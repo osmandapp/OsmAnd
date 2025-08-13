@@ -16,9 +16,10 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -66,7 +67,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		if (editor != null) {
 			WptPt wpt = editor.getWptPt();
 			this.wpt = wpt;
-			selectedGroup = editor.getPointsGroups().get(Algorithms.isEmpty(wpt.category) ? "" : wpt.category);
+			selectedGroup = editor.getPointsGroups().get(Algorithms.isEmpty(wpt.getCategory()) ? "" : wpt.getCategory());
 
 			setColor(getPointColor());
 			setIconName(getInitialIconName(wpt));
@@ -90,7 +91,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			Iterator<Map.Entry<String, PointsGroup>> iterator = groups.entrySet().iterator();
 			while (iterator.hasNext()) {
 				PointsGroup group = iterator.next().getValue();
-				if (Algorithms.isEmpty(group.points)) {
+				if (Algorithms.isEmpty(group.getPoints())) {
 					iterator.remove();
 				}
 			}
@@ -179,7 +180,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 	}
 
-	private void syncGpx(GPXFile gpxFile) {
+	private void syncGpx(GpxFile gpxFile) {
 		MapMarkersHelper helper = app.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {
@@ -191,10 +192,10 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		WptPt wpt = getWpt();
 		WptPtEditor editor = getWptPtEditor();
 		if (wpt != null && editor != null && editor.getOnWaypointTemplateAddedListener() != null) {
-			wpt.name = name;
+			wpt.setName(name);
 			wpt.setAddress(address);
-			wpt.category = category;
-			wpt.desc = description;
+			wpt.setCategory(category);
+			wpt.setDesc(description);
 			if (getColor() != 0) {
 				wpt.setColor(getColor());
 			} else {
@@ -204,7 +205,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			wpt.setIconName(getIconName());
 
 			PointsGroup group = editor.getPointsGroups().get(category);
-			int categoryColor = group != null ? group.color : 0;
+			int categoryColor = group != null ? group.getColor() : 0;
 
 			editor.getOnWaypointTemplateAddedListener().onAddWaypointTemplate(wpt, categoryColor);
 		}
@@ -214,9 +215,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		WptPt wpt = getWpt();
 		WptPtEditor editor = getWptPtEditor();
 		if (wpt != null && editor != null) {
-			wpt.name = name;
-			wpt.category = category;
-			wpt.desc = description;
+			wpt.setName(name);
+			wpt.setCategory(category);
+			wpt.setDesc(description);
 			if (getColor() != 0) {
 				wpt.setColor(getColor());
 			} else {
@@ -226,9 +227,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			wpt.setIconName(getIconName());
 			wpt.getExtensionsToWrite().putAll(extensions);
 
-			GPXFile gpx = editor.getGpxFile();
+			GpxFile gpx = editor.getGpxFile();
 			if (gpx != null) {
-				if (gpx.showCurrentTrack) {
+				if (gpx.isShowCurrentTrack()) {
 					this.wpt = savingTrackHelper.insertPointData(wpt.getLatitude(), wpt.getLongitude(),
 							description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName());
 					this.wpt.getExtensionsToWrite().putAll(extensions);
@@ -244,23 +245,23 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 	}
 
-	protected void addWpt(GPXFile gpx, String description, String name, String category, int color, String iconName,
+	protected void addWpt(GpxFile gpx, String description, String name, String category, int color, String iconName,
 	                      String backgroundType, Map<String, String> extensions) {
 		WptPt wpt = getWpt();
 		if (wpt != null) {
-			this.wpt = WptPt.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(), description,
+			this.wpt = WptPt.Companion.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(), description,
 					name, category, color, iconName, backgroundType, wpt.getAmenityOriginName(), extensions);
 			gpx.addPoint(wpt);
 		}
 	}
 
-	private void doUpdateWpt(String name, String category, String description) {
+	private void doUpdateWpt(String name, String category, @Nullable String description) {
 		WptPt wpt = getWpt();
 		WptPtEditor editor = getWptPtEditor();
 		if (wpt != null && editor != null) {
-			GPXFile gpx = editor.getGpxFile();
+			GpxFile gpx = editor.getGpxFile();
 			if (gpx != null) {
-				if (gpx.showCurrentTrack) {
+				if (gpx.isShowCurrentTrack()) {
 					savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(), description,
 							name, category, getColor(), getIconName(), getBackgroundType().getTypeName());
 					if (!editor.isGpxSelected()) {
@@ -269,7 +270,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 				} else {
 					WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), description, name, category,
 							Algorithms.colorToString(getColor()), getIconName(), getBackgroundType().getTypeName());
-					gpx.updateWptPt(wpt, wptInfo);
+					gpx.updateWptPt(wpt, wptInfo, true);
 					saveGpx(app, gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
@@ -282,7 +283,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.context_menu_item_delete_waypoint));
 			builder.setNegativeButton(R.string.shared_string_no, null);
@@ -290,9 +291,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 				WptPt wpt = getWpt();
 				WptPtEditor editor = getWptPtEditor();
 				if (wpt != null && editor != null) {
-					GPXFile gpx = editor.getGpxFile();
+					GpxFile gpx = editor.getGpxFile();
 					if (gpx != null) {
-						if (gpx.showCurrentTrack) {
+						if (gpx.isShowCurrentTrack()) {
 							savingTrackHelper.deletePointData(wpt);
 						} else {
 							gpx.deleteWptPt(wpt);
@@ -319,7 +320,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	@Override
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		if (editor != null) {
-			editor.getPointsGroups().put(group.name, group);
+			editor.getPointsGroups().put(group.getName(), group);
 		}
 		super.setPointsGroup(group, updateAppearance);
 	}
@@ -332,12 +333,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	@Nullable
 	@Override
 	public String getNameInitValue() {
-		return wpt != null ? wpt.name : "";
+		return wpt != null ? wpt.getName() : "";
 	}
 
 	@Override
 	public String getDescriptionInitValue() {
-		return wpt != null ? wpt.desc : "";
+		return wpt != null ? wpt.getDesc() : "";
 	}
 
 	@Override
@@ -369,9 +370,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		WptPt wptPt = getWpt();
 		int color = wptPt != null ? wptPt.getColor() : 0;
 		if (wptPt != null && color == 0 && editor != null) {
-			PointsGroup group = editor.getPointsGroups().get(wptPt.category);
-			if (group != null && group.color != 0) {
-				color = group.color;
+			PointsGroup group = editor.getPointsGroups().get(wptPt.getCategory());
+			if (group != null && group.getColor() != 0) {
+				color = group.getColor();
 			}
 		}
 		if (color == 0) {
@@ -404,12 +405,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		return isCategoryVisible(app, editor.getGpxFile(), categoryName);
 	}
 
-	public static boolean isCategoryVisible(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @Nullable String categoryName) {
+	public static boolean isCategoryVisible(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @Nullable String categoryName) {
 		SelectedGpxFile selectedGpxFile;
-		if (gpxFile.showCurrentTrack) {
+		if (gpxFile.isShowCurrentTrack()) {
 			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 		} else {
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 		}
 		if (selectedGpxFile != null) {
 			return !selectedGpxFile.isGroupHidden(categoryName);
@@ -417,8 +418,8 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		return true;
 	}
 
-	private void saveGpx(OsmandApplication app, GPXFile gpxFile, boolean gpxSelected) {
-		SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, errorMessage -> {
+	private void saveGpx(OsmandApplication app, GpxFile gpxFile, boolean gpxSelected) {
+		SaveGpxHelper.saveGpx(new File(gpxFile.getPath()), gpxFile, errorMessage -> {
 			if (errorMessage == null && !gpxSelected) {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 			}

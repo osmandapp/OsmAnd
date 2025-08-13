@@ -93,6 +93,7 @@ public class LocationParser {
 
 	public static LatLon parseLocation(String locPhrase) {
 		locPhrase = locPhrase.trim();
+		locPhrase = TextDirectionUtil.clearDirectionMarks(locPhrase);
 		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");
@@ -104,6 +105,7 @@ public class LocationParser {
 		if (!valid) {
 			return null;
 		}
+		locPhrase = prepareLatLonWithDecimalCommas(locPhrase);
 		List<Double> d = new ArrayList<>();
 		List<Object> all = new ArrayList<>();
 		List<String> strings = new ArrayList<>();
@@ -257,6 +259,33 @@ public class LocationParser {
 		return null;
 	}
 
+	private static String prepareLatLonWithDecimalCommas(String ll) {
+		final int DIGITS_BEFORE_COMMA = 1, DIGITS_AFTER_COMMA = 3; // see testCommaLatLonSearch
+		for (int i = DIGITS_BEFORE_COMMA, first = -1; i < ll.length() - DIGITS_AFTER_COMMA; i++) {
+			if (ll.charAt(i) == ',') {
+				int before = 0, after = 0;
+				for (int j = i - 1; j >= i - DIGITS_BEFORE_COMMA; j--) {
+					if (Character.isDigit(ll.charAt(j))) {
+						before++;
+					}
+				}
+				for (int j = i + 1; j <= i + DIGITS_AFTER_COMMA && before >= DIGITS_BEFORE_COMMA; j++) {
+					if (Character.isDigit(ll.charAt(j))) {
+						after++;
+					}
+				}
+				if (before >= DIGITS_BEFORE_COMMA && after >= DIGITS_AFTER_COMMA) {
+					if (first != -1) {
+						return ll.substring(0, first) + "." + ll.substring(first + 1, i) + "." + ll.substring(i + 1);
+					} else {
+						first = i; // first suitable comma found
+					}
+				}
+			}
+		}
+		return ll;
+	}
+
 	private static LatLon validateAndCreateLatLon(double lat, double lon) {
 		if (Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
 			return new LatLon(lat, lon);
@@ -267,6 +296,9 @@ public class LocationParser {
 	private static boolean isValidLocPhrase(String locPhrase) {
 		if (!locPhrase.isEmpty()) {
 			char ch = Character.toLowerCase(locPhrase.charAt(0));
+			if (ch == '(' && locPhrase.length() > 1) {
+				ch = Character.toLowerCase(locPhrase.charAt(1)); // (0.1234,5.6789)
+			}
 			return ch == '-' || Character.isDigit(ch) || ch == 's' || ch == 'n' || locPhrase.contains("://");
 		}
 		return false;

@@ -1,5 +1,8 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.data.SpecialPointType.HOME;
+import static net.osmand.data.SpecialPointType.WORK;
+
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -21,20 +24,23 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.SpecialPointType;
-import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.ShowQuickSearchMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.layers.MapActionsHelper;
 
 import org.apache.commons.logging.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,17 +56,19 @@ public class LauncherShortcutsHelper {
 	private static final int SHORTCUT_ICON_COLOR_RES = R.color.active_color_primary_light;
 
 	private final OsmandApplication app;
+	private final FavouritesHelper favoritesHelper;
 	private final FavoritesListener favoritesListener;
 
 	public LauncherShortcutsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.favoritesHelper = app.getFavoritesHelper();
 		this.favoritesListener = new FavoritesListener() {
 			@Override
 			public void onFavoritesLoaded() {
 				updateLauncherShortcuts();
 			}
 		};
-		app.getFavoritesHelper().addListener(favoritesListener);
+		favoritesHelper.addListener(favoritesListener);
 	}
 
 	public void updateLauncherShortcuts() {
@@ -118,50 +126,72 @@ public class LauncherShortcutsHelper {
 		return new Intent(Intent.ACTION_VIEW, Uri.parse(uriString)).setComponent(component);
 	}
 
-	public void parseIntent(@NonNull MapActivity mapActivity, @NonNull Intent intent) {
+	public void parseIntent(@NonNull MapActivity activity, @NonNull Intent intent) {
 		Uri uri = intent.getData();
 		if (uri == null) {
 			return;
 		}
 
-		String shortcutId = uri.getQueryParameter("id");
-		if (Shortcut.NAVIGATE_TO_HOME.id.equals(shortcutId)) {
-			FavouritePoint home = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.HOME);
-			if (home != null) {
-				navigateTo(mapActivity, home);
-			}
-		} else if (Shortcut.NAVIGATE_TO_WORK.id.equals(shortcutId)) {
-			FavouritePoint work = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.WORK);
-			if (work != null) {
-				navigateTo(mapActivity, work);
-			}
-		} else if (Shortcut.START_RECORDING.id.equals(shortcutId)) {
+		String id = uri.getQueryParameter("id");
+		if (Shortcut.START_RECORDING.id.equals(id)) {
 			OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 			if (plugin != null) {
-				plugin.askStartRecording(mapActivity);
+				plugin.askStartRecording(activity);
 			}
-		} else if (Shortcut.SEARCH.id.equals(shortcutId)) {
-			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
-		} else if (Shortcut.MY_PLACES.id.equals(shortcutId)) {
-			Intent activityIntent = new Intent(mapActivity, app.getAppCustomization().getMyPlacesActivity());
-			mapActivity.startActivity(activityIntent);
-		} else if (Shortcut.NAVIGATE_TO.id.equals(shortcutId)) {
-			navigateTo(mapActivity, null);
+		} else if (Shortcut.SEARCH.id.equals(id)) {
+			activity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+		} else if (Shortcut.MY_PLACES.id.equals(id)) {
+			Intent activityIntent = new Intent(activity, app.getAppCustomization().getMyPlacesActivity());
+			activity.startActivity(activityIntent);
+		} else if (Shortcut.NAVIGATE_TO.id.equals(id)) {
+			navigateTo(activity, null);
+		} else if (Shortcut.NAVIGATE_TO_HOME.id.equals(id) || Shortcut.NAVIGATE_TO_WORK.id.equals(id)) {
+			if (app.isApplicationInitializing()) {
+				app.getAppInitializer().addListener(new AppInitializeListener() {
+					@Override
+					public void onFinish(@NonNull AppInitializer init) {
+						init.removeListener(this);
+						navigateToPoint(activity, id);
+					}
+				});
+			} else {
+				navigateToPoint(activity, id);
+			}
+		}
+	}
+
+	private void navigateToPoint(@NonNull MapActivity activity, @NonNull String id) {
+		FavouritePoint point = null;
+		if (Shortcut.NAVIGATE_TO_HOME.id.equals(id)) {
+			point = favoritesHelper.getSpecialPoint(HOME);
+		} else if (Shortcut.NAVIGATE_TO_WORK.id.equals(id)) {
+			point = favoritesHelper.getSpecialPoint(WORK);
+		}
+		if (point != null) {
+			navigateTo(activity, point);
 		}
 	}
 
 	private void navigateTo(@NonNull MapActivity mapActivity, @Nullable FavouritePoint point) {
 		if (point == null) {
-			MapActionsHelper controlsHelper = mapActivity.getMapLayers().getMapActionsHelper();
-			if (controlsHelper != null) {
-				controlsHelper.doRoute();
-			}
+			mapActivity.getMapActions().doRoute();
 		} else {
-			app.getRoutingHelper().setRoutePlanningMode(true);
-			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
 			PointDescription description = point.getPointDescription(app);
-			app.getTargetPointsHelper().navigateToPoint(latLon, true, -1, description);
-			OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
+			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+			ApplicationMode appMode = ExternalApiHelper.getNavigationProfile(app);
+
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			if (routingHelper.isFollowingMode()) {
+				WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
+				mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
+					MapActivity activity = activityRef.get();
+					if (activity != null && !routingHelper.isFollowingMode() && appMode != null) {
+						NavigateGpxHelper.startNavigation(activity, appMode, null, null, latLon, description, true);
+					}
+				});
+			} else if (appMode != null) {
+				NavigateGpxHelper.startNavigation(mapActivity, appMode, null, null, latLon, description, true);
+			}
 		}
 	}
 
@@ -206,10 +236,10 @@ public class LauncherShortcutsHelper {
 			if (this == START_RECORDING) {
 				return missing && PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 			} else if (this == NAVIGATE_TO_HOME) {
-				boolean hasHome = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.HOME) != null;
+				boolean hasHome = app.getFavoritesHelper().getSpecialPoint(HOME) != null;
 				return missing && hasHome;
 			} else if (this == NAVIGATE_TO_WORK) {
-				boolean hasWork = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.WORK) != null;
+				boolean hasWork = app.getFavoritesHelper().getSpecialPoint(WORK) != null;
 				return missing && hasWork;
 			}
 			return missing;
@@ -221,17 +251,17 @@ public class LauncherShortcutsHelper {
 			} else if (this == START_RECORDING && !PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 				return true;
 			} else if (this == NAVIGATE_TO_HOME || this == NAVIGATE_TO_WORK) {
-				SpecialPointType pointType = this == NAVIGATE_TO_HOME ? SpecialPointType.HOME : SpecialPointType.WORK;
-				return app.getFavoritesHelper().getSpecialPoint(pointType) == null;
+				SpecialPointType type = this == NAVIGATE_TO_HOME ? HOME : WORK;
+				return app.getFavoritesHelper().getSpecialPoint(type) == null;
 			}
 			return false;
 		}
 
 		@Nullable
 		private ShortcutInfoCompat getShortcutInfo(@NonNull OsmandApplication app) {
-			for (ShortcutInfoCompat shortcutInfo : ShortcutManagerCompat.getDynamicShortcuts(app)) {
-				if (id.equals(shortcutInfo.getId())) {
-					return shortcutInfo;
+			for (ShortcutInfoCompat info : ShortcutManagerCompat.getDynamicShortcuts(app)) {
+				if (id.equals(info.getId())) {
+					return info;
 				}
 			}
 			return null;

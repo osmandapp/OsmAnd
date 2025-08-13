@@ -25,6 +25,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -91,24 +92,48 @@ public class BackupUtils {
 
 	@NonNull
 	public static Map<RemoteFile, SettingsItem> getRemoteFilesSettingsItems(@NonNull List<SettingsItem> items,
-	                                                                        @NonNull List<RemoteFile> remoteFiles,
-	                                                                        boolean infoFiles) {
+			@NonNull List<RemoteFile> remoteFiles, boolean infoFiles) {
 		Map<RemoteFile, SettingsItem> res = new HashMap<>();
-		List<RemoteFile> files = new ArrayList<>(remoteFiles);
+		Map<String, SettingsItem> settingsItemMap = new HashMap<>();
+		List<FileSettingsItem> subtypeFolders = new ArrayList<>();
+		String DELIMETER = "___";
 		for (SettingsItem item : items) {
-			List<RemoteFile> processedFiles = new ArrayList<>();
-			for (RemoteFile file : files) {
-				String type = file.getType();
-				String name = file.getName();
-				if (infoFiles && name.endsWith(BackupHelper.INFO_EXT)) {
-					name = name.substring(0, name.length() - BackupHelper.INFO_EXT.length());
-				}
-				if (applyItem(item, type, name)) {
-					res.put(file, item);
-					processedFiles.add(file);
+			String itemFileName = getItemFileName(item);
+			settingsItemMap.put(item.getType().name() + DELIMETER + itemFileName, item);
+			// Commits FileSettingsItem introduced likely are related to TTS / Voice configuration (folders)
+			// https://github.com/osmandapp/OsmAnd/commit/ba750f9df87057da268b36e0d32b8c1996f4023a
+			// https://github.com/osmandapp/OsmAnd/commit/bf93162bd13ef7ab16622bb662c953e931c34a21
+			if (item instanceof FileSettingsItem fileItem) {
+				String subtypeFolder = fileItem.getSubtype().getSubtypeFolder();
+				if (subtypeFolder != null && FileUtils.isProbablyDir(fileItem.getFile())) {
+					subtypeFolders.add(fileItem);
 				}
 			}
-			files.removeAll(processedFiles);
+		}
+		for (RemoteFile file : remoteFiles) {
+			String type = file.getType();
+			String name = file.getName();
+			if (infoFiles && name.endsWith(BackupHelper.INFO_EXT)) {
+				name = name.substring(0, name.length() - BackupHelper.INFO_EXT.length());
+			}
+			SettingsItem item = settingsItemMap.get(type + DELIMETER + name);
+			if (item != null) {
+				res.put(file, item);
+			} else {
+				for (FileSettingsItem fileItem : subtypeFolders) {
+					String itemFileName = getItemFileName(fileItem);
+					boolean found = false;
+					if (!itemFileName.endsWith("/")) {
+						found = name.startsWith(itemFileName + "/");
+					} else {
+						found = name.startsWith(itemFileName);
+					}
+					if (found) {
+						res.put(file, fileItem);
+						break;
+					}
+				}
+			}
 		}
 		return res;
 	}
@@ -121,30 +146,10 @@ public class BackupUtils {
 		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + exportType.name(), true).makeGlobal().makeShared();
 	}
 
-	public static boolean applyItem(@NonNull SettingsItem item, @NonNull String type, @NonNull String name) {
-		String itemFileName = getItemFileName(item);
-		if (item.getType().name().equals(type)) {
-			if (name.equals(itemFileName)) {
-				return true;
-			} else if (item instanceof FileSettingsItem) {
-				FileSettingsItem fileItem = (FileSettingsItem) item;
-				if (name.startsWith(fileItem.getSubtype().getSubtypeFolder())) {
-					if (fileItem.getFile().isDirectory() && !itemFileName.endsWith("/")) {
-						return name.startsWith(itemFileName + "/");
-					} else {
-						return name.startsWith(itemFileName);
-					}
-				}
-			}
-		}
-		return false;
-	}
-
 	@NonNull
 	public static String getItemFileName(@NonNull SettingsItem item) {
 		String fileName;
-		if (item instanceof FileSettingsItem) {
-			FileSettingsItem fileItem = (FileSettingsItem) item;
+		if (item instanceof FileSettingsItem fileItem) {
 			fileName = getFileItemName(fileItem);
 		} else {
 			fileName = item.getFileName();
@@ -152,10 +157,7 @@ public class BackupUtils {
 				fileName = item.getDefaultFileName();
 			}
 		}
-		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
-			fileName = fileName.substring(1);
-		}
-		return fileName;
+		return removeLeadingSlash(fileName);
 	}
 
 	@NonNull
@@ -177,6 +179,10 @@ public class BackupUtils {
 		} else {
 			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
 		}
+		return removeLeadingSlash(fileName);
+	}
+
+	public static String removeLeadingSlash(@Nullable String fileName) {
 		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
 			fileName = fileName.substring(1);
 		}
@@ -237,6 +243,9 @@ public class BackupUtils {
 	}
 
 	public static void updateCacheForItems(@NonNull OsmandApplication app, @NonNull List<SettingsItem> items) {
+		if (Algorithms.isEmpty(items)) {
+			return;
+		}
 		boolean updateIndexes = false;
 		boolean updateRouting = false;
 		boolean updateRenderers = false;

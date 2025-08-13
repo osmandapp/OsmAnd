@@ -53,7 +53,9 @@ public class NativeCoreContext {
 				else
 					NativeCore.load(assets, "");
 			}
-			if (NativeCore.isLoaded()) {
+			if (NativeCore.isLoaded() && (NativeCore.is64Bit() || app.getSettings().USE_OPENGL_RENDER.isSet())) {
+				NativeCore.enablePerformanceLogs(app.getSettings().DEBUG_RENDERING_INFO.get());
+
 				File directory = app.getAppPath("");
 				Logger.get().addLogSink(QIODeviceLogSink.createFileLogSink(new File(directory, LOG_FILE_NAME).getAbsolutePath()));
 
@@ -109,10 +111,8 @@ public class NativeCoreContext {
 	}
 
 	public static void setMapRendererContext(@NonNull OsmandApplication app, float density) {
-		if (mapRendererContext != null) {
-			if (mapRendererContext.getDensity() == density)
-				return;
-			mapRendererContext.setMapRendererView(null);
+		if (mapRendererContext != null && mapRendererContext.getDensity() == density) {
+			return;
 		}
 		mapRendererContext = new MapRendererContext(app, density);
 		mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollectionsByProviderType);

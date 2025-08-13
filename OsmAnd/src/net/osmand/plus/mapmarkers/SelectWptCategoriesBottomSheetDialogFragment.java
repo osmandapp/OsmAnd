@@ -2,8 +2,8 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,7 +37,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 	private OsmandApplication app;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 
 	private final Set<String> selectedCategories = new HashSet<>();
 	private final List<BottomSheetItemWithCompoundButton> categoryItems = new ArrayList<>();
@@ -70,7 +70,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(!isUpdateMode || categories != null && categories.size() == pointsGroups.size())
 				.setCompoundButtonColorId(activeColorResId)
-				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPoints().size())
+				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPointsList().size())
 				.setIcon(getContentIcon(R.drawable.ic_action_group_select_all))
 				.setTitle(getString(R.string.shared_string_select_all))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
@@ -99,7 +99,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 						}
 					})
 					.setCompoundButtonColorId(activeColorResId)
-					.setDescription(String.valueOf(entry.getValue().points.size()))
+					.setDescription(String.valueOf(entry.getValue().getPoints().size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
 					.setTitle(category.isEmpty() ? getString(R.string.shared_string_waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
@@ -132,7 +132,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 
-		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
 		if (selectedGpxFile == null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
 					.showOnMap().selectedAutomatically().saveSelection();
@@ -155,8 +155,8 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		return true;
 	}
 
-	private String getGpxName(GPXFile gpxFile) {
-		return new File(gpxFile.path).getName()
+	private String getGpxName(GpxFile gpxFile) {
+		return new File(gpxFile.getPath()).getName()
 				.replace(IndexConstants.GPX_FILE_EXT, "")
 				.replace("/", " ")
 				.replace("_", " ");

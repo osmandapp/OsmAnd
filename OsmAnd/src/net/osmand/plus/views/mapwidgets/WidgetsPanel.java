@@ -10,6 +10,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.util.Algorithms;
 
@@ -124,13 +125,43 @@ public enum WidgetsPanel {
 		ListStringPreference preference = getOrderPreference(settings);
 		List<String> pages = preference.getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(pages)) {
-			for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
-				String page = pages.get(pageIndex);
-				List<String> orders = Arrays.asList(page.split(","));
-				int order = orders.indexOf(widgetId);
-				if (order != -1) {
-					return Pair.create(pageIndex, order);
+			if ((this == TOP || this == BOTTOM) &&
+					Algorithms.stringsEqual(preference.getRawModeValue(appMode), preference.getProfileDefaultValue(appMode))) {
+				return getDefaultPagedOrder(pages, appMode, widgetId, settings);
+			} else {
+				for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
+					String page = pages.get(pageIndex);
+					List<String> orders = Arrays.asList(page.split(","));
+					int order = orders.indexOf(widgetId);
+					if (order != -1) {
+						return Pair.create(pageIndex, order);
+					}
 				}
+			}
+		}
+		return Pair.create(0, DEFAULT_ORDER);
+	}
+
+	private Pair<Integer, Integer> getDefaultPagedOrder(@NonNull List<String> pages,
+	                                                    @NonNull ApplicationMode appMode,
+	                                                    @NonNull String widgetId,
+	                                                    @NonNull OsmandSettings settings) {
+		int pageIndex = 0;
+		for (int page = 0; page < pages.size(); page++) {
+			String pageString = pages.get(page);
+			List<String> orders = Arrays.asList(pageString.split(","));
+			boolean widgetInPageAvailable = false;
+			for (int order = 0; order < orders.size(); order++) {
+				if (WidgetsAvailabilityHelper.isWidgetVisibleByDefault(settings.getContext(), orders.get(order), appMode)) {
+					widgetInPageAvailable = true;
+					int widgetOrder = orders.indexOf(widgetId);
+					if (widgetOrder != -1) {
+						return Pair.create(pageIndex, widgetOrder);
+					}
+				}
+			}
+			if (widgetInPageAvailable) {
+				pageIndex++;
 			}
 		}
 		return Pair.create(0, DEFAULT_ORDER);

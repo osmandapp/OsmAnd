@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 public class OsmAndMapLayersView extends View {
@@ -79,9 +80,9 @@ public class OsmAndMapLayersView extends View {
 		if (mapView == null) {
 			return;
 		}
-		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		DrawSettings drawSettings = new DrawSettings(nightMode, false);
-		mapView.drawOverMap(canvas, mapView.getCurrentRotatedTileBox().copy(), drawSettings);
+		mapView.drawOverMap(canvas, mapView.getRotatedTileBox(), drawSettings);
 
 		MapRendererView mapRenderer = mapView.getMapRenderer();
 		if (mapRenderer != null) {

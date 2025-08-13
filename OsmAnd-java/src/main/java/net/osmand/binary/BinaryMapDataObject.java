@@ -1,5 +1,8 @@
 package net.osmand.binary;
 
+import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
+import static net.osmand.render.RenderingRulesStorage.POLYGON_RULES;
+
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -22,7 +25,7 @@ public class BinaryMapDataObject {
 	protected int objectType = RenderingRulesStorage.POINT_RULES;
 	protected int labelX;
 	protected int labelY;
-	private static final int SHIFT_ID = 7;
+	public static final int SHIFT_ID = 7;
 	
 	protected TIntObjectHashMap<String> objectNames = null;
 	protected TIntArrayList namesOrder = null;
@@ -371,8 +374,8 @@ public class BinaryMapDataObject {
 		for(int i = 0; i < len; i++) {
 			sum += coordinates[2 * i];
 		}
-		int average = ((int) (sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len) 
-				<< (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
+		int l = (int) ((sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len);
+		int average = l << (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
 		int label31X = (average + this.labelX) << LABEL_SHIFT;
 		return label31X;
 	}
@@ -384,8 +387,8 @@ public class BinaryMapDataObject {
 		for(int i = 0; i < len; i++) {
 			sum += coordinates[2 * i + 1];
 		}
-		int average = ((int) (sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len) 
-				<< (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
+		int l = (int) ((sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len);
+		int average = l << (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
 		int label31Y = (average + this.labelY) << LABEL_SHIFT;
 		return label31Y;
 	}
@@ -429,11 +432,11 @@ public class BinaryMapDataObject {
 	@Override
 	public String toString() {
 		String obj = "Point";
-		if(objectType == RenderingRulesStorage.LINE_RULES) {
+		if (objectType == LINE_RULES) {
 			obj = "Line";
-		} else if(objectType == RenderingRulesStorage.POLYGON_RULES) {
+		} else if (objectType == POLYGON_RULES) {
 			obj = "Polygon";
 		}
-		return obj + " " + (getId() >> SHIFT_ID);
+		return obj + " " + ObfConstants.getOsmObjectId(this);
 	}
 }

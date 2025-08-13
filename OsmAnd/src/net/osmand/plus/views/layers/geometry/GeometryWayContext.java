@@ -113,7 +113,9 @@ public abstract class GeometryWayContext {
 
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes attrs) {
 		this.attrs = attrs;
-		paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), PorterDuff.Mode.MULTIPLY));
+		int color = attrs.paint2.getColor();
+		paintIcon.setColor(color);
+		paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
 		this.nightMode = nightMode;
 		recreateBitmapsInternal();
 	}
@@ -132,13 +134,13 @@ public abstract class GeometryWayContext {
 	}
 
 	public void clearCustomColor() {
-		if (hasAttrs()) {
+		if (attrs != null) {
 			attrs.customColor = 0;
 		}
 	}
 
 	public void clearCustomShader() {
-		if (hasAttrs()) {
+		if (attrs != null) {
 			attrs.customColorPaint.setShader(null);
 		}
 	}

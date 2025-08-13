@@ -23,6 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,7 +56,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		uiUtilities = app.getUIUtilities();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity);
 		markers = app.getMapMarkersHelper().getMapMarkers();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP, MARKERS_TOP_BAR.id);
 	}
 
@@ -142,8 +143,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		} else {
 			descr = OsmAndFormatter.getFormattedDate(mapActivity, marker.creationDate);
 		}
-		if (marker.wptPt != null && !Algorithms.isEmpty(marker.wptPt.category)) {
-			descr = marker.wptPt.category + ", " + descr;
+		if (marker.wptPt != null && !Algorithms.isEmpty(marker.wptPt.getCategory())) {
+			descr = marker.wptPt.getCategory() + ", " + descr;
 		}
 		holder.description.setText(descr);
 

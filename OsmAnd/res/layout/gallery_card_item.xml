@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="@dimen/gallery_standard_icon_size"
+	android:layout_height="@dimen/gallery_standard_icon_size"
+	tools:background="@color/activity_background_color_dark">
+
+	<ImageView
+		android:id="@+id/image"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center"
+		android:scaleType="centerCrop"
+		tools:src="@drawable/mm_tourism_museum" />
+
+	<ImageView
+		android:id="@+id/source_type"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginStart="9dp"
+		android:layout_marginTop="9dp"
+		android:visibility="gone" />
+
+	<ImageView
+		android:id="@+id/load_source_type"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginStart="6dp"
+		android:layout_marginBottom="6dp"
+		android:layout_gravity="start|bottom"
+		android:src="@drawable/ic_action_download_offline_with_bg"
+		android:visibility="gone"/>
+
+	<TextView
+		android:id="@+id/url"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:padding="@dimen/content_padding"
+		android:background="?attr/bg_color"
+		android:textColor="?attr/color_dialog_buttons"
+		android:textSize="@dimen/default_list_text_size"
+		android:visibility="gone"
+		tools:text="https://osmand.net/images/123456789012.jpg"/>
+
+	<ProgressBar
+		android:id="@+id/progress"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:visibility="gone"/>
+
+	<View
+		android:id="@+id/card_outline"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/context_menu_card"/>
+
+</FrameLayout>

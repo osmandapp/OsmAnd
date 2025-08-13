@@ -13,6 +13,7 @@ import android.widget.ListView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -31,7 +32,7 @@ public abstract class OsmandListActivity extends
 	protected void onStart() {
 		super.onStart();
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		getListView().setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 		getListView().setDivider(app.getUIUtilities().getIcon(R.drawable.divider_solid, ColorUtilities.getDividerColorId(nightMode)));
 		getListView().setDividerHeight(AndroidUtils.dpToPx(app, 1));
@@ -52,12 +53,7 @@ public abstract class OsmandListActivity extends
 		if (iconDark != 0) {
 			menuItem.setIcon(getMyApplication().getUIUtilities().getIcon(iconDark));
 		}
-		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				return onOptionsItemSelected(item);
-			}
-		});
+		menuItem.setOnMenuItemClickListener(this::onOptionsItemSelected);
 		menuItem.setShowAsAction(menuItemType);
 		return menuItem;
 	}

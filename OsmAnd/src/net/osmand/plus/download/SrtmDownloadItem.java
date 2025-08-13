@@ -13,7 +13,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -44,6 +44,10 @@ public class SrtmDownloadItem extends DownloadItem {
 			}
 		}
 		return useMetric;
+	}
+
+	public void updateMetric(@NonNull OsmandApplication app){
+		setUseMetric(isUseMetricByDefault(app));
 	}
 
 	@NonNull

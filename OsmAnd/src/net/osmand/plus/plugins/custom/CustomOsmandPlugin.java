@@ -42,6 +42,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.JsonUtils;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
@@ -283,10 +284,10 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 						QuickActionsSettingsItem settingsItem = (QuickActionsSettingsItem) item;
 
 						MapButtonsHelper mapButtonsHelper = app.getMapButtonsHelper();
-						QuickActionButtonState buttonState = settingsItem.getButtonState();
-						QuickActionButtonState state = mapButtonsHelper.getButtonStateById(buttonState.getId());
+						ButtonStateBean stateBean = settingsItem.getStateBean();
+						QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(stateBean.id);
 						if (state != null) {
-							for (QuickAction action : buttonState.getQuickActions()) {
+							for (QuickAction action : stateBean.quickActions) {
 								QuickAction savedAction = state.getQuickAction(action.getType(), action.getName(app), action.getParams());
 								if (savedAction != null) {
 									mapButtonsHelper.deleteQuickAction(state, savedAction);

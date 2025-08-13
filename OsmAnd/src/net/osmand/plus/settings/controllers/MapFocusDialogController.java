@@ -21,6 +21,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.enums.MapFocus;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -47,10 +48,9 @@ public class MapFocusDialogController extends BaseDialogController
 	@Nullable
 	@Override
 	public DisplayData getDisplayData(@NonNull String processId) {
-		int dividerStartPadding = app.getResources()
-				.getDimensionPixelSize(R.dimen.bottom_sheet_divider_margin_start);
+		int dividerStartPadding = getDimension(R.dimen.bottom_sheet_divider_margin_start);
 		UiUtilities iconsCache = app.getUIUtilities();
-		boolean nightMode = !settings.isLightContentForMode(appMode);
+		boolean nightMode = app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 		int profileColor = appMode.getProfileColor(nightMode);
 		int profileColorAlpha = ColorUtilities.getColorWithAlpha(profileColor, 0.3f);
 
@@ -83,8 +83,7 @@ public class MapFocusDialogController extends BaseDialogController
 	@Override
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem selected) {
 		Object newValue = selected.getTag();
-		if (newValue instanceof MapFocus) {
-			MapFocus mapFocus = (MapFocus) newValue;
+		if (newValue instanceof MapFocus mapFocus) {
 			settings.POSITION_PLACEMENT_ON_MAP.setModeValue(appMode, mapFocus.getValue());
 		}
 	}
@@ -97,6 +96,6 @@ public class MapFocusDialogController extends BaseDialogController
 		dialogManager.register(PROCESS_ID, controller);
 
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, appMode, true);
 	}
 }

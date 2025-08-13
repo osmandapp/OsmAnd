@@ -42,9 +42,9 @@ public class SqliteTileImportTask extends BaseImportAsyncTask<Void, Void, String
 				MapActivity mapActivity = (MapActivity) activity;
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, null);
 			}
-			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.map_imported_successfully);
 		} else {
-			Toast.makeText(app, app.getString(R.string.map_import_error) + ": " + error, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(app.getString(R.string.map_import_error) + ": " + error);
 		}
 	}
 }

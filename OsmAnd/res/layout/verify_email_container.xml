@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/authorize_container"
 	android:layout_width="match_parent"
@@ -14,9 +14,9 @@
 		android:focusable="true"
 		android:focusableInTouchMode="true"
 		android:minHeight="@dimen/favorites_list_item_height"
-		osmand:labelText="@string/enter_verification_code"
-		osmand:primaryColor="@color/coordinate_input_edit_text_activated"
-		osmand:secondaryColor="@color/text_color_tertiary_light">
+		app:labelText="@string/enter_verification_code"
+		app:primaryColor="@color/coordinate_input_edit_text_activated"
+		app:secondaryColor="@color/text_color_tertiary_light">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/edit_text"
@@ -40,8 +40,8 @@
 		android:textColor="@color/osmand_live_cancelled"
 		android:textSize="@dimen/default_sub_text_size"
 		android:visibility="gone"
-		osmand:lineHeight="@dimen/default_desc_text_size"
-		osmand:typeface="@string/font_roboto_regular"
+		app:lineHeight="@dimen/default_desc_text_size"
+		android:textStyle="normal"
 		tools:text="Error text"
 		tools:visibility="visible" />
 
@@ -60,8 +60,8 @@
 			android:text="@string/verification_code_missing"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:lineHeight="@dimen/default_desc_line_height"
-			osmand:typeface="@string/font_roboto_regular" />
+			app:lineHeight="@dimen/default_desc_line_height"
+			android:textStyle="normal" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/code_missing_description"
@@ -72,8 +72,8 @@
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
 			android:visibility="gone"
-			osmand:lineHeight="@dimen/default_desc_line_height"
-			osmand:typeface="@string/font_roboto_regular"
+			app:lineHeight="@dimen/default_desc_line_height"
+			android:textStyle="normal"
 			tools:visibility="visible" />
 
 	</LinearLayout>
@@ -82,9 +82,9 @@
 		android:id="@+id/button"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		osmand:dialogButtonTopMargin="@dimen/content_padding_half"
-		osmand:dialogButtonBottomMargin="@dimen/content_padding_small_half"
-		osmand:dialogButtonType="secondary"
+		app:dialogButtonTopMargin="@dimen/content_padding_half"
+		app:dialogButtonBottomMargin="@dimen/content_padding_small_half"
+		app:dialogButtonType="secondary"
 		tools:dialogButtonTitle="@string/verify_email_address"/>
 
 </LinearLayout>

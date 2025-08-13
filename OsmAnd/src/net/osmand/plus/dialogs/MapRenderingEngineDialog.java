@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -35,16 +36,16 @@ public class MapRenderingEngineDialog {
 	}
 
 	private AlertDialog createDialog(@Nullable OnRenderChangeListener renderChangeListener) {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		Context themedContext = UiUtilities.getThemedContext(fragmentActivity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		View alertDialogView = LayoutInflater.from(themedContext).inflate(R.layout.alert_dialog_message_with_choice_list, null, false);
 		builder.setView(alertDialogView);
 
 		View legacyRenderingView = alertDialogView.findViewById(R.id.legacy_rendering);
-		radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getResources().getString(R.string.map_rendering_engine_v1));
+		radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getString(R.string.map_rendering_engine_v1));
 		View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
-		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getResources().getString(R.string.map_rendering_engine_v2));
+		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getString(R.string.map_rendering_engine_v2));
 		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get());
 		radioButtonOpengl.setEnabled(Version.isOpenGlAvailable(app));
 		openglRenderingView.findViewById(R.id.button).setEnabled(Version.isOpenGlAvailable(app));

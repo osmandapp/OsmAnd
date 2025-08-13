@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.ColorInt;
@@ -10,8 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
@@ -19,6 +17,8 @@ import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
 import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask.UpdateGpxListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
 import org.apache.commons.logging.Log;
 
@@ -31,7 +31,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 
 	private static final Log LOG = PlatformUtil.getLog(GpxGroupEditorFragment.class);
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private final Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
 
 	@ColorInt
@@ -55,7 +55,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 	@Override
 	protected boolean isCategoryExists(@NonNull String name) {
 		for (PointsGroup group : pointsGroups.values()) {
-			if (group.name.equalsIgnoreCase(name)) {
+			if (group.getName().equalsIgnoreCase(name)) {
 				return true;
 			}
 		}
@@ -74,11 +74,11 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
 			String backgroundType = getBackgroundType().getTypeName();
 			PointsGroup newGroup = new PointsGroup(groupName, getIconName(), backgroundType, getColor());
-			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.name, newGroup);
+			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), newGroup);
 
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);
 			task.setUpdatePointsAppearance(updatePointsAppearance);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(task);
 		}
 		dismiss();
 	}
@@ -103,7 +103,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-	                                @Nullable GPXFile gpxFile,
+	                                @Nullable GpxFile gpxFile,
 	                                @Nullable PointsGroup pointsGroup,
 	                                @Nullable CategorySelectionListener listener) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {

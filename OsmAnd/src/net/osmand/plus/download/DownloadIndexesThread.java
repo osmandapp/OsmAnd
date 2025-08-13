@@ -10,11 +10,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.TrafficStats;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
@@ -25,12 +23,11 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
@@ -46,13 +43,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @SuppressLint({"NewApi", "DefaultLocale"})
@@ -79,6 +70,9 @@ public class DownloadIndexesThread {
 		}
 
 		default void downloadInProgress() {
+		}
+
+		default void downloadingError(@NonNull String error) {
 		}
 
 		default void downloadHasFinished() {
@@ -138,6 +132,13 @@ public class DownloadIndexesThread {
 			uiActivity.downloadInProgress();
 		}
 		updateNotification();
+	}
+
+	@UiThread
+	protected void downloadingError(@NonNull String error) {
+		if (uiActivity != null) {
+			uiActivity.downloadingError(error);
+		}
 	}
 
 	@UiThread
@@ -238,14 +239,14 @@ public class DownloadIndexesThread {
 		if (checkRunning(true)) {
 			return;
 		}
-		execute(new ReloadIndexesTask());
+		OsmAndTaskManager.executeTask(new ReloadIndexesTask());
 	}
 
 	public void runReloadIndexFiles() {
 		if (checkRunning(false)) {
 			return;
 		}
-		execute(new ReloadIndexesTask());
+		OsmAndTaskManager.executeTask(new ReloadIndexesTask());
 	}
 
 	public void runDownloadFiles(IndexItem... items) {
@@ -263,7 +264,7 @@ public class DownloadIndexesThread {
 			}
 		}
 		if (currentDownloadingItem == null) {
-			execute(new DownloadIndexesAsyncTask());
+			OsmAndTaskManager.executeTask(new DownloadIndexesAsyncTask());
 		} else {
 			downloadInProgress();
 		}
@@ -353,16 +354,11 @@ public class DownloadIndexesThread {
 	private boolean checkRunning(boolean silent) {
 		if (getCurrentRunningTask() != null) {
 			if (!silent) {
-				Toast.makeText(app, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.wait_current_task_finished);
 			}
 			return true;
 		}
 		return false;
-	}
-
-	@SuppressWarnings("unchecked")
-	private <P> void execute(BasicProgressAsyncTask<?, P, ?, ?> task, P... indexItems) {
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
 	}
 
 	private void updateNotification() {
@@ -433,7 +429,6 @@ public class DownloadIndexesThread {
 
 
 	private class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, IndexItem, Object, String> implements DownloadFileShowWarning {
-		private static final int OPEN_CHOOSE_PLAN_FRAGMENT = 1;
 
 		private final OsmandPreference<Integer> downloads;
 
@@ -467,13 +462,13 @@ public class DownloadIndexesThread {
 					}
 				} else if (o instanceof String) {
 					String message = (String) o;
-					if (!message.toLowerCase().contains("interrupted") && !message.equals(app.getString(R.string.shared_string_download_successful))) {
-						app.showToastMessage(message);
-					}
-				} else if (o instanceof Integer) {
-					Integer value = (Integer) o;
-					if (OPEN_CHOOSE_PLAN_FRAGMENT == value) {
-						openChoosePlanFragment();
+					boolean success = message.equals(app.getString(R.string.shared_string_download_successful));
+					if (!success) {
+						if (!message.toLowerCase().contains("interrupted")
+								&& !message.equals(DownloadValidationManager.getFreeVersionMessage(app))) {
+							app.showToastMessage(message);
+						}
+						downloadingError(message);
 					}
 				}
 			}
@@ -499,7 +494,7 @@ public class DownloadIndexesThread {
 		@Override
 		protected void onPostExecute(String result) {
 			if (result != null && result.length() > 0) {
-				Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
+				app.showToastMessage(result);
 			}
 			if (uiActivity instanceof Activity) {
 				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
@@ -594,16 +589,9 @@ public class DownloadIndexesThread {
 					&& DownloadActivityType.isCountedInDownloads(item)
 					&& downloads.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if (exceed) {
-				publishProgress(OPEN_CHOOSE_PLAN_FRAGMENT);
+				publishProgress(DownloadValidationManager.getFreeVersionMessage(app));
 			}
 			return !exceed;
-		}
-
-		private void openChoosePlanFragment() {
-			if (uiActivity instanceof FragmentActivity) {
-				FragmentActivity activity = (FragmentActivity) uiActivity;
-				ChoosePlanFragment.showInstance(activity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
-			}
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {
@@ -647,8 +635,7 @@ public class DownloadIndexesThread {
 			} else if (de.isAsset) {
 				try {
 					if (ctx != null) {
-						ResourceManager.copyAssets(ctx.getAssets(), de.assetName, de.targetFile);
-						boolean changedDate = de.targetFile.setLastModified(de.dateModified);
+						boolean changedDate = ResourceManager.copyAssets(ctx.getAssets(), de.assetName, de.targetFile, de.dateModified);
 						if (!changedDate) {
 							LOG.error("Set last timestamp is not supported");
 						}
@@ -664,9 +651,9 @@ public class DownloadIndexesThread {
 				long time = System.currentTimeMillis() - start;
 				if (result) {
 					app.logMapDownloadEvent("done", item, time);
-					if(item.isHidden()) {
+					if (item.isHidden()) {
 						File nonHiddenFile = item.getDefaultTargetFile(app);
-						if(nonHiddenFile.exists()) {
+						if (nonHiddenFile.exists()) {
 							nonHiddenFile.delete();
 						}
 					}

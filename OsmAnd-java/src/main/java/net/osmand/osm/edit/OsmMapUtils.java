@@ -33,10 +33,20 @@ public class OsmMapUtils {
 				"protected_area".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
 				"low_emission_zone".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
 				"national_park".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
-				"danger_area".equals(tags.get(OSMSettings.OSMTagKey.MILITARY.getValue()));
+				"danger_area".equals(tags.get(OSMSettings.OSMTagKey.MILITARY.getValue())) ||
+				"area".equals(tags.get(OSMSettings.OSMTagKey.OSMAND_CLIMBING.getValue())) ||
+				"crag".equals(tags.get(OSMSettings.OSMTagKey.OSMAND_CLIMBING.getValue()));
+	}
+
+	public static boolean isSuperRoute(Map<String, String> tags) {
+		return "superroute".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue()));
 	}
 
 	public static LatLon getCenter(Entity e) {
+		return getCenter(e, false);
+	}
+
+	public static LatLon getCenter(Entity e, boolean needCenterNode) {
 		if (e instanceof Node) {
 			return ((Node) e).getLatLon();
 		} else if (e instanceof Way) {
@@ -188,7 +198,22 @@ public class OsmMapUtils {
 		return new LatLon(flat, flon);
 
 	}
-	
+
+	public static LatLon getCenterNode(Collection<LatLon> nodes, LatLon weightCenter) {
+		if (nodes.isEmpty()) {
+			return null;
+		}
+		double minDist = 99999;
+		LatLon center = null;
+		for (LatLon n : nodes) {
+			double dist = Math.pow(n.getLatitude() - weightCenter.getLatitude(), 2) + Math.pow(n.getLongitude() - weightCenter.getLongitude(), 2);
+			if (minDist > dist) {
+				center = n;
+				minDist = dist;
+			}
+		}
+		return center;
+	}
 
 	public static LatLon getMathWeightCenterForNodes(Collection<Node> nodes) {
 		if (nodes.isEmpty()) {

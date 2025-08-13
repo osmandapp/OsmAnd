@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -133,7 +133,7 @@ public class AntTemperatureSensor extends AntAbstractSensor<AntPlusEnvironmentPc
 		TemperatureData data = lastTemperatureData;
 		double computedTemperature = data != null ? data.getTemperatureRate() : 0;
 		if (computedTemperature > 0) {
-			json.put(SENSOR_TAG_TEMPERATURE_W, computedTemperature);
+			json.put(SENSOR_TAG_TEMPERATURE_A, computedTemperature);
 		}
 	}
 }

@@ -275,4 +275,8 @@
     <string name="choose_osmand_desc">Roghnaigh leagan OsmAnd áit a thaispeántar na teagmhálaithe ar an léarscáil.</string>
     <string name="si_mi_yard">Mílte/slat</string>
     <string name="initializing">Ag tosú</string>
+    <string name="location_source_summary">De réir réamhshocraithe, úsáideann OsmAnd suiteáilte ó Google Play Seirbhísí Súgartha Google chun suíomh a chinneadh.
+\n
+\nMá fhaigheann tú eolas míchruinn faoin suíomh nó má úsáideann tú gléas gan Google Play Services, déan iarracht athrú go Android API</string>
+    <string name="location_source">Foinse suímh</string>
 </resources>

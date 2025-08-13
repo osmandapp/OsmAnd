@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
@@ -17,7 +17,7 @@
 		android:padding="@dimen/content_padding"
 		android:text="@string/save_as_smart_folder"
 		android:textSize="@dimen/dialog_header_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
+		app:typefaceWeight="medium" />
 
 
 	<net.osmand.plus.widgets.OsmandTextFieldBoxes
@@ -28,11 +28,11 @@
 		android:background="?attr/list_background_color"
 		android:focusable="true"
 		android:focusableInTouchMode="true"
-		osmand:errorColor="@color/color_invalid"
-		osmand:hasClearButton="true"
-		osmand:labelText="@string/shared_string_name"
-		osmand:primaryColor="@color/active_color_primary_dark"
-		osmand:secondaryColor="?android:textColorSecondary">
+		app:errorColor="@color/color_invalid"
+		app:hasClearButton="true"
+		app:labelText="@string/shared_string_name"
+		app:primaryColor="@color/active_color_primary_dark"
+		app:secondaryColor="?android:textColorSecondary">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/name_input"
@@ -60,9 +60,9 @@
 			android:id="@+id/cancel_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			osmand:dialogButtonTitle="@string/shared_string_cancel"
-			osmand:dialogButtonType="tertiary"
-			osmand:dialogButtonUseUppercaseTitle="true" />
+			app:dialogButtonTitle="@string/shared_string_cancel"
+			app:dialogButtonType="tertiary"
+			app:dialogButtonUseUppercaseTitle="true" />
 
 		<View
 			android:layout_width="0dp"
@@ -73,9 +73,9 @@
 			android:id="@+id/save_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			osmand:dialogButtonTitle="@string/shared_string_save"
-			osmand:dialogButtonType="tertiary"
-			osmand:dialogButtonUseUppercaseTitle="true" />
+			app:dialogButtonTitle="@string/shared_string_save"
+			app:dialogButtonType="tertiary"
+			app:dialogButtonUseUppercaseTitle="true" />
 
 	</LinearLayout>
 

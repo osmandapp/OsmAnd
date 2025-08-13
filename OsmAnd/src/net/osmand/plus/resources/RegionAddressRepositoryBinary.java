@@ -19,7 +19,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.Street;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
 
@@ -51,8 +50,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapReaderResource resource ) {
 		this.resource = resource;
-		langSetting = mgr.getContext().getSettings().MAP_PREFERRED_LOCALE;
-		transliterateSetting = mgr.getContext().getSettings().MAP_TRANSLITERATE_NAMES;
+		langSetting = mgr.getApp().getSettings().MAP_PREFERRED_LOCALE;
+		transliterateSetting = mgr.getApp().getSettings().MAP_TRANSLITERATE_NAMES;
 		this.collator = OsmAndCollator.primaryCollator();
 		this.postCodes = new TreeMap<String, City>(OsmAndCollator.primaryCollator());
 	}
@@ -83,7 +82,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 					}
 					cities = ncities;
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
 		}
@@ -129,7 +128,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 					reader.preloadBuildings(street, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 					street.sortBuildings();
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
 		}
@@ -160,7 +159,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			if (reader != null) {
 				reader.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Disk operation failed", e);  //$NON-NLS-1$
 		}
 	}
@@ -177,7 +176,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			if (reader != null) {
 				reader.searchAddressDataByName(req, typeFilter);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}
 		return req.getSearchResults();
@@ -239,7 +238,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		List<City> citiesToFill = new ArrayList<>(cities.values());
 		try {
 			citiesToFill.addAll(fillWithCities(name, resultMatcher, getCityTypeFilter(name, searchVillages)));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}
 		return citiesToFill;
@@ -339,7 +338,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 						}
 					}), id < -1 ? BinaryMapAddressReaderAdapter.POSTCODES_TYPE : BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
 		}

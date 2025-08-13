@@ -30,4 +30,5 @@ public abstract class WidgetState {
 	public abstract void changeToNextState();
 
 	public abstract void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId);
+	public abstract void copyPrefsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId);
 }

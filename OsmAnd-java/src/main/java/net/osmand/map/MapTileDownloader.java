@@ -35,7 +35,8 @@ public class MapTileDownloader {
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
 	public static final long TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS = 15000;
 	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 50;
-	private static final int CONNECTION_TIMEOUT = 30000;
+	private static final int CONNECT_TIMEOUT = 30000;
+	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 
 	private static MapTileDownloader downloader = null;
 
@@ -239,8 +240,8 @@ public class MapTileDownloader {
 					connection.setRequestProperty("User-Agent", Algorithms.isEmpty(request.userAgent) ? USER_AGENT : request.userAgent); 
 					if (request.referer != null)
 						connection.setRequestProperty("Referer", request.referer); 
-					connection.setConnectTimeout(CONNECTION_TIMEOUT);
-					connection.setReadTimeout(CONNECTION_TIMEOUT);
+					connection.setConnectTimeout(CONNECT_TIMEOUT);
+					connection.setReadTimeout(READ_TIMEOUT);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					request.saveTile(inputStream);
 					if (log.isDebugEnabled()) {
@@ -276,7 +277,7 @@ public class MapTileDownloader {
 
 	public void fireLoadCallback(DownloadRequest request) {
 		for (WeakReference<IMapDownloaderCallback> callback : callbacks) {
-			IMapDownloaderCallback c = callback.get();
+			IMapDownloaderCallback c = callback != null ? callback.get() : null;
 			if (c != null) {
 				c.tileDownloaded(request);
 			}

@@ -58,7 +58,7 @@ public abstract class MapRenderingTypes {
 	
 	
 	protected void checkIfInitNeeded() {
-		if(types == null) {
+		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
 			typeList.clear();
 			nameRuleType = MapRulType.createText("name");
@@ -231,13 +231,16 @@ public abstract class MapRenderingTypes {
 			int tok;
 			parser.setInput(is, "UTF-8");
 			MapRulType parentCategory = null;
+			MapRulType parentType = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
 					if (name.equals("category")) { //$NON-NLS-1$
 						parentCategory = parseCategoryFromXml(parser);
 					} else if (name.equals("type")) {
-						parseAndRegisterTypeFromXML(parser, parentCategory);
+						parentType = parseAndRegisterTypeFromXML(parser, parentCategory);
+					} else if (name.equals("propagate")) {
+						parsePropagate(parser, parentType);
 					} else if (name.equals("routing_type")) {
 						parseRouteTagFromXML(parser);
 					} else if (name.equals("entity_convert")) {
@@ -265,8 +268,43 @@ public abstract class MapRenderingTypes {
 	protected abstract void parseEntityConvertXML(XmlPullParser parser);
 
 	protected abstract void parseRouteTagFromXML(XmlPullParser parser);
+	
+	protected abstract void parsePropagate(XmlPullParser parser, MapRulType parentType);
 
-	protected abstract void parseAndRegisterTypeFromXML(XmlPullParser parser, MapRulType parentCategory) ;
+	protected abstract MapRulType parseAndRegisterTypeFromXML(XmlPullParser parser, MapRulType parentCategory) ;
+	
+	protected PropagateToNode parsePropagateType(XmlPullParser parser) {
+		String propagateToNodes = parser.getAttributeValue("", "propagateToNodes");
+		if (propagateToNodes != null) {
+			PropagateToNode rtype = new PropagateToNode();
+			if ("true".equals(propagateToNodes) || "yes".equals(propagateToNodes) || "all".equals(propagateToNodes)) {
+				rtype.propagateToNodes = PropagateToNodesType.ALL;
+			} else if ("start".equals(propagateToNodes)) {
+				rtype.propagateToNodes = PropagateToNodesType.START;
+			} else if ("end".equals(propagateToNodes)) {
+				rtype.propagateToNodes = PropagateToNodesType.END;
+			} else if ("center".equals(propagateToNodes)) {
+				rtype.propagateToNodes = PropagateToNodesType.CENTER;
+			} else if ("border".equals(propagateToNodes) || "borderin".equals(propagateToNodes)) {
+				rtype.propagateToNodes = PropagateToNodesType.BORDERIN;
+			} else if ("borderout".equals(propagateToNodes)) {
+				rtype.propagateToNodes = PropagateToNodesType.BORDEROUT;
+			}
+			String propagateToNodesPrefix = parser.getAttributeValue("", "propagateToNodesPrefix");
+			if (propagateToNodesPrefix != null) {
+				rtype.propagateToNodesPrefix = propagateToNodesPrefix;
+			}
+			String tags = parser.getAttributeValue("", "propagateAlsoTags");
+			if(tags != null) {
+				rtype.propagateAlsoTags = tags.split(",");
+			}
+			rtype.propagateIf = parseMultiTagValue(parser, "propagateIf");
+			rtype.propagateNetworkIf = parseMultiTagValue(parser, "propagateNetworkIf");
+			return rtype;
+		}
+		return null;
+		
+	}
 	
 	protected MapRulType parseBaseRuleType(XmlPullParser parser, MapRulType parentCategory, String tag) {
 		String value = lc(parser.getAttributeValue("", "value"));
@@ -284,25 +322,10 @@ public abstract class MapRenderingTypes {
 				"yes".equals(parser.getAttributeValue("", "map")) || parser.getAttributeValue("", "map") == null;
 		rtype.poi = "true".equals(parser.getAttributeValue("", "poi")) || 
 				"yes".equals(parser.getAttributeValue("", "poi")) || parser.getAttributeValue("", "poi") == null;
-		String propagateToNodes = parser.getAttributeValue("", "propagateToNodes");
-		if (propagateToNodes != null) {
-			if ("true".equals(propagateToNodes) || "yes".equals(propagateToNodes) || "all".equals(propagateToNodes)) {
-				rtype.propagateToNodes = MapRulType.PropagateToNodesType.ALL;
-			} else if ("start".equals(propagateToNodes)) {
-				rtype.propagateToNodes = MapRulType.PropagateToNodesType.START;
-			} else if ("end".equals(propagateToNodes)) {
-				rtype.propagateToNodes = MapRulType.PropagateToNodesType.END;
-			} else if ("center".equals(propagateToNodes)) {
-				rtype.propagateToNodes = MapRulType.PropagateToNodesType.CENTER;
-			} else if ("border".equals(propagateToNodes)) {
-				rtype.propagateToNodes = MapRulType.PropagateToNodesType.BORDER;
-			}
+		PropagateToNode ptype = parsePropagateType(parser);
+		if (ptype != null) {
+			rtype.propagateToNodes.add(ptype);
 		}
-		String propagateToNodesPrefix = parser.getAttributeValue("", "propagateToNodesPrefix");
-		if (propagateToNodesPrefix != null) {
-			rtype.propagateToNodesPrefix = propagateToNodesPrefix;
-		}
-		rtype.propagateIf = parseMultiTagValue(parser, "propagateIf");
 		
 		String order = parser.getAttributeValue("", "order");
 		if(!Algorithms.isEmpty(order)) {
@@ -386,6 +409,7 @@ public abstract class MapRenderingTypes {
 		return rtype;
 		
 	}
+
 
 	private void putNameTags(String namesList, Map<String, String> names, String namePrefix) {
 		if (namesList != null) {
@@ -545,6 +569,27 @@ public abstract class MapRenderingTypes {
 		
 	}
 	
+	public enum PropagateToNodesType {
+		ALL,
+		START,
+		END,
+		CENTER,
+		BORDERIN,
+		BORDEROUT;
+
+		public boolean isBorder() {
+			return this == PropagateToNodesType.BORDERIN || this == PropagateToNodesType.BORDEROUT;
+		}
+	}
+	
+	public static class PropagateToNode {
+		public PropagateToNodesType propagateToNodes;
+		public String propagateToNodesPrefix;
+		public Map<String, String> propagateIf;
+		public Map<String, String> propagateNetworkIf;
+		public String[] propagateAlsoTags;
+	}
+	
 	public static class MapRulType {
 		// relation part
 		protected Map<String, String> relationNames;
@@ -553,9 +598,7 @@ public abstract class MapRenderingTypes {
 		protected String relationGroupPrefix;
 		protected Map<String, String> relationGroupNameTags;
 		protected Map<String, String> relationGroupAdditionalTags;
-		protected PropagateToNodesType propagateToNodes = PropagateToNodesType.NONE;
-		protected String propagateToNodesPrefix;
-		protected Map<String, String> propagateIf;
+		protected List<PropagateToNode> propagateToNodes = new ArrayList<>();
 		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
@@ -741,30 +784,11 @@ public abstract class MapRenderingTypes {
 			return true;
 		}
 		
-		public boolean isPropagateToNodes() {
-			return propagateToNodes != PropagateToNodesType.NONE;
-		}
-
-		public PropagateToNodesType getPropagateToNodesType() {
+		public List<PropagateToNode> getPropagateToNodes() {
 			return propagateToNodes;
 		}
-
-		public String getPropagateToNodesPrefix() {
-			return propagateToNodesPrefix;
-		}
-
-		public Map<String, String> getPropagateIf() {
-			return propagateIf;
-		}
-
-		public enum PropagateToNodesType {
-			NONE,
-			ALL,
-			START,
-			END,
-			CENTER,
-			BORDER
-		}
+		
+		
 
 	}
 
@@ -785,7 +809,7 @@ public abstract class MapRenderingTypes {
 		case RESTRICTION_ONLY_STRAIGHT_ON:
 			return "ONLY_STRAIGHT_ON".toLowerCase();
 		}
-		return "unkonwn";
+		return "unknown";
 
 	}
 

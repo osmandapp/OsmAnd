@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_margin="@dimen/dialog_content_bottom_margin"
+		android:text="@string/prediction_time_description"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		app:lineHeight="@dimen/default_title_line_height" />
+
+	<include layout="@layout/divider" />
+
+	<LinearLayout
+		android:id="@+id/selectable_list_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/setting_list_item_large_height"
+		android:paddingVertical="@dimen/content_padding_small"
+		tools:background="?android:attr/selectableItemBackground">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/context_menu_padding_margin_large">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="marquee"
+				android:singleLine="true"
+				android:text="@string/tab_title_advanced"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				app:lineHeight="@dimen/default_title_line_height" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:maxLines="4"
+				android:scrollbars="none"
+				android:text="@string/prediction_time_advanced_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				app:lineHeight="@dimen/default_desc_line_height" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/advanced_item_icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
+			android:tint="?attr/default_icon_color"
+			tools:src="@drawable/ic_action_arrow_down" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/slider_container"
+		layout="@layout/bottom_sheet_item_slider_with_four_text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginVertical="@dimen/content_padding" />
+
+</LinearLayout>

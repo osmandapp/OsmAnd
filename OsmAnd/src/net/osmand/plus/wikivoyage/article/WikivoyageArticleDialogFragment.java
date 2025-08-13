@@ -30,10 +30,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -43,6 +44,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
@@ -50,11 +52,15 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -102,7 +108,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 		int appBarTextColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		articleToolbarText = mainView.findViewById(R.id.article_toolbar_text);
-		articleToolbarText.setTextColor(ContextCompat.getColor(getContext(), appBarTextColor));
+		articleToolbarText.setTextColor(ContextCompat.getColor(mainView.getContext(), appBarTextColor));
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
 				R.color.icon_color_default_light, R.color.active_color_primary_light,
@@ -114,32 +120,24 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
 		selectedLangTv.setBackgroundResource(nightMode
 				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
-		selectedLangTv.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showPopupLangMenu(v, selectedLang);
-			}
-		});
+		selectedLangTv.setOnClickListener(v -> showPopupLangMenu(v, selectedLang));
 
 		TextView contentsBtn = mainView.findViewById(R.id.contents_button);
 		contentsBtn.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_contents), null, null, null
 		);
-		contentsBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fm = getFragmentManager();
-				if (article == null || fm == null) {
-					return;
-				}
-				Bundle args = new Bundle();
-				args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
-				WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
-				fragment.setUsedOnMap(false);
-				fragment.setArguments(args);
-				fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE);
-				fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
+		contentsBtn.setOnClickListener(v -> {
+			FragmentManager fm = getFragmentManager();
+			if (article == null || fm == null) {
+				return;
 			}
+			Bundle args = new Bundle();
+			args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
+			WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setArguments(args);
+			fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE);
+			fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 		});
 
 		trackButton = mainView.findViewById(R.id.gpx_button);
@@ -175,7 +173,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
 	}
@@ -232,15 +230,16 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		if (article == null || activity == null || fm == null) {
 			return;
 		}
-		if (activity instanceof WikivoyageExploreActivity) {
-			WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
+		if (activity instanceof WikivoyageExploreActivity exploreActivity) {
 			exploreActivity.setArticle(article);
+		} else if (activity instanceof MapActivity) {
+			closeFragment();
 		}
 		TravelHelper travelHelper = app.getTravelHelper();
 		File file = travelHelper.createGpxFile(article);
 		boolean temporarySelected = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) == null;
 		TrackMenuFragment.openTrack(activity, new File(file.getAbsolutePath()), null,
-				getString(R.string.icon_group_travel), TrackMenuTab.POINTS, temporarySelected);
+				app.getString(R.string.icon_group_travel), TrackMenuTab.POINTS, temporarySelected);
 	}
 
 	private void updateSaveButton() {
@@ -250,12 +249,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
 			saveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
-			saveBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					helper.saveOrRemoveArticle(article, !saved);
-					updateSaveButton();
-				}
+			saveBtn.setOnClickListener(view -> {
+				helper.saveOrRemoveArticle(article, !saved);
+				updateSaveButton();
 			});
 		}
 	}
@@ -275,15 +271,12 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			String lang = e.getValue();
 			String langKey = e.getKey();
 			MenuItem item = popup.getMenu().add(lang);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					if (!selectedLang.equals(langKey)) {
-						selectedLang = langKey;
-						populateArticle();
-					}
-					return true;
+			item.setOnMenuItemClickListener(i -> {
+				if (!selectedLang.equals(langKey)) {
+					selectedLang = langKey;
+					populateArticle();
 				}
+				return true;
 			});
 		}
 		popup.show();
@@ -302,7 +295,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			return;
 		}
 		if (selectedLang == null) {
-			selectedLang = langs.get(0);
+			Locale locale = LocaleHelper.getPreferredNameLocale(app, langs);
+			selectedLang = locale != null ? locale.getLanguage() : langs.get(0);
 		}
 		articleToolbarText.setText("");
 		article = app.getTravelHelper().getArticleById(articleId, selectedLang, true,
@@ -313,7 +307,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 					}
 
 					@Override
-					public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+					public void onGpxFileRead(@Nullable GpxFile gpxFile) {
 						updateTrackButton(false, gpxFile);
 					}
 				});
@@ -331,7 +325,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
 	}
 
-	private void updateTrackButton(boolean processing, @Nullable GPXFile gpxFile) {
+	private void updateTrackButton(boolean processing, @Nullable GpxFile gpxFile) {
 		Context ctx = getContext();
 		if (ctx != null) {
 			if (processing) {
@@ -358,18 +352,17 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		String nightModeClass = nightMode ? " nightmode" : "";
 		String imageTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(article.getAggregatedPartOf())) {
-			String[] aggregatedPartOfArrayOrig = article.getAggregatedPartOf().split(",");
+			String[] aggregatedPartOfArrayOrig = Arrays.stream(article.getAggregatedPartOf().split(","))
+					.map(WikivoyageUtils::getTitleWithoutPrefix).toArray(String[]::new);
 			if (aggregatedPartOfArrayOrig.length > 0) {
 				String current = aggregatedPartOfArrayOrig[0];
-				sb.append("<div class=\"nav-bar" + nightModeClass + "\" onClick=\"showNavigation()\">");
-				if (aggregatedPartOfArrayOrig.length > 0) {
-					for (int i = 0; i < aggregatedPartOfArrayOrig.length; i++) {
-						if (i > 0) {
-							sb.append("&nbsp;&nbsp;•&nbsp;&nbsp;").append(aggregatedPartOfArrayOrig[i]);
-						} else {
-							if (!TextUtils.isEmpty(current)) {
-								sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
-							}
+				sb.append("<div class=\"nav-bar").append(nightModeClass).append("\" onClick=\"showNavigation()\">");
+				for (int i = 0; i < aggregatedPartOfArrayOrig.length; i++) {
+					if (i > 0) {
+						sb.append("&nbsp;&nbsp;•&nbsp;&nbsp;").append(aggregatedPartOfArrayOrig[i]);
+					} else {
+						if (!TextUtils.isEmpty(current)) {
+							sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
 						}
 					}
 				}
@@ -394,41 +387,41 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	public static boolean showInstanceByTitle(@NonNull OsmandApplication app,
-											  @NonNull FragmentManager fm,
+											  @NonNull FragmentManager manager,
 											  @NonNull String title,
 											  @NonNull String lang) {
 		TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
-		return articleId != null && showInstance(app, fm, articleId, lang);
+		return articleId != null && showInstance(app, manager, articleId, lang);
 	}
 
 	public static boolean showInstance(@NonNull OsmandApplication app,
-									   @NonNull FragmentManager fm,
+									   @NonNull FragmentManager manager,
 									   @NonNull TravelArticleIdentifier articleId,
 									   @Nullable String selectedLang) {
-		ArrayList<String> langs = app.getTravelHelper().getArticleLangs(articleId);
-		return showInstance(fm, articleId, langs, selectedLang);
+		List<String> langs = app.getTravelHelper().getArticleLangs(articleId);
+		return showInstance(manager, articleId, langs, selectedLang);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fm,
+	public static boolean showInstance(@NonNull FragmentManager manager,
 									   @NonNull TravelArticleIdentifier articleId,
-									   @NonNull ArrayList<String> langs) {
-		return showInstance(fm, articleId, langs, null);
+									   @NonNull List<String> langs) {
+		return showInstance(manager, articleId, langs, null);
 	}
 
-	private static boolean showInstance(@NonNull FragmentManager fm,
+	public static boolean showInstance(@NonNull FragmentManager manager,
 										@NonNull TravelArticleIdentifier articleId,
-										@NonNull ArrayList<String> langs,
+										@NonNull List<String> langs,
 										@Nullable String selectedLang) {
 		try {
 			Bundle args = new Bundle();
 			args.putParcelable(ARTICLE_ID_KEY, articleId);
-			args.putStringArrayList(LANGS_KEY, langs);
+			args.putStringArrayList(LANGS_KEY, new ArrayList<>(langs));
 			if (langs.contains(selectedLang)) {
 				args.putString(SELECTED_LANG_KEY, selectedLang);
 			}
 			WikivoyageArticleDialogFragment fragment = new WikivoyageArticleDialogFragment();
 			fragment.setArguments(args);
-			fragment.show(fm, TAG);
+			fragment.show(manager, TAG);
 			return true;
 		} catch (RuntimeException e) {
 			return false;

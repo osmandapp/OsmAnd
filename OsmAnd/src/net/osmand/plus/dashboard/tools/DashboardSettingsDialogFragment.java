@@ -21,13 +21,14 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,9 +76,9 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		View showDashboardOnStart = createCheckboxItem(settings.SHOW_DASHBOARD_ON_START,
-				R.string.show_on_start , R.string.show_on_start_description);
+				R.string.show_on_start, R.string.show_on_start_description);
 		View accessFromMap = createCheckboxItem(settings.SHOW_DASHBOARD_ON_MAP_SCREEN,
-				R.string.access_from_map, R.string.access_from_map_description); 
+				R.string.access_from_map, R.string.access_from_map_description);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		if (savedInstanceState != null && savedInstanceState.containsKey(CHECKED_ITEMS)) {
@@ -97,7 +98,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 						for (int i = 0; i < shouldShow.length; i++) {
 							DashFragmentData fragmentData = mFragmentsData.get(i);
 							settings.registerBooleanPreference(
-									DashboardOnMap.SHOULD_SHOW + fragmentData.tag, true)
+											DashboardOnMap.SHOULD_SHOW + fragmentData.tag, true)
 									.makeGlobal().set(shouldShow[i]);
 							if (fragmentData.rowNumberTag != null) {
 								settings.registerIntPreference(fragmentData.rowNumberTag, DEFAULT_NUMBER_OF_ROWS)
@@ -109,7 +110,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 								((CompoundButton) showDashboardOnStart.findViewById(R.id.toggle_item)).isChecked());
 						settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(
 								((CompoundButton) accessFromMap.findViewById(R.id.toggle_item)).isChecked());
-						mapActivity.getMapLayers().getMapControlsLayer().initDashboardRelatedControls();
+						mapActivity.getMapLayers().getMapControlsLayer().refreshButtons();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
@@ -158,7 +159,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		private final int[] numbersOfRows;
 
 		public DashFragmentAdapter(@NonNull Context context, @NonNull List<DashFragmentData> objects,
-				@NonNull boolean[] checkedItems, @NonNull int[] numbersOfRows) {
+		                           @NonNull boolean[] checkedItems, @NonNull int[] numbersOfRows) {
 			super(context, 0, objects);
 			this.checkedItems = checkedItems;
 			this.numbersOfRows = numbersOfRows;
@@ -166,7 +167,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		}
 
 		public DashFragmentAdapter(@NonNull Context context, @NonNull List<DashFragmentData> objects,
-				@NonNull OsmandSettings settings) {
+		                           @NonNull OsmandSettings settings) {
 			super(context, 0, objects);
 			numbersOfRows = new int[objects.size()];
 			checkedItems = new boolean[objects.size()];
@@ -239,7 +240,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		};
 
 	}
-	
+
 	private class DashViewHolder {
 		final View view;
 		final TextView textView;
@@ -272,7 +273,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 				numberOfRowsTextView.setVisibility(View.GONE);
 			}
 			textView.setText(fragmentData.shouldShowFunction.getTitleId());
-			textView.setTextColor(dashFragmentAdapter.isChecked(position)? textColorPrimary :
+			textView.setTextColor(dashFragmentAdapter.isChecked(position) ? textColorPrimary :
 					textColorSecondary);
 			this.position = position;
 
@@ -290,11 +291,11 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 			numberOfRowsTextView.setTag(this);
 			numberOfRowsTextView.setOnClickListener(dashFragmentAdapter.onNumberClickListener);
 		}
-		
+
 
 	}
-	
+
 	private boolean isNightMode() {
-		return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		return mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }

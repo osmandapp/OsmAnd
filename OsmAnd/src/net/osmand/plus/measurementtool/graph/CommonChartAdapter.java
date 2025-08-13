@@ -16,7 +16,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -134,7 +134,7 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 		}
 		AndroidUiHelper.updateVisibility(bottomInfoContainer, true);
 
-		GPXTrackAnalysis analysis = additionalData.analysis;
+		GpxTrackAnalysis analysis = additionalData.analysis;
 
 		if (gpxGraphType == GPXTabItemType.GPX_TAB_ITEM_GENERAL) {
 			attachGeneralStatistics(analysis);
@@ -145,7 +145,7 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 		}
 	}
 
-	private void attachGeneralStatistics(@NonNull GPXTrackAnalysis analysis) {
+	private void attachGeneralStatistics(@NonNull GpxTrackAnalysis analysis) {
 		LayoutInflater inflater = createThemedInflater();
 		View generalStatistics = inflater.inflate(R.layout.gpx_item_general_statistics, bottomInfoContainer, false);
 		GPXItemPagerAdapter.updateGeneralTabInfo(generalStatistics, app, analysis, false, false);
@@ -161,7 +161,7 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 		bottomInfoContainer.addView(generalStatistics);
 	}
 
-	private void attachAltitudeStatistics(@NonNull GPXTrackAnalysis analysis) {
+	private void attachAltitudeStatistics(@NonNull GpxTrackAnalysis analysis) {
 		LayoutInflater inflater = createThemedInflater();
 		View altitudeStatistics = inflater.inflate(R.layout.gpx_item_altitude_statistics, bottomInfoContainer, false);
 		GPXItemPagerAdapter.updateAltitudeTabInfo(altitudeStatistics, app, analysis);
@@ -169,7 +169,7 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 		bottomInfoContainer.addView(altitudeStatistics);
 	}
 
-	private void attachSpeedStatistics(@NonNull GPXTrackAnalysis analysis) {
+	private void attachSpeedStatistics(@NonNull GpxTrackAnalysis analysis) {
 		LayoutInflater inflater = createThemedInflater();
 		View speedStatistics = inflater.inflate(R.layout.gpx_item_speed_statistics, bottomInfoContainer, false);
 		GPXItemPagerAdapter.updateSpeedTabInfo(speedStatistics, app, analysis, false, false);
@@ -178,7 +178,7 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 	}
 
 	private LayoutInflater createThemedInflater() {
-		return LayoutInflater.from(UiUtilities.getThemedContext(app, isNightMode()));
+		return LayoutInflater.from(UiUtilities.getThemedContext(chart.getContext(), isNightMode()));
 	}
 
 	public void setGpxGraphType(@Nullable GPXTabItemType gpxGraphType) {

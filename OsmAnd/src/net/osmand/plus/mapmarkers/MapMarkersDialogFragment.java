@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -23,6 +22,7 @@ import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptions
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -75,7 +75,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
-		lightTheme = app.getSettings().isLightContent();
+		lightTheme = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 	}
 
@@ -99,7 +99,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-		lightTheme = app.getSettings().isLightContent();
+		lightTheme = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		inflater = UiUtilities.getInflater(getContext(), !lightTheme);
 		List<Fragment> fragments = getChildFragmentManager().getFragments();
 		for (Fragment fragment : fragments) {
@@ -380,7 +380,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			public void buildRouteOnClick() {
 				if (mapActivity != null) {
 					if (mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().isEmpty()) {
-						Toast.makeText(mapActivity, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
+						app.showShortToastMessage(R.string.plan_route_no_markers_toast);
 					} else {
 						PlanRouteFragment.showInstance(mapActivity);
 						MapMarkersDialogFragment.this.dismiss();
@@ -392,7 +392,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			public void saveAsNewTrackOnClick() {
 				if (mapActivity != null) {
 					if (mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().isEmpty()) {
-						Toast.makeText(mapActivity, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
+						app.showShortToastMessage(R.string.plan_route_no_markers_toast);
 					} else {
 						SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
 						fragment.setListener(createSaveAsTrackFragmentListener());

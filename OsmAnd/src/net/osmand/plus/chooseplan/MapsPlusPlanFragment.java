@@ -84,7 +84,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 		List<InAppSubscription> subscriptions = new ArrayList<>();
 		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
 		for (InAppSubscription subscription : visibleSubscriptions) {
-			if (purchases.isMapsSubscription(subscription)) {
+			if (purchases.isMaps(subscription)) {
 				subscriptions.add(subscription);
 			}
 		}

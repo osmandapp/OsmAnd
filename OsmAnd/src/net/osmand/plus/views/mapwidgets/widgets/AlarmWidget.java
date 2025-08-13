@@ -1,23 +1,13 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static android.util.TypedValue.COMPLEX_UNIT_PX;
-import static net.osmand.plus.routing.AlarmInfoType.BORDER_CONTROL;
-import static net.osmand.plus.routing.AlarmInfoType.HAZARD;
-import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
-import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_LIMIT;
-import static net.osmand.plus.routing.AlarmInfoType.STOP;
-import static net.osmand.plus.routing.AlarmInfoType.TOLL_BOOTH;
-import static net.osmand.plus.routing.AlarmInfoType.TRAFFIC_CALMING;
-import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
+import static net.osmand.plus.routing.AlarmInfoType.*;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.view.View;
@@ -42,6 +32,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
@@ -116,25 +107,17 @@ public class AlarmWidget {
 	public boolean updateInfo(DrawSettings drawSettings, boolean drawBitmap) {
 		boolean showRoutingAlarms = settings.SHOW_ROUTING_ALARMS.get();
 		boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
-		boolean cams = settings.SHOW_CAMERAS.get();
+		boolean showCameras = settings.SHOW_CAMERAS.get();
 		boolean browseMap = settings.APPLICATION_MODE.get() == ApplicationMode.DEFAULT;
+		boolean shouldProcess = routingHelper.isFollowingMode()
+				|| trackingUtilities.isMapLinkedToLocation() && !browseMap;
 		boolean visible = false;
-		if ((routingHelper.isFollowingMode() || trackingUtilities.isMapLinkedToLocation() && !browseMap)
-				&& showRoutingAlarms && (trafficWarnings || cams)) {
-			AlarmInfo alarm;
-			if (routingHelper.isFollowingMode() && !routingHelper.isDeviatedFromRoute()
-					&& (routingHelper.getCurrentGPXRoute() == null || routingHelper.isCurrentGPXRouteV2())) {
-				alarm = wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), cams);
-			} else {
-				RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
-				Location loc = locationProvider.getLastKnownLocation();
-				if (ro != null && loc != null) {
-					alarm = wh.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(),
-							settings.SPEED_SYSTEM.get(), cams);
-				} else {
-					alarm = null;
-				}
-			}
+
+		AlarmInfo alarm = null;
+		if (shouldProcess) {
+			alarm = getMostImportantAlarm(showCameras);
+		}
+		if (shouldProcess && showRoutingAlarms && (trafficWarnings || showCameras)) {
 			boolean changed = false;
 			AlarmWidgetInfo info = null;
 			if (alarm != null) {
@@ -211,6 +194,22 @@ public class AlarmWidget {
 		return true;
 	}
 
+	@Nullable
+	private AlarmInfo getMostImportantAlarm(boolean showCameras) {
+		if (routingHelper.isFollowingMode() && !routingHelper.isDeviatedFromRoute()
+				&& (routingHelper.getCurrentGPXRoute() == null || routingHelper.isCurrentGPXRouteV2())) {
+			return wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), showCameras);
+		} else {
+			Location location = locationProvider.getLastKnownLocation();
+			RouteDataObject routeObject = locationProvider.getLastKnownRouteSegment();
+			if (routeObject != null && location != null) {
+				return wh.calculateMostImportantAlarm(routeObject, location,
+						settings.METRIC_SYSTEM.get(), settings.SPEED_SYSTEM.get(), showCameras);
+			}
+		}
+		return null;
+	}
+
 	@NonNull
 	private Bitmap createWidgetBitmap(@NonNull AlarmWidgetInfo info, float density) {
 		Bitmap bitmap = Bitmap.createBitmap((int) (WIDGET_BITMAP_SIZE_DP * density),
@@ -227,7 +226,7 @@ public class AlarmWidget {
 			textPaint.setColor(Color.BLACK);
 			textPaint.setTextSize(WIDGET_BITMAP_TEXT_SIZE * density);
 			textPaint.setTextAlign(Paint.Align.CENTER);
-			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+			textPaint.setTypeface(FontCache.getMediumFont());
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
 			float y = canvas.getHeight() / 2f - ((textPaint.descent() + textPaint.ascent()) / 2);
@@ -244,7 +243,7 @@ public class AlarmWidget {
 			textPaint.setColor(ContextCompat.getColor(app, info.americanType ? R.color.activity_background_color_dark : R.color.card_and_list_background_light));
 			textPaint.setTextSize(WIDGET_BITMAP_BOTTOM_TEXT_SIZE * density);
 			textPaint.setTextAlign(Paint.Align.CENTER);
-			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+			textPaint.setTypeface(FontCache.getMediumFont());
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
 			float y = canvas.getHeight() - (textPaint.descent() - textPaint.ascent());
@@ -272,7 +271,7 @@ public class AlarmWidget {
 		if (alarm.getType() == SPEED_LIMIT) {
 			if (isCanadianRegion) {
 				locImgId = R.drawable.warnings_speed_limit_ca;
-				bottomText = settings.SPEED_SYSTEM.get().toShortString(settings.getContext());
+				bottomText = settings.SPEED_SYSTEM.get().toShortString();
 			} else if (americanType) {
 				locImgId = R.drawable.warnings_speed_limit_us;
 				//else case is done by drawing red ring

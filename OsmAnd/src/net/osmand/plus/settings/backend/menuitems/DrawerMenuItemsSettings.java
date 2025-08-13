@@ -1,30 +1,6 @@
 package net.osmand.plus.settings.backend.menuitems;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_VERSION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FORECAST_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 
 import androidx.annotation.NonNull;
 
@@ -54,6 +30,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		originalOrderIds.add(DRAWER_MEASURE_DISTANCE_ID);
 		originalOrderIds.add(DRAWER_WEATHER_FORECAST_ID);
 		originalOrderIds.add(DRAWER_ANT_PLUS_ID);
+		originalOrderIds.add(DRAWER_VEHICLE_METRICS_ID);
 		originalOrderIds.add(DRAWER_DIVIDER_ID);
 		originalOrderIds.add(DRAWER_CONFIGURE_SCREEN_ID);
 		originalOrderIds.add(DRAWER_PLUGINS_ID);
@@ -70,18 +47,21 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		super(hiddenIds, orderIds);
 	}
 
+	@NonNull
 	@Override
 	public List<String> getHiddenIds() {
 		updateMissingDrawerItems();
 		return super.getHiddenIds();
 	}
 
+	@NonNull
 	@Override
 	public List<String> getOrderIds() {
 		updateMissingDrawerItems();
 		return super.getOrderIds();
 	}
 
+	@NonNull
 	@Override
 	public DrawerMenuItemsSettings newInstance() {
 		return new DrawerMenuItemsSettings();
@@ -123,10 +103,12 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		orderIds.add(0, idToInsert);
 	}
 
+	@NonNull
 	public static DrawerMenuItemsSettings getDrawerDefaultInstance() {
 		return new DrawerMenuItemsSettings(getDrawerHiddenItemsByDefault(), new ArrayList<>());
 	}
 
+	@NonNull
 	private static List<String> getDrawerHiddenItemsByDefault() {
 		List<String> hiddenByDefault = new ArrayList<>();
 		hiddenByDefault.add(DRAWER_DASHBOARD_ID);
@@ -138,6 +120,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		hiddenByDefault.add(DRAWER_LIVE_UPDATES_ID);
 		hiddenByDefault.add(DRAWER_OSMAND_VERSION_ID);
 		hiddenByDefault.add(DRAWER_ANT_PLUS_ID);
+		hiddenByDefault.add(DRAWER_VEHICLE_METRICS_ID);
 		return hiddenByDefault;
 	}
 }

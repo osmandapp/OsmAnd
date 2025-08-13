@@ -1,15 +1,12 @@
 package net.osmand.plus.track;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
-import static net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.Status;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +22,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabsHelper;
@@ -48,7 +43,7 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -58,10 +53,15 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackFolderLoaderTask;
+import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -108,20 +108,20 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		importHelper = app.getImportHelper();
-		trackTabsHelper = new TrackTabsHelper(app);
+		trackTabsHelper = createTrackTabsHelper(app);
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		itemsSelectionHelper = trackTabsHelper.getItemsSelectionHelper();
 	}
 
 	protected void setupTabLayout(@NonNull View view) {
 		viewPager = view.findViewById(R.id.view_pager);
-		List<TrackTab> tabs = getTrackTabs();
+		List<TrackTab> tabs = getSortedTrackTabs();
 		tabLayout = view.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light);
 		tabLayout.setCustomTabProvider(new PagerSlidingTabStrip.CustomTabProvider() {
 			@Override
 			public View getCustomTabView(@NonNull ViewGroup parent, int position) {
-				TrackTab trackTab = getTrackTabs().get(position);
+				TrackTab trackTab = getSortedTrackTabs().get(position);
 
 				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 				int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -132,7 +132,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 				TextView textView = customView.findViewById(android.R.id.text1);
 				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
 				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
-				textView.setText(trackTab.getName(app));
+				textView.setText(trackTab.getName());
 				return customView;
 			}
 
@@ -155,26 +155,43 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@NonNull
+	protected TrackTabsHelper createTrackTabsHelper(@NonNull OsmandApplication app) {
+		return new TrackTabsHelper(app);
+	}
+
+	@NonNull
 	public List<TrackTab> getTrackTabs() {
-		return new ArrayList<>(trackTabsHelper.getTrackTabs().values());
+		return trackTabsHelper.getTrackTabs();
+	}
+
+	@NonNull
+	public List<TrackTab> getSortedTrackTabs() {
+		return getSortedTrackTabs(true);
+	}
+
+	@NonNull
+	public List<TrackTab> getSortedTrackTabs(boolean useSubdirs) {
+		return trackTabsHelper.getSortedTrackTabs(useSubdirs);
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
-		adapter = new TracksTabAdapter(app, getChildFragmentManager(), items);
+		adapter = new TracksTabAdapter(getChildFragmentManager(), items);
 		pager.setAdapter(adapter);
 	}
 
 	@Nullable
 	public TrackTab getSelectedTab() {
-		List<TrackTab> trackTabs = getTrackTabs();
-		return trackTabs.isEmpty() ? null : trackTabs.get(viewPager.getCurrentItem());
+		List<TrackTab> trackTabs = getSortedTrackTabs();
+		int currentItemIndex = viewPager.getCurrentItem();
+		int selectedTabIndex = currentItemIndex < trackTabs.size() ? currentItemIndex : 0;
+		return trackTabs.isEmpty() ? null : trackTabs.get(selectedTabIndex);
 	}
 
-	public void setSelectedTab(@NonNull String name) {
-		List<TrackTab> trackTabs = getTrackTabs();
+	public void setSelectedTab(@NonNull String id) {
+		List<TrackTab> trackTabs = getSortedTrackTabs();
 		for (int i = 0; i < trackTabs.size(); i++) {
 			TrackTab tab = trackTabs.get(i);
-			if (Algorithms.stringsEqual(tab.getTypeName(), name)) {
+			if (Algorithms.stringsEqual(tab.getId(), id)) {
 				viewPager.setCurrentItem(i);
 				break;
 			}
@@ -182,9 +199,9 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@Nullable
-	public TrackTab getTab(@NonNull String name) {
+	public TrackTab getTab(@NonNull String id) {
 		for (TrackTab trackTab : getTrackTabs()) {
-			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
+			if (Algorithms.stringsEqual(id, trackTab.getId())) {
 				return trackTab;
 			}
 		}
@@ -209,7 +226,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	@Override
 	public void onResume() {
 		super.onResume();
-		List<TrackTab> tabs = getTrackTabs();
+		List<TrackTab> tabs = getSortedTrackTabs();
 		if (tabs.size() != tabSize) {
 			setTabs(tabs);
 		}
@@ -227,9 +244,9 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	protected void reloadTracks() {
 		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
-		TrackFolder folder = new TrackFolder(gpxDir, null);
-		asyncLoader = new TrackFolderLoaderTask(app, folder, this);
-		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		TrackFolder folder = new TrackFolder(SharedUtil.kFile(gpxDir), null);
+		asyncLoader = new TrackFolderLoaderTask(folder, this, false);
+		asyncLoader.execute();
 	}
 
 	@Override
@@ -238,7 +255,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	protected void updateTrackTabs() {
-		adapter.setTrackTabs(trackTabsHelper.getTrackTabs());
+		adapter.setTrackTabs(getSortedTrackTabs());
 	}
 
 	@Override
@@ -263,7 +280,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	@Nullable
 	private TrackItem findTrackItem(@NonNull SelectedGpxFile selectedGpxFile) {
 		for (TrackItem item : itemsSelectionHelper.getAllItems()) {
-			if (Algorithms.stringsEqual(selectedGpxFile.getGpxFile().path, item.getPath())) {
+			if (Algorithms.stringsEqual(selectedGpxFile.getGpxFile().getPath(), item.getPath())) {
 				return item;
 			}
 		}
@@ -288,7 +305,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	public boolean isLoadingTracks() {
-		return asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING;
+		return asyncLoader != null && asyncLoader.isRunning();
 	}
 
 	@Override
@@ -296,7 +313,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 		super.onDestroy();
 
 		if (isLoadingTracks() && !requireActivity().isChangingConfigurations()) {
-			asyncLoader.cancel(false);
+			asyncLoader.cancel();
 		}
 	}
 
@@ -343,9 +360,9 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 			}
 
 			@Override
-			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+			public void onSaveComplete(boolean success, GpxFile gpxFile) {
 				if (isAdded() && success) {
-					addTrackItem(new TrackItem(new File(gpxFile.path)));
+					addTrackItem(new TrackItem(new KFile(gpxFile.getPath())));
 				}
 				super.onSaveComplete(success, gpxFile);
 			}
@@ -354,7 +371,22 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	abstract protected void addTrackItem(@NonNull TrackItem item);
 
-	abstract protected void setTabs(@NonNull List<TrackTab> tabs);
+	protected void setTabs(@NonNull List<TrackTab> tabs) {
+		setTabs(tabs, 0);
+	}
+
+	protected void setTabs(@NonNull List<TrackTab> tabs, @Nullable String preselectedTabId) {
+		int index = 0;
+		for (int i = 0; i < tabs.size(); i++) {
+			if (Algorithms.stringsEqual(preselectedTabId, tabs.get(i).getId())) {
+				index = i;
+				break;
+			}
+		}
+		setTabs(tabs, index);
+	}
+
+	abstract protected void setTabs(@NonNull List<TrackTab> tabs, int preselectedTabIndex);
 
 	public boolean selectionMode() {
 		return true;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
 				android:duplicateParentState="true"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="Title"
 				tools:textColor="@color/active_color_primary_dark" />
 
@@ -47,7 +47,7 @@
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:textSize="@dimen/default_desc_text_size"
 				android:visibility="gone"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="Description"
 				tools:textColor="@color/text_color_secondary_dark"
 				tools:visibility="visible" />

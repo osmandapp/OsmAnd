@@ -18,7 +18,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -26,6 +26,7 @@ import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.AudioNotesTileProvider;
 import net.osmand.util.Algorithms;
@@ -71,10 +72,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof Recording) {
-			Recording objectInMotion = (Recording) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			float textScale = getTextScale();
-			drawRecording(canvas, objectInMotion, pf.x, pf.y, textScale);
 			if (!changeMarkerPositionMode) {
 				changeMarkerPositionMode = true;
 				clearAudioVideoNotes();
@@ -100,8 +97,9 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 
 			DataTileManager<Recording> recs = plugin.getRecordings();
 			List<Recording> objects =  recs.getAllObjects();
-			int objectsCount = objects.size() - (contextMenuLayer.isInChangeMarkerPositionMode()
-					&& contextMenuLayer.getMoveableObject() instanceof Recording ? 1 : 0);
+			int movableObjectsCount = contextMenuLayer.isInChangeMarkerPositionMode()
+					&& contextMenuLayer.getMoveableObject() instanceof Recording ? 1 : 0;
+			int objectsCount = objects.size() - movableObjectsCount;
 			if (audioNotesTileProvider != null && objectsCount != audioNotesTileProvider.getPoints31().size()) {
 				clearAudioVideoNotes();
 			}
@@ -155,19 +153,42 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		}
 	}
 
-	private void drawRecording(Canvas canvas, Recording o, float x, float y, float textScale) {
-		int iconId;
+	private void drawRecording(@NonNull Canvas canvas, @NonNull Recording recording, float x, float y, float textScale) {
+		PointImageDrawable icon = getRecordingIcon(recording);
+		icon.setAlpha(0.8f);
+		icon.drawPoint(canvas, x, y, textScale, false);
+	}
+
+	@NonNull
+	private PointImageDrawable getRecordingIcon(@NonNull Recording o) {
 		if (o.isPhoto()) {
-			iconId = R.drawable.mx_special_photo_camera;
+			return getPhotoNoteIcon();
 		} else if (o.isAudio()) {
-			iconId = R.drawable.mx_special_microphone;
+			return getAudioNoteIcon();
 		} else {
-			iconId = R.drawable.mx_special_video_camera;
+			return getVideoNoteIcon();
 		}
-		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
-				ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true, iconId);
-		pointImageDrawable.setAlpha(0.8f);
-		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
+	}
+
+	@NonNull
+	public PointImageDrawable getAudioNoteIcon() {
+		return createPointImageDrawable(R.drawable.mx_special_microphone);
+	}
+
+	@NonNull
+	public PointImageDrawable getPhotoNoteIcon() {
+		return createPointImageDrawable(R.drawable.mx_special_photo_camera);
+	}
+
+	@NonNull
+	public PointImageDrawable getVideoNoteIcon() {
+		return createPointImageDrawable(R.drawable.mx_special_video_camera);
+	}
+
+	@NonNull
+	private PointImageDrawable createPointImageDrawable(int iconId) {
+		int iconColor = ColorUtilities.getColor(ctx, R.color.audio_video_icon_color);
+		return PointImageUtils.getOrCreate(ctx, iconColor, true, iconId);
 	}
 
 	@Override
@@ -183,8 +204,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof Recording) {
-			Recording rec = (Recording) o;
+		if (o instanceof Recording rec) {
 			if (rec.getFile().exists()) {
 				String recName = rec.getName(ctx, true);
 				if (Algorithms.isEmpty(recName)) {
@@ -202,19 +222,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= START_ZOOM) {
-			getRecordingsFromPoint(point, tileBox, objects);
-		}
-	}
-
-	public void getRecordingsFromPoint(PointF point, RotatedTileBox tileBox, List<? super Recording> am) {
-		Collection<Recording> allRecordings = plugin.getAllRecordings();
-		if (Algorithms.isEmpty(allRecordings)) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
+		Collection<Recording> recordings = plugin.getAllRecordings();
+		if (Algorithms.isEmpty(recordings) || tileBox.getZoom() < START_ZOOM) {
 			return;
 		}
-
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -224,8 +239,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 				return;
 			}
 		}
-
-		for (Recording recording : allRecordings) {
+		for (Recording recording : recordings) {
 			double lat = recording.getLatitude();
 			double lon = recording.getLongitude();
 
@@ -233,7 +247,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 					? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
 					: tileBox.isLatLonNearPixel(lat, lon, point.x, point.y, radius);
 			if (add) {
-				am.add(recording);
+				result.collect(recording, this);
 			}
 		}
 	}
@@ -249,6 +263,16 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	@Override
 	public boolean isObjectMovable(Object o) {
 		return o instanceof Recording;
+	}
+
+	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		if (o instanceof Recording recording) {
+			PointImageDrawable icon = getRecordingIcon(recording);
+			icon.setAlpha(0.8f);
+			return icon;
+		}
+		return null;
 	}
 
 	@Override

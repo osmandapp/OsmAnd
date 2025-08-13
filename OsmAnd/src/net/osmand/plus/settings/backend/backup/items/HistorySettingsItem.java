@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.backend.backup.items;
 
-import static net.osmand.plus.helpers.SearchHistoryHelper.*;
+import static net.osmand.plus.search.history.SearchHistoryHelper.*;
 
 import android.content.Context;
 
@@ -11,7 +11,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.HistoryEntry;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -46,7 +47,7 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 	@Override
 	protected void init() {
 		super.init();
-		searchHistoryHelper = getInstance(app);
+		searchHistoryHelper = app.getSearchHistoryHelper();
 		existingItems = getHistoryEntries();
 	}
 
@@ -185,7 +186,7 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(false);
 	}
 
 	@Nullable

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.9.23'
+    ext.kotlin_version = '2.1.10'
     repositories {
         google()
         mavenCentral()
@@ -8,13 +8,13 @@ buildscript {
         }
     }
     dependencies {
-        //classpath 'com.android.tools.build:gradle:2.+'
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.android.tools.build:gradle:8.7.3'
+        classpath 'com.google.gms:google-services:4.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
         if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {
-            classpath 'com.huawei.agconnect:agcp:1.8.0.300'
+            classpath 'com.huawei.agconnect:agcp:1.9.1.303'
         }
     }
 }
@@ -27,14 +27,14 @@ plugins {
 allprojects {
     group "net.osmand"
     // Configure all test tasks
-    tasks.withType(Test) {
+    tasks.withType(Test).configureEach {
         // Set a system property for all unit tests
         systemProperty 'isAndroidBuild', 'true'
     }
     repositories {
         ivy {
             name = "OsmAndBinariesIvy"
-            url = "https://creator.osmand.net"
+            url = "https://builder.osmand.net"
             patternLayout {
                 artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
             }

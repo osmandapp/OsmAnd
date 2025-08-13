@@ -28,7 +28,6 @@ import java.util.List;
 public final class SearchResultsScreen extends BaseSearchScreen implements DefaultLifecycleObserver,
 		AppInitializeListener {
 
-
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
@@ -47,6 +46,11 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 
 		this.loading = getApp().isApplicationInitializing();
 		getLifecycle().addObserver(this);
+	}
+
+	@Override
+	protected void onFirstGetTemplate() {
+		super.onFirstGetTemplate();
 		getApp().getAppInitializer().addListener(this);
 		if (!loading) {
 			if (!Algorithms.isEmpty(searchText)) {
@@ -57,7 +61,7 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		PlaceListNavigationTemplate.Builder builder = new PlaceListNavigationTemplate.Builder();
 		builder.setTitle(getApp().getString(R.string.search_title, searchText))
 				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
@@ -77,6 +81,7 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
 		getApp().getAppInitializer().removeListener(this);
 		getLifecycle().removeObserver(this);
 		destroyed = true;

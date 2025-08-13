@@ -94,9 +94,9 @@
     <string name="shared_string_authorization">Autorisation</string>
     <string name="shared_string_authorization_descr">Bitte geben Sie Ihre Telegram-Telefonnummer im internationalen Format ein</string>
     <string name="shared_string_welcome">Willkommen</string>
-    <string name="yard">yd</string>
-    <string name="foot">ft</string>
-    <string name="mile">mi</string>
+    <string name="yard">Yard</string>
+    <string name="foot">Foot</string>
+    <string name="mile">Meile</string>
     <string name="km">km</string>
     <string name="m">m</string>
     <string name="min_mile">min/mile</string>
@@ -267,7 +267,7 @@
     <string name="last_response_duration">Letzte Antwort: vor %1$s</string>
     <string name="duration_ago">vor %1$s</string>
     <string name="shared_string_error_short">ERR</string>
-    <string name="shared_string_export">Export</string>
+    <string name="shared_string_export">Exportieren</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="logcat_buffer_descr">Protokolle der App einsehen und freigeben</string>
     <string name="send_report">Bericht senden</string>

@@ -4,6 +4,7 @@ package net.osmand.render;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -142,6 +143,23 @@ public class RenderingRuleProperty {
 			return false;
 		}
 		return ruleValue == renderingProperty;
+	}
+
+	public boolean hasPossibleValues() {
+		return !Algorithms.isEmpty(possibleValues)
+				&& (possibleValues.length > 1 || !Algorithms.isEmpty(possibleValues[0]));
+	}
+
+	public boolean containsValue(String value) {
+		String[] values = getPossibleValues();
+		if (!Algorithms.isEmpty(values)) {
+			for (String v : values) {
+				if (Algorithms.stringsEqual(v, value)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Override
@@ -295,7 +313,8 @@ public class RenderingRuleProperty {
 				}
 				
 				int k = val.indexOf('=');
-				if (k != -1) {
+				boolean negateTag = val.startsWith("!");
+				if (k != -1 && !negateTag) {
 					String ts = val.substring(0, k);
 					String vs = val.substring(k + 1);
 					Integer ruleInd = req.getObject().getMapIndex().getRule(ts, vs);
@@ -305,13 +324,20 @@ public class RenderingRuleProperty {
 						}
 					}
 				} else {
-					String ts = val;
+					String tagToCheck = negateTag ? val.substring(1) : val;
 					int[] additionalTypes = obj.getAdditionalTypes();
 					for (int i = 0; i < additionalTypes.length; i++) {
 						TagValuePair vp = obj.getMapIndex().decodeType(additionalTypes[i]);
-						if (vp != null && ts.equals(vp.tag)) {
-							return true;
+						if (vp != null && tagToCheck.equals(vp.tag)) {
+							if (negateTag) {
+								return false;
+							} else {
+								return true;
+							}
 						}
+					}
+					if (negateTag) {
+						return true;
 					}
 				}
 				return false;

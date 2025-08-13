@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginLeft="14dp"
+	android:layout_marginRight="14dp"
+	android:layout_marginTop="14dp"
+	android:background="?attr/bg_card"
+	android:orientation="vertical"
+	android:layout_marginStart="14dp"
+	android:layout_marginEnd="14dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:minHeight="44dp"
+		android:layout_height="wrap_content"
+		android:gravity="center">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="120dp"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="16dp"
+			android:layout_marginRight="16dp"
+			android:text="@string/tag_poi_name"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="@dimen/default_desc_text_size"
+			android:textStyle="normal"
+			android:layout_marginEnd="16dp"
+			android:layout_marginStart="16dp" />
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:background="?attr/dashboard_divider"/>
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/nameTextView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="16dp"
+			android:layout_marginRight="16dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="4dp"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="@dimen/default_desc_text_size"
+			app:typefaceWeight="medium"
+			tools:text="very very very long poi name"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="16dp" />
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:minHeight="44dp"
+		android:layout_height="wrap_content"
+		android:gravity="center">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/amenityTagTextView"
+			android:layout_width="120dp"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="16dp"
+			android:layout_marginRight="16dp"
+			android:text="@string/tag_poi_amenity"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="@dimen/default_desc_text_size"
+			android:textStyle="normal"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="16dp" />
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:background="?attr/dashboard_divider"/>
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/amenityTextView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="16dp"
+			android:layout_marginRight="16dp"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="@dimen/default_desc_text_size"
+			app:typefaceWeight="medium"
+			tools:text="landmark"
+			android:layout_marginEnd="16dp"
+			android:layout_marginStart="16dp" />
+	</LinearLayout>
+</LinearLayout>

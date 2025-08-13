@@ -1,16 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
 
-
 android {
-    compileSdk 33
-    buildToolsVersion = "33.0.2"
+    compileSdk 35
+    buildToolsVersion = "35.0.0"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 33
+        minSdkVersion 24
+        targetSdkVersion 34
         versionCode 2
         versionName "2.0"
+        namespace = "net.osmand.aidlapi"
     }
     lintOptions {
         abortOnError false
@@ -22,12 +22,24 @@ android {
             java.srcDirs = ["src"]
         }
     }
+    buildFeatures {
+        aidl true
+    }
+    publishing {
+        singleVariant('release') {
+            withJavadocJar()
+        }
+
+        singleVariant('debug') {
+            withJavadocJar()
+        }
+    }
 }
 
 version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
 afterEvaluate {
     publishing {
-        repositories {    
+        repositories {
             ivy {
                 url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
             }
@@ -55,8 +67,8 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.6.0'
 }
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
+tasks.register('sourcesJar', Jar) {
+    archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
 }
 

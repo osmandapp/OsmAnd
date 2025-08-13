@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TimeToNavigationPointWidget extends SimpleWidget {
 
-	private static final long UPDATE_INTERVAL_SECONDS = 30;
+	public static final long UPDATE_INTERVAL_SECONDS = 30;
 
 	private final RoutingHelper routingHelper;
 	private final TimeToNavigationPointWidgetState widgetState;
@@ -78,6 +78,12 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	}
 
 	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+	}
+
+	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int leftSeconds = 0;
 
@@ -123,19 +129,9 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	}
 
 	private void updateTimeToGo(int leftSeconds) {
-		String formattedLeftTime = OsmAndFormatter.getFormattedDurationShortMinutes(leftSeconds);
-		setText(formattedLeftTime, getUnits(leftSeconds));
-	}
-
-	@Nullable
-	private String getUnits(long timeLeft) {
-		if (timeLeft >= 0) {
-			long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.SECONDS);
-			String hour = app.getString(R.string.int_hour);
-			String minute = app.getString(R.string.shared_string_minute_lowercase);
-			return diffInMinutes >= 60 ? hour : minute;
-		}
-		return null;
+		long diffInMinutes = TimeUnit.MINUTES.convert(leftSeconds, TimeUnit.SECONDS);
+		String formattedLeftTime = Algorithms.formatMinutesDuration((int) diffInMinutes, true);
+		setText(formattedLeftTime, app.getString(R.string.int_hour));
 	}
 
 	@Nullable

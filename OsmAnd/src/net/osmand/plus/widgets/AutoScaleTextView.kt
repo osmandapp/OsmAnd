@@ -29,6 +29,14 @@ class AutoScaleTextView : androidx.appcompat.widget.AppCompatTextView {
 	private var minTextSize = 1f
 	private var maxTextSize = 30f
 
+	fun setMinTextSize(minTextSize : Float){
+		this.minTextSize = minTextSize
+	}
+
+	fun setMaxTextSize(maxTextSize : Float){
+		this.maxTextSize = maxTextSize
+	}
+
 	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 		var width = MeasureSpec.getSize(widthMeasureSpec)
 		var height = MeasureSpec.getSize(heightMeasureSpec)

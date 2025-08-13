@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
 					android:id="@+id/map_marker_arrow"
 					android:layout_width="@dimen/card_title_row_min_height"
 					android:layout_height="@dimen/dialog_button_height"
-					osmand:srcCompat="@drawable/ic_arrow_marker_diretion" />
+					app:srcCompat="@drawable/ic_arrow_marker_diretion" />
 
 				<LinearLayout
 					android:layout_width="0dp"
@@ -49,7 +49,7 @@
 						android:layout_height="wrap_content"
 						android:textColor="@color/card_and_list_background_light"
 						android:textSize="26sp"
-						android:textStyle="bold"
+						app:typefaceWeight="medium"
 						tools:text="500 m" />
 
 					<TextView
@@ -60,7 +60,7 @@
 						android:ellipsize="end"
 						android:textColor="@color/marker_top_2nd_line_color"
 						android:textSize="@dimen/default_list_text_size"
-						android:textStyle="bold"
+						app:typefaceWeight="medium"
 						tools:text="Dmitrievskaya st., 45" />
 
 				</LinearLayout>
@@ -79,7 +79,7 @@
 					android:layout_height="@dimen/list_item_height"
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/shared_string_more"
-					osmand:srcCompat="@drawable/ic_action_markers_list" />
+					app:srcCompat="@drawable/ic_action_markers_list" />
 
 			</LinearLayout>
 
@@ -112,7 +112,7 @@
 					android:id="@+id/map_marker_arrow_2nd"
 					android:layout_width="@dimen/card_title_row_min_height"
 					android:layout_height="@dimen/dialog_content_margin"
-					osmand:srcCompat="@drawable/ic_arrow_marker_diretion" />
+					app:srcCompat="@drawable/ic_arrow_marker_diretion" />
 
 				<RelativeLayout
 					android:layout_width="0dp"
@@ -128,7 +128,7 @@
 						android:layout_height="wrap_content"
 						android:textColor="@color/card_and_list_background_light"
 						android:textSize="@dimen/default_list_text_size_large"
-						android:textStyle="bold"
+						app:typefaceWeight="medium"
 						tools:text="500 m" />
 
 					<TextView
@@ -141,7 +141,7 @@
 						android:maxLines="1"
 						android:textColor="@color/marker_top_2nd_line_color"
 						android:textSize="@dimen/default_list_text_size"
-						android:textStyle="bold"
+						app:typefaceWeight="medium"
 						tools:text="  •  Dmitr" />
 
 				</RelativeLayout>

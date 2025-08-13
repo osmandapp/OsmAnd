@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -24,7 +24,7 @@
 			android:ellipsize="end"
 			android:maxLines="5"
 			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-			android:textColor="@null"
+			android:textColor="?android:attr/textColorSecondary"
 			tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard."
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding" />
@@ -53,7 +53,7 @@
 				android:text="@string/shared_string_read"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:drawableLeft="@drawable/ic_action_read_article"
 				tools:drawableTint="?attr/wikivoyage_active_color"
 				tools:ignore="UnusedAttribute"

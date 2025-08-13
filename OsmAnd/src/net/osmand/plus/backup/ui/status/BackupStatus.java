@@ -14,6 +14,9 @@ import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
+
+import java.net.HttpURLConnection;
 
 public enum BackupStatus {
 	BACKUP_COMPLETE(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, -1, -1, -1, R.string.sync_now),
@@ -21,7 +24,7 @@ public enum BackupStatus {
 	CONFLICTS(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, R.drawable.ic_action_alert, -1, -1, R.string.backup_view_conflicts),
 	NO_INTERNET_CONNECTION(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, R.drawable.ic_action_wifi_off, R.string.no_inet_connection, R.string.backup_no_internet_descr, R.string.retry),
 	SUBSCRIPTION_EXPIRED(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, R.drawable.ic_action_osmand_pro_logo_colored, R.string.backup_error_subscription_was_expired, R.string.backup_error_subscription_was_expired_descr, R.string.renew_subscription),
-	ERROR(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, R.drawable.ic_action_alert, -1, -1, R.string.contact_support);
+	ERROR(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, R.drawable.ic_action_alert, -1, -1, R.string.contact_support_retry);
 
 	@StringRes
 	public final int statusTitleRes;
@@ -37,7 +40,7 @@ public enum BackupStatus {
 	public final int actionTitleRes;
 
 	BackupStatus(int statusTitleRes, int statusIconRes, int warningIconRes, int warningTitleRes,
-	             int warningDescriptionRes, int actionTitleRes) {
+			int warningDescriptionRes, int actionTitleRes) {
 		this.statusTitleRes = statusTitleRes;
 		this.statusIconRes = statusIconRes;
 		this.warningIconRes = warningIconRes;
@@ -46,17 +49,28 @@ public enum BackupStatus {
 		this.actionTitleRes = actionTitleRes;
 	}
 
-	public static BackupStatus getBackupStatus(@NonNull OsmandApplication app, @NonNull PrepareBackupResult backup) {
-		BackupInfo info = backup.getBackupInfo();
+	@NonNull
+	public static BackupStatus getBackupStatus(@NonNull OsmandApplication app,
+			@NonNull PrepareBackupResult backupResult) {
+		BackupInfo info = backupResult.getBackupInfo();
 
-		if (!Algorithms.isEmpty(backup.getError())) {
-			BackupError error = new BackupError(backup.getError());
+		if (!Algorithms.isEmpty(backupResult.getError())) {
+			BackupError error = new BackupError(backupResult.getError());
 			int errorCode = error.getCode();
 			if (errorCode == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT
 					|| errorCode == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
 					|| errorCode == STATUS_NO_ORDER_ID_ERROR) {
 				return SUBSCRIPTION_EXPIRED;
+			} else if (errorCode == HttpURLConnection.HTTP_NOT_FOUND) {
+				backupResult.setError(HttpURLConnection.HTTP_BAD_REQUEST + " " +
+						app.getString(R.string.backup_error_failed_to_transfer_file));
+				return ERROR;
+			} else if (errorCode >= HttpURLConnection.HTTP_BAD_REQUEST) {
+				return ERROR;
 			}
+		}
+		if (app.getBackupHelper().isBackupSubscriptionsExpired()) {
+			return SUBSCRIPTION_EXPIRED;
 		}
 		if (info != null) {
 			if (!Algorithms.isEmpty(info.filteredFilesToMerge)) {
@@ -67,9 +81,13 @@ public enum BackupStatus {
 			}
 		} else if (!app.getSettings().isInternetConnectionAvailable()) {
 			return NO_INTERNET_CONNECTION;
-		} else if (backup.getError() != null) {
+		} else if (backupResult.getError() != null) {
 			return ERROR;
 		}
 		return BACKUP_COMPLETE;
+	}
+
+	public boolean canSync() {
+		return CollectionUtils.equalsToAny(this, MAKE_BACKUP, CONFLICTS, BACKUP_COMPLETE, SUBSCRIPTION_EXPIRED);
 	}
 }

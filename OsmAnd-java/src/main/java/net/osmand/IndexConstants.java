@@ -67,6 +67,7 @@ public class IndexConstants {
 	public static final String AVOID_ROADS_FILE_EXT = ".geojson";
 
 	public static final String OBJ_FILE_EXT = ".obj";
+	public static final String TXT_EXT = ".txt";
 
 	public static final String POI_TABLE = "poi";
 
@@ -109,4 +110,5 @@ public class IndexConstants {
 
 	public static final String VOICE_PROVIDER_SUFFIX = "-tts";
 	public static final String MODEL_NAME_PREFIX = "model_";
+	public static final String COLOR_PALETTE_DIR = "color-palette/";
 }

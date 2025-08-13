@@ -3,29 +3,40 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.util.Algorithms;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-public abstract class GeometryWayStyle<T extends GeometryWayContext> {
+public abstract class GeometryWayStyle<T extends CommonGeometryWayContext> {
 
 	private final T context;
 	protected Integer color;
 	protected Float width;
 	protected float[] dashPattern;
+
 	public static final int COLORIZATION_NONE = 0;
 	public static final int COLORIZATION_GRADIENT = 1;
 	public static final int COLORIZATION_SOLID = 2;
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({COLORIZATION_NONE, COLORIZATION_GRADIENT, COLORIZATION_SOLID})
+	public @interface ColorizationType {
+	}
+
 	protected Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
 	protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
 	protected Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	protected float additionalExaggeration = 1f;
+	protected float elevationMeters = 1000f;
 
 	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;
@@ -137,7 +148,24 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 				&& o.trackVisualizationType == ((GeometryWayStyle<?>) other).trackVisualizationType
 				&& o.trackWallColorType == ((GeometryWayStyle<?>) other).trackWallColorType
 				&& o.trackLinePositionType == ((GeometryWayStyle<?>) other).trackLinePositionType
-				&& o.additionalExaggeration == ((GeometryWayStyle<?>) other).additionalExaggeration;
+				&& o.additionalExaggeration == ((GeometryWayStyle<?>) other).additionalExaggeration
+				&& o.elevationMeters == ((GeometryWayStyle<?>) other).elevationMeters;
+	}
+
+	public boolean equalsExceptColor(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof GeometryWayStyle)) {
+			return false;
+		}
+		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
+		return	Algorithms.objectEquals(width, o.width)
+				&& Arrays.equals(dashPattern, o.dashPattern)
+				&& o.trackVisualizationType == ((GeometryWayStyle<?>) other).trackVisualizationType
+				&& o.trackLinePositionType == ((GeometryWayStyle<?>) other).trackLinePositionType
+				&& o.additionalExaggeration == ((GeometryWayStyle<?>) other).additionalExaggeration
+				&& o.elevationMeters == ((GeometryWayStyle<?>) other).elevationMeters;
 	}
 
 	public int getColorizationScheme() {

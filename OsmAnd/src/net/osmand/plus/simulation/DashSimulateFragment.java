@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 
 public class DashSimulateFragment extends DashBaseFragment {
 
@@ -21,7 +21,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 	private static final int TITLE_ID = R.string.shared_string_navigation;
 
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;

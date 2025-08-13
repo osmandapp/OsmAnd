@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.parking;
 
+
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +14,13 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.utils.FontCache;
 
 import java.util.Calendar;
 
@@ -35,7 +35,7 @@ public class DashParkingFragment extends DashLocationFragment {
 	ParkingPositionPlugin plugin;
 
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;
@@ -48,7 +48,6 @@ public class DashParkingFragment extends DashLocationFragment {
 	@Override
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_parking_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		Button remove = view.findViewById(R.id.remove_tag);
 		remove.setOnClickListener(v -> {
 			if (plugin != null) {
@@ -56,7 +55,7 @@ public class DashParkingFragment extends DashLocationFragment {
 				dialog.setOnDismissListener(d -> updateParkingPosition());
 			}
 		});
-		remove.setTypeface(typeface);
+		remove.setTypeface(FontCache.getMediumFont());
 
 		view.findViewById(R.id.parking_header).setOnClickListener(v -> {
 			if (plugin == null || plugin.getParkingPosition() == null) {

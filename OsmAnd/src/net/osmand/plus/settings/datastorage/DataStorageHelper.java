@@ -12,7 +12,7 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
+import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.FileUtils;

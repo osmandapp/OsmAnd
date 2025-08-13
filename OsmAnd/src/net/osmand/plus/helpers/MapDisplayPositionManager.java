@@ -12,7 +12,6 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.ViewportListener;
-import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -79,13 +78,14 @@ public class MapDisplayPositionManager implements ViewportListener {
 
 	@Nullable
 	public PointF projectRatioToVisibleMapRect(@NonNull PointF ratio) {
-		if (visibleMapRect == null || mapView == null) {
+		Rect rect = visibleMapRect;
+		if (rect == null || mapView == null) {
 			return null;
 		}
 
 		RotatedTileBox tileBox = mapView.getRotatedTileBox();
-		float projectedRatioX = (visibleMapRect.left + visibleMapRect.width() * ratio.x) / tileBox.getPixWidth();
-		float projectedRatioY = (visibleMapRect.top + visibleMapRect.height() * ratio.y) / tileBox.getPixHeight();
+		float projectedRatioX = (rect.left + rect.width() * ratio.x) / tileBox.getPixWidth();
+		float projectedRatioY = (rect.top + rect.height() * ratio.y) / tileBox.getPixHeight();
 		return new PointF(projectedRatioX, projectedRatioY);
 	}
 
@@ -99,8 +99,8 @@ public class MapDisplayPositionManager implements ViewportListener {
 		}
 	}
 
-	public void updateMapPositionProviders(@NonNull IMapDisplayPositionProvider provider, boolean shouldRegister) {
-		if (shouldRegister) {
+	public void updateMapPositionProviders(@NonNull IMapDisplayPositionProvider provider, boolean register) {
+		if (register) {
 			registerMapPositionProvider(provider);
 		} else {
 			unregisterMapPositionProvider(provider);

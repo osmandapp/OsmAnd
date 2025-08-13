@@ -107,6 +107,4 @@ public class MissingMapsCalculationResult {
 		usedRegions = convert(or, usedMaps);
 		return this;
 	}
-
-	
 }

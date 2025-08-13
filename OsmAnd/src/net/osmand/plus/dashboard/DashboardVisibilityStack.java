@@ -3,8 +3,6 @@ package net.osmand.plus.dashboard;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-
 import java.util.Stack;
 
 public class DashboardVisibilityStack {

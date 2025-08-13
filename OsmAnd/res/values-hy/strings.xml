@@ -216,7 +216,7 @@
     <string name="shared_string_to">Մինչև</string>
     <string name="mapillary_menu_date_from">Սկսած</string>
     <string name="mapillary_menu_descr_dates">Ցույց տալ միայն ավելացրած լուսանկարներ</string>
-    <string name="mapillary_menu_title_dates">Ամսաթիվ</string>
+    <string name="shared_string_date">Ամսաթիվ</string>
     <string name="mapillary_menu_edit_text_hint">Մուտքագրեք օգտատերի անունը</string>
     <string name="mapillary_menu_descr_username">Դիտել լուսանկարները ավելացրած օգտագործողի կողմից</string>
     <string name="mapillary_menu_title_username">Օգտատերի անունը</string>
@@ -275,9 +275,6 @@
     <string name="quick_action_auto_zoom_desc">Այս կոճակը ակտիվացնում է ավտոմասշտաբի on/off համաձայն ձեր արագությանը:</string>
     <string name="quick_action_auto_zoom_on">Միացնել ավտոմասշտաբ</string>
     <string name="quick_action_auto_zoom_off">Անջատել ավտոմաստաբ</string>
-    <string name="quick_action_add_destination">Տեղադրեք նպատակակետը</string>
-    <string name="quick_action_replace_destination">Փոխարինել նպատակակետը</string>
-    <string name="quick_action_add_first_intermediate">Ավելացնել առաջին միջանկյալ կետը</string>
     <string name="quick_action_add_destination_desc">Այս կոճակը, նպատակակետ է ավելացննում էկրանի կենտրոնում։ Մինչ այդ ընտրած նպատակակետը կդառնա միջանկյալ կետ։</string>
     <string name="quick_action_replace_destination_desc">Այս գործողությունների կոճակը, նպատակակետը տեղափոխում է կրանի կենտրոն։</string>
     <string name="quick_action_add_first_intermediate_desc">Այս գործողությունների կոճակը, ավելացննում է առաջին միջանկյալ կետ էկրանի կենտրոնում։</string>
@@ -349,7 +346,6 @@
     <string name="routing_attr_allow_motorway_name">Օգտագործել մայրուղի</string>
     <string name="routing_attr_allow_motorway_description">Թույլատրում է ավտոմայրուղիներ։</string>
     <string name="upload_osm_note_description">Վերբեռնել ձեր OSM նշումը անանուն կամ ձեր OpenStreetMap.org պրոֆիլի միջոցով:</string>
-    <string name="wiki_around">Վիքիպեդիայի հոդվածներ</string>
     <string name="search_map_hint">Քաղաք կամ երկիր</string>
     <string name="route_roundabout_short">Վերցրեք %1$d ելքը</string>
     <string name="upload_poi">Վերբեռնեք POI</string>
@@ -422,7 +418,7 @@
     <string name="update_all_maps_now">Թարմացնել բոլոր քարտեզները հիմա?</string>
     <string name="clear_tile_data">Ջնջել բոլոր տայլերը</string>
     <string name="routing_attr_short_way_name">Վառելիք տնտեսող ճանապարհ</string>
-    <string name="replace_favorite_confirmation">Վստահ եք, որ ցանկանում եք փոխարինել Սիրածները %1$s\?</string>
+    <string name="replace_favorite_confirmation">Վստահ եք, որ ցանկանում եք փոխարինել Սիրածները %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Վերգետնյա օբյեկտներ</string>
     <string name="shared_string_change">Փոխել</string>
     <string name="get_started">Սկսել</string>
@@ -917,14 +913,8 @@
 \n
 \nՍալիկի քարտեզները կարելի է ձեռք բերել անմիջապես առցանց աղբյուրների միջոցով կամ կարող են պատրաստվել անցանց օգտագործման համար (և պատճենել OsmAnd-ի տվյալների պանակում) որպես SQLite տվյալների բազա, որը կարող է արտադրվել 3-րդ կողմի քարտեզի պատրաստման գործիքների կողմից:</string>
     <string name="record_plugin_name">Ուղեւորության գրանցում</string>
-    <string name="record_plugin_description">Այս plugin-նը ակտիվացնում է հետևյալ ֆունկցիաները`գրանցում և պահպանում ձեր տրեկերը, ձեռքով հպելով GPX-ի գրանցման վիջեթը քարտեզի էկրանին կամ ավտոմատ կերպով մուտքագրելու ձեր բոլոր նավիգացիոն երթուղիները GPX ֆայլում:
-\n
-\nԳրանցված տրեկերը կարող են տարածվել ձեր ընկերների հետ կամ օգտագործել OSM-ի ներդրումների համար: Մարզիկները կարող են օգտվել արձանագրված տրեկերից, որոնք կարող են վերահսկել իրենց դասընթացները: Որոշ հիմնական տրեկերի վերլուծություն կարելի է իրականացնել ուղղակիորեն OsmAnd-ում, նման գրիչ անգամները, միջին արագությունը և այլն, և տրեկերը կարող են նաև վերլուծվել հատուկ 3-րդ կողմի վերլուծության գործիքներում:</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-ի plugin բարձրության գծերի համար</string>
     <string name="srtm_plugin_name">Բարձունքների գծեր (եզրագծեր)</string>
-    <string name="srtm_plugin_description">Այս plugin-ը ապահովում է ինչպես եզրագծային կափարիչը, այնպես էլ (ռելիեֆը) բլուրային շերտ, որը ցուցադրվում է OsmAnd-ի ստանդարտ քարտեզների վրա: Այս ֆունկցիան շատ բարձր է գնահատվելու մարզիկների, զբոսաշրջիկների, և բոլոր նրանց կողմից, ովքեր հետաքրքրված են լանդշաֆտի կառուցվածքով: 
-\n 
-\nՀամաշխարհային տվյալները (70° հյուսիսից 70° հարավ) հիմնված են SRTM-ի (Shuttle Radar Topography Mission) և ASTER- ի (Advanced Spaceborne Thermal Emission and Reflection Radiometer) կողմից չափումների վրա, ՆԱՍԱ-ի Earth Watching-ի առաջատար արբանյակի Համակարգը: ASTER-ն համագործակցային ջանք է ՆԱՍԱ-ի, Ճապոնիայի էկոնոմիկայի, առեւտրի եւ արդյունաբերության նախարարության (METI) և Ճապոնիայի տիեզերական համակարգերի (J-spacesystems) միջև:</string>
     <string name="plugin_touringview_name">Տուրիստական քարտեզ</string>
     <string name="plugin_touringview_descr">Այս դիտարկումը ակտիվացնելուց OsmAnd-ի քարտեզի ոճը փոխվում է «Touring view»-ի ոճի, սա հատուկ բարձր մանրամասն դիտարկում է ճանապարհորդների և պրոֆեսիոնալ վարորդների համար: 
 \n 
@@ -942,8 +932,7 @@
     <string name="audionotes_plugin_name">Աուդիո և վիդեո նշումներ</string>
     <string name="audionotes_plugin_description">Աուդիո/Վիդեո նշումների plugin-ը հնարավորություն են տալիս ստեղծել աուդիո/լուսանկարներ/վիդեո նշումներ վարելու ժամանակ կամ կոճակի միջոցով քարտեզի էկրանին վրա կամ անմիջապես համատեքստային մենյուի միջոցով ցանկացած դիրքի համար քարտեզի վրա:</string>
     <string name="osmand_parking_plugin_name">Ավտոկայանատեղ</string>
-    <string name="osmand_parking_plugin_description">Թույլ է տալիս գրանցել, թե որտեղ է ձեր մեքենան կայանել և որքան ժամանակ է մնացել ավտոկայանատեղը ազատելու (եթե առկա է ժամկետ): 
-\nԹե տեղը, թե ժամանակը տեսանելի են OsmAnd-ի վահանակի վրա, ինչպես նաև քարտեզի էկրանին ինչպես նաև վիդժետի մեջ: Android օրացույցին կարելի է միացնել որպես հիշեցում:</string>
+    <string name="osmand_parking_plugin_description">Թույլ է տալիս գրանցել, թե որտեղ է ձեր մեքենան կայանել և որքան ժամանակ է մնացել ավտոկայանատեղը ազատելու (եթե առկա է ժամկետ): \nԹե տեղը, թե ժամանակը տեսանելի են OsmAnd-ի վահանակի վրա, ինչպես նաև քարտեզի էկրանին ինչպես նաև վիդժետի մեջ: Android օրացույցին կարելի է միացնել որպես հիշեցում:</string>
     <string name="shared_string_accessibility">Հատուկ հնարավորություններ</string>
     <string name="osmand_accessibility_description">The plugin-ն սարքի համար ավելացնում հատուկ հնարավորությունների աջակցում ուղղակիորեն OsmAnd-ում: Սա հեշտացնում է, օրինակ, TTS-ի ձայնի ելքային արագությունը հարմարեցնելու համար, կարգավորել նավիգացիայի ուղղվածությունը էկրանի վրա, վերահսկեք սանդղակը կամ ձայնային հետադարձ կապի հրամանները ավտո անոտացիաներ անելու դեպքում ձեր դիրքի վերաբերյալ:</string>
     <string name="wrong_input">Սխալ մուտքագրում</string>
@@ -952,7 +941,6 @@
     <string name="shared_string_view">Դիտել</string>
     <string name="osm_editing_plugin_name">OSM-ի խմբագրում</string>
     <string name="waypoints_added_to_map_markers">Կետերը ավելացվել են քարտեզի մարկերներին</string>
-    <string name="osm_editing_plugin_description">Այս OsmAnd-ի plugin-ի միջոցով կարելի է ներդրում կատարել OSM-ի, ինչպիսիք են OSM POI-ի օբյեկտների ստեղծում կամ փոփոխում, OSM նշումների բացումը կամ մեկնաբանումը և վերբեռնում արձանագրված GPX ֆայլերը: OSM-ն գլոբալ հանրային քարտեզագրման նախագիծ է, որը կառավարվում է OSM համայնքի կողմից: Մանրամասների համար այցելեք https://openstreetmap.org: Ակտիվ մասնակցությունը գնահատվում է, և ներդրումները կարող են կատարվել ուղղակիորեն OsmAnd-ից, եթե նշեք ձեր անձնական OSM-ի հավատարմագրերը հավելվածում:</string>
     <string name="osmand_development_plugin_description">Կարգավորումներ զարգացման եւ կարգաբերման գործառույթների համար, ինչպիսիք են երթուղու ստուգումը կամ մոդելավորումը,քարտեզի ցուցադրման կատարումը, ձայնային հուշումները ստուգելը: Այս կարգավորումները մշակողների համար են և հասարակ օգտագործողների համար անհրաժեշտ չեն:</string>
     <string name="debugging_and_development">OsmAnd-ի կարգավորումը և զարգացումը</string>
     <string name="rename_failed">Չհաջողվեց վերանվանել:</string>
@@ -1133,7 +1121,6 @@
     <string name="rendering_attr_buildings15zoom_name">Շենքեր 15 սանդղակի վրա</string>
     <string name="rendering_attr_moreDetailed_name">Ավելի մանրամասն</string>
     <string name="rendering_attr_lessDetailed_name">Ավելի քիչ մանրամասներ</string>
-    <string name="rendering_attr_hideAccess_name">Մուտքի սահմանափակումներ</string>
     <string name="rendering_attr_showAccess_name">Ցույց տալ մուտքի սահմանափակումները</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ցույց տալ ճանապարհների որակը</string>
     <string name="rendering_attr_showSurfaces_name">Ցույց տալ ճանապարհների ծածկույթի տեսակը</string>
@@ -1320,7 +1307,6 @@
     <string name="driving_region_us">Ամերիկայի Միացյալ Նահանգներ</string>
     <string name="driving_region_canada">Կանադա</string>
     <string name="driving_region_europe_asia">Եվրոպա, Ասիա, Լատինական Ամերիկայում և նմանատիպ</string>
-    <string name="driving_region_uk">Մեծ Բրիտանիան, Հնդկաստանը և այլն</string>
     <string name="driving_region_australia">Ավստրալիա</string>
     <string name="speak_title">Հայտարարել…</string>
     <string name="speak_descr">Նշեք հնչեցումը՝ Փողոցների անվանումների, նախազգուշացումների (պառկած ոստիկանների, «Շարժումը առանց դադարեցնելու արգելված է»), արագության տեսախցիկներ, արագության սահմանափակումներ։</string>
@@ -1960,11 +1946,6 @@
     <string name="error_doing_search">Հնարավոր չէ կատարել անցանց(offline) որոնում:</string>
     <string name="search_osm_offline">Որոնում ըստ աշխարհագրական դիրքի</string>
     <string name="system_locale">Համակարգային</string>
-    <string name="plugin_nautical_descr">Այս plugin-ը հարստացնում է OsmAnd նավարկության հավելվածը ինչպես նաև ծովային քարտեզներով նավակների համար, ծովագնացության և այլ տեսակի ջրային շրջաններում:
-\n
-\nOsmAnd-ի հատուկ քարտեզների add-on-ը կտրամադրի բոլոր ծովային նավագնացության նշանները և աղյուսակը, ներքին, ինչպես նաև մոտակա նավարկության համար: Յուրաքանչյուր նավագնացության նշանի նկարագրությունը ապահովում է նրանց և դրանց իմաստը հայտնաբերելու համար անհրաժեշտ մանրամասները(կատեգորիա, ձև, գույն, հաջորդականություն, հղում և այլն):
-\n
-\nOsmAnd-ի ավանդական քարտեզի ոճերից մեկին վերադառնալու համար պարզապես կամ ապաակտիվացրեք այս հավելվածը կամ ըստ ցանկության փոխեք «Քարտեզի ոճը» «Քարտեզի կարգավորում» մենույում:</string>
     <string name="preferred_locale_descr">Հավելվածի լեզուն (ուժի մեջ է մտնում OsmAnd-ի վերագործարկումից հետո)։</string>
     <string name="preferred_locale">Տեղայնացումը (լեզուն)</string>
     <string name="incomplete_locale">թերի</string>
@@ -2427,21 +2408,12 @@
     <string name="configure_screen_quick_action">Արագ գործողություն</string>
     <string name="quick_action_item_action">Գործողություն %d</string>
     <string name="quick_action_item_screen">Էկրան %d</string>
-    <string name="quick_action_add_marker">Ավելացնել մարկեր</string>
-    <string name="quick_action_add_poi">Ավելացնել POI</string>
-    <string name="quick_action_map_style">Փոխել քարտեզի ոճը</string>
     <string name="quick_action_map_style_switch">Քարտեզի ոճը փոխվել է «%s»։</string>
-    <string name="quick_action_take_audio_note">Ձայնագրել նոր աուդիո նշում</string>
-    <string name="quick_action_take_video_note">Ձայնագրել նոր վիդեո նշում</string>
-    <string name="quick_action_take_photo_note">Անել նոր լուսանկար-նշում</string>
-    <string name="quick_action_add_osm_bug">Ավելացնել OSM Նշում</string>
     <string name="quick_action_navigation_voice">Ձայնը on/off</string>
     <string name="quick_action_navigation_voice_off">Միացնել ձայնը</string>
     <string name="quick_action_navigation_voice_on">Անջատել ձայնը</string>
-    <string name="quick_action_add_parking">Ավելացնել ավտոկայանատեղ</string>
     <string name="quick_action_new_action">Ավելացնել գործողություն</string>
     <string name="quick_action_edit_action">խմբագրել գործողությունը</string>
-    <string name="quick_action_add_favorite">Ավելացնել «Սիրված»-ին</string>
     <string name="dialog_add_action_title">Ավելացնել գործողություն</string>
     <string name="quick_actions_delete">Ջնջել գործողությունը</string>
     <string name="quick_actions_delete_text">Վստահ եք, որ ցանկանում եք ջնջել գործողությունըվ «%s»?</string>
@@ -2478,15 +2450,12 @@
     <string name="quick_action_map_style_action">Ավելացնել քարտեզի ոճը</string>
     <string name="quick_action_empty_param_error">Լրացրեք բոլոր պարամետրերը</string>
     <string name="quick_action_map_styles">Քարտեզների ոճը</string>
-    <string name="quick_action_map_overlay">Փոխել արտեզը</string>
     <string name="quick_action_map_overlay_title">Քարտեզներ</string>
     <string name="quick_action_map_overlay_action">Ավելացնել քարտեզ</string>
     <string name="quick_action_map_overlay_switch">Քարտեզը փոխվել է «%s»։</string>
     <string name="quick_action_map_underlay_switch">Քարտեզի նեքին շերտը փոխվում է «%s»։</string>
-    <string name="quick_action_map_underlay">Փոխել քարտեզի նեքեվի շերտը</string>
     <string name="quick_action_map_underlay_title">Քարտեզի նեքեվի շերտը</string>
     <string name="quick_action_map_underlay_action">Ավելացնել քարտեզի նեքեվի շերտը</string>
-    <string name="quick_action_map_source">Փոխել քարտեզի աղբյուրը</string>
     <string name="quick_action_map_source_title">Քարտեզի աղբյուրները</string>
     <string name="quick_action_map_source_action">Ավելացնել քարտեզի աղբյուրները</string>
     <string name="quick_action_map_source_switch">Քարտեզի աղբյուրը փոխվել է «%s»։</string>
@@ -2563,9 +2532,7 @@
     <string name="tap_on_map_to_hide_interface_descr">Սեղմելով քարտեզի վրա փոխարինում են հսկողության կոճակները եւ վիջեթները:</string>
     <string name="tap_on_map_to_hide_interface">Ամբողջ էկրանով ռեժիմ</string>
     <string name="osm_recipient_stat">Խմբագրումները կազմում են %1$s, գումարը %2$s mBTC</string>
-    <string name="plugin_ski_descr">OsmAnd-ի այս հավելվածը տրքմքդրում է մանրամասները գլոբալ ցածր լեռնադահուկային լանջերի, խաչաձեւ լեռնադահուկային լեռնանցքի, ալպիական լեռնադահուկային երթուղիների, ճոպանուղիների և լեռնադահուկային վերելակների մանրամասների մասին: 
-\n 
-\nԱյս տեսակը ակտիվացնելու դեպքում, քարտեզի ոճը փոխվում է «Ձմեռային եւ լեռնադահուկային սպորտին», ցույց տալով լանդշաֆտի բոլոր մանրամասները`ձմռանը նայելու ձևով: Այս (ձմեռային) տեսքը կարող է չեղյալ համարվել , այստեղ կրկին անջատելով այն, կամ եթե փոխեք «Քարտի ոճը» ցանկալի տեսք, «Քարտեզների կարգավորումը» ցանկում:</string>
+    <string name="plugin_ski_descr">OsmAnd-ի այս հավելվածը տրքմքդրում է մանրամասները գլոբալ ցածր լեռնադահուկային լանջերի, խաչաձեւ լեռնադահուկային լեռնանցքի, ալպիական լեռնադահուկային երթուղիների, ճոպանուղիների և լեռնադահուկային վերելակների մանրամասների մասին: \n \nԱյս տեսակը ակտիվացնելու դեպքում, քարտեզի ոճը փոխվում է «Ձմեռային եւ լեռնադահուկային սպորտին», ցույց տալով լանդշաֆտի բոլոր մանրամասները`ձմռանը նայելու ձևով: Այս (ձմեռային) տեսքը կարող է չեղյալ համարվել , այստեղ կրկին անջատելով այն, կամ եթե փոխեք «Քարտի ոճը» ցանկալի տեսք, «Քարտեզների կարգավորումը» ցանկում:</string>
     <string name="tiles_to_download_estimated_size">Մասշտաբով {0} ներբեռնել {1} սալիկներ ({2} ՄԲ)</string>
     <string name="use_high_res_maps_descr">Չձգել պատկերացանցային(ռաստրային) քարտեզները բարձրորակ էկրանների վրա:</string>
     <string name="route_tu">Կատարեք շրջադարձ(U-turn) և շարժվեք</string>
@@ -2942,7 +2909,6 @@
     <string name="routing_attr_length_name">Երկարության սահմանապակումը</string>
     <string name="speed_cameras_removed_descr">Այս սարքը չունի արագության վերահսկման տեսախցիկներ:</string>
     <string name="app_mode_inline_skates">Անվաչմուշկներ</string>
-    <string name="quick_action_remove_next_destination">Ջնջել հաջորդ նպատակակետը</string>
     <string name="please_provide_point_name_error">Խնդրում ենք մուտքագրել կետի անունը</string>
     <string name="quick_action_remove_next_destination_descr">Երթուղու ընթացիկ նպատակակետը կջնջվի: Եթե դա նպատակակետն է, նավարկումը կդադարի։</string>
     <string name="search_download_wikipedia_maps">Ներբեռնել Վիքիպեդիայի քարտեզները</string>

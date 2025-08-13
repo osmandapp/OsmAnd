@@ -36,11 +36,13 @@ public class CloudTrashItemMenuController extends BaseDialogController implement
 
 	private final TrashItem item;
 	private final CloudTrashController controller;
+	private final UiUtilities uiUtilities;
 
 	public CloudTrashItemMenuController(@NonNull OsmandApplication app, @NonNull CloudTrashController controller, @NonNull TrashItem item) {
 		super(app);
 		this.item = item;
 		this.controller = controller;
+		this.uiUtilities = app.getUIUtilities();
 	}
 
 	@NonNull
@@ -58,7 +60,7 @@ public class CloudTrashItemMenuController extends BaseDialogController implement
 		DisplayData displayData = new DisplayData();
 		displayData.putExtra(BACKGROUND_COLOR, ColorUtilities.getColorWithAlpha(ColorUtilities.getColor(app, activeColorId), 0.3f));
 
-		int iconId = item.getIconId();
+		int iconId = item.getIconId(app);
 		displayData.addDisplayItem(new DisplayItem()
 				.setClickable(false)
 				.setTitle(item.getName(app))

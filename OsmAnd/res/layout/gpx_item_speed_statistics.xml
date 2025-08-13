@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="6.8 km/h" />
 
 			</LinearLayout>
@@ -54,7 +54,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="2dp"
-				osmand:srcCompat="@drawable/ic_action_speed_16" />
+				app:srcCompat="@drawable/ic_action_speed_16" />
 
 		</LinearLayout>
 
@@ -88,7 +88,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="31.3 km/h" />
 
 			</LinearLayout>
@@ -98,7 +98,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="2dp"
-				osmand:srcCompat="@drawable/ic_action_max_speed_16" />
+				app:srcCompat="@drawable/ic_action_max_speed_16" />
 
 		</LinearLayout>
 
@@ -159,7 +159,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="174" />
 
 			</LinearLayout>
@@ -169,7 +169,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="2dp"
-				osmand:srcCompat="@drawable/ic_action_time_moving_16" />
+				app:srcCompat="@drawable/ic_action_time_moving_16" />
 
 		</LinearLayout>
 
@@ -204,7 +204,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="42 km" />
 
 			</LinearLayout>
@@ -214,7 +214,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="5dp"
-				osmand:srcCompat="@drawable/ic_action_polygom_dark" />
+				app:srcCompat="@drawable/ic_action_polygom_dark" />
 
 		</LinearLayout>
 

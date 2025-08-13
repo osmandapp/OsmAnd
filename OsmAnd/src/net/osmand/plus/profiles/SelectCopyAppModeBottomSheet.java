@@ -10,6 +10,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 
 import org.apache.commons.logging.Log;
 
@@ -80,11 +81,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 
 	@Override
 	public boolean isNightMode(@NonNull OsmandApplication app) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControlsForProfile(currentAppMode);
-		} else {
-			return !app.getSettings().isLightContentForMode(currentAppMode);
-		}
+		return app.getDaynightHelper().isNightMode(currentAppMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	@Override
@@ -105,8 +102,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	@Override
 	protected void onRightBottomButtonClick() {
 		Fragment targetFragment = getTargetFragment();
-		if (selectedAppMode != null && targetFragment instanceof CopyAppModePrefsListener) {
-			CopyAppModePrefsListener listener = (CopyAppModePrefsListener) targetFragment;
+		if (selectedAppMode != null && targetFragment instanceof CopyAppModePrefsListener listener) {
 			listener.copyAppModePrefs(selectedAppMode);
 		}
 		dismiss();

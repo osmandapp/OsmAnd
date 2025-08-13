@@ -6,6 +6,7 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -46,7 +47,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private final Map<String, String> amenityExtensions = new HashMap<>();
 	private Amenity amenity;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint point) {
+	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity,
+			@NonNull FavouritePoint point) {
 		super(mapActivity);
 		this.point = point;
 		setShowNearestWiki(true);
@@ -56,12 +58,12 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private void acquireAmenityExtensions() {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
 
-		String amenityOriginName = point.getAmenityOriginName();
-		if (amenityOriginName != null) {
-			amenity = helper.findAmenity(amenityOriginName, point.getLatitude(), point.getLongitude());
-		}
-		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(),
-				point.getAmenityOriginName(), point.getLatitude(), point.getLongitude()));
+		String originName = point.getAmenityOriginName();
+		Pair<Amenity, Map<String, String>> pair = helper.getAmenityWithExtensions(
+				point.getAmenityExtensions(), originName, point.getLatitude(), point.getLongitude());
+
+		amenity = pair.first;
+		amenityExtensions.putAll(pair.second);
 	}
 
 	@Nullable
@@ -70,7 +72,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId,
+			String text, String amenityKey) {
 		if (amenity == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
@@ -84,11 +87,13 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		boolean light = isLightContent();
 		buildDateRow(view, point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
-			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
@@ -105,11 +110,13 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
+	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description,
+			@NonNull String title) {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
 	private void buildGroupFavouritesView(@NonNull View view) {
+		boolean light = isLightContent();
 		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(point);
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
@@ -122,7 +129,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		}
 	}
 
-	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, @NonNull FavoriteGroup group, FavouritePoint selectedPoint) {
+	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed,
+			@NonNull FavoriteGroup group, FavouritePoint selectedPoint) {
 		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<FavouritePoint> points = group.getPoints();

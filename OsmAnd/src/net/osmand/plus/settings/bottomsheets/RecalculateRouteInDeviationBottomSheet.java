@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DEFAULT_MODE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -13,28 +16,26 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.DEFAULT_MODE;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.settings.enums.MetricsConstants;
 
 public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet {
 
@@ -62,7 +63,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		settings = app.getSettings();
 		appMode = getAppMode();
 		preference = settings.ROUTE_RECALCULATION_DISTANCE;
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		getPreferenceStateAndValue();
 
 		SwitchPreferenceEx switchPref = (SwitchPreferenceEx) getPreference();
@@ -104,13 +105,14 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 		String on = getString(R.string.shared_string_enabled);
 		String off = getString(R.string.shared_string_disabled);
+		Context context = requireContext();
 		BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(enabled)
 				.setCompoundButtonColor(appModeColor)
 				.setTitle(enabled ? on : off)
 				.setTitleColorId(enabled ? activeColor : disabledColor)
-				.setCustomView(getCustomButtonView(app, getAppMode(), enabled, nightMode))
+				.setCustomView(getCustomButtonView(context, getAppMode(), enabled, nightMode))
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -122,7 +124,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 						preferenceBtn[0].setChecked(enabled);
 						getDefaultValue();
 						updateSliderView();
-						updateCustomButtonView(app, getAppMode(), v, enabled, nightMode);
+						updateCustomButtonView(context, getAppMode(), v, enabled, nightMode);
 						Fragment target = getTargetFragment();
 						float newValue = enabled ? DEFAULT_MODE : DISABLE_MODE;
 						if (target instanceof OnConfirmPreferenceChange) {
@@ -179,7 +181,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private void updateSliderView() {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 		int textColorPrimary = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorPrimary);
@@ -222,7 +224,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private static String getFormattedDistance(@NonNull OsmandApplication app, float value) {
-		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,

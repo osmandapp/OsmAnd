@@ -24,7 +24,6 @@ import net.osmand.plus.routepreparationmenu.CalculateMissingMapsOnlineTask.Calcu
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.util.Algorithms;
-import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +38,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private List<DownloadItem> mapsToDownload = new ArrayList<>();
 	private List<DownloadItem> missingMaps = new ArrayList<>();
 	private List<DownloadItem> usedMaps = new ArrayList<>();
+	private boolean usedMapsPresent;
 	private final ItemsSelectionHelper<DownloadItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
 
 	private boolean loadingMapsInProgress = false;
@@ -52,9 +52,8 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 
 	public void initContent() {
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		boolean internetConnectionAvailable = app.getSettings().isInternetConnectionAvailable();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			if (internetConnectionAvailable) {
+			if (isInternetConnectionAvailable()) {
 				downloadThread.runReloadIndexFiles();
 				loadingMapsInProgress = true;
 			}
@@ -87,15 +86,21 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private void updateMapsToDownload() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
-		this.mapsToDownload = collectMapsForRegions(result.getMapsToDownload());
-		this.missingMaps = collectMapsForRegions(result.getMissingMaps());
-		this.usedMaps = collectMapsForRegions(result.getUsedMaps());
+
+		List<WorldRegion> used = result != null ? result.getUsedMaps() : Collections.emptyList();
+		List<WorldRegion> missing = result != null ? result.getMissingMaps() : Collections.emptyList();
+		List<WorldRegion> download = result != null ? result.getMapsToDownload() : Collections.emptyList();
+
+		this.mapsToDownload = collectMapsForRegions(download);
+		this.missingMaps = collectMapsForRegions(missing);
+		this.usedMapsPresent = !Algorithms.isEmpty(used);
+		this.usedMaps = collectMapsForRegions(used);
 	}
 
 	private List<DownloadItem> collectMapsForRegions(@NonNull List<WorldRegion> regions) {
 		List<DownloadItem> result = new ArrayList<>();
-		DownloadResources resources = app.getDownloadThread().getIndexes();
 		if (!Algorithms.isEmpty(regions)) {
+			DownloadResources resources = app.getDownloadThread().getIndexes();
 			for (WorldRegion missingRegion : regions) {
 				for (DownloadItem downloadItem : resources.getDownloadItems(missingRegion)) {
 					if (downloadItem.getType() == DownloadActivityType.NORMAL_FILE) {
@@ -105,6 +110,11 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 			}
 		}
 		return result;
+	}
+
+	public void onIgnoreMissingMapsButtonClicked() {
+		app.getSettings().IGNORE_MISSING_MAPS = true;
+		app.getRoutingHelper().onSettingsChanged(true);
 	}
 
 	public void onCalculateOnlineButtonClicked() {
@@ -150,7 +160,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	}
 
 	public void onDownloadButtonClicked(@NonNull MapActivity mapActivity) {
-		mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
+		mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		mapActivity.getMapRouteInfoMenu().resetRouteCalculation();
 
 		List<IndexItem> indexes = new ArrayList<>();
@@ -185,10 +195,6 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return itemsSelectionHelper.isAllItemsSelected();
 	}
 
-	public boolean isOnlineCalculationRequested() {
-		return onlineCalculationRequested;
-	}
-
 	public boolean isLoadingInProgress() {
 		return loadingMapsInProgress;
 	}
@@ -216,5 +222,17 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, new RequiredMapsController(app));
 		RequiredMapsFragment.showInstance(activity.getSupportFragmentManager());
+	}
+
+	public boolean shouldShowOnlineCalculationBanner() {
+		return !onlineCalculationRequested && !isLoadingInProgress() && isInternetConnectionAvailable();
+	}
+
+	public boolean shouldShowUseDownloadedMapsBanner() {
+		return usedMapsPresent;
+	}
+
+	private boolean isInternetConnectionAvailable() {
+		return app.getSettings().isInternetConnectionAvailable();
 	}
 }

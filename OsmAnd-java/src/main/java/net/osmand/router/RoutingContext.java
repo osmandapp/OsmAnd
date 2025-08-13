@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -27,7 +28,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -43,7 +43,7 @@ public class RoutingContext {
 
 	public static boolean SHOW_GC_SIZE = false;
 	public static boolean PRINT_ROUTING_ALERTS = false;
-	 
+
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
 	
@@ -52,6 +52,7 @@ public class RoutingContext {
 	public final RouteCalculationMode calculationMode;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
+	private RouteConditionalHelper conditionalHelper = new RouteConditionalHelper();
 	public NativeLibrary nativeLib;
 	
 	// 0. Reference to native routingcontext for multiple routes
@@ -73,7 +74,9 @@ public class RoutingContext {
 	public boolean targetTransportStop;
 	public int dijkstraMode;
 	public boolean publicTransport;
-	
+	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
+	public String[] regionsCoveringStartAndTargets = new String[0];
+
 	
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgress calculationProgressFirstPhase;
@@ -218,6 +221,7 @@ public class RoutingContext {
 		}
 		subregionTiles.clear();
 		indexedSubregions.clear();
+		mapIndexReaderFilter = new HashSet<>();
 	}
 	
 	private int searchSubregionTile(RouteSubregion subregion){
@@ -297,8 +301,11 @@ public class RoutingContext {
 				} else {
 					for (RouteDataObject ro : res) {
 						if (ro != null) {
+							if (config.ambiguousConditionalTags != null) {
+								conditionalHelper.resolveAmbiguousConditionalTags(ro, config.ambiguousConditionalTags);
+							}
 							if (config.routeCalculationTime != 0) {
-								ro.processConditionalTags(config.routeCalculationTime);
+								conditionalHelper.processConditionalTags(ro, config.routeCalculationTime);
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
@@ -374,6 +381,11 @@ public class RoutingContext {
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, null);
 		List<RoutingSubregionTile> collection = null;
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
+			BinaryMapIndexReader reader = r.getKey();
+			boolean isLiveUpdate = reader.getHHRoutingIndexes().size() == 0;
+			if (!isLiveUpdate && mapIndexReaderFilter.size() > 0 && !mapIndexReaderFilter.contains(r.getKey())) {
+				continue;
+			}
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
 			try {
 				boolean intersect = false;

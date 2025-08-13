@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
@@ -60,7 +61,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			}
 		}
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 

@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.util.TreeMap;
 
@@ -57,13 +57,20 @@ public class PointImageUtils {
 	public static PointImageDrawable getFromPoint(@NonNull Context context, @ColorInt int color,
 	                                              boolean withShadow, boolean synced, @Nullable WptPt point) {
 		if (point != null) {
-			int overlayIconId = context.getResources().getIdentifier("mx_" + point.getIconNameOrDefault(),
-					"drawable", context.getPackageName());
-			return getOrCreate(context, color, withShadow, synced, overlayIconId,
-					BackgroundType.getByTypeName(point.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+			return getFromPoint(context, color, withShadow, synced, point.getIconNameOrDefault(),
+					point.getBackgroundType());
 		} else {
 			return getOrCreate(context, color, withShadow);
 		}
+	}
+
+	@NonNull
+	public static PointImageDrawable getFromPoint(@NonNull Context context, @ColorInt int color,
+	                                              boolean withShadow, boolean synced, @NonNull String iconName,
+	                                              @Nullable String bgTypeName) {
+		int overlayIconId = getOverlayIconId(context, iconName);
+		BackgroundType backgroundType = getBackgroundType(bgTypeName);
+		return getOrCreate(context, color, withShadow, synced, overlayIconId, backgroundType);
 	}
 
 	@NonNull
@@ -101,6 +108,21 @@ public class PointImageUtils {
 	                                             @DrawableRes int iconId, @NonNull BackgroundType type) {
 		iconId = iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 		return getOrCreate(context, new PointImageInfo(type, color, iconId, synced, withShadow));
+	}
+
+	@DrawableRes
+	public static int getOverlayIconId(@NonNull Context context, @NonNull String iconName) {
+		return context.getResources().getIdentifier(
+				"mx_" + iconName, "drawable", context.getPackageName());
+	}
+
+	@NonNull
+	public static BackgroundType getBackgroundType(@Nullable String bgTypeName) {
+		return BackgroundType.getByTypeName(bgTypeName, DEFAULT_BACKGROUND_TYPE);
+	}
+
+	public static void clearCache() {
+		DRAWABLE_CACHE.clear();
 	}
 
 	public static class PointImageInfo {

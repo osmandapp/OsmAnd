@@ -92,7 +92,7 @@
     <string name="privacy">Privatnost</string>
     <string name="direction">Smjer</string>
     <string name="precision">Točnost</string>
-    <string name="altitude">Nadmorska visina</string>
+    <string name="altitude">Visina</string>
     <string name="bearing">Usmjerenje</string>
     <string name="search_contacts">Traži kontakte</string>
     <string name="search_contacts_descr">Pretraži sve svoje grupe i kontakte.</string>
@@ -268,9 +268,12 @@
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">s</string>
     <string name="welcome_descr"><b>OsmAnd praćenje</b> omogućuje dijeljenje vlastite lokacije i prikaz lokacija drugih korisnika u OsmAndu.<br/><br/>Program koristi Telegram API, stoga je potreban Telegram račun.</string>
-    <string name="my_location">Moja lokacija</string>
+    <string name="my_location">Moja pozicija</string>
     <string name="live_now">Sada uživo</string>
     <string name="enter_code">Upiši kȏd</string>
     <string name="shared_string_error">Greška</string>
     <string name="send_live_location_error">Greška prilikom slanja trenutne lokacije: %1$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
+    <string name="location_source">Izvor lokacije</string>
+    <string name="location_source_summary">OsmAnd instaliran s Google Playa standardno koristi Google Play usluge za određivanje lokacije.\n\nAko dobiješ netočne podatke o lokaciji ili ako koristiš uređaj bez Google Play usluga, pokušaj se prebaciti na Android API</string>
 </resources>

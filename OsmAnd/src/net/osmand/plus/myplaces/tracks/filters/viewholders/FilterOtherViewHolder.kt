@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.FilterChangedListener
 import net.osmand.plus.myplaces.tracks.filters.OtherFilterAdapter
-import net.osmand.plus.myplaces.tracks.filters.OtherTrackFilter
+import net.osmand.shared.gpx.filters.OtherTrackFilter
 import net.osmand.plus.widgets.TextViewEx
 
 class FilterOtherViewHolder(itemView: View, nightMode: Boolean) :
@@ -51,7 +51,7 @@ class FilterOtherViewHolder(itemView: View, nightMode: Boolean) :
 	fun bindView(filter: OtherTrackFilter) {
 		this.filter = filter
 		adapter.filter = filter
-		title.setText(filter.trackFilterType.nameResId)
+		title.text = filter.trackFilterType.getName()
 		updateExpandState()
 		updateValues()
 	}

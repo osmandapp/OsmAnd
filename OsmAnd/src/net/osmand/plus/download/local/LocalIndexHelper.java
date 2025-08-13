@@ -2,30 +2,15 @@ package net.osmand.plus.download.local;
 
 
 import static net.osmand.IndexConstants.*;
-import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
-import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
-import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.OTHER;
-import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.download.local.LocalItemType.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -38,101 +23,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 
 public class LocalIndexHelper {
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
 	private final ResourceManager resourceManager;
 
 	public LocalIndexHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		settings = app.getSettings();
 		resourceManager = app.getResourceManager();
-	}
-
-	@NonNull
-	public Map<CategoryType, LocalCategory> loadAllFilesByCategories() {
-		Map<CategoryType, LocalCategory> categories = new TreeMap<>();
-
-		File noBackupDir = settings.getNoBackupPath();
-		File internalDir = getAppDir(settings.getInternalAppPath());
-		File externalDir = getAppDir(settings.getExternalStorageDirectory());
-
-		collectFiles(categories, internalDir, noBackupDir, false);
-
-		if (!Algorithms.objectEquals(internalDir, externalDir)) {
-			collectFiles(categories, externalDir, noBackupDir, true);
-		}
-
-		return categories;
-	}
-
-	@NonNull
-	private File getAppDir(@NonNull File dir) {
-		File parentDir = dir.getParentFile();
-		return parentDir != null && Algorithms.stringsEqual(parentDir.getName(), app.getPackageName()) ? parentDir : dir;
-	}
-
-	private void collectFiles(@NonNull Map<CategoryType, LocalCategory> categories,
-	                          @NonNull File dir, @NonNull File noBackupDir, boolean addUnknown) {
-		if (!addUnknown && Algorithms.objectEquals(dir, noBackupDir)) {
-			addUnknown = true;
-		}
-		File[] listFiles = dir.listFiles();
-		if (!Algorithms.isEmpty(listFiles)) {
-			for (File file : listFiles) {
-				addFile(categories, file, addUnknown);
-
-				if (file.isDirectory()) {
-					collectFiles(categories, file, noBackupDir, addUnknown);
-				}
-			}
-		}
-	}
-
-	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
-		LocalItemType itemType = LocalItemUtils.getItemType(app, file);
-		if (itemType != null && (itemType != OTHER || addUnknown)) {
-			CategoryType categoryType = itemType.getCategoryType();
-			LocalCategory category = categories.get(categoryType);
-			if (category == null) {
-				category = new LocalCategory(categoryType);
-				categories.put(categoryType, category);
-			}
-			addLocalItem(category, file, itemType);
-		}
-	}
-
-	private void addLocalItem(@NonNull LocalCategory category, @NonNull File file, @NonNull LocalItemType itemType) {
-		if (itemType == LIVE_UPDATES) {
-			addLiveItem(category, file, itemType);
-		} else {
-			LocalItem item = new LocalItem(file, itemType);
-			LocalItemUtils.updateItem(app, item);
-			category.addLocalItem(item);
-		}
-	}
-
-	private void addLiveItem(@NonNull LocalCategory category, @NonNull File file, @NonNull LocalItemType itemType) {
-		String basename = FileNameTranslationHelper.getBasename(app, file.getName());
-		String liveGroupName = getNameToDisplay(basename.replaceAll("(_\\d*)*$", ""), app);
-
-		LocalGroup localGroup = category.getGroups().get(LIVE_UPDATES);
-		if (localGroup == null) {
-			localGroup = new LocalGroup(LIVE_UPDATES);
-			category.getGroups().put(LIVE_UPDATES, localGroup);
-		}
-		LiveGroupItem liveGroup = (LiveGroupItem) localGroup.getItem(liveGroupName);
-		if (liveGroup == null) {
-			liveGroup = new LiveGroupItem(liveGroupName);
-			localGroup.addItem(liveGroupName, liveGroup);
-		}
-		LocalItem item = new LocalItem(file, itemType);
-		LocalItemUtils.updateItem(app, item);
-		((LiveGroupItem) liveGroup).addLocalItem(item);
 	}
 
 	private void collectLocalItems(@NonNull List<LocalItem> items, @NonNull LocalItemType type,
@@ -202,45 +102,41 @@ public class LocalIndexHelper {
 		boolean voicesCollected = false;
 		for (LocalItemType type : types) {
 			switch (type) {
-				case WIKI_AND_TRAVEL_MAPS:
+				case WIKI_AND_TRAVEL_MAPS -> {
 					loadDataImpl(app.getAppPath(WIKI_INDEX_DIR), WIKI_AND_TRAVEL_MAPS, BINARY_MAP_INDEX_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
 					loadDataImpl(app.getAppPath(WIKIVOYAGE_INDEX_DIR), WIKI_AND_TRAVEL_MAPS, BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
-					break;
-				case MAP_DATA:
-					loadObfData(app.getAppPath(MAPS_PATH), items, readFiles, shouldUpdate, indexFiles, task);
-					break;
-				case ROAD_DATA:
-					loadObfData(app.getAppPath(ROADS_INDEX_DIR), items, readFiles, shouldUpdate, indexFiles, task);
-					break;
-				case TILES_DATA:
-					loadTilesData(app.getAppPath(TILES_INDEX_DIR), items, shouldUpdate, task);
-					break;
-				case TTS_VOICE_DATA:
-				case VOICE_DATA:
+				}
+				case MAP_DATA ->
+						loadObfData(app.getAppPath(MAPS_PATH), items, readFiles, shouldUpdate, indexFiles, task);
+				case ROAD_DATA ->
+						loadObfData(app.getAppPath(ROADS_INDEX_DIR), items, readFiles, shouldUpdate, indexFiles, task);
+				case TILES_DATA ->
+						loadTilesData(app.getAppPath(TILES_INDEX_DIR), items, shouldUpdate, task);
+				case TTS_VOICE_DATA, VOICE_DATA -> {
 					if (!voicesCollected) {
 						loadVoiceData(app.getAppPath(VOICE_INDEX_DIR), items, readFiles, shouldUpdate, indexFiles, task);
 						voicesCollected = true;
 					}
-					break;
-				case FONT_DATA:
-					loadFontData(app.getAppPath(FONT_INDEX_DIR), items, readFiles, shouldUpdate, indexFiles, task);
-					break;
-				case DEPTH_DATA:
-					loadDataImpl(app.getAppPath(NAUTICAL_INDEX_DIR), DEPTH_DATA, BINARY_MAP_INDEX_EXT,
-							readFiles, shouldUpdate, items, indexFiles, task);
-					break;
-				case WEATHER_DATA:
-					loadDataImpl(app.getAppPath(WEATHER_FORECAST_DIR), WEATHER_DATA, WEATHER_EXT,
-							readFiles, shouldUpdate, items, indexFiles, task);
-					break;
-				case TERRAIN_DATA:
+				}
+				case FONT_DATA ->
+						loadFontData(app.getAppPath(FONT_INDEX_DIR), items, readFiles, shouldUpdate, indexFiles, task);
+				case DEPTH_DATA ->
+						loadDataImpl(app.getAppPath(NAUTICAL_INDEX_DIR), DEPTH_DATA, BINARY_MAP_INDEX_EXT,
+								readFiles, shouldUpdate, items, indexFiles, task);
+				case WEATHER_DATA ->
+						loadDataImpl(app.getAppPath(WEATHER_FORECAST_DIR), WEATHER_DATA, WEATHER_EXT,
+								readFiles, shouldUpdate, items, indexFiles, task);
+				case TERRAIN_DATA -> {
 					loadDataImpl(app.getAppPath(GEOTIFF_DIR), TERRAIN_DATA, TIF_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
 					loadDataImpl(app.getAppPath(SRTM_INDEX_DIR), TERRAIN_DATA, BINARY_MAP_INDEX_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
-					break;
+				}
+				case COLOR_DATA ->
+						loadDataImpl(app.getAppPath(COLOR_PALETTE_DIR), COLOR_DATA, TXT_EXT,
+								readFiles, shouldUpdate, items, indexFiles, task);
 			}
 		}
 		return items;

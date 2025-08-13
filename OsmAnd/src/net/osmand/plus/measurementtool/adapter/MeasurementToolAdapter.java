@@ -13,7 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -46,7 +47,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	@Override
 	public MeasureToolItemVH onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = inflater.inflate(R.layout.measure_points_list_item, viewGroup, false);
 		if (!nightMode) {
@@ -71,13 +72,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point,
 				ColorUtilities.getDefaultIconColorId(nightMode)));
 		WptPt pt = points.get(pos);
-		String pointTitle = pt.name;
+		String pointTitle = pt.getAmenityOriginName();
 		if (!TextUtils.isEmpty(pointTitle)) {
 			holder.title.setText(pointTitle);
 		} else {
 			holder.title.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_dash, mapActivity.getString(R.string.plugin_distance_point), String.valueOf(pos + 1)));
 		}
-		String pointDesc = pt.desc;
+		String pointDesc = pt.getDesc();
 		if (!TextUtils.isEmpty(pointDesc)) {
 			holder.descr.setText(pointDesc);
 		} else {
@@ -88,7 +89,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				text = mapActivity.getString(R.string.start_point);
 				if (app.getLocationProvider().getLastKnownLocation() != null) {
 					l1 = app.getLocationProvider().getLastKnownLocation();
-					l2 = getLocationFromLL(points.get(0).lat, points.get(0).lon);
+					l2 = getLocationFromLL(points.get(0).getLat(), points.get(0).getLon());
 					text = text
 						+ BULLET + OsmAndFormatter.getFormattedDistance(l1.distanceTo(l2), app)
 						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), app);
@@ -96,8 +97,8 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			} else {
 				float dist = 0;
 				for (int i = 1; i <= pos; i++) {
-					l1 = getLocationFromLL(points.get(i - 1).lat, points.get(i - 1).lon);
-					l2 = getLocationFromLL(points.get(i).lat, points.get(i).lon);
+					l1 = getLocationFromLL(points.get(i - 1).getLat(), points.get(i - 1).getLon());
+					l2 = getLocationFromLL(points.get(i).getLat(), points.get(i).getLon());
 					dist += l1.distanceTo(l2);
 					text = OsmAndFormatter.getFormattedDistance(dist, app)
 						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), app);
@@ -105,7 +106,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			}
 			holder.descr.setText(text);
 		}
-		double elevation = pt.ele;
+		double elevation = pt.getEle();
 		if (!Double.isNaN(elevation)) {
 			String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
 			holder.elevation.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_colon,
@@ -113,7 +114,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		} else {
 			holder.elevation.setText("");
 		}
-		float speed = (float) pt.speed;
+		float speed = (float) pt.getSpeed();
 		if (speed != 0) {
 			String speedStr = (mapActivity.getString(R.string.shared_string_speed)).substring(0, 1);
 			holder.speed.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_colon,

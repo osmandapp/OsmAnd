@@ -53,18 +53,20 @@ use/
 osmand.properties
 osmand.xml
 assets/specialphrases/*
+assets/bundled_assets.json
 assets/voice/*
 assets/fonts/*
 assets/feature_articles/*
 assets/*.obf
+assets/activities.json
 assets/poi_categories.json
 assets/OsmAndCore_ResourcesBundle.index
 assets/OsmAndCore_ResourcesBundle/
-assets/ui-fonts/*
 assets/weather/*
 assets/proj.db
 assets/heightmap/*
 assets/color-palette/*
+assets/models/*
 
 # Android Studio
 /.idea

@@ -25,7 +25,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -106,6 +106,15 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
 		setupSpeedLimitExceedPref();
+		setupTurnByTurnDirections();
+	}
+
+	private void setupTurnByTurnDirections() {
+		SwitchPreferenceCompat speakStreetNames = findPreference(settings.SPEAK_STREET_NAMES.getId());
+		if(speakStreetNames != null) {
+			ApplicationMode mode = getSelectedAppMode();
+			speakStreetNames.setVisible(settings.TURN_BY_TURN_DIRECTIONS.getModeValue(mode));
+		}
 	}
 
 	private void setupSpeedTolerance() {
@@ -237,10 +246,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
+		ApplicationMode mode = getSelectedAppMode();
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
-			SpeedCamerasBottomSheet.showInstance(requireFragmentManager(), this);
+			SpeedCamerasBottomSheet.showInstance(requireFragmentManager(), this, mode, false);
 		} else if (settings.SPEED_LIMIT_EXCEED_KMH.getId().equals(prefId)) {
-			ApplicationMode mode = getSelectedAppMode();
 			SpeedLimitBottomSheet.showInstance(requireFragmentManager(), this, prefId, mode);
 		}
 		return super.onPreferenceClick(preference);

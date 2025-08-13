@@ -15,7 +15,7 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.util.GeoParsedPoint
 import net.osmand.util.GeoPointParserUtil
 import net.osmand.util.MapUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -126,8 +126,8 @@ object OsmandLocationUtils {
 
 	fun getSenderMessageId(message: TdApi.Message): Long {
 		val forwardInfo = message.forwardInfo
-		return if (forwardInfo != null && forwardInfo.origin is TdApi.MessageForwardOriginUser) {
-			(forwardInfo.origin as TdApi.MessageForwardOriginUser).senderUserId
+		return if (forwardInfo != null && forwardInfo.origin is TdApi.MessageOriginUser) {
+			(forwardInfo.origin as TdApi.MessageOriginUser).senderUserId
 		} else {
 			val sender = message.senderId
 			if (sender is TdApi.MessageSenderUser) {
@@ -440,7 +440,7 @@ object OsmandLocationUtils {
 		}
 		val textMessage = builder.toString().trim()
 
-		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
+		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), null, true)
 	}
 
 	fun convertLocationMessagesToGpxFiles(app: TelegramApplication, items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXFile> {
@@ -553,7 +553,7 @@ object OsmandLocationUtils {
 		var type: Int = -1
 			internal set
 
-		override fun getConstructor() = -1
+		override fun getConstructor() = TdApi.MessageLocation.CONSTRUCTOR
 
 		abstract fun isValid(): Boolean
 	}

@@ -13,6 +13,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
@@ -35,27 +36,32 @@ class QuickActionsExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		List<ButtonStateBean> stateBeans = new ArrayList<>();
 		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
-		List<QuickActionButtonState> buttonStates = new ArrayList<>(buttonsHelper.getButtonsStates());
+		List<QuickActionButtonState> buttonStates = buttonsHelper.getQuickActionButtonsStates();
+
 		if (buttonStates.size() == 1) {
 			QuickActionButtonState state = buttonStates.get(0);
 			if (state.isDefaultButton() && Algorithms.isEmpty(state.getQuickActions())) {
 				return Collections.emptyList();
 			}
 		}
-		return buttonStates;
+		for (QuickActionButtonState buttonState : buttonStates) {
+			stateBeans.add(ButtonStateBean.toStateBean(buttonState));
+		}
+		return stateBeans;
 	}
 
 	@NonNull
 	@Override
 	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
 		QuickActionsSettingsItem item = (QuickActionsSettingsItem) settingsItem;
-		return Collections.singletonList(item.getButtonState());
+		return Collections.singletonList(item.getStateBean());
 	}
 
 	@Override
 	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
-		return object instanceof QuickActionButtonState;
+		return object instanceof ButtonStateBean;
 	}
 
 	@NonNull

@@ -79,7 +79,7 @@ public class OpeningHoursParserTest {
 				? hours.getCombinedInfo(cal)
 				: hours.getInfo(cal).get(sequenceIndex);
 		String description = info.getInfo();
-		boolean result = expected.equalsIgnoreCase(description);
+		boolean result = expected.equalsIgnoreCase(description.replace("\u202F", " "));
 
 		String fmt = String.format("  %sok: Expected %s (%s): %s (rule %s)\n",
 				(!result ? "NOT " : ""), time, expected, description, hours.getCurrentRuleTime(cal, sequenceIndex));
@@ -88,7 +88,7 @@ public class OpeningHoursParserTest {
 	}
 
 	private void testParsedAndAssembledCorrectly(String expected, OpeningHours hours) {
-		String assembledString = hours.toString();
+		String assembledString = hours.toString().replace("\u202F", " ");
 		boolean isCorrect = assembledString.equalsIgnoreCase(expected);
 		String fmt = String.format("  %sok: Expected: \"%s\" got: \"%s\"\n",
 				(!isCorrect ? "NOT " : ""), expected, assembledString);
@@ -125,11 +125,11 @@ public class OpeningHoursParserTest {
 		testOpened("20.06.2023 10:00", hours, true);
 		testOpened("01.11.2023 10:00", hours, false);
 		testOpened("31.12.2023 10:00", hours, false);
-		
+
 		hours = parseOpenedHours("2022 Oct 30 - 2023 Oct 24");
 		System.out.println(hours);
 		testOpened("25.10.2023 10:00", hours, false);
-		
+
 		hours = parseOpenedHours("2022 Oct 24 - 2023 Aug 30");
 		System.out.println(hours);
 		testOpened("25.10.2022 10:00", hours, true);
@@ -602,7 +602,27 @@ public class OpeningHoursParserTest {
 		System.out.println(hours);
 
 		testAmPm();
+		testComma();
 	}
+	
+	private void testComma() throws ParseException {
+		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);
+
+		OpeningHours hours = parseOpenedHours("Mo-Fr 09:00-13:00,Tu 14:00-18:00, Th 14:00-17:00; We \"Nach Vereinbarung\"; Sa,Su,PH closed");
+		System.out.println(hours);
+		testOpened("24.03.2025 10:00", hours, true); // Mo
+		testOpened("24.03.2025 13:30", hours, false);
+		testOpened("24.03.2025 17:50", hours, false);
+		testOpened("25.03.2025 10:00", hours, true); // Tu
+		testOpened("25.03.2025 13:30", hours, false);
+		testOpened("25.03.2025 17:50", hours, true);
+		testInfo("24.03.2025 16:00", hours, "Will open tomorrow at 9:00 AM"); // Mo
+		testInfo("25.03.2025 10:00", hours, "Open till 1:00 PM"); // Tu
+		testInfo("25.03.2025 13:30", hours, "Will open at 2:00 PM");
+		testInfo("25.03.2025 17:50", hours, "Will close at 6:00 PM");
+		testInfo("25.03.2025 18:50", hours, "Will open on 9:00 AM Thu."); // not ok
+	}
+
 
 	private void testAmPm() throws ParseException {
 		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.US);
@@ -626,7 +646,7 @@ public class OpeningHoursParserTest {
 		hours = parseOpenedHours(string);
 		testParsedAndAssembledCorrectly("Mo-Fr 12:00 AM-12:00 PM, 12:00 PM-12:00 AM", hours);
 
-		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.CHINESE);
+		OpeningHoursParser.setTwelveHourFormattingEnabled(true, Locale.TRADITIONAL_CHINESE);
 		string = "Mo-Fr 04:30-10:00, 07:30-23:00; Sa, Su, PH 13:30-23:00";
 		hours = parseOpenedHours(string);
 		testParsedAndAssembledCorrectly("Mo-Fr 上午4:30-10:00, 上午7:30-下午11:00; Sa, Su, PH 下午1:30-11:00", hours);

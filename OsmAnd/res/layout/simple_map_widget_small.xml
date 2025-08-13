@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
@@ -20,12 +20,12 @@
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
 			android:layout_gravity="start|center_vertical"
-			osmand:layout_constraintBottom_toBottomOf="parent"
-			osmand:layout_constraintStart_toStartOf="parent"
-			osmand:layout_constraintTop_toTopOf="parent"
-			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:srcCompat="@drawable/ic_action_remove_dark" />
 
-		<TextView
+		<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -34,11 +34,11 @@
 			android:maxLines="1"
 			android:textColor="@color/text_color_primary_light"
 			android:textSize="@dimen/simple_widget_value_small_size"
-			osmand:layout_constraintBottom_toBottomOf="parent"
-			osmand:layout_constraintEnd_toEndOf="parent"
-			osmand:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
 			android:includeFontPadding="false"
-			osmand:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
 			tools:text="Value" />
 
 		<LinearLayout
@@ -47,12 +47,12 @@
 			android:layout_height="wrap_content"
 			android:layout_marginStart="16dp"
 			android:orientation="vertical"
-			osmand:layout_constraintBottom_toBottomOf="parent"
-			osmand:layout_constraintEnd_toEndOf="parent"
-			osmand:layout_constraintStart_toEndOf="@+id/widget_text"
-			osmand:layout_constraintTop_toTopOf="parent">
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/widget_text"
+			app:layout_constraintTop_toTopOf="parent">
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/widget_name"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
 				android:textSize="@dimen/simple_widget_description_text_size"
 				tools:text="Widget name" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/widget_text_small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

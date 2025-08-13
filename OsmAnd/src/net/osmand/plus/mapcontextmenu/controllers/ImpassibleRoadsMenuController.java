@@ -12,6 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 
 public class ImpassibleRoadsMenuController extends MenuController {
 
@@ -23,7 +24,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.avoidRoadInfo = avoidRoadInfo;
 		OsmandApplication app = mapActivity.getMyApplication();
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();

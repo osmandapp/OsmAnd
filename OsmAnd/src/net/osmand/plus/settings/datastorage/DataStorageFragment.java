@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -361,7 +361,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	private void updateSelectedFolderFiles(@NonNull File file) {
 		stopCollectFilesTask();
 		collectTask = new FilesCollectTask(app, file, this);
-		collectTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(collectTask, singleThreadExecutor);
 	}
 
 	@Override
@@ -401,7 +401,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	private void moveData(@NonNull List<File> files,
 	                      @NonNull Pair<Long, Long> filesSize) {
 		moveFileTask = new MoveFilesTask(activity, currentDataStorage, newDataStorage, files, filesSize, this, this);
-		moveFileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(moveFileTask);
 	}
 
 	private void showErrorDialog(@NonNull String error) {
@@ -443,8 +443,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 				((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
 			}
 		} else {
-			Toast.makeText(activity, R.string.specified_directiory_not_writeable,
-					Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.specified_directiory_not_writeable);
 		}
 		refreshDataInfo();
 		updateAllSettings();

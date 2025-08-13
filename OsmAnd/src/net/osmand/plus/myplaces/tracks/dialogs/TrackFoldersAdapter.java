@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptySmartFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
@@ -33,10 +33,10 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TrackFolderAnalysis;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
@@ -79,17 +79,20 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Nullable
 	private EmptySmartFolderListener emptySmartFolderListener;
 
-	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
+	private TracksSortMode sortMode;
 	private boolean nightMode;
 	private boolean selectionMode;
 	private boolean shouldShowFolder;
+	private TrackFolder selectedFolder;
 
-	public TrackFoldersAdapter(@NonNull Context context, boolean nightMode) {
+	public TrackFoldersAdapter(@NonNull Context context, boolean nightMode, @Nullable TrackFolder selectedFolder) {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
 		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
+		this.selectedFolder = selectedFolder;
+		sortMode = TracksSortMode.getDefaultSortMode(selectedFolder == null ? null : selectedFolder.getId());
 	}
 
 	public void setItems(@NonNull List<Object> items) {
@@ -225,7 +228,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		if (holder instanceof SortTracksViewHolder) {
 			SortTracksViewHolder viewHolder = (SortTracksViewHolder) holder;
-			viewHolder.bindView(hasTrackItems(), null);
+			viewHolder.bindView(hasTrackItems(), null, selectedFolder == null ? null : selectedFolder.getId());
 		} else if (holder instanceof TrackViewHolder) {
 			TrackItem trackItem = (TrackItem) items.get(position);
 

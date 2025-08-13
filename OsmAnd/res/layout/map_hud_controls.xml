@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/map_hud_controls"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
@@ -16,40 +15,31 @@
 			android:layout_width="@dimen/map_button_size"
 			android:layout_height="@dimen/map_button_size" />
 
-		<ImageButton
+		<include
 			android:id="@+id/map_my_location_button"
+			layout="@layout/my_location_button"
 			android:layout_width="@dimen/map_button_size"
 			android:layout_height="@dimen/map_button_size"
-			android:layout_marginTop="@dimen/map_button_spacing"
-			android:background="@drawable/btn_circle"
-			android:contentDescription="@string/shared_string_my_location"
-			tools:src="@drawable/ic_action_remove_dark" />
+			android:layout_marginTop="@dimen/map_button_spacing" />
 
 	</LinearLayout>
 
 	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:clipToPadding="false"
+		android:clipChildren="false"
 		android:layout_gravity="bottom"
 		android:layout_marginStart="@dimen/map_button_spacing"
 		android:orientation="vertical">
 
-		<ImageButton
-			android:id="@+id/map_zoom_in_button"
-			android:layout_width="@dimen/map_button_size"
-			android:layout_height="@dimen/map_button_size"
-			android:background="@drawable/btn_circle"
-			android:contentDescription="@string/zoomIn"
-			tools:src="@drawable/ic_action_remove_dark" />
+		<include layout="@layout/map_zoom_in_button" />
 
-		<ImageButton
-			android:id="@+id/map_zoom_out_button"
+		<include
+			layout="@layout/map_zoom_out_button"
 			android:layout_width="@dimen/map_button_size"
 			android:layout_height="@dimen/map_button_size"
-			android:layout_marginTop="@dimen/map_button_spacing"
-			android:background="@drawable/btn_circle"
-			android:contentDescription="@string/zoomOut"
-			tools:src="@drawable/ic_action_remove_dark" />
+			android:layout_marginTop="@dimen/map_button_spacing" />
 
 	</LinearLayout>
 

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
@@ -29,7 +29,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private final OsmandApplication app;
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final List<Object> items = new ArrayList<>();
 	private final List<ImportTrackItem> trackItems = new ArrayList<>();
 
@@ -41,7 +41,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final String fileName;
 	private final boolean nightMode;
 
-	public ImportTracksAdapter(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	public ImportTracksAdapter(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
 	                           @NonNull String fileName, boolean nightMode) {
 		this.app = app;
 		this.gpxFile = gpxFile;
@@ -95,18 +95,14 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		if (holder instanceof HeaderViewHolder) {
-			((HeaderViewHolder) holder).bindView(app, fileName, trackItems.size(), nightMode);
-		} else if (holder instanceof ImportTrackViewHolder) {
-			ImportTrackViewHolder viewHolder = (ImportTrackViewHolder) holder;
-
+		if (holder instanceof HeaderViewHolder viewHolder) {
+			viewHolder.bindView(app, fileName, trackItems.size(), nightMode);
+		} else if (holder instanceof ImportTrackViewHolder viewHolder) {
 			ImportTrackItem item = (ImportTrackItem) getItem(position);
 			boolean checked = selectedTracks.contains(item);
 			MapBitmapDrawerListener listener = getBitmapDrawerListener(item, viewHolder);
-
-			viewHolder.bindView(item, gpxFile.getPoints(), checked, listener);
-		} else if (holder instanceof FoldersViewHolder) {
-			FoldersViewHolder viewHolder = (FoldersViewHolder) holder;
+			viewHolder.bindView(item, gpxFile.getPointsList(), checked, listener);
+		} else if (holder instanceof FoldersViewHolder viewHolder) {
 			viewHolder.bindView(selectedFolder);
 		}
 	}

@@ -12,6 +12,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 
 public class FavoriteDialogs {
@@ -47,7 +48,7 @@ public class FavoriteDialogs {
 			}
 		}
 		if ((!index.isEmpty() || emoticons)) {
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			builder.setTitle(R.string.fav_point_dublicate);

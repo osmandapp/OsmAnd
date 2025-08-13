@@ -2,12 +2,14 @@ package net.osmand.plus.plugins.weather.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.OPEN_WEATHER_ACTION_ID;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -20,9 +22,10 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class OpenWeatherAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(OPEN_WEATHER_ACTION_ID,
 			"weather.forecast.open", OpenWeatherAction.class)
-			.nameRes(R.string.open_weather_action)
+			.nameRes(R.string.weather_screen)
+			.nameActionRes(R.string.shared_string_open)
 			.iconRes(R.drawable.ic_action_umbrella).nonEditable()
-			.category(QuickActionType.WEATHER);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public OpenWeatherAction() {
 		super(TYPE);
@@ -33,7 +36,7 @@ public class OpenWeatherAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (weatherPlugin != null) {
 			if(!PluginsHelper.isEnabled(WeatherPlugin.class)){

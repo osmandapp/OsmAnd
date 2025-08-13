@@ -76,9 +76,9 @@ public class GeneralRouter implements VehicleRouter {
 	
 	// cached values
 	private boolean restrictionsAware = true;
-	private float sharpTurn;
-	private float roundaboutTurn;
-	private float slightTurn;
+	private float sharpTurn, shortWaySharpTurn;
+	private float slightTurn, shortWaySlightTurn;
+	private float roundaboutTurn, shortWayRoundaboutTurn;
 	// speed in m/s
 	private float minSpeed = 0.28f;
 	// speed in m/s
@@ -97,8 +97,7 @@ public class GeneralRouter implements VehicleRouter {
 	public String[] hhNativeFilter = new String[0]; // getFilteredTags() as flat Array (JNI)
 	public String[] hhNativeParameterValues = new String[0]; // parameterValues as flat Array (JNI)
 	private final GeneralRouter root;
-		
-	
+
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
 		ROAD_PRIORITIES("priority"),
@@ -293,6 +292,12 @@ public class GeneralRouter implements VehicleRouter {
 			minSpeed = parseSilentFloat(v, minSpeed * 3.6f) / 3.6f;
 		} else if (k.equals("maxDefaultSpeed") || k.equals("maxSpeed")) {
 			maxSpeed = parseSilentFloat(v, maxSpeed * 3.6f) / 3.6f;
+		} else if (k.equals("shortWaySharpTurn")) {
+			shortWaySharpTurn = parseSilentFloat(v, shortWaySharpTurn);
+		} else if (k.equals("shortWaySlightTurn")) {
+			shortWaySlightTurn = parseSilentFloat(v, shortWaySlightTurn);
+		} else if (k.equals("shortWayRoundaboutTurn")) {
+			shortWayRoundaboutTurn = parseSilentFloat(v, shortWayRoundaboutTurn);
 		}
 	}
 	
@@ -682,16 +687,16 @@ public class GeneralRouter implements VehicleRouter {
 		return maxSpeed;
 	}
 
-	public double getLeftTurn() {
-		return sharpTurn;
+	private float getSharpTurnPenalty() {
+		return shortestRoute ? shortWaySharpTurn : sharpTurn;
 	}
 	
-	public double getRightTurn() {
-		return slightTurn;
+	private float getSlightTurnPenalty() {
+		return shortestRoute ? shortWaySlightTurn : slightTurn;
 	}
 	
-	public double getRoundaboutTurn() {
-		return roundaboutTurn;
+	private float getRoundaboutTurnPenalty() {
+		return shortestRoute ? shortWayRoundaboutTurn : roundaboutTurn;
 	}
 	
 	@Override
@@ -703,40 +708,27 @@ public class GeneralRouter implements VehicleRouter {
 			totalPenalty += Math.abs(ts - prevTs) / 2;
 		}
 		
-//		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
-//		if(pt != null) {
-//			RouteRegion reg = prev.getRoad().region;
-//			for (int i = 0; i < pt.length; i++) {
-//				RouteTypeRule r = reg.quickGetEncodingRule(pt[i]);
-//				if ("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
-//					// traffic signals don't add turn info
-//					return 0;
-//				}
-//			}
-//		}
-		if (shortestRoute) {
-			return totalPenalty;
-		}
-		if(segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
-			double rt = getRoundaboutTurn();
-			if(rt > 0) {
+		if (segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
+			double rt = getRoundaboutTurnPenalty();
+			if (rt > 0) {
 				totalPenalty += rt;
 			}
-		} else if (getLeftTurn() > 0 || getRightTurn() > 0) {
+		} else if (getSharpTurnPenalty() > 0 || getSlightTurnPenalty() > 0) {
 			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(), segment.isPositive());
 			double a2 = prev.getRoad().directionRoute(prev.getSegmentEnd(), !prev.isPositive());
 			double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
-			// more like UT
-			if (diff > 2 * Math.PI / 3) {
-				totalPenalty += getLeftTurn();
+			if (diff > Math.PI / 1.5) {
+				totalPenalty += getSharpTurnPenalty(); // >120 degree (U-turn)
 			} else if (diff > Math.PI / 3) {
-				totalPenalty += getRightTurn();
+				totalPenalty += getSlightTurnPenalty(); // >60 degree (standard)
+			} else if (diff > Math.PI / 6) {
+				totalPenalty += getSlightTurnPenalty() / 2; // >30 degree (light)
+				// totalPenalty += getRightTurn() * diff * 3 / Math.PI; // to think
 			}
 		}
 		
 		return totalPenalty;
 	}
-	
 
 	@Override
 	public boolean containsAttribute(String attribute) {

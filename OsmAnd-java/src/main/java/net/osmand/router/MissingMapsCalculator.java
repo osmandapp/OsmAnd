@@ -20,6 +20,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
@@ -28,7 +29,7 @@ public class MissingMapsCalculator {
 
 	protected static final Log LOG = PlatformUtil.getLog(MissingMapsCalculator.class);
 
-	public static final double DISTANCE_SPLIT = 50000;
+	public static final double DISTANCE_SPLIT = 15000;
 	public static final double DISTANCE_SKIP = 10000;
 	private OsmandRegions or;
 	private BinaryMapIndexReader reader;
@@ -72,6 +73,9 @@ public class MissingMapsCalculator {
 			rmap.downloadName = Algorithms.getRegionName(r.getFile().getName());
 			rmap.reader = r;
 			rmap.standard = or.getRegionDataByDownloadName(rmap.downloadName) != null;
+			if (rmap.downloadName.toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+				continue; // avoid including World_seamarks
+			}
 			knownMaps.put(rmap.downloadName, rmap);
 			for (HHRouteRegion rt : r.getHHRoutingIndexes()) {
 				if (rt.profile.equals(profile)) {
@@ -99,9 +103,11 @@ public class MissingMapsCalculator {
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
-				if (p.regions.size() > 0) {
-					result.addMissingMaps(p.regions.get(0));
-					
+				for (String reg : p.regions) {
+					if (!isRoadOnlyMap(reg)) {
+						result.addMissingMaps(reg);
+						break;
+					}
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -155,12 +161,11 @@ public class MissingMapsCalculator {
 				}
 			}
 		}
-		
-//		System.out.println("Used maps: " + usedMaps);
+
 		if(!result.hasMissingMaps()) {
 			return false;
 		}
-		
+
 		ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
 
 		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
@@ -185,10 +190,15 @@ public class MissingMapsCalculator {
 		boolean onlyJointMap = true;
 		List<String> regions = new ArrayList<String>();
 		for (BinaryMapDataObject o : resList) {
-			regions.add(or.getDownloadName(o));
-			if (!or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
-					&& !or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
-				onlyJointMap = false;
+			boolean hasMapType = or.isDownloadOfType(o, OsmandRegions.MAP_TYPE);
+			boolean hasRoadsType = or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE);
+			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
+			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
+			if (hasMapType || hasRoadsType || hasMapJoinType || hasRoadsJoinType) {
+				regions.add(or.getDownloadName(o));
+				if (!hasMapJoinType && !hasRoadsJoinType) {
+					onlyJointMap = false;
+				}
 			}
 		}
 		Collections.sort(regions, new Comparator<String>() {
@@ -254,6 +264,16 @@ public class MissingMapsCalculator {
 		if (reader != null) {
 			reader.close();
 		}
+	}
+
+	private boolean isRoadOnlyMap(String regionName) {
+		if (or != null) {
+			WorldRegion wr = or.getRegionDataByDownloadName(regionName);
+			if (wr != null) {
+				return !wr.isRegionMapDownload() && wr.isRegionRoadsDownload();
+			}
+		}
+		return false;
 	}
 
 }

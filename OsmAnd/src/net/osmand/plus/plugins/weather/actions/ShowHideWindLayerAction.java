@@ -11,10 +11,10 @@ public class ShowHideWindLayerAction extends BaseWeatherQuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_WIND_LAYER_ACTION_ID,
 			"wind.layer.showhide", ShowHideWindLayerAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.wind_layer)
 			.iconRes(R.drawable.ic_action_wind).nonEditable()
-			.category(QuickActionType.WEATHER);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideWindLayerAction() {
 		super(TYPE);

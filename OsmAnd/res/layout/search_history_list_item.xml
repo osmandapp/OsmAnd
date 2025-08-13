@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
             android:layout_marginTop="@dimen/favorites_icon_top_margin"
-            osmand:srcCompat="@drawable/ic_sdcard"
+            app:srcCompat="@drawable/ic_sdcard"
 	        android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
         <LinearLayout
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_gravity="center_vertical"
-                    osmand:srcCompat="@drawable/ic_action_group_name_16"
+                    app:srcCompat="@drawable/ic_action_group_name_16"
 	                android:layout_marginStart="4dp" />
 
                 <TextView
@@ -101,7 +101,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
             android:focusable="false"
-            osmand:srcCompat="@drawable/ic_overflow_menu_white"
+            app:srcCompat="@drawable/ic_overflow_menu_white"
             android:visibility="gone" />
 
         <ImageButton
@@ -112,7 +112,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            osmand:srcCompat="@drawable/ic_action_remove_dark"
+            app:srcCompat="@drawable/ic_action_remove_dark"
             android:visibility="gone"
 	        android:layout_marginStart="@dimen/dashFavIconMargin" />
     </LinearLayout>

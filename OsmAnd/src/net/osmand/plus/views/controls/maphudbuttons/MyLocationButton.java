@@ -1,37 +1,85 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static android.graphics.drawable.GradientDrawable.RECTANGLE;
+
 import android.Manifest;
+import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
+import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MyLocationButtonState;
 
 public class MyLocationButton extends MapButton {
 
-	private final boolean contextMenuAllowed;
+	private final MyLocationButtonState buttonState;
 
-	private final OnClickListener backToLocationListener = v -> moveBackToLocation(false);
-	private final OnLongClickListener backToLocationWithMenu = v -> moveBackToLocation(true);
-
-	public MyLocationButton(@NonNull MapActivity mapActivity, @NonNull ImageView view, @NonNull String id, boolean contextMenuAllowed) {
-		this(mapActivity, view, id, contextMenuAllowed, false);
+	public MyLocationButton(@NonNull Context context) {
+		this(context, null);
 	}
 
-	public MyLocationButton(@NonNull MapActivity mapActivity, @NonNull ImageView view,
-	                        @NonNull String id, boolean contextMenuAllowed, boolean alwaysVisible) {
-		super(mapActivity, view, id, alwaysVisible);
-		this.contextMenuAllowed = contextMenuAllowed;
-		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
-		setBackground(R.drawable.btn_circle_blue);
-		updateState(app.getDaynightHelper().isNightModeForMapControls());
+	public MyLocationButton(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public MyLocationButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		buttonState = app.getMapButtonsHelper().getMyLocationButtonState();
+
+		setOnClickListener(v -> moveBackToLocation(false));
+		setOnLongClickListener(v -> moveBackToLocation(true));
+	}
+
+	@Nullable
+	@Override
+	public MapButtonState getButtonState() {
+		return buttonState;
+	}
+
+	@Override
+	public void update() {
+		super.update();
+
+		if (app.accessibilityEnabled()) {
+			boolean visible = getVisibility() == View.VISIBLE;
+			boolean hasLocation = app.getLocationProvider().getLastKnownLocation() != null;
+			setClickable(hasLocation && visible);
+		}
+		if (app.getLocationProvider().getLastKnownLocation() == null) {
+			setContentDescription(app.getString(R.string.unknown_location));
+		} else if (app.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+			setContentDescription(app.getString(R.string.access_map_linked_to_location));
+		} else {
+			setContentDescription(app.getString(R.string.map_widget_back_to_loc));
+		}
+	}
+
+	@Override
+	protected void updateColors(boolean nightMode) {
+		Context context = getContext();
+		if (app.getLocationProvider().getLastKnownLocation() == null) {
+			setIconColor(ColorUtilities.getMapButtonIconColor(context, nightMode));
+			setBackgroundColors(ColorUtilities.getColor(context, nightMode ? R.color.map_widget_dark : R.color.map_widget_light),
+					ColorUtilities.getMapButtonBackgroundPressedColor(context, nightMode));
+		} else if (app.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+			setIconColor(ColorUtilities.getColor(context, R.color.color_myloc_distance));
+			setBackgroundColors(ColorUtilities.getColor(app, nightMode ? R.color.map_widget_dark : R.color.map_widget_light),
+					ColorUtilities.getMapButtonBackgroundPressedColor(context, nightMode));
+		} else {
+			setIconColor(0);
+			setBackgroundColors(ColorUtilities.getColor(context, R.color.map_widget_blue),
+					ColorUtilities.getColor(context, R.color.map_widget_blue_pressed));
+		}
 	}
 
 	private boolean moveBackToLocation(boolean showLocationMenu) {
@@ -39,7 +87,11 @@ public class MyLocationButton extends MapButton {
 			if (showLocationMenu) {
 				showContextMenuForMyLocation();
 			} else if (!mapActivity.getContextMenu().isVisible()) {
-				app.getMapViewTrackingUtilities().backToLocationImpl();
+				if (app.accessibilityEnabled()) {
+					mapActivity.getMapActions().whereAmIDialog();
+				} else {
+					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				}
 			}
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,
@@ -57,64 +109,24 @@ public class MyLocationButton extends MapButton {
 	}
 
 	@Override
-	protected void updateState(boolean nightMode) {
-		boolean hasLocation = app.getLocationProvider().getLastKnownLocation() != null;
-		boolean linkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
-
-		if (app.accessibilityEnabled()) {
-			boolean visible = view.getVisibility() == View.VISIBLE;
-			view.setClickable(hasLocation && visible);
-		}
-
-		if (!hasLocation) {
-			setNoLocationState();
-		} else if (linkedToLocation) {
-			setMapLinkedToLocationState();
-		} else {
-			setReturnToLocationState();
-		}
-		updateIcon(nightMode);
-	}
-
-	private void setNoLocationState() {
-		setBackground(R.drawable.btn_circle, R.drawable.btn_circle_night);
-		setIconId(R.drawable.ic_my_location);
-		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
-		setContentDesc(R.string.unknown_location);
-		if (view.isClickable()) {
-			setMyLocationListeners();
-		}
-	}
-
-	private void setMapLinkedToLocationState() {
-		setIconId(R.drawable.ic_my_location);
-		setIconColorId(R.color.color_myloc_distance);
-		setBackground(R.drawable.btn_circle, R.drawable.btn_circle_night);
-		setContentDesc(R.string.access_map_linked_to_location);
-		if (view.isClickable()) {
-			setMyLocationListeners();
-		}
-	}
-
-	private void setReturnToLocationState() {
-		setIconId(R.drawable.ic_my_location);
-		setIconColorId(0);
-		setBackground(R.drawable.btn_circle_blue);
-		setContentDesc(R.string.map_widget_back_to_loc);
-		if (view.isClickable()) {
-			setMyLocationListeners();
-		}
-	}
-
-	private void setMyLocationListeners() {
-		setOnClickListener(backToLocationListener);
-		if (contextMenuAllowed) {
-			setOnLongClickListener(backToLocationWithMenu);
-		}
-	}
-
-	@Override
 	protected boolean shouldShow() {
-		return alwaysVisible || !isRouteDialogOpened() && visibilityHelper.shouldShowBackToLocationButton();
+		return !routeDialogOpened && visibilityHelper.shouldShowBackToLocationButton();
+	}
+
+	protected void updateBackground() {
+		Context context = getContext();
+		int cornerRadius = AndroidUtils.dpToPx(context, getCornerRadius());
+
+		GradientDrawable normal = new GradientDrawable();
+		normal.setShape(RECTANGLE);
+		normal.setColor(ColorUtilities.getColorWithAlpha(backgroundColor, getOpacity()));
+		normal.setCornerRadius(cornerRadius);
+
+		GradientDrawable pressed = new GradientDrawable();
+		pressed.setShape(RECTANGLE);
+		pressed.setColor(backgroundPressedColor);
+		pressed.setCornerRadius(cornerRadius);
+
+		imageView.setBackground(AndroidUtils.createPressedStateListDrawable(normal, pressed));
 	}
 }

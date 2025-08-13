@@ -2,12 +2,14 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_TRANSPORT_LINES_ACTION_ID;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,7 +22,7 @@ public class ShowHideTransportLinesAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_TRANSPORT_LINES_ACTION_ID,
 			"transport.showhide", ShowHideTransportLinesAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.poi_filter_public_transport)
 			.iconRes(R.drawable.ic_action_transport_bus).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
@@ -34,7 +36,7 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
 		boolean selected = transportLinesMenu.isShowAnyTransport();
@@ -54,7 +56,7 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
 		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);

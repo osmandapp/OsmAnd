@@ -3,7 +3,6 @@ package net.osmand.plus.activities.actions;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -62,7 +63,7 @@ public class AppModeDialog {
 			buttons[k++] = createToggle(a.getLayoutInflater(), app, R.layout.mode_view, ll.findViewById(R.id.app_modes_content), ma, useMapTheme);
 		}
 		for (int i = 0; i < buttons.length; i++) {
-			updateButtonState(app, values, selected, onClickListener, buttons, i, singleSelection, useMapTheme, nightMode);
+			updateButtonState(a, values, selected, onClickListener, buttons, i, singleSelection, useMapTheme, nightMode);
 		}
 
 		ApplicationMode activeMode = app.getSettings().getApplicationMode();
@@ -84,10 +85,11 @@ public class AppModeDialog {
 	}
 
 
-	public static void updateButtonState(OsmandApplication app, List<ApplicationMode> visible,
+	public static void updateButtonState(@NonNull Context context, List<ApplicationMode> visible,
 	                                     Set<ApplicationMode> selected, View.OnClickListener onClickListener, View[] buttons,
 	                                     int i, boolean singleChoice, boolean useMapTheme, boolean nightMode) {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		Context themedCtx = UiUtilities.getThemedContext(context, nightMode);
 		if (buttons[i] != null) {
 			View tb = buttons[i];
 			ApplicationMode mode = visible.get(i);
@@ -109,29 +111,25 @@ public class AppModeDialog {
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(), app.getString(R.string.item_unchecked)));
 				selection.setVisibility(View.INVISIBLE);
 			}
-			tb.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					boolean isChecked = !checked;
-					if (singleChoice) {
-						if (isChecked) {
-							selected.clear();
-							selected.add(mode);
-						}
+			tb.setOnClickListener(v -> {
+				boolean isChecked = !checked;
+				if (singleChoice) {
+					if (isChecked) {
+						selected.clear();
+						selected.add(mode);
+					}
+				} else {
+					if (isChecked) {
+						selected.add(mode);
 					} else {
-						if (isChecked) {
-							selected.add(mode);
-						} else {
-							selected.remove(mode);
-						}
+						selected.remove(mode);
 					}
-					if (onClickListener != null) {
-						onClickListener.onClick(null);
-					}
-					for (int i = 0; i < visible.size(); i++) {
-						updateButtonState(app, visible, selected, onClickListener, buttons, i, singleChoice, useMapTheme, nightMode);
-					}
+				}
+				if (onClickListener != null) {
+					onClickListener.onClick(null);
+				}
+				for (int i1 = 0; i1 < visible.size(); i1++) {
+					updateButtonState(context, visible, selected, onClickListener, buttons, i1, singleChoice, useMapTheme, nightMode);
 				}
 			});
 		}
@@ -150,53 +148,39 @@ public class AppModeDialog {
 			if (checked) {
 				iv.setImageDrawable(drawable);
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(), ctx.getString(R.string.item_checked)));
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_checked_border_light));
-					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
-				} else {
-					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_light);
-				}
+				selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_checked_border_light));
+				AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 			} else {
 				if (useMapTheme) {
-					if (Build.VERSION.SDK_INT >= 21) {
-						Drawable active = ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
-						drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
-					}
+					Drawable active = ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
+					drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
 					iv.setImageDrawable(drawable);
-					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-						selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_border_pressed_light));
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
-					} else {
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_light);
-					}
+					selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_border_pressed_light));
+					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode)));
 				}
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(), ctx.getString(R.string.item_unchecked)));
 			}
-			tb.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					boolean isChecked = !checked;
-					if (singleChoice) {
-						if (isChecked) {
-							selected.clear();
-							selected.add(mode);
-						}
+			tb.setOnClickListener(v -> {
+				boolean isChecked = !checked;
+				if (singleChoice) {
+					if (isChecked) {
+						selected.clear();
+						selected.add(mode);
+					}
+				} else {
+					if (isChecked) {
+						selected.add(mode);
 					} else {
-						if (isChecked) {
-							selected.add(mode);
-						} else {
-							selected.remove(mode);
-						}
+						selected.remove(mode);
 					}
-					if (onClickListener != null) {
-						onClickListener.onClick(null);
-					}
-					for (int i = 0; i < visible.size(); i++) {
-						updateButtonStateForRoute(ctx, visible, selected, onClickListener, buttons, i, singleChoice, useMapTheme, nightMode);
-					}
+				}
+				if (onClickListener != null) {
+					onClickListener.onClick(null);
+				}
+				for (int i1 = 0; i1 < visible.size(); i1++) {
+					updateButtonStateForRoute(ctx, visible, selected, onClickListener, buttons, i1, singleChoice, useMapTheme, nightMode);
 				}
 			});
 		}
@@ -215,6 +199,6 @@ public class AppModeDialog {
 	}
 
 	private static boolean isNightMode(OsmandApplication app, boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 }

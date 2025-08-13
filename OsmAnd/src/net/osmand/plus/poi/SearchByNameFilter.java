@@ -34,7 +34,7 @@ public class SearchByNameFilter extends PoiUIFilter {
 		int limit = distanceInd == 0 ? 500 : -1;
 		List<Amenity> result = Collections.emptyList();
 		if (!Algorithms.isBlank(getFilterByName())) {
-			result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), topLatitude,
+			result = app.getResourceManager().getAmenitySearcher().searchAmenitiesByName(getFilterByName(), topLatitude,
 					leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
 						boolean elimit;
 
@@ -43,7 +43,7 @@ public class SearchByNameFilter extends PoiUIFilter {
 							if (limit != -1 && currentSearchResult.size() > limit) {
 								elimit = true;
 							}
-							if (matcher.publish(object)) {
+							if (matcher != null && matcher.publish(object)) {
 								// Causes concurrent modification exception (below)
 //								currentSearchResult.add(object);
 								return true;
@@ -53,7 +53,7 @@ public class SearchByNameFilter extends PoiUIFilter {
 
 						@Override
 						public boolean isCancelled() {
-							return matcher.isCancelled() || elimit;
+							return matcher != null && matcher.isCancelled() || elimit;
 						}
 					});
 			MapUtils.sortListOfMapObject(result, lat, lon);

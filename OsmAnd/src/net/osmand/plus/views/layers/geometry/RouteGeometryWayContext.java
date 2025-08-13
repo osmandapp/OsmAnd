@@ -5,8 +5,8 @@ import android.graphics.Paint;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.R;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.shared.routing.ColoringType;
 
 public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {
 
@@ -26,8 +26,9 @@ public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {
 		return ColoringType.DEFAULT;
 	}
 
+	@NonNull
 	@Override
-	protected int getArrowBitmapResId() {
-		return R.drawable.map_route_direction_arrow;
+	protected String getDefaultGradientPalette() {
+		return PaletteGradientColor.DEFAULT_NAME;
 	}
 }

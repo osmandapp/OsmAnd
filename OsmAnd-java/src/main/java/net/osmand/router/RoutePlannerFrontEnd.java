@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.map.OsmandRegions;
 import org.apache.commons.logging.Log;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -48,7 +50,8 @@ public class RoutePlannerFrontEnd {
 	}
 	
 	public static HHRoutingConfig defaultHHConfig() {
-		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED)
+				.applyCalculateMissingMaps(RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS);
 	}
 	
 	public enum RouteCalculationMode {
@@ -81,6 +84,7 @@ public class RoutePlannerFrontEnd {
 		public List<RouteSegmentResult> stepBackRoute;
 		public int targetInd = -1;
 		public boolean straightLine = false;
+		public RouteDataObject object;
 
 		public GpxPoint() {
 		}
@@ -102,6 +106,7 @@ public class RoutePlannerFrontEnd {
 		public GpxPoint(GpxPoint point) {
 			this.ind = point.ind;
 			this.loc = point.loc;
+			this.object = point.object;
 			this.cumDist = point.cumDist;
 		}
 	}
@@ -271,6 +276,9 @@ public class RoutePlannerFrontEnd {
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
 	                                            ResultMatcher<GpxRouteApproximation> resultMatcher,
 	                                            boolean useExternalTimestamps) throws IOException, InterruptedException {
+		if (!isUseNativeApproximation()) {
+			gctx.ctx.nativeLib = null; // rare case of C++ routing (setup) -> Online routing -> Java approximation
+		}
 		return gctx.searchGpxRouteInternal(this, gpxPoints, resultMatcher, useExternalTimestamps);
 	}
 
@@ -312,11 +320,17 @@ public class RoutePlannerFrontEnd {
 	public List<GpxPoint> generateGpxPoints(GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
 		List<GpxPoint> gpxPoints = new ArrayList<>(locationsHolder.getSize());
 		GpxPoint prev = null;
-		for(int i = 0; i < locationsHolder.getSize(); i++) {
+		List<LatLon> points = new ArrayList<>();
+		for (int i = 0; i < locationsHolder.getSize(); i++) {
+			points.add(locationsHolder.getLatLon(i));
+		}
+		RouteDataObject o = generateStraightLineSegment(0, points).getObject();
+		for (int i = 0; i < points.size(); i++) {
 			GpxPoint p = new GpxPoint();
 			p.ind = i;
 			p.time = locationsHolder.getTime(i);
 			p.loc = locationsHolder.getLatLon(i);
+			p.object = o;
 			if (prev != null) {
 				p.cumDist = MapUtils.getDistance(p.loc, prev.loc) + prev.cumDist;
 			}
@@ -384,8 +398,9 @@ public class RoutePlannerFrontEnd {
 			targets.addAll(intermediates);
 		}
 		targets.add(end);
+		OsmandRegions osmandRegions = PlatformUtil.getOsmandRegions();
 		if (CALCULATE_MISSING_MAPS) {
-			MissingMapsCalculator calculator = new MissingMapsCalculator(PlatformUtil.getOsmandRegions());
+			MissingMapsCalculator calculator = new MissingMapsCalculator(osmandRegions);
 			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
 				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
 			}
@@ -394,6 +409,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
 		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
+			calculateRegionsWithAllRoutePoints(ctx, osmandRegions, start, targets);
 			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
 				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
@@ -411,7 +427,7 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 		}
-		
+
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;
@@ -470,6 +486,35 @@ public class RoutePlannerFrontEnd {
 		return res;
 	}
 
+	private void calculateRegionsWithAllRoutePoints(RoutingContext ctx, OsmandRegions osmandRegions,
+	                                                LatLon start, List<LatLon> targets) throws IOException {
+		Map<String, Integer> regionCounter = new LinkedHashMap<>();
+
+		getRegionsOfPoint(start, regionCounter, osmandRegions);
+		for (LatLon target : targets) {
+			getRegionsOfPoint(target, regionCounter, osmandRegions);
+		}
+
+		int allPoints = 1 + targets.size();
+		List<String> result = new ArrayList<>();
+
+		for (String region : regionCounter.keySet()) {
+			if (regionCounter.get(region) == allPoints) {
+				result.add(region);
+			}
+		}
+
+		ctx.regionsCoveringStartAndTargets = result.toArray(new String[0]);
+	}
+
+	private void getRegionsOfPoint(LatLon ll, Map<String, Integer> regionCounter, OsmandRegions or) throws IOException {
+		List<BinaryMapDataObject> foundRegions = or.getRegionsToDownload(ll.getLatitude(), ll.getLongitude());
+		for (BinaryMapDataObject region : foundRegions) {
+			String name = or.getDownloadName(region);
+			regionCounter.put(name, regionCounter.getOrDefault(name, 0) + 1);
+		}
+	}
+
 	private void setStartEndToCtx(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) {
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
 		ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
@@ -516,6 +561,7 @@ public class RoutePlannerFrontEnd {
 				dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 			}
 		}
+		ctx.unloadAllData(); // clean indexedSubregions is required for BRP-fallback
 		ctx.routingTime = r != null ? (float) r.getHHRoutingDetailed() : 0;
 		return r;
 	}

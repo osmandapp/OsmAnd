@@ -34,7 +34,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
@@ -49,9 +48,11 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
+import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -100,7 +101,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		super.createToolbar(inflater, view);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
-		toolbarTitle.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+		toolbarTitle.setTypeface(FontCache.getMediumFont());
 		toolbarTitle.setText(getSelectedAppMode().toHumanString());
 		float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
 		toolbarTitle.setLetterSpacing(letterSpacing);
@@ -163,7 +164,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		ApplicationMode selectedAppMode = getSelectedAppMode();
-		app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode);
+		app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode, false);
 		updateCopiedOrResetPrefs();
 	}
 
@@ -207,7 +208,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void updateCopiedOrResetPrefs() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			app.getPoiFilters().loadSelectedPoiFilters();
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();
@@ -366,9 +366,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (ctx == null) {
 			return;
 		}
-		Preference configureMap = findPreference(PROFILE_APPEARANCE);
-		configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-		configureMap.setFragment(ProfileAppearanceFragment.TAG);
+		Preference profileAppearance = findPreference(PROFILE_APPEARANCE);
+		profileAppearance.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+		profileAppearance.setFragment(ProfileAppearanceFragment.TAG);
 	}
 
 	private void setupCopyProfileSettingsPref() {

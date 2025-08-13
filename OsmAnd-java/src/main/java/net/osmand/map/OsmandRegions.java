@@ -203,20 +203,34 @@ public class OsmandRegions {
 	}
 
 	public String getLocaleName(String downloadName, boolean includingParent, boolean reversed) {
+		return getLocaleName(downloadName, includingParent, null, reversed);
+	}
+
+	public String getLocaleName(String downloadName, boolean includingParent,
+	                            WorldRegion baseParentRegion, boolean reversed) {
 		String divider = reversed ? ", " : " ";
-		return getLocaleName(downloadName, divider, includingParent, reversed);
+		return getLocaleName(downloadName, divider, includingParent, baseParentRegion, reversed);
 	}
 
 	public String getLocaleName(String downloadName, String divider, boolean includingParent, boolean reversed) {
+		return getLocaleName(downloadName, divider, includingParent, null, reversed);
+	}
+
+	public String getLocaleName(String downloadName, String divider, boolean includingParent, WorldRegion baseParentRegion, boolean reversed) {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
-			return getLocaleNameByFullName(fullName, divider, includingParent, reversed);
+			return getLocaleNameByFullName(fullName, divider, includingParent, baseParentRegion, reversed);
 		}
 		return downloadName.replace('_', ' ');
 	}
 
 	public String getLocaleNameByFullName(String fullName, String divider, boolean includingParent, boolean reversed) {
+		return getLocaleNameByFullName(fullName, divider, includingParent, null, reversed);
+	}
+
+	public String getLocaleNameByFullName(String fullName, String divider, boolean includingParent,
+	                                      WorldRegion baseParentRegion, boolean reversed) {
 		WorldRegion region = fullNamesToRegionData.get(fullName);
 		if (region == null) {
 			return fullName.replace('_', ' ');
@@ -237,7 +251,7 @@ public class OsmandRegions {
 					return String.format(format, parentParent.getLocaleName(), regionName);
 				}
 			}
-			List<WorldRegion> superRegions = region.getSuperRegions();
+			List<WorldRegion> superRegions = region.getSuperRegions(baseParentRegion);
 			if (!Algorithms.isEmpty(superRegions)) {
 				return getLocaleNameWithParent(superRegions, regionName, divider, reversed);
 			}
@@ -828,6 +842,8 @@ public class OsmandRegions {
 				if (found) {
 					it.remove();
 				} else if (region.getRegionId().contains("basemap")) {
+					it.remove();
+				} else if (region.getRegionId().startsWith("World_")) {
 					it.remove();
 				}
 			} else {

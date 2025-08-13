@@ -1,5 +1,6 @@
 package net.osmand.plus.card.base.multistate;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -30,6 +31,14 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 		return R.layout.card_multi_state;
 	}
 
+	@NonNull
+	@Override
+	public View build(@NonNull Context ctx) {
+		View view = super.build(ctx);
+		controller.onCardViewBuilt(view);
+		return view;
+	}
+
 	@Override
 	protected void updateContent() {
 		if (controller.shouldShowCardHeader()) {
@@ -50,7 +59,7 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 		bindSelectedStateContent();
 	}
 
-	private void updateCardTitle() {
+	protected void updateCardTitle() {
 		TextView tvTitle = view.findViewById(R.id.card_title);
 		tvTitle.setText(controller.getCardTitle());
 	}
@@ -69,10 +78,17 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 
 	private void bindSelectedStateContent() {
 		ViewGroup contentContainer = view.findViewById(R.id.content);
-		controller.onBindCardContent(activity, contentContainer, nightMode);
+		controller.onBindCardContent(activity, contentContainer, nightMode, usedOnMap);
 	}
 
 	@Override
+	@NonNull
+	public TextView getCardTitleView() {
+		return view.findViewById(R.id.card_title);
+	}
+
+	@Override
+	@NonNull
 	public View getSelectorView() {
 		return view.findViewById(R.id.card_selector);
 	}
@@ -80,5 +96,10 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 	@Override
 	public FragmentActivity getActivity() {
 		return activity;
+	}
+
+	@NonNull
+	public IMultiStateCardController getController() {
+		return controller;
 	}
 }

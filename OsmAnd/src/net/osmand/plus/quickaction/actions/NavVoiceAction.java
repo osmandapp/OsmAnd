@@ -2,12 +2,14 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_VOICE_ACTION_ID;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -18,8 +20,9 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class NavVoiceAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(NAV_VOICE_ACTION_ID,
 			"nav.voice", NavVoiceAction.class).
-			nameRes(R.string.quick_action_navigation_voice).iconRes(R.drawable.ic_action_volume_up).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			nameRes(R.string.voices).iconRes(R.drawable.ic_action_volume_up).nonEditable().
+			category(QuickActionType.NAVIGATION)
+			.nameActionRes(R.string.quick_action_verb_turn_on_off);
 
 	public NavVoiceAction() {
 		super(TYPE);
@@ -30,9 +33,9 @@ public class NavVoiceAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		boolean mute = mapActivity.getMyApplication().getSettings().VOICE_MUTE.get();
-		mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(!mute);
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
+		boolean oldMuteState = mapActivity.getMyApplication().getSettings().VOICE_MUTE.get();
+		mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(!oldMuteState);
 	}
 
 	@Override
@@ -47,14 +50,14 @@ public class NavVoiceAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		return app.getSettings().VOICE_MUTE.get()
 				? app.getString(R.string.quick_action_navigation_voice_off)
 				: app.getString(R.string.quick_action_navigation_voice_on);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication app) {
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
 		return !app.getSettings().VOICE_MUTE.get();
 	}
 }

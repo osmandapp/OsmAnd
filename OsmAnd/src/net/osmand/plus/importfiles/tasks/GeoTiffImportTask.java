@@ -38,9 +38,9 @@ public class GeoTiffImportTask extends BaseImportAsyncTask<Void, Void, String> {
 		hideProgress();
 		notifyImportFinished();
 		if (error == null) {
-			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.map_imported_successfully);
 		} else {
-			Toast.makeText(app, app.getString(R.string.map_import_error) + ": " + error, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(app.getString(R.string.map_import_error) + ": " + error);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_action_arrow_down"
+				app:srcCompat="@drawable/ic_action_arrow_down"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginStart="@dimen/content_padding" />
 
@@ -55,7 +55,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:lineHeight="@dimen/default_title_line_height"
+					app:lineHeight="@dimen/default_title_line_height"
 					tools:text="Quick actions" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -65,7 +65,7 @@
 					android:letterSpacing="@dimen/description_letter_spacing"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:lineHeight="@dimen/default_desc_line_height"
+					app:lineHeight="@dimen/default_desc_line_height"
 					tools:text="8 of 4" />
 
 			</LinearLayout>

@@ -1,9 +1,11 @@
 package net.osmand.plus.settings.fragments;
 
+import android.graphics.drawable.Drawable;
+
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -19,6 +21,8 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 
 		setupAutoFollowPref();
 		setupAutoZoomMapPref();
+		setupAutoZoom3dAnglePref();
+		setupPreviewNextTurnPref();
 		setupSnapToRoadPref();
 	}
 
@@ -66,10 +70,31 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		autoZoomMapPref.setPersistent(false);
 	}
 
+	private void setupAutoZoom3dAnglePref() {
+		Integer[] entryValues = {20, 25, 30, 35, 40};
+		String[] entries = new String[entryValues.length];
+		for (int i = 0; i < entryValues.length; i++) {
+			entries[i] = entryValues[i] + " " + getString(R.string.shared_string_degrees);
+		}
+
+		ListPreferenceEx autoZoom3dAngle = findPreference(settings.AUTO_ZOOM_3D_ANGLE.getId());
+		autoZoom3dAngle.setEntries(entries);
+		autoZoom3dAngle.setEntryValues(entryValues);
+	}
+
 	private void setupSnapToRoadPref() {
 		SwitchPreferenceEx snapToRoad = findPreference(settings.SNAP_TO_ROAD.getId());
 		snapToRoad.setTitle(getString(R.string.snap_to_road));
 		snapToRoad.setDescription(getString(R.string.snap_to_road_descr));
+	}
+
+	private void setupPreviewNextTurnPref() {
+		SwitchPreferenceCompat preference = findPreference(settings.PREVIEW_NEXT_TURN.getId());
+		preference.setTitle(getString(R.string.preview_next_turn));
+
+		Drawable enabled = getActiveIcon(R.drawable.ic_action_turn_preview_enabled);
+		Drawable disabled = getContentIcon(R.drawable.ic_action_turn_preview_disabled);
+		preference.setIcon(getPersistentPrefIcon(enabled, disabled));
 	}
 
 	@Override

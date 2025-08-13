@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit.data;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
@@ -18,8 +20,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 public class EditPoiData {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
 	private final Set<TagsChangedListener> mListeners = new HashSet<>();
@@ -34,7 +34,7 @@ public class EditPoiData {
 	private PoiType currentPoiType;
 
 	private final Set<String> changedTags = Collections.synchronizedSet(new HashSet<>());
-	
+
 	public EditPoiData(Entity entity, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
 		category = app.getPoiTypes().getOtherPoiCategory();
@@ -42,48 +42,48 @@ public class EditPoiData {
 		initTags(entity);
 		updateTypeTag(getPoiTypeString(), false);
 	}
-	
+
 	public Map<String, PoiType> getAllTranslatedSubTypes() {
 		return allTranslatedSubTypes;
 	}
-	
+
 	public void updateType(PoiCategory type) {
-		if(type != null && type != category) {
+		if (type != null && type != category) {
 			category = type;
 			tagValues.put(POI_TYPE_TAG, "");
 			changedTags.add(POI_TYPE_TAG);
 			removeCurrentTypeTag();
-			currentPoiType=null;
+			currentPoiType = null;
 		}
 	}
-	
+
 	@Nullable
 	public PoiCategory getPoiCategory() {
 		return category;
 	}
-	
+
 	@Nullable
 	public PoiType getCurrentPoiType() {
 		return currentPoiType;
 	}
-	
+
 	public PoiType getPoiTypeDefined() {
 		return allTranslatedSubTypes.get(getPoiTypeString().toLowerCase());
 	}
-	
+
 	public String getPoiTypeString() {
-		String s = tagValues.get(POI_TYPE_TAG) ;
+		String s = tagValues.get(POI_TYPE_TAG);
 		return s == null ? "" : s;
 	}
 
 	public Entity getEntity() {
 		return entity;
 	}
-	
+
 	public String getTag(String key) {
 		return tagValues.get(key);
 	}
-	
+
 	public void updateTags(Map<String, String> mp) {
 		checkNotInEdit();
 		this.tagValues.clear();
@@ -91,13 +91,13 @@ public class EditPoiData {
 		changedTags.clear();
 		retrieveType();
 	}
-	
+
 	private void tryAddTag(String key, String value) {
 		if (value != null) {
 			tagValues.put(key, value);
 		}
 	}
-	
+
 	private void initTags(Entity entity) {
 		checkNotInEdit();
 		for (String s : entity.getTagKeySet()) {
@@ -117,7 +117,7 @@ public class EditPoiData {
 
 	private void retrieveType() {
 		String tp = tagValues.get(POI_TYPE_TAG);
-		if(tp != null) {
+		if (tp != null) {
 			PoiType pt = allTranslatedSubTypes.get(tp);
 			if (pt != null) {
 				category = pt.getCategory();
@@ -147,21 +147,21 @@ public class EditPoiData {
 	}
 
 	private void checkNotInEdit() {
-		if(isInEdit) {
+		if (isInEdit) {
 			throw new IllegalStateException("Can't modify in edit mode");
 		}
 	}
-	
+
 	public void notifyToUpdateUI() {
 		checkNotInEdit();
-		try { 
+		try {
 			isInEdit = true;
 			notifyDatasetChanged(null);
 		} finally {
 			isInEdit = false;
-		}		
+		}
 	}
-	
+
 	public void removeTag(String tag) {
 		checkNotInEdit();
 		try {
@@ -202,9 +202,9 @@ public class EditPoiData {
 	}
 
 	public interface TagsChangedListener {
-		
+
 		void onTagsChanged(String tag);
-		
+
 	}
 
 	public boolean hasChanges() {
@@ -261,8 +261,12 @@ public class EditPoiData {
 			tagValues.remove(currentPoiType.getOsmTag2());
 			tagValues.remove(currentPoiType.getEditOsmTag());
 			tagValues.remove(currentPoiType.getEditOsmTag2());
-			changedTags.removeAll(Arrays.asList(currentPoiType.getEditOsmTag(),currentPoiType.getEditOsmTag2(), currentPoiType.getOsmTag2()));
+			changedTags.removeAll(Arrays.asList(currentPoiType.getEditOsmTag(), currentPoiType.getEditOsmTag2(), currentPoiType.getOsmTag2()));
 		}
+	}
+
+	public boolean isPoiTypeChanged() {
+		return getChangedTags().contains(POI_TYPE_TAG);
 	}
 
 	public boolean hasEmptyValue() {

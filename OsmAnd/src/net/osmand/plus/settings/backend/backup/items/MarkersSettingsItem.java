@@ -1,12 +1,13 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,11 +15,12 @@ import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -28,8 +30,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
@@ -163,16 +163,17 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 		return new SettingsItemReader<MarkersSettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
-				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream);
-				if (gpxFile.error != null) {
+				GpxFile gpxFile = SharedUtil.loadGpxFile(inputStream);
+				if (gpxFile.getError() != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
-					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
+					SettingsHelper.LOG.error("Failed read gpx file", SharedUtil.jException(gpxFile.getError()));
 				} else {
 					List<MapMarker> mapMarkers = markersHelper.getDataHelper().readMarkersFromGpx(gpxFile, false);
 					items.addAll(mapMarkers);
 				}
+				return null;
 			}
 		};
 	}
@@ -180,7 +181,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = markersHelper.getDataHelper().generateGpx(items, true);
+		GpxFile gpxFile = markersHelper.getDataHelper().generateGpx(items, true);
 		return getGpxWriter(gpxFile);
 	}
 }

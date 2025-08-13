@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -58,7 +57,7 @@
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_header_text_size"
 							app:lineHeight="@dimen/default_title_line_height"
-							app:typeface="@string/font_roboto_medium"
+							app:typefaceWeight="medium"
 							tools:text="@string/shared_string_toolbar" />
 
 						<ImageButton
@@ -102,9 +101,9 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/content_padding"
-					osmand:dialogButtonHeight="@dimen/dialog_button_height"
-					osmand:dialogButtonTitle="@string/shared_string_apply"
-					osmand:dialogButtonTopMargin="@dimen/content_padding_small" />
+					app:dialogButtonHeight="@dimen/dialog_button_height"
+					app:dialogButtonTitle="@string/shared_string_apply"
+					app:dialogButtonTopMargin="@dimen/content_padding_small" />
 
 			</LinearLayout>
 
@@ -113,22 +112,29 @@
 		<FrameLayout
 			android:id="@+id/map_controls_container"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
 			android:layout_gravity="bottom"
-			android:layout_marginHorizontal="@dimen/content_padding_half"
 			android:layout_marginBottom="@dimen/content_padding_small_half">
+
+			<include
+				layout="@layout/map_compass_button"
+				android:layout_width="@dimen/map_small_button_size"
+				android:layout_height="@dimen/map_small_button_size"
+				android:layout_marginTop="@dimen/content_padding_half" />
 
 			<include
 				layout="@layout/map_hud_controls"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="end|bottom" />
+				android:layout_gravity="end|bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half" />
 
 			<include
 				layout="@layout/map_ruler"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="start|bottom" />
+				android:layout_gravity="start|bottom"
+				android:layout_marginHorizontal="@dimen/content_padding_half" />
 
 		</FrameLayout>
 

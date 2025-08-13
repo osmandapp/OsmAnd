@@ -13,16 +13,19 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
@@ -32,12 +35,13 @@ import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.PreviewRouteLineLayer;
+import net.osmand.shared.routing.RouteColorize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,6 +58,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	private PreviewRouteLineInfo routeLinePreview;
 
 	private ModedColorsPaletteController colorsPaletteController;
+	private GradientColorsPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 	private boolean initialNightMode;
 
@@ -69,11 +74,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	@NonNull
 	public ModedColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			OsmandSettings settings = app.getSettings();
-			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-			bundle.predefinedColors = getPredefinedColors();
-			bundle.palettePreference = settings.ROUTE_LINE_COLORS_PALETTE;
-			ColorsCollection colorsCollection = new ColorsCollection(bundle);
+			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			colorsPaletteController = new ModedColorsPaletteController(app, colorsCollection) {
 
 				private PaletteMode paletteModeDay;
@@ -94,9 +95,9 @@ public class RouteLineColorController extends ColoringStyleCardController
 				}
 
 				@Override
-				protected PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
+				public PaletteColor provideSelectedColorForPaletteMode(@NonNull PaletteMode paletteMode) {
 					boolean useNightMap = Objects.equals(paletteMode.getTag(), PALETTE_MODE_ID_NIGHT);
-					return colorsCollection.findPaletteColor(routeLinePreview.getCustomColor(useNightMap));
+					return collection.findPaletteColor(routeLinePreview.getCustomColor(useNightMap));
 				}
 
 				@NonNull
@@ -104,6 +105,11 @@ public class RouteLineColorController extends ColoringStyleCardController
 					String title = app.getString(night ? R.string.daynight_mode_night : R.string.daynight_mode_day);
 					int tag = night ? PALETTE_MODE_ID_NIGHT : PALETTE_MODE_ID_DAY;
 					return new PaletteMode(title, tag);
+				}
+
+				@Override
+				public void onAllColorsScreenClosed() {
+					notifyAllColorsScreenClosed();
 				}
 			};
 		}
@@ -148,7 +154,8 @@ public class RouteLineColorController extends ColoringStyleCardController
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		container.removeAllViews();
 		BaseCard card = getContentCardForSelectedState(activity);
 		View cardView = card.getView() != null ? card.getView() : card.build(activity);
@@ -163,9 +170,35 @@ public class RouteLineColorController extends ColoringStyleCardController
 			return new PromoBannerCard(activity);
 		} else if (coloringType.isCustomColor()) {
 			return new ModedColorsPaletteCard(activity, getColorsPaletteController());
+		} else if (ColoringType.Companion.isColorTypeInPurpose(coloringType, ColoringPurpose.ROUTE_LINE) && coloringType.toGradientScaleType() != null) {
+			GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
+			return new GradientColorsPaletteCard(activity, getGradientPaletteController(gradientScaleType));
 		} else {
 			return new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController());
 		}
+	}
+
+	@NonNull
+	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
+		RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
+		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
+
+		if (gradientPaletteController == null) {
+			gradientPaletteController = new GradientColorsPaletteController(app, null) {
+				@Override
+				public void onAllColorsScreenClosed() {
+					notifyAllColorsScreenClosed();
+				}
+			};
+		}
+		gradientPaletteController.setPaletteListener(getExternalListener());
+		gradientPaletteController.updateContent(gradientCollection, routeLinePreview.getGradientPalette());
+		return gradientPaletteController;
+	}
+
+	@Nullable
+	public GradientColorsPaletteController getGradientPaletteController() {
+		return gradientPaletteController;
 	}
 
 	@Override
@@ -189,7 +222,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	@Override
 	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
-		return ColoringType.valuesOf(ColoringPurpose.ROUTE_LINE);
+		return ColoringType.Companion.valuesOf(ColoringPurpose.ROUTE_LINE);
 	}
 
 	@Override
@@ -215,7 +248,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	}
 
 	public void onResume() {
-		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
+		initialNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		setMapThemeProvider(this);
 	}
 
@@ -234,9 +267,10 @@ public class RouteLineColorController extends ColoringStyleCardController
 		return layer.getRouteLineColor(isNightMap());
 	}
 
-	@NonNull
-	public static List<PaletteColor> getPredefinedColors() {
-		return Arrays.asList(DefaultColors.values());
+	private void notifyAllColorsScreenClosed() {
+		if (getExternalListener() instanceof IRouteLineColorControllerListener listener) {
+			listener.updateStatusBar();
+		}
 	}
 
 	@NonNull
@@ -254,5 +288,8 @@ public class RouteLineColorController extends ColoringStyleCardController
 		return controller;
 	}
 
-	public interface IRouteLineColorControllerListener extends IColorCardControllerListener, OnPaletteModeSelectedListener {}
+	public interface IRouteLineColorControllerListener
+			extends IColorCardControllerListener, OnPaletteModeSelectedListener {
+		void updateStatusBar();
+	}
 }

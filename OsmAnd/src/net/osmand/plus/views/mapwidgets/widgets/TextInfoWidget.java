@@ -3,7 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
+import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -16,20 +16,22 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
 
-public class TextInfoWidget extends MapWidget {
+public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 
 	protected static final String NO_VALUE = "—";
 
 	protected String contentTitle;
 
 	protected ImageView imageView;
-	protected TextView textView;
-	protected TextView textViewShadow;
-	protected TextView smallTextView;
+	protected OutlinedTextContainer textView;
+	protected OutlinedTextContainer smallTextView;
 	protected TextView smallTextViewShadow;
 	protected View container;
 	protected View emptyBanner;
@@ -41,16 +43,17 @@ public class TextInfoWidget extends MapWidget {
 	private int nightIconId;
 
 	private Integer cachedMetricSystem;
+	private Integer cachedAltitudeMetric;
 	private Integer cachedAngularUnits;
 
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
-		super(mapActivity, widgetType);
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
+			@Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(mapActivity, widgetType, customId, panel);
 		container = view.findViewById(R.id.container);
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
-		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
@@ -141,9 +144,6 @@ public class TextInfoWidget extends MapWidget {
 
 	private void setText(String text) {
 		textView.setText(text);
-		if (textViewShadow != null) {
-			textViewShadow.setText(text);
-		}
 	}
 
 	private void setSmallText(String text) {
@@ -160,6 +160,11 @@ public class TextInfoWidget extends MapWidget {
 			updateNeeded = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
 			cachedMetricSystem = metricSystem;
 		}
+		if (isAltitudeMetricDepended()) {
+			int altitudeMetric = app.getSettings().ALTITUDE_METRIC.get().ordinal();
+			updateNeeded = cachedAltitudeMetric == null || cachedAltitudeMetric != altitudeMetric;
+			cachedAltitudeMetric = altitudeMetric;
+		}
 		if (isAngularUnitsDepended()) {
 			int angularUnits = app.getSettings().ANGULAR_UNITS.get().ordinal();
 			updateNeeded |= cachedAngularUnits == null || cachedAngularUnits != angularUnits;
@@ -169,6 +174,10 @@ public class TextInfoWidget extends MapWidget {
 	}
 
 	public boolean isMetricSystemDepended() {
+		return false;
+	}
+
+	public boolean isAltitudeMetricDepended() {
 		return false;
 	}
 
@@ -185,8 +194,10 @@ public class TextInfoWidget extends MapWidget {
 		super.updateColors(textState);
 		updateTextColor(smallTextView, smallTextViewShadow, textState.textColor, textState.textShadowColor,
 				textState.textBold, textState.textShadowRadius);
-		updateTextColor(textView, textViewShadow, textState.textColor, textState.textShadowColor,
-				textState.textBold, textState.textShadowRadius);
+
+		updateTextOutline(textView, textState);
+		updateTextContainer(textView, textState);
+
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
@@ -230,16 +241,17 @@ public class TextInfoWidget extends MapWidget {
 	}
 
 	protected void setTimeText(long time) {
-		if (DateFormat.is24HourFormat(app)) {
-			setText(DateFormat.format("k:mm", time).toString(), null);
-		} else {
-			setText(DateFormat.format("h:mm", time).toString(),
-					DateFormat.format("aa", time).toString());
-		}
+		Pair<String, String> formattedTime = OsmAndFormatter.getFormattedTime(app, time);
+		setText(formattedTime.first, formattedTime.second);
 	}
 
 	@DrawableRes
 	public int getIconId(boolean nightMode) {
 		return nightMode ? nightIconId : dayIconId;
+	}
+
+	@DrawableRes
+	public int getMapIconId(boolean nightMode) {
+		return getIconId(nightMode);
 	}
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/selectable_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding">
+
+		<TextView
+			android:id="@+id/row_id"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:layout_gravity="center_vertical"
+			android:lineSpacingExtra="5sp"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="16sp"
+			android:visibility="gone" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding"
+			tools:src="@drawable/ic_action_info_dark" />
+
+		<LinearLayout
+			android:id="@+id/text_wrapper"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginVertical="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textColor="?android:textColorPrimary"
+				tools:text="Some title text" />
+
+		</LinearLayout>
+
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/count"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:textColor="?android:textColorPrimary"
+				tools:text="1" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/pro_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:src="?attr/purchase_pro_badge_icon"
+				android:visibility="gone" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/setting_list_item_large_height"
+		android:background="?attr/divider_color_basic" />
+
+</LinearLayout>

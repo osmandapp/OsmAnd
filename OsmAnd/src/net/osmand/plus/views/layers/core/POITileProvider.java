@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers.core;
 
+import static net.osmand.core.android.MapRendererContext.POI_SYMBOL_SECTION;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 
 import android.content.Context;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.MapMarker;
@@ -36,14 +38,18 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.MapLayerData;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.TileBoxRequest;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
 public class POITileProvider extends interface_MapTiledCollectionProvider {
+
+	private static final Log LOG = PlatformUtil.getLog(POITileProvider.class);
 
 	private final Context ctx;
 	private final int baseOrder;
@@ -53,7 +59,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 	private final float density;
 	private final PointI offset;
 
-	private final OsmandMapLayer.MapLayerData<List<Amenity>> layerData;
+	private final MapLayerData<List<Amenity>> layerData;
 	private MapTiledCollectionProvider providerInstance;
 
 	private static class POICollectionPoint extends interface_MapTiledCollectionPoint {
@@ -94,7 +100,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			if (isFullSize) {
 				String id = amenity.getGpxIcon();
 				if (id == null) {
-					id = RenderingIcons.getIconNameForAmenity(amenity);
+					id = RenderingIcons.getIconNameForAmenity(ctx, amenity);
 				}
 				if (id != null) {
 					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(),
@@ -124,7 +130,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		}
 	}
 
-	public POITileProvider(@NonNull Context context, OsmandMapLayer.MapLayerData<List<Amenity>> layerData,
+	public POITileProvider(@NonNull Context context, MapLayerData<List<Amenity>> layerData,
 	                       int baseOrder, boolean textVisible, @Nullable TextRasterizer.Style textStyle,
 	                       float textScale, float density) {
 		this.ctx = context;
@@ -141,7 +147,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
-		mapRenderer.addSymbolsProvider(providerInstance);
+		mapRenderer.addSymbolsProvider(POI_SYMBOL_SECTION, providerInstance);
 	}
 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {
@@ -200,7 +206,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest request = new TileBoxRequest(tb);
-		OsmandMapLayer.MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
+		MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
 		layerData.addDataReadyCallback(dataReadyCallback);
 		long[] start = {System.currentTimeMillis()};
 		app.runInUIThread(() -> {
@@ -227,7 +233,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			return new QListMapTiledCollectionPoint();
 		}
 
-		List<Amenity> results = dataReadyCallback.getResults();
+		List<Amenity> results = dataReadyCallback.getDisplayedResults();
 		if (Algorithms.isEmpty(results)) {
 			return new QListMapTiledCollectionPoint();
 		}
@@ -237,6 +243,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 				MapUtils.get31LatitudeY(tileBBox31.getTopLeft().getY()),
 				MapUtils.get31LongitudeX(tileBBox31.getBottomRight().getX()),
 				MapUtils.get31LatitudeY(tileBBox31.getBottomRight().getY()));
+
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
 		for (Amenity amenity : results) {
 			LatLon latLon = amenity.getLocation();
@@ -262,7 +269,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public ZoomLevel getMinZoom() {
-		return ZoomLevel.ZoomLevel9;
+		return ZoomLevel.ZoomLevel5;
 	}
 
 	@Override

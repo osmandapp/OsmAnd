@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.PointF;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
@@ -20,9 +18,8 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenuProvider {
 
@@ -44,7 +41,7 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
 				WptPt point = ((SelectedGpxPoint) pair.second).getSelectedPoint();
-				return new LatLon(point.lat, point.lon);
+				return new LatLon(point.getLat(), point.getLon());
 			}
 		}
 		return null;
@@ -56,8 +53,13 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
 				TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
-				String name = Algorithms.isEmpty(travelGpx.getDescription()) ? travelGpx.getTitle() : travelGpx.getDescription();
-				return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
+				if (!Algorithms.isEmpty(travelGpx.getTitle())) {
+					return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
+				} else if (!Algorithms.isEmpty(travelGpx.getDescription())) {
+					return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getDescription());
+				} else {
+					return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getRouteId()); // nullable
+				}
 			}
 		}
 		return null;
@@ -75,7 +77,8 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 
 					WptPt wptPt = selectedGpxPoint.getSelectedPoint();
 					TravelHelper travelHelper = app.getTravelHelper();
-					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getRouteId(), new LatLon(wptPt.lat, wptPt.lon));
+					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getGpxFileName(),
+							new LatLon(wptPt.getLat(), wptPt.getLon()), false);
 					return true;
 				}
 			}
@@ -89,7 +92,8 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
+			boolean unknownLocation, boolean excludeUntouchableObjects) {
 
 	}
 

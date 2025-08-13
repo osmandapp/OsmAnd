@@ -43,7 +43,7 @@
 			android:ellipsize="end"
 			android:maxLines="2"
 			style="@style/TextAppearance.ContextMenuSubtitle"
-			android:textColor="@null"
+			android:textColor="?android:attr/textColorSecondary"
 			tools:text="Some description" />
 	</LinearLayout>
 

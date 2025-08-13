@@ -2,6 +2,9 @@ package net.osmand.plus.helpers;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.Model3D;
@@ -9,8 +12,9 @@ import net.osmand.core.jni.ObjParser;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
@@ -22,38 +26,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class Model3dHelper {
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
 
 	private final Map<String, Model3D> modelsCache = new HashMap<>();
 	private final Set<String> modelsInProgress = new HashSet<>();
 	private final Set<String> failedModels = new HashSet<>();
+	private final Map<String, List<CallbackWithObject<Model3D>>> pendingCallbacks = new HashMap<>();
 
 	public Model3dHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.settings = app.getSettings();
 	}
 
 	@Nullable
-	public Model3D getModel(@NonNull String modelName, @Nullable CallbackWithObject<Model3D> callbackOnLoad) {
+	public Model3D getModel(@NonNull String modelName, @Nullable CallbackWithObject<Model3D> callback) {
+		String pureModelName = modelName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
 		if (!modelName.startsWith(IndexConstants.MODEL_NAME_PREFIX)) {
-			if (callbackOnLoad != null) {
-				callbackOnLoad.processResult(null);
-			}
+			processCallback(pureModelName, null, callback);
 			return null;
 		}
-
-		String pureModelName = modelName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
 		Model3D model3D = modelsCache.get(pureModelName);
 		if (model3D == null) {
-			loadModel(pureModelName, callbackOnLoad);
+			loadModel(pureModelName, callback);
 		}
-
 		return model3D;
 	}
 
@@ -73,35 +69,62 @@ public class Model3dHelper {
 		}
 	}
 
+	private void processCallback(@NonNull String modelName, @Nullable Model3D model, @Nullable CallbackWithObject<Model3D> callback) {
+		if (callback != null) {
+			if (pendingCallbacks.containsKey(modelName)) {
+				List<CallbackWithObject<Model3D>> callbacks = pendingCallbacks.get(modelName);
+				if (callbacks != null) {
+					callbacks.remove(callback);
+					if (!callbacks.isEmpty()) {
+						for (CallbackWithObject<Model3D> pendingCallback : callbacks) {
+							pendingCallback.processResult(model);
+						}
+					}
+					pendingCallbacks.remove(modelName);
+				}
+			}
+			callback.processResult(model);
+		}
+	}
+
 	private void loadModelImpl(@NonNull String modelName, @Nullable CallbackWithObject<Model3D> callback) {
 		if (!app.useOpenGlRenderer()) {
+			processCallback(modelName, null, callback);
 			return;
 		}
 
-		if (modelsCache.containsKey(modelName)
-				|| modelsInProgress.contains(modelName)
-				|| failedModels.contains(modelName)) {
+		if (modelsCache.containsKey(modelName)) {
+			processCallback(modelName, modelsCache.get(modelName), callback);
+			return;
+		}
+		if (failedModels.contains(modelName)) {
+			processCallback(modelName, null, callback);
+			return;
+		}
+		if (modelsInProgress.contains(modelName)) {
+			if (callback != null) {
+				pendingCallbacks.computeIfAbsent(modelName, list -> new ArrayList<>()).add(callback);
+			}
 			return;
 		}
 
 		File dir = new File(app.getAppPath(IndexConstants.MODEL_3D_DIR), modelName);
 		if (!isModelExist(dir)) {
+			processCallback(modelName, null, callback);
 			return;
 		}
 
 		modelsInProgress.add(modelName);
-		new Load3dModelTask(dir.getAbsolutePath(), model -> {
+		OsmAndTaskManager.executeTask(new Load3dModelTask(dir, model -> {
 			if (model == null) {
 				failedModels.add(modelName);
 			} else {
 				modelsCache.put(modelName, model);
 			}
 			modelsInProgress.remove(modelName);
-			if (callback != null) {
-				callback.processResult(model);
-			}
+			processCallback(modelName, model, callback);
 			return true;
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}));
 	}
 
 	@NonNull
@@ -112,7 +135,10 @@ public class Model3dHelper {
 		if (!Algorithms.isEmpty(modelsDirs)) {
 			for (File model : modelsDirs) {
 				if (isModelExist(model)) {
-					modelsDirNames.add(IndexConstants.MODEL_NAME_PREFIX + model.getName());
+					String modelKey = IndexConstants.MODEL_NAME_PREFIX + model.getName();
+					if (!LocationIcon.isDefaultModel(modelKey)) {
+						modelsDirNames.add(IndexConstants.MODEL_NAME_PREFIX + model.getName());
+					}
 				}
 			}
 		}
@@ -138,22 +164,23 @@ public class Model3dHelper {
 
 	private static class Load3dModelTask extends AsyncTask<Void, Void, Model3D> {
 
-		private final String modelDirPath;
+		private final File modelDirPath;
 		private final CallbackWithObject<Model3D> callback;
 
-		public Load3dModelTask(@NonNull String modelDirPath, @NonNull CallbackWithObject<Model3D> callback) {
+		public Load3dModelTask(@NonNull File modelDirPath, @NonNull CallbackWithObject<Model3D> callback) {
 			this.modelDirPath = modelDirPath;
 			this.callback = callback;
 		}
 
 		@Override
-		protected Model3D doInBackground(Void... voids) {
-			ObjParser parser = new ObjParser(modelDirPath + "/model.obj", modelDirPath + "/mtl");
+		protected @Nullable Model3D doInBackground(Void... voids) {
+			ObjParser parser = new ObjParser(modelDirPath.getAbsolutePath() + "/"
+					+ modelDirPath.getName() + ".obj", modelDirPath.getAbsolutePath());
 			return parser.parse();
 		}
 
 		@Override
-		protected void onPostExecute(Model3D result) {
+		protected void onPostExecute(@Nullable Model3D result) {
 			callback.processResult(result);
 		}
 	}

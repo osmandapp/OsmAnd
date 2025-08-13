@@ -78,9 +78,14 @@ public class CustomAlert {
 
 	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
 	                                       int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
+		showSingleSelection(data, createSelectionItemsArray(items), selectedEntryIndex, itemClickListener);
+	}
+
+	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull SelectionDialogItem[] items,
+	                                       int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
-				data.getContext(), items, selectedEntryIndex, null,
+				data.getContext(), data.getItemsLayoutRes(), items, selectedEntryIndex, null,
 				data.getControlsColor(), data.isNightMode(), itemClickListener, false
 		);
 		builder.setAdapter(adapter, null);
@@ -92,9 +97,14 @@ public class CustomAlert {
 
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
 	                                      @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
+		showMultiSelection(data, createSelectionItemsArray(items), checkedItems, itemClickListener);
+	}
+
+	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull SelectionDialogItem[] items,
+	                                      @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
-				data.getContext(), items, INVALID_ID, checkedItems,
+				data.getContext(), data.getItemsLayoutRes(), items, INVALID_ID, checkedItems,
 				data.getControlsColor(), data.isNightMode(), itemClickListener, true
 		);
 		builder.setAdapter(adapter, null);
@@ -102,6 +112,15 @@ public class CustomAlert {
 		AlertDialog dialog = builder.show();
 		applyAdditionalParameters(dialog, data);
 		adapter.setDialog(dialog);
+	}
+
+	@NonNull
+	private static SelectionDialogItem[] createSelectionItemsArray(@NonNull CharSequence[] titles) {
+		SelectionDialogItem[] result = new SelectionDialogItem[titles.length];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = new SelectionDialogItem(titles[i], null);
+		}
+		return result;
 	}
 
 	private static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {

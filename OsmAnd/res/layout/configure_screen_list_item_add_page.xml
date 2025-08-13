@@ -1,42 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:background="?attr/list_background_color">
-
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="?attr/divider_color_basic" />
+	android:orientation="vertical">
 
 	<LinearLayout
-		android:id="@+id/button_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:paddingVertical="@dimen/content_padding_small">
+		android:orientation="vertical"
+		android:background="?attr/list_background_color">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:layout_width="@dimen/dialog_content_margin"
-			android:layout_height="@dimen/dialog_content_margin"
-			android:layout_gravity="center"
-			android:layout_marginStart="@dimen/title_padding"
-			android:tint="?attr/active_color_basic"
-			osmand:srcCompat="@drawable/ic_action_plus" />
-
-		<net.osmand.plus.widgets.TextViewEx
-			style="@style/TitleStyle.Medium"
-			android:id="@+id/add_page"
+		<LinearLayout
+			android:id="@+id/selectable_item"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="@dimen/dialog_button_height"
-			android:ellipsize="end"
-			android:maxLines="1"
-			android:text="@string/add_page"
-			android:textColor="?attr/active_color_basic" />
+			android:orientation="vertical"
+			tools:ignore="UselessParent">
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/divider_color_basic" />
+
+			<LinearLayout
+				android:id="@+id/button_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingVertical="@dimen/content_padding_small">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:layout_width="@dimen/dialog_content_margin"
+					android:layout_height="@dimen/dialog_content_margin"
+					android:layout_gravity="center"
+					android:layout_marginStart="@dimen/title_padding"
+					android:tint="?attr/active_color_basic"
+					app:srcCompat="@drawable/ic_action_plus" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/TitleStyle.Medium"
+					android:id="@+id/add_page"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/dialog_button_height"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:text="@string/add_page"
+					android:textColor="?attr/active_color_basic" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
 
 	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

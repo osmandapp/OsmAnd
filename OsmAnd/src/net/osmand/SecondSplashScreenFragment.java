@@ -2,7 +2,6 @@ package net.osmand;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +15,14 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
@@ -32,7 +31,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	private static final int OSM_TEXT_ID = 1003;
 
 	public static final String TAG = "SecondSplashScreenFragment";
-	public static final int MIN_SCREEN_WIDTH_TABLET_DP = 600;
 	public static boolean SHOW = true;
 	public static boolean VISIBLE;
 
@@ -44,7 +42,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
 			return 0;
 		int orientation = getResources().getConfiguration().orientation;
-		if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone()) {
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE && !AndroidUiHelper.isTablet(getContext())) {
 			int id = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
 			if (id > 0)
 				return getResources().getDimensionPixelSize(id);
@@ -76,7 +74,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 			logo.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.ic_logo_splash_osmand_plus));
 		}
 		RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-		if (isSmartphone()) {
+		if (!AndroidUiHelper.isTablet(activity)) {
 			logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			logoLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		} else {
@@ -119,7 +117,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
 		int defaultLogoMarginTop = getResources().getDimensionPixelSize(R.dimen.splash_screen_logo_top);
-		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : AndroidUtils.getStatusBarHeight(activity));
 		int textMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
 		int osmTextMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
 		int elementsPaddingLeft = 0;
@@ -134,7 +131,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		} else {
 			elementsPaddingLeft = getNavigationBarWidth();
 		}
-		AndroidUtils.setMargins(logoLayoutParams, 0, logoMarginTop, 0, 0);
+		AndroidUtils.setMargins(logoLayoutParams, 0, defaultLogoMarginTop, 0, 0);
 		logo.setPadding(elementsPaddingLeft, 0, elementsPaddingRight, 0);
 		logo.setLayoutParams(logoLayoutParams);
 		view.addView(logo);
@@ -148,10 +145,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		view.addView(osmText);
 
 		return view;
-	}
-
-	private boolean isSmartphone() {
-		return getResources().getConfiguration().smallestScreenWidthDp < MIN_SCREEN_WIDTH_TABLET_DP;
 	}
 
 	@Override

@@ -5,13 +5,16 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.GeoPolylineParserUtil;
 import net.osmand.util.MapUtils;
 
@@ -56,6 +59,11 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 	@Override
 	public String getStandardUrl() {
 		return "https://router.project-osrm.org/route/v1/";
+	}
+
+	@Override
+	public OnlineRoutingResponse responseByGpxFile(OsmandApplication app, GpxFile gpxFile, boolean initialCalculation, RouteCalculationProgress calculationProgress) {
+		return null;
 	}
 
 	@Override

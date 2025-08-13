@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/import_track_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
 		android:text="@string/import_track_descr"
 		android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
 		android:textColor="?android:textColorSecondary"
-		osmand:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingStart="@dimen/content_padding" />
 

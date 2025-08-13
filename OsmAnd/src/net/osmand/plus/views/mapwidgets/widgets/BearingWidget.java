@@ -13,7 +13,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -89,7 +89,7 @@ public class BearingWidget extends SimpleWidget {
 		LatLon destLatLon = null;
 		List<TargetPoint> points = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 		if (!Algorithms.isEmpty(points)) {
-			destLatLon = points.get(0).point;
+			destLatLon = points.get(0).getLatLon();
 		}
 
 		List<MapMarker> markers = app.getMapMarkersHelper().getMapMarkers();

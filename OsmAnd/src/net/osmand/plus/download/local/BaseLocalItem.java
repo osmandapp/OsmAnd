@@ -4,6 +4,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.utils.AndroidUtils;
+
 public abstract class BaseLocalItem {
 
 	protected final LocalItemType type;
@@ -22,6 +24,11 @@ public abstract class BaseLocalItem {
 
 	@NonNull
 	public abstract String getDescription(@NonNull Context context);
+
+	@NonNull
+	public String getSizeDescription(@NonNull Context context) {
+		return AndroidUtils.formatSize(context, getSize());
+	}
 
 	public abstract long getSize();
 

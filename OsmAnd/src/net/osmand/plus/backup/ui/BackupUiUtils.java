@@ -14,11 +14,15 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -53,9 +57,15 @@ public class BackupUiUtils {
 	}
 
 	@DrawableRes
-	public static int getIconId(@NonNull SettingsItem item) {
+	public static int getIconId(@NonNull Context context, @NonNull SettingsItem item) {
 		if (item instanceof ProfileSettingsItem) {
 			return ((ProfileSettingsItem) item).getAppMode().getIconRes();
+		}
+		if (item instanceof QuickActionsSettingsItem actionsItem) {
+			int iconId = actionsItem.getStateBean().getIconId(context);
+			if (iconId > 0) {
+				return iconId;
+			}
 		}
 		ExportType exportType = ExportType.findBy(item);
 		return exportType != null ? exportType.getIconId() : -1;

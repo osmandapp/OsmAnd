@@ -4,14 +4,15 @@ import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.osm.edit.Entity.REMOVE_TAG_PREFIX;
 
 import android.util.Xml;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.github.scribejava.core.model.Response;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.LatLon;
@@ -35,22 +36,14 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
@@ -67,7 +60,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private static final long NO_CHANGESET_ID = -1;
 
-	private final OsmandApplication ctx;
+	private final OsmandApplication app;
 	private final OsmEditingPlugin plugin;
 
 	private EntityInfo entityInfo;
@@ -77,8 +70,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	private long changeSetId = NO_CHANGESET_ID;
 	private long changeSetTimeStamp = NO_CHANGESET_ID;
 
-	public OpenstreetmapRemoteUtil(OsmandApplication app) {
-		this.ctx = app;
+	public OpenstreetmapRemoteUtil(@NonNull OsmandApplication app) {
+		this.app = app;
 		this.plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 	}
 
@@ -95,7 +88,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	public String uploadGPXFile(String tagstring, String description, String visibility, File f) {
-		OsmOAuthAuthorizationAdapter adapter = new OsmOAuthAuthorizationAdapter(ctx);
+		OsmOAuthAuthorizationAdapter adapter = new OsmOAuthAuthorizationAdapter(app);
 		String url = getSiteApi() + "api/0.6/gpx/create";
 		Map<String, String> additionalData = new LinkedHashMap<String, String>();
 		additionalData.put("description", description);
@@ -108,11 +101,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				true, additionalData);
 	}
 
-	private String sendRequest(String url, String requestMethod, String requestBody, String userOperation,
-	                           boolean doAuthenticate) {
+	private String sendRequest(String url, String requestMethod, String requestBody,
+			String userOperation,
+			boolean doAuthenticate) {
 		log.info("Sending request " + url); //$NON-NLS-1$
 		try {
-			OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(ctx);
+			OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 			if (doAuthenticate) {
 				if (client.isValidToken()) {
 					Response response = client.performRequest(url, requestMethod, requestBody);
@@ -126,35 +120,37 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			}
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-			String msg = ctx.getString(R.string.auth_failed);
+			String msg = app.getString(R.string.auth_failed);
 			log.error(msg, e);
-			showWarning(msg);
+			app.showToastMessage(msg);
 		} catch (MalformedURLException e) {
-			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
+			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
+			app.showToastMessage(MessageFormat.format(app.getString(R.string.shared_string_action_template)
+					+ ": " + app.getString(R.string.shared_string_unexpected_error), userOperation));
 		} catch (IOException e) {
-			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
+			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
+			app.showToastMessage(MessageFormat.format(app.getString(R.string.shared_string_action_template)
+					+ ": " + app.getString(R.string.shared_string_io_error), userOperation));
 		} catch (InterruptedException e) {
-			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
+			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
+			app.showToastMessage(MessageFormat.format(app.getString(R.string.shared_string_action_template)
+					+ ": " + app.getString(R.string.shared_string_unexpected_error), userOperation));
 		} catch (Exception e) {
-			log.error(userOperation + " " + ctx.getString(R.string.failed_op), e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
+			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
+			app.showToastMessage(MessageFormat.format(app.getString(R.string.shared_string_action_template)
+					+ ": " + app.getString(R.string.shared_string_unexpected_error), userOperation));
 		}
 
 		return null;
 	}
 
-	private String performBasicAuthRequest(String url, String requestMethod, String requestBody, String userOperation) throws IOException {
+	private String performBasicAuthRequest(String url, String requestMethod, String requestBody,
+			String userOperation) throws IOException {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+		connection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 		connection.setRequestMethod(requestMethod);
-		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
+		connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
 		StringBuilder responseBody = new StringBuilder();
 		String token = plugin.OSM_USER_NAME_OR_EMAIL.get() + ":" + plugin.OSM_USER_PASSWORD.get(); //$NON-NLS-1$
 		connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -173,9 +169,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		connection.connect();
 		if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 			String msg = userOperation
-					+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage(); //$NON-NLS-1$//$NON-NLS-2$
+					+ " " + app.getString(R.string.failed_op) + " : " + connection.getResponseMessage(); //$NON-NLS-1$//$NON-NLS-2$
 			log.error(msg);
-			showWarning(msg);
+			app.showToastMessage(msg);
 		} else {
 			log.info("Response : " + connection.getResponseMessage()); //$NON-NLS-1$
 			// populate return fields.
@@ -199,7 +195,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return null;
 	}
 
-	public long openChangeSet(String comment) {
+	public long openChangeSet(@Nullable String comment) {
 		long id = -1;
 		StringWriter writer = new StringWriter(256);
 		XmlSerializer ser = Xml.newSerializer();
@@ -218,7 +214,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", "created_by"); //$NON-NLS-1$ //$NON-NLS-2$
-			ser.attribute(null, "v", Version.getFullVersion(ctx)); //$NON-NLS-1$
+			ser.attribute(null, "v", Version.getFullVersion(app)); //$NON-NLS-1$
 			ser.endTag(null, "tag"); //$NON-NLS-1$
 			ser.endTag(null, "changeset"); //$NON-NLS-1$
 			ser.endTag(null, "osm"); //$NON-NLS-1$
@@ -228,7 +224,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			log.error("Unhandled exception", e); //$NON-NLS-1$
 		}
 		String response = sendRequest(
-				getSiteApi() + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), ctx.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
+				getSiteApi() + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), app.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
 		try {
 			if (response != null && response.length() > 0) {
 				log.debug(response);
@@ -240,27 +236,28 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return id;
 	}
 
-	private void writeNode(Node n, EntityInfo i, XmlSerializer ser, long changeSetId, String user)
+	private void writeNode(@NonNull Node node, @Nullable EntityInfo info,
+			@NonNull XmlSerializer ser, long changeSetId, String user)
 			throws IllegalArgumentException, IllegalStateException, IOException {
 		ser.startTag(null, "node"); //$NON-NLS-1$
-		ser.attribute(null, "id", n.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
-		ser.attribute(null, "lat", n.getLatitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
-		ser.attribute(null, "lon", n.getLongitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
-		if (i != null) {
-			// ser.attribute(null, "timestamp", i.getETimestamp());
-			// ser.attribute(null, "uid", i.getUid());
-			// ser.attribute(null, "user", i.getUser());
-			ser.attribute(null, "visible", i.getVisible()); //$NON-NLS-1$
-			ser.attribute(null, "version", i.getVersion()); //$NON-NLS-1$
+		ser.attribute(null, "id", node.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+		ser.attribute(null, "lat", node.getLatitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+		ser.attribute(null, "lon", node.getLongitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+		if (info != null) {
+			// ser.attribute(null, "timestamp", info.getETimestamp());
+			// ser.attribute(null, "uid", info.getUid());
+			// ser.attribute(null, "user", info.getUser());
+			ser.attribute(null, "visible", info.getVisible()); //$NON-NLS-1$
+			ser.attribute(null, "version", info.getVersion()); //$NON-NLS-1$
 		}
 		ser.attribute(null, "changeset", changeSetId + ""); //$NON-NLS-1$ //$NON-NLS-2$
 
-		writeTags(n, ser);
+		writeTags(node, ser);
 		ser.endTag(null, "node"); //$NON-NLS-1$
 	}
 
-	private void writeWay(Way way, EntityInfo i, XmlSerializer ser, long changeSetId, String user)
-			throws IllegalArgumentException, IllegalStateException, IOException {
+	private void writeWay(@NonNull Way way, @Nullable EntityInfo i, @NonNull XmlSerializer ser,
+			long changeSetId, String user) throws IllegalArgumentException, IllegalStateException, IOException {
 		ser.startTag(null, "way"); //$NON-NLS-1$
 		ser.attribute(null, "id", way.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (i != null) {
@@ -312,8 +309,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity commitEntityImpl(@NonNull Action action, Entity entity, EntityInfo info, String comment,
-	                               boolean closeChangeSet, Set<String> changedTags) {
+	public Entity commitEntityImpl(@NonNull Action action, @NonNull Entity entity,
+			@Nullable EntityInfo info, @Nullable String comment, boolean closeChangeSet,
+			@Nullable Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
 			changeSetTimeStamp = System.currentTimeMillis();
@@ -331,10 +329,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.startDocument("UTF-8", true); //$NON-NLS-1$
 				ser.startTag(null, "osmChange"); //$NON-NLS-1$
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
-				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
+				ser.attribute(null, "generator", Version.getAppName(app)); //$NON-NLS-1$
 				ser.startTag(null, OsmPoint.stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
-				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
+				ser.attribute(null, "generator", Version.getAppName(app)); //$NON-NLS-1$
 				if (entity instanceof Node) {
 					writeNode((Node) entity, info, ser, changeSetId, plugin.OSM_USER_NAME_OR_EMAIL.get());
 				} else if (entity instanceof Way) {
@@ -347,7 +345,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				log.error("Unhandled exception", e); //$NON-NLS-1$
 			}
 			String res = sendRequest(getSiteApi() + "api/0.6/changeset/" + changeSetId + "/upload", "POST", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-					writer.getBuffer().toString(), ctx.getString(R.string.commiting_node), true);
+					writer.getBuffer().toString(), app.getString(R.string.commiting_node), true);
 			log.debug(res + ""); //$NON-NLS-1$
 			if (res != null) {
 				if (OsmPoint.Action.CREATE == action) {
@@ -381,7 +379,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	public void closeChangeSet() {
 		if (changeSetId != NO_CHANGESET_ID) {
 			String response = sendRequest(
-					getSiteApi() + "api/0.6/changeset/" + changeSetId + "/close", "PUT", "", ctx.getString(R.string.closing_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					getSiteApi() + "api/0.6/changeset/" + changeSetId + "/close", "PUT", "", app.getString(R.string.closing_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			log.info("Response : " + response); //$NON-NLS-1$
 			changeSetId = NO_CHANGESET_ID;
 		}
@@ -393,7 +391,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
-					ctx.getString(R.string.loading_poi_obj) + entityId, false); //$NON-NLS-1$ //$NON-NLS-2$
+					app.getString(R.string.loading_poi_obj) + entityId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.setConvertTagsToLC(false);
@@ -439,9 +437,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			}
 
 		} catch (IOException | NullPointerException | XmlPullParserException e) {
-			log.error("Loading entity failed " + entityId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
-					Toast.LENGTH_LONG).show();
+			log.error("Loading entity failed " + entityId, e);
+			app.showToastMessage(R.string.shared_string_io_error);
 		}
 		return null;
 	}
@@ -456,18 +453,19 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return entity.getTagKeySet().contains(REMOVE_TAG_PREFIX + tag);
 	}
 
+	@Nullable
 	@Override
 	public Entity loadEntity(@NonNull MapObject object) {
-		EntityType type = OsmEditingPlugin.getOsmEntityType(object);
+		EntityType type = ObfConstants.getOsmEntityType(object);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
 		boolean isWay = type == EntityType.WAY;
-		long entityId = OsmEditingPlugin.getOsmObjectId(object);
+		long entityId = ObfConstants.getOsmObjectId(object);
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
-					ctx.getString(R.string.loading_poi_obj) + entityId, false);
+					app.getString(R.string.loading_poi_obj) + entityId, false);
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.setConvertTagsToLC(false);
@@ -514,9 +512,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			}
 
 		} catch (Exception e) {
-			log.error("Loading entity failed " + entityId, e); //$NON-NLS-1$
-			ctx.runInUIThread(() ->
-					Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show());
+			log.error("Loading entity failed " + entityId, e);
+			app.showToastMessage(R.string.shared_string_io_error);
 		}
 		return null;
 	}
@@ -539,9 +536,5 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			}
 		}
 		return entity;
-	}
-
-	private void showWarning(String msg) {
-		ctx.runInUIThread(() -> Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show());
 	}
 }

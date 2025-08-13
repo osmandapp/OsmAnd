@@ -9,10 +9,11 @@ import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -28,7 +29,7 @@ public class OsmandMap {
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 	private final OsmandMapTileView mapView;
 	private final MapLayers mapLayers;
-	private final MapActions mapActions;
+	private final MapActivityActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
 	private List<RenderingViewSetupListener> renderingViewSetupListeners = new ArrayList<>();
@@ -51,7 +52,7 @@ public class OsmandMap {
 	public OsmandMap(@NonNull OsmandApplication app) {
 		this.app = app;
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
-		mapActions = new MapActions(app);
+		mapActions = new MapActivityActions(app);
 
 		int width;
 		int height;
@@ -99,7 +100,7 @@ public class OsmandMap {
 	}
 
 	@NonNull
-	public MapActions getMapActions() {
+	public MapActivityActions getMapActions() {
 		return mapActions;
 	}
 
@@ -118,9 +119,6 @@ public class OsmandMap {
 
 	public void setupRenderingView() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		for (RenderingViewSetupListener listener : renderingViewSetupListeners) {
-			listener.onSetupRenderingView();
-		}
 		NavigationSession navigationSession = app.getCarNavigationSession();
 		if (navigationSession != null) {
 			if (navigationSession.hasStarted()) {
@@ -135,6 +133,9 @@ public class OsmandMap {
 		} else if (mapView.getMapActivity() == null) {
 			app.getMapViewTrackingUtilities().setMapView(null);
 		}
+		for (RenderingViewSetupListener listener : renderingViewSetupListeners) {
+			listener.onSetupRenderingView();
+		}
 	}
 
 	public float getTextScale() {
@@ -147,8 +148,7 @@ public class OsmandMap {
 	}
 
 	public float getMapDensity() {
-		float scale = app.getSettings().MAP_DENSITY.get();
-		return scale * getCarDensityScaleCoef();
+		return app.getSettings().MAP_DENSITY.get();
 	}
 
 	public float getCarDensityScaleCoef() {
@@ -177,20 +177,20 @@ public class OsmandMap {
 				top = Math.max(top, l.getLatitude());
 				bottom = Math.min(bottom, l.getLatitude());
 			}
-			List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+			List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 			if (rh.getRoute().hasMissingMaps()) {
-				TargetPointsHelper.TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
+				TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
 				if (pointToStart != null) {
 					targetPoints.add(pointToStart);
 				}
 			}
-			for (TargetPointsHelper.TargetPoint l : targetPoints) {
+			for (TargetPoint l : targetPoints) {
 				left = Math.min(left, l.getLongitude());
 				right = Math.max(right, l.getLongitude());
 				top = Math.max(top, l.getLatitude());
 				bottom = Math.min(bottom, l.getLatitude());
 			}
-			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			if (!portrait) {
@@ -198,7 +198,7 @@ public class OsmandMap {
 			} else {
 				tileBoxHeightPx = tb.getPixHeight() - leftBottomPaddingPx;
 			}
-			getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+			getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, AndroidUtils.getStatusBarHeight(app));
 		}
 	}
 }

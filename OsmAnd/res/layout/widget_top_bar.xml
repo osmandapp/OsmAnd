@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.views.mapwidgets.TopToolbarView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/widget_top_bar"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:clickable="true"
+	android:visibility="gone"
+	tools:visibility="visible">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/widget_top_bar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:minHeight="@dimen/dashboard_map_toolbar"
+			android:orientation="horizontal">
+
+			<ImageButton
+				android:id="@+id/widget_top_bar_back_button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="@dimen/toolbar_height"
+				android:layout_height="@dimen/toolbar_height"
+				android:layout_gravity="top"
+				android:contentDescription="@string/back_to_search"
+				app:srcCompat="@drawable/ic_arrow_back" />
+
+			<LinearLayout
+				android:id="@+id/widget_top_bar_title_layout"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="1"
+				android:orientation="vertical"
+				android:paddingTop="@dimen/toolbar_title_padding_top"
+				android:paddingBottom="@dimen/toolbar_title_padding_bottom">
+
+				<TextView
+					android:id="@+id/widget_top_bar_title"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="@null"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:lines="1"
+					android:singleLine="true"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/abc_text_size_medium_material"
+					tools:text="OsmAnd+ 50% discount" />
+
+				<TextView
+					android:id="@+id/widget_top_bar_description"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="@null"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_sub_text_size"
+					android:visibility="gone"
+					tools:text="New version of OsmAnd+ with 50% discount" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/widget_top_bar_text_btn"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_half"
+					android:background="?attr/selectableItemBackground"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="?attr/wikivoyage_active_color"
+					android:textSize="@dimen/default_list_text_size"
+					android:visibility="gone"
+					app:typefaceWeight="medium"
+					tools:text="Some button"
+					tools:visibility="visible" />
+
+			</LinearLayout>
+
+			<ImageButton
+				android:id="@+id/widget_top_bar_action_button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="48dp"
+				android:layout_height="@dimen/toolbar_height"
+				android:layout_gravity="top"
+				android:contentDescription="@string/shared_string_refresh"
+				android:visibility="gone"
+				app:srcCompat="@drawable/ic_action_refresh_dark" />
+
+			<ImageButton
+				android:id="@+id/widget_top_bar_close_button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="48dp"
+				android:layout_height="@dimen/toolbar_height"
+				android:layout_gravity="top"
+				android:contentDescription="@string/shared_string_close"
+				app:srcCompat="@drawable/ic_action_remove_dark" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/widget_top_bar_save"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/toolbar_height"
+				android:background="@null"
+				android:contentDescription="@string/shared_string_save"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:lines="1"
+				android:paddingEnd="@dimen/content_padding"
+				android:singleLine="true"
+				android:text="@string/shared_string_save"
+				android:textAllCaps="true"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_desc_text_size"
+				android:visibility="gone"
+				app:typefaceWeight="medium"
+				tools:visibility="visible" />
+
+			<androidx.appcompat.widget.SwitchCompat
+				android:id="@+id/widget_top_bar_switch"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/toolbar_height"
+				android:paddingEnd="@dimen/content_padding"
+				android:visibility="gone"
+				tools:visibility="visible" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/widget_top_bar_bottom_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:animateLayoutChanges="true"
+			android:orientation="vertical"
+			android:visibility="gone" />
+
+		<FrameLayout
+			android:id="@+id/widget_top_bar_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:foreground="@drawable/bg_contextmenu_shadow"
+			android:foregroundGravity="top|fill_horizontal" />
+
+	</LinearLayout>
+
+</net.osmand.plus.views.mapwidgets.TopToolbarView>

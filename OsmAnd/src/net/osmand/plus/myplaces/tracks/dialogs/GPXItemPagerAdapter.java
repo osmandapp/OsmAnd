@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
@@ -38,20 +38,26 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ChartModeBottomSheet;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.plus.charts.GraphModeListener;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GpxUtils;
@@ -74,6 +80,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +93,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private static final int[] TRIPLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.center_button_container, R.layout.right_button_container};
 
 	private final OsmandApplication app;
+	private final MapActivity mapActivity;
 	private final UiUtilities iconsCache;
 
 	private final TrackDisplayHelper displayHelper;
@@ -94,7 +102,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private WptPt selectedWpt;
 	private TrkSegment segment;
 	private GpxDisplayItem gpxItem;
-	private GPXTrackAnalysis analysis;
+	private GpxTrackAnalysis analysis;
 	private GPXTabItemType[] tabTypes;
 
 	private final SparseArray<View> views = new SparseArray<>();
@@ -105,14 +113,33 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private final boolean showEmptyAltitudeTab;
 	private boolean hideStatistics;
 	private boolean hideJoinGapsBottomButtons;
+	private boolean useSingleMainTab;
 	private int chartHMargin;
+
+	private ListStringPreference xAxisPreference;
+	private CommonPreference<GPXDataSetAxisType> yAxisPreference;
+	private GPXDataSetAxisType selectedMainAxisType = GPXDataSetAxisType.DISTANCE;
+	private List<GPXDataSetType> selectedMainSetTypes = new ArrayList<>(Collections.singleton(GPXDataSetType.ALTITUDE));
+
+	public void setUseSingleMainTab(boolean useSingleMainTab) {
+		this.useSingleMainTab = useSingleMainTab;
+	}
+
+	public boolean isUseSingleMainTab() {
+		return useSingleMainTab;
+	}
+
+	public void setAxisPreferences(@NonNull ListStringPreference xAxisPreference, @NonNull CommonPreference<GPXDataSetAxisType> yAxisPreference){
+		this.xAxisPreference = xAxisPreference;
+		this.yAxisPreference = yAxisPreference;
+	}
 
 	public void setChartHMargin(int chartHMargin) {
 		this.chartHMargin = chartHMargin;
 	}
 
 	private boolean isShowCurrentTrack() {
-		return displayHelper.getGpx() != null && displayHelper.getGpx().showCurrentTrack;
+		return displayHelper.getGpx() != null && displayHelper.getGpx().isShowCurrentTrack();
 	}
 
 	public void setHideStatistics(boolean hideStatistics) {
@@ -128,13 +155,15 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	                           @NonNull TrackDisplayHelper displayHelper,
 	                           @NonNull SegmentActionsListener actionsListener,
 	                           boolean nightMode,
-	                           boolean showEmptyAltitudeTab) {
+	                           boolean showEmptyAltitudeTab,
+	                           @Nullable MapActivity mapActivity) {
 		this.app = app;
 		this.gpxItem = gpxItem;
 		this.displayHelper = displayHelper;
 		this.nightMode = nightMode;
 		this.showEmptyAltitudeTab = showEmptyAltitudeTab;
 		this.actionsListener = actionsListener;
+		this.mapActivity = mapActivity;
 		iconsCache = app.getUIUtilities();
 
 		updateAnalysis();
@@ -144,13 +173,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void updateAnalysis() {
 		analysis = null;
 		if (isShowCurrentTrack()) {
-			GPXFile gpxFile = displayHelper.getGpx();
+			GpxFile gpxFile = displayHelper.getGpx();
 			if (gpxFile != null && !gpxFile.isEmpty()) {
-				analysis = gpxFile.getAnalysis(0);
+				analysis = gpxFile.getAnalysis(0, null, null, PluginsHelper.getTrackPointsAnalyser());
 				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 			}
 		} else if (getFilteredGpxFile() != null) {
-			GPXFile gpxFile = getFilteredGpxFile();
+			GpxFile gpxFile = getFilteredGpxFile();
 			analysis = gpxFile.getAnalysis(System.currentTimeMillis());
 			gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 		} else if (gpxItem != null) {
@@ -159,8 +188,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	@Nullable
-	private GPXFile getFilteredGpxFile() {
-		String gpxPath = displayHelper.getGpx() != null ? displayHelper.getGpx().path : null;
+	private GpxFile getFilteredGpxFile() {
+		String gpxPath = displayHelper.getGpx() != null ? displayHelper.getGpx().getPath() : null;
 		if (gpxPath != null) {
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
 			if (selectedGpxFile != null && selectedGpxFile.getFilteredSelectedGpxFile() != null) {
@@ -172,6 +201,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void fetchTabTypes() {
 		List<GPXTabItemType> tabTypeList = new ArrayList<>();
+		if (useSingleMainTab) {
+			tabTypeList.add(GPX_TAB_ITEM_GENERAL);
+			tabTypes = tabTypeList.toArray(new GPXTabItemType[0]);
+			return;
+		}
+
 		boolean showCurrentTrack = isShowCurrentTrack();
 		if (showCurrentTrack) {
 			if (analysis != null && (analysis.hasElevationData() || analysis.hasSpeedData())) {
@@ -198,16 +233,16 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 		boolean withoutGaps = true;
 		if (isShowCurrentTrack()) {
-			GPXFile gpxFile = displayHelper.getGpx();
+			GpxFile gpxFile = displayHelper.getGpx();
 			withoutGaps = !app.getSavingTrackHelper().getCurrentTrack().isJoinSegments() && gpxFile != null
-					&& (Algorithms.isEmpty(gpxFile.tracks) || gpxFile.tracks.get(0).generalTrack);
+					&& (Algorithms.isEmpty(gpxFile.getTracks()) || gpxFile.getTracks().get(0).isGeneralTrack());
 		} else if (gpxItem != null) {
 			GpxDataItem item = displayHelper.getGpxDataItem();
 			boolean joinSegments = item != null ? item.getParameter(JOIN_SEGMENTS) : false;
 			withoutGaps = gpxItem.isGeneralTrack() && joinSegments;
 		}
 		if (chart != null && analysis != null) {
-			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);
+			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, selectedMainAxisType, withoutGaps);
 			if (!Algorithms.isEmpty(dataSets)) {
 				dataSetsMap.remove(tabType);
 			}
@@ -234,7 +269,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
 		TrkSegment segment = getTrackSegment(chart);
 		if (!Algorithms.isEmpty(dataSets) && segment != null) {
-			GPXFile gpxFile = gpxItem.group.getGpxFile();
+			GpxFile gpxFile = gpxItem.group.getGpxFile();
 			boolean joinSegments = displayHelper.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
@@ -406,9 +441,25 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void setupGeneralTab(View view, ElevationChart chart, int position) {
 		if (analysis != null) {
+			if (useSingleMainTab) {
+				setupGraphModeItem(view);
+			}
+
 			if (analysis.hasElevationData() || analysis.hasSpeedData()) {
+				GPXDataSetType firstType = ALTITUDE;
+				GPXDataSetType secondType = null;
+				if (useSingleMainTab) {
+					if (!Algorithms.isEmpty(selectedMainSetTypes)) {
+						firstType = selectedMainSetTypes.get(0);
+					}
+					if (selectedMainSetTypes.size() > 1) {
+						secondType = selectedMainSetTypes.get(1);
+					}
+				} else {
+					secondType = SPEED;
+				}
 				ChartUtils.setupElevationChart(chart);
-				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
+				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, firstType, secondType)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
 			} else {
@@ -437,6 +488,109 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
+	private void updateGraphModeDescription(@NonNull View view) {
+		TextView graphModeDescription = view.findViewById(R.id.graph_mode_description);
+		GPXDataSetType firstType = selectedMainSetTypes.get(0);
+		GPXDataSetType secondType = null;
+		if (selectedMainSetTypes.size() > 1) {
+			secondType = selectedMainSetTypes.get(1);
+		}
+
+		String xAxis;
+		if (secondType != null) {
+			xAxis = app.getString(R.string.ltr_or_rtl_combine_via_comma, app.getString(firstType.getTitleId()), app.getString(secondType.getTitleId()));
+		} else {
+			xAxis = app.getString(firstType.getTitleId());
+		}
+		String yAxis = app.getString(selectedMainAxisType.getTitleId());
+		String description = app.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, xAxis, yAxis);
+		graphModeDescription.setText(description);
+	}
+
+	public void setupSelectedAxisTypes() {
+		if (xAxisPreference != null && yAxisPreference != null) {
+			getSavedSetTypes();
+			getSavedSetAxisType();
+		}
+	}
+
+	private void getSavedSetTypes() {
+		selectedMainSetTypes.clear();
+		List<String> setTypes = xAxisPreference.getStringsList();
+		if (!Algorithms.isEmpty(setTypes)) {
+			List<GPXDataSetType[]> availableSetType = new ArrayList<>();
+			availableSetType.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(analysis));
+			availableSetType.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(analysis));
+			for (String type : setTypes) {
+				for (GPXDataSetType[] dataSetTypes : availableSetType) {
+					if (type.equals(dataSetTypes[0].name())) {
+						selectedMainSetTypes.add(GPXDataSetType.valueOf(type));
+					}
+				}
+			}
+		}
+		if (Algorithms.isEmpty(selectedMainSetTypes)) {
+			selectedMainSetTypes = new ArrayList<>(Collections.singleton(GPXDataSetType.ALTITUDE));
+		}
+	}
+
+	private void getSavedSetAxisType() {
+		GPXDataSetAxisType type = yAxisPreference.get();
+		List<GPXDataSetAxisType> availableAxisType = ChartModeBottomSheet.getAvailableXTypes(analysis);
+		for (GPXDataSetAxisType availableType : availableAxisType) {
+			if (type == availableType) {
+				selectedMainAxisType = type;
+				break;
+			}
+		}
+		if (Algorithms.isEmpty(selectedMainSetTypes)) {
+			selectedMainAxisType = GPXDataSetAxisType.DISTANCE;
+		}
+	}
+
+	private void setupGraphModeItem(@NonNull View view) {
+		setupSelectedAxisTypes();
+		View graphMode = view.findViewById(R.id.graph_mode);
+		graphMode.setVisibility(View.VISIBLE);
+		View graphModeButton = graphMode.findViewById(R.id.graph_mode_button);
+		updateGraphModeDescription(view);
+		graphModeButton.setOnClickListener(v -> ChartModeBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), new GraphModeListener() {
+			@Override
+			public void onGraphModeChanged(@NonNull GPXDataSetAxisType gpxDataSetAxisType, @NonNull List<GPXDataSetType> gpxDataSetTypes) {
+				selectedMainAxisType = gpxDataSetAxisType;
+				selectedMainSetTypes = gpxDataSetTypes;
+				if (xAxisPreference != null) {
+					List<String> names = new ArrayList<>();
+					for (GPXDataSetType type : gpxDataSetTypes) {
+						names.add(type.name());
+					}
+					xAxisPreference.setStringsList(names);
+				}
+				if (yAxisPreference != null) {
+					yAxisPreference.set(gpxDataSetAxisType);
+				}
+				gpxItem.chartAxisType = gpxDataSetAxisType;
+				updateGraphModeDescription(view);
+				updateGraph(0);
+			}
+
+			@Override
+			public GpxTrackAnalysis getAnalysis() {
+				return analysis;
+			}
+
+			@Override
+			public GPXDataSetAxisType getSelectedAxisType() {
+				return selectedMainAxisType;
+			}
+
+			@Override
+			public List<GPXDataSetType> getSelectedDataSetTypes() {
+				return selectedMainSetTypes;
+			}
+		}, true));
+	}
+
 	public static void setupGeneralStatisticsIcons(@NonNull View container, @NonNull UiUtilities iconsCache) {
 		((ImageView) container.findViewById(R.id.distance_icon))
 				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
@@ -448,7 +602,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end_16));
 	}
 
-	public static void setupTimeSpanStatistics(@NonNull View container, @NonNull GPXTrackAnalysis analysis) {
+	public static void setupTimeSpanStatistics(@NonNull View container, @NonNull GpxTrackAnalysis analysis) {
 		DateFormat timeFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 		DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
@@ -471,7 +625,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			if (!chartClicked) {
 				chartClicked = true;
 				if (selectedWpt != null) {
-					actionsListener.onPointSelected(segment, selectedWpt.lat, selectedWpt.lon);
+					actionsListener.onPointSelected(segment, selectedWpt.getLat(), selectedWpt.getLon());
 				}
 			}
 		});
@@ -505,7 +659,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				WptPt wpt = getPoint(chart, h.getX());
 				selectedWpt = wpt;
 				if (chartClicked && wpt != null) {
-					actionsListener.onPointSelected(segment, wpt.lat, wpt.lon);
+					actionsListener.onPointSelected(segment, wpt.getLat(), wpt.getLon());
 				}
 			}
 
@@ -574,7 +728,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 						chart.highlightValue(h);
 						WptPt wpt = getPoint(chart, h.getX());
 						if (wpt != null) {
-							actionsListener.onPointSelected(segment, wpt.lat, wpt.lon);
+							actionsListener.onPointSelected(segment, wpt.getLat(), wpt.getLon());
 						}
 					}
 				}
@@ -715,10 +869,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	public static void updateGeneralTabInfo(@NonNull View container, @NonNull OsmandApplication app,
-	                                        @NonNull GPXTrackAnalysis analysis,
+	                                        @NonNull GpxTrackAnalysis analysis,
 	                                        boolean joinSegments, boolean generalTrack) {
-		float totalDistance = !joinSegments && generalTrack ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
-		float timeSpan = !joinSegments && generalTrack ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
+		float totalDistance = !joinSegments && generalTrack ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
+		float timeSpan = !joinSegments && generalTrack ? analysis.getTimeSpanWithoutGaps() : analysis.getDurationInSeconds() * 1000;
+		if(timeSpan == 0) {
+			timeSpan = analysis.getExpectedRouteDuration();
+		}
 
 		TextView distanceText = container.findViewById(R.id.distance_text);
 		TextView durationText = container.findViewById(R.id.duration_text);
@@ -728,7 +885,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	public static void updateAltitudeTabInfo(@NonNull View container, @NonNull OsmandApplication app,
-	                                         @NonNull GPXTrackAnalysis analysis) {
+	                                         @NonNull GpxTrackAnalysis analysis) {
 		String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
 		String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 
@@ -744,11 +901,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	public static void updateSpeedTabInfo(@NonNull View container, @NonNull OsmandApplication app,
-	                                      @NonNull GPXTrackAnalysis analysis,
+	                                      @NonNull GpxTrackAnalysis analysis,
 	                                      boolean joinSegments, boolean generalTrack) {
-		long timeMoving = !joinSegments && generalTrack ? analysis.timeMovingWithoutGaps : analysis.getTimeMoving();
+		long timeMoving = !joinSegments && generalTrack ? analysis.getTimeMovingWithoutGaps() : analysis.getTimeMoving();
 		float totalDistanceMoving = !joinSegments && generalTrack ?
-				analysis.totalDistanceMovingWithoutGaps : analysis.getTotalDistanceMoving();
+				analysis.getTotalDistanceMovingWithoutGaps() : analysis.getTotalDistanceMoving();
 
 		TextView averageSpeedText = container.findViewById(R.id.average_text);
 		TextView maxSpeedText = container.findViewById(R.id.max_text);
@@ -774,7 +931,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 					if (ds != null && ds.size() > 0) {
 						OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-						gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / dataSet.getDivX());
+						gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.getDistance() / dataSet.getDivX());
 						chart.highlightValue(gpxItem.chartHighlightPos, 0);
 					}
 				}
@@ -785,7 +942,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	public boolean isTabsVisible() {
-		GPXFile gpxFile = displayHelper.getGpx();
+		GpxFile gpxFile = displayHelper.getGpx();
 		if (gpxFile != null && getCount() > 0 && views.size() > 0) {
 			for (int i = 0; i < getCount(); i++) {
 				LineChart lc = getViewAtPosition(i).findViewById(R.id.chart);
@@ -809,12 +966,22 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private void updateGraphTab(int position) {
-		GPXDataSetType firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
+		GPXDataSetType firstType = ALTITUDE;
 		GPXDataSetType secondType = null;
-		if (tabTypes[position] == GPX_TAB_ITEM_ALTITUDE) {
-			secondType = SLOPE;
-		} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {
-			secondType = SPEED;
+		if (useSingleMainTab) {
+			if (!Algorithms.isEmpty(selectedMainSetTypes)) {
+				firstType = selectedMainSetTypes.get(0);
+			}
+			if (selectedMainSetTypes.size() > 1) {
+				secondType = selectedMainSetTypes.get(1);
+			}
+		} else {
+			firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
+			if (tabTypes[position] == GPX_TAB_ITEM_ALTITUDE) {
+				secondType = SLOPE;
+			} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {
+				secondType = SPEED;
+			}
 		}
 
 		View container = getViewAtPosition(position);
@@ -846,10 +1013,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private TrkSegment getTrkSegment() {
-		for (Track track : gpxItem.group.getGpxFile().tracks) {
-			if (!track.generalTrack && !gpxItem.isGeneralTrack() || track.generalTrack && gpxItem.isGeneralTrack()) {
-				for (TrkSegment segment : track.segments) {
-					if (segment.points.size() > 0 && segment.points.get(0).equals(gpxItem.analysis.locationStart)) {
+		for (Track track : gpxItem.group.getGpxFile().getTracks()) {
+			if (!track.isGeneralTrack() && !gpxItem.isGeneralTrack() || track.isGeneralTrack() && gpxItem.isGeneralTrack()) {
+				for (TrkSegment segment : track.getSegments()) {
+					if (segment.getPoints().size() > 0 && segment.getPoints().get(0).equals(gpxItem.analysis.getLocationStart())) {
 						return segment;
 					}
 				}
@@ -878,8 +1045,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				if (segment != null) {
 					OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
 					float distance = gpxItem.chartHighlightPos * dataSet.getDivX();
-					for (WptPt p : segment.points) {
-						if (p.distance >= distance) {
+					for (WptPt p : segment.getPoints()) {
+						if (p.getDistance() >= distance) {
 							wpt = p;
 							break;
 						}
@@ -895,12 +1062,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	@Nullable
-	public static TrkSegment getSegmentForAnalysis(GpxDisplayItem gpxItem, GPXTrackAnalysis analysis) {
-		for (Track track : gpxItem.group.getGpxFile().tracks) {
-			for (TrkSegment segment : track.segments) {
-				int size = segment.points.size();
-				if (size > 0 && segment.points.get(0).equals(analysis.locationStart)
-						&& segment.points.get(size - 1).equals(analysis.locationEnd)) {
+	public static TrkSegment getSegmentForAnalysis(GpxDisplayItem gpxItem, GpxTrackAnalysis analysis) {
+		for (Track track : gpxItem.group.getGpxFile().getTracks()) {
+			for (TrkSegment segment : track.getSegments()) {
+				List<WptPt> points = segment.getPoints();
+				int size = points.size();
+				if (size > 0 && points.get(0).equals(analysis.getLocationStart())
+						&& points.get(size - 1).equals(analysis.getLocationEnd())) {
 					return segment;
 				}
 			}

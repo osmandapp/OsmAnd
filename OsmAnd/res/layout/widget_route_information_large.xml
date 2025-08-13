@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/simple_widget_large_height"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!-- Button with tappable area -->
+    <FrameLayout
+        android:id="@+id/button_tappable_area"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/button_container"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp">
+
+            <include layout="@layout/widget_route_information_button" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <!-- Primary block -->
+    <FrameLayout
+        android:id="@+id/primary_block"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1">
+
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
+            android:id="@+id/primary_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|top"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="36sp"
+            app:textViewType="multi"
+            app:multiTextViewEx_primaryText="20:33"
+            app:multiTextViewEx_secondaryText="13 h 2 m"
+            app:multiTextViewEx_separator=" • "
+            app:multiTextViewEx_separatorColor="?android:textColorSecondary" />
+
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
+            android:id="@+id/secondary_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|bottom"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="24sp"
+            app:textViewType="multi"
+            app:multiTextViewEx_separator=" • "
+            app:multiTextViewEx_separatorColor="?android:textColorSecondary"
+            tools:multiTextViewEx_primaryText="331 km"
+            tools:multiTextViewEx_primaryTextColor="?android:textColorSecondary" />
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/blocks_divider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginVertical="16dp"
+        android:background="?android:listDivider" />
+
+    <!-- Secondary block -->
+    <FrameLayout
+        android:id="@+id/secondary_block"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="12dp">
+
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
+            android:id="@+id/primary_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|top"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="36sp"
+            tools:text="01:27" />
+
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
+            android:id="@+id/secondary_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|bottom"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="24sp"
+            tools:text="9 h 23 m" />
+
+    </FrameLayout>
+
+</LinearLayout>

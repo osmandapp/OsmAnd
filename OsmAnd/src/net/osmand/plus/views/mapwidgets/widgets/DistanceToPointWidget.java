@@ -12,9 +12,10 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -23,8 +24,8 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public abstract class DistanceToPointWidget extends SimpleWidget {
 
-	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
-	private static final int DESTINATION_REACHED_THRESHOLD = 20;
+	public static final int DISTANCE_CHANGE_THRESHOLD = 10;
+	public static final int DESTINATION_REACHED_THRESHOLD = 20;
 
 	private final OsmandMapTileView view;
 	private final float[] calculations = new float[1];
@@ -63,7 +64,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 				setText(isVerticalWidget() ? NO_VALUE : null, null);
 			} else {
 				FormattedValue formattedDistance = OsmAndFormatter
-						.getFormattedDistanceValue(cachedMeters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+						.getFormattedDistanceValue(cachedMeters, app, OsmAndFormatterParams.USE_LOWER_BOUNDS);
 				setText(formattedDistance.value, formattedDistance.unit);
 			}
 		}
@@ -95,7 +96,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 		@Override
 		public LatLon getPointToNavigate() {
 			TargetPoint targetPoint = mapActivity.getPointToNavigate();
-			return targetPoint == null ? null : targetPoint.point;
+			return targetPoint == null ? null : targetPoint.getLatLon();
 		}
 
 		@Override
@@ -127,7 +128,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 		@Override
 		public LatLon getPointToNavigate() {
 			TargetPoint targetPoint = targetPointsHelper.getFirstIntermediatePoint();
-			return targetPoint == null ? null : targetPoint.point;
+			return targetPoint == null ? null : targetPoint.getLatLon();
 		}
 
 		@Override

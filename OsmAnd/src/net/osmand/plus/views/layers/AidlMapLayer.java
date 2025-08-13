@@ -4,14 +4,7 @@ import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -31,11 +24,13 @@ import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -124,7 +119,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		super.initLayer(view);
 
 		Resources res = view.getResources();
-		boolean night = getApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 
 		pointInnerCircle = new Paint();
 		pointInnerCircle.setColor(getColor(R.color.poi_background));
@@ -141,8 +136,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		bitmapPaint.setDither(true);
 		bitmapPaint.setFilterBitmap(true);
 
-		nightMode = night;
-		recreateBitmaps(night);
+		this.nightMode = nightMode;
+		recreateBitmaps(nightMode);
 
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
@@ -172,6 +167,12 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
+	protected void updateResources() {
+		super.updateResources();
+		recreateBitmaps(nightMode);
+	}
+
+	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 
@@ -192,7 +193,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					|| nightModeChanged || pointImagesSize != pointImages.size()
 					|| (pointsType == PointsType.STANDARD && radius != getRadiusPoi(tileBox))
 					|| (selectedPointId != null && !selectedPointId.equals(getSelectedContextMenuPointId()))
-					|| (selectedPointId == null && getSelectedContextMenuPointId() != null)) {
+					|| (selectedPointId == null && getSelectedContextMenuPointId() != null)
+					|| pointsLocationChanged()) {
 				clearAidlTileProvider();
 			}
 			pointImagesSize = pointImages.size();
@@ -239,9 +241,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 				}
 			}
-
-			if (imageRequests.size() > 0) {
-				executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
+			if (!imageRequests.isEmpty()) {
+				OsmAndTaskManager.executeTask(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
 			}
 		}
 		mapTextLayer.putData(this, displayedPoints);
@@ -327,10 +328,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (isLayerEnabled()) {
-			getFromPoint(tileBox, point, o);
+			collectFromPoint(result);
 		}
 	}
 
@@ -440,13 +441,28 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return r * 3 / 2;
 	}
 
-	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AidlMapPointWrapper> points) {
+	private boolean pointsLocationChanged() {
+		if (displayedPoints.size() != aidlLayer.getPointsSize()) {
+			return true;
+		}
+		for (AidlMapPointWrapper point : displayedPoints) {
+			AidlMapPointWrapper updatedPoint = aidlLayer.getPoint(point.getId());
+			if (updatedPoint != null && !point.getLocation().equals(updatedPoint.getLocation())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void collectFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		List<AidlMapPointWrapper> aidlPoints = aidlLayer.getPoints();
-		if (view == null || Algorithms.isEmpty(aidlPoints) || tb.getZoom() < START_ZOOM) {
+		if (view == null || Algorithms.isEmpty(aidlPoints) || tileBox.getZoom() < START_ZOOM) {
 			return;
 		}
 
-		int radius = getPointRadius(tb);
+		int radius = getPointRadius(tileBox);
 
 		MapRendererView mapRenderer = getMapRenderer();
 		List<PointI> touchPolygon31 = null;
@@ -462,9 +478,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			if (position != null) {
 				boolean add = mapRenderer != null
 						? NativeUtilities.isPointInsidePolygon(position, touchPolygon31)
-						: tb.isLatLonNearPixel(position, point.x, point.y, radius);
+						: tileBox.isLatLonNearPixel(position, point.x, point.y, radius);
 				if (add) {
-					points.add(p);
+					result.collect(p, this);
 				}
 			}
 		}
@@ -497,6 +513,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		clearAidlTileProvider();
 		imageRequests.clear();
+		displayedPoints.clear();
 		float yOffset = ((float)bigIconBg.getHeight()) * (1.0f - POINT_IMAGE_VERTICAL_OFFSET);
 		aidlMapLayerProvider = new AidlTileProvider(this, density, yOffset);
 		mapMarkersCollection = new MapMarkersCollection();
@@ -541,12 +558,13 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 							.setCaption(getText(point));
 					mapMarkerBuilder.buildAndAddToCollection(mapMarkersCollection);
 				}
+				displayedPoints.add(point);
 			}
 		}
 		aidlMapLayerProvider.drawSymbols(mapRenderer);
 		mapRenderer.addSymbolsProvider(mapMarkersCollection);
-		if (imageRequests.size() > 0) {
-			executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
+		if (!imageRequests.isEmpty()) {
+			OsmAndTaskManager.executeTask(new PointImageReaderTask(this), imageRequests.toArray(new String[0]));
 		}
 	}
 

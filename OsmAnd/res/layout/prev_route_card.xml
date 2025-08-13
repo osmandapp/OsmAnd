@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/prev_route_card"
 	android:layout_width="match_parent"
@@ -16,7 +16,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_top" />
+			app:srcCompat="@drawable/bg_shadow_list_top" />
 
 	</LinearLayout>
 
@@ -69,7 +69,7 @@
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
-				osmand:srcCompat="@drawable/ic_action_previous_route"
+				app:srcCompat="@drawable/ic_action_previous_route"
 				android:tint="@color/icon_color_default_light" />
 
 			<LinearLayout
@@ -119,7 +119,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</LinearLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_height="@dimen/favorites_icon_size_small"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="?attr/default_icon_color"
-                osmand:srcCompat="@drawable/ic_action_close" />
+                app:srcCompat="@drawable/ic_action_close" />
         </FrameLayout>
 
 		<androidx.legacy.widget.Space
@@ -63,7 +63,7 @@
                 android:text="@string/shared_string_save"
                 android:textColor="?attr/active_color_basic"
                 android:textSize="@dimen/default_desc_text_size"
-                osmand:typeface="@string/font_roboto_medium" />
+                app:typefaceWeight="medium" />
 
         </FrameLayout>
 
@@ -79,7 +79,7 @@
 		android:text="@string/context_menu_edit_descr"
 		android:textColor="?attr/searchbar_text"
 		android:textSize="@dimen/dialog_header_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
+		app:typefaceWeight="medium" />
 
 	<View
 		android:layout_width="match_parent"
@@ -104,9 +104,9 @@
 			android:layout_margin="@dimen/list_content_padding"
 			android:focusable="true"
 			android:focusableInTouchMode="true"
-			osmand:primaryColor="@color/active_color_primary_dark"
-			osmand:secondaryColor="?android:textColorSecondary"
-			osmand:hasClearButton="true"
+			app:primaryColor="@color/active_color_primary_dark"
+			app:secondaryColor="?android:textColorSecondary"
+			app:hasClearButton="true"
 			android:layout_gravity="start"
 			>
 
@@ -118,7 +118,7 @@
 				android:scrollHorizontally="false"
 				android:maxLines="4"
 				android:gravity="start|center_vertical"
-				osmand:suffixTextColor="?android:textColorSecondary"
+				app:suffixTextColor="?android:textColorSecondary"
 				/>
 
 		</net.osmand.plus.widgets.OsmandTextFieldBoxes>

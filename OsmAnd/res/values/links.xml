@@ -33,7 +33,7 @@
     <string name="docs_plugin_trip_recording" translatable="false">https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="docs_plugin_nautical" translatable="false">https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="docs_plugin_osm" translatable="false">https://osmand.net/docs/user/plugins/osm-editing</string>
-    <string name="docs_plugin_srtm" translatable="false">https://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="docs_plugin_srtm" translatable="false">https://osmand.net/docs/user/plugins/topography</string>
     <string name="weather_global_forecast_system" translatable="false">https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
 
     <string name="docs_purchases" translatable="false">https://docs.osmand.net/docs/user/purchases/</string>
@@ -41,10 +41,11 @@
     <string name="docs_purchases_new_device" translatable="false">https://docs.osmand.net/docs/user/purchases/#new-device--new-account</string>
     <string name="docs_map_download_tiles" translatable="false">https://docs.osmand.net/docs/user/map/raster-maps#download--update-tiles</string>
     <string name="docs_troubleshooting_voice_navigation" translatable="false">https://docs.osmand.net/docs/user/troubleshooting/navigation#voice-navigation</string>
-    <string name="docs_osmand_live" translatable="false">https://osmand.net/docs/user/personal/maps#osmand-live</string>
+    <string name="docs_osmand_live" translatable="false">https://osmand.net/docs/user/personal/maps-resources#osmand-live</string>
     <string name="docs_legal_terms_of_use" translatable="false">https://osmand.net/docs/legal/terms-of-use</string>
     <string name="docs_legal_privacy_policy" translatable="false">https://osmand.net/docs/legal/privacy-policy</string>
     <string name="docs_external_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/external-sensors</string>
+    <string name="docs_obd_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/vehicle-metrics</string>
     <string name="docs_external_sensors_unknown_type" translatable="false">https://docs.osmand.net/docs/intro</string>
     <string name="docs_proxy_settings" translatable="false">https://osmand.net/docs/user/personal/global-settings/#proxy</string>
     <string name="docs_free_versions" translatable="false">https://docs.osmand.net/docs/versions/free-versions</string>
@@ -54,7 +55,7 @@
     <string name="community_facebook" translatable="false">https://www.facebook.com/osmandapp</string>
     <string name="community_vk" translatable="false">https://vk.com/osmandapp</string>
 
-	<string name="issues_github" translatable="false">https://github.com/osmandapp/OsmAnd/issues</string>
+    <string name="issues_github" translatable="false">https://github.com/osmandapp/OsmAnd/issues</string>
     <string name="discussion_github" translatable="false">https://github.com/osmandapp/OsmAnd/discussions</string>
 
     <string name="url_osm_live_info" translatable="false">https://osmand.net/osm_live</string>
@@ -65,7 +66,7 @@
 
     <string name="osmand_poll" translatable="false">https://osmand.net/android-poll.html</string>
     <string name="osmand_features" translatable="false">https://osmand.net/docs/user/plugins</string>
-    <string name="osmand_features_contour_lines_plugin" translatable="false">https://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="osmand_features_contour_lines_plugin" translatable="false">https://osmand.net/docs/user/plugins/topography</string>
     <string name="osmand_privacy_policy" translatable="false">https://osmand.net/help-online/privacy-policy</string>
     <string name="osmand_about" translatable="false">https://docs.osmand.net/help-online/about</string>
 

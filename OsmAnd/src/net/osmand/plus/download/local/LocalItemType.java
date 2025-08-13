@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -35,6 +36,7 @@ public enum LocalItemType {
 	ACTIVE_MARKERS(R.string.map_markers, R.drawable.ic_action_flag_stroke),
 	HISTORY_MARKERS(R.string.shared_string_history, R.drawable.ic_action_history),
 	ITINERARY_GROUPS(R.string.shared_string_itinerary, R.drawable.ic_action_flag_stroke),
+	COLOR_DATA(R.string.shared_string_colors, R.drawable.ic_action_file_color_palette),
 	PROFILES(R.string.shared_string_profiles, R.drawable.ic_action_manage_profiles),
 	OTHER(R.string.shared_string_other, R.drawable.ic_action_settings);
 
@@ -76,7 +78,7 @@ public enum LocalItemType {
 	}
 
 	public boolean isSettingsCategory() {
-		return CollectionUtils.equalsToAny(this, PROFILES, OTHER);
+		return CollectionUtils.equalsToAny(this, COLOR_DATA, PROFILES, OTHER);
 	}
 
 	public boolean isMyPlacesCategory() {
@@ -118,5 +120,19 @@ public enum LocalItemType {
 
 	public boolean isSortingByCountrySupported() {
 		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA);
+	}
+
+	public boolean isDerivedFromAssets() {
+		return CollectionUtils.equalsToAny(this, TTS_VOICE_DATA, COLOR_DATA, FONT_DATA);
+	}
+
+	@Nullable
+	public static LocalItemType getByName(@Nullable String name) {
+		for (LocalItemType type : values()) {
+			if (type.name().equalsIgnoreCase(name)) {
+				return type;
+			}
+		}
+		return null;
 	}
 }

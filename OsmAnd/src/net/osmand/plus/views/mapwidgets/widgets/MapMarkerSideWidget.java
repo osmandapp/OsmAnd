@@ -15,10 +15,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -94,6 +95,12 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 	}
 
 	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+	}
+
+	@Override
 	public void setCustomLatLon(@Nullable LatLon customLatLon) {
 		this.customLatLon = customLatLon;
 	}
@@ -141,7 +148,7 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 	private void updateDistance(int distance) {
 		cachedMeters = distance;
 		FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(distance,
-				app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+				app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		setText(formattedDistance.value, formattedDistance.unit);
 	}
 
@@ -151,7 +158,7 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 
 		AverageSpeedComputer averageSpeedComputer = app.getAverageSpeedComputer();
 		long interval = widgetState.getAverageSpeedIntervalPref().get();
-		float averageSpeed = averageSpeedComputer.getAverageSpeed(interval, false);
+		float averageSpeed = averageSpeedComputer.getAverageSpeed(0, interval, false);
 
 		if (Float.isNaN(averageSpeed) || averageSpeed == 0) {
 			setText(NO_VALUE, null);

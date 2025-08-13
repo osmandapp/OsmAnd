@@ -1,9 +1,13 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
+import static net.osmand.shared.grid.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_RIGHT;
+
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -12,10 +16,11 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.shared.grid.ButtonPositionSize;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -27,28 +32,31 @@ public class QuickActionButtonState extends MapButtonState {
 
 	public static final String DEFAULT_BUTTON_ID = "quick_actions";
 
-	private final CommonPreference<Boolean> statePref;
+	public static final String DEFAULT_ICON_KEY = "ic_quick_action";
+
+	private final CommonPreference<Boolean> visibilityPref;
 	private final CommonPreference<String> namePref;
 	private final CommonPreference<String> quickActionsPref;
-	private final FabMarginPreference fabMarginPref;
+
+	private final MapQuickActionLayer quickActionLayer;
 
 	private List<QuickAction> quickActions = new ArrayList<>();
 
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
-		this.statePref = settings.registerBooleanPreference(id + "_state", false).makeProfile();
-		this.namePref = settings.registerStringPreference(id + "_name", null).makeGlobal().makeShared();
-		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeGlobal().makeShared().storeLastModifiedTime();
-		this.fabMarginPref = new FabMarginPreference(settings, id + "_fab_margin");
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", false)).makeProfile();
+		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().storeLastModifiedTime();
+		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().storeLastModifiedTime();
+		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return statePref.get();
+		return visibilityPref.get();
 	}
 
 	public void setEnabled(boolean enabled) {
-		statePref.set(enabled);
+		visibilityPref.set(enabled);
 	}
 
 	@NonNull
@@ -56,6 +64,17 @@ public class QuickActionButtonState extends MapButtonState {
 	public String getName() {
 		String name = namePref.get();
 		return Algorithms.isEmpty(name) ? app.getString(R.string.configure_screen_quick_action) : name;
+	}
+
+	@NonNull
+	@Override
+	public String getDescription() {
+		return app.getString(R.string.configure_screen_quick_action);
+	}
+
+	@Override
+	public int getDefaultLayoutId() {
+		return R.layout.map_quick_actions_button;
 	}
 
 	public boolean hasCustomName() {
@@ -94,13 +113,9 @@ public class QuickActionButtonState extends MapButtonState {
 	}
 
 	@NonNull
-	public FabMarginPreference getFabMarginPref() {
-		return fabMarginPref;
-	}
-
-	@NonNull
-	public CommonPreference<Boolean> getStatePref() {
-		return statePref;
+	@Override
+	public CommonPreference<Boolean> getVisibilityPref() {
+		return visibilityPref;
 	}
 
 	@NonNull
@@ -108,47 +123,23 @@ public class QuickActionButtonState extends MapButtonState {
 		return namePref;
 	}
 
+
 	@NonNull
 	public CommonPreference<String> getQuickActionsPref() {
 		return quickActionsPref;
 	}
 
 	public long getLastModifiedTime() {
-		return quickActionsPref.getLastModifiedTime();
+		return Math.max(namePref.getLastModifiedTime(), quickActionsPref.getLastModifiedTime());
 	}
 
 	public void setLastModifiedTime(long lastModifiedTime) {
+		namePref.setLastModifiedTime(lastModifiedTime);
 		quickActionsPref.setLastModifiedTime(lastModifiedTime);
 	}
 
 	public boolean isSingleAction() {
 		return quickActions.size() == 1;
-	}
-
-	@Nullable
-	@Override
-	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int colorId) {
-		if (isSingleAction()) {
-			QuickAction action = quickActions.get(0);
-			Drawable icon = uiUtilities.getPaintedIcon(action.getIconRes(app), colorId);
-
-			if (mapIcon && action.isActionWithSlash(app)) {
-				Drawable slashIcon = uiUtilities.getIcon(nightMode ? R.drawable.ic_action_icon_hide_dark : R.drawable.ic_action_icon_hide_white);
-				return new LayerDrawable(new Drawable[] {icon, slashIcon});
-			}
-			return icon;
-		}
-		return super.getIcon(nightMode, mapIcon, colorId);
-	}
-
-	public void resetForMode(@NonNull ApplicationMode appMode) {
-		statePref.resetModeToDefault(appMode);
-		fabMarginPref.resetModeToDefault(appMode);
-	}
-
-	public void copyForMode(@NonNull ApplicationMode fromAppMode, @NonNull ApplicationMode toAppMode) {
-		statePref.setModeValue(toAppMode, statePref.getModeValue(fromAppMode));
-		fabMarginPref.copyForMode(fromAppMode, toAppMode);
 	}
 
 	public void saveActions(@NonNull Gson gson) {
@@ -181,7 +172,49 @@ public class QuickActionButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public String toString() {
-		return getId();
+	public ButtonAppearanceParams createAppearanceParams() {
+		ButtonAppearanceParams appearanceParams = super.createAppearanceParams();
+		if (Algorithms.isEmpty(getSavedIconName())) {
+			appearanceParams.setIconName(getDefaultIconName());
+		}
+		return appearanceParams;
+	}
+
+	@NonNull
+	public String getDefaultIconName() {
+		if (isSingleAction()) {
+			int iconId = getQuickActions().get(0).getIconRes(app);
+			if (iconId > 0) {
+				return app.getResources().getResourceEntryName(iconId);
+			}
+		}
+		return DEFAULT_ICON_KEY;
+	}
+
+	@Nullable
+	@Override
+	public Drawable getIcon(@DrawableRes int iconId, @ColorInt int color, boolean nightMode, boolean mapIcon) {
+		if (mapIcon) {
+			if (quickActionLayer.isWidgetVisibleForButton(getId())) {
+				return super.getIcon(R.drawable.ic_action_close, color, nightMode, true);
+			} else if (isSingleAction() && quickActions.get(0).isActionWithSlash(app)) {
+				Drawable drawable = super.getIcon(iconId, color, nightMode, true);
+				Drawable slashIcon = uiUtilities.getIcon(nightMode ? R.drawable.ic_action_icon_hide_dark : R.drawable.ic_action_icon_hide_white);
+				return new LayerDrawable(new Drawable[] {drawable, slashIcon});
+			}
+		}
+		return super.getIcon(iconId, color, nightMode, mapIcon);
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		int hash = id.hashCode();
+		int mod = hash == Integer.MIN_VALUE ? 0 : Math.abs(hash % 3);
+
+		boolean xMove = (mod == 0 || mod == 2);
+		boolean yMove = (mod == 1 || mod == 2);
+
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, xMove, yMove);
 	}
 }

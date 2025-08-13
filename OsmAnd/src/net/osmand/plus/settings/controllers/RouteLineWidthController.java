@@ -21,7 +21,6 @@ import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
-import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -86,7 +85,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity,
-	                              @NonNull ViewGroup container, boolean nightMode) {
+	                              @NonNull ViewGroup container, boolean nightMode, boolean usedOnMap) {
 		if (selectedState.getTag() == null) {
 			bindSummaryCard(activity, container, nightMode);
 		} else {
@@ -161,8 +160,8 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
 				@NonNull
 				@Override
-				public Limits getSliderLimits() {
-					return new Limits(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
+				public Limits<Integer> getSliderLimits() {
+					return new Limits<>(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
 				}
 			};
 		}

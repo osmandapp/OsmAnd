@@ -1,33 +1,40 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
-import static net.osmand.data.Amenity.NAME;
-import static net.osmand.data.Amenity.OPENING_HOURS;
-import static net.osmand.data.Amenity.SEPARATOR;
-import static net.osmand.data.Amenity.SUBTYPE;
-import static net.osmand.data.Amenity.TYPE;
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.data.Amenity.MAPILLARY;
+import static net.osmand.data.Amenity.WIKIDATA;
+import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
+import static net.osmand.data.Amenity.WIKIPEDIA;
+import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
+
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AmenityExtensionsHelper {
 
-	private static final String COLLAPSABLE_PREFIX = "collapsable_";
-	private static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
+	private static final Log LOG = PlatformUtil.getLog(AmenityExtensionsHelper.class);
 
 	private final OsmandApplication app;
 
@@ -35,73 +42,92 @@ public class AmenityExtensionsHelper {
 		this.app = app;
 	}
 
+	@NonNull
+	public Pair<Amenity, Map<String, String>> getAmenityWithExtensions(
+			@NonNull Map<String, String> extensions, @Nullable String originName,
+			double lat, double lon) {
+		Amenity amenity = null;
+		if (!Algorithms.isEmpty(originName)) {
+			amenity = findAmenity(originName, lat, lon);
+		}
+		extensions = getUpdatedAmenityExtensions(extensions, amenity);
+		return Pair.create(amenity, extensions);
+	}
+
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+		List<String> names = Collections.singletonList(nameEn);
+		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 
-		for (Amenity amenity : amenities) {
-			if (Algorithms.stringsEqual(amenity.toStringEn(), nameEn)) {
-				return amenity;
-			}
-		}
-		return null;
+		Amenity requestAmenity = new Amenity();
+		requestAmenity.setLocation(new LatLon(lat, lon));
+		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names);
+		return searcher.searchDetailedAmenity(request, settings);
 	}
 
 	@NonNull
-	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> savedExtensions,
-	                                                       @Nullable String amenityOriginName,
-	                                                       double lat, double lon) {
-		Map<String, String> updatedExtensions = new HashMap<>(savedExtensions);
-		if (amenityOriginName != null) {
-			Amenity amenity = findAmenity(amenityOriginName, lat, lon);
-			if (amenity != null) {
-				updatedExtensions.putAll(getAmenityExtensions(amenity));
+	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> extensions,
+			@Nullable Amenity amenity) {
+		Map<String, String> updatedExtensions = new HashMap<>();
+		for (Map.Entry<String, String> entry : extensions.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+			if (key.startsWith(AMENITY_PREFIX)) {
+				updatedExtensions.put(key.replace(AMENITY_PREFIX, ""), value);
+			} else if (key.startsWith(OSM_PREFIX)) {
+				updatedExtensions.put(key.replace(OSM_PREFIX, ""), value);
+			} else {
+				updatedExtensions.put(key, value);
 			}
+		}
+		if (amenity != null) {
+			updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
 		}
 		return updatedExtensions;
 	}
 
-	public Map<String, String> getAmenityExtensions(@NonNull Amenity amenity) {
-		Map<String, String> result = new HashMap<String, String>();
-		Map<String, List<PoiType>> collectedPoiAdditionalCategories = new HashMap<>();
-
-		String name = amenity.getName();
-		if (name != null) {
-			result.put(AMENITY_PREFIX + NAME, name);
-		}
-		String subType = amenity.getSubType();
-		if (subType != null) {
-			result.put(AMENITY_PREFIX + SUBTYPE, subType);
-		}
-		PoiCategory type = amenity.getType();
-		if (type != null) {
-			result.put(AMENITY_PREFIX + TYPE, type.getKeyName());
-		}
-		String openingHours = amenity.getOpeningHours();
-		if (openingHours != null) {
-			result.put(AMENITY_PREFIX + OPENING_HOURS, openingHours);
-		}
-		if (amenity.hasAdditionalInfo()) {
-			result.putAll(amenity.getAdditionalInfoAndCollectCategories(app.getPoiTypes(),
-					HIDING_EXTENSIONS_AMENITY_TAGS, collectedPoiAdditionalCategories, null));
-
-			//join collected tags by category into one string
-			for (Map.Entry<String, List<PoiType>> entry : collectedPoiAdditionalCategories.entrySet()) {
-				String categoryName = COLLAPSABLE_PREFIX + entry.getKey();
-				List<PoiType> categoryTypes = entry.getValue();
-				if (categoryTypes.size() > 0) {
-					StringBuilder builder = new StringBuilder();
-					for (PoiType poiType : categoryTypes) {
-						if (builder.length() > 0) {
-							builder.append(SEPARATOR);
-						}
-						builder.append(poiType.getKeyName());
-					}
-					result.put(categoryName, builder.toString());
+	@NonNull
+	public static Map<String, String> getImagesParams(@NonNull Map<String, String> extensions) {
+		Map<String, String> params = new HashMap<>();
+		List<String> imageTags = Arrays.asList("image", MAPILLARY, WIKIDATA, WIKIPEDIA, WIKIMEDIA_COMMONS);
+		for (String imageTag : imageTags) {
+			String value = extensions.get(imageTag);
+			if (!Algorithms.isEmpty(value)) {
+				if (imageTag.equals("image")) {
+					params.put("osm_image", getDecodedAdditionalInfo(value));
+				} else {
+					params.put(imageTag, getDecodedAdditionalInfo(value));
 				}
 			}
 		}
-		return result;
+		return params;
+	}
+
+	private static String getDecodedAdditionalInfo(@NonNull String value) {
+		try {
+			return URLDecoder.decode(value, "UTF-8");
+		} catch (UnsupportedEncodingException | IllegalArgumentException e) {
+			LOG.error(e);
+		}
+		return value;
+	}
+
+	@Nullable
+	public static String getAmenityDistanceFormatted(@NonNull Amenity amenity,
+			@NonNull OsmandApplication app) {
+		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
+		float km = Algorithms.parseFloatSilently(distanceTag, 0);
+
+		if (km > 0) {
+			if (!distanceTag.contains(".")) {
+				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
+				// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
+				km /= 1000;
+			}
+			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		}
+
+		return null;
 	}
 }

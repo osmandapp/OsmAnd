@@ -10,13 +10,13 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Link;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -76,7 +76,7 @@ class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 	private File generateGpxFileForRecordings() {
 		File tmpFile = new File(app.getCacheDir(), "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
-		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		for (Recording recording : getRecordingsForGpx()) {
 
 			if (isCancelled()) {
@@ -89,17 +89,17 @@ class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 					desc = recording.getFileName();
 				}
 				WptPt wpt = new WptPt();
-				wpt.lat = recording.getLatitude();
-				wpt.lon = recording.getLongitude();
-				wpt.name = desc;
-				wpt.link = recording.getFileName();
-				wpt.time = recording.getFile().lastModified();
-				wpt.category = recording.getSearchHistoryType();
-				wpt.desc = recording.getTypeWithDuration(app);
+				wpt.setLat(recording.getLatitude());
+				wpt.setLon(recording.getLongitude());
+				wpt.setName(desc);
+				wpt.setLink(new Link(recording.getFileName()));
+				wpt.setTime(recording.getFile().lastModified());
+				wpt.setCategory(recording.getSearchHistoryType());
+				wpt.setDesc(recording.getTypeWithDuration(app));
 				app.getSelectedGpxHelper().addPoint(wpt, gpxFile);
 			}
 		}
-		GPXUtilities.writeGpxFile(tmpFile, gpxFile);
+		SharedUtil.writeGpxFile(tmpFile, gpxFile);
 		return tmpFile;
 	}
 

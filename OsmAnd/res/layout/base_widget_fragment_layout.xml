@@ -1,104 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:background="?attr/list_background_color"
+	android:background="?attr/activity_background_color"
 	android:clickable="true"
 	android:focusable="true">
 
-	<LinearLayout
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:minHeight="@dimen/action_bar_height"
-		android:gravity="center_vertical">
+		android:background="@android:color/transparent"
+		android:stateListAnimator="@animator/appbar_always_elevated">
 
-		<androidx.appcompat.widget.AppCompatImageButton
-			android:id="@+id/close_button"
-			style="@style/Widget.AppCompat.ActionButton"
-			android:layout_width="@dimen/dialog_content_margin"
-			android:layout_height="@dimen/dialog_content_margin"
-			android:layout_marginStart="@dimen/title_padding"
-			android:src="@drawable/ic_action_close"
-			android:tint="?attr/primary_icon_color"
-			android:contentDescription="@string/shared_string_close"/>
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded_large"
+			android:background="?attr/list_background_color"
+			app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-		<View
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1" />
-
-		<androidx.appcompat.widget.AppCompatImageButton
-			android:id="@+id/help_button"
-			style="@style/Widget.AppCompat.ActionButton"
-			android:layout_width="@dimen/dialog_content_margin"
-			android:layout_height="@dimen/dialog_content_margin"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:src="@drawable/ic_action_help_online"
-			android:tint="?default_icon_color" />
-
-	</LinearLayout>
-
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginHorizontal="@dimen/content_padding"
-		android:orientation="horizontal"
-		android:minHeight="@dimen/setting_list_item_large_height"
-		android:gravity="center_vertical">
-
-		<LinearLayout
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:orientation="vertical"
-			android:gravity="center_vertical">
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/title"
-				style="@style/TitleStyle.Medium"
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:maxLines="1"
-				android:ellipsize="end"
-				android:textSize="@dimen/dialog_header_text_size"
-				android:textColor="?android:textColorPrimary"
-				tools:text="Widget name" />
+				android:layout_height="@dimen/toolbar_height"
+				android:minHeight="@dimen/toolbar_height"
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:title="@string/default_appearance"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp" />
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/sub_title"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:maxLines="1"
-				android:ellipsize="end"
-				android:textColor="?android:textColorSecondary"
-				tools:text="Widget" />
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-		</LinearLayout>
-
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/icon"
-			android:layout_width="@dimen/bottom_sheet_descr_height"
-			android:layout_height="@dimen/bottom_sheet_descr_height"
-			osmand:srcCompat="@drawable/widget_lanes_day" />
-
-	</LinearLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1">
+		android:layout_height="match_parent"
+		android:background="?attr/activity_background_color"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
-
-		<ScrollView
+		<androidx.core.widget.NestedScrollView
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:fillViewport="true">
@@ -108,11 +58,22 @@
 				android:layout_height="wrap_content"
 				android:orientation="vertical">
 
+				<include
+					android:id="@+id/available_widgets_divider"
+					layout="@layout/list_item_divider" />
+
 				<LinearLayout
 					android:id="@+id/main_content"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="vertical"/>
+					android:background="?attr/list_background_color"
+					android:orientation="vertical" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:scaleType="fitXY"
+					app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 				<View
 					android:layout_width="match_parent"
@@ -120,18 +81,8 @@
 
 			</LinearLayout>
 
-		</ScrollView>
-
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/buttons_shadow"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:layout_gravity="bottom"
-			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_top" />
+		</androidx.core.widget.NestedScrollView>
 
 	</FrameLayout>
 
-	<include layout="@layout/bottom_buttons" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -113,7 +113,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 
 	private void attachLegend(List<RouteSegmentAttribute> list,
 	                          String propertyNameToFullSpan) {
-		Context themedCtx = UiUtilities.getThemedContext(app, isNightMode());
+		Context themedCtx = UiUtilities.getThemedContext(chart.getContext(), isNightMode());
 		LayoutInflater inflater = LayoutInflater.from(themedCtx);
 		for (RouteSegmentAttribute segment : list) {
 			View view = inflater.inflate(R.layout.route_details_legend, bottomInfoContainer, false);

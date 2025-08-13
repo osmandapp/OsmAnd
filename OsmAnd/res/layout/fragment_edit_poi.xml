@@ -1,190 +1,183 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/spinnerListBackground"
-    android:clickable="true"
-    android:focusable="true"
-    android:orientation="vertical"
-    tools:context="net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/spinnerListBackground"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical"
+	tools:context="net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/dashboard_map_toolbar"
-        android:background="?attr/pstsTabBackground"
-        android:minHeight="@dimen/dashboard_map_toolbar"
-        android:theme="?attr/toolbar_theme"
-        app:contentInsetLeft="@dimen/divider_color_light_margin_start"
-        app:contentInsetStart="@dimen/divider_color_light_margin_start"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp"/>
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/dashboard_map_toolbar"
+		android:background="?attr/pstsTabBackground"
+		android:minHeight="@dimen/dashboard_map_toolbar"
+		android:theme="?attr/toolbar_theme"
+		app:contentInsetEnd="0dp"
+		app:contentInsetLeft="@dimen/divider_color_light_margin_start"
+		app:contentInsetRight="0dp"
+		app:contentInsetStart="@dimen/divider_color_light_margin_start" />
 
-    <ScrollView
-        android:id="@+id/scroll_view"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/app_bar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/pstsTabBackground"
+			android:theme="?attr/appbar_layout_theme"
+			app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"
+			app:liftOnScroll="false">
+			<!-- TODO change theme -->
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/pstsTabBackground"
-            android:theme="?attr/appbar_layout_theme">
-            <!-- TODO change theme -->
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll">
+				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/divider_color_light_margin_start"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:importantForAutofill="noExcludeDescendants"
+					app:colorControlHighlight="@color/color_transparent"
+					app:labelText="@string/shared_string_name"
+					app:panelBackgroundColor="@color/color_transparent"
+					app:primaryColor="@color/card_and_list_background_light"
+					app:secondaryColor="@color/white_50_transparent"
+					app:useDenseSpacing="true">
 
-                <net.osmand.plus.widgets.OsmandTextFieldBoxes
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:labelText="@string/shared_string_name"
-                    app:panelBackgroundColor="@color/color_transparent"
-                    app:colorControlHighlight="@color/color_transparent"
-                    app:primaryColor="@color/card_and_list_background_light"
-                    app:secondaryColor="@color/white_50_transparent"
-                    app:useDenseSpacing="true"
-                    android:importantForAutofill="noExcludeDescendants"
-                    android:layout_marginLeft="@dimen/divider_color_light_margin_start"
-                    android:layout_marginRight="@dimen/content_padding"
-                    android:layout_marginStart="@dimen/divider_color_light_margin_start"
-                    android:layout_marginEnd="@dimen/content_padding">
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:id="@+id/poiNameEditText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="@color/color_transparent"
+						android:imeOptions="actionNext"
+						android:importantForAutofill="noExcludeDescendants"
+						android:inputType="textCapSentences" />
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                        android:id="@+id/poiNameEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/color_transparent"
-                        android:imeOptions="actionNext"
-                        android:importantForAutofill="noExcludeDescendants"
-                        android:inputType="textCapSentences"/>
+				</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+			</LinearLayout>
 
-                </net.osmand.plus.widgets.OsmandTextFieldBoxes>
-            </LinearLayout>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/content_padding_half"
+				app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap">
+				<!--android:layout_marginLeft="72dp"-->
+				<ImageButton
+					android:id="@+id/poiTypeButton"
+					android:layout_width="@dimen/context_menu_buttons_bottom_height"
+					android:layout_height="@dimen/context_menu_buttons_bottom_height"
+					android:layout_gravity="bottom"
+					android:background="@null"
+					android:contentDescription="@string/poi_dialog_poi_type"
+					app:srcCompat="@drawable/ic_action_label" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/content_padding_half"
-                app:layout_scrollFlags="scroll">
-                <!--android:layout_marginLeft="72dp"-->
-                <ImageButton
-                    android:id="@+id/poiTypeButton"
-                    android:contentDescription="@string/poi_dialog_poi_type"
-                    android:layout_width="@dimen/context_menu_buttons_bottom_height"
-                    android:layout_height="@dimen/context_menu_buttons_bottom_height"
-                    android:layout_gravity="bottom"
-                    android:background="@null"
-                    app:srcCompat="@drawable/ic_action_label"/>
+				<net.osmand.plus.widgets.OsmandTextFieldBoxes
+					android:id="@+id/poiTypeTextInputLayout"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="24dp"
+					android:layout_weight="1"
+					android:importantForAutofill="noExcludeDescendants"
+					app:endIcon="@drawable/ic_action_arrow_drop_down"
+					app:labelText="@string/poi_dialog_poi_type"
+					app:panelBackgroundColor="@color/color_transparent"
+					app:primaryColor="@color/card_and_list_background_light"
+					app:secondaryColor="@color/white_50_transparent">
 
-                <net.osmand.plus.widgets.OsmandTextFieldBoxes
-                    android:id="@+id/poiTypeTextInputLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:importantForAutofill="noExcludeDescendants"
-                    app:endIcon="@drawable/ic_action_arrow_drop_down"
-                    app:labelText="@string/poi_dialog_poi_type"
-                    app:panelBackgroundColor="@color/color_transparent"
-                    app:primaryColor="@color/card_and_list_background_light"
-                    app:secondaryColor="@color/white_50_transparent">
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:id="@+id/poiTypeEditText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:completionThreshold="1"
+						android:gravity="bottom|start"
+						android:imeOptions="actionSend"
+						android:importantForAutofill="noExcludeDescendants"
+						android:inputType="text"
+						android:paddingBottom="@dimen/text_margin_small" />
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                        android:id="@+id/poiTypeEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:completionThreshold="1"
-                        android:gravity="bottom|start"
-                        android:imeOptions="actionSend"
-                        android:importantForAutofill="noExcludeDescendants"
-                        android:inputType="text"
-                        android:paddingBottom="@dimen/text_margin_small" />
+				</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
-                </net.osmand.plus.widgets.OsmandTextFieldBoxes>
+				<ImageButton
+					android:id="@+id/onlineDocumentationButton"
+					android:layout_width="@dimen/context_menu_buttons_bottom_height"
+					android:layout_height="@dimen/context_menu_buttons_bottom_height"
+					android:layout_gravity="bottom"
+					android:background="@null"
+					android:contentDescription="@string/shared_string_help"
+					tools:src="@drawable/ic_action_help" />
+			</LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/onlineDocumentationButton"
-                    android:contentDescription="@string/shared_string_help"
-                    android:layout_width="@dimen/context_menu_buttons_bottom_height"
-                    android:layout_height="@dimen/context_menu_buttons_bottom_height"
-                    android:layout_gravity="bottom"
-                    android:background="@null"
-                    tools:src="@drawable/ic_action_help"/>
-            </LinearLayout>
+			<com.google.android.material.tabs.TabLayout
+				android:id="@+id/tab_layout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/bg_color"
+				app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"
+				app:tabIndicatorColor="@color/osmand_orange"
+				app:tabSelectedTextColor="@color/osmand_orange"
+				app:tabTextColor="@android:color/darker_gray" />
+		</com.google.android.material.appbar.AppBarLayout>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/bg_color"
-                app:layout_scrollFlags="scroll"
-                app:tabIndicatorColor="@color/osmand_orange"
-                app:tabSelectedTextColor="@color/osmand_orange"
-                app:tabTextColor="@android:color/darker_gray"/>
-        </com.google.android.material.appbar.AppBarLayout>
+		<androidx.viewpager2.widget.ViewPager2
+			android:id="@+id/viewpager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <net.osmand.plus.plugins.osmedit.EditPoiViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </LinearLayout>
-</ScrollView>
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <View
-        android:id="@+id/buttonDivider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/divider_color"/>
+	<View
+		android:id="@+id/buttonDivider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="end">
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:gravity="end">
 
-        <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/deleteButton"
-            style="@style/DashboardGeneralButton"
-            android:layout_height="@dimen/context_menu_buttons_bottom_height"
-            android:layout_marginLeft="@dimen/showAllButtonMarginRight"
-            android:gravity="center"
-            android:text="@string/shared_string_delete"
-            android:visibility="gone"
-            app:textAllCapsCompat="true"
-            tools:visibility="visible"
-            android:layout_marginStart="@dimen/showAllButtonMarginRight" />
+		<net.osmand.plus.widgets.ButtonEx
+			android:id="@+id/deleteButton"
+			style="@style/DashboardGeneralButton"
+			android:layout_height="@dimen/context_menu_buttons_bottom_height"
+			android:layout_marginStart="@dimen/showAllButtonMarginRight"
+			android:gravity="center"
+			android:text="@string/shared_string_delete"
+			android:textAllCaps="true"
+			android:visibility="gone"
+			tools:visibility="visible" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="@dimen/context_menu_buttons_bottom_height"
-            android:layout_weight="1"/>
+		<Space
+			android:layout_width="0dp"
+			android:layout_height="@dimen/context_menu_buttons_bottom_height"
+			android:layout_weight="1" />
 
-        <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/cancelButton"
-            style="@style/DashboardGeneralButton"
-            android:layout_height="@dimen/context_menu_buttons_bottom_height"
-            android:gravity="center"
-            android:text="@string/shared_string_cancel"
-            app:textAllCapsCompat="true"/>
+		<net.osmand.plus.widgets.ButtonEx
+			android:id="@+id/cancelButton"
+			style="@style/DashboardGeneralButton"
+			android:layout_height="@dimen/context_menu_buttons_bottom_height"
+			android:gravity="center"
+			android:text="@string/shared_string_cancel"
+			android:textAllCaps="true" />
 
-        <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/saveButton"
-            style="@style/DashboardGeneralButton"
-            android:layout_height="@dimen/context_menu_buttons_bottom_height"
-            android:gravity="center"
-            app:textAllCapsCompat="true"
-            tools:text="Save"/>
-    </LinearLayout>
+		<net.osmand.plus.widgets.ButtonEx
+			android:id="@+id/saveButton"
+			style="@style/DashboardGeneralButton"
+			android:layout_height="@dimen/context_menu_buttons_bottom_height"
+			android:gravity="center"
+			android:textAllCaps="true"
+			tools:text="Save" />
+	</LinearLayout>
 </LinearLayout>

@@ -11,14 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.IProgress;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -114,16 +114,17 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 
-		for (int segmentIdx = 0; segmentIdx < group.getTrack().segments.size(); segmentIdx++) {
+		for (int segmentIdx = 0; segmentIdx < group.getTrack().getSegments().size(); segmentIdx++) {
 			if (progress != null && progress.isInterrupted()) {
 				return;
 			}
-			TrkSegment segment = group.getTrack().segments.get(segmentIdx);
-			if (!Algorithms.isEmpty(segment.points)) {
+			TrkSegment segment = group.getTrack().getSegments().get(segmentIdx);
+			if (!Algorithms.isEmpty(segment.getPoints())) {
 				int splitTime = group.getSplitTime();
 				double splitDistance = group.getSplitDistance();
+				boolean uphillDownhill = group.isSplitUphillDownhill();
 
-				for (GPXTrackAnalysis analysis : getTrackAnalysis(segment, splitTime, splitDistance, joinSegments)) {
+				for (GpxTrackAnalysis analysis : getTrackAnalysis(segment, splitTime, splitDistance, uphillDownhill, joinSegments)) {
 					if (progress != null && progress.isInterrupted()) {
 						return;
 					}
@@ -136,19 +137,26 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@NonNull
 	public static GpxDisplayItem createGpxDisplayItem(@NonNull OsmandApplication app, @NonNull TrackDisplayGroup group,
-	                                                  @NonNull TrkSegment segment, @NonNull GPXTrackAnalysis analysis) {
+	                                                  @NonNull TrkSegment segment, @NonNull GpxTrackAnalysis analysis) {
 		GpxDisplayItem item = new GpxDisplayItem(analysis);
 		item.group = group;
 		item.name = getItemName(app, group, analysis);
 		item.description = GpxUiHelper.getDescription(app, analysis, true);
-		item.locationStart = analysis.locationStart;
-		item.locationEnd = analysis.locationEnd;
+		item.locationStart = analysis.getLocationStart();
+		item.locationEnd = analysis.getLocationEnd();
 
-		if (group.getSplitTime() > 0 || group.getSplitDistance() > 0) {
-			item.splitMetric = analysis.metricEnd;
-			item.secondarySplitMetric = analysis.secondaryMetricEnd;
-			item.splitName = formatSplitName(analysis.metricEnd, group, app);
-			item.splitName += " (" + formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) + ") ";
+		if (group.isSplitUphillDownhill()) {
+			item.splitMetric = analysis.getMetricEnd();
+			item.splitName = formatSplitName(analysis.getMetricEnd(), group, app);
+			if (group.getSplitTime() > 0) {
+				item.secondarySplitMetric = analysis.getSecondaryMetricEnd();
+				item.splitName += " (" + formatSecondarySplitName(analysis.getSecondaryMetricEnd(), group, app) + ") ";
+			}
+		} else if (group.getSplitTime() > 0 || group.getSplitDistance() > 0) {
+			item.splitMetric = analysis.getMetricEnd();
+			item.secondarySplitMetric = analysis.getSecondaryMetricEnd();
+			item.splitName = formatSplitName(analysis.getMetricEnd(), group, app);
+			item.splitName += " (" + formatSecondarySplitName(analysis.getSecondaryMetricEnd(), group, app) + ") ";
 		} else if (!group.isGeneralTrack()) {
 			item.trackSegmentName = buildTrackSegmentName(group.getGpxFile(), group.getTrack(), segment, app);
 		}
@@ -156,7 +164,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@NonNull
-	public static String getItemName(@NonNull OsmandApplication app, @NonNull TrackDisplayGroup group, @NonNull GPXTrackAnalysis analysis) {
+	public static String getItemName(@NonNull OsmandApplication app, @NonNull TrackDisplayGroup group, @NonNull GpxTrackAnalysis analysis) {
 		StringBuilder builder = new StringBuilder();
 
 		if (!group.isSplitDistance()) {
@@ -212,17 +220,22 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@NonNull
-	private static GPXTrackAnalysis[] getTrackAnalysis(@NonNull TrkSegment segment, int splitTime,
-	                                                   double splitDistance, boolean joinSegments) {
+	private static GpxTrackAnalysis[] getTrackAnalysis(@NonNull TrkSegment segment, int splitTime,
+	                                                   double splitDistance, boolean upDownHills, boolean joinSegments) {
 		TrackPointsAnalyser pointsAnalyser = getTrackPointsAnalyser();
-		if (splitDistance > 0) {
-			List<GPXTrackAnalysis> trackAnalyses = segment.splitByDistance(splitDistance, joinSegments);
-			return trackAnalyses.toArray(new GPXTrackAnalysis[0]);
+		if (upDownHills) {
+			List<GpxTrackAnalysis> trackAnalyses = segment.splitByUpDownHills(pointsAnalyser);
+			return trackAnalyses.toArray(new GpxTrackAnalysis[0]);
+		} else if (splitDistance > 0) {
+			List<GpxTrackAnalysis> trackAnalyses = segment.splitByDistance(splitDistance, joinSegments, pointsAnalyser);
+			return trackAnalyses.toArray(new GpxTrackAnalysis[0]);
 		} else if (splitTime > 0) {
-			List<GPXTrackAnalysis> trackAnalyses = segment.splitByTime(splitTime, joinSegments);
-			return trackAnalyses.toArray(new GPXTrackAnalysis[0]);
+			List<GpxTrackAnalysis> trackAnalyses = segment.splitByTime(splitTime, joinSegments, pointsAnalyser);
+			return trackAnalyses.toArray(new GpxTrackAnalysis[0]);
 		} else {
-			return new GPXTrackAnalysis[] {GPXTrackAnalysis.prepareInformation(0, pointsAnalyser, segment)};
+			return new GpxTrackAnalysis[] {
+					GpxTrackAnalysis.Companion.prepareInformation(0, joinSegments, pointsAnalyser, segment)
+			};
 		}
 	}
 
@@ -237,7 +250,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	private static String formatSplitName(double metricEnd, @NonNull TrackDisplayGroup group,
 	                                      @NonNull OsmandApplication app) {
-		if (group.isSplitDistance()) {
+		if (group.isSplitDistance() || group.isSplitUphillDownhill()) {
 			MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 				double sd = group.getSplitDistance();

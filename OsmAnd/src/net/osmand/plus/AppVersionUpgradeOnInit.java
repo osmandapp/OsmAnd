@@ -8,32 +8,18 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
+import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.plus.settings.enums.LocalSortMode.COUNTRY_NAME_ASCENDING;
-import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
-import static net.osmand.plus.settings.enums.RoutingType.A_STAR_CLASSIC;
-import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
-import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ARRIVAL_TIME_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BEARING_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_ARRIVAL_TIME_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_TIME_TO_GO_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_TIME_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NAVIGATION_TIME_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_GO_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.*;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
+import static net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState.SIMPLE_WIDGET_SIZE_ID;
 import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
 import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
@@ -44,7 +30,6 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,29 +39,27 @@ import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupUtils;
-import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
+import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV1;
+import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.plugins.srtm.TerrainMode;
+import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.quickaction.MapButtonsHelper;
+import net.osmand.plus.resources.migration.MergeAssetFilesVersionAlgorithm;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.backend.preferences.BooleanPreference;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
-import net.osmand.plus.settings.backend.preferences.IntPreference;
-import net.osmand.plus.settings.backend.preferences.ListStringPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.backend.preferences.*;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.LocalSortMode;
-import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -85,15 +68,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class AppVersionUpgradeOnInit {
 
@@ -155,8 +130,26 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_02 = 4702;
 	public static final int VERSION_4_7_03 = 4703;
 	public static final int VERSION_4_7_04 = 4704;
+	// 4705 - 4.7-05 (Migrate from using preferences for colors storing to using external file)
+	public static final int VERSION_4_7_05 = 4705;
+	// 4706 - 4.7-06 (Import location 3D icon models)
+	public static final int VERSION_4_7_06 = 4706;
+	// 4707 - 4.7-07 (Migrate chosen 3D model key to 2D icon base key)
+	public static final int VERSION_4_7_07 = 4707;
+	// 4801 - 4.8-01 (Migrate north is up compass mode to manually rotated)
+	public static final int VERSION_4_8_01 = 4801;
+	public static final int VERSION_4_8_02 = 4802;
+	// 4803 - 4.8-03 (Merge asset files versions)
+	public static final int VERSION_4_8_03 = 4803;
+	public static final int VERSION_5_0_00 = 5000;
+	public static final int VERSION_5_0_01 = 5001;
+	// 5005 - (Resend user purchases)
+	public static final int VERSION_5_0_05 = 5005;
+	public static final int VERSION_5_1_00 = 5100;
+	// 5101 - 5.1-01 (Migrate show_next_turn_info to widget-specific preference)
+	public static final int VERSION_5_1_01 = 5101;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_04;
+	public static final int LAST_APP_VERSION = VERSION_5_1_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -203,15 +196,10 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
 						|| Version.getAppVersion(app).equals("3.5.4")) {
 					migratePreferences();
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
-							if (event == FAVORITES_INITIALIZED) {
-								migrateHomeWorkParkingToFavorites();
-							}
-						}
-					});
+					app.getAppInitializer().addOnProgressListener(
+							FAVORITES_INITIALIZED,
+							init -> migrateHomeWorkParkingToFavorites()
+					);
 				}
 				if (prevAppVersion < VERSION_3_6) {
 					migratePreferences();
@@ -220,27 +208,18 @@ public class AppVersionUpgradeOnInit {
 					migrateEnumPreferences();
 				}
 				if (prevAppVersion < VERSION_3_7_01) {
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
-							if (event == FAVORITES_INITIALIZED) {
-								app.getFavoritesHelper().fixBlackBackground();
-							}
-						}
-					});
+					app.getAppInitializer().addOnProgressListener(
+							FAVORITES_INITIALIZED,
+							init -> app.getFavoritesHelper().fixBlackBackground()
+					);
 				}
 				if (prevAppVersion < VERSION_3_8_00) {
 					migrateQuickActionStates();
 				}
 				if (prevAppVersion < VERSION_4_0_00) {
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onStart(@NonNull AppInitializer init) {
-							new MarkersDb39HelperLegacy(app).migrateMarkersGroups();
-						}
-					});
+					app.getAppInitializer().addOnStartListener(
+							init -> new MarkersDb39HelperLegacy(app).migrateMarkersGroups()
+					);
 				}
 				if (prevAppVersion < VERSION_4_0_03) {
 					migrateStateDependentWidgets();
@@ -273,11 +252,8 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_6_09) {
 					migrateQuickActionButtons();
 				}
-				if (prevAppVersion < VERSION_4_6_10) {
-					migrateRoutingTypePrefs();
-				}
 				if (prevAppVersion < VERSION_4_7_01) {
-					ColorsMigrationAlgorithm.doMigration(app);
+					ColorsMigrationAlgorithmV1.execute(app);
 				}
 				if (prevAppVersion < VERSION_4_7_02) {
 					migrateVerticalWidgetPanels(settings);
@@ -286,13 +262,44 @@ public class AppVersionUpgradeOnInit {
 					migrateLocalSorting(settings);
 				}
 				if (prevAppVersion < VERSION_4_7_04) {
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onStart(@NonNull AppInitializer init) {
-							migrateProfileQuickActionButtons();
-						}
-					});
+					app.getAppInitializer().addOnStartListener(
+							appInitializer -> migrateProfileQuickActionButtons()
+					);
+				}
+				if (prevAppVersion < VERSION_4_7_05) {
+					app.getAppInitializer().addOnFinishListener(
+							init -> ColorsMigrationAlgorithmV2.execute(app)
+					);
+				}
+				if (prevAppVersion < VERSION_4_7_07) {
+					migrate3DModelKey(settings);
+				}
+				if (prevAppVersion < VERSION_4_8_01) {
+					migrateFixedNorthToManualRotatedCompassMode(settings);
+				}
+				if (prevAppVersion < VERSION_4_8_02) {
+					migrateTerrainModeDefaultPreferences(settings);
+				}
+				boolean mergingAssets = false;
+				if (prevAppVersion < VERSION_5_0_00) {
+					mergingAssets = true;
+					app.getAppInitializer().addOnFinishListener(
+							init -> MergeAssetFilesVersionAlgorithm.execute(app)
+					);
+				}
+				if (prevAppVersion < VERSION_5_0_01) {
+					migrateSideWidgetsSizePrefToSmall(settings);
+				}
+				if (prevAppVersion < VERSION_5_0_05) {
+					settings.BILLING_PURCHASE_TOKENS_SENT.set("");
+				}
+				if (prevAppVersion < VERSION_5_1_00 && !mergingAssets) {
+					app.getAppInitializer().addOnFinishListener(
+							init -> MergeAssetFilesVersionAlgorithm.execute(app)
+					);
+				}
+				if (prevAppVersion < VERSION_5_1_01) {
+					migrateShowNextTurnInfoPrefToWidgetSpecific();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -874,16 +881,6 @@ public class AppVersionUpgradeOnInit {
 				actionsPref.setModeValue(appMode, value);
 			}
 		}
-
-		FabMarginPreference oldFabMarginPref = new FabMarginPreference(settings, "quick_fab_margin");
-		FabMarginPreference fabMarginPref = new FabMarginPreference(settings, DEFAULT_BUTTON_ID + "_fab_margin");
-		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-			Pair<Integer, Integer> portrait = oldFabMarginPref.getPortraitFabMargin(appMode);
-			Pair<Integer, Integer> landscape = oldFabMarginPref.getLandscapeFabMargin(appMode);
-
-			fabMarginPref.setPortraitFabMargin(appMode, portrait.first, portrait.second);
-			fabMarginPref.setLandscapeFabMargin(appMode, landscape.first, landscape.second);
-		}
 	}
 
 	private void migrateProfileQuickActionButtons() {
@@ -907,8 +904,7 @@ public class AppVersionUpgradeOnInit {
 
 							newState.getNamePref().set(name);
 							newState.getQuickActionsPref().set(preferences.getString(key + "_list", null));
-							copyPreferenceForAllModes(oldState.getStatePref(), newState.getStatePref());
-							copyFabMarginPreferenceForAllModes(oldState.getFabMarginPref(), newState.getFabMarginPref());
+							copyPreferenceForAllModes(oldState.getVisibilityPref(), newState.getVisibilityPref());
 
 							globalButtons.put(name, newState);
 						}
@@ -917,7 +913,7 @@ public class AppVersionUpgradeOnInit {
 			}
 		}
 		if (!globalButtons.isEmpty()) {
-			buttonsHelper.setQuickActionButtonStates(globalButtons.values());
+			buttonsHelper.setQuickActionStates(globalButtons.values());
 		}
 	}
 
@@ -927,36 +923,119 @@ public class AppVersionUpgradeOnInit {
 		}
 	}
 
-	private void copyFabMarginPreferenceForAllModes(@NonNull FabMarginPreference oldPref, @NonNull FabMarginPreference newPref) {
-		copyPreferenceForAllModes(oldPref.getFabMarginXPortrait(), newPref.getFabMarginXPortrait());
-		copyPreferenceForAllModes(oldPref.getFabMarginYPortrait(), newPref.getFabMarginYPortrait());
-		copyPreferenceForAllModes(oldPref.getFabMarginXLandscape(), newPref.getFabMarginXLandscape());
-		copyPreferenceForAllModes(oldPref.getFabMarginYLandscape(), newPref.getFabMarginYLandscape());
-	}
-
-	private void migrateRoutingTypePrefs() {
-		OsmandSettings settings = app.getSettings();
-		boolean hhRouting = new BooleanPreference(settings, "use_hh_routing", false).makeGlobal().get();
-		boolean hhRoutingCpp = new BooleanPreference(settings, "hh_routing_cpp", false).makeGlobal().get();
-		CommonPreference<Boolean> disableComplexRouting = new BooleanPreference(settings, "disable_complex_routing", false).makeProfile();
-
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			RoutingType routingType;
-			if (hhRouting) {
-				routingType = hhRoutingCpp ? HH_CPP : HH_JAVA;
-			} else {
-				routingType = disableComplexRouting.getModeValue(mode) ? A_STAR_CLASSIC : A_STAR_2_PHASE;
-			}
-			settings.ROUTING_TYPE.setModeValue(mode, routingType);
-		}
-	}
-
 	private void migrateLocalSorting(@NonNull OsmandSettings settings) {
 		CommonPreference<LocalSortMode> oldPref = settings.registerEnumStringPreference("local_maps_sort_mode", COUNTRY_NAME_ASCENDING, LocalSortMode.values(), LocalSortMode.class).makeGlobal().makeShared();
 		if (oldPref.isSet()) {
 			LocalSortMode sortMode = oldPref.get();
 			LocalItemUtils.getSortModePref(app, MAP_DATA).set(sortMode);
 			LocalItemUtils.getSortModePref(app, ROAD_DATA).set(sortMode);
+		}
+	}
+
+	private void migrate3DModelKey(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			String locationIcon = settings.LOCATION_ICON.getModeValue(mode);
+			String migrateLocationIconKey = LocationIcon.getIconForDefaultModel(locationIcon);
+			if (migrateLocationIconKey != null) {
+				settings.LOCATION_ICON.setModeValue(mode, migrateLocationIconKey);
+			}
+
+			String navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
+			String migrateNavigationIconKey = LocationIcon.getIconForDefaultModel(navigationIcon);
+			if (migrateNavigationIconKey != null) {
+				settings.NAVIGATION_ICON.setModeValue(mode, migrateNavigationIconKey);
+			}
+		}
+	}
+
+	private void migrateFixedNorthToManualRotatedCompassMode(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (settings.getCompassMode(mode) == CompassMode.NORTH_IS_UP) {
+				settings.setCompassMode(CompassMode.MANUALLY_ROTATED, mode);
+			}
+		}
+	}
+
+	private void migrateTerrainModeDefaultPreferences(@NonNull OsmandSettings settings) {
+		OsmandPreference<Integer> oldDefaultMinZoomPref = new IntPreference(settings, DEFAULT_KEY + "_min_zoom", 0);
+		OsmandPreference<Integer> oldDefaultMaxZoomPref = new IntPreference(settings, DEFAULT_KEY + "_max_zoom", 0);
+		OsmandPreference<Integer> oldDefaultTransparencyPref = new IntPreference(settings, DEFAULT_KEY + "_transparency", 0);
+
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			Integer oldMinZoom = oldDefaultMinZoomPref.getModeValue(mode);
+			Integer oldMaxZoom = oldDefaultMaxZoomPref.getModeValue(mode);
+			Integer oldTransparencyZoom = oldDefaultTransparencyPref.getModeValue(mode);
+			for (TerrainMode terrainMode : TerrainMode.values(app)) {
+				if (terrainMode.isDefaultMode() && terrainMode.getType() != HEIGHT) {
+					if (oldDefaultMinZoomPref.isSetForMode(mode) && oldDefaultMaxZoomPref.isSetForMode(mode)) {
+						terrainMode.setZoomValues(oldMinZoom, oldMaxZoom);
+					}
+					if (oldDefaultTransparencyPref.isSetForMode(mode)) {
+						terrainMode.setTransparency(oldTransparencyZoom);
+					}
+				}
+			}
+		}
+	}
+
+	private void migrateSideWidgetsSizePrefToSmall(@NonNull OsmandSettings settings) {
+
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			List<String> leftPages = settings.LEFT_WIDGET_PANEL_ORDER.getStringsListForProfile(mode);
+			migrateSidePanelSizes(settings, mode, leftPages);
+
+			List<String> rightPages = settings.RIGHT_WIDGET_PANEL_ORDER.getStringsListForProfile(mode);
+			migrateSidePanelSizes(settings, mode, rightPages);
+		}
+	}
+
+	private void migrateSidePanelSizes(@NonNull OsmandSettings settings, @NonNull ApplicationMode mode, @Nullable List<String> pages) {
+		if (pages == null) {
+			return;
+		}
+		for (String page : pages) {
+			String[] widgetIds = page.split(WIDGET_SEPARATOR);
+			for (String widgetId : widgetIds) {
+				String sizePrefId;
+				if (WidgetType.isOriginalWidget(widgetId)) {
+					sizePrefId = SIMPLE_WIDGET_SIZE_ID + widgetId;
+				} else {
+					sizePrefId = SIMPLE_WIDGET_SIZE_ID + WidgetType.getDefaultWidgetId(widgetId) + widgetId;
+				}
+				if (settings.isSet(mode, sizePrefId)) {
+					CommonPreference<WidgetSize> pref = settings.registerEnumStringPreference(sizePrefId, WidgetSize.SMALL, WidgetSize.values(), WidgetSize.class)
+							.makeProfile();
+					pref.resetModeToDefault(mode);
+				}
+			}
+		}
+	}
+
+	private void migrateShowNextTurnInfoPrefToWidgetSpecific() {
+		final String BASE_PREF_ID = "show_next_turn_info";
+		final String BASE_WIDGET_ID = "street_name";
+		final String CUSTOM_ID_DELIMITER = "__";
+
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<Boolean> oldPref = new BooleanPreference(settings, BASE_PREF_ID, false).makeProfile();;
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			if (!oldPref.isSetForMode(appMode)) {
+				continue;
+			}
+			boolean showNextTurn = oldPref.getModeValue(appMode);
+
+			// apply this setting to ALL existing StreetNameWidgets (customIds) for this profile
+			List<String> widgetIds = settings.CUSTOM_WIDGETS_KEYS.getStringsListForProfile(appMode);
+			if (widgetIds != null) {
+				for (String widgetId : widgetIds) {
+					if (widgetId.startsWith(BASE_WIDGET_ID) && widgetId.contains(CUSTOM_ID_DELIMITER)) {
+						String prefId = BASE_PREF_ID + "_" + widgetId;
+						settings.registerBooleanPreference(prefId, false)
+								.makeProfile().cache().setModeValue(appMode, showNextTurn);
+					}
+				}
+			}
 		}
 	}
 }

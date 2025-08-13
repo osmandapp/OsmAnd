@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.ORIGINAL_VALUE;
 import static net.osmand.plus.quickaction.QuickActionType.CREATE_CATEGORY;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 
@@ -8,40 +9,36 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.routes.actions.*;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.*;
+import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.Map3DButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.mapwidgets.configure.buttons.*;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.lang.reflect.Type;
+import java.util.*;
 
 /**
  * Created by rosty on 12/27/16.
  */
 
 public class MapButtonsHelper {
+
+	public final static String KEY_EVENT_KEY = "key_event";
 
 	public interface QuickActionUpdatesListener {
 
@@ -68,32 +65,15 @@ public class MapButtonsHelper {
 	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS).iconRes(R.drawable.ic_action_settings);
 	@QuickActionCategoryType
-	public static final QuickActionType TYPE_OPEN = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_open).category(QuickActionType.OPEN);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_AUDIO_VIDEO_NOTES = new QuickActionType(0, "").
-			nameRes(R.string.audionotes_plugin_name).category(QuickActionType.AUDIO_VIDEO_NOTES).iconRes(R.drawable.ic_action_micro_dark);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_FAVORITES = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_favorites).category(QuickActionType.FAVORITES).iconRes(R.drawable.ic_action_favorite);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_MAP_APPEARANCE = new QuickActionType(0, "").
-			nameRes(R.string.map_look_descr).category(QuickActionType.MAP_APPEARANCE).iconRes(R.drawable.ic_action_map_style);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_MAP_INTERACTIONS = new QuickActionType(0, "").
 			nameRes(R.string.key_event_category_map_interactions).category(QuickActionType.MAP_INTERACTIONS).iconRes(R.drawable.ic_action_map_move_up);
 	@QuickActionCategoryType
-	public static final QuickActionType TYPE_OSM_EDITING = new QuickActionType(0, "").
-			nameRes(R.string.osm_editing_plugin_name).category(QuickActionType.OSM_EDITING).iconRes(R.drawable.ic_action_openstreetmap_logo);
+	public static final QuickActionType TYPE_MY_PLACES = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_my_places).category(QuickActionType.MY_PLACES).iconRes(R.drawable.ic_action_favorite);
+
 	@QuickActionCategoryType
-	public static final QuickActionType TYPE_TOPOGRAPHY = new QuickActionType(0, "").
-			nameRes(R.string.srtm_plugin_name).category(QuickActionType.TOPOGRAPHY).iconRes(R.drawable.ic_action_terrain);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_TRACKS = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_tracks).category(QuickActionType.TRACKS).iconRes(R.drawable.ic_action_polygom_dark);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_WEATHER = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_weather).category(QuickActionType.WEATHER).iconRes(R.drawable.ic_action_umbrella);
+	public static final QuickActionType TYPE_INTERFACE = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_interface).category(QuickActionType.INTERFACE).iconRes(R.drawable.ic_action_ui_customization);
 
 	public static List<QuickActionType> collectQuickActionCategoryType(Class<?> typeClass) {
 		List<QuickActionType> annotatedFields = new ArrayList<>();
@@ -112,8 +92,8 @@ public class MapButtonsHelper {
 	}
 
 	@Nullable
-	public QuickActionType getCategoryActionTypeFromId(int typeId) {
-		for (QuickActionType type : collectQuickActionCategoryType(this.getClass())) {
+	public static QuickActionType getCategoryActionTypeFromId(int typeId) {
+		for (QuickActionType type : collectQuickActionCategoryType(MapButtonsHelper.class)) {
 			if (type.getCategory() == typeId) {
 				return type;
 			}
@@ -123,29 +103,52 @@ public class MapButtonsHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final Collator collator = OsmAndCollator.primaryCollator();
 	private final QuickActionSerializer serializer = new QuickActionSerializer();
 	private final Gson gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, serializer).create();
 
+	private final CommonPreference<Integer> defaultSizePref;
+	private final CommonPreference<Float> defaultOpacityPref;
+	private final CommonPreference<Integer> defaultCornerRadiusPref;
+
 	private Map3DButtonState map3DButtonState;
+	private MyLocationButtonState myLocationButtonState;
+	private NavigationMenuButtonState navigationMenuButtonState;
+	private QuickSearchButtonState quickSearchButtonState;
+	private ZoomInButtonState zoomInButtonState;
+	private ZoomOutButtonState zoomOutButtonState;
+	private ConfigureMapButtonState configureMapButtonState;
+	private DrawerMenuButtonState drawerMenuButtonState;
 	private CompassButtonState compassButtonState;
-	private List<QuickActionButtonState> mapButtonStates = new ArrayList<>();
+	private List<QuickActionButtonState> quickActionStates = new ArrayList<>();
 
 	private List<QuickActionType> enabledTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 	private Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>();
-	private final Collator collator = OsmAndCollator.primaryCollator();
+
 
 	public MapButtonsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.defaultSizePref = settings.registerIntPreference("default_map_button_size", ORIGINAL_VALUE).makeProfile().cache();
+		this.defaultOpacityPref = settings.registerFloatPreference("default_map_button_opacity", ORIGINAL_VALUE).makeProfile().cache();
+		this.defaultCornerRadiusPref = settings.registerIntPreference("default_map_button_corner_radius", ORIGINAL_VALUE).makeProfile().cache();
+
 		updateActionTypes();
 		initDefaultButtons();
 	}
 
 	private void initDefaultButtons() {
-		map3DButtonState = new Map3DButtonState(app);
 		compassButtonState = new CompassButtonState(app);
+		configureMapButtonState = new ConfigureMapButtonState(app);
+		drawerMenuButtonState = new DrawerMenuButtonState(app);
+		map3DButtonState = new Map3DButtonState(app);
+		myLocationButtonState = new MyLocationButtonState(app);
+		navigationMenuButtonState = new NavigationMenuButtonState(app);
+		quickSearchButtonState = new QuickSearchButtonState(app);
+		zoomInButtonState = new ZoomInButtonState(app);
+		zoomOutButtonState = new ZoomOutButtonState(app);
 	}
 
 	public void addUpdatesListener(@NonNull QuickActionUpdatesListener listener) {
@@ -177,14 +180,64 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public List<QuickActionButtonState> getButtonsStates() {
-		return mapButtonStates;
+	public MyLocationButtonState getMyLocationButtonState() {
+		return myLocationButtonState;
+	}
+
+	@NonNull
+	public NavigationMenuButtonState getNavigationMenuButtonState() {
+		return navigationMenuButtonState;
+	}
+
+	@NonNull
+	public QuickSearchButtonState getQuickSearchButtonState() {
+		return quickSearchButtonState;
+	}
+
+	@NonNull
+	public ZoomInButtonState getZoomInButtonState() {
+		return zoomInButtonState;
+	}
+
+	@NonNull
+	public ZoomOutButtonState getZoomOutButtonState() {
+		return zoomOutButtonState;
+	}
+
+	@NonNull
+	public ConfigureMapButtonState getConfigureMapButtonState() {
+		return configureMapButtonState;
+	}
+
+	@NonNull
+	public DrawerMenuButtonState getDrawerMenuButtonState() {
+		return drawerMenuButtonState;
+	}
+
+	@NonNull
+	public List<QuickActionButtonState> getQuickActionButtonsStates() {
+		return quickActionStates;
+	}
+
+	@NonNull
+	public List<MapButtonState> getDefaultButtonsStates() {
+		return Arrays.asList(configureMapButtonState, quickSearchButtonState,
+				compassButtonState, drawerMenuButtonState, navigationMenuButtonState,
+				map3DButtonState, myLocationButtonState, zoomInButtonState, zoomOutButtonState
+		);
+	}
+
+	@NonNull
+	public List<MapButtonState> getAllButtonsStates() {
+		List<MapButtonState> list = new ArrayList<>(getQuickActionButtonsStates());
+		list.addAll(getDefaultButtonsStates());
+		return list;
 	}
 
 	@NonNull
 	public List<QuickAction> getFlattenedQuickActions() {
 		List<QuickAction> actions = new ArrayList<>();
-		for (QuickActionButtonState buttonState : mapButtonStates) {
+		for (QuickActionButtonState buttonState : quickActionStates) {
 			actions.addAll(buttonState.getQuickActions());
 		}
 		return actions;
@@ -193,7 +246,7 @@ public class MapButtonsHelper {
 	@NonNull
 	public List<QuickActionButtonState> getEnabledButtonsStates() {
 		List<QuickActionButtonState> list = new ArrayList<>();
-		for (QuickActionButtonState buttonState : mapButtonStates) {
+		for (QuickActionButtonState buttonState : quickActionStates) {
 			if (buttonState.isEnabled()) {
 				list.add(buttonState);
 			}
@@ -237,6 +290,18 @@ public class MapButtonsHelper {
 		notifyUpdates();
 	}
 
+	@NonNull
+	public String convertActionsToJson(@NonNull List<QuickAction> quickActions) {
+		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		return gson.toJson(quickActions, type);
+	}
+
+	@Nullable
+	public List<QuickAction> parseActionsFromJson(@NonNull String json) {
+		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		return gson.fromJson(json, type);
+	}
+
 	public void onButtonStateChanged(@NonNull QuickActionButtonState buttonState) {
 		notifyUpdates();
 	}
@@ -255,7 +320,7 @@ public class MapButtonsHelper {
 	public boolean isActionNameUnique(@NonNull List<QuickAction> actions, @NonNull QuickAction quickAction) {
 		for (QuickAction action : actions) {
 			if (quickAction.getId() != action.getId()
-					&& Algorithms.stringsEqual(quickAction.getName(app), action.getName(app))) {
+					&& Algorithms.stringsEqual(quickAction.getExtendedName(app), action.getExtendedName(app))) {
 				return false;
 			}
 		}
@@ -288,7 +353,7 @@ public class MapButtonsHelper {
 	}
 
 	public boolean hasEnabledButtons() {
-		for (QuickActionButtonState buttonState : mapButtonStates) {
+		for (QuickActionButtonState buttonState : quickActionStates) {
 			if (buttonState.isEnabled()) {
 				return true;
 			}
@@ -317,6 +382,16 @@ public class MapButtonsHelper {
 		allTypes.add(DayNightModeAction.TYPE);
 		allTypes.add(ShowHideTransportLinesAction.TYPE);
 		allTypes.add(ShowHideMapillaryAction.TYPE);
+		allTypes.add(ShowHideCycleRoutesAction.TYPE);
+		allTypes.add(ShowHideMtbRoutesAction.TYPE);
+		allTypes.add(ShowHideHikingRoutesAction.TYPE);
+		allTypes.add(ShowHideDifficultyClassificationAction.TYPE);
+		allTypes.add(ShowHideSkiSlopesAction.TYPE);
+		allTypes.add(ShowHideHorseRoutesAction.TYPE);
+		allTypes.add(ShowHideWhitewaterSportsAction.TYPE);
+		allTypes.add(ShowHideFitnessTrailsAction.TYPE);
+		allTypes.add(ShowHideRunningRoutesAction.TYPE);
+		allTypes.add(ShowHideCoordinatesGridAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);
@@ -332,6 +407,14 @@ public class MapButtonsHelper {
 		allTypes.add(DisplayPositionAction.TYPE);
 		allTypes.add(NextAppProfileAction.TYPE);
 		allTypes.add(PreviousAppProfileAction.TYPE);
+		allTypes.add(ChangeMapOrientationAction.TYPE);
+		// interface
+		allTypes.add(OpenNavigationViewAction.TYPE);
+		allTypes.add(OpenSearchViewAction.TYPE);
+		allTypes.add(OpenWunderLINQDatagridAction.TYPE);
+		allTypes.add(ShowHideDrawerAction.TYPE);
+		allTypes.add(NavigatePreviousScreenAction.TYPE);
+		allTypes.add(LockScreenAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);
@@ -353,7 +436,7 @@ public class MapButtonsHelper {
 	}
 
 	public void updateActiveActions() {
-		mapButtonStates = createButtonsStates();
+		quickActionStates = createButtonsStates();
 	}
 
 	@NonNull
@@ -373,22 +456,24 @@ public class MapButtonsHelper {
 		return list;
 	}
 
-	public void resetQuickActionsForMode(@NonNull ApplicationMode appMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
-			buttonState.resetForMode(appMode);
+	public void resetButtonStatesForMode(@NonNull ApplicationMode mode, @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
+			buttonState.resetToDefault(mode);
 		}
 		updateActionTypes();
 	}
 
-	public void copyQuickActionsFromMode(@NonNull ApplicationMode toAppMode, @NonNull ApplicationMode fromAppMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
+	public void copyButtonStatesFromMode(@NonNull ApplicationMode toAppMode,
+	                                     @NonNull ApplicationMode fromAppMode,
+	                                     @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
 			buttonState.copyForMode(fromAppMode, toAppMode);
 		}
 		updateActionTypes();
 	}
 
 	@NonNull
-	public Map<QuickActionType, List<QuickActionType>>  produceTypeActionsListWithHeaders(@NonNull QuickActionButtonState buttonState) {
+	public Map<QuickActionType, List<QuickActionType>> produceTypeActionsListWithHeaders(@Nullable QuickActionButtonState buttonState) {
 		Map<QuickActionType, List<QuickActionType>> quickActions = new HashMap<>();
 
 		filterQuickActions(buttonState, TYPE_ADD_ITEMS, quickActions);
@@ -396,25 +481,26 @@ public class MapButtonsHelper {
 		filterQuickActions(buttonState, TYPE_NAVIGATION, quickActions);
 //		filterQuickActions(buttonState, TYPE_CONFIGURE_SCREEN, actionTypes);
 		filterQuickActions(buttonState, TYPE_SETTINGS, quickActions);
-
-		filterQuickActions(buttonState, TYPE_AUDIO_VIDEO_NOTES, quickActions);
-		filterQuickActions(buttonState, TYPE_FAVORITES, quickActions);
-		filterQuickActions(buttonState, TYPE_MAP_APPEARANCE, quickActions);
 		filterQuickActions(buttonState, TYPE_MAP_INTERACTIONS, quickActions);
-		filterQuickActions(buttonState, TYPE_OSM_EDITING, quickActions);
-		filterQuickActions(buttonState, TYPE_TOPOGRAPHY, quickActions);
-		filterQuickActions(buttonState, TYPE_TRACKS, quickActions);
-		filterQuickActions(buttonState, TYPE_WEATHER, quickActions);
+		filterQuickActions(buttonState, TYPE_MY_PLACES, quickActions);
+		filterQuickActions(buttonState, TYPE_INTERFACE, quickActions);
 
 		return quickActions;
 	}
 
-	public void filterQuickActions(@NonNull QuickActionButtonState buttonState,
-									@NonNull QuickActionType filter,
-									@NonNull List<QuickActionType> actionTypes) {
+	public void filterQuickActions(@NonNull QuickActionType filter,
+	                               @NonNull List<QuickActionType> actionTypes) {
+		filterQuickActions(null, filter, actionTypes);
+	}
+
+	public void filterQuickActions(@Nullable QuickActionButtonState buttonState,
+	                               @NonNull QuickActionType filter,
+	                               @NonNull List<QuickActionType> actionTypes) {
 		Set<Integer> set = new TreeSet<>();
-		for (QuickAction action : buttonState.getQuickActions()) {
-			set.add(action.getActionType().getId());
+		if (buttonState != null) {
+			for (QuickAction action : buttonState.getQuickActions()) {
+				set.add(action.getActionType().getId());
+			}
 		}
 		for (QuickActionType type : enabledTypes) {
 			if (type.getCategory() == filter.getCategory()) {
@@ -430,9 +516,9 @@ public class MapButtonsHelper {
 		}
 	}
 
-	private void filterQuickActions(@NonNull QuickActionButtonState buttonState,
-									@NonNull QuickActionType filter,
-									@NonNull Map<QuickActionType, List<QuickActionType>> actionTypes) {
+	private void filterQuickActions(@Nullable QuickActionButtonState buttonState,
+	                                @NonNull QuickActionType filter,
+	                                @NonNull Map<QuickActionType, List<QuickActionType>> actionTypes) {
 		List<QuickActionType> categoryActions = actionTypes.get(filter);
 		if (categoryActions == null) {
 			categoryActions = new ArrayList<>();
@@ -486,7 +572,7 @@ public class MapButtonsHelper {
 
 	@Nullable
 	public QuickActionButtonState getButtonStateByName(@NonNull String name) {
-		for (QuickActionButtonState buttonState : mapButtonStates) {
+		for (QuickActionButtonState buttonState : quickActionStates) {
 			if (Algorithms.stringsEqual(buttonState.getName(), name)) {
 				return buttonState;
 			}
@@ -495,8 +581,8 @@ public class MapButtonsHelper {
 	}
 
 	@Nullable
-	public QuickActionButtonState getButtonStateById(@NonNull String id) {
-		for (QuickActionButtonState buttonState : mapButtonStates) {
+	public QuickActionButtonState getActionButtonStateById(@NonNull String id) {
+		for (QuickActionButtonState buttonState : quickActionStates) {
 			if (Algorithms.stringsEqual(buttonState.getId(), id)) {
 				return buttonState;
 			}
@@ -505,9 +591,19 @@ public class MapButtonsHelper {
 	}
 
 	@Nullable
+	public MapButtonState getMapButtonStateById(@NonNull String id) {
+		for (MapButtonState buttonState : getDefaultButtonsStates()) {
+			if (Algorithms.stringsEqual(buttonState.getId(), id)) {
+				return buttonState;
+			}
+		}
+		return getActionButtonStateById(id);
+	}
+
+	@Nullable
 	public QuickActionButtonState getButtonStateByAction(@NonNull QuickAction action) {
 		long id = action.getId();
-		for (QuickActionButtonState buttonState : mapButtonStates) {
+		for (QuickActionButtonState buttonState : quickActionStates) {
 			if (buttonState.getQuickAction(id) != null) {
 				return buttonState;
 			}
@@ -516,9 +612,28 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
+	public CommonPreference<Integer> getDefaultSizePref() {
+		return defaultSizePref;
+	}
+
+	@NonNull
+	public CommonPreference<Float> getDefaultOpacityPref() {
+		return defaultOpacityPref;
+	}
+
+	@NonNull
+	public CommonPreference<Integer> getDefaultCornerRadiusPref() {
+		return defaultCornerRadiusPref;
+	}
+
+	@NonNull
+	public String createNewButtonStateId() {
+		return DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
+	}
+
+	@NonNull
 	public QuickActionButtonState createNewButtonState() {
-		String id = DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
-		return new QuickActionButtonState(app, id);
+		return new QuickActionButtonState(app, createNewButtonStateId());
 	}
 
 	public void addQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
@@ -529,15 +644,17 @@ public class MapButtonsHelper {
 
 	public void removeQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
 		settings.QUICK_ACTION_BUTTONS.removeValue(buttonState.getId());
+		buttonState.onButtonStateRemoved();
 		updateActiveActions();
 		notifyUpdates();
 	}
 
-	public void setQuickActionButtonStates(@NonNull Collection<QuickActionButtonState> buttonStates) {
-		settings.QUICK_ACTION_BUTTONS.clearAll();
+	public void setQuickActionStates(@NonNull Collection<QuickActionButtonState> buttonStates) {
+		List<String> buttonStateIds = new ArrayList<>();
 		for (QuickActionButtonState state : buttonStates) {
-			settings.QUICK_ACTION_BUTTONS.addValue(state.getId());
+			buttonStateIds.add(state.getId());
 		}
+		settings.QUICK_ACTION_BUTTONS.setStringsList(buttonStateIds);
 		updateActiveActions();
 		notifyUpdates();
 	}

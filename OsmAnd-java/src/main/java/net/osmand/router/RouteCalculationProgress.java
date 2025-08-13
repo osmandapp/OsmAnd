@@ -1,10 +1,13 @@
 package net.osmand.router;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class RouteCalculationProgress {
+public class RouteCalculationProgress implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	public int segmentNotFound = -1;
 	public float distanceFromBegin;

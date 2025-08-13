@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -65,7 +66,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		items.add(new TitleItem(getString(R.string.shared_string_rename)));
 
-		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
+		View mainView = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.track_name_edit_text, null);
 		nameTextBox = setupTextBox(mainView);
 		editText = setupEditText(mainView);
 		AndroidUtils.softKeyboardDelayed(getActivity(), editText);
@@ -131,7 +132,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		File dest = renameFile();
 		if (dest != null) {
-			app.getSmartFolderHelper().onTrackRenamed(srcFile, dest);
+			app.getSmartFolderHelper().onTrackRenamed(SharedUtil.kFile(srcFile), SharedUtil.kFile(dest));
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof RenameCallback) {
 				((RenameCallback) fragment).fileRenamed(srcFile, dest);

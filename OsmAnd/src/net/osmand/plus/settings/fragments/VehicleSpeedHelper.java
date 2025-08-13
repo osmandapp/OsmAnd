@@ -29,7 +29,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.SpeedSliderType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -48,7 +49,7 @@ public class VehicleSpeedHelper {
 		this.app = app;
 		this.mode = mode;
 		this.settings = app.getSettings();
-		this.nightMode = !settings.isLightContentForMode(mode);
+		this.nightMode = app.getDaynightHelper().isNightMode(mode, ThemeUsageContext.APP);
 	}
 
 	public void showSeekbarSettingsDialog(@NonNull Activity activity) {
@@ -219,24 +220,13 @@ public class VehicleSpeedHelper {
 		float[] ratio = new float[1];
 		SpeedConstants constants = settings.SPEED_SYSTEM.getModeValue(mode);
 		switch (constants) {
-			case MILES_PER_HOUR:
-				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
-				break;
-			case KILOMETERS_PER_HOUR:
-				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_KILOMETER;
-				break;
-			case MINUTES_PER_KILOMETER:
-				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_KILOMETER;
-				break;
-			case NAUTICALMILES_PER_HOUR:
-				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-				break;
-			case MINUTES_PER_MILE:
-				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
-				break;
-			case METERS_PER_SECOND:
-				ratio[0] = 1;
-				break;
+			case MILES_PER_HOUR -> ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
+			case KILOMETERS_PER_HOUR -> ratio[0] = 3600 / OsmAndFormatter.METERS_IN_KILOMETER;
+			case MINUTES_PER_KILOMETER -> ratio[0] = 3600 / OsmAndFormatter.METERS_IN_KILOMETER;
+			case NAUTICALMILES_PER_HOUR ->
+					ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+			case MINUTES_PER_MILE -> ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
+			case METERS_PER_SECOND -> ratio[0] = 1;
 		}
 		return ratio;
 	}
@@ -250,7 +240,7 @@ public class VehicleSpeedHelper {
 			case MINUTES_PER_MILE:
 				return app.getString(R.string.mile_per_hour);
 		}
-		return constants.toShortString(app);
+		return constants.toShortString();
 	}
 
 	@NonNull

@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.enums.HistorySource;
 
@@ -19,11 +19,11 @@ import java.util.List;
 public class NavigationHistorySettingsItem extends HistorySettingsItem {
 
 
-	public NavigationHistorySettingsItem(@NonNull OsmandApplication app, @NonNull List<SearchHistoryHelper.HistoryEntry> items) {
+	public NavigationHistorySettingsItem(@NonNull OsmandApplication app, @NonNull List<HistoryEntry> items) {
 		super(app, items);
 	}
 
-	public NavigationHistorySettingsItem(@NonNull OsmandApplication app, @Nullable NavigationHistorySettingsItem baseItem, @NonNull List<SearchHistoryHelper.HistoryEntry> items) {
+	public NavigationHistorySettingsItem(@NonNull OsmandApplication app, @Nullable NavigationHistorySettingsItem baseItem, @NonNull List<HistoryEntry> items) {
 		super(app, baseItem, items);
 	}
 
@@ -33,7 +33,7 @@ public class NavigationHistorySettingsItem extends HistorySettingsItem {
 
 	@NonNull
 	@Override
-	protected List<SearchHistoryHelper.HistoryEntry> getHistoryEntries() {
+	protected List<HistoryEntry> getHistoryEntries() {
 		return searchHistoryHelper.getHistoryEntries(HistorySource.NAVIGATION, false);
 	}
 

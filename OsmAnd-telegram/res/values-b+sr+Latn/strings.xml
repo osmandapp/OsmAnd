@@ -61,7 +61,7 @@
     <string name="shared_string_second_short">sek</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_hour_short">č</string>
-    <string name="si_nm_h">Nautičkih milja na sat (čvorovi)</string>
+    <string name="si_nm_h">Nautička milja na sat (čvorovi)</string>
     <string name="nm_h">nmi/h</string>
     <string name="shared_string_welcome">Dobrodošli</string>
     <string name="shared_string_authorization_descr">Unesite vaš telefonski broj Telegrama u međunarodnom formatu</string>

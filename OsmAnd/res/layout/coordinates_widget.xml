@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -36,19 +36,18 @@
 				android:layout_marginTop="@dimen/content_padding_half"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginBottom="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/widget_coordinates_latitude_day" />
+				app:srcCompat="@drawable/widget_coordinates_latitude_day" />
 
-			<net.osmand.plus.widgets.TextViewEx
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/first_coordinate"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:maxLines="1"
 				android:textColor="@color/activity_background_color_light"
-				android:textDirection="ltr"
 				android:textSize="@dimen/map_top_widget_text_size"
-				tools:text="N 20°96′60″"
-				tools:textStyle="bold" />
+				app:typefaceWeight="medium"
+				tools:text="N 20°96′60″" />
 
 		</LinearLayout>
 
@@ -79,19 +78,18 @@
 				android:layout_marginTop="@dimen/content_padding_half"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginBottom="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/widget_coordinates_longitude_day" />
+				app:srcCompat="@drawable/widget_coordinates_longitude_day" />
 
-			<net.osmand.plus.widgets.TextViewEx
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/second_coordinate"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:maxLines="1"
 				android:textColor="@color/activity_background_color_light"
-				android:textDirection="ltr"
 				android:textSize="@dimen/map_top_widget_text_size"
-				tools:text="W 120°31′12″"
-				tools:textStyle="bold" />
+				app:typefaceWeight="medium"
+				tools:text="W 120°31′12″" />
 
 		</LinearLayout>
 

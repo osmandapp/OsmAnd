@@ -2,6 +2,7 @@ package net.osmand.plus.backup.ui;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DELETE;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_NONE;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
 import static net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType.UNIQUE;
 import static net.osmand.plus.backup.ui.BackupUiUtils.generateTimeString;
@@ -35,6 +36,7 @@ import net.osmand.plus.backup.ui.status.ItemViewHolder;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,7 +57,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 	}
 
 	@Nullable
@@ -86,7 +88,8 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private void setupDownloadAction(@NonNull View view) {
-		boolean deleteOperation = item.operation == SYNC_OPERATION_DELETE;
+		boolean deleteOperation = item.operation == SYNC_OPERATION_DELETE
+				|| item.operation == SYNC_OPERATION_NONE && item.remoteFile != null && item.remoteFile.isDeleted();
 		boolean enabled = isRowEnabled(item.fileName) && (item.remoteFile != null || deleteOperation);
 
 		String description;
@@ -203,17 +206,16 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, operation);
 	}
 
+	@NonNull
 	private String getTitleForOperation() {
-		switch (item.operation) {
-			case SYNC_OPERATION_DOWNLOAD:
-				return getString(item.localFile == null ? R.string.new_file : R.string.modified_file);
-			case SYNC_OPERATION_UPLOAD:
-				return getString(item.remoteFile == null ? R.string.new_file : R.string.modified_file);
-			case SYNC_OPERATION_DELETE:
-				return getString(R.string.deleted_file);
-			default:
-				return getString(R.string.cloud_conflict);
-		}
+		return switch (item.operation) {
+			case SYNC_OPERATION_DOWNLOAD ->
+					getString(item.localFile == null ? R.string.new_file : R.string.modified_file);
+			case SYNC_OPERATION_UPLOAD ->
+					getString(item.remoteFile == null ? R.string.new_file : R.string.modified_file);
+			case SYNC_OPERATION_DELETE -> getString(R.string.deleted_file);
+			default -> getString(R.string.cloud_conflict);
+		};
 	}
 
 	private boolean isRowEnabled(@NonNull String fileName) {
@@ -230,7 +232,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull CloudChangeItem item,
 	                                @NonNull ChangesTabFragment target) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			ChangeItemActionsBottomSheet fragment = new ChangeItemActionsBottomSheet();
 			fragment.item = item;
 			fragment.recentChangesType = target.getChangesTabType();

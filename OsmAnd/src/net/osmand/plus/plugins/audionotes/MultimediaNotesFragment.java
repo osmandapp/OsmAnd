@@ -2,29 +2,17 @@ package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_CONTINUOUS;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_EDOF;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_PHOTO_SIZE_DEFAULT;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_PHOTO_CAM_SETTING_ID;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_RECORDER_SETTING_ID;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.canDisableShutterSound;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.*;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
-import android.os.Build;
+import android.media.MediaRecorder.AudioEncoder;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -41,7 +29,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -55,6 +42,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -76,7 +64,9 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_NOTES = "open_notes";
 
-	boolean showSwitchProfile;
+	private final AudioVideoNotesPlugin plugin = PluginsHelper.requirePlugin(AudioVideoNotesPlugin.class);
+
+	private boolean showSwitchProfile;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,29 +97,27 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	@Override
 	protected void setupPreferences() {
-		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin != null) {
-			setupCameraPhotoPrefs(plugin);
+		setupCameraPhotoPrefs();
 
-			setupAudioFormatPref(plugin);
-			setupAudioBitratePref(plugin);
+		setupAudioFormatPref();
+		setupAudioBitratePref();
+		setupAudioSampleRatePref();
 
-			setupExternalRecorderPref(plugin);
-			setupVideoQualityPref(plugin);
+		setupExternalRecorderPref();
+		setupVideoQualityPref();
 
-			setupRecorderSplitPref(plugin);
-			setupClipLengthPref(plugin);
-			setupStorageSizePref(plugin);
+		setupRecorderSplitPref();
+		setupClipLengthPref();
+		setupStorageSizePref();
 
-			setupOpenNotesDescrPref();
-			setupOpenNotesPref();
+		setupOpenNotesDescrPref();
+		setupOpenNotesPref();
 
-			setupCopyProfileSettingsPref();
-			setupResetToDefaultPref();
-		}
+		setupCopyProfileSettingsPref();
+		setupResetToDefaultPref();
 	}
 
-	private void setupCameraPhotoPrefs(AudioVideoNotesPlugin plugin) {
+	private void setupCameraPhotoPrefs() {
 		Camera cam = openCamera();
 		setupCameraPermissionPref(cam);
 		setupExternalPhotoCamPref(cam, plugin);
@@ -231,7 +219,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		if (entries.length > 0) {
 			cameraPictureSize.setEntries(entries);
 			cameraPictureSize.setEntryValues(entryValues);
-			if((Integer) cameraPictureSize.getValue() == AV_PHOTO_SIZE_DEFAULT){
+			if ((Integer) cameraPictureSize.getValue() == AV_PHOTO_SIZE_DEFAULT) {
 				cameraPictureSize.setValueIndex(0);
 				updatePreference(cameraPictureSize);
 			}
@@ -311,7 +299,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		uiPreference.setVisible(shouldShowPreference);
 	}
 
-	private void setupAudioFormatPref(AudioVideoNotesPlugin plugin) {
+	private void setupAudioFormatPref() {
 		Integer[] entryValues = {MediaRecorder.AudioEncoder.DEFAULT, MediaRecorder.AudioEncoder.AAC};
 		String[] entries = {getString(R.string.shared_string_default), "AAC"};
 
@@ -321,7 +309,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		audioFormat.setDescription(R.string.av_audio_format_bottom_sheet_descr);
 	}
 
-	private void setupAudioBitratePref(AudioVideoNotesPlugin plugin) {
+	private void setupAudioBitratePref() {
 		Integer[] entryValues = {16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
 		String[] entries = {"16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
 
@@ -331,7 +319,18 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		audioBitrate.setDescription(R.string.av_audio_bitrate_descr);
 	}
 
-	private void setupExternalRecorderPref(AudioVideoNotesPlugin plugin) {
+	private void setupAudioSampleRatePref() {
+		String[] entries = {"8 kHz", "16 kHz", "22.05 kHz", "24 kHz", "44.1 kHz", "48 kHz"};
+		Integer[] entryValues = {8000, 16000, 22050, 24000, 44100, 48000};
+
+		ListPreferenceEx preference = findPreference(plugin.AV_AUDIO_SAMPLE_RATE.getId());
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setDescription(R.string.av_audio_sample_rate_descr);
+		preference.setVisible(plugin.AV_AUDIO_FORMAT.get() == AudioEncoder.AAC);
+	}
+
+	private void setupExternalRecorderPref() {
 		ApplicationMode appMode = getSelectedAppMode();
 		boolean useSystemCamera = plugin.AV_EXTERNAL_RECORDER.getModeValue(appMode);
 		Preference uiPreference = findPreference(EXTERNAL_RECORDER_SETTING_ID);
@@ -339,7 +338,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		uiPreference.setSummary(getCameraAppTitle(useSystemCamera));
 	}
 
-	private void setupVideoQualityPref(AudioVideoNotesPlugin plugin) {
+	private void setupVideoQualityPref() {
 		List<String> qNames = new ArrayList<>();
 		List<Integer> qValues = new ArrayList<>();
 		if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_LOW)) {
@@ -358,7 +357,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			qNames.add("1920 x 1080 (1080p)");
 			qValues.add(CamcorderProfile.QUALITY_1080P);
 		}
-		if (Build.VERSION.SDK_INT >= 21 && CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_2160P)) {
+		if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_2160P)) {
 			qNames.add("3840x2160 (2160p)");
 			qValues.add(CamcorderProfile.QUALITY_2160P);
 		}
@@ -377,12 +376,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		videoQuality.setIcon(getActiveIcon(R.drawable.ic_action_picture_size));
 	}
 
-	private void setupRecorderSplitPref(AudioVideoNotesPlugin plugin) {
+	private void setupRecorderSplitPref() {
 		SwitchPreferenceEx recorderSplit = findPreference(plugin.AV_RECORDER_SPLIT.getId());
 		recorderSplit.setDescription(getString(R.string.rec_split_desc));
 	}
 
-	private void setupClipLengthPref(AudioVideoNotesPlugin plugin) {
+	private void setupClipLengthPref() {
 		Integer[] entryValues = {1, 2, 3, 4, 5, 7, 10, 15, 20, 25, 30};
 		String[] entries = new String[entryValues.length];
 		int i = 0;
@@ -397,7 +396,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		clipLength.setDescription(R.string.rec_split_clip_length_desc);
 	}
 
-	private void setupStorageSizePref(AudioVideoNotesPlugin plugin) {
+	private void setupStorageSizePref() {
 		ListPreferenceEx storageSize = findPreference(plugin.AV_RS_STORAGE_SIZE.getId());
 
 		long size = AndroidUtils.getTotalSpace(app) / (1 << 30);
@@ -444,8 +443,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		int startIndex = multimediaNotesPathDescr.indexOf(multimediaNotesPath);
 		if (startIndex != -1) {
 			SpannableString titleSpan = new SpannableString(multimediaNotesPathDescr);
-			Typeface typeface = FontCache.getRobotoMedium(getContext());
-			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + multimediaNotesPath.length(), 0);
+			titleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, startIndex + multimediaNotesPath.length(), 0);
 			osmEditsDescription.setTitle(titleSpan);
 		} else {
 			osmEditsDescription.setTitle(multimediaNotesPathDescr);

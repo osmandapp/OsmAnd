@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanUtils;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -38,7 +39,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
 	private static final int TITLE_ID = R.string.prefs_plugins;
 	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;

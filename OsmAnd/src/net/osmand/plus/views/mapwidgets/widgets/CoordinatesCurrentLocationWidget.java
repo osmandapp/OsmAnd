@@ -11,16 +11,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 
-	public CoordinatesCurrentLocationWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, COORDINATES_CURRENT_LOCATION);
+	public CoordinatesCurrentLocationWidget(@NonNull MapActivity mapActivity,
+			@Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(mapActivity, COORDINATES_CURRENT_LOCATION, customId, panel);
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
+		super.updateInfo(drawSettings);
+		boolean visible = visibilityHelper.shouldShowTopCoordinatesWidget();
 		updateVisibility(visible);
 		if (visible) {
 			Location location = locationProvider.getLastKnownLocation();
@@ -35,6 +38,7 @@ public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 	private void showSearchingGpsMessage() {
 		AndroidUiHelper.updateVisibility(firstIcon, false);
 		AndroidUiHelper.updateVisibility(divider, false);
+		AndroidUiHelper.updateVisibility(firstContainer, true);
 		AndroidUiHelper.updateVisibility(secondContainer, false);
 		GPSInfo gpsInfo = locationProvider.getGPSInfo();
 		String message = getString(R.string.searching_gps) + "… " + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites;

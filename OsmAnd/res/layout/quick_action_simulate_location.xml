@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
@@ -25,8 +25,8 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			osmand:typeface="@string/font_roboto_medium"
-			osmand:lineHeight="@dimen/default_title_line_height" />
+			app:typefaceWeight="medium"
+			app:lineHeight="@dimen/default_title_line_height" />
 
 		<include
 			android:id="@+id/track_toggle"
@@ -48,8 +48,8 @@
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/description_letter_spacing"
-			osmand:typeface="@string/font_roboto_regular"
-			osmand:lineHeight="@dimen/default_desc_line_height" />
+			android:textStyle="normal"
+			app:lineHeight="@dimen/default_desc_line_height" />
 
 		<LinearLayout
 			android:id="@+id/selected_track_file_container"
@@ -82,7 +82,7 @@
 					android:textColor="?attr/colorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
 					android:letterSpacing="@dimen/description_letter_spacing"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:background="@drawable/btn_solid_border_light" />
 
 			</FrameLayout>
@@ -96,7 +96,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="top"
 		android:scaleType="fitXY"
-		osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+		app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:layout_width="match_parent"
@@ -104,7 +104,7 @@
 		android:scaleType="fitXY"
 		android:layout_gravity="top"
 		android:layout_marginTop="@dimen/content_padding"
-		osmand:srcCompat="@drawable/bg_shadow_list_top" />
+		app:srcCompat="@drawable/bg_shadow_list_top" />
 
 	<LinearLayout
 		android:orientation="vertical"
@@ -122,8 +122,8 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			osmand:typeface="@string/font_roboto_medium"
-			osmand:lineHeight="@dimen/default_title_line_height" />
+			app:typefaceWeight="medium"
+			app:lineHeight="@dimen/default_title_line_height" />
 
 		<LinearLayout
 			android:orientation="horizontal"
@@ -141,8 +141,8 @@
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
-				osmand:typeface="@string/font_roboto_medium"
-				osmand:lineHeight="@dimen/default_title_line_height" />
+				app:typefaceWeight="medium"
+				app:lineHeight="@dimen/default_title_line_height" />
 
 		</LinearLayout>
 
@@ -172,7 +172,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorPrimary"
 					tools:text="1" />
 
@@ -182,7 +182,7 @@
 					android:layout_height="wrap_content"
 					android:gravity="end"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorPrimary"
 					tools:text="8" />
 			</LinearLayout>
@@ -206,8 +206,8 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			osmand:typeface="@string/font_roboto_medium"
-			osmand:lineHeight="@dimen/default_title_line_height" />
+			app:typefaceWeight="medium"
+			app:lineHeight="@dimen/default_title_line_height" />
 
 		<LinearLayout
 			android:id="@+id/cut_slider_group"
@@ -235,7 +235,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorPrimary"
 					tools:text="0" />
 
@@ -245,7 +245,7 @@
 					android:layout_height="wrap_content"
 					android:gravity="end"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorPrimary"
 					tools:text="10" />
 			</LinearLayout>
@@ -259,6 +259,6 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="top"
 		android:scaleType="fitXY"
-		osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+		app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

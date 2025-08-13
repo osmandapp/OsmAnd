@@ -83,8 +83,8 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 			}
 
 			@Override
-			public void readPreferencesFromJson(JSONObject json) {
-				getSettings().getContext().runInUIThread(() -> {
+			public void readPreferencesFromJson(@NonNull JSONObject json) {
+				getApp().runInUIThread(() -> {
 					OsmandSettings settings = getSettings();
 					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
 					Iterator<String> iterator = json.keys();

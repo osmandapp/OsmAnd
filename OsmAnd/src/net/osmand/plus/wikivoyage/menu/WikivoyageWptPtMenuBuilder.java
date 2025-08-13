@@ -3,8 +3,10 @@ package net.osmand.plus.wikivoyage.menu;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.utils.PicassoUtils;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
@@ -21,15 +23,27 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	private static final String KEY_DIRECTIONS = "Directions: ";
 	private static final String KEY_DESCRIPTION = "Description";
 
+	private String mainImageUrl;
 	private HashMap<String, String> descTokens;
 
 	public WikivoyageWptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity, wpt);
-		updateDescriptionTokens(wpt);
+		updateImageLinkAndDescriptionTokens(wpt);
 	}
 
-	public void updateDescriptionTokens(@NonNull WptPt wpt) {
-		descTokens = getDescriptionTokens(wpt.desc, KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
+	public void updateImageLinkAndDescriptionTokens(@NonNull WptPt wpt) {
+		if (wpt.getLink() != null && PicassoUtils.isImageUrl(wpt.getLink().getHref())) {
+			mainImageUrl = wpt.getLink().getHref();
+		}
+		descTokens = getDescriptionTokens(wpt.getDesc(), KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
+	}
+
+	@Override
+	protected void buildMainImage(View view) {
+		if (mainImageUrl != null) {
+			AppCompatImageView imageView = inflateAndGetMainImageView(view);
+			PicassoUtils.setupImageViewByUrl(app, imageView, mainImageUrl, true);
+		}
 	}
 
 	@Override
@@ -53,9 +67,9 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 					null, phones, 0,
 					false, null, false, 0, false, true, false, null, false);
 		}
-		if (!Algorithms.isEmpty(wpt.link)) {
+		if (wpt.getLink() != null && !Algorithms.isEmpty(wpt.getLink().getHref())) {
 			buildRow(view, R.drawable.ic_world_globe_dark,
-					null, wpt.link, 0,
+					null, wpt.getLink().getHref(), 0,
 					false, null, false, 0, true, null, false);
 		}
 		if (!Algorithms.isEmpty(emails)) {

@@ -57,7 +57,8 @@ public class WeatherBand {
 
 	private static final Log log = PlatformUtil.getLog(WeatherBand.class);
 
-	public static final short WEATHER_BAND_UNDEFINED = 0;
+	public static final short WEATHER_BAND_NOTHING = -1;
+	public static final short WEATHER_BAND_WIND_ANIMATION = 0;
 	public static final short WEATHER_BAND_CLOUD = 1;
 	public static final short WEATHER_BAND_TEMPERATURE = 2;
 	public static final short WEATHER_BAND_PRESSURE = 3;
@@ -65,7 +66,7 @@ public class WeatherBand {
 	public static final short WEATHER_BAND_PRECIPITATION = 5;
 
 	@Retention(RetentionPolicy.SOURCE)
-	@IntDef({WEATHER_BAND_UNDEFINED, WEATHER_BAND_CLOUD, WEATHER_BAND_TEMPERATURE, WEATHER_BAND_PRESSURE, WEATHER_BAND_WIND_SPEED, WEATHER_BAND_PRECIPITATION})
+	@IntDef({WEATHER_BAND_NOTHING, WEATHER_BAND_WIND_ANIMATION, WEATHER_BAND_CLOUD, WEATHER_BAND_TEMPERATURE, WEATHER_BAND_PRESSURE, WEATHER_BAND_WIND_SPEED, WEATHER_BAND_PRECIPITATION})
 	public @interface WeatherBandType {
 	}
 
@@ -150,196 +151,152 @@ public class WeatherBand {
 	}
 
 	public boolean isBandVisible() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloud.get();
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTemp.get();
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressure.get();
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWind.get();
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecip.get();
-			case WEATHER_BAND_UNDEFINED:
-				return false;
-		}
-		return false;
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> getWeatherSettings().weatherCloud.get();
+			case WEATHER_BAND_TEMPERATURE -> getWeatherSettings().weatherTemp.get();
+			case WEATHER_BAND_PRESSURE -> getWeatherSettings().weatherPressure.get();
+			case WEATHER_BAND_WIND_SPEED -> getWeatherSettings().weatherWind.get();
+			case WEATHER_BAND_PRECIPITATION -> getWeatherSettings().weatherPrecip.get();
+			case WEATHER_BAND_WIND_ANIMATION -> getWeatherSettings().weatherWindAnimation.get();
+			default -> false;
+		};
 	}
 
 	public boolean setBandVisible(boolean visible) {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloud.set(visible);
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTemp.set(visible);
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressure.set(visible);
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWind.set(visible);
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecip.set(visible);
-			case WEATHER_BAND_UNDEFINED:
-				return false;
-		}
-		return false;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherCloud.set(visible);
+			case WEATHER_BAND_TEMPERATURE -> settings.weatherTemp.set(visible);
+			case WEATHER_BAND_PRESSURE -> settings.weatherPressure.set(visible);
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherWind.set(visible);
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecip.set(visible);
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherWindAnimation.set(visible);
+			default -> false;
+		};
 	}
 
 	public boolean isForecastBandVisible() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherForecastCloud.get();
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherForecastTemp.get();
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherForecastPressure.get();
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherForecastWind.get();
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherForecastPrecip.get();
-			case WEATHER_BAND_UNDEFINED:
-				return false;
-		}
-		return false;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherForecastCloud.get();
+			case WEATHER_BAND_TEMPERATURE -> settings.weatherForecastTemp.get();
+			case WEATHER_BAND_PRESSURE -> settings.weatherForecastPressure.get();
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherForecastWind.get();
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherForecastPrecip.get();
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherForecastWindAnimation.get();
+			default -> false;
+		};
 	}
 
 	public boolean setForecastBandVisible(boolean visible) {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherForecastCloud.set(visible);
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherForecastTemp.set(visible);
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherForecastPressure.set(visible);
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherForecastWind.set(visible);
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherForecastPrecip.set(visible);
-			case WEATHER_BAND_UNDEFINED:
-				return false;
-		}
-		return false;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherForecastCloud.set(visible);
+			case WEATHER_BAND_TEMPERATURE -> settings.weatherForecastTemp.set(visible);
+			case WEATHER_BAND_PRESSURE -> settings.weatherForecastPressure.set(visible);
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherForecastWind.set(visible);
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherForecastPrecip.set(visible);
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherForecastWindAnimation.set(visible);
+			default -> false;
+		};
 	}
 
 	@Nullable
 	public WeatherUnit getBandUnit() {
-		CommonPreference<? extends WeatherUnit> preference = getBandUnitPref();
-		if (preference != null) {
-			return preference.get();
+		if (bandIndex == WEATHER_BAND_TEMPERATURE) {
+			return app.getSettings().getTemperatureUnit();
+		} else {
+			CommonPreference<? extends WeatherUnit> preference = getBandUnitPref();
+			if (preference != null) {
+				return preference.get();
+			}
 		}
 		return null;
 	}
 
 	@Nullable
 	public CommonPreference<? extends WeatherUnit> getBandUnitPref() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloudUnit;
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTempUnit;
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressureUnit;
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWindUnit;
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecipUnit;
-			case WEATHER_BAND_UNDEFINED:
-				return null;
-		}
-		return null;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherCloudUnit;
+			case WEATHER_BAND_PRESSURE -> settings.weatherPressureUnit;
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindUnit;
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipUnit;
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherWindAnimationUnit;
+			default -> null;
+		};
 	}
 
 	public boolean setBandUnit(@NonNull WeatherUnit unit) {
 		if (!getAvailableBandUnits().contains(unit)) {
 			return false;
 		}
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloudUnit.set((CloudUnit) unit);
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTempUnit.set((TemperatureUnit) unit);
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressureUnit.set((PressureUnit) unit);
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWindUnit.set((WindUnit) unit);
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecipUnit.set((PrecipitationUnit) unit);
-			case WEATHER_BAND_UNDEFINED:
-				break;
-		}
-		return false;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherCloudUnit.set((CloudUnit) unit);
+			case WEATHER_BAND_PRESSURE -> settings.weatherPressureUnit.set((PressureUnit) unit);
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindUnit.set((WindUnit) unit);
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipUnit.set((PrecipitationUnit) unit);
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherWindAnimationUnit.set((WindUnit) unit);
+			default -> false;
+		};
 	}
 
 	public boolean isBandUnitAuto() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloudUnitAuto.get();
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTempUnitAuto.get();
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressureUnitAuto.get();
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWindUnitAuto.get();
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecipUnitAuto.get();
-			case WEATHER_BAND_UNDEFINED:
-				return false;
-		}
-		return false;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherCloudUnitAuto.get();
+			case WEATHER_BAND_TEMPERATURE -> settings.weatherTempUnitAuto.get();
+			case WEATHER_BAND_PRESSURE -> settings.weatherPressureUnitAuto.get();
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindUnitAuto.get();
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipUnitAuto.get();
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherWindAnimationUnitAuto.get();
+			default -> false;
+		};
 	}
 
 	public void setBandUnitAuto(boolean unitAuto) {
+		WeatherSettings settings = getWeatherSettings();
 		switch (bandIndex) {
 			case WEATHER_BAND_CLOUD:
-				getWeatherSettings().weatherCloudUnitAuto.set(unitAuto);
+				settings.weatherCloudUnitAuto.set(unitAuto);
 			case WEATHER_BAND_TEMPERATURE:
-				getWeatherSettings().weatherTempUnitAuto.set(unitAuto);
+				settings.weatherTempUnitAuto.set(unitAuto);
 			case WEATHER_BAND_PRESSURE:
-				getWeatherSettings().weatherPressureUnitAuto.set(unitAuto);
+				settings.weatherPressureUnitAuto.set(unitAuto);
 			case WEATHER_BAND_WIND_SPEED:
-				getWeatherSettings().weatherWindUnitAuto.set(unitAuto);
+				settings.weatherWindUnitAuto.set(unitAuto);
 			case WEATHER_BAND_PRECIPITATION:
-				getWeatherSettings().weatherPrecipUnitAuto.set(unitAuto);
-			case WEATHER_BAND_UNDEFINED:
+				settings.weatherPrecipUnitAuto.set(unitAuto);
+			case WEATHER_BAND_WIND_ANIMATION:
+				settings.weatherWindAnimationUnitAuto.set(unitAuto);
 		}
 	}
 
 	@DrawableRes
 	public int getIconId() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return R.drawable.ic_action_clouds;
-			case WEATHER_BAND_TEMPERATURE:
-				return R.drawable.ic_action_thermometer;
-			case WEATHER_BAND_PRESSURE:
-				return R.drawable.ic_action_air_pressure;
-			case WEATHER_BAND_WIND_SPEED:
-				return R.drawable.ic_action_wind;
-			case WEATHER_BAND_PRECIPITATION:
-				return R.drawable.ic_action_precipitation;
-			case WEATHER_BAND_UNDEFINED:
-				return -1;
-		}
-		return -1;
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> R.drawable.ic_action_clouds;
+			case WEATHER_BAND_TEMPERATURE -> R.drawable.ic_action_thermometer;
+			case WEATHER_BAND_PRESSURE -> R.drawable.ic_action_air_pressure;
+			case WEATHER_BAND_WIND_ANIMATION, WEATHER_BAND_WIND_SPEED -> R.drawable.ic_action_wind;
+			case WEATHER_BAND_PRECIPITATION -> R.drawable.ic_action_precipitation;
+			default -> -1;
+		};
 	}
 
 	@Nullable
 	public String getMeasurementName() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return app.getString(R.string.map_settings_weather_cloud);
-			case WEATHER_BAND_TEMPERATURE:
-				return app.getString(R.string.map_settings_weather_temp);
-			case WEATHER_BAND_PRESSURE:
-				return app.getString(R.string.map_settings_weather_air_pressure);
-			case WEATHER_BAND_WIND_SPEED:
-				return app.getString(R.string.map_settings_weather_wind);
-			case WEATHER_BAND_PRECIPITATION:
-				return app.getString(R.string.map_settings_weather_precip);
-			case WEATHER_BAND_UNDEFINED:
-				return null;
-		}
-		return null;
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> app.getString(R.string.map_settings_weather_cloud);
+			case WEATHER_BAND_TEMPERATURE -> app.getString(R.string.map_settings_weather_temp);
+			case WEATHER_BAND_PRESSURE -> app.getString(R.string.map_settings_weather_air_pressure);
+			case WEATHER_BAND_WIND_SPEED -> app.getString(R.string.map_settings_weather_wind);
+			case WEATHER_BAND_PRECIPITATION -> app.getString(R.string.map_settings_weather_precip);
+			case WEATHER_BAND_WIND_ANIMATION ->
+					app.getString(R.string.map_settings_weather_wind_animation);
+			default -> null;
+		};
 	}
 
 	@Nullable
@@ -364,11 +321,12 @@ public class WeatherBand {
 			case WEATHER_BAND_PRESSURE:
 				return DEFAULT_PRESSURE_UNIT;
 			case WEATHER_BAND_WIND_SPEED:
+			case WEATHER_BAND_WIND_ANIMATION:
 				return DEFAULT_WIND_SPEED_UNIT;
 			case WEATHER_BAND_PRECIPITATION:
 				return DEFAULT_PRECIP_UNIT;
-			case WEATHER_BAND_UNDEFINED:
-				return null;
+			case WEATHER_BAND_NOTHING:
+				break;
 		}
 		return null;
 	}
@@ -383,11 +341,12 @@ public class WeatherBand {
 			case WEATHER_BAND_PRESSURE:
 				return INTERNAL_PRESSURE_UNIT;
 			case WEATHER_BAND_WIND_SPEED:
+			case WEATHER_BAND_WIND_ANIMATION:
 				return INTERNAL_WIND_SPEED_UNIT;
 			case WEATHER_BAND_PRECIPITATION:
 				return INTERNAL_PRECIP_UNIT;
-			case WEATHER_BAND_UNDEFINED:
-				return null;
+			case WEATHER_BAND_NOTHING:
+				break;
 		}
 		return null;
 	}
@@ -404,115 +363,80 @@ public class WeatherBand {
 
 	@NonNull
 	public List<? extends WeatherUnit> getAvailableBandUnits() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return CLOUD_UNITS;
-			case WEATHER_BAND_TEMPERATURE:
-				return TEMP_UNITS;
-			case WEATHER_BAND_PRESSURE:
-				return PRESSURE_UNITS;
-			case WEATHER_BAND_WIND_SPEED:
-				return WIND_UNITS;
-			case WEATHER_BAND_PRECIPITATION:
-				return PRECIPITATION_UNITS;
-			case WEATHER_BAND_UNDEFINED:
-			default:
-				return Collections.emptyList();
-		}
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> CLOUD_UNITS;
+			case WEATHER_BAND_TEMPERATURE -> TEMP_UNITS;
+			case WEATHER_BAND_PRESSURE -> PRESSURE_UNITS;
+			case WEATHER_BAND_WIND_ANIMATION, WEATHER_BAND_WIND_SPEED -> WIND_UNITS;
+			case WEATHER_BAND_PRECIPITATION -> PRECIPITATION_UNITS;
+			default -> Collections.emptyList();
+		};
 	}
 
 	public float getBandOpacity() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloudAlpha.get();
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTempAlpha.get();
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressureAlpha.get();
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWindAlpha.get();
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecipAlpha.get();
-			case WEATHER_BAND_UNDEFINED:
-				return 0.0f;
-		}
-		return 0.0f;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherCloudAlpha.get();
+			case WEATHER_BAND_TEMPERATURE -> settings.weatherTempAlpha.get();
+			case WEATHER_BAND_PRESSURE -> settings.weatherPressureAlpha.get();
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherWindAnimationAlpha.get();
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindAlpha.get();
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipAlpha.get();
+			default -> 0.0f;
+		};
 	}
 
 	@Nullable
 	public CommonPreference<Float> getAlphaPreference() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloudAlpha;
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTempAlpha;
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressureAlpha;
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWindAlpha;
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecipAlpha;
-			case WEATHER_BAND_UNDEFINED:
-				return null;
-		}
-		return null;
+		WeatherSettings settings = getWeatherSettings();
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> settings.weatherCloudAlpha;
+			case WEATHER_BAND_TEMPERATURE -> settings.weatherTempAlpha;
+			case WEATHER_BAND_PRESSURE -> settings.weatherPressureAlpha;
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherWindAnimationAlpha;
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindAlpha;
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipAlpha;
+			default -> null;
+		};
 	}
 
 	@Nullable
 	public String getColorFilePath() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return IndexConstants.CLR_PALETTE_DIR + "weather_cloud.txt";
-			case WEATHER_BAND_TEMPERATURE:
-				return IndexConstants.CLR_PALETTE_DIR + "weather_temperature.txt";
-			case WEATHER_BAND_PRESSURE:
-				return IndexConstants.CLR_PALETTE_DIR + "weather_pressure.txt";
-			case WEATHER_BAND_WIND_SPEED:
-				return IndexConstants.CLR_PALETTE_DIR + "weather_wind.txt";
-			case WEATHER_BAND_PRECIPITATION:
-				return IndexConstants.CLR_PALETTE_DIR + "weather_precip.txt";
-			case WEATHER_BAND_UNDEFINED:
-				return null;
-		}
-		return null;
+		String folder = IndexConstants.CLR_PALETTE_DIR;
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> folder + "weather_cloud.txt";
+			case WEATHER_BAND_TEMPERATURE -> folder + "weather_temperature.txt";
+			case WEATHER_BAND_PRESSURE -> folder + "weather_pressure.txt";
+			case WEATHER_BAND_WIND_ANIMATION -> folder + "weather_wind_animation.txt";
+			case WEATHER_BAND_WIND_SPEED -> folder + "weather_wind.txt";
+			case WEATHER_BAND_PRECIPITATION -> folder + "weather_precip.txt";
+			default -> null;
+		};
 	}
 
 	@Nullable
 	public String getContourStyleName() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return CLOUD_CONTOUR_STYLE_NAME;
-			case WEATHER_BAND_TEMPERATURE:
-				return TEMP_CONTOUR_STYLE_NAME;
-			case WEATHER_BAND_PRESSURE:
-				return PRESSURE_CONTOUR_STYLE_NAME;
-			case WEATHER_BAND_WIND_SPEED:
-				return WIND_SPEED_CONTOUR_STYLE_NAME;
-			case WEATHER_BAND_PRECIPITATION:
-				return PRECIP_CONTOUR_STYLE_NAME;
-			case WEATHER_BAND_UNDEFINED:
-				return null;
-		}
-		return null;
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> CLOUD_CONTOUR_STYLE_NAME;
+			case WEATHER_BAND_TEMPERATURE -> TEMP_CONTOUR_STYLE_NAME;
+			case WEATHER_BAND_PRESSURE -> PRESSURE_CONTOUR_STYLE_NAME;
+			case WEATHER_BAND_WIND_SPEED, WEATHER_BAND_WIND_ANIMATION -> WIND_SPEED_CONTOUR_STYLE_NAME;
+			case WEATHER_BAND_PRECIPITATION -> PRECIP_CONTOUR_STYLE_NAME;
+			default -> null;
+		};
 	}
 
 	@Nullable
 	public String getBandType() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return "cloud";
-			case WEATHER_BAND_TEMPERATURE:
-				return "temp";
-			case WEATHER_BAND_PRESSURE:
-				return "pressure";
-			case WEATHER_BAND_WIND_SPEED:
-				return "wind_speed";
-			case WEATHER_BAND_PRECIPITATION:
-				return "precip";
-			case WEATHER_BAND_UNDEFINED:
-				return null;
-		}
-		return null;
+		return switch (bandIndex) {
+			case WEATHER_BAND_CLOUD -> "cloud";
+			case WEATHER_BAND_TEMPERATURE -> "temp";
+			case WEATHER_BAND_PRESSURE -> "pressure";
+			case WEATHER_BAND_WIND_SPEED -> "wind_speed";
+			case WEATHER_BAND_PRECIPITATION -> "precip";
+			case WEATHER_BAND_WIND_ANIMATION -> "wind_speed_animation";
+			default -> null;
+		};
 	}
 
 	@NonNull
@@ -561,6 +485,7 @@ public class WeatherBand {
 								Pressure pressure = new Pressure(pressureUnit, level);
 								level = pressure.toUnit(pressureInternalUnit);
 								break;
+							case WEATHER_BAND_WIND_ANIMATION:
 							case WEATHER_BAND_WIND_SPEED:
 								Speed.Unit speedUnit = Speed.unitFromString(unit);
 								Speed.Unit speedInternalUnit = Speed.unitFromString(internalUnit);
@@ -572,8 +497,6 @@ public class WeatherBand {
 								Precipitation.Unit precipitationInternalUnit = Precipitation.unitFromString(internalUnit);
 								Precipitation precipitation = new Precipitation(precipitationUnit, level);
 								level = precipitation.toUnit(precipitationInternalUnit);
-								break;
-							case WEATHER_BAND_UNDEFINED:
 								break;
 						}
 					}

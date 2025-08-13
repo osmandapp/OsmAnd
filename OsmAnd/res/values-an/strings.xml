@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="routing_attr_avoid_tram_name">Evitar lo tramvía</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connexión</string>
+    <string name="rendering_attr_piste_type_connection_name">Connexión</string>
+    <string name="external_device_details_connection">Connexión</string>
 </resources>

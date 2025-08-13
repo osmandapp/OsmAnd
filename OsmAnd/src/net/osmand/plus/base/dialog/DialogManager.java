@@ -2,7 +2,6 @@ package net.osmand.plus.base.dialog;
 
 import android.content.DialogInterface;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,18 +12,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogProgressChanged;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
+import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.shared.gpx.filters.BaseTrackFilter;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -103,6 +103,14 @@ public class DialogManager {
 		}
 	}
 
+	public void notifyOnProgress(@NonNull String progressTag, int progress) {
+		for (IDialogController controller : controllers.values()) {
+			if (controller instanceof IDialogProgressChanged callback) {
+				callback.onDialogProgressChanged(progressTag, progress);
+			}
+		}
+	}
+
 	public void showSaveSmartFolderDialog(@NonNull FragmentActivity activity,
 	                                      boolean nightMode,
 	                                      @Nullable List<BaseTrackFilter> filters) {
@@ -122,7 +130,7 @@ public class DialogManager {
 					} else {
 						SmartFolderHelper smartFolderHelper = app.getSmartFolderHelper();
 						if (smartFolderHelper.isSmartFolderPresent(newSmartFolderName)) {
-							Toast.makeText(app, R.string.smart_folder_name_present, Toast.LENGTH_SHORT).show();
+							app.showShortToastMessage(R.string.smart_folder_name_present);
 						} else {
 							smartFolderHelper.saveNewSmartFolder(newSmartFolderName, filters);
 							dialog.dismiss();

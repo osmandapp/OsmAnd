@@ -10,7 +10,7 @@ import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.color.cstyle.OnSelectColoringStyleListener;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.routing.ColoringStyleAlgorithms;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 
@@ -73,8 +73,8 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	}
 
 	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
-		card.updateSelectedCardState();
 		externalListener.onColoringStyleSelected(coloringStyle);
+		card.updateSelectedCardState();
 	}
 
 	protected boolean isAvailableInSubscription(@NonNull ColoringStyle coloringStyle) {

@@ -1,10 +1,16 @@
 package net.osmand.plus.voice;
 
+import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -23,11 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-
-import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
-import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 
 public class JsTtsCommandPlayer extends CommandPlayer {
 
@@ -84,7 +85,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 			ttsRequests = 0;
 
 			mTts = new TextToSpeech(app, status -> {
- 				if (status != TextToSpeech.SUCCESS) {
+				if (status != TextToSpeech.SUCCESS) {
 					ttsVoiceStatus = "NO INIT SUCCESS";
 					internalClear();
 					app.showToastMessage(app.getString(R.string.tts_initialization_error));
@@ -277,11 +278,22 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		return ttsVoiceUsed;
 	}
 
-	public static boolean isMyData(@NonNull File voiceDir) {
-		if (!voiceDir.getName().contains("tts")) {
+	public static boolean isMyData(@NonNull File dir) {
+		String name = dir.getName();
+		if (!name.contains("tts")) {
 			return false;
 		}
-		String langName = voiceDir.getName().replace(VOICE_PROVIDER_SUFFIX, "");
-		return new File(voiceDir, langName + "_" + TTSVOICE_INDEX_EXT_JS).exists();
+		File file = getLangFile(dir);
+		return file != null && file.exists();
+	}
+
+	@Nullable
+	public static File getLangFile(@NonNull File dir) {
+		String name = dir.getName();
+		if (!name.contains("tts")) {
+			return null;
+		}
+		String langName = name.replace(VOICE_PROVIDER_SUFFIX, "");
+		return new File(dir, langName + "_" + TTSVOICE_INDEX_EXT_JS);
 	}
 }

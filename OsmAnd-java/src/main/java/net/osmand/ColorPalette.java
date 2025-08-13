@@ -103,8 +103,12 @@ public class ColorPalette {
 	public String toString() {
 		return writeColorPalette();
 	}
-	
+
 	public String writeColorPalette() {
+		return writeColorPalette(colors);
+	}
+
+	public static String writeColorPalette(List<ColorValue> colors) {
 		StringBuilder bld = new StringBuilder();
 		for (ColorValue v : colors) {
 			bld.append(v.val).append(",");
@@ -127,8 +131,8 @@ public class ColorPalette {
 		public final int g;
 		public final int b;
 		public final int a;
-		public final double val;
 		public final int clr;
+		public double val;
 
 		public ColorValue(double val, int r, int g, int b, int a) {
 			this.r = r;
@@ -139,12 +143,20 @@ public class ColorPalette {
 			this.val = val;
 		}
 
+		public ColorValue(int clr) {
+			this(0, clr);
+		}
+
 		public ColorValue(double val, int clr) {
 			this.r = red(clr);
 			this.g = green(clr);
 			this.b = blue(clr);
 			this.a = alpha(clr);
 			this.clr = clr;
+			this.val = val;
+		}
+
+		public void setValue(double val) {
 			this.val = val;
 		}
 
@@ -178,9 +190,12 @@ public class ColorPalette {
 		palette.sortPalette();
 		return palette;
 	}
-	
 
 	public static ColorPalette parseColorPalette(Reader reader) throws IOException {
+		return parseColorPalette(reader, true);
+	}
+
+	public static ColorPalette parseColorPalette(Reader reader, boolean shouldSort) throws IOException {
 		ColorPalette palette = new ColorPalette();
 		BufferedReader r = new BufferedReader(reader);
 		String line;
@@ -194,14 +209,16 @@ public class ColorPalette {
 				try {
 					ColorValue rgba = ColorValue.rgba(Double.parseDouble(values[0]), Integer.parseInt(values[1]),
 							Integer.parseInt(values[2]), Integer.parseInt(values[3]),
-							values.length >= 4 ? Integer.parseInt(values[4]) : 255);
+							values.length >= 5 ? Integer.parseInt(values[4]) : 255);
 					palette.colors.add(rgba);
 				} catch (NumberFormatException e) {
 					LOG.error(e.getMessage(), e);
 				}
 			}
 		}
-		palette.sortPalette();
+		if (shouldSort) {
+			palette.sortPalette();
+		}
 		return palette;
 	}
 

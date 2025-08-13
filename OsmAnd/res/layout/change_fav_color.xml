@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/change_color_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
         android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-        osmand:srcCompat="@drawable/ic_action_appearance" />
+        app:srcCompat="@drawable/ic_action_appearance" />
 
     <TextView
         android:id="@+id/title"
@@ -37,6 +37,6 @@
         android:id="@+id/colorImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        osmand:srcCompat="@drawable/ic_action_circle" />
+        app:srcCompat="@drawable/ic_action_circle" />
 
 </LinearLayout>

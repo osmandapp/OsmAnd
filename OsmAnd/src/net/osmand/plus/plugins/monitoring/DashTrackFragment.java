@@ -17,12 +17,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -54,7 +56,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;
@@ -109,9 +111,9 @@ public class DashTrackFragment extends DashBaseFragment {
 		List<String> list = new ArrayList<String>();
 		for (SelectedGpxFile sg : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
 			if (!sg.isShowCurrentTrack()) {
-				GPXFile gpxFile = sg.getGpxFile();
+				GpxFile gpxFile = sg.getGpxFile();
 				if (gpxFile != null) {
-					list.add(gpxFile.path);
+					list.add(gpxFile.getPath());
 				}
 			}
 		}
@@ -163,7 +165,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
 			File file = new File(filename);
-			TrackItem trackItem = new TrackItem(file);
+			TrackItem trackItem = new TrackItem(SharedUtil.kFile(file));
 			GpxUiHelper.updateGpxInfoView(itemView, trackItem, app, true, null);
 
 			itemView.setOnClickListener(v -> openGpxContextMenu(file));
@@ -247,7 +249,7 @@ public class DashTrackFragment extends DashBaseFragment {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				selectedGpxHelper.selectGpxFile(selected.getGpxFile(), params);
-				TrackItem trackItem = new TrackItem(file);
+				TrackItem trackItem = new TrackItem(SharedUtil.kFile(file));
 				GpxUiHelper.updateGpxInfoView(pView, trackItem, app, true, null);
 				updateShowOnMap(app, file, v, showOnMap);
 			});
@@ -263,7 +265,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	private void showOnMap(@NonNull Activity activity, @NonNull GPXFile gpxFile) {
+	private void showOnMap(@NonNull Activity activity, @NonNull GpxFile gpxFile) {
 		if (gpxFile.isEmpty()) {
 			app.showToastMessage(R.string.gpx_file_is_empty);
 			return;
@@ -274,7 +276,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			point = gpxFile.findPointToShow();
 		}
 		if (point != null) {
-			settings.setMapLocationToShow(point.lat, point.lon, settings.getLastKnownMapZoom());
+			settings.setMapLocationToShow(point.getLat(), point.getLon(), settings.getLastKnownMapZoom());
 		}
 		app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 		MapActivity.launchMapActivityMoveToTop(activity);

@@ -10,16 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.auto.TripUtils;
+import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 
 public class NextTurnWidget extends NextTurnBaseWidget {
 
 	private final NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
 
-	public NextTurnWidget(@NonNull MapActivity mapActivity, boolean horizontalMini) {
-		super(mapActivity, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, horizontalMini);
+	public NextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@Nullable WidgetsPanel panel, boolean horizontalMini) {
+		super(mapActivity, customId, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, panel, horizontalMini);
 		setOnClickListener(getOnClickListener());
 	}
 
@@ -27,7 +32,7 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 	 * Uncomment to test rendering
 	 */
 	@NonNull
-	private OnClickListener getOnClickListener() {
+	protected OnClickListener getOnClickListener() {
 		return new View.OnClickListener() {
 //			int i = 0;
 //			boolean leftSide = false;
@@ -48,7 +53,7 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 //				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
-				if (routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
+				if (routingHelper.isOnRoute()) {
 					routingHelper.getVoiceRouter().announceCurrentDirection(null);
 				}
 			}
@@ -56,9 +61,11 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	public void updateNavigationInfo(@Nullable DrawSettings drawSettings) {
 		boolean followingMode = routingHelper.isFollowingMode()
 				|| locationProvider.getLocationSimulation().isRouteAnimating();
+		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity, true);
+		CurrentStreetName streetName = params.streetName;
 		TurnType turnType = null;
 		boolean deviatedFromRoute = false;
 		int turnImminent = 0;
@@ -70,14 +77,19 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 				turnType = TurnType.valueOf(TurnType.OFFR, settings.DRIVING_REGION.get().leftHandDriving);
 				setDeviatePath((int) routingHelper.getRouteDeviation());
 			} else {
-				NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
-				if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
-					turnType = r.directionInfo.getTurnType();
-					nextTurnDistance = r.distanceTo;
-					turnImminent = r.imminent;
+				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
+				if (info != null && info.distanceTo >= 0 && info.directionInfo != null) {
+					streetName = TripUtils.getStreetName(info);
+					if (verticalWidget && Algorithms.isEmpty(streetName.text)) {
+						streetName.text = info.directionInfo.getDescriptionRoutePart(true);
+					}
+					turnType = info.directionInfo.getTurnType();
+					nextTurnDistance = info.distanceTo;
+					turnImminent = info.imminent;
 				}
 			}
 		}
+		setStreetName(streetName);
 		setTurnType(turnType);
 		setTurnImminent(turnImminent, deviatedFromRoute);
 		setTurnDistance(nextTurnDistance);

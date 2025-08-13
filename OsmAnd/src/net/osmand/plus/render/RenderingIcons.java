@@ -14,6 +14,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
 import net.osmand.util.Algorithms;
@@ -58,6 +59,18 @@ public class RenderingIcons {
 		}
 		int width = (int) (drawable.getIntrinsicWidth() * scale);
 		int height = (int) (drawable.getIntrinsicHeight() * scale);
+		return getBitmapFromVectorDrawable(width, height, drawable);
+	}
+
+	public static synchronized Bitmap getBitmapFromVectorDrawable(@NonNull Context context, int drawableId, int width, int height) {
+		Drawable drawable = AppCompatResources.getDrawable(context, drawableId);
+		if (drawable == null) {
+			return null;
+		}
+		return getBitmapFromVectorDrawable(width, height, drawable);
+	}
+
+	private static Bitmap getBitmapFromVectorDrawable(int width, int height, Drawable drawable) {
 		if (cacheBmp == null || cacheBmp.getWidth() != width || cacheBmp.getHeight() != height) {
 			cacheBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		}
@@ -117,8 +130,17 @@ public class RenderingIcons {
 	}
 
 	@Nullable
-	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
-		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+	public static String getIconNameForAmenity(@NonNull Context ctx, @NonNull Amenity amenity) {
+		String osmandPoiKey = amenity.getOsmandPoiKey();
+		if (!Algorithms.isEmpty(osmandPoiKey)) {
+			PoiType poiType = ((OsmandApplication) ctx).getPoiTypes().getPoiTypeByKey(osmandPoiKey);
+			if (poiType != null) {
+				return getIconNameForPoiType(poiType);
+			}
+		}
+		String subType = amenity.getSubType();
+		String[] subtypes = subType.split(";");//multivalued
+		PoiType poiType = amenity.getType().getPoiTypeByKeyName(subtypes[0]);
 		return poiType != null ? getIconNameForPoiType(poiType) : null;
 	}
 
@@ -145,8 +167,15 @@ public class RenderingIcons {
 	}
 
 	@Nullable
-	public static String getBigIconNameForAmenity(@NonNull Amenity amenity) {
-		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+	public static String getBigIconNameForAmenity(@NonNull Context ctx, @NonNull Amenity amenity) {
+		PoiType poiType = null;
+		String osmandPoiKey = amenity.getOsmandPoiKey();
+		if (!Algorithms.isEmpty(osmandPoiKey)) {
+			poiType = ((OsmandApplication) ctx).getPoiTypes().getPoiTypeByKey(osmandPoiKey);
+		}
+		if (poiType == null) {
+			poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		}
 		if (poiType == null) {
 			return null;
 		} else if (containsBigIcon(poiType.getIconKeyName())) {
@@ -258,9 +287,9 @@ public class RenderingIcons {
 		}
 	}
 
-	public static int getPreselectedIconId(@NonNull Amenity amenity) {
+	public static int getPreselectedIconId(@NonNull Context ctx, @NonNull Amenity amenity) {
 		String gpxIconId = amenity.getGpxIcon();
-		String preselectedIconName = Algorithms.isEmpty(gpxIconId) ? getIconNameForAmenity(amenity) : gpxIconId;
+		String preselectedIconName = Algorithms.isEmpty(gpxIconId) ? getIconNameForAmenity(ctx, amenity) : gpxIconId;
 		return Algorithms.isEmpty(preselectedIconName) ? 0 : getBigIconResourceId(preselectedIconName);
 	}
 }

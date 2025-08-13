@@ -1,7 +1,6 @@
 package net.osmand.plus.wikivoyage.search;
 
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +89,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 				WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
 				holder.icon.setImageDrawable(historyPlaceholder);
 				holder.title.setText(historyItem.getArticleTitle());
-				holder.leftDescr.setText(historyItem.getIsPartOf());
+				holder.leftDescr.setText(WikivoyageUtils.getTitleWithoutPrefix(historyItem.getIsPartOf()));
 				holder.rightDescr.setText(Algorithms.capitalizeFirstLetter(historyItem.getLang()));
 			}
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
@@ -141,14 +140,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 						? R.drawable.wikivoyage_search_history_placeholder
 						: R.drawable.wikivoyage_search_placeholder
 		);
-		if (Build.VERSION.SDK_INT < 21 && res != null) {
-			res.setDrawableByLayerId(R.id.placeholder_icon, app.getUIUtilities().getIcon(
-					history ? R.drawable.ic_action_history : R.drawable.ic_action_placeholder_city,
-					R.color.icon_color_default_light
-			));
-		} else {
-			res.setTint(colorDefault);
-		}
+		res.setTint(colorDefault);
 		return res;
 	}
 

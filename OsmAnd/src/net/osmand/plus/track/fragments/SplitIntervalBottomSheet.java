@@ -1,6 +1,6 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.plus.utils.OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS;
+import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -121,16 +121,21 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		TextRadioItem none = createRadioButton(GpxSplitType.NO_SPLIT, R.string.shared_string_none);
 		TextRadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
 		TextRadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
+		TextRadioItem uphillDownhill = createRadioButton(GpxSplitType.UPHILL_DOWNHILL, R.string.uphill_downhill_split);
 
 		time.setEnabled(selectedGpxFile == null || selectedGpxFile.getTrackAnalysisToDisplay(app).getTimeSpan() > 0);
 
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
-		radioGroup.setItems(none, time, distance);
+		radioGroup.setItems(none, time, distance, uphillDownhill);
 
 		if (selectedSplitType == GpxSplitType.NO_SPLIT) {
 			radioGroup.setSelectedItem(none);
-		} else {
-			radioGroup.setSelectedItem(selectedSplitType == GpxSplitType.TIME ? time : distance);
+		} else if (selectedSplitType == GpxSplitType.TIME) {
+			radioGroup.setSelectedItem(time);
+		} else if (selectedSplitType == GpxSplitType.DISTANCE) {
+			radioGroup.setSelectedItem(distance);
+		} else if (selectedSplitType == GpxSplitType.UPHILL_DOWNHILL) {
+			radioGroup.setSelectedItem(uphillDownhill);
 		}
 	}
 
@@ -165,6 +170,9 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 				List<Integer> splitOptions = new ArrayList<>(timeSplitOptions.values());
 				int index = splitOptions.indexOf((int) trackDrawInfo.getSplitInterval());
 				selectedTimeSplitInterval = Math.max(index, 0);
+			} else if (trackDrawInfo.getSplitType() == GpxSplitType.UPHILL_DOWNHILL.getType()) {
+				selectedSplitType = GpxSplitType.UPHILL_DOWNHILL;
+				selectedTimeSplitInterval = 0;
 			}
 		}
 	}
@@ -210,7 +218,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateSlider() {
-		if (selectedSplitType != GpxSplitType.NO_SPLIT) {
+		if (selectedSplitType != GpxSplitType.NO_SPLIT && selectedSplitType != GpxSplitType.UPHILL_DOWNHILL) {
 			slider.clearOnChangeListeners();
 			if (selectedSplitType == GpxSplitType.TIME) {
 				updateSliderTimeInterval();
@@ -279,7 +287,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private void updateSplit() {
 		if (trackDrawInfo != null) {
 			double splitInterval = 0;
-			if (selectedSplitType == GpxSplitType.NO_SPLIT) {
+			if (selectedSplitType == GpxSplitType.NO_SPLIT || selectedSplitType == GpxSplitType.UPHILL_DOWNHILL) {
 				splitInterval = 0;
 			} else if (selectedSplitType == GpxSplitType.DISTANCE) {
 				splitInterval = new ArrayList<>(distanceSplitOptions.values()).get(selectedDistanceSplitInterval);

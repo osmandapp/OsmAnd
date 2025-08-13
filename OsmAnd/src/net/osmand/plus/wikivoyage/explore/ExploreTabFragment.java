@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.explore;
 
+import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,12 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -31,22 +34,12 @@ import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
-import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelButtonCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelGpxCard;
-import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.*;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
@@ -172,7 +165,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 					}
 				}
 			}
-			if (!isOnlyDefaultTravelBookPresent()) {
+			if (!isTravelGuidesRepositoryEmpty()) {
 				TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
 				travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
 					@Override
@@ -231,11 +224,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void checkDownloadIndexes() {
-		new ProcessIndexItemsTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new ProcessIndexItemsTask(this));
 	}
 
 	private void addIndexItemCards(List<IndexItem> mainIndexItem, List<IndexItem> neededIndexItems) {
-		if (isOnlyDefaultTravelBookPresent()) {
+		if (isTravelGuidesRepositoryEmpty()) {
 			this.mainIndexItems.clear();
 			this.mainIndexItems.addAll(mainIndexItem);
 			addDownloadUpdateCard();
@@ -245,9 +238,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		addNeededMapsCard();
 	}
 
-	private boolean isOnlyDefaultTravelBookPresent() {
+	private boolean isTravelGuidesRepositoryEmpty() {
 		if (!app.isApplicationInitializing()) {
-			return app.getResourceManager().isOnlyDefaultTravelBookPresent();
+			return !app.getResourceManager().hasTravelRepositories();
 		}
 		return true;
 	}

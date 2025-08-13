@@ -30,15 +30,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabType;
@@ -56,9 +57,10 @@ import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.SelectTrackTabsFragment.GpxDataItemSelectionListener;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -179,7 +181,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	}
 
 	private TrackTab getUpdatedTrackTab() {
-		TrackTab trackTab = new TrackTab(TrackTabType.FOLDERS);
+		TrackTab trackTab = new TrackTab(app, TrackTabType.FOLDERS);
 		List<TrackFolder> subFolders = currentTrackFolder.getSubFolders();
 		List<TrackItem> trackItems = currentTrackFolder.getTrackItems();
 		if (Algorithms.isEmpty(subFolders) && Algorithms.isEmpty(trackItems)) {
@@ -203,7 +205,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	}
 
 	private void updateToolBarTitle() {
-		toolbarTitle.setText(currentTrackFolder.getDirFile().getName());
+		toolbarTitle.setText(currentTrackFolder.getDirFile().name());
 	}
 
 	@Override
@@ -295,7 +297,8 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 		if (fileSelectionListener instanceof CallbackWithObject) {
 			((CallbackWithObject<String>) fileSelectionListener).processResult(firstTrackItem.getPath());
 		} else if (fileSelectionListener instanceof SelectTrackTabsFragment.GpxFileSelectionListener) {
-			GpxSelectionHelper.getGpxFile(requireActivity(), firstTrackItem.getFile(), true, result -> {
+			KFile kFile = firstTrackItem.getFile();
+			GpxSelectionHelper.getGpxFile(requireActivity(), kFile == null ? null : SharedUtil.jFile(kFile), true, result -> {
 				((SelectTrackTabsFragment.GpxFileSelectionListener) fileSelectionListener).onSelectGpxFile(result);
 				return true;
 			});
@@ -367,7 +370,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 					boolean singleTrack = filesSize == 1;
 					File dir;
 					if (currentTrackFolder != null) {
-						dir = currentTrackFolder.getDirFile();
+						dir = SharedUtil.jFile(currentTrackFolder.getDirFile());
 					} else {
 						dir = ImportHelper.getGpxDestinationDir(app, true);
 					}
@@ -395,9 +398,9 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 			}
 
 			@Override
-			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+			public void onSaveComplete(boolean success, GpxFile gpxFile) {
 				if (isAdded() && success) {
-					addTrackItem(new TrackItem(new File(gpxFile.path)));
+					addTrackItem(new TrackItem(new KFile(gpxFile.getPath())));
 				}
 				super.onSaveComplete(success, gpxFile);
 			}

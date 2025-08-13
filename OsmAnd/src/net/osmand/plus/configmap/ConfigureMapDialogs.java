@@ -19,7 +19,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -41,40 +40,6 @@ import java.util.Map;
 import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapDialogs {
-
-	protected static void showMapModeDialog(
-			@NonNull MapActivity activity, boolean nightMode
-	) {
-		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-
-		OsmandMapTileView view = activity.getMapView();
-		int selectedIndex = settings.DAYNIGHT_MODE.get().ordinal();
-		String[] items = new String[DayNightMode.values().length];
-		for (int i = 0; i < items.length; i++) {
-			items[i] = DayNightMode.values()[i].toHumanString(app);
-		}
-
-		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
-				.setTitle(R.string.daynight)
-				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
-				.setNegativeButton(R.string.shared_string_dismiss, null);
-
-		CustomAlert.showSingleSelection(dialogData, items, selectedIndex, v -> {
-			int which = (int) v.getTag();
-			settings.DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-			if (view.hasMapRenderer()) {
-				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-				if (mapRendererContext != null) {
-					boolean updatedNightMode = app.getDaynightHelper().isNightMode();
-					mapRendererContext.setNightMode(updatedNightMode);
-				}
-			} else {
-				activity.refreshMapComplete();
-			}
-			activity.getDashboard().refreshContent(false);
-		});
-	}
 
 	public static void showMapMagnifierDialog(@NonNull OsmandMapTileView view) {
 		OsmandPreference<Float> density = view.getSettings().MAP_DENSITY;
@@ -294,12 +259,7 @@ public class ConfigureMapDialogs {
 		OsmandApplication app = activity.getMyApplication();
 		String title = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
 		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
-		int selectedIndex = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
-		if (selectedIndex >= 0) {
-			selectedIndex++;
-		} else if (Algorithms.isEmpty(pref.get())) {
-			selectedIndex = 0;
-		}
+		int selectedIndex = AndroidUtils.getRenderPropertySelectedValueIndex(app, p);
 
 		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
 				.setTitle(title)
@@ -314,7 +274,7 @@ public class ConfigureMapDialogs {
 				pref.set(p.getPossibleValues()[which - 1]);
 			}
 			activity.refreshMapComplete();
-			item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
+			item.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, p));
 			String id = item.getId();
 			if (!Algorithms.isEmpty(id)) {
 				uiAdapter.onRefreshItem(id);

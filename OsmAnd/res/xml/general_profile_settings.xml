@@ -45,10 +45,38 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/driving_region" />
 
+	<Preference
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="default_metric_system"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/unit_of_length" />
+		android:title="@string/shared_string_length" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="altitude_metrics"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/altitude" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="default_speed_system"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/shared_string_speed" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="unit_of_volume"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/shared_string_volume" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="unit_of_temperature"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/shared_string_temperature" />
+
+	<Preference
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
 
 	<Preference
 		android:key="coordinates_format"
@@ -60,11 +88,6 @@
 		android:key="angular_measurement"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/angular_measeurement" />
-
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:key="default_speed_system"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/default_speed_system" />
 
 	<Preference
 		android:key="precise_distance_numbers"
@@ -93,6 +116,11 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/external_input_device" />
 
+	<Preference
+		android:key="animate_my_location"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/position_animation" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_kalman_filter_compass"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
@@ -108,13 +136,6 @@
 		android:title="@string/use_magnetic_sensor" />
 
     <net.osmand.plus.settings.preferences.SwitchPreferenceEx
-        android:key="fix_north_map"
-        android:layout="@layout/preference_with_descr_dialog_and_switch"
-        android:summaryOff="@string/shared_string_off"
-        android:summaryOn="@string/shared_string_on"
-        android:title="@string/fix_north_up" />
-
-    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="map_empty_state_allowed"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"
@@ -127,13 +148,6 @@
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/do_not_use_animations" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="animate_my_location"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on"
-		android:title="@string/animate_my_location" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_trackball_for_movements"

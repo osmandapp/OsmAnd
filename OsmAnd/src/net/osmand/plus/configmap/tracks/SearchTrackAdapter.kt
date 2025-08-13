@@ -18,30 +18,30 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.settings.enums.TracksSortMode
-import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache
+import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.util.Algorithms
 import java.util.Collections
 
 class SearchTracksAdapter(
-    context: Context,
-    private var trackItems: List<TrackItem>,
-    private val nightMode: Boolean,
-    private var selectionMode: Boolean,
-    private var filter: TracksSearchFilter
+	context: Context,
+	private var trackItems: List<TrackItem>,
+	private val nightMode: Boolean,
+	private var selectionMode: Boolean,
+	private var filter: TracksSearchFilter
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
+	RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private val app: OsmandApplication
     private val locationViewCache: UpdateLocationViewCache
     private var items: MutableList<Any> = mutableListOf()
     private var filteredItems: List<TrackItem> = mutableListOf()
-    private var sortMode: TracksSortMode = TracksSortMode.getDefaultSortMode()
+    private var sortMode: TracksSortMode = TracksSortMode.getDefaultSortMode(null)
 
     private var sortTracksListener: SortTracksListener? = null
     private var selectionListener: TrackSelectionListener? = null
@@ -168,7 +168,7 @@ class SearchTracksAdapter(
             holder.bindView()
         } else if (holder is SortTracksViewHolder) {
             val enabled = !Algorithms.isEmpty(trackItems)
-            holder.bindView(enabled, filter)
+            holder.bindView(enabled, filter, null)
         }
     }
 

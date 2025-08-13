@@ -133,7 +133,7 @@
     <string name="roads">ᱰᱟᱦᱟᱨᱠᱚ</string>
     <string name="buy">ᱠᱤᱨᱤᱧ ᱢᱮ</string>
     <string name="features_menu_group">ᱜᱩᱱᱠᱚ</string>
-    <string name="mapillary_menu_title_dates">ᱢᱟᱹᱦᱤᱛ</string>
+    <string name="shared_string_date">ᱢᱟᱹᱦᱤᱛ</string>
     <string name="type_address">ᱴᱷᱤᱠᱟᱹᱬᱟ ᱚᱞ ᱢᱮ</string>
     <string name="shared_string_send">ᱠᱩᱞ ᱢᱮ</string>
     <string name="shared_string_edit">ᱥᱟᱯᱲᱟᱣ ᱢᱮ</string>
@@ -228,8 +228,8 @@
     <string name="rendering_value_category_name">ᱛᱷᱚᱠ</string>
     <string name="shared_string_used">ᱵᱮᱵᱷᱟᱨ ᱦᱩᱭ ᱟᱠᱟᱱᱟ</string>
     <string name="shared_string_not_used">ᱵᱟᱝ ᱵᱮᱵᱷᱟᱨ ᱟᱠᱟᱱᱟ</string>
-    <string name="delete_history_items">%1$s ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ\?</string>
-    <string name="delete_history_items_descr">ᱵᱟᱪᱷᱟᱣ ᱟᱠᱟᱱ ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ\?</string>
+    <string name="delete_history_items">%1$s ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ?</string>
+    <string name="delete_history_items_descr">ᱵᱟᱪᱷᱟᱣ ᱟᱠᱟᱱ ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ?</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">ᱡᱩᱫᱤ ᱮᱠᱟᱱ ᱞᱟᱹᱠᱛᱤ ᱜᱮᱭᱟ</string>
     <string name="routing_attr_freeride_policy_allow_name">ᱦᱮᱥᱟᱨᱤᱭᱟᱹ</string>
     <string name="routing_attr_difficulty_preference_advanced_name">ᱞᱟᱦᱟᱱᱛᱤ</string>
@@ -344,7 +344,6 @@
     <string name="shared_string_api_key">API ᱪᱟᱹᱵᱤ</string>
     <string name="app_mode_light_aircraft">ᱨᱟᱣᱟᱞ ᱩᱰᱟᱹᱱᱜᱟᱹᱰᱤ</string>
     <string name="use_dev_url">dev.openstreet.org ᱵᱮᱵᱷᱟᱨ ᱢᱮ</string>
-    <string name="add_to_opr">OpenPlaceReviews ᱨᱮ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
     <string name="add_to_mapillary">Mapillary ᱨᱮ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
     <string name="select_items_for_import">ᱡᱤᱱᱤᱥ ᱠᱚ ᱵᱟᱪᱷᱟᱣ ᱢᱮ ᱡᱟ ᱟᱹᱜᱩ ᱦᱩᱭᱩᱜᱼᱟ᱾</string>
     <string name="send_files_to_openstreetmap">GPX ᱨᱮᱫ OpenStreetMap ᱨᱮ ᱠᱩᱞ ᱢᱮ</string>
@@ -691,13 +690,11 @@
     <string name="search_POI_level_btn">ᱰᱷᱮᱨ ᱥᱮᱸᱫᱽᱨᱟᱭ ᱢᱮ</string>
     <string name="search_address_city">ᱥᱚᱦᱚᱨ</string>
     <string name="plugins_menu_group">ᱯᱞᱟᱜᱤᱱᱠᱚ</string>
-    <string name="quick_action_map_style">ᱱᱚᱠᱥᱟ ᱨᱮᱭᱟᱜ ᱦᱩᱱᱟᱹᱨ ᱵᱚᱫᱚᱞ ᱢᱮ</string>
     <string name="poi_dialog_poi_type">ᱪᱮᱞᱮᱠᱟᱱ POI</string>
     <string name="rendering_attr_hideHouseNumbers_name">ᱚᱲᱟᱜ ᱠᱚᱣᱟ ᱞᱮᱠᱷᱟᱠᱚ</string>
     <string name="show_images">ᱪᱤᱛᱟᱹᱨ ᱠᱚ ᱩᱱᱩᱫᱩᱜᱽ ᱢᱮ</string>
     <string name="routing_engine_vehicle_type_hiking">ᱦᱟᱭᱠᱤᱝ</string>
     <string name="configure_profile">ᱢᱚᱦᱲᱟ ᱠᱚᱱᱯᱷᱤᱜᱟᱨ ᱢᱮ</string>
-    <string name="wiki_around">ᱥᱩᱨ ᱨᱮᱱᱟᱜ ᱣᱤᱠᱤᱯᱤᱰᱤᱭᱟ ᱚᱱᱚᱞ ᱠᱚ</string>
     <string name="favorite_category_add_new">ᱱᱟᱶᱟ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
     <string name="lang_es_us">ᱥᱯᱮᱱᱤᱥᱽ (ᱚᱢᱮᱨᱤᱠᱟ)</string>
     <string name="add_work">ᱠᱟᱹᱢᱤ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
@@ -771,7 +768,7 @@
     <string name="arrived_at_destination">ᱟᱢ ᱛᱤᱭᱟᱹᱜ ᱠᱮᱫᱟᱢ᱾</string>
     <string name="route_to">ᱚᱠᱟᱛᱮ:</string>
     <string name="shared_string_close">ᱵᱚᱸᱫᱚᱭ ᱢᱮ</string>
-    <string name="map_widget_trip_recording_distance">ᱥᱟᱺᱜᱤᱧ</string>
+    <string name="map_widget_distance">ᱥᱟᱺᱜᱤᱧ</string>
     <string name="altitude_ascent">ᱵᱩᱨᱩᱪᱮᱛᱟᱱ</string>
     <string name="shared_string_options">ᱚᱯᱥᱟᱱᱠᱚ</string>
     <string name="measurement_tool">ᱥᱟᱺᱜᱤᱧ ᱢᱟᱯ ᱢᱮ</string>

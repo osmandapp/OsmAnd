@@ -1,8 +1,9 @@
 package net.osmand.plus.keyevent.fragments.editassignment;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController.TRANSITION_NAME;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,48 +12,47 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.listener.EventType;
 import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
-import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class EditKeyAssignmentFragment extends BaseOsmAndFragment
-		implements OnKeyCodeSelectedCallback, InputDevicesEventListener {
+		implements IAskRefreshDialogCompletely, IAskDismissDialog, InputDevicesEventListener {
 
 	public static final String TAG = EditKeyAssignmentFragment.class.getSimpleName();
 
-	private static final String ATTR_DEVICE_ID = "attr_device_id";
-	private static final String ATTR_ASSIGNMENT_ID = "attr_key_assignment";
-
 	private EditKeyAssignmentAdapter adapter;
 	private EditKeyAssignmentController controller;
-	private ApplicationMode appMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Fragment thisFragment = this;
-		Bundle arguments = requireArguments();
-		String appModeKey = arguments.getString(APP_MODE_KEY);
-		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		String deviceId = arguments.getString(ATTR_DEVICE_ID, "");
-		String assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID, "");
-		controller = new EditKeyAssignmentController(app, appMode, thisFragment, deviceId, assignmentId, isUsedOnMap());
+		controller = EditKeyAssignmentController.getExistedInstance(app);
+		if (controller != null) {
+			controller.registerDialog(this);
+		} else {
+			dismiss();
+		}
 	}
 
 	@Nullable
@@ -63,13 +63,16 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		updateNightMode();
 		View view = inflate(R.layout.fragment_edit_key_assignment, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		if (!settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
+			AndroidUiHelper.setSharedElementTransition(this, view, TRANSITION_NAME);
+		}
 		setupToolbar(view);
 
-		adapter = new EditKeyAssignmentAdapter(app, appMode, controller, isUsedOnMap());
+		adapter = new EditKeyAssignmentAdapter((MapActivity) requireMyActivity(), appMode, controller, isUsedOnMap());
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
-		updateViewContent(view);
+		updateScreen(view);
 		return view;
 	}
 
@@ -77,22 +80,29 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		AppBarLayout appBar = view.findViewById(R.id.appbar);
 		appBar.setExpanded(AndroidUiHelper.isOrientationPortrait(requireActivity()));
 
-		int color = getPrimaryIconColor(app, nightMode);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
-		toolbar.setNavigationContentDescription(R.string.shared_string_close);
+		toolbar.setNavigationIcon(getNavigationIcon());
+		toolbar.setNavigationContentDescription(R.string.shared_string_exit);
 		toolbar.setNavigationOnClickListener(v -> {
-			dismiss();
+			if (controller.isInEditMode()) {
+				controller.askExitEditMode(getActivity());
+			} else {
+				dismiss();
+			}
 		});
 
-		toolbar.inflateMenu(R.menu.edit_key_assignment_menu);
+		toolbar.inflateMenu(R.menu.key_assignment_overview_menu);
 		toolbar.setOnMenuItemClickListener(item -> {
 			int itemId = item.getItemId();
-			if (itemId == R.id.action_add_new_button) {
-				controller.askAddKeyCode();
+			if (itemId == R.id.action_edit) {
+				controller.enterEditMode();
 				return true;
-			} else if (itemId == R.id.action_clear_key_assignment) {
-				controller.askClearKeyCodes();
+			} else if (itemId == R.id.action_overflow_menu) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					View itemView = view.findViewById(R.id.action_overflow_menu);
+					controller.showOverflowMenu(activity, itemView);
+				}
 				return true;
 			}
 			return false;
@@ -100,26 +110,63 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onKeyCodeSelected(int oldKeyCode, int newKeyCode) {
-		controller.addOrUpdateKeyCode(oldKeyCode, newKeyCode);
-	}
-
-	@Override
 	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
-		View view = getView();
-		if (view != null && event.isAssignmentRelated()) {
-			updateViewContent(view);
+		if (event.isAssignmentRelated()) {
+			askUpdateScreen();
 		}
 	}
 
-	private void updateViewContent(@NonNull View view) {
+	@Override
+	public void onAskRefreshDialogCompletely(@NonNull String processId) {
+		askUpdateScreen();
+	}
+
+	private void askUpdateScreen() {
+		View view = getView();
+		if (view != null) {
+			updateScreen(view);
+		}
+	}
+
+	private void updateScreen(@NonNull View view) {
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar.setNavigationIcon(getNavigationIcon());
+		boolean editMode = controller.isInEditMode();
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_edit), !editMode);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_overflow_menu), !editMode);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_buttons), editMode);
 		updateToolbarTitle(view);
+		updateSaveButton(view);
+		updateViewContent();
+	}
+
+	@NonNull
+	private Drawable getNavigationIcon() {
+		int color = getPrimaryIconColor(app, nightMode);
+		int navIconId = controller.isInEditMode() ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app);
+		return getPaintedContentIcon(navIconId, color);
+	}
+
+	private void updateViewContent() {
 		adapter.setScreenData(controller.populateScreenItems());
 	}
 
 	private void updateToolbarTitle(@NonNull View view) {
 		CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.toolbar_layout);
-		collapsingToolbarLayout.setTitle(controller.getCustomNameSummary());
+		collapsingToolbarLayout.setTitle(controller.getDialogTitle());
+	}
+
+	private void updateSaveButton(@NonNull View view) {
+		DialogButton saveButton = view.findViewById(R.id.save_button);
+		saveButton.setEnabled(controller.hasChangesToSave());
+		saveButton.setOnClickListener(v -> {
+			controller.askSaveChanges();
+		});
+	}
+
+	@Override
+	public void onAskDismissDialog(@NonNull String processId) {
+		dismiss();
 	}
 
 	@Override
@@ -128,7 +175,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
-			controller.setActivity(mapActivity);
 		}
 		app.getInputDeviceHelper().addListener(this);
 	}
@@ -140,8 +186,13 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-		controller.setActivity(null);
 		app.getInputDeviceHelper().removeListener(this);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		controller.finishProcessIfNeeded(getActivity());
 	}
 
 	private void dismiss() {
@@ -158,7 +209,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
@@ -167,21 +217,27 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		return nightMode;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull ApplicationMode appMode,
-	                                @NonNull String deviceId,
-	                                @NonNull String assignmentId) {
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull ApplicationMode appMode,
+	                                   @Nullable View anchorView) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
+		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditKeyAssignmentFragment fragment = new EditKeyAssignmentFragment();
 			Bundle arguments = new Bundle();
-			arguments.putString(ATTR_DEVICE_ID, deviceId);
-			arguments.putString(ATTR_ASSIGNMENT_ID, assignmentId);
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(arguments);
-			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
+
+			FragmentTransaction transaction = manager.beginTransaction();
+			if (anchorView != null && !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
+				transaction.addSharedElement(anchorView, TRANSITION_NAME);
+			}
+			transaction.replace(R.id.fragmentContainer, fragment, TAG);
+			transaction.addToBackStack(TAG);
+			transaction.commitAllowingStateLoss();
+			return true;
 		}
+		return false;
 	}
 }

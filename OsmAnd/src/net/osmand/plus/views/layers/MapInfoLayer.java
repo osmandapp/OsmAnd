@@ -1,10 +1,14 @@
 package net.osmand.plus.views.layers;
 
 
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,8 +28,10 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.controls.VerticalWidgetPanel;
+import net.osmand.plus.views.controls.WidgetsContainer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -51,16 +57,18 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapDisplayPositionManager mapDisplayPositionManager;
 
+	private MapHudLayout mapHudLayout;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
 	private VerticalWidgetPanel topWidgetsPanel;
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
-	private View mapRulerLayout;
+	private RulerWidget rulerWidget;
 	private AlarmWidget alarmWidget;
 	private SpeedometerWidget speedometerWidget;
 	private List<RulerWidget> rulerWidgets;
 	private List<SideWidgetsPanel> sideWidgetsPanels;
+	private List<WidgetsContainer> additionalWidgets;
 
 	private AndroidAutoMapPlaceholderView androidAutoMapPlaceholderView;
 
@@ -89,12 +97,19 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
+			mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
 			topWidgetsPanel = mapActivity.findViewById(R.id.top_widgets_panel);
 			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
-			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
 			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
+
+			leftWidgetsPanel.setScreenWidth(mapActivity);
+			rightWidgetsPanel.setScreenWidth(mapActivity);
+
+			LayoutInflater inflater = mapActivity.getLayoutInflater();
+			rulerWidget = (RulerWidget) inflater.inflate(R.layout.map_ruler, mapHudLayout, false);
+			mapHudLayout.addWidget(rulerWidget);
 
 			registerAllControls(mapActivity);
 			recreateControls();
@@ -110,17 +125,21 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			if (bottomWidgetsPanel != null) {
 				bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
 			}
+			if (mapHudLayout != null) {
+				mapHudLayout.removeWidget(rulerWidget);
+			}
 			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
 
 			resetCashedTheme();
 			widgetRegistry.clearWidgets();
 
+			mapHudLayout = null;
 			topWidgetsPanel = null;
 			bottomWidgetsPanel = null;
 			leftWidgetsPanel = null;
 			rightWidgetsPanel = null;
-			mapRulerLayout = null;
+			rulerWidget = null;
 			androidAutoMapPlaceholderView = null;
 
 			drawSettings = null;
@@ -128,8 +147,14 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			speedometerWidget = null;
 			rulerWidgets = null;
 			sideWidgetsPanels = null;
+			additionalWidgets = null;
 			topToolbarView = null;
 		}
+	}
+
+	@Nullable
+	public TopToolbarView getTopToolbarView() {
+		return topToolbarView;
 	}
 
 	private void resetCashedTheme() {
@@ -169,6 +194,10 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
 	}
 
+	public boolean isMapControlsVisible() {
+		return mapHudLayout != null && mapHudLayout.getVisibility() == VISIBLE;
+	}
+
 	public void updateSideWidgets() {
 		if (leftWidgetsPanel != null) {
 			leftWidgetsPanel.update(drawSettings);
@@ -179,6 +208,11 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (!Algorithms.isEmpty(sideWidgetsPanels)) {
 			for (SideWidgetsPanel sideWidgetsPanel : sideWidgetsPanels) {
 				sideWidgetsPanel.update(drawSettings);
+			}
+		}
+		if (!Algorithms.isEmpty(additionalWidgets)) {
+			for (WidgetsContainer widgetsContainer : additionalWidgets) {
+				widgetsContainer.update(drawSettings);
 			}
 		}
 	}
@@ -193,8 +227,12 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private void registerAllControls(@NonNull MapActivity mapActivity) {
 		rulerWidgets = new ArrayList<>();
 		sideWidgetsPanels = new ArrayList<>();
+		additionalWidgets = new ArrayList<>();
 
-		topToolbarView = new TopToolbarView(mapActivity);
+		if (topToolbarView == null) {
+			topToolbarView = mapActivity.findViewById(R.id.widget_top_bar);
+			topToolbarView.setMapActivity(mapActivity);
+		}
 		updateTopToolbar(false);
 
 		alarmWidget = new AlarmWidget(app, mapActivity);
@@ -204,14 +242,16 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		speedometerWidget = new SpeedometerWidget(app, mapActivity, speedometerView);
 		speedometerWidget.setVisibility(false);
 
-		setupRulerWidget(mapRulerLayout);
+		setupRulerWidget(rulerWidget);
 		widgetRegistry.registerAllControls(mapActivity);
 	}
 
 	public void recreateControls() {
-		if (getMapActivity() != null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
 			resetCashedTheme();
 			ApplicationMode appMode = settings.getApplicationMode();
+			clearCustomContainers(mapActivity);
 			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 			topWidgetsPanel.update(drawSettings);
 			bottomWidgetsPanel.update(drawSettings);
@@ -220,7 +260,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	public void recreateTopWidgetsPanel() {
+	public void updateVerticalPanels() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 
@@ -232,18 +272,24 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	public void updateRow(MapWidget widget) {
-		if(getMapActivity() != null || !getMapActivity().isActivityDestroyed()) {
+	private void clearCustomContainers(@NonNull MapActivity activity) {
+		ViewGroup container = activity.findViewById(R.id.lanes_widget_special_position);
+		if (container != null) {
+			container.removeAllViews();
+		}
+	}
+
+	public void updateRow(@NonNull MapWidget widget) {
+		if (AndroidUtils.isActivityNotDestroyed(getMapActivity())) {
 			topWidgetsPanel.updateRow(widget);
 			bottomWidgetsPanel.updateRow(widget);
 		}
 	}
 
 	@Nullable
-	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
+	public RulerWidget setupRulerWidget(@NonNull RulerWidget widget) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RulerWidget widget = new RulerWidget(app, mapRulerView);
 			widget.setVisibility(false);
 
 			TextState state = calculateTextState(false);
@@ -274,6 +320,19 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void removeSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
 		if (sideWidgetsPanels != null) {
 			sideWidgetsPanels = CollectionUtils.removeFromList(sideWidgetsPanels, panel);
+		}
+	}
+
+	public void addAdditionalWidgetsContainer(@NonNull WidgetsContainer container) {
+		if (additionalWidgets != null) {
+			additionalWidgets = CollectionUtils.addToList(additionalWidgets, container);
+			container.updateColors(calculateTextState(false));
+		}
+	}
+
+	public void removeAdditionalWidgetsContainer(@NonNull WidgetsContainer container) {
+		if (additionalWidgets != null) {
+			additionalWidgets = CollectionUtils.removeFromList(additionalWidgets, container);
 		}
 	}
 
@@ -318,8 +377,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			leftWidgetsPanel.updateColors(sideWidgetsState);
 			rightWidgetsPanel.updateColors(sideWidgetsState);
 
-			topWidgetsPanel.updateColors(sideWidgetsState);
-			bottomWidgetsPanel.updateColors(sideWidgetsState);
+			topWidgetsPanel.updateColors(verticalWidgetsState);
+			bottomWidgetsPanel.updateColors(verticalWidgetsState);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateTextSize(nightMode, sideWidgetsState.textColor, sideWidgetsState.textShadowColor, (int) (2 * view.getDensity()));
@@ -327,8 +386,15 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
 				panel.updateColors(sideWidgetsState);
 			}
+			for (WidgetsContainer container : additionalWidgets) {
+				container.updateColors(verticalWidgetsState);
+			}
 			androidAutoMapPlaceholderView.updateNightMode(nightMode);
 		}
+	}
+
+	public void updateTopToolbar() {
+		updateTopToolbar(topToolbarView.isNightMode());
 	}
 
 	private void updateTopToolbar(boolean nightMode) {
@@ -346,8 +412,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (verticalWidget) {
 			ts.textColor = ColorUtilities.getPrimaryTextColor(getContext(), nightMode);
 		} else {
-			ts.textColor = nightMode ? ContextCompat.getColor(getContext(), R.color.widgettext_night) :
-					ContextCompat.getColor(getContext(), R.color.widgettext_day);
+			int textColorId = nightMode ? R.color.widgettext_night : R.color.widgettext_day;
+			ts.textColor = ColorUtilities.getColor(getContext(), textColorId);
 		}
 		ts.secondaryTextColor = ColorUtilities.getSecondaryTextColor(getContext(), nightMode);
 
@@ -367,7 +433,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			ts.panelBorderColorId = R.color.widget_panel_border_transparent;
 		} else if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
-			ts.widgetBackgroundId = verticalWidget ? R.color.widget_background_color_dark : R.drawable.bs_side_widget_night;
+			ts.widgetBackgroundId = verticalWidget ? R.drawable.bs_vertical_widget_night : R.drawable.bs_side_widget_night;
 			ts.boxFree = R.drawable.btn_round_night;
 			ts.widgetDividerColorId = R.color.divider_color_dark;
 			ts.panelBorderColorId = R.color.icon_color_secondary_dark;
@@ -389,6 +455,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			widgetRegistry.updateWidgetsInfo(settings.getApplicationMode(), drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
+			topWidgetsPanel.update(drawSettings);
+			bottomWidgetsPanel.update(drawSettings);
 			topToolbarView.updateInfo();
 			alarmWidget.updateInfo(drawSettings, false);
 			speedometerWidget.updateInfo(drawSettings);
@@ -398,6 +466,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
 				panel.update(drawSettings);
+			}
+			for (WidgetsContainer container : additionalWidgets) {
+				container.update(drawSettings);
 			}
 		}
 	}

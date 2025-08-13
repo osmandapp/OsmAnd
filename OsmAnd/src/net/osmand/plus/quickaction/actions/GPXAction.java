@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,16 @@ import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.views.layers.GPXLayer;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -43,7 +48,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -58,12 +63,14 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class GPXAction extends QuickAction implements FileSelected {
+public class GPXAction extends SelectMapLocationAction implements FileSelected {
 
 	public static final QuickActionType TYPE = new QuickActionType(GPX_ACTION_ID, "gpx.add", GPXAction.class)
-			.nameRes(R.string.quick_action_add_gpx)
+			.nameRes(R.string.quick_action_track_waypoint)
 			.iconRes(R.drawable.ic_action_gnew_label_dark)
-			.category(QuickActionType.TRACKS);
+			.category(QuickActionType.MY_PLACES)
+			.nameActionRes(R.string.shared_string_add)
+			.forceUseExtendedName();
 
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
 	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
@@ -96,40 +103,49 @@ public class GPXAction extends QuickAction implements FileSelected {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		unselectGpxFileIfMissing();
+		super.execute(mapActivity, params);
+	}
 
+	@Override
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
 		if (!shouldUseSelectedGpxFile()) {
-			addWaypoint(null, mapActivity);
+			addWaypoint(null, mapActivity, latLon);
 		} else {
 			getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
-				addWaypoint(gpxFile, mapActivity);
+				addWaypoint(gpxFile, mapActivity, latLon);
 				return true;
 			});
 		}
 	}
 
-	private void addWaypoint(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
-		LatLon latLon = getMapLocation(mapActivity);
-		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
-		if (usePredefinedWaypoint) {
+	@Override
+	@Nullable
+	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
+		GPXLayer layer = mapActivity.getMapLayers().getGpxLayer();
+		return layer.createWaypointIcon(getWaypointColor(), false, getIconName(), getBackgroundType());
+	}
+
+	private void addWaypoint(@Nullable GpxFile gpxFile, @NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+		if (shouldUsePredefinedAppearance()) {
 			WptPt wptPt = createWaypoint();
-			wptPt.lat = latLon.getLatitude();
-			wptPt.lon = latLon.getLongitude();
-			wptPt.time = System.currentTimeMillis();
+			wptPt.setLat(latLon.getLatitude());
+			wptPt.setLon(latLon.getLongitude());
+			wptPt.setTime(System.currentTimeMillis());
 
 			String categoryName = getParams().get(KEY_CATEGORY_NAME);
 			int categoryColor = getColorFromParams(KEY_CATEGORY_COLOR, 0);
 
-			if (Algorithms.isBlank(wptPt.name) && Algorithms.isBlank(wptPt.getAddress())) {
+			if (Algorithms.isBlank(wptPt.getName()) && Algorithms.isBlank(wptPt.getAddress())) {
 				lookupAddress(latLon, mapActivity, foundAddress -> {
-					wptPt.name = foundAddress;
+					wptPt.setName(foundAddress);
 					mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
 					return true;
 				});
 			} else {
-				if (Algorithms.isBlank(wptPt.name)) {
-					wptPt.name = wptPt.getAddress();
+				if (Algorithms.isBlank(wptPt.getName())) {
+					wptPt.setName(wptPt.getAddress());
 					wptPt.setAddress(null);
 				}
 				mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
@@ -140,6 +156,10 @@ public class GPXAction extends QuickAction implements FileSelected {
 			mapActivity.getContextMenu()
 					.addWptPt(wptPt, null, 0, false, gpxFile);
 		}
+	}
+
+	private boolean shouldUsePredefinedAppearance() {
+		return Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
 	}
 
 	private void lookupAddress(@NonNull LatLon latLon,
@@ -161,6 +181,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_gpx, parent, false);
+		setupPointLocationView(root.findViewById(R.id.point_location_container), mapActivity);
 		parent.addView(root);
 
 		unselectGpxFileIfMissing();
@@ -240,14 +261,14 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 		boolean currentTrack = gpxFilePath.isEmpty();
 		File file = new File(gpxFilePath);
-		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxUiHelper.getGpxTitle(file.getName());
+		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxHelper.INSTANCE.getGpxTitle(file.getName());
 		SelectedGpxFile selectedGpxFile = currentTrack
 				? app.getSavingTrackHelper().getCurrentTrack()
 				: app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 		if (selectedGpxFile != null) {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
+			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item -> {
 				if (item.getAnalysis() != null) {
 					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}
@@ -261,7 +282,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 	private void setupGpxTrackInfo(@NonNull View trackInfoContainer,
 	                               @NonNull String gpxName,
-	                               @NonNull GPXTrackAnalysis analysis,
+	                               @NonNull GpxTrackAnalysis analysis,
 	                               @NonNull OsmandApplication app) {
 		UiUtilities iconsCache = app.getUIUtilities();
 
@@ -302,8 +323,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 	private void setupWaypointAppearanceToggle(@NonNull View container, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean night = isNightMode(mapActivity);
-		boolean usePredefinedAppearance = predefinedWaypoint != null
-				|| Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
+		boolean usePredefinedAppearance = predefinedWaypoint != null || shouldUsePredefinedAppearance();
 		LinearLayout appearanceToggle = container.findViewById(R.id.appearance_toggle);
 		appearanceToggleButton = new TextToggleButton(app, appearanceToggle, night);
 
@@ -354,12 +374,12 @@ public class GPXAction extends QuickAction implements FileSelected {
 			predefinedIcon.setImageDrawable(icon);
 
 			TextView predefinedTitle = container.findViewById(R.id.predefined_title);
-			String waypointName = waypoint.name;
+			String waypointName = waypoint.getName();
 			String title = Algorithms.isEmpty(waypointName) ? context.getString(R.string.address) : waypointName;
 			predefinedTitle.setText(title);
 
 			TextView predefinedCategoryName = container.findViewById(R.id.predefined_category_name);
-			String categoryName = Algorithms.isEmpty(waypoint.category) ? "" : waypoint.category;
+			String categoryName = Algorithms.isEmpty(waypoint.getCategory()) ? "" : waypoint.getCategory();
 			predefinedCategoryName.setText(categoryName);
 			int categoryColor = getCategoryColor();
 			int categoryColorToDisplay = categoryColor != 0
@@ -440,14 +460,19 @@ public class GPXAction extends QuickAction implements FileSelected {
 	@NonNull
 	private WptPt createWaypoint() {
 		WptPt waypoint = new WptPt();
-		waypoint.name = predefinedWaypoint != null ? predefinedWaypoint.name : getParams().get(KEY_WPT_NAME);
+		waypoint.setName(predefinedWaypoint != null ? predefinedWaypoint.getName() : getParams().get(KEY_WPT_NAME));
 		waypoint.setAddress(predefinedWaypoint != null ? predefinedWaypoint.getAddress() : getParams().get(KEY_WPT_ADDRESS));
-		waypoint.desc = predefinedWaypoint != null ? predefinedWaypoint.desc : getParams().get(KEY_WPT_DESCRIPTION);
-		waypoint.category = predefinedWaypoint != null ? predefinedWaypoint.category : getParams().get(KEY_CATEGORY_NAME);
-		waypoint.setColor(predefinedWaypoint != null ? predefinedWaypoint.getColor() : getWaypointColorFromParams());
-		waypoint.setIconName(predefinedWaypoint != null ? predefinedWaypoint.getIconName() : getIconNameFromParams());
-		waypoint.setBackgroundType(predefinedWaypoint != null ? predefinedWaypoint.getBackgroundType() : getBackgroundTypeFromParams());
+		waypoint.setDesc(predefinedWaypoint != null ? predefinedWaypoint.getDesc() : getParams().get(KEY_WPT_DESCRIPTION));
+		waypoint.setCategory(predefinedWaypoint != null ? predefinedWaypoint.getCategory() : getParams().get(KEY_CATEGORY_NAME));
+		waypoint.setColor(getWaypointColor());
+		waypoint.setIconName(getIconName());
+		waypoint.setBackgroundType(getBackgroundType());
 		return waypoint;
+	}
+
+	@ColorInt
+	private int getWaypointColor() {
+		return predefinedWaypoint != null ? predefinedWaypoint.getColor() : getWaypointColorFromParams();
 	}
 
 	@ColorInt
@@ -456,11 +481,21 @@ public class GPXAction extends QuickAction implements FileSelected {
 	}
 
 	@NonNull
+	private String getIconName() {
+		return predefinedWaypoint != null ? predefinedWaypoint.getIconNameOrDefault() : getIconNameFromParams();
+	}
+
+	@NonNull
 	private String getIconNameFromParams() {
 		String iconName = getParams().get(KEY_WPT_ICON);
 		return Algorithms.isEmpty(iconName) || !RenderingIcons.containsBigIcon(iconName)
-				? GPXUtilities.DEFAULT_ICON_NAME
+				? GpxUtilities.DEFAULT_ICON_NAME
 				: iconName;
+	}
+
+	@Nullable
+	private String getBackgroundType() {
+		return predefinedWaypoint != null ? predefinedWaypoint.getBackgroundType() : getBackgroundTypeFromParams();
 	}
 
 	@NonNull
@@ -492,25 +527,25 @@ public class GPXAction extends QuickAction implements FileSelected {
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		boolean useSelectedGpxFile = trackToggleButton.getSelectedItemIndex() == 1;
-		getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
+		setParameter(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
 		if (selectedGpxFilePath != null) {
-			getParams().put(KEY_GPX_FILE_PATH, selectedGpxFilePath);
+			setParameter(KEY_GPX_FILE_PATH, selectedGpxFilePath);
 		}
 
 		boolean usePredefinedTemplate = appearanceToggleButton.getSelectedItemIndex() == 1;
-		getParams().put(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
+		setParameter(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
 		if (predefinedWaypoint != null) {
-			getParams().put(KEY_WPT_NAME, predefinedWaypoint.name);
-			getParams().put(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
-			getParams().put(KEY_WPT_DESCRIPTION, predefinedWaypoint.desc);
-			getParams().put(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
-			getParams().put(KEY_WPT_ICON, predefinedWaypoint.getIconName());
-			getParams().put(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
-			getParams().put(KEY_CATEGORY_NAME, predefinedWaypoint.category);
-			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
+			setParameter(KEY_WPT_NAME, predefinedWaypoint.getName());
+			setParameter(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
+			setParameter(KEY_WPT_DESCRIPTION, predefinedWaypoint.getDesc());
+			setParameter(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
+			setParameter(KEY_WPT_ICON, predefinedWaypoint.getIconName());
+			setParameter(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
+			setParameter(KEY_CATEGORY_NAME, predefinedWaypoint.getCategory());
+			setParameter(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
 		}
 
-		return true;
+		return super.fillParams(root, mapActivity);
 	}
 
 	private String getSelectedGpxFilePath(boolean paramsOnly) {
@@ -521,14 +556,14 @@ public class GPXAction extends QuickAction implements FileSelected {
 		String gpxFilePath = getSelectedGpxFilePath(true);
 		boolean gpxFileMissing = !Algorithms.isEmpty(gpxFilePath) && !new File(gpxFilePath).exists();
 		if (gpxFileMissing) {
-			getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(false));
+			setParameter(KEY_USE_SELECTED_GPX_FILE, String.valueOf(false));
 			getParams().remove(KEY_GPX_FILE_PATH);
 		}
 	}
 
 	private void getGpxFile(@NonNull String gpxFilePath,
 	                        @NonNull MapActivity mapActivity,
-	                        @NonNull CallbackWithObject<GPXFile> onGpxFileAvailable) {
+	                        @NonNull CallbackWithObject<GpxFile> onGpxFileAvailable) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (gpxFilePath.isEmpty()) {
 			onGpxFileAvailable.processResult(app.getSavingTrackHelper().getCurrentGpx());
@@ -537,7 +572,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 			if (selectedGpxFile != null) {
 				onGpxFileAvailable.processResult(selectedGpxFile.getGpxFile());
 			} else {
-				CallbackWithObject<GPXFile[]> onGpxFileLoaded = gpxFiles -> {
+				CallbackWithObject<GpxFile[]> onGpxFileLoaded = gpxFiles -> {
 					onGpxFileAvailable.processResult(gpxFiles[0]);
 					return true;
 				};
@@ -583,6 +618,6 @@ public class GPXAction extends QuickAction implements FileSelected {
 	}
 
 	private boolean isNightMode(@NonNull MapActivity mapActivity) {
-		return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		return mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }

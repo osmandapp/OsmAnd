@@ -14,6 +14,7 @@ import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -51,7 +52,8 @@ import java.util.zip.GZIPOutputStream;
 
 public class AndroidNetworkUtils {
 
-	private static final int CONNECTION_TIMEOUT = 15000;
+	public static final int CONNECT_TIMEOUT = 30000;
+	public static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 	private static final Log LOG = PlatformUtil.getLog(AndroidNetworkUtils.class);
 
 	public static final String CANCELLED_MSG = "cancelled";
@@ -144,8 +146,7 @@ public class AndroidNetworkUtils {
 										 @NonNull List<Request> requests,
 										 @Nullable OnSendRequestsListener listener,
 										 Executor executor) {
-
-		new AsyncTask<Void, Object, List<RequestResponse>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Object, List<RequestResponse>>() {
 
 			@Override
 			protected List<RequestResponse> doInBackground(Void... params) {
@@ -189,7 +190,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(executor, (Void) null);
+		}, executor);
 	}
 
 	public static void sendRequestAsync(@Nullable OsmandApplication app,
@@ -199,7 +200,7 @@ public class AndroidNetworkUtils {
 	                                    boolean toastAllowed,
 	                                    boolean post,
 	                                    @Nullable OnRequestResultListener listener) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 
 			private String result;
 			private String error;
@@ -226,14 +227,13 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		});
 	}
 
 	public static void downloadFileAsync(String url,
 	                                     File fileToSave,
 	                                     CallbackWithObject<String> listener) {
-
-		new AsyncTask<Void, Void, String>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... params) {
@@ -246,7 +246,7 @@ public class AndroidNetworkUtils {
 					listener.processResult(error);
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		});
 	}
 
 	private static void publishFilesDownloadProgress(@NonNull File file, int progress,
@@ -323,8 +323,7 @@ public class AndroidNetworkUtils {
 	                                      @NonNull Map<String, String> parameters,
 	                                      @Nullable OnFilesDownloadCallback callback,
 	                                      Executor executor) {
-
-		new AsyncTask<Void, Object, Map<File, String>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Object, Map<File, String>>() {
 
 			@Override
 			@NonNull
@@ -393,7 +392,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(executor, (Void) null);
+		}, executor);
 	}
 
 	public static String sendRequest(@Nullable OsmandApplication ctx, @NonNull Request request) {
@@ -465,8 +464,8 @@ public class AndroidNetworkUtils {
 			}
 		} catch (MalformedURLException e) {
 			if (app != null) {
-				error = MessageFormat.format(app.getResources().getString(R.string.shared_string_action_template)
-						+ ": " + app.getResources().getString(R.string.shared_string_unexpected_error), userOperation);
+				error = MessageFormat.format(app.getString(R.string.shared_string_action_template)
+						+ ": " + app.getString(R.string.shared_string_unexpected_error), userOperation);
 			} else {
 				error = "Action " + userOperation + ": Unexpected error";
 			}
@@ -493,7 +492,8 @@ public class AndroidNetworkUtils {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("Accept-Charset", "UTF-8");
 		connection.setRequestProperty("User-Agent", app != null ? Version.getFullVersion(app) : "OsmAnd");
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(CONNECT_TIMEOUT);
+		connection.setReadTimeout(READ_TIMEOUT);
 		if (body != null && post) {
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
@@ -545,8 +545,8 @@ public class AndroidNetworkUtils {
 	private static String processIOError(@Nullable OsmandApplication app, @Nullable String userOperation, boolean toastAllowed) {
 		String error = null;
 		if (app != null) {
-			error = MessageFormat.format(app.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + app.getResources().getString(R.string.shared_string_io_error), userOperation);
+			error = MessageFormat.format(app.getString(R.string.shared_string_action_template)
+					+ ": " + app.getString(R.string.shared_string_io_error), userOperation);
 		} else {
 			error = "Action " + userOperation + ": I/O error";
 		}
@@ -561,8 +561,8 @@ public class AndroidNetworkUtils {
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 			try {
 				res = BitmapFactory.decodeStream(inputStream);
@@ -579,15 +579,18 @@ public class AndroidNetworkUtils {
 
 	public static String downloadFile(@NonNull String url, @NonNull File fileToSave, boolean gzip, @Nullable IProgress progress) {
 		String error = null;
+		HttpURLConnection connection = null;
 		try {
-			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection = NetworkUtils.getHttpURLConnection(url);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
 			}
 			connection.connect();
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
+				error = connection.getResponseCode() + " " + connection.getResponseMessage();
+			} else if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				return streamToString(connection.getErrorStream());
 			} else {
 				InputStream inputStream = gzip
@@ -613,6 +616,10 @@ public class AndroidNetworkUtils {
 				error = CANCELLED_MSG;
 			}
 			LOG.warn("Cannot download file: " + url, e);
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
 		}
 		if (progress != null) {
 			progress.finishTask();
@@ -623,20 +630,35 @@ public class AndroidNetworkUtils {
 	public static long downloadModifiedFile(
 			@NonNull String url, @NonNull File fileToSave, boolean gzip, long lastTime, @Nullable IProgress progress) {
 		long result = -1;
+		HttpURLConnection connection = null;
 		try {
-			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			if (progress != null) {
+				progress.startTask(url, 0);
+			}
+			connection = NetworkUtils.getHttpURLConnection(url);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
 			}
 			connection.connect();
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				if (progress != null) {
+					progress.finishTask();
+				}
 				return result;
 			} else {
+				int bytesDivisor = 1024;
 				long lastModified = connection.getLastModified();
 				if (lastModified > 0 && lastModified <= lastTime) {
+					if (progress != null) {
+						progress.finishTask();
+					}
 					return 0;
+				}
+				if (progress != null) {
+					int work = (int) (connection.getContentLengthLong() / bytesDivisor);
+					progress.startWork(work);
 				}
 				InputStream inputStream = gzip
 						? new GZIPInputStream(connection.getInputStream())
@@ -645,7 +667,7 @@ public class AndroidNetworkUtils {
 				OutputStream stream = null;
 				try {
 					stream = new FileOutputStream(fileToSave);
-					Algorithms.streamCopy(inputStream, stream, progress, 1024);
+					Algorithms.streamCopy(inputStream, stream, progress, bytesDivisor);
 					stream.flush();
 					result = lastModified > 0 ? lastModified : 1;
 				} finally {
@@ -657,6 +679,10 @@ public class AndroidNetworkUtils {
 			LOG.error("UnknownHostException, cannot download file " + url + " " + e.getMessage());
 		} catch (Exception e) {
 			LOG.warn("Cannot download file: " + url, e);
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
 		}
 		if (progress != null) {
 			progress.finishTask();
@@ -773,7 +799,9 @@ public class AndroidNetworkUtils {
 			LOG.info("Finish uploading file " + fileName);
 			LOG.info("Response code and message : " + responseCode + " " + responseMessage);
 
-			if (responseCode != HttpURLConnection.HTTP_OK) {
+			if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+				error = responseCode + " " + responseMessage;
+			} else if (responseCode != HttpURLConnection.HTTP_OK) {
 				InputStream errorStream = conn.getErrorStream();
 				error = errorStream != null ? streamToString(errorStream) : responseMessage;
 			} else {
@@ -822,8 +850,7 @@ public class AndroidNetworkUtils {
 	                                    @Nullable Map<String, String> headers,
 	                                    OnFilesUploadCallback callback,
 	                                    Executor executor) {
-
-		new AsyncTask<Void, Object, Map<File, String>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Object, Map<File, String>>() {
 
 			@Override
 			@NonNull
@@ -882,7 +909,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.executeOnExecutor(executor, (Void) null);
+		}, executor);
 	}
 
 	public static UploadFileTask uploadFileAsync(@NonNull String url,
@@ -942,7 +969,7 @@ public class AndroidNetworkUtils {
 	                                             OnFileUploadCallback callback,
 	                                             Executor executor) {
 		UploadFileTask uploadFileTask = new UploadFileTask(url, streamWriter, fileName, gzip, parameters, headers, callback);
-		uploadFileTask.executeOnExecutor(executor, (Void) null);
+		OsmAndTaskManager.executeTask(uploadFileTask, executor);
 		return uploadFileTask;
 	}
 

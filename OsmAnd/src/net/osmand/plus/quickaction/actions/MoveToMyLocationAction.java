@@ -2,12 +2,14 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.MOVE_TO_MY_LOCATION_ACTION;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -18,9 +20,10 @@ public class MoveToMyLocationAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(MOVE_TO_MY_LOCATION_ACTION,
 			"map.move.my_location", MoveToMyLocationAction.class)
-			.nameRes(R.string.key_event_action_move_to_my_location)
+			.nameRes(R.string.quick_action_to_my_location)
 			.iconRes(R.drawable.ic_action_my_location).nonEditable()
-			.category(QuickActionType.MAP_INTERACTIONS);
+			.category(QuickActionType.MAP_INTERACTIONS)
+			.nameActionRes(R.string.shared_string_move);
 
 	public MoveToMyLocationAction() {
 		super(TYPE);
@@ -31,7 +34,7 @@ public class MoveToMyLocationAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 	}
 

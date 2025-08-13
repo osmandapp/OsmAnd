@@ -1,6 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-	<string name="map_widget_gps_info">Impormasyon ng GPS</string>
+    <string name="map_widget_gps_info">Impormasyon ng GPS</string>
     <string name="access_arrival_time">Oras ng Pagdating</string>
-    </resources>
+    <string name="quick_action_directions_from">Punto ng simula</string>
+    <string name="obd_connecting_to_device">Kumukonekta sa %s</string>
+    <string name="shared_string_from">mula sa</string>
+    <string name="cloud_version_confirm_delete">Burahin ang \"%1$s\" mula sa OsmAnd Cloud?</string>
+    <string name="arrived_at_destination">Nakarating ka na.</string>
+    <string name="auto_25_chars_route_tsll">Bahagyang lumiko pakaliwa</string>
+    <string name="switch_start_finish">Baliktarin ang punto ng simula &amp; patutunguhan</string>
+    <string name="percent_hour">%/o</string>
+    <string name="obd_how_to_connect">Paano kumonekta:</string>
+    <string name="connect_obd_instructions_step2">Paganahin ang iyong makina ng sasakyan</string>
+    <string name="quick_action_new_route">Bagong ruta</string>
+    <string name="from_to_with_params">Mula %1$s patungong %2$s</string>
+    <string name="auto_25_chars_route_tr">Lumiko pakanan</string>
+    <string name="auto_25_chars_route_kl">Panatilihing nasa kaliwa</string>
+    <string name="auto_25_chars_route_kr">Panatilihing nasa kanan</string>
+    <string name="litres">Litro</string>
+    <string name="liter_per_hour">l/o</string>
+</resources>

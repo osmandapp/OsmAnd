@@ -2,6 +2,7 @@ package net.osmand;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
+import static net.osmand.data.Amenity.ROUTE_ID;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.router.*;
 import org.apache.commons.logging.Log;
 
 import com.google.gson.JsonObject;
@@ -27,14 +27,24 @@ import gnu.trove.list.array.TIntArrayList;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.ObfConstants;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.GeneralRouter;
+import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.router.HHRoutePlanner;
+import net.osmand.router.NativeTransportRoutingResult;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RouteResultPreparation;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingContext;
+import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -391,6 +401,9 @@ public class NativeLibrary {
 	}
 	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 
+	protected static native ByteBuffer getGeotiffTile(
+		String tilePath, String outColorFilename, String midColorFilename, int type, int size, int zoom, int x, int y);
+
 	/**/
 	// Empty native impl
 	/*
@@ -549,10 +562,10 @@ public class NativeLibrary {
 	}
 
 	public static class RenderedObject extends MapObject {
-		private Map<String, String> tags = new LinkedHashMap<>();
+		private final Map<String, String> tags = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect();
-		private TIntArrayList x = new TIntArrayList();
-		private TIntArrayList y = new TIntArrayList();
+		private final TIntArrayList x = new TIntArrayList();
+		private final TIntArrayList y = new TIntArrayList();
 		private String iconRes;
 		private int order;
 		private boolean visible;
@@ -560,6 +573,7 @@ public class NativeLibrary {
 		private LatLon labelLatLon;
 		private int labelX = 0;
 		private int labelY = 0;
+		private boolean isPolygon;
 
 		public Map<String, String> getTags() {
 			return tags;
@@ -658,6 +672,14 @@ public class NativeLibrary {
 			this.labelY = labelY;
 		}
 
+		public void markAsPolygon(boolean isPolygon) {
+			this.isPolygon = isPolygon;
+		}
+
+		public boolean isPolygon() {
+			return isPolygon;
+		}
+
 		public List<String> getOriginalNames() {
 			List<String> names = new ArrayList<>();
 			if (!Algorithms.isEmpty(name)) {
@@ -675,20 +697,63 @@ public class NativeLibrary {
 
 		public String getRouteID() {
 			for (Map.Entry<String, String> entry : getTags().entrySet()) {
-				if ("route_id".equals(entry.getKey())) {
+				if (ROUTE_ID.equals(entry.getKey())) {
 					return entry.getValue();
 				}
 			}
 			return null;
 		}
 
-		public String getGpxFileName() {
-			for (String name : getOriginalNames()) {
-				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
-					return name;
-				}
+		@Override
+		public String toString() {
+			String s = getClass().getSimpleName() + " " + name;
+			String link = ObfConstants.getOsmUrlForId(this);
+			String tags = ObfConstants.getPrintTags(this);
+			s += s.contains(link) ? "" : " " + link;
+			s += s.contains(tags) ? "" : " " + tags;
+			return s;
+		}
+
+		public List<LatLon> getPolygon() {
+			List<LatLon> res = new ArrayList<>();
+			for (int i = 0; i < this.x.size(); i++) {
+				int x = this.x.get(i);
+				int y = this.y.get(i);
+				LatLon l = new LatLon(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				res.add(l);
 			}
-			return null;
+			return res;
+		}
+
+		public QuadRect getRectLatLon() {
+			if (x.size() == 0) {
+				return null;
+			}
+			int left = x.get(0);
+			int right = left;
+			int top = y.get(0);
+			int bottom = top;
+			for (int i = 0; i < x.size(); i++) {
+				int x = this.x.get(i);
+				int y = this.y.get(i);
+				left = Math.min(left, x);
+				right = Math.max(right, x);
+				top = Math.min(top, y);
+				bottom = Math.max(bottom, y);
+			}
+			return new QuadRect(MapUtils.get31LongitudeX(left), MapUtils.get31LatitudeY(top), MapUtils.get31LongitudeX(right), MapUtils.get31LatitudeY(bottom));
+		}
+
+		public LatLon getLatLon() {
+			LatLon latLon = getLabelLatLon();
+			if (latLon == null && getLabelX() != 0) {
+				latLon = new LatLon(MapUtils.get31LatitudeY(getLabelY()), MapUtils.get31LongitudeX(getLabelX()));
+			}
+			QuadRect rect = getRectLatLon();
+			if (latLon == null && rect != null) {
+				latLon = new LatLon(rect.centerY(), rect.centerX());
+			}
+			return latLon;
 		}
 	}
 }

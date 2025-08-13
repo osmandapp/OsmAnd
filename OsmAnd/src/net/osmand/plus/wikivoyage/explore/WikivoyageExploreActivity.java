@@ -25,15 +25,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OnDialogFragmentResultListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
@@ -69,7 +65,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	public void onCreate(Bundle savedInstanceState) {
 		app = getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		nightMode = !settings.isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		int themeId = nightMode ? R.style.OsmandDarkTheme_NoActionbar : R.style.OsmandLightTheme_NoActionbar_LightStatusBar;
 		app.getLocaleHelper().setLanguage(this);
@@ -297,12 +293,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 					init.removeListener(this);
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						new LoadWikivoyageData(activity, resetData).execute();
+						OsmAndTaskManager.executeTask(new LoadWikivoyageData(activity, resetData));
 					}
 				}
 			});
 		} else {
-			new LoadWikivoyageData(this, resetData).execute();
+			OsmAndTaskManager.executeTask(new LoadWikivoyageData(this, resetData));
 		}
 	}
 

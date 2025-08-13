@@ -21,10 +21,16 @@ public abstract class AbstractPoiType {
 	private String synonyms;
 	private String enTranslation;
 	private String translation;
+	private final String iconName;
 
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
+		this(keyName, registry, null);
+	}
+
+	public AbstractPoiType(String keyName, MapPoiTypes registry, String iconName) {
 		this.keyName = keyName;
 		this.registry = registry;
+		this.iconName = iconName;
 	}
 
 	public void setBaseLangType(AbstractPoiType baseLangType) {
@@ -47,8 +53,12 @@ public abstract class AbstractPoiType {
 		return keyName;
 	}
 
+	protected String getIconNameInternal() {
+		return iconName;
+	}
+
 	public String getIconKeyName() {
-		return getFormattedKeyName();
+		return formatKeyName(iconName != null ? iconName : getKeyName());
 	}
 
 	public String getFormattedKeyName() {
@@ -75,14 +85,14 @@ public abstract class AbstractPoiType {
 	}
 
 	public String getTranslation() {
-		if(translation == null) {
+		if (translation == null) {
 			translation = registry.getTranslation(this);
 		}
 		return translation;
 	}
 
 	public String getSynonyms() {
-		if(synonyms == null) {
+		if (synonyms == null) {
 			synonyms = registry.getSynonyms(this);
 		}
 		return synonyms;
@@ -101,6 +111,10 @@ public abstract class AbstractPoiType {
 		} else {
 			return null;
 		}
+	}
+
+	public boolean hasValidTranslation() {
+		return registry.hasValidTranslation(this);
 	}
 
 	public void addPoiAdditional(PoiType tp) {
@@ -170,8 +184,20 @@ public abstract class AbstractPoiType {
 
 	public abstract Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes);
 
+	public String getParentTypeName() {
+		return "";
+	}
+
 	@Override
 	public String toString() {
 		return keyName;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof AbstractPoiType that)) {
+			return false;
+		}
+		return keyName != null && keyName.equals(that.keyName);
 	}
 }

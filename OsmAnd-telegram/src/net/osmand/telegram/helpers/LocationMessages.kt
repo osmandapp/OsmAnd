@@ -10,7 +10,7 @@ import net.osmand.data.LatLon
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.util.MapUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import java.util.concurrent.ConcurrentLinkedQueue
 
 class LocationMessages(val app: TelegramApplication) {

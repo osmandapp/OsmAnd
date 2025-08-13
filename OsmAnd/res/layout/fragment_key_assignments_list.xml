@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/appbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<include layout="@layout/preference_toolbar_with_action_button" />
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:orientation="vertical"
+			android:scrollbars="none" />
+
+	</LinearLayout>
+
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/fabButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentBottom="true"
+		android:layout_margin="@dimen/content_padding"
+		android:contentDescription="@string/quick_action_new_action"
+		android:transitionName="shared_element_container"
+		app:backgroundTint="?attr/color_dialog_buttons"
+		app:srcCompat="@drawable/ic_action_plus"
+		app:tint="?attr/app_bar_primary_item_color" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:layout_alignParentBottom="true"
+		android:orientation="vertical">
+
+		<include layout="@layout/card_top_divider" />
+
+		<FrameLayout
+			android:id="@+id/bottom_buttons"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_ex_height"
+			android:background="?attr/list_background_color">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/save_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				app:dialogButtonTitle="@string/shared_string_apply"
+				app:dialogButtonType="primary" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+</RelativeLayout>

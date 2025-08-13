@@ -43,6 +43,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
 import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
+import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -107,7 +108,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		Bundle args = getArguments();
 		String key = args != null ? args.getString(QUICK_ACTION_BUTTON_KEY) : null;
 		if (key != null) {
-			buttonState = mapButtonsHelper.getButtonStateById(key);
+			buttonState = mapButtonsHelper.getActionButtonStateById(key);
 		}
 		if (savedInstanceState != null) {
 			long[] array = savedInstanceState.getLongArray(ACTIONS_TO_DELETE_KEY);
@@ -327,6 +328,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		Context context = view.getContext();
 
 		items.add(new PopUpMenuItem.Builder(context)
+				.setTitleId(R.string.shared_string_appearance)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> showAppearanceDialog()).create());
+
+		items.add(new PopUpMenuItem.Builder(context)
 				.setTitleId(R.string.shared_string_rename)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
 				.setOnClickListener(v -> showRenameDialog()).create());
@@ -341,8 +347,15 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
-		displayData.layoutId = R.layout.simple_popup_menu_item;
 		PopUpMenu.show(displayData);
+	}
+
+	private void showAppearanceDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			MapButtonAppearanceFragment.showInstance(manager, buttonState);
+		}
 	}
 
 	private void showRenameDialog() {
@@ -565,7 +578,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 					h.itemContainer.setOnClickListener(view -> {
 						FragmentManager manager = getFragmentManager();
 						if (manager != null) {
-							CreateEditActionDialog.showInstance(manager, buttonState, action);
+							AddQuickActionController.showCreateEditActionDialog(app, manager, buttonState, action);
 						}
 					});
 				} else if (screenType == SCREEN_TYPE_DELETE) {
@@ -593,13 +606,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 				List<QuickAction> actions = getQuickActions();
 				int actionGlobalPosition = actions.indexOf(action);
 				int actionPosition = actionGlobalPosition % ITEMS_IN_GROUP + 1;
-				String name = action.getName(app);
-				if (action.getActionNameRes() != 0 && !name.contains(getString(action.getActionNameRes()))) {
-					String prefAction = getString(action.getActionNameRes());
-					h.title.setText(getString(R.string.ltr_or_rtl_combine_via_dash, prefAction, action.getName(app)));
-				} else {
-					h.title.setText(name);
-				}
+				h.title.setText(action.getExtendedName(app));
 				h.subTitle.setText(getResources().getString(R.string.quick_action_item_action, actionPosition));
 				h.icon.setImageDrawable(getContentIcon(action.getIconRes(app)));
 
@@ -850,7 +857,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		BUTTON
 	}
 
-	private static class ListItem {
+	public static class ListItem {
 		ItemType type;
 		Object value;
 
@@ -883,7 +890,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	private void showAddQuickActionDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			AddQuickActionFragment.showInstance(manager, buttonState);
+			AddQuickActionController.showAddQuickActionDialog(app, manager, buttonState);
 		}
 	}
 

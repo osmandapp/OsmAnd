@@ -13,10 +13,10 @@
 	<color name="widget_secondary_background_color_dark">#F2F2F2</color>
 
 	<!-- Text -->
-	<color name="text_color_primary_light">#212121</color>
-	<color name="text_color_primary_dark">#cccccc</color>
-	<color name="text_color_secondary_light">#727272</color>
-	<color name="text_color_secondary_dark">#727272</color>
+	<color name="text_color_primary_light">#1A1A1A</color>
+	<color name="text_color_primary_dark">#E6E6E6</color>
+	<color name="text_color_secondary_light">#666666</color>
+	<color name="text_color_secondary_dark">#8C8C8C</color>
 	<color name="text_color_tertiary_light">#bfbfbf</color>
 	<color name="text_color_tertiary_dark">#404040</color>
 	<color name="text_color_tab_active_light">#ffffff</color>
@@ -37,6 +37,8 @@
 	<color name="icon_color_active_dark">#d28521</color>
 	<color name="map_button_icon_color_light">#727272</color>
 	<color name="map_button_icon_color_dark">#cccccc</color>
+	<color name="map_button_background_color_light">#FFFFFF</color>
+	<color name="map_button_background_color_dark">#000000</color>
 	
 	<!-- AppBar & Status bar -->
 	<color name="app_bar_main_light">#ff8800</color>
@@ -217,6 +219,10 @@
 	<!-- Distance to object suitable for all themes -->
 	<color name="color_distance">#FD9822</color>
 
+	<!-- Speedometer -->
+	<color name="speedometer_text_speed_exceed_day">#E71D36</color>
+	<color name="speedometer_text_speed_exceed_night">#E71D36</color>
+
 	<color name="color_myloc_distance">#0080FF</color>
 	<color name="wpt_distance_color">#dd6CB336</color>
 
@@ -267,7 +273,10 @@
 
 	<color name="nav_arrow_distant">#C0C0C0</color>
 	<color name="nav_arrow">#FADE23</color>
+	<color name="nav_arrow_stroke_color">#000000</color>
 	<color name="nav_arrow_imminent">#2EFF00</color>
+	<color name="nav_arrow_circle_color_light">#D9D9D9</color>
+	<color name="nav_arrow_circle_color_dark">#737373</color>
 
 	<color name="nav_point">#FA5050</color>
 	<color name="poi_background">#A0FF8000</color>
@@ -478,4 +487,7 @@
 	<color name="local_resources_color">#1560D0</color>
 	<color name="local_my_places_color">#E8C71D</color>
 	<color name="local_settings_color">#14CC70</color>
+
+	<color name="slider_label_text_light">#ffffff</color>
+	<color name="slider_label_text_dark">#e6e6e6</color>
 </resources>

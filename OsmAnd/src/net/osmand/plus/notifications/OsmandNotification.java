@@ -1,11 +1,14 @@
 package net.osmand.plus.notifications;
 
+import static net.osmand.plus.notifications.NotificationHelper.NOTIFICATION_CHANEL_ID;
+
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
-import android.content.Context;
+import android.app.Service;
 import android.content.Intent;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
@@ -14,16 +17,16 @@ import net.osmand.plus.OsmandApplication;
 
 public abstract class OsmandNotification {
 
+	private static final boolean CLEAR_NOTIFICATION_IF_CHANGED = false;
+
 	public static final int NAVIGATION_NOTIFICATION_SERVICE_ID = 5;
 	public static final int GPX_NOTIFICATION_SERVICE_ID = 6;
-	public static final int ERROR_NOTIFICATION_SERVICE_ID = 7;
 	public static final int DOWNLOAD_NOTIFICATION_SERVICE_ID = 8;
 	public static final int CAR_APP_NOTIFICATION_SERVICE_ID = 9;
 	public static final int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	public static final int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
 	public static final int WEAR_GPX_NOTIFICATION_SERVICE_ID = 1006;
-	public static final int WEAR_ERROR_NOTIFICATION_SERVICE_ID = 1007;
 	public static final int WEAR_DOWNLOAD_NOTIFICATION_SERVICE_ID = 1008;
 	public static final int WEAR_CAR_APP_NOTIFICATION_SERVICE_ID = 1009;
 
@@ -36,6 +39,9 @@ public abstract class OsmandNotification {
 	private final String groupName;
 
 	private Notification currentNotification;
+	protected boolean stateChanged;
+
+	private final NotificationManagerCompat notificationManager;
 
 	public enum NotificationType {
 		NAVIGATION,
@@ -49,6 +55,7 @@ public abstract class OsmandNotification {
 	public OsmandNotification(OsmandApplication app, String groupName) {
 		this.app = app;
 		this.groupName = groupName;
+		this.notificationManager = NotificationManagerCompat.from(app);
 		init();
 	}
 
@@ -77,10 +84,10 @@ public abstract class OsmandNotification {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.getNotificationHelper().createNotificationChannel();
 		}
-		Builder builder = new Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID)
+		Builder builder = new Builder(app, NOTIFICATION_CHANEL_ID)
 				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
-				.setLocalOnly(true) // Probably should be deleted to not limit notifications
+//				.setLocalOnly(true) // Probably should be deleted to not limit notifications
 				.setOnlyAlertOnce(true) // Many devices still don't treat that flag correct and keep spamming
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)
@@ -97,7 +104,7 @@ public abstract class OsmandNotification {
 		return builder;
 	}
 
-	public abstract Builder buildNotification(boolean wearable);
+	public abstract Builder buildNotification(@Nullable Service service, boolean wearable);
 
 	public abstract int getOsmandNotificationId();
 
@@ -107,7 +114,15 @@ public abstract class OsmandNotification {
 
 	public abstract boolean isActive();
 
-	public abstract boolean isEnabled();
+	public abstract boolean isUsedByService(@Nullable Service service);
+
+	public boolean isEnabled() {
+		return isUsedByService(null) || isActive();
+	}
+
+	public boolean isEnabled(@Nullable Service service) {
+		return isUsedByService(service) || isActive();
+	}
 
 	public abstract Intent getContentIntent();
 
@@ -117,53 +132,56 @@ public abstract class OsmandNotification {
 	public void onNotificationDismissed() {
 	}
 
-	private void notifyWearable(NotificationManagerCompat notificationManager) {
-		Builder wearNotificationBuilder = buildNotification(true);
+	@SuppressLint("MissingPermission")
+	private void notifyWearable(NotificationManagerCompat notificationManager, boolean stateChanged) {
+		Builder wearNotificationBuilder = buildNotification(null, true);
 		if (wearNotificationBuilder != null) {
 			Notification wearNotification = wearNotificationBuilder.build();
+			if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
+				notificationManager.cancel(getOsmandWearableNotificationId());
+			}
 			notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
 		}
 	}
 
+	@SuppressLint("MissingPermission")
 	public boolean showNotification() {
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
-			Builder notificationBuilder = buildNotification(false);
+			Builder notificationBuilder = buildNotification(null, false);
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, false);
 				setupNotification(notification);
-				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
-				notifyWearable(notificationManager);
+				int notificationId = top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId();
+				if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
+					notificationManager.cancel(notificationId);
+				}
+				notificationManager.notify(notificationId, notification);
+				notifyWearable(notificationManager, stateChanged);
 				return true;
 			}
 		}
 		return false;
 	}
 
+	@SuppressLint("MissingPermission")
 	public boolean refreshNotification() {
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
-			Builder notificationBuilder = buildNotification(false);
+			Builder notificationBuilder = buildNotification(null, false);
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, true);
 				setupNotification(notification);
-				if (top) {
-					//notificationManager.cancel(getOsmandNotificationId());
-					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
-				} else {
-					notificationManager.notify(getOsmandNotificationId(), notification);
+				int notificationId = top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId();
+				if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
+					notificationManager.cancel(notificationId);
 				}
-				notifyWearable(notificationManager);
+				notificationManager.notify(notificationId, notification);
+				notifyWearable(notificationManager, stateChanged);
 				return true;
 			} else {
 				notificationManager.cancel(getOsmandNotificationId());
-				// there could be a different primary notification, so additionally clear CAR_APP explicitly
-				notificationManager.cancel(CAR_APP_NOTIFICATION_SERVICE_ID);
 			}
 		} else {
 			notificationManager.cancel(getOsmandNotificationId());
-			// there could be a different primary notification, so additionally clear CAR_APP explicitly
-			notificationManager.cancel(CAR_APP_NOTIFICATION_SERVICE_ID);
 		}
 		return false;
 	}
@@ -179,14 +197,8 @@ public abstract class OsmandNotification {
 
 	public void removeNotification() {
 		currentNotification = null;
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		notificationManager.cancel(getOsmandNotificationId());
 		notificationManager.cancel(getOsmandWearableNotificationId());
-	}
-
-	public void closeSystemDialogs(Context context) {
-		Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-		context.sendBroadcast(it);
 	}
 }
 

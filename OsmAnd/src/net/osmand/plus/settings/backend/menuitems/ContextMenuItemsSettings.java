@@ -35,6 +35,7 @@ public class ContextMenuItemsSettings implements Serializable {
 		this.orderIds = orderIds;
 	}
 
+	@NonNull
 	public ContextMenuItemsSettings newInstance() {
 		return new ContextMenuItemsSettings();
 	}
@@ -68,6 +69,7 @@ public class ContextMenuItemsSettings implements Serializable {
 		return list;
 	}
 
+	@NonNull
 	public String writeToJsonString(@NonNull String idScheme) {
 		try {
 			JSONObject json = new JSONObject();
@@ -84,6 +86,7 @@ public class ContextMenuItemsSettings implements Serializable {
 		json.put(ORDER, getJsonArray(orderIds, idScheme));
 	}
 
+	@NonNull
 	protected JSONArray getJsonArray(List<String> ids, @NonNull String idScheme) {
 		JSONArray jsonArray = new JSONArray();
 		if (ids != null && !ids.isEmpty()) {
@@ -94,10 +97,12 @@ public class ContextMenuItemsSettings implements Serializable {
 		return jsonArray;
 	}
 
+	@NonNull
 	public List<String> getHiddenIds() {
 		return Collections.unmodifiableList(hiddenIds);
 	}
 
+	@NonNull
 	public List<String> getOrderIds() {
 		return Collections.unmodifiableList(orderIds);
 	}

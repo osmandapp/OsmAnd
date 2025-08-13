@@ -7,9 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.download.local.BaseLocalItem;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.dialogs.HeaderGroup;
-import net.osmand.plus.utils.AndroidUtils;
 
 public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
@@ -24,14 +23,6 @@ public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindView(@NonNull HeaderGroup group) {
 		title.setText(group.getName());
-		count.setText(AndroidUtils.formatSize(itemView.getContext(), getSize(group)));
-	}
-
-	public long getSize(@NonNull HeaderGroup group) {
-		long size = 0;
-		for (BaseLocalItem item : group.getItems()) {
-			size += item.getSize();
-		}
-		return size;
+		count.setText(LocalItemUtils.getSizeDescription(itemView.getContext(), group.getItems()));
 	}
 }

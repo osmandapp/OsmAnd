@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -399,7 +400,10 @@ public class DownloadActivityType {
 		return "";
 	}
 
-	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includeParent, boolean useShortName) {
+	@Nullable
+	public String getVisibleName(@NonNull DownloadItem downloadItem, @NonNull Context ctx,
+	                             @NonNull OsmandRegions osmandRegions, boolean includeParent,
+	                             @Nullable WorldRegion baseParentRegion, boolean useShortName) {
 		if (this == VOICE_FILE) {
 			if (isVoiceTTS(downloadItem) || isVoiceRec(downloadItem)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
@@ -451,7 +455,7 @@ public class DownloadActivityType {
 					" " + ctx.getString(R.string.index_item_nation_addresses);
 		}
 
-		return osmandRegions.getLocaleName(basename, includeParent);
+		return osmandRegions.getLocaleName(basename, includeParent, baseParentRegion, false);
 	}
 
 	public String getTargetFileName(IndexItem item) {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_fuel_type">Seòrsa chonnaidh</string>
+    <string name="poi_netball">Ball-lìn</string>
+    <string name="poi_museum_transport">Còmhdhail</string>
+    <string name="poi_fuel_lpg">LPG</string>
+    <string name="poi_migration">Imrich</string>
+    <string name="poi_distance">Astar</string>
+    <string name="poi_seamark">Seòlaidh</string>
+    <string name="poi_nature_reserve">Tèarmann nàdair</string>
+    <string name="poi_education">Foghlam</string>
+    <string name="poi_substation_industrial">Gnìomhachail</string>
+    <string name="poi_faculty_education">Foghlam</string>
+    <string name="poi_piste_grooming_scooter">Sgùtair</string>
+    <string name="poi_motorcycle_type_scooter">Sgùtair</string>
+    <string name="poi_pump_manual">Leabhar-làimhe</string>
+</resources>

@@ -15,7 +15,7 @@ import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.*
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject

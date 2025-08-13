@@ -21,7 +21,7 @@ import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.R
-import net.osmand.plus.auto.TripHelper
+import net.osmand.plus.auto.TripUtils
 import net.osmand.plus.mapmarkers.MapMarker
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
@@ -33,27 +33,14 @@ import net.osmand.util.MapUtils
 class MapMarkersScreen(
     carContext: CarContext,
     private val settingsAction: Action) : BaseAndroidAutoScreen(carContext) {
-    private var initialCompassMode: CompassMode? = null
 
     init {
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) {
-                super.onDestroy(owner)
-                app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(null)
-                app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = null
-                app.osmandMap.mapView.backToLocation()
-                initialCompassMode?.let {
-                    app.mapViewTrackingUtilities.switchCompassModeTo(it)
-                }
-            }
-            override fun onStart(owner: LifecycleOwner) {
-                recenterMap()
-                app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = CustomMapObjects()
-            }
-        })
+        lifecycle.addObserver(this)
     }
 
-    override fun onGetTemplate(): Template {
+    override fun shouldRestoreMapState() = true
+
+    override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val markersSize = app.mapMarkersHelper.mapMarkers.size
         val markers =
@@ -61,10 +48,6 @@ class MapMarkersScreen(
         val location = app.mapViewTrackingUtilities.defaultLocation
         app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(markers)
         val mapRect = QuadRect()
-        if (!Algorithms.isEmpty(markers)) {
-            initialCompassMode = app.settings.compassMode
-            app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
-        }
         for (marker in markers) {
             val longitude = marker.longitude
             val latitude = marker.latitude
@@ -87,7 +70,7 @@ class MapMarkersScreen(
                     markerLocation.latitude, markerLocation.longitude,
                     location.latitude, location.longitude)
                 val address = SpannableString(" ")
-                val distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist))
+                val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist))
                 address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
                 rowBuilder.addText(address)
                 rowBuilder.setMetadata(
@@ -118,4 +101,14 @@ class MapMarkersScreen(
         openRoutePreview(settingsAction, result)
     }
 
+	override fun onDestroy(owner: LifecycleOwner) {
+		super.onDestroy(owner)
+		app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(null)
+		app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = null
+	}
+
+	override fun onCreate(owner: LifecycleOwner) {
+		super.onCreate(owner)
+		app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = CustomMapObjects()
+	}
 }

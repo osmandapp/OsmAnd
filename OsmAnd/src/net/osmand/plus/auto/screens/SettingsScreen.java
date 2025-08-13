@@ -29,7 +29,7 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		ListTemplate.Builder templateBuilder = new ListTemplate.Builder();
 
 		// Create 2 sections with three settings each.
@@ -43,13 +43,20 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 								.build())
 				.build()
         );
-        //sectionABuilder.addItem(buildRow(R.string.settings_two_label, R.string.settings_two_pref));
-        //sectionABuilder.addItem(buildRow(R.string.settings_three_label, R.string.settings_three_pref));
+		sectionABuilder.addItem(new Row.Builder()
+				.setTitle(getCarContext().getString(R.string.display_distance_to_first_intermediate))
+				.addText(getCarContext().getString(R.string.display_distance_to_first_intermediate_summary))
+				.setToggle(
+						new Toggle.Builder(osmandSettings.USE_LEFT_DISTANCE_TO_INTERMEDIATE::set)
+								.setChecked(osmandSettings.USE_LEFT_DISTANCE_TO_INTERMEDIATE.get())
+								.build())
+				.build()
+		);
 
         templateBuilder.addSectionedList(
                 SectionedItemList.create(
                         sectionABuilder.build(),
-                        getCarContext().getString(R.string.voice_pref_title)));
+                        getCarContext().getString(R.string.shared_string_navigation)));
 
         /*
         ItemList.Builder sectionBBuilder = new ItemList.Builder();

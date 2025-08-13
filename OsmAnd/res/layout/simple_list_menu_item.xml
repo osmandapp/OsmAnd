@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="@dimen/list_item_height">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/list_item_height">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/list_item_height"
-        android:layout_gravity="center_vertical"
-        android:drawablePadding="@dimen/bottom_sheet_icon_margin"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/content_padding"
-        android:paddingEnd="@dimen/content_padding"
-        android:paddingLeft="@dimen/content_padding"
-        android:paddingRight = "@dimen/content_padding"
-        android:textAppearance="@style/TextAppearance.ListItemTitle"
-        android:textStyle="normal"
-        tools:drawableStart="@drawable/ic_action_search_dark"
-        tools:text="@string/layer_poi"/>
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:drawablePadding="@dimen/bottom_sheet_icon_margin"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:textAppearance="@style/TextAppearance.ListItemTitle"
+		android:textStyle="normal"
+		tools:drawableStart="@drawable/ic_action_search_dark"
+		tools:text="@string/layer_poi" />
 
 </LinearLayout>

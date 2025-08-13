@@ -2,12 +2,14 @@ package net.osmand.plus.plugins.mapillary;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_MAPILLARY_ACTION_ID;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,7 +22,7 @@ public class ShowHideMapillaryAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_MAPILLARY_ACTION_ID,
 			"mapillary.showhide", ShowHideMapillaryAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.mapillary)
 			.iconRes(R.drawable.ic_action_mapillary).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
@@ -34,7 +36,7 @@ public class ShowHideMapillaryAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		if (plugin != null) {
 			plugin.SHOW_MAPILLARY.set(!plugin.SHOW_MAPILLARY.get());
@@ -52,7 +54,7 @@ public class ShowHideMapillaryAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
 		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);

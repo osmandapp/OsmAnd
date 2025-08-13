@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.amazon.device.iap.PurchasingService;
+import com.amazon.device.iap.internal.model.ReceiptBuilder;
 import com.amazon.device.iap.model.Product;
 import com.amazon.device.iap.model.ProductType;
 import com.amazon.device.iap.model.PurchaseResponse;
@@ -15,6 +16,7 @@ import com.amazon.device.iap.model.UserData;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
@@ -37,6 +39,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Currency;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -56,6 +59,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	private List<Receipt> receipts = new ArrayList<>();
 	private Map<String, Receipt> subscriptionReceiptMap = new HashMap<>();
 
+	private boolean purchasedLocalFullVersion = false;
+	private boolean subscribedToLocalLiveUpdates = false;
+	private boolean subscribedToLocalOsmAndPro = false;
+	private boolean subscribedToLocalMaps = false;
+
 	public InAppPurchaseHelperImpl(OsmandApplication ctx) {
 		super(ctx);
 		purchases = new InAppPurchasesImpl(ctx);
@@ -66,10 +74,41 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
+	public boolean isPurchasedLocalFullVersion() {
+		return purchasedLocalFullVersion;
+	}
+
+	@Override
+	public boolean isPurchasedLocalDeepContours() {
+		return false;
+	}
+
+	@Override
+	public boolean isSubscribedToLocalLiveUpdates() {
+		return subscribedToLocalLiveUpdates;
+	}
+
+	@Override
+	public boolean isSubscribedToLocalOsmAndPro() {
+		return subscribedToLocalOsmAndPro;
+	}
+
+	@Override
+	public boolean isSubscribedToLocalMaps() {
+		return subscribedToLocalMaps;
+	}
+
+	@Override
 	public void isInAppPurchaseSupported(@NonNull Activity activity, @Nullable InAppPurchaseInitCallback callback) {
 		if (callback != null) {
 			callback.onSuccess();
 		}
+	}
+
+	@NonNull
+	@Override
+	public String getPlatform() {
+		return PLATFORM_AMAZON;
 	}
 
 	@Override
@@ -119,6 +158,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Override
 	protected boolean isBillingManagerExists() {
+		return false;
+	}
+
+	@Override
+	protected boolean isBillingUnavailable() {
 		return false;
 	}
 
@@ -314,71 +358,67 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 					}
 
+					Map<String, Receipt> completePurchases = new HashMap<>();
 					InAppPurchase fullVersion = getFullVersion();
+					Receipt fullVersionReceipt = fullVersion != null ? getReceipt(fullVersion.getSku()) : null;
 					if (fullVersion != null && hasDetails(fullVersion.getSku())) {
-						Receipt receipt = getReceipt(fullVersion.getSku());
 						Product productInfo = getProductInfo(fullVersion.getSku());
 						if (productInfo != null) {
-							fetchInAppPurchase(fullVersion, productInfo, receipt);
+							fetchInAppPurchase(fullVersion, productInfo, fullVersionReceipt);
 						}
 					}
-					if (fullVersion != null && getReceipt(fullVersion.getSku()) != null) {
-						ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+
+					boolean fullVersionPurchased = fullVersionReceipt != null;
+					purchasedLocalFullVersion = fullVersionPurchased;
+					if (fullVersionPurchased) {
+						completePurchases.put(fullVersion.getSku(), fullVersionReceipt);
+					}
+
+					if (fullVersion != null && !fullVersionPurchased && Version.isFullVersion(ctx)) {
+						ReceiptBuilder receiptBuilder = new ReceiptBuilder()
+								.setSku(fullVersion.getSku())
+								.setReceiptId(OSMAND_PLUS_APP_ORDER_ID)
+								.setPurchaseDate(new Date(Version.getInstallTime(ctx)));
+						Receipt receipt = receiptBuilder.build();
+						completePurchases.put(receipt.getSku(), receipt);
 					}
 
 					// Do we have the live updates?
 					boolean subscribedToLiveUpdates = false;
 					boolean subscribedToOsmAndPro = false;
 					boolean subscribedToMaps = false;
-					Map<String, Receipt> subscriptionPurchases = new HashMap<>();
 					for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 						Receipt receipt = getReceipt(s.getSku());
 						if (receipt != null || s.getState().isActive()) {
 							if (receipt != null) {
-								subscriptionPurchases.put(s.getSku(), receipt);
+								completePurchases.put(s.getSku(), receipt);
 							}
-							if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
+							if (!subscribedToLiveUpdates && purchases.isLiveUpdates(s)) {
 								subscribedToLiveUpdates = true;
 							}
-							if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
+							if (!subscribedToOsmAndPro && purchases.isOsmAndPro(s)) {
 								subscribedToOsmAndPro = true;
 							}
-							if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
+							if (!subscribedToMaps && purchases.isMaps(s)) {
 								subscribedToMaps = true;
 							}
 						}
 					}
-					if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
-						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-					} else if (subscribedToLiveUpdates) {
-						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
-					}
-					if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get()) {
-						ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
-					} else if (subscribedToOsmAndPro) {
-						ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
-					}
-					if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get()) {
-						ctx.getSettings().OSMAND_MAPS_PURCHASED.set(false);
-					} else if (subscribedToMaps) {
-						ctx.getSettings().OSMAND_MAPS_PURCHASED.set(true);
-					}
-					if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps) {
-						onSubscriptionExpired();
-					}
+					subscribedToLocalLiveUpdates = subscribedToLiveUpdates;
+					subscribedToLocalOsmAndPro = subscribedToOsmAndPro;
+					subscribedToLocalMaps = subscribedToMaps;
+
+					applyPurchases();
 
 					lastValidationCheckTime = System.currentTimeMillis();
-					logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " live updates purchased.");
-					logDebug("User " + (subscribedToOsmAndPro ? "HAS" : "DOES NOT HAVE") + " OsmAnd Pro purchased.");
-					logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
 
 					OsmandSettings settings = ctx.getSettings();
 					settings.INAPPS_READ.set(true);
 
 					Map<String, Receipt> tokensToSend = new HashMap<>();
-					if (subscriptionPurchases.size() > 0) {
+					if (completePurchases.size() > 0) {
 						List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
-						for (Entry<String, Receipt> receiptEntry : subscriptionPurchases.entrySet()) {
+						for (Entry<String, Receipt> receiptEntry : completePurchases.entrySet()) {
 							String sku = receiptEntry.getKey();
 							if (!tokensSent.contains(sku)) {
 								tokensToSend.put(sku, receiptEntry.getValue());
@@ -390,12 +430,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						purchaseInfoList.add(getPurchaseInfo(receiptEntry.getKey(), receiptEntry.getValue()));
 					}
 					onProductDetailsResponseDone(purchaseInfoList, userRequested);
-				}
-
-				private void onSubscriptionExpired() {
-					if (!InAppPurchaseUtils.isDepthContoursPurchased(ctx)) {
-						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
-					}
 				}
 			};
 			purchasingListener.addResponseListener(responseListener);
@@ -414,7 +448,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 
 		@Override
-		public void run(InAppPurchaseHelper helper) {
+		public void run(@NonNull InAppPurchaseHelper helper) {
 			logDebug("Setup successful. Querying inventory.");
 			InAppPurchaseHelperImpl.this.receipts = new ArrayList<>();
 			try {
@@ -552,7 +586,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 
 		@Override
-		public void run(InAppPurchaseHelper helper) {
+		public void run(@NonNull InAppPurchaseHelper helper) {
 			try {
 				Activity a = activityRef.get();
 				Product productInfo = getProductInfo(sku);

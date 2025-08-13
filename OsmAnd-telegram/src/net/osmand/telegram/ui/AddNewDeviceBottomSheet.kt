@@ -18,7 +18,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.ui.views.BottomSheetDialog
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.OsmandApiUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import org.json.JSONException
 import org.json.JSONObject
 

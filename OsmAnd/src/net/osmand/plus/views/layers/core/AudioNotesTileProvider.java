@@ -19,7 +19,7 @@ import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
@@ -162,7 +162,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
         return false;
     }
 
-    public void addToData(@NonNull AudioVideoNotesPlugin.Recording recording, float textScale) {
+    public void addToData(@NonNull Recording recording, float textScale) {
         if (providerInstance != null) {
             throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
         }
@@ -176,7 +176,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     private static class MapLayerData {
         TypeNotes type;
         float textScale;
-        MapLayerData(@NonNull AudioVideoNotesPlugin.Recording recording, float textScale) {
+        MapLayerData(@NonNull Recording recording, float textScale) {
             if (recording.isPhoto()) {
                 type = TypeNotes.PHOTO;
             } else if (recording.isAudio()) {

@@ -1,8 +1,8 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_SPEED;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;

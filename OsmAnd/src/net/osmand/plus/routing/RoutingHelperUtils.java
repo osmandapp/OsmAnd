@@ -1,7 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.routing.CurrentStreetName.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -9,14 +7,20 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.data.KLatLon;
+import net.osmand.shared.util.KMapUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -27,6 +31,7 @@ public class RoutingHelperUtils {
 
 	private static final int CACHE_RADIUS = 100000;
 	public static final int MAX_BEARING_DEVIATION = 45;
+	private static final Log log = LogFactory.getLog(RoutingHelperUtils.class);
 
 	@NonNull
 	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,
@@ -59,7 +64,10 @@ public class RoutingHelperUtils {
 			if (formattedStreetName.length() > 0) {
 				formattedStreetName.append(" ");
 			}
-			formattedStreetName.append(towards).append(" ").append(destination);
+			if (!Algorithms.isEmpty(towards)) {
+				formattedStreetName.append(towards).append(" ");
+			}
+			formattedStreetName.append(destination);
 		}
 		return formattedStreetName.toString().replace(";", ", ");
 	}
@@ -91,8 +99,8 @@ public class RoutingHelperUtils {
 		for (Location l : list) {
 			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
 		}
-		List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-		for (TargetPointsHelper.TargetPoint l : targetPoints) {
+		List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+		for (TargetPoint l : targetPoints) {
 			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
 		}
 
@@ -111,11 +119,8 @@ public class RoutingHelperUtils {
 	}
 
 	public static void approximateBearingIfNeeded(@NonNull RoutingHelper routingHelper,
-	                                              @NonNull Location projection,
-	                                              @NonNull Location location,
-	                                              @NonNull Location previousRouteLocation,
-	                                              @NonNull Location currentRouteLocation,
-	                                              @NonNull Location nextRouteLocation) {
+			@NonNull Location projection, @NonNull Location location, @NonNull Location previousRouteLocation, @NonNull Location currentRouteLocation,
+			@NonNull Location nextRouteLocation, boolean previewNextTurn) {
 		double dist = location.distanceTo(projection);
 		double maxDist = routingHelper.getMaxAllowedProjectDist(currentRouteLocation);
 		if (dist >= maxDist) {
@@ -127,10 +132,14 @@ public class RoutingHelperUtils {
 				previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
 				currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
 		float currentSegmentBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
-		float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
-		float segmentsBearingDelta = MapUtils.unifyRotationDiff(currentSegmentBearing, nextSegmentBearing)
-				* projectionOffsetN;
-		float approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
+
+		float approximatedBearing = currentSegmentBearing;
+		if (previewNextTurn) {
+			float offset = projectionOffsetN * projectionOffsetN;
+			float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
+			float segmentsBearingDelta = MapUtils.unifyRotationDiff(currentSegmentBearing, nextSegmentBearing) * offset;
+			approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
+		}
 
 		boolean setApproximated = true;
 		if (location.hasBearing() && dist >= maxDist / 2) {
@@ -174,7 +183,11 @@ public class RoutingHelperUtils {
 		// measuring without bearing could be really error prone (with last fixed location)
 		// this code has an effect on route recalculation which should be detected without mistakes
 		if (currentLocation.hasBearing() && nextRouteLocation != null) {
+			final float ASSUME_AS_INVALID_BEARING = 90.0f; // special case (possibly only in the Android emulator)
 			float bearingMotion = currentLocation.getBearing();
+			if (bearingMotion == ASSUME_AS_INVALID_BEARING) {
+				return false;
+			}
 			float bearingToRoute = prevRouteLocation != null
 					? prevRouteLocation.bearingTo(nextRouteLocation)
 					: currentLocation.bearingTo(nextRouteLocation);
@@ -264,5 +277,60 @@ public class RoutingHelperUtils {
 			}
 		}
 		return parameters;
+	}
+
+	@NonNull
+	public static List<Location> predictLocations(@NonNull Location previousLocation, @NonNull Location currentLocation,
+	                                        double timeInSeconds, @NonNull RouteCalculationResult route, int interpolationPercent) {
+		float speedPrev = previousLocation.getSpeed();
+		float speedNew = currentLocation.getSpeed();
+		double avgSpeed = (speedPrev + speedNew) / 2.0;
+		double remainingDistance = avgSpeed * timeInSeconds * (interpolationPercent / 100.0);
+
+		List<Location> predictedLocations = new ArrayList<>();
+		int currentRoute = route.getCurrentRouteForLocation(currentLocation) + 1;
+		List<Location> routeLocations = route.getImmutableAllLocations();
+		for (int i = currentRoute; i < routeLocations.size() - 1; i++) {
+			Location pointA;
+			Location pointB;
+			if (i == currentRoute) {
+				pointA = currentLocation;
+				pointB = routeLocations.get(i);
+			} else {
+				pointA = routeLocations.get(i);
+				pointB = routeLocations.get(i + 1);
+			}
+			double segmentDistance = pointA.distanceTo(pointB);
+			if (remainingDistance <= segmentDistance) {
+				double fraction = remainingDistance / segmentDistance;
+				KLatLon interpolatedLoc = KMapUtils.INSTANCE.interpolateLatLon(
+						pointA.getLatitude(), pointA.getLongitude(), pointB.getLatitude(), pointB.getLongitude(), fraction);
+				Location predictedPoint = buildPredictedLocation(currentLocation, pointA, pointB);
+				predictedPoint.setLatitude(interpolatedLoc.getLatitude());
+				predictedPoint.setLongitude(interpolatedLoc.getLongitude());
+				predictedLocations.add(predictedPoint);
+				break;
+			} else {
+				predictedLocations.add(buildPredictedLocation(currentLocation, pointA, pointB));
+				remainingDistance -= segmentDistance;
+			}
+		}
+
+		if (predictedLocations.isEmpty() && !routeLocations.isEmpty()) {
+			Location lastRouteLocation = routeLocations.get(routeLocations.size() - 1);
+			predictedLocations.add(buildPredictedLocation(currentLocation, currentLocation, lastRouteLocation));
+		}
+
+		return predictedLocations;
+	}
+
+	@NonNull
+	private static Location buildPredictedLocation(Location currentLocation, Location pointA, Location pointB) {
+		Location predictedPoint = new Location(currentLocation);
+		predictedPoint.setProvider("predicted");
+		predictedPoint.setLatitude(pointB.getLatitude());
+		predictedPoint.setLongitude(pointB.getLongitude());
+		predictedPoint.setBearing(pointA.bearingTo(pointB));
+		return predictedPoint;
 	}
 }

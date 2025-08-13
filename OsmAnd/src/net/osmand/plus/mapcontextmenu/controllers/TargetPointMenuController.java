@@ -8,10 +8,11 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
 
@@ -28,7 +29,7 @@ public class TargetPointMenuController extends MenuController {
 		int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		boolean nav = routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode();
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();

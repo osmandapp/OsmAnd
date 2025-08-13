@@ -11,11 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Route;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.ItemViewHolder;
@@ -39,9 +40,9 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 
 	private OnItemClickListener listener;
 
-	public TrackSelectSegmentAdapter(@NonNull Context ctx, @NonNull GPXFile gpxFile) {
+	public TrackSelectSegmentAdapter(@NonNull Context ctx, @NonNull GpxFile gpxFile) {
 		app = (OsmandApplication) ctx.getApplicationContext();
-		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
+		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
 		iconsCache = app.getUIUtilities();
 		this.gpxItems = getGpxItems(gpxFile);
 	}
@@ -51,20 +52,20 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 	}
 
 	@NonNull
-	private List<GpxItem> getGpxItems(@NonNull GPXFile gpxFile) {
+	private List<GpxItem> getGpxItems(@NonNull GpxFile gpxFile) {
 		List<GpxItem> gpxItems = new ArrayList<>();
 
 		int segmentIndex = 0;
 		for (Track track : gpxFile.getTracks(false)) {
-			for (TrkSegment segment : track.segments) {
+			for (TrkSegment segment : track.getSegments()) {
 				String trackSegmentTitle = GpxDisplayHelper.buildTrackSegmentName(gpxFile, track, segment, app);
 				gpxItems.add(new SegmentItem(segment, trackSegmentTitle, segmentIndex));
 				segmentIndex++;
 			}
 		}
 
-		for (int i = 0; i < gpxFile.routes.size(); i++) {
-			Route route = gpxFile.routes.get(i);
+		for (int i = 0; i < gpxFile.getRoutes().size(); i++) {
+			Route route = gpxFile.getRoutes().get(i);
 			String title = GpxDisplayHelper.getRouteTitle(route, i, app);
 			gpxItems.add(new RouteItem(route, title, i));
 		}
@@ -101,12 +102,12 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 		double distance = 0;
 		if (holder instanceof SegmentViewHolder) {
 			SegmentItem item = (SegmentItem) gpxItem;
-			time = getSegmentTime(item.segment.points);
-			distance = getDistance(item.segment.points);
+			time = getSegmentTime(item.segment.getPoints());
+			distance = getDistance(item.segment.getPoints());
 		} else if (holder instanceof RouteViewHolder) {
 			RouteItem item = (RouteItem) gpxItem;
-			time = getSegmentTime(item.route.points);
-			distance = getDistance(item.route.points);
+			time = getSegmentTime(item.route.getPoints());
+			distance = getDistance(item.route.getPoints());
 		}
 		String formattedTime = time > 0 ? OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)) : "";
 		holder.time.setText(formattedTime);
@@ -141,7 +142,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 		long startTime = Long.MAX_VALUE;
 		long endTime = Long.MIN_VALUE;
 		for (WptPt point : points) {
-			long time = point.time;
+			long time = point.getTime();
 			if (time != 0) {
 				startTime = Math.min(startTime, time);
 				endTime = Math.max(endTime, time);

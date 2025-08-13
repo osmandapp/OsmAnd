@@ -105,8 +105,7 @@
 	<PreferenceCategory
 		android:key="logging_data"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/save_track_external_sensors_data"
-		app:isPreferenceVisible="false"/>
+		android:title="@string/save_track_external_sensors_data"/>
 
 	<Preference
 		android:key="open_sensor_settings"
@@ -114,14 +113,30 @@
 		android:title="@string/external_sensor_widgets"
 		tools:icon="@drawable/ic_action_sensor"
 		app:fragment="net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment"
-		app:isPreferenceVisible="false"
-		/>
+		app:isPreferenceVisible="false" />
+
+	<Preference
+		android:key="current_track_route_activity"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/shared_string_activity"
+		tools:icon="@drawable/ic_action_activity" />
+
+	<Preference
+		android:key="record_obd_data"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/obd_widget_group"
+		tools:icon="@drawable/ic_action_car_info" />
+
+	<Preference
+		android:key="record_obd_data_promo"
+		android:layout="@layout/preference_promo_item"
+		android:title="@string/record_obd_data"
+		tools:icon="@drawable/ic_action_car_info" />
 
 	<Preference
 		android:key="logging_data_divider"
 		android:layout="@layout/simple_divider_item"
-		android:selectable="false"
-		app:isPreferenceVisible="false"/>
+		android:selectable="false"/>
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="track_storage_directory"

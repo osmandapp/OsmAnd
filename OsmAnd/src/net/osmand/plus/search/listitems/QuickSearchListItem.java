@@ -1,5 +1,7 @@
 package net.osmand.plus.search.listitems;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
@@ -11,35 +13,30 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.Amenity;
-import net.osmand.data.City;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
+import net.osmand.data.*;
 import net.osmand.data.City.CityType;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.Street;
-import net.osmand.data.WptLocationPoint;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
+import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -119,13 +116,35 @@ public class QuickSearchListItem {
 	}
 
 	public String getTypeName() {
+		return getExtendedTypeName(app, searchResult);
+	}
+
+	public static String getExtendedTypeName(@NonNull OsmandApplication app,
+			@NonNull SearchResult searchResult) {
 		String typeName = getTypeName(app, searchResult);
-		String[] alternateName = new String[]{searchResult.alternateName};
-		if (searchResult.object instanceof Amenity) {
-			((Amenity) searchResult.object).getAdditionalInfoAndCollectCategories(
-					app.getPoiTypes(), null, null, alternateName);
+		String alternateName = searchResult.alternateName;
+		if (searchResult.object instanceof Amenity amenity) {
+			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+			if (amenity.isRouteTrack()) {
+				String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
+				if (distance != null) {
+					if (alternateName == null) {
+						alternateName = distance;
+					} else {
+						alternateName = app.
+								getString(R.string.ltr_or_rtl_combine_via_bold_point, distance, alternateName);
+					}
+				}
+			}
 		}
-		return (alternateName[0] != null ? alternateName[0] + " • " : "") + typeName;
+		if (searchResult.object instanceof PoiUIFilter filter && filter.isTopWikiFilter()) {
+			return app.getString(R.string.shared_string_wikipedia);
+		}
+		if (alternateName == null) {
+			return typeName;
+		} else {
+			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, alternateName);
+		}
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
@@ -171,8 +190,10 @@ public class QuickSearchListItem {
 				if (searchResult.relatedObject != null) {
 					Street relatedStreet = (Street) searchResult.relatedObject;
 					if (relatedStreet.getCity() != null) {
-						return searchResult.localeRelatedObjectName + ", "
-								+ relatedStreet.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String relObj = searchResult.localeRelatedObjectName;
+						String cityName = relatedStreet.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String res = relObj.contains(cityName) ? relObj : relObj + ", " + cityName;
+						return res.replace("<", "").replace(">", "");
 					} else {
 						return searchResult.localeRelatedObjectName;
 					}
@@ -186,41 +207,23 @@ public class QuickSearchListItem {
 				return "";
 			case POI_TYPE:
 				String res = "";
-				if (searchResult.object instanceof AbstractPoiType) {
-					AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
-					if (abstractPoiType instanceof PoiCategory) {
-						res = "";
-					} else if (abstractPoiType instanceof PoiFilter) {
-						PoiFilter poiFilter = (PoiFilter) abstractPoiType;
-						res = poiFilter.getPoiCategory() != null ? poiFilter.getPoiCategory().getTranslation() : "";
-
-					} else if (abstractPoiType instanceof PoiType) {
-						PoiType poiType = (PoiType) abstractPoiType;
-						res = poiType.getParentType() != null ? poiType.getParentType().getTranslation() : null;
-						if (res == null) {
-							res = poiType.getCategory() != null ? poiType.getCategory().getTranslation() : null;
-						}
-						if (res == null) {
-							res = "";
-						}
-					} else {
-						res = "";
-					}
-				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
-					res = ((CustomSearchPoiFilter) searchResult.object).getName();
+				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
+					res = abstractPoiType.getParentTypeName();
+				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
+					res = customSearchPoiFilter.getName();
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {
+					res = searchPoiAdditionalFilter.getName();
+				}
+				if (Algorithms.isEmpty(res) && searchResult.object instanceof PoiUIFilter poiUIFilter) {
+					res = poiUIFilter.getTypesName();
 				}
 				return res;
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				PoiCategory pc = amenity.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-				String typeStr = amenity.getSubType();
-				if (pt != null) {
-					typeStr = pt.getTranslation();
-				} else if (typeStr != null) {
-					typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
+				if (amenity.isRouteTrack()) {
+					return amenity.getRouteActivityType();
 				}
-				return typeStr;
+				return amenity.getSubTypeStr();
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				if (latLon != null && searchResult.localeRelatedObjectName == null) {
@@ -248,15 +251,15 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				StringBuilder sb = new StringBuilder();
-				GPXFile gpx = (GPXFile) searchResult.relatedObject;
+				GpxFile gpx = (GpxFile) searchResult.relatedObject;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					sb.append(searchResult.localeRelatedObjectName);
 				}
-				if (gpx != null && !Algorithms.isEmpty(gpx.path)) {
+				if (gpx != null && !Algorithms.isEmpty(gpx.getPath())) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 					}
-					sb.append(new File(gpx.path).getName());
+					sb.append(new File(gpx.getPath()).getName());
 				}
 				return sb.toString();
 			case MAP_MARKER:
@@ -303,8 +306,8 @@ public class QuickSearchListItem {
 		return getIcon(app, searchResult);
 	}
 
-	public static String getAmenityIconName(@NonNull Amenity amenity) {
-		return RenderingIcons.getIconNameForAmenity(amenity);
+	public static String getAmenityIconName(@NonNull Context ctx, @NonNull Amenity amenity) {
+		return RenderingIcons.getIconNameForAmenity(ctx, amenity);
 	}
 
 	@Nullable
@@ -339,12 +342,13 @@ public class QuickSearchListItem {
 					if (!Algorithms.isEmpty(iconName)) {
 						iconId = RenderingIcons.getBigIconResourceId(iconName);
 					}
-				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
-					CustomSearchPoiFilter searchPoiFilter = (CustomSearchPoiFilter) searchResult.object;
+				} else if (searchResult.object instanceof CustomSearchPoiFilter searchPoiFilter) {
 					PoiUIFilter filter = app.getPoiFilters().getFilterById(searchPoiFilter.getFilterId());
 					if (filter != null) {
 						iconId = getCustomFilterIconRes(filter);
 					}
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter filter) {
+					iconId = RenderingIcons.getBigIconResourceId(filter.getIconResource());
 				}
 				if (iconId > 0) {
 					return getIcon(app, iconId);
@@ -353,7 +357,14 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				String id = getAmenityIconName(amenity);
+				if (amenity.isRouteTrack()) {
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, nightMode);
+					if (shieldIcon != null) {
+						return shieldIcon;
+					}
+				}
+				String id = getAmenityIconName(app, amenity);
 				Drawable icon = null;
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
@@ -406,7 +417,8 @@ public class QuickSearchListItem {
 		return null;
 	}
 
-	public static int getHistoryIconId(@NonNull OsmandApplication app, @NonNull HistoryEntry entry) {
+	public static int getHistoryIconId(@NonNull OsmandApplication app,
+			@NonNull HistoryEntry entry) {
 		int iconId = -1;
 		PointDescription name = entry.getName();
 		if (name != null && !Algorithms.isEmpty(name.getIconName())) {
@@ -424,7 +436,8 @@ public class QuickSearchListItem {
 	}
 
 	@NonNull
-	public static Pair<PointDescription, Object> getPointDescriptionObject(@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
+	public static Pair<PointDescription, Object> getPointDescriptionObject(
+			@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
 		SearchSettings settings = searchResult.requiredSearchPhrase.getSettings();
 		String lang;
 		boolean transliterate;
@@ -439,21 +452,27 @@ public class QuickSearchListItem {
 		Object object = searchResult.object;
 		switch (searchResult.objectType) {
 			case POI:
-				Amenity a = (Amenity) object;
-				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
+				Amenity detailedAmenity = (Amenity) object;
+				String poiSimpleFormat;
+				if (detailedAmenity.getType().isWiki()) {
+					poiSimpleFormat = detailedAmenity.getName(lang, transliterate);
+				} else {
+					poiSimpleFormat = Amenity.getPoiStringWithoutType(detailedAmenity, lang, transliterate);
+				}
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-				pointDescription.setIconName(getAmenityIconName(a));
+				pointDescription.setIconName(getAmenityIconName(app, detailedAmenity));
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
 				pointDescription = entry.getName();
-				if (pointDescription.isPoi()) {
-					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
+				if (pointDescription.isPoi() || pointDescription.isAddressTypeCity()) {
+					Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(),
+							entry.getLat(), entry.getLon());
 					if (amenity != null) {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
-								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
-						pointDescription.setIconName(getAmenityIconName(amenity));
+								Amenity.getPoiStringWithoutType(amenity, lang, transliterate));
+						pointDescription.setIconName(getAmenityIconName(app, amenity));
 					}
 				} else if (pointDescription.isFavorite()) {
 					LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
@@ -516,25 +535,36 @@ public class QuickSearchListItem {
 				pointDescription.setIconName("ic_action_intersection");
 				break;
 			case WPT:
-				GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
+				WptPt wpt = (WptPt) object;
 				pointDescription = new WptLocationPoint(wpt).getPointDescription(app);
 				break;
 		}
 		return new Pair<>(pointDescription, object);
 	}
 
-	private static Drawable getIcon(OsmandApplication app, int iconId) {
-		return app.getUIUtilities().getIcon(iconId,
-				app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+	private static Drawable getIcon(@NonNull OsmandApplication app, @DrawableRes int iconId) {
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return app.getUIUtilities().getIcon(iconId, !nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark);
 	}
 
 	@DrawableRes
 	public static int getCustomFilterIconRes(@Nullable PoiUIFilter filter) {
 		int iconId = 0;
 		String iconName = PoiFilterUtils.getCustomFilterIconName(filter);
-		if (iconName != null && RenderingIcons.containsBigIcon(iconName)) {
-			iconId = RenderingIcons.getBigIconResourceId(iconName);
+
+		if (iconName != null) {
+			if (OSM_WIKI_CATEGORY.equals(iconName)) {
+				iconId = R.drawable.ic_action_popular_places;
+			} else if (RenderingIcons.containsBigIcon(iconName)) {
+				iconId = RenderingIcons.getBigIconResourceId(iconName);
+			}
 		}
 		return iconId > 0 ? iconId : R.drawable.mx_special_custom_category;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

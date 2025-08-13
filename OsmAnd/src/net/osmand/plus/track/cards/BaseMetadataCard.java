@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.gpx.GPXUtilities.Metadata;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -25,8 +25,6 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
 
 public abstract class BaseMetadataCard extends MapBaseCard {
 
@@ -71,7 +69,7 @@ public abstract class BaseMetadataCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(iconIv, icon != null);
 
 		view.setOnLongClickListener(v -> {
-			ShareMenu.copyToClipboardWithToast(activity, description, Toast.LENGTH_SHORT);
+			ShareMenu.copyToClipboardWithToast(activity, description, false);
 			return true;
 		});
 

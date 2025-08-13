@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -22,8 +21,6 @@ import androidx.viewpager.widget.ViewPager;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.custom.CustomRegion;
-import net.osmand.plus.plugins.custom.CustomIndexItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
@@ -31,6 +28,9 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo.ActionButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.custom.CustomIndexItem;
+import net.osmand.plus.plugins.custom.CustomRegion;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -62,7 +62,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = !getMyApplication().getSettings().isLightContent();
+		nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -167,18 +167,19 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 		}
 	}
 
-	static void updateActionButtons(DownloadActivity ctx, DownloadDescriptionInfo descriptionInfo,
-	                                @Nullable IndexItem indexItem, ViewGroup buttonsContainer,
-	                                @LayoutRes int layoutId, boolean nightMode) {
+	static void updateActionButtons(@NonNull DownloadActivity activity,
+			@NonNull DownloadDescriptionInfo descriptionInfo,
+			@Nullable IndexItem indexItem, ViewGroup buttonsContainer,
+			@LayoutRes int layoutId, boolean nightMode) {
 		buttonsContainer.removeAllViews();
 
-		List<ActionButton> actionButtons = descriptionInfo.getActionButtons(ctx);
+		List<ActionButton> actionButtons = descriptionInfo.getActionButtons(activity);
 		if (Algorithms.isEmpty(actionButtons) && indexItem != null && !indexItem.isDownloaded()) {
-			actionButtons.add(new ActionButton(ActionButton.DOWNLOAD_ACTION, ctx.getString(R.string.shared_string_download), null));
+			actionButtons.add(new ActionButton(ActionButton.DOWNLOAD_ACTION, activity.getString(R.string.shared_string_download), null));
 		}
 
 		for (ActionButton actionButton : actionButtons) {
-			View buttonView = UiUtilities.getInflater(ctx, nightMode).inflate(layoutId, buttonsContainer, false);
+			View buttonView = UiUtilities.getInflater(activity, nightMode).inflate(layoutId, buttonsContainer, false);
 			DialogButton button = buttonView.findViewById(R.id.dismiss_button);
 			if (button != null) {
 				button.setButtonType(DialogButtonType.PRIMARY);
@@ -189,15 +190,15 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 			}
 			buttonView.setOnClickListener(v -> {
 				if (actionButton.getUrl() != null) {
-					AndroidUtils.openUrl(ctx, Uri.parse(actionButton.getUrl()), nightMode);
+					AndroidUtils.openUrl(activity, Uri.parse(actionButton.getUrl()), nightMode);
 				} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
-					boolean isDownloading = ctx.getDownloadThread().isDownloading(indexItem);
+					boolean isDownloading = activity.getDownloadThread().isDownloading(indexItem);
 					if (!isDownloading) {
-						ctx.startDownload(indexItem);
+						activity.startDownload(indexItem);
 					}
 				} else {
-					String text = ctx.getString(R.string.download_unsupported_action, actionButton.getActionType());
-					Toast.makeText(ctx, text, Toast.LENGTH_SHORT).show();
+					String text = activity.getString(R.string.download_unsupported_action, actionButton.getActionType());
+					AndroidUtils.getApp(activity).showShortToastMessage(text);
 				}
 			});
 			buttonsContainer.addView(buttonView);

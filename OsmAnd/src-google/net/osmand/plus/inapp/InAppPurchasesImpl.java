@@ -13,31 +13,6 @@ import net.osmand.plus.Version;
 
 public class InAppPurchasesImpl extends InAppPurchases {
 
-	private static final int FULL_VERSION_ID = 1;
-	private static final int DEPTH_CONTOURS_ID = 2;
-	private static final int CONTOUR_LINES_ID = 3;
-
-	private static final int LIVE_UPDATES_ID = 5;
-	private static final int OSMAND_PRO_ID = 6;
-	private static final int MAPS_ID = 7;
-
-	private static final int[] LIVE_UPDATES_SCOPE = new int[]{
-			FULL_VERSION_ID,
-			DEPTH_CONTOURS_ID,
-			CONTOUR_LINES_ID,
-	};
-
-	private static final int[] OSMAND_PRO_SCOPE = new int[]{
-			FULL_VERSION_ID,
-			DEPTH_CONTOURS_ID,
-			CONTOUR_LINES_ID,
-			LIVE_UPDATES_ID,
-	};
-
-	private static final int[] MAPS_SCOPE = new int[]{
-			FULL_VERSION_ID,
-	};
-
 	private static final InAppPurchase FULL_VERSION = new InAppPurchaseFullVersion();
 	private static final InAppPurchase DEPTH_CONTOURS_FULL = new InAppPurchaseDepthContoursFull();
 	private static final InAppPurchase DEPTH_CONTOURS_FREE = new InAppPurchaseDepthContoursFree();
@@ -112,18 +87,18 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	}
 
 	@Override
-	public boolean isLiveUpdatesSubscription(InAppPurchase p) {
+	public boolean isLiveUpdates(InAppPurchase p) {
 		return p.getFeatureId() == LIVE_UPDATES_ID;
 	}
 
 	@Override
-	public boolean isOsmAndProSubscription(InAppPurchase p) {
+	public boolean isOsmAndPro(InAppPurchase p) {
 		return p.getFeatureId() == OSMAND_PRO_ID;
 	}
 
 	@Override
-	public boolean isMapsSubscription(InAppPurchase p) {
-		return p.getFeatureId() == MAPS_ID;
+	public boolean isMaps(InAppPurchase p) {
+		return p.getFeatureId() == MAPS_ID || p.getFeatureId() == FULL_VERSION_ID;
 	}
 
 	private static class InAppPurchaseFullVersion extends InAppPurchase {

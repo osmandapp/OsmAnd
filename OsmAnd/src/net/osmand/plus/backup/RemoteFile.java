@@ -156,6 +156,7 @@ public class RemoteFile {
 	@NonNull
 	@Override
 	public String toString() {
-		return type + "/" + name + " (" + filesize + ") clientTime=" + clienttimems + " updateTime=" + updatetimems;
+		return type + "/" + name + " (" + filesize + ") clientTime=" + clienttimems
+				+ " updateTime=" + updatetimems + " settingsItem=" + item;
 	}
 }

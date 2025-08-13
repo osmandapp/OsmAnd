@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.download.DownloadActivityType.NORMAL_FILE;
 import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
@@ -28,7 +29,9 @@ import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.dialogs.LocalCategoriesFragment;
 import net.osmand.plus.download.ui.AskMapDownloadFragment;
 import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
@@ -43,7 +46,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
+import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -67,6 +70,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
 	public static final String FILTER_GROUP = "filter_group";
+	public static final String LOCAL_ITEM_TYPE = "local_item_type";
 
 	public static final String TAB_TO_OPEN = "Tab_to_open";
 	public static final String LOCAL_TAB = "local";
@@ -75,10 +79,14 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String REGION_TO_SEARCH = "search_region";
 
 
+	private static final boolean SUGGEST_TO_DOWNLOAD_BASEMAP = false;
 	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP;
 
 	private OsmandApplication app;
 	private DownloadIndexesThread downloadThread;
+
+	private final List<TabItem> tabs = new ArrayList<>();
+	private final Set<WeakReference<Fragment>> fragments = new HashSet<>();
 
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ViewPager viewPager;
@@ -86,8 +94,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private String filter;
 	private String filterCat;
 	private String filterGroup;
-	private final List<TabItem> mTabs = new ArrayList<>();
-	private Set<WeakReference<Fragment>> fragSet = new HashSet<>();
+	private LocalItemType localItemType;
 	private WorldRegion downloadItem;
 	private String downloadTargetFileName;
 
@@ -119,11 +126,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		viewPager = findViewById(R.id.pager);
 		PagerSlidingTabStrip pagerSlidingTabs = findViewById(R.id.sliding_tabs);
 
-		mTabs.add(new TabItem(R.string.downloads, getString(R.string.downloads), DownloadResourceGroupFragment.class));
-		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
-		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
+		tabs.add(new TabItem(R.string.downloads, getString(R.string.downloads), DownloadResourceGroupFragment.class));
+		tabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
+		tabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
-		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
+		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), tabs));
 		pagerSlidingTabs.setViewPager(viewPager);
 		pagerSlidingTabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -150,8 +157,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		viewPager.setCurrentItem(loadCurrentTab());
 
 		Intent intent = getIntent();
-		if (intent != null && intent.getExtras() != null) {
-			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
+		Bundle bundle = intent != null ? intent.getExtras() : null;
+		if (bundle != null) {
+			String region = bundle.getString(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
 				if (getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)) {
 					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE, WIKIPEDIA_FILE));
@@ -159,9 +167,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE));
 				}
 			}
-			filter = intent.getExtras().getString(FILTER_KEY);
-			filterCat = intent.getExtras().getString(FILTER_CAT);
-			filterGroup = intent.getExtras().getString(FILTER_GROUP);
+			filter = bundle.getString(FILTER_KEY);
+			filterCat = bundle.getString(FILTER_CAT);
+			filterGroup = bundle.getString(FILTER_GROUP);
+			localItemType = LocalItemType.getByName(bundle.getString(LOCAL_ITEM_TYPE));
 		}
 	}
 
@@ -222,7 +231,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	public void onAttachFragment(@NonNull Fragment fragment) {
-		fragSet.add(new WeakReference<>(fragment));
+		fragments.add(new WeakReference<>(fragment));
 	}
 
 	@Override
@@ -288,7 +297,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			downloadItem = null;
 			downloadTargetFileName = null;
 		}
-		for (WeakReference<Fragment> ref : fragSet) {
+		for (WeakReference<Fragment> ref : fragments) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
 				((DownloadEvents) f).downloadHasFinished();
@@ -303,7 +312,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant.lockEvents();
 		visibleBanner.updateBannerInProgress();
 		showDownloadWorldMapIfNeeded();
-		for (WeakReference<Fragment> ref : fragSet) {
+		for (WeakReference<Fragment> ref : fragments) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
 				((DownloadEvents) f).downloadInProgress();
@@ -312,12 +321,18 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant.unlockEvents();
 	}
 
+	@Override
+	public void downloadingError(@NonNull String error) {
+		if (Algorithms.stringsEqual(error, DownloadValidationManager.getFreeVersionMessage(app))) {
+			ChoosePlanFragment.showInstance(this, UNLIMITED_MAP_DOWNLOADS);
+		}
+	}
 
 	@Override
 	@UiThread
 	public void onUpdatedIndexesList() {
 		visibleBanner.updateBannerInProgress();
-		for (WeakReference<Fragment> ref : fragSet) {
+		for (WeakReference<Fragment> ref : fragments) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
 				((DownloadEvents) f).onUpdatedIndexesList();
@@ -387,13 +402,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (downloadThread.getCurrentDownloadingItem() == null) {
 			return;
 		}
-		IndexItem worldMap = downloadThread.getIndexes().getWorldBaseMapItem();
-		// (!worldMap.isDownloaded() || worldMap.isOutdated()) - now suggest to download if downloaded 
-		if (!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && worldMap.isDownloaded()
-				&& worldMap.isOutdated() && !downloadThread.isDownloading(worldMap)) {
+		IndexItem item = downloadThread.getIndexes().getWorldBaseMapItem();
+		if (SUGGEST_TO_DOWNLOAD_BASEMAP && !SUGGESTED_TO_DOWNLOAD_BASEMAP && item != null
+				&& item.isDownloaded() && item.isOutdated() && !downloadThread.isDownloading(item)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
+
 			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
-			fragment.setIndexItem(worldMap);
+			fragment.setIndexItem(item);
 			fragment.show(getSupportFragmentManager(), AskMapDownloadFragment.TAG);
 		}
 	}
@@ -413,6 +428,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public String getFilterGroupAndClear() {
 		String res = filterGroup;
 		filterGroup = null;
+		return res;
+	}
+
+	@Nullable
+	public LocalItemType getLocalItemTypeAndClear() {
+		LocalItemType res = localItemType;
+		localItemType = null;
 		return res;
 	}
 
@@ -445,7 +467,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		List<Fragment> fragmentsWithoutTabs = new ArrayList<>();
 		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
 			boolean isTabFragment = false;
-			for (TabActivity.TabItem tabItem : mTabs) {
+			for (TabActivity.TabItem tabItem : tabs) {
 				if (fragment.getClass() == tabItem.fragment) {
 					isTabFragment = true;
 					break;

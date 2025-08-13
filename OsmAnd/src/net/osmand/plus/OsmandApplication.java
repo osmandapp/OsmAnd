@@ -2,9 +2,9 @@ package net.osmand.plus;
 
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
-import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS;
+import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
+import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
+import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +15,15 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.car.app.CarToast;
+import androidx.annotation.StringRes;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -49,23 +51,18 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
-import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
-import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.GmsLocationServiceHelper;
-import net.osmand.plus.helpers.LauncherShortcutsHelper;
-import net.osmand.plus.helpers.LocaleHelper;
-import net.osmand.plus.helpers.LocationServiceHelper;
-import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.Model3dHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
@@ -74,9 +71,9 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
@@ -95,22 +92,23 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
@@ -121,16 +119,15 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.SmartFolderHelper;
+import net.osmand.shared.io.KFile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -150,11 +147,13 @@ public class OsmandApplication extends MultiDexApplication {
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
+	OnRequestPermissionsResultCallback carAppPermissionListener;
 
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
+	private final ToastHelper toastHelper = new ToastHelper(this);
 
 	// start variables
 	ResourceManager resourceManager;
@@ -169,6 +168,7 @@ public class OsmandApplication extends MultiDexApplication {
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
 	GpxDisplayHelper gpxDisplayHelper;
+	ColorPaletteHelper colorPaletteHelper;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
 	FeedbackHelper feedbackHelper;
@@ -185,6 +185,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
+	SearchHistoryHelper searchHistoryHelper;
 	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
@@ -194,7 +195,6 @@ public class OsmandApplication extends MultiDexApplication {
 	InputDevicesHelper inputDeviceHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
-	GpxDbHelper gpxDbHelper;
 	MapButtonsHelper mapButtonsHelper;
 	OsmOAuthHelper osmOAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
@@ -209,15 +209,17 @@ public class OsmandApplication extends MultiDexApplication {
 	AverageGlideComputer averageGlideComputer;
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
-	SmartFolderHelper smartFolderHelper;
-
+	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
+	TrackSortModesHelper trackSortModesHelper;
+	ExplorePlacesOnlineProvider explorePlacesProvider;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 	private boolean appInForeground;
 	private boolean androidAutoInForeground;
+	private float density = 0f;
 	// Typeface
 
 	@Override
@@ -259,6 +261,9 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectory = settings.getInternalAppPath();
 		}
 		FileUtils.removeUnnecessaryFiles(this);
+
+		// Initialize shared library
+		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, new OsmAndContextImpl(this));
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -308,9 +313,17 @@ public class OsmandApplication extends MultiDexApplication {
 		return appInForeground || androidAutoInForeground;
 	}
 
+	public boolean isAppInForegroundOnRootDevice() {
+		return appInForeground;
+	}
+
+	public boolean isAppInForegroundOnAndroidAuto() {
+		return androidAutoInForeground;
+	}
+
 	private void createInUiThread() {
 		new Toast(AndroidUtils.createDisplayContext(this)); // activate in UI thread to avoid further exceptions
-		new AsyncTask<View, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<View, Void, Void>() {
 			@Override
 			protected Void doInBackground(View... params) {
 				return null;
@@ -318,7 +331,12 @@ public class OsmandApplication extends MultiDexApplication {
 
 			protected void onPostExecute(Void result) {
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
+	}
+
+	@NonNull
+	public Handler getUiHandler() {
+		return uiHandler;
 	}
 
 	@NonNull
@@ -429,7 +447,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public GpxDbHelper getGpxDbHelper() {
-		return gpxDbHelper;
+		return GpxDbHelper.INSTANCE;
 	}
 
 	public FavouritesHelper getFavoritesHelper() {
@@ -493,6 +511,19 @@ public class OsmandApplication extends MultiDexApplication {
 		resources = getBaseContext().getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
 
+		DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+		if (density != displayMetrics.density) {
+			density = displayMetrics.density;
+			getUIUtilities().clearCache();
+			PointImageUtils.clearCache();
+
+			OsmandMap osmandMap = getOsmandMap();
+			if (osmandMap != null) {
+				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels,
+						displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
+			}
+		}
+
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
@@ -534,6 +565,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return onlineRoutingHelper;
 	}
 
+	public ColorPaletteHelper getColorPaletteHelper() {
+		return colorPaletteHelper;
+	}
+
 	public BackupHelper getBackupHelper() {
 		return backupHelper;
 	}
@@ -556,6 +591,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public QuickSearchHelper getSearchUICore() {
 		return searchUICore;
+	}
+
+	public SearchHistoryHelper getSearchHistoryHelper() {
+		return searchHistoryHelper;
 	}
 
 	public TravelHelper getTravelHelper() {
@@ -588,6 +627,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return averageSpeedComputer;
 	}
 
+	public ExplorePlacesProvider getExplorePlacesProvider() {
+		return explorePlacesProvider;
+	}
+
 	@NonNull
 	public AverageGlideComputer getAverageGlideComputer() {
 		return averageGlideComputer;
@@ -605,7 +648,17 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@NonNull
 	public SmartFolderHelper getSmartFolderHelper() {
-		return smartFolderHelper;
+		return SmartFolderHelper.INSTANCE;
+	}
+
+	@NonNull
+	public RouteLayersHelper getRouteLayersHelper() {
+		return routeLayersHelper;
+	}
+
+	@NonNull
+	public RouteActivityHelper getRouteActivityHelper() {
+		return RouteActivityHelper.INSTANCE;
 	}
 
 	@NonNull
@@ -618,13 +671,18 @@ public class OsmandApplication extends MultiDexApplication {
 		return model3dHelper;
 	}
 
+	@NonNull
+	public TrackSortModesHelper getTrackSortModesHelper() {
+		return trackSortModesHelper;
+	}
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
 
 	public void initVoiceCommandPlayer(@NonNull Context context, @NonNull ApplicationMode appMode,
-	                                   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
-	                                   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
+			@Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
+			boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(appMode);
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			settings.VOICE_MUTE.setModeValue(appMode, true);
@@ -639,6 +697,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
+	@Nullable
 	public NavigationService getNavigationService() {
 		return navigationService;
 	}
@@ -652,8 +711,17 @@ public class OsmandApplication extends MultiDexApplication {
 		return navigationCarAppService;
 	}
 
-	public void setNavigationCarAppService(@Nullable NavigationCarAppService navigationCarAppService) {
-		this.navigationCarAppService = navigationCarAppService;
+	public void setNavigationCarAppService(@Nullable NavigationCarAppService carAppService) {
+		this.navigationCarAppService = carAppService;
+	}
+
+	@Nullable
+	public OnRequestPermissionsResultCallback getCarAppPermissionListener() {
+		return carAppPermissionListener;
+	}
+
+	public void setCarAppPermissionListener(@Nullable OnRequestPermissionsResultCallback callback) {
+		this.carAppPermissionListener = callback;
 	}
 
 	@Nullable
@@ -661,18 +729,22 @@ public class OsmandApplication extends MultiDexApplication {
 		return carNavigationSession;
 	}
 
+	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
+		androidAutoInForeground = true;
+	}
+
+	public void onCarNavigationSessionStop(@NonNull NavigationSession carNavigationSession) {
+		androidAutoInForeground = false;
+	}
+
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
-		NavigationService navigationService = this.navigationService;
-		if (carNavigationSession == null) {
-			if (navigationService != null) {
-				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
-			}
-			androidAutoInForeground = false;
-		} else {
-			androidAutoInForeground = true;
-			startNavigationService(NavigationService.USED_BY_CAR_APP);
-		}
 		this.carNavigationSession = carNavigationSession;
+		if (carNavigationSession != null) {
+			List<OsmandPlugin> enabledPlugins = PluginsHelper.getEnabledPlugins();
+			for (OsmandPlugin plugin : enabledPlugins) {
+				plugin.onCarNavigationSessionCreated();
+			}
+		}
 	}
 
 	public void refreshCarScreen() {
@@ -735,46 +807,24 @@ public class OsmandApplication extends MultiDexApplication {
 		return mapMarkersDbHelper;
 	}
 
-	public void showShortToastMessage(int msgId, Object... args) {
-		uiHandler.post(() -> {
-			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(), getString(msgId, args), CarToast.LENGTH_SHORT).show();
-			}
-		});
-	}
-
-	public void showShortToastMessage(String msg) {
-		uiHandler.post(() -> {
-			Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(), msg, CarToast.LENGTH_SHORT).show();
-			}
-		});
-	}
-
-	public void showToastMessage(int msgId, Object... args) {
-		uiHandler.post(() -> {
-			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(), getString(msgId, args), CarToast.LENGTH_LONG).show();
-			}
-		});
+	public ToastHelper getToastHelper() {
+		return toastHelper;
 	}
 
 	public void showToastMessage(@Nullable String text) {
-		if (!Algorithms.isEmpty(text)) {
-			uiHandler.post(() -> {
-				Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-				NavigationSession carNavigationSession = this.carNavigationSession;
-				if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-					CarToast.makeText(carNavigationSession.getCarContext(), text, CarToast.LENGTH_LONG).show();
-				}
-			});
-		}
+		toastHelper.showToast(text, true);
+	}
+
+	public void showToastMessage(@StringRes int textId, Object... args) {
+		toastHelper.showToast(textId, true, args);
+	}
+
+	public void showShortToastMessage(@Nullable String text) {
+		toastHelper.showToast(text, false);
+	}
+
+	public void showShortToastMessage(@StringRes int textId, Object... args) {
+		toastHelper.showToast(textId, false, args);
 	}
 
 	public SQLiteAPI getSQLiteAPI() {
@@ -789,7 +839,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.postDelayed(run, delay);
 	}
 
-	public void runMessageInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
+	public void runInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
 		Message msg = Message.obtain(uiHandler, () -> {
 			if (!uiHandler.hasMessages(messageId)) {
 				run.run();
@@ -818,6 +868,12 @@ public class OsmandApplication extends MultiDexApplication {
 	public File getAppPath(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new File(externalStorageDirectory, child);
+	}
+
+	@NonNull
+	public KFile getAppPathKt(@Nullable String path) {
+		String child = path != null ? path : "";
+		return new KFile(new KFile(externalStorageDirectory.getPath()), child);
 	}
 
 	@NonNull
@@ -872,6 +928,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return service;
 	}
 
+	@NonNull
 	public String getLanguage() {
 		String appLang = localeHelper.getLanguage();
 		// assume english is default though it's not correct
@@ -888,8 +945,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public Resources getResources() {
-		Resources localizedResources = localeHelper.getLocalizedResources();
-		return localizedResources != null ? localizedResources : super.getResources();
+		OsmandMap map = getOsmandMap();
+		MapActivity a = null;
+		if (map != null) {
+			a = map.getMapView().getMapActivity();
+		}
+		Context mainContext = a == null ? this : a;
+		Resources mainResources = a == null ? super.getResources() : a.getResources();
+		Resources localizedResources = localeHelper.getLocalizedResources(mainContext, mainResources);
+		return localizedResources != null ? localizedResources : mainResources;
 	}
 
 	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {
@@ -965,40 +1029,48 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startNavigationService(int usageIntent) {
-		NavigationService service = getNavigationService();
-		if (service != null) {
-			usageIntent |= service.getUsedBy();
-			service.stopSelf();
-		}
-		Intent intent = new Intent(this, NavigationService.class);
+		startNavigationService(this, usageIntent);
+	}
+
+	public void startNavigationService(@NonNull Context context, int usageIntent) {
+		LOG.info(">>>> APP startNavigationService = " + usageIntent);
+		Intent intent = new Intent(context, NavigationService.class);
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
-				if (isAppInForeground()) {
-					startForegroundService(intent);
+				try {
+					if (isAppInForeground()) {
+						LOG.info(">>>> APP startForegroundService = " + usageIntent);
+						context.startForegroundService(intent);
+					}
+				} catch (IllegalStateException e) {
+					LOG.error("Failed to start foreground service: " + e.getMessage(), e);
 				}
 			});
 		} else {
-			startService(intent);
+			context.startService(intent);
 		}
 	}
 
 	public void setupDrivingRegion(@NonNull WorldRegion worldRegion) {
-		DrivingRegion drivingRegion = null;
-		RegionParams params = worldRegion.getParams();
+		DrivingRegion drivingRegion = getDrivingRegion(worldRegion.getParams());
+		if (drivingRegion != null) {
+			settings.executePreservingPrefTimestamp(() -> settings.DRIVING_REGION.set(drivingRegion));
+		}
+	}
+
+	@Nullable
+	private DrivingRegion getDrivingRegion(@NonNull RegionParams params) {
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
 		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MILES_AND_FEET : KILOMETERS_AND_METERS;
 		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MILES_AND_METERS : KILOMETERS_AND_METERS;
 		for (DrivingRegion region : DrivingRegion.values()) {
 			if (region.leftHandDriving == leftHand && (region.defMetrics == mc1 || region.defMetrics == mc2)) {
-				drivingRegion = region;
-				break;
+				return region;
 			}
 		}
-		if (drivingRegion != null) {
-			settings.DRIVING_REGION.set(drivingRegion);
-		}
+		return null;
 	}
 
 	@NonNull
@@ -1075,5 +1147,9 @@ public class OsmandApplication extends MultiDexApplication {
 				LOG.error(e);
 			}
 		}
+	}
+
+	public void reInitPoiTypes() {
+		appInitializer.reInitPoiTypes();
 	}
 }

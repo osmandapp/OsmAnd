@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.osmedit.dialogs;
 import static net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
-import static net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment.OSM_LOGIN_DATA;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -39,7 +38,6 @@ import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
@@ -83,6 +81,9 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
 		noteText.setSelection(noteText.getText().length());
+		if (noteText.requestFocus() && getActivity() != null) {
+			AndroidUtils.showSoftKeyboard(getActivity(), noteText);
+		}
 		TextInputLayout noteHint = sendOsmNoteView.findViewById(R.id.note_hint);
 		noteHint.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		accountBlockView = sendOsmNoteView.findViewById(R.id.account_container);
@@ -99,31 +100,20 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			}
 			app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
 		});
-		View loginButton = sendOsmNoteView.findViewById(R.id.login_button);
-		loginButton.setOnClickListener(v -> {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA,
-						this, usedOnMap, null);
-			}
-		});
 		updateSignIn(uploadAnonymously.isChecked());
 		uploadAnonymously.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
 		int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
-		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				updateSignIn(isChecked);
-				if (nightMode) {
-					uploadAnonymously.setBackgroundResource(
-							isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
-				} else {
-					uploadAnonymously.setBackgroundResource(
-							isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
-				}
-				uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
+		uploadAnonymously.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			updateSignIn(isChecked);
+			if (nightMode) {
+				uploadAnonymously.setBackgroundResource(
+						isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
+			} else {
+				uploadAnonymously.setBackgroundResource(
+						isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
 			}
+			uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
 		});
 		LinearLayout account = accountBlockView.findViewById(R.id.account_container);
 		account.setOnClickListener(v -> {

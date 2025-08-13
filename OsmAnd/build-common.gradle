@@ -1,18 +1,18 @@
-task printc {
-	configurations.each { if(it.isCanBeResolved())  println it.name }
+tasks.register('printc') {
+	configurations.each { if (it.isCanBeResolved()) println it.name }
 }
 
 android {
-	compileSdk 33
-	buildToolsVersion = "33.0.2"
-	// compileNdkVersion "android-ndk-r17b"
-
-	defaultConfig {
-		targetSdkVersion 33
-		multiDexEnabled true
-		vectorDrawables.useSupportLibrary = true
-		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-	}
+    compileSdk 35
+    buildToolsVersion = "35.0.0"
+    // compileNdkVersion "android-ndk-r17b"
+    namespace = "net.osmand.plus"
+    defaultConfig {
+        targetSdkVersion 34
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 
 	lintOptions {
 		abortOnError false
@@ -42,7 +42,6 @@ android {
 			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
 			resources.srcDirs = ["src"]
-			renderscript.srcDirs = ["src"]
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
 		}
@@ -80,6 +79,7 @@ android {
 		armonly {
 			dimension "abi"
 			ndk {
+				//noinspection ChromeOsAbiSupport
 				abiFilters 'arm64-v8a', 'armeabi-v7a'
 			}
 		}
@@ -115,132 +115,159 @@ clean.doFirst {
 	}
 }
 
-task validateTranslate {
+tasks.register('validateTranslations') {
 	println "Validating translations"
+	def taskStartTime = System.currentTimeMillis()
 
-	file("res").eachFileRecurse groovy.io.FileType.FILES, {
-		if (it.name == "strings.xml" || it.name == "phrases.xml") {
-			it.eachLine { line ->
-				if (line.contains("\$ s") || line.contains("\$ d") || line.contains("\$ f") ||
-						line.contains(" \$s") || line.contains(" \$d") || line.contains(" \$f") ||
-						line.contains("1\$ ") || line.contains("2\$ ") || line.contains("3\$ ") ||
-						line.contains("%1s") || line.contains(" 1\$s") ||
-						(line.contains("% \$") || line.contains("% 1") || line.contains("% 2") ||
-								line.contains("% 3") || line.contains("% s"))) {
-					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line)
+	def pattern = /%(\d+\$)?[sSdD]/
+	def files = ["strings.xml", "phrases.xml"]
+	def defaultPlaceholders = [:]
+	def parser = new XmlParser()
+
+	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
+
+	files.each { fileName ->
+		def file = new File(file("res/values"), fileName)
+		if (file.exists()) {
+			parser.parse(file).string.each { node ->
+				def placeholders = (node.text() ?: "").findAll(pattern)
+				defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
+			}
+		} else {
+			println "Skipping missing default file: ${file.path}"
+		}
+	}
+
+	def issues = []
+	def directories = file("res").listFiles().findAll {
+		it.isDirectory() && it.name.startsWith("values-")
+	}
+
+	directories.each { dir ->
+		files.each { fileName ->
+			def file = new File(dir, fileName)
+			if (file.exists()) {
+				def placeholders = [:]
+				parser.parse(file).string.each { node ->
+					def translationPlaceholders = (node.text() ?: "").findAll(pattern)
+					placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+				}
+
+				defaultPlaceholders.each { key, defaultValues ->
+					if (placeholders.containsKey(key)) {
+						def translationValues = placeholders[key]
+						if (defaultValues != translationValues) {
+							issues << "Mismatch in ${file.path}: '${key}' -> Default: ${defaultValues}, Translation: ${translationValues}"
+						}
+					}
 				}
 			}
 		}
 	}
+
+	if (!issues.isEmpty()) {
+		issues.each { println "ERROR: $it" }
+		throw new GradleException("Translation validation failed with ${issues.size()} issue(s).")
+	}
+	def validationEndTime = System.currentTimeMillis()
+	println "Translations validated in ${(validationEndTime - taskStartTime)} ms"
 }
 
-
-task downloadDefaultWikivoyage(type: Download) {
-	src 'https://creator.osmand.net/basemap/Default_wikivoyage_2.travel.obf'
-	dest 'assets/Default_wikivoyage.travel.obf'
-	onlyIfModified true
-}
-
-task downloadWorldMiniBasemap(type: Download)  {
-	src 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf'
+tasks.register('downloadWorldMiniBasemap', Download) {
+	src 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf'
 	dest 'assets/World_basemap_mini.obf'
 	onlyIfModified true
 }
 
-task downloadDefaultWikivoyageAnt {
+tasks.register('downloadWorldMiniBasemapAnt') {
 	doLast {
-		ant.get(src: 'https://creator.osmand.net/basemap/Default_wikivoyage_2.travel.obf', dest: 'assets/Default_wikivoyage.travel.obf', skipexisting: 'true')
+		ant.get(src: 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
 	}
 }
 
-task downloadWorldMiniBasemapAnt {
-	doLast {
-		ant.get(src: 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
-	}
-}
-
-task collectVoiceAssets(type: Sync) {
+tasks.register('collectVoiceAssets', Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
 	include "**/*.js"
 }
 
-task collectFonts(type: Copy) {
+tasks.register('collectFonts', Copy) {
 	from "../../resources/rendering_styles/fonts"
 //	from "../../resources/rendering_styles/fonts/OpenSans"
 	into "assets/fonts"
 	include "*.ttf"
 }
 
-task collectUiFonts(type: Copy) {
-	from "../../resources/fonts"
-	into "assets/ui-fonts"
-	include "*.ttf"
-}
-
-task collectHelpContentsStyle(type: Copy) {
-	from("../../help/website/help/") {
-		include "style.css"
+tasks.register('copyBundledAssets', Copy) {
+	from("../../resources/bundled_assets.json") {
+		include "bundled_assets.json"
 	}
 	into "assets"
 }
 
-task copyProjDb(type: Copy) {
+tasks.register('copyProjDb', Copy) {
 	from("../../resources/proj") {
 		include "proj.db"
 	}
 	into "assets"
 }
 
-task copyColorPalettes(type: Copy) {
+tasks.register('copyColorPalettes', Copy) {
 	from "../../resources/color-palette"
 	into "assets/color-palette"
 	include "*.*"
 }
 
-task copyPoiCategories(type: Copy) {
+tasks.register('copyPoiCategories', Copy) {
 	from("../../resources/poi") {
 		include "poi_categories.json"
 	}
 	into "assets"
 }
 
-task copyMapShaderIcons(type: Sync) {
+tasks.register('copyRouteActivities', Copy) {
+	from("../../resources/poi") {
+		include "activities.json"
+	}
+	into "assets"
+}
+
+tasks.register('copyMapShaderIcons', Sync) {
 	// from "../../resources/rendering_styles/style-icons/map-shaders-png"
 	// into "res/"
 	from "../../resources/rendering_styles/style-icons/map-shaders-vector"
 	into "res/drawable"
-	include "**/*.png",  "**/*.xml"
+	include "**/*.png", "**/*.xml"
 	preserve {
 		include '**/*'
-		exclude  "**/h_*"
+		exclude "**/h_*"
 	}
 }
 
-task copyMapPOIIcons(type: Sync) {
+tasks.register('copyMapPOIIcons', Sync) {
 	from "../../resources/rendering_styles/style-icons/map-icons-vector"
 	into "res/drawable/"
 	// from "../../resources/rendering_styles/style-icons/map-icons-png"
 	// into "res/"
 
-	include "**/*.png",  "**/*.xml"
+	include "**/*.png", "**/*.xml"
 	preserve {
 		include '**/*'
 		exclude "**/mm_*"
 	}
 }
 
-task copyLargePOIIcons(type: Sync) {
+tasks.register('copyLargePOIIcons', Sync) {
 	from "../../resources/rendering_styles/style-icons/poi-icons-vector"
 	into "res/drawable/"
-	include "**/*.png",  "**/*.xml"
+	include "**/*.png", "**/*.xml"
 	preserve {
 		include '**/*'
 		exclude "**/mx_*"
 	}
 }
 
-task collectTestResources(type: Copy) {
+tasks.register('collectTestResources', Copy) {
 	into "test/assets/"
 	from("../../resources/test-resources/ui/") {
 		include "*"
@@ -249,41 +276,47 @@ task collectTestResources(type: Copy) {
 	}
 }
 
-task collectExternalResources {
+tasks.register('copy3DModels', Copy) {
+	from "../../resources/models"
+	into "assets/models"
+	include "**/*.*"
+}
+
+tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			collectUiFonts,
-			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
 			copyLargePOIIcons,
-			validateTranslate,
+			validateTranslations,
+			copyBundledAssets,
 			copyProjDb,
 			copyColorPalettes,
 			copyPoiCategories,
+			copyRouteActivities,
 			downloadWorldMiniBasemap,
-			downloadDefaultWikivoyage,
-			collectTestResources
+			collectTestResources,
+			copy3DModels
 }
 
 // Legacy core build
 import org.apache.tools.ant.taskdefs.condition.Os
 
-task buildOsmAndCore(type: Exec) {
+tasks.register('buildOsmAndCore', Exec) {
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
 	String flavour = ""
-	if(!tskReqStr.contains("fat")) {
-		if(tskReqStr.contains("arm64")) {
+	if (!tskReqStr.contains("fat")) {
+		if (tskReqStr.contains("arm64")) {
 			flavour = flavour.length() == 0 ? "ARM64_ONLY" : ""
 		}
-		if(tskReqStr.contains("armv7")) {
+		if (tskReqStr.contains("armv7")) {
 			flavour = flavour.length() == 0 ? "ARMV7_ONLY" : ""
 		}
-		if(tskReqStr.contains("armonly")) {
+		if (tskReqStr.contains("armonly")) {
 			flavour = flavour.length() == 0 ? "ARM_ONLY" : ""
 		}
-		if(tskReqStr.contains("x86")) {
+		if (tskReqStr.contains("x86")) {
 			flavour = flavour.length() == 0 ? "X86_ONLY" : ""
 		}
 	}
@@ -291,7 +324,7 @@ task buildOsmAndCore(type: Exec) {
 	description "Build Legacy OsmAndCore"
 
 	if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-		if(flavour.length()  > 0) {
+		if (flavour.length() > 0) {
 			environment "$flavour", "1"
 		}
 		commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath()
@@ -300,22 +333,33 @@ task buildOsmAndCore(type: Exec) {
 	}
 }
 
-task cleanupDuplicatesInCore() {
-	dependsOn buildOsmAndCore
-	// doesn't work for legacy debug builds
+tasks.register('cleanupDuplicatesInCore') {
+	dependsOn(buildOsmAndCore)
+
+	// Capture paths at configuration time using Gradle's layout API
+	def targetDirs = [
+			'armeabi-v7a': [source: layout.projectDirectory.file("libs/armeabi-v7a/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/armeabi-v7a/libc++_shared.so")],
+			'arm64-v8a': [source: layout.projectDirectory.file("libs/arm64-v8a/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/arm64-v8a/libc++_shared.so")],
+			'x86': [source: layout.projectDirectory.file("libs/x86/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/x86/libc++_shared.so")],
+			'x86_64': [source: layout.projectDirectory.file("libs/x86_64/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/x86_64/libc++_shared.so")]
+	]
+
 	doLast {
-		file("libc++/armeabi-v7a").mkdirs()
-		file("libs/armeabi-v7a/libc++_shared.so").renameTo(file("libc++/armeabi-v7a/libc++_shared.so"))
-		file("libc++/arm64-v8a").mkdirs()
-		file("libs/arm64-v8a/libc++_shared.so").renameTo(file("libc++/arm64-v8a/libc++_shared.so"))
-		file("libc++/x86").mkdirs()
-		file("libs/x86/libc++_shared.so").renameTo(file("libc++/x86/libc++_shared.so"))
-		file("libc++/x86_64").mkdirs()
-		file("libs/x86_64/libc++_shared.so").renameTo(file("libc++/x86_64/libc++_shared.so"))
+		targetDirs.each { arch, paths ->
+			def destFile = paths.dest.asFile
+			def destDir = destFile.getParentFile()
+
+			destDir.mkdirs()
+			if (paths.source.asFile.exists()) {
+				if (!paths.source.asFile.renameTo(destFile)) {
+					logger.error("Failed to move file from ${paths.source.asFile} to ${destFile}.")
+				}
+			}
+		}
 	}
 }
 
-task appStart(type: Exec) {
+tasks.register('appStart', Exec) {
 	// linux
 	commandLine 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 	// windows
@@ -327,6 +371,8 @@ dependencies {
 	implementation project(':OsmAnd-api')
 
 	implementation project(':OsmAnd-shared')
+	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 	implementation("androidx.sqlite:sqlite-framework:2.3.1")
 
 	implementation 'androidx.multidex:multidex:2.0.1'
@@ -346,10 +392,13 @@ dependencies {
 	implementation 'org.immutables:gson:2.5.0'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
 	implementation 'com.google.openlocationcode:openlocationcode:1.0.4'
-	implementation 'com.android.billingclient:billing:6.1.0'
+	implementation 'com.android.billingclient:billing:8.0.0'
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'com.squareup.picasso:picasso:2.71828'
+	//implementation("io.coil-kt.coil3:coil-core:3.1.0")
+	//implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+
 	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
 	implementation "net.osmand:antpluginlib:3.8.0@aar"
 	// JS core
@@ -373,12 +422,12 @@ dependencies {
 	implementation('com.github.scribejava:scribejava-apis:7.1.1')
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
-	implementation 'com.google.android.play:core:1.9.1'
+	implementation 'com.google.android.play:review:2.0.1'
 
-	implementation "androidx.car.app:app:1.2.0"
-	implementation "androidx.car.app:app-projected:1.2.0"
+	implementation "androidx.car.app:app:1.4.0"
+	implementation "androidx.car.app:app-projected:1.4.0"
 
-	implementation 'com.google.android.gms:play-services-location:21.0.1'
+	implementation 'com.google.android.gms:play-services-location:21.3.0'
 
 	//implementation "androidx.tracing:tracing:1.1.0"
 	//debugImplementation 'androidx.test:monitor:1.6.1'
@@ -390,4 +439,6 @@ dependencies {
 	androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.5.1') {
 		exclude module: "protobuf-lite"
 	}
+	implementation 'net.sf.marineapi:marineapi:0.12.0'
+	implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
 }

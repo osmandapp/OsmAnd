@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
+import static android.graphics.Typeface.DEFAULT;
 import static net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment.getDefaultCalendar;
 
 import android.content.Context;
@@ -16,9 +17,9 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
+import net.osmand.plus.utils.TimeFormatter;
 
 import org.apache.commons.logging.Log;
 
@@ -57,7 +58,7 @@ public class TimeSlider extends Slider {
 		textPaint = new Paint();
 		textPaint.setAntiAlias(true);
 		textPaint.setTextAlign(Paint.Align.CENTER);
-		textPaint.setTypeface(FontCache.getRobotoRegular(context));
+		textPaint.setTypeface(DEFAULT);
 		textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
 		textPaint.setColor(AndroidUtils.getColorFromAttr(context, android.R.attr.textColorSecondary));
 		textPaint.setLetterSpacing(AndroidUtils.getFloatValueFromRes(context, R.dimen.description_letter_spacing));
@@ -117,5 +118,13 @@ public class TimeSlider extends Slider {
 			coordinates[i] = getTrackSidePadding() + i * interval;
 		}
 		return coordinates;
+	}
+
+	public void hideLabel(){
+		setActiveThumbIndex(-1);
+	}
+
+	public void showLabel(){
+		setActiveThumbIndex(0);
 	}
 }

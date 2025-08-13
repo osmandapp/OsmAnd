@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.plus.plugins.monitoring.TripRecordingOptionsBottomSheet.ACTION_STOP_AND_DISMISS;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,19 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
-
-import static net.osmand.plus.plugins.monitoring.TripRecordingOptionsBottomSheet.ACTION_STOP_AND_DISMISS;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragment implements DismissTargetFragment {
 
@@ -40,7 +40,7 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
 		View buttonDiscard = createItem(inflater, ItemType.STOP);
@@ -61,10 +61,8 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 					@Override
 					public void onClick(View v) {
 						if (plugin != null && app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							plugin.stopRecording();
-							app.getNotificationHelper().refreshNotifications();
+							plugin.stopRecording(true);
 						}
-						app.getSavingTrackHelper().clearRecordedData(true);
 						dismiss();
 
 						Fragment target = getTargetFragment();

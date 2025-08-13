@@ -91,6 +91,7 @@
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
         <item name="activity_background_color">@color/activity_background_color_dark</item>
         <item name="list_background_color">@color/list_background_color_dark</item>
+        <item name="icon_color_primary">@color/icon_color_primary_dark</item>
         <item name="widget_background_color">@color/widget_background_color_dark</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
@@ -176,6 +177,7 @@
         <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_dark</item>
         <item name="wikivoyage_secondary_btn_bg">@drawable/wikivoyage_secondary_btn_bg_dark</item>
         <item name="wikivoyage_primary_btn_bg">@drawable/wikivoyage_primary_btn_bg_dark</item>
+        <item name="bg_keybinding">@drawable/bg_keybinding_dark</item>
         <item name="bg_keycode_cursor">@drawable/bg_keycode_cursor_night</item>
         <item name="bg_keycode_content">@drawable/bg_keycode_content_night</item>
         <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_dark</item>
@@ -185,8 +187,10 @@
         <item name="purchase_sc_selected_plan_bg">@color/purchase_sc_selected_plan_bg_dark</item>
         <item name="purchase_sc_header_icon_bg">@color/purchase_sc_header_icon_bg_dark</item>
         <item name="promo_banner_title_color">@color/active_color_primary_dark</item>
+        <item name="purchase_pro_badge_icon">@drawable/img_button_pro_night</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_night</item>
+        <item name="nav_arrow_circle_color">@color/nav_arrow_circle_color_dark</item>
 
         <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_dark</item>
         <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_dark</item>
@@ -215,6 +219,7 @@
         <item name="dlg_btn_secondary_harmful_text">@color/color_osm_edit_delete</item>
         <item name="dlg_btn_transparent">@drawable/dlg_btn_transparent_dark</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
+        <item name="dlg_btn_stroked_secondary_content">@color/dlg_btn_stroked_secondary_content_dark</item>
         <item name="dlg_btn_tertiary_text">@color/active_color_primary_dark</item>
         <item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
@@ -256,5 +261,10 @@
         <item name="icon_color_active">@color/icon_color_active_dark</item>
         <item name="toolbar_active_color">@color/app_bar_active_dark</item>
         <item name="status_bar_active_color">@color/status_bar_selection_color_dark</item>
+        <item name="active_color_secondary">@color/active_color_secondary_dark</item>
+        <item name="active_color_primary">@color/active_color_primary_dark</item>
+        <item name="slider_label_text_dark">@color/slider_label_text_dark</item>
+        <item name="app_bar_secondary_color">@color/app_bar_secondary_dark</item>
+        <item name="map_button_icon_color">@color/map_button_icon_color_dark</item>
     </style>
 </resources>

@@ -8,11 +8,16 @@
     <string name="app_store_name">OsmAnd Maps</string>
     
     <!-- Not translatable -->
+    <string name="wikipedia_names_pattern">%s (%s)</string>
+    <string name="wikidata_id_pattern">Q%s</string>
+    <string name="hmd">HMD</string>
+    <string name="hugerock">Hugerock</string>
     <string name="tripltek">TRIPLTEK</string>
     <string name="number_in_breckets">(%d)</string>
     <string name="degree_celsius">°C</string>
     <string name="amazon_market">Amazon</string>
     <string name="huawei_market">Huawei</string>
+    <string name="osmand_web_market">OsmAnd Web (FastSpring)</string>
     <string name="apple_app_store">Apple App Store</string>
     <string name="google_play">Google Play</string>
     <string name="google_play_services">Google Play Services</string>
@@ -61,7 +66,7 @@
     <string name="routing_type_hh_java">HH x Java</string>
     <string name="routing_type_hh_cpp">HH x C++</string>
     <string name="oauth2_redirect_uri" translatable="false">https://osmand.net/osmand-oauth-redirect-url</string>
-    <string name="oauth2_scope" translatable="false">read_prefs write_api write_gpx write_notes write_redactions</string>
+    <string name="oauth2_scope" translatable="false">read_prefs write_api write_gpx write_notes</string>
     <string name="osm_oauth2_dev_id" translatable="false">uF18mTh1eRL67xS8wND9Oi7WqKqHcWLQP4ORtAfUwAs</string>
     <string name="osm_oauth2_dev_secret" translatable="false">Zujj3e_vQEUPGCbbbCGX-xUqbx1h0MQspUkIkT0sA8g</string>
     <string name="osm_oauth2_client_id" translatable="false">P-byvAHx1s3qB7cc8VsYikaVBUnMhimeE1VQ0rYot0k</string>

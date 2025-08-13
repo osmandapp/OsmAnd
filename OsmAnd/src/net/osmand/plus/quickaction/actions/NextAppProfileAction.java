@@ -10,9 +10,10 @@ public class NextAppProfileAction extends BaseSwitchAppModeAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NEXT_PROFILE_PROFILE_ACTION,
 			"change.profile.next", NextAppProfileAction.class)
-			.nameRes(R.string.key_event_action_next_app_profile)
+			.nameRes(R.string.quick_action_next_app_profile)
 			.iconRes(R.drawable.ic_action_profile_next).nonEditable()
-			.category(QuickActionType.SETTINGS);
+			.category(QuickActionType.SETTINGS)
+			.nameActionRes(R.string.shared_string_change);
 
 	public NextAppProfileAction() {
 		super(TYPE);

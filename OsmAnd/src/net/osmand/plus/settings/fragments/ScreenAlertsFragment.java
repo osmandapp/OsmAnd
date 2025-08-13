@@ -1,8 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,16 +16,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.plus.R;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
-
-
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
 
@@ -48,7 +46,6 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		showPedestrian.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
 
-		setupScreenAlertsImage();
 		setupShowCamerasPref();
 		setupSpeedCamerasAlert();
 		enableDisablePreferences(settings.SHOW_ROUTING_ALARMS.getModeValue(getSelectedAppMode()));
@@ -123,29 +120,25 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String key = preference.getKey();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
-				holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
-			} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
-				ImageView deviceImage = holder.itemView.findViewById(R.id.device_image);
-				ImageView warningIcon = holder.itemView.findViewById(R.id.warning_icon);
+		if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
+			holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
+		} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
+			ImageView deviceImage = holder.itemView.findViewById(R.id.device_image);
+			ImageView warningIcon = holder.itemView.findViewById(R.id.warning_icon);
 
-				deviceImage.setImageDrawable(getDeviceImage());
-				warningIcon.setImageDrawable(getWarningIcon());
-			} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(key)) {
-				setupPrefRoundedBg(holder);
-			}
+			deviceImage.setImageDrawable(getDeviceImage());
+			warningIcon.setImageDrawable(getWarningIcon());
+		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(key)) {
+			setupPrefRoundedBg(holder);
 		}
 	}
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
-			updatePreference(routeParametersImage);
-		}
+		updatePreference(findPreference(SCREEN_ALERTS_IMAGE));
+
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
-			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -155,13 +148,6 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupShowCamerasPref();
 			setupSpeedCamerasAlert();
-		}
-	}
-
-	private void setupScreenAlertsImage() {
-		Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			routeParametersImage.setVisible(false);
 		}
 	}
 

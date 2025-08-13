@@ -5,30 +5,22 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +51,7 @@ public abstract class SettingsItem {
 		init();
 	}
 
-	public SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public SettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		this.app = app;
 		this.fromJson = true;
 		init();
@@ -121,9 +113,17 @@ public abstract class SettingsItem {
 
 	public abstract long getEstimatedSize();
 
+	public long getInfoModifiedTime() {
+		return 0;
+	}
+
 	public boolean applyFileName(@NonNull String fileName) {
-		String n = getFileName();
-		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
+		// Case: this.fileName could be a folder so all remote files will be collected for it ?
+		// + Subfolder check correct
+		// - Where is type prefix ? filename same for different types
+		fileName = BackupUtils.removeLeadingSlash(fileName);
+		String name = BackupUtils.removeLeadingSlash(getFileName());
+		return name != null && (name.endsWith(fileName) || fileName.startsWith(name + File.separator));
 	}
 
 	public boolean shouldReadOnCollecting() {
@@ -215,11 +215,11 @@ public abstract class SettingsItem {
 	public abstract SettingsItemWriter<? extends SettingsItem> getWriter();
 
 	@NonNull
-	protected SettingsItemReader<? extends SettingsItem> getJsonReader() {
-		return new SettingsItemReader<SettingsItem>(this) {
+	protected SettingsItemReader<? extends SettingsItem> getJsonReader(boolean allowEmptyJson) {
+		return new SettingsItemReader<>(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
-			                           @Nullable String entryName) throws IOException, IllegalArgumentException {
+			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+					@Nullable String entryName) throws IOException, IllegalArgumentException {
 				StringBuilder buf = new StringBuilder();
 				try {
 					BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
@@ -231,36 +231,39 @@ public abstract class SettingsItem {
 					throw new IOException("Cannot read json body", e);
 				}
 				String json = buf.toString();
-				if (json.length() == 0) {
-					throw new IllegalArgumentException("Json body is empty");
+				if (json.isEmpty()) {
+					if (allowEmptyJson) {
+						return null;
+					} else {
+						throw new IllegalArgumentException("Json body is empty");
+					}
 				}
 				try {
 					readItemsFromJson(new JSONObject(json));
 				} catch (JSONException e) {
 					throw new IllegalArgumentException("Json parsing error", e);
 				}
+				return null;
 			}
 		};
 	}
 
 	@NonNull
 	protected SettingsItemWriter<? extends SettingsItem> getJsonWriter() {
-		return new SettingsItemWriter<SettingsItem>(this) {
+		return new SettingsItemWriter<>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
 				JSONObject json = writeItemsToJson(new JSONObject());
-				if (json.length() > 0) {
-					try {
-						int bytesDivisor = 1024;
-						byte[] bytes = json.toString(2).getBytes("UTF-8");
-						if (progress != null) {
-							progress.startWork(bytes.length / bytesDivisor);
-						}
-						Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
-					} catch (JSONException e) {
-						warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
-						SettingsHelper.LOG.error("Failed to write json to stream", e);
+				try {
+					int bytesDivisor = 1024;
+					byte[] bytes = json.toString(2).getBytes("UTF-8");
+					if (progress != null) {
+						progress.startWork(bytes.length / bytesDivisor);
 					}
+					Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
+				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+					SettingsHelper.LOG.error("Failed to write json to stream", e);
 				}
 				if (progress != null) {
 					progress.finishTask();
@@ -270,12 +273,11 @@ public abstract class SettingsItem {
 	}
 
 	@NonNull
-	protected SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull GPXFile gpxFile) {
+	protected SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull GpxFile gpxFile) {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
-				Writer writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-				Exception error = GPXUtilities.writeGpx(writer, gpxFile, progress);
+				Exception error = SharedUtil.writeGpx(outputStream, gpxFile, SharedUtil.kIProgress(progress));
 				if (error != null) {
 					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed write to gpx file", error);

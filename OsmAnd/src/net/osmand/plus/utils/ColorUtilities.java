@@ -97,6 +97,11 @@ public class ColorUtilities {
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
+	@ColorInt
+	public static int invertColor(@ColorInt int color) {
+		return (color & 0xFF000000) | (~color & 0x00FFFFFF);
+	}
+
 	/********************************* Basic colors *********************************/
 
 	@ColorInt
@@ -136,6 +141,16 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getActiveColorId(boolean nightMode) {
 		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+	}
+
+	@ColorInt
+	public static int getSecondaryActiveColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getSecondaryActiveColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getSecondaryActiveColorId(boolean nightMode) {
+		return nightMode ? R.color.active_color_secondary_dark : R.color.active_color_secondary_light;
 	}
 
 	@ColorInt
@@ -274,6 +289,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getAppBarSecondaryColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getAppBarSecondaryColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getAppBarSecondaryColorId(boolean nightMode) {
+		return nightMode ? R.color.app_bar_secondary_dark : R.color.app_bar_secondary_light;
+	}
+
+	@ColorInt
 	public static int getDividerColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getDividerColorId(nightMode));
 	}
@@ -333,16 +358,6 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getInactiveButtonsAndLinksColorId(boolean nightMode) {
 		return nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.inactive_buttons_and_links_bg_light;
-	}
-
-	@ColorInt
-	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
-		return getColor(ctx, getMapButtonIconColorId(nightMode));
-	}
-
-	@ColorRes
-	public static int getMapButtonIconColorId(boolean nightMode) {
-		return nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light;
 	}
 
 	@ColorInt
@@ -428,5 +443,35 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getWidgetSecondaryBackgroundColorId(boolean nightMode) {
 		return nightMode ? R.color.widget_secondary_background_color_dark : R.color.widget_secondary_background_color_light;
+	}
+
+	@ColorInt
+	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light);
+	}
+
+	@ColorInt
+	public static int getMapButtonBackgroundColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, nightMode ? R.color.map_button_background_color_dark : R.color.map_button_background_color_light);
+	}
+
+	@ColorInt
+	public static int getMapButtonBackgroundPressedColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, nightMode ? R.color.map_widget_dark_pressed : R.color.map_widget_light_pressed);
+	}
+
+	@ColorInt
+	public static int getTransparentColor(@NonNull Context ctx) {
+		return getColor(ctx, R.color.color_transparent);
+	}
+
+	@ColorInt
+	public static int getNavBarBackgroundColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getNavBarBackgroundColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getNavBarBackgroundColorId(boolean nightMode) {
+		return nightMode ? R.color.navigation_bar_bg_dark : R.color.navigation_bar_bg_light;
 	}
 }

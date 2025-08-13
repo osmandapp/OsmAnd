@@ -86,6 +86,10 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		return rssi;
 	}
 
+	public DeviceConnectionState getCurrentState() {
+		return state;
+	}
+
 	public boolean isConnected() {
 		return state == DeviceConnectionState.CONNECTED;
 	}

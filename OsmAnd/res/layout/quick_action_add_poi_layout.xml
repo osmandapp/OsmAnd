@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +10,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/point_location_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:scaleType="fitXY"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/bg_shadow_list_top" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:scaleType="fitXY"
-            osmand:srcCompat="@drawable/bg_shadow_list_bottom"/>
+            app:srcCompat="@drawable/bg_shadow_list_bottom"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -54,7 +75,7 @@
             android:layout_gravity="top"
             android:layout_marginTop="@dimen/content_padding"
             android:scaleType="fitXY"
-            osmand:srcCompat="@drawable/bg_shadow_list_top"/>
+            app:srcCompat="@drawable/bg_shadow_list_top"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +83,7 @@
             android:background="?attr/bg_color"
             android:paddingTop="@dimen/content_padding"
             android:paddingBottom="@dimen/content_padding_half"
-            osmand:layout_scrollFlags="scroll">
+            app:layout_scrollFlags="scroll">
             <!--android:layout_marginLeft="72dp"-->
 
             <!--<ImageButton-->
@@ -72,7 +93,7 @@
                 <!--android:layout_height="48dp"-->
                 <!--android:layout_gravity="bottom"-->
                 <!--android:background="@null"-->
-                <!--osmand:srcCompat="@drawable/ic_action_label"/>-->
+                <!--app:srcCompat="@drawable/ic_action_label"/>-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/poiTypeTextInputLayout"
@@ -90,9 +111,9 @@
                     android:gravity="bottom"
                     android:paddingBottom="@dimen/text_margin_small"
                     android:completionThreshold="1"
-                    osmand:drawableTint="@color/osmand_orange"
-                    osmand:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
-                    osmand:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
+                    app:drawableTint="@color/osmand_orange"
+                    app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
+                    app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                     android:hint="@string/poi_dialog_poi_type"
                     android:imeOptions="actionSend"
                     android:inputType="text" />
@@ -106,7 +127,7 @@
                 android:layout_height="@dimen/dashboard_parking_icon_size"
                 android:layout_gravity="bottom"
                 android:background="@null"
-                osmand:srcCompat="@drawable/ic_action_help"/>
+                app:srcCompat="@drawable/ic_action_help"/>
         </LinearLayout>
 
         <!--<androidx.appcompat.widget.AppCompatImageView-->
@@ -114,7 +135,7 @@
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_gravity="top"-->
             <!--android:scaleType="fitXY"-->
-            <!--osmand:srcCompat="@drawable/bg_shadow_list_bottom"/>-->
+            <!--app:srcCompat="@drawable/bg_shadow_list_bottom"/>-->
 
         <!--<androidx.appcompat.widget.AppCompatImageView-->
             <!--android:layout_width="match_parent"-->
@@ -122,7 +143,7 @@
             <!--android:layout_gravity="top"-->
             <!--android:layout_marginTop="16dp"-->
             <!--android:scaleType="fitXY"-->
-            <!--osmand:srcCompat="@drawable/bg_shadow_list_top"/>-->
+            <!--app:srcCompat="@drawable/bg_shadow_list_top"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,7 +171,7 @@
                 android:text="@string/add_tag"
                 android:textColor="@color/card_and_list_background_light"
                 android:textSize="@dimen/default_sub_text_size"
-                osmand:typeface="@string/font_roboto_medium"
+                app:typefaceWeight="medium"
                 android:layout_marginStart="@dimen/content_padding"
                 android:paddingEnd="@dimen/content_padding"
                 android:paddingStart="@dimen/content_padding" />
@@ -167,7 +188,7 @@
                 <!--android:text="Add type test"-->
                 <!--android:textColor="@color/card_and_list_background_light"-->
                 <!--android:textSize="@dimen/default_sub_text_size"-->
-                <!--osmand:typeface="@string/font_roboto_medium"/>-->
+                <!--app:typefaceWeight="medium"/>-->
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -175,7 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:scaleType="fitXY"
-            osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+            app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

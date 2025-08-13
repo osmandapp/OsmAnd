@@ -6,6 +6,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -22,6 +23,7 @@ public class AlertDialogData {
 	private final Context ctx;
 	private final boolean nightMode;
 	@Nullable private Integer controlsColor;
+	@Nullable @LayoutRes private Integer itemsLayoutRes;
 
 	@Nullable private String title;
 	@Nullable private Integer titleId;
@@ -55,6 +57,11 @@ public class AlertDialogData {
 	@Nullable
 	public Object getExtra(@NonNull AlertDialogExtra key) {
 		return extras.get(key);
+	}
+
+	public AlertDialogData setItemsLayoutRes(@Nullable Integer itemsLayoutRes) {
+		this.itemsLayoutRes = itemsLayoutRes;
+		return this;
 	}
 
 	public AlertDialogData setTitle(@Nullable String title) {
@@ -132,6 +139,11 @@ public class AlertDialogData {
 
 	public boolean isNightMode() {
 		return nightMode;
+	}
+
+	@Nullable
+	public Integer getItemsLayoutRes() {
+		return itemsLayoutRes;
 	}
 
 	@Nullable

@@ -4,7 +4,10 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
@@ -14,6 +17,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseMenuController {
 
+	@NonNull
+	private final OsmandApplication app;
 	@Nullable
 	private MapActivity mapActivity;
 	private boolean portraitMode;
@@ -21,6 +26,7 @@ public abstract class BaseMenuController {
 	protected boolean nightMode;
 
 	public BaseMenuController(@NonNull MapActivity mapActivity) {
+		this.app = mapActivity.getMyApplication();
 		this.mapActivity = mapActivity;
 		init();
 	}
@@ -51,7 +57,7 @@ public abstract class BaseMenuController {
 
 	public void updateNightMode() {
 		if (mapActivity != null) {
-			nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		}
 	}
 
@@ -106,4 +112,14 @@ public abstract class BaseMenuController {
 			return null;
 		}
 	}
+
+	@NonNull
+	protected String getString(@StringRes int resId, Object... formatArgs) {
+		return mapActivity != null ? mapActivity.getString(resId, formatArgs) : "";
+	}
+
+    @NonNull
+    public OsmandApplication getApplication() {
+        return app;
+    }
 }

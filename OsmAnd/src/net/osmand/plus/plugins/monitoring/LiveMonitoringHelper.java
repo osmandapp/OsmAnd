@@ -8,12 +8,15 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.shared.gpx.GpxFormatter;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -55,7 +58,7 @@ public class LiveMonitoringHelper {
 		long locationTime = System.currentTimeMillis();
 
 		if (shouldRecordLocation(location, locationTime)) {
-			LiveMonitoringData data = new LiveMonitoringData((float) location.getLatitude(), (float) location.getLongitude(),
+			LiveMonitoringData data = new LiveMonitoringData(location.getLatitude(), location.getLongitude(),
 					(float) location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
 			setupLiveDataTimeAndDistance(data, location, locationTime);
 			queue.add(data);
@@ -63,7 +66,7 @@ public class LiveMonitoringHelper {
 			lastTimeUpdated = locationTime;
 		}
 		if (isLiveMonitoringEnabled() && !queue.isEmpty())  {
-			new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
+			OsmAndTaskManager.executeTask(new LiveSender(), queue);
 		}
 	}
 
@@ -127,8 +130,8 @@ public class LiveMonitoringHelper {
 	private static class LiveMonitoringData {
 		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 11;    //change the value after each addition\deletion of data field
 
-		private final float lat;
-		private final float lon;
+		private final double lat;
+		private final double lon;
 		private final float alt;
 		private final float speed;
 		private final float bearing;
@@ -146,7 +149,7 @@ public class LiveMonitoringHelper {
 			this.distanceToIntermediateOrFinish = distanceToIntermediateOrFinish;
 		}
 
-		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, float bearing, long time) {
+		public LiveMonitoringData(double lat, double lon, float alt, float speed, float hdop, float bearing, long time) {
 			this.lat = lat;
 			this.lon = lon;
 			this.alt = alt;
@@ -203,8 +206,8 @@ public class LiveMonitoringHelper {
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
 					url.getPath(), url.getQuery(), url.getRef());
-			urlConnection.setConnectTimeout(15000);
-			urlConnection.setReadTimeout(15000);
+			urlConnection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+			urlConnection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 			log.info("Monitor " + uri);
 			if (urlConnection.getResponseCode() / 100 != 2) {
 				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
@@ -246,10 +249,10 @@ public class LiveMonitoringHelper {
 		for (int i = 0; i < maxLen + 1; i++) {
 			switch (i) {
 				case 0:
-					prm.add(data.lat + "");
+					prm.add(GpxFormatter.INSTANCE.formatLatLon(data.lat));
 					break;
 				case 1:
-					prm.add(data.lon + "");
+					prm.add(GpxFormatter.INSTANCE.formatLatLon(data.lon));
 					break;
 				case 2:
 					prm.add(data.time + "");

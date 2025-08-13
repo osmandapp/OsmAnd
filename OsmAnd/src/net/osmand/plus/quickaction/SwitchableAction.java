@@ -3,7 +3,6 @@ package net.osmand.plus.quickaction;
 import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -18,7 +18,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -29,6 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
@@ -176,8 +176,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	public String getNextItemFromSources(@NonNull OsmandApplication app,
-	                                     @NonNull List<Pair<String, String>> sources,
-	                                     @NonNull String defValue) {
+										 @NonNull List<Pair<String, String>> sources,
+										 @NonNull String defValue) {
 		if (!Algorithms.isEmpty(sources)) {
 			String currentSource = getSelectedItem(app);
 			if (sources.size() > 1) {
@@ -224,10 +224,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 
-			Drawable icon = app.getUIUtilities().getPaintedIcon(
-					getItemIconRes(app, item), getItemIconColor(app, item));
-			holder.icon.setImageDrawable(icon);
-
+			setIcon(app, item, holder.icon, holder.iconProgressBar);
 			holder.title.setText(getItemName(context, item));
 
 			holder.handleView.setOnTouchListener((v, event) -> {
@@ -238,13 +235,13 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			});
 
 			holder.closeBtn.setOnClickListener(v -> {
-				String oldTitle = getTitle(itemsList);
+				String oldTitle = getTitle(itemsList, app);
 				String defaultName = holder.handleView.getContext().getString(getNameRes());
 
 				deleteItem(holder.getAdapterPosition());
 
 				if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
-					String newTitle = getTitle(itemsList);
+					String newTitle = getTitle(itemsList, app);
 					title.setText(newTitle);
 				}
 			});
@@ -276,7 +273,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		public void addItem(T item, Context context) {
 			if (!itemsList.contains(item)) {
-				String oldTitle = getTitle(itemsList);
+				String oldTitle = getTitle(itemsList, context);
 				String defaultName = context.getString(getNameRes());
 
 				int oldSize = itemsList.size();
@@ -285,7 +282,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				notifyItemRangeInserted(oldSize, itemsList.size() - oldSize);
 
 				if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
-					String newTitle = getTitle(itemsList);
+					String newTitle = getTitle(itemsList, context);
 					title.setText(newTitle);
 				}
 			}
@@ -293,7 +290,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		@Override
 		public boolean onItemMove(int selectedPosition, int targetPosition) {
-			String oldTitle = getTitle(itemsList);
+			String oldTitle = getTitle(itemsList, context);
 			String defaultName = context.getString(getNameRes());
 
 			Collections.swap(itemsList, selectedPosition, targetPosition);
@@ -317,7 +314,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
 
-				String newTitle = getTitle(itemsList);
+				String newTitle = getTitle(itemsList, context);
 				title.setText(newTitle);
 			}
 
@@ -334,6 +331,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			public ImageView handleView;
 			public ImageView closeBtn;
 			public ImageView icon;
+			public ProgressBar iconProgressBar;
 
 			public ItemHolder(View itemView) {
 				super(itemView);
@@ -342,15 +340,21 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				handleView = itemView.findViewById(R.id.handle_view);
 				closeBtn = itemView.findViewById(R.id.closeImageButton);
 				icon = itemView.findViewById(R.id.imageView);
+				iconProgressBar = itemView.findViewById(R.id.iconProgressBar);
 			}
 		}
 	}
 
-	protected abstract String getTitle(List<T> filters);
+	protected abstract String getTitle(List<T> filters, @NonNull Context ctx);
 
 	protected abstract void saveListToParams(List<T> list);
 
 	protected abstract String getItemName(Context context, T item);
+
+	protected void setIcon(@NonNull OsmandApplication app, T item, @NonNull ImageView imageView, @NonNull ProgressBar iconProgressBar) {
+		imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(
+				getItemIconRes(app, item), getItemIconColor(app, item)));
+	}
 
 	@DrawableRes
 	protected int getItemIconRes(Context context, T item) {
@@ -359,9 +363,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@ColorInt
 	protected int getItemIconColor(OsmandApplication app, T item) {
-		boolean nightMode = !app.getSettings().isLightContent();
-		int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
-		return ContextCompat.getColor(app, colorRes);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return ColorUtilities.getDefaultIconColor(app, nightMode);
 	}
 
 	@StringRes

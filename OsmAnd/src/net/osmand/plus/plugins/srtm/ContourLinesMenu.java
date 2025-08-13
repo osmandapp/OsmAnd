@@ -8,6 +8,7 @@ import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
@@ -28,6 +29,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -59,8 +61,8 @@ public class ContourLinesMenu {
 		return adapter;
 	}
 
-	private static void createLayersItems(ContextMenuAdapter contextMenuAdapter,
-	                                      MapActivity mapActivity) {
+	private static void createLayersItems(@NonNull ContextMenuAdapter contextMenuAdapter,
+	                                      @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
@@ -106,7 +108,7 @@ public class ContourLinesMenu {
 		OnRowItemClick l = new OnRowItemClick() {
 
 			@Override
-			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			public boolean onContextMenuClick(@NonNull OnDataChangeUiAdapter uiAdapter,
 			                                  @Nullable View view, @NotNull ContextMenuItem item,
 			                                  boolean isChecked) {
 				int itemId = item.getTitleId();
@@ -116,38 +118,34 @@ public class ContourLinesMenu {
 						mapActivity.refreshMapComplete();
 					}));
 				} else if (itemId == showZoomLevelStringId) {
-					plugin.selectPropertyValue(mapActivity, contourLinesProp, pref, () -> {
-						item.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref));
-						uiAdapter.onDataSetChanged();
-						mapActivity.refreshMapComplete();
-					});
+					plugin.selectPropertyValue(mapActivity, contourLinesProp, pref,
+							() -> onPropertyValueSelected(uiAdapter, item, contourLinesProp));
 				} else if (itemId == colorSchemeStringId) {
-					plugin.selectPropertyValue(mapActivity, colorSchemeProp, colorPref, () -> {
-						item.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref));
-						uiAdapter.onDataSetChanged();
-						mapActivity.refreshMapComplete();
-					});
+					plugin.selectPropertyValue(mapActivity, colorSchemeProp, colorPref,
+							() -> onPropertyValueSelected(uiAdapter, item, colorSchemeProp));
 				} else if (itemId == R.string.download_srtm_maps) {
 					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.TERRAIN);
 					closeDashboard(mapActivity);
 				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
-					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, () -> {
-						item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
-						uiAdapter.onDataSetChanged();
-						mapActivity.refreshMapComplete();
-					});
+					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref,
+							() -> onPropertyValueSelected(uiAdapter, item, contourWidthProp));
 				} else if (contourDensityProp != null && itemId == contourDensityName.hashCode()) {
-					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref, () -> {
-						item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
-						uiAdapter.onDataSetChanged();
-						mapActivity.refreshMapComplete();
-					});
+					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref,
+							() -> onPropertyValueSelected(uiAdapter, item, contourDensityProp));
 				}
 				return false;
 			}
+
+			private void onPropertyValueSelected(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                                     @NonNull ContextMenuItem item,
+			                                     @NonNull RenderingRuleProperty property) {
+				item.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, property));
+				uiAdapter.onDataSetChanged();
+				mapActivity.refreshMapComplete();
+			}
 		};
 
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int toggleIconColorId;
 		int toggleIconId;
 		if (selected) {
@@ -170,20 +168,20 @@ public class ContourLinesMenu {
 					.setTitleId(showZoomLevelStringId, mapActivity)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow)
 					.setIcon(R.drawable.ic_action_map_magnifier)
-					.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref))
+					.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourLinesProp))
 					.setListener(l));
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitleId(colorSchemeStringId, mapActivity)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow)
 					.setIcon(R.drawable.ic_action_appearance)
-					.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref))
+					.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, colorSchemeProp))
 					.setListener(l));
 			if (contourWidthProp != null) {
 				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitle(contourWidthName)
 						.setLayout(R.layout.list_item_single_line_descrition_narrow)
 						.setIcon(R.drawable.ic_action_gpx_width_thin)
-						.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref))
+						.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourWidthProp))
 						.setListener(l));
 			}
 			if (contourDensityProp != null) {
@@ -191,7 +189,7 @@ public class ContourLinesMenu {
 						.setTitle(contourDensityName)
 						.setLayout(R.layout.list_item_single_line_descrition_narrow)
 						.setIcon(R.drawable.ic_plugin_srtm)
-						.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref))
+						.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, contourDensityProp))
 						.setListener(l));
 			}
 		}
@@ -228,7 +226,7 @@ public class ContourLinesMenu {
 					List<IndexItem> srtms = DownloadResources.findIndexItemsAt(
 							app, mapActivity.getMapLocation(), DownloadActivityType.SRTM_COUNTRY_FILE,
 							false, 1, true);
-					SrtmDownloadItem srtmDownloadItem = convertToSrtmDownloadItem(srtms);
+					SrtmDownloadItem srtmDownloadItem = convertToSrtmDownloadItem(app, srtms);
 					if (srtmDownloadItem != null) {
 						contextMenuAdapter.addItem(createDownloadSrtmMapsItem(mapActivity));
 						contextMenuAdapter.addItem(createSrtmDownloadItem(mapActivity, srtmDownloadItem));
@@ -253,14 +251,15 @@ public class ContourLinesMenu {
 	}
 
 	@Nullable
-	private static SrtmDownloadItem convertToSrtmDownloadItem(List<IndexItem> srtms) {
+	private static SrtmDownloadItem convertToSrtmDownloadItem(@NonNull OsmandApplication app, List<IndexItem> srtms) {
 		if (Algorithms.isEmpty(srtms)) {
 			return null;
 		}
 		List<DownloadItem> individualResources = srtms.get(0).getRelatedGroup().getIndividualDownloadItems();
 		for (DownloadItem downloadItem : individualResources) {
-			if (downloadItem instanceof SrtmDownloadItem) {
-				return (SrtmDownloadItem) downloadItem;
+			if (downloadItem instanceof SrtmDownloadItem srtmDownloadItem) {
+				srtmDownloadItem.updateMetric(app);
+				return srtmDownloadItem;
 			}
 		}
 		return null;

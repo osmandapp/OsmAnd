@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -29,7 +29,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/map_widget_icon_margin"
-                android:layout_marginRight="@dimen/map_widget_icon_margin"
                 android:maxLines="1"
                 android:minWidth="10dp"
                 android:textColor="?android:attr/textColorPrimary"
@@ -42,9 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/widget_text"
                 android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
                 android:layout_toEndOf="@+id/widget_text"
-                android:layout_toRightOf="@+id/widget_text"
                 android:maxLines="1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="@dimen/map_widget_text_size_small"
@@ -55,15 +52,14 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/content_padding_half"
-            android:layout_marginLeft="@dimen/content_padding_half">
+            android:layout_marginStart="@dimen/content_padding_half">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image"
                 android:layout_width="@dimen/context_menu_transport_icon_size"
                 android:layout_height="@dimen/context_menu_transport_icon_size"
                 android:layout_gravity="center_vertical|end"
-                osmand:tint="?attr/default_icon_color"
+                app:tint="?attr/default_icon_color"
                 tools:src="@drawable/ic_action_track_16" />
 
         </FrameLayout>

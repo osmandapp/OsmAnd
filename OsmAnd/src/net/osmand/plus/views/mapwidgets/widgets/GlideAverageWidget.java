@@ -58,7 +58,13 @@ public class GlideAverageWidget extends GlideBaseWidget {
 
 	@Override
 	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
-		registerMeasuredIntervalPref(customId).setModeValue(appMode, measuredIntervalPref.getModeValue(appMode));
+		copySettingsFromMode(appMode, appMode, customId);
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		registerMeasuredIntervalPref(customId).setModeValue(appMode, measuredIntervalPref.getModeValue(sourceAppMode));
 	}
 
 	@NonNull

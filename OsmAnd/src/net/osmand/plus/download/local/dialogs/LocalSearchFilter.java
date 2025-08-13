@@ -1,15 +1,15 @@
 package net.osmand.plus.download.local.dialogs;
 
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS;
+
 import android.widget.Filter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.BaseLocalItem;
-import net.osmand.plus.download.local.LocalItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public final class LocalSearchFilter extends Filter {
 			results.values = items;
 			results.count = 1;
 		} else {
-			String namePart = constraint.toString();
-			NameStringMatcher matcher = new NameStringMatcher(namePart.trim(), StringMatcherMode.CHECK_CONTAINS);
+			String namePart = constraint.toString().trim();
+			NameStringMatcher matcher = new NameStringMatcher(namePart, CHECK_CONTAINS);
 			List<BaseLocalItem> localItems = new ArrayList<>();
 			for (BaseLocalItem item : items) {
 				if (matcher.matches(item.getName(app).toString())) {

@@ -27,7 +27,7 @@ class MeasurementToolBarController extends TopToolbarController {
 		setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 		setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 				R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
-		setCloseBtnVisible(false);
+		setCloseButtonVisible(false);
 		setSaveViewVisible(true);
 		setSingleLineTitle(true);
 		setSaveViewTextId(R.string.shared_string_done);

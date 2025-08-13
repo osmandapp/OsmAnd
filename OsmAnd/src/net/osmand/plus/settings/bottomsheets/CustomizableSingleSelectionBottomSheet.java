@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -18,6 +19,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.base.dialog.data.DisplayItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
@@ -84,17 +86,18 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 
 	@Override
 	protected boolean hideButtonsContainer() {
-		Boolean showBottomButtons = (Boolean) displayData.getExtra(SHOW_BOTTOM_BUTTONS);
-		return showBottomButtons == null || !showBottomButtons;
+		Boolean show = displayData != null ? (Boolean) displayData.getExtra(SHOW_BOTTOM_BUTTONS) : null;
+		return show == null || !show;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull String processId, boolean usedOnMap) {
+	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull String processId,
+	                                   @Nullable ApplicationMode appMode, boolean usedOnMap) {
 		try {
 			CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
 			fragment.setProcessId(processId);
+			fragment.setAppMode(appMode);
 			fragment.setUsedOnMap(usedOnMap);
-			fragment.show(fragmentManager, TAG);
+			fragment.show(manager, TAG);
 			return true;
 		} catch (RuntimeException e) {
 			return false;

@@ -96,7 +96,7 @@
     <string name="not_possible_to_send_to_telegram_chats">Não é possível enviar para bate-papo do Telegram:</string>
     <string name="not_sent_yet">Ainda não enviado</string>
     <string name="points_size">%1$d pontos</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>O app usa a API Telegram e precisa de uma conta do Telegram.</string>
+    <string name="welcome_descr"><![CDATA[<b>O OsmAnd Tracker</b> permite-o partilhar a sua localização e ver a dos outros no OsmAnd.<br/><br/>A aplicação usa a API do Telegram, por isso, é necessário ter uma conta no Telegram.]]></string>
     <string name="min_logging_distance_descr">Filtro: distância mínima para registrar um novo ponto</string>
     <string name="device_name_cannot_be_empty">O nome do aparelho não pode estar vazio</string>
     <string name="yard">yd</string>
@@ -263,7 +263,7 @@
     <string name="back_to_osmand">Voltar para OsmAnd</string>
     <string name="duration_ago">%1$s atrás</string>
     <string name="last_response_duration">Última resposta: %1$s atrás</string>
-    <string name="last_update_from_telegram_duration">Última atualização do Telegram: 1$s atrás</string>
+    <string name="last_update_from_telegram_duration">Última atualização do Telegram: %1$s atrás</string>
     <string name="last_response_date">Última resposta: %1$s</string>
     <string name="last_update_from_telegram_date">Última atualização do Telegram: %1$s</string>
     <string name="shared_string_error_short">ERR</string>
@@ -271,7 +271,6 @@
     <string name="logcat_buffer">Buffer de logcat</string>
     <string name="logcat_buffer_descr">Verifique e compartilhe registos detalhados da app</string>
     <string name="send_report">Enviar o relatório</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">Erro</string>
     <string name="send_live_location_error">Enviar erro de localização em tempo real: %1$s</string>
@@ -279,4 +278,5 @@
     <string name="location_source_summary">Por padrão, o OsmAnd instalado do Google Play usa os Google Play Services para determinar a localização.
 \n
 \nSe obter informações de localização imprecisas ou usa aparelho sem os Serviços do Google Play, tente mudar para a API do Android</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

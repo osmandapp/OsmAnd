@@ -2,6 +2,7 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.INDEX_REGION_BOUNDARIES;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
@@ -19,6 +21,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+
+import java.io.IOException;
 
 public class MapAppInitializeListener implements AppInitializeListener {
 
@@ -55,8 +59,20 @@ public class MapAppInitializeListener implements AppInitializeListener {
 		if (event == FAVORITES_INITIALIZED) {
 			activity.refreshMap();
 		}
+		if (event == INDEX_REGION_BOUNDARIES) {
+			if (app.getAppInitializer().isRoutingConfigInitialized()) {
+				activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+			}
+		}
 		if (event == ROUTING_CONFIG_INITIALIZED) {
-			activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+			boolean hasRegions = false;
+			try {
+				hasRegions = PlatformUtil.getOsmandRegions() != null;
+			} catch (IOException ignore) {
+			}
+			if (hasRegions) {
+				activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+			}
 		}
 		if (event == BROUTER_INITIALIZED) {
 			activity.getMapActions().updateDrawerMenu();

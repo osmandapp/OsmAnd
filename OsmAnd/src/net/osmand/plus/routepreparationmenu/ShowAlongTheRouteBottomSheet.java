@@ -86,12 +86,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(ctx));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
@@ -149,7 +144,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					ContentItem radiusItem = new RadiusItem(i);
 					headerItem.subItems.add(radiusItem);
 				}
-				if (tp != null && tp.size() > 0) {
+				if (tp != null && !tp.isEmpty()) {
 					for (int j = 0; j < tp.size(); j++) {
 						LocationPointWrapper pointWrapper = tp.get(j);
 						if (!waypointHelper.isPointPassed(pointWrapper)) {
@@ -247,32 +242,25 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				convertView = createItemForRadiusProximity(themedInflater, group.type);
 			} else if (child instanceof InfoItem) {
 				convertView = createInfoItem(themedInflater);
-			} else if (child instanceof PointItem) {
-				PointItem item = (PointItem) child;
+			} else if (child instanceof PointItem item) {
 				convertView = themedInflater.inflate(R.layout.along_the_route_point_item, parent, false);
-				WaypointDialogHelper.updatePointInfoView(app, mapActivity, convertView, item.point, true, nightMode, true, false);
+				WaypointDialogHelper.updatePointInfoView(mapActivity, convertView, item.point, true, nightMode, true, false);
 
-				convertView.findViewById(R.id.waypoint_container).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment fragment = getTargetFragment();
-						if (fragment != null) {
-							fragment.onActivityResult(getTargetRequestCode(), SHOW_CONTENT_ITEM_REQUEST_CODE, null);
-						}
-						dismiss();
-						WaypointDialogHelper.showOnMap(app, mapActivity, item.point.getPoint(), false);
+				convertView.findViewById(R.id.waypoint_container).setOnClickListener(v -> {
+					Fragment fragment = getTargetFragment();
+					if (fragment != null) {
+						fragment.onActivityResult(getTargetRequestCode(), SHOW_CONTENT_ITEM_REQUEST_CODE, null);
 					}
+					dismiss();
+					WaypointDialogHelper.showOnMap(app, mapActivity, item.point.getPoint(), false);
 				});
 
 				ImageButton remove = convertView.findViewById(R.id.info_close);
 				remove.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
-				remove.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						app.getWaypointHelper().removeVisibleLocationPoint(item.point);
-						group.subItems.remove(item);
-						adapter.notifyDataSetChanged();
-					}
+				remove.setOnClickListener(v -> {
+					app.getWaypointHelper().removeVisibleLocationPoint(item.point);
+					group.subItems.remove(item);
+					adapter.notifyDataSetChanged();
 				});
 			}
 
@@ -480,70 +468,21 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		});
 	}
 
-	private void enableType(int type,
-	                        boolean enable) {
-		new EnableWaypointsTypeTask(this, type, enable).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	private void enableType(int type, boolean enable) {
+		waypointHelper.switchWaypointTypeAsync(type, enable, () -> {
+			if (isAdded()) {
+				updateAdapter();
+				updateMenu();
+			}
+		});
 	}
 
 	private void recalculatePoints(int type) {
-		new RecalculatePointsTask(this, type).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	private static class RecalculatePointsTask extends AsyncTask<Void, Void, Void> {
-
-		private final OsmandApplication app;
-		private final WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
-		private final int type;
-
-		RecalculatePointsTask(ShowAlongTheRouteBottomSheet fragment, int type) {
-			this.app = fragment.getMyApplication();
-			this.fragmentRef = new WeakReference<>(fragment);
-			this.type = type;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			app.getWaypointHelper().recalculatePoints(type);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			ShowAlongTheRouteBottomSheet fragment = fragmentRef.get();
-			if (fragment != null) {
-				fragment.updateAdapter();
+		waypointHelper.recalculatePointsAsync(type, () -> {
+			if (isAdded()) {
+				updateAdapter();
 			}
-		}
-	}
-
-	private static class EnableWaypointsTypeTask extends AsyncTask<Void, Void, Void> {
-
-		private final OsmandApplication app;
-		private final WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
-		private final int type;
-		private final boolean enable;
-
-		EnableWaypointsTypeTask(ShowAlongTheRouteBottomSheet fragment, int type, boolean enable) {
-			this.app = fragment.getMyApplication();
-			this.fragmentRef = new WeakReference<>(fragment);
-			this.type = type;
-			this.enable = enable;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			app.getWaypointHelper().enableWaypointType(type, enable);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			ShowAlongTheRouteBottomSheet fragment = fragmentRef.get();
-			if (fragment != null && fragment.isAdded()) {
-				fragment.updateAdapter();
-				fragment.updateMenu();
-			}
-		}
+		});
 	}
 
 	private static class ContentItem {

@@ -102,9 +102,6 @@
     <string name="voice_provider">Hałasavyja padkazkі</string>
     <string name="monitoring_settings">Zapіs padarožža</string>
     <string name="monitoring_settings_descr">Nalady zapisu vašych padarožžaŭ.</string>
-    <string name="record_plugin_description">Moduĺ aktyvuje funkcyi dlia zapisu i zachoŭvannia vašych sliadoŭ uručnuju naciskam na vidžet zapisu GPX na ekranie mapy, abo taksama aŭtamatyčna zapisvaje ŭsie vašy maršruty navihacyi ŭ fajl GPX. 
-\n 
-\nZapisanymi sliadami možna padzialicca z vašymi siabrami abo vykarystoŭvać ich dlia adsylki ŭ OSM. Spartsmieny mohuć vykarystoŭvać zapisanyja sliady dlia kantroliu za treniroŭkami. Niekatory bazavy analiz trekaŭ moža być vykanany niepasredna ŭ OsmAnd, napryklad, čas prachodžannia kruhu, siaredniaja chutkasć i h.d., treki, viadoma, pazniej taksama mohuć być praanalizavany ŭ specyjaĺnych instrumientach analizu inšych vytvorcaŭ.</string>
     <string name="record_plugin_name">Zapіs padarožža</string>
     <string name="int_hour">h</string>
     <string name="duration">Praciahłaść</string>
@@ -142,7 +139,6 @@
     <string name="rendering_attr_buildings15zoom_name">Budynkі na maštabie 15</string>
     <string name="rendering_attr_moreDetailed_name">Bolš padrabiazna</string>
     <string name="rendering_attr_lessDetailed_name">Mienš padrabiazna</string>
-    <string name="rendering_attr_hideAccess_name">Abmiežavańnі dostupu</string>
     <string name="rendering_attr_showAccess_name">Pakazać abmiežavańnі dostupu і apłatu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Adlustroŭvać jakaść daroh</string>
     <string name="rendering_attr_showSurfaces_name">Adlustroŭvać typ pakryćcia</string>
@@ -185,8 +181,7 @@
     <string name="gpx_selection_segment_title">Adrezak</string>
     <string name="gpx_selection_number_of_points">%1$s punktaŭ</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
-    <string name="gpx_selection_route_points">%1$s 
-Punktaŭ maršrutu %2$s</string>
+    <string name="gpx_selection_route_points">%1$s Punktaŭ maršrutu %2$s</string>
     <string name="gpx_selection_points">%1$s
 \nPunkty</string>
     <string name="gpx_selection_track">%1$s 
@@ -345,7 +340,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="driving_region_us">ZŠA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Eŭropa, Azіja, Łacinskaja Amieryka dy inšyja</string>
-    <string name="driving_region_uk">Vialikabrytanija, Indyija dy inšyja</string>
     <string name="speak_title">Ahałošvać…</string>
     <string name="speak_descr">Ahalošvać nazvy vulic, darožnyja pierasciarohi (vymušanyja prypynki, liažačyja palicejskija), pierasciarohi ab kamierach chutkasci, abmiežavanni chutkasci.</string>
     <string name="speak_street_names">Nazvy vulic (TTS)</string>
@@ -485,9 +479,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>
     <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea-natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
     <string name="audionotes_plugin_name">Aŭdyjo/vіdea-natatkі</string>
-    <string name="srtm_plugin_description">Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Heta mahčyma spatrebiacca spartsmienam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovasci. (Zviarnicie ŭvahu, što dadzienyja vyšyń i reĺjefu asobnyja, dadatkova dastupnyja da spampoŭki, paslia aktyvacyi modulia.)
-\n 
-\nHlabaĺnyja dadzienyja (pamiž 70 ° na poŭnačy i 70 ° na poŭdni) hruntujucca na vymiarenniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumienta vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirannia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kasmičnych sistem Japonii (J-spacesystems).</string>
     <string name="srtm_plugin_name">Іzalinіі vyšyń</string>
     <string name="download_select_map_types">Іnšyja mapy</string>
     <string name="download_roads_only_item">Tolkі darohі</string>
@@ -605,8 +596,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="filterpoi_activity">Stvaryć fіltar POI</string>
     <string name="recalculate_route_to_your_location">Vіd transpartu:</string>
     <string name="select_navigation_mode">Vybierycie vіd transpartu</string>
-    <string name="day_night_info_description">Uzychod: %1$s 
-Zachod: %2$s</string>
+    <string name="day_night_info_description">Uzychod: %1$s Zachod: %2$s</string>
     <string name="day_night_info">Uzychod/zachod</string>
     <string name="map_widget_renderer">Styl mapy</string>
     <string name="layer_map_appearance">Skanfіhuravać ekran</string>
@@ -728,7 +718,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="plugins_screen">Dadatkovyja moduli</string>
     <string name="prefs_plugins_descr">Moduli aktyvujuć dadatkovyja nalady i mahčymasci.</string>
     <string name="prefs_plugins">Dadatkovyja moduli</string>
-    <string name="osm_editing_plugin_description">Z dapamohaj hetaha modula OsmAnd moža być vykarystany dla palapšeńnia OSM praz stvareńnie abo źmienu abjektaŭ OSM POI, adkryćcio abo kamientujučy OSM natatki, a taksama adsyłać zapіsanyja GPX-fajły. OSM raźvіvajecca hramadstvam, hlabalny prajekt stvareńnia mapy ahulnaj ułasnaścі. Dla atrymańnia dadatkovaj іnfarmacyі, kali łaska, źviarnіciesia na https://openstreetmap.org. Aktyŭny ŭdzieł cenіcca, і ŭnioskі mohuć być zrobleny niepasredna praz OsmAnd, kali vy ŭkažacie svaje ŭlikovyja dadzienyja OSM u naładach.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Viektarnyja mapy mohuć adlustroŭvacca chutčej. Padtrymlivajecca nie ŭsіmі pryładamі.</string>
     <string name="play_commands_of_currently_selected_voice">Abrać holas i prajhrać padkazki</string>
     <string name="debugging_and_development">Dla raspracoŭščykaŭ OsmAnd</string>
@@ -1774,15 +1763,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \n 
 \nHety vyhliad moža być deaktyvavany tut, abo šliacham zmieny «Styliu mapy» u razdzielie «Nalady mapy» pa žadańni.</string>
     <string name="plugin_nautical_name">Marskіja mapy</string>
-    <string name="plugin_nautical_descr">Aktyvacyja hetaha styliu mianiaje vyhliad mapy na Marskuju, na jakoj pakazvajucca ŭsie navihacyjnyja znaki i simvaly. 
-\n
-\nFajl z dadzienymi źmiaščaje ŭsie navihacyjnyja simvaly ŭ vyhliadzie adzinaha fajlu z nazvaj \"World seamarks\". 
-\n
-\nHety styĺ moža być skasavany šliacham jaho vykliučeńnia tut abo źmienaju ŭ punkcie \"Styĺ mapy\" mieniu \"Nalady mapy\" na patrebny.</string>
     <string name="plugin_ski_name">Łyžnyja mapy</string>
-    <string name="plugin_ski_descr">Moduĺ dlia OsmAnd daje vam dostup da dadzienych ab harnalyžnych trasach, maršrutach dlia biehavych lyž, aĺpijskich spuskach, funikuliorach i harnalyžnych pad\'jomnikach. Maršruty i spuski adznačany roznymi kolierami ŭ zaliežnasci ad ich skladanasci i namaliavanyja z vykarystanniem admyslovaha «zimovaha» styliu mapy, jaki zakliučajecca ŭ tym, što vykarystoŭvajucca «sniežnyja» koliery zimovaha piejzažu. 
-\n 
-\nU vypadku aktyvacyi hetaha vidu, styĺ mapy mianiajecca na «Winter and ski», pakazvajučy ŭsio detali piejzažu tak, jak jany vyhliadajuć zimoj. Taki (zimovy) vyhliad moža być admienieny aĺbo šliacham deaktyvacyi tut, aĺbo kali vy pamianiajecie «Styĺ mapy» u mieniu «Nalada mapy» na žadany vyhliad.</string>
+    <string name="plugin_ski_descr">Moduĺ dlia OsmAnd daje vam dostup da dadzienych ab harnalyžnych trasach, maršrutach dlia biehavych lyž, aĺpijskich spuskach, funikuliorach i harnalyžnych pad\'jomnikach. Maršruty i spuski adznačany roznymi kolierami ŭ zaliežnasci ad ich skladanasci i namaliavanyja z vykarystanniem admyslovaha «zimovaha» styliu mapy, jaki zakliučajecca ŭ tym, što vykarystoŭvajucca «sniežnyja» koliery zimovaha piejzažu. \n \nU vypadku aktyvacyi hetaha vidu, styĺ mapy mianiajecca na «Winter and ski», pakazvajučy ŭsio detali piejzažu tak, jak jany vyhliadajuć zimoj. Taki (zimovy) vyhliad moža być admienieny aĺbo šliacham deaktyvacyi tut, aĺbo kali vy pamianiajecie «Styĺ mapy» u mieniu «Nalada mapy» na žadany vyhliad.</string>
     <string name="rename_failed">Pierajmienavannie nie atrymalasia.</string>
     <string name="days_behind">d. tamu abnaŭlali</string>
     <string name="back_to_map">Viarnucca da mapy</string>
@@ -2028,8 +2010,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_auto_zoom">Aŭtamaštab mapy ŭkł/adkł</string>
     <string name="quick_action_auto_zoom_on">Ukliučyć aŭtamaštab mapy</string>
     <string name="quick_action_auto_zoom_off">Adkliučyć aŭtamaštab mapy</string>
-    <string name="quick_action_add_destination">Dadać miesca pryznačeńnia</string>
-    <string name="quick_action_replace_destination">Zamianić punkt pryznačeńnia</string>
     <string name="private_access_routing_req">Vaš punkt pryznačennia znachodzicca na pryvatnaj terytoryi. Dazvolić dostup da pryvatnych daroh dlia hetaj pajezdki?</string>
     <string name="subscribe_email_error">Pamyłka</string>
     <string name="depth_contour_descr">Konturnyja linii marskich hlybiń i marskija znaki.</string>
@@ -2105,7 +2085,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_action_name">Nazva dziejańnia</string>
     <string name="quick_action_btn_tutorial_title">Zmianić stanovišča knopki</string>
     <string name="quick_action_map_source_switch">Krynica mapy była źmieniena na \"%s\".</string>
-    <string name="quick_action_map_source">Zmianić krynicu mapy</string>
     <string name="quick_action_map_source_title">Krynicy mapaŭ</string>
     <string name="quick_action_map_source_action">Dadać krynicu mapy</string>
     <string name="quick_action_poi_list">Spis POI</string>
@@ -2113,14 +2092,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="configure_screen_quick_action">Chutkaje dziejańnie</string>
     <string name="quick_action_item_action">Dziejańnie %d</string>
     <string name="quick_action_item_screen">Ekran %d</string>
-    <string name="quick_action_add_marker">Dadać paznaku</string>
-    <string name="quick_action_add_poi">Dadać POI</string>
-    <string name="quick_action_map_style">Zmianić styl mapy</string>
     <string name="quick_action_map_style_switch">Styl mapy byŭ zmienieny na \"%s\".</string>
-    <string name="quick_action_take_audio_note">Novaja hukavaja natatka</string>
-    <string name="quick_action_take_video_note">Novaja videa-natatka</string>
-    <string name="quick_action_take_photo_note">Novaja fota-natatka</string>
-    <string name="quick_action_add_osm_bug">Dadać OSM natatku</string>
     <string name="quick_action_navigation_voice">Holas ukl/adkl</string>
     <string name="shared_string_add_photos">Dadać fatahrafii</string>
     <string name="no_photos_descr">My nie majem fatahrafij dlia hetaha miesca.</string>
@@ -2128,14 +2100,11 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="mapillary">Мapillary</string>
     <string name="quick_action_map_underlay_action">Dadać padkladku</string>
     <string name="quick_action_navigation_voice_on">Pryhlušyć Holas</string>
-    <string name="quick_action_add_parking">Dadać miesca parkoŭki</string>
     <string name="quick_action_edit_action">Redahavać dziejańnie</string>
-    <string name="quick_action_add_favorite">Dadać upadabanaje</string>
     <string name="dialog_add_action_title">Dadać dziejańnie</string>
     <string name="quick_actions_delete">Vydalić dziejańnie</string>
     <string name="quick_actions_delete_text">Vy ŭpeŭnienyja, što chočacie vydalić dziejańnie \"%s\"?</string>
     <string name="quick_action_navigation_voice_off">Ukliučyć Holas</string>
-    <string name="quick_action_add_first_intermediate">Dadać pieršy pramiežkavy punkt</string>
     <string name="quick_action_interim_dialog">Pakazać pramiežkavy dyjaloh</string>
     <string name="quick_action_poi_show">Pakazać %1$s</string>
     <string name="quick_action_poi_hide">Schavać %1$s</string>
@@ -2145,12 +2114,10 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_map_style_action">Dadać styl mapy</string>
     <string name="quick_action_empty_param_error">Zapoŭnicie ŭsie paramietry</string>
     <string name="quick_action_map_styles">Styli mapy</string>
-    <string name="quick_action_map_overlay">Zmianić mapu pakryćcia</string>
     <string name="quick_action_map_overlay_title">Mapy pakryćcia</string>
     <string name="quick_action_map_overlay_action">Dadać nakładku</string>
     <string name="quick_action_map_overlay_switch">Nakładka mapy była źmieniena na \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Padkładka mapy była źmieniena na \"%s\".</string>
-    <string name="quick_action_map_underlay">Zmianić padkładku mapy</string>
     <string name="quick_action_map_underlay_title">Padkładki mapy</string>
     <string name="no_underlay">Biez padkładki</string>
     <string name="no_overlay">Biez nakładki</string>
@@ -2200,7 +2167,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_value_low_name">Nizkaja</string>
     <string name="rendering_attr_contourWidth_name">Taŭščynia haryzantaliaŭ</string>
     <string name="rendering_value_high_name">Vysokaja</string>
-    <string name="wiki_around">Blizkija artykuly ŭ Vikipedyi</string>
     <string name="route_roundabout_short">Zbočcie na %1$d źjeździe</string>
     <string name="gpx_no_tracks_title">U vas jašče niama GPX-fajlaŭ</string>
     <string name="gpx_no_tracks_title_folder">Vy taksama možacie dadać GPX-fajly ŭ tečku</string>
@@ -2383,7 +2349,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_to">Da</string>
     <string name="mapillary_menu_date_from">Ad</string>
     <string name="mapillary_menu_descr_dates">Pahliadzieć toĺki dadanyja vyjavy</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
     <string name="mapillary_menu_descr_username">Pahliadzieć toĺki vyjavy dadanyja</string>
     <string name="mapillary_menu_title_username">Imia karystaĺnika</string>
@@ -2718,8 +2684,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
     <string name="point_deleted">Kropka %1$s vydalienaja</string>
     <string name="shared_string_world">Sviet</string>
-    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n
-        \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
+    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
     <string name="send_search_query">Adpravić pašukovy zapyt?</string>
     <string name="increase_search_radius_to">Pavialičyć radyus pošuku da %1$s</string>
     <string name="thank_you_for_feedback">Dziakuj za Vaš vodhuk</string>

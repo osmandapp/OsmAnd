@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
 				android:maxLines="1"
 				android:textColor="?attr/wikivoyage_primary_text_color"
 				android:textSize="@dimen/travel_card_primary_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="Download file" />
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -54,7 +54,7 @@
 			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
 			android:textColor="@color/text_color_secondary_light"
 			android:textSize="@dimen/travel_card_primary_text_size"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="@string/maps_you_need_descr"/>
 
 	</LinearLayout>
@@ -99,7 +99,7 @@
 				android:maxLines="1"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute"
 				tools:text="Later"/>
 
@@ -129,7 +129,7 @@
 				android:maxLines="1"
 				android:textColor="?attr/wikivoyage_primary_btn_text_color"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute"
 				tools:text="Download all"/>
 

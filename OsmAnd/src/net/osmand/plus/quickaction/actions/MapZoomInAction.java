@@ -12,7 +12,8 @@ public class MapZoomInAction extends BaseMapZoomAction {
 			"map.zoom.in", MapZoomInAction.class)
 			.nameRes(R.string.key_event_action_zoom_in)
 			.iconRes(R.drawable.ic_action_magnifier_plus).nonEditable()
-			.category(QuickActionType.MAP_INTERACTIONS);
+			.category(QuickActionType.MAP_INTERACTIONS)
+			.nameActionRes(R.string.shared_string_map);
 
 	public MapZoomInAction() {
 		super(TYPE);

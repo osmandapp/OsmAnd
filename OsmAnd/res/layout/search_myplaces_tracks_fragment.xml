@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -30,7 +30,7 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
 					android:contentDescription="@string/back"
-					osmand:srcCompat="@drawable/ic_arrow_back" />
+					app:srcCompat="@drawable/ic_arrow_back" />
 
 				<FrameLayout
 					android:layout_width="0dp"
@@ -45,7 +45,7 @@
 						android:letterSpacing="@dimen/text_button_letter_spacing"
 						android:text="asdasd"
 						android:textSize="@dimen/dialog_header_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<include
 						layout="@layout/search_text_layout"
@@ -61,7 +61,7 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
 					android:contentDescription="@string/back"
-					osmand:srcCompat="@drawable/ic_action_select_all" />
+					app:srcCompat="@drawable/ic_action_select_all" />
 
 				<ImageButton
 					android:id="@+id/action_button"
@@ -70,7 +70,7 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
 					android:contentDescription="@string/back"
-					osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+					app:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			</LinearLayout>
 
@@ -106,9 +106,9 @@
 			android:id="@+id/reset_all_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			osmand:dialogButtonTitle="@string/shared_string_reset_all"
-			osmand:dialogButtonType="tertiary"
-			osmand:dialogButtonUseUppercaseTitle="true" />
+			app:dialogButtonTitle="@string/shared_string_reset_all"
+			app:dialogButtonType="tertiary"
+			app:dialogButtonUseUppercaseTitle="true" />
 
 		<View
 			android:layout_width="0dp"
@@ -119,9 +119,9 @@
 			android:id="@+id/save_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			osmand:dialogButtonTitle="@string/shared_string_save"
-			osmand:dialogButtonType="tertiary"
-			osmand:dialogButtonUseUppercaseTitle="true" />
+			app:dialogButtonTitle="@string/shared_string_save"
+			app:dialogButtonType="tertiary"
+			app:dialogButtonUseUppercaseTitle="true" />
 
 	</LinearLayout>
 

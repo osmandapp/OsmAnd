@@ -58,7 +58,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, plugin.getAnyConnectedDeviceId()));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.any_connected);
-			holder.icon.setImageDrawable(uiUtils.getIcon(widgetDataFieldType.getIconId(), nightMode));
+			holder.icon.setImageDrawable(uiUtils.getIcon(widgetDataFieldType.disconnectedIconId, nightMode));
 		} else if (itemType == DEVICE_ITEM_TYPE) {
 			super.onBindViewHolder(holder, position);
 			holder.description.setVisibility(View.VISIBLE);

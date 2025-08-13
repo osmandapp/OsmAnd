@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
 		android:paddingBottom="@dimen/dash_margin"
 		android:textSize="@dimen/default_sub_text_size_small"
 		android:letterSpacing="@dimen/text_button_letter_spacing"
-		osmand:typeface="@string/font_roboto_medium"
+		app:typefaceWeight="medium"
 		tools:text="123 m, 12 km/h"
 		tools:textColor="@color/gpx_chart_blue" />
 

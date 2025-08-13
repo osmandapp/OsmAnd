@@ -2,7 +2,6 @@ package net.osmand.plus.helpers;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
@@ -15,7 +14,6 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.views.layers.MapActionsHelper;
 
 public class MapPermissionsResultCallback implements OnRequestPermissionsResultCallback {
 
@@ -30,15 +28,17 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+			@NonNull int[] grantResults) {
 		if (grantResults.length > 0) {
 			OsmandApplication app = activity.getMyApplication();
 
 			PluginsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			activity.getMapActions().onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-			MapActionsHelper controlsHelper = activity.getMapLayers().getMapActionsHelper();
-			if (controlsHelper != null) {
-				controlsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			OnRequestPermissionsResultCallback aaCallback = app.getCarAppPermissionListener();
+			if (aaCallback != null) {
+				aaCallback.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
 			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
@@ -47,9 +47,7 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 				permissionAsked = true;
 				permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 				if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-					Toast.makeText(activity,
-							R.string.missing_write_external_storage_permission,
-							Toast.LENGTH_LONG).show();
+					app.showToastMessage(R.string.missing_write_external_storage_permission);
 				}
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
 				app.runInUIThread(() -> {

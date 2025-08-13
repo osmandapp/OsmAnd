@@ -1,7 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,32 +9,11 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
-import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
-import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
-import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
+import net.osmand.plus.views.mapwidgets.widgets.*;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesMapCenterWidget;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesCurrentLocationWidget;
-import net.osmand.plus.views.mapwidgets.widgets.CurrentSpeedWidget;
-import net.osmand.plus.views.mapwidgets.widgets.CurrentTimeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToDestinationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToIntermediateDestinationWidget;
-import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
-import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
-import net.osmand.plus.views.mapwidgets.widgets.GlideTargetWidget;
-import net.osmand.plus.views.mapwidgets.widgets.GpsInfoWidget;
-import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MaxSpeedWidget;
-import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
-import net.osmand.plus.views.mapwidgets.widgets.RadiusRulerWidget;
-import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
-import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
-import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
+import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
@@ -55,24 +34,27 @@ public class MapWidgetsFactory {
 		return createMapWidget(null, widgetType, null);
 	}
 
-	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
+	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType,
+			@Nullable WidgetsPanel panel) {
 		switch (widgetType) {
 			case NEXT_TURN:
-				return new NextTurnWidget(mapActivity, false);
+				return new NextTurnWidget(mapActivity, customId, panel, false);
 			case SMALL_NEXT_TURN:
-				return new NextTurnWidget(mapActivity, true);
+				return new NextTurnWidget(mapActivity, customId, panel, true);
 			case SECOND_NEXT_TURN:
-				return new SecondNextTurnWidget(mapActivity);
+				return new SecondNextTurnWidget(mapActivity, customId, panel);
 			case COORDINATES_CURRENT_LOCATION:
-				return new CoordinatesCurrentLocationWidget(mapActivity);
+				return new CoordinatesCurrentLocationWidget(mapActivity, customId, panel);
 			case COORDINATES_MAP_CENTER:
-				return new CoordinatesMapCenterWidget(mapActivity);
+				return new CoordinatesMapCenterWidget(mapActivity, customId, panel);
 			case STREET_NAME:
-				return new StreetNameWidget(mapActivity);
+				return new StreetNameWidget(mapActivity, customId, panel);
 			case MARKERS_TOP_BAR:
-				return new MapMarkersBarWidget(mapActivity, customId);
+				return new MapMarkersBarWidget(mapActivity, customId, panel);
 			case LANES:
-				return new LanesWidget(mapActivity);
+				return new LanesWidget(mapActivity, customId, panel);
+			case ROUTE_INFO:
+				return new RouteInfoWidget(mapActivity, customId, panel);
 			case DISTANCE_TO_DESTINATION:
 				return new DistanceToDestinationWidget(mapActivity, customId, panel);
 			case INTERMEDIATE_DESTINATION:
@@ -112,7 +94,7 @@ public class MapWidgetsFactory {
 			case BATTERY:
 				return new BatteryWidget(mapActivity, customId, panel);
 			case RADIUS_RULER:
-				return new RadiusRulerWidget(mapActivity);
+				return new RadiusRulerWidget(mapActivity, customId, panel);
 			case SUNRISE:
 				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUNRISE);
 				return new SunriseSunsetWidget(mapActivity, sunriseState, customId, panel);
@@ -128,7 +110,7 @@ public class MapWidgetsFactory {
 			case GLIDE_AVERAGE:
 				return new GlideAverageWidget(mapActivity, customId, panel);
 			case ELEVATION_PROFILE:
-				return new ElevationProfileWidget(mapActivity, customId);
+				return new ElevationProfileWidget(mapActivity, customId, panel);
 			case AIDL_WIDGET:
 				return app.getAidlApi().askCreateExternalWidget(mapActivity, customId, panel);
 			default:

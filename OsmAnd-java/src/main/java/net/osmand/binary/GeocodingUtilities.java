@@ -1,11 +1,10 @@
 package net.osmand.binary;
 
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -17,7 +16,6 @@ import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
@@ -51,6 +49,9 @@ public class GeocodingUtilities {
 
 		@Override
 		public int compare(GeocodingResult o1, GeocodingResult o2) {
+			if ((int) o1.getDistance() == (int) o2.getDistance()) {
+				return Double.compare(o1.getCityDistance(), o2.getCityDistance());
+			}
 			return Double.compare(o1.getDistance(), o2.getDistance());
 		}
 	};
@@ -85,6 +86,7 @@ public class GeocodingUtilities {
 		public Street street;
 		public City city;
 		private double dist = -1;
+		private double cityDist = -1;
 
 		public LatLon getLocation() {
 			return connectionPoint;
@@ -108,6 +110,18 @@ public class GeocodingUtilities {
 				}
 			}
 			return dist;
+		}
+
+		public void resetDistance() {
+			dist = -1;
+			getDistance();
+		}
+
+		public double getCityDistance() {
+			if (cityDist == -1 && city != null && searchPoint != null) {
+				cityDist = MapUtils.getDistance(city.getLocation(), searchPoint);
+			}
+			return cityDist;
 		}
 
 		@Override
@@ -185,9 +199,9 @@ public class GeocodingUtilities {
 		List<String> ls = new ArrayList<String>();
 		int beginning = 0;
 		for (int i = 1; i < s.length(); i++) {
-			if (s.charAt(i) == ' ') {
+			if (Character.isWhitespace(s.charAt(i)) || s.charAt(i) == '-') {
 				addWord(ls, s.substring(beginning, i), addCommonWords);
-				beginning = i;
+				beginning = i + 1;
 			} else if (s.charAt(i) == '(') {
 				addWord(ls, s.substring(beginning, i), addCommonWords);
 				while (i < s.length()) {
@@ -254,6 +268,7 @@ public class GeocodingUtilities {
 									// set connection point to sort
 									rs.connectionPoint = rs.street.getLocation();
 									rs.city = rs.street.getCity();
+									rs.dist = d;
 									streetsList.add(rs);
 									return true;
 								}
@@ -281,10 +296,10 @@ public class GeocodingUtilities {
 			for (GeocodingResult street : streetsList) {
 				if (streetDistance == 0) {
 					streetDistance = street.getDistance();
-				} else if (streetDistance > 0 && street.getDistance() > streetDistance + DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME && 
-						isBuildingFound) {
+				} else if (isBuildingFound && street.getDistance() > streetDistance + DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME) {
 					continue;
 				}
+				street.resetDistance();//reset to road projection
 				street.connectionPoint = road.connectionPoint;
 				final List<GeocodingResult> streetBuildings = loadStreetBuildings(road, reader, street);
 				Collections.sort(streetBuildings, DISTANCE_COMPARATOR);
@@ -435,12 +450,7 @@ public class GeocodingUtilities {
 				it.remove();
 			}
 		}
-		Collections.sort(complete, new Comparator<GeocodingResult>() {
-			@Override
-			public int compare(GeocodingResult o1, GeocodingResult o2) {
-				return Double.compare(o1.getDistance(), o2.getDistance());
-			}
-		});
+		Collections.sort(complete, DISTANCE_COMPARATOR);
 		return complete;
 
 	}

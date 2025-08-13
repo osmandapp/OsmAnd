@@ -6,8 +6,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.openlocationcode.OpenLocationCode;
-
 import net.osmand.LocationConvert;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -16,6 +14,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
@@ -36,6 +35,7 @@ public class PointDescription {
 	private double lat;
 	private double lon;
 
+	public static final String POINT_TYPE_NEARBY_PLACE = "nearby_place";
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
 	public static final String POINT_TYPE_GPX = "gpx";
@@ -247,15 +247,10 @@ public class PointDescription {
 		return results;
 	}
 
-	public static String getLocationNamePlain(Context ctx, double lat, double lon) {
-		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
-		int f = st.COORDINATES_FORMAT.get();
-		return OsmAndFormatter.getFormattedCoordinates(lat, lon, f);
-
-	}
-
-	public static String getLocationOlcName(double lat, double lon) {
-		return OpenLocationCode.encode(lat, lon);
+	public static String getLocationNamePlain(@NonNull Context ctx, double lat, double lon) {
+		OsmandApplication app = AndroidUtils.getApp(ctx);
+		int format = app.getSettings().COORDINATES_FORMAT.get();
+		return OsmAndFormatter.getFormattedCoordinates(lat, lon, format);
 	}
 
 	public boolean contextMenuDisabled() {
@@ -268,6 +263,11 @@ public class PointDescription {
 
 	public boolean isAddress() {
 		return POINT_TYPE_ADDRESS.equals(type);
+	}
+
+	public boolean isAddressTypeCity() {
+		return POINT_TYPE_ADDRESS.equals(type) &&
+				("City".equals(typeName) || "Town".equals(typeName) || "Village".equals(typeName));
 	}
 
 	public boolean isWpt() {
@@ -434,26 +434,20 @@ public class PointDescription {
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 
 	public static String formatToHumanString(Context ctx, int format) {
-		switch (format) {
-			case LocationConvert.FORMAT_DEGREES:
-				return ctx.getString(R.string.navigate_point_format_D);
-			case LocationConvert.FORMAT_MINUTES:
-				return ctx.getString(R.string.navigate_point_format_DM);
-			case LocationConvert.FORMAT_SECONDS:
-				return ctx.getString(R.string.navigate_point_format_DMS);
-			case LocationConvert.UTM_FORMAT:
-				return "UTM";
-			case LocationConvert.OLC_FORMAT:
-				return "OLC";
-			case LocationConvert.MGRS_FORMAT:
-				return "MGRS";
-			case LocationConvert.SWISS_GRID_FORMAT:
-				return ctx.getString(R.string.navigate_point_format_swiss_grid);
-			case LocationConvert.SWISS_GRID_PLUS_FORMAT:
-				return ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
-			default:
-				return "Unknown format";
-		}
+		return switch (format) {
+			case LocationConvert.FORMAT_DEGREES -> ctx.getString(R.string.navigate_point_format_D);
+			case LocationConvert.FORMAT_MINUTES -> ctx.getString(R.string.navigate_point_format_DM);
+			case LocationConvert.FORMAT_SECONDS ->
+					ctx.getString(R.string.navigate_point_format_DMS);
+			case LocationConvert.UTM_FORMAT -> "UTM";
+			case LocationConvert.OLC_FORMAT -> "OLC";
+			case LocationConvert.MGRS_FORMAT -> "MGRS";
+			case LocationConvert.SWISS_GRID_FORMAT ->
+					ctx.getString(R.string.navigate_point_format_swiss_grid);
+			case LocationConvert.SWISS_GRID_PLUS_FORMAT ->
+					ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
+			default -> "Unknown format";
+		};
 	}
 
 	@DrawableRes

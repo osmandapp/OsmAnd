@@ -3,10 +3,12 @@ package net.osmand.plus.chooseplan.button;
 import android.text.Spannable;
 import android.util.Pair;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -97,7 +99,7 @@ public class PurchasingUtils {
 	                                   @StringRes int titleId,
 	                                   @StringRes int descriptionId) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			ChoosePlanFragment.showInstance(mapActivity, feature);
@@ -121,5 +123,10 @@ public class PurchasingUtils {
 				iterator.remove();
 			}
 		}
+	}
+
+	@DrawableRes
+	public static int getProFeatureIconId(boolean nightMode) {
+		return nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day;
 	}
 }

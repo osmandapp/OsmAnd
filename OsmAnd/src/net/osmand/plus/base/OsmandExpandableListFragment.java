@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -70,7 +71,7 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment im
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType) {
-		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(isNightMode());
 		return createMenuItem(m, id, titleRes, iconId, menuItemType, false, color);
 	}
 
@@ -89,10 +90,13 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment im
 		return menuItem;
 	}
 
-
-	public boolean isLightActionBar() {
+	public boolean isNightMode() {
 		Activity activity = getActivity();
-		return activity == null || ((OsmandApplication) activity.getApplication()).getSettings().isLightContent();
+		if (activity != null) {
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			return app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		}
+		return false;
 	}
 
 	public void collapseTrees(int count) {

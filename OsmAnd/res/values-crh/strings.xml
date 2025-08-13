@@ -1,1 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources/>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="disable_map_layers">Harita qatlamlarnı söndür</string>
+    <string name="disable_map_layers_descr">Vektör haritasınıñ üstündeki bütün qatlamlarnı söndür (tekrar başlatılmaq kerek).</string>
+    <string name="change_terrain_color_scheme">Reliefniñ renk şemasını deñiştir</string>
+    <string name="play_weather_forecast">Ava tahminini köster</string>
+    <string name="rendering_value_dark_orange_name">Qaranlıq turunç</string>
+    <string name="wall_height">Divarnıñ yüksekligi</string>
+    <string name="key_assignment_add_action">Areket qoşmaq</string>
+    <string name="action_icon">Faaliyet timsalı</string>
+    <string name="steps_per_minute_unit">Daqiqağa adımlar</string>
+    <string name="travel_topics">Seyaat mevzuları</string>
+    <string name="height_legend_description">Reliefni körsetmek içün yükseklikniñ renkli haritaları qullanıla.</string>
+    <string name="allow_display_on_top">Üstinde köstermege ruhset ber</string>
+    <string name="show_debug_info">Ayarlama malümatını köster</string>
+    <string name="map_text">Haritanıñ metini</string>
+</resources>

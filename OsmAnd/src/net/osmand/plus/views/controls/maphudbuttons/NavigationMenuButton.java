@@ -1,63 +1,61 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.layers.MapActionsHelper;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.NavigationMenuButtonState;
 
 public class NavigationMenuButton extends MapButton {
 
 	private final RoutingHelper routingHelper;
+	private final NavigationMenuButtonState buttonState;
 
-	public NavigationMenuButton(@NonNull MapActivity mapActivity) {
-		super(mapActivity, mapActivity.findViewById(R.id.map_route_info_button), ROUTE_PLANNING_HUD_ID, false);
+	public NavigationMenuButton(@NonNull Context context) {
+		this(context, null);
+	}
+
+	public NavigationMenuButton(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public NavigationMenuButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
 		routingHelper = app.getRoutingHelper();
-		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
-		setBackground(R.drawable.btn_round, R.drawable.btn_round_night);
+		buttonState = app.getMapButtonsHelper().getNavigationMenuButtonState();
+
 		setOnClickListener(v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
-			MapActionsHelper controlsHelper = app.getOsmandMap().getMapLayers().getMapActionsHelper();
-			if (controlsHelper != null) {
-				controlsHelper.doRoute();
-			}
+			app.getOsmandMap().getMapActions().doRoute();
 		});
 	}
 
+	@Nullable
 	@Override
-	protected void updateState(boolean nightMode) {
-		int routePlanningBtnImage = mapActivity.getMapRouteInfoMenu().getRoutePlanningBtnImage();
-		boolean planningRoute = routingHelper.isRoutePlanningMode();
-		boolean calculatingRoute = routingHelper.isRouteBeingCalculated();
-		boolean routeCalculated = routingHelper.isRouteCalculated();
-		if (routePlanningBtnImage != 0) {
-			setIconId(routePlanningBtnImage);
-			setIconColorId(R.color.color_myloc_distance);
-		} else if (routingHelper.isFollowingMode()) {
-			setIconId(R.drawable.ic_action_start_navigation);
-			setIconColorId(R.color.color_myloc_distance);
-		} else if (planningRoute || calculatingRoute || routeCalculated) {
-			setIconId(R.drawable.ic_action_gdirections_dark);
-			setIconColorId(R.color.color_myloc_distance);
+	public MapButtonState getButtonState() {
+		return buttonState;
+	}
+
+	@Override
+	protected void updateColors(boolean nightMode) {
+		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()
+				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated()) {
+			setIconColor(ColorUtilities.getColor(app, R.color.color_myloc_distance));
 		} else {
-			setIconId(R.drawable.ic_action_gdirections_dark);
-			resetIconColors();
+			setIconColor(ColorUtilities.getMapButtonIconColor(app, nightMode));
 		}
+		setBackgroundColors(ColorUtilities.getMapButtonBackgroundColor(getContext(), nightMode),
+				ColorUtilities.getMapButtonBackgroundPressedColor(getContext(), nightMode));
 	}
 
 	@Override
 	protected boolean shouldShow() {
-		return isShowBottomButtons();
-	}
-
-	@Override
-	protected void setDrawable(@NonNull Drawable drawable) {
-		super.setDrawable(AndroidUtils.getDrawableForDirection(app, drawable));
+		return showBottomButtons;
 	}
 }

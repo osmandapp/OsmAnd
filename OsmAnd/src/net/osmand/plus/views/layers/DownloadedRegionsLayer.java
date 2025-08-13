@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.PolygonBuilder;
 import net.osmand.core.jni.PolygonsCollection;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -36,12 +38,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -53,8 +52,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -62,15 +59,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection,
-		ResourceListener {
+public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider,
+		IContextMenuProviderSelection, ResourceListener {
 
 	private static final int ZOOM_THRESHOLD = 2;
 
@@ -90,10 +85,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private MapLayerData<List<BinaryMapDataObject>> data;
 	private WorldRegion selectedRegion;
 
-	private int lastCheckMapCx;
-	private int lastCheckMapCy;
-	private int lastCheckMapZoom;
-
 	private static final int ZOOM_TO_SHOW_MAP_NAMES = 6;
 	private static final int ZOOM_AFTER_BASEMAP = 12;
 
@@ -101,8 +92,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static final int ZOOM_TO_SHOW_BORDERS = 8;
 	private static final int ZOOM_TO_SHOW_SELECTION_ST = 3;
 	private static final int ZOOM_TO_SHOW_SELECTION = 8;
-	private static final int ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG = 9;
-	private static final int ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG = 11;
 
 	//OpenGL
 	private PolygonsCollection polygonsCollection;
@@ -116,6 +105,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private boolean cachedShowDownloadedMaps;
 	List<WorldRegion> downloadedRegions;
 	List<WorldRegion> backupedRegions;
+	private MapSuggestionController mapSuggestionController;
 
 	public static class DownloadMapObject {
 		private final BinaryMapDataObject dataObject;
@@ -168,23 +158,22 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		osmandRegions = rm.getOsmandRegions();
 		helper = new LocalIndexHelper(app);
 		cachedShowDownloadedMaps = isShowDownloadedMaps();
+		mapSuggestionController = new MapSuggestionController(view);
 
 		paintDownloaded = getPaint(getColor(R.color.region_uptodate));
 		paintSelected = getPaint(getColor(R.color.region_selected));
 		paintBackuped = getPaint(getColor(R.color.region_backuped));
 
 		textPaint = new TextPaint();
-		DisplayMetrics metrics = new DisplayMetrics();
-		AndroidUtils.getDisplay(app).getMetrics(metrics);
-		textPaint.setStrokeWidth(21 * metrics.scaledDensity);
-		textPaint.setAntiAlias(true);
-		textPaint.setTextAlign(Paint.Align.CENTER);
+
+		updatePaints();
 
 		pathDownloaded = new Path();
 		pathSelected = new Path();
 		pathBackuped = new Path();
 
-		data = new MapLayerData<List<BinaryMapDataObject>>() {
+
+		data = new MapLayerData<>() {
 
 			@Override
 			public void layerOnPostExecute() {
@@ -207,11 +196,26 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 
 			@Override
-			protected List<BinaryMapDataObject> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
-				return queryData(latLonBounds, zoom);
+			protected Pair<List<BinaryMapDataObject>, List<BinaryMapDataObject>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				List<BinaryMapDataObject> dataObjects = queryData(latLonBounds, zoom);
+				return new Pair<>(dataObjects, dataObjects);
 			}
 		};
 		addMapsInitializedListener();
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updatePaints();
+	}
+
+	private void updatePaints() {
+		DisplayMetrics metrics = new DisplayMetrics();
+		AndroidUtils.getDisplay(app).getMetrics(metrics);
+		textPaint.setStrokeWidth(21 * metrics.scaledDensity);
+		textPaint.setAntiAlias(true);
+		textPaint.setTextAlign(Paint.Align.CENTER);
 	}
 
 	private Paint getPaint(int color) {
@@ -232,8 +236,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (zoom < ZOOM_TO_SHOW_SELECTION_ST || !indexRegionBoundaries) {
 			return;
 		}
-		// make sure no maps are loaded for the location
-		checkMapToDownload(tileBox, data.getResults());
+		// Check whether there are no active or downloaded maps for the location
+		mapSuggestionController.updateSuggestion(tileBox, data.getResults());
 		// draw objects
 		if (osmandRegions.isInitialized() && zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
 			MapRendererView mapRenderer = getMapRenderer();
@@ -255,7 +259,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 			boolean isZoomToShowBorders = zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS;
 			if (isShowDownloadedMaps() && isZoomToShowBorders) {
-				if (currentObjects.size() > 0) {
+				if (!currentObjects.isEmpty()) {
 					List<BinaryMapDataObject> downloadedObjects = new ArrayList<>();
 					List<BinaryMapDataObject> backupedObjects = new ArrayList<>();
 					for (BinaryMapDataObject o : currentObjects) {
@@ -267,112 +271,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 							backupedObjects.add(o);
 						}
 					}
-					if (backupedObjects.size() > 0) {
+					if (!backupedObjects.isEmpty()) {
 						drawMapObjectsPolygons(canvas, tileBox, backupedObjects, pathBackuped, paintBackuped);
 					}
-					if (downloadedObjects.size() > 0) {
+					if (!downloadedObjects.isEmpty()) {
 						drawMapObjectsPolygons(canvas, tileBox, downloadedObjects, pathDownloaded, paintDownloaded);
 					}
 				}
 			}
 		} else {
 			clearPolygonsCollections();
-		}
-	}
-
-	private void checkMapToDownload(RotatedTileBox tileBox, List<BinaryMapDataObject> currentObjects) {
-		int zoom = tileBox.getZoom();
-		int cx = tileBox.getCenter31X();
-		int cy = tileBox.getCenter31Y();
-		if (lastCheckMapCx == cx && lastCheckMapCy == cy && lastCheckMapZoom == zoom) {
-			return;
-		}
-		lastCheckMapCx = cx;
-		lastCheckMapCy = cy;
-		lastCheckMapZoom = zoom;
-
-		MapActivity mapActivity = getMapActivity();
-		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
-				&& mapActivity != null && mapActivity.getWidgetsVisibilityHelper().shouldShowDownloadMapWidget()
-				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG
-				&& zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
-				&& !view.isAnimatingMapMove()
-				&& currentObjects != null) {
-
-			DownloadIndexesThread downloadThread = app.getDownloadThread();
-			DownloadResources indexes = downloadThread.getIndexes();
-			if (!indexes.getExternalMapFileNamesAt(cx, cy, false).isEmpty()) {
-				hideDownloadMapToolbar();
-				return;
-			}
-			Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
-			for (int i = 0; i < currentObjects.size(); i++) {
-				BinaryMapDataObject o = currentObjects.get(i);
-				String fullName = osmandRegions.getFullName(o);
-				WorldRegion regionData = osmandRegions.getRegionData(fullName);
-				if (regionData != null && regionData.isRegionMapDownload()) {
-					String regionDownloadName = regionData.getRegionDownloadName();
-					if (regionDownloadName != null) {
-						if (rm.checkIfObjectDownloaded(regionDownloadName)) {
-							hideDownloadMapToolbar();
-							return;
-						} else {
-							selectedObjects.put(regionData, o);
-						}
-					}
-				}
-			}
-
-			IndexItem indexItem = null;
-			String name = null;
-			Map.Entry<WorldRegion, BinaryMapDataObject> res = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects);
-			if (res != null && res.getKey() != null) {
-				WorldRegion regionData = res.getKey();
-				List<IndexItem> indexItems = indexes.getIndexItems(regionData);
-				if (indexItems.size() == 0) {
-					if (!indexes.isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
-						downloadThread.runReloadIndexFilesSilent();
-					}
-				} else {
-					for (IndexItem item : indexItems) {
-						if (item.getType() == DownloadActivityType.NORMAL_FILE
-								&& !(item.isDownloaded() || downloadThread.isDownloading(item))) {
-							indexItem = item;
-							name = regionData.getLocaleName();
-							break;
-						}
-					}
-				}
-			}
-			if (indexItem != null && !Algorithms.isEmpty(name)) {
-				showDownloadMapToolbar(indexItem, name);
-			} else {
-				hideDownloadMapToolbar();
-			}
-		} else {
-			hideDownloadMapToolbar();
-		}
-	}
-
-	private void showDownloadMapToolbar(@NonNull IndexItem indexItem, @NonNull String regionName) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && !regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
-			app.runInUIThread(() -> {
-				if (!regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
-					TopToolbarController controller = mapActivity.getTopToolbarController(TopToolbarControllerType.DOWNLOAD_MAP);
-					if (controller == null || !((DownloadMapToolbarController) controller).getRegionName().equals(regionName)) {
-						controller = new DownloadMapToolbarController(mapActivity, indexItem, regionName);
-						mapActivity.showTopToolbar(controller);
-					}
-				}
-			});
-		}
-	}
-
-	private void hideDownloadMapToolbar() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			app.runInUIThread(() -> mapActivity.hideTopToolbar(TopToolbarControllerType.DOWNLOAD_MAP));
 		}
 	}
 
@@ -493,7 +401,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				Set<String> set = new TreeSet<>();
 				int cx = view.getCurrentRotatedTileBox().getCenter31X();
 				int cy = view.getCurrentRotatedTileBox().getCenter31Y();
-				if ((currentObjects.size() > 0)) {
+				if ((!currentObjects.isEmpty())) {
 					for (int i = 0; i < currentObjects.size(); i++) {
 						BinaryMapDataObject o = currentObjects.get(i);
 						if (!osmandRegions.contain(o, cx, cy)) {
@@ -553,7 +461,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	// IContextMenuProvider
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (excludeUntouchableObjects) {
 			return;
@@ -567,14 +475,18 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			isMenuVisible = menu.isVisible() || (multiMenu != null && multiMenu.isVisible());
 		}
 		if (!isMenuVisible) {
-			getWorldRegionFromPoint(tileBox, point, objects);
+			collectRegionsFromPoint(result);
 		}
 	}
 
 	@Override
+	public boolean isSecondaryProvider() {
+		return true;
+	}
+
+	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof DownloadMapObject) {
-			DownloadMapObject mapObject = ((DownloadMapObject) o);
+		if (o instanceof DownloadMapObject mapObject) {
 			return mapObject.worldRegion.getRegionCenter();
 		}
 		return null;
@@ -582,8 +494,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof DownloadMapObject) {
-			DownloadMapObject mapObject = ((DownloadMapObject) o);
+		if (o instanceof DownloadMapObject mapObject) {
 			return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
 					getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
 		}
@@ -591,7 +502,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				getContext().getString(R.string.shared_string_map), "");
 	}
 
-	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super DownloadMapObject> dataObjects) {
+	private void collectRegionsFromPoint(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION
 				&& data.getResults() != null && osmandRegions.isInitialized()) {
@@ -599,8 +512,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());
 
-			List<BinaryMapDataObject> result = new LinkedList<>(data.getResults());
-			Iterator<BinaryMapDataObject> it = result.iterator();
+			List<BinaryMapDataObject> objects = new LinkedList<>(data.getResults());
+			Iterator<BinaryMapDataObject> it = objects.iterator();
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
 				if (!osmandRegions.contain(o, point31x, point31y)) {
@@ -608,7 +521,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 			}
 			OsmandRegions osmandRegions = app.getRegions();
-			for (BinaryMapDataObject o : result) {
+			for (BinaryMapDataObject o : objects) {
 				String fullName = osmandRegions.getFullName(o);
 				WorldRegion region = osmandRegions.getRegionData(fullName);
 				if (region != null && region.isRegionMapDownload()) {
@@ -629,16 +542,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 					if (!dataItems.isEmpty()) {
 						for (IndexItem item : dataItems) {
-							dataObjects.add(new DownloadMapObject(o, region, item, null));
+							result.collect(new DownloadMapObject(o, region, item, null), this);
 						}
 					} else {
 						String downloadName = osmandRegions.getDownloadName(o);
 						List<LocalItem> infos = helper.getLocalItems(downloadName);
-						if (infos.size() == 0) {
-							dataObjects.add(new DownloadMapObject(o, region, null, null));
+						if (Algorithms.isEmpty(infos)) {
+							result.collect(new DownloadMapObject(o, region, null, null), this);
 						} else {
 							for (LocalItem info : infos) {
-								dataObjects.add(new DownloadMapObject(o, region, null, info));
+								result.collect(new DownloadMapObject(o, region, null, info), this);
 							}
 						}
 					}
@@ -650,8 +563,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	@Override
 	public int getOrder(Object o) {
 		int order = 0;
-		if (o instanceof DownloadMapObject) {
-			DownloadMapObject mapObject = ((DownloadMapObject) o);
+		if (o instanceof DownloadMapObject mapObject) {
 			order = mapObject.worldRegion.getLevel() * 1000 - 100000;
 			if (mapObject.indexItem != null) {
 				order += mapObject.indexItem.getType().getOrderIndex();
@@ -664,8 +576,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void setSelectedObject(Object o) {
-		if (o instanceof DownloadMapObject) {
-			DownloadMapObject downloadMapObject = ((DownloadMapObject) o);
+		if (o instanceof DownloadMapObject downloadMapObject) {
 			selectedRegion = downloadMapObject.getWorldRegion();
 		}
 	}
@@ -749,11 +660,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	/**OpenGL*/
 	private int addToPolygonsCollection(List<WorldRegion> regionList, Paint paint, int baseOrder) {
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		if (mapRenderer == null || regionList.size() == 0 || !needRedrawOpenGL) {
+		if (mapRenderer == null || regionList.isEmpty() || !needRedrawOpenGL) {
 			return baseOrder;
 		}
 		if (polygonsCollection == null) {
-			polygonsCollection = new PolygonsCollection();
+			polygonsCollection = new PolygonsCollection(ZoomLevel.ZoomLevel3, ZoomLevel.ZoomLevel7);
 		}
 		for (WorldRegion region : regionList) {
 			for (List<LatLon> polygon : region.getPolygons()) {

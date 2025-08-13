@@ -10,7 +10,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
@@ -64,7 +64,7 @@ public class PreviousRouteCard extends MapBaseCard {
 					!description.getName().equals(app.getString(R.string.no_address_found))) {
 				name = description.getName();
 			} else {
-				name = PointDescription.getLocationName(app, point.point.getLatitude(), point.point.getLongitude(), true)
+				name = PointDescription.getLocationName(app, point.getLatLon().getLatitude(), point.getLatLon().getLongitude(), true)
 						.replace('\n', ' ');
 			}
 		}

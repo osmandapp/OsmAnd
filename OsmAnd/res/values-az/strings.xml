@@ -735,9 +735,6 @@
     <string name="morning">Səhər</string>
     <string name="night">Gecə</string>
     <string name="select_month_and_country">Ay və ölkə:</string>
-    <string name="quick_action_add_poi">POI əlavə et</string>
-    <string name="quick_action_map_style">Xəritə stilini dəyiş</string>
-    <string name="quick_action_add_favorite">Favorit əlavə et</string>
     <string name="favorite_autofill_toast_text">" burda saxlandı: "</string>
     <string name="favorite_empty_place_name">Yer</string>
     <string name="quick_action_poi_show">%1$s-i göstər</string>
@@ -764,8 +761,6 @@
     <string name="nearest_cities">Yaxındakı şəhərlər</string>
     <string name="select_city">Şəhər seçin</string>
     <string name="select_postcode">Poçt kodu axtar</string>
-    <string name="quick_action_add_destination">Təyinat seç</string>
-    <string name="quick_action_replace_destination">Təyinatı əvəz et</string>
     <string name="average_speed">Ortalama sürət</string>
     <string name="shared_string_time_moving">Hərəkət vaxtı</string>
     <string name="altitude_descent">Eniş</string>
@@ -778,7 +773,6 @@
     <string name="rendering_attr_contourWidth_description">Kontur xəttinin genişliyi</string>
     <string name="rendering_attr_contourWidth_name">Kontur xəttinin genişliyi</string>
     <string name="upload_osm_note_description">OSM qeydinizi anonim və ya OpenStreetMap.org profilinizi istifadə edərək yükləyin.</string>
-    <string name="wiki_around">Yaxındakı Vikipediya məqalələri</string>
     <string name="search_map_hint">Şəhər və ya region</string>
     <string name="upload_poi">POI yüklə</string>
     <string name="route_calculation">Marşrut hesablanması</string>
@@ -803,7 +797,7 @@
     <string name="allow_access_location">Məkan girişinə icazə ver</string>
     <string name="search_my_location">Mövqeyimi tap</string>
     <string name="update_all_maps_now">Bütün xəritələr indi yenilənsin?</string>
-    <string name="replace_favorite_confirmation">“%1$s” Favoriti əvəz edilsin\?</string>
+    <string name="replace_favorite_confirmation">“%1$s” Favoriti əvəz edilsin?</string>
     <string name="rendering_attr_hideOverground_name">Yerüstü obyektlər</string>
     <string name="coords_search">Koordinatlarla axtar</string>
     <string name="advanced_coords_search">Təkmil koordinatlar axtarışı</string>
@@ -823,7 +817,6 @@
     <string name="gpx_start_new_segment">Yeni seqment başlat</string>
     <string name="rendering_attr_hideBuildings_name">Binalar</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Qeyri-nəqliyyat magistrallar</string>
-    <string name="rendering_attr_hideAccess_name">Giriş məhdudiyyətləri</string>
     <string name="rendering_attr_showAccess_name">Giriş məhdudiyyətlərini və rüsumu göstər</string>
     <string name="rendering_attr_showSurfaceGrade_name">Yol keyfiyyətini göstər</string>
     <string name="rendering_attr_showSurfaces_name">Yol örtüyünü göstər</string>
@@ -1215,7 +1208,6 @@
 \nƏfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, …
 \n</string>
     <string name="avoid_in_routing_title">Yayın…</string>
-    <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
     <string name="quick_action_add_destination_desc">Ekranın mərkəzini təyinat nöqtəsi etmək üçün düymə, əvvəl seçilmiş hər hansı təyinat nöqtəsi son ara təyinat nöqtəsi olacaq.</string>
     <string name="quick_action_replace_destination_desc">Ekranın mərkəzini yeni marşrut təyinatı edən düymə. Əvvəl seçilmiş təyinatı (əgər varsa) əvəz edəcək.</string>
     <string name="quick_action_add_first_intermediate_desc">Ekranın mərkəzini birinci aralıq təyinat nöqtəsi etmək üçün düymə.</string>
@@ -1230,12 +1222,10 @@
     <string name="edit_tilesource_choose_existing">Mövcud olanı seçin…</string>
     <string name="maps_define_edit">Müəyyənləşdir/Düzəliş et…</string>
     <string name="driving_region_europe_asia">Avropa, Asiya, Latın Amerikası və oxşar</string>
-    <string name="driving_region_uk">Böyük Britaniya, Hindistan və oxşar</string>
     <string name="map_widget_view_direction">Baxış istiqaməti</string>
     <string name="pref_raster_map">Xəritə mənbəyi parametrləri</string>
     <string name="layer_map">Xəritə mənbəyi…</string>
     <string name="map_source">Xəritə mənbəyi</string>
-    <string name="quick_action_map_source">Xəritə mənbəyini dəyiş</string>
     <string name="quick_action_map_source_title">Xəritə mənbələri</string>
     <string name="quick_action_map_source_action">Xəritə mənbəyi əlavə et</string>
     <string name="quick_action_map_source_switch">Xəritə mənbəyi “%s” olaraq dəyişdirildi.</string>
@@ -1253,7 +1243,6 @@
     <string name="planning_trip_item">Səfər planlaşdırma</string>
     <string name="map_viewing_item">Xəritəyə baxış</string>
     <string name="quick_action_map_style_switch">Xəritə stili “%s” olaraq dəyişdirildi.</string>
-    <string name="quick_action_add_osm_bug">OSM qeyd əlavə et</string>
     <string name="shared_string_recorded">Qeyd edilən</string>
     <string name="shared_string_record">Qeyd et</string>
     <string name="shared_string_trip_recording">Səfər qeydetmə</string>
@@ -1484,13 +1473,12 @@
     <string name="active_markers">Aktiv işarələr</string>
     <string name="map_markers">Xəritə işarələri</string>
     <string name="map_marker">Xəritə işarəsi</string>
-    <string name="quick_action_add_marker">Xəritə işarəsi əlavə et</string>
     <string name="shared_string_reload">Yenilə</string>
     <string name="wrong_user_name">Yanlış istifadəçi adı</string>
     <string name="shared_string_to">Bu tarixədək:</string>
     <string name="mapillary_menu_date_from">Bu tarixdən:</string>
     <string name="mapillary_menu_descr_dates">Yalnız əlavə edilmiş şəkillərə bax</string>
-    <string name="mapillary_menu_title_dates">Tarix</string>
+    <string name="shared_string_date">Tarix</string>
     <string name="mapillary_menu_edit_text_hint">İstifadəçi adını yazın</string>
     <string name="mapillary_menu_descr_username">Yalnız bu şəxsin əlavə etdiyi şəkillərə bax:</string>
     <string name="mapillary_menu_title_username">İstifadəçi adı</string>
@@ -1706,7 +1694,7 @@
     <string name="quick_action_edit_action">Fəaliyyətə düzəliş et</string>
     <string name="dialog_add_action_title">Fəaliyyət əlavə et</string>
     <string name="quick_actions_delete">Fəaliyyəti sil</string>
-    <string name="quick_actions_delete_text">“%s” fəaliyyəti silinsin\?</string>
+    <string name="quick_actions_delete_text">“%s” fəaliyyəti silinsin?</string>
     <string name="quick_favorites_show_favorites_dialog">Favoritlər dialoqunu göstər</string>
     <string name="rendering_value_darkyellow_name">Tünd sarı</string>
     <string name="shared_string_more_actions">Digər fəaliyyətlər</string>
@@ -1769,12 +1757,10 @@
     <string name="quick_action_category_descr">Favoriti yadda saxlamaq üçün kateqoriya:</string>
     <string name="quick_action_sh_poi_descr">Xəritədə göstərmək üçün bir və ya bir neçə POI kateqoriyası əlavə edin.</string>
     <string name="quick_action_empty_param_error">Bütün parametrləri doldurun</string>
-    <string name="quick_action_map_overlay">Xəritə örtüyünü dəyiş</string>
     <string name="quick_action_map_overlay_title">Xəritə örtükləri</string>
     <string name="quick_action_map_overlay_action">Örtük əlavə et</string>
     <string name="quick_action_map_overlay_switch">Xəritə örtüyü “%s” olaraq dəyişdirildi.</string>
     <string name="quick_action_map_underlay_switch">Xəritə altlığı “%s” olaraq dəyişdirildi.</string>
-    <string name="quick_action_map_underlay">Xəritə altlığını dəyiş</string>
     <string name="quick_action_map_underlay_title">Xəritə altlıqları</string>
     <string name="quick_action_map_underlay_action">Altlıq əlavə et</string>
     <string name="quick_action_btn_tutorial_descr">Düyməni basıb saxlayaraq sürüşdürmək onun ekrandakı mövqeyini dəyişir.</string>
@@ -2063,7 +2049,6 @@
     <string name="shared_string_is_saved">saxlanıldı</string>
     <string name="sort_name_descending">Ad: Z – A</string>
     <string name="sort_name_ascending">Ad: A – Z</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_sport">İdman</string>
     <string name="login_account">Hesab</string>
     <string name="user_login">İstifadəçi adı</string>
@@ -2218,7 +2203,6 @@
     <string name="receiving_data_from_server">Serverdən məlumatlar alınır…</string>
     <string name="restore_complete">Bərpa edildi</string>
     <string name="toast_select_edits_for_upload">Yükləmək üçün düzəlişləri seçin</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="settings_routing_mode_string">Rejim: %s</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="shared_preference">Paylaşılan</string>
@@ -2298,7 +2282,6 @@
     <string name="activity_type_car_name">Avtomobil</string>
     <string name="activity_type_motorbike_name">Motosiklet</string>
     <string name="activity_type_water_name">Su</string>
-    <string name="login_open_place_reviews">OpenPlaceReviews-ə daxil ol</string>
     <string name="message_name_is_already_exists">Ad artıq mövcuddur</string>
     <string name="message_server_error">Server səhvi: %1$s</string>
     <string name="routing_engine_vehicle_type_truck">Yük maşını</string>
@@ -2377,7 +2360,6 @@
     <string name="purchases">Alışlar</string>
     <string name="restart">Yenidən başlat</string>
     <string name="activity_type_running_name">Qaçış</string>
-    <string name="opr_use_dev_url">test.openplacereviews.org istifadə et</string>
     <string name="latest_openstreetmap_update">Mövcud ən son OpenStreetMap yeniləməsi:</string>
     <string name="on_pause">Fasilədə</string>
     <string name="track_recording_stop_without_saving">Yadda saxlamadan dayandır</string>
@@ -2443,9 +2425,7 @@
     <string name="additional_actions_descr">“%1$s” düyməsinə toxunaraq bu fəaliyyətlərə daxil olun.</string>
     <string name="replace_point_descr">Başqa bir nöqtəni bununla əvəz et.</string>
     <string name="ui_customization_short_descr">Siyirmə elementləri, kontekst menyusu</string>
-    <string name="ui_customization_description">“Siyirmə”, “Xəritəni tənzimlə” və “Kontekst menyusu” elementlərin sayını fərdiləşdirin.
-\n
-\nBütün idarəetmə vasitələrini gizlətmək üçün istifadə edilməyən qoşmaları söndürün. %1$s.</string>
+    <string name="ui_customization_description">“Siyirmə”, “Xəritəni tənzimlə” və “Kontekst menyusu” elementlərin sayını fərdiləşdirin. \n \nBütün idarəetmə vasitələrini gizlətmək üçün istifadə edilməyən qoşmaları söndürün. %1$s.</string>
     <string name="shared_string_circle">Dairə</string>
     <string name="restore_all_profile_settings_descr">Bu profili yaratdıqdan/idxal etdikdən sonra bütün profil parametrləri orijinal vəziyyətinə qaytarılacaq.</string>
     <string name="restore_all_profile_settings">Bütün profil parametrləri bərpa edilsin\?</string>
@@ -2486,7 +2466,7 @@
     <string name="routing_attr_max_num_changes_name">Dəyişikliklərin sayı</string>
     <string name="shared_string_privacy_policy">Gizlilik siyasəti</string>
     <string name="settings_privacy_and_security">Gizlilik və təhlükəsizlik</string>
-    <string name="profile_alert_delete_msg">“%s” profili silinsin\?</string>
+    <string name="profile_alert_delete_msg">“%s” profili silinsin?</string>
     <string name="nav_type_hint">Naviqasiya növü</string>
     <string name="select_icon_profile_dialog_title">İkon seçin</string>
     <string name="export_profile">Profili ixrac et</string>
@@ -2554,7 +2534,6 @@
     <string name="changes_applied_to_profile">Dəyişikliklər “%1$s” profilinə tətbiq edildi.</string>
     <string name="gpx_monitoring_start">Səfər qeydini davam etdir</string>
     <string name="routing_attr_height_obstacles_description">Marşrut kəskin yoxuşlardan yayına bilər.</string>
-    <string name="add_to_opr">OpenPlaceReviews-a əlavə et</string>
     <string name="add_online_source">Onlayn mənbə əlavə et</string>
     <string name="details_dialog_decr">Əlavə xəritə detallarını göstər və ya gizlət</string>
     <string name="add_edit_favorite">Favorit əlavə et və ya düzəliş et</string>
@@ -2669,7 +2648,7 @@
     <string name="profile_appearance">Profilin görünüşü</string>
     <string name="speed_cameras_alert">Bəzi ölkələrdə sürət kameralarının xəbərdarlığı qanunla qadağandır.</string>
     <string name="step_by_step">Addım-addım</string>
-    <string name="delete_history_items">%1$s tarixçə elementi silinsin\?</string>
+    <string name="delete_history_items">%1$s tarixçə elementi silinsin?</string>
     <string name="history_preferences_descr">Hər bir tarixçə növü üçün fərdi olaraq tarixçə qeydini söndürə bilərsiniz.</string>
     <string name="map_markers_history">Xəritə işarələri tarixçəsi</string>
     <string name="clear_all_history_warning">Axtarış, naviqasiya və işarə tarixçəsi daxil olmaqla bütün proqram tarixçəsi qeydləri silinsin\?</string>
@@ -2697,7 +2676,7 @@
     <string name="downloaded_maps_collect_descr">Ölkə və region xəritəsinin populyarlığını anlamağımıza kömək edir.</string>
     <string name="collected_data_descr">OsmAnd-a hansı məlumatları paylaşmağa icazə verdiyinizi müəyyənləşdirin.</string>
     <string name="routeInfo_road_types_name">Yol növləri</string>
-    <string name="delete_history_items_descr">Seçilən tarixçə elementləri silinsin\?</string>
+    <string name="delete_history_items_descr">Seçilən tarixçə elementləri silinsin?</string>
     <string name="replace_all_desc">Hazırkı elementlər fayldakı elementlərlə əvəz olunacaq</string>
     <string name="select_navigation_icon">Hərəkət vaxtı mövqe ikonu</string>
     <string name="routeInfo_steepness_name">Diklik</string>
@@ -2767,9 +2746,6 @@
     <string name="empty_purchases_description">Alışlarınız burada görünmürsə, “%1$s”ə toxunun və ya dəstək komandamızla əlaqə saxlayın.</string>
     <string name="si_mi_yard">Mil/yard</string>
     <string name="si_mi_feet">Mil/fut</string>
-    <string name="quick_action_take_audio_note">Yeni səsli qeyd</string>
-    <string name="quick_action_take_video_note">Yeni video qeydi</string>
-    <string name="quick_action_take_photo_note">Yeni şəkil qeydi</string>
     <string name="quick_action_switch_day_mode">Gündüz rejimi</string>
     <string name="quick_action_switch_night_mode">Gecə rejimi</string>
     <string name="quick_action_day_night_switch_mode">Gündüz/gecə rejimini dəyiş</string>
@@ -2902,7 +2878,6 @@
     <string name="keep_passed_markers">Keçilmiş işarələri xəritədə saxla</string>
     <string name="hide_passed">Keçilmişi gizlət</string>
     <string name="plan_route_add_new_segment">Yeni seqment əlavə et</string>
-    <string name="quick_action_remove_next_destination">Ən yaxın təyinat nöqtəsini sil</string>
     <string name="add_destination_point">Təyinatı seçin</string>
     <string name="plan_route_split_after">Sonra böl</string>
     <string name="quick_action_remove_next_destination_descr">Marşrutunuzdakı növbəti təyinatı silir. Əgər bu son təyinatdırsa, naviqasiya dayanacaq.</string>
@@ -3062,8 +3037,6 @@
     <string name="markers_remove_dialog_msg">“%s” xəritə işarəsi silinsin\?</string>
     <string name="shared_storage_last_step">Daha sonra yeni məlumat qovluğu təyin edə bilərsiniz.</string>
     <string name="shortcut_navigate_to_work">“iş”ə get</string>
-    <string name="register_on_openplacereviews">OpenPlaceReviews.org-da
-\nqeydiyyatdan keç</string>
     <string name="shared_string_quick_actions">Sürətli fəaliyyətlər</string>
     <string name="vector_data_missing">Xəritələri oflayn istifadə etmək üçün (“oflayn”) məlumatları endirin.</string>
     <string name="sd_unmounted">Yaddaş kartına giriş yoxdur.
@@ -3078,8 +3051,7 @@
     <string name="edit_profiles_descr">OsmAnd standart profilləri silinə bilməz, lakin qeyri-aktiv edilə bilər (əvvəlki ekranda) və ya aşağıda sıralana bilər.</string>
     <string name="gps_filter_speed_altitude_desc">Yalnız müəyyən edilmiş intervala uyğun iz nöqtələri qrafikdə və xəritədə görünəcək, qalanları gizlədiləcək.</string>
     <string name="progress_complete">%1$s tamamlandı</string>
-    <string name="shared_storage_first_step">“%1$s”ə toxunun.
-\nFayl meneceri osmand qovluğunu tapmaq və açmaq üçün lazım olan yerdə açılır.</string>
+    <string name="shared_storage_first_step">“%1$s”ə toxunun. \nFayl meneceri osmand qovluğunu tapmaq və açmaq üçün lazım olan yerdə açılır.</string>
     <string name="shared_string_skip_warning">Köçürmə keçilsin\? OsmAnd artıq paylaşılan yaddaşdakı fayllarınıza daxil ola bilməz.
 \n
 \nProqram yeni məlumat qovluğunuzdan istifadə etməyə başlayacaq.</string>
@@ -3165,15 +3137,9 @@
     <string name="shared_string_hillshade">Təpə kölgəsi</string>
     <string name="hillshade_download_description">Xəritədə təpə kölgəsinə baxmaq üçün əlavə xəritələr lazımdır.</string>
     <string name="audionotes_plugin_description">Səfər zamanı ya xəritə düyməsi ya da məkan kontekst menyusundan istifadə edərək səs/şəkil/video qeydlər yaradın.</string>
-    <string name="srtm_plugin_description">Bu qoşma OsmAnd-ın standart xəritələrinin üzərində həm kontur xəttinin, həm də (relyef) təpə kölgəsi örtüyünün göstərilməsini təmin edir. Bu funksionallıq idmançılar, piyada gəzənlər, səyahətçilər və landşaftın relyef quruluşu ilə maraqlanan hər kəs tərəfindən yüksək qiymətləndiriləcək. (Nəzərə alın ki, kontur xətti və/yaxud relyef məlumatları ayrıdır, qoşmanı aktivləşdirdikdən sonra əlavə endirmələr mümkündür.)
-\n
-\nQlobal məlumatlar (70° şimal və 70° cənub arasında) SRTM (Shuttle Radar Topography Mission) və NASA-nın Yer Müşahidə Sisteminin qabaqcıl peyki olan Terra-nın göyərtəsində təsvir aləti olan ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) tərəfindən ölçmələrə əsaslanır. ASTER – NASA, Yaponiyanın İqtisadiyyat, Ticarət və Sənaye Nazirliyi (METI) və Yaponiya Kosmik Sistemləri (J-spacesystems) arasında ortaq işdir.</string>
     <string name="hillshade_menu_download_descr">Şaquli kölgələri göstərmək üçün “Təpə kölgəsi” örtük xəritəsini endirin.</string>
     <string name="layer_hillshade">Təpə kölgəsi qatı</string>
     <string name="hillshade_layer_disabled">Təpə kölgəsi qatı sönülüdür</string>
-    <string name="record_plugin_description">Bu qoşma xəritədə GPX qeydetmə vidcetinə əl ilə toxunmaqla izlərinizi qeyd etmək və saxlamaq, həmçinin bütün naviqasiya marşrutlarınızı avtomatik olaraq GPX faylına qeyd etmək funksiyasını aktivləşdirir.
-\n
-\nQeyd edilmiş izlər dostlarınızla paylaşıla və ya OSM töhfələri üçün istifadə edilə bilər. İdmançılar məşqlərinə nəzarət etmək üçün qeyd edilmiş izlərdən istifadə edə bilərlər. Dövrə vaxtları, orta sürət və s. kimi bəzi əsas iz analizləri birbaşa OsmAnd-da həyata keçirilə bilər və əlbəttə ki, daha sonra izlər xüsusi 3-cü tərəf analiz alətlərində də təhlil edilə bilər.</string>
     <string name="download_hillshade_maps">Təpə kölgələri</string>
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -3191,7 +3157,6 @@
     <string name="rendering_value_category_name">Kateqoriya</string>
     <string name="overwrite_profile_q">“%1$s” artıq mövcuddur. Üzərinə yazılsın\?</string>
     <string name="osmand_parking_warning_text">Avtomobilinizi götürmək üçün bildiriş təqviminizə əlavə edildi, orada düzəliş edilə və ya silinə bilər.</string>
-    <string name="quick_action_add_parking">Parkinq yeri əlavə et</string>
     <string name="quick_action_add_parking_descr">Ekranın mərkəzində parkinq məkanı əlavə etmək üçün düymə.</string>
     <string name="poi_filter_parking">Parkinq</string>
     <string name="map_widget_parking">Parkinq</string>
@@ -3208,10 +3173,6 @@
     <string name="osmand_parking_position_name">Parkinq yeri</string>
     <string name="context_menu_item_delete_parking_point">Parkinq işarəsini sil</string>
     <string name="context_menu_item_add_parking_point">Parkinq məkanı olaraq işarələ</string>
-    <string name="add_photos_descr">OsmAnd bir neçə mənbədən şəkilləri göstərir:
-\nOpenPlaceReviews - POI şəkilləri;
-\nMapillary - küçə səviyyəsində şəkillər;
-\nİnternet / Vikimedia - OpenStreetMap məlumatlarına görə POI şəkilləri.</string>
     <string name="street_level_imagery">Küçə səviyyəsində şəkillər</string>
     <string name="parking_positions">Parkinq mövqeləri</string>
     <string name="osmand_parking_time_limit_title">Parkinq vaxtı limitini təyin edin</string>
@@ -3229,9 +3190,7 @@
     <string name="list_of_groups">Qrupların siyahısı</string>
     <string name="permission_is_required">Bu seçimdən istifadə etmək üçün icazə tələb olunur.</string>
     <string name="previous_run_crashed">OsmAnd-ın son çalışması çökdü. Qeyd faylı {0} qovluğundadır. Zəhmət olmasa, problemi bildirin və qeyd faylını əlavə edin.</string>
-    <string name="location_source_descr">Standart olaraq, Google Play-dən quraşdırılmış OsmAnd məkanı müəyyən etmək üçün %1$s istifadə edir.
-\n
-\nYanlış məkan məlumatı alsanız və ya cihazı %2$s olmadan istifadə etsəniz, “%3$s” rejiminə keçməyi yoxlayın.</string>
+    <string name="location_source_descr">Standart olaraq, Google Play-dən quraşdırılmış OsmAnd məkanı müəyyən etmək üçün %1$s istifadə edir. \n \nYanlış məkan məlumatı alsanız və ya cihazı %2$s olmadan istifadə etsəniz, “%3$s” rejiminə keçməyi yoxlayın.</string>
     <string name="exit_import">Çıxılsın\?</string>
     <string name="shared_string_crash">Çökmə</string>
     <string name="last_launch_crashed">OsmAnd-ın son çalışması çökdü. Zəhmət olmasa, səhv mesajını paylaşaraq OsmAnd-ı təkmilləşdirməyə kömək edin.</string>
@@ -3346,9 +3305,7 @@
     <string name="shared_string_mode">Rejim</string>
     <string name="auto_backup_preference_desc">Standart olaraq Android yeni cihazlarda və ya yenidən quraşdırıldıqdan sonra bərpa etmək üçün favoritlərin, xəritə işarələrinin və OsmAnd parametrlərinin nüsxələrini saxlayır. Bu nüsxə 25 MB ilə məhdudlaşır.
 \nOsmAnd Cloud istifadə edərkən, bu, yenidən quraşdırmadan sonra anlaşılmazlıqlara səbəb ola bilər.</string>
-    <string name="ant_missing_dependency_descr">Tələb olunan “%1$s” xidmətini tapmaq olmadı.
-\nANT+ Plugins Xidmətini quraşdırmalı və ya yeniləməlisiniz.
-\nBunu etmək üçün Play Store-u işə salmaq istəyirsiniz\?</string>
+    <string name="ant_missing_dependency_descr">Tələb olunan “%1$s” xidmətini tapmaq olmadı. \nANT+ Plugins Xidmətini quraşdırmalı və ya yeniləməlisiniz. \nBunu etmək üçün Play Store-u işə salmaq istəyirsiniz?</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="shared_string_identifiers">İdentifikatorlar</string>
     <string name="map_widget_target_distance">Kameradan hədəfə qədər məsafə</string>

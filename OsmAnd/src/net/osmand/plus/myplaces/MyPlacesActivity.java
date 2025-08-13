@@ -1,7 +1,10 @@
 package net.osmand.plus.myplaces;
 
 import static net.osmand.plus.backup.ui.BackupAuthorizationFragment.OPEN_BACKUP_AUTH;
+import static net.osmand.plus.helpers.IntentHelper.REQUEST_CODE_CREATE_FILE;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
+import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment.FAV_SEARCH_QUERY_KEY;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,15 +21,21 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +55,7 @@ public class MyPlacesActivity extends TabActivity {
 	private OsmandSettings settings;
 
 	private ViewPager viewPager;
-	private List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
+	private final List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
 	private int tabSize;
 
 	private Bundle intentParams;
@@ -70,17 +79,26 @@ public class MyPlacesActivity extends TabActivity {
 
 		if (savedInstanceState == null) {
 			Intent intent = getIntent();
-			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
-				intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
-				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
-				int pagerItem = 0;
-				for (int n = 0; n < tabItems.size(); n++) {
-					if (tabItems.get(n).resId == tabId) {
-						pagerItem = n;
-						break;
-					}
+
+			if (intent != null) {
+				Bundle bundle = intent.getExtras();
+				if (bundle != null && bundle.containsKey(FAV_SEARCH_QUERY_KEY)) {
+					String searchQuery = bundle.getString(FAV_SEARCH_QUERY_KEY, "");
+					FavoritesSearchFragment.showInstance(this, searchQuery);
 				}
-				viewPager.setCurrentItem(pagerItem, false);
+
+				if (intent.hasExtra(MapActivity.INTENT_PARAMS)) {
+					intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
+					int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
+					int pagerItem = 0;
+					for (int n = 0; n < tabItems.size(); n++) {
+						if (tabItems.get(n).resId == tabId) {
+							pagerItem = n;
+							break;
+						}
+					}
+					viewPager.setCurrentItem(pagerItem, false);
+				}
 			}
 		}
 	}
@@ -138,6 +156,26 @@ public class MyPlacesActivity extends TabActivity {
 	}
 
 	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
+
+		if (intent.hasExtra(KEY_SAVE_FILE_NAME)) {
+			String filePath = intent.getStringExtra("file_path");
+			if (Algorithms.isEmpty(filePath)) {
+				return;
+			}
+			File fileToSave = new File(filePath);
+
+			Intent createFileIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+			createFileIntent.setType("*/*");
+			createFileIntent.putExtra(Intent.EXTRA_TITLE, fileToSave.getName());
+
+			AndroidUtils.startActivityForResultIfSafe(this, createFileIntent, REQUEST_CODE_CREATE_FILE);
+		}
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		List<TabItem> tabItems = getTabItems();
@@ -162,7 +200,9 @@ public class MyPlacesActivity extends TabActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		app.getImportHelper().resetUIActivity(this);
+		ImportHelper importHelper = app.getImportHelper();
+		importHelper.resetUIActivity(this);
+		removeActivityResultListener(importHelper.getSaveFileResultListener());
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.utils.GlideUtils.areAltitudesEqual;
 
 import android.view.View;
 
@@ -14,12 +13,13 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.utils.GlideUtils;
+import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
@@ -73,6 +73,12 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		return widgetType != null ? getString(widgetType.titleId) : null;
 	}
 
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+	}
+
 	private void updateTargetAltitude() {
 		LatLon targetLocation = getTargetLocation();
 		boolean locationChanged = !MapUtils.areLatLonEqual(targetLocation, cachedTargetLocation);
@@ -89,7 +95,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 		calculateAltitude(targetLocation, targetAltitude -> {
 			markUpdated();
-			if (forceUpdate || metricSystemChanged || !areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
+			if (forceUpdate || metricSystemChanged || !AverageGlideComputer.areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
 				cachedTargetAltitude = targetAltitude;
 				if (cachedTargetAltitude == null) {
 					setText(NO_VALUE, null);
@@ -113,7 +119,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		Double currentAltitude = currentLocation != null && currentLocation.hasAltitude()
 				? currentLocation.getAltitude()
 				: null;
-		boolean currentAltitudeChanged = !areAltitudesEqual(currentAltitude, cachedCurrentAltitude);
+		boolean currentAltitudeChanged = !AverageGlideComputer.areAltitudesEqual(currentAltitude, cachedCurrentAltitude);
 
 		LatLon targetLocation = getTargetLocation();
 		boolean targetLocationChanged = !MapUtils.areLatLonEqual(targetLocation, cachedTargetLocation);
@@ -131,7 +137,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 		calculateAltitude(targetLocation, targetAltitude -> {
 			markUpdated();
-			if (forceUpdate || anyChanged || !areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
+			if (forceUpdate || anyChanged || !AverageGlideComputer.areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
 				cachedTargetAltitude = targetAltitude;
 				String ratio = calculateFormattedRatio(currentLocation, currentAltitude, targetLocation, targetAltitude);
 				if (forceUpdate || !Objects.equals(cachedFormattedRatio, ratio)) {
@@ -175,7 +181,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 			return null;
 		}
 		LatLon l1LatLon = new LatLon(l1.getLatitude(), l1.getLongitude());
-		return GlideUtils.calculateFormattedRatio(app, l1LatLon, l2, a1, a2);
+		return AverageGlideComputer.calculateFormattedRatio(app, l1LatLon, l2, a1, a2);
 	}
 
 	public boolean isInTargetAltitudeState() {

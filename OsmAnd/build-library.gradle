@@ -14,6 +14,15 @@ android {
 		tasks.lint.enabled = false
 	}
 
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+
+	buildFeatures {
+		aidl true
+	}
+
 	sourceSets {
 		main {
 			manifest.srcFile "AndroidManifest-library.xml"
@@ -29,11 +38,52 @@ android {
 			resValue "string", "app_edition", ""
 		}
 	}
+
+	libraryVariants.configureEach {
+		def variant = it
+		def taskName = variant.name.capitalize()
+		def packageAssetsTaskName = "package${taskName}Assets"
+		tasks.named(packageAssetsTaskName).configure { osmandTask ->
+			println(osmandTask.getName())
+			osmandTask.dependsOn(copyProjDb)
+			osmandTask.dependsOn(collectFonts)
+			osmandTask.dependsOn(copyPoiCategories)
+			osmandTask.dependsOn(copyRouteActivities)
+			osmandTask.dependsOn(copyColorPalettes)
+			osmandTask.dependsOn(copyBundledAssets)
+			osmandTask.dependsOn(copy3DModels)
+			osmandTask.dependsOn(collectVoiceAssets)
+			osmandTask.dependsOn(downloadWorldMiniBasemap)
+		}
+		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
+		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
+			println(osmandTask.getName())
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
+		def packageResources= "package${taskName}Resources"
+		tasks.named(packageResources).configure { osmandTask ->
+			println(osmandTask.getName())
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
+		def generateResources= "generate${taskName}Resources"
+		tasks.named(generateResources).configure { osmandTask ->
+			println(osmandTask.getName() + " generate resources")
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
+	}
 }
 
 afterEvaluate {
-	android.libraryVariants.all { variant ->
-		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+	android.libraryVariants.configureEach { variant ->
+		variant.javaCompileProvider.configure {
+			dependsOn collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore
+		}
 	}
 }
 
@@ -43,16 +93,15 @@ project.afterEvaluate {
 		repositories {
 			ivy {
 				url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-				
 			}
 		}
 		publications {
 			aar(IvyPublication) {
 				artifact bundleLegacyFatDebugAar {
-					classifier 'debug'
+					archiveClassifier = 'debug'
 				}
 				artifact bundleLegacyFatReleaseAar {
-					classifier 'release'
+					archiveClassifier = 'release'
 				}
 			}
 		}
@@ -60,5 +109,5 @@ project.afterEvaluate {
 }
 
 dependencies {
-	implementation 'com.google.android.gms:play-services-location:18.0.0'
+	implementation 'com.google.android.gms:play-services-location:21.3.0'
 }

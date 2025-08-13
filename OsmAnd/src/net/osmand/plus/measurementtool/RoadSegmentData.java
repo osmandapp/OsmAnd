@@ -3,7 +3,7 @@ package net.osmand.plus.measurementtool;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
@@ -29,8 +29,8 @@ public class RoadSegmentData {
 		double distance = 0;
 		if (points != null && points.size() > 1) {
 			for (int i = 1; i < points.size(); i++) {
-				distance += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
-						points.get(i).lat, points.get(i).lon);
+				distance += MapUtils.getDistance(points.get(i - 1).getLat(), points.get(i - 1).getLon(),
+						points.get(i).getLat(), points.get(i).getLon());
 			}
 		} else if (segments != null) {
 			for (RouteSegmentResult segment : segments) {

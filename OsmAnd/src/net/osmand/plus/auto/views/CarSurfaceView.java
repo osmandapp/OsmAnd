@@ -9,7 +9,7 @@ import net.osmand.plus.auto.SurfaceRenderer;
 @SuppressLint("ViewConstructor")
 public class CarSurfaceView extends View {
 
-	private static final float CAR_DENSITY_SCALE = 1.325f;
+	public static final float CAR_DENSITY_SCALE = 1.325f;
 
 	private final SurfaceRenderer surfaceRenderer;
 	private int dpi;
@@ -18,6 +18,7 @@ public class CarSurfaceView extends View {
 	public CarSurfaceView(Context context, SurfaceRenderer surfaceRenderer) {
 		super(context);
 		this.surfaceRenderer = surfaceRenderer;
+		density = 1.0f;
 	}
 
 	public void setSurfaceParams(int width, int height, int dpi) {

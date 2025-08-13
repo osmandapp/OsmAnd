@@ -6,7 +6,6 @@
     <string name="poi_club">Klub</string>
     <string name="poi_cafe_and_restaurant">Kafe və restoran</string>
     <string name="poi_service">Xidmət</string>
-    <string name="poi_osmwiki">Vikipediya</string>
     <string name="poi_doors">Qapılar</string>
     <string name="poi_games">Oyunlar</string>
     <string name="poi_video_games">Video oyunlar</string>
@@ -151,7 +150,7 @@
     <string name="poi_water_place_access_family">Ailə</string>
     <string name="poi_service_vehicle_batteries_yes">Batareyalar</string>
     <string name="poi_checkpoint_type_code">Kod</string>
-    <string name="poi_site_type_fortification">İstehkam</string>
+    <string name="poi_archaeological_site_fortification">İstehkam</string>
     <string name="poi_cocktails">Kokteyllər</string>
     <string name="poi_bath_type">Növ</string>
     <string name="poi_sms">SMS</string>

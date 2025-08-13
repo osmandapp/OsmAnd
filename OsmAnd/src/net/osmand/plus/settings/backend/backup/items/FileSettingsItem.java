@@ -9,9 +9,10 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -52,7 +53,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR, R.drawable.ic_plugin_wikipedia),
 		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark),
 		NAUTICAL_DEPTH("nautical_depth", IndexConstants.NAUTICAL_INDEX_DIR, R.drawable.ic_action_nautical_depth),
-		FAVORITES_BACKUP("favorites_backup", IndexConstants.BACKUP_INDEX_DIR, R.drawable.ic_action_folder_favorites);
+		FAVORITES_BACKUP("favorites_backup", IndexConstants.BACKUP_INDEX_DIR, R.drawable.ic_action_folder_favorites),
+		COLOR_PALETTE("colors_palette", IndexConstants.COLOR_PALETTE_DIR, R.drawable.ic_action_file_color_palette);
 
 		private final String subtypeName;
 		private final String subtypeFolder;
@@ -101,10 +103,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 		@NonNull
 		public static FileSubtype getSubtypeByFileName(@NonNull String fileName) {
-			String name = fileName;
-			if (fileName.startsWith(File.separator)) {
-				name = fileName.substring(1);
-			}
+			String name = BackupUtils.removeLeadingSlash(fileName);
 			for (FileSubtype subtype : values()) {
 				switch (subtype) {
 					case UNKNOWN:
@@ -144,6 +143,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 						break;
 					case NAUTICAL_DEPTH:
 						if (name.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
+							return subtype;
+						}
+						break;
+					case COLOR_PALETTE:
+						if (name.endsWith(IndexConstants.TXT_EXT)) {
 							return subtype;
 						}
 						break;
@@ -381,7 +385,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	public void delete() {
 		super.delete();
-		// TODO: delete settings item
+		Algorithms.removeAllFiles(file);
 	}
 
 	@Nullable

@@ -1,5 +1,7 @@
 package net.osmand.plus.track;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.util.Algorithms;
 
 public class CachedTrackParams {
@@ -38,6 +40,6 @@ public class CachedTrackParams {
 		return "CachedTrackParams{" +
 				"prevModifiedTime=" + prevModifiedTime +
 				", useFilteredGpx=" + useFilteredGpx +
-				", useJoinSegments=" + useJoinSegments + "}";
+				", useJoinSegments=" + useJoinSegments;
 	}
 }

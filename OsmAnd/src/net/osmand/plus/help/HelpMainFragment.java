@@ -146,7 +146,7 @@ public class HelpMainFragment extends BaseOsmAndFragment implements OnItemClickL
 				.showTopDivider(true)
 				.setIcon(getContentIcon(R.drawable.ic_action_osmand_logo))
 				.setOnClickListener(v -> ShareMenu.copyToClipboardWithToast(activity,
-						Version.getFullVersionWithReleaseDate(app), Toast.LENGTH_SHORT)).create());
+						Version.getFullVersionWithReleaseDate(app), false)).create());
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 		displayData.anchorView = view;

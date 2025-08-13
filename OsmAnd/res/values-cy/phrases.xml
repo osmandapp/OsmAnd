@@ -39,7 +39,7 @@
     <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
     <string name="poi_rtsa_scale_1b">1B</string>
     <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
-    <string name="poi_site_type_fortification">Amddiffynfa</string>
+    <string name="poi_archaeological_site_fortification">Amddiffynfa</string>
     <string name="poi_traffic_signals_sound">Sain</string>
     <string name="poi_tactile_paving">Pafin cyffyrddiol</string>
     <string name="poi_ferry_terminal_cargo">Cargo</string>
@@ -248,7 +248,6 @@
     <string name="poi_natural">Naturiol</string>
     <string name="poi_seamark">Morol</string>
     <string name="poi_military">Milwrol</string>
-    <string name="poi_osmwiki">Wicipedia</string>
     <string name="poi_palaeontological_site">Safle palaeontoleg</string>
     <string name="poi_bakery">Pobydd</string>
     <string name="poi_alcohol">Siop diodydd</string>
@@ -811,11 +810,6 @@
     <string name="poi_lcn_ref">Nod rhwydwaith beicio lleol</string>
     <string name="poi_iwn_ref">Nod rhwydwaith heicio rhyngwladol</string>
     <string name="poi_nwn_ref">Nod rhwydwaith heicio cenedlaethol</string>
-    <string name="poi_route_hiking_iwn_poi">Llwybr cerdded rhyngwladol</string>
-    <string name="poi_route_hiking_nwn_poi">Llwybr cerdded cenedlaethol</string>
-    <string name="poi_route_hiking_rwn_poi">Llwybr cerdded rhanbarthol</string>
-    <string name="poi_route_hiking_lwn_poi">Llwybr cerdded lleol</string>
-    <string name="poi_route_hiking_ref_poi">Cyfeirnod llwybr heicio</string>
     <string name="poi_description">Disgrifiad</string>
     <string name="poi_website">Gwefan</string>
     <string name="poi_fax">Ffacs</string>
@@ -1460,11 +1454,11 @@
     <string name="poi_material_limestone">Deunydd: calchfaen</string>
     <string name="poi_material_marble">Deunydd: marmor</string>
     <string name="poi_material_aluminium">Deunydd: alwminiwm</string>
-    <string name="poi_site_type_megalith">Megalith</string>
-    <string name="poi_site_type_settlement">Anheddiad</string>
-    <string name="poi_site_type_city">Dinas</string>
-    <string name="poi_site_type_petroglyph">Petroglyff</string>
-    <string name="poi_site_type_earthwork">Cloddwaith</string>
+    <string name="poi_archaeological_site_megalith">Megalith</string>
+    <string name="poi_archaeological_site_settlement">Anheddiad</string>
+    <string name="poi_archaeological_site_city">Dinas</string>
+    <string name="poi_archaeological_site_petroglyph">Petroglyff</string>
+    <string name="poi_archaeological_site_earthwork">Cloddwaith</string>
     <string name="poi_megalith_type_menhir">Math Megalith: menhir</string>
     <string name="poi_megalith_type_dolmen">Math Megalith: cromen</string>
     <string name="poi_megalith_type_nuraghe">Math Megalith: nuraghe</string>
@@ -2397,7 +2391,7 @@
     <string name="poi_computer_repair_no">Atgyweirio cyfrifiaduron: na</string>
     <string name="poi_computer_parts_yes">Oes;Rhannau cyfrifiaduron</string>
     <string name="poi_computer_parts_no">Rhannau cyfrifiaduron: na</string>
-    <string name="poi_climbing_crag">Oes;Clogwyn ddringo</string>
+    <string name="poi_climbing_crag">Clogwyn ddringo</string>
     <string name="poi_museum_art">Celf</string>
     <string name="poi_museum_gallery">Oriel</string>
     <string name="poi_museum_transport">Trafnidiaeth</string>
@@ -3122,7 +3116,7 @@
     <string name="poi_socket_schuko_output_high">Uchel</string>
     <string name="poi_flooring">Storfa lloriau</string>
     <string name="poi_pottery">Crochenwaith</string>
-    <string name="poi_whitewater_rapid_name">Enw dyfroedd gwylltion yr afon</string>
+    <string name="poi_rapids_name">Enw dyfroedd gwylltion yr afon</string>
     <string name="poi_outpost">Man danfon y siop</string>
     <string name="poi_barbecue_grill">Gril barbeciw: oes</string>
     <string name="poi_water_utility">Swyddfa cyfleustodau dŵr</string>
@@ -3690,9 +3684,9 @@
     <string name="poi_historic_civilization_dacian">Gwareiddiad: daciaidd</string>
     <string name="poi_historic_period_alexander_the_great">Cyfnod hanesyddol: Alecsander Fawr</string>
     <string name="poi_historic_period_ptolemaic_egypt">Cyfnod hanesyddol: yr aifft ptolemaidd (305 CC – 30 CC)</string>
-    <string name="poi_site_type_tumulus">Twmwlws</string>
-    <string name="poi_site_type_hut_circle">Cylch cytiau</string>
-    <string name="poi_site_type_necropolis">Necropolis</string>
+    <string name="poi_archaeological_site_tumulus">Twmwlws</string>
+    <string name="poi_archaeological_site_hut_circle">Cylch cytiau</string>
+    <string name="poi_archaeological_site_necropolis">Necropolis</string>
     <string name="poi_cross">Croes</string>
     <string name="poi_bathing_yes">Ymdrochi: oes</string>
     <string name="poi_bathing_no">Ymdrochi: na</string>
@@ -3748,7 +3742,7 @@
     <string name="poi_payment_contactless_no">Ddim yn derbyn digyswllt</string>
     <string name="poi_substation_converter">Trawsnewidydd</string>
     <string name="poi_substation_compensation">Iawndal</string>
-    <string name="poi_hazard_additional_rockfall">Perygl: cwymp cerrig</string>
+    <string name="poi_hazard_additional_falling_rocks">Perygl: cwymp cerrig</string>
     <string name="poi_bus_designated">Dynodedig;Dynodedig ar gyfer bysiau</string>
     <string name="poi_caravan_yes">Oes;Carafán</string>
     <string name="poi_cash_withdrawal_postfinance_card">Cerdyn post-gyllid</string>
@@ -3915,7 +3909,7 @@
     <string name="poi_energy">Storfa ynni</string>
     <string name="poi_atv">Siop cwad</string>
     <string name="poi_sewing">Siop nwyddau sych</string>
-    <string name="poi_ses_station">Gorsaf SES</string>
+    <string name="poi_disaster_response">Gorsaf SES</string>
     <string name="poi_ford_stepping_stones">Pont sarn</string>
     <string name="poi_lift_gate">Clwyd lifft</string>
     <string name="poi_traffic_calming_bump">Twmpath Cyflymder</string>

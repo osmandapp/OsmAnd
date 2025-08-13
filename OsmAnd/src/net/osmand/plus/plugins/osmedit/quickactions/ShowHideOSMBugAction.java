@@ -2,12 +2,14 @@ package net.osmand.plus.plugins.osmedit.quickactions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_OSM_BUG_ACTION_ID;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -21,9 +23,9 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_OSM_BUG_ACTION_ID,
 			"osmbug.showhide", ShowHideOSMBugAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.osm_notes).iconRes(R.drawable.ic_action_osm_note).nonEditable()
-			.category(QuickActionType.OSM_EDITING);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideOSMBugAction() {
 		super(TYPE);
@@ -34,7 +36,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			plugin.SHOW_OSM_BUGS.set(!plugin.SHOW_OSM_BUGS.get());
@@ -53,7 +55,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
 		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);

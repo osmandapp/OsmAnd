@@ -1,11 +1,13 @@
 package net.osmand.plus.plugins.weather.actions;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
@@ -36,7 +38,7 @@ public abstract class BaseWeatherQuickAction extends QuickAction {
 	public abstract int getQuickActionDescription();
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		WeatherHelper weatherHelper = app.getWeatherHelper();
 		WeatherBand weatherBand = weatherHelper.getWeatherBand(getWeatherBand());
@@ -62,14 +64,14 @@ public abstract class BaseWeatherQuickAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
 		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication app) {
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
 		WeatherBand weatherBand = app.getWeatherHelper().getWeatherBand(getWeatherBand());
 		return weatherBand != null && weatherBand.isBandVisible();
 	}

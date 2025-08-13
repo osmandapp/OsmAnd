@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:minHeight="@dimen/bottom_sheet_list_item_height">
+
+	<TextView
+		android:id="@+id/action_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:textColor="?attr/active_color_basic"
+		android:textSize="@dimen/default_list_text_size"
+		tools:text="Action" />
+
+</FrameLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:minHeight="@dimen/setting_list_item_large_height">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		tools:src="@drawable/ic_world_globe_dark" />
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginStart="@dimen/content_padding">
+
+		<LinearLayout
+			android:id="@+id/text_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/list_item_button_padding"
+			android:layout_gravity="center_vertical"
+			android:gravity="center_vertical"
+			android:minHeight="@dimen/context_menu_action_buttons_height"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/title"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:maxLines="2"
+				android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
+				tools:text="Overlay map..." />
+
+			<TextView
+				android:id="@+id/description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:gravity="end"
+				android:maxWidth="@dimen/list_item_description_width"
+				android:maxLines="1"
+				android:textColor="?attr/android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="Offline vector maps" />
+
+			<ImageView
+				android:id="@+id/secondary_icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_margin="@dimen/content_padding_small"
+				android:src="@drawable/ic_action_arrow_down" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/divider"
+			android:layout_width="wrap_content"
+			android:layout_height="1dp"
+			android:layout_gravity="bottom"
+			android:background="?attr/dashboard_divider" />
+
+	</FrameLayout>
+
+</LinearLayout>

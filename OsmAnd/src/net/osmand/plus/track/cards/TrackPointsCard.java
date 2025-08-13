@@ -31,7 +31,8 @@ import androidx.core.content.ContextCompat;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -260,7 +261,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
 		if (item != null && item.locationStart != null) {
 			notifyButtonPressed(OPEN_WAYPOINT_INDEX);
-			LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
+			LatLon location = new LatLon(item.locationStart.getLat(), item.locationStart.getLon());
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_WPT, item.name);
 
 			MapContextMenu contextMenu = mapActivity.getContextMenu();
@@ -289,7 +290,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	}
 
 	private void deleteItems() {
-		new DeletePointsTask(app, displayHelper.getGpx(), getSelectedItems(), this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new DeletePointsTask(app, displayHelper.getGpx(), getSelectedItems(), this));
 	}
 
 	private Set<GpxDisplayItem> getSelectedItems() {
@@ -445,7 +446,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			Drawable icon = groupHidden
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
-					: getContentIcon(R.drawable.ic_action_folder);
+					: getPaintedIcon(R.drawable.ic_action_folder, group.getColor());
 			ImageView groupImage = row.findViewById(R.id.icon);
 			groupImage.setImageDrawable(icon);
 
@@ -611,7 +612,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		ImageView arrow = container.findViewById(R.id.direction_arrow);
 
 		OsmandApplication app = (OsmandApplication) container.getContext().getApplicationContext();
-		UpdateLocationUtils.updateLocationView(app, cache, arrow, text, point.lat, point.lon);
+		UpdateLocationUtils.updateLocationView(app, cache, arrow, text, point.getLat(), point.getLon());
 
 		String address = point.getAddress();
 		TextView addressContainer = container.findViewById(R.id.address);
@@ -634,9 +635,9 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					for (GpxDisplayItem i : g.getDisplayItems()) {
 						if (i.name.toLowerCase().contains(cs)) {
 							filter.add(i);
-						} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.category)
-								&& i.locationStart.category.toLowerCase().contains(cs)) {
-							filter.add(i.locationStart.category);
+						} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.getCategory())
+								&& i.locationStart.getCategory().toLowerCase().contains(cs)) {
+							filter.add(i.locationStart.getCategory());
 						}
 					}
 				}

@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -20,7 +20,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 
 	@Override
 	protected int getDefaultColorId() {
@@ -52,7 +52,7 @@ public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 		ViewGroup container = view.findViewById(R.id.list_container);
 
 		for (PointsGroup pointsGroup : pointsGroups.values()) {
-			boolean hidden = !WptPtEditorFragment.isCategoryVisible(app, gpxFile, pointsGroup.name);
+			boolean hidden = !WptPtEditorFragment.isCategoryVisible(app, gpxFile, pointsGroup.getName());
 			container.addView(createCategoryItem(pointsGroup, hidden));
 		}
 

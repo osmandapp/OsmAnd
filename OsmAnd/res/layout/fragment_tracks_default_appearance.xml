@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
@@ -10,7 +10,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<androidx.core.widget.NestedScrollView
 			android:id="@+id/scroll_view"
@@ -53,7 +53,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_top" />
+			app:srcCompat="@drawable/bg_shadow_list_top" />
 
 		<FrameLayout
 			android:id="@+id/buttons_container"
@@ -67,46 +67,13 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				osmand:dialogButtonTitle="@string/shared_string_apply"
-				osmand:dialogButtonType="primary" />
+				app:dialogButtonTitle="@string/shared_string_apply"
+				app:dialogButtonType="primary" />
 
 		</FrameLayout>
 
 	</LinearLayout>
 
-	<com.google.android.material.appbar.AppBarLayout
-		android:id="@+id/appbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@android:color/transparent"
-		android:stateListAnimator="@animator/appbar_always_elevated">
-
-		<com.google.android.material.appbar.CollapsingToolbarLayout
-			android:id="@+id/toolbar_layout"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/toolbar_height_expanded_large"
-			android:background="?attr/actionModeBackground"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
-			osmand:expandedTitleMarginEnd="@dimen/content_padding"
-			osmand:expandedTitleMarginStart="@dimen/content_padding"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
-			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-			<androidx.appcompat.widget.Toolbar
-				android:id="@+id/toolbar"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/toolbar_height"
-				android:minHeight="@dimen/toolbar_height"
-				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/default_appearance"
-				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp" />
-
-		</com.google.android.material.appbar.CollapsingToolbarLayout>
-
-	</com.google.android.material.appbar.AppBarLayout>
+	<include layout="@layout/collapsed_toolbar"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

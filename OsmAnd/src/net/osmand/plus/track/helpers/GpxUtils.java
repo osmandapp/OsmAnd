@@ -9,12 +9,14 @@ import net.osmand.Location;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -30,14 +32,14 @@ public class GpxUtils {
 			return null;
 		}
 		WptPt prevPoint = points.get(0);
-		int ppx = (int) tb.getPixXFromLatLon(prevPoint.lat, prevPoint.lon);
-		int ppy = (int) tb.getPixYFromLatLon(prevPoint.lat, prevPoint.lon);
+		int ppx = (int) tb.getPixXFromLatLon(prevPoint.getLat(), prevPoint.getLon());
+		int ppy = (int) tb.getPixYFromLatLon(prevPoint.getLat(), prevPoint.getLon());
 		int pcross = placeInBbox(ppx, ppy, mx, my, r, r);
 
 		for (int i = 1; i < points.size(); i++) {
 			WptPt point = points.get(i);
-			int px = (int) tb.getPixXFromLatLon(point.lat, point.lon);
-			int py = (int) tb.getPixYFromLatLon(point.lat, point.lon);
+			int px = (int) tb.getPixXFromLatLon(point.getLat(), point.getLon());
+			int py = (int) tb.getPixYFromLatLon(point.getLat(), point.getLon());
 			int cross = placeInBbox(px, py, mx, my, r, r);
 			if (cross == 0) {
 				return new Pair<>(prevPoint, point);
@@ -83,7 +85,7 @@ public class GpxUtils {
 		}
 
 		WptPt firstPoint = points.get(0);
-		PointI previousPoint31 = NativeUtilities.getPoint31FromLatLon(firstPoint.lat, firstPoint.lon);
+		PointI previousPoint31 = NativeUtilities.getPoint31FromLatLon(firstPoint.getLat(), firstPoint.getLon());
 
 		if (NativeUtilities.isPointInsidePolygon(previousPoint31, polygon31)) {
 			WptPt secondPoint = points.get(1);
@@ -92,7 +94,7 @@ public class GpxUtils {
 
 		for (int i = 1; i < points.size(); i++) {
 			WptPt currentPoint = points.get(i);
-			PointI currentPoint31 = NativeUtilities.getPoint31FromLatLon(currentPoint.lat, currentPoint.lon);
+			PointI currentPoint31 = NativeUtilities.getPoint31FromLatLon(currentPoint.getLat(), currentPoint.getLon());
 
 			boolean lineInside = NativeUtilities.isPointInsidePolygon(currentPoint31, polygon31)
 					|| NativeUtilities.isSegmentCrossingPolygon(previousPoint31, currentPoint31, polygon31);
@@ -113,12 +115,12 @@ public class GpxUtils {
 		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
-		prevPointLocation.setLatitude(prevPoint.lat);
-		prevPointLocation.setLongitude(prevPoint.lon);
+		prevPointLocation.setLatitude(prevPoint.getLatitude());
+		prevPointLocation.setLongitude(prevPoint.getLongitude());
 
 		Location nextPointLocation = new Location("");
-		nextPointLocation.setLatitude(nextPoint.lat);
-		nextPointLocation.setLongitude(nextPoint.lon);
+		nextPointLocation.setLatitude(nextPoint.getLatitude());
+		nextPointLocation.setLongitude(nextPoint.getLongitude());
 
 		float bearing = prevPointLocation.bearingTo(nextPointLocation);
 
@@ -127,17 +129,17 @@ public class GpxUtils {
 	}
 
 	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
-		LatLon projection = MapUtils.getProjection(latLon.getLatitude(), latLon.getLongitude(), prevPoint.lat, prevPoint.lon, nextPoint.lat, nextPoint.lon);
+		LatLon projection = MapUtils.getProjection(latLon.getLatitude(), latLon.getLongitude(), prevPoint.getLat(), prevPoint.getLon(), nextPoint.getLat(), nextPoint.getLon());
 
 		WptPt projectionPoint = new WptPt();
-		projectionPoint.lat = projection.getLatitude();
-		projectionPoint.lon = projection.getLongitude();
-		projectionPoint.heading = prevPoint.heading;
-		projectionPoint.distance = prevPoint.distance + MapUtils.getDistance(projection, prevPoint.lat, prevPoint.lon);
-		projectionPoint.ele = getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.ele, nextPoint.distance, nextPoint.ele);
-		projectionPoint.speed = getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.speed, nextPoint.distance, nextPoint.speed);
-		if (prevPoint.time != 0 && nextPoint.time != 0) {
-			projectionPoint.time = (long) getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.time, nextPoint.distance, nextPoint.time);
+		projectionPoint.setLat(projection.getLatitude());
+		projectionPoint.setLon(projection.getLongitude());
+		projectionPoint.setHeading(prevPoint.getHeading());
+		projectionPoint.setDistance(prevPoint.getDistance() + MapUtils.getDistance(projection, prevPoint.getLat(), prevPoint.getLon()));
+		projectionPoint.setEle(getValueByDistInterpolation(projectionPoint.getDistance(), prevPoint.getDistance(), prevPoint.getEle(), nextPoint.getDistance(), nextPoint.getEle()));
+		projectionPoint.setSpeed(getValueByDistInterpolation(projectionPoint.getDistance(), prevPoint.getDistance(), prevPoint.getSpeed(), nextPoint.getDistance(), nextPoint.getSpeed()));
+		if (prevPoint.getTime() != 0 && nextPoint.getTime() != 0) {
+			projectionPoint.setTime((long) getValueByDistInterpolation(projectionPoint.getDistance(), prevPoint.getDistance(), prevPoint.getTime(), nextPoint.getDistance(), nextPoint.getTime()));
 		}
 
 		return projectionPoint;
@@ -157,27 +159,27 @@ public class GpxUtils {
 	}
 
 	@Nullable
-	public static WptPt getSegmentPointByTime(@NonNull TrkSegment segment, @NonNull GPXFile gpxFile,
+	public static WptPt getSegmentPointByTime(@NonNull TrkSegment segment, @NonNull GpxFile gpxFile,
 	                                          float time, boolean preciseLocation, boolean joinSegments) {
-		if (!segment.generalSegment || joinSegments) {
+		if (!segment.getGeneralSegment() || joinSegments) {
 			return getSegmentPointByTime(segment, time, 0, preciseLocation);
 		}
 
 		long passedSegmentsTime = 0;
-		for (Track track : gpxFile.tracks) {
-			if (track.generalTrack) {
+		for (Track track : gpxFile.getTracks()) {
+			if (track.isGeneralTrack()) {
 				continue;
 			}
 
-			for (TrkSegment seg : track.segments) {
+			for (TrkSegment seg : track.getSegments()) {
 				WptPt point = getSegmentPointByTime(seg, time, passedSegmentsTime, preciseLocation);
 				if (point != null) {
 					return point;
 				}
 
-				long segmentStartTime = Algorithms.isEmpty(seg.points) ? 0 : seg.points.get(0).time;
-				long segmentEndTime = Algorithms.isEmpty(seg.points) ?
-						0 : seg.points.get(seg.points.size() - 1).time;
+				long segmentStartTime = Algorithms.isEmpty(seg.getPoints()) ? 0 : seg.getPoints().get(0).getTime();
+				long segmentEndTime = Algorithms.isEmpty(seg.getPoints()) ?
+						0 : seg.getPoints().get(seg.getPoints().size() - 1).getTime();
 				passedSegmentsTime += segmentEndTime - segmentStartTime;
 			}
 		}
@@ -189,9 +191,9 @@ public class GpxUtils {
 	private static WptPt getSegmentPointByTime(@NonNull TrkSegment segment, float timeToPoint,
 	                                           long passedSegmentsTime, boolean preciseLocation) {
 		WptPt previousPoint = null;
-		long segmentStartTime = segment.points.get(0).time;
-		for (WptPt currentPoint : segment.points) {
-			long totalPassedTime = passedSegmentsTime + currentPoint.time - segmentStartTime;
+		long segmentStartTime = segment.getPoints().get(0).getTime();
+		for (WptPt currentPoint : segment.getPoints()) {
+			long totalPassedTime = passedSegmentsTime + currentPoint.getTime() - segmentStartTime;
 			if (totalPassedTime >= timeToPoint) {
 				return preciseLocation && previousPoint != null
 						? getIntermediatePointByTime(totalPassedTime, timeToPoint, previousPoint, currentPoint)
@@ -205,29 +207,29 @@ public class GpxUtils {
 	@NonNull
 	private static WptPt getIntermediatePointByTime(double passedTime, double timeToPoint,
 	                                                WptPt prevPoint, WptPt currPoint) {
-		double percent = 1 - (passedTime - timeToPoint) / (currPoint.time - prevPoint.time);
-		double dLat = (currPoint.lat - prevPoint.lat) * percent;
-		double dLon = (currPoint.lon - prevPoint.lon) * percent;
+		double percent = 1 - (passedTime - timeToPoint) / (currPoint.getTime() - prevPoint.getTime());
+		double dLat = (currPoint.getLat() - prevPoint.getLat()) * percent;
+		double dLon = (currPoint.getLon() - prevPoint.getLon()) * percent;
 		WptPt intermediatePoint = new WptPt();
-		intermediatePoint.lat = prevPoint.lat + dLat;
-		intermediatePoint.lon = prevPoint.lon + dLon;
+		intermediatePoint.setLat(prevPoint.getLat() + dLat);
+		intermediatePoint.setLon(prevPoint.getLon() + dLon);
 		return intermediatePoint;
 	}
 
 	@Nullable
-	public static WptPt getSegmentPointByDistance(@NonNull TrkSegment segment, @NonNull GPXFile gpxFile,
+	public static WptPt getSegmentPointByDistance(@NonNull TrkSegment segment, @NonNull GpxFile gpxFile,
 	                                              float distanceToPoint, boolean preciseLocation,
 	                                              boolean joinSegments) {
 		double passedDistance = 0;
-		if (!segment.generalSegment || joinSegments) {
+		if (!segment.isGeneralSegment() || joinSegments) {
 			WptPt prevPoint = null;
-			for (int i = 0; i < segment.points.size(); i++) {
-				WptPt currPoint = segment.points.get(i);
+			for (int i = 0; i < segment.getPoints().size(); i++) {
+				WptPt currPoint = segment.getPoints().get(i);
 				if (prevPoint != null) {
-					passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon, currPoint.lat, currPoint.lon);
+					passedDistance += MapUtils.getDistance(prevPoint.getLat(), prevPoint.getLon(), currPoint.getLat(), currPoint.getLon());
 				}
-				if (currPoint.distance >= distanceToPoint || Math.abs(passedDistance - distanceToPoint) < 0.1) {
-					return preciseLocation && prevPoint != null && currPoint.distance >= distanceToPoint
+				if (currPoint.getDistance() >= distanceToPoint || Math.abs(passedDistance - distanceToPoint) < 0.1) {
+					return preciseLocation && prevPoint != null && currPoint.getDistance() >= distanceToPoint
 							? getIntermediatePointByDistance(passedDistance, distanceToPoint, currPoint, prevPoint)
 							: currPoint;
 				}
@@ -238,30 +240,30 @@ public class GpxUtils {
 		passedDistance = 0;
 		double passedSegmentsPointsDistance = 0;
 		WptPt prevPoint = null;
-		for (Track track : gpxFile.tracks) {
-			if (track.generalTrack) {
+		for (Track track : gpxFile.getTracks()) {
+			if (track.isGeneralTrack()) {
 				continue;
 			}
-			for (TrkSegment seg : track.segments) {
-				if (Algorithms.isEmpty(seg.points)) {
+			for (TrkSegment seg : track.getSegments()) {
+				if (Algorithms.isEmpty(seg.getPoints())) {
 					continue;
 				}
-				for (WptPt currPoint : seg.points) {
+				for (WptPt currPoint : seg.getPoints()) {
 					if (prevPoint != null) {
-						passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon,
-								currPoint.lat, currPoint.lon);
+						passedDistance += MapUtils.getDistance(prevPoint.getLat(), prevPoint.getLon(),
+								currPoint.getLat(), currPoint.getLon());
 					}
-					if (passedSegmentsPointsDistance + currPoint.distance >= distanceToPoint
+					if (passedSegmentsPointsDistance + currPoint.getDistance() >= distanceToPoint
 							|| Math.abs(passedDistance - distanceToPoint) < 0.1) {
 						return preciseLocation && prevPoint != null
-								&& currPoint.distance + passedSegmentsPointsDistance >= distanceToPoint
+								&& currPoint.getDistance() + passedSegmentsPointsDistance >= distanceToPoint
 								? getIntermediatePointByDistance(passedDistance, distanceToPoint, currPoint, prevPoint)
 								: currPoint;
 					}
 					prevPoint = currPoint;
 				}
 				prevPoint = null;
-				passedSegmentsPointsDistance += seg.points.get(seg.points.size() - 1).distance;
+				passedSegmentsPointsDistance += seg.getPoints().get(seg.getPoints().size() - 1).getDistance();
 			}
 		}
 		return null;
@@ -270,12 +272,61 @@ public class GpxUtils {
 	@NonNull
 	private static WptPt getIntermediatePointByDistance(double passedDistance, double distanceToPoint,
 	                                                    WptPt currPoint, WptPt prevPoint) {
-		double percent = 1 - (passedDistance - distanceToPoint) / (currPoint.distance - prevPoint.distance);
-		double dLat = (currPoint.lat - prevPoint.lat) * percent;
-		double dLon = (currPoint.lon - prevPoint.lon) * percent;
+		double percent = 1 - (passedDistance - distanceToPoint) / (currPoint.getDistance() - prevPoint.getDistance());
+		double dLat = (currPoint.getLat() - prevPoint.getLat()) * percent;
+		double dLon = (currPoint.getLon() - prevPoint.getLon()) * percent;
 		WptPt intermediatePoint = new WptPt();
-		intermediatePoint.lat = prevPoint.lat + dLat;
-		intermediatePoint.lon = prevPoint.lon + dLon;
+		intermediatePoint.setLat(prevPoint.getLat() + dLat);
+		intermediatePoint.setLon(prevPoint.getLon() + dLon);
 		return intermediatePoint;
+	}
+
+	@Nullable
+	public static LatLon calculateProjectionOnRoute(@NonNull RoutingHelper routingHelper, @NonNull RotatedTileBox tileBox) {
+		Location lastLocation = routingHelper.getLastFixedLocation();
+		RouteCalculationResult route = routingHelper.getRoute();
+		List<Location> locations = route.getImmutableAllLocations();
+
+		int currentRoute = route.getCurrentRoute();
+		int locIndex = locations.size() - 1;
+		if (route.getIntermediatePointsToPass() > 0) {
+			locIndex = route.getIndexOfIntermediate(route.getIntermediatePointsToPass() - 1);
+		}
+		if (lastLocation != null && currentRoute > 0 && currentRoute < locations.size()
+				&& locIndex >= 0 && locIndex < locations.size()) {
+			Location target = locations.get(locIndex);
+			double targetDistance = lastLocation.distanceTo(target);
+			LatLon latLon = calculateProjectionOnSegment(locations, target, currentRoute - 1, targetDistance);
+			if (latLon == null) {
+				latLon = calculateProjectionOnSegment(locations, target, currentRoute, targetDistance);
+			}
+			return latLon != null && tileBox.containsLatLon(latLon) ? latLon : null;
+		}
+		return null;
+	}
+
+	@Nullable
+	private static LatLon calculateProjectionOnSegment(@NonNull List<Location> locations,
+			@NonNull Location target, int index, double targetDistance) {
+		if (index < 0 || index + 1 >= locations.size()) {
+			return null;
+		}
+		Location loc1 = locations.get(index);
+		Location loc2 = locations.get(index + 1);
+		if (loc1.distanceTo(loc2) == 0) {
+			return null;
+		}
+		double distance1 = loc1.distanceTo(target);
+		double distance2 = loc2.distanceTo(target);
+		double deltaDistance = distance1 - distance2;
+		if (deltaDistance != 0) {
+			double coeff = (distance1 - targetDistance) / deltaDistance;
+			if (coeff >= 0.0 && coeff <= 1.0) {
+				return MapUtils.calculateIntermediatePoint(
+						loc1.getLatitude(), loc1.getLongitude(),
+						loc2.getLatitude(), loc2.getLongitude(), coeff);
+			}
+		}
+		return null;
 	}
 }

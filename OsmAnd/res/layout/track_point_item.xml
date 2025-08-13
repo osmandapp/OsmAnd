@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
 						android:layout_marginBottom="@dimen/text_margin_small"
 						android:contentDescription="@string/show_view_angle"
 						android:scaleType="center"
-						osmand:srcCompat="@drawable/ic_direction_arrow"
+						app:srcCompat="@drawable/ic_direction_arrow"
 						tools:tint="@color/icon_color_active_light" />
 
 					<net.osmand.plus.widgets.TextViewEx
@@ -92,7 +92,7 @@
 						android:layout_marginStart="@dimen/content_padding"
 						android:layout_marginEnd="@dimen/content_padding"
 						android:tint="?attr/default_icon_color"
-						osmand:srcCompat="@drawable/circle_background_light" />
+						app:srcCompat="@drawable/circle_background_light" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/address"

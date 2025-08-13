@@ -1,8 +1,14 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
+import static net.osmand.plus.views.mapwidgets.TopToolbarController.NO_COLOR;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -27,9 +33,11 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.UiContext;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SwitchCompat;
@@ -54,10 +62,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.TextViewEx;
@@ -138,6 +149,21 @@ public class UiUtilities {
 		return getDrawable(id, colorId);
 	}
 
+	@Nullable
+	public Drawable getRenderingIcon(@NonNull Context ctx, @NonNull String fileName, boolean nightMode) {
+		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
+		if (d != null) {
+			int color = ColorUtilities.getColor(ctx, nightMode
+					? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark);
+			d = DrawableCompat.wrap(d);
+			d.mutate();
+			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+			return d;
+		} else {
+			return null;
+		}
+	}
+
 	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId) {
 		return getLayeredIcon(bgIconId, foregroundIconId, 0, 0);
 	}
@@ -147,6 +173,10 @@ public class UiUtilities {
 		Drawable background = getDrawable(bgIconId, bgColorId);
 		Drawable foreground = getDrawable(foregroundIconId, foregroundColorId);
 		return getLayeredIcon(background, foreground);
+	}
+
+	public void clearCache() {
+		drawableCache.clear();
 	}
 
 	public static Drawable getLayeredIcon(Drawable... icons) {
@@ -598,21 +628,32 @@ public class UiUtilities {
 	}
 
 	@NonNull
-	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId) {
+		return inflate(ctx, nightMode, layoutId, null, false);
+	}
+
+	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId,
+	                           @Nullable ViewGroup root, boolean attachToRoot) {
+		return getInflater(ctx, nightMode).inflate(layoutId, root, attachToRoot);
+	}
+
+	@NonNull
+	public static LayoutInflater getInflater(@NonNull Context ctx, boolean nightMode) {
 		return LayoutInflater.from(getThemedContext(ctx, nightMode));
 	}
 
 	@NonNull
-	public static Context getThemedContext(Context context, boolean nightMode) {
+	public static Context getThemedContext(@NonNull Context context, boolean nightMode) {
 		return getThemedContext(context, nightMode, R.style.OsmandLightTheme, R.style.OsmandDarkTheme);
 	}
 
 	@NonNull
-	public static Context getThemedContext(Context context, boolean nightMode, int lightStyle, int darkStyle) {
+	public static Context getThemedContext(@NonNull Context context, boolean nightMode, int lightStyle, int darkStyle) {
 		return new ContextThemeWrapper(context, nightMode ? darkStyle : lightStyle);
 	}
 
-	public static void setMargins(View v, int s, int t, int e, int b) {
+	public static void setMargins(@NonNull View v, int s, int t, int e, int b) {
 		if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
 			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
 			AndroidUtils.setMargins(p, s, t, e, b);
@@ -719,22 +760,23 @@ public class UiUtilities {
 			return;
 		}
 
-		int color = TopToolbarController.NO_COLOR;
-		boolean mapControlsVisible = activity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
-		boolean topToolbarVisible = mapLayers.getMapInfoLayer().isTopToolbarViewVisible();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		MapInfoLayer infoLayer = mapLayers.getMapInfoLayer();
+		boolean mapControlsVisible = infoLayer.isMapControlsVisible();
+		boolean topToolbarVisible = infoLayer.isTopToolbarViewVisible();
+		boolean nightMode = app.getDaynightHelper().isNightMode(OVER_MAP);
 
-		TopToolbarController toolbarController = mapLayers.getMapInfoLayer().getTopToolbarController();
+		int color = NO_COLOR;
+		TopToolbarController toolbarController = infoLayer.getTopToolbarController();
 		if (toolbarController != null && mapControlsVisible && topToolbarVisible) {
-			color = toolbarController.getStatusBarColor(activity, night);
+			color = toolbarController.getStatusBarColor(activity, nightMode);
 		}
-		if (color == TopToolbarController.NO_COLOR) {
+		if (color == NO_COLOR) {
 			ApplicationMode appMode = settings.getApplicationMode();
 			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, night);
+			int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, nightMode);
 			if (colorIdForTopWidget != -1) {
-				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, night);
+				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, nightMode);
 			}
 
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
@@ -744,4 +786,14 @@ public class UiUtilities {
 
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 	}
+
+	public Bitmap getScaledBitmap(@UiContext Context context, @DrawableRes int drawableId, float scale) {
+		Bitmap bitmap = BitmapFactory.decodeResource(context == null ? app.getResources() : context.getResources(), drawableId);
+		if (bitmap != null && scale != 1f && scale > 0) {
+			bitmap = AndroidUtils.scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+		return bitmap;
+	}
+
 }

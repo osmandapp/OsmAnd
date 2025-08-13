@@ -15,7 +15,7 @@ public class MediaRemoteControlReceiver extends BroadcastReceiver {
 //					plugin.getActivity() != null) {
 //
 //				System.out.println("OsmAnd AV Button pressed " + intent.getIntExtra(Intent.EXTRA_KEY_EVENT, 0));
-				// Toast.makeText(context, "Button pressed " + intent.getIntExtra(Intent.EXTRA_KEY_EVENT, 0), Toast.LENGTH_LONG).show();
+				// app.showToastMessage("Button pressed " + intent.getIntExtra(Intent.EXTRA_KEY_EVENT, 0));
 //				plugin.defaultAction(plugin.getActivity());
 //			}
 //		}

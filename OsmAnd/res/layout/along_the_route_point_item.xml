@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/package_delivered_layout"
 	android:layout_width="match_parent"
@@ -24,7 +24,7 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding"
-			osmand:srcCompat="@drawable/ic_action_favorite"
+			app:srcCompat="@drawable/ic_action_favorite"
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding" />
 
@@ -103,7 +103,7 @@
 			android:contentDescription="@string/shared_string_delete"
 			android:focusable="false"
 			android:scaleType="center"
-			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+			app:srcCompat="@drawable/ic_action_remove_dark" />
 
 	</LinearLayout>
 

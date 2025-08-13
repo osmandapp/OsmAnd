@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
@@ -23,6 +26,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -41,9 +45,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 
 public class TerrainLayer extends MapTileLayer {
@@ -277,7 +278,7 @@ public class TerrainLayer extends MapTileLayer {
 				return rs;
 			}
 		};
-		executeTaskInBackground(task);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	private SQLiteTileSource createTileSource(@NonNull OsmandApplication app) {

@@ -1,18 +1,21 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class EnumStringPreference<E extends Enum<E>> extends CommonPreference<E> {
 
 	private final E[] values;
 
-	public EnumStringPreference(OsmandSettings settings, String id, E defaultValue, E[] values) {
+	public EnumStringPreference(@NonNull OsmandSettings settings, @NonNull String id,
+			E defaultValue, E[] values) {
 		super(settings, id, defaultValue);
 		this.values = values;
 	}
 
 	@Override
-	public E getValue(Object prefs, E defaultValue) {
+	public E getValue(@NonNull Object prefs, E defaultValue) {
 		try {
 			String defaultValueName = defaultValue == null ? null : defaultValue.name();
 			String name = getSettingsAPI().getString(prefs, getId(), defaultValueName);

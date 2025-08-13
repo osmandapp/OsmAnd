@@ -1,11 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.*;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
@@ -25,42 +21,36 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.odb.OBDWidgetSettingFragment;
+import net.osmand.plus.plugins.odb.OBDRemainingFuelWidget;
+import net.osmand.plus.plugins.odb.dialogs.FuelConsumptionSettingFragment;
+import net.osmand.plus.plugins.odb.OBDFuelConsumptionWidget;
+import net.osmand.plus.plugins.odb.OBDTextWidget;
+import net.osmand.plus.plugins.odb.dialogs.RemainingFuelSettingFragment;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.ZoomLevelSettingsFragment;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.plus.views.mapwidgets.configure.settings.*;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public enum WidgetType {
 
 	// Left Panel
-	NEXT_TURN("next_turn", R.string.map_widget_next_turn, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_day, R.drawable.widget_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, LEFT),
-	SMALL_NEXT_TURN("next_turn_small", R.string.map_widget_next_turn_small, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_small_day, R.drawable.widget_next_turn_small_night, 0, WidgetGroup.ROUTE_MANEUVERS, LEFT),
-	SECOND_NEXT_TURN("next_next_turn", R.string.map_widget_next_next_turn, R.string.second_next_turn_widget_desc, R.drawable.widget_second_next_turn_day, R.drawable.widget_second_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, LEFT),
+	NEXT_TURN("next_turn", R.string.map_widget_next_turn, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_day, R.drawable.widget_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, ROUTE_GUIDANCE, TOP),
+	SMALL_NEXT_TURN("next_turn_small", R.string.map_widget_next_turn_small, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_small_day, R.drawable.widget_next_turn_small_night, 0, ROUTE_MANEUVERS, LEFT),
+	SECOND_NEXT_TURN("next_next_turn", R.string.map_widget_next_next_turn, R.string.second_next_turn_widget_desc, R.drawable.widget_second_next_turn_day, R.drawable.widget_second_next_turn_night, 0, ROUTE_MANEUVERS, ROUTE_GUIDANCE, LEFT),
 
 	// Top panel
 	COORDINATES_MAP_CENTER("coordinates_map_center", R.string.coordinates_widget_map_center, R.string.coordinates_widget_map_center_desc, R.drawable.widget_coordinates_map_center_day, R.drawable.widget_coordinates_map_center_night, R.string.docs_widget_coordinates, WidgetGroup.COORDINATES_WIDGET, TOP),
 	COORDINATES_CURRENT_LOCATION("coordinates_current_location", R.string.coordinates_widget_current_location, R.string.coordinates_widget_current_location_desc, R.drawable.widget_coordinates_location_day, R.drawable.widget_coordinates_location_night, R.string.docs_widget_coordinates, WidgetGroup.COORDINATES_WIDGET, TOP),
-	STREET_NAME("street_name", R.string.street_name, R.string.street_name_widget_desc, R.drawable.widget_street_name_day, R.drawable.widget_street_name_night, R.string.docs_widget_street_name, null, TOP),
+	STREET_NAME("street_name", R.string.street_name, R.string.street_name_widget_desc, R.drawable.widget_street_name_day, R.drawable.widget_street_name_night, R.string.docs_widget_street_name, null, BOTTOM),
 	MARKERS_TOP_BAR("map_markers_top", R.string.map_markers_bar, R.string.map_markers_bar_widget_desc, R.drawable.widget_markers_topbar_day, R.drawable.widget_markers_topbar_night, R.string.docs_widget_markers, null, TOP),
-	LANES("lanes", R.string.show_lanes, R.string.lanes_widgets_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_lanes, null, TOP),
+	LANES("lanes", R.string.show_lanes, R.string.lanes_widgets_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_lanes, null, ROUTE_GUIDANCE, TOP),
 
 	// Right panel
 	DISTANCE_TO_DESTINATION("distance", R.string.map_widget_distance_to_destination, R.string.distance_to_destination_widget_desc, R.drawable.widget_target_day, R.drawable.widget_target_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
@@ -81,7 +71,7 @@ public enum WidgetType {
 	ALTITUDE_MAP_CENTER("altitude_map_center", R.string.map_widget_altitude_map_center, R.string.map_widget_altitude_map_center_desc, R.drawable.widget_altitude_map_center_day, R.drawable.widget_altitude_map_center_night, 0, WidgetGroup.ALTITUDE, RIGHT),
 	GPS_INFO("gps_info", R.string.map_widget_gps_info, R.string.gps_info_widget_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
 
-	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_trip_recording_distance, R.string.trip_recording_distance_widget_desc, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
+	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_distance, R.string.trip_recording_distance_widget_desc, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_TIME("trip_recording_time", R.string.map_widget_trip_recording_duration, R.string.trip_recording_duration_widget_desc, R.drawable.widget_track_recording_duration_day, R.drawable.widget_track_recording_duration_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_UPHILL("trip_recording_uphill", R.string.map_widget_trip_recording_uphill, R.string.trip_recording_uphill_widget_desc, R.drawable.widget_track_recording_uphill_day, R.drawable.widget_track_recording_uphill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_DOWNHILL("trip_recording_downhill", R.string.map_widget_trip_recording_downhill, R.string.trip_recording_downhill_widget_desc, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
@@ -109,6 +99,23 @@ public enum WidgetType {
 
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
+	OBD_SPEED("obd_speed", R.string.obd_widget_vehicle_speed, R.string.obd_speed_desc, R.drawable.widget_obd_speed_day, R.drawable.widget_obd_speed_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_RPM("obd_rpm", R.string.obd_widget_engine_speed, R.string.obd_rpm_desc, R.drawable.widget_obd_engine_speed_day, R.drawable.widget_obd_engine_speed_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_ENGINE_RUNTIME("obd_engine_runtime", R.string.obd_engine_runtime, R.string.obd_engine_runtime_desc, R.drawable.widget_obd_engine_runtime_day, R.drawable.widget_obd_engine_runtime_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_PRESSURE("obd_fuel_pressure", R.string.obd_fuel_pressure, R.string.obd_fuel_pressure_desc, R.drawable.widget_obd_fuel_pressure_day, R.drawable.widget_obd_fuel_pressure_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_obd_temperature_intake_day, R.drawable.widget_obd_temperature_intake_night, 0, VEHICLE_METRICS, RIGHT),
+	ENGINE_OIL_TEMPERATURE("obd_engine_oil_temperature", R.string.obd_engine_oil_temperature, R.string.obd_engine_oil_temperature_desc, R.drawable.widget_obd_temperature_engine_oil_day, R.drawable.widget_obd_temperature_engine_oil_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_obd_temperature_outside_day, R.drawable.widget_obd_temperature_outside_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_obd_battery_voltage_day, R.drawable.widget_obd_battery_voltage_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_obd_temperature_coolant_day, R.drawable.widget_obd_temperature_coolant_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_REMAINING_FUEL("obd_remaining_fuel", R.string.remaining_fuel, R.string.remaining_fuel_description, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_CALCULATED_ENGINE_LOAD("obd_calculated_engine_load", R.string.obd_calculated_engine_load, R.string.obd_calculated_engine_load_desc, R.drawable.widget_obd_engine_calculated_load_day, R.drawable.widget_obd_engine_calculated_load_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_THROTTLE_POSITION("obd_throttle_position", R.string.obd_throttle_position, R.string.obd_throttle_position_desc, R.drawable.widget_obd_throttle_position_day, R.drawable.widget_obd_throttle_position_night, 0, VEHICLE_METRICS, RIGHT),
+
+	OBD_FUEL_CONSUMPTION("obd_fuel_consumption", R.string.obd_fuel_consumption, R.string.obd_fuel_consumption_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
+//	OBD_VIN("obd_vin", R.string.obd_vin, R.string.obd_vin_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+//	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+
 	TEMPERATURE("temperature_sensor", R.string.shared_string_temperature, R.string.sensor_temperature_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, ANT_PLUS, RIGHT),
 	HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_sensor_heart_rate_day, R.drawable.widget_sensor_heart_rate_night, 0, ANT_PLUS, RIGHT),
 	BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_sensor_bicycle_power_day, R.drawable.widget_sensor_bicycle_power_night, 0, ANT_PLUS, RIGHT),
@@ -131,6 +138,7 @@ public enum WidgetType {
 	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.map_widget_glide_average_desc, R.drawable.widget_glide_ratio_average_day, R.drawable.widget_glide_ratio_average_night, 0, GLIDE, RIGHT),
 
 	// Bottom panel
+	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, null, NAVIGATION_POINTS, BOTTOM),
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
 
 	public static final String INTERMEDIATE_TIME_WIDGET_LEGACY = "intermediate_time";
@@ -156,6 +164,8 @@ public enum WidgetType {
 	public final int docsUrlId;
 	@Nullable
 	private final WidgetGroup group;
+	@Nullable
+	private final WidgetGroup verticalGroup;
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
@@ -167,6 +177,18 @@ public enum WidgetType {
 			   @StringRes int docsUrlId,
 			   @Nullable WidgetGroup group,
 			   @NonNull WidgetsPanel defaultPanel) {
+		this(id, titleId, descId, dayIconId, nightIconId, docsUrlId, group, null, defaultPanel);
+	}
+
+	WidgetType(@NonNull String id,
+	           @StringRes int titleId,
+	           @StringRes int descId,
+	           @DrawableRes int dayIconId,
+	           @DrawableRes int nightIconId,
+	           @StringRes int docsUrlId,
+	           @Nullable WidgetGroup group,
+	           @Nullable WidgetGroup verticalGroup,
+	           @NonNull WidgetsPanel defaultPanel) {
 		this.id = id;
 		this.titleId = titleId;
 		this.descId = descId;
@@ -174,6 +196,7 @@ public enum WidgetType {
 		this.nightIconId = nightIconId;
 		this.docsUrlId = docsUrlId;
 		this.group = group;
+		this.verticalGroup = verticalGroup;
 		this.defaultPanel = defaultPanel;
 	}
 
@@ -182,17 +205,38 @@ public enum WidgetType {
 		return night ? nightIconId : dayIconId;
 	}
 
+	@Nullable
 	public WidgetGroup getGroup() {
-		if (group == ALTITUDE && !ALTITUDE_MAP_CENTER.isAllowed()) {
-			return null;
-		}
 		return group;
+	}
+
+	@Nullable
+	public WidgetGroup getGroup(@NonNull WidgetsPanel panel) {
+		if(panel.isPanelVertical() && verticalGroup != null){
+			return verticalGroup;
+		}
+		return getGroup();
+	}
+
+	@Nullable
+	public WidgetGroup getVerticalGroup() {
+		return verticalGroup;
 	}
 
 	public boolean isAllowed() {
 		if (this == ALTITUDE_MAP_CENTER) {
 			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 			return plugin != null && plugin.is3DReliefAllowed();
+		}
+		return true;
+	}
+
+	public boolean isPanelsAllowed(@NonNull List<WidgetsPanel> panels) {
+		if (this == SMALL_NEXT_TURN) {
+			return !panels.contains(TOP) && !panels.contains(BOTTOM);
+		}
+		if (this == ROUTE_INFO) {
+			return !panels.contains(LEFT) && !panels.contains(RIGHT);
 		}
 		return true;
 	}
@@ -244,11 +288,8 @@ public enum WidgetType {
 	}
 
 	public boolean isPurchased(@NonNull Context ctx) {
-		if (getProWidgets().contains(this)) {
-			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			return InAppPurchaseUtils.isProWidgetsAvailable(app);
-		}
-		return true;
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		return InAppPurchaseUtils.isWidgetPurchased(app, this);
 	}
 
 	public int getDefaultOrder() {
@@ -300,21 +341,21 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	public WidgetSettingsBaseFragment getSettingsFragment(@NonNull Context ctx, @Nullable MapWidgetInfo widgetInfo) {
+	public WidgetInfoBaseFragment getSettingsFragment(@NonNull Context ctx, @Nullable MapWidgetInfo widgetInfo) {
 		if (this == ELEVATION_PROFILE) {
-			return isPurchased(ctx) ? new ElevationProfileWidgetSettingsFragment() : null;
+			return isPurchased(ctx) ? new ElevationProfileWidgetInfoFragment() : null;
 		} else if (this == MARKERS_TOP_BAR) {
 			return new MapMarkersBarWidgetSettingFragment();
 		} else if (this == RADIUS_RULER) {
-			return new RadiusRulerWidgetSettingsFragment();
+			return new RadiusRulerWidgetInfoFragment();
 		} else if (this == TIME_TO_INTERMEDIATE || this == TIME_TO_DESTINATION) {
-			return new TimeToNavigationPointSettingsFragment();
+			return new TimeToNavigationPointInfoFragment();
 		} else if (this == SIDE_MARKER_1 || this == SIDE_MARKER_2) {
-			return new MapMarkerSideWidgetSettingsFragment();
+			return new MapMarkerSideWidgetInfoFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
 		} else if (this == SUNRISE || this == SUNSET || this == SUN_POSITION) {
-			return new SunriseSunsetSettingsFragment();
+			return new SunriseSunsetInfoFragment();
 		} else if (this == HEART_RATE ||
 				this == BICYCLE_POWER ||
 				this == BICYCLE_CADENCE ||
@@ -324,18 +365,44 @@ public enum WidgetType {
 				this == TEMPERATURE) {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
-			return new AverageGlideWidgetSettingsFragment();
+			return new AverageGlideWidgetInfoFragment();
 		} else if (this == DEV_ZOOM_LEVEL) {
-			return new ZoomLevelSettingsFragment();
+			return new ZoomLevelInfoFragment();
+		} else if (this == LANES) {
+			return new LanesWidgetInfoFragment();
+		} else if (this == ROUTE_INFO) {
+			return new RouteInfoWidgetInfoFragment();
+		} else if (this == STREET_NAME) {
+			return new StreetNameWidgetInfoFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
-			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
-			if (simpleWidget.isVerticalWidget()) {
-				BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
-				settingsFragment.setWidgetType(this);
-				return settingsFragment;
+			WidgetInfoBaseFragment OBDSettingFragment = getOBDWidgetSettings(ctx, widgetInfo);
+			if (OBDSettingFragment != null) {
+				return OBDSettingFragment;
 			}
+
+			return new BaseSimpleWidgetInfoFragment();
+		} else if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing) {
+			if (widgetInfo.widgetPanel.isPanelVertical()) {
+				return new BaseResizableWidgetSettingFragment();
+			}
+		}
+		return new WidgetInfoBaseFragment();
+	}
+
+	@Nullable
+	private WidgetInfoBaseFragment getOBDWidgetSettings(@NonNull Context ctx,
+	                                                    @Nullable MapWidgetInfo widgetInfo) {
+		if (widgetInfo == null || !isPurchased(ctx)) {
+			return null;
+		}
+		if (widgetInfo.widget instanceof OBDFuelConsumptionWidget) {
+			return new FuelConsumptionSettingFragment();
+		} else if (widgetInfo.widget instanceof OBDRemainingFuelWidget) {
+			return new RemainingFuelSettingFragment();
+		} else if (widgetInfo.widget instanceof OBDTextWidget obdTextWidget && (obdTextWidget.supportsAverageMode() || obdTextWidget.isTemperatureWidget())) {
+			return new OBDWidgetSettingFragment();
 		}
 		return null;
 	}
@@ -358,9 +425,9 @@ public enum WidgetType {
 		return null;
 	}
 
-	@NonNull
-	public static List<WidgetType> getProWidgets() {
-		return Collections.singletonList(ELEVATION_PROFILE);
+	public boolean isProWidget() {
+		return this == ELEVATION_PROFILE || this == ALTITUDE_MAP_CENTER
+				|| (isOBDWidget() && this != OBD_SPEED && this != OBD_RPM);
 	}
 
 	public static boolean isOriginalWidget(@NonNull String widgetId) {
@@ -369,6 +436,10 @@ public enum WidgetType {
 
 	public static boolean isComplexWidget(@NonNull String widgetId) {
 		return CollectionUtils.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
+	}
+
+	public boolean isOBDWidget() {
+		return getGroup() == VEHICLE_METRICS;
 	}
 
 	@NonNull
@@ -391,5 +462,16 @@ public enum WidgetType {
 	@NonNull
 	public static String getDuplicateWidgetId(@NonNull String widgetId) {
 		return getDefaultWidgetId(widgetId) + DELIMITER + System.currentTimeMillis();
+	}
+
+	@NonNull
+	public static List<WidgetType> getObdTypes() {
+		List<WidgetType> obdWidgets = new ArrayList<>();
+		for (WidgetType widgetType : values()) {
+			if (VEHICLE_METRICS == widgetType.getGroup()) {
+				obdWidgets.add(widgetType);
+			}
+		}
+		return obdWidgets;
 	}
 }

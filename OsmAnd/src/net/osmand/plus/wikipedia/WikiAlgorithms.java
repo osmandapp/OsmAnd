@@ -3,9 +3,21 @@ package net.osmand.plus.wikipedia;
 import static net.osmand.util.Algorithms.isUrl;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
+import net.osmand.PlatformUtil;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class WikiAlgorithms {
+	private static final Log LOG = PlatformUtil.getLog(WikiAlgorithms.class);
+
 
 	public static final String WIKIPEDIA = "wikipedia";
 	public static final String WIKIPEDIA_DOMAIN = ".wikipedia.org/";
@@ -60,4 +72,26 @@ public class WikiAlgorithms {
 		return new Pair<>(text, url);
 	}
 
+	public static String formatWikiDate(@Nullable String date) {
+		if (Algorithms.isEmpty(date)) {
+			return "";
+		}
+		String cleanDate = date.startsWith("+") ? date.substring(1) : date;
+		cleanDate = cleanDate.endsWith("Z") ? cleanDate.substring(0, cleanDate.length() - 1) : cleanDate;
+		try {
+			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+			SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+			Date dateTime = inputFormat.parse(cleanDate);
+			if (dateTime != null) {
+				String dateTimeString = outputFormat.format(dateTime);
+				if (!Algorithms.isEmpty(dateTimeString)) {
+					return dateTimeString;
+				}
+			}
+			return date;
+		} catch (Exception exception) {
+			LOG.error(exception);
+		}
+		return date;
+	}
 }

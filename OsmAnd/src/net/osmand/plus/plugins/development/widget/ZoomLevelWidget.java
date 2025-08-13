@@ -1,16 +1,21 @@
 package net.osmand.plus.plugins.development.widget;
 
-import android.content.Context;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
+
 import android.util.DisplayMetrics;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Zoom;
@@ -19,11 +24,6 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.ZoomLevelWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.ZoomLevelWidgetState.ZoomLevelType;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 
 public class ZoomLevelWidget extends SimpleWidget {
 
@@ -82,6 +82,12 @@ public class ZoomLevelWidget extends SimpleWidget {
 	}
 
 	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+	}
+
+	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 		int newCenterX = tileBox.getCenter31X() >> ZOOM_OFFSET_FROM_31;
@@ -128,15 +134,14 @@ public class ZoomLevelWidget extends SimpleWidget {
 	}
 
 	private int calculateMapScale() {
-		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
+		DisplayMetrics metrics = new DisplayMetrics();
+		AndroidUtils.getDisplay(mapActivity).getMetrics(metrics);
 
 		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 		int pixWidth = tileBox.getPixWidth();
 		int pixHeight = tileBox.getPixHeight();
 
-		float averageRealDpi = (dm.xdpi + dm.ydpi) / 2.0f;
+		float averageRealDpi = (metrics.xdpi + metrics.ydpi) / 2.0f;
 		float pixelsPerMeter = averageRealDpi * 100 / 2.54f;
 		double realScreenWidthInMeters = (double) pixWidth / pixelsPerMeter;
 		double mapScreenWidthInMeters = tileBox.getDistance(0, pixHeight / 2, pixWidth, pixHeight / 2);

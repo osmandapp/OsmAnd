@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -12,12 +12,7 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/shadow_on_map"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_onmap" />
+		<include layout="@layout/shadow_on_map" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -71,7 +66,7 @@
 							android:text="@string/vertical_exaggeration"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:textStyle="normal" />
 
 						<TextView
 							android:id="@+id/exaggeration_value"

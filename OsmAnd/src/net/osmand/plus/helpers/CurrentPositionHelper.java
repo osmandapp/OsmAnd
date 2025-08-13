@@ -13,7 +13,7 @@ import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
+import net.osmand.plus.resources.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;

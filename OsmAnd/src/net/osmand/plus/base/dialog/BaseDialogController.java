@@ -11,19 +11,29 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.settings.bottomsheets.CustomizableBottomSheet;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
+import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
 
 public abstract class BaseDialogController implements IDialogController {
 
 	protected final OsmandApplication app;
-	protected final UiUtilities uiUtilities;
 	protected final DialogManager dialogManager;
 
 	public BaseDialogController(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.uiUtilities = app.getUIUtilities();
 		this.dialogManager = app.getDialogManager();
+	}
+
+	public void registerDialog(@NonNull IDialog dialog) {
+		dialogManager.register(getProcessId(), dialog);
+	}
+
+	public boolean finishProcessIfNeeded(@Nullable FragmentActivity activity) {
+		if (activity != null && !activity.isChangingConfigurations()) {
+			dialogManager.unregister(getProcessId());
+			return true;
+		}
+		return false;
 	}
 
 	@NonNull
@@ -32,8 +42,8 @@ public abstract class BaseDialogController implements IDialogController {
 	@Nullable
 	public FragmentActivity getActivity() {
 		IDialog dialog = getDialog();
-		if (dialog instanceof CustomizableBottomSheet) {
-			return ((CustomizableBottomSheet) dialog).getActivity();
+		if (dialog instanceof IContextDialog contextDialog) {
+			return contextDialog.getActivity();
 		}
 		return null;
 	}
@@ -41,16 +51,16 @@ public abstract class BaseDialogController implements IDialogController {
 	@Nullable
 	public Context getContext() {
 		IDialog dialog = getDialog();
-		if (dialog instanceof CustomizableBottomSheet) {
-			return ((CustomizableBottomSheet) dialog).getContext();
+		if (dialog instanceof IContextDialog contextDialog) {
+			return contextDialog.getContext();
 		}
 		return null;
 	}
 
 	public boolean isNightMode() {
 		IDialog dialog = getDialog();
-		if (dialog instanceof CustomizableBottomSheet) {
-			return ((CustomizableBottomSheet) dialog).isNightMode(app);
+		if (dialog instanceof IDialogNightModeInfoProvider nightModeInfoProvider) {
+			return nightModeInfoProvider.isNightMode();
 		}
 		return false;
 	}
@@ -62,11 +72,6 @@ public abstract class BaseDialogController implements IDialogController {
 
 	public int getDimension(@DimenRes int id) {
 		return app.getResources().getDimensionPixelSize(id);
-	}
-
-	@NonNull
-	public String getString(@StringRes int stringId) {
-		return app.getString(stringId);
 	}
 
 	@NonNull

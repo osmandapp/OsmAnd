@@ -12,19 +12,21 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class CoordinatesMapCenterWidget extends CoordinatesBaseWidget {
 
 	private final OsmandMapTileView mapTileView;
 
-	public CoordinatesMapCenterWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, COORDINATES_MAP_CENTER);
+	public CoordinatesMapCenterWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(mapActivity, COORDINATES_MAP_CENTER, customId, panel);
 		mapTileView = app.getOsmandMap().getMapView();
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
+		super.updateInfo(drawSettings);
+		boolean visible = visibilityHelper.shouldShowTopCoordinatesWidget();
 
 		updateVisibility(visible);
 		if (visible) {

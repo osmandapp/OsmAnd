@@ -11,10 +11,10 @@ public class ShowHideCloudLayerAction extends BaseWeatherQuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_CLOUD_LAYER_ACTION_ID,
 			"cloud.layer.showhide", ShowHideCloudLayerAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.cloud_layer)
 			.iconRes(R.drawable.ic_action_clouds).nonEditable()
-			.category(QuickActionType.WEATHER);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideCloudLayerAction() {
 		super(TYPE);

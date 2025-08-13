@@ -1,24 +1,23 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.data.PointDescription.getLocationOlcName;
 import static java.util.Calendar.DAY_OF_YEAR;
 import static java.util.Calendar.ERA;
 import static java.util.Calendar.YEAR;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.text.TextUtilsCompat;
-import androidx.core.view.ViewCompat;
 
+import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.ZonedUTMPoint;
 
 import net.osmand.LocationConvert;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
@@ -29,19 +28,26 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
+import net.osmand.util.TextDirectionUtil;
+
+import org.apache.commons.logging.Log;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -51,6 +57,11 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class OsmAndFormatter {
+
+	private static final Log log = PlatformUtil.getLog(OsmAndFormatter.class);
+
+	public static final int OLC_FORMAT_PRECISION = 11; // 2.8 x 3.5 meters
+
 	public static final float METERS_IN_KILOMETER = 1000f;
 	public static final float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
 	public static final float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
@@ -58,6 +69,9 @@ public class OsmAndFormatter {
 	public static final float YARDS_IN_ONE_METER = 1.0936f;
 	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	public static final float INCHES_IN_ONE_METER = FEET_IN_ONE_METER * 12;
+
+	public static final float IMPERIAL_GALLONS_IN_LITER = 4.54609f;
+	public static final float US_GALLONS_IN_LITER = 3.78541f;
 
 	public static final int KILOGRAMS_IN_ONE_TON = 1000;
 	public static final float POUNDS_IN_ONE_KILOGRAM = 2.2046f;
@@ -85,7 +99,7 @@ public class OsmAndFormatter {
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
-	private static final char DELIMITER_MINUTES = '′';
+	private static final char DELIMITER_MINUTES = '\'';
 	private static final char DELIMITER_SECONDS = '″';
 
 	private static final char NORTH = 'N';
@@ -108,18 +122,27 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDuration(long seconds, @NonNull OsmandApplication app) {
+		NumberFormat numberFormat = getNumberFormat(app);
 		long hours = seconds / (60 * 60);
 		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
-			return hours + " "
+			return numberFormat.format(hours) + " "
 					+ app.getString(R.string.osmand_parking_hour)
-					+ (minutes > 0 ? " " + minutes + " "
+					+ (minutes > 0 ? " " + numberFormat.format(minutes) + " "
 					+ app.getString(R.string.shared_string_minute_lowercase) : "");
 		} else if (minutes > 0) {
-			return minutes + " " + app.getString(R.string.shared_string_minute_lowercase);
+			return numberFormat.format(minutes) + " " + app.getString(R.string.shared_string_minute_lowercase);
 		} else {
-			return "<1 " + app.getString(R.string.shared_string_minute_lowercase);
+			return "<" + numberFormat.format(1) + " " + app.getString(R.string.shared_string_minute_lowercase);
 		}
+	}
+
+	@NonNull
+	public static NumberFormat getNumberFormat(@NonNull OsmandApplication app) {
+		LocaleHelper localeHelper = app.getLocaleHelper();
+		Locale locale = localeHelper.getPreferredLocale() != null
+				? localeHelper.getPreferredLocale() : localeHelper.getDefaultLocale();
+		return NumberFormat.getInstance(locale);
 	}
 
 	public static String getFormattedDurationShort(int seconds) {
@@ -155,6 +178,31 @@ public class OsmAndFormatter {
 		}
 		return formattedTime;
 	}
+
+	public static String getFormattedTimeRuntime(int seconds) {
+		int totalMinutes = (seconds / 60);
+		int hours = totalMinutes / 60;
+		int minutes = totalMinutes % 60;
+		return String.format(Locale.US, "%d:%02d", hours, minutes);
+	}
+
+	@NonNull
+	public static Pair<String, String> getFormattedTime(@NonNull Context context, long time) {
+		String timeFormatted;
+		String period = null;
+
+		boolean is24HourFormat = android.text.format.DateFormat.is24HourFormat(context);
+
+		if (is24HourFormat) {
+			timeFormatted = android.text.format.DateFormat.format("k:mm", time).toString();
+		} else {
+			timeFormatted = android.text.format.DateFormat.format("h:mm", time).toString();
+			period = android.text.format.DateFormat.format("aa", time).toString();
+		}
+
+		return new Pair<>(timeFormatted, period);
+	}
+
 
 	public static DateFormat getDateFormat(@NonNull Context context) {
 		return android.text.format.DateFormat.getDateFormat(context);
@@ -213,6 +261,12 @@ public class OsmAndFormatter {
 	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, OsmAndFormatterParams pms) {
 		double roundedDist = calculateRoundedDist(interval, app);
 		return getFormattedDistance((float) roundedDist, app, pms);
+	}
+
+	public static String getFormattedPredictionTime(@NonNull OsmandApplication app, double interpolationValue) {
+		double seconds = interpolationValue / 100.0;
+		String formattedValue = String.format(seconds % 1 == 0 ? "%.0f" : "%.1f", seconds);
+		return app.getString(R.string.ltr_or_rtl_combine_via_space, formattedValue, app.getString(R.string.shared_string_sec));
 	}
 
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
@@ -321,37 +375,6 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static class OsmAndFormatterParams {
-		public static final boolean DEFAULT_FORCE_TRAILING = true;
-		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
-		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING;
-		int extraDecimalPrecision = DEFAULT_EXTRA_DECIMAL_PRECISION;
-
-		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
-		public static final OsmAndFormatterParams NO_TRAILING_ZEROS = new OsmAndFormatterParams().setTrailingZerosForMainUnit(false);
-		public static final OsmAndFormatterParams DEFAULT = new OsmAndFormatterParams();
-
-		boolean useLowerBound = false;
-
-		public boolean isUseLowerBound() {
-			return useLowerBound;
-		}
-
-		private static OsmAndFormatterParams useLowerBoundParam() {
-			OsmAndFormatterParams p = new OsmAndFormatterParams();
-			p.useLowerBound = true;
-			p.extraDecimalPrecision = 0;
-			p.forceTrailingZerosInDecimalMainUnit = true;
-			return p;
-		}
-
-		private OsmAndFormatterParams setTrailingZerosForMainUnit(boolean forceTrailingZeros) {
-			this.forceTrailingZerosInDecimalMainUnit = forceTrailingZeros;
-			return this;
-		}
-
-	}
-
 	@NonNull
 	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx) {
 		return getFormattedDistance(meters, ctx, null);
@@ -402,7 +425,9 @@ public class OsmAndFormatter {
 		float floatDistance = meters / mainUnitInMeters;
 		boolean forceTrailingZeros = pms.forceTrailingZerosInDecimalMainUnit;
 		int decimalPrecision = pms.extraDecimalPrecision;
-		if (meters >= 100 * mainUnitInMeters) {
+		if(pms.forcePreciseValue) {
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, decimalPrecision, ctx);
+		} else if (meters >= 100 * mainUnitInMeters) {
 			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
 					0, ctx);
 		} else if (meters > 9.99f * mainUnitInMeters) {
@@ -443,24 +468,23 @@ public class OsmAndFormatter {
 		}
 	}
 
-
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
-		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		return getFormattedAlt(alt, ctx, mc);
+		AltitudeMetrics altitudeMetrics = settings.ALTITUDE_METRIC.get();
+		return getFormattedAlt(alt, ctx, altitudeMetrics);
 	}
 
 	@NonNull
-	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
-		return getFormattedAltitudeValue(alt, ctx, mc).format(ctx);
+	public static String getFormattedAlt(double alt, OsmandApplication ctx, AltitudeMetrics altitudeMetrics) {
+		return getFormattedAltitudeValue(alt, ctx, altitudeMetrics).format(ctx);
 	}
 
 	@NonNull
 	public static FormattedValue getFormattedAltitudeValue(double altitude,
 	                                                       @NonNull OsmandApplication ctx,
-	                                                       @NonNull MetricsConstants mc) {
-		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
+	                                                       @NonNull AltitudeMetrics am) {
+		boolean useFeet = am.shouldUseFeet();
 		FormattedValue formattedValue;
 		if (useFeet) {
 			int feet = (int) (altitude * FEET_IN_ONE_METER + 0.5);
@@ -557,9 +581,61 @@ public class OsmAndFormatter {
 		}
 	}
 
+	public static FormattedValue getFormattedFuelCapacityValue(@NonNull OsmandApplication app, @NonNull VolumeUnit volumeUnit, @NonNull ApplicationMode mode) {
+		OsmandSettings settings = app.getSettings();
+		boolean separateWithSpace = false;
+		String textValue;
+		String textUnit;
+		float value = readSavedFuelTankCapacity(settings, volumeUnit, mode);
+		if (value == 0.0f) {
+			textValue = app.getString(R.string.shared_string_none);
+			textUnit = "";
+		} else {
+			DecimalFormat formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.US));
+			textValue = formatter.format(value);
+			textUnit = volumeUnit.getUnitSymbol(app);
+			separateWithSpace = true;
+		}
+		return new FormattedValue(value, textValue, textUnit, separateWithSpace);
+	}
+
+	public static float readSavedFuelTankCapacity(@NonNull OsmandSettings settings, @NonNull VolumeUnit volumeUnit, @NonNull ApplicationMode mode) {
+		OsmandPreference<Float> fuelTankCapacity = settings.FUEL_TANK_CAPACITY;
+		float valueInLitres = fuelTankCapacity.getModeValue(mode);
+		if (valueInLitres == 0.0f) {
+			return valueInLitres;
+		}
+
+		return convertLiterToVolumeUnit(volumeUnit, valueInLitres);
+	}
+
+	public static float convertLiterToVolumeUnit(@NonNull VolumeUnit volumeUnit, float value){
+		if (volumeUnit == VolumeUnit.US_GALLONS) {
+			return value / US_GALLONS_IN_LITER;
+		} else if (volumeUnit == VolumeUnit.IMPERIAL_GALLONS) {
+			return value / IMPERIAL_GALLONS_IN_LITER;
+		} else {
+			return value;
+		}
+	}
+
+	public static float prepareFuelTankCapacityToSave(@NonNull VolumeUnit volumeUnit, float value) {
+		float preparedValueToSave = 0;
+		if (value != 0.0f) {
+			if (volumeUnit == VolumeUnit.US_GALLONS) {
+				preparedValueToSave = value * US_GALLONS_IN_LITER;
+			} else if (volumeUnit == VolumeUnit.IMPERIAL_GALLONS) {
+				preparedValueToSave = value * IMPERIAL_GALLONS_IN_LITER;
+			} else {
+				preparedValueToSave = value;
+			}
+		}
+		return preparedValueToSave;
+	}
+
 	@NonNull
 	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, boolean hasFastSpeed, SpeedConstants mc) {
-		String unit = mc.toShortString(app);
+		String unit = mc.toShortString();
 		float kmh = metersPerSeconds * 3.6f;
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
@@ -608,7 +684,7 @@ public class OsmAndFormatter {
 				return getFormattedLowSpeed(mph10 / 10f, unit, app);
 			}
 		} else {
-			String metersPerSecond = SpeedConstants.METERS_PER_SECOND.toShortString(app);
+			String metersPerSecond = SpeedConstants.METERS_PER_SECOND.toShortString();
 			if (metersPerSeconds >= 10) {
 				return getFormattedSpeed(Math.round(metersPerSeconds), metersPerSecond, app);
 			}
@@ -619,15 +695,12 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
-	public static SpeedConstants getSpeedModeForPaceMode(SpeedConstants originalMode) {
-		switch (originalMode) {
-			case MINUTES_PER_KILOMETER:
-				return SpeedConstants.KILOMETERS_PER_HOUR;
-			case MINUTES_PER_MILE:
-				return SpeedConstants.MILES_PER_HOUR;
-			default:
-				return originalMode;
-		}
+	public static SpeedConstants getSpeedModeForPaceMode(@NonNull SpeedConstants originalMode) {
+		return switch (originalMode) {
+			case MINUTES_PER_KILOMETER -> SpeedConstants.KILOMETERS_PER_HOUR;
+			case MINUTES_PER_MILE -> SpeedConstants.MILES_PER_HOUR;
+			default -> originalMode;
+		};
 	}
 
 	@NonNull
@@ -732,29 +805,6 @@ public class OsmAndFormatter {
 		return "";
 	}
 
-	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
-		PoiCategory pc = amenity.getType();
-		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-		String typeName = amenity.getSubType();
-		if (pt != null) {
-			typeName = pt.getTranslation();
-		} else if (typeName != null) {
-			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
-		}
-		String localName = amenity.getName(locale, transliterate);
-		if (typeName != null && localName.contains(typeName)) {
-			// type is contained in name e.g.
-			// localName = "Bakery the Corner"
-			// type = "Bakery"
-			// no need to repeat this
-			return localName;
-		}
-		if (localName.length() == 0) {
-			return typeName;
-		}
-		return typeName + " " + localName; //$NON-NLS-1$
-	}
-
 	public static List<String> getPoiStringsWithoutType(Amenity amenity, String locale, boolean transliterate) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
@@ -838,30 +888,24 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedCoordinates(double lat, double lon, int outputFormat) {
+		return getFormattedCoordinates(lat, lon, outputFormat, true);
+	}
+
+	public static String getFormattedCoordinates(double lat, double lon, int outputFormat, boolean forceLTR) {
 		StringBuilder result = new StringBuilder();
 		if (outputFormat == FORMAT_DEGREES_SHORT) {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
 		} else if (outputFormat == FORMAT_DEGREES || outputFormat == FORMAT_MINUTES || outputFormat == FORMAT_SECONDS) {
-			boolean isLeftToRight = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_LTR;
-			String rtlCoordinates = isLeftToRight ? "" : "\u200f";
-			String rtlCoordinatesPunctuation = isLeftToRight ? ", " : " ,";
-			result
-					.append(rtlCoordinates)
-					.append(formatCoordinate(lat, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
-					.append(lat > 0 ? NORTH : SOUTH).append(rtlCoordinates).append(rtlCoordinatesPunctuation).append(rtlCoordinates)
-					.append(formatCoordinate(lon, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
+			result.append(formatCoordinate(lat, outputFormat)).append(" ")
+					.append(lat > 0 ? NORTH : SOUTH).append(", ")
+					.append(formatCoordinate(lon, outputFormat)).append(" ")
 					.append(lon > 0 ? EAST : WEST);
 		} else if (outputFormat == UTM_FORMAT) {
 			ZonedUTMPoint utmPoint = new ZonedUTMPoint(new LatLonPoint(lat, lon));
 			result.append(utmPoint.format());
 		} else if (outputFormat == OLC_FORMAT) {
-			String r;
-			try {
-				r = getLocationOlcName(lat, lon);
-			} catch (RuntimeException e) {
-				r = "0, 0";
-			}
-			result.append(r);
+			String code = getOpenLocationCode(lat, lon);
+			result.append(code);
 		} else if (outputFormat == MGRS_FORMAT) {
 			MGRSPoint pnt = new MGRSPoint(new LatLonPoint(lat, lon));
 			try {
@@ -875,16 +919,17 @@ public class OsmAndFormatter {
 			formatSymbols.setDecimalSeparator('.');
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
-			result.append(swissGridFormat.format(swissGrid[0]) + ", " + swissGridFormat.format(swissGrid[1]));
+			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == SWISS_GRID_PLUS_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV95(new LatLon(lat, lon));
 			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
 			formatSymbols.setDecimalSeparator('.');
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
-			result.append(swissGridFormat.format(swissGrid[0]) + ", " + swissGridFormat.format(swissGrid[1]));
+			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		}
-		return result.toString();
+		String formattedCoordinates = result.toString();
+		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
 	}
 
 
@@ -938,73 +983,18 @@ public class OsmAndFormatter {
 		return coordinate;
 	}
 
-	public static class FormattedValue {
-
-		public final String value;
-		public final String unit;
-		public final float valueSrc;
-		public final int unitId;
-
-		private final boolean separateWithSpace;
-
-		public FormattedValue(float valueSrc, String value, String unit) {
-			this(valueSrc, value, unit, true);
-		}
-
-		public FormattedValue(float valueSrc, String value, String unit, boolean separateWithSpace) {
-			this(valueSrc, value, unit, -1, separateWithSpace);
-		}
-
-		public FormattedValue(float valueSrc, String value, String unit, @StringRes int unitId, boolean separateWithSpace) {
-			this.value = value;
-			this.valueSrc = valueSrc;
-			this.unit = unit;
-			this.separateWithSpace = separateWithSpace;
-			this.unitId = unitId;
-		}
-
-		@NonNull
-		public String format(@NonNull Context context) {
-			return format(context, value, unit, separateWithSpace);
-		}
-
-		@NonNull
-		public static String format(@NonNull Context context, @NonNull String value,
-		                            @NonNull String unit, boolean separateWithSpace) {
-			return separateWithSpace
-					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
-					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});
-		}
-	}
-
-	public static class TimeFormatter {
-
-		private final DateFormat simpleTimeFormat;
-		private final DateFormat amPmTimeFormat;
-
-		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern, @NonNull String amPmPattern) {
-			this(locale, pattern, amPmPattern, null);
-		}
-
-		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern,
-		                     @NonNull String amPmPattern, @Nullable TimeZone timeZone) {
-			simpleTimeFormat = new SimpleDateFormat(pattern, locale);
-			amPmTimeFormat = new SimpleDateFormat(amPmPattern, locale);
-
-			if (timeZone != null) {
-				simpleTimeFormat.getCalendar().setTimeZone(timeZone);
-				amPmTimeFormat.getCalendar().setTimeZone(timeZone);
-			}
-		}
-
-		public String format(@NonNull Date date, boolean twelveHoursFormat) {
-			DateFormat timeFormat = twelveHoursFormat ? amPmTimeFormat : simpleTimeFormat;
-			return timeFormat.format(date);
-		}
-	}
-
 	@NonNull
 	public static String formatFps(float fps) {
 		return fps > 0 ? String.format(Locale.US, "%.1f", fps) : "-";
+	}
+
+	@NonNull
+	public static String getOpenLocationCode(double lat, double lon) {
+		try {
+			return OpenLocationCode.encode(lat, lon, OLC_FORMAT_PRECISION);
+		} catch (RuntimeException e) {
+			log.error("Failed to define OLC location", e);
+		}
+		return "0, 0";
 	}
 }

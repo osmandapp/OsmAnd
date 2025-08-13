@@ -12,7 +12,7 @@
     <string name="shared_string_save">Запазване</string>
     <string name="no_internet_connection">Няма връзка с Интернет</string>
     <string name="no_gps_connection">Няма GPS връзка</string>
-    <string name="shared_string_status">Статус</string>
+    <string name="shared_string_status">Състояние</string>
     <string name="shared_string_enabled">Включено</string>
     <string name="location_sharing_status">Споделяне: %1$s</string>
     <string name="sharing_status">Състояние на споделяне</string>
@@ -77,7 +77,7 @@
     <string name="location_recording_enabled">Записването на местоположението е активирано</string>
     <string name="disable_monitoring">Деактивиране на наблюдението</string>
     <string name="timeline_available_for_free_now">Timeline е функция, която вече е достъпна безплатно.</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Добре</string>
     <string name="shared_string_search">Търсене</string>
     <string name="type_contact_or_group_name">Въведете име на контакт или група</string>
     <string name="search_contacts_descr">Търсене във всичките ви групи и контакти.</string>
@@ -142,4 +142,15 @@
     <string name="shared_string_continue">Напред</string>
     <string name="shared_string_disable">Изключване</string>
     <string name="shared_string_logout">Излизане</string>
+    <string name="shared_string_sort_by">Сортиране</string>
+    <string name="shared_string_back">Назад</string>
+    <string name="shared_string_sort">Сортиране</string>
+    <string name="shared_string_second_short">с</string>
+    <string name="min_mile">мин/миля</string>
+    <string name="min_km">мин/км</string>
+    <string name="si_min_km">Минути на километър</string>
+    <string name="si_min_m">Минути на миля</string>
+    <string name="shared_string_minute_short">мин</string>
+    <string name="m">м</string>
+    <string name="si_km_m">Километри / метри</string>
 </resources>

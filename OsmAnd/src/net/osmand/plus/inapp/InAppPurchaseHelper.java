@@ -14,14 +14,17 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseExternalInApp;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseExternalSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
@@ -38,26 +41,43 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class InAppPurchaseHelper {
 
 	// Debug tag, for logging
 	protected static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
+
+	public static final String SERVER_URL = "https://osmand.net";
+	public static final String SUBSCRIPTION_REGISTER_URL = SERVER_URL + "/subscription/register";
+	public static final String GET_ACTIVE_SUBSCRIPTIONS_SKU_URL = SERVER_URL + "/api/subscriptions/active";
+	public static final String GET_SUBSCRIPTIONS_URL = SERVER_URL + "/api/subscriptions/get";
+	public static final String GET_ALL_SUBSCRIPTIONS_URL = SERVER_URL + "/api/subscriptions/getAll";
+	public static final String GET_INAPPS_URL = SERVER_URL + "/api/inapps/get";
+	public static final String USER_VALIDATE_SUBSCRIPTION_URL = SERVER_URL + "/userdata/user-validate-sub";
+	public static final String PURCHASE_COMPLETE_URL = SERVER_URL + "/api/purchase-complete";
+	public static final String PURCHASED_URL = SERVER_URL + "/subscription/purchased";
+
+	public static final String PURCHASE_TYPE_SUBSCRIPTION = "subscription";
+	public static final String PURCHASE_TYPE_INAPP = "inapp";
+
+	public static final String PLATFORM_GOOGLE = "google";
+	public static final String PLATFORM_APPLE = "apple";
+	public static final String PLATFORM_AMAZON = "amazon";
+	public static final String PLATFORM_HUAWEI = "huawei";
+	public static final String PLATFORM_FASTSPRING = "fastspring";
+
+	protected static final String OSMAND_PLUS_APP_ORDER_ID = "OSMAND_PLUS_APP";
+
 	private final boolean mDebugLog = true;
 
 	protected InAppPurchases purchases;
 	protected long lastValidationCheckTime;
 	protected boolean inventoryRequested;
+	protected boolean externalPurchasesRequested;
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
+	protected Map<String, InAppStateHolder> inAppStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 
@@ -103,12 +123,27 @@ public abstract class InAppPurchaseHelper {
 		void onFail();
 	}
 
-	static class SubscriptionStateHolder {
-		SubscriptionState state = SubscriptionState.UNDEFINED;
-		long startTime;
-		long expireTime;
-		PeriodUnit periodUnit;
-		PurchaseOrigin origin;
+	public static class SubscriptionStateHolder {
+		public String sku;
+		public String name;
+		public String icon;
+		public SubscriptionState state = SubscriptionState.UNDEFINED;
+		public long startTime;
+		public long expireTime;
+		public PeriodUnit periodUnit;
+		public PurchaseOrigin origin;
+		public InAppSubscription linkedSubscription;
+	}
+
+	public static class InAppStateHolder {
+		public String sku;
+		public String name;
+		public String icon;
+		public PurchaseOrigin origin;
+		public String platform;
+		public long purchaseTime;
+		public long expireTime;
+		public InAppPurchase linkedPurchase;
 	}
 
 	public enum InAppPurchaseTaskType {
@@ -124,7 +159,7 @@ public abstract class InAppPurchaseHelper {
 		InAppCommandResultHandler resultHandler;
 
 		// return true if done and false if async task started
-		abstract void run(InAppPurchaseHelper helper);
+		abstract void run(@NonNull InAppPurchaseHelper helper);
 
 		protected boolean userRequested() {
 			return false;
@@ -187,6 +222,16 @@ public abstract class InAppPurchaseHelper {
 		return purchases.getAnyPurchasedOsmAndProSubscription();
 	}
 
+	public abstract boolean isPurchasedLocalFullVersion();
+
+	public abstract boolean isPurchasedLocalDeepContours();
+
+	public abstract boolean isSubscribedToLocalLiveUpdates();
+
+	public abstract boolean isSubscribedToLocalOsmAndPro();
+
+	public abstract boolean isSubscribedToLocalMaps();
+
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);
@@ -225,6 +270,33 @@ public abstract class InAppPurchaseHelper {
 			}
 		}
 		return purchases;
+	}
+
+	@NonNull
+	public abstract String getPlatform();
+
+	@NonNull
+	public List<SubscriptionStateHolder> getExternalSubscriptions() {
+		List<SubscriptionStateHolder> res = new ArrayList<>();
+		PurchaseOrigin origin = getPlatformOrigin();
+		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+			if (holder.linkedSubscription != null && holder.origin != origin) {
+				res.add(holder);
+			}
+		}
+		return res;
+	}
+
+	@NonNull
+	public List<InAppStateHolder> getExternalInApps() {
+		List<InAppStateHolder> res = new ArrayList<>();
+		String platform = getPlatform();
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (holder.linkedPurchase != null && !platform.equals(holder.platform)) {
+				res.add(holder);
+			}
+		}
+		return res;
 	}
 
 	public static void subscribe(@NonNull Activity activity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull String sku) {
@@ -266,11 +338,11 @@ public abstract class InAppPurchaseHelper {
 					if (p.isPurchased()) {
 						return true;
 					} else {
-						if (purchases.isLiveUpdatesSubscription(p) && InAppPurchaseUtils.isLiveUpdatesAvailable(ctx)) {
+						if (purchases.isLiveUpdates(p) && InAppPurchaseUtils.isLiveUpdatesAvailable(ctx)) {
 							return true;
-						} else if (purchases.isOsmAndProSubscription(p) && InAppPurchaseUtils.isOsmAndProAvailable(ctx)) {
+						} else if (purchases.isOsmAndPro(p) && InAppPurchaseUtils.isOsmAndProAvailable(ctx)) {
 							return true;
-						} else if (purchases.isMapsSubscription(p) && InAppPurchaseUtils.isMapsPlusAvailable(ctx)) {
+						} else if (purchases.isMaps(p) && InAppPurchaseUtils.isMapsPlusAvailable(ctx)) {
 							return true;
 						}
 					}
@@ -330,21 +402,21 @@ public abstract class InAppPurchaseHelper {
 
 	public void requestInventory(boolean userRequested) {
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
-		new RequestInventoryTask(userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		OsmAndTaskManager.executeTask(new RequestInventoryTask(userRequested));
 	}
 
 	public abstract void purchaseFullVersion(@NonNull Activity activity) throws UnsupportedOperationException;
 
 	public void purchaseSubscription(@NonNull Activity activity, String sku) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
-		new SubscriptionPurchaseTask(activity, sku).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		OsmAndTaskManager.executeTask(new SubscriptionPurchaseTask(activity, sku));
 	}
 
 	public abstract void purchaseDepthContours(@NonNull Activity activity) throws UnsupportedOperationException;
 
 	public abstract void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException;
 
-	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
+	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku, @Nullable PurchaseOrigin origin);
 
 	protected boolean isUserInfoSupported() {
 		return true;
@@ -374,8 +446,7 @@ public abstract class InAppPurchaseHelper {
 				try {
 					Map<String, String> parameters = new HashMap<>();
 					addUserInfo(parameters);
-					return AndroidNetworkUtils.sendRequest(ctx,
-							"https://osmand.net/subscription/register",
+					return AndroidNetworkUtils.sendRequest(ctx, SUBSCRIPTION_REGISTER_URL,
 							parameters, "Requesting userId...", true, true);
 
 				} catch (Exception e) {
@@ -456,27 +527,43 @@ public abstract class InAppPurchaseHelper {
 		protected String[] doInBackground(Void... params) {
 			String activeSubscriptionsIds = null;
 			String subscriptionsState = null;
+			String inappsState = null;
 			try {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("androidPackage", ctx.getPackageName());
 				addUserInfo(parameters);
 				activeSubscriptionsIds = AndroidNetworkUtils.sendRequest(ctx,
-						"https://osmand.net/api/subscriptions/active",
+						GET_ACTIVE_SUBSCRIPTIONS_SKU_URL,
 						parameters, "Requesting active subscriptions...", false, false);
 
+				boolean hasToken = false;
 				String userId = ctx.getSettings().BILLING_USER_ID.get();
 				String userToken = ctx.getSettings().BILLING_USER_TOKEN.get();
 				if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(userToken)) {
 					parameters.put("userId", userId);
 					parameters.put("userToken", userToken);
-					subscriptionsState = AndroidNetworkUtils.sendRequest(ctx,
-							"https://osmand.net/api/subscriptions/get",
+					hasToken = true;
+				}
+				String deviceId = ctx.getSettings().BACKUP_DEVICE_ID.get();
+				String accessToken = ctx.getSettings().BACKUP_ACCESS_TOKEN.get();
+				if (!Algorithms.isEmpty(deviceId) && !Algorithms.isEmpty(accessToken)) {
+					parameters.put("deviceId", deviceId);
+					parameters.put("accessToken", accessToken);
+					hasToken = true;
+				}
+				if (hasToken) {
+					subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, GET_ALL_SUBSCRIPTIONS_URL,
 							parameters, "Requesting subscriptions state...", false, false);
+					inappsState = AndroidNetworkUtils.sendRequest(ctx, GET_INAPPS_URL,
+							parameters, "Requesting inapps state...", false, false);
 				}
 			} catch (Exception e) {
 				logError("sendRequest Error", e);
 			}
-			return new String[] {activeSubscriptionsIds, subscriptionsState};
+			if (userRequested) {
+				ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
+			}
+			return new String[] {activeSubscriptionsIds, subscriptionsState, inappsState};
 		}
 
 		@Override
@@ -484,6 +571,7 @@ public abstract class InAppPurchaseHelper {
 			logDebug("Response=" + Arrays.toString(response));
 			String activeSubscriptionsIdsJson = response[0];
 			String subscriptionsStateJson = response[1];
+			String inappsStateJson = response[2];
 			if (activeSubscriptionsIdsJson != null) {
 				inventoryRequested = true;
 				try {
@@ -507,12 +595,17 @@ public abstract class InAppPurchaseHelper {
 				inventoryRequested = true;
 				subscriptionStateMap = parseSubscriptionStates(subscriptionsStateJson);
 			}
+			if (inappsStateJson != null) {
+				inventoryRequested = true;
+				inAppStateMap = parseInAppStates(inappsStateJson);
+			}
+			externalPurchasesRequested = subscriptionsStateJson != null && inappsStateJson != null;
 			exec(InAppPurchaseTaskType.REQUEST_INVENTORY, getRequestInventoryCommand(userRequested));
 		}
 	}
 
 	@NonNull
-	public Map<String, SubscriptionStateHolder> parseSubscriptionStates(@NonNull String subscriptionsStateJson) {
+	Map<String, SubscriptionStateHolder> parseSubscriptionStates(@NonNull String subscriptionsStateJson) {
 		Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 		try {
 			JSONArray subArrJson = new JSONArray(subscriptionsStateJson);
@@ -524,13 +617,23 @@ public abstract class InAppPurchaseHelper {
 				}
 				String sku = subObj.getString("sku");
 				String state = subObj.getString("state");
+				String name = subObj.optString("name", null);
+				String icon = subObj.optString("icon", null);
 
 				if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
 					SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
+					stateHolder.sku = sku;
+					stateHolder.name = name;
+					stateHolder.icon = icon;
 					stateHolder.state = SubscriptionState.getByStateStr(state);
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
 					stateHolder.origin = getPurchaseOriginBySku(sku);
+					try {
+						stateHolder.linkedSubscription = InAppPurchaseExternalSubscription.buildFromJson(ctx, subObj);
+					} catch (Exception e) {
+						LOG.error("Subscription state json parsing error = " + subObj, e);
+					}
 
 					PeriodUnit periodUnit = null;
 					if (stateHolder.origin == PurchaseOrigin.PROMO || sku.contains("annual")) {
@@ -544,14 +647,130 @@ public abstract class InAppPurchaseHelper {
 				}
 			}
 		} catch (JSONException e) {
-			logError("Json parsing error", e);
+			logError("Subscription state json parsing error", e);
 		}
 		return subscriptionStateMap;
 	}
 
+	@NonNull
+	Map<String, InAppStateHolder> parseInAppStates(@NonNull String inAppsStateJson) {
+		Map<String, InAppStateHolder> inappStateMap = new HashMap<>();
+		try {
+			JSONArray subArrJson = new JSONArray(inAppsStateJson);
+			for (int i = 0; i < subArrJson.length(); i++) {
+				JSONObject subObj = subArrJson.getJSONObject(i);
+				String sku = subObj.getString("sku");
+				String name = subObj.optString("name", null);
+				String icon = subObj.optString("icon", null);
+				String platform = subObj.optString("platform", null);
+				long purchaseTime = subObj.optLong("purchaseTime", 0);
+				long expireTime = subObj.optLong("expireTime", 0);
+				if (!Algorithms.isEmpty(sku)) {
+					InAppStateHolder stateHolder = new InAppStateHolder();
+					stateHolder.sku = sku;
+					stateHolder.name = name;
+					stateHolder.icon = icon;
+					stateHolder.origin = getPurchaseOriginBySku(sku);
+					stateHolder.platform = platform;
+					stateHolder.purchaseTime = purchaseTime;
+					stateHolder.expireTime = expireTime;
+					try {
+						stateHolder.linkedPurchase = InAppPurchaseExternalInApp.buildFromJson(ctx, subObj);
+					} catch (Exception e) {
+						LOG.error("InApp state json parsing error = " + subObj, e);
+					}
+					inappStateMap.put(sku, stateHolder);
+				}
+			}
+		} catch (JSONException e) {
+			logError("Inapp state json parsing error", e);
+		}
+		return inappStateMap;
+	}
+
+	protected void applyPurchases() {
+		boolean externalPurchasesHandled = !ctx.getBackupHelper().isRegistered()
+				|| this.externalPurchasesRequested;
+
+		boolean purchasedFullVersion = isPurchasedLocalFullVersion() || isPurchasedExternalFullVersion();
+		boolean depthContoursPurchased = isPurchasedLocalDeepContours();
+		if (purchasedFullVersion) {
+			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+		}
+		if (depthContoursPurchased) {
+			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+		}
+
+		boolean subscribedToLiveUpdates = isSubscribedToLocalLiveUpdates();
+		boolean subscribedToMaps = isSubscribedToLocalMaps() || isSubscribedToExternalMaps();
+		boolean subscribedToOsmAndPro = isSubscribedToLocalOsmAndPro() || isSubscribedToExternalOsmAndPro() || isPurchasedExternalOsmAndPro();
+		if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && externalPurchasesHandled) {
+			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+		} else if (subscribedToLiveUpdates) {
+			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+		}
+		if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get() && externalPurchasesHandled) {
+			ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
+		} else if (subscribedToOsmAndPro) {
+			ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
+		}
+		if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get() && externalPurchasesHandled) {
+			ctx.getSettings().OSMAND_MAPS_PURCHASED.set(false);
+		} else if (subscribedToMaps) {
+			ctx.getSettings().OSMAND_MAPS_PURCHASED.set(true);
+		}
+		if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps && externalPurchasesHandled) {
+			if (!InAppPurchaseUtils.isDepthContoursAvailable(ctx)) {
+				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+			}
+		}
+
+		logDebug("User " + (purchasedFullVersion ? "HAS" : "DOES NOT HAVE") + " Full Version purchased.");
+		logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " Live Updates purchased.");
+		logDebug("User " + (subscribedToOsmAndPro ? "HAS" : "DOES NOT HAVE") + " OsmAnd Pro purchased.");
+		logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
+	}
+
+	protected boolean isPurchasedExternalFullVersion() {
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (holder.linkedPurchase != null && holder.linkedPurchase.isFullVersion()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isPurchasedExternalOsmAndPro() {
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (holder.linkedPurchase != null && holder.linkedPurchase.isOsmAndPro()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isSubscribedToExternalOsmAndPro() {
+		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+			if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()
+					&& holder.state == SubscriptionState.ACTIVE) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isSubscribedToExternalMaps() {
+		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
+			if (holder.linkedSubscription != null && holder.linkedSubscription.isMaps()
+					&& holder.state == SubscriptionState.ACTIVE) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void checkPromoAsync(@Nullable CallbackWithObject<Boolean> listener) {
-		CheckBackupSubscriptionTask task = new CheckBackupSubscriptionTask(listener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		OsmAndTaskManager.executeTask(new CheckBackupSubscriptionTask(listener));
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -594,6 +813,7 @@ public abstract class InAppPurchaseHelper {
 				settings.BACKUP_PURCHASE_EXPIRE_TIME.set(stateHolder.expireTime);
 				settings.BACKUP_PURCHASE_PERIOD.set(stateHolder.periodUnit);
 				settings.BACKUP_SUBSCRIPTION_ORIGIN.set(stateHolder.origin);
+				settings.BACKUP_SUBSCRIPTION_SKU.set(stateHolder.sku);
 				return stateHolder.state.isActive();
 			}
 			return false;
@@ -645,7 +865,7 @@ public abstract class InAppPurchaseHelper {
 			Map<String, String> params = new HashMap<>();
 			params.put("deviceid", deviceId);
 			params.put("accessToken", accessToken);
-			AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/userdata/user-validate-sub",
+			AndroidNetworkUtils.sendRequest(ctx, USER_VALIDATE_SUBSCRIPTION_URL,
 					params, "Validate user subscription", false, false, (result, error, resultCode) -> {
 						if (Algorithms.isEmpty(error)) {
 							if (result != null) {
@@ -667,7 +887,7 @@ public abstract class InAppPurchaseHelper {
 	private Map<String, SubscriptionStateHolder> getSubscriptionStatesByOrderId(@NonNull String orderId) {
 		Map<String, String> params = new HashMap<>();
 		params.put("orderId", orderId);
-		String subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/api/subscriptions/get",
+		String subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, GET_SUBSCRIPTIONS_URL,
 				params, "Requesting promo subscription state", false, false);
 
 		if (subscriptionsState != null) {
@@ -679,16 +899,13 @@ public abstract class InAppPurchaseHelper {
 	protected abstract InAppCommand getRequestInventoryCommand(boolean userRequested) throws UnsupportedOperationException;
 
 	protected void onProductDetailsResponseDone(@NonNull List<PurchaseInfo> purchaseInfoList, boolean userRequested) {
-		OnRequestResultListener listener = new OnRequestResultListener() {
-			@Override
-			public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
-				notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
-				notifyGetItems();
-				stop(true);
-				logDebug("Initial inapp query finished");
-				if (userRequested) {
-					showToast(ctx.getString(R.string.purchases_restored));
-				}
+		OnRequestResultListener listener = (result, error, resultCode) -> {
+			notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
+			notifyGetItems();
+			stop(true);
+			logDebug("Initial inapp query finished");
+			if (userRequested) {
+				showToast(ctx.getString(R.string.purchases_restored));
 			}
 		};
 
@@ -717,9 +934,9 @@ public abstract class InAppPurchaseHelper {
 		InAppPurchase depthContours = getDepthContours();
 		InAppPurchase contourLines = getContourLines();
 		if (subscription != null) {
-			boolean maps = purchases.isMapsSubscription(subscription);
-			boolean liveUpdates = purchases.isLiveUpdatesSubscription(subscription);
-			boolean pro = purchases.isOsmAndProSubscription(subscription);
+			boolean maps = purchases.isMaps(subscription);
+			boolean liveUpdates = purchases.isLiveUpdates(subscription);
+			boolean pro = purchases.isOsmAndPro(subscription);
 			// bought live updates
 			if (maps) {
 				logDebug("Maps subscription purchased.");
@@ -826,10 +1043,14 @@ public abstract class InAppPurchaseHelper {
 
 	protected abstract boolean isBillingManagerExists();
 
+	protected abstract boolean isBillingUnavailable();
+
 	protected abstract void destroyBillingManager();
 
 	protected void stop(boolean taskDone) {
 		logDebug("Destroying helper.");
+		InAppPurchaseTaskType task = activeTask;
+		boolean billingUnavailable = isBillingUnavailable();
 		if (isBillingManagerExists()) {
 			if (taskDone) {
 				processingTask = false;
@@ -845,40 +1066,57 @@ public abstract class InAppPurchaseHelper {
 		if (inventoryRequestPending) {
 			inventoryRequestPending = false;
 			requestInventory(false);
+		} else {
+			if (task == InAppPurchaseTaskType.REQUEST_INVENTORY && billingUnavailable) {
+				applyPurchases();
+			}
 		}
 	}
 
 	private void sendPurchaseComplete(@NonNull PurchaseInfo info) {
 		try {
-			String url = "https://osmand.net/api/purchase-complete";
-			Map<String, String> params = new HashMap<>();
+            Map<String, String> params = new HashMap<>();
 			params.put("purchaseId", info.getSku().get(0));
 			params.put("orderId", info.getOrderId());
 			addUserInfo(params);
-			AndroidNetworkUtils.sendRequestAsync(ctx, url, params, "Sending purchase complete...", false, false, null);
+			AndroidNetworkUtils.sendRequestAsync(ctx, PURCHASE_COMPLETE_URL, params, "Sending purchase complete...", false, false, null);
 		} catch (Exception e) {
 			logError("SendPurchaseComplete Error", e);
 		}
+	}
+
+	public void resetPurchases() {
+		subscriptionStateMap = new HashMap<>();
+		inAppStateMap = new HashMap<>();
 	}
 
 	protected void sendTokens(@NonNull List<PurchaseInfo> purchaseInfoList, @Nullable OnRequestResultListener listener) {
 		String userId = ctx.getSettings().BILLING_USER_ID.get();
 		String token = ctx.getSettings().BILLING_USER_TOKEN.get();
 		String email = ctx.getSettings().BILLING_USER_EMAIL.get();
+		String deviceId = ctx.getSettings().BACKUP_DEVICE_ID.get();
+		String accessToken = ctx.getSettings().BACKUP_ACCESS_TOKEN.get();
 		try {
-			String url = "https://osmand.net/subscription/purchased";
-			String userOperation = "Sending purchase info...";
+            String userOperation = "Sending purchase info...";
 			List<Request> requests = new ArrayList<>();
 			for (PurchaseInfo info : purchaseInfoList) {
+				String sku = info.getSku().get(0);
 				Map<String, String> parameters = new HashMap<>();
+				parameters.put("purchaseType", purchases.getInAppPurchaseBySku(sku) != null
+						? PURCHASE_TYPE_INAPP : PURCHASE_TYPE_SUBSCRIPTION);
 				parameters.put("userid", userId);
-				parameters.put("sku", info.getSku().get(0));
+				parameters.put("sku", sku);
+				parameters.put("platform", getPlatform());
 				parameters.put("orderId", info.getOrderId());
 				parameters.put("purchaseToken", info.getPurchaseToken());
 				parameters.put("email", email);
 				parameters.put("token", token);
+				if (!Algorithms.isEmpty(deviceId) && !Algorithms.isEmpty(accessToken)) {
+					parameters.put("deviceid", deviceId);
+					parameters.put("accessToken", accessToken);
+				}
 				addUserInfo(parameters);
-				requests.add(new Request(url, parameters, userOperation, true, true));
+				requests.add(new Request(PURCHASED_URL, parameters, userOperation, true, true));
 			}
 			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnSendRequestsListener() {
 				@Override
@@ -983,7 +1221,7 @@ public abstract class InAppPurchaseHelper {
 	protected void notifyDismissProgress(InAppPurchaseTaskType taskType) {
 		ctx.runInUIThread(() -> {
 			if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-				new CheckBackupSubscriptionTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+				OsmAndTaskManager.executeTask(new CheckBackupSubscriptionTask(null));
 			}
 			if (uiActivity != null) {
 				uiActivity.dismissProgress(taskType);
@@ -1039,6 +1277,25 @@ public abstract class InAppPurchaseHelper {
 		if (sku.contains(".amazon.")) {
 			return PurchaseOrigin.AMAZON;
 		}
+		if (sku.contains(".fastspring.")) {
+			return PurchaseOrigin.FASTSPRING;
+		}
 		return PurchaseOrigin.GOOGLE;
+	}
+
+	@NonNull
+	public PurchaseOrigin getPlatformOrigin() {
+		return getPurchaseOriginByPlatform(getPlatform());
+	}
+
+	@NonNull
+	public PurchaseOrigin getPurchaseOriginByPlatform(@NonNull String platform) {
+		return switch (platform) {
+			case PLATFORM_APPLE -> PurchaseOrigin.IOS;
+			case PLATFORM_AMAZON -> PurchaseOrigin.AMAZON;
+			case PLATFORM_HUAWEI -> PurchaseOrigin.HUAWEI;
+			case PLATFORM_FASTSPRING -> PurchaseOrigin.FASTSPRING;
+			default -> PurchaseOrigin.GOOGLE;
+		};
 	}
 }

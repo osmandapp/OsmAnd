@@ -11,7 +11,7 @@ import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.BASE_URL
 import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.util.MapUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import org.json.JSONException
 import org.json.JSONObject
 

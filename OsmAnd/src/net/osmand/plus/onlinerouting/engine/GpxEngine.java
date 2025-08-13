@@ -5,11 +5,10 @@ import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.LocationsHolder;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -28,8 +27,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -110,6 +107,9 @@ public class GpxEngine extends OnlineRoutingEngine {
 		if ((previousRoute == null || previousRoute.isEmpty()) && shouldApproximateRoute()) {
 			params.initialCalculation = true;
 		}
+		if (previousRoute != null && previousRoute.isInitialCalculation()) {
+			params.gpxFile = previousRoute.getGpxFile(); // catch gpx from 1st phase
+		}
 	}
 
 	@Override
@@ -119,18 +119,18 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Override
 	@Nullable
-	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation, boolean initialCalculation,
-	                                           @Nullable RouteCalculationProgress calculationProgress) {
-		GPXFile gpxFile = parseGpx(content);
-		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation, calculationProgress) : null;
+	public OnlineRoutingResponse responseByContent(@NonNull OsmandApplication app, @NonNull String content,
+	                                               boolean leftSideNavigation, boolean initialCalculation,
+	                                               @Nullable RouteCalculationProgress calculationProgress) {
+		GpxFile gpxFile = parseGpx(content);
+		return gpxFile != null ? responseByGpxFile(app, gpxFile, initialCalculation, calculationProgress) : null;
 	}
 
-	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
+	public OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
+	                                               boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
 		boolean[] calculatedTimeSpeed = new boolean[]{useExternalTimestamps()};
 		if (shouldApproximateRoute() && !initialCalculation) {
-			GPXFile approximated = approximateGpxFile(app, gpxFile, calculationProgress, calculatedTimeSpeed);
+			GpxFile approximated = approximateGpxFile(app, gpxFile, calculationProgress, calculatedTimeSpeed);
 			if (approximated != null) {
 				gpxFile = approximated;
 			}
@@ -139,7 +139,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 	}
 
 	@Nullable
-	private GPXFile approximateGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	private GpxFile approximateGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
 	                                   @Nullable RouteCalculationProgress calculationProgress,
 	                                   boolean[] calculatedTimeSpeed) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -153,7 +153,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				appMode.setDerivedProfile(getApproximationDerivedProfile());
 			}
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
-			LocationsHolder holder = new LocationsHolder(points);
+			LocationsHolder holder = new LocationsHolder(SharedUtil.jWptPtList(points));
 			if (holder.getSize() > 1) {
 				LatLon start = holder.getLatLon(0);
 				LatLon end = holder.getLatLon(holder.getSize() - 1);
@@ -184,11 +184,11 @@ public class GpxEngine extends OnlineRoutingEngine {
 	}
 
 	@Nullable
-	private GPXFile parseGpx(@NonNull String content) {
+	private GpxFile parseGpx(@NonNull String content) {
 		InputStream gpxStream;
 		try {
 			gpxStream = new ByteArrayInputStream(content.getBytes("UTF-8"));
-			return GPXUtilities.loadGPXFile(gpxStream);
+			return SharedUtil.loadGpxFile(gpxStream);
 		} catch (UnsupportedEncodingException e) {
 			LOG.debug("Error when parsing GPX from server response: " + e.getMessage());
 		}

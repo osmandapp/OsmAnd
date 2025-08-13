@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                     android:singleLine="true"
                     android:text="@string/coords_search"
                     android:textColor="@color/card_and_list_background_light"
-                    osmand:typeface="@string/font_roboto_medium"
+                    app:typefaceWeight="medium"
                     android:textSize="@dimen/dialog_header_text_size"/>
 
                 <ProgressBar
@@ -225,6 +224,57 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/eastingLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/eastingImage"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp">
+
+                            <EditText
+                                android:id="@+id/eastingEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_easting"
+                                android:imeOptions="actionDone"
+                                android:inputType="textCapCharacters|textNoSuggestions"
+                                tools:text="22.12345"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/eastingClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
+                            android:layout_marginEnd="4dp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:id="@+id/northingLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -261,56 +311,6 @@
 
                         <ImageButton
                             android:id="@+id/northingClearButton"
-                            style="@style/Widget.AppCompat.ActionButton"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
-                            android:contentDescription="@string/shared_string_clear"
-                            app:srcCompat="@drawable/ic_action_remove_dark"
-	                        android:layout_marginEnd="4dp" />
-
-                    </FrameLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/eastingLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="16dp"
-                    android:visibility="gone">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/eastingImage"
-                        android:layout_width="54dp"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
-	                        android:layout_marginEnd="16dp">
-
-                            <EditText
-                                android:id="@+id/eastingEditText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/navigate_point_easting"
-                                android:imeOptions="actionDone"
-                                android:inputType="textCapCharacters|textNoSuggestions"
-                                tools:text="22.12345"/>
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <ImageButton
-                            android:id="@+id/eastingClearButton"
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"

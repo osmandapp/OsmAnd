@@ -6,8 +6,12 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -16,19 +20,21 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MissingMapsCalculator;
-import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -51,14 +57,28 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 		MissingMapsCalculator calculator = new MissingMapsCalculator(app.getRegions());
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		MissingMapsCalculationResult previousResult = route.getMissingMapsCalculationResult();
-		RoutingContext routingContext = previousResult.getMissingMapsRoutingContext();
-		List<LatLon> routePoints = previousResult.getMissingMapsPoints();
+		RoutingContext routingContext = previousResult != null ? previousResult.getMissingMapsRoutingContext() : null;
+		List<LatLon> routePoints = previousResult != null ? previousResult.getMissingMapsPoints() : null;
 
-		if (routingContext != null && routePoints != null)  {
+		TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
+		TargetPoint start = pointsHelper.getPointToStart();
+		TargetPoint end = pointsHelper.getPointToNavigate();
+		Location lastKnownLocation = app.getLocationProvider().getLastStaleKnownLocation();
+		if ((start != null || lastKnownLocation != null) && end != null) {
+			LatLon startPoint = start != null ? start.getLatLon()
+					: new LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+			routePoints = CollectionUtils.asOneList(
+					Collections.singletonList(startPoint),
+					pointsHelper.getIntermediatePointsLatLon(),
+					Collections.singletonList(end.getLatLon())
+			);
+		}
+
+		if (routingContext != null && routePoints != null) {
 			StringBuilder url = new StringBuilder(ONLINE_CALCULATION_URL)
 					.append(getRoutingProfile())
 					.append(getFormattedRoutingParameters());
-			for(LatLon point : routePoints) {
+			for (LatLon point : routePoints) {
 				url.append("&").append(formatPointString(point));
 			}
 			try {
@@ -86,7 +106,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	private String getRoutingProfile() {
 		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
 		RoutingConfiguration config = prevRoute.getMissingMapsCalculationResult().getMissingMapsRoutingContext().config;
-		boolean useBicycle = config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE;
+		GeneralRouterProfile profile = config.router.getProfile();
+		boolean useBicycle = profile == GeneralRouterProfile.BICYCLE || profile == GeneralRouterProfile.PEDESTRIAN;
 		return useBicycle ? "bicycle" : "car";
 	}
 
@@ -108,8 +129,9 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				}
 			}
 		}
+		String profile = getRoutingProfile();
 		return !Algorithms.isEmpty(activeParameters)
-				? "&params=car" + "," + TextUtils.join(",", activeParameters)
+				? "&params=" + profile + "," + TextUtils.join(",", activeParameters)
 				: "";
 	}
 
@@ -151,12 +173,13 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	public static CalculateMissingMapsOnlineTask execute(@NonNull OsmandApplication app,
 	                                                     @NonNull CalculateMissingMapsOnlineListener listener) {
 		CalculateMissingMapsOnlineTask task = new CalculateMissingMapsOnlineTask(app, listener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 		return task;
 	}
 
 	public interface CalculateMissingMapsOnlineListener {
 		void onSuccess();
+
 		void onError(@Nullable String error);
 	}
 }

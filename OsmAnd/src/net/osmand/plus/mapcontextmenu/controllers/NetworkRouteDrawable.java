@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -20,11 +21,14 @@ import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.data.Amenity;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 
@@ -73,6 +77,24 @@ public class NetworkRouteDrawable extends Drawable {
 		}
 	}
 
+	@Nullable
+	public static Drawable getIconByAmenityShieldTags(@NonNull Amenity amenity,
+	                                                  @NonNull OsmandApplication app, boolean nightMode) {
+		Map<String, String> shieldTags = new HashMap<>();
+		for (String tag : amenity.getAdditionalInfoKeys()) {
+			String value = amenity.getAdditionalInfo(tag);
+			shieldTags.put(tag, value);
+		}
+		RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
+		if (shieldRouteKey != null) {
+			NetworkRouteDrawable iconDrawable = new NetworkRouteDrawable(app, shieldRouteKey, nightMode);
+			if (iconDrawable.backgroundDrawable != null) {
+				return iconDrawable;
+			}
+		}
+		return null;
+	}
+
 	private void setupTextPaint(boolean nightMode) {
 		paint.setStrokeWidth(1);
 		paint.setAntiAlias(true);
@@ -88,16 +110,29 @@ public class NetworkRouteDrawable extends Drawable {
 		if (!Algorithms.isEmpty(osmcText)) {
 			MapRenderRepositories renderer = app.getResourceManager().getRenderer();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+			if (storage == null) {
+				 return;
+			}
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 
-			String tag = "route_" + routeKey.type.getName();
-			String color = routeKey.getValue("osmc_textcolor");
+			String shieldTextColor = routeKey.getValue("shield_textcolor");
 
-			request.setInitialTagValueZoom(tag, null, 14, null);
-			request.setIntFilter(request.ALL.R_TEXT_LENGTH, osmcText.length());
-			request.setStringFilter(request.ALL.R_NAME_TAG, tag + "_1_osmc_text");
-			request.setStringFilter(request.ALL.R_ADDITIONAL, tag + "_1_osmc_textcolor=" + color);
+			if (Algorithms.isEmpty(shieldTextColor)) {
+				String tag = "route_" + routeKey.type.getName();
+				String color = routeKey.getValue("osmc_textcolor");
+				request.setInitialTagValueZoom(tag, null, 14, null);
+				request.setIntFilter(request.ALL.R_TEXT_LENGTH, osmcText.length());
+				request.setStringFilter(request.ALL.R_NAME_TAG, tag + "_1_osmc_text");
+				request.setStringFilter(request.ALL.R_ADDITIONAL, tag + "_1_osmc_textcolor=" + color);
+			} else {
+				// Search rules for TravelGpx shields that were encapsulated into RouteKey.
+				request.setInitialTagValueZoom("route", "segment", 14, null);
+				request.setStringFilter(request.ALL.R_NAME_TAG, ""); // empty nameTag for route=segment
+				request.setStringFilter(request.ALL.R_ADDITIONAL, "shield_textcolor=" + shieldTextColor);
+				request.setIntFilter(request.ALL.R_TEXT_LENGTH, osmcText.length());
+			}
+
 			request.search(RenderingRulesStorage.TEXT_RULES);
 
 			StreetNameWidget.setupTextPaint(app, paint, request);

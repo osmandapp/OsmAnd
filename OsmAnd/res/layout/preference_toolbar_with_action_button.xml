@@ -50,7 +50,7 @@
                 android:maxLines="2"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/dialog_header_text_size"
-                app:typeface="@string/font_roboto_medium"
+                app:typefaceWeight="medium"
                 tools:text="@string/routing_settings_2" />
 
             <net.osmand.plus.widgets.TextViewEx
@@ -60,7 +60,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-                android:textColor="@null"
+                android:textColor="?android:attr/textColorSecondary"
                 tools:text="Some description" />
 
         </LinearLayout>

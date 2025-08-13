@@ -10,65 +10,46 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
-import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
-import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
-import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
-import net.osmand.plus.backup.BackupListeners.OnDownloadFileListListener;
-import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
-import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
-import net.osmand.plus.backup.BackupListeners.OnUpdateSubscriptionListener;
-import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
+import net.osmand.plus.backup.BackupListeners.*;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
-import net.osmand.plus.backup.commands.CheckCodeCommand;
-import net.osmand.plus.backup.commands.DeleteAccountCommand;
-import net.osmand.plus.backup.commands.DeleteAllFilesCommand;
-import net.osmand.plus.backup.commands.DeleteFilesCommand;
-import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
-import net.osmand.plus.backup.commands.RegisterDeviceCommand;
-import net.osmand.plus.backup.commands.RegisterUserCommand;
-import net.osmand.plus.backup.commands.SendCodeCommand;
+import net.osmand.plus.backup.commands.*;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.inapp.InAppPurchases;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
-import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.backend.backup.items.StreamSettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,14 +59,9 @@ import java.util.concurrent.Executor;
 
 public class BackupHelper {
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-	private final BackupDbHelper dbHelper;
-
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
-	public static boolean DEBUG;
 
-	private final BackupExecutor executor;
+	public static boolean DEBUG;
 
 	public static final String INFO_EXT = ".info";
 
@@ -124,9 +100,14 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT = 110;
 	public static final int SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED = 111;
 
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final BackupDbHelper dbHelper;
+	private final BackupExecutor executor;
+	private List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
+
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();
-	private final List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
 
 	private final BackupListeners backupListeners = new BackupListeners();
 
@@ -189,6 +170,28 @@ public class BackupHelper {
 		return purchasedSubscription != null ? purchasedSubscription.getOrderId() : null;
 	}
 
+	public boolean isBackupSubscriptionsExpired() {
+		if (InAppPurchaseUtils.isBackupAvailable(app)) {
+			return false;
+		}
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
+
+		boolean subscriptionsExpired = false;
+		for (InAppPurchase purchase : purchaseHelper.getEverMadeMainPurchases()) {
+			if (purchases.isOsmAndPro(purchase) && purchase instanceof InAppSubscription subscription) {
+				SubscriptionState state = subscription.getState();
+				if (state.isActive() || subscription.isPurchased()) {
+					return false;
+				}
+				if (state.isGone()) {
+					subscriptionsExpired = true;
+				}
+			}
+		}
+		return subscriptionsExpired;
+	}
+
 	@Nullable
 	private Map<String, LocalFile> getPreparedLocalFiles() {
 		if (isBackupPreparing()) {
@@ -220,11 +223,13 @@ public class BackupHelper {
 		}
 	}
 
-	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
+	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName,
+			long updateTime) {
 		dbHelper.updateFileUploadTime(type, fileName, updateTime);
 	}
 
-	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName, @NonNull String md5Hex) {
+	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName,
+			@NonNull String md5Hex) {
 		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
 	}
 
@@ -237,20 +242,17 @@ public class BackupHelper {
 	}
 
 	public void logout() {
-		settings.BACKUP_PROMOCODE.resetToDefault();
+		resetBackupPurchase();
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
 	}
 
-	@NonNull
-	private List<ExportType> getEnabledExportTypes() {
-		List<ExportType> result = new ArrayList<>();
-		for (ExportType exportType : ExportType.enabledValues()) {
-			if (getBackupTypePref(exportType).get()) {
-				result.add(exportType);
-			}
-		}
-		return result;
+	public void resetBackupPurchase() {
+		settings.BACKUP_PROMOCODE.resetToDefault();
+		settings.BACKUP_PURCHASE_ACTIVE.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_SKU.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_ORIGIN.resetToDefault();
+		app.getInAppPurchaseHelper().resetPurchases();
 	}
 
 	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType) {
@@ -400,14 +402,14 @@ public class BackupHelper {
 	}
 
 	public void addPrepareBackupListener(@NonNull OnPrepareBackupListener listener) {
-		prepareBackupListeners.add(listener);
+		prepareBackupListeners = CollectionUtils.addAllToList(prepareBackupListeners, Collections.singletonList(listener));
 		if (isBackupPreparing()) {
 			listener.onBackupPreparing();
 		}
 	}
 
 	public void removePrepareBackupListener(@NonNull OnPrepareBackupListener listener) {
-		prepareBackupListeners.remove(listener);
+		prepareBackupListeners = CollectionUtils.removeFromList(prepareBackupListeners, listener);
 	}
 
 	private void setPrepareBackupTask(@Nullable PrepareBackupTask task) {
@@ -416,7 +418,8 @@ public class BackupHelper {
 
 	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type, long lastModifiedTime,
-	                  @NonNull StreamWriter streamWriter, @Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
+			@NonNull StreamWriter streamWriter,
+			@Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -490,17 +493,18 @@ public class BackupHelper {
 	}
 
 	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                        @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
 
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                     @Nullable Executor executor, @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+			@Nullable Executor executor,
+			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
-			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
-					.executeOnExecutor(executor == null ? this.executor : executor).get();
+			OsmAndTaskManager.executeTask(new DeleteFilesCommand(this, remoteFiles, byVersion, listener),
+					executor == null ? this.executor : executor, null).get();
 		} catch (ExecutionException | InterruptedException e) {
 			if (listener != null) {
 				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));
@@ -508,7 +512,8 @@ public class BackupHelper {
 		}
 	}
 
-	void downloadFileList(@Nullable OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	void downloadFileList(
+			@Nullable OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -564,17 +569,20 @@ public class BackupHelper {
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
 
-	public void deleteAccount(@NonNull String email, @NonNull String token) throws UserNotRegisteredException {
+	public void deleteAccount(@NonNull String email,
+			@NonNull String token) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteAccountCommand(this, email, token));
 	}
 
-	public void checkCode(@NonNull String email, @NonNull String token) throws UserNotRegisteredException {
+	public void checkCode(@NonNull String email,
+			@NonNull String token) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new CheckCodeCommand(this, email, token));
 	}
 
-	public void sendCode(@NonNull String email, @NonNull String action) throws UserNotRegisteredException {
+	public void sendCode(@NonNull String email,
+			@NonNull String action) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new SendCodeCommand(this, email, action));
 	}
@@ -596,13 +604,14 @@ public class BackupHelper {
 
 	@NonNull
 	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile,
-	                    @Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
+			@Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
 		String error;
 		String type = remoteFile.getType();
 		String fileName = remoteFile.getName();
+		StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 		try {
 			Map<String, String> params = new HashMap<>();
 			params.put("deviceid", getDeviceId());
@@ -611,7 +620,6 @@ public class BackupHelper {
 			params.put("type", type);
 			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
 
-			StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
 				builder.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
@@ -673,280 +681,15 @@ public class BackupHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	void collectLocalFiles(@Nullable OnCollectLocalFilesListener listener) {
-		OperationLog operationLog = new OperationLog("collectLocalFiles", DEBUG);
-		operationLog.startOperation();
-		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
-
-			BackupDbHelper dbHelper;
-			SQLiteConnection db;
-			Map<String, UploadedFileInfo> infos;
-
-			@Override
-			protected void onPreExecute() {
-				dbHelper = app.getBackupHelper().getDbHelper();
-				db = dbHelper.openConnection(true);
-			}
-
-			@Override
-			protected List<LocalFile> doInBackground(Void... voids) {
-				List<LocalFile> result = new ArrayList<>();
-				infos = dbHelper.getUploadedFileInfoMap();
-				List<SettingsItem> localItems = getLocalItems();
-				operationLog.log("getLocalItems");
-				for (SettingsItem item : localItems) {
-					String fileName = BackupUtils.getItemFileName(item);
-					if (item instanceof FileSettingsItem) {
-						FileSettingsItem fileItem = (FileSettingsItem) item;
-						File file = fileItem.getFile();
-						if (file.isDirectory()) {
-							if (item instanceof GpxSettingsItem) {
-								continue;
-							} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
-								File jsFile = new File(file, file.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
-								if (jsFile.exists()) {
-									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
-									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
-									continue;
-								}
-							} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
-								String langName = file.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
-								File jsFile = new File(file, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
-								if (jsFile.exists()) {
-									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
-									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
-									continue;
-								}
-							} else if (fileItem.getSubtype() == FileSubtype.TILES_MAP) {
-								continue;
-							}
-							List<File> dirs = new ArrayList<>();
-							dirs.add(file);
-							Algorithms.collectDirs(file, dirs);
-							operationLog.log("collectDirs " + file.getName() + " BEGIN");
-							for (File dir : dirs) {
-								File[] files = dir.listFiles();
-								if (files != null && files.length > 0) {
-									for (File f : files) {
-										if (!f.isDirectory()) {
-											fileName = f.getPath().replace(app.getAppPath(null).getPath() + "/", "");
-											createLocalFile(result, item, fileName, f, f.lastModified());
-										}
-									}
-								}
-							}
-							operationLog.log("collectDirs " + file.getName() + " END");
-						} else if (fileItem.getSubtype() == FileSubtype.TILES_MAP) {
-							if (file.getName().endsWith(SQLiteTileSource.EXT)) {
-								createLocalFile(result, item, fileName, file, file.lastModified());
-							}
-						} else {
-							createLocalFile(result, item, fileName, file, file.lastModified());
-						}
-					} else {
-						createLocalFile(result, item, fileName, null, item.getLastModifiedTime());
-					}
-				}
-				return result;
-			}
-
-			private void createLocalFile(@NonNull List<LocalFile> result, @NonNull SettingsItem item,
-			                             @NonNull String fileName, @Nullable File file, long lastModifiedTime) {
-				LocalFile localFile = new LocalFile();
-				localFile.file = file;
-				localFile.item = item;
-				localFile.fileName = fileName;
-				localFile.localModifiedTime = lastModifiedTime;
-				if (infos != null) {
-					UploadedFileInfo fileInfo = infos.get(item.getType().name() + "___" + fileName);
-					if (fileInfo != null) {
-						localFile.uploadTime = fileInfo.getUploadTime();
-						checkM5Digest(localFile, fileInfo, lastModifiedTime);
-					}
-				}
-				result.add(localFile);
-				publishProgress(localFile);
-			}
-
-			private void checkM5Digest(@NonNull LocalFile localFile, @NonNull UploadedFileInfo fileInfo, long lastModifiedTime) {
-				SettingsItem item = localFile.item;
-				String lastMd5 = fileInfo.getMd5Digest();
-				boolean needM5Digest = item instanceof StreamSettingsItem
-						&& ((StreamSettingsItem) item).needMd5Digest()
-						&& localFile.uploadTime < lastModifiedTime
-						&& !Algorithms.isEmpty(lastMd5);
-
-				if (needM5Digest && localFile.file != null && localFile.file.exists()) {
-					FileInputStream is = null;
-					try {
-						is = new FileInputStream(localFile.file);
-						String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
-						if (md5.equals(lastMd5)) {
-							item.setLocalModifiedTime(localFile.uploadTime);
-							localFile.localModifiedTime = localFile.uploadTime;
-						}
-					} catch (IOException e) {
-						LOG.error(e.getMessage(), e);
-					} finally {
-						Algorithms.closeStream(is);
-					}
-				}
-			}
-
-			private List<SettingsItem> getLocalItems() {
-				List<ExportType> types = getEnabledExportTypes();
-				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, false);
-			}
-
-			@Override
-			protected void onProgressUpdate(LocalFile... localFiles) {
-				for (LocalFile file : localFiles) {
-					if (listener != null) {
-						listener.onFileCollected(file);
-					}
-				}
-			}
-
-			@Override
-			protected void onPostExecute(List<LocalFile> localFiles) {
-				if (db != null) {
-					db.close();
-				}
-				operationLog.finishOperation(" Files=" + localFiles.size());
-				if (listener != null) {
-					listener.onFilesCollected(localFiles);
-				}
-			}
-		};
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		AsyncTask<Void, LocalFile, List<LocalFile>> task = new CollectLocalFilesTask(app, listener);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	void generateBackupInfo(@NonNull Map<String, LocalFile> localFiles,
-	                        @NonNull Map<String, RemoteFile> uniqueRemoteFiles,
-	                        @NonNull Map<String, RemoteFile> deletedRemoteFiles,
-	                        @Nullable OnGenerateBackupInfoListener listener) {
-
-		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
-		operationLog.startOperation();
-
-		AsyncTask<Void, Void, BackupInfo> task = new AsyncTask<Void, Void, BackupInfo>() {
-			@Override
-			protected BackupInfo doInBackground(Void... voids) {
-				BackupInfo info = new BackupInfo();
-				/*
-				operationLog.log("=== localFiles ===");
-				for (LocalFile localFile : localFiles.values()) {
-					operationLog.log(localFile.toString());
-				}
-				operationLog.log("=== localFiles ===");
-				operationLog.log("=== uniqueRemoteFiles ===");
-				for (RemoteFile remoteFile : uniqueRemoteFiles.values()) {
-					operationLog.log(remoteFile.toString());
-				}
-				operationLog.log("=== uniqueRemoteFiles ===");
-				operationLog.log("=== deletedRemoteFiles ===");
-				for (RemoteFile remoteFile : deletedRemoteFiles.values()) {
-					operationLog.log(remoteFile.toString());
-				}
-				operationLog.log("=== deletedRemoteFiles ===");
-				*/
-				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
-				remoteFiles.addAll(deletedRemoteFiles.values());
-				for (RemoteFile remoteFile : remoteFiles) {
-					ExportType exportType = ExportType.findBy(remoteFile);
-					if (exportType == null || !exportType.isEnabled() || remoteFile.isRecordedVoiceFile()) {
-						continue;
-					}
-					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
-					if (localFile != null) {
-						boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
-						boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
-						if (fileChangedRemotely && fileChangedLocally) {
-							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
-						} else if (fileChangedLocally) {
-							info.filesToUpload.add(localFile);
-						} else if (fileChangedRemotely) {
-							if (remoteFile.isDeleted()) {
-								info.localFilesToDelete.add(localFile);
-							} else {
-								info.filesToDownload.add(remoteFile);
-							}
-						}
-						if (PluginsHelper.isDevelopment()) {
-							if (fileChangedRemotely || fileChangedLocally) {
-								LOG.debug("file to backup " + localFile + " " + remoteFile
-										+ " " + fileChangedRemotely + " fileChangedRemotely " + fileChangedLocally + "fileChangedLocally");
-							}
-						}
-					} else if (!remoteFile.isDeleted()) {
-						UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
-						// suggest to remove only if file exists in db
-						if (fileInfo != null && fileInfo.getUploadTime() >= remoteFile.getUpdatetimems()) {
-							// conflicts not supported yet
-							// info.filesToMerge.add(new Pair<>(null, remoteFile));
-							info.filesToDelete.add(remoteFile);
-						} else {
-							info.filesToDownload.add(remoteFile);
-						}
-					}
-				}
-				for (LocalFile localFile : localFiles.values()) {
-					ExportType exportType = ExportType.findBy(localFile.item);
-					if (exportType == null || !exportType.isEnabled()) {
-						continue;
-					}
-					boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());
-					boolean toDelete = info.localFilesToDelete.contains(localFile);
-					if (!hasRemoteFile && !toDelete) {
-						boolean isEmpty = localFile.item instanceof CollectionSettingsItem<?> && ((CollectionSettingsItem<?>) localFile.item).isEmpty();
-						if (!isEmpty) {
-							info.filesToUpload.add(localFile);
-						}
-					}
-				}
-				info.createItemCollections(app);
-
-				operationLog.log("=== filesToUpload ===");
-				for (LocalFile localFile : info.filesToUpload) {
-					operationLog.log(localFile.toString());
-				}
-				operationLog.log("=== filesToUpload ===");
-				operationLog.log("=== filesToDownload ===");
-				for (RemoteFile remoteFile : info.filesToDownload) {
-					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
-					if (localFile != null) {
-						operationLog.log(remoteFile.toString() + " localUploadTime=" + localFile.uploadTime);
-					} else {
-						operationLog.log(remoteFile.toString());
-					}
-				}
-				operationLog.log("=== filesToDownload ===");
-				operationLog.log("=== filesToDelete ===");
-				for (RemoteFile remoteFile : info.filesToDelete) {
-					operationLog.log(remoteFile.toString());
-				}
-				operationLog.log("=== filesToDelete ===");
-				operationLog.log("=== localFilesToDelete ===");
-				for (LocalFile localFile : info.localFilesToDelete) {
-					operationLog.log(localFile.toString());
-				}
-				operationLog.log("=== localFilesToDelete ===");
-				operationLog.log("=== filesToMerge ===");
-				for (Pair<LocalFile, RemoteFile> filePair : info.filesToMerge) {
-					operationLog.log("LOCAL=" + filePair.first.toString() + " REMOTE=" + filePair.second.toString());
-				}
-				operationLog.log("=== filesToMerge ===");
-				return info;
-			}
-
-			@Override
-			protected void onPostExecute(BackupInfo backupInfo) {
-				operationLog.finishOperation(backupInfo.toString());
-				if (listener != null) {
-					listener.onBackupInfoGenerated(backupInfo, null);
-				}
-			}
-		};
-		task.executeOnExecutor(executor);
+			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
+			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
+			@Nullable OnGenerateBackupInfoListener listener) {
+		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener), executor);
 	}
 }

@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
@@ -27,9 +28,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.local.dialogs.LiveGroupItem;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -37,11 +39,11 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.LocalSortMode;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -50,6 +52,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -78,7 +81,7 @@ public class LocalItemUtils {
 		if (type == MULTIMEDIA_NOTES) {
 			item.setAttachedObject(new Recording(file));
 		} else if (type == TRACKS) {
-			item.setAttachedObject(app.getGpxDbHelper().getItem(file, item::setAttachedObject));
+			item.setAttachedObject(app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item::setAttachedObject));
 		} else if (type == TILES_DATA) {
 			ITileSource template = null;
 			if (file.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(file)) {
@@ -211,6 +214,8 @@ public class LocalItemUtils {
 		} else if (path.startsWith(app.getCacheDir().getAbsolutePath()) && (path.contains(WEATHER_FORECAST_DIR)
 				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR))) {
 			return file.isFile() ? CACHE : null;
+		} else if (path.contains(COLOR_PALETTE_DIR) && name.endsWith(TXT_EXT)) {
+			return COLOR_DATA;
 		}
 		if (file.isFile() && file.length() >= OTHER_MIN_SIZE) {
 			return OTHER;
@@ -229,6 +234,8 @@ public class LocalItemUtils {
 		} else if (type == CACHE) {
 			if (fileName.startsWith("heightmap")) {
 				return context.getString(R.string.relief_3d);
+			} else if (fileName.startsWith("height_cache")) {
+				return context.getString(R.string.altitude);
 			} else if (fileName.startsWith("hillshade")) {
 				return context.getString(R.string.shared_string_hillshade);
 			} else if (fileName.startsWith("slope")) {
@@ -243,7 +250,7 @@ public class LocalItemUtils {
 				return ((Recording) attachedObject).getName(context, true);
 			}
 		} else if (type == TRACKS) {
-			return GpxUiHelper.getGpxTitle(fileName);
+			return GpxHelper.INSTANCE.getGpxTitle(fileName);
 		} else if (type == PROFILES) {
 			String key = Algorithms.getFileNameWithoutExtension(fileName);
 			if (CollectionUtils.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
@@ -255,6 +262,8 @@ public class LocalItemUtils {
 			if (attachedObject instanceof String) {
 				return RendererRegistry.getRendererName(context, (String) attachedObject);
 			}
+		} else if (type == COLOR_DATA) {
+			return ColorsPaletteUtils.getPaletteName(item.getFile());
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
@@ -275,13 +284,43 @@ public class LocalItemUtils {
 
 	@NonNull
 	public static String getItemDescription(@NonNull Context context, @NonNull LocalItem item) {
-		String size = AndroidUtils.formatSize(context, item.getFile().length());
+		String formattedSize = item.getSizeDescription(context);
 		if (item.getType() == CACHE) {
-			return size;
+			return formattedSize;
+		} else if (item.getType() == COLOR_DATA) {
+			return ColorsPaletteUtils.getPaletteTypeName(context, item.getFile());
 		} else {
 			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
-			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate);
+			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 		}
+	}
+
+	@NonNull
+	public static String getSizeDescription(@NonNull Context context, @NonNull Collection<BaseLocalItem> items) {
+		String formattedSize = AndroidUtils.formatSize(context, calculateItemsSize(items));
+		String prefix = isSizeCalculated(items) ? "" : "≥ ";
+		return prefix + formattedSize;
+	}
+
+	public static boolean isSizeCalculated(@NonNull Collection<BaseLocalItem> items) {
+		for (BaseLocalItem item : items) {
+			if (item instanceof LocalItem localItem && localItem.isSizeCalculationLimitReached()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean isSizeCalculating(@NonNull Context context, @NonNull LocalItem item) {
+		return LocalSizeController.isSizeCalculating(context, item);
+	}
+
+	public static long calculateItemsSize(@NonNull Collection<BaseLocalItem> items) {
+		long size = 0;
+		for (BaseLocalItem item : items) {
+			size += item.getSize();
+		}
+		return size;
 	}
 
 	@NonNull

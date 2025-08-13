@@ -248,7 +248,7 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 
 	@Override
 	public void onForget(@NonNull AbstractDevice<?> device) {
-		ForgetDeviceDialog.Companion.showInstance(requireActivity().getSupportFragmentManager(), this, device);
+		ForgetDeviceDialog.Companion.showInstance(requireActivity().getSupportFragmentManager(), this, device.getDeviceId());
 	}
 
 	@Override

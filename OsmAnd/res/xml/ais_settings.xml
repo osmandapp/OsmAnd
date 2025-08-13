@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:title="AIS">
+
+    <PreferenceCategory
+        android:key="ais_address_settings"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/ais_address_settings" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_nmea_protocol"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_nmea_protocol"
+        tools:summary="@string/ais_nmea_protocol_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="ais_address_nmea_server"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_address_nmea_server"
+        tools:summary="@string/ais_address_nmea_server_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="ais_port_nmea_server"
+        android:layout="@layout/preference_with_descr"
+        android:inputType="number"
+        android:title="@string/ais_port_nmea_server"
+        tools:summary="@string/ais_port_nmea_server_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="ais_port_nmea_local"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_port_nmea_local"
+        tools:summary="@string/ais_port_nmea_local_description" />
+
+    <PreferenceCategory
+        android:key="ais_object_lost_timeouts"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/ais_object_lost_timeouts" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_object_lost_timeout"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_object_lost_timeout"
+        tools:summary="@string/ais_object_lost_timeout_description" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_ship_lost_timeout"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_ship_lost_timeout"
+        tools:summary="@string/ais_ship_lost_timeout_description" />
+
+    <PreferenceCategory
+        android:key="ais_cpa_settings"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/ais_cpa_settings" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_cpa_warning_time"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_cpa_warning_time"
+        tools:summary="@string/ais_cpa_warning_time_description" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_cpa_warning_distance"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_cpa_warning_distance"
+        tools:summary="@string/ais_cpa_warning_distance_description" />
+
+</PreferenceScreen>

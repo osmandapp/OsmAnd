@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
@@ -55,7 +55,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
 		this.selectedPoints = selectedPoints;
-		inflater = UiUtilities.getInflater(app, nightMode);
+		inflater = UiUtilities.getInflater(context, nightMode);
 		uiUtilities = app.getUIUtilities();
 		viewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 	}
@@ -139,7 +139,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 		WptPt point = getChild(groupPosition, childPosition);
 
 		TextView title = view.findViewById(R.id.title);
-		title.setText(point.name);
+		title.setText(point.getName());
 
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(selectedPoints.contains(point));

@@ -1,87 +1,78 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
+import static androidx.recyclerview.widget.DiffUtil.calculateDiff;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.*;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
+import static net.osmand.plus.views.mapwidgets.WidgetType.isComplexWidget;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_ADD_PAGE;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_DIVIDER;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_EMPTY_STATE;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.VIEW_TYPE_SPACE;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnScrollChangedListener;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.DiffUtil.DiffResult;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetInfoFragment;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
-import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
-import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
-import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.PageItem;
+import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.WidgetItem;
+import net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBaseFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
-public class WidgetsListFragment extends Fragment implements OnScrollChangedListener,
-		ConfirmationDialogListener, CopyAppModePrefsListener {
+public class WidgetsListFragment extends Fragment implements ConfirmationBottomSheet.ConfirmationDialogListener,
+		SelectCopyAppModeBottomSheet.CopyAppModePrefsListener, WidgetsListAdapter.WidgetsAdapterListener, AddWidgetFragment.AddWidgetListener {
 
-	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
+	private static final String SELECTED_PANEL_KEY = "selected_panel_key";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
+	private ConfigureWidgetsController controller;
 
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
-	private WidgetsSettingsHelper widgetsSettingsHelper;
-	private WidgetIconsHelper iconsHelper;
+	private List<List<MapWidgetInfo>> originalWidgetsData;
 
-	private View view;
-	private NestedScrollView scrollView;
-	private View changeOrderListButton;
-	private View changeOrderFooterButton;
-	private ViewGroup enabledWidgetsContainer;
-	private ViewGroup availableWidgetsContainer;
-	private ViewGroup actionsCardContainer;
-
-	private final int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
+	private RecyclerView recyclerView;
+	private WidgetsListAdapter adapter;
 
 	private boolean nightMode;
+
+	@NonNull
+	public WidgetsPanel getSelectedPanel() {
+		return selectedPanel;
+	}
 
 	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
 		this.selectedPanel = panel;
@@ -91,441 +82,170 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (OsmandApplication) requireContext().getApplicationContext();
+		settings = app.getSettings();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
-		settings = app.getSettings();
-		nightMode = !settings.isLightContent();
-		selectedAppMode = settings.getApplicationMode();
-		widgetsSettingsHelper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
-		iconsHelper = new WidgetIconsHelper(app, selectedAppMode.getProfileColor(nightMode), nightMode);
+		DialogManager dialogManager = app.getDialogManager();
+		controller = (ConfigureWidgetsController) dialogManager.findController(ConfigureWidgetsController.PROCESS_ID);
 		if (savedInstanceState != null) {
-			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
+			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_PANEL_KEY));
 		}
 	}
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
+		View view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
 
-		enabledWidgetsContainer = view.findViewById(R.id.enabled_widgets_list);
-		availableWidgetsContainer = view.findViewById(R.id.available_widgets_list);
-		changeOrderListButton = view.findViewById(R.id.change_order_button_in_list);
-		changeOrderFooterButton = view.findViewById(R.id.change_order_button_in_bottom);
-		actionsCardContainer = view.findViewById(R.id.configure_screen_actions_container);
-
-		scrollView = view.findViewById(R.id.scroll_view);
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(this);
-
-		updateContent();
-
-		boolean isRtl = AndroidUtils.isLayoutRtl(view.getContext());
-		TextView title = view.findViewById(R.id.panel_title);
-		title.setText(getString(isVerticalPanel() ? R.string.shared_string_rows : selectedPanel.getTitleId(isRtl)));
-
-		setupReorderButton(changeOrderListButton);
-		setupReorderButton(changeOrderFooterButton);
-		setupActionsCard();
+		recyclerView = view.findViewById(R.id.recycler_view);
+		setupRecyclerView();
 
 		return view;
+	}
+
+	private void setupRecyclerView() {
+		originalWidgetsData = getPagedWidgets();
+
+		adapter = new WidgetsListAdapter(requireMapActivity(), nightMode, this, selectedPanel.isPanelVertical(), selectedAppMode);
+
+		recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+		recyclerView.setAdapter(adapter);
+		adapter.attachToRecyclerView(recyclerView);
+
+		boolean disableAnimation = app.getSettings().DO_NOT_USE_ANIMATIONS.getModeValue(selectedAppMode);
+		if (disableAnimation) {
+			recyclerView.setItemAnimator(null);
+		}
+
+		if (isEditMode()) {
+			List<Object> savedList = controller.getReorderList();
+			if (!Algorithms.isEmpty(savedList)) {
+				updateAdapter(new ArrayList<>(savedList), false);
+			}
+		} else {
+			updateWidgetItems(originalWidgetsData, false);
+		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		Fragment fragment = getParentFragment();
-		if (fragment instanceof ConfigureWidgetsFragment) {
-			((ConfigureWidgetsFragment) fragment).setSelectedFragment(this);
-		}
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 
-		Fragment fragment = getParentFragment();
-		if (fragment instanceof ConfigureWidgetsFragment) {
-			((ConfigureWidgetsFragment) fragment).setSelectedFragment(null);
-		}
-	}
-
-	public void setupReorderButton(@NonNull View view) {
-		view.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				FragmentManager manager = activity.getSupportFragmentManager();
-				ReorderWidgetsFragment.showInstance(manager, selectedPanel, selectedAppMode, getParentFragment());
-			}
-		});
-		setupListItemBackground(view);
-	}
-
-	public void scrollToActions() {
-		scrollView.smoothScrollTo(0, (int) actionsCardContainer.getY());
-	}
-
-	private void setupActionsCard() {
-		int panelTitleId = selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app));
-		View cardView = new ConfigureActionsCard(requireMapActivity(), this, panelTitleId)
-				.build(view.getContext());
-		actionsCardContainer.addView(cardView);
-	}
-
-	@Override
-	public void onActionConfirmed(int actionId) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		widgetsSettingsHelper.resetWidgetsForPanel(selectedPanel);
-
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(mapActivity);
-		}
-		updateContent();
-	}
-
-	@Override
-	public void copyAppModePrefs(@NonNull ApplicationMode fromAppMode) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-
-		widgetsSettingsHelper.copyWidgetsForPanel(fromAppMode, selectedPanel);
-
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(mapActivity);
-		}
-		updateContent();
-	}
-
-	public void updateContent() {
-		updateEnabledWidgets();
-		updateAvailableWidgets();
-	}
-
-	private void updateEnabledWidgets() {
-		enabledWidgetsContainer.removeAllViews();
-
-		MapActivity mapActivity = requireMapActivity();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode,
-				enabledWidgetsFilter, Collections.singletonList(selectedPanel));
-		boolean noEnabledWidgets = Algorithms.isEmpty(enabledWidgets);
-
-		View noWidgetsContainer = view.findViewById(R.id.no_widgets_container);
-		AndroidUiHelper.updateVisibility(noWidgetsContainer, noEnabledWidgets);
-		if (noEnabledWidgets) {
-			boolean rtl = AndroidUtils.isLayoutRtl(app);
-			ImageView imageView = view.findViewById(R.id.no_widgets_image);
-			imageView.setImageDrawable(app.getUIUtilities().getIcon(selectedPanel.getIconId(rtl), nightMode));
-		} else {
-			inflateEnabledWidgets();
-		}
-	}
-
-	private void inflateEnabledWidgets() {
-		MapActivity mapActivity = requireMapActivity();
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-
-		List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel, enabledWidgetsFilter);
-		for (int i = 0; i < pagedWidgets.size(); i++) {
-			if (!isVerticalPanel()) {
-				inflatePageItemView(i, inflater);
-			}
-			inflateWidgetItemsViews(pagedWidgets.get(i), inflater, i + 1, i == pagedWidgets.size() - 1);
-		}
-	}
-
-	private void inflatePageItemView(int index, @NonNull LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.configure_screen_list_item_page, enabledWidgetsContainer, false);
-		View topDivider = view.findViewById(R.id.top_divider);
-		TextView pageText = view.findViewById(R.id.page);
-		AndroidUiHelper.updateVisibility(topDivider, index > 0);
-		pageText.setText(getString(R.string.page_number, String.valueOf(index + 1)));
-		enabledWidgetsContainer.addView(view);
-	}
-
-	private void inflateWidgetItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo, @NonNull LayoutInflater inflater, int row, boolean lastRow) {
-		List<MapWidgetInfo> widgets = new ArrayList<>(widgetsInfo);
-
-		for (int i = 0; i < widgets.size(); i++) {
-			MapWidgetInfo widgetInfo = widgets.get(i);
-
-			View view = inflater.inflate(R.layout.configure_screen_widget_item, enabledWidgetsContainer, false);
-
-			TextView title = view.findViewById(R.id.title);
-			title.setText(widgetInfo.getTitle(app));
-
-			WidgetType widgetType = widgetInfo.getWidgetType();
-			WidgetGroup widgetGroup = widgetType == null ? null : widgetType.getGroup();
-			if (widgetGroup != null) {
-				TextView description = view.findViewById(R.id.description);
-				description.setText(widgetGroup.titleId);
-				AndroidUiHelper.updateVisibility(description, true);
-			}
-
-			ImageView imageView = view.findViewById(R.id.icon);
-			iconsHelper.updateWidgetIcon(imageView, widgetInfo);
-
-			View settingsButton = view.findViewById(R.id.settings_button);
-			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app, widgetInfo) : null;
-			if (fragment != null) {
-				settingsButton.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						Bundle args = new Bundle();
-						args.putString(KEY_WIDGET_ID, widgetInfo.key);
-						args.putString(KEY_APP_MODE, selectedAppMode.getStringKey());
-
-						Fragment target = getParentFragment();
-						FragmentManager manager = activity.getSupportFragmentManager();
-						WidgetSettingsBaseFragment.showFragment(manager, args, target, fragment);
-					}
-				});
-				UiUtilities.setupListItemBackground(app, settingsButton, selectedAppMode.getProfileColor(nightMode));
-			}
-
-			View infoButton = view.findViewById(R.id.info_button);
-			infoButton.setOnClickListener(v -> {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					Fragment target = getParentFragment();
-					WidgetInfoFragment.showInstance(fragmentManager, target, selectedAppMode, widgetInfo.key);
-				}
-			});
-			view.setOnClickListener(v -> infoButton.callOnClick());
-
-			AndroidUiHelper.updateVisibility(settingsButton, fragment != null);
-			AndroidUiHelper.updateVisibility(infoButton, true);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), fragment != null);
-
-			setupListItemBackground(view);
-
-			View bottomDivider = view.findViewById(R.id.bottom_divider);
-			boolean lastWidget = i + 1 == widgets.size();
-			AndroidUiHelper.updateVisibility(bottomDivider, !lastWidget);
-
-			if (isVerticalPanel()) {
-				TextView rowId = view.findViewById(R.id.row_id);
-				rowId.setText(String.valueOf(row));
-				AndroidUiHelper.setVisibility(i == 0 ? View.VISIBLE : View.INVISIBLE, rowId);
-
-				if (lastWidget && !lastRow) {
-					ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) bottomDivider.getLayoutParams();
-					params.setMarginStart(0);
-					AndroidUiHelper.updateVisibility(bottomDivider, true);
-				}
-			}
-			enabledWidgetsContainer.addView(view);
-		}
-	}
-
-	private void updateAvailableWidgets() {
-		availableWidgetsContainer.removeAllViews();
-
-		int filter = AVAILABLE_MODE | DEFAULT_MODE;
-
-		MapActivity mapActivity = requireMapActivity();
-		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(selectedPanel));
-		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
-		if (hasAvailableWidgets) {
-			List<WidgetType> defaultWidgets = excludeGroupsDuplicated(listDefaultWidgets(availableWidgets));
-			sortWidgetsItems(defaultWidgets, app, nightMode);
-
-			List<MapWidgetInfo> externalWidgets = listExternalWidgets(availableWidgets);
-			sortWidgetsItems(externalWidgets, app, nightMode);
-
-			inflateAvailableDefaultWidgets(defaultWidgets, !Algorithms.isEmpty(externalWidgets));
-			inflateAvailableExternalWidgets(externalWidgets);
-		}
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.available_widgets_container), hasAvailableWidgets);
-	}
-
-	public static void sortWidgetsItems(List<?> widgets, @NonNull OsmandApplication app, boolean nightMode) {
-		Collections.sort(widgets, (o1, o2) -> {
-			String firstName = getListItemName(o1, app, nightMode);
-			String secondName = getListItemName(o2, app, nightMode);
-			if (firstName != null && secondName != null) {
-				return firstName.compareTo(secondName);
-			}
-			return 0;
-		});
-	}
-
-	@Nullable
-	public static String getListItemName(Object item, @NonNull OsmandApplication app, boolean nightMode) {
-		if (item instanceof WidgetType) {
-			WidgetType widgetType = (WidgetType) item;
-			WidgetGroup widgetGroup = widgetType.getGroup();
-			return widgetGroup != null
-					? String.valueOf(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode))
-					: app.getString(widgetType.titleId);
-		} else if (item instanceof MapWidgetInfo) {
-			return ((MapWidgetInfo) item).getTitle(app);
-		} else if (item instanceof ListItem) {
-			Object value = ((ListItem) item).value;
-			if (value instanceof AvailableWidgetUiInfo) {
-				return ((AvailableWidgetUiInfo) value).title;
-			} else if (value instanceof WidgetGroup) {
-				return ((WidgetGroup) value).name();
-			}
-		}
-		return null;
+		updateReorderList();
 	}
 
 	@NonNull
-	private List<WidgetType> excludeGroupsDuplicated(List<WidgetType> widgets) {
-		List<WidgetGroup> visitedGroups = new ArrayList<>();
-		List<WidgetType> individualWidgets = new ArrayList<>();
-		List<WidgetType> result = new ArrayList<>();
-		for (WidgetType widget : widgets) {
-			WidgetGroup group = widget.getGroup();
-			if (group != null && !visitedGroups.contains(group)) {
-				visitedGroups.add(group);
-				result.add(widget);
-			} else if (group == null) {
-				individualWidgets.add(widget);
-			}
+	private List<List<MapWidgetInfo>> getPagedWidgets() {
+		MapActivity mapActivity = requireMapActivity();
+
+		List<List<MapWidgetInfo>> result = new ArrayList<>();
+		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
+		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel, enabledWidgetsFilter)) {
+			result.add(new ArrayList<>(set));
 		}
-		result.addAll(individualWidgets);
 		return result;
 	}
 
-	private void inflateAvailableDefaultWidgets(@NonNull List<WidgetType> widgets, boolean hasExternalWidgets) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		for (int i = 0; i < widgets.size(); i++) {
-			WidgetType widgetType = widgets.get(i);
-			WidgetGroup widgetGroup = widgetType.getGroup();
+	public void onApplyChanges() {
+		applyWidgetsConfiguration();
 
-			View view = inflater.inflate(R.layout.configure_screen_widget_item, availableWidgetsContainer, false);
-
-			ImageView icon = view.findViewById(R.id.icon);
-			if (widgetGroup != null) {
-				icon.setImageResource(widgetGroup.getIconId(nightMode));
-			} else {
-				icon.setImageResource(widgetType.getIconId(nightMode));
-			}
-
-			CharSequence title = widgetGroup != null
-					? AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode)
-					: getString(widgetType.titleId);
-			((TextView) view.findViewById(R.id.title)).setText(title);
-
-			view.setOnClickListener(v -> {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					Fragment target = getParentFragment();
-					if (widgetGroup != null) {
-						AddWidgetFragment.showGroupDialog(fragmentManager, target,
-								selectedAppMode, selectedPanel, widgetGroup, null);
-					} else {
-						AddWidgetFragment.showWidgetDialog(fragmentManager, target,
-								selectedAppMode, selectedPanel, widgetType, null);
-					}
-				}
-			});
-
-			View infoButton = view.findViewById(R.id.info_button);
-			infoButton.setClickable(false);
-			AndroidUiHelper.updateVisibility(infoButton, true);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
-
-			boolean last = i + 1 == widgets.size();
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !last || hasExternalWidgets);
-
-			setupListItemBackground(view);
-
-			availableWidgetsContainer.addView(view);
-		}
-	}
-
-	private void inflateAvailableExternalWidgets(@NonNull List<MapWidgetInfo> externalWidgets) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		for (int i = 0; i < externalWidgets.size(); i++) {
-			MapWidgetInfo widgetInfo = externalWidgets.get(i);
-
-			View view = inflater.inflate(R.layout.configure_screen_widget_item, availableWidgetsContainer, false);
-
-			ImageView icon = view.findViewById(R.id.icon);
-			iconsHelper.updateWidgetIcon(icon, widgetInfo);
-
-			TextView title = view.findViewById(R.id.title);
-			title.setText(widgetInfo.getTitle(app));
-
-			view.setOnClickListener(v -> {
-				FragmentActivity activity = getActivity();
-				String externalProviderPackage = widgetInfo.getExternalProviderPackage();
-				if (activity != null && !Algorithms.isEmpty(externalProviderPackage)) {
-					FragmentManager fragmentManager = activity.getSupportFragmentManager();
-					AddWidgetFragment.showExternalWidgetDialog(fragmentManager, getParentFragment(),
-							selectedAppMode, selectedPanel, widgetInfo.key, externalProviderPackage, null);
-				}
-			});
-			View infoButton = view.findViewById(R.id.info_button);
-			infoButton.setClickable(false);
-			AndroidUiHelper.updateVisibility(infoButton, true);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
-
-			boolean last = i + 1 == externalWidgets.size();
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !last);
-			setupListItemBackground(view);
-
-			availableWidgetsContainer.addView(view);
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof WidgetsConfigurationChangeListener) {
+			((WidgetsConfigurationChangeListener) fragment).onWidgetsConfigurationChanged();
 		}
 	}
 
 	@NonNull
-	private List<WidgetType> listDefaultWidgets(@NonNull Set<MapWidgetInfo> widgets) {
-		Map<Integer, WidgetType> defaultWidgets = new TreeMap<>();
-		for (MapWidgetInfo widgetInfo : widgets) {
-			WidgetType widgetType = widgetInfo.getWidgetType();
-			if (widgetType != null) {
-				defaultWidgets.put(widgetType.ordinal(), widgetType);
+	private List<MapWidgetInfo> getFlatWidgetsList(@NonNull List<List<MapWidgetInfo>> widgetsData) {
+		List<MapWidgetInfo> flatWidgetsList = new ArrayList<>();
+		for (List<MapWidgetInfo> page : widgetsData) {
+			if (!Algorithms.isEmpty(page)) {
+				flatWidgetsList.addAll(page);
 			}
 		}
-		return new ArrayList<>(defaultWidgets.values());
+		return flatWidgetsList;
 	}
 
-	@NonNull
-	private List<MapWidgetInfo> listExternalWidgets(@NonNull Set<MapWidgetInfo> widgets) {
-		List<MapWidgetInfo> externalWidgets = new ArrayList<>();
-		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.isExternal()) {
-				externalWidgets.add(widgetInfo);
+	private void applyWidgetsConfiguration() {
+		List<List<MapWidgetInfo>> widgetsData = adapter.getWidgetsData();
+		List<String> enabledWidgetsIds = new ArrayList<>();
+		List<MapWidgetInfo> newWidgetToCreate = new ArrayList<>();
+
+		for (MapWidgetInfo widgetInfo : getFlatWidgetsList(widgetsData)) {
+			String key = widgetInfo.key;
+			MapWidgetInfo info = widgetRegistry.getWidgetInfoById(key);
+			if (info == null) {
+				newWidgetToCreate.add(widgetInfo);
+			}
+			enabledWidgetsIds.add(key);
+		}
+
+		applyWidgetsPanel(newWidgetToCreate);
+		applyWidgetsVisibility(enabledWidgetsIds);
+
+		List<List<String>> orderList = new ArrayList<>();
+		for (List<MapWidgetInfo> page : widgetsData) {
+			List<String> orderIds = new ArrayList<>();
+			for (MapWidgetInfo widgetInfo : page) {
+				orderIds.add(widgetInfo.key);
+			}
+			orderList.add(orderIds);
+		}
+
+		applyWidgetsOrder(orderList);
+
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null) {
+			mapInfoLayer.recreateControls();
+		}
+	}
+
+	private void applyWidgetsPanel(@NonNull List<MapWidgetInfo> enabledWidgetsIds) {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment) {
+			((ConfigureWidgetsFragment) fragment).createWidgets(enabledWidgetsIds);
+		}
+	}
+
+	private void applyWidgetsVisibility(@NonNull List<String> enabledWidgetsIds) {
+		WidgetsPanel panel = selectedPanel;
+		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
+			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
+			if (widget.isEnabledForAppMode(selectedAppMode) != enabledFromApply) {
+				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widget, enabledFromApply, false);
 			}
 		}
-		return externalWidgets;
 	}
 
-	private void setupListItemBackground(@NonNull View view) {
-		View container = view.findViewById(R.id.container);
-		UiUtilities.setupListItemBackground(app, container, selectedAppMode.getProfileColor(nightMode));
-	}
-
-	private boolean isVerticalPanel() {
-		return selectedPanel.isPanelVertical();
+	private void applyWidgetsOrder(@NonNull List<List<String>> pagedOrder) {
+		selectedPanel.setWidgetsOrder(selectedAppMode, pagedOrder, settings);
+		widgetRegistry.reorderWidgets();
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
+		outState.putString(SELECTED_PANEL_KEY, selectedPanel.name());
+		updateReorderList();
 	}
 
-	@Override
-	public void onScrollChanged() {
-		int y1 = AndroidUtils.getViewOnScreenY(changeOrderListButton);
-		int y2 = AndroidUtils.getViewOnScreenY(changeOrderFooterButton);
-		changeOrderFooterButton.setVisibility(y1 <= y2 ? View.GONE : View.VISIBLE);
+	private void updateReorderList() {
+		Fragment parent = getParentFragment();
+		if (parent instanceof ConfigureWidgetsFragment configureWidgetsFragment) {
+			if (isEditMode() && selectedPanel == configureWidgetsFragment.getSelectedPanel()) {
+				controller.setReorderList(adapter.getItems());
+			}
+		}
 	}
 
 	@NonNull
@@ -537,9 +257,309 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		return (MapActivity) activity;
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
+	@Override
+	public void onPageDeleted(int position, Object item) {
+		if (adapter != null) {
+			adapter.removeItem(position);
+		}
+	}
+
+	@Override
+	public void onWidgetDeleted(int position, Object item) {
+		if (adapter != null) {
+			adapter.removeItem(position);
+		}
+	}
+
+	@Override
+	public void onAddPageClicked() {
+		if (adapter != null) {
+			adapter.addPage();
+		}
+	}
+
+	@Override
+	public void onWidgetClick(@NonNull MapWidgetInfo widgetInfo) {
+		WidgetType widgetType = widgetInfo.getWidgetType();
+
+		WidgetInfoBaseFragment settingsBaseFragment = widgetType.getSettingsFragment(app, widgetInfo);
+		if (settingsBaseFragment != null) {
+			FragmentManager manager = requireMapActivity().getSupportFragmentManager();
+			WidgetInfoBaseFragment.showFragment(manager, settingsBaseFragment, requireParentFragment(), selectedAppMode, widgetInfo.key, selectedPanel);
+		}
+	}
+
+	@Override
+	public boolean isEditMode() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment configureWidgetsFragment) {
+			return configureWidgetsFragment.isEditMode;
+		}
+		return false;
+	}
+
+	@Override
+	public void onMoveStarted() {
+		adapter.actionStarted();
+	}
+
+	private void updatePageIndexes(@NonNull List<Object> items) {
+		int pageNumber = 1;
+		for (Object item : items) {
+			if (item instanceof PageItem pageItem) {
+				pageItem.pageNumber = pageNumber;
+				pageNumber++;
+			}
+		}
+	}
+
+	@Override
+	public void refreshAll() {
+		updatePageIndexes(adapter.getItems());
+		List<Object> updatedNewItems = duplicateItems(adapter.getItems());
+		updateAdapter(updatedNewItems, true);
+	}
+
+	@Override
+	public void restoreBackup() {
+		List<Object> updatedNewItems = duplicateItems(adapter.getBackupItems());
+		updateAdapter(updatedNewItems, true);
+	}
+
+	@NonNull
+	private List<Object> duplicateItems(@NonNull List<Object> itemsToDuplicate) {
+		List<Object> duplicatedItems = new ArrayList<>();
+		for (Object object : itemsToDuplicate) {
+			if (object instanceof PageItem pageItem) {
+				PageItem newPageItem = new PageItem(pageItem.pageNumber);
+				newPageItem.deleteMessage = pageItem.deleteMessage;
+				newPageItem.movable = pageItem.movable;
+				duplicatedItems.add(newPageItem);
+			} else if (object instanceof WidgetItem widgetItem) {
+				WidgetItem newWidgetItem = new WidgetItem(widgetItem.mapWidgetInfo);
+				newWidgetItem.showBottomDivider = widgetItem.showBottomDivider;
+				duplicatedItems.add(newWidgetItem);
+			} else {
+				duplicatedItems.add(object);
+			}
+		}
+		return duplicatedItems;
+	}
+
+	@Override
+	public void addNewWidget() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment) {
+			((ConfigureWidgetsFragment) fragment).addNewWidget();
+		}
+	}
+
+	public void addWidget(@NonNull MapWidgetInfo widgetInfo) {
+		adapter.addWidget(widgetInfo);
+		updateReorderList();
+	}
+
+	public void reloadWidgets() {
+		if (adapter != null) {
+			List<List<MapWidgetInfo>> newData = getPagedWidgets();
+			originalWidgetsData = newData;
+			updateWidgetItems(newData, true);
+		}
+	}
+
+	public void resetToOriginal() {
+		updateWidgetItems(originalWidgetsData, true);
+	}
+
+	public void updateEditMode() {
+		List<Object> newItems = getUpdatedItems(originalWidgetsData);
+		updateAdapter(newItems, true);
+	}
+
+	@Override
+	public void onWidgetSelectedToAdd(@NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel, boolean recreateControls) {
+		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+		if (widgetInfo != null) {
+			adapter.addWidget(widgetInfo);
+		}
+	}
+
+	@Override
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
+		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), appMode);
+		List<List<MapWidgetInfo>> widgetsOrder = helper.getWidgetInfoPagedOrder(appMode, selectedAppMode, selectedPanel, filter);
+		updateWidgetItems(widgetsOrder, false);
+	}
+
+	@Override
+	public void onActionConfirmed(int actionId) {
+
+	}
+
+	private void updateWidgetItems(@NonNull List<List<MapWidgetInfo>> pagedWidgets, boolean updatePosition) {
+		List<Object> newItems = getUpdatedItems(pagedWidgets);
+		updateAdapter(newItems, updatePosition);
+	}
+
+	private List<Object> getUpdatedItems(@NonNull List<List<MapWidgetInfo>> pagedWidgets) {
+		List<Object> items = new ArrayList<>();
+		boolean isEmpty = pagedWidgets.stream().allMatch(List::isEmpty);
+		if (isEmpty) {
+			items.add(VIEW_TYPE_DIVIDER);
+			items.add(VIEW_TYPE_EMPTY_STATE);
+			return items;
+		}
+
+		if (isEditMode()) {
+			items.add(VIEW_TYPE_DIVIDER);
+
+			int pageNumber = 1;
+			for (List<MapWidgetInfo> widgetsOnPage : pagedWidgets) {
+				PageItem pageItem = new PageItem(pageNumber);
+				items.add(pageItem);
+				for (MapWidgetInfo widgetInfo : widgetsOnPage) {
+					items.add(new WidgetItem(widgetInfo));
+				}
+
+				pageNumber++;
+			}
+
+			items.add(VIEW_TYPE_ADD_PAGE);
+			items.add(VIEW_TYPE_SPACE);
+		} else {
+			items.add(VIEW_TYPE_DIVIDER);
+
+			int pageNumber = 1;
+			for (List<MapWidgetInfo> widgetsOnPage : pagedWidgets) {
+				PageItem pageItem = new PageItem(pageNumber);
+				items.add(pageItem);
+				for (MapWidgetInfo widgetInfo : widgetsOnPage) {
+					items.add(new WidgetItem(widgetInfo));
+				}
+
+				pageNumber++;
+			}
+
+			items.add(VIEW_TYPE_SPACE);
+		}
+		return items;
+	}
+
+	private List<Object> updateItemsState(@NonNull List<Object> newItems) {
+		int pageNumber = 1;
+
+		for (int position = 0; position < newItems.size(); position++) {
+			Object object = newItems.get(position);
+
+			if (object instanceof PageItem pageItem) {
+
+				boolean isPageMovable;
+				String deleteMessage = null;
+				if (isFirstPage(position, newItems)) {
+					isPageMovable = false;
+				} else if (selectedPanel.isPanelVertical()) {
+					int previousRowPosition = getPreviousRowPosition(newItems, position);
+
+					boolean rowHasComplexWidget = rowHasComplexWidget(position, newItems);
+					boolean previousRowHasComplexWidget = rowHasComplexWidget(previousRowPosition, newItems);
+					boolean isRowEmpty = getRowWidgetIds(position, newItems).isEmpty();
+					boolean isPreviousRowEmpty = getRowWidgetIds(previousRowPosition, newItems).isEmpty();
+
+					if (rowHasComplexWidget && !isPreviousRowEmpty) {
+						deleteMessage = app.getString(R.string.remove_widget_first);
+						isPageMovable = false;
+					} else if (previousRowHasComplexWidget && !isRowEmpty) {
+						deleteMessage = app.getString(R.string.previous_row_has_complex_widget);
+						isPageMovable = false;
+					} else {
+						isPageMovable = true;
+					}
+				} else {
+					isPageMovable = true;
+				}
+				pageItem.movable = isPageMovable;
+				pageItem.deleteMessage = deleteMessage;
+				pageItem.pageNumber = pageNumber;
+				pageNumber++;
+
+			} else if (object instanceof WidgetItem widgetItem) {
+				boolean showDivider = false;
+				boolean showBottomShadow = false;
+				int nextItemIndex = position + 1;
+				if (newItems.size() > nextItemIndex) {
+					if (newItems.get(nextItemIndex) instanceof WidgetItem) {
+						showDivider = true;
+					} else if (newItems.get(nextItemIndex) instanceof Integer integer
+							&& integer == VIEW_TYPE_SPACE) {
+						showBottomShadow = true;
+					}
+				}
+				widgetItem.showBottomDivider = showDivider;
+				widgetItem.showBottomShadow = showBottomShadow;
+			}
+		}
+		return newItems;
+	}
+
+	public static boolean isFirstPage(int position, @NonNull List<Object> searchItems) {
+		for (int i = 0; i < position; i++) {
+			if (searchItems.get(i) instanceof PageItem) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@NonNull
+	public static ArrayList<MapWidgetInfo> getRowWidgetIds(int rowPosition,	@NonNull List<Object> searchItems) {
+		ArrayList<MapWidgetInfo> rowWidgetIds = new ArrayList<>();
+		Object item = searchItems.get(++rowPosition);
+
+		while (rowPosition < searchItems.size() && item instanceof WidgetItem) {
+			item = searchItems.get(rowPosition);
+			if (item instanceof WidgetItem widgetItem) {
+				rowWidgetIds.add(widgetItem.mapWidgetInfo);
+			}
+			rowPosition++;
+		}
+		return rowWidgetIds;
+	}
+
+	public static boolean rowHasComplexWidget(int rowPosition, @NonNull List<Object> searchItems) {
+		ArrayList<MapWidgetInfo> rowWidgetIds = getRowWidgetIds(rowPosition, searchItems);
+		for (MapWidgetInfo widgetUiInfo : rowWidgetIds) {
+			if (isComplexWidget(widgetUiInfo.key)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private int getPreviousRowPosition(@NonNull List<Object> newItems, int currentRowPosition) {
+		currentRowPosition--;
+		while (currentRowPosition >= 0) {
+			if (newItems.get(currentRowPosition) instanceof PageItem) {
+				return currentRowPosition;
+			}
+			currentRowPosition--;
+		}
+		return -1;
+	}
+
+	private void updateAdapter(@NonNull List<Object> items, boolean updatePosition) {
+		boolean editMode = isEditMode();
+		List<Object> newItems = updateItemsState(items);
+		WidgetsListDiffCallback diffCallback = new WidgetsListDiffCallback(
+				adapter.getItems(),
+				newItems,
+				adapter.isCurrentlyInEditMode(),
+				editMode,
+				updatePosition);
+		DiffResult diffRes = calculateDiff(diffCallback);
+
+		adapter.setEditMode(editMode);
+		adapter.setItems(newItems);
+		diffRes.dispatchUpdatesTo(adapter);
 	}
 }

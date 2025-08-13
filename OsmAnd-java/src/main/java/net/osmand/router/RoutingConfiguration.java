@@ -63,6 +63,9 @@ public class RoutingConfiguration {
 
 	// 1.6 Time to calculate all access restrictions based on conditions
 	public long routeCalculationTime = 0;
+
+	// 1.6.1. Apply "unlimited" :conditional tags (used by HHRoutingShortcutCreator)
+	public Map<String, String> ambiguousConditionalTags;
 	
 	// 1.7 Maximum visited segments
 	public int MAX_VISITED = -1;
@@ -84,6 +87,9 @@ public class RoutingConfiguration {
 
 	// Parameter to smoother the track itself (could be 0 if it's not recorded track)
 	public float smoothenPointsNoRoute = 5;
+
+	public boolean showMinorTurns = false;
+
 
 	public QuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;

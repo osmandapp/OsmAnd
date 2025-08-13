@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/map_hud_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<net.osmand.plus.views.controls.MapHudLayout
+		android:id="@+id/map_hud_layout"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/default_buttons_hud_preview" />
+
+</LinearLayout>

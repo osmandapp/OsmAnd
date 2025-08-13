@@ -12,6 +12,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -22,7 +25,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -259,11 +261,14 @@ public class MapWidgetRegistry {
 	                                             int filterModes,
 	                                             @NonNull List<WidgetsPanel> panels) {
 		List<Class<?>> includedWidgetTypes = new ArrayList<>();
+		boolean sidePanel = false, verticalPanel = false;
 		if (panels.contains(WidgetsPanel.LEFT) || panels.contains(WidgetsPanel.RIGHT)) {
+			sidePanel = true;
 			includedWidgetTypes.add(SideWidgetInfo.class);
 			includedWidgetTypes.add(SimpleWidgetInfo.class);
 		}
 		if (panels.contains(WidgetsPanel.TOP) || panels.contains(WidgetsPanel.BOTTOM)) {
+			verticalPanel = true;
 			includedWidgetTypes.add(CenterWidgetInfo.class);
 			includedWidgetTypes.add(SimpleWidgetInfo.class);
 		}
@@ -275,7 +280,13 @@ public class MapWidgetRegistry {
 		}
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		for (MapWidgetInfo widget : widgetInfos) {
-			if (includedWidgetTypes.contains(widget.getClass())) {
+			boolean panelSupported = false;
+			if (sidePanel) {
+				panelSupported = widget.widget instanceof ISupportSidePanel;
+			} else if (verticalPanel) {
+				panelSupported = widget.widget instanceof ISupportVerticalPanel;
+			}
+			if (panelSupported || includedWidgetTypes.contains(widget.getClass())) {
 				boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
 				boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;
 				boolean availableMode = (filterModes & AVAILABLE_MODE) == AVAILABLE_MODE;
@@ -288,8 +299,9 @@ public class MapWidgetRegistry {
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
 				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getWidgetPanel());
 				boolean passTypeAllowed = widget.getWidgetType() == null || widget.getWidgetType().isAllowed();
+				boolean passPanelAllowed = widget.getWidgetType() == null || widget.getWidgetType().isPanelsAllowed(panels);
 
-				if (passDisabled && passEnabled && passAvailable && defaultAvailable && passMatchedPanels && passTypeAllowed) {
+				if (passDisabled && passEnabled && passAvailable && defaultAvailable && passMatchedPanels && passTypeAllowed && passPanelAllowed) {
 					filteredWidgets.add(widget);
 				}
 			}
@@ -319,7 +331,7 @@ public class MapWidgetRegistry {
 				return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 			} else if (widget instanceof MapMarkersBarWidget) {
 				return R.color.status_bar_main_dark;
-			} else if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget) {
+			} else if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
 				return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
 			} else {
 				return -1;
@@ -336,7 +348,7 @@ public class MapWidgetRegistry {
 			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode)) {
 				continue;
 			}
-			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget) {
+			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget || widget instanceof IComplexWidget) {
 				return nightMode;
 			} else {
 				return true;

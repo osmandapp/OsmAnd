@@ -1,38 +1,55 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import android.widget.ImageView;
+import android.content.Context;
+import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapDialogs;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ZoomInButtonState;
 
 public class ZoomInButton extends MapButton {
 
-	public ZoomInButton(@NonNull MapActivity mapActivity, @NonNull ImageView view, @NonNull String id) {
-		this(mapActivity, view, id, false);
+	private final ZoomInButtonState buttonState;
+
+	public ZoomInButton(@NonNull Context context) {
+		this(context, null);
 	}
 
-	public ZoomInButton(@NonNull MapActivity mapActivity, @NonNull ImageView view, @NonNull String id, boolean alwaysVisible) {
-		super(mapActivity, view, id, alwaysVisible);
-		setIconId(R.drawable.ic_zoom_in);
-		setRoundTransparentBackground();
+	public ZoomInButton(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public ZoomInButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		buttonState = app.getMapButtonsHelper().getZoomInButtonState();
+
 		setOnClickListener(v -> {
+			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
+			trackingUtils.resetBackToLocation();
+
 			if (mapActivity.getContextMenu().zoomInPressed()) {
 				return;
 			}
-			mapActivity.getMapView().zoomInAndAdjustTiltAngle();
+			getMapView().zoomInAndAdjustTiltAngle();
 		});
-		setOnLongClickListener(notUseCouldBeNull -> {
-			ConfigureMapDialogs.showMapMagnifierDialog(mapActivity.getMapView());
+		setOnLongClickListener(v -> {
+			ConfigureMapDialogs.showMapMagnifierDialog(getMapView());
 			return true;
 		});
-		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
+	}
+
+	@Nullable
+	@Override
+	public MapButtonState getButtonState() {
+		return buttonState;
 	}
 
 	@Override
 	protected boolean shouldShow() {
-		return alwaysVisible || !isRouteDialogOpened() && visibilityHelper.shouldShowZoomButtons();
+		return !routeDialogOpened && visibilityHelper.shouldShowZoomButtons();
 	}
 }

@@ -67,6 +67,7 @@ body {
     font-family: sans-serif;
     background-color: #17191a;
     background-color: var(--background-color-night);
+    color: var(--main-text-color-night);
 }
 
 .nav-bar {

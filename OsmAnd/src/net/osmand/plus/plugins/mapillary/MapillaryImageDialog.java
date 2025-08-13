@@ -40,9 +40,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialog;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.resources.ResourceManager;
@@ -284,14 +284,14 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		noInternetView.findViewById(R.id.retry_button).setOnClickListener(v -> {
 			DownloadImageTask downloadTask = new DownloadImageTask(staticImageView,
 					downloadRequestNumber.incrementAndGet(), downloadRequestNumber);
-			MenuBuilder.execute(downloadTask);
+			OsmAndTaskManager.executeTask(downloadTask);
 			fetchSequence();
 		});
 
 		if (!Algorithms.isEmpty(imageUrl)) {
 			DownloadImageTask downloadTask = new DownloadImageTask(staticImageView,
 					downloadRequestNumber.incrementAndGet(), downloadRequestNumber);
-			MenuBuilder.execute(downloadTask);
+			OsmAndTaskManager.executeTask(downloadTask);
 			fetchSequence();
 		}
 		updateArrowButtons();
@@ -407,12 +407,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.imageId = image.getImageId();
 		this.imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + image.getImageId();
 		this.viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + image.getImageId();
-		MenuBuilder.execute(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
+		OsmAndTaskManager.executeTask(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
 		setImageLocation(latLon, compassAngle, false);
 	}
 
 	public void fetchTiles() {
-		RotatedTileBox tileBox = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+		RotatedTileBox tileBox = getMapActivity().getMapView().getRotatedTileBox();
 		if (fetchedTileLat == tileBox.getLatitude() && fetchedTileLon == tileBox.getLongitude()) {
 			return;
 		}

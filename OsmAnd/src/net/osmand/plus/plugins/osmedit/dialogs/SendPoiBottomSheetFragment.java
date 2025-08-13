@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +27,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
@@ -60,7 +60,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		if (app == null || plugin == null) return;
 
 		poi = AndroidUtils.getSerializable(getArguments(), OPENSTREETMAP_POINT, OsmPoint[].class);
-		boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean isNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_poi_fragment, null);
 		sendOsmPoiView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
@@ -78,12 +78,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		closeChangeSet.setChecked(true);
 		setCloseChangeSet(isNightMode, paddingSmall);
-		closeChangeSet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				setCloseChangeSet(isNightMode, paddingSmall);
-			}
-		});
+		closeChangeSet.setOnCheckedChangeListener((buttonView, isChecked) -> setCloseChangeSet(isNightMode, paddingSmall));
 		LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
 		account.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();

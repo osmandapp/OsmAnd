@@ -276,7 +276,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 				ivCheckmark.setImageDrawable(getEmptyCheckmark());
 				normal = new ColorDrawable(Color.TRANSPARENT);
 			}
-			setupRoundedBackground(itemView, normal, colorNoAlpha, ButtonBackground.ROUNDED);
+			setupRoundedBackground(itemView, normal, ButtonBackground.ROUNDED);
 			itemView.setContentDescription(getButtonContentDescription(key, selected));
 		}
 		updateSelectedPriceButton();
@@ -340,7 +340,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		Drawable normal = createRoundedDrawable(activeColor, ButtonBackground.ROUNDED_SMALL);
-		setupRoundedBackground(itemView, normal, activeColor, ButtonBackground.ROUNDED_SMALL);
+		setupRoundedBackground(itemView, normal, ButtonBackground.ROUNDED_SMALL);
 	}
 
 	private void setupDescription() {

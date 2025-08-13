@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -34,7 +34,7 @@
 					android:layout_gravity="center"
 					android:contentDescription="@string/shared_string_back"
 					android:tint="?attr/primary_icon_color"
-					osmand:srcCompat="@drawable/ic_arrow_back" />
+					app:srcCompat="@drawable/ic_arrow_back" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/toolbar_title"

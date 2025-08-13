@@ -1,15 +1,18 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class BooleanPreference extends CommonPreference<Boolean> {
 
-	public BooleanPreference(OsmandSettings settings, String id, boolean defaultValue) {
+	public BooleanPreference(@NonNull OsmandSettings settings, @NonNull String id,
+			boolean defaultValue) {
 		super(settings, id, defaultValue);
 	}
 
 	@Override
-	public Boolean getValue(Object prefs, Boolean defaultValue) {
+	public Boolean getValue(@NonNull Object prefs, Boolean defaultValue) {
 		return getSettingsAPI().getBoolean(prefs, getId(), defaultValue);
 	}
 
