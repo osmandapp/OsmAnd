@@ -5661,7 +5661,7 @@
     <string name="calculating_indication_message">Sto calcolando…</string>
     <string name="calculate_size">Calcola la dimensione</string>
     <string name="default_buttons_corners_original_description">Ogni pulsante manterrebbe il proprio raggio d\'angolo.</string>
-    <string name="default_buttons_opacity_original_description">Ogni pulsante manterrebbe la propria opacità di sfondo.</string>
+    <string name="default_buttons_opacity_original_description">Ogni pulsante mantiene la propria opacità di sfondo.</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostra i percorsi per l\'arrampicata</string>
     <string name="rendering_attr_showClimbingRoutes_name">Percorsi arrampicata</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra il tempo e la distanza per la prossima fermata. Disattiva per mostrare sempre i dettagli per la destinazione.</string>
@@ -5686,7 +5686,7 @@
     <string name="ais_cpa_settings">Impostazioni relative al PAV</string>
     <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
     <string name="ais_address_settings">Impostazioni dell\'indirizzo IP</string>
-    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e definisci gli indirizzi</string>
+    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e specifica gli indirizzi e le porte corrispondenti</string>
     <string name="ais_ship_lost_timeout">Timeout per la visibilità della nave quando non viene ricevuto alcun segnale</string>
     <string name="ais_port_nmea_local">Porta UDP locale del ricevitore dati NMEA</string>
     <string name="ais_object_lost_timeouts_description">Imposta valori di timeout per identificare oggetti AIS persi se non viene ricevuto alcun segnale per un periodo di tempo specifico.</string>
