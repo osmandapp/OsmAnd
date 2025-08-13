@@ -412,16 +412,18 @@ class GpxTrackAnalysis {
 					maxElevation = maxOf(point.ele, maxElevation)
 				}
 
-				val firstPoint = false
-				val lastPoint = false
+				var firstPoint = false
+				var lastPoint = false
 				if (s.segment.generalSegment) {
 					distanceOfSingleSegment += calculations[0]
 					if (point.firstPoint) {
+						firstPoint = j > 0;
 						distanceOfSingleSegment = 0f
 						timeMovingOfSingleSegment = 0
 						distanceMovingOfSingleSegment = 0f
 					}
 					if (point.lastPoint) {
+						lastPoint = j < numberOfPoints - 1;
 						totalDistanceWithoutGaps += distanceOfSingleSegment
 						timeMovingWithoutGaps += timeMovingOfSingleSegment
 						totalDistanceMovingWithoutGaps += distanceMovingOfSingleSegment
@@ -551,16 +553,13 @@ class GpxTrackAnalysis {
 
 	private fun getExpectedRouteSegmentDuration(segment: SplitSegment): Long {
 		val routeSegments = segment.segment.routeSegments
-		if (!segment.segment.generalSegment) {
-			var result: Long = 0
-			for (routeSegment in routeSegments) {
-				result += (1000 * KAlgorithms.parseFloatSilently(
-					routeSegment.segmentTime, 0.0f
-				)).toLong()
-			}
-			return result
+		var result: Long = 0
+		for (routeSegment in routeSegments) {
+			result += (1000 * KAlgorithms.parseFloatSilently(
+				routeSegment.segmentTime, 0.0f
+			)).toLong()
 		}
-		return 0
+		return result
 	}
 
 	private fun processAverageValues(
