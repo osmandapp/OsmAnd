@@ -231,7 +231,7 @@
     <string name="proxy_settings">代理伺服器設定</string>
     <string name="proxy">代理伺服器</string>
     <string name="privacy">隱私</string>
-    <string name="shared_string_select">選取</string>
+    <string name="shared_string_select">選擇</string>
     <string name="min_logging_distance">最小記錄距離</string>
     <string name="min_logging_distance_descr">過濾：記錄新點的最小距離</string>
     <string name="min_logging_accuracy">最低記錄精度</string>
@@ -252,7 +252,7 @@
     <string name="time_zone_descr">選取要在您位置訊息中顯示的時區。</string>
     <string name="time_zone">時區</string>
     <string name="units_and_formats">單位與格式</string>
-    <string name="unit_of_length_descr">選擇距離的顯示單位。</string>
+    <string name="unit_of_length_descr">更改距離顯示單位。</string>
     <string name="unit_of_length">長度單位</string>
     <string name="unit_of_speed_system_descr">定義速度單位。</string>
     <string name="unit_of_speed_system">速度單位</string>
