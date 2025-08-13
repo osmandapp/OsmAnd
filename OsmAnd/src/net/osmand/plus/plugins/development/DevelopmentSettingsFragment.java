@@ -3,8 +3,9 @@ package net.osmand.plus.plugins.development;
 import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
 import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
 
@@ -13,9 +14,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.aistracker.AisLoadTask;
+import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -26,6 +32,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
@@ -37,6 +44,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
+	private static final String AISTRACKER_SIMULATION = "aistracker_simulation";
+
+	private static final int OPEN_AIS_FILE_REQUEST = 1001;
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
@@ -71,8 +81,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
-		setupDebugRenderingInfoPref();
-		setupDisableMapLayersPref();
+		setupBatterySavingModePref();
+		setupSimulateOBDDataPref();
 		setupSimulateInitialStartupPref();
 		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
@@ -82,11 +92,13 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupTripRecordingPrefs();
 
-		setupMapTextsPrefs();
+		setupMapRenderingPrefs();
+		setupAisTrackerPrefs();
 
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
+		setupMaxRenderingThreadsPref();
 		setupMemoryAllocatedForRoutingPref();
 		setupGlobalAppAllocatedMemoryPref();
 		setupNativeAppAllocatedMemoryPref();
@@ -123,17 +135,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
 	}
 
-	private void setupDebugRenderingInfoPref() {
-		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
-		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
+	private void setupBatterySavingModePref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.BATTERY_SAVING_MODE.getId());
+		debugRenderingInfo.setDescription(getString(R.string.battery_saving_mode));
 		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 
-	private void setupDisableMapLayersPref() {
-		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
-		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
-		disableMapLayers.setIconSpaceReserved(false);
+	private void setupSimulateOBDDataPref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SIMULATE_OBD_DATA.getId());
+		debugRenderingInfo.setDescription(getString(R.string.simulate_obd));
+		debugRenderingInfo.setIconSpaceReserved(false);
 	}
+
 
 	private void setupSimulateInitialStartupPref() {
 		Preference simulateInitialStartup = findPreference(SIMULATE_INITIAL_STARTUP);
@@ -181,25 +194,66 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx headingPref = findPreference(plugin.SAVE_HEADING_TO_GPX.getId());
 		headingPref.setIconSpaceReserved(false);
 		headingPref.setDescription(R.string.write_heading_description);
+
+		SwitchPreferenceEx locationProviderPref = findPreference(plugin.SAVE_LOCATION_PROVIDER_TO_GPX.getId());
+		locationProviderPref.setIconSpaceReserved(false);
+		locationProviderPref.setDescription(R.string.write_location_provider_description);
 	}
 
-	private void setupMapTextsPrefs() {
+	private void setupMapRenderingPrefs() {
 		Preference textsCategory = findPreference("texts");
 		textsCategory.setIconSpaceReserved(false);
 
-		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
-		syminfoPref.setIconSpaceReserved(false);
-		syminfoPref.setDescription(R.string.show_debug_info_description);
+		SwitchPreferenceEx symRasterTilePref = findPreference(plugin.SHOW_PRIMITIVES_DEBUG_INFO.getId());
+		symRasterTilePref.setIconSpaceReserved(false);
+		symRasterTilePref.setDescription(R.string.show_debug_tile_description);
+
+		SwitchPreferenceEx msaaPref = findPreference(settings.ENABLE_MSAA.getId());
+		msaaPref.setIconSpaceReserved(false);
+		msaaPref.setVisible(MapRendererView.isMSAASupported());
+
+		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
+		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
+		disableMapLayers.setIconSpaceReserved(false);
 
 		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
 		symtopPref.setIconSpaceReserved(false);
 		symtopPref.setDescription(R.string.allow_display_on_top_description);
+
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
+		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
+		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupMaxRenderingThreadsPref() {
+		MapRendererView mapRenderer = app.getOsmandMap().getMapView().getMapRenderer();
+		int value = settings.MAX_RENDERING_THREADS.get();
+		Preference preference = findPreference(settings.MAX_RENDERING_THREADS.getId());
+		if (value == 0) {
+			value = mapRenderer != null ? mapRenderer.getResourceWorkerThreadsLimit() : -1;
+		}
+		preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), (value == 1 ? "thread" : "threads")));
+		preference.setIconSpaceReserved(false);
+		preference.setVisible(mapRenderer != null);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {
 		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
 		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
 		preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), "MB"));
+		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupAisTrackerPrefs() {
+		AisTrackerPlugin plugin = PluginsHelper.getPlugin(AisTrackerPlugin.class);
+
+		Preference category = findPreference("aistracker");
+		Preference preference = findPreference(AISTRACKER_SIMULATION);
+
+		category.setVisible(plugin != null);
+		preference.setVisible(plugin != null);
+
+		category.setIconSpaceReserved(false);
 		preference.setIconSpaceReserved(false);
 	}
 
@@ -264,7 +318,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		// in microamperes (µA) as specified in the API documentation.
 		if (Math.abs(m1.energyConsumption) > AUTO_DETECT_MICROAMPERES) m1.energyConsumption /= 1000;
 		if (Math.abs(m5.energyConsumption) > AUTO_DETECT_MICROAMPERES) m5.energyConsumption /= 1000;
-		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES) m15.energyConsumption /= 1000;
+		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES)
+			m15.energyConsumption /= 1000;
 
 		String fps = String.format("%.0f / %.0f / %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
 		String gpu = String.format("%.2f / %.2f / %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
@@ -315,6 +370,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
+		} else if (settings.MAX_RENDERING_THREADS.getId().equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				MaxRenderingThreadsBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
+			}
 		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
@@ -325,8 +385,26 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			if (fragmentManager != null) {
 				showResetSettingsDialog(fragmentManager, this, R.string.debugging_and_development);
 			}
+		} else if (AISTRACKER_SIMULATION.equals(prefId)) {
+			Intent intent = ImportHelper.getImportFileIntent();
+			AndroidUtils.startActivityForResultIfSafe(this, intent, OPEN_AIS_FILE_REQUEST);
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == OPEN_AIS_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null) {
+				Uri uri = data.getData();
+				if (uri != null) {
+					AisLoadTask task = new AisLoadTask(app, uri);
+					OsmAndTaskManager.executeTask(task);
+				}
+			}
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
 	}
 
 	@Override
@@ -334,6 +412,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		if (prefId.equals(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId())) {
 			applyPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId(), applyToAllProfiles, newValue);
 			setupMemoryAllocatedForRoutingPref();
+		} else if (prefId.equals(settings.MAX_RENDERING_THREADS.getId())) {
+			applyPreference(settings.MAX_RENDERING_THREADS.getId(), applyToAllProfiles, newValue);
+			setupMaxRenderingThreadsPref();
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
@@ -343,7 +424,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	public void onDisplayPreferenceDialog(Preference preference) {
 		String prefId = preference.getKey();
 
-		if (plugin.SAVE_BEARING_TO_GPX.getId().equals(prefId) || plugin.SAVE_HEADING_TO_GPX.getId().equals(prefId)) {
+		if (plugin.SAVE_BEARING_TO_GPX.getId().equals(prefId) || plugin.SAVE_HEADING_TO_GPX.getId().equals(prefId)
+				|| plugin.SAVE_LOCATION_PROVIDER_TO_GPX.getId().equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				BooleanRadioButtonsBottomSheet.showInstance(manager, prefId, getApplyQueryType(),
@@ -411,7 +493,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		if (!NativeOsmandLibrary.isLoaded() && activity != null) {
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 			NativeLibraryLoadTask nativeLibraryLoadTask = new NativeLibraryLoadTask(activity, storage);
-			nativeLibraryLoadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(nativeLibraryLoadTask);
 		}
 	}
 }

@@ -5,7 +5,6 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
@@ -14,7 +13,8 @@ import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.ColorPalette;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -85,7 +85,6 @@ public class GradientColorsCollection extends ColorsCollection {
 		List<GradientData> loadedPreference = readPaletteColorsPreference();
 
 		// Firstly collect all items those already have last used order
-		long now = System.currentTimeMillis();
 		for (GradientData gradientData : loadedPreference) {
 			int index = gradientData.index;
 			String typeName = gradientData.typeName;
@@ -93,7 +92,7 @@ public class GradientColorsCollection extends ColorsCollection {
 			Pair<ColorPalette, Long> paletteInfo = gradientPalettes.get(paletteName);
 			if (paletteInfo != null) {
 				ColorPalette palette = paletteInfo.first;
-				PaletteGradientColor gradientColor = new PaletteGradientColor(typeName, paletteName, palette, now++, index);
+				PaletteGradientColor gradientColor = new PaletteGradientColor(typeName, paletteName, palette, index);
 				lastUsedOrder.add(gradientColor);
 				addedPaletteIds.add(gradientColor.getStringId());
 			}
@@ -104,7 +103,7 @@ public class GradientColorsCollection extends ColorsCollection {
 			if (pair != null) {
 				ColorPalette palette = pair.first;
 				long creationTime = pair.second;
-				PaletteGradientColor gradientColor = new PaletteGradientColor(type, key, palette, now++, (int) creationTime);
+				PaletteGradientColor gradientColor = new PaletteGradientColor(type, key, palette, (int) creationTime);
 				String id = gradientColor.getStringId();
 				if (!addedPaletteIds.contains(id)) {
 					lastUsedOrder.add(gradientColor);

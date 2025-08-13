@@ -133,8 +133,7 @@
     <string name="osmand_parking_pm">ب.ظ.</string>
     <string name="osmand_parking_am">ق.ظ.</string>
     <string name="osmand_parking_position_name">جای پارک</string>
-    <string name="osmand_parking_plugin_description">محل پارک‌کردن خودروی خود را ثبت کنید و حساب زمان پارکینگ را داشته باشید.
-\nهم مکان و هم زمان در پیشخوان و نیز در ابزارکی روی نقشه قابل‌رؤیت است. همچنین می‌توانید هشداری را به‌عنوان یادآور به تقویم اندروید اضافه کنید.</string>
+    <string name="osmand_parking_plugin_description">محل پارک‌کردن خودروی خود را ثبت کنید و حساب زمان پارکینگ را داشته باشید. \nهم مکان و هم زمان در پیشخوان و نیز در ابزارکی روی نقشه قابل‌رؤیت است. همچنین می‌توانید هشداری را به‌عنوان یادآور به تقویم اندروید اضافه کنید.</string>
     <string name="osmand_parking_plugin_name">جای پارک</string>
     <string name="context_menu_item_add_parking_point">علامت‌گذاری جای پارک</string>
     <string name="context_menu_item_delete_parking_point">حذف نشانهٔ جای پارک</string>
@@ -750,12 +749,6 @@
     <string name="layer_hillshade">لایهٔ سایه‌روشن</string>
     <string name="index_name_openmaps">نقشه‌های اتحادیهٔ اروپا</string>
     <string name="download_hillshade_maps">سایه‌روشن‌ها</string>
-    <string name="srtm_plugin_description">این افزونه دو لایهٔ منحنی‌های میزان و سایه‌روشن (پستی‌بلندی‌ها) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد.
-\nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
-\nمبنای دادهٔ جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است. 
-\n 
-\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفته برای سامانهٔ دیده‌بانی زمینِ ناساست. 
-\nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
     <string name="rendering_attr_noPolygons_description">همهٔ عوارض زمین را روی نقشه ناپدید کنید.</string>
     <string name="rendering_attr_noPolygons_name">چندضلعی‌ها</string>
     <string name="rendering_attr_appMode_name">حالت رندرگیری</string>
@@ -957,7 +950,6 @@
 \n
 \nنقشه‌های کاشی‌وار را مستقیماً به‌طور آنلاین بارگیری کنید یا همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ دادهٔ OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
     <string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهتی (D-pad) و استفاده از توپک (trackball) برای تنظیم زوم.</string>
-    <string name="osm_editing_plugin_description">با ایجاد یا اصلاح نقاط توجه (POI)، ایجاد یادداشت‌های OSM یا نظردادن روی آن‌ها و بارگذاری پرونده‌های GPXای که ضبط کرده‌اید در تکمیل نقشهٔ OSM مشارکت کنید. برای این منظور لازم است نام کاربری و گذرواژهٔ خود را در OsmAnd وارد کنید. OpenStreetMap.org یک پروژهٔ نقشه‌کشی جامعه‌محور، جهانی و در مالکیت عمومی است.</string>
     <string name="play_commands_of_currently_selected_voice">گفتاری را انتخاب کنید و با پخش پیام‌ها، آن را امتحان کنید:</string>
     <string name="native_rendering">رندرگیری native</string>
     <string name="accessibility_mode">حالت قابلیت دسترسی</string>
@@ -1043,7 +1035,6 @@
     <string name="driving_region_us">ایالات متحدهٔ آمریکا</string>
     <string name="driving_region_canada">کانادا</string>
     <string name="driving_region_europe_asia">اروپا، آسیا، آمریکای لاتین و مناطق مشابه</string>
-    <string name="driving_region_uk">انگلستان، هند و مناطق مشابه</string>
     <string name="about_version">نسخه:</string>
     <string name="shared_string_about">درباره</string>
     <string name="about_settings_descr">دربارهٔ نسخه، گواهی‌ها، اعضای پروژه</string>
@@ -1286,7 +1277,6 @@
     <string name="rendering_attr_buildings15zoom_name">ساختمان‌ها در زوم ۱۵</string>
     <string name="rendering_attr_moreDetailed_name">جزئیات بیشتر</string>
     <string name="rendering_attr_lessDetailed_name">جزئیات کمتر</string>
-    <string name="rendering_attr_hideAccess_name">محدودیت‌های دسترسی</string>
     <string name="rendering_attr_showAccess_name">محدودیت‌های دسترسی و عوارضی‌ها</string>
     <string name="rendering_attr_showSurfaceGrade_name">کیفیت راه</string>
     <string name="rendering_attr_showSurfaces_name">سطح راه</string>
@@ -1294,11 +1284,6 @@
     <string name="save_global_track_interval">تناوب ردنگاری عمومی</string>
     <string name="save_track_to_gpx_globally_descr">می‌توانید با استفاده از ابزارک ضبط GPX روی نقشه، ردنگاری در پروندهٔ GPX را خاموش یا روشن کنید.</string>
     <string name="save_track_interval_globally">تناوب ردنگاری</string>
-    <string name="record_plugin_description">این افزونه یک ابزارک ضبط GPX روی نقشه اضافه می‌کند و با انتخاب آن می‌توانید رد خود را ضبط و در قالب پروندهٔ GPX ذخیره کنید. همچنین این امکان را فراهم می‌کند که هنگام مسیریابی، به‌طور خودکار این کار برای شما انجام شود.
-\n
-\nردهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM هم‌رسانی کنید.
-\nورزشکاران می‌توانند برای کنترل تمرین‌هایشان از ردهای ضبط‌شده استفاده کنند.
-\nبرنامهٔ OsmAnd پردازش‌های ساده‌ای مانند محاسبهٔ lap timeها، سرعت متوسط و... را روی ردهای ضبط‌شده انجام می‌دهد؛ البته می‌توانید این ردها را در سایر نرم‌افزارهای تحلیلگر نیز تحلیل کنید.</string>
     <string name="lang_al">آلبانیایی</string>
     <string name="lang_ar">عربی</string>
     <string name="lang_fa">فارسی</string>
@@ -1797,7 +1782,6 @@
     <string name="rendering_attr_contourWidth_name">ضخامت منحنی میزان</string>
     <string name="routing_attr_allow_motorway_name">استفاده از آزادراه</string>
     <string name="routing_attr_allow_motorway_description">مسیردهی از آزادراه مجاز می‌شود.</string>
-    <string name="wiki_around">مقالات ویکی‌پدیا دربارهٔ این حوالی</string>
     <string name="search_map_hint">شهر یا منطقه</string>
     <string name="upload_poi">بارگذاری POI</string>
     <string name="route_calculation">محاسبهٔ مسیر</string>
@@ -2220,7 +2204,7 @@
     <string name="shared_string_to">تا</string>
     <string name="mapillary_menu_date_from">از</string>
     <string name="mapillary_menu_descr_dates">فقط تصاویری که در بازهٔ زمانی زیر اضافه شده است</string>
-    <string name="mapillary_menu_title_dates">تاریخ</string>
+    <string name="shared_string_date">تاریخ</string>
     <string name="mapillary_menu_edit_text_hint">نام کاربری را بنویسید</string>
     <string name="mapillary_menu_descr_username">فقط تصاویری که کاربر زیر اضافه کرده است</string>
     <string name="mapillary_menu_title_username">نام کاربری</string>
@@ -2352,17 +2336,10 @@
     <string name="route_point_one">نقطهٔ مسیر 1</string>
     <string name="animate_my_location_desc">در هنگام ناوبری، نقشه همگام با «موقعیت من» جابه‌جا شود.</string>
     <string name="rendering_value_fine_name">خوب</string>
-    <string name="plugin_nautical_descr">این افزونه قابلیت ارائهٔ نقشه‌های دریایی را به OsmAnd اضافه می‌کند. این نقشه‌ها برای قایقرانی، بادبانی‌رانی و دیگر انواع ورزش‌های آبی مفید است. 
-\n 
-\nاین افزونه همهٔ نشانگرهای ناوبری دریایی و جدول نمادها را ارائه می‌کند؛ هم برای ناوبری درون‌سرزمینی و هم کنارهٔ ساحل. همچنین با ارائهٔ جزئیات لازم، هر نشانگر معرفی و مفهومش شرح داده می‌شود (دسته، شکل، رنگ، ترتیب و توالی، ارجاع و...). 
-\n 
-\nبرای برگشتن به سبک‌های عادی OsmAnd، این افزونه را غیرفعال کنید یا اینکه «سبک نقشه» را از طریق منوی «پیکربندی نقشه» به‌دلخواه خود تغییر دهید.</string>
-    <string name="plugin_ski_descr">با این افزونه اطلاعات جهانی سراشیبی‌های اسکی، مسابقات اسکی صحرایی، مسیرهای اسکی آلپاین، تله‌کابین‌ها و نقاله‌های اسکی کاملاً در اختیارتان است. مسیرها و پیست‌ها بر اساس دشواری رنگ‌بندی شده‌اند که در یک سبک زمستانی ارائه می‌شوند تا نمایی همگون با محیط زمستانی را برایتان ایجاد کند. 
-\n 
-\nبا فعال‌کردن این نما، سبک نقشه به «زمستان و اسکی» تغییر می‌کند که همهٔ خصوصیات زمین را با ظاهر زمستانی نشان می‌دهد. برای غیرفعال‌کردن این نما افزونه را غیرفعال کنید یا اینکه از طریق منو ← پیکربندی نقشه ← سبک نقشه، سبک دلخواهتان را انتخاب کنید.</string>
+    <string name="plugin_ski_descr">با این افزونه اطلاعات جهانی سراشیبی‌های اسکی، مسابقات اسکی صحرایی، مسیرهای اسکی آلپاین، تله‌کابین‌ها و نقاله‌های اسکی کاملاً در اختیارتان است. مسیرها و پیست‌ها بر اساس دشواری رنگ‌بندی شده‌اند که در یک سبک زمستانی ارائه می‌شوند تا نمایی همگون با محیط زمستانی را برایتان ایجاد کند. \n \nبا فعال‌کردن این نما، سبک نقشه به «زمستان و اسکی» تغییر می‌کند که همهٔ خصوصیات زمین را با ظاهر زمستانی نشان می‌دهد. برای غیرفعال‌کردن این نما افزونه را غیرفعال کنید یا اینکه از طریق منو ← پیکربندی نقشه ← سبک نقشه، سبک دلخواهتان را انتخاب کنید.</string>
     <string name="osmand_extended_description_part1">برنامهٔ OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهنمای خودکار ناوبری بر پایهٔ OSM) یک نرم‌افزار نقشه و ناوبری است که به گسترهٔ وسیعی از دادهٔ OSM دسترسی دارد. این دادهٔ رایگان و جهانی با بالاترین کیفیت ارائه می‌شود. 
 \n 
-\nناوبری دیداری و شنیداری، مشاهدهٔ نقاط توجه (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های میزان و اطلاعات ارتفاع (با استفاده از افزونه)، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی در کار با نقشه را برایتان به ارمغان می‌آورند.</string>
+\nناوبری دیداری و شنیداری، مشاهدهٔ نقاط توجه (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های میزان و اطلاعات ارتفاع (با استفاده از افزونه)، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و… چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی در کار با نقشه را برایتان به ارمغان می‌آورند.</string>
     <string name="osmand_extended_description_part2">ناوبری با GPS
 \n • امکان انتخاب بین حالت آنلاین و آفلاین؛ در حالت آفلاین هزینهٔ دیگری بابت اینترنت نمی‌پردازید و در حالت آنلاین عملکرد سریع‌تری را تجربه می‌کنید
 \n • راهنمای گام‌به‌گام گفتاری که در پیمودن مسیر راهنمایی‌تان می‌کند (با پیام‌های گفتاری انسانی و ماشینی)
@@ -2856,7 +2833,7 @@
     <string name="rendering_attr_highway_class_motorway_name">آزادراه</string>
     <string name="rendering_attr_highway_class_street_name">خیابان</string>
     <string name="public_transport_warning_descr_blog">در وبلاگ ما دربارهٔ مسیریابی OsmAnd بیشتر بخوانید.</string>
-    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و بعید نیست که خطاها و نقایصی داشته باشد.</string>
+    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و شاید خطا یا ایرادهایی داشته باشد.</string>
     <string name="add_intermediate">افزودن نقطهٔ میانی</string>
     <string name="rendering_attr_surface_sand_name">ماسه</string>
     <string name="rendering_attr_surface_ground_name">زمین</string>
@@ -3235,9 +3212,7 @@
     <string name="exported_osmand_profile">نمایه OsmAnd:‏ %1$s</string>
     <string name="monthly_map_updates">روزآمدسازی‌های ماهانهٔ نقشه</string>
     <string name="daily_map_updates">روزآمدسازی‌های ساعتی نقشه</string>
-    <string name="send_search_query_description">عبارت جستجوی شما «%1$s» و همچنین مکان شما ارسال خواهد شد. 
-\n 
-\nاطلاعات خصوصی جمع‌آوری نمی‌شود. فقط دادهٔ جست‌وجو برای بهبود الگوریتم جست‌وجو موردنیاز است.</string>
+    <string name="send_search_query_description">عبارت جستجوی شما «%1$s» و همچنین مکان شما ارسال خواهد شد. \n \nاطلاعات خصوصی جمع‌آوری نمی‌شود. فقط دادهٔ جست‌وجو برای بهبود الگوریتم جست‌وجو موردنیاز است.</string>
     <string name="export_profile">برون‌برد نمایه</string>
     <string name="overwrite_profile_q">‏«%1$s» وجود دارد. برنویسی شود؟</string>
     <string name="export_profile_failed">نمایه برون‌برد نشد.</string>
@@ -3480,9 +3455,7 @@
     <string name="shared_string_languages">زبان‌ها</string>
     <string name="shared_string_language">زبان</string>
     <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
-    <string name="ui_customization_description">تعداد اقلام «کشو»، «پیکربندی نقشه» و «منوی زمینه» را به‌دلخواه تنظیم کنید.
-\n
-\nافزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از برنامه پنهان شود. %1$s.</string>
+    <string name="ui_customization_description">تعداد اقلام «کشو»، «پیکربندی نقشه» و «منوی زمینه» را به‌دلخواه تنظیم کنید. \n \nافزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از برنامه پنهان شود. %1$s.</string>
     <string name="reset_items_descr">پنهان‌سازی تنظیمات آن‌ها را به حالت اولیه بازنشانی می‌کند.</string>
     <string name="hidden_items_descr">این اقلام از منو پنهان می‌شوند، اما گزینه‌ها یا افزونه‌های متناظر همچنان کار می‌کنند.</string>
     <string name="shared_string_hidden">پنهان</string>
@@ -3512,7 +3485,6 @@
 \nاشتراک شما به‌طور خودکار تمدید می‌شود مگر اینکه پیش از دورهٔ تمدید انتخاب‌شده لغو شود.
 \n
 \nهر زمان که خواستید از طریق تنظیمات گوگل‌پلی اشتراک خود را مدیریت یا لغو کنید.</string>
-    <string name="tracker_item">OsmAnd tracker</string>
     <string name="legend_item_description">راهنمای نمادشناسی نقشه.</string>
     <string name="navigation_profiles_item">نمایه‌های ناوبری</string>
     <string name="lang_zhyue">کانتونی</string>
@@ -3548,25 +3520,7 @@
     <string name="lang_scn">سیسیلی</string>
     <string name="lang_kk">قزاقی</string>
     <string name="lang_pnb">پنجابی</string>
-    <string name="release_3_7">• نقشه‌های آفلاین جدید شیب
-\n
-\n • شخصی‌سازی کامل علاقه‌مندی‌ها و راه‌نشان‌های GPX - رنگ، نماد و شکل دلخواه
-\n
-\n • شخصی‌سازی ترتیب آیتم‌های منوی زمینه، پیکربندی نقشه و کشو
-\n
-\n • برای ویکی‌پدیا لایهٔ جداگانه‌ای در «پیکربندی نقشه» اضافه شد. فقط زبان‌های موردنیاز را برگزینید
-\n
-\n • نقشه/پالایهٔ POI خود را با نهایت انعطاف‌پذیری بسازید
-\n
-\n • گزینه‌هایی برای بازیابی تنظیمات نمایه‌های سفارشی اضافه شد
-\n
-\n • مسیرهای GPX کامل که از ناوبری تولید می‌شود، تمام فرمان‌های گردش و خطوط عبوری را پشتیبانی می‌کنند.
-\n
-\n • اندازه‌های رابط کاربری برای تبلت‌ها اصلاح شد
-\n
-\n • مشکلاتی مربوط به RTL اصلاح شد
-\n
-\n</string>
+    <string name="release_3_7">• نقشه‌های آفلاین جدید شیب \n \n • شخصی‌سازی کامل علاقه‌مندی‌ها و راه‌نشان‌های GPX - رنگ، نماد و شکل دلخواه \n \n • شخصی‌سازی ترتیب آیتم‌های منوی زمینه، پیکربندی نقشه و کشو \n \n • برای ویکی‌پدیا لایهٔ جداگانه‌ای در «پیکربندی نقشه» اضافه شد. فقط زبان‌های موردنیاز را برگزینید \n \n • نقشه/پالایهٔ POI خود را با نهایت انعطاف‌پذیری بسازید \n \n • گزینه‌هایی برای بازیابی تنظیمات نمایه‌های سفارشی اضافه شد \n \n • مسیرهای GPX کامل که از ناوبری تولید می‌شود، تمام فرمان‌های گردش و خطوط عبوری را پشتیبانی می‌کنند. \n \n • اندازه‌های رابط کاربری برای تبلت‌ها اصلاح شد \n \n • مشکلاتی مربوط به RTL اصلاح شد \n \n</string>
     <string name="back_to_editing">بازگشت به ویرایش</string>
     <string name="create_edit_poi">ایجاد یا ویرایش POI</string>
     <string name="add_edit_favorite">افزودن یا ویرایش علاقه‌مندی</string>
@@ -3800,7 +3754,6 @@
     <string name="message_need_calculate_route_before_show_graph">دادهٔ %1$s فقط در جاده‌ها ارائه می‌شود. با استفاده از «مسیریابی بین نقطه‌ها» مسیری محاسبه کنید تا نمودارها را ببینید.</string>
     <string name="message_graph_will_be_available_after_recalculation">لطفاً منتظر بمانید.
 \nنمودار پس از بازمحاسبهٔ مسیر فراهم می‌شود.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="message_you_need_add_two_points_to_show_graphs">دست‌کم دو نقطه اضافه کنید</string>
     <string name="login_open_street_map">ورود به اوپن‌استریت‌مپ</string>
     <string name="login_open_street_map_org">ورود به OpenStreetMap.org</string>
@@ -3820,9 +3773,6 @@
     <string name="gpx_upload_identifiable_visibility_descr">«قابل‌شناسایی» یا Identifiable به این معنی است که رد به‌صورت عمومی در فهرست ردهای جی‌پی‌اس شما و لیست عمومی ردهای جی‌پی‌اس نمایش داده می‌شود، یعنی سایر کاربران می‌توانند رد خام را بارگیری کنند و بدانند که مربوط به نام کاربری شماست. دادهٔ نقاط رد همراه با مهر زمان از طریق API به‌طور عمومی در دسترس است و به صفحهٔ ردهای شما ارجاع می‌دهد.</string>
     <string name="gpx_upload_trackable_visibility_descr">«قابل‌ردیابی» یا Trackable به این معنی است که رد در هیچ فهرست عمومی‌ای نشان داده نمی‌شود اما نقاط پردازش‌شدهٔ رد + مهر زمان نقاط (که مستقیماً به نام کاربری شما ارجاع نمی‌دهد) از طریق API جی‌پی‌اس‌های عمومی قابل‌بارگیری است.</string>
     <string name="shared_string_add_photo">افزودن عکس</string>
-    <string name="register_on_openplacereviews_desc">عکس‌ها به‌واسطهٔ پروژهٔ داده‌باز OpenPlaceReviews.org ارائه می‌شود. برای بارگذاری عکس‌های خود لازم است در این وبگاه ثبت نام کنید.</string>
-    <string name="register_on_openplacereviews">ثبت نام در
-\nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">ساخت حساب جدید</string>
     <string name="register_opr_have_account">حساب کاربری دارم</string>
     <string name="shared_string_search_history">تاریخچهٔ جست‌وجو</string>
@@ -3831,13 +3781,8 @@
     <string name="select_groups_for_import">گروه‌هایی را که درون‌ریزی خواهند شد را انتخاب کنید.</string>
     <string name="select_items_for_import">مواردی که درون‌برد خواهند شد را انتخاب کنید.</string>
     <string name="add_to_mapillary">افزودن به مپیلاری</string>
-    <string name="add_to_opr">افزودن به OpenPlaceReviews</string>
     <string name="use_dev_url_descr">برای بارگذاری آزمایشی یادداشت / نقطهٔ توجه / GPX، به‌جای openstreetmep.org از dev.openstreetmap.org استفاده کنید.</string>
     <string name="use_dev_url">استفاده از dev.openstreetmap.org</string>
-    <string name="add_photos_descr">برنامه OsmAnd عکس‌ها را از چند منبع نشان می‌دهد:
-\nاز OpenPlaceReview برای عکس‌های نقاط توجه؛
-\nاز مپیلاری برای تصویر سطح خیابان؛
-\nاز وب و ویکی‌پدیا برای عکس‌های نقاط توجه متناسب با داده‌های اوپن‌استریت‌مپ.</string>
     <string name="app_mode_light_aircraft">هواپیمای سبک</string>
     <string name="plan_route_split_before">تقطیع از اینجا به قبل</string>
     <string name="plan_route_split_after">تقطیع از این جا به بعد</string>
@@ -3920,12 +3865,6 @@
     <string name="uploaded_count">%1$d از %2$d بارگذاری شد</string>
     <string name="toast_select_edits_for_upload">ویرایش‌ها را برای بارگذاری انتخاب کنید</string>
     <string name="hillshade_slope_contour_lines">سایه‌روشن / شیب / منحنی‌های میزان</string>
-    <string name="open_place_reviews_plugin_description">برای مکان‌های عمومی مانند رستوران‌ها، هتل‌ها، موزه‌ها و نقاط بین‌راهی نگاره بفرستید، دیدگاه بنویسید و پیوند ثبت کنید؛ همگی این‌ها به‌عنوان دادهٔ باز ثبت خواهد شد. http://openplacereviews.org/data
-\n
-\nاینجا بیشتر بخوانید: http://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">استفاده از test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">ورود به OpenPlaceReviews</string>
     <string name="activity_type_water_name">آب</string>
     <string name="activity_type_winter_name">زمستان</string>
     <string name="activity_type_snowmobile_name">برف‌رو</string>
@@ -3951,15 +3890,7 @@
     <string name="shared_string_subtype">زیرنوع</string>
     <string name="use_native_pt">پیاده‌سازی Native حمل‌ونقل عمومی</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="release_3_9">• گزینه‌ای برای برون‌برد و درون‌برد همهٔ داده‌ها شامل تنظیمات، منابع و مکان‌های من اضافه شد.
-\n
-\n • طراحی مسیر: برای پاره‌هایی از رد که مسیر دارند نمودار رسم می‌شود. امکان ساخت و ویرایش چندین پارهٔ رد اضافه شد.
-\n
-\n • شیوهٔ احراز هویت OAuth برای OpenStreetMap اضافه شد، رابط کاربری کادرهای OSM بهبود یافت.
-\n
-\n • پشتیبانی از رنگ‌های دلخواه برای علاقه‌مندی‌ها (favorites) و راه‌نشان‌های رد (track waypoints)
-\n
-\n</string>
+    <string name="release_3_9">• گزینه‌ای برای برون‌برد و درون‌برد همهٔ داده‌ها شامل تنظیمات، منابع و مکان‌های من اضافه شد. \n \n • طراحی مسیر: برای پاره‌هایی از رد که مسیر دارند نمودار رسم می‌شود. امکان ساخت و ویرایش چندین پارهٔ رد اضافه شد. \n \n • شیوهٔ احراز هویت OAuth برای OpenStreetMap اضافه شد، رابط کاربری کادرهای OSM بهبود یافت. \n \n • پشتیبانی از رنگ‌های دلخواه برای علاقه‌مندی‌ها (favorites) و راه‌نشان‌های رد (track waypoints)</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="routing_attr_prefer_hiking_routes_description">ترجیح مسیرهای پیاده‌گردی</string>
     <string name="routing_attr_prefer_hiking_routes_name">ترجیح مسیرهای پیاده‌گردی</string>
@@ -4020,19 +3951,7 @@
     <string name="trip_recording_logging_interval_info">تناوب ردنگاری مشخص می‌کند OsmAnd هر چند وقت یک بار دادهٔ مربوط به موقعیت جاری را درخواست کند.</string>
     <string name="customize_route_line">سفارشی‌سازی خط مسیر</string>
     <string name="shared_string_route_line">خط مسیر</string>
-    <string name="release_4_0_beta">• گزینه‌ای برای بارگیری منحنی‌های میزان با ‌یکای پا اضافه شد.
-\n
-\n• طراحی مسیر در حالت افقی: زبانه‌هایی برای جابه‌جایی بین نقطه‌ها و نمودارها اضافه شد.
-\n
-\n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «بارگیری‌ها &gt; روزآمدسازی‌ها» قرار گرفت
-\n
-\n• اکنون می‌توان ردها را بر اساس ارتفاع، سرعت یا شیب رنگ کرد.
-\n
-\n• گزینه‌ای برای تغییر ظاهر خط مسیر هنگام ناوبری اضافه شد.
-\n
-\n• کادر «ضبط سفر» روزآمد شد.
-\n
-\n</string>
+    <string name="release_4_0_beta">• گزینه‌ای برای بارگیری منحنی‌های میزان با ‌یکای پا اضافه شد. \n \n• طراحی مسیر در حالت افقی: زبانه‌هایی برای جابه‌جایی بین نقطه‌ها و نمودارها اضافه شد. \n \n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «بارگیری‌ها &gt; روزآمدسازی‌ها» قرار گرفت \n \n• اکنون می‌توان ردها را بر اساس ارتفاع، سرعت یا شیب رنگ کرد. \n \n• گزینه‌ای برای تغییر ظاهر خط مسیر هنگام ناوبری اضافه شد. \n \n• کادر «ضبط سفر» روزآمد شد. \n \n</string>
     <string name="on_hold">در تعلیق</string>
     <string name="no_purchases">شما هیچ خریدی نکرده‌اید</string>
     <string name="new_device_account">دستگاه جدید / حساب جدید</string>
@@ -4147,27 +4066,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">توکن نامعتبر یا منقضی</string>
     <string name="backup_error_user_is_not_registered">کاربری با آن نشانی ایمیل ثبت‌نام نکرده است</string>
     <string name="backup_error_no_valid_subscription">اشتراک معتبری وجود ندارد</string>
-    <string name="release_4_0">• پشتیبان‌گیری ابری افزوده شد
-\n
-\n • حالت شب برای سبک نقشهٔ Topo افزوده شد
-\n
-\n • گزینه‌ای برای بارگیری خطوط میزان با یکای فوت افزوده شد
-\n
-\n • ردها را می‌توان بر اساس ارتفاع، سرعت یا شیب رنگ کرد
-\n
-\n • کادر «ضبط سفر» روزآمد شد
-\n
-\n • گزینهٔ «مسافت با لمس» از قسمت خط‌کش شعاعی برداشته شد و در یک گزینهٔ مجزا قرار گرفت
-\n
-\n • طراحی مسیر: اکنون می‌توانید بدون ترک طراحی مسیر، گزینه‌های ناوبری را تغییر دهید و به جستجو و پیکربندی نقشه دسترسی پیدا کنید
-\n
-\n • صفحهٔ «خرید» نو شد و ریز اطلاعات خرید را نشان می‌دهد
-\n
-\n • گزینه‌ای برای تغییردادن ظاهر خط مسیر افزوده شد
-\n
-\n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «بارگیری‌ها &gt; روزآمدسازی‌ها» قرار گرفت
-\n
-\n</string>
+    <string name="release_4_0">• پشتیبان‌گیری ابری افزوده شد \n \n • حالت شب برای سبک نقشهٔ Topo افزوده شد \n \n • گزینه‌ای برای بارگیری خطوط میزان با یکای فوت افزوده شد \n \n • ردها را می‌توان بر اساس ارتفاع، سرعت یا شیب رنگ کرد \n \n • کادر «ضبط سفر» روزآمد شد \n \n • گزینهٔ «مسافت با لمس» از قسمت خط‌کش شعاعی برداشته شد و در یک گزینهٔ مجزا قرار گرفت \n \n • طراحی مسیر: اکنون می‌توانید بدون ترک طراحی مسیر، گزینه‌های ناوبری را تغییر دهید و به جستجو و پیکربندی نقشه دسترسی پیدا کنید \n \n • صفحهٔ «خرید» نو شد و ریز اطلاعات خرید را نشان می‌دهد \n \n • گزینه‌ای برای تغییردادن ظاهر خط مسیر افزوده شد \n \n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «بارگیری‌ها &gt; روزآمدسازی‌ها» قرار گرفت \n \n</string>
     <string name="send_logcat_log">ارسال گزارش logcat</string>
     <string name="osmand_online_routing_promo">از الگوهای از پیش تعریف شده استفاده کنید یا از خدمات مسیریابی آنلاین OSRM،‏ GrapgHopper،‏ openrouteservice یا GPX اضافه نمایید.</string>
     <string name="backup_view_conflicts">دیدن تداخل‌ها</string>
@@ -4387,7 +4286,7 @@
     <string name="weather_wind_mph">مایل در ساعت</string>
     <string name="shared_string_mode">حالت</string>
     <string name="fold_unfold">تا کردن/باز کردن</string>
-    <string name="map_widget_trip_recording_distance">فاصله</string>
+    <string name="map_widget_distance">فاصله</string>
     <string name="shared_string_large">بزرگ</string>
     <string name="shared_string_normal">عادی</string>
     <string name="shared_string_widget">ویجت</string>
@@ -4491,4 +4390,16 @@
     <string name="avg_sensor_temperature">دما، میانگین</string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="change_key_binding"/>
+    <string name="shared_string_automatically">خودکار</string>
+    <string name="ask_every_time">همیشه بپرس</string>
+    <string name="quick_action_routes_summary">کلیدی برای نمایش یا پنهان‌سازی %1$s روی نقشه.</string>
+    <string name="maps_and_resources">نقشه‌ها و منابع</string>
+    <string name="map_settings_weather_air_pressure">فشار هوا</string>
+    <string name="map_settings_weather_precip">بارش</string>
+    <string name="empty_screen_weather_precipitation_layer">برای نمایش لایه بارش در نقشه روشن کنید.</string>
+    <string name="quick_action_precipitation_layer">یک کلید برای نمایش یا پنهان کردن لایه بارش در نقشه.</string>
+    <string name="precipitation_widget_desc">نمایش بارش کنونی در مرکز نقشه.</string>
+    <string name="send_uuid_preference_desc">از یک UUID تصادفی برای بارگیری نقشه های آفلاین از سرورهای OSMAND برای نظارت بر به‌کارگیری عادلانه منابع سرور ، پیش‌بینی الگوهای ترافیک و تولید گزارش نقشه ماهانه ناشناس استفاده می شود.</string>
+    <string name="precipitation_layer">لایه بارش</string>
+    <string name="driving_region_uk">انگلستان یا مشابه آن</string>
 </resources>

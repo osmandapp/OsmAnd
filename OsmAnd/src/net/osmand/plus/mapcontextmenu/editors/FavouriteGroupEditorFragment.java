@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
@@ -42,7 +42,7 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 		favouritesHelper = app.getFavoritesHelper();
 
 		if (pointsGroup != null) {
-			favoriteGroup = favouritesHelper.getGroup(pointsGroup.name);
+			favoriteGroup = favouritesHelper.getGroup(pointsGroup.getName());
 		}
 	}
 

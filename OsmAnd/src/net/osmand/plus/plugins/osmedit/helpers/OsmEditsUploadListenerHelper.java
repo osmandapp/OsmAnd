@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -24,19 +22,20 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -70,10 +69,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			}
 		}
 		if (uploaded == pointsNum) {
-			Toast.makeText(activity,
-					MessageFormat.format(numberFormat, uploaded),
-					Toast.LENGTH_LONG)
-					.show();
+			AndroidUtils.getApp(activity).showToastMessage(MessageFormat.format(numberFormat, uploaded));
 		} else if (pointsNum == 1) {
 			Log.v(TAG, "in if1");
 			OsmPoint point = loadErrorsMap.keySet().iterator().next();
@@ -106,7 +102,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 		dialog.show(activity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				dialog, helper, plugin, toUpload.length, false, false);
-		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
+		OsmAndTaskManager.executeTask(uploadTask, toUpload);
 	}
 
 	public static final class UploadingErrorDialogFragment extends DialogFragment {

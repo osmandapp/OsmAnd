@@ -1,49 +1,76 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.ViewChangeProvider;
+import net.osmand.plus.widgets.FrameLayoutEx;
 
-public class RulerWidget {
+public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 
 	private final OsmandApplication app;
 	private final OsmandMap osmandMap;
 
-	private final View layout;
-	private final ImageView icon;
-	private final TextView text;
-	private final TextView textShadow;
+	private View layout;
+	private ImageView icon;
+	private TextView text;
+	private TextView textShadow;
 
-	private final int maxWidth;
+	private int maxWidth;
 	private float cacheRulerZoom;
 	private float cacheMapDensity;
 	private double cacheRulerTileX;
 	private double cacheRulerTileY;
 
-	public RulerWidget(@NonNull OsmandApplication app, @NonNull View view) {
-		this.app = app;
-		osmandMap = app.getOsmandMap();
-		cacheMapDensity = osmandMap.getMapDensity();
-
-		layout = view.findViewById(R.id.map_ruler_layout);
-		icon = view.findViewById(R.id.map_ruler_image);
-		text = view.findViewById(R.id.map_ruler_text);
-		textShadow = view.findViewById(R.id.map_ruler_text_shadow);
-		maxWidth = view.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
+	public RulerWidget(@NonNull Context context) {
+		this(context, null);
 	}
 
-	public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		this(context, attrs, defStyleAttr, 0);
+	}
+
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr,
+			int defStyleRes) {
+		super(context, attrs, defStyleAttr, defStyleRes);
+
+		this.app = (OsmandApplication) context.getApplicationContext();
+		osmandMap = app.getOsmandMap();
+		cacheMapDensity = osmandMap.getMapDensity();
+	}
+
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+
+		layout = findViewById(R.id.map_ruler_layout);
+		icon = findViewById(R.id.map_ruler_image);
+		text = findViewById(R.id.map_ruler_text);
+		textShadow = findViewById(R.id.map_ruler_text_shadow);
+		maxWidth = getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
+	}
+
+	public void updateTextSize(boolean isNight, int textColor, int textShadowColor,
+			int shadowRadius) {
 		TextInfoWidget.updateTextColor(text, textShadow, textColor, textShadowColor, false, shadowRadius);
 		icon.setBackgroundResource(isNight ? R.drawable.ruler_night : R.drawable.ruler);
 	}
@@ -69,7 +96,7 @@ public class RulerWidget {
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
 
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			String cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+			String cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 			textShadow.setText(cacheRulerText);
 			text.setText(cacheRulerText);
 			ViewGroup.LayoutParams lp = layout.getLayoutParams();
@@ -85,7 +112,8 @@ public class RulerWidget {
 		AndroidUiHelper.updateVisibility(layout, visibility);
 	}
 
-	public static double getRulerDistance(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox) {
+	public static double getRulerDistance(@NonNull OsmandApplication app,
+			@NonNull RotatedTileBox tileBox) {
 		double pixDensity = tileBox.getPixDensity();
 		int maxWidth = app.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 		return OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);

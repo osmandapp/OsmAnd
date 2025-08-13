@@ -1,101 +1,61 @@
 package net.osmand.plus.widgets;
 
-import android.annotation.SuppressLint;
+import static net.osmand.plus.utils.FontCache.FONT_WEIGHT_NORMAL;
+
 import android.content.Context;
+import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import androidx.appcompat.text.AllCapsTransformationMethod;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.utils.FontCache;
+
 
 public class TextViewEx extends androidx.appcompat.widget.AppCompatTextView {
 
-	public TextViewEx(Context context) {
-		super(context);
+
+	public TextViewEx(@NonNull Context context) {
+		this(context, null);
 	}
 
-	public TextViewEx(Context context, AttributeSet attrs) {
-		super(context, attrs);
+	public TextViewEx(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
 
 		parseAttributes(this, attrs, 0, 0);
 	}
 
-	public TextViewEx(Context context, AttributeSet attrs, int defStyleAttr) {
+	public TextViewEx(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 
 		parseAttributes(this, attrs, defStyleAttr, 0);
 	}
 
-	/*internal*/ static void parseAttributes(TextView target, AttributeSet attrs, int defStyleAttr,
-											 int defStyleRes) {
-		if (attrs == null) {
+	protected static void parseAttributes(@NonNull TextView textView, @Nullable AttributeSet attrs,
+	                                      int defStyleAttr, int defStyleRes) {
+		if (attrs != null) {
+			Theme theme = textView.getContext().getTheme();
+			TypedArray attributes = theme.obtainStyledAttributes(attrs, R.styleable.TextViewEx, defStyleAttr, defStyleRes);
+			applyAttributes(textView, attributes);
+			attributes.recycle();
+		}
+	}
+
+	private static void applyAttributes(@NonNull TextView textView, @NonNull TypedArray attributes) {
+		applyTypefaceWeight(textView, attributes);
+	}
+
+	private static void applyTypefaceWeight(@NonNull TextView textView, @NonNull TypedArray attributes) {
+		if (!attributes.hasValue(R.styleable.TextViewEx_typefaceWeight) || textView.isInEditMode()) {
 			return;
 		}
+		int weight = attributes.getInteger(R.styleable.TextViewEx_typefaceWeight, FONT_WEIGHT_NORMAL);
 
-		TypedArray resolvedAttrs = target.getContext().getTheme().obtainStyledAttributes(attrs,
-				R.styleable.TextViewEx, defStyleAttr, defStyleRes);
-		applyAttributes(resolvedAttrs, target);
-		resolvedAttrs.recycle();
+		Typeface typeface = textView.getTypeface();
+		textView.setTypeface(FontCache.getFont(typeface, weight));
 	}
-
-	private static void applyAttributes(TypedArray resolvedAttributes, TextView target) {
-		applyAttribute_typeface(resolvedAttributes, target);
-		applyAttribute_textAllCapsCompat(resolvedAttributes, target);
-	}
-
-	/*internal*/ static void applyAttribute_typeface(TypedArray resolvedAttributes,
-													 TextView target) {
-		if (!resolvedAttributes.hasValue(R.styleable.TextViewEx_typeface)
-				|| target.isInEditMode()) {
-			return;
-		}
-
-		String typefaceName = resolvedAttributes.getString(R.styleable.TextViewEx_typeface);
-		Typeface typeface = FontCache.getFont(target.getContext(), typefaceName);
-		int style = target.getTypeface() == null ? 0 : target.getTypeface().getStyle();
-		if (typeface != null)
-			target.setTypeface(typeface, style);
-	}
-
-	public static void setAllCapsCompat(TextView target, boolean allCaps) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			updateAllCapsNewAPI(target, allCaps);
-			return;
-		}
-
-		if (allCaps) {
-			target.setTransformationMethod(new AllCapsTransformationMethod(target.getContext()));
-		} else {
-			target.setTransformationMethod(null);
-		}
-	}
-
-	@SuppressLint("NewApi")
-	private static void updateAllCapsNewAPI(TextView target, boolean allCaps) {
-		target.setAllCaps(allCaps);
-	}
-
-	public void setAllCapsCompat(boolean allCaps) {
-		setAllCapsCompat(this, allCaps);
-	}
-
-	/*internal*/ static void applyAttribute_textAllCapsCompat(TypedArray resolvedAttributes,
-														TextView target) {
-		if (!resolvedAttributes.hasValue(R.styleable.TextViewEx_textAllCapsCompat)) {
-			return;
-		}
-
-		boolean textAllCaps = resolvedAttributes.getBoolean(
-				R.styleable.TextViewEx_textAllCapsCompat, false);
-		if (!textAllCaps) {
-			return;
-		}
-		setAllCapsCompat(target, true);
-	}
-	
 }

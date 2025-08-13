@@ -8,16 +8,20 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.primitives.Route;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -44,10 +48,10 @@ public class GpxDisplayHelper {
 
 	@NonNull
 	public List<GpxDisplayGroup> collectDisplayGroups(@Nullable SelectedGpxFile selectedGpxFile,
-	                                                  @NonNull GPXFile gpxFile, boolean processTrack,
+	                                                  @NonNull GpxFile gpxFile, boolean processTrack,
 	                                                  boolean useCachedGroups) {
 		if (selectedGpxFile == null) {
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 		}
 		List<GpxDisplayGroup> displayGroups = null;
 		if (selectedGpxFile != null && useCachedGroups) {
@@ -60,69 +64,72 @@ public class GpxDisplayHelper {
 	}
 
 	@NonNull
-	private List<GpxDisplayGroup> collectDisplayGroups(@NonNull GPXFile gpxFile, boolean processTrack) {
+	private List<GpxDisplayGroup> collectDisplayGroups(@NonNull GpxFile gpxFile, boolean processTrack) {
 		List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 		String name = getGroupName(app, gpxFile);
-		if (gpxFile.tracks.size() > 0) {
-			for (int i = 0; i < gpxFile.tracks.size(); i++) {
+		if (gpxFile.getTracks().size() > 0) {
+			for (int i = 0; i < gpxFile.getTracks().size(); i++) {
 				TrackDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name);
 				if (processTrack) {
-					SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
+					GpxDataItem dataItem = !Algorithms.isEmpty(gpxFile.getPath())
+							? app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath())) : null;
+					boolean joinSegments = dataItem != null ? dataItem.getParameter(GpxParameter.JOIN_SEGMENTS) : false;
+					SplitTrackAsyncTask.processGroupTrack(app, group, null, joinSegments);
 				}
 				if (!Algorithms.isEmpty(group.getDisplayItems()) || !processTrack) {
 					displayGroups.add(group);
 				}
 			}
 		}
-		if (gpxFile.routes.size() > 0) {
-			for (int i = 0; i < gpxFile.routes.size(); i++) {
+		if (gpxFile.getRoutes().size() > 0) {
+			for (int i = 0; i < gpxFile.getRoutes().size(); i++) {
 				GpxDisplayGroup group = buildRouteDisplayGroup(gpxFile, i, name);
 				displayGroups.add(group);
 			}
 		}
 		if (!gpxFile.isPointsEmpty()) {
-			GpxDisplayGroup group = buildPointsDisplayGroup(gpxFile, gpxFile.getPoints(), name);
+			GpxDisplayGroup group = buildPointsDisplayGroup(gpxFile, gpxFile.getPointsList(), name);
 			displayGroups.add(group);
 		}
 		return displayGroups;
 	}
 
 	@NonNull
-	public TrackDisplayGroup buildTrackDisplayGroup(@NonNull GPXFile gpxFile) {
+	public TrackDisplayGroup buildTrackDisplayGroup(@NonNull GpxFile gpxFile) {
 		return buildTrackDisplayGroup(gpxFile, 0, "");
 	}
 
 	@NonNull
-	private TrackDisplayGroup buildTrackDisplayGroup(@NonNull GPXFile gpxFile, int trackIndex, @NonNull String name) {
-		Track track = gpxFile.tracks.get(trackIndex);
-		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, track.generalTrack, trackIndex);
+	private TrackDisplayGroup buildTrackDisplayGroup(@NonNull GpxFile gpxFile, int trackIndex, @NonNull String name) {
+		Track track = gpxFile.getTracks().get(trackIndex);
+		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, track.getGeneralTrack(), trackIndex);
 		group.applyName(app, name);
 		group.setColor(track.getColor(gpxFile.getColor(0)));
 		String description = "";
-		if (track.name != null && !track.name.isEmpty()) {
-			description = track.name + " " + description;
+		if (track.getName() != null && !track.getName().isEmpty()) {
+			description = track.getName() + " " + description;
 		}
 		group.setDescription(description);
 		return group;
 	}
 
-	private GpxDisplayGroup buildRouteDisplayGroup(@NonNull GPXFile gpxFile, int routeIndex, @NonNull String name) {
-		Route route = gpxFile.routes.get(routeIndex);
+	private GpxDisplayGroup buildRouteDisplayGroup(@NonNull GpxFile gpxFile, int routeIndex, @NonNull String name) {
+		Route route = gpxFile.getRoutes().get(routeIndex);
 		GpxDisplayGroup group = new RouteDisplayGroup(gpxFile, routeIndex);
 		group.applyName(app, name);
-		group.setDescription(route.name);
+		group.setDescription(route.getName());
 
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 		int i = 0;
-		for (WptPt point : route.points) {
+		for (WptPt point : route.getPoints()) {
 			GpxDisplayItem item = new GpxDisplayItem(null);
 			item.group = group;
-			item.description = point.desc;
+			item.description = point.getDesc();
 			item.expanded = true;
-			item.name = point.name;
+			item.name = point.getName();
 			i++;
 			if (Algorithms.isEmpty(item.name)) {
-				item.name = getString(R.string.gpx_selection_point, i + "");
+				item.name = getString(R.string.gpx_selection_point, String.valueOf(i));
 			}
 			item.locationStart = point;
 			item.locationEnd = point;
@@ -132,7 +139,7 @@ public class GpxDisplayHelper {
 		return group;
 	}
 
-	public GpxDisplayGroup buildPointsDisplayGroup(@NonNull GPXFile gpxFile, @NonNull List<WptPt> points, @NonNull String name) {
+	public GpxDisplayGroup buildPointsDisplayGroup(@NonNull GpxFile gpxFile, @NonNull List<WptPt> points, @NonNull String name) {
 		GpxDisplayGroup group = new PointsDisplayGroup(gpxFile);
 		group.applyName(app, name);
 		group.setDescription(getString(R.string.gpx_selection_number_of_points, String.valueOf(gpxFile.getPointsSize())));
@@ -141,8 +148,8 @@ public class GpxDisplayHelper {
 		for (WptPt wptPt : points) {
 			GpxDisplayItem item = new GpxDisplayItem(null);
 			item.group = group;
-			item.description = wptPt.desc;
-			item.name = wptPt.name;
+			item.description = wptPt.getDesc();
+			item.name = wptPt.getName();
 			k++;
 			if (Algorithms.isEmpty(item.name)) {
 				item.name = getString(R.string.gpx_selection_point, String.valueOf(k));
@@ -157,7 +164,7 @@ public class GpxDisplayHelper {
 	}
 
 	public void updateDisplayGroupsNames(@NonNull SelectedGpxFile selectedGpxFile) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
 		List<GpxDisplayGroup> displayGroups = selectedGpxFile.getSplitGroups(app);
 		if (displayGroups != null) {
 			String name = getGroupName(app, gpxFile);
@@ -168,9 +175,9 @@ public class GpxDisplayHelper {
 	}
 
 	@NonNull
-	public static String getGroupName(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		String name = gpxFile.path;
-		if (gpxFile.showCurrentTrack) {
+	public static String getGroupName(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile) {
+		String name = gpxFile.getPath();
+		if (gpxFile.isShowCurrentTrack()) {
 			name = app.getString(R.string.shared_string_currently_recording_track);
 		} else if (Algorithms.isEmpty(name)) {
 			name = app.getString(R.string.current_route);
@@ -202,12 +209,12 @@ public class GpxDisplayHelper {
 	private final ExecutorService splitTrackSingleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@NonNull
-	public List<GpxDisplayGroup> processSplitSync(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
+	public List<GpxDisplayGroup> processSplitSync(@NonNull GpxFile gpxFile, @NonNull GpxDataItem dataItem) {
 		GpxSplitParams params = new GpxSplitParams(app, dataItem);
 		List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
 		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, params, groups, null);
 		try {
-			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor).get();
+			OsmAndTaskManager.executeTask(splitTask, splitTrackSingleThreadExecutor).get();
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
@@ -215,8 +222,8 @@ public class GpxDisplayHelper {
 	}
 
 	private void splitTrackAsync(@NonNull SelectedGpxFile selectedGpxFile, @Nullable CallbackWithObject<Boolean> callback) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path));
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath()));
 		if (!isSplittingTrack(selectedGpxFile) && dataItem != null) {
 			GpxSplitParams params = new GpxSplitParams(app, dataItem);
 			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
@@ -236,15 +243,31 @@ public class GpxDisplayHelper {
 			cancelTrackSplitting(selectedGpxFile);
 		}
 		if (paramsChanged || !splittingTrack) {
-			SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, splitParams, groups, listener);
-			splitTrackTasks.put(selectedGpxFile.getGpxFile().path, splitTask);
-			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
+			String path = selectedGpxFile.getGpxFile().getPath();
+			SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, splitParams, groups, new SplitTrackListener() {
+				@Override
+				public void trackSplittingStarted() {
+					if (listener != null) {
+						listener.trackSplittingStarted();
+					}
+				}
+
+				@Override
+				public void trackSplittingFinished(boolean success) {
+					if (listener != null) {
+						listener.trackSplittingFinished(success);
+					}
+					splitTrackTasks.remove(path);
+				}
+			});
+			splitTrackTasks.put(path, splitTask);
+			OsmAndTaskManager.executeTask(splitTask, splitTrackSingleThreadExecutor);
 		}
 	}
 
 	private boolean splitParamsChanged(@NonNull SelectedGpxFile selectedGpxFile, @NonNull GpxSplitParams splitParams) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		SplitTrackAsyncTask splitTask = splitTrackTasks.get(gpxFile.path);
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
+		SplitTrackAsyncTask splitTask = splitTrackTasks.get(gpxFile.getPath());
 		if (splitTask != null) {
 			return !Algorithms.objectEquals(splitParams, splitTask.getSplitParams());
 		}
@@ -252,11 +275,11 @@ public class GpxDisplayHelper {
 	}
 
 	public boolean isSplittingTrack(@NonNull SelectedGpxFile selectedGpxFile) {
-		return splitTrackTasks.containsKey(selectedGpxFile.getGpxFile().path);
+		return splitTrackTasks.containsKey(selectedGpxFile.getGpxFile().getPath());
 	}
 
 	public void cancelTrackSplitting(@NonNull SelectedGpxFile selectedGpxFile) {
-		SplitTrackAsyncTask splitTask = splitTrackTasks.get(selectedGpxFile.getGpxFile().path);
+		SplitTrackAsyncTask splitTask = splitTrackTasks.get(selectedGpxFile.getGpxFile().getPath());
 		if (splitTask != null && splitTask.getStatus() == Status.RUNNING) {
 			splitTask.cancel(false);
 		}
@@ -276,15 +299,14 @@ public class GpxDisplayHelper {
 				if (callback != null) {
 					callback.processResult(success);
 				}
-				splitTrackTasks.remove(selectedGpxFile.getGpxFile().path);
 			}
 		};
 	}
 
 	@NonNull
-	public static String buildTrackSegmentName(GPXFile gpxFile, Track track, TrkSegment segment, OsmandApplication app) {
+	public static String buildTrackSegmentName(GpxFile gpxFile, Track track, TrkSegment segment, OsmandApplication app) {
 		String trackTitle = getTrackTitle(gpxFile, track, app);
-		String segmentTitle = getSegmentTitle(segment, track.segments.indexOf(segment), app);
+		String segmentTitle = getSegmentTitle(segment, track.getSegments().indexOf(segment), app);
 
 		boolean oneSegmentPerTrack =
 				gpxFile.getNonEmptySegmentsCount() == gpxFile.getNonEmptyTracksCount();
@@ -301,13 +323,13 @@ public class GpxDisplayHelper {
 	}
 
 	@NonNull
-	private static String getTrackTitle(GPXFile gpxFile, Track track, OsmandApplication app) {
+	private static String getTrackTitle(GpxFile gpxFile, Track track, OsmandApplication app) {
 		String trackName;
-		if (Algorithms.isBlank(track.name)) {
-			int trackIdx = gpxFile.tracks.indexOf(track);
+		if (Algorithms.isBlank(track.getName())) {
+			int trackIdx = gpxFile.getTracks().indexOf(track);
 			trackName = String.valueOf(trackIdx + 1);
 		} else {
-			trackName = track.name;
+			trackName = track.getName();
 		}
 		String trackString = app.getString(R.string.shared_string_gpx_track);
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, trackString, trackName);
@@ -315,14 +337,14 @@ public class GpxDisplayHelper {
 
 	@NonNull
 	private static String getSegmentTitle(@NonNull TrkSegment segment, int segmentIdx, OsmandApplication app) {
-		String segmentName = Algorithms.isBlank(segment.name) ? String.valueOf(segmentIdx + 1) : segment.name;
+		String segmentName = Algorithms.isBlank(segment.getName()) ? String.valueOf(segmentIdx + 1) : segment.getName();
 		String segmentString = app.getString(R.string.gpx_selection_segment_title);
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
 	}
 
 	@NonNull
 	public static String getRouteTitle(@NonNull Route route, int index, OsmandApplication app) {
-		String segmentName = Algorithms.isBlank(route.name) ? String.valueOf(index + 1) : route.name;
+		String segmentName = Algorithms.isBlank(route.getName()) ? String.valueOf(index + 1) : route.getName();
 		String segmentString = app.getString(R.string.layer_route);
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
 	}

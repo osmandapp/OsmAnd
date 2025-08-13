@@ -5,6 +5,7 @@ import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_POI_ACTION_ID
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +16,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.ViewCreator;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -39,7 +42,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class ShowHidePoiAction extends QuickAction {
 	private static final int defaultActionNameId = R.string.poi;
@@ -71,7 +73,6 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
-
 		return isCurrentFilters(app);
 	}
 
@@ -101,39 +102,42 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		mapActivity.getFragmentsHelper().closeQuickSearch();
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		PoiFiltersHelper helper = app.getPoiFilters();
+		List<PoiUIFilter> poiFilters = loadPoiFilters(helper);
+		boolean currentFilters = isCurrentFilters(app, poiFilters);
 
-		PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
-		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
-		if (!isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters)) {
-			pf.clearSelectedPoiFilters();
+		mapActivity.getFragmentsHelper().closeQuickSearch();
+		helper.clearAllSelectedPoiFilters();
+		if (!currentFilters) {
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
 				}
-				pf.addSelectedPoiFilter(filter);
+				helper.addSelectedPoiFilter(filter);
 			}
-		} else {
-			pf.clearSelectedPoiFilters();
 		}
 
 		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
-	private boolean isCurrentFilters(OsmandApplication application) {
-		PoiFiltersHelper pf = application.getPoiFilters();
-		List<PoiUIFilter> poiFilters = loadPoiFilters(application.getPoiFilters());
-		return isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters);
+	private boolean isCurrentFilters(@NonNull OsmandApplication app) {
+		return isCurrentFilters(app, null);
 	}
 
-	private boolean isCurrentFilters(Set<PoiUIFilter> currentPoiFilters, List<PoiUIFilter> poiFilters) {
-		return currentPoiFilters.size() == poiFilters.size() && currentPoiFilters.containsAll(poiFilters);
+	private boolean isCurrentFilters(@NonNull OsmandApplication app,
+	                                 @Nullable List<PoiUIFilter> poiFilters) {
+		PoiFiltersHelper helper = app.getPoiFilters();
+		if (poiFilters == null) {
+			poiFilters = loadPoiFilters(helper);
+		}
+		return helper.isPoiFiltersSelected(poiFilters);
 	}
 
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
 
 		RecyclerView list = view.findViewById(R.id.list);
@@ -280,7 +284,7 @@ public class ShowHidePoiAction extends QuickAction {
 			}
 		}
 
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
 		ArrayAdapter<ContextMenuItem> listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));

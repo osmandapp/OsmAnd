@@ -10,6 +10,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -87,7 +88,7 @@ public abstract class BaseChartAdapter<_Chart extends Chart<_ChartData>, _ChartD
 	}
 
 	protected boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	public interface ExternalValueSelectedListener {

@@ -6,6 +6,8 @@ import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.mapcontextmenu.ContextMenuToolbarController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.LatLon;
@@ -60,7 +62,7 @@ public class TransportRouteController extends MenuController {
 			}
 		});
 
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				int previousStop = getPreviousStop();
@@ -71,7 +73,7 @@ public class TransportRouteController extends MenuController {
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_previous);
 
-		rightTitleButtonController = new TitleButtonController() {
+		rightTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				int nextStop = getNextStop();

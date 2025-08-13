@@ -2,7 +2,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
 
-import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -15,12 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.ElevationChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,6 +30,8 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +41,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int START_BUTTON_INDEX = 1;
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final GpxDisplayItem gpxItem;
 	@Nullable
 	private OrderedLineDataSet slopeDataSet;
@@ -52,7 +50,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	private final OnClickListener onAnalyseClickListener;
 	private CommonChartAdapter graphAdapter;
 
-	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpxFile, OnClickListener onAnalyseClickListener) {
+	public RouteStatisticCard(MapActivity mapActivity, GpxFile gpxFile, OnClickListener onAnalyseClickListener) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		this.onAnalyseClickListener = onAnalyseClickListener;
@@ -60,7 +58,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	@Nullable
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
@@ -142,7 +140,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void buildSlopeInfo() {
-		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		buildHeader(analysis);
 		boolean hasElevationData = analysis.hasElevationData();
@@ -166,12 +164,8 @@ public class RouteStatisticCard extends MapBaseCard {
 			TextView analyseButtonDescr = view.findViewById(R.id.analyse_button_descr);
 
 			FrameLayout analyseButton = view.findViewById(R.id.analyse_button);
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-				AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-			} else {
-				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-			}
+			AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+			AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 			analyseButton.setOnClickListener(onAnalyseClickListener);
 		}
 		view.findViewById(R.id.altitude_container).setVisibility(hasElevationData ? View.VISIBLE : View.GONE);
@@ -195,9 +189,9 @@ public class RouteStatisticCard extends MapBaseCard {
 		return graphAdapter;
 	}
 
-	private void buildHeader(GPXTrackAnalysis analysis) {
+	private void buildHeader(GpxTrackAnalysis analysis) {
 		ElevationChart mChart = view.findViewById(R.id.chart);
-		ChartUtils.setupElevationChart(mChart, 24f, 16f, true);
+		ChartUtils.setupElevationChart(mChart);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData()) {

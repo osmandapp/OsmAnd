@@ -3,10 +3,11 @@ package net.osmand.plus.render;
 import static net.osmand.IProgress.EMPTY_PROGRESS;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
 import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
 import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
@@ -20,9 +21,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.render.RendererRegistry.IRendererLoadedEventListener;
+import net.osmand.plus.render.RendererRegistry.RendererEventListener;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -42,8 +45,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class TravelRendererHelper implements IRendererLoadedEventListener {
+public class TravelRendererHelper implements RendererEventListener {
 
 	private static final Log log = PlatformUtil.getLog(TravelRendererHelper.class);
 	private static final String FILE_PREFERENCE_PREFIX = "travel_file_";
@@ -68,7 +72,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 
 	private PoiUIFilter routeArticleFilter;
 	private PoiUIFilter routeArticlePointsFilter;
-	private PoiUIFilter routeTrackFilter;
+	private Set<PoiUIFilter> routeTrackFilters;
 
 	public interface OnFileVisibilityChangeListener {
 		void fileVisibilityChanged();
@@ -92,7 +96,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 
 	private void addListeners() {
 		addShowTravelPrefListener();
-		rendererRegistry.addRendererLoadedEventListener(this);
+		rendererRegistry.addRendererEventListener(this);
 		fileVisibilityPropertiesListener = change -> {
 			for (OnFileVisibilityChangeListener listener : fileVisibilityListeners) {
 				listener.fileVisibilityChanged();
@@ -144,12 +148,12 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 		}
 		boolean showTracks = getRouteTracksProperty().get();
 		boolean renderedChanged = false;
-		List<String> routesTypes = resourceManager.searchPoiSubTypesByPrefix(ACTIVITY_TYPE);
+		List<String> routesTypes = resourceManager.searchPoiSubTypesByPrefix(ROUTE_ACTIVITY_TYPE);
 		for (String type : routesTypes) {
 			CommonPreference<Boolean> pref = getRouteTypeProperty(type);
 			if (renderer != null) {
 				boolean selected = showTracks && pref.get();
-				String attrName = type.replace(ACTIVITY_TYPE + "_", "");
+				String attrName = type.replace(ROUTE_ACTIVITY_TYPE + "_", "");
 				renderedChanged |= updateRouteTypeVisibility(renderer, attrName, selected, false);
 			}
 		}
@@ -235,11 +239,11 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	}
 
 	@Nullable
-	public PoiUIFilter getRouteTrackFilter() {
-		if (routeTrackFilter == null && app.getPoiTypes().isInit()) {
-			updateRouteTrackFilter();
+	public Set<PoiUIFilter> getRouteTrackFilters() {
+		if (routeTrackFilters == null) {
+			updateRouteTrackFilters();
 		}
-		return routeTrackFilter;
+		return routeTrackFilters;
 	}
 
 	public void updateRouteArticleFilter() {
@@ -249,26 +253,38 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	}
 
 	public void updateRouteArticlePointsFilter() {
-		if (!app.getPoiTypes().isInit()) {
-			return;
-		}
-		PoiUIFilter routeArticlePointsFilter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_ARTICLE_POINT);
-		if (routeArticlePointsFilter != null) {
-			Set<String> selectedCategories = new HashSet<>();
-			List<String> categories = app.getResourceManager().searchPoiSubTypesByPrefix(MapPoiTypes.CATEGORY);
-			for (String category : categories) {
-				CommonPreference<Boolean> prop = getRoutePointCategoryProperty(category);
-				if (prop.get()) {
-					selectedCategories.add(category.replace('_', ':').toLowerCase());
+		if (app.getPoiTypes().isInit()) {
+			PoiUIFilter routeArticlePointsFilter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_ARTICLE_POINT);
+			if (routeArticlePointsFilter != null) {
+				Set<String> selectedCategories = new HashSet<>();
+				List<String> categories = app.getResourceManager().searchPoiSubTypesByPrefix(MapPoiTypes.CATEGORY);
+				for (String category : categories) {
+					CommonPreference<Boolean> prop = getRoutePointCategoryProperty(category);
+					if (prop.get()) {
+						selectedCategories.add(category.replace('_', ':').toLowerCase());
+					}
 				}
+				routeArticlePointsFilter.setFilterByName(TextUtils.join(" ", selectedCategories));
 			}
-			routeArticlePointsFilter.setFilterByName(TextUtils.join(" ", selectedCategories));
+			this.routeArticlePointsFilter = routeArticlePointsFilter;
 		}
-		this.routeArticlePointsFilter = routeArticlePointsFilter;
 	}
 
-	public void updateRouteTrackFilter() {
-		routeTrackFilter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_TRACK);
+	public void updateRouteTrackFilters() {
+		if (app.getPoiTypes().isInit()) {
+			routeTrackFilters = new TreeSet<>();
+			PoiCategory routes = app.getPoiTypes().getRoutes();
+			for (PoiType subType : routes.getPoiTypes()) {
+				String subTypeKeyName = subType.getKeyName();
+				if (subTypeKeyName.startsWith(ROUTES_PREFIX)) {
+					routeTrackFilters.add(app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + subTypeKeyName));
+				}
+			}
+			PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_TRACK);
+			if (filter != null) {
+				routeTrackFilters.add(filter);
+			}
+		}
 	}
 
 	public boolean updateRouteTypeVisibility(RenderingRulesStorage storage, String name, boolean selected) {
@@ -369,7 +385,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	public void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source) {
 		for (Map.Entry<String, CommonPreference<Boolean>> entry : routeTypesProps.entrySet()) {
 			boolean selected = entry.getValue().get();
-			String attrName = entry.getKey().replace(ACTIVITY_TYPE + "_", "");
+			String attrName = entry.getKey().replace(ROUTE_ACTIVITY_TYPE + "_", "");
 			updateRouteTypeVisibility(rules, attrName, selected, false);
 		}
 	}

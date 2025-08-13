@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.util.Algorithms.objectEquals;
 
 import android.graphics.Rect;
@@ -34,7 +33,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
@@ -52,13 +51,12 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import java.util.Objects;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
-		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener, InAppPurchaseHelper.InAppPurchaseListener {
+		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener,
+		InAppPurchaseHelper.InAppPurchaseListener {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
 	private PreviewRouteLineInfo previewRouteLineInfo;
-
-	private ApplicationMode appMode;
 
 	private int toolbarHeightPx;
 	private String currentHeaderSourceId;
@@ -116,7 +114,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setupAppMode(savedInstanceState);
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
 		if (savedInstanceState != null) {
@@ -130,15 +127,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 				dismiss();
 			}
 		});
-	}
-
-	private void setupAppMode(@Nullable Bundle savedInstanceState) {
-		if (appMode == null && savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null) {
-			appMode = settings.getApplicationMode();
-		}
 	}
 
 	private PreviewRouteLineInfo createPreviewRouteLineInfo() {
@@ -455,7 +443,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		previewRouteLineInfo.saveToBundle(outState);
-		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 	}
 
 	@Override
@@ -540,13 +527,12 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor instanceof PaletteGradientColor){
-			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
 			previewRouteLineInfo.setGradientPalette(paletteGradientColor.getPaletteName());
 			if (getMapActivity() != null) {
 				getMapActivity().refreshMap();
 			}
-		} else{
+		} else {
 			RouteLineColorController colorController = getColorCardController();
 			previewRouteLineInfo.setCustomColor(paletteColor.getColor(), colorController.isNightMap());
 			updateColorItems();
@@ -589,7 +575,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
-	                                   @Nullable ApplicationMode appMode) {
+	                                   @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
@@ -598,7 +584,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			}
 
 			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
-			fragment.appMode = appMode;
+			fragment.setAppMode(appMode);
 
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

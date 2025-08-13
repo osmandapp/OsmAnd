@@ -16,6 +16,7 @@ import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -126,7 +127,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 
 	@Nullable
 	private QuickAction findAction(int keyCode) {
-		if (mapActivity == null || isLetterKeyCode(keyCode) && !mapActivity.isMapVisible()) {
+		if (mapActivity == null || isLetterForbid(keyCode)) {
 			// Reject using of letter keycodes when the focus isn't on the Activity
 			return null;
 		}
@@ -140,6 +141,16 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 		InputDeviceProfile device = deviceHelper.getFunctionalityDevice(appMode);
 		return device != null ? device.findAction(keyCode) : null;
 	}
+
+	private boolean isLetterForbid(int keyCode){
+		boolean isMapActivityActive = AndroidUtils.isActivityNotDestroyed(mapActivity) && settings.MAP_ACTIVITY_ENABLED;
+		boolean isMapVisible = mapActivity.isMapVisible();
+		boolean isMapRouteMenuVisible = isMapActivityActive && mapActivity.getMapRouteInfoMenu().isVisible();
+
+		boolean letterAllowedScreenVisible = isMapVisible || isMapRouteMenuVisible;
+		return isLetterKeyCode(keyCode) && !letterAllowedScreenVisible;
+	}
+
 
 	private void bindCommand(int keyCode, @NonNull String commandId) {
 		QuickAction action = CommandToActionConverter.createQuickAction(commandId);

@@ -2,11 +2,13 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.plus.routing.GpxApproximator.DEFAULT_POINT_APPROXIMATION;
 
+import androidx.annotation.Nullable;
+
 public class GpxNavigationParams {
 
 	private boolean force;
 	private boolean checkLocationPermission;
-	private boolean passWholeRoute;
+	private Boolean passWholeRoute;
 	private boolean snapToRoad;
 	private String snapToRoadMode;
 	private int snapToRoadThreshold = DEFAULT_POINT_APPROXIMATION;
@@ -30,11 +32,12 @@ public class GpxNavigationParams {
 		return this;
 	}
 
-	public boolean isPassWholeRoute() {
+	@Nullable
+	public Boolean isPassWholeRoute() {
 		return passWholeRoute;
 	}
 
-	public GpxNavigationParams setPassWholeRoute(boolean passWholeRoute) {
+	public GpxNavigationParams setPassWholeRoute(@Nullable Boolean passWholeRoute) {
 		this.passWholeRoute = passWholeRoute;
 		return this;
 	}

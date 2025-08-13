@@ -15,11 +15,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.plugins.audionotes.NotesFragment;
 
 import java.util.List;
@@ -68,7 +69,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	@NonNull
 	@Override
 	public View getView(int position, View row, @NonNull ViewGroup parent) {
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		Context themedCtx = UiUtilities.getThemedContext(getContext(), nightMode);
 		if (portrait) {
 			int type = getItemViewType(position);
@@ -78,7 +79,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 					|| type == TYPE_VIDEO_HEADER;
 
 			if (row == null) {
-				LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+				LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 				if (header) {
 					row = inflater.inflate(R.layout.list_item_header, parent, false);
 					HeaderViewHolder hHolder = new HeaderViewHolder(row);
@@ -101,7 +102,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 			return row;
 		} else {
-			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+			LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 			boolean lastCard = getCardsCount() == position + 1;
 			int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 			int sideMargin = app.getResources().getDisplayMetrics().widthPixels / 10;
@@ -216,7 +217,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			holder.description.setText(recording.getExtendedDescription(app));
 			int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
 					: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
-			int colorRes = ColorUtilities.getDefaultIconColorId(!app.getSettings().isLightContent());
+			int colorRes = ColorUtilities.getDefaultIconColorId(app.getDaynightHelper().isNightMode(ThemeUsageContext.APP));
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, colorRes));
 		}
 
@@ -226,35 +227,26 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		holder.options.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
 		if (selectionMode) {
 			holder.checkBox.setChecked(selected.contains(recording));
-			holder.checkBox.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (listener != null) {
-						listener.onCheckBoxClick(recording, holder.checkBox.isChecked());
-					}
+			holder.checkBox.setOnClickListener(v -> {
+				if (listener != null) {
+					listener.onCheckBoxClick(recording, holder.checkBox.isChecked());
 				}
 			});
 		} else {
 			holder.options.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
-			holder.options.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (listener != null) {
-						listener.onOptionsClick(recording);
-					}
+			holder.options.setOnClickListener(v -> {
+				if (listener != null) {
+					listener.onOptionsClick(recording);
 				}
 			});
 		}
 
-		holder.view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (selectionMode) {
-					holder.checkBox.performClick();
-				} else {
-					if (listener != null) {
-						listener.onItemClick(recording, position);
-					}
+		holder.view.setOnClickListener(v -> {
+			if (selectionMode) {
+				holder.checkBox.performClick();
+			} else {
+				if (listener != null) {
+					listener.onItemClick(recording, position);
 				}
 			}
 		});

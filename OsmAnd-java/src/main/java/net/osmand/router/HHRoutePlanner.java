@@ -144,6 +144,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 //			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
 //			HHRoutingContext.USE_GLOBAL_QUEUE = true;
 		}
+		c.applyCalculateMissingMaps(RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS);
 		return c;
 	}
 
@@ -606,7 +607,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		RouteCalculationProgress progress = hctx.rctx.calculationProgress;
 		if (predefinedRegions == null) {
 			progress.hhIteration(HHIteration.SELECT_REGIONS);
-			hctx = selectBestRoutingFiles(start, end, hctx);
+			hctx = selectBestRoutingFiles(start, end, hctx, c.STRICT_BEST_GROUP_MAPS);
 		}
 		if (hctx == null) {
 			System.out.println("No files found for routing");
@@ -718,9 +719,27 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			return false;
 		}
+
+		public boolean containsStartEndRegion(String[] regionsCoveringStartAndTargets) {
+			if (regionsCoveringStartAndTargets.length == 0) {
+				return true;
+			}
+			for (BinaryMapIndexReader reader : readers) {
+				for (RouteRegion index : reader.getRoutingIndexes()) {
+					for (String region : regionsCoveringStartAndTargets) {
+						if (region.equalsIgnoreCase(index.getName())) {
+							return true;
+						}
+					}
+
+				}
+			}
+			return false;
+		}
 	}
 
-	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) throws IOException {
+	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx,
+	                                                   boolean strictBestGroupMaps) throws IOException {
 		List<HHRouteRegionsGroup<T>> groups = new ArrayList<>();
 	
 		GeneralRouter router = hctx.rctx.config.router;
@@ -741,7 +760,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 		}
 		for (HHRouteRegionsGroup<T> g : groups) {
-			g.containsStartEnd = g.contains(start) && g.contains(end);
+			g.containsStartEnd = g.contains(start) && g.contains(end)
+					&& g.containsStartEndRegion(hctx.rctx.regionsCoveringStartAndTargets);
 			String[] params = g.profileParams.split(",");
 			for (String p : params) {
 				if (p.trim().length() == 0) {
@@ -760,6 +780,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			public int compare(HHRouteRegionsGroup<T> o1, HHRouteRegionsGroup<T> o2) {
 				if (o1.containsStartEnd != o2.containsStartEnd) {
 					return o1.containsStartEnd ? -1 : 1;
+				} else if (o1.edition != o2.edition) {
+					return o1.edition > o2.edition ? -1 : 1;
 				} else if (o1.extraParam != o2.extraParam) {
 					return o1.extraParam < o2.extraParam ? -1 : 1;
 				} else if (o1.matchParam != o2.matchParam) {
@@ -796,6 +818,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		if (allMatched) {
 			return currentCtx;
+		}
+		if (strictBestGroupMaps && groups.size() > 1) {
+			hctx.rctx.mapIndexReaderFilter = new HashSet<>();
+			for (HHRouteRegionPointsCtx<T> reg : regions) {
+				hctx.rctx.mapIndexReaderFilter.add(reg.file);
+			}
 		}
 		return initNewContext(hctx.rctx, regions);
 	}
@@ -871,7 +899,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			dualPoint.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, dualPoint));
 			dualPoint.setCostParentRt(reverse, negCost, null, negCost);
 			pnts.put(dualPoint.index, dualPoint);
-
 			return pnts;
 		}
 		int savedMaxVisited = hctx.rctx.config.MAX_VISITED;
@@ -895,9 +922,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
-				long pntId = calculateRoutePointInternalId(o.getRoad().getId(),
-						reverse ? o.getSegmentEnd() : o.getSegmentStart(),
-						reverse ? o.getSegmentStart() : o.getSegmentEnd());
+				int startSegment = reverse ? o.getSegmentEnd() : o.getSegmentStart();
+				int endSegment = reverse ? o.getSegmentStart() : o.getSegmentEnd();
+				long pntId = calculateRoutePointInternalId(o.getRoad().getId(), startSegment, endSegment);
 				if (set.add(pntId)) {
 					T pnt = hctx.pointsByGeo.get(pntId);
 					if (pnt == null) {
@@ -921,7 +948,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						int preciseX = reverse? hctx.startX : hctx.endX;
 						o.distanceFromStart += planner.calculatePreciseStartTime(hctx.rctx, preciseX, preciseY, o);
 					} else {
-						o.distanceFromStart += planner.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2;
+						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
+								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
+						if (obstacle < 0) {
+							continue;
+						}
+						o.distanceFromStart += planner.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + obstacle;
 					}
 					if (pnt.rt(reverse).rtCost != 0) {
 						throw new IllegalStateException();
@@ -1273,6 +1305,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		// SPEEDUP: Speed up by just clearing visited
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		RouteSegmentPoint s = loadPoint(hctx.rctx, start);
+		if (s == null) {
+			System.err.printf("HH recalculateNetworkCluster: loadPoint() is NULL for %s\n", start);
+			return;
+		}
 		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // we should reuse same progress for cancellation
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2;
 		long ps = calcRPId(s, s.getSegmentStart(), s.getSegmentEnd());

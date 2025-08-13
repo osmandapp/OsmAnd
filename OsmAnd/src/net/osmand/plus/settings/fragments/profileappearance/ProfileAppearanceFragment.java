@@ -38,6 +38,7 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -178,6 +179,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		if (activity == null) {
 			return;
 		}
+		ApplicationMode appMode = getSelectedAppMode();
 		String key = preference.getKey();
 		if (PROFILE_NAME.equals(preference.getKey())) {
 			profileName = (EditText) holder.findViewById(R.id.profile_name_et);
@@ -211,13 +213,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			profileNameOtfb = (OsmandTextFieldBoxes) holder.findViewById(R.id.profile_name_otfb);
 			updateProfileNameAppearance();
 		} else if (COLORS_CARD.equals(key)) {
-			bindCard(holder, new ColorsPaletteCard(activity, screenController.getColorsCardController()));
+			bindCard(holder, new ColorsPaletteCard(activity, screenController.getColorsCardController(), appMode, false));
 		} else if (PROFILE_ICON_CARD.equals(key)) {
-			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getProfileIconCardController()));
+			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getProfileIconCardController(), appMode, false));
 		} else if (RESTING_POSITION_ICON_CARD.equals(key)) {
-			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getRestingIconCardController()));
+			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getRestingIconCardController(), appMode, false));
 		} else if (NAVIGATION_POSITION_ICON_CARD.equals(key)) {
-			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getNavigationIconCardController()));
+			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getNavigationIconCardController(), appMode, false));
 		} else if (OPTIONS_CARD.equals(key)) {
 			ViewGroup container = (ViewGroup) holder.itemView;
 			container.removeAllViews();
@@ -228,12 +230,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	public boolean onPreferenceClick(Preference preference) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			ApplicationMode appMode = getSelectedAppMode();
 			ProfileOptionsDialogController optionsDialogController = screenController.getProfileOptionController();
 			if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
-				optionsDialogController.showDialog(mapActivity, app.getString(R.string.view_angle),
+				optionsDialogController.showDialog(mapActivity, appMode, app.getString(R.string.view_angle),
 						app.getString(R.string.view_angle_description), settings.VIEW_ANGLE_VISIBILITY);
 			} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
-				optionsDialogController.showDialog(mapActivity, app.getString(R.string.location_radius),
+				optionsDialogController.showDialog(mapActivity, appMode, app.getString(R.string.location_radius),
 						app.getString(R.string.location_radius_description), settings.LOCATION_RADIUS_VISIBILITY);
 			}
 		}

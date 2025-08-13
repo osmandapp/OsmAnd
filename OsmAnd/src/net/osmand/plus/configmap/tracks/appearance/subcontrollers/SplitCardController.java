@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +20,7 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -55,7 +56,8 @@ public class SplitCardController extends BaseMultiStateCardController {
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		if (selectedState.getTag() == null) {
 			if (container.getChildCount() == 0) {
 				LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
@@ -116,11 +118,13 @@ public class SplitCardController extends BaseMultiStateCardController {
 			if (splitType == GpxSplitType.NO_SPLIT.getType()) {
 				summary = GpxSplitType.NO_SPLIT.getHumanString(app);
 			} else if (splitType == GpxSplitType.DISTANCE.getType()) {
-				String formattedDistance = OsmAndFormatter.getFormattedDistanceInterval(app, splitInterval, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+				String formattedDistance = OsmAndFormatter.getFormattedDistanceInterval(app, splitInterval, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 				summary = app.getString(R.string.ltr_or_rtl_combine_via_comma, GpxSplitType.DISTANCE.getHumanString(app), formattedDistance);
 			} else if (splitType == GpxSplitType.TIME.getType()) {
 				String formattedTime = OsmAndFormatter.getFormattedTimeInterval(app, splitInterval);
 				summary = app.getString(R.string.ltr_or_rtl_combine_via_comma, GpxSplitType.TIME.getHumanString(app), formattedTime);
+			} else if (splitType == GpxSplitType.UPHILL_DOWNHILL.getType()) {
+				summary = app.getString(R.string.uphill_downhill_split);
 			}
 		}
 		return summary;

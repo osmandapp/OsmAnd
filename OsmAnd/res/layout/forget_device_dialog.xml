@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                                 android:paddingRight="@dimen/content_padding_small"
                                 android:text="@string/external_device_forget_sensor"
                                 android:textSize="@dimen/default_desc_text_size"
-                                osmand:typeface="@string/font_roboto_medium"
+                                app:typefaceWeight="medium"
                                 tools:text="Forget sensor" />
 
                         </FrameLayout>
@@ -117,7 +117,7 @@
                                 android:paddingRight="@dimen/content_padding_small"
                                 android:text="@string/shared_string_cancel"
                                 android:textSize="@dimen/default_desc_text_size"
-                                osmand:typeface="@string/font_roboto_medium"
+                                app:typefaceWeight="medium"
                                 tools:text="Cancel" />
 
                         </FrameLayout>

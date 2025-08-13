@@ -1,8 +1,14 @@
 package net.osmand.plus.liveupdates;
 
+import static android.graphics.Typeface.DEFAULT;
+import static net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -16,6 +22,13 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,15 +41,13 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -54,30 +65,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.download.DownloadIndexesThread.*;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNextUpdateDate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNextUpdateTimeMillis;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastOsmChange;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment
 		implements RefreshLiveUpdates, DownloadEvents {
@@ -117,7 +104,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		settings = app.getSettings();
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		if (getTargetFragment() instanceof OnLiveUpdatesForLocalChange) {
 			onLiveUpdatesForLocalChange = (OnLiveUpdatesForLocalChange) getTargetFragment();
 		}
@@ -150,7 +137,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		items.add(itemUpdateTimeInfo);
 		refreshUpdateTimeInfo();
 
-		View itemLiveUpdate = getCustomButtonView(app, null, localUpdatePreference.get(), nightMode);
+		Context context = requireContext();
+		View itemLiveUpdate = getCustomButtonView(context, null, localUpdatePreference.get(), nightMode);
 		View itemLiveUpdateButton = itemLiveUpdate.findViewById(R.id.button_container);
 		CompoundButton button = itemLiveUpdateButton.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(button, nightMode, TOOLBAR);
@@ -177,7 +165,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 									}
 								})) {
 							item.setTitle(getStateText(!checked));
-							updateCustomButtonView(app, null, item.getView(), !checked, nightMode);
+							updateCustomButtonView(context, null, item.getView(), !checked, nightMode);
 							CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
 							frequencyToggleButton.setItemsEnabled(localUpdatePreference.get());
 							timeOfDayToggleButton.setItemsEnabled(localUpdatePreference.get());
@@ -188,13 +176,11 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				.create();
 		items.add(itemSwitchLiveUpdate);
 
-		Typeface typefaceRegular = FontCache.getRobotoRegular(app);
-
 		TextViewEx frequencyTitle = (TextViewEx) inflater.inflate(R.layout.bottom_sheet_item_title, null);
 		frequencyTitle.setMinHeight(dp24);
 		frequencyTitle.setMinimumHeight(dp24);
 		frequencyTitle.setText(R.string.update_frequency);
-		frequencyTitle.setTypeface(typefaceRegular);
+		frequencyTitle.setTypeface(DEFAULT);
 		AndroidUtils.setPadding(frequencyTitle, dp16, dp12, dp16, dp12);
 		AndroidUtils.setTextPrimaryColor(app, frequencyTitle, nightMode);
 		items.add(new BaseBottomSheetItem.Builder()
@@ -226,7 +212,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		timeOfDayTitle.setMinHeight(dp24);
 		timeOfDayTitle.setMinimumHeight(dp24);
 		timeOfDayTitle.setText(R.string.update_time);
-		timeOfDayTitle.setTypeface(typefaceRegular);
+		timeOfDayTitle.setTypeface(DEFAULT);
 		AndroidUtils.setPadding(timeOfDayTitle, dp16, dp16, dp16, dp6);
 		AndroidUtils.setTextPrimaryColor(app, timeOfDayTitle, nightMode);
 		items.add(new BaseBottomSheetItem.Builder()
@@ -474,7 +460,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		String lastOsmChangesTime = getString(R.string.includes_osm_changes_until, formattedOsmUpdateTime);
 		String updateInfo = getString(R.string.ltr_or_rtl_combine_via_space, lastUpdateTime, lastOsmChangesTime);
 		SpannableString spannable = new SpannableString(updateInfo);
-		CustomTypefaceSpan span = new CustomTypefaceSpan(FontCache.getRobotoMedium(app));
+		CustomTypefaceSpan span = new CustomTypefaceSpan(FontCache.getMediumFont());
 		int start = updateInfo.indexOf(formattedOsmUpdateTime);
 		int end = start + formattedOsmUpdateTime.length();
 		spannable.setSpan(span, start, end, 0);

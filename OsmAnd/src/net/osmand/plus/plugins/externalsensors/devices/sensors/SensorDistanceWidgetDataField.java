@@ -4,7 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.FormattedValue;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.OsmAndFormatter;
 
 public class SensorDistanceWidgetDataField extends SensorWidgetDataField {
@@ -15,11 +16,11 @@ public class SensorDistanceWidgetDataField extends SensorWidgetDataField {
 
 	@Nullable
 	@Override
-	public OsmAndFormatter.FormattedValue getFormattedValue(@NonNull OsmandApplication app) {
+	public FormattedValue getFormattedValue(@NonNull OsmandApplication app) {
 		float distance = getNumberValue().floatValue();
 		if (distance > 0) {
 			return OsmAndFormatter.getFormattedDistanceValue(distance,
-					app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+					app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		}
 		return null;
 	}

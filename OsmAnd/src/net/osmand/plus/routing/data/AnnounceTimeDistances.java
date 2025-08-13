@@ -5,6 +5,8 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -12,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.router.TurnType;
 
 public class AnnounceTimeDistances {
 	// Avoids false negatives: Pre-pone close announcements by this distance to allow for the possible over-estimation of the 'true' lead distance due to positioning error.
@@ -28,6 +31,11 @@ public class AnnounceTimeDistances {
 	public static final int STATE_SHORT_PNT_APPROACH = 6;
 	public static final int STATE_LONG_PNT_APPROACH = 7;
 
+	private static final int LANES_MAX_METERS_NOT_SPOKEN_TURN = 800;
+	private static final int LANES_MAX_METERS_SPOKEN_TURN = 1200;
+
+
+	private final ApplicationMode appMode;
 	// Default speed to have comfortable announcements (m/s)
 	// initial value is updated from default speed settings anyway
 	private float DEFAULT_SPEED = 10;
@@ -50,6 +58,7 @@ public class AnnounceTimeDistances {
 	OsmAndLocationProvider locationProvider;
 
 	public AnnounceTimeDistances(ApplicationMode appMode, OsmandApplication app) {
+		this.appMode = appMode;
 		OsmandSettings settings = app.getSettings();
 		locationProvider = app.getLocationProvider();
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
@@ -180,6 +189,10 @@ public class AnnounceTimeDistances {
 		return dist <= Math.max(leadDist, currentSpeed / DEFAULT_SPEED * leadDist) + currentSpeed * voicePromptDelayTimeSec;
 	}
 
+	public ApplicationMode getAppMode() {
+		return appMode;
+	}
+
 	public float getSpeed(Location loc) {
 		float speed = DEFAULT_SPEED;
 		if (loc != null && loc.hasSpeed()) {
@@ -284,5 +297,10 @@ public class AnnounceTimeDistances {
 		int end = start + word.length() + 1;
 		b.setSpan(new StyleSpan(Typeface.BOLD), start, end,
 				SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE);
+	}
+
+	public boolean tooFarToDisplayLanes(@NonNull TurnType turnType, int distanceTo) {
+		return (distanceTo > LANES_MAX_METERS_NOT_SPOKEN_TURN && turnType.isSkipToSpeak()
+				|| distanceTo > LANES_MAX_METERS_SPOKEN_TURN);
 	}
 }

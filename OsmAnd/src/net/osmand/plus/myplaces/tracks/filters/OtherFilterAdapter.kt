@@ -9,6 +9,10 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.TextViewEx
+import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.OtherTrackFilter
+import net.osmand.shared.gpx.filters.OtherTrackParam
+import net.osmand.shared.util.Localization
 
 class OtherFilterAdapter(
 	val app: OsmandApplication,
@@ -34,7 +38,7 @@ class OtherFilterAdapter(
 			filterChangedListener?.onFilterChanged()
 		}
 		holder.switch.isChecked = filter.isParamSelected(param)
-		holder.title.setText(param.displayName)
+		holder.title.text = Localization.getString(param.displayName)
 	}
 
 	override fun getItemCount(): Int {
@@ -43,12 +47,10 @@ class OtherFilterAdapter(
 
 	class OtherViewHolder(app: OsmandApplication, view: View, val nightMode: Boolean) :
 		RecyclerView.ViewHolder(view) {
-		var switch: AppCompatCheckBox
-		var title: TextViewEx
+		var switch: AppCompatCheckBox = view.findViewById(R.id.check)
+		var title: TextViewEx = view.findViewById(R.id.param_title)
 
 		init {
-			switch = view.findViewById(R.id.check)
-			title = view.findViewById(R.id.param_title)
 			UiUtilities.setupCompoundButton(
 				nightMode,
 				net.osmand.plus.utils.ColorUtilities.getActiveColor(app, nightMode),

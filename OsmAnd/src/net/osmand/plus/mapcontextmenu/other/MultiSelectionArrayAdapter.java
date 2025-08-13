@@ -94,7 +94,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 		// Text line 2
 		TextView line2 = convertView.findViewById(R.id.context_menu_line2);
 		line2.setTextColor(getSecondaryTextColor(context, nightMode));
-		line2.setText(getSecondLineText(item));
+		line2.setText(MenuObjectUtils.getSecondLineText(item));
 		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
 		line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(context, 5f));
@@ -116,26 +116,6 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 			icon = iconId != 0 ? iconsCache.getIcon(iconId, iconColorId) : null;
 		}
 		return icon;
-	}
-
-	private String getSecondLineText(MenuObject item) {
-		StringBuilder line2Str = new StringBuilder(item.getTypeStr());
-		if (item.getObject() instanceof Pair) {
-			Pair<?, ?> pair = (Pair<?, ?>) item.getObject();
-			if (pair.first instanceof RouteKey) {
-				RouteKey key = (RouteKey) pair.first;
-				String routeType = AndroidUtils.getActivityTypeTitle(item.getMyApplication(), key.type);
-				line2Str.append(" - ").append(routeType);
-			}
-		}
-		String streetStr = item.getStreetStr();
-		if (!Algorithms.isEmpty(streetStr) && !item.displayStreetNameInTitle()) {
-			if (line2Str.length() > 0) {
-				line2Str.append(", ");
-			}
-			line2Str.append(streetStr);
-		}
-		return line2Str.toString();
 	}
 
 	private void onItemClicked(int position) {

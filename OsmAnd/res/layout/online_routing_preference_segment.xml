@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:singleLine="true"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            osmand:typeface="@string/font_roboto_medium"
+            app:typefaceWeight="medium"
             tools:visibility="visible"
             android:visibility="gone"
             tools:text="Title" />
@@ -43,7 +43,7 @@
             android:singleLine="true"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/default_list_text_size"
-            osmand:typeface="@string/font_roboto_regular"
+            android:textStyle="normal"
             tools:visibility="visible"
             android:visibility="gone"
             tools:text="Subtitle" />
@@ -76,7 +76,7 @@
         android:paddingBottom="@dimen/content_padding"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/default_desc_text_size"
-        osmand:typeface="@string/font_roboto_regular"
+        android:textStyle="normal"
         tools:text="Description"
         tools:visibility="visible"
         android:visibility="gone"
@@ -114,7 +114,7 @@
             android:paddingEnd="@dimen/content_padding"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/default_desc_text_size"
-            osmand:typeface="@string/font_roboto_regular"
+            android:textStyle="normal"
             android:layout_gravity="center_vertical"
             tools:text="Approximate route" />
 
@@ -138,11 +138,11 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            osmand:errorColor="@color/color_invalid"
-            osmand:helperTextColor="?android:textColorSecondary"
+            app:errorColor="@color/color_invalid"
+            app:helperTextColor="?android:textColorSecondary"
             tools:labelText="Hint"
-            osmand:primaryColor="@color/active_color_primary_dark"
-            osmand:secondaryColor="?android:textColorSecondary">
+            app:primaryColor="@color/active_color_primary_dark"
+            app:secondaryColor="?android:textColorSecondary">
 
             <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                 android:id="@+id/edit_text"
@@ -164,7 +164,7 @@
             android:paddingTop="@dimen/content_padding_half"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/default_desc_text_size"
-            osmand:typeface="@string/font_roboto_regular"
+            android:textStyle="normal"
             tools:text="Helper text"
             tools:visibility="visible"
             android:visibility="gone" />
@@ -177,7 +177,7 @@
             android:paddingTop="@dimen/content_padding_half"
             android:textColor="@color/color_invalid"
             android:textSize="@dimen/default_desc_text_size"
-            osmand:typeface="@string/font_roboto_regular"
+            android:textStyle="normal"
             tools:text="Error text"
             tools:visibility="visible"
             android:visibility="gone" />
@@ -199,8 +199,8 @@
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:visibility="gone"
-		osmand:dialogButtonTopMargin="@dimen/content_padding_half"
-		osmand:dialogButtonType="primary"
+		app:dialogButtonTopMargin="@dimen/content_padding_half"
+		app:dialogButtonType="primary"
 		tools:dialogButtonTitle="Action button"
 		tools:visibility="visible" />
 

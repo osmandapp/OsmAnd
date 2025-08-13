@@ -9,18 +9,22 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.OnCompleteCallback;
+import net.osmand.StateChangedListener;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfoType;
@@ -30,15 +34,17 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -57,6 +63,7 @@ public class WaypointHelper {
 	private static final int ANNOUNCE_POI_LIMIT = 3;
 
 	OsmandApplication app;
+	OsmandSettings settings;
 	// every time we modify this collection, we change the reference (copy on write list)
 	public static final int TARGETS = 0;
 	public static final int WAYPOINTS = 1;
@@ -67,23 +74,38 @@ public class WaypointHelper {
 	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 200, 500, 1000, 2000, 5000};
 	private static final double DISTANCE_IGNORE_DOUBLE_SPEEDCAMS = 150;
 	private static final double DISTANCE_IGNORE_DOUBLE_RAILWAYS = 50;
-
+	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
-	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 
 	private ApplicationMode appMode;
 
+	// Listeners cache that is needed to prevent individual listeners weak references lost
+	private final Map<String, StateChangedListener<Boolean>> registeredPrefListeners = new HashMap<>();
+
 
 	public WaypointHelper(OsmandApplication application) {
 		app = application;
-		appMode = app.getSettings().getApplicationMode();
+		settings = app.getSettings();
+		appMode = settings.getApplicationMode();
+		registerPreferenceListeners();
 	}
 
+	private void registerPreferenceListeners() {
+		registerPreferenceListener(settings.ANNOUNCE_WPT, WAYPOINTS);
+		registerPreferenceListener(settings.ANNOUNCE_NEARBY_FAVORITES, FAVORITES);
+		registerPreferenceListener(settings.ANNOUNCE_NEARBY_POI, POI);
+	}
+
+	private void registerPreferenceListener(@NonNull OsmandPreference<Boolean> preference, int type) {
+		StateChangedListener<Boolean> listener = aBoolean -> recalculatePointsAsync(type, null);
+		registeredPrefListeners.put(preference.getId(), listener);
+		preference.addListener(listener);
+	}
 
 	public List<LocationPointWrapper> getWaypoints(int type) {
 		if (type == TARGETS) {
@@ -213,7 +235,7 @@ public class WaypointHelper {
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
-		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
+		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), lastProjection.getSpeed());
@@ -258,31 +280,24 @@ public class WaypointHelper {
 		return mostImportant;
 	}
 
-	public void enableWaypointType(int type, boolean enable) {
-		//An item will be displayed in the Waypoint list if either "Show..." or "Announce..." is selected for it in the Navigation settings
-		//Keep both "Show..." and "Announce..." Nav settings in sync when user changes what to display in the Waypoint list, as follows:
-		if (type == ALARMS) {
-			app.getSettings().SHOW_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
-			app.getSettings().SPEAK_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
-			app.getSettings().SHOW_PEDESTRIAN.setModeValue(appMode, enable);
-			app.getSettings().SPEAK_PEDESTRIAN.setModeValue(appMode, enable);
-			app.getSettings().SHOW_TUNNELS.setModeValue(appMode, enable);
-			app.getSettings().SPEAK_TUNNELS.setModeValue(appMode, enable);
-			//But do not implicitly change speed_cam settings here because of legal restrictions in some countries, so Nav settings must prevail
-		} else if (type == POI) {
-			app.getSettings().SHOW_NEARBY_POI.setModeValue(appMode, enable);
-			app.getSettings().ANNOUNCE_NEARBY_POI.setModeValue(appMode, enable);
-		} else if (type == FAVORITES) {
-			app.getSettings().SHOW_NEARBY_FAVORITES.setModeValue(appMode, enable);
-			app.getSettings().ANNOUNCE_NEARBY_FAVORITES.setModeValue(appMode, enable);
-		} else if (type == WAYPOINTS) {
-			app.getSettings().SHOW_WPT.set(enable);
-			app.getSettings().ANNOUNCE_WPT.set(enable);
-		}
-		recalculatePoints(route, type, locationPoints);
+	public void switchWaypointTypeAsync(int type, boolean enable, @Nullable OnCompleteCallback callback) {
+		runAsync(() -> switchWaypointType(type, enable), callback);
 	}
 
-	public void recalculatePoints(int type) {
+	public void switchWaypointType(int type, boolean enable) {
+		if (type == ALARMS) {
+			settings.SHOW_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
+			settings.SHOW_PEDESTRIAN.setModeValue(appMode, enable);
+			settings.SHOW_TUNNELS.setModeValue(appMode, enable);
+			// Do not implicitly change speed_cam settings here because of
+			// legal restrictions in some countries, so Nav settings must prevail
+		} else if (type == POI) {
+			settings.SHOW_NEARBY_POI.setModeValue(appMode, enable);
+		} else if (type == FAVORITES) {
+			settings.SHOW_NEARBY_FAVORITES.setModeValue(appMode, enable);
+		} else if (type == WAYPOINTS) {
+			settings.SHOW_WPT.set(enable);
+		}
 		recalculatePoints(route, type, locationPoints);
 	}
 
@@ -292,22 +307,18 @@ public class WaypointHelper {
 	}
 
 	public boolean isTypeVisible(int waypointType) {
-		boolean vis = app.getAppCustomization().isWaypointGroupVisible(waypointType, route);
-		if (!vis) {
-			return false;
-		}
-		return vis;
+		return app.getAppCustomization().isWaypointGroupVisible(waypointType, route);
 	}
 
 	public boolean isTypeEnabled(int type) {
 		if (type == ALARMS) {
-			return app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(appMode);
+			return settings.SHOW_ROUTING_ALARMS.get() && settings.SHOW_TRAFFIC_WARNINGS.getModeValue(appMode);
 		} else if (type == POI) {
-			return app.getSettings().SHOW_NEARBY_POI.getModeValue(appMode);
+			return settings.SHOW_NEARBY_POI.getModeValue(appMode);
 		} else if (type == FAVORITES) {
-			return app.getSettings().SHOW_NEARBY_FAVORITES.getModeValue(appMode);
+			return settings.SHOW_NEARBY_FAVORITES.getModeValue(appMode);
 		} else if (type == WAYPOINTS) {
-			return app.getSettings().SHOW_WPT.get();
+			return settings.SHOW_WPT.get();
 		}
 		return true;
 	}
@@ -317,7 +328,7 @@ public class WaypointHelper {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
 		if (route != null) {
 			float maxSpeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
-			float delta = whenExceeded ? app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
+			float delta = whenExceeded ? settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
 			return createSpeedAlarm(constants, maxSpeed, lastProjection, delta);
 		}
 		return null;
@@ -326,7 +337,7 @@ public class WaypointHelper {
 	@Nullable
 	public AlarmInfo calculateSpeedLimitAlarm(@NonNull RouteDataObject object, @NonNull Location location, @NonNull SpeedConstants constants, boolean whenExceeded) {
 		float maxSpeed = object.getMaximumSpeed(object.bearingVsRouteDirection(location), appMode.getRouteTypeProfile());
-		float delta = whenExceeded ? app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
+		float delta = whenExceeded ? settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
 		return createSpeedAlarm(constants, maxSpeed, location, delta);
 	}
 
@@ -334,7 +345,7 @@ public class WaypointHelper {
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
 	                                             SpeedConstants sc, boolean showCameras) {
 		float maxSpeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
-		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
+		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, loc, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), loc.getSpeed());
@@ -364,7 +375,7 @@ public class WaypointHelper {
 		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
 			if (loc.getSpeed() > mxspeed + delta) {
 				int speed;
-				if (constants.imperial) {
+				if (constants.getImperial()) {
 					speed = Math.round(mxspeed * 3.6f / 1.6f);
 				} else {
 					speed = Math.round(mxspeed * 3.6f);
@@ -569,51 +580,56 @@ public class WaypointHelper {
 		setLocationPoints(locationPoints, route);
 	}
 
+	public void recalculatePointsAsync(int type, @Nullable OnCompleteCallback callback) {
+		runAsync(() -> recalculatePoints(route, type, locationPoints), callback);
+	}
+
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
+		if (route == null || route.isEmpty()) {
+			return;
+		}
 		boolean all = type == -1;
-		appMode = app.getSettings().getApplicationMode();
-		if (route != null && !route.isEmpty()) {
-			boolean showWaypoints = app.getSettings().SHOW_WPT.get(); // global
-			boolean announceWaypoints = app.getSettings().ANNOUNCE_WPT.get(); // global
+		appMode = settings.getApplicationMode();
+		boolean showWaypoints = settings.SHOW_WPT.get(); // global
+		boolean announceWaypoints = settings.ANNOUNCE_WPT.get(); // global
 
+		if (route.getAppMode() != null) {
+			appMode = route.getAppMode();
+		}
+		boolean showPOI = settings.SHOW_NEARBY_POI.getModeValue(appMode);
+		boolean announcePOI = settings.ANNOUNCE_NEARBY_POI.getModeValue(appMode);
+		boolean showFavorites = settings.SHOW_NEARBY_FAVORITES.getModeValue(appMode);
+		boolean announceFavorites = settings.ANNOUNCE_NEARBY_FAVORITES.getModeValue(appMode);
+
+		if ((type == FAVORITES || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
+			if (showFavorites) {
+				findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
+						announceFavorites);
+				sortList(array);
+			}
+		}
+		if ((type == ALARMS || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
 			if (route.getAppMode() != null) {
-				appMode = route.getAppMode();
+				calculateAlarms(route, array, appMode);
+				sortList(array);
 			}
-			boolean showPOI = app.getSettings().SHOW_NEARBY_POI.getModeValue(appMode);
-			boolean showFavorites = app.getSettings().SHOW_NEARBY_FAVORITES.getModeValue(appMode);
-			boolean announceFavorites = app.getSettings().ANNOUNCE_NEARBY_FAVORITES.getModeValue(appMode);
-			boolean announcePOI = app.getSettings().ANNOUNCE_NEARBY_POI.getModeValue(appMode);
-
-			if ((type == FAVORITES || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
-				if (showFavorites) {
-					findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
-							announceFavorites);
-					sortList(array);
-				}
+		}
+		if ((type == WAYPOINTS || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
+			if (showWaypoints) {
+				findLocationPoints(route, WAYPOINTS, array, app.getAppCustomization().getWaypoints(),
+						announceWaypoints);
+				findLocationPoints(route, WAYPOINTS, array, route.getLocationPoints(), announceWaypoints);
+				sortList(array);
 			}
-			if ((type == ALARMS || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
-				if (route.getAppMode() != null) {
-					calculateAlarms(route, array, appMode);
-					sortList(array);
-				}
-			}
-			if ((type == WAYPOINTS || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
-				if (showWaypoints) {
-					findLocationPoints(route, WAYPOINTS, array, app.getAppCustomization().getWaypoints(),
-							announceWaypoints);
-					findLocationPoints(route, WAYPOINTS, array, route.getLocationPoints(), announceWaypoints);
-					sortList(array);
-				}
-			}
-			if ((type == POI || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
-				if (showPOI) {
-					calculatePoi(route, array, announcePOI);
-					sortList(array);
-				}
+		}
+		if ((type == POI || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
+			if (showPOI) {
+				calculatePoi(route, array, announcePOI);
+				sortList(array);
 			}
 		}
 	}
@@ -657,16 +673,13 @@ public class WaypointHelper {
 
 
 	protected void sortList(List<LocationPointWrapper> list) {
-		Collections.sort(list, new Comparator<LocationPointWrapper>() {
-			@Override
-			public int compare(LocationPointWrapper olhs, LocationPointWrapper orhs) {
-				int lhs = olhs.routeIndex;
-				int rhs = orhs.routeIndex;
-				if (lhs == rhs) {
-					return Float.compare(olhs.deviationDistance, orhs.deviationDistance);
-				}
-				return lhs < rhs ? -1 : 1;
+		Collections.sort(list, (olhs, orhs) -> {
+			int lhs = olhs.routeIndex;
+			int rhs = orhs.routeIndex;
+			if (lhs == rhs) {
+				return Float.compare(olhs.deviationDistance, orhs.deviationDistance);
 			}
+			return lhs < rhs ? -1 : 1;
 		});
 	}
 
@@ -695,7 +708,6 @@ public class WaypointHelper {
 	}
 
 	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array, ApplicationMode mode) {
-		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_ROUTING_ALARMS.getModeValue(mode)) {
 			return;
 		}
@@ -773,5 +785,22 @@ public class WaypointHelper {
 		} else {
 			this.searchDeviationRadius = radius;
 		}
+	}
+
+	private void runAsync(@NonNull Runnable runnable, @Nullable OnCompleteCallback callback) {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... voids) {
+				runnable.run();
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void unused) {
+				if (callback != null) {
+					callback.onComplete();
+				}
+			}
+		});
 	}
 }

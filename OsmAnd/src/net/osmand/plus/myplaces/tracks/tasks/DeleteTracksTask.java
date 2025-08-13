@@ -5,13 +5,15 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
-import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -53,12 +55,13 @@ public class DeleteTracksTask extends AsyncTask<Void, File, Void> {
 			if (isCancelled()) {
 				break;
 			}
-			File file = trackItem.getFile();
+			KFile file = trackItem.getFile();
 			if (file != null && file.exists()) {
 				totalFiles++;
-				if (FileUtils.removeGpxFile(app, file)) {
+				File jFile = SharedUtil.jFile(file);
+				if (FileUtils.removeGpxFile(app, jFile)) {
 					deletedFiles++;
-					publishProgress(file);
+					publishProgress(jFile);
 				}
 			}
 		}
@@ -74,7 +77,7 @@ public class DeleteTracksTask extends AsyncTask<Void, File, Void> {
 				TrackFolder trackFolder = (TrackFolder) tracksGroup;
 				deleteTrackItems(trackFolder.getFlattenedTrackItems());
 
-				File dirFile = trackFolder.getDirFile();
+				File dirFile = SharedUtil.jFile(trackFolder.getDirFile());
 				if (Algorithms.removeAllFiles(dirFile)) {
 					deletedFiles++;
 					publishProgress(dirFile);

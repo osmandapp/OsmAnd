@@ -18,6 +18,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.track.BaseTracksTabsFragment;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.MapUtils;
 
 import java.util.Set;
@@ -26,9 +27,9 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
-	private static final String TRACK_TAB_NAME_KEY = "track_tab_name_key";
+	private static final String TRACK_TAB_ID_KEY = "track_tab_id_key";
 
-	private String trackTabName;
+	private String trackTabId;
 	private TracksAdapter adapter;
 	private RecyclerView recyclerView;
 
@@ -78,11 +79,11 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	@Nullable
 	public TrackTab getTrackTab() {
 		BaseTracksTabsFragment fragment = (BaseTracksTabsFragment) requireParentFragment();
-		return fragment.getTab(trackTabName);
+		return fragment.getTab(trackTabId);
 	}
 
 	public void setTrackTab(@NonNull TrackTab trackTab) {
-		this.trackTabName = trackTab.getTypeName();
+		this.trackTabId = trackTab.getId();
 	}
 
 	@Override
@@ -117,7 +118,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString(TRACK_TAB_NAME_KEY, trackTabName);
+		outState.putString(TRACK_TAB_ID_KEY, trackTabId);
 	}
 
 	@Override
@@ -147,7 +148,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 				if (location == null) {
 					location = app.getLocationProvider().getLastKnownLocation();
 				}
-				adapter.notifyDataSetChanged();
+				adapter.notifyItemRangeChanged(0, adapter.getItemCount());
 			});
 		}
 	}

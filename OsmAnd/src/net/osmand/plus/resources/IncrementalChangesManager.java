@@ -1,5 +1,7 @@
 package net.osmand.plus.resources;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -17,19 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import androidx.annotation.Nullable;
-
 public class IncrementalChangesManager {
+
 	private static final Log LOG = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private static final String URL = "https://osmand.net/check_live";
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(IncrementalChangesManager.class);
@@ -348,7 +342,7 @@ public class IncrementalChangesManager {
 		RegionUpdateFiles ruf = regions.get(fileName.toLowerCase());
 		iul.updateFiles = ruf;
 		if (ruf == null) {
-			iul.errorMessage = resourceManager.getContext().getString(R.string.no_updates_available);
+			iul.errorMessage = resourceManager.getApp().getString(R.string.no_updates_available);
 			return iul;
 		}
 		long timestamp = getTimestamp(ruf);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
 		android:layout_marginRight="@dimen/list_content_padding"
 		android:contentDescription="@string/shared_string_icon"
 		android:visibility="visible"
-		osmand:srcCompat="@drawable/ic_action_split_interval" />
+		app:srcCompat="@drawable/ic_action_split_interval" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -60,7 +60,7 @@
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
 				android:contentDescription="@string/distance"
-				osmand:srcCompat="@drawable/ic_action_distance_16" />
+				app:srcCompat="@drawable/ic_action_distance_16" />
 
 			<TextView
 				android:id="@+id/distance"
@@ -79,7 +79,7 @@
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
 				android:contentDescription="@string/track_points"
-				osmand:srcCompat="@drawable/ic_action_time_moving_16" />
+				app:srcCompat="@drawable/ic_action_time_moving_16" />
 
 			<TextView
 				android:id="@+id/time_interval"

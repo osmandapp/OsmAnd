@@ -8,27 +8,28 @@ import android.util.Pair;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnResultCallback;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
-import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
@@ -42,6 +43,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -52,15 +54,14 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.search.AmenitySearcher;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
 		MapMarkerChangedListener, TargetPointChangedListener {
@@ -335,18 +336,27 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	                    @Nullable PointDescription pointDescription,
 	                    @Nullable Object object,
 	                    boolean update, boolean restorePrevious) {
-
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return false;
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
+		if (!(object instanceof RenderedObject)) {
+			AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
+			AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+			BaseDetailsObject detailsObject = searcher.searchDetailedObject(object, settings);
+			if (detailsObject != null) {
+				object = detailsObject;
+			}
+		}
 
 		Object thisObject = getObject();
 		if (!update && isVisible()) {
 			if (thisObject == null || !thisObject.equals(object)
-					|| (thisObject instanceof Amenity && !((Amenity) thisObject).strictEquals(object))) {
+					|| (thisObject instanceof Amenity amenity && !amenity.strictEquals(object))
+					|| (thisObject instanceof BaseDetailsObject detailsObject
+					&& !detailsObject.getSyntheticAmenity().strictEquals(object))) {
 				hide();
 			} else {
 				return false;
@@ -402,7 +412,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		} else if (object instanceof TargetPoint) {
 			app.getTargetPointsHelper().addPointListener(this);
 		}
-
 		return true;
 	}
 
@@ -431,9 +440,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	                 @Nullable PointDescription pointDescription,
 	                 @Nullable Object object) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && init(latLon, pointDescription, object)) {
-			mapActivity.getMyApplication().logEvent("open_context_menu");
-			showInternal();
+		if (mapActivity != null) {
+			if (init(latLon, pointDescription, object)) {
+				mapActivity.getMyApplication().logEvent("open_context_menu");
+				showInternal();
+			}
 		}
 	}
 
@@ -767,7 +778,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			TopToolbarController toolbarController = mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
 			if (toolbarController instanceof ContextMenuToolbarController) {
-				MenuController menuController = ((ContextMenuToolbarController) toolbarController).getMenuController();
+				MenuController menuController = ((ContextMenuToolbarController) toolbarController).getController();
 				closeToolbar(menuController);
 			}
 		}
@@ -933,7 +944,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (navigateInPedestrianMode()) {
 				mapActivity.getMyApplication().getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
 			}
-			mapActivity.getMapLayers().getMapActionsHelper().navigateButton();
+			mapActivity.getMapActions().navigateButton();
 		}
 	}
 
@@ -967,8 +978,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			} else {
 				String mapObjectName = null;
 				Object object = getObject();
+
+				Amenity amenity = null;
 				if (object instanceof Amenity) {
-					Amenity amenity = (Amenity) object;
+					amenity = (Amenity) object;
+				} else if (object instanceof BaseDetailsObject detailsObject) {
+					amenity = detailsObject.getSyntheticAmenity();
+				}
+				if (amenity != null) {
 					mapObjectName = amenity.getName() + "_" + amenity.getType().getKeyName();
 				}
 				LatLon latLon = getLatLon();
@@ -1047,10 +1064,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public ContextMenuItemClickListener getContextMenuItemClickListener(ContextMenuAdapter menuAdapter) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
 			LatLon latLon = getLatLon();
-			return mapActivity.getMapActions().getContextMenuItemClickListener(latLon.getLatitude(), latLon.getLongitude(), menuAdapter);
+			return activity.getMapActions().getContextMenuItemClickListener(activity, latLon.getLatitude(), latLon.getLongitude(), menuAdapter);
 		}
 		return null;
 	}
@@ -1149,17 +1166,21 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 
 			Amenity amenity = null;
-			Object object = getObject();
-			if (object instanceof Amenity && pointDescription.isPoi()) {
-				amenity = (Amenity) object;
+			if (pointDescription.isPoi()) {
+				Object object = getObject();
+				if (object instanceof Amenity) {
+					amenity = (Amenity) object;
+				} else if (object instanceof BaseDetailsObject detailsObject) {
+					amenity = detailsObject.getSyntheticAmenity();
+				}
 			}
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			boolean forceAddToCurrentTrack = PluginsHelper.isActive(OsmandMonitoringPlugin.class)
-					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack));
+					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack()));
 
 			if (forceAddToCurrentTrack) {
-				GPXFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
+				GpxFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
 					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
@@ -1171,7 +1192,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void addWptPt(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor,
-	                     boolean skipDialog, @Nullable GPXFile gpxFile) {
+	                     boolean skipDialog, @Nullable GpxFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
@@ -1184,8 +1205,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			} else {
 				List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
-					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack())) {
+					GpxFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
 				} else {
 					addNewWptToGPXFile(wptPt, categoryName, categoryColor, skipDialog);
@@ -1207,23 +1228,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
-				@Override
-				public boolean processResult(GPXFile[] result) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						GPXFile gpxFile = result != null && result.length > 0
-								? result[0]
-								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
-						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
-						}
+
+			SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					WptPtEditor wptPtPointEditor = getWptPtPointEditor();
+					if (wptPtPointEditor != null) {
+						wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 					}
-					return true;
 				}
 			};
-			GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
+			SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 		}
 	}
 
@@ -1236,22 +1251,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private void addNewWptToGPXFileImpl(@NonNull MapActivity mapActivity,
 	                                    @Nullable String title, @Nullable Amenity amenity) {
-		GpxUiHelper.selectSingleGPXFile(mapActivity, true, result -> {
+		SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				GPXFile gpxFile;
-				if (result != null && result.length > 0) {
-					gpxFile = result[0];
-				} else {
-					gpxFile = activity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-				}
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
 					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
 				}
 			}
-			return true;
-		});
+		};
+		SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 	}
 
 	@Nullable
@@ -1589,7 +1598,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		});
 	}
 
-	private abstract class MenuAction implements Runnable {
+	private abstract static class MenuAction implements Runnable {
 		protected ProgressDialog dlg;
 	}
 }

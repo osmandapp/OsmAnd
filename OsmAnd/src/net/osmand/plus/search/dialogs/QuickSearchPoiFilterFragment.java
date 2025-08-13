@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +40,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -98,7 +98,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		isLightTheme = getMyApplication().getSettings().isLightContent();
+		isLightTheme = !getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -108,7 +108,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	                         @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		if (getArguments() != null) {
 			filterId = getArguments().getString(QUICK_SEARCH_POI_FILTER_ID_KEY);
@@ -287,9 +287,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 			if (app.getPoiFilters().removePoiFilter(filter)) {
-				Toast.makeText(getContext(),
-						getContext().getString(R.string.edit_filter_delete_message, filter.getName()),
-						Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.edit_filter_delete_message, filter.getName());
 				app.getSearchUICore().refreshCustomPoiFilters();
 				QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
 				quickSearchDialogFragment.reloadCategories();
@@ -335,9 +333,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				nFilter.setSavedFilterByName(filter.getFilterByName());
 			}
 			if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
-				Toast.makeText(getContext(),
-					       getContext().getString(R.string.edit_filter_create_message, filterName),
-					       Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.edit_filter_create_message, filterName);
 				app.getSearchUICore().refreshCustomPoiFilters();
 				QuickSearchDialogFragment fragment = (QuickSearchDialogFragment) getParentFragment();
 				if (fragment != null) {
@@ -777,8 +773,10 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				}
 
 				if (item.iconId != 0) {
-					icon.setImageDrawable(app.getUIUtilities().getIcon(item.iconId,
-							app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.card_and_list_background_light));
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+					icon.setImageDrawable(app.getUIUtilities().getIcon(item.iconId, nightMode
+							? R.color.card_and_list_background_light
+							: R.color.icon_color_default_light));
 					icon.setVisibility(View.VISIBLE);
 				} else {
 					icon.setVisibility(View.GONE);

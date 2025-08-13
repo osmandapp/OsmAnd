@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,13 +17,17 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.data.AnnounceTimeDistances;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
@@ -32,8 +37,6 @@ import java.util.List;
 
 public class LanesWidget extends MapWidget {
 
-	private static final int MAX_METERS_NOT_SPOKEN_TURN = 800;
-	private static final int MAX_METERS_SPOKEN_TURN = 1200;
 	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
 
 	private final RoutingHelper routingHelper;
@@ -43,15 +46,17 @@ public class LanesWidget extends MapWidget {
 	private final TextView lanesShadowText;
 
 	private final LanesDrawable lanesDrawable;
+	private AnnounceTimeDistances timeDistances;
 
 	private int cachedDist;
 	private int shadowRadius;
+	boolean specialPosition;
 
-	public LanesWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, LANES);
+	public LanesWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@Nullable WidgetsPanel panel) {
+		super(mapActivity, LANES, customId, panel);
 
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-
 		lanesImage = view.findViewById(R.id.map_lanes);
 		lanesText = view.findViewById(R.id.map_lanes_dist_text);
 		lanesShadowText = view.findViewById(R.id.map_lanes_dist_text_shadow);
@@ -95,28 +100,45 @@ public class LanesWidget extends MapWidget {
 			NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 			RouteDirectionInfo routeDirectionInfo = directionInfo != null ? directionInfo.directionInfo : null;
 			TurnType turnType = routeDirectionInfo != null ? routeDirectionInfo.getTurnType() : null;
-			boolean tooFar = (turnType != null)
-					&& (directionInfo.distanceTo > MAX_METERS_NOT_SPOKEN_TURN && turnType.isSkipToSpeak()
-					|| directionInfo.distanceTo > MAX_METERS_SPOKEN_TURN);
 
-			if (turnType != null && !tooFar) {
+			if (timeDistances == null || timeDistances.getAppMode() != routingHelper.getAppMode()) {
+				timeDistances = new AnnounceTimeDistances(routingHelper.getAppMode(), getMyApplication());
+			}
+			if (directionInfo != null && turnType != null &&
+					!timeDistances.tooFarToDisplayLanes(turnType, directionInfo.distanceTo)) {
 				lanes = directionInfo.directionInfo.getTurnType().getLanes();
 				imminent = directionInfo.imminent;
 				distance = directionInfo.distanceTo;
 			}
 		}
 
-		boolean visible = lanes != null && lanes.length > 0
-				&& !MapRouteInfoMenu.chooseRoutesVisible
-				&& !MapRouteInfoMenu.waypointsVisible
-				&& !MapRouteInfoMenu.followTrackVisible
-				&& !mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
+		boolean visible = lanes != null && lanes.length > 0 && !shouldHide();
 		if (visible) {
 			updateLanes(lanes, imminent, distance);
 		}
 
-		AndroidUiHelper.updateVisibility(view, visible);
+		updateVisibility(visible);
+	}
+
+	protected boolean shouldHide() {
+		return MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible ||
+				MapRouteInfoMenu.followTrackVisible || visibilityHelper.shouldHideVerticalWidgets()
+				|| panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets();
+	}
+
+	@Override
+	public boolean updateVisibility(boolean visible) {
 		AndroidUiHelper.updateVisibility(lanesShadowText, visible && shadowRadius > 0);
+		boolean updatedVisibility = super.updateVisibility(visible);
+
+		if (specialPosition && updatedVisibility) {
+			ViewGroup specialContainer = getSpecialContainer();
+			specialContainer.removeAllViews();
+			if (visible) {
+				specialContainer.addView(view);
+			}
+		}
+		return updatedVisibility;
 	}
 
 	private void updateLanes(@NonNull int[] lanes, int imminent, int distance) {
@@ -138,7 +160,7 @@ public class LanesWidget extends MapWidget {
 				lanesText.setText("");
 			} else {
 				String formattedDistance = OsmAndFormatter.getFormattedDistance(distance, app,
-						OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+						OsmAndFormatterParams.USE_LOWER_BOUNDS);
 				lanesText.setText(formattedDistance);
 				lanesShadowText.setText(formattedDistance);
 			}
@@ -158,13 +180,12 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-	                       @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
+			@NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
-		specialContainer.removeAllViews();
-
-		boolean specialPosition = followingWidgets.isEmpty();
+		specialPosition = panel == WidgetsPanel.TOP && followingWidgets.isEmpty();
 		if (specialPosition) {
+			specialContainer.removeAllViews();
 			specialContainer.addView(view);
 		} else {
 			container.addView(view);
@@ -172,10 +193,10 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
-		super.detachView(widgetsPanel);
+	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+		super.detachView(widgetsPanel, widgets, mode);
 		// Clear in case link to previous view of LanesWidget is lost
-		getSpecialContainer().removeAllViews();
+		getSpecialContainer().removeView(view);
 	}
 
 	@NonNull

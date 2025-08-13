@@ -9,7 +9,6 @@ import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.settings.controllers.BatteryOptimizationController.isIgnoringBatteryOptimizations;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -29,8 +28,12 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorTrackDataType;
@@ -48,7 +51,12 @@ import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -63,8 +71,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
 	private static final String EXTERNAL_SENSORS = "open_sensor_settings";
+	private static final String PRESELECTED_ROUTE_ACTIVITY = "current_track_route_activity";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
+	private static final String RECORD_OBD_DATA_PROMO = "record_obd_data_promo";
+	private static final String RECORD_OBD_DATA = "record_obd_data";
 
+	private RouteActivitySelectionHelper routeActivitySelectionHelper;
 	boolean showSwitchProfile;
 
 	@Override
@@ -111,7 +123,9 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 		setupTrackStorageDirectoryPref();
 		setupExternalSensorsPref();
+		setupPreselectedRouteActivityPref();
 		setupShowTripRecNotificationPref();
+		setupObdRecordingPref();
 		setupLiveMonitoringPref();
 
 		setupOpenNotesDescrPref();
@@ -256,6 +270,34 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
+	public void setupObdRecordingPref() {
+		Preference preference = findPreference(RECORD_OBD_DATA);
+
+		@ColorRes int iconColor = isNightMode() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+		int iconId = R.drawable.ic_action_car_info;
+		Drawable prefIcon = getIcon(iconId, iconColor);
+		String summary = app.getString(R.string.shared_string_none);
+
+		VehicleMetricsPlugin plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
+		if (plugin != null) {
+			List<String> enabledCommands = plugin.getTRIP_RECORDING_VEHICLE_METRICS().getStringsListForProfile(getSelectedAppMode());
+			if (!Algorithms.isEmpty(enabledCommands)) {
+				summary = String.valueOf(enabledCommands.size());
+				prefIcon = getActiveIcon(iconId);
+			}
+		}
+		preference.setSummary(summary);
+
+		Preference promo = findPreference(RECORD_OBD_DATA_PROMO);
+
+		boolean purchased = InAppPurchaseUtils.isVehicleMetricsAvailable(app);
+		preference.setVisible(purchased && PluginsHelper.isEnabled(VehicleMetricsPlugin.class));
+		promo.setVisible(!purchased);
+
+		preference.setIcon(prefIcon);
+		promo.setIcon(getContentIcon(iconId));
+	}
+
 	private void setupTrackStorageDirectoryPref() {
 		Integer[] entryValues = {REC_DIRECTORY, MONTHLY_DIRECTORY};
 		String[] entries = new String[entryValues.length];
@@ -275,8 +317,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		if (openExternalSensors != null) {
 			if (PluginsHelper.isEnabled(ExternalSensorsPlugin.class)) {
 				openExternalSensors.setVisible(true);
-				setPreferenceVisible("logging_data", true);
-				setPreferenceVisible("logging_data_divider", true);
 				List<String> linkedSensorNames = getLinkedSensorNames();
 				if (linkedSensorNames.isEmpty()) {
 					@ColorRes int iconColor = isNightMode() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
@@ -293,6 +333,24 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 					}
 					openExternalSensors.setSummary(summary);
 				}
+			}
+		}
+	}
+
+	private void setupPreselectedRouteActivityPref() {
+		Preference preference = findPreference(PRESELECTED_ROUTE_ACTIVITY);
+		if (preference != null) {
+			ApplicationMode selectedAppMode = getSelectedAppMode();
+			String selectedId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
+			RouteActivityHelper helper = app.getRouteActivityHelper();
+			RouteActivity activity = helper.findRouteActivity(selectedId);
+			if (activity != null) {
+				int iconId = AndroidUtils.getActivityIconId(app, activity);
+				preference.setIcon(getContentIcon(iconId));
+				preference.setSummary(activity.getLabel());
+			} else {
+				preference.setIcon(getContentIcon(R.drawable.ic_action_activity));
+				preference.setSummary(getString(R.string.shared_string_none));
 			}
 		}
 	}
@@ -351,8 +409,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 		int startIndex = tracksPathDescr.indexOf(tracksPath);
 		SpannableString titleSpan = new SpannableString(tracksPathDescr);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
-		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + tracksPath.length(), 0);
+		titleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, startIndex + tracksPath.length(), 0);
 
 		Preference openTracksDescription = findPreference("open_tracks_description");
 		openTracksDescription.setTitle(titleSpan);
@@ -427,8 +484,46 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			if (mapActivity != null) {
 				BatteryOptimizationController.showDialog(mapActivity, false, null);
 			}
+		} else if (PRESELECTED_ROUTE_ACTIVITY.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				SelectRouteActivityController.showDialog(mapActivity, getSelectedAppMode(), getRouteActivitySelectionHelper());
+			}
+		} else if (RECORD_OBD_DATA_PROMO.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.VEHICLE_METRICS);
+			}
+		} else if (RECORD_OBD_DATA.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				VehicleMetricsRecordingFragment.showInstance(mapActivity, this, getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@NonNull
+	private RouteActivitySelectionHelper getRouteActivitySelectionHelper() {
+		if (routeActivitySelectionHelper == null) {
+			SelectRouteActivityController controller = SelectRouteActivityController.getExistedInstance(app);
+			if (controller != null) {
+				routeActivitySelectionHelper = controller.getRouteActivityHelper();
+			}
+			if (routeActivitySelectionHelper == null) {
+				RouteActivityHelper helper = app.getRouteActivityHelper();
+				routeActivitySelectionHelper = new RouteActivitySelectionHelper();
+				ApplicationMode selectedAppMode = getSelectedAppMode();
+				String selectedId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
+				RouteActivity selected = helper.findRouteActivity(selectedId);
+				routeActivitySelectionHelper.setSelectedActivity(selected);
+			}
+		}
+		routeActivitySelectionHelper.setActivitySelectionListener(newRouteActivity -> {
+			String id = newRouteActivity != null ? newRouteActivity.getId() : "";
+			onPreferenceChange(requirePreference(PRESELECTED_ROUTE_ACTIVITY), id);
+		});
+		return routeActivitySelectionHelper;
 	}
 
 	@Override

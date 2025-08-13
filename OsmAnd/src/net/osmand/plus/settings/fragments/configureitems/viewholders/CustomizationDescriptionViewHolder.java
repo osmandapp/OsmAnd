@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments.configureitems.viewholders;
 
-import android.graphics.Typeface;
+
 import android.text.SpannableString;
 import android.view.View;
 import android.widget.TextView;
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -35,8 +35,7 @@ public class CustomizationDescriptionViewHolder extends RecyclerView.ViewHolder 
 			PluginsFragment.showInstance(activity.getSupportFragmentManager());
 			return true;
 		});
-		Typeface typeface = FontCache.getRobotoMedium(activity);
-		UiUtilities.setSpan(spannable, new CustomTypefaceSpan(typeface), text, plugins);
+		UiUtilities.setSpan(spannable, new CustomTypefaceSpan(FontCache.getMediumFont()), text, plugins);
 		UiUtilities.setupClickableText(description, spannable, nightMode);
 	}
 }

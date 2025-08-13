@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
-import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -117,11 +117,11 @@ public class SegmentsCard extends MapBaseCard {
 		if (gpxPoint != null) {
 			for (GpxDisplayItem item : displayItems) {
 				TrkSegment segment = GPXItemPagerAdapter.getSegmentForAnalysis(item, item.analysis);
-				if (segment != null && (segment.points.contains(gpxPoint.getSelectedPoint())
-						|| segment.points.contains(gpxPoint.getPrevPoint())
-						&& segment.points.contains(gpxPoint.getNextPoint()))) {
+				if (segment != null && (segment.getPoints().contains(gpxPoint.getSelectedPoint())
+						|| segment.getPoints().contains(gpxPoint.getPrevPoint())
+						&& segment.getPoints().contains(gpxPoint.getNextPoint()))) {
 					item.locationOnMap = gpxPoint.getSelectedPoint();
-					listener.onPointSelected(segment, item.locationOnMap.lat, item.locationOnMap.lon);
+					listener.onPointSelected(segment, item.locationOnMap.getLat(), item.locationOnMap.getLon());
 				}
 			}
 		}
@@ -154,7 +154,7 @@ public class SegmentsCard extends MapBaseCard {
 			}
 			AndroidUiHelper.updateVisibility(holder.title, !Algorithms.isBlank(displayItem.trackSegmentName));
 
-			GPXItemPagerAdapter adapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, listener, nightMode, true);
+			GPXItemPagerAdapter adapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, listener, nightMode, true, mapActivity);
 			holder.pager.setAdapter(adapter);
 			holder.tabLayout.setViewPager(holder.pager);
 

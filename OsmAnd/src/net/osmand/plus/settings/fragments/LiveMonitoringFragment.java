@@ -70,7 +70,7 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 			if (Algorithms.isValidMessageFormat((String) newValue)) {
 				return super.onPreferenceChange(preference, newValue);
 			} else {
-				Toast.makeText(app, R.string.wrong_format, Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.wrong_format);
 				return false;
 			}
 		}

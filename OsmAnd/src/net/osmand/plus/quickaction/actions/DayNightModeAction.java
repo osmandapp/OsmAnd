@@ -3,12 +3,14 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.DAY_NIGHT_MODE_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.enums.DayNightMode;
@@ -16,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 
 public class DayNightModeAction extends QuickAction {
 
@@ -29,8 +32,8 @@ public class DayNightModeAction extends QuickAction {
 	public DayNightModeAction(QuickAction quickAction) {super(quickAction);}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		if (mapActivity.getMyApplication().getDaynightHelper().isNightMode()) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
+		if (mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP)) {
 			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
 		} else {
 			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.NIGHT);
@@ -48,16 +51,14 @@ public class DayNightModeAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity
-			&& ((MapActivity) context).getMyApplication().getDaynightHelper().isNightMode()) {
-			return R.drawable.ic_action_map_day;
-		}
-		return R.drawable.ic_action_map_night;
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		return nightMode ? R.drawable.ic_action_map_day : R.drawable.ic_action_map_night;
 	}
 
 	@Override
 	public String getActionText(@NonNull OsmandApplication app) {
-		if (app.getDaynightHelper().isNightMode()) {
+		if (app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP)) {
 			return String.format(app.getString(R.string.quick_action_day_night_mode),
 				DayNightMode.DAY.toHumanString(app));
 		} else {

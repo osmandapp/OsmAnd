@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.Limits;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.containers.Assets;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
@@ -37,7 +37,7 @@ public abstract class VehicleSizes {
 
 	protected abstract void collectSizesData();
 
-	protected void add(@NonNull SizeType type, @NonNull Assets assets, @NonNull Limits limits) {
+	protected void add(@NonNull SizeType type, @NonNull Assets assets, @NonNull Limits<Float> limits) {
 		sizes.put(type, new SizeData(assets, limits));
 	}
 
@@ -153,7 +153,7 @@ public abstract class VehicleSizes {
 	@NonNull
 	private List<Float> collectProposedValues(@NonNull SizeType type, @NonNull Metric metric) {
 		SizeData data = getSizeData(type);
-		Limits limits = data.getLimits();
+		Limits<Float> limits = data.limits();
 		if (type == SizeType.WEIGHT) {
 			limits = VehicleAlgorithms.convertWeightLimitsByMetricSystem(
 					limits, metric.getWeightMetric(), useKilogramsInsteadOfTons());

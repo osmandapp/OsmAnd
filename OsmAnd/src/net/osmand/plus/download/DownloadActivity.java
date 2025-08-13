@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.download.DownloadActivityType.NORMAL_FILE;
 import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
@@ -28,6 +29,7 @@ import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.dialogs.LocalCategoriesFragment;
@@ -44,7 +46,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
+import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -319,6 +321,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant.unlockEvents();
 	}
 
+	@Override
+	public void downloadingError(@NonNull String error) {
+		if (Algorithms.stringsEqual(error, DownloadValidationManager.getFreeVersionMessage(app))) {
+			ChoosePlanFragment.showInstance(this, UNLIMITED_MAP_DOWNLOADS);
+		}
+	}
 
 	@Override
 	@UiThread

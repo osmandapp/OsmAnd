@@ -2,6 +2,7 @@ package net.osmand.plus.dialogs;
 
 import static net.osmand.osm.OsmRouteType.SKI;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -64,6 +64,8 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	private TreeMap<String, String> stylesMap;
 	private String selectedStyle;
+	@Nullable
+	private SelectStyleListener selectStyleListener;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -140,7 +142,17 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (mapActivity == null) {
 			return;
 		}
-		OsmandApplication app = getMyApplication();
+
+		setStyle(mapActivity, selectedStyle);
+
+		if (selectStyleListener != null) {
+			selectStyleListener.onMapStyleSelected();
+		}
+		dismiss();
+	}
+
+	public static void setStyle(@NonNull MapActivity mapActivity, @NonNull String selectedStyle) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(selectedStyle);
 		if (loaded != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
@@ -155,9 +167,8 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			DashboardOnMap dashboard = mapActivity.getDashboard();
 			dashboard.refreshContent(false);
 		} else {
-			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.renderer_load_exception);
 		}
-		dismiss();
 	}
 
 	@Override
@@ -266,9 +277,18 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		showInstance(fragmentManager, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable SelectStyleListener selectStyleListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectMapStyleBottomSheetDialogFragment fragment = new SelectMapStyleBottomSheetDialogFragment();
+			fragment.selectStyleListener = selectStyleListener;
 			fragment.show(fragmentManager, TAG);
 		}
+	}
+
+	public interface SelectStyleListener {
+		void onMapStyleSelected();
 	}
 }

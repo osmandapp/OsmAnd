@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -45,7 +46,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		int themeRes = !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, null);
 		view.setOnClickListener(v -> dismiss());
@@ -124,7 +126,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			@Override
 			public void onGlobalLayout() {
 				Activity activity = getActivity();
-				boolean nightMode = !getMyApplication().getSettings().isLightContent();
+				boolean nightMode = requiredMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 				int allowedHeight = getAllowedHeight();
 
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {

@@ -89,7 +89,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (DIALOGS_AND_NOTIFICATIONS_PREF_ID.equals(prefId)) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
-				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_DOWNLOAD_MAP_DIALOG.get());
+				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_SUGGEST_MAP_DIALOG.get());
 				imageView.setEnabled(enabled);
 			}
 		} else if (SEND_UNIQUE_USER_IDENTIFIER_PREF_ID.equals(prefId)) {
@@ -179,7 +179,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				SpeedCamerasBottomSheet.showInstance(manager, this);
+				SpeedCamerasBottomSheet.showInstance(manager, this, getSelectedAppMode(), false);
 			}
 		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
 			FragmentManager manager = getFragmentManager();
@@ -211,7 +211,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupPreferredLocalePref() {
 		boolean visible = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU;
-		ListPreferenceEx preference = findPreference(settings.PREFERRED_LOCALE.getId());
+		ListPreferenceEx preference = requirePreference(settings.PREFERRED_LOCALE.getId());
 		preference.setVisible(visible);
 		if (visible) {
 			preference.setIcon(getContentIcon(R.drawable.ic_action_map_language));
@@ -224,7 +224,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			preference.setEntryValues(languagesIds);
 
 			// Add " (Display language)" to menu title in Latin letters for all non-en languages
-			if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
+			if (!getString(R.string.preferred_locale).equals(getString(R.string.preferred_locale_no_translate))) {
 				preference.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 			}
 		}
@@ -275,7 +275,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupDialogsAndNotificationsPref() {
 		boolean showStartupMessages = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get();
-		boolean showDownloadMapDialog = settings.SHOW_DOWNLOAD_MAP_DIALOG.get();
+		boolean showDownloadMapDialog = settings.SHOW_SUGGEST_MAP_DIALOG.get();
 		String summary;
 		if (showStartupMessages && showDownloadMapDialog) {
 			summary = getString(R.string.shared_string_all);

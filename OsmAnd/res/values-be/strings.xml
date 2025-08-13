@@ -29,7 +29,6 @@
     <string name="driving_region_us">ЗША</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Еўропа, Азія, Лацінская Амерыка ды іншыя</string>
-    <string name="driving_region_uk">Вялікабрытанія, Індыія ды іншыя</string>
     <string name="speak_title">Агалошваць…</string>
     <string name="speak_descr">Наладжванне агалошвання назваў вуліц, дарожных апавяшчэнняў (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасцярог пра камеры хуткасці, абмежаванні хуткасці.</string>
     <string name="speak_street_names">Назвы вуліц (TTS)</string>
@@ -1203,7 +1202,6 @@
     <string name="rendering_attr_buildings15zoom_name">Будынкі на маштабе 15</string>
     <string name="rendering_attr_moreDetailed_name">Больш падрабязна</string>
     <string name="rendering_attr_lessDetailed_name">Менш падрабязна</string>
-    <string name="rendering_attr_hideAccess_name">Абмежаванні доступу</string>
     <string name="rendering_attr_showAccess_name">Паказаць абмежаванні доступу і аплату</string>
     <string name="rendering_attr_showSurfaceGrade_name">Адлюстроўваць якасць дарог</string>
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцця</string>
@@ -1988,7 +1986,7 @@
     <string name="shared_string_change">Змяніць</string>
     <string name="get_started">Пачаць</string>
     <string name="routing_attr_short_way_name">Паліўна-ашчадны маршрут</string>
-    <string name="replace_favorite_confirmation">Вы сапраўды хочаце замяніць улюбёную мясціну %1$s\?</string>
+    <string name="replace_favorite_confirmation">Вы сапраўды хочаце замяніць улюбёную мясціну %1$s?</string>
     <string name="update_all_maps_now">Абнавіць усе мапы зараз?</string>
     <string name="clear_tile_data">Ачысціць кэш сеціўных мапаў</string>
     <string name="skip_map_downloading">Прамінуць спампоўванне мапаў</string>
@@ -2052,7 +2050,6 @@
     <string name="route_roundabout_short">Збочце на %1$d з’ездзе</string>
     <string name="upload_poi">Запампаваць POI</string>
     <string name="search_map_hint">Горад ці краіна</string>
-    <string name="wiki_around">Блізкія артыкулы ў Вікіпедыі</string>
     <string name="rendering_value_fine_name">Вельмі тонкі</string>
     <string name="rendering_attr_contourColorScheme_description">Каляровая схема гарызанталяў</string>
     <string name="save_track_min_speed">Мінімальная хуткасць для запісу</string>
@@ -2391,7 +2388,7 @@
     <string name="shared_string_to">Да</string>
     <string name="mapillary_menu_date_from">Ад</string>
     <string name="mapillary_menu_descr_dates">Паказваць толькі дададзеныя выявы</string>
-    <string name="mapillary_menu_title_dates">Дата</string>
+    <string name="shared_string_date">Дата</string>
     <string name="mapillary_menu_edit_text_hint">Увядзіце імя карыстальніка</string>
     <string name="mapillary_menu_descr_username">Паглядзець толькі выявы, дададзеныя</string>
     <string name="mapillary_menu_title_username">Імя карыстальніка</string>
@@ -3682,25 +3679,7 @@
 \nПадпіска аўтаматычна працягваецца, калі вы не скасуеце яе да даты працягу. З вашага рахунку будзе адзін раз спаганяцца аплата за перыяд працягу (месяц/тры месяцы/год).
 \n
 \nВы можаце кіраваць падпіскамі і скасоўваць іх у наладах Google Play.</string>
-    <string name="release_3_7">• Новыя лакальныя мапы схілаў
-\n
-\n • Поўнае наладжванне ўлюбёных пунктаў і пунктаў шляху GPX: адвольныя колеры, значкі, формы
-\n
-\n • Змена парадку элементаў у кантэкстным меню, наладах мапы і панэлі
-\n
-\n • Вікіпедыя як асобны пласт у наладах мапы, магчыма абраць толькі патрэбныя мовы
-\n
-\n • Можна стварыць адвольны фільтр POI/мапы
-\n
-\n • Дададзены параметры для аднаўлення налад профіляў карыстальніка
-\n
-\n • Поўныя GPX-маршруты ў навігацыі з падтрымкай палос руху і падрабязнымі інструкцыямі паваротаў
-\n
-\n • Выпраўлены памеры інтэрфейсу на планшэтах
-\n
-\n • Выпраўлены памылкі для моў, якія пішуцца справа ўлева
-\n
-\n</string>
+    <string name="release_3_7">• Новыя лакальныя мапы схілаў \n \n • Поўнае наладжванне ўлюбёных пунктаў і пунктаў шляху GPX: адвольныя колеры, значкі, формы \n \n • Змена парадку элементаў у кантэкстным меню, наладах мапы і панэлі \n \n • Вікіпедыя як асобны пласт у наладах мапы, магчыма абраць толькі патрэбныя мовы \n \n • Можна стварыць адвольны фільтр POI/мапы \n \n • Дададзены параметры для аднаўлення налад профіляў карыстальніка \n \n • Поўныя GPX-маршруты ў навігацыі з падтрымкай палос руху і падрабязнымі інструкцыямі паваротаў \n \n • Выпраўлены памеры інтэрфейсу на планшэтах \n \n • Выпраўлены памылкі для моў, якія пішуцца справа ўлева \n \n</string>
     <string name="unsupported_type_error">Непадтрымліваемы тып</string>
     <string name="width_limit_description">Пазначце шырыню аўтамабіля, для шырокіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
     <string name="height_limit_description">Пазначце вышыню аўтамабіля, для высокіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
@@ -3797,7 +3776,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Калі ласка, пачакайце.
 \nГрафік будзе даступны пасля пераразліку маршруту.</string>
     <string name="shared_string_local_maps">Лакальныя мапы</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Выгоды</string>
     <string name="icon_group_special">Адмысловыя</string>
     <string name="icon_group_transport">Транспарт</string>
@@ -3832,9 +3810,6 @@
     <string name="osm_edit_comment_note">Каментаваць нататку OSM</string>
     <string name="osm_login_descr">Увайдзіце з дапамогай OAuth або імя карыстальніка і пароля для OSM.</string>
     <string name="shared_string_add_photo">Дадаць фотаздымак</string>
-    <string name="register_on_openplacereviews">Зарэгістравацца на
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Фотаздымкі падаюцца праектам з адкрытымі данымі OpenPlaceReviews.org. Каб запампаваць фотаздымкі, зарэгіструйцеся на іх сайце.</string>
     <string name="register_opr_create_new_account">Стварыць акаўнт</string>
     <string name="register_opr_have_account">У мяне ўжо ёсць акаўнт</string>
     <string name="shared_string_search_history">Гісторыя пошуку</string>
@@ -3851,13 +3826,8 @@
     <string name="select_groups_for_import">Абярыце групы, якія трэба імпартаваць.</string>
     <string name="select_items_for_import">Абярыце элементы, якія трэба імпартаваць.</string>
     <string name="add_to_mapillary">Дадаць да Mapillary</string>
-    <string name="add_to_opr">Дадаць да OpenPlaceReviews</string>
     <string name="use_dev_url_descr">Пераключыцца на выкарыстанне dev.openstreetmap.org замест openstreetmap.org для тэставання адпраўлення нататак OSM / POI / GPX.</string>
     <string name="use_dev_url">Выкарыстоўваць dev.openstreetmap.org</string>
-    <string name="add_photos_descr">OsmAnd паказвае фотаздымкі з некалькіх крыніц;
-\nOpenPlaceReviews - фотаздымкі POI;
-\nMapillary - выявы вуліц;
-\nWeb / Wikimedia - фотаздымкі POI паводле даных з OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Лёгкі самалёт</string>
     <string name="plan_route_split_before">Падзяліць да</string>
@@ -3949,12 +3919,6 @@
     <string name="uploaded_count">Адпраўлена %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Абярыце змены для адпраўлення</string>
     <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Контурныя лініі</string>
-    <string name="open_place_reviews_plugin_description">Рабіце ўнёскі у праект OpenPlaceReviews, напрыклад фатаграфіі, агляды або спасылкі на грамадскія месцы (рэстараны, гасцініцы або музеі).
-\n
-\nЗнайсці інструкцыі можна на нашым сайце %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Выкарыстаць test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Увайсці ў OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вада</string>
     <string name="activity_type_winter_name">Зіма</string>
     <string name="activity_type_snowmobile_name">Снегаход</string>
@@ -4075,7 +4039,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Ізабары</string>
     <string name="routing_attr_avoid_highway_name">Пазбягаць аўтамагісрталяў</string>
     <string name="routing_attr_avoid_highway_description">Пазбягаць аўтамагісрталяў</string>
-    <string name="map_widget_trip_recording_distance">Адлегласць</string>
+    <string name="map_widget_distance">Адлегласць</string>
     <string name="routing_attr_hazmat_category_name">Катэгорыя небяспечнасці</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без абмежаванняў)</string>
     <string name="routing_attr_avoid_fords_description">Пазбягаць бродаў</string>
@@ -4126,27 +4090,7 @@
     <string name="snackbar_page_removed">«Старонка %1$s» была выдалена.</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сыходзіць з трасы</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Толькі пры неабходнасці</string>
-    <string name="release_4_0">• Воблачнае рэзервовае капіяванне
-\n
-\n • Дададзены начны рэжым для стылю мапы «Topo»
-\n
-\n • Дададзена магчымасць загрузкі контурных ліній у футах
-\n
-\n • Сляды цяпер можна афарбоўваць паводле вышыні, хуткасці або нахілу
-\n
-\n • Абноўлена дыялогавае акно «Запіс паездкі»
-\n
-\n • Адлегласць націскам перанесена з радыуснай лінейкі ў асобны варыянт
-\n
-\n • Планаванне маршруту: цяпер вы можаце змяняць параметры навігацыі, атрымаць доступ да канфігурацыі мапы і шукаць, не пакідаючы планавання маршруту
-\n
-\n • Новы экран «Пакупкі» з падрабязнай інфармацыяй аб куплі
-\n
-\n • Дададзеная магчымасць змены выгляду лініі маршруту
-\n
-\n • Абнаўленні OsmAnd Live перамешчаны ў «Спампоўкі &gt; Абнаўленні»
-\n
-\n</string>
+    <string name="release_4_0">• Воблачнае рэзервовае капіяванне \n \n • Дададзены начны рэжым для стылю мапы «Topo» \n \n • Дададзена магчымасць загрузкі контурных ліній у футах \n \n • Сляды цяпер можна афарбоўваць паводле вышыні, хуткасці або нахілу \n \n • Абноўлена дыялогавае акно «Запіс паездкі» \n \n • Адлегласць націскам перанесена з радыуснай лінейкі ў асобны варыянт \n \n • Планаванне маршруту: цяпер вы можаце змяняць параметры навігацыі, атрымаць доступ да канфігурацыі мапы і шукаць, не пакідаючы планавання маршруту \n \n • Новы экран «Пакупкі» з падрабязнай інфармацыяй аб куплі \n \n • Дададзеная магчымасць змены выгляду лініі маршруту \n \n • Абнаўленні OsmAnd Live перамешчаны ў «Спампоўкі &gt; Абнаўленні» \n \n</string>
     <string name="release_4_1">• Дададзена пачатковая падтрымка Android Auto
 \n
 \n • Абнаўленне карыстальніцкага інтэрфейсу для пошуку каардынатаў UTM
@@ -4172,19 +4116,7 @@
 \n • Выпраўленыя розныя праблемы з маршрутызацыяй
 \n
 \n</string>
-    <string name="release_4_0_beta">• Дададзена магчымасць загрузкі контурных ліній у футах
-\n
-\n • Планаванне маршруту: для пераключэння паміж кропкамі або графікамі былі дададзеныя ўкладкі
-\n
-\n • Абнаўленні OsmAnd Live перамешчаны ў «Спампоўкі &gt; Абнаўленні»
-\n
-\n • Слядз цяпер можна афарбоўваць паводле вышыні, хуткасці або нахілу.
-\n
-\n • Дададзена магчымасць змены выгляду лініі маршруту.
-\n
-\n • Абноўлена дыялогавае акно «Запіс паездкі».
-\n
-\n</string>
+    <string name="release_4_0_beta">• Дададзена магчымасць загрузкі контурных ліній у футах \n \n • Планаванне маршруту: для пераключэння паміж кропкамі або графікамі былі дададзеныя ўкладкі \n \n • Абнаўленні OsmAnd Live перамешчаны ў «Спампоўкі &gt; Абнаўленні» \n \n • Слядз цяпер можна афарбоўваць паводле вышыні, хуткасці або нахілу. \n \n • Дададзена магчымасць змены выгляду лініі маршруту. \n \n • Абноўлена дыялогавае акно «Запіс паездкі». \n \n</string>
     <string name="shared_storage_warning_description">З-за новых правілаў Android з лістапада 2021 года OsmAnd 4.2 страціць доступ да агульнага сховішча.
 \n
 \nКалі ласка, перамясціце каталог з данымі з агульнага сховішча ў даступнае сховішча, інакш праграма страціць доступ да вашых даных, такіх як аўтаномныя мапы, дарожкі GPX і г.д.</string>
@@ -4239,8 +4171,7 @@
     <string name="routeInfo_tracktype_description">Расфарбуйце трасу або след паводле тыпу паверхні. Звычайна ўжываецца, калі дарожная сетка ў асноўным грунтовая.</string>
     <string name="simulation_preview_mode_desc">Хуткасць мадэлявання будзе максімальнай на прамых участках і запавольвацца толькі на скрыжаваннях.</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Расфарбоўвайце маршруты ў адпаведнасці з іх індывідуальным лакальным колерам і сімвалам на турыстычных указальніках (калі прысутнічаюць на OpenStreetMap) .</string>
-    <string name="shared_storage_first_step">Націсніце «%1$s».
-\nПасля чаго адкрыецца файлавы менеджэр, дзе трэба знайсці і адкрыць каталог osmand.</string>
+    <string name="shared_storage_first_step">Націсніце «%1$s». \nПасля чаго адкрыецца файлавы менеджэр, дзе трэба знайсці і адкрыць каталог osmand.</string>
     <string name="enough_contributions_descr">Віншуем, вы ўнеслі дастатковую колькасць змен у OpenStreetMap і цяпер можаце атрымліваць асалоду ад неабмежаванай колькасці абнаўленняў мапы ў OsmAnd!</string>
     <string name="failed_loading_predefined_engines">Немагчыма загрузіць спіс прадвызначаных шаблонаў.
 \nПраверце падключэнне да інтэрнэту.</string>
@@ -4427,9 +4358,9 @@
     <string name="routing_attr_carriage_restrictions_description">Улічваць дазволы на доступу для гужавых транспартных сродкаў</string>
     <string name="add_group_to_markers">Дадаць групу ў спіс адзнак</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедыя і Wikivoyage ў аўтаномным рэжыме</string>
-    <string name="delete_history_items">Выдаліць %1$s элемент(аў) гісторыі\?</string>
+    <string name="delete_history_items">Выдаліць %1$s элемент(аў) гісторыі?</string>
     <string name="folder_access_denied">Патрабуецца дазвол на доступ да выбранага каталога.</string>
-    <string name="delete_history_items_descr">Выдаліць вылучаныя элементы гісторыі\?</string>
+    <string name="delete_history_items_descr">Выдаліць вылучаныя элементы гісторыі?</string>
     <string name="routeInfo_horse_scale_name">Складанасць конных сцежак</string>
     <string name="transparent_status_bar">Празрыстая панэль стану</string>
     <string name="save_as_copy">Захаваць як копію</string>
@@ -5123,4 +5054,24 @@
     <string name="distance_during_navigation_description">Выберыце спосаб адлюстравання інфармацыі аб адлегласці ў віджэтах навігацыі (адлегласць да пункту прызначэння, наступнага павароту, паласы).
 \n
 \n Выберыце «%1$s» для дакладных лічбаў або «%2$s» для больш зручнай чытальнасці.</string>
+    <string name="display_distance_to_first_intermediate">Паказаць дэталі маршрута да наступнага прыпынку</string>
+    <string name="display_distance_to_first_intermediate_summary">Спачатку паказаць час і адлегласць да наступнага прыпынку. Выключыць, каб заўсёды паказваць дэталі для пункта прызначэння.</string>
+    <string name="av_audio_sample_rate_descr">Абраць частату дыскрэтызацыі аўдыё.</string>
+    <string name="auto_zoom_3d_angle">Аўтаматычны зум 3D-вугал</string>
+    <string name="default_buttons_size_original_description">Кожная кнопка будзе захоўваць свой памер.</string>
+    <string name="default_buttons_opacity_original_description">Кожная кнопка будзе захоўваць сваю празрыстасць фону.</string>
+    <string name="default_buttons_corners_original_description">Кожная кнопка будзе захоўваць свой радыус закруглення кутоў.</string>
+    <string name="connect_new_scanner">Падключыць новы сканер</string>
+    <string name="preview_next_turn">Папярэдні прагляд наступнага павароту</string>
+    <string name="location_interpolation_percent_desc">Усталюйце працэнт інтэрпаляцыі месцазнаходжання падчас навігацыі па маршруце. Гэты параметр памяншае затрымку вашай пазіцыі на карце падчас анімацыі.</string>
+    <string name="av_audio_sample_rate">Частата дыскрэтызацыі аўдыё</string>
+    <string name="shared_string_engine">Рухавік</string>
+    <string name="vehicle_metrics_recording_description">Абраць параметры для запісу ў файл GPX.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Маршруты для ўздыму</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Паказаць маршруты для ўздыму</string>
+    <string name="calculating_indication_message">Вылічэнне…</string>
+    <string name="calculate_size">Вылічыць памер</string>
+    <string name="location_interpolation_percent">Працэнт інтэрпаляцыі месцазнаходжання</string>
+    <string name="selected_delayed_profile">Абраны профіль \"%s\"</string>
+    <string name="shared_string_interpolation">Інтэрпаляцыя</string>
 </resources>

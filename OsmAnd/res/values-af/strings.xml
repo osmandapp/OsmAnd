@@ -82,7 +82,6 @@
     <string name="plugins_screen">Inlasmodule bestuurder</string>
     <string name="prefs_plugins_descr">Inlasmodule aktiveer die gevorderde instellings en voorsien ekstra funksionaliteit</string>
     <string name="prefs_plugins">Inlasmodule bestuurder</string>
-    <string name="osm_editing_plugin_description">Wys stellings nodig vir OSM terugvoer bv. versamel / aanpas van OSM POI voorwerpe, oopmaak / komentaarlewer op OSM foute, en bydra van opgeneemde GPX dokumente (vereis OSM inlog besonderhede).</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektor kaarte vertoon waarskynlik vinniger. Dit mag egter nie goed werk op sommige toestelle nie.</string>
     <string name="play_commands_of_currently_selected_voice">Speel opdragte van die huidige gekose stem</string>
     <string name="debugging_and_development">OsmAnd ontwikkeling</string>
@@ -879,7 +878,6 @@
     <string name="safe_mode_description">gebruik die toepassing in beskermde wyse (gebruik stadiger Android in plaas van inheemse kode).</string>
     <string name="safe_mode">Beskermde wyse</string>
     <string name="native_library_not_running">Die toepassing werk in beskermde wyse (skakel dit af in Instellings).</string>
-    <string name="srtm_plugin_description">Vergemoontlik dei aflaai van aflyn kontoerlyne en heuwelsakdus (\'Instellings\'-&gt; \'Inligtingsbestuur\' -&gt; \'Aflaai\' -&gt; Kies verlangde kaart-tipe).</string>
     <string name="route_descr_lat_lon">Breedtegraad %1$.3f, lengtegraad %2$.3f</string>
     <string name="background_service_is_enabled_question">OsmAnd slaapwyse diens is nog aan. Wil jy dit afskakel?</string>
     <string name="support_new_features_descr">Maak donasies om die implementering van nuwe funksies in die toepassing moontlik te maak</string>
@@ -975,7 +973,6 @@
     <string name="driving_region_us">Verenigde State van Amerika</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa &amp; Asië</string>
-    <string name="driving_region_uk">VK, Indië, Australië &amp; Ander</string>
     <string name="about_version">Weergawe:</string>
     <string name="shared_string_about">Omtrent</string>
     <string name="about_settings_descr">Weergawe inligting, lisensie, projeklede</string>

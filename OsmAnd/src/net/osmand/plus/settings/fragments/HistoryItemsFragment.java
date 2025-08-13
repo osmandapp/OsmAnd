@@ -28,12 +28,14 @@ import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryListener;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -50,7 +52,7 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
-		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
+		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener, DeleteHistoryListener {
 
 	protected final List<Object> items = new ArrayList<>();
 	protected final Set<Object> selectedItems = new HashSet<>();
@@ -107,8 +109,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected abstract void shareItems();
 
 	protected abstract void updateHistoryItems();
-
-	protected abstract void deleteSelectedItems();
 
 	protected abstract boolean isHistoryEnabled();
 
@@ -264,7 +264,11 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 	@Override
 	public void onDeletionConfirmed() {
-		deleteSelectedItems();
+		DeleteHistoryTask deleteHistoryTask = new DeleteHistoryTask(requireActivity(), selectedItems, this);
+		OsmAndTaskManager.executeTask(deleteHistoryTask);
+	}
+
+	public void onDeletionComplete() {
 		updateHistoryItems();
 		updateButtonsState();
 		adapter.notifyDataSetChanged();

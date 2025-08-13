@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -42,7 +43,7 @@ public class BackupStorageCard extends BaseCard {
 
 		title.setText(R.string.shared_string_trash);
 		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
-		proIcon.setImageDrawable(getIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day));
+		proIcon.setImageDrawable(getIcon(PurchasingUtils.getProFeatureIconId(nightMode)));
 
 		button.setOnClickListener(v -> notifyButtonPressed(TRASH_BUTTON_INDEX));
 

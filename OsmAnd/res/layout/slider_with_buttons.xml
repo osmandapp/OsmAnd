@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/card_and_list_background_basic"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding_half">
+
+	<include
+		android:id="@+id/header_container"
+		layout="@layout/card_multi_state" />
+
+	<LinearLayout
+		android:id="@+id/slider_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingHorizontal="@dimen/content_padding_round_medium">
+
+			<ImageButton
+				android:id="@+id/decrease_button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
+				android:contentDescription="@string/shared_string_decrease"
+				tools:src="@drawable/ic_zoom_out"
+				tools:tint="?attr/secondary_icon_color" />
+
+			<com.google.android.material.slider.Slider
+				android:id="@+id/slider"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:saveEnabled="false"
+				app:labelStyle="@style/TimeSlider" />
+
+			<ImageButton
+				android:id="@+id/increase_button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
+				android:contentDescription="@string/shared_string_increase"
+				tools:src="@drawable/ic_zoom_in"
+				tools:tint="?attr/active_color_primary" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/description_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<include layout="@layout/list_item_divider_with_padding_basic" />
+
+		<include layout="@layout/card_description" />
+
+	</LinearLayout>
+
+</LinearLayout>

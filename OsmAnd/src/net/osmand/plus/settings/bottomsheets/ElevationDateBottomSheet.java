@@ -1,5 +1,14 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.updateSelectedParameters;
+import static net.osmand.plus.utils.AndroidUtils.createColorStateList;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -10,15 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
-import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -26,11 +29,18 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 
@@ -39,16 +49,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.utils.AndroidUtils.createColorStateList;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.updateSelectedParameters;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -142,14 +142,14 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		return null;
 	}
 
-	private void createUseHeightButton(Context context) {
+	private void createUseHeightButton(@NonNull Context context) {
 		boolean checked = useHeightPref.getModeValue(appMode);
 		useHeightButton = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColor(appModeColor)
 				.setChecked(checked)
 				.setTitle(checked ? on : off)
 				.setTitleColorId(checked ? activeColor : disabledColor)
-				.setCustomView(getCustomButtonView(app, appMode, checked, nightMode))
+				.setCustomView(getCustomButtonView(context, appMode, checked, nightMode))
 				.setOnClickListener(v -> {
 					boolean newValue = !useHeightPref.getModeValue(appMode);
 					Fragment target = getTargetFragment();
@@ -186,7 +186,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		button.setTitle(newValue ? on : off);
 		button.setChecked(newValue);
 		button.setTitleColorId(newValue ? activeColor : disabledColor);
-		updateCustomButtonView(app, appMode, button.getView(), newValue, nightMode);
+		updateCustomButtonView(requireContext(), appMode, button.getView(), newValue, nightMode);
 	}
 
 	private void createReliefFactorButtons(Context context) {
@@ -235,11 +235,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public boolean isNightMode(@NonNull OsmandApplication app) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
-		} else {
-			return !app.getSettings().isLightContentForMode(appMode);
-		}
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	private List<RoutingParameter> getReliefParametersForMode(Map<String, RoutingParameter> parameters) {

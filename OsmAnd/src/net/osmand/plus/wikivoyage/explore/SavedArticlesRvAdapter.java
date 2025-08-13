@@ -18,6 +18,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.osm.OsmRouteType;
@@ -65,7 +66,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		this.app = app;
 		this.settings = app.getSettings();
 		picasso = PicassoUtils.getPicasso(app);
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		readIcon = getActiveIcon(R.drawable.ic_action_read_article);
 		deleteIcon = getActiveIcon(R.drawable.ic_action_read_later_fill);
 	}
@@ -263,27 +264,18 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			itemView.setOnClickListener(readClickListener);
 			leftButton.setOnClickListener(readClickListener);
 
-			rightButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					Object item = getItemByPosition();
-					if (item instanceof TravelArticle) {
-						TravelArticle article = (TravelArticle) item;
-						TravelHelper helper = app.getTravelHelper();
-						helper.saveOrRemoveArticle(article, false);
-						Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
-								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-									@Override
-									public void onClick(View view) {
-										helper.saveOrRemoveArticle(article, true);
-									}
-								});
-						boolean nightMode = !settings.isLightContent();
-						UiUtilities.setupSnackbar(snackbar, nightMode);
-						int wikivoyageActiveColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-						UiUtilities.setupSnackbar(snackbar, nightMode, null, null, wikivoyageActiveColorResId, null);
-						snackbar.show();
-					}
+			rightButton.setOnClickListener(view -> {
+				Object item = getItemByPosition();
+				if (item instanceof TravelArticle article) {
+					TravelHelper helper = app.getTravelHelper();
+					helper.saveOrRemoveArticle(article, false);
+					Snackbar snackbar = Snackbar.make(itemView, R.string.article_removed, Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, v -> helper.saveOrRemoveArticle(article, true));
+					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+					UiUtilities.setupSnackbar(snackbar, nightMode);
+					int wikivoyageActiveColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+					UiUtilities.setupSnackbar(snackbar, nightMode, null, null, wikivoyageActiveColorResId, null);
+					snackbar.show();
 				}
 			});
 		}

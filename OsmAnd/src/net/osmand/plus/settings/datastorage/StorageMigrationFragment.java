@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.datastorage;
 
+
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -28,16 +29,16 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -60,6 +61,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private static final String ESTIMATED_SIZE_KEY = "estimated_size";
 	private static final String EXISTING_FILES_KEY = "existing_files";
 	private static final String SELECTED_STORAGE_KEY = "selected_storage";
+	private static final String CURRENT_STORAGE_KEY = "current_storage";
 
 	private StorageItem selectedStorage;
 	private StorageItem currentStorage;
@@ -89,6 +91,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		if (savedInstanceState != null && filesSize == null) {
 			filesCount = savedInstanceState.getInt(FILES_COUNT_KEY);
 			remainingSize = savedInstanceState.getLong(REMAINING_SIZE_KEY);
@@ -97,6 +100,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			copyFinished = savedInstanceState.getBoolean(COPY_FINISHED_KEY);
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 			selectedStorage = savedInstanceState.getParcelable(SELECTED_STORAGE_KEY);
+			currentStorage = savedInstanceState.getParcelable(CURRENT_STORAGE_KEY);
 
 			long size = savedInstanceState.getLong(FILES_SIZE_KEY);
 			long estimatedSize = savedInstanceState.getLong(ESTIMATED_SIZE_KEY);
@@ -140,6 +144,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		outState.putLong(FILES_SIZE_KEY, filesSize.first);
 		outState.putLong(ESTIMATED_SIZE_KEY, filesSize.second);
 		outState.putParcelable(SELECTED_STORAGE_KEY, selectedStorage);
+		outState.putParcelable(CURRENT_STORAGE_KEY, currentStorage);
 
 		ArrayList<String> filePaths = new ArrayList<>();
 		for (File file : existingFiles) {
@@ -239,7 +244,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 		SpannableStringBuilder spannable = new SpannableStringBuilder(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -272,7 +277,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		String description = getString(R.string.from_to_with_params, currentStorageName, selectedStorageName);
 
 		TextView summary = copyFilesDescr.findViewById(android.R.id.summary);
-		summary.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), description, currentStorageName, selectedStorageName));
+		summary.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), description, currentStorageName, selectedStorageName));
 	}
 
 	private void setupRestartDescr() {
@@ -292,7 +297,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 		SpannableString spannable = new SpannableString(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -312,13 +317,13 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			} else if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
 				fileName = FileNameTranslationHelper.getFileNameWithRegion(app, fileName);
 			} else if (subtype == FileSubtype.GPX) {
-				fileName = GpxUiHelper.getGpxTitle(fileName);
+				fileName = GpxHelper.INSTANCE.getGpxTitle(fileName);
 			}
 
 			String description = getString(R.string.copying_file, fileName);
 			SpannableString spannable = new SpannableString(description);
 			int index = description.indexOf(fileName);
-			spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + fileName.length(), 0);
+			spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + fileName.length(), 0);
 			spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), index, index + fileName.length(), 0);
 
 			TextView summary = remainingFiles.findViewById(android.R.id.summary);

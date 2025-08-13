@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.PointImageUtils;
 
@@ -30,7 +31,7 @@ public class ParkingPositionMenuController extends MenuController {
 		if (plugin != null) {
 			buildParkingDescription(mapActivity);
 		}
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();

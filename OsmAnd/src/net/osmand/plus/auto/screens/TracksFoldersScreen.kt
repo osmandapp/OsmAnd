@@ -1,28 +1,36 @@
 package net.osmand.plus.auto.screens
 
-import android.os.AsyncTask
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarColor
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.IndexConstants.GPX_INDEX_DIR
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.configmap.tracks.TrackTabsHelper
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.settings.enums.TracksSortMode
-import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.FileUtils
+import net.osmand.shared.extensions.kFile
+import net.osmand.shared.gpx.TrackFolderLoaderTask
+import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener
+import net.osmand.shared.gpx.data.TrackFolder
 
 class TracksFoldersScreen(
     carContext: CarContext,
     private val settingsAction: Action) : BaseAndroidAutoScreen(carContext),
-    TrackFolderLoaderTask.LoadTracksListener {
+    LoadTracksListener {
     private var asyncLoader: TrackFolderLoaderTask? = null
     private val trackTabsHelper: TrackTabsHelper = TrackTabsHelper(app)
 
@@ -34,7 +42,7 @@ class TracksFoldersScreen(
         })
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         setupTrackFolders(templateBuilder)
         val actionStripBuilder = ActionStrip.Builder()
@@ -55,9 +63,8 @@ class TracksFoldersScreen(
     }
 
     private fun reloadTracks() {
-        val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR), null)
-        asyncLoader = TrackFolderLoaderTask(app, folder, this)
-        asyncLoader!!.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR).kFile(), null)
+        asyncLoader = TrackFolderLoaderTask(folder, this).apply { execute() }
     }
 
 
@@ -75,7 +82,7 @@ class TracksFoldersScreen(
                 .setTitle(app.getString(R.string.sort_last_modified))
                 .setImage(iconLastModified)
                 .setBrowsable(true)
-                .setOnClickListener { onClickTabFolder(trackTabsHelper.trackTabs[TrackTabType.ALL.name]!!) }
+                .setOnClickListener { onClickTabFolder(trackTabsHelper.getTrackTab(TrackTabType.ALL.name)!!) }
                 .build())
 
         if (trackTabsHelper.trackTabs.isEmpty()) {
@@ -87,15 +94,16 @@ class TracksFoldersScreen(
         }
         templateBuilder.setLoading(false)
         var itemsCount = 1
-        for (trackTab in trackTabsHelper.trackTabs.values) {
+        for (trackTab in trackTabsHelper.getSortedTrackTabs(true)) {
             if (trackTab.type != TrackTabType.FOLDER) {
                 continue
             }
             if (itemsCount == contentLimit) {
                 break
             }
-            val title = trackTab.getName(app)
-            val iconColorId = ColorUtilities.getDefaultIconColorId(app.daynightHelper.isNightMode)
+            val title = trackTab.getDirName(includingSubdirs = true)
+            val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
+            val iconColorId = ColorUtilities.getDefaultIconColorId(nightMode)
             val iconDrawable = app.uiUtilities.getIcon(trackTab.type.iconId, iconColorId)
             val icon = CarIcon.Builder(
                 IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(iconDrawable))).build()
@@ -125,7 +133,7 @@ class TracksFoldersScreen(
     }
 
     override fun loadTracksFinished(folder: TrackFolder) {
-        trackTabsHelper.updateTrackItems(folder.flattenedTrackItems)
+        trackTabsHelper.updateTrackItems(folder)
         invalidate()
     }
 

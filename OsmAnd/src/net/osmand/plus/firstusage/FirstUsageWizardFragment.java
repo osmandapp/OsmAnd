@@ -36,13 +36,8 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.*;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
@@ -54,16 +49,17 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -75,13 +71,7 @@ import net.osmand.util.MapUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents, StorageSelectionListener, FirstUsageActionsListener {
@@ -91,6 +81,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public static final String FIRST_USAGE = "first_usage";
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
+	private static final int NO_MAP_ZOOM_LEVEL = 9;
+	private static final int DOWNLOAD_MAP_ZOOM_LEVEL = 13;
 
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
@@ -161,7 +153,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		wizardButton = view.findViewById(R.id.wizard_action_button);
 		wizardProgressBarCircle = view.findViewById(R.id.wizard_progress_bar_icon);
 
-		if (!AndroidUiHelper.isOrientationPortrait(activity) && !AndroidUiHelper.isXLargeDevice(activity)) {
+		if (!AndroidUiHelper.isOrientationPortrait(activity) && !AndroidUiHelper.isTablet(activity)) {
 			TextView wizardDescription = view.findViewById(R.id.wizard_description);
 			wizardDescription.setMinimumHeight(0);
 			wizardDescription.setMinHeight(0);
@@ -272,7 +264,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				wizardButton.setTitleId(R.string.go_to_map);
 
 				wizardButton.setOnClickListener(view -> {
-					showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+					showOnMap(new LatLon(location.getLatitude(), location.getLongitude()));
 				});
 				break;
 		}
@@ -288,7 +280,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				deviceNightMode = false;
 				break;
 			case Configuration.UI_MODE_NIGHT_UNDEFINED:
-				deviceNightMode = !app.getSettings().isLightContent();
+				deviceNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 				break;
 		}
 	}
@@ -306,7 +298,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		AppCompatButton skipButton = view.findViewById(R.id.skip_button);
 		skipButton.setOnClickListener(v -> {
 			if (location != null) {
-				showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+				showOnMap(new LatLon(location.getLatitude(), location.getLongitude()));
 			} else {
 				closeWizard();
 			}
@@ -340,7 +332,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					if (app.isUserAndroidIdAllowed()) {
 						pms.put("aid", app.getUserAndroidId());
 					}
-					new AsyncTask<Void, Void, String>() {
+					OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 						@Override
 						protected String doInBackground(Void... params) {
@@ -380,7 +372,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 								showNoLocationWizard(true);
 							}
 						}
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					});
 				} else {
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						ActivityCompat.requestPermissions(activity,
@@ -538,11 +530,10 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		DataStorageHelper.updateDownloadIndexes(app);
 	}
 
-	private void showOnMap(LatLon mapCenter, int mapZoom) {
+	private void showOnMap(LatLon mapCenter) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			app.getOsmandMap().setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
-			app.getOsmandMap().getMapView().setIntZoom(mapZoom);
 		}
 		closeWizard();
 	}
@@ -633,8 +624,19 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		}
 	}
 
+	private void setProperZoom() {
+		int zoom;
+		if (app.getResourceManager().isAnyMapInstalled() || (mapIndexItem != null && app.getDownloadThread().isDownloading(mapIndexItem))) {
+			zoom = DOWNLOAD_MAP_ZOOM_LEVEL;
+		} else {
+			zoom = NO_MAP_ZOOM_LEVEL;
+		}
+		app.getOsmandMap().getMapView().setIntZoom(zoom);
+	}
+
 	public void closeWizard() {
 		app.getSettings().SHOW_OSMAND_WELCOME_SCREEN.set(false);
+		setProperZoom();
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			activity.getSupportFragmentManager()
@@ -694,7 +696,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		int endInd = startInd + part.length();
 		int color = ColorUtilities.getColor(app, R.color.active_color_primary_light);
 		ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
+		Typeface typeface = FontCache.getMediumFont();
 		CustomTypefaceSpan typefaceSpan = new CustomTypefaceSpan(typeface);
 		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override

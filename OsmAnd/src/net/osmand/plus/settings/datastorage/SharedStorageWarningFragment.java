@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.datastorage;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,26 +23,27 @@ import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
-import net.osmand.plus.settings.datastorage.task.DocumentFilesCollectTask;
-import net.osmand.plus.settings.datastorage.task.DocumentFilesCollectTask.DocumentFilesCollectListener;
 import net.osmand.plus.settings.datastorage.SkipMigrationBottomSheet.OnConfirmMigrationSkipListener;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.datastorage.task.DocumentFilesCollectTask;
+import net.osmand.plus.settings.datastorage.task.DocumentFilesCollectTask.DocumentFilesCollectListener;
 import net.osmand.plus.settings.datastorage.task.StorageMigrationAsyncTask;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -165,7 +167,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			String sharedStorage = getString(R.string.shared_storage);
 			String warning = getString(R.string.shared_storage_migration_descr, sharedStorage);
 			TextView migrationDescr = stepsContainer.findViewById(R.id.shared_storage_migration);
-			migrationDescr.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), warning, sharedStorage));
+			migrationDescr.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(migrationDescr.getTypeface()), warning, sharedStorage));
 
 			TextView firstStep = stepsContainer.findViewById(R.id.shared_storage_first_step);
 			firstStep.setText(getString(R.string.shared_storage_first_step, getString(R.string.shared_string_continue)));
@@ -194,7 +196,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 		String storageName = selectedStorage.getTitle();
 		SpannableString spannable = new SpannableString(storageName);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), 0, storageName.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, storageName.length(), 0);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), 0, storageName.length(), 0);
 		summary.setText(spannable);
 
@@ -217,7 +219,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 		SpannableString spannable = new SpannableString(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -252,7 +254,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 				if (activity != null) {
 					StorageMigrationAsyncTask copyFilesTask = new StorageMigrationAsyncTask(activity,
 							documentFiles, selectedStorage, filesSize, usedOnMap);
-					copyFilesTask.executeOnExecutor(singleThreadExecutor);
+					OsmAndTaskManager.executeTask(copyFilesTask, singleThreadExecutor);
 					dismiss();
 				}
 			});
@@ -345,7 +347,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private void updateSelectedFolderFiles(@NonNull Uri uri) {
 		stopCollectFilesTask();
 		collectTask = new DocumentFilesCollectTask(app, uri, this);
-		collectTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(collectTask, singleThreadExecutor);
 	}
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {

@@ -8,13 +8,14 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -37,18 +38,18 @@ public class ResourcesImporter {
 					.open(assetFilePath, AssetManager.ACCESS_STREAMING)) {
 				String error = ImportHelper.copyFile(app, file, is, true, false);
 				if (error == null) {
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+					GpxFile gpxFile = SharedUtil.loadGpxFile(file);
 					String[] errors = {""};
-					new SaveGpxAsyncTask(app, gpxFile, gpxDestinationDir, fileName, new SaveImportedGpxListener() {
+					OsmAndTaskManager.executeTask(new SaveGpxAsyncTask(app, gpxFile, gpxDestinationDir, fileName, new SaveImportedGpxListener() {
 						@Override
-						public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
+						public void onGpxSaved(@Nullable String error, @NonNull GpxFile gpxFile) {
 							errors[0] = error;
 
 							if (listener != null) {
 								listener.onGpxSaved(error, gpxFile);
 							}
 						}
-					}, true).execute().get();
+					}, true)).get();
 					if (!Algorithms.isEmpty(errors[0])) {
 						throw new IOException("Import gpx error: " + errors[0]);
 					}

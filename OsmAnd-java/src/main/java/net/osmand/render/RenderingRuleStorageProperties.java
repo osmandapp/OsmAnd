@@ -23,8 +23,9 @@ public class RenderingRuleStorageProperties {
 	public static final String ATTR_STRING_VALUE = "attrStringValue";
 	public static final String TEST = "test";
 	public static final String DISABLE = "disable";
-	
-	
+
+	public static final String ASSOCIATION = "association";
+
 	
 	public static final String INTERSECTION_MARGIN = "intersectionMargin";
 	public static final String INTERSECTION_SIZE_FACTOR = "intersectionSizeFactor";
@@ -100,7 +101,8 @@ public class RenderingRuleStorageProperties {
 	public static final String ADD_POINT = "addPoint";
 	public static final String ORDER_BY_DENSITY = "orderByDensity";
 
-	
+	public RenderingRuleProperty R_ASSOCIATION;
+
 	public RenderingRuleProperty R_TEST;
 	public RenderingRuleProperty R_DISABLE;
 	public RenderingRuleProperty R_ATTR_INT_VALUE;
@@ -190,21 +192,21 @@ public class RenderingRuleStorageProperties {
 
 	final Map<String, RenderingRuleProperty> properties;
 	// C++
-	final List<RenderingRuleProperty> rules ;
-	final List<RenderingRuleProperty> customRules ;
+	final List<RenderingRuleProperty> rules;
+	final Map<String, RenderingRuleProperty> customRules;
 	
 	
 	public RenderingRuleStorageProperties() {
-		properties = new LinkedHashMap<String, RenderingRuleProperty>();
-		rules = new ArrayList<RenderingRuleProperty>();
-		customRules = new ArrayList<RenderingRuleProperty>();
+		properties = new LinkedHashMap<>();
+		rules = new ArrayList<>();
+		customRules = new LinkedHashMap<>();
 		createDefaultRenderingRuleProperties();
 	}
 	
 	public RenderingRuleStorageProperties(RenderingRuleStorageProperties toClone) {
-		properties = new LinkedHashMap<String, RenderingRuleProperty>(toClone.properties);
-		rules = new ArrayList<RenderingRuleProperty>(toClone.rules);
-		customRules = new ArrayList<RenderingRuleProperty>(toClone.customRules);
+		properties = new LinkedHashMap<>(toClone.properties);
+		rules = new ArrayList<>(toClone.rules);
+		customRules = new LinkedHashMap<>(toClone.customRules);
 		createDefaultRenderingRuleProperties();
 	}
 
@@ -228,6 +230,7 @@ public class RenderingRuleStorageProperties {
 		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(NAME_TAG));
 		R_NAME_TAG2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(NAME_TAG2));
 
+		R_ASSOCIATION = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ASSOCIATION));
 		R_DISABLE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(DISABLE));
 		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));
 		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ATTR_BOOL_VALUE));
@@ -326,37 +329,40 @@ public class RenderingRuleStorageProperties {
 	}
 	
 	public List<RenderingRuleProperty> getCustomRules() {
-		return customRules;
+		return new ArrayList<>(customRules.values());
 	}
 
 	public RenderingRuleProperty getCustomRule(String attrName) {
-		for (RenderingRuleProperty p : customRules) {
-			if (p.getAttrName().equals(attrName)) {
-				return p;
-			}
-		}
-		return null;
+		return customRules.get(attrName);
 	}
 
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
-		RenderingRuleProperty existing = get(p.getAttrName());
-		properties.put(p.getAttrName(), p);
-		if(existing == null) {
+		return registerRuleInternal(p, true);
+	}
+
+	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p, boolean overwriteExisting) {
+		String attrName = p.getAttrName();
+		RenderingRuleProperty existing = get(attrName);
+		if (existing == null) {
+			properties.put(attrName, p);
 			p.setId(rules.size());
 			rules.add(p);
+		} else if (overwriteExisting) {
+			int id = existing.getId();
+			p.setId(id);
+			rules.set(id, p);
+			properties.put(attrName, p);
+			customRules.remove(attrName);
 		} else {
-			p.setId(existing.getId());
-			rules.set(existing.getId(), p);
-			customRules.remove(existing);
+			p = existing;
 		}
 		return p;
 	}
 
-	public RenderingRuleProperty registerRule(RenderingRuleProperty p) {
-		RenderingRuleProperty ps = registerRuleInternal(p);
-		if(!customRules.contains(ps)) {
-			customRules.add(p);
+	public void registerRule(RenderingRuleProperty p, boolean overwriteExisting) {
+		registerRuleInternal(p, overwriteExisting);
+		if (!customRules.containsKey(p.attrName)) {
+			customRules.put(p.attrName, p);
 		}
-		return ps;
 	}
 }

@@ -22,14 +22,14 @@ body:
     -   type: textarea
         id: describe-the-idea
         attributes:
-            label: Describe the idea (required)
+            label: Describe the idea
             description: Please provide a clear and concise description of your idea and provide a summarised description in the title above.
         validations:
             required: true
     -   type: textarea
         id: expected-behaviour
         attributes:
-            label: Tell us about the expected behaviour (required)
+            label: Expected behaviour
             description: |
                 If you're suggesting a change/improvement, tell us a bit more about the problem you attempt to solve and how you idea helps to solve it.
                 Include a brief description of what you think should happen, maybe even how it should work and how you plan on using it.
@@ -39,7 +39,7 @@ body:
     -   type: textarea
         id: alternatives
         attributes:
-            label: Tell us about alternatives you've considered (required)
+            label: Alternatives you've considered
             description: |
                 Have you considered any alternative solutions or workarounds?
         validations:
@@ -47,7 +47,7 @@ body:
     -   type: textarea
         id: context
         attributes:
-            label: Context (optional)
+            label: Context
             description: |
                 Anything else relevant?
         validations:

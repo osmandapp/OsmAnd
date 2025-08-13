@@ -70,7 +70,10 @@ public class WidgetsSettingsHelper {
 		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(appMode);
 		mapButtonsHelper.getCompassButtonState().getVisibilityPref().resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
-		mapButtonsHelper.resetQuickActionsForMode(appMode);
+		mapButtonsHelper.resetButtonStatesForMode(appMode, mapButtonsHelper.getAllButtonsStates());
+		mapButtonsHelper.getDefaultSizePref().resetModeToDefault(appMode);
+		mapButtonsHelper.getDefaultOpacityPref().resetModeToDefault(appMode);
+		mapButtonsHelper.getDefaultCornerRadiusPref().resetModeToDefault(appMode);
 	}
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
@@ -84,7 +87,10 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(settings.DISTANCE_BY_TAP_TEXT_SIZE, fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_SPEEDOMETER, fromAppMode);
 		copyPrefFromAppMode(settings.SPEEDOMETER_SIZE, fromAppMode);
-		mapButtonsHelper.copyQuickActionsFromMode(settings.getApplicationMode(), fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultSizePref(),fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultOpacityPref(),fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultCornerRadiusPref(),fromAppMode);
+		mapButtonsHelper.copyButtonStatesFromMode(appMode, fromAppMode, mapButtonsHelper.getAllButtonsStates());
 	}
 
 	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {
@@ -131,6 +137,26 @@ public class WidgetsSettingsHelper {
 			}
 		}
 		panel.setWidgetsOrder(appMode, newPagedOrder, settings);
+	}
+
+	public List<List<MapWidgetInfo>> getWidgetInfoPagedOrder(@NonNull ApplicationMode fromAppMode, @NonNull ApplicationMode toAppMode, @NonNull WidgetsPanel panel, int filter) {
+		int previousPage = -1;
+		List<WidgetsPanel> panels = Collections.singletonList(panel);
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, filter, panels);
+		List<List<MapWidgetInfo>> pagedOrder = new ArrayList<>();
+		for (MapWidgetInfo widgetInfo : widgetInfos) {
+			String widgetId = widgetInfo.key;
+			if (!Algorithms.isEmpty(widgetId) && WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetId, appMode)) {
+				if (previousPage != widgetInfo.pageIndex || pagedOrder.isEmpty()) {
+					previousPage = widgetInfo.pageIndex;
+					pagedOrder.add(new ArrayList<>());
+				}
+				if (WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetId, toAppMode)) {
+					pagedOrder.get(pagedOrder.size() - 1).add(widgetInfo);
+				}
+			}
+		}
+		return pagedOrder;
 	}
 
 	public List<List<String>> getWidgetsPagedOrder(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel, int filter) {

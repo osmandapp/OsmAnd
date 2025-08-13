@@ -4,6 +4,10 @@
 	android:installLocation="auto"
 	package="net.osmand.plus">
 
+	<permission
+		android:name="${applicationId}.SERVICE_PERMISSION"
+		android:protectionLevel="signature" />
+
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -20,6 +24,7 @@
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
 
 	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
@@ -81,8 +86,7 @@
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true"
 		android:supportsRtl="true" android:usesCleartextTraffic="true"
 		android:hasFragileUserData="true" android:requestLegacyExternalStorage="true"
-		android:localeConfig="@xml/locales_config"
-		android:memtagMode="off">
+		android:localeConfig="@xml/locales_config">
 
 		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
@@ -104,22 +108,6 @@
 				android:resource="@xml/paths" />
 		</provider>
 
-
-		<receiver android:name="net.osmand.plus.notifications.NavigationNotification$PauseNavigationReceiver" android:exported="true">
-			<intent-filter>
-				<action android:name="net.osmand.plus.OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION" />
-			</intent-filter>
-		</receiver>
-		<receiver android:name="net.osmand.plus.notifications.NavigationNotification$ResumeNavigationReceiver" android:exported="true">
-			<intent-filter>
-				<action android:name="net.osmand.plus.OSMAND_RESUME_NAVIGATION_SERVICE_ACTION" />
-			</intent-filter>
-		</receiver>
-		<receiver android:name="net.osmand.plus.notifications.NavigationNotification$StopNavigationReceiver" android:exported="true">
-			<intent-filter>
-				<action android:name="net.osmand.plus.OSMAND_STOP_NAVIGATION_SERVICE_ACTION" />
-			</intent-filter>
-		</receiver>
 		<receiver android:name="net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver" android:exported="false" />
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" android:exported="false" />
 		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" android:exported="false" />
@@ -1146,15 +1134,12 @@
 
 		<!-- keep android:process on a separate line !! -->
 		<service
-			android:process="net.osmand.plus"
 			android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
 			android:exported="true"
+			android:permission="${applicationId}.SERVICE_PERMISSION"
 			android:foregroundServiceType="location"
 			android:stopWithTask="false">
-			<intent-filter>
-				<action android:name="net.osmand.plus.NavigationService" />
-			</intent-filter>
 		</service>
 
 		<service android:name="net.osmand.aidl.OsmandAidlService" android:exported="true" >
@@ -1175,7 +1160,9 @@
 			android:name="net.osmand.plus.download.DownloadService"
 			android:label="@string/process_downloading_service"
 			android:stopWithTask="false"
-			android:exported="true" />
+			android:exported="true"
+			android:permission="${applicationId}.SERVICE_PERMISSION"
+			android:foregroundServiceType="dataSync" />
 
 		<meta-data android:name="com.google.android.gms.car.application"
 			android:resource="@xml/car_app_desc"
@@ -1186,6 +1173,7 @@
 			tools:ignore="MetadataTagInsideApplicationTag" />
 
 		<service
+			android:process="${applicationId}"
 			android:name="net.osmand.plus.auto.NavigationCarAppService"
 			android:foregroundServiceType="location"
 			android:exported="true">

@@ -3,12 +3,14 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_RESUME_PAUSE_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,7 +37,7 @@ public class NavResumePauseAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (routingHelper.isRoutePlanningMode()) {
 			routingHelper.resumeNavigation();
@@ -68,14 +70,12 @@ public class NavResumePauseAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity) {
-			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
-			if (!helper.isRouteCalculated() || helper.isRoutePlanningMode()) {
-				return R.drawable.ic_play_dark;
-			}
-			return R.drawable.ic_pause;
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		RoutingHelper helper = app.getRoutingHelper();
+		if (!helper.isRouteCalculated() || helper.isRoutePlanningMode()) {
+			return R.drawable.ic_play_dark;
 		}
-		return super.getIconRes(context);
+		return R.drawable.ic_pause;
 	}
 
 	@Override

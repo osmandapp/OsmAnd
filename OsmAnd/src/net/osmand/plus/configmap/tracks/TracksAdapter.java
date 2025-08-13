@@ -21,13 +21,15 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.track.BaseTracksTabsFragment;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -172,7 +174,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			((RecentlyVisibleViewHolder) holder).bindView(selectionMode);
 		} else if (holder instanceof SortTracksViewHolder) {
 			boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems()) || (selectTrackMode && !Algorithms.isEmpty(trackTab.getTrackFolders()));
-			((SortTracksViewHolder) holder).bindView(enabled, null);
+			((SortTracksViewHolder) holder).bindView(enabled, null, trackTab.getId());
 		}
 	}
 

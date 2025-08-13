@@ -187,8 +187,10 @@
         <item name="purchase_sc_selected_plan_bg">@color/purchase_sc_selected_plan_bg_dark</item>
         <item name="purchase_sc_header_icon_bg">@color/purchase_sc_header_icon_bg_dark</item>
         <item name="promo_banner_title_color">@color/active_color_primary_dark</item>
+        <item name="purchase_pro_badge_icon">@drawable/img_button_pro_night</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_night</item>
+        <item name="nav_arrow_circle_color">@color/nav_arrow_circle_color_dark</item>
 
         <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_dark</item>
         <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_dark</item>
@@ -217,6 +219,7 @@
         <item name="dlg_btn_secondary_harmful_text">@color/color_osm_edit_delete</item>
         <item name="dlg_btn_transparent">@drawable/dlg_btn_transparent_dark</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
+        <item name="dlg_btn_stroked_secondary_content">@color/dlg_btn_stroked_secondary_content_dark</item>
         <item name="dlg_btn_tertiary_text">@color/active_color_primary_dark</item>
         <item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
@@ -259,5 +262,9 @@
         <item name="toolbar_active_color">@color/app_bar_active_dark</item>
         <item name="status_bar_active_color">@color/status_bar_selection_color_dark</item>
         <item name="active_color_secondary">@color/active_color_secondary_dark</item>
+        <item name="active_color_primary">@color/active_color_primary_dark</item>
+        <item name="slider_label_text_dark">@color/slider_label_text_dark</item>
+        <item name="app_bar_secondary_color">@color/app_bar_secondary_dark</item>
+        <item name="map_button_icon_color">@color/map_button_icon_color_dark</item>
     </style>
 </resources>

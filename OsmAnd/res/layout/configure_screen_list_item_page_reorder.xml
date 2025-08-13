@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:background="?attr/list_background_color">
+	android:animateLayoutChanges="true"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
 
 	<View
 		android:id="@+id/top_divider"
@@ -13,42 +14,50 @@
 		android:layout_height="1dp"
 		android:background="?divider_color_basic" />
 
-	<LinearLayout
+	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
-
-		<ImageButton
-			android:id="@+id/delete_page_button"
-			style="@style/Widget.AppCompat.ActionButton"
-			android:layout_width="@dimen/standard_icon_size"
-			android:layout_height="@dimen/standard_icon_size"
-			android:layout_gravity="center"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			tools:src="@drawable/ic_action_remove"
-			tools:tint="@color/icon_color_default_light"
-			tools:ignore="ContentDescription" />
-
-
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/page"
-			style="@style/TitleStyle.Medium"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:paddingHorizontal="@dimen/content_padding"
-			android:paddingVertical="@dimen/directionIconSize"
-			android:textColor="?android:textColorPrimary"
-			tools:text="Page 1" />
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/move_button"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
-			android:layout_gravity="center"
+			android:layout_gravity="end|center_vertical"
 			android:paddingHorizontal="@dimen/content_padding"
 			android:tint="?attr/secondary_icon_color"
-			osmand:srcCompat="@drawable/ic_action_item_move" />
+			app:srcCompat="@drawable/ic_action_item_move" />
 
-	</LinearLayout>
+		<LinearLayout
+			android:id="@+id/animated_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:animateLayoutChanges="true">
+
+			<ImageButton
+				android:id="@+id/delete_page_button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				tools:ignore="ContentDescription"
+				tools:src="@drawable/ic_action_remove"
+				tools:tint="@color/icon_color_default_light" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/page"
+				style="@style/TitleStyle.Medium"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:paddingHorizontal="@dimen/content_padding"
+				android:paddingVertical="@dimen/directionIconSize"
+				android:textColor="?android:textColorPrimary"
+				tools:text="Page 1" />
+
+
+		</LinearLayout>
+
+	</FrameLayout>
 
 </LinearLayout>

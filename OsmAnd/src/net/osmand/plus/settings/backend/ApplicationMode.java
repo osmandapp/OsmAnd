@@ -21,13 +21,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ApplicationMode {
 
@@ -114,7 +108,6 @@ public class ApplicationMode {
 			app.getAppCustomization().addListener(customizationListener);
 		}
 		if (cachedFilteredValues.isEmpty()) {
-
 			OsmandSettings settings = app.getSettings();
 			if (listener == null) {
 				listener = change -> cachedFilteredValues = new ArrayList<>();
@@ -152,10 +145,11 @@ public class ApplicationMode {
 		return customModes;
 	}
 
-	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
-		for (ApplicationMode p : values) {
-			if (p.getStringKey().equals(key)) {
-				return p;
+	@Nullable
+	public static ApplicationMode valueOfStringKey(@Nullable String key, @Nullable ApplicationMode def) {
+		for (ApplicationMode mode : values) {
+			if (Algorithms.stringsEqual(mode.getStringKey(), key)) {
+				return mode;
 			}
 		}
 		return def;
@@ -414,18 +408,21 @@ public class ApplicationMode {
 		}
 	}
 
+	@NonNull
 	public ProfileIconColors getIconColorInfo() {
 		return app.getSettings().ICON_COLOR.getModeValue(this);
 	}
 
-	public void setIconColor(ProfileIconColors iconColor) {
+	public void setIconColor(@Nullable ProfileIconColors iconColor) {
 		if (iconColor != null) {
 			app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
 		}
 	}
 
-	public void setViewAngleVisibility(@NonNull MarkerDisplayOption viewAngle) {
-		app.getSettings().VIEW_ANGLE_VISIBILITY.setModeValue(this, viewAngle);
+	public void setViewAngleVisibility(@Nullable MarkerDisplayOption viewAngle) {
+		if (viewAngle != null) {
+			app.getSettings().VIEW_ANGLE_VISIBILITY.setModeValue(this, viewAngle);
+		}
 	}
 
 	@NonNull
@@ -433,8 +430,10 @@ public class ApplicationMode {
 		return app.getSettings().VIEW_ANGLE_VISIBILITY.getModeValue(this);
 	}
 
-	public void setLocationRadius(@NonNull MarkerDisplayOption locationRadius) {
-		app.getSettings().LOCATION_RADIUS_VISIBILITY.setModeValue(this, locationRadius);
+	public void setLocationRadius(@Nullable MarkerDisplayOption locationRadius) {
+		if (locationRadius != null) {
+			app.getSettings().LOCATION_RADIUS_VISIBILITY.setModeValue(this, locationRadius);
+		}
 	}
 
 	@NonNull
@@ -482,10 +481,10 @@ public class ApplicationMode {
 		app.getSettings().APP_MODE_VERSION.setModeValue(this, version);
 	}
 
-	public static void onApplicationStart(OsmandApplication app) {
+	public static void onApplicationStart(@NonNull OsmandApplication app) {
 		initCustomModes(app);
 		initModesParams(app);
-		WidgetsAvailabilityHelper.initRegVisibility();
+		WidgetsAvailabilityHelper.initRegVisibility(app);
 		reorderAppModes();
 	}
 
@@ -587,7 +586,7 @@ public class ApplicationMode {
 			mode.setLocationRadius(builder.locationRadius);
 		} else {
 			mode = builder.customReg();
-			WidgetsAvailabilityHelper.initRegVisibility();
+			WidgetsAvailabilityHelper.initRegVisibility(app);
 		}
 		reorderAppModes();
 		saveCustomAppModesToSettings(app);
@@ -657,23 +656,24 @@ public class ApplicationMode {
 		saveCustomAppModesToSettings(app);
 	}
 
-	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
-		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(values(app));
-		StringBuilder vls = new StringBuilder(DEFAULT.getStringKey() + ",");
-		if (allPossibleValues().contains(mode)) {
+	public static boolean changeProfileAvailability(ApplicationMode appMode, boolean selected, OsmandApplication app) {
+		if (allPossibleValues().contains(appMode) && appMode != DEFAULT) {
 			OsmandSettings settings = app.getSettings();
-			if (isSelected) {
-				selectedModes.add(mode);
+			Set<ApplicationMode> selectedModes = new LinkedHashSet<>(values(app));
+
+			StringBuilder builder = new StringBuilder(DEFAULT.getStringKey() + ",");
+			if (selected) {
+				selectedModes.add(appMode);
 			} else {
-				selectedModes.remove(mode);
-				if (settings.APPLICATION_MODE.get() == mode) {
+				selectedModes.remove(appMode);
+				if (settings.APPLICATION_MODE.get() == appMode) {
 					settings.APPLICATION_MODE.resetToDefault();
 				}
 			}
-			for (ApplicationMode m : selectedModes) {
-				vls.append(m.getStringKey()).append(",");
+			for (ApplicationMode mode : selectedModes) {
+				builder.append(mode.getStringKey()).append(",");
 			}
-			settings.AVAILABLE_APP_MODES.set(vls.toString());
+			settings.AVAILABLE_APP_MODES.set(builder.toString());
 			return true;
 		}
 		return false;
@@ -810,6 +810,7 @@ public class ApplicationMode {
 			this.navigationIcon = navIcon;
 			return this;
 		}
+
 		public ApplicationModeBuilder setViewAngle(@NonNull MarkerDisplayOption viewAngle) {
 			this.viewAngle = viewAngle;
 			return this;

@@ -9,6 +9,10 @@ import static net.osmand.render.RenderingRuleProperty.STRING_TYPE;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.util.Algorithms;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RenderingRuleSearchRequest {
 
@@ -52,6 +56,29 @@ public class RenderingRuleSearchRequest {
 		System.arraycopy(searchRequest.values, 0, values, 0, searchRequest.values.length);
 		System.arraycopy(searchRequest.fvalues, 0, fvalues, 0, searchRequest.fvalues.length);
 		saveState();
+	}
+
+	public static RenderingRuleSearchRequest initWithCustomProperties(RenderingRulesStorage renderingRules, int zoom,
+	                                                                  Map<String, String> customProperties) {
+		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(renderingRules);
+
+		for (RenderingRuleProperty customProp : renderingRules.PROPS.getCustomRules()) {
+			String custom = customProperties != null ? customProperties.get(customProp.getAttrName()) : null;
+			if (customProp.isBoolean()) {
+				searchRequest.setBooleanFilter(customProp, custom != null ? "true".equals(custom) : false);
+			} else {
+				searchRequest.setStringFilter(customProp, custom != null ? custom : "");
+			}
+		}
+
+		if (zoom > 0) {
+			searchRequest.setIntFilter(renderingRules.PROPS.R_MINZOOM, zoom);
+			searchRequest.setIntFilter(renderingRules.PROPS.R_MAXZOOM, zoom);
+		}
+
+		searchRequest.saveState();
+
+		return searchRequest;
 	}
 
 	RenderingRulesStorage getStorage() {
@@ -337,5 +364,69 @@ public class RenderingRuleSearchRequest {
 			}
 		}
 		return builder.toString();
+	}
+
+	public String searchIconByTags(Map<String, String> transformedTags) {
+		return searchTopOrderedPropertyByTags(transformedTags, RenderingRulesStorage.POINT_RULES,
+				storage.PROPS.R_ICON, storage.PROPS.R_ICON_ORDER);
+	}
+
+	private String searchTopOrderedPropertyByTags(Map<String, String> transformedTags, int rulesNumber,
+	                                              RenderingRuleProperty mainStringProperty,
+	                                              RenderingRuleProperty orderIntProperty) {
+
+		Map<String, Integer> resultOrderMap = new HashMap<>();
+
+		for (Map.Entry<String, String> entry : transformedTags.entrySet()) {
+			final String tag = entry.getKey();
+			final String value = entry.getValue();
+			clearState();
+			setStringFilter(storage.PROPS.R_TAG, tag);
+			setStringFilter(storage.PROPS.R_VALUE, value);
+			clearValue(storage.PROPS.R_ADDITIONAL); // parent - no additional
+
+			int order = 0;
+			String result = null;
+			search(rulesNumber);
+
+			if (isSpecified(mainStringProperty)) {
+				result = getStringPropertyValue(mainStringProperty);
+				order = orderIntProperty != null ? getIntPropertyValue(orderIntProperty) : 0;
+			}
+
+			// Cycle tags to visit "additional" rules. XXX: think how to optimize.
+			for (Map.Entry<String, String> additional : transformedTags.entrySet()) {
+				final String aTag = additional.getKey();
+				final String aValue = additional.getValue();
+
+				if (aTag.equals(tag) && aValue.equals(value)) {
+					continue;
+				}
+
+				setStringFilter(storage.PROPS.R_ADDITIONAL, aTag + "=" + aValue);
+				search(rulesNumber);
+
+				if (isSpecified(mainStringProperty)) {
+					String childResult = getStringPropertyValue(mainStringProperty);
+					if (childResult != null && (result == null || !result.equals(childResult))) {
+						order = orderIntProperty != null ? getIntPropertyValue(orderIntProperty) : 0;
+						result = childResult;
+						break; // enough
+					}
+				}
+			}
+
+			if (result != null) {
+				resultOrderMap.put(result, order);
+			}
+		}
+
+		if (!resultOrderMap.isEmpty()) {
+			Map.Entry<String, Integer> bestResult =
+					Collections.min(resultOrderMap.entrySet(), Comparator.comparingInt(Map.Entry::getValue));
+			return bestResult.getKey();
+		}
+
+		return null;
 	}
 }

@@ -4,6 +4,7 @@ import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +22,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
@@ -61,13 +62,13 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final int groupViewHeight;
 	private final int childViewHeight;
 
-	ExportSettingsAdapter(OsmandApplication app, boolean exportMode, OnItemSelectedListener listener, boolean nightMode) {
-		this.app = app;
+	ExportSettingsAdapter(@NonNull Context context, boolean exportMode, OnItemSelectedListener listener, boolean nightMode) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.exportMode = exportMode;
 		this.listener = listener;
 		this.nightMode = nightMode;
 		uiUtilities = app.getUIUtilities();
-		themedInflater = UiUtilities.getInflater(app, nightMode);
+		themedInflater = UiUtilities.getInflater(context, nightMode);
 		activeColorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
 		groupViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height);
@@ -86,7 +87,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		String title = app.getString(category.getTitleId());
 		TextView titleTv = group.findViewById(R.id.title_tv);
-		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), title, title));
+		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), title, title));
 
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
 		subTextTv.setText(getCategoryDescr(category, exportMode));

@@ -4,8 +4,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 
-import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
 	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
@@ -29,15 +29,15 @@ public class TurnType {
 	}
 	
 	public int getActiveCommonLaneTurn() {
-		if(lanes == null || lanes.length == 0) {
-			return C;
+		if (lanes == null || lanes.length == 0) {
+			return -1;
 		}
-		for(int i = 0; i < lanes.length; i++) {
-			if(lanes[i] % 2 == 1) {
+		for (int i = 0; i < lanes.length; i++) {
+			if (lanes[i] % 2 == 1) {
 				return TurnType.getPrimaryTurn(lanes[i]);
 			}
 		}
-		return C;
+		return -1;
 	}
 	
 	public String toXmlString() {
@@ -138,6 +138,7 @@ public class TurnType {
 	private int[] lanes;
 	private boolean possiblyLeftTurn;
 	private boolean possiblyRightTurn;
+	private List<Float> otherTurnAngles;
 
 	public TurnType(int value, int exitOut, float turnAngle, boolean skipToSpeak, int[] lanes,
 	                boolean possiblyLeftTurn, boolean possiblyRightTurn) {
@@ -612,5 +613,13 @@ public class TurnType {
 			}
 		}
 		return turn;
+	}
+
+	public List<Float> getOtherTurnAngles() {
+		return otherTurnAngles;
+	} 
+	
+	public void setOtherTurnAngles(List<Float> turnAngles) {
+		this.otherTurnAngles = turnAngles;
 	}
 }

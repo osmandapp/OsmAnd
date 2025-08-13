@@ -5,9 +5,9 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -22,14 +22,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.util.TextDirectionUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -43,35 +47,68 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	protected LatLon lastLocation;
 
 	protected final View divider;
-	protected final View secondContainer;
+	protected View firstContainer;
+	protected View secondContainer;
 
-	private final TextView firstCoordinate;
-	private final TextView secondCoordinate;
+	protected OutlinedTextContainer firstCoordinate;
+	protected OutlinedTextContainer secondCoordinate;
 
 	private String firstCoordinateText = "";
 	private String secondCoordinateText = "";
 
-	protected final ImageView firstIcon;
-	protected final ImageView secondIcon;
+	protected ImageView firstIcon;
+	protected ImageView secondIcon;
+
+	private boolean cachedLayoutRtl;
 
 	protected int getLayoutId() {
 		return R.layout.coordinates_widget;
 	}
 
-	public CoordinatesBaseWidget(@NonNull MapActivity mapActivity, WidgetType widgetType) {
-		super(mapActivity, widgetType);
+	public CoordinatesBaseWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
+			@Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(mapActivity, widgetType, customId, panel);
 
 		divider = view.findViewById(R.id.divider);
-		secondContainer = view.findViewById(R.id.second_container);
-
-		firstCoordinate = view.findViewById(R.id.first_coordinate);
-		secondCoordinate = view.findViewById(R.id.second_coordinate);
-
-		firstIcon = view.findViewById(R.id.first_icon);
-		secondIcon = view.findViewById(R.id.second_icon);
+		updateViewIds(isLayoutRtl());
 
 		view.setOnClickListener(v -> copyCoordinates());
 		updateVisibility(false);
+	}
+
+	@Override
+	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		checkLayoutDirection();
+	}
+
+	private void checkLayoutDirection() {
+		boolean isLayoutRtl = isLayoutRtl();
+		if (cachedLayoutRtl != isLayoutRtl) {
+			cachedLayoutRtl = isLayoutRtl;
+			updateViewIds(isLayoutRtl);
+		}
+	}
+
+	private void updateViewIds(boolean isLayoutRtl) {
+		if (isLayoutRtl) {
+			firstContainer = view.findViewById(R.id.second_container);
+			secondContainer = view.findViewById(R.id.first_coordinates_container);
+
+			firstCoordinate = view.findViewById(R.id.second_coordinate);
+			secondCoordinate = view.findViewById(R.id.first_coordinate);
+
+			firstIcon = view.findViewById(R.id.second_icon);
+			secondIcon = view.findViewById(R.id.first_icon);
+		} else {
+			firstContainer = view.findViewById(R.id.first_coordinates_container);
+			secondContainer = view.findViewById(R.id.second_container);
+
+			firstCoordinate = view.findViewById(R.id.first_coordinate);
+			secondCoordinate = view.findViewById(R.id.second_coordinate);
+
+			firstIcon = view.findViewById(R.id.first_icon);
+			secondIcon = view.findViewById(R.id.second_icon);
+		}
 	}
 
 	protected void copyCoordinates() {
@@ -81,7 +118,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 				coordinates += ", " + secondCoordinateText;
 			}
 			if (ShareMenu.copyToClipboard(app, coordinates)) {
-				showShareSnackbar(coordinates);
+				showShareSnackbar(TextDirectionUtil.markAsLTR(coordinates));
 			}
 		}
 	}
@@ -113,9 +150,9 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			showMgrsCoordinates(lat, lon);
 		} else if (format == PointDescription.OLC_FORMAT) {
 			showOlcCoordinates(lat, lon);
-		} else if(format == PointDescription.SWISS_GRID_FORMAT){
+		} else if (format == PointDescription.SWISS_GRID_FORMAT) {
 			showSwissGrid(lat, lon, false);
-		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT){
+		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 			showSwissGrid(lat, lon, true);
 		} else {
 			showStandardCoordinates(lat, lon, format);
@@ -136,18 +173,10 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 	private void showOlcCoordinates(double lat, double lon) {
 		setupForNonStandardFormat();
-
-		String olcCoordinates;
-		try {
-			olcCoordinates = PointDescription.getLocationOlcName(lat, lon);
-		} catch (RuntimeException e) {
-			log.error("Failed to define OLC location", e);
-			olcCoordinates = "0, 0";
-		}
-		setFirstCoordinateText(olcCoordinates);
+		setFirstCoordinateText(OsmAndFormatter.getOpenLocationCode(lat, lon));
 	}
 
-	private void showSwissGrid(double lat, double lon, boolean swissGridPlus){
+	private void showSwissGrid(double lat, double lon, boolean swissGridPlus) {
 		LatLon latLon = new LatLon(lat, lon);
 		double[] swissGrid = swissGridPlus
 				? SwissGridApproximation.convertWGS84ToLV95(latLon)
@@ -167,6 +196,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	private void setupForNonStandardFormat() {
 		AndroidUiHelper.updateVisibility(firstIcon, true);
 		AndroidUiHelper.updateVisibility(divider, false);
+		AndroidUiHelper.updateVisibility(firstContainer, true);
 		AndroidUiHelper.updateVisibility(secondContainer, false);
 
 		firstIcon.setImageDrawable(getUtmIcon());
@@ -175,6 +205,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	private void showStandardCoordinates(double lat, double lon, int format) {
 		AndroidUiHelper.updateVisibility(firstIcon, true);
 		AndroidUiHelper.updateVisibility(divider, true);
+		AndroidUiHelper.updateVisibility(firstContainer, true);
 		AndroidUiHelper.updateVisibility(secondContainer, true);
 
 		String latitude = "";
@@ -203,12 +234,16 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		setCoordinateText(secondCoordinate, text);
 	}
 
-	private void setCoordinateText(@NonNull TextView textView, @NonNull String text) {
-		AndroidUtils.setTruncatedText(textView, text);
+	private void setCoordinateText(@NonNull OutlinedTextContainer textView, @NonNull String text) {
+		AndroidUtils.setTruncatedText(textView, TextDirectionUtil.markAsLTR(text));
+	}
+
+	protected void setCoordinateIcon(@NonNull ImageView imageView, @NonNull Drawable drawable) {
+		imageView.setImageDrawable(drawable);
 	}
 
 	@NonNull
-	protected Drawable getUtmIcon(){
+	protected Drawable getUtmIcon() {
 		int utmIconId = isNightMode()
 				? R.drawable.widget_coordinates_utm_night
 				: R.drawable.widget_coordinates_utm_day;
@@ -245,7 +280,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
-				mapInfoLayer.recreateTopWidgetsPanel();
+				mapInfoLayer.updateVerticalPanels();
 			}
 			mapActivity.updateStatusBarColor();
 		}
@@ -254,6 +289,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 	public void updateColors(@NonNull TextState textState) {
 		super.updateColors(textState);
+		checkLayoutDirection();
 
 		divider.setBackgroundColor(ColorUtilities.getDividerColor(app, isNightMode()));
 		int textColor = textState.textColor;
@@ -264,7 +300,14 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		firstCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		secondCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
 
+		updateTextOutline(firstCoordinate, textState);
+		updateTextOutline(secondCoordinate, textState);
+
 		view.setBackgroundResource(textState.widgetBackgroundId);
 		updateInfo(null);
+	}
+
+	private boolean isLayoutRtl() {
+		return AndroidUtils.isLayoutMirrored(view);
 	}
 }

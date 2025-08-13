@@ -3,9 +3,11 @@ package net.osmand.plus.plugins.osmedit.helpers;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.LatLon;
@@ -54,8 +56,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity commitEntityImpl(@NonNull Action action, Entity entity, EntityInfo info, String comment,
-	                               boolean closeChangeSet, Set<String> changedTags) {
+	public Entity commitEntityImpl(@NonNull Action action, @NonNull Entity entity,
+			@Nullable EntityInfo info, @Nullable String comment, boolean closeChangeSet,
+			@Nullable Set<String> changedTags) {
 		Entity newEntity = entity;
 		OpenstreetmapsDbHelper dbHelper = plugin.getDBPOI();
 		if (entity.getId() == -1) {
@@ -84,14 +87,15 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		return newEntity;
 	}
 
+	@Nullable
 	@Override
 	public Entity loadEntity(@NonNull MapObject mapObject) {
-		EntityType type = OsmEditingPlugin.getOsmEntityType(mapObject);
+		EntityType type = ObfConstants.getOsmEntityType(mapObject);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
 		boolean isWay = type == EntityType.WAY;
-		long entityId = OsmEditingPlugin.getOsmObjectId(mapObject);
+		long entityId = ObfConstants.getOsmObjectId(mapObject);
 
 		Amenity amenity = null;
 		if (mapObject instanceof Amenity) {

@@ -3,8 +3,10 @@ package net.osmand.plus.notifications;
 import static net.osmand.plus.NavigationService.DEEP_LINK_ACTION_OPEN_ROOT_SCREEN;
 import static net.osmand.plus.NavigationService.USED_BY_NAVIGATION;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -17,6 +19,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.car.app.notification.CarAppExtender;
 import androidx.car.app.notification.CarPendingIntent;
 import androidx.core.app.NotificationCompat;
@@ -30,12 +33,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -58,41 +62,45 @@ public class NavigationNotification extends OsmandNotification {
 		super(app, GROUP_NAME);
 	}
 
-	public static class PauseNavigationReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			app.getRoutingHelper().pauseNavigation();
-		}
-	}
-
-	public static class ResumeNavigationReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			app.getRoutingHelper().resumeNavigation();
-		}
-	}
-
-	public static class StopNavigationReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			app.stopNavigation();
-		}
-	}
-
+	@SuppressLint("UnspecifiedRegisterReceiverFlag")
 	@Override
 	public void init() {
 		leftSide = app.getSettings().DRIVING_REGION.get().leftHandDriving;
-		app.registerReceiver(new PauseNavigationReceiver(),
-				new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
+		BroadcastReceiver pauseReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				app.getRoutingHelper().pauseNavigation();
+			}
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(pauseReceiver, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(pauseReceiver, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new ResumeNavigationReceiver(),
-				new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
+		BroadcastReceiver resumeReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				app.getRoutingHelper().resumeNavigation();
+			}
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(resumeReceiver, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(resumeReceiver, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new StopNavigationReceiver(),
-				new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
+		BroadcastReceiver stopReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				app.stopNavigation();
+			}
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(stopReceiver, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(stopReceiver, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION));
+		}
 	}
 
 	@Override
@@ -107,17 +115,16 @@ public class NavigationNotification extends OsmandNotification {
 
 	@Override
 	public boolean isActive() {
-		NavigationService service = app.getNavigationService();
-		return isEnabled()
-				&& service != null
-				&& (service.getUsedBy() & USED_BY_NAVIGATION) != 0;
-	}
-
-	@Override
-	public boolean isEnabled() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		return routingHelper.isFollowingMode()
 				|| (routingHelper.isRoutePlanningMode() && routingHelper.isPauseNavigation());
+	}
+
+	@Override
+	public boolean isUsedByService(@Nullable Service service) {
+		NavigationService navService = service instanceof NavigationService
+				? (NavigationService) service : app.getNavigationService();
+		return navService != null && (navService.getUsedBy() & USED_BY_NAVIGATION) != 0;
 	}
 
 	@Override
@@ -126,11 +133,10 @@ public class NavigationNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification(boolean wearable) {
-		if (!isEnabled()) {
+	public Builder buildNotification(@Nullable Service service, boolean wearable) {
+		if (!isEnabled(service)) {
 			return null;
 		}
-		NavigationService service = app.getNavigationService();
 		String notificationTitle;
 		StringBuilder notificationText = new StringBuilder();
 		color = 0;
@@ -138,11 +144,11 @@ public class NavigationNotification extends OsmandNotification {
 		Bitmap turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
+		if (isUsedByService(service)) {
 			color = app.getColor(R.color.osmand_orange);
 
 			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app,
-					OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+					OsmAndFormatterParams.USE_LOWER_BOUNDS);
 			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);
 			String etaStr = SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
 					.format(new Date(System.currentTimeMillis() + routingHelper.getLeftTime() * 1000L));
@@ -162,7 +168,6 @@ public class NavigationNotification extends OsmandNotification {
 				deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 
 				if (deviatedFromRoute) {
-					turnImminent = 0;
 					turnType = TurnType.valueOf(TurnType.OFFR, leftSide);
 					nextTurnDistance = (int) routingHelper.getRouteDeviation();
 				} else {
@@ -185,16 +190,17 @@ public class NavigationNotification extends OsmandNotification {
 					drawable.setBounds(0, 0, width, height);
 					drawable.setTurnType(turnType);
 					drawable.setTurnImminent(turnImminent, deviatedFromRoute);
+					drawable.updateColors(!app.getSettings().isLightSystemTheme());
 					turnBitmap = drawableToBitmap(drawable);
 				}
 
-				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS)
+				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app, OsmAndFormatterParams.USE_LOWER_BOUNDS)
 						+ (turnType != null ? " • " + RouteCalculationResult.toString(turnType, app, true) : "");
 				if (ri != null && !Algorithms.isEmpty(ri.getDescriptionRoutePart())) {
 					notificationText.append(ri.getDescriptionRoutePart());
 					if (nextNextTurnDistance > 0) {
 						notificationText.append(" ").append(OsmAndFormatter.getFormattedDistance(nextNextTurnDistance, app,
-								OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+								OsmAndFormatterParams.USE_LOWER_BOUNDS));
 					}
 					notificationText.append("\n");
 				}
@@ -206,7 +212,7 @@ public class NavigationNotification extends OsmandNotification {
 					if (nextIntermediateIndex < intermediatePoints.size()) {
 						TargetPoint nextIntermediate = intermediatePoints.get(nextIntermediateIndex);
 						notificationText.append(OsmAndFormatter.getFormattedDistance(distanceToNextIntermediate, app,
-										OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS))
+										OsmAndFormatterParams.USE_LOWER_BOUNDS))
 								.append(" • ")
 								.append(nextIntermediate.getOnlyName());
 						notificationText.append("\n");
@@ -278,19 +284,16 @@ public class NavigationNotification extends OsmandNotification {
 
 	@Override
 	public void setupNotification(Notification notification) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			int smallIconViewId = app.getResources().getIdentifier("right_icon", "id", android.R.class.getPackage().getName());
+		int smallIconViewId = app.getResources().getIdentifier("right_icon", "id", android.R.class.getPackage().getName());
+		if (smallIconViewId != 0) {
+			if (notification.contentView != null)
+				notification.contentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 
-			if (smallIconViewId != 0) {
-				if (notification.contentView != null)
-					notification.contentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
+			if (notification.headsUpContentView != null)
+				notification.headsUpContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 
-				if (notification.headsUpContentView != null)
-					notification.headsUpContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
-
-				if (notification.bigContentView != null)
-					notification.bigContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
-			}
+			if (notification.bigContentView != null)
+				notification.bigContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 		}
 	}
 

@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -44,7 +45,9 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) requireActivity();
+		OsmandApplication app = mapActivity.getMyApplication();
+
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_active, container, false);
 		EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -65,7 +68,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				}
 
 				MapMarker marker = adapter.getItem(pos);
-				OsmandApplication app = mapActivity.getMyApplication();
 				if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
 					app.getMapMarkersHelper().moveMarkerToTop(marker);
 					updateAdapter();
@@ -95,7 +97,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			}
 
 			private void showMap(LatLon latLon, PointDescription desc, Object objToShow) {
-				mapActivity.getMyApplication().getSettings().setMapLocationToShow(latLon.getLatitude(),
+				app.getSettings().setMapLocationToShow(latLon.getLatitude(),
 						latLon.getLongitude(), 15, desc, true, objToShow);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);
 				((DialogFragment) getParentFragment()).dismiss();
@@ -114,7 +116,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					hideSnackbar();
-					mapActivity.getMyApplication().getMapMarkersHelper().saveGroups(false);
+					app.getMapMarkersHelper().saveGroups(false);
 					adapter.notifyDataSetChanged();
 				}
 			}
@@ -127,8 +129,10 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 		View emptyView = mainView.findViewById(R.id.empty_view);
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(mapActivity.getMyApplication().getSettings().isLightContent()
-				? R.drawable.ic_empty_state_marker_list_day : R.drawable.ic_empty_state_marker_list_night);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		emptyImageView.setImageResource(nightMode
+				? R.drawable.ic_empty_state_marker_list_night
+				: R.drawable.ic_empty_state_marker_list_day);
 		recyclerView.setEmptyView(emptyView);
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

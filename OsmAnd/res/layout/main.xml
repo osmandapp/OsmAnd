@@ -20,35 +20,9 @@
 				android:id="@+id/map_view_with_layers"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:orientation="vertical"/>
+				android:orientation="vertical" />
 
-			<FrameLayout
-				android:id="@+id/MapHudButtonsOverlay"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:fitsSystemWindows="true">
-
-				<include
-					android:id="@+id/MapHudButtonsOverlayTop"
-					layout="@layout/map_hud_top" />
-
-				<FrameLayout
-					android:id="@+id/left_side_menu"
-					android:layout_width="0dp"
-					android:layout_height="0dp" />
-
-				<include
-					android:id="@+id/MapHudButtonsOverlayBottom"
-					layout="@layout/map_hud_bottom" />
-
-				<include
-					android:id="@+id/MapHudButtonsOverlayQuickActions"
-					layout="@layout/map_hud_quick_actions" />
-
-				<include
-					android:id="@+id/MapHudButtonsOverlay3DMode"
-					layout="@layout/map_hud_3d_mode" />
-			</FrameLayout>
+			<include layout="@layout/map_hud_layout" />
 
 			<FrameLayout
 				android:layout_width="match_parent"
@@ -73,8 +47,6 @@
 				android:background="@drawable/bg_contextmenu_shadow_top_light" />
 
 		</FrameLayout>
-
-
 
 	</LinearLayout>
 

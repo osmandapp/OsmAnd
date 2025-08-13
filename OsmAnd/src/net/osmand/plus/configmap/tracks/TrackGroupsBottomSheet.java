@@ -42,9 +42,8 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 		nightMode = isNightMode(true);
 
 		Fragment target = getTargetFragment();
-		if (target instanceof TracksTabsFragment) {
-			TracksTabsFragment fragment = (TracksTabsFragment) target;
-			trackTabs = fragment.getTrackTabs();
+		if (target instanceof TracksTabsFragment fragment) {
+			trackTabs = fragment.getSortedTrackTabs(true);
 			selectedTab = fragment.getSelectedTab();
 		}
 	}
@@ -87,7 +86,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 		public void onBindViewHolder(@NonNull TrackGroupViewHolder holder, int position) {
 			TrackTab trackTab = trackTabs.get(position);
 
-			holder.title.setText(trackTab.getName(app, true));
+			holder.title.setText(trackTab.getDirName(true));
 
 			boolean selected = trackTab == selectedTab;
 			int colorId = selected ? activeColorId : defaultColorId;
@@ -101,7 +100,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 				int adapterPosition = holder.getAdapterPosition();
 				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksTabsFragment) {
 					TrackTab tab = trackTabs.get(adapterPosition);
-					((TracksTabsFragment) target).setSelectedTab(tab.getTypeName());
+					((TracksTabsFragment) target).setSelectedTab(tab.getId());
 				}
 				dismiss();
 			});

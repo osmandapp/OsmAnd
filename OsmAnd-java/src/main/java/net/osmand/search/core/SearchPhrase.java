@@ -16,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.ArabicNormalizer;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
@@ -331,6 +332,10 @@ public class SearchPhrase {
 				}
 			}
 		}
+		if (ArabicNormalizer.isSpecialArabic(mainUnknownWordToSearch)) {
+			String normalized = ArabicNormalizer.normalize(mainUnknownWordToSearch);
+			mainUnknownWordToSearch = normalized == null ? mainUnknownWordToSearch : normalized;
+		}
 	}
 
 	public List<SearchWord> getWords() {
@@ -549,7 +554,7 @@ public class SearchPhrase {
 	}
 	
 
-	private void addResult(SearchResult res, SearchPhrase sp) {
+	public void addResult(SearchResult res, SearchPhrase sp) {
 		SearchWord sw = new SearchWord(res.wordsSpan != null ? res.wordsSpan : res.localeName.trim(), res);
 		sp.words.add(0, sw);
 	}
@@ -802,21 +807,28 @@ public class SearchPhrase {
 
 		@Override
 		public boolean matches(String name) {
+			if (name == null || name.length() == 0) {
+				return false;
+			}
 			return sm.matches(name);
 		}
 		
 	}
 	
 	public int countUnknownWordsMatchMainResult(SearchResult sr) {
-		return countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, 0);
+		return countUnknownWordsMatchInternal(sr, null, 0);
 	}
 	
 	public int countUnknownWordsMatchMainResult(SearchResult sr, int amountMatchingWords) {
-		return countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, amountMatchingWords);
+		return countUnknownWordsMatchInternal(sr, null, amountMatchingWords);
+	}
+	
+	public int countUnknownWordsMatchMainResult(SearchResult sr, String name, int amountMatchingWords) {
+		return countUnknownWordsMatchInternal(sr, name, amountMatchingWords);
 	}
 	
 	
-	public int countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames, int amountMatchingWords) {
+	private int countUnknownWordsMatchInternal(SearchResult sr, String extraName, int amountMatchingWords) {
 		int r = 0;
 		if (otherUnknownWords.size() > 0) {
 			for (int i = 0; i < otherUnknownWords.size(); i++) {
@@ -825,7 +837,8 @@ public class SearchPhrase {
 					match = true;
 				} else {
 					NameStringMatcher ms = getUnknownNameStringMatcher(i);
-					if (ms.matches(localeName) || ms.matches(otherNames)) {
+					if (ms.matches(sr.localeName) || ms.matches(sr.otherNames)
+							|| ms.matches(sr.alternateName) || ms.matches(extraName) ) {
 						match = true;
 					}
 				}
@@ -842,9 +855,11 @@ public class SearchPhrase {
 			sr.firstUnknownWordMatches = true;
 			r++;
 		} else {
-			boolean match = localeName.equals(getFirstUnknownSearchWord())
-					|| getFirstUnknownNameStringMatcher().matches(localeName)
-					|| getFirstUnknownNameStringMatcher().matches(otherNames);
+			boolean match =
+					getFirstUnknownNameStringMatcher().matches(sr.localeName) 
+					|| getFirstUnknownNameStringMatcher().matches(sr.otherNames)
+					|| getFirstUnknownNameStringMatcher().matches(sr.alternateName)
+					|| getFirstUnknownNameStringMatcher().matches(extraName);
 			if(match) {
 				r++;
 			}

@@ -23,11 +23,6 @@ class WikiAndTravelExportType extends AbstractMapExportType {
 		return R.drawable.ic_action_wikipedia;
 	}
 
-	@Override
-	protected boolean shouldSkipLocalItem(@NonNull LocalItem localItem) {
-		return localItem.getType() == LocalItemType.WIKI_AND_TRAVEL_MAPS;
-	}
-
 	@NonNull
 	@Override
 	public List<FileSubtype> getRelatedFileSubtypes() {

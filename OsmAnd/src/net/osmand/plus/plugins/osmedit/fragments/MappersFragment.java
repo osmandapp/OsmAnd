@@ -204,7 +204,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateContributionsList() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		LinearLayout list = mainView.findViewById(R.id.contributions_list);
 		list.removeAllViews();
 

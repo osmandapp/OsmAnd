@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
+import static net.osmand.plus.routing.RouteCalculationResult.FIRST_LAST_LOCATION_PROVIDER;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
@@ -33,5 +35,10 @@ class GeometryWayLocationProvider implements GeometryWayProvider {
 	@Override
 	public float getHeight(int index) {
 		return 0;
+	}
+
+	@Override
+	public boolean isFirstLastLocation(int index) {
+		return FIRST_LAST_LOCATION_PROVIDER.equals(locations.get(index).getProvider());
 	}
 }

@@ -1,13 +1,6 @@
 package net.osmand.binary;
 
-import static net.osmand.router.GeneralRouter.*;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import gnu.trove.map.hash.TIntObjectHashMap;
-
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -15,6 +8,12 @@ import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import static net.osmand.router.GeneralRouter.GeneralRouterProfile;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -328,7 +327,7 @@ public class RouteDataObject {
 				int k = kt[i];
 				if (region.routeEncodingRules.size() > k) {
 					if (refTag.equals(region.routeEncodingRules.get(k).getTag())) {
-						return names.get(k);
+						return Algorithms.splitAndClearRepeats(names.get(k), ";");
 					}
 					if (refTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						refDefault = names.get(k);
@@ -336,7 +335,7 @@ public class RouteDataObject {
 				}
 			}
 			if (refDefault != null) {
-				return refDefault;
+				return Algorithms.splitAndClearRepeats(refDefault, ";");
 			}
 			//return names.get(region.refTypeRule);
 		}
@@ -531,68 +530,6 @@ public class RouteDataObject {
 		return types;
 	}
 
-	public void processConditionalTags(long conditionalTime) {
-		int sz = types.length;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r != null && r.conditional()) {
-				int vl = r.conditionalValue(conditionalTime);
-				if (vl != 0) {
-					RouteTypeRule rtr = region.quickGetEncodingRule(vl);
-					String nonCondTag = rtr.getTag();
-					int ks;
-					for (ks = 0; ks < types.length; ks++) {
-						RouteTypeRule toReplace = region.quickGetEncodingRule(types[ks]);
-						if (toReplace != null && toReplace.getTag().equals(nonCondTag)) {
-							break;
-						}
-					}
-					if (ks == types.length) {
-						int[] ntypes = new int[types.length + 1];
-						System.arraycopy(types, 0, ntypes, 0, types.length);
-						types = ntypes;
-					}
-					types[ks] = vl;
-				}
-			}
-		}
-
-		if (pointTypes != null) {
-			for (int i = 0; i < pointTypes.length; i++) {
-				if (pointTypes[i] != null) {
-					int[] pTypes = pointTypes[i];
-					int pSz = pTypes.length;
-					if (pSz > 0) {
-						for (int j = 0; j < pSz; j++) {
-							RouteTypeRule r = region.quickGetEncodingRule(pTypes[j]);
-							if (r != null && r.conditional()) {
-								int vl = r.conditionalValue(conditionalTime);
-								if (vl != 0) {
-									RouteTypeRule rtr = region.quickGetEncodingRule(vl);
-									String nonCondTag = rtr.getTag();
-									int ks;
-									for (ks = 0; ks < pointTypes[i].length; ks++) {
-										RouteTypeRule toReplace = region.quickGetEncodingRule(pointTypes[i][ks]);
-										if (toReplace != null && toReplace.getTag().contentEquals(nonCondTag)) {
-											break;
-										}
-									}
-									if (ks == pTypes.length) {
-										int[] ntypes = new int[pTypes.length + 1];
-										System.arraycopy(pTypes, 0, ntypes, 0, pTypes.length);
-										pTypes = ntypes;
-									}
-									pTypes[ks] = vl;
-								}
-							}
-						}
-					}
-					pointTypes[i] = pTypes;
-				}
-			}
-		}
-	}
-
 	public float getMaximumSpeed(boolean direction) {
 		return getMaximumSpeed(direction, RouteTypeRule.PROFILE_NONE);
 	}
@@ -698,6 +635,31 @@ public class RouteDataObject {
 			if (r.roundabout()) {
 				return true;
 			}
+		}
+		return false;
+	}
+
+	public boolean isClockwise(boolean leftSide) {
+		if (pointTypes != null) {
+			for (int[] tt : pointTypes) {
+				if (tt == null) {
+					continue;
+				}
+				for (int t : tt) {
+					RouteTypeRule r = region.quickGetEncodingRule(t);
+					if (r.getTag().equals("direction")) {
+						if (r.getValue().equals("clockwise")) {
+							return true;
+						}
+						if (r.getValue().equals("anticlockwise")) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		if (leftSide) {
+			return true;
 		}
 		return false;
 	}
@@ -1006,42 +968,6 @@ public class RouteDataObject {
 
 	private double simplifyDistance(int x, int y, int px, int py) {
 		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
-	}
-
-	private static void assertTrueLength(String vl, float exp) {
-		float dest = parseLength(vl, 0);
-		if (exp != dest) {
-			System.err.println("FAIL " + vl + " " + dest);
-		} else {
-			System.out.println("OK " + vl);
-		}
-	}
-
-	public static void main(String[] args) {
-		assertTrueLength("10 km", 10000);
-		assertTrueLength("0.01 km", 10);
-		assertTrueLength("0.01 km 10 m", 20);
-		assertTrueLength("10 m", 10);
-		assertTrueLength("10m", 10);
-		assertTrueLength("3.4 m", 3.4f);
-		assertTrueLength("3.40 m", 3.4f);
-		assertTrueLength("10 m 10m", 20);
-		assertTrueLength("14'10\"", 4.5212f);
-		assertTrueLength("14.5'", 4.4196f);
-		assertTrueLength("14.5 ft", 4.4196f);
-		assertTrueLength("14'0\"", 4.2672f);
-		assertTrueLength("15ft", 4.572f);
-		assertTrueLength("15 ft 1 in", 4.5974f);
-		assertTrueLength("4.1 metres", 4.1f);
-		assertTrueLength("14'0''", 4.2672f);
-		assertTrueLength("14 feet", 4.2672f);
-		assertTrueLength("14 mile", 22530.76f);
-		assertTrueLength("14 cm", 0.14f);
-
-// 		float badValue = -1;
-// 		assertTrueLength("none", badValue);
-// 		assertTrueLength("m 4.1", badValue);
-// 		assertTrueLength("1F4 m", badValue);
 	}
 
 	public String coordinates() {

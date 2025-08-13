@@ -12,14 +12,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
@@ -34,7 +27,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected String name = null;
 	protected String enName = null;
 	/**
-	 * Looks like: {ru=Москва, dz=མོསི་ཀོ...} and does not contain values of OSM tags "name" and "name:en",
+	 * Looks like: {dz=མོསི་ཀོ...} and does not contain values of OSM tags "name" and "name:en",
 	 * see {@link name} and {@link enName} respectively.
 	 */
 	protected Map<String, String> names = null;
@@ -87,7 +80,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			names.putAll(name);
 		}
 	}
-	
+
 	public Map<String, String> getNamesMap(boolean includeEn) {
 		if ((!includeEn || Algorithms.isEmpty(enName)) && names == null) {
 			return Collections.emptyMap();
@@ -112,7 +105,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	
 	public List<String> getOtherNames(boolean transliterate) {
 		List<String> l = new ArrayList<String>();
-		String enName = getEnName(transliterate); 
+		String enName = getEnName(transliterate);
 		if (!Algorithms.isEmpty(enName)) {
 			l.add(enName);
 		}
@@ -265,7 +258,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (this == thatObj) {
 			return true;
 		} else {
-			if(thatObj == null || this.id == null || thatObj.id == null) {
+			if (thatObj == null || this.id == null || thatObj.id == null) {
 				return false;
 			}
 			return this.id.longValue() == thatObj.id.longValue() &&
@@ -358,7 +351,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 				br.close();
 				str = bld.toString();
 				// ugly fix of temporary problem of map generation
-				if(isContentZipped(str)) {
+				if (isContentZipped(str)) {
 					str = unzipContent(str);
 				}
 			} catch (IOException e) {
@@ -395,5 +388,19 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (json.has("id")) {
 			o.id = json.getLong("id");
 		}
+	}
+
+	public static boolean isNameLangTag(String tag) {
+		if (tag.startsWith("name:")) {
+			// languages code <= 3
+			if (tag.length() <= "name:".length() + 3) {
+				return true;
+			}
+			int l = tag.indexOf("-");
+			if (l <= "name:".length() + 3) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

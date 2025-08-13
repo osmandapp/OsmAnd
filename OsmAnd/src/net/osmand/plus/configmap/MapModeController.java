@@ -34,16 +34,6 @@ public class MapModeController extends BaseDialogController implements MapThemeP
 		selectedTheme = preference.get();
 	}
 
-	public void registerDialog(@NonNull IDialog dialog) {
-		dialogManager.register(PROCESS_ID, dialog);
-	}
-
-	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
-		if (activity != null && !activity.isChangingConfigurations()) {
-			dialogManager.unregister(PROCESS_ID);
-		}
-	}
-
 	@NonNull
 	public String getHeaderSummary() {
 		return selectedTheme.toHumanString(app);

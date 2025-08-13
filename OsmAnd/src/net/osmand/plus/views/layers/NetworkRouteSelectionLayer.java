@@ -5,7 +5,6 @@ import static net.osmand.data.PointDescription.POINT_TYPE_ROUTE;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.util.Pair;
 
@@ -18,13 +17,15 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
 import net.osmand.plus.utils.FileUtils;
@@ -38,8 +39,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -47,7 +46,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 
 	private OsmandApplication app;
 	private ResourceManager resourceManager;
-	private Map<RouteKey, GPXFile> routesCache = new HashMap<>();
+	private Map<RouteKey, GpxFile> routesCache = new HashMap<>();
 
 	private NetworkRouteSelectionTask selectionTask;
 
@@ -90,11 +89,11 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Pair) {
 			Pair<?, ?> pair = (Pair<?, ?>) o;
-			if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
-				RouteKey routeKey = (RouteKey) pair.first;
-				Locale locale = LocaleHelper.getPreferredNameLocale(app, routeKey.getSupportedNameLocales());
-				String localeId = locale != null ? locale.getLanguage() : null;
-				return new PointDescription(POINT_TYPE_ROUTE, routeKey.getRouteName(localeId));
+			if (pair.first instanceof RouteKey routeKey && pair.second instanceof QuadRect) {
+				OsmandSettings settings = app.getSettings();
+				String locale = settings.MAP_PREFERRED_LOCALE.get();
+				boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+				return new PointDescription(POINT_TYPE_ROUTE, routeKey.getRouteName(locale, transliterate));
 			}
 		}
 		return null;
@@ -114,7 +113,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 				Pair<RouteKey, QuadRect> routePair = (Pair<RouteKey, QuadRect>) pair;
 
 				LatLon latLon = getObjectLocation(object);
-				GPXFile gpxFile = routesCache.get(pair.first);
+				GpxFile gpxFile = routesCache.get(pair.first);
 				if (gpxFile == null) {
 					if (isSelectingRoute()) {
 						cancelRouteSelection();
@@ -132,29 +131,29 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	private void loadNetworkGpx(@NonNull Pair<RouteKey, QuadRect> pair, @NonNull LatLon latLon) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			CallbackWithObject<GPXFile> callback = gpxFile -> {
-				if (gpxFile != null && gpxFile.error == null) {
+			CallbackWithObject<GpxFile> callback = gpxFile -> {
+				if (gpxFile != null && gpxFile.getError() == null) {
 					routesCache.put(pair.first, gpxFile);
 					saveAndOpenGpx(gpxFile, pair, latLon);
 				}
 				return true;
 			};
 			selectionTask = new NetworkRouteSelectionTask(activity, pair.first, pair.second, callback);
-			selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(selectionTask);
 		}
 	}
 
-	private void saveAndOpenGpx(@NonNull GPXFile gpxFile, @NonNull Pair<RouteKey, QuadRect> pair, @NonNull LatLon latLon) {
+	private void saveAndOpenGpx(@NonNull GpxFile gpxFile, @NonNull Pair<RouteKey, QuadRect> pair, @NonNull LatLon latLon) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			WptPt wptPt = new WptPt();
-			wptPt.lat = latLon.getLatitude();
-			wptPt.lon = latLon.getLongitude();
+			wptPt.setLat(latLon.getLatitude());
+			wptPt.setLon(latLon.getLongitude());
 
 			String name = getObjectName(pair).getName();
 			String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
 			File file = new File(FileUtils.getTempDir(app), fileName);
-			GpxUiHelper.saveAndOpenGpx(activity, file, gpxFile, wptPt, null, pair.first);
+			GpxUiHelper.saveAndOpenGpx(activity, file, gpxFile, wptPt, null, pair.first, false);
 		}
 	}
 
@@ -169,12 +168,12 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	}
 
 	private void clearRouteCache(@NonNull BinaryMapIndexReader reader) {
-		Map<RouteKey, GPXFile> cache = new HashMap<>(routesCache);
-		for (Iterator<Entry<RouteKey, GPXFile>> iterator = cache.entrySet().iterator(); iterator.hasNext(); ) {
-			QuadRect rect = iterator.next().getValue().getRect();
-			boolean containsRoute = reader.containsRouteData(MapUtils.get31TileNumberX(rect.left),
-					MapUtils.get31TileNumberY(rect.top), MapUtils.get31TileNumberX(rect.right),
-					MapUtils.get31TileNumberY(rect.bottom), 15);
+		Map<RouteKey, GpxFile> cache = new HashMap<>(routesCache);
+		for (Iterator<Entry<RouteKey, GpxFile>> iterator = cache.entrySet().iterator(); iterator.hasNext(); ) {
+			KQuadRect rect = iterator.next().getValue().getRect();
+			boolean containsRoute = reader.containsRouteData(MapUtils.get31TileNumberX(rect.getLeft()),
+					MapUtils.get31TileNumberY(rect.getTop()), MapUtils.get31TileNumberX(rect.getRight()),
+					MapUtils.get31TileNumberY(rect.getBottom()), 15);
 			if (containsRoute) {
 				iterator.remove();
 			}
@@ -188,12 +187,34 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, boolean unknownLocation, boolean excludeUntouchableObjects) {
 
 	}
 
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	public void clearCachedGpx(@NonNull GpxFile gpxFile) {
+		RouteKey routeKey = RouteKey.fromGpxFile(gpxFile);
+
+		if (!routesCache.containsKey(routeKey)) {
+			routeKey = findKeyByValue(gpxFile);
+		}
+
+		if (routeKey != null) {
+			routesCache.remove(routeKey);
+		}
+	}
+
+	private RouteKey findKeyByValue(@NonNull GpxFile gpxFile) {
+		for (Map.Entry<RouteKey, GpxFile> entry : routesCache.entrySet()) {
+			if (entry.getValue() == gpxFile ||
+					Algorithms.stringsEqual(entry.getValue().getPath(), gpxFile.getPath())) {
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 }

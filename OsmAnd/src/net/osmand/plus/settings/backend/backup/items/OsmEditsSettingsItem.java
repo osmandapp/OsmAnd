@@ -224,7 +224,7 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(false);
 	}
 
 	@Nullable

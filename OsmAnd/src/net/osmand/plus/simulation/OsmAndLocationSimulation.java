@@ -7,7 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
@@ -27,7 +28,7 @@ public class OsmAndLocationSimulation {
 	private List<LoadSimulatedLocationsListener> loadLocationsListeners = new ArrayList<>();
 
 	@Nullable
-	private GPXFile gpxFile = null;
+	private GpxFile gpxFile = null;
 	private List<LocationSimulationListener> listeners = new ArrayList<>();
 
 	public OsmAndLocationSimulation(@NonNull OsmandApplication app) {
@@ -51,7 +52,7 @@ public class OsmAndLocationSimulation {
 	}
 
 	@Nullable
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
@@ -136,7 +137,7 @@ public class OsmAndLocationSimulation {
 
 	private void startLoadLocationsTask(@Nullable Runnable runnable) {
 		loadLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), getLoadLocationsListener(runnable));
-		loadLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(loadLocationsTask);
 	}
 
 	private void stopLoadLocationsTask() {
@@ -154,7 +155,7 @@ public class OsmAndLocationSimulation {
 		startStopRouteAnimation(activity, true, null);
 	}
 
-	public void startSimulationThread(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	public void startSimulationThread(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
 	                                  int firstLocationOffset, boolean useLocationTime, float coeff) {
 		this.gpxFile = gpxFile;
 		List<SimulatedLocation> locations = LocationSimulationUtils.getSimulatedLocationsForGpx(gpxFile, firstLocationOffset);

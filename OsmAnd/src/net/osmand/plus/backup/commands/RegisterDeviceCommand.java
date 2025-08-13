@@ -87,6 +87,8 @@ public class RegisterDeviceCommand extends BackupCommand {
 					settings.BACKUP_ACCESS_TOKEN.set(result.getString("accesstoken"));
 					settings.BACKUP_ACCESS_TOKEN_UPDATE_TIME.set(result.getString("udpatetime"));
 
+					helper.resetBackupPurchase();
+
 					message = "Device have been registered successfully";
 					status = STATUS_SUCCESS;
 				} catch (JSONException e) {
@@ -105,10 +107,13 @@ public class RegisterDeviceCommand extends BackupCommand {
 
 	@Override
 	protected void onProgressUpdate(Object... values) {
+		int status = (Integer) values[0];
+		String message = (String) values[1];
+		BackupError backupError = (BackupError) values[2];
+		if (status == STATUS_SUCCESS) {
+			getApp().getInAppPurchaseHelper().requestInventory(false);
+		}
 		for (OnRegisterDeviceListener listener : getListeners()) {
-			int status = (Integer) values[0];
-			String message = (String) values[1];
-			BackupError backupError = (BackupError) values[2];
 			listener.onRegisterDevice(status, message, backupError);
 		}
 	}

@@ -4,8 +4,8 @@ import static net.osmand.plus.helpers.ColorPaletteHelper.GRADIENT_ID_SPLITTER;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.ColorPalette;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.shared.ColorPalette;
 
 import java.util.Objects;
 
@@ -20,9 +20,8 @@ public class PaletteGradientColor extends PaletteColor {
 	private int index;
 
 	public PaletteGradientColor(@NonNull String typeName, @NonNull String paletteName,
-	                            @NonNull ColorPalette colorPalette,
-	                            long creationTime, int initialIndex) {
-		super(null, creationTime);
+	                            @NonNull ColorPalette colorPalette, int initialIndex) {
+		super(null);
 		this.stringId = typeName + GRADIENT_ID_SPLITTER + paletteName;
 		this.typeName = typeName;
 		this.paletteName = paletteName;

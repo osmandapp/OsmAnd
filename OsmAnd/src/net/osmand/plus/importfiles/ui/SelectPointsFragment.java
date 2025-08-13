@@ -1,7 +1,7 @@
 package net.osmand.plus.importfiles.ui;
 
+
 import android.app.Dialog;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -23,25 +23,25 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Location;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListener;
 import net.osmand.plus.importfiles.ui.TrackPointsAdapter.OnItemSelectedListener;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -109,7 +109,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	protected void setupListView(@NonNull View view) {
-		GPXFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
+		GpxFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
 		GpxDisplayGroup group = app.getGpxDisplayHelper().buildPointsDisplayGroup(gpxFile, points, trackItem.name);
 
 		adapter = new TrackPointsAdapter(view.getContext(), selectedPoints, nightMode);
@@ -127,7 +127,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	@NonNull
 	private View getHeaderView() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.suggested_points_header, null);
 
 		TextView title = view.findViewById(R.id.title);
@@ -149,10 +149,9 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 		String text = getString(R.string.selected_waypoints_descr, trackItem.name);
 		int start = text.indexOf(trackItem.name);
 		int end = start + trackItem.name.length();
-		Typeface typeface = FontCache.getRobotoMedium(app);
 
 		SpannableString spannable = new SpannableString(text);
-		spannable.setSpan(new CustomTypefaceSpan(typeface), start, end, 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), start, end, 0);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), start, end, 0);
 		return spannable;
 	}

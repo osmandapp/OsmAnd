@@ -1,11 +1,15 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -14,12 +18,14 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -103,11 +109,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof FavouritePoint) {
-			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
-			float textScale = getTextScale();
-			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
 			if (!changeMarkerPositionMode) {
 				changeMarkerPositionMode = true;
 				showFavorites();
@@ -232,19 +233,54 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return markersGroup != null && !markersGroup.isDisabled();
 	}
 
-	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y, @Nullable MapMarker marker,
-							  float textScale) {
-		PointImageDrawable pointImageDrawable;
-		boolean history = false;
-		if (marker != null) {
-			pointImageDrawable = PointImageUtils.getOrCreateSyncedIcon(getContext(),
-					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
-			history = marker.history;
-		} else {
-			pointImageDrawable = PointImageUtils.getFromPoint(getContext(),
-					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
-		}
-		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
+	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y,
+	                          @Nullable MapMarker marker, float textScale) {
+		PointImageDrawable drawable = createBigPointIcon(favoritePoint, marker);
+		boolean history = marker != null && marker.history;
+		drawable.drawPoint(canvas, x, y, textScale, history);
+	}
+
+	@NonNull
+	private PointImageDrawable createBigPointIcon(@NonNull FavouritePoint favoritePoint,
+	                                              @Nullable MapMarker marker) {
+		int pointColor = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+		int iconId = favoritePoint.getOverlayIconId(getContext());
+		BackgroundType backgroundType = favoritePoint.getBackgroundType();
+		boolean synced = marker != null;
+		return createFavoriteIcon(pointColor, iconId, backgroundType, synced);
+	}
+
+	@NonNull
+	public PointImageDrawable createHomeIcon() {
+		return createSpecialIcon(SpecialPointType.HOME);
+	}
+
+	@NonNull
+	public PointImageDrawable createWorkIcon() {
+		return createSpecialIcon(SpecialPointType.WORK);
+	}
+
+	@NonNull
+	public PointImageDrawable createParkingIcon() {
+		return createSpecialIcon(SpecialPointType.PARKING);
+	}
+
+	@NonNull
+	public PointImageDrawable createSpecialIcon(@NonNull SpecialPointType pointType) {
+		int iconId = pointType.getIconId(getContext());
+		int pointColor = favouritesHelper.getParkingIconColor();
+		return createFavoriteIcon(pointColor, iconId, DEFAULT_BACKGROUND_TYPE, false);
+	}
+
+	@NonNull
+	public PointImageDrawable createDefaultFavoriteIcon(@ColorInt int pointColor) {
+		return createFavoriteIcon(pointColor, DEFAULT_UI_ICON_ID, DEFAULT_BACKGROUND_TYPE, false);
+	}
+
+	@NonNull
+	public PointImageDrawable createFavoriteIcon(@ColorInt int pointColor, @DrawableRes int iconId,
+	                                             @NonNull BackgroundType bgType, boolean synced) {
+		return PointImageUtils.getOrCreate(getContext(), pointColor, true, synced, iconId, bgType);
 	}
 
 	private List<FavoriteGroup> getFavoriteGroups() {
@@ -314,12 +350,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return false;
 	}
 
-	private void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super FavouritePoint> res) {
+	private void collectFavoritesFromPoint(@NonNull MapSelectionResult result) {
 		List<FavouritePoint> favouritePoints = favouritesHelper.getFavouritePoints();
 		if (Algorithms.isEmpty(favouritePoints)) {
 			return;
 		}
-
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -342,7 +379,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
 					: tb.isLatLonNearPixel(lat, lon, point.x, point.y, radius);
 			if (add) {
-				res.add(favouritePoint);
+				result.collect(favouritePoint, this);
 			}
 		}
 	}
@@ -356,10 +393,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= START_ZOOM) {
-			getFavoriteFromPoint(tileBox, point, res);
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
+			boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (settings.SHOW_FAVORITES.get() && result.getTileBox().getZoom() >= START_ZOOM) {
+			collectFavoritesFromPoint(result);
 		}
 	}
 
@@ -399,6 +436,15 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public boolean isObjectMovable(Object o) {
 		return o instanceof FavouritePoint;
+	}
+
+	@Override
+	public Object getMoveableObjectIcon(@NonNull Object o) {
+		if (o instanceof FavouritePoint objectInMotion) {
+			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
+			return createBigPointIcon(objectInMotion, mapMarker);
+		}
+		return null;
 	}
 
 	@Override

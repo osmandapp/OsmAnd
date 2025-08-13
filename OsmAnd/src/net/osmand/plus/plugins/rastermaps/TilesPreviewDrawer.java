@@ -14,6 +14,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -54,8 +55,8 @@ public class TilesPreviewDrawer {
 		minZoomBitmap.eraseColor(Color.TRANSPARENT);
 		maxZoomBitmap.eraseColor(Color.TRANSPARENT);
 
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
-		DrawSettings drawSettings = new DrawSettings(night);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+		DrawSettings drawSettings = new DrawSettings(nightMode);
 		drawTilePreview(minZoomCanvas, center, minZoom, drawSettings);
 		drawTilePreview(maxZoomCanvas, center, maxZoom, drawSettings);
 
@@ -64,7 +65,7 @@ public class TilesPreviewDrawer {
 
 
 	private void drawTilePreview(@NonNull Canvas canvas, @NonNull LatLon center, int zoom, @NonNull DrawSettings drawSettings) {
-		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 		tileBox.setLatLonCenter(center.getLatitude(), center.getLongitude());
 		tileBox.setZoom(zoom);
 		tileBox.setPixelDimensions(previewSize, previewSize);

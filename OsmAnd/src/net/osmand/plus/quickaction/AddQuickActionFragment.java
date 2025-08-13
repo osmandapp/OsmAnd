@@ -27,14 +27,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.quickaction.AddQuickActionsAdapter.ItemClickListener;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
-public class AddQuickActionFragment extends BaseOsmAndFragment
-		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
+public class AddQuickActionFragment extends BaseOsmAndFragment implements ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddQuickActionFragment.class.getSimpleName();
 
@@ -94,7 +94,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 		return view;
 	}
 
-	private void setupOnBackPressedCallback(){
+	private void setupOnBackPressedCallback() {
 		backPressedCallback = new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {

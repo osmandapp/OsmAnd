@@ -1,21 +1,8 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.DOWNLOAD_EXT;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TEMP_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
-
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,12 +12,21 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -52,7 +48,7 @@ public class FileUtils {
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
 	public static void renameFile(@NonNull FragmentActivity activity, @NonNull File file,
-	                              @Nullable Fragment target, boolean usedOnMap) {
+			@Nullable Fragment target, boolean usedOnMap) {
 		if (file.exists()) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			RenameFileBottomSheet.showInstance(fragmentManager, target, file, usedOnMap);
@@ -60,9 +56,9 @@ public class FileUtils {
 	}
 
 	@Nullable
-	public static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
-	                                    RenameCallback callback) {
-		File dest = checkRenamePossibility(ctx, source, newName, false);
+	public static File renameSQLiteFile(@NonNull OsmandApplication app, @NonNull File source,
+			@NonNull String newName, @Nullable RenameCallback callback) {
+		File dest = checkRenamePossibility(app, source, newName, false);
 		if (dest == null) {
 			return null;
 		}
@@ -73,9 +69,9 @@ public class FileUtils {
 		if (source.renameTo(dest)) {
 			String[] suffixes = {"-journal", "-wal", "-shm"};
 			for (String s : suffixes) {
-				File file = new File(ctx.getDatabasePath(source + s).toString());
+				File file = new File(app.getDatabasePath(source + s).toString());
 				if (file.exists()) {
-					file.renameTo(ctx.getDatabasePath(dest + s));
+					file.renameTo(app.getDatabasePath(dest + s));
 				}
 			}
 			if (callback != null) {
@@ -83,14 +79,14 @@ public class FileUtils {
 			}
 			return dest;
 		} else {
-			Toast.makeText(ctx, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_can_not_be_renamed);
 		}
 		return null;
 	}
 
 	@Nullable
 	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File source,
-	                                 @NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
+			@NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
@@ -101,14 +97,14 @@ public class FileUtils {
 				callback.fileRenamed(source, res);
 			}
 		} else {
-			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_can_not_be_renamed);
 		}
 		return res;
 	}
 
 	@Nullable
 	public static File renameFile(@NonNull OsmandApplication app, @NonNull File source,
-	                              @NonNull String newName, boolean dirAllowed, RenameCallback callback) {
+			@NonNull String newName, boolean dirAllowed, RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
@@ -123,13 +119,14 @@ public class FileUtils {
 				callback.fileRenamed(source, res);
 			}
 		} else {
-			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_can_not_be_renamed);
 		}
 		return res;
 	}
 
 	@Nullable
-	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
+	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File src,
+			@NonNull File dest) {
 		File destDir = dest.getParentFile();
 		if (!destDir.exists()) {
 			destDir.mkdirs();
@@ -141,22 +138,71 @@ public class FileUtils {
 		return null;
 	}
 
-	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
-		app.getGpxDbHelper().rename(src, dest);
+	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src,
+			@NonNull File dest) {
+		GpxFile gpxFile = null;
+		app.getGpxDbHelper().rename(SharedUtil.kFile(src), SharedUtil.kFile(dest));
 		app.getMapButtonsHelper().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
-			selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
+			gpxFile = selectedGpxFile.getGpxFile();
+			gpxFile.setPath(dest.getAbsolutePath());
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
 			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
 			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
 		}
+		updateGpxMetadata(gpxFile, dest);
 	}
 
-	public static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,
-	                                       @NonNull File srcDir, @NonNull File destDir) {
+	private static void updateGpxMetadata(@Nullable GpxFile gpxFile, @NonNull File dest) {
+		String name = Algorithms.getFileNameWithoutExtension(dest.getName());
+		if (gpxFile != null) {
+			updateGpxMetadata(gpxFile, name);
+		} else {
+			GpxFileLoaderTask.loadGpxFile(dest, null, gpx -> {
+				updateGpxMetadata(gpx, name);
+				return true;
+			});
+		}
+	}
+
+	private static void updateGpxMetadata(@NonNull GpxFile gpxFile, @NonNull String name) {
+		if (gpxFile.isOsmAndOrigin()) {
+			Metadata metadata = gpxFile.getMetadata();
+			if (!Algorithms.stringsEqual(name, metadata.getName())) {
+				metadata.setName(name);
+				SaveGpxHelper.saveGpx(gpxFile);
+			}
+		}
+	}
+
+	public static void updateMovedTrackFolder(@NonNull OsmandApplication app,
+			@NonNull TrackFolder trackFolder,
+			@NonNull File srcDir, @NonNull File destDir) {
+		List<File> files = new ArrayList<>();
+		for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
+			KFile file = trackItem.getFile();
+			if (file != null) {
+				files.add(SharedUtil.jFile(file));
+			}
+		}
+		updateMovedGpxFiles(app, files, srcDir, destDir);
+
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.updateAfterMoveTrackFolder(trackFolder, srcDir);
+	}
+
+	public static void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app,
+			@NonNull TrackFolder trackFolder) {
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.updateAfterDeleteTrackFolder(trackFolder);
+	}
+
+	private static void updateMovedGpxFiles(@NonNull OsmandApplication app,
+			@NonNull List<File> files,
+			@NonNull File srcDir, @NonNull File destDir) {
 		for (File srcFile : files) {
 			String path = srcFile.getAbsolutePath();
 			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());
@@ -177,28 +223,29 @@ public class FileUtils {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
+				app.getOsmandMap().getMapLayers().getRouteSelectionLayer().clearCachedGpx(selected.getGpxFile());
 			}
-			app.getGpxDbHelper().remove(file);
-			app.getSmartFolderHelper().onGpxFileDeleted(file);
+			app.getGpxDbHelper().remove(SharedUtil.kFile(file));
+			app.getSmartFolderHelper().onGpxFileDeleted(SharedUtil.kFile(file));
 			return true;
 		}
 		return false;
 	}
 
 	public static File checkRenamePossibility(@NonNull OsmandApplication app, @NonNull File source,
-	                                          @NonNull String newName, boolean dirAllowed) {
+			@NonNull String newName, boolean dirAllowed) {
 		if (Algorithms.isEmpty(newName)) {
-			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.empty_filename);
 			return null;
 		}
 		Pattern illegalCharactersPattern = dirAllowed ? ILLEGAL_PATH_NAME_CHARACTERS : ILLEGAL_FILE_NAME_CHARACTERS;
 		if (illegalCharactersPattern.matcher(newName).find()) {
-			Toast.makeText(app, R.string.file_name_containes_illegal_char, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_name_containes_illegal_char);
 			return null;
 		}
 		File dest = new File(source.getParentFile(), newName);
 		if (dest.exists()) {
-			Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_with_name_already_exists);
 			return null;
 		}
 		return dest;
@@ -212,7 +259,8 @@ public class FileUtils {
 		return !ILLEGAL_PATH_NAME_CHARACTERS.matcher(name).find();
 	}
 
-	public static String createUniqueFileName(@NonNull OsmandApplication app, String name, String dirName, String extension) {
+	public static String createUniqueFileName(@NonNull OsmandApplication app, String name,
+			String dirName, String extension) {
 		String uniqueFileName = name;
 		File dir = app.getAppPath(dirName);
 		File fout = new File(dir, name + extension);
@@ -303,7 +351,8 @@ public class FileUtils {
 		return list;
 	}
 
-	public static void collectFiles(@NonNull File file, @NonNull List<File> list, boolean includeDirs) {
+	public static void collectFiles(@NonNull File file, @NonNull List<File> list,
+			boolean includeDirs) {
 		if (file.isDirectory()) {
 			if (includeDirs) {
 				list.add(file);
@@ -319,6 +368,22 @@ public class FileUtils {
 		}
 	}
 
+	public static List<File> collectFiles(@NonNull File dir, @NonNull String ext,
+			@NonNull List<File> list) {
+		if (dir.exists() && dir.canRead()) {
+			File[] files = dir.listFiles();
+			if (Algorithms.isEmpty(files)) {
+				return list;
+			}
+			for (File file : files) {
+				if (file.getName().endsWith(ext)) {
+					list.add(file);
+				}
+			}
+		}
+		return list;
+	}
+
 	@NonNull
 	public static File getFileWithDownloadExtension(@NonNull File original) {
 		File folder = original.getParentFile();
@@ -326,7 +391,8 @@ public class FileUtils {
 		return new File(folder, fileName);
 	}
 
-	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs, @NonNull String... extensions) {
+	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs,
+			@NonNull String... extensions) {
 		File[] files = dir.listFiles(pathname -> pathname.isDirectory()
 				? withSubdirs : CollectionUtils.endsWithAny(pathname.getName(), extensions));
 		if (files == null) {
@@ -348,7 +414,7 @@ public class FileUtils {
 	}
 
 	public static boolean replaceTargetFile(@Nullable ResourceManager manager,
-	                                        @NonNull File sourceFile, @NonNull File targetFile) {
+			@NonNull File sourceFile, @NonNull File targetFile) {
 		boolean removed = Algorithms.removeAllFiles(targetFile);
 		if (manager != null && removed) {
 			manager.closeFile(targetFile.getName());
@@ -378,10 +444,19 @@ public class FileUtils {
 	}
 
 	@NonNull
-	public static File getBackupFileForCustomAppMode(@NonNull OsmandApplication app, @NonNull String appModeKey) {
+	public static File getBackupFileForCustomAppMode(@NonNull OsmandApplication app,
+			@NonNull String appModeKey) {
 		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
 		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
 		return new File(backupDir, fileName);
+	}
+
+	public static boolean isProbablyDir(@NonNull File file) {
+		return file.exists() ? file.isDirectory() : file.getPath().endsWith("/") || !file.getName().contains(".");
+	}
+
+	public static boolean isProbablyDir(@NonNull String path) {
+		return isProbablyDir(new File(path));
 	}
 
 	public interface RenameCallback {

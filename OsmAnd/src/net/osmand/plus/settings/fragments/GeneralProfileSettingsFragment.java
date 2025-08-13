@@ -2,9 +2,9 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.*;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
+import static net.osmand.plus.settings.fragments.SettingsScreenType.POSITION_ANIMATION;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -27,6 +27,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
@@ -34,11 +35,19 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.ScreenOrientation;
+import net.osmand.plus.settings.enums.TemperatureUnitsMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.router.GeneralRouter;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,17 +66,20 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 		setupDrivingRegionPref();
 		setupUnitsOfLengthPref();
+		setupUnitsOfAltitudePref();
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
+		setupUnitOfVolumePref();
+		setupUnitOfTemperaturePref();
 		setupPreciseDistanceNumbersPref();
 
 		setupVolumeButtonsAsZoom();
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
-		setupAnimatePositionPref();
 		setupExternalInputDevicePref();
+		setupPositionAnimation();
 		setupTrackballForMovementsPref();
 
 		updateDialogControllerCallbacks();
@@ -102,7 +114,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (settings.isSystemThemeUsed(mode)) {
 			iconId = R.drawable.ic_action_android;
 		} else {
-			iconId = settings.isLightContentForMode(mode) ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
+			boolean nightMode = app.getDaynightHelper().isNightMode(mode, ThemeUsageContext.APP);
+			iconId = nightMode ? R.drawable.ic_action_moon : R.drawable.ic_action_sun;
 		}
 		return getActiveIcon(iconId);
 	}
@@ -119,26 +132,32 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupMapScreenOrientationPref() {
-		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
-		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
-		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
-		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
+		ListPreferenceEx preference = requirePreference(settings.MAP_SCREEN_ORIENTATION.getId());
+		ScreenOrientation[] values = ScreenOrientation.values();
+		String[] entries = new String[values.length];
+		Integer[] entryValues = new Integer[values.length];
+
+		for (int i = 0; i < values.length; i++) {
+			ScreenOrientation orientation = values[i];
+			entries[i] = getString(orientation.getTitleId());
+			entryValues[i] = orientation.getValue();
+		}
+
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setIcon(getMapScreenOrientationIcon());
 	}
 
 	private void setupTurnScreenOnPref() {
-		Preference screenControl = findPreference("screen_control");
+		Preference screenControl = requirePreference("screen_control");
 		screenControl.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 	}
 
+	@NonNull
 	private Drawable getMapScreenOrientationIcon() {
-		switch (settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode())) {
-			case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-				return getActiveIcon(R.drawable.ic_action_phone_portrait_orientation);
-			case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
-				return getActiveIcon(R.drawable.ic_action_phone_landscape_orientation);
-			default:
-				return getActiveIcon(R.drawable.ic_action_phone_device_orientation);
-		}
+		int value = settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode());
+		ScreenOrientation orientation = ScreenOrientation.fromValue(value);
+		return getActiveIcon(orientation.getIconId());
 	}
 
 	private void setupDrivingRegionPref() {
@@ -154,14 +173,31 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[metricsConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = metricsConstants[i].toHumanString(app);
+			entries[i] = metricsConstants[i].toHumanString();
 			entryValues[i] = metricsConstants[i].ordinal();
 		}
 
 		ListPreferenceEx unitsOfLength = findPreference(settings.METRIC_SYSTEM.getId());
 		unitsOfLength.setEntries(entries);
 		unitsOfLength.setEntryValues(entryValues);
-		unitsOfLength.setIcon(getActiveIcon(R.drawable.ic_action_ruler_unit));
+		unitsOfLength.setIcon(getActiveIcon(R.drawable.ic_action_units_length));
+	}
+
+	private void setupUnitsOfAltitudePref() {
+		AltitudeMetrics[] altitudeMetrics = AltitudeMetrics.values();
+		String[] entries = new String[altitudeMetrics.length];
+		Integer[] entryValues = new Integer[altitudeMetrics.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = Algorithms.capitalizeFirstLetter(altitudeMetrics[i].toHumanString());
+			entryValues[i] = altitudeMetrics[i].ordinal();
+		}
+
+		ListPreferenceEx unitsOfAltitude = findPreference(settings.ALTITUDE_METRIC.getId());
+		unitsOfAltitude.setEntries(entries);
+		unitsOfAltitude.setEntryValues(entryValues);
+		unitsOfAltitude.setDescription(R.string.altitude_metrics_description);
+		unitsOfAltitude.setIcon(getActiveIcon(R.drawable.ic_action_units_altitude));
 	}
 
 	private void setupCoordinatesFormatPref() {
@@ -200,7 +236,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[speedConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = speedConstants[i].toHumanString(app);
+			entries[i] = speedConstants[i].toHumanString();
 			entryValues[i] = speedConstants[i].ordinal();
 		}
 
@@ -209,6 +245,57 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupUnitOfVolumePref() {
+		boolean hidePref = false;
+		ApplicationMode mode = getSelectedAppMode();
+		RouteService routeService = mode.getRouteService();
+		if (routeService == RouteService.OSMAND) {
+			GeneralRouter router = app.getRouter(mode);
+			if (router != null) {
+				GeneralRouter.GeneralRouterProfile routerProfile = router.getProfile();
+				hidePref = routerProfile == null
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.PEDESTRIAN
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.BICYCLE
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.HORSEBACKRIDING
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.SKI;
+			}
+		}
+		ListPreferenceEx unitOfVolumePref = requirePreference(settings.UNIT_OF_VOLUME.getId());
+		if (hidePref) {
+			unitOfVolumePref.setVisible(false);
+		} else {
+			VolumeUnit[] unitValues = VolumeUnit.values();
+			String[] entries = new String[unitValues.length];
+			Integer[] entryValues = new Integer[unitValues.length];
+
+			for (int i = 0; i < entries.length; i++) {
+				entries[i] = unitValues[i].toHumanString(app);
+				entryValues[i] = unitValues[i].ordinal();
+			}
+
+			unitOfVolumePref.setEntries(entries);
+			unitOfVolumePref.setEntryValues(entryValues);
+			unitOfVolumePref.setDescription(R.string.unit_of_volume_description);
+			unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_fuel_tank));
+		}
+	}
+
+	private void setupUnitOfTemperaturePref() {
+		ListPreferenceEx preference = requirePreference(settings.UNIT_OF_TEMPERATURE.getId());
+		TemperatureUnitsMode[] unitValues = TemperatureUnitsMode.values();
+		String[] entries = new String[unitValues.length];
+		Integer[] entryValues = new Integer[unitValues.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = unitValues[i].toHumanString(app);
+			entryValues[i] = unitValues[i].ordinal();
+		}
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setDescription(R.string.unit_of_temperature_description);
+		preference.setIcon(getActiveIcon(R.drawable.ic_action_thermometer));
 	}
 
 	private void setupPreciseDistanceNumbersPref() {
@@ -246,16 +333,38 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
 	}
 
-	private void setupAnimatePositionPref() {
-		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());
-		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
-	}
-
 	private void setupExternalInputDevicePref() {
 		Preference uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 		if (uiPreference != null) {
 			uiPreference.setSummary(getExternalInputDeviceSummary());
 			uiPreference.setIcon(getExternalInputDeviceIcon());
+		}
+	}
+
+	private void setupPositionAnimation() {
+		Preference uiPreference = findPreference(settings.ANIMATE_MY_LOCATION.getId());
+
+		if (uiPreference != null) {
+			int interpolationValue = settings.LOCATION_INTERPOLATION_PERCENT.getModeValue(getSelectedAppMode());
+			boolean animationEnabled = settings.ANIMATE_MY_LOCATION.getModeValue(getSelectedAppMode());
+
+			String summary;
+			Drawable icon;
+			if (animationEnabled) {
+				icon = getActiveIcon(R.drawable.ic_action_location_animation);
+				String enabled = app.getString(R.string.shared_string_enabled);
+				if (interpolationValue > 0) {
+					String formattedInterpolateValue = OsmAndFormatter.getFormattedPredictionTime(app, interpolationValue);
+					summary = app.getString(R.string.ltr_or_rtl_combine_via_bold_point, enabled, formattedInterpolateValue);
+				} else {
+					summary = enabled;
+				}
+			} else {
+				icon = getContentIcon(R.drawable.ic_action_location_no_animation);
+				summary = app.getString(R.string.shared_string_disabled);
+			}
+			uiPreference.setSummary(summary);
+			uiPreference.setIcon(icon);
 		}
 	}
 
@@ -387,6 +496,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			return true;
 		} else if (key.equals(settings.EXTERNAL_INPUT_DEVICE.getId())) {
 			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
+			return true;
+		} else if (key.equals(settings.ANIMATE_MY_LOCATION.getId())) {
+			BaseSettingsFragment.showInstance(requireActivity(), POSITION_ANIMATION, appMode, new Bundle(), this);
 			return true;
 		} else if (key.equals(settings.PRECISE_DISTANCE_NUMBERS.getId())) {
 			FragmentManager fragmentManager = getFragmentManager();

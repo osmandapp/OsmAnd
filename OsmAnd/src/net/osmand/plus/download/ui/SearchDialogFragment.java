@@ -37,8 +37,10 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
@@ -94,7 +96,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -373,7 +375,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					CityItem item = (CityItem) obj;
 					viewHolder.bindDownloadItem(item);
 					if (item.getIndexItem() == null) {
-						new IndexItemResolverTask(viewHolder, item).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+						OsmAndTaskManager.executeTask(new IndexItemResolverTask(viewHolder, item));
 					}
 				}
 			} else {

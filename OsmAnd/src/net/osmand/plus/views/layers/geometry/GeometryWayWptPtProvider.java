@@ -2,8 +2,8 @@ package net.osmand.plus.views.layers.geometry;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.views.layers.geometry.GeometryWay.GeometryWayProvider;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.util.List;
 
@@ -27,11 +27,16 @@ class GeometryWayWptPtProvider implements GeometryWayProvider {
 
 	@Override
 	public float getHeight(int index) {
-		return (float) points.get(index).ele;
+		return (float) points.get(index).getEle();
 	}
 
 	@Override
 	public int getSize() {
 		return points.size();
+	}
+
+	@Override
+	public boolean isFirstLastLocation(int index) {
+		return false;
 	}
 }

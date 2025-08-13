@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 	<item
 		android:id="@+id/weather_data_source"
 		android:contentDescription="@string/data_source"
 		android:icon="@drawable/ic_action_settings_outlined"
 		android:title="@string/data_source"
-		osmand:iconTint="?attr/icon_color_primary"
-		osmand:showAsAction="always" />
+		app:iconTint="?attr/icon_color_primary"
+		app:showAsAction="always" />
 </menu>

@@ -15,7 +15,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 
-public class MapMarkersBarWidgetSettingFragment extends WidgetSettingsBaseFragment {
+public class MapMarkersBarWidgetSettingFragment extends WidgetInfoBaseFragment {
 
 	private static final String KEY_DISPLAYED_MARKERS = "displayed_markers";
 
@@ -36,7 +36,7 @@ public class MapMarkersBarWidgetSettingFragment extends WidgetSettingsBaseFragme
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.map_markers_bar_widget_settings, container);
 
 		LinearLayout radioButtonsView = view.findViewById(R.id.custom_radio_buttons);

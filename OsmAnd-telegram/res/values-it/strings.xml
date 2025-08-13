@@ -138,9 +138,9 @@
     <string name="shared_string_authorization">Autorizzazione</string>
     <string name="shared_string_authorization_descr">Si prega di inserire il numero di telefono di Telegram nel formato internazionale</string>
     <string name="shared_string_welcome">Benvenuto/a</string>
-    <string name="yard">yd</string>
-    <string name="foot">ft</string>
-    <string name="mile">mi</string>
+    <string name="yard">yarda</string>
+    <string name="foot">piede</string>
+    <string name="mile">km</string>
     <string name="km">km</string>
     <string name="m">m</string>
     <string name="nm">nmi</string>
@@ -218,7 +218,7 @@
     <string name="direction">Direzione</string>
     <string name="precision">Precisione</string>
     <string name="altitude">Altitudine</string>
-    <string name="bearing">Orientamento</string>
+    <string name="bearing">Direzione</string>
     <string name="proxy_key">Chiave</string>
     <string name="proxy_password">Password</string>
     <string name="proxy_username">Nome utente</string>

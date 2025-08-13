@@ -42,7 +42,7 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public void clearAllForProfile(ApplicationMode appMode) {
-		setModeValue(appMode, "");
+		setModeValue(appMode, null);
 	}
 
 	public boolean containsValue(String res) {
@@ -106,36 +106,27 @@ public class ListStringPreference extends StringPreference {
 	}
 
 	public void setStringsListForProfile(ApplicationMode appMode, List<String> values) {
-		if (values == null || values.size() == 0) {
-			setModeValue(appMode, null);
-			return;
-		}
-		clearAllForProfile(appMode);
-		for (String value : values) {
-			addModeValue(appMode, value);
-		}
+		setModeValues(appMode, values);
 	}
 
 	public boolean setModeValues(ApplicationMode mode, List<String> values) {
 		if (Algorithms.isEmpty(values)) {
-			setModeValue(mode, null);
-			return false;
+			return setModeValue(mode, null);
 		}
-		clearAll();
-		String vl = get();
+		StringBuilder vl = new StringBuilder();
 		for (String value : values) {
-			addValue(value);
-			if (vl == null || vl.isEmpty()) {
-				vl = value + delimiter;
-			} else {
-				vl = vl + value + delimiter;
-			}
+			vl.append(value).append(delimiter);
 		}
-		return setModeValue(mode, vl);
+		return setModeValue(mode, vl.toString());
 	}
 
 	@NonNull
 	public String getDelimiter() {
 		return delimiter;
+	}
+
+	@Nullable
+	public String getRawModeValue(@NonNull ApplicationMode mode) {
+		return super.getModeValue(mode);
 	}
 }

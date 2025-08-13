@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -34,27 +32,13 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 	public static final String TAG = CompassVisibilityBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
-	private ApplicationMode appMode;
 	private CompassButtonState buttonState;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		settings = app.getSettings();
 		buttonState = app.getMapButtonsHelper().getCompassButtonState();
-
-		Bundle args = getArguments();
-		if (savedInstanceState != null) {
-			restoreAppMode(savedInstanceState);
-		} else if (args != null) {
-			restoreAppMode(args);
-		}
-	}
-
-	private void restoreAppMode(@NonNull Bundle bundle) {
-		appMode = ApplicationMode.valueOfStringKey(bundle.getString(APP_MODE_KEY), settings.getApplicationMode());
 	}
 
 	@Override
@@ -66,7 +50,7 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 
 	@NonNull
 	private View createView() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.fragment_compass_visibility_bottom_sheet_dialog, null);
 
 		setupVisibilityItem(CompassVisibility.ALWAYS_VISIBLE, view);
@@ -113,12 +97,6 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 				? ColorUtilities.getActiveIconColorId(nightMode)
 				: ColorUtilities.getDefaultIconColorId(nightMode);
 		return getIcon(visibility.iconId, iconColorId);
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 	}
 
 	@Override

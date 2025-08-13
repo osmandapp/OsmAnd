@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -20,6 +21,7 @@ import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VAL
 import static net.osmand.plus.quickaction.QuickActionIds.CONTOUR_LINES_ACTION_ID;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class ContourLinesAction extends QuickAction {
 
@@ -38,7 +40,7 @@ public class ContourLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getMyApplication());
@@ -46,8 +48,8 @@ public class ContourLinesAction extends QuickAction {
 				OsmandApplication app = mapActivity.getMyApplication();
 				RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 				if (contourLinesProp != null) {
-					CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
-					if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
+					OsmandSettings settings = app.getSettings();
+					if (!settings.getRenderPropertyValue(contourLinesProp).equals(CONTOUR_LINES_DISABLED_VALUE)) {
 						PluginsHelper.enablePluginIfNeeded(mapActivity, app, plugin, true);
 					}
 					mapActivity.refreshMapComplete();

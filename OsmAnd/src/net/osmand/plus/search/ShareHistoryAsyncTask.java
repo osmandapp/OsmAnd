@@ -7,14 +7,15 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -44,15 +45,15 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, Stri
 	@NonNull
 	@Override
 	protected Pair<File, String> doInBackground(Void... params) {
-		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		for (HistoryEntry h : historyEntries) {
 			WptPt pt = new WptPt();
-			pt.lat = h.getLat();
-			pt.lon = h.getLon();
-			pt.name = h.getName().getName();
+			pt.setLat(h.getLat());
+			pt.setLon(h.getLon());
+			pt.setName(h.getName().getName());
 			boolean hasTypeInDescription = !Algorithms.isEmpty(h.getName().getTypeName());
 			if (hasTypeInDescription) {
-				pt.desc = h.getName().getTypeName();
+				pt.setDesc(h.getName().getTypeName());
 			}
 			gpxFile.addPoint(pt);
 		}
@@ -62,9 +63,9 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, Stri
 			dir.mkdir();
 		}
 		File historyFile = new File(dir, "History.gpx");
-		GPXUtilities.writeGpxFile(historyFile, gpxFile);
+		SharedUtil.writeGpxFile(historyFile, gpxFile);
 
-		return Pair.create(historyFile, GPXUtilities.asString(gpxFile));
+		return Pair.create(historyFile, GpxUtilities.INSTANCE.asString(gpxFile));
 	}
 
 	@Override

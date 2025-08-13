@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/context_menu_layout"
 	android:layout_width="match_parent"
@@ -72,7 +72,7 @@
 					android:layout_width="@dimen/map_widget_icon"
 					android:layout_height="@dimen/map_widget_icon"
 					android:layout_marginTop="@dimen/context_menu_padding_margin_default"
-					osmand:srcCompat="@drawable/ic_action_building_number" />
+					app:srcCompat="@drawable/ic_action_building_number" />
 
 			</LinearLayout>
 
@@ -114,7 +114,7 @@
 					android:text="@string/more_transport_on_stop_hint"
 					android:textSize="@dimen/default_sub_text_size"
 					android:visibility="gone"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 				<LinearLayout
 					android:id="@+id/nearby_routes"
@@ -135,7 +135,7 @@
 						android:layout_gravity="center_vertical"
 						android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
 						android:textSize="@dimen/default_sub_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<GridView
 						android:id="@+id/transport_stop_nearby_routes_grid"
@@ -171,8 +171,8 @@
 						android:id="@+id/additional_info_row"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						osmand:horizontalItemsSpacing="@dimen/content_padding_half"
-						osmand:verticalItemsSpacing="@dimen/content_padding_small_half">
+						app:horizontalItemsSpacing="@dimen/content_padding_half"
+						app:verticalItemsSpacing="@dimen/content_padding_small_half">
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/context_menu_line3"
@@ -183,7 +183,7 @@
 							android:layout_weight="1"
 							android:ellipsize="end"
 							android:maxLines="2"
-							osmand:typeface="@string/font_roboto_medium"
+							app:typefaceWeight="medium"
 							tools:text="Some really long string" />
 
 						<LinearLayout
@@ -474,7 +474,7 @@
 					android:text="@string/rendering_category_details"
 					android:textAllCaps="true"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:textColor="?attr/contextMenuButtonColor" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -487,7 +487,7 @@
 					android:text="@string/shared_string_navigation"
 					android:textAllCaps="true"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:textColor="?attr/contextMenuButtonColor" />
 
 			</LinearLayout>
@@ -512,7 +512,6 @@
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					tools:background="?attr/activity_background_color">
-
 				</LinearLayout>
 
 			</net.osmand.plus.LockableScrollView>
@@ -548,7 +547,7 @@
 			android:background="?attr/selectableItemBackgroundBorderless"
 			android:contentDescription="@string/shared_string_collapse"
 			android:scaleType="center"
-			osmand:srcCompat="@drawable/ic_arrow_back"
+			app:srcCompat="@drawable/ic_arrow_back"
 			tools:visibility="visible" />
 
 	</FrameLayout>
@@ -582,7 +581,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/shared_string_collapse"
 					android:scaleType="center"
-					osmand:srcCompat="@drawable/ic_arrow_back"
+					app:srcCompat="@drawable/ic_arrow_back"
 					tools:visibility="visible" />
 
 				<TextView
@@ -622,22 +621,13 @@
 			android:visibility="gone"
 			tools:visibility="visible">
 
-			<ImageButton
-				android:id="@+id/context_menu_zoom_in_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/zoomIn"
-				tools:src="@drawable/ic_action_remove_dark" />
+			<include layout="@layout/map_zoom_in_button" />
 
-			<ImageButton
-				android:id="@+id/context_menu_zoom_out_button"
+			<include
+				layout="@layout/map_zoom_out_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
-				android:layout_marginTop="@dimen/map_button_spacing"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/zoomOut"
-				tools:src="@drawable/ic_action_remove_dark" />
+				android:layout_marginTop="@dimen/map_button_spacing" />
 
 		</LinearLayout>
 

@@ -1,6 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,8 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -36,6 +34,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -167,7 +167,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateGroupVisibility(String groupName, boolean visible) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
 		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(groupName);
 		if (pointsGroup != null) {
 			pointsGroup.setHidden(!visible);
@@ -252,12 +252,12 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateGroupsVisibility() {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
 		MapActivity activity = (MapActivity) getActivity();
 		if (activity != null) {
 			Map<String, PointsGroup> groups = new HashMap<>(gpxFile.getPointsGroups());
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(task);
 		}
 	}
 

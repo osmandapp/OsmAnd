@@ -1,9 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,25 +12,35 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
-import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
@@ -48,24 +55,12 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapMarkersLayer;
-import net.osmand.plus.views.mapwidgets.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.TopToolbarView;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class PlanRouteFragment extends BaseOsmAndFragment
 		implements OsmAndLocationListener, IMapDisplayPositionProvider {
@@ -113,7 +108,8 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = getMapActivity();
 		markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
@@ -519,7 +515,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 					}
 					planRouteContext.setNavigationFromMarkers(true);
 					dismiss();
-					mapActivity.getMapLayers().getMapActionsHelper().doRoute();
+					mapActivity.getMapActions().doRoute();
 				}
 			}
 
@@ -535,7 +531,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 					Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 					boolean startFromLocation = app.getMapMarkersHelper().isStartFromMyLocation() && myLoc != null;
 					if (selectedCount > (startFromLocation ? 0 : 1)) {
-						sortSelectedMarkersDoorToDoor(mapActivity, startFromLocation, myLoc);
+						sortSelectedMarkersDoorToDoor(mapActivity, myLoc, startFromLocation);
 					}
 				}
 			}
@@ -703,10 +699,10 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			boolean defaultMode = appMode == ApplicationMode.DEFAULT;
 
 			float dist = 0;
-			for (int i = 1; i < snapTrkSegment.points.size(); i++) {
-				WptPt pt1 = snapTrkSegment.points.get(i - 1);
-				WptPt pt2 = snapTrkSegment.points.get(i);
-				dist += MapUtils.getDistance(pt1.lat, pt1.lon, pt2.lat, pt2.lon);
+			for (int i = 1; i < snapTrkSegment.getPoints().size(); i++) {
+				WptPt pt1 = snapTrkSegment.getPoints().get(i - 1);
+				WptPt pt2 = snapTrkSegment.getPoints().get(i);
+				dist += MapUtils.getDistance(pt1.getLat(), pt1.getLon(), pt2.getLat(), pt2.getLon());
 			}
 			distanceTv.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + (defaultMode ? "" : ","));
 
@@ -754,7 +750,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			mapActivity.getMapLayers().getMapMarkersLayer().setRoute(planRouteContext.getSnapTrkSegment());
 			mapActivity.refreshMap();
 			if (adjustMap) {
-				showRouteOnMap(planRouteContext.getSnapTrkSegment().points);
+				showRouteOnMap(planRouteContext.getSnapTrkSegment().getPoints());
 			}
 		}
 	}
@@ -786,7 +782,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 				}
 			}
 
-			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapView.getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 
@@ -839,61 +835,16 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 		return false;
 	}
 
-	private void sortSelectedMarkersDoorToDoor(MapActivity mapActivity, boolean startFromLoc, Location myLoc) {
-		new AsyncTask<Void, Void, List<MapMarker>>() {
-
-			private ProgressDialog dialog;
-			private long startDialogTime;
-
-			@Override
-			protected void onPreExecute() {
-				startDialogTime = System.currentTimeMillis();
-				dialog = new ProgressDialog(mapActivity);
-				dialog.setTitle("");
-				dialog.setMessage(mapActivity.getString(R.string.intermediate_items_sort_by_distance));
-				dialog.setCancelable(false);
-				dialog.show();
-			}
-
-			@Override
-			protected List<MapMarker> doInBackground(Void... voids) {
-				MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
-				List<MapMarker> selectedMarkers = markersHelper.getSelectedMarkers();
-				List<LatLon> selectedLatLon = markersHelper.getSelectedMarkersLatLon();
-
-				LatLon start = startFromLoc ? new LatLon(myLoc.getLatitude(), myLoc.getLongitude()) : selectedLatLon.remove(0);
-
-				int[] sequence = new TspAnt().readGraph(selectedLatLon, start, null).solve();
-
-				List<MapMarker> res = new ArrayList<>();
-				for (int i = 0; i < sequence.length; i++) {
-					if (i == 0 && startFromLoc) {
-						continue;
-					}
-					int index = sequence[i];
-					res.add(selectedMarkers.get(startFromLoc ? index - 1 : index));
-				}
-
-				return res;
-			}
-
-			@Override
-			protected void onPostExecute(List<MapMarker> res) {
-				if (dialog != null) {
-					long t = System.currentTimeMillis();
-					if (t - startDialogTime < 500) {
-						mapActivity.getMyApplication().runInUIThread(dialog::dismiss, 500 - (t - startDialogTime));
-					} else {
-						dialog.dismiss();
-					}
-				}
-
-				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
-				adapter.reloadData();
-				adapter.notifyDataSetChanged();
-				planRouteContext.recreateSnapTrkSegment(false);
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	private void sortSelectedMarkersDoorToDoor(@NonNull MapActivity activity,
+			@Nullable Location location, boolean startFromLoc) {
+		SortMarkersTask task = new SortMarkersTask(activity, location, startFromLoc, markers -> {
+			app.getMapMarkersHelper().addSelectedMarkersToTop(markers);
+			adapter.reloadData();
+			adapter.notifyDataSetChanged();
+			planRouteContext.recreateSnapTrkSegment(false);
+			return false;
+		});
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	private void updateMapDisplayPosition() {
@@ -906,36 +857,8 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	@Override
 	public MapPosition getMapDisplayPosition() {
 		if (isInPlanRouteMode) {
-			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_RIGHT;
+			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_END;
 		}
 		return null;
-	}
-
-	private class PlanRouteToolbarController extends TopToolbarController {
-
-		PlanRouteToolbarController() {
-			super(TopToolbarController.TopToolbarControllerType.MEASUREMENT_TOOL);
-			setBackBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
-			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
-			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
-					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
-			setCloseBtnVisible(false);
-			setSaveViewVisible(true);
-		}
-
-		@Override
-		public void updateToolbar(@NonNull TopToolbarView toolbarView) {
-			super.updateToolbar(toolbarView);
-			View shadow = toolbarView.getShadowView();
-			if (shadow != null) {
-				shadow.setVisibility(View.GONE);
-			}
-		}
-
-		@Override
-		public int getStatusBarColor(Context context, boolean nightMode) {
-			return NO_COLOR;
-		}
 	}
 }

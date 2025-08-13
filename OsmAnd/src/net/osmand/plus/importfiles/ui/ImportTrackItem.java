@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 

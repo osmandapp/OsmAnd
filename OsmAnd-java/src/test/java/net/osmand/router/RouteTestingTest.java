@@ -66,7 +66,6 @@ public class RouteTestingTest {
 
 	}
 
-//	@Ignore 
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;
@@ -87,6 +86,7 @@ public class RouteTestingTest {
 		String fl = "src/test/resources/routing/Routing_test_archive.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+		fe.CALCULATE_MISSING_MAPS = false;
 
 		BinaryMapIndexReader[] binaryMapIndexReaders;// = { new BinaryMapIndexReader(raf, new File(fl)) };
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
@@ -119,6 +119,10 @@ public class RouteTestingTest {
 			);
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
 					memoryLimits, params);
+
+			if (params.containsKey("routeCalculationTime")) {
+				config.routeCalculationTime = Long.parseLong(params.get("routeCalculationTime")); // conditional
+			}
 //			config.heuristicCoefficient = DEFAULT_HR;
 
 			System.out.println("planRoadDirection: " + planRoadDirection);
@@ -128,6 +132,14 @@ public class RouteTestingTest {
 			}
 
 			config.planRoadDirection = planRoadDirection;
+
+			if ("true".equals(params.get("hh"))) {
+				fe.CALCULATE_MISSING_MAPS = false;
+				fe.setDefaultHHRoutingConfig();
+				fe.setUseOnlyHHRouting(true);
+				fe.setHHRouteCpp(useNative);
+			}
+
 			RoutingContext ctx;
 			if (useNative) {
 				ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
@@ -141,6 +153,7 @@ public class RouteTestingTest {
 			List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(),
 					te.getTransitPoint()).detailed;
 			Set<Long> reachedSegments = new TreeSet<Long>();
+			Set<String> reachedSegmentPoints = new TreeSet<>();
 			Assert.assertNotNull(routeSegments);
 			int prevSegment = -1;
 			for (int i = 0; i <= routeSegments.size(); i++) {
@@ -154,7 +167,13 @@ public class RouteTestingTest {
 					prevSegment = i;
 				}
 				if (i < routeSegments.size()) {
-					reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
+					RouteSegmentResult seg = routeSegments.get(i);
+					long id = seg.getObject().getId() >> RouteResultPreparation.SHIFT_ID;
+					for (int point = Math.min(seg.getStartPointIndex(), seg.getEndPointIndex());
+					     point <= Math.max(seg.getStartPointIndex(), seg.getEndPointIndex()); point++) {
+						reachedSegmentPoints.add(id + ":" + point);
+					}
+					reachedSegments.add(id);
 				}
 			}
 			Map<String, String> expectedResults = te.getExpectedResults();
@@ -162,24 +181,36 @@ public class RouteTestingTest {
 				System.out.println("This is test on hanging routing");
 				break;
 			}
-			
-			checkRouteLength(params, routeSegments);
 			checkRoutingTime(ctx, params);
-			
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
+				int point = RouterUtilTest.getRoadStartPoint(es.getKey());
+				String pointInSegment = id + ":" + point;
 				switch (es.getValue()) {
 					case "false":
-						Assert.assertFalse("Expected segment " + id + " was wrongly reached in route segments "
-								+ reachedSegments, reachedSegments.contains(id));
+						if (point == -1) {
+							Assert.assertFalse("Expected segment " + id + " was wrongly reached in route segments "
+									+ reachedSegments, reachedSegments.contains(id));
+						} else {
+							Assert.assertTrue("Unexpected pointInSegment " + pointInSegment + " is found in "
+									+ reachedSegmentPoints, !reachedSegmentPoints.contains(pointInSegment));
+						}
 						break;
 					case "true":
-						Assert.assertTrue("Expected segment " + id + " weren't reached in route segments "
-								+ reachedSegments, reachedSegments.contains(id));
+						if (point == -1) {
+							Assert.assertTrue("Expected segment " + id + " weren't reached in route segments "
+									+ reachedSegments, reachedSegments.contains(id));
+						} else {
+							Assert.assertTrue("Expected pointInSegment " + pointInSegment + " is not found in "
+									+ reachedSegmentPoints, reachedSegmentPoints.contains(pointInSegment));
+						}
 						break;
 					case "visitedSegments":
 						Assert.assertTrue("Expected segments visit " + id + " less then actually visited segments "
 								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < id);
+						break;
+					default:
+						Assert.assertTrue("Invalid key " + es.getKey() + " value " + es.getValue(), false);
 						break;
 				}
 			}
@@ -193,14 +224,5 @@ public class RouteTestingTest {
 		}
 	}
 	
-	private void checkRouteLength(Map<String, String> params, List<RouteSegmentResult> routeSegments) {
-		if (params.containsKey("maxRouteLength")) {
-			float maxRouteLength = Float.parseFloat(params.get("maxRouteLength"));
-			float routeLength = 0;
-			for (RouteSegmentResult segment : routeSegments) {
-				routeLength += segment.getDistance();
-			}
-			Assert.assertTrue("Calculated route length " + routeLength + " is greater then max route length " + maxRouteLength, routeLength < maxRouteLength);
-		}
-	}
+	
 }

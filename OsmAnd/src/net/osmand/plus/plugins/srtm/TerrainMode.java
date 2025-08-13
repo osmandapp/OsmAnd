@@ -62,9 +62,9 @@ public class TerrainMode {
 		this.translateName = translateName;
 
 		OsmandSettings settings = app.getSettings();
-		MIN_ZOOM = settings.registerIntPreference(key + "_min_zoom", 3).makeProfile();
-		MAX_ZOOM = settings.registerIntPreference(key + "_max_zoom", 17).makeProfile();
-		TRANSPARENCY = settings.registerIntPreference(key + "_transparency", type == HILLSHADE ? 100 : 80).makeProfile();
+		MIN_ZOOM = settings.registerIntPreference(type + "_min_zoom", 3).makeProfile();
+		MAX_ZOOM = settings.registerIntPreference(type + "_max_zoom", 17).makeProfile();
+		TRANSPARENCY = settings.registerIntPreference(type + "_transparency", type == HILLSHADE ? 100 : 80).makeProfile();
 	}
 
 	@NonNull

@@ -9,52 +9,52 @@ import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.base.containers.Limits;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleAlgorithms {
 
-	public static Limits convertWeightLimitsByMetricSystem(@NonNull Limits limits,
-	                                                       @NonNull WeightMetric weightMetricSystem,
-	                                                       boolean useKilogramsInsteadOfTons) {
+	public static Limits<Float> convertWeightLimitsByMetricSystem(@NonNull Limits<Float> limits,
+	                                                              @NonNull WeightMetric weightMetricSystem,
+	                                                              boolean useKilogramsInsteadOfTons) {
 		if (weightMetricSystem != WeightMetric.TONES || useKilogramsInsteadOfTons) {
-			float min = limits.getMin();
-			float max = limits.getMax();
+			float min = limits.min();
+			float max = limits.max();
 			// Convert to appropriate weight metric system
 			min = convertWeightFromTons(weightMetricSystem, min, useKilogramsInsteadOfTons);
 			max = convertWeightFromTons(weightMetricSystem, max, useKilogramsInsteadOfTons);
 			// Round min / max
 			min = roundToSecondSignificantDigit(min, true);
 			max = roundToSecondSignificantDigit(max, false);
-			limits = new Limits(min, max);
+			limits = new Limits<>(min, max);
 		}
 		return limits;
 	}
 
-	public static Limits convertLengthLimitsByMetricSystem(@NonNull Limits limits,
-	                                                       @NonNull MetricsConstants lengthMetricSystem,
-	                                                       boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
+	public static Limits<Float> convertLengthLimitsByMetricSystem(@NonNull Limits<Float> limits,
+	                                                              @NonNull MetricsConstants lengthMetricSystem,
+	                                                              boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
 		if (lengthMetricSystem != MetricsConstants.KILOMETERS_AND_METERS) {
-			float min = limits.getMin();
-			float max = limits.getMax();
+			float min = limits.min();
+			float max = limits.max();
 			// Convert to appropriate length metric system
 			min = convertLengthFromMeters(lengthMetricSystem, min, useInchesInsteadOfFeet, useInchesInsteadOfYards);
 			max = convertLengthFromMeters(lengthMetricSystem, max, useInchesInsteadOfFeet, useInchesInsteadOfYards);
 			// Round min / max
 			min = roundToSecondSignificantDigit(min, true);
 			max = roundToSecondSignificantDigit(max, false);
-			limits = new Limits(min, max);
+			limits = new Limits<>(min, max);
 		}
 		return limits;
 	}
 
-	public static List<Float> collectProposedValues(@NonNull Limits limits, int upscale,
+	public static List<Float> collectProposedValues(@NonNull Limits<Float> limits, int upscale,
 	                                                int minValuesCount) {
 		int multiplier = (int) Math.pow(10, upscale);
-		int scaledMin = (int) (limits.getMin() * multiplier);
-		int scaledMax = (int) (limits.getMax() * multiplier);
+		int scaledMin = (int) (limits.min() * multiplier);
+		int scaledMax = (int) (limits.max() * multiplier);
 
 		// Find appropriate step size
 		int maxScale = (int) Math.log10(scaledMax);

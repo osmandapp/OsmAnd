@@ -1,11 +1,20 @@
 package net.osmand.plus.auto.screens
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.Item
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
 import net.osmand.plus.auto.NavigationSession
 
@@ -15,10 +24,24 @@ class LandingScreen(
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
 
-    override fun onGetTemplate(): Template {
+    init {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onResume(owner: LifecycleOwner) {
+                app.carNavigationSession?.updateCarNavigation(app.locationProvider.lastKnownLocation)
+            }
+        })
+    }
+
+    override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val app = app
-        for (category in PlaceCategory.values()) {
+        for (category in PlaceCategory.entries) {
+            if (category == PlaceCategory.FREE_MODE) {
+                if (app.routingHelper.isRouteCalculated) {
+                    listBuilder.addItem(createContinueNavigationItem())
+                    continue
+                }
+            }
             val title = app.getString(category.titleId)
             val icon = CarIcon.Builder(IconCompat.createWithResource(app, category.iconId)).build()
             listBuilder.addItem(
@@ -41,10 +64,9 @@ class LandingScreen(
                 Action.Builder()
                     .setIcon(
                         CarIcon.Builder(
-                            IconCompat.createWithResource(
-                                getCarContext(),
-                                R.drawable.ic_my_location))
-                            .build())
+                            IconCompat.createWithResource(carContext, R.drawable.ic_my_location)
+                        ).build()
+                    )
                     .setOnClickListener {
                         session?.navigationCarSurface?.handleRecenter()
                     }
@@ -53,10 +75,9 @@ class LandingScreen(
                 Action.Builder()
                     .setIcon(
                         CarIcon.Builder(
-                            IconCompat.createWithResource(
-                                carContext,
-                                R.drawable.ic_zoom_in))
-                            .build())
+                            IconCompat.createWithResource(carContext, R.drawable.ic_zoom_in)
+                        ).build()
+                    )
                     .setOnClickListener {
                         app.carNavigationSession?.navigationCarSurface?.handleScale(
 	                        NavigationSession.INVALID_FOCAL_POINT_VAL,
@@ -88,6 +109,24 @@ class LandingScreen(
             .setHeaderAction(Action.APP_ICON)
             .setMapActionStrip(mapActionStripBuilder)
             .setActionStrip(actionStripBuilder.build())
+            .build()
+    }
+
+    private fun createContinueNavigationItem(): Item {
+        val title = app.getString(R.string.continue_navigation)
+        val icon = CarIcon.Builder(
+            IconCompat.createWithResource(
+                app,
+                R.drawable.ic_action_gdirections_dark)).build()
+        return Row.Builder()
+            .setTitle(title)
+            .setImage(icon)
+            .setBrowsable(true)
+            .setOnClickListener {
+                app.carNavigationSession?.let { carNavigationSession ->
+                    carNavigationSession.startNavigationScreen()
+                }
+            }
             .build()
     }
 

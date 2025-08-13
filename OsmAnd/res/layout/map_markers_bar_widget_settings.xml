@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -43,6 +43,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
 		android:layout_marginTop="@dimen/content_padding_small"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:text="@string/active_markers_descr"

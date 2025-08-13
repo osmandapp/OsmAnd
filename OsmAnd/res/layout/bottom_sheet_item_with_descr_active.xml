@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/attach_roads"
 	android:layout_width="match_parent"
@@ -17,7 +17,7 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
-		osmand:tint="?attr/active_color_basic"
+		tools:tint="?attr/active_color_basic"
 		tools:srcCompat="@drawable/ic_action_attach_track" />
 
 	<LinearLayout

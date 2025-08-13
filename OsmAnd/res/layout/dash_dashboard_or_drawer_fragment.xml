@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/main_fav"
               xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_marginBottom="@dimen/dash_margin"
@@ -24,7 +24,7 @@
         android:text="@string/dashboard_or_drawer_title"
         android:textColor="?android:textColorPrimary"
         android:textSize="20sp"
-        osmand:typeface="@string/font_roboto_medium"
+        app:typefaceWeight="medium"
 	    android:paddingEnd="@dimen/list_content_padding"
 	    android:paddingStart="@dimen/list_content_padding" />
 
@@ -46,15 +46,15 @@
             android:id="@+id/useDashboardButton"
             style="@style/DashboardGeneralButton"
             android:text="@string/use_dashboard_btn"
-            osmand:textAllCapsCompat="true"
-            osmand:typeface="@string/font_roboto_medium"/>
+            android:textAllCaps="true"
+            app:typefaceWeight="medium"/>
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/useDrawerButton"
             style="@style/DashboardGeneralButton"
             android:text="@string/use_drawer_btn"
-            osmand:textAllCapsCompat="true"
-            osmand:typeface="@string/font_roboto_medium"/>
+            android:textAllCaps="true"
+            app:typefaceWeight="medium"/>
     </LinearLayout>
 
 </LinearLayout>

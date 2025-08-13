@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
@@ -28,6 +29,7 @@ import net.osmand.plus.plugins.weather.WeatherWebClient.DownloadState;
 import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
+import net.osmand.plus.settings.enums.TemperatureUnitsMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
@@ -52,6 +54,7 @@ public class WeatherHelper {
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
 	private List<WeakReference<WeatherWebClientListener>> downloadStateListeners = new ArrayList<>();
+	private final StateChangedListener<TemperatureUnitsMode> temperaturePreferenceListener = weatherUnit -> updateBandsSettings();
 	private WeatherWebClient webClient;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
@@ -68,6 +71,8 @@ public class WeatherHelper {
 		weatherBands.put(WEATHER_BAND_CLOUD, WeatherBand.withWeatherBand(app, WEATHER_BAND_CLOUD));
 		weatherBands.put(WEATHER_BAND_PRECIPITATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRECIPITATION));
 		weatherBands.put(WEATHER_BAND_WIND_ANIMATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_WIND_ANIMATION));
+
+		app.getSettings().UNIT_OF_TEMPERATURE.addListener(temperaturePreferenceListener);
 	}
 
 	@NonNull
@@ -112,14 +117,14 @@ public class WeatherHelper {
 	}
 
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRenderer) {
-		if (weatherTileResourcesManager != null) {
+		MapPresentationEnvironment environment = mapRenderer.getMapPresentationEnvironment();
+		if (weatherTileResourcesManager != null || environment == null) {
 			return;
 		}
 		File cacheDir = getForecastCacheDir();
 		String projResourcesPath = app.getAppPath(null).getAbsolutePath();
 		int tileSize = 256;
-		MapPresentationEnvironment mapPresentationEnvironment = mapRenderer.getMapPresentationEnvironment();
-		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
+		float densityFactor = environment.getDisplayDensityFactor();
 		if (webClient != null) {
 			webClient.cleanupResources();
 		}
@@ -204,7 +209,7 @@ public class WeatherHelper {
 	}
 
 	@NonNull
-	public BandIndexGeoBandSettingsHash getBandSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
+	public BandIndexGeoBandSettingsHash getBandSettings(@NonNull WeatherTileResourcesManager resourcesManager) {
 		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
 
 		for (WeatherBand band : weatherBands.values()) {
@@ -218,10 +223,9 @@ public class WeatherHelper {
 				String contourStyleName = band.getContourStyleName();
 				String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
 				MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-				MapPresentationEnvironment mapPresentationEnvironment =
-						mapContext != null ? mapContext.getMapPresentationEnvironment() : null;
-				ZoomLevelDoubleListHash contourLevels = band.getContourLevels(
-						weatherResourcesManager, mapPresentationEnvironment);
+				MapPresentationEnvironment environment = mapContext != null ? mapContext.getMapPresentationEnvironment() : null;
+				ZoomLevelDoubleListHash contourLevels = band.getContourLevels(resourcesManager, environment);
+
 				GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,
 						internalUnit, opacity, colorProfilePath, contourStyleName, contourLevels);
 				bandSettings.set(band.getBandIndex(), settings);

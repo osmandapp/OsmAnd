@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Deprecated
 public enum GpxParameter {
 
 	FILE_NAME("fileName", "TEXT", String.class, null, false),
@@ -16,6 +17,7 @@ public enum GpxParameter {
 	START_TIME("startTime", "bigint", Long.class, Long.MAX_VALUE, true),
 	END_TIME("endTime", "bigint", Long.class, Long.MIN_VALUE, true),
 	TIME_SPAN("timeSpan", "bigint", Long.class, 0L, true),
+	EXPECTED_DURATION("expectedDuration", "bigint", Long.class, 0L, true),
 	TIME_MOVING("timeMoving", "bigint", Long.class, 0L, true),
 	TOTAL_DISTANCE_MOVING("totalDistanceMoving", "double", Double.class, 0d, true),
 	DIFF_ELEVATION_UP("diffElevationUp", "double", Double.class, 0d, true),

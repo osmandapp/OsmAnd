@@ -1,52 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/show_icon_container"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="56dp"
+	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
-		<LinearLayout
-			android:id="@+id/widget_size_container"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:paddingHorizontal="@dimen/content_padding"
-			android:paddingVertical="@dimen/content_padding_small"
-			android:orientation="vertical">
-
-			<net.osmand.plus.widgets.TextViewEx
-				style="@style/TitleStyle"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="@string/shared_string_size"
-				android:textColor="?android:textColorPrimary" />
-
-			<TextView
-				android:id="@+id/widget_size_description"
-				style="@style/DescStyle"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:textColor="?android:textColorSecondary"
-				tools:text="Small" />
-
-		</LinearLayout>
-
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="?divider_color_basic" />
-
-	<LinearLayout
-		android:id="@+id/show_icon_container"
+	<include
+		layout="@layout/divider"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<LinearLayout
+
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
 		android:orientation="horizontal"
-		android:paddingHorizontal="@dimen/content_padding"
-		android:paddingVertical="@dimen/content_padding_small">
+		android:paddingHorizontal="@dimen/content_padding">
 
 		<TextView
 			style="@style/TitleStyle"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:gravity="center_vertical"
@@ -57,6 +34,7 @@
 			android:id="@+id/show_icon_toggle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
 			android:layout_marginStart="@dimen/list_content_padding_large"
 			android:background="@null"
 			android:clickable="false"

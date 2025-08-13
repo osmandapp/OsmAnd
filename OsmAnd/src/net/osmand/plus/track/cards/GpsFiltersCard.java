@@ -1,11 +1,11 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
-import static net.osmand.gpx.GpxParameter.MAX_FILTER_HDOP;
-import static net.osmand.gpx.GpxParameter.MAX_FILTER_SPEED;
-import static net.osmand.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
-import static net.osmand.gpx.GpxParameter.MIN_FILTER_SPEED;
-import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.shared.gpx.GpxParameter.SMOOTHING_THRESHOLD;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -28,11 +28,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
-import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.List;
@@ -54,7 +55,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	@Nullable
 	private GpxDataItem fetchGpxDataItem() {
-		File file = new File(filteredSelectedGpxFile.getGpxFile().path);
+		KFile file = new KFile(filteredSelectedGpxFile.getGpxFile().getPath());
 		GpxDataItemCallback callback = item -> gpxDataItem = item;
 		return gpxDbHelper.getItem(file, callback);
 	}

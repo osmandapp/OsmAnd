@@ -372,7 +372,7 @@
     <string name="poi_viewpoint">관점</string>
     <string name="poi_camp_site">캠프 사이트</string>
     <string name="poi_caravan_site">캐러밴 사이트</string>
-    <string name="poi_ses_station">SES 역</string>
+    <string name="poi_disaster_response">SES 역</string>
     <string name="poi_traffic_calming_hump">험프</string>
     <string name="poi_standpipe">스탠드파이프</string>
     <string name="poi_water_works">물 작품</string>
@@ -620,7 +620,6 @@
     <string name="poi_finance">금융</string>
     <string name="poi_natural">자연경관</string>
     <string name="poi_seamark">항해</string>
-    <string name="poi_osmwiki">위키백과</string>
     <string name="poi_user_defined_other">사용자 정의</string>
     <string name="poi_apartment">아파트</string>
     <string name="poi_military_landuse">군사 지역</string>
@@ -768,7 +767,7 @@
     <string name="poi_hiking_routes">하이킹 코스</string>
     <string name="poi_traffic_enforcement">트래픽 집행</string>
     <string name="poi_doors">문</string>
-    <string name="poi_site_type_fortification">방어시설</string>
+    <string name="poi_archaeological_site_fortification">방어시설</string>
     <string name="facebook">페이스북</string>
     <string name="poi_operator">연산자</string>
     <string name="poi_fuel_avia_type">연료 종류(avia)</string>

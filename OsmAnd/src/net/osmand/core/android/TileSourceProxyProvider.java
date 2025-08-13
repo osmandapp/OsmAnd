@@ -19,9 +19,9 @@ import net.osmand.core.jni.interface_ImageMapLayerProvider;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.resources.TileLoadDownloadRequest;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
@@ -176,11 +176,10 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
 		@Override
 		public void tileDownloaded(MapTileDownloader.DownloadRequest request) {
-			if (!(request instanceof AsyncLoadingThread.TileLoadDownloadRequest)) {
+			if (!(request instanceof TileLoadDownloadRequest)) {
 				return;
 			}
-			AsyncLoadingThread.TileLoadDownloadRequest tileLoadRequest =
-					(AsyncLoadingThread.TileLoadDownloadRequest)request;
+			TileLoadDownloadRequest tileLoadRequest = (TileLoadDownloadRequest)request;
 
 			if (tileSource != tileLoadRequest.tileSource ||
 					x != tileLoadRequest.xTile ||

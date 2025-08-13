@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.core;
 
+import static net.osmand.core.android.MapRendererContext.FAVORITES_SECTION;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -7,17 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapMarker;
-import net.osmand.core.jni.MapTiledCollectionProvider;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListMapTiledCollectionPoint;
-import net.osmand.core.jni.QListPointI;
-import net.osmand.core.jni.SingleSkImage;
-import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.TextRasterizer;
-import net.osmand.core.jni.TileId;
-import net.osmand.core.jni.ZoomLevel;
-import net.osmand.core.jni.interface_MapTiledCollectionProvider;
+import net.osmand.core.jni.*;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
@@ -35,8 +27,8 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-	private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
-	private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
+	private final Map<Long, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
+	private final Map<Long, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
 	private final Context ctx;
 	private final int baseOrder;
 	private final boolean textVisible;
@@ -59,7 +51,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
-		mapRenderer.addSymbolsProvider(providerInstance);
+		mapRenderer.addSymbolsProvider(FAVORITES_SECTION, providerInstance);
 	}
 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {
@@ -116,29 +108,28 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			return SwigUtilities.nullSkImage();
 		}
 		Bitmap bitmap;
+		long key = data.getKey();
 		if (isFullSize) {
-			int bigBitmapKey = data.getKey();
-			bitmap = bigBitmapCache.get(bigBitmapKey);
+			bitmap = bigBitmapCache.get(key);
 			if (bitmap == null) {
-				PointImageDrawable pointImageDrawable;
+				PointImageDrawable drawable;
 				if (data.hasMarker) {
-					pointImageDrawable = PointImageUtils.getOrCreate(ctx, data.color,
-							data.withShadow, true, data.overlayIconId, data.backgroundType);
+					drawable = PointImageUtils.getOrCreate(ctx, data.color, data.withShadow,
+							true, data.overlayIconId, data.backgroundType);
 				} else {
-					pointImageDrawable = PointImageUtils.getOrCreate(ctx, data.color,
+					drawable = PointImageUtils.getOrCreate(ctx, data.color,
 							data.withShadow, false, data.overlayIconId, data.backgroundType);
 				}
-				bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, false);
-				bigBitmapCache.put(bigBitmapKey, bitmap);
+				bitmap = drawable.getBigMergedBitmap(data.textScale, false);
+				bigBitmapCache.put(key, bitmap);
 			}
 		} else {
-			int smallBitmapKey = data.getKey();
-			bitmap = smallBitmapCache.get(smallBitmapKey);
+			bitmap = smallBitmapCache.get(key);
 			if (bitmap == null) {
-				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
-						data.color, data.withShadow, false, data.overlayIconId, data.backgroundType);
-				bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
-				smallBitmapCache.put(smallBitmapKey, bitmap);
+				PointImageDrawable drawable = PointImageUtils.getOrCreate(ctx, data.color,
+						data.withShadow, false, data.overlayIconId, data.backgroundType);
+				bitmap = drawable.getSmallMergedBitmap(data.textScale);
+				smallBitmapCache.put(key, bitmap);
 			}
 		}
 		return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
@@ -220,13 +211,9 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			this.textScale = textScale;
 		}
 
-		int getKey() {
-			long hash = ((long) color << 6) + ((long) overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
+		long getKey() {
+			return ((long) color << 6) + ((long) overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
 					+ ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (backgroundType != null ? backgroundType.ordinal() : 0);
-			if (hash >= Integer.MAX_VALUE || hash <= Integer.MIN_VALUE) {
-				return (int) (hash >> 4);
-			}
-			return (int) hash;
 		}
 	}
 }

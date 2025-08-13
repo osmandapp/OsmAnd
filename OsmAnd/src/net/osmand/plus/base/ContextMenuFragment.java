@@ -10,28 +10,18 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.VelocityTracker;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnLayoutChangeListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
-import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -47,6 +37,7 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
@@ -268,8 +259,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
-		ContextThemeWrapper context =
-				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		Context context = UiUtilities.getThemedContext(mapActivity, nightMode);
 		view = LayoutInflater.from(context).inflate(getMainLayoutId(), container, false);
 		initLayout = true;
 		currentMenuState = getInitialMenuState();
@@ -322,8 +312,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		processScreenHeight(container);
 		minHalfY = getMinHalfY(mapActivity);
 
-		GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
-		GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
+		GestureDetector singleTapDetector = new GestureDetector(context, new SingleTapConfirm());
+		GestureDetector swipeDetector = new GestureDetector(context, new HorizontalSwipeConfirm(true));
 
 		OnTouchListener slideTouchListener = new OnTouchListener() {
 			private float dy;
@@ -341,7 +331,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 			private boolean hasMoved;
 
 			{
-				scroller = new OverScroller(app);
+				scroller = new OverScroller(context);
 				ViewConfiguration configuration = ViewConfiguration.get(requireContext());
 				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
 				maximumVelocity = configuration.getScaledMaximumFlingVelocity();
@@ -524,7 +514,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	private int addStatusBarHeightIfNeeded(int res) {
 		MapActivity mapActivity = getMapActivity();
-		if (Build.VERSION.SDK_INT >= 21 && mapActivity != null) {
+		if (mapActivity != null) {
 			return res + (isSingleFragment() ? statusBarHeight : 0);
 		}
 		return res;
@@ -1063,7 +1053,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public void fitRectOnMap(QuadRect rect) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			if (!portrait) {
@@ -1084,7 +1074,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
-		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		ShareMenu.copyToClipboardWithToast(ctx, text, false);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {

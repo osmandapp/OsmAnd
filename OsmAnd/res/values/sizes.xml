@@ -145,7 +145,7 @@
 	<dimen name="map_widget_icon">24dp</dimen>
 	<dimen name="map_widget_height">32dp</dimen>
 	<dimen name="map_widget_image">80dp</dimen>
-	<dimen name="map_button_spacing">11dp</dimen>
+	<dimen name="map_button_spacing">12dp</dimen>
 	<dimen name="map_button_spacing_land">6dp</dimen>
 	<dimen name="map_button_margin">6dp</dimen>
 	<dimen name="map_routing_progress_width">100dp</dimen>
@@ -284,6 +284,7 @@
 	<dimen name="content_padding_extra_large">72dp</dimen>
 	<dimen name="content_padding_large">48dp</dimen>
 	<dimen name="content_padding">16dp</dimen>
+	<dimen name="content_padding_double">32dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>
@@ -350,6 +351,9 @@
 
 	<dimen name="distance_by_tap_normal_text_size">16sp</dimen>
 
+	<dimen name="gallery_standard_icon_size">72dp</dimen>
+	<dimen name="gallery_big_icon_size">156dp</dimen>
+
 	<!--Route info-->
 	<dimen name="route_info_buttons_padding_top_bottom">16dp</dimen>
 	<dimen name="route_info_buttons_padding_left_right">22dp</dimen>
@@ -392,6 +396,7 @@
     <dimen name="grid_menu_item_bottom_top_margin">16dp</dimen>
     <dimen name="grid_menu_item_sides_margin">40dp</dimen>
 
+	<dimen name="bottom_sheet_min_peek_height">50dp</dimen>
 	<dimen name="bottom_sheet_menu_peek_height">300dp</dimen>
 
 	<dimen name="side_of_the_world_button_size">36dp</dimen>
@@ -473,5 +478,14 @@
 
 	<dimen name="bottom_space_height">160dp</dimen>
 	<dimen name="external_devices_empty_content_centre_margin">126dp</dimen>
+	<dimen name="map_button_appearance_image_height">130dp</dimen>
+	<dimen name="default_buttons_hud_preview">290dp</dimen>
 
+	<dimen name="nearby_place_image_height">108dp</dimen>
+	<dimen name="nearby_place_image_width">144dp</dimen>
+	<dimen name="nearby_place_item_height">214dp</dimen>
+	<dimen name="nearby_place_error_image_size">24dp</dimen>
+	<dimen name="nearby_place_error_image_size_big">36dp</dimen>
+	<dimen name="nearby_place_item_height_non_image">122dp</dimen>
+	<dimen name="nearby_place_image_vertical_size">66dp</dimen>
 </resources>

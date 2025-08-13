@@ -10,30 +10,38 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardType;
+import net.osmand.plus.mapcontextmenu.CollapsableView;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
+import net.osmand.plus.mapcontextmenu.gallery.ImageCardType;
+import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -58,8 +66,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -79,8 +87,13 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public final CommonPreference<Long> MAPILLARY_FILTER_FROM_DATE;
 	public final CommonPreference<Long> MAPILLARY_FILTER_TO_DATE;
 	public final CommonPreference<Boolean> MAPILLARY_FILTER_PANO;
+	public final CommonPreference<Boolean> MAPILLARY_PHOTOS_ROW_COLLAPSED;
 
 	private MapActivity mapActivity;
+
+	@Nullable
+	private CardsRowBuilder mapillaryCardsRow;
+	private List<AbstractCard> mapillaryCards;
 
 	private MapillaryVectorLayer vectorLayer;
 	private MapWidgetInfo mapillaryWidgetRegInfo;
@@ -97,6 +110,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		MAPILLARY_FILTER_FROM_DATE = registerLongPreference("mapillary_filter_from_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_TO_DATE = registerLongPreference("mapillary_filter_to_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_PANO = registerBooleanPreference("mapillary_filter_pano", false).makeGlobal().makeShared();
+		MAPILLARY_PHOTOS_ROW_COLLAPSED = registerBooleanPreference("mapillary_menu_collapsed", true).makeGlobal().makeShared();
 	}
 
 	@Override
@@ -206,7 +220,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			@Override
 			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
 			                              @NonNull View view, @NonNull ContextMenuItem item) {
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
 				return false;
 			}
 
@@ -239,6 +253,77 @@ public class MapillaryPlugin extends OsmandPlugin {
 		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
 
+	@Override
+	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+		GalleryController controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
+		if (controller == null) {
+			return;
+		}
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+		boolean needUpdateOnly = mapillaryCardsRow != null && mapillaryCardsRow.getMenuBuilder() == menuBuilder;
+
+		mapillaryCardsRow = new CardsRowBuilder(menuBuilder);
+		mapillaryCardsRow.build(controller, false, nightMode);
+
+		LinearLayout parent = new LinearLayout(view.getContext());
+		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT));
+		parent.setOrientation(LinearLayout.VERTICAL);
+		parent.addView(mapillaryCardsRow.getGalleryView());
+
+		CollapsableView collapsableView = new CollapsableView(parent, menuBuilder, MAPILLARY_PHOTOS_ROW_COLLAPSED);
+		collapsableView.setCollapseExpandListener(collapsed -> {
+			if (!collapsed && mapillaryCards == null) {
+				menuBuilder.startLoadingImages();
+			}
+		});
+		menuBuilder.buildRow(view, R.drawable.ic_action_photo_street, null, app.getString(R.string.street_level_imagery), 0, true,
+				collapsableView, false, 1, false, null, false);
+
+		if (needUpdateOnly && mapillaryCards != null) {
+			mapillaryCardsRow.setCards(mapillaryCards);
+		} else if (!collapsableView.isCollapsed() && mapillaryCards == null) {
+			menuBuilder.startLoadingImages();
+		}
+	}
+
+	@Override
+	public void clearContextMenuRows() {
+		mapillaryCards = null;
+		mapillaryCardsRow = null;
+	}
+
+	public GetImageCardsListener getImageCardsListener() {
+		return new GetImageCardsListener() {
+			@Override
+			public void onTaskStarted() {
+				if (mapillaryCardsRow != null) {
+					mapillaryCardsRow.onLoadingImage(true);
+				}
+			}
+
+			@Override
+			public void onFinish(ImageCardsHolder cardsHolder) {
+				if (mapillaryCardsRow != null) {
+					mapillaryCardsRow.onLoadingImage(false);
+				}
+				List<AbstractCard> cards = new ArrayList<>(cardsHolder.getMapillaryCards());
+				if (mapActivity != null && Algorithms.isEmpty(cards)) {
+					cards.add(new NoImagesCard(mapActivity));
+				}
+				if (mapillaryCardsRow != null) {
+					mapillaryCardsRow.setCards(cards);
+				}
+				mapillaryCards = cards;
+			}
+		};
+	}
+
+	@Override
+	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+		return true;
+	}
+
 	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
 		if (mapillaryWidgetRegInfo != null) {
 			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
@@ -251,24 +336,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 				mil.recreateControls();
 			}
 			mapActivity.refreshMap();
-		}
-	}
-
-	@Override
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
-	                                            @NonNull Map<String, String> params,
-	                                            @Nullable Map<String, String> additionalParams,
-	                                            @Nullable GetImageCardsListener listener) {
-		if (mapActivity != null && additionalParams != null) {
-			String key = additionalParams.get(Amenity.MAPILLARY);
-			if (key != null) {
-				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(key);
-				if (imageObject != null) {
-					holder.add(ImageCardType.MAPILLARY_AMENITY, new MapillaryImageCard(mapActivity, imageObject));
-				}
-				additionalParams.remove(Amenity.MAPILLARY);
-			}
-			params.putAll(additionalParams);
 		}
 	}
 
@@ -291,7 +358,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			}
 		}
 		if (imageCard != null) {
-			holder.add(ImageCardType.MAPILLARY, imageCard);
+			holder.addCard(ImageCardType.MAPILLARY, imageCard);
 			return true;
 		}
 		return false;

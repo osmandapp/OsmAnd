@@ -1,12 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.IndexConstants.TXT_EXT;
-import static net.osmand.plus.plugins.srtm.TerrainMode.ALTITUDE_DEFAULT_KEY;
-import static net.osmand.plus.plugins.srtm.TerrainMode.COLOR_SLOPE_PREFIX;
-import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HEIGHT_PREFIX;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE_SCND_PREFIX;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
@@ -37,7 +31,6 @@ import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,16 +39,18 @@ import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
+import net.osmand.plus.configmap.TerrainZoomLevelsController;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -63,12 +58,14 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +111,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		srtmPlugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 	}
 
@@ -167,12 +164,12 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		modifyButton.setOnClickListener(view -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				if (InAppPurchaseUtils.isOsmAndProAvailable(app)) {
+				if (isColoringTypeAvailable()) {
 					activity.getDashboard().hideDashboard();
 					FragmentManager manager = activity.getSupportFragmentManager();
 					ModifyGradientFragment.showInstance(manager, srtmPlugin.getTerrainMode().getType());
 				} else {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+					ChoosePlanFragment.showInstance(activity, OsmAndFeature.ADVANCED_WIDGETS);
 				}
 			}
 		});
@@ -184,7 +181,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void updateChart() {
-		int labelsColor = ContextCompat.getColor(app, R.color.text_color_secondary_light);
+		int labelsColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
 		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
@@ -224,9 +221,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		String transparency = transparencyValue + "%";
 		visibilityTv.setText(transparency);
 
-		int minZoom = srtmPlugin.getTerrainMinZoom();
-		int maxZoom = srtmPlugin.getTerrainMaxZoom();
-		String zoomLevels = minZoom + " - " + maxZoom;
+		NumberFormat numberFormat = OsmAndFormatter.getNumberFormat(app);
+		String minZoom = numberFormat.format(srtmPlugin.getTerrainMinZoom());
+		String maxZoom = numberFormat.format(srtmPlugin.getTerrainMaxZoom());
+		String zoomLevels = getString(R.string.ltr_or_rtl_combine_via_dash, minZoom, maxZoom);
 		zoomLevelsTv.setText(zoomLevels);
 		coloSchemeTv.setText(mode.getType().getName(app));
 	}
@@ -266,7 +264,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getDashboard().hideDashboard();
-				TerrainZoomLevelsFragment.showInstance(mapActivity.getSupportFragmentManager());
+				TerrainZoomLevelsController.showDialog(mapActivity, srtmPlugin);
 			}
 		});
 	}
@@ -335,8 +333,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 							: R.color.icon_color_secondary_light));
 			stateTv.setText(R.string.shared_string_disabled);
 		}
-		AndroidUiHelper.updateVisibility(proIv, !InAppPurchaseUtils.isOsmAndProAvailable(app));
-		proIv.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+		AndroidUiHelper.updateVisibility(proIv, !isColoringTypeAvailable());
+		proIv.setImageResource(PurchasingUtils.getProFeatureIconId(nightMode));
 
 		adjustGlobalVisibility();
 		updateColorSchemeCard(mode);
@@ -370,7 +368,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		try {
 			int startIndex = text.indexOf(clickableText);
 			if (medium) {
-				spannableString.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spannableString.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			spannableString.setSpan(clickableSpan, startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			textView.setText(spannableString);
@@ -424,6 +422,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		if (mapActivity != null && plugin != null && plugin.isTerrainLayerEnabled()) {
 			plugin.registerLayers(mapActivity, mapActivity);
 		}
+	}
+
+	private boolean isColoringTypeAvailable() {
+		return InAppPurchaseUtils.isColoringTypeAvailable(app);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

@@ -13,12 +13,12 @@ public class BoatSizes extends VehicleSizes {
 	protected void collectSizesData() {
 		ThemedIconId icon = new ThemedIconId(R.drawable.img_help_vessel_width_day, R.drawable.img_help_vessel_width_night);
 		Assets assets = new Assets(icon, R.string.vessel_width_limit_description);
-		Limits limits = new Limits(1.5f, 15f);
+		Limits<Float> limits = new Limits<>(1.5f, 15f);
 		add(SizeType.WIDTH, assets, limits);
 
 		icon = new ThemedIconId(R.drawable.img_help_vessel_height_day, R.drawable.img_help_vessel_height_night);
 		assets = new Assets(icon, R.string.vessel_height_limit_description);
-		limits = new Limits(1.5f, 30f);
+		limits = new Limits<>(1.5f, 30f);
 		add(SizeType.HEIGHT, assets, limits);
 	}
 

@@ -38,12 +38,22 @@ public class PurchaseItemCard extends BaseCard {
 	private final PurchaseUiData purchase;
 	private final InAppPurchaseHelper purchaseHelper;
 
+	private boolean preferPurchasedTimeTitle = false;
+
 	public PurchaseItemCard(@NonNull FragmentActivity activity,
 	                        @NonNull InAppPurchaseHelper purchaseHelper,
 	                        @NonNull PurchaseUiData purchase) {
 		super(activity, false);
 		this.purchase = purchase;
 		this.purchaseHelper = purchaseHelper;
+	}
+
+	public boolean isPreferPurchasedTimeTitle() {
+		return preferPurchasedTimeTitle;
+	}
+
+	public void setPreferPurchasedTimeTitle(boolean preferPurchasedTimeTitle) {
+		this.preferPurchasedTimeTitle = preferPurchasedTimeTitle;
 	}
 
 	@Override
@@ -107,13 +117,17 @@ public class PurchaseItemCard extends BaseCard {
 
 	private void prepareOneTimePaymentCard() {
 		long purchaseTime = purchase.getPurchaseTime();
-		if (purchaseTime > 0) {
+		long expireTime = purchase.getExpireTime();
+		if (purchaseTime > 0 && (preferPurchasedTimeTitle || expireTime <= 0)) {
 			String dateStr = dateFormat.format(purchaseTime);
 			String purchased = app.getString(R.string.shared_string_purchased);
 			tvBillingDate.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, purchased, dateStr));
 			AndroidUiHelper.updateVisibility(tvBillingDate, true);
-		} else {
-			AndroidUiHelper.updateVisibility(tvBillingDate, false);
+		} else if (expireTime > 0) {
+			String dateStr = dateFormat.format(expireTime);
+			String expires = app.getString(R.string.shared_string_expires);
+			tvBillingDate.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, expires, dateStr));
+			AndroidUiHelper.updateVisibility(tvBillingDate, true);
 		}
 		// Don't show status for one-time payment purchase
 		AndroidUiHelper.updateVisibility(tvStatus, false);

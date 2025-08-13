@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -13,12 +12,7 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/shadow_on_map"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_onmap" />
+		<include layout="@layout/shadow_on_map" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -63,7 +57,7 @@
 							android:text="@string/srtm_color_scheme"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							osmand:typeface="@string/font_roboto_medium" />
+							app:typefaceWeight="medium" />
 
 						<LinearLayout
 							android:id="@+id/color_scheme_button"
@@ -83,15 +77,15 @@
 								android:text="@string/shared_string_transparency"
 								android:textColor="?android:textColorSecondary"
 								android:textSize="@dimen/default_list_text_size"
-								osmand:typeface="@string/font_roboto_regular" />
+								android:textStyle="normal" />
 
 							<ImageView
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_gravity="center_vertical"
 								android:layout_marginStart="@dimen/content_padding"
-								app:tint="?attr/secondary_icon_color"
-								osmand:srcCompat="@drawable/ic_action_arrow_down" />
+								app:srcCompat="@drawable/ic_action_arrow_down"
+								app:tint="?attr/secondary_icon_color" />
 
 						</LinearLayout>
 
@@ -181,7 +175,7 @@
 							android:text="@string/gpx_visibility_txt"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:textStyle="normal" />
 
 						<TextView
 							android:id="@+id/visibility_value"
@@ -225,7 +219,7 @@
 							android:text="@string/shared_string_zoom_levels"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:textStyle="normal" />
 
 						<TextView
 							android:id="@+id/zoom_value"
@@ -274,7 +268,7 @@
 							android:text="@string/cache_size"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:textStyle="normal" />
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/cache_size_value"
@@ -318,7 +312,7 @@
 						android:layout_height="match_parent"
 						android:adjustViewBounds="true"
 						android:scaleType="fitCenter"
-						osmand:srcCompat="@drawable/img_empty_state_terrain" />
+						app:srcCompat="@drawable/img_empty_state_terrain" />
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -376,7 +370,7 @@
 					android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					tools:text="@string/terrain_empty_state_text" />
 
 			</LinearLayout>

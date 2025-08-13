@@ -230,7 +230,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			fragment.setArguments(arguments);
 			fragment.setRetainInstance(true);
 			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
+					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}

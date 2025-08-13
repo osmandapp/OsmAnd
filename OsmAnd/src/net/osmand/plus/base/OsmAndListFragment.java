@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.ListFragment;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 
@@ -14,7 +15,7 @@ public abstract class OsmAndListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		getListView().setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 	

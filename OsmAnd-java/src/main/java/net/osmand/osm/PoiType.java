@@ -31,12 +31,13 @@ public class PoiType extends AbstractPoiType {
 	private boolean relation;
 	private int order = DEFAULT_ORDER;
 	private boolean topIndex = false;
+	private boolean hidden = false;
 	private int maxPerMap;
 	private int minCount;
 
 
-	public PoiType(MapPoiTypes poiTypes, PoiCategory category, PoiFilter filter, String keyName) {
-		super(keyName, poiTypes);
+	public PoiType(MapPoiTypes poiTypes, PoiCategory category, PoiFilter filter, String keyName, String iconName) {
+		super(keyName, poiTypes, iconName);
 		this.category = category;
 		this.filter = filter;
 	}
@@ -201,7 +202,18 @@ public class PoiType extends AbstractPoiType {
 		return acceptedTypes;
 	}
 
-    public void setAdditional(AbstractPoiType parentType) {
+	@Override
+	public String getParentTypeName() {
+		if (parentType != null) {
+			return parentType.getTranslation();
+		} else if (category != null) {
+			return category.getTranslation();
+		} else {
+			return "";
+		}
+	}
+
+	public void setAdditional(AbstractPoiType parentType) {
         this.parentType = parentType;
     }
 
@@ -253,6 +265,14 @@ public class PoiType extends AbstractPoiType {
 		this.order = order;
 	}
 
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
 	@Override
 	public String toString() {
 		return "PoiType{" +
@@ -267,6 +287,7 @@ public class PoiType extends AbstractPoiType {
 				", nameOnly=" + nameOnly +
 				", relation=" + relation +
 				", order=" + order +
+				", hidden=" + hidden +
 				'}';
 	}
 

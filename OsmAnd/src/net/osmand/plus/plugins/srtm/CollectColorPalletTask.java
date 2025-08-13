@@ -5,8 +5,8 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.shared.ColorPalette;
 
 import java.io.File;
 

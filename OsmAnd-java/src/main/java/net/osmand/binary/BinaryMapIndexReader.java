@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -73,6 +74,7 @@ import net.osmand.data.City;
 import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -974,8 +976,10 @@ public class BinaryMapIndexReader {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
-
-
+					if (req.hasSearchBoxes() &&
+							!req.containsSearchBox(index.left, index.top, index.right, index.bottom)) {
+						continue;
+					}
 
 					// lazy initializing trees
 					if (index.trees == null) {
@@ -988,6 +992,10 @@ public class BinaryMapIndexReader {
 
 					for (MapTree tree : index.trees) {
 						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
+							continue;
+						}
+						if (req.hasSearchBoxes() &&
+								!req.containsSearchBox(tree.left, tree.top, tree.right, tree.bottom)) {
 							continue;
 						}
 						codedIS.seek(tree.filePointer);
@@ -1013,7 +1021,6 @@ public class BinaryMapIndexReader {
 					}
 					foundSubtrees.clear();
 				}
-
 			}
 		}
 		if (req.numberOfVisitedObjects > 0 && req.log) {
@@ -1114,9 +1121,12 @@ public class BinaryMapIndexReader {
 				// coordinates are init
 				if (current.right < req.left || current.left > req.right || current.top > req.bottom || current.bottom < req.top) {
 					return;
-				} else {
-					req.numberOfAcceptedSubtrees++;
 				}
+				if (req.hasSearchBoxes() &&
+						!req.containsSearchBox(current.left, current.top, current.right, current.bottom)) {
+					return;
+				}
+				req.numberOfAcceptedSubtrees++;
 			}
 			switch (tag) {
 			case 0:
@@ -1490,7 +1500,6 @@ public class BinaryMapIndexReader {
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 		}
-
 		return req.getSearchResults();
 	}
 
@@ -1715,6 +1724,7 @@ public class BinaryMapIndexReader {
 			mapIndexes.clear();
 			addressIndexes.clear();
 			transportIndexes.clear();
+			poiIndexes.clear();
 		}
 	}
 
@@ -1790,6 +1800,8 @@ public class BinaryMapIndexReader {
 		int right = 0;
 		int top = 0;
 		int bottom = 0;
+
+		private Collection<QuadRect> searchBoxes;
 
 		int zoom = 15;
 		int limit = -1;
@@ -1954,7 +1966,36 @@ public class BinaryMapIndexReader {
 		public boolean isBboxSpecified() {
 			return left != 0 || right != 0;
 		}
-	}
+
+		private boolean hasSearchBoxes() {
+			return searchBoxes != null;
+		}
+
+		private boolean containsSearchBox(int left, int top, int right, int bottom) {
+			if (Algorithms.isEmpty(searchBoxes)) {
+				return false;
+			}
+			QuadRect searchRect = new QuadRect(left, top, right, bottom);
+			for (QuadRect box : searchBoxes) {
+				if (searchRect.contains(box)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+        public Collection<QuadRect> clearSearchBoxes() {
+            return searchBoxes = null;
+        }
+
+        public void setSearchBoxes(Collection<QuadRect> searchBboxes) {
+            this.searchBoxes = searchBboxes;
+        }
+
+		public void setMatcherMode(StringMatcherMode mode) {
+			matcherMode = mode;
+		}
+    }
 
 
 	public static class MapIndex extends BinaryIndexPart {
@@ -2275,10 +2316,12 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressSearch = false;
 	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = true;
+	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
-	
+	private static boolean testPoiRouteByName = true;
+	private static boolean testPoiRouteByType = true;
+
 	private static int sleft = MapUtils.get31TileNumberX(27.55079);
 	private static int sright = MapUtils.get31TileNumberX(27.55317);
 	private static int stop = MapUtils.get31TileNumberY(53.89378);
@@ -2319,10 +2362,22 @@ public class BinaryMapIndexReader {
 			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
 			if (testPoiSearch) {
 				testPoiSearch(reader, poiRegion);
-				testPoiSearchByName(reader);
+				testPoiSearchByName(reader, "central ukraine", 0, 0);
 			}
 			if (testPoiSearchOnPath) {
 				testSearchOnthePath(reader);
+			}
+		}
+
+		if (testPoiRouteByName || testPoiRouteByType) {
+			int y = MapUtils.get31TileNumberY(36.023431);
+			int x = MapUtils.get31TileNumberX(14.298406);
+			if (testPoiRouteByName) {
+				testPoiSearchByName(reader, "Gozo Coastal Walk", x, y); // Malta - Gozo Island - osm_hiking track
+			}
+			if (testPoiRouteByType) {
+				testPoiSearchByType(reader, "routes", "osm_hiking", x, y);
+//				testPoiSearchByType(reader, "routes", null, x, y);
 			}
 		}
 
@@ -2436,16 +2491,49 @@ public class BinaryMapIndexReader {
 		}
 		return res;
 	}
+	private static void testPoiSearchByType(BinaryMapIndexReader reader, String askType, String askSubType, int x, int y) throws IOException {
+		println("Searching by type/subtype...");
 
-	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
+		SearchRequest<Amenity> req = buildSearchPoiRequest(x, y, "", 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+				new SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return type.getKeyName().equals(askType) && (askSubType == null || subcategory.equals(askSubType));
+					}
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, null, null);
+
+		reader.searchPoi(req);
+		for (Amenity a : req.getSearchResults()) {
+			int distance = 0;
+			if (x > 0 && y > 0) {
+				distance = (int)MapUtils.getDistance(a.getLocation(),
+						MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			}
+			println(a.getType().getTranslation() +
+					" " + a.getSubType() + " " + a.getName() + " " + a.getLocation() +
+					(distance > 0 ? (" Dist " + distance + " m") : ""));
+		}
+	}
+
+	private static void testPoiSearchByName(BinaryMapIndexReader reader, String query, int x, int y) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "central ukraine",
+		SearchRequest<Amenity> req = buildSearchPoiRequest(x, y, query,
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {
+			int distance = 0;
+			if (x > 0 && y > 0) {
+				distance = (int)MapUtils.getDistance(a.getLocation(),
+						MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			}
 			println(a.getType().getTranslation() +
-					" " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
+					" " + a.getSubType() + " " + a.getName() + " " + a.getLocation() +
+					(distance > 0 ? (" Dist " + distance + " m") : ""));
 		}
 	}
 

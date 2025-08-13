@@ -19,8 +19,9 @@ public class FileColorsCollection extends ColorsCollection {
 
 	private static final String DEFAULT_USER_PALETTE_FILE = "user_palette_default.txt";
 
+	private static boolean fileRecreated = false;
+
 	private final File file;
-	private final List<String> commentsFromFile = new ArrayList<>();
 
 	public FileColorsCollection(@NonNull OsmandApplication app) {
 		this(getSourceFile(app));
@@ -28,7 +29,11 @@ public class FileColorsCollection extends ColorsCollection {
 
 	public FileColorsCollection(@NonNull File file) {
 		this.file = file;
-		loadColors();
+		if (fileRecreated) {
+			addAllUniqueColors(DefaultPaletteColors.valuesList());
+		} else {
+			loadColors();
+		}
 	}
 
 	@Override
@@ -36,13 +41,12 @@ public class FileColorsCollection extends ColorsCollection {
 		long now = System.currentTimeMillis();
 		ColorPalette palette = readFile();
 		for (ColorValue color : palette.getColors()) {
-			lastUsedOrder.add(new PaletteColor(color, now++));
+			lastUsedOrder.add(new PaletteColor(color));
 		}
 	}
 
 	private ColorPalette readFile() throws IOException {
-		commentsFromFile.clear();
-		return ColorPalette.parseColorPalette(new FileReader(file), commentsFromFile, false);
+		return ColorPalette.parseColorPalette(new FileReader(file), false);
 	}
 
 	@Override
@@ -57,12 +61,8 @@ public class FileColorsCollection extends ColorsCollection {
 		for (PaletteColor paletteColor : lastUsedOrder) {
 			colorValues.add(paletteColor.getColorValue());
 		}
-		StringBuilder content = new StringBuilder();
-		for (String comment : commentsFromFile) {
-			content.append(comment).append("\n");
-		}
+		StringBuilder content = new StringBuilder("# Index,R,G,B,A\n");
 		content.append(ColorPalette.writeColorPalette(colorValues));
-
 		try {
 			FileWriter writer = new FileWriter(file);
 			BufferedWriter w = new BufferedWriter(writer);
@@ -82,7 +82,10 @@ public class FileColorsCollection extends ColorsCollection {
 		}
 		File file = new File(dir, DEFAULT_USER_PALETTE_FILE);
 		try {
-			file.createNewFile();
+			if (!file.isFile()) {
+				file.createNewFile();
+				fileRecreated = true;
+			}
 		} catch (IOException e) {
 			LOG.debug("Can't create a color palette file: " + e.getMessage());
 		}

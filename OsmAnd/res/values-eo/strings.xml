@@ -105,8 +105,8 @@
     <string name="shared_string_hide">Kaŝi</string>
     <string name="av_video_quality_low">Kvalito malalta</string>
     <string name="av_video_quality_high">Kvalito alta</string>
-    <string name="av_video_quality">Kvalito de videa eligo</string>
-    <string name="av_video_quality_descr">Elekti kvaliton de videa eligo.</string>
+    <string name="av_video_quality">Kvalito de filmetoj</string>
+    <string name="av_video_quality_descr">Elekti kvaliton por filmetoj.</string>
     <string name="av_audio_format">Sonformo</string>
     <string name="av_audio_format_descr">Elekti tipon de eliga sondosiero.</string>
     <string name="av_audio_bitrate">Sona bitrapido</string>
@@ -145,7 +145,7 @@
     <string name="share_osm_edits_subject">OSM-redaktoj kunhavataj per OsmAnd</string>
     <string name="lang_nds">Platgermana</string>
     <string name="lang_mk">Makedona</string>
-    <string name="lang_fy">Okcidentfrisa</string>
+    <string name="lang_fy">Okcident-frisa</string>
     <string name="lang_als">Albana (Toska)</string>
     <string name="read_more">Legi pli</string>
     <string name="whats_new">Kio estas nova en</string>
@@ -175,7 +175,6 @@
     <string name="driving_region_us">Usono</string>
     <string name="driving_region_canada">Kanado</string>
     <string name="driving_region_europe_asia">Eŭropo, Azio, Latin-Ameriko kaj similaj</string>
-    <string name="driving_region_uk">Britujo, Hindujo kaj similaj</string>
     <string name="index_name_north_america">Nordameriko</string>
     <string name="index_name_netherlands">Eŭropo - Nederlando</string>
     <string name="index_name_us">Nordameriko - Usono</string>
@@ -193,7 +192,7 @@
     <string name="shared_string_move_down">Movi ↓</string>
     <string name="finish_navigation">Fini navigadon</string>
     <string name="avoid_road">Eviti vojon</string>
-    <string name="storage_directory_readonly_desc">Baskulis al interna konservejo, ĉar la elektita dosierujo por konservi datumojn estas nurlega. Bonvolu elekti skribeblan dosierujon.</string>
+    <string name="storage_directory_readonly_desc">Ŝanĝis al interna konservejo, ĉar la elektita dosierujo por konservi datumojn estas nurlega. Elektu skribeblan dosierujon.</string>
     <string name="storage_directory_shared">Komuna memoro</string>
     <string name="osm_live_month_cost_desc">Monata elspezo</string>
     <string name="map_marker_1st">Unua map-marko</string>
@@ -285,7 +284,7 @@
     <string name="lang_ga">Irlanda</string>
     <string name="lang_ku">Kurda</string>
     <string name="lang_ta">Tamila</string>
-    <string name="lang_ml">Malajala</string>
+    <string name="lang_ml">Malajalama</string>
     <string name="lang_lb">Luksemburga</string>
     <string name="lang_os">Oseta</string>
     <string name="lang_nb">Norvega Bokmål</string>
@@ -343,7 +342,7 @@
     <string name="shared_string_disable">Malaktivigi</string>
     <string name="shared_string_enabled">Aktiva</string>
     <string name="shared_string_disabled">Malaktiva</string>
-    <string name="shared_string_selected">Elektitaj</string>
+    <string name="shared_string_selected">Elektita(j)</string>
     <string name="shared_string_never">Neniam</string>
     <string name="shared_string_help">Helpo</string>
     <string name="shared_string_settings">Agordoj</string>
@@ -378,8 +377,8 @@
     <string name="shared_string_add">Aldoni</string>
     <string name="shared_string_my_places">Miaj ejoj</string>
     <string name="shared_string_tracks">Kursoj</string>
-    <string name="shared_string_audio">Sono</string>
-    <string name="shared_string_video">Video</string>
+    <string name="shared_string_audio">Sonaĵo</string>
+    <string name="shared_string_video">Filmeto</string>
     <string name="shared_string_photo">Foto</string>
     <string name="settings_privacy">Privateco</string>
     <string name="map_locale">Lingvo de mapo</string>
@@ -428,7 +427,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon kurbiĝo-post-kurbiĝo post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -476,7 +475,7 @@
     <string name="notes">Sonaj/videaj notoj</string>
     <string name="online_map">Enreta mapo</string>
     <string name="roads_only">Nur vojoj</string>
-    <string name="rendering_attr_pisteRoutes_name">Descendejoj</string>
+    <string name="rendering_attr_pisteRoutes_name">Skiaj kursoj</string>
     <string name="free">Libera %1$s</string>
     <string name="gps_status">Stato de GPS</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
@@ -526,7 +525,7 @@
     <string name="navigate_point_easting">Absciso</string>
     <string name="download_tab_downloads">Ĉiuj</string>
     <string name="download_tab_local">Lokaj</string>
-    <string name="no_internet_connection">Ne povas elŝuti, bonvolu kontroli vian retkonekton.</string>
+    <string name="no_internet_connection">Neniu retkonekto</string>
     <string name="record_plugin_name">Spur-registrilo</string>
     <string name="record_plugin_description">Ebligas registri viajn vojaĝojn aŭ trejnadojn kaj analizi ilin konsiderante rapidon, tutajn suprenirojn kaj malsuprenirojn, profilon de altitudo kaj pli. Registritajn spurojn oni povas arĥivigi, kunhavigi, redakti kaj pritrakti.
 \n
@@ -543,7 +542,7 @@
     <string name="rendering_attr_subwayMode_name">Metroaj kursoj</string>
     <string name="lock_screen_request_explanation">%1$s bezonas tiun ĉi permeson por malŝalti ekranon por energi-ŝparan funkcion.</string>
     <string name="wake_on_voice">Ŝalti ekranon</string>
-    <string name="wake_on_voice_descr">Ŝalti aparatan ekranon dum proksimigado al turniĝo.</string>
+    <string name="wake_on_voice_descr">Ŝalti aparatan ekranon dum proksimigado al kurbiĝo.</string>
     <string name="impassable_road">Eviti vojojn…</string>
     <string name="rendering_attr_tramRoutes_name">Tramaj kursoj</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Fervojaj kursoj</string>
@@ -608,7 +607,7 @@
     <string name="monitoring_settings_descr">Agordi kiel registri spurojn.</string>
     <string name="duration">Daŭro</string>
     <string name="distance">Distanco</string>
-    <string name="download_additional_maps">Ĉu elŝuti mankajn mapojn de %1$s (%2$d MB)?</string>
+    <string name="download_additional_maps">Ĉu elŝuti mankantajn mapojn de %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Foliumi mapon</string>
     <string name="rendering_value_car_name">Aŭto</string>
     <string name="rendering_value_bicycle_name">Biciklo</string>
@@ -634,8 +633,7 @@
     <string name="rendering_attr_buildings15zoom_name">Konstruaĵoj ĉe skal-nivelo 15</string>
     <string name="rendering_attr_moreDetailed_name">Pli detaloj</string>
     <string name="rendering_attr_lessDetailed_name">Malpli detaloj</string>
-    <string name="rendering_attr_hideAccess_name">Aliraj baroj</string>
-    <string name="rendering_attr_showAccess_name">Aliraj baroj kaj vojpagejoj</string>
+    <string name="rendering_attr_showAccess_name">Aliraj limigoj</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklaj kursoj</string>
@@ -681,7 +679,7 @@
     <string name="lang_ca">Kataluna</string>
     <string name="lang_da">Dana</string>
     <string name="lang_nl">Nederlanda</string>
-    <string name="lang_fi">Suoma</string>
+    <string name="lang_fi">Finna</string>
     <string name="lang_ka">Kartvela</string>
     <string name="lang_el">Greka</string>
     <string name="lang_iw">Hebrea</string>
@@ -715,7 +713,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nPremtenu por vidigi sur la mapo"</string>
-    <string name="delay_navigation_start">Ekigi navigadon turnon-post-turno aŭtomate</string>
+    <string name="delay_navigation_start">Ekigi gvidadon kurbiĝo-post-kurbiĝo aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">Navigadpunktoj: %1$s</string>
     <string name="gpx_info_subtracks">Subspuroj: %1$s</string>
@@ -732,9 +730,9 @@
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_number_of_points">%1$s punktoj</string>
     <string name="gpx_selection_point">Punkto %1$s</string>
-    <string name="gpx_selection_route_points">%1$s\nPunktoj de kurso: %2$s</string>
-    <string name="gpx_selection_points">%1$s\nPunktoj</string>
-    <string name="gpx_selection_track">%1$s\nKurso %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nPunktoj de kurso: %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPunktoj</string>
+    <string name="gpx_selection_track">%1$s \nKurso %2$s</string>
     <string name="gpx_file_is_empty">Malplena GPX-dosiero</string>
     <string name="osmo_edit_color">Vidiga koloro</string>
     <string name="int_days">tagoj</string>
@@ -938,7 +936,7 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Vikipedio</string>
     <string name="download_hillshade_maps">Nivelombrumo</string>
-    <string name="local_indexes_cat_av">Sonaj/videaj datumoj</string>
+    <string name="local_indexes_cat_av">Sonaj/filmaj datumoj</string>
     <string name="stop_routing_confirm">Ĉu ĉesigi navigadon\?</string>
     <string name="clear_dest_confirm">Ĉu forigi la celon (kaj intercelojn)\?</string>
     <string name="precise_routing_mode">Precizaj kursoj (alfa)</string>
@@ -947,43 +945,43 @@
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Fari foton</string>
     <string name="recording_context_menu_precord">Fari foton</string>
-    <string name="dropbox_plugin_description">Samtempigi kursojn kaj sonajn/videajn notojn kun via konto ĉe Dropbox.</string>
+    <string name="dropbox_plugin_description">Samtempigi kursojn kaj sonajn/filmajn notojn kun via konto ĉe Dropbox.</string>
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
     <string name="srtm_paid_version_msg">Konsideru aĉeti la kromprogramon “Topografio” por subteni ĝian pluan evoluigon.</string>
-    <string name="av_def_action_video">Registri videon</string>
+    <string name="av_def_action_video">Registri filmeton</string>
     <string name="av_def_action_audio">Registri sonon</string>
     <string name="av_widget_action_descr">Implicita ago de fenestraĵo:</string>
     <string name="av_widget_action">Implicita fenestraĵo ago</string>
-    <string name="av_video_format_descr">Formo de eliga video:</string>
-    <string name="av_video_format">Speco de eliga video</string>
+    <string name="av_video_format_descr">Formo por filmetoj:</string>
+    <string name="av_video_format">Filmet-formo</string>
     <string name="av_use_external_recorder">Uzi sisteman registrilon</string>
-    <string name="av_use_external_recorder_descr">Uzi sisteman kameraon por videoj.</string>
+    <string name="av_use_external_recorder_descr">Uzi sisteman fotilon por filmi.</string>
     <string name="av_use_external_camera">Uzi sisteman fotilon</string>
     <string name="av_use_external_camera_descr">Uzi sisteman aplikaĵon por fari fotojn.</string>
-    <string name="av_settings">Sonaj/videaj agordoj</string>
-    <string name="av_settings_descr">Agordi sonon kaj videon.</string>
+    <string name="av_settings">Sonaj/filmetaj agordoj</string>
+    <string name="av_settings_descr">Agordi sonon kaj bildon.</string>
     <string name="recording_error">Fiaskis registri</string>
     <string name="recording_camera_not_available">Fotilo ne alirebla</string>
-    <string name="recording_is_recorded">Registranta sonon/videon. Por ĉesigi premu la butonon sur la fenestraĵo.</string>
+    <string name="recording_is_recorded">Registranta sonon/filmeton. Por ĉesigi premu la butonon sur la fenestraĵo.</string>
     <string name="recording_playing">Ludanta sonon de elektita registraĵo.\n%1$s</string>
     <string name="recording_open_external_player">Malfermi eksteran ludilon</string>
     <string name="recording_delete_confirm">Ĉu forigi tiun ĉi elementon?</string>
     <string name="recording_unavailable">nedisponebla</string>
-    <string name="recording_context_menu_arecord">Krei son-noton</string>
-    <string name="recording_context_menu_vrecord">Krei video-noton</string>
+    <string name="recording_context_menu_arecord">Krei sonan noton</string>
+    <string name="recording_context_menu_vrecord">Krei filman noton</string>
     <string name="layer_recordings">Tavolo de registrado</string>
     <string name="recording_can_not_be_played">Ne povas ludi registraĵon.</string>
     <string name="recording_context_menu_delete">Forigi registraĵon</string>
     <string name="recording_context_menu_play">Ludi</string>
     <string name="recording_description">Registraĵo %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registraĵo</string>
-    <string name="map_widget_av_notes">Sonaj/videaj notoj</string>
-    <string name="audionotes_plugin_name">Sonaj/videaj notoj</string>
-    <string name="audionotes_plugin_description">Fari bildajn/sonajn/videajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per la kunteksta menuo de loko.</string>
+    <string name="map_widget_av_notes">Sonaj/filmaj notoj</string>
+    <string name="audionotes_plugin_name">Sonaj/filmaj notoj</string>
+    <string name="audionotes_plugin_description">Fari fotajn/sonajn/filmajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per la kunteksta menuo de loko.</string>
     <string name="map_widget_distancemeasurement">Mezuro de distanco</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
-    <string name="audionotes_location_not_defined">Frepetu “uzi pozicion…” por aldoni noton al la loko.</string>
+    <string name="audionotes_location_not_defined">Frapetu “Uzi pozicion…” por aldoni noton al la loko.</string>
     <string name="download_select_map_types">Aliaj mapoj</string>
     <string name="download_roads_only_item">Nur vojoj</string>
     <string name="download_srtm_maps">Nivelkurboj</string>
@@ -1074,7 +1072,7 @@
 \n– sen aliro al eksterretaj vikipediaj interesejoj
 \n
 \nOsmAnd estas konstante evoluigata kaj ĝia plua evoluigo dependas de monaj donacoj por subteni programadon kaj testadon de novaj ebloj. Bonvolu konsideri aĉeti OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto ĉe https://osmand.net.</string>
-    <string name="day_night_info_description">Sunleviĝo: %1$s\nSunsubiro: %2$s</string>
+    <string name="day_night_info_description">Sunleviĝo: %1$s \nSunsubiro: %2$s</string>
     <string name="day_night_info">Informo pri tago/nokto</string>
     <string name="filterpoi_activity">Krei filtrilon de interesejo</string>
     <string name="recalculate_route_to_your_location">Transporta speco:</string>
@@ -1100,9 +1098,9 @@
     <string name="map_widget_reset">Rekomencigi</string>
     <string name="map_widget_parking">Parkumejo</string>
     <string name="map_widget_time">Plua tempo</string>
-    <string name="map_widget_next_turn">Sekva turniĝo</string>
-    <string name="map_widget_next_turn_small">Sekva turniĝeto</string>
-    <string name="map_widget_next_next_turn">Post-sekva turniĝo</string>
+    <string name="map_widget_next_turn">Sekva kurbiĝo</string>
+    <string name="map_widget_next_turn_small">Sekva kurbiĝeto</string>
+    <string name="map_widget_next_next_turn">Postsekva kurbiĝo</string>
     <string name="bg_service_screen_lock">Ŝlosi ekranon</string>
     <string name="bg_service_screen_unlock">Malŝlosi ekranon</string>
     <string name="bg_service_screen_lock_toast">Ekrano ŝlosita</string>
@@ -1131,17 +1129,17 @@
     <string name="osmand_parking_delete_confirm">Ĉu forigi markon de parkumita aŭto?</string>
     <string name="osmand_parking_delete">Forigi markon de parkumita aŭto</string>
     <string name="osmand_parking_choose_type">Elekti specon de parkumejo</string>
-    <string name="osmand_parking_lim_text">Temp-limigita</string>
+    <string name="osmand_parking_lim_text">Templimigita</string>
     <string name="osmand_parking_no_lim_text">Sen templimo</string>
     <string name="osmand_parking_add_event">Aldoni averton al la aplikaĵo kalendaro</string>
-    <string name="osmand_parking_time_limit">Temp-limigita parkumejo</string>
-    <string name="osmand_parking_time_no_limit">Sen-templima parkumejo</string>
+    <string name="osmand_parking_time_limit">Templimigita parkumejo</string>
+    <string name="osmand_parking_time_no_limit">Sentemplima parkumejo</string>
     <string name="osmand_parking_position_description">La pozicio de via parkumata veturilo. %1$s</string>
     <string name="osmand_parking_position_description_add">Reprenu la veturilon je:</string>
     <string name="osmand_parking_pm">ptm.</string>
     <string name="osmand_parking_am">atm.</string>
     <string name="osmand_parking_position_name">Parkumejo</string>
-    <string name="context_menu_item_add_parking_point">Marki kiel pozicion de parkumado</string>
+    <string name="context_menu_item_add_parking_point">Marki kiel pozicion de parkumo</string>
     <string name="context_menu_item_delete_parking_point">Forigi markon de parkumita veturilo</string>
     <string name="gpxup_public">Publika</string>
     <string name="gpxup_identifiable">Identigebla</string>
@@ -1190,7 +1188,7 @@
     <string name="favorite_home_category">Hejmo</string>
     <string name="preferred_locale">Lingvo de aplikaĵo</string>
     <string name="incomplete_locale">nekompleta</string>
-    <string name="map_online_plugin_is_not_installed">Aktivigu la kromprogramon “enretaj mapoj” por elekti aliajn fontojn de mapoj</string>
+    <string name="map_online_plugin_is_not_installed">Aktivigu la kromprogramon “Enretaj mapoj” por elekti aliajn fontojn de mapoj</string>
     <string name="map_online_data">Enretaj kaj kahelaj mapoj</string>
     <string name="map_online_data_descr">Uzi enretajn mapojn (elŝuti kaj kaŝmemorigi kahelojn en memorkarton).</string>
     <string name="online_map_settings_descr">Agordi fontojn de enretaj kaj kahelaj mapoj.</string>
@@ -1203,7 +1201,7 @@
     <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per la menuo “Elŝuti mapojn”, aŭ aktivigu la kromprogramon “Enretaj mapoj”.</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
-    <string name="gpx_visibility_txt">Videblo</string>
+    <string name="gpx_visibility_txt">Videbla</string>
     <string name="shared_string_description">Priskribo</string>
     <string name="validate_gpx_upload_name_pwd">Bonvolu enmeti vian uzantnomon kaj pasvorton al OSM por alŝuti GPX-dosierojn.</string>
     <string name="default_buttons_support">Subteni</string>
@@ -1447,7 +1445,7 @@
     <string name="daynight_mode_auto">Sunleviĝa/sunsubira</string>
     <string name="daynight_mode_sensor">Lum-sentilo</string>
     <string name="daynight">Taga/nokta reĝimo</string>
-    <string name="daynight_descr">Alĝustigi kiam baskuli inter nokta kaj taga reĝimoj.</string>
+    <string name="daynight_descr">Alĝustigi kiam baskuligi inter nokta kaj taga reĝimoj.</string>
     <string name="download_files_question">Ĉu elŝuti {0} dosiero(j)n ({1} MB)?</string>
     <string name="filter_existing_indexes">Elŝutitaj</string>
     <string name="shared_string_download_map">Elŝuti mapon</string>
@@ -1488,12 +1486,10 @@
     <string name="access_direction_haptic_feedback_descr">Montri direkton al celo per vibrado.</string>
     <string name="lang_ast">Asturia</string>
     <string name="plugin_nautical_name">Mara map-vido</string>
-    <string name="plugin_nautical_descr">Pliriĉigas la mapon per naŭtikaj kursoj, navigadaj lumoj, danĝerejoj, zonoj (mal)permesataj por navigi, alligi akvoveturilon, ktp. Por uzi la kromprogramon, elŝutu marajn mapojn kaj aktivigu la map-aspekton “Marnavigada” per la menuo “Agordi mapon”.
-\n
-\nPliaj informoj: %1$s</string>
+    <string name="plugin_nautical_descr">Pliriĉigas la mapon per naŭtikaj kursoj, navigadaj lumoj, danĝerejoj, zonoj (mal)permesataj por navigi, alligi akvoveturilon, ktp. Por uzi la kromprogramon, elŝutu marajn mapojn kaj aktivigu la map-aspekton “Marnavigada” per la menuo “Agordi mapon”. \n \nPliaj informoj: %1$s</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
     <string name="plugin_ski_descr">Projektita por navigi en vintraj sportejoj. Vidigas descendejojn, skiliftojn kaj skikuradajn kursojn kiel kolorajn liniojn, kiuj indikas malfacilecon. Por uzi la kromprogramon, aktivigu la map-aspekton “Vintro kaj skiado” en la menuo “Agordi mapon”.</string>
-    <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
+    <string name="osmand_parking_plugin_name">Pozicio de parkumo</string>
     <string name="osmand_parking_plugin_description">Ebligas marki kie vi parkumis vian aŭtomobilon kaj aldoni sciigon al via kalendaro pri parkumada templimo. Por aldoni markon, frapetadu lokon sur la mapo kaj elektu “Marki kiel pozicion de parkumado” el la menuo “Agoj”.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Ebligas difini kursojn per frapeti la mapon kaj modifi ekzistajn GPX‑dosierojn – por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX‑dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
@@ -1653,7 +1649,7 @@
     <string name="background_service_int_descr">Tempo inter veki la fonan reĝimon:</string>
     <string name="background_router_service">Lanĉi OsmAnd fone</string>
     <string name="background_router_service_descr">Spuri vian pozicion, kiam la ekrano estas malŝaltita.</string>
-    <string name="off_router_service_no_gps_available">La fona navigad-servo postulas aktivigi pozicitrovan servon.</string>
+    <string name="off_router_service_no_gps_available">La fona navigad-servo postulas aktivigi pozici-trovan servon.</string>
     <string name="hide_poi_filter">Kaŝi filtrilon</string>
     <string name="show_poi_filter">Montri filtrilon</string>
     <string name="search_poi_filter">Filtri</string>
@@ -1666,12 +1662,12 @@
     <string name="sd_unmounted">Memorkarto ne alirebla.\nVi ne povos vidi mapojn kaj serĉi ejojn.</string>
     <string name="sd_mounted_ro">Memorkarto estas nurlega.
 \nNun nur eblas foliumi jam-instalitajn mapojn, sed ne elŝuti novajn regionojn.</string>
-    <string name="route_tr">Turniĝu dekstren</string>
-    <string name="route_tshr">Turniĝegu dekstren</string>
-    <string name="route_tslr">Turniĝetu dekstren</string>
-    <string name="route_tl">Turniĝu maldekstren</string>
-    <string name="route_tshl">Turniĝegu maldekstren</string>
-    <string name="route_tsll">Turniĝetu maldekstren</string>
+    <string name="route_tr">Dekstren</string>
+    <string name="route_tshr">Akre dekstren</string>
+    <string name="route_tslr">Ete dekstren</string>
+    <string name="route_tl">Maldekstren</string>
+    <string name="route_tshl">Akre maldekstren</string>
+    <string name="route_tsll">Ete maldekstren</string>
     <string name="route_tu">Turniĝu malantaŭen</string>
     <string name="route_head">Rekten</string>
     <string name="first_time_continue">Poste</string>
@@ -1777,8 +1773,8 @@
     <string name="choose_available_region">Elekti regionon el listo</string>
     <string name="choose_intersected_street">Elekti intersekcan straton</string>
     <string name="Closest_Amenities">Proksimaj servoj</string>
-    <string name="position_on_map_center">Centre</string>
-    <string name="position_on_map_bottom">Sube</string>
+    <string name="position_on_map_center">centre</string>
+    <string name="position_on_map_bottom">sube</string>
     <string name="navigate_point_top_text">Enigu latitudon kaj longitudon en la elektita formo (G - gradoj, M - arkminutoj, S - arksekundoj)</string>
     <string name="navigate_point_latitude">Latitudo</string>
     <string name="navigate_point_longitude">Longitudo</string>
@@ -1826,7 +1822,7 @@
     <string name="av_camera_focus_edof">Plilarĝigita profundo kampa (EDOF)</string>
     <string name="av_camera_focus_infinity">Fokuso agordita je infinito</string>
     <string name="av_camera_focus_macro">Makrofokuso (alproksimigo)</string>
-    <string name="av_camera_focus_continuous">Fotilo kontinue provas agordi fokuson</string>
+    <string name="av_camera_focus_continuous">Fotilo senĉese provas agordi fokuson</string>
     <string name="av_photo_play_sound">Ludi sonon dum fari foton</string>
     <string name="av_photo_play_sound_descr">Agordi sonon aŭ silenton de fotilo.</string>
     <string name="av_camera_pic_size">Fotila distingivo</string>
@@ -1950,31 +1946,12 @@
     <string name="coords_search">Koordinat-serĉo</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
     <string name="route_stops_before">Post %1$s haltejoj</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo)
-\n
-\nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno.
-\n
-\nOsmAnd+ estas pagenda versio de programo, per aĉeti la aplikaĵo, vi subtenas la projekton, donacas al novaj ebloj, kaj ricevos la plej novajn ĝisdatigojn.
-\n
-\nĈefaj eblaĵoj:
-\n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelajn mapojn en la aparata konservejo)
-\n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo
-\n– senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo
-\n– eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado
-\n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, haltejoj de publika transporto, ekstraj mapoj kun ŝanĝebla diafaneco, topografio (nivelkurboj/nivelombrumo/dekliveco)
-\n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn)
-\n– difini kursojn por mezaj distancoj eksterrete
-\n– aŭta, bicikla, kaj piediranta reĝimoj kun:
-\n – agordeblaj aŭtomata/taga/nokta aspektoj
-\n – agordebla rapid-dependa map-skalado
-\n – agordebla map-turniĝo laŭ direkto de movado aŭ kompaso
-\n – sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) \n \nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno. \n \nOsmAnd+ estas pagenda versio de programo, per aĉeti la aplikaĵo, vi subtenas la projekton, donacas al novaj ebloj, kaj ricevos la plej novajn ĝisdatigojn. \n \nĈefaj eblaĵoj: \n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelajn mapojn en la aparata konservejo) \n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo \n– senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo \n– eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado \n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, haltejoj de publika transporto, ekstraj mapoj kun ŝanĝebla diafaneco, topografio (nivelkurboj/nivelombrumo/dekliveco) \n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) \n– difini kursojn por mezaj distancoj eksterrete \n– aŭta, bicikla, kaj piediranta reĝimoj kun: \n – agordeblaj aŭtomata/taga/nokta aspektoj \n – agordebla rapid-dependa map-skalado \n – agordebla map-turniĝo laŭ direkto de movado aŭ kompaso \n – sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj</string>
     <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
     <string name="shared_string_change">Ŝanĝi</string>
     <string name="get_started">Ekigi</string>
     <string name="routing_attr_short_way_name">Brulaĵ-ŝparema kurso</string>
-    <string name="replace_favorite_confirmation">Ĉu anstataŭigi la ŝatatan ejon “%1$s”\?</string>
+    <string name="replace_favorite_confirmation">Ĉu anstataŭigi la ŝatatan ejon “%1$s”?</string>
     <string name="clear_tile_data">Forviŝi ĉiujn kahelojn</string>
     <string name="update_all_maps_now">Ĉu ĝisdatigi ĉiujn mapojn nun?</string>
     <string name="skip_map_downloading">Transsalti elŝuton de mapoj</string>
@@ -2047,7 +2024,6 @@
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
     <string name="route_roundabout_short">Elektu la %1$d-an elveturejon</string>
     <string name="search_map_hint">Urbo aŭ regiono</string>
-    <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
     <string name="routing_attr_allow_motorway_name">Uzi aŭtovojojn</string>
     <string name="routing_attr_allow_motorway_description">Uzi aŭtoŝoseojn.</string>
     <string name="lang_sr_latn">Serba (latina)</string>
@@ -2059,7 +2035,7 @@
     <string name="rendering_value_low_name">Malalta</string>
     <string name="rendering_attr_contourWidth_description">Larĝo de nivelkurboj</string>
     <string name="rendering_attr_contourWidth_name">Nivelkurba larĝo</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Akvo</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Kaŝi akvon</string>
     <string name="rendering_attr_hideWaterPolygons_name">Akvo</string>
     <string name="configure_screen_quick_action">Rapida ago</string>
     <string name="quick_action_item_action">Ago %d</string>
@@ -2072,13 +2048,13 @@
     <string name="quick_action_edit_action">Redakti agon</string>
     <string name="dialog_add_action_title">Aldoni agon</string>
     <string name="quick_actions_delete">Forigi agon</string>
-    <string name="quick_actions_delete_text">Ĉu forigi la agon “%s”\?</string>
+    <string name="quick_actions_delete_text">Ĉu forigi la agon “%s”?</string>
     <string name="quick_favorites_show_favorites_dialog">Montri fenestron de ŝatataj ejoj</string>
     <string name="quick_favorites_name_preset">Nomo</string>
     <string name="quick_action_add_marker_descr">Butono por aldoni map‑markon al la ekrana centro.</string>
     <string name="quick_action_add_gpx_descr">Butono por aldoni GPX‑navigadpunkton al la ekrana centro.</string>
     <string name="quick_action_take_audio_note_descr">Butono por aldoni sonan noton al la ekrana centro.</string>
-    <string name="quick_action_take_video_note_descr">Butono por aldoni videan noton al la ekrana centro.</string>
+    <string name="quick_action_take_video_note_descr">Butono por aldoni filman noton al la ekrana centro.</string>
     <string name="quick_action_take_photo_note_descr">Butono por aldoni fotan noton al la ekrana centro.</string>
     <string name="quick_action_add_osm_bug_descr">Butono por aldoni OSM‑rimarkon al la ekrana centro.</string>
     <string name="quick_action_add_poi_descr">Butono por aldoni interesejon al la ekrana centro.</string>
@@ -2173,32 +2149,13 @@
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd kolektas informojn pri uzataj partoj de la aplikaĵo. Via pozicio neniam estas sendata, nek ion ajn, kion vi entajpas en la aplikaĵo nek detaloj pri ejoj foliumataj, serĉataj aŭ elŝutataj.</string>
     <string name="do_not_show_startup_messages">Ne montri mesaĝojn je starto</string>
     <string name="do_not_show_startup_messages_desc">Ne montri mesaĝojn pri rabatoj por aplikaĵo pri kaj specialaj lokaj okazoj.</string>
-    <string name="shared_string_automatic">Aŭtomata</string>
+    <string name="shared_string_automatic">aŭtomate</string>
     <string name="right_side_navigation">Dekstr‑flanka trafiko</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj altkvalitaj datumoj de OSM.
 \n
 \nĜuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX‑spuroj, montradon de nivelkurboj kaj informojn pri topografio (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM‑redaktadon kaj pli.</string>
-    <string name="osmand_extended_description_part2">GPS-navigado 
-\n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj 
-\n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) 
-\n • Kurso estos rekalkulita kiam vi devojiĝos 
-\n • Informoj pri koridoroj, strat-nomoj kaj proksimuma tempo de alveno helpos al vi dum vojaĝo 
-\n • Por igi vian veturadon pli sekura, taga/nokta etoso ŝanĝiĝas aŭtomate 
-\n • Elekti montri rapid-limojn kaj avertojn kiam vi trorapidas 
-\n • Map-pligrandigo alĝustiĝas al via rapido 
-\n • Serĉi cel-lokojn laŭ adreso, laŭ speco (ekz. parkumejo, restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj 
-\n • Subteno por interceloj sur via kurso 
-\n • Registri vian propran GPX-spuron kaj sekvi ĝin
-\n</string>
-    <string name="osmand_extended_description_part3">Mapo 
-\n • Montrado de interesejoj (punktoj de intereso) ĉirkaŭ vi 
-\n • Orientiĝado de mapo laŭ via direkto de movo (aŭ laŭ kompaso) 
-\n • Montrado kie vi estas kaj kien vi rigardas 
-\n • Diskonigi vian pozicion por ke viaj amikoj povu trovi vin 
-\n • Konservi viajn plej gravajn ejojn en listo de “ŝatataj” 
-\n • Ebligas al vi elekti kiel vidigi nomojn sur la mapo: esperante, en loka lingvo aŭ en fonetika transskribo 
-\n • Montras specialajn enretajn kahelojn, satelitan vidon (de Bing), diversajn surtavolojn kiel piediradajn kursojn kaj aldonajn tavolojn kun agordebla diafaneco
-\n</string>
+    <string name="osmand_extended_description_part2">GPS-navigado \n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj \n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) \n • Kurso estos rekalkulita kiam vi devojiĝos \n • Informoj pri koridoroj, strat-nomoj kaj proksimuma tempo de alveno helpos al vi dum vojaĝo \n • Por igi vian veturadon pli sekura, taga/nokta etoso ŝanĝiĝas aŭtomate \n • Elekti montri rapid-limojn kaj avertojn kiam vi trorapidas \n • Map-pligrandigo alĝustiĝas al via rapido \n • Serĉi cel-lokojn laŭ adreso, laŭ speco (ekz. parkumejo, restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj \n • Subteno por interceloj sur via kurso \n • Registri vian propran GPX-spuron kaj sekvi ĝin</string>
+    <string name="osmand_extended_description_part3">Mapo \n • Montrado de interesejoj (punktoj de intereso) ĉirkaŭ vi \n • Orientiĝado de mapo laŭ via direkto de movo (aŭ laŭ kompaso) \n • Montrado kie vi estas kaj kien vi rigardas \n • Diskonigi vian pozicion por ke viaj amikoj povu trovi vin \n • Konservi viajn plej gravajn ejojn en listo de “ŝatataj” \n • Ebligas al vi elekti kiel vidigi nomojn sur la mapo: esperante, en loka lingvo aŭ en fonetika transskribo \n • Montras specialajn enretajn kahelojn, satelitan vidon (de Bing), diversajn surtavolojn kiel piediradajn kursojn kaj aldonajn tavolojn kun agordebla diafaneco</string>
     <string name="osmand_extended_description_part4">Skiado 
 \n La kromprogramo de OsmAnd “skiada map-vido” ebligas al vi vidigi skivojojn kun ilia facileco kaj aliajn taŭgajn informojn, kiel lokojn de skiliftoj kaj aliajn ejojn.</string>
     <string name="osmand_extended_description_part5">Biciklado
@@ -2207,18 +2164,8 @@
 \n • Montri viajn rapidon kaj altitudon
 \n • Registri GPX-spurojn de via vojaĝo kaj diskonigi ilin
 \n • Per aldona kromprogramo vi povas vidigi nivelkurbojn kaj nivelombrumon (reliefon)</string>
-    <string name="osmand_extended_description_part6">Piedirado, vizitado de urbo 
-\n • La mapo montras al vi piediradajn kursojn 
-\n • Vikipedio en via lingvo eblas rakonti al vi multe dum via vizitado de urbo 
-\n • Haltejoj de publika transporto (aŭtobusaj, tramaj, fervojaj) kaj nomoj de linioj por helpi al vi navigi en urbo 
-\n • GPS-navigado en piedirada reĝimo kalkulas kursojn uzante piediradajn kursojn 
-\n • Alŝuti kaj postsekvi GPX-spuron aŭ registri kaj diskonigi vian propran
-\n</string>
-    <string name="osmand_extended_description_part7">Kontribui al OSM
-\n • Raporti erarojn pri datumoj
-\n • Alŝuti GPX-spurojn al OSM senpere de la aplikaĵo
-\n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)
-\n</string>
+    <string name="osmand_extended_description_part6">Piedirado, vizitado de urbo \n • La mapo montras al vi piediradajn kursojn \n • Vikipedio en via lingvo eblas rakonti al vi multe dum via vizitado de urbo \n • Haltejoj de publika transporto (aŭtobusaj, tramaj, fervojaj) kaj nomoj de linioj por helpi al vi navigi en urbo \n • GPS-navigado en piedirada reĝimo kalkulas kursojn uzante piediradajn kursojn \n • Alŝuti kaj postsekvi GPX-spuron aŭ registri kaj diskonigi vian propran</string>
+    <string name="osmand_extended_description_part7">Kontribui al OSM \n • Raporti erarojn pri datumoj \n • Alŝuti GPX-spurojn al OSM senpere de la aplikaĵo \n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)</string>
     <string name="osmand_extended_description_part8">OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn. 
 \n Proksimuma map-atingo kaj kvalito: 
 \n • Okcidenta Eŭropo: **** 
@@ -2246,14 +2193,7 @@
 \n • interceloj de kurso
 \n • aŭtomate rekalkuli kurson kiam devoje
 \n • serĉi lokojn laŭ adreso, laŭ speco (ekz. restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj</string>
-    <string name="osmand_plus_extended_description_part3">Map‑vido:
-\n • montri vian pozicion kaj orientiĝon
-\n • malnepre orienti la ekranon laŭ kompaso aŭ laŭ via direkto de movo
-\n • konservi viajn plej gravajn lokojn en la listo de ŝatataj
-\n • montri proksimajn interesejojn (vendejoj, frizejoj, statuoj, ktp)
-\n • vidigi specialajn enretajn kahelojn, satelita vido (de Bing), diversaj surtavoloj ekz. piediradaj kursoj, GPX-spuroj kaj kromaj tavoloj kun agordebla diafaneco
-\n • malnepre vidigi nomojn en Esperanto, en loka lingvo aŭ en fonetika transskribo
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Map‑vido: \n • montri vian pozicion kaj orientiĝon \n • malnepre orienti la ekranon laŭ kompaso aŭ laŭ via direkto de movo \n • konservi viajn plej gravajn lokojn en la listo de ŝatataj \n • montri proksimajn interesejojn (vendejoj, frizejoj, statuoj, ktp) \n • vidigi specialajn enretajn kahelojn, satelita vido (de Bing), diversaj surtavoloj ekz. piediradaj kursoj, GPX-spuroj kaj kromaj tavoloj kun agordebla diafaneco \n • malnepre vidigi nomojn en Esperanto, en loka lingvo aŭ en fonetika transskribo</string>
     <string name="fonts_header">Mapaj tiparoj</string>
     <string name="osmand_plus_extended_description_part4">Uzi datumojn de OSM kaj Vikipedio:
 \n • altkvalitaj informoj el la plej bonaj kunlaboraj projektoj en la mondo
@@ -2262,12 +2202,7 @@
 \n • senlimaj senpagaj elŝutoj senpere de la aplikaĵo
 \n • kompaktaj vektoraj mapoj ĝisdatigataj almenaŭ unumonate
 \n • elekto inter plenaj datumoj por regiono aŭ nur voja reto (ekz. plena mapo povas okupi 700 MB, sed nurvoja mapo 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Sekurecaj eblaĵoj:
-\n • malnepre aŭtomate baskui inter taga/nokta vido
-\n • malnepre montri rapid‑limon kaj avertojn se vi trorapidas
-\n • malnepra rapid‑dependa map‑pligrandigo
-\n • kunhavigi vian pozicion, por ke viaj amikoj povu trovi vin
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Sekurecaj eblaĵoj: \n • malnepre aŭtomate baskui inter taga/nokta vido \n • malnepre montri rapid‑limon kaj avertojn se vi trorapidas \n • malnepra rapid‑dependa map‑pligrandigo \n • kunhavigi vian pozicion, por ke viaj amikoj povu trovi vin</string>
     <string name="osmand_plus_extended_description_part6">Bicikladaj kaj piediradaj eblaĵoj:
 \n • vidigo de piediradaj kaj bicikladaj kursoj, bonega por eksterdoma aktiveco 
 \n • speciala difinado de vojo por biciklado kaj piedirado
@@ -2275,27 +2210,8 @@
 \n • malnepra registrado de kurso kun eblo konservi ĝin al GPX‑dosiero aŭ al enreta servo 
 \n • malnepra vidigo de rapido kaj altitudo 
 \n • vidigado de nivelkurboj kaj nivel‑ombrumo (reliefo) (per kromprogramo)</string>
-    <string name="osmand_plus_extended_description_part7">Senpere kontribui al OSM:
-\n • raporti erarojn pri datumoj
-\n • alŝuti GPX-spurojn al OSM senpere de la aplikaĵo
-\n • aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)
-\n • malnepre registri kurson ankaŭ en fona reĝimo (kiam la aparato dormetas)
-\n OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Proksimuma map‑atingo kaj kvalito: 
-\n • Okcidenta Eŭropo: ☆☆☆☆ 
-\n • Orienta Eŭropo: ☆☆☆ 
-\n • Rusujo: ☆☆☆ 
-\n • Nordameriko: ☆☆☆ 
-\n • Sudameriko: ☆☆ 
-\n • Azio: ☆☆ 
-\n • Japanujo kaj Koreujo: ☆☆☆ 
-\n • Proksim-Oriento: ☆☆ 
-\n • Afriko: ☆☆ 
-\n • Antarkto: ☆ 
-\nMapoj de preskaŭ ĉiuj landoj de la mondo estas elŝuteblaj! 
-\nDe Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Senpere kontribui al OSM: \n • raporti erarojn pri datumoj \n • alŝuti GPX-spurojn al OSM senpere de la aplikaĵo \n • aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte) \n • malnepre registri kurson ankaŭ en fona reĝimo (kiam la aparato dormetas) \n OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn.</string>
+    <string name="osmand_plus_extended_description_part8">Proksimuma map‑atingo kaj kvalito: \n • Okcidenta Eŭropo: ☆☆☆☆ \n • Orienta Eŭropo: ☆☆☆ \n • Rusujo: ☆☆☆ \n • Nordameriko: ☆☆☆ \n • Sudameriko: ☆☆ \n • Azio: ☆☆ \n • Japanujo kaj Koreujo: ☆☆☆ \n • Proksim-Oriento: ☆☆ \n • Afriko: ☆☆ \n • Antarkto: ☆ \nMapoj de preskaŭ ĉiuj landoj de la mondo estas elŝuteblaj! \nDe Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…</string>
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
     <string name="shared_string_visible">Videbla(j)</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
@@ -2378,7 +2294,7 @@
     <string name="shared_string_to">al</string>
     <string name="mapillary_menu_date_from">de</string>
     <string name="mapillary_menu_descr_dates">Montri bildojn aldonitajn nur</string>
-    <string name="mapillary_menu_title_dates">Dato</string>
+    <string name="shared_string_date">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Enigu uzantnomon</string>
     <string name="mapillary_menu_descr_username">Montri nur bildojn aldonitajn de</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
@@ -2432,8 +2348,8 @@
     <string name="move_point">Movi punkton</string>
     <string name="keep_showing_on_map">Daŭre montri sur mapo</string>
     <string name="exit_without_saving">Ĉu eliri sen konservi?</string>
-    <string name="do_not_use_animations">Sen movbildoj</string>
-    <string name="do_not_use_animations_descr">Malaktivigi animaciojn en la aplikaĵo.</string>
+    <string name="do_not_use_animations">Forigi movbildojn</string>
+    <string name="do_not_use_animations_descr">Malaktivigi movbildojn de mapo kaj aplikaĵa fasado.</string>
     <string name="move_all_to_history">Movi ĉiujn al historio</string>
     <string name="show_direction">Distanc-vidigo</string>
     <string name="sort_by">Ordigi laŭ</string>
@@ -2496,7 +2412,7 @@
     <string name="import_as_gpx">Enporti kiel GPX-dosieron</string>
     <string name="import_as_favorites">Enporti kiel ŝatatajn</string>
     <string name="import_file">Enporti dosieron</string>
-    <string name="tap_on_map_to_hide_interface_descr">Frapetu la mapon por baskuli kontrol-butonojn kaj fenestraĵojn.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Frapetu la mapon por (mal)montri regilojn kaj fenestraĵojn.</string>
     <string name="tap_on_map_to_hide_interface">Plenekrana reĝimo</string>
     <string name="mark_passed">Marki kiel pasigitan</string>
     <string name="rename_marker">Alinomi markon</string>
@@ -2535,7 +2451,7 @@
     <string name="one_tap_active_descr">Per frapeti markon sur la mapo, movi ĝin al komenco de la listo senmalfermante kuntekstan menuon.</string>
     <string name="one_tap_active">Aktivigi per unu frapeto</string>
     <string name="empty_state_av_notes">Fari notojn</string>
-    <string name="empty_state_av_notes_desc">Aldonu sonajn, videajn aŭ fotajn notojn al iu ajn punkto sur la mapo per la fenestraĵo aŭ kunteksta menuo.</string>
+    <string name="empty_state_av_notes_desc">Aldonu sonajn, filmajn aŭ fotajn notojn al iu ajn punkto sur la mapo per la fenestraĵo aŭ kunteksta menuo.</string>
     <string name="notes_by_date">Notoj laŭ dato</string>
     <string name="by_date">Laŭ dato</string>
     <string name="by_type">Laŭ speco</string>
@@ -2597,7 +2513,7 @@
     <string name="dd_dddddd_format">GG,GGGGGG°</string>
     <string name="dd_ddddd_format">GG,GGGGG°</string>
     <string name="dd_mm_mmmm_format">GG°MM,MMMM′</string>
-    <string name="dd_mm_mmm_format">GG°MM.MMM′</string>
+    <string name="dd_mm_mmm_format">GG°MM,MMM′</string>
     <string name="east_abbreviation">Or</string>
     <string name="west_abbreviation">Ok</string>
     <string name="south_abbreviation">S</string>
@@ -2631,7 +2547,7 @@
     <string name="show_images">Montri bildojn</string>
     <string name="online_webpage_warning">Paĝo disponebla nur enrete. Ĉu malfermi ĝin per foliumilo?</string>
     <string name="shared_string_dont">Ne</string>
-    <string name="shared_string_do">" "</string>
+    <string name="shared_string_do">Jes</string>
     <string name="shared_string_only_with_wifi">Nur tra vifio</string>
     <string name="wikivoyage_download_pics">Elŝuti bildojn</string>
     <string name="wikivoyage_download_pics_descr">Bildoj por artikoloj estas elŝuteblaj por eksterreta uzo. 
@@ -2710,9 +2626,7 @@
     <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Enigu dosiernomon kaj frapetu “Konservi”.</string>
     <string name="point_deleted">Forigis la punkton %1$s</string>
     <string name="shared_string_world">Mondo</string>
-    <string name="send_search_query_description">Ni sendos vian serĉ-peton: “%1$s” kun via pozicio.
-\n 
-\nNeniuj personaj informoj estos senditaj, serĉ-datumoj estos uzataj nur por plibonigi la serĉan algoritmon.</string>
+    <string name="send_search_query_description">Ni sendos vian serĉ-peton: “%1$s” kun via pozicio. \n \nNeniuj personaj informoj estos senditaj, serĉ-datumoj estos uzataj nur por plibonigi la serĉan algoritmon.</string>
     <string name="send_search_query">Ĉu sendi serĉ-peton?</string>
     <string name="increase_search_radius_to">Pliigi serĉan radiuson ĝis %1$s</string>
     <string name="thank_you_for_feedback">Dankon pro via opinio</string>
@@ -2752,7 +2666,7 @@
     <string name="run_full_osmand_msg">Vi uzas mapon {0}, kiu estas povigata de OsmAnd. Ĉu lanĉi la plenan version de OsmAnd\?</string>
     <string name="run_full_osmand_header">Ĉu lanĉi OsmAnd\?</string>
     <string name="lang_gn_py">Gvarania</string>
-    <string name="quick_action_switch_day_night_descr">Butono por baskuli inter nokta kaj taga reĝimoj.</string>
+    <string name="quick_action_switch_day_night_descr">Butono por baskuligi inter nokta kaj taga reĝimoj.</string>
     <string name="quick_action_switch_day_mode">Taga reĝimo</string>
     <string name="quick_action_switch_night_mode">Nokta reĝimo</string>
     <string name="quick_action_day_night_switch_mode">Taga/nokta reĝimo</string>
@@ -2792,7 +2706,7 @@
     <string name="tracks_on_map">Montrataj kursoj</string>
     <string name="time_of_day">Tagtempo</string>
     <string name="by_transport_type">Per %1$s</string>
-    <string name="step_by_step">Turno-post-turno</string>
+    <string name="step_by_step">Kurbiĝo-post-kurbiĝo</string>
     <string name="routeInfo_road_types_name">Specoj de vojoj</string>
     <string name="exit_at">Eliru ĉe</string>
     <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
@@ -2934,7 +2848,7 @@
     <string name="profile_alert_need_save_title">Konservi ŝanĝojn</string>
     <string name="profile_alert_need_save_msg">Unue konservu ŝanĝojn al la profilo</string>
     <string name="profile_alert_delete_title">Forigi profilon</string>
-    <string name="profile_alert_delete_msg">Ĉu forigi la profilon “%s”\?</string>
+    <string name="profile_alert_delete_msg">Ĉu forigi la profilon “%s”?</string>
     <string name="select_base_profile_dialog_title">Elektu komencan profilon</string>
     <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
     <string name="select_nav_profile_dialog_title">Elekti profilon de navigo</string>
@@ -2989,27 +2903,7 @@
     <string name="shared_string_crash">Paneo</string>
     <string name="last_launch_crashed">OsmAnd paneis dum la antaŭa starto. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>
     <string name="app_mode_ufo">NIFO</string>
-    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
-\n 
-\n • agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan tempon de alveno) 
-\n 
-\n • fenestraĵo montranta koordinatojn 
-\n 
-\n • eblo mezuri distancojn per cirkelo 
-\n 
-\n • riparita registrado de spuro fone 
-\n 
-\n • restarigita eblaĵo “teni ekranon ŝaltita” 
-\n 
-\n • plibonigita elŝuto de mapoj fone 
-\n 
-\n • riparita elekto de lingvo por Vikipedio 
-\n 
-\n • riparita sinteno de kompaso butono dum navigado 
-\n 
-\n • riparoj de aliaj eraroj
-\n
-\n</string>
+    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro \n \n • agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan tempon de alveno) \n \n • fenestraĵo montranta koordinatojn \n \n • eblo mezuri distancojn per cirkelo \n \n • riparita registrado de spuro fone \n \n • restarigita eblaĵo “teni ekranon ŝaltita” \n \n • plibonigita elŝuto de mapoj fone \n \n • riparita elekto de lingvo por Vikipedio \n \n • riparita sinteno de kompaso butono dum navigado \n \n • riparoj de aliaj eraroj</string>
     <string name="app_mode_personal_transporter">Persona transportilo</string>
     <string name="app_mode_monowheel">Unurada veturilo</string>
     <string name="app_mode_scooter">Skotero</string>
@@ -3112,7 +3006,7 @@
     <string name="manage_profiles_descr">Krei, enporti kaj redakti profilojn</string>
     <string name="manage_profiles">Administri profilojn de aplikaĵo…</string>
     <string name="osmand_settings_descr">Influas al la tuta aplikaĵo</string>
-    <string name="osmand_settings">Ĝeneralaj agordoj</string>
+    <string name="osmand_settings">Aplikaĵaj agordoj</string>
     <string name="copy_from_other_profile">Kopii el alia profilo</string>
     <string name="turn_screen_on">Teni ekranon ŝaltita</string>
     <string name="map_during_navigation_info">Mapo dum navigi</string>
@@ -3186,23 +3080,7 @@
     <string name="routing_attr_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
     <string name="update_all_maps">Ĝisdatigi ĉiujn mapojn</string>
     <string name="update_all_maps_q">Ĉu ĝisdatigi ĉiujn (%1$d) mapojn\?</string>
-    <string name="release_3_5">• ĝisdatigitaj agordoj de aplikaĵo kaj de profiloj: oportuna ordigo laŭ speco, eblaĵo alĝustigi ĉiun profilon
-\n 
-\n• nova ekrano de map‑elŝuto, propono elŝuti rilatan mapon dum foliumi mapon
-\n 
-\n• plibonigoj al malhela reĝimo
-\n 
-\n• riparitaj kelkaj problemoj pri difinado de vojo
-\n 
-\n• aktualigita fundamenta mapo de mondo, pli detala reto de vojoj
-\n 
-\n• riparitaj problemoj pri superakvitaj arenoj tra la mondo
-\n 
-\n• skiado: aldonita profilo de altitudo kaj kompliko de skivojo al detaloj pri skivojo
-\n 
-\n• riparoj de aliaj eraroj
-\n
-\n</string>
+    <string name="release_3_5">• ĝisdatigitaj agordoj de aplikaĵo kaj de profiloj: oportuna ordigo laŭ speco, eblaĵo alĝustigi ĉiun profilon \n \n• nova ekrano de map‑elŝuto, propono elŝuti rilatan mapon dum foliumi mapon \n \n• plibonigoj al malhela reĝimo \n \n• riparitaj kelkaj problemoj pri difinado de vojo \n \n• aktualigita fundamenta mapo de mondo, pli detala reto de vojoj \n \n• riparitaj problemoj pri superakvitaj arenoj tra la mondo \n \n• skiado: aldonita profilo de altitudo kaj kompliko de skivojo al detaloj pri skivojo \n \n• riparoj de aliaj eraroj</string>
     <string name="apply_preference_to_all_profiles">Apliki tiun ĉi ŝanĝon al ĉiuj aŭ al la elektita profilo.</string>
     <string name="shared_preference">Komuna</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferi tervojojn</string>
@@ -3272,7 +3150,7 @@
     <string name="import_routing_file">Enporti dosieron de navigo</string>
     <string name="import_profile">Enporti profilon</string>
     <string name="monitoring_prefs_descr">Navigado, precizo de registrado</string>
-    <string name="multimedia_notes_prefs_descr">Dimensioj de bildo, kvalito de sono kaj video</string>
+    <string name="multimedia_notes_prefs_descr">Grando de fotoj, kvalito de sono kaj filmetoj</string>
     <string name="osm_editing_prefs_descr">Uzantnomo, pasvorto, malkonekta redaktado</string>
     <string name="accessibility_prefs_descr">Emblemo, koloro kaj nomo</string>
     <string name="live_monitoring_descr">Ebligas kunhavigi nunan pozicion per registrado de kurso.</string>
@@ -3280,7 +3158,7 @@
     <string name="save_track_logging_accuracy">Precizo de registrado</string>
     <string name="tracks_view_descr">Viaj registritaj spuroj troviĝas en %1$s aŭ en la dosierujo OsmAnd.</string>
     <string name="multimedia_notes_view_descr">Viaj notoj troviĝas en %1$s.</string>
-    <string name="video_notes">Videaj notoj</string>
+    <string name="video_notes">Filmaj notoj</string>
     <string name="photo_notes">Fotaj notoj</string>
     <string name="route_recalculation">Rekalkuli kurson</string>
     <string name="button_rate">Taksi</string>
@@ -3296,7 +3174,7 @@
     <string name="permission_is_required">Permeso estas necesa por uzi tiun ĉi eblaĵon.</string>
     <string name="monitoring_min_speed_descr">Tiu ĉi filtrilo preventas registri punktojn sub difinita rapidlimo. Tiel registritaj spuroj aspektos pli glate dum vidiĝi sur la mapo.</string>
     <string name="monitoring_min_speed_descr_side_effect">Kromefiko: en via spuro mankos fragmentoj, en kiuj la minimuma rapido ne estis atingita (ekz. kiam vi puŝis vian biciklon ĉe kruta deklivo). Ankaŭ estos neniuj informoj pri paŭzoj. Tio ĉi efikos sur analizo aŭ pritraktado: por determini tutan tempon de via ekskurso, tempon de movado aŭ mezuman rapidon.</string>
-    <string name="monitoring_min_accuracy_descr_remark">Rimarko: se GPS estos malaktiva tuj antaŭ registri spuron, la unua mezurita punkto povos havi etigitan precizon. (Eble estontece la aplikaĵo atendos sekundon aŭ pli antaŭ registri punkton (aŭ registros la plej bonan el 3 sekvantaj punktoj).)</string>
+    <string name="monitoring_min_accuracy_descr_remark">Rimarko: se GPS estos malaktiva tuj antaŭ ol registri spuron, la unua mezurita punkto povos havi etigitan precizon. (Eble estontece la aplikaĵo atendos sekundon aŭ pli antaŭ ol registri punkton (aŭ registros la plej bonan el 3 sekvantaj punktoj).)</string>
     <string name="monitoring_min_distance_descr">Tiu ĉi filtrilo ebligas al vi ne preterpasi aldoni datumojn al registrata spuro, kiam preskaŭ neniu movo registriĝas. Tio ĉi ankaŭ plibonigas aspekton de spuro sen aldona pritraktado.</string>
     <string name="monitoring_min_distance_descr_side_effect">Kromefiko: periodoj de ripozoj ne estos registritaj aŭ estos registritaj nur per unuopaj punktoj. Etaj movoj (ekzemple al moviĝo alia vojflanko, kiu estus registrita kiel turniĝo) povos esti forfiltritaj. Rimarku, ke via spur-dosiero enhavos malpliajn datumojn por posttrakti kaj havos la saman ekzaktecon (ĝustecon): mezureraroj kaŭzitaj pro misricevoj aŭ difektoj de GPS-cirkvitaro plue aperos.</string>
     <string name="live_monitoring_adress">Retadreso</string>
@@ -3336,31 +3214,7 @@
 \n
 \nAktivigu tion ĉi por ke OsmAnd uzu la operaciuman agordon pri malŝalti ekranon.</string>
     <string name="clear_recorded_data">Forviŝi registritajn datumojn</string>
-    <string name="release_3_6">• profiloj: eblo ŝanĝi ilian ordigon, agordi emblemon por mapo, ŝanĝi ĉiujn agordojn por bazaj profiloj kaj restarigi implicitajn valorojn 
-\n 
-\n• aldonis numeron de elveturejo dum navigadi 
-\n 
-\n• rearanĝitaj agordoj pri kromprogramoj 
-\n 
-\n• rearanĝita ekrano de agordoj por rapide agordi ĉiun profilon 
-\n 
-\n• aldonis eblon kopii agordojn el alia profilo 
-\n 
-\n• aldonis eblon ŝanĝi ordigon kaj kaŝi kategoriojn de interesejoj dum serĉi 
-\n 
-\n• rektigis emblemojn de interesejoj sur la mapo 
-\n 
-\n• aldonis informojn pri senleviĝo/sunsubiro al la ekrano “agordi mapon” 
-\n 
-\n• aldonis emblemojn de hejmo kaj laboro al la mapo 
-\n 
-\n• aldonis subtenon por plurliniaj priskriboj al la agordoj 
-\n 
-\n• ĝusta transliterumo al la mapo de Japanujo 
-\n 
-\n• aldonis mapon de Antarkto
-\n
-\n</string>
+    <string name="release_3_6">• profiloj: eblo ŝanĝi ilian ordigon, agordi emblemon por mapo, ŝanĝi ĉiujn agordojn por bazaj profiloj kaj restarigi implicitajn valorojn \n \n• aldonis numeron de elveturejo dum navigadi \n \n• rearanĝitaj agordoj pri kromprogramoj \n \n• rearanĝita ekrano de agordoj por rapide agordi ĉiun profilon \n \n• aldonis eblon kopii agordojn el alia profilo \n \n• aldonis eblon ŝanĝi ordigon kaj kaŝi kategoriojn de interesejoj dum serĉi \n \n• rektigis emblemojn de interesejoj sur la mapo \n \n• aldonis informojn pri senleviĝo/sunsubiro al la ekrano “agordi mapon” \n \n• aldonis emblemojn de hejmo kaj laboro al la mapo \n \n• aldonis subtenon por plurliniaj priskriboj al la agordoj \n \n• ĝusta transliterumo al la mapo de Japanujo \n \n• aldonis mapon de Antarkto</string>
     <string name="copy_coordinates">Kopii koordinatojn</string>
     <string name="routing_profile_direct_to">Rekte al punkto</string>
     <string name="sort_by_category">Ordigi laŭ kategorio</string>
@@ -3460,9 +3314,7 @@
     <string name="move_inside_category">Vi povas movi elementojn nur ene tiu ĉi kategorio.</string>
     <string name="developer_plugin">Programista kromprogramo</string>
     <string name="shared_string_items">Elementoj</string>
-    <string name="ui_customization_description">Alĝustigi kaj kaŝi elementojn en la (maldekstra) tirmenuo, menuo “agordi mapon” kaj kunteksta menuo de mapo. 
-\n 
-\nEblas malaktivigi neuzatajn kromprogramojn por kaŝi ĉiujn iliajn rilatajn butonojn: %1$s.</string>
+    <string name="ui_customization_description">Alĝustigi kaj kaŝi elementojn en la (maldekstra) tirmenuo, menuo “agordi mapon” kaj kunteksta menuo de mapo. \n \nEblas malaktivigi neuzatajn kromprogramojn por kaŝi ĉiujn iliajn rilatajn butonojn: %1$s.</string>
     <string name="ui_customization_short_descr">Elementoj de tirmenuo, kunteksta menuo, ktp.</string>
     <string name="ui_customization">Alĝustigi fasadon</string>
     <string name="shared_string_drawer">Tirmenuo</string>
@@ -3473,7 +3325,7 @@
     <string name="hidden_items_descr">La jenaj elementoj estas kaŝitaj el la menuo, sed la rilataj eblaĵoj kaj kromprogramoj plue funkcios.</string>
     <string name="shared_string_hidden">Kaŝita</string>
     <string name="reset_items_descr">Per kaŝi agordojn, ili revenos al la implicitaj valoroj.</string>
-    <string name="select_wikipedia_article_langs">Elektu lingvojn por artikoloj de Vikipedio montrataj sur la mapo. Eblos baskuli inter ĉiuj disponeblaj lingvoj dum legi artikolon.</string>
+    <string name="select_wikipedia_article_langs">Elektu lingvojn por artikoloj de Vikipedio montrataj sur la mapo. Eblos elekti ĉiun disponeblan lingvon dum legi artikolon.</string>
     <string name="some_articles_may_not_available_in_lang">Iuj artikoloj de Vikipedio povas ne esti disponeblaj en via lingvo.</string>
     <string name="lang_zhyue">Kantona</string>
     <string name="lang_zhminnan">Minnana</string>
@@ -3525,25 +3377,7 @@
     <string name="map_markers_item">Map‑markoj</string>
     <string name="legend_item_description">Gvidilo al simboloj sur la mapo.</string>
     <string name="navigation_profiles_item">Profiloj de navigo</string>
-    <string name="release_3_7">• novaj mapoj de dekliveco por malkonekta uzado 
-\n 
-\n • plena alĝustigo de ŝatataj punktoj kaj GPX‑navigadpunktoj: propraj koloroj, emblemoj kaj formoj 
-\n 
-\n • reordigi elementojn de la kunteksta menuo, menuo “konfiguri mapon” kaj tirmenuo 
-\n 
-\n • Vikipedio kiel aparta tavolo vidigebla per la menuo “konfiguri mapon”, eblo elekti nur bezonatajn lingvojn 
-\n 
-\n • krei viajn proprajn filtrilojn/mapojn de interesejoj, tute agordeblaj 
-\n 
-\n • restarigi agordojn por propraj profiloj 
-\n 
-\n • plenaj GPX‑spuroj en navigo, subteno por instrukcioj pri (voj)koridoroj kaj turnoj 
-\n 
-\n • riparita grando de fasado ĉe tabulkomputiloj 
-\n 
-\n • riparitaj eraroj pri lingvoj skribataj dekstre-maldekstren
-\n
-\n</string>
+    <string name="release_3_7">• novaj mapoj de dekliveco por malkonekta uzado \n \n • plena alĝustigo de ŝatataj punktoj kaj GPX‑navigadpunktoj: propraj koloroj, emblemoj kaj formoj \n \n • reordigi elementojn de la kunteksta menuo, menuo “konfiguri mapon” kaj tirmenuo \n \n • Vikipedio kiel aparta tavolo vidigebla per la menuo “konfiguri mapon”, eblo elekti nur bezonatajn lingvojn \n \n • krei viajn proprajn filtrilojn/mapojn de interesejoj, tute agordeblaj \n \n • restarigi agordojn por propraj profiloj \n \n • plenaj GPX‑spuroj en navigo, subteno por instrukcioj pri (voj)koridoroj kaj turnoj \n \n • riparita grando de fasado ĉe tabulkomputiloj \n \n • riparitaj eraroj pri lingvoj skribataj dekstre-maldekstren \n \n</string>
     <string name="additional_actions_descr">Vi povas ekigi tiujn ĉi agojn per frapeti la butonon “%1$s”.</string>
     <string name="quick_action_transport_descr">Butono por montri/kaŝi publikan transporton sur la mapo.</string>
     <string name="create_edit_poi">Krei aŭ redakti interesejon</string>
@@ -3552,7 +3386,7 @@
     <string name="reset_deafult_order">Restarigi implicitan ordigon de elementoj</string>
     <string name="back_to_editing">Reen al redaktado</string>
     <string name="shared_string_resume">Pluigi</string>
-    <string name="quick_action_switch_profile_descr">Butono por baskuli inter elektitaj profiloj.</string>
+    <string name="quick_action_switch_profile_descr">Butono por baskuligi inter elektitaj profiloj.</string>
     <string name="shared_string_add_profile">Aldoni profilon</string>
     <string name="change_application_profile">Ŝanĝi aplikaĵan profilon</string>
     <string name="profiles_for_action_not_found">Ne trovis tiajn profilojn.</string>
@@ -3608,7 +3442,7 @@
     <string name="shared_string_meters">metroj</string>
     <string name="details_dialog_decr">Montri aŭ kaŝi pliajn detalojn sur la mapo</string>
     <string name="shared_string_night_map">Nokta mapo</string>
-    <string name="turn_screen_on_power_button_disabled">Malŝaltita. Postulas “teni ekranon aktiva” en la sekcio “aktiveca periodo de ekrano”.</string>
+    <string name="turn_screen_on_power_button_disabled">Malŝaltita. Postulas “Teni ekranon aktiva” en la sekcio “Aktiveca periodo de ekrano”.</string>
     <string name="clear_tiles_warning">Per apliki tiujn ĉi ŝanĝojn, la kaŝmemorigitaj datumoj por tiu ĉi fonto de kaheloj forviŝiĝos</string>
     <string name="add_online_source">Aldoni enretan fonton</string>
     <string name="vessel_height_warning_link">Enigu alton de akvoveturilo</string>
@@ -3720,21 +3554,7 @@
     <string name="shared_string_is_saved">estas konservata</string>
     <string name="one_point_error">Aldonu almenaŭ du punktojn.</string>
     <string name="shared_string_redo">Refari</string>
-    <string name="release_3_8">• plibonigoj al “plani kurson”: eblo uzi diversajn specojn de navigo por ĉiu segmento aparte kaj ampleksi spurojn
-\n
-\n• nova menuo de aspekto por spuroj: eblo elekti koloron kaj dikecon, montri sagetojn de direkto kaj vidigi markojn de komenco kaj fino de la spuro
-\n
-\n• plibonigita videblo de biciklaj nodoj
-\n
-\n• nun eblas frapeti spuron sur la mapo, vidigi ĝian kuntekstan menuon kun bazajn informojn
-\n
-\n• plibonigoj al serĉ‑algoritmojn
-\n
-\n• plibonigoj al la funkcio “sekvi spuron” dum navigi
-\n
-\n• riparitaj problemoj pri en-/el-porti agordojn de profilo
-\n
-\n</string>
+    <string name="release_3_8">• plibonigoj al “plani kurson”: eblo uzi diversajn specojn de navigo por ĉiu segmento aparte kaj ampleksi spurojn \n \n• nova menuo de aspekto por spuroj: eblo elekti koloron kaj dikecon, montri sagetojn de direkto kaj vidigi markojn de komenco kaj fino de la spuro \n \n• plibonigita videblo de biciklaj nodoj \n \n• nun eblas frapeti spuron sur la mapo, vidigi ĝian kuntekstan menuon kun bazajn informojn \n \n• plibonigoj al serĉ‑algoritmojn \n \n• plibonigoj al la funkcio “sekvi spuron” dum navigi \n \n• riparitaj problemoj pri en-/el-porti agordojn de profilo</string>
     <string name="monitoring_control_start">Registri</string>
     <string name="save_global_track_interval_descr">Elektu la intertempon de registrado por la ĝenerala registrado de spuro (aktivigebla per la fenestraĵo “registri spuron” sur la mapo).</string>
     <string name="simplified_track">Simpligita spuro</string>
@@ -3777,7 +3597,6 @@
     <string name="message_need_calculate_route_before_show_graph">Datumoj de %1$s estas disponeblaj nur por vojoj, kalkulu la kurson uzante “kalkuli kurson inter punktoj” por montri diagramon.</string>
     <string name="message_graph_will_be_available_after_recalculation">Bonvolu atendi.
 \nDiagramo estos videbla post rekalkuli kurson.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Lokaj mapoj</string>
     <string name="icon_group_amenity">Oportunaĵo</string>
     <string name="icon_group_special">Specialaj</string>
@@ -3816,18 +3635,11 @@
     <string name="osm_edit_comment_note">Komenti OSM-rimarkon</string>
     <string name="osm_login_descr">Ensalutu per la metodo OAuth aŭ per uzi uzantnomon kaj pasvorton al OSM.</string>
     <string name="shared_string_add_photo">Aldoni foton</string>
-    <string name="register_on_openplacereviews">Registri ĉe
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas enlasaluti en la retejon.</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
     <string name="shared_string_search_history">Historio de serĉoj</string>
     <string name="app_mode_kayak">Kajako</string>
     <string name="app_mode_motorboat">Motorboato</string>
-    <string name="add_photos_descr">OsmAnd montras fotojn el diversaj fontoj:
-\nOpenPlaceReviews – fotoj de interesejoj;
-\nMapillary – strat‑nivela fotaro;
-\ninterreto, Vikimedio – fotoj de interesejoj difinitaj en OSM-datumoj.</string>
     <string name="shared_string_resources">Rimedoj</string>
     <string name="approximate_file_size">Proksimuma dosiergrando</string>
     <string name="select_data_to_export">Elektu datumojn por elporti al dosiero.</string>
@@ -3835,10 +3647,9 @@
     <string name="export_not_enough_space_descr">En via aparato estas nur %1$s da libera spaco. Liberigu iom da spaco aŭ malelektu iujn elementojn de elporto.</string>
     <string name="export_not_enough_space">Mankas spaco</string>
     <string name="add_to_mapillary">Aldoni al Mapillary</string>
-    <string name="add_to_opr">Aldoni al OpenPlaceReviews</string>
     <string name="select_groups_for_import">Elektu grupojn por enporti.</string>
     <string name="select_items_for_import">Elektu elementojn por enporti.</string>
-    <string name="use_dev_url_descr">Baskuli al dev.openstreetmap.org anstataŭ openstreetmap.org por testi alŝuti OSM‑rimarkojn, interesejojn, GPX‑spurojn.</string>
+    <string name="use_dev_url_descr">Baskuligi al dev.openstreetmap.org anstataŭ openstreetmap.org por testi alŝuti OSM‑rimarkojn, interesejojn, GPX‑spurojn.</string>
     <string name="use_dev_url">Uzi dev.openstreetmap.org</string>
     <string name="cannot_upload_image">Ne povas alŝuti la bildon, reprovu poste</string>
     <string name="select_picture">Elektu bildon</string>
@@ -3848,15 +3659,7 @@
     <string name="plan_route_split_before">Dividi antaŭ</string>
     <string name="plan_route_split_after">Dividi post</string>
     <string name="plan_route_add_new_segment">Aldoni novan segmenton</string>
-    <string name="release_3_9">• eblo el-/en-porti ĉiujn datumojn, inkluzivante agordojn, map‑datumojn kaj miajn lokojn
-\n
-\n • plani kurson: diagramoj por segmentoj kun la kurso, aldonita eblo por krei kaj redakti plurajn segmentojn de kurso
-\n
-\n • aldonita aŭtentiga metodo OAuth por OpenStreetMap, plibonigita fasado de OSM‑rilataj dialogujoj
-\n
-\n • propraj koloroj por ŝatataj ejoj kaj navigadpunktoj de spuro
-\n
-\n</string>
+    <string name="release_3_9">• eblo el-/en-porti ĉiujn datumojn, inkluzivante agordojn, map‑datumojn kaj miajn lokojn \n \n • plani kurson: diagramoj por segmentoj kun la kurso, aldonita eblo por krei kaj redakti plurajn segmentojn de kurso \n \n • aldonita aŭtentiga metodo OAuth por OpenStreetMap, plibonigita fasado de OSM‑rilataj dialogujoj \n \n • propraj koloroj por ŝatataj ejoj kaj navigadpunktoj de spuro</string>
     <string name="profile_type_osmand_string">OsmAnd‑profilo</string>
     <string name="profile_type_user_string">Profilo de uzanto</string>
     <string name="reverse_all_points">Inversigi ĉiujn punktojn</string>
@@ -3919,7 +3722,7 @@
     <string name="announcement_time_prepare">Preparado</string>
     <string name="announcement_time_off_route">Devojiĝo de kurso</string>
     <string name="announcement_time_arrive">Atingo al celo</string>
-    <string name="shared_string_turn">Turno</string>
+    <string name="shared_string_turn">Kurbiĝo</string>
     <string name="announcement_time_intervals">Interspacoj distancaj kaj tempaj</string>
     <string name="announcement_time_descr">La tempo de anonco de diversaj voĉaj sciigoj dependas de iliaj specoj, nuna kaj implicita navigaj rapidoj.</string>
     <string name="announcement_time_title">Tempo de anonco</string>
@@ -3935,12 +3738,6 @@
     <string name="uploaded_count">Sendis %1$d el %2$d</string>
     <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
     <string name="hillshade_slope_contour_lines">Nivelkurboj / nivelombrumo / dekliveco</string>
-    <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
-\n
-\nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: %1$s</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Uzi test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Ensaluti al OpenPlaceReviews</string>
     <string name="activity_type_water_name">Akvo</string>
     <string name="activity_type_winter_name">Vintro</string>
     <string name="activity_type_snowmobile_name">Motorsledo</string>
@@ -3973,7 +3770,7 @@
     <string name="track_has_no_altitude">La spuro ne enhavas datumojn pri altitudo.</string>
     <string name="track_has_no_speed">La spuro ne enhavas datumojn pri rapido.</string>
     <string name="select_another_colorization">Elektu alian specon de kolorigo.</string>
-    <string name="routing_attr_short_way_description">Optimumigita pli mallonga kurso (energiŝpara)</string>
+    <string name="routing_attr_short_way_description">Plejbonigita pli mallonga kurso (energiŝpara)</string>
     <string name="latest_openstreetmap_update">Lasta disponebla ĝisdatigo de OpenStreetMap:</string>
     <string name="last_time_checked">Lastfoje kontrolita: %s</string>
     <string name="segments_count">Segmento %1$d</string>
@@ -3997,19 +3794,7 @@
     <string name="specify_color_for_map_mode">Elektu koloron por la map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
-    <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj
-\n
-\n• horizontala vido por “plani kurson”: aldonitaj langetoj por baskuli inter punktoj kaj diagramoj
-\n
-\n• ĝisdatigoj OsmAnd Live movitaj al “elŝutoj” → “ĝisdatigoj”
-\n
-\n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco
-\n
-\n• eblo ŝanĝi aspekton de linio de la navigata kurso
-\n
-\n• plibonigita ekrano “registri spuron”
-\n
-\n</string>
+    <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj \n \n• horizontala vido por “plani kurson”: aldonitaj langetoj por baskuli inter punktoj kaj diagramoj \n \n• ĝisdatigoj OsmAnd Live movitaj al “elŝutoj” → “ĝisdatigoj” \n \n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco \n \n• eblo ŝanĝi aspekton de linio de la navigata kurso \n \n• plibonigita ekrano “registri spuron”</string>
     <string name="empty_purchases_description">Se viaj aĉetoj ne aperas ĉi tie, frapetu “%1$s”, aŭ kontaktu nian subtenan teamon.</string>
     <string name="troubleshooting">Problemsolvado</string>
     <string name="troubleshooting_description">Bonvolu sekvi ĉi tiun ligilon, se vi spertas problemojn pri aĉetoj.</string>
@@ -4030,7 +3815,7 @@
     <string name="update_all_maps_added">Ĉu ĝisdatigi ĉiujn mapojn aldonitajn al %1$s\?</string>
     <string name="announce_when_exceeded">Sciigi kiam superita</string>
     <string name="exit_number">Numero de elirejo</string>
-    <string name="user_points">Poentoj de uzanto</string>
+    <string name="user_points">Objektoj de uzanto</string>
     <string name="output">Eligo</string>
     <string name="shared_string_feet">futoj</string>
     <string name="srtm_unit_format">Unuo por nivelkurboj</string>
@@ -4040,10 +3825,10 @@
     <string name="shared_string_min_height">Minimuma alto</string>
     <string name="shared_string_max_height">Maksimuma alto</string>
     <string name="language_description">Elektu preferatan lingvon kaj specon de voĉo por navigaj gvidiloj.</string>
-    <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri turnoj, nomoj de stratoj kaj interesejoj, ktp.</string>
+    <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri kurbiĝoj, nomoj de stratoj kaj interesejoj, ktp.</string>
     <string name="tts_title">Parolsintezita</string>
-    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas elparoli nomojn de stratoj aŭ de interesejoj.</string>
-    <string name="use_system_language">Uzi sisteman lingvon</string>
+    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri kurbiĝoj. Ĝi ne povas elparoli nomojn de stratoj aŭ de interesejoj.</string>
+    <string name="use_system_language">Uzi lingvon de operaciumo</string>
     <string name="shared_string_itinerary">Kurso</string>
     <string name="route_line_use_map_style_width">Uzi implicitan larĝon de la map‑stilo %1$s.</string>
     <string name="route_line_use_map_style_color">Uzi implicitan koloron de la map‑stilo %1$s.</string>
@@ -4144,7 +3929,7 @@
     <string name="purchases_feature_desc_nautical">Akiru aliron al informoj pri mara profundo.</string>
     <string name="purchases_feature_desc_terrain">Nivelkurboj (egal-nivel-linioj), nivelombrumo (reliefo) kaj perkolora prezento de dekliveco por montri teren-formon.</string>
     <string name="purchases_feature_desc_wikivoyage">Esploru Vikivojaĝon malkonekte. Artikoloj estas dividitaj laŭ landoj/regionoj kaj estas disponeblaj en ĉiuj lingvoj.</string>
-    <string name="purchases_feature_desc_wikipedia">Malkonekta aliro al ĉiuj artikoloj de Vikipedio pri lokoj por ke vi povu sciiĝi pri la vizitataj ejoj per simple frapi la mapon. Ne forgesu elŝuti Vikipediajn mapojn de la dezirataj lokoj antaŭ komenci vojaĝon.</string>
+    <string name="purchases_feature_desc_wikipedia">Malkonekta aliro al ĉiuj artikoloj de Vikipedio pri lokoj por ke vi povu sciiĝi pri la vizitataj ejoj per simple frapi la mapon. Ne forgesu elŝuti Vikipediajn mapojn de la dezirataj lokoj antaŭ ol komenci vojaĝon.</string>
     <string name="purchases_feature_desc_combined_wiki">Esploru artikolojn de Vikipedio dum vojaĝi sen interreta konekto. Datumoj estas dividitaj laŭ landoj kaj liveras artikolojn en ĉiuj lingvoj.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Akiru aliron al senlimaj elŝutoj de malkonektaj mapoj de ĉiuj kontinentoj kaj regionoj.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
@@ -4166,27 +3951,7 @@
     <string name="backup_error_user_is_not_registered">Neniu registrita uzanto kun tiu ĉi retpoŝta adreso</string>
     <string name="backup_error_no_valid_subscription">Neniu valida abono</string>
     <string name="you_can_get_feature_as_part_of_pattern">Akiru la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo:</string>
-    <string name="release_4_0">• sekurkopio en nubo
-\n
-\n• nokta reĝimo por la map-stilo “Topo”
-\n
-\n• eblo elŝuto nivelkurbojn en futoj
-\n
-\n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco
-\n
-\n• aktualigita fenestro “registri spuron”
-\n
-\n• distanco je frapeto: nun aperas en aparta eblaĵo anstataŭ esti en cirkleto
-\n
-\n• plani kurson: eblo ŝanĝi parametrojn de navigo kaj agordojn de mapo, kaj serĉi sen forlasi la ekranon “plani kurson”
-\n
-\n• nova ekrano “aĉetoj” enhavanta detalajn informojn pri pagendaj eblaĵoj de OsmAnd
-\n
-\n• eblo ŝanĝi aspekton de linio de kurso
-\n
-\n• ĝisdatigoj OsmAnd Live nun aperas en “elŝutoj” → “ĝisdatigoj”
-\n
-\n</string>
+    <string name="release_4_0">• sekurkopio en nubo \n \n• nokta reĝimo por la map-stilo “Topo” \n \n• eblo elŝuto nivelkurbojn en futoj \n \n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco \n \n• aktualigita fenestro “registri spuron” \n \n• distanco je frapeto: nun aperas en aparta eblaĵo anstataŭ esti en cirkleto \n \n• plani kurson: eblo ŝanĝi parametrojn de navigo kaj agordojn de mapo, kaj serĉi sen forlasi la ekranon “plani kurson” \n \n• nova ekrano “aĉetoj” enhavanta detalajn informojn pri pagendaj eblaĵoj de OsmAnd \n \n• eblo ŝanĝi aspekton de linio de kurso \n \n• ĝisdatigoj OsmAnd Live nun aperas en “elŝutoj” → “ĝisdatigoj”</string>
     <string name="duration_moment_ago">antaŭ momento</string>
     <string name="enter_verification_code">Enigu unufojan pasvorton</string>
     <string name="backup_error_subscription_was_expired_descr">Via abono OsmAnd Pro senvalidiĝis – reaboni ĝin por povi uzi sekurkopion. Vi plue povas restarigi datumojn el la nubo.</string>
@@ -4297,31 +4062,7 @@
     <string name="included_categories">Ampleksataj kategorioj</string>
     <string name="rendering_attr_natureReserves_name">Naturrezervejoj</string>
     <string name="shared_string_articles">Artikoloj</string>
-    <string name="release_4_1">• komenca subteno por Android Auto
-\n
-\n• plibonigoj al serĉado laŭ UTM-koordinatoj
-\n
-\n• filtri punktojn en GPX-dosieroj (laŭ altitudo rapido, min. distanco k precizo)
-\n
-\n• fenestraĵo de altitudo (Pro)
-\n
-\n• ŝatataj punktoj: eblo montri antaŭe uzatajn bildsimbolojn
-\n
-\n• planado de kurso: la elektita profilo estos uzata post starto
-\n
-\n• riparita surtavolo Mapillary, la kromprogramo estos implicite malaktiva
-\n
-\n• nova ekrano por administri ĉiun historion de la aplikaĵo
-\n
-\n• map-orientiĝo ne nuliĝas post restarto de OsmAnd
-\n
-\n• plibonigoj al bildigado de nivelkurboj
-\n
-\n• riparita vidigo de tekstoj en la araba lingvo
-\n
-\n• riparitaj diversaj problemoj pri kurs-difinado
-\n
-\n</string>
+    <string name="release_4_1">• komenca subteno por Android Auto \n \n• plibonigoj al serĉado laŭ UTM-koordinatoj \n \n• filtri punktojn en GPX-dosieroj (laŭ altitudo rapido, min. distanco k precizo) \n \n• fenestraĵo de altitudo (Pro) \n \n• ŝatataj punktoj: eblo montri antaŭe uzatajn bildsimbolojn \n \n• planado de kurso: la elektita profilo estos uzata post starto \n \n• riparita surtavolo Mapillary, la kromprogramo estos implicite malaktiva \n \n• nova ekrano por administri ĉiun historion de la aplikaĵo \n \n• map-orientiĝo ne nuliĝas post restarto de OsmAnd \n \n• plibonigoj al bildigado de nivelkurboj \n \n• riparita vidigo de tekstoj en la araba lingvo \n \n• riparitaj diversaj problemoj pri kurs-difinado</string>
     <string name="search_history_is_disabled_descr">Vi povas aktivigi la historion de serĉoj en la agordoj.</string>
     <string name="shortcut_navigate_to_home">Navigi al “hejmo”</string>
     <string name="is_disabled">%1$s estas malaktiva</string>
@@ -4357,8 +4098,8 @@
     <string name="shared_string_travelbooks">Vojaĝ-gvidiloj</string>
     <string name="display_route_tracks_as_poi">Montri kursojn kiel interesejojn</string>
     <string name="display_route_tracks">Montri kursojn</string>
-    <string name="delete_history_items_descr">Ĉu forigi la elektitajn objektojn el historio\?</string>
-    <string name="delete_history_items">Ĉu forigi %1$s objektojn el historio\?</string>
+    <string name="delete_history_items_descr">La elektitaj objektoj foriĝos el la listo.</string>
+    <string name="delete_history_items">Ĉu forigi %1$s objekto(j)n el historio?</string>
     <string name="quick_action_toggle_preference">Ŝaltilo por ŝanĝi agordon.</string>
     <string name="icon_group_education">Edukado</string>
     <string name="add_to_group">Aldoni al grupo</string>
@@ -4383,8 +4124,7 @@
     <string name="copying_completed">Kopiita</string>
     <string name="shared_string_copy_to">Kopii al</string>
     <string name="start_copying">Kopii</string>
-    <string name="shared_storage_first_step">Frapetu “%1$s”.
-\nLa dosieradministrilo malfermiĝos, per kiu vi devos trovi kaj malfermi la dosierujon de OsmAnd.</string>
+    <string name="shared_storage_first_step">Frapetu “%1$s”. \nLa dosieradministrilo malfermiĝos, per kiu vi devos trovi kaj malfermi la dosierujon de OsmAnd.</string>
     <string name="shared_storage_second_step">Frapetu “Uzi tiun ĉi dosierujon”.</string>
     <string name="skip_confirmation">Jes, preterpasi</string>
     <string name="memory_allocated_for_routing">Memoro rezervata por kurs-difinado</string>
@@ -4477,9 +4217,7 @@
     <string name="import_tracks_descr">La dosiero “%1$s” enhavas %2$s apartajn spurojn. Elektu spurojn por enporti.</string>
     <string name="zoom_levels_difference_description">Ju pli granda amplekso de skal-niveloj, des pli multe da datumoj necesos elŝuti.</string>
     <string name="default_appearance">Implicita aspekto</string>
-    <string name="location_source_descr">OsmAnd instalita per Google Play implicite uzas %1$s por determini vian pozicion.
-\n
-\nSe via pozicio estas malpreciza aŭ vi uzas aparaton sen %2$s, provu elekti “%3$s”.</string>
+    <string name="location_source_descr">OsmAnd instalita per Google Play implicite uzas %1$s por determini vian pozicion. \n \nSe via pozicio estas malpreciza aŭ vi uzas aparaton sen %2$s, provu elekti “%3$s”.</string>
     <string name="location_source">Fonto de pozicio</string>
     <string name="stop_download_desc">Elŝutado ne kompletiĝis. Se vi ĉesigos la elŝutadon nun, nur parto de la kaheloj estos montrebla.</string>
     <string name="stop_download">Ĉesigi elŝutadon</string>
@@ -4556,15 +4294,7 @@
     <string name="routing_attr_difficulty_preference_advanced_name">malfacilaj</string>
     <string name="routing_attr_difficulty_preference_expert_name">malfacilegaj</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">mezfacilaj</string>
-    <string name="release_4_2">• rekonstruo de fenestraĵoj: nova aspekto, eblo grupigi ilin laŭ paĝoj, ŝanĝi ordon kaj kunigi laŭ viaj bezonoj
-\n
-\n• kursoj piediradaj / biciklaj / vojaĝaj: frapetu simbolon de la kurso por akiri plenajn informojn pri la kurso
-\n
-\n• grupoj de ŝatataj punktoj: difini implicitan aspekton por novaj punktoj de la grupo
-\n
-\n• erar-riparoj: aŭtomate ĝisdatigi enretajn map-kahelojn
-\n
-\n</string>
+    <string name="release_4_2">• rekonstruo de fenestraĵoj: nova aspekto, eblo grupigi ilin laŭ paĝoj, ŝanĝi ordon kaj kunigi laŭ viaj bezonoj \n \n• kursoj piediradaj / biciklaj / vojaĝaj: frapetu simbolon de la kurso por akiri plenajn informojn pri la kurso \n \n• grupoj de ŝatataj punktoj: difini implicitan aspekton por novaj punktoj de la grupo \n \n• erar-riparoj: aŭtomate ĝisdatigi enretajn map-kahelojn</string>
     <string name="turn_on_public_transport_description">Aktivigu por vidigi kursojn de publika transporto sur la mapo.</string>
     <string name="arrival_time_widget_desc">Tempo (horo) de alveno al la alcela loko.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permesi privatan aliron (kamionoj)</string>
@@ -4581,7 +4311,7 @@
     <string name="colour_of_circles">Koloro de cirkloj</string>
     <string name="bearing_secondary_desc">Vi povas ŝanĝi formon de montrataj datumoj per la menuo “%1$s” → “%2$s” → “%3$s”.</string>
     <string name="coordinates_widget_secondary_desc">Vi povas ŝanĝi formon de koordinatoj per la menuo “%1$s” → “%2$s” → “%3$s”.</string>
-    <string name="parking_widget_desc">Fenestraĵo montranta distancon de la ekrana centro al la parkumeja pozicio.</string>
+    <string name="parking_widget_desc">Fenestraĵo montranta distancon de la ekrana centro al la pozicio de parkumo.</string>
     <string name="mapillary_widget_desc">Fenestraĵo liveranta rapidan aliron al aplikaĵo Mapillary por aldoni tien strat-nivelajn fotojn.</string>
     <string name="av_notes_choose_action_widget_desc">Elekti agon.</string>
     <string name="current_time_widget_desc">Fenestraĵo montranta la nunan horon (de la operaciumo).</string>
@@ -4590,11 +4320,11 @@
     <string name="current_speed_widget_desc">Fenestraĵo montranta vian nunan rapidon determinitan per GPS.</string>
     <string name="shared_string_widget">Fenestraĵo</string>
     <string name="av_def_action_choose">Demandi</string>
-    <string name="audio_video_notes_desc">Fenestraĵoj ebligantaj rapide ekigi/fini videan/sonan noton aŭ fari fotan noton.</string>
+    <string name="audio_video_notes_desc">Fenestraĵoj ebligantaj rapide ekigi/fini filman/sonan noton aŭ fari fotan noton.</string>
     <string name="routing_attr_allow_private_for_truck_description">Permesi aliron al privataj areoj por kamionoj.</string>
     <string name="rendering_attr_weatherPressureContours_name">Egal-aerprem-linioj (izobaroj)</string>
     <string name="rendering_attr_horseScale_name">Facilo de ĉevalvojoj</string>
-    <string name="map_widget_trip_recording_distance">Distanco</string>
+    <string name="map_widget_distance">Distanco</string>
     <string name="map_widget_trip_recording_downhill">Malsupreniroj</string>
     <string name="routing_attr_avoid_4wd_only_name">Eviti vojojn por terenaj aŭtomobiloj</string>
     <string name="routing_attr_avoid_4wd_only_description">Eviti vojojn travetureblajn nur per ajnagrundaj aŭtomobiloj</string>
@@ -4618,8 +4348,8 @@
     <string name="route_maneuvers_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva turniĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
     <string name="map_widget_true_bearing">Vera direkto</string>
     <string name="route_maneuvers">Manovroj</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ne superstreki armeajn areojn</string>
-    <string name="rendering_attr_hideMilitaryAreas_description">Ne montri transversajn ruĝajn liniojn sur armeaj areoj</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Armeaj terenoj</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Kaŝi armeajn terenojn</string>
     <string name="get_altitude_information">Akiri informojn pri altitudo</string>
     <string name="calculating_altitude">Kalkulado de altitudo</string>
     <string name="calculate_online">Kalkuli enrete</string>
@@ -4684,18 +4414,18 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Montri dediĉitajn montbiciklajn kursojn laŭ la skalo de IMBA.</string>
     <string name="attach_roads_warning">Nur registrita spuro povas esti alproksimigita al vojoj.</string>
     <string name="without_profiles_changing">Sen ŝanĝi profilon</string>
-    <string name="shared_string_only_missing">Nur mankajn</string>
+    <string name="shared_string_only_missing">Nur mankantajn</string>
     <string name="download_tiles">Elŝuti kahelojn</string>
-    <string name="auto_25_chars_route_tl_kl">Turniĝu maldekstren kaj veturu ĉe maldekstra flanko</string>
-    <string name="auto_25_chars_route_tr_kl">Turniĝu dekstren kaj veturu ĉe maldekstra flanko</string>
-    <string name="auto_25_chars_route_tr_kr">Turniĝu dekstren kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_tl_kl">Maldekstren kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_tr_kl">Dekstren kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_tr_kr">Dekstren kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_tu_kr">Turniĝu malantaŭen kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_roundabout_kl">Elektu la %1$d-an elveturejon kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_25_chars_route_roundabout_kr">Elektu la %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
     <string name="relative_bearing_widget_desc">Angulo inter direkto de via movado kaj la alcela loko.</string>
     <string name="connect_with_straight_line">Konekti per rekta linio</string>
-    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj por difini kurson inter punktoj kaj por akiri precizajn informojn pri turniĝoj kaj ŝoseoj.</string>
-    <string name="auto_25_chars_route_tl_kr">Turniĝu maldekstren kaj veturu ĉe dekstra flanko</string>
+    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj por akiri precizajn informojn pri kurso, inkluzivante instrukciojn kurbiĝo-post-kurbiĝo kaj atributojn de ŝoseoj.</string>
+    <string name="auto_25_chars_route_tl_kr">Maldekstren kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_tu_kl">Turniĝu malantaŭen kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_backup_preference_desc">Implicite Android konservas sekurkopiojn de ŝatataj punktoj, map-ĵetonoj kaj agordoj de la aplikaĵo por restarigi ilin en novaj aparatoj post reinstali. Tiu sekurkopio estas limigita al 25 MB.
 \nSe vi uzas OsmAnd-Nubon, tio ĉi povos kaŭzi malkontenton post reinstalado.</string>
@@ -4703,7 +4433,7 @@
     <string name="duplacate_widget_added_snackbar">Aldonis duobligaĵon de la fenestraĵo al la listo.</string>
     <string name="shared_string_duplicate">Duobligi</string>
     <string name="av_notes_photo_widget_desc">Fenestraĵo ebliganta fari foton.</string>
-    <string name="av_notes_video_widget_desc">Fenestraĵo ebliganta registri videan noton.</string>
+    <string name="av_notes_video_widget_desc">Fenestraĵo ebliganta registri filman noton.</string>
     <string name="av_notes_audio_widget_desc">Fenestraĵo ebliganta registri sonan noton.</string>
     <string name="trip_recording_distance_widget_desc">Montras distancon de la nune registrata spuro.</string>
     <string name="trip_recording_downhill_widget_desc">Montras sumon (horizontale) de ĉiuj malsupreniroj por la nune registrata spuro.</string>
@@ -4712,14 +4442,14 @@
     <string name="true_bearing_wdiget_desc">Angulo inter la vera nordo, via pozicio kaj la alcela loko.</string>
     <string name="first_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la unua map-marko.</string>
     <string name="second_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la dua map-marko.</string>
-    <string name="compass_click_desc">Konsilo: frapetu la bildsimbolon de kompaso por ŝanĝi reĝimon de map-turniĝo.</string>
+    <string name="compass_click_desc">Duoble frapetu la bildsimbolon de kompaso por ŝanĝi reĝimon de map-turniĝo.</string>
     <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne enkalkuliĝos al la mezuma rapido.</string>
     <string name="time_to_intermediate_widget_desc">Montras tempon de alveno kaj pluan tempon al la unua intercelo. Tempo estas senĉese aktualigata dum navigado. Kiam intercelo estos pasigita, la fenestraĵo montros tempon al la sekva intercelo.</string>
     <string name="distance_to_intermediate_widget_desc">Montras plian distancon al la unua intercelo. Kiam intercelo estos pasigita, la fenestraĵo montros distancon al la sekva intercelo.</string>
     <string name="time_to_destination_widget_desc">Montras tempon de alveno aŭ pluan tempon al la fina celo. Tempo estas senĉese rekalkulata dum navigado.</string>
     <string name="distance_to_destination_widget_desc">Montras plian distancon al la fina celo.</string>
-    <string name="second_next_turn_widget_desc">Montras informojn pri via post-sekva turniĝo kaj aktiviĝos dum alproksimiĝi turniĝon.</string>
-    <string name="next_turn_widget_desc">Montras informojn pri via sekva turniĝo, bildsimbolon de manovro kaj distancon al la turniĝo.</string>
+    <string name="second_next_turn_widget_desc">Montras informojn pri via postsekva kurbiĝo kaj aktiviĝos dum alproksimiĝi kurbiĝon.</string>
+    <string name="next_turn_widget_desc">Montras informojn pri via sekva kurbiĝo, bildsimbolon de manovro kaj distancon al la kurbiĝo.</string>
     <string name="widget_with_dot">Fenestraĵo.</string>
     <string name="compass_visible_if_map_rotated_desc">Kaŝita kiam nordo troviĝas ĉe supro de la mapo</string>
     <string name="compass_visible_if_map_rotated">Nur kiam mapo turnita</string>
@@ -4743,7 +4473,7 @@
     <string name="map_markers_desc">Fenestraĵo montranta distancon aŭ antaŭkalkulitan tempon de alveno por la du unuaj map-markoj.</string>
     <string name="map_marker_interval_dialog_desc">Enigu la tempodaŭron por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
     <string name="go_to_marker_location">Iri al la map-marko</string>
-    <string name="shared_string_switch_mode">Baskuli reĝimon</string>
+    <string name="shared_string_switch_mode">Baskuligi reĝimon</string>
     <string name="map_widget_zoom_level">Skal-nivelo</string>
     <string name="map_widget_camera_distance_desc">Fenestraĵo montranta altecon de la fotilo super la tero.</string>
     <string name="map_widget_camera_distance">Alteco de fotilo</string>
@@ -4771,9 +4501,7 @@
     <string name="external_sensors_plugin_description">Aliro al eksteraj sentiloj por legi koran pulson, rapidon de pedalado, rapidon kaj povumon de biciklado. Postulas por ke la aparato estu konektita al kongruaj sentiloj per la sendrata protokolo ANT+.</string>
     <string name="map_widget_rendering_fps">Rapido de map-bildigado</string>
     <string name="map_widget_rendering_fps_desc">Montras kiel rapide la mapo kaj ĝiaj elementoj estas bildigataj sur la ekrano (en kadroj en sekundo [FPS]).</string>
-    <string name="ant_missing_dependency_descr">Ne trovis la postulatan servon “%1$s”.
-\nVi devas instali aŭ ĝisdatigi ĝin.
-\nĈu malfermi la vendejon Google Play por instali la servon\?</string>
+    <string name="ant_missing_dependency_descr">Ne trovis la postulatan servon “%1$s”. \nVi devas instali aŭ ĝisdatigi ĝin. \nĈu malfermi la vendejon Google Play por instali la servon?</string>
     <string name="ant_read_data">Legi datumojn</string>
     <string name="map_widget_target_distance">Distanco inter fotilo kaj celo</string>
     <string name="simulate_location_by_gpx">Simuli pozicion per GPX</string>
@@ -4809,31 +4537,7 @@
     <string name="speak_route_recalculation">Sciigi pri rekalkulo de kurso</string>
     <string name="purchases_feature_desc_external_sensors">Havigu vidon kaj registru datumojn de eksteraj sentiloj: rapidon de pedalado, rapidon kaj povumon de biciklado, kaj koran pulson.</string>
     <string name="external_sensors_support">Subteno por eksteraj sentiloj</string>
-    <string name="release_4_3">• nova , pli rapida map-bildigilo kun 2,5-dimensia vido
-\n
-\n• glata vidigo de ŝanĝanta pozicio dum movado
-\n
-\n• novaj fenestraĵoj montrataj koordinatojn kaj altitudon de map-centro
-\n
-\n• “Distanco je frapeto”: eblo ŝanĝi grandon de teksto
-\n
-\n• fenestraĵo “Map-markoj”: eblo agordi agon je frapeti fenestraĵon
-\n
-\n• korektita eblaĵo “Vidigi pozicion ĉiam je centro”
-\n
-\n• GPX-spuroj: subteno por etikedoj “link”, “cmt”, “desc” kaj por ĉiuj propraj etendaĵoj
-\n
-\n• reordigita listo de maraj mapoj
-\n
-\n• subteno por sentiloj ANT+
-\n
-\n• eblo malaktivigi sendi unikan uzant-identigilon «UUID» dum elŝuti mapojn
-\n
-\n• antaŭkalkulitaj alvenaj tempoj konsiderantaj altitudon kaj agorditan rapidon por piediradaj kursoj
-\n
-\n• riparita sinteno de sona eligo kaj sonforteca ŝovilo
-\n
-\n</string>
+    <string name="release_4_3">• nova , pli rapida map-bildigilo kun 2,5-dimensia vido \n \n• glata vidigo de ŝanĝanta pozicio dum movado \n \n• novaj fenestraĵoj montrataj koordinatojn kaj altitudon de map-centro \n \n• “Distanco je frapeto”: eblo ŝanĝi grandon de teksto \n \n• fenestraĵo “Map-markoj”: eblo agordi agon je frapeti fenestraĵon \n \n• korektita eblaĵo “Vidigi pozicion ĉiam je centro” \n \n• GPX-spuroj: subteno por etikedoj “link”, “cmt”, “desc” kaj por ĉiuj propraj etendaĵoj \n \n• reordigita listo de maraj mapoj \n \n• subteno por sentiloj ANT+ \n \n• eblo malaktivigi sendi unikan uzant-identigilon «UUID» dum elŝuti mapojn \n \n• antaŭkalkulitaj alvenaj tempoj konsiderantaj altitudon kaj agorditan rapidon por piediradaj kursoj \n \n• riparita sinteno de sona eligo kaj sonforteca ŝovilo</string>
     <string name="shared_string_open">Malfermi</string>
     <string name="open_weather_action_description">Ebligas al vi malfermi ekranon kun detalaj informoj pri vetero.</string>
     <string name="open_weather_action">Malfermi veter-informojn</string>
@@ -4924,9 +4628,7 @@
     <string name="precipitation_widget_desc">Fenestraĵo montranta precipitaĵojn por la nuna map-centro.</string>
     <string name="weather_pressure_hectopascals">Hektopaskaloj</string>
     <string name="weather_pressure_millimeters_of_mercury">Milimetroj da hidrargo</string>
-    <string name="rendering_engine_failed_descr">OsmAnd retropaŝis al la map-bildigilo en versio 1. Provu rebaskuli al la nova map-bildigilo “Versio 2 (OpenGL)” en agordoj de la aplikaĵo.
-\n
-\nBonvolu subteni ripari erarojn per liveri erar-protokolojn.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd retropaŝis al la map-bildigilo en versio 1. Provu rebaskuligi al la nova map-bildigilo “Versio 2 (OpenGL)” en agordoj de la aplikaĵo. \n \nBonvolu subteni ripari erarojn per liveri erar-protokolojn.</string>
     <string name="weather_widget_group_desc">Fenestraĵoj montrantaj diversajn informojn pri vetero.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inhg">inHg</string>
@@ -4939,14 +4641,14 @@
     <string name="show_borders_of_downloaded_maps">Montri randojn de elŝutitaj mapoj</string>
     <string name="show_map_symbols">Montri simbolojn</string>
     <string name="show_map_symbols_desc">Tekstoj, trafiksignoj kaj aliaj.</string>
-    <string name="map_rendering_engine_descr">La map-bildigilo en versio 2 (OpenGL) estas pli rapida kaj subtenas 2,5-dimensian vidon. La map-bildigilo en versio 1 estis implicita ĝis OsmAnd 4.3 kaj plue estas konsilinda por pli malnovaj aparatoj.</string>
+    <string name="map_rendering_engine_descr">La map-bildigilo en versio 2 (OpenGL) estas pli potenca kaj subtenas 2,5-dimensian vidon. La map-bildigilo en versio 1 estis implicita ĝis OsmAnd 4.3 kaj plue estas konsilinda por pli malnovaj aparatoj.</string>
     <string name="si_nm_mt">Marmejloj/metroj</string>
     <string name="si_nm_ft">Marmejloj/futoj</string>
     <string name="av_audio_format_bottom_sheet_descr">Elekti sonformon. La ujaformo por sono estas 3GP.</string>
     <string name="choose_what_to_sync">Elektu kion samtempigi</string>
     <string name="changes">Ŝanĝoj %1$s</string>
     <string name="cloud_changes">Ŝanĝoj en la nubo</string>
-    <string name="cloud_sync_progress">Samtempigado…%1$s</string>
+    <string name="cloud_sync_progress">Samtempigado… %1$s</string>
     <string name="checking_progress">Kontrolado…</string>
     <string name="shared_string_modified">Modifita</string>
     <string name="res_unknown">Nekonata</string>
@@ -5025,43 +4727,13 @@
     <string name="sort_date_ascending">dato (de plej novaj)</string>
     <string name="shared_string_nearest">proksimeco</string>
     <string name="shared_string_add_manually">Aldoni permane…</string>
-    <string name="cloud_version_confirm_delete">Ĉu forigi “%1$s” el OsmAnd-Nubo\?</string>
+    <string name="cloud_version_confirm_delete">Ĉu forigi “%1$s” el OsmAnd-Nubo?</string>
     <string name="local_version_do_not_exist">Neniu loka versio.</string>
     <string name="shared_string_original">Origina</string>
     <string name="movement_speed">Movrapido</string>
     <string name="app_mode_moped">Motorbiciklo</string>
     <string name="simulation_position_description">Elektu dosieron de spuro, kiu estos uzata por simuli movadon.</string>
-    <string name="release_4_4">• plibonigita menuo “Spuroj” en “Agordi mapon”
-\n
-\n• kunteksta menuo montras tradukitajn nomojn por interesejoj
-\n
-\n• eblo kunhavigi spuron per ligilo
-\n
-\n• eblo elekti marajn mejlojn/futojn por mezurunuo de longo
-\n
-\n• nova reĝimo por map-orientiĝo: “Fiksita (permane turnita)”
-\n
-\n• plisimpligita komenca ekrano
-\n
-\n• fiksita pozicio de loko sur dividita ekrano en Android Auto
-\n
-\n• aldonita diagramo “Dekliveco/Rapido” al analizo de spuro
-\n
-\n• Android 13: agordo pri lingvo aldonita al operaciumaj agordoj
-\n
-\n• riparita problemo pri montrado de veganaj ejoj
-\n
-\n• eblo elŝuti enretajn kahelojn por uzi kiel subtavolan aŭ surtavolan mapon
-\n
-\n• subteno por imperiaj unuoj por “Parametroj de veturilo”
-\n
-\n• nova profilo “Motorbiciklo”
-\n
-\n• nova elekto “Aŭtomata” por la agordo “Markilo de nuna pozicio”
-\n
-\n• riparitaj map-gestoj por 2,5-dimensia vido, pligrandigi kaj turni
-\n
-\n</string>
+    <string name="release_4_4">• plibonigita menuo “Spuroj” en “Agordi mapon” \n \n• kunteksta menuo montras tradukitajn nomojn por interesejoj \n \n• eblo kunhavigi spuron per ligilo \n \n• eblo elekti marajn mejlojn/futojn por mezurunuo de longo \n \n• nova reĝimo por map-orientiĝo: “Fiksita (permane turnita)” \n \n• plisimpligita komenca ekrano \n \n• fiksita pozicio de loko sur dividita ekrano en Android Auto \n \n• aldonita diagramo “Dekliveco/Rapido” al analizo de spuro \n \n• Android 13: agordo pri lingvo aldonita al operaciumaj agordoj \n \n• riparita problemo pri montrado de veganaj ejoj \n \n• eblo elŝuti enretajn kahelojn por uzi kiel subtavolan aŭ surtavolan mapon \n \n• subteno por imperiaj unuoj por “Parametroj de veturilo” \n \n• nova profilo “Motorbiciklo” \n \n• nova elekto “Aŭtomata” por la agordo “Markilo de nuna pozicio” \n \n• riparitaj map-gestoj por 2,5-dimensia vido, pligrandigi kaj turni</string>
     <string name="generate_hillshade_from_3d_maps">Generi nivelombruman kahelan mapon uzante 3-dimensiajn mapojn</string>
     <string name="generate_slope_from_3d_maps">Generi deklivecan kahelan mapon uzante 3-dimensiajn mapojn</string>
     <string name="disable_vertex_hillshade_3d">Malaktivigi vertican nivelombrumon en 3D</string>
@@ -5070,7 +4742,7 @@
     <string name="offline_cache">Kaŝmemoro</string>
     <string name="shared_string_alt_name">Alternativa nomo</string>
     <string name="free_maps_updates">Senpagaj ĝisdatigoj (krizaj)</string>
-    <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
+    <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s. Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
     <string name="clear_online_cache_description">Forviŝi kaŝmemoron de enretaj veteraj kaheloj.</string>
     <string name="clear_online_cache">Forviŝi kaŝmemoron</string>
     <string name="token_is_not_valid">Ĵetono malvalida</string>
@@ -5210,9 +4882,7 @@
 \n
 \nTiu ĉi ago estas neinversigebla.</string>
     <string name="backup_error_delete_account_email_match">Retpoŝta adreso ne kongruas kun uzantnomo</string>
-    <string name="verify_account_deletion_descr">Ni devas verigi vian konton antaŭ forigi ĝin.
-\n
-\nEnigu la retpoŝtan adreson, per kiu ĝi registriĝis. Sekve unufoja pasvorto estos sendita al ĝi.</string>
+    <string name="verify_account_deletion_descr">Ni devas verigi vian konton antaŭ ol forigi ĝin. \n \nEnigu la retpoŝtan adreson, per kiu ĝi registriĝis. Sekve unufoja pasvorto estos sendita al ĝi.</string>
     <string name="osmand_cloud_deleting_account_descr">Baldaŭ ĉiuj viaj datumoj kaj via konto estos forigitaj el OsmAnd-Nubo.
 \n
 \nĈiuj datumoj en la aparato ne perdiĝos.</string>
@@ -5238,49 +4908,7 @@
     <string name="cache_size">Grando de kaŝmemoro</string>
     <string name="shared_string_avoid">Eviti</string>
     <string name="may_be_used_if_there_is_shortcut">Povas esti uzata se pli mallonga kurso</string>
-    <string name="release_4_5">• sentiloj BLE/ANT+: refaris konektadon, konservadon kaj montradon de ricevitaj datumoj al GPX
-\n
-\n• senpaga sekurkopio de ŝatataj punktoj kaj agordoj al OsmAnd-Nubo
-\n
-\n• nova formo de terenaj mapoj kun 3-dimensia reliefo
-\n
-\n• administri spurojn: plibonigita fasado, aldonis ordigadon kaj subtenon por ingitaj dosierujoj
-\n
-\n• Android Auto: nova komenca ekrano kun aliro al ŝatataj punktoj, spuroj kaj kategorioj de interesejoj
-\n
-\n• la samaj disponeblaj fenestraĵoj por supra kaj malsupra paneloj
-\n
-\n• nova profilo “Vagonaro” por kalkuli fervojajn kursojn
-\n
-\n• nivelkurboj kun ĉiuj map-fonto
-\n
-\n• etendita listo de implicitaj agoj por eksteraj klavaroj
-\n
-\n• propraj dosieroj de navigo, eblo superskribi aŭ forigi
-\n
-\n• eblo “Anonci devojiĝon de la kurso”
-\n
-\n• komenca ekrano: eblo restarigi agordaron de OsmAnd el dosiero
-\n
-\n• aldonis klasojn de danĝeraj materialoj por navigo per kamiono en Usono
-\n
-\n• aldonis subtenon por viaferataojn por piedirada navigo
-\n
-\n• vidigo de malfaciloj de kursoj laŭ la CAI-skalo
-\n
-\n• riparis elektilon de lingvo
-\n
-\n• aldonis subtenon por etosaj emblemoj
-\n
-\n• OsmAnd-Nubo: eblo por forigi konton
-\n
-\n• alirebleco: butona tuŝ-areo ŝanĝita al 48 dp; riparita problemo pri videbla uzant-fasado por ekranlegiloj
-\n
-\n• refaritaj japanaj voĉaj anoncoj
-\n
-\n• refaritaj ŝanĝoj de altitudo kaj pritakso de dekliveco
-\n
-\n</string>
+    <string name="release_4_5">• sentiloj BLE/ANT+: refaris konektadon, konservadon kaj montradon de ricevitaj datumoj al GPX \n \n• senpaga sekurkopio de ŝatataj punktoj kaj agordoj al OsmAnd-Nubo \n \n• nova formo de terenaj mapoj kun 3-dimensia reliefo \n \n• administri spurojn: plibonigita fasado, aldonis ordigadon kaj subtenon por ingitaj dosierujoj \n \n• Android Auto: nova komenca ekrano kun aliro al ŝatataj punktoj, spuroj kaj kategorioj de interesejoj \n \n• la samaj disponeblaj fenestraĵoj por supra kaj malsupra paneloj \n \n• nova profilo “Vagonaro” por kalkuli fervojajn kursojn \n \n• nivelkurboj kun ĉiuj map-fonto \n \n• etendita listo de implicitaj agoj por eksteraj klavaroj \n \n• propraj dosieroj de navigo, eblo superskribi aŭ forigi \n \n• eblo “Anonci devojiĝon de la kurso” \n \n• komenca ekrano: eblo restarigi agordaron de OsmAnd el dosiero \n \n• aldonis klasojn de danĝeraj materialoj por navigo per kamiono en Usono \n \n• aldonis subtenon por viaferataojn por piedirada navigo \n \n• vidigo de malfaciloj de kursoj laŭ la CAI-skalo \n \n• riparis elektilon de lingvo \n \n• aldonis subtenon por etosaj emblemoj \n \n• OsmAnd-Nubo: eblo por forigi konton \n \n• alirebleco: butona tuŝ-areo ŝanĝita al 48 dp; riparita problemo pri videbla uzant-fasado por ekranlegiloj \n \n• refaritaj japanaj voĉaj anoncoj \n \n• refaritaj ŝanĝoj de altitudo kaj pritakso de dekliveco</string>
     <string name="free_account">Senpaga konto</string>
     <string name="routing_attr_allow_via_ferrata_name">Sekurigita vojo (viaferatao)</string>
     <string name="free_settings_backup">Senpaga sekurkopio de agordoj</string>
@@ -5302,7 +4930,6 @@
     <string name="rendering_value_caiScale_description">laŭ skalo de Itala Alpisma Klubo</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC/CAS</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifiko de facileco</string>
     <string name="rendering_attr_alpineHiking_description">Maniero klasifiki facilecon de montgrimpadaj kursoj.</string>
     <string name="write_heading">Konservi mov-direkton</string>
     <string name="write_bearing_description">Konservi kompas-direkton al ĉiu punkto dum registri spuron</string>
@@ -5401,29 +5028,7 @@
     <string name="copy_build_version">Kopii version de kompilaĵo</string>
     <string name="most_viewed">Ofte legataj</string>
     <string name="app_mode_baby_transport">Transporto de beboj</string>
-    <string name="release_4_6">• Android Auto: aldonita 3D-reĝimo
-\n
-\n • spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por grandaj dosieroj
-\n
-\n • modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon
-\n
-\n • plibonigita administrado de lokaj rimedoj
-\n
-\n • eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj
-\n
-\n • novaj fenestraĵoj: Glisrilato kaj Pozicio de Suno
-\n
-\n • OsmAnd-Nubo: aliro por forigitaj dosieroj
-\n
-\n • plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento
-\n
-\n • riparitaj problemoj pri travideblaj stataj strioj
-\n
-\n • aldonis fenestraĵon ANT+: temperaturo
-\n
-\n • nova fenestraĵo: Disponebla RAM
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: aldonita 3D-reĝimo \n \n • spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por grandaj dosieroj \n \n • modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon \n \n • plibonigita administrado de lokaj rimedoj \n \n • eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj \n \n • novaj fenestraĵoj: Glisrilato kaj Pozicio de Suno \n \n • OsmAnd-Nubo: aliro por forigitaj dosieroj \n \n • plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento \n \n • riparitaj problemoj pri travideblaj stataj strioj \n \n • aldonis fenestraĵon ANT+: temperaturo \n \n • nova fenestraĵo: Disponebla RAM</string>
     <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}.</string>
     <string name="sensor_temperature_desc">Montras temperaturon de sentilo</string>
     <string name="shared_string_temperature">Temperaturo</string>
@@ -5620,31 +5225,11 @@
     <string name="routing_type_a_star_2_phase">A* 2-faza</string>
     <string name="shared_sting_all_colors">Ĉiuj koloroj</string>
     <string name="lang_ta_in">Tamila (Hinda)</string>
-    <string name="release_4_7">• nova fenestraĵo “Rapidmezurilo” kongrua kun Android Auto
-\n
-\n • eblo alĝustigi ekranon de mapo per aldoni plurajn butonojn “Rapida ago”
-\n
-\n • plibonigita legeblo de datumoj sur diagramoj
-\n
-\n • eblo filtri spurojn laŭ datumoj de eksteraj sentiloj
-\n
-\n • plibonigita alĝustigeblo de aspekto de grupoj de spuroj
-\n
-\n • subteno por pliajn etikedojn por GPX
-\n
-\n • elekto inter precizaj kaj rondigitaj valoroj por distancoj
-\n
-\n • samaspektigita ekrano de elekto de spuro
-\n
-\n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">• nova fenestraĵo “Rapidmezurilo” kongrua kun Android Auto \n \n • eblo alĝustigi ekranon de mapo per aldoni plurajn butonojn “Rapida ago” \n \n • plibonigita legeblo de datumoj sur diagramoj \n \n • eblo filtri spurojn laŭ datumoj de eksteraj sentiloj \n \n • plibonigita alĝustigeblo de aspekto de grupoj de spuroj \n \n • subteno por pliajn etikedojn por GPX \n \n • elekto inter precizaj kaj rondigitaj valoroj por distancoj \n \n • samaspektigita ekrano de elekto de spuro \n \n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0</string>
     <string name="distance_during_navigation">Distanco dum navigi</string>
     <string name="precise">Preciza</string>
     <string name="round_up">Rondigita</string>
-    <string name="distance_during_navigation_description">Maniero vidigi distancon sur navigaj fenestraĵoj (Distanco al celo/intercelo, Sekva turniĝo, Vetur-koridoroj).
-\n
-\nElektu “%1$s”-n por vidigi precizajn valorojn aŭ ”%2$s”-n por pli bona legeblo.</string>
+    <string name="distance_during_navigation_description">Maniero vidigi distancon sur navigaj fenestraĵoj (Distanco al celo/intercelo, Sekva kurbiĝo, Vetur-koridoroj). \n \nElektu “%1$s”-n por vidigi precizajn valorojn aŭ ”%2$s”-n por pli bona legeblo.</string>
     <string name="download_cloud_versions">Elŝuti nubajn versiojn</string>
     <string name="upload_local_versions">Alŝuti lokajn versiojn</string>
     <string name="map_widget_map_scale">Skalo de mapo</string>
@@ -5663,7 +5248,7 @@
     <string name="wall_color">Koloro de muro</string>
     <string name="track_line">Linio de spuro</string>
     <string name="route_line_use_coloring_altitude">Kolorigi linion de kurso laŭ altitudo.</string>
-    <string name="delete_actions_button_confirmation">Ĉu forigi “%1$s” kun ĉiuj aldonitaj agoj?</string>
+    <string name="delete_actions_button_confirmation">Ĉu forigi “%1$s” kun ĉiujn aldonitajn agojn?</string>
     <string name="fixed_height">Konstanta alto</string>
     <string name="downward_gradient">Gradiento malsupren</string>
     <string name="upward_gradient">Gradiento supren</string>
@@ -5674,7 +5259,7 @@
     <string name="explore_3d_track_description">Vidu la spuron interage en 3D! Bildigi altitudon, rapidon kaj pli senpere sur la mapo.</string>
     <string name="maps_that_also_be_used">Aliaj uzotaj mapoj: %1$s</string>
     <string name="getting_list_of_required_maps">Akirado de listo de necesaj mapoj…</string>
-    <string name="required_maps_calculate_online_summary">La listo de mankaj mapoj baziĝas sur kurso en rekta linio. Por akiri la precizan liston de mapoj, OsmAnd povas antaŭkalkuli vian kurson enrete.</string>
+    <string name="required_maps_calculate_online_summary">La listo de mankantaj mapoj baziĝas sur kurso en rekta linio. Por akiri la precizan liston de mapoj, OsmAnd povas antaŭkalkuli vian kurson enrete.</string>
     <string name="required_maps">Necesaj mapoj</string>
     <string name="missing_maps_description">Kelkaj malkonektaj mapoj necesaj por kalkuli tiun ĉi kurson mankas aŭ estas neĝisdataj. Elŝutu aŭ ĝisdatigu tiujn ĉi mapojn.</string>
     <string name="missing_maps_header">Mankaj aŭ neĝisdataj mapoj</string>
@@ -5693,9 +5278,9 @@
     <string name="change_default_tracks_appearance_confirmation">Ĉu apliki ŝanĝojn al ekzistaj spuroj en tiu ĉi dosierujo aŭ nur al novaj?</string>
     <string name="allow_display_on_top">Permesi kovri tekston per teksto</string>
     <string name="allow_display_on_top_description">Permesi al etikedoj sur la mapo kovri unu al la alia</string>
-    <string name="show_debug_info">Montri senerarigaj informoj</string>
+    <string name="show_debug_info">Montri senerarigajn informojn</string>
     <string name="show_debug_info_description">Montri grafikajn informojn pri lokiĝo de ĉiu teksto sur la mapo</string>
-    <string name="map_text">Etikedoj sur la mapo</string>
+    <string name="map_text">Map-bildigado</string>
     <string name="routing_attr_avoid_cobblestone_name">Eviti rulŝtonajn kahelojn</string>
     <string name="routing_attr_avoid_cobblestone_description">Eviti ĝibajn pavimŝtonojn</string>
     <string name="gpx_approximation_geo_cpp">Surbaze de geometrio (C++) (rapide)</string>
@@ -5754,14 +5339,14 @@
     <string name="quick_action_move_map_right">Mapo dekstren</string>
     <string name="quick_action_move_map_down">Mapo malsupren</string>
     <string name="quick_action_new_route">Nova kurso</string>
-    <string name="quick_action_previous_app_profile">Antaŭa aplikaĵa profilo</string>
+    <string name="quick_action_previous_app_profile">Aplikaĵa profilo: antaŭa</string>
     <string name="shared_string_simulate">Simuli</string>
     <string name="quick_action_terrain">Maniero kolorigi terenon</string>
     <string name="quick_action_first_intermediate">Unua intercelo</string>
-    <string name="quick_action_video_note">Videa noto</string>
+    <string name="quick_action_video_note">Filma noto</string>
     <string name="quick_action_photo_note">Fota noto</string>
     <string name="quick_action_track_waypoint">Navigadpunkto al spuro</string>
-    <string name="quick_action_parking_place">Parkumeja pozicio</string>
+    <string name="quick_action_parking_place">Pozicio de parkumo</string>
     <string name="quick_action_verb_pause_resume">Paŭzigi / daŭrigi</string>
     <string name="quick_action_verb_turn_on_off">Ŝalti / malŝalti</string>
     <string name="quick_action_map_style">Map-stilo</string>
@@ -5772,7 +5357,7 @@
     <string name="quick_action_location_by_gpx">Pozicio laŭ GPX</string>
     <string name="quick_action_move_map_up">Mapo supren</string>
     <string name="shared_string_set">Agordi</string>
-    <string name="quick_action_next_app_profile">Sekva aplikaĵa profilo</string>
+    <string name="quick_action_next_app_profile">Aplikaĵa profilo: sekva</string>
     <string name="shared_string_create">Krei</string>
     <string name="shared_string_replace">Anstataŭigi</string>
     <string name="quick_action_display_position_in_center">Markilo de nuna pozicio: ĉiam centre</string>
@@ -5780,33 +5365,7 @@
     <string name="quick_action_verb_show_hide">Montri / kaŝi</string>
     <string name="quick_action_map_underlay">Subtavolo</string>
     <string name="app_profile">Aplikaĵa profilo</string>
-    <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo”
-\n
-\n• alĝustigeblaj koloroj por tereno, spuroj kaj kursoj
-\n
-\n• 3-dimensiaj bildsimboloj de pozicio
-\n
-\n• rapida ago povas esti asignita al ekstera klavaro
-\n
-\n• vetero: modernigita fasado, movbilda vento
-\n
-\n• spuroj: plibonigoj al 3-dimensia vidigo
-\n
-\n• etendita elekto de turismaj kursoj sur la mapo
-\n
-\n• eblo agordi aplikaĵan etoson laŭ map-reĝimo
-\n
-\n• riparitaj statistikoj pri spuroj, ordigado kaj serĉado
-\n
-\n• OSM-redaktilo: forigis simplan (uzantnomo+pasvorto) aŭtentigan metodon
-\n
-\n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14
-\n
-\n</string>
-    <string name="rendering_avg_info_description">Kadroj / sekundo dum lastaj 1k kadroj: %1$s
-\nCPU: %2$s
-\nGPU 1k: %3$s
-\nIDLE 1k: %4$s</string>
+    <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo” \n \n• alĝustigeblaj koloroj por tereno, spuroj kaj kursoj \n \n• 3-dimensiaj bildsimboloj de pozicio \n \n• rapida ago povas esti asignita al ekstera klavaro \n \n• vetero: modernigita fasado, movbilda vento \n \n• spuroj: plibonigoj al 3-dimensia vidigo \n \n• etendita elekto de turismaj kursoj sur la mapo \n \n• eblo agordi aplikaĵan etoson laŭ map-reĝimo \n \n• riparitaj statistikoj pri spuroj, ordigado kaj serĉado \n \n• OSM-redaktilo: forigis simplan (uzantnomo+pasvorto) aŭtentigan metodon \n \n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14</string>
     <string name="energy_avg_info">Statistiko pri energio (mezume 1 /5 /15 minutoj)</string>
     <string name="energy_avg_info_description">Bateri-nivelo je minuto: %1$s
 \nKonsumo de energio (mAh): %2$s</string>
@@ -5825,12 +5384,12 @@
     <string name="view_angle_description">Vidigi konus-forman figuron reprezentantan la rigardatan direkton.</string>
     <string name="view_angle">Rigardata angulo</string>
     <string name="auto_25_chars_route_kr">Veturu je dekstre</string>
-    <string name="auto_25_chars_route_tr">Turniĝu dekstren</string>
-    <string name="auto_25_chars_route_tshr">Turniĝegu dekstren</string>
-    <string name="auto_25_chars_route_tslr">Turniĝetu dekstren</string>
-    <string name="auto_25_chars_route_tl">Turniĝu maldekstren</string>
-    <string name="auto_25_chars_route_tshl">Turniĝegu maldekstren</string>
-    <string name="auto_25_chars_route_tsll">Turniĝetu maldekstren</string>
+    <string name="auto_25_chars_route_tr">Dekstren</string>
+    <string name="auto_25_chars_route_tshr">Akre dekstren</string>
+    <string name="auto_25_chars_route_tslr">Ete dekstren</string>
+    <string name="auto_25_chars_route_tl">Maldekstren</string>
+    <string name="auto_25_chars_route_tshl">Akre maldekstren</string>
+    <string name="auto_25_chars_route_tsll">Ete maldekstren</string>
     <string name="auto_25_chars_route_tu">Turniĝu malantaŭen</string>
     <string name="location_radius_description">Vidigi diskon reprezentantan precizon de determinita pozicio.</string>
     <string name="location_radius">Radiuso de pozicio</string>
@@ -5839,4 +5398,405 @@
 \nĈefprocesoro (senokupa): %3$s
 \nĈefprocesoro (atendas GPU): %4$s</string>
     <string name="auto_25_chars_route_kl">Veturu je maldekstre</string>
+    <string name="driving_region_uk">Britujo kaj similaj</string>
+    <string name="shared_string_automatically">Aŭtomate</string>
+    <string name="detailed_track_guidance">Detala gvidado laŭ spuro</string>
+    <string name="detailed_track_guidance_description">OsmAnd alproksimigos vian spuron al proksimaj vojoj por liveri avertojn pri ĉiu kurbiĝo.</string>
+    <string name="quick_action_routes_summary">Butono por montri/kaŝi “%1$s” sur la mapo.</string>
+    <string name="hugerock_promo">Promocio Hugerock por %1$s monatoj</string>
+    <string name="hugerock_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="driving_region_india">Hindujo</string>
+    <string name="ask_every_time">Ĉiam demandi</string>
+    <string name="compass_click_north_is_up">Por ŝanĝi orientiĝon frapetadu tiun ĉi butonon</string>
+    <string name="route_roundabout_exit">Elektu %1$d-an elveturejon</string>
+    <string name="help_article_map_routes_name">Kursoj</string>
+    <string name="help_article_map_tracks_name">Spuroj</string>
+    <string name="add_widget_below">Aldoni fenestraĵon malsupren</string>
+    <string name="add_widget_above">Aldoni fenestraĵon supren</string>
+    <string name="add_widget_to_the_right">Aldoni fenestraĵon dekstren</string>
+    <string name="add_widget_to_the_left">Aldoni fenestraĵon maldekstren</string>
+    <string name="delete_widget">Ĉu forigi fenestraĵon?</string>
+    <string name="delete_widget_description">Tiu ĉi fenestraĵo estos forigita. Vi povas restarigi ĝin per la menuo “Agordi ekranon”.</string>
+    <string name="battery_saving_mode">Bateri-ŝparema reĝimo</string>
+    <string name="graph_axis">Aksoj sur diagramo</string>
+    <string name="y_axis_description">Elekti maksimume du celarojn por akso Y.</string>
+    <string name="app_mode_suv">Sporta Util-Veturilo</string>
+    <string name="rendering_attr_alpineHiking_name">Malfacileco de turismaj kursoj</string>
+    <string name="quick_action_previous_screen_desc">Butono por iri al antaŭa ekrano.</string>
+    <string name="quick_action_previous_screen_title">Antaŭa ekrano</string>
+    <string name="quick_action_verb_navigate">Navigi</string>
+    <string name="quick_action_drawer_desc">Butono por montri/kaŝi flankan tirmenuon.</string>
+    <string name="quick_action_drawer_title">Tirmenuo</string>
+    <string name="quick_action_search_view_desc">Butono por malfermi/fermi ekranon de serĉo.</string>
+    <string name="quick_action_navigation_view_desc">Butono por malfermi/fermi ekranon de navigo.</string>
+    <string name="quick_action_switch_compass_desc">Butono por ŝanĝi orientiĝon de mapo.</string>
+    <string name="shared_string_interface">Fasado</string>
+    <string name="quick_action_search_view_title">Serĉi</string>
+    <string name="quick_action_navigation_view_title">Navigi</string>
+    <string name="background_opacity">Travideblo de fono</string>
+    <string name="corner_radius">Radiuso de angulo</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="contour_layers_action_descr">Ŝanĝi konturajn tavolojn</string>
+    <string name="search_action_descr">Malfermi serĉon.</string>
+    <string name="navigation_action_descr">Malfermi navigon.</string>
+    <string name="map_3d_mode_action_descr">Ŝanĝi klinecon de mapo.</string>
+    <string name="drawer_button_description">Malfermi la ĉefmenuon.</string>
+    <string name="configure_map_description">Ŝanĝi map-stilon, tavolojn kaj aliajn agordojn.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Montri kursojn por ekstervojaj motorcikloj</string>
+    <string name="raster_layers_action_descr">Ŝanĝi rastrumajn tavolojn</string>
+    <string name="change_zoom_action_descr">Alĝustigi map-pligrandigon.</string>
+    <string name="my_location_action_descr">Centrigi mapon al via nuna pozicio.</string>
+    <string name="type_of_activity">Speco de aktiveco</string>
+    <string name="change_activity">Ŝanĝi aktivecon</string>
+    <string name="shared_string_increase">Pliigi</string>
+    <string name="shared_string_decrease">Malpliigi</string>
+    <string name="wikimedia">Vikimedio</string>
+    <string name="open_in_browser">Malfermi per retfoliumilo</string>
+    <string name="shared_string_source">Fonto</string>
+    <string name="shared_string_no_internet_connection">Neniu interreta konekto</string>
+    <string name="no_internet_descr">Kontrolu vian retkonekton kaj reprovu.</string>
+    <string name="no_photos_available_descr">Neniu foto de uzanto aldonita al tiu ĉi loko</string>
+    <string name="no_photos_available">Neniu disponebla foto</string>
+    <string name="obd_fuel_type_gasoline">benzino</string>
+    <string name="obd_fuel_type_methanol">metanolo</string>
+    <string name="obd_fuel_type_ethanol">etanolo</string>
+    <string name="obd_fuel_type_not_provided">neraportata speco de brulaĵo</string>
+    <string name="obd_fuel_type_diesel">dizeloleo</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_propane">propano</string>
+    <string name="obd_fuel_type_electric">elektro</string>
+    <string name="obd_fuel_type_bifuel_gasoline">plurbrulaĵa, nun benzino</string>
+    <string name="obd_fuel_type_bifuel_methanol">plurbrulaĵa, nun metanolo</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_bifuel_ethanol">plurbrulaĵa, nun etanolo</string>
+    <string name="obd_fuel_type_bifuel_lpg">plurbrulaĵa, nun LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">plurbrulaĵa, nun CNG</string>
+    <string name="obd_fuel_type_bifuel_propane">plurbrulaĵa, nun propano</string>
+    <string name="obd_fuel_type_bifuel_electricity">plurbrulaĵa, nun elektro</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">plurbrulaĵa, nun elektro kaj brulmotoro</string>
+    <string name="obd_fuel_type_hybrid_gasoline">hibrida, nun benzino</string>
+    <string name="obd_fuel_type_hybrid_ethanol">hibrida, nun etanolo</string>
+    <string name="obd_fuel_type_hybrid_diesel">hibrida, nun dizeloleo</string>
+    <string name="obd_fuel_type_hybrid_electric">hibrida, nun elektro</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">hibrida, nun elektro kaj brulmotoro</string>
+    <string name="obd_fuel_type_hybrid_regenerative">hibrida, nun reutiligo</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">plurbrulaĵa, nun hidrogeno</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">hibrida, nun hidrogeno</string>
+    <string name="obd_fuel_type_unknown">nekonata speco de brulaĵo</string>
+    <string name="obd_widget_group">Statistikoj pri veturilo</string>
+    <string name="percent_unit">%</string>
+    <string name="rpm_unit">riv./min</string>
+    <string name="obd_fuel_level_desc">Montras nivelon de brulaĵo raportatan de OBD-sentilo</string>
+    <string name="obd_fuel_left_distance_desc">Montras vetureblan distancon per la nuna brulaĵ-nivelo raportatan de OBD-sentilo</string>
+    <string name="obd_air_intake_temp">Temperaturo de eniga aero</string>
+    <string name="obd_ambient_air_temp">Temperaturo de ĉirkaŭaĵo</string>
+    <string name="obd_battery_voltage">Tensio de baterio</string>
+    <string name="obd_engine_coolant_temp">Temperaturo de malvarmiga likvaĵo</string>
+    <string name="obd_fuel_level">Brulaĵa efikeco (%)</string>
+    <string name="obd_plugin_name">Statistikoj pri veturilo</string>
+    <string name="obd_fuel_consumption_rate">Konsum-rapido de brulaĵo</string>
+    <string name="obd_fuel_consumption_rate_desc">Montras konsum-rapidon de brulaĵo raportatan de OBD-sentilo</string>
+    <string name="obd_fuel_type">Speco de brulaĵo</string>
+    <string name="obd_plugin_description">Ebligas kontroli parametrojn de aŭtomobilo per la protokolo OBD-II. Alireblaj datumoj:\n• rivolua rapido de motoro, ĝia labortempo, ĝia kalkulita ŝargo\n• konsumo de brulaĵo, premo de brula, resta brulaĵo\n• temperaturoj de: eniga aer-kolektilo, fono, malvarmiga likvaĵo, motoroleo\n• rapido de veturilo, pozicio de brulaĵ-valvo, tensio de baterio.\n</string>
+    <string name="obd_support">Subteno por OBD</string>
+    <string name="obd_fuel_type_hydrogen">hidrogeno</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="obd_rpm_desc">Montras rivoluan rapidon de motoro raportatan de OBD-sentilo</string>
+    <string name="obd_fuel_type_desc">Montras specon de brulaĵo raportatan de OBD-sentilo</string>
+    <string name="unknown_bt_device">Nekonata aparato</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">Montras VIN-numeron raportatan de OBD-sentilo</string>
+    <string name="vehicle_metrics_plugin_settings">Agordoj pri statistikoj pri veturilo</string>
+    <string name="reset_average_speed">Nuligi mezuman rapidon</string>
+    <string name="start_trip_recording_first_m">Unue komencu registri spuron.</string>
+    <string name="new_segment_started_m">Komencis registri novan segmenton de spuro.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Konservi spuron kaj pluigi</string>
+    <string name="new_trip_segment">Nova segmento de spuro</string>
+    <string name="quick_action_start_pause_recording">Butono por ekigi, paŭzigi kaj plugi registri GPX-spuron.</string>
+    <string name="quick_action_verb_start_pause">Ekigi / paŭzigi</string>
+    <string name="help_article_personal_color_palette_schemes_name">Kolor-skemoj</string>
+    <string name="movies_list">Listo de filmetoj</string>
+    <string name="third_links">Neoficialaj ligiloj</string>
+    <string name="track_does_not_contain_data_to_save">Spuro enhavas neniun datumon por konservi.</string>
+    <string name="quick_action_finish_trip_recording_summary">Butono por konservi GPX-spuron kaj fini registradon.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Butono por konservi la nune registratan spuron kiel GPX-dosieron kaj pluigi registri spuron.</string>
+    <string name="quick_action_new_trip_segment">Butono por ekigi novan segmenton en la nune registrata GPX-spuro.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="lock_screen_description">Aktivigi aŭ malaktivigi tuŝekranon por evitigi senintencajn frapetojn</string>
+    <string name="lock_screen">Ŝlosi ekranon</string>
+    <string name="record_obd_data">Registri statistikojn pri veturilo</string>
+    <string name="fuel_tank_capacity_description">Enigu enhavecon de via brulaĵujo por precize spuri nivelon kaj konsumon de brulaĵo</string>
+    <string name="fuel_tank_capacity">Enhaveco de brulaĵujo</string>
+    <string name="shared_strings_dimensions">Dimensioj</string>
+    <string name="litres">Litroj</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Britaj galjonoj</string>
+    <string name="us_gallons">Usonaj galjonoj</string>
+    <string name="unit_of_volume_description">Elektata mezurunuo estos aplikita al ĉiuj volumen-rilataj datumoj en la nuna profilo.</string>
+    <string name="unit_of_volume">Unuo de volumeno</string>
+    <string name="dynamic_icon_type_summary">Bildsimbolo ŝanĝiĝas laŭ stato de ago.</string>
+    <string name="shared_string_dynamic">Dinamika</string>
+    <string name="obd_connected_to_device">Konektita kun %s</string>
+    <string name="obd_not_connected_to_device">Malkonektita de %s</string>
+    <string name="obd_connecting_to_device">Konektata kun %s</string>
+    <string name="bt_start_pair_failed">Ne povas ekigi kupli la aparaton</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Konsumo de brulaĵo (l/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/100 km)</string>
+    <string name="simulate_obd">Simuli OBD-datumojn</string>
+    <string name="obd_engine_runtime">Labortempo de motoro</string>
+    <string name="obd_engine_runtime_desc">Montras kiel longe la motoro laboris ekde ĝia starto.</string>
+    <string name="obd_fuel_pressure">Premo de brulaĵo</string>
+    <string name="obd_fuel_pressure_desc">Montras premon en la brulaĵa sistemo</string>
+    <string name="obd_calculated_engine_load">Kalkulita ŝarĝo de motoro</string>
+    <string name="speedometer_maximum">Maksimumo</string>
+    <string name="obd_throttle_position">Pozicio de brulaĵ-valvo</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_level_percent">Nivelo de brulaĵo (%)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Konsumo de brulaĵo (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Konsumo de brulaĵo (sentilo)</string>
+    <string name="obd_fuel_level_liter">Nivelo de brulaĵo (l)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/h)</string>
+    <string name="obd_fuel_left_km">Resta brulaĵo (km)</string>
+    <string name="obd_calculated_engine_load_desc">Montras elcenton de aktuale uzata povo de la motoro.</string>
+    <string name="obd_engine_oil_temperature_desc">Montras temperaturon de motoroleo.</string>
+    <string name="obd_fuel_consumption_rate_scanner">Konsumo de brulaĵo (OBD)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Konsumo de brulaĵo</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Montras konsumon de brulaĵo de via veturilo surbaze de sentilo (l/h)</string>
+    <string name="obd_engine_oil_temperature">Temperaturo de motoroleo</string>
+    <string name="liter">l</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Konsumo de brulaĵo (%/h)</string>
+    <string name="obd_nothing_found_description">Certiĝu, ke:\n – Bludento estas aktiva;\n – motoro de la veturilo laboras;\n – via aparato estas ene atingo de la skanilo.</string>
+    <string name="route_guidance">Sciigoj pri kurso</string>
+    <string name="obd_widget_engine_speed">Rivolua rapido de motoro</string>
+    <string name="obd_widget_vehicle_speed">Rapido de veturilo</string>
+    <string name="route_guidance_desc">Liveras jamajn sciigojn pri kurso: distancon ĝis sekva kurbiĝo, strat-nomon (aktualan kaj sekvan) kaj informojn pri vetur-koridoroj. Fenestraĵoj estas aktivaj dum navigi.</string>
+    <string name="obd_nothing_found_text">Neniu trovita skanilo</string>
+    <string name="obd_bluetooth_off_description">Aktivigu Bludenton por serĉi kaj konekti skanilojn.</string>
+    <string name="obd_device_forget_sensor">Forgesi skanilon</string>
+    <string name="obd_searching_text_description">Tenu vian aparaton proksime al la skanilo. Certiĝu, ke motoro de la veturilo laboras.</string>
+    <string name="obd_searching_text">Serĉado de skaniloj</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s je %2$s</string>
+    <string name="vehicle_metrics_obd_ii">Statistikoj pri veturilo (OBD-II)</string>
+    <string name="shared_string_hour">Horo</string>
+    <string name="shared_string_volume">Volumeno</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Uzi mezurunuojn laŭ nomo.</string>
+    <string name="remaining_fuel_description">Montras kvanton da brulaĵo restantan en brulaĵujo de la veturilo</string>
+    <string name="remaining_fuel">Resta brulaĵo</string>
+    <string name="obd_fuel_consumption">Konsum-rapido de brulaĵo</string>
+    <string name="reset_average_value">Nuligi mezuman valoron</string>
+    <string name="average_value_slider_description">Elekti tempdaŭron por mezuri la mezuman valoron.</string>
+    <string name="shared_string_instant">Momenta</string>
+    <string name="current_temperature">Nuna temperaturo</string>
+    <string name="average_temperature">Mezuma temperaturo</string>
+    <string name="obd_battery_voltage_desc">Montras tension de baterio de la veturilo</string>
+    <string name="obd_ambient_air_temp_desc">Montras temperaturon ekster la veturilo.</string>
+    <string name="learn_more_about_obd_sensors">Pliaj informoj pri sentiloj.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spuru bazajn datumojn via veturilo per la protokolo OBD-II. Observu bazajn parametrojn: rapidon, rivoluan rapidon de motoro, konsumon de brulaĵo kaj pli.</string>
+    <string name="release_4_9">• nova plenekrana galeria vidigilo por Vikimediaj fotoj\n\n• nova kromprogramo “Statistikoj pri veturilo” por observi parametrojn de aŭtomobilo per la protokolo OBD-II\n\n• eblo asigni aktivecojn al spuroj kaj filtri ilin\n\n• novaj rapidaj agoj por registri kurson kaj por ŝlosi ekranon\n\n• alĝustigeblaj kaj moveblaj butonoj sur la mapo\n\n• aldonis kuntekstan menuon kaj la agon “Nuligi mezuman rapidon” al fenestraĵoj\n\n• nova tavolo de kursoj: “Teren-motorciklaj kursoj”\n\n• riparis problemon pri “Aŭtomate registri spuron dum navigi”\n\n• riparis problemon pri inversaj koordinatoj en lingvoj skribataj maldekstren\n\n• riparis mankantajn sentilajn datumojn por nune registrata spuro\n\n• aldonis informojn pri proksimaj areoj de la elektita punkto\n\n• butono de rapida ago por alĝustigi videblon de OSM-redaktoj\n\n• apartaj videblaj parametroj por kolorigi terenon\n\n• aldonis premeblan bildsimbolon por vidigi aliron kaj aliajn atributojn de vojoj</string>
+    <string name="obd_fuel_consumption_desc">Montras kiel rapide brulaĵo estas uzata de la motoro, kalkulita konsiderante restantan brulaĵon, enhavecon de brulaĵujo kaj distancon determinitan per GPS.</string>
+    <string name="average_temperature_slider_description">Elekti tempdaŭron por mezuri la mezuman temperaturon.</string>
+    <string name="obd_speed_desc">Montras rapidon de la veturilo mezuratan de aŭtomobila rapidmezurilo.</string>
+    <string name="obd_air_intake_temp_desc">Montras temperaturon de aero, kiu enigas la motoron per la eniga aer-kolektilo.</string>
+    <string name="obd_engine_coolant_temp_desc">Montras temperaturon de malvarmigan likvaĵon de la motoro</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Teren-motorciklaj kursoj</string>
+    <string name="screen_is_unlocked">Tuŝekrano estas malŝlosita.</string>
+    <string name="screen_is_locked_by_action_button">Tuŝekrano estas ŝlosita. Frapetu la butonon por malŝlosi.</string>
+    <string name="screen_is_locked_by_external_button">Tuŝekrano estas ŝlosita. Por malŝlosi, premu la butonon %1$s aŭ frapetu la surekranan butonon.</string>
+    <string name="show_minor_turns_descr">Sciigoj pri vetur-koridoroj estos montrataj ĉe ĉiuj vojkruciĝoj malgraŭ voĉaj sciigoj</string>
+    <string name="wunderlinq_datagrid">WunderLINQ-datum-krado</string>
+    <string name="show_minor_turns">Montri ĉe nesignifaj vojkruciĝoj dum veturi rekten</string>
+    <string name="obd_device_forget_sensor_description">Skanilo estos forigita el la listo. Vi ĉiam povos denove kupli tiun ĉi skanilon.</string>
+    <string name="connect_obd_instructions_title">OsmAnd ebligas konekti per Bludento al skaniloj OBD-II.</string>
+    <string name="obd_vehicle_info">Informoj pri veturilo</string>
+    <string name="shared_string_bluetooth">Bludento</string>
+    <string name="connect_obd_instructions_step4">Premu la butonon “%1$s” kaj elektu vian skanilon el la listo.</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="obd_fuel_left_liters">Resta brulaĵo (litroj)</string>
+    <string name="connect_obd_instructions_step">1. Konektu la skanilon al konektilo OBD-II de via veturilo.\n\n2. Ekfunkciu motoron.\n\n3. Aktivigu Bludenton ĉe via aparato.\n\n4. Frapetu “%1$s” kaj elektu vian skanilon el la listo.</string>
+    <string name="quick_action_showhide_osm_edits_descr">Butono por montri/kaŝi lokajn OSM-redaktojn sur la mapo.</string>
+    <string name="connect_obd_instructions_step1">Konektu la skanilon al konektilo OBD-II de via veturilo.</string>
+    <string name="obd_how_to_connect">Kiel konekti:</string>
+    <string name="connect_obd_instructions_step2">Ekfunkciu motoron.</string>
+    <string name="connect_obd_instructions_step3">Aktivigu Bludenton ĉe via aparato.</string>
+    <string name="obd_throttle_position_desc">Montras malfermecon de brulaĵ-valvo en la korpo de brulaĵ-valvo.</string>
+    <string name="auto_zoom_3d_angle">Angulo de aŭtomata skalado</string>
+    <string name="av_audio_sample_rate">Sona specimenrapido</string>
+    <string name="av_audio_sample_rate_descr">Elekti specimen-rapidon (samplorapidon) de sondosiero.</string>
+    <string name="preview_next_turn">Antaŭvidi sekvan kurbiĝon</string>
+    <string name="connect_new_scanner">Konekti novan skanilon</string>
+    <string name="vehicle_metrics_recording_description">Elekti parametrojn por registri al la GPX-dosiero.</string>
+    <string name="shared_string_engine">Motoro</string>
+    <string name="location_interpolation_percent">Elcento de interpolo de pozicio</string>
+    <string name="location_interpolation_percent_desc">Agordi elcenton de alproksimigo de pozicio dum navigi laŭ kurso. Tiu ĉi parametro malpliigas prokraston vidigi vian movbildan pozicion sur la mapo.</string>
+    <string name="shared_string_interpolation">Interpolo</string>
+    <string name="selected_delayed_profile">Elektis profilon “%s”</string>
+    <string name="default_buttons_corners_original_description">Ĉiu butono tenos sian propran rondecon (radiuson de angulo).</string>
+    <string name="default_buttons_opacity_original_description">Ĉiu butono tenos sian propran travideblon de interna fono.</string>
+    <string name="default_buttons_size_original_description">Ĉiu butono tenos sian propran grandon.</string>
+    <string name="calculate_size">Kalkuli grandon</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Grimpadaj kursoj</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Montri grimpadajn kursojn</string>
+    <string name="calculating_indication_message">Kalkulado…</string>
+    <string name="display_distance_to_first_intermediate_summary">Montras tempon kaj distancon al la sekva intercelo. Malaktiviĝu por ĉiam montri detalojn pri la fina celo.</string>
+    <string name="display_distance_to_first_intermediate">Montri detalojn pri kurso al la sekva intercelo</string>
+    <string name="shared_string_length">Longo</string>
+    <string name="popular_places_nearby">Proksimaj popularaj ejoj</string>
+    <string name="recently_visited">Historio</string>
+    <string name="shared_string_avg_altitude">Mezuma altitudo</string>
+    <string name="meridian_180">180-a meridiano</string>
+    <string name="shared_string_online_only">Nur enrete</string>
+    <string name="choose_location">Elekti lokon</string>
+    <string name="point_location">Pozicio de punkto</string>
+    <string name="shared_string_manual">elektebla</string>
+    <string name="shared_string_map_center">map-centro</string>
+    <string name="choose_location_on_map">Elektu lokon sur la mapo.</string>
+    <string name="intermediate_first">Intercelo unue</string>
+    <string name="destination_first">Fincelo unue</string>
+    <string name="display_priority">Prioritato de montrado</string>
+    <string name="row_height">Alto de vico</string>
+    <string name="add_widget">Aldoni fenestraĵon</string>
+    <string name="shared_string_offline_only">Nur malkonekte</string>
+    <string name="prime_meridian">1-a meridiano</string>
+    <string name="equator">Ekvatoro</string>
+    <string name="layer_coordinates_grid">Krado de koordinatoj</string>
+    <string name="show_image_previews">Antaŭvidi bildojn</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Butono por montri/kaŝi kradon de koordinatoj sur la mapo.</string>
+    <string name="poi_source">Fonto de interesejoj</string>
+    <string name="ais_load_data">Enlegi AIS-datumojn el dosiero</string>
+    <string name="hmd_promo">Promocio HMD por %1$s monatoj</string>
+    <string name="hmd_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monatoj</string>
+    <string name="shared_string_road_exit">Elveturejo</string>
+    <string name="popular_places">Popularaj lokoj</string>
+    <string name="show_list">Montri liston</string>
+    <string name="save_favorite_default_appearance">Ĉu apliki ŝanĝojn al ĉiuj ekzistaj punktoj en tiu ĉi dosierujo aŭ nur al novaj punktoj?</string>
+    <string name="original_icon_description">Ĉiu punkto tenos sian propran bildsimbolon.</string>
+    <string name="original_shape_description">Ĉiu punkto tenos sian propran formon.</string>
+    <string name="apply_to_all_points">Apliki al ĉiuj punktoj</string>
+    <string name="original_color_description">Ĉiu punkto tenos sian propran koloron.</string>
+    <string name="map_widget_route_information_desc">Montras proksimuman tempon de alveno, restan tempon kaj restan distancon por la aktiva kurso.</string>
+    <string name="ais_cpa_warning_distance">Averta distanco por la plej proksima punkto de alproksimiĝo (CPA)</string>
+    <string name="ais_address_settings">Agordoj pri IP-adresoj</string>
+    <string name="plugin_ais_tracker_name">Spurilo de AIS-ŝipoj</string>
+    <string name="shared_string_default_view">Implicita vido</string>
+    <string name="ais_cpa_settings">Agordoj pri CPA</string>
+    <string name="ais_object_lost_timeout">Templimo por videblo de perditaj objektoj</string>
+    <string name="shared_string_avg_speed">Minimuma rapido</string>
+    <string name="ais_nmea_protocol">Protokolo por ricevi NMEA-datumojn</string>
+    <string name="show_grids">Montri kradon</string>
+    <string name="ais_port_nmea_local">UDP-pordo de loka NMEA-datum-ricevilo</string>
+    <string name="ais_port_nmea_local_description">Difini UPD-pordon je kiu OsmAnd ricevas NMEA-datumojn</string>
+    <string name="ais_object_lost_timeouts">Templimo por ricevi AIS-signalojn</string>
+    <string name="ais_ship_lost_timeout">Templimo por videblo de ŝipo kiam neniu signalo riceviĝas.</string>
+    <string name="ais_ship_lost_timeout_description">Agordi templimon por videblo de ŝipo: post tiu tempo sen ricevi signalon, la emblemo de ŝipo sur la ekrano estos trastrekita.</string>
+    <string name="ais_cpa_warning_time_description">Se la tempo por atingi CPA kun alia ŝipo (TCPA) kun alia ŝipo estas malpli granda ol tiu ĉi valoro, la ŝipo estos markita ruĝe.</string>
+    <string name="no_photo_for_location_desc">Neniu foto de uzanto aldonita al tiu ĉi loko</string>
+    <string name="show_utm_grids_description">Montri la kradon en metroj laŭ UTM anstataŭ laŭ WGS84</string>
+    <string name="ais_address_settings_description">Elekti protokolon por NMEA (UDP/TCP) kaj difini adresojn kaj pordojn</string>
+    <string name="ais_nmea_protocol_description">Elekti protokolon por ricevi NMEA-datumojn</string>
+    <string name="ais_address_nmea_server">IP-adreso de NMEA-datum-fonto</string>
+    <string name="ais_address_nmea_server_description">Difini IP-adreson por NMEA-datum-fonto (se TCP estas uzata)</string>
+    <string name="ais_port_nmea_server">TCP-pordo de NMEA-datum-fonto</string>
+    <string name="map_widget_route_information">Informoj pri kurso</string>
+    <string name="no_places_available">Neniu loko en la videbla regiono</string>
+    <string name="show_grids_description">Vidigas koordinatan kradon sur la mapo</string>
+    <string name="show_utm_grids">Uzi UTM anstataŭ WGS84</string>
+    <string name="ais_cpa_warning_time">Averta tempo por atingi la plej proksiman punkton de alproksimiĝo (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Markas ŝipojn ruĝe, se la plej proksima punkto de alproksimiĝo (CPA) estas malpli granda ol la difinita valoro kaj la tempo por atingi la plej proksiman punkton de alproksimiĝo (TCPA) estas malpli granda ol la agordo \"Averta tempo por…(CPA)\".</string>
+    <string name="plugin_ais_tracker_disclaimer">MALGARANTIO\n\nTiu ĉi kromprogramo estas amatora projekto, kiu ne estas projektita por krizokazaj aplikoj. Ĝia senmalfunkcieco kaj akurateco ne estas garantiata. Ne baziĝu sur tiu ĉi programo por marnavigado, vivsekureco kaj aliaj gravaj operacioj.</string>
+    <string name="ais_object_lost_timeouts_description">Agordi valorojn de templimojn por identigi perditajn AIS-objektojn, se neniu signalo estas ricevita dum difinita tempo.</string>
+    <string name="ais_port_nmea_server_description">Difini TCP-pordon por NMEA-datum-fonto</string>
+    <string name="ais_object_lost_timeout_description">Agordi templimon por videblo de AIS-objektoj: se neniu signalo estos ricevita dum la difinita tempo, la AIS-objekto aŭtomate foriĝos de la ekrano.</string>
+    <string name="ais_cpa_settings_description">Valoroj difinantaj kiel vidigi AIS-objektojn, kiu povas esti tro proksimaj al via pozicio.</string>
+    <string name="plugin_ais_tracker_description">Montri poziciojn kaj informojn de AIS pri proksimaj ŝipoj. La AIS-datumoj estas ricevataj el ekstera AIS-ricevilo.</string>
+    <string name="show_dm_grids_description">Montri la kradon en gradoj kaj minutoj, anstataŭ nur en gradoj aŭ en gradoj, minutoj, sekundoj</string>
+    <string name="map_grid">Koordinataj kradoj</string>
+    <string name="show_dms_grids">Uzi gradojn, minutojn kaj sekundojn</string>
+    <string name="show_dm_grids">Uzi gradojn kaj minutojn</string>
+    <string name="show_dms_grids_description">Montri la kradon en gradoj, minutoj kaj sekundoj anstataŭ nur en gradoj</string>
+    <string name="show_mercator_grids">Uzi Merkator anstataŭ WGS aŭ UTM</string>
+    <string name="show_mercator_grids_description">Montri la kradon en kilometroj laŭ merkatora projekcio anstataŭ laŭ WGS84 aŭ UTM</string>
+    <string name="read_on_wiki">Legi en Vikipedio</string>
+    <string name="prediction_time_advanced_description">Alĝustigi antaŭkalkulan (anticipan) tempon por minimumigi prokraston.</string>
+    <string name="routing_attr_allow_ferries_name">Permesi pramojn</string>
+    <string name="grid_color">Koloro de krado</string>
+    <string name="shared_string_edges">randoj</string>
+    <string name="labels_position">Pozicio de etikedoj</string>
+    <string name="prediction_time">Antaŭkalkula tempo</string>
+    <string name="shared_string_no_animation">Ne animita</string>
+    <string name="routing_attr_allow_ferries_description">Permesi navigi tra pramaj kursoj</string>
+    <string name="customize_grid_color">Alĝustigi koloron de krado</string>
+    <string name="wikidata">Vikidatumoj</string>
+    <string name="position_animation_empty_banner_description">Bildsimbolo de pozicio moviĝas kun ĉiu determinita pozicio sen transpasa efiko.</string>
+    <string name="prediction_time_description">Bildsimbolo de pozicio en OsmAnd moviĝas kun ĉiu GPS-signalo (unufoje je sekundo). Sensignifa prokrasto en moviĝo povas aperi, precipe dum rapida movo aŭ kiam GPS-signalo malaperas.</string>
+    <string name="position_animation">Animi pozicion</string>
+    <string name="wiki_around">Proksimaj popularaj lokoj</string>
+    <string name="release_5_0">• esplori la plej popularajn interesejojn en la nova serĉa reĝimo “Esplori”\n\n• eblo serĉi ĉiujn kursojn en OSM, piedirado, biciklado kaj pli\n\n• novaj navigaj fenestraĵoj kunigas sagetojn de turniĝoj kun navigaj instrukcioj\n\n• fenestraĵo “Informoj pri kurso” nun montras proksimuman tempon de alveno, pluan tempon kaj distancon\n\n• eblo elekti skivojojn kaj montbiciklajn kursojn sur la mapo por vidigi detalajn informojn\n\n• eblo agordi grandon de dekstra/maldekstra fenestraĵo\n\n• aldonis kradon de geografiajn koordinatoj\n\n• eblo alĝustigi implicitan aspekton de grupoj de ŝatataj punktoj\n\n• Android Auto: vidigi proksimuman tempon de alveno kaj distancon por sekva intercelo, nomoj de urboj montrataj en serĉ-rezultoj\n\n• elstaraj montpintoj esploreblaj sur la serĉilo\n\n• eblo vidigi alton de montpintoj en futoj\n\n• aldonis areojn de grimpado sur la mapo\n\n• plibonigita serĉado de adresoj en Usono\n\n• hebrea voĉo por navigi</string>
+    <string name="route_members">Anoj</string>
+    <string name="route_part_of">Parto de</string>
+    <string name="multipoligon_related">Rilataj</string>
+    <string name="cant_load_map_styles">Ne povas enlegi map-stilojn.</string>
+    <string name="add_to_navigation">Aldoni por navigi</string>
+    <string name="msg_favorites_skipped_as_existing">Ignoris %1$d ŝatata(j)n punkto(j)n pro jam ekzisti.</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Kopiis %1$d GPX-navigadpnkto(j)n al ŝatataj.</string>
+    <string name="save_to_device_error">Eraro dum konservi al aparato</string>
+    <string name="save_to_device">Konservi al aparato</string>
+    <string name="saved_to_device">Konservis al aparato</string>
+    <string name="travel_guides">Gvidiloj</string>
+    <string name="show_debug_tile">Montri informojn pri kahelo</string>
+    <string name="show_debug_tile_description">Montri informojn pri simboloj por ĉiu map-kahelo</string>
+    <string name="show_symbols_debug_info">Montri senerarigajn informojn pri simboloj</string>
+    <string name="deactivated_map">Malaktiva mapo</string>
+    <string name="suggest_activate_map_msg">La mapo “%1$s” estas malaktiva,\naktivigu ĝin por bildigi tiun ĉi areon.</string>
+    <string name="unit_of_temperature_description">Elektata mezurunuo estos aplikita al ĉiuj temperatur-rilataj datumoj en la nuna profilo.</string>
+    <string name="read_on">Legi en %1$s</string>
+    <string name="hmd_promo_years">Promocio HMD por %1$s jaroj</string>
+    <string name="hmd_promo_description_years">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s jaroj</string>
+    <string name="uphill_downhill_split">Supreniro / malsupreniro</string>
+    <string name="shared_string_flat">Ebeno</string>
+    <string name="shared_string_split_by">Dividi laŭ</string>
+    <string name="shared_string_switch">Ŝanĝi</string>
+    <string name="set_home">Agordi kiel hejmon</string>
+    <string name="set_intermediate_point">Agordi kiel intercelon</string>
+    <string name="set_start_point">Agordi kiel komencejon</string>
+    <string name="ski_route_switch_style_description">Esplori descendejojn, telferojn kaj pli kun la map-stilo Vintro kaj skiado.</string>
+    <string name="battery">baterio</string>
+    <string name="sensor_data">Datumoj de sentilo</string>
+    <string name="battery_level">Nivelo de baterio</string>
+    <string name="set_parking_position">Agordi kiel pozicion de parkumado</string>
+    <string name="set_work">Agordi kiel laborejon</string>
+    <string name="release_5_1">• subteno por aĉeti retejan kaj pluroperaciuman version\n\n• movis elekton de temperaturaj unuoj al Ĝeneralaj agordoj\n\n• aldonis subtenon por nivelo de baterio al BLE-sentiloj\n\n• nova, pli intuicia maniero elekti punktojn por navigi\n\n• plibonigita videblo de fenestraĵoj kun nova konturo\n\n• aldonis analizilon de (mal)supreniroj\n\n• plivastigita interago kun Vikipedio/Vikivojaĝoj al pliaj interesejoj</string>
+    <string name="years_3">tri jaroj</string>
+    <string name="osm_live_payment_3_years_title">Ĉiu-3-jare</string>
+    <string name="three_years_subscription">Trijara abono</string>
+    <string name="osm_live_payment_renews_3_years">Reaboni ĉiutrijare</string>
+    <string name="deleting">Forigado…</string>
+    <string name="deleting_history">Forigado de historio…</string>
+    <string name="show_rasterization_debug_tile">Montri informojn pro bildigado de kaheloj</string>
+    <string name="show_symbols_bboxes">Montri limigajn kestojn de simboloj</string>
+    <string name="shared_string_threads">Fadenoj</string>
+    <string name="threads_allocated_for_rendering">Fadenoj asignitaj por bildigado</string>
+    <string name="threads_allocated_for_rendering_desc">Malpliigo de asignitaj fadenoj povas iuokaze plirapidigi map-bildigadon.</string>
+    <string name="turn_by_turn_directions">Gvidiloj pri kurso</string>
+    <string name="failed_to_connect">Malsukcesis konekti al %1s</string>
+    <string name="enable_msaa">Aktivigi plurspecimenan glatigon (MSAA)</string>
+    <string name="next_turn_information">Informoj pri sekva kurbiĝo</string>
+    <string name="next_turn_information_desc">Montras direkton de la sekva manovro kaj nomon de strato.</string>
+    <string name="description_purchases_fastspring">Vi povas administri viajn aĉetojn per kont-agordoj en la retejo FastSpring.</string>
+    <string name="description_subscription_fastspring">Vi povas administri aŭ nuligi vian abonon per kont-agordoj en la retejo FastSpring.</string>
+    <string name="manage_purchases">Administri aĉetojn</string>
+    <string name="map_orientation_portrait_inverted">Vertikala (inversa)</string>
+    <string name="map_orientation_landscape_inverted">Horizontala (inversa)</string>
+    <string name="reverse_mode_calculate_route">Kalkuli kurson</string>
+    <string name="reverse_mode_calculate_route_desc">Kalkuli novan plejbonigitan kurson al la komenco.</string>
+    <string name="reverse_mode_original_track">Origina kurso</string>
+    <string name="reverse_mode_original_track_desc">Gvidas la ekzaktan inversan kurson al la starto.\nAverto: tio ĉi povas esti danĝera pro ignori unudirektecon de vojoj.</string>
+    <string name="reverse_mode">Inversa reĝimo</string>
+    <string name="n_a">n/a</string>
+    <string name="altitude_metrics_description">Difini unuon uzatan por vidigi altitudon en fenestraĵoj kaj statistikoj.</string>
+    <string name="write_location_provider_description">Konservi pozici-trovan servon por ĉiu punkto dum registri spuron</string>
+    <string name="write_location_provider">Konservi pozici-trovan servon</string>
 </resources>

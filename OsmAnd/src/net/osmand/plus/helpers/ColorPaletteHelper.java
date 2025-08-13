@@ -8,9 +8,9 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.gradient.DuplicateGradientTask;
 import net.osmand.plus.card.color.palette.gradient.DuplicateGradientTask.DuplicateGradientListener;
@@ -18,14 +18,13 @@ import net.osmand.plus.plugins.srtm.CollectColorPalletTask;
 import net.osmand.plus.plugins.srtm.CollectColorPalletTask.CollectColorPalletListener;
 import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.util.Algorithms;
+import net.osmand.shared.ColorPalette;
+import net.osmand.shared.io.KFile;
+import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -56,11 +55,11 @@ public class ColorPaletteHelper {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
 		String colorTypePrefix = ROUTE_PREFIX + type.name().toLowerCase() + GRADIENT_ID_SPLITTER;
 
-		File colorPalletsDir = getColorPaletteDir();
-		File[] colorFiles = colorPalletsDir.listFiles();
+		KFile colorPalletsDir = getColorPaletteDir();
+		List<KFile> colorFiles = colorPalletsDir.listFiles();
 		if (colorFiles != null) {
-			for (File file : colorFiles) {
-				String fileName = file.getName();
+			for (KFile file : colorFiles) {
+				String fileName = file.name();
 				if (fileName.startsWith(colorTypePrefix) && fileName.endsWith(TXT_EXT)) {
 					String colorPalletName = fileName.replace(colorTypePrefix, "").replace(TXT_EXT, "");
 					ColorPalette colorPalette = getGradientColorPalette(fileName);
@@ -76,7 +75,7 @@ public class ColorPaletteHelper {
 		for (TerrainMode mode : TerrainMode.values(app)) {
 			if (mode.getType() == type) {
 				String fileName = mode.getMainFile();
-				File file = new File(getColorPaletteDir(), fileName);
+				KFile file = new KFile(getColorPaletteDir(), fileName);
 				ColorPalette colorPalette = getGradientColorPalette(fileName);
 				if (colorPalette != null && file.exists()) {
 					colorPalettes.put(mode.getKeyName(), new Pair<>(colorPalette, file.lastModified()));
@@ -90,14 +89,14 @@ public class ColorPaletteHelper {
 		return palette != null && palette.getColors().size() >= 2;
 	}
 
-	private File getColorPaletteDir() {
-		return app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
+	private KFile getColorPaletteDir() {
+		return app.getAppPathKt(IndexConstants.CLR_PALETTE_DIR);
 	}
 
 	@NonNull
 	public ColorPalette requireGradientColorPaletteSync(@NonNull ColorizationType colorizationType, @NonNull String gradientPaletteName) {
 		ColorPalette colorPalette = getGradientColorPaletteSync(colorizationType, gradientPaletteName);
-		return isValidPalette(colorPalette) ? colorPalette : RouteColorize.getDefaultPalette(colorizationType);
+		return isValidPalette(colorPalette) ? colorPalette : RouteColorize.Companion.getDefaultPalette(colorizationType);
 	}
 
 	@Nullable
@@ -116,13 +115,13 @@ public class ColorPaletteHelper {
 		ColorPalette colorPalette = cachedColorPalette.get(colorPaletteFileName);
 
 		if (colorPalette == null) {
-			File colorPaletteFile = new File(getColorPaletteDir(), colorPaletteFileName);
+			KFile colorPaletteFile = new KFile(getColorPaletteDir(), colorPaletteFileName);
 			try {
 				if (colorPaletteFile.exists()) {
-					colorPalette = ColorPalette.parseColorPalette(new FileReader(colorPaletteFile));
+					colorPalette = ColorPalette.Companion.parseColorPalette(colorPaletteFile);
 					cachedColorPalette.put(colorPaletteFileName, colorPalette);
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				PlatformUtil.getLog(ColorPaletteHelper.class).error("Error reading color file ", e);
 			}
 		}
@@ -160,19 +159,18 @@ public class ColorPaletteHelper {
 					listener.collectingPalletFinished(colorPalette);
 				}
 			});
-			collectColorPalletTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(collectColorPalletTask);
 		}
 	}
 
 	public void duplicateGradient(@NonNull String colorPaletteFileName, @NonNull DuplicateGradientListener duplicateGradientListener) {
 		DuplicateGradientTask duplicateGradientTask = new DuplicateGradientTask(app, colorPaletteFileName, duplicateGradientListener);
-		duplicateGradientTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(duplicateGradientTask);
 	}
 
 	public void deleteGradient(@NonNull String colorPaletteFileName, @NonNull DeleteGradientListener deleteGradientListener) {
-		File gradientToDelete = new File(getColorPaletteDir(), colorPaletteFileName);
-
-		boolean deleted = Algorithms.removeAllFiles(gradientToDelete);
+		KFile gradientToDelete = new KFile(getColorPaletteDir(), colorPaletteFileName);
+		boolean deleted = KFile.Companion.removeAllFiles(gradientToDelete);
 		if (deleted) {
 			cachedColorPalette.remove(colorPaletteFileName);
 		}

@@ -1,10 +1,12 @@
 package net.osmand.plus.card.icon;
 
+import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.fragments.profileappearance.IconsPaletteFragment;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -25,9 +27,13 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 
 	public IconsPaletteController(@NonNull OsmandApplication app,
 	                              @NonNull List<IconData> icons, @Nullable IconData selectedIcon) {
-		this.app = app;
+		this(app);
 		this.icons = icons;
 		this.selectedIcon = selectedIcon;
+	}
+
+	public IconsPaletteController(@NonNull OsmandApplication app) {
+		this.app = app;
 	}
 
 	@Override
@@ -49,6 +55,14 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 		}
 	}
 
+	public void setIcons(@NonNull List<IconData> icons) {
+		this.icons = icons;
+	}
+
+	public void setSelectedIcon(@NonNull IconData selectedIcon) {
+		this.selectedIcon = selectedIcon;
+	}
+
 	public void askUpdateColoredPaletteElements() {
 		notifyUpdatePaletteColors();
 	}
@@ -68,6 +82,11 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 	@Override
 	public void setPaletteListener(@NonNull OnIconsPaletteListener<IconData> onIconsPaletteListener) {
 		this.listener = onIconsPaletteListener;
+	}
+
+	@Override
+	public int getIconsAccentColor(boolean nightMode) {
+		return getControlsAccentColor(nightMode);
 	}
 
 	@Override
@@ -114,6 +133,20 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 	@Override
 	public boolean isSelectedIcon(@NonNull IconData icon) {
 		return Objects.equals(selectedIcon, icon);
+	}
+
+	@Override
+	public int getHorizontalIconsSpace() {
+		return getDimen(R.dimen.content_padding_small_half);
+	}
+
+	@Override
+	public int getRecycleViewHorizontalPadding() {
+		return getDimen(R.dimen.content_padding);
+	}
+
+	protected int getDimen(@DimenRes int id){
+		return app.getResources().getDimensionPixelSize(id);
 	}
 
 	@NonNull

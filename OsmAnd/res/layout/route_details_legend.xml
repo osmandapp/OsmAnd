@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/route_details_legend"
 	android:layout_width="match_parent"
@@ -32,7 +32,7 @@
 		android:maxLines="2"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
-		osmand:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		tools:text="Unpaved 13.4 km" />
 
 </LinearLayout>

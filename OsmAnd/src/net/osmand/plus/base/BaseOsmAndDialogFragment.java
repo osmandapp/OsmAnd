@@ -17,15 +17,17 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.RequestMapThemeParams;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class BaseOsmAndDialogFragment extends DialogFragment {
+public abstract class BaseOsmAndDialogFragment extends DialogFragment implements AppModeDependentComponent {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
+	protected ApplicationMode appMode;
 	protected UiUtilities iconsCache;
 	protected LayoutInflater themedInflater;
 	protected boolean nightMode;
@@ -36,15 +38,31 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
+		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 
 		updateNightMode();
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		saveAppModeToBundle(appMode, outState);
+	}
+
 	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+	}
+
+	public void setAppMode(@NonNull ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	@NonNull
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
 	protected boolean isUsedOnMap() {
@@ -92,7 +110,6 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		RequestMapThemeParams params = new RequestMapThemeParams().markIgnoreExternalProvider();
-		return app.getDaynightHelper().isNightMode(usedOnMap, params);
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 }

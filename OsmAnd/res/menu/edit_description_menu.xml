@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 	<item android:id="@+id/action_edit"
 		android:icon="@drawable/ic_action_edit_dark"
-		osmand:showAsAction="always"
+		app:showAsAction="always"
 		android:title="@string/shared_string_edit"/>
 </menu>

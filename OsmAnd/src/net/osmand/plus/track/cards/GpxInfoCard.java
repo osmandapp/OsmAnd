@@ -1,10 +1,7 @@
 package net.osmand.plus.track.cards;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,12 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -29,10 +25,10 @@ import java.util.Locale;
 
 public class GpxInfoCard extends MapBaseCard {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
 
-	public GpxInfoCard(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile) {
+	public GpxInfoCard(@NonNull MapActivity mapActivity, @NonNull GpxFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 	}
@@ -44,7 +40,7 @@ public class GpxInfoCard extends MapBaseCard {
 
 	@Override
 	public void updateContent() {
-		if (gpxFile.showCurrentTrack) {
+		if (gpxFile.isShowCurrentTrack()) {
 			updateVisibility(false);
 			return;
 		}
@@ -56,12 +52,12 @@ public class GpxInfoCard extends MapBaseCard {
 		ViewGroup container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
 
-		if (gpxFile.metadata.time > 0) {
-			String trackDate = DATE_FORMAT.format(gpxFile.metadata.time);
+		if (gpxFile.getMetadata().getTime() > 0) {
+			String trackDate = DATE_FORMAT.format(gpxFile.getMetadata().getTime());
 			createItemRow(container, R.string.created_on, R.drawable.ic_action_data, trackDate);
 		}
 
-		File file = new File(gpxFile.path);
+		File file = new File(gpxFile.getPath());
 		String trackSize = AndroidUtils.formatSize(app, file.length());
 		createItemRow(container, R.string.shared_string_size, R.drawable.ic_sdcard, trackSize);
 
@@ -71,10 +67,6 @@ public class GpxInfoCard extends MapBaseCard {
 			dirName = Algorithms.objectEquals(dir, app.getAppPath(GPX_INDEX_DIR)) ? getString(R.string.shared_string_tracks) : Algorithms.capitalizeFirstLetter(dir.getName());
 		}
 		createItemRow(container, R.string.shared_string_location, R.drawable.ic_action_folder, dirName);
-
-		if (!Algorithms.isEmpty(gpxFile.metadata.desc)) {
-			createItemRow(container, R.string.shared_string_description, R.drawable.ic_action_description, gpxFile.metadata.desc);
-		}
 	}
 
 	@NonNull

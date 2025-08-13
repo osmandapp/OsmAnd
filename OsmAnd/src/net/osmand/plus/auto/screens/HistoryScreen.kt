@@ -3,6 +3,7 @@ package net.osmand.plus.auto.screens
 import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
+import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
@@ -19,19 +20,22 @@ import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import net.osmand.plus.shared.SharedUtil
 import net.osmand.data.LatLon
+import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.R
-import net.osmand.plus.auto.TripHelper
-import net.osmand.plus.helpers.SearchHistoryHelper
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
+import net.osmand.plus.auto.TripUtils
+import net.osmand.plus.search.history.SearchHistoryHelper
+import net.osmand.plus.search.history.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GpxDataItem
-import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
+import net.osmand.shared.extensions.kFile
+import net.osmand.shared.gpx.GpxDataItem
+import net.osmand.shared.gpx.GpxDbHelper
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
 
@@ -42,14 +46,10 @@ class HistoryScreen(
 	private lateinit var searchItems: ArrayList<QuickSearchListItem>
 	val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
 
-	init {
-		lifecycle.addObserver(object : DefaultLifecycleObserver {
-			override fun onCreate(owner: LifecycleOwner) {
-				super.onCreate(owner)
-				updateItemsTask = UpdateHistoryItemsTask()
-				updateItemsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-			}
-		})
+	override fun onFirstGetTemplate() {
+		super.onFirstGetTemplate()
+		updateItemsTask = UpdateHistoryItemsTask()
+		OsmAndTaskManager.executeTask(updateItemsTask)
 	}
 
 	private inner class UpdateHistoryItemsTask : AsyncTask<Unit, Unit, Unit>() {
@@ -63,7 +63,7 @@ class HistoryScreen(
 	}
 
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = ListTemplate.Builder()
         val app = app
 	    val isLoading = updateItemsTask.status != AsyncTask.Status.FINISHED
@@ -88,32 +88,32 @@ class HistoryScreen(
     }
 
 	private fun prepareHistoryItems() {
-		val historyHelper = SearchHistoryHelper.getInstance(app)
+		val historyHelper = app.getSearchHistoryHelper()
 		val results = historyHelper.getHistoryEntries(true)
 		val resultsSize = results.size
 		searchItems = ArrayList()
-		var limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
+		val limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
 		for (result in limitedResults) {
 			val searchResult =
 				SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase())
 			val listItem = QuickSearchListItem(app, searchResult)
 			if (listItem.searchResult.objectType == ObjectType.GPX_TRACK && listItem.searchResult.location == null) {
-				var gpxInfo = listItem.searchResult.relatedObject as GPXInfo
-				var gpxFile = gpxInfo.gpxFile
+				val gpxInfo = listItem.searchResult.relatedObject as GPXInfo
+				val gpxFile = gpxInfo.gpxFile
 				if (gpxFile == null) {
 					gpxInfo.file?.let { file ->
-						val item = gpxDbHelper.getItem(file) {
-							updateSearchResult(
-								listItem.searchResult,
-								it)
-						}
+						val item = gpxDbHelper.getItem(file.kFile()) { updateSearchResult(listItem.searchResult, it) }
 						if (item != null) {
 							updateSearchResult(listItem.searchResult, item)
 						}
 					}
 				} else {
-					val analysis = gpxFile.getAnalysis(0)
-					listItem.searchResult.location = analysis?.latLonStart
+					val latLonStart = gpxFile.getAnalysis(0).getLatLonStart()
+					listItem.searchResult.location = if (latLonStart != null) {
+						SharedUtil.jLatLon(latLonStart)
+					} else {
+						null
+					}
 				}
 			}
 			searchItems.add(listItem)
@@ -121,7 +121,12 @@ class HistoryScreen(
 	}
 
 	private fun updateSearchResult(searchResult: SearchResult, dataItem: GpxDataItem) {
-		searchResult.location = dataItem.analysis?.latLonStart
+		val latLonStart = dataItem.getAnalysis()?.getLatLonStart()
+		searchResult.location = if (latLonStart != null) {
+			SharedUtil.jLatLon(latLonStart)
+		} else {
+			null
+		}
 	}
 
 	private fun prepareList(templateBuilder: ListTemplate.Builder) {
@@ -144,7 +149,7 @@ class HistoryScreen(
 				val dist = if (item.searchResult.location == null) {
 					0.0
 				} else {
-					var startLocation = item.searchResult.location
+					val startLocation = item.searchResult.location
 					rowBuilder.setMetadata(
 						Metadata.Builder().setPlace(
 							Place.Builder(
@@ -156,7 +161,7 @@ class HistoryScreen(
 						location.latitude, location.longitude)
 				}
 				val address = SpannableString(" ")
-				val distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist))
+				val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist))
 				address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
 				rowBuilder.addText(address)
 				listBuilder.addItem(rowBuilder.build())

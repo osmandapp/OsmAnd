@@ -27,6 +27,7 @@ import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.XMasDialogFragment;
+import net.osmand.plus.dialogs.selectlocation.SelectLocationFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -35,13 +36,14 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
-import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -117,12 +119,20 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	public void updateFragments() {
 		FragmentManager manager = getSupportFragmentManager();
 		for (Fragment fragment : manager.getFragments()) {
-			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
-			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
+			updateFragment(manager, fragment);
 		}
 		DashboardOnMap dashboard = activity.getDashboard();
 		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
 			dashboard.refreshContent(true);
+		}
+	}
+
+	public void updateFragment(@NonNull FragmentManager manager, @NonNull Fragment fragment) {
+		try {
+			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
+			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
+		} catch (IllegalStateException e) {
+			LOG.error("Error updating fragment " + fragment.getClass().getSimpleName(), e);
 		}
 	}
 
@@ -138,9 +148,21 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 		}
 	}
 
+	public void onStop() {
+		QuickSearchDialogFragment quickSearchFragment = getQuickSearchDialogFragment();
+		if (quickSearchFragment != null && quickSearchFragment.isSearchHidden()) {
+			quickSearchFragment.closeSearch();
+		}
+	}
+
 	@Nullable
 	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
 		return getFragment(QuickSearchDialogFragment.TAG);
+	}
+
+	@Nullable
+	public ExplorePlacesFragment getExplorePlacesFragment() {
+		return getFragment(ExplorePlacesFragment.Companion.getTAG());
 	}
 
 	@Nullable
@@ -186,6 +208,14 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	@Nullable
 	public DownloadTilesFragment getDownloadTilesFragment() {
 		return getFragment(DownloadTilesFragment.TAG);
+	}
+
+	@Nullable
+	public SelectLocationFragment getSelectMapLocationFragment() {
+		if (getConfigureMapOptionFragment() instanceof SelectLocationFragment fragment) {
+			return fragment;
+		}
+		return null;
 	}
 
 	@Nullable
@@ -314,6 +344,13 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 		if (fragment != null) {
 			fragment.closeSearch();
 			activity.refreshMap();
+		}
+	}
+
+	public void closeExplore() {
+		ExplorePlacesFragment fragment = getExplorePlacesFragment();
+		if (fragment != null) {
+			fragment.closeFragment();
 		}
 	}
 

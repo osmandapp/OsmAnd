@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/openingHoursImageView"
+		style="@style/edit_poi_imageview_style"
+		android:layout_marginTop="@dimen/content_padding_small"
+		app:srcCompat="@drawable/ic_action_time"
+		app:tint="?android:textColorSecondary" />
+
+	<net.osmand.plus.widgets.ButtonEx
+		android:id="@+id/addOpeningHoursButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="72dp"
+		android:layout_marginLeft="72dp"
+		android:text="@string/add_opening_hours"
+		android:textSize="@dimen/default_sub_text_size"
+		app:typefaceWeight="medium" />
+
+</RelativeLayout>

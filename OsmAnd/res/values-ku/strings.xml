@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>    
-	
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <string name="local_indexes_cat_av">Daneya Deng/Vîdyoyê</string>
     <string name="stop_routing_confirm">Tu dixwazî navîgasyonê bisekinînî?</string>
     <string name="recording_context_menu_show">Nîşan bide</string>
@@ -11,7 +10,7 @@
     <string name="recording_camera_not_available">Kamera ne berdest e</string>
     <string name="application_dir_change_warning3">Gelo tu dixwazî OsmAnd daneyên dosyeyê jî ji cihê armanca te ya nû re kopî bike?</string>
     <string name="specified_directiory_not_writeable">Nexşe li wê cihê ku hatibû diyarkirin nikare were çêkirin</string>
-	<string name="favorite_category_add_new">Nû Têxe</string>
+    <string name="favorite_category_add_new">Nû Têxe</string>
     <string name="si_nm">Mîlê behrê</string>
     <string name="shared_string_trip_recording">Qeydkirina gerrê</string>
     <string name="favourites_edit_dialog_title">Agahdariyên favorî</string>
@@ -90,7 +89,7 @@
     <string name="osm_live_active">Çalak</string>
     <string name="osm_live_not_active">Neçalak e</string>
     <string name="reports_for">Ji bo raporkirina</string>
-<string name="update_now">Niha rojane bike</string>
+    <string name="update_now">Niha rojane bike</string>
     <string name="sort_by">Tesnîfkirina gorî</string>
     <string name="do_not_use_animations">Ti anîmasyon tine ye</string>
     <string name="do_not_use_animations_descr">Di sepanê de anîmasyonan disekinîne.</string>
@@ -123,18 +122,18 @@
     <string name="make_round_trip_descr">Cihê destpêkê bike cihê amanc.</string>
     <string name="shared_string_sort">Tesnîf bike</string>
     <string name="enter_new_name">Navê nû binivîse</string>
-	<string name="shared_string_back">Paşve</string>
-	<string name="shared_string_view">Dîtin</string>
-	<string name="dd_mm_ss_format">DD°MM′SS″</string>
-	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="dd_ddddd_format">DD.DDDDD°</string>
-	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
-	<string name="east_abbreviation">Rh</string>
-	<string name="west_abbreviation">Ra</string>
-	<string name="south_abbreviation">Bş</string>
-	<string name="north_abbreviation">Bk</string>
-	<string name="all_data">Hemû daneyan</string>
+    <string name="shared_string_back">Paşve</string>
+    <string name="shared_string_view">Dîtin</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_dddddd_format">DD.DDDDDD°</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
+    <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="east_abbreviation">Rh</string>
+    <string name="west_abbreviation">Ra</string>
+    <string name="south_abbreviation">Bş</string>
+    <string name="north_abbreviation">Bk</string>
+    <string name="all_data">Hemû daneyan</string>
     <string name="context_menu_read_article">"Gotarê bixwîne "</string>
     <string name="shared_string_deleted">Jêbirî</string>
     <string name="shared_string_edited">"Guhertî "</string>
@@ -162,7 +161,7 @@
     <string name="enter_lon">Dirêjiyek îlawe bike</string>
     <string name="enter_lat">Firehiyek têkeve</string>
     <string name="enter_lat_and_lon">Dirêjî û firehiyê têkeve</string>
-	<string name="optional_point_name">Navê nuqeteyê yê ne mecbûrî</string>
+    <string name="optional_point_name">Navê nuqeteyê yê ne mecbûrî</string>
     <string name="transport_nearby_routes_within">Rotayên nêzî te</string>
     <string name="transport_nearby_routes">NÊZÎK</string>
     <string name="enter_the_file_name">Navê dosyeyê têkeve.</string>
@@ -218,4 +217,4 @@
     <string name="transport_Stop">Rawestgeh</string>
     <string name="navigate_point_latitude">Hêlîpan</string>
     <string name="navigate_point_longitude">Hêlîlar</string>
-    </resources>
+</resources>

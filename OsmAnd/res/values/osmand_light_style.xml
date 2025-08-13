@@ -220,8 +220,10 @@
         <item name="purchase_sc_selected_plan_bg">@color/purchase_sc_selected_plan_bg_light</item>
         <item name="purchase_sc_header_icon_bg">@color/purchase_sc_header_icon_bg_light</item>
         <item name="promo_banner_title_color">@color/osmand_pro_item_bg</item>
+        <item name="purchase_pro_badge_icon">@drawable/img_button_pro_day</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
+        <item name="nav_arrow_circle_color">@color/nav_arrow_circle_color_light</item>
 
         <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_light</item>
         <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_light</item>
@@ -246,6 +248,7 @@
         <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_light</item>
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_light</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_light</item>
+        <item name="dlg_btn_stroked_secondary_content">@color/dlg_btn_stroked_secondary_content_light</item>
         <item name="dlg_btn_transparent">@drawable/dlg_btn_transparent_light</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
         <item name="dlg_btn_tertiary_text">@color/button_color_active_light</item>
@@ -292,6 +295,10 @@
         <item name="toolbar_active_color">@color/app_bar_active_light</item>
         <item name="status_bar_active_color">@color/status_bar_selection_color_light</item>
         <item name="active_color_secondary">@color/active_color_secondary_light</item>
+        <item name="active_color_primary">@color/active_color_primary_light</item>
+        <item name="slider_label_text_dark">@color/slider_label_text_light</item>
+        <item name="app_bar_secondary_color">@color/app_bar_secondary_light</item>
+        <item name="map_button_icon_color">@color/map_button_icon_color_light</item>
     </style>
 
 </resources>

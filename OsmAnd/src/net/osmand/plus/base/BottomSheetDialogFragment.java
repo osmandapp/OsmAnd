@@ -21,6 +21,7 @@ import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 
 public abstract class BottomSheetDialogFragment extends DialogFragment {
 
@@ -32,7 +33,8 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		Context context = requireContext();
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandSettings settings = app.getSettings();
-		int themeId = settings.isLightContent() ? R.style.OsmandLightTheme_BottomSheet : R.style.OsmandDarkTheme_BottomSheet;
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		int themeId = nightMode ? R.style.OsmandDarkTheme_BottomSheet : R.style.OsmandLightTheme_BottomSheet;
 
 		BottomSheetDialog dialog = new BottomSheetDialog(context, themeId);
 		dialog.setCanceledOnTouchOutside(true);

@@ -3,7 +3,6 @@ package net.osmand.plus.card.color.palette.gradient;
 import static android.graphics.drawable.GradientDrawable.LINEAR_GRADIENT;
 import static android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT;
 import static android.graphics.drawable.GradientDrawable.RECTANGLE;
-
 import static net.osmand.gpx.GpxParameter.MAX_ELEVATION;
 import static net.osmand.gpx.GpxParameter.MIN_ELEVATION;
 import static net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard.MAX_ALTITUDE_ADDITION;
@@ -25,8 +24,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import net.osmand.ColorPalette.ColorValue;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
@@ -34,9 +31,11 @@ import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.ColorPalette.ColorValue;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -79,7 +78,7 @@ public class GradientUiHelper {
 		int[] colors = new int[values.size()];
 		for (int i = 0; i < values.size(); i++) {
 			ColorValue value = values.get(i);
-			colors[i] = Color.argb(value.a, value.r, value.g, value.b);
+			colors[i] = Color.argb(value.getA(), value.getR(), value.getG(), value.getB());
 		}
 		GradientDrawable drawable = new GradientDrawable(LEFT_RIGHT, colors);
 		drawable.setGradientType(LINEAR_GRADIENT);
@@ -112,7 +111,7 @@ public class GradientUiHelper {
 	}
 
 	@NonNull
-	public static IAxisValueFormatter getGradientTypeFormatter(@NonNull OsmandApplication app, @NonNull Object gradientType, @Nullable GPXTrackAnalysis analysis) {
+	public static IAxisValueFormatter getGradientTypeFormatter(@NonNull OsmandApplication app, @NonNull Object gradientType, @Nullable GpxTrackAnalysis analysis) {
 		if (gradientType instanceof TerrainType) {
 			return getTerrainTypeFormatter(app, (TerrainType) gradientType);
 		}
@@ -130,7 +129,7 @@ public class GradientUiHelper {
 					typeValue = "°";
 					break;
 				case HEIGHT:
-					FormattedValue formattedValue = OsmAndFormatter.getFormattedAltitudeValue(value, app, app.getSettings().METRIC_SYSTEM.get());
+					FormattedValue formattedValue = OsmAndFormatter.getFormattedAltitudeValue(value, app, app.getSettings().ALTITUDE_METRIC.get());
 					stringValue = formattedValue.value;
 					typeValue = formattedValue.unit;
 					break;
@@ -139,7 +138,7 @@ public class GradientUiHelper {
 		};
 	}
 
-	private static IAxisValueFormatter getColorizationTypeFormatter(@NonNull OsmandApplication app, @NonNull ColorizationType colorizationType, @Nullable GPXTrackAnalysis analysis) {
+	private static IAxisValueFormatter getColorizationTypeFormatter(@NonNull OsmandApplication app, @NonNull ColorizationType colorizationType, @Nullable GpxTrackAnalysis analysis) {
 		return (value, axis) -> {
 			boolean shouldShowUnit = axis.mEntries.length >= 1 && axis.mEntries[0] == value;
 			String stringValue = formatValue(value, 100);
@@ -148,7 +147,7 @@ public class GradientUiHelper {
 			switch (colorizationType) {
 				case SPEED:
 					if (analysis != null && analysis.getMaxSpeed() != 0) {
-						type = app.getSettings().SPEED_SYSTEM.getModeValue(app.getSettings().getApplicationMode()).toShortString(app);
+						type = app.getSettings().SPEED_SYSTEM.getModeValue(app.getSettings().getApplicationMode()).toShortString();
 						stringValue = formatValue(value, analysis.getMaxSpeed());
 					}
 					break;
@@ -166,7 +165,7 @@ public class GradientUiHelper {
 						} else {
 							break;
 						}
-						formattedValue = OsmAndFormatter.getFormattedAltitudeValue(calculatedValue, app, app.getSettings().METRIC_SYSTEM.get());
+						formattedValue = OsmAndFormatter.getFormattedAltitudeValue(calculatedValue, app, app.getSettings().ALTITUDE_METRIC.get());
 						stringValue = formattedValue.value;
 						type = formattedValue.unit;
 					}

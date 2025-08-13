@@ -71,7 +71,7 @@
     <string name="shared_string_hour_short">ч</string>
     <string name="shared_string_minute_short">мин</string>
     <string name="shared_string_second_short">сек</string>
-    <string name="shared_string_name">Имя</string>
+    <string name="shared_string_name">Название</string>
     <string name="by_distance">По расстоянию</string>
     <string name="by_name">По имени</string>
     <string name="by_group">По группе</string>
@@ -202,7 +202,7 @@
     <string name="si_m_s">Метров в секунду</string>
     <string name="si_min_km">Минут на километр</string>
     <string name="si_min_m">Минут на милю</string>
-    <string name="si_nm_h">Морских миль в час (узел)</string>
+    <string name="si_nm_h">Морских миль в час (узлов)</string>
     <string name="si_mi_feet">Мили/футы</string>
     <string name="si_mi_yard">Мили/ярды</string>
     <string name="si_km_m">Километры/метры</string>

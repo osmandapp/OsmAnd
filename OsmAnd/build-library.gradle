@@ -15,6 +15,15 @@ android {
 		tasks.lint.enabled = false
 	}
 
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+
+	buildFeatures {
+		aidl true
+	}
+
 	sourceSets {
 		main {
 			manifest.srcFile "AndroidManifest-library.xml"
@@ -34,16 +43,16 @@ android {
 	libraryVariants.configureEach {
 		def variant = it
 		def taskName = variant.name.capitalize()
-		def mergeAssetsTaskName = "merge${taskName}Assets"
-		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
+		def packageAssetsTaskName = "package${taskName}Assets"
+		tasks.named(packageAssetsTaskName).configure { osmandTask ->
 			println(osmandTask.getName())
 			osmandTask.dependsOn(copyProjDb)
 			osmandTask.dependsOn(collectFonts)
 			osmandTask.dependsOn(copyPoiCategories)
-			osmandTask.dependsOn(collectHelpContentsStyle)
+			osmandTask.dependsOn(copyRouteActivities)
 			osmandTask.dependsOn(copyColorPalettes)
+			osmandTask.dependsOn(copyBundledAssets)
 			osmandTask.dependsOn(copy3DModels)
-			osmandTask.dependsOn(collectUiFonts)
 			osmandTask.dependsOn(collectVoiceAssets)
 			osmandTask.dependsOn(downloadWorldMiniBasemap)
 		}
@@ -54,9 +63,16 @@ android {
 			osmandTask.dependsOn(copyMapPOIIcons)
 			osmandTask.dependsOn(copyLargePOIIcons)
 		}
-		def mergeResources= "merge${taskName}Resources"
-		tasks.named(mergeResources).configure { osmandTask ->
+		def packageResources= "package${taskName}Resources"
+		tasks.named(packageResources).configure { osmandTask ->
 			println(osmandTask.getName())
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
+		def generateResources= "generate${taskName}Resources"
+		tasks.named(generateResources).configure { osmandTask ->
+			println(osmandTask.getName() + " generate resources")
 			osmandTask.dependsOn(copyMapShaderIcons)
 			osmandTask.dependsOn(copyMapPOIIcons)
 			osmandTask.dependsOn(copyLargePOIIcons)

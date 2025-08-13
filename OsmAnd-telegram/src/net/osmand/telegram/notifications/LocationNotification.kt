@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import net.osmand.telegram.R
@@ -19,16 +20,29 @@ private const val DISABLE_MONITORING_ACTION = "disable_monitoring_action"
 class LocationNotification(app: TelegramApplication) : TelegramNotification(app, GROUP_NAME) {
 
 	init {
-		app.registerReceiver(object : BroadcastReceiver() {
+		val stopSharingLocationReceiver = object : BroadcastReceiver() {
 			override fun onReceive(context: Context?, intent: Intent?) {
 				app.stopSharingLocation()
 			}
-		}, IntentFilter(DISABLE_SHARING_ACTION))
-		app.registerReceiver(object : BroadcastReceiver() {
+		}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(stopSharingLocationReceiver, IntentFilter(DISABLE_SHARING_ACTION),
+				Context.RECEIVER_EXPORTED)
+		} else {
+			app.registerReceiver(stopSharingLocationReceiver, IntentFilter(DISABLE_SHARING_ACTION))
+		}
+
+		val stopMonitoringReceiver = object : BroadcastReceiver() {
 			override fun onReceive(context: Context?, intent: Intent?) {
 				app.stopMonitoring()
 			}
-		}, IntentFilter(DISABLE_MONITORING_ACTION))
+		}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(stopMonitoringReceiver, IntentFilter(DISABLE_MONITORING_ACTION),
+				Context.RECEIVER_EXPORTED)
+		} else {
+			app.registerReceiver(stopMonitoringReceiver, IntentFilter(DISABLE_MONITORING_ACTION))
+		}
 	}
 
 	override val type: NotificationType

@@ -1,124 +1,62 @@
 package net.osmand.plus.download.ui;
 
-import android.graphics.Typeface;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.view.ContextThemeWrapper;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
+import android.view.ViewGroup.LayoutParams;
+
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.views.mapwidgets.TopToolbarController;
-import net.osmand.plus.widgets.dialogbutton.DialogButton;
-import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.util.Algorithms;
 
-public class DownloadMapToolbarController extends TopToolbarController {
+public class DownloadMapToolbarController extends SuggestMapToolbarController {
 
-	private final MapActivity mapActivity;
 	private final DownloadValidationManager downloadValidationManager;
-
-	private final boolean nightMode;
-
-	private final DialogButton btnClose;
-	private final DialogButton btnDownload;
-	private final TextView tvDescription;
-	private final TextView tvSize;
-
 	private final IndexItem indexItem;
-	private final String regionName;
-
-	private static String lastProcessedRegionName;
 
 	public DownloadMapToolbarController(@NonNull MapActivity mapActivity, @NonNull IndexItem indexItem, @NonNull String regionName) {
-		super(TopToolbarControllerType.DOWNLOAD_MAP);
-		this.mapActivity = mapActivity;
+		super(mapActivity, regionName);
 		this.indexItem = indexItem;
-		this.regionName = regionName;
-
-		OsmandApplication app = mapActivity.getMyApplication();
 		downloadValidationManager = new DownloadValidationManager(app);
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		View mainView = View.inflate(new ContextThemeWrapper(mapActivity, themeRes), R.layout.download_detailed_map_widget, null);
-
-		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-			mainView.setBackgroundResource(getLandscapeBottomSidesBgResId());
-		} else {
-			mainView.setBackgroundResource(getPortraitBgResId());
-		}
-
-		tvDescription = mainView.findViewById(R.id.description);
-		tvSize = mainView.findViewById(R.id.fileSize);
-		btnClose = mainView.findViewById(R.id.btnClose);
-		btnDownload = mainView.findViewById(R.id.btnDownload);
-
-		refreshView();
-		setBottomView(mainView);
-		setTopViewVisible(false);
-		setShadowViewVisible(false);
+		initializeUI();
 	}
 
-	public static String getLastProcessedRegionName() {
-		return lastProcessedRegionName;
+	@Override
+	protected int getPrimaryTextPattern() {
+		return R.string.download_detailed_map;
 	}
 
-	public IndexItem getIndexItem() {
-		return indexItem;
+	@NonNull
+	@Override
+	protected String getSecondaryText() {
+		return indexItem.getSizeDescription(mapActivity);
 	}
 
-	public String getRegionName() {
-		return regionName;
+	@Override
+	protected int getIconId() {
+		return R.drawable.img_download;
 	}
 
-	private void refreshView() {
-		if (!Algorithms.isEmpty(regionName)) {
-			String descriptionText = String.format(mapActivity.getString(R.string.download_detailed_map), regionName);
-			int startIndex = descriptionText.indexOf(regionName);
-			int endIndex = startIndex + regionName.length();
-			SpannableStringBuilder description = new SpannableStringBuilder(descriptionText);
-			if (startIndex != -1 && endIndex != -1) {
-				Typeface typeface = FontCache.getRobotoMedium(mapActivity);
-				description.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			}
-			tvDescription.setText(description);
-		}
-
-		if (indexItem != null) {
-			String size = indexItem.getSizeDescription(mapActivity);
-			tvSize.setText(size);
-
-			btnDownload.setOnClickListener(v -> {
-				downloadValidationManager.startDownload(mapActivity, indexItem);
-				dismiss();
-			});
-		}
-
-		btnClose.setOnClickListener(v -> dismiss());
+	@Override
+	protected int getPreferredIconHeight() {
+		return LayoutParams.WRAP_CONTENT;
 	}
 
-	private void dismiss() {
-		lastProcessedRegionName = regionName;
-		mapActivity.hideTopToolbar(this);
+	@Override
+	protected int getPreferredIconWidth() {
+		return LayoutParams.WRAP_CONTENT;
 	}
 
-	@DrawableRes
-	private int getPortraitBgResId() {
-		return nightMode ? R.drawable.bg_top_menu_dark : R.drawable.bg_top_menu_light;
+	@NonNull
+	@Override
+	protected String getApplyButtonTitle() {
+		return app.getString(R.string.shared_string_download);
 	}
 
-	@DrawableRes
-	private int getLandscapeBottomSidesBgResId() {
-		return nightMode ? R.drawable.bg_top_sheet_bottom_sides_landscape_dark : R.drawable.bg_top_sheet_bottom_sides_landscape_light;
+	@Override
+	protected void onApply() {
+		downloadValidationManager.startDownload(mapActivity, indexItem);
+		dismiss();
 	}
 }

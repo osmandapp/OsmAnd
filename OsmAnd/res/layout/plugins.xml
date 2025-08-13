@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:background="?attr/bg_color"
 	android:orientation="vertical"
@@ -18,9 +18,9 @@
 		android:layout_height="4dp"
 		android:indeterminate="true"
 		android:visibility="invisible"
-		osmand:mpb_progressStyle="horizontal"
-		osmand:mpb_setBothDrawables="true"
-		osmand:mpb_useIntrinsicPadding="false"
+		app:mpb_progressStyle="horizontal"
+		app:mpb_setBothDrawables="true"
+		app:mpb_useIntrinsicPadding="false"
 		tools:visibility="visible" />
 
 	<ListView

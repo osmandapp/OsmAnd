@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_color"
 	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/graph_mode"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:visibility="gone"
+		android:paddingStart="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:text="@string/shared_string_graph"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			android:textStyle="bold" />
+
+		<LinearLayout
+			android:id="@+id/graph_mode_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="0"
+			android:background="?attr/selectableItemBackground"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="16dp">
+
+			<TextView
+				android:id="@+id/graph_mode_description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				tools:text="Altitude, Speed / Distance"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="normal" />
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/content_padding"
+				app:tint="?attr/secondary_icon_color"
+				osmand:srcCompat="@drawable/ic_action_arrow_down" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
 
 	<com.github.mikephil.charting.charts.ElevationChart
 		android:id="@+id/chart"
@@ -33,7 +86,7 @@
 			android:text="@string/join_segments"
 			android:textColor="?android:attr/textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_regular" />
+			android:textStyle="normal" />
 
 		<androidx.appcompat.widget.SwitchCompat
 			android:id="@+id/gpx_join_gaps_switch"

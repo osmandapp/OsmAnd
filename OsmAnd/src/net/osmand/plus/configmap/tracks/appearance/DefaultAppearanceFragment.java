@@ -28,7 +28,7 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.configmap.tracks.ConfirmDefaultAppearanceBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -115,27 +115,27 @@ public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implemen
 		FragmentActivity activity = requireActivity();
 		ViewGroup container = view.findViewById(R.id.cards_container);
 
-		MultiStateCard arrowsCard = new MultiStateCard(activity, controller.getArrowsCardController());
+		MultiStateCard arrowsCard = new MultiStateCard(activity, controller.getArrowsCardController(), false);
 		container.addView(arrowsCard.build());
 
 		inflate(R.layout.list_item_divider_with_padding_basic, container, true);
 
-		MultiStateCard iconsCard = new MultiStateCard(activity, controller.getIconsCardController());
+		MultiStateCard iconsCard = new MultiStateCard(activity, controller.getIconsCardController(), false);
 		container.addView(iconsCard.build());
 
 		inflate(R.layout.list_item_divider, container, true);
 
-		MultiStateCard colorsCard = new MultiStateCard(activity, controller.getColorCardController());
+		MultiStateCard colorsCard = new MultiStateCard(activity, controller.getColorCardController(), false);
 		container.addView(colorsCard.build());
 
 		inflate(R.layout.list_item_divider, container, true);
 
-		MultiStateCard widthCard = new MultiStateCard(activity, controller.getWidthCardController());
+		MultiStateCard widthCard = new MultiStateCard(activity, controller.getWidthCardController(), false);
 		container.addView(widthCard.build());
 
 		inflate(R.layout.list_item_divider, container, true);
 
-		MultiStateCard splitCard = new MultiStateCard(activity, controller.getSplitCardController());
+		MultiStateCard splitCard = new MultiStateCard(activity, controller.getSplitCardController(), false);
 		container.addView(splitCard.build());
 
 		setupOnNeedScrollListener();

@@ -3,8 +3,8 @@ apply plugin: 'ivy-publish'
 apply from: '../versions.gradle'
 
 android {
-    compileSdk 34
-    buildToolsVersion = "34.0.0"
+    compileSdk 35
+    buildToolsVersion = "35.0.0"
 
     defaultConfig {
         minSdkVersion minSdk
@@ -28,12 +28,10 @@ android {
     }
     publishing {
         singleVariant('release') {
-            withSourcesJar()
             withJavadocJar()
         }
 
         singleVariant('debug') {
-            withSourcesJar()
             withJavadocJar()
         }
     }
@@ -70,7 +68,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.6.0'
 }
 
-task sourcesJar(type: Jar) {
+tasks.register('sourcesJar', Jar) {
     archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
 }

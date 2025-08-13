@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="mapillary_menu_edit_text_hint">Кулланучының исемен языгыз</string>
     <string name="shared_string_move_up">Күчерү ↑</string>
@@ -91,7 +91,6 @@
     <string name="monitoring_control_start">REC</string>
     <string name="use_live_routing">OsmAnd Live мәгълүматы</string>
     <string name="use_live_public_transport">OsmAnd Live мәгълүматы</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_sport">Спорт</string>
     <string name="use_login_password">Логин һәм парол куллану</string>
     <string name="login_account">Хисап язмасы</string>
@@ -137,6 +136,6 @@
     <string name="edit_name">Исемне үзгәртү</string>
     <string name="shared_string_reset">Бетерү</string>
     <string name="mapillary_menu_title_username">Кулланучы исеме</string>
-    <string name="mapillary_menu_title_dates">Дата</string>
+    <string name="shared_string_date">Дата</string>
     <string name="shared_string_install">Урнаштыру</string>
 </resources>

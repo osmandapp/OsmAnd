@@ -161,6 +161,7 @@ public class IconsPaletteFragment<IconData> extends BaseOsmAndDialogFragment imp
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(ALL_ICONS_PROCESS_ID);
+			controller.onAllIconsScreenClosed();
 		}
 	}
 

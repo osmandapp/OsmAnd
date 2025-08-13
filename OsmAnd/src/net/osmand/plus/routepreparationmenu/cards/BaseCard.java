@@ -19,14 +19,17 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.RequestMapThemeParams;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.util.Localization;
 
 public abstract class BaseCard {
 
 	protected final OsmandApplication app;
+	protected final ApplicationMode appMode;
 	protected final OsmandSettings settings;
 	protected final FragmentActivity activity;
 
@@ -58,12 +61,16 @@ public abstract class BaseCard {
 	}
 
 	public BaseCard(@NonNull FragmentActivity activity, boolean usedOnMap) {
+		this(activity, null, usedOnMap);
+	}
+
+	public BaseCard(@NonNull FragmentActivity activity, @Nullable ApplicationMode appMode, boolean usedOnMap) {
 		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.settings = app.getSettings();
 		this.usedOnMap = usedOnMap;
-		RequestMapThemeParams requestMapThemeParams = new RequestMapThemeParams().markIgnoreExternalProvider();
-		nightMode = app.getDaynightHelper().isNightMode(usedOnMap, requestMapThemeParams);
+		this.appMode = appMode != null ? appMode : settings.getApplicationMode();
+		nightMode = app.getDaynightHelper().isNightMode(this.appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	public abstract int getCardLayoutId();
@@ -127,10 +134,15 @@ public abstract class BaseCard {
 
 	@NonNull
 	public View build(@NonNull Context ctx) {
-		themedInflater = UiUtilities.getInflater(ctx, nightMode);
-		view = themedInflater.inflate(getCardLayoutId(), null);
+		view = inflate(ctx);
 		update();
 		return view;
+	}
+
+	@NonNull
+	public View inflate(@NonNull Context ctx) {
+		themedInflater = UiUtilities.getInflater(ctx, nightMode);
+		return themedInflater.inflate(getCardLayoutId(), null);
 	}
 
 	public OsmandApplication getMyApplication() {
@@ -219,11 +231,24 @@ public abstract class BaseCard {
 	}
 
 	public void updateVisibility(boolean show) {
+		updateVisibility(view, show);
+	}
+
+	public void updateVisibility(int viewId, boolean show) {
+		updateVisibility(view.findViewById(viewId), show);
+	}
+
+	public void updateVisibility(@Nullable View view, boolean show) {
 		AndroidUiHelper.updateVisibility(view, show);
 	}
 
 	public boolean isVisible() {
 		return view != null && view.getVisibility() == View.VISIBLE;
+	}
+
+	@NonNull
+	public final String getString(String resId) {
+		return Localization.INSTANCE.getString(resId);
 	}
 
 	@NonNull

@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
-import android.graphics.Typeface;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +46,7 @@ public class ImportedSettingsItemsAdapter extends
 	@NonNull
 	@Override
 	public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.list_item_import, parent, false);
 		return new ItemViewHolder(view);
 	}
@@ -59,10 +58,7 @@ public class ImportedSettingsItemsAdapter extends
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
 		holder.title.setTextColor(app.getColor(activeColorRes));
-		Typeface typeface = FontCache.getFont(app, app.getString(R.string.font_roboto_medium));
-		if (typeface != null) {
-			holder.title.setTypeface(typeface);
-		}
+		holder.title.setTypeface(FontCache.getMediumFont());
 		holder.divider.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
 		holder.itemView.setOnClickListener(view -> listener.onItemClick(currentItemType));
 		holder.subTitle.setText(String.format(

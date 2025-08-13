@@ -23,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
@@ -36,6 +35,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.ColorPalette.ColorValue;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -134,13 +134,12 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		public void onBindViewHolder(@NonNull PaletteColor paletteColor, boolean isSelected, boolean nightMode) {
 			UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), radioButton);
 			radioButton.setChecked(isSelected);
-			if (paletteColor instanceof PaletteGradientColor) {
-				PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
+			if (paletteColor instanceof PaletteGradientColor gradientColor) {
 				List<ColorValue> colorsList = gradientColor.getColorPalette().getColors();
 				int[] colors = new int[colorsList.size()];
 				for (int i = 0; i < colorsList.size(); i++) {
 					ColorValue value = colorsList.get(i);
-					colors[i] = Color.argb(value.a, value.r, value.g, value.b);
+					colors[i] = Color.argb(value.getA(), value.getR(), value.getG(), value.getB());
 				}
 				GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
 				gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
@@ -157,9 +156,9 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 					if (i != 0) {
 						descriptionBuilder.append(" • ");
 					}
-					String formattedValue = String.valueOf(colorValues.get(i).val);
+					String formattedValue = String.valueOf(colorValues.get(i).getValue());
 					if (controller.getGradientType() instanceof TerrainType) {
-						formattedValue = GradientUiHelper.formatTerrainTypeValues((float) colorValues.get(i).val);
+						formattedValue = GradientUiHelper.formatTerrainTypeValues((float) colorValues.get(i).getValue());
 					}
 					descriptionBuilder.append(formattedValue);
 				}

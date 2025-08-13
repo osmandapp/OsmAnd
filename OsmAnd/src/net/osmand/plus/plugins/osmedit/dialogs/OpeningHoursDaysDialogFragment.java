@@ -78,7 +78,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 										.setBasicOpeningHoursRule(item, positionToAdd);
 							}
 						} else {
-							Toast.makeText(getContext(), getString(R.string.set_working_days_to_continue), Toast.LENGTH_SHORT).show();
+							AndroidUtils.getApp(requireContext()).showShortToastMessage(R.string.set_working_days_to_continue);
 						}
 					}
 

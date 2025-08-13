@@ -18,7 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -29,6 +29,7 @@ import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.WeatherSettings;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -56,7 +57,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 		forecastHelper = app.getOfflineForecastHelper();
 		weatherSettings = weatherHelper.getWeatherSettings();
 		weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	@Nullable

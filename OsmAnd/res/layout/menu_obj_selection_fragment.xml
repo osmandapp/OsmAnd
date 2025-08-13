@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/main_view"
+<LinearLayout android:id="@+id/multi_selection_main_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     tools:background="?attr/bottom_menu_view_bg"
     android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/content"
@@ -44,7 +44,7 @@
                 android:text="@string/shared_string_close"
                 android:textAllCaps="true"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"/>
+                app:typefaceWeight="medium"/>
         </FrameLayout>
 
     </LinearLayout>

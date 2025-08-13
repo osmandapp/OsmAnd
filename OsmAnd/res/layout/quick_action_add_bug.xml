@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/point_location_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:scaleType="fitXY"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@drawable/bg_shadow_list_top" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+        app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
@@ -48,7 +69,7 @@
         android:layout_gravity="top"
         android:scaleType="fitXY"
         android:layout_marginTop="16dp"
-        osmand:srcCompat="@drawable/bg_shadow_list_top" />
+        app:srcCompat="@drawable/bg_shadow_list_top" />
 
     <LinearLayout
         android:id="@+id/title_view"
@@ -119,6 +140,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+        app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

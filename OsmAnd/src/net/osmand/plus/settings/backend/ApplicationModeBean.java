@@ -13,6 +13,8 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
+import java.util.Set;
+
 public class ApplicationModeBean {
 	@Expose
 	public String stringKey;
@@ -40,7 +42,8 @@ public class ApplicationModeBean {
 	public int version = -1;
 
 
-	public static void checkAndReplaceInvalidValues(@NonNull OsmandApplication app, @NonNull ApplicationModeBean modeBean) {
+	public static void checkAndReplaceInvalidValues(@NonNull OsmandApplication app,
+			@NonNull ApplicationModeBean modeBean) {
 		if (ApplicationMode.isCustomProfile(modeBean.stringKey)) {
 			checkAndReplaceInvalidParent(modeBean);
 		}
@@ -64,7 +67,8 @@ public class ApplicationModeBean {
 		}
 	}
 
-	private static void checkAndReplaceInvalidIconName(@NonNull OsmandApplication app, @NonNull ApplicationModeBean modeBean) {
+	private static void checkAndReplaceInvalidIconName(@NonNull OsmandApplication app,
+			@NonNull ApplicationModeBean modeBean) {
 		if (AndroidUtils.getDrawableId(app, modeBean.iconName) == 0) {
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 			if (appMode == null) {
@@ -74,5 +78,22 @@ public class ApplicationModeBean {
 				modeBean.iconName = appMode.getIconName();
 			}
 		}
+	}
+
+	@NonNull
+	public static Set<String> getAppModeBeanPrefsIds(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		return Set.of(
+				settings.ICON_COLOR.getId(),
+				settings.CUSTOM_ICON_COLOR.getId(),
+				settings.ICON_RES_NAME.getId(),
+				settings.PARENT_APP_MODE.getId(),
+				settings.ROUTING_PROFILE.getId(),
+				settings.ROUTE_SERVICE.getId(),
+				settings.USER_PROFILE_NAME.getId(),
+				settings.LOCATION_ICON.getId(),
+				settings.NAVIGATION_ICON.getId(),
+				settings.APP_MODE_ORDER.getId()
+		);
 	}
 }

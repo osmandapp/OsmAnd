@@ -1,9 +1,9 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
-import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
+import static net.osmand.util.Algorithms.DECIMAL_FORMAT;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_SPEED;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -259,7 +259,8 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 			lastWheelRevolutions = wheelRevolutions;
 			this.lastWheelEventTime = lastWheelEventTime;
 
-		} else if (crankRevPreset) {
+		}
+		if (crankRevPreset) {
 			int crankRevolutions = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 1);
 			int lastCrankEventTime = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 3);
 			if (lastCrankRevolutions >= 0) {

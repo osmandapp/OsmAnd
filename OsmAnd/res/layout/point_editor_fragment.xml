@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/point_edit_layout"
 	android:layout_width="match_parent"
@@ -23,9 +22,9 @@
 			android:background="?attr/appbar_and_list_background_color"
 			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
 			app:titleTextAppearance="@style/ToolbarTitle"
-			osmand:subtitleTextColor="?android:textColorPrimary"
-			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-			osmand:titleTextColor="?android:textColorPrimary">
+			app:subtitleTextColor="?android:textColorPrimary"
+			app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+			app:titleTextColor="?android:textColorPrimary">
 
 			<ImageButton
 				android:id="@+id/toolbar_action"
@@ -194,7 +193,7 @@
 						android:paddingBottom="@dimen/content_padding_half"
 						android:text="@string/add_address"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:text="@string/add_address" />
 
 					<ImageButton
@@ -276,7 +275,7 @@
 					android:paddingRight="@dimen/content_padding_half"
 					android:text="@string/add_description"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="@string/add_description" />
 
 				<View
@@ -311,7 +310,7 @@
 							android:text="@string/select_group"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_medium" />
+							app:typefaceWeight="medium" />
 
 						<LinearLayout
 							android:id="@+id/group_list_button"
@@ -332,7 +331,7 @@
 								android:text="@string/shared_string_list"
 								android:textColor="@color/preference_category_title"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								app:typefaceWeight="medium"
 								tools:ignore="UnusedAttribute" />
 
 							<androidx.appcompat.widget.AppCompatImageView
@@ -387,7 +386,7 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						android:visibility="gone"
-						osmand:typeface="@string/font_roboto_regular" />
+						android:textStyle="normal" />
 
 				</LinearLayout>
 
@@ -396,26 +395,10 @@
 					android:layout_height="1dp"
 					android:background="?attr/dashboard_divider" />
 
-				<net.osmand.plus.widgets.TextViewEx
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:letterSpacing="@dimen/description_letter_spacing"
-					android:paddingStart="@dimen/content_padding"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingTop="@dimen/context_menu_first_line_top_margin"
-					android:paddingEnd="@dimen/content_padding"
-					android:paddingRight="@dimen/content_padding"
-					android:text="@string/select_icon_profile_dialog_title"
-					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
-
 				<FrameLayout
 					android:id="@+id/icons_card_container"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/content_padding_small"
-					android:layout_marginBottom="@dimen/content_padding_half" />
+					android:layout_height="wrap_content" />
 
 				<View
 					android:layout_width="match_parent"
@@ -441,7 +424,7 @@
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/color_name"
@@ -457,7 +440,7 @@
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 				</LinearLayout>
 
@@ -490,7 +473,7 @@
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shape_name"
@@ -507,7 +490,7 @@
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 				</LinearLayout>
 
@@ -570,7 +553,7 @@
 							android:lines="1"
 							android:text="@string/replace_point_descr"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-							android:textColor="@null"
+							android:textColor="?android:attr/textColorSecondary"
 							tools:text="@string/replace_point_descr" />
 
 					</LinearLayout>

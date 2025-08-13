@@ -41,7 +41,7 @@
 			android:text="@string/is_disabled"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/description"
@@ -54,7 +54,7 @@
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
 			app:lineHeight="@dimen/default_desc_line_height"
-			app:typeface="@string/font_roboto_regular" />
+			android:textStyle="normal" />
 
 		<FrameLayout
 			android:id="@+id/settings_button_container"
@@ -80,7 +80,7 @@
 				android:text="@string/shared_string_settings"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/text_button_text_size"
-				app:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute" />
 
 		</FrameLayout>

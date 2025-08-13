@@ -38,6 +38,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
@@ -110,7 +111,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		boolean nightMode = isNightMode(app, usedOnMap);
 
-		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
+		View mainView = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		createToolbar(mainView, nightMode);
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.profiles_list);
@@ -483,7 +484,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	}
 
 	public static boolean isNightMode(@NonNull OsmandApplication app, boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	@Override

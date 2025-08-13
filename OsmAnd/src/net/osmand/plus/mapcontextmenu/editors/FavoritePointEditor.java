@@ -3,16 +3,20 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.data.MapObject;
 import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.layers.MapSelectionHelper;
+import net.osmand.search.AmenitySearcher;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 public class FavoritePointEditor extends PointEditor {
@@ -58,27 +62,38 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		double altitude = Double.NaN;
 		if (object instanceof WptPt) {
-			altitude = ((WptPt) object).ele;
+			altitude = ((WptPt) object).getEle();
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, 0);
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 
+		Amenity amenity = null;
 		if (object instanceof Amenity) {
-			setAmenity(((Amenity) object));
-		} else if (object instanceof OpenstreetmapPoint) {
-			Entity entity = ((OpenstreetmapPoint) object).getEntity();
-			Amenity amenity = MapSelectionHelper.findAmenityByOsmId(app, latLon, entity.getId());
-			if (amenity != null) {
-				setAmenity(amenity);
-			}
+			amenity = (Amenity) object;
+		} else if (object instanceof BaseDetailsObject detailsObject) {
+			amenity = detailsObject.getSyntheticAmenity();
+		} else if (object instanceof OpenstreetmapPoint point) {
+			Entity entity = point.getEntity();
+			AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
+			AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+
+			Amenity requestAmenity = new Amenity();
+			requestAmenity.setLocation(latLon);
+			requestAmenity.setId(ObfConstants.createMapObjectIdFromOsmId(entity.getId(), EntityType.valueOf(entity)));
+
+			AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity);
+			amenity = searcher.searchDetailedAmenity(request, settings);
+		}
+		if (amenity != null) {
+			setAmenity(amenity);
 		}
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
 
 	private void setAmenity(@NonNull Amenity amenity) {
 		favorite.setAmenityOriginName(amenity.toStringEn());
-		favorite.setIconId(RenderingIcons.getPreselectedIconId(amenity));
+		favorite.setIconId(RenderingIcons.getPreselectedIconId(app, amenity));
 		favorite.setAmenityExtensions(amenity.getAmenityExtensions(app.getPoiTypes(), true));
 	}
 

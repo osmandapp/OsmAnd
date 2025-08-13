@@ -82,7 +82,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	protected void onThirdBottomButtonClick() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			GpxUiHelper.shareGpx(activity, new File(fileName));
+			GpxUiHelper.shareGpx(activity, activity, new File(fileName));
 		}
 		dismiss();
 	}

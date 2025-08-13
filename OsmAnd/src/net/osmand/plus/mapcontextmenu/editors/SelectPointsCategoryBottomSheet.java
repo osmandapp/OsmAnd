@@ -1,7 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -22,10 +21,11 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashMap;
@@ -88,13 +88,12 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 	@NonNull
 	private BaseBottomSheetItem createAddNewCategoryItem() {
 		OsmandApplication app = requiredMyApplication();
-		View container = UiUtilities.getInflater(app, nightMode)
+		View container = UiUtilities.getInflater(requireContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
 		container.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 
 		TextView title = container.findViewById(R.id.title);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
-		title.setTypeface(typeface);
+		title.setTypeface(FontCache.getMediumFont());
 
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.description), false);
 
@@ -124,14 +123,14 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		if (isHidden) {
 			button.setImageDrawable(getContentIcon(R.drawable.ic_action_folder_hidden));
 		} else {
-			int categoryColor = pointsGroup.color;
+			int categoryColor = pointsGroup.getColor();
 			if (categoryColor != 0) {
 				button.setImageDrawable(getPaintedIcon(R.drawable.ic_action_folder, categoryColor));
 			} else {
 				button.setImageDrawable(getIcon(R.drawable.ic_action_folder, getDefaultColorId()));
 			}
 		}
-		String categoryName = pointsGroup.name;
+		String categoryName = pointsGroup.getName();
 		RadioButton compoundButton = itemView.findViewById(R.id.compound_button);
 		compoundButton.setChecked(Algorithms.stringsEqual(selectedCategory, categoryName));
 		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
@@ -141,7 +140,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		TextView description = itemView.findViewById(R.id.description);
 		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
 		text.setText(name);
-		description.setText(String.valueOf(pointsGroup.points.size()));
+		description.setText(String.valueOf(pointsGroup.getPoints().size()));
 
 		itemView.setOnClickListener(v -> {
 			PointEditor pointEditor = getPointEditor();

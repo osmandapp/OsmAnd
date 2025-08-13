@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,11 +27,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.ScreenItem;
-import net.osmand.plus.helpers.RequestMapThemeParams;
-import net.osmand.plus.keyevent.assignment.KeyAssignment;
-import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
@@ -219,7 +216,7 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap, new RequestMapThemeParams().setAppMode(appMode));
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	private int getDimen(@DimenRes int resId) {

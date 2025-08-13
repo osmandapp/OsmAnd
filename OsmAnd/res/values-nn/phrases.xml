@@ -86,7 +86,6 @@
     <string name="poi_seamark">Maritimt</string>
     <string name="poi_natural">Naturleg</string>
     <string name="poi_military">Militær</string>
-    <string name="poi_osmwiki">Wikipedia</string>
     <string name="poi_water_filter">Vatn;Drikkevatn</string>
     <string name="poi_user_defined_other">Brukardefinert</string>
     <string name="poi_palaeontological_site">Paleontologisk område</string>
@@ -677,7 +676,7 @@
     <string name="poi_recycling_engine_oil">Motorolje</string>
     <string name="poi_apartment">Leilegheit</string>
     <string name="poi_denomination_salvation_army">Frelsesarmeen</string>
-    <string name="poi_denomination_mennonite"></string>
+    <string name="poi_denomination_mennonite"/>
     <string name="poi_denomination_quaker">Kveker</string>
     <string name="poi_internet_access_wlan">Internettilgang: wlan</string>
     <string name="poi_internet_access_fee_no">Internettilgang: ingen gebyr</string>

@@ -108,7 +108,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		Bundle args = getArguments();
 		String key = args != null ? args.getString(QUICK_ACTION_BUTTON_KEY) : null;
 		if (key != null) {
-			buttonState = mapButtonsHelper.getButtonStateById(key);
+			buttonState = mapButtonsHelper.getActionButtonStateById(key);
 		}
 		if (savedInstanceState != null) {
 			long[] array = savedInstanceState.getLongArray(ACTIONS_TO_DELETE_KEY);
@@ -328,6 +328,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		Context context = view.getContext();
 
 		items.add(new PopUpMenuItem.Builder(context)
+				.setTitleId(R.string.shared_string_appearance)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> showAppearanceDialog()).create());
+
+		items.add(new PopUpMenuItem.Builder(context)
 				.setTitleId(R.string.shared_string_rename)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
 				.setOnClickListener(v -> showRenameDialog()).create());
@@ -342,8 +347,15 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
-		displayData.layoutId = R.layout.simple_popup_menu_item;
 		PopUpMenu.show(displayData);
+	}
+
+	private void showAppearanceDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			MapButtonAppearanceFragment.showInstance(manager, buttonState);
+		}
 	}
 
 	private void showRenameDialog() {
@@ -594,7 +606,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 				List<QuickAction> actions = getQuickActions();
 				int actionGlobalPosition = actions.indexOf(action);
 				int actionPosition = actionGlobalPosition % ITEMS_IN_GROUP + 1;
-				h.title.setText(action.getExtendedName(app, true));
+				h.title.setText(action.getExtendedName(app));
 				h.subTitle.setText(getResources().getString(R.string.quick_action_item_action, actionPosition));
 				h.icon.setImageDrawable(getContentIcon(action.getIconRes(app)));
 

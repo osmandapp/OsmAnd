@@ -3,3 +3,5 @@ gen
 raw
 obj
 *.iml
+
+/release

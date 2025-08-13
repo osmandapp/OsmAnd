@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
+import static net.osmand.plus.dashboard.DashboardType.TERRAIN;
 
 import android.os.Bundle;
 import android.view.View;
@@ -28,8 +28,6 @@ import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
-
-import java.util.Map;
 
 public class ModifyGradientFragment extends ConfigureMapOptionFragment implements IColorCardControllerListener {
 
@@ -174,8 +172,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor instanceof PaletteGradientColor) {
-			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+		if (paletteColor instanceof PaletteGradientColor paletteGradientColor) {
 			TerrainType terrainType = TerrainType.valueOf(paletteGradientColor.getTypeName());
 			String key = paletteGradientColor.getPaletteName();
 			TerrainMode mode = TerrainMode.getMode(terrainType, key);

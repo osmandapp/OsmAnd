@@ -21,11 +21,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class LocaleHelper {
 
@@ -36,14 +32,15 @@ public class LocaleHelper {
 
 	private Locale preferredLocale;
 	private Resources localizedResources;
+	private Configuration localizedConf;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.defaultLocale = Locale.getDefault();
-		localeListener = change -> preferredLocaleChanged();
+		localeListener = change -> onPreferredLocaleChanged();
 	}
 
-	private void preferredLocaleChanged() {
+	private void onPreferredLocaleChanged() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
 			if (!Algorithms.isEmpty(preferredLocale)) {
@@ -57,8 +54,9 @@ public class LocaleHelper {
 	public void checkPreferredLocale() {
 		OsmandSettings settings = app.getSettings();
 		String locale = settings.PREFERRED_LOCALE.get();
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			String currentLocale = Locale.getDefault().toString();
+			String currentLocale = Locale.getDefault().toLanguageTag();
 			if (!Algorithms.stringsEqual(currentLocale, locale)) {
 				locale = currentLocale;
 				settings.PREFERRED_LOCALE.set(locale);
@@ -66,18 +64,59 @@ public class LocaleHelper {
 		}
 		settings.PREFERRED_LOCALE.addListener(localeListener);
 
-		String[] splitScript = locale.split("\\+");
-		String script = (splitScript.length > 1) ? splitScript[1] : "";
-		String[] splitCountry = splitScript[0].split("_");
-		String lang = splitCountry[0];
-		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
+		boolean useSystemDefault = Algorithms.isEmpty(locale);
+		if (!useSystemDefault) {
+			Locale modernLocale = Locale.forLanguageTag(locale);
+			if (!Algorithms.isEmpty(modernLocale.toString())) {
+				preferredLocale = modernLocale;
+			} else {
+				preferredLocale = parseLegacyLanguageTag(locale, preferredLocale);
+			}
+		}
 
+		Locale selectedLocale = null;
+		Configuration config = app.getBaseContext().getResources().getConfiguration();
+
+		if (!useSystemDefault && !Objects.equals(config.getLocales().get(0), preferredLocale)) {
+			selectedLocale = preferredLocale;
+		} else if (useSystemDefault && defaultLocale != null && !Objects.equals(Locale.getDefault(), defaultLocale)) {
+			selectedLocale = defaultLocale;
+			preferredLocale = null;
+		}
+
+		updateTimeFormatting(selectedLocale != null ? selectedLocale : Locale.getDefault());
+
+		if (selectedLocale != null) {
+			Locale.setDefault(selectedLocale);
+			Configuration newConfig = new Configuration(config);
+
+			newConfig.setLocales(new android.os.LocaleList(selectedLocale));
+			newConfig.setLayoutDirection(selectedLocale);
+
+			Resources resources = app.getBaseContext().getResources();
+			resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
+			localizedConf = new Configuration(newConfig);
+		}
+	}
+
+	@Nullable
+	private Locale parseLegacyLanguageTag(@NonNull String locale, @Nullable Locale defaultLocale) {
+		// Split locale into language, region, and script
+		String[] scriptSplit = locale.split("\\+");
+		String baseLocale = scriptSplit[0];
+		String script = (scriptSplit.length > 1) ? scriptSplit[1] : "";
+
+		String[] localeSplit = baseLocale.split("_");
+		String lang = localeSplit[0];
+		String country = (localeSplit.length > 1) ? localeSplit[1] : "";
+
+		// Construct Locale using Builder
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
 			lang = backwardCompatibleNonIsoCodes(lang);
-			String langLowerCase = lang.toLowerCase();
 			for (String isoLang : Locale.getISOLanguages()) {
-				if (isoLang.toLowerCase().equals(langLowerCase)) {
+				if (isoLang.equalsIgnoreCase(lang)) {
 					builder.setLanguage(isoLang);
 					break;
 				}
@@ -88,30 +127,9 @@ public class LocaleHelper {
 			if (!Algorithms.isEmpty(script)) {
 				builder.setScript(script);
 			}
-			preferredLocale = builder.build();
+			return builder.build();
 		}
-
-		Locale selectedLocale = null;
-		Configuration config = app.getBaseContext().getResources().getConfiguration();
-		if (!Algorithms.isEmpty(lang) && !config.locale.equals(preferredLocale)) {
-			selectedLocale = preferredLocale;
-		} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
-			selectedLocale = defaultLocale;
-			preferredLocale = null;
-		}
-
-		updateTimeFormatting(selectedLocale != null ? selectedLocale : Locale.getDefault());
-		if (selectedLocale != null) {
-			Locale.setDefault(selectedLocale);
-			config.locale = selectedLocale;
-			config.setLayoutDirection(selectedLocale);
-
-			Resources resources = app.getBaseContext().getResources();
-			resources.updateConfiguration(config, resources.getDisplayMetrics());
-			Configuration conf = new Configuration(config);
-			conf.locale = selectedLocale;
-			localizedResources = app.createConfigurationContext(conf).getResources();
-		}
+		return defaultLocale;
 	}
 
 	private String backwardCompatibleNonIsoCodes(String lang) {
@@ -147,7 +165,11 @@ public class LocaleHelper {
 	}
 
 	@Nullable
-	public Resources getLocalizedResources() {
+	public Resources getLocalizedResources(Context ctx, Resources ctxRes) {
+		if (localizedResources == null && localizedConf != null
+				|| (localizedResources != null && localizedResources.getDisplayMetrics().density != ctxRes.getDisplayMetrics().density)) {
+			localizedResources = ctx.createConfigurationContext(localizedConf).getResources();
+		}
 		return localizedResources;
 	}
 
@@ -174,7 +196,12 @@ public class LocaleHelper {
 
 	@NonNull
 	public String getLanguage() {
-		String lang = preferredLocale != null ? preferredLocale.getLanguage() : Locale.getDefault().getLanguage();
+		return getLanguage(preferredLocale != null ? preferredLocale : Locale.getDefault());
+	}
+
+	@NonNull
+	public String getLanguage(@NonNull Locale locale) {
+		String lang = locale.getLanguage();
 		if (lang.length() > 3) {
 			lang = lang.substring(0, 2).toLowerCase();
 		}
@@ -207,7 +234,8 @@ public class LocaleHelper {
 	}
 
 	@Nullable
-	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app, @NonNull Collection<String> localeIds) {
+	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app,
+			@NonNull Collection<String> localeIds) {
 		String preferredLocaleId = app.getSettings().PREFERRED_LOCALE.get();
 		Locale availablePreferredLocale = getAvailablePreferredLocale(localeIds);
 
@@ -230,6 +258,12 @@ public class LocaleHelper {
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public static String getPreferredPlacesLanguage(@NonNull OsmandApplication app) {
+		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		return Algorithms.isEmpty(locale) ? app.getLanguage() : locale;
 	}
 
 	@NonNull

@@ -41,6 +41,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
@@ -49,7 +51,7 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public final class NavigationScreen extends BaseAndroidAutoScreen implements SurfaceRendererCallback,
-		IRouteInformationListener, DefaultLifecycleObserver {
+		IRouteInformationListener, DefaultLifecycleObserver, ElevationListener {
 
 	@NonNull
 	private final NavigationListener listener;
@@ -69,6 +71,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	private TravelEstimate destinationTravelEstimate;
 	private boolean shouldShowNextStep;
 	private boolean shouldShowLanes;
+	private boolean use3DButton = true;
 
 	@Nullable
 	CarIcon junctionImage;
@@ -91,7 +94,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
 		speedometerWidget = new SpeedometerWidget(app, null, null);
-
+		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}
 
@@ -102,11 +105,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void onResume(@NonNull LifecycleOwner owner) {
-		DefaultLifecycleObserver.super.onResume(owner);
+		super.onResume(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
-		if(navigationSession != null) {
+		if (navigationSession != null) {
 			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-			if(surfaceRenderer != null) {
+			if (surfaceRenderer != null) {
 				surfaceRenderer.setCallback(this);
 			}
 		}
@@ -114,11 +117,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void onPause(@NonNull LifecycleOwner owner) {
-		DefaultLifecycleObserver.super.onPause(owner);
+		super.onPause(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
-		if(navigationSession != null) {
+		if (navigationSession != null) {
 			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-			if(surfaceRenderer != null) {
+			if (surfaceRenderer != null) {
 				surfaceRenderer.setCallback(null);
 			}
 		}
@@ -126,6 +129,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
 		adjustMapPosition(false);
 		getApp().getRoutingHelper().removeListener(this);
 		getLifecycle().removeObserver(this);
@@ -157,6 +161,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	private SurfaceRenderer getSurfaceRenderer() {
 		NavigationSession session = getApp().getCarNavigationSession();
 		return session != null ? session.getNavigationCarSurface() : null;
+	}
+
+	@Nullable
+	OsmandMapTileView getMapView() {
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
+			return surfaceRenderer.getMapView();
+		}
+		return null;
 	}
 
 	/**
@@ -218,7 +231,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		NavigationTemplate.Builder builder = new NavigationTemplate.Builder();
 		builder.setBackgroundColor(CarColor.SECONDARY);
 
@@ -239,13 +252,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 						.setOnClickListener(this::compassClick)
 						.build());
 		if (getApp().useOpenGlRenderer()) {
+			int dButtonResource = use3DButton ? R.drawable.ic_action_3d : R.drawable.ic_action_2d;
 			actionStripBuilder.addAction(
 					new Action.Builder()
-							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_3d)).build())
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), dButtonResource)).build())
 							.setOnClickListener(() -> {
 								if (surfaceRenderer != null) {
 									surfaceRenderer.handleTilt();
 								}
+								invalidate();
 							})
 							.build());
 		}
@@ -326,9 +341,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		// pressing the select button again.
 		builder.setPanModeListener(isInPanMode -> {
 			if (isInPanMode) {
-				CarToast.makeText(getCarContext(),
-						R.string.exit_pan_mode_descr,
-						CarToast.LENGTH_LONG).show();
+				getApp().getToastHelper().showCarToast(getApp().getString(R.string.exit_pan_mode_descr), true);
 			}
 			panMode = isInPanMode;
 			invalidate();
@@ -391,6 +404,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		compassResId = compassMode.getIconId(nightMode);
 	}
 
+	private void updateUse3DButton() {
+		if (getApp().useOpenGlRenderer()) {
+			OsmandMapTileView mapView = getMapView();
+			use3DButton = mapView != null && mapView.getElevationAngle() == OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+		} else {
+			use3DButton = false;
+		}
+	}
+
 	private boolean isRerouting() {
 		return rerouting || destinations == null;
 	}
@@ -430,5 +452,18 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void routeWasFinished() {
+	}
+
+	@Override
+	public void onElevationChanging(float angle) {
+		boolean currentUse3DButton = use3DButton;
+		updateUse3DButton();
+		if (currentUse3DButton != use3DButton) {
+			invalidate();
+		}
+	}
+
+	@Override
+	public void onStopChangingElevation(float angle) {
 	}
 }

@@ -46,6 +46,19 @@ public class Zoom {
 		changeZoom(-1);
 	}
 
+	public void partialChangeZoom(float deltaZoom) {
+		while (zoomFloatPart + deltaZoom >= 0.5 && baseZoom + 1 <= maxZoom) {
+			deltaZoom--;
+			baseZoom++;
+		}
+		while (zoomFloatPart + deltaZoom < -0.5 && baseZoom - 1 >= minZoom) {
+			deltaZoom++;
+			baseZoom--;
+		}
+		zoomFloatPart += deltaZoom;
+		checkZoomBounds();
+	}
+
 	public void changeZoom(int step) {
 		baseZoom += step;
 		checkZoomBounds();

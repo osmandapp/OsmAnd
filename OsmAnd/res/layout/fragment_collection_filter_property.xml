@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
@@ -36,10 +36,10 @@
 			android:layout_margin="@dimen/list_content_padding"
 			android:focusable="true"
 			android:focusableInTouchMode="true"
-			osmand:hasClearButton="true"
-			osmand:labelText="@string/filter_by_name"
-			osmand:primaryColor="@color/active_color_primary_dark"
-			osmand:secondaryColor="?android:textColorSecondary">
+			app:hasClearButton="true"
+			app:labelText="@string/filter_by_name"
+			app:primaryColor="@color/active_color_primary_dark"
+			app:secondaryColor="?android:textColorSecondary">
 
 			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 				android:id="@+id/query_et"
@@ -72,9 +72,9 @@
 			android:layout_height="4dp"
 			android:indeterminate="true"
 			android:visibility="gone"
-			osmand:mpb_progressStyle="horizontal"
-			osmand:mpb_setBothDrawables="true"
-			osmand:mpb_useIntrinsicPadding="false" />
+			app:mpb_progressStyle="horizontal"
+			app:mpb_setBothDrawables="true"
+			app:mpb_useIntrinsicPadding="false" />
 
 		<include
 			android:id="@+id/top_divider"
@@ -99,9 +99,9 @@
 				android:id="@+id/show_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				osmand:dialogButtonTitle="@string/shared_string_apply"
-				osmand:dialogButtonType="tertiary"
-				osmand:dialogButtonUseUppercaseTitle="true" />
+				app:dialogButtonTitle="@string/shared_string_apply"
+				app:dialogButtonType="tertiary"
+				app:dialogButtonUseUppercaseTitle="true" />
 
 		</LinearLayout>
 	</LinearLayout>

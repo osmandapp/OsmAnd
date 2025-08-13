@@ -1,8 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,11 +16,9 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -35,27 +30,13 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = Map3DModeBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
-	private ApplicationMode appMode;
 	private Map3DButtonState buttonState;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		settings = app.getSettings();
 		buttonState = app.getMapButtonsHelper().getMap3DButtonState();
-
-		Bundle args = getArguments();
-		if (savedInstanceState != null) {
-			restoreAppMode(savedInstanceState);
-		} else if (args != null) {
-			restoreAppMode(args);
-		}
-	}
-
-	private void restoreAppMode(@NonNull Bundle bundle) {
-		appMode = ApplicationMode.valueOfStringKey(bundle.getString(APP_MODE_KEY), settings.getApplicationMode());
 	}
 
 	@Override
@@ -67,7 +48,7 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@NonNull
 	private View createView() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.fragment_map_3d_mode_bottom_sheet, null);
 		LinearLayout itemsContainer = view.findViewById(R.id.items_container);
 
@@ -95,11 +76,6 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 			Fragment targetFragment = getTargetFragment();
 			if (targetFragment instanceof Map3DModeUpdateListener) {
 				((Map3DModeUpdateListener) targetFragment).onMap3DModeUpdated(itemVisibility);
-			}
-			Activity activity = getActivity();
-			if (activity instanceof MapActivity) {
-				MapActivity mapActivity = (MapActivity) activity;
-				mapActivity.getMapLayers().updateLayers(mapActivity);
 			}
 			dismiss();
 		});
@@ -129,8 +105,7 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @Nullable Fragment target,
-	                                @NonNull ApplicationMode appMode) {
+	                                @Nullable Fragment target, @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Map3DModeBottomSheet fragment = new Map3DModeBottomSheet();
 			fragment.setTargetFragment(target, 0);

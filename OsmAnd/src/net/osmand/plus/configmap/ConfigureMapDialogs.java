@@ -259,12 +259,7 @@ public class ConfigureMapDialogs {
 		OsmandApplication app = activity.getMyApplication();
 		String title = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
 		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
-		int selectedIndex = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
-		if (selectedIndex >= 0) {
-			selectedIndex++;
-		} else if (Algorithms.isEmpty(pref.get())) {
-			selectedIndex = 0;
-		}
+		int selectedIndex = AndroidUtils.getRenderPropertySelectedValueIndex(app, p);
 
 		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
 				.setTitle(title)
@@ -279,7 +274,7 @@ public class ConfigureMapDialogs {
 				pref.set(p.getPossibleValues()[which - 1]);
 			}
 			activity.refreshMapComplete();
-			item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
+			item.setDescription(AndroidUtils.getRenderingStringPropertyValue(app, p));
 			String id = item.getId();
 			if (!Algorithms.isEmpty(id)) {
 				uiAdapter.onRefreshItem(id);

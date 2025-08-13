@@ -16,6 +16,7 @@ import androidx.core.widget.CompoundButtonCompat;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.render.RenderingIcons;
 
@@ -47,7 +48,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 		this.items = new ArrayList<>(items);
 		selectedItems = new ArrayList<>();
 		uiUtilities = app.getUIUtilities();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		activeIconColorRes = nightMode
 				? R.color.icon_color_osmand_dark
 				: R.color.icon_color_osmand_light;
@@ -63,7 +64,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 	@Override
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		if (convertView == null) {
-			convertView = UiUtilities.getInflater(app, nightMode)
+			convertView = UiUtilities.getInflater(parent.getContext(), nightMode)
 					.inflate(R.layout.profile_data_list_item_child, parent, false);
 		}
 		PoiType poiType = getItem(position);

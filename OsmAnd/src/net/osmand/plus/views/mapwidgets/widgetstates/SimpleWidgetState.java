@@ -11,28 +11,15 @@ import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
-public class SimpleWidgetState extends WidgetState {
+public class SimpleWidgetState extends ResizableWidgetState {
 
-	private final OsmandPreference<WidgetSize> widgetSizePref;
 	private final CommonPreference<Boolean> showIconPref;
 	private final WidgetType widgetType;
 
-	public SimpleWidgetState(@NonNull OsmandApplication app, @Nullable String customId, @NonNull WidgetType widgetType) {
-		super(app);
-		this.widgetSizePref = registerWidgetSizePref(customId, widgetType);
+	public SimpleWidgetState(@NonNull OsmandApplication app, @Nullable String customId, @NonNull WidgetType widgetType, @NonNull WidgetSize defaultWidgetSize) {
+		super(app, customId, widgetType, defaultWidgetSize);
 		this.showIconPref = registerShowIconPref(customId, widgetType);
 		this.widgetType = widgetType;
-	}
-
-	@NonNull
-	private OsmandPreference<WidgetSize> registerWidgetSizePref(@Nullable String customId, @NonNull WidgetType widgetType) {
-		String prefId = "simple_widget_size";
-		prefId += widgetType.id;
-		if (!Algorithms.isEmpty(customId)) {
-			prefId += customId;
-		}
-		return settings.registerEnumStringPreference(prefId, WidgetSize.MEDIUM, WidgetSize.values(), WidgetSize.class)
-				.makeProfile();
 	}
 
 	@NonNull
@@ -43,11 +30,6 @@ public class SimpleWidgetState extends WidgetState {
 			prefId += customId;
 		}
 		return settings.registerBooleanPreference(prefId, true).makeProfile();
-	}
-
-	@NonNull
-	public OsmandPreference<WidgetSize> getWidgetSizePref() {
-		return widgetSizePref;
 	}
 
 	@NonNull
@@ -67,17 +49,13 @@ public class SimpleWidgetState extends WidgetState {
 	}
 
 	@Override
-	public void changeToNextState() {
-	}
-
-	@Override
 	public void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId) {
 		copyPrefsFromMode(appMode, appMode, customId);
+		super.copyPrefs(appMode, customId);
 	}
 
 	@Override
 	public void copyPrefsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId){
-		registerWidgetSizePref(customId, widgetType).setModeValue(appMode, widgetSizePref.getModeValue(sourceAppMode));
 		registerShowIconPref(customId, widgetType).setModeValue(appMode, showIconPref.getModeValue(sourceAppMode));
 	}
 }

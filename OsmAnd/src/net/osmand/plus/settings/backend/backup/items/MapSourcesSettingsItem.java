@@ -278,7 +278,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(false);
 	}
 
 	@Nullable

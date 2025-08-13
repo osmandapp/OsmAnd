@@ -5,6 +5,7 @@ poi_types.xml
 *.map_styles_presets.xml
 routing*.xml
 rendering_types.xml
+activities.json
 countries.reginfo
 regions.ocbf
 h_*.png
@@ -27,7 +28,9 @@ agconnect-services.json
 OsmAndHms.jks
 
 # Android Studio
+java_pid*.hprof
 .attach_pid*
+hs_err_pid*
 /.idea
 *.iml
 
@@ -46,3 +49,9 @@ build
 
 #Rendering test files
 OsmAnd-java/src/test/resources/rendering/*
+OsmAnd-shared/bin
+# ApproximationTest resources
+OsmAnd-java/src/test/resources/approximation/*
+#Shared library resources
+OsmAnd-shared/src/androidMain/resources/
+OsmAnd-shared/src/jvmMain/resources/

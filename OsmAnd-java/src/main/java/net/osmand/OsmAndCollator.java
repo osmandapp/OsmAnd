@@ -1,5 +1,7 @@
 package net.osmand;
 
+import net.osmand.util.ArabicNormalizer;
+
 import java.util.Locale;
 
 public class OsmAndCollator {
@@ -34,7 +36,17 @@ public class OsmAndCollator {
 
 			@Override
 			public int compare(String source, String target) {
+				source = normalize(source);
+				target = normalize(target);
 				return instance.compare(source, target);
+			}
+
+			private String normalize(String s) {
+				if (ArabicNormalizer.isSpecialArabic(s)) {
+					String normalized = ArabicNormalizer.normalize(s);
+					s = normalized == null ? s : normalized;
+				}
+				return s;
 			}
 		};
 	}

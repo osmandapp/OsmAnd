@@ -50,6 +50,7 @@ import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -67,7 +68,7 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer
 		implements OsmAndLocationListener, OsmAndCompassListener, IContextMenuProvider {
 
-	private static final float MODEL_3D_MAX_SIZE_DP = 4.8f;
+	private static final int MODEL_3D_MAX_SIZE_DP = 6;
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
 	protected static final int RADIUS = 7;
@@ -83,14 +84,19 @@ public class PointLocationLayer extends OsmandMapLayer
 	private int profileColor;
 
 	private String navigationIconName;
+	@Nullable
 	private Model3D navigationModel;
 	private boolean brokenNavigationModel;
+	@Nullable
 	private LayerDrawable navigationIcon;
 
 	private String locationIconName;
+	@Nullable
 	private Model3D locationModel;
 	private boolean brokenLocationModel;
+	@Nullable
 	private LayerDrawable locationIcon;
+
 	private Bitmap headingIcon;
 	private int headingIconId;
 
@@ -98,7 +104,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 	private final OsmandSettings settings;
 	private final Model3dHelper model3dHelper;
-	private boolean nm;
+	private boolean nighMode;
 	private boolean locationOutdated;
 	private Location prevLocation;
 
@@ -246,9 +252,6 @@ public class PointLocationLayer extends OsmandMapLayer
 		super.onUpdateFrame(mapRenderer);
 		if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
 			Location location = getPointLocation();
-			if (location != null && location.hasBearing()) {
-				location.setBearing(getPointBearing());
-			}
 			PointI target31 = mapRenderer.getTarget();
 			updateMarker(location, target31, 0);
 		}
@@ -284,6 +287,12 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		recreateMarkerCollection();
+	}
+
 	private boolean recreateMarkerCollection() {
 		if (view == null || !hasMapRenderer()) {
 			return false;
@@ -309,7 +318,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		float sectorDirection = 0.0f;
 		float sectorRadius = 0.0f;
 		switch (currentMarkerState) {
-			case MOVE:
+			case MOVE -> {
 				navigationMarker.setVisibility(!showHeading);
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(showHeading);
@@ -330,8 +339,8 @@ public class PointLocationLayer extends OsmandMapLayer
 				sectorRadius = (float) (showHeading
 						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
 						: 0);
-				break;
-			case STAY:
+			}
+			case STAY -> {
 				navigationMarker.setVisibility(false);
 				locationMarker.setVisibility(!showHeading);
 				navigationMarkerWithHeading.setVisibility(false);
@@ -352,13 +361,13 @@ public class PointLocationLayer extends OsmandMapLayer
 				sectorRadius = (float) (showHeading
 						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
 						: 0);
-				break;
-			case NONE:
-			default:
+			}
+			default -> {
 				navigationMarker.setVisibility(false);
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(false);
 				locationMarkerWithHeading.setVisibility(false);
+			}
 		}
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
@@ -380,15 +389,11 @@ public class PointLocationLayer extends OsmandMapLayer
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
-			case MOVE:
-				locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
-				break;
-			case STAY:
-				locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
-				break;
-			case NONE:
-			default:
+			case MOVE -> locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
+			case STAY -> locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
+			default -> {
 				return null;
+			}
 		}
 		return locMarker;
 	}
@@ -490,15 +495,11 @@ public class PointLocationLayer extends OsmandMapLayer
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
-			case MOVE:
-				locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
-				break;
-			case STAY:
-				locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
-				break;
-			case NONE:
-			default:
+			case MOVE -> locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
+			case STAY -> locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
+			default -> {
 				return null;
+			}
 		}
 		return locMarker != null && locMarker.marker != null ? locMarker.marker.getPosition() : null;
 	}
@@ -561,26 +562,6 @@ public class PointLocationLayer extends OsmandMapLayer
 		return location != null ? location : locationProvider.getLastStaleKnownLocation();
 	}
 
-	@Nullable
-	public float getPointBearing() {
-		float result = 0.0f;
-		Location location = null;
-		OsmandApplication app = getApplication();
-		if (app.getRoutingHelper().isFollowingMode() && app.getSettings().SNAP_TO_ROAD.get()) {
-			RouteLayer routeLayer = app.getOsmandMap().getMapLayers().getRouteLayer();
-			location = routeLayer.getLastRouteProjection();
-			if (location != null) {
-				result = routeLayer.getLastRouteBearing();
-			}
-		}
-		if (location == null) {
-			location = locationProvider.getLastStaleKnownLocation();
-			if (location != null && location.hasBearing()) {
-				result = location.getBearing();
-			}
-		}
-		return result;
-	}
 
 	private boolean isLocationVisible(@NonNull RotatedTileBox tb, @NonNull Location l) {
 		return tb.containsLatLon(l.getLatitude(), l.getLongitude());
@@ -609,8 +590,10 @@ public class PointLocationLayer extends OsmandMapLayer
 			Float bearing = getBearingToShow(lastKnownLocation);
 			if (bearing != null) {
 				canvas.rotate(bearing - 90, locationX, locationY);
-				AndroidUtils.drawScaledLayerDrawable(canvas, navigationIcon, locationX, locationY, textScale);
-			} else {
+				if (navigationIcon != null) {
+					AndroidUtils.drawScaledLayerDrawable(canvas, navigationIcon, locationX, locationY, textScale);
+				}
+			} else if (locationIcon != null) {
 				AndroidUtils.drawScaledLayerDrawable(canvas, locationIcon, locationX, locationY, textScale);
 			}
 		}
@@ -703,7 +686,19 @@ public class PointLocationLayer extends OsmandMapLayer
 			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
-				updateMarker(location, null, isAnimateMyLocation() ? movingTime : 0);
+				boolean animatePosition = settings.ANIMATE_MY_LOCATION.get();
+				Integer interpolationPercent = settings.LOCATION_INTERPOLATION_PERCENT.get();
+				if (prevLocation != null && getApplication().getRoutingHelper().isFollowingMode() && interpolationPercent > 0 && animatePosition) {
+					List<Location> predictedLocations = RoutingHelperUtils.predictLocations(prevLocation, location,
+							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute(), interpolationPercent);
+					if (!predictedLocations.isEmpty()) {
+						// At the moment we get the first predicted location, but there may be several of them
+						Location predictedLocation = predictedLocations.get(0);
+						updateMarker(predictedLocation, null, isAnimateMyLocation() ? movingTime : 0);
+					}
+				} else {
+					updateMarker(location, null, isAnimateMyLocation() ? movingTime : 0);
+				}
 				prevLocation = location;
 			}
 		}
@@ -754,7 +749,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
 		boolean locationIconChanged = !locationIconName.equals(this.locationIconName);
 		boolean navigationIconChanged = !navigationIconName.equals(this.navigationIconName);
-		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated
+		if (appMode != this.appMode || this.nighMode != nighMode || this.locationOutdated != locationOutdated
 				|| this.profileColor != profileColor
 				|| locationIconChanged
 				|| navigationIconChanged
@@ -762,7 +757,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				|| this.carView != carView) {
 			this.appMode = appMode;
 			this.profileColor = profileColor;
-			this.nm = nighMode;
+			this.nighMode = nighMode;
 			this.locationOutdated = locationOutdated;
 			this.locationIconName = locationIconName;
 			this.navigationIconName = navigationIconName;
@@ -832,10 +827,10 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= 3 && !excludeUntouchableObjects) {
-			getMyLocationFromPoint(tileBox, point, o);
+		if (result.getTileBox().getZoom() >= 3 && !excludeUntouchableObjects) {
+			getMyLocationFromPoint(result);
 		}
 	}
 
@@ -859,15 +854,17 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
-	private void getMyLocationFromPoint(RotatedTileBox tb, PointF point, List<? super LatLon> myLocation) {
+	private void getMyLocationFromPoint(@NonNull MapSelectionResult result) {
 		LatLon location = getMyLocation();
 		if (location != null && view != null) {
+			PointF point = result.getPoint();
+			RotatedTileBox tileBox = result.getTileBox();
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, location);
-			int rad = (int) (18 * tb.getDensity());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, location);
+			int rad = (int) (18 * tileBox.getDensity());
 			if (Math.abs(pixel.x - ex) <= rad && (ey - pixel.y) <= rad && (pixel.y - ey) <= 2.5 * rad) {
-				myLocation.add(location);
+				result.collect(location, this);
 			}
 		}
 	}
@@ -876,17 +873,38 @@ public class PointLocationLayer extends OsmandMapLayer
 	private String getLocationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
 		String locationIconName = appMode.getLocationIcon();
+		if (hasMapRenderer && LocationIcon.isModelRepresented(locationIconName)) {
+			locationIconName = LocationIcon.fromName(locationIconName).getRepresented3DModelKey();
+		}
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
 				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
-		return forceUseDefault ? LocationIcon.DEFAULT.name() : locationIconName;
+		return forceUseDefault
+				? getDefaultIcon(locationIconName, LocationIcon.STATIC_DEFAULT.name())
+				: locationIconName;
 	}
 
 	@NonNull
 	private String getNavigationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
 		String navigationIconName = appMode.getNavigationIcon();
+		if (hasMapRenderer && LocationIcon.isModelRepresented(navigationIconName)) {
+			navigationIconName = LocationIcon.fromName(navigationIconName).getRepresented3DModelKey();
+		}
 		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
 				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
-		return forceUseDefault ? LocationIcon.MOVEMENT_DEFAULT.name() : navigationIconName;
+		return forceUseDefault
+				? getDefaultIcon(navigationIconName, LocationIcon.MOVEMENT_DEFAULT.name())
+				: navigationIconName;
+	}
+
+	private String getDefaultIcon(@NonNull String iconName, @NonNull String defaultIconName) {
+		String defaultIcon = defaultIconName;
+		if (LocationIcon.isDefaultModel(iconName)) {
+			String iconForDefaultModel = LocationIcon.getIconForDefaultModel(iconName);
+			if (!Algorithms.isEmpty(iconForDefaultModel)) {
+				defaultIcon = iconForDefaultModel;
+			}
+		}
+		return defaultIcon;
 	}
 }

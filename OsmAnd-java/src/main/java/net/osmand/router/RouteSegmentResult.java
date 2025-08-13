@@ -652,7 +652,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
 
-	public String getDestinationName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
+	public String getDestinationName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd, boolean withRef) {
 		String dnRef = getObject().getDestinationRef(lang, transliterate, isForwardDirection());
 		String destinationName = getObject().getDestinationName(lang, transliterate, isForwardDirection());
 		if (Algorithms.isEmpty(destinationName)) {
@@ -660,6 +660,11 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			float distanceFromTurn = getDistance();
 			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
 				RouteSegmentResult s1 = list.get(n);
+				TurnType t = s1.getTurnType();
+				if (t != null) {
+					// avoid retrieve destination over other turns
+					break;
+				}
 				String s1DnRef = s1.getObject().getDestinationRef(lang,	transliterate, isForwardDirection());
 				boolean dnRefIsEqual = !Algorithms.isEmpty(s1DnRef) && !Algorithms.isEmpty(dnRef) && s1DnRef.equals(dnRef);
 				boolean isMotorwayLink = "motorway_link".equals(s1.getObject().getHighway());
@@ -673,10 +678,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				}
 			}
 		}
-		if (!Algorithms.isEmpty(dnRef) && !Algorithms.isEmpty(destinationName)) {
-			destinationName = dnRef + ", " + destinationName;
-		} else if (!Algorithms.isEmpty(dnRef) && Algorithms.isEmpty(destinationName)) {
-			destinationName = dnRef;
+		if (withRef) {
+			if (!Algorithms.isEmpty(dnRef) && !Algorithms.isEmpty(destinationName)) {
+				destinationName = dnRef + ", " + destinationName;
+			} else if (!Algorithms.isEmpty(dnRef) && Algorithms.isEmpty(destinationName)) {
+				destinationName = dnRef;
+			}
 		}
 		return destinationName;
 	}

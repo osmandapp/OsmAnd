@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="@dimen/card_row_min_height"
@@ -21,7 +21,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.ListItemTitle"
-        osmand:typeface="@string/font_roboto_regular"
+        android:textStyle="normal"
         tools:text="Some title" />
 
     <androidx.appcompat.widget.AppCompatCheckBox

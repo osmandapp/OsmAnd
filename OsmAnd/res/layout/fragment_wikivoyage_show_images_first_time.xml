@@ -2,7 +2,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               xmlns:tools="http://schemas.android.com/tools"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_gravity="bottom"
               android:orientation="vertical">
 
@@ -25,7 +25,7 @@
 		android:paddingLeft="@dimen/list_content_padding"
 		android:paddingRight="@dimen/list_content_padding"
 		android:paddingStart="@dimen/list_content_padding"
-		osmand:srcCompat="@drawable/img_help_wikivoyage_show_image"
+		app:srcCompat="@drawable/img_help_wikivoyage_show_image"
 		android:contentDescription="@string/wikivoyage_download_pics" />
 
 			<TextView
@@ -90,7 +90,7 @@
 					android:text="@string/shared_string_dont"
 					android:textColor="?attr/wikivoyage_active_color"
 					android:textSize="@dimen/text_button_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:ignore="UnusedAttribute" />
 
 			</FrameLayout>
@@ -113,7 +113,7 @@
 					android:maxLines="1"
 					android:textColor="?attr/wikivoyage_primary_btn_text_color"
 					android:textSize="@dimen/text_button_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:ignore="UnusedAttribute"
 					tools:text="@string/shared_string_do" />
 

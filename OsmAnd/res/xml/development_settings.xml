@@ -53,18 +53,19 @@
 		android:title="@string/debugging_and_development" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="debug_rendering"
+		android:key="simulate_obd_data"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/trace_rendering" />
+		android:title="@string/simulate_obd" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="disable_map_layers"
+		android:key="battery_saving"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/disable_map_layers" />
+		android:title="@string/battery_saving_mode" />
+
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="transparent_status_bar"
@@ -127,17 +128,38 @@
 		android:summaryOn="@string/shared_string_yes"
 		android:title="@string/write_heading" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_location_provider_to_gpx"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_no"
+		android:summaryOn="@string/shared_string_yes"
+		android:title="@string/write_location_provider" />
+
 	<PreferenceCategory
 		android:key="texts"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/map_text" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="show_symbols_debug_info"
+		android:key="disable_map_layers"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/show_debug_info" />
+		android:title="@string/disable_map_layers" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_primitives_debug_info"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_debug_tile" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="enable_msaa"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/enable_msaa" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="allow_symbols_display_on_top"
@@ -145,6 +167,31 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/allow_display_on_top" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="debug_rendering"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/trace_rendering" />
+
+	<Preference
+		android:key="max_rendering_threads"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/threads_allocated_for_rendering"
+		tools:summary="8 threads" />
+
+	<PreferenceCategory
+		android:key="aistracker"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/plugin_ais_tracker_name" />
+
+	<Preference
+		android:key="aistracker_simulation"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/ais_load_data" />
 
 	<PreferenceCategory
 		android:key="info"

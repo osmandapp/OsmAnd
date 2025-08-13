@@ -24,7 +24,7 @@ public class PoiFilterUtils {
 	public static void combineStandardPoiFilters(@NonNull Set<PoiUIFilter> filters, @NonNull OsmandApplication app) {
 		Set<PoiUIFilter> standardFilters = new TreeSet<>();
 		for (PoiUIFilter filter : filters) {
-			if (((filter.isStandardFilter() && filter.filterId.startsWith(STD_PREFIX))
+			if (((filter.isStandardFilter() && filter.filterId.startsWith(STD_PREFIX) && !filter.isTopWikiFilter())
 					|| filter.isCustomPoiFilter())
 					&& (filter.getFilterByName() == null)
 					&& (filter.getSavedFilterByName() == null)) {
@@ -69,6 +69,14 @@ public class PoiFilterUtils {
 			}
 		}
 		return null;
+	}
+
+	public static void sortByElo(@NonNull List<Amenity> amenities) {
+		amenities.sort((a1, a2) -> {
+			int cmp = Integer.compare(a2.getTravelEloNumber(), a1.getTravelEloNumber());
+			if (cmp != 0) return cmp;
+			return a1.getId() < a2.getId() ? -1 : (a1.getId().longValue() == a2.getId().longValue() ? 0 : 1);
+		});
 	}
 
 	public interface AmenityNameFilter {

@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.views.layers.geometry.GeometryWay.GeometryWayProvider;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 
 import java.util.List;
 
@@ -24,22 +24,22 @@ class GradientGeometryWayProvider implements GeometryWayProvider {
 	}
 
 	@Nullable
-	public List<RouteColorizationPoint> simplify(int zoom) {
+	public List<RouteColorize.RouteColorizationPoint> simplify(int zoom) {
 		return routeColorize != null ? routeColorize.simplify(zoom) : null;
 	}
 
 	public int getColor(int index) {
-		return points.get(index).color;
+		return points.get(index).getPrimaryColor();
 	}
 
 	@Override
 	public double getLatitude(int index) {
-		return points.get(index).lat;
+		return points.get(index).getLat();
 	}
 
 	@Override
 	public double getLongitude(int index) {
-		return points.get(index).lon;
+		return points.get(index).getLon();
 	}
 
 	@Override
@@ -50,5 +50,10 @@ class GradientGeometryWayProvider implements GeometryWayProvider {
 	@Override
 	public float getHeight(int index) {
 		return heights == null ? 0 : heights.get(index);
+	}
+
+	@Override
+	public boolean isFirstLastLocation(int index) {
+		return false;
 	}
 }

@@ -25,10 +25,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
@@ -45,8 +44,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.BaseTracksTabsFragment;
-import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -59,6 +58,11 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -187,11 +191,12 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		PopUpMenu.show(displayData);
 	}
 
-	protected void setTabs(@NonNull List<TrackTab> tabs) {
+	@Override
+	protected void setTabs(@NonNull List<TrackTab> tabs, int preselectedTabIndex) {
 		tabSize = tabs.size();
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
-		viewPager.setCurrentItem(0);
+		viewPager.setCurrentItem(preselectedTabIndex);
 		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -225,7 +230,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				selectionButton.setEnabled(!Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) || notAllSelected);
 			}
 			applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
-			TrackTab allTracksTab = trackTabsHelper.getTrackTabs().get(TrackTabType.ALL.name());
+			TrackTab allTracksTab = trackTabsHelper.getTrackTab(TrackTabType.ALL.name());
 			searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
 		}
 	}
@@ -250,12 +255,16 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	}
 
 	@Override
+	public void loadTracksProgress(@NonNull TrackItem... items) {
+	}
+
+	@Override
 	public void tracksLoaded(@NonNull TrackFolder folder) {
-		trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems());
 	}
 
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
+		trackTabsHelper.updateTrackItems(folder);
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateTrackTabs();
 		applyPreselectedParams();
@@ -264,12 +273,27 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		preselectedTabParams = null;
 	}
 
+	@Override
+	protected void updateTrackTabs() {
+		List<TrackTab> trackTabs = getSortedTrackTabs();
+		if (Algorithms.objectEquals(adapter.getTrackTabs(), trackTabs)) {
+			super.updateTrackTabs();
+		} else {
+			TrackTab tab = getSelectedTab();
+			setTabs(trackTabs, tab != null ? tab.getId() : null);
+		}
+	}
+
+	@Override
+	public void deferredLoadTracksFinished(@NonNull TrackFolder folder) {
+	}
+
 	private void applyPreselectedParams() {
 		if (preselectedTabParams != null) {
-			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
-			TrackTab trackTab = getTab(tabName);
+			String tabId = preselectedTabParams.getPreselectedTabId();
+			TrackTab trackTab = getTab(tabId);
 			if (trackTab != null) {
-				setSelectedTab(tabName);
+				setSelectedTab(tabId);
 
 				if (preselectedTabParams.shouldSelectAll()) {
 					itemsSelectionHelper.onItemsSelected(trackTab.getTrackItems(), true);
@@ -305,7 +329,11 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);
 			trackTabsHelper.sortTrackTab(trackTab);
-			trackTabsHelper.saveTabsSortModes();
+			trackTabsHelper.saveTabSortMode(trackTab);
+			// Update tabs order if sort mode changed for the "Tracks" base folder
+			if (trackTab.isBaseFolder()) {
+				setTabs(getSortedTrackTabs(), trackTab.getId());
+			}
 			updateTabsContent();
 		}
 	}
@@ -339,13 +367,13 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setOnClickListener(v -> showTrackOnMap(trackItem))
 				.create());
 
-		File file = trackItem.getFile();
+		File file = getTrackItemFile(trackItem);
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.analyze_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, result -> {
 					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null);
-					detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					OsmAndTaskManager.executeTask(detailsTask);
 					dismiss();
 					return true;
 				}))
@@ -372,7 +400,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, activity, gpxFile);
 					return true;
 				}))
 				.create());
@@ -403,7 +431,9 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		boolean temporary = app.getSelectedGpxHelper().getSelectedFileByPath(trackItem.getPath()) == null;
-		TrackMenuFragment.openTrack(mapActivity, trackItem.getFile(), null, null, OVERVIEW, temporary);
+		KFile kFile = trackItem.getFile();
+		File jFile = kFile == null ? null : SharedUtil.jFile(kFile);
+		TrackMenuFragment.openTrack(mapActivity, jFile, null, null, OVERVIEW, temporary);
 
 		dismiss();
 		mapActivity.getDashboard().hideDashboard();
@@ -413,16 +443,22 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		FragmentActivity activity = requireActivity();
 		if (trackItem.isShowCurrentTrack()) {
 			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-			GPXFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
+			GpxFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
 
 			SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
 				if (errorMessage == null) {
-					plugin.sendGPXFiles(activity, this, new File(gpxFile.path));
+					plugin.sendGPXFiles(activity, this, new File(gpxFile.getPath()));
 				}
 			});
 		} else {
-			plugin.sendGPXFiles(activity, this, trackItem.getFile());
+			plugin.sendGPXFiles(activity, this, getTrackItemFile(trackItem));
 		}
+	}
+
+	@Nullable
+	private File getTrackItemFile(@NonNull TrackItem trackItem) {
+		KFile kFile = trackItem.getFile();
+		return kFile == null ? null : SharedUtil.jFile(kFile);
 	}
 
 	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems) {
@@ -442,7 +478,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				reloadTracks();
 			}
 		});
-		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(deleteFilesTask);
 	}
 
 	@Override

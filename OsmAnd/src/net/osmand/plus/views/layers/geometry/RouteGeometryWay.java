@@ -8,22 +8,23 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.layers.RouteLayer.ActionPoint;
+import net.osmand.plus.views.layers.RouteActionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -115,10 +116,10 @@ public class RouteGeometryWay extends
 		return false;
 	}
 
-	public void setForceIncludedPointIndexesFromActionPoints(@Nullable List<ActionPoint> actionPoints) {
+	public void setForceIncludedPointIndexesFromActionPoints(@Nullable List<RouteActionPoint> actionPoints) {
 		List<Integer> indexes = new ArrayList<>();
 		if (actionPoints != null) {
-			for (ActionPoint actionPoint : actionPoints) {
+			for (RouteActionPoint actionPoint : actionPoints) {
 				if (actionPoint != null) {
 					indexes.add(actionPoint.index);
 					if (actionPoint.normalizedOffset > 0) {
@@ -148,9 +149,9 @@ public class RouteGeometryWay extends
 	@Override
 	protected boolean addInitialPoint(RotatedTileBox tb,
 	                                  double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-	                                  GeometryWayStyle<?> style, boolean previousVisible, Location lastPoint, int startLocationIndex) {
+	                                  GeometryWayStyle<?> style, Location lastPoint, int startLocationIndex) {
 		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-				style, previousVisible, lastPoint, startLocationIndex);
+				style, lastPoint, startLocationIndex);
 		if (added) {
 			if (currentCachedSegment == null) {
 				currentCachedSegment = new Segment();
@@ -165,9 +166,9 @@ public class RouteGeometryWay extends
 	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
 	                                                          @NonNull RotatedTileBox tb,
 	                                                          int startLocationIndex,
-	                                                          boolean previousVisible) {
-		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
-		if (croppedPathData31 == null) {
+	                                                          Location lastProjection) {
+		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, lastProjection);
+		if (croppedPathData31 == null || !cachedSegments.isEmpty()) {
 			return null;
 		}
 
@@ -178,30 +179,25 @@ public class RouteGeometryWay extends
 			segment.indexes = new ArrayList<>();
 			segment.styles = new ArrayList<>();
 
-			for (int lineIndex = 0; lineIndex < segmentData.size(); lineIndex++) {
-				DrawPathData31 line = segmentData.get(lineIndex);
-
-				boolean lastLine = lineIndex + 1 == segmentData.size();
-				int endIndex = lastLine
-						? line.indexes.size()
-						: line.indexes.size() - 1;
+			for (int pathIndex = 0; pathIndex < segmentData.size(); pathIndex++) {
+				DrawPathData31 path31 = segmentData.get(pathIndex);
+				boolean lastPath = pathIndex + 1 == segmentData.size();
+				int endIndex = lastPath ? path31.indexes.size() : path31.indexes.size() - 1;
 				for (int i = 0; i < endIndex; i++) {
-					int index = line.indexes.get(i);
+					int index = path31.indexes.get(i);
 					if (index >= INITIAL_POINT_INDEX_SHIFT) {
-						int x31 = line.tx.get(i);
-						int y31 = line.ty.get(i);
+						int x31 = path31.tx.get(i);
+						int y31 = path31.ty.get(i);
 						double lat = MapUtils.get31LatitudeY(y31);
 						double lon = MapUtils.get31LongitudeX(x31);
 						segment.initialLocations.add(new Location("", lat, lon));
 					}
-
 					segment.indexes.add(index);
-					segment.styles.add(line.style);
+					segment.styles.add(path31.style);
 				}
 			}
 			segments.add(segment);
 		}
-
 		cachedSegments = segments;
 
 		return croppedPathData31;
@@ -303,12 +299,12 @@ public class RouteGeometryWay extends
 		}
 	}
 
-	public List<List<ActionPoint>> getActionArrows(List<ActionPoint> actionPoints) {
-		List<List<ActionPoint>> ll = new ArrayList<>();
+	public List<List<RouteActionPoint>> getActionArrows(List<RouteActionPoint> actionPoints) {
+		List<List<RouteActionPoint>> ll = new ArrayList<>();
 		ll.add(new ArrayList<>());
 		int index = 0;
 		for (int i = 0; i < actionPoints.size(); i++) {
-			ActionPoint actionPoint = actionPoints.get(i);
+			RouteActionPoint actionPoint = actionPoints.get(i);
 			if (actionPoint != null) {
 				ll.get(index).add(actionPoint);
 			} else if (i < actionPoints.size() - 1) {
@@ -319,40 +315,42 @@ public class RouteGeometryWay extends
 		return ll;
 	}
 
-	public void buildActionArrows(@NonNull List<ActionPoint> actionPoints, int customTurnArrowColor) {
+	public void buildActionArrows(@NonNull List<RouteActionPoint> actionPoints, int customTurnArrowColor) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
 		int baseOrder = this.baseOrder - 1000;
-		List<List<ActionPoint>> actionArrows = getActionArrows(actionPoints);
+		List<List<RouteActionPoint>> actionArrows = getActionArrows(actionPoints);
 		if (!actionArrows.isEmpty()) {
 			int lineIdx = 0;
 			if (actionLinesCollection == null) {
 				actionLinesCollection = new VectorLinesCollection();
 			}
-			long initialLinesCount = actionLinesCollection.getLines().size();
-			for (List<ActionPoint> line : actionArrows) {
+			QListVectorLine lines = actionLinesCollection.getLines();
+			long initialLinesCount = lines.size();
+			for (List<RouteActionPoint> line : actionArrows) {
 				int arrowColor = getContrastArrowColor(line, customTurnArrowColor);
 				QVectorPointI points = new QVectorPointI();
-				for (ActionPoint point : line) {
+				for (RouteActionPoint point : line) {
 					int x = MapUtils.get31TileNumberX(point.location.getLongitude());
 					int y = MapUtils.get31TileNumberY(point.location.getLatitude());
 					points.add(new PointI(x, y));
 				}
+				float vectorLineScale = GeometryWayDrawer.getVectorLineScale(getContext().getApp()) / 2.0f;
 				if (lineIdx < initialLinesCount) {
-					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
+					VectorLine vectorLine = lines.get(lineIdx);
 					vectorLine.setPoints(points);
 					vectorLine.setIsHidden(false);
-					vectorLine.setLineWidth(customWidth);
+					vectorLine.setLineWidth(customWidth * vectorLineScale);
 					vectorLine.setFillColor(NativeUtilities.createFColorARGB(arrowColor));
 					lineIdx++;
 				} else {
 					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
 					vectorLineBuilder.setBaseOrder(baseOrder--)
 							.setIsHidden(false)
-							.setLineId((int) actionLinesCollection.getLines().size())
-							.setLineWidth(customWidth)
+							.setLineId(actionLinesCollection.getLinesCount())
+							.setLineWidth(customWidth * vectorLineScale)
 							.setPoints(points)
 							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
 							.setFillColor(NativeUtilities.createFColorARGB(arrowColor));
@@ -360,7 +358,7 @@ public class RouteGeometryWay extends
 				}
 			}
 			while (lineIdx < initialLinesCount) {
-				actionLinesCollection.getLines().get(lineIdx).setIsHidden(true);
+				lines.get(lineIdx).setIsHidden(true);
 				lineIdx++;
 			}
 			mapRenderer.addSymbolsProvider(actionLinesCollection);
@@ -368,7 +366,7 @@ public class RouteGeometryWay extends
 	}
 
 	@ColorInt
-	public int getContrastArrowColor(@NonNull List<ActionPoint> line, @ColorInt int originalArrowColor) {
+	public int getContrastArrowColor(@NonNull List<RouteActionPoint> line, @ColorInt int originalArrowColor) {
 		Context context = getContext().getCtx();
 
 		int lightColor = ColorUtilities.getSecondaryIconColor(context, false);
@@ -379,7 +377,7 @@ public class RouteGeometryWay extends
 		lowDistanceCounts.put(lightColor, 0);
 		lowDistanceCounts.put(darkColor, 0);
 
-		for (ActionPoint actionPoint : line) {
+		for (RouteActionPoint actionPoint : line) {
 			Integer lineColor = getActionPointColor(actionPoint);
 			if (lineColor == null) {
 				return originalArrowColor;
@@ -414,7 +412,7 @@ public class RouteGeometryWay extends
 	}
 
 	@ColorInt
-	private Integer getActionPointColor(@NonNull ActionPoint actionPoint) {
+	private Integer getActionPointColor(@NonNull RouteActionPoint actionPoint) {
 		if (styleMap.isEmpty()) {
 			return getDefaultWayStyle().getColor();
 		}
@@ -429,14 +427,13 @@ public class RouteGeometryWay extends
 			}
 
 			GeometryWayStyle<?> style = segment.styles.get(pointOrder);
-			if (style instanceof GeometryGradientWayStyle<?>) {
-				GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) style;
+			if (style instanceof GeometryGradientWayStyle<?> gradientStyle) {
 				if (pointOrder + 1 == segment.styles.size()) {
 					return gradientStyle.nextColor;
 				} else {
 					int startColor = gradientStyle.currColor;
 					int endColor = gradientStyle.nextColor;
-					return ColorPalette.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
+					return ColorPalette.Companion.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
 				}
 			} else {
 				return style.getColor();

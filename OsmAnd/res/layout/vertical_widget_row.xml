@@ -4,6 +4,11 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
+	<include
+		android:id="@+id/top_divider"
+		layout="@layout/simple_divider_item"
+		android:visibility="gone"/>
+
 	<LinearLayout
 		android:id="@+id/widgets_container"
 		android:layout_width="match_parent"

@@ -1,6 +1,5 @@
 package net.osmand.plus.keyevent.fragments.keyassignments;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.AndroidUtils.getNavigationIconResId;
 
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.listener.EventType;
 import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
@@ -43,16 +41,11 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 
 	private KeyAssignmentsAdapter adapter;
 	private KeyAssignmentsController controller;
-
-	private ApplicationMode appMode;
 	private InputDevicesHelper deviceHelper;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle arguments = getArguments();
-		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
-		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		deviceHelper = app.getInputDeviceHelper();
 		controller = KeyAssignmentsController.getExistedInstance(app);
 		if (controller != null) {
@@ -197,7 +190,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.unregisterDialogIfNeeded(getActivity());
+		controller.finishProcessIfNeeded(getActivity());
 	}
 
 	private void dismiss() {
@@ -214,7 +207,6 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 

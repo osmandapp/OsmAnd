@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/button_body"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:duplicateParentState="true"
+    tools:background="?attr/list_background_color">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:src="@drawable/ic_action_arrow_up"
+        android:tint="?attr/active_color_basic"
+        android:contentDescription="@string/shared_string_navigation"
+        android:layout_gravity="center" />
+
+</FrameLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/root"
 	android:layout_width="match_parent"
@@ -30,7 +30,7 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:background="?attr/selectableItemBackgroundBorderless"
-				osmand:srcCompat="@drawable/ic_arrow_back" />
+				app:srcCompat="@drawable/ic_arrow_back" />
 
 		</FrameLayout>
 
@@ -43,7 +43,7 @@
 			android:ellipsize="end"
 			android:textColor="@color/list_background_color_light"
 			android:textSize="@dimen/dialog_header_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:text="Amsterdam" />
 
 		<FrameLayout
@@ -58,7 +58,7 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:background="?attr/selectableItemBackgroundBorderless"
-				osmand:srcCompat="@drawable/ic_action_edit_dark" />
+				app:srcCompat="@drawable/ic_action_edit_dark" />
 
 		</FrameLayout>
 
@@ -100,7 +100,7 @@
 					android:id="@+id/content_plain"
 					android:textSize="@dimen/default_list_text_size"
 					android:textColor="?android:textColorPrimary"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content" />
 
@@ -136,10 +136,10 @@
 					android:text="@string/shared_string_edit"
 					android:textColor="?attr/active_color_basic"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:drawableLeftCompat="@drawable/ic_action_edit_dark"
-					osmand:drawableStartCompat="@drawable/ic_action_edit_dark"
-					osmand:drawableTint="?attr/active_color_basic"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:drawableLeftCompat="@drawable/ic_action_edit_dark"
+					app:drawableStartCompat="@drawable/ic_action_edit_dark"
+					app:drawableTint="?attr/active_color_basic"
+					app:typefaceWeight="medium" />
 
 			</FrameLayout>
 

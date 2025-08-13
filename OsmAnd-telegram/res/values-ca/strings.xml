@@ -156,7 +156,7 @@
     <string name="enter_password">Introduïu la contrasenya</string>
     <string name="password_descr">Contrasenya de Telegram</string>
     <string name="shared_string_login">Inicia sessió</string>
-    <string name="shared_string_logout">Tanca la sessió</string>
+    <string name="shared_string_logout">Tanca sessió</string>
     <string name="initialization">S\'està iniciant</string>
     <string name="logging_out">S\'està tancant</string>
     <string name="gps_network_not_enabled">Voleu activa la ubicació\?</string>

@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseBottomSheetDialogFragment extends BottomSheetDialogFragment {
@@ -47,6 +48,6 @@ public abstract class BaseBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 }

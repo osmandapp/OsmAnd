@@ -7,7 +7,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.FormattedValue;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -34,7 +35,7 @@ public class CameraDistanceWidget extends SimpleWidget {
 			cachedCameraDistance = cameraDistance;
 			if (cameraDistance > 0) {
 				MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
-				OsmAndFormatter.FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedCameraDistance, app);
+				FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedCameraDistance, app);
 				setText(formattedDistance.value, formattedDistance.unit);
 			} else {
 				setText(NO_VALUE, null);

@@ -78,8 +78,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/shared_string_download"
-                android:visibility="gone"/>
+                android:visibility="gone" />
+
+            <include
+                layout="@layout/map_compass_button"
+                android:visibility="gone" />
+
         </FrameLayout>
+
     </LinearLayout>
 
     <include layout="@layout/dashboard_toolbar"

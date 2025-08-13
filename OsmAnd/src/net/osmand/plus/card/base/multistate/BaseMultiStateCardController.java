@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData.CustomDropDown;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public abstract class BaseMultiStateCardController implements IMultiStateCardCon
 	protected IMultiStateCard card;
 	protected List<CardState> states;
 	protected CardState selectedState;
+
+	protected CustomDropDown customDropDownSelectorPopup;
+	protected Boolean limitHeightSelectorPopup;
 
 	public BaseMultiStateCardController(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -49,6 +53,12 @@ public abstract class BaseMultiStateCardController implements IMultiStateCardCon
 			}
 		}
 		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
+		if (customDropDownSelectorPopup != null) {
+			data.customDropDown = customDropDownSelectorPopup;
+		}
+		if (limitHeightSelectorPopup != null) {
+			data.limitHeight = limitHeightSelectorPopup;
+		}
 		data.anchorView = view;
 		data.menuItems = items;
 		data.nightMode = nightMode;
@@ -72,6 +82,14 @@ public abstract class BaseMultiStateCardController implements IMultiStateCardCon
 			}
 		}
 		return states.get(0);
+	}
+
+	public void setCustomDropDownSelectorPopup(@NonNull CustomDropDown customDropDownSelectorPopup) {
+		this.customDropDownSelectorPopup = customDropDownSelectorPopup;
+	}
+
+	public void setLimitHeightSelectorPopup(@Nullable Boolean limitHeightSelectorPopup) {
+		this.limitHeightSelectorPopup = limitHeightSelectorPopup;
 	}
 
 	protected boolean isCardStateAvailable(@NonNull CardState cardState) {

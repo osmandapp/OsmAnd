@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class FreeVersionBanner {
@@ -73,7 +74,7 @@ public class FreeVersionBanner {
 		}
 		freeVersionBanner.setVisibility(View.VISIBLE);
 		downloadsLeftProgressBar.setMax(MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
-		freeVersionDescriptionTextView.setText(activity.getString(R.string.free_version_message, String.valueOf(MAXIMUM_AVAILABLE_FREE_DOWNLOADS)));
+		freeVersionDescriptionTextView.setText(DownloadValidationManager.getFreeVersionMessage(activity));
 
 		LinearLayout marksContainer = freeVersionBanner.findViewById(R.id.marksLinearLayout);
 

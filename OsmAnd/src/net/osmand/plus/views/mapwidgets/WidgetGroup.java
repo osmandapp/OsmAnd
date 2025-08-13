@@ -21,7 +21,7 @@ import java.util.List;
 
 public enum WidgetGroup {
 
-	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
+	ROUTE_MANEUVERS(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
 	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, R.string.docs_widget_navigation_points),
 	COORDINATES_WIDGET(R.string.coordinates_widget, R.string.coordinates_widget_desc, R.drawable.widget_coordinates_longitude_west_day, R.drawable.widget_coordinates_longitude_west_night, R.string.docs_widget_coordinates),
 	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_night, R.string.docs_widget_markers),
@@ -31,9 +31,11 @@ public enum WidgetGroup {
 	DEVELOPER_OPTIONS(R.string.developer_widgets, 0, R.drawable.widget_developer_day, R.drawable.widget_developer_night, 0),
 	ALTITUDE(R.string.altitude, R.string.map_widget_altitude_desc, R.drawable.widget_altitude_day, R.drawable.widget_altitude_night, 0),
 	ANT_PLUS(R.string.external_sensor_widgets, 0, R.drawable.widget_sensor_external_day, R.drawable.widget_sensor_external_night, 0),
+	VEHICLE_METRICS(R.string.obd_widget_group, 0, R.drawable.widget_obd_vehicle_info_day, R.drawable.widget_obd_vehicle_info_night, 0),
 	WEATHER(R.string.shared_string_weather, R.string.weather_widget_group_desc, R.drawable.widget_weather_umbrella_day, R.drawable.widget_weather_umbrella_night, 0),
 	SUNRISE_SUNSET(R.string.map_widget_sun_position, R.string.map_widget_group_sunrise_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0),
-	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0);
+	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0),
+	ROUTE_GUIDANCE(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers);
 
 	@StringRes
 	public final int titleId;
@@ -60,13 +62,25 @@ public enum WidgetGroup {
 
 	@NonNull
 	public List<WidgetType> getWidgets() {
+		return getWidgets(null);
+	}
+
+	@NonNull
+	public List<WidgetType> getWidgets(@Nullable WidgetsPanel panel) {
 		List<WidgetType> widgets = new ArrayList<>();
 		for (WidgetType widget : WidgetType.values()) {
-			if (this == widget.getGroup()) {
+			if (isRelatedWidget(widget, panel)) {
 				widgets.add(widget);
 			}
 		}
 		return widgets;
+	}
+
+	public boolean isRelatedWidget(@NonNull WidgetType widget, @Nullable WidgetsPanel panel) {
+		if (panel != null) {
+			return this == widget.getGroup(panel);
+		}
+		return this == widget.getGroup() || this == widget.getVerticalGroup();
 	}
 
 	@NonNull
@@ -80,16 +94,12 @@ public enum WidgetGroup {
 
 	@Nullable
 	public WidgetType getMainWidget() {
-		switch (this) {
-			case BEARING:
-				return WidgetType.RELATIVE_BEARING;
-			case TRIP_RECORDING:
-				return WidgetType.TRIP_RECORDING_DISTANCE;
-			case AUDIO_VIDEO_NOTES:
-				return WidgetType.AV_NOTES_ON_REQUEST;
-			default:
-				return null;
-		}
+		return switch (this) {
+			case BEARING -> WidgetType.RELATIVE_BEARING;
+			case TRIP_RECORDING -> WidgetType.TRIP_RECORDING_DISTANCE;
+			case AUDIO_VIDEO_NOTES -> WidgetType.AV_NOTES_ON_REQUEST;
+			default -> null;
+		};
 	}
 
 	@DrawableRes
@@ -135,8 +145,8 @@ public enum WidgetGroup {
 		return 0;
 	}
 
-	public int getOrder() {
-		return getWidgets().get(0).ordinal();
+	public int getOrder(@Nullable WidgetsPanel panel) {
+		return getWidgets(panel).get(0).ordinal();
 	}
 
 	@Nullable

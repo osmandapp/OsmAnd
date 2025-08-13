@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="release_5_0">
+    • Yeni Keşfet moduyla en beğenilen İÇN\'leri (POI) keşfedin\n\n
+    • Tüm OSM rotaları artık aranabilir! Yürüyüş, bisiklet, MTB ve daha fazlası\n\n
+    • Yeni navigasyon widget\'ı dönüş okunu ve navigasyon talimatlarını birleştirir\n\n
+    • Mevcut rota bilgi widget\'ı: ETA, varış zamanı ve mesafeyi gösterir\n\n
+    • Ayrıntılı bilgi için haritada kayak pistlerini ve MTB parkurlarını seçin\n\n
+    • Sol ve sağ paneller için widget boyutunu seçme yeteneği\n\n
+    • Coğrafi koordinatlarla "Koordinat ızgarası" eklendi\n\n
+    • Favori grupların varsayılan görünümünü özelleştirme yeteneği eklendi\n\n
+    • Android Auto: Bir sonraki ara noktaya olan ETA ve mesafeyi görüntüleyin; şehir adları artık arama sonuçlarında görünüyor\n\n
+    • Önemli zirveler artık harita ve arama yoluyla keşfedilebilir\n\n
+    • Dağ zirvesi yükseklikleri fit cinsinden\n\n
+    • Eklendi: Haritada Kayalıklar ve tırmanma alanları\n\n
+    • ABD\'de adres araması iyileştirildi\n\n
+    • Navigasyon için İbranice TTS eklendi\n\n
+</string>
     <string name="close_changeset">Değişiklik listesini kapat</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması yüklü değil. Google Play\'de ara\?</string>
     <string name="rendering_attr_roadColors_description">Bir yol rengi şeması seçin:</string>
@@ -127,9 +143,6 @@
     <string name="map_widget_audionotes">Sesli notlar</string>
     <string name="audionotes_plugin_description">Bir harita düğmesi veya konum içerik menüsünü kullanarak yolculuk sırasında ses/fotoğraf/video notları alın.</string>
     <string name="audionotes_plugin_name">Ses/video notları</string>
-    <string name="srtm_plugin_description">Bu eklenti, OsmAnd\'ın standart haritalarının üstünde hem eş yükselti eğrisi üst katmanının hem de (kabartma) tepe gölgesi katmanının gösterilmesini sağlamaktadır. Bu işlevsellik sporcular, uzun yürüyüşçüler, doğa yürüyüşçüleri ve manzaranın kabartma yapısıyla ilgilenen herkes tarafından çok takdir edilecektir. (Eş yükselti eğrisi ve/veya kabartma verilerinin ayrı olduğunu, eklentiyi etkinleştirdikten sonra ek indirmelerin mevcut olduğunu lütfen unutmayın.)
-\n 
-\nKüresel veriler (70° kuzey ve 70° güney arasındaki) SRTM (Shuttle Radar Topography Mission) ve ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), NASA\'nın Dünya Gözlem Sisteminin amiral uydusu olan Terra üzerindeki bir görüntüleme aracı, tarafından yapılan ölçümlere dayanmaktadır. ASTER NASA, Japonya Ekonomi, Ticaret ve Sanayi Bakanlığı (METI) , ve Japon Uzay Sistemleri (J-spacesystems) arasında ortak bir çalışmadır.</string>
     <string name="srtm_plugin_name">Topoğrafya</string>
     <string name="download_select_map_types">Diğer haritalar</string>
     <string name="download_roads_only_item">Sadece yollar</string>
@@ -420,8 +433,7 @@
     <string name="osmand_parking_choose_type">Park etme türünü seçin</string>
     <string name="osmand_parking_time_no_limit">Zaman-sınırsız park et</string>
     <string name="osmand_parking_position_description_add">Aracı almak için:</string>
-    <string name="osmand_parking_plugin_description">Aracınızın nerede park edildiğini ve alternatif olarak ne kadar park süresi kaldığını kaydetmenizi sağlar.
-\n Konum ve saat hem gösterge tablosunda hem de harita widget\'ında görülebilir. Android takvimine bir alarm hatırlatıcısı eklenebilir.</string>
+    <string name="osmand_parking_plugin_description">Aracınızın nerede park edildiğini ve alternatif olarak ne kadar park süresi kaldığını kaydetmenizi sağlar. \n Konum ve saat hem gösterge tablosunda hem de harita widget\'ında görülebilir. Android takvimine bir alarm hatırlatıcısı eklenebilir.</string>
     <string name="osmand_parking_plugin_name">Park etme pozisyonu</string>
     <string name="context_menu_item_delete_parking_point">Park etme işaretini sil</string>
     <string name="gpxup_public">Genel</string>
@@ -463,7 +475,6 @@
     <string name="plugins_screen">Eklentiler</string>
     <string name="prefs_plugins_descr">Eklentiler gelişmiş ayarları ve ek işlevselliği etkinleştirir.</string>
     <string name="prefs_plugins">Eklentiler</string>
-    <string name="osm_editing_plugin_description">Kullanıcı adınızı ve şifrenizi sağlayarak, OSM POI nesneleri oluşturma veya değiştirme, OSM notlarını açma veya yorum yapma ve kayıtlı GPX dosyaları ile OsmAnd\'a katkıda bulunma gibi OSM katkıları yapın. OpenStreetMap.org topluluk odaklı, küresel bir kamu malı haritalama projesidir.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektörel haritalar daha hızlı görüntülenir. Bazı aygıtlarda düzgün çalışmayabilir.</string>
     <string name="play_commands_of_currently_selected_voice">Bir ses seçin ve duyuruları oynayarak test edin:</string>
     <string name="debugging_and_development">OsmAnd gelişimi</string>
@@ -646,7 +657,6 @@
     <string name="driving_region_us">Birleşik Devletler</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Avrupa, Asya, Latin Amerika ve benzeri</string>
-    <string name="driving_region_uk">Birleşik Krallık (İngiltere), Hindistan ve benzeri</string>
     <string name="speak_title">Bildir…</string>
     <string name="speak_descr">Sokak adları, trafik uyarıları (zorunlu duruşlar, hız tümsekleri), hız kamerası uyarıları ve hız sınırları duyurularını ayarlayın.</string>
     <string name="speak_street_names">Cadde adları (TTS)</string>
@@ -1231,9 +1241,6 @@
     <string name="track_segments">İz bölümü</string>
     <string name="track_points">İz noktası</string>
     <string name="record_plugin_name">Seyahat kaydetme</string>
-    <string name="record_plugin_description">Bu eklenti, harita üzerindeki GPX kayıt widget\'ına elle dokunarak gezinme rotalarınızı kaydetme işlevini, ya da tüm navigasyon rotalarınızı bir GPX dosyasına otomatik olarak kaydetme özelliğini etkinleştirir. 
-\n 
-\nKaydedilen yollar arkadaşlarınızla paylaşılabilir veya OSM\'ye katkıda bulunmak için kullanılabilir. Atletler antremanlarını izlemek için kayıtlı yolları kullanabilir. Tur zamanı, ortalama hız vs. gibi bazı basit yol analizi doğrudan OsmAnd içinde yapılabilir, ve tabii ki daha sonra özel üçüncü parti araçlarla da analiz edilebilir.</string>
     <string name="plugin_touringview_name">Gezinti haritası görünümü</string>
     <string name="lang_new">Nevar / Nepal Bhasa</string>
     <string name="favorite_category_add_new">Yeni ekle</string>
@@ -1663,14 +1670,7 @@
 \nÖzel bir harita indirme işlemi gerekli değildir, görünüm standart haritalarımızdan oluşturulmuştur. 
 \n 
 \nBu görünüm, burada tekrar devre dışı bırakılarak ya da \'Harita yapılandır\' altındaki \'Harita tarzını\' istediğiniz gibi değiştirerek geri döndürülebilir.</string>
-    <string name="plugin_nautical_descr">Bu eklenti, bot, yelken ve diğer su sporları türleri için deniz haritaları üretmesi için OsmAnd harita ve navigasyon uygulamasını zenginleştirir. 
-\n 
-\nOsmAnd için özel bir harita eklentisi, tüm deniz navigasyon işaretlerini ve harita sembollerini, hem kıyıdan uzak hem de yakın navigasyon için sağlayacaktır. Her gezinme işaretinin açıklaması, onları tanımlamak için gereken ayrıntıları ve anlamlarını (kategori, şekil, renk, sıra, referans vb.) sağlar. 
-\n 
-\nOsmAnd\'ın geleneksel harita tarzlarından birine geri dönmek için, bu eklentiyi tekrar devre dışı bırakın ya da \'Haritayı yapılandırın\' altında \'Harita tarzını\' istediğiniz gibi değiştirin.</string>
-    <string name="plugin_ski_descr">OsmAnd için bu eklenti, küresel yokuş aşağı kayak pistlerinin, kros kayağı pistlerinin, Alp kayak pistlerinin, teleferiklerin ve telesiyejlerin ayrıntılarını parmaklarınızın ucuna getirir. Yollar ve pistler, zorluk derecesine göre renk kodlu olarak gösterilir ve kar renginde bir kış manzarasına benzeyen özel bir \'Kış\' harita tarzında gösterilir. 
-\n 
-\nBu görünümü etkinleştirmek, kış koşullarında tüm peyzaj özelliklerini gösteren harita tarzını \'Kış ve kayak\' olarak değiştirir. Bu görünüm, burada tekrar devre dışı bırakılarak veya \'Harita yapılandır\' altındaki \'Harita tarzını\' istediğiniz gibi değiştirerek geri döndürülebilir.</string>
+    <string name="plugin_ski_descr">OsmAnd için bu eklenti, küresel yokuş aşağı kayak pistlerinin, kros kayağı pistlerinin, Alp kayak pistlerinin, teleferiklerin ve telesiyejlerin ayrıntılarını parmaklarınızın ucuna getirir. Yollar ve pistler, zorluk derecesine göre renk kodlu olarak gösterilir ve kar renginde bir kış manzarasına benzeyen özel bir \'Kış\' harita tarzında gösterilir. \n \nBu görünümü etkinleştirmek, kış koşullarında tüm peyzaj özelliklerini gösteren harita tarzını \'Kış ve kayak\' olarak değiştirir. Bu görünüm, burada tekrar devre dışı bırakılarak veya \'Harita yapılandır\' altındaki \'Harita tarzını\' istediğiniz gibi değiştirerek geri döndürülebilir.</string>
     <string name="osmand_distance_planning_plugin_description">Bir seyahat planlamak ve noktalar arasındaki mesafeyi ölçmek için haritaya dokunarak veya mevcut GPX dosyalarını kullanarak veya değiştirerek yollar oluşturun. Sonuç, daha sonra rehberlik için kullanmak üzere bir GPX dosyası olarak kaydedilebilir.</string>
     <string name="rename_failed">Yeniden adlandırma başarısız oldu.</string>
     <string name="location_on_map">Yer:
@@ -1781,7 +1781,6 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ağaç ve çalılıklar</string>
     <string name="rendering_attr_buildings15zoom_name">Binalar üzerinde yakınlaştırma 15</string>
-    <string name="rendering_attr_hideAccess_name">Erişim kısıtlamaları</string>
     <string name="rendering_attr_showAccess_name">Erişim ve geçiş ücreti kısıtlamalarını göster</string>
     <string name="rendering_attr_showSurfaces_name">Yol yüzeyi göster</string>
     <string name="rendering_attr_showCycleRoutes_name">Bisiklet rotaları</string>
@@ -2002,7 +2001,7 @@
     <string name="wrong_user_name">Yanlış kullanıcı adı</string>
     <string name="shared_string_to">Buraya</string>
     <string name="mapillary_menu_descr_dates">Yalnızca eklenen resimleri görüntüle</string>
-    <string name="mapillary_menu_title_dates">Tarih</string>
+    <string name="shared_string_date">Tarih</string>
     <string name="mapillary_menu_edit_text_hint">Kullanıcı-adını yazın</string>
     <string name="mapillary_menu_descr_username">Yalnızca şu kişi tarafından eklenen görüntüler görüntülensin</string>
     <string name="route_point">Rota noktası</string>
@@ -2166,7 +2165,6 @@
     <string name="do_not_show_startup_messages">Başlangıç mesajlarını gösterme</string>
     <string name="routing_attr_driving_style_speed_name">daha kısa rotalar</string>
     <string name="points_delete_multiple">%1$d nokta silinsin mi\?</string>
-    <string name="wiki_around">Yakındaki Wikipedia makaleleri</string>
     <string name="route_calculation">Rota hesaplama</string>
     <string name="shared_string_notifications">Bildirimler</string>
     <string name="shared_string_continue">Devam et</string>
@@ -3531,25 +3529,7 @@
     <string name="osmand_purchases_item">OsmAnd satın alımları</string>
     <string name="legend_item_description">Bir haritadaki sembollerin rehberi.</string>
     <string name="navigation_profiles_item">Navigasyon profilleri</string>
-    <string name="release_3_7">• Yeni çevrim dışı Yamaç haritaları
-\n
-\n • Sık Kullanılanlar ve GPX Ara Noktalarını tamamen özelleştirme – özel renkler, simgeler, şekiller
-\n
-\n • İçerik Menüsü, Harita Yapılandırma, Çekmece ögelerinin sırasını özelleştirme
-\n
-\n • Harita yapılandırma bölümünde ayrı bir katman olarak Wikipedia, yalnızca gerekli dilleri seçin
-\n
-\n • Tamamen esnek olarak kendi POI filtrenizi / haritalarınızı oluşturun
-\n
-\n • Özel profiller için ayarları geri yükleme seçenekleri eklendi
-\n
-\n • GPX rota navigasyonu için trafik şeritleri ve dönüş talimatları için tam destek
-\n
-\n • Tabletlerde kullanıcı arayüzü boyutlarını düzeltme
-\n
-\n • RTL hatalarını düzeltme
-\n
-\n</string>
+    <string name="release_3_7">• Yeni çevrim dışı Yamaç haritaları \n \n • Sık Kullanılanlar ve GPX Ara Noktalarını tamamen özelleştirme – özel renkler, simgeler, şekiller \n \n • İçerik Menüsü, Harita Yapılandırma, Çekmece ögelerinin sırasını özelleştirme \n \n • Harita yapılandırma bölümünde ayrı bir katman olarak Wikipedia, yalnızca gerekli dilleri seçin \n \n • Tamamen esnek olarak kendi POI filtrenizi / haritalarınızı oluşturun \n \n • Özel profiller için ayarları geri yükleme seçenekleri eklendi \n \n • GPX rota navigasyonu için trafik şeritleri ve dönüş talimatları için tam destek \n \n • Tabletlerde kullanıcı arayüzü boyutlarını düzeltme \n \n • RTL hatalarını düzeltme \n \n</string>
     <string name="shared_string_resume">Devam ettir</string>
     <string name="additional_actions_descr">“%1$s” düğmesine dokunarak bu eylemlere erişin.</string>
     <string name="quick_action_transport_descr">Haritada toplu taşıma araçlarını gösteren veya gizleyen düğme.</string>
@@ -3786,7 +3766,6 @@
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd, UTM NATO biçimine benzer olan MGRS\'yi kullanmaktadır.</string>
     <string name="shared_string_local_maps">Yerel haritalar</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Tesis</string>
     <string name="icon_group_special">Özel</string>
     <string name="icon_group_transport">Ulaşım</string>
@@ -3821,20 +3800,12 @@
     <string name="osm_edit_comment_note">OSM Notuna Yorum Yap</string>
     <string name="osm_login_descr">OAuth yöntemini veya OSM kullanıcı adınızı ve parolanızı kullanarak oturum açın.</string>
     <string name="shared_string_add_photo">Fotoğraf ekle</string>
-    <string name="register_on_openplacereviews">OpenPlaceReviews.org\'a
-\nkaydolun</string>
-    <string name="register_on_openplacereviews_desc">Fotoğraflar OpenPlaceReviews.org açık veri projesi tarafından sağlanmaktadır. Fotoğraflarınızı yüklemek için web sitelerine kaydolmanız gerekir.</string>
     <string name="register_opr_create_new_account">Yeni hesap oluştur</string>
     <string name="register_opr_have_account">Zaten bir hesabım var</string>
     <string name="shared_string_search_history">Arama geçmişi</string>
     <string name="app_mode_kayak">Kano</string>
     <string name="app_mode_motorboat">Motorlu tekne</string>
     <string name="add_to_mapillary">Mapillary\'ye ekle</string>
-    <string name="add_to_opr">OpenPlaceReviews\'a ekle</string>
-    <string name="add_photos_descr">OsmAnd çeşitli kaynaklardan fotoğraflar gösterir:
-\nOpenPlaceReviews - POI fotoğrafları;
-\nMapillary - sokak düzeyinde görüntüler;
-\nİnternet / Wikimedia - OpenStreetMap verilerine göre POI fotoğrafları.</string>
     <string name="shared_string_resources">Kaynaklar</string>
     <string name="approximate_file_size">Yaklaşık dosya boyutu</string>
     <string name="select_data_to_export">Dosyaya aktarılacak verileri seçin.</string>
@@ -3940,12 +3911,6 @@
     <string name="uploaded_count">%1$d / %2$d karşıya yüklendi</string>
     <string name="toast_select_edits_for_upload">Karşıya yüklenecek düzenlemeleri seçin</string>
     <string name="hillshade_slope_contour_lines">eş yükselti eğrileri / tepe gölgesi / yamaç</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews projesine katkıda bulunmanızı sağlar. Fotoğraflar, yorumlar, restoranlar, oteller, müzeler ve yol noktaları gibi halka açık yerler hakkında bağlantılar gibi.
-\n
-\nNasıl katkıda bulunacağınıza ilişkin talimatları web sitemizde bulabilirsiniz - %1$s</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">test.openplacereviews.org adresini kullan</string>
-    <string name="login_open_place_reviews">OpenPlaceReviews\'te oturum aç</string>
     <string name="activity_type_water_name">Su</string>
     <string name="activity_type_winter_name">Kış</string>
     <string name="activity_type_snowmobile_name">Kar arabası</string>
@@ -4295,7 +4260,7 @@
     <string name="shared_string_gps_filter">GPS filtresi</string>
     <string name="exit_without_saving_warning">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
     <string name="icon_group_industrial">Sanayi</string>
-    <string name="delete_history_items">%1$s geçmiş ögesi silinsin mi\?</string>
+    <string name="delete_history_items">%1$s geçmiş ögesi silinsin mi?</string>
     <string name="quick_action_toggle_preference">Tercihi değiştirmek için bir geçiş.</string>
     <string name="display_route_tracks_as_poi">İzlenen yolları POI olarak göster</string>
     <string name="clear_all_history_warning">Arama, gezinme ve işaretleyici geçmişi dahil tüm uygulama geçmişi girdileri silinsin mi\?</string>
@@ -4367,7 +4332,7 @@
     <string name="reading_files">Dosyalar okunuyor…</string>
     <string name="shared_storage_second_step">\"Bu klasörü kullan\" seçeneğine tıklayın.</string>
     <string name="icon_group_education">Eğitim</string>
-    <string name="delete_history_items_descr">Seçili geçmiş ögeleri silinsin mi\?</string>
+    <string name="delete_history_items_descr">Seçili geçmiş ögeleri silinsin mi?</string>
     <string name="skip_confirmation">Evet, atla</string>
     <string name="shared_storage">Paylaşılan depolama alanı</string>
     <string name="shared_storage_migration">Paylaşılan depolama alanı geçişi</string>
@@ -4482,9 +4447,7 @@
     <string name="select_suggested_points">Önerilen noktaları seç</string>
     <string name="exit_import_descr">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
     <string name="location_source">Konum kaynağı</string>
-    <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için varsayılan olarak %1$s kullanılır.
-\n
-\nHatalı konum bilgisi alıyor veya cihazınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
+    <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için varsayılan olarak %1$s kullanılır. \n \nHatalı konum bilgisi alıyor veya cihazınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
     <string name="default_appearance_desc">Varsayılan renk, simge ve şekil, gruba eklenen favori noktalara uygulanacaktır.</string>
     <string name="default_appearance">Varsayılan görünüm</string>
     <string name="edit_category">Kategoriyi düzenle</string>
@@ -4628,7 +4591,7 @@
     <string name="rendering_attr_weatherTempContours_name">Sıcaklık eş değer eğrileri</string>
     <string name="map_widget_trip_recording_downhill">Yokuş aşağı</string>
     <string name="map_widget_trip_recording_uphill">Yokuş yukarı</string>
-    <string name="map_widget_trip_recording_distance">Mesafe</string>
+    <string name="map_widget_distance">Mesafe</string>
     <string name="routing_attr_hazmat_category_name">Tehlikeli madde kategorisi</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Kısıtlama yok)</string>
     <string name="routing_attr_avoid_fords_description">Nehir geçişlerinden kaçının</string>
@@ -5070,7 +5033,6 @@
     <string name="max_altitude">En yüksek rakım</string>
     <string name="shared_string_not_checked">İşaretli değil</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
-    <string name="rendering_attr_alpineHiking_name">Zorluk sınıflandırması</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Patlayıcılar</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gazlar</string>
     <string name="routing_attr_hazmat_category_usa_4_name">Yanıcı Katılar</string>
@@ -5458,4 +5420,329 @@
     <string name="fixed_height">Sabit yükseklik</string>
     <string name="map_markers_desc">Pencere öğesi, harita işaretçileri listesindeki ilk iki işaretçi için mesafeyi veya tahmini varış zamanını (TVZ) gösterir.</string>
     <string name="live_monitoring_adress_descr">Web adresini parametre sözdizimi ile belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, hız={5}, yön={6}.</string>
+    <string name="weather_source_ecmwf_description">Avrupa Orta Vadeli Hava Tahminleri Merkezi (ECMWF)</string>
+    <string name="ais_load_data">AIS verisini dosyadan yükleyin</string>
+    <string name="ais_address_settings">IP adresi ayarları</string>
+    <string name="recently_visited">Son ziyaret edilenler</string>
+    <string name="apply_to_all_points">Bütün noktalara uygula</string>
+    <string name="original_color_description">Her nokta kendi renginde kalacak.</string>
+    <string name="original_icon_description">Her nokta kendi simgesiyle kalacak.</string>
+    <string name="original_shape_description">Her nokta kendi şekliyle kalacak.</string>
+    <string name="hmd_promo_description">%1$s aylığına sınırsız harita indirme, 3B kabartma vb. dahil ücretsiz erişim</string>
+    <string name="shared_string_road_exit">Çıkış</string>
+    <string name="popular_places_nearby">Yakınlardaki popüler mekanlar</string>
+    <string name="save_favorite_default_appearance">Değişiklikler klasördeki mevcut noktalara mı kaydolsun veya yeni oluşturulsun mu?</string>
+    <string name="ais_ship_lost_timeout">Sinyal alınmadığında gemi görünürlüğü zaman aşımı</string>
+    <string name="map_widget_route_information">Rota bilgisi</string>
+    <string name="display_distance_to_first_intermediate_summary">Sonraki durak için önce zamanı ve mesafeyi gösterir. Varış noktası ayrıntılarını sürekli görmek için kapatın.</string>
+    <string name="connect_new_scanner">Yeni tarayıcı bağla</string>
+    <string name="av_audio_sample_rate_descr">Ses örnek hızını seçin.</string>
+    <string name="obd_engine_runtime_desc">Motorun çalıştırıldığından beri ne kadar süredir çalıştığını gösterir.</string>
+    <string name="obd_calculated_engine_load">Hesaplanan Motor Yükü</string>
+    <string name="obd_speed_desc">Araç Hız Sensöründen (VSS) gelen hız verisini gösterir.</string>
+    <string name="auto_zoom_3d_angle">3B otomatik yakınlaştırma açısı</string>
+    <string name="obd_fuel_pressure_desc">Yakıt sistemindeki basıncı gösterir</string>
+    <string name="vehicle_metrics_obd_ii">Araç Verileri (OBD-II)</string>
+    <string name="vehicle_metrics_recording_description">GPX dosyasına kaydedilecek parametreleri seçin.</string>
+    <string name="calculating_indication_message">Hesaplanıyor…</string>
+    <string name="obd_battery_voltage_desc">Aracın akü voltaj seviyesini gösterir</string>
+    <string name="obd_engine_coolant_temp_desc">Motor suyu sıcaklığını gösterir</string>
+    <string name="plugin_ais_tracker_disclaimer">UYARI\n\nBu eklenti bir hobi projesidir, güvenilirlik ve doğruluk için tasarlanmamıştır. Can güvenliği ve/veya yön tarifi dahil hiçbir yönlendirmeye GÜVENMEYİN.</string>
+    <string name="no_photo_for_location_desc">Bu konuma henüz hiç kullanıcı fotoğrafı eklenmemiş</string>
+    <string name="shared_string_default_view">Varsayılan görüntüleme</string>
+    <string name="default_buttons_opacity_original_description">Her buton kendi arka plan opaklığında kalacak.</string>
+    <string name="shared_string_length">Uzunluk</string>
+    <string name="shared_string_avg_altitude">Ort. yükseklik</string>
+    <string name="shared_string_avg_speed">Min. hız</string>
+    <string name="default_buttons_corners_original_description">Her buton kendi köşe ayarında kalacak.</string>
+    <string name="shared_string_engine"/>
+    <string name="shared_string_hour">Saat</string>
+    <string name="obd_throttle_position">Gaz Kelebeği Konumu</string>
+    <string name="obd_calculated_engine_load_desc">Motorun anlık kullanılabilir gücünü yüzde olarak gösterir.</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Tırmanma rotalarını göster</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Tırmanma rotaları</string>
+    <string name="selected_delayed_profile">\"%s\" profili seçildi</string>
+    <string name="calculate_size">Boyutu hesapla</string>
+    <string name="default_buttons_size_original_description">Her buton kendi boyutunda kalacak.</string>
+    <string name="av_audio_sample_rate">Ses örnek hızı</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">OBD-II protokolü verilerini kullanarak aracın önemli verilerini izleyin. Hız, motor devri, yakıt tüketimi ve diğer verileri takip edin.</string>
+    <string name="ltr_or_rtl_combine_via_per">%2$s başına %1$s</string>
+    <string name="ais_cpa_settings">CPA ile ilgili ayarlar</string>
+    <string name="display_distance_to_first_intermediate">Sonraki durak için rota ayrıntılarını göster</string>
+    <string name="reset_average_value">Ortalama değeri sıfırla</string>
+    <string name="current_temperature">Anlık sıcaklık</string>
+    <string name="ais_port_nmea_server_description">NMEA veri kaynağının TCP port numarasını tanımlayın</string>
+    <string name="ais_port_nmea_local">Yerel NMEA veri alıcısının UDP portu</string>
+    <string name="average_value_slider_description">Ortalama değer ölçümü için zaman aralığını seçin.</string>
+    <string name="average_temperature_slider_description">Ortalama sıcaklık ölçümü için zaman aralığını seçin.</string>
+    <string name="average_temperature">Ortalama sıcaklık</string>
+    <string name="obd_fuel_consumption">Yakıt tüketimi</string>
+    <string name="remaining_fuel">Kalan yakıt</string>
+    <string name="remaining_fuel_description">Aracın deposunda kalan yakıt miktarını gösterir</string>
+    <string name="ais_address_nmea_server">NMEA veri kaynağının IP adresi</string>
+    <string name="ais_address_nmea_server_description">NMEA veri kaynağının IP adresini tanımlayın (TCP kullanılıyorsa)</string>
+    <string name="ais_port_nmea_local_description">OsmAnd\'ın NMEA verisini çekeceği UDP portunu tanımlayın</string>
+    <string name="obd_ambient_air_temp_desc">Araç dışı sıcaklığı gösterir.</string>
+    <string name="obd_air_intake_temp_desc">Emme manifoldundan motora giren havanın sıcaklığını gösterir.</string>
+    <string name="obd_fuel_consumption_desc">Motorun yakıt kullanımını, kalan yakıtı, depo kapasitesini ve GPS\'den gelen veriye göre katedilen mesafeyi gösterir.</string>
+    <string name="ais_port_nmea_server">NMEA veri kaynağının TCP portu</string>
+    <string name="ais_object_lost_timeout">Nesneler kaybolduğunda görünürlük zaman aşımı</string>
+    <string name="map_widget_route_information_desc">Tahmini varış süresini, kalan yolculuk süresini ve mevcut yol tarifinin mesafesini gösterir.</string>
+    <string name="obd_engine_oil_temperature_desc">Motor yağı sıcaklığını gösterir.</string>
+    <string name="obd_engine_oil_temperature">Motor Yağı Sıcaklığı</string>
+    <string name="record_obd_data">Araç ölçümlerini kaydet</string>
+    <string name="percent_hour">%/sa</string>
+    <string name="obd_fuel_level_percent">Yakıt seviyesi (%)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Yakıt tüketim oranı (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Yakıt tüketim oranı</string>
+    <string name="obd_fuel_consumption_rate_l_h">Yakıt tüketim oranı (L/sa)</string>
+    <string name="fuel_tank_capacity_description">İsabetli yakıt seviyesi ve yakıt tüketimi takibi yapmak için depo kapasitenizi girin</string>
+    <string name="fuel_tank_capacity">Yakıt deposu kapasitesi</string>
+    <string name="shared_strings_dimensions">Ebatlar</string>
+    <string name="litres">Litre</string>
+    <string name="imperial_gallons">İngiliz galonu</string>
+    <string name="l_100km">L/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Yakıt tüketim oranı (L/100 km)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Yakıt tüketim oranı %/sa</string>
+    <string name="obd_connecting_to_device">%s bağlantısı kuruluyor</string>
+    <string name="us_gallons_unit">Galon</string>
+    <string name="us_gallons">Amerikan galonu</string>
+    <string name="unit_of_volume"/>
+    <string name="speedometer_maximum">Maksimum</string>
+    <string name="obd_not_connected_to_device">%s bağlantısı kesildi</string>
+    <string name="obd_connected_to_device">%s bağlantısı kuruldu</string>
+    <string name="show_minor_turns_descr">Şeritler, kavşaklarda sesli yönergeler açık olsa da gösterilecek</string>
+    <string name="obd_fuel_pressure">Yakıt basıncı</string>
+    <string name="obd_fuel_level_liter">Yakıt seviyesi (l)</string>
+    <string name="obd_fuel_left_km">Kalan yakıt (km)</string>
+    <string name="shared_string_dynamic">Dinamik</string>
+    <string name="bt_start_pair_failed">Aygıtla eşleştirme başlatılamadı</string>
+    <string name="obd_fuel_consumption_rate_sensor">Yakıt tüketim oranı (sensör)</string>
+    <string name="obd_fuel_left_liters">Kalan yakıt (litre)</string>
+    <string name="obd_fuel_consumption_rate_desc">Aracın yakıt tüketim oranını OBD ve konuma göre gösterir</string>
+    <string name="corner_radius">Köşe yarıçapı</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="shared_string_increase">Artış</string>
+    <string name="change_zoom_action_descr">Harita yakınlaştırmayı değiştir.</string>
+    <string name="obd_plugin_name">Araç Ölçümleri</string>
+    <string name="obd_support">OBD desteği</string>
+    <string name="contour_layers_action_descr">Yükselti katmanlarını değiştir</string>
+    <string name="search_action_descr">Aramayı açar.</string>
+    <string name="map_3d_mode_action_descr">Harita eğimini değiştir.</string>
+    <string name="drawer_button_description">Ana menüyü açar.</string>
+    <string name="type_of_activity">Aktivite türü</string>
+    <string name="obd_fuel_type_gasoline">Benzin</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Araç Ölçümleri ayaları</string>
+    <string name="rpm_unit">devir</string>
+    <string name="obd_rpm_desc">Aracın devir sayacını OBD sensörü üzerinden gösterir</string>
+    <string name="obd_fuel_type_desc">Aracın yakıt tipini OBD sensörü üzerinden gösterir</string>
+    <string name="obd_air_intake_temp">Giren hava sıcaklığı</string>
+    <string name="obd_battery_voltage">Akü voltajı</string>
+    <string name="obd_engine_coolant_temp">Motor suyu sıcaklığı</string>
+    <string name="obd_fuel_consumption_rate">Yakıt tüketim oranı</string>
+    <string name="quick_action_navigation_view_desc">Navigasyon görünümünü açıp kapatma butonu.</string>
+    <string name="my_location_action_descr">Haritayı konumunuza göre ortalar.</string>
+    <string name="obd_fuel_type_not_provided">Yakıt tipi girilmedi</string>
+    <string name="obd_fuel_type_unknown">Bilinmeyen Yakıt Tipi</string>
+    <string name="obd_fuel_type_hydrogen">Hidrojen</string>
+    <string name="obd_fuel_type_electric">Elektrik</string>
+    <string name="obd_widget_group">Araç Ölçümleri</string>
+    <string name="quick_action_search_view_title">Arama görünümü</string>
+    <string name="shared_string_source">Kaynak</string>
+    <string name="quick_action_drawer_title">Yan menü</string>
+    <string name="quick_action_drawer_desc">Yan menüyü gösterip gizleme butonu.</string>
+    <string name="raster_layers_action_descr">Tarama katmanlarını değiştir</string>
+    <string name="shared_string_interface">Arayüz</string>
+    <string name="quick_action_verb_navigate">Gezin</string>
+    <string name="quick_action_navigation_view_title">Navigasyon görünümü</string>
+    <string name="no_photos_available_descr">Bu konuma henüz kullanıcı fotoğrafı eklenmemiş</string>
+    <string name="configure_map_description">Harita stilini, katmanları veya diğer ayarları değiştir.</string>
+    <string name="obd_fuel_level_desc">Aracın yakıt seviyesini OBD sensörü üzerinden gösterir</string>
+    <string name="obd_fuel_left_distance_desc">Aracın kalan yakıtla ne kadar mesafe gidebileceğini ODB sensörü üzerinden gösterir</string>
+    <string name="obd_ambient_air_temp">Ortam sıcaklığı</string>
+    <string name="obd_fuel_type">Yakıt tipi</string>
+    <string name="background_opacity">Arka plan opaklığı</string>
+    <string name="quick_action_previous_screen_desc">Önceki ekrana geçiş butonu.</string>
+    <string name="quick_action_previous_screen_title">Önceki ekran</string>
+    <string name="shared_string_no_internet_connection">İnternet bağlantısı yok</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="no_internet_descr">Lütfen bağlantınızı kontrol edip tekrar deneyin.</string>
+    <string name="change_activity">Aktiviteyi değiştir</string>
+    <string name="open_in_browser">Tarayıcıda aç</string>
+    <string name="shared_string_decrease">Düşüş</string>
+    <string name="obd_fuel_type_propane">Tüp gazı</string>
+    <string name="obd_fuel_level">Yakıt Verimliliği (%)</string>
+    <string name="quick_action_search_view_desc">Arama görünümünü açıp kapatma butonu.</string>
+    <string name="quick_action_switch_compass_desc">Harita yönünü değiştirme butonu.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Arazi motoru yollarını göster</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Arazi motoru yolları</string>
+    <string name="obd_fuel_type_diesel">Dizel</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="percent_unit">%</string>
+    <string name="graph_axis">Grafik ekseni</string>
+    <string name="add_widget_above">Yukarıya widget ekle</string>
+    <string name="y_axis_description">Y ekseni için iki seçenek seçin.</string>
+    <string name="add_widget_to_the_right">Sağa widget ekle</string>
+    <string name="add_widget_to_the_left">Sola widget ekle</string>
+    <string name="help_article_map_tracks_name">Yollar</string>
+    <string name="help_article_map_routes_name">Rotalar</string>
+    <string name="compass_click_north_is_up">Yönlendirme modunu değiştirmek için tıklayın ve basılı tutun</string>
+    <string name="quick_action_routes_summary">Haritadaki %1$s\'ı gösterip gizleme butonu.</string>
+    <string name="detailed_track_guidance_description">OsmAnd yakınlarınızdaki yolları geliştirilmiş adım adım yol rehberi için eşleştirecek.</string>
+    <string name="driving_region_uk">Birleşik Krallık ve benzeri</string>
+    <string name="shared_string_automatically">Otomatik</string>
+    <string name="delete_widget_description">Bu widget silinecek. Yapılandırma ekranından geri getirebilirsiniz.</string>
+    <string name="add_widget_below">Aşağıya widget ekle</string>
+    <string name="delete_widget">Widget silinsin mi?</string>
+    <string name="route_roundabout_exit">%1$d çıkışı kullanın</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="ask_every_time">Her zaman sor</string>
+    <string name="detailed_track_guidance">Ayrıntılı yol rehberi</string>
+    <string name="auto_25_chars_route_tr">Sağa dön</string>
+    <string name="driving_region_india">Hindistan</string>
+    <string name="auto_25_chars_route_kl">Solda tut</string>
+    <string name="auto_25_chars_route_kr">Sağda tut</string>
+    <string name="navigation_position">Navigasyon pozisyonu</string>
+    <string name="auto_25_chars_route_tl">Sola dönüş</string>
+    <string name="resting_navigation_position">Dinlenme &amp; navigasyon pozisyonu</string>
+    <string name="resting_position">Dinlenme pozisyonu</string>
+    <string name="choose_map_orientation">Harita yönünü seçin</string>
+    <string name="auto_25_chars_route_tsll">Sola hafif viraj</string>
+    <string name="rendering_value_pale_name">Soluk</string>
+    <string name="auto_25_chars_route_tshl">Sola keskin viraj</string>
+    <string name="auto_25_chars_route_tu">U dönüşü yapın</string>
+    <string name="view_angle">Görüntüleme açısı</string>
+    <string name="location_radius_description">Mevcut konum doğruluğunuzu belirten dairesel alanı gösterir</string>
+    <string name="auto_25_chars_route_tslr">Sağa hafif viraj</string>
+    <string name="energy_avg_info">Pil istatistikleri (ortalama 1 / 5 / 15 dakika)</string>
+    <string name="auto_25_chars_route_tshr">Sağa keskin viraj</string>
+    <string name="location_radius">Konum yarıçapı</string>
+    <string name="rendering_avg_info">Görüntü işleme istatistikleri (ortalama 1 / 5 / 15 dakika)</string>
+    <string name="energy_avg_info_description">Dakika başına pil seviyesi: %1$s\nPil tüketimi (mAh): %2$s</string>
+    <string name="quick_action_audio_note">Sesli not</string>
+    <string name="shared_string_all_icons">Bütün simgeler</string>
+    <string name="quick_action_remove_next_destination">Sonraki varılacak nokta</string>
+    <string name="quick_action_new_route">Yeni rota</string>
+    <string name="quick_action_terrain">Yüzey renklendirme tipi</string>
+    <string name="quick_action_destination">Varış noktası</string>
+    <string name="shared_string_create">Oluştur</string>
+    <string name="quick_action_verb_show_hide">Göster / Gizle</string>
+    <string name="quick_action_verb_turn_on_off">Aç / Kapat</string>
+    <string name="quick_action_verb_start_stop">Başlat / Durdur</string>
+    <string name="shared_string_set">Ayarla</string>
+    <string name="quick_action_location_by_gpx">GPX konumu</string>
+    <string name="quick_action_video_note">Video not</string>
+    <string name="quick_action_map_style">Harita stili</string>
+    <string name="quick_action_photo_note">Fotoğraflı not</string>
+    <string name="quick_action_to_my_location">Konumuma</string>
+    <string name="rendering_avg_info_details">Son 1000 karedeki FPS: %1$s\nİşlemci (çekirdek): %2$s\nİşlemci (boşta):%3$s\nİşlemci (GPU\'yu bekleyen): %4$s</string>
+    <string name="shared_string_replace"/>
+    <string name="quick_action_display_position_in_center">Mevcut konumu her zaman ortada göster</string>
+    <string name="quick_action_terrain_color_scheme">Yüzey renk düzeni</string>
+    <string name="quick_action_directions_from">Başlangıç noktası</string>
+    <string name="quick_action_parking_place">Park yeri</string>
+    <string name="quick_action_verb_pause_resume">Duraklat / Devam ettir</string>
+    <string name="weather_screen">Hava durumu ekranı</string>
+    <string name="navigation_position_icon">Navigasyon pozisyonu simgesi</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="resting_position_icon">Dinlenme pozisyonu simgesi</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="daynight_mode_app_theme_summary">Haritanın görünümü uygulama temasına uyum sağlar — gündüz modunda açık tema, gece modunda koyu tema</string>
+    <string name="navigation_position_icon_summary">Gezinirken ya da hareket ederken simge görünür.</string>
+    <string name="resting_position_icon_summary">Hareketsizken simge görünür.</string>
+    <string name="profile_icon">Profil simgesi</string>
+    <string name="map_grid">Harita kılavuzları</string>
+    <string name="show_grids">Harita kılavuzunu göster</string>
+    <string name="show_grids_description">Haritanın üzerinde kılavuz göstermeye izin ver</string>
+    <string name="show_utm_grids">WGS84 yerine UTM kullan</string>
+    <string name="fix_north_up">Kuzey kutbunu yukarı sabitle</string>
+    <string name="fix_north_up_descr">Kuzey kutbu yukarı sabitken haritayı parmak hareketleriyle döndürme</string>
+    <string name="rendering_attr_padusDisplayMode_name">Kamu arazilerini gösterme modu</string>
+    <string name="filter_screen_title">Filtrele</string>
+    <string name="filter_tracks_count">Filtrele: %d</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Kamu arazisi sınırlarını gizle</string>
+    <string name="app_mode_hang_gliding">Delta kanat sporu</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Kamu arazisi bölgelerini göster sınırlarını gizle</string>
+    <string name="max_sensor_cadence">Bisiklet Temposu, maksimum</string>
+    <string name="app_mode_paragliding">Yamaç paraşütü</string>
+    <string name="avg_sensor_cadence">Bisiklet Temposu, ortalama</string>
+    <string name="average_glide_time_interval_desc">Süzülme ortalaması için zaman aralığı belirtin.</string>
+    <string name="map_widget_group_glide_ratio">Süzülme hızı</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Direkt noktaya rota (Tekne)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Tren rotası</string>
+    <string name="help_article_plan_route_coordinate_input_name">Koordinat girişi</string>
+    <string name="help_article_plan_route_name">Rota planla</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Kayak rotası</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">OsmAnd rota oluşturma hakkında</string>
+    <string name="help_article_navigation_routing_name">Rota parametreleri</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Rota Hazırlığı</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Bisiklet rotası (MTB)</string>
+    <string name="help_article_navigation_routing_online_routing_name">Çevrimiçi rota</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Toplu Taşıma rotası</string>
+    <string name="help_article_navigation_setup_route_details_name">Rota Ayrıntıları</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Yaya rotası</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Tekne rotası</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Araç rotası (Kamyon, Motorsiklet)</string>
+    <string name="average_glide_ratio">Ortalama süzülme hızı</string>
+    <string name="help_article_map_raster_maps_name">Haritaları tara (Çevrimiçi / Çevrimdışı)</string>
+    <string name="map_widget_glide_target_desc">Hedefe varmak için gerekli olan süzülme hızını gösterir.</string>
+    <string name="wheel_circumference">Teker çevresi</string>
+    <string name="help_article_map_tracks_on_map_name">Yollar ve Rotalar</string>
+    <string name="help_article_setup_a_route_name">Rota çiz</string>
+    <string name="changes">%1$s\'i değiştirir</string>
+    <string name="show_all_tracks_on_the_map">Haritada bütün yolları göster</string>
+    <string name="shared_string_new_track">Yeni yol</string>
+    <string name="beats_per_minute_short">nabız</string>
+    <string name="empty_tracks">Yol dosyasınız bulunmamaktadır.</string>
+    <string name="quick_action_verb_start_pause">Başlat / Duraklat</string>
+    <string name="route_guidance">Rota rehberi</string>
+    <string name="external_device_characteristic_heart_rate">Kalp ritmi</string>
+    <string name="unknown_bt_device">Bilinmeyen aygıt</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">OBD\'den gelen VIN kodu</string>
+    <string name="unit_volt">V</string>
+    <string name="navigation_action_descr">Navigasyonu açar.</string>
+    <string name="dangerous_goods_description">Bazı yollarda ve tünellerde tehlikeli materyal taşınması yasaktır.</string>
+    <string name="rendering_attr_alpineHiking_description">Rota tiplerinin zorluk sınıflandırması.</string>
+    <string name="external_device_characteristic_diastolic">Küçük tansiyon</string>
+    <string name="open_weather_action">Hava durumunu aç</string>
+    <string name="external_device_characteristic_pulse_rate">Nabız</string>
+    <string name="learn_more_about_obd_sensors">Sensörler hakkında daha fazla bilgi edinin.</string>
+    <string name="screen_is_unlocked">Dokunmatik ekran aktif edildi.</string>
+    <string name="connect_obd_instructions_step4">%1$s\'a dokunun ve listeden tarayıcınızı seçin.</string>
+    <string name="connect_obd_instructions_step1">Tarayıcıyı aracınızın OBD-II portuna bağlayın.</string>
+    <string name="lock_screen_description">Yanlışlıkla dokunmaları önlemek için dokunmatik ekranı açıp kapatır</string>
+    <string name="rendering_attr_alpineHiking_name">Yürüyüş yolu zorluk derecesi</string>
+    <string name="show_all_tracks">Bütün yolları göster</string>
+    <string name="liter_per_hour">L/sa</string>
+    <string name="search_track_by_name">Ada göre yol ara</string>
+    <string name="number_of_tracks">%1$s yol</string>
+    <string name="empty_tracks_description">OsmAnd ile yol dosyalarınızı içe aktarabilir, oluşturabilir veya kaydedebilirsiniz.</string>
+    <string name="start_trip_recording_first_m">Lütfen önce seyahat kaydını başlatın.</string>
+    <string name="external_device_characteristic_systolic">Büyük tansiyon</string>
+    <string name="speak_route_recalculation">Yolu yeniden hesaplayınca bildir</string>
+    <string name="movies_list">Film listesi</string>
+    <string name="connect_obd_instructions_title">OsmAnd OBD-II tarayıcılarının Bluetooth bağlantılarını destekler.</string>
+    <string name="tracks_empty_folder_description">Bu klasörde henüz hiç yol yok.</string>
+    <string name="free_ride">Serbest sürüş</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="speak_route_deviation">Yoldan sapınca uyar</string>
+    <string name="battery_saving_mode">Pil tasarrufu modu</string>
+    <string name="proxy_port_max_warning">Maksimum port değeri %1$s</string>
+    <string name="obd_widget_vehicle_speed">Araç hızı</string>
+    <string name="no_visible_tracks_description">Haritada gösterilecek yolları seçin.</string>
+    <string name="obd_vehicle_info">Araç bilgisi</string>
+    <string name="obd_how_to_connect">Nasıl bağlantı kurulur:</string>
+    <string name="connect_obd_instructions_step2">Aracınızın motorunu çalıştırın</string>
+    <string name="connect_obd_instructions_step3">Cihazınızda Bluetooth\'u açın</string>
+    <string name="screen_is_locked_by_external_button">Dokunmatik ekran devre dışı bırakıldı. Açmak için %1$s butonuna dokunun veya ekrandaki butona dokunun.</string>
+    <string name="screen_is_locked_by_action_button">Dokunmatik ekran devre dışı bırakıldı. Aktif etmek için açma tuşuna dokunun.</string>
+    <string name="help_article_personal_color_palette_schemes_name">Renk Şeması</string>
+    <string name="reset_average_speed">Ortalama hızı sıfırla</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="delete_track_folder_dialog_message">Bu işlem %1$s klasörünü ve bütün %2$s içeren yolları silecek.</string>
+    <string name="track_does_not_contain_data_to_save">Yol kaydedilecek veri içermiyor.</string>
+    <string name="external_device_details_information">Bilgi</string>
 </resources>

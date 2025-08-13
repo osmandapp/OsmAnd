@@ -21,7 +21,6 @@ import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
-import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.data.FavouritePoint;
@@ -29,10 +28,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.auto.TripHelper;
+import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.FavouritesLayer;
@@ -57,7 +54,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 
 	@Nullable
 	private FavoriteGroup selectedGroup;
-	private CompassMode initialCompassMode;
 
 	public FavoritesScreen(
 			@NonNull CarContext carContext,
@@ -66,24 +62,25 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		super(carContext);
 		this.settingsAction = settingsAction;
 		selectedGroup = group;
-		getLifecycle().addObserver(new DefaultLifecycleObserver() {
-			@Override
-			public void onDestroy(@NonNull LifecycleOwner owner) {
-				DefaultLifecycleObserver.super.onDestroy(owner);
-				getFavouritesLayer().setCustomMapObjects(null);
-				getFavouritesLayer().customObjectsDelegate = null;
-				getApp().getOsmandMap().getMapView().backToLocation();
-				if (initialCompassMode != null) {
-					getApp().getMapViewTrackingUtilities().switchCompassModeTo(initialCompassMode);
-				}
-			}
+		getLifecycle().addObserver(this);
+	}
 
-			@Override
-			public void onStart(@NonNull LifecycleOwner owner) {
-				DefaultLifecycleObserver.super.onStart(owner);
-				getFavouritesLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
-			}
-		});
+	@Override
+	protected boolean shouldRestoreMapState() {
+		return true;
+	}
+
+	@Override
+	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
+		getFavouritesLayer().setCustomMapObjects(null);
+		getFavouritesLayer().customObjectsDelegate = null;
+	}
+
+	@Override
+	public void onCreate(@NonNull LifecycleOwner owner) {
+		super.onCreate(owner);
+		getFavouritesLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 	}
 
 	private FavouritesLayer getFavouritesLayer() {
@@ -92,7 +89,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		ItemList.Builder listBuilder = new ItemList.Builder();
 		setupFavorites(listBuilder);
 		return new PlaceListNavigationTemplate.Builder()
@@ -115,11 +112,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
 		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
 		QuadRect mapRect = new QuadRect();
-		if (!Algorithms.isEmpty(limitedFavoritesPoints)) {
-			OsmandSettings settings = getApp().getSettings();
-			initialCompassMode = settings.getCompassMode();
-			getApp().getMapViewTrackingUtilities().switchCompassModeTo(CompassMode.NORTH_IS_UP);
-		}
 		for (FavouritePoint point : limitedFavoritesPoints) {
 			double longitude = point.getLongitude();
 			double latitude = point.getLatitude();
@@ -132,7 +124,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 			double dist = MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					location.getLatitude(), location.getLongitude());
 			SpannableString address = new SpannableString(Algorithms.isEmpty(description) ? " " : "  • " + description);
-			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(getApp(), dist));
+			DistanceSpan distanceSpan = DistanceSpan.create(TripUtils.getDistance(getApp(), dist));
 			address.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
 			listBuilder.addItem(new Row.Builder()
 					.setTitle(title)
@@ -143,7 +135,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
 		}
-		adjustMapToRect(location, mapRect);
 	}
 
 	private void onClickFavorite(@NonNull FavouritePoint point) {
@@ -168,10 +159,10 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 	}
 
 	private void onRouteSelected(@NonNull SearchResult sr) {
-		getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+		getApp().getOsmandMap().getMapActions().startNavigation();
 		NavigationSession session = getApp().getCarNavigationSession();
 		if (session != null && session.hasStarted()) {
-			session.startNavigation();
+			session.startNavigationScreen();
 		}
 	}
 

@@ -28,6 +28,9 @@ import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.security.MessageDigest;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -56,6 +59,8 @@ public class Algorithms {
 	
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
+
+	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
 
@@ -1043,8 +1048,18 @@ public class Algorithms {
 	}
 
 	public static String formatMinutesDuration(int minutes) {
+		return formatMinutesDuration(minutes, false);
+	}
+
+	public static String formatMinutesDuration(int minutes, boolean compact) {
 		int min = minutes % 60;
 		int hours = minutes / 60;
+		if (compact) {
+			if (min == 0) {
+				return String.format(Locale.UK, "%d", hours);
+			}
+			return String.format(Locale.UK, "%d:%02d", hours, min);
+		}
 		return String.format(Locale.UK, "%02d:%02d", hours, min);
 	}
 
@@ -1344,4 +1359,41 @@ public class Algorithms {
 		return resultList.toArray(new String[resultList.size()]);
 	}
 
+	public static String splitAndClearRepeats(String ref, String symbol) {
+		String[] arr = ref.split(symbol);
+		String res = "";
+		String prev = "";
+		for (String s : arr) {
+			if (Algorithms.isEmpty(s) || prev.equals(s))
+				continue;
+			if (!res.isEmpty()) {
+				res += symbol;
+			}
+			res += s;
+			prev = s;
+		}
+		return res;
+	}
+
+	public static String sanitizeFileName(String fileName) {
+		return fileName
+				.replace("/", "_")
+				.replace("\\", "_")
+				.replace(":", "_")
+				.replace(";", "_")
+				.replace("*", "_")
+				.replace("?", "_")
+				.replace("`", "_")
+				.replace("\'", "_")
+				.replace("\"", "_")
+				.replace("<", "_")
+				.replace(">", "_")
+				.replace("|", "_")
+				.replace("&", "_")
+				.replace("\0", "_")
+				.replace("\n", "_")
+				.replace("\r", "_")
+				.replace("\t", " ")
+				.trim();
+	}
 }

@@ -1,35 +1,22 @@
 package net.osmand.plus.search.dialogs;
 
-import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.StringMatcher;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -37,37 +24,26 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
-import net.osmand.plus.search.QuickSearchHelper;
-import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
-import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
-import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
-import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.search.listitems.QuickSearchListItemType;
-import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
-import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.SearchResultViewHolder;
+import net.osmand.plus.search.WikiItemViewHolder;
+import net.osmand.plus.search.listitems.*;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.*;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
@@ -76,6 +52,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private final FragmentActivity activity;
 	private AccessibilityAssistant accessibilityAssistant;
 	private final LayoutInflater inflater;
+	@Nullable
+	private PoiUIFilter poiUIFilter;
 
 	private boolean useMapCenter;
 
@@ -240,6 +218,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindTopShadowItem(convertView);
 		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
 			return bindBottomShadowItem(convertView);
+		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
+				poiUIFilter != null && poiUIFilter.isWikiFilter()) {
+			return bindWikiItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
 		} else {
@@ -266,7 +247,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
 			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -320,12 +301,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 		TextView analyseButtonDescr = view.findViewById(R.id.settings_button);
 		FrameLayout analyseButton = view.findViewById(R.id.settings_button_container);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, analyseButtonDescr, isNightMode(), R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-		}
+		AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, analyseButtonDescr, isNightMode(), R.drawable.ripple_light, R.drawable.ripple_dark);
 		analyseButton.setOnClickListener(disabledHistoryItem.getOnClickListener());
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), false);
@@ -360,7 +337,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
 			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -438,7 +415,17 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return getLinearLayout(convertView, R.layout.list_shadow_footer);
 	}
 
-	private LinearLayout bindSearchResultItem(int position, @Nullable View convertView, @NonNull QuickSearchListItem listItem) {
+	@NonNull
+	private LinearLayout bindWikiItem(@Nullable View convertView, @NonNull QuickSearchListItem item) {
+		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, item.getSearchResult());
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
+		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, isNightMode());
+		holder.bindItem(wikiItem, poiUIFilter, useMapCenter);
+		return view;
+	}
+
+	private LinearLayout bindSearchResultItem(int position, @Nullable View convertView,
+	                                          @NonNull QuickSearchListItem listItem) {
 		LinearLayout view;
 		SearchResult searchResult = listItem.getSearchResult();
 		if (searchResult != null && searchResult.objectType == ObjectType.INDEX_ITEM) {
@@ -456,8 +443,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			setupCheckBox(position, view, listItem);
 		} else {
 			view = getLinearLayout(convertView, R.layout.search_list_item);
-			bindSearchResult(view, listItem);
-			updateCompassVisibility(view, listItem);
+			SearchResultViewHolder.bindSearchResult(view, listItem);
+			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 			setupCheckBox(position, view, listItem);
 		}
 		return view;
@@ -514,99 +501,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public static void bindGpxTrack(@NonNull View view, @NonNull QuickSearchListItem listItem, @Nullable GPXInfo gpxInfo) {
 		SearchResult searchResult = listItem.getSearchResult();
-		String gpxTitle = GpxUiHelper.getGpxTitle(searchResult.localeName);
+		String gpxTitle = GpxHelper.INSTANCE.getGpxTitle(searchResult.localeName);
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		GpxUiHelper.updateGpxInfoView(app, view, gpxTitle, listItem.getIcon(), gpxInfo);
 	}
 
-	public static void bindSearchResult(@NonNull LinearLayout view, @NonNull QuickSearchListItem listItem) {
-		TextView title = view.findViewById(R.id.title);
-		TextView subtitle = view.findViewById(R.id.subtitle);
-		ImageView imageView = view.findViewById(R.id.imageView);
-
-		imageView.setImageDrawable(listItem.getIcon());
-		String name = listItem.getName();
-		if (listItem.getSpannableName() != null) {
-			title.setText(listItem.getSpannableName());
-		} else {
-			title.setText(name);
-		}
-
-		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
-		String desc = listItem.getTypeName();
-		Object searchResultObject = listItem.getSearchResult().object;
-		if (searchResultObject instanceof AbstractPoiType) {
-			AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
-			String[] synonyms = abstractPoiType.getSynonyms().split(";");
-			QuickSearchHelper searchHelper = app.getSearchUICore();
-			SearchUICore searchUICore = searchHelper.getCore();
-			String searchPhrase = searchUICore.getPhrase().getText(true);
-			StringMatcher matcher = new NameStringMatcher(searchPhrase, CHECK_STARTS_FROM_SPACE);
-
-			if (!searchPhrase.isEmpty() && !matcher.matches(abstractPoiType.getTranslation())) {
-				if (matcher.matches(abstractPoiType.getEnTranslation())) {
-					desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
-				} else {
-					for (String syn : synonyms) {
-						if (matcher.matches(syn)) {
-							desc = listItem.getTypeName() + " (" + syn + ")";
-							break;
-						}
-					}
-				}
-			}
-		}
-
-		boolean hasDesc = false;
-		if (subtitle != null) {
-			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
-				subtitle.setText(desc);
-				subtitle.setVisibility(View.VISIBLE);
-				hasDesc = true;
-			} else {
-				subtitle.setVisibility(View.GONE);
-			}
-		}
-
-		Drawable typeIcon = listItem.getTypeIcon();
-		ImageView groupIcon = view.findViewById(R.id.type_name_icon);
-		if (groupIcon != null) {
-			if (typeIcon != null && hasDesc) {
-				groupIcon.setImageDrawable(typeIcon);
-				groupIcon.setVisibility(View.VISIBLE);
-			} else {
-				groupIcon.setVisibility(View.GONE);
-			}
-		}
-
-		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
-		if (timeLayout != null) {
-			if (listItem.getSearchResult().object instanceof Amenity
-					&& ((Amenity) listItem.getSearchResult().object).getOpeningHours() != null) {
-				Amenity amenity = (Amenity) listItem.getSearchResult().object;
-				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-				if (rs != null && rs.getInfo() != null) {
-					int colorOpen = R.color.text_color_positive;
-					int colorClosed = R.color.text_color_negative;
-					SpannableString openHours = MenuController.getSpannableOpeningHours(
-							rs.getInfo(),
-							ContextCompat.getColor(app, colorOpen),
-							ContextCompat.getColor(app, colorClosed));
-					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
-					timeLayout.setVisibility(View.VISIBLE);
-
-					TextView timeText = view.findViewById(R.id.time);
-					ImageView timeIcon = view.findViewById(R.id.time_icon);
-					timeText.setText(openHours);
-					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
-				} else {
-					timeLayout.setVisibility(View.GONE);
-				}
-			} else {
-				timeLayout.setVisibility(View.GONE);
-			}
-		}
-	}
 
 	private LinearLayout getLinearLayout(@Nullable View convertView, int layoutId) {
 		if (convertView == null || isLayoutIdChanged(convertView, layoutId)) {
@@ -668,7 +567,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			float rd = (float) OsmAndFormatter.calculateRoundedDist(
 					searchUICore.getNextSearchRadius(searchPhrase), app);
 			return app.getString(R.string.increase_search_radius_to,
-					OsmAndFormatter.getFormattedDistance(rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
+					OsmAndFormatter.getFormattedDistance(rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		} else {
 			return app.getString(R.string.increase_search_radius);
 		}
@@ -703,30 +602,48 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		}
 	}
 
-	private void updateCompassVisibility(View view, QuickSearchListItem listItem) {
-		View compassView = view.findViewById(R.id.compass_layout);
-		boolean showCompass = listItem.getSearchResult().location != null;
+	public static void updateCompass(@NonNull View view, @NonNull QuickSearchListItem item,
+			@NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
+		boolean showCompass = item.getSearchResult().location != null;
 		if (showCompass) {
-			updateDistanceDirection(view, listItem);
-			compassView.setVisibility(View.VISIBLE);
-		} else {
-			compassView.setVisibility(View.GONE);
+			updateLocationView(view, item, updateLocationViewCache, useMapCenter);
 		}
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.compass_layout), showCompass);
 	}
 
-	private void updateDistanceDirection(View view, QuickSearchListItem listItem) {
+	public static void updateLocationView(@NonNull View view, @NonNull QuickSearchListItem item,
+			@NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
+		OsmandApplication app = AndroidUtils.getApp(view.getContext());
 		TextView distanceText = view.findViewById(R.id.distance);
 		ImageView direction = view.findViewById(R.id.direction);
-		SearchPhrase phrase = listItem.getSearchResult().requiredSearchPhrase;
+		SearchPhrase phrase = item.getSearchResult().requiredSearchPhrase;
 		updateLocationViewCache.specialFrom = null;
 		if (phrase != null && useMapCenter) {
 			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
-		LatLon toloc = listItem.getSearchResult().location;
+		LatLon toloc = null;
+		if (item.getSearchResult() != null) {
+			toloc = item.getSearchResult().location;
+		}
 		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
 	}
 
 	private boolean isNightMode() {
-		return !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+	}
+
+	public void setPoiUIFilter(@Nullable PoiUIFilter poiUIFilter) {
+		this.poiUIFilter = poiUIFilter;
+	}
+
+	@Nullable
+	public PoiUIFilter getPoiUIFilter() {
+		return poiUIFilter;
+	}
+
+	@Override
+	public void clear() {
+		super.clear();
+		setPoiUIFilter(null);
 	}
 }

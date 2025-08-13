@@ -8,27 +8,26 @@ import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -44,8 +43,7 @@ public class TrackTabsHelper {
 	private final ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 
 	private final Set<TrackItem> recentlyVisibleTrackItem = new HashSet<>();
-	private final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
-
+	protected final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 
 	public TrackTabsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -60,8 +58,20 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	public Map<String, TrackTab> getTrackTabs() {
-		return trackTabs;
+	public List<TrackTab> getSortedTrackTabs(boolean useSubdirs) {
+		List<TrackTab> result = getTrackTabs();
+		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), useSubdirs));
+		return result;
+	}
+
+	@NonNull
+	public List<TrackTab> getTrackTabs() {
+		return new ArrayList<>(trackTabs.values());
+	}
+
+	@Nullable
+	public TrackTab getTrackTab(@NonNull String id) {
+		return trackTabs.get(id);
 	}
 
 	@NonNull
@@ -69,89 +79,52 @@ public class TrackTabsHelper {
 		return new HashSet<>(recentlyVisibleTrackItem);
 	}
 
-	public void updateTrackItems(@NonNull List<TrackItem> trackItems) {
-		List<TrackItem> allTrackItems = new ArrayList<>(trackItems);
-		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
-			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
-			allTrackItems.add(trackItem);
-		}
+	public void updateTrackItems(@NonNull TrackFolder rootFolder) {
+		List<TrackItem> allTrackItems = new ArrayList<>(rootFolder.getFlattenedTrackItems());
+		addCurrentTrackItemIfPresent(allTrackItems);
 		itemsSelectionHelper.setAllItems(allTrackItems);
-		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
-		for (TrackItem item : trackItems) {
-			addTrackItem(trackTabs, item);
-		}
-		updateTrackTabs(trackTabs);
-	}
 
-	public void updateItems(@NonNull TrackFolder folder){
-		List<TrackItem> allTrackItems = new ArrayList<>(folder.getFlattenedTrackItems());
-		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
-			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
-			allTrackItems.add(trackItem);
-		}
-		itemsSelectionHelper.setAllItems(allTrackItems);
-		updateSelectTrackTabs(folder);
-	}
-
-	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs) {
 		processVisibleTracks();
 		processRecentlyVisibleTracks();
+
+		updateTrackTabs(rootFolder);
+		loadTabsSortModes();
+		sortTrackTabsContent();
+	}
+
+	protected void updateTrackTabs(@NonNull TrackFolder rootFolder) {
 		trackTabs.clear();
 		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
 		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
-		for (TrackTab tab : sortTabOrder(getAllSmartFoldersTabs())) {
-			trackTabs.put(tab.getTypeName(), tab);
+		for (TrackTab tab : getAllSmartFoldersTabs()) {
+			trackTabs.put(tab.getId(), tab);
 		}
-		for (TrackTab tab : sortTabOrder(folderTabs)) {
-			trackTabs.put(tab.getTypeName(), tab);
+		for (TrackTab tab : getAllTrackFoldersTabs(rootFolder)) {
+			trackTabs.put(tab.getId(), tab);
 		}
-		loadTabsSortModes();
-		sortTrackTabs();
 	}
 
-	private List<TrackTab> sortTabOrder(Map<String, TrackTab> folderTabs) {
-		List<TrackTab> sortedTabs = new ArrayList<>(folderTabs.values());
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
-		TracksSortMode rootSortModeTemp = TracksSortMode.getDefaultSortMode();
-		String trackRootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
-		if (tabsSortModes.containsKey(trackRootDir)) {
-			rootSortModeTemp = TracksSortMode.getByValue(tabsSortModes.get(trackRootDir));
+	private void addCurrentTrackItemIfPresent(@NonNull List<TrackItem> trackItems) {
+		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
+			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			TrackItem trackItem = new TrackItem(selectedGpxFile.getGpxFile());
+			trackItems.add(trackItem);
 		}
-		final TracksSortMode rootSortMode = rootSortModeTemp;
-		//LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		//Collections.sort(sortedTabs, new TracksComparator(rootSortMode, latLon));
-		// PRELIMINARY: Should ultimately use TracksComparator for trackTabs, similar to trackFolders:
-    		Collections.sort(sortedTabs, new Comparator<TrackTab>() {
-		        @Override
-			public int compare(TrackTab tab1, TrackTab tab2) {
-				switch (rootSortMode) {
-					case NAME_ASCENDING:
-						return tab1.getTypeName().compareTo(tab2.getTypeName());
-					case NAME_DESCENDING:
-						return -tab1.getTypeName().compareTo(tab2.getTypeName());
-				}
-				return tab1.getTypeName().compareTo(tab2.getTypeName());
-			}
-		});
-		return sortedTabs;
-	}
-
-	private void updateSelectTrackTabs(@NonNull TrackFolder folder) {
-		processVisibleTracks();
-		processRecentlyVisibleTracks();
-		trackTabs.clear();
-		trackTabs.put(app.getString(R.string.shared_string_visible), getTracksOnMapTab());
-		trackTabs.put(app.getString(R.string.shared_string_all_tracks), getAllTracksTab());
-		trackTabs.put(app.getString(R.string.shared_string_folders), getFoldersTab(folder));
-		loadTabsSortModes();
-		sortTrackTabs();
 	}
 
 	@NonNull
-	private TrackTab getTracksOnMapTab() {
-		TrackTab trackTab = new TrackTab(TrackTabType.ON_MAP);
+	private Collection<TrackTab> getAllTrackFoldersTabs(@NonNull TrackFolder rootFolder) {
+		List<TrackItem> trackItems = rootFolder.getFlattenedTrackItems();
+		Map<String, TrackTab> trackFolderTabs = new LinkedHashMap<>();
+		for (TrackItem item : trackItems) {
+			addTrackItem(trackFolderTabs, item);
+		}
+		return trackFolderTabs.values();
+	}
+
+	@NonNull
+	protected TrackTab getTracksOnMapTab() {
+		TrackTab trackTab = new TrackTab(app, TrackTabType.ON_MAP);
 		trackTab.items.addAll(getOnMapTabItems());
 		return trackTab;
 	}
@@ -163,8 +136,8 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	private TrackTab getAllTracksTab() {
-		TrackTab trackTab = new TrackTab(TrackTabType.ALL);
+	protected TrackTab getAllTracksTab() {
+		TrackTab trackTab = new TrackTab(app, TrackTabType.ALL);
 		trackTab.items.addAll(getAllTabItems());
 		return trackTab;
 	}
@@ -193,8 +166,8 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	private TrackTab getFoldersTab(@NonNull TrackFolder folder) {
-		TrackTab trackTab = new TrackTab(TrackTabType.FOLDERS);
+	protected TrackTab getFoldersTab(@NonNull TrackFolder folder) {
+		TrackTab trackTab = new TrackTab(app, TrackTabType.FOLDERS);
 		trackTab.items.add(TYPE_SORT_TRACKS);
 		trackTab.items.addAll(folder.getSubFolders());
 		trackTab.items.addAll(folder.getTrackItems());
@@ -228,10 +201,10 @@ public class TrackTabsHelper {
 	public void processRecentlyVisibleTracks() {
 		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
-		for (GPXFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
-			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
-			if (selectedGpxFile == null && (!gpxFile.showCurrentTrack || monitoringActive)) {
-				recentlyVisibleTrackItem.add(new TrackItem(app, gpxFile));
+		for (GpxFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
+			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
+			if (selectedGpxFile == null && (!gpxFile.isShowCurrentTrack() || monitoringActive)) {
+				recentlyVisibleTrackItem.add(new TrackItem(gpxFile));
 			}
 		}
 	}
@@ -251,30 +224,33 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	private Map<String, TrackTab> getAllSmartFoldersTabs() {
-		Map<String, TrackTab> smartFoldersTabs = new LinkedHashMap<>();
+	private List<TrackTab> getAllSmartFoldersTabs() {
+		List<TrackTab> smartFoldersTabs = new ArrayList<>();
 		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			TrackTab folderTab = new TrackTab(folder);
+			TrackTab folderTab = new TrackTab(app, folder);
 			folderTab.items.add(TYPE_SORT_TRACKS);
 			folderTab.items.addAll(folder.getTrackItems());
-			smartFoldersTabs.put(folderTab.getTypeName(), folderTab);
+			smartFoldersTabs.add(folderTab);
 		}
 		return smartFoldersTabs;
 	}
 
 	@Nullable
 	private TrackTab addTrackItem(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
-		File file = item.getFile();
+		KFile file = item.getFile();
 		if (file != null && file.getParentFile() != null) {
-			File dir = file.getParentFile();
-			TrackTab trackTab = trackTabs.get(dir.getName());
-			if (trackTab == null) {
-				trackTab = new TrackTab(dir);
-				trackTab.items.add(TYPE_SORT_TRACKS);
-				trackTabs.put(trackTab.getTypeName(), trackTab);
+			KFile dir = file.getParentFile();
+			if (dir != null) {
+				String folderId = TrackSortModesHelper.getFolderId(dir.absolutePath());
+				TrackTab trackTab = trackTabs.get(folderId);
+				if (trackTab == null) {
+					trackTab = new TrackTab(app, SharedUtil.jFile(dir));
+					trackTab.items.add(TYPE_SORT_TRACKS);
+					trackTabs.put(folderId, trackTab);
+				}
+				trackTab.items.add(item);
+				return trackTab;
 			}
-			trackTab.items.add(item);
-			return trackTab;
 		}
 		return null;
 	}
@@ -304,14 +280,14 @@ public class TrackTabsHelper {
 		gpxSelectionHelper.saveTracksVisibility(itemsSelectionHelper.getSelectedItems());
 	}
 
-	private void sortTrackTabs() {
+	private void sortTrackTabsContent() {
 		for (TrackTab trackTab : trackTabs.values()) {
 			sortTrackTab(trackTab);
 		}
 	}
 
 	public void sortTrackTab(@NonNull TrackTab trackTab) {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
+		LatLon latLon = getDefaultLocation();
 		if (trackTab.type == TrackTabType.ON_MAP) {
 			List<Object> visibleItems = getVisibleItems();
 			List<Object> recentlyVisibleItems = getRecentlyVisibleItems();
@@ -330,24 +306,36 @@ public class TrackTabsHelper {
 	}
 
 	public void loadTabsSortModes() {
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
-		if (!Algorithms.isEmpty(tabsSortModes)) {
-			for (Entry<String, String> entry : tabsSortModes.entrySet()) {
-				TrackTab trackTab = trackTabs.get(entry.getKey());
-				if (trackTab != null) {
-					trackTab.setSortMode(TracksSortMode.getByValue(entry.getValue()));
-				}
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		for (TrackTab trackTab : trackTabs.values()) {
+			TracksSortMode sortMode = sortModesHelper.getSortMode(trackTab.getId());
+			if (sortMode != null) {
+				trackTab.setSortMode(sortMode);
 			}
 		}
 	}
 
+	public void saveTabSortMode(@NonNull TrackTab trackTab) {
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.setSortMode(trackTab.getId(), trackTab.getSortMode());
+		sortModesHelper.syncSettings();
+	}
+
 	public void saveTabsSortModes() {
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
 		for (TrackTab trackTab : trackTabs.values()) {
-			String name = trackTab.getTypeName();
-			String sortType = trackTab.getSortMode().name();
-			tabsSortModes.put(name, sortType);
+			sortModesHelper.setSortMode(trackTab.getId(), trackTab.getSortMode());
 		}
-		settings.saveTabsSortModes(tabsSortModes);
+		sortModesHelper.syncSettings();
+	}
+
+	@NonNull
+	private TracksSortMode getRootSortMode() {
+		return app.getTrackSortModesHelper().getRootFolderSortMode();
+	}
+
+	@NonNull
+	private LatLon getDefaultLocation() {
+		return app.getMapViewTrackingUtilities().getDefaultLocation();
 	}
 }

@@ -5,7 +5,7 @@
               android:layout_height="wrap_content"
               android:orientation="vertical"
               android:background="?attr/activity_background_color"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto">
+              xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/container"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="24dp"
-                osmand:srcCompat="@drawable/ic_action_message"
+                app:srcCompat="@drawable/ic_action_message"
                 android:tint="?attr/color_dialog_buttons"
 	            android:layout_marginEnd="24dp" />
 
@@ -71,8 +71,8 @@
                 android:layout_marginLeft="64dp"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
-                osmand:typeface="@string/font_roboto_medium"
-                osmand:textAllCapsCompat="true"
+                app:typefaceWeight="medium"
+                android:textAllCaps="true"
 	            android:layout_marginStart="64dp" />
 
         </LinearLayout>

@@ -1,5 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static android.graphics.Typeface.DEFAULT;
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
 
 import android.annotation.SuppressLint;
@@ -35,10 +36,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -46,9 +43,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -75,7 +71,9 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -85,6 +83,10 @@ import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -102,7 +104,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private int pageMarginPx;
 	private int toolbarHeightPx;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
@@ -317,7 +319,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (route != null) {
 			List<RouteStatistics> routeStatistics = calculateRouteStatistics(app, route, isNightMode());
-			GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+			GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 			for (RouteStatistics statistic : routeStatistics) {
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
@@ -425,7 +427,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 
-		Typeface typeface = FontCache.getRobotoMedium(app);
+		Typeface typeface = FontCache.getMediumFont();
 		startTime[0] += (int) boardingTime;
 		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
@@ -482,7 +484,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			spannable.append(" • ");
 			spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
-		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app, OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		String type = getString(transportStopRoute.getTypeStrRes()).toLowerCase();
@@ -531,7 +533,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 				spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				startIndex = spannable.length();
 				spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app,
-						OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+						OsmAndFormatterParams.USE_LOWER_BOUNDS));
 				spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 				buildRowDivider(view, true);
@@ -612,7 +614,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		buildStartRow(infoContainer, icon, text, startTitle, imagesContainer, new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showLocationOnMap(start != null ? start.point : null);
+				showLocationOnMap(start != null ? start.getLatLon() : null);
 			}
 		});
 		addWalkRouteIcon(imagesContainer);
@@ -628,9 +630,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
 		title.append(" ").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
-		title.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		title.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = title.length();
-		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, title, imagesContainer, new OnClickListener() {
@@ -698,7 +700,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	private void buildDestinationItem(@NonNull View view, TargetPoint destination, int[] startTime,
 									  TransportRouteResultSegment segment, double walkSpeed) {
-		Typeface typeface = FontCache.getRobotoMedium(app);
+		Typeface typeface = FontCache.getMediumFont();
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer(view.getContext());
@@ -720,7 +722,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		spannable.append("~").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = spannable.length();
-		spannable.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+		spannable.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, spannable, imagesContainer, v -> showWalkingRouteOnMap(segment, null));
@@ -728,7 +730,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		addWalkRouteIcon(imagesContainer);
 
 		String timeStr = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0] + walkTime);
-		String name = getRoutePointDescription(destination.point, destination.getOnlyName());
+		String name = getRoutePointDescription(destination.getLatLon(), destination.getOnlyName());
 		SpannableString title = new SpannableString(name);
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -737,7 +739,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, imagesContainer, v -> showLocationOnMap(destination.point));
+		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.getLatLon(), imagesContainer, v -> showLocationOnMap(destination.getLatLon()));
 
 		((ViewGroup) view).addView(baseItemView);
 	}
@@ -1263,7 +1265,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		TextViewEx titleView = new TextViewEx(container.getContext());
 		FrameLayout.LayoutParams titleParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleParams.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
-		titleView.setTypeface(FontCache.getRobotoRegular(container.getContext()));
+		titleView.setTypeface(DEFAULT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
 		titleView.setTextColor(getMainFontColor());
@@ -1277,7 +1279,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		LinearLayout.LayoutParams descriptionParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(descriptionParams, 0, dpToPx(paddingTop), 0, dpToPx(paddingBottom));
 		textViewDescription.setLayoutParams(descriptionParams);
-		textViewDescription.setTypeface(FontCache.getRobotoRegular(container.getContext()));
+		textViewDescription.setTypeface(DEFAULT);
 		textViewDescription.setTextSize(14);
 		textViewDescription.setTextColor(getSecondaryColor());
 		textViewDescription.setText(description);
@@ -1383,23 +1385,23 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			WptPt wpt = null;
 			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
 			if (gpxItem.chartHighlightPos != -1) {
-				TrkSegment segment = gpxFile.tracks.get(0).segments.get(0);
+				TrkSegment segment = gpxFile.getTracks().get(0).getSegments().get(0);
 				if (segment != null) {
 					float distance = gpxItem.chartHighlightPos * elevationDataSet.getDivX();
-					for (WptPt p : segment.points) {
-						if (p.distance >= distance) {
+					for (WptPt p : segment.getPoints()) {
+						if (p.getDistance() >= distance) {
 							wpt = p;
 							break;
 						}
 					}
 					if (wpt != null) {
-						location = new LatLon(wpt.lat, wpt.lon);
+						location = new LatLon(wpt.getLat(), wpt.getLon());
 					}
 				}
 			}
 
 			if (location == null) {
-				location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
+				location = new LatLon(gpxItem.locationStart.getLat(), gpxItem.locationStart.getLon());
 			}
 			if (wpt != null) {
 				gpxItem.locationOnMap = wpt;

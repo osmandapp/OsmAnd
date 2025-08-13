@@ -255,7 +255,7 @@
     <string name="poi_fire_hose">Margue d’incendi</string>
     <string name="poi_grit_bin">Caissa de sabla</string>
     <string name="poi_ambulance_station">Estacion d’ambulàncias</string>
-    <string name="poi_ses_station">Estacion de proteccion civila</string>
+    <string name="poi_disaster_response">Estacion de proteccion civila</string>
     <string name="poi_emergency_access_point">Ponch d’accès d’urgéncia</string>
     <string name="poi_ford">Ga</string>
     <string name="poi_mountain_pass">Còl (pas, pòrt)</string>
@@ -283,7 +283,7 @@
     <string name="poi_fuel_lpg">GPL</string>
     <string name="poi_fuel_octane_80">Octane 80</string>
     <string name="poi_fuel_octane_91">Octane 91</string>
-    <string name="poi_climbing_crag">Òc;Escalada</string>
+    <string name="poi_climbing_crag">Escalada</string>
     <string name="poi_clock_option">Suplement</string>
     <string name="poi_piste_grooming">Preparacion de la pista</string>
     <string name="poi_outdoor_seating">Terrassa</string>
@@ -304,7 +304,6 @@
     <string name="poi_healthcare">Centre de santat</string>
     <string name="poi_office">Burèus - Ofici</string>
     <string name="poi_sightseeing">Interès toristic</string>
-    <string name="poi_osmwiki">Wiquipedia</string>
     <string name="poi_bakery">Fornier</string>
     <string name="poi_pastry">Pastissarià</string>
     <string name="poi_charity">Botiga de benfasença</string>
@@ -1056,7 +1055,7 @@
     <string name="poi_content_fodder">Contengut: ferratge</string>
     <string name="poi_content_beer">Contengut: cervesa</string>
     <string name="poi_content_salt">Contengut: sau</string>
-    <string name="poi_site_type_fortification">Fortificacion</string>
+    <string name="poi_archaeological_site_fortification">Fortificacion</string>
     <string name="poi_embassy_filter">Ambaissada</string>
     <string name="poi_traffic_signals_arrow">Sageta</string>
     <string name="poi_traffic_signals_vibration">Vibracion</string>

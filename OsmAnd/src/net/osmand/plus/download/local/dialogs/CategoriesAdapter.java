@@ -107,14 +107,25 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Nullable
 	public LocalGroup getLocalGroup(@Nullable LocalItemType type) {
 		for (Object object : items) {
-			if (object instanceof LocalGroup) {
-				LocalGroup group = (LocalGroup) object;
+			if (object instanceof LocalGroup group) {
 				if (group.getType() == type) {
 					return group;
 				}
 			}
 		}
 		return null;
+	}
+
+
+	public void updateItem(@NonNull Object object) {
+		int index = getItemPosition(object);
+		if (index != -1) {
+			notifyItemChanged(index);
+		}
+	}
+
+	public int getItemPosition(@NonNull Object object) {
+		return items.indexOf(object);
 	}
 
 	public interface LocalTypeListener {

@@ -1,29 +1,24 @@
 package net.osmand.plus.auto;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
+import static net.osmand.search.core.ObjectType.INDEX_ITEM;
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.car.app.model.CarIcon;
-import androidx.car.app.model.CarLocation;
-import androidx.car.app.model.DistanceSpan;
-import androidx.car.app.model.ItemList;
-import androidx.car.app.model.Metadata;
-import androidx.car.app.model.Place;
-import androidx.car.app.model.Row;
+import androidx.car.app.model.*;
 import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.search.SearchUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -41,7 +36,7 @@ public class SearchHelper {
 	private final OsmandApplication app;
 	private final SearchUICore searchUICore;
 	private final boolean showDescription;
-	private final int contentLimit;
+	private int contentLimit;
 
 	@Nullable
 	private String searchQuery;
@@ -82,6 +77,10 @@ public class SearchHelper {
 
 	public int getContentLimit() {
 		return contentLimit;
+	}
+
+	public void setContentLimit(int contentLimit) {
+		this.contentLimit = contentLimit;
 	}
 
 	public void resetSearchRadius() {
@@ -184,11 +183,11 @@ public class SearchHelper {
 			List<SearchResult> searchResults = new ArrayList<>();
 			for (SearchResult r : resultCollection.getCurrentSearchResults()) {
 				String name = QuickSearchListItem.getName(app, r);
-				if (Algorithms.isEmpty(name)) {
+				if (Algorithms.isEmpty(name) || r.objectType == INDEX_ITEM) {
 					continue;
 				}
 				Drawable icon = QuickSearchListItem.getIcon(app, r);
-				String typeName = showDescription ? QuickSearchListItem.getTypeName(app, r) : "";
+				String typeName = showDescription ? QuickSearchListItem.getExtendedTypeName(app, r) : "";
 				itemList.setNoItemsMessage(app.getString(R.string.search_nothing_found));
 				Row.Builder builder = buildSearchRow(searchSettings.getOriginalLocation(), r.location, name, icon, typeName);
 				if (builder != null) {
@@ -223,7 +222,7 @@ public class SearchHelper {
 					if (count == 0 && minimalSearchRadius != Integer.MAX_VALUE) {
 						double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 						builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
-								+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
+								+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
 					}
 					builder.setOnClickListener(this::onClickSearchMore);
 					builder.setBrowsable(true);
@@ -243,8 +242,7 @@ public class SearchHelper {
 	}
 
 	public void completeQueryWithObject(@NonNull SearchResult result) {
-		SearchUtils.selectSearchResult(app, result);
-
+		app.getSearchHistoryHelper().selectSearchResult(result);
 		String searchQuery = searchUICore.getPhrase().getText(true);
 		if (searchRadiusLevel != 1) {
 			searchRadiusLevel = minSearchRadiusLevel;
@@ -267,7 +265,7 @@ public class SearchHelper {
 			float dist = (float) MapUtils.getDistance(placeLocation, searchLocation);
 			SpannableString description = !Algorithms.isEmpty(typeName)
 					? new SpannableString("  • " + typeName) : new SpannableString(" ");
-			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist));
+			DistanceSpan distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist));
 			description.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
 			builder.addText(description);
 			builder.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(

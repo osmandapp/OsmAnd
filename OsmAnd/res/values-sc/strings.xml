@@ -137,7 +137,6 @@
     <string name="driving_region_us">Istados Unidos</string>
     <string name="driving_region_canada">Cànada</string>
     <string name="driving_region_europe_asia">Europa, Àsia, Amèrica latina e simigiantes</string>
-    <string name="driving_region_uk">UK, Ìndia, e simigiantes</string>
     <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e àteras.</string>
     <string name="driving_region_japan">Giapone</string>
     <string name="speak_title">Annuntzia…</string>
@@ -391,7 +390,6 @@
     <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae s\'ismanniamentu 15</string>
     <string name="rendering_attr_moreDetailed_name">Prus minujas (a sa minuda)</string>
     <string name="rendering_attr_lessDetailed_name">Minujas de mancu</string>
-    <string name="rendering_attr_hideAccess_name">Restritziones de atzessu</string>
     <string name="rendering_attr_showAccess_name">Ammustra restritziones de atzessu e pedàgios</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sos caminos</string>
     <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sos caminos</string>
@@ -2050,7 +2048,6 @@
     <string name="upload_poi">Càrriga PDI</string>
     <string name="route_roundabout_short">Piga sa %1$d essida e sighi</string>
     <string name="search_map_hint">Tzitade o regione</string>
-    <string name="wiki_around">Artìculos de Wikipedia a curtzu</string>
     <string name="routing_attr_allow_motorway_name">Imprea sas autostradas</string>
     <string name="routing_attr_allow_motorway_description">Permitit s\'impreu de sas autostradas.</string>
     <string name="lang_sr_latn">Serbu (latinu)</string>
@@ -2383,7 +2380,7 @@
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Dae</string>
     <string name="mapillary_menu_descr_dates">Pompia sas immàgines annànghidas ebbia</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Iscrie su nùmene de s\'impreadore</string>
     <string name="mapillary_menu_descr_username">Ammustra petzi sas immàgines annantas dae su</string>
     <string name="mapillary_menu_title_username">Nùmene impreadore</string>
@@ -3458,9 +3455,7 @@
     <string name="shared_string_language">Limba</string>
     <string name="shared_string_all_languages">Totu sas limbas</string>
     <string name="wiki_menu_download_descr">Pro bìdere sos PDI de Wikipedia in sa mapa b\'at bisòngiu de mapas agiuntivas.</string>
-    <string name="ui_customization_description">Personaliza sa cantidade de elementos in su Calàssiu, cunfigura sa mapa e su menù de cuntestu.
-\n
-\nPodes disabilitare sas estensiones chi no impreas, pro cuare totu sos controllos issoro dae s\'aplicatzione %1$s.</string>
+    <string name="ui_customization_description">Personaliza sa cantidade de elementos in su Calàssiu, cunfigura sa mapa e su menù de cuntestu. \n \nPodes disabilitare sas estensiones chi no impreas, pro cuare totu sos controllos issoro dae s\'aplicatzione %1$s.</string>
     <string name="ui_customization_short_descr">Elementos de su calàssiu, menù de cuntestu</string>
     <string name="ui_customization">Personalizatzione de s\'interfache de s\'impreadore</string>
     <string name="shared_string_drawer">Calàssiu</string>
@@ -3779,7 +3774,6 @@
     <string name="shared_string_graph">Gràficu</string>
     <string name="message_graph_will_be_available_after_recalculation">Pro praghere iseta.
 \nSu gràficu at a èssere a disponimentu a pustis de su càrculu nou de s\'àndala.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_emergency">Apretu/Emergèntzia</string>
     <string name="icon_group_special">Ispetziales</string>
     <string name="icon_group_transport">Trasportu</string>
@@ -3818,20 +3812,12 @@
     <string name="osm_edit_comment_note">Cummenta sa nota de OSM</string>
     <string name="osm_login_descr">Intra impreende su mètodu OAuth o cun su nùmene tuo e sa crae de intrada tua de OSM.</string>
     <string name="shared_string_add_photo">Annanghe una fotografia</string>
-    <string name="register_on_openplacereviews">Registra·ti in
-\nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Sas fotografias benint frunidas dae su progetu a datos abertos OpenPlaceReviews.org. Pro carrigare sas fotografias tuas ti depes registrare a su situ issoro.</string>
     <string name="register_opr_create_new_account">Crea unu contu nou</string>
     <string name="register_opr_have_account">Tèngio giai unu contu</string>
     <string name="shared_string_search_history">Cronologia de chirca</string>
     <string name="app_mode_kayak">Kàyak</string>
     <string name="app_mode_motorboat">Motoscafu</string>
     <string name="add_to_mapillary">Annanghe a Mapillary</string>
-    <string name="add_to_opr">Annanghe a OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd ammustrat fotografias dae fontes medas:
-\nOpenPlaceReviews - fotografias de sos PDI;
-\nMapillary - immàgines a livellu de su caminu;
-\nWeb / Wikimedia - fotografias de sos PDI ligadas a sos datos de OpenStreetMap.</string>
     <string name="shared_string_resources">Risursas</string>
     <string name="approximate_file_size">Mannària aprossimativa de su documentu</string>
     <string name="select_data_to_export">Ischerta sos datos de esportare in su documentu.</string>
@@ -3929,9 +3915,6 @@
     <string name="toast_select_edits_for_upload">Ischerta modìficas de carrigare</string>
     <string name="announcement_time_descr">Su tempus de annùntziu de sos annùntzios vocales diferentes dipendet dae sa casta de annùntziu, dae sa lestresa de navigatzione de cussu momentu e dae sa lestresa de navigatzione predefinida.</string>
     <string name="announcement_time_title">Tempus de s\'annùntziu</string>
-    <string name="open_place_reviews_plugin_description">Faghe contributziones a su progetu de OpenPlaceReviews comente fotografias, retzensiones o ligàmenes pro logos pùblicos che a ristorantes, albergos o museos.
-\n
-\nAtzapa istrutziones subra de comente contribuire in su situ nostru %1$s.</string>
     <string name="announcement_time_passing">Colende</string>
     <string name="announcement_time_approach">Acùrtzia·ti</string>
     <string name="announcement_time_prepare_long">Ammanniamentu longu</string>
@@ -3940,9 +3923,6 @@
     <string name="announcement_time_arrive">Arrivu a destinatzione</string>
     <string name="shared_string_turn">Bortada</string>
     <string name="hillshade_slope_contour_lines">Umbradura de sos rilievos / Pendèntzia / Lìnias de livellu</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Imprea test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Intra in OpenPlaceReviews</string>
     <string name="activity_type_water_name">Abba</string>
     <string name="activity_type_winter_name">Ierru</string>
     <string name="activity_type_snowmobile_name">Motoislita</string>
@@ -4360,8 +4340,8 @@
 \n
 \nPro praghere move sa memòria de archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: datos chi incluint sas mapas non in lìnia, sas rastas GPX etz.</string>
     <string name="display_route_tracks_as_poi">Ammustra sas rastas comente PDI</string>
-    <string name="delete_history_items_descr">Iscantzellare sos elementos de sa cronologia ischertados\?</string>
-    <string name="delete_history_items">Iscantzellare %1$s elementos de sa cronologia\?</string>
+    <string name="delete_history_items_descr">Iscantzellare sos elementos de sa cronologia ischertados?</string>
+    <string name="delete_history_items">Iscantzellare %1$s elementos de sa cronologia?</string>
     <string name="quick_action_toggle_preference">Unu butone pro mudare sas preferèntzias.</string>
     <string name="save_as_copy">Sarva comente còpia</string>
     <string name="shared_string_gps_filter">Filtru GPS</string>
@@ -4627,7 +4607,7 @@
     <string name="use_latin_name_if_missing">Imprea su nùmene latinu si mancat</string>
     <string name="average_speed_skip_stops">Piga in cunsideru sas firmadas</string>
     <string name="transport_hazmat_yes_desc">Seletziona sa categoria adeguada.</string>
-    <string name="map_widget_trip_recording_distance">Distàntzia</string>
+    <string name="map_widget_distance">Distàntzia</string>
     <string name="routing_attr_hazmat_category_name">Categoria de materiale perigulosu</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materiales perigulosos / Piga in cunsideru sos permissos de atzessu a sos materiales perigulosos</string>
     <string name="rendering_attr_weatherTempContours_name">Isolìnias de sa temperadura</string>
@@ -4999,4 +4979,7 @@
     <string name="sound_beep_simple">Bip: simpre</string>
     <string name="last_synchronized">Ùrtima sincronizatzione</string>
     <string name="display_position_automatic_descr">Dipendet dae s\'orientamentu de sa mapa. In bassu pro sa diretzione de su movimentu, in tzentru pro totu su restu.</string>
+    <string name="poi_source">Fonte de sos PDI</string>
+    <string name="maps_and_resources">Mapas e Resursas</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapas e datos</string>
 </resources>

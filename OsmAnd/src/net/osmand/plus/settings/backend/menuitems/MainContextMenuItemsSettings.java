@@ -24,6 +24,7 @@ public class MainContextMenuItemsSettings extends ContextMenuItemsSettings {
 		this.mainIds = mainIds;
 	}
 
+	@NonNull
 	@Override
 	public ContextMenuItemsSettings newInstance() {
 		return new MainContextMenuItemsSettings();

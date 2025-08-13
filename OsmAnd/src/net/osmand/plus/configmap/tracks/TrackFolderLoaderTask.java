@@ -9,25 +9,29 @@ import androidx.annotation.WorkerThread;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
-import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.SmartFolderHelper;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+@Deprecated
 public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	private static final Log LOG = PlatformUtil.getLog(TrackFolderLoaderTask.class);
+	private static final int LOG_BATCH_SIZE = 100;
+	private static final int PROGRESS_BATCH_SIZE = 70;
 
 	private final GpxDbHelper gpxDbHelper;
 	private final SmartFolderHelper smartFolderHelper;
@@ -36,7 +40,6 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	private final LoadTracksListener listener;
 	private long loadingTime = 0;
 	private int tracksCounter = 0;
-	private static final int LOG_BATCH_SIZE = 100;
 	private GpxDataItemCallback callback;
 
 	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder, @NonNull LoadTracksListener listener) {
@@ -63,7 +66,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	@Override
 	protected Void doInBackground(Void... voids) {
 		long start = System.currentTimeMillis();
-		LOG.info("Start loading tracks in " + folder.getDirName());
+		LOG.info("Start loading tracks in " + folder.getDirName(true));
 
 		folder.clearData();
 		loadingTime = System.currentTimeMillis();
@@ -87,15 +90,15 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 		while (!folders.isEmpty()) {
 			TrackFolder folder = folders.pop();
-			File dir = folder.getDirFile();
-			File[] files = dir.listFiles();
+			KFile dir = folder.getDirFile();
+			List<KFile> files = dir.listFiles();
 			if (Algorithms.isEmpty(files)) {
 				continue;
 			}
 			List<TrackItem> trackItems = new ArrayList<>();
 			List<TrackFolder> subFolders = new ArrayList<>();
 
-			for (File file : files) {
+			for (KFile file : files) {
 				if (isCancelled()) {
 					return;
 				}
@@ -103,13 +106,13 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					TrackFolder subfolder = new TrackFolder(file, folder);
 					subFolders.add(subfolder);
 					folders.push(subfolder); // Add subfolder to the queue for processing
-				} else if (GpxUiHelper.isGpxFile(file)) {
+				} else if (GpxHelper.INSTANCE.isGpxFile(file)) {
 					TrackItem item = new TrackItem(file);
 					item.setDataItem(getDataItem(item, file));
 					trackItems.add(item);
 
 					progress.add(item);
-					if (progress.size() > 7) {
+					if (progress.size() > PROGRESS_BATCH_SIZE) {
 						publishProgress(progress.toArray(new TrackItem[0]));
 						progress.clear();
 					}
@@ -126,30 +129,27 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
 		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
-			folder.resetCashedData();
+			folder.resetCachedData();
 		}
-		rootFolder.resetCashedData();
+		rootFolder.resetCachedData();
 	}
 
 	@Nullable
-	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, File file) {
-		if (file != null) {
-			if (callback == null) {
-				callback = new GpxDataItemCallback() {
-					@Override
-					public boolean isCancelled() {
-						return TrackFolderLoaderTask.this.isCancelled();
-					}
+	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, @NonNull KFile file) {
+		if (callback == null) {
+			callback = new GpxDataItemCallback() {
+				@Override
+				public boolean isCancelled() {
+					return TrackFolderLoaderTask.this.isCancelled();
+				}
 
-					@Override
-					public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-						trackItem.setDataItem(item);
-					}
-				};
-			}
-			return gpxDbHelper.getItem(file, callback);
+				@Override
+				public void onGpxDataItemReady(@NonNull GpxDataItem item) {
+					trackItem.setDataItem(item);
+				}
+			};
 		}
-		return null;
+		return gpxDbHelper.getItem(file, callback);
 	}
 
 	@Override

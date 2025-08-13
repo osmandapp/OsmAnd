@@ -12,8 +12,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -22,18 +22,7 @@ import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.Point;
 
 import net.osmand.IndexConstants;
-import net.osmand.core.jni.AlphaChannelPresence;
-import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.IMapTiledDataProvider;
-import net.osmand.core.jni.IQueryController;
-import net.osmand.core.jni.MapStubStyle;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
-import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.TileId;
-import net.osmand.core.jni.Utilities;
-import net.osmand.core.jni.ZoomLevel;
-import net.osmand.core.jni.interface_ImageMapLayerProvider;
+import net.osmand.core.jni.*;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
@@ -89,7 +78,7 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 	public static final int MIN_POINTS_ZOOM = MapillaryVectorLayer.MIN_POINTS_ZOOM;
 	public static final double EXTENT = MapillaryVectorLayer.EXTENT;
 
-	public MapillaryTilesProvider(OsmandApplication app, @NonNull ITileSource tileSource, float density) {
+	public MapillaryTilesProvider(@NonNull OsmandApplication app, @NonNull ITileSource tileSource, float density) {
 		this.tileSource = tileSource;
 		this.app = app;
 		this.rm = app.getResourceManager();
@@ -102,10 +91,10 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		this.storedEnlargedBBox31 = null;
 		this.pointsMap = new ConcurrentHashMap<>();
 		this.lazyLoadMap = new ConcurrentHashMap<>();
-		Drawable drawablePoint = ResourcesCompat.getDrawable(app.getResources(), R.drawable.map_mapillary_photo_dot, null);
+		Drawable drawable = AppCompatResources.getDrawable(app, R.drawable.map_mapillary_photo_dot);
 		// TODO: resize for Android auto
-		if (drawablePoint != null) {
-			bitmapPoint = AndroidUtils.createScaledBitmap(drawablePoint, 1.0f);
+		if (drawable != null) {
+			bitmapPoint = AndroidUtils.createScaledBitmap(drawable, 1.0f);
 		} else {
 			bitmapPoint = BitmapFactory.decodeResource(app.getResources(), R.drawable.map_mapillary_photo_dot);
 		}

@@ -95,6 +95,6 @@ public class LoginBottomSheetFragment extends MenuBottomSheetDialogFragment impl
 
 	@Override
 	public void authorizationCompleted() {
-		dismiss();
+		dismissAllowingStateLoss();
 	}
 }

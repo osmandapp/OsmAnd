@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -43,7 +44,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 
 	public static final String ROW_NUMBER_TAG = TAG + "_row_number";
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;

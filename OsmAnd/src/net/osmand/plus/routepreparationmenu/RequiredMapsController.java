@@ -38,6 +38,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private List<DownloadItem> mapsToDownload = new ArrayList<>();
 	private List<DownloadItem> missingMaps = new ArrayList<>();
 	private List<DownloadItem> usedMaps = new ArrayList<>();
+	private boolean usedMapsPresent;
 	private final ItemsSelectionHelper<DownloadItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
 
 	private boolean loadingMapsInProgress = false;
@@ -51,9 +52,8 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 
 	public void initContent() {
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		boolean internetConnectionAvailable = app.getSettings().isInternetConnectionAvailable();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			if (internetConnectionAvailable) {
+			if (isInternetConnectionAvailable()) {
 				downloadThread.runReloadIndexFiles();
 				loadingMapsInProgress = true;
 			}
@@ -86,15 +86,21 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private void updateMapsToDownload() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
-		this.mapsToDownload = collectMapsForRegions(result.getMapsToDownload());
-		this.missingMaps = collectMapsForRegions(result.getMissingMaps());
-		this.usedMaps = collectMapsForRegions(result.getUsedMaps());
+
+		List<WorldRegion> used = result != null ? result.getUsedMaps() : Collections.emptyList();
+		List<WorldRegion> missing = result != null ? result.getMissingMaps() : Collections.emptyList();
+		List<WorldRegion> download = result != null ? result.getMapsToDownload() : Collections.emptyList();
+
+		this.mapsToDownload = collectMapsForRegions(download);
+		this.missingMaps = collectMapsForRegions(missing);
+		this.usedMapsPresent = !Algorithms.isEmpty(used);
+		this.usedMaps = collectMapsForRegions(used);
 	}
 
 	private List<DownloadItem> collectMapsForRegions(@NonNull List<WorldRegion> regions) {
 		List<DownloadItem> result = new ArrayList<>();
-		DownloadResources resources = app.getDownloadThread().getIndexes();
 		if (!Algorithms.isEmpty(regions)) {
+			DownloadResources resources = app.getDownloadThread().getIndexes();
 			for (WorldRegion missingRegion : regions) {
 				for (DownloadItem downloadItem : resources.getDownloadItems(missingRegion)) {
 					if (downloadItem.getType() == DownloadActivityType.NORMAL_FILE) {
@@ -154,7 +160,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	}
 
 	public void onDownloadButtonClicked(@NonNull MapActivity mapActivity) {
-		mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
+		mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		mapActivity.getMapRouteInfoMenu().resetRouteCalculation();
 
 		List<IndexItem> indexes = new ArrayList<>();
@@ -218,7 +224,15 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		RequiredMapsFragment.showInstance(activity.getSupportFragmentManager());
 	}
 
-	public boolean shouldShowOnlineCalculation() {
-		return !onlineCalculationRequested && !isLoadingInProgress();
+	public boolean shouldShowOnlineCalculationBanner() {
+		return !onlineCalculationRequested && !isLoadingInProgress() && isInternetConnectionAvailable();
+	}
+
+	public boolean shouldShowUseDownloadedMapsBanner() {
+		return usedMapsPresent;
+	}
+
+	private boolean isInternetConnectionAvailable() {
+		return app.getSettings().isInternetConnectionAvailable();
 	}
 }

@@ -1,9 +1,9 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
-import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.ColoringPurpose.TRACK;
+import static net.osmand.shared.routing.ColoringType.TRACK_SOLID;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
-import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.IControlsColorProvider;
@@ -36,12 +36,12 @@ import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.routing.RouteColorize;
 import net.osmand.util.Algorithms;
-import net.osmand.router.RouteColorize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,8 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		container.removeAllViews();
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle != null ? coloringStyle.getType() : null;
@@ -95,7 +96,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 			container.addView(new DescriptionCard(activity, R.string.unchanged_parameter_summary).build());
 		} else if (!isAvailableInSubscription(coloringStyle)) {
 			container.addView(new PromoBannerCard(activity).build());
-		} else if (ColoringType.isColorTypeInPurpose(coloringType, ColoringPurpose.TRACK) && coloringType.toGradientScaleType() != null) {
+		} else if (ColoringType.Companion.isColorTypeInPurpose(coloringType, ColoringPurpose.TRACK) && coloringType.toGradientScaleType() != null) {
 			GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 			container.addView(new GradientColorsPaletteCard(activity, getGradientPaletteController(gradientScaleType)).build());
 		} else if (coloringType.isTrackSolid()) {
@@ -154,8 +155,8 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	private ColoringStyle getColoringStyle() {
 		String coloringType = data.getParameter(COLORING_TYPE);
 		if (coloringType != null) {
-			ColoringType type = ColoringType.requireValueOf(TRACK, coloringType);
-			String attribute = ColoringType.getRouteInfoAttribute(coloringType);
+			ColoringType type = ColoringType.Companion.requireValueOf(TRACK, coloringType);
+			String attribute = ColoringType.Companion.getRouteInfoAttribute(coloringType);
 			return new ColoringStyle(type, attribute);
 		}
 		return null;
@@ -183,7 +184,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	@Override
 	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
-		return ColoringType.valuesOf(TRACK);
+		return ColoringType.Companion.valuesOf(TRACK);
 	}
 
 	@Override

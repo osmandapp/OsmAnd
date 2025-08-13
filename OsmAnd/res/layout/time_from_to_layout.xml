@@ -2,7 +2,7 @@
 
 
 <LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="top"
-        osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+        app:srcCompat="@drawable/ic_action_remove_dark"/>
 
 </LinearLayout>
 

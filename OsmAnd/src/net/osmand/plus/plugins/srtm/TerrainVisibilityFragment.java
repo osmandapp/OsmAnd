@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
+import static net.osmand.plus.dashboard.DashboardType.TERRAIN;
 
 import android.os.Bundle;
 import android.view.View;

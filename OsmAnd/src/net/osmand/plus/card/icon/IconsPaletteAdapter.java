@@ -18,20 +18,17 @@ public class IconsPaletteAdapter<IconData> extends RecyclerView.Adapter<IconView
 	private final FragmentActivity activity;
 	private final IIconsPaletteController<IconData> controller;
 	private final boolean nightMode;
-	private List<IconData> icons;
 
 	public IconsPaletteAdapter(@NonNull FragmentActivity activity,
 	                           @NonNull IIconsPaletteController<IconData> controller,
 	                           boolean nightMode) {
 		this.activity = activity;
 		this.controller = controller;
-		this.icons = controller.getIcons();
 		this.nightMode = nightMode;
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
 	public void updateIconsList() {
-		this.icons = controller.getIcons();
 		notifyDataSetChanged();
 	}
 
@@ -44,9 +41,9 @@ public class IconsPaletteAdapter<IconData> extends RecyclerView.Adapter<IconView
 
 	@Override
 	public void onBindViewHolder(@NonNull IconViewHolder holder, int position) {
-		IconData icon = icons.get(position);
+		IconData icon = controller.getIcons().get(position);
 		boolean isSelected = controller.isSelectedIcon(icon);
-		int controlsColor = controller.getControlsAccentColor(nightMode);
+		int controlsColor = controller.getIconsAccentColor(nightMode);
 		IconsPaletteElements<IconData> paletteElements = controller.getPaletteElements(activity, nightMode);
 		paletteElements.bindView(holder.itemView, icon, controlsColor, isSelected);
 		holder.itemView.setOnClickListener(v -> controller.onSelectIconFromPalette(icon));
@@ -60,12 +57,12 @@ public class IconsPaletteAdapter<IconData> extends RecyclerView.Adapter<IconView
 	}
 
 	public int indexOf(@Nullable IconData icon) {
-		return icons.indexOf(icon);
+		return controller.getIcons().indexOf(icon);
 	}
 
 	@Override
 	public int getItemCount() {
-		return icons.size();
+		return controller.getIcons().size();
 	}
 
 	static class IconViewHolder extends RecyclerView.ViewHolder {

@@ -1,29 +1,29 @@
 package net.osmand.data;
 
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.gpx.GPXUtilities.*;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
+import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import net.osmand.Location;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.ObfConstants;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.shared.wiki.WikiHelper;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -34,6 +34,7 @@ public class Amenity extends MapObject {
 	public static final String PHONE = "phone";
 	public static final String MOBILE = "mobile";
 	public static final String DESCRIPTION = "description";
+	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String SERVICE_TIMES = "service_times";
@@ -56,8 +57,16 @@ public class Amenity extends MapObject {
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
+	public static final String ROUTE_ID_OSM_PREFIX_LEGACY = "OSM"; // non-indexed
+	public static final String ROUTE_ID_OSM_PREFIX = "O"; // indexed in POI-section
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
+	public static final String ROUTE_ACTIVITY_TYPE = "route_activity_type";
+	public static final String WIKI_PHOTO = "wiki_photo";
+	public static final String WIKI_CATEGORY = "wiki_category";
+	public static final String TRAVEL_TOPIC = "travel_topic";
+	public static final String TRAVEL_ELO = "travel_elo";
+	public static final String OSMAND_POI_KEY = "osmand_poi_key";
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
@@ -67,7 +76,10 @@ public class Amenity extends MapObject {
 	public static final String SEPARATOR = ";";
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
+	public static final String ROUTE_MEMBERS_IDS = "route_members_ids";
+	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
+	public static final int DEFAULT_ELO = 900;
 
 	private String subType;
 	private PoiCategory type;
@@ -80,6 +92,13 @@ public class Amenity extends MapObject {
 	private TIntArrayList x;
 	private String mapIconName;
 	private int order;
+	private Map<Integer, List<TagValuePair>> tagGroups;
+	private String regionName;
+
+	private String wikiIconUrl;
+	private String wikiImageStubUrl;
+	private int travelElo = 0;
+	private Set<String> contentLocales;
 
 	public int getOrder() {
 		return order;
@@ -89,7 +108,30 @@ public class Amenity extends MapObject {
 		this.order = order;
 	}
 
-	public static class AmenityRoutePoint {
+	public Map<Integer, List<TagValuePair>> getTagGroups() {
+		return tagGroups;
+	}
+
+	public void addTagGroup(int id, List<TagValuePair> tagValues) {
+		if (tagGroups == null) {
+			tagGroups = new HashMap<Integer, List<TagValuePair>>();
+		}
+		tagGroups.put(id, tagValues);
+	}
+
+	public void setTagGroups(Map<Integer, List<TagValuePair>> tagGroups) {
+		this.tagGroups = tagGroups;
+	}
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+
+	public String getRegionName() {
+		return regionName;
+	}
+
+    public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
@@ -151,7 +193,12 @@ public class Amenity extends MapObject {
 			return null;
 		}
 		String str = additionalInfo.get(key);
-		str = unzipContent(str);
+		if (str == null && key.contains(":")) {
+			str = additionalInfo.get(key.replaceAll(":", XML_COLON)); // try content_-_uk after content:uk
+		}
+		if (str != null) {
+			str = unzipContent(str);
+		}
 		return str;
 	}
 
@@ -223,15 +270,33 @@ public class Amenity extends MapObject {
 	public void setAdditionalInfo(String tag, String value) {
 		if ("name".equals(tag)) {
 			setName(value);
-		} else if (tag.startsWith("name:")) {
+		} else if (isNameLangTag(tag)) {
 			setName(tag.substring("name:".length()), value);
 		} else {
-			if (this.additionalInfo == null) {
-				this.additionalInfo = new LinkedHashMap<String, String>();
+			if (additionalInfo == null) {
+				additionalInfo = new LinkedHashMap<String, String>();
 			}
-			this.additionalInfo.put(tag, value);
+			additionalInfo.put(tag, value);
+
 			if (OPENING_HOURS.equals(tag)) {
-				this.openingHours = unzipContent(value);
+				openingHours = unzipContent(value);
+			}
+		}
+	}
+
+	public void copyAdditionalInfo(Amenity amenity, boolean overwrite) {
+		copyAdditionalInfo(amenity.getInternalAdditionalInfoMap(), overwrite);
+	}
+
+	public void copyAdditionalInfo(Map<String, String> map, boolean overwrite) {
+		if (overwrite || additionalInfo == null) {
+			setAdditionalInfo(map);
+		} else {
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				String key = entry.getKey();
+				if (!additionalInfo.containsKey(key)) {
+					setAdditionalInfo(key, entry.getValue());
+				}
 			}
 		}
 	}
@@ -256,9 +321,9 @@ public class Amenity extends MapObject {
 					if (pt2 != null) {
 						String cat = pt2.getCategory().getKeyName();
 						if (poi_type.containsKey(cat)) {
-							val = poi_type.get(cat) + ";" + val;
+							key = poi_type.get(cat) + ";" + key;
 						}
-						poi_type.put(pt2.getCategory().getKeyName(), val);
+						poi_type.put(pt2.getCategory().getKeyName(), key);
 					} else {
 						text.put(key, val);
 					}
@@ -287,9 +352,9 @@ public class Amenity extends MapObject {
 	private void printNames(String prefix, Map<String, String> stringMap, StringBuilder s) {
 		for (Entry<String, String> e : stringMap.entrySet()) {
 			if (e.getValue().startsWith(" gz ")) {
-				s.append(prefix).append(e.getKey()).append("='gzip ...'");
+				s.append(prefix).append(e.getKey()).append("='gzip ...' ");
 			} else {
-				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("'");
+				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("' ");
 			}
 		}
 	}
@@ -325,9 +390,10 @@ public class Amenity extends MapObject {
 	}
 
 	public String getGpxIcon() {
-		return getAdditionalInfo(GPX_ICON);
+		String wikiVoyageIcon = getAdditionalInfo(GPX_ICON);
+		String travelGpxIcon = getAdditionalInfo(ICON_NAME_EXTENSION);
+		return Algorithms.isEmpty(wikiVoyageIcon) ? travelGpxIcon : wikiVoyageIcon;
 	}
-
 
 	public String getContentLanguage(String tag, String lang, String defLang) {
 		if (lang != null) {
@@ -360,10 +426,21 @@ public class Amenity extends MapObject {
 	}
 
 	public Set<String> getSupportedContentLocales() {
-		Set<String> supported = new TreeSet<>();
-		supported.addAll(getNames("content", "en"));
-		supported.addAll(getNames("description", "en"));
-		return supported;
+		if (contentLocales != null) {
+			return contentLocales;
+		} else {
+			Set<String> supported = new TreeSet<>();
+			supported.addAll(getNames(CONTENT, "en"));
+			supported.addAll(getNames(DESCRIPTION, "en"));
+			return supported;
+		}
+	}
+
+	public void updateContentLocales(Set<String> locales) {
+		if (contentLocales == null) {
+			contentLocales = new TreeSet<>();
+		}
+		contentLocales.addAll(locales);
 	}
 
 	public List<String> getNames(String tag, String defTag) {
@@ -410,7 +487,7 @@ public class Amenity extends MapObject {
 			return translateName;
 		}
 		for (String nm : getAdditionalInfoKeys()) {
-			if (nm.startsWith(tag + ":")) {
+			if (nm.startsWith(tag + ":") || nm.startsWith(tag + XML_COLON)) {
 				return getAdditionalInfo(nm);
 			}
 		}
@@ -423,6 +500,106 @@ public class Amenity extends MapObject {
 
 	public String getRouteId() {
 		return getAdditionalInfo(ROUTE_ID);
+	}
+
+	public String getWikiPhoto() {
+		return getAdditionalInfo(WIKI_PHOTO);
+	}
+
+	public void setWikiPhoto(String wikiPhoto) {
+		setAdditionalInfo(WIKI_PHOTO, wikiPhoto);
+	}
+
+	public String getWikiCategory() {
+		return getAdditionalInfo(WIKI_CATEGORY);
+	}
+
+	public void setWikiCategory(String wikiCategory) {
+		setAdditionalInfo(WIKI_CATEGORY, wikiCategory);
+	}
+
+	public String getTravelTopic() {
+		return getAdditionalInfo(TRAVEL_TOPIC);
+	}
+
+	public void setTravelTopic(String travelTopic) {
+		setAdditionalInfo(TRAVEL_TOPIC, travelTopic);
+	}
+
+	public String getTravelElo() {
+		return getAdditionalInfo(TRAVEL_ELO);
+	}
+	public String getWikidata() {
+		return getAdditionalInfo(WIKIDATA);
+	}
+
+	public int getTravelEloNumber() {
+		if (travelElo > 0) {
+			return travelElo;
+		}
+		String travelEloStr = getTravelElo();
+		travelElo = Algorithms.parseIntSilently(travelEloStr, DEFAULT_ELO);
+		return travelElo;
+	}
+
+	public void setTravelEloNumber(int elo) {
+		travelElo = elo;
+	}
+
+	public String getWikiIconUrl() {
+		if (wikiIconUrl == null) {
+			obtainWikiUrls();
+		}
+		return wikiIconUrl;
+	}
+
+	public void setWikiIconUrl(String wikiIconUrl) {
+		this.wikiIconUrl = wikiIconUrl;
+	}
+
+	public String getWikiImageStubUrl() {
+		if (wikiImageStubUrl == null) {
+			obtainWikiUrls();
+		}
+		return wikiImageStubUrl;
+	}
+
+	public void setWikiImageStubUrl(String wikiImageStubUrl) {
+		this.wikiImageStubUrl = wikiImageStubUrl;
+	}
+
+	public String getOsmandPoiKey() {
+		return getAdditionalInfo(OSMAND_POI_KEY);
+	}
+
+	private void obtainWikiUrls() {
+		String wikiPhoto = getWikiPhoto();
+		if (!Algorithms.isEmpty(wikiPhoto)) {
+			WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(wikiPhoto);
+			setWikiIconUrl(wikiIMage.getImageIconUrl());
+			setWikiImageStubUrl(wikiIMage.getImageStubUrl());
+		}
+	}
+
+	public boolean hasOsmRouteId() {
+		String routeId = getRouteId();
+		return routeId != null &&
+				(routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX_LEGACY)
+						|| routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX));
+	}
+
+	public String getGpxFileName(String lang) {
+		final String gpxFileName = lang != null ? getName(lang) : getEnName(true);
+		if (!Algorithms.isEmpty(gpxFileName)) {
+			return Algorithms.sanitizeFileName(gpxFileName);
+		}
+		if (!Algorithms.isEmpty(getRouteId())) {
+			return getRouteId();
+		}
+		if (!Algorithms.isEmpty(getSubType())) {
+			return getType().getKeyName() + " " + getSubType();
+		}
+		return getType().getKeyName();
 	}
 
 	public String getStrictTagContent(String tag, String lang) {
@@ -527,6 +704,28 @@ public class Amenity extends MapObject {
 		return PRIVATE_VALUE.equals(getTagContent(ACCESS_PRIVATE_TAG));
 	}
 
+	public boolean isRouteTrack() {
+		if (subType == null) {
+			return false;
+		} else {
+			boolean hasRouteTrackSubtype = subType.startsWith(ROUTES_PREFIX) || subType.equals(ROUTE_TRACK);
+			boolean hasGeometry = additionalInfo != null && additionalInfo.containsKey(ROUTE_BBOX_RADIUS);
+			return hasRouteTrackSubtype && hasGeometry && !Algorithms.isEmpty(getRouteId());
+		}
+	}
+
+	public boolean isRoutePoint() {
+		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
+	}
+
+	public boolean isRouteArticle() {
+		return Algorithms.stringsEqual(ROUTE_ARTICLE, subType);
+	}
+
+	public boolean isSuperRoute() {
+		return additionalInfo != null && additionalInfo.containsKey(ROUTE_MEMBERS_IDS);
+	}
+
 	public JSONObject toJSON() {
 		JSONObject json = super.toJSON();
 		json.put("subType", subType);
@@ -544,32 +743,31 @@ public class Amenity extends MapObject {
 	}
 
 	public static Amenity parseJSON(JSONObject json) {
-		Amenity a = new Amenity();
-		MapObject.parseJSON(json, a);
+		Amenity amenity = new Amenity();
+		MapObject.parseJSON(json, amenity);
 
 		if (json.has("subType")) {
-			a.subType = json.getString("subType");
+			amenity.subType = json.getString("subType");
 		}
 		if (json.has("type")) {
 			String categoryName = json.getString("type");
-			a.setType(MapPoiTypes.getDefault().getPoiCategoryByName(categoryName));
+			amenity.setType(MapPoiTypes.getDefault().getPoiCategoryByName(categoryName));
 		} else {
-			a.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
+			amenity.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
 		}
 		if (json.has("openingHours")) {
-			a.openingHours = json.getString("openingHours");
+			amenity.openingHours = json.getString("openingHours");
 		}
 		if (json.has("additionalInfo")) {
 			JSONObject namesObj = json.getJSONObject("additionalInfo");
-			a.additionalInfo = new HashMap<>();
 			Iterator<String> iterator = namesObj.keys();
 			while (iterator.hasNext()) {
 				String key = iterator.next();
 				String value = namesObj.getString(key);
-				a.additionalInfo.put(key, value);
+				amenity.setAdditionalInfo(key, value);
 			}
 		}
-		return a;
+		return amenity;
 	}
 
 	public Map<String, String> getAmenityExtensions() {
@@ -586,7 +784,7 @@ public class Amenity extends MapObject {
 		if (subType != null) {
 			result.put(addPrefixes ? AMENITY_PREFIX + SUBTYPE : SUBTYPE, subType);
 		}
-		if (type != null) {
+		if (type != null && type.getKeyName() != null) {
 			result.put(addPrefixes ? AMENITY_PREFIX + TYPE : TYPE, type.getKeyName());
 		}
 		if (openingHours != null) {
@@ -673,4 +871,105 @@ public class Amenity extends MapObject {
 		}
 		return alternateName;
 	}
+
+	public String getCityFromTagGroups(String lang) {
+		if (tagGroups == null) {
+			return null;
+		}
+		String result = null;
+		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
+			String translated = "";
+			String nonTranslated = "";
+			City.CityType type = null;
+			for (TagValuePair tagValue : entry.getValue()) {
+				if (tagValue.tag.endsWith("name:" + lang)) {
+					translated = tagValue.value;
+				}
+				if (tagValue.tag.endsWith("name")) {
+					nonTranslated = tagValue.value;
+				}
+				if (tagValue.tag.equals("place")) {
+					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
+				}
+			}
+			String name = translated.isEmpty() ? nonTranslated : translated;
+			if (!name.isEmpty() && isCityTypeAccept(type)) {
+				result = result == null ? name : result + ", " + name;
+			}
+		}
+		return result;
+	}
+
+	private boolean isCityTypeAccept(City.CityType type) {
+		if (type == null) {
+			return false;
+		}
+		return type.storedAsSeparateAdminEntity();
+	}
+
+	public List<LatLon> getPolygon() {
+		List<LatLon> res = new ArrayList<>();
+		if (x == null) {
+			return res;
+		}
+		for (int i = 0; i < getX().size(); i++) {
+			int x = getX().get(i);
+			int y = getY().get(i);
+			LatLon l = new LatLon(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			res.add(l);
+		}
+		return res;
+	}
+
+	public void setX(TIntArrayList x) {
+		this.x = x;
+	}
+
+	public void setY(TIntArrayList y) {
+		this.y = y;
+	}
+
+	public String getRouteActivityType() {
+		if (!isRouteTrack() && !isSuperRoute()) {
+			return "";
+		}
+		for (Map.Entry<String, String> entry : additionalInfo.entrySet()) {
+			if (entry.getKey().startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
+				return MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey()).getTranslation();
+			}
+		}
+		return "";
+	}
+
+	public Long getOsmId() {
+		Long id = getId();
+		if (id == null) {
+			return null;
+		}
+		if (ObfConstants.isShiftedID(id)) {
+			return ObfConstants.getOsmId(id);
+		} else {
+			return id >> AMENITY_ID_RIGHT_SHIFT;
+		}
+	}
+
+	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
+		String typeName = amenity.getSubTypeStr();
+		String localName = amenity.getName(locale, transliterate);
+		if (typeName != null && localName.contains(typeName)) {
+			// type is contained in name e.g.
+			// localName = "Bakery the Corner"
+			// type = "Bakery"
+			// no need to repeat this
+			return localName;
+		}
+		if (Algorithms.isEmpty(localName) && amenity.isRouteTrack()) {
+			localName = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
+		if (Algorithms.isEmpty(localName)) {
+			return typeName;
+		}
+		return typeName + " " + localName; // $NON-NLS-1$
+	}
+
 }

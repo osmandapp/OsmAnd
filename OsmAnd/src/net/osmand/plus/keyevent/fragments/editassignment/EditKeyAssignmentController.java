@@ -29,9 +29,8 @@ import net.osmand.OnResultCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
+import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
@@ -40,6 +39,7 @@ import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -52,13 +52,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class EditKeyAssignmentController implements IDialogController, OnKeyCodeSelectedCallback {
+public class EditKeyAssignmentController extends BaseDialogController implements OnKeyCodeSelectedCallback {
 
 	public static final String PROCESS_ID = "edit_key_assignment";
 
 	public static final String TRANSITION_NAME = "shared_element_container";
 
-	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final DialogManager dialogManager;
 	private final InputDevicesHelper deviceHelper;
@@ -71,12 +70,18 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	                                   @NonNull ApplicationMode appMode,
 									   @NonNull String deviceId,
 									   @Nullable String assignmentId) {
-		this.app = app;
+		super(app);
 		this.appMode = appMode;
 		this.dialogManager = app.getDialogManager();
 		this.deviceHelper = app.getInputDeviceHelper();
 		this.deviceId = deviceId;
 		this.assignmentId = assignmentId;
+	}
+
+	@NonNull
+	@Override
+	public String getProcessId() {
+		return PROCESS_ID;
 	}
 
 	@NonNull
@@ -116,15 +121,14 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		return screenItems;
 	}
 
-	public void registerDialog(@NonNull IDialog dialog) {
-		dialogManager.register(PROCESS_ID, dialog);
-	}
-
-	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
+	@Override
+	public boolean finishProcessIfNeeded(@Nullable FragmentActivity activity) {
 		if (activity != null && !activity.isChangingConfigurations()) {
 			dialogManager.unregister(PROCESS_ID);
 			dialogManager.unregister(AddQuickActionController.PROCESS_ID);
+			return true;
 		}
+		return false;
 	}
 
 	public void showOverflowMenu(@NonNull FragmentActivity activity, @Nullable View actionView) {
@@ -167,8 +171,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 
 		dialogData.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
 			Object extra = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT);
-			if (extra instanceof EditText) {
-				EditText editText = (EditText) extra;
+			if (extra instanceof EditText editText) {
 				String newName = editText.getText().toString();
 				if (Objects.equals(oldName, newName)) {
 					return;
@@ -345,7 +348,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(false);
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 	}
 
 	@Nullable
@@ -360,9 +363,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		@Override
 		public boolean equals(Object o) {
 			if (this == o) return true;
-			if (!(o instanceof EditingBundle)) return false;
-
-			EditingBundle that = (EditingBundle) o;
+			if (!(o instanceof EditingBundle that)) return false;
 
 			if (!Objects.equals(action, that.action)) return false;
 			return Objects.equals(keyCodes, that.keyCodes);

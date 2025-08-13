@@ -190,18 +190,18 @@ public class ColorPalette {
 		palette.sortPalette();
 		return palette;
 	}
+
 	public static ColorPalette parseColorPalette(Reader reader) throws IOException {
-		return parseColorPalette(reader, new ArrayList<>(), true);
+		return parseColorPalette(reader, true);
 	}
 
-	public static ColorPalette parseColorPalette(Reader reader, List<String> comments, boolean shouldSort) throws IOException {
+	public static ColorPalette parseColorPalette(Reader reader, boolean shouldSort) throws IOException {
 		ColorPalette palette = new ColorPalette();
 		BufferedReader r = new BufferedReader(reader);
 		String line;
 		while ((line = r.readLine()) != null) {
 			String t = line.trim();
 			if (t.startsWith("#")) {
-				comments.add(t);
 				continue;
 			}
 			String[] values = t.split(",");

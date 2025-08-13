@@ -3,14 +3,13 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public interface TravelHelper {
 	interface GpxReadCallback {
 		void onGpxFileReading();
 
-		void onGpxFileRead(@Nullable GPXFile gpxFile);
+		void onGpxFileRead(@Nullable GpxFile gpxFile);
 	}
 
 
@@ -32,7 +31,7 @@ public interface TravelHelper {
 	boolean isAnyTravelBookPresent();
 
 	@NonNull
-	List<WikivoyageSearchResult> search(@NonNull String searchQuery);
+	List<WikivoyageSearchResult> search(@NonNull String searchQuery, int requestNumber);
 
 	@NonNull
 	List<TravelArticle> getPopularArticles();
@@ -59,13 +58,18 @@ public interface TravelHelper {
 	TravelArticleIdentifier getArticleId(@NonNull String title, @NonNull String lang);
 
 	@NonNull
-	ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
+	List<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
+
+	@NonNull
+	Map<String, TravelArticle> getArticleByLangs(@NonNull TravelArticleIdentifier articleId);
+
+	boolean isTravelGpxTags(@NonNull Map<String, String> tags);
 
 	@Nullable
-	TravelGpx searchGpx(@NonNull LatLon location, @Nullable String fileName, @Nullable String ref);
+	TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId);
 
 	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-					   @NonNull String gpxFileName, @NonNull LatLon location);
+					   @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition);
 
 	@NonNull
 	String getGPXName(@NonNull TravelArticle article);
@@ -80,5 +84,4 @@ public interface TravelHelper {
 	String getWikivoyageFileName();
 
 	void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save);
-
 }

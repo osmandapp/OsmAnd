@@ -3,6 +3,7 @@ package net.osmand.gpx;
 
 
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 import static net.osmand.util.Algorithms.isDigit;
 
 import net.osmand.IProgress;
@@ -53,6 +54,7 @@ import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.TimeZone;
 
+@Deprecated
 public class GPXUtilities {
 
 	public static final Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -1122,7 +1124,7 @@ public class GPXUtilities {
 	private static void writePoints(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
 		for (WptPt l : file.points) {
 			serializer.startTag(null, "wpt"); //$NON-NLS-1$
-			writeWpt(serializer, l, progress);
+			writeWpt(serializer, l, progress, file);
 			serializer.endTag(null, "wpt"); //$NON-NLS-1$
 		}
 	}
@@ -1135,7 +1137,7 @@ public class GPXUtilities {
 
 			for (WptPt p : route.points) {
 				serializer.startTag(null, "rtept"); //$NON-NLS-1$
-				writeWpt(serializer, p, progress);
+				writeWpt(serializer, p, progress, file);
 				serializer.endTag(null, "rtept"); //$NON-NLS-1$
 			}
 			writeExtensions(serializer, route, null);
@@ -1154,7 +1156,7 @@ public class GPXUtilities {
 					writeNotNullText(serializer, "name", segment.name);
 					for (WptPt p : segment.points) {
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						writeWpt(serializer, p, progress);
+						writeWpt(serializer, p, progress, file);
 						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
 					}
 					assignRouteExtensionWriter(segment);
@@ -1199,6 +1201,9 @@ public class GPXUtilities {
 			i = path.lastIndexOf('.');
 			if (i > 0) {
 				path = path.substring(0, i);
+			}
+			if (path.contains(XML_COLON)) {
+				path = path.replaceAll(XML_COLON, ":");
 			}
 		}
 		return path;
@@ -1248,7 +1253,7 @@ public class GPXUtilities {
 		}
 	}
 
-	private static void writeWpt(XmlSerializer serializer, WptPt p, IProgress progress) throws IOException {
+	private static void writeWpt(XmlSerializer serializer, WptPt p, IProgress progress, GPXFile file) throws IOException {
 		serializer.attribute(null, "lat", LAT_LON_FORMAT.format(p.lat));
 		serializer.attribute(null, "lon", LAT_LON_FORMAT.format(p.lon));
 
@@ -1283,6 +1288,18 @@ public class GPXUtilities {
 			String profile = extensions.get(PROFILE_TYPE_EXTENSION);
 			if (GAP_PROFILE_TYPE.equals(profile)) {
 				extensions.remove(PROFILE_TYPE_EXTENSION);
+			}
+		}
+		if (p.category != null && file.pointsGroups.get(p.category) != null) {
+			PointsGroup pointsGroup = file.pointsGroups.get(p.category);
+			if (p.getColor() == pointsGroup.color) {
+				extensions.remove(COLOR_NAME_EXTENSION);
+			}
+			if (Algorithms.stringsEqual(p.getIconName(), pointsGroup.iconName)) {
+				extensions.remove(ICON_NAME_EXTENSION);
+			}
+			if (Algorithms.stringsEqual(p.getBackgroundType(), pointsGroup.backgroundType)) {
+				extensions.remove(BACKGROUND_TYPE_EXTENSION);
 			}
 		}
 		assignExtensionWriter(p, extensions);
@@ -1350,7 +1367,7 @@ public class GPXUtilities {
 		if (key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
 			key = key.replace(OSMAND_EXTENSIONS_PREFIX, "");
 		}
-		key = key.replace(":", "_-_");
+		key = key.replace(":", XML_COLON);
 		return OSMAND_EXTENSIONS_PREFIX + key;
 	}
 
@@ -1984,14 +2001,20 @@ public class GPXUtilities {
 			int color = point.getColor();
 			if (pointsGroup.color == 0 && color != 0) {
 				pointsGroup.color = color;
+			} else if (pointsGroup.color != 0 && color == 0) {
+				point.setColor(pointsGroup.color);
 			}
 			String iconName = point.getIconName();
 			if (Algorithms.isEmpty(pointsGroup.iconName) && !Algorithms.isEmpty(iconName)) {
 				pointsGroup.iconName = iconName;
+			} else if (!Algorithms.isEmpty(pointsGroup.iconName) && Algorithms.isEmpty(iconName)) {
+				point.setIconName(pointsGroup.iconName);
 			}
 			String backgroundType = point.getBackgroundType();
 			if (Algorithms.isEmpty(pointsGroup.backgroundType) && !Algorithms.isEmpty(backgroundType)) {
 				pointsGroup.backgroundType = backgroundType;
+			} else if (!Algorithms.isEmpty(pointsGroup.backgroundType) && Algorithms.isEmpty(backgroundType)) {
+				 point.setBackgroundType(pointsGroup.backgroundType);
 			}
 			pointsGroup.points.add(point);
 		}

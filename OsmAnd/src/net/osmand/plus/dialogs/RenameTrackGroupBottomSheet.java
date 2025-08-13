@@ -3,7 +3,6 @@ package net.osmand.plus.dialogs;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -13,9 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
-import net.osmand.gpx.GPXUtilities.Route;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -27,6 +24,9 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.primitives.Route;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -62,7 +62,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 	}
 
 	private void renameGroupName() {
-		GPXFile gpxFile = group.getGpxFile();
+		GpxFile gpxFile = group.getGpxFile();
 		GpxDisplayItemType type = group.getType();
 		if (TRACK_POINTS == type) {
 			PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
@@ -71,8 +71,8 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 			}
 		} else if (TRACK_ROUTE_POINTS == type) {
 			Route route = gpxFile.getRouteByName(group.getDescription());
-			if (route != null && !Algorithms.stringsEqual(route.name, groupName)) {
-				route.name = groupName;
+			if (route != null && !Algorithms.stringsEqual(route.getName(), groupName)) {
+				route.setName(groupName);
 				SaveGpxHelper.saveGpx(gpxFile);
 			}
 		}
@@ -83,15 +83,15 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 		dismiss();
 	}
 
-	private void updateGpx(@NonNull GPXFile gpxFile, @NonNull PointsGroup group) {
+	private void updateGpx(@NonNull GpxFile gpxFile, @NonNull PointsGroup group) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
-			PointsGroup newGroup = new PointsGroup(groupName, group.iconName, group.backgroundType, group.color);
-			Map<String, PointsGroup> groups = Collections.singletonMap(group.name, newGroup);
+			PointsGroup newGroup = new PointsGroup(groupName, group.getIconName(), group.getBackgroundType(), group.getColor());
+			Map<String, PointsGroup> groups = Collections.singletonMap(group.getName(), newGroup);
 
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(task);
 		}
 	}
 

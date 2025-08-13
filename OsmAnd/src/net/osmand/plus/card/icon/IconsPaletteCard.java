@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
 
@@ -21,8 +22,14 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 	private RecyclerView rvIcons;
 
 	public IconsPaletteCard(@NonNull FragmentActivity activity,
-	                        @NonNull IIconsPaletteController<IconData> controller) {
-		super(activity);
+	                        @NonNull IIconsPaletteController<IconData> controller, boolean usedOnMap) {
+		this(activity, controller, null, usedOnMap);
+	}
+
+	public IconsPaletteCard(@NonNull FragmentActivity activity,
+	                        @NonNull IIconsPaletteController<IconData> controller,
+	                        @Nullable ApplicationMode appMode, boolean usedOnMap) {
+		super(activity, appMode, usedOnMap);
 		this.controller = controller;
 		controller.bindPalette(this);
 		paletteAdapter = new IconsPaletteAdapter<>(activity, controller, nightMode);
@@ -58,10 +65,12 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 		}
 	}
 
-	private void setupAllIconsButton() {
+	public void setupAllIconsButton() {
 		View buttonAllIcons = view.findViewById(R.id.button_all_icons);
-		buttonAllIcons.setOnClickListener(v -> controller.onAllIconsButtonClicked(activity));
-		updateAllIconsButton();
+		if (buttonAllIcons != null) {
+			buttonAllIcons.setOnClickListener(v -> controller.onAllIconsButtonClicked(activity));
+			updateAllIconsButton(buttonAllIcons);
+		}
 	}
 
 	@Override
@@ -77,22 +86,23 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 		askScrollToTargetIconPosition(newIcon, true);
 	}
 
-	private void updateAllIconsButton() {
-		View buttonAllIcons = view.findViewById(R.id.button_all_icons);
+	private void updateAllIconsButton(@NonNull View buttonAllIcons) {
 		int controlsAccentColor = controller.getControlsAccentColor(nightMode);
 		UiUtilities.setupListItemBackground(activity, buttonAllIcons, controlsAccentColor);
 	}
 
 	private void askScrollToTargetIconPosition(@Nullable IconData targetIcon, boolean useSmoothScroll) {
 		int targetPosition = paletteAdapter.indexOf(targetIcon);
-		LinearLayoutManager lm = (LinearLayoutManager) rvIcons.getLayoutManager();
-		int firstVisiblePosition = lm != null ? lm.findFirstCompletelyVisibleItemPosition() : 0;
-		int lastVisiblePosition = lm != null ? lm.findLastCompletelyVisibleItemPosition() : paletteAdapter.getItemCount();
-		if (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition) {
-			if (useSmoothScroll) {
-				rvIcons.smoothScrollToPosition(targetPosition);
-			} else {
-				rvIcons.scrollToPosition(targetPosition);
+		LinearLayoutManager layoutManager = (LinearLayoutManager) rvIcons.getLayoutManager();
+		if (layoutManager != null && targetPosition >= 0 && targetPosition < paletteAdapter.getItemCount()) {
+			int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+			int lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition();
+			if (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition) {
+				if (useSmoothScroll) {
+					rvIcons.smoothScrollToPosition(targetPosition);
+				} else {
+					rvIcons.scrollToPosition(targetPosition);
+				}
 			}
 		}
 	}

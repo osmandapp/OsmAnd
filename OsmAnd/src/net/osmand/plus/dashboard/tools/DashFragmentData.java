@@ -2,9 +2,10 @@ package net.osmand.plus.dashboard.tools;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public final String tag;
@@ -43,4 +44,10 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 		}
 	}
 
+	public static class DefaultShouldShow extends ShouldShowFunction {
+
+		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
+			return settings.registerBooleanPreference(DashboardOnMap.SHOULD_SHOW + tag, true).makeGlobal().get();
+		}
+	}
 }

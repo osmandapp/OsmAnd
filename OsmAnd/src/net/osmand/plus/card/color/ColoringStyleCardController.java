@@ -10,7 +10,7 @@ import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.color.cstyle.OnSelectColoringStyleListener;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.routing.ColoringStyleAlgorithms;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 

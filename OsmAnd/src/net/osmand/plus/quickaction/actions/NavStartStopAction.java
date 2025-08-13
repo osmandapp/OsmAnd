@@ -3,11 +3,13 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_START_STOP_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.OsmandApplication;
@@ -22,7 +24,7 @@ public class NavStartStopAction extends QuickAction {
 
 	private static final String KEY_DIALOG = "dialog";
 	public static final QuickActionType TYPE = new QuickActionType(NAV_START_STOP_ACTION_ID,
-			"nav.startstop", NavStartStopAction .class)
+			"nav.startstop", NavStartStopAction.class)
 			.nameRes(R.string.shared_string_navigation).iconRes(R.drawable.ic_action_start_navigation).nonEditable()
 			.category(QuickActionType.NAVIGATION)
 			.nameActionRes(R.string.quick_action_verb_start_stop);
@@ -36,16 +38,16 @@ public class NavStartStopAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		RoutingHelper helper = mapActivity.getRoutingHelper();
 		if (helper.isPauseNavigation() || helper.isFollowingMode()) {
 			if (Boolean.parseBoolean(getParams().get(KEY_DIALOG))) {
 				DestinationReachedFragment.show(mapActivity);
 			} else {
-				mapActivity.getMapLayers().getMapActionsHelper().stopNavigation();
+				mapActivity.getMapActions().stopNavigation();
 			}
 		} else {
-			mapActivity.getMapLayers().getMapActionsHelper().doRoute();
+			mapActivity.getMapActions().doRoute();
 		}
 	}
 
@@ -88,14 +90,16 @@ public class NavStartStopAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity) {
-			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
-			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
-				return ((MapActivity) context).getMapActions().getRouteMode().getIconRes();
-			}
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		RoutingHelper helper = app.getRoutingHelper();
+
+		if (!helper.isRoutePlanningMode() && !helper.isFollowingMode() && context instanceof MapActivity activity) {
+			return activity.getMapActions().getRouteMode().getIconRes();
+		} else if (helper.isPauseNavigation() || helper.isFollowingMode() || helper.isRoutePlanningMode()) {
 			return helper.getAppMode().getIconRes();
+		} else {
+			return app.getSettings().getApplicationMode().getIconRes();
 		}
-		return super.getIconRes(context);
 	}
 
 	@Override

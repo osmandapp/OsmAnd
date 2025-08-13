@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
@@ -20,9 +20,9 @@
 			android:layout_height="@dimen/map_widget_icon"
 			android:layout_gravity="start|center_vertical"
 			android:layout_marginEnd="@dimen/content_padding_small"
-			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+			app:srcCompat="@drawable/ic_action_remove_dark" />
 
-		<net.osmand.plus.widgets.AutoScaleTextView
+		<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
@@ -32,8 +32,9 @@
 			android:lines="1"
 			android:maxLines="1"
 			android:textColor="@color/text_color_primary_light"
-			osmand:maxTextSize="@dimen/simple_widget_value_small_size"
-			osmand:minTextSize="@dimen/simple_widget_value_minimum_size"
+			app:textViewType="autoScale"
+			app:autoScale_maxTextSize="@dimen/simple_widget_value_small_size"
+			app:autoScale_minTextSize="@dimen/simple_widget_value_minimum_size"
 			tools:text="155" />
 
 		<LinearLayout
@@ -44,7 +45,7 @@
 			android:layout_marginStart="@dimen/content_padding"
 			android:orientation="vertical">
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/widget_name"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
 				android:textSize="@dimen/simple_widget_description_text_size"
 				tools:text="Widget name" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/widget_text_small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

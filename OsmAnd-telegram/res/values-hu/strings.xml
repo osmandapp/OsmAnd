@@ -274,6 +274,8 @@
     <string name="send_report">Jelentés küldése</string>
     <string name="shared_string_error">Hiba</string>
     <string name="send_live_location_error">Élő helymeghatározási hiba küldése: %1$s</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
+    <string name="location_source">Helymeghatározás forrása</string>
+    <string name="location_source_summary">Alapértelmezés szerint a Google Playről telepített OsmAnd a Google Play Services szolgáltatást használja a helymeghatározáshoz.\n\nHa pontatlan helyadatokat kap, vagy Google Play Services nélküli eszközt használ, próbáljon meg Android API-ra váltani</string>
 </resources>

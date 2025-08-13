@@ -117,7 +117,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 			}
 		});
 
-		adapter = new ExportSettingsAdapter(app, exportMode, this, nightMode);
+		adapter = new ExportSettingsAdapter(requireContext(), exportMode, this, nightMode);
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 		expandableList.setAdapter(adapter);
 		setupListView(expandableList);

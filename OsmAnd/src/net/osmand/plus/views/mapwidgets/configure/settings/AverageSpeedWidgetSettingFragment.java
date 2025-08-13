@@ -10,13 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 
-public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsFragment {
+public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 	private static final String KEY_COUNT_STOPS = "count_stops";
@@ -37,7 +36,6 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			speedWidget = ((AverageSpeedWidget) widgetInfo.widget);
 
@@ -52,13 +50,13 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.average_speed_widget_settings_fragment, container);
 
 		setupIntervalSliderCard();
 		setupSkipStopsSetting();
 		themedInflater.inflate(R.layout.divider, container);
-		super.setupContent(themedInflater, container);
+		setupSettingAction(themedInflater, container);
 	}
 
 	private void setupIntervalSliderCard() {
@@ -68,21 +66,33 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 	}
 
 	private void setupSkipStopsSetting() {
-		View skipStopsContainer = view.findViewById(R.id.skip_stops_container);
-		TextView skipStopsDesc = view.findViewById(R.id.skip_stops_desc);
-		CompoundButton skipStopsToggle = view.findViewById(R.id.skip_stops_toggle);
+		View container = view.findViewById(R.id.skip_stops_container);
+		TextView title = container.findViewById(R.id.title);
+		TextView description = container.findViewById(R.id.description);
+		CompoundButton compoundButton = container.findViewById(R.id.compound_button);
 
 		SpeedConstants speedSystem = settings.SPEED_SYSTEM.getModeValue(appMode);
 		String speedToSkip = String.valueOf(AverageSpeedComputer.getConvertedSpeedToSkip(speedSystem));
-		String speedUnit = speedSystem.toShortString(app);
+		String speedUnit = speedSystem.toShortString();
 		String formattedSpeedToSkip = getString(R.string.ltr_or_rtl_combine_via_space, speedToSkip, speedUnit);
-		skipStopsDesc.setText(getString(R.string.average_speed_skip_stops_desc, formattedSpeedToSkip));
+		title.setText(R.string.average_speed_skip_stops);
+		description.setText(getString(R.string.average_speed_skip_stops_desc, formattedSpeedToSkip));
 
-		skipStopsToggle.setChecked(countStops);
-		skipStopsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> countStops = isChecked);
+		compoundButton.setChecked(countStops);
+		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> countStops = isChecked);
 
-		skipStopsContainer.setOnClickListener(v -> skipStopsToggle.setChecked(!skipStopsToggle.isChecked()));
-		skipStopsContainer.setBackground(getPressedStateDrawable());
+		container.setOnClickListener(v -> compoundButton.setChecked(!compoundButton.isChecked()));
+		container.setBackground(getPressedStateDrawable());
+	}
+
+	private void setupSettingAction(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+		themedInflater.inflate(R.layout.divider, container);
+		View actionView = themedInflater.inflate(R.layout.setting_action_button, null);
+		actionView.setBackground(getPressedStateDrawable());
+		actionView.setOnClickListener(v -> speedWidget.resetAverageSpeed());
+		TextView title = actionView.findViewById(R.id.action_title);
+		title.setText(R.string.reset_average_speed);
+		container.addView(actionView);
 	}
 
 	@Override

@@ -207,9 +207,7 @@
     <string name="poi_cuisine_ukrainian">Tukranit</string>
     <string name="poi_cuisine_mongolian">Tamungulit</string>
     <string name="poi_cuisine_latin_american">Taspanit n temrikt talatinit</string>
-    <string name="poi_cuisine_cuban">![]({{ site.baseurl }}/assets/posts/2017-07-03-cuba/child_apps.jpg)&lt;br/&gt;
-\n*Agrud n Kuba yettnadin isnasen yella i usiggez*
-\n</string>
+    <string name="poi_cuisine_cuban"></string>
     <string name="poi_cuisine_czech">Taččikit</string>
     <string name="poi_cuisine_uzbek">Tuzbikt</string>
     <string name="poi_cuisine_european">Asulay VAT n Turuft</string>
@@ -255,7 +253,7 @@
     <string name="poi_temperature">Tifestiniwin n lḥamu</string>
     <string name="poi_artist_name">Anaẓur</string>
     <string name="poi_square">Amkuẓ</string>
-    <string name="poi_site_type_city">Tiɣremt</string>
+    <string name="poi_archaeological_site_city">Tiɣremt</string>
     <string name="poi_animal_training_dog">&lt;strong&gt;Amarraw&lt;/strong&gt; &amp;mdash; Tzemreḍ ad tsettefeḍ isebtar-inek s umyellel. deg umedya tzemreḍ ad tesɛuḍ asebtar &amp;#8220;Awal ɣef&amp;#8221; i yesɛan isebtar &amp;#8220;Tudert-iw&amp;#8221; aked&amp;#8220;Aqjun-iw&amp;#8221; d isebtar inadayen. Ulac tilist i isebtar inadayen.</string>
     <string name="poi_theatre_genre_chamber_music">Musique de chambre</string>
     <string name="poi_theatre_genre_comedy">Comédie</string>
@@ -599,7 +597,6 @@
     <string name="poi_vending_machine">Asedgar awurman</string>
     <string name="poi_coffee">Taneɣlust</string>
     <string name="poi_user_defined_other">Yemla-t-id useqdac</string>
-    <string name="poi_osmwiki">Wikipedia</string>
     <string name="poi_natural">Agaman</string>
     <string name="poi_service">Ameẓlu</string>
     <string name="poi_club">Club</string>
@@ -732,4 +729,27 @@
     <string name="poi_midwife">Lqabla</string>
     <string name="poi_blood_bank">Tabankat n yidammen</string>
     <string name="poi_subway_station_filter">Taɣtest n umitru</string>
+    <string name="poi_access_disabled">Anekcum n yimeεdaṛ</string>
+    <string name="poi_access_hgv">Anekcum n HGV</string>
+    <string name="poi_access_motorcycle">Anekcum n yimuṭuten</string>
+    <string name="poi_fireplace">Lkanun</string>
+    <string name="poi_backcountry">Azaɣar</string>
+    <string name="poi_star_rating">Aktazal (Itran)</string>
+    <string name="poi_ferry_terminal_cargo">Cargo</string>
+    <string name="poi_padus_public_access_unknown">Anekcum: d arusin</string>
+    <string name="poi_piste_difficulty">Iwεer ubrid</string>
+    <string name="poi_padus_public_access_open">Anekcum: yeldi</string>
+    <string name="poi_aerialway_bicycle">Iviluten n usiweḍ</string>
+    <string name="poi_padus_public_access_restricted">Anekcum: yesεa tilisa</string>
+    <string name="poi_padus_public_access_closed">Anekcum: yemdel</string>
+    <string name="poi_aerialway_heating">Aseḥmu</string>
+    <string name="poi_social_facility_for">Agraw asaḍas</string>
+    <string name="poi_checkpoint_type">Anaw n tenqiḍt n usenqed</string>
+    <string name="poi_compressed_air_filter">Azwu uqbir</string>
+    <string name="poi_vacuum_cleaner_filter">Tafelluct n trisiti</string>
+    <string name="poi_access_moped">Anekcum n uvilu</string>
+    <string name="poi_cash_withdrawal_bank_card">Asuffeɣ n tedrimt</string>
+    <string name="poi_government_public_service">Ameẓlu azayaz</string>
+    <string name="poi_operator_type_public">Anaw n umahal: azayaz</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Lviza i yinig</string>
 </resources>

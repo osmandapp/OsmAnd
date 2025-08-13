@@ -40,11 +40,12 @@ import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -58,6 +59,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.plugins.weather.enums.WeatherSource;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -117,7 +119,10 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherSettings = weatherHelper.getWeatherSettings();
 
 		for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
-			pluginPreferences.add(weatherBand.getBandUnitPref());
+			CommonPreference<? extends WeatherUnit> preference = weatherBand.getBandUnitPref();
+			if (preference != null) {
+				pluginPreferences.add(preference);
+			}
 		}
 
 		ApplicationMode[] noAppMode = {};
@@ -189,7 +194,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnableByDefault() {
-		return true;
+		return !Version.isHMDBuild();
 	}
 
 	@Override
@@ -269,19 +274,19 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Nullable
 	@Override
 	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		switch (widgetType) {
-			case WEATHER_TEMPERATURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_TEMPERATURE);
-			case WEATHER_PRECIPITATION_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRECIPITATION);
-			case WEATHER_WIND_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_WIND_SPEED);
-			case WEATHER_CLOUDS_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_CLOUD);
-			case WEATHER_AIR_PRESSURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRESSURE);
-		}
-		return null;
+		return switch (widgetType) {
+			case WEATHER_TEMPERATURE_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_TEMPERATURE);
+			case WEATHER_PRECIPITATION_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRECIPITATION);
+			case WEATHER_WIND_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_WIND_SPEED);
+			case WEATHER_CLOUDS_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_CLOUD);
+			case WEATHER_AIR_PRESSURE_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRESSURE);
+			default -> null;
+		};
 	}
 
 	@Nullable

@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_MAP;
+import static net.osmand.plus.dashboard.DashboardType.CONFIGURE_MAP;
 
 import android.os.Bundle;
 import android.view.View;

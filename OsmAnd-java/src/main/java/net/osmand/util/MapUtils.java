@@ -34,6 +34,7 @@ public class MapUtils {
 	public static final double LONGITUDE_TURN = 360.0;
 	public static final double DEFAULT_LATLON_PRECISION = 0.00001;
 	public static final double HIGH_LATLON_PRECISION = 0.0000001;
+	public static final double METERS_IN_DEGREE = 111320;
 
 	// TODO change the hostname back to osm.org once HTTPS works for it
 	// https://github.com/openstreetmap/operations/issues/2
@@ -495,6 +496,29 @@ public class MapUtils {
 		return new GeoParsedPoint(lat, lon, z);
 	}
 
+	public static QuadRect decodeShortLinkToQuadRect(String shortLink) {
+		GeoParsedPoint point = decodeShortLinkString(shortLink);
+		double bottom = point.getLatitude();
+		double left = point.getLongitude();
+
+		int precision = 0;
+		String base64chars = new String(intToBase64);
+		for (int i = 0; i < shortLink.length(); i++) {
+			if (base64chars.indexOf(shortLink.charAt(i)) > 0) {
+				precision++;
+			}
+		}
+
+		double factor = Math.pow(2, 2 - 3 * precision);
+		double deltaLon = factor * 90;
+		double deltaLat = factor * 45;
+
+		double top = bottom + deltaLat;
+		double right = left + deltaLon;
+
+		return new QuadRect(left, top, right, bottom);
+	}
+
 	/**
 	 * interleaves the bits of two 32-bit numbers. the result is known as a Morton code.
 	 */
@@ -623,7 +647,7 @@ public class MapUtils {
 		boolean top1 = y1 > EQUATOR;
 		boolean top2 = y2 > EQUATOR;
 		if (top1 != top2 && y1 != EQUATOR && y2 != EQUATOR) {
-			int mx = x1 / 2 + x2 / 2;
+			int mx = x1 + (int) ((x2 - x1) * (double) (EQUATOR - y1) / (y2 - y1));
 			double d1 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x2, y2));
 			double d2 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x1, y1));
 			return (d1 + d2) * (d1 + d2);
@@ -861,5 +885,50 @@ public class MapUtils {
 			dist = dist * (iteration % 2 == 1 ? mult1 : mult2);
 		}
 		return dist;
+	}
+
+	public static void inflateBBox31(QuadRect bbox, int dx, int dy) {
+		if (bbox.left <= bbox.right) {
+			bbox.left -= dx;
+			bbox.right += dx;
+		} else {
+			bbox.left += dx;
+			bbox.right -= dx;
+		}
+		if (bbox.top <= bbox.bottom) {
+			bbox.top -= dy;
+			bbox.bottom += dy;
+		} else {
+			bbox.top += dy;
+			bbox.bottom -= dy;
+		}
+		int INT31_MAX = (1 << 31) - 1;
+		bbox.top = Math.min(Math.max(0, bbox.top), INT31_MAX);
+		bbox.left = Math.min(Math.max(0, bbox.left), INT31_MAX);
+		bbox.right = Math.min(Math.max(0, bbox.right), INT31_MAX);
+		bbox.bottom = Math.min(Math.max(0, bbox.bottom), INT31_MAX);
+	}
+
+	public static void inflateBBoxLatLon(QuadRect bbox, double dx, double dy) {
+		if (bbox.left <= bbox.right) {
+			bbox.left -= dx;
+			bbox.right += dx;
+		} else {
+			bbox.left += dx;
+			bbox.right -= dx;
+		}
+		if (bbox.top >= bbox.bottom) {
+			bbox.top += dy;
+			bbox.bottom -= dy;
+		} else {
+			bbox.top -= dy;
+			bbox.bottom += dy;
+		}
+		// clamp X/longitude [-180,180]
+		bbox.left = Math.max(-180.0, Math.min(180.0, bbox.left));
+		bbox.right = Math.max(-180.0, Math.min(180.0, bbox.right));
+		// clamp Y/latitude [-90,90]
+		bbox.top = Math.max(-90.0, Math.min(90.0, bbox.top));
+		bbox.bottom = Math.max(-90.0, Math.min(90.0, bbox.bottom));
 	}
 }

@@ -60,7 +60,7 @@
     <string name="timeline_description">Ative a monitorização para gravar todos os locais no histórico.</string>
     <string name="privacy_policy_use_telegram">O Telegram (a aplicação de mensagens) é usado para conectar e comunicar com outras pessoas.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker é um dos clientes que usam a Plataforma aberta do Telegram. Os seus contactos podem usar qualquer outro cliente Telegram.</string>
-    <string name="privacy_policy_agree">Ao pressionar o botão \"Continuar\" concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
+    <string name="privacy_policy_agree">Ao pressionar o botão Continuar concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
     <string name="shared_string_accept">Aceitar</string>
     <string name="telegram_privacy_policy">Política de privacidade do Telegram</string>
     <string name="osmand_privacy_policy">Política de privacidade do OsmAnd</string>
@@ -196,13 +196,13 @@
     <string name="initialization">A iniciar</string>
     <string name="logging_out">A terminar sessão</string>
     <string name="closing">A fechar</string>
-    <string name="gps_network_not_enabled">Ativar \"Localização\"\?</string>
+    <string name="gps_network_not_enabled">Ativar localização?</string>
     <string name="not_logged_in">Não tem a sessão iniciada</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_cancel">Cancelar</string>
     <string name="shared_string_settings">Configurações</string>
     <string name="no_location_permission">A aplicação não tem permissão para aceder aos dados de localização.</string>
-    <string name="gps_not_available">Por favor, ative a \"Localização\" nas configurações do sistema</string>
+    <string name="gps_not_available">Por favor, ative a localização nas configurações do sistema</string>
     <string name="location_service_no_gps_available">Selecione um dos fornecedores de localização para partilhar a sua localização.</string>
     <string name="osmand_service">Modo em segundo plano</string>
     <string name="osmand_service_descr">O OsmAnd Tracker é executado em segundo plano com o ecrã desligado.</string>
@@ -244,7 +244,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">seg</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>A aplicação usa a API do Telegram e é necessário ter uma conta no Telegram.</string>
+    <string name="welcome_descr"><![CDATA[<b>O OsmAnd Tracker</b> permite partilhar a sua localização e ver a dos outros no OsmAnd.<br/><br/>A aplicação usa a API do Telegram, por isso, é necessário ter uma conta no Telegram.]]></string>
     <string name="my_location">A minha posição</string>
     <string name="live_now">Ao vivo agora</string>
     <string name="timeline">Cronologia</string>
@@ -263,7 +263,7 @@
     <string name="back_to_osmand">Voltar para OsmAnd</string>
     <string name="duration_ago">%1$s atrás</string>
     <string name="last_response_duration">Última resposta: %1$s atrás</string>
-    <string name="last_update_from_telegram_duration">Última atualização do Telegram: 1$s atrás</string>
+    <string name="last_update_from_telegram_duration">Última atualização do Telegram: %1$s atrás</string>
     <string name="last_response_date">Última resposta: %1$s</string>
     <string name="last_update_from_telegram_date">Última atualização do Telegram: %1$s</string>
     <string name="shared_string_error_short">ERR</string>
@@ -271,12 +271,10 @@
     <string name="shared_string_export">Exportar</string>
     <string name="logcat_buffer">Buffer de logcat</string>
     <string name="logcat_buffer_descr">Verifique e partilhe registos detalhados da aplicação</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">Erro</string>
     <string name="send_live_location_error">Enviar erro de localização em tempo real: %1$s</string>
     <string name="location_source">Fonte da localização</string>
-    <string name="location_source_summary">Por padrão, o OsmAnd instalado do Google Play usa os Google Play Services para determinar a localização.
-\n
-\nSe obter informações de localização imprecisas ou usa aparelho sem os Serviços do Google Play, tente mudar para a API do Android</string>
+    <string name="location_source_summary">Por padrão, o OsmAnd instalado do Google Play usa os Google Play Services para determinar a localização. \n \nSe obtiver informações de localização incorrectas ou se estiver a utilizar um dispositivo sem o Google Play Services, tente mudar para a API do Android</string>
 </resources>

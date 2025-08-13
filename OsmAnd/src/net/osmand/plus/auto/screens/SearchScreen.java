@@ -24,9 +24,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.SearchHelper;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RoutingHelper;
@@ -52,7 +52,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 	private static final Log LOG = PlatformUtil.getLog(SearchScreen.class);
 	private static final int MAP_MARKERS_LIMIT = 3;
 
-
 	@NonNull
 	private final Action settingsAction;
 
@@ -69,10 +68,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		this.settingsAction = settingsAction;
 
 		getLifecycle().addObserver(this);
-		getApp().getAppInitializer().addListener(this);
-		reloadHistory();
 	}
-
 
 	@NonNull
 	public SearchUICore getSearchUICore() {
@@ -81,14 +77,22 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
 		getApp().getAppInitializer().removeListener(this);
 		getLifecycle().removeObserver(this);
 		destroyed = true;
 	}
 
+	@Override
+	protected void onFirstGetTemplate() {
+		super.onFirstGetTemplate();
+		getApp().getAppInitializer().addListener(this);
+		reloadHistory();
+	}
+
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		String searchQuery = getSearchHelper().getSearchQuery();
 		String searchHint = getSearchHelper().getSearchHint();
 		SearchTemplate.Builder builder = new SearchTemplate.Builder(new SearchCallback() {
@@ -276,7 +280,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 				}
 
 				// History
-				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+				SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 				List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.SEARCH, true, false);
 				if (!Algorithms.isEmpty(results)) {
 					recentResults.addAll(results);
@@ -302,8 +306,8 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 					!description.getName().equals(app.getString(R.string.no_address_found))) {
 				name = description.getName();
 			} else {
-				name = PointDescription.getLocationName(app, targetPoint.point.getLatitude(),
-						targetPoint.point.getLongitude(), true).replace('\n', ' ');
+				name = PointDescription.getLocationName(app, targetPoint.getLatLon().getLatitude(),
+						targetPoint.getLatLon().getLongitude(), true).replace('\n', ' ');
 			}
 		}
 		return name;

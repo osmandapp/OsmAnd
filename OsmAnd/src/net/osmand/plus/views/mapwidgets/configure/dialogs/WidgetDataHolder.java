@@ -5,11 +5,14 @@ import android.os.Bundle;
 import net.osmand.aidl.AidlMapWidgetWrapper;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -87,7 +90,7 @@ public class WidgetDataHolder {
 	}
 
 	public int getWidgetsCount() {
-		return widgetGroup != null ? widgetGroup.getWidgets().size() : 1;
+		return widgetGroup != null ? widgetGroup.getWidgets(widgetsPanel).size() : 1;
 	}
 
 	/**
@@ -119,9 +122,15 @@ public class WidgetDataHolder {
 	}
 
 	@Nullable
-	public List<WidgetType> getWidgetsList() {
+	public List<WidgetType> getWidgetsList(ApplicationMode appMode) {
 		if (widgetGroup != null) {
-			return widgetGroup.getWidgets();
+			List<WidgetType> availableWidgets = new ArrayList<>();
+			for (WidgetType type : widgetGroup.getWidgets(widgetsPanel)) {
+				if (WidgetsAvailabilityHelper.isWidgetAvailable(app, type.id, appMode)) {
+					availableWidgets.add(type);
+				}
+			}
+			return availableWidgets;
 		} else if (widgetType != null) {
 			return Collections.singletonList(widgetType);
 		}
@@ -131,7 +140,7 @@ public class WidgetDataHolder {
 	@Nullable
 	public WidgetType getMainWidget() {
 		if (widgetGroup != null) {
-			for (WidgetType widget : widgetGroup.getWidgets()) {
+			for (WidgetType widget : widgetGroup.getWidgets(widgetsPanel)) {
 				if (widget.isMainWidgetOfGroup()) {
 					return widget;
 				}

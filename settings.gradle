@@ -6,3 +6,5 @@ include ':OsmAnd-shared'
 include ':plugins:Osmand-Nautical'
 include ':plugins:Osmand-SRTMPlugin'
 include ':plugins:Osmand-Skimaps'
+
+gradle.ext.java_shared_conf = ''

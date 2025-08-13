@@ -14,7 +14,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
-import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -225,14 +224,33 @@ public class TransportRoutingHelper {
 	private void startRouteCalculationThread(TransportRouteCalculationParams params) {
 		synchronized (this) {
 			app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(routingHelper.getAppMode());
-			RouteRecalculationTask newTask = new RouteRecalculationTask(this, params,
-					app.getSettings().SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary());
+			NativeOsmandLibrary library = null;
+			if (!app.getSettings().SAFE_MODE.get()) {
+				library = NativeOsmandLibrary.getLoadedLibrary();
+				initNativeRouteFiles(params);
+			}
+			RouteRecalculationTask newTask = new RouteRecalculationTask(this, params, library);
 			lastTask = newTask;
 			startProgress(params);
 			updateProgress(params);
 			Future<?> future = executor.submit(newTask);
 			tasksMap.put(future, newTask);
 		}
+	}
+
+	private void initNativeRouteFiles(TransportRouteCalculationParams params) {
+		NativeOsmandLibrary library = NativeOsmandLibrary.getLoadedLibrary();
+		if (library == null) {
+			return;
+		}
+		QuadRect bbox = new QuadRect();
+		MapUtils.insetLatLonRect(bbox, params.start.getLatitude(), params.start.getLongitude());
+		MapUtils.insetLatLonRect(bbox, params.end.getLatitude(), params.end.getLongitude());
+		int leftX = MapUtils.get31TileNumberX(bbox.left);
+		int rightX = MapUtils.get31TileNumberX(bbox.right);
+		int topY = MapUtils.get31TileNumberY(bbox.top);
+		int bottomY = MapUtils.get31TileNumberY(bbox.bottom);
+		params.ctx.getResourceManager().getRenderer().checkInitialized(15, library, leftX, rightX, bottomY, topY);
 	}
 
 	public void setProgressBar(TransportRouteCalculationProgressCallback progressRoute) {
@@ -512,6 +530,7 @@ public class TransportRoutingHelper {
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress = params.calculationProgress;
 			if (ctx.library != null && !settings.PT_SAFE_MODE.get()) {
+				log.info("Public transport. Use native library");
 				NativeTransportRoutingResult[] nativeRes = library.runNativePTRouting(
 						MapUtils.get31TileNumberX(params.start.getLongitude()),
 						MapUtils.get31TileNumberY(params.start.getLatitude()),
@@ -520,6 +539,7 @@ public class TransportRoutingHelper {
 						cfg, ctx.calculationProgress);
 				return TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
 			} else {
+				log.info("Public transport. No native library present");
 				TransportRoutePlanner planner = new TransportRoutePlanner();
 				return planner.buildRoute(ctx, params.start, params.end);
 			}
@@ -685,11 +705,6 @@ public class TransportRoutingHelper {
 			}
 		}
 
-		private void showMessage(String msg) {
-			OsmandApplication app = routingHelper.getApplication();
-			app.runInUIThread(() -> app.showToastMessage(msg));
-		}
-
 		@Override
 		public void run() {
 			List<TransportRouteResult> res = null;
@@ -721,11 +736,11 @@ public class TransportRoutingHelper {
 			} else if (error != null) {
 				routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + error;
 				routeCalcErrorShort = app.getString(R.string.error_calculating_route);
-				showMessage(routeCalcError);
+				app.showToastMessage(routeCalcError);
 			} else {
 				routeCalcError = app.getString(R.string.empty_route_calculated);
 				routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
-				showMessage(routeCalcError);
+				app.showToastMessage(routeCalcError);
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}

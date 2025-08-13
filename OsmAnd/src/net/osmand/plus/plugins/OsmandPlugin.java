@@ -25,8 +25,6 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,7 +34,6 @@ import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
@@ -46,8 +43,8 @@ import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -67,6 +64,9 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -77,7 +77,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public abstract class OsmandPlugin {
@@ -247,18 +246,17 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected List<PoiUIFilter> getCustomPoiFilters() {
+	@NonNull
+	protected List<PoiUIFilter> getPoiFilters() {
 		return Collections.emptyList();
 	}
 
-	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
+	@Nullable
+	protected PoiUIFilter getPoiFilterById(@NonNull String filterId) {
+		return null;
 	}
 
-
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
-	                                            @NonNull Map<String, String> params,
-	                                            @Nullable Map<String, String> additionalParams,
-	                                            @Nullable GetImageCardsListener listener) {
+	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
 	}
 
 	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
@@ -311,6 +309,17 @@ public abstract class OsmandPlugin {
 	 * Add menu rows to the map context menu.
 	 */
 	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+	}
+
+	/*
+	 * Add gallery menu row to the map context menu.
+	 */
+	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+	}
+
+	@Nullable
+	public GetImageCardsListener getImageCardsListener() {
+		return null;
 	}
 
 	/*
@@ -500,14 +509,16 @@ public abstract class OsmandPlugin {
 	}
 
 	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
-		CommonPreference<String> preference = settings.registerCustomRenderProperty(prefId, defValue);
+		CommonPreference<String> preference = settings.getCustomRenderProperty(prefId, defValue);
+		preference.setDefaultValue(defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	private CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = settings.registerCustomRenderBooleanProperty(prefId, defValue);
+		CommonPreference<Boolean> preference = settings.getCustomRenderBooleanProperty(prefId, defValue);
+		preference.setDefaultValue(defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
@@ -527,18 +538,29 @@ public abstract class OsmandPlugin {
 
 	@Nullable
 	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
-	                                                @NonNull GPXTrackAnalysis analysis,
+	                                                @NonNull GpxTrackAnalysis analysis,
 	                                                @NonNull GPXDataSetType graphType,
 	                                                @NonNull GPXDataSetAxisType chartAxisType,
 	                                                boolean calcWithoutGaps, boolean useRightAxis) {
 		return null;
 	}
 
-	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 
 	}
 
 	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
 
+	}
+
+	public boolean isMapPositionIconNeeded() {
+		return false;
+	}
+
+	public void onCarNavigationSessionCreated() {
+
+	}
+
+	public void newRouteIsCalculated(boolean newRoute) {
 	}
 }

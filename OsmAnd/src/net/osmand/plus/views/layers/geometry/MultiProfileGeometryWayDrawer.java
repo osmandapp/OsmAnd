@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
+import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -37,22 +39,23 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
 	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
-		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
+		int lineId = LINE_ID;
 		for (DrawPathData31 data : pathsData) {
 			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(data.style);
-			if (prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
+			if (!dataArr.isEmpty() && prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
 				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows,
 						true, prevStyle, dataArr);
 				dataArr.clear();
 			}
 			prevStyle = style;
+			data.lineId = lineId;
 			if (style != null && !style.isGap()) {
 				dataArr.add(data);
 			}
 		}
-		if (!dataArr.isEmpty()) {
+		if (!dataArr.isEmpty() && prevStyle != null) {
 			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle,
 					dataArr);
 		}
@@ -73,8 +76,8 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth,
 				style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, pointBitmap, pxStep, pxStep, false, null,
-				0, pathsData);
+				pointBitmap, pointBitmap, pxStep, pxStep, false, null, null,
+				COLORIZATION_NONE, pathsData);
 	}
 
 	@Override

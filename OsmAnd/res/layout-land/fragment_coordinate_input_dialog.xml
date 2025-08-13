@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,7 +30,7 @@
                     android:layout_width="@dimen/toolbar_height"
                     android:layout_height="@dimen/toolbar_height"
                     android:contentDescription="@string/access_shared_string_navigate_up"
-                    osmand:srcCompat="@drawable/ic_arrow_back" />
+                    app:srcCompat="@drawable/ic_arrow_back" />
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/toolbar_text"
@@ -46,7 +46,7 @@
                     android:maxLines="1"
                     android:text="@string/coordinates"
                     android:textSize="@dimen/dialog_header_text_size"
-                    osmand:typeface="@string/font_roboto_medium"
+                    app:typefaceWeight="medium"
                     tools:textColor="@color/card_and_list_background_light" />
 
                 <net.osmand.plus.widgets.TextViewEx
@@ -63,7 +63,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/card_and_list_background_light"
                     android:textSize="@dimen/default_list_text_size"
-                    osmand:typeface="@string/font_roboto_medium"
+                    app:typefaceWeight="medium"
                     android:paddingStart="@dimen/content_padding"
                     android:paddingEnd="@dimen/content_padding" />
 
@@ -91,7 +91,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:scaleType="fitXY"
-                osmand:srcCompat="@drawable/bg_shadow_quick_input_left" />
+                app:srcCompat="@drawable/bg_shadow_quick_input_left" />
 
         </FrameLayout>
 
@@ -107,7 +107,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:scaleType="fitXY"
-                osmand:srcCompat="@drawable/bg_shadow_quick_input_right" />
+                app:srcCompat="@drawable/bg_shadow_quick_input_right" />
 
         </FrameLayout>
 

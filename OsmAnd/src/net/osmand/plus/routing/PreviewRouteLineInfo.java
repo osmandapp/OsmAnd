@@ -8,10 +8,11 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.util.Algorithms;
+import net.osmand.shared.routing.ColoringType;
 
 public class PreviewRouteLineInfo {
 
@@ -199,8 +200,8 @@ public class PreviewRouteLineInfo {
 		if (bundle.containsKey(CUSTOM_COLOR_NIGHT)) {
 			customColorNight = bundle.getInt(CUSTOM_COLOR_NIGHT);
 		}
-		coloringType = ColoringType.requireValueOf(ColoringPurpose.ROUTE_LINE, bundle.getString(ROUTE_COLORING_TYPE));
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(ROUTE_COLORING_TYPE));
+		coloringType = ColoringType.Companion.requireValueOf(ColoringPurpose.ROUTE_LINE, bundle.getString(ROUTE_COLORING_TYPE));
+		routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(bundle.getString(ROUTE_COLORING_TYPE));
 		width = bundle.getString(LINE_WIDTH);
 		showTurnArrows = bundle.getBoolean(SHOW_TURN_ARROWS);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);

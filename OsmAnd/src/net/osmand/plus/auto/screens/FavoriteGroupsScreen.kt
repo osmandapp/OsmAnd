@@ -23,7 +23,7 @@ class FavoriteGroupsScreen(
         })
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         setupFavoriteGroups(listBuilder)
         return PlaceListNavigationTemplate.Builder()
@@ -61,16 +61,23 @@ class FavoriteGroupsScreen(
             favoriteGroups.subList(0, favoriteGroupsSize.coerceAtMost(contentLimit - 2))
         for (group in limitedFavoriteGroups) {
             val title = group.getDisplayName(app)
-            val groupIcon = app.favoritesHelper.getColoredIconForGroup(group.name);
-            val icon = CarIcon.Builder(
-                IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon))).build()
+            var groupIcon = app.favoritesHelper.getColoredIconForGroup(group.name)
+            if (groupIcon == null) {
+                val colorId =
+                    if (!carContext.isDarkMode) R.color.icon_color_default_light else R.color.icon_color_secondary_dark
+                val uiUtilities = app.uiUtilities
+                groupIcon = uiUtilities.getIcon(R.drawable.ic_action_group_name_16, colorId)
+            }
+            val icon = if (groupIcon != null) CarIcon.Builder(
+                IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon)))
+                .build() else null
+            val rowBuilder = Row.Builder()
+                .setTitle(title)
+                .setBrowsable(true)
+                .setOnClickListener { onClickFavoriteGroup(group) }
+            icon?.let { rowBuilder.setImage(it) }
             listBuilder.addItem(
-                Row.Builder()
-                    .setTitle(title)
-                    .setImage(icon)
-                    .setBrowsable(true)
-                    .setOnClickListener { onClickFavoriteGroup(group) }
-                    .build())
+                rowBuilder.build())
         }
     }
 

@@ -29,21 +29,9 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.MultiSelectListPreference;
-import androidx.preference.Preference;
+import androidx.preference.*;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceGroupAdapter;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
-import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -54,6 +42,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.base.AppModeDependentComponent;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -70,6 +59,7 @@ import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSh
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -84,11 +74,10 @@ import java.io.Serializable;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
-		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
+		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged, AppModeDependentComponent {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
-	public static final String APP_MODE_KEY = "app_mode_key";
 	public static final String OPEN_CONFIG_PROFILE = "openConfigProfile";
 	public static final String OPEN_SETTINGS = "openSettings";
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
@@ -114,16 +103,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		app = requireMyApplication();
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
-		Bundle args = getArguments();
-		if (savedInstanceState != null) {
-			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null && args != null) {
-			appMode = ApplicationMode.valueOfStringKey(args.getString(APP_MODE_KEY), null);
-		}
-		if (appMode == null) {
-			appMode = settings.getApplicationMode();
-		}
+		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 		super.onCreate(savedInstanceState);
 		currentScreenType = getCurrentScreenType();
 	}
@@ -159,7 +139,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	private boolean updateTheme() {
 		ApplicationMode appMode = getSelectedAppMode();
-		boolean nightMode = !settings.isLightContentForMode(appMode);
+		boolean nightMode = app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
 		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -198,8 +178,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		outState.putString(APP_MODE_KEY, appMode.getStringKey());
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		saveAppModeToBundle(appMode, outState);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -213,19 +193,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				mapActivity.disableDrawer();
 			}
 		}
-
-		Activity activity = getActivity();
-		if (activity != null) {
-			int colorId = getStatusBarColorId();
-			if (colorId != -1) {
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).updateStatusBarColor();
-				} else {
-					statusBarColor = activity.getWindow().getStatusBarColor();
-					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-				}
-			}
-		}
+		updateStatusBar();
 	}
 
 	@Override
@@ -252,6 +220,25 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
 				((MapActivity) activity).updateNavigationBarColor();
+			}
+		}
+	}
+
+	public void updateStatusBar() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			updateStatusBar(activity);
+		}
+	}
+
+	protected void updateStatusBar(@NonNull Activity activity) {
+		int colorId = getStatusBarColorId();
+		if (colorId != -1) {
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).updateStatusBarColor();
+			} else {
+				statusBarColor = activity.getWindow().getStatusBarColor();
+				activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 			}
 		}
 	}
@@ -348,7 +335,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onAppModeChanged(ApplicationMode appMode) {
-		this.appMode = appMode;
+		setAppMode(appMode);
 		if (updateTheme()) {
 			recreate();
 		} else {
@@ -356,6 +343,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			updateToolbar();
 			updateAllSettings();
 		}
+	}
+
+	@Override
+	public void setAppMode(@NonNull ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	@NonNull
+	@Override
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
 	public Bundle buildArguments() {
@@ -438,7 +436,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 
 		View toolbarContainer = currentScreenType == null ? null :
-				UiUtilities.getInflater(getActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
+				UiUtilities.getInflater(requireActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		if (toolbarTitle != null) {
@@ -592,8 +590,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	protected final void applyPreference(Preference pref, boolean applyToAllProfiles, Object newValue) {
-		if (pref instanceof MultiSelectBooleanPreference) {
-			MultiSelectBooleanPreference msp = (MultiSelectBooleanPreference) pref;
+		if (pref instanceof MultiSelectBooleanPreference msp) {
 			Set<String> values = (Set<String>) newValue;
 			String[] ids = msp.getPrefsIds();
 			for (String id : ids) {
@@ -806,8 +803,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (activity != null) {
 			DialogManager dialogManager = app.getDialogManager();
 			dialogManager.register(processId, controller);
+			ApplicationMode appMode = getSelectedAppMode();
 			FragmentManager fm = activity.getSupportFragmentManager();
-			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
+			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, appMode, false);
 		}
 	}
 
@@ -870,9 +868,23 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return listPreference;
 	}
 
+	public void addDividerPref() {
+		getPreferenceScreen().addPreference(createDividerPref());
+	}
+
 	@NonNull
-	protected Preference requirePreference(@NonNull CharSequence key) {
-		Preference preference = findPreference(key);
+	public Preference createDividerPref() {
+		Preference preference = new Preference(requireContext());
+		preference.setSelectable(false);
+		preference.setPersistent(false);
+		preference.setLayoutResource(R.layout.simple_divider_item);
+
+		return preference;
+	}
+
+	@NonNull
+	protected <T extends Preference> T requirePreference(@NonNull CharSequence key) {
+		T preference = findPreference(key);
 		if (preference == null) {
 			throw new IllegalArgumentException("Preference with key '" + key + "' not found.");
 		}

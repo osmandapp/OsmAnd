@@ -27,12 +27,14 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 public class PointImageDrawable extends Drawable {
 
+	public static final int MIN_ICON_SIZE_PX = 4;
 	public static final int ICON_SIZE_VECTOR_PX = 12;
 	public static final int DEFAULT_SIZE_ON_MAP_DP = 16;
 
 	private final int dp_12_px;
 	private final boolean withShadow;
 	private boolean history;
+	private BackgroundType backgroundType;
 	private final Drawable mapIcon;
 	private Bitmap mapIconBitmap;
 	private final Bitmap mapIconBackgroundTop;
@@ -74,6 +76,7 @@ public class PointImageDrawable extends Drawable {
 		mapIconBackgroundTopSmall = type.getMapBackgroundIconId(context, "top", true);
 		mapIconBackgroundCenterSmall = type.getMapBackgroundIconId(context, "center", true);
 		mapIconBackgroundBottomSmall = type.getMapBackgroundIconId(context, "bottom", true);
+		backgroundType = type;
 
 		colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
 		grayFilter = new PorterDuffColorFilter(ContextCompat.getColor(context, R.color.color_favorite_gray), PorterDuff.Mode.SRC_IN);
@@ -120,6 +123,11 @@ public class PointImageDrawable extends Drawable {
 		return uiBackgroundIcon.getIntrinsicWidth();
 	}
 
+	@NonNull
+	public BackgroundType getBackgroundType() {
+		return backgroundType;
+	}
+
 	@Override
 	public void draw(@NonNull Canvas canvas) {
 		paintBackground.setColorFilter(history ? grayFilter : colorFilter);
@@ -156,7 +164,7 @@ public class PointImageDrawable extends Drawable {
 		if (scale != this.scale || this.mapIconSize == 0) {
 			this.scale = scale;
 			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
-			this.mapIconSize = Math.round((scale * pixels / ICON_SIZE_VECTOR_PX * ICON_SIZE_VECTOR_PX));
+			this.mapIconSize = Math.max(Math.round((scale * pixels / ICON_SIZE_VECTOR_PX * ICON_SIZE_VECTOR_PX)), MIN_ICON_SIZE_PX);
 			this.backSize = (int) (scale * getIntrinsicWidth());
 			mapIconBitmap = getBitmapFromVectorDrawable(mapIcon);
 		}

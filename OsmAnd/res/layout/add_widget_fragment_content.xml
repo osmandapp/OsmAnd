@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -21,18 +21,14 @@
 		android:id="@+id/widgets_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginTop="@dimen/content_padding"
-		android:layout_marginEnd="@dimen/content_padding"
 		android:orientation="vertical"
-		tools:layout_height="@dimen/content_padding"
 		tools:background="?attr/divider_color_basic" />
 
 	<LinearLayout
 		android:id="@+id/secondary_info_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/content_padding_small"
 		android:orientation="vertical"
 		android:visibility="gone"
 		tools:visibility="visible">
@@ -46,7 +42,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			android:layout_marginTop="@dimen/content_padding_small">
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginBottom="@dimen/content_padding_small">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/secondary_description"
@@ -65,7 +62,7 @@
 				android:layout_marginStart="@dimen/dialog_button_height"
 				android:layout_marginTop="@dimen/favorites_icon_padding"
 				android:layout_marginEnd="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_action_help"
+				app:srcCompat="@drawable/ic_action_help"
 				android:tint="?android:textColorSecondary" />
 
 		</LinearLayout>

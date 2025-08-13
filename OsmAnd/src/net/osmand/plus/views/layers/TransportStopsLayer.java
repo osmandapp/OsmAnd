@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -115,7 +116,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 
 			@Override
-			protected List<TransportStop> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+			protected Pair<List<TransportStop>, List<TransportStop>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
 				try {
 					List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {
@@ -132,19 +133,22 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							});
 					Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
 							? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1));
-					return res;
+					return new Pair<>(res, res);
 				} catch (IOException e) {
-					return new ArrayList<>();
+					return new Pair<>(Collections.emptyList(), Collections.emptyList());
 				}
 			}
 		};
 		addMapsInitializedListener();
 	}
 
-	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
-	                          List<TransportStop> objects) {
+	private void collectTransportStopsFromPoint(@NonNull MapSelectionResult result,
+	                          @NonNull List<TransportStop> transportStops) {
+		PointF point = result.getPoint();
+		RotatedTileBox tileBox = result.getTileBox();
 		MapRendererView mapRenderer = getMapRenderer();
-		float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER;
+
+		float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
 		if (mapRenderer != null) {
 			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
@@ -155,13 +159,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 		try {
 			TreeSet<String> addedTransportStops = new TreeSet<>();
-			for (int i = 0; i < objects.size(); i++) {
-				TransportStop transportStop = objects.get(i);
-
+			for (int i = 0; i < transportStops.size(); i++) {
+				TransportStop transportStop = transportStops.get(i);
 				if (addedTransportStops.contains(transportStop.getName())) {
 					continue;
 				}
-
 				LatLon latLon = transportStop.getLocation();
 				if (latLon == null) {
 					continue;
@@ -169,10 +171,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 				boolean add = mapRenderer != null
 						? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
-						: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
+						: tileBox.isLatLonNearPixel(latLon, point.x, point.y, radius);
 				if (add) {
 					addedTransportStops.add(transportStop.getName());
-					res.add(transportStop);
+					result.collect(transportStop, this);
 				}
 			}
 		} catch (IndexOutOfBoundsException e) {
@@ -369,16 +371,16 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (excludeUntouchableObjects) {
 			return;
 		}
-
+		RotatedTileBox tileBox = result.getTileBox();
 		if (tileBox.getZoom() >= START_ZOOM_SELECTED_TRANSPORT_ROUTE && stopRoute != null) {
-			getFromPoint(tileBox, point, res, stopRoute.route.getForwardStops());
+			collectTransportStopsFromPoint(result, stopRoute.route.getForwardStops());
 		} else if (tileBox.getZoom() >= START_ZOOM_ALL_TRANSPORT_STOPS && data.getResults() != null) {
-			getFromPoint(tileBox, point, res, data.getResults());
+			collectTransportStopsFromPoint(result, data.getResults());
 		}
 	}
 

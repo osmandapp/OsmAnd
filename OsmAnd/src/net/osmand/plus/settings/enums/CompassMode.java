@@ -1,7 +1,10 @@
 package net.osmand.plus.settings.enums;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -9,11 +12,10 @@ import net.osmand.plus.base.containers.ThemedIconId;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public enum CompassMode {
-
-	NORTH_IS_UP(
-			OsmandSettings.ROTATE_MAP_NONE,
-			R.string.rotate_map_north_opt,
-			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white)
+	MANUALLY_ROTATED(
+			OsmandSettings.ROTATE_MAP_MANUAL,
+			R.string.rotate_map_manual_opt,
+			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white)
 	),
 
 	MOVEMENT_DIRECTION(
@@ -28,10 +30,10 @@ public enum CompassMode {
 			new ThemedIconId(R.drawable.ic_compass, R.drawable.ic_compass_white)
 	),
 
-	MANUALLY_ROTATED(
-			OsmandSettings.ROTATE_MAP_MANUAL,
-			R.string.rotate_map_manual_opt,
-			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white)
+	NORTH_IS_UP(
+			OsmandSettings.ROTATE_MAP_NONE,
+			R.string.rotate_map_north_opt,
+			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white)
 	);
 
 	@StringRes
@@ -50,6 +52,10 @@ public enum CompassMode {
 		return titleId;
 	}
 
+	public String getTitle(@NonNull Context ctx) {
+		return ctx.getString(titleId);
+	}
+
 	@NonNull
 	public ThemedIconId getIconId() {
 		return themedIconId;
@@ -63,6 +69,11 @@ public enum CompassMode {
 	public int getValue() {
 		return value;
 	}
+
+	@NonNull
+	public String getKey() {
+		return name();
+	};
 
 	@NonNull
 	public CompassMode next() {
@@ -79,5 +90,25 @@ public enum CompassMode {
 			}
 		}
 		return NORTH_IS_UP;
+	}
+
+	public static boolean isCompassIconId(@DrawableRes int iconId) {
+		for (CompassMode compassMode : CompassMode.values()) {
+			ThemedIconId icon = compassMode.getIconId();
+			if (icon.getIconId(true) == iconId || icon.getIconId(false) == iconId) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Nullable
+	public static CompassMode getModeForKey(@Nullable String key) {
+		for (CompassMode mode : CompassMode.values()) {
+			if (mode.getKey().equals(key)) {
+				return mode;
+			}
+		}
+		return null;
 	}
 }

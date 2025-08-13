@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
@@ -15,6 +14,7 @@ import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 	protected GradientColorsCollection gradientCollection;
 	protected PaletteColor selectedPaletteColor;
 
-	protected GPXTrackAnalysis analysis;
+	protected GpxTrackAnalysis analysis;
 
-	public GradientColorsPaletteController(@NonNull OsmandApplication app, @Nullable GPXTrackAnalysis analysis) {
+	public GradientColorsPaletteController(@NonNull OsmandApplication app, @Nullable GpxTrackAnalysis analysis) {
 		this.app = app;
 		this.analysis = analysis;
 	}
@@ -69,7 +69,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 	}
 
 	@Nullable
-	public GPXTrackAnalysis getAnalysis() {
+	public GpxTrackAnalysis getAnalysis() {
 		return analysis;
 	}
 

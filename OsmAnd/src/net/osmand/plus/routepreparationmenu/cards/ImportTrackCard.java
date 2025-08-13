@@ -1,6 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.graphics.Typeface;
+
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -10,11 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.UiUtilities;
+
 
 public class ImportTrackCard extends MapBaseCard {
 
@@ -30,9 +31,8 @@ public class ImportTrackCard extends MapBaseCard {
 	@Override
 	protected void updateContent() {
 		int color = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		String importTrack = app.getString(R.string.plan_route_import_track);
-		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, importTrack, importTrack, importTrack);
+		SpannableString spannable = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), importTrack, importTrack, importTrack);
 		spannable.setSpan(new ForegroundColorSpan(color), 0, importTrack.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		TextView title = view.findViewById(R.id.title);

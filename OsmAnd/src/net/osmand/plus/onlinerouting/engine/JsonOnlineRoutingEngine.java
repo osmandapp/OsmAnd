@@ -3,7 +3,7 @@ package net.osmand.plus.onlinerouting.engine;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -73,8 +73,8 @@ public abstract class JsonOnlineRoutingEngine extends OnlineRoutingEngine {
 		if (!isEmpty(route)) {
 			for (LatLon pt : route) {
 				WptPt wpt = new WptPt();
-				wpt.lat = pt.getLatitude();
-				wpt.lon = pt.getLongitude();
+				wpt.setLat(pt.getLatitude());
+				wpt.setLon(pt.getLongitude());
 				result.add(RouteProvider.createLocation(wpt));
 			}
 		}

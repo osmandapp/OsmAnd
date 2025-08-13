@@ -9,7 +9,6 @@ import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -32,6 +31,7 @@ public class LocationSearchTest {
 	@Test
 	public void testBasicCommaSearch() throws IOException {
 		search("5.0,3.0", new LatLon(5, 3));
+		search("(5.0,3.0)", new LatLon(5, 3));
 		search("5.445,3.523", new LatLon(5.445, 3.523));
 		search("5:1:1,3:1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 	}
@@ -88,7 +88,15 @@ public class LocationSearchTest {
 		search("43°38′ 79°23′13.7″E", new LatLon(43 + 38/60f,79 + 23/60f + 13.7/3600f));
 		search("43°38′23\" 79°23′13.7″E", new LatLon(43 + 38/60f + 23/3600f,79 + 23/60f + 13.7/3600f));
 	}
-	
 
-	
+	@Test
+	public void testCommaLatLonSearch() throws IOException {
+		search("(33,95060 °S, 151,14453° E)", new LatLon(-33.95060, 151.14453));
+		search("33,95060 °S, 151,14453° E", new LatLon(-33.95060, 151.14453));
+		search("33,95060, 151,14453", new LatLon(33.95060, 151.14453));
+		search("33,95060 151,14453", new LatLon(33.95060,151.14453));
+
+		search("15,1235 S, 23,1244 W", new LatLon(-15.1235, -23.1244));
+		search("-15,1235, 23,1244", new LatLon(-15.1235, 23.1244));
+	}
 }

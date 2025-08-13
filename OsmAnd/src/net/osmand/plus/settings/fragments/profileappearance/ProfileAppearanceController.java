@@ -5,9 +5,9 @@ import static net.osmand.plus.settings.backend.ApplicationMode.CUSTOM_MODE_KEY_S
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -21,6 +21,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.helpers.Model3dHelper;
@@ -33,7 +34,6 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
-import net.osmand.plus.settings.fragments.profileappearance.elements.ProfileIconPaletteElements;
 import net.osmand.plus.settings.fragments.profileappearance.elements.LocationIconPaletteElements;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -136,12 +136,12 @@ public class ProfileAppearanceController extends BaseDialogController {
 	}
 
 	@NonNull
-	public MarkerDisplayOption getViewAngleVisibility(){
+	public MarkerDisplayOption getViewAngleVisibility() {
 		return changedProfile.viewAngleVisibility;
 	}
 
 	@NonNull
-	public MarkerDisplayOption getLocationRadiusVisibility(){
+	public MarkerDisplayOption getLocationRadiusVisibility() {
 		return changedProfile.locationRadiusVisibility;
 	}
 
@@ -270,7 +270,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 				.setViewAngle(changedProfile.viewAngleVisibility)
 				.setLocationRadius(changedProfile.locationRadiusVisibility);
 
-		app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode());
+		app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode(), true);
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, app);
@@ -337,6 +337,13 @@ public class ProfileAppearanceController extends BaseDialogController {
 			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			colorsCardController = new ColorsPaletteController(app, colorsCollection, selectedColor) {
 				@Override
+				public void onAllColorsScreenClosed() {
+					if (screen != null) {
+						screen.updateStatusBar();
+					}
+				}
+
+				@Override
 				public int getControlsAccentColor(boolean nightMode) {
 					if (selectedPaletteColor != null) {
 						return selectedPaletteColor.getColor();
@@ -376,10 +383,15 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<Integer> getProfileIconCardController() {
 		if (profileIconCardController == null) {
-			profileIconCardController = new ProfileIconsController<Integer>(app, ProfileIcons.getIcons(), changedProfile.iconRes) {
+			profileIconCardController = new ProfileIconsController<>(app, ProfileIcons.getIcons(), changedProfile.iconRes) {
 				@Override
 				protected IconsPaletteElements<Integer> createPaletteElements(@NonNull Context context, boolean nightMode) {
-					return new ProfileIconPaletteElements(context, nightMode);
+					return new CircleIconPaletteElements<>(context, nightMode) {
+						@Override
+						protected Drawable getIconDrawable(@NonNull Integer iconId, boolean isSelected) {
+							return getContentIcon(iconId);
+						}
+					};
 				}
 
 				@Override
@@ -398,7 +410,8 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getRestingIconCardController() {
 		if (restingIconCardController == null) {
-			restingIconCardController = new ProfileIconsController<String>(app, listLocationIcons(), changedProfile.locationIcon) {
+			String iconName = LocationIcon.getActualIconName(changedProfile.locationIcon, false);
+			restingIconCardController = new ProfileIconsController<>(app, listLocationIcons(), iconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);
@@ -430,8 +443,8 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getNavigationIconCardController() {
 		if (navigationIconCardController == null) {
-			String movementIconName = LocationIcon.getActualNavigationIconName(changedProfile.navigationIcon);
-			navigationIconCardController = new ProfileIconsController<String>(app, listNavigationIcons(), movementIconName) {
+			String movementIconName = LocationIcon.getActualIconName(changedProfile.navigationIcon, true);
+			navigationIconCardController = new ProfileIconsController<>(app, listNavigationIcons(), movementIconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);
@@ -509,9 +522,9 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	private List<String> listLocationIcons() {
 		List<String> locationIcons = new ArrayList<>();
-		locationIcons.add(LocationIcon.DEFAULT.name());
-		locationIcons.add(LocationIcon.CAR.name());
-		locationIcons.add(LocationIcon.BICYCLE.name());
+		locationIcons.add(LocationIcon.STATIC_DEFAULT.name());
+		locationIcons.add(LocationIcon.STATIC_CAR.name());
+		locationIcons.add(LocationIcon.STATIC_BICYCLE.name());
 		locationIcons.add(LocationIcon.MOVEMENT_DEFAULT.name());
 		locationIcons.add(LocationIcon.MOVEMENT_NAUTICAL.name());
 		locationIcons.add(LocationIcon.MOVEMENT_CAR.name());
@@ -519,14 +532,15 @@ public class ProfileAppearanceController extends BaseDialogController {
 		return locationIcons;
 	}
 
-	@NonNull List<String> listNavigationIcons() {
+	@NonNull
+	List<String> listNavigationIcons() {
 		List<String> navigationIcons = new ArrayList<>();
 		navigationIcons.add(LocationIcon.MOVEMENT_DEFAULT.name());
 		navigationIcons.add(LocationIcon.MOVEMENT_NAUTICAL.name());
 		navigationIcons.add(LocationIcon.MOVEMENT_CAR.name());
-		navigationIcons.add(LocationIcon.DEFAULT.name());
-		navigationIcons.add(LocationIcon.CAR.name());
-		navigationIcons.add(LocationIcon.BICYCLE.name());
+		navigationIcons.add(LocationIcon.STATIC_DEFAULT.name());
+		navigationIcons.add(LocationIcon.STATIC_CAR.name());
+		navigationIcons.add(LocationIcon.STATIC_BICYCLE.name());
 		navigationIcons.addAll(Model3dHelper.listModels(app));
 		return navigationIcons;
 	}
@@ -559,6 +573,13 @@ public class ProfileAppearanceController extends BaseDialogController {
 		protected abstract IconsPaletteElements<IconData> createPaletteElements(@NonNull Context context, boolean nightMode);
 
 		@Override
+		public void onAllIconsScreenClosed() {
+			if (screen != null) {
+				screen.updateStatusBar();
+			}
+		}
+
+		@Override
 		public int getControlsAccentColor(boolean nightMode) {
 			return getColorsCardController().getControlsAccentColor(nightMode);
 		}
@@ -568,19 +589,6 @@ public class ProfileAppearanceController extends BaseDialogController {
 			return true;
 		}
 
-		@Override
-		public int getHorizontalIconsSpace() {
-			return getDimen(R.dimen.content_padding_small_half);
-		}
-
-		@Override
-		public int getRecycleViewHorizontalPadding() {
-			return getDimen(R.dimen.content_padding);
-		}
-
-		protected int getDimen(@DimenRes int id){
-			return app.getResources().getDimensionPixelSize(id);
-		}
 	}
 
 	@NonNull

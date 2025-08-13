@@ -78,8 +78,7 @@
     <string name="osmand_parking_position_description">Lleoliad parcio eich cerbyd. %1$s</string>
     <string name="osmand_parking_position_description_add">I nôl y cerbyd o:</string>
     <string name="osmand_parking_position_name">Man parcio</string>
-    <string name="osmand_parking_plugin_description">Mae\'n caniatáu cofnodi ble mae\'ch cerbyd wedi\'i barcio, gan gynnwys faint o amser sy\'n weddill yno.
-\n Mae\'r lleoliad a\'r amser i\'w gweld ar y dashfwrdd yn ogystal ag yn y teclyn map. Gellir gosod larwm atgoffa i galendr Android.</string>
+    <string name="osmand_parking_plugin_description">Mae\'n caniatáu cofnodi ble mae\'ch cerbyd wedi\'i barcio, gan gynnwys faint o amser sy\'n weddill yno. \n Mae\'r lleoliad a\'r amser i\'w gweld ar y dashfwrdd yn ogystal ag yn y teclyn map. Gellir gosod larwm atgoffa i galendr Android.</string>
     <string name="osmand_parking_plugin_name">Lleoliad parcio</string>
     <string name="context_menu_item_add_parking_point">Cofnodi fel man parcio</string>
     <string name="context_menu_item_delete_parking_point">Dileu cofnod man parcio</string>
@@ -289,7 +288,7 @@
     <string name="shared_string_add_photos">Ychwanegu lluniau</string>
     <string name="mapillary_menu_title_username">Enw defnyddiwr</string>
     <string name="mapillary_menu_edit_text_hint">Rhowch enw defnyddiwr</string>
-    <string name="mapillary_menu_title_dates">Dyddiad</string>
+    <string name="shared_string_date">Dyddiad</string>
     <string name="wrong_user_name">Enw defnyddiwr anghywir</string>
     <string name="shared_string_reload">Ail-lwytho</string>
     <string name="shared_string_reset">Ailosod</string>
@@ -346,7 +345,6 @@
     <string name="shared_string_add_profile">Ychwanegu proffil</string>
     <string name="add_online_source">Ychwanegu ffynhonnell ar-lein</string>
     <string name="add_address">Ychwanegu cyfeiriad</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_add_photo">Ychwanegu llun</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="plan_route_add_new_segment">Ychwanegu segment newydd</string>
@@ -437,7 +435,6 @@
     <string name="save_changes_into_file">Cadw newidiadau i ffeil</string>
     <string name="search_history_is_disabled_descr">Gellir galluogi\'r hanes chwilio yn y gosodiadau.</string>
     <string name="enter_verification_code">Rhowch gyfrinair un tro</string>
-    <string name="add_to_opr">Ychwanegu at OpenPlaceReviews</string>
     <string name="shared_string_permissions">Caniatâd</string>
     <string name="amenity_type_shop">Siop</string>
     <string name="exit_import">Gadael\?</string>
@@ -565,8 +562,6 @@
     <string name="activity_type_snowmobile_name">Car eira</string>
     <string name="activity_type_winter_name">Gaeaf</string>
     <string name="activity_type_water_name">Dŵr</string>
-    <string name="login_open_place_reviews">Mewngofnodi i OpenPlaceReviews</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_motorbike_name">Beic modur</string>
     <string name="activity_type_walking_name">Cerdded</string>
     <string name="activity_type_running_name">Rhedeg</string>
@@ -591,10 +586,6 @@
     <string name="shared_string_last_used">Defnyddiwyd diwethaf</string>
     <string name="profile_by_default_description">Dewiswch y proffil i\'w ddefnyddio ar ddechrau\'r ap.</string>
     <string name="profile_type_user_string">Proffil defnyddiwr</string>
-    <string name="add_photos_descr">Mae OsmAnd yn dangos lluniau o sawl ffynhonell:
-\nOpenPlaceReviews - lluniau MODd;
-\nMapillary - delweddau lefel strydoedd;
-\nGwe / Wicimedia - lluniau MODd yn ôl data OpenStreetMap.</string>
     <string name="use_dev_url">Defnyddio dev.openstreetmap.org</string>
     <string name="select_items_for_import">Dewiswch eitemau i\'w mewnforio.</string>
     <string name="select_groups_for_import">Dewiswch grwpiau i\'w mewnforio.</string>
@@ -718,7 +709,6 @@
     <string name="driving_region_descr">Dewisa gyfandir gyrru: DU, Ewrop, UDA, Asia, ac eraill.</string>
     <string name="driving_region">Rhanbarth gyrru</string>
     <string name="driving_region_europe_asia">Ewrop, Asia, De America, a thebyg</string>
-    <string name="driving_region_uk">DU, India, a thebyg</string>
     <string name="speak_street_names">Enwau strydoedd (TTS)</string>
     <string name="speak_traffic_warnings">Rhybuddion traffig</string>
     <string name="clear_intermediate_points">Clirio cyrchfannau ar y ffordd</string>
@@ -1108,9 +1098,6 @@
     <string name="city_type_village">Pentref</string>
     <string name="lang_af">Affricâneg</string>
     <string name="rendering_attr_hideText_name">Testun</string>
-    <string name="srtm_plugin_description">Mae\'r ategyn hwn yn cynnig troshaen cyfuchlinau a haen cysgodion bryniau (tirwedd) i\'w dangos dros ben mapiau safonol OsmAnd. Gwerthfawrogir y nodwedd hon mwyaf gan athletwyr, heicwyr, cerddwyr mynyddoedd, ac unrhyw un â diddordeb yn ffurf tirwedd. (Noder fod data cyfuchlinau a thirwedd ar gael ac i\'w lwytho ar wahân ar ôl gosod yr ategyn.)
-\n
-\nMae\'r data byd-eang (rhwng 70° i\'r gogledd a 70° i\'r de) yn seiliedig ar fesuriadau gan SRTM (Shuttle Radar Topography Mission) ac ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), offeryn delweddu ar fwrdd Terra, lloeren arloesol System Arsylwi\'r Ddaear NASA. Mae ASTER yn ymdrech ar y cyd rhwng NASA, Gweinyddiaeth Economeg, Masnach a Diwydiant (METI) Japan, a Systemau Gofod Japan (J-spacesystems).</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
 \n Mae OsmAnd+ yn ap llywio meddalwedd cod agored gyda mynediad at ystyr eang o ddata OSM byd-eang. Gellir cadw holl ddata\'r map (fectorau neu deils mapiau) yng ngherdyn storfa\'r ffôn ar gyfer defnydd all-lein. Mae\'n bosib llywio llwybrau ar-lein ac all-lein, gan gynnwys cyfarwyddiadau llais ar hyd y ffordd.
@@ -1133,9 +1120,6 @@
 \n - Canllaw lonydd cywir, dangos cyfyngiadau cyflymder, lleisiau wedi\'i recordio a thestun-i-lais.
 \n</string>
     <string name="show_tunnels">Twneli</string>
-    <string name="open_place_reviews_plugin_description">Anfon lluniau, adolygiadau, a dolenni am lefydd cyhoeddus megis bwytai, gwestai, amgueddfeydd, a mannau o ddiddordeb fel data agored https://openplacereviews.org/data/.
-\n
-\nDarllenwch mwy ar https://openplacereviews.org</string>
     <string name="routing_engine_vehicle_type_foot">Cerdded</string>
     <string name="uploaded_count">Uwchlwythwyd %1$d o %2$d</string>
     <string name="message_name_is_already_exists">Mae\'r enw eisoes yn bodoli</string>
@@ -1369,7 +1353,6 @@
     <string name="duration_moment_ago">moment yn ôl</string>
     <string name="shared_string_external">Allanol</string>
     <string name="quick_action_show_hide_title">Dangos/cuddio</string>
-    <string name="opr_use_dev_url">Defnyddio test.openplacereviews.org</string>
     <string name="copy_to_map_favorites">Copïo i ffefrynnau</string>
     <string name="copy_to_map_markers">Copïo i nodau map</string>
     <string name="select_segments_description">Mae %1$s yn cynnwys mwy nag un segment. Rhaid nodi\'r rhan ar gyfer y llywio.</string>
@@ -1515,8 +1498,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="winter_and_ski_renderer">Gaeaf a sgïo</string>
     <string name="day_off_label">i ffwrdd</string>
-    <string name="delete_history_items_descr">Dileu\'r eitemau hanes dan sylw\?</string>
-    <string name="delete_history_items">Dileu %1$s eitem hanes\?</string>
+    <string name="delete_history_items_descr">Dileu\'r eitemau hanes dan sylw?</string>
+    <string name="delete_history_items">Dileu %1$s eitem hanes?</string>
     <string name="quick_action_toggle_preference">Togl i newid dewis.</string>
     <string name="routing_attr_prefer_horse_routes_name">Ffafrio llwybrau marchogaeth</string>
     <string name="backup_welcome_back_descr">Adfer data ar y ddyfais hon gan ddefnyddio copïau wrth gefn neu gadw data wrth gefn ar OsmAnd Cloud.</string>
@@ -1865,7 +1848,6 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Ffyrdd di-gerbyd</string>
     <string name="rendering_attr_moreDetailed_name">Rhagor o fanylion</string>
     <string name="rendering_attr_lessDetailed_name">Llai o fanylion</string>
-    <string name="rendering_attr_hideAccess_name">Cyfyngiadau mynediad</string>
     <string name="rendering_attr_showCycleRoutes_name">Llwybrau beicio</string>
     <string name="show_zoom_buttons_navigation">Dangos botymau chwyddo</string>
     <string name="show_zoom_buttons_navigation_descr">Dangos botymau chwyddo yn ystod llywio.</string>
@@ -2407,8 +2389,6 @@
     <string name="shared_strings_all_regions">Pob rhanbarth</string>
     <string name="snap_to_road_descr">Bydd yr eicon lleoliad presennol yn snapio i\'r llwybr llywio cyfredol</string>
     <string name="reverse_all_points">Gwrthdroi pob pwynt</string>
-    <string name="register_on_openplacereviews">Cofrestru ar
-\nOpenPlaceReviews.org</string>
     <string name="delete_updates">Dileu diweddariadau</string>
     <string name="app_mode_light_aircraft">Awyrennau bychain</string>
     <string name="track_recording_save_and_stop">Cadw a stopio recordio</string>
@@ -2595,7 +2575,7 @@
     <string name="map_widget_trip_recording_downhill">Am i lawr</string>
     <string name="map_widget_trip_recording_uphill">Ar i fyny</string>
     <string name="map_widget_trip_recording_duration">Hyd</string>
-    <string name="map_widget_trip_recording_distance">Pellter</string>
+    <string name="map_widget_distance">Pellter</string>
     <string name="release_4_2">• Ail-dyluniad ategion: golwg a theimlad newydd, grwpio yn ôl tudalennau, newid trefn a\'u chyfuno fel y dymunwch.
 \n
 \n • Llwybrau Mynydda / Seiclo / Teithio: tapiwch ar symbol y llwybr a chael holl wybodaeth y llwybr.
@@ -3104,7 +3084,6 @@
     <string name="simulation_constant_mode_desc">Bydd yr efelychiad yn cael ei gyflawni gyda chyflymder dethol cyson.</string>
     <string name="simulation_preview_mode_desc">Bydd cyflymder yr efelychiad yn fwyaf ar adrannau syth ac yn arafu dim ond ar groesffyrdd.</string>
     <string name="simulation_preview_mode_title">Y modd rhagolwg cyflym</string>
-    <string name="register_on_openplacereviews_desc">Darperir lluniau gan brosiect data agored OpenPlaceReviews.org. Er mwyn llwytho\'ch lluniau i fyny mae angen i chi gofrestru ar eu gwefan.</string>
     <string name="osm_edit_comment_note">Sylw Nodyn OSM</string>
     <string name="gpx_upload_public_visibility_descr">Mae \"cyhoeddus\" yn golygu bod yr olrhain yn cael ei ddangos yn gyhoeddus yn eich olrhain GPS ac mewn rhestrau olrhain GPS cyhoeddus, ac yn y rhestr olrhain gyhoeddus gyda stampiau amser ar ffurf amrwd. Nid yw data a gyflwynir trwy\'r API yn cyfeirio at eich tudalen olrhain. Nid yw stampiau amser pwyntiau olrhain ar gael trwy\'r API GPS cyhoeddus, ac nid yw pwyntiau olrhain wedi\'u trefnu\'n gronolegol.</string>
     <string name="subscription_expired_title">Mae tanysgrifiad OsmAnd Live wedi dod i ben</string>
@@ -3844,11 +3823,6 @@
 \nNid oes angen lawrlwytho map arbennig, mae\'r olygfa\'n cael ei chreu o\'n mapiau safonol.
 \n
 \nGellir dychwelyd y wedd hon trwy naill ai ei dad-ysgogi eto yma, neu trwy newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
-    <string name="plugin_nautical_descr">Mae\'r ategyn hwn yn cyfoethogi map ac ap llywio OsmAnd i hefyd gynhyrchu mapiau morol ar gyfer cychod, hwylio, a mathau eraill o chwaraeon dŵr.
-\n
-\nBydd yr ychwanegiad map arbennig ar gyfer OsmAnd yn darparu\'r holl farciau llywio morol a symbolau siart, ar gyfer mordwyo mewndirol yn ogystal ag ar gyfer mordwyo ger y lan. Mae disgrifiad pob marc llywio yn rhoi\'r manylion sydd eu hangen i\'w hadnabod a\'u hystyr (categori, siâp, lliw, dilyniant, cyfeirnod, ac ati).
-\n
-\nI ddychwelyd i un o arddulliau map confensiynol OsmAnd, yn syml naill ai cau\'r ategyn hwn eto, neu newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
     <string name="nautical_maps_missing">Llwythwch i lawr y map all-lein arbennig i ddangos y nodweddion sgïo.</string>
     <string name="proxy_pref_descr">Nodwch weinydd dirprwyol.</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas ffordd yr Almaen</string>
@@ -3883,7 +3857,6 @@
     <string name="gps_wake_up_timer">Cyfwng deffro GPS</string>
     <string name="download_wikipedia_files">Lawrlwytho data Wicipedia ychwanegol (%1$sMB)\?</string>
     <string name="simulate_your_location">Efelychu dy safle</string>
-    <string name="osm_editing_plugin_description">Gwnewch gyfraniadau OSM fel creu neu addasu gwrthrychau OSM POI, agor neu roi sylwadau ar nodiadau OSM, a chyfrannu ffeiliau GPX wedi\'u recordio yn OsmAnd trwy gyflenwi\'ch enw defnyddiwr a\'ch cyfrinair. Mae OpenStreetMap.org yn brosiect mapio parth cyhoeddus byd-eang a yrrir gan y gymuned.</string>
     <string name="back_to_map">Nôl i\'r map</string>
     <string name="routing_attr_no_new_routing_description">Peidio â defnyddio rheolau llwybro a gyflwynwyd yn v1.9.</string>
     <string name="use_opengl_render_descr">Defnyddio rendrad OpenGL cyflymu caledwedd (gall ddefnyddio mwy o fatri, neu beidio â gweithio ar ddyfeisiau hen iawn).</string>
@@ -3987,7 +3960,6 @@
     <string name="rendering_category_others">Nodweddion map eraill</string>
     <string name="unlock_all_features">Datgloi holl nodweddion OsmAnd</string>
     <string name="purchase_dialog_subtitle">Dewiswch eitem addas</string>
-    <string name="wiki_around">Erthyglau Wicipedia gerllaw</string>
     <string name="new_filter_desc">Rho enw ar gyfer yr hidlydd newydd, bydd hwn yn cael ei ychwanegu at dy dab \'Categorïau\'.</string>
     <string name="no_inet_connection">Dim cysylltiad â\'r rhyngrwyd</string>
     <string name="advanced_coords_search">Chwiliad cyfesurynnau uwch</string>
@@ -4034,9 +4006,6 @@
     <string name="osm_edit_reopened_note">Nodyn OSM wedi\'i ailagor</string>
     <string name="specified_directiory_not_writeable">Nid oedd modd creu mapiau yn y cyfeiriadur penodedig</string>
     <string name="local_osm_changes_upload_all_confirm">Llwytho %1$d newid(iadau) i OSM\?</string>
-    <string name="record_plugin_description">Mae\'r ategyn hwn yn agor y swyddogaeth i recordio a chadw eich traciau trwy gyffwrdd â\'r teclyn cofnodi GPX ar y map â llaw, neu hefyd i fewngofnodi\'ch holl lwybrau llywio yn awtomatig i ffeil GPX.
-\n
-\n Gellir rhannu traciau wedi\'u recordio gyda\'ch ffrindiau neu eu defnyddio ar gyfer cyfraniadau OSM. Gall athletwyr ddefnyddio traciau wedi\'u recordio i fonitro eu sesiynau hyfforddi. Gellir perfformio rhywfaint o ddadansoddi trac sylfaenol yn uniongyrchol yn OsmAnd, fel amseroedd lap, cyflymder cyfartalog ac ati, ac wrth gwrs gellir dadansoddi traciau yn ddiweddarach hefyd mewn offer dadansoddi trydydd parti arbennig.</string>
     <string name="dash_download_msg_none">Lawrlwytho mapiau all-lein\?</string>
     <string name="rendering_attr_transportStops_name">Arosfanau trafnidiaeth</string>
     <string name="use_opengl_render">Defnyddio rendrad OpenGL</string>
@@ -4074,9 +4043,7 @@
     <string name="use_osm_live_routing_description">Galluogi llywio ar gyfer newidiadau OsmAnd Live.</string>
     <string name="use_osm_live_routing">Llywio OsmAnd Live</string>
     <string name="add_time_span">Ychwanegu rhychwant amser</string>
-    <string name="plugin_ski_descr">Mae\'r ategyn hwn ar gyfer OsmAnd yn rhoi manylion llethrau sgïo lawr allt fyd-eang, rhediadau sgïo traws gwlad, llwybrau sgïo Alpaidd, ceir cebl a lifftiau sgïo ar flaenau eich bysedd. Mae llwybrau a pistes yn cael eu dangos â chod lliw yn ôl anhawster, a\'u darlunio mewn arddull map \'Gaeaf\' arbennig sy\'n cymathu tirwedd aeafol lliw eira.
-\n
-\nMae agor yr olwg hon yn newid arddull y map i \'Gaeaf a sgïo\', gan ddangos holl nodweddion y dirwedd dan amodau gaeafol. Gellir dychwelyd y wedd hon trwy naill ai ei gau eto yma, neu trwy newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
+    <string name="plugin_ski_descr">Mae\'r ategyn hwn ar gyfer OsmAnd yn rhoi manylion llethrau sgïo lawr allt fyd-eang, rhediadau sgïo traws gwlad, llwybrau sgïo Alpaidd, ceir cebl a lifftiau sgïo ar flaenau eich bysedd. Mae llwybrau a pistes yn cael eu dangos â chod lliw yn ôl anhawster, a\'u darlunio mewn arddull map \'Gaeaf\' arbennig sy\'n cymathu tirwedd aeafol lliw eira. \n \nMae agor yr olwg hon yn newid arddull y map i \'Gaeaf a sgïo\', gan ddangos holl nodweddion y dirwedd dan amodau gaeafol. Gellir dychwelyd y wedd hon trwy naill ai ei gau eto yma, neu trwy newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
     <string name="paid_plugin">Ategyn taledig</string>
     <string name="start_editing_card_description">Gallwch a dylech olygu unrhyw erthygl ar Wikivoyage. Rhannwch wybodaeth, profiad, talent, a\'ch sylw.</string>
     <string name="get_unlimited_access">Cael mynediad diderfyn</string>

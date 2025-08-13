@@ -7,6 +7,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 
 public class RouteDirectionInfo {
 	// location when you should action (turn or go ahead)
@@ -25,6 +26,8 @@ public class RouteDirectionInfo {
 	private String streetName;
 
 	private String destinationName;
+
+	private String destinationRef;
 
 	private RouteDataObject routeDataObject;
 
@@ -68,7 +71,11 @@ public class RouteDirectionInfo {
 	}
 
 	public String getDescriptionRoutePart() {
-		return descriptionRoute;
+		return getDescriptionRoutePart(false);
+	}
+
+	public String getDescriptionRoutePart(boolean forceTurnType) {
+		return forceTurnType && Algorithms.isEmpty(descriptionRoute) ? turnType.toString() : descriptionRoute;
 	}
 
 	public String getRef() {
@@ -131,5 +138,27 @@ public class RouteDirectionInfo {
 
 	public void setExitInfo(@Nullable ExitInfo exitInfo) {
 		this.exitInfo = exitInfo;
+	}
+
+    public String getDestinationRef() {
+        return destinationRef;
+    }
+
+    public void setDestinationRef(String destinationRef) {
+        this.destinationRef = destinationRef;
+    }
+
+	public String getDestinationRefAndName() {
+		String[] destinations = {destinationRef, destinationName};
+		String res = "";
+		for (String s : destinations) {
+			if (!res.isEmpty()) {
+				res += ", ";
+			}
+			if (!Algorithms.isEmpty(s)) {
+				res += s;
+			}
+		}
+		return res;
 	}
 }

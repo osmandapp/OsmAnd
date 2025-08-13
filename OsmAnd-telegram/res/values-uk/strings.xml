@@ -34,7 +34,7 @@
     <string name="shared_string_enabled">Увімкнено</string>
     <string name="shared_string_status">Стан</string>
     <string name="no_gps_connection">Немає зʼєднання з GPS</string>
-    <string name="no_internet_connection">Немає інтернет-з\'єднання</string>
+    <string name="no_internet_connection">Зʼєднання з інтернетом відсутнє</string>
     <string name="shared_string_disable">Вимкнути</string>
     <string name="shared_string_save">Зберегти</string>
     <string name="add_device">Додати пристрій</string>
@@ -135,7 +135,7 @@
     <string name="mile">миля</string>
     <string name="km">км</string>
     <string name="m">м</string>
-    <string name="nm">nmi</string>
+    <string name="nm">BMI</string>
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="nm_h">nmi/год</string>
@@ -147,7 +147,7 @@
     <string name="si_m_s">Метрів за секунду</string>
     <string name="si_min_km">Хвилин на кілометр</string>
     <string name="si_min_m">Хвилин на милю</string>
-    <string name="si_nm_h">Морських миль на годину (вузол)</string>
+    <string name="si_nm_h">Морські милі на годину (вузол)</string>
     <string name="si_mi_feet">Милі/фути</string>
     <string name="si_mi_yard">Милі/ярди</string>
     <string name="si_km_m">Кілометри/метри</string>

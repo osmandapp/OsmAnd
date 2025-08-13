@@ -13,7 +13,7 @@ public class NavigateGpxParams extends AidlParams {
 	private String fileName;
 	private boolean force;
 	private boolean needLocationPermission;
-	private boolean passWholeRoute;
+	private Boolean passWholeRoute;
 	private boolean snapToRoad;
 	private String snapToRoadMode;
 	private int snapToRoadThreshold;
@@ -66,11 +66,11 @@ public class NavigateGpxParams extends AidlParams {
 		return force;
 	}
 
-	public boolean isPassWholeRoute() {
+	public Boolean isPassWholeRoute() {
 		return passWholeRoute;
 	}
 
-	public void setPassWholeRoute(boolean passWholeRoute) {
+	public void setPassWholeRoute(Boolean passWholeRoute) {
 		this.passWholeRoute = passWholeRoute;
 	}
 

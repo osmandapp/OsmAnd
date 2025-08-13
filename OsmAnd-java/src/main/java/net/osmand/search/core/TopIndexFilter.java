@@ -5,6 +5,8 @@ import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 
+import java.util.Objects;
+
 public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalFilter {
 
 	private PoiSubType poiSubType;
@@ -23,11 +25,15 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 
 	@Override
 	public boolean accept(PoiSubType poiSubType, String value) {
-		return this.poiSubType.name.equals(poiSubType.name) && this.value.equals(value);
+		return this.poiSubType.name.equals(poiSubType.name) && this.value.equalsIgnoreCase(value);
 	}
 	
 	public String getTag() {
 		return tag;
+	}
+
+	public String getFilterId() {
+		return MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX + tag + "_" + getValueKey(value);
 	}
 
 	@Override
@@ -46,7 +52,24 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 		return valueKey;
 	}
 
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof TopIndexFilter that)) {
+			return false;
+		}
+		return this.tag.equals(that.tag) && this.value.equalsIgnoreCase(that.value);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(tag, value);
+	}
+
 	public static String getValueKey(String value) {
 		return value.toLowerCase().replace(':', '_').replaceAll("\'", "").replace(' ', '_').replaceAll("\"", "");
+	}
+
+	public String getValue() {
+		return value;
 	}
 }

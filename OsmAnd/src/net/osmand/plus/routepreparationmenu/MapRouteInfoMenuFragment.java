@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
@@ -26,7 +26,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
-import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewExProgress;
@@ -281,7 +280,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	private void adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null || menu.isSelectFromMapTouch() || mapActivity == null) {
+		if (menu == null || menu.isSelectFromMap() || mapActivity == null) {
 			return;
 		}
 
@@ -289,7 +288,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (rh.isRoutePlanningMode()) {
 			mapActivity.getMapView();
 			QuadRect r = menu.getRouteRect(mapActivity);
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 
@@ -501,19 +500,19 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	@Override
-	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
+	public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			mapActivity.getMapActions().startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
 			dismiss();
 		}
 	}
 
 	@Override
-	public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+	public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
+			mapActivity.getMapActions().startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
 			dismiss();
 		}
 	}

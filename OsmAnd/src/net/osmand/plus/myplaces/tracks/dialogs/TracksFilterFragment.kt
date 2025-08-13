@@ -22,21 +22,23 @@ import net.osmand.CallbackWithObject
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
-import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
-import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
-import net.osmand.plus.track.data.SmartFolder
-import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.shared.gpx.SmartFolderHelper
+import net.osmand.shared.gpx.SmartFolderUpdateListener
+import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.data.TrackFolder
+import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.DateTrackFilter
+import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.TrackFilterType
 import net.osmand.util.Algorithms
 
 class TracksFilterFragment : BaseOsmAndDialogFragment(),
@@ -56,8 +58,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				(foundFragment as TracksFilterFragment).dialog?.dismiss()
 			}
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				val initialFilter = TracksSearchFilter(app, arrayListOf())
-				initialFilter.initSelectedFilters(filter.appliedFilters)
+				val initialFilter = TracksSearchFilter(app, arrayListOf(), filter.appliedFilters)
 				val fragment = TracksFilterFragment()
 				fragment.setTargetFragment(target, 0)
 				fragment.initialFilterState = initialFilter
@@ -127,6 +128,10 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		if (!::filter.isInitialized) {
+			dismiss()
+			return
+		}
 		setupToolbar(view)
 		setupList(view)
 		setupBottomMenu(view)
@@ -192,8 +197,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 							app.smartFolderHelper.saveSmartFolder(
 								smartFolder!!,
 								filter.currentFilters)
-							Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT)
-								.show()
+							app.showShortToastMessage(R.string.smart_folder_saved)
 							dismiss()
 						} else {
 							app.dialogManager.showSaveSmartFolderDialog(
@@ -265,7 +269,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	private fun filterChanged(): Boolean {
 		var changed = false
 
-		var initialFilters: List<BaseTrackFilter>? = if (smartFolder == null) {
+		val initialFilters: List<BaseTrackFilter>? = if (smartFolder == null) {
 			this.initialFilterState.appliedFilters
 		} else {
 			smartFolder?.filters
@@ -290,7 +294,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun updateUI() {
-		app.runInUIThread{
+		app.runInUIThread {
 			resetAllButton?.isEnabled = filter.appliedFiltersCount > 0
 			var filteredItemsCount = 0
 			if (filter.filteredTrackItems?.size != null) {
@@ -298,7 +302,9 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			}
 			showButton?.setTitle(
 				app.getString(R.string.shared_string_show) + " " +
-						String.format(app.getString(R.string.number_in_breckets), filteredItemsCount))
+						String.format(
+							app.getString(R.string.number_in_breckets),
+							filteredItemsCount))
 		}
 	}
 
@@ -334,7 +340,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun updateProgressVisibility(visible: Boolean) {
-		app.runInUIThread{
+		app.runInUIThread {
 			AndroidUiHelper.setVisibility(
 				if (visible) View.VISIBLE else View.GONE, progressBar)
 		}
@@ -345,12 +351,20 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		dialogClosedListener?.onDialogClosed()
 	}
 
-	override fun onSmartFolderSaved(smartFolder: SmartFolder?) {
-		super.onSmartFolderSaved(smartFolder)
+	override fun onSmartFoldersUpdated() {
+	}
+
+	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderRenamed(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderSaved(smartFolder: SmartFolder) {
 		dismiss()
 	}
 
-	override fun onSmartFolderCreated(smartFolder: SmartFolder?) {
+	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
 		dismiss()
 	}
 }

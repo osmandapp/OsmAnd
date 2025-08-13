@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:fitsSystemWindows="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:id="@+id/toolbar_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/color_transparent"
+				android:minHeight="@dimen/toolbar_height"
+				android:orientation="horizontal">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/back_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:tint="@color/icon_color_default_light"
+					tools:srcCompat="@drawable/ic_arrow_back" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/toolbar_title"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginVertical="@dimen/content_padding_half"
+					android:layout_weight="1"
+					android:textSize="@dimen/dialog_header_text_size"
+					app:typefaceWeight="medium"
+					tools:text="@string/map_widget_left" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/list_background_color"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<net.osmand.plus.mapcontextmenu.gallery.GalleryGridRecyclerView
+				android:id="@+id/content_list"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="?attr/list_background_color"
+				android:clipToPadding="false"
+				android:paddingHorizontal="13dp"
+				android:paddingBottom="@dimen/content_padding"/>
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/shadow_view"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:scaleType="fitXY"
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+	</FrameLayout>
+
+</LinearLayout>

@@ -55,4 +55,26 @@ public class QuickActionIds {
 	public static final int TERRAIN_COLOR_SCHEME_ACTION = 55;
 	public static final int CONTINUOUS_MAP_ZOOM_IN_ACTION = 56;
 	public static final int CONTINUOUS_MAP_ZOOM_OUT_ACTION = 57;
+	public static final int SHOW_HIDE_CYCLE_ROUTES_ACTION = 58;
+	public static final int SHOW_HIDE_MTB_ROUTES_ACTION = 59;
+	public static final int SHOW_HIDE_HIKING_ROUTES_ACTION = 60;
+	public static final int SHOW_HIDE_DIFFICULTY_CLASSIFICATION_ACTION = 61;
+	public static final int SHOW_HIDE_SKI_SLOPES_ROUTES_ACTION = 62;
+	public static final int SHOW_HIDE_HORSE_ROUTES_ACTION = 63;
+	public static final int SHOW_HIDE_WHITEWATER_SPORTS_ROUTES_ACTION = 64;
+	public static final int SHOW_HIDE_FITNESS_TRAILS_ROUTES_ACTION = 65;
+	public static final int SHOW_HIDE_RUNNING_ROUTES_ACTION = 66;
+	public static final int OPEN_WUNDERLINQ_DATAGRID_ACTION = 67;
+	public static final int CHANGE_MAP_ORIENTATION_ACTION = 68;
+	public static final int OPEN_NAVIGATION_VIEW_ACTION = 69;
+	public static final int OPEN_SEARCH_VIEW_ACTION = 70;
+	public static final int SHOW_HIDE_DRAWER_ACTION = 71;
+	public static final int NAVIGATE_PREVIOUS_SCREEN_ACTION = 72;
+	public static final int TRIP_RECORDING_ACTION = 73;
+	public static final int START_NEW_TRIP_SEGMENT_ACTION = 74;
+	public static final int SAVE_RECORDED_TRIP_AND_CONTINUE_ACTION = 75;
+	public static final int FINISH_TRIP_RECORDING_ACTION = 76;
+	public static final int LOCK_SCREEN_ACTION = 77;
+	public static final int SHOW_HIDE_OSM_EDITS_ACTION = 78;
+	public static final int SHOW_HIDE_COORDINATE_GRID_ACTION_ID = 79;
 }

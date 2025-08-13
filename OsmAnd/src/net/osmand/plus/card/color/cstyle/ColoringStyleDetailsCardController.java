@@ -7,21 +7,21 @@ import android.text.style.ForegroundColorSpan;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
 public class ColoringStyleDetailsCardController implements IColoringStyleDetailsController {
 
 	protected final OsmandApplication app;
-	protected final GPXTrackAnalysis analysis;
+	protected final GpxTrackAnalysis analysis;
 	protected ColoringStyle coloringStyle;
 	protected ColoringStyleDetailsCard card;
 
@@ -32,7 +32,7 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 
 	public ColoringStyleDetailsCardController(@NonNull OsmandApplication app,
 	                                          @NonNull ColoringStyle coloringStyle,
-	                                          @Nullable GPXTrackAnalysis analysis) {
+	                                          @Nullable GpxTrackAnalysis analysis) {
 		this.app = app;
 		this.coloringStyle = coloringStyle;
 		this.analysis = analysis;
@@ -92,8 +92,8 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 		if (isLegendDataSpecified() && coloringType.toGradientScaleType() != null) {
 			ApplicationMode appMode = app.getSettings().getApplicationMode();
 			ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
-			double min = RouteColorize.getMinValue(colorizationType, analysis);
-			double max = RouteColorize.getMaxValue(colorizationType, analysis, min, appMode.getMaxSpeed());
+			double min = RouteColorize.Companion.getMinValue(colorizationType, analysis);
+			double max = RouteColorize.Companion.getMaxValue(colorizationType, analysis, min, appMode.getMaxSpeed());
 			return new CharSequence[] { formatValue(min), formatValue(max) };
 		} else if (coloringType == ColoringType.SPEED) {
 			return new CharSequence[] {
@@ -129,7 +129,7 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 			return app.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf((int) value), "%");
 		}
 		String speed = OsmAndFormatter.getFormattedSpeed((float) value, app);
-		String speedUnit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);
+		String speedUnit = app.getSettings().SPEED_SYSTEM.get().toShortString();
 		Spannable formattedSpeed = new SpannableString(speed);
 		formattedSpeed.setSpan(
 				new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, android.R.attr.textColorSecondary)),

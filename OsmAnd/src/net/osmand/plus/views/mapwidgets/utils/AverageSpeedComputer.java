@@ -10,7 +10,7 @@ import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
@@ -19,23 +19,16 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Queue;
 
 public class AverageSpeedComputer extends AverageValueComputer {
 
-	private static final boolean CALCULATE_UNIFORM_SPEED = true;
-
-	private final SegmentsList segmentsList;
-
-	private Location previousLocation;
-	private long previousTime;
-
 	public AverageSpeedComputer(@NonNull OsmandApplication app) {
 		super(app);
-		this.segmentsList = new SegmentsList();
 	}
 
+	@Override
 	protected boolean isEnabled() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -52,90 +45,52 @@ public class AverageSpeedComputer extends AverageValueComputer {
 		return false;
 	}
 
+	@Override
 	protected void saveLocation(@NonNull Location location, long time) {
-		if (CALCULATE_UNIFORM_SPEED) {
-			if (location.hasSpeed()) {
-				Location loc = new Location(location);
-				loc.setTime(time);
-				locations.add(loc);
-				clearExpiredLocations(locations, BIGGEST_MEASURED_INTERVAL);
-			}
-		} else if (time - previousTime >= ADD_POINT_INTERVAL_MILLIS) {
-			if (previousLocation != null && previousTime > 0) {
-				double distance = MapUtils.getDistance(previousLocation, location);
-				segmentsList.addSegment(new Segment(distance, previousTime, time));
-			}
-			previousLocation = location;
-			previousTime = time;
+		if (location.hasSpeed()) {
+			Location loc = new Location(location);
+			loc.setTime(time);
+			locations.add(loc);
+			clearExpiredLocations(BIGGEST_MEASURED_INTERVAL);
 		}
 	}
 
 	private float getSpeedToSkipInMetersPerSecond() {
 		SpeedConstants speedConstant = settings.SPEED_SYSTEM.get();
-		switch (speedConstant) {
-			case METERS_PER_SECOND:
-				return 1;
-			case KILOMETERS_PER_HOUR:
-			case MINUTES_PER_KILOMETER:
-				return 1 / 3.6f;
-			case MILES_PER_HOUR:
-			case MINUTES_PER_MILE:
-				return METERS_IN_ONE_MILE / (3.6f * METERS_IN_KILOMETER);
-			case NAUTICALMILES_PER_HOUR:
-				return METERS_IN_ONE_NAUTICALMILE / (3.6f * METERS_IN_KILOMETER);
-			default:
-				throw new IllegalStateException("Unsupported speed system");
-		}
+		return switch (speedConstant) {
+			case METERS_PER_SECOND -> 1;
+			case KILOMETERS_PER_HOUR, MINUTES_PER_KILOMETER -> 1 / 3.6f;
+			case MILES_PER_HOUR, MINUTES_PER_MILE ->
+					METERS_IN_ONE_MILE / (3.6f * METERS_IN_KILOMETER);
+			case NAUTICALMILES_PER_HOUR ->
+					METERS_IN_ONE_NAUTICALMILE / (3.6f * METERS_IN_KILOMETER);
+			default -> throw new IllegalStateException("Unsupported speed system");
+		};
 	}
 
-	/**
-	 * @return average speed in meters/second or {@link Float#NaN} if average speed cannot be calculated
-	 */
-	public float getAverageSpeed(long measuredInterval, boolean skipLowSpeed) {
-		if (CALCULATE_UNIFORM_SPEED) {
-			return calculateUniformSpeed(measuredInterval, skipLowSpeed);
-		} else {
-			return calculateNonUniformSpeed(measuredInterval, skipLowSpeed);
-		}
+	public float getAverageSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
+		return calculateUniformSpeed(startTimestamp, measuredInterval, skipLowSpeed);
 	}
 
-	private float calculateUniformSpeed(long measuredInterval, boolean skipLowSpeed) {
-		List<Location> locationsToUse = new ArrayList<>(locations);
-		clearExpiredLocations(locationsToUse, measuredInterval);
+	private float calculateUniformSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
+		long now = System.currentTimeMillis();
+		float totalSpeed = 0;
+		int countedLocations = 0;
+		float speedToSkip = getSpeedToSkipInMetersPerSecond();
 
-		if (!Algorithms.isEmpty(locationsToUse)) {
-			float totalSpeed = 0;
-			float speedToSkip = getSpeedToSkipInMetersPerSecond();
+		// Iterate over the concurrent queue
+		for (Location location : locations) {
+			long locationTime = location.getTime();
 
-			int countedLocations = 0;
-			for (Location location : locationsToUse) {
+			// Check if the location is within the measured interval and after the start timestamp
+			if (locationTime >= startTimestamp && now - locationTime <= measuredInterval) {
 				if (!skipLowSpeed || location.getSpeed() >= speedToSkip) {
 					totalSpeed += location.getSpeed();
 					countedLocations++;
 				}
 			}
-			return countedLocations != 0 ? totalSpeed / countedLocations : Float.NaN;
 		}
-		return Float.NaN;
-	}
-
-	private float calculateNonUniformSpeed(long measuredInterval, boolean skipLowSpeed) {
-		long intervalStart = System.currentTimeMillis() - measuredInterval;
-		List<Segment> segments = segmentsList.getSegments(intervalStart);
-
-		double totalDistance = 0;
-		double totalTimeMillis = 0;
-
-		float speedToSkip = getSpeedToSkipInMetersPerSecond();
-
-		for (Segment segment : segments) {
-			if (!skipLowSpeed || !segment.isLowSpeed(speedToSkip)) {
-				totalDistance += segment.distance;
-				totalTimeMillis += segment.endTime - segment.startTime;
-			}
-		}
-
-		return totalTimeMillis == 0 ? Float.NaN : (float) (totalDistance / totalTimeMillis * 1000);
+		return countedLocations != 0 ? totalSpeed / countedLocations : Float.NaN;
 	}
 
 	public static int getConvertedSpeedToSkip(@NonNull SpeedConstants speedSystem) {
@@ -150,80 +105,6 @@ public class AverageSpeedComputer extends AverageValueComputer {
 				return 60;
 			default:
 				throw new IllegalStateException("Unsupported speed system");
-		}
-	}
-
-	private static class SegmentsList {
-
-		private final Segment[] segments;
-
-		private int tailIndex;
-		private int headIndex;
-
-		public SegmentsList() {
-			int size = (int) (BIGGEST_MEASURED_INTERVAL / ADD_POINT_INTERVAL_MILLIS) + 1;
-			segments = new Segment[size];
-		}
-
-		@NonNull
-		public List<Segment> getSegments(long fromTimeInclusive) {
-			List<Segment> filteredSegments = new ArrayList<>();
-			for (int i = tailIndex; i != headIndex; i = nextIndex(i)) {
-				Segment segment = segments[i];
-				if (segment != null && segment.startTime >= fromTimeInclusive) {
-					filteredSegments.add(segment);
-				}
-			}
-			return filteredSegments;
-		}
-
-		public void removeSegments(long toTimeExclusive) {
-			for (int i = tailIndex; i != headIndex; i = nextIndex(i)) {
-				Segment segment = segments[i];
-				if (segment != null && segment.startTime < toTimeExclusive) {
-					deleteFromTail();
-				}
-			}
-		}
-
-		public void addSegment(@NonNull Segment segment) {
-			cleanUpIfOverflowed();
-			headIndex = nextIndex(headIndex);
-			segments[headIndex] = segment;
-		}
-
-		private void cleanUpIfOverflowed() {
-			if (nextIndex(headIndex) == tailIndex) {
-				deleteFromTail();
-			}
-		}
-
-		private void deleteFromTail() {
-			segments[tailIndex] = null;
-			tailIndex = nextIndex(tailIndex);
-		}
-
-		private int nextIndex(int index) {
-			return (index + 1) % segments.length;
-		}
-	}
-
-	private static class Segment {
-
-		public final double distance;
-		public final long startTime;
-		public final long endTime;
-		public final float speed;
-
-		public Segment(double distance, long startTime, long endTime) {
-			this.distance = distance;
-			this.startTime = startTime;
-			this.endTime = endTime;
-			this.speed = (float) (distance / ((endTime - startTime) / 1000f));
-		}
-
-		public boolean isLowSpeed(float speedToSkip) {
-			return speed < speedToSkip;
 		}
 	}
 }

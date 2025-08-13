@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -21,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class GpxApproximator {
 
@@ -43,8 +44,7 @@ public class GpxApproximator {
 	private GpxApproximationListener listener;
 	private Runnable approximationTask;
 
-	private static final ThreadPoolExecutor SINGLE_THREAD_EXECUTOR
-			= new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+	private static final ThreadPoolExecutor SINGLE_THREAD_EXECUTOR = new ThreadPoolExecutor(1, 1, 0L, MILLISECONDS, new LinkedBlockingQueue<>());
 
 	public GpxApproximator(@NonNull OsmandApplication ctx, @NonNull LocationsHolder locationsHolder) throws IOException {
 		this.ctx = ctx;
@@ -75,7 +75,7 @@ public class GpxApproximator {
 		this.env = routingHelper.getRoutingEnvironment(ctx, mode, start, end);
 	}
 
-	private GpxRouteApproximation getNewGpxApproximationContext() {
+	public GpxRouteApproximation getNewGpxApproximationContext() {
 		GpxRouteApproximation newContext = new GpxRouteApproximation(env.getCtx());
 		newContext.ctx.calculationProgress = new RouteCalculationProgress();
 		newContext.ctx.config.minPointApproximation = pointApproximation;
@@ -86,11 +86,11 @@ public class GpxApproximator {
 		if (points == null) {
 			points = routingHelper.generateGpxPoints(env, getNewGpxApproximationContext(), locationsHolder);
 		}
-		List<GpxPoint> points = new ArrayList<>(this.points.size());
+		List<GpxPoint> pointsCopy = new ArrayList<>(this.points.size());
 		for (GpxPoint p : this.points) {
-			points.add(new GpxPoint(p));
+			pointsCopy.add(new GpxPoint(p));
 		}
-		return points;
+		return pointsCopy;
 	}
 
 	public ApplicationMode getMode() {
@@ -126,7 +126,7 @@ public class GpxApproximator {
 		}
 	}
 
-	public void calculateGpxApproximation(@NonNull ResultMatcher<GpxRouteApproximation> resultMatcher) {
+	public void calculateGpxApproximationAsync(@NonNull ResultMatcher<GpxRouteApproximation> resultMatcher) {
 		if (gctx != null) {
 			gctx.ctx.calculationProgress.isCancelled = true;
 		}
@@ -135,15 +135,20 @@ public class GpxApproximator {
 		notifyOnStart();
 		notifyUpdateProgress(gctx);
 		approximationTask = () -> {
-			try {
-				routingHelper.calculateGpxApproximation(env, gctx, getPoints(), resultMatcher, false);
-			} catch (Exception e) {
-				resultMatcher.publish(null);
-				log.error(e.getMessage(), e);
-			}
+			calculateGpxApproximationSync(gctx, resultMatcher);
 			approximationTask = null;
 		};
 		SINGLE_THREAD_EXECUTOR.submit(approximationTask);
+	}
+
+	public void calculateGpxApproximationSync(@NonNull GpxRouteApproximation gctx,
+	                                          @NonNull ResultMatcher<GpxRouteApproximation> matcher) {
+		try {
+			routingHelper.calculateGpxApproximation(env, gctx, getPoints(), matcher, false);
+		} catch (Exception e) {
+			matcher.publish(null);
+			log.error(e.getMessage(), e);
+		}
 	}
 
 	private void notifyOnStart() {

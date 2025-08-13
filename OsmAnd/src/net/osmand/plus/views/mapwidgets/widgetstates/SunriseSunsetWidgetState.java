@@ -14,6 +14,8 @@ import net.osmand.util.Algorithms;
 
 public class SunriseSunsetWidgetState extends WidgetState {
 
+	public static final String SUN_POSITION_WIDGET_MODE_ID = "sun_position_widget_mode";
+
 	private final WidgetType widgetType;
 	private final OsmandPreference<Boolean> preference;
 	private final OsmandPreference<SunPositionMode> sunPositionPreference;
@@ -78,20 +80,16 @@ public class SunriseSunsetWidgetState extends WidgetState {
 
 	@NonNull
 	private String getPrefId() {
-		switch (widgetType) {
-			case SUNSET:
-				return "show_sunset_info";
-			case SUNRISE:
-				return "show_sunrise_info";
-			case SUN_POSITION:
-			default:
-				return "show_sun_position_info";
-		}
+		return switch (widgetType) {
+			case SUNSET -> "show_sunset_info";
+			case SUNRISE -> "show_sunrise_info";
+			default -> "show_sun_position_info";
+		};
 	}
 
 	@NonNull
 	private OsmandPreference<SunPositionMode> registerSunPositionPreference(@Nullable String customId) {
-		String prefId = "sun_position_widget_mode";
+		String prefId = SUN_POSITION_WIDGET_MODE_ID;
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}

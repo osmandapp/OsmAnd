@@ -98,7 +98,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	public int getMapIconId(boolean nightMode) {
 		if (widget instanceof TextInfoWidget) {
 			TextInfoWidget textInfoWidget = (TextInfoWidget) widget;
-			return textInfoWidget.getIconId(nightMode);
+			return textInfoWidget.getMapIconId(nightMode);
 		}
 		return 0;
 	}
@@ -116,7 +116,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return false;
 	}
 
-	@Nullable
+	@NonNull
 	public WidgetType getWidgetType() {
 		return widget.getWidgetType();
 	}

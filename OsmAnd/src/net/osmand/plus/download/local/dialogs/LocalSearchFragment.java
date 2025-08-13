@@ -33,6 +33,8 @@ import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
+import net.osmand.plus.download.local.LocalSizeCalculationListener;
+import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.LocalSortMode;
@@ -46,7 +48,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class LocalSearchFragment extends LocalBaseFragment implements LocalItemListener {
+public class LocalSearchFragment extends LocalBaseFragment implements LocalItemListener, LocalSizeCalculationListener {
 
 	public static final String TAG = LocalSearchFragment.class.getSimpleName();
 
@@ -118,7 +120,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	private void setupRecyclerView(@NonNull View view) {
-		adapter = new LocalSearchAdapter(app, this, nightMode);
+		adapter = new LocalSearchAdapter(view.getContext(), this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -231,6 +233,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	@Override
 	public void onResume() {
 		super.onResume();
+		LocalSizeController.addCalculationListener(app, this);
 
 		if (!Algorithms.isEmpty(searchText)) {
 			searchEditText.setText(searchText);
@@ -243,6 +246,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	@Override
 	public void onPause() {
 		super.onPause();
+		LocalSizeController.removeCalculationListener(app, this);
 		AndroidUiHelper.updateActionBarVisibility(getDownloadActivity(), true);
 	}
 
@@ -268,6 +272,11 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 			menuProvider.setColorId(ColorUtilities.getDefaultIconColorId(nightMode));
 			menuProvider.showMenu(view);
 		}
+	}
+
+	@Override
+	public void onSizeCalculationEvent(@NonNull LocalItem localItem) {
+		adapter.updateItem(localItem);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable LocalItemType type,

@@ -8,18 +8,18 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Metadata;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -33,15 +33,15 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
 
     private final File outFile;
     private File backupFile;
-    private final GPXFile gpxFile;
-    private GPXFile savedGpxFile;
+    private final GpxFile gpxFile;
+    private GpxFile savedGpxFile;
     private final boolean simplified;
     private final boolean addToTrack;
     private final boolean showOnMap;
 
     private final SaveGpxRouteListener saveGpxRouteListener;
 
-    public SaveGpxRouteAsyncTask(MeasurementToolFragment fragment, File outFile, GPXFile gpxFile,
+    public SaveGpxRouteAsyncTask(MeasurementToolFragment fragment, File outFile, GpxFile gpxFile,
                                  boolean simplified, boolean addToTrack, boolean showOnMap,
                                  SaveGpxRouteListener saveGpxRouteListener) {
         fragmentRef = new WeakReference<>(fragment);
@@ -80,9 +80,9 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         if (gpxFile == null) {
             String fileName = outFile.getName();
             String trackName = fileName.substring(0, fileName.length() - GPX_FILE_EXT.length());
-            GPXFile gpx = generateGpxFile(editingContext, trackName, new GPXFile(Version.getFullVersion(app)));
-            res = GPXUtilities.writeGpxFile(outFile, gpx);
-            gpx.path = outFile.getAbsolutePath();
+            GpxFile gpx = generateGpxFile(editingContext, trackName, new GpxFile(Version.getFullVersion(app)));
+            res = SharedUtil.writeGpxFile(outFile, gpx);
+            gpx.setPath(outFile.getAbsolutePath());
             savedGpxFile = gpx;
             if (showOnMap) {
                 MeasurementToolFragment.showGpxOnMap(app, gpx, true);
@@ -90,10 +90,10 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         } else {
             backupFile = FileUtils.backupFile(app, outFile);
             String trackName = Algorithms.getFileNameWithoutExtension(outFile);
-            GPXFile gpx = generateGpxFile(editingContext, trackName, gpxFile);
-            gpx.metadata = new Metadata(gpxFile.metadata);
-            if (!gpx.showCurrentTrack) {
-                res = GPXUtilities.writeGpxFile(outFile, gpx);
+            GpxFile gpx = generateGpxFile(editingContext, trackName, gpxFile);
+            gpx.setMetadata(new Metadata(gpxFile.getMetadata()));
+            if (!gpx.isShowCurrentTrack()) {
+                res = SharedUtil.writeGpxFile(outFile, gpx);
             }
             savedGpxFile = gpx;
             if (showOnMap) {
@@ -107,15 +107,15 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         return res;
     }
 
-    private GPXFile generateGpxFile(@NonNull MeasurementEditingContext editingCtx,
+    private GpxFile generateGpxFile(@NonNull MeasurementEditingContext editingCtx,
                                     @NonNull String trackName,
-                                    @NonNull GPXFile gpx) {
+                                    @NonNull GpxFile gpx) {
         return generateGpxFile(editingCtx, trackName, gpx, simplified, addToTrack);
     }
 
-    public static GPXFile generateGpxFile(@NonNull MeasurementEditingContext editingCtx,
+    public static GpxFile generateGpxFile(@NonNull MeasurementEditingContext editingCtx,
                                           @NonNull String trackName,
-                                          @NonNull GPXFile gpx,
+                                          @NonNull GpxFile gpx,
                                           boolean simplified,
                                           boolean addToTrack) {
         List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
@@ -123,32 +123,32 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
 
         if (simplified) {
             Track track = new Track();
-            track.name = trackName;
-            gpx.tracks.add(track);
+            track.setName(trackName);
+            gpx.getTracks().add(track);
 
             GpxData gpxData = editingCtx.getGpxData();
             if (gpxData != null) {
-                List<WptPt> points = gpxData.getGpxFile().getPoints();
+                List<WptPt> points = gpxData.getGpxFile().getPointsList();
                 gpx.addPoints(points);
             }
 
             for (TrkSegment s : before) {
                 TrkSegment segment = new TrkSegment();
-                segment.points.addAll(s.points);
-                track.segments.add(segment);
+                segment.getPoints().addAll(s.getPoints());
+                track.getSegments().add(segment);
             }
             for (TrkSegment s : after) {
                 TrkSegment segment = new TrkSegment();
-                segment.points.addAll(s.points);
-                track.segments.add(segment);
+                segment.getPoints().addAll(s.getPoints());
+                track.getSegments().add(segment);
             }
         } else {
-            GPXFile newGpx = editingCtx.exportGpx(trackName);
+            GpxFile newGpx = editingCtx.exportGpx(trackName);
             if (newGpx != null) {
                 if (addToTrack) {
-                    newGpx.tracks.addAll(gpx.tracks);
-                    newGpx.routes.addAll(gpx.routes);
-                    newGpx.addPoints(gpx.getPoints());
+                    newGpx.getTracks().addAll(gpx.getTracks());
+                    newGpx.getRoutes().addAll(gpx.getRoutes());
+                    newGpx.addPoints(gpx.getPointsList());
                 }
                 gpx = newGpx;
             }
@@ -169,6 +169,6 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
 
     public interface SaveGpxRouteListener {
 
-        void gpxSavingFinished(Exception warning, GPXFile savedGpxFile, File backupFile);
+        void gpxSavingFinished(Exception warning, GpxFile savedGpxFile, File backupFile);
     }
 }

@@ -2,7 +2,9 @@ package net.osmand.data;
 
 import static net.osmand.data.SpecialPointType.HOME;
 import static net.osmand.data.SpecialPointType.WORK;
-import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.data.SpecialPointType.HOME;
+import static net.osmand.data.SpecialPointType.WORK;
+import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
@@ -12,8 +14,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
@@ -327,6 +329,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.backgroundType = backgroundType;
 	}
 
+	public boolean isBackgroundSet(){
+		return backgroundType != null;
+	}
+
 	@NonNull
 	@Override
 	public String toString() {
@@ -365,10 +371,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 				&& (this.timestamp == point.timestamp)
 				&& (this.visitedDate == point.visitedDate)
 				&& (this.pickupDate == point.pickupDate)
-				&& (this.color == point.color)
+				&& (this.specialPointType == point.specialPointType)
+				&& appearanceEquals(point);
+	}
+
+	public boolean appearanceEquals(@NonNull FavouritePoint point) {
+		return (this.color == point.color)
 				&& (this.iconId == point.iconId)
-				&& (this.backgroundType == point.backgroundType)
-				&& (this.specialPointType == point.specialPointType);
+				&& (this.backgroundType == point.backgroundType);
 	}
 
 	@Override
@@ -388,32 +398,40 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return result;
 	}
 
+	public void copyAppearance(@NonNull FavouritePoint point) {
+		setColor(point.getColor());
+		setIconId(point.getIconId());
+		setBackgroundType(point.getBackgroundType());
+	}
+
 	public static FavouritePoint fromWpt(@NonNull WptPt pt) {
 		return fromWpt(pt, null);
 	}
 
 	public static FavouritePoint fromWpt(@NonNull WptPt wptPt, @Nullable String category) {
-		String name = wptPt.name != null ? wptPt.name : "";
+		String name = wptPt.getName() != null ? wptPt.getName() : "";
 		if (category == null) {
-			category = wptPt.category != null ? wptPt.category : "";
+			category = wptPt.getCategory() != null ? wptPt.getCategory() : "";
 		}
-		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, category, wptPt.ele, wptPt.time);
-		point.setDescription(wptPt.desc);
-		point.setComment(wptPt.comment);
+		FavouritePoint point = new FavouritePoint(wptPt.getLat(), wptPt.getLon(), name, category, wptPt.getEle(), wptPt.getTime());
+		point.setDescription(wptPt.getDesc());
+		point.setComment(wptPt.getComment());
 		point.setAmenityOriginName(wptPt.getAmenityOriginName());
 		point.setAmenityExtensions(wptPt.getExtensionsToRead());
 
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
 			String time = extensions.get(VISITED_DATE);
-			point.setVisitedDate(GPXUtilities.parseTime(time));
+			if (!Algorithms.isEmpty(time)) {
+				point.setVisitedDate(GpxUtilities.INSTANCE.parseTime(time));
+			}
 		}
 		String time = extensions.get(PICKUP_DATE);
 		if (time == null) {
 			time = extensions.get(CREATION_DATE);
 		}
 		if (!Algorithms.isEmpty(time)) {
-			point.setPickupDate(GPXUtilities.parseTime(time));
+			point.setPickupDate(GpxUtilities.INSTANCE.parseTime(time));
 		}
 		if (extensions.containsKey(CALENDAR_EXTENSION)) {
 			String calendarEvent = extensions.get(CALENDAR_EXTENSION);
@@ -434,16 +452,16 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public WptPt toWpt(@NonNull Context ctx) {
 		WptPt point = new WptPt();
-		point.lat = getLatitude();
-		point.lon = getLongitude();
-		point.ele = getAltitude();
-		point.time = getTimestamp();
-		point.name = getName();
-		point.desc = getDescription();
-		point.comment = getComment();
+		point.setLat(getLatitude());
+		point.setLon(getLongitude());
+		point.setEle(getAltitude());
+		point.setTime(getTimestamp());
+		point.setName(getName());
+		point.setDesc(getDescription());
+		point.setComment(getComment());
 
 		if (!Algorithms.isEmpty(getCategory())) {
-			point.category = getCategory();
+			point.setCategory(getCategory());
 		}
 		Map<String, String> extensions = point.getExtensionsToWrite();
 		extensions.putAll(getAmenityExtensions());
@@ -456,10 +474,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			point.setAddress(getAddress());
 		}
 		if (getVisitedDate() > 0) {
-			extensions.put(VISITED_DATE, GPXUtilities.formatTime(getVisitedDate()));
+			extensions.put(VISITED_DATE, GpxUtilities.INSTANCE.formatTime(getVisitedDate()));
 		}
 		if (getPickupDate() > 0) {
-			extensions.put(PICKUP_DATE, GPXUtilities.formatTime(getPickupDate()));
+			extensions.put(PICKUP_DATE, GpxUtilities.INSTANCE.formatTime(getPickupDate()));
 		}
 		if (getCalendarEvent()) {
 			extensions.put(CALENDAR_EXTENSION, "true");

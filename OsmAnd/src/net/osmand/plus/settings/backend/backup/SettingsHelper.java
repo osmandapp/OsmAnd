@@ -11,7 +11,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -27,7 +27,7 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.*;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -161,7 +161,7 @@ public abstract class SettingsHelper {
 
 	public List<SettingsItem> prepareSettingsItems(List<?> data, List<SettingsItem> settingsItems, boolean export) {
 		List<SettingsItem> result = new ArrayList<>();
-		List<QuickActionButtonState> quickActionButtons = new ArrayList<>();
+		List<ButtonStateBean> buttonStateBeans = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
@@ -177,8 +177,8 @@ public abstract class SettingsHelper {
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
 
 		for (Object object : data) {
-			if (object instanceof QuickActionButtonState) {
-				quickActionButtons.add((QuickActionButtonState) object);
+			if (object instanceof ButtonStateBean) {
+				buttonStateBeans.add((ButtonStateBean) object);
 			} else if (object instanceof PoiUIFilter) {
 				poiUIFilters.add((PoiUIFilter) object);
 			} else if (object instanceof TileSourceTemplate || object instanceof SQLiteTileSource) {
@@ -228,10 +228,10 @@ public abstract class SettingsHelper {
 				onlineRoutingEngines.add((OnlineRoutingEngine) object);
 			}
 		}
-		if (!quickActionButtons.isEmpty()) {
-			for (QuickActionButtonState buttonState : quickActionButtons) {
-				QuickActionsSettingsItem baseItem = getBaseQuickActionsSettingsItem(buttonState, settingsItems);
-				result.add(new QuickActionsSettingsItem(app, baseItem, buttonState));
+		if (!buttonStateBeans.isEmpty()) {
+			for (ButtonStateBean stateBean : buttonStateBeans) {
+				QuickActionsSettingsItem baseItem = getBaseQuickActionsSettingsItem(stateBean, settingsItems);
+				result.add(new QuickActionsSettingsItem(app, baseItem, stateBean));
 			}
 		}
 		if (!poiUIFilters.isEmpty()) {
@@ -344,12 +344,14 @@ public abstract class SettingsHelper {
 	}
 
 	@Nullable
-	private QuickActionsSettingsItem getBaseQuickActionsSettingsItem(QuickActionButtonState buttonState, List<SettingsItem> settingsItems) {
-		for (SettingsItem settingsItem : settingsItems) {
+	private QuickActionsSettingsItem getBaseQuickActionsSettingsItem(
+			@NonNull ButtonStateBean stateBean, @NonNull List<SettingsItem> items) {
+		for (SettingsItem settingsItem : items) {
 			if (settingsItem.getType() == QUICK_ACTIONS) {
 				QuickActionsSettingsItem item = (QuickActionsSettingsItem) settingsItem;
-				QuickActionButtonState state = item.getButtonState();
-				if (Algorithms.objectEquals(state.getId(), buttonState.getId()) && Algorithms.objectEquals(state.getName(), buttonState.getName())) {
+				ButtonStateBean bean = item.getStateBean();
+				if (Algorithms.objectEquals(bean.id, stateBean.id)
+						&& Algorithms.objectEquals(bean.name, stateBean.name)) {
 					return item;
 				}
 			}

@@ -2,7 +2,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,22 +11,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
+import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.shared.gpx.GpxFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -88,10 +88,10 @@ public class HistoryCard extends MapBaseCard {
 					String filePath = gpxInfo.getFilePath();
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 					if (selectedGpxFile != null) {
-						GPXFile gpxFile = selectedGpxFile.getGpxFile();
+						GpxFile gpxFile = selectedGpxFile.getGpxFile();
 						mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, true);
 					} else {
-						CallbackWithObject<GPXFile[]> callback = result -> {
+						CallbackWithObject<GpxFile[]> callback = result -> {
 							MapActivity mapActivity = getMapActivity();
 							if (mapActivity != null) {
 								mapActivity.getMapRouteInfoMenu().selectTrack(result[0], true);
@@ -105,18 +105,14 @@ public class HistoryCard extends MapBaseCard {
 				});
 			} else {
 				view = (LinearLayout) themedInflater.inflate(R.layout.search_list_item, items, false);
-				QuickSearchListAdapter.bindSearchResult(view, listItem);
+				SearchResultViewHolder.bindSearchResult(view, listItem);
 
 				ImageView icon = view.findViewById(R.id.imageView);
 				icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
 
 				HistoryEntry entry = (HistoryEntry) searchResult.object;
-				view.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						app.getTargetPointsHelper().navigateToPoint(searchResult.location, true, -1, entry.getName());
-					}
-				});
+				view.setOnClickListener(v -> app.getTargetPointsHelper().navigateToPoint(
+						searchResult.location, true, -1, entry.getName()));
 			}
 			View itemContainer = view.findViewById(R.id.searchListItemLayout);
 			itemContainer.setBackground(UiUtilities.getSelectableDrawable(context));

@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -89,7 +89,8 @@ public class WidthCardController extends BaseMultiStateCardController {
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		if (selectedState.getTag() == null) {
 			bindSummaryCard(activity, container, nightMode);
 		} else {
@@ -144,8 +145,8 @@ public class WidthCardController extends BaseMultiStateCardController {
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::widthValueSelected) {
 				@NonNull
 				@Override
-				public Limits getSliderLimits() {
-					return new Limits(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
+				public Limits<Integer> getSliderLimits() {
+					return new Limits<>(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
 				}
 			};
 		}

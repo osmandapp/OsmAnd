@@ -3,6 +3,7 @@ package net.osmand.osm;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -13,24 +14,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 
 public class MapPoiTypes {
-	private static final String OTHER_MAP_CATEGORY = "Other";
+	public static final String OTHER_MAP_CATEGORY = "Other";
 	private static MapPoiTypes DEFAULT_INSTANCE = null;
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	private String resourceName;
@@ -47,7 +36,8 @@ public class MapPoiTypes {
 	public static final String ROUTE_ARTICLE = "route_article";
 	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String CATEGORY = "category";
-	public static final String ROUTE_TRACK = "route_track";
+	public static final String ROUTE_TRACK = "route_track"; // routes:route_track (no activity)
+	public static final String ROUTES_PREFIX = "routes_"; // routes:routes_xxx (any activity type)
 	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
 	private PoiTranslator poiTranslator = null;
@@ -60,6 +50,7 @@ public class MapPoiTypes {
 	public Map<String, PoiType> topIndexPoiAdditional = new LinkedHashMap<String, PoiType>();
 	public static final String TOP_INDEX_ADDITIONAL_PREFIX = "top_index_";
 
+	private List<String> publicTransportTypes;
 
 	public MapPoiTypes(String fileName) {
 		this.resourceName = fileName;
@@ -102,6 +93,10 @@ public class MapPoiTypes {
 
 	public boolean isInit() {
 		return init;
+	}
+
+	public boolean isOtherCategory(PoiCategory poiCategory) {
+		return Objects.equals(otherCategory, poiCategory);
 	}
 
 	public PoiCategory getOtherPoiCategory() {
@@ -208,6 +203,10 @@ public class MapPoiTypes {
 	}
 
 	public AbstractPoiType getAnyPoiTypeByKey(String name) {
+		return getAnyPoiTypeByKey(name, true);
+	}
+
+	public AbstractPoiType getAnyPoiTypeByKey(String name, boolean skipAdditional) {
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory pc = categories.get(i);
 			if (pc.getKeyName().equals(name)) {
@@ -217,10 +216,35 @@ public class MapPoiTypes {
 				if (pf.getKeyName().equals(name)) {
 					return pf;
 				}
+				// search in poi additional
+				if (!skipAdditional) {
+					for (PoiType type : pf.getPoiTypes()) {
+						if (type.getKeyName().equals(name)) {
+							return type;
+						}
+						AbstractPoiType foundType = findInAdds(type.getPoiAdditionals(), name);
+						if (foundType != null) {
+							return foundType;
+						}
+					}
+				}
 			}
 			PoiType pt = pc.getPoiTypeByKeyName(name);
 			if (pt != null && !pt.isReference()) {
 				return pt;
+			}
+		}
+		return null;
+	}
+	
+	private AbstractPoiType findInAdds(List<PoiType> adds, String name) {
+		for (PoiType additional : adds) {
+			if (additional.getKeyName().equals(name)) {
+				return additional;
+			}
+			AbstractPoiType foundType = findInAdds(additional.getPoiAdditionals(), name);
+			if (foundType != null) {
+				return foundType;
 			}
 		}
 		return null;
@@ -381,14 +405,14 @@ public class MapPoiTypes {
 
 	public void initFromInputStream(InputStream is) {
 		long time = System.currentTimeMillis();
-		List<PoiType> referenceTypes = new ArrayList<PoiType>();
-		final Map<String, PoiType> allTypes = new LinkedHashMap<String, PoiType>();
-		final Map<String, List<PoiType>> categoryPoiAdditionalMap = new LinkedHashMap<String, List<PoiType>>();
-		final Map<AbstractPoiType, Set<String>> abstractTypeAdditionalCategories = new LinkedHashMap<AbstractPoiType, Set<String>>();
-		final Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
-		final Map<String, String> deprecatedTags = new LinkedHashMap<String, String>();
-		final Map<String, String> poiAdditionalCategoryIconNames = new LinkedHashMap<String, String>();
-		final List<PoiType> textPoiAdditionals = new ArrayList<PoiType>();
+		List<PoiType> referenceTypes = new ArrayList<>();
+		final Map<String, PoiType> allTypes = new LinkedHashMap<>();
+		final Map<String, List<PoiType>> categoryPoiAdditionalMap = new LinkedHashMap<>();
+		final Map<AbstractPoiType, Set<String>> abstractTypeAdditionalCategories = new LinkedHashMap<>();
+		final Map<String, PoiType> poiTypesByTag = new LinkedHashMap<>();
+		final Map<String, String> deprecatedTags = new LinkedHashMap<>();
+		final Map<String, String> poiAdditionalCategoryIconNames = new LinkedHashMap<>();
+		final List<PoiType> textPoiAdditionals = new ArrayList<>();
 
 		List<PoiCategory> categoriesList = new ArrayList<>();
 		try {
@@ -396,147 +420,167 @@ public class MapPoiTypes {
 			int tok;
 			parser.setInput(is, "UTF-8");
 			PoiCategory lastCategory = null;
-			Set<String> lastCategoryPoiAdditionalsCategories = new TreeSet<String>();
+			Set<String> lastCategoryPoiAdditionalsCategories = new TreeSet<>();
 			PoiFilter lastFilter = null;
-			Set<String> lastFilterPoiAdditionalsCategories = new TreeSet<String>();
+			Set<String> lastFilterPoiAdditionalsCategories = new TreeSet<>();
 			PoiType lastType = null;
-			Set<String> lastTypePoiAdditionalsCategories = new TreeSet<String>();
+			Set<String> lastTypePoiAdditionalsCategories = new TreeSet<>();
 			String lastPoiAdditionalCategory = null;
 			PoiCategory localOtherMapCategory = new PoiCategory(this, OTHER_MAP_CATEGORY, categoriesList.size());
 			categoriesList.add(localOtherMapCategory);
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
-					if (name.equals("poi_category")) {
-						lastCategory = new PoiCategory(this, parser.getAttributeValue("", "name"), categoriesList.size());
-						lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
-						lastCategory.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
-						lastCategory.setDefaultTag(parser.getAttributeValue("", "default_tag"));
-						if(!Algorithms.isEmpty(parser.getAttributeValue("", "poi_additional_category"))) {
-							Collections.addAll(lastCategoryPoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
-						}
-						if(!Algorithms.isEmpty(parser.getAttributeValue("", "excluded_poi_additional_category"))) {
-							lastCategory.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
-							lastCategoryPoiAdditionalsCategories.removeAll(lastCategory.getExcludedPoiAdditionalCategories());
-						}
-						categoriesList.add(lastCategory);
-					} else if (name.equals("poi_filter")) {
-						String keyName = parser.getAttributeValue("", "name");
-						String iconName = parser.getAttributeValue("", "icon");
-						PoiFilter tp = new PoiFilter(this, lastCategory, keyName, iconName);
-						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
-						lastFilter = tp;
-						lastFilterPoiAdditionalsCategories.addAll(lastCategoryPoiAdditionalsCategories);
-						if(!Algorithms.isEmpty(parser.getAttributeValue("", "poi_additional_category"))) {
-							Collections.addAll(lastFilterPoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
-						}
-						if(!Algorithms.isEmpty(parser.getAttributeValue("", "excluded_poi_additional_category"))) {
-							lastFilter.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
-							lastFilterPoiAdditionalsCategories.removeAll(lastFilter.getExcludedPoiAdditionalCategories());
-						}
-						lastCategory.addPoiType(tp);
-					} else if (name.equals("poi_reference")) {
-						PoiType tp = new PoiType(this, lastCategory, lastFilter, parser.getAttributeValue("", "name"));
-						referenceTypes.add(tp);
-						tp.setReferenceType(tp);
-						if (lastFilter != null) {
-							lastFilter.addPoiType(tp);
-						}
-						lastCategory.addPoiType(tp);
-					} else if (name.equals("poi_additional")) {
-						if (lastCategory == null) {
-							lastCategory = localOtherMapCategory;
-						}
-						PoiType baseType = parsePoiAdditional(parser, lastCategory, lastFilter, lastType, null, null,
-								lastPoiAdditionalCategory, textPoiAdditionals);
-						if ("true".equals(parser.getAttributeValue("", "lang"))) {
-							for (String lng : MapRenderingTypes.langs) {
-								parsePoiAdditional(parser, lastCategory, lastFilter, lastType, lng, baseType,
-										lastPoiAdditionalCategory, textPoiAdditionals);
-								if (baseType.isTopIndex()) {
-									topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName() + ":" + lng, baseType);
-								}
-							}
-							parsePoiAdditional(parser, lastCategory, lastFilter, lastType, "en", baseType,
-									lastPoiAdditionalCategory, textPoiAdditionals);
-							if (baseType.isTopIndex()) {
-								topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName() + ":en", baseType);
-							}
-						}
-						if (lastPoiAdditionalCategory != null) {
-							List<PoiType> categoryAdditionals = categoryPoiAdditionalMap.get(lastPoiAdditionalCategory);
-							if (categoryAdditionals == null) {
-								categoryAdditionals = new ArrayList<>();
-								categoryPoiAdditionalMap.put(lastPoiAdditionalCategory, categoryAdditionals);
-							}
-							categoryAdditionals.add(baseType);
-						}
-						if (baseType.isTopIndex()) {
-							topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName(), baseType);
-						}
-					} else if (name.equals("poi_additional_category")) {
-						if (lastPoiAdditionalCategory == null) {
-							lastPoiAdditionalCategory = parser.getAttributeValue("", "name");
-							String icon = parser.getAttributeValue("", "icon");
-							if (!Algorithms.isEmpty(icon)) {
-								poiAdditionalCategoryIconNames.put(lastPoiAdditionalCategory, icon);
-							}
-						}
-
-					} else if (name.equals("poi_type")) {
-						if (lastCategory == null) {
-							lastCategory = localOtherMapCategory;
-						}
-						if(!Algorithms.isEmpty(parser.getAttributeValue("", "deprecated_of"))){
-							String vl = parser.getAttributeValue("", "name");
-							String target = parser.getAttributeValue("", "deprecated_of");
-							deprecatedTags.put(vl, target);
-						} else {
-							lastType = parsePoiType(allTypes, parser, lastCategory, lastFilter, null, null);
-							if ("true".equals(parser.getAttributeValue("", "lang"))) {
-								for (String lng : MapRenderingTypes.langs) {
-									parsePoiType(allTypes, parser, lastCategory, lastFilter, lng, lastType);
-								}
-							}
-							lastTypePoiAdditionalsCategories.addAll(lastCategoryPoiAdditionalsCategories);
-							lastTypePoiAdditionalsCategories.addAll(lastFilterPoiAdditionalsCategories);
-							if(!Algorithms.isEmpty(parser.getAttributeValue("", "poi_additional_category"))) {
-								Collections.addAll(lastTypePoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
-							}
-							if(!Algorithms.isEmpty(parser.getAttributeValue("", "excluded_poi_additional_category"))) {
-								lastType.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
-								lastTypePoiAdditionalsCategories.removeAll(lastType.getExcludedPoiAdditionalCategories());
-							}
-						}
-					}
-				} else if (tok == XmlPullParser.END_TAG) {
-					String name = parser.getName();
-					if (name.equals("poi_filter")) {
-						if (lastFilterPoiAdditionalsCategories.size() > 0) {
-							abstractTypeAdditionalCategories.put(lastFilter, lastFilterPoiAdditionalsCategories);
-							lastFilterPoiAdditionalsCategories = new TreeSet<String>();
-						}
-						lastFilter = null;
-					} else if (name.equals("poi_type")) {
-						if (lastTypePoiAdditionalsCategories.size() > 0) {
-							abstractTypeAdditionalCategories.put(lastType, lastTypePoiAdditionalsCategories);
-							lastTypePoiAdditionalsCategories = new TreeSet<String>();
-						}
-						lastType = null;
-					} else if (name.equals("poi_category")) {
-						if (lastCategoryPoiAdditionalsCategories.size() > 0) {
-							abstractTypeAdditionalCategories.put(lastCategory, lastCategoryPoiAdditionalsCategories);
-							lastCategoryPoiAdditionalsCategories = new TreeSet<String>();
-						}
-						lastCategory = null;
-					} else if (name.equals("poi_additional_category")) {
-						lastPoiAdditionalCategory = null;
-					}
+                    switch (name) {
+                        case "poi_category" -> {
+                            lastCategory = new PoiCategory(this, parser.getAttributeValue("", "name"), categoriesList.size());
+                            lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+                            lastCategory.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
+                            lastCategory.setDefaultTag(parser.getAttributeValue("", "default_tag"));
+                            if (!Algorithms.isEmpty(parser.getAttributeValue("", "poi_additional_category"))) {
+                                Collections.addAll(lastCategoryPoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
+                            }
+                            if (!Algorithms.isEmpty(parser.getAttributeValue("", "excluded_poi_additional_category"))) {
+                                lastCategory.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
+                                lastCategory.getExcludedPoiAdditionalCategories().forEach(lastCategoryPoiAdditionalsCategories::remove);
+                            }
+                            categoriesList.add(lastCategory);
+                        }
+                        case "poi_filter" -> {
+                            String keyName = parser.getAttributeValue("", "name");
+                            String iconName = parser.getAttributeValue("", "icon");
+                            PoiFilter tp = new PoiFilter(this, lastCategory, keyName, iconName);
+                            tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+                            lastFilter = tp;
+                            lastFilterPoiAdditionalsCategories.addAll(lastCategoryPoiAdditionalsCategories);
+                            if (!Algorithms.isEmpty(parser.getAttributeValue("", "poi_additional_category"))) {
+                                Collections.addAll(lastFilterPoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
+                            }
+                            if (!Algorithms.isEmpty(parser.getAttributeValue("", "excluded_poi_additional_category"))) {
+                                lastFilter.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
+                                lastFilter.getExcludedPoiAdditionalCategories().forEach(lastFilterPoiAdditionalsCategories::remove);
+                            }
+                            if (lastCategory != null) {
+                                lastCategory.addPoiType(tp);
+                            }
+                        }
+                        case "poi_reference" -> {
+                            String keyName = parser.getAttributeValue("", "name");
+                            String iconName = parser.getAttributeValue("", "icon");
+                            PoiType tp = new PoiType(this, lastCategory, lastFilter, keyName, iconName);
+                            referenceTypes.add(tp);
+                            tp.setReferenceType(tp);
+                            if (lastFilter != null) {
+                                lastFilter.addPoiType(tp);
+                            }
+                            if (lastCategory != null) {
+                                lastCategory.addPoiType(tp);
+                            }
+                        }
+                        case "poi_additional" -> {
+                            if (lastCategory == null) {
+                                lastCategory = localOtherMapCategory;
+                            }
+                            PoiType baseType = parsePoiAdditional(parser, lastCategory, lastFilter, lastType, null, null,
+                                    lastPoiAdditionalCategory, textPoiAdditionals);
+                            if ("true".equals(parser.getAttributeValue("", "lang"))) {
+                                for (String lng : MapRenderingTypes.langs) {
+                                    parsePoiAdditional(parser, lastCategory, lastFilter, lastType, lng, baseType,
+                                            lastPoiAdditionalCategory, textPoiAdditionals);
+                                    if (baseType.isTopIndex()) {
+                                        topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName() + ":" + lng, baseType);
+                                    }
+                                }
+                                parsePoiAdditional(parser, lastCategory, lastFilter, lastType, "en", baseType,
+                                        lastPoiAdditionalCategory, textPoiAdditionals);
+                                if (baseType.isTopIndex()) {
+                                    topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName() + ":en", baseType);
+                                }
+                            }
+                            if (lastPoiAdditionalCategory != null) {
+                                List<PoiType> categoryAdditionals = categoryPoiAdditionalMap.computeIfAbsent(lastPoiAdditionalCategory, k -> new ArrayList<>());
+                                categoryAdditionals.add(baseType);
+                            }
+                            if (baseType.isTopIndex()) {
+                                topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName(), baseType);
+                            }
+                        }
+                        case "poi_additional_category" -> {
+                            if (lastPoiAdditionalCategory == null) {
+                                lastPoiAdditionalCategory = parser.getAttributeValue("", "name");
+                                String icon = parser.getAttributeValue("", "icon");
+                                if (!Algorithms.isEmpty(icon)) {
+                                    poiAdditionalCategoryIconNames.put(lastPoiAdditionalCategory, icon);
+                                }
+                            }
+                        }
+                        case "poi_type" -> {
+                            if (lastCategory == null) {
+                                lastCategory = localOtherMapCategory;
+                            }
+                            if (!Algorithms.isEmpty(parser.getAttributeValue("", "deprecated_of"))) {
+                                String vl = parser.getAttributeValue("", "name");
+                                String target = parser.getAttributeValue("", "deprecated_of");
+                                deprecatedTags.put(vl, target);
+                            } else {
+                                lastType = parsePoiType(allTypes, parser, lastCategory, lastFilter, null, null);
+                                if ("true".equals(parser.getAttributeValue("", "lang"))) {
+                                    for (String lng : MapRenderingTypes.langs) {
+                                        parsePoiType(allTypes, parser, lastCategory, lastFilter, lng, lastType);
+                                    }
+                                }
+                                lastTypePoiAdditionalsCategories.addAll(lastCategoryPoiAdditionalsCategories);
+                                lastTypePoiAdditionalsCategories.addAll(lastFilterPoiAdditionalsCategories);
+                                if (!Algorithms.isEmpty(parser.getAttributeValue("", "poi_additional_category"))) {
+                                    Collections.addAll(lastTypePoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
+                                }
+                                if (!Algorithms.isEmpty(parser.getAttributeValue("", "excluded_poi_additional_category"))) {
+                                    lastType.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
+                                    lastType.getExcludedPoiAdditionalCategories().forEach(lastTypePoiAdditionalsCategories::remove);
+                                }
+                            }
+                        }
+                        case "poi_types" -> {
+                            // just ignore the root tag of poi_types.xml
+                        }
+                        default -> log.warn("Unknown start tag encountered: " + name);
+                    }
+                } else if (tok == XmlPullParser.END_TAG) {
+                    String name = parser.getName();
+                    switch (name) {
+                        case "poi_filter" -> {
+                            if (!lastFilterPoiAdditionalsCategories.isEmpty()) {
+                                abstractTypeAdditionalCategories.put(lastFilter, lastFilterPoiAdditionalsCategories);
+                                lastFilterPoiAdditionalsCategories = new TreeSet<>();
+                            }
+                            lastFilter = null;
+                        }
+                        case "poi_type" -> {
+                            if (!lastTypePoiAdditionalsCategories.isEmpty()) {
+                                abstractTypeAdditionalCategories.put(lastType, lastTypePoiAdditionalsCategories);
+                                lastTypePoiAdditionalsCategories = new TreeSet<>();
+                            }
+                            lastType = null;
+                        }
+                        case "poi_category" -> {
+                            if (!lastCategoryPoiAdditionalsCategories.isEmpty()) {
+                                abstractTypeAdditionalCategories.put(lastCategory, lastCategoryPoiAdditionalsCategories);
+                                lastCategoryPoiAdditionalsCategories = new TreeSet<>();
+                            }
+                            lastCategory = null;
+                        }
+                        case "poi_additional_category" -> lastPoiAdditionalCategory = null;
+	                    default -> {
+		                    if (!name.equals("poi_additional") && !name.equals("poi_reference") && !name.equals("poi_types")) {
+			                    log.warn("Unknown end tag encountered: " + name);
+		                    }
+	                    }
+                    }
 				}
 			}
 
 			is.close();
-		} catch (IOException e) {
+		} catch (IOException | XmlPullParserException e) {
 			log.error("Unexpected error", e); //$NON-NLS-1$
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -544,10 +588,6 @@ public class MapPoiTypes {
 			log.error("Unexpected error", e); //$NON-NLS-1$
 			e.printStackTrace();
 			throw e;
-		} catch (XmlPullParserException e) {
-			log.error("Unexpected error", e); //$NON-NLS-1$
-			e.printStackTrace();
-			throw new RuntimeException(e);
 		}
 		for (PoiType gt : referenceTypes) {
 			PoiType pt = allTypes.get(gt.getKeyName());
@@ -585,15 +625,17 @@ public class MapPoiTypes {
 		PoiFilter lastFilter = null;
 		PoiType lastType = null;
 		PoiType ref = null;
+		String keyName = poiAdditional.getKeyName();
+		String iconNameAttribute = poiAdditional.getIconNameInternal();
 		if (parent instanceof PoiCategory) {
 			lastCategory = (PoiCategory) parent;
-			ref = new PoiType(this, lastCategory, null, poiAdditional.getKeyName());
+			ref = new PoiType(this, lastCategory, null, keyName, iconNameAttribute);
 		} else if (parent instanceof PoiFilter) {
 			lastFilter = (PoiFilter) parent;
-			ref = new PoiType(this, lastFilter.getPoiCategory(), lastFilter, poiAdditional.getKeyName());
+			ref = new PoiType(this, lastFilter.getPoiCategory(), lastFilter, keyName, iconNameAttribute);
 		} else if (parent instanceof PoiType) {
 			lastType = (PoiType) parent;
-			ref = new PoiType(this, lastType.getCategory(), lastType.getFilter(), poiAdditional.getKeyName());
+			ref = new PoiType(this, lastType.getCategory(), lastType.getFilter(), keyName, iconNameAttribute);
 		}
 		if (ref == null) {
 			return null;
@@ -610,6 +652,7 @@ public class MapPoiTypes {
 		ref.setTopVisible(poiAdditional.isTopVisible());
 		ref.setText(poiAdditional.isText());
 		ref.setOrder(poiAdditional.getOrder());
+		ref.setHidden(poiAdditional.isHidden());
 		ref.setOsmTag(poiAdditional.getOsmTag());
 		ref.setNotEditableOsm(poiAdditional.isNotEditableOsm());
 		ref.setOsmValue(poiAdditional.getOsmValue());
@@ -641,13 +684,15 @@ public class MapPoiTypes {
 		if (lang != null) {
 			otag += ":" + lang;
 		}
-		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname);
+		String iconName = parser.getAttributeValue("", "icon");
+		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname, iconName);
 		tp.setBaseLangType(langBaseType);
 		tp.setLang(lang);
 		tp.setAdditional(lastType != null ? lastType :
 			 (lastFilter != null ? lastFilter : lastCategory));
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
 		String orderStr = parser.getAttributeValue("", "order");
 		if (!Algorithms.isEmpty(orderStr)) {
 			tp.setOrder(Integer.parseInt(orderStr));
@@ -688,7 +733,8 @@ public class MapPoiTypes {
 		if (lang != null) {
 			oname += ":" + lang;
 		}
-		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname);
+		String iconName = parser.getAttributeValue("", "icon");
+		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname, iconName);
 		String otag = parser.getAttributeValue("", "tag");
 		if (lang != null) {
 			otag += ":" + lang;
@@ -705,6 +751,7 @@ public class MapPoiTypes {
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
 		String orderStr = parser.getAttributeValue("", "order");
 		if (!Algorithms.isEmpty(orderStr)) {
 			tp.setOrder(Integer.parseInt(orderStr));
@@ -768,25 +815,32 @@ public class MapPoiTypes {
 		return null;
 	}
 
-	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
-		PoiType add = null;
-		for (int i = 0; i < categories.size(); i++) {
-			PoiCategory pc = categories.get(i);
-			add = getPoiAdditionalByKey(pc, name);
+	public AbstractPoiType getPoiAdditionalType(PoiCategory category, String name) {
+		PoiType add = getPoiAdditionalByKey(category, name);
+		if (add != null) {
+			return add;
+		}
+		for (PoiFilter pf : category.getPoiFilters()) {
+			add = getPoiAdditionalByKey(pf, name);
 			if (add != null) {
 				return add;
 			}
-			for (PoiFilter pf : pc.getPoiFilters()) {
-				add = getPoiAdditionalByKey(pf, name);
-				if (add != null) {
-					return add;
-				}
+		}
+		for (PoiType p : category.getPoiTypes()) {
+			add = getPoiAdditionalByKey(p, name);
+			if (add != null) {
+				return add;
 			}
-			for (PoiType p : pc.getPoiTypes()) {
-				add = getPoiAdditionalByKey(p, name);
-				if (add != null) {
-					return add;
-				}
+		}
+		return null;
+	}
+
+	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
+		for (int i = 0; i < categories.size(); i++) {
+			PoiCategory pc = categories.get(i);
+			AbstractPoiType add = getPoiAdditionalType(pc, name);
+			if (add != null) {
+				return add;
 			}
 		}
 		return null;
@@ -845,6 +899,14 @@ public class MapPoiTypes {
 		return getBasePoiName(abstractPoiType);
 	}
 
+	public boolean hasValidTranslation(AbstractPoiType poiType) {
+		if (poiTranslator != null) {
+			String translation = poiTranslator.getTranslation(poiType);
+			return !Algorithms.isEmpty(translation);
+		}
+		return false;
+	}
+
 	public String getAllLanguagesTranslationSuffix() {
 		if (poiTranslator != null) {
 			return poiTranslator.getAllLanguagesTranslationSuffix();
@@ -900,7 +962,7 @@ public class MapPoiTypes {
 
 
 	private void initPoiType(PoiType p) {
-		if (!p.isReference()) {
+		if (!p.isReference() && !Algorithms.isEmpty(p.getRawOsmTag())) {
 			String key = null;
 			if (p.isAdditional()) {
 				key = p.isText() ? p.getRawOsmTag() :
@@ -923,11 +985,7 @@ public class MapPoiTypes {
 	}
 
 	public Amenity parseAmenity(String tag, String val, boolean relation, Map<String, String> otherTags) {
-		initPoiTypesByTag();
-		PoiType pt = poiTypesByTag.get(tag + "/" + val);
-		if (pt == null) {
-			pt = poiTypesByTag.get(tag);
-		}
+		PoiType pt = getPoiTypeByTagValue(tag, val);
 		if (pt == null || pt.isAdditional()) {
 			return null;
 		}
@@ -947,7 +1005,10 @@ public class MapPoiTypes {
 		if (!hasName && pt.isNameOnly()) {
 			return null;
 		}
-		if (relation && !pt.isRelation()) {
+		boolean multy = "multipolygon".equals(otherTags.get("type")) || "site".equals(otherTags.get("type"));
+		boolean superroute = OsmMapUtils.isSuperRoute(otherTags);
+		// example of site is scottish parliament POI
+		if (!multy && relation && !pt.isRelation() && !superroute) {
 			return null;
 		}
 
@@ -983,6 +1044,19 @@ public class MapPoiTypes {
 		return a;
 	}
 
+
+	public PoiType getPoiTypeByTagValue(String tag, String val) {
+		initPoiTypesByTag();
+		PoiType pt = poiTypesByTag.get(tag + "/" + val);
+		if (pt == null) {
+			pt = poiTypesByTag.get(tag);
+		}
+//		if (pt == null) {
+//			pt = poitypesbytag.get(tag + "/" + "null"); // required when no type="text" specified
+//		}
+		return pt;
+	}
+
 	public boolean isTextAdditionalInfo(String key, String value) {
 		if (key.startsWith("name:") || key.equals("name")) {
 			return true;
@@ -1006,5 +1080,26 @@ public class MapPoiTypes {
 
 	public boolean isTypeForbidden(String typeName) {
 		return forbiddenTypes.contains(typeName);
+	}
+
+	public List<String> getPublicTransportTypes() {
+		if (publicTransportTypes == null && init) {
+			PoiCategory category = getPoiCategoryByName("transportation");
+			if (category != null) {
+				publicTransportTypes = new ArrayList<>();
+				List<PoiFilter> filters = category.getPoiFilters();
+				for (PoiFilter poiFilter : filters) {
+					if (poiFilter.getKeyName().equals("public_transport") || poiFilter.getKeyName().equals("water_transport")) {
+						for (PoiType poiType : poiFilter.getPoiTypes()) {
+							publicTransportTypes.add(poiType.getKeyName());
+							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
+								publicTransportTypes.add(poiAdditionalType.getKeyName());
+							}
+						}
+					}
+				}
+			}
+		}
+		return publicTransportTypes;
 	}
 }

@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.favorites;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.text.Spanned;
@@ -10,8 +9,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.AndroidUtils;
 
 import java.io.File;
 import java.util.Collections;
@@ -70,18 +67,7 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void res) {
 		if (listener != null) {
-			listener.shareFavoritesFinished();
-		}
-		if (destFile.exists()) {
-			Intent intent = new Intent();
-			intent.setAction(Intent.ACTION_SEND)
-					.putExtra(Intent.EXTRA_SUBJECT, app.getString(R.string.share_fav_subject))
-					.putExtra(Intent.EXTRA_TEXT, pointsDescription)
-					.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, destFile))
-					.setType("text/plain")
-					.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			Intent chooserIntent = Intent.createChooser(intent, app.getString(R.string.share_fav_subject));
-			AndroidUtils.startActivityIfSafe(app, chooserIntent);
+			listener.shareFavoritesFinished(destFile, pointsDescription);
 		}
 	}
 
@@ -134,6 +120,6 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		void shareFavoritesStarted();
 
-		void shareFavoritesFinished();
+		void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription);
 	}
 }

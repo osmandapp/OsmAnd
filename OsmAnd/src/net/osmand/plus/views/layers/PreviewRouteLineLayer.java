@@ -8,14 +8,7 @@ import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
@@ -23,14 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
-import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
@@ -43,8 +33,11 @@ import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.shared.ColorPalette;
+import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.routing.RouteColorize;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -141,7 +134,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		points.add(new GeometryWayPoint(points.size(), endX, endY));
 
 		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
-				true, directionArrowsColor, routeColoringType, routeInfoAttribute, routeGradientPalette);
+				shouldShowDirectionArrows(), getDirectionArrowsColor(), routeColoringType, routeInfoAttribute, routeGradientPalette);
 		fillPreviewLineArrays(points);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		previewLineGeometry.drawRouteSegment(tileBox, canvas, points, 0);
@@ -177,6 +170,12 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		canvas.rotate(90, centerX, centerY);
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		previewIcon = null;
+	}
+
 	private void fillPreviewLineArrays(List<GeometryWayPoint> points) {
 		fillDistancesAngles(points);
 		if (routeColoringType.isSolidSingleColor()) {
@@ -200,7 +199,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 
 	private void fillAltitudeGradientArrays(List<GeometryWayPoint> points) {
-		int[] colors = ColorPalette.COLORS;
+		int[] colors = ColorPalette.Companion.getCOLORS();
 		GeometryGradientWayStyle<?> style = null;
 		for (int i = 1; i < points.size(); i++) {
 			style = previewLineGeometry.getGradientWayStyle();
@@ -215,7 +214,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private void fillSlopeGradientArrays(List<GeometryWayPoint> points) {
-		ColorPalette previewPalette = ColorPalette.MIN_MAX_PALETTE;
+		ColorPalette previewPalette = ColorPalette.Companion.getMIN_MAX_PALETTE();
 		GradientScaleType gradientScaleType = routeColoringType.toGradientScaleType();
 		if (gradientScaleType != null) {
 			RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
@@ -223,7 +222,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		}
 		List<Integer> palette = new ArrayList<>();
 		for (ColorPalette.ColorValue colorValue : previewPalette.getColors()) {
-			palette.add(colorValue.clr);
+			palette.add(colorValue.getClr());
 		}
 		int ratiosAmount = palette.size() - 1;
 		double lengthRatio = 1d / palette.size();
@@ -243,7 +242,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				style.nextColor = colors.get(i);
 			} else {
 				double coeff = currDist / (currDist + nextDist);
-				style.nextColor = ColorPalette.getIntermediateColor(colors.get(i - 1), colors.get(i + 1), coeff);
+				style.nextColor = ColorPalette.Companion.getIntermediateColor(colors.get(i - 1), colors.get(i + 1), coeff);
 			}
 		}
 		points.get(points.size() - 1).style = points.get(points.size() - 2).style;
@@ -442,7 +441,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		if (index == 0) {
 			return colors[0];
 		} else if (index > 0 && index < colors.length) {
-			return ColorPalette.getIntermediateColor(colors[index - 1], colors[index], coeff);
+			return ColorPalette.Companion.getIntermediateColor(colors[index - 1], colors[index], coeff);
 		} else if (index == colors.length) {
 			return colors[index - 1];
 		}
@@ -535,7 +534,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) (style);
 				int startColor = gradientStyle.currColor;
 				int endColor = gradientStyle.nextColor;
-				lineColor = ColorPalette.getIntermediateColor(startColor, endColor, offset);
+				lineColor = ColorPalette.Companion.getIntermediateColor(startColor, endColor, offset);
 			} else {
 				 lineColor = style.getColor(getRouteLineColor());
 			}

@@ -125,6 +125,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		if (chip.contentDescription != null) {
 			button.setContentDescription(chip.contentDescription);
 		}
+		chip.boundView = button;
 	}
 
 	@ColorInt

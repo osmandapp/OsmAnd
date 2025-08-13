@@ -20,7 +20,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
@@ -73,7 +74,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private ImportHelper importHelper;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 
 	private View buttonsShadow;
 	private ImageButton sortButton;
@@ -201,7 +202,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackPaths(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
-			if (list.size() > 0) {
+			if (!list.isEmpty()) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
 				tracksCard = new TracksToFollowCard(mapActivity, this, list, defaultCategory);
 				tracksCard.setListener(this);
@@ -263,15 +264,15 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			QuadRect rect = mapActivity.getMapRouteInfoMenu().getRouteRect(mapActivity);
 
 			if (gpxFile != null) {
-				QuadRect gpxRect = gpxFile.getRect();
+				KQuadRect gpxRect = gpxFile.getRect();
 
-				rect.left = Math.min(rect.left, gpxRect.left);
-				rect.right = Math.max(rect.right, gpxRect.right);
-				rect.top = Math.max(rect.top, gpxRect.top);
-				rect.bottom = Math.min(rect.bottom, gpxRect.bottom);
+				rect.left = Math.min(rect.left, gpxRect.getLeft());
+				rect.right = Math.max(rect.right, gpxRect.getRight());
+				rect.top = Math.max(rect.top, gpxRect.getTop());
+				rect.bottom = Math.min(rect.bottom, gpxRect.getBottom());
 			}
 
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 
@@ -396,11 +397,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			String filePath = gpxInfo.getFilePath();
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 			if (selectedGpxFile != null) {
-				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				selectTrackToFollow(gpxFile, true);
 				updateSelectionMode(gpxFile.getNonEmptySegmentsCount() > 1);
 			} else {
-				CallbackWithObject<GPXFile[]> callback = result -> {
+				CallbackWithObject<GpxFile[]> callback = result -> {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
 						selectTrackToFollow(result[0], true);
@@ -415,7 +416,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	private void selectTrackToFollow(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
+	private void selectTrackToFollow(@NonNull GpxFile gpxFile, boolean showSelectionDialog) {
 		this.gpxFile = gpxFile;
 
 		MapActivity mapActivity = getMapActivity();
@@ -448,7 +449,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				Uri uri = data.getData();
 				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile gpxFile) {
+					public void onSaveComplete(boolean success, GpxFile gpxFile) {
 						if (success) {
 							selectTrackToFollow(gpxFile, true);
 							updateSelectionMode(false);
@@ -553,7 +554,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				if (!mapActivity.isChangingConfigurations()) {
 					mapActivity.getMapRouteInfoMenu().cancelSelectionFromTracks();
 				}
-				mapActivity.getMapLayers().getMapActionsHelper().showRouteInfoControlDialog();
+				mapActivity.getMapActions().showRouteInfoControlDialog();
 			}
 		} catch (Exception e) {
 			log.error(e);
@@ -566,7 +567,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	@Override
-	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
+	public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 		app.getSettings().GPX_SEGMENT_INDEX.set(selectedSegment);
 		selectTrackToFollow(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
@@ -579,7 +580,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 
 	@Override
-	public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+	public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 		app.getSettings().GPX_ROUTE_INDEX.set(selectedRoute);
 		selectTrackToFollow(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();

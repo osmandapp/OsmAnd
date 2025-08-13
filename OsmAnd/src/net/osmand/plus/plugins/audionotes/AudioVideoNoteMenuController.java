@@ -1,28 +1,31 @@
 package net.osmand.plus.plugins.audionotes;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
-
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording mRecording;
 	private final AudioVideoNotesPlugin mPlugin;
 	private boolean mIsFileAvailable;
 
-	public AudioVideoNoteMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull Recording recording) {
+	public AudioVideoNoteMenuController(@NonNull MapActivity mapActivity,
+			@NonNull PointDescription pointDescription, @NonNull Recording recording) {
 		super(new AudioVideoNoteMenuBuilder(mapActivity, recording), pointDescription, mapActivity);
 		this.mRecording = recording;
 		mPlugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
@@ -30,7 +33,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		builder.setShowTitleIfTruncated(false);
 
 		if (mIsFileAvailable) {
-			leftTitleButtonController = new TitleButtonController() {
+			leftTitleButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					if (mPlugin != null) {
@@ -46,7 +49,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 				}
 			};
 
-			rightTitleButtonController = new TitleButtonController() {
+			rightTitleButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
@@ -186,26 +189,25 @@ public class AudioVideoNoteMenuController extends MenuController {
 	public void share(LatLon latLon, String title, String address) {
 		MapActivity mapActivity = getMapActivity();
 		if (mIsFileAvailable && mapActivity != null) {
-			String path = mRecording.getFile().getAbsolutePath();
-			MediaScannerConnection.scanFile(mapActivity, new String[] {path},
-					null, (p, uri) -> {
-						MapActivity activity = getMapActivity();
-						if (activity != null) {
-							Intent shareIntent = new Intent(Intent.ACTION_SEND);
-							if (mRecording.isPhoto()) {
-								shareIntent.setType("image/*");
-							} else if (mRecording.isAudio()) {
-								shareIntent.setType("audio/*");
-							} else if (mRecording.isVideo()) {
-								shareIntent.setType("video/*");
-							}
-							shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-							shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-							Intent chooserIntent = Intent.createChooser(shareIntent,
-									activity.getString(R.string.share_note));
-							AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
-						}
-					});
+			String type = null;
+			if (mRecording.isPhoto()) {
+				type = "image/*";
+			} else if (mRecording.isAudio()) {
+				type = "audio/*";
+			} else if (mRecording.isVideo()) {
+				type = "video/*";
+			}
+
+			File file = mRecording.getFile().getAbsoluteFile();
+			OsmandApplication app = getApplication();
+
+			new NativeShareDialogBuilder()
+					.addFileWithSaveAction(file, app, mapActivity, false)
+					.setChooserTitle(getString(R.string.share_note))
+					.setExtraStream(AndroidUtils.getUriForFile(app, file))
+					.setType(type)
+					.setNewDocument(true)
+					.build(app);
 		} else {
 			super.share(latLon, title, "");
 		}

@@ -80,7 +80,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 		@Override
 		public SingleSkImage getImageBitmap(boolean isFullSize) {
-			Bitmap bitmap = null;
+			Bitmap bitmap;
 			if (!osmNote.isOpened() && !showClosed) {
 				return SwigUtilities.nullSkImage();
 			}
@@ -189,7 +189,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
-		if (isMapRendererLost()) {
+		if (OsmandMapLayer.isMapRendererLost(ctx)) {
 			return new QListMapTiledCollectionPoint();
 		}
 
@@ -204,7 +204,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			start[0] = System.currentTimeMillis();
 		});
 		while (System.currentTimeMillis() - start[0] < layerData.DATA_REQUEST_TIMEOUT) {
-			if (isMapRendererLost()) {
+			if (OsmandMapLayer.isMapRendererLost(ctx)) {
 				return new QListMapTiledCollectionPoint();
 			}	
 			synchronized (dataReadyCallback.getSync()) {
@@ -219,7 +219,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		}
 		layerData.removeDataReadyCallback(dataReadyCallback);
 
-		if (isMapRendererLost()) {
+		if (OsmandMapLayer.isMapRendererLost(ctx)) {
 			return new QListMapTiledCollectionPoint();
 		}
 
@@ -283,9 +283,5 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	@Override
 	public PointI getPinIconOffset() {
 		return offset;
-	}
-
-	private boolean isMapRendererLost() {
-		return !((OsmandApplication) ctx.getApplicationContext()).getOsmandMap().getMapView().hasMapRenderer();
 	}
 }

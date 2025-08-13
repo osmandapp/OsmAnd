@@ -93,7 +93,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment impleme
 
 		progressBar = view.findViewById(R.id.progress_bar);
 
-		adapter = new BackupTypesAdapter(app, this, cloudRestore, nightMode);
+		adapter = new BackupTypesAdapter(view.getContext(), this, cloudRestore, nightMode);
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 
 		ExpandableListView expandableList = view.findViewById(R.id.list);

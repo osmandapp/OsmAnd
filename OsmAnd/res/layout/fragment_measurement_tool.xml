@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -206,7 +206,7 @@
                         android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
                         android:text="@string/shared_string_options"
                         android:textColor="?attr/color_dialog_buttons"
-                        osmand:typeface="@string/font_roboto_medium"/>
+                        app:typefaceWeight="medium"/>
                 </FrameLayout>
 
                 <ImageButton
@@ -274,7 +274,7 @@
                     android:padding="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_cancel"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium"/>
+                    app:typefaceWeight="medium"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -295,7 +295,7 @@
                     android:padding="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_cancel"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium"/>
+                    app:typefaceWeight="medium"/>
 
                 <View
                     android:layout_width="0dp"

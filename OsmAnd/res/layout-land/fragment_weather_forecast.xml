@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -26,11 +26,11 @@
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:background="?attr/actionModeBackground"
-				osmand:contentInsetEnd="0dp"
-				osmand:contentInsetLeft="0dp"
-				osmand:contentInsetRight="0dp"
-				osmand:contentInsetStart="0dp"
-				osmand:elevation="2dp">
+				app:contentInsetEnd="0dp"
+				app:contentInsetLeft="0dp"
+				app:contentInsetRight="0dp"
+				app:contentInsetStart="0dp"
+				app:elevation="2dp">
 
 				<androidx.appcompat.widget.Toolbar
 					android:id="@+id/toolbar"
@@ -38,8 +38,8 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:fitsSystemWindows="false"
 					android:gravity="center_vertical"
-					osmand:menu="@menu/weather_forecast_menu"
-					osmand:title="@string/shared_string_weather" />
+					app:menu="@menu/weather_forecast_menu"
+					app:title="@string/shared_string_weather" />
 
 			</com.google.android.material.appbar.AppBarLayout>
 
@@ -52,11 +52,17 @@
 	<FrameLayout
 		android:id="@+id/map_controls_container"
 		android:layout_width="0dp"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_gravity="bottom"
 		android:layout_marginHorizontal="@dimen/content_padding_half"
 		android:layout_marginBottom="@dimen/content_padding_small_half"
 		android:layout_weight="1">
+
+		<include
+			layout="@layout/map_compass_button"
+			android:layout_width="@dimen/map_small_button_size"
+			android:layout_height="@dimen/map_small_button_size"
+			android:layout_marginStart="@dimen/map_button_spacing" />
 
 		<include
 			layout="@layout/map_ruler"
@@ -71,24 +77,13 @@
 			android:layout_marginStart="@dimen/map_button_spacing"
 			android:orientation="vertical">
 
-			<ImageButton
-				android:id="@+id/raster_layers_btn"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/zoomIn"
-				android:src="@drawable/ic_layer_top"
-				tools:src="@drawable/ic_layer_top" />
+			<include layout="@layout/weather_layers_button" />
 
-			<ImageButton
-				android:id="@+id/contour_layers_btn"
+			<include
+				layout="@layout/weather_contours_button"
 				android:layout_width="@dimen/map_button_size"
 				android:layout_height="@dimen/map_button_size"
-				android:layout_marginTop="@dimen/map_button_spacing"
-				android:background="@drawable/btn_circle"
-				android:contentDescription="@string/zoomOut"
-				android:src="@drawable/ic_plugin_srtm"
-				tools:src="@drawable/ic_plugin_srtm" />
+				android:layout_marginTop="@dimen/map_button_spacing" />
 
 		</LinearLayout>
 

@@ -2,6 +2,7 @@ package net.osmand.plus.auto.screens
 
 import android.text.SpannableString
 import android.text.Spanned
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.car.app.CarContext
 import androidx.car.app.model.Action
 import androidx.car.app.model.ActionStrip
@@ -15,16 +16,14 @@ import androidx.car.app.model.Row
 import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.R
-import net.osmand.plus.auto.TripHelper
-import net.osmand.plus.poi.PoiUIFilter
-import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.auto.TripUtils
+import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.views.layers.base.OsmandMapLayer
@@ -38,34 +37,24 @@ import net.osmand.util.MapUtils
 class POIScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val group: PoiUIFilter
+    private val categoryResult: SearchResult
 ) : BaseSearchScreen(carContext), LifecycleObserver {
     private lateinit var itemList: ItemList
     private var searchRadius = 0.0
     private var initialCompassMode: CompassMode? = null
 
     init {
-        loadPOI()
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) {
-                super.onDestroy(owner)
-                app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
-                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = null
-                app.osmandMap.mapView.backToLocation()
-                initialCompassMode?.let {
-                    app.mapViewTrackingUtilities.switchCompassModeTo(it)
-                }
-            }
-
-            override fun onStart(owner: LifecycleOwner) {
-                super.onStart(owner)
-                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate =
-                    OsmandMapLayer.CustomMapObjects()
-            }
-        })
+        lifecycle.addObserver(this)
     }
 
-    override fun onGetTemplate(): Template {
+    override fun shouldRestoreMapState() = true
+
+    override fun onFirstGetTemplate() {
+        super.onFirstGetTemplate()
+        loadPOI()
+    }
+
+    override fun getTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         if (loading) {
             templateBuilder.setLoading(true)
@@ -73,8 +62,12 @@ class POIScreen(
             templateBuilder.setLoading(false)
             templateBuilder.setItemList(itemList)
         }
+        var title = QuickSearchListItem.getName(app, categoryResult)
+        if (Algorithms.isEmpty(title)) {
+            title = QuickSearchListItem.getTypeName(app, categoryResult)
+        }
         return templateBuilder
-            .setTitle(group.name)
+            .setTitle(title)
             .setActionStrip(ActionStrip.Builder()
                 .addAction(createSearchAction())
                 .build())
@@ -103,7 +96,7 @@ class POIScreen(
             if (resultsCount == 0) {
                 this.itemList = withNoResults(ItemList.Builder()).build()
             } else {
-                var builder = ItemList.Builder();
+                val builder = ItemList.Builder()
                 setupPOI(builder, searchResults)
                 this.itemList = builder.build()
             }
@@ -116,14 +109,14 @@ class POIScreen(
         val mapPoint = ArrayList<Amenity>()
         val mapRect = QuadRect()
         searchResults?.let {
-            val searchResultsSize = searchResults.size
-            val limitedSearchResults =
-                searchResults.subList(0, searchResultsSize.coerceAtMost(contentLimit - 1))
-            if (!Algorithms.isEmpty(limitedSearchResults)) {
-                initialCompassMode = app.settings.compassMode
-                app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
-            }
-            for (point in limitedSearchResults) {
+            var counter = 0
+            for (point in searchResults) {
+                if (point.location == null) {
+                    continue
+                }
+                if (counter >= contentLimit) {
+                    break
+                }
                 if (point.`object` is Amenity) {
                     val amenity = point.`object` as Amenity
                     mapPoint.add(amenity)
@@ -131,12 +124,13 @@ class POIScreen(
                     Algorithms.extendRectToContainPoint(mapRect, latLon.longitude, latLon.latitude)
                 }
                 val title = point.localeName
-                var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
+                var groupIcon = QuickSearchListItem.getIcon(app, point)
                 if (groupIcon == null) {
-                    groupIcon = app.getDrawable(R.drawable.mx_special_custom_category)
+                    groupIcon = AppCompatResources.getDrawable(app, R.drawable.mx_special_custom_category)
                 }
-                val icon = CarIcon.Builder(
-                    IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon))).build()
+                val icon = if (groupIcon != null) CarIcon.Builder(
+                    IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon)))
+                    .build() else null
                 val description =
                     if (point.alternateName != null) point.alternateName else ""
                 val dist = MapUtils.getDistance(
@@ -144,11 +138,10 @@ class POIScreen(
                     location.latitude, location.longitude)
                 val address =
                     SpannableString(if (Algorithms.isEmpty(description)) " " else "  • $description")
-                val distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist))
+                val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist))
                 address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
-                listBuilder.addItem(Row.Builder()
+                val rowBuilder = Row.Builder()
                     .setTitle(title)
-                    .setImage(icon)
                     .addText(address)
                     .setOnClickListener { onClickSearchResult(point) }
                     .setMetadata(
@@ -157,7 +150,13 @@ class POIScreen(
                                 CarLocation.create(
                                     point.location.latitude,
                                     point.location.longitude)).build()).build())
-                    .build())
+                icon?.let { rowBuilder.setImage(it) }
+                listBuilder.addItem(rowBuilder.build())
+                counter++
+            }
+            if (counter > 0) {
+                initialCompassMode = app.settings.compassMode
+                app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
             }
         }
         adjustMapToRect(location, mapRect)
@@ -165,14 +164,8 @@ class POIScreen(
     }
 
     private fun loadPOI() {
-        val objectLocalizedName = group.name;
-        val sr = SearchResult()
-        sr.localeName = objectLocalizedName
-        sr.`object` = group
-        sr.priority = SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY.toDouble()
-        sr.priorityDistance = searchRadius
-        sr.objectType = ObjectType.POI_TYPE
-        searchHelper.completeQueryWithObject(sr)
+        categoryResult.priorityDistance = searchRadius
+        searchHelper?.completeQueryWithObject(categoryResult)
         loading = true
     }
 
@@ -183,4 +176,19 @@ class POIScreen(
         result.`object` = point.`object`
         openRoutePreview(settingsAction, result)
     }
+
+	override fun onDestroy(owner: LifecycleOwner) {
+		super.onDestroy(owner)
+		app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
+		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = null
+		app.osmandMap.mapView.backToLocation()
+		initialCompassMode?.let {
+			app.mapViewTrackingUtilities.switchCompassModeTo(it)
+		}
+	}
+
+	override fun onCreate(owner: LifecycleOwner) {
+		super.onCreate(owner)
+		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = OsmandMapLayer.CustomMapObjects()
+	}
 }

@@ -19,7 +19,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MultiProfileGeometryWayContext extends GeometryWayContext {
+public class MultiProfileGeometryWayContext extends CommonGeometryWayContext {
 
 	@DrawableRes
 	private static final int STRAIGHT_LINE_ICON_RES = R.drawable.ic_action_split_interval;

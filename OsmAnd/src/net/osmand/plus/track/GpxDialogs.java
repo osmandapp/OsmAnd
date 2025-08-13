@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -25,8 +24,10 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -39,14 +40,15 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,14 +60,14 @@ public class GpxDialogs {
 
 	public static void selectGPXFile(@NonNull FragmentActivity activity, boolean showCurrentGpx,
 	                                 boolean multipleChoice,
-	                                 CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                 CallbackWithObject<GpxFile[]> callbackWithObject,
 	                                 boolean nightMode) {
 		int dialogThemeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, null, false);
 		if (list.isEmpty()) {
-			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.gpx_files_not_found);
 		}
 		if (!list.isEmpty() || showCurrentGpx) {
 			if (showCurrentGpx) {
@@ -88,7 +90,7 @@ public class GpxDialogs {
 	                                              boolean needSelectItems) {
 		for (GPXInfo gpxInfo : allGpxFiles) {
 			adapter.addItem(new ContextMenuItem(null)
-					.setTitle(GpxUiHelper.getGpxTitle(gpxInfo.getFileName()))
+					.setTitle(GpxHelper.INSTANCE.getGpxTitle(gpxInfo.getFileName()))
 					.setSelected(needSelectItems && gpxInfo.isSelected())
 					.setIcon(R.drawable.ic_action_polygom_dark));
 		}
@@ -97,7 +99,7 @@ public class GpxDialogs {
 	private static void createDialog(@NonNull FragmentActivity activity,
 	                                 boolean showCurrentGpx,
 	                                 boolean multipleChoice,
-	                                 CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                 CallbackWithObject<GpxFile[]> callbackWithObject,
 	                                 List<GPXInfo> gpxInfoList,
 	                                 ContextMenuAdapter adapter,
 	                                 int themeRes,
@@ -123,7 +125,7 @@ public class GpxDialogs {
 
 			private GpxDataItem getDataItem(GPXInfo info) {
 				return app.getGpxDbHelper().getItem(
-						new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()),
+						new KFile(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR), info.getFileName()),
 						gpxDataItemCallback);
 			}
 
@@ -141,7 +143,7 @@ public class GpxDialogs {
 				GPXInfo info = gpxInfoList.get(position);
 				boolean currentlyRecordingTrack = showCurrentGpx && position == 0;
 
-				GPXTrackAnalysis analysis = null;
+				GpxTrackAnalysis analysis = null;
 				if (currentlyRecordingTrack) {
 					analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 				} else {
@@ -188,7 +190,7 @@ public class GpxDialogs {
 		if (multipleChoice) {
 			builder.setTitle(R.string.show_gpx);
 			builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-				GPXFile currentGPX = null;
+				GpxFile currentGPX = null;
 				//clear all previously selected files before adding new one
 				if (app.getSelectedGpxHelper() != null) {
 					app.getSelectedGpxHelper().clearAllGpxFilesToShow(false);
@@ -233,8 +235,8 @@ public class GpxDialogs {
 				item.setSelected(!item.getSelected());
 				alertDialogAdapter.notifyDataSetInvalidated();
 				if (position == 0 && showCurrentGpx && item.getSelected()) {
-					OsmandMonitoringPlugin monitoringPlugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
-					if (monitoringPlugin == null) {
+					OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
+					if (plugin == null) {
 						AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 						confirm.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 							Bundle params = new Bundle();
@@ -244,8 +246,8 @@ public class GpxDialogs {
 						confirm.setNegativeButton(R.string.shared_string_cancel, null);
 						confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
 						confirm.show();
-					} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-						monitoringPlugin.askShowTripRecordingDialog(activity);
+					} else if (!plugin.isRecordingTrack()) {
+						plugin.askShowTripRecordingDialog(activity);
 					}
 				}
 			} else {
@@ -257,7 +259,7 @@ public class GpxDialogs {
 					String filePath = gpxInfo.getFilePath();
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 					if (selectedGpxFile != null) {
-						callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
+						callbackWithObject.processResult(new GpxFile[] {selectedGpxFile.getGpxFile()});
 					} else {
 						String fileName = gpxInfo.getFileName();
 						GpxUiHelper.loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
@@ -330,12 +332,12 @@ public class GpxDialogs {
 				ImportHelper importHelper = mapActivity.getImportHelper();
 				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile gpxFile) {
+					public void onSaveComplete(boolean success, GpxFile gpxFile) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
 							GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
-							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.getPath());
 						}
 						importHelper.setGpxImportListener(null);
 					}
@@ -352,7 +354,7 @@ public class GpxDialogs {
 				mapActivity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 				mapActivity.registerActivityResultListener(new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, listener));
 			} catch (ActivityNotFoundException e) {
-				Toast.makeText(mapActivity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+				AndroidUtils.getApp(activity).showToastMessage(R.string.no_activity_for_intent);
 			}
 		}
 	}
@@ -403,7 +405,7 @@ public class GpxDialogs {
 			if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
 				updateItemsProc.run();
 			}
-			app.runMessageInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
+			app.runInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
 		}
 	}
 }

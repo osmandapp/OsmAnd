@@ -3,14 +3,15 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.plus.track.GpxSplitType.DISTANCE;
 import static net.osmand.plus.track.GpxSplitType.NO_SPLIT;
 import static net.osmand.plus.track.GpxSplitType.TIME;
+import static net.osmand.plus.track.GpxSplitType.UPHILL_DOWNHILL;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.plus.R;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
@@ -22,12 +23,13 @@ public class TrackDisplayGroup extends GpxDisplayGroup {
 
 	private double splitDistance = -1;
 	private int splitTime = -1;
+	private boolean uphillDownhill = false;
 
-	public TrackDisplayGroup(@NonNull GPXFile gpxFile, @NonNull Track track, boolean isGeneralTrack) {
+	public TrackDisplayGroup(@NonNull GpxFile gpxFile, @NonNull Track track, boolean isGeneralTrack) {
 		this(gpxFile, track, isGeneralTrack, -1);
 	}
 
-	public TrackDisplayGroup(@NonNull GPXFile gpxFile, @NonNull Track track, boolean isGeneralTrack, int trackIndex) {
+	public TrackDisplayGroup(@NonNull GpxFile gpxFile, @NonNull Track track, boolean isGeneralTrack, int trackIndex) {
 		super(gpxFile, trackIndex);
 		this.track = track;
 		this.isGeneralTrack = isGeneralTrack;
@@ -46,8 +48,8 @@ public class TrackDisplayGroup extends GpxDisplayGroup {
 	public void applyName(@NonNull Context context, @NonNull String name) {
 		setGpxName(name);
 		int trackIndex = getIndex();
-		GPXFile gpxFile = getGpxFile();
-		String trackIndexStr = trackIndex == -1 || gpxFile.tracks.size() == 1 ? "" : String.valueOf(trackIndex + 1);
+		GpxFile gpxFile = getGpxFile();
+		String trackIndexStr = trackIndex == -1 || gpxFile.getTracks().size() == 1 ? "" : String.valueOf(trackIndex + 1);
 		setName(context.getString(R.string.gpx_selection_track, name, trackIndexStr));
 	}
 
@@ -63,6 +65,10 @@ public class TrackDisplayGroup extends GpxDisplayGroup {
 		return splitTime > 0;
 	}
 
+	public boolean isSplitUphillDownhill() {
+		return uphillDownhill;
+	}
+
 	public int getSplitTime() {
 		return splitTime;
 	}
@@ -72,12 +78,19 @@ public class TrackDisplayGroup extends GpxDisplayGroup {
 		if (splitParams.splitType == NO_SPLIT) {
 			splitDistance = -1;
 			splitTime = -1;
+			uphillDownhill = false;
 		} else if (splitParams.splitType == DISTANCE) {
 			splitDistance = splitParams.splitInterval;
 			splitTime = -1;
+			uphillDownhill = false;
 		} else if (splitParams.splitType == TIME) {
 			splitDistance = -1;
 			splitTime = (int) splitParams.splitInterval;
+			uphillDownhill = false;
+		} else if (splitParams.splitType == UPHILL_DOWNHILL) {
+			splitDistance = -1;
+			splitTime = (int) splitParams.splitInterval;
+			uphillDownhill = true;
 		}
 	}
 
@@ -89,7 +102,7 @@ public class TrackDisplayGroup extends GpxDisplayGroup {
 
 	@Override
 	@NonNull
-	protected GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile) {
+	protected GpxDisplayGroup newInstance(@NonNull GpxFile gpxFile) {
 		return new TrackDisplayGroup(gpxFile, track, isGeneralTrack, getIndex());
 	}
 

@@ -6,10 +6,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.ColoringPurpose;
-import net.osmand.plus.track.GradientScaleType;
-import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.shared.gpx.ColoringPurpose;
+import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
 import java.util.Arrays;
@@ -134,6 +135,20 @@ public enum ColoringType {
 			return ALTITUDE;
 		} else if (type == GradientScaleType.SLOPE) {
 			return SLOPE;
+		}
+		return null;
+	}
+
+	@Nullable
+	public static ColoringType valueOf(@Nullable Gpx3DWallColorType type) {
+		if (type == Gpx3DWallColorType.SPEED) {
+			return SPEED;
+		} else if (type == Gpx3DWallColorType.ALTITUDE) {
+			return ALTITUDE;
+		} else if (type == Gpx3DWallColorType.SLOPE) {
+			return SLOPE;
+		} else if (type == Gpx3DWallColorType.SOLID) {
+			return TRACK_SOLID;
 		}
 		return null;
 	}

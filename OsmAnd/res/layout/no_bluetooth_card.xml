@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginTop="@dimen/content_padding_small"
@@ -34,8 +34,7 @@
 				android:text="@string/ant_plus_bluetooth_off"
 				android:textColor="?android:textColor"
 				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="bold"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:typefaceWeight="medium" />
 
 			<TextView
 				android:id="@+id/no_bluetooth_description"
@@ -48,7 +47,7 @@
 				android:text="@string/ant_plus_bluetooth_off_description"
 				android:textColor="?android:textColor"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:typefaceWeight="medium" />
 
 		</LinearLayout>
 

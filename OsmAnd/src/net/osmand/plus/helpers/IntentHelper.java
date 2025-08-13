@@ -2,10 +2,10 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
@@ -27,10 +27,11 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.plus.mapcontextmenu.editors.FavoriteAppearanceFragment;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -45,21 +46,23 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.EditFavoriteGroupDialogFragment;
+import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -95,6 +98,7 @@ public class IntentHelper {
 	private static final String URL_PARAMETER_TOKEN = "token";
 	private static final String URL_PARAMETER_MODE = "profile";
 	private static final String URL_PARAMETER_INTERMEDIATE_POINTS = "via";
+	public static final int REQUEST_CODE_CREATE_FILE = 1101;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -525,15 +529,18 @@ public class IntentHelper {
 				}
 				clearIntent(intent);
 			}
-			if (intent.hasExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY)) {
-				String groupName = intent.getStringExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY);
-				FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, groupName));
+			if (intent.hasExtra(KEY_SAVE_FILE_NAME)) {
+				String filePath = intent.getStringExtra("file_path");
+				if (Algorithms.isEmpty(filePath)) {
+					return;
+				}
+				File fileToSave = new File(filePath);
 
-				PointsGroup pointsGroup = favoriteGroup != null ? favoriteGroup.toPointsGroup(app) : null;
-				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				FavouriteGroupEditorFragment.showInstance(manager, pointsGroup, null, true);
+				Intent createFileIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+				createFileIntent.setType("*/*");
+				createFileIntent.putExtra(Intent.EXTRA_TITLE, fileToSave.getName());
 
-				clearIntent(intent);
+				AndroidUtils.startActivityForResultIfSafe(mapActivity, createFileIntent, REQUEST_CODE_CREATE_FILE);
 			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
@@ -557,13 +564,12 @@ public class IntentHelper {
 				clearIntent(intent);
 			}
 			Bundle extras = intent.getExtras();
-			if (extras != null && intent.hasExtra(PRESELECTED_TRACKS_TAB_NAME) && intent.hasExtra(PRESELECTED_TRACKS_TAB_TYPE)) {
-				String name = extras.getString(PRESELECTED_TRACKS_TAB_NAME, TrackTabType.ALL.name());
+			if (extras != null && intent.hasExtra(PRESELECTED_TRACKS_TAB_ID)) {
+				String id = extras.getString(PRESELECTED_TRACKS_TAB_ID, TrackTabType.ALL.name());
 				String callingFragmentTag = extras.getString(CALLING_FRAGMENT_TAG, null);
-				TrackTabType type = AndroidUtils.getSerializable(extras, PRESELECTED_TRACKS_TAB_TYPE, TrackTabType.class);
 				boolean selectAllItems = intent.getBooleanExtra(SELECT_ALL_ITEMS_ON_TAB, false);
 
-				PreselectedTabParams params = new PreselectedTabParams(name, type != null ? type : TrackTabType.ALL, selectAllItems);
+				PreselectedTabParams params = new PreselectedTabParams(id, selectAllItems);
 				TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), params, callingFragmentTag);
 				clearIntent(intent);
 			}
@@ -579,8 +585,16 @@ public class IntentHelper {
 				BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				clearIntent(intent);
 			}
+			if (intent.hasExtra(GpxNotification.OSMAND_START_GPX_SERVICE_ACTION)) {
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
+				if (plugin != null) {
+					plugin.startGPXMonitoring(null);
+					plugin.updateWidgets();
+				}
+				clearIntent(intent);
+			}
 			if (intent.getExtras() != null) {
-				if (extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
+				if (extras != null && extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
 					String featureValue = extras.getString(ChoosePlanFragment.CHOOSE_PLAN_FEATURE);
 					if (!Algorithms.isEmpty(featureValue)) {
 						try {

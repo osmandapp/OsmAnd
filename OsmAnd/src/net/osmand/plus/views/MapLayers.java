@@ -33,6 +33,7 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.*;
@@ -63,6 +64,7 @@ public class MapLayers {
 	private final static String LAYER_ADD = "LAYER_ADD";
 
 	private final OsmandApplication app;
+
 	private final MapWidgetRegistry mapWidgetRegistry;
 
 	// the order of layer should be preserved ! when you are inserting new layer
@@ -80,8 +82,10 @@ public class MapLayers {
 	private RadiusRulerControlLayer radiusRulerControlLayer;
 	private DistanceRulerControlLayer distanceRulerControlLayer;
 	private PointNavigationLayer navigationLayer;
+	private SelectLocationLayer selectLocationLayer;
 	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
+	private CoordinatesGridLayer coordinatesGridLayer;
 	private MapInfoLayer mapInfoLayer;
 	private MapTextLayer mapTextLayer;
 	private ContextMenuLayer contextMenuLayer;
@@ -92,6 +96,7 @@ public class MapLayers {
 
 	private StateChangedListener<Integer> transparencyListener;
 	private StateChangedListener<Integer> overlayTransparencyListener;
+	private StateChangedListener<Boolean> enable3DMapsListener;
 
 	public MapLayers(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -171,6 +176,9 @@ public class MapLayers {
 		// 7.5 Impassable roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(app);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
+		// 7.6 Coordinates Grid layer
+		coordinatesGridLayer = new CoordinatesGridLayer(app);
+		mapView.addLayer(coordinatesGridLayer, 7.6f);
 		// 7.8 radius ruler control layer
 		radiusRulerControlLayer = new RadiusRulerControlLayer(app);
 		mapView.addLayer(radiusRulerControlLayer, 7.8f);
@@ -181,6 +189,10 @@ public class MapLayers {
 		// 9. map info layer
 		mapInfoLayer = new MapInfoLayer(app, routeLayer);
 		mapView.addLayer(mapInfoLayer, 9);
+
+		// 10. select location layer
+		selectLocationLayer = new SelectLocationLayer(app);
+		mapView.addLayer(selectLocationLayer, 10f);
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(app);
 		mapView.addLayer(mapControlsLayer, 11);
@@ -199,12 +211,20 @@ public class MapLayers {
 		overlayTransparencyListener = change -> app.runInUIThread(() -> {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
-				mapTileLayer.setAlpha(255 - change);
-				mapVectorLayer.setAlpha(255 - change);
+				mapVectorLayer.setSymbolsAlpha(255 - change);
 				mapRenderer.requestRender();
 			}
 		});
 		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
+
+		enable3DMapsListener = change -> app.runInUIThread(() -> {
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				gpxLayer.setInvalidated(true);
+				mapRenderer.requestRender();
+			}
+		});
+		app.getSettings().ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
 		createAdditionalLayers(null);
 	}
@@ -246,13 +266,16 @@ public class MapLayers {
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = app.getSettings();
 		boolean useOpenGLRender = app.useOpenGlRenderer();
+		boolean rasterMapsEnabled = PluginsHelper.isEnabled(OsmandRasterMapsPlugin.class);
 
 		// update transparency
 		int mapTransparency = 255;
-		if (settings.MAP_UNDERLAY.get() != null) {
-			mapTransparency = settings.MAP_TRANSPARENCY.get();
-		} else if (useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
-			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
+		if (rasterMapsEnabled) {
+			if (settings.MAP_UNDERLAY.get() != null) {
+				mapTransparency = settings.MAP_TRANSPARENCY.get();
+			} else if (useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
+				mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
+			}
 		}
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
@@ -282,7 +305,6 @@ public class MapLayers {
 		List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isTopWikiFilter()
-					&& !f.isRoutesFilter()
 					&& !f.isRouteArticleFilter()
 					&& !f.isRouteArticlePointFilter()
 					&& !f.isCustomPoiFilter()) {
@@ -352,7 +374,6 @@ public class MapLayers {
 		list.add(null);
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
 			if (!f.isTopWikiFilter()
-					&& !f.isRoutesFilter()
 					&& !f.isRouteArticleFilter()
 					&& !f.isRouteArticlePointFilter()
 					&& !f.isCustomPoiFilter()) {
@@ -378,8 +399,7 @@ public class MapLayers {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
 				}
-				PoiUIFilter wiki = poiFilters.getTopWikiPoiFilter();
-				poiFilters.clearSelectedPoiFilters(wiki);
+				poiFilters.clearGeneralSelectedPoiFilters();
 				poiFilters.addSelectedPoiFilter(filter);
 				updateRoutingPoiFiltersIfNeeded();
 				mapActivity.getMapView().refreshMap();
@@ -571,7 +591,7 @@ public class MapLayers {
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightModeForMapControls();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	public RouteLayer getRouteLayer() {
@@ -586,8 +606,16 @@ public class MapLayers {
 		return navigationLayer;
 	}
 
+	public SelectLocationLayer getSelectLocationLayer() {
+		return selectLocationLayer;
+	}
+
 	public ImpassableRoadsLayer getImpassableRoadsLayer() {
 		return impassableRoadsLayer;
+	}
+
+	public CoordinatesGridLayer getCoordinatesGridLayer() {
+		return coordinatesGridLayer;
 	}
 
 	public GPXLayer getGpxLayer() {
@@ -636,10 +664,6 @@ public class MapLayers {
 
 	public MapControlsLayer getMapControlsLayer() {
 		return mapControlsLayer;
-	}
-
-	public MapActionsHelper getMapActionsHelper() {
-		return mapControlsLayer.getMapActionsHelper();
 	}
 
 	public MapQuickActionLayer getMapQuickActionLayer() {

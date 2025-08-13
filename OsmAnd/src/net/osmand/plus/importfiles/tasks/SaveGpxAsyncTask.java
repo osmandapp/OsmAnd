@@ -8,19 +8,20 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -38,14 +39,14 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 
 	private final OsmandApplication app;
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final String fileName;
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
 	private final boolean overwrite;
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
-	                        @NonNull GPXFile gpxFile,
+	                        @NonNull GpxFile gpxFile,
 	                        @NonNull File destinationDir,
 	                        @NonNull String fileName,
 	                        @Nullable SaveImportedGpxListener listener,
@@ -92,13 +93,13 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 
 	@Nullable
 	private String saveFile(@NonNull File toSave) {
-		File file = !Algorithms.isEmpty(gpxFile.path) ? new File(gpxFile.path) : null;
+		File file = !Algorithms.isEmpty(gpxFile.getPath()) ? new File(gpxFile.getPath()) : null;
 		if (isTmpFileToMove(file)) {
 			if (!FileUtils.move(file, toSave)) {
 				return app.getString(R.string.error_reading_gpx);
 			}
 		} else {
-			Exception exception = GPXUtilities.writeGpxFile(toSave, gpxFile);
+			Exception exception = SharedUtil.writeGpxFile(toSave, gpxFile);
 			return exception != null ? exception.getMessage() : null;
 		}
 		return null;
@@ -109,9 +110,9 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	}
 
 	private void processSavedFile(@NonNull File file) {
-		gpxFile.path = file.getAbsolutePath();
+		gpxFile.setPath(file.getAbsolutePath());
 		if (overwrite) {
-			app.getGpxDbHelper().remove(file);
+			app.getGpxDbHelper().remove(SharedUtil.kFile(file));
 
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
@@ -120,16 +121,17 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 				DeletePointsTask.syncGpx(app, gpxFile);
 			}
 		}
-		GpxDataItem item = new GpxDataItem(app, file);
-		item.readGpxParams(app, gpxFile);
+		GpxDataItem item = new GpxDataItem(SharedUtil.kFile(file));
+		item.readGpxParams(gpxFile);
 		app.getGpxDbHelper().add(item);
-		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(file));
+		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(SharedUtil.kFile(file)));
 	}
 
 	@NonNull
-	private File getFileToSave(@NonNull String fileName, @NonNull File importDir, @NonNull GPXFile gpxFile) {
+	private File getFileToSave(@NonNull String fileName, @NonNull File importDir, @NonNull GpxFile gpxFile) {
 		if (Algorithms.isEmpty(fileName)) {
-			long time = gpxFile.findPointToShow().time;
+			WptPt pt = gpxFile.findPointToShow();
+			long time = pt != null ? pt.getTime() : System.currentTimeMillis();
 			fileName = "import_" + GPX_FILE_DATE_FORMAT.format(new Date(time));
 		} else if (fileName.endsWith(ImportHelper.KML_SUFFIX)) {
 			fileName = fileName.replace(ImportHelper.KML_SUFFIX, "");

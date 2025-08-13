@@ -1,5 +1,6 @@
 package net.osmand.plus.mapsource;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,11 +21,11 @@ import com.google.android.material.slider.RangeSlider;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.UiUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -76,7 +77,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
 			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE);
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
 		items.add(titleItem);
 		View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);
@@ -86,7 +87,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			String mapSource = getString(R.string.map_source);
 			String overlayUnderlay = getString(R.string.pref_overlay);
 			String dialogDesr = getString(dialogDescrRes, mapSource, overlayUnderlay);
-			dialogDescrTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), dialogDesr, mapSource, overlayUnderlay));
+			dialogDescrTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), dialogDesr, mapSource, overlayUnderlay));
 		} else {
 			dialogDescrTv.setText(getString(dialogDescrRes));
 		}

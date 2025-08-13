@@ -29,8 +29,7 @@
             android:layout_marginLeft="@dimen/content_padding"
             android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_list_text_size_large"
-            android:textStyle="bold"
-            app:typeface="@string/font_roboto_regular"
+            android:textStyle="normal"
 	        android:layout_marginStart="@dimen/content_padding" />
 
     </LinearLayout>

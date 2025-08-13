@@ -41,7 +41,6 @@
     <string name="poi_natural">Gamta</string>
     <string name="poi_seamark">Laivyba</string>
     <string name="poi_military">Kariniai objektai</string>
-    <string name="poi_osmwiki">Vikipedija</string>
     <string name="poi_user_defined_other">Nustatyta naudotojo</string>
     <string name="poi_palaeontological_site">Paleontologinis objektas</string>
     <string name="poi_bakery">Kepykla</string>
@@ -403,7 +402,7 @@
     <string name="poi_sms">SMS</string>
     <string name="poi_access_bus">Privažiavimas autobusu</string>
     <string name="poi_snowmobile_filter">Privažiavimas sniego motociklu</string>
-    <string name="poi_climbing_crag">Taip;Laipiojimo uola</string>
+    <string name="poi_climbing_crag">Laipiojimo uola</string>
     <string name="poi_service_car">Autoservisas</string>
     <string name="poi_denotation">Denotacija</string>
     <string name="poi_books_type">Knygos</string>
@@ -1606,7 +1605,7 @@
     <string name="poi_surface_pebblestone">Paviršius: žvirgždas</string>
     <string name="poi_resource_mineral_oil">Mineralinė alyva</string>
     <string name="poi_resource_lead">Švinas</string>
-    <string name="poi_site_type_fortification">Fortas</string>
+    <string name="poi_archaeological_site_fortification">Fortas</string>
     <string name="poi_direction_northeast">Šiaurės rytų kryptis</string>
     <string name="poi_direction_west">Vakarų kryptis</string>
     <string name="poi_direction_south">Pietų kryptis</string>
@@ -1679,7 +1678,7 @@
     <string name="poi_charcoal_pile">Anglių krūva</string>
     <string name="poi_hazard_additional_avalanche">Pavojus: lavina</string>
     <string name="poi_hazard_additional_flood">Pavojus: potvynis</string>
-    <string name="poi_hazard_additional_rockfall">Pavojus: uolų griūtis</string>
+    <string name="poi_hazard_additional_falling_rocks">Pavojus: uolų griūtis</string>
     <string name="poi_change_delete">Ištrintas objektas</string>
     <string name="poi_hazard_nuclear">Branduolinis pavojus</string>
     <string name="poi_end_date">Pabaigos data</string>
@@ -1702,7 +1701,7 @@
     <string name="poi_water_utility">Vandens komunalinių paslaugų biuras</string>
     <string name="poi_barbecue_grill">Grilis: taip</string>
     <string name="poi_outpost">Parduotuvės pristatymo vieta</string>
-    <string name="poi_whitewater_rapid_name">Upės slenksčio pavadinimas</string>
+    <string name="poi_rapids_name">Upės slenksčio pavadinimas</string>
     <string name="poi_pottery">Keramika</string>
     <string name="poi_flooring">Grindų dangų parduotuvė</string>
     <string name="poi_socket_type3_output_high">Aukšta</string>
@@ -2593,4 +2592,11 @@
     <string name="poi_state_abandoned">Būsena: apleista</string>
     <string name="poi_state_active">Būsena: aktyvi</string>
     <string name="poi_state_detour">Būsena: apylanka</string>
+    <string name="poi_archaeological_site">Archeologinė vietovė</string>
+    <string name="poi_place_of_worship">Maldos vieta</string>
+    <string name="poi_historic_manor">Istorinis dvaras</string>
+    <string name="poi_townhall">Rotušė</string>
+    <string name="poi_highway_crossing">Kelio perėja</string>
+    <string name="poi_cross">Kryžius</string>
+    <string name="poi_property_management">Nekilnojamojo turto valdymo biuras</string>
 </resources>

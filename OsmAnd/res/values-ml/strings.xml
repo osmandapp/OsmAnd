@@ -599,7 +599,6 @@
     <string name="edit_tilesource_choose_existing">നിലവിലുള്ളത് തെരഞ്ഞെടുക്കുക…</string>
     <string name="driving_region_descr">ഡ്രൈവിങ്ങ് ദിശ തിരഞ്ഞെടുക്കുക(രാജ്യം): യുഎസ്, യൂറോപ്പ്, യൂകെ , ഏഷ്യ , മറ്റുള്ളവ</string>
     <string name="driving_region">ഡ്രൈ‌വിങ്ങ് റീജിയണ്‍(രാജ്യം)</string>
-    <string name="driving_region_uk">ഇന്ത്യ, യൂകെ, ജപ്പാന്‍</string>
     <string name="speak_street_names">തെരുവ് നാമങ്ങള്‍ (ടിടിഎസ്)</string>
     <string name="speak_speed_limit">വേഗപരിധി</string>
     <string name="speak_cameras">സ്പീഡ് ക്യാമറ</string>
@@ -636,8 +635,7 @@
     <string name="poi_filter_entertainment">കലാപ്രകടനം</string>
     <string name="auto_zoom_map_descr">"നിങ്ങളുടെ സ്പീഡിനനുസരിച്ച് ഭൂപടത്തിന്റെ സൂം സ്വയം ക്രമീകരിക്കുക "</string>
     <string name="snap_to_road">പാതയില്‍ തന്നെ നിര്‍ത്തുക</string>
-    <string name="day_night_info_description">സൂര്യോദയം: %1$s 
-സൂര്യസ്തമയം: %2$s</string>
+    <string name="day_night_info_description">സൂര്യോദയം: %1$s സൂര്യസ്തമയം: %2$s</string>
     <string name="day_night_info">പകല്‍/രാത്രി വിവരം</string>
     <string name="map_widget_show_ruler">സ്കേല്‍</string>
     <string name="bg_service_sleep_mode_off">"ആപ്പിനെ ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിപ്പിക്കുക "</string>
@@ -1363,7 +1361,6 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">വാഹനങ്ങുളുടേതല്ലാത്ത പാതകള്‍</string>
     <string name="rendering_attr_hideWoodScrubs_name">മരങ്ങളും കുറ്റിച്ചെടികളും</string>
     <string name="rendering_attr_buildings15zoom_name">കെട്ടിടങ്ങള്‍ സൂം 15-ല്‍</string>
-    <string name="rendering_attr_hideAccess_name">പ്രവേഷന തടസം</string>
     <string name="osmo_edit_color">പ്രദര്‍ശനനിറം</string>
     <string name="int_days">ദിവസങ്ങള്‍</string>
     <string name="index_item_world_altitude_correction">"ലോക ഉയരവ്യത്യാസതിരുത്തലുകള്‍ "</string>
@@ -1526,9 +1523,7 @@
     <string name="shared_string_on">ഓണ്‍</string>
     <string name="shared_string_or">"അല്ലെങ്കില്‍ "</string>
     <string name="osmand_parking_plugin_name">പാര്‍ക്കിങ്ങ് സ്ഥാനം</string>
-    <string name="osmand_parking_plugin_description">"പാര്‍ക്കിങ്ങ് സ്ഥാന അനുബന്ധം എവിടെയാണ് കാര്‍ പാര്‍ക്ക് ചെയ്തത് എന്നും എത്രസമയം കൂടി ലഭ്യമാണ്(സമയപരിമിതമെങ്കില്‍) ഓര്‍മിപ്പിക്കുന്നു.
-
-പാര്‍ക്കിങ്ങ് സ്ഥലവും സമയവും ഓഎസ്എംആന്ഡിന്റെ ഡാഷ്ബോഡിലും ഭൂപത്തിലും കാണാവുന്നതാണ്. കൂടാതെ ആന്ഡ്രോയിഡ് കലണ്ടറിലൊരു  ഓര്‍മ്മക്കത്ത് ചേര്‍ക്കാവുന്നതാണ്."</string>
+    <string name="osmand_parking_plugin_description">"പാര്‍ക്കിങ്ങ് സ്ഥാന അനുബന്ധം എവിടെയാണ് കാര്‍ പാര്‍ക്ക് ചെയ്തത് എന്നും എത്രസമയം കൂടി ലഭ്യമാണ്(സമയപരിമിതമെങ്കില്‍) ഓര്‍മിപ്പിക്കുന്നു.\n\nപാര്‍ക്കിങ്ങ് സ്ഥലവും സമയവും ഓഎസ്എംആന്ഡിന്റെ ഡാഷ്ബോഡിലും ഭൂപത്തിലും കാണാവുന്നതാണ്. കൂടാതെ ആന്ഡ്രോയിഡ് കലണ്ടറിലൊരു  ഓര്‍മ്മക്കത്ത് ചേര്‍ക്കാവുന്നതാണ്."</string>
     <string name="osm_editing_plugin_name">ഓഎസ്എം തിരുത്തലുകള്‍</string>
     <string name="watch">നിരീക്ഷണം</string>
     <string name="use_opengl_render_descr">ഉപകരണ സഹായത്തോടെ ഓപണ്‍ജിഎല്‍ ഉപയോഗിച്ച് വരക്കുക (ചില ഉപകരണങ്ങളില്‍ പ്രവര്‍ത്തിക്കില്ല)</string>
@@ -1735,7 +1730,7 @@
     <string name="add_point_after">"അടുത്ത ബിന്ദുവായ്  ചേര്‍ക്കുക "</string>
     <string name="shared_string_options">ഐച്ഛികങ്ങള്‍</string>
     <string name="shared_string_reset">വീണ്ടും തുടങ്ങുക</string>
-    <string name="mapillary_menu_title_dates">"തിയതി "</string>
+    <string name="shared_string_date">"തിയതി "</string>
     <string name="mapillary_menu_title_username">ഉപയോക്തൃനാമം</string>
     <string name="shared_string_install">സ്ഥാപിക്കുക</string>
     <string name="srtm_color_scheme">നിറങ്ങളുടെ സ്കീം</string>
@@ -1931,19 +1926,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">"മഞ്ഞിലുള്ള (ice) റോഡുകളും  കടത്തുകളും (ford)  ഒഴിവാക്കുക "</string>
     <string name="use_location">സ്ഥാനം ഉപയോഗിക്കു</string>
     <string name="shared_string_gpx_tracks">"ജിപിഎക്സ്  പാതകള്‍"</string>
-    <string name="osmand_plus_extended_description_part8">"മാപ്പിന്റെ ഏകദേശ വ്യാപ്തിയും നിലവാരവും:
-\n. പടിഞ്ഞാറന്‍ യൂറോപ്പ് : ****
-\n .കിഴക്കന്‍ യൂറോപ്പ്  : ***
-\n.റഷ്യ: ***
-\n. വടക്കേ അമേരിക്ക: *** 
-\n. തെക്കേ അമേരിക്ക:**
-\n. ഏഷ്യ: **
-\n. ജപ്പാന്‍ &amp; കൊറിയ :***
-\n. ഗള്‍ഫ് : **
-\n. ആഫ്റിക്ക : **
-\n. അന്റാര്‍ട്ടിക്ക:*
-\nഅഫ്ഗാനിസ്ഥാന്‍ തുടങ്ങി സിംബാവേ വരെ ലോകത്തെ മിക്കവാറും എല്ലാ രാജ്യങ്ങളുടെ ഭൂപടങ്ങളും ഡൗണ്‍ലോഡ് ചെയ്യാനായ് ലഭ്യമാണ്, ഇന്ത്യ, അമേരിക്ക , ആസ്ട്രേലിയ, ഫ്രാന്‍സ്, റഷ്യ, ഇംഗ്ളണ്ട്  , സ്പെയ്ന്‍, ......   
-\n"</string>
+    <string name="osmand_plus_extended_description_part8">"മാപ്പിന്റെ ഏകദേശ വ്യാപ്തിയും നിലവാരവും:\n\n. പടിഞ്ഞാറന്‍ യൂറോപ്പ് : ****\n\n .കിഴക്കന്‍ യൂറോപ്പ്  : ***\n\n.റഷ്യ: ***\n\n. വടക്കേ അമേരിക്ക: *** \n\n. തെക്കേ അമേരിക്ക:**\n\n. ഏഷ്യ: **\n\n. ജപ്പാന്‍ &amp; കൊറിയ :***\n\n. ഗള്‍ഫ് : **\n\n. ആഫ്റിക്ക : **\n\n. അന്റാര്‍ട്ടിക്ക:*\n\nഅഫ്ഗാനിസ്ഥാന്‍ തുടങ്ങി സിംബാവേ വരെ ലോകത്തെ മിക്കവാറും എല്ലാ രാജ്യങ്ങളുടെ ഭൂപടങ്ങളും ഡൗണ്‍ലോഡ് ചെയ്യാനായ് ലഭ്യമാണ്, ഇന്ത്യ, അമേരിക്ക , ആസ്ട്രേലിയ, ഫ്രാന്‍സ്, റഷ്യ, ഇംഗ്ളണ്ട്  , സ്പെയ്ന്‍, ......   \n\n"</string>
     <string name="recalculate_route_to_your_location">ഗതാഗത രീതി:</string>
     <string name="show_lanes">ലേനുകള്‍</string>
     <string name="int_continuosly">തുടരെയുളള</string>
@@ -1956,7 +1939,7 @@
     <string name="route_roundabout">"റൗണ്ടാന: %1$d പുറത്തേക്കുള്ള വഴി എടുത്ത് പോവുക "</string>
     <string name="routing_attr_avoid_bus_name">ബസുകൾ ഒഴിവാക്കുക</string>
     <string name="new_filter_desc">പുതിയ ഫിൽറ്ററിന് പേര് നൽകുക, ഇത് നിങ്ങളുടെ \'വിഭാഗങ്ങൾ\' ടാബിൽ ചേർക്കും.</string>
-    <string name="replace_favorite_confirmation">പ്രിയപ്പെട്ടവയില്‍ %1$s പകരം വയ്ക്കണമെന്ന് തീർച്ചയാണോ\?</string>
+    <string name="replace_favorite_confirmation">പ്രിയപ്പെട്ടവയില്‍ %1$s പകരം വയ്ക്കണമെന്ന് തീർച്ചയാണോ?</string>
     <string name="rendering_attr_hideOverground_name">ഓവർഗ്രൗണ്ട് വസ്തുക്കൾ</string>
     <string name="advanced_coords_search">വിപുലമായ കോർഡിനേറ്റ്സ് സെർച്ച്</string>
     <string name="map_widget_magnetic_bearing">മാഗനറ്റിക് ബെയറിങ്ങ്</string>
@@ -2010,7 +1993,6 @@
     <string name="osmand_distance_planning_plugin_name">ദൂരം കാൽക്കുലേറ്റർ &amp; പ്ലാനിംഗ് ടൂൾ</string>
     <string name="osmand_distance_planning_plugin_description">നിലവിലെ GPX ഫയലുകളിൽ മാറ്റം വരുത്താനും വഴി യാത്രകൾ ആസൂത്രണം ചെയ്യുന്നതിനും പോയിന്റുകൾ തമ്മിലുള്ള ദൂരം അളക്കുന്നതിനും ടാപ്പുചെയ്ത് പാതകൾ സൃഷ്ടിക്കാനും അനുവദിക്കുന്ന ഒരു മാപ്പ് സ്ക്രീൻ വിഡ്ജെറ്റ് ഈ പ്ലഗിൻ നൽകുന്നു. ഫലങ്ങൾ ജിപിഎക്സ് ഫയലായി സേവ് ചെയ്യാൻ സാധിക്കും, അത് പിന്നീട് മാർഗനിർദേശത്തിനായി ഉപയോഗിക്കാം.</string>
     <string name="osmand_accessibility_description">ഈ പ്ലഗിൻ ഉപകരണത്തിന്റെ അക്സസ്സിബിലിറ്റി സവിശേഷതകൾ OsmAnd- ൽ നേരിട്ട് ലഭ്യമാക്കുന്നു. ഉദാ: നിങ്ങളുടെ സ്ഥാനം പ്രഖ്യാപിക്കുക, സ്വയം ടിടിഎസ് ശബ്ദങ്ങൾക്കായുള്ള സംഭാഷണ നിരക്ക് ക്രമീകരിക്കുക, സൂം നിയന്ത്രണത്തിനു ട്രാക്ക്ബോൾ ഉപയോഗിക്കുക, ടെക്സ്റ്റ്-ടു-സ്പീച്ച് ഫീഡ്ബാക്ക് ഉപയോഗിക്കുക.</string>
-    <string name="osm_editing_plugin_description">"ഈ OSM കോണ്ട്രിബൂഷന്‍ പ്ലഗിൻ ഉപയോഗിച്ച് ഒഎസ്എം POI ഒബ്ജക്റ്റുകൾ സൃഷ്ടിക്കുക, പരിഷ്കരിക്കുക, OSM Notes തുറക്കുകയും അഭിപ്രായമിടുകയുംറിക്കോഡ് ചെയ്ത GPX ഫയലുകൾ സംഭാവന ചെയ്യുകയും ചെയ്യാം. OSM ഒരു  ആഗോള  പബ്ലിക് ഡൊമെയ്ൻ - പങ്കാളിത്ത മാപ്പിംഗ് പ്രോജക്ട് ആണ്. കൂടുതൽ വിവരങ്ങൾക്ക് https://openstreetmap.org സന്ദർശിക്കുക. സജീവ പങ്കാളിത്തം വിലമതിക്കപ്പെടുന്നു, കൂടാതെ താങ്കളുടെ വ്യക്തിഗത OSM ക്രെഡൻഷ്യലുകൾ ആപ്ലിക്കേഷനിൽ വ്യക്തമാക്കിയിട്ടുണ്ടെങ്കിൽ, OSM സംഭാവനകൾ നേരിട്ട് നൽകാവുന്നതാണ്."</string>
     <string name="osmand_development_plugin_description">"റൂട്ടിംഗ്, സ്ക്രീൻ റെൻഡറിംഗ് പ്രകടനം, അല്ലെങ്കിൽ വോയ്സ് പ്രോംപ്റ്റിംഗ് എന്നിവ പരിശോധിക്കുന്നതിനോ മെച്ചപ്പെടുത്തുന്നതിനോ ഉള്ള ഡെവലപ്മെന്റ്, ഡീബഗ്ഗിംഗ് ഫീച്ചറുകൾക്കായുള്ള ക്രമീകരണങ്ങള്‍ കാണിക്കുന്ന പ്ലഗിൻ  . ഈ ക്രമീകരണങ്ങൾ ഡെവലപ്പർമാർക്ക് ഉദ്ദേശിച്ചതും പൊതു ഉപയോക്താവിനായി ആവശ്യമില്ലാത്തതുമാണ്."</string>
     <string name="location_on_map">സ്ഥാനം:
 \nഅക്ഷാംശം %1$s
@@ -2288,7 +2270,6 @@
     <string name="upload_poi">POI അപ്ലോഡ് ചെയ്യുക</string>
     <string name="route_roundabout_short">%1$d എക്സിറ്റ് എടുത്തു പോവുക</string>
     <string name="search_map_hint">നഗരമോ പ്രദേശമോ തിരയുക</string>
-    <string name="wiki_around">അടുത്തുള്ള വിക്കിപീഡിയ ലേഖനങ്ങൾ</string>
     <string name="upload_osm_note_description">OSM കുറിപ്പ് അജ്ഞാതമായി അല്ലെങ്കിൽ നിങ്ങളുടെ OpenStreetMap.org പ്രൊഫൈൽ ഉപയോഗിച്ച് അപ്ലോഡുചെയ്യുക.</string>
     <string name="routing_attr_allow_motorway_name">അതിവേഗപാതകള്‍ അനുവദിക്കുക</string>
     <string name="routing_attr_allow_motorway_description">അതിവേഗപാതകള്‍ അനുവദിക്കുക.</string>
@@ -2719,4 +2700,9 @@
     <string name="months_2_4">മാസങ്ങള്‍</string>
     <string name="months_5">മാസങ്ങള്‍</string>
     <string name="year">വര്‍ഷം</string>
+    <string name="add_to_navigation">നാവിഗേഷനിലേക്ക് ആഡ് ചെയ്യാൻ</string>
+    <string name="grid_color">ഗ്രിഡിന്റെ കളർ</string>
+    <string name="customize_grid_color">ഗ്രിഡിന്റെ കളർ കസ്റ്റമൈസ്</string>
+    <string name="save_to_device">ഫോണിലേക്ക് സേവ് ചെയ്യാൻ</string>
+    <string name="saved_to_device">ഫോണിൽ സേവ് ആയി</string>
 </resources>

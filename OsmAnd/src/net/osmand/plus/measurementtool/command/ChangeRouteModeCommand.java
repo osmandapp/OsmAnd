@@ -7,7 +7,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.measurementtool.RoadSegmentData;
@@ -140,7 +140,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		MeasurementEditingContext editingCtx = getEditingCtx();
 		editingCtx.getPoints().clear();
 		editingCtx.addPoints(newPoints);
-		if (newPoints.isEmpty()) {
+		if (newPoints.isEmpty() || newPoints.get(newPoints.size() - 1).isGap()) {
 			editingCtx.setAppMode(newMode);
 		} else {
 			WptPt lastPoint = newPoints.get(newPoints.size() - 1);

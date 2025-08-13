@@ -2,12 +2,11 @@ package net.osmand.plus.plugins.parking;
 
 import static net.osmand.plus.quickaction.QuickActionIds.PARKING_ACTION_ID;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -15,8 +14,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
 
-public class ParkingAction extends QuickAction {
+public class ParkingAction extends SelectMapLocationAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(PARKING_ACTION_ID,
 			"parking.add", ParkingAction.class).
@@ -32,20 +32,29 @@ public class ParkingAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
+		if (PluginsHelper.isActive(ParkingPositionPlugin.class)) {
+			super.execute(mapActivity, params);
+		}
+	}
+
+	@Override
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
 		ParkingPositionPlugin plugin = PluginsHelper.getActivePlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
-			LatLon latLon = getMapLocation(mapActivity);
 			plugin.showAddParkingDialog(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 		}
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
-		((TextView) view.findViewById(R.id.text)).setText(
-				R.string.quick_action_add_parking_descr);
-		parent.addView(view);
+	@Nullable
+	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
+		return mapActivity.getMapLayers().getFavouritesLayer().createParkingIcon();
+	}
+
+	@NonNull
+	@Override
+	protected CharSequence getQuickActionDescription(@NonNull Context context) {
+		return context.getString(R.string.quick_action_add_parking_descr);
 	}
 }

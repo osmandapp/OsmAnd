@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+<net.osmand.plus.widgets.LinearLayoutEx
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/add_gpx_point_bottom_sheet"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/content_padding"
-        osmand:srcCompat="@drawable/ic_action_photo_dark"/>
+        app:srcCompat="@drawable/ic_action_photo_dark"/>
 
     <LinearLayout
         android:layout_weight="1"
@@ -69,4 +69,5 @@
         android:layout_gravity="center_vertical"
         android:text="@string/shared_string_cancel"
         android:layout_marginEnd="@dimen/content_padding" />
-</LinearLayout>
+
+</net.osmand.plus.widgets.LinearLayoutEx>

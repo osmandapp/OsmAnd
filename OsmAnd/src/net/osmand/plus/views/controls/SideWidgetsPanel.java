@@ -2,6 +2,7 @@ package net.osmand.plus.views.controls;
 
 import static androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -13,7 +14,6 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,21 +30,23 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.widgets.FrameLayoutEx;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
+public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer {
 
 	private static final int BORDER_WIDTH_DP = 2;
 	private static final int BORDER_RADIUS_DP = 5;
-
+	private static final float SIDE_PANEL_WEIGHT_RATIO = 0.45f;
 	private final Paint borderPaint = new Paint();
 	private final Path borderPath = new Path();
 
@@ -56,6 +58,8 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
 	protected ViewPager2 viewPager;
 	protected WidgetsPagerAdapter adapter;
 	protected LinearLayout dots;
+
+	private int screenWidth = -1;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -71,7 +75,7 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
 
 	public SideWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
-		nightMode = getMyApplication().getDaynightHelper().isNightMode();
+		nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		context = UiUtilities.getThemedContext(getContext(), nightMode);
 
 		definePanelSide(context, attrs);
@@ -220,8 +224,9 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
 			List<View> views = visiblePages.getWidgetsViews(viewPager.getCurrentItem());
 			if (!Algorithms.isEmpty(views)) {
 				for (View view : views) {
+					View emptyBanner = view.findViewById(R.id.empty_banner);
 					if (view.findViewById(R.id.container).getVisibility() == VISIBLE
-							|| view.findViewById(R.id.empty_banner).getVisibility() == VISIBLE) {
+							|| (emptyBanner != null &&  emptyBanner.getVisibility() == VISIBLE)) {
 						return true;
 					}
 				}
@@ -274,6 +279,14 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
 			int measuredWidth = viewToWrap.getMeasuredWidth();
 			int measuredHeight = viewToWrap.getMeasuredHeight();
 
+			if (screenWidth != -1) {
+				int maxAllowedWidth = (int) (screenWidth * SIDE_PANEL_WEIGHT_RATIO);
+
+				if (measuredWidth > maxAllowedWidth) {
+					measuredWidth = maxAllowedWidth;
+				}
+			}
+
 			if (width != measuredWidth || height != measuredHeight) {
 				ViewGroup.LayoutParams pagerParams = viewPager.getLayoutParams();
 				pagerParams.width = measuredWidth;
@@ -302,5 +315,9 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
 	@NonNull
 	protected OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getContext().getApplicationContext());
+	}
+
+	public void setScreenWidth(@NonNull Activity activity) {
+		screenWidth = AndroidUtils.getScreenWidth(activity);
 	}
 }

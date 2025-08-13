@@ -4,7 +4,6 @@
     <string name="poi_internet_access">ഇന്റെര്‍നെറ്റ്</string>
     <string name="poi_natural">നാച്ചുറല്‍</string>
     <string name="poi_seamark">നോട്ടിക്കല്‍</string>
-    <string name="poi_osmwiki">വിക്കിപീഡിയ</string>
     <string name="poi_kiosk">കിയോസ്ക്</string>
     <string name="poi_medical_supply">മെഡിക്കല്‍ സ്ടോര്‍</string>
     <string name="poi_mobile_phone">സെല്‍ഫോണ്‍ കട</string>
@@ -169,7 +168,7 @@
     <string name="poi_fire_water_pond">കുളം (അഗ്നിശമനം)</string>
     <string name="poi_grit_bin">ഉപ്പ് കയം</string>
     <string name="poi_ambulance_station">ആംബുലന്‍സ്</string>
-    <string name="poi_ses_station">ഏസ് ഈ എസ് സ്ടേഷന്‍</string>
+    <string name="poi_disaster_response">ഏസ് ഈ എസ് സ്ടേഷന്‍</string>
     <string name="poi_emergency_access_point">എമെര്‍ജെന്‍സി അക്സെസ് പോയിന്റ്</string>
     <string name="poi_ford">ചപ്പാത്ത്</string>
     <string name="poi_mountain_pass">ചുരം</string>
@@ -1121,11 +1120,6 @@
     <string name="poi_nwn_ref">നാഷണല്‍ ഹൈക്കിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
     <string name="poi_rwn_ref">"റീജിയണല്‍ ഹൈക്കിങ്ങ്  നെറ്റ്വര്‍ക്ക് നോഡ്"</string>
     <string name="poi_lwn_ref">ലോക്കല്‍ ഹൈക്കിങ്ങ് നെറ്റ്വര്‍ക്ക് നോഡ്</string>
-    <string name="poi_route_hiking_iwn_poi">"ഇന്റെര്‍നാഷണല്‍ ഹൈക്കിങ്ങ്  റൂട്ട് "</string>
-    <string name="poi_route_hiking_nwn_poi">"നാഷണല്‍ ഹൈക്കിങ്ങ്  റൂട്ട് "</string>
-    <string name="poi_route_hiking_rwn_poi">റീജിയണല്‍ ഹൈക്കിങ്ങ് റൂട്ട്</string>
-    <string name="poi_route_hiking_lwn_poi">"ലോക്കല്‍ ഹൈക്കിങ്ങ് റൂട്ട് "</string>
-    <string name="poi_route_hiking_ref_poi">ഹൈക്കിങ്ങ് റൂട്ട് റെഫറന്‍സ്</string>
     <string name="poi_opening_hours">തുറക്കുന്ന സമയം</string>
     <string name="poi_collection_times">കളക്ഷന്‍ ടൈംസ്</string>
     <string name="poi_description">വിവരണം</string>
@@ -2041,12 +2035,12 @@
     <string name="poi_material_limestone">"മെറ്റീരിയല്‍ : ചുണ്ണാമ്പ് കല്ല് "</string>
     <string name="poi_material_marble">മെറ്റീരിയല്‍ : മാര്‍ബിള്‍</string>
     <string name="poi_material_aluminium">മെറ്റീരിയല്‍ :അലുമിനിയം</string>
-    <string name="poi_site_type_megalith">"പുരതന പാറകൊണ്ടുള്ള നിര്‍മ്മിതി "</string>
-    <string name="poi_site_type_tumulus">"മണ്‍കൂന "</string>
-    <string name="poi_site_type_fortification">മതില്‍</string>
-    <string name="poi_site_type_settlement">സെറ്റില്‍മെന്റ്</string>
-    <string name="poi_site_type_city">നഗരം</string>
-    <string name="poi_site_type_necropolis">പൗരാണിക കല്ലറ</string>
+    <string name="poi_archaeological_site_megalith">"പുരതന പാറകൊണ്ടുള്ള നിര്‍മ്മിതി "</string>
+    <string name="poi_archaeological_site_tumulus">"മണ്‍കൂന "</string>
+    <string name="poi_archaeological_site_fortification">മതില്‍</string>
+    <string name="poi_archaeological_site_settlement">സെറ്റില്‍മെന്റ്</string>
+    <string name="poi_archaeological_site_city">നഗരം</string>
+    <string name="poi_archaeological_site_necropolis">പൗരാണിക കല്ലറ</string>
     <string name="poi_building_type_church">പള്ളി</string>
     <string name="poi_building_type_chapel">ചാപ്പ</string>
     <string name="poi_building_type_mosque">"മോസ്ക് "</string>

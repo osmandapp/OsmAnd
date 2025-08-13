@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -8,12 +10,11 @@ import androidx.annotation.Nullable;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -23,6 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -203,7 +205,6 @@ public class TravelDbHelper implements TravelHelper {
 		}
 	}
 
-
 	public List<File> getExistingTravelBooks() {
 		return existingTravelBooks;
 	}
@@ -235,7 +236,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Override
 	@NonNull
-	public List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
+	public List<WikivoyageSearchResult> search(@NonNull String searchQuery, int reqNumber) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		String[] queries = searchQuery.replace('_', ' ').replace('/', ' ').split(" ");
@@ -678,6 +679,26 @@ public class TravelDbHelper implements TravelHelper {
 	}
 
 	@NonNull
+	@Override
+	public Map<String, TravelArticle> getArticleByLangs(@NonNull TravelArticleIdentifier articleId) {
+		Map<String, TravelArticle> res = new LinkedHashMap<>();
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			Map<String, TravelArticle> articles = readTravelArticles(conn, "", Collections.singletonList(articleId.routeId));
+			if (!Algorithms.isEmpty(articles)) {
+				res.putAll(articles);
+			}
+		}
+		if (Algorithms.isEmpty(res)) {
+			List<TravelArticle> articles = localDataHelper.getSavedArticles(articleId.file, articleId.routeId);
+			for (TravelArticle article : articles) {
+				res.put(article.getLang(), article);
+			}
+		}
+		return res;
+	}
+
+	@NonNull
 	private TravelArticle readArticle(SQLiteCursor cursor) {
 		TravelArticle res = new TravelArticle();
 		res.file = selectedTravelBook;
@@ -698,7 +719,7 @@ public class TravelDbHelper implements TravelHelper {
 		res.aggregatedPartOf = cursor.getString(11);
 		try {
 			String gpxContent = Algorithms.gzipToString(cursor.getBlob(6));
-			res.gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+			res.gpxFile = SharedUtil.loadGpxFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
@@ -713,32 +734,35 @@ public class TravelDbHelper implements TravelHelper {
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 
+	@Override
+	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
+		return false; // stub
+	}
+
 	@Nullable
 	@Override
-	public TravelGpx searchGpx(@NonNull LatLon location, @Nullable String fileName, @Nullable String ref) {
+	public TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId) {
 		return null;
 	}
 
 	@Override
 	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-							  @NonNull String gpxFileName, @NonNull LatLon location) {
-
+							  @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition) {
 	}
 
 	@NonNull
 	@Override
 	public String getGPXName(@NonNull TravelArticle article) {
-		return article.getTitle().replace('/', '_').replace('\'', '_')
-				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
+		return article.getGpxFileName() + GPX_FILE_EXT;
 	}
 
 	@NonNull
 	@Override
 	public File createGpxFile(@NonNull TravelArticle article) {
-		GPXFile gpx = article.getGpxFile();
+		GpxFile gpx = article.getGpxFile();
 		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
 		if (!file.exists()) {
-			GPXUtilities.writeGpxFile(file, gpx);
+			SharedUtil.writeGpxFile(file, gpx);
 		}
 		return file;
 	}

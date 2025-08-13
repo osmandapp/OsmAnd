@@ -17,7 +17,6 @@
 package com.github.ksoichiro.android.observablescrollview;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -230,18 +229,7 @@ public class ObservableGridView extends GridView implements Scrollable {
     }
 
     private int getNumColumnsCompat() {
-        if (Build.VERSION.SDK_INT >= 11) {
-            return getNumColumns();
-        } else {
-            int columns = 0;
-            if (getChildCount() > 0) {
-                int width = getChildAt(0).getMeasuredWidth();
-                if (width > 0) {
-                    columns = getWidth() / width;
-                }
-            }
-            return columns > 0 ? columns : AUTO_FIT;
-        }
+	    return getNumColumns();
     }
 
     private void onScrollChanged() {

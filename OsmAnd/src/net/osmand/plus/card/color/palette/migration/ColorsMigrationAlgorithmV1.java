@@ -66,7 +66,7 @@ public class ColorsMigrationAlgorithmV1 {
 				settings, "route_line_colors_palette", null).makeGlobal();
 	}
 
-	private void execute() {
+	private void executeImpl() {
 		timestamp = System.currentTimeMillis();
 
 		List<MigrationBundle> migrationBundles = Arrays.asList(
@@ -147,9 +147,8 @@ public class ColorsMigrationAlgorithmV1 {
 		return colors;
 	}
 
-	public static void doMigration(@NonNull OsmandApplication app) {
-		ColorsMigrationAlgorithmV1 migrationAlgorithm = new ColorsMigrationAlgorithmV1(app);
-		migrationAlgorithm.execute();
+	public static void execute(@NonNull OsmandApplication app) {
+		new ColorsMigrationAlgorithmV1(app).executeImpl();
 	}
 
 	static class MigrationBundle {

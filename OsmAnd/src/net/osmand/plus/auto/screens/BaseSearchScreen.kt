@@ -2,6 +2,7 @@ package net.osmand.plus.auto.screens
 
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.auto.SearchHelper
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener
 import net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS
@@ -10,7 +11,8 @@ abstract class BaseSearchScreen(carContext: CarContext) : BaseAndroidAutoScreen(
 	SearchHelperListener {
 
 	protected var loading = false
-	protected val searchHelper: SearchHelper by lazy(::createSearchHelper)
+	protected var searchHelper: SearchHelper? = null
+		get() = field ?: createSearchHelper().also { field = it }
 
 	override fun getConstraintLimitType(): Int {
 		return ConstraintManager.CONTENT_LIMIT_TYPE_PLACE_LIST
@@ -24,5 +26,16 @@ abstract class BaseSearchScreen(carContext: CarContext) : BaseAndroidAutoScreen(
 		searchHelper.listener = this
 		searchHelper.setupSearchSettings(true)
 		return searchHelper
+	}
+
+	override fun onFirstGetTemplate() {
+		super.onFirstGetTemplate()
+		searchHelper?.contentLimit = contentLimit
+	}
+
+	override fun onDestroy(owner: LifecycleOwner) {
+		super.onDestroy(owner)
+		searchHelper?.listener = null
+		searchHelper = null
 	}
 }

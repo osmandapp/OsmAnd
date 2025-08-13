@@ -47,6 +47,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -116,6 +117,12 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		selectedImage = getScaledBitmap(R.drawable.map_mapillary_location);
 		headingImage = getScaledBitmap(R.drawable.map_mapillary_location_view_angle);
 		point = getScaledBitmap(R.drawable.map_mapillary_photo_dot);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updateBitmaps(true);
 	}
 
 	@Override
@@ -501,10 +508,10 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (map != null && tileBox.getZoom() >= MIN_POINTS_ZOOM) {
-			getImagesFromPoint(tileBox, point, objects);
+		if (map != null && result.getTileBox().getZoom() >= MIN_POINTS_ZOOM) {
+			collectImagesFromPoint(result);
 		}
 	}
 
@@ -539,22 +546,24 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		}
 	}
 
-	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+	private void collectImagesFromPoint(@NonNull MapSelectionResult result) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && mapillaryTilesProvider != null) {
-			getImagesFromPointOpenGL(tb, point, images);
+			getImagesFromPointOpenGL(result);
 		} else {
-			getImagesFromPointCanvas(tb, point, images);
+			getImagesFromPointCanvas(result);
 		}
 	}
 
 	/**OpenGL*/
-	private void getImagesFromPointOpenGL(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+	private void getImagesFromPointOpenGL(@NonNull MapSelectionResult result) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
 
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		PointI center31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, point.x, point.y);
 		if (center31 == null) {
 			return;
@@ -599,7 +608,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			double lon = closestImage.getLongitude();
 			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, lat, lon);
 			if (Math.abs(pixel.x - point.x) <= radius && Math.abs(pixel.y - point.y) <= radius) {
-				images.add(closestImage);
+				result.collect(closestImage, this);
 			}
 		}
 	}
@@ -635,7 +644,9 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		);
 	}
 
-	private void getImagesFromPointCanvas(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+	private void getImagesFromPointCanvas(@NonNull MapSelectionResult result) {
+		PointF point = result.getPoint();
+		RotatedTileBox tb = result.getTileBox();
 		Map<QuadPointDouble, Map<?, ?>> points = this.visiblePoints;
 		float ex = point.x;
 		float ey = point.y;
@@ -643,7 +654,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		float x, y;
 		double minSqDist = Double.NaN;
 		double sqDist;
-		MapillaryImage img = null;
+		MapillaryImage image = null;
 
 		for (Entry<QuadPointDouble, Map<?, ?>> entry : points.entrySet()) {
 			double tileX = entry.getKey().x;
@@ -654,19 +665,19 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			y = tb.getPixYFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 			if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 				sqDist = (x - ex) * (x - ex) + (y - ey) * (y - ey);
-				if (img == null || minSqDist > sqDist) {
+				if (image == null || minSqDist > sqDist) {
 					minSqDist = sqDist;
 					double lat = MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileY);
 					double lon = MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileX);
-					img = new MapillaryImage(lat, lon);
-					if (!img.setData(userData)) {
-						img = null;
+					image = new MapillaryImage(lat, lon);
+					if (!image.setData(userData)) {
+						image = null;
 					}
 				}
 			}
 		}
-		if (img != null) {
-			images.add(img);
+		if (image != null) {
+			result.collect(image, this);
 		}
 	}
 

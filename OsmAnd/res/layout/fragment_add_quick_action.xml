@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -51,7 +51,7 @@
 						android:layout_marginVertical="@dimen/content_padding_half"
 						android:text="@string/dialog_add_action_title"
 						android:textSize="@dimen/dialog_header_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<include
 						layout="@layout/search_text_layout"
@@ -80,7 +80,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:background="?attr/activity_background_color"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -103,7 +103,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</FrameLayout>
 

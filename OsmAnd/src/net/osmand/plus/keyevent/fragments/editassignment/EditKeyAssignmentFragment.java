@@ -1,7 +1,6 @@
 package net.osmand.plus.keyevent.fragments.editassignment;
 
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController.TRANSITION_NAME;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
 import android.graphics.drawable.Drawable;
@@ -44,14 +43,10 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 
 	private EditKeyAssignmentAdapter adapter;
 	private EditKeyAssignmentController controller;
-	private ApplicationMode appMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle arguments = requireArguments();
-		String appModeKey = arguments.getString(APP_MODE_KEY);
-		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		controller = EditKeyAssignmentController.getExistedInstance(app);
 		if (controller != null) {
 			controller.registerDialog(this);
@@ -214,7 +209,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 

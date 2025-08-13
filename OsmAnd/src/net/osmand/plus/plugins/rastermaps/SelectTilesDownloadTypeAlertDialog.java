@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
@@ -21,8 +23,6 @@ import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 class SelectTilesDownloadTypeAlertDialog {
 
@@ -36,12 +36,12 @@ class SelectTilesDownloadTypeAlertDialog {
 
 	private List<Pair<String, String>> items;
 
-	public SelectTilesDownloadTypeAlertDialog(@NonNull OsmandApplication app,
+	public SelectTilesDownloadTypeAlertDialog(@NonNull Context context,
 	                                          boolean nightMode,
 	                                          boolean allSelected,
 	                                          @NonNull DownloadTypeSelectionListener listener) {
-		this.app = app;
-		this.layoutInflater = UiUtilities.getInflater(app, nightMode);
+		this.app = (OsmandApplication) context.getApplicationContext();
+		this.layoutInflater = UiUtilities.getInflater(context, nightMode);
 		this.nightMode = nightMode;
 		this.selectedItem = allSelected ? 0 : 1;
 		this.listener = listener;

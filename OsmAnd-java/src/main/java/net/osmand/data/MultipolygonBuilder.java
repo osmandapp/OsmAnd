@@ -1,19 +1,14 @@
 package net.osmand.data;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
+import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.osm.edit.*;
+import net.osmand.osm.io.OsmBaseStorage;
+import net.osmand.util.JarvisAlgorithm;
+import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.MapUtils;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * The idea of multipolygon:
@@ -130,19 +125,19 @@ public class MultipolygonBuilder {
 			do {
 				newWay = merge(multilineStartPoint, getLastId(changedWay), changedWay, 
 						multilineEndPoint, getFirstId(changedWay));
-				if(newWay == null) {
-					newWay = merge(multilineEndPoint, getFirstId(changedWay), changedWay, 
-							multilineStartPoint, getLastId(changedWay));
+				if (newWay == null) {
+					newWay = merge(multilineEndPoint, getFirstId(changedWay), changedWay, multilineStartPoint,
+							getLastId(changedWay));
 				}
-				if(newWay == null) {
-					newWay = merge(multilineStartPoint, getFirstId(changedWay), changedWay, 
-							multilineEndPoint, getLastId(changedWay));
+				if (newWay == null) {
+					newWay = merge(multilineStartPoint, getFirstId(changedWay), changedWay, multilineEndPoint,
+							getLastId(changedWay));
 				}
-				if(newWay == null) {
-					newWay = merge(multilineEndPoint, getLastId(changedWay), changedWay, 
-							multilineStartPoint, getFirstId(changedWay));
+				if (newWay == null) {
+					newWay = merge(multilineEndPoint, getLastId(changedWay), changedWay, multilineStartPoint,
+							getFirstId(changedWay));
 				}
-				if(newWay != null) {
+				if (newWay != null) {
 					changedWay = newWay;
 				}
 			} while (newWay != null);
@@ -153,8 +148,11 @@ public class MultipolygonBuilder {
 		}
 		
 		List<Way> multiLines = new ArrayList<Way>();
-		for(List<Way> lst : multilineStartPoint.valueCollection()) {
-			multiLines.addAll(lst);
+		for (List<Way> lst : multilineStartPoint.valueCollection()) {
+			if(lst.size() > 0) {
+				multiLines.addAll(lst);
+				
+			}
 		}
 		ArrayList<Ring> result = new ArrayList<Ring>();
 		for (Way multiLine : multiLines) {
@@ -162,6 +160,37 @@ public class MultipolygonBuilder {
 			result.add(r);
 		}
 		return result;
+	}
+
+	public void createInnerAndOuterWays(Entity e) {
+		// fill the multipolygon with all ways from the Relation
+		for (Relation.RelationMember es : ((Relation) e).getMembers()) {
+			if (es.getEntity() instanceof Way) {
+				boolean inner = "inner".equals(es.getRole()); //$NON-NLS-1$
+				if (inner) {
+					addInnerWay((Way) es.getEntity());
+				} else if ("outer".equals(es.getRole())) {
+					addOuterWay((Way) es.getEntity());
+				}
+			}
+		}
+	}
+	
+	
+	public static boolean isClimbingMultipolygon(Entity relation) {
+		return "area".equals(relation.getTag(OSMSettings.OSMTagKey.CLIMBING.getValue()))
+				|| "crag".equals(relation.getTag(OSMSettings.OSMTagKey.CLIMBING.getValue()));
+	}
+
+	public void createClimbingOuterWay(Entity e, List<Node> nodes) throws SQLException {
+		nodes = JarvisAlgorithm.createConvexPolygon(nodes);
+		int radius = "crag".equals(e.getTag(OSMSettings.OSMTagKey.CLIMBING)) ? 10 : 50;
+		nodes = JarvisAlgorithm.expandPolygon(nodes, radius);
+
+		if (nodes != null) {
+			Way w = new Way(e.getId(), nodes);
+			addOuterWay(w);
+		}
 	}
 
 	private Way merge(TLongObjectHashMap<List<Way>> endMap, long stNodeId, Way changedWay,
@@ -234,6 +263,7 @@ public class MultipolygonBuilder {
 		}
 		if (combine) {
 			Way newWay = new Way(nextRandId());
+//			Way newWay = new Way(-Math.abs(w1.getId()));
 			boolean nodePresent = w1.getNodes() != null || w1.getNodes().size() != 0;
 			int w1size = nodePresent ? w1.getNodes().size() : w1.getNodeIds().size();
 			for (int i = 0; i < w1size; i++) {

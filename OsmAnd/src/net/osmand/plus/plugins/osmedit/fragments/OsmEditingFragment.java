@@ -4,7 +4,6 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -24,7 +23,6 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -34,6 +32,7 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationList
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
@@ -186,8 +185,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 		int startIndex = osmEditsPathDescr.indexOf(osmEditsPath);
 		SpannableString titleSpan = new SpannableString(osmEditsPathDescr);
 		if (startIndex != -1) {
-			Typeface typeface = FontCache.getRobotoMedium(getContext());
-			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + osmEditsPath.length(), 0);
+			titleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, startIndex + osmEditsPath.length(), 0);
 		}
 
 		Preference osmEditsDescription = findPreference("osm_edits_description");
@@ -236,7 +234,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				if (!isValidToken() && !isLoginExists()) {
-					MappersPromoFragment.showInstance(activity, this);
+					MappersPromoFragment.showInstance(activity, getSelectedAppMode(), this);
 				} else {
 					MappersFragment.showInstance(activity);
 				}

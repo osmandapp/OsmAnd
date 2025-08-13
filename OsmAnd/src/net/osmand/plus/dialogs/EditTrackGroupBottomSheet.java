@@ -34,7 +34,7 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 		app = requiredMyApplication();
 		groupName = Algorithms.isEmpty(group.getName()) ? app.getString(R.string.shared_string_gpx_points) : group.getName();
 
-		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
+		View mainView = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.track_name_edit_text, null);
 		setupTextBox(mainView);
 		setupEditText(mainView);
 

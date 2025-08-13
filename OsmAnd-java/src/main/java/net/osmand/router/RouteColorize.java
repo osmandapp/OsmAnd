@@ -1,12 +1,12 @@
 package net.osmand.router;
 
+import net.osmand.ColorPalette;
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.ColorPalette;
-import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.Algorithms;
@@ -17,8 +17,9 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class RouteColorize {
-	
+
 	public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;// in meters
 	public static int SLOPE_RANGE = 150;// 150 meters
 	private static final Log LOG = PlatformUtil.getLog(RouteColorize.class);
@@ -162,7 +163,11 @@ public class RouteColorize {
 				slopes[i] = Double.NaN;
 			} else {
 				double[] arg = findDerivativeArguments(distances, elevations, i, slopeRange);
-				slopes[i] = (arg[1] - arg[0]) / (arg[3] - arg[2]);
+				if (arg.length >= 4) {
+					slopes[i] = (arg[1] - arg[0]) / (arg[3] - arg[2]);
+				} else {
+					slopes[i] = Double.NaN;
+				}
 			}
 		}
 		return slopes;
@@ -235,7 +240,7 @@ public class RouteColorize {
 
 	private void setColorsToPoints(List<RouteColorizationPoint> points) {
 		for (RouteColorizationPoint point : points) {
-			point.color = palette.getColorByValue(point.val);
+			point.primaryColor = palette.getColorByValue(point.val);
 		}
 	}
 
@@ -439,11 +444,14 @@ public class RouteColorize {
 	}
 
 	public static class RouteColorizationPoint {
-		public int id;
-		public double lat;
-		public double lon;
-		public double val;
-		public int color;
+
+		public final int id;
+		public final double lat;
+		public final double lon;
+		public final double val;
+
+		public int primaryColor;
+		public int secondaryColor;
 
 		public RouteColorizationPoint(int id, double lat, double lon, double val) {
 			this.id = id;

@@ -1,12 +1,16 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -14,53 +18,50 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.views.layers.TransportStopHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
+
+import org.apache.commons.logging.Log;
 
 import java.util.List;
 
 public class AmenityMenuController extends MenuController {
 
-	private Amenity amenity;
-	private final MapMarker marker;
-	private TransportStopController transportStopController;
+	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
+
+	protected Amenity amenity;
+	protected final MapMarker marker;
+	protected TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
-	                             @NonNull PointDescription pointDescription,
-	                             @NonNull Amenity amenity) {
-		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
+			@NonNull PointDescription pointDescription,
+			@NonNull Amenity amenity) {
+		this(mapActivity, new AmenityMenuBuilder(mapActivity, amenity), pointDescription, amenity);
+	}
+
+	public AmenityMenuController(@NonNull MapActivity mapActivity,
+			@NonNull MenuBuilder builder,
+			@NonNull PointDescription pointDescription,
+			@NonNull Amenity amenity) {
+		super(builder, pointDescription, mapActivity);
 		this.amenity = amenity;
-		if (amenity.getType().getKeyName().equals("transportation")) {
-			boolean showTransportStops = false;
-			PoiFilter f = amenity.getType().getPoiFilterByName("public_transport");
-			if (f != null) {
-				for (PoiType t : f.getPoiTypes()) {
-					if (t.getKeyName().equals(amenity.getSubType())) {
-						showTransportStops = true;
-						break;
-					}
-				}
-			}
-			if (showTransportStops) {
-				TransportStop transportStop = TransportStopController.findBestTransportStopForAmenity(mapActivity.getMyApplication(), amenity);
-				if (transportStop != null) {
-					transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
-					transportStopController.processRoutes();
-				}
-			}
-		}
+		acquireTransportStopController(mapActivity, pointDescription);
 
 		String mapNameForMarker = amenity.getName() + "_" + amenity.getType().getKeyName();
 		marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(mapNameForMarker, amenity.getLocation());
@@ -69,8 +70,8 @@ public class AmenityMenuController extends MenuController {
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
-		} else if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT)) {
-			TitleButtonController openTrackButtonController = new TitleButtonController() {
+		} else if (amenity.isRoutePoint()) {
+			TitleButtonController openTrackButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity mapActivity = getMapActivity();
@@ -82,30 +83,58 @@ public class AmenityMenuController extends MenuController {
 			openTrackButtonController.startIconId = R.drawable.ic_action_polygom_dark;
 			openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
 			leftTitleButtonController = openTrackButtonController;
-		} else if (amenity.getType().isWiki()) {
-			leftTitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					MapActivity activity = getMapActivity();
-					if (activity != null) {
-						WikipediaDialogFragment.showInstance(activity, amenity);
+		}
+		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
+	}
+
+	protected void acquireTransportStopController(@NonNull MapActivity activity,
+			@NonNull PointDescription description) {
+		transportStopController = acquireTransportStopController(amenity, activity, description);
+		if (transportStopController != null) {
+			transportStopController.processRoutes();
+		}
+	}
+
+	@Nullable
+	protected TransportStopController acquireTransportStopController(@NonNull Amenity amenity,
+			@NonNull MapActivity activity, @NonNull PointDescription description) {
+		if (amenity.getType().getKeyName().equals("transportation")) {
+			boolean showTransportStops = false;
+			PoiFilter filter = amenity.getType().getPoiFilterByName("public_transport");
+			if (filter != null) {
+				for (PoiType type : filter.getPoiTypes()) {
+					if (type.getKeyName().equals(amenity.getSubType())) {
+						showTransportStops = true;
+						break;
 					}
 				}
-			};
-			leftTitleButtonController.caption = mapActivity.getString(R.string.context_menu_read_article);
-			leftTitleButtonController.startIconId = R.drawable.ic_action_read_text;
+			}
+			if (showTransportStops) {
+				TransportStop transportStop = TransportStopHelper.findBestTransportStopForAmenity(getApplication(), amenity);
+				if (transportStop != null) {
+					return new TransportStopController(activity, description, transportStop);
+				}
+			}
 		}
-
-		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
+		return null;
 	}
 
 	void openTrack(MapActivity mapActivity) {
 		TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
-		String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-		String name = amenity.getTagContent(Amenity.ROUTE_NAME);
-		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
-		if (article != null) {
-			travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
+		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
+			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+			String name = amenity.getTagContent(Amenity.ROUTE_NAME);
+			TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+			if (article != null) {
+				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
+			}
+		} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
+			TravelGpx travelGpx = travelHelper.searchTravelGpx(amenity.getLocation(), amenity.getRouteId());
+			if (travelGpx != null) {
+				travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getTitle(), amenity.getLocation(), false);
+			} else {
+				LOG.error("openTrack() searchTravelGpx() travelGpx is null");
+			}
 		}
 	}
 
@@ -137,17 +166,17 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public int getRightIconId() {
-		return getRightIconId(amenity);
+		return getRightIconId(getApplication(), amenity);
 	}
 
-	public static int getRightIconId(Amenity amenity) {
+	public static int getRightIconId(@NonNull Context ctx, @NonNull Amenity amenity) {
 		String iconName = amenity.getGpxIcon();
 		if (iconName == null) {
 			String mapIconName = amenity.getMapIconName();
 			if (!Algorithms.isEmpty(mapIconName) && (RenderingIcons.containsBigIcon(mapIconName))) {
 				iconName = mapIconName;
 			} else {
-				iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
+				iconName = RenderingIcons.getBigIconNameForAmenity(ctx, amenity);
 			}
 		}
 		return iconName == null ? 0 : RenderingIcons.getBigIconResourceId(iconName);
@@ -190,6 +219,9 @@ public class AmenityMenuController extends MenuController {
 				name = operator;
 			}
 		}
+		if (Algorithms.isEmpty(name) && amenity.isRouteTrack()) {
+			name = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
 		return name;
 	}
 
@@ -205,10 +237,27 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		return getTypeStr(amenity);
+		return amenity.isRouteTrack()
+				? getTypeWithDistanceStr(amenity, getApplication())
+				: getTypeStr(amenity);
 	}
 
-	public static String getTypeStr(Amenity amenity) {
+	@NonNull
+	private String getTypeWithDistanceStr(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+		String type = getTypeStr(amenity);
+		String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
+		String activityType = amenity.getRouteActivityType();
+		if (!Algorithms.isEmpty(activityType)) {
+			type = activityType;
+		}
+		if (distance != null) {
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, type, distance);
+		} else {
+			return type;
+		}
+	}
+
+	public static String getTypeStr(@NonNull Amenity amenity) {
 		return amenity.getSubTypeStr();
 	}
 
@@ -239,10 +288,10 @@ public class AmenityMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 	}
 
-	public static void addTypeMenuItem(Amenity amenity, MenuBuilder builder) {
+	public static void addTypeMenuItem(@NonNull Amenity amenity, @NonNull MenuBuilder builder) {
 		String typeStr = getTypeStr(amenity);
 		if (!Algorithms.isEmpty(typeStr)) {
-			int resId = getRightIconId(amenity);
+			int resId = getRightIconId(builder.getApplication(), amenity);
 			if (resId == 0) {
 				PoiCategory pc = amenity.getType();
 				resId = RenderingIcons.getBigIconResourceId(pc.getIconKeyName());
@@ -260,6 +309,8 @@ public class AmenityMenuController extends MenuController {
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
-		return null;
+		return amenity.isRouteTrack()
+				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight())
+				: null;
 	}
 }

@@ -18,10 +18,8 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
+import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
@@ -35,11 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class KeyAssignmentsController implements IDialogController {
+public class KeyAssignmentsController extends BaseDialogController {
 
 	public static final String PROCESS_ID = "key_assignments";
 
-	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final InputDevicesHelper deviceHelper;
 	private final InputDeviceProfile inputDevice;
@@ -52,12 +49,18 @@ public class KeyAssignmentsController implements IDialogController {
 	public KeyAssignmentsController(@NonNull OsmandApplication app,
 	                                @NonNull ApplicationMode appMode,
 	                                boolean usedOnMap) {
-		this.app = app;
+		super(app);
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.deviceHelper = app.getInputDeviceHelper();
 		this.inputDevice = deviceHelper.getSelectedDevice(appMode);
 		this.dialogManager = app.getDialogManager();
+	}
+
+	@NonNull
+	@Override
+	public String getProcessId() {
+		return PROCESS_ID;
 	}
 
 	@NonNull
@@ -171,26 +174,8 @@ public class KeyAssignmentsController implements IDialogController {
 		exitEditMode();
 	}
 
-	public void registerDialog(@NonNull IDialog dialog) {
-		dialogManager.register(PROCESS_ID, dialog);
-	}
-
-	public void unregisterDialogIfNeeded(@Nullable FragmentActivity activity) {
-		if (activity != null && !activity.isChangingConfigurations()) {
-			unregisterDialog();
-		}
-	}
-
-	private void unregisterDialog() {
-		dialogManager.unregister(PROCESS_ID);
-	}
-
 	private void askRefreshDialog() {
 		dialogManager.askRefreshDialogCompletely(PROCESS_ID);
-	}
-
-	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap, new RequestMapThemeParams().setAppMode(appMode));
 	}
 
 	private static class EditingBundle {
@@ -210,9 +195,8 @@ public class KeyAssignmentsController implements IDialogController {
 		@Override
 		public boolean equals(Object o) {
 			if (this == o) return true;
-			if (!(o instanceof EditingBundle)) return false;
+			if (!(o instanceof EditingBundle that)) return false;
 
-			EditingBundle that = (EditingBundle) o;
 			return Objects.equals(assignments, that.assignments);
 		}
 

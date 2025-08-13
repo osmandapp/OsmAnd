@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -29,7 +29,7 @@
 			android:scaleType="center"
 			android:layout_marginLeft="@dimen/dashFavIconMargin"
 			android:layout_marginRight="@dimen/dashFavIconMargin"
-			osmand:srcCompat="@drawable/ic_action_remove_dark"
+			app:srcCompat="@drawable/ic_action_remove_dark"
 			android:layout_marginEnd="@dimen/dashFavIconMargin"
 			android:layout_marginStart="@dimen/dashFavIconMargin" />
 

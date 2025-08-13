@@ -16,14 +16,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -31,10 +30,9 @@ import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.List;
 
 public class DestinationReachedFragment extends Fragment implements RouteCalculationProgressListener {
 
@@ -59,7 +57,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		app = mapActivity.getMyApplication();
 		iconsCache = app.getUIUtilities();
 		ctxMenu = mapActivity.getContextMenu();
-		nighMode = app.getDaynightHelper().isNightModeForMapControls();
+		nighMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		isLandscapeLayout = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		app.getRoutingHelper().addCalculationProgressListener(this);
 		if (savedInstanceState != null) {
@@ -99,7 +97,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 					helper.navigateToPoint(new LatLon(target.getLatitude(), target.getLongitude()),
 							true, -1, target.getOriginalPointDescription());
 					mapActivity.getMapActions().recalculateRoute(false);
-					mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
+					mapActivity.getMapActions().startNavigation();
 				}
 			}
 		});

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Deprecated
 public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public String author;
@@ -101,6 +102,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		pointsGroups.clear();
 		modifiedTime = System.currentTimeMillis();
 		pointsModifiedTime = modifiedTime;
+	}
+
+	public void addParsedPoint(GPXUtilities.WptPt point) {
+		points.add(point);
 	}
 
 	public void addPoint(GPXUtilities.WptPt point) {

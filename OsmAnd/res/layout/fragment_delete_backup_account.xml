@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/main_view"
 	android:layout_width="match_parent"
@@ -13,7 +13,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
-		osmand:layout_behavior="net.osmand.plus.backup.ui.ScrollingFooterBehaviour">
+		app:layout_behavior="net.osmand.plus.backup.ui.ScrollingFooterBehaviour">
 
 		<androidx.core.widget.NestedScrollView
 			android:id="@+id/scroll_view"
@@ -87,9 +87,9 @@
 						android:indeterminate="false"
 						android:max="100"
 						android:progress="100"
-						osmand:mpb_progressStyle="horizontal"
-						osmand:mpb_setBothDrawables="true"
-						osmand:mpb_useIntrinsicPadding="false" />
+						app:mpb_progressStyle="horizontal"
+						app:mpb_setBothDrawables="true"
+						app:mpb_useIntrinsicPadding="false" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/progress_description"
@@ -156,23 +156,23 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
 			android:background="?attr/list_background_color"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
-			osmand:expandedTitleMarginEnd="@dimen/content_padding"
-			osmand:expandedTitleMarginStart="@dimen/content_padding"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
-			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
+			app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
-				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp"
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp"
 				tools:title="@string/delete_account">
 
 			</androidx.appcompat.widget.Toolbar>

@@ -19,6 +19,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
@@ -36,14 +37,26 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	private static final int APPROXIMATE_QUICK_ACTION_SIZE_BYTES = 135;
 
 	private MapButtonsHelper mapButtonsHelper;
+
+	private ButtonStateBean stateBean;
 	private QuickActionButtonState buttonState;
 
-	public QuickActionsSettingsItem(@NonNull OsmandApplication app, @Nullable QuickActionsSettingsItem baseItem, @NonNull QuickActionButtonState buttonState) {
-		super(app, baseItem);
+	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
+			@NonNull QuickActionButtonState buttonState) {
+		super(app);
 		this.buttonState = buttonState;
+		this.stateBean = ButtonStateBean.toStateBean(buttonState);
 	}
 
-	public QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
+			@Nullable QuickActionsSettingsItem baseItem, @NonNull ButtonStateBean stateBean) {
+		super(app, baseItem);
+		this.stateBean = stateBean;
+		this.buttonState = new QuickActionButtonState(app, stateBean.id);
+	}
+
+	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
+			@NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -64,6 +77,11 @@ public class QuickActionsSettingsItem extends SettingsItem {
 		return buttonState;
 	}
 
+	@NonNull
+	public ButtonStateBean getStateBean() {
+		return stateBean;
+	}
+
 	@Override
 	public long getLocalModifiedTime() {
 		return buttonState.getLastModifiedTime();
@@ -76,19 +94,19 @@ public class QuickActionsSettingsItem extends SettingsItem {
 
 	@Override
 	public boolean exists() {
-		return mapButtonsHelper.getButtonStateById(buttonState.getId()) != null;
+		return mapButtonsHelper.getActionButtonStateById(stateBean.id) != null;
 	}
 
 	@Override
 	public long getEstimatedSize() {
-		return (long) buttonState.getQuickActions().size() * APPROXIMATE_QUICK_ACTION_SIZE_BYTES;
+		return (long) stateBean.quickActions.size() * APPROXIMATE_QUICK_ACTION_SIZE_BYTES;
 	}
 
 	@Override
 	public void apply() {
 		if (exists()) {
 			if (shouldReplace) {
-				QuickActionButtonState state = mapButtonsHelper.getButtonStateById(buttonState.getId());
+				QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(stateBean.id);
 				if (state != null) {
 					mapButtonsHelper.removeQuickActionButtonState(state);
 				}
@@ -96,27 +114,26 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				renameButton();
 			}
 		}
+		stateBean.setupButtonState(app, buttonState);
 		mapButtonsHelper.addQuickActionButtonState(buttonState);
 	}
 
 	private void renameButton() {
-		String name = buttonState.getName();
-		QuickActionButtonState newButtonState = mapButtonsHelper.createNewButtonState();
-		newButtonState.setName(mapButtonsHelper.generateUniqueButtonName(name));
-		newButtonState.setEnabled(buttonState.isEnabled());
-		buttonState = newButtonState;
+		stateBean.id = mapButtonsHelper.createNewButtonStateId();
+		stateBean.name = mapButtonsHelper.generateUniqueButtonName(stateBean.name);
+		buttonState = new QuickActionButtonState(app, stateBean.id);
 	}
 
 	@NonNull
 	@Override
 	public String getName() {
-		return buttonState.getId();
+		return stateBean.id;
 	}
 
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return buttonState.hasCustomName() ? buttonState.getName() : ctx.getString(R.string.shared_string_quick_actions);
+		return stateBean.getName(ctx);
 	}
 
 	@Override
@@ -131,9 +148,28 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				JSONObject object = json.getJSONObject("buttonState");
 				String id = object.getString("id");
 				buttonState = new QuickActionButtonState(app, id);
-				buttonState.setName(object.getString("name"));
-				buttonState.setEnabled(object.getBoolean("enabled"));
+				stateBean = new ButtonStateBean(id);
+				stateBean.name = object.optString("name");
+				stateBean.enabled = object.optBoolean("enabled");
+
+				String iconName = object.optString("icon");
+				if (!Algorithms.isEmpty(iconName)) {
+					stateBean.icon = iconName;
+				}
+				int size = object.optInt("size", -1);
+				if (size > 0) {
+					stateBean.size = size;
+				}
+				int cornerRadius = object.optInt("corner_radius", -1);
+				if (cornerRadius >= 0) {
+					stateBean.cornerRadius = cornerRadius;
+				}
+				float opacity = (float) object.optDouble("opacity", -1);
+				if (opacity >= 0) {
+					stateBean.opacity = opacity;
+				}
 			} else {
+				stateBean = new ButtonStateBean(DEFAULT_BUTTON_ID);
 				buttonState = new QuickActionButtonState(app, DEFAULT_BUTTON_ID);
 			}
 		} catch (JSONException e) {
@@ -147,9 +183,25 @@ public class QuickActionsSettingsItem extends SettingsItem {
 		super.writeToJson(json);
 		try {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("id", buttonState.getId());
-			jsonObject.put("name", buttonState.hasCustomName() ? buttonState.getName() : "");
-			jsonObject.put("enabled", buttonState.isEnabled());
+			jsonObject.put("id", stateBean.id);
+
+			if (!Algorithms.isEmpty(stateBean.name)) {
+				jsonObject.put("name", stateBean.name);
+			}
+			jsonObject.put("enabled", stateBean.enabled);
+
+			if (!Algorithms.isEmpty(stateBean.icon)) {
+				jsonObject.put("icon", stateBean.icon);
+			}
+			if (stateBean.size > 0) {
+				jsonObject.put("size", stateBean.size);
+			}
+			if (stateBean.cornerRadius >= 0) {
+				jsonObject.put("corner_radius", stateBean.cornerRadius);
+			}
+			if (stateBean.opacity >= 0) {
+				jsonObject.put("opacity", stateBean.opacity);
+			}
 			json.put("buttonState", jsonObject);
 		} catch (JSONException e) {
 			warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
@@ -166,33 +218,31 @@ public class QuickActionsSettingsItem extends SettingsItem {
 			Gson gson = new Gson();
 			Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-			List<QuickAction> quickActions = new ArrayList<>();
-			MapButtonsHelper mapButtonsHelper = app.getMapButtonsHelper();
+			List<QuickAction> actions = new ArrayList<>();
 			JSONArray itemsJson = json.getJSONArray("items");
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject object = itemsJson.getJSONObject(i);
 				String name = object.getString("name");
-				QuickAction quickAction = null;
+				QuickAction action = null;
 				if (object.has("actionType")) {
-					quickAction = mapButtonsHelper.newActionByStringType(object.getString("actionType"));
+					action = mapButtonsHelper.newActionByStringType(object.getString("actionType"));
 				} else if (object.has("type")) {
-					quickAction = mapButtonsHelper.newActionByType(object.getInt("type"));
+					action = mapButtonsHelper.newActionByType(object.getInt("type"));
 				}
-				if (quickAction != null) {
+				if (action != null) {
 					String paramsString = object.getString("params");
 					HashMap<String, String> params = gson.fromJson(paramsString, type);
 
 					if (!name.isEmpty()) {
-						quickAction.setName(name);
+						action.setName(name);
 					}
-					quickAction.setParams(params);
-					quickActions.add(quickAction);
+					action.setParams(params);
+					actions.add(action);
 				} else {
 					warnings.add(app.getString(R.string.settings_item_read_error, name));
 				}
 			}
-			mapButtonsHelper.updateQuickActions(buttonState, quickActions);
-			mapButtonsHelper.updateActiveActions();
+			stateBean.quickActions = actions;
 		} catch (JSONException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 			throw new IllegalArgumentException("Json parse error", e);
@@ -206,29 +256,31 @@ public class QuickActionsSettingsItem extends SettingsItem {
 		JSONArray jsonArray = new JSONArray();
 		Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-		List<QuickAction> quickActions = buttonState.getQuickActions();
-		if (!Algorithms.isEmpty(quickActions)) {
-			try {
-				for (QuickAction action : quickActions) {
-					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("name", action.hasCustomName(app) ? action.getName(app) : "");
-					jsonObject.put("actionType", action.getActionType().getStringId());
-					jsonObject.put("params", gson.toJson(action.getParams(), type));
-					jsonArray.put(jsonObject);
-				}
-				json.put("items", jsonArray);
-			} catch (JSONException e) {
-				warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
-				SettingsHelper.LOG.error("Failed write to json", e);
+		try {
+			for (QuickAction action : stateBean.quickActions) {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("name", action.hasCustomName(app) ? action.getName(app) : "");
+				jsonObject.put("actionType", action.getActionType().getStringId());
+				jsonObject.put("params", gson.toJson(action.getParams(), type));
+				jsonArray.put(jsonObject);
 			}
+			json.put("items", jsonArray);
+		} catch (JSONException e) {
+			warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+			SettingsHelper.LOG.error("Failed write to json", e);
 		}
 		return json;
+	}
+
+	@Override
+	public boolean shouldReadOnCollecting() {
+		return true;
 	}
 
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(true);
 	}
 
 	@Nullable

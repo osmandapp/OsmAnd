@@ -5,6 +5,7 @@ import static net.osmand.plus.notifications.OsmandNotification.NotificationType.
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -15,6 +16,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -30,6 +34,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 class RouteRecalculationHelper {
+	private static final Log LOG = PlatformUtil.getLog(RouteRecalculationHelper.class);
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
@@ -217,6 +222,15 @@ class RouteRecalculationHelper {
 		if (start == null || end == null) {
 			return;
 		}
+		try {
+			if (PlatformUtil.getOsmandRegions() == null || !app.getAppInitializer().isRoutingConfigInitialized()) {
+				app.showToastMessage(R.string.waiting_for_route_calculation);
+				LOG.warn("recalculateRouteInBackground is waiting for initialization");
+				return; // will be retried automatically
+			}
+		} catch (IOException e) {
+			LOG.warn("getOsmandRegions", e);
+		}
 		// do not evaluate very often
 		if ((!isRouteBeingCalculated() && System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval)
 				|| paramsChanged || !onlyStartPointChanged) {
@@ -358,11 +372,6 @@ class RouteRecalculationHelper {
 			return routingHelper.getSettings();
 		}
 
-		private void showMessage(String msg) {
-			OsmandApplication app = routingHelper.getApplication();
-			app.runInUIThread(() -> app.showToastMessage(msg));
-		}
-
 		@Override
 		public void run() {
 			if (!updateProgress) {
@@ -396,7 +405,7 @@ class RouteRecalculationHelper {
 					routeCalcError = app.getString(R.string.error_calculating_route)
 							+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);
 					routeCalcErrorShort = app.getString(R.string.error_calculating_route);
-					showMessage(routeCalcError);
+					app.showToastMessage(routeCalcError);
 				} else {
 					if (res.getErrorMessage() != null) {
 						routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
@@ -406,7 +415,7 @@ class RouteRecalculationHelper {
 						routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
 					}
 					app.getSettings().IGNORE_MISSING_MAPS = false; // reset on routing error
-					showMessage(routeCalcError);
+					app.showToastMessage(routeCalcError);
 				}
 			}
 			if (!updateProgress) {

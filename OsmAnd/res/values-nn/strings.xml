@@ -23,7 +23,6 @@
     <string name="rendering_attr_buildings15zoom_name">Bygningar ved zoomnivå 15</string>
     <string name="rendering_attr_moreDetailed_name">Meir detaljert</string>
     <string name="rendering_attr_lessDetailed_name">Mindre detaljert</string>
-    <string name="rendering_attr_hideAccess_name">Gøym tilgangstype</string>
     <string name="rendering_attr_showAccess_name">Vis tilgangstype</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vegkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis vegdekke</string>
@@ -310,7 +309,7 @@
     <string name="routing_attr_avoid_fords_name">Unngå vadestadar</string>
     <string name="compass_on_circles">Kompass på sirklar</string>
     <string name="map_widget_trip_recording_downhill">Nedoverbakke</string>
-    <string name="map_widget_trip_recording_distance">Avstand</string>
+    <string name="map_widget_distance">Avstand</string>
     <string name="routing_attr_avoid_4wd_only_description">Unngå vegar som berre passar køyretøy med firhjulstrekk</string>
     <string name="rendering_attr_horse_scale_impossible_name">Umogleg</string>
     <string name="navigation_history">Navigasjonshistorikk</string>
@@ -417,7 +416,6 @@
     <string name="layer_map_appearance">Konfigurer skjerm</string>
     <string name="address_search_desc">Adressesøk</string>
     <string name="open_till">Open til</string>
-    <string name="rendering_attr_alpineHiking_name">Vanskegradsklassifisering</string>
     <string name="simulate_your_location">Simuler posisjonen din</string>
     <string name="map_widget_time">Tid att</string>
     <string name="simulation_constant_mode_title">Fastsett fart</string>

@@ -7,10 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,6 +32,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -49,12 +47,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMapTileView.TouchListener;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -67,6 +65,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	public static final String KEY_DOWNLOAD_LAYER = "download_layer";
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
+	private static final String KEY_LAT_LON = "key_lat_lon";
 
 	private DownloadTilesHelper downloadTilesHelper;
 
@@ -78,7 +77,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private View view;
 	private View mapWindow;
-	private boolean mapWindowTouched;
 	private boolean wasDrawerDisabled;
 
 	private TextView tvDownloadTilesDesc;
@@ -109,11 +107,11 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private SelectTilesDownloadTypeAlertDialog alertDialog;
 	private MapLayerType layerToDownload;
 
+	@Nullable
 	private LockableScrollView scrollView;
 	private IMapLocationListener mapLocationListener;
 	private TouchListener touchListener;
-	private double lat;
-	private double lon;
+	private LatLon latLon = null;
 	private boolean portraitMode;
 
 	@Override
@@ -136,7 +134,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			selectedMinZoom = savedInstanceState.getInt(KEY_SELECTED_MIN_ZOOM);
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
 			downloadType = AndroidUtils.getSerializable(savedInstanceState, KEY_DOWNLOAD_TYPE, DownloadType.class);
-		} else {
+			if (savedInstanceState.containsKey(KEY_LAT_LON)) {
+				LatLon savedLatLon = AndroidUtils.getSerializable(savedInstanceState, KEY_LAT_LON, LatLon.class);
+				if (savedLatLon != null) {
+					latLon = savedLatLon;
+				}
+			}
+		} else if (tileSource != null) {
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			selectedMinZoom = Math.min(mapView.getZoom(), selectedMaxZoom);
 			if (args != null) {
@@ -156,6 +160,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		portraitMode = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
 		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
 
+		if (tileSource == null) {
+			dismiss();
+			return view;
+		}
 		mapWindow = view.findViewById(R.id.map_window);
 
 		View minZoomPreviewContainer = view.findViewById(R.id.min_zoom_tile_preview);
@@ -177,61 +185,77 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		mapView.setElevationAngle(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
 
 		setupToolbar();
-		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				moveMapCenterToMapWindow();
-				updateTileSourceContent();
-			}
-		});
+
 		setupDownloadButton();
 		showHideMapControls(false);
-		if (portraitMode) {
-			setupScrollableMapView();
-		}
+		setupScrollableMapView();
 
 		return view;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				view.post(() -> {
+					Context ctx = getContext();
+					if (ctx != null) {
+						moveMapCenterToMapWindow();
+						updateTileSourceContent();
+					}
+				});
+			}
+		});
+	}
+
 	@SuppressLint("ClickableViewAccessibility")
 	private void setupScrollableMapView() {
-		scrollView = view.findViewById(R.id.scroll_view);
 		mapLocationListener = getMapLocationListener();
-		touchListener = getTouchListener();
+		if (portraitMode) {
+			scrollView = view.findViewById(R.id.scroll_view);
+			touchListener = getTouchListener();
 
-		view.findViewById(R.id.map_window_container).setOnTouchListener((v, event) -> {
-			if (event.getAction() == MotionEvent.ACTION_DOWN){
-				scrollView.setScrollingEnabled(false);
+			view.findViewById(R.id.map_window_container).setOnTouchListener((v, event) -> {
+				if (event.getAction() == MotionEvent.ACTION_DOWN && scrollView != null) {
+					scrollView.setScrollingEnabled(false);
+				}
+				return false;
+			});
+			if (scrollView != null) {
+				scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+					OsmandMapTileView mapView = DownloadTilesFragment.this.mapView;
+					if (mapView != null) {
+						RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
+						View mapWindow = view.findViewById(R.id.map_window);
+						int[] xy = new int[2];
+						mapWindow.getLocationOnScreen(xy);
+						int marginTop = xy[1];
+						mapView.fitLocationToMap(latLon.getLatitude(), latLon.getLongitude(), tileBox.getZoom(), mapWindow.getWidth(),
+								mapWindow.getHeight(), marginTop, false);
+					}
+				});
 			}
-			return false;
-		});
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-			OsmandMapTileView mapView = DownloadTilesFragment.this.mapView;
-			if (mapView != null) {
-				RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
-				View mapWindow = view.findViewById(R.id.map_window);
-				int[] xy = new int[2];
-				mapWindow.getLocationOnScreen(xy);
-				int marginTop = xy[1];
-				mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
-						marginTop, false);
-			}
-		});
+		}
 	}
 
-	private IMapLocationListener getMapLocationListener(){
-		return (v, v1, o) -> {
-			QuadRect rect = getLatLonRectOfMapWindow();
-			LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
-			lat = mapWindowCenter.getLatitude();
-			lon = mapWindowCenter.getLongitude();
-		};
+	@NonNull
+	private IMapLocationListener getMapLocationListener() {
+		return (v, v1, o) -> updateLatLon();
 	}
 
-	private TouchListener getTouchListener(){
+	private void updateLatLon() {
+		QuadRect rect = getLatLonRectOfMapWindow();
+		LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
+		latLon = mapWindowCenter;
+	}
+
+	@NonNull
+	private TouchListener getTouchListener() {
 		return event -> {
-			if (event.getAction() == MotionEvent.ACTION_UP){
+			if (event.getAction() == MotionEvent.ACTION_UP && scrollView != null) {
 				scrollView.setScrollingEnabled(true);
 			}
 		};
@@ -261,16 +285,29 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	private void moveMapCenterToMapWindow() {
+		boolean animated = false;
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
-		double lat = tileBox.getCenterLatLon().getLatitude();
-		double lon = tileBox.getCenterLatLon().getLongitude();
+		if (latLon == null) {
+			latLon = new LatLon(tileBox.getCenterLatLon().getLatitude(), tileBox.getCenterLatLon().getLongitude());
+			animated = true;
+		}
+
 		View mapWindow = view.findViewById(R.id.map_window);
 		int[] xy = new int[2];
 		mapWindow.getLocationOnScreen(xy);
 		int marginTop = xy[1];
+		int marginLeft = xy[0];
 
-		mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
-				marginTop, true);
+		double lat = latLon.getLatitude();
+		double lon = latLon.getLongitude();
+
+		if (portraitMode) {
+			mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
+					marginTop, animated);
+		} else {
+			mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
+					marginTop, marginLeft, animated);
+		}
 	}
 
 	private void updateTileSourceContent() {
@@ -510,8 +547,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		mapView.addMapLocationListener(this);
 		handler.startUpdatesIfNotRunning();
 		showHideMapControls(false);
+		mapView.addMapLocationListener(mapLocationListener);
+
 		if (portraitMode) {
-			mapView.addMapLocationListener(mapLocationListener);
 			mapView.addTouchListener(touchListener);
 		}
 	}
@@ -523,6 +561,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
 		}
+		mapView.removeMapLocationListener(mapLocationListener);
 		mapView.removeMapLocationListener(this);
 		handler.stopUpdates();
 
@@ -530,7 +569,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			downloadTilesHelper.setListener(null);
 		}
 		if (portraitMode) {
-			mapView.removeMapLocationListener(mapLocationListener);
 			mapView.removeTouchListener(touchListener);
 		}
 	}
@@ -541,6 +579,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		outState.putInt(KEY_SELECTED_MIN_ZOOM, selectedMinZoom);
 		outState.putInt(KEY_SELECTED_MAX_ZOOM, selectedMaxZoom);
 		outState.putSerializable(KEY_DOWNLOAD_TYPE, downloadType);
+		if (latLon != null) {
+			outState.putSerializable(KEY_LAT_LON, latLon);
+		}
 	}
 
 	@Override
@@ -640,7 +681,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			}
 			return true;
 		});
-		calculateMissingTilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(calculateMissingTilesTask);
 	}
 
 	private long getAllTilesCount() {
@@ -684,7 +725,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		return false;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles, @NonNull MapLayerType layerType) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles,
+			@NonNull MapLayerType layerType) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			DownloadType downloadType = updateTiles ? DownloadType.ONLY_MISSING : DownloadType.ALL;
@@ -697,37 +739,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	private static class UpdateTilesHandler extends Handler {
-
-		private static final int UPDATE_TILES_MESSAGE_ID = 0;
-		private static final long UPDATE_TILES_PREVIEW_INTERVAL = 500;
-
-		private final Runnable updateTilesTask;
-
-		public UpdateTilesHandler(@NonNull Runnable updateTilesTask) {
-			this.updateTilesTask = updateTilesTask;
-		}
-
-		public void startUpdatesIfNotRunning() {
-			if (!hasMessages(UPDATE_TILES_MESSAGE_ID)) {
-				sendEmptyMessage(UPDATE_TILES_MESSAGE_ID);
-			}
-		}
-
-		public void stopUpdates() {
-			removeMessages(UPDATE_TILES_MESSAGE_ID);
-		}
-
-		@Override
-		public void handleMessage(@NonNull Message message) {
-			if (message.what == UPDATE_TILES_MESSAGE_ID) {
-				updateTilesTask.run();
-				sendEmptyMessageDelayed(UPDATE_TILES_MESSAGE_ID, UPDATE_TILES_PREVIEW_INTERVAL);
-			}
 		}
 	}
 }

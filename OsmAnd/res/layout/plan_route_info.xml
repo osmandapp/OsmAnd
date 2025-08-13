@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -63,7 +63,7 @@
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
-							osmand:srcCompat="@drawable/ic_action_arrow_down"
+							app:srcCompat="@drawable/ic_action_arrow_down"
 							android:tint="@color/icon_color_default_light"
 							android:paddingStart="@dimen/route_info_icon_padding_right"
 							android:paddingEnd="@dimen/route_info_icon_padding_right" />
@@ -85,7 +85,7 @@
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
-							osmand:srcCompat="@drawable/ic_overflow_menu_dark"
+							app:srcCompat="@drawable/ic_overflow_menu_dark"
 							android:paddingStart="@dimen/route_info_icon_padding_right"
 							android:paddingEnd="@dimen/route_info_icon_padding_right" />
 
@@ -118,7 +118,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						osmand:srcCompat="@drawable/ic_action_location_color" />
+						app:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -184,7 +184,7 @@
 								android:text="@string/shared_string_swap"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								app:typefaceWeight="medium"
 								android:visibility="gone"
 								tools:ignore="UnusedAttribute" />
 
@@ -230,7 +230,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						osmand:srcCompat="@drawable/ic_action_location_color" />
+						app:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -295,7 +295,7 @@
 								android:text="@string/shared_string_edit"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								app:typefaceWeight="medium"
 								tools:ignore="UnusedAttribute" />
 
 							<androidx.appcompat.widget.AppCompatImageView
@@ -340,7 +340,7 @@
 						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						osmand:srcCompat="@drawable/ic_action_location_color" />
+						app:srcCompat="@drawable/ic_action_location_color" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -404,7 +404,7 @@
 								android:text="@string/shared_string_add"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								app:typefaceWeight="medium"
 								tools:ignore="UnusedAttribute" />
 
 							<androidx.appcompat.widget.AppCompatImageView
@@ -474,7 +474,7 @@
 						android:text="@string/shared_string_settings"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/text_button_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:ignore="UnusedAttribute" />
 
 					<androidx.appcompat.widget.AppCompatImageView
@@ -497,9 +497,9 @@
 					android:layout_gravity="bottom"
 					android:max="100"
 					android:visibility="gone"
-					osmand:mpb_progressStyle="horizontal"
-					osmand:mpb_useIntrinsicPadding="false"
-					osmand:mpb_setBothDrawables="true"
+					app:mpb_progressStyle="horizontal"
+					app:mpb_useIntrinsicPadding="false"
+					app:mpb_setBothDrawables="true"
 					style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
 
 			</FrameLayout>
@@ -553,7 +553,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_contextmenu_shadow" />
+			app:srcCompat="@drawable/bg_contextmenu_shadow" />
 
 	</LinearLayout>
 

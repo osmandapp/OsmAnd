@@ -20,25 +20,24 @@ import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -71,7 +70,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 	@NonNull
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		if (viewType == HEADER_TYPE) {
 			View view = inflater.inflate(R.layout.list_item_header_import, parent, false);
 			return new HeaderViewHolder(view);
@@ -130,10 +129,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				int actualIconColor = customIconColor != null ?
 						customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
 				itemHolder.icon.setImageDrawable(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
-			} else if (currentItem instanceof QuickActionButtonState) {
-				QuickActionButtonState buttonState = (QuickActionButtonState) currentItem;
-				itemHolder.title.setText(buttonState.getName());
-				itemHolder.icon.setImageDrawable(buttonState.getIcon(nightMode, false, ColorUtilities.getColor(app, activeColorRes)));
+			} else if (currentItem instanceof ButtonStateBean) {
+				ButtonStateBean stateBean = (ButtonStateBean) currentItem;
+				itemHolder.title.setText(stateBean.getName(app));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(stateBean.getIconId(app), activeColorRes));
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
@@ -151,7 +150,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
-					itemHolder.title.setText(GpxUiHelper.getGpxTitle(file.getName()));
+					itemHolder.title.setText(GpxHelper.INSTANCE.getGpxTitle(file.getName()));
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 					int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);

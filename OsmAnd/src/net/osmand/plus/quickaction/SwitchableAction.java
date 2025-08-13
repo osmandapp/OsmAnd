@@ -18,7 +18,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -29,6 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
@@ -235,13 +235,13 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			});
 
 			holder.closeBtn.setOnClickListener(v -> {
-				String oldTitle = getTitle(itemsList);
+				String oldTitle = getTitle(itemsList, app);
 				String defaultName = holder.handleView.getContext().getString(getNameRes());
 
 				deleteItem(holder.getAdapterPosition());
 
 				if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
-					String newTitle = getTitle(itemsList);
+					String newTitle = getTitle(itemsList, app);
 					title.setText(newTitle);
 				}
 			});
@@ -273,7 +273,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		public void addItem(T item, Context context) {
 			if (!itemsList.contains(item)) {
-				String oldTitle = getTitle(itemsList);
+				String oldTitle = getTitle(itemsList, context);
 				String defaultName = context.getString(getNameRes());
 
 				int oldSize = itemsList.size();
@@ -282,7 +282,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				notifyItemRangeInserted(oldSize, itemsList.size() - oldSize);
 
 				if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
-					String newTitle = getTitle(itemsList);
+					String newTitle = getTitle(itemsList, context);
 					title.setText(newTitle);
 				}
 			}
@@ -290,7 +290,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		@Override
 		public boolean onItemMove(int selectedPosition, int targetPosition) {
-			String oldTitle = getTitle(itemsList);
+			String oldTitle = getTitle(itemsList, context);
 			String defaultName = context.getString(getNameRes());
 
 			Collections.swap(itemsList, selectedPosition, targetPosition);
@@ -314,7 +314,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
 
-				String newTitle = getTitle(itemsList);
+				String newTitle = getTitle(itemsList, context);
 				title.setText(newTitle);
 			}
 
@@ -345,7 +345,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 	}
 
-	protected abstract String getTitle(List<T> filters);
+	protected abstract String getTitle(List<T> filters, @NonNull Context ctx);
 
 	protected abstract void saveListToParams(List<T> list);
 
@@ -363,9 +363,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@ColorInt
 	protected int getItemIconColor(OsmandApplication app, T item) {
-		boolean nightMode = !app.getSettings().isLightContent();
-		int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
-		return ContextCompat.getColor(app, colorRes);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		return ColorUtilities.getDefaultIconColor(app, nightMode);
 	}
 
 	@StringRes

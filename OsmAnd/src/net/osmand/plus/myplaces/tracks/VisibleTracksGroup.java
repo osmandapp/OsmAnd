@@ -1,13 +1,12 @@
 package net.osmand.plus.myplaces.tracks;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.plus.configmap.tracks.TrackTabType;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 
@@ -26,10 +25,16 @@ public class VisibleTracksGroup implements TracksGroup {
 
 	@NonNull
 	@Override
+	public String getId() {
+		return TrackTabType.ON_MAP.name();
+	}
+
+	@NonNull
+	@Override
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
 		for (SelectedGpxFile selectedGpxFile : selectedGpxHelper.getSelectedGPXFiles()) {
-			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
+			TrackItem trackItem = new TrackItem(selectedGpxFile.getGpxFile());
 			trackItems.add(trackItem);
 		}
 		return trackItems;
@@ -37,13 +42,13 @@ public class VisibleTracksGroup implements TracksGroup {
 
 	@NonNull
 	@Override
-	public String getName(@NonNull Context context) {
-		return context.getString(R.string.shared_string_visible_on_map);
+	public String getName() {
+		return app.getString(R.string.shared_string_visible_on_map);
 	}
 
 	@NonNull
 	@Override
 	public String toString() {
-		return getName(app);
+		return getName();
 	}
 }

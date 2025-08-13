@@ -1,5 +1,6 @@
 package net.osmand.plus.profiles;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -13,10 +14,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -24,6 +23,8 @@ import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,14 +77,15 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	private void addProfileItem(ProfileDataObject profile) {
+		Context context = requireContext();
 		OsmandApplication app = requiredMyApplication();
-		View itemView = UiUtilities.getInflater(app, nightMode)
+		View itemView = UiUtilities.getInflater(requireContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp, null);
 
 		int profileColor = profile.getIconColor(nightMode);
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		int disableColorId = ColorUtilities.getDefaultIconColorId(nightMode);
-		int disableColor = ContextCompat.getColor(app, disableColorId);
+		int disableColor = ContextCompat.getColor(context, disableColorId);
 		boolean enable = profile.isEnabled();
 
 		TextView tvTitle = itemView.findViewById(R.id.title);
@@ -95,14 +97,14 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 		tvDescription.setText(profile.getDescription());
 
 		if (!enable) {
-			tvTitle.setTextColor(ContextCompat.getColor(app, disableColorId));
-			tvDescription.setTextColor(ContextCompat.getColor(app, disableColorId));
+			tvTitle.setTextColor(ContextCompat.getColor(context, disableColorId));
+			tvDescription.setTextColor(ContextCompat.getColor(context, disableColorId));
 		}
 
 		Drawable drawableIcon = app.getUIUtilities().getPaintedIcon(
 				profile.getIconRes(), enable ? profileColor : disableColor);
 		ivIcon.setImageDrawable(drawableIcon);
-		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app,
+		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(context,
 				enable ? activeColorId : disableColorId), compoundButton);
 		compoundButton.setSaveEnabled(false);
 		compoundButton.setChecked(profile.isSelected());

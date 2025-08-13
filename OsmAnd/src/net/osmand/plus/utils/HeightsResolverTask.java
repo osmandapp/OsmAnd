@@ -5,12 +5,12 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private final File file;
 	private final List<LatLon> points;
 	private final HeightsResolverCallback callback;
@@ -30,7 +30,7 @@ public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 	}
 
 	public interface GpxHeightsResolverCallback {
-		void onHeightsResolveDone(@Nullable GPXFile gpxFile);
+		void onHeightsResolveDone(@Nullable GpxFile gpxFile);
 	}
 
 	public HeightsResolverTask(@NonNull List<LatLon> points, @NonNull HeightsResolverCallback callback) {
@@ -41,7 +41,7 @@ public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 		this.gpxCallback = null;
 	}
 
-	public HeightsResolverTask(@NonNull GPXFile gpxFile, @NonNull GpxHeightsResolverCallback gpxCallback) {
+	public HeightsResolverTask(@NonNull GpxFile gpxFile, @NonNull GpxHeightsResolverCallback gpxCallback) {
 		this.file = null;
 		this.gpxFile = gpxFile;
 		this.points = null;
@@ -59,14 +59,14 @@ public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 
 	@Override
 	protected float[] doInBackground(Void... voids) {
-		GPXFile gpx = gpxFile;
+		GpxFile gpx = gpxFile;
 		List<LatLon> points = this.points;
 		if (points == null) {
 			if (gpx != null) {
 				points = getGpxPoints(gpx);
 			} else if (file != null && file.exists()) {
-				gpx = GPXUtilities.loadGPXFile(file);
-				if (gpx.error == null) {
+				gpx = SharedUtil.loadGpxFile(file);
+				if (gpx.getError() == null) {
 					points = getGpxPoints(gpx);
 				}
 			}
@@ -78,7 +78,7 @@ public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 			List<WptPt> segmentsPoints = gpx.getAllSegmentsPoints();
 			int i = 0;
 			for (WptPt point : segmentsPoints) {
-				point.ele = heights[i++];
+				point.setEle(heights[i++]);
 			}
 			this.gpxFile = gpx;
 		}
@@ -86,7 +86,7 @@ public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 	}
 
 	@NonNull
-	private List<LatLon> getGpxPoints(@NonNull GPXFile gpx) {
+	private List<LatLon> getGpxPoints(@NonNull GpxFile gpx) {
 		List<LatLon> list = new ArrayList<>();
 		for (WptPt point : gpx.getAllSegmentsPoints()) {
 			list.add(new LatLon(point.getLatitude(), point.getLongitude()));

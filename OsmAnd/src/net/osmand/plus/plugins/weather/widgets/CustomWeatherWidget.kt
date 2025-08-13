@@ -10,7 +10,7 @@ class CustomWeatherWidget(
 	mapActivity: MapActivity,
 	widgetType: WidgetType,
 	customId: String?,
-	band: Short) : WeatherWidget(mapActivity, widgetType, customId, band) {
+	band: Short) : WeatherWidget(mapActivity, widgetType, customId, null, band) {
 
 	@LayoutRes
 	override fun getContentLayoutId(): Int {

@@ -2,7 +2,7 @@ package net.osmand.plus.settings.vehiclesize.containers;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.vehiclesize.WeightMetric;
 
 public class Metric {

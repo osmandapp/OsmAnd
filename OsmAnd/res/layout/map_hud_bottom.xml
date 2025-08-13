@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<net.osmand.plus.widgets.LinearLayoutEx
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
 				layout="@layout/map_alarm_warning"
 				android:layout_width="@dimen/map_alarm_size"
 				android:layout_height="@dimen/map_alarm_size"
-				android:layout_marginStart="@dimen/map_button_margin"/>
+				android:layout_marginStart="@dimen/map_button_margin" />
 
 			<include
 				android:id="@+id/speedometer_widget"
@@ -76,24 +76,8 @@
 			android:layout_marginStart="@dimen/map_button_margin"
 			android:layout_marginBottom="@dimen/map_button_margin">
 
-			<ImageButton
-				android:id="@+id/map_menu_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:background="@drawable/btn_round"
-				android:contentDescription="@string/backToMenu"
-				tools:src="@drawable/ic_action_remove_dark" />
-
-			<ImageButton
-				android:id="@+id/map_route_info_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_marginStart="@dimen/map_button_spacing"
-				android:background="@drawable/btn_round"
-				android:contentDescription="@string/layer_route"
-				tools:src="@drawable/ic_action_remove_dark" />
-
 			<FrameLayout
+				android:id="@+id/measurement_buttons"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content">
 
@@ -117,29 +101,7 @@
 
 			</FrameLayout>
 
-			<LinearLayout
-				android:id="@+id/map_ruler_container"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="bottom">
-
-				<include
-					layout="@layout/map_ruler"
-					android:layout_width="@dimen/map_ruler_width"
-					android:layout_height="wrap_content"
-					android:layout_gravity="bottom"
-					android:layout_marginStart="@dimen/map_button_margin" />
-			</LinearLayout>
-
 		</LinearLayout>
-
-		<include
-			layout="@layout/map_hud_controls"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="bottom|end"
-			android:layout_marginEnd="@dimen/map_button_margin"
-			android:layout_marginBottom="@dimen/map_button_margin" />
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/map_horizontal_progress"
@@ -149,14 +111,13 @@
 			android:layout_gravity="bottom"
 			android:max="100"
 			android:visibility="gone"
-			osmand:mpb_progressStyle="horizontal"
-			osmand:mpb_setBothDrawables="true"
-			osmand:mpb_useIntrinsicPadding="false"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_setBothDrawables="true"
+			app:mpb_useIntrinsicPadding="false"
 			tools:progress="60"
 			tools:visibility="visible" />
 
 	</FrameLayout>
-
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -167,26 +128,9 @@
 			tools:visibility="gone" />
 
 		<include
-			layout="@layout/move_marker_bottom_sheet"
-			tools:visibility="gone" />
-
-		<include
 			layout="@layout/add_gpx_point_bottom_sheet"
 			tools:visibility="gone" />
 
-		<FrameLayout
-			android:id="@+id/bottomFragmentContainer"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent" />
-
 	</FrameLayout>
 
-	<net.osmand.plus.views.controls.VerticalWidgetPanel
-		android:id="@+id/map_bottom_widgets_panel"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:paddingTop="5dp"
-		app:topPanel="false" />
-
-</LinearLayout>
+</net.osmand.plus.widgets.LinearLayoutEx>
