@@ -43,6 +43,7 @@ public class RendererRegistry {
 	public static final String TOURING_VIEW = "Touring view (contrast and details)";
 	public static final String WINTER_SKI_RENDER = "Winter and ski";
 	public static final String NAUTICAL_RENDER = "Nautical";
+	public static final String MARINE_RENDER = "Marine";
 	public static final String TOPO_RENDER = "Topo";
 	public static final String OSM_CARTO_RENDER = "OSM-carto";
 	public static final String OFFROAD_RENDER = "Offroad";
@@ -89,6 +90,7 @@ public class RendererRegistry {
 		internalRenderers.put(LIGHTRS_RENDER, "LightRS" + RENDERER_INDEX_EXT);
 		internalRenderers.put(UNIRS_RENDER, "UniRS" + RENDERER_INDEX_EXT);
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + RENDERER_INDEX_EXT);
+		internalRenderers.put(MARINE_RENDER, "marine" + RENDERER_INDEX_EXT);
 		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + RENDERER_INDEX_EXT);
 		internalRenderers.put(OFFROAD_RENDER, "offroad" + RENDERER_INDEX_EXT);
 		internalRenderers.put(DESERT_RENDER, "desert" + RENDERER_INDEX_EXT);
@@ -422,6 +424,8 @@ public class RendererRegistry {
 				return ctx.getString(R.string.winter_and_ski_renderer);
 			case NAUTICAL_RENDER:
 				return ctx.getString(R.string.nautical_renderer);
+			case MARINE_RENDER:
+				return ctx.getString(R.string.marine_renderer);
 		}
 		return null;
 	}
@@ -445,6 +449,8 @@ public class RendererRegistry {
 				return ctx.getString(R.string.ski_map_render_descr);
 			case NAUTICAL_RENDER:
 				return ctx.getString(R.string.nautical_render_descr);
+			case MARINE_RENDER:
+				return ctx.getString(R.string.marine_render_descr);
 			case OFFROAD_RENDER:
 				return ctx.getString(R.string.off_road_render_descr);
 			case DESERT_RENDER:

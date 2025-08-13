@@ -5809,4 +5809,12 @@
     <string name="write_location_provider_description">Збереження постачальника місцезнаходження для кожної точки треку під час запису</string>
     <string name="write_location_provider">Постачальник місцезнаходження для запису</string>
     <string name="altitude_metrics_description">Встановлює одиницю відображення висоти у віджетах та статистиці.</string>
+    <string name="average_elevation">Середній висота</string>
+    <string name="ascent">Підйом</string>
+    <string name="descent">Спуск</string>
+    <string name="map_orientations_choose_description">Залиште поле порожнім, щоб перемикатися між усіма доступними режимами, або додайте лише потрібні.</string>
+    <string name="map_orientations">Орієнтації карти</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Відповідь</string>
 </resources>

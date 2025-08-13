@@ -5633,7 +5633,7 @@
     <string name="popular_places_nearby">Позната места у близини</string>
     <string name="recently_visited">Недавно посећено</string>
     <string name="shared_string_length">Дужина</string>
-    <string name="shared_string_avg_altitude">Просечна надморска висина</string>
+    <string name="shared_string_avg_altitude">Прос. надморска висина</string>
     <string name="shared_string_avg_speed">Најмања брзина</string>
     <string name="map_widget_route_information">Информације о рути</string>
     <string name="shared_string_default_view">Подразумевани приказ</string>
@@ -5787,4 +5787,12 @@
     <string name="write_location_provider_description">Сачувај добављача локације за сваку тачку стазе током снимања</string>
     <string name="write_location_provider">Упишите добављача локације</string>
     <string name="altitude_metrics_description">Подешава јединицу приказа за надморску висину у виџетима и статистици.</string>
+    <string name="average_elevation">Просечна надморска висина</string>
+    <string name="ascent">Успон</string>
+    <string name="descent">Спуст</string>
+    <string name="map_orientations_choose_description">Оставите празно да бисте пребацивали између свих доступних режима или додајте само оне које желите.</string>
+    <string name="map_orientations">Оријентације мапе</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Одговор</string>
 </resources>

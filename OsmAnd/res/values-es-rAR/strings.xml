@@ -5672,4 +5672,12 @@
     <string name="write_location_provider_description">Guardá el proveedor de ubicación en cada punto de la traza, mientras se graba</string>
     <string name="write_location_provider">Escribir proveedor de ubicación</string>
     <string name="altitude_metrics_description">Define la unidad de medida para la altitud en los widgets y las estadísticas.</string>
+    <string name="average_elevation">Elevación media</string>
+    <string name="ascent">Ascenso</string>
+    <string name="descent">Descenso</string>
+    <string name="map_orientations_choose_description">Dejá vacío para alternar entre todos los modos disponibles, o agregá sólo los que prefieras.</string>
+    <string name="map_orientations">Orientaciones del mapa</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Respuesta</string>
 </resources>
