@@ -1,16 +1,16 @@
-apply from: '../versions.gradle'
+apply from: rootProject.file("versions.gradle")
 
 tasks.register('printc') {
 	configurations.each { if (it.isCanBeResolved()) println it.name }
 }
 
 android {
-    compileSdk 35
-    buildToolsVersion = "35.0.0"
+    compileSdk osmand_compileSdk
+    buildToolsVersion = osmand_buildToolsVersion
     // compileNdkVersion "android-ndk-r17b"
     namespace = "net.osmand.plus"
     defaultConfig {
-        targetSdkVersion 34
+        targetSdkVersion osmand_targetSdk
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -429,7 +429,7 @@ dependencies {
 	implementation "androidx.car.app:app:1.4.0"
 	implementation "androidx.car.app:app-projected:1.4.0"
 
-	implementation 'com.google.android.gms:play-services-location:$play_services_location'
+	implementation 'com.google.android.gms:play-services-location:21.3.0'
 
 	//implementation "androidx.tracing:tracing:1.1.0"
 	//debugImplementation 'androidx.test:monitor:1.6.1'

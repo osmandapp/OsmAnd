@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
 apply from: 'build-common.gradle'
-apply from: '../versions.gradle'
+apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 
 android {
 
 	defaultConfig {
-		minSdkVersion minSdk
+		minSdkVersion osmand_minSdk
 	}
 
 	lintOptions {
@@ -110,5 +110,5 @@ project.afterEvaluate {
 }
 
 dependencies {
-	implementation "com.google.android.gms:play-services-location:$play_services_location"
+	implementation 'com.google.android.gms:play-services-location:21.3.0'
 }

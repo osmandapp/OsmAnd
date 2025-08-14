@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: 'build-common.gradle'
-apply from: '../versions.gradle'
+apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 
@@ -48,7 +48,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion minSdk
+		minSdkVersion osmand_minSdk
 		versionCode 5299
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		versionName "5.2.0"
