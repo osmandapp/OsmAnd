@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
 apply from: 'build-common.gradle'
+apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 
 android {
 
 	defaultConfig {
-		minSdkVersion 24
+		minSdkVersion osmand_minSdk
 	}
 
 	lintOptions {

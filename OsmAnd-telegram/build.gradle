@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply from: rootProject.file("versions.gradle")
 
 android {
-	compileSdk 34
-	buildToolsVersion = "34.0.0"
+	compileSdk osmand_compileSdk
+	buildToolsVersion = osmand_buildToolsVersion
 	namespace = "net.osmand.telegram"
 
 	compileOptions {
@@ -26,8 +27,8 @@ android {
 
 	defaultConfig {
 		applicationId "net.osmand.telegram"
-		minSdkVersion 24
-		targetSdkVersion 34
+		minSdkVersion osmand_minSdk
+		targetSdkVersion osmand_targetSdk
 		multiDexEnabled true
 		versionCode 1
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
