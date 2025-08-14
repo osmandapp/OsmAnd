@@ -150,7 +150,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	//OpenGL
 	private int markersCount;
 	private VectorLinesCollection vectorLinesCollection;
-	private List<VectorLinePair> Lines;
+	private List<VectorLinePair> lines;
 	private MapMarkersCollection distanceMarkersCollection;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
 	private int displayedWidgets;
@@ -283,9 +283,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		handler = new Handler();
 		initUI();
 
-		OsmandApplication app = getApplication();
-		OsmandSettings settings = app.getSettings();
-		settings.DISPLAYED_MARKERS_WIDGETS_COUNT.addListener(initializeMapObjects);
+		getApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.addListener(initializeMapObjects);
 	}
 
 	private final StateChangedListener<Integer> initializeMapObjects = new StateChangedListener<Integer>() {
@@ -301,9 +299,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 									@Nullable MapRendererView newMapRenderer) {
 		super.onMapRendererChange(currentMapRenderer, newMapRenderer);
 
-		OsmandApplication app = getApplication();
-		OsmandSettings settings = app.getSettings();
-		initializeMapObjects(settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get(), newMapRenderer);
+		initializeMapObjects(getApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get(), newMapRenderer);
 	}
 
 	@Override
@@ -870,7 +866,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	/**
 	 * OpenGL
 	 */
-	private void initializeMapObjects(Integer objectsCount, @Nullable MapRendererView mapRenderer) {
+	private void initializeMapObjects(int objectsCount, @Nullable MapRendererView mapRenderer) {
 		if (mapRenderer == null) {
 			return;
 		}
@@ -886,7 +882,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		distanceMarkersCollection = new MapMarkersCollection();
 		vectorLinesCollection = new VectorLinesCollection();
 
-		Lines = new ArrayList<>(objectsCount);
+		lines = new ArrayList<>(objectsCount);
 
 		double strokeWidth = 20.0d;
 
@@ -946,13 +942,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			outlineBuilder.attachMarker(distanceMarker);
 			linePair.outline = outlineBuilder.buildAndAddToCollection(vectorLinesCollection);
 
-			Lines.add(linePair);
+			lines.add(linePair);
 		}
 	}
 
 	void updateVectorLine(@NonNull MapRendererView mapRenderer, int index, int color, PointI start,
 						  PointI end, boolean nightMode, String distance) {
-		if (index > Lines.size()) {
+		if (index > lines.size()) {
 			return;
 		}
 
@@ -963,7 +959,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		points.add(start);
 		points.add(end);
 
-		VectorLinePair linePair = Lines.get(index);
+		VectorLinePair linePair = lines.get(index);
 
 		QVectorMapMarker distanceMarkers = linePair.outline.getAttachedMarkers();
 		if (!distanceMarkers.isEmpty()) {
