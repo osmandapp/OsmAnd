@@ -426,6 +426,7 @@ public class BackupHelper {
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		params.put("name", fileName);
+		params.put("fileName", fileName);
 		params.put("type", type);
 		params.put("clienttime", String.valueOf(lastModifiedTime));
 
