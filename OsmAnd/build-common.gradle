@@ -1,14 +1,16 @@
+apply from: rootProject.file("versions.gradle")
+
 tasks.register('printc') {
 	configurations.each { if (it.isCanBeResolved()) println it.name }
 }
 
 android {
-    compileSdk 35
-    buildToolsVersion = "35.0.0"
+    compileSdk osmand_compileSdk
+    buildToolsVersion = osmand_buildToolsVersion
     // compileNdkVersion "android-ndk-r17b"
     namespace = "net.osmand.plus"
     defaultConfig {
-        targetSdkVersion 34
+        targetSdkVersion osmand_targetSdk
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
