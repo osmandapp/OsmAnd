@@ -374,14 +374,13 @@ public class RearrangePoiFiltersFragment extends BaseFullScreenDialogFragment im
 
 	public static void showInstance(@NonNull ApplicationMode appMode, @NonNull DialogFragment parentFragment,
 	                                boolean usedOnMap, OnApplyPoiFiltersState callback) {
-		try {
+		FragmentManager childFragmentManager = parentFragment.getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
 			RearrangePoiFiltersFragment fragment = new RearrangePoiFiltersFragment();
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setResultCallback(callback);
 			fragment.setSelectedAppMode(appMode);
-			fragment.show(parentFragment.getChildFragmentManager(), TAG);
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			fragment.show(childFragmentManager, TAG);
 		}
 	}
 

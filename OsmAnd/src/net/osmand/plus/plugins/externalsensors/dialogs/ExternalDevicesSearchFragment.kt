@@ -223,6 +223,6 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
     }
 
     override fun onDeviceClicked(device: AbstractDevice<out AbstractSensor>) {
-        ExternalDeviceDetailsFragment.showInstance(activity!!.supportFragmentManager, device)
+        ExternalDeviceDetailsFragment.showInstance(requireActivity().supportFragmentManager, device)
     }
 }

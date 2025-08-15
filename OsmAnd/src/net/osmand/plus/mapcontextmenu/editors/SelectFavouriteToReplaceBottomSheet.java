@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -60,9 +59,16 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 		}
 	}
 
-	public static void showInstance(@NonNull Activity activity, @Nullable Bundle args) {
-		SelectFavouriteToReplaceBottomSheet fragment = new SelectFavouriteToReplaceBottomSheet();
-		fragment.setArguments(args);
-		showInstance((FragmentActivity) activity, fragment);
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @Nullable FavouritePoint favouritePoint) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putSerializable(KEY_FAVORITE, favouritePoint);
+
+			SelectFavouriteToReplaceBottomSheet fragment = new SelectFavouriteToReplaceBottomSheet();
+			fragment.setArguments(args);
+			fragment.show(manager, SelectFavouriteBottomSheet.TAG);
+		}
 	}
 }

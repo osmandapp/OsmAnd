@@ -631,9 +631,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 			MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
-				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
-				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
-				plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
+				MapillaryFirstDialogFragment.showInstance(mapActivity);
 			}
 		}
 		mapActivity.updateStatusBarColor();

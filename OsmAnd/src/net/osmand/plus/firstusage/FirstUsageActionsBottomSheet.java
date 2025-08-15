@@ -7,11 +7,16 @@ import static net.osmand.plus.firstusage.FirstUsageAction.SELECT_STORAGE_FOLDER;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.firstusage.FirstUsageWizardFragment.WizardType;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class FirstUsageActionsBottomSheet extends BaseFirstUsageBottomSheet {
+
+	private static final String TAG = FirstUsageActionsBottomSheet.class.getSimpleName();
 
 	@Override
 	protected String getTitle() {
@@ -33,6 +38,15 @@ public class FirstUsageActionsBottomSheet extends BaseFirstUsageBottomSheet {
 				processActionClick(SELECT_STORAGE_FOLDER);
 				dismiss();
 			}));
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull Fragment target) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			FirstUsageActionsBottomSheet fragment = new FirstUsageActionsBottomSheet();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
 		}
 	}
 }

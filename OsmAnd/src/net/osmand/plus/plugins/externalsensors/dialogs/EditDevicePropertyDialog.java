@@ -170,7 +170,7 @@ public class EditDevicePropertyDialog extends BaseFullScreenDialogFragment {
 			throw new IllegalArgumentException("target fragment should implement OnSaveSensorNameCallback");
 		}
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			EditDevicePropertyDialog fragment = new EditDevicePropertyDialog();
 			Bundle args = new Bundle();
 			ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);

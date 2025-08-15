@@ -215,11 +215,8 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		int activeColor = ColorUtilities.getActiveColor(getContext(), nightMode);
 		onlineDocumentationButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_help, activeColor));
 		ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
-		poiTypeButton.setOnClickListener(v -> {
-			PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();
-			fragment.setOnItemSelectListener(this::setPoiCategory);
-			fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
-		});
+		poiTypeButton.setOnClickListener(v ->
+				PoiTypeDialogFragment.showInstance(getChildFragmentManager(), this::setPoiCategory));
 
 		ExtendedEditText poiNameEditText = view.findViewById(R.id.poiNameEditText);
 		AndroidUtils.setTextHorizontalGravity(poiNameEditText, Gravity.START);

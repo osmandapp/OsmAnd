@@ -12,6 +12,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -82,7 +83,7 @@ public class BackupTypesFragment extends BaseBackupTypesFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		if (manager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			BackupTypesFragment fragment = new BackupTypesFragment();
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

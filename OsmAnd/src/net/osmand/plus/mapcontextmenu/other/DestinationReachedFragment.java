@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
@@ -227,13 +228,13 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 		}
 	}
 
-	private static void showInstance(@NonNull MapActivity mapActivity) {
-		FragmentManager fm = mapActivity.getSupportFragmentManager();
+	private static void showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager fm = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			int slideInAnim = R.anim.slide_in_bottom;
 			int slideOutAnim = R.anim.slide_out_bottom;
-			if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-				boolean isRtl = AndroidUtils.isLayoutRtl(mapActivity);
+			if (!AndroidUiHelper.isOrientationPortrait(activity)) {
+				boolean isRtl = AndroidUtils.isLayoutRtl(activity);
 				slideInAnim = isRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
 				slideOutAnim = isRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
 			}

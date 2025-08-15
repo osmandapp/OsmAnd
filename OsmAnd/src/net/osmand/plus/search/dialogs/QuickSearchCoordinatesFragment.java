@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.openlocationcode.OpenLocationCode;
 import com.google.openlocationcode.OpenLocationCode.CodeArea;
@@ -869,21 +870,26 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, latLon);
 	}
 
-	public static void showDialog(DialogFragment parentFragment, String text) {
-		Bundle bundle = new Bundle();
-		bundle.putString(QUICK_SEARCH_COORDS_TEXT_KEY, text);
-		QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
-		fragment.setArguments(bundle);
-		fragment.show(parentFragment.getChildFragmentManager(), TAG);
+	public static void showInstance(@NonNull DialogFragment parentFragment, String text) {
+		FragmentManager manager = parentFragment.getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(QUICK_SEARCH_COORDS_TEXT_KEY, text);
+			QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
+		}
 	}
 
-	public static void showDialog(DialogFragment parentFragment, double latitude,
-			double longitude) {
-		Bundle bundle = new Bundle();
-		bundle.putDouble(QUICK_SEARCH_COORDS_LATITUDE_KEY, latitude);
-		bundle.putDouble(QUICK_SEARCH_COORDS_LONGITUDE_KEY, longitude);
-		QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
-		fragment.setArguments(bundle);
-		fragment.show(parentFragment.getChildFragmentManager(), TAG);
+	public static void showInstance(@NonNull DialogFragment parentFragment, double lat, double lon) {
+		FragmentManager manager = parentFragment.getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle bundle = new Bundle();
+			bundle.putDouble(QUICK_SEARCH_COORDS_LATITUDE_KEY, lat);
+			bundle.putDouble(QUICK_SEARCH_COORDS_LONGITUDE_KEY, lon);
+			QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
+			fragment.setArguments(bundle);
+			fragment.show(manager, TAG);
+		}
 	}
 }

@@ -28,6 +28,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -640,17 +641,21 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		}
 	}
 
-	public static void showDialog(DialogFragment parentFragment, String filterByName, String filterId) {
-		Bundle bundle = new Bundle();
-		if (filterByName != null) {
-			bundle.putString(QUICK_SEARCH_POI_FILTER_BY_NAME_KEY, filterByName);
+	public static void showInstance(@NonNull DialogFragment parentFragment,
+	                                @Nullable String filterByName, @Nullable String filterId) {
+		FragmentManager manager = parentFragment.getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle bundle = new Bundle();
+			if (filterByName != null) {
+				bundle.putString(QUICK_SEARCH_POI_FILTER_BY_NAME_KEY, filterByName);
+			}
+			if (filterId != null) {
+				bundle.putString(QUICK_SEARCH_POI_FILTER_ID_KEY, filterId);
+			}
+			QuickSearchPoiFilterFragment fragment = new QuickSearchPoiFilterFragment();
+			fragment.setArguments(bundle);
+			fragment.show(manager, TAG);
 		}
-		if (filterId != null) {
-			bundle.putString(QUICK_SEARCH_POI_FILTER_ID_KEY, filterId);
-		}
-		QuickSearchPoiFilterFragment fragment = new QuickSearchPoiFilterFragment();
-		fragment.setArguments(bundle);
-		fragment.show(parentFragment.getChildFragmentManager(), TAG);
 	}
 
 	private class PoiFilterListAdapter extends ArrayAdapter<PoiFilterListItem> {

@@ -871,12 +871,11 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-			@Nullable Bundle args) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+	public static boolean showInstance(@NonNull FragmentManager manager, @Nullable Bundle args) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			fragment.setArguments(args);
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.commitAllowingStateLoss();
 			return true;
@@ -886,13 +885,12 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 
 	@Override
 	public void onNavigationRequested() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
 			dismiss(false);
-			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
+			if (app.getRoutingHelper().isPublicTransportMode()) {
 				mapActivity.getMapActions().startNavigation();
 			}
-		}
+		});
 	}
 
 	@Override
@@ -927,7 +925,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, currentMenuState);
 			args.putInt(RouteDetailsFragment.ROUTE_ID_KEY, position);
-			return Fragment.instantiate(ChooseRouteFragment.this.getContext(), RouteDetailsFragment.class.getName(), args);
+			return Fragment.instantiate(requireContext(), RouteDetailsFragment.class.getName(), args);
 		}
 	}
 }

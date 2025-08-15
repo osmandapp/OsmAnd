@@ -130,12 +130,7 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 
 		view.findViewById(R.id.sort_button).setOnClickListener(v -> {
 			if (isHasActivePoints()) {
-				MapActivity activity = getMapActivity();
-				if (activity != null) {
-					TargetOptionsBottomSheetDialogFragment fragment = new TargetOptionsBottomSheetDialogFragment();
-					fragment.setUsedOnMap(true);
-					fragment.show(activity.getSupportFragmentManager(), TargetOptionsBottomSheetDialogFragment.TAG);
-				}
+				callMapActivity(TargetOptionsBottomSheetDialogFragment::showInstance);
 			}
 		});
 

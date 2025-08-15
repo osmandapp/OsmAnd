@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -358,12 +359,12 @@ public class MapMarkersGroupsFragment extends BaseNestedFragment implements OsmA
 	}
 
 	private void openAddGroupMenu() {
-		SelectionMarkersGroupBottomSheetDialogFragment fragment = new SelectionMarkersGroupBottomSheetDialogFragment();
-		fragment.setListener(createAddMarkersGroupFragmentListener());
-		fragment.setUsedOnMap(false);
-		fragment.show(getChildFragmentManager(), SelectionMarkersGroupBottomSheetDialogFragment.TAG);
+		FragmentManager childFragmentManager = getChildFragmentManager();
+		AddMarkersGroupFragmentListener listener = createAddMarkersGroupFragmentListener();
+		SelectionMarkersGroupBottomSheetDialogFragment.showInstance(childFragmentManager, listener);
 	}
 
+	@NonNull
 	private AddMarkersGroupFragmentListener createAddMarkersGroupFragmentListener() {
 		return new AddMarkersGroupFragmentListener() {
 			@Override
@@ -383,13 +384,12 @@ public class MapMarkersGroupsFragment extends BaseNestedFragment implements OsmA
 			if (gpxDataItem != null) {
 				GpxTrackAnalysis analysis = gpxDataItem.getAnalysis();
 				if (analysis != null && analysis.getWptCategoryNamesSet() != null && analysis.getWptCategoryNamesSet().size() > 1) {
-					Bundle args = new Bundle();
-					args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, gpxDataItem.getFile().getParentFile().absolutePath());
-
-					SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-					fragment.setArguments(args);
-					fragment.setUsedOnMap(false);
-					fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+					Fragment parent = getParentFragment();
+					if (parent != null) {
+						FragmentManager fragmentManager = parent.getChildFragmentManager();
+						String path = gpxDataItem.getFile().getParentFile().absolutePath();
+						SelectWptCategoriesBottomSheetDialogFragment.showInstance(fragmentManager, path);
+					}
 				} else {
 					GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
 					File gpx = SharedUtil.jFile(gpxDataItem.getFile());

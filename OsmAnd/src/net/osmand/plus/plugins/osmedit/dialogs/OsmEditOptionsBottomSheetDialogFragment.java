@@ -1,7 +1,9 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -43,14 +45,11 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 					.setIcon(getContentIcon(R.drawable.ic_action_export))
 					.setTitle(getString(R.string.local_openstreetmap_upload))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.onUploadClick(osmPoint);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.onUploadClick(osmPoint);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(uploadItem);
@@ -59,14 +58,11 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 					.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 					.setTitle(getString(R.string.shared_string_show_on_map))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.onShowOnMapClick(osmPoint);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.onShowOnMapClick(osmPoint);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(showOnMapItem);
@@ -78,14 +74,11 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 						.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
 						.setTitle(getString(R.string.poi_context_menu_modify_osm_change))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								if (listener != null) {
-									listener.onModifyOsmChangeClick(osmPoint);
-								}
-								dismiss();
+						.setOnClickListener(v -> {
+							if (listener != null) {
+								listener.onModifyOsmChangeClick(osmPoint);
 							}
+							dismiss();
 						})
 						.create();
 				items.add(modifyOsmChangeItem);
@@ -96,14 +89,11 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 						.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
 						.setTitle(getString(R.string.context_menu_item_modify_note))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								if (listener != null) {
-									listener.onModifyOsmNoteClick(osmPoint);
-								}
-								dismiss();
+						.setOnClickListener(v -> {
+							if (listener != null) {
+								listener.onModifyOsmNoteClick(osmPoint);
 							}
+							dismiss();
 						})
 						.create();
 				items.add(modifyOsmNoteItem);
@@ -113,14 +103,11 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
 					.setTitle(getString(R.string.shared_string_delete))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.onDeleteClick(osmPoint);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.onDeleteClick(osmPoint);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(deleteItem);
@@ -131,6 +118,22 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
 	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull OsmPoint osmPoint,
+	                                @NonNull OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putSerializable(OSM_POINT, osmPoint);
+
+			OsmEditOptionsBottomSheetDialogFragment fragment = new OsmEditOptionsBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setArguments(args);
+			fragment.setListener(listener);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
 
 	public interface OsmEditOptionsFragmentListener {
 

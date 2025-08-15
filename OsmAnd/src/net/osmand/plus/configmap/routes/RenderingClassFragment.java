@@ -68,7 +68,7 @@ public class RenderingClassFragment extends MapRoutesFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-			@NonNull RenderingClass renderingClass) {
+	                                @NonNull RenderingClass renderingClass) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			RenderingClassFragment fragment = new RenderingClassFragment();

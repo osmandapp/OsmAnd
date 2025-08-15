@@ -1,7 +1,5 @@
 package net.osmand.plus.search.dialogs;
 
-import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
-import static net.osmand.plus.search.dialogs.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.CITY;
 import static net.osmand.search.core.ObjectType.HOUSE;
 import static net.osmand.search.core.ObjectType.LOCATION;
@@ -21,7 +19,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
@@ -323,7 +320,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}
 				}
 				if (filterId != null) {
-					QuickSearchPoiFilterFragment.showDialog(QuickSearchDialogFragment.this, filterByName, filterId);
+					QuickSearchPoiFilterFragment.showInstance(QuickSearchDialogFragment.this, filterByName, filterId);
 				}
 			}
 		});
@@ -337,7 +334,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					if (poiUIFilter != null) {
 						showFilterOnMap(poiUIFilter, getString(R.string.popular_places));
 					} else if (foundPartialLocation) {
-						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
+						QuickSearchCoordinatesFragment.showInstance(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 						PoiUIFilter filter;
 						Object object = searchPhrase.isLastWord(POI_TYPE) ? searchPhrase.getLastSelectedWord().getResult().object : null;
@@ -454,9 +451,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			}
 		});
 		view.findViewById(R.id.deleteButton).setOnClickListener(v -> {
-			DeleteDialogFragment deleteDialog = new DeleteDialogFragment();
-			deleteDialog.setSelectedItems(historySearchFragment.getListAdapter().getSelectedItems());
-			deleteDialog.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
+			List<QuickSearchListItem> items = historySearchFragment.getListAdapter().getSelectedItems();
+			DeleteHistoryConfirmationFragment.showInstance(getChildFragmentManager(), items);
 		});
 
 		viewPager = view.findViewById(R.id.pager);
@@ -584,12 +580,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				app.showToastMessage(R.string.internet_not_available);
 			} else {
 				if (searchQuery != null) {
-					Bundle args = new Bundle();
-					SendSearchQueryBottomSheet fragment = new SendSearchQueryBottomSheet();
-					args.putString(MISSING_SEARCH_LOCATION_KEY, String.valueOf(location));
-					args.putString(MISSING_SEARCH_QUERY_KEY, searchQuery);
-					fragment.setArguments(args);
-					fragment.show(mapActivity.getSupportFragmentManager(), SendSearchQueryBottomSheet.TAG);
+					SendSearchQueryBottomSheet.showInstance(mapActivity, String.valueOf(location), searchQuery);
 				}
 			}
 		});
@@ -1391,7 +1382,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}));
 		rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_marker_dark, getString(R.string.coords_search), v -> {
 			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
-			QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, latLon.getLatitude(), latLon.getLongitude());
+			QuickSearchCoordinatesFragment.showInstance(QuickSearchDialogFragment.this, latLon.getLatitude(), latLon.getLongitude());
 		}));
 
 		if (res != null) {
@@ -1906,8 +1897,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull String searchQuery,
 	                                   @Nullable Object object,
-	                                   QuickSearchType searchType,
-	                                   QuickSearchTab showSearchTab,
+	                                   @NonNull QuickSearchType searchType,
+	                                   @NonNull QuickSearchTab showSearchTab,
 	                                   @Nullable LatLon latLon) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
@@ -1918,8 +1909,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
 				String objectLocalizedName = searchQuery;
 
-				if (object instanceof PoiCategory) {
-					PoiCategory c = (PoiCategory) object;
+				if (object instanceof PoiCategory c) {
 					objectLocalizedName = c.getTranslation();
 
 					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
@@ -1963,7 +1953,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			}
 			QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
 			fragment.setArguments(bundle);
-			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
+			fragment.show(fragmentManager, TAG);
 			return true;
 		}
 		return false;

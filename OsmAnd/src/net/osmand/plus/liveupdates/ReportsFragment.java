@@ -115,7 +115,7 @@ public class ReportsFragment extends BaseFullScreenFragment implements OnFragmen
 			String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 			String countryUrlString = selectedCountryItem.getDownloadName();
 			boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
-			if (countryUrlString.length() > 0 || isRecipientsReport) {
+			if (!countryUrlString.isEmpty() || isRecipientsReport) {
 				Bundle bl = new Bundle();
 				bl.putString(UsersReportFragment.URL_REQUEST,
 						String.format(isRecipientsReport ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));

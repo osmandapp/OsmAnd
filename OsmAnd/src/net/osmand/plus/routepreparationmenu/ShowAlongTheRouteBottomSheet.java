@@ -457,17 +457,19 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @Nullable Fragment targetFragment, @Nullable Integer pointType) {
-		ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
-		Bundle args = new Bundle();
-		if (pointType != null) {
-			args.putInt(EXPAND_TYPE_KEY, pointType);
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
+			Bundle args = new Bundle();
+			if (pointType != null) {
+				args.putInt(EXPAND_TYPE_KEY, pointType);
+			}
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(true);
+			if (targetFragment != null) {
+				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
+			}
+			fragment.show(fragmentManager, TAG);
 		}
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(true);
-		if (targetFragment != null) {
-			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
-		}
-		fragment.show(fragmentManager, TAG);
 	}
 
 	private static class ContentItem {

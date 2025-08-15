@@ -245,12 +245,8 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 
 			@Override
 			public void onOptionsClick(Recording rec) {
-				ItemMenuBottomSheetDialogFragment fragment = new ItemMenuBottomSheetDialogFragment();
-				fragment.setUsedOnMap(false);
-				fragment.setListener(createItemMenuFragmentListener());
-				fragment.setRecording(rec);
-				fragment.setRetainInstance(true);
-				fragment.show(getChildFragmentManager(), ItemMenuBottomSheetDialogFragment.TAG);
+				ItemMenuBottomSheetDialogFragment.showInstance(
+						getChildFragmentManager(), createItemMenuFragmentListener(), rec);
 			}
 		};
 	}

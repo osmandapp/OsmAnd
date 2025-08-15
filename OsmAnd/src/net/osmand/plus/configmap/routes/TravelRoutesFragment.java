@@ -432,7 +432,7 @@ public class TravelRoutesFragment extends BaseFullScreenFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager.beginTransaction()
 					.replace(R.id.content, new TravelRoutesFragment(), TAG)
 					.commitAllowingStateLoss();

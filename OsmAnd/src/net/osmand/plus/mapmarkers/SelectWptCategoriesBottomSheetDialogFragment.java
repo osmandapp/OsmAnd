@@ -2,6 +2,10 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.IndexConstants;
@@ -28,11 +32,11 @@ import java.util.Set;
 
 public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = SelectWptCategoriesBottomSheetDialogFragment.class.getSimpleName();
+	private static final String TAG = SelectWptCategoriesBottomSheetDialogFragment.class.getSimpleName();
 
-	public static final String GPX_FILE_PATH_KEY = "gpx_file_path";
-	public static final String UPDATE_CATEGORIES_KEY = "update_categories";
-	public static final String ACTIVE_CATEGORIES_KEY = "active_categories";
+	private static final String GPX_FILE_PATH_KEY = "gpx_file_path";
+	private static final String UPDATE_CATEGORIES_KEY = "update_categories";
+	private static final String ACTIVE_CATEGORIES_KEY = "active_categories";
 
 	private GpxFile gpxFile;
 
@@ -174,6 +178,40 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 					return true;
 				});
 			}
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager childFragmentManager,
+	                                @NonNull String gpxFilePath) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(GPX_FILE_PATH_KEY, gpxFilePath);
+
+			SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(false);
+			fragment.show(childFragmentManager, TAG);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull String gpxFilePath,
+	                                @Nullable String activeCategories,
+	                                @Nullable Boolean updateCategories) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(GPX_FILE_PATH_KEY, gpxFilePath);
+			if (activeCategories != null) {
+				args.putString(ACTIVE_CATEGORIES_KEY, activeCategories);
+			}
+			if (updateCategories != null) {
+				args.putBoolean(UPDATE_CATEGORIES_KEY, updateCategories);
+			}
+
+			SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(false);
+			fragment.show(manager, TAG);
 		}
 	}
 }

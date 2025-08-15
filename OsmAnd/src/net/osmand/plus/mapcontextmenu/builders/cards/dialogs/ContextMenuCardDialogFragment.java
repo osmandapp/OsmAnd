@@ -138,7 +138,7 @@ public class ContextMenuCardDialogFragment extends BaseFullScreenFragment implem
 
 	public static void showInstance(@NonNull ContextMenuCardDialog menu) {
 		FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ContextMenuCardDialogFragment fragment = new ContextMenuCardDialogFragment();
 			fragment.dialog = menu;
 			fragmentManager.beginTransaction()

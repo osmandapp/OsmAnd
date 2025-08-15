@@ -645,12 +645,9 @@ public class PlanRouteFragment extends BaseFullScreenFragment
 			ImageButton appModesBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 			appModesBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 			appModesBtn.setImageDrawable(getActiveIcon(planRouteContext.getSnappedMode().getIconRes()));
-			appModesBtn.setOnClickListener(v -> {
-				SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
-				fragment.setListener(createSnapToRoadFragmentListener());
-				fragment.setRemoveDefaultMode(false);
-				fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
-			});
+			appModesBtn.setOnClickListener(v ->
+					SnapToRoadBottomSheetDialogFragment.showInstance(
+							mapActivity, createSnapToRoadFragmentListener(), false));
 			if (!portrait) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) appModesBtn.getLayoutParams();
 				params.leftMargin = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
@@ -661,17 +658,10 @@ public class PlanRouteFragment extends BaseFullScreenFragment
 	}
 
 	private void optionsOnClick() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			Bundle args = new Bundle();
-			args.putBoolean(PlanRouteOptionsBottomSheetDialogFragment.SELECT_ALL_KEY,
-					!(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()));
-			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(true);
-			fragment.setListener(createOptionsFragmentListener());
-			fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
-		}
+		callMapActivity(mapActivity -> {
+			boolean selectAll = !(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation());
+			PlanRouteOptionsBottomSheetDialogFragment.showInstance(mapActivity, selectAll, createOptionsFragmentListener());
+		});
 	}
 
 	private void updateText() {
@@ -715,19 +705,8 @@ public class PlanRouteFragment extends BaseFullScreenFragment
 	}
 
 	private void showHideMarkersList() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && portrait) {
-			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			if (fragmentManager.findFragmentByTag(TAG) == null) {
-				cancelSnapToRoad = false;
-				planRouteContext.setMarkersListOpened(!planRouteContext.isMarkersListOpened());
-				int containerRes = planRouteContext.isMarkersListOpened() ?
-						R.id.fragmentContainer : R.id.bottomFragmentContainer;
-				fragmentManager.beginTransaction()
-						.remove(this)
-						.add(containerRes, new PlanRouteFragment(), TAG)
-						.commitAllowingStateLoss();
-			}
+		if (portrait) {
+			callMapActivity(PlanRouteFragment::showInstance);
 		}
 	}
 

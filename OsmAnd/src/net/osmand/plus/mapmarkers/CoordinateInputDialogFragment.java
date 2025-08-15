@@ -55,6 +55,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapmarkers.CoordinateInputActionsBottomSheet.CoordinateInputActionsListener;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
@@ -270,16 +271,17 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 			setBackgroundColor(R.id.app_bar, !nightMode ? R.color.app_bar_main_light : R.color.card_and_list_background_dark);
 		}
 
-		optionsButton.setOnClickListener(view -> {
-			CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
-			fragment.setUsedOnMap(false);
-			fragment.setListener(createCoordinateInputFormatChangeListener());
-			fragment.show(getChildFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
-		});
+		optionsButton.setOnClickListener(v -> showCoordinateInputDialog());
 
 		registerMainView();
 
 		return mainView;
+	}
+
+	private void showCoordinateInputDialog() {
+		FragmentManager childFragmentManager = getChildFragmentManager();
+		CoordinateInputFormatChangeListener listener = createCoordinateInputFormatChangeListener();
+		CoordinateInputBottomSheetDialogFragment.showInstance(childFragmentManager, listener);
 	}
 
 	private void registerMainView() {
@@ -373,18 +375,11 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 		});
 		adapter.setOnActionsClickListener(v -> {
 			RecyclerView.ViewHolder viewHolder = recyclerView.findContainingViewHolder(v);
-			if (viewHolder != null) {
-				int pos = viewHolder.getAdapterPosition();
-				if (pos == RecyclerView.NO_POSITION) {
-					return;
-				}
-				Bundle args = new Bundle();
-				args.putInt(CoordinateInputAdapter.ADAPTER_POSITION_KEY, pos);
-				CoordinateInputActionsBottomSheet fragment = new CoordinateInputActionsBottomSheet();
-				fragment.setUsedOnMap(false);
-				fragment.setArguments(args);
-				fragment.setListener(createCoordinateInputActionsListener());
-				fragment.show(getChildFragmentManager(), CoordinateInputActionsBottomSheet.TAG);
+			int pos = viewHolder != null ? viewHolder.getAdapterPosition() : RecyclerView.NO_POSITION;
+			if (pos != RecyclerView.NO_POSITION) {
+				FragmentManager manager = getChildFragmentManager();
+				CoordinateInputActionsListener listener = createCoordinateInputActionsListener();
+				CoordinateInputActionsBottomSheet.showInstance(manager, listener, pos);
 			}
 		});
 

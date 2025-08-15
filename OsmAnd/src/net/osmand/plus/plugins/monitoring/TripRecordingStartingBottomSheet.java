@@ -47,13 +47,6 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 
 	private boolean infoExpanded;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
-			TripRecordingStartingBottomSheet fragment = new TripRecordingStartingBottomSheet();
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		View itemView = inflate(R.layout.trip_recording_starting_fragment);
@@ -214,5 +207,12 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 	@Override
 	protected boolean hideButtonsContainer() {
 		return true;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
+			TripRecordingStartingBottomSheet fragment = new TripRecordingStartingBottomSheet();
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

@@ -81,14 +81,9 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		options.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light));
 		options.setOnClickListener(v -> {
 			FragmentManager manager = getFragmentManager();
-			if (manager == null) {
-				return;
+			if (manager != null) {
+				WikipediaOptionsBottomSheetDialogFragment.showInstance(manager, WikipediaDialogFragment.this);
 			}
-			WikipediaOptionsBottomSheetDialogFragment fragment = new WikipediaOptionsBottomSheetDialogFragment();
-			fragment.setUsedOnMap(false);
-			fragment.setTargetFragment(WikipediaDialogFragment.this,
-					WikipediaOptionsBottomSheetDialogFragment.REQUEST_CODE);
-			fragment.show(manager, WikipediaOptionsBottomSheetDialogFragment.TAG);
 		});
 		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), nightMode,
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
@@ -294,8 +289,8 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 			WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 			if (lang == null && plugin != null) {
 				OsmandApplication app = (OsmandApplication) activity.getApplication();
-				String preferredlocale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-				lang = plugin.getMapObjectsLocale(amenity, preferredlocale);
+				String preferredLocale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+				lang = plugin.getMapObjectsLocale(amenity, preferredLocale);
 			}
 			WikipediaDialogFragment fragment = new WikipediaDialogFragment();
 			fragment.setAmenity(amenity);

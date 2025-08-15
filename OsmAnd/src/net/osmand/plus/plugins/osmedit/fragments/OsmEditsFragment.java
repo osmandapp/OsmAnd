@@ -506,13 +506,8 @@ public class OsmEditsFragment extends BaseNestedListFragment implements Progress
 	}
 
 	private void openPopUpMenu(OsmPoint info) {
-		OsmEditOptionsBottomSheetDialogFragment optionsFragment = new OsmEditOptionsBottomSheetDialogFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(OsmEditOptionsBottomSheetDialogFragment.OSM_POINT, info);
-		optionsFragment.setUsedOnMap(false);
-		optionsFragment.setArguments(args);
-		optionsFragment.setListener(createOsmEditOptionsFragmentListener());
-		optionsFragment.show(getChildFragmentManager(), OsmEditOptionsBottomSheetDialogFragment.TAG);
+		OsmEditOptionsBottomSheetDialogFragment.showInstance(
+				getChildFragmentManager(), info, createOsmEditOptionsFragmentListener());
 	}
 
 	@NonNull

@@ -4,6 +4,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -38,14 +41,11 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.setIcon(getContentIcon(recording.isPhoto() ? R.drawable.ic_action_view : R.drawable.ic_play_dark))
 					.setTitle(getString(recording.isPhoto() ? R.string.watch : R.string.recording_context_menu_play))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.playOnClick(recording);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.playOnClick(recording);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(playItem);
@@ -58,14 +58,11 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.setIcon(shareIcon)
 					.setTitle(getString(R.string.shared_string_share))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.shareOnClick(recording);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.shareOnClick(recording);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(shareItem);
@@ -75,14 +72,11 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 					.setTitle(getString(R.string.shared_string_show_on_map))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.showOnMapOnClick(recording);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.showOnMapOnClick(recording);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(showOnMapItem);
@@ -93,14 +87,11 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
 					.setTitle(getString(R.string.shared_string_rename))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.renameOnClick(recording);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.renameOnClick(recording);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(renameItem);
@@ -109,14 +100,11 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
 					.setTitle(getString(R.string.shared_string_delete))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.deleteOnClick(recording);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.deleteOnClick(recording);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(deleteItem);
@@ -134,6 +122,19 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull ItemMenuFragmentListener listener,
+	                                @NonNull Recording rec) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ItemMenuBottomSheetDialogFragment fragment = new ItemMenuBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setListener(listener);
+			fragment.setRecording(rec);
+			fragment.setRetainInstance(true);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	interface ItemMenuFragmentListener {

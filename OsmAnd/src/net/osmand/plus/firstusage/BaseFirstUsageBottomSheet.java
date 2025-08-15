@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.firstusage.FirstUsageWizardFragment.WizardType;
 
 public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragment {
 

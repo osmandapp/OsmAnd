@@ -5,8 +5,12 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.R;
@@ -88,6 +92,15 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 		OnDialogFragmentResultListener resultListener = getResultListener();
 		if (resultListener != null) {
 			resultListener.onDialogFragmentResult(TAG, resultCode, null);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			WikivoyageOptionsBottomSheetDialogFragment fragment = new WikivoyageOptionsBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

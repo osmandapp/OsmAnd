@@ -12,15 +12,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser;
 import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser.WikivoyageContentItem;
 
@@ -108,6 +111,20 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	@Override
 	protected boolean useScrollableItemsContainer() {
 		return false;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull Fragment target, @NonNull String contentsJson) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(CONTENTS_JSON_KEY, contentsJson);
+
+			WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setArguments(args);
+			fragment.setTargetFragment(target, SHOW_CONTENT_ITEM_REQUEST_CODE);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {

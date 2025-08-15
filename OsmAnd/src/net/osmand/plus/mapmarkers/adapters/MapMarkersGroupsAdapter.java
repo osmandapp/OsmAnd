@@ -3,7 +3,6 @@ package net.osmand.plus.mapmarkers.adapters;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -466,15 +466,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 					if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
 						group.setWasShown(true);
-						Bundle args = new Bundle();
-						args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
-						args.putString(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, group.getWptCategoriesString());
-						args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
 
-						SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-						fragment.setArguments(args);
-						fragment.setUsedOnMap(false);
-						fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+						FragmentManager manager = mapActivity.getSupportFragmentManager();
+						SelectWptCategoriesBottomSheetDialogFragment.showInstance(manager,
+								group.getGpxPath(app), group.getWptCategoriesString(), true);
 					}
 					mapMarkersHelper.updateGroupDisabled(group, disabled);
 					if (group.getType() == ItineraryType.TRACK) {
@@ -531,22 +526,15 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				createDisplayGroups();
 				notifyDataSetChanged();
 			});
-		} else if (holder instanceof MapMarkerCategoriesViewHolder) {
-			MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
+		} else if (holder instanceof MapMarkerCategoriesViewHolder categoriesViewHolder) {
 			Object header = getItem(position);
-			if (header instanceof CategoriesSubHeader) {
-				CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
+			if (header instanceof CategoriesSubHeader categoriesSubHeader) {
 				MapMarkersGroup group = categoriesSubHeader.getGroup();
 				View.OnClickListener openChooseCategoriesDialog = view -> {
 					if (!group.getWptCategories().isEmpty()) {
-						Bundle args = new Bundle();
-						args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
-						args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
-						args.putStringArrayList(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, new ArrayList<String>(group.getWptCategories()));
-						SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-						fragment.setArguments(args);
-						fragment.setUsedOnMap(false);
-						fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+						FragmentManager manager = mapActivity.getSupportFragmentManager();
+						SelectWptCategoriesBottomSheetDialogFragment.showInstance(manager,
+								group.getGpxPath(app), group.getWptCategoriesString(), true);
 					} else {
 						app.getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath(app)));
 					}

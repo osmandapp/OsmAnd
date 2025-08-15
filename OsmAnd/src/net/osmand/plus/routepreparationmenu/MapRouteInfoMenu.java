@@ -1886,8 +1886,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void openFollowTrackFragment(@NonNull MapActivity mapActivity) {
-		FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-		FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
+		FollowTrackFragment.showInstance(mapActivity);
 	}
 
 	private OnSegmentSelectedListener getOnSegmentSelectedListener() {
@@ -1920,8 +1919,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
 		if (mapActivity != null) {
-			FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-			FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
+			openFollowTrackFragment(mapActivity);
 		}
 		updateCards();
 	}

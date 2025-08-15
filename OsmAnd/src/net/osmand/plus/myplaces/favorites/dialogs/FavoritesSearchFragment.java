@@ -246,21 +246,18 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull String searchQuery) {
-		try {
-
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
 			if (!Algorithms.isEmpty(searchQuery)) {
 				bundle.putString(FAV_SEARCH_QUERY_KEY, searchQuery);
 			}
-
 			FavoritesSearchFragment fragment = new FavoritesSearchFragment();
 			fragment.setArguments(bundle);
 			fragment.show(activity.getSupportFragmentManager(), TAG);
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	class FavoritesSearchListAdapter extends ArrayAdapter<FavouritePoint> {

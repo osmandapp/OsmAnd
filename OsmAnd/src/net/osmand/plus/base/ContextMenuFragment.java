@@ -1053,16 +1053,4 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
 		ShareMenu.copyToClipboardWithToast(ctx, text, false);
 	}
-
-	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {
-		String tag = fragment.getFragmentTag();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
-			manager.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, tag)
-					.addToBackStack(tag)
-					.commitAllowingStateLoss();
-			return true;
-		}
-		return false;
-	}
 }

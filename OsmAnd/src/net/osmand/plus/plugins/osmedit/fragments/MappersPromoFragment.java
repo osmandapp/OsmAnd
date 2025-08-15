@@ -43,7 +43,7 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull ApplicationMode appMode, @Nullable Fragment target) {
 		FragmentManager manager = activity.getSupportFragmentManager();
-		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			MappersPromoFragment fragment = new MappersPromoFragment();
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);

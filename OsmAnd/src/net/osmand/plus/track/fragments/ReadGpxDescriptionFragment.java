@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class ReadGpxDescriptionFragment extends ReadDescriptionFragment {
 
@@ -85,14 +86,14 @@ public class ReadGpxDescriptionFragment extends ReadDescriptionFragment {
 	                                @Nullable String imageUrl,
 	                                @NonNull String description,
 	                                @NonNull Fragment targetFragment) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved()) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ReadGpxDescriptionFragment fragment = new ReadGpxDescriptionFragment();
 			Bundle args = new Bundle();
 			fragment.writeBundle(args, title, imageUrl, description);
 			fragment.setArguments(args);
 			fragment.setTargetFragment(targetFragment, 0);
-			fragment.show(fm, ReadGpxDescriptionFragment.TAG);
+			fragment.show(manager, ReadGpxDescriptionFragment.TAG);
 		}
 	}
 }

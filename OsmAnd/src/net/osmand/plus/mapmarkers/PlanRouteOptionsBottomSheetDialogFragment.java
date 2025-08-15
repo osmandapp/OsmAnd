@@ -2,6 +2,10 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -11,6 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -109,7 +114,22 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 		return R.string.shared_string_close;
 	}
 
-	interface PlanRouteOptionsFragmentListener {
+	public static void showInstance(@NonNull FragmentActivity activity, boolean selectAll,
+	                                @NonNull PlanRouteOptionsFragmentListener listener) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putBoolean(SELECT_ALL_KEY, selectAll);
+
+			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(true);
+			fragment.setListener(listener);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public interface PlanRouteOptionsFragmentListener {
 
 		void selectOnClick();
 

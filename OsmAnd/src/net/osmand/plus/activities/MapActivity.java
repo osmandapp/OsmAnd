@@ -729,7 +729,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			disableDrawer();
 		}
 
-		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(this)) {
+		if (showWelcomeScreen && FirstUsageWizardFragment.showInstance(this)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);

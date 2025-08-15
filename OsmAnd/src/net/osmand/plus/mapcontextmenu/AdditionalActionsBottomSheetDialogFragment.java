@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -195,6 +197,18 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 			return R.id.second_item_container;
 		}
 		return R.id.third_item_container;
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull ContextMenuAdapter adapter,
+	                                @NonNull ContextMenuItemClickListener listener) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			AdditionalActionsBottomSheetDialogFragment fragment =
+					new AdditionalActionsBottomSheetDialogFragment();
+			fragment.setAdapter(adapter, listener);
+			fragment.show(manager, TAG);
+		}
 	}
 
 	public interface ContextMenuItemClickListener {
