@@ -267,7 +267,14 @@ public class SimulateLocationFragment extends BaseFullScreenFragment implements 
 		return speed == 1 ? getString(R.string.shared_string_original) : "x" + speed;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable GpxFile gpxFile, boolean usedOnMap) {
+	@Override
+	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
+		this.gpxFile = gpxFile;
+		updateCard();
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @Nullable GpxFile gpxFile, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SimulateLocationFragment fragment = new SimulateLocationFragment();
 			fragment.setGpxFile(gpxFile);
@@ -277,11 +284,5 @@ public class SimulateLocationFragment extends BaseFullScreenFragment implements 
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	@Override
-	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
-		this.gpxFile = gpxFile;
-		updateCard();
 	}
 }

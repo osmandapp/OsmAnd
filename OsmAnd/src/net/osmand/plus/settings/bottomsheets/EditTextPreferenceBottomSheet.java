@@ -112,7 +112,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
 									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		try {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
 
@@ -123,8 +123,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

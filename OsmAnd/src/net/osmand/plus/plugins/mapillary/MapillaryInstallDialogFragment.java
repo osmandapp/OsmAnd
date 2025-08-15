@@ -6,13 +6,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseAlertDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class MapillaryInstallDialogFragment extends BaseAlertDialogFragment {
 
-	public static final String TAG = MapillaryInstallDialogFragment.class.getSimpleName();
+	private static final String TAG = MapillaryInstallDialogFragment.class.getSimpleName();
 
 	@NonNull
 	@Override
@@ -32,5 +35,13 @@ public class MapillaryInstallDialogFragment extends BaseAlertDialogFragment {
 	@Override
 	protected boolean isUsedOnMap() {
 		return true;
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			MapillaryInstallDialogFragment fragment = new MapillaryInstallDialogFragment();
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

@@ -386,10 +386,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	private void showGoToMap(@NonNull WorldRegion region) {
-		GoToMapFragment fragment = new GoToMapFragment();
-		fragment.setRegionCenter(region.getRegionCenter());
-		fragment.setRegionName(region.getLocaleName());
-		fragment.show(getSupportFragmentManager(), GoToMapFragment.TAG);
+		GoToMapFragment.showInstance(this, region);
 	}
 
 	private void showDownloadWorldMapIfNeeded() {

@@ -11,6 +11,7 @@ import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -77,7 +78,7 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		if (manager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			VersionHistoryFragment fragment = new VersionHistoryFragment();
 			fragment.setRetainInstance(true);
 			manager.beginTransaction()

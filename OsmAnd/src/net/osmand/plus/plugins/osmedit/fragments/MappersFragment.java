@@ -71,7 +71,7 @@ public class MappersFragment extends BaseFullScreenFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		FragmentManager manager = activity.getSupportFragmentManager();
-		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			MappersFragment fragment = new MappersFragment();
 			fragment.setRetainInstance(true);
 			manager.beginTransaction()

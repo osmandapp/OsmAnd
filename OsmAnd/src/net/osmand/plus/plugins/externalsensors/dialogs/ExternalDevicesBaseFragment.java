@@ -51,10 +51,6 @@ public abstract class ExternalDevicesBaseFragment extends BaseFullScreenFragment
 		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 	}
 
-	public boolean getContentStatusBarNightMode() {
-		return true;
-	}
-
 	@Override
 	protected boolean isUsedOnMap() {
 		return true;
@@ -70,9 +66,7 @@ public abstract class ExternalDevicesBaseFragment extends BaseFullScreenFragment
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
 		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(v -> {
-			requireActivity().onBackPressed();
-		});
+		toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
 	}
 
 	protected float getElevation() {

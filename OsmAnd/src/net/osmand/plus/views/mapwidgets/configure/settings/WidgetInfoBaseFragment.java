@@ -415,7 +415,6 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel) {
 		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false);
-
 	}
 
 	public static void showAddWidgetFragment(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,

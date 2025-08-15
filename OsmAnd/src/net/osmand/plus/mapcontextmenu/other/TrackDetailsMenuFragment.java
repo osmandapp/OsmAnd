@@ -283,11 +283,11 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.add(portrait ? R.id.bottomFragmentContainer : R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

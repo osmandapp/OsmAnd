@@ -15,6 +15,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -124,5 +125,13 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 	@ColorRes
 	protected int getBgColorId() {
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			WikivoyageShowPicturesDialogFragment fragment = new WikivoyageShowPicturesDialogFragment();
+			fragment.setTargetFragment(target, SHOW_PICTURES_CHANGED_REQUEST_CODE);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

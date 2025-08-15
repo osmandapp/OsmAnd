@@ -56,12 +56,11 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 		return nightMode ? R.color.wikivoyage_welcome_bg_dark : R.color.wikivoyage_welcome_bg_light;
 	}
 
-	public static boolean showInstance(FragmentManager fm) {
-		try {
-			new WikivoyageWelcomeDialogFragment().show(fm, TAG);
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			new WikivoyageWelcomeDialogFragment().show(fragmentManager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

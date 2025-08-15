@@ -128,7 +128,7 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String description, @Nullable Fragment target) {
 		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			EditDescriptionFragment fragment = new EditDescriptionFragment();
 			Bundle args = new Bundle();
 			args.putString(CONTENT_KEY, description);

@@ -120,13 +120,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
-			TripRecordingBottomSheet fragment = new TripRecordingBottomSheet();
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -719,5 +712,12 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 				drawTopShadow(showTopShadow);
 			}
 		});
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			TripRecordingBottomSheet fragment = new TripRecordingBottomSheet();
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

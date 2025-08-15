@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -98,13 +99,12 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		GpxDataItem dataItem = gpxList.get(position - 1);
 		GpxTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null && !Algorithms.isEmpty(analysis.getWptCategoryNames())) {
-			Bundle args = new Bundle();
-			args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, dataItem.getFile().absolutePath());
-
-			SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(false);
-			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+			Fragment parent = getParentFragment();
+			if (parent != null) {
+				FragmentManager fragmentManager = parent.getChildFragmentManager();
+				String path = dataItem.getFile().absolutePath();
+				SelectWptCategoriesBottomSheetDialogFragment.showInstance(fragmentManager, path);
+			}
 		} else {
 			GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
 			File gpx = SharedUtil.jFile(dataItem.getFile());

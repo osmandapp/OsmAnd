@@ -6,10 +6,16 @@ import static net.osmand.plus.firstusage.FirstUsageAction.SELECT_COUNTRY;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class FirstUsageLocationBottomSheet extends BaseFirstUsageBottomSheet {
+
+	private static final String TAG = FirstUsageLocationBottomSheet.class.getSimpleName();
 
 	@Override
 	protected String getTitle() {
@@ -27,5 +33,14 @@ public class FirstUsageLocationBottomSheet extends BaseFirstUsageBottomSheet {
 			processActionClick(DETERMINE_LOCATION);
 			dismiss();
 		}));
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull Fragment target) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			FirstUsageLocationBottomSheet fragment = new FirstUsageLocationBottomSheet();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
+		}
 	}
 }

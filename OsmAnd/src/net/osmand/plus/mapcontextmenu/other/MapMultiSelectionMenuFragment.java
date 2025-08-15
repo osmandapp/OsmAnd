@@ -268,13 +268,12 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		MapContextMenu contextMenu = mapActivity.getContextMenu();
-		MapMultiSelectionMenu menu = contextMenu.getMultiSelectionMenu();
-
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandSettings settings = app.getSettings();
+			MapContextMenu contextMenu = mapActivity.getContextMenu();
+			MapMultiSelectionMenu menu = contextMenu.getMultiSelectionMenu();
 			if (contextMenu.isVisible()) {
 				contextMenu.hide();
 			}

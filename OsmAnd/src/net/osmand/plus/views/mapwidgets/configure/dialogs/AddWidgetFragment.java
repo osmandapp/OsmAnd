@@ -273,7 +273,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(manager, fragment);
+		showInstance(manager, fragment);
 	}
 
 	/**
@@ -293,7 +293,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(manager, fragment);
+		showInstance(manager, fragment);
 	}
 
 	/**
@@ -315,10 +315,11 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(manager, fragment);
+		showInstance(manager, fragment);
 	}
 
-	private static void showFragment(@NonNull FragmentManager manager, @NonNull AddWidgetFragment fragment) {
+	private static void showInstance(@NonNull FragmentManager manager,
+	                                 @NonNull AddWidgetFragment fragment) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)

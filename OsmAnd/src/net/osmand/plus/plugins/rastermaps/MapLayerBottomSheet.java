@@ -144,15 +144,13 @@ public class MapLayerBottomSheet extends BaseBottomSheetDialogFragment {
 	                                boolean updateTiles) {
 		if (layerTypes.size() == 1) {
 			downloadTilesForLayer(app, manager, layerTypes.get(0), updateTiles);
-		} else {
-			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				MapLayerBottomSheet fragment = new MapLayerBottomSheet();
-				Bundle args = new Bundle();
-				args.putBoolean(KEY_UPDATE_TILES, updateTiles);
-				args.putSerializable(KEY_LAYER_NAMES, new ArrayList<>(layerTypes));
-				fragment.setArguments(args);
-				fragment.show(manager, TAG);
-			}
+		} else if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			MapLayerBottomSheet fragment = new MapLayerBottomSheet();
+			Bundle args = new Bundle();
+			args.putBoolean(KEY_UPDATE_TILES, updateTiles);
+			args.putSerializable(KEY_LAYER_NAMES, new ArrayList<>(layerTypes));
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
 		}
 	}
 }
