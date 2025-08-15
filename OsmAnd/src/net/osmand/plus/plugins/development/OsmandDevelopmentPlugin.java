@@ -17,6 +17,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.NativeCore;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -346,12 +347,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				float cpuBasic = renderer.getBasicThreadsCPULoad();
 				this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
 
-				Intent batteryIntent;
-				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED), Context.RECEIVER_NOT_EXPORTED);
-				} else {
-					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-				}
+				Intent batteryIntent = AndroidUtils.registerBroadCastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
 				if (batteryIntent != null) {
 					int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 					int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);

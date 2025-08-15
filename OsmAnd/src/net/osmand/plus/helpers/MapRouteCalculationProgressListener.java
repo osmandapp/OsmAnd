@@ -65,17 +65,13 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 			ApplicationMode routingProfile = routingHelper.getAppMode();
 			if (AndroidUtils.isActivityNotDestroyed(activity) && !app.getOsmandMap().getMapView().isCarView()
 					&& !settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
-				List<ApplicationMode> modes = ApplicationMode.values(app);
-				for (ApplicationMode mode : modes) {
-					if (!settings.getAllowPrivatePreference(mode).getModeValue(mode)) {
-						settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
-					}
-				}
+				settings.setPrivateAccessRoutingAsked();
 				OsmandPreference<Boolean> allowPrivate = settings.getAllowPrivatePreference(routingProfile);
 				if (!allowPrivate.getModeValue(routingProfile)) {
 					AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
 					dlg.setMessage(R.string.private_access_routing_req);
 					dlg.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+						List<ApplicationMode> modes = ApplicationMode.values(app);
 						for (ApplicationMode mode : modes) {
 							OsmandPreference<Boolean> preference = settings.getAllowPrivatePreference(mode);
 							if (!preference.getModeValue(mode)) {

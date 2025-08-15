@@ -38,6 +38,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
@@ -72,11 +73,7 @@ public class NavigationNotification extends OsmandNotification {
 				app.getRoutingHelper().pauseNavigation();
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(pauseReceiver, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
-		} else {
-			app.registerReceiver(pauseReceiver, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
-		}
+		AndroidUtils.registerBroadCastReceiver(app, OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION, pauseReceiver, true);
 
 		BroadcastReceiver resumeReceiver = new BroadcastReceiver() {
 			@Override
@@ -84,11 +81,7 @@ public class NavigationNotification extends OsmandNotification {
 				app.getRoutingHelper().resumeNavigation();
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(resumeReceiver, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
-		} else {
-			app.registerReceiver(resumeReceiver, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
-		}
+		AndroidUtils.registerBroadCastReceiver(app, OSMAND_RESUME_NAVIGATION_SERVICE_ACTION, resumeReceiver, true);
 
 		BroadcastReceiver stopReceiver = new BroadcastReceiver() {
 			@Override
@@ -96,11 +89,7 @@ public class NavigationNotification extends OsmandNotification {
 				app.stopNavigation();
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(stopReceiver, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
-		} else {
-			app.registerReceiver(stopReceiver, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION));
-		}
+		AndroidUtils.registerBroadCastReceiver(app, OSMAND_STOP_NAVIGATION_SERVICE_ACTION, stopReceiver, true);
 	}
 
 	@Override

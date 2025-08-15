@@ -74,6 +74,7 @@ import net.osmand.util.GeoPointParserUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -131,6 +132,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
+	}
+
+	@NonNull
+	private ScreenManager getScreenManager() {
+		return getCarContext().getCarService(ScreenManager.class);
 	}
 
 	@Nullable
@@ -286,8 +292,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				.setIcon(new CarIcon.Builder(
 						IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_settings_outlined))
 						.build())
-				.setOnClickListener(() -> getCarContext()
-						.getCarService(ScreenManager.class)
+				.setOnClickListener(() -> getScreenManager()
 						.push(new SettingsScreen(getCarContext())))
 				.build();
 
@@ -304,12 +309,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
-			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
+			getScreenManager().push(landingScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
 			return requestPurchaseScreen;
 		}
 		if (!isLocationPermissionAvailable()) {
-			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
+			getScreenManager().push(landingScreen);
 			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
 		return landingScreen;
@@ -336,7 +341,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	private boolean requestLocationPermission() {
 		if (!isLocationPermissionAvailable()) {
-			getCarContext().getCarService(ScreenManager.class).push(
+			getScreenManager().push(
 					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback));
 			return true;
 		}
@@ -360,7 +365,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
 		if (point != null) {
 			CarContext context = getCarContext();
-			ScreenManager screenManager = context.getCarService(ScreenManager.class);
+			ScreenManager screenManager = getScreenManager();
 			screenManager.popToRoot();
 
 			if (point.isGeoPoint()) {
@@ -396,7 +401,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		// the top if any other screens were pushed onto it.
 		if (URI_SCHEME.equals(uri.getScheme()) && URI_HOST.equals(uri.getSchemeSpecificPart())
 				&& DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment())) {
-			ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
+			ScreenManager screenManager = getScreenManager();
 			Screen top = screenManager.getTop();
 
 			boolean followingMode = routingHelper.isFollowingMode();
@@ -424,8 +429,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	public void startNavigationScreen() {
 		if (navigationScreen != null) {
-			CarContext context = getCarContext();
-			ScreenManager screenManager = context.getCarService(ScreenManager.class);
+			ScreenManager screenManager = getScreenManager();
 			Screen top = screenManager.getTop();
 			if (top instanceof NavigationScreen) {
 				return;
@@ -435,7 +439,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
-		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
+		getScreenManager().push(navigationScreen);
 		// navigation already started
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
 			startCarNavigation();
@@ -488,8 +492,30 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		getApp().stopNavigation();
 	}
 
+	private boolean isRoutePreviewPresent() {
+		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
+		Collection<Screen> displayedScreens = screenManager.getScreenStack();
+		for (Screen screen : displayedScreens) {
+			if (screen instanceof RoutePreviewScreen) {
+				return screen.getLifecycle().getCurrentState().isAtLeast(State.INITIALIZED);
+			}
+		}
+		return false;
+	}
+
+	private boolean isPrivateAccessScreenShown() {
+		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
+		Collection<Screen> displayedScreens = screenManager.getScreenStack();
+		for (Screen screen : displayedScreens) {
+			if (screen instanceof PrivateAccessScreen) {
+				return screen.getLifecycle().getCurrentState() == State.RESUMED;
+			}
+		}
+		return false;
+	}
+
 	private void showRoutePreview() {
-		if (privateAccessScreenShown) {
+		if (isPrivateAccessScreenShown()) {
 			pendingShowPreviewScreen = true;
 			return;
 		}
@@ -766,29 +792,22 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onRequestPrivateAccessRouting() {
 		if (routingHelper.isRouteCalculated()) {
-			RoutingHelper routingHelper = getApp().getRoutingHelper();
 			ApplicationMode routingProfile = routingHelper.getAppMode();
 			OsmandSettings settings = getApp().getSettings();
 			if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
-				List<ApplicationMode> modes = ApplicationMode.values(getApp());
-				for (ApplicationMode mode : modes) {
-					if (!settings.getAllowPrivatePreference(mode).getModeValue(mode)) {
-						settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
-					}
-				}
+				settings.setPrivateAccessRoutingAsked();
 			}
 			OsmandPreference<Boolean> allowPrivate = settings.getAllowPrivatePreference(routingProfile);
 			if (!allowPrivate.getModeValue(routingProfile)) {
-				privateAccessScreenShown = true;
 				getCarContext().getCarService(ScreenManager.class).pushForResult(new PrivateAccessScreen(getCarContext()), result -> {
-					privateAccessScreenShown = false;
-					if(result != null && !((boolean) result)) {
-						pendingShowPreviewScreen = false;
+					if (result != null && !((boolean) result)) {
 						getApp().stopNavigation();
-					}
-					if (pendingShowPreviewScreen) {
-						pendingShowPreviewScreen = false;
-						showRoutePreview();
+					} else {
+						if (isRoutePreviewPresent()) {
+							getScreenManager().popTo(RoutePreviewScreen.class.getSimpleName());
+						} else {
+							showRoutePreview();
+						}
 					}
 				});
 			}

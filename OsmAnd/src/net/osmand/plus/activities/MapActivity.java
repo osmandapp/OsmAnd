@@ -93,8 +93,8 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
+import net.osmand.plus.receivers.AndroidAutoActionReceiver;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routepreparationmenu.RequiredMapsFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RouteService;
@@ -215,21 +215,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private TransportRouteCalculationProgressCallback transportRouteCalculationProgressCallback;
 	private LoadSimulatedLocationsListener simulatedLocationsListener;
 
-	private final BroadcastReceiver carActionReceiver = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			if (INTENT_SHOW_FRAGMENT.equals(intent.getAction())) {
-				if (intent.hasExtra(INTENT_KEY_SHOW_FRAGMENT_NAME)) {
-					String fragmentName = intent.getStringExtra(INTENT_KEY_SHOW_FRAGMENT_NAME);
-					if (fragmentName != null) {
-						if (fragmentName.equals(RequiredMapsFragment.class.getSimpleName())) {
-							RequiredMapsFragment.showInstance(getSupportFragmentManager());
-						}
-					}
-				}
-			}
-		}
-	};
+	private final AndroidAutoActionReceiver carActionReceiver = new AndroidAutoActionReceiver();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -574,6 +560,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onResume() {
 		super.onResume();
+		carActionReceiver.setActivity(this);
 		AndroidUtils.registerBroadCastReceiver(this, INTENT_SHOW_FRAGMENT, carActionReceiver, true);
 		MapActivity mapViewMapActivity = getMapView().getMapActivity();
 		if (activityRestartNeeded || !getMapLayers().hasMapActivity()
@@ -1041,6 +1028,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(carActionReceiver);
+		carActionReceiver.setActivity(null);
 		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;

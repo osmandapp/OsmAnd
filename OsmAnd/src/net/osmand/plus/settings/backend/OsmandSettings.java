@@ -3487,4 +3487,13 @@ public class OsmandSettings {
 				getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK, false);
 		return Algorithms.objectEquals(derivedProfile, "truck") ? allowPrivateForTruck : allowPrivate;
 	}
+
+	public void setPrivateAccessRoutingAsked() {
+		List<ApplicationMode> modes = ApplicationMode.values(ctx);
+		for (ApplicationMode mode : modes) {
+			if (!getAllowPrivatePreference(mode).getModeValue(mode)) {
+				FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
+			}
+		}
+	}
 }

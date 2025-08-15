@@ -1506,17 +1506,15 @@ public class AndroidUtils {
 		return ((OsmandApplication) context.getApplicationContext());
 	}
 
-	public static void registerBroadCastReceiver(@NonNull Activity activity, @NonNull String action, @NonNull BroadcastReceiver receiver) {
-		registerBroadCastReceiver(activity, action, receiver, false);
+	public static Intent registerBroadCastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver) {
+		return registerBroadCastReceiver(context, action, receiver, false);
 	}
 
-	public static void registerBroadCastReceiver(@NonNull Activity activity, @NonNull String action, @NonNull BroadcastReceiver receiver, boolean export) {
+	public static Intent registerBroadCastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver, boolean export) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			// For API level 33 and above
-			activity.registerReceiver(receiver, new IntentFilter(action), export ? Context.RECEIVER_EXPORTED : Context.RECEIVER_NOT_EXPORTED);
+			return context.registerReceiver(receiver, new IntentFilter(action), export ? Context.RECEIVER_EXPORTED : Context.RECEIVER_NOT_EXPORTED);
 		} else {
-			// For older API levels
-			activity.registerReceiver(receiver, new IntentFilter(action));
+			return context.registerReceiver(receiver, new IntentFilter(action));
 		}
 	}
 }

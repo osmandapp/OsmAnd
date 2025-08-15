@@ -86,6 +86,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		this.calculateRoute = calculateRoute;
 		getLifecycle().addObserver(this);
 		calculating = calculateRoute;
+		setMarker(RoutePreviewScreen.class.getSimpleName());
 	}
 
 	@Override
@@ -151,7 +152,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			this.routeRows = routeRows;
 			calculating = app.getRoutingHelper().isRouteBeingCalculated();
 			invalidate();
-		} else if (routingHelper.getRoute().getMissingMapsCalculationResult() != null && !Algorithms.isEmpty(routingHelper.getRoute().getMissingMapsCalculationResult().getMissingMaps())) {
+		} else if (routingHelper.getRoute().hasMissingMaps() && !Algorithms.isEmpty(routingHelper.getRoute().getMissingMapsCalculationResult().getMissingMaps())) {
 			NavigationSession session = getSession();
 			if (session != null) {
 				session.showMissingMapsScreen();

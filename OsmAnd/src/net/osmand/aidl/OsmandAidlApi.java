@@ -441,11 +441,7 @@ public class OsmandAidlApi {
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
 		try {
 			receivers.put(filter, rec);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-				ma.registerReceiver(rec, new IntentFilter(filter), Context.RECEIVER_EXPORTED);
-			} else {
-				ma.registerReceiver(rec, new IntentFilter(filter));
-			}
+			AndroidUtils.registerBroadCastReceiver(ma, filter, rec, true);
 		} catch (IllegalStateException e) {
 			LOG.error(e);
 		}
