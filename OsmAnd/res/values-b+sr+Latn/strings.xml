@@ -3847,7 +3847,7 @@
     <string name="routing_attr_avoid_tunnels_name">Tunele</string>
     <string name="backup_storage_taken">Zauzeto skladište</string>
     <string name="restore_complete">Vraćeno</string>
-    <string name="rendering_attr_natureReserves_name">Rezervat</string>
+    <string name="rendering_attr_natureReserves_name">Prirodni rezervat i zaštićeno područje</string>
     <string name="shared_string_gps_filter">GPS filter</string>
     <string name="shared_string_memory">Memorija</string>
     <string name="backup_welcome_back">Dobrodošao nazad!</string>

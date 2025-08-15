@@ -3653,7 +3653,7 @@
     <string name="shared_storage_first_step">Докоснете „%1$s“.\nПриложението за управление на файлове отваря мястото, на което трябва да откриете папката osmand.</string>
     <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.\n\nНеобходимо е да копирате всички данни в новата папка.</string>
     <string name="shared_storage_migration">Мигриране на споделеното хранилище</string>
-    <string name="rendering_attr_natureReserves_description">Показват се природни резервати, защитени територии и национални паркове.</string>
+    <string name="rendering_attr_natureReserves_description">Показват се природни резервати, защитени месности и национални паркове.</string>
     <string name="shared_string_new_track">Ново трасе</string>
     <string name="shared_string_visible_on_map">Видимо на картата</string>
     <string name="track_not_recorded">Не е записано</string>
@@ -3668,7 +3668,7 @@
     <string name="shared_string_skip_warning">Сигурни ли сте, че желаете да пропуснете миграцията\? OsmAnd вече няма достъп до вашите файлове в споделеното хранилище.
 \n
 \nПриложението ще започне да използва новата папка с данни.</string>
-    <string name="rendering_attr_natureReserves_name">Природен резерват</string>
+    <string name="rendering_attr_natureReserves_name">Природни резервати и защитени месности</string>
     <string name="shared_storage_third_step">Дайте разрешение за достъп до папката. Без него OsmAnd не може да копира файлове.</string>
     <string name="icon_group_industrial">Промишленост</string>
     <string name="shared_string_migration">Мигриране</string>

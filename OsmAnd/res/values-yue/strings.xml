@@ -115,8 +115,8 @@
     <string name="ais_object_lost_timeouts_description">設定逾時值，以便在特定時間內未收到訊號時識別消失的 AIS 物件。</string>
     <string name="ais_object_lost_timeout">物件訊號消失時的顯示時限</string>
     <string name="ais_object_lost_timeout_description">設定 AIS 物件訊號消失後顯示時限：移除指定時間內未收到訊號的 AIS 物件</string>
-    <string name="ais_ship_lost_timeout">船隻訊號消失的顯示時限</string>
-    <string name="ais_ship_lost_timeout_description">設定船隻訊號消失後的顯示時限：劃掉指定時間內未收到訊號的船隻</string>
+    <string name="ais_ship_lost_timeout">船隻訊號消失的顯示時限。</string>
+    <string name="ais_ship_lost_timeout_description">設定船隻訊號消失後的顯示時限：劃掉指定時間內未收到訊號的船隻。</string>
     <string name="ais_cpa_settings">與 CPA 相關的設定</string>
     <string name="ais_cpa_settings_description">這些值定義了可能太接近自身位置的 AIS 物件的呈現方式。</string>
     <string name="ais_cpa_warning_time">最短距離 (CPA) 前的警告時間</string>
@@ -481,7 +481,7 @@
     <string name="key_assignment_add_action">新增快速動作</string>
     <string name="disable_map_layers">停用地圖圖層</string>
     <string name="disable_map_layers_descr">停用向量地圖上的所有地圖圖層（需要重新啟動）。</string>
-    <string name="height_legend_description">海拔顏色呈現地形高度變化</string>
+    <string name="height_legend_description">海拔顏色呈現地形高度變化。</string>
     <string name="action_icon">快速動作圖示</string>
     <string name="assigned_keys">分配按鍵</string>
     <string name="steps_per_minute_unit">步數每分鐘</string>
@@ -508,7 +508,7 @@
     <string name="routing_attr_avoid_cobblestone_name">避免石板路</string>
     <string name="routing_attr_avoid_cobblestone_description">避免鵝卵石路面</string>
     <string name="release_4_8">• 新的地形著色選項「海拔」 \n \n • 地形、軌跡與路線的自訂調色板 \n \n • 位置圖示的 3D 變體 \n \n • 現在可以將快速動作分配給外接鍵盤 \n \n • 天氣：更新使用者介面，新增風的動畫 \n \n • 3D 軌跡改進：新的視覺化與著色選項 \n \n • 地圖上旅遊路線的更多選擇 \n \n • 新增應用程式佈景主題選項以遵循地圖模式 \n \n • 修復了軌跡統計、排序與搜尋 \n \n • OSM 編輯：已刪除帳號/密碼授權方法 \n \n • 從 Android 14 開始切換至系統 Sharesheet</string>
-    <string name="track_vertical_exaggeration_description">調整比例值可以改變 3D 路線的垂直高度顯示</string>
+    <string name="track_vertical_exaggeration_description">調整比例值可以改變 3D 路線的垂直高度顯示。</string>
     <string name="visualized_by">視覺化方式</string>
     <string name="wall_color">牆壁顏色</string>
     <string name="track_line">軌跡線</string>
@@ -606,11 +606,11 @@
     <string name="precise_distance_numbers">精確的距離數字</string>
     <string name="any_connected">任何已連線</string>
     <string name="any_connected_with_device">任何已連線的：%s</string>
-    <string name="complex_widget_alert">%1$s 小工具必須單獨佔一列</string>
+    <string name="complex_widget_alert">%1$s 小工具必須單獨佔一列。</string>
     <string name="previous_row_has_complex_widget">上一列有複雜的小工具</string>
     <string name="shared_string_road_maps">道路地圖</string>
     <string name="shared_string_next_event">下次事件</string>
-    <string name="map_widget_sun_position_desc">顯示距離日出或日落的剩餘時間</string>
+    <string name="map_widget_sun_position_desc">顯示距離日出或日落的剩餘時間。</string>
     <string name="map_widget_sun_position">太陽位置</string>
     <string name="max_sensor_heartrate">最高心率</string>
     <string name="avg_sensor_heartrate">平均心率</string>
@@ -871,7 +871,7 @@
     <string name="shared_string_avoid">避免</string>
     <string name="may_be_used_if_there_is_shortcut">若有捷徑可以使用</string>
     <string name="routing_attr_allow_via_ferrata_name">山腰路線（鐵索山路）</string>
-    <string name="routing_attr_allow_via_ferrata_description">設有固定鋼纜、支柱、梯級和橋樑的山路</string>
+    <string name="routing_attr_allow_via_ferrata_description">設有固定鋼纜、支柱、梯級和橋樑的山路。</string>
     <string name="release_4_5">• BLE/ANT+ 偵測器：重新設計了連線、寫入與檢視接收到的資料到 GPX 的流程 \n \n • 免費備份收藏與設定到「OsmAnd Cloud」 \n \n • 支援 3D 地形陰影的地形圖新格式 \n \n • 軌跡管理：更新的使用者介面、新增排序、支援巢狀資料夾 \n \n • Android Auto：用於存取收藏、軌跡與 POI 類別的新開始選單 \n \n • 頂部/底部面板的一個小工具列表 \n \n • 新的「鐵路」設定檔，用以計算鐵道路線 \n \n • 等高線現在可以與任何「地圖來源」共同運作 \n \n • 外部鍵盤預設動作的擴展列表 \n \n • 自訂路線規劃檔案，新增選項以刪除或覆寫 \n \n • 新增了「偏離路線時宣佈」選項 \n \n • 開始畫面：新增選項以從檔案還原 OsmAnd 狀態 \n \n • 在北美新增了「危險材料」類別貨車導航 \n \n • 對步行路線規劃新增了「鐵索攀岩」路線規劃的支援 \n \n • 新增用於路線難度分級的「CAI」等級 \n \n • 修復了不同應用程式語言選擇的問題 \n \n • 新增了主題化圖示的支援 \n \n • OsmAnd Cloud：新增刪除帳號的選項 \n \n • 無障礙功能：按鈕的觸控目標大小更改為 48 dp；修復了地圖使用者介面對螢幕閱讀程式可見的問題 \n \n • 日語語音提示重新設計 \n \n • 重新設計高度變化與坡度評估</string>
     <string name="free_favorites_backup_description">在 OsmAnd Cloud 中註冊即可免費備份收藏與設定。</string>
     <string name="free_favorites_backup">免費收藏備份</string>
@@ -929,7 +929,7 @@
     <string name="shared_string_visible_on_map">地圖可視</string>
     <string name="no_poi_for_category">找不到興趣點</string>
     <string name="rendering_attr_lightDetail_name">燈光詳細資訊</string>
-    <string name="rendering_attr_lightDetail_description">預設：海標名稱（燈光特性.群組.週期），選擇區段 1 至 3 或區段 1,2,3,4,5 燈光特性</string>
+    <string name="rendering_attr_lightDetail_description">預設：航路標識（燈光特性.群組.週期），選擇區段 1 至 3 或區段 1,2,3,4,5 燈光特性</string>
     <string name="rendering_value_sectors_name">區段</string>
     <string name="rendering_value_sector1_name">區段 1</string>
     <string name="rendering_value_sector2_name">區段 2</string>
@@ -1001,9 +1001,9 @@
     <string name="ant_plus_nothing_found_text">找不到任何感應器</string>
     <string name="ant_plus_nothing_found_description">確保： \n– 藍牙已開啟 \n– 感應器已啟動 \n– 此裝置在感應器附近</string>
     <string name="ant_plus_bluetooth_off">藍牙已關閉</string>
-    <string name="ant_plus_bluetooth_off_description">開啟藍牙以尋找及配對感應器</string>
+    <string name="ant_plus_bluetooth_off_description">開啟藍牙以尋找及配對感應器。</string>
     <string name="ant_plus_searching_text">正在搜尋感應器</string>
-    <string name="ant_plus_searching_text_description">請將裝置靠近感應器。請先啟動感應器，讓 OsmAnd 能夠偵測</string>
+    <string name="ant_plus_searching_text_description">請將裝置靠近感應器。請先啟動感應器，讓 OsmAnd 可偵測感應器。</string>
     <string name="ant_plus_help_title">不確定感應器類型</string>
     <string name="ant_plus_searching">正在搜尋</string>
     <string name="ant_plus_pair_new_sensor">配對新感應器</string>
@@ -1133,7 +1133,7 @@
     <string name="mtb_imba_full">國際山地車協會</string>
     <string name="mtb_segment_classification">細分分類</string>
     <string name="rendering_attr_showMtbScale_name">顯示單車難度等級</string>
-    <string name="rendering_attr_showMtbScale_description">根據單車難度等級顯示路徑</string>
+    <string name="rendering_attr_showMtbScale_description">根據單車難度等級顯示路徑。</string>
     <string name="quick_action_temperature_layer">用來在地圖上切換顯示或隱藏溫度圖層。</string>
     <string name="quick_action_precipitation_layer">用來在地圖上切換顯示或隱藏降水圖層。</string>
     <string name="quick_action_wind_layer">用來在地圖上切換顯示或隱藏風力圖層。</string>
@@ -3033,7 +3033,7 @@
     <string name="show_full_description">顯示完整說明</string>
     <string name="snowmobile_render_descr">適用於有專用道路與軌道的雪地電單車駕駛。</string>
     <string name="off_road_render_descr">基於「地形」樣式，適用於越野駕駛，使用綠色衛星圖作為底圖。主要道路的寬度減少，並新增車跡、路徑、單車道及其他路徑的寬度。</string>
-    <string name="nautical_render_descr">專為航海導航設計，特點包括浮標、燈塔、水道、航線與標記、港口、海事服務及等深線。</string>
+    <string name="nautical_render_descr">專為航海導航設計，特點包括浮標、燈塔、水道、航線與航標、港口、海事服務及等深線。</string>
     <string name="ski_map_render_descr">專為滑雪而設，特點包括滑雪道、纜車、越野賽道等。次要地點將變暗，以突顯主要資訊。</string>
     <string name="light_rs_render_descr">簡易駕駛樣式。柔和的夜間模式和對比鮮明的橙色道路，使次要地圖物件、等高線等地形特徵變暗。</string>
     <string name="topo_render_descr">專為遠足、徒步旅行和野外單車設計。版面易於戶外閱讀，具有對比鮮明的道路和自然地點，顯示不同路徑類型、進階等高線選項及額外細節。調整路面完整性有助於判斷道路狀況，不提供夜間模式。</string>
@@ -4358,7 +4358,7 @@
     <string name="complex_route_calculation_failed">快速路徑計算失敗 (%s)，改用標準計算方式。</string>
     <string name="disable_complex_routing_descr">汽車導航時，停用多階段路線規劃。</string>
     <string name="disable_complex_routing">停用進階路線規劃</string>
-    <string name="amenity_type_seamark">海上標誌</string>
+    <string name="amenity_type_seamark">航路標識</string>
     <string name="app_modes_choose_descr">選擇已顯示的設定檔。</string>
     <string name="app_modes_choose">應用程式設定檔</string>
     <string name="map_widget_map_rendering">地圖繪製</string>
@@ -5580,4 +5580,6 @@
     <string name="routing_attr_freeride_policy_name">自由滑雪</string>
     <string name="routing_attr_freeride_policy_description">「自由滑雪」與「非正式路線」指未經規劃的路徑與通道。這些路線通常未經整理和維護，且不會在夜間檢查。使用風險自負</string>
     <string name="voice_prompts_timetable">語音提示時間</string>
+    <string name="rendering_attr_hideNoLNAM_name">OSM 航路標識（部分）</string>
+    <string name="rendering_attr_hideNoLNAM_description">隱藏 OSM 航路標識（部分）</string>
 </resources>
