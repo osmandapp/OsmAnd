@@ -144,6 +144,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 //			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
 //			HHRoutingContext.USE_GLOBAL_QUEUE = true;
 		}
+		c.applyCalculateMissingMaps(RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS);
 		return c;
 	}
 
@@ -606,7 +607,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		RouteCalculationProgress progress = hctx.rctx.calculationProgress;
 		if (predefinedRegions == null) {
 			progress.hhIteration(HHIteration.SELECT_REGIONS);
-			hctx = selectBestRoutingFiles(start, end, hctx);
+			hctx = selectBestRoutingFiles(start, end, hctx, c.STRICT_BEST_GROUP_MAPS);
 		}
 		if (hctx == null) {
 			System.out.println("No files found for routing");
@@ -718,9 +719,27 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			return false;
 		}
+
+		public boolean containsStartEndRegion(String[] regionsCoveringStartAndTargets) {
+			if (regionsCoveringStartAndTargets.length == 0) {
+				return true;
+			}
+			for (BinaryMapIndexReader reader : readers) {
+				for (RouteRegion index : reader.getRoutingIndexes()) {
+					for (String region : regionsCoveringStartAndTargets) {
+						if (region.equalsIgnoreCase(index.getName())) {
+							return true;
+						}
+					}
+
+				}
+			}
+			return false;
+		}
 	}
 
-	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) throws IOException {
+	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx,
+	                                                   boolean strictBestGroupMaps) throws IOException {
 		List<HHRouteRegionsGroup<T>> groups = new ArrayList<>();
 	
 		GeneralRouter router = hctx.rctx.config.router;
@@ -741,7 +760,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 		}
 		for (HHRouteRegionsGroup<T> g : groups) {
-			g.containsStartEnd = g.contains(start) && g.contains(end);
+			g.containsStartEnd = g.contains(start) && g.contains(end)
+					&& g.containsStartEndRegion(hctx.rctx.regionsCoveringStartAndTargets);
 			String[] params = g.profileParams.split(",");
 			for (String p : params) {
 				if (p.trim().length() == 0) {
@@ -760,6 +780,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			public int compare(HHRouteRegionsGroup<T> o1, HHRouteRegionsGroup<T> o2) {
 				if (o1.containsStartEnd != o2.containsStartEnd) {
 					return o1.containsStartEnd ? -1 : 1;
+				} else if (o1.edition != o2.edition) {
+					return o1.edition > o2.edition ? -1 : 1;
 				} else if (o1.extraParam != o2.extraParam) {
 					return o1.extraParam < o2.extraParam ? -1 : 1;
 				} else if (o1.matchParam != o2.matchParam) {
@@ -797,7 +819,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (allMatched) {
 			return currentCtx;
 		}
-		if (RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS && groups.size() > 1) {
+		if (strictBestGroupMaps && groups.size() > 1) {
 			hctx.rctx.mapIndexReaderFilter = new HashSet<>();
 			for (HHRouteRegionPointsCtx<T> reg : regions) {
 				hctx.rctx.mapIndexReaderFilter.add(reg.file);

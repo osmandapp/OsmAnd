@@ -402,7 +402,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							}
 
 							offscreenMapRendererView = new AtlasMapRendererView(carContext);
-							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView);
+
+							boolean enableMSAA = getApp().getSettings().ENABLE_MSAA.get();
+
+							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView, enableMSAA);
 							offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
 							offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 							offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
@@ -501,7 +504,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
 			if (offscreenMapRendererView != null) {
-				float leftOffset = -surfaceAdditionalWidth * ((maxRatio - cachedRatioX) / (maxRatio - minRatio));
+				float leftOffset = 0.0f;
+				if (surfaceAdditionalWidth != 0) {
+					leftOffset = -surfaceAdditionalWidth * ((maxRatio - cachedRatioX) / (maxRatio - minRatio));
+				}
 				canvas.drawBitmap(offscreenMapRendererView.getBitmap(), leftOffset, 0, null);
 			}
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
@@ -526,6 +532,18 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	public double getVisibleAreaWidth() {
 		return visibleArea != null ? visibleArea.width() : 0f;
+	}
+
+	public int getSurfaceAdditionalWidth() {
+		return surfaceAdditionalWidth;
+	}
+
+	public float getCachedRatioX() {
+		return cachedRatioX;
+	}
+
+	public float getCachedRatioY() {
+		return cachedRatioY;
 	}
 
 	@Override

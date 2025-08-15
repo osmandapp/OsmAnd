@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -21,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -53,6 +51,7 @@ import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -69,6 +68,7 @@ import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.CollatorFilteredAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -137,7 +137,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 		if (savedInstanceState != null) {
 			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, LinkedHashMap.class);
-			editPoiData.updateTags(map);
+			if (!Algorithms.isEmpty(map)) {
+				editPoiData.updateTags(map);
+			}
 		}
 
 		boolean isAddingPoi = getArguments().getBoolean(IS_ADDING_POI);
@@ -361,6 +363,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			onSaveButtonClickListener.onSaveButtonClick();
 		}
 		String tagWithExceedingValue = isTextLengthInRange();
+		boolean poiTypeChanged = editPoiData.isPoiTypeChanged()
+				&& !Algorithms.stringsEqual(editPoiData.getPoiTypeString(), editPoiData.getTag(POI_TYPE_TAG));
 		if (!Algorithms.isEmpty(tagWithExceedingValue)) {
 			ValueExceedLimitDialogFragment.showInstance(getChildFragmentManager(), tagWithExceedingValue);
 		} else if (TextUtils.isEmpty(poiTypeEditText.getText())) {
@@ -373,9 +377,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		} else if (testTooManyCapitalLetters(editPoiData.getTag(OSMTagKey.NAME.getValue()))) {
 			int messageId = R.string.save_poi_too_many_uppercase;
 			SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
-		} else if (editPoiData.getPoiCategory() == app.getPoiTypes().getOtherPoiCategory()) {
+		} else if (editPoiData.getPoiCategory() == app.getPoiTypes().getOtherPoiCategory()
+				&& poiTypeChanged) {
 			poiTypeEditText.setError(getString(R.string.please_specify_poi_type));
-		} else if (editPoiData.getPoiTypeDefined() == null) {
+		} else if (editPoiData.getPoiTypeDefined() == null && poiTypeChanged) {
 			poiTypeEditText.setError(getString(R.string.please_specify_poi_type_only_from_list));
 		} else {
 			save();
@@ -523,7 +528,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 		CommitEntityTask task = new CommitEntityTask(activity, osmUtil, entity, action, info,
 				comment, closeChangeSet, changedTags, callback);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	public void setPoiCategory(PoiCategory type) {
@@ -553,8 +558,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
 			}
 		}
-		ArrayAdapter<Object> adapter = new ArrayAdapter<>(getActivity(),
-				R.layout.list_textview, subCategories.keySet().toArray());
+		CollatorFilteredAdapter adapter = new CollatorFilteredAdapter(getActivity(),
+				R.layout.list_textview, new ArrayList<>(subCategories.keySet()));
 		adapter.sort(new Comparator<Object>() {
 			@Override
 			public int compare(Object lhs, Object rhs) {
@@ -622,7 +627,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 			return false;
 		});
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	private final TextView.OnEditorActionListener mOnEditorActionListener =

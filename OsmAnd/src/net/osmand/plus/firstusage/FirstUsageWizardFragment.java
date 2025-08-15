@@ -36,13 +36,8 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.*;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
@@ -158,7 +153,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		wizardButton = view.findViewById(R.id.wizard_action_button);
 		wizardProgressBarCircle = view.findViewById(R.id.wizard_progress_bar_icon);
 
-		if (!AndroidUiHelper.isOrientationPortrait(activity) && !AndroidUiHelper.isXLargeDevice(activity)) {
+		if (!AndroidUiHelper.isOrientationPortrait(activity) && !AndroidUiHelper.isTablet(activity)) {
 			TextView wizardDescription = view.findViewById(R.id.wizard_description);
 			wizardDescription.setMinimumHeight(0);
 			wizardDescription.setMinHeight(0);
@@ -337,7 +332,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					if (app.isUserAndroidIdAllowed()) {
 						pms.put("aid", app.getUserAndroidId());
 					}
-					new AsyncTask<Void, Void, String>() {
+					OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 						@Override
 						protected String doInBackground(Void... params) {
@@ -377,7 +372,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 								showNoLocationWizard(true);
 							}
 						}
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					});
 				} else {
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						ActivityCompat.requestPermissions(activity,

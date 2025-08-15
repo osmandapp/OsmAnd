@@ -9,7 +9,6 @@ import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_F
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -21,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -31,6 +29,7 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -42,11 +41,14 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalOperationTask;
+import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
+import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -307,18 +309,24 @@ public class ItemViewHolder {
 		tvDesc.setText(fullDescription);
 	}
 
-	private void setupCommonDescription(@NonNull DownloadItem downloadItem) {
+	private void setupCommonDescription(@NonNull DownloadItem item) {
+		String size = item.getSizeDescription(context);
+		String date = item.getDate(dateFormat, showRemoteDate);
+		String additional = item.getAdditionalDescription(context);
 		String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
-		String size = downloadItem.getSizeDescription(context);
-		String addDesc = downloadItem.getAdditionalDescription(context);
-		if (addDesc != null) {
-			size += " " + addDesc;
-		}
-		String date = downloadItem.getDate(dateFormat, showRemoteDate);
-		String fullDescription = String.format(pattern, size, date);
+
+		String fullDescription;
 		if (showTypeInDesc) {
-			String type = downloadItem.getType().getString(context);
-			fullDescription = String.format(pattern, type, fullDescription);
+			String type = item.getType().getString(context);
+			if (additional != null) {
+				type += " " + additional;
+			}
+			fullDescription = String.format(pattern, type, String.format(pattern, size, date));
+		} else {
+			if (additional != null) {
+				size += " " + additional;
+			}
+			fullDescription = String.format(pattern, size, date);
 		}
 		tvDesc.setText(fullDescription);
 	}
@@ -560,8 +568,15 @@ public class ItemViewHolder {
 				params[i] = new LocalItem(file, type);
 			}
 		}
-		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, null);
-		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, new OperationListener() {
+			@Override
+			public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
+				if (AndroidUtils.isActivityNotDestroyed(context)) {
+					context.onUpdatedIndexesList();
+				}
+			}
+		});
+		OsmAndTaskManager.executeTask(removeTask, params);
 	}
 
 	private Drawable getThemedIcon(DownloadActivity context, int resourceId) {

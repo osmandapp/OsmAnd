@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: 'build-common.gradle'
+apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 
@@ -47,10 +48,10 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 24
-		versionCode 5100
+		minSdkVersion osmand_minSdk
+		versionCode 5299
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "5.1.0"
+		versionName "5.2.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -257,8 +258,8 @@ tasks.register('copyOsmAndCoreWithJNI') {
 }
 
 dependencies {
-	openglImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
-	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
+	openglImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar', 'QtAndroidNetwork.jar'], dir: 'libs')
+	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar', 'QtAndroidNetwork.jar'], dir: 'libs')
 
 	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'

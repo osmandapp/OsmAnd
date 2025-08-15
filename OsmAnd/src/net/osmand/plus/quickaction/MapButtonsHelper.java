@@ -38,6 +38,8 @@ import java.util.*;
 
 public class MapButtonsHelper {
 
+	public final static String KEY_EVENT_KEY = "key_event";
+
 	public interface QuickActionUpdatesListener {
 
 		void onActionsUpdated();
@@ -648,10 +650,11 @@ public class MapButtonsHelper {
 	}
 
 	public void setQuickActionStates(@NonNull Collection<QuickActionButtonState> buttonStates) {
-		settings.QUICK_ACTION_BUTTONS.clearAll();
+		List<String> buttonStateIds = new ArrayList<>();
 		for (QuickActionButtonState state : buttonStates) {
-			settings.QUICK_ACTION_BUTTONS.addValue(state.getId());
+			buttonStateIds.add(state.getId());
 		}
+		settings.QUICK_ACTION_BUTTONS.setStringsList(buttonStateIds);
 		updateActiveActions();
 		notifyUpdates();
 	}

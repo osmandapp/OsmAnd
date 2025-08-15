@@ -2,7 +2,6 @@ package net.osmand.plus.search.listitems;
 
 import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,6 +17,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import net.osmand.data.Amenity;
 import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -70,8 +70,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	private View noInternetCard;
 	private View emptyView;
 	private View noCardsFound;
-	private View cardContent;
-	private ShimmerFrameLayout shimmerFrameLayout;
+	private View showAllBtn;
+	private ShimmerFrameLayout cardContent;
 	private boolean isLoadingItems;
 
 	private RecyclerView downloadRecyclerView;
@@ -101,8 +101,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		noInternetCard = findViewById(R.id.no_internet);
 		emptyView = findViewById(R.id.empty_nearby_places);
 		noCardsFound = findViewById(R.id.no_cards_found);
+		showAllBtn = findViewById(R.id.show_all_button);
 		cardContent = findViewById(R.id.card_content);
-		shimmerFrameLayout = findViewById(R.id.shimmer_layout);
 		downloadMapsCard = findViewById(R.id.download_maps_card);
 		downloadRecyclerView = emptyView.findViewById(R.id.download_recycler_view);
 		downloadRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -122,7 +122,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 	}
 
 	private void setupShowAllNearbyPlacesBtn() {
-		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
+		showAllBtn.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
@@ -156,6 +156,7 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, nightMode));
 		boolean nearbyPointFound = getNearbyAdapter().hasData();
 		AndroidUiHelper.updateVisibility(cardContent, !collapsed && isDataSourceAvailable());
+		AndroidUiHelper.updateVisibility(showAllBtn, !collapsed && nearbyPointFound);
 		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !isDataSourceAvailable());
 		AndroidUiHelper.updateVisibility(emptyView, !collapsed && isDataSourceAvailable() && !nearbyPointFound && !isLoadingItems);
 		if (!collapsed && !nearbyPointFound && !isLoadingItems) {
@@ -174,8 +175,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		searchAmenitiesTask = null;
 		adapter.setLoading(false);
 		isLoadingItems = false;
-		shimmerFrameLayout.stopShimmer();
-		shimmerFrameLayout.hideShimmer();
+		cardContent.stopShimmer();
+		cardContent.hideShimmer();
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateExpandState();
 	}
@@ -223,10 +224,10 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 				onLoadingFinished();
 				return false;
 			});
-			searchAmenitiesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(searchAmenitiesTask);
 			AndroidUiHelper.updateVisibility(progressBar, true);
-			if (!getNearbyAdapter().hasData()) {
-				shimmerFrameLayout.startShimmer();
+			if(!getNearbyAdapter().hasData()) {
+				cardContent.startShimmer();
 			}
 		}
 	}

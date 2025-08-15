@@ -220,6 +220,9 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 
 		updateNightMode();
 		view = themedInflater.inflate(R.layout.widget_settings_info_fragment, container, false);
+		if (widgetInfo == null) {
+			return view;
+		}
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
@@ -411,7 +414,7 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 			fragment.setTargetFragment(target, 0);
 
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, tag)
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(tag)
 					.commitAllowingStateLoss();
 		}

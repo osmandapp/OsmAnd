@@ -145,8 +145,11 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_0_01 = 5001;
 	// 5005 - (Resend user purchases)
 	public static final int VERSION_5_0_05 = 5005;
+	public static final int VERSION_5_1_00 = 5100;
+	// 5101 - 5.1-01 (Migrate show_next_turn_info to widget-specific preference)
+	public static final int VERSION_5_1_01 = 5101;
 
-	public static final int LAST_APP_VERSION = VERSION_5_0_05;
+	public static final int LAST_APP_VERSION = VERSION_5_1_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -277,7 +280,9 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_8_02) {
 					migrateTerrainModeDefaultPreferences(settings);
 				}
+				boolean mergingAssets = false;
 				if (prevAppVersion < VERSION_5_0_00) {
+					mergingAssets = true;
 					app.getAppInitializer().addOnFinishListener(
 							init -> MergeAssetFilesVersionAlgorithm.execute(app)
 					);
@@ -287,6 +292,14 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_0_05) {
 					settings.BILLING_PURCHASE_TOKENS_SENT.set("");
+				}
+				if (prevAppVersion < VERSION_5_1_00 && !mergingAssets) {
+					app.getAppInitializer().addOnFinishListener(
+							init -> MergeAssetFilesVersionAlgorithm.execute(app)
+					);
+				}
+				if (prevAppVersion < VERSION_5_1_01) {
+					migrateShowNextTurnInfoPrefToWidgetSpecific();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -993,6 +1006,34 @@ public class AppVersionUpgradeOnInit {
 					CommonPreference<WidgetSize> pref = settings.registerEnumStringPreference(sizePrefId, WidgetSize.SMALL, WidgetSize.values(), WidgetSize.class)
 							.makeProfile();
 					pref.resetModeToDefault(mode);
+				}
+			}
+		}
+	}
+
+	private void migrateShowNextTurnInfoPrefToWidgetSpecific() {
+		final String BASE_PREF_ID = "show_next_turn_info";
+		final String BASE_WIDGET_ID = "street_name";
+		final String CUSTOM_ID_DELIMITER = "__";
+
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<Boolean> oldPref = new BooleanPreference(settings, BASE_PREF_ID, false).makeProfile();;
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			if (!oldPref.isSetForMode(appMode)) {
+				continue;
+			}
+			boolean showNextTurn = oldPref.getModeValue(appMode);
+
+			// apply this setting to ALL existing StreetNameWidgets (customIds) for this profile
+			List<String> widgetIds = settings.CUSTOM_WIDGETS_KEYS.getStringsListForProfile(appMode);
+			if (widgetIds != null) {
+				for (String widgetId : widgetIds) {
+					if (widgetId.startsWith(BASE_WIDGET_ID) && widgetId.contains(CUSTOM_ID_DELIMITER)) {
+						String prefId = BASE_PREF_ID + "_" + widgetId;
+						settings.registerBooleanPreference(prefId, false)
+								.makeProfile().cache().setModeValue(appMode, showNextTurn);
+					}
 				}
 			}
 		}

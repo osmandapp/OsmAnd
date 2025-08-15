@@ -4338,8 +4338,8 @@
     <string name="display_route_tracks">Afișează trasee</string>
     <string name="shared_string_travelbooks">Cărți de călătorie</string>
     <string name="display_route_tracks_as_poi">Afișează trasee ca punct de interes</string>
-    <string name="delete_history_items_descr">Ștergeți elementele selectate din istoric\?</string>
-    <string name="delete_history_items">Ștergeți %1$s elemente din istoric\?</string>
+    <string name="delete_history_items_descr">Ștergeți elementele selectate din istoric?</string>
+    <string name="delete_history_items">Ștergeți %1$s elemente din istoric?</string>
     <string name="quick_action_toggle_preference">Un comutator pentru a schimba preferința.</string>
     <string name="not_enough_contributions_descr">Un minim de %1$s modificări în ultimele două luni %2$s este necesar pentru a avea acces la actualizări nelimitate ale hărților din oră în oră.</string>
     <string name="copying_file">Se copiază fișierul %1$s…</string>
@@ -6041,4 +6041,10 @@
     <string name="msg_gpx_waypoints_copied_to_favorites">Puncte de referință GPX (%1$d) copiate în favorite.</string>
     <string name="save_to_device_error">Eroare la salvarea pe dispozitiv</string>
     <string name="save_to_device">Salvare pe dispozitiv</string>
+    <string name="map_orientation_portrait_inverted">Portret (inversat)</string>
+    <string name="map_orientation_landscape_inverted">Peisaj (inversat)</string>
+    <string name="reverse_mode_calculate_route">Calculează ruta</string>
+    <string name="reverse_mode_calculate_route_desc">Calculează o nouă rută optimizată până la pornire.</string>
+    <string name="reverse_mode_original_track">Ruta originală</string>
+    <string name="altitude_metrics_description">Setează unitatea de afișare pentru altitudine în widget-uri și statistici.</string>
 </resources>

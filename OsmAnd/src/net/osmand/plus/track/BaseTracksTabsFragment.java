@@ -166,7 +166,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	@NonNull
 	public List<TrackTab> getSortedTrackTabs() {
-		return getSortedTrackTabs(false);
+		return getSortedTrackTabs(true);
 	}
 
 	@NonNull
@@ -182,7 +182,9 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	@Nullable
 	public TrackTab getSelectedTab() {
 		List<TrackTab> trackTabs = getSortedTrackTabs();
-		return trackTabs.isEmpty() ? null : trackTabs.get(viewPager.getCurrentItem());
+		int currentItemIndex = viewPager.getCurrentItem();
+		int selectedTabIndex = currentItemIndex < trackTabs.size() ? currentItemIndex : 0;
+		return trackTabs.isEmpty() ? null : trackTabs.get(selectedTabIndex);
 	}
 
 	public void setSelectedTab(@NonNull String id) {

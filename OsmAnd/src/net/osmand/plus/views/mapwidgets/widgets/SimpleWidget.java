@@ -140,7 +140,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public boolean shouldShowIcon() {
-		return widgetState.getShowIconPref().get();
+		return widgetState.getShowIconPref().get() || (isSmallSize() && !isVerticalWidget());
 	}
 
 	@NonNull
@@ -287,11 +287,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		return null;
 	}
 
-	public void showIcon(boolean showIcon) {
-		AndroidUiHelper.updateVisibility(imageView, showIcon);
-		imageView.invalidate();
-	}
-
 	public void setImageDrawable(int res) {
 		Drawable imageDrawable = iconsCache.getIcon(res, 0);
 		if (shouldShowIcon()) {
@@ -360,5 +355,9 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 			}
 			updateInfo(null);
 		}
+	}
+
+	private boolean isSmallSize() {
+		return getWidgetSizePref().get() == WidgetSize.SMALL;
 	}
 }

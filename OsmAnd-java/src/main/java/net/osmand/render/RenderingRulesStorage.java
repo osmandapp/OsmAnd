@@ -696,10 +696,11 @@ public class RenderingRulesStorage {
 			styleName = styleFile.getName().substring(0, styleFile.getName().indexOf('.'));
 			defaultIS = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		} else {
-			File stylesDir = new File(System.getProperty("repo.dir") + "/resources/rendering_styles/");
+			
+			File stylesDir = new File("../../resources/rendering_styles/");
+			System.out.println(stylesDir.getCanonicalFile().getAbsolutePath());
 			defaultIS = new FileInputStream(new File(stylesDir, "default.render.xml"));
-//			styleName = "default";
-			styleName = "test";
+			styleName = "default";
 			styleFile = new File(stylesDir, styleName +".render.xml");
 		}
 		final Map<String, String> renderingConstants = readRenderingConstantsFromInputStream(defaultIS);
@@ -732,25 +733,25 @@ public class RenderingRulesStorage {
 //		for (RenderingRuleProperty p :  storage.PROPS.getCustomRules()) {
 //			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
 //		}
-		printAllRules(storage);
+//		printAllRules(storage);
 		testSearch(storage);
 	}
 
 	protected static void testSearch(RenderingRulesStorage storage) {
-		//		long tm = System.nanoTime();
-		//		int count = 100000;
-		//		for (int i = 0; i < count; i++) {
-					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-					searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "primary");
+		long tm = System.nanoTime();
+		int count = 1000000;
+		for (int i = 0; i < count; i++) {
+			RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
+			searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
+			searchRequest.setStringFilter(storage.PROPS.R_VALUE, "primary");
 //					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "contourtype=10m");
 //					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
-					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
+			searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
+			searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
 //						searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 //					searchRequest.setStringFilter(storage.PROPS.get("contourColorScheme"), "yellow");
 //					searchRequest.setStringFilter(storage.PROPS.get("contourLines"), "15");
-					
+
 //					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
 //						if (customProp.isBoolean()) {
 //							searchRequest.setBooleanFilter(customProp, false);
@@ -759,11 +760,11 @@ public class RenderingRulesStorage {
 //						}
 //					}
 //					searchRequest.setBooleanFilter(storage.PROPS.get("noPolygons"), true);
-					boolean res = searchRequest.search(LINE_RULES);
-					System.out.println("Result " + res);
-					printResult(searchRequest,  System.out);
-		//		}
-		//		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
+			boolean res = searchRequest.search(LINE_RULES);
+//			System.out.println("Result " + res);
+//			printResult(searchRequest, System.out);
+		}
+		System.out.println((System.nanoTime() - tm) / (1e9f));
 	}
 
 	public static RenderingRulesStorage getTestStorageForStyle(String filePath) throws XmlPullParserException, IOException  {

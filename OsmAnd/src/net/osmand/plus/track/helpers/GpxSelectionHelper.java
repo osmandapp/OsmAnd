@@ -15,9 +15,10 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
@@ -101,12 +102,12 @@ public class GpxSelectionHelper {
 				if (file.exists() && !file.isDirectory()) {
 					GpxSelectionParams selectionParams = GpxSelectionParams.getDefaultSelectionParams();
 					if (file.lastModified() > gpxEntry.getValue()) {
-						new GpxFileLoaderTask(file, null, result -> {
+						OsmAndTaskManager.executeTask(	new GpxFileLoaderTask(file, null, result -> {
 							if (result != null) {
 								selectGpxFile(result, selectionParams);
 							}
 							return true;
-						}).execute();
+						}));
 					} else {
 						selectGpxFile(gpxEntry.getKey(), selectionParams);
 					}
@@ -308,7 +309,7 @@ public class GpxSelectionHelper {
 		String relativePath = GpxUiHelper.getGpxFileRelativePath(app, gpx.getPath());
 		GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, relativePath);
 		if (gpxInfo != null) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
+			app.getSearchHistoryHelper().addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
 		}
 	}
 
@@ -508,7 +509,7 @@ public class GpxSelectionHelper {
 			selectGpxTask.cancel(false);
 		}
 		selectGpxTask = new SelectGpxTask(app, selectedPaths, getGpxSelectionListener());
-		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(selectGpxTask);
 	}
 
 	@NonNull

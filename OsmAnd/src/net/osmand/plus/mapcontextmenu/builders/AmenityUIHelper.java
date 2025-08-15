@@ -44,6 +44,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.LocaleHelper;
@@ -61,6 +62,7 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -87,6 +89,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private static final String WIKI_DATA_BASE_URL = "https://www.wikidata.org/wiki/";
 
 	private final MetricsConstants metricSystem;
+	private final AltitudeMetrics altitudeMetrics;
 	private final AdditionalInfoBundle additionalInfo;
 
 	private String preferredLang;
@@ -107,6 +110,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		this.preferredLang = preferredLang;
 		this.additionalInfo = infoBundle;
 		this.metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
+		this.altitudeMetrics = mapActivity.getMyApplication().getSettings().ALTITUDE_METRIC.get();
 	}
 
 	public void setPreferredLang(String lang) {
@@ -526,13 +530,15 @@ public class AmenityUIHelper extends MenuBuilder {
 		if ("ele".equals(key)) {
 			try {
 				float distance = Float.parseFloat(vl);
-				vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
+				vl = OsmAndFormatter.getFormattedAlt(distance, app, altitudeMetrics);
 				String collapsibleVal;
-				if (metricSystem == MILES_AND_FEET || metricSystem == MILES_AND_YARDS || metricSystem == NAUTICAL_MILES_AND_FEET) {
-					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, KILOMETERS_AND_METERS);
+
+				if (altitudeMetrics == AltitudeMetrics.FEET) {
+					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, AltitudeMetrics.METERS);
 				} else {
-					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MILES_AND_FEET);
+					collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, AltitudeMetrics.FEET);
 				}
+
 				Set<String> elevationData = new HashSet<>();
 				elevationData.add(collapsibleVal);
 				collapsableView = getDistanceCollapsableView(elevationData);
@@ -1041,5 +1047,35 @@ public class AmenityUIHelper extends MenuBuilder {
 	@Nullable
 	private Locale getPreferredLocale(Collection<String> locales) {
 		return LocaleHelper.getPreferredNameLocale(app, locales);
+	}
+
+
+	@Nullable
+	public static Pair<String, Locale> getDescriptionWithPreferredLang(@NonNull OsmandApplication app,
+			@NonNull Amenity amenity, @NonNull String key, @NonNull Map<String, Object> map) {
+		Object object = map.get(key);
+		if (object instanceof Map<?, ?>) {
+			Map<String, Object> descriptions = (Map<String, Object>) object;
+			Map<String, String> localizations = (Map<String, String>) descriptions.get("localizations");
+			Collection<String> locales = AmenityUIHelper.collectAvailableLocalesFromTags(localizations.keySet());
+
+			Locale locale = LocaleHelper.getPreferredNameLocale(app, locales);
+			String localeKey = locale != null ? key + ":" + locale.getLanguage() : key;
+
+			String description = localizations.get(localeKey);
+			if (description == null && locale != null && Algorithms.stringsEqual(locale.getLanguage(), "en")) {
+				description = localizations.get(key);
+			}
+			if (description == null) {
+				Map.Entry<String, String> entry = new ArrayList<>(localizations.entrySet()).get(0);
+				description = entry.getValue();
+			}
+			return Pair.create(description, locale);
+		}
+		String description = amenity.getAdditionalInfo(key);
+		if (!Algorithms.isEmpty(description)) {
+			return Pair.create(description, null);
+		}
+		return null;
 	}
 }

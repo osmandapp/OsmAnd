@@ -90,8 +90,7 @@ public class PluginSettingsItem extends SettingsItem {
 	public void apply() {
 		if (shouldReplace || !exists()) {
 			for (SettingsItem item : pluginDependentItems) {
-				if (item instanceof FileSettingsItem) {
-					FileSettingsItem fileItem = (FileSettingsItem) item;
+				if (item instanceof FileSettingsItem fileItem) {
 					if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.RENDERING_STYLE) {
 						plugin.addRenderer(fileItem.getName());
 					} else if (fileItem.getSubtype() == FileSettingsItem.FileSubtype.ROUTING_CONFIG) {

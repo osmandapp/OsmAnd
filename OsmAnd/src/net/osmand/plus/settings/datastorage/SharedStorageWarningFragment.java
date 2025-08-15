@@ -23,6 +23,7 @@ import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -253,7 +254,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 				if (activity != null) {
 					StorageMigrationAsyncTask copyFilesTask = new StorageMigrationAsyncTask(activity,
 							documentFiles, selectedStorage, filesSize, usedOnMap);
-					copyFilesTask.executeOnExecutor(singleThreadExecutor);
+					OsmAndTaskManager.executeTask(copyFilesTask, singleThreadExecutor);
 					dismiss();
 				}
 			});
@@ -346,7 +347,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private void updateSelectedFolderFiles(@NonNull Uri uri) {
 		stopCollectFilesTask();
 		collectTask = new DocumentFilesCollectTask(app, uri, this);
-		collectTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(collectTask, singleThreadExecutor);
 	}
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {

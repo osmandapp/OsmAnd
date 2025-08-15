@@ -15,6 +15,7 @@ object GpxDbUtils {
 
 	private const val GPX_TABLE_INDEX = "indexNameDir"
 	private const val GPX_DIR_TABLE_INDEX = "gpxDirIndexNameDir"
+	private const val GPX_APPEARANCE_TRIGGER = "triggerGpxAppearanceLastModified"
 
 	fun getCreateGpxTableQuery(): String {
 		return getCreateTableQuery(GpxParameter.entries, GPX_TABLE_NAME)
@@ -83,6 +84,7 @@ object GpxDbUtils {
 		db.execSQL(getGpxIndexQuery())
 		db.execSQL(getCreateGpxDirTableQuery())
 		db.execSQL(getGpxDirIndexQuery())
+		db.execSQL(getCreateAppearanceTriggerQuery())
 	}
 
 	fun onUpgrade(database: GpxDatabase, db: SQLiteConnection, oldVersion: Int, newVersion: Int) {
@@ -150,8 +152,10 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_CADENCE);
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_CADENCE);
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_HEART_RATE);
+			addIfMissingGpxTableColumn(columnNames, db, MIN_SENSOR_HEART_RATE);
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_HEART_RATE);
 			addIfMissingGpxTableColumn(columnNames, db, DATA_VERSION);
+			addIfMissingGpxTableColumn(columnNames, db, APPEARANCE_LAST_MODIFIED_TIME);
 			// temporary code to test failure
 
 			GpxParameter.entries.forEach { parameter ->
@@ -200,6 +204,9 @@ object GpxDbUtils {
 							"WHERE ${COLOR.columnName} = ?", arrayOf(it.value, it.key))
 				}
 			}
+		}
+		if (oldVersion < 31) {
+			db.execSQL(getCreateAppearanceTriggerQuery())
 		}
 	}
 
@@ -297,5 +304,25 @@ object GpxDbUtils {
 
 	fun createDataVersion(analysisVersion: Int): Int {
 		return (GpxDatabase.DB_VERSION shl 10) + analysisVersion
+	}
+
+	private fun getCreateAppearanceTriggerQuery(): String {
+		val stampColumn = GpxParameter.APPEARANCE_LAST_MODIFIED_TIME.columnName
+		val appearance = GpxParameter.getAppearanceParameters()
+		val columnNames  = appearance.joinToString(", ") { it.columnName }
+		val changeCondition = appearance.joinToString(" OR ") {
+			"OLD.${it.columnName} IS NOT NEW.${it.columnName}"
+		}
+		val sb = StringBuilder()
+		sb.appendLine("CREATE TRIGGER IF NOT EXISTS $GPX_APPEARANCE_TRIGGER")
+		sb.appendLine("AFTER UPDATE OF $columnNames ON $GPX_TABLE_NAME")
+		sb.appendLine("FOR EACH ROW")
+		sb.appendLine("WHEN $changeCondition")
+		sb.appendLine("BEGIN")
+		sb.appendLine("UPDATE $GPX_TABLE_NAME")
+		sb.appendLine("SET $stampColumn = CAST(strftime('%s','now') AS INTEGER) * 1000")
+		sb.appendLine("WHERE rowid = NEW.rowid;")
+		sb.append("END;")
+		return sb.toString()
 	}
 }

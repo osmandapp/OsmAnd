@@ -5,6 +5,7 @@ import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.settings.enums.ReverseTrackStrategy;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
@@ -36,6 +37,7 @@ public class GPXRouteParams {
 	protected List<Location> segmentEndpoints = new ArrayList<>();
 	protected List<WptPt> routePoints = new ArrayList<>();
 	protected boolean reverse;
+	protected ReverseTrackStrategy reverseStrategy;
 	protected boolean passWholeRoute;
 	protected boolean calculateOsmAndRoute;
 	protected boolean connectPointsStraightly;
@@ -57,6 +59,10 @@ public class GPXRouteParams {
 		return route;
 	}
 
+	public boolean hasOsmAndRoute() {
+		return !Algorithms.isEmpty(route);
+	}
+
 	public List<LocationPoint> getWpt() {
 		return wpt;
 	}
@@ -72,6 +78,7 @@ public class GPXRouteParams {
 	public void prepareGPXFile(@NonNull GPXRouteParamsBuilder builder) {
 		gpxFile = builder.file;
 		reverse = builder.reverse;
+		reverseStrategy = builder.reverseStrategy;
 		passWholeRoute = builder.passWholeRoute;
 		calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 		calculatedRouteTimeSpeed = builder.calculatedRouteTimeSpeed;
@@ -139,7 +146,6 @@ public class GPXRouteParams {
 	}
 
 	public static class GPXRouteParamsBuilder {
-
 		private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(GPXRouteParamsBuilder.class);
 
 		boolean calculateOsmAndRoute;
@@ -147,6 +153,7 @@ public class GPXRouteParams {
 		private final GpxFile file;
 		private final boolean leftSide;
 		private boolean reverse;
+		private ReverseTrackStrategy reverseStrategy;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
 		private boolean calculatedRouteTimeSpeed;
@@ -167,6 +174,7 @@ public class GPXRouteParams {
 			this.calculateOsmAndRoute = params.calculateOsmAndRoute;
 			this.leftSide = params.leftSide;
 			this.reverse = params.reverse;
+			this.reverseStrategy = params.reverseStrategy;
 			this.passWholeRoute = params.passWholeRoute;
 			this.calculateOsmAndRouteParts = params.calculateOsmAndRouteParts;
 			this.calculatedRouteTimeSpeed = params.calculatedRouteTimeSpeed;
@@ -329,6 +337,10 @@ public class GPXRouteParams {
 			this.reverse = reverse;
 		}
 
+		public void setReverseStrategy(@NonNull ReverseTrackStrategy reverseStrategy) {
+			this.reverseStrategy = reverseStrategy;
+		}
+
 		public GpxFile getFile() {
 			return file;
 		}
@@ -346,6 +358,7 @@ public class GPXRouteParams {
 					", file=" + file.getPath() +
 					", leftSide=" + leftSide +
 					", reverse=" + reverse +
+					", reverseStrategy=" + reverseStrategy +
 					", passWholeRoute=" + passWholeRoute +
 					", calculateOsmAndRouteParts=" + calculateOsmAndRouteParts +
 					", calculatedRouteTimeSpeed=" + calculatedRouteTimeSpeed +

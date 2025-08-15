@@ -4,6 +4,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -176,7 +177,11 @@ public class PrecalculatedRouteDirection {
 			x31 = sx31;
 			y31 = sy31;
 		} else {
-			throw new UnsupportedOperationException();
+			int sInd = getIndex(sx31, sy31);
+			int eInd = getIndex(ex31, ey31);
+			String err = String.format(Locale.US, "startPoint:%d, endPoint:%d, l1:%d, l2:%d, sx31:%d, sy31:%d, ex31:%d, ey31:%d, startIndex: %d, endIndex:%d",
+					startPoint, endPoint, l1, l2, sx31, sy31, ex31, ey31, sInd, eInd);
+			throw new UnsupportedOperationException(err);
 		}
 		int ind = getIndex(x31, y31);
 		if(ind == -1) {
@@ -246,7 +251,7 @@ public class PrecalculatedRouteDirection {
 	}
 
 	private long calc(int x31, int y31) {
-		return ((long) x31) << 32l + ((long)y31);
+		return (((long) x31) << 32L) + ((long)y31);
 	}
 	
 	public void setFollowNext(boolean followNext) {

@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.os.AsyncTask;
 import android.util.Pair;
 import android.view.View;
 import android.widget.TextView;
@@ -10,10 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
+import net.osmand.plus.search.history.HistoryEntry;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.search.core.SearchResult;
@@ -38,7 +38,7 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 	@Override
 	protected void updateHistoryItems() {
 		clearItems();
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 		List<SearchResult> searchResults = historyHelper.getHistoryResults(HistorySource.SEARCH, false, true);
 		sortSearchResults(searchResults);
 
@@ -112,18 +112,7 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 			}
 		}
 		ShareHistoryAsyncTask exportTask = new ShareHistoryAsyncTask(app, historyEntries, null);
-		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	@Override
-	protected void deleteSelectedItems() {
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-		for (Object item : selectedItems) {
-			if (item instanceof SearchResult) {
-				SearchResult searchResult = (SearchResult) item;
-				helper.remove(searchResult.object);
-			}
-		}
+		OsmAndTaskManager.executeTask(exportTask);
 	}
 
 	@Override

@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.NextDirectionInfo;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
@@ -119,9 +118,9 @@ public class TripUtils {
 		} else if (unitId == R.string.foot) {
 			return Distance.UNIT_FEET;
 		} else if (unitId == R.string.mile || unitId == R.string.nm) {
-			return Distance.UNIT_MILES;
+			return Distance.UNIT_MILES_P1;
 		} else if (unitId == R.string.km) {
-			return Distance.UNIT_KILOMETERS;
+			return Distance.UNIT_KILOMETERS_P1;
 		}
 		return Distance.UNIT_METERS;
 	}
@@ -224,7 +223,7 @@ public class TripUtils {
 	}
 
 	@NonNull
-	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
+	public static CurrentStreetName getStreetName(@NonNull NextDirectionInfo info) {
 		return new CurrentStreetName(info, true);
 	}
 }

@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.purchase;
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.FASTSPRING;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.GOOGLE;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HUGEROCK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
@@ -61,6 +62,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	private PurchaseOrigin purchaseOrigin;
 	private PurchaseUiData purchase;
 	private InAppPurchaseHelper inAppPurchaseHelper;
+	private boolean externalInapp;
 
 	private View view;
 	private boolean isToolbarInitialized;
@@ -113,7 +115,9 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 					for (InAppStateHolder holder : inAppPurchaseHelper.getExternalInApps()) {
 						InAppPurchase inapp = holder.linkedPurchase;
 						if (inapp != null && holder.origin == purchaseOrigin && purchaseSku.equals(inapp.getSku())) {
-							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.purchaseTime, UNDEFINED_TIME, holder.origin, null);
+							purchase = PurchaseUiDataUtils.createUiData(app, inapp, holder.name, holder.icon,
+									holder.purchaseTime, holder.expireTime == 0 ? UNDEFINED_TIME : holder.expireTime, holder.origin, null);
+							externalInapp = true;
 							break;
 						}
 					}
@@ -121,7 +125,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 						for (SubscriptionStateHolder holder : inAppPurchaseHelper.getExternalSubscriptions()) {
 							InAppSubscription subscription = holder.linkedSubscription;
 							if (subscription != null && holder.origin == purchaseOrigin && purchaseSku.equals(subscription.getSku())) {
-								purchase = PurchaseUiDataUtils.createUiData(app, subscription, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
+								purchase = PurchaseUiDataUtils.createUiData(app, subscription, null, null, UNDEFINED_TIME, holder.expireTime, holder.origin, holder.state);
 								break;
 							}
 						}
@@ -164,6 +168,9 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		ViewGroup cardContainer = view.findViewById(R.id.card_container);
 		cardContainer.removeAllViews();
 		PurchaseItemCard card = new PurchaseItemCard(context, inAppPurchaseHelper, purchase);
+		if (externalInapp) {
+			card.setPreferPurchasedTimeTitle(true);
+		}
 		cardContainer.addView(card.build(context));
 
 		// Info blocks
@@ -184,11 +191,18 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 			updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
 		} else {
 			long purchaseTime = purchase.getPurchaseTime();
-			boolean hasTime = purchaseTime > 0;
+			long expireTime = purchase.getExpireTime();
+			boolean hasTime = purchaseTime > 0 || expireTime > 0;
 			if (hasTime) {
-				purchaseDesc = PurchaseUiDataUtils.DATE_FORMAT.format(purchaseTime);
-				purchaseTitle = app.getString(R.string.shared_string_purchased);
-				updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
+				if (expireTime > 0) {
+					purchaseDesc = PurchaseUiDataUtils.DATE_FORMAT.format(expireTime);
+					purchaseTitle = app.getString(R.string.shared_string_expires);
+					updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
+				} else {
+					purchaseDesc = PurchaseUiDataUtils.DATE_FORMAT.format(purchaseTime);
+					purchaseTitle = app.getString(R.string.shared_string_purchased);
+					updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
+				}
 			}
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.purchasing_period_block), hasTime);
 		}
@@ -199,10 +213,12 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		updateInformationBlock(R.id.platform_block, purchasedOn, platform);
 
 		// Bottom buttons
-		boolean manageVisible = purchase.isSubscription() && origin == GOOGLE;
+		boolean manageVisible = purchase.isSubscription() && origin == GOOGLE || isFastSpring();
 		boolean liveVisible = purchase.isLiveUpdateSubscription();
+		boolean descriptionVisible = isFastSpring();
 
 		setupLiveButton(liveVisible);
+		setupDescription(descriptionVisible);
 		setupManageButton(manageVisible);
 		setupPromoDetails(origin);
 
@@ -232,6 +248,14 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		tvDesc.setText(description);
 	}
 
+	private void setupDescription(boolean visible){
+		View descriptionBlock = view.findViewById(R.id.description_block);
+		TextView textView = descriptionBlock.findViewById(R.id.title);
+		textView.setText(purchase.isSubscription() ? R.string.description_subscription_fastspring : R.string.description_purchases_fastspring);
+
+		AndroidUiHelper.updateVisibility(descriptionBlock, visible);
+	}
+
 	private void setupManageButton(boolean visible) {
 		FragmentActivity activity = getActivity();
 		if (activity == null) {
@@ -241,7 +265,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		manageSubscription.setOnClickListener(v -> {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
-				purchaseHelper.manageSubscription(activity, purchase.getSku());
+				purchaseHelper.manageSubscription(activity, purchase.getSku(), purchase.getOrigin());
 			}
 		});
 		setupSelectableBackground(manageSubscription);
@@ -249,8 +273,12 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_purchases));
 
 		TextView title = manageSubscription.findViewById(android.R.id.title);
-		title.setText(R.string.manage_subscription);
+		title.setText(purchase.isSubscription() ? R.string.manage_subscription : R.string.manage_purchases);
 		AndroidUiHelper.updateVisibility(manageSubscription, visible);
+	}
+
+	private boolean isFastSpring() {
+		return purchase.getOrigin() == FASTSPRING;
 	}
 
 	private void setupLiveButton(boolean visible) {

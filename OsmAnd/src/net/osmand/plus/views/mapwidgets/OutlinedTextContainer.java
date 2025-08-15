@@ -29,7 +29,6 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 
 public class OutlinedTextContainer extends FrameLayout {
@@ -37,7 +36,6 @@ public class OutlinedTextContainer extends FrameLayout {
 
 	private TextView outlineTextView;
 	private TextView mainTextView;
-	private String textViewClassName = null;
 
 	public OutlinedTextContainer(Context context) {
 		super(context);
@@ -58,8 +56,8 @@ public class OutlinedTextContainer extends FrameLayout {
 		if (attrs != null) {
 			AttrsHolder holder = new AttrsHolder(attrs);
 
-			outlineTextView = createTextView(textViewClassName);
-			mainTextView = createTextView(textViewClassName);
+			outlineTextView = createTextView(holder.textViewType);
+			mainTextView = createTextView(holder.textViewType);
 
 			setupTextView(outlineTextView, holder, true);
 			setupTextView(mainTextView, holder, false);
@@ -113,7 +111,7 @@ public class OutlinedTextContainer extends FrameLayout {
 			TextPaint paint = textView.getPaint();
 			paint.setStyle(Paint.Style.STROKE);
 			paint.setStrokeWidth(holder.outlineWidth);
-			//paint.setStrokeJoin(Paint.Join.ROUND);
+			paint.setStrokeJoin(Paint.Join.ROUND);
 		} else {
 			textView.setTextColor(holder.textColor);
 		}
@@ -161,27 +159,25 @@ public class OutlinedTextContainer extends FrameLayout {
 				primaryColor, secondaryColor, tertiaryColor);
 	}
 
-	private TextView createTextView(@Nullable String className) {
-		if (className == null) {
-			return new TextView(getContext());
+	@NonNull
+	private TextView createTextView(int type) {
+		Context context = getContext();
+		switch (type) {
+			case 1: // autoScale
+				return new AutoScaleTextView(getContext());
+			case 2: // multi
+				return new MultiTextViewEx(getContext());
+			default: // normal
+				return new TextView(getContext());
 		}
-
-		TextView textView;
-		try {
-			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(Context.class);
-			textView = (TextView) constructor.newInstance(getContext());
-		} catch (Exception e) {
-			LOG.error("OutlinedTextContainer: Failed to create TextView of class " + className, e);
-			textView = new TextView(getContext());
-		}
-
-		return textView;
 	}
 
 	public void setText(@Nullable CharSequence text) {
 		outlineTextView.setText(text);
 		mainTextView.setText(text);
+
+		outlineTextView.requestLayout();
+		mainTextView.requestLayout();
 	}
 
 	public CharSequence getText() {
@@ -304,6 +300,7 @@ public class OutlinedTextContainer extends FrameLayout {
 		float lineSpacingExtra = 0f;
 		float lineSpacingMultiplier = 1.0f;
 		int autoSizeTextType = 0;
+		int textViewType = 0;
 		int autoSizeMinTextSize = -1;
 		int autoSizeMaxTextSize = -1;
 		int autoSizeStepGranularity = -1;
@@ -367,15 +364,11 @@ public class OutlinedTextContainer extends FrameLayout {
 				lineSpacingExtra = a.getDimension(R.styleable.OutlinedTextContainer_android_lineSpacingExtra, lineSpacingExtra);
 				lineSpacingMultiplier = a.getFloat(R.styleable.OutlinedTextContainer_android_lineSpacingMultiplier, lineSpacingMultiplier);
 
+				textViewType = a.getInt(R.styleable.OutlinedTextContainer_textViewType, textViewType);
 				autoSizeTextType = a.getInt(R.styleable.OutlinedTextContainer_android_autoSizeTextType, autoSizeTextType);
 				autoSizeMinTextSize = a.getDimensionPixelSize(R.styleable.OutlinedTextContainer_android_autoSizeMinTextSize, autoSizeMinTextSize);
 				autoSizeMaxTextSize = a.getDimensionPixelSize(R.styleable.OutlinedTextContainer_android_autoSizeMaxTextSize, autoSizeMaxTextSize);
 				autoSizeStepGranularity = a.getDimensionPixelSize(R.styleable.OutlinedTextContainer_android_autoSizeStepGranularity, autoSizeStepGranularity);
-
-				String className = a.getString(R.styleable.OutlinedTextContainer_textViewClass);
-				if (className != null && !className.isEmpty()) {
-					textViewClassName = className;
-				}
 
 				minTextSize = a.getDimension(R.styleable.OutlinedTextContainer_autoScale_minTextSize, minTextSize);
 				maxTextSize = a.getDimension(R.styleable.OutlinedTextContainer_autoScale_maxTextSize, maxTextSize);

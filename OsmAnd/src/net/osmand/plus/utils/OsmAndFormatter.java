@@ -1,6 +1,5 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.data.PointDescription.getLocationOlcName;
 import static java.util.Calendar.DAY_OF_YEAR;
 import static java.util.Calendar.ERA;
 import static java.util.Calendar.YEAR;
@@ -12,11 +11,13 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.ZonedUTMPoint;
 
 import net.osmand.LocationConvert;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
@@ -33,10 +34,13 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.TextDirectionUtil;
+
+import org.apache.commons.logging.Log;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -53,6 +57,10 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class OsmAndFormatter {
+
+	private static final Log log = PlatformUtil.getLog(OsmAndFormatter.class);
+
+	public static final int OLC_FORMAT_PRECISION = 11; // 2.8 x 3.5 meters
 
 	public static final float METERS_IN_KILOMETER = 1000f;
 	public static final float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
@@ -463,20 +471,20 @@ public class OsmAndFormatter {
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
-		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		return getFormattedAlt(alt, ctx, mc);
+		AltitudeMetrics altitudeMetrics = settings.ALTITUDE_METRIC.get();
+		return getFormattedAlt(alt, ctx, altitudeMetrics);
 	}
 
 	@NonNull
-	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
-		return getFormattedAltitudeValue(alt, ctx, mc).format(ctx);
+	public static String getFormattedAlt(double alt, OsmandApplication ctx, AltitudeMetrics altitudeMetrics) {
+		return getFormattedAltitudeValue(alt, ctx, altitudeMetrics).format(ctx);
 	}
 
 	@NonNull
 	public static FormattedValue getFormattedAltitudeValue(double altitude,
 	                                                       @NonNull OsmandApplication ctx,
-	                                                       @NonNull MetricsConstants mc) {
-		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
+	                                                       @NonNull AltitudeMetrics am) {
+		boolean useFeet = am.shouldUseFeet();
 		FormattedValue formattedValue;
 		if (useFeet) {
 			int feet = (int) (altitude * FEET_IN_ONE_METER + 0.5);
@@ -896,13 +904,8 @@ public class OsmAndFormatter {
 			ZonedUTMPoint utmPoint = new ZonedUTMPoint(new LatLonPoint(lat, lon));
 			result.append(utmPoint.format());
 		} else if (outputFormat == OLC_FORMAT) {
-			String r;
-			try {
-				r = getLocationOlcName(lat, lon);
-			} catch (RuntimeException e) {
-				r = "0, 0";
-			}
-			result.append(r);
+			String code = getOpenLocationCode(lat, lon);
+			result.append(code);
 		} else if (outputFormat == MGRS_FORMAT) {
 			MGRSPoint pnt = new MGRSPoint(new LatLonPoint(lat, lon));
 			try {
@@ -983,5 +986,15 @@ public class OsmAndFormatter {
 	@NonNull
 	public static String formatFps(float fps) {
 		return fps > 0 ? String.format(Locale.US, "%.1f", fps) : "-";
+	}
+
+	@NonNull
+	public static String getOpenLocationCode(double lat, double lon) {
+		try {
+			return OpenLocationCode.encode(lat, lon, OLC_FORMAT_PRECISION);
+		} catch (RuntimeException e) {
+			log.error("Failed to define OLC location", e);
+		}
+		return "0, 0";
 	}
 }

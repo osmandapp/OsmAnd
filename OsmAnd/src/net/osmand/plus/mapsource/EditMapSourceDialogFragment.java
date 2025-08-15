@@ -41,6 +41,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -383,7 +384,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
 			}
 			if (storageChanged) {
-				new DeleteTilesTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+				OsmAndTaskManager.executeTask(new DeleteTilesTask(app), f);
 			}
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OnMapSourceUpdateListener) {

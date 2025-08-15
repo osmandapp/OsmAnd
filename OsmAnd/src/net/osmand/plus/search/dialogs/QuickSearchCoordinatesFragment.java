@@ -44,6 +44,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
@@ -628,8 +629,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				}
 			} else if (CURRENT_FORMAT == PointDescription.OLC_FORMAT) {
 				if (latLon != null) {
-					String olc = OpenLocationCode.encode(latLon.getLatitude(), latLon.getLongitude());
-					olcEdit.setText(olc);
+					String code = OsmAndFormatter.getOpenLocationCode(latLon.getLatitude(), latLon.getLongitude());
+					olcEdit.setText(code);
 				} else if (prevFormat == PointDescription.UTM_FORMAT) {
 					olcEdit.setText(zoneEdit.getText());
 				} else if (prevFormat == PointDescription.MGRS_FORMAT) {
@@ -796,7 +797,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				}
 			} else {
 				parseOlcCodeTask = new SearchCitiesTask(getMyApplication(), cityName, mapLocation, getSearchCitiesListener(olcTextCode));
-				parseOlcCodeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(parseOlcCodeTask);
 			}
 		}
 		if (codeArea != null) {
@@ -858,7 +859,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			TextView titleView = coordinatesView.findViewById(R.id.title);
 			TextView subtitleView = coordinatesView.findViewById(R.id.subtitle);
 			titleView.setText(PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude()));
-			new AsyncTask<LatLon, Void, String>() {
+			OsmAndTaskManager.executeTask(new AsyncTask<LatLon, Void, String>() {
 				@Override
 				protected String doInBackground(LatLon... params) {
 					return app.getRegions().getCountryName(latLon);
@@ -870,7 +871,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 						subtitleView.setText(country == null ? "" : country);
 					}
 				}
-			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+			}, latLon);
 			updateLocationUI(coordinatesView, latLon);
 			AndroidUiHelper.updateVisibility(coordinatesView, true);
 			AndroidUiHelper.updateVisibility(((View) coordinatesView.getParent()).findViewById(R.id.divider), showDivider);

@@ -4,10 +4,12 @@ import static net.osmand.plus.quickaction.QuickActionIds.MAP_SOURCE_ACTION_ID;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -53,7 +55,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected String getTitle(List<Pair<String, String>> filters) {
+	protected String getTitle(List<Pair<String, String>> filters, @NonNull Context ctx) {
 
 		if (filters.isEmpty()) return "";
 
@@ -101,7 +103,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();

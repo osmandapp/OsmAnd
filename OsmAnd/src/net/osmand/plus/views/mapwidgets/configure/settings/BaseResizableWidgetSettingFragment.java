@@ -18,7 +18,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 
@@ -74,18 +73,22 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 		IconToggleButton.IconRadioItem item = new IconToggleButton.IconRadioItem(widgetSize.iconId);
 		item.setOnClickListener((radioItem, v) -> {
 			selectedWidgetSize = widgetSize;
-
 			setupToggleButtons(view);
+			onWidgetSizeChanged();
 			return true;
 		});
 		return item;
+	}
+
+	protected void onWidgetSizeChanged() {
+
 	}
 
 	private boolean isMediumHeight() {
 		return selectedWidgetSize == WidgetSize.MEDIUM;
 	}
 
-	private boolean isSmallHeight() {
+	protected boolean isSmallHeight() {
 		return selectedWidgetSize == WidgetSize.SMALL;
 	}
 

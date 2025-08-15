@@ -14,6 +14,7 @@ import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxFile.Companion.XML_COLON
 import net.osmand.shared.gpx.GpxFormatter.formatDecimal
 import net.osmand.shared.gpx.GpxFormatter.formatLatLon
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.gpx.primitives.Author
 import net.osmand.shared.gpx.primitives.Bounds
 import net.osmand.shared.gpx.primitives.Copyright
@@ -343,12 +344,18 @@ object GpxUtilities {
 	}
 
 	fun convert(splitSegments: List<SplitSegment>): List<GpxTrackAnalysis> {
+		return convert(splitSegments, null)
+	}
+
+	fun convert(splitSegments: List<SplitSegment>, pointsAnalyser: TrackPointsAnalyser?): List<GpxTrackAnalysis> {
 		val list = mutableListOf<GpxTrackAnalysis>()
 		for (segment in splitSegments) {
 			val analysis = GpxTrackAnalysis()
-			analysis.prepareInformation(0, null, segment)
-			if (segment.segmentSlopeType != null) {
+			analysis.prepareInformation(0, pointsAnalyser, segment)
+			if (segment.segmentSlopeType != null && segment.slopeCount != null && segment.slopeValue != null) {
 				analysis.segmentSlopeType = segment.segmentSlopeType
+				analysis.slopeCount = segment.slopeCount
+				analysis.slopeValue = segment.slopeValue
 			}
 			list.add(analysis)
 		}

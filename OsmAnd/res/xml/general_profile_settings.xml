@@ -55,6 +55,11 @@
 		android:title="@string/shared_string_length" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="altitude_metrics"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/altitude" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="default_speed_system"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/shared_string_speed" />

@@ -560,10 +560,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				selectedMainAxisType = gpxDataSetAxisType;
 				selectedMainSetTypes = gpxDataSetTypes;
 				if (xAxisPreference != null) {
-					xAxisPreference.clearAll();
+					List<String> names = new ArrayList<>();
 					for (GPXDataSetType type : gpxDataSetTypes) {
-						xAxisPreference.addValue(type.name());
+						names.add(type.name());
 					}
+					xAxisPreference.setStringsList(names);
 				}
 				if (yAxisPreference != null) {
 					yAxisPreference.set(gpxDataSetAxisType);
@@ -871,7 +872,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	                                        @NonNull GpxTrackAnalysis analysis,
 	                                        boolean joinSegments, boolean generalTrack) {
 		float totalDistance = !joinSegments && generalTrack ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
-		float timeSpan = !joinSegments && generalTrack ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
+		float timeSpan = !joinSegments && generalTrack ? analysis.getTimeSpanWithoutGaps() : analysis.getDurationInSeconds() * 1000;
+		if(timeSpan == 0) {
+			timeSpan = analysis.getExpectedRouteDuration();
+		}
 
 		TextView distanceText = container.findViewById(R.id.distance_text);
 		TextView durationText = container.findViewById(R.id.duration_text);

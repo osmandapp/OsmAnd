@@ -163,9 +163,9 @@ public class AndroidUiHelper {
 		}
 	}
 
-	public static boolean isXLargeDevice(@NonNull Activity ctx) {
-		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
-		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+	public static boolean isTablet(@NonNull Context context) {
+		Configuration config = context.getResources().getConfiguration();
+		return config.smallestScreenWidthDp >= 600;
 	}
 
 	public static boolean isOrientationPortrait(@NonNull @UiContext Context context) {

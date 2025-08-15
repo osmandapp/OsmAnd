@@ -3,11 +3,13 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.MAP_STYLE_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -78,7 +80,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		List<String> mapStyles = getFilteredStyles();
 		if (!Algorithms.isEmpty(mapStyles)) {
 			boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
@@ -247,7 +249,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getTitle(List<String> filters) {
+	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 
 		if (filters.isEmpty()) return "";
 

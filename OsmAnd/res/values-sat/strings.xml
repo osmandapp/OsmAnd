@@ -228,8 +228,8 @@
     <string name="rendering_value_category_name">ᱛᱷᱚᱠ</string>
     <string name="shared_string_used">ᱵᱮᱵᱷᱟᱨ ᱦᱩᱭ ᱟᱠᱟᱱᱟ</string>
     <string name="shared_string_not_used">ᱵᱟᱝ ᱵᱮᱵᱷᱟᱨ ᱟᱠᱟᱱᱟ</string>
-    <string name="delete_history_items">%1$s ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ\?</string>
-    <string name="delete_history_items_descr">ᱵᱟᱪᱷᱟᱣ ᱟᱠᱟᱱ ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ\?</string>
+    <string name="delete_history_items">%1$s ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ?</string>
+    <string name="delete_history_items_descr">ᱵᱟᱪᱷᱟᱣ ᱟᱠᱟᱱ ᱱᱟᱜᱟᱢ ᱡᱤᱱᱤᱥ ᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱟ?</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">ᱡᱩᱫᱤ ᱮᱠᱟᱱ ᱞᱟᱹᱠᱛᱤ ᱜᱮᱭᱟ</string>
     <string name="routing_attr_freeride_policy_allow_name">ᱦᱮᱥᱟᱨᱤᱭᱟᱹ</string>
     <string name="routing_attr_difficulty_preference_advanced_name">ᱞᱟᱦᱟᱱᱛᱤ</string>

@@ -3,11 +3,13 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.SWITCH_PROFILE_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.gson.Gson;
@@ -52,7 +54,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getTitle(List<String> filters) {
+	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 		List<String> profileNames = new ArrayList<>();
 		for (String key : filters) {
 			ApplicationMode appMode = getModeForKey(key);
@@ -91,7 +93,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		List<String> profiles = loadListFromParams();
 		if (profiles.size() == 0) {
 			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.profiles_for_action_not_found);

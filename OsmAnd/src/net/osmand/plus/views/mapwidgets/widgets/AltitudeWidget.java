@@ -89,4 +89,9 @@ public class AltitudeWidget extends SimpleWidget {
 	public boolean isMetricSystemDepended() {
 		return true;
 	}
+
+	@Override
+	public boolean isAltitudeMetricDepended() {
+		return true;
+	}
 }

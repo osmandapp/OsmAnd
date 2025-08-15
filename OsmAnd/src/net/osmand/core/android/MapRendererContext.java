@@ -63,6 +63,10 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
+	public static final int POI_SYMBOL_SECTION = 1000;
+	public static final int TOP_PLACES_POI_SECTION = 1001;
+	public static final int SELECTED_POI_SECTION = 1002;
+	public static final int FAVORITES_SECTION = 1003;
 	public static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
@@ -93,7 +97,7 @@ public class MapRendererContext {
 	private float cachedReferenceTileSize;
 	private boolean heightmapsActive;
 
-	public boolean showDebugTiles = false;
+	public boolean showDebugPrimivitisationTiles = false;
 
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
@@ -305,11 +309,7 @@ public class MapRendererContext {
 			String name = addonEntry.getKey();
 			String fileName = addonEntry.getValue();
 			if (mapStylesCollection.getStyleByName(fileName) == null) {
-				try {
-					loadStyleFromStream(fileName, app.getRendererRegistry().getInputStream(name));
-				} catch (IOException e) {
-					Log.e(TAG, "Failed to load '" + fileName + "'", e);
-				}
+				loadStyleFromStream(fileName, app.getRendererRegistry().getInputStream(name));
 			}
 		}
 	}
@@ -317,13 +317,9 @@ public class MapRendererContext {
 	private void loadRenderer(String rendName) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getRenderer(rendName);
 		if ((mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) && renderer != null) {
-			try {
-				loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
-				if (renderer.getDependsName() != null) {
-					loadRenderer(renderer.getDependsName());
-				}
-			} catch (IOException e) {
-				Log.e(TAG, "Failed to load '" + rendName + "'", e);
+			loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
+			if (renderer.getDependsName() != null) {
+				loadRenderer(renderer.getDependsName());
 			}
 		}
 	}
@@ -412,9 +408,11 @@ public class MapRendererContext {
 		if (obfsCollection == null) {
 			return false;
 		}
-
+		int renderingThreadsLimit = app.getSettings().MAX_RENDERING_THREADS.get();
 		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
-		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
+		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection,
+				ObfMapObjectsProvider.Mode.BinaryMapObjectsAndRoads,
+				renderingThreadsLimit > 3 || renderingThreadsLimit == 0 ? 2 : 1);
 		mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
 				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
 		return true;
@@ -445,9 +443,9 @@ public class MapRendererContext {
 	}
 
 	private void updateObfMapRasterLayerProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
-	                                             @NonNull ProviderType providerType) {
+												 @NonNull ProviderType providerType) {
 		// Create new OBF map raster layer provider
-		if (showDebugTiles) {
+		if (showDebugPrimivitisationTiles) {
 			obfMapRasterLayerProvider = new MapPrimitivesMetricsLayerProvider(mapPrimitivesProvider);
 		} else {
 			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
@@ -480,7 +478,7 @@ public class MapRendererContext {
 
 	private void updateOrRemoveObfMapSymbolsProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
 											 @NonNull ProviderType providerType) {
-		if (showDebugTiles) {
+		if (showDebugPrimivitisationTiles) {
 			if (obfMapSymbolsProvider != null && mapRendererView != null && this.providerType == providerType) {
 				mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 			}
@@ -488,8 +486,9 @@ public class MapRendererContext {
 			updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
 		}
 	}
-	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView) {
+	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView, boolean MSAAEnabled) {
 		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
+		mapRendererView.setMSAAEnabled(MSAAEnabled);
 	}
 
 	private void applyCurrentContextToView() {

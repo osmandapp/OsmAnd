@@ -15,6 +15,9 @@ import androidx.car.app.model.Template;
 
 import net.osmand.plus.R;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,8 @@ import java.util.List;
  * Screen for asking the user to grant location permission.
  */
 public class RequestPermissionScreen extends BaseAndroidAutoScreen {
+
+	private static final Log log = LogFactory.getLog(RequestPermissionScreen.class);
 
 	/**
 	 * Callback called when the location permission is granted.
@@ -43,14 +48,15 @@ public class RequestPermissionScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		List<String> permissions = new ArrayList<>();
 		permissions.add(ACCESS_FINE_LOCATION);
 		permissions.add(ACCESS_COARSE_LOCATION);
 
 		String message = getCarContext().getString(R.string.location_access_request_title);
 
-		OnClickListener listener = ParkedOnlyOnClickListener.create(() ->
+		OnClickListener listener = ParkedOnlyOnClickListener.create(() -> {
+			try {
 				getCarContext().requestPermissions(
 						permissions,
 						(approved, rejected) -> {
@@ -61,7 +67,11 @@ public class RequestPermissionScreen extends BaseAndroidAutoScreen {
 								}
 							}
 							finish();
-						}));
+						});
+			} catch (RuntimeException error) {
+				log.error("Can't request permissions", error);
+			}
+		});
 
 		Action action = new Action.Builder()
 				.setTitle(getCarContext().getString(R.string.location_access_request_action))

@@ -5,6 +5,7 @@ import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.io.KFile
+import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.settings.enums.SpeedConstants
 import net.osmand.shared.util.KStringMatcher
@@ -20,6 +21,7 @@ interface OsmAndContext {
 	fun getSettings(): SettingsAPI
 	fun getSpeedSystem(): SpeedConstants?
 	fun getMetricSystem(): MetricsConstants?
+	fun getAltitudeMetric(): AltitudeMetrics?
 
 	fun isGpxFileVisible(path: String): Boolean
 	fun getSelectedFileByPath(path: String): GpxFile?

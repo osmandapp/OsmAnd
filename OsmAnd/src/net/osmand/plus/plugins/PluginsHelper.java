@@ -21,6 +21,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -927,7 +928,7 @@ public class PluginsHelper {
 		}
 		AndroidNetworkUtils.sendRequestAsync(app, ONLINE_PLUGINS_URL, params, null,
 				false, false, (resultJson, error, resultCode) -> {
-					new AsyncTask<Void, Void, List<OnlineOsmandPlugin>>() {
+					OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, List<OnlineOsmandPlugin>>() {
 						@Override
 						protected List<OnlineOsmandPlugin> doInBackground(Void... voids) {
 							List<OnlineOsmandPlugin> plugins = new ArrayList<>();
@@ -953,7 +954,7 @@ public class PluginsHelper {
 								callback.onFetchComplete(plugins);
 							}
 						}
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+					});
 				});
 	}
 }

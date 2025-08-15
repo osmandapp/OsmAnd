@@ -95,6 +95,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	private final SelectedGpxFile currentTrack;
 
 	private int currentTrackIndex = 1;
+	private boolean shouldRecordSimulation = false;
 	private boolean shouldAutomaticallyRecord = true;
 	private LatLon lastPoint;
 	private float distance;
@@ -273,10 +274,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 				}
 
 				GpxDataItem item = new GpxDataItem(fKout);
+				setTrackAppearance(item);
 				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
+
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
-				saveTrackAppearance(item);
 			}
 			clearRecordedData(warnings.isEmpty());
 		}
@@ -294,7 +296,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		}
 	}
 
-	private void saveTrackAppearance(@NonNull GpxDataItem item) {
+	private void setTrackAppearance(@NonNull GpxDataItem item) {
 		ColoringType coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
 		String routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		ColoringStyle coloringStyle = new ColoringStyle(coloringType, routeInfoAttribute);
@@ -306,8 +308,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		item.setParameter(COLORING_TYPE, coloringStyle.getId());
 		item.setParameter(COLOR_PALETTE, settings.CURRENT_GRADIENT_PALETTE);
-
-		app.getGpxDbHelper().updateDataItem(item);
 	}
 
 	public void clearRecordedData(boolean clearDb) {
@@ -345,6 +345,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			try {
 				collectDBPoints(db, data);
 				collectDBTracks(db, data);
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
 			} finally {
 				db.close();
 			}
@@ -353,9 +355,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	}
 
 	private void collectDBPoints(@NonNull SQLiteDatabase db, @NonNull Map<String, GpxFile> dataTracks) {
-		Cursor query = db.rawQuery("SELECT " + POINT_COL_LAT + "," + POINT_COL_LON + "," + POINT_COL_DATE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		Cursor query = db.rawQuery("SELECT " + POINT_COL_LAT + "," + POINT_COL_LON + "," + POINT_COL_DATE + ","
 				+ POINT_COL_DESCRIPTION + "," + POINT_COL_NAME + "," + POINT_COL_CATEGORY + "," + POINT_COL_COLOR + ","
-				+ POINT_COL_ICON + "," + POINT_COL_BACKGROUND + " FROM " + POINT_NAME + " ORDER BY " + POINT_COL_DATE + " ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ POINT_COL_ICON + "," + POINT_COL_BACKGROUND + " FROM " + POINT_NAME + " ORDER BY " + POINT_COL_DATE + " ASC", null);
 		if (query.moveToFirst()) {
 			do {
 				WptPt pt = new WptPt();
@@ -541,7 +543,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
 		boolean record = false;
-		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
+		if (location != null && (SimulationProvider.isNotSimulatedLocation(location) || isShouldRecordSimulation())
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
@@ -578,7 +580,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
 		try {
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-			if (settings.SAVE_TRACK_PRECISION.get() == 0) {
+			if (plugin != null && plugin.SAVE_LOCATION_PROVIDER_TO_GPX.get()) {
 				json.put("provider", location.getProvider());
 			}
 			boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
@@ -912,5 +914,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	@Override
 	public void routeWasFinished() {
 		shouldAutomaticallyRecord = true;
+	}
+
+	public boolean isShouldRecordSimulation() {
+		return shouldRecordSimulation;
+	}
+
+	public void setShouldRecordSimulation(boolean shouldRecordSimulation) {
+		this.shouldRecordSimulation = shouldRecordSimulation;
 	}
 }

@@ -29,7 +29,7 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		ListTemplate.Builder templateBuilder = new ListTemplate.Builder();
 
 		// Create 2 sections with three settings each.
