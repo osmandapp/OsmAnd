@@ -333,6 +333,8 @@ class WptPt : GpxExtensions {
 		val hidden = extensions[GpxUtilities.HIDDEN_EXTENSION]
 		if (hidden != null) {
 			setHidden(hidden)
+		} else {
+			getExtensionsToWrite().remove(GpxUtilities.HIDDEN_EXTENSION)
 		}
 	}
 
