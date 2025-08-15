@@ -44,9 +44,9 @@
     <string name="auto_zoom_map_descr">根據您的速度，自動調整縮放比例（當地圖與目前位置同步時）。</string>
     <string name="auto_zoom_map">自動縮放地圖</string>
     <string name="snap_to_road">對齊道路</string>
-    <string name="osmand_short_description_80_chars">離線與線上的 OSM 地圖用於全球行動地圖視圖與導航</string>
+    <string name="osmand_short_description_80_chars">離線與在線的 OSM 地圖用於全球行動地圖視圖與導航</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \nOsmAnd 是一款開源導航應用程式，能存取全球開放街圖（OSM）資料。所有地圖（向量圖或圖磚）均可離線儲存於手機記憶卡，支援離線與線上導航，並提供語音導航與轉向建議。 \n \n主要特色： \n- 完整離線功能（將下載的地圖資料儲存於裝置） \n- 提供精細的全球離線向量地圖 \n- 直接從應用程式下載各國或地區地圖 \n- 支援多圖層疊加，例如：GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、可自訂透明度的附加地圖、等高線、地形陰影、坡度等地形特徵 \n- 離線查詢地址與景點 \n- 中途停靠點的離線導航 \n- 多種交通模式：汽車、自行車、步行 \n- 自動日夜模式切換 \n- 智慧型地圖縮放（依行進速度） \n- 地圖方向靈活調整（指南針或行進方向） \n- 車道導引、速限顯示、真人語音或文字轉語音導航 \n \n免費版限制： \n- 地圖下載次數有限制 \n- 無法離線存取維基百科景點資訊 \n \nOsmAnd 持續積極開發，專案發展仰賴社群捐助。歡迎考慮購買 OsmAnd+ 或在 https://osmand.net 捐款，支持新功能的開發與測試。</string>
-    <string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖視圖和導航</string>
+    <string name="osmand_plus_short_description_80_chars">將離線與在線的 OSM 地圖，用在全球行動地圖視圖和導航</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ 是開放原始碼的導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。 \n \nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。 \n \n一些主要的功能： \n- 完整離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間） \n- 提供簡潔的全世界向量地圖 \n- 直接從應用程式下載國家或區域地圖 \n- 離線維基百科功能（下載維基百興趣點），非常適合觀光使用 \n- 可以疊加多個地圖圖層，例如 GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、具有可自訂透明度的附加地圖、等高線/地形陰影/坡度等地形特徵 \n \n- 離線查詢地址、場所(POI) \n- 中程距離的離線路徑 \n- 汽車、自行車、步行模式有多種選項： \n- 自動日夜模式切換 \n- 可依據速度選擇地圖縮放 \n- 根據羅盤或行進方向進行地圖對齊 \n- 車道引導、速限顯示、使用真人語音或文字轉語音</string>
     <string name="filterpoi_activity">建立 POI 篩選條件</string>
     <string name="recalculate_route_to_your_location">交通工具模式：</string>
@@ -247,10 +247,10 @@
     <string name="local_openstreetmap_descr_title">與 OSM 非同步編輯：</string>
     <string name="local_openstreetmap_settings">OSM 的 POI/註記已儲存在裝置上</string>
     <string name="local_openstreetmap_settings_descr">在您的裝置資料庫中顯示並管理 OSM POI/註記。</string>
-    <string name="live_monitoring_interval_descr">指定線上即時追蹤間隔。</string>
-    <string name="live_monitoring_interval">線上即時追蹤間隔</string>
+    <string name="live_monitoring_interval_descr">指定在線即時追蹤間隔。</string>
+    <string name="live_monitoring_interval">在線即時追蹤間隔</string>
     <string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}。</string>
-    <string name="live_monitoring_url">線上即時追蹤網路地址</string>
+    <string name="live_monitoring_url">在線即時追蹤網路地址</string>
     <string name="gpx_monitoring_disabled_warn">記錄軌跡使用 GPX 小工具或透過 \'錄製旅程\'的設定。</string>
     <string name="show_current_gpx_title">顯示目前軌跡</string>
     <string name="free_version_message">%1$s 地圖下載或更新。</string>
@@ -320,7 +320,7 @@
     <string name="update_poi_file_not_found">在裝置端檔案，找不到要維護的 POI 的變更，且無法建立該檔。</string>
     <string name="button_upgrade_osmandplus">升級為 OsmAnd+</string>
     <string name="map_version_changed_info">下載新版本的應用程式，以便能夠使用新的地圖檔案。</string>
-    <string name="poi_filter_nominatim">線上 Nominatim</string>
+    <string name="poi_filter_nominatim">在線 Nominatim</string>
     <string name="search_position_current_location_search">位置搜尋中…</string>
     <string name="search_position_current_location_found">我的位置 (找到)</string>
     <string name="search_position_address">地址…</string>
@@ -462,7 +462,7 @@
     <string name="reading_cached_tiles">正在取讀暫存地圖圖磚…</string>
     <string name="version_index_is_big_for_memory">索引 \'\'{0}\'\' 不存在</string>
     <string name="version_index_is_not_supported">這版本的 \'\'{0}\'\' 索引不支援</string>
-    <string name="osmand_routing_experimental">OsmAnd 的離線導航是一個實驗性功能，並不適用於超過 20 公里的長距離導航。 \n \n導航暫時切換為線上的 CloudMade 服務。</string>
+    <string name="osmand_routing_experimental">OsmAnd 的離線導航是一個實驗性功能，並不適用於超過 20 公里的長距離導航。 \n \n導航暫時切換為在線的 CloudMade 服務。</string>
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
     <string name="application_dir">資料存儲器資料夾</string>
     <string name="osmand_net_previously_installed">舊版應用程式中安裝的所有離線資料在新版中都會受到支援，但我的最愛中的標記必須從舊版程式匯出，然後再匯入新版程式。</string>
@@ -633,7 +633,7 @@
     <string name="max_level_download_tile">線上地圖最大縮放比例</string>
     <string name="max_level_download_tile_descr">忽略超出此範圍縮放級別的線上地圖。</string>
     <string name="route_general_information">總距離 %1$s，行駛時間 %2$d 小時 %3$d 分。</string>
-    <string name="router_service_descr">線上或離線導航服務。</string>
+    <string name="router_service_descr">在線或離線導航服務。</string>
     <string name="router_service">導航服務</string>
     <string name="sd_dir_not_accessible">無法存取儲存卡上的資料資料夾！</string>
     <string name="download_question">下載 {0} - {1}？</string>
@@ -674,7 +674,7 @@
     <string name="saving_gpx_tracks">正在儲存 GPX 檔案…</string>
     <string name="finished_task">已完成</string>
     <string name="use_online_routing_descr">使用網際網路估算路徑。</string>
-    <string name="use_online_routing">使用線上導航</string>
+    <string name="use_online_routing">使用在線導航</string>
     <string name="osm_settings_descr">請指定所需的 OpenStreetMap.org (OSM) 設定以進行遞交。</string>
     <string name="data_settings_descr">指定語言，下載/重載資料。</string>
     <string name="data_settings">資料</string>
@@ -701,7 +701,7 @@
     <string name="map_view_3d">3D 地圖視圖</string>
     <string name="show_poi_over_map_description">顯示上次使用的 POI 覆蓋層。</string>
     <string name="show_poi_over_map">顯示 POI 覆蓋</string>
-    <string name="map_tile_source_descr">選擇線上或快取地圖圖磚來源。</string>
+    <string name="map_tile_source_descr">選擇在線或快取地圖圖磚來源。</string>
     <string name="map_tile_source">地圖圖磚來源</string>
     <string name="map_source">地圖來源</string>
     <string name="use_internet">使用網際網路</string>
@@ -1116,7 +1116,7 @@
     <string name="layer_amenity_label">POI 標籤（POI、收藏）</string>
     <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕。</string>
     <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
-    <string name="create_poi_link_to_osm_doc"><u>線上 OSM</u> 地圖的分類與影像。</string>
+    <string name="create_poi_link_to_osm_doc"><u>在線 OSM</u> 地圖的分類與影像。</string>
     <string name="sort_by_distance">按距離排序</string>
     <string name="sort_by_name">按名稱排序</string>
     <string name="none_selected_gpx">先長按來指定 GPX 檔案。</string>
@@ -1140,9 +1140,9 @@
     <string name="lang_he">希伯來語</string>
     <string name="forward">往前</string>
     <string name="home">儀表板</string>
-    <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
-    <string name="live_monitoring_start">開始線上即時追蹤</string>
-    <string name="live_monitoring_stop">停止線上即時追蹤</string>
+    <string name="live_monitoring_m">在線即時追蹤 (需要 GPX)</string>
+    <string name="live_monitoring_start">開始在線即時追蹤</string>
+    <string name="live_monitoring_stop">停止在線即時追蹤</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯語</string>
     <string name="map_preferred_locale_descr">在地圖上對標簽偏好的語言(如果無法使用，將使用英文或當地名稱)。</string>
@@ -1441,7 +1441,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">網路從屬</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>
-    <string name="read_full_article">閱讀全部文章 (線上)</string>
+    <string name="read_full_article">閱讀全部文章 (在線)</string>
     <string name="shared_string_wikipedia">維基百科</string>
     <string name="local_indexes_cat_wiki">維基百科</string>
     <string name="shared_string_show_details">顯示詳細資訊</string>
@@ -2201,9 +2201,9 @@
     <string name="quick_action_show_navigation_finish_dialog">顯示「導航完成」對話方塊</string>
     <string name="quick_action_start_stop_navigation">開始/停止導航</string>
     <string name="quick_action_start_stop_navigation_descr">開始或結束導航的按鈕。</string>
-    <string name="live_monitoring_max_interval_to_send">用於線上追蹤的緩衝時間</string>
+    <string name="live_monitoring_max_interval_to_send">用於在線追蹤的緩衝時間</string>
     <string name="live_monitoring_max_interval_to_send_desrc">指定一段緩衝時間以保持位置，而無需連接發送</string>
-    <string name="mappilary_no_internet_desc">從 Mapillary 而來的照片僅供線上使用。</string>
+    <string name="mappilary_no_internet_desc">從 Mapillary 而來的照片僅供在線使用。</string>
     <string name="retry">重試</string>
     <string name="measurement_tool">測量距離</string>
     <string name="measurement_tool_action_bar">瀏覽地圖並新增標點</string>
@@ -2435,7 +2435,7 @@
     <string name="shared_string_wifi_only">只有在 Wi-Fi</string>
     <string name="select_travel_book">選擇一本旅遊書籍</string>
     <string name="shared_string_travel_book">旅遊書籍</string>
-    <string name="online_webpage_warning">此頁面僅在線上狀態提供。是否在網頁瀏覽器中開啟？</string>
+    <string name="online_webpage_warning">此頁面僅在在線狀態提供。是否在網頁瀏覽器中開啟？</string>
     <string name="images_cache">圖片快取</string>
     <string name="delete_search_history">刪除搜尋歷史記錄</string>
     <string name="download_images">下載圖片</string>
@@ -3712,7 +3712,7 @@
     <string name="select_nav_profile_dialog_message">「導航類型」選取了路徑計算的方式，提供離線與線上導航引擎。</string>
     <string name="loading_list_of_routing_services">載入可用路徑規劃服務清單</string>
     <string name="shared_string_offline">離線</string>
-    <string name="shared_string_online">線上</string>
+    <string name="shared_string_online">在線</string>
     <string name="osmand_online_routing_promo">使用預先定義的範本，或新增 OSRM、Graphhopper、openrouteservice 或是 GPX 線上路徑規劃。</string>
     <string name="shared_string_external">外部</string>
     <string name="provided_by">由 %1$s 提供</string>
@@ -4791,7 +4791,7 @@
     <string name="help_article_map_legend_ski_map_name">滑雪地圖圖例</string>
     <string name="help_article_map_map_context_menu_name">快速動作選單</string>
     <string name="help_article_map_point_layers_on_map_name">地圖上的點位</string>
-    <string name="help_article_map_raster_maps_name">點陣地圖 (線上/離線)</string>
+    <string name="help_article_map_raster_maps_name">點陣地圖 (在線/離線)</string>
     <string name="help_article_map_vector_maps_name">向量地圖 (地圖樣式)</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
@@ -5544,7 +5544,7 @@
     <string name="meridian_180">180度經線</string>
     <string name="release_5_0">• 使用新的探索模式發現排名最高的 POI\n\n • 所有 OSM 路線，現在都可搜尋！遠足、腳踏車、山地雙輪車等等\n\n • 新導航小工具結合轉彎箭頭與導航指示\n\n • 目前路線資訊小工具：預計抵達時間、抵達時間與距離\n\n • 在地圖上選擇滑雪場與山地雙輪車賽道，以取得詳細資訊\n\n • 可選擇左右面板的小工具大小\n\n • 新增有地理座標的座標網格\n\n • 新增自訂最愛群組預設外觀的功能\n\n • Android Auto：檢視到下一個航點的的預計抵達時間與距離；城市名稱現在會顯示在搜尋結果中\n\n • 現在可透過地圖與搜尋發現著名的山峰\n\n • 以英呎為單位的山峰高度\n\n • 新增：地圖上的峭壁與攀登區域\n\n • 改進了在美國的地址搜尋\n\n • 新增希伯來語文字轉語音導航功能</string>
     <string name="equator">赤道</string>
-    <string name="shared_string_online_only">僅線上</string>
+    <string name="shared_string_online_only">僅在線</string>
     <string name="shared_string_offline_only">僅離線</string>
     <string name="add_widget">新增小工具</string>
     <string name="row_height">列高</string>
