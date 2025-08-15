@@ -831,7 +831,6 @@ public class MapRenderRepositories {
 		renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
 		for (RenderingRuleProperty property : storage.PROPS.getCustomRules()) {
 			String attrName = property.getAttrName();
-			log.info("attrName: " + attrName);
 			if (property.isBoolean()) {
 				if (attrName.equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
 					renderingReq.setBooleanFilter(property, true);
