@@ -32,6 +32,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -862,6 +863,23 @@ public class MapRenderRepositories {
 					}
 				}
 			}
+		}
+
+		Map<String, Boolean> parentsStates = new HashMap<>();
+		Map<String, RenderingClass> renderingClasses = storage.getRenderingClasses();
+
+		for (Map.Entry<String, RenderingClass> entry : renderingClasses.entrySet()) {
+			String name = entry.getKey();
+			RenderingClass renderingClass = entry.getValue();
+			boolean enabled = settings.getBooleanRenderClassProperty(renderingClass).get();
+
+			String parentName = renderingClass.getParentName();
+			if (parentName != null && parentsStates.containsKey(parentName) && !parentsStates.get(parentName)) {
+				enabled = false;
+			}
+
+			renderingReq.setClassProperty(name, String.valueOf(enabled));
+			parentsStates.put(name, enabled);
 		}
 		return renderingReq;
 	}
