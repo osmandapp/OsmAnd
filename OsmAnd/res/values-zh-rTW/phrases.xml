@@ -2824,10 +2824,10 @@
     <string name="poi_telescope_type_gamma">伽瑪</string>
     <string name="poi_telescope_diameter">直徑</string>
     <string name="poi_telescope_spectrum">光譜</string>
-    <string name="poi_telescope_usage_education">運用︰教育</string>
-    <string name="poi_telescope_usage_espionage">運用︰刺探</string>
-    <string name="poi_telescope_usage_research">運用︰研究</string>
-    <string name="poi_observatory_type_espionage">運用︰偵探</string>
+    <string name="poi_telescope_usage_education">用途︰教育</string>
+    <string name="poi_telescope_usage_espionage">用途：情報蒐集</string>
+    <string name="poi_telescope_usage_research">用途︰研究</string>
+    <string name="poi_observatory_type_espionage">用途：情報偵蒐</string>
     <string name="poi_observatory_type_meteorological">氣象</string>
     <string name="poi_observatory_type_gravitational">引力</string>
     <string name="poi_greenhouse_horticulture">溫室栽培</string>
