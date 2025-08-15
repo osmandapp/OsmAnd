@@ -5763,7 +5763,7 @@
     <string name="prediction_time_advanced_description">Vorhersagezeit anpassen, um Verzögerung zu minimieren.</string>
     <string name="position_animation_empty_banner_description">Das Positionssymbol wird ohne Übergangsanimation auf jeden neu empfangenen Standort aktualisiert.</string>
     <string name="position_animation">Animation der Position</string>
-    <string name="prediction_time_description">Animation des Positionssymbols in OsmAnd bei jedem empfangenen GPS-Datenpunkt (einmal pro Sekunde). Kann zu einer merkbaren Verzögerung seiner Bewegung führen, insbesondere wenn der Nutzer sich schnell bewegt oder die GPS-Signalstärke schwankt.</string>
+    <string name="prediction_time_description">Animation des Positionssymbols in OsmAnd bei jeder GPS-Aktualisierung (einmal pro Sekunde). Es kann eine leichte Verzögerung auftreten, insbesondere während sehr schneller Bewegungen oder wenn das GPS-Signal instabil ist.</string>
     <string name="wiki_around">Nahe gelegene beliebte Orte</string>
     <string name="grid_color">Gitterfarbe</string>
     <string name="shared_string_edges">Kanten</string>
@@ -5824,7 +5824,7 @@
     <string name="reverse_mode">Umgekehrter Modus</string>
     <string name="n_a">N/A</string>
     <string name="next_turn_information_desc">Zeigt die nächste Abbiegerichtung und den Straßennamen an.</string>
-    <string name="description_purchases_fastspring">Sie können ihre Käufe mithilfe ihres FastSpring Kontos verwalten.</string>
+    <string name="description_purchases_fastspring">Sie können Ihre Käufe mithilfe Ihres FastSpring-Kontos verwalten.</string>
     <string name="manage_purchases">Käufe verwalten</string>
     <string name="enable_msaa">MSAA aktivieren</string>
     <string name="ascent">Steigung</string>
@@ -5839,4 +5839,6 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Antwort</string>
     <string name="average_elevation">Durchschnittliche Höhe</string>
+    <string name="next_turn_information">Nächste Abbiege-Information</string>
+    <string name="description_subscription_fastspring">Sie können Ihr Abo mithilfe Ihres FastSpring-Kontos verwalten oder beenden.</string>
 </resources>
