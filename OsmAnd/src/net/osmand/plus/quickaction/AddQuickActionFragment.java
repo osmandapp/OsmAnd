@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.AddQuickActionsAdapter.ItemClickListener;
@@ -34,7 +34,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
-public class AddQuickActionFragment extends BaseOsmAndFragment implements ItemClickListener, IAskDismissDialog {
+public class AddQuickActionFragment extends BaseFullScreenFragment implements ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddQuickActionFragment.class.getSimpleName();
 
@@ -82,7 +82,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements ItemCl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_add_quick_action, container, false);
+		View view = inflate(R.layout.fragment_add_quick_action, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}

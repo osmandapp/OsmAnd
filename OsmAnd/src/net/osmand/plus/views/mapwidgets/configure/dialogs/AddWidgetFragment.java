@@ -71,11 +71,11 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 			selectWidgetByDefault();
 		}
 
-		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
+		view = inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		ViewGroup mainContent = view.findViewById(R.id.main_content);
-		themedInflater.inflate(R.layout.add_widget_fragment_content, mainContent);
+		inflate(R.layout.add_widget_fragment_content, mainContent);
 
 		setupToolbar();
 		setupContent();
@@ -183,7 +183,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		String title = aidlWidgetData.getMenuTitle();
 		String iconName = aidlWidgetData.getMenuIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
-		Drawable icon = iconId != 0 ? getPaintedContentIcon(iconId, appMode.getProfileColor(nightMode)) : null;
+		Drawable icon = iconId != 0 ? getPaintedIcon(iconId, appMode.getProfileColor(nightMode)) : null;
 		setupWidgetItemView(view, widgetId, title, null, icon, false);
 
 		container.addView(view);

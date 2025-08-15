@@ -1,11 +1,9 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -16,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -28,8 +25,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.util.Algorithms;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,39 +38,16 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 	private static final String CATEGORY_SELECTED_KEY = "is_any_category_selected_key";
 	private static final String SELECTED_ENTRY_INDEX_KEY = "selected_entry_index_key";
 
-	private OsmandApplication app;
-	private ApplicationMode appMode;
-
 	private final List<View> categoriesViews = new ArrayList<>();
-	private LayoutInflater inflater;
 
 	private String[] names;
 	private Object[] values;
 	private boolean isAnyCategorySelected;
 	private int selectedEntryIndex;
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull Fragment target, @NonNull String key,
-	                                @NonNull ApplicationMode appMode, boolean usedOnMap,
-	                                @NonNull String[] names, @NonNull Object[] values,
-	                                @Nullable Integer selectedEntryIndex) {
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, key);
-			HazmatCategoryBottomSheet fragment = new HazmatCategoryBottomSheet();
-			fragment.setArguments(args);
-			fragment.setAppMode(appMode);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setTargetFragment(target, 0);
-			fragment.setData(names, values, selectedEntryIndex);
-			fragment.show(fm, TAG);
-		}
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		appMode = getAppMode();
 		if (savedInstanceState != null) {
 			restoreSavedState(savedInstanceState);
 		}
@@ -83,13 +55,9 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = requireContext();
-		inflater = UiUtilities.getInflater(context, nightMode);
-
-		View view = inflater.inflate(R.layout.bottom_sheet_hazmat_category, null);
+		View view = inflate(R.layout.bottom_sheet_hazmat_category);
 		setupToggleButtons(view);
 		updateView(view);
-
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
@@ -139,7 +107,7 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 		}
 
 		for (int i = 0; i < names.length; i++) {
-			View v = inflater.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems, false);
+			View v = inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems, false);
 			v.setTag(i);
 
 			TextView tvTitle = v.findViewById(R.id.title);
@@ -210,12 +178,27 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	private void onApply() {
-		Fragment target = getTargetFragment();
-		if (target instanceof OnConfirmPreferenceChange) {
+		if (getTargetFragment() instanceof OnConfirmPreferenceChange callback) {
 			Object newValue = isAnyCategorySelected ? values[selectedEntryIndex] : false;
-			OnConfirmPreferenceChange callback = ((OnConfirmPreferenceChange) target);
 			callback.onConfirmPreferenceChange(getPrefId(), newValue, ApplyQueryType.SNACK_BAR);
 		}
 	}
 
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull Fragment target, @NonNull String key,
+	                                @NonNull ApplicationMode appMode, boolean usedOnMap,
+	                                @NonNull String[] names, @NonNull Object[] values,
+	                                @Nullable Integer selectedEntryIndex) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, key);
+			HazmatCategoryBottomSheet fragment = new HazmatCategoryBottomSheet();
+			fragment.setArguments(args);
+			fragment.setAppMode(appMode);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.setData(names, values, selectedEntryIndex);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
 }

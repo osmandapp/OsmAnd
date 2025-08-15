@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -72,8 +71,8 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.fragment_widget_settings_route_info, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.fragment_widget_settings_route_info, container);
 
 		View defaultValueButton = container.findViewById(R.id.default_view_container);
 		defaultValueButton.setOnClickListener(v -> showDefaultViewDialog(container));

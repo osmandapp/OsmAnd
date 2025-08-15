@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -21,7 +20,7 @@ import com.google.android.material.appbar.AppBarLayout
 import net.osmand.CallbackWithObject
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseOsmAndDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
@@ -36,12 +35,10 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.gpx.filters.BaseTrackFilter
-import net.osmand.shared.gpx.filters.DateTrackFilter
 import net.osmand.shared.gpx.filters.FilterChangedListener
-import net.osmand.shared.gpx.filters.TrackFilterType
 import net.osmand.util.Algorithms
 
-class TracksFilterFragment : BaseOsmAndDialogFragment(),
+class TracksFilterFragment : BaseFullScreenDialogFragment(),
 	FilterChangedListener, SmartFolderUpdateListener {
 	companion object {
 		val TAG: String = TracksFilterFragment::class.java.simpleName

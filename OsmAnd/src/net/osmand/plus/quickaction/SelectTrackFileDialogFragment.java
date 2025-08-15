@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.GpxTrackAdapter;
@@ -26,12 +26,11 @@ import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.List;
 
-public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
+public class SelectTrackFileDialogFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = SelectTrackFileDialogFragment.class.getSimpleName();
 
@@ -41,7 +40,7 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.select_track_file_dialog_fragment, container, false);
+		View view = inflate(R.layout.select_track_file_dialog_fragment, container, false);
 		setupToolbar(view);
 		setupRecyclerView(view);
 		return view;

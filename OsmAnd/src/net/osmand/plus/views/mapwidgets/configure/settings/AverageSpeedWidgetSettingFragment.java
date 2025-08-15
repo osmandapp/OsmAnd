@@ -50,13 +50,13 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetInfoFragm
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.average_speed_widget_settings_fragment, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.average_speed_widget_settings_fragment, container);
 
 		setupIntervalSliderCard();
 		setupSkipStopsSetting();
-		themedInflater.inflate(R.layout.divider, container);
-		setupSettingAction(themedInflater, container);
+		inflate(R.layout.divider, container);
+		setupSettingAction(container);
 	}
 
 	private void setupIntervalSliderCard() {
@@ -85,9 +85,9 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetInfoFragm
 		container.setBackground(getPressedStateDrawable());
 	}
 
-	private void setupSettingAction(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.divider, container);
-		View actionView = themedInflater.inflate(R.layout.setting_action_button, null);
+	private void setupSettingAction(@NonNull ViewGroup container) {
+		inflate(R.layout.divider, container, true);
+		View actionView = inflate(R.layout.setting_action_button);
 		actionView.setBackground(getPressedStateDrawable());
 		actionView.setOnClickListener(v -> speedWidget.resetAverageSpeed());
 		TextView title = actionView.findViewById(R.id.action_title);

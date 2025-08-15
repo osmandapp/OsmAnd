@@ -54,7 +54,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 		updateNightMode();
 		searchHelper = new WikivoyageSearchHelper(app);
 
-		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container, false);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
@@ -69,7 +69,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 				String newQueryText = searchQuery + " ";
 				searchEt.setText(newQueryText);
 				searchEt.setSelection(newQueryText.length());
-				AndroidUtils.hideSoftKeyboard(getActivity(), searchEt);
+				callActivity(activity -> AndroidUtils.hideSoftKeyboard(activity, searchEt));
 				return true;
 			}
 			return false;

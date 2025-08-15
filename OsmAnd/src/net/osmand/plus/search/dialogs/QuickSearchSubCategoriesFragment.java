@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -37,7 +37,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
+public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = QuickSearchSubCategoriesFragment.class.getName();
 	private static final String CATEGORY_NAME_KEY = "category_key";
@@ -126,10 +126,10 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_subcategories, container, false);
+		View root = inflate(R.layout.fragment_subcategories, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, color);
+		Drawable icClose = getIcon(R.drawable.ic_arrow_back, color);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> dismissFragment());
@@ -137,12 +137,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		title.setText(poiCategory.getTranslation());
 		addButton = root.findViewById(R.id.add_button);
 		updateAddBtnVisibility();
-		addButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismissFragment();
-			}
-		});
+		addButton.setOnClickListener(v -> dismissFragment());
 		listView = root.findViewById(R.id.list);
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			@Override

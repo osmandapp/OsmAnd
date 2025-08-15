@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -36,8 +35,8 @@ public class MapMarkersBarWidgetSettingFragment extends WidgetInfoBaseFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.map_markers_bar_widget_settings, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.map_markers_bar_widget_settings, container);
 
 		LinearLayout radioButtonsView = view.findViewById(R.id.custom_radio_buttons);
 		TextToggleButton toggle = new TextToggleButton(app, radioButtonsView, nightMode);

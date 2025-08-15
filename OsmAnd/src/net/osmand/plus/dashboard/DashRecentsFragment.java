@@ -64,14 +64,14 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			TAG, DashRecentsFragment.class, SHOULD_SHOW_FUNCTION, 80, ROW_NUMBER_TAG);
 
 	@Override
-	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
+		View view = inflate(R.layout.dash_common_fragment, container, false);
 
 		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
 			closeDashboard();
-			if (getActivity() instanceof MapActivity) {
-				MapActivity mapActivity = (MapActivity) getActivity();
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
 				mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, false);
 			}
 		});
@@ -81,45 +81,43 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 
 	@Override
 	public void onOpenDash() {
-		setupRecents();
+		setupRecent();
 	}
 
-	public void setupRecents() {
+	public void setupRecent() {
 		View mainView = getView();
-		if (mainView == null) {
-			return;
-		}
-		OsmandApplication app = requireMyApplication();
+		if (mainView == null) return;
+
 		SearchHistoryHelper helper = app.getSearchHistoryHelper();
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(true);
 
-		if (!app.getSettings().SEARCH_HISTORY.get() || Algorithms.isEmpty(historyEntries)) {
+		if (!settings.SEARCH_HISTORY.get() || Algorithms.isEmpty(historyEntries)) {
 			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), false);
 			return;
-		} else {
-			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), true);
 		}
 
-		LinearLayout recents = mainView.findViewById(R.id.items);
-		recents.removeAllViews();
-		DashboardOnMap.handleNumberOfRows(historyEntries, app.getSettings(), ROW_NUMBER_TAG);
-		LatLon loc = getDefaultLocation();
+		AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), true);
 
+		LinearLayout llRecentItems = mainView.findViewById(R.id.items);
+		llRecentItems.removeAllViews();
+
+		DashboardOnMap.handleNumberOfRows(historyEntries, settings, ROW_NUMBER_TAG);
+
+		LatLon loc = getDefaultLocation();
 		for (HistoryEntry historyEntry : historyEntries) {
-			LayoutInflater inflater = requireActivity().getLayoutInflater();
-			View itemView = inflater.inflate(R.layout.search_history_list_item, null, false);
+			View itemView = inflate(R.layout.search_history_list_item);
 			updateHistoryItem(historyEntry, itemView, loc);
 			itemView.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			itemView.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 
-			Drawable navigationIcon = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_gdirections_dark);
-			((ImageView) itemView.findViewById(R.id.navigate_to)).setImageDrawable(navigationIcon);
+			Drawable navIcon = uiUtilities.getThemedIcon(R.drawable.ic_action_gdirections_dark);
+			((ImageView) itemView.findViewById(R.id.navigate_to)).setImageDrawable(navIcon);
 
 			itemView.findViewById(R.id.navigate_to).setOnClickListener(v -> runNavigation(historyEntry));
 			itemView.setOnClickListener(v -> showContextMenu(historyEntry));
 			setupDistanceAndDirection(historyEntry, itemView);
 
-			recents.addView(itemView);
+			llRecentItems.addView(itemView);
 		}
 	}
 
@@ -127,8 +125,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 		TextView nameText = row.findViewById(R.id.name);
 		TextView distanceText = row.findViewById(R.id.distance);
 		ImageView direction = row.findViewById(R.id.direction);
-		UiUtilities ic = app.getUIUtilities();
-		direction.setImageDrawable(ic.getIcon(R.drawable.ic_direction_arrow, R.color.color_distance));
+		direction.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_direction_arrow, R.color.color_distance));
 
 		String distance = "";
 		if (location != null) {
@@ -140,13 +137,13 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 		PointDescription pointDescription = historyEntry.getName();
 		nameText.setText(pointDescription.getSimpleName(app, false), BufferType.SPANNABLE);
 		ImageView icon = row.findViewById(R.id.icon);
-		icon.setImageDrawable(ic.getThemedIcon(pointDescription.getItemIcon()));
+		icon.setImageDrawable(uiUtilities.getThemedIcon(pointDescription.getItemIcon()));
 
 		String typeName = pointDescription.getTypeName();
 		if (!Algorithms.isEmpty(typeName)) {
 			ImageView group = row.findViewById(R.id.type_name_icon);
 			group.setVisibility(View.VISIBLE);
-			group.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_group_name_16));
+			group.setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_group_name_16));
 			((TextView) row.findViewById(R.id.type_name)).setText(typeName);
 		} else {
 			row.findViewById(R.id.type_name_icon).setVisibility(View.GONE);
@@ -156,14 +153,11 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 
 	private void runNavigation(@NonNull HistoryEntry historyEntry) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		if (mapActivity == null) return;
 
-		PointDescription pointDescription = historyEntry.getName();
-		if (pointDescription.isGpxFile()) {
-			File file = new File(app.getAppPath(GPX_INDEX_DIR), pointDescription.getName());
+		PointDescription pd = historyEntry.getName();
+		if (pd.isGpxFile()) {
+			File file = new File(app.getAppPath(GPX_INDEX_DIR), pd.getName());
 			GpxSelectionHelper.getGpxFile(mapActivity, file, true, gpxFile -> {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
@@ -172,15 +166,15 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 				return false;
 			});
 		} else {
-			DirectionsDialogs.directionsToDialogAndLaunchMap(mapActivity, historyEntry.getLat(),
-					historyEntry.getLon(), historyEntry.getName());
+			DirectionsDialogs.directionsToDialogAndLaunchMap(mapActivity,
+					historyEntry.getLat(), historyEntry.getLon(), historyEntry.getName());
 		}
 	}
 
 	private void navigateGpxFile(@NonNull GpxFile gpxFile, @NonNull MapActivity mapActivity) {
 		if (TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFile)) {
-			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFile, this);
+			FragmentManager fm = mapActivity.getSupportFragmentManager();
+			TrackSelectSegmentBottomSheet.showInstance(fm, gpxFile, this);
 		} else {
 			mapActivity.getMapActions().startNavigationForGpx(gpxFile, mapActivity);
 			closeDashboard();
@@ -189,10 +183,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 
 	private void showContextMenu(@NonNull HistoryEntry historyEntry) {
 		Activity activity = getActivity();
-		if (activity == null) {
-			return;
-		}
-		OsmandApplication app = requireMyApplication();
+		if (activity == null) return;
 
 		PointDescription pointDescription = historyEntry.getName();
 		if (pointDescription.isGpxFile()) {
@@ -205,21 +196,22 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 				closeDashboard();
 			}
 		} else {
-			app.getSettings().setMapLocationToShow(historyEntry.getLat(), historyEntry.getLon(),
+			settings.setMapLocationToShow(historyEntry.getLat(), historyEntry.getLon(),
 					15, historyEntry.getName(), true, historyEntry);
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
 	}
 
 	private void setupDistanceAndDirection(@NonNull HistoryEntry historyEntry, @NonNull View itemView) {
-		MapActivity mapActivity = requireMapActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) return;
 
 		ImageView directionArrow = itemView.findViewById(R.id.direction);
 		TextView distanceText = itemView.findViewById(R.id.distance);
-		PointDescription pointDescription = historyEntry.getName();
-		if (pointDescription.isGpxFile()) {
-			String relativeGpxPath = pointDescription.getName();
+		PointDescription pd = historyEntry.getName();
+
+		if (pd.isGpxFile()) {
+			String relativeGpxPath = pd.getName();
 			File file = new File(app.getAppPath(GPX_INDEX_DIR), relativeGpxPath);
 			GpxSelectionHelper.getGpxFile(mapActivity, file, false, gpxFile -> {
 				KQuadRect gpxRect = gpxFile.getRect();

@@ -58,7 +58,7 @@ class PluginsListAdapter extends ArrayAdapter<Object> {
 	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 		View view = convertView;
 		if (view == null) {
-			view = pluginsFragment.getThemedInflater().inflate(R.layout.plugins_list_item, parent, false);
+			view = pluginsFragment.inflate(R.layout.plugins_list_item, parent, false);
 		}
 		Context context = view.getContext();
 
@@ -71,21 +71,19 @@ class PluginsListAdapter extends ArrayAdapter<Object> {
 		TextView pluginDescription = view.findViewById(R.id.plugin_description);
 
 		Object item = getItem(position);
-		if (item instanceof ConnectedApp) {
-			ConnectedApp app = (ConnectedApp) item;
-			active = app.isEnabled();
+		if (item instanceof ConnectedApp connectedApp) {
+			active = connectedApp.isEnabled();
 			if (!active) {
 				logoContDescId = R.string.shared_string_enable;
 			}
-			name = app.getName();
+			name = connectedApp.getName();
 			pluginDescription.setText(R.string.third_party_application);
-			pluginLogo.setImageDrawable(app.getIcon());
-			pluginLogo.setOnClickListener(v -> pluginsFragment.switchEnabled(app));
+			pluginLogo.setImageDrawable(connectedApp.getIcon());
+			pluginLogo.setOnClickListener(v -> pluginsFragment.switchEnabled(connectedApp));
 			pluginOptions.setVisibility(View.GONE);
 			pluginOptions.setOnClickListener(null);
-			view.setTag(app);
-		} else if (item instanceof OsmandPlugin) {
-			OsmandPlugin plugin = (OsmandPlugin) item;
+			view.setTag(connectedApp);
+		} else if (item instanceof OsmandPlugin plugin) {
 			active = plugin.isEnabled();
 			if (!active) {
 				logoContDescId = plugin.isLocked()

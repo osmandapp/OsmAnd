@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -39,8 +38,8 @@ public class AverageGlideWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.fragment_widget_settings_average_glide_ratio, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.fragment_widget_settings_average_glide_ratio, container);
 
 		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), initialIntervalMillis);
 		ViewGroup cardContainer = view.findViewById(R.id.time_interval_card_container);

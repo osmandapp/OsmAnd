@@ -1,7 +1,6 @@
 package net.osmand.plus.search.dialogs;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
@@ -20,9 +19,7 @@ import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.SearchVisibilityListener;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
@@ -41,21 +38,21 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	@Override
 	public void onUpdatedIndexesList() {
-		if(nearbyPlacesCard != null) {
+		if (nearbyPlacesCard != null) {
 			nearbyPlacesCard.onUpdatedIndexesList();
 		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		if(nearbyPlacesCard != null) {
+		if (nearbyPlacesCard != null) {
 			nearbyPlacesCard.downloadHasFinished();
 		}
 	}
 
 	@Override
 	public void downloadInProgress() {
-		if(nearbyPlacesCard != null) {
+		if (nearbyPlacesCard != null) {
 			nearbyPlacesCard.downloadInProgress();
 		}
 	}
@@ -67,6 +64,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	@Override
+	@NonNull
 	public SearchListFragmentType getType() {
 		return SearchListFragmentType.HISTORY;
 	}
@@ -148,16 +146,10 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	@Override
 	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		setupNearByCard(view);
-	}
-
-	private void setupNearByCard(@NonNull View view) {
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		QuickSearchDialogFragment dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this, nightMode, !dialogFragment.isSearchHidden());
 		getListView().addHeaderView(nearbyPlacesCard, null, false);
-		getListView().addHeaderView(themedInflater.inflate(R.layout.recently_visited_header, getListView(), false));
+		getListView().addHeaderView(inflate(R.layout.recently_visited_header, getListView(), false));
 	}
 
 	@Override

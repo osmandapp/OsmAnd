@@ -1,6 +1,5 @@
 package net.osmand.plus.wikipedia;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -14,12 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
@@ -43,8 +42,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 	public static final String TAG = SelectWikiLanguagesBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
-	private ApplicationMode appMode;
 	private WikipediaPlugin wikiPlugin;
 
 	private List<BottomSheetItemWithCompoundButton> languageItems;
@@ -55,8 +52,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		appMode = app.getSettings().getApplicationMode();
 		wikiPlugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 		initLanguagesData();
 	}
@@ -72,9 +67,9 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 		int profileColor = appMode.getProfileColor(nightMode);
 
-		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int contentPadding = getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingSmall = getDimensionPixelSize(R.dimen.content_padding_small);
+		int contentPaddingHalf = getDimensionPixelSize(R.dimen.content_padding_half);
 
 		items.add(new TitleItem(getString(R.string.shared_string_languages)));
 		items.add(new LongDescriptionItem(getString(R.string.some_articles_may_not_available_in_lang)));
@@ -89,13 +84,10 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 				.setTitle(getString(R.string.shared_string_all_languages))
 				.setTitleColorId(activeColorResId)
 				.setCustomView(getCustomButtonView())
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						isGlobalWikiPoiEnabled = !isGlobalWikiPoiEnabled;
-						btnSelectAll[0].setChecked(isGlobalWikiPoiEnabled);
-						setLanguageListEnable(!isGlobalWikiPoiEnabled);
-					}
+				.setOnClickListener(v -> {
+					isGlobalWikiPoiEnabled = !isGlobalWikiPoiEnabled;
+					btnSelectAll[0].setChecked(isGlobalWikiPoiEnabled);
+					setLanguageListEnable(!isGlobalWikiPoiEnabled);
 				})
 				.create();
 		items.add(btnSelectAll[0]);
@@ -115,24 +107,15 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 					.setChecked(language.isChecked())
 					.setTitle(language.getTitle())
 					.setLayoutId(R.layout.bottom_sheet_item_title_with_checkbox)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean newValue = !languageItem[0].isChecked();
-							languageItem[0].setChecked(newValue);
-							language.setChecked(newValue);
-						}
+					.setOnClickListener(v -> {
+						boolean newValue = !languageItem[0].isChecked();
+						languageItem[0].setChecked(newValue);
+						language.setChecked(newValue);
 					})
 					.create();
 			languageItems.add(languageItem[0]);
 			items.add(languageItem[0]);
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		return (MapActivity) activity;
 	}
 
 	private void initLanguagesData() {
@@ -212,37 +195,25 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 			wikiPlugin.setLanguagesToShow(localesForSaving);
 			wikiPlugin.setShowAllLanguages(global);
 		}
-
 		wikiPlugin.updateWikipediaState();
 	}
 
 	protected void applyPreferenceWithSnackBar(List<String> localesForSaving, boolean global) {
 		applyPreference(false, localesForSaving, global);
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
 			String modeName = appMode.toHumanString();
-			String text = app.getString(R.string.changes_applied_to_profile, modeName);
+			String text = getString(R.string.changes_applied_to_profile, modeName);
 			SpannableString message = UiUtilities.createSpannableString(text, Typeface.BOLD, modeName);
 			Snackbar snackbar = Snackbar.make(mapActivity.getLayout(), message, Snackbar.LENGTH_LONG)
-					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							applyPreference(true, localesForSaving, global);
-						}
-					});
+					.setAction(R.string.apply_to_all_profiles, view -> applyPreference(true, localesForSaving, global));
 			UiUtilities.setupSnackbarVerticalLayout(snackbar);
 			UiUtilities.setupSnackbar(snackbar, nightMode);
 			snackbar.show();
-		}
+		});
 	}
 
 	private View getCustomButtonView() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return null;
-		}
-		View buttonView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_title_with_swith_56dp, null);
+		View buttonView = inflate(R.layout.bottom_sheet_item_title_with_swith_56dp);
 		CompoundButton cb = buttonView.findViewById(R.id.compound_button);
 
 		int color = ColorUtilities.getDividerColor(app, nightMode);
@@ -263,6 +234,15 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		super.onPause();
 		if (requireActivity().isChangingConfigurations()) {
 			dismiss();
+		}
+	}
+
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean usedOnMap) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectWikiLanguagesBottomSheet fragment = new SelectWikiLanguagesBottomSheet();
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
@@ -304,12 +284,5 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 			int result = other.topDefined ? (!this.topDefined ? 1 : 0) : (this.topDefined ? -1 : 0);
 			return result != 0 ? result : this.title.compareToIgnoreCase(other.title);
 		}
-	}
-
-	public static void showInstance(@NonNull MapActivity mapActivity,
-									boolean usedOnMap) {
-		SelectWikiLanguagesBottomSheet fragment = new SelectWikiLanguagesBottomSheet();
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 	}
 }

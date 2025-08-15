@@ -93,7 +93,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			imported = args.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		}
 		screenController = ProfileAppearanceController.getInstance(app, this, modeKey, imported);
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+		requireActionBarActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {

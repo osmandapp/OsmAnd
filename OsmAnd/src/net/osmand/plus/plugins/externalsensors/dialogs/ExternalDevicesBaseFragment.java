@@ -13,15 +13,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public abstract class ExternalDevicesBaseFragment extends BaseOsmAndFragment {
+public abstract class ExternalDevicesBaseFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = ExternalDevicesBaseFragment.class.getSimpleName();
 	protected ExternalSensorsPlugin plugin;
@@ -39,7 +38,7 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(getLayoutId(), container, false);
+		View view = inflate(getLayoutId(), container, false);
 		setupToolbar(view);
 		setupUI(view);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -78,11 +77,5 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndFragment {
 
 	protected float getElevation() {
 		return 5.0f;
-	}
-
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
 	}
 }

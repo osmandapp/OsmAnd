@@ -1,7 +1,6 @@
 package net.osmand.plus.backup.ui;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -9,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -21,8 +20,7 @@ public class RemoveOldVersionsBottomSheet extends MenuBottomSheetDialogFragment 
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View titleView = themedInflater.inflate(R.layout.backup_delete_data, null);
+		View titleView = inflate(R.layout.backup_delete_data);
 		BaseBottomSheetItem item = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.backup_delete_old_data_warning))
 				.setTitle(getString(R.string.backup_delete_old_data))
@@ -63,11 +61,11 @@ public class RemoveOldVersionsBottomSheet extends MenuBottomSheetDialogFragment 
 
 	@Override
 	public int getFirstDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+		return getDimensionPixelSize(R.dimen.dialog_content_margin);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			RemoveOldVersionsBottomSheet fragment = new RemoveOldVersionsBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);

@@ -114,7 +114,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	private View createFeatureItemView(@NonNull OsmAndFeature feature) {
-		View view = themedInflater.inflate(R.layout.purchase_dialog_list_item, listContainer, false);
+		View view = inflate(R.layout.purchase_dialog_list_item, listContainer, false);
 		view.setTag(feature);
 		view.setOnClickListener(v -> selectFeature(feature));
 		bindFeatureItem(view, feature, false);

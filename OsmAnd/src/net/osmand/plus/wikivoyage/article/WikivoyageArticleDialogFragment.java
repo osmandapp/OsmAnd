@@ -102,7 +102,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			}
 		}
 
-		View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container, false);
 
 		setupToolbar(mainView.findViewById(R.id.toolbar));
 

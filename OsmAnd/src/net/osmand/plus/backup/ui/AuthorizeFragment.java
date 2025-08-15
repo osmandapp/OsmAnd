@@ -50,7 +50,7 @@ import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
 import net.osmand.plus.backup.BackupListeners.OnSendCodeListener;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.backup.UserNotRegisteredException;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -63,7 +63,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterUserListener,
+public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegisterUserListener,
 		OnRegisterDeviceListener, OnSendCodeListener, OnCheckCodeListener {
 
 	private static final Log LOG = PlatformUtil.getLog(AuthorizeFragment.class);
@@ -134,7 +134,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_cloud_authorize, container, false);
+		View view = inflate(R.layout.fragment_cloud_authorize, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		space = view.findViewById(R.id.space);

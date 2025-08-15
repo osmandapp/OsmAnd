@@ -1,9 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -14,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -36,11 +33,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 	private static final String VALUES_KEY = "values_array_key";
 	private static final String SELECTED_ENTRY_INDEX_KEY = "selected_entry_index_key";
 
-	private OsmandApplication app;
-	private ApplicationMode appMode;
-
 	private final List<View> views = new ArrayList<>();
-	private LayoutInflater inflater;
 
 	private String title;
 	private String description;
@@ -48,29 +41,9 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 	private Object[] values;
 	private int selectedEntryIndex;
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull Fragment target,
-	                                @NonNull String key, @NonNull String title, @NonNull String description,
-	                                @NonNull ApplicationMode appMode, boolean usedOnMap,
-	                                @NonNull String[] names, @NonNull Object[] values,
-	                                int selectedIndex) {
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, key);
-			SimpleSingleSelectionBottomSheet fragment = new SimpleSingleSelectionBottomSheet();
-			fragment.setArguments(args);
-			fragment.setAppMode(appMode);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setTargetFragment(target, 0);
-			fragment.setParameters(title, description, names, values, selectedIndex);
-			fragment.show(fm, TAG);
-		}
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		appMode = getAppMode();
 		if (savedInstanceState != null) {
 			restoreSavedState(savedInstanceState);
 		}
@@ -78,10 +51,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = requireContext();
-		inflater = UiUtilities.getInflater(context, nightMode);
-
-		View view = inflater.inflate(R.layout.bottom_sheet_simple_single_selection, null);
+		View view = inflate(R.layout.bottom_sheet_simple_single_selection);
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(title);
 		TextView tvDesc = view.findViewById(R.id.description);
@@ -95,13 +65,13 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 		LinearLayout llItems = view.findViewById(R.id.items);
 
 		for (int i = 0; i < names.length; i++) {
-			View v = inflater.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems, false);
+			View v = inflate(R.layout.bottom_sheet_item_with_radio_btn_left, llItems, false);
 			v.setTag(i);
 
 			TextView tvTitle = v.findViewById(R.id.title);
 			tvTitle.setText(names[i]);
 
-			int color = appMode.getProfileColor(nightMode);
+			int color = getAppMode().getProfileColor(nightMode);
 			CompoundButton cb = v.findViewById(R.id.compound_button);
 			UiUtilities.setupCompoundButton(nightMode, color, cb);
 			cb.setChecked(i == selectedEntryIndex);
@@ -162,10 +132,27 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 
 	private void onApply() {
 		Fragment target = getTargetFragment();
-		if (target instanceof OnConfirmPreferenceChange) {
-			OnConfirmPreferenceChange callback = ((OnConfirmPreferenceChange) target);
+		if (target instanceof OnConfirmPreferenceChange callback) {
 			callback.onConfirmPreferenceChange(getPrefId(), values[selectedEntryIndex], ApplyQueryType.SNACK_BAR);
 		}
 		dismiss();
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull Fragment target,
+	                                @NonNull String key, @NonNull String title, @NonNull String description,
+	                                @NonNull ApplicationMode appMode, boolean usedOnMap,
+	                                @NonNull String[] names, @NonNull Object[] values,
+	                                int selectedIndex) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, key);
+			SimpleSingleSelectionBottomSheet fragment = new SimpleSingleSelectionBottomSheet();
+			fragment.setArguments(args);
+			fragment.setAppMode(appMode);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.setParameters(title, description, names, values, selectedIndex);
+			fragment.show(fm, TAG);
+		}
 	}
 }

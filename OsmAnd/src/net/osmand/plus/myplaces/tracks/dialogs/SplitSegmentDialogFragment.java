@@ -28,7 +28,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentsAdapter.SplitAdapterListener;
@@ -62,7 +62,7 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment implements SplitAdapterListener {
+public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment implements SplitAdapterListener {
 
 	public static final String TAG = "SPLIT_SEGMENT_DIALOG_FRAGMENT";
 
@@ -124,7 +124,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment impleme
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = themedInflater.inflate(R.layout.split_segments_layout, container, false);
+		View view = inflate(R.layout.split_segments_layout, container, false);
 
 		Toolbar toolbar = view.findViewById(R.id.split_interval_toolbar);
 		TextView title = toolbar.findViewById(R.id.title);
@@ -149,8 +149,8 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment impleme
 		ImageView splitImage = headerView.findViewById(R.id.header_split_image);
 		splitImage.setImageDrawable(getIcon(R.drawable.ic_action_split_interval, nightMode ? 0 : R.color.icon_color_default_light));
 
-		listView.addHeaderView(themedInflater.inflate(R.layout.gpx_split_segments_empty_header, listView, false));
-		listView.addFooterView(themedInflater.inflate(R.layout.list_shadow_footer, listView, false));
+		listView.addHeaderView(inflate(R.layout.gpx_split_segments_empty_header, listView, false));
+		listView.addFooterView(inflate(R.layout.list_shadow_footer, listView, false));
 
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			int previousYPos = -1;

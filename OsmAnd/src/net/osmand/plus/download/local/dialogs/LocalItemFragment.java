@@ -69,7 +69,7 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.local_item_fragment, container, false);
+		View view = inflate(R.layout.local_item_fragment, container, false);
 		itemsContainer = view.findViewById(R.id.container);
 
 		setupToolbar(view);

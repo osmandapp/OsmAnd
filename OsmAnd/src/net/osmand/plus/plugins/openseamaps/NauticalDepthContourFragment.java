@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class NauticalDepthContourFragment extends BaseOsmAndFragment {
+public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = NauticalDepthContourFragment.class.getSimpleName();
 
@@ -68,7 +68,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
+		View view = inflate(R.layout.fragment_nautical_depth_contours, container, false);
 
 		setupHeader(view);
 		setupPropertyPreferences(view);

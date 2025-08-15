@@ -52,7 +52,7 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetInfoFragment() {
 		}
 	}
 
-	override fun setupMainContent(themedInflater: LayoutInflater, container: ViewGroup) {
+	override fun setupMainContent(container: ViewGroup) {
 		inflater = themedInflater
 		themedInflater.inflate(R.layout.map_marker_side_widget_settings_fragment, container)
 		buttonsCard = view.findViewById(R.id.items_container)

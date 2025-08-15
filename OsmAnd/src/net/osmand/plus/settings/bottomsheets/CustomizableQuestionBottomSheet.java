@@ -8,7 +8,6 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,7 +23,6 @@ import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DialogExtra;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.Objects;
@@ -39,10 +37,8 @@ public class CustomizableQuestionBottomSheet extends CustomizableBottomSheet {
 		if (ctx == null || displayData == null) {
 			return;
 		}
-		ctx = UiUtilities.getThemedContext(ctx, nightMode);
-		
-		LayoutInflater inflater = LayoutInflater.from(ctx);
-		View contentView = inflater.inflate(R.layout.bottom_sheet_icon_title_description, (ViewGroup) getView(), false);
+
+		View contentView = inflate(R.layout.bottom_sheet_icon_title_description, (ViewGroup) getView(), false);
 		ImageView ivIcon = contentView.findViewById(R.id.icon);
 		TextView tvTitle = contentView.findViewById(R.id.title);
 		TextView tvDescription = contentView.findViewById(R.id.description);
@@ -116,7 +112,7 @@ public class CustomizableQuestionBottomSheet extends CustomizableBottomSheet {
 
 	@Override
 	public int getFirstDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+		return getDimensionPixelSize(R.dimen.dialog_content_margin);
 	}
 
 	@NonNull
@@ -131,7 +127,7 @@ public class CustomizableQuestionBottomSheet extends CustomizableBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull String processId, boolean usedOnMap) {
+	                                @NonNull String processId, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			CustomizableQuestionBottomSheet fragment = new CustomizableQuestionBottomSheet();
 			fragment.setProcessId(processId);

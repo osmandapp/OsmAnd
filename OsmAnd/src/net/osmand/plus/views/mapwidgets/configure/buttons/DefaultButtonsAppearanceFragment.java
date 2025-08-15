@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.quickaction.ButtonSizeCard;
@@ -39,7 +39,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment implements CardListener {
+public class DefaultButtonsAppearanceFragment extends BaseFullScreenFragment implements CardListener {
 
 	public static final String TAG = DefaultButtonsAppearanceFragment.class.getSimpleName();
 
@@ -86,7 +86,7 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.map_button_appearance_fragment, container, false);
+		View view = inflate(R.layout.map_button_appearance_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -132,9 +132,9 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 		mapHudCard = new MapHudCard(activity, appearanceParams);
 		addCard(container, mapHudCard);
 		addCard(container, new CornerRadiusCard(activity, appearanceParams, true));
-		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
+		container.addView(inflate(R.layout.list_item_divider, container, false));
 		addCard(container, new ButtonSizeCard(activity, appearanceParams, true));
-		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
+		container.addView(inflate(R.layout.list_item_divider, container, false));
 		addCard(container, new OpacitySliderCard(activity, appearanceParams, true));
 	}
 
@@ -253,21 +253,6 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 		if (mapHudCard != null) {
 			mapHudCard.clearWidgets();
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

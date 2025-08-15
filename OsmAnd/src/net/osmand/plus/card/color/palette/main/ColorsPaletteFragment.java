@@ -23,7 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
@@ -33,7 +33,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
-public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements IColorsPalette {
+public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
 
 	public static final String TAG = ColorsPaletteFragment.class.getSimpleName();
 
@@ -72,7 +72,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_palette, container, false);
+		View view = inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);
 		setupColorsPalette(view);
 		return view;

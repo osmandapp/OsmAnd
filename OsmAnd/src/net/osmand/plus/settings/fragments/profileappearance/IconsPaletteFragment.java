@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.icon.IIconsPalette;
 import net.osmand.plus.card.icon.IIconsPaletteController;
@@ -31,7 +31,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
-public class IconsPaletteFragment<IconData> extends BaseOsmAndDialogFragment implements IIconsPalette<IconData> {
+public class IconsPaletteFragment<IconData> extends BaseFullScreenDialogFragment implements IIconsPalette<IconData> {
 
 	public static final String TAG = IconsPaletteFragment.class.getSimpleName();
 
@@ -70,7 +70,7 @@ public class IconsPaletteFragment<IconData> extends BaseOsmAndDialogFragment imp
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		this.paletteElements = controller.getPaletteElements(requireContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.fragment_palette, container, false);
+		View view = inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);
 		setupIconsPalette(view);
 		return view;

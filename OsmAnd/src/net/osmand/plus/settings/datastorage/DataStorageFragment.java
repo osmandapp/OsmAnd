@@ -89,8 +89,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		app = getMyApplication();
-		activity = getMyActivity();
+		activity = requireActionBarActivity();
+		app = activity.getMyApplication();
 		Bundle args = getArguments();
 		if (args != null) {
 			storageMigration = args.getBoolean(STORAGE_MIGRATION, false);
@@ -165,9 +165,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if (newValue instanceof Bundle) {
+		if (newValue instanceof Bundle resultData) {
 			//results from BottomSheets
-			Bundle resultData = (Bundle) newValue;
 			if (resultData.containsKey(ChangeDataStorageBottomSheet.TAG)) {
 				boolean moveMaps = resultData.getBoolean(MOVE_DATA);
 				newDataStorage = resultData.getParcelable(CHOSEN_DIRECTORY);

@@ -1,9 +1,10 @@
 package net.osmand.plus.dashboard;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -23,32 +24,20 @@ public class DashDashboardOrDrawerFragment extends DashBaseFragment {
 			};
 
 	@Override
-	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_dashboard_or_drawer_fragment, container, false);
-		view.findViewById(R.id.useDashboardButton).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OsmandSettings settings = getMyApplication().getSettings();
-				settings.SHOW_DASHBOARD_ON_START.set(true);
-				settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
-				settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(false);
-				dashboard.hideFragmentByTag(TAG);
-			}
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
+		View view = inflate(R.layout.dash_dashboard_or_drawer_fragment, container, false);
+		view.findViewById(R.id.useDashboardButton).setOnClickListener(v -> {
+			settings.SHOW_DASHBOARD_ON_START.set(true);
+			settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
+			settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(false);
+			dashboard.hideFragmentByTag(TAG);
 		});
-		view.findViewById(R.id.useDrawerButton).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OsmandSettings settings = getMyApplication().getSettings();
-				settings.SHOW_DASHBOARD_ON_START.set(false);
-				settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(false);
-				settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(false);
-				dashboard.hideDashboard();
-			}
+		view.findViewById(R.id.useDrawerButton).setOnClickListener(v -> {
+			settings.SHOW_DASHBOARD_ON_START.set(false);
+			settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(false);
+			settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(false);
+			dashboard.hideDashboard();
 		});
 		return view;
-	}
-
-	@Override
-	public void onOpenDash() {
 	}
 }

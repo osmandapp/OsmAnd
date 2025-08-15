@@ -78,7 +78,7 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.terrain_visibility_fragment, container, false);
+		View view = inflate(R.layout.terrain_visibility_fragment, container, false);
 		visibilitySlider = view.findViewById(R.id.transparency_slider);
 		visibilityTv = view.findViewById(R.id.transparency_value_tv);
 

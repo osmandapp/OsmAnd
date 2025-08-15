@@ -75,7 +75,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 				dismiss();
 			}
 		};
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+		requireActionBarActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 	}
 
 	@Override

@@ -114,15 +114,13 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	}
 
 	private void addDivider(@NonNull ViewGroup container) {
-		View bottomDivider = themedInflater.inflate(R.layout.card_bottom_divider, container, false);
-		container.addView(bottomDivider);
-		View topDivider = themedInflater.inflate(R.layout.card_top_divider, container, false);
-		container.addView(topDivider);
+		container.addView(inflate(R.layout.card_bottom_divider));
+		container.addView(inflate(R.layout.card_top_divider));
 	}
 
 	@NonNull
 	private View getHeaderView(@NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.list_item_text_header, container, false);
+		View view = inflate(R.layout.list_item_text_header, container, false);
 		titleView = view.findViewById(R.id.title);
 		updateTitle();
 		return view;

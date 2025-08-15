@@ -36,7 +36,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
@@ -68,7 +68,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ImportTracksFragment extends BaseOsmAndDialogFragment implements OnExitConfirmedListener,
+public class ImportTracksFragment extends BaseFullScreenDialogFragment implements OnExitConfirmedListener,
 		FolderSelectionListener, OnTrackFolderAddListener, ImportTracksListener, PointsSelectionListener {
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();
@@ -141,7 +141,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_import_tracks, container, false);
+		View view = inflate(R.layout.fragment_import_tracks, container, false);
 
 		setupToolbar(view);
 		setupButtons(view);
@@ -485,16 +485,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			Intent intent = new Intent(app, app.getAppCustomization().getMyPlacesActivity());
 			intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			activity.startActivity(intent);
-		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
 		}
 	}
 

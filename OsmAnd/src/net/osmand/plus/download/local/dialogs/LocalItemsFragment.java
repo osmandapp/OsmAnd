@@ -150,7 +150,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.recyclerview_fragment, container, false);
+		View view = inflate(R.layout.recyclerview_fragment, container, false);
 
 		DownloadActivity activity = requireDownloadActivity();
 		activity.getAccessibilityAssistant().registerPage(view, LOCAL_TAB_NUMBER);

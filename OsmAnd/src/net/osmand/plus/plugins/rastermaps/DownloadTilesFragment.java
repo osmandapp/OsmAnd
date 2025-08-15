@@ -36,7 +36,7 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.rastermaps.CalculateMissingTilesTask.MissingTilesInfo;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
@@ -57,7 +57,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import java.text.MessageFormat;
 import java.util.List;
 
-public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
+public class DownloadTilesFragment extends BaseFullScreenFragment implements IMapLocationListener {
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
 
@@ -158,7 +158,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
-		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
+		view = inflate(R.layout.download_tiles_fragment, container, false);
 
 		if (tileSource == null) {
 			dismiss();
@@ -693,17 +693,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	@NonNull
-	private MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		return activity == null ? null : ((MapActivity) activity);
-	}
-
 	private ITileSource loadTileSource() {
 		ITileSource tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
 		if (tileSource instanceof SQLiteTileSource) {
@@ -715,8 +704,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
 		List<OsmandMapLayer> layers = app.getOsmandMap().getMapView().getLayers();
 		for (OsmandMapLayer layer : layers) {
-			if (layer instanceof MapTileLayer) {
-				MapTileLayer mapTileLayer = (MapTileLayer) layer;
+			if (layer instanceof MapTileLayer mapTileLayer) {
 				if (mapTileLayer.isVisible() && mapTileLayer.getMap() != null && mapTileLayer.getMap().couldBeDownloadedFromInternet()) {
 					return true;
 				}

@@ -37,7 +37,7 @@ public class ModeSelectionBottomSheet<T> extends SelectionBottomSheet<T> {
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescr = view.findViewById(R.id.description);
 
-		Drawable icon = uiUtilities.getIcon(item.getIconId(), activeColorRes);
+		Drawable icon = getIcon(item.getIconId(), activeColorRes);
 		ivIcon.setImageDrawable(icon);
 		tvTitle.setText(item.getTitle());
 		tvDescr.setText(item.getDescription());

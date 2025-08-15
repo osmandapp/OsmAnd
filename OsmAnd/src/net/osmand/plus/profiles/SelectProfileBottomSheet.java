@@ -1,14 +1,11 @@
 package net.osmand.plus.profiles;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -23,12 +20,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressWithTitleItem;
@@ -55,13 +49,11 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	public static final String PROFILES_LIST_UPDATED_ARG = "is_profiles_list_updated";
 	public static final String DERIVED_PROFILE_ARG = "derived_profile";
 
-	protected OsmandApplication app;
 	protected String selectedItemKey;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		Bundle args = getArguments();
 		if (args != null) {
 			selectedItemKey = args.getString(SELECTED_KEY, null);
@@ -72,18 +64,14 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		view.findViewById(R.id.dismiss_button).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				onDismissButtonClickAction();
-				dismiss();
-			}
+		view.findViewById(R.id.dismiss_button).setOnClickListener(v -> {
+			onDismissButtonClickAction();
+			dismiss();
 		});
 	}
 
 	protected void addProfileItem(ProfileDataObject profile) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View itemView = inflater.inflate(getItemLayoutId(profile), null);
+		View itemView = inflate(getItemLayoutId(profile));
 
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		tvTitle.setText(profile.getName());
@@ -105,10 +93,8 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addToggleButton(TextRadioItem selectedItem, TextRadioItem... radioItems) {
-		int padding = getDimen(R.dimen.content_padding_small);
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
-		LinearLayout container = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
+		int padding = getDimensionPixelSize(R.dimen.content_padding_small);
+		LinearLayout container = (LinearLayout) inflate(R.layout.custom_radio_buttons);
 		LinearLayout.MarginLayoutParams params = new LinearLayout.MarginLayoutParams(
 				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(params, padding, padding, padding, 0);
@@ -118,22 +104,19 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		radioGroup.setItems(radioItems);
 		radioGroup.setSelectedItem(selectedItem);
 
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(container)
-				.create()
-		);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(container).create());
 	}
 
 	protected void addCheckableItem(int titleId,
 									boolean isSelected,
 									OnClickListener listener) {
-		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+		View itemView = inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn);
 		itemView.findViewById(R.id.icon).setVisibility(View.GONE);
 		itemView.findViewById(R.id.description).setVisibility(View.GONE);
 
 		String title = getString(titleId);
 		SpannableString spannable = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), title, title, title);
-		int activeColor = ContextCompat.getColor(app, getActiveColorId());
+		int activeColor = getColor(getActiveColorId());
 		ForegroundColorSpan colorSpan = new ForegroundColorSpan(activeColor);
 		spannable.setSpan(colorSpan, 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		((TextView) itemView.findViewById(R.id.title)).setText(spannable);
@@ -149,13 +132,12 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addButtonItem(int titleId, int iconId, OnClickListener listener) {
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-		View buttonView = View.inflate(themedCtx, R.layout.bottom_sheet_item_preference_btn, null);
+		View buttonView = inflate(R.layout.bottom_sheet_item_preference_btn);
 		TextView tvTitle = buttonView.findViewById(R.id.title);
 		tvTitle.setText(getString(titleId));
 
 		ImageView ivIcon = buttonView.findViewById(R.id.icon);
-		ivIcon.setImageDrawable(app.getUIUtilities().getIcon(iconId, getActiveColorId()));
+		ivIcon.setImageDrawable(getIcon(iconId, getActiveColorId()));
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonView)
@@ -184,9 +166,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addGroupHeader(CharSequence title, CharSequence description) {
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_large, null);
+		View view = inflate(R.layout.bottom_sheet_item_title_with_description_large);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
@@ -198,32 +178,25 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 			tvDescription.setVisibility(View.GONE);
 		}
 
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create()
-		);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
-	protected void addMessageWithRoundedBackground(String message, int marginTop, int marginBottom) {
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_item_description_on_rounded_bg, null);
+	protected void addMessageWithRoundedBackground(@NonNull String message) {
+		View view = inflate(R.layout.bottom_sheet_item_description_on_rounded_bg);
+		int marginBottom = getDimensionPixelSize(R.dimen.content_padding_half);
 
 		TextView tvMessage = view.findViewById(R.id.title);
 		tvMessage.setText(message);
 
 		LinearLayout backgroundView = view.findViewById(R.id.background_view);
-		int color = AndroidUtils.getColorFromAttr(themedCtx, R.attr.activity_background_color);
+		int color = ColorUtilities.getActivityBgColor(app, nightMode);
 		Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
 		AndroidUtils.setBackground(backgroundView, bgDrawable);
 
 		MarginLayoutParams params = (MarginLayoutParams) backgroundView.getLayoutParams();
-		AndroidUtils.setMargins(params, params.leftMargin, marginTop, params.rightMargin, marginBottom);
+		AndroidUtils.setMargins(params, params.leftMargin, 0, params.rightMargin, marginBottom);
 
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create()
-		);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
 	protected OnClickListener getItemClickListener(ProfileDataObject profile) {
@@ -286,17 +259,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 				R.color.icon_color_default_light;
 	}
 
-	@Nullable
-	protected MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
-
 	public interface OnSelectProfileCallback {
 		void onProfileSelected(Bundle args);
 	}
-
 }
