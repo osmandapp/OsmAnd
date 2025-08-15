@@ -5680,4 +5680,20 @@
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Respuesta</string>
+    <string name="marine_renderer">Marino</string>
+    <string name="marine_render_descr">Estilo de navegación náutica altamente personalizable. Basado en el estilo Náutico. Funciona mejor con el mapa mundial de balizas náuticas y los mapas de profundidad opcionales.</string>
+    <string name="rendering_attr_hideAreas_name">Áreas de profundidad</string>
+    <string name="rendering_attr_hideAreas_description">Ocultar áreas de profundidad</string>
+    <string name="rendering_attr_hideContours_name">Curvas de profundidad</string>
+    <string name="rendering_attr_hideContours_description">Ocultar curvas de profundidad</string>
+    <string name="rendering_attr_hideFairways_description">Ocultar las calles de golf</string>
+    <string name="rendering_attr_hideFairways_name">Calles de golf</string>
+    <string name="rendering_attr_hideFerries_name">Rutas de transbordador (ferry)</string>
+    <string name="rendering_attr_hideFerries_description">Ocultar las rutas de trasbordador (ferry)</string>
+    <string name="rendering_attr_hideLightSectors_name">Sectores ligeros</string>
+    <string name="rendering_attr_hideLightSectors_description">Ocultar los sectores ligeros</string>
+    <string name="rendering_attr_hideMinorContours_name">Curvas de profundidad menores</string>
+    <string name="rendering_attr_hideMinorContours_description">Ocultar las curvas de profundidad menores</string>
+    <string name="rendering_attr_hideNoLNAM_name">Balizas náuticas de OSM (algunas)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Ocultar las balizas náuticas de OSM (algunas)</string>
 </resources>

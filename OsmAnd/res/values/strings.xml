@@ -2204,7 +2204,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="select_another_colorization">Please select another type of coloring.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
-    <string name="rendering_attr_natureReserves_name">Nature reserve</string>
+    <string name="rendering_attr_natureReserves_name">Nature reserve and Protected areas</string>
     <string name="rendering_attr_natureReserves_description">Show nature reserve, protected areas, and national parks.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>

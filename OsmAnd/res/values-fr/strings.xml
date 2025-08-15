@@ -5708,4 +5708,13 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Réponse</string>
     <string name="map_orientations_choose_description">Laissez vide pour basculer entre tous les modes existants ou sélectionnez vos modes préférés.</string>
+    <string name="rendering_attr_watercolor_description">Couleur de l\'eau</string>
+    <string name="rendering_attr_hideLightSectors_name">Secteurs lumineux</string>
+    <string name="rendering_attr_hideLightSectors_description">Masquer les secteurs lumineux</string>
+    <string name="rendering_attr_hideNoLNAM_name">Balisage maritime OSM (partiel)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Masquer le balisage maritime OSM (partiel)</string>
+    <string name="rendering_attr_hideSpots_name">Points de sonde</string>
+    <string name="rendering_attr_hideSpots_description">Masquer les points de sonde</string>
+    <string name="rendering_attr_shellsStyle_name">Style des coquillages</string>
+    <string name="rendering_attr_watercolor_name">Couleur de l\'eau</string>
 </resources>

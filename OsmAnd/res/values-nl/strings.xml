@@ -1665,7 +1665,7 @@
     <string name="recent_places">Recente plaatsen</string>
     <string name="favourites">Favorieten</string>
     <string name="saved_at_time">Bewaard op: %1$s</string>
-    <string name="poi_deleted_localy">De POI zal worden verwijdert wanneer je je wijzigingen uploadt</string>
+    <string name="poi_deleted_localy">De POI zal worden verwijderd wanneer je je wijzigingen uploadt</string>
     <string name="count_of_lines">Aantal regels</string>
     <string name="are_you_sure">Weet je het zeker\?</string>
     <string name="unsaved_changes_will_be_lost">Niet-bewaarde wijzigingen gaan verloren. Doorgaan?</string>
@@ -5336,8 +5336,8 @@
     <string name="use_terrain_maps_summary">Gebruikt terreinkaarten voor hoogtedata. Track-geometrie blijft onveranderd.</string>
     <string name="sort_subfolders">Submappen sorteren</string>
     <string name="change_default_tracks_appearance_confirmation">Veranderingen toepassen op bestaande tracks in de map of alleen op nieuwe tracks?</string>
-    <string name="use_nearby_roads_summary">Gebruikt offline kaart om nabijgelegend wegen en hoogtedata te vinden. Kan de track-geometrie bijstellen.</string>
-    <string name="retrieve_elevation_data_summary">OsmAnd kan hoogtedata ophelen van nabijgelegen wegen of terreinkaarten.</string>
+    <string name="use_nearby_roads_summary">Gebruikt de offline kaarten om nabijgelegen wegen en hoogtegegevens te vinden. Kan de trackgeometrie aanpassen.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd kan hoogtegegevens ophalen van nabijgelegen wegen of terreinkaarten.</string>
     <string name="auto_zoom_discrete">Discreet</string>
     <string name="shared_string_limit">Limiet</string>
     <string name="gpx_approximation_cpp">Routegebaseerd (C++)</string>
@@ -6114,4 +6114,25 @@
     <string name="no_poi_for_category">POI niet gevonden</string>
     <string name="poi_categories">POI-categorieën</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="release_4_5">• BLE/ANT+ sensoren: verbeterde verbinding, schrijven en bekijken van ontvangen gegevens naar GPX \n\n • Gratis back-up voor favorieten en instellingen op\"OsmAnd Cloud\" \n\n • Nieuw formaat voor terreinkaarten met ondersteuning voor 3D-reliëf \n\n • Beheer van tracks: bijgewerkte UI, sorteren toegevoegd, ondersteuning voor geneste mappen \n\n • Android Auto: nieuw startmenu voor toegang tot favorieten, tracks en POI-categorieën \n\n • Een lijst van widgets voor het bovenste/onderste paneel \n\n • Nieuw \"Trein\"-profiel, waarmee je treinroutes kunt berekenen \n\n • Contourlijnen werken met elke \"Kaartbron\" \n\n • Een lijst van standaardacties voor externe toetsenborden \n\n • Eigen routebestanden, opties toegevoegd om te verwijderen of te overschrijven \n\n • Optie toegevoegd om \"Afwijking van route aan te kondigen\" \n\n • Startscherm: optie toegevoegd om de opgeslagen OsmAnd-staat te herstellen vanuit een bestanden \n\n • \"Gevaarlijke stoffen\"-klassen toegevoegd voor vrachtwagennavigatie in Noord-Amerika \n\n • Ondersteuning toegevoegd voor \"via ferrata\" voor voetgangersroutes \n\n • \"CAI\"-schaal toegevoegd voor moeilijkheidsclassificatie van de routes \n\n • Taalkeuze per app gerepareerd \n\n • Ondersteuning voor thema-iconen toegevoegd \n\n • OsmAnd Cloud: optie toegevoegd om het account te kunnen verwijderen \n\n • Toegankelijkheid: aanraakvlakgrootte van knoppen gewijzigd naar 48 dp; probleem opgelost met kaart-UI zichtbaarheid bij het gebruik van een schermlezer \n\n • Japanse spraakopdrachten bewerkt\n\n • Hoogteverschil en hellingevaluatie bewerkt</string>
+    <string name="release_4_9">• Een volledig scherm galerijweergave toegevoegd voor Wikimedia-afbeeldingen\n\n • Een nieuwe plug-in \"Voertuigmetingen\" geïntroduceerd om voertuigprestaties te kunnen monitoren met behulp van het OBD-II-protocol\n\n • De mogelijkheid toegevoegd om activiteiten aan tracks toe te wijzen en deze dienovereenkomstig te filteren\n\n • Nieuwe snelle acties geïmplementeerd om een reis op te kunnen nemen en het vergrendelen van het aanraakscherm\n\n • Aanpasbare kaartknopweergave en een nauwkeurig raster geïntroduceerd\n\n • Contextmenu en actie \"Gemiddelde snelheid resetten\" toegevoegd aan widgets\n\n • Nieuwe routelaag \"Dirt Bike trails\" toegevoegd\n\n • Probleem met \"automatische reisopname tijdens het navigeren\" opgelost\n\n • Probleem met omgedraaide coördinaten in RTL opgelost\n\n • Probleem met ontbrekende sensorgegevens voor de huidige reisopname opgelost\n\n • Informatie over de omgeving van het geselecteerde punt toegevoegd\n\n • Snelle actie toegevoegd om de zichtbaarheid van OSM-bwerkingen aan te passen\n\n • Zichtbaarheidsparameters voor opties voor terrein-inkleuring opgesplitst\n\n • Een aanraakbaar pictogram toegevoegd om toegang of andere weg- of padattributen weer te geven</string>
+    <string name="rendering_attr_watercolor_description">Kleur van water</string>
+    <string name="rendering_attr_watercolor_name">Waterkleur</string>
+    <string name="rendering_attr_depthContoursDashed_description">Gestreepte dieptecontouren</string>
+    <string name="rendering_attr_depthContoursDashed_name">Gestreepte dieptecontouren</string>
+    <string name="rendering_attr_depthColorScheme_name">Diepte kleurenschema</string>
+    <string name="rendering_attr_depthColorScheme_description">Diepte kleurenschema</string>
+    <string name="rendering_attr_hideTidalFlats_description">Verberg waddenplaten</string>
+    <string name="rendering_attr_hideTidalFlats_name">Wadden</string>
+    <string name="rendering_attr_hideNoLNAM_description">Verberg OSM-betonning (sommige)</string>
+    <string name="rendering_attr_hideNoLNAM_name">OSM-betonning (sommige)</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Sectorenlichtbronnen</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Verberg sectorenlichtbronnen</string>
+    <string name="rendering_attr_hideLightSectors_name">Sectorenlicht</string>
+    <string name="rendering_attr_hideLightSectors_description">Verberg sectorenlicht</string>
+    <string name="rendering_attr_hideMinorContours_name">Kleine dieptecontouren</string>
+    <string name="rendering_attr_hideMinorContours_description">Verberg kleine dieptecontouren</string>
+    <string name="rendering_attr_hideFerries_name">Veerbootverbindingen</string>
+    <string name="rendering_attr_hideFerries_description">Verberg veerbootverbindingen</string>
+    <string name="disable_vertex_hillshade_3d">Deactiveer knooppunt heuvelschaduw in 3D</string>
 </resources>
