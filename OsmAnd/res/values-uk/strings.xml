@@ -4060,7 +4060,7 @@
     <string name="upload_gpx_description_hint">Залиште порожніми, назви треків будуть використовуватись як опис. Введений опис буде застосований до кожного треку.</string>
     <string name="exit_pan_mode_descr">Натисніть Вибрати, щоб вийти з режиму панорамування</string>
     <string name="icon_group_nautical">Морські</string>
-    <string name="rendering_attr_natureReserves_name">Заповідник</string>
+    <string name="rendering_attr_natureReserves_name">Природний заповідник та охоронювані території</string>
     <string name="shared_app_storage_description">Спільне сховище більше не доступне через зміну правил доступу до сховища в Android.</string>
     <string name="shared_storage_warning_title">Зміни в правилах доступу до сховища</string>
     <string name="purchases_feature_desc_android_auto">Офлайн-мапи та навігація OsmAnd на екрані вашого автомобіля. Зручна інтеграція з органами керування вашого автомобіля.</string>
