@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="average_elevation">Average elevation</string>
+    <string name="ascent">Ascent</string>
+    <string name="descent">Descent</string>
+    <string name="map_orientations_choose_description">Leave empty to switch between all available modes, or add only your preferred ones.</string>
+    <string name="map_orientations">Map orientations</string>
     <string name="altitude_metrics_description">Sets the display unit for altitude in widgets and statistics.</string>
     <string name="write_location_provider_description">Save location provider to each track point while recording</string>
     <string name="write_location_provider">Write Location Provider</string>
@@ -23,6 +28,10 @@
     <string name="release_5_2">
         • Work in progress...
     </string>
+
+    <string name="ble_prefix_pattern">%s • </string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Response</string>
     <string name="deleting_history">Deleting history…</string>
 	<string name="n_a">N/A</string>
     <string name="next_turn_information">Next turn information</string>
@@ -382,6 +391,51 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_fuel_type_hydrogen">Hydrogen</string>
     <string name="obd_fuel_type_unknown">Unknown Fuel Type</string>
 
+
+    <!-- Marine style -->
+    <string name="marine_renderer">Marine</string>
+    <string name="marine_render_descr">Highly customizable Marine navigation style. Based on Nautical style. Works better with Nautical World Seamarks map and optional Depth maps.</string>
+    <string name="rendering_attr_hideAreas_name">Depth areas</string>
+    <string name="rendering_attr_hideAreas_description">Hide depth areas</string>
+    <string name="rendering_attr_hideContours_name">Depth contours</string>
+    <string name="rendering_attr_hideContours_description">Hide depth contours</string>
+    <string name="rendering_attr_hideFairways_name">Fairways</string>
+    <string name="rendering_attr_hideFairways_description">Hide fairways</string>
+    <string name="rendering_attr_hideFerries_name">Ferry routes</string>
+    <string name="rendering_attr_hideFerries_description">Hide ferry routes</string>
+    <string name="rendering_attr_hideLightSectors_name">Light sectors</string>
+    <string name="rendering_attr_hideLightSectors_description">Hide light sectors</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Light sectors sources</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Hide light sectors sources</string>
+    <string name="rendering_attr_hideMinorContours_name">Minor depth contours</string>
+    <string name="rendering_attr_hideMinorContours_description">Hide minor depth contours</string>
+    <string name="rendering_attr_hideNoLNAM_name">OSM seamarks (some)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Hide OSM seamarks (some)</string>
+    <string name="rendering_attr_hideSpots_name">Spot soundings</string>
+    <string name="rendering_attr_hideSpots_description">Hide spot soundings</string>
+    <string name="rendering_attr_hideTidalFlats_name">Tidal flats</string>
+    <string name="rendering_attr_hideTidalFlats_description">Hide tidal flats</string>
+    <string name="rendering_attr_depthColorScheme_name">Depth color scheme</string>
+    <string name="rendering_attr_depthColorScheme_description">Depth color scheme</string>
+    <string name="rendering_attr_depthContoursDashed_name">Dashed depth contours</string>
+    <string name="rendering_attr_depthContoursDashed_description">Dashed depth contours</string>
+    <string name="rendering_attr_fairwayStyle_name">Fairway color</string>
+    <string name="rendering_attr_fairwayStyle_description">Color of fairways</string>
+    <string name="rendering_attr_safetyContour_name">Safety depth contour</string>
+    <string name="rendering_attr_safetyContour_description">Safety depth contour</string>
+    <string name="rendering_attr_shellsStyle_name">Shells style</string>
+    <string name="rendering_attr_shellsStyle_description">Style for shells on the seabed</string>
+    <string name="rendering_attr_showLNAMmarker_name">ENC markers</string>
+    <string name="rendering_attr_showLNAMmarker_description">Show ENC markers</string>
+    <string name="rendering_attr_spotDistance_name">Spot sounding distance</string>
+    <string name="rendering_attr_spotDistance_description">Spot sounding distance</string>
+    <string name="rendering_attr_spotSize_name">Spot sounding size</string>
+    <string name="rendering_attr_spotSize_description">Spot sounding size</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Tidal flat style</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Style of tidal flats</string>
+    <string name="rendering_attr_watercolor_name">Water color</string>
+    <string name="rendering_attr_watercolor_description">Color of water</string>
+
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Vehicle Metrics</string>
     <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
@@ -592,6 +646,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="visualized_by">Visualized by</string>
     <string name="wall_color">Wall color</string>
     <string name="track_line">Track line</string>
+  
     <string name="fixed_height">Fixed height</string>
     <string name="downward_gradient">Downward gradient</string>
     <string name="upward_gradient">Upward gradient</string>

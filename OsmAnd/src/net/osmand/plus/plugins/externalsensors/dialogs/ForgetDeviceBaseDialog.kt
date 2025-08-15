@@ -22,13 +22,13 @@ abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		val deviceId = arguments?.getString(DEVICE_ID_KEY)
-		deviceId?.let { initDevice(it) }
+		arguments?.let { initDevice(it) }
 	}
 
 	override fun isUsedOnMap() = true
 
-	abstract fun initDevice(deviceId: String)
+	abstract fun initDevice(arguments: Bundle)
+
 	abstract fun onForgetSensorConfirmed()
 
 	override fun onCreateView(

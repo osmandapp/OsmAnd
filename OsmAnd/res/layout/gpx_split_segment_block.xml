@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical">
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="28dp"
+		android:background="?attr/dashboard_divider"/>
+
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="7dp"
+		android:layout_marginBottom="8dp"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="3dp"
+			android:layout_weight="1"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/first_icon"
+				android:layout_width="16dp"
+				android:layout_height="16dp"
+				android:layout_marginTop="2dp"
+				android:layout_marginEnd="12dp"
+				tools:src="@drawable/ic_action_sensor_heart_rate_outlined" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/first_value"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_split_segments_data"
+					app:typefaceWeight="medium"
+					tools:text="40 bpm" />
+
+				<TextView
+					android:id="@+id/first_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="1dp"
+					android:background="@null"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_split_segments_sub"
+					android:text="@string/average" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="3dp"
+			android:layout_weight="1"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/second_icon"
+				android:layout_width="16dp"
+				android:layout_height="16dp"
+				android:layout_marginTop="2dp"
+				android:layout_marginEnd="12dp"
+				tools:src="@drawable/ic_action_sensor_heart_rate_outlined" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/second_value"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_split_segments_data"
+					app:typefaceWeight="medium"
+					tools:text="140 bpm" />
+
+				<TextView
+					android:id="@+id/second_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="1dp"
+					android:background="@null"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_split_segments_sub"
+					android:text="@string/shared_string_max" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/third_icon"
+				android:layout_width="16dp"
+				android:layout_height="16dp"
+				android:layout_marginTop="2dp"
+				android:layout_marginEnd="12dp"
+				tools:src="@drawable/ic_action_sensor_heart_rate_outlined" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/third_value"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_split_segments_data"
+					app:typefaceWeight="medium"
+					tools:text="140 bpm" />
+
+				<TextView
+					android:id="@+id/third_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="1dp"
+					android:background="@null"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_split_segments_sub"
+					android:text="@string/shared_string_min" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
