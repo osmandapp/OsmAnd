@@ -4089,7 +4089,7 @@
     <string name="shared_string_articles">Artikel</string>
     <string name="included_categories">Enthaltene Kategorien</string>
     <string name="release_4_1">• Erste Unterstützung für Android Auto hinzugefügt \n \n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM-Koordinaten \n \n • GPS-Filter für GPX-Tracks \n \n • Höhen-Widget (Pro) \n \n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt \n \n • Routenplanung: verwendet nach dem Start das ausgewählte Profil \n \n • Mapillary-Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert \n \n • Anzeige zur Verwaltung des gesamten Verlaufs der App hinzugefügt \n \n • Die Kartenausrichtung wird nach dem Neustart der App nicht zurückgesetzt \n \n • Verbesserte Darstellung von SRTM-Höhenmarkierungen \n \n • Arabische Kartenbeschriftungen korrigiert \n \n • Verschiedene Routingprobleme behoben</string>
-    <string name="rendering_attr_natureReserves_name">Naturschutzgebiet</string>
+    <string name="rendering_attr_natureReserves_name">Naturreservate und -schutzgebiete</string>
     <string name="internal_app_storage_description">Interner Speicher, versteckt vor allen Benutzern und anderen Apps, sodass nur OsmAnd auf Ihre Daten zugreifen kann.</string>
     <string name="shared_string_details">Details</string>
     <string name="shared_app_storage_description">Gemeinsamer Speicher ist aufgrund des geänderten Android-Speicherzugriffs nicht mehr verfügbar.</string>
