@@ -8,7 +8,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -20,6 +19,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBaseFragment;
+import net.osmand.plus.views.mapwidgets.dialogs.DeleteWidgetConfirmationController;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -35,7 +35,7 @@ public class WidgetsContextMenu {
 
 	static public void showMenu(@NonNull View view, @NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 	                            @Nullable String customId, @Nullable List<PopUpMenuItem> widgetActions,
-	                            WidgetsPanel widgetsPanel, boolean nightMode) {
+	                            WidgetsPanel widgetsPanel, boolean nightMode, boolean usedOnMap) {
 		boolean verticalWidget = widgetsPanel.isPanelVertical();
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
@@ -85,16 +85,9 @@ public class WidgetsContextMenu {
 
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_delete)
-					.setOnClickListener(item -> {
-						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
-						builder.setTitle(app.getString(R.string.delete_widget));
-						builder.setMessage(R.string.delete_widget_description);
-						builder.setNegativeButton(R.string.shared_string_cancel, null)
-								.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-									widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
-								});
-						builder.show();
-					})
+					.setOnClickListener(item -> DeleteWidgetConfirmationController.showDialog(
+							mapActivity, appMode, widgetInfo, usedOnMap, null)
+					)
 					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_delete_outlined, iconColor))
 					.showTopDivider(true)
 					.create());

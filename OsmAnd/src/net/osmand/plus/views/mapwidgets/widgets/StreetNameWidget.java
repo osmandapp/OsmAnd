@@ -114,7 +114,7 @@ public class StreetNameWidget extends MapWidget {
 
 	private void setupLongClickListener() {
 		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode);
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
 			return true;
 		});
 	}
