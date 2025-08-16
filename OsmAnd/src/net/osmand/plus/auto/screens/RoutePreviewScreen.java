@@ -152,7 +152,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			this.routeRows = routeRows;
 			calculating = app.getRoutingHelper().isRouteBeingCalculated();
 			invalidate();
-		} else if (routingHelper.getRoute().hasMissingMaps() && !Algorithms.isEmpty(routingHelper.getRoute().getMissingMapsCalculationResult().getMissingMaps())) {
+		} else if (routingHelper.getRoute().hasMissingMaps()) {
 			NavigationSession session = getSession();
 			if (session != null) {
 				session.showMissingMapsScreen();

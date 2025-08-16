@@ -3496,4 +3496,14 @@ public class OsmandSettings {
 			}
 		}
 	}
+
+	public void setAllowPrivateAccessAllModes(boolean allow) {
+		List<ApplicationMode> modes = ApplicationMode.values(ctx);
+		for (ApplicationMode mode : modes) {
+			OsmandPreference<Boolean> preference = getAllowPrivatePreference(mode);
+			if (preference.getModeValue(mode) != allow) {
+				preference.setModeValue(mode, allow);
+			}
+		}
+	}
 }

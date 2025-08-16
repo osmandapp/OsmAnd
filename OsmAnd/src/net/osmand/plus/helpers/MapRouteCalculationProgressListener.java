@@ -71,13 +71,7 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 					AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
 					dlg.setMessage(R.string.private_access_routing_req);
 					dlg.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-						List<ApplicationMode> modes = ApplicationMode.values(app);
-						for (ApplicationMode mode : modes) {
-							OsmandPreference<Boolean> preference = settings.getAllowPrivatePreference(mode);
-							if (!preference.getModeValue(mode)) {
-								preference.setModeValue(mode, true);
-							}
-						}
+						settings.setAllowPrivateAccessAllModes(true);
 						routingHelper.onSettingsChanged(null, true);
 					});
 					dlg.setNegativeButton(R.string.shared_string_no, null);

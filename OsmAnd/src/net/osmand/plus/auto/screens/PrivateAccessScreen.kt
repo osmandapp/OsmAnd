@@ -22,15 +22,7 @@ class PrivateAccessScreen(carContext: CarContext) : BaseAndroidAutoScreen(carCon
 			.setTitle(app.getString(R.string.shared_string_yes))
 			.setOnClickListener {
 				val routingHelper = app.routingHelper
-				val settings = app.settings
-				val modes = ApplicationMode.values(app)
-				for (mode in modes) {
-					val preference: OsmandPreference<Boolean> =
-						settings.getAllowPrivatePreference(mode)
-					if (!preference.getModeValue(mode)) {
-						preference.setModeValue(mode, true)
-					}
-				}
+				app.settings.setAllowPrivateAccessAllModes(true)
 				routingHelper.onSettingsChanged(null, true)
 				setResult(true)
 				finish()

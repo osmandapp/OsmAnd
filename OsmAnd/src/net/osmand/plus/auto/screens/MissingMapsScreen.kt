@@ -6,7 +6,7 @@ import androidx.car.app.model.Action
 import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.Template
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.receivers.AndroidAutoActionReceiver
 import net.osmand.plus.routepreparationmenu.RequiredMapsFragment
 import net.osmand.plus.settings.backend.OsmandSettings
 
@@ -32,9 +32,9 @@ class MissingMapsScreen(carContext: CarContext) : BaseAndroidAutoScreen(carConte
 				Action.Builder()
 					.setTitle(app.getString(R.string.view_on_phone))
 					.setOnClickListener {
-						val intent = Intent(MapActivity.INTENT_SHOW_FRAGMENT)
+						val intent = Intent(AndroidAutoActionReceiver.INTENT_SHOW_FRAGMENT)
 						intent.putExtra(
-							MapActivity.INTENT_KEY_SHOW_FRAGMENT_NAME,
+							AndroidAutoActionReceiver.INTENT_KEY_SHOW_FRAGMENT_NAME,
 							RequiredMapsFragment::class.java.simpleName)
 						app.sendBroadcast(intent)
 						finish()

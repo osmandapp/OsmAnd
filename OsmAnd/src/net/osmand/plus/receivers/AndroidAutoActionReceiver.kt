@@ -7,13 +7,18 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.routepreparationmenu.RequiredMapsFragment
 
 class AndroidAutoActionReceiver : BroadcastReceiver() {
+	companion object {
+		const val INTENT_SHOW_FRAGMENT: String = "net.osmand.CAR_ACTION_SHOW_FRAGMENT"
+		const val INTENT_KEY_SHOW_FRAGMENT_NAME: String = "INTENT_KEY_SHOW_FRAGMENT_NAME"
+	}
+
 	var activity: MapActivity? = null
 	override fun onReceive(context: Context, intent: Intent) {
 		activity?.apply {
-			if (MapActivity.INTENT_SHOW_FRAGMENT == intent.action) {
-				if (intent.hasExtra(MapActivity.INTENT_KEY_SHOW_FRAGMENT_NAME)) {
+			if (INTENT_SHOW_FRAGMENT == intent.action) {
+				if (intent.hasExtra(INTENT_KEY_SHOW_FRAGMENT_NAME)) {
 					val fragmentName =
-						intent.getStringExtra(MapActivity.INTENT_KEY_SHOW_FRAGMENT_NAME)
+						intent.getStringExtra(INTENT_KEY_SHOW_FRAGMENT_NAME)
 					if (fragmentName != null) {
 						if (fragmentName == RequiredMapsFragment::class.java.simpleName) {
 							RequiredMapsFragment.showInstance(supportFragmentManager)

@@ -147,8 +147,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OnDrawMapListener, OsmAndAppCustomizationListener, LockUIAdapter,
 		OnPreferenceStartFragmentCallback {
 
-	public static final String INTENT_SHOW_FRAGMENT = "net.osmand.CAR_ACTION_SHOW_FRAGMENT";
-	public static final String INTENT_KEY_SHOW_FRAGMENT_NAME = "INTENT_KEY_SHOW_FRAGMENT_NAME";
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
 
@@ -561,7 +559,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onResume() {
 		super.onResume();
 		carActionReceiver.setActivity(this);
-		AndroidUtils.registerBroadCastReceiver(this, INTENT_SHOW_FRAGMENT, carActionReceiver, true);
+		AndroidUtils.registerBroadCastReceiver(this, AndroidAutoActionReceiver.INTENT_KEY_SHOW_FRAGMENT_NAME, carActionReceiver, true);
 		MapActivity mapViewMapActivity = getMapView().getMapActivity();
 		if (activityRestartNeeded || !getMapLayers().hasMapActivity()
 				|| (mapViewMapActivity != null && mapViewMapActivity != this)) {
