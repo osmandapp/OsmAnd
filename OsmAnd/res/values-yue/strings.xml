@@ -114,7 +114,7 @@
     <string name="ais_object_lost_timeouts">AIS 物件的顯示時限設定</string>
     <string name="ais_object_lost_timeouts_description">設定逾時值，以便在特定時間內未收到訊號時識別消失的 AIS 物件。</string>
     <string name="ais_object_lost_timeout">物件訊號消失時的顯示時限</string>
-    <string name="ais_object_lost_timeout_description">設定 AIS 物件訊號消失後顯示時限：移除指定時間內未收到訊號的 AIS 物件</string>
+    <string name="ais_object_lost_timeout_description">設定 AIS 物件訊號消失後顯示時限：移除指定時間內未收到訊號的 AIS 物件。</string>
     <string name="ais_ship_lost_timeout">船隻訊號消失的顯示時限。</string>
     <string name="ais_ship_lost_timeout_description">設定船隻訊號消失後的顯示時限：劃掉指定時間內未收到訊號的船隻。</string>
     <string name="ais_cpa_settings">與 CPA 相關的設定</string>
@@ -144,7 +144,7 @@
     <string name="default_buttons_corners_original_description">每個按鈕都會維持其轉角半徑。</string>
     <string name="default_buttons_opacity_original_description">每個按鈕都會維持其背景透明度。</string>
     <string name="selected_delayed_profile">選定的設定檔「%s」</string>
-    <string name="shared_string_interpolation">內插</string>
+    <string name="shared_string_interpolation">內插值</string>
     <string name="location_interpolation_percent">位置內插百分比</string>
     <string name="location_interpolation_percent_desc">設定路線導航時位置內插的百分比。此參數可減少動畫時您在地圖上位置的延遲。</string>
     <string name="shared_string_engine">引擎</string>
@@ -153,10 +153,10 @@
     <string name="av_audio_sample_rate">音訊採樣速率</string>
     <string name="av_audio_sample_rate_descr">選擇音訊採樣速率。</string>
     <string name="connect_new_scanner">連線新的掃描器</string>
-    <string name="release_5_0">• 使用新的探索模式發現排名最高的 POI\n\n • 所有 OSM 路線，現在都可搜尋！遠足、單車、山地雙輪車等等\n\n • 新導航小工具結合轉彎箭咀與導航指示\n\n • 目前路線資訊小工具：預計抵達時間、抵達時間與距離\n\n • 在地圖上選擇滑雪場與山地雙輪車賽道，以取得詳細資訊\n\n • 可選擇左右面板的小工具大小\n\n • 新增有地理坐標的格網座標\n\n • 新增自訂收藏群組預設外觀的功能\n\n • Android Auto：檢視到下一個航點的的預計抵達時間與距離；城市名稱現在會顯示在搜尋結果中\n\n • 現在可透過地圖與搜尋發現著名的山峰\n\n • 以英呎為單位的山峰高度\n\n • 新增：地圖上的峭壁與攀登區域\n\n • 改進了在美國的地址搜尋\n\n • 新增希伯來語語音合成導航功能</string>
+    <string name="release_5_0">• 採用全新探索模式，發現熱門興趣點\n\n • OpenStreetMap 路線全面開放搜尋！支援遠足、單車、山地越野車等多種路線\n\n • 新導航小工具：整合轉彎箭頭與導航指示\n\n • 路線資訊小工具新增功能：預計抵達時間、抵達時間與行駛距離\n\n • 地圖上直接選取滑雪場與山地車道，即可查看詳細資訊\n\n • 可自訂左右面板小工具大小\n\n • 新增地理座標網格\n\n • 新增自訂常用群組預設外觀功能\n\n • Android Auto 新功能：顯示下一個航點的預計抵達時間與距離；搜尋結果中增加城市名稱顯示\n • 地圖與搜尋功能現已支援知名山峰探索\n\n • 以英呎為單位的山峰高度\n\n • 新增：地圖上的懸崖與攀登區域\n\n • 改進了在美國的地址搜尋準確度\n\n • 新增希伯來語語音合成導航功能</string>
     <string name="preview_next_turn">預覽下個轉彎</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">使用 OBD-II 通訊協定追蹤重要的車輛資料。監控車速、引擎轉速、油耗等關鍵指標。</string>
-    <string name="vehicle_metrics_obd_ii">車輛指標 (OBD-II)</string>
+    <string name="vehicle_metrics_obd_ii">車載診斷系統指標 (OBD-II)</string>
     <string name="shared_string_hour">小時</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s 每 %2$s</string>
     <string name="shared_string_volume">容量</string>
@@ -244,7 +244,7 @@
     <string name="connect_obd_instructions_step2">開啟您的車輛引擎</string>
     <string name="connect_obd_instructions_step3">在您的裝置上啟用藍牙</string>
     <string name="connect_obd_instructions_step4">點擊「%1$s」並從列表中選擇您的感應器。</string>
-    <string name="learn_more_about_obd_sensors">進一步了解車載診斷（OBD）感應器</string>
+    <string name="learn_more_about_obd_sensors">進一步了解車載診斷（OBD）感應器。</string>
     <string name="screen_is_locked_by_external_button">已鎖定觸控螢幕。要解鎖，請按 %1$s 按鈕，或是輕觸螢幕上的按鈕。</string>
     <string name="screen_is_unlocked">觸控螢幕已經解鎖。</string>
     <string name="screen_is_locked_by_action_button">觸控螢幕已經鎖定，點一下底下來解鎖。</string>
@@ -352,7 +352,7 @@
     <string name="quick_action_drawer_title">側邊選單</string>
     <string name="quick_action_search_view_desc">開啟或關閉搜尋視圖的開關。</string>
     <string name="quick_action_search_view_title">搜尋視圖</string>
-    <string name="quick_action_navigation_view_desc">開啟或關閉導航視圖的開關</string>
+    <string name="quick_action_navigation_view_desc">開啟或關閉導航視圖的開關。</string>
     <string name="quick_action_navigation_view_title">導航視圖</string>
     <string name="quick_action_switch_compass_desc">切換地圖方向的開關。</string>
     <string name="app_mode_suv">SUV</string>
@@ -1753,7 +1753,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_description">按網路關係分配著色。</string>
     <string name="rendering_value_walkingRoutesOSMC_description">根據各自的當地顏色（如果在 OpenStreetMap 上存在）和遠足盾牌符號為路線著色。</string>
     <string name="shared_string_relation">關係</string>
-    <string name="routes_color_by_type">使用……為路線著色</string>
+    <string name="routes_color_by_type">為路線著色…</string>
     <string name="explore_osmnad_plans_to_find_suitable">瀏覽 OsmAnd 方案，揀選最適合你的服務</string>
     <string name="purchases_feature_desc_pro_widgets">解鎖 OsmAnd Pro 專業功能：路線著色等進階工具</string>
     <string name="option_available_only_in_osmand_pro">此功能僅限 OsmAnd Pro 訂戶使用</string>
@@ -2178,7 +2178,7 @@
     <string name="gpx_monitoring_start">恢復旅程錄製</string>
     <string name="gpx_monitoring_stop">暫停旅程錄製</string>
     <string name="save_global_track_interval_descr">指定一般軌跡錄製的記錄間隔（透過地圖上的旅程錄製小工具開啟）。</string>
-    <string name="disable_recording_once_app_killed_descrp">當應用程式被關閉（透過最近的應用程式）時，將暫停軌跡錄製。（OsmAnd 背景指示會從 Android 通知列中消失。）</string>
+    <string name="disable_recording_once_app_killed_descrp">當應用程式被關閉（透過最近使用的應用程式）時，軌跡錄製將會暫停。（OsmAnd 的背景執行指示將從 Android 通知列消失。）</string>
     <string name="monitoring_control_start">REC</string>
     <string name="number_of_gpx_files_selected_pattern">已選定 %s 軌跡檔案</string>
     <string name="shared_string_file_name">檔案名稱</string>
@@ -2467,7 +2467,7 @@
     <string name="replace_all">取代全部</string>
     <string name="keep_both">保留雙方</string>
     <string name="keep_both_desc">匯入的項目將會加入前綴</string>
-    <string name="import_duplicates_description">OsmAnd 已有與匯入的名稱相同的元素。 \n \n選擇選項：</string>
+    <string name="import_duplicates_description">OsmAnd 已有與匯入的名稱相同的元素。 \n \n選擇選項。</string>
     <string name="import_duplicates_title">一些項目已存在</string>
     <string name="select_data_to_import">選擇要匯入的資料。</string>
     <string name="please_provide_profile_name_message">請為設定檔命名</string>
@@ -3104,7 +3104,7 @@
     <string name="use_two_digits_longitude">使用兩位數的經度</string>
     <string name="shared_string_travel_guides">旅遊指南</string>
     <string name="waypoints_removed_from_map_markers">已從地圖標記移除航點</string>
-    <string name="nothing_found_in_radius">指定範圍內未找到任何結果</string>
+    <string name="nothing_found_in_radius">指定範圍內未找到任何結果：</string>
     <string name="select_waypoints_category_description">新增所有軌跡的航點，或選擇個別的類別。</string>
     <string name="shared_string_total">總計</string>
     <string name="clear_all_intermediates">移除所有中途目的地</string>
@@ -3173,7 +3173,7 @@
     <string name="marker_activated">標記 %s 已啟動。</string>
     <string name="one_tap_active_descr">輕觸在地圖上的旗標，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="one_tap_active">「點一下」啟動</string>
-    <string name="empty_state_av_notes">新增筆記</string>
+    <string name="empty_state_av_notes">新增筆記！</string>
     <string name="empty_state_av_notes_desc">您可以透過小工具或內容選單，在地圖上的任何位置加入音訊、影片或照片筆記。</string>
     <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
     <string name="by_date">按照日期</string>
@@ -4665,7 +4665,7 @@
     <string name="route_updated_loc_found">等待位置以規劃路線</string>
     <string name="osmand_parking_hours">小時</string>
     <string name="osmand_parking_minutes">分鐘</string>
-    <string name="osmand_parking_position_description_add_time">停泊時間：</string>
+    <string name="osmand_parking_position_description_add_time">停泊時間</string>
     <string name="select_animate_speedup">路線模擬速度：</string>
     <string name="global_app_allocated_memory_descr">已配置記憶體 %1$s MB (Android 限制%2$s MB, Dalvik %3$s MB)。</string>
     <string name="global_app_allocated_memory">已配置記憶體</string>
@@ -5578,7 +5578,7 @@
     <string name="routing_attr_difficulty_preference_name">路線難度優先</string>
     <string name="routing_attr_difficulty_preference_description">優先特定難度的路線，但若路線較短，亦可選擇難度更高或更低的路線</string>
     <string name="routing_attr_freeride_policy_name">自由滑雪</string>
-    <string name="routing_attr_freeride_policy_description">「自由滑雪」與「非正式路線」指未經規劃的路徑與通道。這些路線通常未經整理和維護，且不會在夜間檢查。使用風險自負</string>
+    <string name="routing_attr_freeride_policy_description">「自由滑雪」和「非正式路線」為非官方路線與通道。通常未經整理、未維護，且晚間未經檢查。請自行評估風險後進入。</string>
     <string name="voice_prompts_timetable">語音提示時間</string>
     <string name="rendering_attr_hideNoLNAM_name">OSM 航路標識（部分）</string>
     <string name="rendering_attr_hideNoLNAM_description">隱藏 OSM 航路標識（部分）</string>
@@ -5632,4 +5632,8 @@
     <string name="rendering_attr_tidalFlatStyle_description">設定潮間帶樣式</string>
     <string name="rendering_attr_watercolor_name">水色</string>
     <string name="rendering_attr_watercolor_description">設定水色</string>
+    <plurals name="tracks">
+        <item quantity="other">%1$d（%2$d 個軌跡）</item>
+    </plurals>
+    <string name="navigate_point_olc_info_invalid">無效的 OLC\n</string>
 </resources>
