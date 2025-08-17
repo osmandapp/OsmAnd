@@ -6122,8 +6122,8 @@
     <string name="rendering_attr_depthContoursDashed_name">Gestreepte dieptecontouren</string>
     <string name="rendering_attr_depthColorScheme_name">Diepte kleurenschema</string>
     <string name="rendering_attr_depthColorScheme_description">Diepte kleurenschema</string>
-    <string name="rendering_attr_hideTidalFlats_description">Verberg waddenplaten</string>
-    <string name="rendering_attr_hideTidalFlats_name">Wadden</string>
+    <string name="rendering_attr_hideTidalFlats_description">Verberg getijdenvlakten</string>
+    <string name="rendering_attr_hideTidalFlats_name">Getijdenvlakten</string>
     <string name="rendering_attr_hideNoLNAM_description">Verberg OSM-betonning (sommige)</string>
     <string name="rendering_attr_hideNoLNAM_name">OSM-betonning (sommige)</string>
     <string name="rendering_attr_hideLightSectorSources_name">Sectorenlichtbronnen</string>
@@ -6135,4 +6135,18 @@
     <string name="rendering_attr_hideFerries_name">Veerbootverbindingen</string>
     <string name="rendering_attr_hideFerries_description">Verberg veerbootverbindingen</string>
     <string name="disable_vertex_hillshade_3d">Deactiveer knooppunt heuvelschaduw in 3D</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Getijdenvlakte-stijl</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Stijl van de getijdenvlakten</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="generate_hillshade_from_3d_maps">Genereer heuvelschaduw-rasterkaarten van 3D-kaarten</string>
+    <string name="average_elevation">Gemiddelde hoogte</string>
+    <string name="rendering_attr_fairwayStyle_name">Fairwaykleur</string>
+    <string name="rendering_attr_shellsStyle_name">Schelpenstijl</string>
+    <string name="rendering_attr_shellsStyle_description">Stijl voor schelpen op de zeebodem</string>
+    <string name="map_orientations_choose_description">Laat leeg om te wisselen tussen alle beschikbare modi of voeg alleen je gewenste modi toe.</string>
+    <string name="map_orientations">Kaartoriëntaties</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Reactie</string>
+    <string name="marine_renderer">Marine</string>
 </resources>
