@@ -6165,4 +6165,21 @@
     <string name="threads_allocated_for_rendering">Linhas alocadas para renderização</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Pontos de rota GPX (%1$d) copiados para os favoritos.</string>
     <string name="msg_favorites_skipped_as_existing">Os pontos favoritos (%1$d) foram ignorados como já existentes.</string>
+    <string name="average_elevation">Elevação média</string>
+    <string name="ascent">Subida</string>
+    <string name="descent">Descida</string>
+    <string name="map_orientations_choose_description">Deixe em branco para alternar entre todos os modos disponíveis ou adicione apenas os seus preferidos.</string>
+    <string name="map_orientations">Orientações do mapa</string>
+    <string name="altitude_metrics_description">Define a unidade de exibição para altitude em widgets e estatísticas.</string>
+    <string name="write_location_provider_description">Salvar o provedor de localização em cada ponto da trilha durante a gravação</string>
+    <string name="write_location_provider">Provedor de localização de gravação</string>
+    <string name="map_orientation_portrait_inverted">Retrato (invertido)</string>
+    <string name="map_orientation_landscape_inverted">Paisagem (invertida)</string>
+    <string name="reverse_mode_calculate_route">Calcular rota</string>
+    <string name="reverse_mode_calculate_route_desc">Calcule uma nova rota otimizada até o ponto de partida.</string>
+    <string name="reverse_mode_original_track">Trilha original</string>
+    <string name="reverse_mode">Modo reverso</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="n_a">N/D</string>
 </resources>
