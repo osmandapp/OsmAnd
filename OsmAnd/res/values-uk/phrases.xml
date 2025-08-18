@@ -720,7 +720,7 @@
     <string name="poi_religion_zoroastrian">Зороастризм</string>
     <string name="poi_denomination_catholic">Католицизм</string>
     <string name="poi_denomination_baptist">Баптизм</string>
-    <string name="poi_denomination_roman_catholic">Римо -католик</string>
+    <string name="poi_denomination_roman_catholic">Римо-католицизм</string>
     <string name="poi_denomination_orthodox">Православ’я</string>
     <string name="poi_denomination_lutheran">Лютеранство</string>
     <string name="poi_denomination_sunni">Сунізм</string>
@@ -735,7 +735,7 @@
     <string name="poi_denomination_jehovahs_witness">Свідок Єгови</string>
     <string name="poi_denomination_greek_orthodox">Грецький православний</string>
     <string name="poi_denomination_reformed">Кальвінізм</string>
-    <string name="poi_denomination_seventh_day_adventist">Адвентист сьомого дня</string>
+    <string name="poi_denomination_seventh_day_adventist">Адвентисти сьомого дня</string>
     <string name="poi_denomination_new_apostolic">Новий апостольський</string>
     <string name="poi_denomination_church_of_england">Церква Англії</string>
     <string name="poi_denomination_episcopal">Єпископальна</string>
@@ -5095,7 +5095,7 @@
     <string name="poi_denomination_ismaili">Ісмаїлі</string>
     <string name="poi_denomination_sufi">Суфій</string>
     <string name="poi_denomination_rinzai">Риндзай</string>
-    <string name="poi_denomination_old_catholic">Старий католик</string>
+    <string name="poi_denomination_old_catholic">Старокатолицтво</string>
     <string name="poi_denomination_shaivism">Шиваїзм</string>
     <string name="poi_denomination_pkn">Протестантська церква в Нідерландах</string>
     <string name="poi_denomination_zen">Дзен</string>
@@ -5109,7 +5109,7 @@
     <string name="poi_denomination_theravada">Тхеравада</string>
     <string name="poi_denomination_tiantai">Тяньтай</string>
     <string name="poi_denomination_scottish_episcopal">Шотландська єпископальна церква</string>
-    <string name="poi_denomination_polish_catholic">Польський католик</string>
+    <string name="poi_denomination_polish_catholic">Польський католицизм</string>
     <string name="poi_denomination_moravian">Моравський</string>
     <string name="poi_denomination_disciples_of_christ">Учні Христа</string>
     <string name="poi_denomination_charismatic">Харизматичний</string>
