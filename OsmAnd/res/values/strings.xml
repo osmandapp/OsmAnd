@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="private_access_routing_req_short">Your destination is in a private area. Allow using private roads?</string>
+    <string name="view_on_phone">View on Phone</string>
     <string name="average_elevation">Average elevation</string>
     <string name="ascent">Ascent</string>
     <string name="descent">Descent</string>
@@ -646,7 +649,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="visualized_by">Visualized by</string>
     <string name="wall_color">Wall color</string>
     <string name="track_line">Track line</string>
-  
+
     <string name="fixed_height">Fixed height</string>
     <string name="downward_gradient">Downward gradient</string>
     <string name="upward_gradient">Upward gradient</string>
