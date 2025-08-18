@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="copy_as_new_folder">Copy as new folder</string>
+    <string name="add_to_a_folder">Add to a folder</string>
+    <string name="add_to_favorites">Add to favorites</string>
     <string name="average_elevation">Average elevation</string>
     <string name="ascent">Ascent</string>
     <string name="descent">Descent</string>

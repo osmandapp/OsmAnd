@@ -50,40 +50,13 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 	}
 
 	private void copyToFavorites() {
-		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
-
-		List<FavouritePoint> addedPoints = new ArrayList<>();
-		List<FavouritePoint> duplicatePoints = new ArrayList<>();
-		AddFavoriteOptions options = new AddFavoriteOptions().setLookupAddress(true);
-
-		for (GpxDisplayItem item : group.getDisplayItems()) {
-			if (item.locationStart != null) {
-				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
-				if (!Algorithms.isEmpty(item.description)) {
-					point.setDescription(item.description);
-				}
-				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
-					plugin.updateParkingPoint(point);
-				}
-				switch (favouritesHelper.addFavourite(point, options)) {
-					case ADDED -> addedPoints.add(point);
-					case DUPLICATE -> duplicatePoints.add(point);
-				}
-			}
-		}
-		favouritesHelper.saveCurrentPointsIntoFile(true);
-
+		OnGroupNameChangeListener onGroupNameChangeListener = null;
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnGroupNameChangeListener listener) {
-			listener.onTrackGroupChanged();
+			onGroupNameChangeListener = listener;
 		}
-		if (!addedPoints.isEmpty()) {
-			app.showShortToastMessage(getString(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size()));
-		}
-		if (!duplicatePoints.isEmpty()) {
-			app.showShortToastMessage(getString(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size()));
-		}
+		favouritesHelper.copyToFavorites(group, groupName, onGroupNameChangeListener);
 		dismiss();
 	}
 
