@@ -27,7 +27,9 @@ public class DeleteWidgetConfirmationDialog extends BaseAlertDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		controller = DeleteWidgetConfirmationController.getExistedInstance(app);
-		if (controller == null) dismiss();
+		if (controller == null) {
+			dismiss();
+		}
 	}
 
 	@NonNull
@@ -41,14 +43,20 @@ public class DeleteWidgetConfirmationDialog extends BaseAlertDialogFragment {
 		builder.setTitle(getString(R.string.delete_widget));
 		builder.setMessage(R.string.delete_widget_description);
 		builder.setNegativeButton(R.string.shared_string_cancel, null)
-				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> controller.onDeleteActionConfirmed());
+				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
+					if (controller != null) {
+						controller.onDeleteActionConfirmed();
+					}
+				});
 		return builder.create();
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.finishProcessIfNeeded(getActivity());
+		if (controller != null) {
+			controller.finishProcessIfNeeded(getActivity());
+		}
 	}
 
 	@Override
