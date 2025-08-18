@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.development;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Handler;
@@ -23,7 +22,6 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.utils.PicassoUtils;
-import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
@@ -399,7 +397,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				float cpuBasic = renderer.getBasicThreadsCPULoad();
 				this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
 
-				Intent batteryIntent = AndroidUtils.registerBroadCastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
+				Intent batteryIntent = AndroidUtils.registerBroadcastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
 				if (batteryIntent != null) {
 					int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 					int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);

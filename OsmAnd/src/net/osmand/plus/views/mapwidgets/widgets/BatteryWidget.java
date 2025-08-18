@@ -33,7 +33,7 @@ public class BatteryWidget extends SimpleWidget {
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - cachedTime > UPDATE_INTERVAL_MILLIS) {
 			cachedTime = time;
-			Intent batteryIntent = AndroidUtils.registerBroadCastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
+			Intent batteryIntent = AndroidUtils.registerBroadcastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
 			if (batteryIntent != null) {
 				int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 				int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);

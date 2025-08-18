@@ -6,6 +6,8 @@ import static android.Manifest.permission.BLUETOOTH;
 import static android.Manifest.permission.BLUETOOTH_ADMIN;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
+import static android.content.Context.RECEIVER_EXPORTED;
+import static android.content.Context.RECEIVER_NOT_EXPORTED;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -1506,15 +1508,14 @@ public class AndroidUtils {
 		return ((OsmandApplication) context.getApplicationContext());
 	}
 
-	public static Intent registerBroadCastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver) {
-		return registerBroadCastReceiver(context, action, receiver, false);
+	public static Intent registerBroadcastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver) {
+		return registerBroadcastReceiver(context, action, receiver, false);
 	}
 
-	public static Intent registerBroadCastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver, boolean export) {
+	public static Intent registerBroadcastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver, boolean export) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			return context.registerReceiver(receiver, new IntentFilter(action), export ? Context.RECEIVER_EXPORTED : Context.RECEIVER_NOT_EXPORTED);
-		} else {
-			return context.registerReceiver(receiver, new IntentFilter(action));
+			return context.registerReceiver(receiver, new IntentFilter(action), export ? RECEIVER_EXPORTED : RECEIVER_NOT_EXPORTED);
 		}
+		return context.registerReceiver(receiver, new IntentFilter(action));
 	}
 }

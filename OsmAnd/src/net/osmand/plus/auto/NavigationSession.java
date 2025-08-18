@@ -127,8 +127,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private NavigationManager navigationManager;
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
-	private boolean privateAccessScreenShown;
-	private boolean pendingShowPreviewScreen;
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
@@ -516,7 +514,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	private void showRoutePreview() {
 		if (isPrivateAccessScreenShown()) {
-			pendingShowPreviewScreen = true;
 			return;
 		}
 		OsmandApplication app = getApp();
@@ -792,22 +789,25 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onRequestPrivateAccessRouting() {
 		if (routingHelper.isRouteCalculated()) {
-			ApplicationMode routingProfile = routingHelper.getAppMode();
 			OsmandSettings settings = getApp().getSettings();
-			if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
+			ApplicationMode appMode = routingHelper.getAppMode();
+			if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(appMode)) {
 				settings.setPrivateAccessRoutingAsked();
 			}
-			OsmandPreference<Boolean> allowPrivate = settings.getAllowPrivatePreference(routingProfile);
-			if (!allowPrivate.getModeValue(routingProfile)) {
+			OsmandPreference<Boolean> allowPrivate = settings.getAllowPrivatePreference(appMode);
+			if (!allowPrivate.getModeValue(appMode)) {
 				getCarContext().getCarService(ScreenManager.class).pushForResult(new PrivateAccessScreen(getCarContext()), result -> {
-					if (result != null && !((boolean) result)) {
-						getApp().stopNavigation();
-					} else {
-						if (isRoutePreviewPresent()) {
-							getScreenManager().popTo(RoutePreviewScreen.class.getSimpleName());
+					if (result instanceof Boolean allowed) {
+						if (allowed) {
+							settings.setAllowPrivateAccessAllModes(true);
+							routingHelper.onSettingsChanged(null, true);
 						} else {
-							showRoutePreview();
+							getApp().stopNavigation();
 						}
+					} else if (isRoutePreviewPresent()) {
+						getScreenManager().popTo(RoutePreviewScreen.class.getSimpleName());
+					} else {
+						showRoutePreview();
 					}
 				});
 			}

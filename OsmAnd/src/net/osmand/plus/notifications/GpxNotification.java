@@ -62,7 +62,7 @@ public class GpxNotification extends OsmandNotification {
 				}
 			}
 		};
-		AndroidUtils.registerBroadCastReceiver(app, OSMAND_SAVE_GPX_SERVICE_ACTION, saveTrackReceiver, true);
+		AndroidUtils.registerBroadcastReceiver(app, OSMAND_SAVE_GPX_SERVICE_ACTION, saveTrackReceiver, true);
 
 		BroadcastReceiver stopGpxRecReceiver = new BroadcastReceiver() {
 			@Override
@@ -74,7 +74,7 @@ public class GpxNotification extends OsmandNotification {
 				}
 			}
 		};
-		AndroidUtils.registerBroadCastReceiver(app, OSMAND_STOP_GPX_SERVICE_ACTION, stopGpxRecReceiver, true);
+		AndroidUtils.registerBroadcastReceiver(app, OSMAND_STOP_GPX_SERVICE_ACTION, stopGpxRecReceiver, true);
 	}
 
 	@Override

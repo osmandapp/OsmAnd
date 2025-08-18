@@ -21,9 +21,6 @@ class PrivateAccessScreen(carContext: CarContext) : BaseAndroidAutoScreen(carCon
 		val yesAction = Action.Builder()
 			.setTitle(app.getString(R.string.shared_string_yes))
 			.setOnClickListener {
-				val routingHelper = app.routingHelper
-				app.settings.setAllowPrivateAccessAllModes(true)
-				routingHelper.onSettingsChanged(null, true)
 				setResult(true)
 				finish()
 			}
@@ -48,7 +45,7 @@ class PrivateAccessScreen(carContext: CarContext) : BaseAndroidAutoScreen(carCon
 				.addAction(cancelAction)
 				.build()
 		)
-			.setTitle(app.getString(R.string.private_access))
+			.setTitle(app.getString(R.string.poi_access_private))
 			.setHeaderAction(Action.BACK)
 			.build()
 

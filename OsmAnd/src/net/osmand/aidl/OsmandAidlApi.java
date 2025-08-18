@@ -21,12 +21,10 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
@@ -441,7 +439,7 @@ public class OsmandAidlApi {
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
 		try {
 			receivers.put(filter, rec);
-			AndroidUtils.registerBroadCastReceiver(ma, filter, rec, true);
+			AndroidUtils.registerBroadcastReceiver(ma, filter, rec, true);
 		} catch (IllegalStateException e) {
 			LOG.error(e);
 		}

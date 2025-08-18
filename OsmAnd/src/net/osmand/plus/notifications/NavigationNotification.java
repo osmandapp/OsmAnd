@@ -11,12 +11,10 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -73,7 +71,7 @@ public class NavigationNotification extends OsmandNotification {
 				app.getRoutingHelper().pauseNavigation();
 			}
 		};
-		AndroidUtils.registerBroadCastReceiver(app, OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION, pauseReceiver, true);
+		AndroidUtils.registerBroadcastReceiver(app, OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION, pauseReceiver, true);
 
 		BroadcastReceiver resumeReceiver = new BroadcastReceiver() {
 			@Override
@@ -81,7 +79,7 @@ public class NavigationNotification extends OsmandNotification {
 				app.getRoutingHelper().resumeNavigation();
 			}
 		};
-		AndroidUtils.registerBroadCastReceiver(app, OSMAND_RESUME_NAVIGATION_SERVICE_ACTION, resumeReceiver, true);
+		AndroidUtils.registerBroadcastReceiver(app, OSMAND_RESUME_NAVIGATION_SERVICE_ACTION, resumeReceiver, true);
 
 		BroadcastReceiver stopReceiver = new BroadcastReceiver() {
 			@Override
@@ -89,7 +87,7 @@ public class NavigationNotification extends OsmandNotification {
 				app.stopNavigation();
 			}
 		};
-		AndroidUtils.registerBroadCastReceiver(app, OSMAND_STOP_NAVIGATION_SERVICE_ACTION, stopReceiver, true);
+		AndroidUtils.registerBroadcastReceiver(app, OSMAND_STOP_NAVIGATION_SERVICE_ACTION, stopReceiver, true);
 	}
 
 	@Override
