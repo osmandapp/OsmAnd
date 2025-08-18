@@ -13,6 +13,8 @@ class SplitSegment {
 	var metricEnd: Double = 0.0
 	var secondaryMetricEnd: Double = 0.0
 	var segmentSlopeType: TrkSegment.SegmentSlopeType? = null
+	var slopeCount: Int? = null
+	var slopeValue: Double? = null
 
 	constructor(segment: TrkSegment) {
 		startPointInd = 0
