@@ -13,7 +13,7 @@
     <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="application_dir_change_warning3">Mover arquivos de dados OsmAnd para o novo destino\?</string>
-    <string name="specified_directiory_not_writeable">Mapas não podem ser criados no diretório especificado</string>
+    <string name="specified_directiory_not_writeable">Mapas não puderam ser criados no diretório especificado</string>
     <string name="copying_osmand_file_failed">Falha ao mover os arquivos</string>
     <string name="storage_directory_external">Armazenamento externo</string>
     <string name="storage_directory_multiuser">Armazenamento multiusuário</string>
@@ -6010,7 +6010,7 @@
     <string name="show_minor_turns_descr">As faixas serão exibidas em todos os cruzamentos, independentemente das instruções de voz</string>
     <string name="labels_position">Posição dos rótulos</string>
     <string name="routing_attr_allow_ferries_name">Permitir balsas</string>
-    <string name="routing_attr_allow_ferries_description">Permitir roteamento por rotas de balsa</string>
+    <string name="routing_attr_allow_ferries_description">Permitir rotas com balsas</string>
     <string name="route_part_of">Parte de</string>
     <string name="display_priority">Prioridade de exibição</string>
     <string name="row_height">Altura da linha</string>
@@ -6139,7 +6139,7 @@
     <string name="set_start_point">Definir ponto de início</string>
     <string name="battery_level">Nível da bateria</string>
     <string name="set_parking_position">Definir posição de estacionamento</string>
-    <string name="three_years_subscription">Três anos de assinatura</string>
+    <string name="three_years_subscription">Assinatura de três anos</string>
     <string name="deleting">Apagando…</string>
     <string name="osm_live_payment_3_years_title">A cada três anos</string>
     <string name="battery">bateria</string>
@@ -6149,7 +6149,7 @@
     <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
     <string name="show_symbols_bboxes">Mostrar símbolos bboxes</string>
     <string name="release_5_2">• Trabalho em andamento...</string>
-    <string name="next_turn_information">Informações sobre a próxima volta</string>
+    <string name="next_turn_information">Informações sobre a próxima curva</string>
     <string name="next_turn_information_desc">Mostra a direção da próxima curva e o nome da rua.</string>
     <string name="description_purchases_fastspring">Você pode gerenciar suas compras através do portal de gerenciamento de contas FastSpring.</string>
     <string name="description_subscription_fastspring">Você pode gerenciar ou cancelar sua assinatura através do portal de gerenciamento de contas FastSpring.</string>
@@ -6182,4 +6182,6 @@
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="n_a">N/D</string>
+    <string name="reverse_mode_original_track_desc">Siga o caminho exato de volta ao início.\nAtenção: isso pode ser perigoso visto que ignora o tráfego de mão única em estradas.</string>
+    <string name="response">Resposta</string>
 </resources>
