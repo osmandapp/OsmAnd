@@ -35,6 +35,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.dialogs.DeleteWidgetConfirmationController;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
@@ -94,6 +95,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		DialogManager dialogManager = app.getDialogManager();
 		controller = (ConfigureWidgetsController) dialogManager.findController(ConfigureWidgetsController.PROCESS_ID);
+		DeleteWidgetConfirmationController.askUpdateListener(app, this::dismiss);
 
 		createMenuProvider();
 	}
@@ -108,10 +110,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 					deleteAction.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined));
 					deleteAction.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 					deleteAction.setOnMenuItemClickListener(item -> {
-						if (widgetInfo != null) {
-							widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
-							dismiss();
-						}
+						showDeleteWidgetConfirmationDialog();
 						return true;
 					});
 
@@ -147,6 +146,12 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 				return false;
 			}
 		};
+	}
+
+	private void showDeleteWidgetConfirmationDialog() {
+		callActivity(activity -> { if (widgetInfo != null) {
+			DeleteWidgetConfirmationController.showDialog(activity, appMode, widgetInfo, isUsedOnMap(), this::dismiss);
+		}});
 	}
 
 	private void showDuplicateAddedSnackbar() {
