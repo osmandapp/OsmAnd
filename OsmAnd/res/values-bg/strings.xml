@@ -2582,15 +2582,7 @@
     <string name="clear_confirmation_msg">Почистване на %1$s\?</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитане на селски пътища</string>
     <string name="route_start_point">Отправна точка</string>
-    <string name="release_4_2">• Нов дизайн на приспособленията: ново оформление, групиране по страници, сортиране и комбиниране по веше желание.
-\n
-\n• Пешеходни, велосипедни и туристически маршрути: докоснете символа на маршрита, за да получите пълна информация за него.
-\n
-\n• Избрани групи: избор на външния вид на новите точки в групата.
-\n
-\n• Поправки: автоматично обновяване на растерните карти.
-\n
-\n</string>
+    <string name="release_4_2">• Нов дизайн на приспособленията: ново оформление, групиране по страници, сортиране и комбиниране по ваше желание.\n\n• Пешеходни, велосипедни и туристически маршрути: докоснете символа на маршрута, за да получите пълна информация за него.\n\n• Избрани групи: избор на външния вид на новите точки в групата.\n\n• Поправки: автоматично обновяване на растерните карти.</string>
     <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено (от последни приложения). (Иконата на OsmAnd изчезва от лентата за известия на Android.)</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Междинни</string>
     <string name="relief_smoothness_factor_descr">Изберете предпочитания релеф.</string>
@@ -2671,11 +2663,7 @@
     <string name="favourites_group">Категория избрани</string>
     <string name="routing_attr_allow_skating_only_description">Маршрути, подготвени само за свободен стил или пързаляне без класическо трасе.</string>
     <string name="gpx_no_tracks_title_folder">Също можете да добавите фсйлове с трасета към папката</string>
-    <string name="osmand_extended_description_part7">Принос към OSM
-\n - Докладване на грешки в информацията
-\n - Качване на трасета от приложението директно в OSM
-\n - Добавяне на точки на интерес и директното им качване в OSM (или по-късно, ако сте без мрежа)
-\n</string>
+    <string name="osmand_extended_description_part7">Принос към OSM\n • Докладване на грешки в информацията;\n • Качване на трасета от приложението директно в OSM\n • Добавяне на точки на интерес и директното им качване в OSM (или по-късно, ако сте без интернет)</string>
     <string name="empty_state_favourites_desc">Внесете избрани точки или ги създавайте като отбелязвате точки на картата.</string>
     <string name="empty_state_favourites">Добавяне на избрани</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Скриване на военните зони</string>
@@ -3637,7 +3625,7 @@
     <string name="routing_attr_piste_type_downhill_description">Склонове за алпийски ски или спускане и достъп до ски лифтове.</string>
     <string name="shared_string_size">Размер</string>
     <string name="storage_found_files_descr">Докоснете „%1$s“, за да бъдат копирани %2$s файла от „%3$s“ към „%4$s“. Може да отнеме известно време.</string>
-    <string name="delete_history_items_descr">Премахване на избраните записи?</string>
+    <string name="delete_history_items_descr">Избраните записи се премахват от списъка.</string>
     <string name="folder_access_denied">За достъп до тази папка е необходим достъп.</string>
     <string name="storage_copying_files_size">Копиране на файлове: %1$s %2$s</string>
     <string name="shared_string_copy_to">Копиране в</string>
