@@ -232,6 +232,14 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 		}
 	}
 
+	private void updateHideText(List<MapWidgetInfo> widgetsInRow) {
+		for (MapWidgetInfo widgetInfo : widgetsInRow) {
+			if (widgetInfo.widget instanceof ISupportMultiRow supportMultiRow) {
+				supportMultiRow.updateHiddenNameText();
+			}
+		}
+	}
+
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
 			if (widgetInfo.widget instanceof ISupportMultiRow supportMultiRow) {
@@ -356,6 +364,7 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			}
 			updateFullRowState(enabledMapWidgets, visibleViewsInRowCount);
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
+			updateHideText(enabledMapWidgets);
 
 			boolean transparentMode = app.getSettings().TRANSPARENT_MAP_THEME.get();
 			boolean lastRow = index == totalRows - 1;

@@ -284,6 +284,10 @@ public class OutlinedTextContainer extends FrameLayout {
 		mainTextView.invalidate();
 	}
 
+	public TextPaint getPaint() {
+		return mainTextView.getPaint();
+	}
+
 	class AttrsHolder {
 		int textColor = Color.BLACK;
 		int outlineColor = Color.WHITE;
