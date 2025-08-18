@@ -325,13 +325,12 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 	}
 
 	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			fragmentManager.beginTransaction()
 					.remove(this)
 					.commitAllowingStateLoss();
-		}
+		});
 	}
 
 	private boolean collectingFiles() {

@@ -120,14 +120,14 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-			BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE,
-					ApplicationMode.valueOfStringKey(prefId, null));
+			callActivity(activity -> {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(prefId, null);
+				BaseSettingsFragment.showInstance(activity, SettingsScreenType.CONFIGURE_PROFILE, appMode);
+			});
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
-			if (getActivity() != null) {
-				SelectBaseProfileBottomSheet.showInstance(
-						getActivity(), this, getSelectedAppMode(), null, false);
-			}
+			callActivity(activity -> SelectBaseProfileBottomSheet.showInstance(activity,
+					this, getSelectedAppMode(), null, false));
 		} else if (PURCHASES_SETTINGS.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {

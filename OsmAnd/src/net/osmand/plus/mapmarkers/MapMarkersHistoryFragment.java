@@ -185,16 +185,8 @@ public class MapMarkersHistoryFragment extends BaseNestedFragment implements Map
 			}
 			Object item = adapter.getItem(pos);
 			if (item instanceof MapMarker marker) {
-				HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
-				fragment.setUsedOnMap(false);
-				Bundle arguments = new Bundle();
-				arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_POSITION, pos);
-				arguments.putString(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_NAME, marker.getName(mapActivity));
-				arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_COLOR_INDEX, marker.colorIndex);
-				arguments.putLong(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_VISITED_DATE, marker.visitedDate);
-				fragment.setArguments(arguments);
-				fragment.setListener(createHistoryMarkerMenuListener());
-				fragment.show(mapActivity.getSupportFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
+				HistoryMarkerMenuBottomSheetDialogFragment.showInstance(mapActivity,
+						mapActivity.getSupportFragmentManager(), createHistoryMarkerMenuListener(), pos, marker);
 			}
 		});
 		recyclerView.setEmptyView(getEmptyView(mainView, nightMode));

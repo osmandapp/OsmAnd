@@ -158,7 +158,7 @@ class RenameOBDDialog : BaseFullScreenDialogFragment() {
 			device: BTDeviceInfo) {
 			require(target is OnDeviceNameChangedCallback) { "target fragment should implement OnSaveSensorNameCallback" }
 			val fragmentManager = activity.supportFragmentManager
-			if (!fragmentManager.isStateSaved) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				val fragment = RenameOBDDialog()
 				val args = Bundle()
 				args.putString(DEVICE_ADDRESS_KEY, device.address)

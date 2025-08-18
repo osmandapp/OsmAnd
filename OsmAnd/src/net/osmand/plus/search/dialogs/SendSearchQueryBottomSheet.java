@@ -5,12 +5,17 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -22,7 +27,7 @@ import java.util.Map;
 
 public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "SendSearchQueryBottomSheet";
+	public static final String TAG = SendSearchQueryBottomSheet.class.getSimpleName();
 	public static final String MISSING_SEARCH_QUERY_KEY = "missing_search_query_key";
 	public static final String MISSING_SEARCH_LOCATION_KEY = "missing_search_location_key";
 
@@ -79,6 +84,20 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 						}
 						dismiss();
 					});
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull String searchLocation, @NonNull String searchQuery) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(MISSING_SEARCH_LOCATION_KEY, searchLocation);
+			args.putString(MISSING_SEARCH_QUERY_KEY, searchQuery);
+
+			SendSearchQueryBottomSheet fragment = new SendSearchQueryBottomSheet();
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
 		}
 	}
 }

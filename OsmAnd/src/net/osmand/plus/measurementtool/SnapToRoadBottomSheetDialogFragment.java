@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseBottomSheetDialogFragment;
@@ -130,6 +131,18 @@ public class SnapToRoadBottomSheetDialogFragment extends BaseBottomSheetDialogFr
 			listener.onDestroyView(snapToRoadEnabled);
 		}
 		super.onDestroyView();
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull SnapToRoadFragmentListener listener,
+	                                boolean removeDefaultMode) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
+			fragment.setListener(listener);
+			fragment.setRemoveDefaultMode(removeDefaultMode);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	public interface SnapToRoadFragmentListener {

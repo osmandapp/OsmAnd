@@ -84,12 +84,7 @@ public class CountrySelectionFragment extends BaseFullScreenDialogFragment {
 		});
 		ImageButton clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		clearButton.setOnClickListener(v -> dismiss());
 		return view;
 	}
 

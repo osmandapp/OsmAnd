@@ -6,15 +6,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.base.BaseAlertDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PoiTypeDialogFragment extends BaseAlertDialogFragment {
+
+	private static final String TAG = PoiTypeDialogFragment.class.getSimpleName();
+
 	private OnItemSelectListener onItemSelectListener;
 
 	@NonNull
@@ -39,15 +44,19 @@ public class PoiTypeDialogFragment extends BaseAlertDialogFragment {
 		return builder.create();
 	}
 
-	public static PoiTypeDialogFragment createInstance() {
-		PoiTypeDialogFragment poiTypeDialogFragment = new PoiTypeDialogFragment();
-		Bundle args = new Bundle();
-		poiTypeDialogFragment.setArguments(args);
-		return poiTypeDialogFragment;
-	}
-
 	public void setOnItemSelectListener(OnItemSelectListener onItemSelectListener) {
 		this.onItemSelectListener = onItemSelectListener;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull OnItemSelectListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			PoiTypeDialogFragment fragment = new PoiTypeDialogFragment();
+			Bundle args = new Bundle();
+			fragment.setArguments(args);
+			fragment.setOnItemSelectListener(listener);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	public interface OnItemSelectListener {

@@ -3,6 +3,8 @@ package net.osmand.plus.routepreparationmenu;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -14,11 +16,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.routepreparationmenu.data.PointType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "TargetOptionsBottomSheetDialogFragment";
+	public static final String TAG = TargetOptionsBottomSheetDialogFragment.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -94,5 +97,14 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private void openAddPointDialog(@NonNull MapActivity mapActivity) {
 		AddPointBottomSheetDialog.showInstance(mapActivity, PointType.INTERMEDIATE, false);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			TargetOptionsBottomSheetDialogFragment fragment = new TargetOptionsBottomSheetDialogFragment();
+			fragment.setUsedOnMap(true);
+			fragment.show(manager, TAG);
+		}
 	}
 }

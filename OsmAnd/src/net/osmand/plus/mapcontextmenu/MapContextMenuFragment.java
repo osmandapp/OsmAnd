@@ -2170,6 +2170,8 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		}
 
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (!AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) return false;
+
 		int slideInAnim = 0;
 		int slideOutAnim = 0;
 		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {

@@ -7,15 +7,18 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 
-	public static final String TAG = MapillaryFirstDialogFragment.class.getSimpleName();
+	private static final String TAG = MapillaryFirstDialogFragment.class.getSimpleName();
 
 	private static final String KEY_SHOW_WIDGET = "key_show_widget";
 
@@ -51,5 +54,15 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(KEY_SHOW_WIDGET, showWidget);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
+		if (plugin != null && AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
+			fragment.show(manager, TAG);
+			plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
+		}
 	}
 }

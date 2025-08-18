@@ -1,6 +1,5 @@
 package net.osmand.plus.search.dialogs;
 
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -55,19 +54,6 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	private View footerShadow;
 	private FrameLayout addButton;
 	private boolean selectAll;
-
-	public static void showInstance(@NonNull FragmentManager fm,
-									@Nullable Fragment targetFragment,
-									@NonNull PoiCategory poiCategory,
-									@Nullable Set<String> acceptedCategories,
-									boolean selectAll) {
-		QuickSearchSubCategoriesFragment fragment = new QuickSearchSubCategoriesFragment();
-		fragment.setPoiCategory(poiCategory);
-		fragment.setSelectAll(selectAll);
-		fragment.setAcceptedCategories(acceptedCategories);
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.show(fm, TAG);
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -158,14 +144,11 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 		headerSelectAll.setVerticalScrollBarEnabled(false);
 		selectAllSwitch = headerSelectAll.findViewById(R.id.select_all);
 		selectAllSwitch.setChecked(selectAll);
-		selectAllSwitch.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				selectAll = !selectAll;
-				selectAllSwitch.setChecked(selectAll);
-				adapter.selectAll(selectAll);
-				updateAddBtnVisibility();
-			}
+		selectAllSwitch.setOnClickListener(v -> {
+			selectAll = !selectAll;
+			selectAllSwitch.setChecked(selectAll);
+			adapter.selectAll(selectAll);
+			updateAddBtnVisibility();
 		});
 		listView.addFooterView(footerShadow);
 		listView.addHeaderView(headerSelectAll);
@@ -178,21 +161,13 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 		});
 		ImageView searchIcon = root.findViewById(R.id.search_icon);
 		searchIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_search_dark, nightMode));
-		searchIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				searchEditText.requestFocus();
-				AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
-			}
+		searchIcon.setOnClickListener(view -> {
+			searchEditText.requestFocus();
+			AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
 		});
 		ImageView searchCloseIcon = root.findViewById(R.id.search_close);
 		searchCloseIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_cancel, nightMode));
-		searchCloseIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				clearSearch();
-			}
-		});
+		searchCloseIcon.setOnClickListener(view -> clearSearch());
 		listView.setAdapter(adapter);
 		return root;
 	}
@@ -200,19 +175,16 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	@Override
 	public void onResume() {
 		super.onResume();
-		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
-			@Override
-			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() == KeyEvent.ACTION_DOWN) {
-						return true;
-					} else {
-						dismissFragment();
-						return true;
-					}
+		getDialog().setOnKeyListener((dialog, keyCode, event) -> {
+			if (keyCode == KeyEvent.KEYCODE_BACK) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					return true;
+				} else {
+					dismissFragment();
+					return true;
 				}
-				return false;
 			}
+			return false;
 		});
 	}
 
@@ -271,5 +243,20 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 
 	public void setAcceptedCategories(Set<String> acceptedCategories) {
 		this.acceptedCategories = acceptedCategories;
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @Nullable Fragment targetFragment,
+	                                @NonNull PoiCategory poiCategory,
+	                                @Nullable Set<String> acceptedCategories,
+	                                boolean selectAll) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			QuickSearchSubCategoriesFragment fragment = new QuickSearchSubCategoriesFragment();
+			fragment.setPoiCategory(poiCategory);
+			fragment.setSelectAll(selectAll);
+			fragment.setAcceptedCategories(acceptedCategories);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.show(manager, TAG);
+		}
 	}
 }

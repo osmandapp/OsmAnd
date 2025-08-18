@@ -144,7 +144,8 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		return gpxFile.getNonEmptySegmentsCount() > 1 || gpxFile.getRoutes().size() > 1;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GpxFile gpxFile, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GpxFile gpxFile,
+	                                @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			TrackSelectSegmentBottomSheet fragment = new TrackSelectSegmentBottomSheet();
 			fragment.setRetainInstance(true);

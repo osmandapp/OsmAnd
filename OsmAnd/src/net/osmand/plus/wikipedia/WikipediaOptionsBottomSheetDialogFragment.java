@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
@@ -13,11 +15,12 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 
 public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "WikipediaOptionsBottomSheetDialogFragment";
+	public static final String TAG = WikipediaOptionsBottomSheetDialogFragment.class.getSimpleName();
 
 	public static final int REQUEST_CODE = 0;
 	public static final int SHOW_PICTURES_CHANGED_REQUEST_CODE = 1;
@@ -55,6 +58,15 @@ public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
 			fragment.onActivityResult(getTargetRequestCode(), SHOW_PICTURES_CHANGED_REQUEST_CODE, null);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			WikipediaOptionsBottomSheetDialogFragment fragment = new WikipediaOptionsBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setTargetFragment(target, REQUEST_CODE);
+			fragment.show(manager, TAG);
 		}
 	}
 }

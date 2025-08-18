@@ -6,10 +6,14 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -164,5 +168,19 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 	private void closeContextMenu() {
 		callMapActivity(mapActivity -> mapActivity.getContextMenu().close());
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                double lat, double lon, @NonNull PointDescription name) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putDouble(LAT_KEY, lat);
+			args.putDouble(LON_KEY, lon);
+			args.putString(POINT_DESCRIPTION_KEY, PointDescription.serializeToString(name));
+			AddWaypointBottomSheetDialogFragment fragment = new AddWaypointBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
+		}
 	}
 }

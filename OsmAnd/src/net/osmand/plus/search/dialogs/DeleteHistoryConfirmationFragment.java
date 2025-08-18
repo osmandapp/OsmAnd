@@ -5,15 +5,19 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.List;
 
-public class DeleteDialogFragment extends BaseAlertDialogFragment {
+public class DeleteHistoryConfirmationFragment extends BaseAlertDialogFragment {
+
+	private static final String TAG = DeleteHistoryConfirmationFragment.class.getSimpleName();
 
 	private List<QuickSearchListItem> selectedItems;
 
@@ -39,5 +43,14 @@ public class DeleteDialogFragment extends BaseAlertDialogFragment {
 				})
 				.setNegativeButton(R.string.shared_string_no, null);
 		return builder.create();
+	}
+
+	public static void showInstance(@NonNull FragmentManager childFragmentManager,
+	                                @NonNull List<QuickSearchListItem> selectedItems) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			DeleteHistoryConfirmationFragment fragment = new DeleteHistoryConfirmationFragment();
+			fragment.setSelectedItems(selectedItems);
+			fragment.show(childFragmentManager, TAG);
+		}
 	}
 }

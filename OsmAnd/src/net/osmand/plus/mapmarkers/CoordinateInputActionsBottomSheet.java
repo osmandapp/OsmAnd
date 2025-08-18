@@ -1,7 +1,9 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -9,10 +11,11 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class CoordinateInputActionsBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "CoordinateInputActionsBottomSheet";
+	public static final String TAG = CoordinateInputActionsBottomSheet.class.getSimpleName();
 
 	private CoordinateInputActionsListener listener;
 
@@ -34,12 +37,9 @@ public class CoordinateInputActionsBottomSheet extends MenuBottomSheetDialogFrag
 				.setIcon(getContentIcon(R.drawable.ic_action_type_edit))
 				.setTitle(getString(R.string.shared_string_edit))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						listener.editItem(position);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					listener.editItem(position);
+					dismiss();
 				})
 				.create();
 		items.add(editItem);
@@ -48,12 +48,9 @@ public class CoordinateInputActionsBottomSheet extends MenuBottomSheetDialogFrag
 				.setIcon(getContentIcon(R.drawable.ic_action_type_delete))
 				.setTitle(getString(R.string.shared_string_delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						listener.removeItem(position);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					listener.removeItem(position);
+					dismiss();
 				})
 				.create();
 		items.add(deleteItem);
@@ -65,11 +62,24 @@ public class CoordinateInputActionsBottomSheet extends MenuBottomSheetDialogFrag
 		return R.string.shared_string_cancel;
 	}
 
-	interface CoordinateInputActionsListener {
+	public static void showInstance(@NonNull FragmentManager childFragmentManager,
+	                                @NonNull CoordinateInputActionsListener listener, int position) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putInt(CoordinateInputAdapter.ADAPTER_POSITION_KEY, position);
+
+			CoordinateInputActionsBottomSheet fragment = new CoordinateInputActionsBottomSheet();
+			fragment.setUsedOnMap(false);
+			fragment.setArguments(args);
+			fragment.setListener(listener);
+			fragment.show(childFragmentManager, CoordinateInputActionsBottomSheet.TAG);
+		}
+	}
+
+	public interface CoordinateInputActionsListener {
 
 		void removeItem(int position);
 
 		void editItem(int position);
-
 	}
 }

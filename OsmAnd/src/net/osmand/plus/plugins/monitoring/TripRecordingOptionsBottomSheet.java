@@ -60,14 +60,6 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			TripRecordingOptionsBottomSheet fragment = new TripRecordingOptionsBottomSheet();
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		helper = app.getSavingTrackHelper();
@@ -280,5 +272,13 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 	@Override
 	protected boolean useVerticalButtons() {
 		return true;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			TripRecordingOptionsBottomSheet fragment = new TripRecordingOptionsBottomSheet();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }
