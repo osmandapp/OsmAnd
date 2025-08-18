@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
+apply from: rootProject.file("versions.gradle")
 
 android {
-    compileSdk 35
-    buildToolsVersion = "35.0.0"
+    compileSdk osmand_compileSdk
+    buildToolsVersion = osmand_buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 34
+        minSdkVersion osmand_minSdk
+        targetSdkVersion osmand_targetSdk
         versionCode 2
         versionName "2.0"
         namespace = "net.osmand.aidlapi"

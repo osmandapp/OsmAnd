@@ -4537,4 +4537,13 @@
     <string name="poi_padus_public_access_unknown">Πρόσβαση: άγνωστη</string>
     <string name="poi_padus_public_access_closed">Πρόσβαση: κλειστή</string>
     <string name="poi_padus_area">Περιοχή PAD-US</string>
+    <string name="poi_recycling_marine_waste">Απόβλητα σκαφών</string>
+    <string name="poi_recycling_metal_packaging">Μεταλλική συσκευασία</string>
+    <string name="poi_recycling_pallets">Παλέτες</string>
+    <string name="poi_recycling_plastic_bottle_tops">Πλαστικά καπάκια μπουκαλιών</string>
+    <string name="poi_recycling_refund_bottles">Μπουκάλια ανταποδοτικής</string>
+    <string name="poi_recycling_second_hand">Μεταχειρισμένα</string>
+    <string name="poi_recycling_small_metal">Μικρά μεταλλικά κομμάτια</string>
+    <string name="poi_recycling_textiles">Υφάσματα</string>
+    <string name="poi_waste_dog_excrement">Περιττώματα σκύλου</string>
 </resources>

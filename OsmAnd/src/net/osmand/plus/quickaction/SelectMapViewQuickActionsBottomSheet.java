@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 import androidx.core.widget.CompoundButtonCompat;
@@ -25,14 +26,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.srtm.TerrainColorSchemeAction;
+import net.osmand.plus.quickaction.actions.ChangeMapOrientationAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.List;
 
@@ -85,7 +90,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			itemsSize = switchableAction.loadListFromParams().size();
 		}
 		for (int i = 0; i < itemsSize; i++) {
-			inflate(R.layout.bottom_sheet_item_with_radio_btn, itemsContainer, true);
+			inflate(getLayoutId(), itemsContainer, true);
 		}
 
 		nestedScrollView.addView(itemsContainer);
@@ -94,6 +99,14 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		populateItemsList();
 	}
 
+	@LayoutRes
+	private int getLayoutId() {
+		if (action instanceof ChangeMapOrientationAction) {
+			return R.layout.bottom_sheet_item_with_descr_and_radio_btn;
+		} else {
+			return R.layout.bottom_sheet_item_with_radio_btn;
+		}
+	}
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -111,8 +124,21 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	}
 
 	@Override
+	protected DialogButtonType getRightBottomButtonType() {
+		if (action instanceof ChangeMapOrientationAction) {
+			return DialogButtonType.SECONDARY;
+		} else {
+			return DialogButtonType.PRIMARY;
+		}
+	}
+
+	@Override
 	protected int getDismissButtonTextId() {
-		return R.string.quick_action_edit_actions;
+		if (action instanceof ChangeMapOrientationAction) {
+			return DEFAULT_VALUE;
+		} else {
+			return R.string.quick_action_edit_actions;
+		}
 	}
 
 	@Override
@@ -160,6 +186,17 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 					counter++;
 				}
 			}
+		} else if (action instanceof ChangeMapOrientationAction mapOrientationAction) {
+			List<String> compassModes = mapOrientationAction.loadListFromParams();
+			for (String key : compassModes) {
+				CompassMode compassMode = CompassMode.valueOf(key);
+				boolean selected = key.equals(selectedItem);
+				int iconId = compassMode.getIconId(nightMode);
+				Drawable icon = getIcon(iconId);
+				String translatedName = compassMode.getTitle(context);
+				createItemRow(selected, counter, icon, translatedName, key);
+				counter++;
+			}
 		} else if (action instanceof SwitchableAction switchableAction) {
 			List<Pair<String, String>> sources = (List<Pair<String, String>>) switchableAction.loadListFromParams();
 			for (Pair<String, String> entry : sources) {
@@ -185,6 +222,9 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		CompoundButtonCompat.setButtonTintList(rb, colorStateList);
 		ImageView imageView = view.findViewById(R.id.icon);
 		imageView.setImageDrawable(icon);
+
+		TextView descriptionTv = view.findViewById(R.id.description);
+		AndroidUiHelper.updateVisibility(descriptionTv, false);
 	}
 
 	@ColorInt

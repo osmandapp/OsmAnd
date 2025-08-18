@@ -26,7 +26,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
+import net.osmand.shared.grid.ButtonPositionSize;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -195,12 +195,12 @@ public abstract class MapButtonState {
 	@NonNull
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position,
 	                                                 int posH, int posV, boolean xMove, boolean yMove) {
-		position.posH = posH;
-		position.posV = posV;
-		position.xMove = xMove;
-		position.yMove = yMove;
-		position.marginX = 0;
-		position.marginY = 0;
+		position.setPosH(posH);
+		position.setPosV(posV);
+		position.setXMove(xMove);
+		position.setYMove(yMove);
+		position.setMarginX(0);
+		position.setMarginY(0);
 
 		return position;
 	}

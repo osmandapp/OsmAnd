@@ -32,9 +32,10 @@ class ForgetDeviceDialog : ForgetDeviceBaseDialog() {
         fun onForgetSensorConfirmed(device: AbstractDevice<out AbstractSensor>)
     }
 
-	override fun initDevice(deviceId: String) {
+	override fun initDevice(arguments: Bundle) {
+		val deviceId = arguments.getString(DEVICE_ID_KEY)
 		val plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin::class.java)
-		val device = plugin?.getDevice(deviceId)
+		val device = if (deviceId != null) plugin?.getDevice(deviceId) else null
 		if (device == null) {
 			dismiss()
 		} else {

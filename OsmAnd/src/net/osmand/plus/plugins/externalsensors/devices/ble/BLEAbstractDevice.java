@@ -44,7 +44,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor> {
 
-	private static final Log LOG = PlatformUtil.getLog(BLEAbstractDevice.class);
+	protected static final Log LOG = PlatformUtil.getLog(BLEAbstractDevice.class);
 
 	protected BluetoothAdapter bluetoothAdapter;
 	protected BluetoothDevice device;
@@ -54,6 +54,9 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	private final Handler mainHandler = new Handler(Looper.getMainLooper());
 	private final Queue<Runnable> commandQueue = new ConcurrentLinkedQueue<>();
 	private boolean commandQueueBusy;
+	@Nullable
+	protected List<BluetoothGattCharacteristic> cachedCharacteristics;
+
 
 	public BLEAbstractDevice(@NonNull BluetoothAdapter bluetoothAdapter, @NonNull String deviceId) {
 		super(deviceId);
@@ -66,7 +69,9 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	                                                   @NonNull UUID uuid, @NonNull String address,
 	                                                   @NonNull String name, int rssi) {
 		BLEAbstractDevice device = null;
-		if (BLEHeartRateDevice.getServiceUUID().equals(uuid)) {
+		if (BLEOBDDevice.Companion.getServiceUUID().equals(uuid)) {
+			device = new BLEOBDDevice(bluetoothAdapter, address);
+		} else if (BLEHeartRateDevice.getServiceUUID().equals(uuid)) {
 			device = new BLEHeartRateDevice(bluetoothAdapter, address);
 		} else if (BLETemperatureDevice.getServiceUUID().equals(uuid)) {
 			device = new BLETemperatureDevice(bluetoothAdapter, address);
@@ -117,7 +122,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	}
 
 	@NonNull
-	private List<BluetoothGattCharacteristic> getCharacteristics() {
+	protected List<BluetoothGattCharacteristic> getCharacteristics() {
 		List<BluetoothGattCharacteristic> characteristics = new ArrayList<>();
 		List<BluetoothGattService> services = getSupportedGattServices();
 		if (services != null) {
@@ -129,42 +134,68 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		return characteristics;
 	}
 
-	private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
-		@SuppressLint("MissingPermission")
-		@Override
-		public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-			LOG.debug("status: " + status);
-			LOG.debug("newState: " + newState);
-			LOG.debug("currentState: " + getCurrentState());
+	@SuppressLint("MissingPermission")
+	protected void onGattConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+		LOG.debug("status: " + status);
+		LOG.debug("newState: " + newState);
+		LOG.debug("currentState: " + getCurrentState());
+		if (status == GATT_SUCCESS) {
+			if (newState == BluetoothProfile.STATE_CONNECTED) {
+				int bondState = device.getBondState();
 
-			if (status == GATT_SUCCESS) {
-				if (newState == BluetoothProfile.STATE_CONNECTED) {
-					int bondState = device.getBondState();
+				if (bondState == BOND_NONE || bondState == BOND_BONDED) {
+					LOG.debug("Discovering services");
+					boolean result = gatt.discoverServices();
 
-					if (bondState == BOND_NONE || bondState == BOND_BONDED) {
-						LOG.debug("Discovering services");
-						boolean result = gatt.discoverServices();
-
-						if (!result) {
-							LOG.error("DiscoverServices failed to start");
-						}
-					} else if (bondState == BOND_BONDING) {
-						LOG.debug("Waiting for bonding to complete");
+					if (!result) {
+						LOG.error("DiscoverServices failed to start");
 					}
-					setCurrentState(DeviceConnectionState.CONNECTED);
-					fireDeviceConnectedEvent();
-				} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-					fireDeviceDisconnectedEvent();
-					gatt.close();
-					bluetoothGatt = null;
-					setCurrentState(DeviceConnectionState.DISCONNECTED);
+				} else if (bondState == BOND_BONDING) {
+					LOG.debug("Waiting for bonding to complete");
 				}
-			} else {
+				setCurrentState(DeviceConnectionState.CONNECTED);
+				fireDeviceConnectedEvent();
+			} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
 				fireDeviceDisconnectedEvent();
 				gatt.close();
 				bluetoothGatt = null;
 				setCurrentState(DeviceConnectionState.DISCONNECTED);
 			}
+		} else {
+			LOG.debug("GATT disconnected");
+			fireDeviceDisconnectedEvent();
+			gatt.close();
+			bluetoothGatt = null;
+			setCurrentState(DeviceConnectionState.DISCONNECTED);
+		}
+	}
+
+	@SuppressLint("MissingPermission")
+	protected void onGattServicesDiscovered(BluetoothGatt gatt, int status) {
+		if (status == BluetoothGatt.GATT_SUCCESS) {
+			List<BluetoothGattService> services = gatt.getServices();
+			LOG.debug(String.format(Locale.US, "discovered %d services for '%s'", services.size(), gatt.getDevice().getName()));
+			if (cachedCharacteristics == null) {
+				cachedCharacteristics = getCharacteristics();
+			}
+			for (BLEAbstractSensor sensor : sensors) {
+				sensor.requestCharacteristic(cachedCharacteristics);
+			}
+			enqueueCommand(() -> {
+				if (!gatt.readRemoteRssi()) {
+					completedCommand();
+				}
+			});
+		} else {
+			LOG.debug("onServicesDiscovered received: " + status);
+		}
+	}
+
+	private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+		@SuppressLint("MissingPermission")
+		@Override
+		public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+			onGattConnectionStateChange(gatt, status, newState);
 		}
 
 		@SuppressLint("MissingPermission")
@@ -176,22 +207,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				setCurrentState(DeviceConnectionState.DISCONNECTED);
 				return;
 			}
-			if (status == BluetoothGatt.GATT_SUCCESS) {
-				List<BluetoothGattService> services = gatt.getServices();
-				LOG.debug(String.format(Locale.US, "discovered %d services for '%s'", services.size(), gatt.getDevice().getName()));
-
-				List<BluetoothGattCharacteristic> characteristics = getCharacteristics();
-				for (BLEAbstractSensor sensor : sensors) {
-					sensor.requestCharacteristic(characteristics);
-				}
-				enqueueCommand(() -> {
-					if (!gatt.readRemoteRssi()) {
-						completedCommand();
-					}
-				});
-			} else {
-				LOG.debug("onServicesDiscovered received: " + status);
-			}
+			onGattServicesDiscovered(gatt, status);
 		}
 
 		@Override
@@ -269,7 +285,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			}
 
 			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
-			LOG.debug("Trying to create new connection");
+			LOG.debug("Trying to create new connection " + device.getAddress());
 			setCurrentState(DeviceConnectionState.CONNECTING);
 			for (DeviceListener listener : listeners) {
 				listener.onDeviceConnecting(this);

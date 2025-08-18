@@ -293,6 +293,12 @@ public class AppInitializer implements IProgress {
 		notifyEvent(INDEX_REGION_BOUNDARIES);
 	}
 
+	public void reInitPoiTypes() {
+		MapPoiTypes.setDefault(new MapPoiTypes(null));
+		app.poiTypes = MapPoiTypes.getDefaultNoInit();
+		initPoiTypes();
+	}
+
 	private void initPoiTypes() {
 		app.poiTypes.setForbiddenTypes(app.settings.getForbiddenTypes());
 		if (app.getAppPath(SETTINGS_DIR + "poi_types.xml").exists()) {

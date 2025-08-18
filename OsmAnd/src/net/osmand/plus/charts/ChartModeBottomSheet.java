@@ -43,8 +43,12 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		selectedXAxisMode = listener.getSelectedAxisType();
-		selectedYAxisMode.addAll(listener.getSelectedDataSetTypes());
+		if (listener == null) {
+			dismiss();
+		} else {
+			selectedXAxisMode = listener.getSelectedAxisType();
+			selectedYAxisMode.addAll(listener.getSelectedDataSetTypes());
+		}
 	}
 
 	@Override

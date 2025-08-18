@@ -5720,7 +5720,7 @@
     <string name="ais_cpa_warning_distance">Výstražná vzdialenosť pre najbližší bod priblíženia (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Plavidlá sú vyznačené červenou farbou ak je CPA nižšie ako táto hodnota a CPA bude dosiahnutý v blízkej budúcnosti (pozri nastavenia Výstražnej doby pre dosiahnutie CPA).</string>
     <string name="ais_address_nmea_server_description">Zadajte IP adresu zdroja údajov NMEA (ak sa používa TCP)</string>
-    <string name="ais_ship_lost_timeout">Časový limit pre viditeľnosť lode, keď nie je obdržaný signál</string>
+    <string name="ais_ship_lost_timeout">Časový limit pre viditeľnosť lode - odstrániť keď nie je obdržaný signál AIS počas zadaného intervalu.</string>
     <string name="ais_ship_lost_timeout_description">Nastavte časový limit pre viditeľnosť lode: Po tomto čase bez príjmu signálu bude symbol lode na obrazovke zmenený: bude preškrtnutý.</string>
     <string name="choose_location_on_map">Zvoľte polohu na mape.</string>
     <string name="show_image_previews">Zobraziť náhľady obrázkov</string>

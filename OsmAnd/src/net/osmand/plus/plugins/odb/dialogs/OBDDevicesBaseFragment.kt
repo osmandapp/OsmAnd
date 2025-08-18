@@ -12,6 +12,7 @@ import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -20,6 +21,9 @@ abstract class OBDDevicesBaseFragment : BaseFullScreenFragment() {
 
 	protected val vehicleMetricsPlugin =
 		PluginsHelper.requirePlugin(VehicleMetricsPlugin::class.java)
+
+	protected val externalDevicesPlugin =
+		PluginsHelper.requirePlugin(ExternalSensorsPlugin::class.java)
 
 	@get:LayoutRes
 	protected abstract val layoutId: Int

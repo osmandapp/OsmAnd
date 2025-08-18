@@ -249,7 +249,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getTitle(List<String> filters) {
+	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 
 		if (filters.isEmpty()) return "";
 

@@ -5947,4 +5947,19 @@
     <string name="manage_purchases">Kudeatu erosketak</string>
     <string name="failed_to_connect">Huts egin du %1s-rekin konektatzen</string>
     <string name="turn_by_turn_directions">Urratsez urratseko norabideak</string>
+    <string name="altitude_metrics_description">Trepetetan eta estatistiketan altitudearen bistaratze-unitatea ezartzen du.</string>
+    <string name="write_location_provider_description">Gorde kokapen-hornitzailea arrasto-puntu bakoitzean grabatzen ari zaren bitartean</string>
+    <string name="write_location_provider">Idatzi kokalekuaren hornitzailea</string>
+    <string name="description_purchases_fastspring">Erosketak kudeatu dezakezu FastSpring kontuak kudeatzeko atariaren bidez.</string>
+    <string name="shared_string_manual">Eskuzkoa</string>
+    <string name="popular_places">Leku ospetsuak</string>
+    <string name="show_list">Erakutsi zerrenda</string>
+    <string name="save_favorite_default_appearance">Aplikatu aldaketak karpetako puntu guztiei, edo sartu berriei bakarrik?</string>
+    <string name="original_color_description">Puntu bakoitzak bere kolorea mantentzen du.</string>
+    <string name="original_icon_description">Puntu bakoitzak bere ikonoa mantentzen du.</string>
+    <string name="original_shape_description">Puntu bakoitzak bere forma mantentzen du.</string>
+    <string name="apply_to_all_points">Aplikatu puntu guztiei</string>
+    <string name="shared_string_road_exit">Irten</string>
+    <string name="popular_places_nearby">Gertu dauden leku ospetsuak</string>
+    <string name="recently_visited">Duela gutxi bisitatuta</string>
 </resources>

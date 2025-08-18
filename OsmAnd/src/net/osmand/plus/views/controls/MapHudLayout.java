@@ -2,12 +2,12 @@ package net.osmand.plus.views.controls;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.CELL_SIZE_DP;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_FULL_WIDTH;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;
+import static net.osmand.shared.grid.ButtonPositionSize.CELL_SIZE_DP;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_FULL_WIDTH;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_LEFT;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_RIGHT;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_TOP;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,10 +25,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.shared.grid.ButtonPositionSize;
 
 import org.apache.commons.logging.Log;
 
@@ -215,7 +215,7 @@ public class MapHudLayout extends FrameLayout {
 
 		int width = Math.round(getWidth() / dpToPx / CELL_SIZE_DP);
 		int height = Math.round(getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
-		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);
+		ButtonPositionSize.Companion.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);
 
 //		for (ButtonPositionSize b : map.values()) {
 //			LOG.info(b + " value = " + b.toLongValue());
@@ -233,7 +233,7 @@ public class MapHudLayout extends FrameLayout {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = createWidgetPosition(view);
-				if (position.height > 0 && position.width > 0) {
+				if (position.getHeight() > 0 && position.getWidth() > 0) {
 					map.put(view, position);
 				}
 			}
@@ -241,7 +241,7 @@ public class MapHudLayout extends FrameLayout {
 		for (MapButton button : mapButtons) {
 			if (button.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = button.getDefaultPositionSize();
-				if (position != null && position.height > 0 && position.width > 0) {
+				if (position != null && position.getHeight() > 0 && position.getWidth() > 0) {
 					map.put(button, position);
 				}
 			}
@@ -250,7 +250,7 @@ public class MapHudLayout extends FrameLayout {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
 				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
-				if (position.height > 0 && position.width > 0) {
+				if (position.getHeight() > 0 && position.getWidth() > 0) {
 					map.put(view, position);
 				}
 			}
@@ -321,8 +321,8 @@ public class MapHudLayout extends FrameLayout {
 				position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight, left, x, top, y);
 			}
 		} else if (view instanceof RulerWidget) {
-			position.marginX = 0;
-			position.marginY = 0;
+			position.setMarginX(0);
+			position.setMarginY(0);
 		}
 		return position;
 	}
