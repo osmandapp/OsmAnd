@@ -59,7 +59,7 @@ public class BackupTypesFragment extends BaseFullScreenFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_backup_types, container);
+		View view = inflate(R.layout.fragment_backup_types, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 		progressBar = view.findViewById(R.id.progress_bar);
