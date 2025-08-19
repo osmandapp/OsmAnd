@@ -5823,4 +5823,12 @@
     <string name="enable_msaa">Abilita MSAA</string>
     <string name="average_elevation">Elevazione media</string>
     <string name="descent">Discesa</string>
+    <string name="private_access_routing_req_short">La destinazione è in un\'area privata. Abilitare l\'uso di strade private?</string>
+    <string name="view_on_phone">Vedi sul telefono</string>
+    <string name="ascent">Salita</string>
+    <string name="map_orientations_choose_description">Lasciare vuoto per passare tra le modalità disponibili, o aggiungere solo quelle preferite.</string>
+    <string name="map_orientations">Orientamento mappa</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Risposta</string>
 </resources>

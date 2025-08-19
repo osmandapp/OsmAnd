@@ -6184,4 +6184,26 @@
     <string name="n_a">N/D</string>
     <string name="reverse_mode_original_track_desc">Siga o caminho exato de volta ao início.\nAtenção: isso pode ser perigoso visto que ignora o tráfego de mão única em estradas.</string>
     <string name="response">Resposta</string>
+    <string name="rendering_attr_hideSpots_name">Sondagens pontuais</string>
+    <string name="rendering_attr_hideSpots_description">Ocultar sondagens pontuais</string>
+    <string name="rendering_attr_hideTidalFlats_name">Planícies de maré</string>
+    <string name="rendering_attr_hideTidalFlats_description">Ocultar planícies de maré</string>
+    <string name="rendering_attr_depthColorScheme_name">Esquema de cores de profundidade</string>
+    <string name="rendering_attr_depthColorScheme_description">Esquema de cores de profundidade</string>
+    <string name="rendering_attr_depthContoursDashed_name">Contornos de profundidade tracejados</string>
+    <string name="rendering_attr_depthContoursDashed_description">Contornos de profundidade tracejados</string>
+    <string name="rendering_attr_safetyContour_name">Contorno de profundidade de segurança</string>
+    <string name="rendering_attr_safetyContour_description">Contorno de profundidade de segurança</string>
+    <string name="rendering_attr_shellsStyle_name">Estilo de conchas</string>
+    <string name="rendering_attr_shellsStyle_description">Estilo para conchas no fundo do mar</string>
+    <string name="rendering_attr_showLNAMmarker_name">Marcadores ENC</string>
+    <string name="rendering_attr_showLNAMmarker_description">Mostrar marcadores ENC</string>
+    <string name="rendering_attr_spotDistance_name">Distância de sondagem pontual</string>
+    <string name="rendering_attr_spotDistance_description">Distância de sondagem pontual</string>
+    <string name="rendering_attr_spotSize_name">Tamanho do som pontual</string>
+    <string name="rendering_attr_spotSize_description">Tamanho do som pontual</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Estilo de planície de maré</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Estilo das planícies de maré</string>
+    <string name="rendering_attr_watercolor_name">Aquarela</string>
+    <string name="rendering_attr_watercolor_description">Cor da água</string>
 </resources>
