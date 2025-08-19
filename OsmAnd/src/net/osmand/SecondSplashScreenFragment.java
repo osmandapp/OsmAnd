@@ -40,7 +40,7 @@ public class SecondSplashScreenFragment extends BaseFullScreenFragment {
 		if (orientation == Configuration.ORIENTATION_LANDSCAPE && !AndroidUiHelper.isTablet(getContext())) {
 			int id = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
 			if (id > 0)
-				return (id);
+				return getDimensionPixelSize(id);
 		}
 		return 0;
 	}
