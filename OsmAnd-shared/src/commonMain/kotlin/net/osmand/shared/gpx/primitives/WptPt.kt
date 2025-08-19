@@ -204,8 +204,13 @@ class WptPt : GpxExtensions {
 		}
 	}
 
-	fun setHidden(hidden: String) {
-		getExtensionsToWrite()[GpxUtilities.HIDDEN_EXTENSION] = hidden
+	fun setHidden(hidden: String?) {
+		val extensionsToWrite = getExtensionsToWrite()
+		if (hidden == "true") {
+			extensionsToWrite[GpxUtilities.HIDDEN_EXTENSION] = hidden
+		} else {
+			extensionsToWrite.remove(GpxUtilities.HIDDEN_EXTENSION)
+		}
 	}
 
 	fun setProfileType(profileType: String) {
@@ -314,28 +319,21 @@ class WptPt : GpxExtensions {
 		category = pt.category
 
 		val extensions = pt.getExtensionsToRead()
+
 		val color = extensions[GpxUtilities.COLOR_NAME_EXTENSION]
-		if (color != null) {
-			setColor(color)
-		}
+		setColor(color)
+
 		val iconName = extensions[GpxUtilities.ICON_NAME_EXTENSION]
-		if (iconName != null) {
-			setIconName(iconName)
-		}
+		setIconName(iconName)
+
 		val backgroundType = extensions[GpxUtilities.BACKGROUND_TYPE_EXTENSION]
-		if (backgroundType != null) {
-			setBackgroundType(backgroundType)
-		}
+		setBackgroundType(backgroundType)
+
 		val address = extensions[GpxUtilities.ADDRESS_EXTENSION]
-		if (address != null) {
-			setAddress(address)
-		}
+		setAddress(address)
+
 		val hidden = extensions[GpxUtilities.HIDDEN_EXTENSION]
-		if (hidden != null) {
-			setHidden(hidden)
-		} else {
-			getExtensionsToWrite().remove(GpxUtilities.HIDDEN_EXTENSION)
-		}
+		setHidden(hidden)
 	}
 
 	fun getSpecialPointType(): String? {
