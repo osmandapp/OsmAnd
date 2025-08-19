@@ -2118,7 +2118,7 @@
     <string name="right_side_navigation">Circular por la derecha</string>
     <string name="shared_string_automatic">Automático</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad. \n \n Disfrutá del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usando la visualización de las curvas de nivel y la información topográfica (mediante un complemento), elegí entre los modos de automóvil, bicicleta o peatón, editá en OSM y mucho más.</string>
-    <string name="osmand_extended_description_part2">Navegación GPS\n• Elegí entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro te guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, te ayudará a lo largo de la ruta\n• Para hacer tu viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Mostrá los límites de velocidad y obtené un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Buscá destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Grabá tu viaje o subí una traza GPX y seguila</string>
+    <string name="osmand_extended_description_part2">Navegación GPS\n• Elegí entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro te guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, te ayudarán a lo largo de la ruta\n• Para hacer tu viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Mostrá los límites de velocidad y obtené un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Buscá destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Grabá tu viaje o subí una traza GPX y seguila</string>
     <string name="osmand_extended_description_part3">Mapa\n• Mostrá los PDI (puntos de interés) a tu alrededor\n• Ajustá el mapa a la dirección del movimiento (o brújula)\n• Mostrá tu ubicación y la dirección hacia dónde mirás\n• Compartí la ubicación para que tus amigos te encuentren\n• Guardá los sitios importantes en «Mis favoritos»\n• Elegí cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Mostrá las teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
@@ -2449,7 +2449,7 @@
     <string name="rendering_attr_whiteWaterSports_name">Deportes acuáticos</string>
     <string name="group_deleted">Grupo borrado</string>
     <string name="clear_all_intermediates">Limpiar todos los destinos intermedios</string>
-    <string name="select_waypoints_category_description">Agregá todos los puntos de referencia de la traza o elegí categorías separadas.</string>
+    <string name="select_waypoints_category_description">Agregá todos los puntos de referencia de la traza o elegí las categorías separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">No se encontró nada:</string>
     <string name="shared_string_travel_guides">Guías turísticas</string>
@@ -3816,7 +3816,7 @@
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
     <string name="offline_wikivoyage">Wikiviajes sin conexión</string>
     <string name="nautical_depth">Profundidad náutica</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Conseguí «%1$s» como parte del plan %2$s. Comparación:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Obtené «%1$s» como parte del plan %2$s. Comparación:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
     <string name="continue_with">Continuar con %1$s</string>
     <string name="not_available_with">No disponible con %1$s</string>
@@ -4263,7 +4263,7 @@
     <string name="routing_attr_motor_type_name">Combustible del motor</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
-    <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
+    <string name="routing_attr_motor_type_petrol_name">Gasolina (nafta)</string>
     <string name="switch_widget_mode_desc">Pulsá el widget para alternar los modos.</string>
     <string name="side_marker_eta">Hora estimada de llegada</string>
     <string name="goods_delivery_desc_3">Solo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
@@ -4349,7 +4349,7 @@
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo a medir con la velocidad media para calcular la hora de llegada estimada.</string>
     <string name="shared_string_large">Grande</string>
     <string name="how_to_use">Cómo usar:</string>
-    <string name="distance_by_tap_use_description">Pulsá en el mapa para ver la distancia entre tu ubicación actual y el punto pulsado.\nPulsá con 2 dedos en el mapa para ver la distancia entre los dos puntos pulsados</string>
+    <string name="distance_by_tap_use_description">Pulsá en el mapa para ver la distancia entre tu ubicación actual y el punto pulsado.\nPulsá con 2 dedos en el mapa para ver la distancia entre los puntos pulsados</string>
     <string name="rotate_map_manual_opt">Rotación manual</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
@@ -5118,7 +5118,7 @@
     <string name="vertical_exaggeration">Exageración vertical</string>
     <string name="relief_3d_download_description">Se necesitan mapas adicionales para ver el «Terreno» en el mapa.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd puede recuperar los datos de elevación de caminos cercanos o mapas del terreno.</string>
-    <string name="vertical_exaggeration_description">Al cambiar el valor de la escala, puede enfatizar el relieve en 3D.</string>
+    <string name="vertical_exaggeration_description">Al cambiar el valor de la escala, puedes enfatizar el relieve en 3D.</string>
     <string name="apply_only_to_new">Aplicar sólo para nuevos</string>
     <string name="shared_string_changes">Cambios</string>
     <string name="use_terrain_maps_summary">Usa mapas del terreno para los datos de elevación. La geometría de la traza se mantiene sin cambios.</string>
@@ -5330,7 +5330,7 @@
     <string name="no_photos_available_descr">Aún no se agregaron fotos de usuarios a esta ubicación</string>
     <string name="no_photos_available">Sin fotos disponibles</string>
     <string name="obd_fuel_type_not_provided">No se indica el tipo de combustible</string>
-    <string name="obd_fuel_type_gasoline">Nafta, Gasolina, Bencina</string>
+    <string name="obd_fuel_type_gasoline">Gasolina (nafta)</string>
     <string name="obd_fuel_type_methanol">Metanol</string>
     <string name="obd_fuel_type_ethanol">Etanol</string>
     <string name="obd_fuel_type_diesel">Diésel</string>
@@ -5560,11 +5560,11 @@
     <string name="shared_string_road_exit">Salida</string>
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
     <string name="hmd_promo">Oferta de HMD por %1$s meses</string>
-    <string name="original_shape_description">Cada punto mantendría su propia forma.</string>
+    <string name="original_shape_description">Cada punto conserva su propia forma.</string>
     <string name="save_favorite_default_appearance">¿Aplicar cambios a todos los puntos existentes en la carpeta, o sólo a los nuevos?</string>
-    <string name="original_color_description">Cada punto mantendría su propio color.</string>
+    <string name="original_color_description">Cada punto conserva su propio color.</string>
     <string name="apply_to_all_points">Aplicar a todos los puntos</string>
-    <string name="original_icon_description">Cada punto mantendría su propio ícono.</string>
+    <string name="original_icon_description">Cada punto conserva su propio ícono.</string>
     <string name="show_mercator_grids_description">Muestra la cuadrícula en kilómetros de Mercator, en lugar de WGS84 o UTM</string>
     <string name="show_mercator_grids">Usar Mercator en lugar de WGS84 o UTM</string>
     <string name="show_dms_grids">Usar DMS en lugar de grados</string>
@@ -5669,7 +5669,7 @@
     <string name="reverse_mode_original_track">Traza original</string>
     <string name="reverse_mode">Modo inverso</string>
     <string name="n_a">N/C</string>
-    <string name="write_location_provider_description">Guardá el proveedor de ubicación en cada punto de la traza, mientras se graba</string>
+    <string name="write_location_provider_description">Guarda el proveedor de ubicación en cada punto de la traza, mientras se graba</string>
     <string name="write_location_provider">Escribir proveedor de ubicación</string>
     <string name="altitude_metrics_description">Define la unidad de medida para la altitud en los widgets y las estadísticas.</string>
     <string name="average_elevation">Elevación media</string>
@@ -5722,4 +5722,6 @@
     <string name="rendering_attr_watercolor_description">Color del agua</string>
     <string name="rendering_attr_shellsStyle_description">Estilo para los moluscos en el fondo marino</string>
     <string name="rendering_attr_shellsStyle_name">Estilo para moluscos marinos</string>
+    <string name="private_access_routing_req_short">El destino está en un área privada. ¿Querés cruzar por caminos privados?</string>
+    <string name="view_on_phone">Ver en el teléfono</string>
 </resources>
