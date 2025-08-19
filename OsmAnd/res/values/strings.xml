@@ -4740,6 +4740,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="lang_cs">Czech</string>
     <string name="lang_da">Danish</string>
     <string name="lang_nl">Dutch</string>
+    <string name="lang_en_barebones">English (barebones)</string>
     <string name="lang_fi">Finnish</string>
     <string name="lang_fr">French</string>
     <string name="lang_ka">Georgian</string>
