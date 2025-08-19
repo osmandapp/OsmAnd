@@ -1,9 +1,6 @@
 package net.osmand.plus.configmap.routes;
 
-import static net.osmand.osm.OsmRouteType.MTB;
-
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,15 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.render.RenderingClass;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class CustomRoutesFragment extends MapRoutesFragment {
 
@@ -58,7 +48,7 @@ public class CustomRoutesFragment extends MapRoutesFragment {
 		ImageView icon = container.findViewById(R.id.icon);
 		int iconId = RouteUtils.getIconIdForAttr(attrName);
 		if (iconId > 0) {
-			icon.setImageDrawable(getPaintedContentIcon(iconId, enabled ? selectedColor : disabledColor));
+			icon.setImageDrawable(getPaintedIcon(iconId, enabled ? selectedColor : disabledColor));
 		}
 
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.description), false);

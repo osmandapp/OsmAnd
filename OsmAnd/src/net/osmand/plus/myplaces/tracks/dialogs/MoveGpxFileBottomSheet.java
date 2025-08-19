@@ -10,10 +10,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -23,7 +21,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -37,7 +34,6 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	private static final String EXCLUDED_DIR_KEY = "excluded_dir_key";
 	private static final String SHOW_ALL_FOLDERS_KEY = "show_all_folders_key";
 
-	private OsmandApplication app;
 	@Nullable
 	private File srcFile;
 	@Nullable
@@ -48,7 +44,6 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(SRC_FILE_KEY)) {
 				srcFile = AndroidUtils.getSerializable(savedInstanceState, SRC_FILE_KEY, File.class);
@@ -69,20 +64,17 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 				.create();
 		items.add(titleItem);
 
-		View addNewFolderView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
+		View addNewFolderView = inflate(R.layout.bottom_sheet_item_with_descr_64dp);
 		addNewFolderView.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 		AndroidUiHelper.updateVisibility(addNewFolderView.findViewById(R.id.description), false);
 		BaseBottomSheetItem addNewFolderItem = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.add_new_folder))
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
+				.setOnClickListener(v -> callActivity(activity ->
 						AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-								null, null, MoveGpxFileBottomSheet.this, usedOnMap);
-					}
-				})
+						null, null, MoveGpxFileBottomSheet.this, usedOnMap)
+				))
 				.setCustomView(addNewFolderView)
 				.create();
 		items.add(addNewFolderItem);
@@ -152,10 +144,9 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	private void folderSelected(@NonNull File destDir) {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnTrackFileMoveListener) {
+		if (getTargetFragment() instanceof OnTrackFileMoveListener listener) {
 			File dest = srcFile != null ? new File(destDir, srcFile.getName()) : destDir;
-			((OnTrackFileMoveListener) fragment).onFileMove(srcFile, dest);
+			listener.onFileMove(srcFile, dest);
 		}
 	}
 

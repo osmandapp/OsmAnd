@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -44,8 +43,8 @@ public class ElevationProfileWidgetInfoFragment extends WidgetInfoBaseFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		View content = themedInflater.inflate(R.layout.elevation_profile_widget_settings, container, false);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		View content = inflate(R.layout.elevation_profile_widget_settings, container, false);
 		container.addView(content);
 
 		icon = view.findViewById(R.id.slope_icon);

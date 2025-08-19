@@ -77,8 +77,8 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 			}
 		}
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnGroupNameChangeListener) {
-			((OnGroupNameChangeListener) fragment).onTrackGroupChanged();
+		if (fragment instanceof OnTrackGroupChangeListener) {
+			((OnTrackGroupChangeListener) fragment).onTrackGroupChanged();
 		}
 		dismiss();
 	}

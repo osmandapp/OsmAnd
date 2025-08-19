@@ -147,7 +147,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private final Map<DashboardType, Integer> lastKnownScrolls = new HashMap<>();
 	private ApplicationMode previousAppMode;
 	private boolean landscape;
-	private final List<WeakReference<DashBaseFragment>> fragList = new LinkedList<>();
+	private final List<WeakReference<DashBaseFragment>> fragments = new LinkedList<>();
 	private LatLon mapViewLocation;
 	private float heading;
 	private boolean mapLinkedToLocation;
@@ -361,8 +361,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (isCurrentType(DASHBOARD)) {
 			settingsButton.setVisibility(View.VISIBLE);
 			settingsButton.setOnClickListener(v -> {
-				DashboardSettingsDialogFragment fragment = new DashboardSettingsDialogFragment();
-				fragment.show(mapActivity.getSupportFragmentManager(), "dashboard_settings");
+				DashboardSettingsDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 			});
 			lst.setVisibility(View.VISIBLE);
 			lst.setOnClickListener(v -> {
@@ -624,7 +623,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			hide(animation);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			hideActionButton();
-			for (WeakReference<DashBaseFragment> df : fragList) {
+			for (WeakReference<DashBaseFragment> df : fragments) {
 				if (df.get() != null) {
 					df.get().onCloseDash();
 				}
@@ -632,9 +631,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 			MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
-				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
-				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
-				plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
+				MapillaryFirstDialogFragment.showInstance(mapActivity);
 			}
 		}
 		mapActivity.updateStatusBarColor();
@@ -1004,7 +1001,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	void onDetach(DashBaseFragment dashBaseFragment) {
-		Iterator<WeakReference<DashBaseFragment>> it = fragList.iterator();
+		Iterator<WeakReference<DashBaseFragment>> it = fragments.iterator();
 		while (it.hasNext()) {
 			WeakReference<DashBaseFragment> wr = it.next();
 			if (wr.get() == dashBaseFragment) {
@@ -1027,7 +1024,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		inLocationUpdate = true;
 		mapActivity.runOnUiThread(() -> {
 			inLocationUpdate = false;
-			for (WeakReference<DashBaseFragment> df : fragList) {
+			for (WeakReference<DashBaseFragment> df : fragments) {
 				if (df.get() instanceof DashLocationFragment) {
 					((DashLocationFragment) df.get()).updateLocation(centerChanged, locationChanged, compassChanged);
 				}
@@ -1045,8 +1042,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		updateLocation(false, false, true);
 	}
 
-	public void onAttach(DashBaseFragment dashBaseFragment) {
-		fragList.add(new WeakReference<>(dashBaseFragment));
+	public void onAttach(@NonNull DashBaseFragment fragment) {
+		fragments.add(new WeakReference<>(fragment));
 	}
 
 	public boolean onBackPressed() {
@@ -1221,7 +1218,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	<T extends DashBaseFragment> T getFragmentByClass(Class<T> class1) {
-		for (WeakReference<DashBaseFragment> f : fragList) {
+		for (WeakReference<DashBaseFragment> f : fragments) {
 			DashBaseFragment b = f.get();
 			if (b != null && !b.isDetached() && class1.isInstance(b)) {
 				//noinspection unchecked

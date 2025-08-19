@@ -34,7 +34,7 @@ import java.util.List;
 
 public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
-	public static final String TAG = "WikivoyageSearchDialogFragment";
+	public static final String TAG = WikivoyageSearchDialogFragment.class.getSimpleName();
 
 	private WikivoyageSearchHelper searchHelper;
 	private String searchQuery = "";
@@ -54,7 +54,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 		updateNightMode();
 		searchHelper = new WikivoyageSearchHelper(app);
 
-		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container, false);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
@@ -69,7 +69,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 				String newQueryText = searchQuery + " ";
 				searchEt.setText(newQueryText);
 				searchEt.setSelection(newQueryText.length());
-				AndroidUtils.hideSoftKeyboard(getActivity(), searchEt);
+				callActivity(activity -> AndroidUtils.hideSoftKeyboard(activity, searchEt));
 				return true;
 			}
 			return false;
@@ -105,13 +105,10 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 			FragmentManager fm = getFragmentManager();
 			if (pos != RecyclerView.NO_POSITION && fm != null) {
 				Object item = adapter.getItem(pos);
-				if (item instanceof WikivoyageSearchResult) {
-					WikivoyageSearchResult res = (WikivoyageSearchResult) item;
+				if (item instanceof WikivoyageSearchResult res) {
 					WikivoyageArticleDialogFragment.showInstance(fm, res.getArticleId(), new ArrayList<>(res.getLangs()));
-				} else if (item instanceof WikivoyageSearchHistoryItem) {
-					WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
-					WikivoyageArticleDialogFragment
-							.showInstanceByTitle(app, fm, historyItem.getArticleTitle(), historyItem.getLang());
+				} else if (item instanceof WikivoyageSearchHistoryItem historyItem) {
+					WikivoyageArticleDialogFragment.showInstanceByTitle(app, fm, historyItem.getArticleTitle(), historyItem.getLang());
 				}
 			}
 		});
@@ -154,7 +151,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 	private void runSearch() {
 		switchProgressBarVisibility(true);
 		cancelled = false;
-		searchHelper.search(searchQuery, new ResultMatcher<List<WikivoyageSearchResult>>() {
+		searchHelper.search(searchQuery, new ResultMatcher<>() {
 			@Override
 			public boolean publish(List<WikivoyageSearchResult> results) {
 				app.runInUIThread(() -> {

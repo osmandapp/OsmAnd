@@ -201,10 +201,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupRoutingPrefs() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		PreferenceScreen screen = getPreferenceScreen();
 		ApplicationMode am = getSelectedAppMode();
 

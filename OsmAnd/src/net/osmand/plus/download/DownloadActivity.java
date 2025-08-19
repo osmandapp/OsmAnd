@@ -14,9 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBar;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.IProgress;
@@ -162,9 +160,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			String region = bundle.getString(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
 				if (getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)) {
-					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE, WIKIPEDIA_FILE));
+					SearchDialogFragment.showInstance(this, region, true, NORMAL_FILE, WIKIPEDIA_FILE);
 				} else {
-					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE));
+					SearchDialogFragment.showInstance(this, region, true, NORMAL_FILE);
 				}
 			}
 			filter = bundle.getString(FILTER_KEY);
@@ -349,10 +347,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		return viewPager.getCurrentItem();
 	}
 
-	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
-		fragment.show(activity.getSupportFragmentManager(), "dialog");
-	}
-
 	public static boolean isDownloadingPermitted(@NonNull OsmandSettings settings) {
 		Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 		int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
@@ -392,10 +386,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	private void showGoToMap(@NonNull WorldRegion region) {
-		GoToMapFragment fragment = new GoToMapFragment();
-		fragment.setRegionCenter(region.getRegionCenter());
-		fragment.setRegionName(region.getLocaleName());
-		fragment.show(getSupportFragmentManager(), GoToMapFragment.TAG);
+		GoToMapFragment.showInstance(this, region);
 	}
 
 	private void showDownloadWorldMapIfNeeded() {
@@ -406,10 +397,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (SUGGEST_TO_DOWNLOAD_BASEMAP && !SUGGESTED_TO_DOWNLOAD_BASEMAP && item != null
 				&& item.isDownloaded() && item.isOutdated() && !downloadThread.isDownloading(item)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
-
-			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
-			fragment.setIndexItem(item);
-			fragment.show(getSupportFragmentManager(), AskMapDownloadFragment.TAG);
+			AskMapDownloadFragment.showInstance(this, item);
 		}
 	}
 

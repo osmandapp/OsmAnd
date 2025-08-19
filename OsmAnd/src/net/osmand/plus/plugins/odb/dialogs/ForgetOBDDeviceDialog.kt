@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import net.osmand.plus.plugins.externalsensors.dialogs.ForgetDeviceBaseDialog
+import net.osmand.plus.utils.AndroidUtils
 
 class ForgetOBDDeviceDialog : ForgetDeviceBaseDialog() {
 	private lateinit var deviceId: String
@@ -21,13 +22,15 @@ class ForgetOBDDeviceDialog : ForgetDeviceBaseDialog() {
 			if (targetFragment !is ForgetDeviceListener) {
 				throw IllegalArgumentException("target fragment should implement ForgetDeviceListener")
 			}
-			val fragment = ForgetOBDDeviceDialog()
-			val args = Bundle()
-			args.putString(DEVICE_ID_KEY, deviceId)
-			args.putBoolean(BLE_KEY, isBLE)
-			fragment.arguments = args
-			fragment.setTargetFragment(targetFragment, 0)
-			fragment.show(manager, TAG)
+			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+				val fragment = ForgetOBDDeviceDialog()
+				val args = Bundle()
+				args.putString(DEVICE_ID_KEY, deviceId)
+				args.putBoolean(BLE_KEY, isBLE)
+				fragment.arguments = args
+				fragment.setTargetFragment(targetFragment, 0)
+				fragment.show(manager, TAG)
+			}
 		}
 	}
 

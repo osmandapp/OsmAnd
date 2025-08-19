@@ -33,7 +33,7 @@ import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -63,7 +63,7 @@ import java.util.List;
 
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
-public class WaypointsFragment extends BaseOsmAndFragment implements IContextDialog, ObservableScrollViewCallbacks,
+public class WaypointsFragment extends BaseFullScreenFragment implements IContextDialog, ObservableScrollViewCallbacks,
 		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {
 
 	public static final String TAG = "WaypointsFragment";
@@ -130,12 +130,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 
 		view.findViewById(R.id.sort_button).setOnClickListener(v -> {
 			if (isHasActivePoints()) {
-				MapActivity activity = getMapActivity();
-				if (activity != null) {
-					TargetOptionsBottomSheetDialogFragment fragment = new TargetOptionsBottomSheetDialogFragment();
-					fragment.setUsedOnMap(true);
-					fragment.show(activity.getSupportFragmentManager(), TargetOptionsBottomSheetDialogFragment.TAG);
-				}
+				callMapActivity(TargetOptionsBottomSheetDialogFragment::showInstance);
 			}
 		});
 
@@ -332,11 +327,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 		controller.onApplyChanges(items);
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
 	public void applyDayNightMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -360,14 +350,14 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 		TextView addButtonDescr = view.findViewById(R.id.add_button_descr);
 
 		addButtonDescr.setText(R.string.shared_string_add);
-		addButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedContentIcon(R.drawable.ic_action_plus, colorActive), null, null, null);
+		addButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedIcon(R.drawable.ic_action_plus, colorActive), null, null, null);
 		AndroidUtils.setBackground(mapActivity, addButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 		AndroidUtils.setBackground(mapActivity, addButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 
 		FrameLayout clearButton = view.findViewById(R.id.clear_all_button);
 		TextView clearButtonDescr = view.findViewById(R.id.clear_all_button_descr);
 		clearButtonDescr.setText(R.string.shared_string_clear_all);
-		clearButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedContentIcon(R.drawable.ic_action_clear_all, colorActive), null, null, null);
+		clearButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getPaintedIcon(R.drawable.ic_action_clear_all, colorActive), null, null, null);
 
 		AndroidUtils.setBackground(mapActivity, clearButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 		AndroidUtils.setBackground(mapActivity, clearButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
@@ -548,9 +538,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 	                                    ArrayAdapter<Object> adapter, boolean nightMode,
 	                                    boolean flat, int position) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		WaypointDialogHelper helper = mapActivity.getDashboard().getWaypointDialogHelper();
 		if (v == null || v.findViewById(R.id.info_close) == null) {
-			v = inflate(R.layout.route_waypoint_item, null);
+			v = inflate(R.layout.route_waypoint_item);
 		}
 		v.setBackgroundColor(ColorUtilities.getCardAndListBackgroundColor(mapActivity, nightMode));
 		updatePointInfoView(mapActivity, v, point, true, nightMode, edit, false);

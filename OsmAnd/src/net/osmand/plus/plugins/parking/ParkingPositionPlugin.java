@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CheckBox;
@@ -20,7 +19,6 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -228,13 +226,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * It allows user to choose a type of parking (time-limited or time-unlimited).
 	 */
 	public void showAddParkingDialog(MapActivity mapActivity, double latitude, double longitude) {
-		Bundle args = new Bundle();
-		args.putDouble(ParkingTypeBottomSheetDialogFragment.LAT_KEY, latitude);
-		args.putDouble(ParkingTypeBottomSheetDialogFragment.LON_KEY, longitude);
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		ParkingTypeBottomSheetDialogFragment fragment = new ParkingTypeBottomSheetDialogFragment();
-		fragment.setArguments(args);
-		fragment.show(fragmentManager, ParkingTypeBottomSheetDialogFragment.TAG);
+		ParkingTypeBottomSheetDialogFragment.showInstance(mapActivity, latitude, longitude);
 	}
 
 	void showContextMenuIfNeeded(MapActivity mapActivity, boolean animated) {

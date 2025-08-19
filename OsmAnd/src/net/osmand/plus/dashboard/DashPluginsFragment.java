@@ -2,7 +2,6 @@ package net.osmand.plus.dashboard;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -54,32 +53,22 @@ public class DashPluginsFragment extends DashBaseFragment {
 		};
 	}
 
-	private View.OnClickListener pluginDetailsListener() {
-		return view -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				PluginsFragment.showInstance(activity.getSupportFragmentManager());
-			}
-			closeDashboard();
-		};
-	}
-
 	@Override
-	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.dash_common_fragment, container, false);
-		TextView header = view.findViewById(R.id.fav_text);
-		header.setText(TITLE_ID);
-		view.findViewById(R.id.show_all).setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				PluginsFragment.showInstance(activity.getSupportFragmentManager());
-			}
-			closeDashboard();
-		});
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
+		View view = inflate(R.layout.dash_common_fragment, container, false);
+		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
+		view.findViewById(R.id.show_all).setOnClickListener(v -> showPluginsScreen());
 		initPlugins();
 		return view;
 	}
 
+	private void showPluginsScreen() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			PluginsFragment.showInstance(activity.getSupportFragmentManager());
+		}
+		closeDashboard();
+	}
 
 	private void initPlugins() {
 		List<OsmandPlugin> notFunctionalPlugins = PluginsHelper.getNotActivePlugins();
@@ -112,45 +101,19 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	@Override
 	public void onOpenDash() {
-		View contentView = getView();
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		LinearLayout pluginsContainer = contentView.findViewById(R.id.items);
-		pluginsContainer.removeAllViews();
-		for (OsmandPlugin p : plugins) {
-			inflatePluginView(inflater, pluginsContainer, p);
+		View mainView = getView();
+		if (mainView != null) {
+			LinearLayout llPluginsContainer = mainView.findViewById(R.id.items);
+			llPluginsContainer.removeAllViews();
+			for (OsmandPlugin p : plugins) {
+				inflatePluginView(llPluginsContainer, p);
+			}
 		}
 	}
 
-	private void updatePluginState(View pluginView, OsmandPlugin plugin) {
-		CompoundButton enableDisableButton = pluginView.findViewById(R.id.plugin_enable_disable);
-		Button getButton = pluginView.findViewById(R.id.get_plugin);
-		enableDisableButton.setOnCheckedChangeListener(null);
-		if (plugin.isLocked()) {
-			getButton.setVisibility(View.VISIBLE);
-			enableDisableButton.setVisibility(View.GONE);
-		} else {
-			getButton.setVisibility(View.GONE);
-			enableDisableButton.setVisibility(View.VISIBLE);
-			enableDisableButton.setChecked(plugin.isEnabled());
-		}
-		setListener(plugin, enableDisableButton, pluginView);
-
-		ImageButton logoView = pluginView.findViewById(R.id.plugin_logo);
-		if (plugin.isEnabled()) {
-			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled_light);
-			logoView.setContentDescription(getString(R.string.shared_string_disable));
-		} else {
-			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(
-					new int[]{R.attr.bg_plugin_logo_disabled});
-			logoView.setBackground(attributes.getDrawable(0));
-			logoView.setContentDescription(getString(plugin.isLocked() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
-			attributes.recycle();
-		}
-	}
-
-	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, OsmandPlugin plugin) {
-		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
-		view.setOnClickListener(pluginDetailsListener());
+	private void inflatePluginView(@NonNull ViewGroup container, @NonNull OsmandPlugin plugin) {
+		View view = inflate(R.layout.dash_plugin_item, container, false);
+		view.setOnClickListener(v -> showPluginsScreen());
 
 		TextView nameView = view.findViewById(R.id.plugin_name);
 		nameView.setText(plugin.getName());
@@ -164,14 +127,45 @@ public class DashPluginsFragment extends DashBaseFragment {
 		getButton.setOnClickListener(getListener(plugin));
 		enableDisableButton.setOnCheckedChangeListener(null);
 		updatePluginState(view, plugin);
-		setListener(plugin, enableDisableButton, view);
+		setListener(view, plugin, enableDisableButton);
 		container.addView(view);
 	}
 
-	private void setListener(OsmandPlugin plugin, CompoundButton enableDisableButton, View pluginView) {
-		enableDisableButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			if (PluginsHelper.enablePluginIfNeeded(getActivity(), getMyApplication(), plugin, isChecked)) {
-				updatePluginState(pluginView, plugin);
+	private void updatePluginState(@NonNull View view, @NonNull OsmandPlugin plugin) {
+		Button btnGet = view.findViewById(R.id.get_plugin);
+		CompoundButton btnEnableDisable = view.findViewById(R.id.plugin_enable_disable);
+
+		btnEnableDisable.setOnCheckedChangeListener(null);
+		if (plugin.isLocked()) {
+			btnGet.setVisibility(View.VISIBLE);
+			btnEnableDisable.setVisibility(View.GONE);
+		} else {
+			btnGet.setVisibility(View.GONE);
+			btnEnableDisable.setVisibility(View.VISIBLE);
+			btnEnableDisable.setChecked(plugin.isEnabled());
+		}
+		setListener(view, plugin, btnEnableDisable);
+
+		ImageButton ivPluginLogo = view.findViewById(R.id.plugin_logo);
+		if (plugin.isEnabled()) {
+			ivPluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled_light);
+			ivPluginLogo.setContentDescription(getString(R.string.shared_string_disable));
+		} else {
+			try (TypedArray attributes = getThemedContext().getTheme().obtainStyledAttributes(
+					new int[]{R.attr.bg_plugin_logo_disabled})) {
+				ivPluginLogo.setBackground(attributes.getDrawable(0));
+				ivPluginLogo.setContentDescription(getString(plugin.isLocked()
+						? R.string.access_shared_string_not_installed
+						: R.string.shared_string_enable));
+			}
+		}
+	}
+
+	private void setListener(@NonNull View view, @NonNull OsmandPlugin plugin,
+	                         @NonNull CompoundButton btnEnableDisable) {
+		btnEnableDisable.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			if (PluginsHelper.enablePluginIfNeeded(getActivity(), app, plugin, isChecked)) {
+				updatePluginState(view, plugin);
 			}
 		});
 	}

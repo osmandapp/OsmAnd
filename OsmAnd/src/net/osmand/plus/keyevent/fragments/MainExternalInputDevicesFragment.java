@@ -17,7 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
@@ -43,7 +42,6 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 		ApplicationMode appMode = getSelectedAppMode();
 		PreferenceScreen screen = getPreferenceScreen();
 		if (context != null && screen != null) {
-			OsmandApplication app = requireMyApplication();
 			deviceHelper = app.getInputDeviceHelper();
 			screen.addPreference(createPreference(context, R.layout.list_item_divider));
 			if (isInputDeviceEnabled(appMode)) {

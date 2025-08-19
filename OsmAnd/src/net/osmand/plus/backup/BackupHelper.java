@@ -108,6 +108,7 @@ public class BackupHelper {
 
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();
+	private long maximumAccountSize;
 
 	private final BackupListeners backupListeners = new BackupListeners();
 
@@ -168,6 +169,10 @@ public class BackupHelper {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppSubscription purchasedSubscription = purchaseHelper.getAnyPurchasedOsmAndProSubscription();
 		return purchasedSubscription != null ? purchasedSubscription.getOrderId() : null;
+	}
+
+	public long getMaximumAccountSize() {
+		return maximumAccountSize;
 	}
 
 	public boolean isBackupSubscriptionsExpired() {
@@ -536,6 +541,7 @@ public class BackupHelper {
 							String totalZipSize = res.getString("totalZipSize");
 							String totalFiles = res.getString("totalFiles");
 							String totalFileVersions = res.getString("totalFileVersions");
+							maximumAccountSize = Algorithms.parseLongSilently(res.getString("maximumAccountSize"), 0);
 							JSONArray allFiles = res.getJSONArray("allFiles");
 							for (int i = 0; i < allFiles.length(); i++) {
 								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));

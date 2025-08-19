@@ -19,6 +19,7 @@ import net.osmand.plus.base.BaseBottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.enums.WeatherSource;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -26,13 +27,11 @@ public class SelectWeatherSourceBottomSheet extends BaseBottomSheetDialogFragmen
 
 	private static final String TAG = SelectWeatherSourceBottomSheet.class.getSimpleName();
 
-	private boolean nightMode;
 	private WeatherPlugin plugin;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 	}
 
@@ -40,8 +39,8 @@ public class SelectWeatherSourceBottomSheet extends BaseBottomSheetDialogFragmen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_select_weather_source, null);
+		updateNightMode();
+		View view = inflate(R.layout.bottom_sheet_select_weather_source);
 
 		((TextView) view.findViewById(R.id.title)).setText(R.string.data_source);
 		((TextView) view.findViewById(R.id.description)).setText(R.string.weather_data_sources_prompt);
@@ -53,6 +52,12 @@ public class SelectWeatherSourceBottomSheet extends BaseBottomSheetDialogFragmen
 		recyclerView.setAdapter(new WeatherSourceAdapter());
 
 		return view;
+	}
+
+	@NonNull
+	@Override
+	public ThemeUsageContext getThemeUsageContext() {
+		return ThemeUsageContext.OVER_MAP;
 	}
 
 	public class WeatherSourceAdapter extends RecyclerView.Adapter<WeatherSourceAdapter.WeatherSourceViewHolder> {

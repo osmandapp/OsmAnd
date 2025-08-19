@@ -21,7 +21,7 @@ import net.osmand.IndexConstants;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.GpxDialogs;
 import net.osmand.plus.track.SelectTrackTabsFragment;
@@ -31,7 +31,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackTabsFragment.GpxFileSelectionListener {
+public class SimulateLocationFragment extends BaseFullScreenFragment implements SelectTrackTabsFragment.GpxFileSelectionListener {
 
 	public static final String TAG = SimulateLocationFragment.class.getSimpleName();
 
@@ -99,7 +99,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.simulate_location_fragment, container, false);
+		View view = inflate(R.layout.simulate_location_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		if (gpxFile == null && savedInstanceState != null) {
@@ -267,7 +267,14 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 		return speed == 1 ? getString(R.string.shared_string_original) : "x" + speed;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable GpxFile gpxFile, boolean usedOnMap) {
+	@Override
+	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
+		this.gpxFile = gpxFile;
+		updateCard();
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @Nullable GpxFile gpxFile, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SimulateLocationFragment fragment = new SimulateLocationFragment();
 			fragment.setGpxFile(gpxFile);
@@ -277,11 +284,5 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	@Override
-	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
-		this.gpxFile = gpxFile;
-		updateCard();
 	}
 }

@@ -37,7 +37,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
@@ -70,7 +70,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener,
+public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, TrackItemsContainer, TrackSelectionListener, SortTracksListener, EmptyTracksViewHolder.EmptyTracksListener {
 
 	public static final String TAG = SelectTrackFolderFragment.class.getSimpleName();
@@ -123,7 +123,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		importHelper = app.getImportHelper();
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.select_track_folder_fragment, container, false);
+		view = inflate(R.layout.select_track_folder_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		toolbarTitle = view.findViewById(R.id.toolbar_title);

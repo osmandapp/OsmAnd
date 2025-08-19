@@ -1,10 +1,10 @@
 package net.osmand.plus.profiles;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,10 +20,8 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 		implements AbstractProfileMenuAdapter.ButtonPressedListener, AbstractProfileMenuAdapter.ProfilePressedListener {
 
 	private UpdateMapRouteMenuListener updateMapRouteMenuListener;
-	
-	private int themeRes;
+
 	protected T adapter;
-	private RecyclerView recyclerView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +35,7 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 	}
 
 	@Override
-	public void onDismiss(DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
 		if (updateMapRouteMenuListener != null) {
 			updateMapRouteMenuListener.updateAppModeMenu();
@@ -46,12 +44,10 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		Context themedContext = getThemedContext();
 		adapter = getMenuAdapter();
-		recyclerView = new RecyclerView(getContext());
-		recyclerView = (RecyclerView) View
-				.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		RecyclerView recyclerView = (RecyclerView) inflate(R.layout.recyclerview);
+		recyclerView.setLayoutManager(new LinearLayoutManager(themedContext));
 		recyclerView.setAdapter(adapter);
 		items.add(new TitleItem(getTitle()));
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(recyclerView).create());
@@ -82,12 +78,12 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 	@Override
 	public void onProfilePressed(ApplicationMode item) {
 		this.dismiss();
-		BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE, item);
+		BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.CONFIGURE_PROFILE, item);
 	}
 
 	@Override
 	public void onButtonPressed() {
 		this.dismiss();
-		BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.MAIN_SETTINGS);
+		BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN_SETTINGS);
 	}
 }

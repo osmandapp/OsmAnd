@@ -10,7 +10,6 @@ import android.view.View;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -18,23 +17,20 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFragment {
 
 	protected GpxDisplayGroup group;
-	protected OsmandApplication app;
 	protected TextInputLayout nameTextBox;
 	protected TextInputEditText editText;
 	protected String groupName;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		groupName = Algorithms.isEmpty(group.getName()) ? app.getString(R.string.shared_string_gpx_points) : group.getName();
+		groupName = Algorithms.isEmpty(group.getName()) ? getString(R.string.shared_string_gpx_points) : group.getName();
 
-		View mainView = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.track_name_edit_text, null);
+		View mainView = inflate(R.layout.track_name_edit_text);
 		setupTextBox(mainView);
 		setupEditText(mainView);
 
@@ -81,7 +77,7 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 		return nameTextBox.getError() == null;
 	}
 
-	public interface OnGroupNameChangeListener {
+	public interface OnTrackGroupChangeListener {
 		void onTrackGroupChanged();
 	}
 }

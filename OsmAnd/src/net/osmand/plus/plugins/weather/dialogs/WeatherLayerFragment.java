@@ -20,7 +20,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
@@ -32,7 +32,7 @@ import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-public class WeatherLayerFragment extends BaseOsmAndFragment {
+public class WeatherLayerFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = WeatherLayerFragment.class.getSimpleName();
 
@@ -72,7 +72,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_weather_layer, container, false);
+		View view = inflate(R.layout.fragment_weather_layer, container, false);
 
 		if (weatherBand != null) {
 			setupHeader(view);

@@ -28,7 +28,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.chooseplan.PromoCompanyFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -48,7 +48,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
-public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
+public class PurchaseItemFragment extends BaseFullScreenDialogFragment implements InAppPurchaseListener {
 
 	public static final String TAG = PurchaseItemFragment.class.getName();
 
@@ -92,7 +92,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.fragment_purchase_item, container, false);
+		view = inflate(R.layout.fragment_purchase_item, container, false);
 		return view;
 	}
 
@@ -228,7 +228,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 
 	private void createToolbar() {
 		AppBarLayout appbar = view.findViewById(R.id.appbar);
-		View toolbar = themedInflater.inflate(R.layout.global_preference_toolbar, appbar, false);
+		View toolbar = inflate(R.layout.global_preference_toolbar, appbar, false);
 
 		ImageButton ivBackButton = toolbar.findViewById(R.id.close_button);
 		UiUtilities.rotateImageByLayoutDirection(ivBackButton);
