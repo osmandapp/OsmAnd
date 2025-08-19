@@ -4604,4 +4604,7 @@
     <string name="poi_denomination_syriac_orthodox">Sýrske pravoslávne</string>
     <string name="poi_denomination_eritrean_orthodox">Eritrejské pravoslávne</string>
     <string name="poi_denomination_antiochian_orthodox">Antiochijské pravoslávne</string>
+    <string name="poi_canoe_put_in">Miesto na spúšťanie kajakov</string>
+    <string name="poi_canoe_egress">Miesto na vyzdvihnutie kajakov</string>
+    <string name="poi_canoe_put_in_egress">Miesto na spúšťanie aj vyzdvihnutie kajakov</string>
 </resources>
