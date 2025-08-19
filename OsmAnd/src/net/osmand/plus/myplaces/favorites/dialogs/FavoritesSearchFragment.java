@@ -127,7 +127,7 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 		clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(v -> {
-					if (!searchEditText.getText().isEmpty()) {
+					if (!searchEditText.getText().toString().isEmpty()) {
 						searchEditText.setText("");
 						searchEditText.setSelection(0);
 					}
