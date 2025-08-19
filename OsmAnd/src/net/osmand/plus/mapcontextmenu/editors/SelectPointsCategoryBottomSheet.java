@@ -176,5 +176,9 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 	public interface CategorySelectionListener {
 
 		void onCategorySelected(PointsGroup pointsGroup);
+
+		default void onAddGroupOpened(){
+
+		}
 	}
 }

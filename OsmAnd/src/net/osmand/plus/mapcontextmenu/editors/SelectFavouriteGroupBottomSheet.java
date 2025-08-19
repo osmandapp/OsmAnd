@@ -66,6 +66,9 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 	protected void showAddNewCategoryFragment(CategorySelectionListener listener) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
+			if (listener != null) {
+				listener.onAddGroupOpened();
+			}
 			FragmentManager manager = activity.getSupportFragmentManager();
 			FavouriteGroupEditorFragment.showInstance(manager, null, listener, false);
 		}
@@ -73,7 +76,7 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull String selectedCategory,
+	                                @Nullable String selectedCategory,
 	                                @Nullable CategorySelectionListener listener) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectFavouriteGroupBottomSheet fragment = new SelectFavouriteGroupBottomSheet();

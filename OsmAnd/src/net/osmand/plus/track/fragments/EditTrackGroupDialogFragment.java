@@ -6,7 +6,6 @@ import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,11 +27,11 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.OptionsDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dialogs.CopyTrackGroupToFavoritesBottomSheet;
-import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnGroupNameChangeListener;
+import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnTrackGroupChangeListener;
 import net.osmand.plus.dialogs.RenameTrackGroupBottomSheet;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.mapcontextmenu.editors.AddToFavoritesBottomSheet;
 import net.osmand.plus.mapcontextmenu.editors.GpxGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -61,7 +60,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnGroupNameChangeListener {
+public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnTrackGroupChangeListener {
 
 	private static final String TAG = EditTrackGroupDialogFragment.class.getSimpleName();
 
@@ -117,7 +116,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		if (!currentTrack && trackPoints) {
 			items.add(createCopyToMarkersItem());
 		}
-		items.add(createCopyToFavoritesItem());
+		items.add(createAddToFavorites());
 		if (!currentTrack) {
 			items.add(createAddToNavigationItem());
 		}
@@ -230,16 +229,18 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	@NonNull
-	private BaseBottomSheetItem createCopyToFavoritesItem() {
+	private BaseBottomSheetItem createAddToFavorites() {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_copy))
-				.setTitle(getString(R.string.copy_to_map_favorites))
+				.setTitle(getString(R.string.add_to_favorites))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
+
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						FragmentManager manager = activity.getSupportFragmentManager();
-						CopyTrackGroupToFavoritesBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
+						AddToFavoritesBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
+						dismiss();
 					}
 				})
 				.create();

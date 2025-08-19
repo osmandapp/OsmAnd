@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="copy_as_new_folder">Copy as new folder</string>
+    <string name="add_to_a_folder">Add to a folder</string>
+    <string name="add_to_favorites">Add to favorites</string>
     <string name="max_weight_at_full_load_description">Provide your vehicle\'s max weight at full load to avoid roads and bridges with weight limits.</string>
     <string name="max_axle_load_description">Provide your vehicle\'s max axle load to avoid roads and bridges with weight limits.</string>
     <string name="private_access_routing_req_short">Your destination is in a private area. Allow using private roads?</string>
