@@ -65,7 +65,7 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create());
 
-		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+		items.add(new DividerSpaceItem(getContext(), getDimensionPixelSize(R.dimen.content_padding_small)));
 	}
 
 	@Override
