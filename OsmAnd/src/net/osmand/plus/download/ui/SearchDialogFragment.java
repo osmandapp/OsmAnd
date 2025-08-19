@@ -165,7 +165,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		});
 
 		clearButton.setOnClickListener(v -> {
-			if (searchEditText.getText().isEmpty()) {
+			if (searchEditText.getText().toString().isEmpty()) {
 				dismiss();
 			} else {
 				searchEditText.setText("");
