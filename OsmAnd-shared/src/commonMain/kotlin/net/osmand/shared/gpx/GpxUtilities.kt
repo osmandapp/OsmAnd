@@ -278,10 +278,20 @@ object GpxUtilities {
 			this.color = color
 		}
 
+		constructor(name: String, iconName: String?, backgroundType: String?, color: Int, hidden: Boolean) : this(
+			name
+		) {
+			this.iconName = iconName
+			this.backgroundType = backgroundType
+			this.color = color
+			this.hidden = hidden
+		}
+
 		constructor(point: WptPt) : this(point.category ?: "") {
 			color = point.getColor()
 			iconName = point.getIconName()
 			backgroundType = point.getBackgroundType()
+			hidden = point.getExtensionsToRead()[HIDDEN_EXTENSION]?.toBoolean() ?: false
 		}
 
 		fun isHidden(): Boolean {

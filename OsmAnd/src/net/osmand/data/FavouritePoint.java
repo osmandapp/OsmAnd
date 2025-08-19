@@ -438,7 +438,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			point.setCalendarEvent(Boolean.parseBoolean(calendarEvent));
 		}
 		point.setColor(wptPt.getColor(0));
-		point.setVisible(!wptPt.getExtensionsToRead().containsKey(HIDDEN));
+
+		String hidden = wptPt.getExtensionsToRead().get(HIDDEN);
+		point.setVisible(hidden == null || !Boolean.parseBoolean(hidden));
+
 		point.setAddress(wptPt.getAddress());
 		String iconName = wptPt.getIconName();
 		if (iconName != null) {
