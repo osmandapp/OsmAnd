@@ -5750,4 +5750,6 @@
     <string name="rendering_attr_spotSize_description">Taille du sondage ponctuel</string>
     <string name="rendering_attr_tidalFlatStyle_name">Style des vasières</string>
     <string name="rendering_attr_tidalFlatStyle_description">Style des vasières</string>
+    <string name="private_access_routing_req_short">Votre destination se situe dans une propriété privée. Souhaitez-vous emprunter des routes privées ?</string>
+    <string name="view_on_phone">Afficher sur le téléphone</string>
 </resources>
