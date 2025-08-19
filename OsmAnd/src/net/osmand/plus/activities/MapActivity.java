@@ -93,6 +93,7 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
+import net.osmand.plus.receivers.AndroidAutoActionReceiver;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
@@ -181,6 +182,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private final MapFragmentsHelper fragmentsHelper = new MapFragmentsHelper(this);
 	private final TrackballController trackballController = new TrackballController(this);
 	private final MapPermissionsResultCallback permissionsResultCallback = new MapPermissionsResultCallback(this);
+	private final AndroidAutoActionReceiver androidAutoReceiver = new AndroidAutoActionReceiver();
 
 	private AppInitializeListener initListener;
 	private MapViewWithLayers mapViewWithLayers;
@@ -555,7 +557,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		androidAutoReceiver.setActivity(this);
+		AndroidUtils.registerBroadcastReceiver(this, AndroidAutoActionReceiver.INTENT_SHOW_FRAGMENT, androidAutoReceiver, true);
 		MapActivity mapViewMapActivity = getMapView().getMapActivity();
 		if (activityRestartNeeded || !getMapLayers().hasMapActivity()
 				|| (mapViewMapActivity != null && mapViewMapActivity != this)) {
@@ -1021,6 +1024,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onPause() {
 		super.onPause();
+		unregisterReceiver(androidAutoReceiver);
+		androidAutoReceiver.setActivity(null);
 		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;

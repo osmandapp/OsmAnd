@@ -1,14 +1,16 @@
+apply from: rootProject.file("versions.gradle")
+
 tasks.register('printc') {
 	configurations.each { if (it.isCanBeResolved()) println it.name }
 }
 
 android {
-    compileSdk 35
-    buildToolsVersion = "35.0.0"
+    compileSdk osmand_compileSdk
+    buildToolsVersion = osmand_buildToolsVersion
     // compileNdkVersion "android-ndk-r17b"
     namespace = "net.osmand.plus"
     defaultConfig {
-        targetSdkVersion 34
+        targetSdkVersion osmand_targetSdk
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -174,14 +176,14 @@ tasks.register('validateTranslations') {
 }
 
 tasks.register('downloadWorldMiniBasemap', Download) {
-	src 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf'
+	src 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf'
 	dest 'assets/World_basemap_mini.obf'
 	onlyIfModified true
 }
 
 tasks.register('downloadWorldMiniBasemapAnt') {
 	doLast {
-		ant.get(src: 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
+		ant.get(src: 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
 	}
 }
 

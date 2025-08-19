@@ -4067,7 +4067,7 @@
     <string name="routing_attr_prefer_horse_routes_description">Preferisci i percorsi per cavalli</string>
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
     <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così solo OsmAnd può accedere ai tuoi dati.</string>
-    <string name="rendering_attr_natureReserves_name">Riserve naturali</string>
+    <string name="rendering_attr_natureReserves_name">Riserve naturali e aree protette</string>
     <string name="shared_string_details">Dettagli</string>
     <string name="shared_string_articles">Articoli</string>
     <string name="included_categories">Categorie incluse</string>
@@ -5661,7 +5661,7 @@
     <string name="calculating_indication_message">Sto calcolando…</string>
     <string name="calculate_size">Calcola la dimensione</string>
     <string name="default_buttons_corners_original_description">Ogni pulsante manterrebbe il proprio raggio d\'angolo.</string>
-    <string name="default_buttons_opacity_original_description">Ogni pulsante manterrebbe la propria opacità di sfondo.</string>
+    <string name="default_buttons_opacity_original_description">Ogni pulsante mantiene la propria opacità di sfondo.</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostra i percorsi per l\'arrampicata</string>
     <string name="rendering_attr_showClimbingRoutes_name">Percorsi arrampicata</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra il tempo e la distanza per la prossima fermata. Disattiva per mostrare sempre i dettagli per la destinazione.</string>
@@ -5686,7 +5686,7 @@
     <string name="ais_cpa_settings">Impostazioni relative al PAV</string>
     <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
     <string name="ais_address_settings">Impostazioni dell\'indirizzo IP</string>
-    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e definisci gli indirizzi</string>
+    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e specifica gli indirizzi e le porte corrispondenti</string>
     <string name="ais_ship_lost_timeout">Timeout per la visibilità della nave quando non viene ricevuto alcun segnale</string>
     <string name="ais_port_nmea_local">Porta UDP locale del ricevitore dati NMEA</string>
     <string name="ais_object_lost_timeouts_description">Imposta valori di timeout per identificare oggetti AIS persi se non viene ricevuto alcun segnale per un periodo di tempo specifico.</string>
@@ -5821,4 +5821,6 @@
     <string name="threads_allocated_for_rendering_desc">Diminuire l\'allocazione dei thread può accelerare il rendering della mappa in alcuni casi.</string>
     <string name="turn_by_turn_directions">Indicazioni di svolta</string>
     <string name="enable_msaa">Abilita MSAA</string>
+    <string name="average_elevation">Elevazione media</string>
+    <string name="descent">Discesa</string>
 </resources>
