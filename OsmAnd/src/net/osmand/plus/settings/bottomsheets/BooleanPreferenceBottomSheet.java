@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -44,27 +43,21 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		SwitchPreferenceEx switchPreference = getSwitchPreferenceEx();
 		if (switchPreference == null) {
 			return;
 		}
-		OsmandPreference preference = app.getSettings().getPreference(switchPreference.getKey());
+		OsmandPreference preference = settings.getPreference(switchPreference.getKey());
 		if (!(preference instanceof BooleanPreference)) {
 			return;
 		}
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
 
 		String on = getSummary(switchPreference, true);
 		String off = getSummary(switchPreference, false);
-		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
-		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
+		int activeColor = ColorUtilities.getActiveColorId(nightMode);
+		int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
 		boolean checked = switchPreference.isChecked();
 
 		Context context = requireContext();
@@ -77,13 +70,11 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				.setOnClickListener(v -> {
 					boolean newValue = !switchPreference.isChecked();
 					Fragment targetFragment = getTargetFragment();
-					if (targetFragment instanceof OnConfirmPreferenceChange) {
+					if (targetFragment instanceof OnConfirmPreferenceChange confirmationInterface) {
 						ApplyQueryType applyQueryType = getApplyQueryType();
 						if (applyQueryType == ApplyQueryType.SNACK_BAR) {
 							applyQueryType = ApplyQueryType.NONE;
 						}
-						OnConfirmPreferenceChange confirmationInterface =
-								(OnConfirmPreferenceChange) targetFragment;
 						if (confirmationInterface.onConfirmPreferenceChange(
 								switchPreference.getKey(), newValue, applyQueryType)) {
 							switchPreference.setChecked(newValue);
@@ -131,7 +122,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static View getCustomButtonView(@NonNull Context context, ApplicationMode mode, boolean checked, boolean nightMode) {
-		View customView = UiUtilities.getInflater(context, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
+		View customView = UiUtilities.inflate(context, nightMode, R.layout.bottom_sheet_item_preference_switch);
 		updateCustomButtonView(context, mode, customView, checked, nightMode);
 		return customView;
 	}
@@ -149,10 +140,10 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			bgColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
 			selectedColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 		} else {
-			bgColor = ContextCompat.getColor(context, checked
+			bgColor = ColorUtilities.getColor(context, checked
 					? getActiveColorId(nightMode) : getSecondaryIconColorId(nightMode));
 			selectedColor = ColorUtilities.getColorWithAlpha(
-					ContextCompat.getColor(context, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
+					ColorUtilities.getColor(context, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
 		}
 
 		int bgResId = isLayoutRtl ? R.drawable.rectangle_rounded_left : R.drawable.rectangle_rounded_right;
@@ -168,13 +159,9 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		return (SwitchPreferenceEx) getPreference();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull String prefId,
-	                                @NonNull ApplyQueryType applyQueryType,
-	                                @Nullable Fragment target,
-	                                @Nullable ApplicationMode appMode,
-	                                boolean usedOnMap,
-	                                boolean profileDependent) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String prefId,
+	                                @NonNull ApplyQueryType applyQueryType, @Nullable Fragment target,
+	                                @Nullable ApplicationMode appMode, boolean usedOnMap, boolean profileDependent) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, prefId);

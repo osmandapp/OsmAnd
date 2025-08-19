@@ -38,7 +38,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 				.setTitleColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_plain_title_with_description)
 				.create());
-		items.add(new DividerSpaceItem(requireContext(), getDimen(R.dimen.content_padding_small)));
+		items.add(new DividerSpaceItem(requireContext(), getDimensionPixelSize(R.dimen.content_padding_small)));
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected int getFirstDividerHeight() {
-		return getDimen(R.dimen.dialog_content_margin);
+		return getDimensionPixelSize(R.dimen.dialog_content_margin);
 	}
 
 	@Override

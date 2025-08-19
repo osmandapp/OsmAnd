@@ -2,14 +2,9 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,15 +13,12 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
 import java.text.Collator;
@@ -46,7 +38,6 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	private static final int SORT_TYPE_NAME = 2;
 	private static final int SORT_TYPE_CATEGORY = 3;
 
-	protected OsmandApplication app;
 	protected FavouritesHelper mFavouritesHelper;
 	private final List<FavouritePoint> mPoints = new ArrayList<>();
 
@@ -65,7 +56,6 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	@Override
 	public void createMenuItems(@Nullable Bundle savedInstanceState) {
-		app = getMyApplication();
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
 			mSortByDist = savedInstanceState.getInt(SORTED_BY_TYPE);
 		}
@@ -76,10 +66,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 		} else {
 			mFavouritesHelper.addListener(getFavouritesListener());
 		}
-		rvPoints = new RecyclerView(getContext());
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		rvPoints = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.recyclerview, null);
+		rvPoints = (RecyclerView) inflate(R.layout.recyclerview);
 		rvPoints.setLayoutManager(new LinearLayoutManager(getContext()));
 		sortFavourites();
 		BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
@@ -135,9 +122,9 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	private void loadFavorites() {
 		mPoints.clear();
-		mPoints.addAll(getMyApplication().getFavoritesHelper().getVisibleFavouritePoints());
+		mPoints.addAll(app.getFavoritesHelper().getVisibleFavouritePoints());
 		if (mPoints.isEmpty()) {
-			mPoints.addAll(getMyApplication().getFavoritesHelper().getFavouritePoints());
+			mPoints.addAll(app.getFavoritesHelper().getFavouritePoints());
 		}
 	}
 
@@ -155,12 +142,12 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 						rhs.getLongitude());
 				return Double.compare(ld, rd);
 			} else if (mSortByDist == SORT_TYPE_CATEGORY) {
-				int cat = inst.compare(lhs.getCategoryDisplayName(getMyApplication()), rhs.getCategoryDisplayName(getMyApplication()));
+				int cat = inst.compare(lhs.getCategoryDisplayName(app), rhs.getCategoryDisplayName(app));
 				if (cat != 0) {
 					return cat;
 				}
 			}
-			int name = inst.compare(lhs.getDisplayName(getMyApplication()), rhs.getDisplayName(getMyApplication()));
+			int name = inst.compare(lhs.getDisplayName(app), rhs.getDisplayName(app));
 			return name;
 		});
 
@@ -192,8 +179,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && !mLocationUpdateStarted) {
+		if (!mLocationUpdateStarted) {
 			mLocationUpdateStarted = true;
 			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 			app.getLocationProvider().addCompassListener(this);
@@ -203,8 +189,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && mLocationUpdateStarted) {
+		if (mLocationUpdateStarted) {
 			mLocationUpdateStarted = false;
 			app.getLocationProvider().removeLocationListener(this);
 			app.getLocationProvider().removeCompassListener(this);
@@ -213,14 +198,8 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	}
 
 	private void updateLocationUi() {
-		if (!mCompassUpdateAllowed) {
-			return;
-		}
-		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null && mAdapter != null) {
-			mapActivity.getMyApplication().runInUIThread(() -> {
-				mAdapter.notifyDataSetChanged();
-			});
+		if (mCompassUpdateAllowed && mAdapter != null) {
+			app.runInUIThread(mAdapter::notifyDataSetChanged);
 		}
 	}
 
@@ -263,21 +242,12 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	@Override
 	protected int getCustomHeight() {
-		return AndroidUtils.dpToPx(getContext(), 300);
+		return dpToPx(300);
 	}
 
 	private static int getNextType(int type) {
 		return type % SORT_TYPE_CATEGORY + 1;
 	}
 
-	public static void showFragment(@NonNull FragmentActivity activity,
-	                                @NonNull DialogFragment fragment) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			fragment.show(fm, SelectFavouriteBottomSheet.TAG);
-		}
-	}
-
 	protected abstract void onFavouriteSelected(@NonNull FavouritePoint favourite);
-
 }

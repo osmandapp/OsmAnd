@@ -2221,7 +2221,7 @@
     <string name="plan_route">Vẽ một tuyến đường</string>
     <string name="rendering_value_medium_w_name">Trung bình</string>
     <string name="rendering_value_low_name">Thấp</string>
-    <string name="shared_string_commit"/>
+    <string name="shared_string_commit"></string>
     <string name="shared_string_control_start">Bắt đầu</string>
     <string name="record_plugin_name">Ghi chuyến đi</string>
     <string name="rendering_attr_showSurfaceGrade_name">Hiện chất lượng đường</string>

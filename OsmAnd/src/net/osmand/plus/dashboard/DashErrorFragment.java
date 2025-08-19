@@ -3,16 +3,12 @@ package net.osmand.plus.dashboard;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -34,19 +30,20 @@ public class DashErrorFragment extends DashBaseFragment {
 			return CrashBottomSheetDialogFragment.shouldShow(settings, activity);
 		}
 	};
-	private DismissListener dismissCallback;
 
 	@Override
-	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		OsmandApplication app = requireMyApplication();
-		View view = inflater.inflate(R.layout.dash_error_fragment, container, false);
-		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), FeedbackHelper.EXCEPTION_PATH);
+	public View initView(ViewGroup container, Bundle savedState) {
+		View view = inflate(R.layout.dash_error_fragment, container, false);
 		Typeface typeface = FontCache.getMediumFont();
-		ImageView iv = view.findViewById(R.id.error_icon);
-		iv.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_crashlog));
-		TextView message = view.findViewById(R.id.error_header);
-		message.setTypeface(typeface);
-		message.setText(msg);
+
+		String message = MessageFormat.format(getString(R.string.previous_run_crashed), FeedbackHelper.EXCEPTION_PATH);
+		TextView tvMessage = view.findViewById(R.id.error_header);
+		tvMessage.setTypeface(typeface);
+		tvMessage.setText(message);
+
+		ImageView ivErrorIcon = view.findViewById(R.id.error_icon);
+		ivErrorIcon.setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_crashlog));
+
 		Button errorBtn = view.findViewById(R.id.error_btn);
 		errorBtn.setTypeface(typeface);
 		errorBtn.setOnClickListener(v -> app.getFeedbackHelper().sendCrashLog());
@@ -62,49 +59,7 @@ public class DashErrorFragment extends DashBaseFragment {
 						.commitAllowingStateLoss();
 			}
 		});
-		dismissCallback = new ErrorDismissListener(getParentView(), dashboard, TAG, view);
+		dismissListener = new ErrorDismissListener(getParentView(), dashboard, TAG, view);
 		return view;
-	}
-
-	@Override
-	public void onOpenDash() {
-	}
-
-	@Override
-	public DismissListener getDismissCallback() {
-		return dismissCallback;
-	}
-
-	private static class ErrorDismissListener implements DismissListener {
-
-		private final View parentView;
-		private final DashboardOnMap dashboardOnMap;
-		private final String fragmentTag;
-		private final View fragmentView;
-
-		public ErrorDismissListener(View parentView, DashboardOnMap dashboardOnMap,
-		                            String fragmentTag, View fragmentView) {
-			this.parentView = parentView;
-			this.dashboardOnMap = dashboardOnMap;
-			this.fragmentTag = fragmentTag;
-			this.fragmentView = fragmentView;
-		}
-
-		@Override
-		public void onDismiss() {
-			dashboardOnMap.hideFragmentByTag(fragmentTag);
-			fragmentView.setTranslationX(0);
-			fragmentView.setAlpha(1);
-			Snackbar.make(parentView, dashboardOnMap.getMyApplication().getResources()
-							.getString(R.string.shared_string_card_was_hidden), Snackbar.LENGTH_LONG)
-					.setAction(R.string.shared_string_undo, view -> ErrorDismissListener.this.onUndo())
-					.show();
-		}
-
-		public void onUndo() {
-			dashboardOnMap.unhideFragmentByTag(fragmentTag);
-			fragmentView.setTranslationX(0);
-			fragmentView.setAlpha(1);
-		}
 	}
 }

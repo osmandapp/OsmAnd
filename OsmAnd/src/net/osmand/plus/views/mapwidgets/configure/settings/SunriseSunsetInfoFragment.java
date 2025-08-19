@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -59,8 +58,8 @@ public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.fragment_widget_settings_sunrise_sunset, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.fragment_widget_settings_sunrise_sunset, container);
 		timeDescription = container.findViewById(R.id.preference_description);
 		sunPositionDescription = container.findViewById(R.id.sun_position_description);
 

@@ -12,22 +12,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser;
 import net.osmand.plus.wikivoyage.data.WikivoyageJsonParser.WikivoyageContentItem;
 
 
 public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "WikivoyageArticleContentsFragment";
+	public static final String TAG = WikivoyageArticleContentsFragment.class.getSimpleName();
 
 	public static final String CONTENTS_JSON_KEY = "contents_json";
 	public static final String CONTENT_ITEM_LINK_KEY = "content_item_link";
@@ -39,21 +42,15 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context ctx = getContext();
+		Context ctx = getThemedContext();
 		Bundle args = getArguments();
-		if (ctx == null || args == null) {
-			return;
-		}
+		if (args == null) return;
 
 		String contentsJson = args.getString(CONTENTS_JSON_KEY);
-		if (contentsJson == null) {
-			return;
-		}
+		if (contentsJson == null) return;
 
 		WikivoyageContentItem contentItem = WikivoyageJsonParser.parseJsonContents(contentsJson);
-		if (contentItem == null) {
-			return;
-		}
+		if (contentItem == null) return;
 
 		items.add(new TitleItem(getString(R.string.shared_string_contents)));
 
@@ -68,28 +65,21 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 				LinearLayout.LayoutParams.MATCH_PARENT)
 		);
 
-		expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-			@Override
-			public boolean onChildClick(ExpandableListView parent, View v,
-										int groupPosition, int childPosition, long id) {
-				WikivoyageContentItem wikivoyageContentItem = contentItem.getSubItems().get(groupPosition);
-				String link = wikivoyageContentItem.getSubItems().get(childPosition).getLink();
-				String name = wikivoyageContentItem.getLink().substring(1);
-				sendResults(link, name);
-				dismiss();
-				return true;
-			}
+		expListView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+			WikivoyageContentItem wikivoyageContentItem = contentItem.getSubItems().get(groupPosition);
+			String link = wikivoyageContentItem.getSubItems().get(childPosition).getLink();
+			String name = wikivoyageContentItem.getLink().substring(1);
+			sendResults(link, name);
+			dismiss();
+			return true;
 		});
-		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				WikivoyageContentItem wikivoyageContentItem = contentItem.getSubItems().get(groupPosition);
-				String link = wikivoyageContentItem.getLink();
-				String name = wikivoyageContentItem.getLink().substring(1);
-				sendResults(link, name);
-				dismiss();
-				return true;
-			}
+		expListView.setOnGroupClickListener((parent, v, groupPosition, id) -> {
+			WikivoyageContentItem wikivoyageContentItem = contentItem.getSubItems().get(groupPosition);
+			String link = wikivoyageContentItem.getLink();
+			String name = wikivoyageContentItem.getLink().substring(1);
+			sendResults(link, name);
+			dismiss();
+			return true;
 		});
 
 		LinearLayout container = new LinearLayout(ctx);
@@ -121,6 +111,20 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 	@Override
 	protected boolean useScrollableItemsContainer() {
 		return false;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull Fragment target, @NonNull String contentsJson) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(CONTENTS_JSON_KEY, contentsJson);
+
+			WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setArguments(args);
+			fragment.setTargetFragment(target, SHOW_CONTENT_ITEM_REQUEST_CODE);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
@@ -182,7 +186,6 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		@Override
 		public Object getGroup(int groupPosition) {
 			return contentItem.getSubItems().get(groupPosition).getName();
-
 		}
 
 		@Override
@@ -196,28 +199,23 @@ public class WikivoyageArticleContentsFragment extends MenuBottomSheetDialogFrag
 		}
 
 		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded,
-		                         View convertView, ViewGroup parent) {
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
 			if (convertView == null) {
-				convertView = LayoutInflater.from(context)
-						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
+				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView lblListHeader = convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(headerTitle);
 			lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light));
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
-			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
+			adjustIndicator(app, groupPosition, isExpanded, convertView, !nightMode);
 			ImageView indicator = convertView.findViewById(R.id.explicit_indicator);
-			indicator.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (isExpanded) {
-						expListView.collapseGroup(groupPosition);
-					} else {
-						expListView.expandGroup(groupPosition);
-					}
+			indicator.setOnClickListener(v -> {
+				if (isExpanded) {
+					expListView.collapseGroup(groupPosition);
+				} else {
+					expListView.expandGroup(groupPosition);
 				}
 			});
 			return convertView;

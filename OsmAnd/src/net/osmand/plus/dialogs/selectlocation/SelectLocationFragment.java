@@ -63,7 +63,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 		title.setTextColor(contentColor);
 
 		ImageView backButton = appbar.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_close, contentColor));
+		backButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_close, contentColor));
 
 		ImageButton resetButton = appbar.findViewById(R.id.reset_button);
 		resetButton.setVisibility(View.GONE);
@@ -77,7 +77,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = inflate(R.layout.fragment_select_location, container);
+		View view = inflate(R.layout.fragment_select_location, container, false);
 		updateContent(view);
 		container.addView(view);
 	}

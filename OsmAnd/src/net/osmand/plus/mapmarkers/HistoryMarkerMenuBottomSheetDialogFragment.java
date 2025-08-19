@@ -1,7 +1,10 @@
 package net.osmand.plus.mapmarkers;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -9,6 +12,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
@@ -17,7 +21,7 @@ import java.util.Locale;
 
 public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
+	public static final String TAG = HistoryMarkerMenuBottomSheetDialogFragment.class.getSimpleName();
 
 	public static final String MARKER_POSITION = "marker_position";
 	public static final String MARKER_NAME = "marker_name";
@@ -26,7 +30,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 
 	private HistoryMarkerMenuFragmentListener listener;
 
-	public void setListener(HistoryMarkerMenuFragmentListener listener) {
+	public void setListener(@NonNull HistoryMarkerMenuFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -60,14 +64,11 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 					.setIcon(getContentIcon(R.drawable.ic_action_reset_to_default_dark))
 					.setTitle(getString(R.string.make_active))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.onMakeMarkerActive(pos);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.onMakeMarkerActive(pos);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(makeActiveItem);
@@ -76,14 +77,11 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
 					.setTitle(getString(R.string.shared_string_delete))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.onDeleteMarker(pos);
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (listener != null) {
+							listener.onDeleteMarker(pos);
 						}
+						dismiss();
 					})
 					.create();
 			items.add(deleteItem);
@@ -95,7 +93,25 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		return R.string.shared_string_close;
 	}
 
-	interface HistoryMarkerMenuFragmentListener {
+	public static void showInstance(@NonNull Context context,
+	                                @NonNull FragmentManager fragmentManager,
+									@NonNull HistoryMarkerMenuFragmentListener listener,
+	                                int position, @NonNull MapMarker marker) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			Bundle arguments = new Bundle();
+			arguments.putInt(MARKER_POSITION, position);
+			arguments.putString(MARKER_NAME, marker.getName(context));
+			arguments.putInt(MARKER_COLOR_INDEX, marker.colorIndex);
+			arguments.putLong(MARKER_VISITED_DATE, marker.visitedDate);
+			fragment.setArguments(arguments);
+			fragment.setListener(listener);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public interface HistoryMarkerMenuFragmentListener {
 
 		void onMakeMarkerActive(int pos);
 

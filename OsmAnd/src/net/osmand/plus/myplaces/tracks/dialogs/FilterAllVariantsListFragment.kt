@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseOsmAndDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
@@ -31,7 +31,7 @@ import net.osmand.shared.gpx.filters.ListTrackFilter
 import net.osmand.shared.gpx.data.SmartFolder
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
-class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpdateListener {
+class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolderUpdateListener {
 	companion object {
 		val TAG: String = FilterAllVariantsListFragment::class.java.simpleName
 

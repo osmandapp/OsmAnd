@@ -136,9 +136,8 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_show_hide_poi, parent, false);
 
 		RecyclerView list = view.findViewById(R.id.list);
 		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());

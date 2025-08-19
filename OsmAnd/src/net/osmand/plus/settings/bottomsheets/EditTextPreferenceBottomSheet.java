@@ -48,15 +48,14 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			text = editTextPreference.getText();
 		}
 
-		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.preference_edit_text_box, null);
+		View view = inflate(R.layout.preference_edit_text_box);
 		editText = view.findViewById(R.id.edit_text);
 		editText.setText(text);
 		editText.requestFocus();
 
 		ViewGroup editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
-		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) editTextLayout.getLayoutParams();
-			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(ctx, 9), params.rightMargin, params.bottomMargin);
+		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof ViewGroup.MarginLayoutParams params) {
+			params.setMargins(params.leftMargin, dpToPx(9), params.rightMargin, params.bottomMargin);
 		}
 
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());
@@ -113,7 +112,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
 									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		try {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
 
@@ -124,8 +123,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

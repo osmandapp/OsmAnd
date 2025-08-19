@@ -10,8 +10,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.OsmAndTaskManager;
-import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
@@ -32,7 +32,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class LocalBaseFragment extends BaseOsmAndFragment implements OperationListener,
+public abstract class LocalBaseFragment extends BaseFullScreenFragment implements OperationListener,
 		ConfirmDeletionListener, DownloadEvents, OnMapSourceUpdateListener, RenameCallback {
 
 	private final Map<String, IndexItem> itemsToUpdate = new HashMap<>();

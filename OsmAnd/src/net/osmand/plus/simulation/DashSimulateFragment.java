@@ -1,7 +1,6 @@
 package net.osmand.plus.simulation;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -33,18 +32,21 @@ public class DashSimulateFragment extends DashBaseFragment {
 
 	@Override
 	public void onOpenDash() {
-		((TextView) getView().findViewById(R.id.name)).setText(R.string.simulate_your_location);
+		View mainView = getView();
+		if (mainView != null) {
+			((TextView) mainView.findViewById(R.id.name)).setText(R.string.simulate_your_location);
+		}
 	}
 
 	@Override
-	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		TextView header = view.findViewById(R.id.fav_text);
-		header.setText(TITLE_ID);
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
+		View view = inflate(R.layout.dash_common_fragment, container, false);
+		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		view.findViewById(R.id.show_all).setVisibility(View.GONE);
-		LinearLayout tracks = view.findViewById(R.id.items);
-		View item = inflater.inflate(R.layout.dash_simulate_item, null, false);
-		tracks.addView(item);
+
+		LinearLayout llTracks = view.findViewById(R.id.items);
+		View item = inflate(R.layout.dash_simulate_item);
+		llTracks.addView(item);
 		item.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

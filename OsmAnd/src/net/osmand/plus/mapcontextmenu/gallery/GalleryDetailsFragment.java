@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController.DownloadMetadataListener;
@@ -34,7 +33,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.Set;
 
-public class GalleryDetailsFragment extends BaseOsmAndFragment implements DownloadMetadataListener {
+public class GalleryDetailsFragment extends BaseFullScreenFragment implements DownloadMetadataListener {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 
@@ -66,7 +65,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.gallery_details_fragment, container, false);
+		View view = inflate(R.layout.gallery_details_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -149,7 +148,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 
 	private void buildItem(@NonNull ViewGroup container, @NonNull String title, @NonNull String description,
 	                       int iconId, boolean defaultColor, boolean isUrl) {
-		View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_descr_72dp, container, false);
+		View view = inflate(R.layout.bottom_sheet_item_with_descr_72dp, container, false);
 
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		ImageView iconView = view.findViewById(R.id.icon);
@@ -224,16 +223,6 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 		if (controller != null) {
 			controller.removeMetaDataListener(this);
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return (MapActivity) requireActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {

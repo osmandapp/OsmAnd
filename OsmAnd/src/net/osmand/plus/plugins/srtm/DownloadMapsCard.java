@@ -83,10 +83,8 @@ public class DownloadMapsCard {
 
 	public void updateDownloadSection(@Nullable MapActivity mapActivity) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+		if (mapActivity == null) return;
 
-		if (mapActivity == null) {
-			return;
-		}
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -108,7 +106,7 @@ public class DownloadMapsCard {
 				int currentDownloadingProgress = (int) downloadThread.getCurrentDownloadProgress();
 				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(app,
 						mapActivity.getMapLocation(), type, false, -1, true);
-				if (terrainItems.size() > 0) {
+				if (!terrainItems.isEmpty()) {
 					downloadContainer.setVisibility(View.VISIBLE);
 					downloadTopDivider.setVisibility(View.VISIBLE);
 					downloadBottomDivider.setVisibility(View.VISIBLE);
@@ -138,8 +136,7 @@ public class DownloadMapsCard {
 									return false;
 								})
 								.setProgressListener((progressObject, progress, adptr, itemId, position) -> {
-									if (progressObject instanceof IndexItem) {
-										IndexItem progressItem = (IndexItem) progressObject;
+									if (progressObject instanceof IndexItem progressItem) {
 										if (indexItem.compareTo(progressItem) == 0) {
 											ContextMenuItem item = adptr.getItem(position);
 											if (item != null) {

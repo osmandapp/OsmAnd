@@ -1,7 +1,6 @@
 package net.osmand.plus.dashboard;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,10 @@ import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -48,10 +45,9 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			};
 
 	@Override
-	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
+		View view = inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(getString(TITLE_ID));
-		
 		return view;
 	}
 
@@ -65,24 +61,20 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	}
 
 	private void setupTargets() {
-		OsmandApplication app = getMyApplication();
 		View mainView = getView();
-		if (mainView == null || app == null) {
-			return;
-		}
+		if (mainView == null) return;
 
 		TargetPointsHelper helper = app.getTargetPointsHelper();
 		if (helper.getPointToNavigate() == null) {
 			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), false);
 			return;
-		} else {
-			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), true);
 		}
 
-		String collapseOrShowAll = SHOW_ALL
+		AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), true);
+
+		((Button) mainView.findViewById(R.id.show_all)).setText(SHOW_ALL
 				? getString(R.string.shared_string_collapse)
-				: getString(R.string.shared_string_show_all);
-		((Button) mainView.findViewById(R.id.show_all)).setText(collapseOrShowAll);
+				: getString(R.string.shared_string_show_all));
 
 		mainView.findViewById(R.id.show_all).setOnClickListener(v -> {
 			SHOW_ALL = !SHOW_ALL;
@@ -90,8 +82,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		});
 
 		mainView.findViewById(R.id.show_all).setVisibility(
-				helper.getIntermediatePoints().size() == 0 ? View.INVISIBLE : View.VISIBLE);
-		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.shared_string_waypoints) + " (" + 
+				helper.getIntermediatePoints().isEmpty() ? View.INVISIBLE : View.VISIBLE);
+		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.shared_string_waypoints) + " (" +
 				helper.getIntermediatePointsWithTarget().size() + ")");
 		LinearLayout favorites = mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
@@ -102,8 +94,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		List<DashLocationView> distances = new ArrayList<>();
 
 		for (TargetPoint point : targetPoints) {
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.favorites_list_item, null, false);
+			View view = inflate(R.layout.favorites_list_item);
 			TextView name = view.findViewById(R.id.favourite_label);
 			TextView label = view.findViewById(R.id.distance);
 			ImageView direction = view.findViewById(R.id.direction);
@@ -113,23 +104,18 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			view.findViewById(R.id.group_image).setVisibility(View.GONE);
 
 			boolean target = helper.getPointToNavigate() == point;
-			int id;
-			if (!target) {
-				id = R.drawable.list_intermediate;
-			} else {
-				id = R.drawable.list_destination;
-			}
+			int iconId = !target ? R.drawable.list_intermediate :  R.drawable.list_destination;
 
-			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(app.getUIUtilities()
-					.getIcon(id, 0));
-			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
-					point.getLongitude()));
+			((ImageView) view.findViewById(R.id.favourite_icon))
+					.setImageDrawable(uiUtilities.getIcon(iconId, 0));
+			DashLocationView dv = new DashLocationView(direction, label,
+					new LatLon(point.getLatitude(), point.getLongitude()));
 			distances.add(dv);
 
 			name.setText(PointDescription.getSimpleName(point, getActivity()));
 			ImageButton options = view.findViewById(R.id.options);
 			options.setVisibility(View.VISIBLE);
-			boolean optionsVisible = (SHOW_ALL && app.getTargetPointsHelper().getIntermediatePoints().size() > 0);
+			boolean optionsVisible = (SHOW_ALL && !app.getTargetPointsHelper().getIntermediatePoints().isEmpty());
 			
 			options.setImageDrawable(app.getUIUtilities().
 					getThemedIcon(optionsVisible ? R.drawable.ic_overflow_menu_white :
@@ -150,7 +136,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			
 			view.setOnClickListener(v -> {
 				if (getActivity() != null) {
-					getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
+					settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(),
 							15, point.getPointDescription(getActivity()), false,
 							point);
 					MapActivity.launchMapActivityMoveToTop(getActivity());
@@ -162,10 +148,6 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	}
 	
 	protected void deletePointConfirm(TargetPoint point, View view) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		boolean target = point == app.getTargetPointsHelper().getPointToNavigate();
 		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		// Stop the navigation
@@ -180,23 +162,18 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	}
 
 	private void selectTargetModel(TargetPoint point, View view) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-		UiUtilities iconsCache = app.getUIUtilities();
 		PopupMenu optionsMenu = new PopupMenu(requireActivity(), view);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item; 
 		boolean target = point == app.getTargetPointsHelper().getPointToNavigate();
 
-		if (SHOW_ALL && app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
+		if (SHOW_ALL && !app.getTargetPointsHelper().getIntermediatePoints().isEmpty()) {
 			List<TargetPoint> allTargets = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 
 			if (point.index > 0 || target) {
 				int ind = target ? allTargets.size() - 1 : point.index;
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_before)
-						.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_up_dark));
+						.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_up_dark));
 				item.setOnMenuItemClickListener(menuItem -> {
 					TargetPoint remove = allTargets.remove(ind - 1);
 					allTargets.add(ind, remove);
@@ -208,7 +185,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 
 			if (!target) {
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_after)
-						.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_down_dark));
+						.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_down_dark));
 				item.setOnMenuItemClickListener(menuItem -> {
 					TargetPoint remove = allTargets.remove(point.index + 1);
 					allTargets.add(point.index, remove);
@@ -219,7 +196,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			}
 		}
 		item = optionsMenu.getMenu().add(R.string.shared_string_remove)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_remove_dark));
 		item.setOnMenuItemClickListener(menuItem -> {
 			deletePointConfirm(point, view);
 			return true;

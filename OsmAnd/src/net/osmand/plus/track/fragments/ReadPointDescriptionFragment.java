@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
 import net.osmand.plus.track.fragments.controller.EditPointDescriptionController;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 
@@ -51,13 +52,13 @@ public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull String description) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved()) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ReadPointDescriptionFragment fragment = new ReadPointDescriptionFragment();
 			Bundle args = new Bundle();
 			args.putString(CONTENT_KEY, description);
 			fragment.setArguments(args);
-			fragment.show(fm, ReadDescriptionFragment.TAG);
+			fragment.show(manager, ReadDescriptionFragment.TAG);
 		}
 	}
 

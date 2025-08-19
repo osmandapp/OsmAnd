@@ -2,9 +2,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.BatteryManager;
 
 import androidx.annotation.NonNull;
@@ -12,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
@@ -34,12 +33,7 @@ public class BatteryWidget extends SimpleWidget {
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - cachedTime > UPDATE_INTERVAL_MILLIS) {
 			cachedTime = time;
-			Intent batteryIntent;
-			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-				batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED), Context.RECEIVER_NOT_EXPORTED);
-			} else {
-				batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-			}
+			Intent batteryIntent = AndroidUtils.registerBroadcastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
 			if (batteryIntent != null) {
 				int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 				int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);

@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.chooseplan.ChoosePlanUtils;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
@@ -38,7 +38,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStateListener, InAppPurchaseListener {
+public class PluginInfoFragment extends BaseFullScreenFragment implements PluginStateListener, InAppPurchaseListener {
 
 	private static final Log log = PlatformUtil.getLog(PluginInfoFragment.class);
 
@@ -75,7 +75,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		}
 
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.plugin, container, false);
+		mainView = inflate(R.layout.plugin, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		TextView toolbarTitle = mainView.findViewById(R.id.toolbar_title);

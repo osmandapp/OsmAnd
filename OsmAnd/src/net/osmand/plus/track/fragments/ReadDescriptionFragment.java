@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
 import net.osmand.plus.utils.AndroidUtils;
@@ -31,7 +31,7 @@ import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.util.Algorithms;
 
-public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment implements OnSaveDescriptionCallback {
+public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragment implements OnSaveDescriptionCallback {
 
 	public static final String TAG = ReadDescriptionFragment.class.getSimpleName();
 
@@ -63,7 +63,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
+		View view = inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
 		AppCompatImageView imageView = view.findViewById(R.id.main_image);
 		PicassoUtils.setupImageViewByUrl(app, imageView, getImageUrl(), true);

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -13,24 +14,12 @@ import net.osmand.plus.chooseplan.button.SubscriptionButton;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OsmAndProPlanFragment extends SelectedPlanFragment {
-
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		OsmAndProPlanFragment fragment = new OsmAndProPlanFragment();
-		fragment.show(activity.getSupportFragmentManager(), TAG);
-	}
-
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String selectedButtonId) {
-		Bundle args = new Bundle();
-		args.putString(SELECTED_PRICE_BTN_ID, selectedButtonId);
-		OsmAndProPlanFragment fragment = new OsmAndProPlanFragment();
-		fragment.setArguments(args);
-		fragment.show(activity.getSupportFragmentManager(), TAG);
-	}
 
 	@Override
 	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
@@ -80,5 +69,24 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 			}
 		}
 		return subscriptions;
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			OsmAndProPlanFragment fragment = new OsmAndProPlanFragment();
+			fragment.show(manager, TAG);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String selectedButtonId) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(SELECTED_PRICE_BTN_ID, selectedButtonId);
+			OsmAndProPlanFragment fragment = new OsmAndProPlanFragment();
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
+		}
 	}
 }

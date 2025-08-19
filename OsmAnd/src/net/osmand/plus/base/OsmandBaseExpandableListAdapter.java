@@ -18,7 +18,7 @@ public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableList
 		indicator.setVisibility(getChildrenCount(groupPosition) > 0 ? View.VISIBLE : View.GONE);
 	}
 
-	public static void adjustIndicator(@NonNull OsmandApplication app, @NonNull View row, boolean expanded, boolean nightMode) { // todo use for icon
+	public static void adjustIndicator(@NonNull OsmandApplication app, @NonNull View row, boolean expanded, boolean nightMode) {
 		ImageView indicator = row.findViewById(R.id.explicit_indicator);
 		if (!expanded) {
 			indicator.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_down, !nightMode));

@@ -8,23 +8,21 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 
 import java.lang.reflect.Field;
 
 
-public class WhatsNewDialogFragment extends DialogFragment {
+public class WhatsNewDialogFragment extends BaseAlertDialogFragment {
 
 	public static final String TAG = WhatsNewDialogFragment.class.getSimpleName();
 
@@ -33,11 +31,11 @@ public class WhatsNewDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		OsmandApplication app = requireMyApplication();
+		updateNightMode();
 		Class<? extends R.string> cl = R.string.class;
 		String ver = Version.getAppVersion(app);
 		String message = "Release " + Version.getAppVersion(app);
-		if(ver.length() > 0 ) {
+		if(!ver.isEmpty()) {
 			try {
 				Field f = R.string.class.getField("release_" + ver.charAt(0) + "_" + ver.charAt(2));
 				if (f != null) {
@@ -51,7 +49,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 			}
 		}
 		String appVersion = Version.getAppVersion(app);
-		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+		AlertDialog.Builder builder = createDialogBuilder();
 		builder.setTitle(getString(R.string.whats_new) + " " + appVersion)
 				.setMessage(message)
 				.setNegativeButton(R.string.shared_string_close, (dialog, which) -> showSharedStorageWarningIfRequired());
@@ -65,9 +63,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 	private void showArticle() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = requireMyApplication();
-			Uri uri = Uri.parse(app.getString(R.string.docs_latest_version));
-			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+			Uri uri = Uri.parse(getString(R.string.docs_latest_version));
 			AndroidUtils.openUrl(mapActivity, uri, nightMode);
 		}
 	}
@@ -81,22 +77,11 @@ public class WhatsNewDialogFragment extends DialogFragment {
 	private void showSharedStorageWarningIfRequired() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = requireMyApplication();
 			if (mapActivity.getFragmentsHelper().getFragment(SharedStorageWarningFragment.TAG) == null
 					&& SharedStorageWarningFragment.dialogShowRequired(app)) {
 				SharedStorageWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 			}
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return getActivity() == null ? null : ((MapActivity) getActivity());
-	}
-
-	@NonNull
-	private OsmandApplication requireMyApplication() {
-		return ((OsmandApplication) requireActivity().getApplication());
 	}
 
 	public static boolean wasNotShown() {

@@ -458,7 +458,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			ApplicationMode selectedMode = getSelectedAppMode();
 			if (newValue instanceof String) {
 				applyPreference(settings.DRIVING_REGION_AUTOMATIC.getId(), applyToAllProfiles, true);
-				MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+				MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 				if (mapViewTrackingUtilities != null) {
 					mapViewTrackingUtilities.resetDrivingRegionUpdate();
 				}

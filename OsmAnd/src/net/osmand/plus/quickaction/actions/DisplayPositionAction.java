@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.UiUtilities;
 
 public class DisplayPositionAction extends QuickAction {
 
@@ -54,9 +55,8 @@ public class DisplayPositionAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-		View view = inflater.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		TextView tvDescription = view.findViewById(R.id.text);
 		tvDescription.setText(R.string.quick_action_toggle_preference);
 		parent.addView(view);

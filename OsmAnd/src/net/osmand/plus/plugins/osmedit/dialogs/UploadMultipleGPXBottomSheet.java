@@ -19,7 +19,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.io.KFile;
 
-import java.io.File;
 import java.util.List;
 
 public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<TrackItem> {
@@ -65,7 +64,7 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<T
 		}
 		String total = getString(R.string.shared_string_total);
 		titleDescription.setText(getString(R.string.ltr_or_rtl_combine_via_colon, total,
-				AndroidUtils.formatSize(app, selectedItems.size() == 0 ? 1 : size)));
+				AndroidUtils.formatSize(app, selectedItems.isEmpty() ? 1 : size)));
 	}
 
 	@Nullable

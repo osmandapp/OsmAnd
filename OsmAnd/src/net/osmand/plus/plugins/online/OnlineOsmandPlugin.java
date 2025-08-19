@@ -112,15 +112,15 @@ public class OnlineOsmandPlugin extends CustomOsmandPlugin implements ImportTask
 			LOG.error("Cannot install online plugin. OSF url is empty for " + pluginId);
 			return;
 		}
-
-		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(R.string.shared_string_plugin,
-				R.string.shared_string_downloading, ProgressDialog.STYLE_SPINNER);
-		if (activity != null) {
-			dialog.show(activity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
-		}
+		ProgressDialogFragment dialog = activity != null
+				? ProgressDialogFragment.showInstance(activity.getSupportFragmentManager(),
+				R.string.shared_string_plugin, R.string.shared_string_downloading, ProgressDialog.STYLE_SPINNER)
+				: null;
 		File osfFile = new File(getPluginDir(), osfUrl);
 		AndroidNetworkUtils.downloadFileAsync(OSMAND_URL + osfUrl, osfFile, result -> {
-			dialog.dismiss();
+			if (dialog != null) {
+				dialog.dismiss();
+			}
 			if (result == null) {
 				this.installListener = installListener;
 				app.getImportHelper().addImportTaskListener(this);

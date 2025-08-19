@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,19 +18,16 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -54,8 +50,6 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String OPEN_TRACK_ATTR = "open_track";
 	private static final String SHOW_ON_MAP_ATTR = "show_on_map";
 
-	private OsmandApplication app;
-
 	private File file;
 	private String newGpxName = "";
 	private String initialGpxName = "";
@@ -66,8 +60,6 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		app = requiredMyApplication();
 
 		Bundle args = getArguments();
 		if (args != null && args.containsKey(FILE_PATH_KEY)) {
@@ -87,10 +79,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context ctx = requireContext();
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
-		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
+		View view = inflate(R.layout.save_gpx_fragment);
 
 		OsmandTextFieldBoxes textBox = view.findViewById(R.id.name_text_box);
 		if (nightMode) {
@@ -101,7 +90,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 		EditText nameEditText = view.findViewById(R.id.name_edit_text);
 		nameEditText.setText(initialGpxName);
-		nameEditText.setTextColor(ContextCompat.getColor(ctx, textPrimaryColor));
+		nameEditText.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 		nameEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -129,11 +118,10 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 		nameEditText.setOnFocusChangeListener((v, hasFocus) -> {
 			if (hasFocus) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
+				callActivity(activity -> {
 					nameEditText.setSelection(nameEditText.getText().length());
 					AndroidUtils.showSoftKeyboard(activity, nameEditText);
-				}
+				});
 			}
 		});
 
@@ -141,10 +129,8 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		showOnMapButton.setChecked(showOnMap);
 		showOnMapButton.setOnCheckedChangeListener((buttonView, isChecked) -> showOnMap = !showOnMap);
 
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create();
-		items.add(titleItem);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());
+
 	}
 
 	@Override
@@ -233,12 +219,10 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void moveMap(@NonNull FragmentActivity activity, @NonNull GpxFile gpxFile) {
 		WptPt point = gpxFile.findPointToShow();
-		if (point != null) {
-			if (AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity) {
-				OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-				mapView.getAnimatedDraggingThread().startMoving(point.getLat(), point.getLon());
-				mapView.refreshMap();
-			}
+		if (point != null && AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity) {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			mapView.getAnimatedDraggingThread().startMoving(point.getLat(), point.getLon());
+			mapView.refreshMap();
 		}
 	}
 

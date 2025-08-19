@@ -119,7 +119,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		findViews();
 		updateWidgetView();
 		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode);
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
 			return true;
 		});
 	}

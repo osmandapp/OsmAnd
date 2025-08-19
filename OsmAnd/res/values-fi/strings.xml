@@ -510,7 +510,7 @@
     <string name="search_villages_and_postcodes">Etsi lisää paikkakuntia/postinumeroita</string>
     <string name="map_widget_max_speed">Nopeusrajoitus</string>
     <string name="osmand_parking_position_name">Pysäköintipaikka</string>
-    <string name="osmand_parking_plugin_description"/>
+    <string name="osmand_parking_plugin_description"></string>
     <string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
     <string name="context_menu_item_delete_parking_point">Poista pysäköintimarkkeri</string>
     <string name="shared_string_clear">Nollaa</string>
@@ -1845,7 +1845,7 @@
     <string name="successfully_uploaded_pattern">Viety {0}/{1}</string>
     <string name="offline_maps_and_navigation">Offline kartat
 \n&amp; navigointi</string>
-    <string name="commit_poi"/>
+    <string name="commit_poi"></string>
     <string name="tab_title_advanced">Edistynyt</string>
     <string name="confirm_download_roadmaps">Vain tiet-karttaa ei tarvita, koska sinulla on jo vakio (täysi) kartta. Ladataanko se silti\?</string>
     <string name="free_downloads_used">Käytetyt ilmaiset lataukset</string>

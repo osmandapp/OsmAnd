@@ -21,7 +21,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -44,15 +43,11 @@ public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 	private int currentValue;
 	private int defaultValue;
 
-	private CommonPreference<Integer> preference;
-
 	private View sliderContainer;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		preference = app.getSettings().MAX_RENDERING_THREADS;
 		initData();
 	}
 
@@ -64,9 +59,9 @@ public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 			minValue = range[0];
 			maxValue = range[range.length - 1];
 		}
-		initialValue = preference.get();
+		initialValue = settings.MAX_RENDERING_THREADS.get();
 		currentValue = initialValue;
-		defaultValue = preference.getDefaultValue();
+		defaultValue = settings.MAX_RENDERING_THREADS.getDefaultValue();
 	}
 
 	@Override
@@ -161,7 +156,7 @@ public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 						mapRenderer.setResourceWorkerThreadsLimit(getMapRenderer().getDefaultWorkerThreadsLimit() / 2);
 					}
 				}
-				fragment.onApplyPreferenceChange(preference.getId(), false, currentValue);
+				fragment.onApplyPreferenceChange(settings.MAX_RENDERING_THREADS.getId(), false, currentValue);
 			}
 		}
 		dismiss();

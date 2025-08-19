@@ -55,7 +55,7 @@ public class StopDownloadBottomSheetDialogFragment extends MenuBottomSheetDialog
 
 	@Override
 	protected int getFirstDividerHeight() {
-		return AndroidUtils.dpToPx(requireContext(), 24);
+		return dpToPx(24);
 	}
 
 	@Override

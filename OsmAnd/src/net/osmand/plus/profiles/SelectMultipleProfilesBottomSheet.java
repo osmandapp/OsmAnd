@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
@@ -23,6 +24,7 @@ import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -53,10 +55,10 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	private void readBundle(Bundle bundle) {
 		selectedProfiles = bundle.getStringArrayList(SELECTED_KEYS);
 		disabledProfiles = bundle.getStringArrayList(DISABLED_KEYS);
-		refreshProfiles(getMyApplication());
+		refreshProfiles(app);
 	}
 
-	private void refreshProfiles(OsmandApplication app) {
+	private void refreshProfiles(@NonNull OsmandApplication app) {
 		profiles.clear();
 		List<ApplicationMode> appModes = ApplicationMode.allPossibleValues();
 		profiles.addAll(ProfileDataUtils.getDataObjects(app, appModes));
@@ -78,14 +80,12 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 
 	private void addProfileItem(ProfileDataObject profile) {
 		Context context = requireContext();
-		OsmandApplication app = requiredMyApplication();
-		View itemView = UiUtilities.getInflater(requireContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp, null);
+		View itemView = inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp);
 
 		int profileColor = profile.getIconColor(nightMode);
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		int disableColorId = ColorUtilities.getDefaultIconColorId(nightMode);
-		int disableColor = ContextCompat.getColor(context, disableColorId);
+		int disableColor = getColor(disableColorId);
 		boolean enable = profile.isEnabled();
 
 		TextView tvTitle = itemView.findViewById(R.id.title);
@@ -97,31 +97,27 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 		tvDescription.setText(profile.getDescription());
 
 		if (!enable) {
-			tvTitle.setTextColor(ContextCompat.getColor(context, disableColorId));
-			tvDescription.setTextColor(ContextCompat.getColor(context, disableColorId));
+			tvTitle.setTextColor(disableColor);
+			tvDescription.setTextColor(disableColor);
 		}
 
-		Drawable drawableIcon = app.getUIUtilities().getPaintedIcon(
-				profile.getIconRes(), enable ? profileColor : disableColor);
+		Drawable drawableIcon = getPaintedIcon(profile.getIconRes(), enable ? profileColor : disableColor);
 		ivIcon.setImageDrawable(drawableIcon);
 		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(context,
 				enable ? activeColorId : disableColorId), compoundButton);
 		compoundButton.setSaveEnabled(false);
 		compoundButton.setChecked(profile.isSelected());
 
-		View.OnClickListener l = !enable ? null : new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String key = profile.getStringKey();
-				boolean selected = !profile.isSelected();
-				if (selected) {
-					selectedProfiles.add(key);
-				} else {
-					selectedProfiles.remove(key);
-				}
-				profile.setSelected(selected);
-				compoundButton.setChecked(selected);
+		View.OnClickListener l = !enable ? null : v -> {
+			String key = profile.getStringKey();
+			boolean selected = !profile.isSelected();
+			if (selected) {
+				selectedProfiles.add(key);
+			} else {
+				selectedProfiles.remove(key);
 			}
+			profile.setSelected(selected);
+			compoundButton.setChecked(selected);
 		};
 
 		items.add(new BaseBottomSheetItem.Builder()
@@ -150,33 +146,35 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof CallbackWithObject) {
+		if (getTargetFragment() instanceof CallbackWithObject callback) {
 			List<String> newSelected = new ArrayList<>();
 			for (String profile : selectedProfiles) {
 				if (!disabledProfiles.contains(profile)) {
 					newSelected.add(profile);
 				}
 			}
-			((CallbackWithObject) targetFragment).processResult(newSelected);
+			callback.processResult(newSelected);
 		}
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull MapActivity mapActivity, Fragment targetFragment,
+	public static void showInstance(@NonNull MapActivity mapActivity,
+	                                @Nullable Fragment targetFragment,
 	                                @Nullable List<String> selectedProfiles,
 	                                @Nullable List<String> disabledProfiles,
 	                                boolean usedOnMap) {
-		SelectMultipleProfilesBottomSheet fragment = new SelectMultipleProfilesBottomSheet();
-		Bundle args = new Bundle();
-		args.putStringArrayList(SELECTED_KEYS, selectedProfiles != null ?
-				new ArrayList<>(selectedProfiles) : new ArrayList<String>());
-		args.putStringArrayList(DISABLED_KEYS, disabledProfiles != null ?
-				new ArrayList<>(disabledProfiles) : new ArrayList<String>());
-		fragment.setArguments(args);
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectMultipleProfilesBottomSheet fragment = new SelectMultipleProfilesBottomSheet();
+			Bundle args = new Bundle();
+			args.putStringArrayList(SELECTED_KEYS, selectedProfiles != null ?
+					new ArrayList<>(selectedProfiles) : new ArrayList<>());
+			args.putStringArrayList(DISABLED_KEYS, disabledProfiles != null ?
+					new ArrayList<>(disabledProfiles) : new ArrayList<>());
+			fragment.setArguments(args);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
-
 }

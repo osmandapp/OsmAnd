@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
+public abstract class ImportDuplicatesFragment extends BaseFullScreenFragment {
 
 	protected List<SettingsItem> settingsItems;
 	protected List<? super Object> duplicatesList;
@@ -68,7 +68,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_import_duplicates, container, false);
+		View root = inflate(R.layout.fragment_import_duplicates, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);
@@ -78,11 +78,11 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		description = root.findViewById(R.id.description);
 		progressBar = root.findViewById(R.id.progress_bar);
 		toolbarLayout = root.findViewById(R.id.toolbar_layout);
-		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both, nightMode
+		keepBothBtn.setIcon(getPaintedIcon(R.drawable.ic_action_keep_both, nightMode
 				? getColor(R.color.icon_color_active_dark)
 				: getColor(R.color.icon_color_active_light))
 		);
-		replaceAllBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_replace,
+		replaceAllBtn.setIcon(getPaintedIcon(R.drawable.ic_action_replace,
 				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))
 		);
 		keepBothBtn.setOnClickListener(v -> importItems(false));
@@ -139,7 +139,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 
 	protected void setupToolbar(Toolbar toolbar) {
 		toolbar.setTitle(R.string.import_duplicates_title);
-		toolbar.setNavigationIcon(getPaintedContentIcon(
+		toolbar.setNavigationIcon(getPaintedIcon(
 				AndroidUtils.getNavigationIconResId(app),
 				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode)));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);

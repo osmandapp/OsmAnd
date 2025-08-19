@@ -43,7 +43,7 @@ import net.osmand.plus.backup.ui.status.CloudSyncCard;
 import net.osmand.plus.backup.ui.status.IntroductionCard;
 import net.osmand.plus.backup.ui.status.WarningStatusCard;
 import net.osmand.plus.backup.ui.trash.CloudTrashFragment;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -54,7 +54,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
-public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurchaseListener,
+public class BackupCloudFragment extends BaseFullScreenFragment implements InAppPurchaseListener,
 		OnPrepareBackupListener, CardListener, OnBackupSyncListener {
 
 	public static final String TAG = BackupCloudFragment.class.getSimpleName();
@@ -101,7 +101,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.osmand_cloud, container, false);
+		View view = inflate(R.layout.osmand_cloud, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -288,7 +288,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 				refreshContent();
 			} else if (IntroductionCard.SETTINGS_BUTTON_INDEX == buttonIndex) {
 				dialogType = null;
-				BackupTypesFragment.showInstance(manager);
+				BackupDataController.showScreen(requireActivity());
 			}
 		} else if (card instanceof CloudSyncCard) {
 			if (SYNC_BUTTON_INDEX == buttonIndex) {
@@ -320,11 +320,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		if (!settingsHelper.isBackupSyncing()) {
 			settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC);
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

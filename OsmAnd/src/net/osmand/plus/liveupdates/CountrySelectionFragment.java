@@ -9,7 +9,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,7 +21,7 @@ import androidx.annotation.DrawableRes;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -33,7 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
+public class CountrySelectionFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = CountrySelectionFragment.class.getSimpleName();
 
@@ -59,14 +58,14 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		updateNightMode();
-		if (countryItems.size() == 0) {
+		if (countryItems.isEmpty()) {
 			initCountries(app);
 		}
 
-		View view = themedInflater.inflate(R.layout.fragment_search_list, container, false);
+		View view = inflate(R.layout.fragment_search_list, container, false);
 		ListView listView = view.findViewById(android.R.id.list);
 		ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
-		if (countryItems.size() > 0) {
+		if (!countryItems.isEmpty()) {
 			for (CountryItem item : countryItems) {
 				adapter.add(item);
 			}
@@ -85,12 +84,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		});
 		ImageButton clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		clearButton.setOnClickListener(v -> dismiss());
 		return view;
 	}
 

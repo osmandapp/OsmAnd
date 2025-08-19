@@ -20,7 +20,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 
@@ -54,16 +53,12 @@ public abstract class BaseTextFieldBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			items.add(setupContent(app));
-		}
+		items.add(setupContent(app));
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
-	private BaseBottomSheetItem setupContent(OsmandApplication app) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View mainView = inflater.inflate(R.layout.bottom_sheet_item_edit_with_chips_view, null);
+	private BaseBottomSheetItem setupContent(@NonNull OsmandApplication app) {
+		View mainView = inflate(R.layout.bottom_sheet_item_edit_with_chips_view);
 
 		title = mainView.findViewById(R.id.title);
 		ivImage = mainView.findViewById(R.id.image_view);
@@ -85,6 +80,7 @@ public abstract class BaseTextFieldBottomSheet extends BasePreferenceBottomSheet
 		return createBottomSheetItem(app, mainView);
 	}
 
+	@NonNull
 	protected abstract BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView);
 
 	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {

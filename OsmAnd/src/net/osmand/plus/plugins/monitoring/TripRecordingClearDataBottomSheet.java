@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -18,33 +17,21 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 
 public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFragment implements DismissTargetFragment {
 
 	public static final String TAG = TripRecordingClearDataBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
-
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
-			TripRecordingClearDataBottomSheet fragment = new TripRecordingClearDataBottomSheet();
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
-		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int verticalBig = getDimensionPixelSize(R.dimen.dialog_content_margin);
+		int verticalNormal = getDimensionPixelSize(R.dimen.content_padding);
 		String description = getString(R.string.clear_recorded_data_warning)
 				.concat("\n").concat(getString(R.string.lost_data_warning));
-		View buttonClear = createItem(inflater, ItemType.CLEAR_DATA);
-		View buttonCancel = createItem(inflater, ItemType.CANCEL);
+		View buttonClear = createItem(ItemType.CLEAR_DATA);
+		View buttonCancel = createItem(ItemType.CANCEL);
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(description)
@@ -57,13 +44,10 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonClear)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						app.getSavingTrackHelper().clearRecordedData(true);
-						dismiss();
-						dismissTarget();
-					}
+				.setOnClickListener(v -> {
+					app.getSavingTrackHelper().clearRecordedData(true);
+					dismiss();
+					dismissTarget();
 				})
 				.create());
 
@@ -71,19 +55,14 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonCancel)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						dismiss();
-					}
-				})
+				.setOnClickListener(v -> dismiss())
 				.create());
 
 		items.add(new DividerSpaceItem(app, verticalNormal));
 	}
 
-	private View createItem(LayoutInflater inflater, ItemType type) {
-		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type);
+	private View createItem(ItemType type) {
+		return TripRecordingBottomSheet.createItem(app, nightMode, getThemedInflater(), type);
 	}
 
 	@Override
@@ -122,6 +101,14 @@ public class TripRecordingClearDataBottomSheet extends MenuBottomSheetDialogFrag
 				target.setArguments(args);
 			}
 			((TripRecordingOptionsBottomSheet) target).dismiss();
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			TripRecordingClearDataBottomSheet fragment = new TripRecordingClearDataBottomSheet();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

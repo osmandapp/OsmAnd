@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
@@ -37,7 +37,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
+public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
 
 	private static final String TAG = ChangeAppearanceFragment.class.getSimpleName();
 
@@ -77,7 +77,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_tracks_change_appearance, container);
+		View view = inflate(R.layout.fragment_tracks_change_appearance, container, false);
 		view.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
 		setupToolbar(view);

@@ -1,10 +1,7 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
-import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,13 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -27,9 +22,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -55,18 +48,15 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
-		if (app == null || plugin == null) return;
+		if (plugin == null) return;
 
-		poi = AndroidUtils.getSerializable(getArguments(), OPENSTREETMAP_POINT, OsmPoint[].class);
-		boolean isNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.send_poi_fragment, null);
+		poi = AndroidUtils.getSerializable(requireArguments(), OPENSTREETMAP_POINT, OsmPoint[].class);
+		View sendOsmPoiView = inflate(R.layout.send_poi_fragment);
 		sendOsmPoiView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 		closeChangeSet = sendOsmPoiView.findViewById(R.id.close_change_set_checkbox);
 		messageEditText = sendOsmPoiView.findViewById(R.id.message_field);
-		String defaultChangeSet = createDefaultChangeSet(app);
+		String defaultChangeSet = createDefaultChangeSet();
 		messageEditText.setText(defaultChangeSet);
 		messageEditText.setSelection(messageEditText.getText().length());
 		TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
@@ -75,27 +65,21 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		String userNameOpenID = plugin.OSM_USER_NAME_OR_EMAIL.get();
 		String userName = isLoginOAuth() ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
-		int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int paddingSmall = getDimensionPixelSize(R.dimen.content_padding_small);
 		closeChangeSet.setChecked(true);
-		setCloseChangeSet(isNightMode, paddingSmall);
-		closeChangeSet.setOnCheckedChangeListener((buttonView, isChecked) -> setCloseChangeSet(isNightMode, paddingSmall));
+		setCloseChangeSet(paddingSmall);
+		closeChangeSet.setOnCheckedChangeListener((buttonView, isChecked) -> setCloseChangeSet(paddingSmall));
 		LinearLayout account = sendOsmPoiView.findViewById(R.id.account_container);
 		account.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				showOpenStreetMapScreen(activity);
-			}
+			callActivity(SendGpxBottomSheetFragment::showOpenStreetMapScreen);
 			dismiss();
 		});
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(sendOsmPoiView)
-				.create();
-		items.add(titleItem);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(sendOsmPoiView).create());
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {
 		try {
-			if (!fm.isStateSaved()) {
+			if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 				SendPoiBottomSheetFragment fragment = new SendPoiBottomSheetFragment();
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(OPENSTREETMAP_POINT, points);
@@ -108,22 +92,17 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected DialogButtonType getRightBottomButtonType() {
-		return (DialogButtonType.PRIMARY);
-	}
-
-	@Override
 	protected void onRightBottomButtonClick() {
 		ProgressDialogPoiUploader progressDialogPoiUploader = null;
 		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader((MapActivity) activity);
+		if (activity instanceof MapActivity mapActivity) {
+			progressDialogPoiUploader = new SimpleProgressDialogPoiUploader(mapActivity);
 		} else if (getParentFragment() instanceof ProgressDialogPoiUploader) {
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
 		if (progressDialogPoiUploader != null) {
 			String comment = messageEditText.getText().toString();
-			if (comment.length() > 0) {
+			if (!comment.isEmpty()) {
 				for (OsmPoint osmPoint : poi) {
 					if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 						((OpenstreetmapPoint) osmPoint).setComment(comment);
@@ -141,7 +120,8 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_upload;
 	}
 
-	private String createDefaultChangeSet(OsmandApplication app) {
+	@NonNull
+	private String createDefaultChangeSet() {
 		Map<String, PoiType> allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
 		if (allTranslatedSubTypes == null) {
 			return "";
@@ -224,7 +204,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 						modifiedItemsOutOfLimit += quantity;
 					} else {
 						if (pos == 0) {
-							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ")
+							comment = comment.concat(comment.isEmpty() ? "" : "; ").concat(action).concat(" ")
 									.concat(quantity == 1 ? "" : quantity + " ").concat(type);
 						} else {
 							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
@@ -243,8 +223,8 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		return comment;
 	}
 
-	private void setCloseChangeSet(boolean isNightMode, int paddingSmall) {
-		if (isNightMode) {
+	private void setCloseChangeSet(int paddingSmall) {
+		if (nightMode) {
 			closeChangeSet.setBackgroundResource(
 					closeChangeSet.isChecked() ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
 		} else {

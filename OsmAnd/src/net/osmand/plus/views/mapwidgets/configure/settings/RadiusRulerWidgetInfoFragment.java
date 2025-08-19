@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -49,9 +48,8 @@ public class RadiusRulerWidgetInfoFragment extends WidgetInfoBaseFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.radius_ruler_widget_settings_fragment, container);
-
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.radius_ruler_widget_settings_fragment, container);
 		setupRadiusRulerModeSetting();
 		setupCompassSetting();
 	}

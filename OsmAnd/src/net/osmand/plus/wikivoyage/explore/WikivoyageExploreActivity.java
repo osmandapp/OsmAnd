@@ -88,12 +88,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> finish());
 
-		findViewById(R.id.options_button).setOnClickListener(v -> {
-			FragmentManager manager = getSupportFragmentManager();
-			WikivoyageOptionsBottomSheetDialogFragment fragment = new WikivoyageOptionsBottomSheetDialogFragment();
-			fragment.setUsedOnMap(false);
-			fragment.show(manager, WikivoyageOptionsBottomSheetDialogFragment.TAG);
-		});
+		findViewById(R.id.options_button).setOnClickListener(v ->
+				WikivoyageOptionsBottomSheetDialogFragment.showInstance(WikivoyageExploreActivity.this));
 
 		int searchColorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 		((TextView) findViewById(R.id.search_hint)).setTextColor(getResolvedColor(searchColorId));

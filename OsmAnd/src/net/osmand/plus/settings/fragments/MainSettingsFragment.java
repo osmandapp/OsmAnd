@@ -19,7 +19,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
@@ -68,16 +67,16 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	protected void setupPreferences() {
 		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
-		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
-		Preference globalSettings = findPreference("global_settings");
+		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(app));
+		Preference globalSettings = requirePreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 		setupBackupAndRestorePref();
-		Preference purchasesSettings = findPreference(PURCHASES_SETTINGS);
+		Preference purchasesSettings = requirePreference(PURCHASES_SETTINGS);
 		purchasesSettings.setIcon(getContentIcon(R.drawable.ic_action_purchases));
-		PreferenceCategory selectedProfile = findPreference(SELECTED_PROFILE);
+		PreferenceCategory selectedProfile = requirePreference(SELECTED_PROFILE);
 		selectedProfile.setIconSpaceReserved(false);
 		setupConfigureProfilePref();
-		PreferenceCategory appProfiles = findPreference(APP_PROFILES);
+		PreferenceCategory appProfiles = requirePreference(APP_PROFILES);
 		appProfiles.setIconSpaceReserved(false);
 		setupAppProfiles(appProfiles);
 		profileManagementPref();
@@ -121,14 +120,14 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-			BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE,
-					ApplicationMode.valueOfStringKey(prefId, null));
+			callActivity(activity -> {
+				ApplicationMode appMode = ApplicationMode.valueOfStringKey(prefId, null);
+				BaseSettingsFragment.showInstance(activity, SettingsScreenType.CONFIGURE_PROFILE, appMode);
+			});
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
-			if (getActivity() != null) {
-				SelectBaseProfileBottomSheet.showInstance(
-						getActivity(), this, getSelectedAppMode(), null, false);
-			}
+			callActivity(activity -> SelectBaseProfileBottomSheet.showInstance(activity,
+					this, getSelectedAppMode(), null, false));
 		} else if (PURCHASES_SETTINGS.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
@@ -213,10 +212,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	}
 
 	private void setupAppProfiles(PreferenceCategory preferenceCategory) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		for (ApplicationMode applicationMode : allAppModes) {
 			boolean isAppProfileEnabled = availableAppModes.contains(applicationMode);
 			SwitchPreferenceEx pref = new SwitchPreferenceEx(app);
@@ -239,13 +234,13 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		} else {
 			availableAppModes.remove(item);
 		}
-		ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
+		ApplicationMode.changeProfileAvailability(item, isChecked, app);
 	}
 
 	private Drawable getAppProfilesIcon(ApplicationMode applicationMode, boolean appProfileEnabled) {
 		int iconResId = applicationMode.getIconRes();
-		return appProfileEnabled ? app.getUIUtilities().getPaintedIcon(applicationMode.getIconRes(), applicationMode.getProfileColor(isNightMode()))
-				: getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
+		return appProfileEnabled ? getPaintedIcon(applicationMode.getIconRes(), applicationMode.getProfileColor(isNightMode()))
+				: getIcon(iconResId, ColorUtilities.getSecondaryIconColorId(isNightMode()));
 	}
 
 	@Override

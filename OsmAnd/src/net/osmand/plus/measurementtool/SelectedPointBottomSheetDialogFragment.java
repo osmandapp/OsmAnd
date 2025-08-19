@@ -2,7 +2,6 @@ package net.osmand.plus.measurementtool;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -29,9 +27,9 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.OptionsDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
@@ -52,9 +50,8 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (requireMapActivity().getMapLayers().getMeasurementToolLayer().getEditingCtx().getPoints().isEmpty()) {
 			dismiss();
 			return null;
-		} else {
-			return super.onCreateView(inflater, parent, savedInstanceState);
 		}
+		return super.onCreateView(inflater, parent, savedInstanceState);
 	}
 
 	@SuppressLint("InflateParams")
@@ -66,8 +63,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 		editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 
-		View titleView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp, null, false);
+		View titleView = inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp);
 		TextView title = titleView.findViewById(R.id.title);
 		title.setTypeface(FontCache.getMediumFont());
 
@@ -85,15 +81,12 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setIcon(getContentIcon(R.drawable.ic_action_move_point))
 				.setTitle(getString(R.string.shared_string_move))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onMovePoint();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					Fragment targetFragment = getTargetFragment();
+					if (targetFragment instanceof SelectedPointFragmentListener) {
+						((SelectedPointFragmentListener) targetFragment).onMovePoint();
 					}
+					dismiss();
 				})
 				.create();
 		items.add(moveItem);
@@ -104,15 +97,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setIcon(getContentIcon(R.drawable.ic_action_addpoint_above))
 				.setTitle(getString(R.string.add_point_after))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onAddPointAfter();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+						listener.onAddPointAfter();
 					}
+					dismiss();
 				})
 				.create();
 		items.add(addAfterItem);
@@ -121,15 +110,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setIcon(getContentIcon(R.drawable.ic_action_addpoint_below))
 				.setTitle(getString(R.string.add_point_before))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onAddPointBefore();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+						listener.onAddPointBefore();
 					}
+					dismiss();
 				})
 				.create();
 		items.add(addBeforeItem);
@@ -141,15 +126,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setIcon(getContentIcon(R.drawable.ic_action_trim_left))
 				.setTitle(getString(R.string.plan_route_trim_before))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onTrimRouteBefore();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+						listener.onTrimRouteBefore();
 					}
+					dismiss();
 				})
 				.setDisabled(editingCtx.isFirstPointSelected(false))
 				.create();
@@ -160,15 +141,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
 				.setTitle(getString(R.string.plan_route_trim_after))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onTrimRouteAfter();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+						listener.onTrimRouteAfter();
 					}
+					dismiss();
 				})
 				.setDisabled(editingCtx.isLastPointSelected(false))
 				.create();
@@ -184,15 +161,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 					.setIcon(getContentIcon(R.drawable.ic_action_new_segment))
 					.setTitle(getString(R.string.plan_route_add_new_segment))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Fragment targetFragment = getTargetFragment();
-							if (targetFragment instanceof SelectedPointFragmentListener) {
-								((SelectedPointFragmentListener) targetFragment).onSplitPointsAfter();
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+							listener.onSplitPointsAfter();
 						}
+						dismiss();
 					})
 					.create();
 			items.add(addNewSegment);
@@ -204,15 +177,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 					.setIcon(getContentIcon(R.drawable.ic_action_join_segments))
 					.setTitle(getString(R.string.join_segments))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Fragment targetFragment = getTargetFragment();
-							if (targetFragment instanceof SelectedPointFragmentListener) {
-								((SelectedPointFragmentListener) targetFragment).onJoinPoints();
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+							listener.onJoinPoints();
 						}
+						dismiss();
 					})
 					.create();
 			items.add(joinSegments);
@@ -224,15 +193,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 					.setIcon(getContentIcon(R.drawable.ic_action_split_after))
 					.setTitle(getString(R.string.plan_route_split_after))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Fragment targetFragment = getTargetFragment();
-							if (targetFragment instanceof SelectedPointFragmentListener) {
-								((SelectedPointFragmentListener) targetFragment).onSplitPointsAfter();
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+							listener.onSplitPointsAfter();
 						}
+						dismiss();
 					})
 					.setDisabled(!editingCtx.canSplit(true))
 					.create();
@@ -242,15 +207,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 					.setIcon(getContentIcon(R.drawable.ic_action_split_after))
 					.setTitle(getString(R.string.plan_route_split_before))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Fragment targetFragment = getTargetFragment();
-							if (targetFragment instanceof SelectedPointFragmentListener) {
-								((SelectedPointFragmentListener) targetFragment).onSplitPointsBefore();
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+							listener.onSplitPointsBefore();
 						}
+						dismiss();
 					})
 					.setDisabled(!editingCtx.canSplit(false))
 					.create();
@@ -265,15 +226,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setIcon(getRouteTypeIcon(true))
 				.setTitle(getString(R.string.plan_route_change_route_type_before))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onChangeRouteTypeBefore();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+						listener.onChangeRouteTypeBefore();
 					}
+					dismiss();
 				})
 				.setDisabled(editingCtx.isFirstPointSelected(false) || approximationNeeded)
 				.create();
@@ -283,15 +240,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setIcon(getRouteTypeIcon(false))
 				.setTitle(getString(R.string.plan_route_change_route_type_after))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onChangeRouteTypeAfter();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+						listener.onChangeRouteTypeAfter();
 					}
+					dismiss();
 				})
 				.setDisabled(editingCtx.isLastPointSelected(false) || approximationNeeded)
 				.create();
@@ -304,15 +257,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						R.color.color_osm_edit_delete))
 				.setTitle(getString(R.string.shared_string_delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onDeletePoint();
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+						listener.onDeletePoint();
 					}
+					dismiss();
 				})
 				.create();
 		items.add(deleteItem);
@@ -320,19 +269,17 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public void dismiss() {
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof SelectedPointFragmentListener) {
-			((SelectedPointFragmentListener) targetFragment).onCloseMenu();
+		if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+			listener.onCloseMenu();
 		}
 		super.dismiss();
 	}
 
 	@Override
 	public void onCancel(@NonNull DialogInterface dialog) {
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof SelectedPointFragmentListener) {
-			((SelectedPointFragmentListener) targetFragment).onCloseMenu();
-			((SelectedPointFragmentListener) targetFragment).onClearSelection();
+		if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+			listener.onCloseMenu();
+			listener.onClearSelection();
 		}
 		super.onCancel(dialog);
 	}
@@ -344,24 +291,9 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof SelectedPointFragmentListener) {
-			((SelectedPointFragmentListener) targetFragment).onClearSelection();
+		if (getTargetFragment() instanceof SelectedPointFragmentListener listener) {
+			listener.onClearSelection();
 		}
-	}
-
-	@NonNull
-	private MapActivity requireMapActivity() {
-		return (MapActivity) requireActivity();
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 
 	@NonNull
@@ -380,7 +312,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (mapActivity == null) {
 			return "";
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
 
 		StringBuilder description = new StringBuilder();
 		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
@@ -450,15 +381,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment) {
-		try {
-			if (!fm.isStateSaved()) {
-				SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
-				fragment.setRetainInstance(true);
-				fragment.setTargetFragment(targetFragment, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 

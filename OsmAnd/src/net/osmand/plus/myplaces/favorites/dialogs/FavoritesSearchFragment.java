@@ -5,7 +5,6 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -26,13 +25,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -42,11 +39,11 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -63,11 +60,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FavoritesSearchFragment extends DialogFragment {
+public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = "FavoritesSearchFragment";
 
-	private OsmandApplication app;
 	private AccessibilityAssistant accessibilityAssistant;
 
 	public static final String FAV_SEARCH_QUERY_KEY = "fav_search_query_key";
@@ -84,18 +80,16 @@ public class FavoritesSearchFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
 		accessibilityAssistant = new AccessibilityAssistant(requireActivity());
-		boolean isLightTheme = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
 	@Override
 	@SuppressLint("PrivateResource, ValidFragment")
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		Activity activity = requireActivity();
-		View view = inflater.inflate(R.layout.search_favs_fragment, container, false);
+		View view = inflate(R.layout.search_favs_fragment, container, false);
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -109,7 +103,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 		}
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		Drawable icBack = app.getUIUtilities().getThemedIcon(AndroidUtils.getNavigationIconResId(activity));
+		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(activity));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
@@ -131,9 +125,9 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 		progressBar = view.findViewById(R.id.searchProgressBar);
 		clearButton = view.findViewById(R.id.clearButton);
-		clearButton.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
+		clearButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(v -> {
-					if (searchEditText.getText().length() > 0) {
+					if (!searchEditText.getText().isEmpty()) {
 						searchEditText.setText("");
 						searchEditText.setSelection(0);
 					}
@@ -159,14 +153,14 @@ public class FavoritesSearchFragment extends DialogFragment {
 					}
 				}
 			});
-			listView.setOnItemClickListener((parent, view1, position, id) -> {
+			listView.setOnItemClickListener((parent, v, position, id) -> {
 				FavouritePoint point = listAdapter.getItem(position);
 				if (point != null) {
 					showOnMap(point);
 					dismiss();
 				}
 			});
-			listAdapter = new FavoritesSearchListAdapter(getMyApplication());
+			listAdapter = new FavoritesSearchListAdapter(app);
 			if (!Algorithms.isEmpty(searchQuery)) {
 				listAdapter.getFilter().filter(searchQuery);
 				searchEditText.setText(searchQuery);
@@ -208,9 +202,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 	}
 
 	public void showOnMap(FavouritePoint point) {
-		getMyApplication().getSettings().FAVORITES_TAB.set(MyPlacesActivity.FAV_TAB);
+		settings.FAVORITES_TAB.set(MyPlacesActivity.FAV_TAB);
 
-		OsmandSettings settings = getMyApplication().getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
@@ -221,10 +214,6 @@ public class FavoritesSearchFragment extends DialogFragment {
 		Bundle bundle = new Bundle();
 		bundle.putString(FAV_SEARCH_QUERY_KEY, searchQuery);
 		MapActivity.launchMapActivityMoveToTop(requireActivity(), bundle, null, null);
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) requireActivity().getApplication();
 	}
 
 	private void openKeyboard() {
@@ -257,21 +246,18 @@ public class FavoritesSearchFragment extends DialogFragment {
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull String searchQuery) {
-		try {
-
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
 			if (!Algorithms.isEmpty(searchQuery)) {
 				bundle.putString(FAV_SEARCH_QUERY_KEY, searchQuery);
 			}
-
 			FavoritesSearchFragment fragment = new FavoritesSearchFragment();
 			fragment.setArguments(bundle);
 			fragment.show(activity.getSupportFragmentManager(), TAG);
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	class FavoritesSearchListAdapter extends ArrayAdapter<FavouritePoint> {
@@ -364,7 +350,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 		@Override
 		public int getCount() {
-			if (points.size() > 0) {
+			if (!points.isEmpty()) {
 				return points.size() + 3;
 			} else {
 				return 0;
@@ -402,10 +388,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 			LinearLayout view;
 			if (type == HEADER_TYPE) {
 				if (convertView == null) {
-					LayoutInflater inflater = (LayoutInflater) app
-							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-					view = (LinearLayout) inflater.inflate(
-							R.layout.search_favs_list_header, null);
+					view = (LinearLayout) inflate(R.layout.search_favs_list_header);
 				} else {
 					view = (LinearLayout) convertView;
 				}
@@ -413,32 +396,22 @@ public class FavoritesSearchFragment extends DialogFragment {
 				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.sorted_by_distance));
 			} else if (type == HEADER_SHADOW_TYPE) {
 				if (convertView == null) {
-					LayoutInflater inflater = (LayoutInflater) app
-							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-					view = (LinearLayout) inflater.inflate(
-							R.layout.list_shadow_header, null);
+					view = (LinearLayout) inflate(R.layout.list_shadow_header);
 				} else {
 					view = (LinearLayout) convertView;
 				}
 			} else if (type == FOOTER_SHADOW_TYPE) {
 				if (convertView == null) {
-					LayoutInflater inflater = (LayoutInflater) app
-							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-					view = (LinearLayout) inflater.inflate(
-							R.layout.list_shadow_footer, null);
+					view = (LinearLayout) inflate(R.layout.list_shadow_footer);
 				} else {
 					view = (LinearLayout) convertView;
 				}
 			} else {
 				if (convertView == null) {
-					LayoutInflater inflater = (LayoutInflater) app
-							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-					view = (LinearLayout) inflater.inflate(
-							R.layout.search_favs_list_item, null);
+					view = (LinearLayout) inflate(R.layout.search_favs_list_item);
 				} else {
 					view = (LinearLayout) convertView;
 				}
-
 				if (point != null) {
 					boolean visible = point.isVisible();
 					ImageView imageView = view.findViewById(R.id.imageView);
@@ -460,7 +433,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					TextView distanceText = view.findViewById(R.id.distance);
 					distanceText.setText(distance);
 					distanceText.setTextColor(visible ? getColor(enabledColor) : getColor(disabledColor));
-					subtitle.setText(point.getCategory().length() == 0 ? app.getString(R.string.shared_string_favorites) : point.getCategoryDisplayName(app));
+					subtitle.setText(point.getCategory().isEmpty() ? app.getString(R.string.shared_string_favorites) : point.getCategoryDisplayName(app));
 				}
 			}
 			View divider = view.findViewById(R.id.divider);
@@ -487,11 +460,6 @@ public class FavoritesSearchFragment extends DialogFragment {
 		void setFilterResults(Set<?> values) {
 			this.filter = values;
 		}
-
-		@ColorInt
-		protected int getColor(@ColorRes int resId) {
-			return ColorUtilities.getColor(getContext(), resId);
-		}
 	}
 
 	private class FavoritesFilter extends Filter {
@@ -505,7 +473,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
-			if (constraint == null || constraint.length() == 0) {
+			if (constraint == null || constraint.isEmpty()) {
 				results.values = null;
 				results.count = 1;
 			} else {

@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.imageview.GalleryImageView;
@@ -29,7 +29,7 @@ import net.osmand.shared.util.LoadingImage;
 
 import org.apache.commons.logging.Log;
 
-public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
+public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	private static final Log LOG = PlatformUtil.getLog(GalleryPhotoViewerFragment.class);
 
 	public static final String TAG = GalleryPhotoViewerFragment.class.getSimpleName();
@@ -58,7 +58,7 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		ViewGroup view = (ViewGroup) themedInflater.inflate(R.layout.gallery_photo_item, container, false);
+		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_item, container, false);
 
 		setupImageView(view);
 

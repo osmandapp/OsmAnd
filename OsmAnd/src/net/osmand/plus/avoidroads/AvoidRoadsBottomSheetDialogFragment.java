@@ -3,10 +3,7 @@ package net.osmand.plus.avoidroads;
 import static net.osmand.IndexConstants.AVOID_ROADS_FILE_EXT;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,9 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -35,7 +33,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -60,7 +57,6 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private static final String AVOID_ROADS_OBJECTS_KEY = "avoid_roads_objects";
 	private static final String AVOID_ROADS_APP_MODE_KEY = "avoid_roads_app_mode";
 
-	private OsmandApplication app;
 	private DirectionPointsHelper pointsHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 
@@ -72,24 +68,17 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private boolean hideImpassableRoads;
 	@ColorInt
 	private Integer compoundButtonColor;
-	private ApplicationMode appMode;
 
 	public void setHideImpassableRoads(boolean hideImpassableRoads) {
 		this.hideImpassableRoads = hideImpassableRoads;
 	}
 
-	public void setApplicationMode(ApplicationMode appMode) {
-		this.appMode = appMode;
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
 		pointsHelper = app.getAvoidSpecificRoads().getPointsHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 
-		ApplicationMode mode = appMode != null ? appMode : app.getSettings().getApplicationMode();
-		compoundButtonColor = mode.getProfileColor(nightMode);
+		compoundButtonColor = appMode.getProfileColor(nightMode);
 		if (savedInstanceState != null) {
 			hideImpassableRoads = savedInstanceState.getBoolean(HIDE_IMPASSABLE_ROADS_KEY);
 			if (savedInstanceState.containsKey(AVOID_ROADS_TYPES_KEY)) {
@@ -98,15 +87,12 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			if (savedInstanceState.containsKey(AVOID_ROADS_OBJECTS_KEY)) {
 				removedImpassableRoads = (List<AvoidRoadInfo>) AndroidUtils.getSerializable(savedInstanceState, AVOID_ROADS_OBJECTS_KEY, ArrayList.class);
 			}
-			if (savedInstanceState.containsKey(AVOID_ROADS_APP_MODE_KEY)) {
-				appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(AVOID_ROADS_APP_MODE_KEY), null);
-			}
 		}
 		List<String> selectedFileNames;
 		if (savedInstanceState != null) {
 			selectedFileNames = savedInstanceState.getStringArrayList(ENABLED_FILES_IDS);
 		} else {
-			selectedFileNames = pointsHelper.getSelectedFilesForMode(mode);
+			selectedFileNames = pointsHelper.getSelectedFilesForMode(appMode);
 		}
 		if (!Algorithms.isEmpty(selectedFileNames)) {
 			enabledFiles.addAll(selectedFileNames);
@@ -118,8 +104,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			removedImpassableRoads = new ArrayList<>();
 		}
 
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		View titleView = themedInflater.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
+		View titleView = inflate(R.layout.bottom_sheet_item_toolbar_title);
 		TextView textView = titleView.findViewById(R.id.title);
 		textView.setText(!hideImpassableRoads ? R.string.impassable_road : R.string.avoid_pt_types);
 
@@ -143,7 +128,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		stylesContainer = new LinearLayout(app);
 		stylesContainer.setLayoutParams((new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)));
 		stylesContainer.setOrientation(LinearLayout.VERTICAL);
-		stylesContainer.setPadding(0, getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
+		stylesContainer.setPadding(0, getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
 
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(stylesContainer).create());
 
@@ -152,11 +137,11 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				if (removedImpassableRoads.contains(roadInfo)) {
 					continue;
 				}
-				themedInflater.inflate(R.layout.bottom_sheet_item_simple_right_icon, stylesContainer, true);
+				inflate(R.layout.bottom_sheet_item_simple_right_icon, stylesContainer, true);
 			}
 			populateImpassableRoadsObjects();
 
-			View buttonView = themedInflater.inflate(R.layout.bottom_sheet_item_btn, null);
+			View buttonView = inflate(R.layout.bottom_sheet_item_btn);
 			TextView buttonDescription = buttonView.findViewById(R.id.button_descr);
 			buttonDescription.setText(R.string.shared_string_select_on_map);
 			buttonDescription.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
@@ -190,8 +175,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void populateImpassableRoadsObjects() {
-		Context context = requireContext();
-		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 
 		int counter = 0;
@@ -250,14 +234,12 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			items.add(new SubtitleDividerItem(app));
 			items.add(new TitleItem(getString(R.string.files_with_route_restrictions)));
 
-			LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-
 			for (File file : avoidRoadsFiles) {
 				String fileName = file.getName();
 				String name = capitalizeFirstLetter(fileName.replace(AVOID_ROADS_FILE_EXT, ""));
 				boolean enabled = enabledFiles.contains(fileName);
 
-				View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
+				View itemView = inflate(R.layout.bottom_sheet_item_with_switch_and_dialog);
 				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.divider), false);
 
 				BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
@@ -303,24 +285,11 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		outState.putSerializable(AVOID_ROADS_OBJECTS_KEY, (Serializable) removedImpassableRoads);
 		outState.putStringArrayList(ENABLED_FILES_IDS, (ArrayList<String>) enabledFiles);
 		outState.putBoolean(HIDE_IMPASSABLE_ROADS_KEY, hideImpassableRoads);
-		if (appMode != null) {
-			outState.putString(AVOID_ROADS_APP_MODE_KEY, appMode.getStringKey());
-		}
 	}
 
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_apply;
-	}
-
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 
 	@Override
@@ -331,7 +300,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(mode, parameterId);
 			if (parameter != null) {
 				boolean checked = entry.getValue();
-				CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+				CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				preference.setModeValue(mode, checked);
 			}
 		}
@@ -359,5 +328,31 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			map.put(entry.getKey().getId(), entry.getValue());
 		}
 		return map;
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity) {
+		showInstance(activity, null, null,null, null);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable Fragment targetFragment,
+	                                @Nullable ApplicationMode appMode, @Nullable Boolean hideImpassableRoads,
+	                                @Nullable @ColorInt Integer accentColor) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+			if (appMode != null) {
+				avoidRoadsFragment.setAppMode(appMode);
+			}
+			if (hideImpassableRoads != null) {
+				avoidRoadsFragment.setHideImpassableRoads(hideImpassableRoads);
+			}
+			if (targetFragment != null) {
+				avoidRoadsFragment.setTargetFragment(targetFragment, REQUEST_CODE);
+			}
+			if (accentColor != null) {
+				avoidRoadsFragment.setCompoundButtonColor(accentColor);
+			}
+			avoidRoadsFragment.show(fragmentManager, AvoidRoadsBottomSheetDialogFragment.TAG);
+		}
 	}
 }

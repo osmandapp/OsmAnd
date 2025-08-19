@@ -18,22 +18,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DiffUtil.DiffResult;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseNestedFragment;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -43,6 +39,7 @@ import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.PageItem;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.WidgetItem;
+import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListAdapter.WidgetsAdapterListener;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBaseFragment;
 import net.osmand.util.Algorithms;
 
@@ -50,24 +47,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class WidgetsListFragment extends Fragment implements ConfirmationBottomSheet.ConfirmationDialogListener,
-		SelectCopyAppModeBottomSheet.CopyAppModePrefsListener, WidgetsListAdapter.WidgetsAdapterListener, AddWidgetFragment.AddWidgetListener {
+public class WidgetsListFragment extends BaseNestedFragment implements ConfirmationDialogListener,
+		CopyAppModePrefsListener, WidgetsAdapterListener, AddWidgetFragment.AddWidgetListener {
 
 	private static final String SELECTED_PANEL_KEY = "selected_panel_key";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
 	private ConfigureWidgetsController controller;
 
 	private WidgetsPanel selectedPanel;
-	private ApplicationMode selectedAppMode;
 	private List<List<MapWidgetInfo>> originalWidgetsData;
 
 	private RecyclerView recyclerView;
 	private WidgetsListAdapter adapter;
-
-	private boolean nightMode;
 
 	@NonNull
 	public WidgetsPanel getSelectedPanel() {
@@ -81,10 +73,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = (OsmandApplication) requireContext().getApplicationContext();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
 		DialogManager dialogManager = app.getDialogManager();
@@ -96,27 +84,25 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
-
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		View view = inflate(R.layout.fragment_widgets_list, container, false);
 		recyclerView = view.findViewById(R.id.recycler_view);
 		setupRecyclerView();
-
 		return view;
 	}
 
 	private void setupRecyclerView() {
+		ApplicationMode appMode = getAppMode();
 		originalWidgetsData = getPagedWidgets();
 
-		adapter = new WidgetsListAdapter(requireMapActivity(), nightMode, this, selectedPanel.isPanelVertical(), selectedAppMode);
+		adapter = new WidgetsListAdapter(requireMapActivity(), nightMode, this, selectedPanel.isPanelVertical(), appMode);
 
 		recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 		recyclerView.setAdapter(adapter);
 		adapter.attachToRecyclerView(recyclerView);
 
-		boolean disableAnimation = app.getSettings().DO_NOT_USE_ANIMATIONS.getModeValue(selectedAppMode);
+		boolean disableAnimation = settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
 		if (disableAnimation) {
 			recyclerView.setItemAnimator(null);
 		}
@@ -150,7 +136,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 
 		List<List<MapWidgetInfo>> result = new ArrayList<>();
 		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
-		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel, enabledWidgetsFilter)) {
+		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(), selectedPanel, enabledWidgetsFilter)) {
 			result.add(new ArrayList<>(set));
 		}
 		return result;
@@ -218,17 +204,18 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 	}
 
 	private void applyWidgetsVisibility(@NonNull List<String> enabledWidgetsIds) {
+		ApplicationMode appMode = getAppMode();
 		WidgetsPanel panel = selectedPanel;
 		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(panel)) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
-			if (widget.isEnabledForAppMode(selectedAppMode) != enabledFromApply) {
-				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widget, enabledFromApply, false);
+			if (widget.isEnabledForAppMode(appMode) != enabledFromApply) {
+				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, false);
 			}
 		}
 	}
 
 	private void applyWidgetsOrder(@NonNull List<List<String>> pagedOrder) {
-		selectedPanel.setWidgetsOrder(selectedAppMode, pagedOrder, settings);
+		selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings);
 		widgetRegistry.reorderWidgets();
 	}
 
@@ -246,15 +233,6 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 				controller.setReorderList(adapter.getItems());
 			}
 		}
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	@Override
@@ -284,8 +262,9 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 
 		WidgetInfoBaseFragment settingsBaseFragment = widgetType.getSettingsFragment(app, widgetInfo);
 		if (settingsBaseFragment != null) {
+			ApplicationMode appMode = getAppMode();
 			FragmentManager manager = requireMapActivity().getSupportFragmentManager();
-			WidgetInfoBaseFragment.showFragment(manager, settingsBaseFragment, requireParentFragment(), selectedAppMode, widgetInfo.key, selectedPanel);
+			WidgetInfoBaseFragment.showInstance(manager, settingsBaseFragment, requireParentFragment(), appMode, widgetInfo.key, selectedPanel);
 		}
 	}
 
@@ -388,7 +367,7 @@ public class WidgetsListFragment extends Fragment implements ConfirmationBottomS
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), appMode);
-		List<List<MapWidgetInfo>> widgetsOrder = helper.getWidgetInfoPagedOrder(appMode, selectedAppMode, selectedPanel, filter);
+		List<List<MapWidgetInfo>> widgetsOrder = helper.getWidgetInfoPagedOrder(appMode, getAppMode(), selectedPanel, filter);
 		updateWidgetItems(widgetsOrder, false);
 	}
 

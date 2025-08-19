@@ -116,7 +116,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.tracks_fragment, container, false);
+		View view = inflate(R.layout.tracks_fragment, container, false);
 
 		setupToolbar(view);
 		setupTabLayout(view);

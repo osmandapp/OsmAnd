@@ -31,7 +31,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -46,7 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CloudTrashFragment extends BaseOsmAndFragment implements ConfirmationDialogListener,
+public class CloudTrashFragment extends BaseFullScreenFragment implements ConfirmationDialogListener,
 		OnPrepareBackupListener, OnBackupSyncListener {
 
 	public static final String TAG = CloudTrashFragment.class.getSimpleName();
@@ -76,7 +76,7 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_trash, container, false);
+		View view = inflate(R.layout.fragment_osmand_cloud_trash, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
 
@@ -254,11 +254,6 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 	@Override
 	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
 		app.runInUIThread(() -> adapter.onBackupItemFinished(type, fileName));
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

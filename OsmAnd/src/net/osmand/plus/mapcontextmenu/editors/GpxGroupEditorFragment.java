@@ -73,7 +73,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 		if (pointsGroup != null && mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
 			String backgroundType = getBackgroundType().getTypeName();
-			PointsGroup newGroup = new PointsGroup(groupName, getIconName(), backgroundType, getColor());
+			PointsGroup newGroup = new PointsGroup(groupName, getIconName(), backgroundType, getColor(), !isHidden());
 			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), newGroup);
 
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);

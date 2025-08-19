@@ -59,7 +59,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.render.RenderingIcons;
@@ -735,9 +735,9 @@ public class UiUtilities {
 		MapLayers mapLayers = activity.getMapLayers();
 
 		MapFragmentsHelper fragmentsHelper = activity.getFragmentsHelper();
-		BaseOsmAndFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+		BaseFullScreenFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.fragmentContainer);
 		BaseSettingsFragment settingsFragmentAboveDashboard = fragmentsHelper.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
-		BaseOsmAndFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+		BaseFullScreenFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 		if (fragmentAboveDashboard != null) {
 			colorId = fragmentAboveDashboard.getStatusBarColorId();
 			nightModeForContent = fragmentAboveDashboard.getContentStatusBarNightMode();

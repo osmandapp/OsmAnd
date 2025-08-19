@@ -6,7 +6,6 @@ import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPoin
 import static net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState.INTERMEDIATE_ARRIVAL_TIME;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -51,8 +50,8 @@ public class TimeToNavigationPointInfoFragment extends BaseSimpleWidgetInfoFragm
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.time_to_navigation_point_widget_settings_fragment, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.time_to_navigation_point_widget_settings_fragment, container);
 		setupTimeModeSelector();
 	}
 

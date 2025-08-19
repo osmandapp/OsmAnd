@@ -101,12 +101,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	private void replacePressed() {
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_FAVORITE, getFavorite());
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			SelectFavouriteToReplaceBottomSheet.showInstance(activity, args);
-		}
+		callActivity(activity -> SelectFavouriteToReplaceBottomSheet.showInstance(activity, getFavorite()));
 	}
 
 	@Nullable
@@ -441,15 +436,15 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {
-		showAutoFillInstance(mapActivity, false);
+		showInstance(mapActivity, false);
 	}
 
-	public static void showAutoFillInstance(MapActivity mapActivity, boolean skipConfirmationDialog) {
+	public static void showInstance(MapActivity mapActivity, boolean skipConfirmationDialog) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
-			if (fragmentManager.findFragmentByTag(tag) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag, true)) {
 				FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
 				fragment.skipConfirmationDialog = skipConfirmationDialog;
 				fragmentManager.beginTransaction()

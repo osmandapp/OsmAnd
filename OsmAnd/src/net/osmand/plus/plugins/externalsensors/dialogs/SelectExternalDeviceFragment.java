@@ -211,31 +211,6 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		updateCurrentStateView();
 	}
 
-
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull Fragment targetFragment,
-	                                @NonNull SensorWidgetDataFieldType fieldType,
-	                                @Nullable String selectedDeviceId,
-	                                boolean withNoneVariant) {
-		if (!(targetFragment instanceof SelectDeviceListener)) {
-			throw new IllegalArgumentException("targetFragment should implement SelectDeviceListener interface");
-		}
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SelectExternalDeviceFragment fragment = new SelectExternalDeviceFragment();
-			Bundle arguments = new Bundle();
-			arguments.putInt(WIDGET_TYPE_KEY, fieldType.ordinal());
-			arguments.putString(SELECTED_DEVICE_ID_KEY, selectedDeviceId);
-			arguments.putBoolean(WITH_NONE_VARIANT_KEY, withNoneVariant);
-			fragment.setTargetFragment(targetFragment, 0);
-			fragment.setArguments(arguments);
-			fragment.setRetainInstance(true);
-			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(null)
-					.commitAllowingStateLoss();
-		}
-	}
-
 	@Override
 	public void onDeviceConnecting(@NonNull AbstractDevice<?> device) {
 	}
@@ -258,6 +233,30 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		if (getTargetFragment() instanceof SelectDeviceListener) {
 			((SelectDeviceListener) getTargetFragment()).selectNewDevice(deviceId, widgetDataFieldType);
 			requireActivity().onBackPressed();
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull Fragment targetFragment,
+	                                @NonNull SensorWidgetDataFieldType fieldType,
+	                                @Nullable String selectedDeviceId,
+	                                boolean withNoneVariant) {
+		if (!(targetFragment instanceof SelectDeviceListener)) {
+			throw new IllegalArgumentException("targetFragment should implement SelectDeviceListener interface");
+		}
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			SelectExternalDeviceFragment fragment = new SelectExternalDeviceFragment();
+			Bundle arguments = new Bundle();
+			arguments.putInt(WIDGET_TYPE_KEY, fieldType.ordinal());
+			arguments.putString(SELECTED_DEVICE_ID_KEY, selectedDeviceId);
+			arguments.putBoolean(WITH_NONE_VARIANT_KEY, withNoneVariant);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setArguments(arguments);
+			fragment.setRetainInstance(true);
+			manager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
 		}
 	}
 

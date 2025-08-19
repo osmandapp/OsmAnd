@@ -71,11 +71,11 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 			selectWidgetByDefault();
 		}
 
-		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
+		view = inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		ViewGroup mainContent = view.findViewById(R.id.main_content);
-		themedInflater.inflate(R.layout.add_widget_fragment_content, mainContent);
+		inflate(R.layout.add_widget_fragment_content, mainContent);
 
 		setupToolbar();
 		setupContent();
@@ -183,7 +183,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		String title = aidlWidgetData.getMenuTitle();
 		String iconName = aidlWidgetData.getMenuIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
-		Drawable icon = iconId != 0 ? getPaintedContentIcon(iconId, appMode.getProfileColor(nightMode)) : null;
+		Drawable icon = iconId != 0 ? getPaintedIcon(iconId, appMode.getProfileColor(nightMode)) : null;
 		setupWidgetItemView(view, widgetId, title, null, icon, false);
 
 		container.addView(view);
@@ -273,7 +273,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(manager, fragment);
+		showInstance(manager, fragment);
 	}
 
 	/**
@@ -293,7 +293,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(manager, fragment);
+		showInstance(manager, fragment);
 	}
 
 	/**
@@ -315,10 +315,11 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(manager, fragment);
+		showInstance(manager, fragment);
 	}
 
-	private static void showFragment(@NonNull FragmentManager manager, @NonNull AddWidgetFragment fragment) {
+	private static void showInstance(@NonNull FragmentManager manager,
+	                                 @NonNull AddWidgetFragment fragment) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)

@@ -4,7 +4,6 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPEN
 import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -25,13 +24,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -42,9 +42,9 @@ import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 
 import java.util.LinkedList;
 
-public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
+public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragment {
 
-	public static final String TAG = DirectionIndicationDialogFragment.class.getSimpleName();
+	private static final String TAG = DirectionIndicationDialogFragment.class.getSimpleName();
 
 	private View mainView;
 
@@ -54,13 +54,13 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
+		helpImgHeight = getDimensionPixelSize(R.dimen.action_bar_image_height);
 
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.fragment_direction_indication_dialog, container);
+		mainView = inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(getContext())));
+		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(requireContext())));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(view -> dismiss());
 
@@ -69,7 +69,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		appModeTv.setText(appMode.toHumanString());
 		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIcon(appMode.getIconRes()), null);
 
-		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
 			((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
 				@Override
 				public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
@@ -141,16 +141,6 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		UiUtilities.setupCompoundButton(keepPassedToggle, nightMode, PROFILE_DEPENDENT);
 
 		return mainView;
-	}
-
-	@Override
-	protected Drawable getContentIcon(int id) {
-		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
-	}
-
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
 	}
 
 	private CharSequence[] getMenuTitles() {
@@ -247,6 +237,13 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private void refreshMap() {
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			DirectionIndicationDialogFragment fragment = new DirectionIndicationDialogFragment();
+			fragment.show(fm, TAG);
 		}
 	}
 }

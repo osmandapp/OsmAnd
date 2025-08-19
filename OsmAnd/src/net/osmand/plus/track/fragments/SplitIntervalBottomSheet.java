@@ -3,7 +3,6 @@ package net.osmand.plus.track.fragments;
 import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -51,7 +49,6 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String SELECTED_TIME_SPLIT_INTERVAL = "selected_time_split_interval";
 	public static final String SELECTED_DISTANCE_SPLIT_INTERVAL = "selected_distance_split_interval";
 
-	private OsmandApplication app;
 	private SelectedGpxFile selectedGpxFile;
 	private TrackDrawInfo trackDrawInfo;
 
@@ -72,11 +69,8 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 
-		Fragment target = getTargetFragment();
-		if (target instanceof TrackAppearanceFragment) {
-			TrackAppearanceFragment fragment = (TrackAppearanceFragment) target;
+		if (getTargetFragment() instanceof TrackAppearanceFragment fragment) {
 			trackDrawInfo = fragment.getTrackDrawInfo();
 			selectedGpxFile = fragment.getSelectedGpxFile();
 		}
@@ -95,8 +89,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.gpx_split_interval)));
 
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.track_split_interval, null);
+		View view = inflate(R.layout.track_split_interval);
 
 		sliderContainer = view.findViewById(R.id.slider_container);
 		slider = sliderContainer.findViewById(R.id.split_slider);
@@ -111,10 +104,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		LinearLayout radioGroup = view.findViewById(R.id.custom_radio_buttons);
 		setupTypeRadioGroup(radioGroup);
 
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create();
-		items.add(titleItem);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
 	private void setupTypeRadioGroup(LinearLayout buttonsContainer) {
@@ -139,6 +129,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
+	@NonNull
 	private TextRadioItem createRadioButton(GpxSplitType splitType, int titleId) {
 		String title = app.getString(titleId);
 		TextRadioItem item = new TextRadioItem(title);

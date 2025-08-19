@@ -837,14 +837,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable Fragment target) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TrackAppearanceFragment fragment = new TrackAppearanceFragment();
 			fragment.setRetainInstance(true);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setTargetFragment(target, 0);
 
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

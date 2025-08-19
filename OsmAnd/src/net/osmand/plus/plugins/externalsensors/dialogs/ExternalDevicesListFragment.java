@@ -214,17 +214,6 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			ExternalDevicesListFragment fragment = new ExternalDevicesListFragment();
-			fragment.setRetainInstance(true);
-			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(null)
-					.commitAllowingStateLoss();
-		}
-	}
-
 	@Override
 	public void onDisconnect(@NonNull AbstractDevice<?> device) {
 		plugin.disconnectDevice(device);
@@ -281,5 +270,16 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 
 	@Override
 	public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			ExternalDevicesListFragment fragment = new ExternalDevicesListFragment();
+			fragment.setRetainInstance(true);
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
+		}
 	}
 }

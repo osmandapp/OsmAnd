@@ -54,7 +54,7 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = inflate(R.layout.zoom_levels_fragment, container);
+		View view = inflate(R.layout.zoom_levels_fragment, container, false);
 		slider = view.findViewById(R.id.zoom_slider);
 		minText = view.findViewById(R.id.zoom_value_min);
 		maxText = view.findViewById(R.id.zoom_value_max);

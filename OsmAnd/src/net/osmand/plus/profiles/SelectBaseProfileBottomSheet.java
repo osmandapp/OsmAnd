@@ -14,6 +14,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,24 +22,6 @@ import java.util.List;
 public class SelectBaseProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
-
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @Nullable Fragment target,
-	                                ApplicationMode appMode,
-	                                String selectedItemKey,
-	                                boolean usedOnMap) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
-			SelectBaseProfileBottomSheet fragment = new SelectBaseProfileBottomSheet();
-			Bundle args = new Bundle();
-			args.putString(SELECTED_KEY, selectedItemKey);
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -57,4 +40,19 @@ public class SelectBaseProfileBottomSheet extends SelectProfileBottomSheet {
 		profiles.addAll(ProfileDataUtils.getDataObjects(app, appModes));
 	}
 
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable Fragment target,
+	                                @NonNull ApplicationMode appMode, @Nullable String selectedItemKey,
+	                                boolean usedOnMap) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectBaseProfileBottomSheet fragment = new SelectBaseProfileBottomSheet();
+			Bundle args = new Bundle();
+			args.putString(SELECTED_KEY, selectedItemKey);
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
 }

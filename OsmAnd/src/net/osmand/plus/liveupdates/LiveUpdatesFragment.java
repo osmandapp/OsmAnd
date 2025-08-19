@@ -44,7 +44,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -80,7 +80,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange, LiveUpdateListener {
+public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements OnLiveUpdatesForLocalChange, LiveUpdateListener {
 
 	public static final String URL = "https://osmand.net/api/osmlive_status";
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();
@@ -94,30 +94,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	private GetLastUpdateDateTask getLastUpdateDateTask;
 	private LoadLiveMapsTask loadLiveMapsTask;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
-			LiveUpdatesFragment fragment = new LiveUpdatesFragment();
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
-	public static void showUpdateDialog(Activity activity, FragmentManager fragmentManager, LiveUpdateListener listener) {
-		List<LocalItem> mapsToUpdate = listener.getMapsToUpdate();
-		if (!Algorithms.isEmpty(mapsToUpdate)) {
-			int countEnabled = listener.getMapsToUpdate().size();
-			if (countEnabled == 1) {
-				runLiveUpdate(activity, getFileNameWithoutRoadSuffix(mapsToUpdate.get(0)), false, listener::processFinish);
-			} else if (countEnabled > 1) {
-				Fragment target = null;
-				if (listener instanceof Fragment) {
-					target = (Fragment) listener;
-				}
-				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, target);
-			}
-		}
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -127,7 +103,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_live_updates, container, false);
+		View view = inflate(R.layout.fragment_live_updates, container, false);
 		createToolbar(view.findViewById(R.id.app_bar));
 
 		listView = view.findViewById(android.R.id.list);
@@ -671,5 +647,29 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			countryName = app.getString(R.string.osmand_team);
 		}
 		return countryName;
+	}
+
+	public static void showUpdateDialog(Activity activity, FragmentManager fragmentManager, LiveUpdateListener listener) {
+		List<LocalItem> mapsToUpdate = listener.getMapsToUpdate();
+		if (!Algorithms.isEmpty(mapsToUpdate)) {
+			int countEnabled = listener.getMapsToUpdate().size();
+			if (countEnabled == 1) {
+				runLiveUpdate(activity, getFileNameWithoutRoadSuffix(mapsToUpdate.get(0)), false, listener::processFinish);
+			} else if (countEnabled > 1) {
+				Fragment target = null;
+				if (listener instanceof Fragment) {
+					target = (Fragment) listener;
+				}
+				LiveUpdatesUpdateAllBottomSheet.showInstance(fragmentManager, target);
+			}
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			LiveUpdatesFragment fragment = new LiveUpdatesFragment();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

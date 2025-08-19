@@ -2,7 +2,6 @@ package net.osmand.plus.backup.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
@@ -49,7 +47,7 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		backupHelper = requiredMyApplication().getBackupHelper();
+		backupHelper = app.getBackupHelper();
 		if (savedInstanceState != null) {
 			progress = savedInstanceState.getInt(PROGRESS_KEY);
 			maxProgress = savedInstanceState.getInt(MAX_PROGRESS_KEY);
@@ -76,22 +74,17 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 				.create();
 		items.add(descriptionItem);
 
-		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		items.add(new DividerSpaceItem(requireContext(), padding));
+		int padding = getDimensionPixelSize(R.dimen.content_padding_small);
+		items.add(new DividerSpaceItem(getThemedContext(), padding));
 	}
 
 	private BaseBottomSheetItem createProgressItem() {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_progress_with_description, null);
-
+		View view = inflate(R.layout.bottom_sheet_progress_with_description);
 		percentage = view.findViewById(R.id.percentage);
 		progressBar = view.findViewById(R.id.progress_bar);
 		progressBar.setMax(maxProgress);
 		updateProgress();
-
-		return new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create();
+		return new BaseBottomSheetItem.Builder().setCustomView(view).create();
 	}
 
 	@Override

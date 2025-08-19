@@ -13,10 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -25,7 +26,7 @@ import net.osmand.plus.utils.AndroidUtils;
 
 public class GoToMapFragment extends BottomSheetDialogFragment {
 
-	public static final String TAG = GoToMapFragment.class.getSimpleName();
+	private static final String TAG = GoToMapFragment.class.getSimpleName();
 
 	private static final String REGION_NAME_KEY = "region_name_key";
 	private static final String REGION_CENTER_KEY = "region_center_key";
@@ -56,7 +57,8 @@ public class GoToMapFragment extends BottomSheetDialogFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.go_to_map_fragment, container, false);
+		updateNightMode();
+		View view = inflate(R.layout.go_to_map_fragment, container, false);
 
 		ImageView icon = view.findViewById(R.id.titleIconImageView);
 		icon.setImageDrawable(getIcon(R.drawable.ic_map, R.color.osmand_orange));
@@ -77,11 +79,8 @@ public class GoToMapFragment extends BottomSheetDialogFragment {
 		view.findViewById(R.id.actionButton).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null && regionCenter != null) {
-				OsmandApplication app = requiredMyApplication();
-				app.getSettings().setMapLocationToShow(
-						regionCenter.getLatitude(),
-						regionCenter.getLongitude(),
-						5,
+				settings.setMapLocationToShow(
+						regionCenter.getLatitude(), regionCenter.getLongitude(), 5,
 						new PointDescription(POINT_TYPE_WORLD_REGION_SHOW_ON_MAP, ""));
 
 				dismiss();
@@ -96,5 +95,15 @@ public class GoToMapFragment extends BottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(REGION_NAME_KEY, regionName);
 		outState.putSerializable(REGION_CENTER_KEY, regionCenter);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WorldRegion region) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			GoToMapFragment fragment = new GoToMapFragment();
+			fragment.setRegionCenter(region.getRegionCenter());
+			fragment.setRegionName(region.getLocaleName());
+			fragment.show(manager, TAG);
+		}
 	}
 }

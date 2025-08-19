@@ -5,7 +5,6 @@ import static net.osmand.plus.utils.OsmAndFormatter.getFormattedSpeedValue;
 import static net.osmand.plus.utils.OsmAndFormatter.getMpSFromFormattedValue;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,7 +15,6 @@ import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
@@ -35,21 +33,17 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 
 	private static final String SELECTED_VALUE = "selected_value";
 
-	private OsmandApplication app;
 	private float selectedValue;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-
 		if (savedInstanceState != null) {
 			selectedValue = savedInstanceState.getFloat(SELECTED_VALUE);
 		} else {
-			float value = app.getSettings().SPEED_LIMIT_EXCEED_KMH.getModeValue(getAppMode());
-			selectedValue = value;
+			selectedValue = settings.SPEED_LIMIT_EXCEED_KMH.getModeValue(getAppMode());
 		}
 
-		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int padding = getDimensionPixelSize(R.dimen.content_padding);
 
 		items.add(new TitleItem(getString(R.string.speed_limit_exceed)));
 		items.add(new LongDescriptionItem(getString(R.string.speed_limit_exceed_message)));
@@ -61,14 +55,13 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 	@NonNull
 	private BaseBottomSheetItem createSliderItem() {
 		ApplicationMode appMode = getAppMode();
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_item_slider_with_four_text, null);
+		View view = inflate(R.layout.bottom_sheet_item_slider_with_four_text);
 
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.selected_value);
 
 		Slider slider = view.findViewById(R.id.slider);
-		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(app.getSettings().SPEED_SYSTEM.getModeValue(appMode));
+		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(settings.SPEED_SYSTEM.getModeValue(appMode));
 		boolean isSpeedToleranceBigRange = appMode.isSpeedToleranceBigRange();
 		float convertedLimitFrom = getFormattedSpeedValue(appMode.getMinSpeedToleranceLimit(), app, isSpeedToleranceBigRange, speedFormat).valueSrc;
 		float convertedLimitTo = getFormattedSpeedValue(appMode.getMaxSpeedToleranceLimit(), app, isSpeedToleranceBigRange, speedFormat).valueSrc;
@@ -107,10 +100,7 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 
 		int color = appMode.getProfileColor(nightMode);
 		UiUtilities.setupSlider(slider, nightMode, color, false);
-
-		return new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create();
+		return new BaseBottomSheetItem.Builder().setCustomView(view).create();
 	}
 
 	private int getIntegerSpeed(float floatSpeed) {
@@ -127,11 +117,10 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		if (preference != null) {
 			float value = selectedValue;
 			if (preference.callChangeListener(value)) {
-				app.getSettings().SPEED_LIMIT_EXCEED_KMH.setModeValue(getAppMode(), value);
+				settings.SPEED_LIMIT_EXCEED_KMH.setModeValue(getAppMode(), value);
 			}
-			Fragment target = getTargetFragment();
-			if (target instanceof OnPreferenceChanged) {
-				((OnPreferenceChanged) target).onPreferenceChanged(preference.getKey());
+			if (getTargetFragment() instanceof OnPreferenceChanged listener) {
+				listener.onPreferenceChanged(preference.getKey());
 			}
 		}
 		dismiss();

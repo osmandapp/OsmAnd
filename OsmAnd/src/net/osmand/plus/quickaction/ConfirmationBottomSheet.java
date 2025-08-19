@@ -8,15 +8,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
@@ -34,7 +33,6 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		OsmandApplication app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			title = savedInstanceState.getString(TITLE_KEY);
 			message = savedInstanceState.getCharSequence(MESSAGE_KEY);
@@ -44,7 +42,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		rightButton.setButtonType(DialogButtonType.SECONDARY);
 		rightButton.setTitleId(rightButtonTitle);
 		TextView tvRightButton = rightButton.findViewById(R.id.button_text);
-		int colorDelete = ContextCompat.getColor(app, R.color.color_osm_edit_delete);
+		int colorDelete = getColor(R.color.color_osm_edit_delete);
 		tvRightButton.setTextColor(colorDelete);
 		return view;
 	}
@@ -60,9 +58,8 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment target = getTargetFragment();
-		if (target instanceof OnConfirmButtonClickListener) {
-			((OnConfirmButtonClickListener) target).onConfirmButtonClick();
+		if (getTargetFragment() instanceof OnConfirmButtonClickListener listener) {
+			listener.onConfirmButtonClick();
 		}
 		dismiss();
 	}
@@ -80,19 +77,18 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(RIGHT_BUTTON_TITLE_KEY, rightButtonTitle);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull Fragment target,
-	                                @NonNull String title,
-	                                @NonNull CharSequence message,
-	                                int rightButtonTitle,
-	                                boolean usedOnMap) {
-		ConfirmationBottomSheet f = new ConfirmationBottomSheet();
-		f.title = title;
-		f.message = message;
-		f.rightButtonTitle = rightButtonTitle;
-		f.setTargetFragment(target, 0);
-		f.setUsedOnMap(usedOnMap);
-		f.show(manager, TAG);
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target,
+	                                @NonNull String title, @NonNull CharSequence message,
+	                                int rightButtonTitle, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			ConfirmationBottomSheet fragment = new ConfirmationBottomSheet();
+			fragment.title = title;
+			fragment.message = message;
+			fragment.rightButtonTitle = rightButtonTitle;
+			fragment.setTargetFragment(target, 0);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.show(manager, TAG);
+		}
 	}
 
 	public interface OnConfirmButtonClickListener {

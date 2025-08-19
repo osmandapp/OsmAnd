@@ -43,7 +43,7 @@ import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 
-public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeProvider {
+public abstract class ContextMenuFragment extends BaseFullScreenFragment implements MapControlsThemeProvider {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -200,25 +200,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	public int getMenuFullHeight() {
 		return menuFullHeight;
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	public ContextMenuFragmentListener getListener() {
@@ -1069,23 +1050,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 	}
 
-	public int dpToPx(float dp) {
-		return AndroidUtils.dpToPx(app, dp);
-	}
-
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
 		ShareMenu.copyToClipboardWithToast(ctx, text, false);
-	}
-
-	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {
-		String tag = fragment.getFragmentTag();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
-			manager.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, tag)
-					.addToBackStack(tag)
-					.commitAllowingStateLoss();
-			return true;
-		}
-		return false;
 	}
 }

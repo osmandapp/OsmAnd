@@ -20,14 +20,14 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
-public class MapMarkerEditorFragment extends BaseOsmAndFragment {
+public class MapMarkerEditorFragment extends BaseFullScreenFragment {
 
 	@Nullable
 	private MapMarkerEditor editor;
@@ -45,7 +45,7 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		Context context = requireContext();
-		View view = themedInflater.inflate(R.layout.map_marker_editor_fragment, container, false);
+		View view = inflate(R.layout.map_marker_editor_fragment, container, false);
 
 		MapMarkerEditor editor = this.editor;
 		if (editor == null) {
@@ -204,11 +204,6 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 	@Override
 	protected boolean isFullScreenAllowed() {
 		return false;
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {

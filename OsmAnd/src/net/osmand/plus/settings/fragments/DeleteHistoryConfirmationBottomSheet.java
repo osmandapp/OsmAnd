@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -68,17 +68,12 @@ public class DeleteHistoryConfirmationBottomSheet extends MenuBottomSheetDialogF
 	}
 
 	@Override
-	protected DialogButtonType getRightBottomButtonType() {
-		return DialogButtonType.PRIMARY;
-	}
-
-	@Override
 	protected boolean useVerticalButtons() {
 		return true;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, int itemsSize, @Nullable Fragment target) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DeleteHistoryConfirmationBottomSheet fragment = new DeleteHistoryConfirmationBottomSheet();
 			fragment.itemsSize = itemsSize;
 			fragment.setTargetFragment(target, 0);

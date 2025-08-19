@@ -1,9 +1,8 @@
 package net.osmand.plus.dialogs;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
@@ -20,45 +19,38 @@ import java.lang.reflect.Method;
 
 public class DirectionsDialogs {
 	
-	public static void directionsToDialogAndLaunchMap(Activity act, double lat, double lon,
-	                                                  PointDescription name) {
-		OsmandApplication ctx = (OsmandApplication) act.getApplication();
+	public static void directionsToDialogAndLaunchMap(@NonNull Activity activity, double lat, double lon,
+	                                                  @NonNull PointDescription name) {
+		OsmandApplication ctx = (OsmandApplication) activity.getApplication();
 		TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
-		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(act);
+		if (!targetPointsHelper.getIntermediatePoints().isEmpty()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 			builder.setTitle(R.string.new_directions_point_dialog);
 			builder.setItems(
-					new String[] { act.getString(R.string.keep_intermediate_points),
-							act.getString(R.string.clear_intermediate_points)},
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (which == 1) {
-								targetPointsHelper.clearPointToNavigate(false);
-							}
-							ctx.getSettings().navigateDialog();
-							targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
-							MapActivity.launchMapActivityMoveToTop(act);
+					new String[] {
+							activity.getString(R.string.keep_intermediate_points),
+							activity.getString(R.string.clear_intermediate_points)
+					},
+					(dialog, which) -> {
+						if (which == 1) {
+							targetPointsHelper.clearPointToNavigate(false);
 						}
+						ctx.getSettings().navigateDialog();
+						targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
+						MapActivity.launchMapActivityMoveToTop(activity);
 					});
 			builder.show();
 		} else {
 			ctx.getSettings().navigateDialog();
 			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
-			MapActivity.launchMapActivityMoveToTop(act);
+			MapActivity.launchMapActivityMoveToTop(activity);
 		}
 	}
 
 	public static void addWaypointDialogAndLaunchMap(AppCompatActivity act, double lat, double lon, PointDescription name) {
 		TargetPointsHelper targetPointsHelper = ((OsmandApplication) act.getApplication()).getTargetPointsHelper();
 		if (targetPointsHelper.getPointToNavigate() != null) {
-			Bundle args = new Bundle();
-			args.putDouble(AddWaypointBottomSheetDialogFragment.LAT_KEY, lat);
-			args.putDouble(AddWaypointBottomSheetDialogFragment.LON_KEY, lon);
-			args.putString(AddWaypointBottomSheetDialogFragment.POINT_DESCRIPTION_KEY, PointDescription.serializeToString(name));
-			AddWaypointBottomSheetDialogFragment fragment = new AddWaypointBottomSheetDialogFragment();
-			fragment.setArguments(args);
-			fragment.show(act.getSupportFragmentManager(), AddWaypointBottomSheetDialogFragment.TAG);
+			AddWaypointBottomSheetDialogFragment.showInstance(act, lat, lon, name);
 		} else {
 			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
 			closeContextMenu(act);

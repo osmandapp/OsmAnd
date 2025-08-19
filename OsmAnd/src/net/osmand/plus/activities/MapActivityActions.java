@@ -233,13 +233,10 @@ public class MapActivityActions extends MapActions {
 		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(activity, latitude, longitude, adapter));
 	}
 
-	public void showAdditionalActionsFragment(ContextMenuAdapter adapter,
-			AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener listener) {
+	public void showAdditionalActionsFragment(ContextMenuAdapter adapter, ContextMenuItemClickListener listener) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
-			actionsBottomSheetDialogFragment.setAdapter(adapter, listener);
-			actionsBottomSheetDialogFragment.show(activity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+			AdditionalActionsBottomSheetDialogFragment.showInstance(activity, adapter, listener);
 		}
 	}
 

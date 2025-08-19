@@ -26,7 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.settings.enums.MapLayerType;
@@ -40,7 +40,7 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.text.MessageFormat;
 
-public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements TilesDownloadListener {
+public class TilesDownloadProgressFragment extends BaseFullScreenFragment implements TilesDownloadListener {
 
 	public static final String TAG = TilesDownloadProgressFragment.class.getSimpleName();
 
@@ -146,7 +146,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(R.layout.tiles_download_progress_fragment, container, false);
+		view = inflate(R.layout.tiles_download_progress_fragment, container, false);
 
 		setupToolbar();
 		updateProgress();

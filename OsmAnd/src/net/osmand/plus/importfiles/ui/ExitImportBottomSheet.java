@@ -29,7 +29,7 @@ public class ExitImportBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(titleItem);
 
 		Context context = requireContext();
-		items.add(new DividerSpaceItem(context, AndroidUtils.dpToPx(context, 12)));
+		items.add(new DividerSpaceItem(context, dpToPx(12)));
 	}
 
 	@Override

@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -41,7 +41,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultMapButtonFragment extends BaseOsmAndFragment implements CopyAppModePrefsListener,
+public class DefaultMapButtonFragment extends BaseFullScreenFragment implements CopyAppModePrefsListener,
 		Map3DModeUpdateListener, CompassVisibilityUpdateListener, CardListener {
 
 	public static final String TAG = DefaultMapButtonFragment.class.getSimpleName();
@@ -74,7 +74,7 @@ public class DefaultMapButtonFragment extends BaseOsmAndFragment implements Copy
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.default_map_button_fragment, container, false);
+		View view = inflate(R.layout.default_map_button_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -115,9 +115,9 @@ public class DefaultMapButtonFragment extends BaseOsmAndFragment implements Copy
 
 		addCard(container, new MapButtonCard(activity, buttonState, null));
 		addCard(container, new MapButtonVisibilityCard(activity, buttonState, this));
-		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
+		inflate(R.layout.list_item_divider, container, true);
 		addCard(container, new MapButtonAppearanceCard(activity, buttonState));
-		container.addView(themedInflater.inflate(R.layout.card_bottom_divider, container, false));
+		inflate(R.layout.card_bottom_divider, container, true);
 	}
 
 	private void addCard(@NonNull ViewGroup container, @NonNull BaseCard card) {
@@ -204,21 +204,6 @@ public class DefaultMapButtonFragment extends BaseOsmAndFragment implements Copy
 		if (activity != null) {
 			activity.enableDrawer();
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull MapButtonState buttonState) {

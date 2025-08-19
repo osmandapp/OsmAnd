@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -20,18 +19,15 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class BackupAuthorizationFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
+public class BackupAuthorizationFragment extends BaseFullScreenFragment implements InAppPurchaseListener {
 
 	public static final String OPEN_BACKUP_AUTH = "open_backup_auth";
 
@@ -54,7 +50,7 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_authorize_cloud, container, false);
+		View view = inflate(R.layout.fragment_authorize_cloud, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		signUpButton = view.findViewById(R.id.sign_up_button);
@@ -121,11 +117,6 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

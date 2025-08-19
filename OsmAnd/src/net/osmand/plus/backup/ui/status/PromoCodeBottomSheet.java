@@ -1,6 +1,5 @@
 package net.osmand.plus.backup.ui.status;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -29,25 +26,21 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = requiredMyApplication();
-
 		items.add(new TitleItem(getString(R.string.backup_promocode)));
 
 		String promoCode;
 		if (savedInstanceState == null) {
-			promoCode = app.getSettings().BACKUP_PROMOCODE.get();
+			promoCode = settings.BACKUP_PROMOCODE.get();
 		} else {
 			promoCode = savedInstanceState.getString(PROMOCODE_KEY);
 		}
-		Context ctx = requireContext();
-		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.preference_edit_text_box, null);
+		View view = inflate(R.layout.preference_edit_text_box);
 		editText = view.findViewById(R.id.edit_text);
 		editText.setText(promoCode);
 
 		ViewGroup editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
-		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) editTextLayout.getLayoutParams();
-			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(ctx, 9), params.rightMargin, params.bottomMargin);
+		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof ViewGroup.MarginLayoutParams params) {
+			params.setMargins(params.leftMargin, dpToPx(9), params.rightMargin, params.bottomMargin);
 		}
 
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());
@@ -71,19 +64,16 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			String promoCode = editText.getText().toString();
-			app.getSettings().BACKUP_PROMOCODE.set(promoCode);
+		String promoCode = editText.getText().toString();
+		settings.BACKUP_PROMOCODE.set(promoCode);
 
-			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-			if (purchaseHelper != null) {
-				CallbackWithObject<Boolean> listener = result -> {
-					app.runInUIThread(() -> app.getBackupHelper().prepareBackup());
-					return true;
-				};
-				purchaseHelper.checkPromoAsync(listener);
-			}
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			CallbackWithObject<Boolean> listener = result -> {
+				app.runInUIThread(() -> app.getBackupHelper().prepareBackup());
+				return true;
+			};
+			purchaseHelper.checkPromoAsync(listener);
 		}
 		dismiss();
 	}

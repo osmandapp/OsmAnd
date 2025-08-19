@@ -1,9 +1,7 @@
 package net.osmand.plus.importfiles.ui;
 
-import static net.osmand.plus.utils.UiUtilities.getInflater;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -23,14 +20,12 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private static final String FILE_NAME_KEY = "file_name";
 
-	private OsmandApplication app;
 	private String fileName;
 	private SaveExistingFileListener listener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
@@ -47,8 +42,7 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@NonNull
 	private View createView() {
-		LayoutInflater inflater = getInflater(app, nightMode);
-		View view = inflater.inflate(R.layout.fragment_file_exists_bottom_sheet, null);
+		View view = inflate(R.layout.fragment_file_exists_bottom_sheet);
 
 		setupReplaceButton(view.findViewById(R.id.replace_button));
 		setupDuplicateButton(view.findViewById(R.id.duplicate_button));

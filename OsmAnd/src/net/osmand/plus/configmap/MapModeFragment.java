@@ -57,7 +57,7 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = inflate(R.layout.fragment_map_mode, container);
+		View view = inflate(R.layout.fragment_map_mode, container, false);
 		setupToggleButton(view);
 		updateContent(view);
 		container.addView(view);

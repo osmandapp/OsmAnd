@@ -8,10 +8,8 @@ import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.create
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.updateTrackIcon;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -24,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
@@ -32,7 +29,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,9 +39,6 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 
 	public static final String TAG = TripRecordingStartingBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private AppCompatImageView upDownBtn;
 	private AppCompatImageView trackAppearanceIcon;
 	private TextView intervalValueView;
@@ -54,24 +47,10 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 
 	private boolean infoExpanded;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
-			TripRecordingStartingBottomSheet fragment = new TripRecordingStartingBottomSheet();
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		settings = app.getSettings();
-		Context context = requireContext();
-
-		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
-		View itemView = inflater.inflate(R.layout.trip_recording_starting_fragment, null, false);
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(itemView)
-				.create());
+		View itemView = inflate(R.layout.trip_recording_starting_fragment);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(itemView).create());
 
 		LinearLayout expandHideIntervalContainer = itemView.findViewById(R.id.interval_view_container);
 		upDownBtn = itemView.findViewById(R.id.up_down_button);
@@ -84,18 +63,17 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
-		createShowTrackItem(showTrackContainer, trackAppearanceIcon, R.string.shared_string_show_on_map,
-				this, nightMode, this::hide);
+		createShowTrackItem(showTrackContainer, trackAppearanceIcon,
+				R.string.shared_string_show_on_map, this, nightMode, this::hide);
 
 		updateUpDownBtn();
 	}
 
 	@Override
 	protected void setupBottomButtons(ViewGroup view) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		int contentPadding = getDimen(R.dimen.content_padding);
-		int topPadding = getDimen(R.dimen.context_menu_first_line_top_margin);
-		View buttonsContainer = themedInflater.inflate(R.layout.preference_button_with_icon_triple, null);
+		int contentPadding = getDimensionPixelSize(R.dimen.content_padding);
+		int topPadding = getDimensionPixelSize(R.dimen.context_menu_first_line_top_margin);
+		View buttonsContainer = inflate(R.layout.preference_button_with_icon_triple);
 		buttonsContainer.setPadding(contentPadding, topPadding, contentPadding, contentPadding);
 		view.addView(buttonsContainer);
 
@@ -104,29 +82,26 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 		setupSettingsButton(buttonsContainer);
 	}
 
-	private void setupCancelButton(View buttonsContainer) {
+	private void setupCancelButton(@NonNull View buttonsContainer) {
 		CardView cancelButton = buttonsContainer.findViewById(R.id.button_left);
 		createItem(app, nightMode, cancelButton, ItemType.CANCEL, true, null);
 		cancelButton.setOnClickListener(v -> dismiss());
 	}
 
-	private void setupStartButton(View buttonsContainer) {
+	private void setupStartButton(@NonNull View buttonsContainer) {
 		CardView startButton = buttonsContainer.findViewById(R.id.button_center);
 		createItemActive(app, nightMode, startButton, ItemType.START_RECORDING);
 		startButton.setOnClickListener(v -> startRecording());
 	}
 
-	private void setupSettingsButton(View buttonsContainer) {
+	private void setupSettingsButton(@NonNull View buttonsContainer) {
 		CardView settingsButton = buttonsContainer.findViewById(R.id.button_right);
 		createItem(app, nightMode, settingsButton, ItemType.SETTINGS, true, null);
-		settingsButton.setOnClickListener(v -> {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				hide();
-				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
-						null, new Bundle(), this);
-			}
-		});
+		settingsButton.setOnClickListener(v -> callMapActivity(mapActivity -> {
+			hide();
+			BaseSettingsFragment.showInstance(mapActivity,
+					SettingsScreenType.MONITORING_SETTINGS, null, new Bundle(), this);
+		}));
 	}
 
 	private void updateIntervalLegend() {
@@ -157,20 +132,16 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 			int currentModeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 			UiUtilities.setupSlider(intervalSlider, nightMode, currentModeColor, true);
 			intervalContainer.setVisibility(View.GONE);
-			intervalSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-
-				@Override
-				public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-					int progress = (int) value;
-					if (progress == 0) {
-						settings.SAVE_GLOBAL_TRACK_INTERVAL.set(0);
-					} else if (progress < secondsLength) {
-						settings.SAVE_GLOBAL_TRACK_INTERVAL.set(SECONDS[progress] * 1000);
-					} else {
-						settings.SAVE_GLOBAL_TRACK_INTERVAL.set(MINUTES[progress - secondsLength] * 60 * 1000);
-					}
-					updateIntervalLegend();
+			intervalSlider.addOnChangeListener((slider, value, fromUser) -> {
+				int progress = (int) value;
+				if (progress == 0) {
+					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(0);
+				} else if (progress < secondsLength) {
+					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(SECONDS[progress] * 1000);
+				} else {
+					settings.SAVE_GLOBAL_TRACK_INTERVAL.set(MINUTES[progress - secondsLength] * 60 * 1000);
 				}
+				updateIntervalLegend();
 			});
 
 			for (int i = 0; i < secondsLength + minutesLength; i++) {
@@ -236,5 +207,12 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 	@Override
 	protected boolean hideButtonsContainer() {
 		return true;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
+			TripRecordingStartingBottomSheet fragment = new TripRecordingStartingBottomSheet();
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

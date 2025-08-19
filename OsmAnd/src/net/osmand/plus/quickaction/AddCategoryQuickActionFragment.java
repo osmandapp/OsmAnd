@@ -21,14 +21,14 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class AddCategoryQuickActionFragment extends BaseOsmAndFragment
+public class AddCategoryQuickActionFragment extends BaseFullScreenFragment
 		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddCategoryQuickActionFragment.class.getSimpleName();
@@ -68,7 +68,7 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_add_category_quick_action, container, false);
+		View view = inflate(R.layout.fragment_add_category_quick_action, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}

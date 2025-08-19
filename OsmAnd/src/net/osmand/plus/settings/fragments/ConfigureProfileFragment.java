@@ -90,9 +90,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-
 		getListView().addItemDecoration(createDividerItemDecoration());
-
 		return view;
 	}
 
@@ -110,10 +108,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		toolbarSubtitle.setText(R.string.configure_profile);
 		toolbarSubtitle.setVisibility(View.VISIBLE);
 
-		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(view1 -> {
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(v -> {
 			ApplicationMode selectedMode = getSelectedAppMode();
 			boolean isChecked = ApplicationMode.values(app).contains(selectedMode);
-			ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+			ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, app);
 			updateToolbarSwitch();
 		});
 
@@ -206,18 +204,17 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void updateCopiedOrResetPrefs() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();
-		}
+		});
 	}
 
 	private RecyclerView.ItemDecoration createDividerItemDecoration() {
 		Drawable dividerLight = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_light));
 		Drawable dividerDark = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_dark));
-		int pluginDividerHeight = AndroidUtils.dpToPx(app, 3);
+		int pluginDividerHeight = dpToPx(3);
 
 		return new RecyclerView.ItemDecoration() {
 			@Override

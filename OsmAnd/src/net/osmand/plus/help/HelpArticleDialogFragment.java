@@ -17,25 +17,21 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class HelpArticleDialogFragment extends DialogFragment {
+public class HelpArticleDialogFragment extends BaseFullScreenDialogFragment {
 
 	private static final String TAG = HelpArticleDialogFragment.class.getSimpleName();
 
 	private static final String ARTICLE_URL_KEY = "url";
 	private static final String ARTICLE_TITLE_KEY = "name";
-
-	private OsmandApplication app;
 
 	private String title;
 	private String articleUrl;
@@ -43,12 +39,6 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = (OsmandApplication) requireActivity().getApplication();
-
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-
 		Bundle args = getArguments();
 		if (args != null) {
 			articleUrl = args.getString(ARTICLE_URL_KEY);
@@ -59,11 +49,10 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_help_article, container, false);
-
+		updateNightMode();
+		View view = inflate(R.layout.fragment_help_article, container, false);
 		setupToolbar(view);
 		setupWebView(view, savedInstanceState);
-
 		return view;
 	}
 

@@ -29,8 +29,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
@@ -44,7 +43,7 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import java.util.List;
 
-public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implements IEditorIconPaletteScreen {
+public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment implements IEditorIconPaletteScreen {
 
 	public static final String TAG = EditorIconPaletteFragment.class.getSimpleName();
 
@@ -100,7 +99,7 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_icon_categories, container);
+		View view = inflate(R.layout.fragment_icon_categories, container, false);
 		progressBar = view.findViewById(R.id.progress_bar);
 		setupToolbar(view);
 		setupSearch(view);

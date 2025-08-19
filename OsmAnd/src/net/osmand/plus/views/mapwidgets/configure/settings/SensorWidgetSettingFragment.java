@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import net.osmand.plus.plugins.externalsensors.dialogs.SelectExternalDeviceFragm
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ExternalDeviceShowMode;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
@@ -32,7 +30,6 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 
 	private SensorTextWidget sensorWidget;
 	protected ExternalSensorsPlugin plugin;
-	private UiUtilities uiUtils;
 
 	@Nullable
 	private OsmandPreference<ExternalDeviceShowMode> showModePreference;
@@ -48,7 +45,6 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
-		uiUtils = app.getUIUtilities();
 	}
 
 	@Override
@@ -75,8 +71,8 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.sensor_widget_settings_fragment, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.sensor_widget_settings_fragment, container);
 		deviceIcon = view.findViewById(R.id.device_icon);
 		showIcon = view.findViewById(R.id.show_icon);
 		showModeDescription = container.findViewById(R.id.show);
@@ -115,7 +111,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 		showModeDescription.setText(getString(ExternalDeviceShowMode.values()[selectedShowMode].getTitleId()));
 		SensorWidgetDataFieldType fieldType = sensorWidget.getFieldType();
 		int iconId = selectedShowMode == ExternalDeviceShowMode.SENSOR_DATA.ordinal() ? fieldType.disconnectedIconId : fieldType.disconnectedBatteryIconId;
-		showIcon.setImageDrawable(uiUtils.getIcon(iconId, nightMode));
+		showIcon.setImageDrawable(getContentIcon(iconId));
 	}
 
 	@NonNull
@@ -132,7 +128,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment im
 	private void updateSourceDeviceUI() {
 		AbstractDevice<?> sourceDevice = plugin.getDevice(sourceDeviceId);
 		if (sourceDevice == null) {
-			deviceIcon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_sensor, nightMode));
+			deviceIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_sensor));
 			AbstractDevice<?> connectedDevice = null;
 			if (sensorWidget != null) {
 				if (sensorWidget.getWidgetDevice() != null) {

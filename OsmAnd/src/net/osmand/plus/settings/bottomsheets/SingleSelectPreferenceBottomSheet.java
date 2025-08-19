@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
@@ -71,7 +72,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 			preferenceItem[0] = new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
 					.setButtonTintList(AndroidUtils.createCheckedColorIntStateList(
-							ContextCompat.getColor(ctx,R.color.icon_color_default_light),
+							ColorUtilities.getDefaultIconColor(ctx, nightMode),
 							isProfileDependent() ?
 									getAppMode().getProfileColor(nightMode) :
 									ContextCompat.getColor(ctx, getActiveColorId())))
@@ -174,7 +175,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target, boolean usedOnMap,
 	                                   @Nullable ApplicationMode appMode, boolean profileDependent, boolean collapsibleDescription) {
-		try {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
 			args.putBoolean(USE_COLLAPSIBLE_DESCRIPTION, collapsibleDescription);
@@ -187,8 +188,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 			fragment.setProfileDependent(profileDependent);
 			fragment.show(fragmentManager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

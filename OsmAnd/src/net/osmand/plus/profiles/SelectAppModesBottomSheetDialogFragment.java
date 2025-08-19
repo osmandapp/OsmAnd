@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -39,7 +39,7 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	@Override
 	public void onResume() {
 		super.onResume();
-		activeModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
+		activeModes = new ArrayList<>(ApplicationMode.values(app));
 		adapter.updateItemsList(activeModes);
 		setupHeightAndBackground(getView());
 	}
@@ -54,12 +54,12 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 
 	@Override
 	protected void getData() {
-		activeModes.addAll(ApplicationMode.values(getMyApplication()));
+		activeModes.addAll(ApplicationMode.values(app));
 	}
 
 	@Override
 	protected SelectProfileMenuAdapter getMenuAdapter() {
-		return new SelectProfileMenuAdapter(activeModes, requiredMyApplication(), getString(R.string.shared_string_manage), nightMode, appMode);
+		return new SelectProfileMenuAdapter(activeModes, app, getString(R.string.shared_string_manage), nightMode, appMode);
 	}
 
 	@Override
@@ -69,14 +69,12 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 
 	@Override
 	public void onProfilePressed(ApplicationMode appMode) {
-		OsmandSettings settings = getMyApplication().getSettings();
 		if (appMode != this.appMode) {
 			if (appModeChangeable) {
 				settings.setApplicationMode(appMode);
 			}
 			Fragment targetFragment = getTargetFragment();
-			if (targetFragment instanceof AppModeChangedListener) {
-				AppModeChangedListener listener = (AppModeChangedListener) targetFragment;
+			if (targetFragment instanceof AppModeChangedListener listener) {
 				listener.onAppModeChanged(appMode);
 			}
 		}
@@ -91,17 +89,13 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, boolean usedOnMap,
 									@Nullable ApplicationMode appMode, boolean appModeChangeable) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				SelectAppModesBottomSheetDialogFragment fragment = new SelectAppModesBottomSheetDialogFragment();
-				fragment.setTargetFragment(target, 0);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setAppModeChangeable(appModeChangeable);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG, true)) {
+			SelectAppModesBottomSheetDialogFragment fragment = new SelectAppModesBottomSheetDialogFragment();
+			fragment.setTargetFragment(target, 0);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setAppModeChangeable(appModeChangeable);
+			fragment.show(fm, TAG);
 		}
 	}
 

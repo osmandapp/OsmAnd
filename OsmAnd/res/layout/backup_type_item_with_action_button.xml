@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/card_top_divider"
+        layout="@layout/card_top_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/list_background_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/selectable_list_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/setting_list_item_large_height"
+            android:orientation="horizontal"
+            tools:background="?attr/selectableItemBackground">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/explicit_indicator"
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                tools:srcCompat="@drawable/ic_action_arrow_down"
+                tools:tint="@color/icon_color_default_light" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginTop="@dimen/content_padding_small"
+                android:layout_marginRight="@dimen/content_padding"
+                android:layout_marginBottom="@dimen/content_padding_small"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="@dimen/text_button_letter_spacing"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    app:lineHeight="@dimen/default_title_line_height"
+                    android:textStyle="normal"
+                    tools:text="@string/shared_string_my_places" />
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="@dimen/description_letter_spacing"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_desc_text_size"
+                    app:lineHeight="@dimen/default_desc_line_height"
+                    android:textStyle="normal"
+                    tools:text="3 MB" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/action_button_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/action_button"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/content_padding"
+                    android:clickable="false"
+                    android:focusable="false"
+                    tools:src="@drawable/ic_action_info_dark" />
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/pro_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/img_button_pro_day"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/divider"
+            layout="@layout/divider_half_item_with_background" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/card_bottom_divider"
+        layout="@layout/card_bottom_divider"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

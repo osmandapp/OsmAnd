@@ -4085,7 +4085,7 @@
     <string name="purchases_feature_desc_combined_wiki">Prozkoumejte články Wikipedie bez připojení na internet. Offline data jsou rozdělena podle zemí a dostupná ve všech jazycích.</string>
     <string name="purchases_feature_desc_wikivoyage">Prozkoumejte průvodce Wikivoyage offline. Články jsou rozdělené podle zemí a oblastí a jsou dostupné ve všech jazycích.</string>
     <string name="purchases_feature_desc_nautical">Získejte přístup k informacím o námořní hloubce</string>
-    <string name="rendering_attr_natureReserves_name">Přírodní rezervace</string>
+    <string name="rendering_attr_natureReserves_name">Přírodní rezervace a chráněná území</string>
     <string name="benefits_for_contributors_secondary_descr">Přihlaste se do OpenStreetMap a zkontrolujte, zda máte nárok na neomezené měsíční a hodinové aktualizace map.</string>
     <string name="use_login_and_password">Použít jméno a heslo</string>
     <string name="duration_moment_ago">před chvílí</string>

@@ -17,12 +17,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment implements OnChildClickListener {
+public abstract class OsmandExpandableListFragment extends BaseFullScreenFragment implements OnChildClickListener {
 
 	protected ExpandableListView listView;
 	protected ExpandableListAdapter adapter;
@@ -116,13 +115,5 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment im
 				}
 			});
 		}
-	}
-
-	@Nullable
-	public OsmandActionBarActivity getActionBarActivity() {
-		if (getActivity() instanceof OsmandActionBarActivity) {
-			return (OsmandActionBarActivity) getActivity();
-		}
-		return null;
 	}
 }

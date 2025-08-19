@@ -80,7 +80,7 @@ public class MultipleSelectionBottomSheet<T> extends SelectionBottomSheet<T> {
 		if (description != null) {
 			description.setText(item.getDescription());
 		}
-		imageView.setImageDrawable(uiUtilities.getIcon(item.getIconId(), activeColorRes));
+		imageView.setImageDrawable(getIcon(item.getIconId(), activeColorRes));
 	}
 
 	@Override

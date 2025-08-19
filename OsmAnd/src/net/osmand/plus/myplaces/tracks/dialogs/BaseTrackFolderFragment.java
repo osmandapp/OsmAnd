@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.configmap.tracks.TrackTabType;
@@ -84,7 +84,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment implements FragmentStateHolder,
+public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment implements FragmentStateHolder,
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener, OsmAuthorizationListener,
 		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener,
 		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem>, SmartFolderOptionsListener {

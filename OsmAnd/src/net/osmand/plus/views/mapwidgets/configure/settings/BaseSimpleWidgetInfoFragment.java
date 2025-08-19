@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,9 +36,9 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 	}
 
 	@Override
-	protected void setupTopContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		super.setupTopContent(themedInflater, container);
-		themedInflater.inflate(R.layout.simple_widget_settings, container);
+	protected void setupTopContent(@NonNull ViewGroup container) {
+		super.setupTopContent(container);
+		inflate(R.layout.simple_widget_settings, container);
 
 		SwitchCompat switchCompat = container.findViewById(R.id.show_icon_toggle);
 		switchCompat.setChecked(showIcon);

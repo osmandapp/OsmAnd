@@ -43,7 +43,7 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull ApplicationMode appMode, @Nullable Fragment target) {
 		FragmentManager manager = activity.getSupportFragmentManager();
-		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			MappersPromoFragment fragment = new MappersPromoFragment();
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
@@ -99,7 +99,7 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	}
 
 	private View createFeatureItemView(@NonNull OsmAndFeature feature) {
-		View view = themedInflater.inflate(R.layout.purchase_dialog_list_item, listContainer, false);
+		View view = inflate(R.layout.purchase_dialog_list_item, listContainer, false);
 		view.setTag(feature);
 		bindFeatureItem(view, feature, false);
 		return view;

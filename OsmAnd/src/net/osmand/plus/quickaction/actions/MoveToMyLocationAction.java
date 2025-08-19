@@ -15,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.utils.UiUtilities;
 
 public class MoveToMyLocationAction extends QuickAction {
 
@@ -39,9 +40,8 @@ public class MoveToMyLocationAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(R.string.key_event_action_move_to_my_location));
 		parent.addView(view);
 	}

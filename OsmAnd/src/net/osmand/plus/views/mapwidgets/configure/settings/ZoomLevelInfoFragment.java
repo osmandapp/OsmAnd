@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -56,8 +55,8 @@ public class ZoomLevelInfoFragment extends BaseSimpleWidgetInfoFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.fragment_widget_settings_zoom_level, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.fragment_widget_settings_zoom_level, container);
 
 		View zoomLevelTypeContainer = container.findViewById(R.id.zoom_level_type_container);
 		zoomLevelTypeContainer.setOnClickListener(v -> showZoomLevelTypeSelectionDialog());

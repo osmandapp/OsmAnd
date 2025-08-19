@@ -134,9 +134,8 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View root = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_simulate_location, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View root = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_simulate_location, parent, false);
 		parent.addView(root);
 		OsmandApplication app = mapActivity.getMyApplication();
 		unselectGpxFileIfMissing();

@@ -6,7 +6,6 @@ import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
@@ -14,7 +13,6 @@ import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -34,7 +32,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -96,8 +93,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	private static final Log LOG = PlatformUtil.getLog(RouteOptionsBottomSheet.class);
 	public static final String DIALOG_MODE_KEY = "DIALOG_MODE_KEY";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 	private ApplicationMode applicationMode;
@@ -155,8 +150,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 			String dialogModeName = args.getString(DIALOG_MODE_KEY, null);
 			dialogMode = DialogMode.getModeByName(dialogModeName);
 		}
-		app = requiredMyApplication();
-		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 		mapActivity = getMapActivity();
@@ -167,18 +160,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 			dialogMode = DialogMode.DIRECTIONS;
 		}
 		selectedModeColor = applicationMode.getProfileColor(nightMode);
-		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
-			@Override
-			public void stateChanged(Boolean change) {
-				app.runInUIThread(() -> updateWhenMuteChanged());
-			}
-		};
-		useHeightChangeListener = new StateChangedListener<Boolean>() {
-			@Override
-			public void stateChanged(Boolean change) {
-				app.runInUIThread(() -> updateWhenUseHeightChanged());
-			}
-		};
+		voiceMuteChangeListener = change -> app.runInUIThread(this::updateWhenMuteChanged);
+		useHeightChangeListener = change -> app.runInUIThread(this::updateWhenUseHeightChanged);
 		useHeightPref = settings.getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
 		reliefParameters = getReliefParameters();
 	}
@@ -203,7 +186,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				items.add(createShowAlongTheRouteItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
-				items.add(createRouteSimulationItem(optionsItem));
+				items.add(createRouteSimulationItem());
 			} else if (optionsItem instanceof AvoidPTTypesRoutingParameter) {
 				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
@@ -235,23 +218,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	public void onResume() {
 		super.onResume();
 		for (BaseBottomSheetItem item : items) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				BottomSheetItemWithCompoundButton itemWithCompoundButton = (BottomSheetItemWithCompoundButton) item;
+			if (item instanceof BottomSheetItemWithCompoundButton itemWithCompoundButton) {
 				itemWithCompoundButton.setChecked(itemWithCompoundButton.isChecked());
 			}
 		}
 		currentUseHeightState = useHeightPref.getModeValue(applicationMode);
-		currentMuteState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
+		currentMuteState = settings.VOICE_MUTE.getModeValue(applicationMode);
 
 		useHeightPref.addListener(useHeightChangeListener);
-		app.getSettings().VOICE_MUTE.addListener(voiceMuteChangeListener);
+		settings.VOICE_MUTE.addListener(voiceMuteChangeListener);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		useHeightPref.removeListener(useHeightChangeListener);
-		app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
+		settings.VOICE_MUTE.removeListener(voiceMuteChangeListener);
 	}
 
 	@Override
@@ -274,7 +256,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	}
 
 	public void updateWhenMuteChanged() {
-		boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
+		boolean changedState = settings.VOICE_MUTE.getModeValue(applicationMode);
 		if (changedState != currentMuteState) {
 			currentMuteState = changedState;
 			updateMenuItems();
@@ -291,10 +273,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		}
 	}
 
+	@NonNull
 	private BaseBottomSheetItem createMuteSoundItem(LocalRoutingParameter optionsItem) {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-		View itemView = UiUtilities.getInflater(requireContext(), nightMode).inflate(
-				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
+		View itemView = inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp);
 		ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		TextView tvDescription = itemView.findViewById(R.id.description);
@@ -305,7 +287,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 		tvTitle.setText(getString(R.string.shared_string_sound));
 		tvDescription.setText(getString(R.string.voice_announcements));
-		icon.setImageDrawable(getPaintedContentIcon(active ?
+		icon.setImageDrawable(getContentIcon(active ?
 				optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
 		cb.setChecked(active);
 		cb.setFocusable(false);
@@ -323,15 +305,14 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 							RouteOptionsBottomSheet.this, applicationMode, usedOnMap);
 				} else {
 					cb.setChecked(!active);
-					icon.setImageDrawable(getPaintedContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+					icon.setImageDrawable(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
 				}
 				updateMenu();
 			}
 		});
 
-		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
-				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
-		Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
+		Drawable drawable = getContentIcon(R.drawable.ic_action_settings);
+		Drawable activeDrawable = getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
 		drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
 		voicePromptsBtnImage.setImageDrawable(drawable);
 
@@ -345,32 +326,26 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.create();
 	}
 
+	@NonNull
 	private BaseBottomSheetItem inflateElevationParameter(LocalRoutingParameter parameter) {
 		BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 		boolean active = !useHeightPref.getModeValue(applicationMode);
-		View itemView = UiUtilities.getInflater(requireContext(), nightMode).inflate(
-				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
+		View itemView = inflate(R.layout.bottom_sheet_item_with_switch_and_dialog);
 		SwitchCompat switchButton = itemView.findViewById(R.id.compound_button);
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);
-		itemsContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (USE_HEIGHT_OBSTACLES.equals(parameter.getKey()) && hasReliefParameters()) {
-					FragmentManager fm = getFragmentManager();
-					if (fm != null) {
-						ElevationDateBottomSheet.showInstance(fm, applicationMode, RouteOptionsBottomSheet.this, false);
-					}
+		itemsContainer.setOnClickListener(v -> {
+			if (USE_HEIGHT_OBSTACLES.equals(parameter.getKey()) && hasReliefParameters()) {
+				FragmentManager fm = getFragmentManager();
+				if (fm != null) {
+					ElevationDateBottomSheet.showInstance(fm, applicationMode, RouteOptionsBottomSheet.this, false);
 				}
 			}
 		});
 
-		switchButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				applyParameter(item[0], parameter);
-				item[0].setDescription(getElevationDescription(parameter));
-				switchButton.setChecked(parameter.isSelected(settings));
-			}
+		switchButton.setOnClickListener(v -> {
+			applyParameter(item[0], parameter);
+			item[0].setDescription(getElevationDescription(parameter));
+			switchButton.setChecked(parameter.isSelected(settings));
 		});
 
 		item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -385,14 +360,15 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		return item[0];
 	}
 
-	private String getElevationDescription(LocalRoutingParameter parameter) {
+	@NonNull
+	private String getElevationDescription(@NonNull LocalRoutingParameter parameter) {
 		String description;
 		if (parameter.isSelected(settings)) {
 			description = getString(R.string.shared_string_enabled);
 			for (RoutingParameter routingParameter : reliefParameters) {
 				if (isRoutingParameterSelected(settings, applicationMode, routingParameter)) {
-					description = getString(R.string.ltr_or_rtl_combine_via_comma, description,
-							getRoutingParameterTitle(app, routingParameter));
+					description = getString(R.string.ltr_or_rtl_combine_via_comma,
+							description, getRoutingParameterTitle(app, routingParameter));
 				}
 			}
 		} else {
@@ -401,7 +377,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		return description;
 	}
 
-	private BaseBottomSheetItem createTimeConditionalRoutingItem(LocalRoutingParameter optionsItem) {
+	@NonNull
+	private BaseBottomSheetItem createTimeConditionalRoutingItem(@NonNull LocalRoutingParameter optionsItem) {
 		BottomSheetItemWithCompoundButton[] timeConditionalRoutingItem = new BottomSheetItemWithCompoundButton[1];
 		timeConditionalRoutingItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColor(selectedModeColor)
@@ -409,43 +386,35 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.temporary_conditional_routing))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean enabled = !settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode);
-						settings.ENABLE_TIME_CONDITIONAL_ROUTING.setModeValue(applicationMode, enabled);
-						timeConditionalRoutingItem[0].setChecked(enabled);
-						app.getRoutingHelper().onSettingsChanged(applicationMode, true);
-					}
+				.setOnClickListener(v -> {
+					boolean enabled = !settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode);
+					settings.ENABLE_TIME_CONDITIONAL_ROUTING.setModeValue(applicationMode, enabled);
+					timeConditionalRoutingItem[0].setChecked(enabled);
+					app.getRoutingHelper().onSettingsChanged(applicationMode, true);
 				})
 				.create();
 		return timeConditionalRoutingItem[0];
 	}
 
-	private BaseBottomSheetItem createShowAlongTheRouteItem(LocalRoutingParameter optionsItem) {
+	@NonNull
+	private BaseBottomSheetItem createShowAlongTheRouteItem(@NonNull LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.show_along_the_route))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.setOnClickListener(view -> {
                     routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-                    FragmentManager fm = getFragmentManager();
-                    if (fm == null) {
-                        return;
+                    FragmentManager fragmentManager = getFragmentManager();
+                    if (fragmentManager != null) {
+						ShowAlongTheRouteBottomSheet.showInstance(fragmentManager, RouteOptionsBottomSheet.this, null);
+	                    updateMenu();
                     }
-                    Bundle args = new Bundle();
-                    ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
-                    fragment.setUsedOnMap(true);
-                    fragment.setArguments(args);
-                    fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
-                    fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
-                    updateMenu();
                 }).create();
 	}
 
-	private BaseBottomSheetItem createRouteSimulationItem(LocalRoutingParameter optionsItem) {
-		View itemView = UiUtilities.getInflater(requireContext() , nightMode).inflate(
-				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
+	@NonNull
+	private BaseBottomSheetItem createRouteSimulationItem() {
+		View itemView = inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp);
 		ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		itemView.findViewById(R.id.description).setVisibility(View.GONE);
@@ -472,9 +441,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 			}
 		});
 
-		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
-				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
-		Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
+		Drawable drawable = getContentIcon(R.drawable.ic_action_settings);
+		Drawable activeDrawable = getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
 		drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
 		settingBtnImage.setImageDrawable(drawable);
 		settingBtn.setOnClickListener(v -> {
@@ -487,44 +455,30 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.create();
 	}
 
-
-	private BaseBottomSheetItem createAvoidRoadsItem(LocalRoutingParameter optionsItem) {
+	@NonNull
+	private BaseBottomSheetItem createAvoidRoadsItem(@NonNull LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.impassable_road))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
-						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
-						avoidRoadsFragment.setCompoundButtonColor(selectedModeColor);
-						avoidRoadsFragment.setApplicationMode(applicationMode);
-						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
-						updateMenu();
-					}
+				.setOnClickListener(view -> {
+					routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+					AvoidRoadsBottomSheetDialogFragment.showInstance(mapActivity, RouteOptionsBottomSheet.this, applicationMode, null, selectedModeColor);
+					updateMenu();
 				})
 				.create();
 	}
 
-
-	private BaseBottomSheetItem createAvoidPTTypesItem(LocalRoutingParameter optionsItem) {
+	@NonNull
+	private BaseBottomSheetItem createAvoidPTTypesItem(@NonNull LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.avoid_pt_types))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
-						avoidRoadsFragment.setHideImpassableRoads(true);
-						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
-						avoidRoadsFragment.setCompoundButtonColor(selectedModeColor);
-						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
-						updateMenu();
-					}
+				.setOnClickListener(view -> {
+					routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+					AvoidRoadsBottomSheetDialogFragment.showInstance(mapActivity, RouteOptionsBottomSheet.this, null, true, selectedModeColor);
+					updateMenu();
 				})
 				.create();
 	}
@@ -615,8 +569,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				builder.setTitle(parameter.getText(mapActivity));
 				iconId = parameter.isSelected(settings) ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 			}
-			if (parameter instanceof LocalRoutingParameterGroup) {
-				LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) parameter;
+			if (parameter instanceof LocalRoutingParameterGroup group) {
 				LocalRoutingParameter selected = group.getSelected(settings);
 				iconId = selected != null ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 				if (selected != null) {
@@ -656,7 +609,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				});
 			}
 			if (iconId != -1) {
-				builder.setIcon(getPaintedContentIcon(iconId));
+				builder.setIcon(getContentIcon(iconId));
 			}
 			item[0] = builder.create();
 			items.add(item[0]);
@@ -738,7 +691,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		bottomSheetItem.setChecked(selected);
 		int iconId = selected ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 		if (iconId != -1) {
-			bottomSheetItem.setIcon(getPaintedContentIcon(iconId));
+			bottomSheetItem.setIcon(getContentIcon(iconId));
 		}
 		updateMenu();
 	}
@@ -776,31 +729,21 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		return routingOptionsHelper.getRoutingParameters(applicationMode, routingParameters);
 	}
 
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
 	public static void showInstance(@NonNull MapActivity mapActivity) {
 		showInstance(mapActivity, null, DialogMode.DIRECTIONS, null);
 	}
 
-	public static void showInstance(@NonNull MapActivity mapActivity,
-	                                @Nullable Fragment targetFragment,
-	                                @NonNull DialogMode dialogMode,
-	                                @Nullable String appModeKey) {
-		try {
-			FragmentManager fm = mapActivity.getSupportFragmentManager();
-			if (!fm.isStateSaved()) {
-				RouteOptionsBottomSheet fragment = new RouteOptionsBottomSheet();
-				Bundle args = new Bundle();
-				args.putString(APP_MODE_KEY, appModeKey);
-				args.putString(DIALOG_MODE_KEY, dialogMode.name());
-				fragment.setArguments(args);
-				fragment.setTargetFragment(targetFragment, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull MapActivity mapActivity, @Nullable Fragment target,
+	                                @NonNull DialogMode dialogMode, @Nullable String appModeKey) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			RouteOptionsBottomSheet fragment = new RouteOptionsBottomSheet();
+			Bundle args = new Bundle();
+			args.putString(APP_MODE_KEY, appModeKey);
+			args.putString(DIALOG_MODE_KEY, dialogMode.name());
+			fragment.setArguments(args);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
