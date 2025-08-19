@@ -77,7 +77,7 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 		return nameTextBox.getError() == null;
 	}
 
-	public interface OnGroupNameChangeListener {
+	public interface OnTrackGroupChangeListener {
 		void onTrackGroupChanged();
 	}
 }

@@ -22,6 +22,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -190,7 +191,7 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 	}
 
 	protected void updateAvailableSpace() {
-		long calculatedSize = ExportSettingsAdapter.calculateItemsSize(adapter.getData());
+		long calculatedSize = BackupUtils.calculateItemsSize(adapter.getData());
 		if (calculatedSize != 0) {
 			selectedItemsSize.setText(AndroidUtils.formatSize(app, calculatedSize));
 
