@@ -2,6 +2,8 @@ package net.osmand.plus.settings.vehiclesize;
 
 import static net.osmand.plus.settings.vehiclesize.SizeType.HEIGHT;
 import static net.osmand.plus.settings.vehiclesize.SizeType.LENGTH;
+import static net.osmand.plus.settings.vehiclesize.SizeType.AXLE_LOAD;
+import static net.osmand.plus.settings.vehiclesize.SizeType.WEIGHT_FULL_LOAD;
 import static net.osmand.plus.settings.vehiclesize.SizeType.WEIGHT;
 import static net.osmand.plus.settings.vehiclesize.SizeType.WIDTH;
 
@@ -39,6 +41,16 @@ public class TruckSizes extends VehicleSizes {
 		assets = new Assets(icon, R.string.weight_limit_description);
 		limits = new Limits<>(3.5f, 16f);
 		add(WEIGHT, assets, limits);
+
+		icon = new ThemedIconId(R.drawable.img_help_weight_limit_day, R.drawable.img_help_weight_limit_night);
+		assets = new Assets(icon, R.string.max_axle_load_description);
+		limits = new Limits<>(3.5f, 16f);
+		add(AXLE_LOAD, assets, limits);
+
+		icon = new ThemedIconId(R.drawable.img_help_weight_limit_day, R.drawable.img_help_weight_limit_night);
+		assets = new Assets(icon, R.string.max_weight_at_full_load_description);
+		limits = new Limits<>(3.5f, 16f);
+		add(WEIGHT_FULL_LOAD, assets, limits);
 	}
 
 	@Override

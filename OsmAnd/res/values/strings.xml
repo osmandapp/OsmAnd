@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="max_weight_at_full_load_description">Provide your vehicle\'s max weight at full load to avoid roads and bridges with weight limits.</string>
+    <string name="max_axle_load_description">Provide your vehicle\'s max axle load to avoid roads and bridges with weight limits.</string>
     <string name="private_access_routing_req_short">Your destination is in a private area. Allow using private roads?</string>
     <string name="view_on_phone">View on Phone</string>
     <string name="average_elevation">Average elevation</string>
