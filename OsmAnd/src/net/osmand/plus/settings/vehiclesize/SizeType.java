@@ -34,4 +34,10 @@ public enum SizeType {
 		}
 		return null;
 	}
+
+	public boolean isWeightType () {
+		return this == SizeType.WEIGHT
+				|| this == SizeType.AXLE_LOAD
+				|| this == SizeType.WEIGHT_FULL_LOAD;
+	}
 }
