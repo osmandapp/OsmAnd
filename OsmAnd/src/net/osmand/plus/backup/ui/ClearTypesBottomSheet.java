@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.utils.AndroidUtils;
@@ -48,7 +47,6 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			processId = savedInstanceState.getString(PROCESS_ID_KEY);
 		}
-		OsmandApplication app = requiredMyApplication();
 		DialogManager dialogManager = app.getDialogManager();
 		controller = (BaseBackupTypesController) dialogManager.findController(processId);
 	}

@@ -193,7 +193,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 				boolean selected = key.equals(selectedItem);
 				int iconId = compassMode.getIconId(nightMode);
 				Drawable icon = getIcon(iconId);
-				String translatedName = compassMode.getTitle(context);
+				String translatedName = compassMode.getTitle(app);
 				createItemRow(selected, counter, icon, translatedName, key);
 				counter++;
 			}

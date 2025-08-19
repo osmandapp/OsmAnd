@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -28,13 +27,6 @@ public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment imp
 	private static final String TAG = AddToFavoritesBottomSheet.class.getName();
 
 	protected GpxDisplayGroup group;
-	private OsmandApplication app;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

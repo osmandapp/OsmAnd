@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
@@ -28,7 +28,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class BackupTypesFragment extends BaseOsmAndFragment
+public class BackupTypesFragment extends BaseFullScreenFragment
 		implements IContextDialog, IDialogNightModeInfoProvider, InAppPurchaseListener {
 
 	private static final String TAG = BackupTypesFragment.class.getSimpleName();
@@ -90,23 +90,19 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
-		}
+		});
 		controller.updateListeners(true);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && !wasDrawerDisabled) {
-			mapActivity.enableDrawer();
-		}
+		if (!wasDrawerDisabled) callMapActivity(MapActivity::enableDrawer);
 		controller.updateListeners(false);
 	}
 
@@ -141,21 +137,6 @@ public class BackupTypesFragment extends BaseOsmAndFragment
 
 	public void updateProgressVisibility(boolean visible) {
 		AndroidUiHelper.updateVisibility(progressBar, visible);
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull String processId) {
