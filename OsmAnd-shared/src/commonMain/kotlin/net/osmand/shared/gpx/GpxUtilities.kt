@@ -291,7 +291,7 @@ object GpxUtilities {
 			color = point.getColor()
 			iconName = point.getIconName()
 			backgroundType = point.getBackgroundType()
-			hidden = point.getExtensionsToRead()[HIDDEN_EXTENSION]?.toBoolean() ?: false
+			hidden = point.isHidden()
 		}
 
 		fun isHidden(): Boolean {

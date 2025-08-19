@@ -119,12 +119,12 @@ class WptPt : GpxExtensions {
 		setBackgroundType(background)
 	}
 
-	fun isVisible(): Boolean {
-		return true
-	}
-
 	fun getIconName(): String? {
 		return getExtensionsToRead()[GpxUtilities.ICON_NAME_EXTENSION]
+	}
+
+	fun isHidden(): Boolean {
+		return getExtensionsToRead()[GpxUtilities.HIDDEN_EXTENSION]?.toBoolean() ?: false
 	}
 
 	fun getIconNameOrDefault(): String {
