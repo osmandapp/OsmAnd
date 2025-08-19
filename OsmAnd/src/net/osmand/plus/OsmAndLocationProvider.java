@@ -703,7 +703,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		updateLocation(this.location);
 	}
 
-
+	public void ensureLatestLocation() {
+		if (prevLocation != null && (location == null || prevLocation.getTime() > location.getTime())) {
+			cachedLocation = location = prevLocation;
+			cachedLocationTimeFix = lastTimeLocationFixed;
+			updateLocation(location);
+		}
+	}
 
 	private void notifyGpsLocationRecovered() {
 		if (gpsSignalLost) {
@@ -721,7 +727,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			updateSpeedEmulator(location);
 		}
 	}
-
 
 	public NavigationInfo getNavigationInfo() {
 		return navigationInfo;

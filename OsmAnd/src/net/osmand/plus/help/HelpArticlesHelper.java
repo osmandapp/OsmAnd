@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -53,7 +54,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 
 	public void loadArticles() {
 		loadArticlesTask = new LoadArticlesTask(app, this);
-		loadArticlesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(loadArticlesTask);
 	}
 
 	public boolean isLoadingPopularArticles() {

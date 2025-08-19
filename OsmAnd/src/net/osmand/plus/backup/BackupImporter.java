@@ -167,14 +167,14 @@ class BackupImporter {
 				}
 				if (!error) {
 					is = new FileInputStream(tempFile);
-					reader.readFromStream(is, tempFile, remoteFile.getName());
+					File file = reader.readFromStream(is, tempFile, remoteFile.getName());
 					if (forceReadData) {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
 						}
 						item.apply();
 					}
-					updateFileM5Digest(remoteFile, item);
+					updateFileM5Digest(remoteFile, item, file);
 					updateFileUploadTime(remoteFile, item);
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
@@ -199,20 +199,16 @@ class BackupImporter {
 		}
 	}
 
-	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item) {
-		if (!(item instanceof FileSettingsItem)) {
-			return;
-		}
-		FileSettingsItem settingsItem = (FileSettingsItem) item;
-		if (settingsItem.needMd5Digest()) {
+	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, @Nullable File file) {
+		if (file != null && item instanceof FileSettingsItem fileItem && fileItem.needMd5Digest()) {
 			BackupDbHelper dbHelper = backupHelper.getDbHelper();
 			UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 			String lastMd5 = fileInfo != null ? fileInfo.getMd5Digest() : null;
 
-			if (Algorithms.isEmpty(lastMd5)) {
+			if (Algorithms.isEmpty(lastMd5) && file != null) {
 				FileInputStream is = null;
 				try {
-					is = new FileInputStream(settingsItem.getFile());
+					is = new FileInputStream(file);
 					String md5Digest = new String(Hex.encodeHex(DigestUtils.md5(is)));
 					if (!Algorithms.isEmpty(md5Digest)) {
 						backupHelper.updateFileMd5Digest(item.getType().name(), remoteFile.getName(), md5Digest);
@@ -379,8 +375,7 @@ class BackupImporter {
 			if (fileName.charAt(0) != '/') {
 				fileName = "/" + fileName;
 			}
-			if (item instanceof GpxSettingsItem) {
-				GpxSettingsItem gpxItem = (GpxSettingsItem) item;
+			if (item instanceof GpxSettingsItem gpxItem) {
 				String folder = gpxItem.getSubtype().getSubtypeFolder();
 				if (!Algorithms.isEmpty(folder) && folder.charAt(0) != '/') {
 					folder = "/" + folder;

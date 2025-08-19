@@ -51,7 +51,13 @@ public abstract class VehicleSizes {
 	}
 
 	public int getMetricStringId(@NonNull SizeType type, @NonNull Metric metric) {
-		if (type != SizeType.WEIGHT) {
+		if (type.isWeightType()) {
+			WeightMetric wm = metric.getWeightMetric();
+			if (wm == WeightMetric.TONES) {
+				return useKilogramsInsteadOfTons() ? R.string.shared_string_kilograms : R.string.shared_string_tones;
+			}
+			return R.string.shared_string_pounds;
+		} else {
 			MetricsConstants lm = metric.getLengthMetric();
 			if (lm == MetricsConstants.MILES_AND_FEET || lm == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				return useInchesInsteadOfFeet() ? R.string.shared_string_inches : R.string.shared_string_feet;
@@ -60,17 +66,17 @@ public abstract class VehicleSizes {
 				return useInchesInsteadOfYards() ? R.string.shared_string_inches : R.string.shared_string_yards;
 			}
 			return R.string.shared_string_meters;
-		} else {
-			WeightMetric wm = metric.getWeightMetric();
-			if (wm == WeightMetric.TONES) {
-				return useKilogramsInsteadOfTons() ? R.string.shared_string_kilograms : R.string.shared_string_tones;
-			}
-			return R.string.shared_string_pounds;
 		}
 	}
 
 	public int getMetricShortStringId(@NonNull SizeType type, @NonNull Metric metric) {
-		if (type != SizeType.WEIGHT) {
+		if (type.isWeightType()) {
+			WeightMetric wm = metric.getWeightMetric();
+			if (wm == WeightMetric.TONES) {
+				return useKilogramsInsteadOfTons() ? R.string.kg : R.string.metric_ton;
+			}
+			return R.string.metric_lbs;
+		} else {
 			MetricsConstants lm = metric.getLengthMetric();
 			if (lm == MetricsConstants.MILES_AND_FEET || lm == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				return useInchesInsteadOfFeet() ? R.string.inch : R.string.foot;
@@ -79,12 +85,6 @@ public abstract class VehicleSizes {
 				return useInchesInsteadOfYards() ? R.string.inch : R.string.yard;
 			}
 			return R.string.m;
-		} else {
-			WeightMetric wm = metric.getWeightMetric();
-			if (wm == WeightMetric.TONES) {
-				return useKilogramsInsteadOfTons() ? R.string.kg : R.string.metric_ton;
-			}
-			return R.string.metric_lbs;
 		}
 	}
 
@@ -93,7 +93,7 @@ public abstract class VehicleSizes {
 		float value = (float) Algorithms.parseDoubleSilently(preference.getValue(), 0.0f);
 		if (value != 0.0f) {
 			value += 0.0001f;
-			if (preference.getSizeType() == SizeType.WEIGHT) {
+			if (preference.getSizeType().isWeightType()) {
 				// Convert weight from tons to selected weight metric system
 				value = VehicleAlgorithms.convertWeightFromTons(
 						metric.getWeightMetric(), value, useKilogramsInsteadOfTons());
@@ -109,7 +109,7 @@ public abstract class VehicleSizes {
 	public float prepareValueToSave(@NonNull SizePreference preference, float value) {
 		if (value != 0.0f) {
 			Metric metric = preference.getMetric();
-			if (preference.getSizeType() == SizeType.WEIGHT) {
+			if (preference.getSizeType().isWeightType()) {
 				// Convert weight to tons before save
 				value = VehicleAlgorithms.convertWeightToTons(
 						metric.getWeightMetric(), value, useKilogramsInsteadOfTons());
@@ -154,7 +154,7 @@ public abstract class VehicleSizes {
 	private List<Float> collectProposedValues(@NonNull SizeType type, @NonNull Metric metric) {
 		SizeData data = getSizeData(type);
 		Limits<Float> limits = data.limits();
-		if (type == SizeType.WEIGHT) {
+		if (type.isWeightType()) {
 			limits = VehicleAlgorithms.convertWeightLimitsByMetricSystem(
 					limits, metric.getWeightMetric(), useKilogramsInsteadOfTons());
 		} else {

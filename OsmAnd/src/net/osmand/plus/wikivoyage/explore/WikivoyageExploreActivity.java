@@ -25,12 +25,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OnDialogFragmentResultListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -298,12 +293,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 					init.removeListener(this);
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						new LoadWikivoyageData(activity, resetData).execute();
+						OsmAndTaskManager.executeTask(new LoadWikivoyageData(activity, resetData));
 					}
 				}
 			});
 		} else {
-			new LoadWikivoyageData(this, resetData).execute();
+			OsmAndTaskManager.executeTask(new LoadWikivoyageData(this, resetData));
 		}
 	}
 

@@ -9,8 +9,6 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Build;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat.BigTextStyle;
@@ -23,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
@@ -63,11 +62,7 @@ public class GpxNotification extends OsmandNotification {
 				}
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
-		} else {
-			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
-		}
+		AndroidUtils.registerBroadcastReceiver(app, OSMAND_SAVE_GPX_SERVICE_ACTION, saveTrackReceiver, true);
 
 		BroadcastReceiver stopGpxRecReceiver = new BroadcastReceiver() {
 			@Override
@@ -79,11 +74,7 @@ public class GpxNotification extends OsmandNotification {
 				}
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
-		} else {
-			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
-		}
+		AndroidUtils.registerBroadcastReceiver(app, OSMAND_STOP_GPX_SERVICE_ACTION, stopGpxRecReceiver, true);
 	}
 
 	@Override
@@ -198,7 +189,7 @@ public class GpxNotification extends OsmandNotification {
 						app.getString(R.string.shared_string_record), startPendingIntent);
 			}
 		}
-		stateChanged  = prevState != state;
+		stateChanged = prevState != state;
 		return notificationBuilder;
 	}
 

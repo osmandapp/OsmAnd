@@ -296,6 +296,9 @@ public class LocationParser {
 	private static boolean isValidLocPhrase(String locPhrase) {
 		if (!locPhrase.isEmpty()) {
 			char ch = Character.toLowerCase(locPhrase.charAt(0));
+			if (ch == '(' && locPhrase.length() > 1) {
+				ch = Character.toLowerCase(locPhrase.charAt(1)); // (0.1234,5.6789)
+			}
 			return ch == '-' || Character.isDigit(ch) || ch == 's' || ch == 'n' || locPhrase.contains("://");
 		}
 		return false;

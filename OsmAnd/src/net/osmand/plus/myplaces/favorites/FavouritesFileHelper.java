@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
@@ -120,13 +121,13 @@ public class FavouritesFileHelper {
 
 	public void loadGpxFile(@NonNull File file, @NonNull CallbackWithObject<GpxFile> callback) {
 		GpxFileLoaderTask loaderTask = new GpxFileLoaderTask(file, null, callback);
-		loaderTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(loaderTask, singleThreadExecutor);
 	}
 
 	public void loadGpxFileSync(@NonNull File file, @NonNull CallbackWithObject<GpxFile> callback) {
 		GpxFileLoaderTask loaderTask = new GpxFileLoaderTask(file, null, null);
 		try {
-			GpxFile gpxFile = loaderTask.executeOnExecutor(singleThreadExecutor).get();
+			GpxFile gpxFile = OsmAndTaskManager.executeTask(loaderTask, singleThreadExecutor).get();
 			callback.processResult(gpxFile);
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
@@ -136,14 +137,14 @@ public class FavouritesFileHelper {
 	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
 			@Nullable SaveFavoritesListener listener) {
 		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
-		task.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(task, singleThreadExecutor);
 	}
 
 	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
 			@Nullable SaveFavoritesListener listener) {
 		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
 		try {
-			task.executeOnExecutor(singleThreadExecutor).get();
+			OsmAndTaskManager.executeTask(task, singleThreadExecutor).get();
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}

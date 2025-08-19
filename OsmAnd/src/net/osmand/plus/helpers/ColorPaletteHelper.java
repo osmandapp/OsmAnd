@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.gradient.DuplicateGradientTask;
 import net.osmand.plus.card.color.palette.gradient.DuplicateGradientTask.DuplicateGradientListener;
@@ -158,13 +159,13 @@ public class ColorPaletteHelper {
 					listener.collectingPalletFinished(colorPalette);
 				}
 			});
-			collectColorPalletTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(collectColorPalletTask);
 		}
 	}
 
 	public void duplicateGradient(@NonNull String colorPaletteFileName, @NonNull DuplicateGradientListener duplicateGradientListener) {
 		DuplicateGradientTask duplicateGradientTask = new DuplicateGradientTask(app, colorPaletteFileName, duplicateGradientListener);
-		duplicateGradientTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(duplicateGradientTask);
 	}
 
 	public void deleteGradient(@NonNull String colorPaletteFileName, @NonNull DeleteGradientListener deleteGradientListener) {

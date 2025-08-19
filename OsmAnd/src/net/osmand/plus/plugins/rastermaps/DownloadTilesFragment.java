@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,6 +32,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -681,7 +681,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			}
 			return true;
 		});
-		calculateMissingTilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(calculateMissingTilesTask);
 	}
 
 	private long getAllTilesCount() {

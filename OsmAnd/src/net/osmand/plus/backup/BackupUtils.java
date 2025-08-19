@@ -26,6 +26,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -106,7 +107,7 @@ public class BackupUtils {
 			// https://github.com/osmandapp/OsmAnd/commit/bf93162bd13ef7ab16622bb662c953e931c34a21
 			if (item instanceof FileSettingsItem fileItem) {
 				String subtypeFolder = fileItem.getSubtype().getSubtypeFolder();
-				if (subtypeFolder != null && fileItem.getFile().isDirectory()) {
+				if (subtypeFolder != null && FileUtils.isProbablyDir(fileItem.getFile())) {
 					subtypeFolders.add(fileItem);
 				}
 			}
@@ -150,8 +151,7 @@ public class BackupUtils {
 	@NonNull
 	public static String getItemFileName(@NonNull SettingsItem item) {
 		String fileName;
-		if (item instanceof FileSettingsItem) {
-			FileSettingsItem fileItem = (FileSettingsItem) item;
+		if (item instanceof FileSettingsItem fileItem) {
 			fileName = getFileItemName(fileItem);
 		} else {
 			fileName = item.getFileName();
@@ -159,10 +159,7 @@ public class BackupUtils {
 				fileName = item.getDefaultFileName();
 			}
 		}
-		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
-			fileName = fileName.substring(1);
-		}
-		return fileName;
+		return removeLeadingSlash(fileName);
 	}
 
 	@NonNull
@@ -184,6 +181,10 @@ public class BackupUtils {
 		} else {
 			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
 		}
+		return removeLeadingSlash(fileName);
+	}
+
+	public static String removeLeadingSlash(@Nullable String fileName) {
 		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
 			fileName = fileName.substring(1);
 		}

@@ -105,7 +105,9 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 				setupHeaderClick(currentGpxDisplayItem, convertView, nightMode);
 
 				overviewTextView.setTextColor(app.getColor(activeColorId));
+
 				SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
+				Integer slopeCount = currentGpxDisplayItem.analysis.getSlopeCount();
 
 				if (trackGroup != null && (trackGroup.isSplitDistance() || slopeType != null)) {
 					if (slopeType != null) {
@@ -121,14 +123,19 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 					overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
 
-					if (slopeType != null) {
+
+					if (slopeType != null && slopeCount != null) {
+						String slopeNumber = "#" + slopeCount;
 						String slopeName;
 						if (slopeType == SegmentSlopeType.FLAT) {
-							slopeName = getString(R.string.shared_string_flat);
+							String flat = getString(R.string.shared_string_flat);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, flat, slopeNumber);
 						} else if (slopeType == SegmentSlopeType.UPHILL) {
-							slopeName = getString(R.string.shared_string_uphill);
+							String uphill = getString(R.string.shared_string_uphill);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, uphill, slopeNumber);
 						} else {
-							slopeName = getString(R.string.shared_string_downhill);
+							String downhill = getString(R.string.shared_string_downhill);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, downhill, slopeNumber);
 						}
 
 						overviewTextView.append(" - " + slopeName);
@@ -343,6 +350,36 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 				} else {
 					speedDivider.setVisibility(View.GONE);
 					speedSection.setVisibility(View.GONE);
+				}
+
+				ViewGroup hrBlock = convertView.findViewById(R.id.hr_block);
+				View hrDivider = hrBlock.findViewById(R.id.divider);
+				View hrSection = hrBlock.findViewById(R.id.container);
+				if (analysis.getAvgSensorHr() > 0 || analysis.getMaxSensorHr() > 0 || analysis.getMinSensorHr() > 0) {
+					String avgHr = getString(R.string.ltr_or_rtl_combine_via_space, Math.round(analysis.getAvgSensorHr()), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.first_value))
+							.setText(avgHr);
+
+					String maxHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMaxSensorHr(), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.second_value))
+							.setText(maxHr);
+
+					String minHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMinSensorHr(), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.third_value))
+							.setText(minHr);
+
+					((ImageView) hrBlock.findViewById(R.id.first_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+					((ImageView) hrBlock.findViewById(R.id.second_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+					((ImageView) hrBlock.findViewById(R.id.third_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+
+					hrDivider.setVisibility(View.VISIBLE);
+					hrSection.setVisibility(View.VISIBLE);
+				} else{
+					hrDivider.setVisibility(View.GONE);
+					hrSection.setVisibility(View.GONE);
 				}
 			}
 		}

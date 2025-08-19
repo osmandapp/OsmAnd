@@ -13,6 +13,7 @@ import net.osmand.IProgress;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.*;
@@ -507,8 +508,8 @@ public class BackupHelper {
 			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
-			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
-					.executeOnExecutor(executor == null ? this.executor : executor).get();
+			OsmAndTaskManager.executeTask(new DeleteFilesCommand(this, remoteFiles, byVersion, listener),
+					executor == null ? this.executor : executor, null).get();
 		} catch (ExecutionException | InterruptedException e) {
 			if (listener != null) {
 				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));
@@ -687,7 +688,7 @@ public class BackupHelper {
 	@SuppressLint("StaticFieldLeak")
 	void collectLocalFiles(@Nullable OnCollectLocalFilesListener listener) {
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new CollectLocalFilesTask(app, listener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -695,6 +696,6 @@ public class BackupHelper {
 			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
 			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
 			@Nullable OnGenerateBackupInfoListener listener) {
-		new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener).executeOnExecutor(executor);
+		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener), executor);
 	}
 }

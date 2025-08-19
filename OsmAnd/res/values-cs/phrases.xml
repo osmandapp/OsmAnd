@@ -5130,4 +5130,16 @@
     <string name="poi_denomination_mariavite">Mariavita</string>
     <string name="poi_denomination_slavic">Slovanská</string>
     <string name="poi_denomination_celtic">Keltská</string>
+    <string name="poi_denomination_christadelphian">Kristadelfiánská</string>
+    <string name="poi_denomination_mission_covenant_church_of_sweden">Misijní církev ve Švédsku</string>
+    <string name="poi_denomination_gelug">Gelugpa</string>
+    <string name="poi_denomination_vajrayana">Vadžrajána</string>
+    <string name="poi_denomination_marthoma">Mar Thoma</string>
+    <string name="poi_denomination_free_methodist">Svobodná metodistická</string>
+    <string name="poi_denomination_churches_of_christ">Společenství Kristovo</string>
+    <string name="poi_denomination_kardecista">Kardecistická</string>
+    <string name="poi_denomination_free_church_of_scotland">Svobodná církev Skotska</string>
+    <string name="poi_denomination_catholic_apostolic">Katolická apoštolská</string>
+    <string name="poi_denomination_sephardi">Sefardská</string>
+    <string name="poi_denomination_welsh_independent">Waleská nezávislá</string>
 </resources>

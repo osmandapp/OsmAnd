@@ -7,15 +7,7 @@ import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
 import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
-import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.aidlapi.OsmandAidlConstants.*;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
@@ -29,12 +21,10 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
@@ -50,7 +40,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
@@ -73,6 +62,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -120,6 +110,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -151,25 +142,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class OsmandAidlApi {
@@ -463,11 +439,7 @@ public class OsmandAidlApi {
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
 		try {
 			receivers.put(filter, rec);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-				ma.registerReceiver(rec, new IntentFilter(filter), Context.RECEIVER_EXPORTED);
-			} else {
-				ma.registerReceiver(rec, new IntentFilter(filter));
-			}
+			AndroidUtils.registerBroadcastReceiver(ma, filter, rec, true);
 		} catch (IllegalStateException e) {
 			LOG.error(e);
 		}
@@ -1302,7 +1274,7 @@ public class OsmandAidlApi {
 		SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(destination.getAbsolutePath());
 		if (selectedGpx != null) {
 			if (show) {
-				new AsyncTask<File, Void, GpxFile>() {
+				OsmAndTaskManager.executeTask(new AsyncTask<File, Void, GpxFile>() {
 
 					@Override
 					protected GpxFile doInBackground(File... files) {
@@ -1320,7 +1292,7 @@ public class OsmandAidlApi {
 						}
 					}
 
-				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
+				}, destination);
 			} else {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
@@ -1328,7 +1300,7 @@ public class OsmandAidlApi {
 				refreshMap();
 			}
 		} else if (show) {
-			new AsyncTask<File, Void, GpxFile>() {
+			OsmAndTaskManager.executeTask(new AsyncTask<File, Void, GpxFile>() {
 
 				@Override
 				protected GpxFile doInBackground(File... files) {
@@ -1344,7 +1316,7 @@ public class OsmandAidlApi {
 					}
 				}
 
-			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
+			}, destination);
 		}
 	}
 
@@ -1464,10 +1436,10 @@ public class OsmandAidlApi {
 			};
 
 			if (f.exists()) {
-				asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+				OsmAndTaskManager.executeTask(asyncTask, f);
 				return true;
 			} else if (fi.exists()) {
-				asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fi);
+				OsmAndTaskManager.executeTask(asyncTask, fi);
 				return true;
 			}
 		}
@@ -2178,7 +2150,7 @@ public class OsmandAidlApi {
 		};
 		stopLogcatTask(id);
 		LogcatAsyncTask task = new LogcatAsyncTask(listener, filterLevel);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 		logcatAsyncTasks.put(id, task);
 	}
 
@@ -2312,7 +2284,7 @@ public class OsmandAidlApi {
 			trackBitmapDrawer.initAndDraw();
 			return false;
 		});
-		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(gpxAsyncLoaderTask);
 	}
 
 	private final Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();

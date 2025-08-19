@@ -104,9 +104,11 @@ import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.GeneralRouter;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -1123,6 +1125,16 @@ public class OsmandSettings {
 		@Override
 		public MetricsConstants getProfileDefaultValue(ApplicationMode mode) {
 			return DRIVING_REGION.getModeValue(mode).defMetrics;
+		}
+	}.makeProfile();
+
+	public final EnumStringPreference<AltitudeMetrics> ALTITUDE_METRIC = (EnumStringPreference<AltitudeMetrics>) new EnumStringPreference<AltitudeMetrics>(this,
+			"altitude_metrics", AltitudeMetrics.METERS, AltitudeMetrics.values()) {
+
+		@Override
+		public AltitudeMetrics getProfileDefaultValue(ApplicationMode mode) {
+			MetricsConstants mc = METRIC_SYSTEM.getModeValue(mode);
+			return AltitudeMetrics.Companion.fromMetricsConstant(mc);
 		}
 	}.makeProfile();
 
@@ -3465,4 +3477,33 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> CONTEXT_GALLERY_SPAN_GRID_COUNT_LANDSCAPE = new IntPreference(this, "context_gallery_span_grid_count_landscape", 7).makeProfile();
 
 	public final CommonPreference<Boolean> ENABLE_MSAA = new BooleanPreference(this, "enable_msaa", false).makeGlobal().makeShared().cache();
+
+	@NonNull
+	public OsmandPreference<Boolean> getAllowPrivatePreference(@NonNull ApplicationMode appMode) {
+		String derivedProfile = appMode.getDerivedProfile();
+		CommonPreference<Boolean> allowPrivate =
+				getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
+		CommonPreference<Boolean> allowPrivateForTruck =
+				getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK, false);
+		return Algorithms.objectEquals(derivedProfile, "truck") ? allowPrivateForTruck : allowPrivate;
+	}
+
+	public void setPrivateAccessRoutingAsked() {
+		List<ApplicationMode> modes = ApplicationMode.values(ctx);
+		for (ApplicationMode mode : modes) {
+			if (!getAllowPrivatePreference(mode).getModeValue(mode)) {
+				FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
+			}
+		}
+	}
+
+	public void setAllowPrivateAccessAllModes(boolean allow) {
+		List<ApplicationMode> modes = ApplicationMode.values(ctx);
+		for (ApplicationMode mode : modes) {
+			OsmandPreference<Boolean> preference = getAllowPrivatePreference(mode);
+			if (preference.getModeValue(mode) != allow) {
+				preference.setModeValue(mode, allow);
+			}
+		}
+	}
 }

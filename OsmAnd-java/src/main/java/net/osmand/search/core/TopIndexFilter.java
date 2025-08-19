@@ -25,7 +25,7 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 
 	@Override
 	public boolean accept(PoiSubType poiSubType, String value) {
-		return this.poiSubType.name.equals(poiSubType.name) && this.value.equals(value);
+		return this.poiSubType.name.equals(poiSubType.name) && this.value.equalsIgnoreCase(value);
 	}
 	
 	public String getTag() {
@@ -57,7 +57,7 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 		if (!(other instanceof TopIndexFilter that)) {
 			return false;
 		}
-		return this.tag.equals(that.tag) && this.value.equals(that.value);
+		return this.tag.equals(that.tag) && this.value.equalsIgnoreCase(that.value);
 	}
 
 	@Override

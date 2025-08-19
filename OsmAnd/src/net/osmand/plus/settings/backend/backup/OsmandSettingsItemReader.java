@@ -27,7 +27,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 												   @NonNull JSONObject json) throws JSONException;
 
 	@Override
-	public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+	public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 	                           @Nullable String entryName) throws IOException, IllegalArgumentException {
 		StringBuilder buf = new StringBuilder();
 		try {
@@ -50,6 +50,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 			throw new IllegalArgumentException("Json parse error", e);
 		}
 		readPreferencesFromJson(json);
+		return null;
 	}
 
 	public abstract void readPreferencesFromJson(@NonNull JSONObject json);

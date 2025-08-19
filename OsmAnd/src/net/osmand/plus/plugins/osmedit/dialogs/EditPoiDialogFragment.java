@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -52,12 +51,12 @@ import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.utils.CollatorFilteredAdapter;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.CommitEntityTask;
 import net.osmand.plus.plugins.osmedit.asynctasks.LoadEntityTask;
@@ -69,6 +68,7 @@ import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.CollatorFilteredAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -528,7 +528,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 		CommitEntityTask task = new CommitEntityTask(activity, osmUtil, entity, action, info,
 				comment, closeChangeSet, changedTags, callback);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	public void setPoiCategory(PoiCategory type) {
@@ -627,7 +627,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 			return false;
 		});
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	private final TextView.OnEditorActionListener mOnEditorActionListener =

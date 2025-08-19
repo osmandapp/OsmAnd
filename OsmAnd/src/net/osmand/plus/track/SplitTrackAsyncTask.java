@@ -224,13 +224,13 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 	                                                   double splitDistance, boolean upDownHills, boolean joinSegments) {
 		TrackPointsAnalyser pointsAnalyser = getTrackPointsAnalyser();
 		if (upDownHills) {
-			List<GpxTrackAnalysis> trackAnalyses = segment.splitByUpDownHills();
+			List<GpxTrackAnalysis> trackAnalyses = segment.splitByUpDownHills(pointsAnalyser);
 			return trackAnalyses.toArray(new GpxTrackAnalysis[0]);
 		} else if (splitDistance > 0) {
-			List<GpxTrackAnalysis> trackAnalyses = segment.splitByDistance(splitDistance, joinSegments);
+			List<GpxTrackAnalysis> trackAnalyses = segment.splitByDistance(splitDistance, joinSegments, pointsAnalyser);
 			return trackAnalyses.toArray(new GpxTrackAnalysis[0]);
 		} else if (splitTime > 0) {
-			List<GpxTrackAnalysis> trackAnalyses = segment.splitByTime(splitTime, joinSegments);
+			List<GpxTrackAnalysis> trackAnalyses = segment.splitByTime(splitTime, joinSegments, pointsAnalyser);
 			return trackAnalyses.toArray(new GpxTrackAnalysis[0]);
 		} else {
 			return new GpxTrackAnalysis[] {
