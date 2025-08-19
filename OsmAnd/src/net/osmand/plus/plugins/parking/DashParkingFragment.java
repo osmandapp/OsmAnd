@@ -3,13 +3,13 @@ package net.osmand.plus.plugins.parking;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
@@ -46,8 +46,8 @@ public class DashParkingFragment extends DashLocationFragment {
 			SHOULD_SHOW_FUNCTION, 50, null);
 
 	@Override
-	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_parking_fragment, container, false);
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
+		View view = inflate(R.layout.dash_parking_fragment, container, false);
 		Button remove = view.findViewById(R.id.remove_tag);
 		remove.setOnClickListener(v -> {
 			if (plugin != null) {
@@ -67,9 +67,9 @@ public class DashParkingFragment extends DashLocationFragment {
 			PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_PARKING_MARKER,
 					getString(R.string.osmand_parking_position_name));
 
-			getMyApplication().getSettings().setMapLocationToShow(lat, lon,
+			settings.setMapLocationToShow(lat, lon,
 					15, pointDescription, false, parkingPosition);
-			MapActivity.launchMapActivityMoveToTop(getActivity());
+			MapActivity.launchMapActivityMoveToTop(requireActivity());
 		});
 		return view;
 	}
@@ -82,9 +82,8 @@ public class DashParkingFragment extends DashLocationFragment {
 
 	private void updateParkingPosition() {
 		View mainView = getView();
-		if (mainView == null) {
-			return;
-		}
+		if (mainView == null) return;
+
 		if (plugin == null || plugin.getParkingPosition() == null) {
 			mainView.setVisibility(View.GONE);
 			return;
@@ -140,13 +139,13 @@ public class DashParkingFragment extends DashLocationFragment {
 		if (hours > 0) {
 			timeStringBuilder.append(hours);
 			timeStringBuilder.append(" ");
-			timeStringBuilder.append(getResources().getString(R.string.osmand_parking_hour));
+			timeStringBuilder.append(getString(R.string.osmand_parking_hour));
 		}
 
 		timeStringBuilder.append(" ");
 		timeStringBuilder.append(minutes);
 		timeStringBuilder.append(" ");
-		timeStringBuilder.append(getResources().getString(R.string.shared_string_minute_lowercase));
+		timeStringBuilder.append(getString(R.string.shared_string_minute_lowercase));
 
 		return timeStringBuilder.toString();
 	}

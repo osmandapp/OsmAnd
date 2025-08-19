@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.base.BaseNestedFragment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.Amenity;
@@ -17,7 +17,6 @@ import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter;
@@ -29,12 +28,11 @@ import net.osmand.util.MapUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	private MapMarkersActiveAdapter adapter;
 	private Location location;
@@ -44,11 +42,12 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
 
-		View mainView = inflater.inflate(R.layout.fragment_map_markers_active, container, false);
+		View mainView = inflate(R.layout.fragment_map_markers_active, container, false);
 		EmptyStateRecyclerView recyclerView = mainView.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -68,7 +67,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 				}
 
 				MapMarker marker = adapter.getItem(pos);
-				if (app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+				if (settings.SELECT_MARKER_ON_SINGLE_TAP.get()) {
 					app.getMapMarkersHelper().moveMarkerToTop(marker);
 					updateAdapter();
 				} else {
@@ -97,7 +96,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			}
 
 			private void showMap(LatLon latLon, PointDescription desc, Object objToShow) {
-				app.getSettings().setMapLocationToShow(latLon.getLatitude(),
+				settings.setMapLocationToShow(latLon.getLatitude(),
 						latLon.getLongitude(), 15, desc, true, objToShow);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);
 				((DialogFragment) getParentFragment()).dismiss();
@@ -129,7 +128,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 		View emptyView = mainView.findViewById(R.id.empty_view);
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		emptyImageView.setImageResource(nightMode
 				? R.drawable.ic_empty_state_marker_list_night
 				: R.drawable.ic_empty_state_marker_list_day);
@@ -178,13 +176,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		}
 	}
 
-	private OsmandApplication getMyApplication() {
-		if (getActivity() != null) {
-			return ((MapActivity) getActivity()).getMyApplication();
-		}
-		return null;
-	}
-
 	void setShowDirectionEnabled(boolean showDirectionEnabled) {
 		if (adapter != null) {
 			adapter.setShowDirectionEnabled(showDirectionEnabled);
@@ -220,7 +211,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	}
 
 	void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		if (app != null && !locationUpdateStarted) {
 			locationUpdateStarted = true;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
@@ -232,7 +222,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	}
 
 	void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		if (app != null && locationUpdateStarted) {
 			locationUpdateStarted = false;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();

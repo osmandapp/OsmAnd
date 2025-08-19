@@ -200,7 +200,7 @@ public class QuickAction {
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 	}
 
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
 	}
 
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {

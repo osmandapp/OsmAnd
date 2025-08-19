@@ -37,11 +37,10 @@ public class ScreenTimeoutBottomSheet extends BooleanPreferenceBottomSheet {
 				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_right_icon)
 				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
+					callActivity(activity -> {
 						Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
 						AndroidUtils.startActivityIfSafe(activity, intent);
-					}
+					});
 				})
 				.create();
 		items.add(preferenceDescription);
@@ -51,7 +50,7 @@ public class ScreenTimeoutBottomSheet extends BooleanPreferenceBottomSheet {
 	                                @Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
 	                                boolean profileDependent) {
 		try {
-			if (fm.findFragmentByTag(TAG) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fm, TAG, true)) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
 

@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -56,7 +56,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchWidgetListener {
+public class SearchWidgetsFragment extends BaseFullScreenFragment implements SearchWidgetListener {
 
 	public static final String TAG = SearchWidgetsFragment.class.getSimpleName();
 
@@ -121,7 +121,7 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_search_widgets, container, false);
+		View view = inflate(R.layout.fragment_search_widgets, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMapActivity(), view);
 		actionButton = view.findViewById(R.id.clearButton);
 		backButton = view.findViewById(R.id.back_button);
@@ -259,11 +259,6 @@ public class SearchWidgetsFragment extends BaseOsmAndFragment implements SearchW
 		return searchMode
 				? ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode)
 				: ColorUtilities.getDefaultIconColor(app, nightMode);
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
 	}
 
 	@NonNull

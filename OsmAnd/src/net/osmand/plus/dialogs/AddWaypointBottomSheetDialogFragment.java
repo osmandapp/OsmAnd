@@ -1,23 +1,23 @@
 package net.osmand.plus.dialogs;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -33,10 +33,10 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Bundle args = getArguments();
+		Bundle args = requireArguments();
 		LatLon latLon = new LatLon(args.getDouble(LAT_KEY), args.getDouble(LON_KEY));
 		PointDescription name = PointDescription.deserializeFromString(args.getString(POINT_DESCRIPTION_KEY), latLon);
-		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 
 		items.add(new TitleItem(getString(R.string.new_destination_point_dialog)));
 
@@ -101,13 +101,10 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setIcon(getLastIntermDistIcon())
 				.setTitle(getString(R.string.add_as_last_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						targetPointsHelper.navigateToPoint(latLon, true,
-								targetPointsHelper.getIntermediatePoints().size(), name);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					targetPointsHelper.navigateToPoint(latLon, true,
+							targetPointsHelper.getIntermediatePoints().size(), name);
+					dismiss();
 				})
 				.create();
 		items.add(lastIntermItem);
@@ -153,27 +150,37 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	}
 
 	private String getCurrentPointName(@Nullable TargetPoint point, boolean start) {
-		Context ctx = getContext();
-		StringBuilder builder = new StringBuilder(ctx.getString(R.string.shared_string_current));
+		StringBuilder builder = new StringBuilder(getString(R.string.shared_string_current));
 		builder.append(": ");
 		if (point != null) {
-			if (point.getOnlyName().length() > 0) {
+			if (!point.getOnlyName().isEmpty()) {
 				builder.append(point.getOnlyName());
 			} else {
-				builder.append(ctx.getString(R.string.route_descr_map_location));
+				builder.append(getString(R.string.route_descr_map_location));
 				builder.append(" ");
-				builder.append(ctx.getString(R.string.route_descr_lat_lon, point.getLatitude(), point.getLongitude()));
+				builder.append(getString(R.string.route_descr_lat_lon, point.getLatitude(), point.getLongitude()));
 			}
 		} else if (start) {
-			builder.append(ctx.getString(R.string.shared_string_my_location));
+			builder.append(getString(R.string.shared_string_my_location));
 		}
 		return builder.toString();
 	}
 
 	private void closeContextMenu() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).getContextMenu().close();
+		callMapActivity(mapActivity -> mapActivity.getContextMenu().close());
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                double lat, double lon, @NonNull PointDescription name) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putDouble(LAT_KEY, lat);
+			args.putDouble(LON_KEY, lon);
+			args.putString(POINT_DESCRIPTION_KEY, PointDescription.serializeToString(name));
+			AddWaypointBottomSheetDialogFragment fragment = new AddWaypointBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
 		}
 	}
 }

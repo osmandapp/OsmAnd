@@ -584,7 +584,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		dashboardOnMap.updateLocation(true, true, false);
 
 		if (!dashboardOnMap.isVisible()) {
-			if (RenderInitErrorBottomSheet.shouldShow(settings, this)) {
+			if (RenderInitErrorBottomSheet.shouldShow(app)) {
 				SecondSplashScreenFragment.SHOW = false;
 				RenderInitErrorBottomSheet.showInstance(fragmentManager);
 			} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
@@ -732,7 +732,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			disableDrawer();
 		}
 
-		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(this)) {
+		if (showWelcomeScreen && FirstUsageWizardFragment.showInstance(this)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);

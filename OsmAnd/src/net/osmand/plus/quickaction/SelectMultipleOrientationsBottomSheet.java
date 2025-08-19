@@ -12,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -22,6 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -64,10 +65,8 @@ public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomS
 
 	private void adCompassButton(@NonNull CompassMode compassMode) {
 		Context context = requireContext();
-		OsmandApplication app = requiredMyApplication();
-		View itemView = UiUtilities.getInflater(requireContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp, null);
-		itemView.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_large_list_item_height));
+		View itemView = inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp);
+		itemView.setMinimumHeight(getDimensionPixelSize(R.dimen.bottom_sheet_large_list_item_height));
 
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		int disableColorId = ColorUtilities.getDefaultIconColorId(nightMode);
@@ -85,14 +84,13 @@ public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomS
 
 		Drawable drawableIcon;
 		if (disabled) {
-			drawableIcon = app.getUIUtilities().getPaintedIcon(
-					compassMode.getIconId(nightMode), disableColor);
+			drawableIcon = getPaintedIcon(compassMode.getIconId(nightMode), disableColor);
 		} else {
-			drawableIcon = app.getUIUtilities().getIcon(compassMode.getIconId(nightMode));
+			drawableIcon = getIcon(compassMode.getIconId(nightMode));
 		}
 
 		ivIcon.setImageDrawable(drawableIcon);
-		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(context,
+		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getColor(context,
 				disabled ? disableColorId : activeColorId), compoundButton);
 		compoundButton.setSaveEnabled(false);
 		compoundButton.setChecked(disabled || selected);
@@ -135,14 +133,14 @@ public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomS
 	@Override
 	protected void onRightBottomButtonClick() {
 		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof CallbackWithObject) {
+		if (targetFragment instanceof CallbackWithObject callback) {
 			List<String> newSelected = new ArrayList<>();
 			for (String mode : selectedModes) {
 				if (!disabledModes.contains(mode)) {
 					newSelected.add(mode);
 				}
 			}
-			((CallbackWithObject) targetFragment).processResult(newSelected);
+			callback.processResult(newSelected);
 		}
 		dismiss();
 	}
@@ -151,16 +149,18 @@ public class SelectMultipleOrientationsBottomSheet extends BasePreferenceBottomS
 	                                @Nullable List<String> selectedModes,
 	                                @Nullable List<String> disabledModes,
 	                                boolean usedOnMap) {
-		SelectMultipleOrientationsBottomSheet fragment = new SelectMultipleOrientationsBottomSheet();
-		Bundle args = new Bundle();
-		args.putStringArrayList(SELECTED_KEYS, selectedModes != null ?
-				new ArrayList<>(selectedModes) : new ArrayList<>());
-		args.putStringArrayList(DISABLED_KEYS, disabledModes != null ?
-				new ArrayList<>(disabledModes) : new ArrayList<>());
-		fragment.setArguments(args);
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectMultipleOrientationsBottomSheet fragment = new SelectMultipleOrientationsBottomSheet();
+			Bundle args = new Bundle();
+			args.putStringArrayList(SELECTED_KEYS, selectedModes != null ?
+					new ArrayList<>(selectedModes) : new ArrayList<>());
+			args.putStringArrayList(DISABLED_KEYS, disabledModes != null ?
+					new ArrayList<>(disabledModes) : new ArrayList<>());
+			fragment.setArguments(args);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
-
 }

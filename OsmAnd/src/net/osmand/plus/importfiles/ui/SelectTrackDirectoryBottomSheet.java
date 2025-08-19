@@ -4,7 +4,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -45,15 +43,12 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 	private static final String SELECTED_DIRECTORY_KEY = "selected_directory_key";
 	private static final String SUGGESTED_DIRECTORY_KEY = "suggested_directory_key";
 
-	private OsmandApplication app;
-
 	private String selectedFolder;
 	private String suggestedDirName;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 
 		if (savedInstanceState != null) {
 			selectedFolder = savedInstanceState.getString(SELECTED_DIRECTORY_KEY);
@@ -63,8 +58,6 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.select_category_descr))
 				.setTitle(getString(R.string.all_groups))
@@ -73,13 +66,13 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		items.add(titleItem);
 
 		items.add(new DividerSpaceItem(app, AndroidUtils.dpToPx(app, 12)));
-		createAddFolderItem(inflater);
+		createAddFolderItem();
 		items.add(new SimpleDividerItem(app));
-		createFoldersItem(inflater);
+		createFoldersItem();
 	}
 
-	private void createAddFolderItem(@NonNull LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.bottom_sheet_item_simple_pad_32dp, null);
+	private void createAddFolderItem() {
+		View view = inflate(R.layout.bottom_sheet_item_simple_pad_32dp);
 		TextView title = view.findViewById(R.id.title);
 		title.setTypeface(FontCache.getMediumFont());
 
@@ -99,25 +92,26 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		items.add(item);
 	}
 
-	private void createFoldersItem(@NonNull LayoutInflater inflater) {
+	private void createFoldersItem() {
 		List<File> folders = new ArrayList<>();
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		folders.add(gpxDir);
 		Algorithms.collectDirs(gpxDir, folders);
 
-		View view = inflater.inflate(R.layout.favorite_categories_dialog, null);
+		View view = inflate(R.layout.favorite_categories_dialog);
 		LinearLayout container = view.findViewById(R.id.list_container);
 
 		for (File dir : folders) {
-			container.addView(createFolderView(inflater, dir));
+			container.addView(createFolderView(dir));
 		}
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
 				.create());
 	}
 
-	private View createFolderView(@NonNull LayoutInflater inflater, @NonNull File folder) {
-		View view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
+	@NonNull
+	private View createFolderView(@NonNull File folder) {
+		View view = inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn);
 		AndroidUtils.setPadding(view, 0, 0, 0, 0);
 
 		TextView text = view.findViewById(R.id.title);
@@ -132,9 +126,8 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), compoundButton);
 
 		view.setOnClickListener(v -> {
-			Fragment target = getTargetFragment();
-			if (target instanceof FolderSelectionListener) {
-				((FolderSelectionListener) target).onFolderSelected(folder);
+			if (getTargetFragment() instanceof FolderSelectionListener listener) {
+				listener.onFolderSelected(folder);
 			}
 			dismiss();
 		});
@@ -142,7 +135,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_folder));
 
-		int padding = AndroidUtils.dpToPx(app, 8f);
+		int padding = dpToPx(8f);
 		AndroidUtils.setPadding(view.findViewById(R.id.icon), 0, 0, padding, 0);
 
 		return view;
@@ -170,9 +163,8 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 
 	@Override
 	public void onTrackFolderAdd(String folderName) {
-		Fragment target = getTargetFragment();
-		if (target instanceof OnTrackFolderAddListener) {
-			((OnTrackFolderAddListener) target).onTrackFolderAdd(folderName);
+		if (getTargetFragment() instanceof OnTrackFolderAddListener listener) {
+			listener.onTrackFolderAdd(folderName);
 		}
 		dismiss();
 	}

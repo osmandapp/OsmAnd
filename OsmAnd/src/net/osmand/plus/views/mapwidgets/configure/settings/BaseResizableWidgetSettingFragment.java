@@ -5,7 +5,6 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -47,9 +46,9 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 	}
 
 	@Override
-	protected void setupTopContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupTopContent(@NonNull ViewGroup container) {
 		if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing resizableWidget && resizableWidget.allowResize()) {
-			themedInflater.inflate(R.layout.resizable_widget_setting, container);
+			inflate(R.layout.resizable_widget_setting, container);
 
 			TextView height = container.findViewById(R.id.height);
 			height.setText(R.string.shared_string_height);

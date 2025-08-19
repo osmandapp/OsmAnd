@@ -39,7 +39,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -55,7 +55,7 @@ import net.osmand.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBackupListener, OnBackupSyncListener {
+public class ChangesFragment extends BaseFullScreenFragment implements OnPrepareBackupListener, OnBackupSyncListener {
 
 	public static final String TAG = ChangesFragment.class.getSimpleName();
 
@@ -83,7 +83,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_changes, container, false);
+		View view = inflate(R.layout.fragment_osmand_cloud_changes, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		buttonsContainer = view.findViewById(R.id.buttons_container);
@@ -231,7 +231,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 				int activeColor = ColorUtilities.getButtonSecondaryTextColor(app, nightMode);
 
 				TextView textView = button.findViewById(R.id.button_text);
-				Drawable icon = getPaintedContentIcon(tabType.buttonIconId, enabled ? activeColor : defaultColor);
+				Drawable icon = getPaintedIcon(tabType.buttonIconId, enabled ? activeColor : defaultColor);
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 				textView.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.content_padding_small));
 			}
@@ -332,11 +332,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public enum RecentChangesType {

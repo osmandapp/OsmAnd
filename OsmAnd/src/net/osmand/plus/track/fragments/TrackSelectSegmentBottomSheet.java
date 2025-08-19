@@ -2,13 +2,11 @@ package net.osmand.plus.track.fragments;
 
 import static net.osmand.plus.helpers.TrackSelectSegmentAdapter.GpxItem;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,7 +18,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -32,7 +29,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -42,7 +38,6 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 
 	public static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
 	private GpxFile gpxFile;
 	private OnSegmentSelectedListener onSegmentSelectedListener;
 
@@ -53,15 +48,8 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		Context context = requireContext();
-
-		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
-		View itemView = inflater.inflate(R.layout.bottom_sheet_select_segment, null, false);
-
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(itemView)
-				.create());
+		View itemView = inflate(R.layout.bottom_sheet_select_segment);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(itemView).create());
 
 		setupTrackRow(itemView);
 		setupItemsList(itemView);
@@ -85,8 +73,8 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		ImageView icon = routesContainer.findViewById(R.id.icon);
-		int sidePadding = AndroidUtils.dpToPx(app, 16f);
-		int bottomTopPadding = AndroidUtils.dpToPx(app, 2f);
+		int sidePadding = dpToPx(16f);
+		int bottomTopPadding = dpToPx(2f);
 
 		LinearLayout readContainer = routesContainer.findViewById(R.id.read_section);
 		readContainer.setPadding(0, bottomTopPadding, 0, bottomTopPadding);
@@ -156,8 +144,9 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		return gpxFile.getNonEmptySegmentsCount() > 1 || gpxFile.getRoutes().size() > 1;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GpxFile gpxFile, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
-		if (!fragmentManager.isStateSaved()) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GpxFile gpxFile,
+	                                @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			TrackSelectSegmentBottomSheet fragment = new TrackSelectSegmentBottomSheet();
 			fragment.setRetainInstance(true);
 			fragment.onSegmentSelectedListener = onSegmentSelectedListener;

@@ -389,12 +389,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 			Intent intent = new Intent(ACTION_VIEW, uri)
 					.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			if (!AndroidUtils.startActivityIfSafe(app, intent)) {
-				new MapillaryInstallDialogFragment()
-						.show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
+				MapillaryInstallDialogFragment.showInstance(activity);
 			}
 			success = true;
 		} else {
-			new MapillaryInstallDialogFragment().show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
+			MapillaryInstallDialogFragment.showInstance(activity);
 		}
 		return success;
 	}

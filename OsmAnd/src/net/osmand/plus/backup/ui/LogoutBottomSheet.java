@@ -62,7 +62,7 @@ public class LogoutBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public int getFirstDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+		return getDimensionPixelSize(R.dimen.dialog_content_margin);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target) {

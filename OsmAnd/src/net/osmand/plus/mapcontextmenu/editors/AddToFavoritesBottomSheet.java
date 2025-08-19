@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -28,20 +27,15 @@ public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment imp
 	private static final String TAG = AddToFavoritesBottomSheet.class.getName();
 
 	protected GpxDisplayGroup group;
-	private OsmandApplication app;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new TitleItem(app.getString(R.string.add_to_favorites)));
-		items.add(createCopyToFavoritesItem());
-		items.add(new DividerHalfItem(app));
-		items.add(createAddToFavorites());
+		callActivity(activity -> {
+			items.add(new TitleItem(getString(R.string.add_to_favorites)));
+			items.add(createCopyToFavoritesItem());
+			items.add(new DividerHalfItem(activity));
+			items.add(createAddToFavorites());
+		});
 	}
 
 	@NonNull
@@ -50,13 +44,10 @@ public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment imp
 				.setIcon(getContentIcon(R.drawable.ic_action_folder_add))
 				.setTitle(getString(R.string.copy_as_new_folder))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager manager = getParentFragmentManager();
-						CopyTrackGroupToFavoritesBottomSheet.showInstance(manager, this, group);
-					}
-				})
+				.setOnClickListener(v -> callActivity(activity -> {
+					FragmentManager manager = getParentFragmentManager();
+					CopyTrackGroupToFavoritesBottomSheet.showInstance(manager, this, group);
+				}))
 				.create();
 	}
 
@@ -66,25 +57,22 @@ public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment imp
 				.setIcon(getContentIcon(R.drawable.ic_action_folder_open))
 				.setTitle(getString(R.string.add_to_a_folder))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager manager = activity.getSupportFragmentManager();
-						SelectFavouriteGroupBottomSheet.showInstance(manager, null, new CategorySelectionListener() {
-							@Override
-							public void onCategorySelected(PointsGroup pointsGroup) {
-								FavouritesHelper favouritesHelper = app.getFavoritesHelper();
-								favouritesHelper.copyToFavorites(group, pointsGroup.getName());
-								onTrackGroupChanged();
-							}
+				.setOnClickListener(v -> callActivity(activity -> {
+					FragmentManager manager = activity.getSupportFragmentManager();
+					SelectFavouriteGroupBottomSheet.showInstance(manager, null, new CategorySelectionListener() {
+						@Override
+						public void onCategorySelected(PointsGroup pointsGroup) {
+							FavouritesHelper favouritesHelper = app.getFavoritesHelper();
+							favouritesHelper.copyToFavorites(group, pointsGroup.getName());
+							onTrackGroupChanged();
+						}
 
-							@Override
-							public void onAddGroupOpened() {
-								dismiss();
-							}
-						});
-					}
-				})
+						@Override
+						public void onAddGroupOpened() {
+							dismiss();
+						}
+					});
+				}))
 				.create();
 	}
 

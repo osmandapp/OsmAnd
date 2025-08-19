@@ -699,9 +699,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (card instanceof PublicTransportNotFoundWarningCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof PublicTransportNotFoundSettingsWarningCard) {
-				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
-				avoidRoadsFragment.setHideImpassableRoads(true);
-				avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
+				AvoidRoadsBottomSheetDialogFragment.showInstance(mapActivity, null, null, true, null);
 			} else if (card instanceof PedestrianRouteCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			} else if (card instanceof AttachTrackToRoadsBannerCard) {
@@ -1888,8 +1886,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void openFollowTrackFragment(@NonNull MapActivity mapActivity) {
-		FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-		FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
+		FollowTrackFragment.showInstance(mapActivity);
 	}
 
 	private OnSegmentSelectedListener getOnSegmentSelectedListener() {
@@ -1922,8 +1919,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
 		if (mapActivity != null) {
-			FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-			FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
+			openFollowTrackFragment(mapActivity);
 		}
 		updateCards();
 	}
@@ -1984,8 +1980,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				selectNavPointController.selectMapMarker(mapActivity, marker, pointType);
 				updateMenu();
 			} else {
-				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
-				selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
+				MapMarkerSelectionFragment.showInstance(mapActivity, pointType);
 			}
 		}
 	}

@@ -15,14 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
@@ -35,16 +33,6 @@ import net.osmand.plus.utils.UiUtilities;
 public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet {
 
 	private static final String TAG = BooleanRadioButtonsBottomSheet.class.getSimpleName();
-
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		settings = app.getSettings();
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -63,14 +51,14 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 					.create();
 			items.add(headerItem);
 		}
-		items.add(getRadioButtonItem(switchPreference, true));
-		items.add(getRadioButtonItem(switchPreference, false));
+		items.add(createRadioButtonItem(switchPreference, true));
+		items.add(createRadioButtonItem(switchPreference, false));
 
 		updatePreferenceButtons(switchPreference.isChecked());
 	}
 
 	@NonNull
-	private BaseBottomSheetItem getRadioButtonItem(@NonNull SwitchPreferenceEx preference, boolean enabled) {
+	private BaseBottomSheetItem createRadioButtonItem(@NonNull SwitchPreferenceEx preference, boolean enabled) {
 		return new BottomSheetItemWithCompoundButton.Builder()
 				.setCustomView(getCustomRadioButtonView(preference, enabled))
 				.setOnClickListener(v -> onRadioButtonClick(v, preference)).create();
@@ -78,14 +66,14 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 
 	@NonNull
 	public View getCustomRadioButtonView(@NonNull SwitchPreferenceEx preference, boolean enabled) {
-		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.dialog_list_item_with_compound_button, null);
+		View view = inflate(R.layout.dialog_list_item_with_compound_button);
 		view.setTag(enabled);
 
 		TextView textView = view.findViewById(R.id.text);
 		textView.setText(getSummary(preference, enabled));
-		textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimensionPixelSize(R.dimen.default_list_text_size));
 
-		int margin = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int margin = getDimensionPixelSize(R.dimen.content_padding_small);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
 		params.gravity = Gravity.CENTER_VERTICAL;
 		params.setMargins(margin, 0, margin, 0);
@@ -93,7 +81,7 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 
 		int color = getAppMode().getProfileColor(nightMode);
 		LinearLayout button = view.findViewById(R.id.button);
-		button.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
+		button.setMinimumHeight(getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 		AndroidUtils.setBackground(button, UiUtilities.getColoredSelectableDrawable(app, color, 0.3f));
 
 		AndroidUiHelper.setVisibility(View.VISIBLE, view.findViewById(R.id.radio));
@@ -104,18 +92,17 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 	private void onRadioButtonClick(@NonNull View view, @NonNull SwitchPreferenceEx preference) {
 		boolean newValue = (boolean) view.getTag();
 		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof OnConfirmPreferenceChange) {
+		if (targetFragment instanceof OnConfirmPreferenceChange confirmationInterface) {
 			ApplyQueryType applyQueryType = getApplyQueryType();
 			if (applyQueryType == ApplyQueryType.SNACK_BAR) {
 				applyQueryType = ApplyQueryType.NONE;
 			}
-			OnConfirmPreferenceChange confirmationInterface = (OnConfirmPreferenceChange) targetFragment;
 			if (confirmationInterface.onConfirmPreferenceChange(preference.getKey(), newValue, applyQueryType)) {
 				preference.setChecked(newValue);
 				updatePreferenceButtons(newValue);
 
-				if (targetFragment instanceof OnPreferenceChanged) {
-					((OnPreferenceChanged) targetFragment).onPreferenceChanged(preference.getKey());
+				if (targetFragment instanceof OnPreferenceChanged listener) {
+					listener.onPreferenceChanged(preference.getKey());
 				}
 			}
 		}

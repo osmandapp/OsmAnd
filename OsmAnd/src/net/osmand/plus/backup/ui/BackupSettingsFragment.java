@@ -30,7 +30,7 @@ import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDeleteFilesListener,
+public class BackupSettingsFragment extends BaseFullScreenFragment implements OnDeleteFilesListener,
 		OnConfirmDeletionListener, OnPrepareBackupListener {
 
 	public static final String TAG = BackupSettingsFragment.class.getSimpleName();
@@ -76,7 +76,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_backup_settings, container);
+		View view = inflate(R.layout.fragment_backup_settings, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
 
