@@ -76,7 +76,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_backup_settings, container, false);
+		View view = inflate(R.layout.fragment_backup_settings, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
 
@@ -136,7 +136,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				BackupTypesFragment.showInstance(activity.getSupportFragmentManager());
+				BackupDataController.showScreen(activity);
 			}
 		});
 		setupSelectableBackground(container);
@@ -188,7 +188,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				VersionHistoryFragment.showInstance(activity.getSupportFragmentManager());
+				VersionHistoryController.showScreen(activity);
 			}
 		});
 		setupSelectableBackground(container);
