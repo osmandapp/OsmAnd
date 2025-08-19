@@ -19,8 +19,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.util.EnumSet;
 
 public class LogcatActivity extends BaseLogcatActivity {
 
@@ -40,7 +43,13 @@ public class LogcatActivity extends BaseLogcatActivity {
 		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.recyclerview);
+		setContentView(R.layout.logcat_activity);
+
+		View root = findViewById(R.id.root);
+		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
+				InsetsUtils.InsetSide.TOP,
+				InsetsUtils.InsetSide.BOTTOM
+		));
 
 		ActionBar supportActionBar = getSupportActionBar();
 		if (supportActionBar != null) {

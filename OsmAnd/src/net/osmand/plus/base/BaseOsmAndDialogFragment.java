@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
@@ -44,6 +46,12 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		nightMode = resolveNightMode();
 		Context themedCtx = new ContextThemeWrapper(requireActivity(), getDialogThemeId());
 		themedInflater = LayoutInflater.from(themedCtx);
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		AndroidUtils.addStatusBarPadding21v(null, view);
 	}
 
 	@Override

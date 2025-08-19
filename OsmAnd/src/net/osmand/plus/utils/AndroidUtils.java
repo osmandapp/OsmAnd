@@ -786,21 +786,11 @@ public class AndroidUtils {
 		return cutoutHeight;
 	}
 
-	public static void addStatusBarPadding21v(@NonNull Activity activity, @NonNull View view) {
-		if (isInFullScreenMode(activity)) {
-			int paddingLeft = view.getPaddingLeft();
-			int paddingTop = view.getPaddingTop();
-			int paddingRight = view.getPaddingRight();
-			int paddingBottom = view.getPaddingBottom();
-
-			int statusBarHeight = getStatusBarHeight(activity);
-			int cutoutHeight = getCutoutHeight(activity);
-
-			view.setPadding(paddingLeft,
-					paddingTop + statusBarHeight > cutoutHeight ? statusBarHeight : cutoutHeight,
-					paddingRight,
-					paddingBottom);
-		}
+	public static void addStatusBarPadding21v(@Nullable Activity activity, @NonNull View view) { //todo call InsetUtils instead with proper InsetSide
+		InsetsUtils.doOnApplyWindowInsets(view, EnumSet.of(
+				InsetsUtils.InsetSide.TOP,
+				InsetsUtils.InsetSide.BOTTOM
+		));
 	}
 
 	public static int resizeViewForKeyboard(Activity activity, View view, int layoutHeightPrevious) {

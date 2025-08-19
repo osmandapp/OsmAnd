@@ -22,10 +22,12 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -57,7 +59,12 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		LinearLayout gl = new LinearLayout(this);
 		gl.setOrientation(LinearLayout.VERTICAL);
 		gl.setPadding(3, 3, 3, 3);
-		
+
+		InsetsUtils.doOnApplyWindowInsets(gl, EnumSet.of(
+				InsetsUtils.InsetSide.TOP,
+				InsetsUtils.InsetSide.BOTTOM
+		));
+
 		TextView tv = new TextView(this);
 		tv.setText(R.string.test_voice_desrc);
 		tv.setPadding(0, 5, 0, 7);

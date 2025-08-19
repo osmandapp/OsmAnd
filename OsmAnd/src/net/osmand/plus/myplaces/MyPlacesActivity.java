@@ -8,6 +8,7 @@ import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -21,7 +22,6 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -32,12 +32,14 @@ import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -101,6 +103,11 @@ public class MyPlacesActivity extends TabActivity {
 				}
 			}
 		}
+		View root = findViewById(R.id.root);
+		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
+				InsetsUtils.InsetSide.TOP,
+				InsetsUtils.InsetSide.BOTTOM
+		));
 	}
 
 	public void updateToolbar() {
