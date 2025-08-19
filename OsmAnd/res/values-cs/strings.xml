@@ -577,7 +577,7 @@
     <string name="choose_available_region">Vybrat oblast ze seznamu</string>
     <string name="choose_intersected_street">Vybrat protínající ulici</string>
     <string name="Closest_Amenities">Nejbližší body zájmu</string>
-    <string name="app_mode_default">Standardní</string>
+    <string name="app_mode_default">Procházet mapu</string>
     <string name="app_mode_car">Řízení vozidla</string>
     <string name="app_mode_bicycle">Jízda na kole</string>
     <string name="app_mode_pedestrian">Chůze</string>
@@ -839,7 +839,7 @@
     <string name="safe_mode_description">Spustit aplikaci v (pomalejším) bezpečném režimu.</string>
     <string name="safe_mode">Bezpečný režim</string>
     <string name="download_roads_only_item">Silniční mapa</string>
-    <string name="download_regular_maps">Standardní mapy</string>
+    <string name="download_regular_maps">Standardní mapa</string>
     <string name="download_roads_only_maps">Silniční mapa</string>
     <string name="rendering_attr_showRoadMaps_description">Zvolte, kdy zobrazovat silniční mapy:</string>
     <string name="rendering_attr_showRoadMaps_name">Silniční mapy</string>
@@ -1250,7 +1250,7 @@
     <string name="av_camera_pic_size">Velikost fotografie</string>
     <string name="av_camera_pic_size_descr">Nastavte velikost obrázku fotoaparátu</string>
     <string name="shared_string_more">Více…</string>
-    <string name="rendering_value_browse_map_name">Standardní</string>
+    <string name="rendering_value_browse_map_name">Procházet mapu</string>
     <string name="rendering_value_car_name">Automobil</string>
     <string name="rendering_value_bicycle_name">Jízdní kolo</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
@@ -1535,7 +1535,7 @@
     <string name="download_wikipedia_files">Stáhnout dodatečná data Wikipedie (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Služba zjištění polohy je vypnuta. Aktivovat\?</string>
     <string name="disable_recording_once_app_killed">Zabránit samostatnému logování</string>
-    <string name="download_live_updates">Okamžité aktualizace</string>
+    <string name="download_live_updates">Živé aktualizace</string>
     <string name="no_updates_available">Nejsou dostupné žádné aktualizace</string>
     <string name="traffic_warning_hazard">Nebezpečí</string>
     <string name="rendering_value_boldOutline_name">Tučný obrys</string>
@@ -4989,7 +4989,7 @@
     <string name="help_article_navigation_routing_car_based_routing_name">Navigace automobilů (nákladních automobilů, motocyklů)</string>
     <string name="help_article_navigation_setup_route_details_name">Detaily trasy</string>
     <string name="help_article_navigation_setup_route_navigation_name">Příprava trasy</string>
-    <string name="wikipedia_and_travel_maps">Wikipedie a cestovní mapy</string>
+    <string name="wikipedia_and_travel_maps">Mapy Wikipedie a cestování</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Pěší navigace</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigace podle stopy</string>
     <string name="help_article_navigation_routing_online_routing_name">Online navigace</string>
