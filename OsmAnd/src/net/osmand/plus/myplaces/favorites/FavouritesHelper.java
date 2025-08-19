@@ -24,7 +24,6 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnGroupNameChangeListener;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
@@ -374,7 +373,7 @@ public class FavouritesHelper {
 		}
 	}
 
-	public void copyToFavorites(@NonNull GpxDisplayGroup displayGroup, @NonNull String groupName, @Nullable OnGroupNameChangeListener listener) {
+	public void copyToFavorites(@NonNull GpxDisplayGroup displayGroup, @NonNull String groupName) {
 		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
 
@@ -399,9 +398,6 @@ public class FavouritesHelper {
 		}
 		favouritesHelper.saveCurrentPointsIntoFile(true);
 
-		if (listener != null) {
-			listener.onTrackGroupChanged();
-		}
 		if (!addedPoints.isEmpty()) {
 			app.showShortToastMessage(app.getString(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size()));
 		}

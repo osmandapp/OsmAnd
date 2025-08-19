@@ -27,8 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.OptionsDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dialogs.CopyTrackGroupToFavoritesBottomSheet;
-import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnGroupNameChangeListener;
+import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnTrackGroupChangeListener;
 import net.osmand.plus.dialogs.RenameTrackGroupBottomSheet;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -61,7 +60,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnGroupNameChangeListener {
+public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnTrackGroupChangeListener {
 
 	private static final String TAG = EditTrackGroupDialogFragment.class.getSimpleName();
 

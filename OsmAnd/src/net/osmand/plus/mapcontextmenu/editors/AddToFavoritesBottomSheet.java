@@ -16,14 +16,14 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.dialogs.CopyTrackGroupToFavoritesBottomSheet;
-import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnGroupNameChangeListener;
+import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnTrackGroupChangeListener;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
-public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment implements OnGroupNameChangeListener {
+public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment implements OnTrackGroupChangeListener {
 
 	private static final String TAG = AddToFavoritesBottomSheet.class.getName();
 
@@ -74,13 +74,8 @@ public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment imp
 							@Override
 							public void onCategorySelected(PointsGroup pointsGroup) {
 								FavouritesHelper favouritesHelper = app.getFavoritesHelper();
-								OnGroupNameChangeListener onGroupNameChangeListener = null;
-								Fragment fragment = getTargetFragment();
-								if (fragment instanceof OnGroupNameChangeListener listener) {
-									onGroupNameChangeListener = listener;
-								}
-								favouritesHelper.copyToFavorites(group, pointsGroup.getName(), onGroupNameChangeListener);
-								dismiss();
+								favouritesHelper.copyToFavorites(group, pointsGroup.getName());
+								onTrackGroupChanged();
 							}
 
 							@Override
@@ -110,7 +105,7 @@ public class AddToFavoritesBottomSheet extends MenuBottomSheetDialogFragment imp
 	@Override
 	public void onTrackGroupChanged() {
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnGroupNameChangeListener listener) {
+		if (fragment instanceof OnTrackGroupChangeListener listener) {
 			dismiss();
 			listener.onTrackGroupChanged();
 		}
