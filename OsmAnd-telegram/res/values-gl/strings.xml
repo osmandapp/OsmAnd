@@ -168,8 +168,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">seg</string>
-    <string name="welcome_descr">O <b>rastrexador do OsmAnd</b> (OsmAnd Tracker) permite compartillar a túa ubicación e ollar a doutros no OsmAnd.<br/>
-        <br/>A aplicación emprega a API do Telegram, polo que precisas dunha conta do Telegram.</string>
+    <string name="welcome_descr">O <b>rastrexador do OsmAnd</b> (OsmAnd Tracker) permite compartillar a túa ubicación e ollar a doutros no OsmAnd.<br></br> <br></br>A aplicación emprega a API do Telegram, polo que precisas dunha conta do Telegram.</string>
     <string name="my_location">A miña ubicación</string>
     <string name="live_now">Ao vivo agora</string>
     <string name="send_location_as">Enviar ubicación coma</string>
@@ -276,4 +275,6 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">Erro</string>
     <string name="send_live_location_error">Envialo erro na posición: %1$s</string>
+    <string name="location_source">Fonte da localización</string>
+    <string name="location_source_summary">Por defecto, o OsmAnd instalado do Google Play usa os Google Play Services para determinar a localización. \n \nSe obtén información de localización imprecisa ou utiliza un dispositivo sen os servizos de Google Play, tente mudar para a API do Android</string>
 </resources>
