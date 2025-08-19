@@ -137,8 +137,8 @@
     <string name="local_index_transport_data">Données des transports en commun</string>
     <string name="local_index_map_data">Cartes</string>
     <string name="local_indexes_cat_backup">Désactivé</string>
-    <string name="local_indexes_cat_tts">Annonces vocales (synthèse vocale TTS)</string>
-    <string name="local_indexes_cat_voice">Annonces vocales (voix enregistrée)</string>
+    <string name="local_indexes_cat_tts">Invites vocales (TTS)</string>
+    <string name="local_indexes_cat_voice">Messages vocaux (enregistrés)</string>
     <string name="local_indexes_cat_tile">Cartes tuilées en ligne ou en cache</string>
     <string name="local_indexes_cat_map">Cartes standard (vectorielles)</string>
     <string name="local_indexes_cat_poi">Données des POI</string>
@@ -1537,7 +1537,7 @@
     <string name="rate_this_app_long">Merci d\'évaluer OsmAnd sur Google Play</string>
     <string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
     <string name="user_hates_app_get_feedback_long">N’hésitez pas à nous faire part de vos suggestions.</string>
-    <string name="download_live_updates">Mise à jour automatique</string>
+    <string name="download_live_updates">Mises à jour en direct</string>
     <string name="failed_to_upload">Erreur lors de l’envoi</string>
     <string name="delete_change">Supprimer les modifications</string>
     <string name="successfully_uploaded_pattern">Envoyé {0}/{1}</string>
@@ -4949,7 +4949,7 @@
     <string name="delete_map">Supprimer la carte</string>
     <string name="standard_maps">Cartes standard</string>
     <string name="shared_string_created">Créé le</string>
-    <string name="wikipedia_and_travel_maps">Wikipedia et cartes de voyage</string>
+    <string name="wikipedia_and_travel_maps">Wikipédia et Cartes de voyage</string>
     <string name="rendering_styles">Styles de rendu</string>
     <string name="sort_country_name_ascending">Nom de pays : A – Z</string>
     <string name="weather_online">Météo en ligne</string>
@@ -5684,8 +5684,8 @@
     <string name="turn_by_turn_directions">Indications de guidage pas à pas</string>
     <string name="failed_to_connect">Échec de connexion à %1s</string>
     <string name="enable_msaa">Activer MSAA</string>
-    <string name="next_turn_information">Prochaine bifurcation</string>
-    <string name="next_turn_information_desc">Afficher la prochaine bifurcation et le nom de rue.</string>
+    <string name="next_turn_information">Informations sur le prochain virage</string>
+    <string name="next_turn_information_desc">Affiche la direction du virage à venir et le nom de la rue.</string>
     <string name="description_purchases_fastspring">Vous pouvez gérer vos achats via le portail FastSpring.</string>
     <string name="description_subscription_fastspring">Vous pouvez gérer et annuler votre abonnement via le portail FastSpring.</string>
     <string name="manage_purchases">Gérer vos achats</string>
