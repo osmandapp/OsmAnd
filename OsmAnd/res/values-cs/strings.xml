@@ -5806,4 +5806,5 @@
     <string name="write_location_provider_description">Uložit poskytovatele polohy pro každý bod stopy během nahrávání</string>
     <string name="write_location_provider">Zapsat poskytovatele polohy</string>
     <string name="altitude_metrics_description">Nastaví jednotku zobrazení nadmořské výšky ve widgetech a statistikách.</string>
+    <string name="backup_delete_data_warning_extended">Tato akce trvale odstraní všechna vybraná data z cloudu. Později nebude možné je obnovit.</string>
 </resources>
