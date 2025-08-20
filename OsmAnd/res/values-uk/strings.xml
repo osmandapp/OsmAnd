@@ -5861,4 +5861,15 @@
     <string name="rendering_attr_watercolor_description">Колір з води</string>
     <string name="private_access_routing_req_short">Ваш пункт призначення знаходиться на приватній території. Дозволити користування приватними дорогами?</string>
     <string name="view_on_phone">Переглянути на телефоні</string>
+    <string name="backup_delete_data_warning_extended">Ця дія назавжди видалить усі вибрані дані з хмари. Відновити їх пізніше буде неможливо.</string>
+    <string name="amount_of_total_used">Використано %1$s з %2$s</string>
+    <string name="delete_data">Видалити дані</string>
+    <string name="manage_storage_delete_data_dialog_summary">Ви впевнені, що хочете видалити %1$s з OsmAnd Cloud?\n\nВи можете відновити їх з кошика протягом 30 днів.</string>
+    <string name="manage_storage">Керування сховищем</string>
+    <string name="copy_as_new_folder">Копіювати як нову папку</string>
+    <string name="add_to_a_folder">Додати до папки</string>
+    <string name="add_to_favorites">Додати до обраного</string>
+    <string name="max_weight_at_full_load_description">Вкажіть максимальну вагу вашого транспортного засобу при повному завантаженні, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
+    <string name="max_axle_load_description">Вкажіть максимальне навантаження на вісь вашого автомобіля, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
+    <string name="lang_en_barebones">Англійська (базова)</string>
 </resources>
