@@ -236,8 +236,8 @@
     <string name="local_index_transport_data">Podaci javnog prevoza</string>
     <string name="local_index_map_data">Podaci mape</string>
     <string name="local_indexes_cat_backup">Deaktivirano</string>
-    <string name="local_indexes_cat_tts">Glasovno navođenje (TTS)</string>
-    <string name="local_indexes_cat_voice">glasovno navođenje (snimljeno)</string>
+    <string name="local_indexes_cat_tts">TTS glasovna uputstva</string>
+    <string name="local_indexes_cat_voice">Snimljena glasovna uputstva</string>
     <string name="local_indexes_cat_poi">TOI podaci</string>
     <string name="ttsvoice">TTS glas</string>
     <string name="search_offline_clear_search">Nova pretraga</string>
@@ -2235,7 +2235,7 @@
     <string name="rendering_attr_currentTrackColor_name">GPX boja</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Podrazumevano (prozirna zelenkasto-plava)</string>
     <string name="rendering_value_default13_name">Podrazumevano (13)</string>
-    <string name="download_live_updates">Trenutno ažuriranje</string>
+    <string name="download_live_updates">Ažuriranja uživo</string>
     <string name="no_updates_available">Nema dostupnog ažuriranja</string>
     <string name="rendering_value_boldOutline_name">Zadebljaj obrisne linije</string>
     <string name="traffic_warning_hazard">Opasnost</string>
@@ -4765,13 +4765,13 @@
     <string name="key_event_action_next_app_profile">Sledeći profil aplikacije</string>
     <string name="weather_online">Online prognoza</string>
     <string name="widget_available_ram_desc">Prikazuje raspoloživu memoriju, dodjeljenu za OsmAnd.</string>
-    <string name="rendering_styles">Stilovi prikazivanja</string>
+    <string name="rendering_styles">Stilovi renderinga</string>
     <string name="widget_available_ram">Dostupan RAM</string>
     <string name="terrain_maps">Reljefne mape</string>
     <string name="shared_string_created">Kreirano</string>
     <string name="delete_map_description">Brišeš %1$s mapu?</string>
     <string name="app_mode_baby_transport">Prevoz beba</string>
-    <string name="wikipedia_and_travel_maps">Wikipedia i Travel maps</string>
+    <string name="wikipedia_and_travel_maps">Vikipedija i mape putovanja</string>
     <string name="sort_country_name_ascending">Po imenu od A – Ž</string>
     <string name="sort_country_name_descending">Po imenu od Ž – A</string>
     <string name="sensor_temperature_desc">Prikazuje temperaturu izmerenu senzorom</string>
@@ -5775,8 +5775,8 @@
     <string name="description_purchases_fastspring">Svojim kupovinama možete upravljati putem portala za upravljanje FastSpring računom.</string>
     <string name="description_subscription_fastspring">Možete upravljati ili otkazati pretplatu putem FastSpring portala za upravljanje nalogom.</string>
     <string name="manage_purchases">Upravljajte kupovinama</string>
-    <string name="next_turn_information">Sledeća informacije o skretanju</string>
-    <string name="next_turn_information_desc">Prikazuje predstojeće skretanje i ime ulice.</string>
+    <string name="next_turn_information">Informacije o sledećem skretanju</string>
+    <string name="next_turn_information_desc">Prikazuje predstojeći pravac skretanja i ime ulice.</string>
     <string name="map_orientation_portrait_inverted">Uspravno (obrnuto)</string>
     <string name="map_orientation_landscape_inverted">Vodoravno (obrnuto)</string>
     <string name="reverse_mode_calculate_route">Izračunajte rutu</string>
@@ -5840,4 +5840,15 @@
     <string name="rendering_attr_watercolor_description">Boja vode</string>
     <string name="private_access_routing_req_short">Vaše odredište je u privatnom prostoru. Dozvoljavate korišćenje privatnih puteva?</string>
     <string name="view_on_phone">Pogledaj na telefonu</string>
+    <string name="copy_as_new_folder">Kopiraj kao novi folder</string>
+    <string name="add_to_a_folder">Dodajte u folder</string>
+    <string name="add_to_favorites">Dodaj u favorite</string>
+    <string name="max_weight_at_full_load_description">Odredite maximalnu težinu vašeg vozila sa punim opterećenjem, da bi se izbegli putevi i mostovi sa ograničenjima u težini.</string>
+    <string name="max_axle_load_description">Obezbediti maximalno opterećenje po osovini vašeg vozila, da se izbegnu putevi i mostovi sa ograničenjima u težini.</string>
+    <string name="backup_delete_data_warning_extended">Ova akcija će trajno ukloniti sve izabrane podatke iz oblaka. Kasnije ga neće biti moguće obnoviti.</string>
+    <string name="amount_of_total_used">%1$s od %2$s se koristi</string>
+    <string name="delete_data">Izbriši podatke</string>
+    <string name="manage_storage_delete_data_dialog_summary">Da li ste sigurni da želite da izbrišete %1$s iz OsmAnd Cloud?\n\nMožete ih vratiti iz kante u roku od 30 dana.</string>
+    <string name="manage_storage">Upravljanje skladištem</string>
+    <string name="lang_en_barebones">Engleski (osnovni)</string>
 </resources>
