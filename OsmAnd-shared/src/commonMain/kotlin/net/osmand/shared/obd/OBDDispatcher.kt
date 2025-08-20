@@ -110,7 +110,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 			val timeout = 15000L
 			val timeoutTicks = timeout / loopDelay
 			while (coroutineContext.isActive) {
-				val bytesRead = inputStream?.read(readBuffer, 20)
+				val bytesRead = inputStream?.read(readBuffer, 1024)
 				if (bytesRead != null && bytesRead > 0) {
 					return readBuffer.readUtf8()
 				}
