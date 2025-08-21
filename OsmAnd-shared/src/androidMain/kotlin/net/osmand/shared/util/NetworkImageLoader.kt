@@ -39,6 +39,14 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
     private val okHttp = okhttp3.OkHttpClient.Builder()
         .dispatcher(okDispatcher)
         .addInterceptor { chain ->
+            android.net.TrafficStats.setThreadStatsTag(android.os.Process.myTid() and 0xFFFFF)
+            try {
+                chain.proceed(chain.request())
+            } finally {
+                android.net.TrafficStats.clearThreadStatsTag()
+            }
+        }
+        .addInterceptor { chain ->
             chain.proceed(chain.request().newBuilder()
                 .header("User-Agent", USER_AGENT)
                 .build())
