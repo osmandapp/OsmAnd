@@ -5752,4 +5752,13 @@
     <string name="rendering_attr_tidalFlatStyle_description">Style des vasières</string>
     <string name="private_access_routing_req_short">Votre destination se situe dans une propriété privée. Souhaitez-vous emprunter des routes privées ?</string>
     <string name="view_on_phone">Afficher sur le téléphone</string>
+    <string name="add_to_favorites">Ajouter aux favoris</string>
+    <string name="backup_delete_data_warning_extended">Cette action supprimera définitivement toutes les données sélectionnées du Cloud. Il ne sera pas possible de les restaurer plus tard.</string>
+    <string name="amount_of_total_used">%1$s de %2$s utilisé</string>
+    <string name="delete_data">Supprimer les données</string>
+    <string name="manage_storage_delete_data_dialog_summary">Êtes-vous certain de vouloir supprimer %1$s de OsmAnd Cloud?\n\nUne restauration sera possible depuis la corbeille durant les 30 prochains jours.</string>
+    <string name="manage_storage">Gérer le stockage</string>
+    <string name="copy_as_new_folder">Copier comme nouveau dossier</string>
+    <string name="add_to_a_folder">Ajouter à un dossier</string>
+    <string name="lang_en_barebones">Anglais (barebones)</string>
 </resources>
