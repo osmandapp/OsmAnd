@@ -5805,4 +5805,15 @@
     <string name="rendering_attr_spotDistance_name">Mélységi szondázás távolság</string>
     <string name="private_access_routing_req_short">Az úticél magánterületen található. Engedélyezi a magánutak használatát?</string>
     <string name="view_on_phone">Megtekintés telefonon</string>
+    <string name="backup_delete_data_warning_extended">Ez a művelet véglegesen eltávolítja az összes kiválasztott adatot a felhőből. Később sem lehet visszaállítani őket.</string>
+    <string name="amount_of_total_used">%1$s / %2$s használatban</string>
+    <string name="delete_data">Adatok törlése</string>
+    <string name="manage_storage_delete_data_dialog_summary">Biztosan törölni szeretné az OsmAnd Cloudból ezt: %1$s?\n\n30 napon belül még visszaállíthatja a Lomtárból.</string>
+    <string name="manage_storage">Tárhely kezelése</string>
+    <string name="copy_as_new_folder">Másolás új mappaként</string>
+    <string name="add_to_a_folder">Hozzáadás egy mappához</string>
+    <string name="add_to_favorites">Hozzáadás a kedvencekhez</string>
+    <string name="max_weight_at_full_load_description">Adja meg a járműve teljes terhelés melletti maximális súlyát, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
+    <string name="max_axle_load_description">Adja meg a járműve maximális tengelyterhelését, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
+    <string name="lang_en_barebones">Angol (csupasz)</string>
 </resources>
