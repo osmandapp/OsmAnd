@@ -13,6 +13,7 @@ import coil3.request.Disposable
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
 import coil3.toBitmap
+import kotlin.random.Random
 
 class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = false) {
     val log = LoggerFactory.getLogger("NetworkImageLoader")
@@ -20,9 +21,14 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
     companion object {
         private const val DISK_CACHE_SIZE = 1024 * 1024 * 300L // 300MB
         private const val DISK_IMAGES_CACHE_DIR = "net_images_cache"
+
         private const val MAX_THREADS = 8
         private const val MAX_REQUESTS_PER_HOST = 4
-        private const val HTTP_REDIRECT_SLEEP = MAX_REQUESTS_PER_HOST * 1000L // Avoid 429 Too Many Requests
+        private const val USER_AGENT = "Mozilla/5.0 (OsmAnd; Android)"
+
+        private const val MAX_ATTEMPTS = 5
+        private const val HTTP_TOO_MANY_REQUESTS = 429
+        private const val RETRY_SLEEP = MAX_REQUESTS_PER_HOST * 1000L;
     }
 
     private val okDispatcher = okhttp3.Dispatcher().apply {
@@ -32,13 +38,31 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
 
     private val okHttp = okhttp3.OkHttpClient.Builder()
         .dispatcher(okDispatcher)
-        .addNetworkInterceptor { chain ->
+        .addInterceptor { chain ->
+            chain.proceed(chain.request().newBuilder()
+                .header("User-Agent", USER_AGENT)
+                .build())
+        }
+        .addInterceptor { chain ->
+            var attempt = 0
+            var lastCode = 0
             val req = chain.request()
-            val resp = chain.proceed(req)
-            if (resp.code in 300..399) {
-                Thread.sleep(HTTP_REDIRECT_SLEEP)
+            var lastIoError: java.io.IOException? = null
+            while (attempt++ < MAX_ATTEMPTS) {
+                try {
+                    val resp = chain.proceed(req)
+                    if (resp.code != HTTP_TOO_MANY_REQUESTS) {
+                        return@addInterceptor resp
+                    }
+                    lastCode = resp.code
+                    resp.close()
+                } catch (e: java.io.IOException) {
+                    lastIoError = e
+                }
+                val backoff = RETRY_SLEEP * attempt;
+                Thread.sleep(Random.nextLong(backoff, backoff * 2))
             }
-            resp
+            throw lastIoError ?: java.io.IOException("MAX_ATTEMPTS (HTTP $lastCode)")
         }
         .build()
 
