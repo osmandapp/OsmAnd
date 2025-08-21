@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
@@ -63,7 +64,7 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		Dialog dialog = new Dialog(activity, getThemeId()) {
 			@Override
 			public void onBackPressed() {
-				RequiredMapsFragment.this.dismiss();
+				closeDialog();
 			}
 		};
 		Window window = dialog.getWindow();
@@ -74,6 +75,14 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 			window.setStatusBarColor(ColorUtilities.getStatusBarColor(app, nightMode));
 		}
 		return dialog;
+	}
+
+	public void closeDialog() {
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession != null) {
+			carNavigationSession.onRequiredMapsDialogClosed();
+		}
+		dismiss();
 	}
 
 	@Override
@@ -120,7 +129,7 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
-		closeButton.setOnClickListener(v -> dismiss());
+		closeButton.setOnClickListener(v -> closeDialog());
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.required_maps);

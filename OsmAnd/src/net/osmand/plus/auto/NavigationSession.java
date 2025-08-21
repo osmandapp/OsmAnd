@@ -818,4 +818,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onCalculationFinish() {
 
 	}
+
+	public void onRequiredMapsDialogClosed() {
+		Screen topScreen = getScreenManager().getTop();
+		if (topScreen instanceof RoutePreviewScreen) {
+			topScreen.finish();
+		}
+	}
 }
