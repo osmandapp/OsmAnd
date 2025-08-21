@@ -7,6 +7,7 @@ import coil3.decode.DataSource
 import coil3.disk.DiskCache
 import coil3.disk.directory
 import coil3.memory.MemoryCache
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.Disposable
 import coil3.request.ImageRequest
@@ -14,14 +15,38 @@ import coil3.request.allowHardware
 import coil3.toBitmap
 
 class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = false) {
+    val log = LoggerFactory.getLogger("NetworkImageLoader")
 
     companion object {
         private const val DISK_CACHE_SIZE = 1024 * 1024 * 300L // 300MB
         private const val DISK_IMAGES_CACHE_DIR = "net_images_cache"
+        private const val MAX_THREADS = 8
+        private const val MAX_REQUESTS_PER_HOST = 4
+        private const val HTTP_REDIRECT_SLEEP = MAX_REQUESTS_PER_HOST * 1000L // Avoid 429 Too Many Requests
     }
+
+    private val okDispatcher = okhttp3.Dispatcher().apply {
+        maxRequestsPerHost = MAX_REQUESTS_PER_HOST
+        maxRequests = MAX_THREADS
+    }
+
+    private val okHttp = okhttp3.OkHttpClient.Builder()
+        .dispatcher(okDispatcher)
+        .addNetworkInterceptor { chain ->
+            val req = chain.request()
+            val resp = chain.proceed(req)
+            if (resp.code in 300..399) {
+                Thread.sleep(HTTP_REDIRECT_SLEEP)
+            }
+            resp
+        }
+        .build()
 
     private var imageLoader: ImageLoader = ImageLoader.Builder(context)
         .allowHardware(false)
+        .components {
+            add(OkHttpNetworkFetcherFactory(okHttp))
+        }
         .memoryCache {
             MemoryCache.Builder()
                 .maxSizePercent(context, 0.25)
@@ -75,6 +100,13 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
                         else -> ImageLoadSource.MEMORY
                     }
                     it.onSuccess(source)
+                },
+                onError = { _, errorResult ->
+                    val throwable = errorResult.throwable
+                    val info =
+                        (throwable as? coil3.network.HttpException)?.response?.code?.toString()
+                            ?: (throwable.message ?: "$throwable")
+                    log.error("NetworkImageLoader error $url ($info)")
                 }
             )
         }
