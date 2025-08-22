@@ -3987,7 +3987,7 @@
     <string name="srtm_unit_format">Eenheid van hoogtelijnen</string>
     <string name="srtm_download_list_help_message">OsmAnd biedt gegevens van contourlijnen in meters en voet aan. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
     <string name="srtm_download_single_help_message">Selecteer a.u.b. een variant. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
-    <string name="exit_number">Exit nummer</string>
+    <string name="exit_number">Afritnummer</string>
     <string name="announce_when_exceeded">Aankondigen wanneer overschreden</string>
     <string name="user_points">Gebruikerspunten</string>
     <string name="output">Output</string>
@@ -4792,7 +4792,7 @@
     <string name="shared_string_only_missing">Enkel missende</string>
     <string name="auto_25_chars_route_tl_kr">Sla linksaf en houd rechts aan</string>
     <string name="auto_25_chars_route_tl_kl">Sla linksaf en houd links aan</string>
-    <string name="auto_25_chars_route_roundabout_kl">Afslag %1$d namen en links aanhouden</string>
+    <string name="auto_25_chars_route_roundabout_kl">Afslag %1$d nemen en links aanhouden</string>
     <string name="auto_backup_preference_desc">Android maakt standaard een reservekopie van favorieten, kaart tekens en OsmAnd instellingen, om het te herstellen op nieuwe toestellen of na herinstallatie. De kopie kan tot 25 MB groot zijn.
 \nAls u ook OsmAnd Cloud gebruikt, kan dat tot tegenstrijdheden leiden na herinstallatie.</string>
     <string name="av_notes_video_widget_desc">Door te tikken op de widget kun je een video opnemen.</string>
