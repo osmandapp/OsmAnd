@@ -31,12 +31,19 @@ import gnu.trove.list.array.TIntArrayList;
 public class Amenity extends MapObject {
 
 	public static final String WEBSITE = "website";
+	public static final String URL = "url";
 	public static final String PHONE = "phone";
 	public static final String MOBILE = "mobile";
+	public static final String BRAND = "brand";
+	public static final String OPERATOR = "operator";
 	public static final String DESCRIPTION = "description";
 	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
+	public static final String POPULATION = "population";
+	public static final String WIDTH = "width";
+	public static final String HEIGHT = "height";
+	public static final String DISTANCE = "distance";
 	public static final String SERVICE_TIMES = "service_times";
 	public static final String COLLECTION_TIMES = "collection_times";
 	public static final String CONTENT = "content";

@@ -591,18 +591,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		} else if (object instanceof BaseDetailsObject detailsObject) {
 			amenity = detailsObject.getSyntheticAmenity();
 		}
+		String link = null;
 		if (amenity != null) {
-			String link = ObfConstants.getOsmUrlForId(amenity);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
-						0, false, null, true, 0, true, null, false);
-			}
+			link = ObfConstants.getOsmUrlForId(amenity);
 		} else if (object instanceof RenderedObject renderedObject) {
-			String link = ObfConstants.getOsmUrlForId(renderedObject);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
-						null, true, 0, true, null, false);
-			}
+			link = ObfConstants.getOsmUrlForId(renderedObject);
+		}
+		if (!Algorithms.isEmpty(link)) {
+			Drawable icon = menuBuilder.getRowIcon(R.drawable.ic_action_openstreetmap_logo);
+			String textPrefix = app.getString(R.string.shared_sting_osm_link);
+			menuBuilder.buildRow(view, icon, null, textPrefix, link, 0,
+					null, false, null, true, 0,
+					true, false, false, null, false);
 		}
 	}
 
