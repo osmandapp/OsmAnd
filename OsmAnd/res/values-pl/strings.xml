@@ -73,9 +73,7 @@
     <string name="shared_string_no_thanks">Niepotrzebne</string>
     <string name="basemap_missing">Pobierz podstawową mapę świata, by uzyskać poglądowe pokrycie całego świata na niskich stopniach przybliżenia.</string>
     <string name="vector_data_missing">Pobierz dane (\"offline\") by używać map offline.</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nPrzytrzymaj dłużej, aby wyświetlić opcje"</string>
+    <string name="local_index_gpx_info_show">\n\nPrzytrzymaj dłużej, aby wyświetlić opcje</string>
     <string name="local_index_installed">Wersja lokalna</string>
     <string name="local_index_items_backuped">Zdezaktywowano %1$d z %2$d elementów.</string>
     <string name="local_index_items_deleted">Usunięto %1$d z %2$d elementów.</string>
@@ -568,7 +566,7 @@
 \n
 \nPobieraj mapy kafelkowe bezpośrednio online albo przygotuj je do użytku w trybie offline (ręcznie skopiowane do katalogu danych OsmAnd) jako baza danych SQLite, którą można utworzyć za pomocą różnych narzędzi do przygotowywania map od innych firm.</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle poprzez okresowe wybudzanie urządzenia GPS (przy wyłączonym ekranie).</string>
-    <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala to np. na dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
+    <string name="osmand_accessibility_description">Umożliwia bezpośredni dostęp do funkcji ułatwień dostępu urządzenia w OsmAnd. Ułatwia to np. dostosowywanie tempa mowy w przypadku głosów przetwarzanych na mowę, konfigurowanie nawigacji za pomocą pada kierunkowego, sterowanie zoomem za pomocą trackballa lub korzystanie z funkcji przetwarzania tekstu na mowę, na przykład do automatycznego ogłaszania swojej pozycji.</string>
     <string name="osmand_development_plugin_description">Zapewnia funkcjonalność do testowania i debugowania OsmAnd: symuluj trasy nawigacji, monitoruj renderowanie ekranu, sprawdzaj wydajność itp. Ta wtyczka nie jest wymagana do normalnego użytkowania aplikacji.</string>
     <string name="plugins_screen">Wtyczki</string>
     <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność.</string>
@@ -702,7 +700,7 @@
     <string name="rendering_attr_noPolygons_name">Wielokąty</string>
     <string name="rendering_attr_appMode_name">Tryb renderowania</string>
     <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
-    <string name="rendering_attr_contourLines_description">Wyświetl od stopnia przybliżenia (wymaga danych poziomic):</string>
+    <string name="rendering_attr_contourLines_description">Wyświetlanie z poziomu powiększenia (wymaga danych linii konturowej):</string>
     <string name="rendering_attr_contourLines_name">Wyświetl poziomice</string>
     <string name="rendering_attr_hmRendered_description">Zwiększ liczbę szczegółów pokazywanych na mapie.</string>
     <string name="rendering_attr_hmRendered_name">Wyświetl więcej szczegółów na mapie</string>
@@ -928,12 +926,12 @@
     <string name="shared_string_control_stop">Zakończ</string>
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Uwagi audio/wideo</string>
-    <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd dla poziomic w trybie offline</string>
+    <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do tworzenia obiektów topograficznych offline, takich jak linie poziomicowe, cieniowanie wzniesień, nachylenie</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
     <string name="dropbox_plugin_description">Synchronizuj trasy i uwagi audio/wideo ze swoim kontem Dropbox.</string>
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
     <string name="intermediate_points_change_order">Zmień kolejność</string>
-    <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej poziomice, aby wspomóc dalszy rozwój.</string>
+    <string name="srtm_paid_version_msg">Prosimy o rozważenie zakupu wtyczki „Topografia”, aby wspomóc dalszy rozwój.</string>
     <string name="srtm_paid_version_title">Wtyczka Topografia</string>
     <string name="recording_context_menu_arecord">Zrób uwagę audio</string>
     <string name="recording_context_menu_vrecord">Zrób uwagę wideo</string>
@@ -1225,9 +1223,7 @@
 \n Punkty wyznaczonej trasy %2$s</string>
     <string name="gpx_selection_points">%1$s \nPunkty</string>
     <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nPrzytrzymaj dłużej, aby wyświetlić na mapie"</string>
+    <string name="selected_gpx_info_show">\n\nPrzytrzymaj dłużej, aby wyświetlić na mapie</string>
     <string name="delay_navigation_start">Rozpocznij nawigację automatycznie</string>
     <string name="shared_string_selected_lowercase">wybrano</string>
     <string name="gpx_split_interval">Interwał podziału</string>
@@ -1473,7 +1469,7 @@
 \n 
 \nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy.</string>
     <string name="watch">Oglądaj</string>
-    <string name="rendering_attr_pisteRoutes_name">Stoki narciarskie</string>
+    <string name="rendering_attr_pisteRoutes_name">Trasy narciarskie</string>
     <string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
     <string name="world_ski_missing">Aby wyświetlić obiekty narciarskie, należy pobrać specjalną mapę offline.</string>
     <string name="nautical_maps_missing">Aby wyświetlać mapy żeglugowe, należy pobrać specjalną mapę offline.</string>
@@ -2199,8 +2195,8 @@
     <string name="subscribe_email_error">Błąd</string>
     <string name="quick_action_auto_zoom_on">Włącz automatyczne powiększanie</string>
     <string name="quick_action_auto_zoom_off">Wyłącz automatyczne powiększanie</string>
-    <string name="quick_action_auto_zoom">Przełącz automatyczne przybliżanie</string>
-    <string name="quick_action_auto_zoom_desc">Przycisk do włączania lub wyłączania automatycznego zoomu z regulacją prędkości.</string>
+    <string name="quick_action_auto_zoom">Mapa z automatycznym powiększeniem</string>
+    <string name="quick_action_auto_zoom_desc">Przycisk umożliwiający włączanie i wyłączanie automatycznego powiększania sterowanego prędkością.</string>
     <string name="quick_action_add_destination_desc">Przycisk ustalenia celu trasy w położeniu na środku ekranu; poprzednio ustalony cel zamieniony będzie na ostatni cel pośredni.</string>
     <string name="quick_action_replace_destination_desc">Przycisk do wyśrodkowania na ekranie nowego celu podróży, zastępujący poprzednio wybrany cel podróży (jeśli istnieje).</string>
     <string name="quick_action_add_first_intermediate_desc">Przycisk umożliwiający wyśrodkowanie ekranu jako pierwszego pośredniego celu podróży.</string>
@@ -2227,7 +2223,7 @@
     <string name="shared_string_in_name">w %1$s</string>
     <string name="shared_string_overview">Podsumowanie</string>
     <string name="animate_my_location">Animowanie położenia</string>
-    <string name="animate_my_location_desc">Animuje aktualne położenie na mapie podczas nawigacji.</string>
+    <string name="animate_my_location_desc">Płynne przesuwanie mapy w ruchu. Wprowadza lekkie opóźnienie.</string>
     <string name="osmand_extended_description_part2">Nawigacja GPS 
 \n • Możesz wybrać pomiędzy trybem offline (brak kosztów roamingu za granicą) lub online (szybciej) 
 \n • Podpowiedzi głosowe zakręt-za-zakrętem poprowadzą cię do celu (nagrane lub syntetyzowane głosy) 
@@ -2318,11 +2314,7 @@
     <string name="retry">Ponów</string>
     <string name="save_route_point">Zapisz punkt trasy</string>
     <string name="route_point_one">Punkt 1 trasy</string>
-    <string name="osmand_extended_description_part7">Pomagaj rozwijać OSM
-\n • Raportowanie o błędach danych
-\n • Przesyłaj bezpośrednio z aplikacji trasy GPX do OSM
-\n • Dodawaj Użyteczne Miejsca (POI) i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)
-\n</string>
+    <string name="osmand_extended_description_part7">Pomagaj rozwijać OSM \n • Raportowanie o błędach danych \n • Przesyłaj bezpośrednio z aplikacji trasy GPX do OSM \n • Dodawaj Użyteczne Miejsca (POI) i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)</string>
     <string name="live_monitoring_max_interval_to_send">Bufor czasowy do śledzenia online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Określa czas przechowywania wysyłanych położeń bez połączenia</string>
     <string name="mappilary_no_internet_desc">Zdjęcia z Mapillary są dostępne tylko online.</string>
@@ -2349,8 +2341,8 @@
     <string name="move_point">Przesuń punkt</string>
     <string name="keep_showing_on_map">Wyświetlanie na mapie</string>
     <string name="exit_without_saving">Zakończyć bez zapisywania?</string>
-    <string name="do_not_use_animations">Wyłączenie animacji</string>
-    <string name="do_not_use_animations_descr">Wyłącza animacje mapy.</string>
+    <string name="do_not_use_animations">Usuń animacje</string>
+    <string name="do_not_use_animations_descr">Wyłącza animacje mapy i interfejsu użytkownika.</string>
     <string name="move_all_to_history">Przenieś wszystkie do historii</string>
     <string name="show_direction">Wskaźnik odległości</string>
     <string name="sort_by">Kolejność sortowania</string>
@@ -2523,7 +2515,7 @@
     <string name="empty_state_markers_groups_desc">Importuj ulubione grupy lub punkty trasy jako znaczniki.</string>
     <string name="rendering_attr_whiteWaterSports_name">Sporty spływowe</string>
     <string name="group_deleted">Usunięto grupę</string>
-    <string name="clear_all_intermediates">Wyczyść wszystkie punkty pośrednie</string>
+    <string name="clear_all_intermediates">Wyczyść wszystkie miejsca docelowe pośrednie</string>
     <string name="nothing_found_in_radius">Nic nie znaleziono:</string>
     <string name="select_waypoints_category_description">Można dodać wszystkie punkty pośrednie trasy lub wybrać osobne kategorie.</string>
     <string name="shared_string_total">Łącznie</string>
@@ -2648,10 +2640,10 @@
     <string name="off_road_render_descr">Do jazdy off-road, oparty na stylu „Topo” i do użycia z zielonym podkładem. Zmniejszona szerokość głównych dróg, zwiększona szerokość szlaków, ścieżek, dróg rowerowych itp.</string>
     <string name="nautical_render_descr">Do nawigacji morskiej. Zawiera boje, latarnie morskie, drogi rzeczne, drogi morskie, porty, obiekty żeglugi i izobaty.</string>
     <string name="ski_map_render_descr">Do narciarstwa. Zawiera trasy zjazdowe, wyciągi narciarskie, trasy biegowe itp. Przyciemnia dodatkowe obiekty mapy.</string>
-    <string name="light_rs_render_descr">Prosty styl dla nawigacji drogowej. Delikatny styl nocny, poziomice, kontrastujące drogi w kolorze pomarańczowym, przyciemnione drugoplanowe obiekty mapy.</string>
+    <string name="light_rs_render_descr">Prosty styl jazdy. Delikatny tryb nocny, kontrastujące pomarańczowe drogi, przyciemnione drugorzędne obiekty na mapie i elementy topograficzne, takie jak linie poziomicowe.</string>
     <string name="topo_render_descr">Do uprawiania turystyki pieszej, trekkingu i kolarstwa przyrodniczego. Czytelny na zewnątrz. Kontrastujące drogi i naturalne obiekty, różne rodzaje tras, zaawansowane opcje izolinii, dodatkowe szczegóły. Regulacja integralności powierzchni odróżnia jakość drogi. Brak trybu nocnego.</string>
     <string name="touring_view_render_descr">Styl turystyczny o wysokim kontraście i maksymalnej szczegółowości. Zawiera wszystkie opcje domyślnego stylu OsmAnd, wyświetlając jak najwięcej szczegółów, w szczególności drogi, ścieżki i inne sposoby podróżowania. Czyste rozróżnienie typów dróg jak w atlasie turystycznym. Nadaje się do użytku w dzień, w nocy i na zewnątrz.</string>
-    <string name="default_render_descr">Styl ogólnego przeznaczenia. Wyraźnie pokazuje w gęsto zaludnionych miastach. Zawiera poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
+    <string name="default_render_descr">Styl uniwersalny. Gęste miasta przedstawione w przejrzysty sposób. Zawiera trasy, jakość nawierzchni, ograniczenia dostępu, osłony drogowe, renderowanie ścieżek zgodnie ze skalą SAC/CAI, elementy sportów wodnych, cechy topograficzne, takie jak poziomice.</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
@@ -2702,12 +2694,7 @@
 \n• Kompaktowe mapy wektorowe w trybie offline aktualizowane co najmniej raz w miesiącu
 \n 
 \n• Wybór między kompletnymi danymi regionu lub tylko z siecią dróg (Przykład: Cała Japonia to 700 MB lub 200 MB dla części sieci drogowej)</string>
-    <string name="osmand_plus_extended_description_part5">Funkcje bezpieczeństwa
-\n• Opcjonalne automatyczne przełączanie widoku dzień/noc
-\n• Opcjonalny wyświetlacz ograniczenia prędkości z przypomnieniem, jeśli go przekroczysz
-\n• Opcjonalne powiększanie zależne od prędkości
-\n• Udostępnij swoją lokalizację, aby Twoi znajomi mogli Cię znaleźć
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Funkcje bezpieczeństwa \n• Opcjonalne automatyczne przełączanie widoku dzień/noc \n• Opcjonalny wyświetlacz ograniczenia prędkości z przypomnieniem, jeśli go przekroczysz \n• Opcjonalne powiększanie zależne od prędkości \n• Udostępnij swoją lokalizację, aby Twoi znajomi mogli Cię znaleźć</string>
     <string name="osmand_plus_extended_description_part6">Funkcje dla pieszych i rowerzystów
 \n• Oglądanie chodu, piesze wycieczki i ścieżki rowerowe, idealne do zajęć na świeżym powietrzu
 \n• Specjalne tryby kierowania i wyświetlania dla rowerów i pieszych
@@ -2715,13 +2702,7 @@
 \nOpcjonalne dopasowywanie do lokalnego pliku GPX lub usługi online
 \n• Opcjonalny wyświetlacz prędkości i wysokości
 \n• Wyświetlanie warstwic i cieniowania rzeźby terenu (poprzez dodatkowa wtyczkę)</string>
-    <string name="osmand_plus_extended_description_part7">Przyczyń się do rozwoju OSM
-\n• Zgłoś błędy danych
-\n• Przesyłaj ścieżki GPX do OSM bezpośrednio z aplikacji
-\n• Dodaj punkty POI i bezpośrednio prześlij je do OSM (lub później, jeśli jesteś offline)
-\n• Opcjonalne nagrywanie podróży również w tle (gdy urządzenie znajduje się w trybie uśpienia)
-\nOsmAnd jest aktywnie rozwijanym oprogramowaniem typu open source. Każdy może wnieść swój wkład do aplikacji poprzez zgłaszanie błędów, ulepszanie tłumaczeń lub kodowanie nowych funkcji. Dodatkowo projekt opiera się na wkładzie finansowym na finansowanie kodowania i testowania nowych funkcjonalności.
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Przyczyń się do rozwoju OSM \n• Zgłoś błędy danych \n• Przesyłaj ścieżki GPX do OSM bezpośrednio z aplikacji \n• Dodaj punkty POI i bezpośrednio prześlij je do OSM (lub później, jeśli jesteś offline) \n• Opcjonalne nagrywanie podróży również w tle (gdy urządzenie znajduje się w trybie uśpienia) \nOsmAnd jest aktywnie rozwijanym oprogramowaniem typu open source. Każdy może wnieść swój wkład do aplikacji poprzez zgłaszanie błędów, ulepszanie tłumaczeń lub kodowanie nowych funkcji. Dodatkowo projekt opiera się na wkładzie finansowym na finansowanie kodowania i testowania nowych funkcjonalności.</string>
     <string name="test_voice_desrc">Naciśnij przycisk i słuchaj odpowiedniego komunikatu głosowego, aby zidentyfikować brakujące lub błędne monity</string>
     <string name="ask_for_location_permission">Proszę przyznać uprawnienia udostępniania położenia, aby kontynuować.</string>
     <string name="rendering_value_black_name">Czarny</string>
@@ -2761,9 +2742,9 @@
     <string name="shared_string_width">Szerokość</string>
     <string name="shared_string_height">Wysokość</string>
     <string name="add_destination_point">Ustal cel trasy</string>
-    <string name="add_intermediate_point">Dodaj punkt pośredni</string>
+    <string name="add_intermediate_point">Dodaj cel pośredni</string>
     <string name="add_start_point">Ustal położenie początkowe</string>
-    <string name="intermediate_waypoint">Punkt pośredni</string>
+    <string name="intermediate_waypoint">Cel pośredni</string>
     <string name="transfers">przesiadki</string>
     <string name="on_foot">pieszo</string>
     <string name="route_way">Trasa</string>
@@ -2811,7 +2792,7 @@
     <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
     <string name="public_transport_warning_title">Nawigacja transportem publicznym jest obecnie w fazie testów beta. Mogą pojawić się błędy i nieścisłości.</string>
-    <string name="add_intermediate">Dodaj punkt pośredni</string>
+    <string name="add_intermediate">Dodaj cel pośredni</string>
     <string name="transfers_size">%1$d transfery</string>
     <string name="add_start_and_end_points">Dodaj punkty początkowe i końcowe</string>
     <string name="rendering_attr_surface_grass_paver_name">Bruk z trawą</string>
@@ -3210,7 +3191,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferuje drogi nieutwardzone.</string>
     <string name="layer_osm_edits">Zmiany OSM</string>
     <string name="quick_action_contour_lines_descr">Przycisk wyświetlający lub ukrywający izolinie na mapie.</string>
-    <string name="quick_action_hillshade_descr">Przycisk do pokazywania lub ukrywania cieniowania na mapie.</string>
+    <string name="quick_action_hillshade_descr">Przycisk umożliwiający pokazywanie lub ukrywanie cieniowania wzniesień na mapie.</string>
     <string name="tts_initialization_error">Nie można uruchomić mechanizmu zamiany tekstu na mowę.</string>
     <string name="shared_preference">Wspólne</string>
     <string name="simulate_your_location_gpx_descr">Symuluje położenie, używając zarejestrowanej trasy GPX.</string>
@@ -3423,7 +3404,7 @@
     <string name="delete_description">Usuń opis</string>
     <string name="quick_action_terrain_descr">Przycisk do wyświetlania lub ukrywania warstwy terenu na mapie.</string>
     <string name="download_slope_maps">Nachylenie</string>
-    <string name="terrain_empty_state_text">Wyświetla cieniowania lub nachylenia na mapie. Przeczytaj więcej o tego rodzaju mapach na naszej stronie.</string>
+    <string name="terrain_empty_state_text">Pokazuje na mapie cieniowanie lub nachylenie wzniesień. Więcej informacji o tych typach map znajdziesz na naszej stronie.</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Poziom powiększenia</string>
     <string name="shared_string_transparency">Przejrzystość</string>
@@ -3431,7 +3412,7 @@
     <string name="slope_download_description">Do wyświetlania nachylenia terenu wymagane są dodatkowe mapy.</string>
     <string name="terrain_slider_description">Ustaw minimalny i maksymalny poziom powiększenia, na których będzie wyświetlana warstwa.</string>
     <string name="slope_description">Nachylenie używa kolorów do wizualizacji stromości terenu.</string>
-    <string name="hillshade_description">Mapa cieniowana wykorzystuje ciemne odcienie do wyświetlania stoków, szczytów i nizin.</string>
+    <string name="hillshade_description">Mapa cieniowania używa ciemnych odcieni do pokazania zboczy, szczytów i nizin.</string>
     <string name="shared_string_terrain">Teren</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="shared_string_square">Kwadrat</string>
@@ -3524,7 +3505,7 @@
 \nSubskrypcja odnawia się, chyba że zostanie anulowana przed wybranym okresem odnowienia.
 \n
 \nZarządzaj lub anuluj swoje subskrypcje w ustawieniach Google Play w dowolnym momencie.</string>
-    <string name="release_3_7">• Nowe mapy stoków offline \n \n • Pełna personalizacja Ulubionych i Punktów GPX - niestandardowe kolory, ikony, kształty \n \n • Dostosowywanie kolejności elementów w menu kontekstowym, konfiguracji mapy i menu podręcznym \n \n • Wikipedia jako osobna warstwa w konfiguracji mapy, wybierz tylko potrzebne języki \n \n • Tworzenie własnego filtru użytecznych miejsc/map z pełną elastycznością \n \n • Dodano opcje przywracania ustawień profili niestandardowych \n \n • Pełne trasy GPX z nawigacji obsługują pasy ruchu i pełne instrukcje skrętu \n \n • Naprawiono rozmiary interfejsu użytkownika na tabletach \n \n • Naprawiono błędy z RTL \n \n</string>
+    <string name="release_3_7">• Nowe mapy offline stoków\n\n• Pełna personalizacja Ulubionych i punktów GPX – niestandardowe kolory, ikony, kształty\n\n• Możliwość dostosowania kolejności elementów w „Menu kontekstowym”, „Konfiguruj mapę” i „Szufladzie”\n\n• Wikipedia jako osobna warstwa w Konfiguruj mapę, wybór tylko potrzebnych języków\n\n• Twórz własne filtry POI / mapy z pełną elastycznością\n\n• Dodano opcje przywracania ustawień dla niestandardowych profili\n\n• Pełne trasy GPX z nawigacji obsługują pasy ruchu i kompletne instrukcje skrętu\n\n• Naprawiono rozmiary interfejsu użytkownika na tabletach\n\n• Naprawiono błędy z RTL\n\n</string>
     <string name="back_to_editing">Powrót do edycji</string>
     <string name="create_edit_poi">Utwórz lub edytuj użyteczne miejsce</string>
     <string name="add_edit_favorite">Dodaj lub edytuj ulubione miejsce</string>
@@ -5765,14 +5746,14 @@
     <string name="ais_port_nmea_local">Port UDP lokalnego odbiornika danych NMEA</string>
     <string name="ais_object_lost_timeouts">Ustawienia limitu czasu odbioru sygnału AIS</string>
     <string name="ais_object_lost_timeout">Limit czasu widoczności w przypadku utraty obiektu</string>
-    <string name="ais_object_lost_timeout_description">Ustaw limit czasu widoczności obiektów AIS: Po upływie tego czasu bez odbioru sygnału obiekt AIS zostanie usunięty z ekranu.</string>
+    <string name="ais_object_lost_timeout_description">Ustaw limit czasu widoczności obiektu AIS: Jeżeli w określonym czasie nie zostanie odebrany żaden sygnał, obiekt zostanie automatycznie usunięty z ekranu.</string>
     <string name="ais_ship_lost_timeout">Przekroczenie limitu widoczności statku – usuń, jeśli w określonym czasie nie odebrano sygnału AIS.</string>
     <string name="ais_load_data">Wczytaj dane AIS z pliku</string>
     <string name="ais_port_nmea_local_description">Zdefiniuj port UDP, na którym OsmAnd odbiera dane NMEA</string>
     <string name="ais_object_lost_timeouts_description">Ustaw wartości limitu czasu, aby zidentyfikować utracone obiekty AIS, jeśli przez określony czas nie odebrano żadnego sygnału.</string>
     <string name="ais_ship_lost_timeout_description">Ustawianie limitu czasu widoczności statku: Po upływie tego czasu bez odbioru sygnału symbol statku zmieni swój stan na ekranie: Zostanie przekreślony.</string>
     <string name="ais_cpa_settings">Ustawienia dotyczące CPA</string>
-    <string name="ais_cpa_settings_description">Wartości te określają sposób prezentacji obiektów AIS, które mogą znajdować się zbyt blisko własnej pozycji.</string>
+    <string name="ais_cpa_settings_description">Wartości te określają sposób wyświetlania obiektów AIS w momencie zbliżania się do pozycji statku.</string>
     <string name="popular_places_nearby">Popularne miejsca w pobliżu</string>
     <string name="recently_visited">Ostatnio odwiedzone</string>
     <string name="shared_string_road_exit">Wyjedź</string>
@@ -5835,7 +5816,7 @@
     <string name="popular_places">Popularne miejsca</string>
     <string name="show_list">Pokaż listę</string>
     <string name="shared_string_map_center">Środek mapy</string>
-    <string name="plugin_ais_tracker_description">Wyświetlaj pozycje AIS i informacje o otaczających statkach. Dane AIS są odbierane przez sieć z zewnętrznego odbiornika AIS.</string>
+    <string name="plugin_ais_tracker_description">Wyświetla pozycje AIS i informacje o pobliskich statkach. Dane AIS są odbierane przez sieć z zewnętrznego odbiornika AIS.</string>
     <string name="contour_layers_action_descr">Zmień warstwy konturowe</string>
     <string name="shared_string_interpolation">Interpolacja</string>
     <string name="location_interpolation_percent">Procent interpolacji lokalizacji</string>
@@ -5847,13 +5828,13 @@
     <string name="reset_average_speed">Zresetuj średnią prędkość</string>
     <string name="intermediate_first">Najpierw średniozaawansowane</string>
     <string name="obd_fuel_type_bifuel_methanol">Dwupaliwowy zasilany metanolem</string>
-    <string name="ais_cpa_warning_time_description">Jeżeli TCPA (czas dotarcia do CPA innym statkiem) jest krótszy od tej wartości, statek jest oznaczony kolorem czerwonym.</string>
+    <string name="ais_cpa_warning_time_description">Jeżeli czas TCPA (czas do najbliższego punktu podejścia) dla innego statku spadnie poniżej określonego progu, statek ten zostanie podświetlony na czerwono.</string>
     <string name="no_photo_for_location_desc">Dla tej lokalizacji nie dodano jeszcze żadnych zdjęć użytkowników</string>
-    <string name="display_distance_to_first_intermediate_summary">Najpierw pokazuje czas i odległość do następnego przystanku. Wyłącz, aby zawsze pokazywać szczegóły dotyczące miejsca docelowego.</string>
+    <string name="display_distance_to_first_intermediate_summary">Wyświetla czas i odległość do następnego przystanku. Wyłącz tę opcję, aby zawsze wyświetlać szczegóły dotyczące celu podróży.</string>
     <string name="change_activity">Zmień aktywność</string>
     <string name="obd_fuel_type_bifuel_gasoline">Dwupaliwowy zasilany benzyną</string>
     <string name="obd_fuel_type_bifuel_lpg">Dwupaliwowy zasilany LPG</string>
-    <string name="ais_cpa_warning_time">Czas ostrzegawczy przed osiągnięciem najbliższego punktu podejścia (CPA)</string>
+    <string name="ais_cpa_warning_time">Czas ostrzegania przed najbliższym punktem podejścia (CPA)</string>
     <string name="ais_cpa_warning_distance">Odległość ostrzegawcza dla najbliższego punktu podejścia (CPA)</string>
     <string name="no_places_available">Brak miejsc w widocznym regionie</string>
     <string name="map_widget_route_information_desc">Wyświetla dla aktywnej trasy nawigacyjnej szacowany czas przyjazdu, pozostały czas podróży i odległość.</string>
@@ -5865,7 +5846,7 @@
     <string name="default_buttons_opacity_original_description">Każdy przycisk zachowuje własne krycie tła.</string>
     <string name="type_of_activity">Rodzaj aktywności</string>
     <string name="choose_location_on_map">Wybierz lokalizację na mapie.</string>
-    <string name="ais_cpa_warning_distance_description">Statki są oznaczane kolorem czerwonym, jeśli CPA jest mniejsze od tej wartości i zostanie osiągnięte w niedalekiej przyszłości (patrz ustawienie Czasu ostrzeżenia o osiągnięciu CPA).</string>
+    <string name="ais_cpa_warning_distance_description">Statki są podświetlane na czerwono, jeśli CPA (najbliższy punkt zbliżenia) znajduje się poniżej określonego progu, a TCPA (czas do CPA) mieści się w czasie ostrzegawczym ustawionym w ustawieniu „Czas ostrzegawczy przed osiągnięciem CPA”.</string>
     <string name="display_distance_to_first_intermediate">Pokaż szczegóły trasy dla następnego przystanku</string>
     <string name="battery">bateria</string>
     <string name="ski_route_switch_style_description">Odkrywaj stoki narciarskie, wyciągi i nie tylko dzięki mapom w stylu zimowym i narciarskim.</string>
@@ -5898,7 +5879,7 @@
     <string name="set_intermediate_point">Ustaw cel pośredni</string>
     <string name="quick_action_start_pause_recording">Przycisk do rozpoczęcia, wstrzymania lub wznowienia nagrywania śladu GPX.</string>
     <string name="obd_fuel_consumption_rate_desc">Wyświetla zużycie paliwa pojazdu na podstawie danych z OBD i lokalizacji</string>
-    <string name="plugin_ais_tracker_disclaimer">ZASTRZEŻENIE\n\nTen plugin jest projektem hobbystycznym i nie został zaprojektowany z myślą o niezawodności ani poprawności działania. NIE należy polegać na tym oprogramowaniu w żaden sposób, w tym do nawigacji lub w sytuacjach związanych z bezpieczeństwem życia.</string>
+    <string name="plugin_ais_tracker_disclaimer">ZASTRZEŻENIE\n\nTa wtyczka jest projektem hobbystycznym i nie jest przeznaczona do użytku w aplikacjach o znaczeniu krytycznym. Nie gwarantuje ona niezawodności ani dokładności. Nie należy polegać na tym oprogramowaniu do nawigacji, zapewnienia bezpieczeństwa życia ani do wykonywania innych niezbędnych operacji.</string>
     <string name="key_event_action_next_app_profile">Następny profil aplikacji</string>
     <string name="key_event_action_previous_app_profile">Poprzedni profil aplikacji</string>
     <string name="key_bindings">Skróty klawiszowe</string>
@@ -6114,4 +6095,21 @@
     <string name="enable_msaa">Włącz MSAA</string>
     <string name="cant_load_map_styles">Nie można wczytać stylów mapy.</string>
     <string name="special_routing_cpp">Specjalny typ wyznaczania trasy</string>
+    <string name="backup_delete_data_warning_extended">Ta czynność spowoduje trwałe usunięcie wszystkich wybranych danych z chmury. Nie będzie możliwe ich późniejsze przywrócenie.</string>
+    <string name="amount_of_total_used">Użyte %1$s z %2$s</string>
+    <string name="delete_data">Usuń dane</string>
+    <string name="manage_storage">Zarządzaj przechowywaniem</string>
+    <string name="manage_storage_delete_data_dialog_summary">Czy na pewno chcesz usunąć %1$s z OsmAnd Cloud?\n\nMożesz je przywrócić z Kosza w ciągu 30 dni.</string>
+    <string name="copy_as_new_folder">Skopiuj jako nowy folder</string>
+    <string name="add_to_a_folder">Dodaj do folderu</string>
+    <string name="add_to_favorites">Dodaj do ulubionych</string>
+    <string name="max_weight_at_full_load_description">Podaj maksymalną masę pojazdu przy pełnym załadunku, aby uniknąć dróg i mostów z ograniczeniami wagowymi.</string>
+    <string name="max_axle_load_description">Podaj maksymalny nacisk na oś pojazdu, aby uniknąć dróg i mostów z ograniczeniami wagowymi.</string>
+    <string name="rendering_attr_depthContoursDashed_name">Kropkowane kontury głębokości</string>
+    <string name="rendering_attr_depthContoursDashed_description">Kropkowane kontury głębokości</string>
+    <string name="rendering_attr_safetyContour_name">Kontur bezpiecznej głębokości</string>
+    <string name="rendering_attr_safetyContour_description">Kontur bezpiecznej głębokości</string>
+    <string name="rendering_attr_fairwayStyle_name">Kolor tras wodnych</string>
+    <string name="rendering_attr_fairwayStyle_description">Kolor tras wodnych</string>
+    <string name="lang_en_barebones">Angielski (prosty)</string>
 </resources>

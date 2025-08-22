@@ -407,7 +407,7 @@
     <string name="plugin_settings">Додаци</string>
     <string name="rendering_value_boldOutline_name">Задебљај обрисне линије</string>
     <string name="no_updates_available">Нема доступних надградњи</string>
-    <string name="download_live_updates">Надградње уживо</string>
+    <string name="download_live_updates">Надоградње уживо</string>
     <string name="rendering_value_default13_name">Подразумевано (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Подразумевано (прозирна зеленкасто-плава)</string>
     <string name="rendering_attr_currentTrackColor_name">Боја ГПИкс-а</string>
@@ -5771,7 +5771,7 @@
     <string name="turn_by_turn_directions">Упутства корак-по-корак</string>
     <string name="failed_to_connect">Нисам успео да се повежем са %1s</string>
     <string name="enable_msaa">Омогући MSAA</string>
-    <string name="next_turn_information">Подаци о следећем скретању</string>
+    <string name="next_turn_information">Информација о следећем скретању</string>
     <string name="next_turn_information_desc">Приказује смер надолазећег скретања и назив улице.</string>
     <string name="description_purchases_fastspring">Можете управљати својим куповинама путем портала за управљање FastSpring налозима.</string>
     <string name="description_subscription_fastspring">Можете управљати или отказати претплату путем портала за управљање FastSpring налозима.</string>
@@ -5839,4 +5839,15 @@
     <string name="rendering_attr_watercolor_description">Боја воде</string>
     <string name="private_access_routing_req_short">Ваше одредиште је у приватној области. Дозволи коришћење приватних путева?</string>
     <string name="view_on_phone">Прикажи на телефону</string>
+    <string name="backup_delete_data_warning_extended">Ова радња ће трајно уклонити све изабране податке из облака. Неће бити могуће вратити их касније.</string>
+    <string name="amount_of_total_used">%1$s од %2$s искоришћено</string>
+    <string name="delete_data">Обриши податке</string>
+    <string name="manage_storage_delete_data_dialog_summary">Да ли сте сигурни да желите да обришете %1$s из ОсмАнд Облака?\n\nМожете их вратити из корпе за отпад у року од 30 дана.</string>
+    <string name="manage_storage">Управљање складиштем</string>
+    <string name="copy_as_new_folder">Копирај као нови фолдер</string>
+    <string name="add_to_a_folder">Додај у фолдеру</string>
+    <string name="add_to_favorites">Додај у омиљене</string>
+    <string name="max_weight_at_full_load_description">Наведите максималну тежину вашег возила при пуном оптерећењу како бисте избегли путеве и мостове са ограничењима тежине.</string>
+    <string name="max_axle_load_description">Наведите максимално осовинско оптерећење вашег возила како бисте избегли путеве и мостове са ограничењима тежине.</string>
+    <string name="lang_en_barebones">Енглески (основни)</string>
 </resources>

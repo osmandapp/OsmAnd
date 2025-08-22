@@ -40,7 +40,8 @@ public class RenderingRulesStorage {
 	// C++
 	List<String> dictionary = new ArrayList<String>();
 	Map<String, Integer> dictionaryMap = new LinkedHashMap<String, Integer>();
-	
+	Map<String, String> classProperties = new LinkedHashMap<String, String>();
+
 	public RenderingRuleStorageProperties PROPS = new RenderingRuleStorageProperties();
 
 	@SuppressWarnings("unchecked")

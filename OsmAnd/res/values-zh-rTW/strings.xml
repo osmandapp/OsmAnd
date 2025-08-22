@@ -5681,4 +5681,17 @@
     <string name="rendering_attr_watercolor_description">設定水色</string>
     <string name="marine_renderer">海洋</string>
     <string name="marine_render_descr">高度可客製化的海事導航樣式。基於海圖樣式，搭配海上標記世界地圖和深度地圖效果更佳。</string>
+    <string name="backup_delete_data_warning_extended">此動作將會從雲端移除所有選定的資料。之後將無法還原。</string>
+    <string name="amount_of_total_used">已使用 %2$s 中的 %1$s</string>
+    <string name="delete_data">刪除資料</string>
+    <string name="manage_storage_delete_data_dialog_summary">您確定您想要從 OsmAnd Cloud 刪除 %1$s 嗎？\n\n您可以在30天內將它們從回收桶還原。</string>
+    <string name="manage_storage">管理儲存空間</string>
+    <string name="copy_as_new_folder">複製為新資料夾</string>
+    <string name="add_to_a_folder">新增至資料夾</string>
+    <string name="add_to_favorites">新增至收藏</string>
+    <string name="max_weight_at_full_load_description">提供您車輛滿載時的最大重量，以避開有重量限制的道路與橋樑。</string>
+    <string name="max_axle_load_description">提供您車輛的最大軸重，以避開有重量限制的道路與橋樑。</string>
+    <string name="private_access_routing_req_short">您的目的地位於私人區域。允許使用私人道路？</string>
+    <string name="view_on_phone">在手機上檢視</string>
+    <string name="lang_en_barebones">英文（簡易）</string>
 </resources>

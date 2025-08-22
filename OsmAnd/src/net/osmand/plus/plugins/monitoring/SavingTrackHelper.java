@@ -330,8 +330,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		duration = 0;
 		trkPoints = 0;
 		currentTrackIndex++;
-		app.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
-		currentTrack.getModifiableGpxFile().getTracks().clear();
+
+		GpxFile gpxFile = currentTrack.getModifiableGpxFile();
+		gpxFile.clearData();
+		app.getSelectedGpxHelper().syncGpxWithMarkers(gpxFile);
+
 		currentTrack.clearSegmentsToDisplay();
 		currentTrack.getModifiableGpxFile().setModifiedTime(time);
 		currentTrack.getModifiableGpxFile().setPointsModifiedTime(time);
@@ -339,7 +342,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	}
 
 	public Map<String, GpxFile> collectRecordedData() {
-		Map<String, GpxFile> data = new LinkedHashMap<String, GpxFile>();
+		Map<String, GpxFile> data = new LinkedHashMap<>();
 		SQLiteDatabase db = getReadableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
@@ -619,7 +622,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			currentTrack.addEmptySegmentToDisplay();
 		}
 		boolean segmentAdded = false;
-		if (track.getSegments().size() == 0 || newSegment) {
+		if (track.getSegments().isEmpty() || newSegment) {
 			track.getSegments().add(new TrkSegment());
 			segmentAdded = true;
 		}

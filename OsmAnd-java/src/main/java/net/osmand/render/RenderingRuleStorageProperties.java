@@ -34,6 +34,7 @@ public class RenderingRuleStorageProperties {
 	public static final String TEXT_LENGTH = "textLength";
 	public static final String NAME_TAG = "nameTag";
 	public static final String NAME_TAG2 = "nameTag2";
+	public static final String R_CLASS = "rClass";
 	public static final String TEXT_SHIELD = "textShield";
 	public static final String SHIELD = "shield";
 	public static final String SHADOW_RADIUS = "shadowRadius";
@@ -112,6 +113,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_LENGTH;
 	public RenderingRuleProperty R_NAME_TAG;
 	public RenderingRuleProperty R_NAME_TAG2;
+	public RenderingRuleProperty R_R_CLASS;
 	public RenderingRuleProperty R_TEXT_SHIELD;
 	public RenderingRuleProperty R_SHIELD;
 	public RenderingRuleProperty R_SHADOW_RADIUS;
@@ -229,6 +231,7 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
 		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(NAME_TAG));
 		R_NAME_TAG2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(NAME_TAG2));
+		R_R_CLASS = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(R_CLASS));
 
 		R_ASSOCIATION = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ASSOCIATION));
 		R_DISABLE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(DISABLE));
