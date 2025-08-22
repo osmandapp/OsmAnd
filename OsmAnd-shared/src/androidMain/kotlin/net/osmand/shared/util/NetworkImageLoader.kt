@@ -28,7 +28,7 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
 
         private const val MAX_ATTEMPTS = 5
         private const val HTTP_TOO_MANY_REQUESTS = 429
-        private const val RETRY_SLEEP = MAX_REQUESTS_PER_HOST * 1000L;
+        private const val RETRY_SLEEP = MAX_REQUESTS_PER_HOST * 1000L
     }
 
     private val okDispatcher = okhttp3.Dispatcher().apply {
@@ -67,7 +67,7 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
                 } catch (e: java.io.IOException) {
                     lastIoError = e
                 }
-                val backoff = RETRY_SLEEP * attempt;
+                val backoff = RETRY_SLEEP * attempt
                 Thread.sleep(Random.nextLong(backoff, backoff * 2))
             }
             throw lastIoError ?: java.io.IOException("MAX_ATTEMPTS (HTTP $lastCode)")
