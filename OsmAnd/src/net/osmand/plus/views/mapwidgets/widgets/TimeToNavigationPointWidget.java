@@ -44,7 +44,6 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		setText(null, null);
 		updateIcons();
 		updateContentTitle();
-		setOnClickListener(getOnClickListener());
 		updateWidgetName();
 	}
 
