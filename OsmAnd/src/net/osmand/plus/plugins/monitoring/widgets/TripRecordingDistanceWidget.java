@@ -32,7 +32,6 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

@@ -33,7 +33,6 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 
 		setIcons(TRIP_RECORDING_TIME);
 		updateInfo(null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

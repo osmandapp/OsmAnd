@@ -52,7 +52,6 @@ public class ZoomLevelWidget extends SimpleWidget {
 		this.widgetState = widgetState;
 		updateInfo(null);
 		setIcons(DEV_ZOOM_LEVEL);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@NonNull

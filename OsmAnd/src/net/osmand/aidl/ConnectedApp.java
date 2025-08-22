@@ -268,7 +268,6 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			this.widgetId = widgetId;
 
 			updateInfo(null);
-			setOnClickListener(getOnClickListener());
 		}
 
 		@Override

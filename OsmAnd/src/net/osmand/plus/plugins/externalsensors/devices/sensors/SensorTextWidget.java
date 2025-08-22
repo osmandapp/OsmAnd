@@ -50,7 +50,6 @@ public class SensorTextWidget extends SimpleWidget {
 		applyDeviceId();
 		updateInfo(null);
 		setImageDrawable(getIconId());
-		setOnClickListener(getOnClickListener());
 		updateWidgetName();
 	}
 

@@ -86,7 +86,6 @@ public class WeatherWidget extends SimpleWidget {
 		this.callback.swigReleaseOwnership();
 		setIcons(widgetType);
 		setText(NO_VALUE, null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

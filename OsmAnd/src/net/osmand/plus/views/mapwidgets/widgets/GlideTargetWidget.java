@@ -41,8 +41,6 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		super(mapActivity, WidgetType.GLIDE_TARGET, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		updateInfo(null);
-
-		setOnClickListener(getOnClickListener());
 		updateWidgetName();
 	}
 

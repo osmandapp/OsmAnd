@@ -19,7 +19,6 @@ public class MapillaryMapWidget extends SimpleWidget {
 
 		setText(app.getString(R.string.mapillary), "");
 		setIcons(MAPILLARY);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

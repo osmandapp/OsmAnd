@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -185,8 +186,12 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 		return false;
 	}
 
-	public void setOnClickListener(@Nullable OnClickListener onClickListener) {
-		view.setOnClickListener(onClickListener);
+	public void setOnClickListener(@Nullable OnClickListener listener) {
+		view.setOnClickListener(listener);
+	}
+
+	public void setOnLongClickListener(@Nullable OnLongClickListener listener) {
+		view.setOnLongClickListener(listener);
 	}
 
 	@Override
