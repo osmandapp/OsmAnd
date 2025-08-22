@@ -91,7 +91,7 @@ public class WidgetsContextMenu {
 						builder.setMessage(R.string.delete_widget_description);
 						builder.setNegativeButton(R.string.shared_string_cancel, null)
 								.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-									widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
+									widgetRegistry.removeWidget(mapActivity, appMode, widgetInfo);
 								});
 						builder.show();
 					})

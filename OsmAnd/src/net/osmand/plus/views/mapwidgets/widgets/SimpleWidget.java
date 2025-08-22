@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -95,14 +95,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 				params.setMarginStart(dpToPx(app, (shouldShowIcon() || fullRow) ? 36 : 0));
 				params.setMarginEnd(dpToPx(app, fullRow ? 36 : 0));
 			}
-		}
-	}
-
-	@Override
-	public void updateHiddenNameText() {
-		if (widgetName != null && widgetName.getVisibility() == View.GONE) {
-			widgetName.setVisibility(INVISIBLE);
-			checkForMaxWidgetName();
 		}
 	}
 
@@ -266,23 +258,33 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		if (widgetName == null) {
 			return;
 		}
-		widgetName.post(() -> {
-			String text = widgetName.getText().toString();
 
-			String firstFourSymbols = (text.length() > 4 ? text.substring(0, 4) : text).toUpperCase();
+		widgetName.addViewChangeListener(new ViewChangeListener() {
+			@Override
+			public void onSizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight) {
+				String text = widgetName.getText().toString();
 
-			if (text.length() > 4) {
-				firstFourSymbols += "…";
+				String firstFourSymbols = (text.length() > 4 ? text.substring(0, 4) : text).toUpperCase();
+
+				if (text.length() > 4) {
+					firstFourSymbols += "…";
+				}
+
+				int titleViewWidth = widgetName.getWidth();
+				if (titleViewWidth == 0) {
+					return;
+				}
+
+				TextPaint paint = widgetName.getPaint();
+				float requiredWidth = paint.measureText(firstFourSymbols);
+				float availableWidth = titleViewWidth - widgetName.getPaddingLeft() - widgetName.getPaddingRight();
+				boolean hideTitle = availableWidth < requiredWidth;
+				AndroidUiHelper.updateVisibility(widgetName, !hideTitle);
 			}
 
-			TextPaint paint = widgetName.getPaint();
-			float requiredWidth = paint.measureText(firstFourSymbols);
-			float availableWidth = widgetName.getWidth() - widgetName.getPaddingLeft() - widgetName.getPaddingRight();
+			@Override
+			public void onVisibilityChanged(@NonNull View view, int visibility) {
 
-			if (availableWidth < requiredWidth) {
-				widgetName.setVisibility(View.GONE);
-			} else {
-				widgetName.setVisibility(View.VISIBLE);
 			}
 		});
 	}

@@ -110,7 +110,7 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 					deleteAction.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 					deleteAction.setOnMenuItemClickListener(item -> {
 						if (widgetInfo != null) {
-							widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
+							widgetRegistry.removeWidget(requireMapActivity(), appMode, widgetInfo);
 							dismiss();
 						}
 						return true;
@@ -148,6 +148,11 @@ public class WidgetInfoBaseFragment extends BaseOsmAndFragment {
 				return false;
 			}
 		};
+	}
+
+	@NonNull
+	protected MapActivity requireMapActivity() {
+		return (MapActivity) requireActivity();
 	}
 
 	private void showDuplicateAddedSnackbar() {
