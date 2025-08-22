@@ -203,10 +203,18 @@ public class MapRendererContext {
 
 		int zoom = app.getOsmandMap().getMapView().getZoom();
 		String langId = MapRenderRepositories.getMapPreferredLocale(app, zoom);
-		boolean transliterate = MapRenderRepositories.transliterateMapNames(app, zoom);
-		LanguagePreference langPref = transliterate
-				? LanguagePreference.LocalizedOrTransliterated
-				: LanguagePreference.LocalizedOrNative;
+		int mapLanguageSetting = MapRenderRepositories.getMapLanguageSetting(app, zoom);
+		
+		LanguagePreference langPref = switch (mapLanguageSetting) {
+            case 0 -> LanguagePreference.NativeOnly;
+            case 1 -> LanguagePreference.LocalizedOrNative;
+            case 2 -> LanguagePreference.NativeAndLocalized;
+            case 3 -> LanguagePreference.NativeAndLocalizedOrTransliterated;
+            case 4 -> LanguagePreference.LocalizedAndNative;
+            case 5 -> LanguagePreference.LocalizedOrTransliteratedAndNative;
+            case 6 -> LanguagePreference.LocalizedOrTransliterated;
+            default -> LanguagePreference.LocalizedOrNative;
+        };
 
 		loadRendererAddons();
 		String rendName = settings.RENDERER.get();
