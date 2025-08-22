@@ -6173,4 +6173,15 @@
     <string name="descent">Daling</string>
     <string name="private_access_routing_req_short">De bestemming ligt op een privéterrein. Gebruik van privéwegen toestaan?</string>
     <string name="view_on_phone">Bekijk op telefoon</string>
+    <string name="backup_delete_data_warning_extended">Deze actie verwijdert alle geselecteerde gegevens permanent uit de cloud. Het is daarna niet meer mogelijk om ze te herstellen.</string>
+    <string name="amount_of_total_used">%1$s van %2$s gebruikt</string>
+    <string name="delete_data">Verwijder gegevens</string>
+    <string name="manage_storage_delete_data_dialog_summary">Weet je zeker dat je %1$s wilt verwijderen uit de OsmAnd Cloud?\n\nJe kan het binnen dertig dagen herstellen vanuit de prullenbak.</string>
+    <string name="manage_storage">Opslag beheren</string>
+    <string name="copy_as_new_folder">Kopieer als nieuwe map</string>
+    <string name="add_to_a_folder">Voeg toe aan een map</string>
+    <string name="add_to_favorites">Voeg toe aan favorieten</string>
+    <string name="max_weight_at_full_load_description">Geef het maximaal toegestane gewicht van je voertuig bij volledige belading op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
+    <string name="max_axle_load_description">Geef de maximale asbelasting van je voertuig op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
+    <string name="lang_en_barebones">Engels (barebones)</string>
 </resources>
