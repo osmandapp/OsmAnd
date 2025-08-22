@@ -59,7 +59,13 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Override
 	protected void makeFullUrl(@NonNull StringBuilder sb, @NonNull List<LatLon> path, @Nullable Float startBearing) {
-		sb.append("?");
+		if (sb.indexOf("?") >= 0) {
+			if (sb.charAt(sb.length() - 1) != '?' && sb.charAt(sb.length() - 1) != '&') {
+				sb.append('&');
+			}
+		} else {
+			sb.append('?');
+		}
 		for (int i = 0; i < path.size(); i++) {
 			LatLon point = path.get(i);
 			sb.append("point=")
