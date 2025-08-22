@@ -5,7 +5,6 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,11 +31,10 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.base.BaseOsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -45,7 +43,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter.NotesAdapterListener;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -53,14 +50,13 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class NotesFragment extends OsmAndListFragment implements FragmentStateHolder {
+public class NotesFragment extends BaseOsmAndListFragment implements FragmentStateHolder {
 
 	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
 
@@ -84,6 +80,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		FragmentManager fm = getChildFragmentManager();
 		Fragment itemMenu = fm.findFragmentByTag(ItemMenuBottomSheetDialogFragment.TAG);
 		if (itemMenu != null) {
@@ -93,14 +90,12 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		setHasOptionsMenu(true);
 
-		OsmandApplication app = getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		View view = inflater.inflate(R.layout.update_index, container, false);
+		View view = inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ViewStub emptyStub = view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
 		emptyView = emptyStub.inflate();
-		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
+		emptyView.setBackgroundColor(getBackgroundColor());
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 
 		int icRes = !nightMode ? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
@@ -110,28 +105,20 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		OsmandApplication app = getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		getListView().setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
 		List<Object> items = createItemsList();
 		ListView listView = getListView();
 		listView.setDivider(null);
 		listView.setEmptyView(emptyView);
-		if (items.size() > 0 && footerView == null && portrait) {
-			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
+		if (!items.isEmpty() && footerView == null && portrait) {
+			footerView = inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 			listView.setHeaderDividersEnabled(false);
 			listView.setFooterDividersEnabled(false);
 		}
-		listAdapter = new NotesAdapter(getMyApplication(), items);
+		listAdapter = new NotesAdapter(app, items);
 		listAdapter.setSelectionMode(selectionMode);
 		listAdapter.setSelected(selected);
 		listAdapter.setListener(createAdapterListener());
@@ -174,8 +161,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		Drawable shareIcon = AndroidUtils.getDrawableForDirection(activity,
-				getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark));
+		Drawable shareIcon = AndroidUtils.getDrawableForDirection(app, requireIcon(R.drawable.ic_action_gshare_dark));
 		item = menu.add(R.string.shared_string_share).setIcon(shareIcon);
 		item.setOnMenuItemClickListener(menuItem -> {
 			enterSelectionMode(MODE_SHARE);
@@ -189,13 +175,6 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 			return true;
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-	}
-
-	public OsmandActionBarActivity getActionBarActivity() {
-		if (getActivity() instanceof OsmandActionBarActivity) {
-			return (OsmandActionBarActivity) getActivity();
-		}
-		return null;
 	}
 
 	private List<Object> createItemsList() {
@@ -266,12 +245,8 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 
 			@Override
 			public void onOptionsClick(Recording rec) {
-				ItemMenuBottomSheetDialogFragment fragment = new ItemMenuBottomSheetDialogFragment();
-				fragment.setUsedOnMap(false);
-				fragment.setListener(createItemMenuFragmentListener());
-				fragment.setRecording(rec);
-				fragment.setRetainInstance(true);
-				fragment.show(getChildFragmentManager(), ItemMenuBottomSheetDialogFragment.TAG);
+				ItemMenuBottomSheetDialogFragment.showInstance(
+						getChildFragmentManager(), createItemMenuFragmentListener(), rec);
 			}
 		};
 	}
@@ -320,18 +295,15 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	}
 
 	private List<Recording> sortRecsByDateDescending(List<Recording> recs) {
-		Collections.sort(recs, new Comparator<>() {
-			@Override
-			public int compare(Recording first, Recording second) {
-				long firstTime = first.getLastModified();
-				long secondTime = second.getLastModified();
-				if (firstTime < secondTime) {
-					return 1;
-				} else if (firstTime == secondTime) {
-					return 0;
-				} else {
-					return -1;
-				}
+		Collections.sort(recs, (first, second) -> {
+			long firstTime = first.getLastModified();
+			long secondTime = second.getLastModified();
+			if (firstTime < secondTime) {
+				return 1;
+			} else if (firstTime == secondTime) {
+				return 0;
+			} else {
+				return -1;
 			}
 		});
 		return recs;
@@ -349,29 +321,24 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				LOG.debug("onCreateActionMode");
-				OsmandApplication app = getMyApplication();
 				if (type == MODE_SHARE) {
 					listAdapter.insert(SHARE_LOCATION_FILE, 0);
 				}
 				switchSelectionMode(true);
 				int titleRes = type == MODE_DELETE ? R.string.shared_string_delete_all : R.string.shared_string_share;
 				int iconRes = type == MODE_DELETE ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_gshare_dark;
-				Drawable icon = AndroidUtils.getDrawableForDirection(app,
-						app.getUIUtilities().getIcon(iconRes));
-				MenuItem item = menu.add(titleRes).setIcon(icon);
-				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						if (type == MODE_DELETE) {
-							deleteItems(selected);
-						} else if (type == MODE_SHARE) {
-							shareItems(selected);
-						}
-						mode.finish();
-						return true;
+				Drawable icon = AndroidUtils.getDrawableForDirection(app, requireIcon(iconRes));
+				MenuItem menuItem = menu.add(titleRes).setIcon(icon);
+				menuItem.setOnMenuItemClickListener(item -> {
+					if (type == MODE_DELETE) {
+						deleteItems(selected);
+					} else if (type == MODE_SHARE) {
+						shareItems(selected);
 					}
+					mode.finish();
+					return true;
 				});
-				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selected.clear();
 				updateSelectionMode(mode);
 				return true;
@@ -409,7 +376,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	}
 
 	private void updateSelectionTitle(ActionMode m) {
-		if (selected.size() > 0) {
+		if (!selected.isEmpty()) {
 			m.setTitle(selected.size() + " " + getString(R.string.shared_string_selected_lowercase));
 		} else {
 			m.setTitle("");
@@ -422,19 +389,16 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	}
 
 	private void deleteItems(Set<Recording> selected) {
-		new AlertDialog.Builder(getActivity())
+		new AlertDialog.Builder(getThemedContext())
 				.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()))
-				.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Iterator<Recording> it = selected.iterator();
-						while (it.hasNext()) {
-							Recording rec = it.next();
-							plugin.deleteRecording(rec, true);
-							it.remove();
-						}
-						recreateAdapterData();
+				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
+					Iterator<Recording> it = selected.iterator();
+					while (it.hasNext()) {
+						Recording rec = it.next();
+						plugin.deleteRecording(rec, true);
+						it.remove();
 					}
+					recreateAdapterData();
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
@@ -447,7 +411,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 				shareRecordingsTask.cancel(false);
 			}
 			shareRecordingsTask = new ShareRecordingsTask(activity, plugin, selected);
-			shareRecordingsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(shareRecordingsTask);
 		}
 	}
 
@@ -455,7 +419,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		return new ItemMenuFragmentListener() {
 			@Override
 			public void playOnClick(Recording recording) {
-				plugin.playRecording(getActivity(), recording);
+				plugin.playRecording(requireActivity(), recording);
 			}
 
 			@Override
@@ -484,7 +448,6 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		if (!recording.getFile().exists()) {
 			return;
 		}
-
 		Activity activity = getActivity();
 		if (activity != null) {
 			String type = null;
@@ -495,8 +458,6 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 			} else if (recording.isVideo()) {
 				type = "video/*";
 			}
-
-			OsmandApplication app = getMyApplication();
 			File file = recording.getFile().getAbsoluteFile();
 			new NativeShareDialogBuilder()
 					.addFileWithSaveAction(file, app, requireActivity(), true)
@@ -514,29 +475,26 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 
 	private void showOnMap(Recording recording, int itemPosition) {
 		selectedItemPosition = itemPosition;
-		((MyPlacesActivity) getActivity()).showOnMap(this, recording.getLatitude(), recording.getLongitude(), 15,
+		((MyPlacesActivity) requireActivity()).showOnMap(this, recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
 	}
 
 	private void editNote(Recording recording) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getThemedContext());
 		builder.setTitle(R.string.shared_string_rename);
-		View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
+		View v = inflate(R.layout.note_edit_dialog, getListView(), false);
 		EditText editText = v.findViewById(R.id.name);
 		builder.setView(v);
 		editText.setText(recording.getName(getActivity(), true));
-		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (!recording.setName(editText.getText().toString())) {
-				AndroidUtils.getApp(requireContext()).showShortToastMessage(R.string.rename_failed);
-				}
-				listAdapter.notifyDataSetInvalidated();
+		builder.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
+			if (!recording.setName(editText.getText().toString())) {
+				app.showShortToastMessage(R.string.rename_failed);
 			}
+			listAdapter.notifyDataSetInvalidated();
 		});
 		builder.create().show();
 		editText.requestFocus();
@@ -580,5 +538,10 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 				}
 			}
 		}
+	}
+
+	@Override
+	protected int getBackgroundColor() {
+		return ColorUtilities.getActivityBgColor(app, nightMode);
 	}
 }

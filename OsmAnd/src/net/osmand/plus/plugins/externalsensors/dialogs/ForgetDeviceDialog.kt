@@ -7,6 +7,7 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
+import net.osmand.plus.utils.AndroidUtils
 
 class ForgetDeviceDialog : ForgetDeviceBaseDialog() {
     private lateinit var device: AbstractDevice<out AbstractSensor>
@@ -16,12 +17,14 @@ class ForgetDeviceDialog : ForgetDeviceBaseDialog() {
 		    if (targetFragment !is ForgetDeviceListener) {
                 throw IllegalArgumentException("target fragment should implement ForgetDeviceListener")
             }
-            val fragment = ForgetDeviceDialog()
-            val args = Bundle()
-            args.putString(DEVICE_ID_KEY, deviceId)
-            fragment.arguments = args
-            fragment.setTargetFragment(targetFragment, 0)
-            fragment.show(manager, TAG)
+            if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+                val fragment = ForgetDeviceDialog()
+                val args = Bundle()
+                args.putString(DEVICE_ID_KEY, deviceId)
+                fragment.arguments = args
+                fragment.setTargetFragment(targetFragment, 0)
+                fragment.show(manager, TAG)
+            }
         }
     }
 
@@ -29,9 +32,10 @@ class ForgetDeviceDialog : ForgetDeviceBaseDialog() {
         fun onForgetSensorConfirmed(device: AbstractDevice<out AbstractSensor>)
     }
 
-	override fun initDevice(deviceId: String) {
+	override fun initDevice(arguments: Bundle) {
+		val deviceId = arguments.getString(DEVICE_ID_KEY)
 		val plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin::class.java)
-		val device = plugin?.getDevice(deviceId)
+		val device = if (deviceId != null) plugin?.getDevice(deviceId) else null
 		if (device == null) {
 			dismiss()
 		} else {

@@ -1,9 +1,7 @@
 package net.osmand.plus.track.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -18,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -46,13 +44,11 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = DisplayGroupsBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
 	private TrackDisplayHelper displayHelper;
 	private SelectedGpxFile selectedGpxFile;
 
 	private final List<SelectableItem<GpxDisplayGroup>> uiItems = new ArrayList<>();
 	private final Map<SelectableItem<GpxDisplayGroup>, View> listViews = new HashMap<>();
-	private LayoutInflater inflater;
 	private LinearLayout listContainer;
 	private TextView sizeIndication;
 	private View stateButton;
@@ -67,8 +63,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_display_groups_visibility, null);
+		View view = inflate(R.layout.bottom_sheet_display_groups_visibility);
 		sizeIndication = view.findViewById(R.id.selected_size);
 		stateButton = view.findViewById(R.id.state_button);
 		listContainer = view.findViewById(R.id.list);
@@ -84,7 +79,6 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void initData() {
-		app = requiredMyApplication();
 		callback = (DisplayPointGroupsCallback) getTargetFragment();
 		if (callback != null) {
 			displayHelper = callback.getDisplayHelper();
@@ -107,7 +101,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 			String categoryName = group.getName();
 			if (TextUtils.isEmpty(categoryName)) {
-				categoryName = app.getString(R.string.shared_string_gpx_points);
+				categoryName = getString(R.string.shared_string_gpx_points);
 			}
 			uiItem.setTitle(categoryName);
 			uiItem.setColor(group.getColor());
@@ -133,7 +127,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		listContainer.removeAllViews();
 		listViews.clear();
 		for (SelectableItem<GpxDisplayGroup> item : uiItems) {
-			View view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_and_switch_56dp, listContainer, false);
+			View view = inflate(R.layout.bottom_sheet_item_with_descr_and_switch_56dp, listContainer, false);
 			TextView title = view.findViewById(R.id.title);
 			title.setText(item.getTitle());
 
@@ -166,7 +160,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 	}
 
-	private void updateGroupVisibility(String groupName, boolean visible) {
+	private void updateGroupVisibility(@NonNull String groupName, boolean visible) {
 		GpxFile gpxFile = selectedGpxFile.getGpxFile();
 		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(groupName);
 		if (pointsGroup != null) {
@@ -174,6 +168,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
+	@NonNull
 	private List<String> getGroupsNames() {
 		List<String> names = new ArrayList<>();
 		for (SelectableItem<GpxDisplayGroup> item : uiItems) {
@@ -204,9 +199,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		for (SelectableItem<GpxDisplayGroup> item : uiItems) {
 			View view = listViews.get(item);
-			if (view == null) {
-				continue;
-			}
+			if (view == null) continue;
 
 			GpxDisplayGroup group = item.getObject();
 			boolean isVisible = group != null && !selectedGpxFile.isGroupHidden(group.getName());
@@ -257,7 +250,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (activity != null) {
 			Map<String, PointsGroup> groups = new HashMap<>(gpxFile.getPointsGroups());
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(task);
 		}
 	}
 

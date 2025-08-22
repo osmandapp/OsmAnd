@@ -3,10 +3,12 @@ package net.osmand.plus.backup.ui;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -21,11 +23,14 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = ClearTypesBottomSheet.class.getSimpleName();
 
+	private static final String PROCESS_ID_KEY = "process_id";
 	private static final String CLEAR_TYPE_KEY = "clear_type_key";
 	private static final String DISABLED_TYPES_KEY = "disabled_types_key";
 
 	private final List<ExportType> types = new ArrayList<>();
+	private BaseBackupTypesController controller;
 	private BackupClearType clearType;
+	private String processId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,10 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 			if (savedInstanceState.containsKey(CLEAR_TYPE_KEY)) {
 				clearType = BackupClearType.valueOf(savedInstanceState.getString(CLEAR_TYPE_KEY));
 			}
+			processId = savedInstanceState.getString(PROCESS_ID_KEY);
 		}
+		DialogManager dialogManager = app.getDialogManager();
+		controller = (BaseBackupTypesController) dialogManager.findController(processId);
 	}
 
 	@Override
@@ -50,12 +58,14 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 				.setLayoutId(R.layout.bottom_sheet_item_title)
 				.create());
 
+		String baseDescription = getString(clearType.descriptionId);
+		String extendedDescription = getString(R.string.backup_delete_data_warning_extended);
 		items.add(new LongDescriptionItem.Builder()
-				.setDescription(getString(clearType.descriptionId))
+				.setDescription(baseDescription + "\n\n" + extendedDescription)
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create());
 
-		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+		items.add(new DividerSpaceItem(getContext(), getDimensionPixelSize(R.dimen.content_padding_small)));
 	}
 
 	@Override
@@ -67,14 +77,12 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		outState.putStringArrayList(DISABLED_TYPES_KEY, names);
 		outState.putString(CLEAR_TYPE_KEY, clearType.name());
+		outState.putString(PROCESS_ID_KEY, processId);
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnClearTypesListener) {
-			((OnClearTypesListener) fragment).onClearTypesConfirmed(types);
-		}
+		controller.onClearTypesConfirmed(types);
 		dismiss();
 	}
 
@@ -91,17 +99,6 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected DialogButtonType getRightBottomButtonType() {
 		return DialogButtonType.SECONDARY_HARMFUL;
-	}
-
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull List<ExportType> types,
-									@NonNull BackupClearType clearType, @NonNull Fragment target) {
-		if (!manager.isStateSaved()) {
-			ClearTypesBottomSheet fragment = new ClearTypesBottomSheet();
-			fragment.types.addAll(types);
-			fragment.clearType = clearType;
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
-		}
 	}
 
 	public enum BackupClearType {
@@ -122,6 +119,19 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 
 		public int getDescriptionId() {
 			return descriptionId;
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull BaseBackupTypesController controller,
+	                                @NonNull List<ExportType> types) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			ClearTypesBottomSheet fragment = new ClearTypesBottomSheet();
+			fragment.types.addAll(types);
+			fragment.clearType = controller.clearType;
+			fragment.processId = controller.getProcessId();
+			fragment.show(manager, TAG);
 		}
 	}
 

@@ -4,10 +4,8 @@ import static net.osmand.plus.settings.enums.HistorySource.NAVIGATION;
 import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
-import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,10 +28,11 @@ import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryListener;
@@ -52,7 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
+public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment implements OnItemSelectedListener,
 		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener, DeleteHistoryListener {
 
 	protected final List<Object> items = new ArrayList<>();
@@ -83,7 +82,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		View view = themedInflater.inflate(R.layout.history_preferences_fragment, container, false);
+		View view = inflate(R.layout.history_preferences_fragment, container, false);
 
 		appbar = view.findViewById(R.id.appbar);
 		recyclerView = view.findViewById(R.id.list);
@@ -149,7 +148,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		} else {
 			int color = ContextCompat.getColor(app, R.color.active_buttons_and_links_text_light);
 			int colorWithAlpha = ColorUtilities.getColorWithAlpha(color, 0.5f);
-			shareButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_upload, colorWithAlpha));
+			shareButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_upload, colorWithAlpha));
 		}
 		shareButton.setEnabled(checked);
 
@@ -266,7 +265,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	@Override
 	public void onDeletionConfirmed() {
 		DeleteHistoryTask deleteHistoryTask = new DeleteHistoryTask(requireActivity(), selectedItems, this);
-		deleteHistoryTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(deleteHistoryTask);
 	}
 
 	public void onDeletionComplete() {

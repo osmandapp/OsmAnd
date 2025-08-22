@@ -151,7 +151,7 @@
     <string name="poi_toll_booth">Cabina de peaje</string>
     <string name="poi_border_control">Control fronterizo</string>
     <string name="poi_traffic_calming_bump">Lomo de burro (pequeño);Reductor de velocidad;Lomada;Lomo de toro;Badén;Banda de frenado</string>
-    <string name="poi_traffic_calming_hump">Resalte (grande);Lomada (grande);Reductor de velocidad (lomada, grande)</string>
+    <string name="poi_traffic_calming_hump">Reductor de velocidad (lomada grande);Resalte (grande);Lomada (grande)</string>
     <string name="poi_traffic_calming_cushion">Cojín berlinés</string>
     <string name="poi_traffic_calming_chicane">Chicana</string>
     <string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
@@ -3057,7 +3057,7 @@
     <string name="poi_life_ring">Aro salvavidas</string>
     <string name="poi_zoo_type">Tipo de zoológico</string>
     <string name="poi_zoo_petting_zoo">Zoológico interactivo</string>
-    <string name="poi_zoo_wildlife_park">Reserva natural</string>
+    <string name="poi_zoo_wildlife_park">Parque de vida silvestre</string>
     <string name="poi_zoo_enclosure">Recinto</string>
     <string name="poi_zoo_safari_park">Parque safari</string>
     <string name="poi_zoo_birds">Aves</string>

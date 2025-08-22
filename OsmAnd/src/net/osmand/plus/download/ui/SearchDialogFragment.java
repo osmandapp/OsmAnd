@@ -25,7 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
@@ -37,9 +38,10 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
@@ -70,16 +72,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class SearchDialogFragment extends DialogFragment implements DownloadEvents, OnItemClickListener {
+public class SearchDialogFragment extends BaseFullScreenDialogFragment implements DownloadEvents,
+		OnItemClickListener {
 
-	public static final String TAG = "SearchDialogFragment";
+	public static final String TAG = SearchDialogFragment.class.getSimpleName();
 	private static final String SEARCH_TEXT_DLG_KEY = "search_text_dlg_key";
 	public static final String SHOW_GROUP_KEY = "show_group_key";
 	public static final String DOWNLOAD_TYPES_TO_SHOW_KEY = "download_types_to_show";
 	public static final String SHOW_WIKI_KEY = "show_wiki_key";
-
-	private OsmandApplication app;
-	private boolean nightMode;
 
 	private boolean showGroup;
 	private ArrayList<String> downloadTypesToShow = new ArrayList<>();
@@ -92,19 +92,11 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	private ImageButton clearButton;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-	}
-
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		View view = inflate(R.layout.maps_in_category_fragment, container, false);
 		Context themedContext = UiUtilities.getThemedContext(requireContext(), nightMode);
-		LayoutInflater themedInflater = LayoutInflater.from(themedContext);
-		View view = themedInflater.inflate(R.layout.maps_in_category_fragment, container, false);
 
 		if (savedInstanceState != null) {
 			searchText = savedInstanceState.getString(SEARCH_TEXT_DLG_KEY);
@@ -128,7 +120,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
+		Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(app), iconColorResId);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
@@ -151,7 +143,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		listView.setOnItemClickListener(this);
 		listView.setAdapter(listAdapter);
 
-		View searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
+		View searchView = inflate(R.layout.search_text_layout, toolbar, false);
 		toolbar.addView(searchView);
 
 		searchEditText = view.findViewById(R.id.searchEditText);
@@ -162,7 +154,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		progressBar = view.findViewById(R.id.searchProgressBar);
 		clearButton = view.findViewById(R.id.clearButton);
-		clearButton.setColorFilter(ContextCompat.getColor(app, iconColorResId));
+		clearButton.setColorFilter(getColor(iconColorResId));
 		clearButton.setVisibility(View.GONE);
 
 		searchEditText.addTextChangedListener(new SimpleTextWatcher() {
@@ -173,7 +165,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		});
 
 		clearButton.setOnClickListener(v -> {
-			if (searchEditText.getText().length() == 0) {
+			if (searchEditText.getText().toString().isEmpty()) {
 				dismiss();
 			} else {
 				searchEditText.setText("");
@@ -217,7 +209,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(SEARCH_TEXT_DLG_KEY, searchText);
 		outState.putBoolean(SHOW_GROUP_KEY, showGroup);
 		outState.putStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY, downloadTypesToShow);
@@ -243,40 +235,12 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		return (DownloadActivity) getActivity();
 	}
 
-	@NonNull
-	private OsmandApplication requireMyApplication() {
-		return (OsmandApplication) requireActivity().getApplication();
-	}
-
-	public static SearchDialogFragment createInstance(String searchText, boolean showGroup,
-	                                                  DownloadActivityType ... fileTypes) {
-		ArrayList<String> typesList = new ArrayList<>();
-		for (DownloadActivityType type : fileTypes) {
-			typesList.add(type.getTag());
-		}
-		Bundle bundle = new Bundle();
-		bundle.putString(SEARCH_TEXT_DLG_KEY, searchText);
-		bundle.putBoolean(SHOW_GROUP_KEY, showGroup);
-		bundle.putStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY, typesList);
-		SearchDialogFragment fragment = new SearchDialogFragment();
-		fragment.setArguments(bundle);
-		return fragment;
-	}
-
-	public static SearchDialogFragment createInstance(String searchText) {
-		return createInstance(searchText, true, DownloadActivityType.NORMAL_FILE);
-	}
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		Object obj = listAdapter.getItem(position);
-		if (obj instanceof DownloadResourceGroup) {
-			String uniqueId = ((DownloadResourceGroup) obj).getUniqueId();
-			DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
-					.createInstance(uniqueId);
-			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
-		} else if (obj instanceof IndexItem) {
-			IndexItem indexItem = (IndexItem) obj;
+		if (obj instanceof DownloadResourceGroup group) {
+			DownloadResourceGroupFragment.showInstance(requireActivity(), group.getUniqueId());
+		} else if (obj instanceof IndexItem indexItem) {
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
 			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
 			ls.onClick(v);
@@ -298,6 +262,29 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			clearButton.setVisibility(searchEditText.length() > 0 ? View.VISIBLE : View.GONE);
 		} else {
 			clearButton.setVisibility(View.GONE);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String searchText) {
+		showInstance(activity, searchText, true, DownloadActivityType.NORMAL_FILE);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull String searchText, boolean showGroup,
+	                                @NonNull DownloadActivityType ... fileTypes) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ArrayList<String> typesList = new ArrayList<>();
+			for (DownloadActivityType type : fileTypes) {
+				typesList.add(type.getTag());
+			}
+			Bundle bundle = new Bundle();
+			bundle.putString(SEARCH_TEXT_DLG_KEY, searchText);
+			bundle.putBoolean(SHOW_GROUP_KEY, showGroup);
+			bundle.putStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY, typesList);
+			SearchDialogFragment fragment = new SearchDialogFragment();
+			fragment.setArguments(bundle);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
@@ -366,15 +353,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					viewHolder.setShowRemoteDate(true);
 					convertView.setTag(viewHolder);
 				}
-				if (obj instanceof IndexItem) {
-					IndexItem item = (IndexItem) obj;
+				if (obj instanceof IndexItem item) {
 					viewHolder.setShowTypeInDesc(true);
 					viewHolder.bindDownloadItem(item);
 				} else {
 					CityItem item = (CityItem) obj;
 					viewHolder.bindDownloadItem(item);
 					if (item.getIndexItem() == null) {
-						new IndexItemResolverTask(viewHolder, item).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+						OsmAndTaskManager.executeTask(new IndexItemResolverTask(viewHolder, item));
 					}
 				}
 			} else {

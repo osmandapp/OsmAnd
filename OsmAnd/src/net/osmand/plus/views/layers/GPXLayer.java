@@ -32,6 +32,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -195,6 +196,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private int grayColor;
 	@ColorInt
 	private int disabledColor;
+	@ColorInt
+	private int altitudeAscColor;
+	@ColorInt
+	private int altitudeDescColor;
 
 	private CommonPreference<String> defaultColorPref;
 	private CommonPreference<String> defaultWidthPref;
@@ -281,6 +286,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 		grayColor = ContextCompat.getColor(app, R.color.color_favorite_gray);
 		disabledColor = ContextCompat.getColor(app, R.color.gpx_disabled_color);
+		altitudeAscColor = ContextCompat.getColor(app, R.color.gpx_altitude_asc);
+		altitudeDescColor = ContextCompat.getColor(app, R.color.gpx_altitude_desc);
 
 		wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 	}
@@ -576,7 +583,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (!Algorithms.isEmpty(groups)) {
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						if (item.splitName != null) {
+						if (item.getLabelName(app) != null) {
 							splitLabelsCount++;
 						}
 					}
@@ -618,16 +625,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				List<GpxDisplayGroup> groups = selectedGpxFile.getSplitGroups(app);
 				if (!Algorithms.isEmpty(groups)) {
-					int color = getTrackColor(gpxFile, cachedColor);
+					int trackColor = getTrackColor(gpxFile, cachedColor);
 					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
 					for (GpxDisplayItem item : items) {
-						WptPt point = item.locationEnd;
-						String name = item.splitName;
+						WptPt point = item.getLabelPoint();
+						String name = item.getLabelName(app);
+						int color = item.getLabelColor(trackColor, altitudeAscColor, altitudeDescColor);
+
 						if (name != null) {
-							int ind = name.indexOf(' ');
-							if (ind > 0) {
-								name = name.substring(0, ind);
-							}
 							SplitLabel splitLabel;
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.getLon()), Utilities.get31TileNumberY(point.getLat()));
 							if (visualizationType == Gpx3DVisualizationType.NONE || trackLinePosition != Gpx3DLinePositionType.TOP) {
@@ -712,7 +717,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		float py = -1;
 		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
-			WptPt point = i.locationEnd;
+			WptPt point = i.getLabelPoint();
 			if (point != null && point.getLat() >= latLonBounds.bottom && point.getLat() <= latLonBounds.top
 					&& point.getLon() >= latLonBounds.left && point.getLon() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(point.getLat(), point.getLon());
@@ -724,12 +729,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				px = x;
 				py = y;
-				String name = i.splitName;
+				String name = i.getLabelName(app);
 				if (name != null) {
-					int ind = name.indexOf(' ');
-					if (ind > 0) {
-						name = name.substring(0, ind);
-					}
 					Rect bounds = new Rect();
 					paintTextIcon.getTextBounds(name, 0, name.length(), bounds);
 
@@ -1445,7 +1446,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			};
 			ParseGpxRouteTask task = new ParseGpxRouteTask(gpxFile, trackParams, nonEmptySegmentIdx, listener);
 			parseGpxRouteTasks.put(gpxFile.getPath(), task);
-			task.executeOnExecutor(parseGpxRouteSingleThreadExecutor);
+			OsmAndTaskManager.executeTask(task, parseGpxRouteSingleThreadExecutor);
 		}
 	}
 

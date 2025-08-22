@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
@@ -57,9 +58,8 @@ public class OpenTimeListHolder extends RecyclerView.ViewHolder {
 
 				daysTextView.setText(stringBuilder.toString());
 				daysTextView.setOnClickListener(v -> {
-					OpeningHoursDaysDialogFragment fragment =
-							OpeningHoursDaysDialogFragment.createInstance(rule, position);
-					fragment.show(editPoiListener.getChildFragmentManager(), "OpenTimeDialogFragment");
+					FragmentManager fragmentManager = editPoiListener.getChildFragmentManager();
+					OpeningHoursDaysDialogFragment.showInstance(fragmentManager, rule, position);
 				});
 
 				TIntArrayList startTimes = rule.getStartTimes();
@@ -76,14 +76,14 @@ public class OpenTimeListHolder extends RecyclerView.ViewHolder {
 					openingTextView.setTag(i);
 					openingTextView.setOnClickListener(v -> {
 						int index = (int) v.getTag();
-						OpeningHoursHoursDialogFragment.createInstance(rule, position, true, index)
-								.show(editPoiListener.getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+						FragmentManager fragmentManager = editPoiListener.getChildFragmentManager();
+						OpeningHoursHoursDialogFragment.showInstance(fragmentManager, rule, position, true, index);
 					});
 					closingTextView.setTag(i);
 					closingTextView.setOnClickListener(v -> {
 						int index = (int) v.getTag();
-						OpeningHoursHoursDialogFragment.createInstance(rule, position, false, index)
-								.show(editPoiListener.getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+						FragmentManager fragmentManager = editPoiListener.getChildFragmentManager();
+						OpeningHoursHoursDialogFragment.showInstance(fragmentManager, rule, position, false, index);
 					});
 
 					ImageButton deleteTimeSpanImageButton = timeFromToLayout
@@ -104,9 +104,11 @@ public class OpenTimeListHolder extends RecyclerView.ViewHolder {
 
 				deleteItemImageButton.setVisibility(View.GONE);
 				addTimeSpanButton.setVisibility(View.VISIBLE);
-				addTimeSpanButton.setOnClickListener(v -> OpeningHoursHoursDialogFragment.createInstance(rule, position, true,
-						startTimes.size()).show(editPoiListener.getChildFragmentManager(),
-						"TimePickerDialogFragment"));
+				addTimeSpanButton.setOnClickListener(v -> {
+					FragmentManager fragmentManager = editPoiListener.getChildFragmentManager();
+					OpeningHoursHoursDialogFragment.showInstance(
+							fragmentManager, rule, position, true, startTimes.size());
+				});
 			} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
 				daysTextView.setText(openingHours.getRules().get(position).toRuleString());
 				timeListContainer.removeAllViews();

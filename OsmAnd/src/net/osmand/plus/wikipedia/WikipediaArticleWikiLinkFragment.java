@@ -93,18 +93,16 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 		return nightMode ? R.color.wikivoyage_bottom_bar_bg_dark : R.color.list_background_color_light;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fm,
-	                                   @NonNull String articleUrl) {
-		try {
+	public static boolean showInstance(@NonNull FragmentManager fm, @NonNull String articleUrl) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(ARTICLE_URL_KEY, articleUrl);
-			WikipediaArticleWikiLinkFragment fragment = new WikipediaArticleWikiLinkFragment();
 
+			WikipediaArticleWikiLinkFragment fragment = new WikipediaArticleWikiLinkFragment();
 			fragment.setArguments(args);
 			fragment.show(fm, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

@@ -13,6 +13,7 @@ import net.osmand.IProgress;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.*;
@@ -107,6 +108,7 @@ public class BackupHelper {
 
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();
+	private long maximumAccountSize;
 
 	private final BackupListeners backupListeners = new BackupListeners();
 
@@ -167,6 +169,10 @@ public class BackupHelper {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppSubscription purchasedSubscription = purchaseHelper.getAnyPurchasedOsmAndProSubscription();
 		return purchasedSubscription != null ? purchasedSubscription.getOrderId() : null;
+	}
+
+	public long getMaximumAccountSize() {
+		return maximumAccountSize;
 	}
 
 	public boolean isBackupSubscriptionsExpired() {
@@ -502,8 +508,8 @@ public class BackupHelper {
 			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
-			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
-					.executeOnExecutor(executor == null ? this.executor : executor).get();
+			OsmAndTaskManager.executeTask(new DeleteFilesCommand(this, remoteFiles, byVersion, listener),
+					executor == null ? this.executor : executor, null).get();
 		} catch (ExecutionException | InterruptedException e) {
 			if (listener != null) {
 				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));
@@ -535,6 +541,7 @@ public class BackupHelper {
 							String totalZipSize = res.getString("totalZipSize");
 							String totalFiles = res.getString("totalFiles");
 							String totalFileVersions = res.getString("totalFileVersions");
+							maximumAccountSize = Algorithms.parseLongSilently(res.getString("maximumAccountSize"), 0);
 							JSONArray allFiles = res.getJSONArray("allFiles");
 							for (int i = 0; i < allFiles.length(); i++) {
 								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
@@ -681,7 +688,7 @@ public class BackupHelper {
 	@SuppressLint("StaticFieldLeak")
 	void collectLocalFiles(@Nullable OnCollectLocalFilesListener listener) {
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new CollectLocalFilesTask(app, listener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -689,6 +696,6 @@ public class BackupHelper {
 			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
 			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
 			@Nullable OnGenerateBackupInfoListener listener) {
-		new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener).executeOnExecutor(executor);
+		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener), executor);
 	}
 }

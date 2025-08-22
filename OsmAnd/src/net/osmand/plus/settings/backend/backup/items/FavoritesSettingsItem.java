@@ -238,7 +238,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		return new SettingsItemReader<FavoritesSettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			public File readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
 				GpxFile gpxFile = SharedUtil.loadGpxFile(inputStream);
 				if (gpxFile.getError() != null) {
@@ -257,6 +257,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 						group.getPoints().add(point);
 					}
 				}
+				return null;
 			}
 
 			@NonNull
@@ -268,6 +269,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					favoriteGroup.setColor(pointsGroup.getColor());
 					favoriteGroup.setIconName(pointsGroup.getIconName());
 					favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+					favoriteGroup.setVisible(!pointsGroup.isHidden());
 				}
 				return favoriteGroup;
 			}

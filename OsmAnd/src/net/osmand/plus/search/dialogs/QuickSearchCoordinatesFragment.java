@@ -28,8 +28,8 @@ import android.widget.TextView.OnEditorActionListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.openlocationcode.OpenLocationCode;
 import com.google.openlocationcode.OpenLocationCode.CodeArea;
@@ -42,15 +42,15 @@ import net.osmand.LocationConvert;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.dialogs.SearchCitiesTask.SearchCitiesListener;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -66,9 +66,9 @@ import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
 
-public class QuickSearchCoordinatesFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
-	public static final String TAG = "QuickSearchCoordinatesFragment";
+	public static final String TAG = QuickSearchCoordinatesFragment.class.getSimpleName();
 	private static final String QUICK_SEARCH_COORDS_LAT_KEY = "quick_search_coords_lat_key";
 	private static final String QUICK_SEARCH_COORDS_LON_KEY = "quick_search_coords_lon_key";
 	private static final String QUICK_SEARCH_COORDS_NORTH_KEY = "quick_search_coords_north_key";
@@ -110,50 +110,32 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private LatLon currentLatLon;
 	private LatLon additionalUtmLatLon;
 	private UpdateLocationViewCache updateLocationViewCache;
-	private boolean isLightTheme;
 
 	private SearchCitiesTask parseOlcCodeTask;
 
 	public QuickSearchCoordinatesFragment() {
 	}
 
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		isLightTheme = !getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-	}
-
 	@Override
 	@SuppressLint("PrivateResource")
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		view = inflater.inflate(R.layout.search_advanced_coords, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		view = inflate(R.layout.search_advanced_coords, container, false);
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightTheme);
-		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), color);
+		int backIconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+		Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(app), backIconColorId);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
-		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
-		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.card_and_list_background_light : R.color.text_color_primary_dark));
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
+		toolbar.setTitleTextColor(getColor(!nightMode ? R.color.card_and_list_background_light : R.color.text_color_primary_dark));
 
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(view.getContext());
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 
-		if (CURRENT_FORMAT == -1)
-			CURRENT_FORMAT = app.getSettings().COORDINATES_FORMAT.get();
+		if (CURRENT_FORMAT == -1) CURRENT_FORMAT = settings.COORDINATES_FORMAT.get();
 
 		latEdit = view.findViewById(R.id.latitudeEditText);
 		lonEdit = view.findViewById(R.id.longitudeEditText);
@@ -234,12 +216,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		}
 
 		formatEdit.setText(PointDescription.formatToHumanString(app, CURRENT_FORMAT));
-		formatEdit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				new ChooseCoordsFormatDialogFragment().show(getChildFragmentManager(), "ChooseCoordinatesFormatFragment");
-			}
-		});
+		formatEdit.setOnClickListener(v ->
+				ChooseCoordsFormatDialogFragment.showInstance(getChildFragmentManager()));
 
 		TextWatcher textWatcher = new SimpleTextWatcher() {
 			@Override
@@ -322,7 +300,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		ImageButton formatSelectButton = view.findViewById(R.id.formatSelectButton);
 		formatSelectButton.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_drop_down));
 		formatSelectButton.setOnClickListener(v ->
-				new ChooseCoordsFormatDialogFragment().show(getChildFragmentManager(), "ChooseCoordinatesFormatFragment"));
+				ChooseCoordsFormatDialogFragment.showInstance(getChildFragmentManager()));
 
 		View coordinatesViewContainer = view.findViewById(R.id.found_location);
 		coordsView = setupCoordinatesView(coordinatesViewContainer);
@@ -345,10 +323,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		coordinatesView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		coordinatesView.setClickable(true);
 
-		OsmandApplication app = getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int iconColorRes = !nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark;
-		Drawable icon = app.getUIUtilities().getIcon(R.drawable.ic_action_world_globe, iconColorRes);
+		Drawable icon = getIcon(R.drawable.ic_action_world_globe, iconColorRes);
 		((ImageView) coordinatesView.findViewById(R.id.imageView)).setImageDrawable(icon);
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), false);
@@ -412,19 +388,19 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
-		app.getLocationProvider().addCompassListener(this);
-		app.getLocationProvider().addLocationListener(this);
-		myLocation = app.getLocationProvider().getLastKnownLocation();
+		OsmAndLocationProvider locationProvider = app.getLocationProvider();
+		locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
+		locationProvider.addCompassListener(this);
+		locationProvider.addLocationListener(this);
+		myLocation = locationProvider.getLastKnownLocation();
 		updateLocation(myLocation);
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		app.getLocationProvider().removeLocationListener(this);
-		app.getLocationProvider().removeCompassListener(this);
-		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+		OsmAndLocationProvider locationProvider = app.getLocationProvider();
+		locationProvider.removeLocationListener(this);
+		locationProvider.removeCompassListener(this);
+		locationProvider.addCompassListener(locationProvider.getNavigationInfo());
 	}
 
 	private void showOnMap(@Nullable LatLon latLon) {
@@ -449,7 +425,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		// on non-compass devices
 		if (Math.abs(MapUtils.degreesDiff(value, heading)) > 5) {
 			heading = value;
-			getMyApplication().runInUIThread(() -> {
+			app.runInUIThread(() -> {
 				updateLocationUI(coordsView, currentLatLon);
 				updateLocationUI(additionalCoordsView, additionalUtmLatLon);
 			});
@@ -459,7 +435,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	@Override
 	public void updateLocation(net.osmand.Location location) {
 		this.myLocation = location;
-		getMyApplication().runInUIThread(() -> {
+		app.runInUIThread(() -> {
 			updateLocationUI(coordsView, currentLatLon);
 			updateLocationUI(additionalCoordsView, additionalUtmLatLon);
 		});
@@ -549,20 +525,20 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private String provideOlcInfo(String olcString) {
 		try {
 			if (!OpenLocationCode.isValidCode(olcString))
-				return getContext().getString(R.string.navigate_point_olc_info_invalid);
+				return getString(R.string.navigate_point_olc_info_invalid);
 			OpenLocationCode olc = new OpenLocationCode(olcString);
 			if (olc.isShort())
-				return getContext().getString(R.string.navigate_point_olc_info_short);
+				return getString(R.string.navigate_point_olc_info_short);
 			OpenLocationCode.CodeArea area = olc.decode();
 			int areaWidth = (int) Math.ceil(MapUtils.getDistance(area.getNorthLatitude(), area.getWestLongitude(),
 					area.getNorthLatitude(), area.getEastLongitude()));
 			int areaHeight = (int) Math.ceil(MapUtils.getDistance(area.getNorthLatitude(), area.getWestLongitude(),
 					area.getSouthLatitude(), area.getWestLongitude()));
-			return getContext().getString(R.string.navigate_point_olc_info_area,
-					OsmAndFormatter.getFormattedDistance(areaWidth, getMyApplication()),
-					OsmAndFormatter.getFormattedDistance(areaHeight, getMyApplication()));
+			return getString(R.string.navigate_point_olc_info_area,
+					OsmAndFormatter.getFormattedDistance(areaWidth, app),
+					OsmAndFormatter.getFormattedDistance(areaHeight, app));
 		} catch (IllegalArgumentException iae) {
-			return getContext().getString(R.string.navigate_point_olc_info_invalid);
+			return getString(R.string.navigate_point_olc_info_invalid);
 		}
 	}
 
@@ -581,7 +557,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		if (CURRENT_FORMAT != format || forceApply) {
 			int prevFormat = CURRENT_FORMAT;
 			CURRENT_FORMAT = format;
-			formatEdit.setText(PointDescription.formatToHumanString(getMyApplication(), CURRENT_FORMAT));
+			formatEdit.setText(PointDescription.formatToHumanString(app, CURRENT_FORMAT));
 			EditText latEdit = view.findViewById(R.id.latitudeEditText);
 			EditText lonEdit = view.findViewById(R.id.longitudeEditText);
 			updateControlsVisibility();
@@ -787,7 +763,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			codeArea = OpenLocationCode.decode(olcTextCode);
 		} else if (OpenLocationCode.isShortCode(olcTextCode)) {
 			OpenLocationCode code = new OpenLocationCode(olcTextCode);
-			LatLon mapLocation = getMapActivity().getMapLocation();
+			LatLon mapLocation = requireMapActivity().getMapLocation();
 			if (cityName.isEmpty()) {
 				if (mapLocation != null) {
 					OpenLocationCode newCode = code.recover(mapLocation.getLatitude(), mapLocation.getLongitude());
@@ -795,8 +771,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					olcInfo.setText(provideOlcInfo(newCode.getCode()));
 				}
 			} else {
-				parseOlcCodeTask = new SearchCitiesTask(getMyApplication(), cityName, mapLocation, getSearchCitiesListener(olcTextCode));
-				parseOlcCodeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				parseOlcCodeTask = new SearchCitiesTask(app, cityName, mapLocation, getSearchCitiesListener(olcTextCode));
+				OsmAndTaskManager.executeTask(parseOlcCodeTask);
 			}
 		}
 		if (codeArea != null) {
@@ -851,14 +827,13 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	}
 
 	private void updateLocationCell(View coordinatesView, LatLon latLon, boolean showDivider) {
-		OsmandApplication app = getMyApplication();
 		if (latLon == null) {
 			AndroidUiHelper.updateVisibility(coordinatesView, false);
 		} else {
 			TextView titleView = coordinatesView.findViewById(R.id.title);
 			TextView subtitleView = coordinatesView.findViewById(R.id.subtitle);
 			titleView.setText(PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude()));
-			new AsyncTask<LatLon, Void, String>() {
+			OsmAndTaskManager.executeTask(new AsyncTask<LatLon, Void, String>() {
 				@Override
 				protected String doInBackground(LatLon... params) {
 					return app.getRegions().getCountryName(latLon);
@@ -870,7 +845,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 						subtitleView.setText(country == null ? "" : country);
 					}
 				}
-			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+			}, latLon);
 			updateLocationUI(coordinatesView, latLon);
 			AndroidUiHelper.updateVisibility(coordinatesView, true);
 			AndroidUiHelper.updateVisibility(((View) coordinatesView.getParent()).findViewById(R.id.divider), showDivider);
@@ -892,24 +867,29 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private void updateDistanceDirection(View view, LatLon latLon) {
 		TextView distanceText = view.findViewById(R.id.distance);
 		ImageView direction = view.findViewById(R.id.direction);
-		UpdateLocationUtils.updateLocationView(getMyApplication(), updateLocationViewCache, direction, distanceText, latLon);
+		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, latLon);
 	}
 
-	public static void showDialog(DialogFragment parentFragment, String text) {
-		Bundle bundle = new Bundle();
-		bundle.putString(QUICK_SEARCH_COORDS_TEXT_KEY, text);
-		QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
-		fragment.setArguments(bundle);
-		fragment.show(parentFragment.getChildFragmentManager(), TAG);
+	public static void showInstance(@NonNull DialogFragment parentFragment, String text) {
+		FragmentManager manager = parentFragment.getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(QUICK_SEARCH_COORDS_TEXT_KEY, text);
+			QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
+		}
 	}
 
-	public static void showDialog(DialogFragment parentFragment, double latitude,
-			double longitude) {
-		Bundle bundle = new Bundle();
-		bundle.putDouble(QUICK_SEARCH_COORDS_LATITUDE_KEY, latitude);
-		bundle.putDouble(QUICK_SEARCH_COORDS_LONGITUDE_KEY, longitude);
-		QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
-		fragment.setArguments(bundle);
-		fragment.show(parentFragment.getChildFragmentManager(), TAG);
+	public static void showInstance(@NonNull DialogFragment parentFragment, double lat, double lon) {
+		FragmentManager manager = parentFragment.getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle bundle = new Bundle();
+			bundle.putDouble(QUICK_SEARCH_COORDS_LATITUDE_KEY, lat);
+			bundle.putDouble(QUICK_SEARCH_COORDS_LONGITUDE_KEY, lon);
+			QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
+			fragment.setArguments(bundle);
+			fragment.show(manager, TAG);
+		}
 	}
 }

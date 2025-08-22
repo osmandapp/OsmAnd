@@ -15,6 +15,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.search.history.SearchHistoryHelper;
@@ -101,12 +102,12 @@ public class GpxSelectionHelper {
 				if (file.exists() && !file.isDirectory()) {
 					GpxSelectionParams selectionParams = GpxSelectionParams.getDefaultSelectionParams();
 					if (file.lastModified() > gpxEntry.getValue()) {
-						new GpxFileLoaderTask(file, null, result -> {
+						OsmAndTaskManager.executeTask(	new GpxFileLoaderTask(file, null, result -> {
 							if (result != null) {
 								selectGpxFile(result, selectionParams);
 							}
 							return true;
-						}).execute();
+						}));
 					} else {
 						selectGpxFile(gpxEntry.getKey(), selectionParams);
 					}
@@ -432,11 +433,6 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public void clearPoints(GpxFile gpxFile) {
-		gpxFile.clearPoints();
-		syncGpxWithMarkers(gpxFile);
-	}
-
 	public void addPoint(WptPt point, GpxFile gpxFile) {
 		gpxFile.addPoint(point);
 		syncGpxWithMarkers(gpxFile);
@@ -453,7 +449,7 @@ public class GpxSelectionHelper {
 		return res;
 	}
 
-	private void syncGpxWithMarkers(GpxFile gpxFile) {
+	public void syncGpxWithMarkers(GpxFile gpxFile) {
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group != null) {
@@ -508,7 +504,7 @@ public class GpxSelectionHelper {
 			selectGpxTask.cancel(false);
 		}
 		selectGpxTask = new SelectGpxTask(app, selectedPaths, getGpxSelectionListener());
-		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(selectGpxTask);
 	}
 
 	@NonNull

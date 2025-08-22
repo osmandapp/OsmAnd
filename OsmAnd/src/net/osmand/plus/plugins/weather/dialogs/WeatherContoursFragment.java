@@ -18,7 +18,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherContour;
@@ -30,7 +30,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WeatherContoursFragment extends BaseOsmAndFragment {
+public class WeatherContoursFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = WeatherContoursFragment.class.getSimpleName();
 
@@ -148,7 +148,7 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		Drawable icon = getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);
@@ -186,7 +186,7 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		Drawable icon = getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);

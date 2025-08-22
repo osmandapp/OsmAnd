@@ -58,6 +58,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -690,14 +691,14 @@ public class MenuBuilder {
 			getImageCardsTask = new GetImageCardsTask(mapActivity, getLatLon(),
 					getAdditionalCardParams(), imageCardListener,
 					response -> savePhotoListToCache(cacheManager, rawKey, response));
-			execute(getImageCardsTask);
+			OsmAndTaskManager.executeTask(getImageCardsTask);
 		}
 	}
 
 	private void savePhotoListToCache(@NonNull PhotoCacheManager cacheManager, @NonNull String rawKey, @NonNull String response){
 		if (!Algorithms.isEmpty(response)) {
 			CacheWriteTask cacheWriteTask = new CacheWriteTask(cacheManager, rawKey, response);
-			execute(cacheWriteTask);
+			OsmAndTaskManager.executeTask(cacheWriteTask);
 		}
 	}
 
@@ -719,7 +720,7 @@ public class MenuBuilder {
 				}
 				return true;
 			});
-			execute(cacheReadTask);
+			OsmAndTaskManager.executeTask(cacheReadTask);
 		}
 	}
 
@@ -1618,7 +1619,7 @@ public class MenuBuilder {
 
 	protected void buildRouteRow(SearchByRouteIdListener listener, SearchType type) {
 		if (amenity != null) {
-			execute(new SearchByRouteIdTask(amenity, type, app, listener));
+			OsmAndTaskManager.executeTask(new SearchByRouteIdTask(amenity, type, app, listener));
 		}
 	}
 
@@ -1644,7 +1645,7 @@ public class MenuBuilder {
 
 	private void searchSortedAmenities(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
 			@Nullable SearchAmenitiesListener listener) {
-		execute(new SearchAmenitiesTask(filter, latLon, amenity, listener));
+		OsmAndTaskManager.executeTask(new SearchAmenitiesTask(filter, latLon, amenity, listener));
 	}
 
 	@ColorInt
@@ -1674,10 +1675,5 @@ public class MenuBuilder {
 
 	protected boolean isLightContent() {
 		return menuRowBuilder.isLightContent();
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 }

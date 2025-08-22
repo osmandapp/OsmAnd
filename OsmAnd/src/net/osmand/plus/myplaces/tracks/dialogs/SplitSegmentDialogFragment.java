@@ -25,9 +25,13 @@ import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentsAdapter.SplitAdapterListener;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
@@ -43,11 +47,13 @@ import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -56,7 +62,7 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
+public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment implements SplitAdapterListener {
 
 	public static final String TAG = "SPLIT_SEGMENT_DIALOG_FRAGMENT";
 
@@ -118,7 +124,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = themedInflater.inflate(R.layout.split_segments_layout, container, false);
+		View view = inflate(R.layout.split_segments_layout, container, false);
 
 		Toolbar toolbar = view.findViewById(R.id.split_interval_toolbar);
 		TextView title = toolbar.findViewById(R.id.title);
@@ -137,14 +143,14 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		listView.setDivider(null);
 		listView.setDividerHeight(0);
 
-		adapter = new SplitSegmentsAdapter(requireActivity(), new ArrayList<>(), displayItem);
+		adapter = new SplitSegmentsAdapter(requireActivity(), new ArrayList<>(), displayItem, this);
 		headerView = view.findViewById(R.id.header_layout);
 
 		ImageView splitImage = headerView.findViewById(R.id.header_split_image);
 		splitImage.setImageDrawable(getIcon(R.drawable.ic_action_split_interval, nightMode ? 0 : R.color.icon_color_default_light));
 
-		listView.addHeaderView(themedInflater.inflate(R.layout.gpx_split_segments_empty_header, listView, false));
-		listView.addFooterView(themedInflater.inflate(R.layout.list_shadow_footer, listView, false));
+		listView.addHeaderView(inflate(R.layout.gpx_split_segments_empty_header, listView, false));
+		listView.addFooterView(inflate(R.layout.list_shadow_footer, listView, false));
 
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			int previousYPos = -1;
@@ -483,6 +489,23 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 			fragment.displayHelper = helper;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
+		}
+	}
+
+	@Override
+	public void onOpenSegment(@NonNull GpxDisplayItem currentGpxDisplayItem) {
+		SelectedGpxFile selectedGpxFile;
+		selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(currentGpxDisplayItem.group.getGpxFile().getPath());
+
+		if (selectedGpxFile != null) {
+			dismiss();
+			MapLayers mapLayers = app.getOsmandMap().getMapLayers();
+			WptPt wptPt = currentGpxDisplayItem.getLabelPoint();
+
+			SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wptPt);
+			LatLon latLon = new LatLon(wptPt.getLatitude(), wptPt.getLongitude());
+			PointDescription pointDescription = mapLayers.getGpxLayer().getObjectName(gpxPoint);
+			mapLayers.getContextMenuLayer().showContextMenu(latLon, pointDescription, gpxPoint, null);
 		}
 	}
 }

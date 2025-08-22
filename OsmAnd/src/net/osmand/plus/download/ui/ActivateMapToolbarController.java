@@ -3,11 +3,11 @@ package net.osmand.plus.download.ui;
 import static net.osmand.IProgress.EMPTY_PROGRESS;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 
-import android.os.AsyncTask;
 import android.view.ViewGroup.LayoutParams;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.local.LocalItem;
@@ -67,7 +67,7 @@ public class ActivateMapToolbarController extends SuggestMapToolbarController {
 				app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> app.getOsmandMap().refreshMap());
 			}
 		});
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
+		OsmAndTaskManager.executeTask(task, localItem);
 		dismiss();
 	}
 }

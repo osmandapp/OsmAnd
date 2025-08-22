@@ -100,6 +100,13 @@ class GpxFile : GpxExtensions {
 		return points.contains(point)
 	}
 
+	fun clearData() {
+		clearPoints()
+		tracks.clear()
+		generalSegment = null
+		generalTrack = null
+	}
+
 	fun clearPoints() {
 		points.clear()
 		pointsGroups.clear()
@@ -248,6 +255,7 @@ class GpxFile : GpxExtensions {
 		val segment = TrkSegment()
 		for (track in tracks) {
 			for (trkSegment in track.segments) {
+				segment.routeSegments.addAll(trkSegment.routeSegments)
 				if (trkSegment.points.isNotEmpty()) {
 					val waypoints = trkSegment.points.map { WptPt(it) }.toMutableList()
 					waypoints.first().firstPoint = true

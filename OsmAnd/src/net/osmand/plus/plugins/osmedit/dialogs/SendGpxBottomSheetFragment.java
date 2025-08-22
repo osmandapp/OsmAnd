@@ -7,7 +7,6 @@ import static net.osmand.plus.settings.fragments.SettingsScreenType.OPEN_STREET_
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -20,7 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -33,7 +32,6 @@ import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.shared.gpx.GpxDataItem;
@@ -70,7 +68,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		gpxDbHelper = getMyApplication().getGpxDbHelper();
+		gpxDbHelper = app.getGpxDbHelper();
 		if (uploadVisibility == null) {
 			uploadVisibility = plugin.OSM_UPLOAD_VISIBILITY.get();
 		}
@@ -78,8 +76,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.send_gpx_fragment, null);
+		View view = inflate(R.layout.send_gpx_fragment);
 		view.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
 		setupDescriptionRow(view);
@@ -169,10 +166,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		textView.setText(Algorithms.isEmpty(name) ? plugin.OSM_USER_NAME_OR_EMAIL.get() : name);
 
 		container.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				showOpenStreetMapScreen(activity);
-			}
+			callActivity(SendGpxBottomSheetFragment::showOpenStreetMapScreen);
 			dismiss();
 		});
 	}
@@ -184,18 +178,16 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			Editable descrText = messageField.getText();
 			Editable tagsText = tagsField.getText();
 			String description = descrText != null ? descrText.toString() : "";
 			Set<String> tags = tagsText != null ? parseTags(tagsText.toString()) : Collections.emptySet();
 
-			OsmandApplication app = getMyApplication();
 			UploadGpxListener listener = getUploadListener(activity);
 			UploadGPXFilesTask task = new UploadGPXFilesTask(app, tags, description, defaultActivity, uploadVisibility, listener);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
-		}
+			OsmAndTaskManager.executeTask(task, files);
+		});
 		dismiss();
 	}
 
@@ -218,9 +210,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			public void onGpxUploadFinished(String result) {
 				updateProgressVisibility(false);
 
-				Fragment target = getTargetFragment();
-				if (target instanceof UploadGpxListener) {
-					((UploadGpxListener) target).onGpxUploadFinished(result);
+				if (getTargetFragment() instanceof UploadGpxListener listener) {
+					listener.onGpxUploadFinished(result);
 				}
 			}
 
@@ -233,12 +224,12 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	protected static void showOpenStreetMapScreen(@NonNull FragmentActivity activity) {
-		if (activity instanceof MapActivity) {
-			BaseSettingsFragment.showInstance(activity, OPEN_STREET_MAP_EDITING);
+		if (activity instanceof MapActivity mapActivity) {
+			BaseSettingsFragment.showInstance(mapActivity, OPEN_STREET_MAP_EDITING);
 		} else {
 			Bundle prevIntentParams = null;
-			if (activity instanceof MyPlacesActivity) {
-				prevIntentParams = ((MyPlacesActivity) activity).storeCurrentState();
+			if (activity instanceof MyPlacesActivity myPlacesActivity) {
+				prevIntentParams = myPlacesActivity.storeCurrentState();
 			} else if (activity.getIntent() != null) {
 				prevIntentParams = activity.getIntent().getExtras();
 			}
@@ -249,8 +240,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull File[] files,
-			@Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull File[] files, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
 			fragment.files = files;

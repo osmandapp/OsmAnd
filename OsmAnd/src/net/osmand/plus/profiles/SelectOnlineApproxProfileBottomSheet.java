@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -17,6 +16,7 @@ import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -30,26 +30,6 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
 	private String selectedDerivedProfile;
 	private boolean networkApproximateRoute;
-
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @Nullable Fragment target,
-	                                @Nullable ApplicationMode appMode,
-	                                @Nullable String selectedItemKey,
-	                                @Nullable String selectedDerivedProfile,
-	                                boolean usedOnMap) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
-			SelectOnlineApproxProfileBottomSheet fragment = new SelectOnlineApproxProfileBottomSheet();
-			Bundle args = new Bundle();
-			args.putString(SELECTED_KEY, selectedItemKey);
-			args.putString(SELECTED_DERIVED_PROFILE_KEY, selectedDerivedProfile);
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -93,8 +73,7 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 	@Override
 	protected boolean isSelected(ProfileDataObject profile) {
 		boolean isSelected = super.isSelected(profile) && !networkApproximateRoute;
-		if (isSelected && profile instanceof RoutingDataObject) {
-			RoutingDataObject data = (RoutingDataObject) profile;
+		if (isSelected && profile instanceof RoutingDataObject data) {
 			boolean checkForDerived = !Algorithms.objectEquals(selectedDerivedProfile, "default");
 			if (checkForDerived) {
 				isSelected = Algorithms.objectEquals(selectedDerivedProfile, data.getDerivedProfile());
@@ -113,8 +92,7 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 
 	@Override
 	protected int getIconColor(ProfileDataObject profile) {
-		int iconColorResId = isSelected(profile) ? getActiveColorId() : getDefaultIconColorId();
-		return ContextCompat.getColor(app, iconColorResId);
+		return getColor(isSelected(profile) ? getActiveColorId() : getDefaultIconColorId());
 	}
 
 	private RoutingDataUtils getDataUtils() {
@@ -122,5 +100,22 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 			dataUtils = new RoutingDataUtils(app);
 		}
 		return dataUtils;
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable Fragment target,
+	                                @Nullable ApplicationMode appMode, @Nullable String selectedItemKey,
+	                                @Nullable String selectedDerivedProfile, boolean usedOnMap) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectOnlineApproxProfileBottomSheet fragment = new SelectOnlineApproxProfileBottomSheet();
+			Bundle args = new Bundle();
+			args.putString(SELECTED_KEY, selectedItemKey);
+			args.putString(SELECTED_DERIVED_PROFILE_KEY, selectedDerivedProfile);
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

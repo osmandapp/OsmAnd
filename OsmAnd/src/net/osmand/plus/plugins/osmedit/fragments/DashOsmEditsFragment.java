@@ -3,19 +3,19 @@ package net.osmand.plus.plugins.osmedit.fragments;
 import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -65,19 +65,17 @@ public class DashOsmEditsFragment extends DashBaseFragment
 	private OsmPoint selectedPoint;
 
 	@Override
-	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View initView(@Nullable ViewGroup container, @Nullable Bundle savedState) {
 		plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
+		View view = inflate(R.layout.dash_common_fragment, container, false);
 
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		TextView header = view.findViewById(R.id.fav_text);
-		header.setText(TITLE_ID);
-		Button manage = view.findViewById(R.id.show_all);
-		manage.setText(R.string.shared_string_manage);
+		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
+		((TextView) view.findViewById(R.id.show_all)).setText(R.string.shared_string_manage);
+
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
 			startMyPlacesActivity(R.string.osm_edits);
 			closeDashboard();
 		});
-
 		return view;
 	}
 
@@ -91,7 +89,8 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	private void setupEditings() {
 		View mainView = getView();
-		assert mainView != null;
+		if (mainView == null) return;
+
 		if (plugin == null) {
 			mainView.setVisibility(View.GONE);
 			return;
@@ -99,33 +98,30 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 		ArrayList<OsmPoint> dataPoints = new ArrayList<>();
 		getOsmPoints(dataPoints);
-		if (dataPoints.size() == 0) {
+		if (dataPoints.isEmpty()) {
 			mainView.setVisibility(View.GONE);
 			return;
-		} else {
-			mainView.setVisibility(View.VISIBLE);
-			DashboardOnMap.handleNumberOfRows(dataPoints,
-					getMyApplication().getSettings(), ROW_NUMBER_TAG);
 		}
+
+		mainView.setVisibility(View.VISIBLE);
+		DashboardOnMap.handleNumberOfRows(dataPoints, settings, ROW_NUMBER_TAG);
 
 		LinearLayout osmLayout = mainView.findViewById(R.id.items);
 		osmLayout.removeAllViews();
 
 		for (OsmPoint point : dataPoints) {
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.note, null, false);
+			View view = inflate(R.layout.note);
 
-			OsmEditsFragment.getOsmEditView(view, point, getMyApplication());
+			OsmEditsFragment.getOsmEditView(view, point, app);
 			ImageButton send = view.findViewById(R.id.play);
-			send.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_export));
+			send.setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_export));
 			send.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
-				if (activity == null) {
-					return;
-				}
+				if (activity == null) return;
+
 				if (point.getGroup() == OsmPoint.Group.POI) {
 					selectedPoint = point;
-					if (requireMyApplication().getOsmOAuthHelper().isLogged(plugin)) {
+					if (app.getOsmOAuthHelper().isLogged(plugin)) {
 						SendPoiBottomSheetFragment.showInstance(getChildFragmentManager(), new OsmPoint[] {point});
 					} else {
 						LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), this);
@@ -136,19 +132,13 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					boolean poi = point.getGroup() == OsmPoint.Group.POI;
-					String name = poi ? ((OpenstreetmapPoint) point).getName() : ((OsmNotesPoint) point).getText();
-					getMyApplication().getSettings().setMapLocationToShow(
-							point.getLatitude(),
-							point.getLongitude(),
-							15,
-							new PointDescription(poi ? PointDescription.POINT_TYPE_POI
-									: PointDescription.POINT_TYPE_OSM_BUG, name), true, point); //$NON-NLS-1$
-					MapActivity.launchMapActivityMoveToTop(getActivity());
-				}
+			view.setOnClickListener(v -> {
+				boolean poi = point.getGroup() == OsmPoint.Group.POI;
+				String name = poi ? ((OpenstreetmapPoint) point).getName() : ((OsmNotesPoint) point).getText();
+				settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 15,
+						new PointDescription(poi ? PointDescription.POINT_TYPE_POI
+								: PointDescription.POINT_TYPE_OSM_BUG, name), true, point); //$NON-NLS-1$
+				MapActivity.launchMapActivityMoveToTop(requireActivity());
 			});
 			osmLayout.addView(view);
 		}
@@ -162,14 +152,14 @@ public class DashOsmEditsFragment extends DashBaseFragment
 	}
 
 	@Override
-	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
-		OsmPoint[] toUpload = points;
-		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(R.string.uploading,
-				R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
-		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getActivity(),
+	public void showProgressDialog(@NonNull OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
+		FragmentActivity activity = getActivity();
+		if (activity == null) return;
+
+		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(activity,
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
-			public void uploadUpdated(OsmPoint point) {
+			public void uploadUpdated(@NonNull OsmPoint point) {
 				super.uploadUpdated(point);
 				if (DashOsmEditsFragment.this.isAdded()) {
 					onOpenDash();
@@ -177,20 +167,21 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			}
 
 			@Override
-			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+			public void uploadEnded(@NonNull Map<OsmPoint, String> loadErrorsMap) {
 				super.uploadEnded(loadErrorsMap);
 				if (DashOsmEditsFragment.this.isAdded()) {
 					onOpenDash();
 				}
 			}
 		};
-		dialog.show(getChildFragmentManager(), ProgressDialogFragment.TAG);
+		ProgressDialogFragment dialog = ProgressDialogFragment.showInstance(getChildFragmentManager(),
+				R.string.uploading, R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
-				listener, plugin, toUpload.length, closeChangeSet, anonymously);
-		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
+				listener, plugin, points.length, closeChangeSet, anonymously);
+		OsmAndTaskManager.executeTask(uploadTask, points);
 	}
 
-	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {
+	private void getOsmPoints(@NonNull ArrayList<OsmPoint> dataPoints) {
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmBugsPoints();
 		if (l1.isEmpty()) {

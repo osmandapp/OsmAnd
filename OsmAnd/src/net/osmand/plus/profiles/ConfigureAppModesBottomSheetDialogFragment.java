@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ConfigureProfileMenuAdapter.ProfileSelectedListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,10 +15,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSheetDialogFragment<ConfigureProfileMenuAdapter>
+public class ConfigureAppModesBottomSheetDialogFragment
+		extends AppModesBottomSheetDialogFragment<ConfigureProfileMenuAdapter>
 		implements ProfileSelectedListener {
 
-	public static final String TAG = "ConfigureAppModesBottomSheetDialogFragment";
+	public static final String TAG = ConfigureAppModesBottomSheetDialogFragment.class.getSimpleName();
 
 	private List<ApplicationMode> allModes = new ArrayList<>();
 	private final Set<ApplicationMode> selectedModes = new HashSet<>();
@@ -29,8 +31,7 @@ public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSh
 		adapter.setProfileSelectedListener(this);
 		allModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		allModes.remove(ApplicationMode.DEFAULT);
-		adapter.updateItemsList(allModes,
-				new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
+		adapter.updateItemsList(allModes, new LinkedHashSet<>(ApplicationMode.values(app)));
 		setupHeightAndBackground(getView());
 	}
 
@@ -43,13 +44,13 @@ public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSh
 	protected void getData() {
 		allModes.addAll(ApplicationMode.allPossibleValues());
 		allModes.remove(ApplicationMode.DEFAULT);
-		selectedModes.addAll(ApplicationMode.values(getMyApplication()));
+		selectedModes.addAll(ApplicationMode.values(app));
 		selectedModes.remove(ApplicationMode.DEFAULT);
 	}
 
 	@Override
 	protected ConfigureProfileMenuAdapter getMenuAdapter() {
-		return new ConfigureProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage), nightMode);
+		return new ConfigureProfileMenuAdapter(allModes, selectedModes, app, getString(R.string.shared_string_manage), nightMode);
 	}
 
 	@Override
@@ -59,12 +60,12 @@ public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSh
 		} else {
 			selectedModes.remove(item);
 		}
-		ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
+		ApplicationMode.changeProfileAvailability(item, isChecked, app);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap,
 	                                @Nullable UpdateMapRouteMenuListener listener) {
-		if (fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
 			ConfigureAppModesBottomSheetDialogFragment fragment = new ConfigureAppModesBottomSheetDialogFragment();
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setUpdateMapRouteMenuListener(listener);

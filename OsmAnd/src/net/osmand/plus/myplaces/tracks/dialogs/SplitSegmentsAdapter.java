@@ -30,6 +30,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
@@ -49,14 +50,17 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 
 	private final Paint minMaxSpeedPaint = new Paint();
 	private ColorStateList defaultTextColor;
+	private final SplitAdapterListener listener;
 
 	SplitSegmentsAdapter(@NonNull FragmentActivity activity,
 	                     @NonNull List<GpxDisplayItem> items,
-	                     @NonNull GpxDisplayItem displayItem) {
+	                     @NonNull GpxDisplayItem displayItem,
+	                     @NonNull SplitAdapterListener listener) {
 		super(activity, 0, items);
 		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.displayItem = displayItem;
+		this.listener = listener;
 
 		minMaxSpeedPaint.setTextSize(app.getResources().getDimension(R.dimen.default_split_segments_data));
 		minMaxSpeedPaint.setTypeface(FontCache.getMediumFont());
@@ -98,8 +102,12 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 			}
 		} else {
 			if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
+				setupHeaderClick(currentGpxDisplayItem, convertView, nightMode);
+
 				overviewTextView.setTextColor(app.getColor(activeColorId));
+
 				SegmentSlopeType slopeType = currentGpxDisplayItem.analysis.getSegmentSlopeType();
+				Integer slopeCount = currentGpxDisplayItem.analysis.getSlopeCount();
 
 				if (trackGroup != null && (trackGroup.isSplitDistance() || slopeType != null)) {
 					if (slopeType != null) {
@@ -115,14 +123,19 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 					overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
 
-					if (slopeType != null) {
+
+					if (slopeType != null && slopeCount != null) {
+						String slopeNumber = "#" + slopeCount;
 						String slopeName;
 						if (slopeType == SegmentSlopeType.FLAT) {
-							slopeName = getString(R.string.shared_string_flat);
+							String flat = getString(R.string.shared_string_flat);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, flat, slopeNumber);
 						} else if (slopeType == SegmentSlopeType.UPHILL) {
-							slopeName = getString(R.string.shared_string_uphill);
+							String uphill = getString(R.string.shared_string_uphill);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, uphill, slopeNumber);
 						} else {
-							slopeName = getString(R.string.shared_string_downhill);
+							String downhill = getString(R.string.shared_string_downhill);
+							slopeName = getString(R.string.ltr_or_rtl_combine_via_space, downhill, slopeNumber);
 						}
 
 						overviewTextView.append(" - " + slopeName);
@@ -338,9 +351,51 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 					speedDivider.setVisibility(View.GONE);
 					speedSection.setVisibility(View.GONE);
 				}
+
+				ViewGroup hrBlock = convertView.findViewById(R.id.hr_block);
+				View hrDivider = hrBlock.findViewById(R.id.divider);
+				View hrSection = hrBlock.findViewById(R.id.container);
+				if (analysis.getAvgSensorHr() > 0 || analysis.getMaxSensorHr() > 0 || analysis.getMinSensorHr() > 0) {
+					String avgHr = getString(R.string.ltr_or_rtl_combine_via_space, Math.round(analysis.getAvgSensorHr()), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.first_value))
+							.setText(avgHr);
+
+					String maxHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMaxSensorHr(), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.second_value))
+							.setText(maxHr);
+
+					String minHr = getString(R.string.ltr_or_rtl_combine_via_space, analysis.getMinSensorHr(), getString(R.string.beats_per_minute_short));
+					((TextView) hrBlock.findViewById(R.id.third_value))
+							.setText(minHr);
+
+					((ImageView) hrBlock.findViewById(R.id.first_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+					((ImageView) hrBlock.findViewById(R.id.second_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+					((ImageView) hrBlock.findViewById(R.id.third_icon))
+							.setImageDrawable(getIcon(R.drawable.ic_action_sensor_heart_rate_outlined, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
+
+					hrDivider.setVisibility(View.VISIBLE);
+					hrSection.setVisibility(View.VISIBLE);
+				} else{
+					hrDivider.setVisibility(View.GONE);
+					hrSection.setVisibility(View.GONE);
+				}
 			}
 		}
 		return convertView;
+	}
+
+	private void setupHeaderClick(@NonNull GpxDisplayItem currentGpxDisplayItem, View convertView, boolean nightMode) {
+		View headerButton = convertView.findViewById(R.id.header_button);
+
+		int color = app.getSettings().getApplicationMode().getProfileColor(nightMode);
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
+		AndroidUtils.setBackground(headerButton, background);
+
+		headerButton.setOnClickListener(v -> {
+			listener.onOpenSegment(currentGpxDisplayItem);
+		});
 	}
 
 	private Drawable getSlopeDrawable(@NonNull SegmentSlopeType slopeType, boolean nightMode) {
@@ -363,5 +418,9 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 	@NonNull
 	private String getString(@StringRes int resId, Object... formatArgs) {
 		return app.getString(resId, formatArgs);
+	}
+
+	interface SplitAdapterListener{
+		void onOpenSegment(@NonNull GpxDisplayItem currentGpxDisplayItem);
 	}
 }

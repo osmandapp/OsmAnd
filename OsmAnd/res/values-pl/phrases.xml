@@ -1161,7 +1161,7 @@
     <string name="poi_denomination_spiritist">Spirytyzm</string>
     <string name="poi_denomination_united_church_of_christ">Zjednoczony Kościół Chrystusowy</string>
     <string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopski ortodoksyjny tewahedo</string>
-    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
+    <string name="poi_denomination_iglesia_ni_cristo">Kościół Chrystusa (Iglesia ni Cristo)</string>
     <string name="poi_denomination_uniting">Kościół Zjednoczony w Australii</string>
     <string name="poi_disease_malaria_yes">Malaria: tak</string>
     <string name="poi_disease_malaria_no">Malaria: nie</string>
@@ -4785,4 +4785,6 @@
     <string name="poi_us_maps_recreation_area_activity_boating_motorized">Żeglarstwo motorowe</string>
     <string name="poi_route_activity_type_hang_gliding">Lotniarstwo</string>
     <string name="poi_us_maps_recreation_area_activity_bicycling">Jazda na rowerze</string>
+    <string name="poi_roundtrip_yes">Lot w obie strony: tak</string>
+    <string name="poi_roundtrip_no">Lot w obie strony: nie</string>
 </resources>

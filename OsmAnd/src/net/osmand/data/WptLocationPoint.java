@@ -31,7 +31,7 @@ public class WptLocationPoint implements LocationPoint {
 
 	@Override
 	public boolean isVisible() {
-		return pt.isVisible();
+		return !pt.isHidden();
 	}
 
 	public PointDescription getPointDescription(@NonNull Context ctx) {

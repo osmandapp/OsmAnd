@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -35,8 +34,8 @@ public class LanesWidgetInfoFragment extends WidgetInfoBaseFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.widget_preference_with_switch, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		View view = inflate(R.layout.widget_preference_with_switch, container);
 		setupShowMinorTurnsPref(view);
 	}
 
@@ -58,6 +57,8 @@ public class LanesWidgetInfoFragment extends WidgetInfoBaseFragment {
 	@Override
 	protected void applySettings() {
 		settings.SHOW_MINOR_TURNS.setModeValue(appMode, showMinorTurns);
+
+		// Required for routing recalculation — omit if routing isn't affected
 		app.getRoutingHelper().onSettingsChanged(appMode);
 	}
 

@@ -16,6 +16,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +24,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -34,13 +34,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -67,7 +63,6 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
-import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -165,36 +160,12 @@ public class GpxUiHelper {
 		return description.toString();
 	}
 
-	public static void selectSingleGPXFile(FragmentActivity activity, boolean showCurrentGpx,
-	                                       CallbackWithObject<GpxFile[]> callbackWithObject) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
-		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
-		List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
-		if (!PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			showCurrentGpx = false;
-		}
-		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {
-			if (showCurrentGpx) {
-				list.add(new GPXInfo(activity.getString(R.string.shared_string_currently_recording_track), null));
-			}
-
-			for (SelectedGpxFile selectedGpx : selectedGpxFiles) {
-				GpxFile gpxFile = selectedGpx.getGpxFile();
-				if (!gpxFile.isShowCurrentTrack() && gpxFile.getPath().length() > gpxDirLength + 1) {
-					list.add(new GPXInfo(gpxFile.getPath().substring(gpxDirLength + 1), new File(gpxFile.getPath())));
-				}
-			}
-			SelectGpxTrackBottomSheet.showInstance(activity.getSupportFragmentManager(), showCurrentGpx, callbackWithObject, list);
-		}
-	}
-
 	@NonNull
 	public static String getFolderName(@NonNull Context context, @NonNull File directory) {
-		String name = directory.getName();
-		if (GPX_INDEX_DIR.equals(name + File.separator)) {
+		if (isRootGpxDirectory(directory)) {
 			return context.getString(R.string.shared_string_tracks);
 		}
+		String name = directory.getName();
 		String dirPath = directory.getPath() + File.separator;
 		if (dirPath.endsWith(GPX_IMPORT_DIR) || dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
 			return Algorithms.capitalizeFirstLetter(name);
@@ -203,14 +174,40 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
-	public static String getFolderPath(@NonNull File directory, @NonNull String initialName) {
-		String name = directory.getName() + File.separator;
-		File parent = directory.getParentFile();
-		String parentName = parent != null ? parent.getName() + File.separator : "";
-		if (!CollectionUtils.equalsToAny(GPX_INDEX_DIR, name, parentName)) {
-			return parentName + initialName;
+	public static String getRelativeFolderPath(@NonNull File directory,
+	                                           @NonNull String initialName, boolean includeSubdirs) {
+		return includeSubdirs
+				? getRelativeFolderPath(directory, initialName)
+				: getShortRelativeFolderPath(directory, initialName);
+	}
+
+	@NonNull
+	public static String getRelativeFolderPath(@NonNull File directory, @NonNull String initialName) {
+		List<String> dirNames = new ArrayList<>();
+		File current = directory;
+		while (current != null) {
+			if (isRootGpxDirectory(current)) {
+				break;
+			}
+			dirNames.add(0, current.getName());
+			current = current.getParentFile();
+		}
+		return dirNames.isEmpty() ? initialName : TextUtils.join(File.separator, dirNames);
+	}
+
+	@NonNull
+	public static String getShortRelativeFolderPath(@NonNull File directory, @NonNull String initialName) {
+		if (!isRootGpxDirectory(directory)) {
+			File parentDir = directory.getParentFile();
+			if (parentDir != null && !isRootGpxDirectory(parentDir)) {
+				return ".." + File.separator + initialName;
+			}
 		}
 		return initialName;
+	}
+
+	private static boolean isRootGpxDirectory(@NonNull File directory) {
+		return GPX_INDEX_DIR.equals(directory.getName() + File.separator);
 	}
 
 	@NonNull

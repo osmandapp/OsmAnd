@@ -1,22 +1,25 @@
 package net.osmand.plus.plugins.development;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.PowerManager;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.squareup.picasso.Picasso;
 
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.NativeCore;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -64,6 +67,7 @@ import java.util.stream.Collectors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
@@ -74,6 +78,8 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 
+import org.apache.commons.logging.Log;
+
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	public static final String DOWNLOAD_BUILD_NAME = "osmandToInstall.apk";
@@ -81,14 +87,17 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
+	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
-	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
 	private final StateChangedListener<Boolean> msaaListener;
 	private final StateChangedListener<Boolean> batterySavingModeListener;
+
+	private static final Log LOG_termal = PlatformUtil.getLog("ThermalState");
+
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -113,8 +122,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
 		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
+		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
-		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
@@ -133,8 +142,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		};
 		SHOW_PRIMITIVES_DEBUG_INFO.addListener(symbolsDebugInfoListener);
-		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+		settings.DEBUG_RENDERING_INFO.addListener(symbolsDebugInfoListener);
 
 		debugRenderingInfoListener = NativeCore::enablePerformanceLogs;
 		settings.DEBUG_RENDERING_INFO.addListener(debugRenderingInfoListener);
@@ -264,7 +273,49 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		super.init(app, activity);
 		avgStatsEnabled = true;
 		avgStatsCollector();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			startThermalStatusListening();
+		}
 		return true;
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	private void startThermalStatusListening() {
+		PowerManager powerManager = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
+		PowerManager.OnThermalStatusChangedListener listener = status -> {
+			LOG_termal.debug("ThermalStatus changed: " + getThermalStateName(status));
+		};
+		powerManager.addThermalStatusListener(listener);
+	}
+
+	private String getThermalStateName(int stateCode) {
+		String name;
+		switch (stateCode){
+			case PowerManager.THERMAL_STATUS_NONE:
+				name = "None";
+				break;
+			case PowerManager.THERMAL_STATUS_LIGHT:
+				name = "Light";
+				break;
+			case PowerManager.THERMAL_STATUS_MODERATE:
+				name = "Moderate";
+				break;
+			case PowerManager.THERMAL_STATUS_SEVERE:
+				name = "Severe";
+				break;
+			case PowerManager.THERMAL_STATUS_CRITICAL:
+				name = "Critical";
+				break;
+			case PowerManager.THERMAL_STATUS_EMERGENCY:
+				name = "Emergency";
+				break;
+			case PowerManager.THERMAL_STATUS_SHUTDOWN:
+				name = "Shutdown";
+				break;
+			default:
+				name = "Unknown";
+		}
+		return String.format("%s {%d}", name, stateCode);
 	}
 
 	@Override
@@ -346,12 +397,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				float cpuBasic = renderer.getBasicThreadsCPULoad();
 				this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
 
-				Intent batteryIntent;
-				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED), Context.RECEIVER_NOT_EXPORTED);
-				} else {
-					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-				}
+				Intent batteryIntent = AndroidUtils.registerBroadcastReceiver(app, Intent.ACTION_BATTERY_CHANGED, null, false);
 				if (batteryIntent != null) {
 					int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 					int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -378,7 +424,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		private float avgFloat(List<AvgStatsEntry> allEntries, int periodMinutes, Function<AvgStatsEntry, Float> getter) {
 			long earliestTimestamp = System.currentTimeMillis() - periodMinutes * 60 * 1000;
-			final float[] pairSumCounter = { 0, 0 }; // sum, counter
+			final float[] pairSumCounter = {0, 0}; // sum, counter
 			allEntries.forEach(entry -> {
 				if (entry.timestamp > 0 && entry.timestamp >= earliestTimestamp) {
 					pairSumCounter[0] += getter.apply(entry);
@@ -404,8 +450,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	private void avgStatsCleanup() {
-		long expirationTimestamp = System.currentTimeMillis() - (long)(AVG_STATS_LIFETIME_MINUTES * 60 * 1000);
-		long delayedCleanupTimestamp = System.currentTimeMillis() - (long)(AVG_STATS_LIFETIME_MINUTES * 60 * 1000 * 2);
+		long expirationTimestamp = System.currentTimeMillis() - (long) (AVG_STATS_LIFETIME_MINUTES * 60 * 1000);
+		long delayedCleanupTimestamp = System.currentTimeMillis() - (long) (AVG_STATS_LIFETIME_MINUTES * 60 * 1000 * 2);
 		if (!avgStats.isEmpty() && avgStats.get(0).timestamp < delayedCleanupTimestamp) {
 			avgStats = avgStats.stream().filter(entry -> entry.timestamp >= expirationTimestamp).collect(Collectors.toList());
 		}

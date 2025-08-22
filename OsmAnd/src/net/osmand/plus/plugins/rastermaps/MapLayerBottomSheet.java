@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.MapLayerType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -35,13 +35,11 @@ public class MapLayerBottomSheet extends BaseBottomSheetDialogFragment {
 	private static final String KEY_UPDATE_TILES = "KEY_UPDATE_TILES";
 
 	private List<MapLayerType> layerTypes;
-	private boolean nightMode;
 	private boolean updateTiles;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
 		Bundle args = getArguments();
 		layerTypes = (List<MapLayerType>) AndroidUtils.getSerializable(args, KEY_LAYER_NAMES, ArrayList.class);
 		updateTiles = args.getBoolean(KEY_UPDATE_TILES);
@@ -51,19 +49,24 @@ public class MapLayerBottomSheet extends BaseBottomSheetDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		Context context = requireContext();
-		inflater = UiUtilities.getInflater(context, nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_track_group_list, null);
+		updateNightMode();
+		View view = inflate(R.layout.bottom_sheet_track_group_list);
 
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.select_layer);
-		title.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
+		title.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(context));
+		recyclerView.setLayoutManager(new LinearLayoutManager(getThemedContext()));
 		recyclerView.setAdapter(new MapLayersAdapter(layerTypes));
 
 		return view;
+	}
+
+	@NonNull
+	@Override
+	public ThemeUsageContext getThemeUsageContext() {
+		return ThemeUsageContext.OVER_MAP;
 	}
 
 	public class MapLayersAdapter extends RecyclerView.Adapter<MapLayerViewHolder> {
@@ -90,7 +93,7 @@ public class MapLayerBottomSheet extends BaseBottomSheetDialogFragment {
 			String mapSourceTitle = settings.getTileSourceTitle(mapSource);
 			holder.description.setText(mapSourceTitle);
 			holder.layerIcon.setImageResource(layerType.getIconId());
-			int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+			int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 			holder.layerIcon.setImageTintList(ColorStateList.valueOf(iconColor));
 			holder.itemView.setOnClickListener(view -> {
 				downloadTilesForLayer(app, requireFragmentManager(), layerType, updateTiles);
@@ -141,15 +144,13 @@ public class MapLayerBottomSheet extends BaseBottomSheetDialogFragment {
 	                                boolean updateTiles) {
 		if (layerTypes.size() == 1) {
 			downloadTilesForLayer(app, manager, layerTypes.get(0), updateTiles);
-		} else {
-			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				MapLayerBottomSheet fragment = new MapLayerBottomSheet();
-				Bundle args = new Bundle();
-				args.putBoolean(KEY_UPDATE_TILES, updateTiles);
-				args.putSerializable(KEY_LAYER_NAMES, new ArrayList<>(layerTypes));
-				fragment.setArguments(args);
-				fragment.show(manager, TAG);
-			}
+		} else if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			MapLayerBottomSheet fragment = new MapLayerBottomSheet();
+			Bundle args = new Bundle();
+			args.putBoolean(KEY_UPDATE_TILES, updateTiles);
+			args.putSerializable(KEY_LAYER_NAMES, new ArrayList<>(layerTypes));
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
 		}
 	}
 }

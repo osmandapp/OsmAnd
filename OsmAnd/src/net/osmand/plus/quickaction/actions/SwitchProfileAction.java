@@ -54,7 +54,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getTitle(List<String> filters) {
+	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 		List<String> profileNames = new ArrayList<>();
 		for (String key : filters) {
 			ApplicationMode appMode = getModeForKey(key);

@@ -102,7 +102,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			}
 		}
 
-		View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_article_dialog, container, false);
 
 		setupToolbar(mainView.findViewById(R.id.toolbar));
 
@@ -127,17 +127,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				getActiveIcon(R.drawable.ic_action_contents), null, null, null
 		);
 		contentsBtn.setOnClickListener(v -> {
-			FragmentManager fm = getFragmentManager();
-			if (article == null || fm == null) {
-				return;
+			FragmentManager fragmentManager = getFragmentManager();
+			if (article != null && fragmentManager != null) {
+				WikivoyageArticleContentsFragment.showInstance(fragmentManager, WikivoyageArticleDialogFragment.this, article.getContentsJson());
 			}
-			Bundle args = new Bundle();
-			args.putString(WikivoyageArticleContentsFragment.CONTENTS_JSON_KEY, article.getContentsJson());
-			WikivoyageArticleContentsFragment fragment = new WikivoyageArticleContentsFragment();
-			fragment.setUsedOnMap(false);
-			fragment.setArguments(args);
-			fragment.setTargetFragment(WikivoyageArticleDialogFragment.this, WikivoyageArticleContentsFragment.SHOW_CONTENT_ITEM_REQUEST_CODE);
-			fragment.show(fm, WikivoyageArticleContentsFragment.TAG);
 		});
 
 		trackButton = mainView.findViewById(R.id.gpx_button);
@@ -214,11 +207,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		super.onResume();
 		if (!settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.get()) {
 			FragmentActivity activity = getActivity();
-			FragmentManager fm = getFragmentManager();
-			if (activity != null && fm != null) {
-				WikivoyageShowPicturesDialogFragment fragment = new WikivoyageShowPicturesDialogFragment();
-				fragment.setTargetFragment(this, WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE);
-				fragment.show(fm, WikivoyageShowPicturesDialogFragment.TAG);
+			FragmentManager fragmentManager = getFragmentManager();
+			if (activity != null && fragmentManager != null) {
+				WikivoyageShowPicturesDialogFragment.showInstance(fragmentManager, this);
 				settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(true);
 			}
 		}
@@ -409,10 +400,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager,
-										@NonNull TravelArticleIdentifier articleId,
-										@NonNull List<String> langs,
-										@Nullable String selectedLang) {
-		try {
+	                                   @NonNull TravelArticleIdentifier articleId,
+	                                   @NonNull List<String> langs,
+	                                   @Nullable String selectedLang) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putParcelable(ARTICLE_ID_KEY, articleId);
 			args.putStringArrayList(LANGS_KEY, new ArrayList<>(langs));
@@ -423,9 +414,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			fragment.setArguments(args);
 			fragment.show(manager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	private class WikivoyageArticleWebAppInterface {

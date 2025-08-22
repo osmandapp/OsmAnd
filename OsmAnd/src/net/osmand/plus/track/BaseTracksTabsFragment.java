@@ -24,7 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
 import net.osmand.plus.configmap.tracks.TrackTab;
@@ -66,7 +66,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
+public abstract class BaseTracksTabsFragment extends BaseFullScreenDialogFragment implements LoadTracksListener,
 		SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, RenameCallback,
 		TrackSelectionListener, SortTracksListener, EmptyTracksListener, SelectGpxTaskListener {
 
@@ -166,7 +166,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	@NonNull
 	public List<TrackTab> getSortedTrackTabs() {
-		return getSortedTrackTabs(false);
+		return getSortedTrackTabs(true);
 	}
 
 	@NonNull

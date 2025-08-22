@@ -4,8 +4,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_HIDDEN;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_VISIBLE;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_LEFT;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_TOP;
 
 import android.graphics.drawable.Drawable;
 
@@ -24,8 +24,8 @@ import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.CompassVisibility;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.CompassDrawable;
+import net.osmand.shared.grid.ButtonPositionSize;
 import net.osmand.util.Algorithms;
 
 public class CompassButtonState extends MapButtonState {

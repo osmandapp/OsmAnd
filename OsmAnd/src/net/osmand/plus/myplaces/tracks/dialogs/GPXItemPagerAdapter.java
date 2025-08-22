@@ -38,6 +38,8 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.plus.charts.ElevationChartAppearance;
+import net.osmand.plus.charts.GpxMarkerView;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -353,7 +355,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupSpeedTab(View view, com.github.mikephil.charting.charts.ElevationChart chart, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData()) {
-				ChartUtils.setupElevationChart(chart);
+				setupChartWithAppearance(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_SPEED, SPEED, null)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -405,7 +407,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupAltitudeTab(View view, ElevationChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData()) {
-				ChartUtils.setupElevationChart(chart);
+				setupChartWithAppearance(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -458,7 +460,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				} else {
 					secondType = SPEED;
 				}
-				ChartUtils.setupElevationChart(chart);
+				setupChartWithAppearance(chart);
 				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, firstType, secondType)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -486,6 +488,14 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			updateJoinGapsInfo(view, position);
 			updateActionButtonsRow(view, GPX_TAB_ITEM_GENERAL, true);
 		}
+	}
+
+	private void setupChartWithAppearance(@NonNull ElevationChart chart){
+		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
+		ElevationChartAppearance appearance = new ElevationChartAppearance();
+		appearance.setContext(themedContext);
+		appearance.setMarkerView(new GpxMarkerView(themedContext, 0, false));
+		ChartUtils.setupElevationChart(chart, appearance);
 	}
 
 	private void updateGraphModeDescription(@NonNull View view) {
@@ -872,7 +882,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	                                        @NonNull GpxTrackAnalysis analysis,
 	                                        boolean joinSegments, boolean generalTrack) {
 		float totalDistance = !joinSegments && generalTrack ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
-		float timeSpan = !joinSegments && generalTrack ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
+		float timeSpan = !joinSegments && generalTrack ? analysis.getTimeSpanWithoutGaps() : analysis.getDurationInSeconds() * 1000;
+		if(timeSpan == 0) {
+			timeSpan = analysis.getExpectedRouteDuration();
+		}
 
 		TextView distanceText = container.findViewById(R.id.distance_text);
 		TextView durationText = container.findViewById(R.id.duration_text);

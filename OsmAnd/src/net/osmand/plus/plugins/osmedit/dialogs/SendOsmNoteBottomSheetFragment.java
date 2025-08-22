@@ -1,16 +1,13 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import static net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
-import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,13 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -37,9 +32,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -51,12 +44,10 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private static final Log LOG = PlatformUtil.getLog(SendOsmNoteBottomSheetFragment.class);
 	private OsmPoint[] poi;
 
-	protected OsmandSettings settings;
 	private TextView accountName;
 	private LinearLayout accountBlockView;
 	private LinearLayout signInView;
 	private SwitchCompat uploadAnonymously;
-	private OsmandApplication app;
 	private OsmEditingPlugin plugin;
 	private EditText noteText;
 
@@ -66,16 +57,14 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = getMyApplication();
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
-		if (app == null || plugin == null) return;
+		if (plugin == null) return;
 
-		poi = AndroidUtils.getSerializable(getArguments(), OPENSTREETMAP_POINT, OsmPoint[].class);
+		poi = AndroidUtils.getSerializable(requireArguments(), OPENSTREETMAP_POINT, OsmPoint[].class);
 
 		items.add(new TitleItem(getString(R.string.upload_osm_note)));
 
-		View sendOsmNoteView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.send_osm_note_fragment, null);
+		View sendOsmNoteView = inflate(R.layout.send_osm_note_fragment);
 		sendOsmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 
 		noteText = sendOsmNoteView.findViewById(R.id.note_text);
@@ -98,11 +87,11 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			if (fragment instanceof OsmAuthorizationListener) {
 				app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
 			}
-			app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
+			app.getOsmOAuthHelper().startOAuth((ViewGroup) requireView(), nightMode);
 		});
 		updateSignIn(uploadAnonymously.isChecked());
 		uploadAnonymously.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
-		int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int paddingSmall = getDimensionPixelSize(R.dimen.content_padding_small);
 		uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
 		uploadAnonymously.setOnCheckedChangeListener((buttonView, isChecked) -> {
 			updateSignIn(isChecked);
@@ -117,16 +106,10 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		});
 		LinearLayout account = accountBlockView.findViewById(R.id.account_container);
 		account.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				showOpenStreetMapScreen(activity);
-			}
+			callActivity(SendGpxBottomSheetFragment::showOpenStreetMapScreen);
 			dismiss();
 		});
-		SimpleBottomSheetItem bottomSheetItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(sendOsmNoteView)
-				.create();
-		items.add(bottomSheetItem);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(sendOsmNoteView).create());
 	}
 
 	private void updateAccountName() {
@@ -146,29 +129,10 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	private void setupButtonIcon(View buttonView, int drawableId) {
 		Drawable icon = null;
 		if (drawableId != -1) {
-			icon = app.getUIUtilities().getIcon(drawableId, R.color.popup_text_color);
+			icon = getIcon(drawableId, R.color.popup_text_color);
 		}
 		TextView buttonText = buttonView.findViewById(R.id.button_text);
 		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(buttonText, icon, null, null, null);
-	}
-
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {
-		try {
-			if (!fm.isStateSaved()) {
-				SendOsmNoteBottomSheetFragment fragment = new SendOsmNoteBottomSheetFragment();
-				Bundle bundle = new Bundle();
-				bundle.putSerializable(OPENSTREETMAP_POINT, points);
-				fragment.setArguments(bundle);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
-		}
-	}
-
-	@Override
-	protected DialogButtonType getRightBottomButtonType() {
-		return (DialogButtonType.PRIMARY);
 	}
 
 	@Override
@@ -211,5 +175,15 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		return adapter.isValidToken()
 				|| !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get())
 				&& !Algorithms.isEmpty(plugin.OSM_USER_PASSWORD.get());
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			SendOsmNoteBottomSheetFragment fragment = new SendOsmNoteBottomSheetFragment();
+			Bundle bundle = new Bundle();
+			bundle.putSerializable(OPENSTREETMAP_POINT, points);
+			fragment.setArguments(bundle);
+			fragment.show(fm, TAG);
+		}
 	}
 }

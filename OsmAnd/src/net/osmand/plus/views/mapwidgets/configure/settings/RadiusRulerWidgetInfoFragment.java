@@ -1,12 +1,14 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -19,10 +21,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-
-public class RadiusRulerWidgetInfoFragment extends WidgetInfoBaseFragment {
+public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_RADIUS_RULER_MODE = "radius_ruler_mode";
 	private static final String KEY_SHOW_COMPASS = "show_compass";
@@ -49,9 +48,8 @@ public class RadiusRulerWidgetInfoFragment extends WidgetInfoBaseFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.radius_ruler_widget_settings_fragment, container);
-
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		inflate(R.layout.radius_ruler_widget_settings_fragment, container);
 		setupRadiusRulerModeSetting();
 		setupCompassSetting();
 	}
@@ -152,6 +150,8 @@ public class RadiusRulerWidgetInfoFragment extends WidgetInfoBaseFragment {
 
 	@Override
 	protected void applySettings() {
+		super.applySettings();
+
 		settings.RADIUS_RULER_MODE.setModeValue(appMode, radiusRulerMode);
 		settings.SHOW_COMPASS_ON_RADIUS_RULER.setModeValue(appMode, showCompass);
 

@@ -3,7 +3,6 @@ package net.osmand.plus.liveupdates;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,19 +20,20 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
-import net.osmand.plus.liveupdates.Protocol.RecipientsByMonth;
-import net.osmand.plus.liveupdates.Protocol.TotalChangesByMonthResponse;
 import net.osmand.plus.liveupdates.GetJsonAsyncTask.OnErrorListener;
 import net.osmand.plus.liveupdates.GetJsonAsyncTask.OnResponseListener;
+import net.osmand.plus.liveupdates.Protocol.RecipientsByMonth;
+import net.osmand.plus.liveupdates.Protocol.TotalChangesByMonthResponse;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
-public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInteractionListener {
+public class ReportsFragment extends BaseFullScreenFragment implements OnFragmentInteractionListener {
 
 	public static final String DOMAIN = "https://osmand.net/";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = DOMAIN +
@@ -83,11 +83,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInt
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_reports, container, false);
+		View view = inflate(R.layout.fragment_reports, container, false);
 		monthReportsSpinner = view.findViewById(R.id.monthReportsSpinner);
 		View monthButton = view.findViewById(R.id.monthButton);
 		monthReportsSpinner.setOnTouchListener((v, event) -> {
-			event.offsetLocation(AndroidUtils.dpToPx(app, 48f), 0);
+			event.offsetLocation(dpToPx(48f), 0);
 			monthButton.onTouchEvent(event);
 			return true;
 		});
@@ -115,7 +115,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInt
 			String monthUrlString = monthsForReportsAdapter.getQueryString(monthItemPosition);
 			String countryUrlString = selectedCountryItem.getDownloadName();
 			boolean isRecipientsReport = v.getId() == R.id.numberOfRecipientsLayout;
-			if (countryUrlString.length() > 0 || isRecipientsReport) {
+			if (!countryUrlString.isEmpty() || isRecipientsReport) {
 				Bundle bl = new Bundle();
 				bl.putString(UsersReportFragment.URL_REQUEST,
 						String.format(isRecipientsReport ? RECIPIENTS_BY_MONTH : USERS_RANKING_BY_MONTH, monthUrlString, countryUrlString));
@@ -223,7 +223,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInt
 		totalChangesByMontAsyncTask.setOnResponseListener(onResponseListener);
 		totalChangesByMontAsyncTask.setOnErrorListener(onErrorListener);
 		String finalUrl = String.format(TOTAL_CHANGES_BY_MONTH_URL_PATTERN, monthUrlString, regionUrlString);
-		totalChangesByMontAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, finalUrl);
+		OsmAndTaskManager.executeTask(totalChangesByMontAsyncTask, finalUrl);
 
 		GetJsonAsyncTask<RecipientsByMonth> recChangesByMontAsyncTask =
 				new GetJsonAsyncTask<>(Protocol.RecipientsByMonth.class);
@@ -249,7 +249,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInt
 		clearTextViewResult(donationsTotalTextView);
 
 		String recfinalUrl = String.format(RECIPIENTS_BY_MONTH, monthUrlString, regionUrlString);
-		recChangesByMontAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, recfinalUrl);
+		OsmAndTaskManager.executeTask(recChangesByMontAsyncTask, recfinalUrl);
 	}
 
 	private void setThemedDrawable(View parent, @IdRes int viewId, @DrawableRes int iconId) {
@@ -274,11 +274,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInt
 	}
 
 	private void enableProgress() {
-		numberOfContributorsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
-		numberOfEditsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_map, inactiveColor));
-		numberOfRecipientsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_group, inactiveColor));
-		donationsIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
-		donationsTotalIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bitcoin, inactiveColor));
+		numberOfContributorsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_group, inactiveColor));
+		numberOfEditsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_map, inactiveColor));
+		numberOfRecipientsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_group, inactiveColor));
+		donationsIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_bitcoin, inactiveColor));
+		donationsTotalIcon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_bitcoin, inactiveColor));
 
 		numberOfContributorsTitle.setTextColor(inactiveColor);
 		numberOfEditsTitle.setTextColor(inactiveColor);

@@ -1,10 +1,7 @@
 package net.osmand.plus.mapsource;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -21,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -31,34 +29,22 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 	private TileStorageFormat tileStorageFormat;
 	private boolean newMapSource;
 
-	public static void showInstance(@NonNull FragmentManager fm,
-									@Nullable Fragment targetFragment,
-									boolean sqliteDb,
-									boolean newMapSource) {
-		TileStorageFormatBottomSheet bottomSheet = new TileStorageFormatBottomSheet();
-		bottomSheet.setTargetFragment(targetFragment, 0);
-		bottomSheet.setTileStorageFormat(sqliteDb);
-		bottomSheet.setNewMapSource(newMapSource);
-		bottomSheet.show(fm, TAG);
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
 			setTileStorageFormat(savedInstanceState.getBoolean(SQLITE_DB_KEY));
 			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE_KEY);
 		}
-		Context context = requireContext();
+		Context themedContext = getThemedContext();
 		TitleItem titleItem = new TitleItem(getString(R.string.storage_format));
 		items.add(titleItem);
-		NestedScrollView nestedScrollView = new NestedScrollView(context);
-		valuesContainer = new LinearLayout(context);
+		NestedScrollView nestedScrollView = new NestedScrollView(themedContext);
+		valuesContainer = new LinearLayout(themedContext);
 		valuesContainer.setLayoutParams((new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)));
 		valuesContainer.setOrientation(LinearLayout.VERTICAL);
-		valuesContainer.setPadding(0, getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
+		valuesContainer.setPadding(0, getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
 		for (int i = 0; i < TileStorageFormat.values().length; i++) {
-			LayoutInflater.from(new ContextThemeWrapper(context, themeRes))
-					.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, valuesContainer, true);
+			inflate(R.layout.bottom_sheet_item_with_radio_btn_left, valuesContainer, true);
 		}
 		nestedScrollView.addView(valuesContainer);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(nestedScrollView).create());
@@ -84,20 +70,12 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 			View view = valuesContainer.getChildAt(i);
 			((CompoundButton) view.findViewById(R.id.compound_button)).setChecked(selected);
 			((TextView) view.findViewById(R.id.title)).setText(m.titleRes);
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (tileStorageFormat != m) {
-						if (newMapSource) {
-							applyTileStorageFormat(m);
-						} else {
-							InputZoomLevelsBottomSheet.showClearTilesWarningDialog(requireActivity(), nightMode, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialogInterface, int i) {
-									applyTileStorageFormat(m);
-								}
-							});
-						}
+			view.setOnClickListener(v -> {
+				if (tileStorageFormat != m) {
+					if (newMapSource) {
+						applyTileStorageFormat(m);
+					} else {
+						InputZoomLevelsBottomSheet.showClearTilesWarningDialog(requireActivity(), nightMode, (dialogInterface, j) -> applyTileStorageFormat(m));
 					}
 				}
 			});
@@ -118,6 +96,19 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 
 	public void setNewMapSource(boolean newMapSource) {
 		this.newMapSource = newMapSource;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm,
+	                                @Nullable Fragment targetFragment,
+	                                boolean sqliteDb,
+	                                boolean newMapSource) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			TileStorageFormatBottomSheet bottomSheet = new TileStorageFormatBottomSheet();
+			bottomSheet.setTargetFragment(targetFragment, 0);
+			bottomSheet.setTileStorageFormat(sqliteDb);
+			bottomSheet.setNewMapSource(newMapSource);
+			bottomSheet.show(fm, TAG);
+		}
 	}
 
 	public enum TileStorageFormat {

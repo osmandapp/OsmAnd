@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import net.osmand.OperationLog;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
@@ -25,7 +26,9 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,7 +107,7 @@ public class BackupUtils {
 			// https://github.com/osmandapp/OsmAnd/commit/bf93162bd13ef7ab16622bb662c953e931c34a21
 			if (item instanceof FileSettingsItem fileItem) {
 				String subtypeFolder = fileItem.getSubtype().getSubtypeFolder();
-				if (subtypeFolder != null && fileItem.getFile().isDirectory()) {
+				if (subtypeFolder != null && FileUtils.isProbablyDir(fileItem.getFile())) {
 					subtypeFolders.add(fileItem);
 				}
 			}
@@ -148,8 +151,7 @@ public class BackupUtils {
 	@NonNull
 	public static String getItemFileName(@NonNull SettingsItem item) {
 		String fileName;
-		if (item instanceof FileSettingsItem) {
-			FileSettingsItem fileItem = (FileSettingsItem) item;
+		if (item instanceof FileSettingsItem fileItem) {
 			fileName = getFileItemName(fileItem);
 		} else {
 			fileName = item.getFileName();
@@ -157,10 +159,7 @@ public class BackupUtils {
 				fileName = item.getDefaultFileName();
 			}
 		}
-		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
-			fileName = fileName.substring(1);
-		}
-		return fileName;
+		return removeLeadingSlash(fileName);
 	}
 
 	@NonNull
@@ -182,6 +181,10 @@ public class BackupUtils {
 		} else {
 			fileName = file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
 		}
+		return removeLeadingSlash(fileName);
+	}
+
+	public static String removeLeadingSlash(@Nullable String fileName) {
 		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
 			fileName = fileName.substring(1);
 		}
@@ -280,5 +283,29 @@ public class BackupUtils {
 				plugin.indexingFiles(true, true);
 			}
 		}
+	}
+
+	public static long calculateItemsSize(@NonNull List<?> items) {
+		long size = 0;
+		for (Object item : items) {
+			size += getItemSize(item);
+		}
+		return size;
+	}
+
+	public static long getItemSize(@NonNull Object object) {
+		if (object instanceof FileSettingsItem fileSettingsItem) {
+			return fileSettingsItem.getSize();
+		} else if (object instanceof File file) {
+			return file.length();
+		} else if (object instanceof RemoteFile remoteFile) {
+			return  remoteFile.getZipSize();
+		} else if (object instanceof MapMarkersGroup markersGroup) {
+			if (CollectionUtils.equalsToAny(markersGroup.getId(),
+					ExportType.ACTIVE_MARKERS.name(), ExportType.HISTORY_MARKERS.name())) {
+				return  markersGroup.getMarkers().size();
+			}
+		}
+		return 0;
 	}
 }

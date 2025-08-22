@@ -9,6 +9,9 @@ import static net.osmand.plus.mapmarkers.MapMarkersComparator.BY_NAME;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -16,6 +19,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.mapmarkers.MapMarkersComparator.MapMarkersSortByDef;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -23,7 +27,7 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 	private OrderByFragmentListener listener;
 
-	public void setListener(OrderByFragmentListener listener) {
+	public void setListener(@NonNull OrderByFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -109,7 +113,16 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		return R.string.shared_string_close;
 	}
 
-	interface OrderByFragmentListener {
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull OrderByFragmentListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			OrderByBottomSheetDialogFragment fragment = new OrderByBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setListener(listener);
+			fragment.show(fm, TAG);
+		}
+	}
+
+	public interface OrderByFragmentListener {
 		void onMapMarkersOrderByModeChanged(@MapMarkersSortByDef int sortByMode);
 	}
 }

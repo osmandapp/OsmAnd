@@ -3798,7 +3798,7 @@
     <string name="read_full_article">Darllen yr erthygl lawn (ar-lein)</string>
     <string name="osm_edit_context_menu_delete">Dileu golygiad OSM</string>
     <string name="agps_data_last_downloaded">Data A-GPS wedi\'i lawrlwytho: %1$s</string>
-    <string name="please_specify_poi_type_only_from_list"/>
+    <string name="please_specify_poi_type_only_from_list"></string>
     <string name="welcome_select_region">I adlewyrchu\'r arwyddion traffig a\'r rheoliadau yn gywir, dewisa dy rhanbarth gyrru:</string>
     <string name="welcome_text">Mae OsmAnd yn darparu pori mapiau all-lein byd-eang a llywio all-lein.</string>
     <string name="osm_changes_added_to_local_edits">Newidiadau OSM wedi\'u hychwanegu at set newidiadau lleol</string>

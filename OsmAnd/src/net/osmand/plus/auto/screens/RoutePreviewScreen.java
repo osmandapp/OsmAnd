@@ -19,22 +19,21 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-
 import net.osmand.PlatformUtil;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.auto.TripUtils;
-import net.osmand.plus.helpers.TargetPoint;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.TripUtils;
+import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -87,6 +86,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		this.calculateRoute = calculateRoute;
 		getLifecycle().addObserver(this);
 		calculating = calculateRoute;
+		setMarker(RoutePreviewScreen.class.getSimpleName());
 	}
 
 	@Override
@@ -152,6 +152,11 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			this.routeRows = routeRows;
 			calculating = app.getRoutingHelper().isRouteBeingCalculated();
 			invalidate();
+		} else if (routingHelper.getRoute().hasMissingMaps()) {
+			NavigationSession session = getSession();
+			if (session != null) {
+				session.showMissingMapsScreen();
+			}
 		}
 	}
 
@@ -202,13 +207,15 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		if (calculating) {
 			builder.setLoading(true);
 		} else {
-			builder.setLoading(false);
 			if (!Algorithms.isEmpty(routeRows)) {
+				builder.setLoading(false);
 				builder.setItemList(listBuilder.build());
+			} else {
+				builder.setLoading(true);
+				finish();
 			}
 		}
-		builder
-				.setTitle(getCarContext().getString(R.string.current_route))
+		builder.setTitle(getCarContext().getString(R.string.current_route))
 				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
 				.setHeaderAction(Action.BACK)
 				.setNavigateAction(

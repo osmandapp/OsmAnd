@@ -1,11 +1,11 @@
 package net.osmand.test.junit;
 
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_FULL_WIDTH;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_FULL_WIDTH;
+import static net.osmand.shared.grid.ButtonPositionSize.POS_TOP;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
+import net.osmand.shared.grid.ButtonPositionSize;
 
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class OverlapButtonsTest {
 			System.out.println(b);
 		}
 		System.out.println("--------");
-		ButtonPositionSize.computeNonOverlap(1, positions);
+		ButtonPositionSize.Companion.computeNonOverlap(1, positions, 100, 100);
 		for (ButtonPositionSize b : positions) {
 			System.out.println(b);
 		}

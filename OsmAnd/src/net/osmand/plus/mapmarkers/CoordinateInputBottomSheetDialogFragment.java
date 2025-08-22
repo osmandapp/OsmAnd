@@ -6,8 +6,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -20,10 +22,11 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = "CoordinateInputBottomSheetDialogFragment";
+	public static final String TAG = CoordinateInputBottomSheetDialogFragment.class.getSimpleName();
 
 	private CoordinateInputFormatChangeListener listener;
 
@@ -33,8 +36,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = getContext();
-		OsmandSettings settings = getMyApplication().getSettings();
+		Context context = getThemedContext();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 		BaseBottomSheetItem editItem = new SimpleBottomSheetItem.Builder()
@@ -85,7 +87,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 				.create();
 		items.add(twoDigitsLongtitudeItem);
 
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		if (!AndroidUiHelper.isOrientationPortrait(requireActivity())) {
 			boolean rightHand = settings.COORDS_INPUT_USE_RIGHT_SIDE.get();
 
 			BaseBottomSheetItem showNumberPadItem = new BottomSheetItemWithDescription.Builder()
@@ -129,7 +131,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			BaseBottomSheetItem formatItem = new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(selectedItem)
 					.setButtonTintList(selectedItem
-							? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
+							? ColorStateList.valueOf(getColor(getActiveColorId()))
 							: null)
 					.setIcon(selectedItem ? getActiveIcon(R.drawable.ic_action_coordinates_latitude) : formatIcon)
 					.setTitle(format.toHumanString(context))
@@ -147,7 +149,17 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		return R.string.shared_string_close;
 	}
 
-	interface CoordinateInputFormatChangeListener {
+	public static void showInstance(@NonNull FragmentManager childFragmentManager,
+	                                @NonNull CoordinateInputFormatChangeListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setListener(listener);
+			fragment.show(childFragmentManager, TAG);
+		}
+	}
+
+	public interface CoordinateInputFormatChangeListener {
 
 		void onKeyboardChanged();
 

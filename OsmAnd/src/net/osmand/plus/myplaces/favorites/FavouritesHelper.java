@@ -29,6 +29,10 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
@@ -366,6 +370,39 @@ public class FavouritesHelper {
 			point.setAddress(address);
 			point.setIconId(specialType.getIconId(app));
 			addFavourite(point);
+		}
+	}
+
+	public void copyToFavorites(@NonNull GpxDisplayGroup displayGroup, @NonNull String groupName) {
+		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
+		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
+
+		List<FavouritePoint> addedPoints = new ArrayList<>();
+		List<FavouritePoint> duplicatePoints = new ArrayList<>();
+		AddFavoriteOptions options = new AddFavoriteOptions().setLookupAddress(true);
+
+		for (GpxDisplayItem item : displayGroup.getDisplayItems()) {
+			if (item.locationStart != null) {
+				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
+				if (!Algorithms.isEmpty(item.description)) {
+					point.setDescription(item.description);
+				}
+				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
+					plugin.updateParkingPoint(point);
+				}
+				switch (favouritesHelper.addFavourite(point, options)) {
+					case ADDED -> addedPoints.add(point);
+					case DUPLICATE -> duplicatePoints.add(point);
+				}
+			}
+		}
+		favouritesHelper.saveCurrentPointsIntoFile(true);
+
+		if (!addedPoints.isEmpty()) {
+			app.showShortToastMessage(app.getString(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size()));
+		}
+		if (!duplicatePoints.isEmpty()) {
+			app.showShortToastMessage(app.getString(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size()));
 		}
 	}
 
@@ -838,6 +875,7 @@ public class FavouritesHelper {
 			favoriteGroup.setColor(pointsGroup.getColor());
 			favoriteGroup.setIconName(pointsGroup.getIconName());
 			favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+			favoriteGroup.setVisible(!pointsGroup.isHidden());
 		}
 	}
 

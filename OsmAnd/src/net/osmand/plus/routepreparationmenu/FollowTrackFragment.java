@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -202,7 +204,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackPaths(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
-			if (list.size() > 0) {
+			if (!list.isEmpty()) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
 				tracksCard = new TracksToFollowCard(mapActivity, this, list, defaultCategory);
 				tracksCard.setListener(this);
@@ -589,5 +591,19 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
 		updateSelectionMode(false);
+	}
+
+	public static boolean showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		FollowTrackFragment fragment = new FollowTrackFragment();
+		String tag = fragment.getFragmentTag();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+			manager.beginTransaction()
+					.replace(R.id.routeMenuContainer, fragment, tag)
+					.addToBackStack(tag)
+					.commitAllowingStateLoss();
+			return true;
+		}
+		return false;
 	}
 }

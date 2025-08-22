@@ -17,6 +17,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -70,6 +71,9 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 
 	private boolean buildDescription(@NonNull View view, @NonNull List<Amenity> amenities,
 			boolean allowOnlineWiki) {
+		if (detailsObject != null && buildDescription(view, detailsObject.getSyntheticAmenity(), allowOnlineWiki)) {
+			return true;
+		}
 		for (Amenity amenity : amenities) {
 			if (buildDescription(view, amenity, allowOnlineWiki)) {
 				return true;
@@ -140,7 +144,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchTravelArticles(@NonNull Map<String, LatLon> routeIds,
 			@Nullable CallbackWithObject<Map<String, Map<String, TravelArticle>>> callback) {
-		execute(new SearchTravelArticlesTask(app, routeIds, callback));
+		OsmAndTaskManager.executeTask(new SearchTravelArticlesTask(app, routeIds, callback));
 	}
 
 	@NonNull
@@ -186,9 +190,14 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 			}
 			for (Amenity amenity : detailsObject.getAmenities()) {
 				if (CollectionUtils.equalsToAny(amenity.getSubType(), ROUTE_ARTICLE_POINT, ROUTE_TRACK_POINT)) {
-					routeId = amenity.getRouteId();
-					if (!Algorithms.isEmpty(routeId) && !map.containsKey(routeId)) {
-						map.put(routeId, amenity.getLocation());
+					String id = amenity.getRouteId();
+					String wikidata = amenity.getWikidata();
+
+					if (!Algorithms.isEmpty(id) && !map.containsKey(id)) {
+						map.put(id, amenity.getLocation());
+					}
+					if (!Algorithms.isEmpty(wikidata) && !map.containsKey(wikidata)) {
+						map.put(wikidata, amenity.getLocation());
 					}
 				}
 			}

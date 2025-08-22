@@ -1340,7 +1340,7 @@
     <string name="poi_toll_yes">Teemaks</string>
     <string name="poi_toll_no">Teemaks puudub</string>
     <string name="poi_tactile_paving_yes">Jah;kombatav sillutis</string>
-    <string name="poi_tactile_paving_no">Ilma kombatava sillutiseta</string>
+    <string name="poi_tactile_paving_no">Ilma kompesillutiseta</string>
     <string name="poi_traffic_signals_sound_yes">Jah;Heliga foorid</string>
     <string name="poi_traffic_signals_sound_no">Heli: ei</string>
     <string name="poi_traffic_signals_sound_walk">Ainult kui kõndimine on lubatud</string>
@@ -2738,7 +2738,7 @@
     <string name="poi_wheelchair_designated">Määratud</string>
     <string name="poi_spoil_heap">Rämpsuhunnik</string>
     <string name="poi_bin_yes">Korviga</string>
-    <string name="poi_bin_no">Korv puudub</string>
+    <string name="poi_bin_no">Prügikast puudub</string>
     <string name="poi_summer_camp">Suvelaager</string>
     <string name="poi_recreation_center">Puhkekeskus</string>
     <string name="poi_crossing_activation_automatic">Ristumiskoha aktiveerimine: automaatne</string>

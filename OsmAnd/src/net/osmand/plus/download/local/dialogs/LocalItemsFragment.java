@@ -9,7 +9,6 @@ import static net.osmand.plus.utils.ColorUtilities.getToolbarActiveColorId;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,19 +28,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.local.BaseLocalItem;
-import net.osmand.plus.download.local.CategoryType;
-import net.osmand.plus.download.local.LocalCategory;
-import net.osmand.plus.download.local.LocalGroup;
-import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.download.local.LocalItemUtils;
-import net.osmand.plus.download.local.LocalOperationTask;
-import net.osmand.plus.download.local.LocalSizeCalculationListener;
-import net.osmand.plus.download.local.LocalSizeController;
-import net.osmand.plus.download.local.OperationType;
+import net.osmand.plus.download.local.*;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
@@ -160,7 +150,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.recyclerview_fragment, container, false);
+		View view = inflate(R.layout.recyclerview_fragment, container, false);
 
 		DownloadActivity activity = requireDownloadActivity();
 		activity.getAccessibilityAssistant().registerPage(view, LOCAL_TAB_NUMBER);
@@ -309,7 +299,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	public void performOperation(@NonNull OperationType type, @NonNull LocalItem... items) {
 		LocalOperationTask task = new LocalOperationTask(app, type, this);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, items);
+		OsmAndTaskManager.executeTask(task, items);
 	}
 
 	@Override

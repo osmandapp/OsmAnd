@@ -3,7 +3,6 @@ package net.osmand.plus.settings.fragments;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
 
-import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
@@ -147,12 +145,10 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	public void onPreferenceChanged(@NonNull String prefId) {
 		if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
 			// recreate activity to update locale
-			Activity activity = getActivity();
-			OsmandApplication app = getMyApplication();
-			if (app != null && activity != null) {
+			callActivity(activity -> {
 				app.getLocaleHelper().checkPreferredLocale();
 				RestartActivity.doRestart(activity);
-			}
+			});
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupUninstallSpeedCamerasPref();
 		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
