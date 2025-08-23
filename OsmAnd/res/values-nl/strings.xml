@@ -1444,7 +1444,7 @@
     <string name="action_create">Actietoets aanmaken</string>
     <string name="action_modify">Actie wijzigen</string>
     <string name="action_delete">Actie verwijderen</string>
-    <string name="osm_edits">OSM wijzigingen</string>
+    <string name="osm_edits">OSM-wijzigingen</string>
     <string name="osmand_parking_hour">u</string>
     <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">over</string>
@@ -6184,4 +6184,5 @@
     <string name="max_weight_at_full_load_description">Geef het maximaal toegestane gewicht van je voertuig bij volledige belading op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
     <string name="max_axle_load_description">Geef de maximale asbelasting van je voertuig op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
     <string name="lang_en_barebones">Engels (barebones)</string>
+    <string name="shared_sting_osm_link">OSM-link</string>
 </resources>
