@@ -3212,9 +3212,7 @@
     <string name="please_provide_profile_name_message">Dai un nome a questo profilo</string>
     <string name="open_settings">Apri le impostazioni</string>
     <string name="plugin_disabled">Plugin disabilitato</string>
-    <string name="plugin_disabled_descr">Questo plugin è un\' applicazione separata: disabilitandolo non lo rimuovi.
-\n
-\nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
+    <string name="plugin_disabled_descr">Questo plugin è un\'applicazione separata: disabilitandolo non lo rimuovi. \n \nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
     <string name="shared_string_menu">Menù</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="no_recalculation_setting">Disattiva ricalcolo</string>
@@ -4915,7 +4913,7 @@
     <string name="osmand_cloud_deletion_subscriptions_warning">Questo non eliminerà il tuo abbonamento OsmAnd Pro.</string>
     <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati da OsmAnd Cloud.</string>
     <string name="delete_account_warning">Eliminare l\'account %1$s?</string>
-    <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
+    <string name="backup_error_delete_account_email_match">L\'email non corrisponde al nome utente di accesso</string>
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
 \n
 \nInserisci l\'indirizzo email con cui ti sei registrato. Verrà inviata una password monouso per il passaggio successivo.</string>
@@ -5728,7 +5726,7 @@
     <string name="choose_location">Scegli un luogo</string>
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
-    <string name="show_image_previews">Mostra l\' immagine precedente</string>
+    <string name="show_image_previews">Mostra l\'immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Attiva la griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
     <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
