@@ -4492,7 +4492,7 @@
     <string name="mtb_imba_full">Internationale Mountain Bicycling Association</string>
     <string name="weather_pressure_hectopascals">Hectopascal</string>
     <string name="weather_pressure_inches_of_mercury">Inch kwik</string>
-    <string name="map_rendering_engine_descr">Versie 2 (OpenGL) is een snellere laad methode, met 2,5D zicht. Versie 1 was de standaard voor OsmAnd 4.3, en is nog steeds beter voor oudere toestellen.</string>
+    <string name="map_rendering_engine_descr">Versie 1 was de standaard voor OsmAnd 4.3, en is nog steeds beter voor oudere toestellen.\nVersie 2 (OpenGL) is een snellere laad methode, met 2,5D zicht.</string>
     <string name="map_rendering_engine">Laad methode van kaarten</string>
     <string name="show_borders_of_downloaded_maps">Grenzen tonen van gedownloade kaarten</string>
     <string name="purchases_feature_desc_external_sensors">Gegevens van externe sensors tonen en opnemen: fietssnelheid, fietskracht, ritme en hartslag.</string>
