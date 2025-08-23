@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
@@ -2268,7 +2269,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);
 			startRotating = false;
 			startZooming = false;
-			notifyLocationListeners(getLatitude(), getLongitude());
+			Location myLocation = app.getLocationProvider().getLastKnownLocation();
+			if (myLocation == null || myLocation.distanceTo(new Location("", initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude())) > 1) {
+				notifyLocationListeners(getLatitude(), getLongitude());
+			}
 		}
 
 		@Override
