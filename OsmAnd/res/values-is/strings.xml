@@ -4627,7 +4627,7 @@
     <string name="open_weather_action">Opna veður</string>
     <string name="map_markers_bar_widget_desc">Viðmótshluti toppstikunnar birtir vegalengd og stefnu að næsta kortamerki miðað við fyrirliggjandi staðsetningu þína. Hægt er að stilla viðmótshlutann á að birta eitt eða tvö kortamerki.</string>
     <string name="external_sensors_plugin_description">Sækir gögn frá utanaðkomandi skynjurum til að lesa t.d. hraða reiðhjóls, afl við hjólreiðar, takt og hjartslátt. Krefst þess að tækið þitt sé tengt við viðkomandi skynjara með samskiptamáta fyrir þráðlaus ANT+ einkanet.</string>
-    <string name="map_rendering_engine_descr">Útgáfa 2 (OpenGL) er öflug myndgerðarvél fyrir landakort, sem býður einnig upp á 2.5D-sýn. Myndgerð í útgáfu 1 var sjálfgefin allt að OsmAnd útgáfu 4.3 og er enn sú besta fyrir eldri tæki.</string>
+    <string name="map_rendering_engine_descr">Myndgerð í útgáfu 1 var sjálfgefin allt að OsmAnd útgáfu 4.3 og er enn sú besta fyrir eldri tæki.\nÚtgáfa 2 (OpenGL) er öflug myndgerðarvél fyrir landakort, sem býður einnig upp á 2.5D-sýn.</string>
     <string name="weather_plugin_description">Gefur kost á\n- 24-stunda og 7-daga veðurspá með 5 gagnaþekjum\n- staðarháðum viðmótshlutum\n- hitastigs- / loftþrýstingslínum\n\nVeðurgögnin koma frá Global Forecast System (GFS, %1$s).</string>
     <string name="distance_by_tap_use_description">Ýttu á kortið til að sjá vegalengdina milli fyrirliggjandi staðsetningar þinnar og punktsins sem þú ýttir á.
 \nÝttu á kortið með 2 fingrum til að sjá vegalengdina milli punktanna sem þú ýttir á</string>
