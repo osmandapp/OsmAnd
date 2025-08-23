@@ -4535,7 +4535,7 @@
 \nМолим, подржите побољшања достављањем дневника грешака.</string>
     <string name="rendering_engine_failed">Приказ карте Османда се недавно срушио.</string>
     <string name="map_rendering_engine_v2">Издање 2 (ОпенГЛ)</string>
-    <string name="map_rendering_engine_descr">Верзија 2 (ОпенГЛ) је моћнији механизам за рендеровање мапа, који такође нуди 2.5Д приказ. Верзија 1 је била подразумевана пре ОсмАнд 4.3 и још увек је пожељнија за старије уређаје.</string>
+    <string name="map_rendering_engine_descr">Верзија 1 је била подразумевана пре ОсмАнд 4.3 и још увек је пожељнија за старије уређаје.\nВерзија 2 (ОпенГЛ) је моћнији механизам за рендеровање мапа, који такође нуди 2.5Д приказ.</string>
     <string name="map_rendering_engine">Погон приказа карата</string>
     <string name="external_sensors_support">Подршка спољних пријемника</string>
     <string name="external_sensor_widgets">Спољашњи пријемници</string>
