@@ -4672,7 +4672,7 @@
     <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض الخريطة العادي . يمكنك العودة إلى مشغل العرض (3D)\" في الإعدادات.
 \n
 \nالرجاء دعم التحسينات من خلال توفير سجل الأخطاء الخاص بك.</string>
-    <string name="map_rendering_engine_descr">عرض 3D هو نمط عرض خرائط أسرع . كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.</string>
+    <string name="map_rendering_engine_descr">كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.\nعرض 3D هو نمط عرض خرائط أسرع .</string>
     <string name="rendering_attr_depthContourWidth_name">عرض الخط</string>
     <string name="shared_string_next_sunset">غروب الشمس القادم</string>
     <string name="shared_string_next_sunrise">شروق الشمس القادم</string>
