@@ -5724,4 +5724,14 @@
     <string name="rendering_attr_shellsStyle_name">Estilo para moluscos marinos</string>
     <string name="private_access_routing_req_short">El destino está en un área privada. ¿Querés cruzar por caminos privados?</string>
     <string name="view_on_phone">Ver en el teléfono</string>
+    <string name="backup_delete_data_warning_extended">Esta acción quitará de la nube todos los datos marcados. No podrás restaurarlos luego.</string>
+    <string name="amount_of_total_used">Usado %1$s de %2$s</string>
+    <string name="delete_data">Borrar datos</string>
+    <string name="manage_storage_delete_data_dialog_summary">¿Borrar %1$s de OsmAnd Cloud?\n\nTendrás hasta 30 días para restaurarlo de la papelera.</string>
+    <string name="manage_storage">Gestionar almacenamiento</string>
+    <string name="copy_as_new_folder">Copiar como nueva carpeta</string>
+    <string name="add_to_a_folder">Agregar a una carpeta</string>
+    <string name="add_to_favorites">Agregar a favoritos</string>
+    <string name="max_weight_at_full_load_description">Indicá el peso bruto máximo del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
+    <string name="max_axle_load_description">Indicá la carga máxima por eje del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
 </resources>
