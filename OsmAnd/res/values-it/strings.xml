@@ -4569,7 +4569,7 @@
     <string name="action_not_supported_with_map_style">Questa azione non è supportata dallo stile della mappa attuale.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_rendering_engine">Motore di rendering della mappa</string>
-    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D. Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.</string>
+    <string name="map_rendering_engine_descr">Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.\nVersione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D.</string>
     <string name="show_map_symbols">Mostra i simboli della mappa</string>
     <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
     <string name="depth_contours">Isobate</string>
