@@ -4781,7 +4781,7 @@
     <string name="temperature_widget_desc">Prikazuje temperaturo za trenutno središče zemljevida.</string>
     <string name="weather_prefs_descr">24-urna in 7-dnevna napoved, posodobljena vsake 3 ure</string>
     <string name="weather_temperature_celsius">Celzija</string>
-    <string name="map_rendering_engine_descr">Različica 2 (OpenGL) je hitrejši mehanizem za upodabljanje zemljevidov, ki vključuje tudi 2,5D pogled. Različica 1 je bila privzeta pred OsmAnd 4.3 in je še vedno primernejša za starejše naprave.</string>
+    <string name="map_rendering_engine_descr">Različica 1 je bila privzeta pred OsmAnd 4.3 in je še vedno primernejša za starejše naprave.\nRazličica 2 (OpenGL) je hitrejši mehanizem za upodabljanje zemljevidov, ki vključuje tudi 2,5D pogled.</string>
     <string name="map_rendering_engine_v2">Različica 2 (OpenGL)</string>
     <string name="storage_migration_fragment_close_descr">Kopiranje je opravljeno samo za %1$s%%. Če se zdaj ustaviš, aplikacija morda ne bo delovala pravilno.</string>
     <string name="rendering_attr_depthContourWidth_name">Debelina črte</string>
