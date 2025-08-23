@@ -4800,7 +4800,7 @@
     <string name="restart_now">Şimdi yeniden başlat</string>
     <string name="map_rendering_engine_v1">Sürüm 1</string>
     <string name="map_rendering_engine_v2">Sürüm 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Sürüm 2 (OpenGL) daha hızlı bir harita görselleştirme motorudur ve 2.5D görünüm özelliğine de sahiptir. Sürüm 1 görselleştirme OsmAnd 4.3\'ten önce öntanımlıydı ve eski aygıtlar için hala tercih edilir.</string>
+    <string name="map_rendering_engine_descr">Sürüm 1 görselleştirme OsmAnd 4.3\'ten önce öntanımlıydı ve eski aygıtlar için hala tercih edilir.\nSürüm 2 (OpenGL) daha hızlı bir harita görselleştirme motorudur ve 2.5D görünüm özelliğine de sahiptir.</string>
     <string name="map_rendering_engine">Harita görselleştirme motoru</string>
     <string name="show_borders_of_downloaded_maps">İndirilen haritaların sınırlarını göster</string>
     <string name="show_map_symbols">Harita sembollerini göster</string>
