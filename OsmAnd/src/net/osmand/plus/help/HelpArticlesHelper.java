@@ -1,6 +1,5 @@
 package net.osmand.plus.help;
 
-import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
 import static net.osmand.plus.feedback.FeedbackHelper.EXCEPTION_PATH;
 import static net.osmand.plus.help.HelpArticleUtils.createArticleItem;
 import static net.osmand.plus.help.HelpArticleUtils.createCategory;
@@ -100,7 +99,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 
 			int counter = 0;
 			for (Map.Entry<String, String> entry : popularArticles.entrySet()) {
-				String url = SERVER_URL + entry.getValue();
+				String url = entry.getValue();
 				String title = HelpArticleUtils.getArticleName(app, url, entry.getKey());
 
 				items.add(createMenuItem(title, null, R.drawable.ic_action_file_info,
