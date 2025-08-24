@@ -4638,7 +4638,7 @@
 \nHjálpaðu til við að bæta þetta með því að senda okkur atvikaskrána þína.</string>
     <string name="release_4_3">• Ný, hraðvirkari Útgáfa 2 (OpenGL) myndgerðarvél fyrir kort, með 2.5D-sýn \n \n • Mýkt hreyfing við breytingar á staðsetningu \n \n • Nýir viðmótshlutar fyrir hnit og hæð á miðju korts \n \n • \"Vegalengd að\": fleiri valkostir texta \n \n • Viðmótshlutinn \"Kortamerki\": hægt að breyta hegðun við smell \n \n • Lagfært \"Staðsetning á skjá\" kosturinn \n \n • GPX: bætt við stuðningi við merkin \"link\", \"cmt\", \"desc\" og í sérsniðnum viðbótum \n \n • \"Sjókort\"-listanum endurraðað \n \n • Stuðningur við ANT+ skynjara \n \n • Hægt að birta UUID niðurhals \n \n • Sjálfgefinn-hraði spá fyrir for tímaútreikning á hæðarháðum göngu/hlaupaleiðum \n \n • Lagfæringar á hljóði og hljóðstyrkssleða</string>
     <string name="send_uuid_preference_desc">Tilviljanakennt UUID er notað til að sækja ónettengd kort á netþjóna OsmAnd í þeim tilgangi að fylgjast með sanngjarnri notkun á vinnslu netþjónanna, spá fyrir um myndtur netumferðar og til að útbúa mánaðarleg nafnlaus yfirlit um landakortin.</string>
-    <string name="attach_roads_descr">Þú getur hengt ferilinn þinn við vegi til að ná í nákvæmar upplýsingar um leið með leiðbeiningum beygju-fyrir-beygju og eiginleikum vega.</string>
+    <string name="attach_roads_descr">Þú getur hengt ferilinn þinn við vegi til að ná í nákvæmar upplýsingar um leiðir, þar með töldum leiðbeiningum beygju-fyrir-beygju og eiginleikum vega.</string>
     <string name="av_audio_format_bottom_sheet_descr">Veldu hljóðsnið. Skráategund fyrir hljóðgáma er 3GPP (.3gp).</string>
     <string name="choose_what_to_sync">Veldu það sem á að samstilla</string>
     <string name="cloud_sync_progress">Samstilli… %1$s</string>
@@ -5851,4 +5851,5 @@
     <string name="map_orientations_choose_description">Skildu þetta eftir autt til að nota alla tiltæka hami, eða bættu við einungis þeim sem þú kýst að nota.</string>
     <string name="description_purchases_fastspring">Þú getur sýslað með innkaup þín í gegnum FastSpring aðgangsstýringavefinn.</string>
     <string name="description_subscription_fastspring">Þú getur sýslað með eða sagt upp áskriftinni þinni í gegnum FastSpring aðgangsstýringavefinn.</string>
+    <string name="shared_sting_osm_link">OSM-tengill</string>
 </resources>
