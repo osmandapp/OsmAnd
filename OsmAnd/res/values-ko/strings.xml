@@ -2781,7 +2781,7 @@
     <string name="rendering_engine_failed">OsmAnd의 지도 렌더링이 최근에 충돌했습니다.</string>
     <string name="map_rendering_engine_v1">버전 1</string>
     <string name="map_rendering_engine_v2">버전 2 (오픈GL)</string>
-    <string name="map_rendering_engine_descr">버전 2 (OpenGL)는 2.5D보기를 특징으로하는 더 빠른지도 렌더링 엔진입니다. 버전 1 렌더링은 OsmAnd 4.3 이전의 기본값이었으며 구형 장치에서는 여전히 선호됩니다.</string>
+    <string name="map_rendering_engine_descr">버전 1 렌더링은 OsmAnd 4.3 이전의 기본값이었으며 구형 장치에서는 여전히 선호됩니다.\n버전 2 (OpenGL)는 2.5D보기를 특징으로하는 더 빠른지도 렌더링 엔진입니다.</string>
     <string name="map_rendering_engine">지도 렌더링 엔진</string>
     <string name="osmand_plus_extended_description_part3">지도 보기
 \n • 위치 및 방향 표시

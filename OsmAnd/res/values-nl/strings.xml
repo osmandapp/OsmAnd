@@ -1444,7 +1444,7 @@
     <string name="action_create">Actietoets aanmaken</string>
     <string name="action_modify">Actie wijzigen</string>
     <string name="action_delete">Actie verwijderen</string>
-    <string name="osm_edits">OSM wijzigingen</string>
+    <string name="osm_edits">OSM-wijzigingen</string>
     <string name="osmand_parking_hour">u</string>
     <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">over</string>
@@ -3987,7 +3987,7 @@
     <string name="srtm_unit_format">Eenheid van hoogtelijnen</string>
     <string name="srtm_download_list_help_message">OsmAnd biedt gegevens van contourlijnen in meters en voet aan. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
     <string name="srtm_download_single_help_message">Selecteer a.u.b. een variant. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
-    <string name="exit_number">Exit nummer</string>
+    <string name="exit_number">Afritnummer</string>
     <string name="announce_when_exceeded">Aankondigen wanneer overschreden</string>
     <string name="user_points">Gebruikerspunten</string>
     <string name="output">Output</string>
@@ -4492,7 +4492,7 @@
     <string name="mtb_imba_full">Internationale Mountain Bicycling Association</string>
     <string name="weather_pressure_hectopascals">Hectopascal</string>
     <string name="weather_pressure_inches_of_mercury">Inch kwik</string>
-    <string name="map_rendering_engine_descr">Versie 2 (OpenGL) is een snellere laad methode, met 2,5D zicht. Versie 1 was de standaard voor OsmAnd 4.3, en is nog steeds beter voor oudere toestellen.</string>
+    <string name="map_rendering_engine_descr">Versie 1 was de standaard voor OsmAnd 4.3, en is nog steeds beter voor oudere toestellen.\nVersie 2 (OpenGL) is een snellere laad methode, met 2,5D zicht.</string>
     <string name="map_rendering_engine">Laad methode van kaarten</string>
     <string name="show_borders_of_downloaded_maps">Grenzen tonen van gedownloade kaarten</string>
     <string name="purchases_feature_desc_external_sensors">Gegevens van externe sensors tonen en opnemen: fietssnelheid, fietskracht, ritme en hartslag.</string>
@@ -4792,7 +4792,7 @@
     <string name="shared_string_only_missing">Enkel missende</string>
     <string name="auto_25_chars_route_tl_kr">Sla linksaf en houd rechts aan</string>
     <string name="auto_25_chars_route_tl_kl">Sla linksaf en houd links aan</string>
-    <string name="auto_25_chars_route_roundabout_kl">Afslag %1$d namen en links aanhouden</string>
+    <string name="auto_25_chars_route_roundabout_kl">Afslag %1$d nemen en links aanhouden</string>
     <string name="auto_backup_preference_desc">Android maakt standaard een reservekopie van favorieten, kaart tekens en OsmAnd instellingen, om het te herstellen op nieuwe toestellen of na herinstallatie. De kopie kan tot 25 MB groot zijn.
 \nAls u ook OsmAnd Cloud gebruikt, kan dat tot tegenstrijdheden leiden na herinstallatie.</string>
     <string name="av_notes_video_widget_desc">Door te tikken op de widget kun je een video opnemen.</string>
@@ -6184,4 +6184,5 @@
     <string name="max_weight_at_full_load_description">Geef het maximaal toegestane gewicht van je voertuig bij volledige belading op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
     <string name="max_axle_load_description">Geef de maximale asbelasting van je voertuig op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
     <string name="lang_en_barebones">Engels (barebones)</string>
+    <string name="shared_sting_osm_link">OSM-link</string>
 </resources>

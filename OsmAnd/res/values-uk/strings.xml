@@ -4553,7 +4553,7 @@
     <string name="dismiss_changes_descr">Усі зміни буде відхилено.</string>
     <string name="dismiss_changes">Відхилити зміни\?</string>
     <string name="restart_now">Перезапустити зараз</string>
-    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) — це потужніший механізм візуалізації карт, який також підтримує 2.5D-вигляд. Версія 1 була стандартною до OsmAnd 4.3 і все ще краща для старіших пристроїв.</string>
+    <string name="map_rendering_engine_descr">Версія 1 була стандартною до OsmAnd 4.3 і все ще краща для старіших пристроїв.\nВерсія 2 (OpenGL) — це потужніший механізм візуалізації карт, який також підтримує 2.5D-вигляд.</string>
     <string name="rendering_engine_failed">Стався збій рендерингу мап OsmAnd.</string>
     <string name="share_crash_log">Поділитися журналом збоїв</string>
     <string name="map_rendering_engine_v1">Версія 1</string>
@@ -5872,4 +5872,5 @@
     <string name="max_weight_at_full_load_description">Вкажіть максимальну вагу вашого транспортного засобу при повному завантаженні, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
     <string name="max_axle_load_description">Вкажіть максимальне навантаження на вісь вашого автомобіля, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
     <string name="lang_en_barebones">Англійська (базова)</string>
+    <string name="shared_sting_osm_link">Посилання OSM</string>
 </resources>

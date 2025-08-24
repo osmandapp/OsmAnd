@@ -4751,7 +4751,7 @@
     <string name="restart_now">Repornește acum</string>
     <string name="map_rendering_engine_v1">Versiunea 1</string>
     <string name="map_rendering_engine_v2">Versiunea 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Versiunea 2 (OpenGL) este un motor de redare a hărților mai rapid, care oferă, de asemenea, o vizualizare 2.5D. Versiunea 1 de redare a fost cea implicită înainte de OsmAnd 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.</string>
+    <string name="map_rendering_engine_descr">Versiunea 1 de redare a fost cea implicită înainte de OsmAnd 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.\nVersiunea 2 (OpenGL) este un motor de redare a hărților mai rapid, care oferă, de asemenea, o vizualizare 2.5D.</string>
     <string name="show_map_symbols">Arată simbolurile hărții</string>
     <string name="show_map_symbols_desc">Text, indicatoare rutiere și altele.</string>
     <string name="shared_string_identifiers">Identificatori</string>

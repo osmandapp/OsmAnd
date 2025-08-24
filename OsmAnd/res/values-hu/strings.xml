@@ -4501,7 +4501,7 @@
     <string name="map_rendering_engine_v1">1-es verzió</string>
     <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
     <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az „1-es verziójú” térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban. \n\nTámogassa a fejlesztéseket a hibanaplója elküldésével.</string>
-    <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) egy erőteljesebbbb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.</string>
+    <string name="map_rendering_engine_descr">Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.\nA 2-es verzió (OpenGL) egy erőteljesebbbb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz.</string>
     <string name="rendering_engine_failed">Az OsmAnd térkép-megjelenítője nemrég összeomlott.</string>
     <string name="share_crash_log">Összeomlási napló megosztása</string>
     <string name="dismiss_changes">Változtatások elvetése\?</string>

@@ -4903,7 +4903,7 @@
     <string name="temperature_widget_desc">Menampilkan suhu untuk tengah peta saat ini.</string>
     <string name="map_widget_sunset_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbenam.</string>
     <string name="precipitation_widget_desc">Menampilkan curah hujan untuk tengah peta saat ini.</string>
-    <string name="map_rendering_engine_descr">Versi 2 (OpenGL) adalah mesin perenderan peta yang lebih cepat, juga menyediakan tampilan 2,5D. Perenderan Versi 1 adalah bawaan sebelum OsmAnd 4.3, dan masih dimungkinkan untuk perangkat yang lawas.</string>
+    <string name="map_rendering_engine_descr">Perenderan Versi 1 adalah bawaan sebelum OsmAnd 4.3, dan masih dimungkinkan untuk perangkat yang lawas.\nVersi 2 (OpenGL) adalah mesin perenderan peta yang lebih cepat, juga menyediakan tampilan 2,5D.</string>
     <string name="quick_action_wind_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan angin di peta.</string>
     <string name="quick_action_cloud_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan awan di peta.</string>
     <string name="quick_action_air_pressure_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan tekanan udara di peta.</string>

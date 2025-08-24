@@ -4569,7 +4569,7 @@
     <string name="restart_now">Reštartovať teraz</string>
     <string name="map_rendering_engine_v1">Verzia 1</string>
     <string name="map_rendering_engine_v2">Verzia 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Verzia 2 (OpenGL) je výkonnejšie jadro na vykresľovanie mapy, ktoré obsahuje aj 2,5D pohľad. Vykresľovanie Verzie 1 bolo predvolené do OsmAnd 4.3 a je stále vhodnejšie pre staršie zariadenia.</string>
+    <string name="map_rendering_engine_descr">Vykresľovanie Verzie 1 bolo predvolené do OsmAnd 4.3 a je stále vhodnejšie pre staršie zariadenia.\nVerzia 2 (OpenGL) je výkonnejšie jadro na vykresľovanie mapy, ktoré obsahuje aj 2,5D pohľad.</string>
     <string name="map_rendering_engine">Spôsob vykresľovania mapy</string>
     <string name="weather_offline_forecast">Offline predpoveď</string>
     <string name="weather_online_cache">Online vyrovnávacia pamäť</string>

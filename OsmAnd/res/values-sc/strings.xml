@@ -4893,7 +4893,7 @@
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="weather_pressure_hectopascals">Etopascàls</string>
     <string name="precipitation_widget_desc">Ammustrat sas pretzipitatziones pro su tzentru atuale de sa mapa.</string>
-    <string name="map_rendering_engine_descr">Sa versione 2 (OpenGL) est unu motore de renderizatzione de sa mapa prus lestru, chi tenet fintzas sa vista 2.5D. Sa versione 1 fiat sa predefinida finas a OsmAnd 4.3, e est galu sa cussigiada pro dispositivos prus betzos.</string>
+    <string name="map_rendering_engine_descr">Sa versione 1 fiat sa predefinida finas a OsmAnd 4.3, e est galu sa cussigiada pro dispositivos prus betzos.\nSa versione 2 (OpenGL) est unu motore de renderizatzione de sa mapa prus lestru, chi tenet fintzas sa vista 2.5D.</string>
     <string name="quick_action_precipitation_layer">Unu butone pro ammustrare o cuare s\'istratu de sas pretzipitatziones in sa mapa.</string>
     <string name="quick_action_wind_layer">Unu butone pro ammustrare o cuare s\'istratu de su bentu in sa mapa.</string>
     <string name="quick_action_cloud_layer">Unu butone pro ammustrare o cuare s\'istratu de sas nues in sa mapa.</string>

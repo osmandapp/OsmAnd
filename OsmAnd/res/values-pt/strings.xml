@@ -4569,7 +4569,7 @@
     <string name="restart_now">Reiniciar agora</string>
     <string name="map_rendering_engine_v1">Versão 1</string>
     <string name="map_rendering_engine_v2">Versão 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">A versão 2 (OpenGL) é um motor de renderização de mapas mais rápido também na visualização 2.5D. A versão 1 foi a versão padrão antes da versão do OsmAnd 4.3, e ainda é a recomendada em dispositivos mais antigos.</string>
+    <string name="map_rendering_engine_descr">A versão 1 foi a versão padrão antes da versão do OsmAnd 4.3, e ainda é a recomendada em dispositivos mais antigos.\nA versão 2 (OpenGL) é um motor de renderização de mapas mais rápido também na visualização 2.5D.</string>
     <string name="map_rendering_engine">Motor de renderização do mapa</string>
     <string name="weather_plugin_description">Fornece \n- a previsão meteorológica semanal com 5 camadas \n- widgets baseados em localização \n- as isolinhas de temperatura / pressão \n \nOs dados meteorológicos são fornecidos pelo Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Previsão offline</string>

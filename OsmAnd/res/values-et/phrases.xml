@@ -1051,7 +1051,7 @@
     <string name="poi_motorcycle_barrier">Mootorratta tõke</string>
     <string name="poi_block">Tõke</string>
     <string name="poi_bus_trap">Bussilõks</string>
-    <string name="poi_cattle_grid">Veisevõrk</string>
+    <string name="poi_cattle_grid">Lahtine karjatõkkevärav</string>
     <string name="poi_bump_gate">Põrkevärav</string>
     <string name="poi_general_barrier">Üldine tõke</string>
     <string name="poi_stile">Trepp üle aia</string>
@@ -2737,7 +2737,7 @@
     <string name="poi_salt_no">Sool: ei</string>
     <string name="poi_wheelchair_designated">Määratud</string>
     <string name="poi_spoil_heap">Rämpsuhunnik</string>
-    <string name="poi_bin_yes">Korviga</string>
+    <string name="poi_bin_yes">Prügikast</string>
     <string name="poi_bin_no">Prügikast puudub</string>
     <string name="poi_summer_camp">Suvelaager</string>
     <string name="poi_recreation_center">Puhkekeskus</string>
@@ -3189,7 +3189,7 @@
     <string name="poi_boat_kayak_rental_no">Kajakid: ei</string>
     <string name="poi_boat_canoe_rental_yes">Kanuu: jah</string>
     <string name="poi_boat_canoe_rental_no">Kanuu: ei</string>
-    <string name="poi_network">Võrk</string>
+    <string name="poi_network">Võrgustik</string>
     <string name="poi_government_archive">Arhiiv</string>
     <string name="poi_government_ministry">Ministeerium</string>
     <string name="poi_government_public_service">Avalik teenistus</string>

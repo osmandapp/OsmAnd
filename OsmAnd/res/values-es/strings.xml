@@ -4461,7 +4461,7 @@
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
     <string name="map_rendering_engine_v2">Versión 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">La versión 2 (OpenGL) del motor de renderizado de mapas, es más rápida y también cuenta con vista 2.5D. El renderizado de la versión 1 era el predefinido antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos.</string>
+    <string name="map_rendering_engine_descr">El renderizado de la versión 1 era el predefinido antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos.\nLa versión 2 (OpenGL) del motor de renderizado de mapas, es más rápida y también cuenta con vista 2.5D.</string>
     <string name="weather_offline_forecast">Pronóstico sin conexión</string>
     <string name="weather_online_cache">Caché en línea</string>
     <string name="map_settings_weather_temp">Temperatura</string>

@@ -1,6 +1,6 @@
 package net.osmand.plus.help;
 
-import static net.osmand.plus.help.LoadArticlesTask.DOCS_LINKS_URL;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +22,9 @@ import net.osmand.util.Algorithms;
 import java.util.Locale;
 
 public class HelpArticleUtils {
+
+	public static final String DOCS_PATH_PREFIX = "/docs/user/";
+	public static final String DOCS_LINKS_URL = SERVER_URL + DOCS_PATH_PREFIX;
 
 	@NonNull
 	public static String getTelegramChatName(@NonNull OsmandApplication app, @NonNull String key) {
@@ -61,8 +64,9 @@ public class HelpArticleUtils {
 		if (key.endsWith("/")) {
 			key = key.substring(0, key.length() - 1);
 		}
-		String name = key.replace(DOCS_LINKS_URL, "").replace("-", "_")
-				.replace("/", "_").replace(" ", "_");
+		int index = key.indexOf(DOCS_PATH_PREFIX);
+		key = index != -1 ? key.substring(index + DOCS_PATH_PREFIX.length()) : key.replace(DOCS_LINKS_URL, "");
+		String name = key.replace("-", "_").replace("/", "_").replace(" ", "_");
 
 		if (!Algorithms.isEmpty(name) && name.charAt(name.length() - 1) == '_') {
 			name = name.substring(0, name.length() - 1);

@@ -4862,7 +4862,7 @@
     <string name="weather_prefs_descr">24-timer og 7-dagers værvarsel, oppdatert hver tredje time.</string>
     <string name="weather_pressure_inches_of_mercury">Tommer kvikksølv</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeter kvikksølv</string>
-    <string name="map_rendering_engine_descr">Versjon 2 (OpenGL) er en raskere kartopptegningsmotor, som også har en 2.5D-visning. Versjon 1-opptegning var standard før OsmAnd 4.3, og er fremdeles å foretrekke for eldre enheter.</string>
+    <string name="map_rendering_engine_descr">Versjon 1-opptegning var standard før OsmAnd 4.3, og er fremdeles å foretrekke for eldre enheter.\nVersjon 2 (OpenGL) er en raskere kartopptegningsmotor, som også har en 2.5D-visning.</string>
     <string name="restart_now">Start på ny nå</string>
     <string name="shared_string_cross_buy">Krysskjøp</string>
     <string name="quick_action_current_location_widget_descr">En bryter for å vise eller skjule miniprogram for nåværende posisjon på kartet.</string>

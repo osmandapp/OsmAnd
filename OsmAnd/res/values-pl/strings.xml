@@ -4671,7 +4671,7 @@
     <string name="precipitation_widget_desc">Pokazuje opady dla bieżącego centrum mapy.</string>
     <string name="weather_widget_group_desc">Zestaw widżetów pokazujących różne informacje o pogodzie.</string>
     <string name="action_not_supported_with_map_style">Ta czynność nie jest obsługiwana przez wybrany styl mapy.</string>
-    <string name="map_rendering_engine_descr">Wersja 2 (OpenGL) to bardziej wydajny silnik renderujący mapy, oferujący również widok 2,5W. Wersja 1 była domyślna przed OsmAnd 4.3 i nadal jest preferowana dla starszych urządzeń.</string>
+    <string name="map_rendering_engine_descr">Wersja 1 była domyślna przed OsmAnd 4.3 i nadal jest preferowana dla starszych urządzeń.\nWersja 2 (OpenGL) to bardziej wydajny silnik renderujący mapy, oferujący również widok 2,5W.</string>
     <string name="map_widget_rendering_fps">FPS renderowania mapy</string>
     <string name="map_widget_rendering_fps_desc">Pokazuje, jak szybko mapa i jej elementy są wyświetlane i odświeżane, wyrażone w klatkach na sekundę (FPS).</string>
     <string name="purchases_feature_desc_cross_buy">Korzystaj z funkcji subskrypcji na różnych platformach (Android/iOS/web) bez dodatkowych kosztów.</string>
