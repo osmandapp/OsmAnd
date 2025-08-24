@@ -5,7 +5,7 @@
     <string name="poi_emergency">Спешна помощ</string>
     <string name="poi_transportation">Транспорт</string>
     <string name="poi_road_obstacle">Препятствие на пътя</string>
-    <string name="poi_filling_station">Станция за зареждане</string>
+    <string name="poi_filling_station">Бензиностанция</string>
     <string name="poi_personal_transport">Личен транспорт</string>
     <string name="poi_public_transport">Обществен транспорт</string>
     <string name="poi_air_transport">Въздушен транспорт</string>
@@ -146,7 +146,7 @@
     <string name="poi_traffic_signals">Светофар</string>
     <string name="poi_vehicle_inspection">ГТП</string>
     <string name="poi_car_wash">Автомивка</string>
-    <string name="poi_fuel">Бензиностанция</string>
+    <string name="poi_fuel">Бензиностанция;Газостанция</string>
     <string name="poi_fuel_diesel">Дизел</string>
     <string name="poi_fuel_gtl_diesel">GTL дизел</string>
     <string name="poi_fuel_hgv_diesel">Дизел за камиони</string>
@@ -166,7 +166,7 @@
     <string name="poi_fuel_e20">E20</string>
     <string name="poi_fuel_lh2">Течен водород</string>
     <string name="poi_fuel_electricity">Електричество</string>
-    <string name="poi_electricity_combined_charging">Станция за зареждане;Станция за зареждане на електромобили;Станция за зареждане на EV;Точка за зареждане;Зарядна станция;Електронна заряднс станция;Оборудване за зсхранване на електромобили</string>
+    <string name="poi_electricity_combined_charging">Станция за зареждане;Станция за зареждане на електромобили;Станция за зареждане на EV;Точка за зареждане;Зарядна станция;Електронна зарядна станция;Оборудване за захранване на електромобили</string>
     <string name="poi_compressed_air">Сгъстен въздух</string>
     <string name="poi_parking">Паркинг</string>
     <string name="poi_motorcycle_parking">Паркинг за мотоциклети</string>

@@ -5036,7 +5036,7 @@
     <string name="rendering_engine_failed_descr">Osmand se je vratio na prikaz mape „Verzija 1“. Možeš pokušati da povratiš novi način za prikaz „Verzija 2 (OpenGL)“ u podešavanjima.
 \n
 \nMolimo, podržite poboljšanja dostavljanjem dnevnika grešaka.</string>
-    <string name="map_rendering_engine_descr">Verzija 2 (OpenGL) je moćniji mehanizam za prikazivanje mapa, koji takođe sadrži 2.5D prikaz. Verzija 1 je podrazumevana pre OsmAnd 4.3 i još uvek je poželjna za starije uređaje.</string>
+    <string name="map_rendering_engine_descr">Verzija 1 je podrazumevana pre OsmAnd 4.3 i još uvek je poželjna za starije uređaje. \nVerzija 2 (OpenGL) je moćniji mehanizam za prikazivanje mapa, koji takođe sadrži 2.5D prikaz.</string>
     <string name="map_rendering_engine">Motor za renderovanje mape</string>
     <string name="show_borders_of_downloaded_maps">Prikazati granice preuzetih mapa</string>
     <string name="dismiss_changes">Odbaciti promene?</string>
@@ -5851,4 +5851,5 @@
     <string name="manage_storage_delete_data_dialog_summary">Da li ste sigurni da želite da izbrišete %1$s iz OsmAnd Cloud?\n\nMožete ih vratiti iz kante u roku od 30 dana.</string>
     <string name="manage_storage">Upravljanje skladištem</string>
     <string name="lang_en_barebones">Engleski (osnovni)</string>
+    <string name="shared_sting_osm_link">OSM link</string>
 </resources>

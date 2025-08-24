@@ -100,6 +100,13 @@ class GpxFile : GpxExtensions {
 		return points.contains(point)
 	}
 
+	fun clearData() {
+		clearPoints()
+		tracks.clear()
+		generalSegment = null
+		generalTrack = null
+	}
+
 	fun clearPoints() {
 		points.clear()
 		pointsGroups.clear()

@@ -4478,7 +4478,7 @@
     <string name="dismiss_changes_descr">所有更改都将被驳回。</string>
     <string name="dismiss_changes">忽略更改？</string>
     <string name="map_rendering_engine_v2">版本 2 （OpenGL）</string>
-    <string name="map_rendering_engine_descr">第二版（OpenGL）是更快的地图渲染引擎，也具有2.5D视图。在4.3版之前，默认使用第1版的渲染，且其对旧的设备仍然更好。</string>
+    <string name="map_rendering_engine_descr">在4.3版之前，默认使用第1版的渲染，且其对旧的设备仍然更好。\n第二版（OpenGL）是更快的地图渲染引擎，也具有2.5D视图。</string>
     <string name="map_rendering_engine">地图渲染引擎</string>
     <string name="system_screen_timeout_descr">根据系统的屏幕超时关闭屏幕。</string>
     <string name="additional_actions_descr">通过点击“%1$s”按钮访问这些操作。</string>

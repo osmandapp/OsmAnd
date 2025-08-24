@@ -4533,7 +4533,7 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
-    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est un moteur de rendu cartographique plus puissant, offrant également une vue 2,5D. La version 1 était la version par défaut avant OsmAnd 4.3 et reste préférable pour les appareils plus anciens.</string>
+    <string name="map_rendering_engine_descr">La version 1 était la version par défaut jusqu\'à OsmAnd 4.3 et reste préférable pour les anciens appareils.\nLa version 2 (OpenGL) est un moteur de rendu cartographique plus puissant offrant également une vue 2,5D.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolignes de vitesse de vent</string>
     <string name="rendering_engine_failed_descr">OsmAnd est repassé au mode de rendu de carte « Version 1 ». Vous pouvez tenter de réactiver le nouveau moteur « Version 2 (OpenGL) » dans les paramètres.\n\nMerci de contribuer aux améliorations en transmettant votre journal d’erreurs.</string>
     <string name="mtb_imba">IMBA</string>
@@ -5752,4 +5752,16 @@
     <string name="rendering_attr_tidalFlatStyle_description">Style des vasières</string>
     <string name="private_access_routing_req_short">Votre destination se situe dans une propriété privée. Souhaitez-vous emprunter des routes privées ?</string>
     <string name="view_on_phone">Afficher sur le téléphone</string>
+    <string name="add_to_favorites">Ajouter aux favoris</string>
+    <string name="backup_delete_data_warning_extended">Cette action supprimera définitivement toutes les données sélectionnées du Cloud. Il ne sera pas possible de les restaurer plus tard.</string>
+    <string name="amount_of_total_used">%1$s de %2$s utilisé</string>
+    <string name="delete_data">Supprimer les données</string>
+    <string name="manage_storage_delete_data_dialog_summary">Êtes-vous certain de vouloir supprimer %1$s de OsmAnd Cloud?\n\nUne restauration sera possible depuis la corbeille durant les 30 prochains jours.</string>
+    <string name="manage_storage">Gérer le stockage</string>
+    <string name="copy_as_new_folder">Copier comme nouveau dossier</string>
+    <string name="add_to_a_folder">Ajouter à un dossier</string>
+    <string name="lang_en_barebones">Anglais (barebones)</string>
+    <string name="max_weight_at_full_load_description">Indiquez le poids maximal de votre véhicule à pleine charge pour éviter les routes et les ponts avec des limites de poids.</string>
+    <string name="max_axle_load_description">Indiquez la charge maximale par essieu de votre véhicule pour éviter les routes et les ponts avec des limites de poids.</string>
+    <string name="shared_sting_osm_link">Lien OSM</string>
 </resources>

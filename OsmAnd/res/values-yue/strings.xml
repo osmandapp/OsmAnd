@@ -1217,7 +1217,7 @@
     <string name="restart_now">立刻重新啟動</string>
     <string name="map_rendering_engine_v1">第一版</string>
     <string name="map_rendering_engine_v2">第二版 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">第二版 (OpenGL) 是較快的地圖繪製引擎，並支援 2.5D 視圖。第一版是 OsmAnd 4.3 以前的預設值，對於舊裝置來說可能更好用。</string>
+    <string name="map_rendering_engine_descr">第一版是 OsmAnd 4.3 以前的預設值，對於舊裝置來說可能更好用。\n第二版 (OpenGL) 是較快的地圖繪製引擎，並支援 2.5D 視圖。</string>
     <string name="map_rendering_engine">地圖繪製引擎</string>
     <string name="show_borders_of_downloaded_maps">顯示已下載地圖的邊界</string>
     <string name="show_map_symbols">顯示地圖符號</string>

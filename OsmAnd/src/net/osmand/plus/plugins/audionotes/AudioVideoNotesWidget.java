@@ -28,7 +28,6 @@ public class AudioVideoNotesWidget extends SimpleWidget {
 		this.actionId = actionId;
 
 		updateSimpleWidgetInfo(null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

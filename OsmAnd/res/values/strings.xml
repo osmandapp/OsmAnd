@@ -53,7 +53,8 @@
 	<string name="description_subscription_fastspring">You can manage or cancel your subscription through the FastSpring account management portal.</string>
 	<string name="manage_purchases">Manage purchases</string>
     <string name="failed_to_connect">Failed to connect to %1s</string>
-    <string name="deleting">Deleting…</string>
+    <string name="shared_sting_osm_link">OSM link</string>
+	<string name="deleting">Deleting…</string>
     <string name="release_5_1">
         • Added support for web and cross-platform purchases\n\n
         • Moved Temperature units to General settings for easier access\n\n
@@ -1431,7 +1432,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="restart_now">Restart now</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) is a more powerful map rendering engine, also featuring 2.5D view. Version 1 was the default prior to OsmAnd 4.3 and is still preferable for older devices.</string>
+    <string name="map_rendering_engine_descr">Version 1 was the default prior to OsmAnd 4.3 and is still preferable for older devices.
+\nVersion 2 (OpenGL) is a more powerful map rendering engine, also featuring 2.5D view.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
