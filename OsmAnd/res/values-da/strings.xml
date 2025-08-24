@@ -4574,7 +4574,7 @@
     <string name="restart_now">Genstart nu</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 1 var standard før OsmAnd 4.3 og er stadig at foretrække for ældre enheder.\nVersion 2 (OpenGL) er en mere kraftfuld kortgengivelsesmotor, der også har 2,5D-visning.</string>
+    <string name="map_rendering_engine_descr">Version 1 var standard før OsmAnd 4.3 og er stadig at foretrække for ældre enheder. \nVersion 2 (OpenGL) er en mere kraftfuld kortgengivelsesmotor, der også har 2,5D-visning.</string>
     <string name="map_rendering_engine">Kortgengivelsesmotor</string>
     <string name="rendering_engine_failed_descr">OsmAnd er vendt tilbage til kortgengivelse efter \'Version 1\'. Du kan prøve at skifte tilbage til den nye \'Version 2 (OpenGL)\'-gengivelsesmotor i indstillingerne.
 \n
@@ -5888,4 +5888,5 @@
     <string name="rendering_attr_hideLightSectorSources_description">Skjul kilder til lyse sektorer</string>
     <string name="rendering_attr_hideMinorContours_name">Konturer af mindre dybder</string>
     <string name="rendering_attr_hideMinorContours_description">Skjul konturer af mindre dybder</string>
+    <string name="shared_sting_osm_link">OSM-link</string>
 </resources>
