@@ -4580,7 +4580,8 @@
     <string name="restart_now">Jetzt neu starten</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) ist eine leistungsstärkere Karten-Rendering-Engine, die auch eine 2,5D-Ansicht bietet. Version 1 war vor OsmAnd 4.3 die Standardeinstellung und ist für ältere Geräte weiterhin vorzuziehen.</string>
+    <string name="map_rendering_engine_descr">Version 1 war die Standardeinstellung vor OsmAnd 4.3 und ist für ältere Geräte weiterhin vorzuziehen.
+\nVersion 2 (OpenGL) ist eine leistungsstärkere Karten-Rendering-Engine, die auch eine 2,5D-Ansicht bietet.</string>
     <string name="map_rendering_engine">Karten-Rendering-Engine</string>
     <string name="weather_offline_forecast">Offline-Vorhersage</string>
     <string name="weather_online_cache">Online-Zwischenspeicher</string>
@@ -5877,4 +5878,14 @@
     <string name="rendering_attr_shellsStyle_description">Stil für Muscheln auf dem Meeresboden</string>
     <string name="rendering_attr_watercolor_name">Wasserfarbe</string>
     <string name="rendering_attr_watercolor_description">Farbe des Wassers</string>
+    <string name="backup_delete_data_warning_extended">Diese Aktion wird dauerhaft alle ausgewählten Daten aus der Cloud entfernen. Es wird nicht möglich sein, sie später wiederherzustellen.</string>
+    <string name="manage_storage_delete_data_dialog_summary">Sind Sie sicher, dass Sie %1$s aus OsmAnd Cloud löschen möchten?\n\nSie können es innerhalb von 30 Tagen aus dem Mülleimer wiederherstellen.</string>
+    <string name="rendering_attr_hideSpots_name">Punktmessungen</string>
+    <string name="rendering_attr_hideSpots_description">Punktmessungen verbergen</string>
+    <string name="rendering_attr_showLNAMmarker_name">ENC-Markierungen</string>
+    <string name="rendering_attr_showLNAMmarker_description">ENC-Markierungen anzeigen</string>
+    <string name="rendering_attr_spotDistance_name">Punktmessungsabstand</string>
+    <string name="rendering_attr_spotDistance_description">Punktmessungsabstand</string>
+    <string name="rendering_attr_spotSize_name">Größe der Punktmessung</string>
+    <string name="rendering_attr_spotSize_description">Größe der Punktmessung</string>
 </resources>

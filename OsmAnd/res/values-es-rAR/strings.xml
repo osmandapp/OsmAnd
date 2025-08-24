@@ -836,7 +836,7 @@
     <string name="modify_transparency">Definir transparencia (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga\?</string>
     <string name="first_time_msg">Gracias por usar OsmAnd. Descarga datos regionales sin conexión a través de «Menú → Descargar mapas» para ver los mapas, ubicar direcciones, buscar PDI, encontrar transporte público y más.</string>
-    <string name="basemap_was_selected_to_download">El mapa base necesario para proporcionar la funcionalidad básica, está en la cola de descarga.</string>
+    <string name="basemap_was_selected_to_download">El mapa base necesario para proveer la funcionalidad básica, está en la cola de descarga.</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
     <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en el dispositivo.</string>
@@ -2063,8 +2063,7 @@
     <string name="navigate_point_olc">Código de Ubicación Abierto (OLC)</string>
     <string name="navigate_point_olc_info_invalid">OLC inválido
 \n</string>
-    <string name="navigate_point_olc_info_short">OLC corto
-\nProporciona un código completo</string>
+    <string name="navigate_point_olc_info_short">OLC corto \nIngresá un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo y válido.
 \nÁrea representada: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Un botón que muestra la siguiente lista.</string>
@@ -3324,7 +3323,7 @@
     <string name="pseudo_mercator_projection">Proyección de pseudo-Mercator</string>
     <string name="one_image_per_tile">Un archivo de imagen por tesela</string>
     <string name="sqlite_db_file">Archivo SQLiteDB</string>
-    <string name="online_map_name_helper_text">Proporciona un nombre para el repositorio del mapa en línea.</string>
+    <string name="online_map_name_helper_text">Ingresá un nombre para el repositorio del mapa en línea.</string>
     <string name="online_map_url_helper_text">Ingresá o pegá la URL del repositorio en línea.</string>
     <string name="edit_online_source">Editar repositorio en línea</string>
     <string name="expire_time">Tiempo de expiración</string>
@@ -3342,9 +3341,9 @@
     <string name="export_import_quick_actions_with_profiles_promo">Exportá o importá acciones rápidas con perfiles de aplicación.</string>
     <string name="shared_string_delete_all_q">¿Borrar todo\?</string>
     <string name="delete_all_actions_message_q">¿Borrar irrevocablemente %d acciones rápidas\?</string>
-    <string name="width_limit_description">Proporciona el ancho del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
-    <string name="height_limit_description">Proporciona la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
-    <string name="weight_limit_description">Proporciona el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
+    <string name="width_limit_description">Indica el ancho del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
+    <string name="height_limit_description">Indica la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
+    <string name="weight_limit_description">Indica el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
     <string name="screen_timeout">Tiempo de espera de la pantalla</string>
     <string name="shared_string_tones">toneladas</string>
     <string name="shared_string_meters">metros</string>
@@ -3375,7 +3374,7 @@
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlá el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zum</string>
-    <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
+    <string name="lenght_limit_description">Indica la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
     <string name="please_provide_point_name_error">Agregá un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
@@ -3913,7 +3912,7 @@
     <string name="routeInfo_tracktype_description">Colorea la ruta o el trazado de la vía por su composición superficial. Suele aplicarse cuando la red de caminos está en gran parte sin pavimentar.</string>
     <string name="routeInfo_winter_ice_road_description">Colorea la ruta o el trazado de la vía según la clasificación del camino en invierno.</string>
     <string name="routeInfo_smoothness_description">Clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
-    <string name="routeInfo_surface_description">Proporciona información sobre la superficie física de los caminos y senderos.</string>
+    <string name="routeInfo_surface_description">Provee información sobre la superficie física de los caminos y senderos.</string>
     <string name="routeInfo_roadClass_description">Colorea la ruta o el trazado de la vía según la clasificación del camino.</string>
     <string name="add_group_to_markers">Agregar grupo a la lista de marcadores</string>
     <string name="remove_group_from_markers">Quitar grupo de la lista de marcadores</string>
@@ -4179,7 +4178,7 @@
     <string name="elevation_profile_widget_desc">Muestra el perfil de elevación y pendiente de la ruta actual.</string>
     <string name="parking_widget_desc">Muestra la distancia desde el centro de la pantalla hasta el lugar del estacionamiento.</string>
     <string name="av_notes_choose_action_widget_desc">Elegir acción.</string>
-    <string name="mapillary_widget_desc">Proporciona un acceso rápido a la aplicación Mapillary para agregar imágenes a nivel de calle.</string>
+    <string name="mapillary_widget_desc">Provee un acceso rápido a la aplicación Mapillary para agregar imágenes a nivel de calle.</string>
     <string name="radius_rules_widget_desc">La herramienta «Regla radial» muestra círculos de distancia alrededor del punto marcado en el mapa.</string>
     <string name="current_time_widget_desc">Muestra la hora actual tomada del dispositivo.</string>
     <string name="battery_widget_desc">Muestra el nivel de batería del dispositivo.</string>
@@ -4196,7 +4195,7 @@
     <string name="coordinates_widget_desc">Muestra las coordenadas geográficas de la ubicación actual.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="bearing_desc">Muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados o milirradianes).</string>
-    <string name="audio_video_notes_desc">Proporciona un acceso rápido para iniciar o parar una nota de audio, video o foto.</string>
+    <string name="audio_video_notes_desc">Provee un acceso rápido para iniciar o parar una nota de audio, video o foto.</string>
     <string name="route_maneuvers">Maniobras de la ruta</string>
     <string name="get_altitude_information">Obtener información de elevación</string>
     <string name="calculating_altitude">Calculando elevación</string>
@@ -4423,7 +4422,7 @@
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
     <string name="map_rendering_engine_v2">Versión 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">La versión 2 (OpenGL) es un motor de renderizado de mapas más potente, que también ofrece una vista 2.5D. La versión 1, era la predefinida antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos.</string>
+    <string name="map_rendering_engine_descr">La versión 1, era la predefinida antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos. \nLa versión 2 (OpenGL) es un motor de renderizado de mapas más potente, que también ofrece una vista 2.5D.</string>
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
     <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
     <string name="show_map_symbols">Mostrar símbolos del mapa</string>
@@ -5415,7 +5414,7 @@
     <string name="connect_obd_instructions_step3">Activa el Bluetooth del dispositivo</string>
     <string name="learn_more_about_obd_sensors">Aprendé más sobre los sensores.</string>
     <string name="obd_fuel_left_liters">Combustible restante (litros)</string>
-    <string name="route_guidance_desc">Proporciona orientación sobre la ruta en tiempo real, incluida la distancia hasta el próximo giro, el nombre de la ruta, la calle actual e información sobre el carril. Los widgets se activan al navegar.</string>
+    <string name="route_guidance_desc">Indica la orientación sobre la ruta en tiempo real, incluida la distancia hasta el próximo giro, el nombre de la ruta, la calle actual e información sobre el carril. Los widgets se activan al navegar.</string>
     <string name="route_guidance">Guías de ruta</string>
     <string name="obd_widget_vehicle_speed">Velocidad del vehículo</string>
     <string name="obd_widget_engine_speed">Revoluciones del motor</string>
@@ -5724,4 +5723,16 @@
     <string name="rendering_attr_shellsStyle_name">Estilo para moluscos marinos</string>
     <string name="private_access_routing_req_short">El destino está en un área privada. ¿Querés cruzar por caminos privados?</string>
     <string name="view_on_phone">Ver en el teléfono</string>
+    <string name="backup_delete_data_warning_extended">Esta acción quitará de la nube todos los datos marcados. No podrás restaurarlos luego.</string>
+    <string name="amount_of_total_used">Usado %1$s de %2$s</string>
+    <string name="delete_data">Borrar datos</string>
+    <string name="manage_storage_delete_data_dialog_summary">¿Borrar %1$s de OsmAnd Cloud?\n\nTendrás hasta 30 días para restaurarlo de la papelera.</string>
+    <string name="manage_storage">Gestionar almacenamiento</string>
+    <string name="copy_as_new_folder">Copiar como nueva carpeta</string>
+    <string name="add_to_a_folder">Agregar a una carpeta</string>
+    <string name="add_to_favorites">Agregar a favoritos</string>
+    <string name="max_weight_at_full_load_description">Indicá el peso bruto máximo del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
+    <string name="max_axle_load_description">Indicá la carga máxima por eje del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
+    <string name="shared_sting_osm_link">Enlace de OSM</string>
+    <string name="lang_en_barebones">Inglés (básico)</string>
 </resources>

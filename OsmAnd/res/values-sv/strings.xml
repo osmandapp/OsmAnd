@@ -4209,7 +4209,7 @@
     <string name="air_pressure_widget_desc">Visar lufttrycket för aktuellt centrum i kartan.</string>
     <string name="temperature_widget_desc">Visar temperatur för aktuellt centrum i kartan.</string>
     <string name="rendering_engine_failed">OsmAnds kartrendering har nyligen kraschat.</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) är en snabbare motor för kartrendering och har även 2,5D-visning. Rendering i version 1 var standard före OsmAnd 4.3 och är fortfarande att föredra för äldre enheter.</string>
+    <string name="map_rendering_engine_descr">Rendering i version 1 var standard före OsmAnd 4.3 och är fortfarande att föredra för äldre enheter.\nVersion 2 (OpenGL) är en snabbare motor för kartrendering och har även 2,5D-visning.</string>
     <string name="favorites_backup">Säkerhetskopiering av favoriter</string>
     <string name="ant_go_to_store">Gå till butik</string>
     <string name="map_widget_ant_bicycle_dist_desc">Visar längden på tillryggalagd sträcka</string>

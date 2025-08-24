@@ -2,6 +2,7 @@ package net.osmand.plus.help;
 
 import static net.osmand.IndexConstants.HELP_INDEX_DIR;
 import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.help.HelpArticleUtils.DOCS_PATH_PREFIX;
 
 import android.os.AsyncTask;
 
@@ -20,22 +21,18 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 	private static final Log log = PlatformUtil.getLog(LoadArticlesTask.class);
 
 	private static final String HELP_STRUCTURE_FILE_NAME = "help-structure.json";
-	public static final String DOCS_LINKS_URL = SERVER_URL + "/docs/user/";
 	private static final String HELP_LINKS_URL = SERVER_URL + "/" + HELP_STRUCTURE_FILE_NAME;
 
 	private final OsmandApplication app;
 
+	private final Set<String> languages = new LinkedHashSet<>();
 	private final Map<String, HelpArticle> topArticles = new LinkedHashMap<>();
 	private final Map<String, String> telegramChats = new LinkedHashMap<>();
 	private final Map<String, String> popularArticles = new LinkedHashMap<>();
@@ -80,6 +77,10 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 			StringBuilder builder = Algorithms.readFromInputStream(new FileInputStream(file));
 			JSONObject jsonObject = new JSONObject(builder.toString());
 
+			JSONArray languages = jsonObject.optJSONArray("languages");
+			if (languages != null) {
+				parseLanguages(languages);
+			}
 			JSONArray jsonArray = jsonObject.optJSONArray("articles");
 			if (jsonArray != null) {
 				buildArticlesHierarchy(parseArticles(jsonArray));
@@ -98,6 +99,13 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		} catch (Exception e) {
 			file.delete();
 			log.error(e);
+		}
+	}
+
+	@NonNull
+	private void parseLanguages(@NonNull JSONArray array) throws JSONException {
+		for (int i = 0; i < array.length(); i++) {
+			languages.add(array.optString(i));
 		}
 	}
 
@@ -127,7 +135,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
 			String key = iterator.next();
 			String url = json.getString(key);
-			map.put(key, url);
+			map.put(key, createLocalizedUrl(url));
 		}
 	}
 
@@ -139,16 +147,28 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 			String url = object.optString("url");
 			boolean hasUrl = !Algorithms.isEmpty(url);
-			url = hasUrl ? SERVER_URL + url : "";
-
 			boolean available = object.optBoolean("android", true);
-			if (available && (url.startsWith(DOCS_LINKS_URL) || !hasUrl)) {
+
+			if (available && (url.startsWith(DOCS_PATH_PREFIX) || !hasUrl)) {
 				int level = object.optInt("level");
 				String label = object.optString("label");
-				articles.add(new HelpArticle(url, label, level));
+				articles.add(new HelpArticle(createLocalizedUrl(url), label, level));
 			}
 		}
 		return articles;
+	}
+
+	@Nullable
+	private String createLocalizedUrl(@Nullable String url) {
+		if (!Algorithms.isEmpty(url) && url.startsWith(DOCS_PATH_PREFIX)) {
+			String language = app.getLanguage();
+			boolean useLocalizedUrl = languages.contains(language) && !"en".equals(language);
+			if (useLocalizedUrl) {
+				return SERVER_URL + "/" + language + url;
+			}
+			return SERVER_URL + url;
+		}
+		return url;
 	}
 
 	@NonNull

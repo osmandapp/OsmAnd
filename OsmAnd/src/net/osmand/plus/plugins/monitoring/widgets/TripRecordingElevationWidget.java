@@ -36,7 +36,6 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

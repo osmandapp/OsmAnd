@@ -4408,7 +4408,7 @@
     <string name="dismiss_changes_descr">所有變更都將被取消。</string>
     <string name="map_rendering_engine_v1">第一版</string>
     <string name="map_rendering_engine_v2">第二版 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">第二版 (OpenGL) 是較為強大的地圖顯示引擎，並支援 2.5D 視圖。第一版是 OsmAnd 4.3 以前的預設值，對於舊裝置來說可能更好用。</string>
+    <string name="map_rendering_engine_descr">第一版是 OsmAnd 4.3 以前的預設值，對於舊裝置來說可能更好用。\n第二版 (OpenGL) 是較為強大的地圖顯示引擎，並支援 2.5D 視圖。</string>
     <string name="map_rendering_engine">地圖繪製引擎</string>
     <string name="weather_online_cache">線上預報</string>
     <string name="empty_screen_weather_wind_layer">開啟以在地圖上檢視風圖層。</string>

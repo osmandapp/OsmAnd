@@ -4397,7 +4397,7 @@
     <string name="restart_now">Restartovat nyní</string>
     <string name="map_rendering_engine_v1">Verze 1</string>
     <string name="map_rendering_engine_v2">Verze 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Verze 2 (OpenGL) je výkonnější vykreslovací jádro map, které rovněž obsahuje 2,5D zobrazení. Verze 1 byla výchozí před vydáním OsmAnd 4.3 a je stále vhodnější pro starší zařízení.</string>
+    <string name="map_rendering_engine_descr">Verze 1 byla výchozí před vydáním OsmAnd 4.3 a je stále vhodnější pro starší zařízení.\nVerze 2 (OpenGL) je výkonnější vykreslovací jádro map, které rovněž obsahuje 2,5D zobrazení.</string>
     <string name="map_rendering_engine">Vykreslovací jádro mapy</string>
     <string name="weather_wind_mph">mph</string>
     <string name="action_not_supported_with_map_style">Tato akce není podporována vybraným stylem mapy.</string>

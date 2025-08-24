@@ -23,8 +23,6 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 
 	public SecondNextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, customId, SECOND_NEXT_TURN, panel, true);
-
-		setOnClickListener(getOnClickListener());
 	}
 
 	/**
