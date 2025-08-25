@@ -31,6 +31,7 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -1234,44 +1235,37 @@ public class MapRenderRepositories {
 		return transliterate && (!useAppLocale || !noTransliteration);
 	}
 
-	public static boolean showLocalNames(@NonNull OsmandApplication app, int zoom) {
-		boolean showLocal = app.getSettings().MAP_SHOW_LOCAL_NAMES.get();
-		boolean useAppLocale = useAppLocaleForMap(app, zoom);
-		String mapPreferredLocale = getMapPreferredLocale(app, zoom);
-		return showLocal && !useAppLocale && !mapPreferredLocale.isEmpty();
-	}
-
-	public static int getMapLanguageSetting(@NonNull OsmandApplication app, int zoom) {
+	public static LanguagePreference getMapLanguageSetting(@NonNull OsmandApplication app, int zoom) {
 		OsmandSettings settings = app.getSettings();
 		String preferredLocale = settings.MAP_PREFERRED_LOCALE.get();
 		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
 		boolean showLocal = settings.MAP_SHOW_LOCAL_NAMES.get();
 		
 		if (preferredLocale.isEmpty()) {
-			return 0; // NativeOnly
+			return LanguagePreference.NativeOnly;
 		}
 		
 		if (!transliterate && !showLocal) {
-			return 1; // LocalizedOrNative
+			return LanguagePreference.LocalizedOrNative;
 		}
 		
 		if (showLocal && !transliterate) {
-			return 4; // LocalizedAndNative
+			return LanguagePreference.LocalizedAndNative;
 		}
 		
 		if (showLocal && transliterate) {
-			return 3; // NativeAndLocalizedOrTransliterated
+			return LanguagePreference.NativeAndLocalizedOrTransliterated;
 		}
 		
 		if (!showLocal && transliterate) {
-			return 5; // LocalizedOrTransliteratedAndNative
+			return LanguagePreference.LocalizedOrTransliteratedAndNative;
 		}
 		
 		if (transliterate && !showLocal) {
-			return 6; // LocalizedOrTransliterated
+			return LanguagePreference.LocalizedOrTransliterated;
 		}
 		
-		return 1; // LocalizedOrNative
+		return LanguagePreference.LocalizedOrNative;
 	}
 
 	public static boolean useAppLocaleForMap(@NonNull OsmandApplication app, int zoom) {
