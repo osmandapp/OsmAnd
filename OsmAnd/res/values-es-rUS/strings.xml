@@ -5653,7 +5653,6 @@
     <string name="popular_places">Lugares populares</string>
     <string name="show_list">Mostrar listado</string>
     <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
-    <string name="read_on_wiki">Leer en Wikipedia</string>
     <string name="prediction_time_description">El ícono de ubicación en OsmAnd se anima con cada actualización del GPS (una vez por segundo). Podrías notar un ligero retraso en el movimiento, especialmente cuando te mueves rápidamente o la señal GPS fluctúa.</string>
     <string name="prediction_time_advanced_description">Ajusta el tiempo de predicción para minimizar el retraso.</string>
     <string name="destination_first">Destino primero</string>
@@ -5704,7 +5703,6 @@
     <string name="hmd_promo_years">Oferta de HMD por %1$s años</string>
     <string name="show_debug_tile_description">Muestra información sobre los símbolos de mapa de cada tesela</string>
     <string name="show_debug_tile">Mostrar información de la tesela</string>
-    <string name="show_symbols_debug_info">Mostrar información de los símbolos de depuración</string>
     <string name="shared_string_flat">Plano (llanura)</string>
     <string name="suggest_activate_map_msg">Mapa de «%1$s» desactivado,\nactivarlo para ver esta área.</string>
     <string name="unit_of_temperature_description">Las unidades elegidas se aplicarán a todos los datos relacionados con la temperatura del perfil actual.</string>
@@ -5714,7 +5712,6 @@
     <string name="read_on">Leer en %1$s</string>
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
-    <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
     <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
     <string name="release_5_2">• Trabajo en progreso...</string>
     <string name="failed_to_connect">Falló al conectar con %1s</string>

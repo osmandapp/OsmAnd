@@ -5578,7 +5578,6 @@
     <string name="save_to_device">儲存到裝置</string>
     <string name="travel_guides">指南</string>
     <string name="show_debug_tile_description">顯示每個圖磚的地圖符號資訊</string>
-    <string name="show_symbols_debug_info">顯示符號除錯資訊</string>
     <string name="show_debug_tile">顯示圖磚資訊</string>
     <string name="deactivated_map">已停用的地圖</string>
     <string name="unit_of_temperature_description">選定的單位將會套用至目前設定檔中所有的溫度相關資料。</string>
@@ -5606,7 +5605,6 @@
     <string name="years_3">三年</string>
     <string name="deleting">正在刪除……</string>
     <string name="deleting_history">正在刪除歷史紀錄……</string>
-    <string name="show_symbols_bboxes">顯示符號方塊</string>
     <string name="show_rasterization_debug_tile">顯示圖磚點陣化資訊</string>
     <string name="release_5_2">• 正在進行中……</string>
     <string name="shared_string_threads">執行緒</string>

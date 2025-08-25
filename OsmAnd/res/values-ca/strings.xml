@@ -5724,7 +5724,6 @@
     <string name="lang_zh_hans">Xinès simplificat</string>
     <string name="lang_zh_hant">Xinès tradicional</string>
     <string name="battery_saving_mode">Mode de desament de bateria</string>
-    <string name="show_symbols_debug_info">Mostra la informació de depuració dels símbols</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d pista)</item>
         <item quantity="many">%1$d (%2$d pistes)</item>

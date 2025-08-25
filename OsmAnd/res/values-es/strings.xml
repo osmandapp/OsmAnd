@@ -5593,7 +5593,6 @@
     <string name="position_animation">Animación de ubicación</string>
     <string name="map_widget_route_information_desc">Muestra la hora de llegada estimada, el tiempo de viaje restante y la distancia de la ruta de navegación activa.</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Leer en Wikipedia</string>
     <string name="shared_string_no_animation">Sin animación</string>
     <string name="ais_cpa_settings_description">Estos valores definen la presentación de los objetos AIS que pueden acercarse demasiado respecto a su propia ubicación.</string>
     <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
@@ -5658,7 +5657,6 @@
     <string name="multipoligon_related">Relacionado</string>
     <string name="route_part_of">Parte de</string>
     <string name="show_debug_tile_description">Muestra información sobre los símbolos de mapa de cada tesela</string>
-    <string name="show_symbols_debug_info">Mostrar información de los símbolos de depuración</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Puntos GPX (%1$d) copiados a favoritos.</string>
     <string name="msg_favorites_skipped_as_existing">Puntos favoritos (%1$d) omitidos como ya existentes.</string>
     <string name="ais_cpa_warning_distance_description">Los buques se marcan en color rojo si el CPA es inferior a este valor y el CPA se alcanza en un futuro próximo (véase el ajuste «Tiempo de aviso para alcanzar el CPA»).</string>

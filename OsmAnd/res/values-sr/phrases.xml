@@ -5025,7 +5025,6 @@
     <string name="poi_neo_pentecostal_church">Неопентекостална црква</string>
     <string name="poi_latter_day_saints_church">Црква светаца последњих дана</string>
     <string name="poi_evangelical_lutheran_church">Евангелистичко лутеранска црква</string>
-    <string name="poi_landmark_church">Знаменита црква</string>
     <string name="poi_adventist_church">Адвентистичка црква</string>
     <string name="poi_nondenominational_church">Неденоминационална црква</string>
     <string name="poi_iglesia_ni_cristo_church">Црква Христова</string>
@@ -5074,7 +5073,6 @@
     <string name="poi_denomination_ukrainian_orthodox">Украјинска Православна</string>
     <string name="poi_denomination_neo_pentecostal">Нео-пентекостална</string>
     <string name="poi_denomination_evangelical_lutheran">Евангелистичка Лутеранска</string>
-    <string name="poi_denomination_landmark">Ознака места</string>
     <string name="poi_denomination_anabaptist">Анабаптиста</string>
     <string name="poi_denomination_thai_mahanikaya">Тај Маханикаја</string>
     <string name="poi_denomination_thai_thammayut">Тај Тамајут</string>
@@ -5137,7 +5135,6 @@
     <string name="poi_denomination_kardecista">Кардециста</string>
     <string name="poi_denomination_free_church_of_scotland">Слободна црква Шкотске</string>
     <string name="poi_denomination_catholic_apostolic">Католичка апостолска</string>
-    <string name="poi_denomination_iglesia_filipina_independiente">Филипинска независна црква</string>
     <string name="poi_denomination_sephardi">Сефардска</string>
     <string name="poi_denomination_welsh_independent">Велшка независна</string>
     <string name="poi_canoe_put_in">Спуштање кануа</string>

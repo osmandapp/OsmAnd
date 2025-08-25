@@ -5541,7 +5541,6 @@
     <string name="destination_first">Ceann scríbe ar dtús</string>
     <string name="poi_source">Foinse POI</string>
     <string name="wikidata">Vicísonraí</string>
-    <string name="read_on_wiki">Léigh ar Vicipéid</string>
     <string name="prediction_time_description">Beochan deilbhín suímh in OsmAnd le gach nuashonrú GPS (uair amháin sa soicind). D’fhéadfadh moill bheag tarlú, go háirithe le linn gluaiseachta tapa nó nuair a bhíonn an comhartha GPS éagobhsaí.</string>
     <string name="prediction_time_advanced_description">Coigeartaigh an t-am tuartha chun moill a laghdú.</string>
     <string name="prediction_time">Am tuar</string>
@@ -5568,7 +5567,6 @@
     <string name="travel_guides">Treoraithe</string>
     <string name="show_debug_tile">Taispeáin faisnéis tíleanna</string>
     <string name="show_debug_tile_description">Taispeáin faisnéis faoi shiombailí léarscáile gach tíle</string>
-    <string name="show_symbols_debug_info">Taispeáin eolas dífhabhtaithe siombailí</string>
     <string name="read_on">Léigh ar %1$s</string>
     <string name="unit_of_temperature_description">Cuirfear na haonaid roghnaithe i bhfeidhm ar na sonraí go léir a bhaineann le teocht sa phróifíl reatha.</string>
     <string name="deactivated_map">Léarscáil díghníomhachtaithe</string>
@@ -5595,7 +5593,6 @@
     <string name="osm_live_payment_3_years_title">Gach trí bliana</string>
     <string name="deleting">Ag scriosadh…</string>
     <string name="deleting_history">Stair á scriosadh…</string>
-    <string name="show_symbols_bboxes">Taispeáin boscaí siombailí</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
     <string name="release_5_2">• Obair ar siúl...</string>
     <string name="shared_string_threads">Snáitheanna</string>

@@ -5758,7 +5758,6 @@
     <string name="travel_guides">Путівника</string>
     <string name="show_debug_tile">Показати інформацію про плитку</string>
     <string name="show_debug_tile_description">Відображати інформацію про символи карти кожної плитки</string>
-    <string name="show_symbols_debug_info">Показати інформацію про налагодження символів</string>
     <string name="deactivated_map">Деактивована карта</string>
     <string name="suggest_activate_map_msg">Карта %1$s деактивована,\nактивуйте її, щоб переглянути цю область.</string>
     <string name="unit_of_temperature_description">Вибрані одиниці вимірювання будуть застосовані до всіх даних, пов\'язаних з температурою, у поточному профілі.</string>
@@ -5785,7 +5784,6 @@
     <string name="deleting">Видалення…</string>
     <string name="deleting_history">Видалення історії…</string>
     <string name="show_rasterization_debug_tile">Показати інформацію про растеризацію плиток</string>
-    <string name="show_symbols_bboxes">Показати символи bboxes</string>
     <string name="release_5_2">• Робота триває...</string>
     <string name="shared_string_threads">Теми</string>
     <string name="threads_allocated_for_rendering">Потоки, виділені для рендерингу</string>

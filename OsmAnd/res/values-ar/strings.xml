@@ -5793,7 +5793,6 @@
     <string name="add_widget">إضافة أداة (عنصر واجهة مستخدم)</string>
     <string name="wiki_around">الأماكن المشهورة القريبة</string>
     <string name="wikidata">ويكيداتا Wikidata</string>
-    <string name="read_on_wiki">اقرأ على مستوى ويكيبيديا</string>
     <string name="prediction_time_advanced_description">عدل الوقت التوقع لتقليل التأخير.</string>
     <string name="prediction_time">وقت التوقع</string>
     <string name="position_animation">مؤثرات الموقع الحركية</string>
@@ -5822,7 +5821,6 @@
     <string name="show_debug_tile_description">عرض معلومات حول رموز الخريطة لكل مربع</string>
     <string name="deactivated_map">خريطة معطلة</string>
     <string name="suggest_activate_map_msg">تم إلغاء تنشيط خريطة %1$s، \nقم بتنشيطها لعرض هذه المنطقة.</string>
-    <string name="show_symbols_debug_info">إظهار معلومات تصحيح أخطاء الرموز</string>
     <string name="unit_of_temperature_description">سيتم تطبيق الوحدات المحددة على جميع البيانات المتعلقة بدرجة الحرارة في الملف الشخصي الحالي.</string>
     <string name="shared_string_split_by">التقسيم حسب</string>
     <string name="uphill_downhill_split">الصعود / الهبوط</string>
@@ -5848,7 +5846,6 @@
     <string name="set_start_point">تحديد نقطة الانطلاق</string>
     <string name="set_intermediate_point">تعيين الوجهة الوسيطة</string>
     <string name="show_rasterization_debug_tile">إظهار معلومات تنقيط البلاط</string>
-    <string name="show_symbols_bboxes">إظهار الرموز bboxes</string>
     <string name="release_5_2">• جارِ العمل...</string>
     <string name="map_orientation_portrait_inverted">عمودي (مقلوب)</string>
 </resources>
