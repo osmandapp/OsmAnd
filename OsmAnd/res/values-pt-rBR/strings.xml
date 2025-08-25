@@ -6053,7 +6053,6 @@
     <string name="us_gallons_unit">gal</string>
     <string name="choose_location_on_map">Escolha um local no mapa.</string>
     <string name="vehicle_metrics_obd_ii">Métricas de veículos (OBD-II)</string>
-    <string name="read_on_wiki">Ler na Wikipédia</string>
     <string name="add_to_navigation">Adicionar à navegação</string>
     <string name="customize_grid_color">Personalizar a cor da grade</string>
     <string name="map_grid">Grades de mapas</string>
@@ -6110,7 +6109,6 @@
     <string name="save_to_device">Salvar no dispositivo</string>
     <string name="hmd_promo_years">Promoção HMD por %1$s anos</string>
     <string name="show_debug_tile">Mostrar informações do mosaico</string>
-    <string name="show_symbols_debug_info">Mostrar informações de depuração de símbolos</string>
     <string name="read_on">Ler no %1$s</string>
     <string name="uphill_downhill_split">Subida / Descida</string>
     <string name="hmd_promo_description_years">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s anos</string>
@@ -6147,7 +6145,6 @@
     <string name="deleting_history">Excluindo o histórico…</string>
     <string name="ski_route_switch_style_description">Explore as pistas de esqui, os teleféricos e muito mais com o estilo de mapa Inverno e esqui.</string>
     <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
-    <string name="show_symbols_bboxes">Mostrar símbolos bboxes</string>
     <string name="release_5_2">• Trabalho em andamento...</string>
     <string name="next_turn_information">Informações sobre a próxima curva</string>
     <string name="next_turn_information_desc">Mostra a direção da próxima curva e o nome da rua.</string>
@@ -6206,4 +6203,25 @@
     <string name="rendering_attr_tidalFlatStyle_description">Estilo das planícies de maré</string>
     <string name="rendering_attr_watercolor_name">Aquarela</string>
     <string name="rendering_attr_watercolor_description">Cor da água</string>
+    <string name="backup_delete_data_warning_extended">Esta ação removerá permanentemente todos os dados selecionados da nuvem. Não será possível restaurá-los posteriormente.</string>
+    <string name="delete_data">Exluir dados</string>
+    <string name="manage_storage">Gerenciar armazenamento</string>
+    <string name="copy_as_new_folder">Copiar como nova pasta</string>
+    <string name="add_to_a_folder">Adicionar a uma pasta</string>
+    <string name="add_to_favorites">Adicionar aos favoritos</string>
+    <string name="max_weight_at_full_load_description">Informe o peso máximo do seu veículo com carga total para evitar estradas e pontes com limites de peso.</string>
+    <string name="max_axle_load_description">Forneça a carga máxima por eixo do seu veículo para evitar estradas e pontes com limites de peso.</string>
+    <string name="private_access_routing_req_short">Seu destino está em uma área privada. Permite o uso de estradas privadas?</string>
+    <string name="view_on_phone">Ver no celular</string>
+    <string name="shared_sting_osm_link">Link do OSM</string>
+    <string name="marine_renderer">Marinha</string>
+    <string name="marine_render_descr">Estilo de navegação marítima altamente personalizável. Baseado no estilo náutico. Funciona melhor com o mapa Nautical World Seamarks e mapas de profundidade opcionais.</string>
+    <string name="rendering_attr_hideAreas_name">Áreas de profundidade</string>
+    <string name="rendering_attr_hideAreas_description">Ocultar áreas profundas</string>
+    <string name="rendering_attr_hideContours_name">Contornos de profundidade</string>
+    <string name="rendering_attr_hideContours_description">Ocultar contornos de profundidade</string>
+    <string name="rendering_attr_hideFerries_name">Rotas de balsa</string>
+    <string name="rendering_attr_hideFerries_description">Ocultar rotas de balsa</string>
+    <string name="rendering_attr_hideMinorContours_name">Contornos de profundidade menores</string>
+    <string name="rendering_attr_hideMinorContours_description">Ocultar contornos de profundidade menores</string>
 </resources>

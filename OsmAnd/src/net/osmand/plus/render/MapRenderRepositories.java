@@ -31,6 +31,7 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
@@ -1250,6 +1251,39 @@ public class MapRenderRepositories {
 		String mapPreferredLocale = getMapPreferredLocale(app, zoom);
 		boolean noTransliteration = LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP.contains(mapPreferredLocale);
 		return transliterate && (!useAppLocale || !noTransliteration);
+	}
+
+	public static LanguagePreference getMapLanguageSetting(@NonNull OsmandApplication app, int zoom) {
+		OsmandSettings settings = app.getSettings();
+		String preferredLocale = settings.MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+		boolean showLocal = settings.MAP_SHOW_LOCAL_NAMES.get();
+		
+		if (preferredLocale.isEmpty()) {
+			return LanguagePreference.NativeOnly;
+		}
+		
+		if (!transliterate && !showLocal) {
+			return LanguagePreference.LocalizedOrNative;
+		}
+		
+		if (showLocal && !transliterate) {
+			return LanguagePreference.LocalizedAndNative;
+		}
+		
+		if (showLocal && transliterate) {
+			return LanguagePreference.NativeAndLocalizedOrTransliterated;
+		}
+		
+		if (!showLocal && transliterate) {
+			return LanguagePreference.LocalizedOrTransliteratedAndNative;
+		}
+		
+		if (transliterate && !showLocal) {
+			return LanguagePreference.LocalizedOrTransliterated;
+		}
+		
+		return LanguagePreference.LocalizedOrNative;
 	}
 
 	public static boolean useAppLocaleForMap(@NonNull OsmandApplication app, int zoom) {

@@ -5949,7 +5949,6 @@
     <string name="wikidata">date Wiki</string>
     <string name="prediction_time_advanced_description">Reglați timpul de predicție pentru a minimiza întârzierea.</string>
     <string name="prediction_time_description">Pictograma de poziție din OsmAnd se animă cu fiecare punct de date GPS primit (o dată pe secundă). O ușoară întârziere în mișcarea sa poate fi observată, în special atunci când utilizatorul se deplasează rapid sau când semnalul GPS fluctuează.</string>
-    <string name="read_on_wiki">Citiți pe Wikipedia</string>
     <string name="prediction_time">Durata de predicție</string>
     <string name="shared_string_no_animation">Fără animație</string>
     <string name="position_animation_empty_banner_description">Pictograma de poziție se mută la fiecare locație nouă primită fără animație.</string>

@@ -203,10 +203,7 @@ public class MapRendererContext {
 
 		int zoom = app.getOsmandMap().getMapView().getZoom();
 		String langId = MapRenderRepositories.getMapPreferredLocale(app, zoom);
-		boolean transliterate = MapRenderRepositories.transliterateMapNames(app, zoom);
-		LanguagePreference langPref = transliterate
-				? LanguagePreference.LocalizedOrTransliterated
-				: LanguagePreference.LocalizedOrNative;
+		LanguagePreference langPref = MapRenderRepositories.getMapLanguageSetting(app, zoom);
 
 		loadRendererAddons();
 		String rendName = settings.RENDERER.get();

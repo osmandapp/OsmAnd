@@ -71,16 +71,11 @@ public class Model3dHelper {
 
 	private void processCallback(@NonNull String modelName, @Nullable Model3D model, @Nullable CallbackWithObject<Model3D> callback) {
 		if (callback != null) {
-			if (pendingCallbacks.containsKey(modelName)) {
-				List<CallbackWithObject<Model3D>> callbacks = pendingCallbacks.get(modelName);
-				if (callbacks != null) {
-					callbacks.remove(callback);
-					if (!callbacks.isEmpty()) {
-						for (CallbackWithObject<Model3D> pendingCallback : callbacks) {
-							pendingCallback.processResult(model);
-						}
-					}
-					pendingCallbacks.remove(modelName);
+			List<CallbackWithObject<Model3D>> callbacks = pendingCallbacks.remove(modelName);
+			if (callbacks != null) {
+				callbacks.remove(callback);
+				for (CallbackWithObject<Model3D> pendingCallback : callbacks) {
+					pendingCallback.processResult(model);
 				}
 			}
 			callback.processResult(model);

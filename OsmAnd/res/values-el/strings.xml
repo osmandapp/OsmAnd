@@ -4927,7 +4927,6 @@
     <string name="distance_during_navigation">Απόσταση κατά την πλοήγηση</string>
     <string name="map_widget_distance">Απόσταση</string>
     <string name="map_widget_map_scale">Κλίμακα χάρτη</string>
-    <string name="show_symbols_debug_info">Εμφάνιση πληροφοριών για τα σύμβολα απασφαλμάτωσης</string>
     <string name="special_routing_cpp">Είδος ειδικής δρομολόγησης</string>
     <string name="plan_route_exit_dialog_descr">Απόρριψη όλων των αλλαγών στη σχεδιασμένη διαδρομή;</string>
     <string name="follow_track_descr">Επιλέξτε αρχείο ίχνους για ακολούθηση</string>

@@ -5755,7 +5755,6 @@
     <string name="travel_guides">Průvodci</string>
     <string name="show_debug_tile">Zobrazit informace o dlaždicích</string>
     <string name="show_debug_tile_description">Zobrazení informací o mapových symbolech jednotlivých dlaždic</string>
-    <string name="show_symbols_debug_info">Zobrazovat informace o ladění symbolů</string>
     <string name="deactivated_map">Deaktivovaná mapa</string>
     <string name="suggest_activate_map_msg">Mapa %1$s je deaktivovaná,\naktivujte ji, abyste mohli zobrazit tuto oblast.</string>
     <string name="unit_of_temperature_description">Vybrané jednotky budou použity na všechna data týkající se teploty v aktuálním profilu.</string>
@@ -5782,7 +5781,6 @@
     <string name="deleting_history">Mazání historie…</string>
     <string name="deleting">Mazání…</string>
     <string name="show_rasterization_debug_tile">Zobrazit informace o rasterizaci dlaždic</string>
-    <string name="show_symbols_bboxes">Zobrazit bboxy znaků</string>
     <string name="release_5_2">• V přípravě…</string>
     <string name="shared_string_threads">Vlákna</string>
     <string name="threads_allocated_for_rendering">Vlákna alokovaná pro vykreslování</string>

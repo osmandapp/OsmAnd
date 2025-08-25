@@ -5619,7 +5619,6 @@
     <string name="save_to_device">Guardar en el dispositivo</string>
     <string name="travel_guides">Guías</string>
     <string name="show_debug_tile_description">Muestra información sobre los símbolos de mapa de cada tesela</string>
-    <string name="show_symbols_debug_info">Mostrar información de los símbolos de depuración</string>
     <string name="show_debug_tile">Mostrar información de la tesela</string>
     <string name="unit_of_temperature_description">Las unidades elegidas se aplicarán a todos los datos relacionados con la temperatura del perfil actual.</string>
     <string name="deactivated_map">Mapa desactivado</string>
@@ -5647,7 +5646,6 @@
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
     <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
-    <string name="show_symbols_bboxes">Mostrar cuadros delimitadores de los símbolos</string>
     <string name="release_5_2">• Trabajo en progreso...</string>
     <string name="shared_string_threads">Hilos</string>
     <string name="threads_allocated_for_rendering">Hilos asignados a la representación</string>

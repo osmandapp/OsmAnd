@@ -5698,7 +5698,6 @@
     <string name="labels_position">标签位置</string>
     <string name="routing_attr_allow_ferries_description">允许通过渡轮航线规划路线</string>
     <string name="wikidata">维基数据</string>
-    <string name="read_on_wiki">在维基百科上阅读</string>
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="customize_grid_color">自定义网格颜色</string>
     <string name="travel_guides">指南</string>
@@ -5766,7 +5765,6 @@
     <string name="quick_action_switch_compass_desc">切换地图方向的切换按钮。</string>
     <string name="graph_axis">图表轴</string>
     <string name="y_axis_description">最多为 Y 轴选择两个选项。</string>
-    <string name="show_symbols_debug_info">显示符号调试信息</string>
     <string name="visualized_by">可视化方式</string>
     <string name="downward_gradient">下坡坡度</string>
     <string name="upward_gradient">上坡坡度</string>

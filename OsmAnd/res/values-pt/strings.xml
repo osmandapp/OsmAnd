@@ -5769,7 +5769,6 @@
     <string name="shared_string_road_exit">Sair</string>
     <string name="show_dms_grids">Use DMS em vez de graus</string>
     <string name="show_dm_grids">Use DM em vez de graus ou DMS</string>
-    <string name="show_symbols_debug_info">Mostrar símbolos de info de depuração</string>
     <string name="cant_load_map_styles">Não é possível carregar estilos de mapa.</string>
     <string name="osm_live_payment_renews_3_years">Renova a cada três anos</string>
     <string name="years_3">Três anos</string>

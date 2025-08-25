@@ -3474,7 +3474,6 @@
     <string name="speed_cameras_restart_descr">Khởi động lại ứng dụng để xoá tất cả dữ liệu camera tốc độ.</string>
     <string name="routing_attr_length_name">Chiều dài</string>
     <string name="clear_tiles_warning">Áp dụng những thay đổi này sẽ xoá dữ liệu đã lưu vào bộ nhớ đệm cho nguồn của mảng này</string>
-    <string name="read_on_wiki">Đọc trên Wikipedia</string>
     <string name="prediction_time_advanced_description">Điều chỉnh thời gian dự đoán để giảm thiểu độ trễ.</string>
     <string name="position_animation">Hiệu ứng chuyển động vị trí</string>
     <string name="popular_places">Địa điểm nổi tiếng</string>

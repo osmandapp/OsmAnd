@@ -5008,7 +5008,6 @@
     <string name="poi_area_highway_steps">Površina stepeništa</string>
     <string name="poi_evangelical_lutheran_church">Evangelistička luteranska crkva</string>
     <string name="poi_mennonite_church">Menonitska crkva</string>
-    <string name="poi_landmark_church">Znamenita crkva</string>
     <string name="poi_adventist_church">Adventistička crkva</string>
     <string name="poi_mormon_church">Mormonska crkva</string>
     <string name="poi_seventh_day_adventist_church">Adventistička crkva sedmog dana</string>
@@ -5074,7 +5073,6 @@
     <string name="poi_denomination_ukrainian_orthodox">Ukrajinska pravoslavna</string>
     <string name="poi_denomination_neo_pentecostal">Novo-pentekostalci</string>
     <string name="poi_denomination_evangelical_lutheran">Evangelistička Luteranska</string>
-    <string name="poi_denomination_landmark">Orijentir</string>
     <string name="poi_denomination_anabaptist">Anabaptist</string>
     <string name="poi_denomination_thai_mahanikaya">Tajlandski Mahanikaja</string>
     <string name="poi_denomination_thai_thammayut">Thai Thammayut</string>
@@ -5139,7 +5137,6 @@
     <string name="poi_denomination_kardecista">Kardecista</string>
     <string name="poi_denomination_free_church_of_scotland">Slobodna crkva Škotske</string>
     <string name="poi_denomination_catholic_apostolic">Katolička Apostolska</string>
-    <string name="poi_denomination_iglesia_filipina_independiente">Filipinska nezavisna crkva</string>
     <string name="poi_canoe_put_in_egress">Spuštanje u vodu i iznošenje kanua</string>
     <string name="poi_whitewater_hazard">Opasnost od divljih voda</string>
     <string name="poi_canoe_put_in">Spuštanje kanua u vodu</string>

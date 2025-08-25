@@ -5228,7 +5228,6 @@
     <string name="download_complete">Allalaadimine on lõppenud</string>
     <string name="calculating_altitude">Arvutame kõrgust</string>
     <string name="wikidata">Vikiandmed</string>
-    <string name="read_on_wiki">Loe Vikipeedias</string>
     <string name="map_widget_camera_tilt_desc">Näitab kaamera kaldenurka perspektiivis. Vaikimisi 90° (kallet pole).</string>
     <string name="routing_attr_allow_private_for_truck_name">Luba eratee kasutamine (veoauto jaoks)</string>
     <string name="av_notes_audio_widget_desc">Häälmärget saad salvestada vidinal klõpsides.</string>

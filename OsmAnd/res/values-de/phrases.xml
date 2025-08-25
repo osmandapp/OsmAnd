@@ -5066,7 +5066,6 @@
     <string name="poi_moving_company">Umzugsunternehmen</string>
     <string name="poi_construction_company">Bauunternehmen</string>
     <string name="poi_politician">Büro eines Politikers</string>
-    <string name="poi_landmark_church">Landmark Kirche</string>
     <string name="poi_neo_pentecostal_church">Neocharismatische Kirchenbewegung</string>
     <string name="poi_route_point_category">Reisekategorie</string>
     <string name="poi_african_methodist_episcopal_church">Afrikanische Methodistische Bischofskirche</string>
@@ -5076,7 +5075,6 @@
     <string name="poi_denomination_church_of_god">Kirche Gottes</string>
     <string name="poi_denomination_ukrainian_greek_catholic">Ukrainisch Griechisch-katholisch</string>
     <string name="poi_denomination_neo_pentecostal">Neocharismatisch</string>
-    <string name="poi_denomination_landmark">Wahrzeichen</string>
     <string name="poi_denomination_anabaptist">Täufer</string>
     <string name="poi_denomination_thai_mahanikaya">Thailändisches Mahanikaya</string>
     <string name="poi_denomination_thai_thammayut">Thailändisches Thammayut</string>

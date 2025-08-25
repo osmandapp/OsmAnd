@@ -29,26 +29,58 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingLeft="26dp"
         android:paddingRight="@dimen/list_content_padding"
 	    android:paddingEnd="@dimen/list_content_padding"
 	    android:paddingStart="26dp">
 
-        <TextView
-            android:id="@+id/switchText"
+        <LinearLayout
+            android:gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:paddingRight="@dimen/list_content_padding"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="@dimen/default_sub_text_size"
-	        android:paddingEnd="@dimen/list_content_padding" />
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/check"
+            <TextView
+                android:id="@+id/transliterate_title"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:paddingRight="@dimen/list_content_padding"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_sub_text_size"
+	            android:paddingEnd="@dimen/list_content_padding" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/transliterate_switch"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/local_names_title"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:paddingRight="@dimen/list_content_padding"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_sub_text_size"
+	            android:paddingEnd="@dimen/list_content_padding" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/local_names_switch"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

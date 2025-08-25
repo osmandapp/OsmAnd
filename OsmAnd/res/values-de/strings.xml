@@ -5756,7 +5756,6 @@
     <string name="poi_source">POI-Quelle</string>
     <string name="row_height">Zeilenhöhe</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Auf Wikipedia lesen</string>
     <string name="prediction_time">Vorhersagezeit</string>
     <string name="shared_string_no_animation">Keine Animation</string>
     <string name="routing_attr_allow_ferries_description">Routenführung über Fähren zulassen</string>
@@ -5784,7 +5783,6 @@
     <string name="suggest_activate_map_msg">Die %1$s-Karte ist deaktiviert,\naktivieren, um das Gebiet anzusehen.</string>
     <string name="read_on">Weiterlesen %1$s</string>
     <string name="show_debug_tile">Kachelinformationen anzeigen</string>
-    <string name="show_symbols_debug_info">Debug-Infos anzeigen</string>
     <string name="show_debug_tile_description">Infos zu den Kartensymbolen der einzelnen Kacheln anzeigen</string>
     <string name="unit_of_temperature_description">Ausgewählte Einheiten werden auf alle temperaturbezogenen Daten im aktuellen Profil angewendet.</string>
     <string name="travel_guides">Leitfäden</string>

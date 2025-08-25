@@ -5719,7 +5719,6 @@
     <string name="show_dms_grids_description">Montri la kradon en gradoj, minutoj kaj sekundoj anstataŭ nur en gradoj</string>
     <string name="show_mercator_grids">Uzi Merkator anstataŭ WGS aŭ UTM</string>
     <string name="show_mercator_grids_description">Montri la kradon en kilometroj laŭ merkatora projekcio anstataŭ laŭ WGS84 aŭ UTM</string>
-    <string name="read_on_wiki">Legi en Vikipedio</string>
     <string name="prediction_time_advanced_description">Alĝustigi antaŭkalkulan (anticipan) tempon por minimumigi prokraston.</string>
     <string name="routing_attr_allow_ferries_name">Permesi pramojn</string>
     <string name="grid_color">Koloro de krado</string>
@@ -5748,7 +5747,6 @@
     <string name="travel_guides">Gvidiloj</string>
     <string name="show_debug_tile">Montri informojn pri kahelo</string>
     <string name="show_debug_tile_description">Montri informojn pri simboloj por ĉiu map-kahelo</string>
-    <string name="show_symbols_debug_info">Montri senerarigajn informojn pri simboloj</string>
     <string name="deactivated_map">Malaktiva mapo</string>
     <string name="suggest_activate_map_msg">La mapo “%1$s” estas malaktiva,\naktivigu ĝin por bildigi tiun ĉi areon.</string>
     <string name="unit_of_temperature_description">Elektata mezurunuo estos aplikita al ĉiuj temperatur-rilataj datumoj en la nuna profilo.</string>
@@ -5776,7 +5774,6 @@
     <string name="deleting">Forigado…</string>
     <string name="deleting_history">Forigado de historio…</string>
     <string name="show_rasterization_debug_tile">Montri informojn pro bildigado de kaheloj</string>
-    <string name="show_symbols_bboxes">Montri limigajn kestojn de simboloj</string>
     <string name="shared_string_threads">Fadenoj</string>
     <string name="threads_allocated_for_rendering">Fadenoj asignitaj por bildigado</string>
     <string name="threads_allocated_for_rendering_desc">Malpliigo de asignitaj fadenoj povas iuokaze plirapidigi map-bildigadon.</string>

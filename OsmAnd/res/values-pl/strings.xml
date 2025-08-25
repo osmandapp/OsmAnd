@@ -5767,7 +5767,6 @@
     <string name="labels_position">Pozycja etykiet</string>
     <string name="customize_grid_color">Dostosuj kolor siatki</string>
     <string name="grid_color">Kolor siatki</string>
-    <string name="read_on_wiki">Przeczytaj na Wikipedii</string>
     <string name="obd_plugin_description">Monitoruj kluczowe parametry pojazdu za pomocą protokołu OBD-II. Dostęp do danych, w tym:\n • Prędkość obrotowa silnika, Czas pracy silnika, Obliczone obciążenie silnika\n • Zużycie paliwa, Ciśnienie paliwa, Pozostała ilość paliwa\n • Temperatura wlotu, Temperatura otoczenia, Temperatura płynu chłodzącego, Temperatura oleju silnikowego\n • Prędkość pojazdu, Położenie przepustnicy, Napięcie akumulatora\n</string>
     <string name="add_to_navigation">Dodaj do nawigacji</string>
     <string name="shared_string_all_icons">Wszystkie ikony</string>

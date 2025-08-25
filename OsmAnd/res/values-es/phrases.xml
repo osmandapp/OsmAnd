@@ -5032,7 +5032,6 @@
     <string name="poi_latter_day_saints_church">Iglesia de los santos de los últimos días</string>
     <string name="poi_evangelical_lutheran_church">Iglesia evangélica luterana</string>
     <string name="poi_mennonite_church">Iglesia menonita</string>
-    <string name="poi_landmark_church">Iglesia landmark</string>
     <string name="poi_adventist_church">Iglesia adventista</string>
     <string name="poi_uniting_church">Iglesia unida</string>
     <string name="poi_apostolic_church">Iglesia apostólica</string>
@@ -5074,7 +5073,6 @@
     <string name="poi_denomination_ukrainian_orthodox">Ortodoxa ucraniana</string>
     <string name="poi_denomination_neo_pentecostal">Neopentecostal</string>
     <string name="poi_denomination_evangelical_lutheran">Luterana evangélica</string>
-    <string name="poi_denomination_landmark">Punto de referencia</string>
     <string name="poi_denomination_anabaptist">Anabaptista</string>
     <string name="poi_denomination_thai_mahanikaya">Mahanikaya tailandesa</string>
     <string name="poi_denomination_thai_thammayut">Thammayut tailandesa</string>
@@ -5137,7 +5135,6 @@
     <string name="poi_denomination_kardecista">Kardecista</string>
     <string name="poi_denomination_free_church_of_scotland">Iglesia libre de Escocia</string>
     <string name="poi_denomination_catholic_apostolic">Católico apostólico</string>
-    <string name="poi_denomination_iglesia_filipina_independiente"></string>
     <string name="poi_denomination_sephardi">Sefardí</string>
     <string name="poi_denomination_welsh_independent">Independiente galés</string>
     <string name="poi_canoe_put_in">Embarco de canoas</string>

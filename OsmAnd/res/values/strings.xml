@@ -1610,6 +1610,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
+    <string name="show_local_names">Show local names</string>
     <string name="transport_hazmat_yes_desc">Select the applicable category.</string>
     <string name="transport_hazmat_no_desc">Roads and tunnels may restrict transporting hazardous materials.</string>
     <string name="transport_hazmat_title">Transporting of hazardous materials</string>
