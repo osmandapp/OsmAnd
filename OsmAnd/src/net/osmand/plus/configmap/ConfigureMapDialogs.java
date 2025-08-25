@@ -212,19 +212,19 @@ public class ConfigureMapDialogs {
 					v.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
 					v.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
 					
-					TextView switchText = v.findViewById(R.id.switchText);
-					switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
-					SwitchCompat check = v.findViewById(R.id.check);
-					check.setChecked(transliterateNames[0]);
-					check.setOnCheckedChangeListener(translitChangdListener);
-					UiUtilities.setupCompoundButton(nightMode, profileColor, check);
-					
-					TextView switchText2 = v.findViewById(R.id.switchText2);
-					switchText2.setText(R.string.show_local_names);
-					SwitchCompat check2 = v.findViewById(R.id.check2);
-					check2.setChecked(showLocalNames[0]);
-					check2.setOnCheckedChangeListener(showLocalNamesListener);
-					UiUtilities.setupCompoundButton(nightMode, profileColor, check2);
+					TextView transliterateTitle = v.findViewById(R.id.transliterate_title);
+					transliterateTitle.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
+					SwitchCompat transliterateSwitch = v.findViewById(R.id.transliterate_switch);
+					transliterateSwitch.setChecked(transliterateNames[0]);
+					transliterateSwitch.setOnCheckedChangeListener(translitChangdListener);
+					UiUtilities.setupCompoundButton(nightMode, profileColor, transliterateSwitch);
+
+					TextView localNamesTitle = v.findViewById(R.id.local_names_title);
+					localNamesTitle.setText(R.string.show_local_names);
+					SwitchCompat localNamesSwitch = v.findViewById(R.id.local_names_switch);
+					localNamesSwitch.setChecked(showLocalNames[0]);
+					localNamesSwitch.setOnCheckedChangeListener(showLocalNamesListener);
+					UiUtilities.setupCompoundButton(nightMode, profileColor, localNamesSwitch);
 				} else {
 					checkedTextView.setChecked(position == selectedLanguageIndex[0]);
 					v.findViewById(R.id.topDivider).setVisibility(View.GONE);
