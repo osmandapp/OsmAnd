@@ -1473,6 +1473,8 @@ public class OsmandSettings {
 
 	}.makeGlobal().makeShared().cache();
 
+	public final OsmandPreference<Boolean> MAP_SHOW_LOCAL_NAMES = new BooleanPreference(this, "map_show_local_names", false).makeGlobal().makeShared().cache();
+
 	public boolean usingEnglishNames() {
 		return MAP_PREFERRED_LOCALE.get().equals("en");
 	}
