@@ -576,7 +576,7 @@
     <string name="searchpoi_activity">POI kiválasztás</string>
     <string name="search_POI_level_btn">További találatok</string>
     <string name="incremental_search_city">Település keresése lépésenként</string>
-    <string name="incremental_search_street">Utca keresése</string>
+    <string name="incremental_search_street">Utca fokozatos keresése</string>
     <string name="incremental_search_building">Épület keresése növekményesen</string>
     <string name="choose_available_region">Régió kijelölése listából</string>
     <string name="choose_intersected_street">Keresztező utca kijelölése</string>
@@ -1301,7 +1301,7 @@
     <string name="error_avoid_specific_road">Nem található kerülőút</string>
     <string name="home_button">Otthon</string>
     <string name="map_update">Frissítés érhető el %1$s térképéhez</string>
-    <string name="search_for">Keresés</string>
+    <string name="search_for">Keresés erre:</string>
     <string name="shared_string_show_all">Összes megjelenítése</string>
     <string name="coordinates">Koordináták</string>
     <string name="dash_download_msg_none">Letölt offline térképeket\?</string>
@@ -5816,4 +5816,5 @@
     <string name="max_weight_at_full_load_description">Adja meg a járműve teljes terhelés melletti maximális súlyát, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
     <string name="max_axle_load_description">Adja meg a járműve maximális tengelyterhelését, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
     <string name="lang_en_barebones">Angol (csupasz)</string>
+    <string name="shared_sting_osm_link">OSM hivatkozás</string>
 </resources>

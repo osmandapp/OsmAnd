@@ -5850,4 +5850,5 @@
     <string name="max_weight_at_full_load_description">Наведите максималну тежину вашег возила при пуном оптерећењу како бисте избегли путеве и мостове са ограничењима тежине.</string>
     <string name="max_axle_load_description">Наведите максимално осовинско оптерећење вашег возила како бисте избегли путеве и мостове са ограничењима тежине.</string>
     <string name="lang_en_barebones">Енглески (основни)</string>
+    <string name="shared_sting_osm_link">ОСМ линк</string>
 </resources>

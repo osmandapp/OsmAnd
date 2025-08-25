@@ -6206,4 +6206,25 @@
     <string name="rendering_attr_tidalFlatStyle_description">Estilo das planícies de maré</string>
     <string name="rendering_attr_watercolor_name">Aquarela</string>
     <string name="rendering_attr_watercolor_description">Cor da água</string>
+    <string name="backup_delete_data_warning_extended">Esta ação removerá permanentemente todos os dados selecionados da nuvem. Não será possível restaurá-los posteriormente.</string>
+    <string name="delete_data">Exluir dados</string>
+    <string name="manage_storage">Gerenciar armazenamento</string>
+    <string name="copy_as_new_folder">Copiar como nova pasta</string>
+    <string name="add_to_a_folder">Adicionar a uma pasta</string>
+    <string name="add_to_favorites">Adicionar aos favoritos</string>
+    <string name="max_weight_at_full_load_description">Informe o peso máximo do seu veículo com carga total para evitar estradas e pontes com limites de peso.</string>
+    <string name="max_axle_load_description">Forneça a carga máxima por eixo do seu veículo para evitar estradas e pontes com limites de peso.</string>
+    <string name="private_access_routing_req_short">Seu destino está em uma área privada. Permite o uso de estradas privadas?</string>
+    <string name="view_on_phone">Ver no celular</string>
+    <string name="shared_sting_osm_link">Link do OSM</string>
+    <string name="marine_renderer">Marinha</string>
+    <string name="marine_render_descr">Estilo de navegação marítima altamente personalizável. Baseado no estilo náutico. Funciona melhor com o mapa Nautical World Seamarks e mapas de profundidade opcionais.</string>
+    <string name="rendering_attr_hideAreas_name">Áreas de profundidade</string>
+    <string name="rendering_attr_hideAreas_description">Ocultar áreas profundas</string>
+    <string name="rendering_attr_hideContours_name">Contornos de profundidade</string>
+    <string name="rendering_attr_hideContours_description">Ocultar contornos de profundidade</string>
+    <string name="rendering_attr_hideFerries_name">Rotas de balsa</string>
+    <string name="rendering_attr_hideFerries_description">Ocultar rotas de balsa</string>
+    <string name="rendering_attr_hideMinorContours_name">Contornos de profundidade menores</string>
+    <string name="rendering_attr_hideMinorContours_description">Ocultar contornos de profundidade menores</string>
 </resources>
