@@ -5683,4 +5683,5 @@
     <string name="max_weight_at_full_load_description">Cuir uasmheáchan d’fheithicle ar fáil ag lánualach chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
     <string name="max_axle_load_description">Cuir ualach acastóra uasta do fheithicle ar fáil chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
     <string name="lang_en_barebones">Béarla (lom)</string>
+    <string name="shared_sting_osm_link">Nasc OSM</string>
 </resources>
