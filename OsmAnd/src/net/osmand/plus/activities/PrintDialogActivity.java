@@ -10,6 +10,7 @@ import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintJobId;
 import android.print.PrintManager;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -18,8 +19,11 @@ import androidx.annotation.NonNull;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.InsetsUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.util.EnumSet;
 
 public class PrintDialogActivity extends ActionBarProgressActivity {
 
@@ -42,6 +46,13 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		getSupportActionBar().setTitle(R.string.print_route);
 
 		setContentView(R.layout.print_dialog);
+
+		View root = findViewById(R.id.root);
+		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
+				InsetsUtils.InsetSide.TOP,
+				InsetsUtils.InsetSide.BOTTOM
+		));
+
 		webView = findViewById(R.id.printDialogWebview);
 
 		Intent intent = getIntent();

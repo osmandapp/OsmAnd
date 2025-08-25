@@ -47,12 +47,14 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -115,6 +117,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download_activity);
+
+		View root = findViewById(R.id.root);
+		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
+				InsetsUtils.InsetSide.TOP,
+				InsetsUtils.InsetSide.BOTTOM
+		));
+
 		updateToolbar();
 
 		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);

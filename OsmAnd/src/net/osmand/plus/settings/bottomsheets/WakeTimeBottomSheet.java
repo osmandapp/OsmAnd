@@ -129,6 +129,7 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		for (BaseBottomSheetItem item : items) {
 			if (item instanceof BottomSheetItemWithCompoundButton itemWithCompoundButton) {
 				itemWithCompoundButton.getCompoundButton().setSaveEnabled(false);
