@@ -5753,7 +5753,6 @@
     <string name="wiki_around">Populárne miesta v okolí</string>
     <string name="customize_grid_color">Prispôsobiť farbu mriežky</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Prečítať na Wikipédii</string>
     <string name="prediction_time_description">Ikona polohy v OsmAnde je animovaná s každou aktualizáciou polohy z GPS (raz za sekundu). Môže byť viditeľné drobné oneskorenie jej pohybu, najmä pri rýchlom pohybe zariadenia alebo keď je signál GPS nestabilný.</string>
     <string name="prediction_time_advanced_description">Upraviť čas predpovede pre minimalizáciu oneskorenia.</string>
     <string name="prediction_time">Čas predpovede</string>
@@ -5790,7 +5789,6 @@
     <string name="deleting_history">Odstraňovanie histórie…</string>
     <string name="show_debug_tile">Zobraziť informácie o dlaždiciach</string>
     <string name="show_debug_tile_description">Zobraziť informácie o mapových symboloch jednotlivých dlaždíc</string>
-    <string name="show_symbols_debug_info">Zobraziť informácie ladenia pre symboly</string>
     <string name="shared_string_flat">Rovina</string>
     <string name="uphill_downhill_split">Do kopca / Z kopca</string>
     <string name="read_on">Prečítať na %1$s</string>
@@ -5801,7 +5799,6 @@
     <string name="unit_of_temperature_description">Zvolené jednotky budú použité na všetky údaje o teplote v zvolenom profile.</string>
     <string name="suggest_activate_map_msg">Mapa %1$s je vypnutá,\nzapnite (obnovte) ju pre zobrazenie tejto oblasti.</string>
     <string name="show_rasterization_debug_tile">Zobraziť informácie o rastrovaní dlaždíc</string>
-    <string name="show_symbols_bboxes">Zobraziť ohraničujúce rámce symbolov</string>
     <string name="release_5_2">• V príprave…</string>
     <string name="failed_to_connect">Nepodarilo sa pripojiť k %1s</string>
     <string name="shared_string_threads">Vlákna</string>

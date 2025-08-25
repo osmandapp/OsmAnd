@@ -5767,7 +5767,6 @@
     <string name="save_to_device">Salva nel dispositivo</string>
     <string name="travel_guides">Guide</string>
     <string name="save_to_device_error">Errore di salvataggio sul dispositivo</string>
-    <string name="show_symbols_debug_info">Mostra info dei simboli di debug</string>
     <string name="show_debug_tile_description">Mostra le informazioni sui simboli della mappa di ogni riquadro</string>
     <string name="show_debug_tile">Mostra informazioni riquadro</string>
     <string name="deactivated_map">Mappa disattivata</string>

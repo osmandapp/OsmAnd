@@ -5708,7 +5708,6 @@
     <string name="add_widget">Bæta við viðmótshluta</string>
     <string name="row_height">Hæð raða</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Víxla af/á sýnileika hnitanets á landakortinu.</string>
-    <string name="read_on_wiki">Lesa á Wikipedia</string>
     <string name="grid_color">Litur á hnitalínum</string>
     <string name="shared_string_edges">Jaðrar</string>
     <string name="labels_position">Staðsetning skýringa</string>
@@ -5735,7 +5734,6 @@
     <string name="save_to_device_error">Villa við vistun á tæki</string>
     <string name="save_to_device">Vista á tæki</string>
     <string name="add_to_navigation">Bæta í leiðsögn</string>
-    <string name="show_symbols_debug_info">Birta villuleitarupplýsingar tákna</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX-ferilpunktar (%1$d) afritaðir inn í eftirlæti.</string>
     <string name="saved_to_device">Vistað á tæki</string>
     <string name="show_debug_tile">Birta upplýsingar um kortatígul</string>

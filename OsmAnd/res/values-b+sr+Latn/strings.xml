@@ -5737,7 +5737,6 @@
     <string name="travel_guides">Vodič</string>
     <string name="show_debug_tile_description">Prikaz informacija o simbolima na mapi svakog tila</string>
     <string name="show_debug_tile">Prikaži informacije o tilovima</string>
-    <string name="show_symbols_debug_info">Prikaži simbol informacije o otklanjanju grešaka</string>
     <string name="deactivated_map">Deaktivirana mapa</string>
     <string name="suggest_activate_map_msg">%1$s mapa je deaktivirana,\naktivirajte da biste videli ovu oblast.</string>
     <string name="unit_of_temperature_description">Izabrane jedinice će biti primenjene na sve podatke vezane za temperaturu u trenutnom profilu.</string>
@@ -5764,7 +5763,6 @@
     <string name="deleting">Brisanje…</string>
     <string name="deleting_history">Brisanje istorije…</string>
     <string name="show_rasterization_debug_tile">Prikaži informacije o rasterizaciji pločica</string>
-    <string name="show_symbols_bboxes">Prikaži simbole boks okvirnih polja</string>
     <string name="release_5_2">• Rad u toku...</string>
     <string name="threads_allocated_for_rendering_desc">U nekim slučajevima, manja brzina rendrovanja mape može da ubrza prikaz mape.</string>
     <string name="shared_string_threads">Teme</string>

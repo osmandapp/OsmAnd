@@ -6053,7 +6053,6 @@
     <string name="us_gallons_unit">gal</string>
     <string name="choose_location_on_map">Escolha um local no mapa.</string>
     <string name="vehicle_metrics_obd_ii">Métricas de veículos (OBD-II)</string>
-    <string name="read_on_wiki">Ler na Wikipédia</string>
     <string name="add_to_navigation">Adicionar à navegação</string>
     <string name="customize_grid_color">Personalizar a cor da grade</string>
     <string name="map_grid">Grades de mapas</string>
@@ -6110,7 +6109,6 @@
     <string name="save_to_device">Salvar no dispositivo</string>
     <string name="hmd_promo_years">Promoção HMD por %1$s anos</string>
     <string name="show_debug_tile">Mostrar informações do mosaico</string>
-    <string name="show_symbols_debug_info">Mostrar informações de depuração de símbolos</string>
     <string name="read_on">Ler no %1$s</string>
     <string name="uphill_downhill_split">Subida / Descida</string>
     <string name="hmd_promo_description_years">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s anos</string>
@@ -6147,7 +6145,6 @@
     <string name="deleting_history">Excluindo o histórico…</string>
     <string name="ski_route_switch_style_description">Explore as pistas de esqui, os teleféricos e muito mais com o estilo de mapa Inverno e esqui.</string>
     <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
-    <string name="show_symbols_bboxes">Mostrar símbolos bboxes</string>
     <string name="release_5_2">• Trabalho em andamento...</string>
     <string name="next_turn_information">Informações sobre a próxima curva</string>
     <string name="next_turn_information_desc">Mostra a direção da próxima curva e o nome da rua.</string>

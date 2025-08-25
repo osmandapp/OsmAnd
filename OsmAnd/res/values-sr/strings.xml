@@ -5710,7 +5710,6 @@
     <string name="position_animation_empty_banner_description">Икона положаја се ажурира за сваку новопримљену локацију без икакве анимације прелаза.</string>
     <string name="wikidata">Вики-подаци</string>
     <string name="shared_string_no_animation">Без исцртавања</string>
-    <string name="read_on_wiki">Прочитајте на Википедији</string>
     <string name="prediction_time_description">Икона положаја у ОсмАнду се анимира са сваким ажурирањем ГПС-а (једном у секунди). Може доћи до малог кашњења, посебно током брзог кретања или када је ГПС сигнал нестабилан.</string>
     <string name="prediction_time_advanced_description">Подесите време предвиђања ради смањивања кашњења.</string>
     <string name="prediction_time">Време предвиђања</string>
@@ -5735,7 +5734,6 @@
     <string name="travel_guides">Водичи</string>
     <string name="show_debug_tile">Прикажи информације о плочицама</string>
     <string name="show_debug_tile_description">Прикажите информације о симболима мапе сваке плочице</string>
-    <string name="show_symbols_debug_info">Прикажи информације о отклањању грешака у симболима</string>
     <string name="deactivated_map">Искључена карта</string>
     <string name="unit_of_temperature_description">Изабране јединице ће бити примењене на све податке везане за температуру у тренутном профилу.</string>
     <string name="suggest_activate_map_msg">Карта %1$s је искључена,\nради прегледа ове области је укључите.</string>
@@ -5763,7 +5761,6 @@
     <string name="deleting">Бришем…</string>
     <string name="deleting_history">Бришем повест…</string>
     <string name="show_rasterization_debug_tile">Прикажи информације о растеризацији плочица</string>
-    <string name="show_symbols_bboxes">Прикажи симболе бокс оквирног поља</string>
     <string name="release_5_2">• Рад је у току...</string>
     <string name="shared_string_threads">Нити</string>
     <string name="threads_allocated_for_rendering">Измештене нити за приказ</string>

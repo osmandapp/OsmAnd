@@ -5783,7 +5783,6 @@
     <string name="travel_guides">Guider</string>
     <string name="show_debug_tile">Vis information om kortflise</string>
     <string name="show_debug_tile_description">Vis information om kortsymboler for hver kortflise</string>
-    <string name="show_symbols_debug_info">Vis symboler fejlfindinginfo</string>
     <string name="deactivated_map">Deaktiveret kort</string>
     <string name="suggest_activate_map_msg">%1$s kort er deaktiveret,\naktiver for at se dette område.</string>
     <string name="unit_of_temperature_description">De valgte enheder anvendes på alle temperaturrelaterede data i den aktuelle profil.</string>
@@ -5810,7 +5809,6 @@
     <string name="deleting">Sletter…</string>
     <string name="deleting_history">Sletter historik…</string>
     <string name="show_rasterization_debug_tile">Vis oplysninger om rasterisering af kortfliser</string>
-    <string name="show_symbols_bboxes">Vis symbolers bboxer</string>
     <string name="release_5_2">• Arbejde i gang...</string>
     <string name="shared_string_threads">Tråde</string>
     <string name="threads_allocated_for_rendering">Tråde allokeret til rendering</string>
