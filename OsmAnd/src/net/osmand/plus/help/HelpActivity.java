@@ -1,6 +1,7 @@
 package net.osmand.plus.help;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -9,6 +10,9 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.BaseLogcatActivity;
+import net.osmand.plus.utils.InsetsUtils;
+
+import java.util.EnumSet;
 
 
 public class HelpActivity extends BaseLogcatActivity {
@@ -38,6 +42,12 @@ public class HelpActivity extends BaseLogcatActivity {
 			actionBar.setElevation(5.0f);
 		}
 		setContentView(R.layout.help_activity);
+
+		View root = findViewById(R.id.root);
+		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
+				InsetsUtils.InsetSide.TOP,
+				InsetsUtils.InsetSide.BOTTOM
+		));
 
 		if (savedInstanceState == null) {
 			HelpMainFragment.showInstance(getSupportFragmentManager());

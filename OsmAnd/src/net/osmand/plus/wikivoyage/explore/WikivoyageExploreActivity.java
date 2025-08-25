@@ -21,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,6 +31,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -43,6 +43,7 @@ import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class WikivoyageExploreActivity extends TabActivity implements DownloadEvents, OnDialogFragmentResultListener,
@@ -81,6 +82,11 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 			window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
 		}
+
+		View root = findViewById(R.id.root);
+		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
+				InsetsUtils.InsetSide.TOP
+		));
 
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(app));
