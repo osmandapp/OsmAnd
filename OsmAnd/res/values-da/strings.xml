@@ -5889,4 +5889,7 @@
     <string name="rendering_attr_hideMinorContours_name">Konturer af mindre dybder</string>
     <string name="rendering_attr_hideMinorContours_description">Skjul konturer af mindre dybder</string>
     <string name="shared_sting_osm_link">OSM-link</string>
+    <string name="rendering_attr_shellsStyle_name">Skalstil</string>
+    <string name="rendering_attr_shellsStyle_description">Stil for skaller på havbunden</string>
+    <string name="lang_en_barebones">Engelsk (helt enkelt)</string>
 </resources>
