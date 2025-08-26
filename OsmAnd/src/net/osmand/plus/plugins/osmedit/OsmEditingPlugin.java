@@ -308,11 +308,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
-				EditPoiDialogFragment editPoiDialogFragment =
-						EditPoiDialogFragment.createAddPoiInstance(latitude, longitude,
-								mapActivity.getMyApplication());
-				editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
-						EditPoiDialogFragment.TAG);
+				EditPoiDialogFragment.showAddPoiInstance(mapActivity, latitude, longitude);
 			} else if (resId == R.string.context_menu_item_open_note) {
 				openOsmNote(mapActivity, latitude, longitude, "", false);
 			} else if (resId == R.string.context_menu_item_modify_note) {
@@ -326,8 +322,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
-				EditPoiDialogFragment.createInstance(entity, false)
-						.show(mapActivity.getSupportFragmentManager(), EditPoiDialogFragment.TAG);
+				EditPoiDialogFragment.showInstance(mapActivity, entity, false);
 			}
 			return true;
 		};
@@ -596,18 +591,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		} else if (object instanceof BaseDetailsObject detailsObject) {
 			amenity = detailsObject.getSyntheticAmenity();
 		}
+		String link = null;
 		if (amenity != null) {
-			String link = ObfConstants.getOsmUrlForId(amenity);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
-						0, false, null, true, 0, true, null, false);
-			}
+			link = ObfConstants.getOsmUrlForId(amenity);
 		} else if (object instanceof RenderedObject renderedObject) {
-			String link = ObfConstants.getOsmUrlForId(renderedObject);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
-						null, true, 0, true, null, false);
-			}
+			link = ObfConstants.getOsmUrlForId(renderedObject);
+		}
+		if (!Algorithms.isEmpty(link)) {
+			Drawable icon = menuBuilder.getRowIcon(R.drawable.ic_action_openstreetmap_logo);
+			String textPrefix = app.getString(R.string.shared_sting_osm_link);
+			menuBuilder.buildRow(view, icon, null, textPrefix, link, 0,
+					null, false, null, true, 0,
+					true, false, false, null, false);
 		}
 	}
 

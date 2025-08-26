@@ -5,7 +5,6 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -41,8 +39,6 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 
 	private static final int BYTES_IN_MB = 1024 * 1024;
 
-	private OsmandApplication app;
-
 	private Integer[] range;
 	private int minValue;
 	private int maxValue;
@@ -57,8 +53,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		preference = app.getSettings().MEMORY_ALLOCATED_FOR_ROUTING;
+		preference = settings.MEMORY_ALLOCATED_FOR_ROUTING;
 		initData();
 	}
 
@@ -77,15 +72,13 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-
 		String title = getString(R.string.memory_allocated_for_routing);
 		items.add(new TitleItem(title));
 
 		String description = getString(R.string.memory_allocated_for_routing_ds);
 		items.add(new LongDescriptionItem(description));
 
-		View view = inflater.inflate(R.layout.bottom_sheet_allocated_routing_memory, null);
+		View view = inflate(R.layout.bottom_sheet_allocated_routing_memory);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 
 		sliderContainer = view.findViewById(R.id.slider_container);
@@ -114,9 +107,9 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 		slider.setStepSize(1);
 		slider.setValue(getRangeIndex(currentValue));
 
-		slider.addOnChangeListener((slider1, value, fromUser) -> {
+		slider.addOnChangeListener((sliderView, value, fromUser) -> {
 			if (fromUser) {
-				currentValue = range[(int) slider1.getValue()];
+				currentValue = range[(int) sliderView.getValue()];
 				summary.setText(getFormattedMb(currentValue));
 			}
 		});
@@ -154,9 +147,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	@Override
 	protected void onRightBottomButtonClick() {
 		if (isChanged()) {
-			Fragment target = getTargetFragment();
-			if (target instanceof BaseSettingsFragment) {
-				BaseSettingsFragment fragment = (BaseSettingsFragment) target;
+			if (getTargetFragment() instanceof BaseSettingsFragment fragment) {
 				fragment.onApplyPreferenceChange(preference.getId(), false, currentValue);
 			}
 		}
@@ -185,10 +176,10 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 
 	private float getMaxLimit() {
 		Activity activity = requireActivity();
-		MemoryInfo mi = new MemoryInfo();
+		MemoryInfo memoryInfo = new MemoryInfo();
 		ActivityManager activityManager = (ActivityManager) activity.getSystemService(ACTIVITY_SERVICE);
-		activityManager.getMemoryInfo(mi);
-		double availableMb = (double) mi.totalMem / BYTES_IN_MB;
+		activityManager.getMemoryInfo(memoryInfo);
+		double availableMb = (double) memoryInfo.totalMem / BYTES_IN_MB;
 		return (float) availableMb / 2;
 	}
 
@@ -206,8 +197,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull String key,
-	                                @NonNull Fragment target,
+	                                @NonNull String key, @NonNull Fragment target,
 	                                @Nullable ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
@@ -220,5 +210,4 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 			fragment.show(fragmentManager, TAG);
 		}
 	}
-
 }

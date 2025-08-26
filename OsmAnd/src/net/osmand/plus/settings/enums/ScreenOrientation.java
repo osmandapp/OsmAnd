@@ -16,7 +16,7 @@ public enum ScreenOrientation {
 
 	PORTRAIT_INVERTED(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT,
 			R.string.map_orientation_portrait_inverted,
-			R.drawable.ic_action_phone_portrait_orientation),
+			R.drawable.ic_action_phone_portrait_orientation_inverted),
 
 	LANDSCAPE(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE,
 			R.string.map_orientation_landscape,
@@ -24,7 +24,7 @@ public enum ScreenOrientation {
 
 	LANDSCAPE_INVERTED(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE,
 			R.string.map_orientation_landscape_inverted,
-			R.drawable.ic_action_phone_landscape_orientation),
+			R.drawable.ic_action_phone_landscape_orientation_inverted),
 
 	DEFAULT(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED,
 			R.string.map_orientation_default,

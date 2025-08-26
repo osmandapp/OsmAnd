@@ -1807,8 +1807,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable GpxTrackAnalysis analyses,
 	                                   @Nullable RouteKey routeKey,
 	                                   @Nullable Bundle params) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
 
@@ -1845,7 +1845,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				fragment.setLatLon(latLonRect);
 			}
 
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

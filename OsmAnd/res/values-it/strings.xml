@@ -3212,9 +3212,7 @@
     <string name="please_provide_profile_name_message">Dai un nome a questo profilo</string>
     <string name="open_settings">Apri le impostazioni</string>
     <string name="plugin_disabled">Plugin disabilitato</string>
-    <string name="plugin_disabled_descr">Questo plugin è un\' applicazione separata: disabilitandolo non lo rimuovi.
-\n
-\nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
+    <string name="plugin_disabled_descr">Questo plugin è un\'applicazione separata: disabilitandolo non lo rimuovi. \n \nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
     <string name="shared_string_menu">Menù</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="no_recalculation_setting">Disattiva ricalcolo</string>
@@ -4067,7 +4065,7 @@
     <string name="routing_attr_prefer_horse_routes_description">Preferisci i percorsi per cavalli</string>
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
     <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così solo OsmAnd può accedere ai tuoi dati.</string>
-    <string name="rendering_attr_natureReserves_name">Riserve naturali</string>
+    <string name="rendering_attr_natureReserves_name">Riserve naturali e aree protette</string>
     <string name="shared_string_details">Dettagli</string>
     <string name="shared_string_articles">Articoli</string>
     <string name="included_categories">Categorie incluse</string>
@@ -4571,7 +4569,7 @@
     <string name="action_not_supported_with_map_style">Questa azione non è supportata dallo stile della mappa attuale.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_rendering_engine">Motore di rendering della mappa</string>
-    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D. Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.</string>
+    <string name="map_rendering_engine_descr">Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.\nVersione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D.</string>
     <string name="show_map_symbols">Mostra i simboli della mappa</string>
     <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
     <string name="depth_contours">Isobate</string>
@@ -4915,7 +4913,7 @@
     <string name="osmand_cloud_deletion_subscriptions_warning">Questo non eliminerà il tuo abbonamento OsmAnd Pro.</string>
     <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati da OsmAnd Cloud.</string>
     <string name="delete_account_warning">Eliminare l\'account %1$s?</string>
-    <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
+    <string name="backup_error_delete_account_email_match">L\'email non corrisponde al nome utente di accesso</string>
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
 \n
 \nInserisci l\'indirizzo email con cui ti sei registrato. Verrà inviata una password monouso per il passaggio successivo.</string>
@@ -5661,7 +5659,7 @@
     <string name="calculating_indication_message">Sto calcolando…</string>
     <string name="calculate_size">Calcola la dimensione</string>
     <string name="default_buttons_corners_original_description">Ogni pulsante manterrebbe il proprio raggio d\'angolo.</string>
-    <string name="default_buttons_opacity_original_description">Ogni pulsante manterrebbe la propria opacità di sfondo.</string>
+    <string name="default_buttons_opacity_original_description">Ogni pulsante mantiene la propria opacità di sfondo.</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostra i percorsi per l\'arrampicata</string>
     <string name="rendering_attr_showClimbingRoutes_name">Percorsi arrampicata</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra il tempo e la distanza per la prossima fermata. Disattiva per mostrare sempre i dettagli per la destinazione.</string>
@@ -5686,7 +5684,7 @@
     <string name="ais_cpa_settings">Impostazioni relative al PAV</string>
     <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
     <string name="ais_address_settings">Impostazioni dell\'indirizzo IP</string>
-    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e definisci gli indirizzi</string>
+    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e specifica gli indirizzi e le porte corrispondenti</string>
     <string name="ais_ship_lost_timeout">Timeout per la visibilità della nave quando non viene ricevuto alcun segnale</string>
     <string name="ais_port_nmea_local">Porta UDP locale del ricevitore dati NMEA</string>
     <string name="ais_object_lost_timeouts_description">Imposta valori di timeout per identificare oggetti AIS persi se non viene ricevuto alcun segnale per un periodo di tempo specifico.</string>
@@ -5728,7 +5726,7 @@
     <string name="choose_location">Scegli un luogo</string>
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
-    <string name="show_image_previews">Mostra l\' immagine precedente</string>
+    <string name="show_image_previews">Mostra l\'immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Attiva la griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
     <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
@@ -5769,7 +5767,6 @@
     <string name="save_to_device">Salva nel dispositivo</string>
     <string name="travel_guides">Guide</string>
     <string name="save_to_device_error">Errore di salvataggio sul dispositivo</string>
-    <string name="show_symbols_debug_info">Mostra info dei simboli di debug</string>
     <string name="show_debug_tile_description">Mostra le informazioni sui simboli della mappa di ogni riquadro</string>
     <string name="show_debug_tile">Mostra informazioni riquadro</string>
     <string name="deactivated_map">Mappa disattivata</string>
@@ -5821,4 +5818,14 @@
     <string name="threads_allocated_for_rendering_desc">Diminuire l\'allocazione dei thread può accelerare il rendering della mappa in alcuni casi.</string>
     <string name="turn_by_turn_directions">Indicazioni di svolta</string>
     <string name="enable_msaa">Abilita MSAA</string>
+    <string name="average_elevation">Elevazione media</string>
+    <string name="descent">Discesa</string>
+    <string name="private_access_routing_req_short">La destinazione è in un\'area privata. Abilitare l\'uso di strade private?</string>
+    <string name="view_on_phone">Vedi sul telefono</string>
+    <string name="ascent">Salita</string>
+    <string name="map_orientations_choose_description">Lasciare vuoto per passare tra le modalità disponibili, o aggiungere solo quelle preferite.</string>
+    <string name="map_orientations">Orientamento mappa</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Risposta</string>
 </resources>

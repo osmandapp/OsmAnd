@@ -18,10 +18,10 @@
     <string name="map_online_data_descr">მიმდინარე რუკების გამოყენება (ჩამოტვირთვა და მეხსიერების ბარათზე ქეშირება).</string>
     <string name="shared_string_online_maps">მიმდინარე რუკები</string>
     <string name="online_map_settings_descr">მიმდინარე და დაქეშირებული ნაწილოვანი რუკების წყაროების გამართვა.</string>
-    <string name="osmand_rastermaps_plugin_description"/>
+    <string name="osmand_rastermaps_plugin_description"></string>
     <string name="osmand_background_plugin_description">დამატება გაძლევთ საშუალებს დევნის ან ნავიგაციის მოწყობილობის ძილის დროს პერიოდულად GPS ჩიპის გააქტიურების საშუალებით.</string>
-    <string name="osmand_accessibility_description"/>
-    <string name="osmand_development_plugin_description"/>
+    <string name="osmand_accessibility_description"></string>
+    <string name="osmand_development_plugin_description"></string>
     <string name="plugins_screen">დამატებათა გამმართველი</string>
     <string name="prefs_plugins_descr">დამატება გაძლევთ საშუალებას გამოიყენოთ აპლიკაციისათვის თანმოყოლილი ფუნქციები როგორიცაა ნაწილოვანი რუკები, თვალის დევნება, ძილის დროის ოპერაციები და სხვა.</string>
     <string name="prefs_plugins">დამატების მმართველი</string>
@@ -702,7 +702,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">პარკინგის ადგილი</string>
-    <string name="osmand_parking_plugin_description"/>
+    <string name="osmand_parking_plugin_description"></string>
     <string name="osmand_parking_plugin_name">პარკინგის მდებარეობა</string>
     <string name="context_menu_item_add_parking_point">დამატება პარკინგის მდებარეობად</string>
     <string name="context_menu_item_delete_parking_point">პარკინგის მაჩვენებლის წაშლა</string>
@@ -1232,7 +1232,7 @@
     <string name="file_size_needed_for_import">საჭიროა იმპორტისთვის</string>
     <string name="select_items_for_import">აირჩიეთ საიმპორტო პუნქტები.</string>
     <string name="add_to_mapillary">Mapillary-ში დამატება</string>
-    <string name="shared_string_save_as_gpx"/>
+    <string name="shared_string_save_as_gpx"></string>
     <string name="layer_gpx_layer">თვალთვალი</string>
     <string name="map_widget_monitoring">გზის ჩაწერა</string>
     <string name="edit_group">ჯგუფის ჩასწორება</string>
@@ -2870,7 +2870,7 @@
     <string name="shared_string_move_up">გადაადგილება ↑</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">სალაშქრო გზები</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელი</string>
-    <string name="save_track_to_gpx_descrp"/>
+    <string name="save_track_to_gpx_descrp"></string>
     <string name="av_def_action_choose">მოთხოვნისას</string>
     <string name="contact_us">დაგვიკავშირდით</string>
     <string name="rendering_attr_horse_scale_impossible_name">შეუძლებელი</string>

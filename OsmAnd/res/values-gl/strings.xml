@@ -212,7 +212,7 @@
     <string name="routing_attr_avoid_ferries_description">Evitar ferris</string>
     <string name="routing_attr_avoid_motorway_name">Sen autoestradas</string>
     <string name="routing_attr_avoid_motorway_description">Evitar autoestradas</string>
-    <string name="routing_attr_weight_name">Peso máximo</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica o peso do vehículo permitido nos itinerarios.</string>
     <string name="android_19_location_disabled">Dende o Android 4.4 (KitKat), o cartafol de almacenamento antiga (%s) atópase en desuso. Copiar todos os ficheiros do OsmAnd á nova localización de almacenamento\? 
 \n Nota 1: Os ficheiros antigos permanecerán intactos (pero poden ser eliminados de xeiti manual). 
@@ -360,7 +360,7 @@
     <string name="prefer_in_routing_descr">Preferir empregar autoestradas.</string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_maps">Sombreado</string>
+    <string name="download_hillshade_maps">Sombra de relevo</string>
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos de son/vídeo</string>
     <string name="stop_routing_confirm">Tes a certeza de querer finalizar a navegación?</string>
@@ -412,7 +412,7 @@
     <string name="map_widget_audionotes">Notas de son</string>
     <string name="audionotes_plugin_description">Fai notas de audio, fotografías e/ou vídeos durante unha viaxe, empregando un botón no mapa ou o menú contextual da localización.</string>
     <string name="audionotes_plugin_name">Notas de son/vídeo</string>
-    <string name="srtm_plugin_name">Curvas de nivel</string>
+    <string name="srtm_plugin_name">Topografía</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Só as estradas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
@@ -505,24 +505,7 @@
 \n O OsmAnd está a ser desenvolvido activamente e o noso proxecto e o seu progreso futuro depende da contribución financeira para financia-lo desenvolvemento e as probas das funcionalidades novas. Coida a posibilidade de mercar o OsmAnd+ ou de financiar funcións novas específicas ou de facer unha doazón xeral no osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">Mapas e navegación de OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visualización e navegación móbil de mapas globais para mapas de OSM con e sen conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">O OsmAnd+ (Indicacións da navegación automatizadas do OSM) é un aplicativo de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono para empregalos sen conexión. O OsmAnd tamén fornece funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso.
-\n
-\nO OsmAnd+ é a versión de pagamento, mais ó mercala estás a apoiar o proxecto, financiar o desenvolvemento de funcións novas e tes a oportunidade de recibir as últimas actualizacións.
-\n
-\nAlgunhas das funcións principais son:
-\n-Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolleu)
-\n-Mapas vectoriais compactos sen conexión para todo o mundo.
-\n-Pódense baixar mapas de países ou rexións de xeito directo dende a aplicación.
-\n-É posíbel sobrepór varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paradas de transporte público ou mapas adicionais con transparencia regulábel.
-\n
-\n- Procura sen conexión de enderezos e lugares (PDI).
-\n-Cálculo de rotas sen conexión para distancias curtas (distancias medias)
-\n- Modos para automóbil, bicicleta e peóns, con:
-\n-Vistas de noite e día automatizadas opcionais.
-\n-Achegamento opcional do mapa dependendo da velocidade
-\n-Aliñamento opcional do mapa dependendo do compás ou da dirección do movemento.
-\n-Guía opcional de faixas ou carrís da estrada, límites de velocidade, voces gravadas e TTS
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">O OsmAnd+ (Indicacións da navegación automatizadas do OSM) é un aplicativo de navegación de código aberto con acceso a unha ampla variedade de datos globais do OSM. Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono para empregalos sen conexión. O OsmAnd tamén fornece funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso. \n \nO OsmAnd+ é a versión de pagamento, mais ó mercala estás a apoiar o proxecto, financiar o desenvolvemento de funcións novas e tes a oportunidade de recibir as últimas actualizacións. \n \nAlgunhas das funcións principais son: \n-Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolleu) \n-Mapas vectoriais compactos sen conexión para todo o mundo. \n-Pódense baixar mapas de países ou rexións de xeito directo dende a aplicación. \n-É posíbel sobrepór varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paradas de transporte público ou mapas adicionais con transparencia regulábel. \n \n- Procura sen conexión de enderezos e lugares (PDI). \n-Cálculo de rotas sen conexión para distancias curtas (distancias medias) \n- Modos para automóbil, bicicleta e peóns, con: \n-Vistas de noite e día automatizadas opcionais. \n-Achegamento opcional do mapa dependendo da velocidade \n-Aliñamento opcional do mapa dependendo do compás ou da dirección do movemento. \n-Guía opcional de faixas ou carrís da estrada, límites de velocidade, voces gravadas e TTS</string>
     <string name="filterpoi_activity">Crear un filtro de PDI</string>
     <string name="recalculate_route_to_your_location">Modode transporte:</string>
     <string name="select_navigation_mode">Modo de transporte:</string>
@@ -1192,7 +1175,7 @@
     <string name="osm_editing_plugin_name">Edición do OpenStreetMap</string>
     <string name="additional_settings">Opcións adicionais</string>
     <string name="shared_string_settings">Axustes</string>
-    <string name="update_tile">Actualizar o mapa</string>
+    <string name="update_tile">Actualizar</string>
     <string name="reload_tile">Recargar a tesela</string>
     <string name="mark_point">Destino</string>
     <string name="shared_string_add_to_favorites">Engadir ós \"Favoritos\"</string>
@@ -1519,7 +1502,7 @@
     <string name="proxy_port_title">Porto do proxy</string>
     <string name="proxy_port_descr">Especifica o número de porto do teu proxy (p.ex. 8118).</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar fronteiras nacionais</string>
-    <string name="routing_attr_height_name">Límite da altitude</string>
+    <string name="routing_attr_height_name">Altitude</string>
     <string name="routing_attr_height_description">Especifique a altitude dos vehículos permitida nas rotas.</string>
     <string name="route_descr_destination">Destino</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
@@ -1971,7 +1954,7 @@
     <string name="rendering_attr_contourWidth_description">Amplitude das curvas do nivel</string>
     <string name="rendering_attr_contourWidth_name">Amplitude da curva do nivel</string>
     <string name="rendering_attr_hideWaterPolygons_description">Auga</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Agochar a auga</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Auga</string>
     <string name="access_map_linked_to_location">O mapa está ligado á localización</string>
     <string name="access_sort">Ordenar</string>
     <string name="storage_directory_readonly_desc">Mudouse cara a memoria interna, porque o cartafol de almacenamento dos datos escollida está protexida contra a escritura. Escolle un cartafol de almacenamento válido.</string>
@@ -2539,7 +2522,7 @@
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     <string name="rendering_value_black_name">Negro</string>
     <string name="lang_lo">Laosiano</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Cor por símbolo do sendeirismo OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="plugin_ski_descr">Este plugin para o OsmAnd pon ó teu acade detalles sobre pistas do esquí de baixada, de travesía, roteiros do esquí alpino, teleféricos e refachos a nivel mundial. As rotas e pistas amósanse polo código de cor en función da súa dificuldade e representados cun estilo do mapa especial \"Inverno\" que o asemella a unha paisaxe invernal nevada.
 \n 
 \nActivando esta vista, muda o estilo do mapa a «Inverno e esquí», amosando as características do terreo en condicións invernais. Esta vista pódese revertir desactivando de novo eiquí ou mudando o \"Estilo do mapa\" en \"Configurar mapa\" cando o desexes.</string>
@@ -2618,48 +2601,16 @@
     <string name="wiki_article_not_found">Artigo non atopado</string>
     <string name="how_to_open_wiki_title">De que xeito abrir artigos da Wikipedia\?</string>
     <string name="test_voice_desrc">Preme un botón e escoita o seu correspondente aviso por voz para saber se falla algo ou está defectuoso</string>
-    <string name="osmand_extended_description_part2">Navegación GPS
-\n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
-\n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 
-\n • A rota recalcúlase ó saírse da mesma 
-\n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota 
-\n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático 
-\n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo 
-\n • O achegamento do mapa axústase á velocidade 
-\n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas 
-\n • Suporta puntos intermedios no itinerario 
-\n • Grave a súa viaxe ou soba unha pista GPX e séguea
-\n</string>
-    <string name="osmand_extended_description_part3">Navegación GPS 
-\n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
-\n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 
-\n • A rota recalcúlase ó saírse da mesma 
-\n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota 
-\n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático 
-\n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo 
-\n • O achegamento do mapa axústase á velocidade 
-\n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas 
-\n • Suporta puntos intermedios no itinerario 
-\n • Grave a súa viaxe ou soba unha pista GPX e séguea
-\n</string>
+    <string name="osmand_extended_description_part2">Navegación GPS \n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) \n • A rota recalcúlase ó saírse da mesma \n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota \n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático \n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo \n • O achegamento do mapa axústase á velocidade \n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas \n • Suporta puntos intermedios no itinerario \n • Grave a súa viaxe ou soba unha pista GPX e séguea</string>
+    <string name="osmand_extended_description_part3">Navegación GPS \n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) \n • A rota recalcúlase ó saírse da mesma \n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota \n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático \n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo \n • O achegamento do mapa axústase á velocidade \n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas \n • Suporta puntos intermedios no itinerario \n • Grave a súa viaxe ou soba unha pista GPX e séguea</string>
     <string name="osmand_extended_description_part5">Ciclismo 
 \n• Atopa roteiros ciclistas no mapa 
 \n• A navegación GPS no modo bicicleta, constrúe a ruta empregando roteiros ciclistas 
 \n• Olla a velocidade e altitude 
 \n• A opción da gravación GPX, permite gravar o viaxe e partillalo ou compartilo 
 \n• Mediante un plugin adicional, podes activar as curvas de nivel e o asombreado dos outeiros ou colinas</string>
-    <string name="osmand_extended_description_part6">Camiñar, sendeirismo, turismo de cidade
-\n • O mapa amosa as rotas para camiñar e de sendeirismo
-\n • Wikipedia na lingua de preferencia, pode dicir moito durante unha visita turística
-\n • As paradas do transporte público (autobús, tranvía, tren), incluíndo os nomes de liña, axuda a navigar nunha nova cidade
-\n • Navegación GPS no modo peón, constrúe a rota empregando rotas de sendeirismo
-\n • Soba e sigua unha rota GPX ou grave e partille ou comparta as súas propias rotas
-\n</string>
-    <string name="osmand_extended_description_part7">Contribúe co OSM
-\n • Informa sobre problemas dos datos no mapa
-\n • Sobe trazas GPX ó OSM de xeito directo dende a aplicación
-\n • Engade PDI e súbeos de xeito directo ó OSM (ou máis tarde, se non estás conectado)
-\n</string>
+    <string name="osmand_extended_description_part6">Camiñar, sendeirismo, turismo de cidade \n • O mapa amosa as rotas para camiñar e de sendeirismo \n • Wikipedia na lingua de preferencia, pode dicir moito durante unha visita turística \n • As paradas do transporte público (autobús, tranvía, tren), incluíndo os nomes de liña, axuda a navigar nunha nova cidade \n • Navegación GPS no modo peón, constrúe a rota empregando rotas de sendeirismo \n • Soba e sigua unha rota GPX ou grave e partille ou comparta as súas propias rotas</string>
+    <string name="osmand_extended_description_part7">Contribúe co OSM \n • Informa sobre problemas dos datos no mapa \n • Sobe trazas GPX ó OSM de xeito directo dende a aplicación \n • Engade PDI e súbeos de xeito directo ó OSM (ou máis tarde, se non estás conectado)</string>
     <string name="osmand_plus_extended_description_part1">O OsmAnd+ (OSM Automated Navigation Directions, e no galego, Guía de Navegación Automatizada do OSM) é unha aplicación de mapa e navegación con acceso ós datos ceibes ou libres do OSM, en todo o mundo e de alta calidade. 
 \n Desfruta do navigador por voz e óptico, a visualización dos PDI (puntos de interese), a creación e xestión das pistas GPX, emprega a información da visualización e a altitude das curvas do nivel (mediante un engadido), escolle entre modos de automóbil, bicicleta ou peón, edita no OSM e moito máis. 
 \n 
@@ -2674,14 +2625,7 @@
 \n • A rota recalcúlase ó saírse da mesma 
 \n • Procura destinos por enderezo, por tipo (por exemplo: Restaurantes, hoteis, gasolineiras, museos), ou por coordenada xeográfica
 \n</string>
-    <string name="osmand_plus_extended_description_part3">Vista do mapa 
-\n • Amosa a túa posición e orientación 
-\n • (Opcional) Axusta o mapa á dirección do movemento (ou o compás) 
-\n • Garda sitios importantes nos \"Favoritos\" 
-\n • Amosa os PDI (puntos de interese) ó seu arredor 
-\n • Amosa teselas en liña especiais, ollada satelital (do Bing), diferentes sobreposicións coma pistas da travesía/navegación GPX e capas adicionais con transparencia personalizábel 
-\n • Permite escoller de que xeito amosar os nomes no mapa: en inglés, local, ou ortografía fonética
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Vista do mapa \n • Amosa a túa posición e orientación \n • (Opcional) Axusta o mapa á dirección do movemento (ou o compás) \n • Garda sitios importantes nos \"Favoritos\" \n • Amosa os PDI (puntos de interese) ó seu arredor \n • Amosa teselas en liña especiais, ollada satelital (do Bing), diferentes sobreposicións coma pistas da travesía/navegación GPX e capas adicionais con transparencia personalizábel \n • Permite escoller de que xeito amosar os nomes no mapa: en inglés, local, ou ortografía fonética</string>
     <string name="osmand_plus_extended_description_part4">Emprego dos datos do OSM e da Wikipedia
 \n • Información de alta calidade do mellor proxecto colaborativo do mundo
 \n • Datos do OSM dispoñíbeis por país ou rexión
@@ -2690,12 +2634,7 @@
 \n • Mapas vectoriais reducidos sen conexión, actualizados polo menos unha vez cada mes
 \n
 \n • Escolle entre datos completos da rexión ou só a rede de estradas (Exemplo: Todo o Xapón ten 700 MB ou só 200 MB para a rede de estradas)</string>
-    <string name="osmand_plus_extended_description_part5">Funcións de seguranza 
-\n • (Opcional) O modo día/noite trócase de xeito automático 
-\n • (Opcional) Visualización do límite de velocidade, con aviso ó excederche 
-\n • (Opcional) Achegamento do mapa segundo a velocidade 
-\n • Compartilla a túa localización para que as túas amizades poidan atoparche
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Funcións de seguranza \n • (Opcional) O modo día/noite trócase de xeito automático \n • (Opcional) Visualización do límite de velocidade, con aviso ó excederche \n • (Opcional) Achegamento do mapa segundo a velocidade \n • Compartilla a túa localización para que as túas amizades poidan atoparche</string>
     <string name="osmand_plus_extended_description_part6">Funcións do ciclismo e peón 
 \n • Visualización dos camiños para camiñar, sendeirismo e ciclismo, ideal para actividades ó ar libre 
 \n • Navegación especial e modos da visualización para bicicletas e peóns 
@@ -2703,27 +2642,8 @@
 \n • (Opcional) Grava a viaxe de xeito local nun ficheiro GPX ou con un servizo en liña 
 \n • (Opcional) Amosa a velocidade e altitude 
 \n • Activa a visualización das curvas do nivel e o asombreado dos outeiros ou colinas (mediante un plugin adicional)</string>
-    <string name="osmand_plus_extended_description_part7">Contribuír directamente a OSM
-\n • Informar de erros
-\n • Carga pistas GPX a OSM directamente desde a aplicación
-\n • Engade POIs e cárgaos directamente a OSM (ou máis tarde se está fóra de liña)
-\n • Gravación da viaxe opcional tamén de fondo (mentres o dispositivo está en modo de suspensión)
-\n OsmAnd é un software de código aberto desenvolvido activamente. Todo o mundo pode contribuír á aplicación informando de erros, mellorando as traducións ou codificando novas funcións. Ademais, o proxecto depende das contribucións financeiras para financiar a codificación e a proba de novas funcions.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Cobertura e calidade aproximada do mapa:
-\n • Europa Occidental: ****
-\n • Europa Oriental: ***
-\n • Rusia: ***
-\n • Norteamérica: ***
-\n • Suramérica: **
-\n • Asia: **
-\n • Xapón e Corea: ***
-\n • Medio Oriente: **
-\n • África: **
-\n • Antártida: *
-\n Máis países darredor do globo están dispoñíbeis para baixar!
-\nDende Afganistán a Zimbabue, dende Australia ós Estados Unidos. A Arxentina, Brasil, Canadá, Francia, Alemaña, México, Reino Unido, España, …
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Contribuír directamente a OSM \n • Informar de erros \n • Carga pistas GPX a OSM directamente desde a aplicación \n • Engade POIs e cárgaos directamente a OSM (ou máis tarde se está fóra de liña) \n • Gravación da viaxe opcional tamén de fondo (mentres o dispositivo está en modo de suspensión) \n OsmAnd é un software de código aberto desenvolvido activamente. Todo o mundo pode contribuír á aplicación informando de erros, mellorando as traducións ou codificando novas funcións. Ademais, o proxecto depende das contribucións financeiras para financiar a codificación e a proba de novas funcions.</string>
+    <string name="osmand_plus_extended_description_part8">Cobertura e calidade aproximada do mapa: \n • Europa Occidental: **** \n • Europa Oriental: *** \n • Rusia: *** \n • Norteamérica: *** \n • Suramérica: ** \n • Asia: ** \n • Xapón e Corea: *** \n • Medio Oriente: ** \n • África: ** \n • Antártida: * \n Máis países darredor do globo están dispoñíbeis para baixar! \nDende Afganistán a Zimbabue, dende Australia ós Estados Unidos. A Arxentina, Brasil, Canadá, Francia, Alemaña, México, Reino Unido, España, …</string>
     <string name="osm_live_plan_pricing">Plans e prezos</string>
     <string name="osm_live_payment_monthly_title">Mensual</string>
     <string name="osm_live_payment_3_months_title">Trimestral</string>
@@ -2982,27 +2902,7 @@
     <string name="routing_attr_freeride_policy_name">Fóra de pista</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' e \'Fóra de pista\' son rutas e pasaxes non oficiais. Normalmente con moitas fochancas, sen mantemento e non revisadas. Entra polo teu propio risco.</string>
     <string name="app_mode_ufo">OVNI</string>
-    <string name="release_3_4">• Perfís de aplicación: Crea o teu propio perfil para as túas necesidades, cunha icona e unha cor personalizadas 
-\n 
-\n • Engade a opción para estabelecer a velocidade predeterminada e mínima/máxima para os diferentes perfís 
-\n 
-\n • Engade un trebello para amosar as coordenadas actuais 
-\n 
-\n • Engade a opción de amosar o compás no mapa cunha regra de raio 
-\n
-\n • Arreglado o rexistro de pistas en segundo plano
-\n 
-\n • Melloradas as descargas de mapas en segundo plano 
-\n 
-\n• Volta a opción de \'Activar pantalla\' 
-\n 
-\n • Corrixida a opción de escolla de lingua da Wikipedia 
-\n 
-\n • Corrixiuse o comportamento do botón do compás durante a navegación 
-\n 
-\n • Arranxo doutros erros menores
-\n
-\n</string>
+    <string name="release_3_4">• Perfís de aplicación: Crea o teu propio perfil para as túas necesidades, cunha icona e unha cor personalizadas \n \n • Engade a opción para estabelecer a velocidade predeterminada e mínima/máxima para os diferentes perfís \n \n • Engade un trebello para amosar as coordenadas actuais \n \n • Engade a opción de amosar o compás no mapa cunha regra de raio \n \n • Arreglado o rexistro de pistas en segundo plano \n \n • Melloradas as descargas de mapas en segundo plano \n \n• Volta a opción de \'Activar pantalla\' \n \n • Corrixida a opción de escolla de lingua da Wikipedia \n \n • Corrixiuse o comportamento do botón do compás durante a navegación \n \n • Arranxo doutros erros menores</string>
     <string name="app_mode_personal_transporter">Transporte persoal</string>
     <string name="app_mode_monowheel">Monowheel (monociclo)</string>
     <string name="app_mode_scooter">Escúter (motocicleta)</string>
@@ -3178,23 +3078,7 @@
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas sen pavimentar.</string>
     <string name="update_all_maps">Actualizar todos os mapas</string>
     <string name="update_all_maps_q">Actualizar todos os mapas (%1$d)\?</string>
-    <string name="release_3_5">• Axustes da aplicación e do perfil actualizados. Cómoda distribución dos axustes por tipo e posibilidade de personalizar cada perfil 
-\n 
-\n • Novo cadro de diálogo de descarga de mapas que suxire un mapa para baixar mentras se procura un 
-\n 
-\n • Arranxos no tema escuro 
-\n 
-\n • Corrixíronse algúns problemas de enrutamento en todo o mundo 
-\n 
-\n • Actualizouse o mapa de base con máis detalles na rede de estradas 
-\n 
-\n • Corrixíronse as zonas inundadas en todo o mundo 
-\n 
-\n • Enrutamento de esquí: perfil de altura e complexidade da ruta engadidos ós detalles da ruta 
-\n 
-\n • Outras correccións de erros
-\n
-\n</string>
+    <string name="release_3_5">• Axustes da aplicación e do perfil actualizados. Cómoda distribución dos axustes por tipo e posibilidade de personalizar cada perfil \n \n • Novo cadro de diálogo de descarga de mapas que suxire un mapa para baixar mentras se procura un \n \n • Arranxos no tema escuro \n \n • Corrixíronse algúns problemas de enrutamento en todo o mundo \n \n • Actualizouse o mapa de base con máis detalles na rede de estradas \n \n • Corrixíronse as zonas inundadas en todo o mundo \n \n • Enrutamento de esquí: perfil de altura e complexidade da ruta engadidos ós detalles da ruta \n \n • Outras correccións de erros</string>
     <string name="apply_preference_to_all_profiles">Podes aplicar esta modificación a todos ou só ós perfís seleccionados.</string>
     <string name="shared_preference">Compartido</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas sen pavimentar</string>
@@ -3328,31 +3212,7 @@
 \n
 \nSe está activado, o OsmAnd empregará a configuración de tempo de espera do sistema.</string>
     <string name="clear_recorded_data">Limpar datos gravados</string>
-    <string name="release_3_6">• Perfís: agora podes mudar a orde, definir a icona para o mapa, mudar todos os axustes para os perfís base e restabelecelos de novo ó valores por defecto 
-\n 
-\n • Engadíronse os números de saída na navegación 
-\n 
-\n • Redeseñáronse os axustes dos plugins 
-\n 
-\n • Redeseñouse a lapela de axustes, para un acceso rápido a todos os perfís 
-\n 
-\n • Engadiuse a opción de copiar os axustes doutro perfil 
-\n 
-\n • Engadiuse a posibilidade de mudar a orde ou agochar as categorías de PDI na procura 
-\n 
-\n • Aliñáronse de xeito correcto no mapa as iconas de PDI 
-\n 
-\n • Engadíronse datos do amencer e solpor en \"Configurar o mapa\" 
-\n 
-\n • Engadíronse iconas de \"Casa\" e \"Traballo\" no mapa 
-\n 
-\n • Engadiuse soporte para as múltiples liñas de descrición nos Axustes 
-\n 
-\n • Engadiuse a correcta transliteración no mapa do Xapón 
-\n 
-\n • Engadiuse o mapa da Antártida
-\n
-\n</string>
+    <string name="release_3_6">• Perfís: agora podes mudar a orde, definir a icona para o mapa, mudar todos os axustes para os perfís base e restabelecelos de novo ó valores por defecto \n \n • Engadíronse os números de saída na navegación \n \n • Redeseñáronse os axustes dos plugins \n \n • Redeseñouse a lapela de axustes, para un acceso rápido a todos os perfís \n \n • Engadiuse a opción de copiar os axustes doutro perfil \n \n • Engadiuse a posibilidade de mudar a orde ou agochar as categorías de PDI na procura \n \n • Aliñáronse de xeito correcto no mapa as iconas de PDI \n \n • Engadíronse datos do amencer e solpor en \"Configurar o mapa\" \n \n • Engadíronse iconas de \"Casa\" e \"Traballo\" no mapa \n \n • Engadiuse soporte para as múltiples liñas de descrición nos Axustes \n \n • Engadiuse a correcta transliteración no mapa do Xapón \n \n • Engadiuse o mapa da Antártida</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="routing_profile_direct_to">Directo ó punto</string>
     <string name="sort_by_category">Ordenar por categoría</string>
@@ -3665,21 +3525,7 @@
     <string name="shared_string_is_saved">está gardado</string>
     <string name="one_point_error">Engade polo menos dous puntos.</string>
     <string name="shared_string_redo">Refacer</string>
-    <string name="release_3_8">• Actualizouse a función \"Planificar ruta\": permite empregar diferentes tipos de navegación por segmento e o engadido de pistas
-\n
-\n • Novo menú coa aparencia das pistas: escoller a cor, o grosor, amosar as frechas de dirección e as iconas de inicio e final.
-\n
-\n • Melloras na visibilidade dos nós de bicicleta.
-\n
-\n • As pistas agora pódense premer, contén un menú con información básica.
-\n
-\n • Algoritmos de procura mellorados
-\n
-\n • Melloras nas opcións de seguimento da navegación
-\n
-\n • Solucionáronse os problemas da importación e exportación nos axustes dos perfís
-\n
-\n</string>
+    <string name="release_3_8">• Actualizouse a función \"Planificar ruta\": permite empregar diferentes tipos de navegación por segmento e o engadido de pistas \n \n • Novo menú coa aparencia das pistas: escoller a cor, o grosor, amosar as frechas de dirección e as iconas de inicio e final. \n \n • Melloras na visibilidade dos nós de bicicleta. \n \n • As pistas agora pódense premer, contén un menú con información básica. \n \n • Algoritmos de procura mellorados \n \n • Melloras nas opcións de seguimento da navegación \n \n • Solucionáronse os problemas da importación e exportación nos axustes dos perfís</string>
     <string name="save_track_to_gpx">Gravar a pista de xeito automático ó navegar</string>
     <string name="plan_route_last_edited">Última edición</string>
     <string name="plan_route_import_track">Importar pista</string>
@@ -3831,15 +3677,7 @@
     <string name="plan_route_add_new_segment">Engadir novo segmento</string>
     <string name="profile_type_osmand_string">Perfil do OsmAnd</string>
     <string name="profile_type_user_string">Perfil do usuario</string>
-    <string name="release_3_9">• Engadiuse a opción de exportar e importar todos os datos, incluíndo os axustes, os recursos e \"Os meus sitios\"
-\n
-\n • Planificar ruta: engadíronse gráficos para os segmentos de pistas coa ruta e capacidade de crear ou editar pistas de segmentos múltiples
-\n
-\n • Engadiuse o método de autenticación OAuth para o OpenStreetMap e mellorouse a interface de usuario dos diálogos do OSM
-\n
-\n • Engadíronse cores personalizadas para os favoritos e os puntos de referencia da pista
-\n
-\n</string>
+    <string name="release_3_9">• Engadiuse a opción de exportar e importar todos os datos, incluíndo os axustes, os recursos e \"Os meus sitios\" \n \n • Planificar ruta: engadíronse gráficos para os segmentos de pistas coa ruta e capacidade de crear ou editar pistas de segmentos múltiples \n \n • Engadiuse o método de autenticación OAuth para o OpenStreetMap e mellorouse a interface de usuario dos diálogos do OSM \n \n • Engadíronse cores personalizadas para os favoritos e os puntos de referencia da pista</string>
     <string name="reverse_all_points">Inverter todos os puntos</string>
     <string name="profile_by_default_description">Escolle o perfil que será empregado ao iniciar a aplicación.</string>
     <string name="shared_string_last_used">Usado por última vez</string>
@@ -3964,19 +3802,7 @@
     <string name="temporary_conditional_routing_descr">Empregar as restricións de estrada que están activas agora no mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada máis curta (baixo consumo)</string>
     <string name="routing_attr_driving_style_description">Escolle o propósito da condución para obter unha ruta máis curta, máis rápida ou máis segura</string>
-    <string name="release_4_0_beta">• Engadiuse a opción para baixar as curvas de nivel en pés.
-\n
-\n• Paisaxe do plan de ruta: engadíronse lapelas para alternar entre puntos ou gráficos
-\n
-\n• As actualizacións do OsmAnd Live movéronse a \"Descargas &gt; Actualizacións\".
-\n
-\n• As pistas agora poden corarse por altitude, velocidade ou pendente.
-\n
-\n• Engadiuse a opción da aparencia da liña de ruta.
-\n
-\n• Actualizouse o cadro de diálogo \"Gravación de viaxe\"
-\n
-\n</string>
+    <string name="release_4_0_beta">• Engadiuse a opción para baixar as curvas de nivel en pés. \n \n• Paisaxe do plan de ruta: engadíronse lapelas para alternar entre puntos ou gráficos \n \n• As actualizacións do OsmAnd Live movéronse a \"Descargas &gt; Actualizacións\". \n \n• As pistas agora poden corarse por altitude, velocidade ou pendente. \n \n• Engadiuse a opción da aparencia da liña de ruta. \n \n• Actualizouse o cadro de diálogo \"Gravación de viaxe\"</string>
     <string name="trip_recording_logging_interval_info">O intre de rexistro estabelece o período de tempo no que o OsmAnd pedirá os datos da posición actual.</string>
     <string name="trip_recording_save_and_continue">Gardar e continuar</string>
     <string name="lost_data_warning">Todos os datos non gardados serán perdidos.</string>
@@ -4167,4 +3993,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Botón para amosar ou agochar as edicións locais de OSM no mapa.</string>
     <string name="liter_per_hour">l/h</string>
     <string name="release_4_9">• Engadiuse un visor de galerías a pantalla completa para imaxes de Wikimedia\n\n• Introduciuse un novo complemento «Métricas do vehículo» para supervisar o rendemento do vehículo mediante o protocolo OBD-II\n\n• Engadiuse a posibilidade de asignar actividades ás pistas e filtralas en consecuencia\n\n• Implementáronse novas accións rápidas para a gravación de viaxes e o bloqueo da pantalla táctil\n\n• Introduciuse o aspecto do botón do mapa personalizábel e unha cuadrícula precisa\n\n• Engadiuse un menú contextual e unha acción «Restabelecer a velocidade media» aos trebellos\n\n• Engadiuse unha nova capa de ruta «Vieiros moto/bici de terra»\n\n• Corrixiuse a función «Gravación automática da pista durante a navegación»\n\n•• Solucionouse o problema coas coordenadas invertidas en RTL\n\n• Corrixíronse os datos do sensor perdidos para a pista de gravación actualmente\n\n• Engadiuse información sobre as áreas circundantes para o punto seleccionado\n\n• Engadiuse unha acción rápida para controlar a visibilidade das edicións de OSM\n\n• Parámetros de visibilidade separados para as opcións de coloración do terreo\n\n• Engadiuse unha icona na que se pode tocar para amosar o acceso ou outros atributos da estrada ou camiño</string>
+    <string name="location_source">Fonte da localización</string>
+    <string name="quick_action_map_overlay">Capa superposta</string>
+    <string name="quick_action_map_underlay">Capa subxacente</string>
 </resources>

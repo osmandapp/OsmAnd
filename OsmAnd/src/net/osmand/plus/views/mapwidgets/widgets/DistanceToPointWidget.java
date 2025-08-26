@@ -37,7 +37,6 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 
 		setIcons(widgetType);
 		setText(null, null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

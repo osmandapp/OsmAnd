@@ -433,11 +433,6 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public void clearPoints(GpxFile gpxFile) {
-		gpxFile.clearPoints();
-		syncGpxWithMarkers(gpxFile);
-	}
-
 	public void addPoint(WptPt point, GpxFile gpxFile) {
 		gpxFile.addPoint(point);
 		syncGpxWithMarkers(gpxFile);
@@ -454,7 +449,7 @@ public class GpxSelectionHelper {
 		return res;
 	}
 
-	private void syncGpxWithMarkers(GpxFile gpxFile) {
+	public void syncGpxWithMarkers(GpxFile gpxFile) {
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group != null) {

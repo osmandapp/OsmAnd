@@ -55,7 +55,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 		authHelper = app.getOsmOAuthHelper();
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 
-		FragmentActivity activity = requireMyActivity();
+		FragmentActivity activity = requireActionBarActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();

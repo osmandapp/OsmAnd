@@ -2622,7 +2622,7 @@
     <string name="poi_fire_operator">Operatore dei vigili del fuoco</string>
     <string name="poi_water_tank">Serbatoio d\'acqua</string>
     <string name="poi_xmas_location">Natale: posizione</string>
-    <string name="poi_public_bookcase">Libreria pubblica</string>
+    <string name="poi_public_bookcase">Casetta dei libri</string>
     <string name="poi_public_bookcase_type_phone_box">Tipo: cabina telefonica</string>
     <string name="poi_cuisine_ramen">Ramen</string>
     <string name="poi_cuisine_fried_food">Cibo fritto</string>
@@ -2756,8 +2756,8 @@
     <string name="poi_changing_table_location_female_toilet">Posizionamento del fasciatoio: bagno femminile</string>
     <string name="poi_changing_table_location_unisex_toilet">Posizionamento del fasciatoio: bagno unisex</string>
     <string name="poi_changing_table_count">Numero di fasciatoi</string>
-    <string name="poi_changing_table_fee_yes">Tarriffa per l\' uso del fasciatoio: si</string>
-    <string name="poi_changing_table_fee_no">Tariffa per l\' uso del fasciatoio: nessuna</string>
+    <string name="poi_changing_table_fee_yes">Tarriffa per l\'uso del fasciatoio: si</string>
+    <string name="poi_changing_table_fee_no">Tariffa per l\'uso del fasciatoio: nessuna</string>
     <string name="poi_historic_tank">Carro armato storico</string>
     <string name="poi_sms">SMS</string>
     <string name="poi_video_telephone">Video</string>

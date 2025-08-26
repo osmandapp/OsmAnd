@@ -150,8 +150,8 @@
     <string name="poi_lift_gate">Barrera levadiza</string>
     <string name="poi_toll_booth">Cabina de peaje</string>
     <string name="poi_border_control">Control fronterizo</string>
-    <string name="poi_traffic_calming_bump">Reductor de velocidad (lomada, pequeño);Lomo de burro;Banda de frenado;Rompemuelle;Policía acostado</string>
-    <string name="poi_traffic_calming_hump">Resalte (grande);Lomada (grande);Reductor de velocidad (lomada, grande)</string>
+    <string name="poi_traffic_calming_bump">Reductor de velocidad (lomada pequeña);Lomo de burro;Banda de frenado;Rompemuelle;Policía acostado</string>
+    <string name="poi_traffic_calming_hump">Reductor de velocidad (lomada grande);Resalte (grande);Lomada (grande)</string>
     <string name="poi_traffic_calming_cushion">Cojín berlinés</string>
     <string name="poi_traffic_calming_chicane">Chicana</string>
     <string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
@@ -1015,7 +1015,7 @@
     <string name="poi_denomination_tibetan">Tibetana</string>
     <string name="poi_denomination_church_of_scotland">Iglesia de Escocia</string>
     <string name="poi_denomination_salvation_army">Ejército de salvación</string>
-    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+    <string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
     <string name="poi_denomination_mennonite">Menonita</string>
     <string name="poi_denomination_bulgarian_orthodox">Ortodoxa búlgara</string>
     <string name="poi_denomination_assemblies_of_god">Asambleas de Dios</string>
@@ -3057,7 +3057,7 @@
     <string name="poi_zoo_type">Tipo de zoológico</string>
     <string name="poi_life_ring">Aro salvavidas</string>
     <string name="poi_zoo_petting_zoo">Zoológico interactivo</string>
-    <string name="poi_zoo_wildlife_park">Reserva natural</string>
+    <string name="poi_zoo_wildlife_park">Parque de vida silvestre</string>
     <string name="poi_zoo_enclosure">Recinto</string>
     <string name="poi_zoo_safari_park">Parque safari</string>
     <string name="poi_zoo_birds">Aves</string>
@@ -5019,7 +5019,7 @@
     <string name="poi_united_methodist_church">Iglesia metodista unida</string>
     <string name="poi_ukrainian_greek_catholic_church">Iglesia greco-católica ucraniana</string>
     <string name="poi_episcopal_church">Iglesia episcopal</string>
-    <string name="poi_iglesia_ni_cristo_church">Iglesia ni Cristo</string>
+    <string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo</string>
     <string name="poi_georgian_orthodox_church">Iglesia ortodoxa georgiana</string>
     <string name="poi_new_apostolic_church">Nueva iglesia apostólica</string>
     <string name="poi_ukrainian_orthodox_church">Iglesia ortodoxa ucraniana</string>
@@ -5033,7 +5033,6 @@
     <string name="poi_latter_day_saints_church">Iglesia de los santos del último día</string>
     <string name="poi_evangelical_lutheran_church">Iglesia evangélica luterana</string>
     <string name="poi_mennonite_church">Iglesia menonita</string>
-    <string name="poi_landmark_church">Iglesia emblemática</string>
     <string name="poi_adventist_church">Iglesia adventista</string>
     <string name="poi_uniting_church">Iglesia unida</string>
     <string name="poi_united_church_of_christ">Iglesia Unida de Cristo</string>

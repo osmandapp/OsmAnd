@@ -59,7 +59,6 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 		cachedNightMode = isNightMode();
 
 		setText(null, null);
-		setOnClickListener(getOnClickListener());
 		updateWidgetName();
 	}
 

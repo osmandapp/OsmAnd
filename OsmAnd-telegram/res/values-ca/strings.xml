@@ -214,7 +214,7 @@
     <string name="nm_h">nusos</string>
     <string name="mile_per_hour">mph</string>
     <string name="shared_string_second_short">seg</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> us permet compartir la vostra posició i veure la dels altres a OsmAnd.<br/> <br/>L\'aplicació utilitza l\'API de Telegram, per tant us cal un compte de Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> us permet compartir la vostra posició i veure la dels altres a OsmAnd.<br></br> <br></br>L\'aplicació utilitza l\'API de Telegram, per tant us cal un compte de Telegram.</string>
     <string name="direction">Adreça</string>
     <string name="precision">Precisió</string>
     <string name="altitude">Altitud</string>

@@ -2582,15 +2582,7 @@
     <string name="clear_confirmation_msg">Почистване на %1$s\?</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитане на селски пътища</string>
     <string name="route_start_point">Отправна точка</string>
-    <string name="release_4_2">• Нов дизайн на приспособленията: ново оформление, групиране по страници, сортиране и комбиниране по веше желание.
-\n
-\n• Пешеходни, велосипедни и туристически маршрути: докоснете символа на маршрита, за да получите пълна информация за него.
-\n
-\n• Избрани групи: избор на външния вид на новите точки в групата.
-\n
-\n• Поправки: автоматично обновяване на растерните карти.
-\n
-\n</string>
+    <string name="release_4_2">• Нов дизайн на приспособленията: ново оформление, групиране по страници, сортиране и комбиниране по ваше желание.\n\n• Пешеходни, велосипедни и туристически маршрути: докоснете символа на маршрута, за да получите пълна информация за него.\n\n• Избрани групи: избор на външния вид на новите точки в групата.\n\n• Поправки: автоматично обновяване на растерните карти.</string>
     <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено (от последни приложения). (Иконата на OsmAnd изчезва от лентата за известия на Android.)</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Междинни</string>
     <string name="relief_smoothness_factor_descr">Изберете предпочитания релеф.</string>
@@ -2671,11 +2663,7 @@
     <string name="favourites_group">Категория избрани</string>
     <string name="routing_attr_allow_skating_only_description">Маршрути, подготвени само за свободен стил или пързаляне без класическо трасе.</string>
     <string name="gpx_no_tracks_title_folder">Също можете да добавите фсйлове с трасета към папката</string>
-    <string name="osmand_extended_description_part7">Принос към OSM
-\n - Докладване на грешки в информацията
-\n - Качване на трасета от приложението директно в OSM
-\n - Добавяне на точки на интерес и директното им качване в OSM (или по-късно, ако сте без мрежа)
-\n</string>
+    <string name="osmand_extended_description_part7">Принос към OSM\n • Докладване на грешки в информацията;\n • Качване на трасета от приложението директно в OSM\n • Добавяне на точки на интерес и директното им качване в OSM (или по-късно, ако сте без интернет)</string>
     <string name="empty_state_favourites_desc">Внесете избрани точки или ги създавайте като отбелязвате точки на картата.</string>
     <string name="empty_state_favourites">Добавяне на избрани</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Скриване на военните зони</string>
@@ -3116,14 +3104,7 @@
 \n%1$s → %2$s</string>
     <string name="selected_value">Избрана стойност</string>
     <string name="quick_action_remove_next_destination_descr">Следващата междинна точка ще бъде премахната. Ако това е местоназначението, маршрутизирането ще спре.</string>
-    <string name="osmand_plus_extended_description_part3">Преглед на карти
-\n• Показване на позиция и ориентация
-\n• По желание подравняване картата според компаса или посоката на движение
-\n• Запазване на най-важните места като Избрани
-\n• Показване на POI (интересни места) около вас
-\n• Показване на специализирани карти от интернет, сателитен изглед (от Bing), различни слоеве като туристически/навигационни трасета на GPX и допълнителни слоеве с възможност за промяна на прозрачността
-\n• По желание се показват имената на местата на английски език, местния език или се представят фонетично
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Преглед на карти\n• Показване на позиция и ориентация\n• По желание подравняване картата според компаса или посоката на движение\n• Запазване на най-важните места в Любими\n• Показване на POI (интересни места) около вас\n• Показване на специализирани карти от интернет, сателитен изглед (от Bing), различни слоеве като туристически/навигационни трасета на GPX и допълнителни слоеве с възможност за промяна на прозрачността\n• По желание се показват имената на местата на английски език, местния език или се представят фонетично</string>
     <string name="points_of_interests">Интересни места (POI)</string>
     <string name="selected_waypoints_descr">Избраните отправни точки ще бъдат добавени към трасето „%1$s“</string>
     <string name="apply_to_existing_favorites_descr">Прилагане на промените към съществуващите избрани точки в групата или само към новите\?</string>
@@ -3344,7 +3325,7 @@
     <string name="terms_of_service_desc">С изтегляне на карти се съгласявате с %1$s и %2$s.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветова схема на контурните линии на дълбочината (изобати)</string>
     <string name="delete_search_history">Премахване на историята на търсене</string>
-    <string name="map_rendering_engine_descr">Издание 2 (OpenGL) е по-бърза машина за изчертаване на картите, която включва и полутриизмерен изглед. Издание 1 беше по подразбиране преди OsmAnd 4.3 и все още е за предпочитане за по-стари устройства.</string>
+    <string name="map_rendering_engine_descr">Издание 1 беше по подразбиране преди OsmAnd 4.3 и все още е за предпочитане за по-стари устройства.\nИздание 2 (OpenGL) е по-бърза машина за изчертаване на картите, която включва и полутриизмерен изглед.</string>
     <string name="map_rendering_engine">Машина за изчертаване на карти</string>
     <string name="speak_route_recalculation">Съобщаване за преизчисляване на маршрута</string>
     <string name="map_center_widget">Координати: център на картата</string>
@@ -3637,7 +3618,7 @@
     <string name="routing_attr_piste_type_downhill_description">Склонове за алпийски ски или спускане и достъп до ски лифтове.</string>
     <string name="shared_string_size">Размер</string>
     <string name="storage_found_files_descr">Докоснете „%1$s“, за да бъдат копирани %2$s файла от „%3$s“ към „%4$s“. Може да отнеме известно време.</string>
-    <string name="delete_history_items_descr">Премахване на избраните записи?</string>
+    <string name="delete_history_items_descr">Избраните записи се премахват от списъка.</string>
     <string name="folder_access_denied">За достъп до тази папка е необходим достъп.</string>
     <string name="storage_copying_files_size">Копиране на файлове: %1$s %2$s</string>
     <string name="shared_string_copy_to">Копиране в</string>
@@ -3653,7 +3634,7 @@
     <string name="shared_storage_first_step">Докоснете „%1$s“.\nПриложението за управление на файлове отваря мястото, на което трябва да откриете папката osmand.</string>
     <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.\n\nНеобходимо е да копирате всички данни в новата папка.</string>
     <string name="shared_storage_migration">Мигриране на споделеното хранилище</string>
-    <string name="rendering_attr_natureReserves_description">Показват се природни резервати, защитени територии и национални паркове.</string>
+    <string name="rendering_attr_natureReserves_description">Показват се природни резервати, защитени месности и национални паркове.</string>
     <string name="shared_string_new_track">Ново трасе</string>
     <string name="shared_string_visible_on_map">Видимо на картата</string>
     <string name="track_not_recorded">Не е записано</string>
@@ -3668,7 +3649,7 @@
     <string name="shared_string_skip_warning">Сигурни ли сте, че желаете да пропуснете миграцията\? OsmAnd вече няма достъп до вашите файлове в споделеното хранилище.
 \n
 \nПриложението ще започне да използва новата папка с данни.</string>
-    <string name="rendering_attr_natureReserves_name">Природен резерват</string>
+    <string name="rendering_attr_natureReserves_name">Природни резервати и защитени месности</string>
     <string name="shared_storage_third_step">Дайте разрешение за достъп до папката. Без него OsmAnd не може да копира файлове.</string>
     <string name="icon_group_industrial">Промишленост</string>
     <string name="shared_string_migration">Мигриране</string>
@@ -4773,4 +4754,8 @@
     <string name="row_number">Ред %1$s</string>
     <string name="show_minor_turns_descr">Пътните платна ще бъдат показвани за всички преминавани кръстовища независимо от гласовите напътствия</string>
     <string name="show_minor_turns">Показване и на малките кръстовища при движение направо</string>
+    <string name="backup_delete_data_warning_extended">Това действие ще премахне за постоянно всички избрани данни от облака. Няма да е възможно да ги възстановите по-късно.</string>
+    <string name="download_depth_countours">Контури на морски дълбочини</string>
+    <string name="amount_of_total_used">Използвани %1$s от %2$s</string>
+    <string name="delete_data">Изтриване на данни</string>
 </resources>

@@ -69,10 +69,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
-		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), panel, nightMode);
+		setOnLongClickListener(v -> {
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), panel, nightMode, true);
 			return true;
 		});
+		setOnClickListener(getOnClickListener());
 	}
 
 	@LayoutRes
@@ -185,7 +186,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 		imageView.setImageDrawable(oldImageView.getDrawable());
 		copyView(imageView, oldImageView);
-		view.setOnClickListener(getOnClickListener());
 		view.setVisibility(oldContainer.getVisibility());
 
 		copyTextView(textView, oldTextView);

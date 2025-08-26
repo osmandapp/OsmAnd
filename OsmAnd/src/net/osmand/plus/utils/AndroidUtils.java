@@ -6,6 +6,8 @@ import static android.Manifest.permission.BLUETOOTH;
 import static android.Manifest.permission.BLUETOOTH_ADMIN;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
+import static android.content.Context.RECEIVER_EXPORTED;
+import static android.content.Context.RECEIVER_NOT_EXPORTED;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -18,8 +20,10 @@ import android.app.KeyguardManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -1502,5 +1506,16 @@ public class AndroidUtils {
 	@NonNull
 	public static OsmandApplication getApp(@NonNull Context context) {
 		return ((OsmandApplication) context.getApplicationContext());
+	}
+
+	public static Intent registerBroadcastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver) {
+		return registerBroadcastReceiver(context, action, receiver, false);
+	}
+
+	public static Intent registerBroadcastReceiver(@NonNull Context context, @Nullable String action, @Nullable BroadcastReceiver receiver, boolean export) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return context.registerReceiver(receiver, new IntentFilter(action), export ? RECEIVER_EXPORTED : RECEIVER_NOT_EXPORTED);
+		}
+		return context.registerReceiver(receiver, new IntentFilter(action));
 	}
 }

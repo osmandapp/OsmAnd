@@ -2808,10 +2808,10 @@
     <plurals name="tracks">
         <item quantity="zero">%1$d (%2$d مسار)</item>
         <item quantity="one">%1$d (%2$d مسار)</item>
-        <item quantity="two"/>
-        <item quantity="few"/>
-        <item quantity="many"/>
-        <item quantity="other"/>
+        <item quantity="two"></item>
+        <item quantity="few"></item>
+        <item quantity="many"></item>
+        <item quantity="other"></item>
     </plurals>
     <string name="help_article_navigation_routing_pedestrian_routing_name">توجيه المشاة</string>
     <string name="speak_speed_limit">السرعة القصوى</string>
@@ -5279,7 +5279,7 @@
     <string name="give_permission">إعطاء الإذن</string>
     <string name="background_service_provider_descr">اختر مزود تحديد المواقع لاستخدامه في الخلفية:</string>
     <string name="routeInfo_road_types_name">أنواع الطرق</string>
-    <string name="map_rendering_engine_descr">عرض 3D هو نمط عرض خرائط أسرع . كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.</string>
+    <string name="map_rendering_engine_descr">كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.\nعرض 3D هو نمط عرض خرائط أسرع .</string>
     <string name="activate_srtm_plugin">يجب تفعيل ملحق الخرائط الجغرافية</string>
     <string name="gpx_no_tracks_title_folder">يمكنك إضافة مسارات إلى المجلد</string>
     <string name="show_free_version_banner_description">حتى و إن كنت قد دفعت النسخة ، يمكنك استظهار شعار ”نسخة مجانية“.</string>

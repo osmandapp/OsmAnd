@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -64,11 +63,8 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
 		Context context = getContext();
-		if (context == null || app == null) {
-			return;
-		}
+		if (context == null) return;
 
 		if (savedInstanceState != null) {
 			pluginId = savedInstanceState.getString(PLUGIN_ID_KEY);
@@ -80,9 +76,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		}
 
 		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
-		if (plugin == null) {
-			return;
-		}
+		if (plugin == null) return;
 
 		BaseBottomSheetItem titleItem = new TitleItem.Builder()
 				.setTitle(getString(R.string.new_plugin_added))
@@ -141,19 +135,13 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void downloadInProgress() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 		if (downloadIndexItem != null) {
 			for (BaseBottomSheetItem item : items) {
 				if (item instanceof BottomSheetItemWithDescription) {
 					Object tag = item.getTag();
-					if (tag instanceof IndexItem) {
-						IndexItem indexItem = (IndexItem) tag;
+					if (tag instanceof IndexItem indexItem) {
 						BottomSheetItemWithDescription mapItem = (BottomSheetItemWithDescription) item;
 
 						ProgressBar progressBar = mapItem.getView().findViewById(R.id.ProgressBar);
@@ -181,9 +169,8 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		OsmandApplication app = getMyApplication();
 		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
-		if (app != null && plugin != null) {
+		if (plugin != null) {
 			Activity activity = getActivity();
 			PluginsHelper.enablePlugin(activity, app, plugin, false);
 
@@ -212,11 +199,9 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	private void createAddedAppModesItems(List<ApplicationMode> addedAppModes) {
-		OsmandApplication app = requiredMyApplication();
-
 		items.add(new DividerItem(getContext()));
 
-		View categoryView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_56dp, null);
+		View categoryView = inflate(R.layout.bottom_sheet_item_with_descr_56dp);
 		categoryView.findViewById(R.id.icon).setVisibility(View.GONE);
 
 		BaseBottomSheetItem addedAppProfiles = new BottomSheetItemWithDescription.Builder()
@@ -234,26 +219,21 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 					.setTitle(mode.toHumanString())
 					.setIcon(getActiveIcon(mode.getIconRes()))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean checked = !appModeItem[0].isChecked();
-							appModeItem[0].setChecked(checked);
-							ApplicationMode.changeProfileAvailability(mode, checked, app);
-						}
+					.setOnClickListener(v -> {
+						boolean checked = !appModeItem[0].isChecked();
+						appModeItem[0].setChecked(checked);
+						ApplicationMode.changeProfileAvailability(mode, checked, app);
 					})
 					.create();
 			items.add(appModeItem[0]);
 		}
 	}
 
-	private void createSuggestedMapsItems(List<IndexItem> suggestedMaps) {
-		OsmandApplication app = requiredMyApplication();
-		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
-
+	private void createSuggestedMapsItems(@NonNull List<IndexItem> suggestedMaps) {
+		Context themedCtx = getThemedContext();
 		items.add(new DividerItem(themedCtx));
 
-		View categoryView = UiUtilities.getInflater(themedCtx, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_56dp, null);
+		View categoryView = inflate(R.layout.bottom_sheet_item_with_descr_56dp);
 		categoryView.findViewById(R.id.icon).setVisibility(View.GONE);
 
 		BaseBottomSheetItem addedAppProfiles = new BottomSheetItemWithDescription.Builder()
@@ -266,7 +246,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 
 		for (IndexItem indexItem : suggestedMaps) {
-			View view = UiUtilities.getInflater(themedCtx, nightMode).inflate(R.layout.list_item_icon_and_download, null);
+			View view = inflate(R.layout.list_item_icon_and_download);
 			AndroidUtils.setBackground(view, UiUtilities.getSelectableDrawable(themedCtx));
 
 			ImageView secondaryIcon = view.findViewById(R.id.secondary_icon);
@@ -304,7 +284,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 							AndroidUiHelper.updateVisibility(progressBar, true);
 							progressBar.setIndeterminate(downloadThread.isDownloading());
 							secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
-							new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
+							callActivity(activity -> new DownloadValidationManager(app).startDownload(activity, indexItem));
 						}
 					})
 					.setTag(indexItem)
@@ -315,18 +295,14 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String pluginId, Boolean usedOnMap) {
-		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PLUGIN_ID_KEY, pluginId);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PLUGIN_ID_KEY, pluginId);
 
-				PluginInstalledBottomSheetDialog dialog = new PluginInstalledBottomSheetDialog();
-				dialog.setArguments(args);
-				dialog.setUsedOnMap(usedOnMap);
-				dialog.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			PluginInstalledBottomSheetDialog dialog = new PluginInstalledBottomSheetDialog();
+			dialog.setArguments(args);
+			dialog.setUsedOnMap(usedOnMap);
+			dialog.show(fm, TAG);
 		}
 	}
 

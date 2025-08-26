@@ -31,7 +31,9 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -863,6 +865,23 @@ public class MapRenderRepositories {
 				}
 			}
 		}
+
+		Map<String, Boolean> parentsStates = new HashMap<>();
+		Map<String, RenderingClass> renderingClasses = storage.getRenderingClasses();
+
+		for (Map.Entry<String, RenderingClass> entry : renderingClasses.entrySet()) {
+			String name = entry.getKey();
+			RenderingClass renderingClass = entry.getValue();
+			boolean enabled = settings.getBooleanRenderClassProperty(renderingClass).get();
+
+			String parentName = renderingClass.getParentName();
+			if (parentName != null && parentsStates.containsKey(parentName) && !parentsStates.get(parentName)) {
+				enabled = false;
+			}
+
+			renderingReq.setClassProperty(name, String.valueOf(enabled));
+			parentsStates.put(name, enabled);
+		}
 		return renderingReq;
 	}
 
@@ -1232,6 +1251,39 @@ public class MapRenderRepositories {
 		String mapPreferredLocale = getMapPreferredLocale(app, zoom);
 		boolean noTransliteration = LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP.contains(mapPreferredLocale);
 		return transliterate && (!useAppLocale || !noTransliteration);
+	}
+
+	public static LanguagePreference getMapLanguageSetting(@NonNull OsmandApplication app, int zoom) {
+		OsmandSettings settings = app.getSettings();
+		String preferredLocale = settings.MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+		boolean showLocal = settings.MAP_SHOW_LOCAL_NAMES.get();
+		
+		if (preferredLocale.isEmpty()) {
+			return LanguagePreference.NativeOnly;
+		}
+		
+		if (!transliterate && !showLocal) {
+			return LanguagePreference.LocalizedOrNative;
+		}
+		
+		if (showLocal && !transliterate) {
+			return LanguagePreference.LocalizedAndNative;
+		}
+		
+		if (showLocal && transliterate) {
+			return LanguagePreference.NativeAndLocalizedOrTransliterated;
+		}
+		
+		if (!showLocal && transliterate) {
+			return LanguagePreference.LocalizedOrTransliteratedAndNative;
+		}
+		
+		if (transliterate && !showLocal) {
+			return LanguagePreference.LocalizedOrTransliterated;
+		}
+		
+		return LanguagePreference.LocalizedOrNative;
 	}
 
 	public static boolean useAppLocaleForMap(@NonNull OsmandApplication app, int zoom) {

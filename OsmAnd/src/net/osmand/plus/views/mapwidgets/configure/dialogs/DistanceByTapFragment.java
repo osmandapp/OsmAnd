@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
@@ -35,7 +35,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class DistanceByTapFragment extends BaseOsmAndFragment {
+public class DistanceByTapFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 
@@ -57,7 +57,7 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.distance_by_tap_fragment, container, false);
+		View view = inflate(R.layout.distance_by_tap_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		toolbar = view.findViewById(R.id.toolbar);
@@ -146,9 +146,9 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	                                   boolean enabled,
 	                                   boolean showShortDivider,
 	                                   OnClickListener listener) {
-		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+		View view = inflate(R.layout.configure_screen_list_item);
 
-		Drawable icon = getPaintedContentIcon(iconId, enabled
+		Drawable icon = getPaintedIcon(iconId, enabled
 				? ColorUtilities.getDefaultIconColor(app, nightMode)
 				: ColorUtilities.getSecondaryIconColor(app, nightMode));
 		ImageView ivIcon = view.findViewById(R.id.icon);
@@ -166,7 +166,7 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 
 		TextView stateContainer = view.findViewById(R.id.items_count_descr);
 		stateContainer.setText(settings.DISTANCE_BY_TAP_TEXT_SIZE.get().toHumanString(app));
-		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
+		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getDimensionPixelSize(R.dimen.default_sub_text_size));
 
 		AndroidUiHelper.updateVisibility(stateContainer, true);
 
@@ -214,17 +214,19 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMapActivity().disableDrawer();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMapActivity().enableDrawer();
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

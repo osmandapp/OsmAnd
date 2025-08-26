@@ -4751,7 +4751,7 @@
     <string name="restart_now">Repornește acum</string>
     <string name="map_rendering_engine_v1">Versiunea 1</string>
     <string name="map_rendering_engine_v2">Versiunea 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Versiunea 2 (OpenGL) este un motor de redare a hărților mai rapid, care oferă, de asemenea, o vizualizare 2.5D. Versiunea 1 de redare a fost cea implicită înainte de OsmAnd 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.</string>
+    <string name="map_rendering_engine_descr">Versiunea 1 de redare a fost cea implicită înainte de OsmAnd 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.\nVersiunea 2 (OpenGL) este un motor de redare a hărților mai rapid, care oferă, de asemenea, o vizualizare 2.5D.</string>
     <string name="show_map_symbols">Arată simbolurile hărții</string>
     <string name="show_map_symbols_desc">Text, indicatoare rutiere și altele.</string>
     <string name="shared_string_identifiers">Identificatori</string>
@@ -5949,7 +5949,6 @@
     <string name="wikidata">date Wiki</string>
     <string name="prediction_time_advanced_description">Reglați timpul de predicție pentru a minimiza întârzierea.</string>
     <string name="prediction_time_description">Pictograma de poziție din OsmAnd se animă cu fiecare punct de date GPS primit (o dată pe secundă). O ușoară întârziere în mișcarea sa poate fi observată, în special atunci când utilizatorul se deplasează rapid sau când semnalul GPS fluctuează.</string>
-    <string name="read_on_wiki">Citiți pe Wikipedia</string>
     <string name="prediction_time">Durata de predicție</string>
     <string name="shared_string_no_animation">Fără animație</string>
     <string name="position_animation_empty_banner_description">Pictograma de poziție se mută la fiecare locație nouă primită fără animație.</string>

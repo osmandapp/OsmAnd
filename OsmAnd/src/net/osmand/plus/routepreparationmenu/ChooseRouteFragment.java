@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -30,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -51,7 +49,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PrintDialogActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
@@ -92,7 +90,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
+public class ChooseRouteFragment extends BaseFullScreenFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
 
 	public static final String TAG = "ChooseRouteFragment";
@@ -305,16 +303,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return -1;
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@Override
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
-	}
-
 	public boolean isPaused() {
 		return paused;
 	}
@@ -327,7 +315,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				gpxItem);
 
 		dismiss();
-		MapActivity.launchMapActivityMoveToTop(getMapActivity());
+		MapActivity.launchMapActivityMoveToTop(requireMapActivity());
 	}
 
 	public void dismiss() {
@@ -883,12 +871,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-			@Nullable Bundle args) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+	public static boolean showInstance(@NonNull FragmentManager manager, @Nullable Bundle args) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			fragment.setArguments(args);
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.commitAllowingStateLoss();
 			return true;
@@ -898,13 +885,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	@Override
 	public void onNavigationRequested() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
 			dismiss(false);
-			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
+			if (app.getRoutingHelper().isPublicTransportMode()) {
 				mapActivity.getMapActions().startNavigation();
 			}
-		}
+		});
 	}
 
 	@Override
@@ -939,7 +925,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, currentMenuState);
 			args.putInt(RouteDetailsFragment.ROUTE_ID_KEY, position);
-			return Fragment.instantiate(ChooseRouteFragment.this.getContext(), RouteDetailsFragment.class.getName(), args);
+			return Fragment.instantiate(requireContext(), RouteDetailsFragment.class.getName(), args);
 		}
 	}
 }

@@ -4903,7 +4903,7 @@
     <string name="temperature_widget_desc">Menampilkan suhu untuk tengah peta saat ini.</string>
     <string name="map_widget_sunset_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbenam.</string>
     <string name="precipitation_widget_desc">Menampilkan curah hujan untuk tengah peta saat ini.</string>
-    <string name="map_rendering_engine_descr">Versi 2 (OpenGL) adalah mesin perenderan peta yang lebih cepat, juga menyediakan tampilan 2,5D. Perenderan Versi 1 adalah bawaan sebelum OsmAnd 4.3, dan masih dimungkinkan untuk perangkat yang lawas.</string>
+    <string name="map_rendering_engine_descr">Perenderan Versi 1 adalah bawaan sebelum OsmAnd 4.3, dan masih dimungkinkan untuk perangkat yang lawas.\nVersi 2 (OpenGL) adalah mesin perenderan peta yang lebih cepat, juga menyediakan tampilan 2,5D.</string>
     <string name="quick_action_wind_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan angin di peta.</string>
     <string name="quick_action_cloud_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan awan di peta.</string>
     <string name="quick_action_air_pressure_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan tekanan udara di peta.</string>
@@ -6138,7 +6138,6 @@
     <string name="multipoligon_related">Terkait</string>
     <string name="route_part_of">Bagian dari</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Baca di Wikipedia</string>
     <string name="prediction_time_advanced_description">Atur waktu prediksi untuk mengurangi jeda.</string>
     <string name="msg_favorites_skipped_as_existing">Titik favorit (%1$d) dilewati karena sudah ada.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">Titik jalur GPX (%1$d) disalin ke favorit.</string>
@@ -6151,7 +6150,6 @@
     <string name="read_on">Baca di %1$s</string>
     <string name="shared_string_split_by">Dipisah berdasarkan</string>
     <string name="hmd_promo_years">Promo HMD selama %1$s tahun</string>
-    <string name="show_symbols_debug_info">Tampilkan info pengawakutuan simbol</string>
     <string name="shared_string_flat">Datar</string>
     <string name="uphill_downhill_split">Naik / Turun</string>
     <string name="hmd_promo_description_years">Akses gratis ke fitur termasuk unduhan peta, relief 3D tidak terbatas, dll. selama %1$s tahun</string>
@@ -6177,6 +6175,5 @@
     <string name="deleting_history">Menghapus riwayat…</string>
     <string name="deleting">Menghapus…</string>
     <string name="release_5_1">• Menambahkan dukungan untuk pembelian web dan lintas platform\n\n • Memindahkan unit Suhu ke pengaturan Umum untuk akses yang lebih mudah\n\n • Menambahkan indikator daya baterai untuk sensor BLE\n\n • UI baru yang lebih intuitif untuk pemilihan titik di Navigasi\n\n • Visibilitas widget yang ditingkatkan dengan garis besar baru\n\n • Menambahkan penganalisis Tanjakan/Turunan\n\n • Integrasi Wikipedia &amp; Wikivoyage yang diperluas untuk lebih banyak POI.</string>
-    <string name="show_symbols_bboxes">Tampilkan kotak simbol</string>
     <string name="show_rasterization_debug_tile">Tampilkan informasi rasterisasi ubin</string>
 </resources>

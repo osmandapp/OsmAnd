@@ -720,7 +720,7 @@
     <string name="poi_religion_zoroastrian">Зороастризм</string>
     <string name="poi_denomination_catholic">Католицизм</string>
     <string name="poi_denomination_baptist">Баптизм</string>
-    <string name="poi_denomination_roman_catholic">Римо -католик</string>
+    <string name="poi_denomination_roman_catholic">Римо-католицизм</string>
     <string name="poi_denomination_orthodox">Православ’я</string>
     <string name="poi_denomination_lutheran">Лютеранство</string>
     <string name="poi_denomination_sunni">Сунізм</string>
@@ -735,13 +735,13 @@
     <string name="poi_denomination_jehovahs_witness">Свідок Єгови</string>
     <string name="poi_denomination_greek_orthodox">Грецький православний</string>
     <string name="poi_denomination_reformed">Кальвінізм</string>
-    <string name="poi_denomination_seventh_day_adventist">Адвентист сьомого дня</string>
+    <string name="poi_denomination_seventh_day_adventist">Адвентисти сьомого дня</string>
     <string name="poi_denomination_new_apostolic">Новий апостольський</string>
     <string name="poi_denomination_church_of_england">Церква Англії</string>
     <string name="poi_denomination_episcopal">Єпископальна</string>
     <string name="poi_denomination_shia">Шиїзм</string>
     <string name="poi_denomination_united">Об’єднана церква</string>
-    <string name="poi_denomination_greek_catholic">Грецький католик</string>
+    <string name="poi_denomination_greek_catholic">Греко-католіцизм</string>
     <string name="poi_denomination_tibetan">Тибетський буддизм</string>
     <string name="poi_denomination_united_reformed">Об\'єднаний реформований</string>
     <string name="poi_denomination_church_of_scotland">Церква Шотландії</string>
@@ -5026,7 +5026,7 @@
     <string name="poi_nondenominational_church">Неконфесійна церква</string>
     <string name="poi_reformed_church">Реформатська церква</string>
     <string name="poi_united_methodist_church">Об\'єднана методистська церква</string>
-    <string name="poi_ukrainian_orthodox_church">Українська православна церква</string>
+    <string name="poi_ukrainian_orthodox_church">Православна церква України</string>
     <string name="poi_moving_company">Компанія з переїздів</string>
     <string name="poi_apostolic_church">Апостольська церква</string>
     <string name="poi_international_organization">Міжнародна організація</string>
@@ -5063,7 +5063,6 @@
     <string name="poi_spiritist_church">Спіритистська церква</string>
     <string name="poi_ukrainian_greek_catholic_church">Українська греко-католицька церква</string>
     <string name="poi_united_church">Об\'єднана церква</string>
-    <string name="poi_landmark_church">Церква-знаменитість</string>
     <string name="poi_private_investigator">Приватний детектив</string>
     <string name="poi_tutoring">Репетиторство</string>
     <string name="poi_adventist_church">Адвентистська церква</string>
@@ -5071,10 +5070,9 @@
     <string name="poi_new_apostolic_church">Нова апостольська церква</string>
     <string name="poi_route_point_category">Категорія подорожей</string>
     <string name="poi_denomination_ukrainian_greek_catholic">Українська греко-католицьк</string>
-    <string name="poi_denomination_ukrainian_orthodox">Українська православна</string>
+    <string name="poi_denomination_ukrainian_orthodox">Православна церква України</string>
     <string name="poi_denomination_neo_pentecostal">Неопентікостал</string>
     <string name="poi_denomination_evangelical_lutheran">Євангельсько-лютеранський</string>
-    <string name="poi_denomination_landmark">Орієнтир</string>
     <string name="poi_denomination_anabaptist">Анабаптист</string>
     <string name="poi_denomination_thai_mahanikaya">Тайська Маханікая</string>
     <string name="poi_denomination_thai_thammayut">Тай Таммают</string>
@@ -5095,7 +5093,7 @@
     <string name="poi_denomination_ismaili">Ісмаїлі</string>
     <string name="poi_denomination_sufi">Суфій</string>
     <string name="poi_denomination_rinzai">Риндзай</string>
-    <string name="poi_denomination_old_catholic">Старий католик</string>
+    <string name="poi_denomination_old_catholic">Старокатолицтво</string>
     <string name="poi_denomination_shaivism">Шиваїзм</string>
     <string name="poi_denomination_pkn">Протестантська церква в Нідерландах</string>
     <string name="poi_denomination_zen">Дзен</string>
@@ -5109,7 +5107,7 @@
     <string name="poi_denomination_theravada">Тхеравада</string>
     <string name="poi_denomination_tiantai">Тяньтай</string>
     <string name="poi_denomination_scottish_episcopal">Шотландська єпископальна церква</string>
-    <string name="poi_denomination_polish_catholic">Польський католик</string>
+    <string name="poi_denomination_polish_catholic">Польський католицизм</string>
     <string name="poi_denomination_moravian">Моравський</string>
     <string name="poi_denomination_disciples_of_christ">Учні Христа</string>
     <string name="poi_denomination_charismatic">Харизматичний</string>
@@ -5137,7 +5135,6 @@
     <string name="poi_denomination_kardecista">Кардечіста</string>
     <string name="poi_denomination_free_church_of_scotland">Вільна церква Шотландії</string>
     <string name="poi_denomination_catholic_apostolic">Католицька Апостольська</string>
-    <string name="poi_denomination_iglesia_filipina_independiente">Філіппінська незалежна церква</string>
     <string name="poi_denomination_sephardi">Сефарди</string>
     <string name="poi_denomination_welsh_independent">Валлійський незалежний</string>
     <string name="poi_canoe_put_in">Спуск на воду каное</string>

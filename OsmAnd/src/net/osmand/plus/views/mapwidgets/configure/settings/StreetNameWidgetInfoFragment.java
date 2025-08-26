@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -41,8 +40,8 @@ public class StreetNameWidgetInfoFragment extends WidgetInfoBaseFragment {
 	}
 
 	@Override
-	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.widget_preference_with_switch, container);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		View view = inflate(R.layout.widget_preference_with_switch, container);
 		setupShowNextTurnInfoPref(view);
 	}
 
@@ -71,7 +70,7 @@ public class StreetNameWidgetInfoFragment extends WidgetInfoBaseFragment {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = showNextTurn ? activeColor : defaultColor;
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_next_turn, iconColor));
+		icon.setImageDrawable(getPaintedIcon(R.drawable.ic_action_next_turn, iconColor));
 		icon.setVisibility(View.VISIBLE);
 	}
 

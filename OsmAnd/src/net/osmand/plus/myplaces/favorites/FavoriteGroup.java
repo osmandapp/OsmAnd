@@ -139,7 +139,8 @@ public class FavoriteGroup {
 	public boolean appearanceEquals(@NonNull FavoriteGroup group) {
 		return (color == group.color)
 				&& (backgroundType == group.backgroundType)
-				&& Algorithms.stringsEqual(iconName, group.iconName);
+				&& Algorithms.stringsEqual(iconName, group.iconName)
+				&& visible == group.isVisible();
 	}
 
 	@Override
@@ -151,6 +152,7 @@ public class FavoriteGroup {
 		setColor(group.getColor());
 		setIconName(group.getIconName());
 		setBackgroundType(group.getBackgroundType());
+		setVisible(group.isVisible());
 	}
 
 	private static boolean isPersonal(@NonNull String name) {
@@ -172,7 +174,7 @@ public class FavoriteGroup {
 	}
 
 	public PointsGroup toPointsGroup(@NonNull Context ctx) {
-		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor());
+		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor(), !isVisible());
 		List<FavouritePoint> points = new ArrayList<>(this.points);
 		for (FavouritePoint point : points) {
 			pointsGroup.getPoints().add(point.toWpt(ctx));

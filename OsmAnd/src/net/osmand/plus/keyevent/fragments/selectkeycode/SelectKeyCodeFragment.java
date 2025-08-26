@@ -23,7 +23,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
@@ -40,7 +40,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.Objects;
 
-public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEvent.Callback {
+public class SelectKeyCodeFragment extends BaseFullScreenFragment implements KeyEvent.Callback {
 
 	public static final String TAG = SelectKeyCodeFragment.class.getSimpleName();
 
@@ -88,7 +88,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_select_key_code, container);
+		View view = inflate(R.layout.fragment_select_key_code, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 		setupDescription(view);
@@ -108,7 +108,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 		int color = getPrimaryIconColor(app, nightMode);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
+		toolbar.setNavigationIcon(getPaintedIcon(R.drawable.ic_action_close, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
 			dismiss();
@@ -292,11 +292,6 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		super.onSaveInstanceState(outState);
 		outState.putInt(ATTR_KEY_CODE, keyCode);
 		outState.putBoolean(ATTR_HAS_INPUT_FROM_USER, hasInputFromUser);
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	private void dismiss() {

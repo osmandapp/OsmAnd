@@ -4698,7 +4698,7 @@
 \nMesedez, lagundu hobekuntzak egiten zure erroreen erregistroa emanez.</string>
     <string name="dismiss_changes_descr">Aldaketa guztiak baztertu egingo dira.</string>
     <string name="show_map_symbols">Erakutsi mapen ikurrak</string>
-    <string name="map_rendering_engine_descr">2. bertsioa (OpenGL) mapak errendatzeko motor azkarragoa da, 2.5D ikuspegia ere badu. 1 bertsioa errendatzea lehenetsia zen OsmAnd 4.3 baino lehen, eta oraindik hobe da gailu zaharrentzako.</string>
+    <string name="map_rendering_engine_descr">1 bertsioa errendatzea lehenetsia zen OsmAnd 4.3 baino lehen, eta oraindik hobe da gailu zaharrentzako.\n2. bertsioa (OpenGL) mapak errendatzeko motor azkarragoa da, 2.5D ikuspegia ere badu.</string>
     <string name="map_rendering_engine">Mapak errendatzeko motorra</string>
     <string name="external_sensors_support">Onartzen diren kanpoko sentsoreak</string>
     <string name="map_center_widget">Koordenatuak: Maparen erdigunea</string>
@@ -5962,4 +5962,10 @@
     <string name="shared_string_road_exit">Irten</string>
     <string name="popular_places_nearby">Gertu dauden leku ospetsuak</string>
     <string name="recently_visited">Duela gutxi bisitatuta</string>
+    <string name="average_elevation">Batez besteko altuera</string>
+    <string name="ascent">Igoera</string>
+    <string name="descent">Jaitsiera</string>
+    <string name="map_orientations_choose_description">Utzi hutsik erabilgarri dauden modu guztien artean aldatzeko, edo gehitu zure gogokoak bakarrik.</string>
+    <string name="map_orientations">Maparen orientazioak</string>
+    <string name="response">Erantzuna</string>
 </resources>

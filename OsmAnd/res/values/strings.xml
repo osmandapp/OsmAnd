@@ -10,6 +10,19 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="backup_delete_data_warning_extended">This action will permanently remove all selected data from the cloud. It will not be possible to restore it later.</string>
+    <string name="amount_of_total_used">%1$s of %2$s used</string>
+    <string name="delete_data">Delete data</string>
+    <string name="manage_storage_delete_data_dialog_summary">Are you sure you want to delete %1$s from OsmAnd Cloud?\n\nYou can restore them from the Trash within 30 days.</string>
+    <string name="manage_storage">Manage storage</string>
+    <string name="copy_as_new_folder">Copy as new folder</string>
+    <string name="add_to_a_folder">Add to a folder</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="max_weight_at_full_load_description">Provide your vehicle\'s max weight at full load to avoid roads and bridges with weight limits.</string>
+    <string name="max_axle_load_description">Provide your vehicle\'s max axle load to avoid roads and bridges with weight limits.</string>
+    <string name="private_access_routing_req_short">Your destination is in a private area. Allow using private roads?</string>
+    <string name="view_on_phone">View on Phone</string>
     <string name="average_elevation">Average elevation</string>
     <string name="ascent">Ascent</string>
     <string name="descent">Descent</string>
@@ -40,7 +53,8 @@
 	<string name="description_subscription_fastspring">You can manage or cancel your subscription through the FastSpring account management portal.</string>
 	<string name="manage_purchases">Manage purchases</string>
     <string name="failed_to_connect">Failed to connect to %1s</string>
-    <string name="deleting">Deleting…</string>
+    <string name="shared_sting_osm_link">OSM link</string>
+	<string name="deleting">Deleting…</string>
     <string name="release_5_1">
         • Added support for web and cross-platform purchases\n\n
         • Moved Temperature units to General settings for easier access\n\n
@@ -391,6 +405,51 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_fuel_type_hydrogen">Hydrogen</string>
     <string name="obd_fuel_type_unknown">Unknown Fuel Type</string>
 
+
+    <!-- Marine style -->
+    <string name="marine_renderer">Marine</string>
+    <string name="marine_render_descr">Highly customizable Marine navigation style. Based on Nautical style. Works better with Nautical World Seamarks map and optional Depth maps.</string>
+    <string name="rendering_attr_hideAreas_name">Depth areas</string>
+    <string name="rendering_attr_hideAreas_description">Hide depth areas</string>
+    <string name="rendering_attr_hideContours_name">Depth contours</string>
+    <string name="rendering_attr_hideContours_description">Hide depth contours</string>
+    <string name="rendering_attr_hideFairways_name">Fairways</string>
+    <string name="rendering_attr_hideFairways_description">Hide fairways</string>
+    <string name="rendering_attr_hideFerries_name">Ferry routes</string>
+    <string name="rendering_attr_hideFerries_description">Hide ferry routes</string>
+    <string name="rendering_attr_hideLightSectors_name">Light sectors</string>
+    <string name="rendering_attr_hideLightSectors_description">Hide light sectors</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Light sectors sources</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Hide light sectors sources</string>
+    <string name="rendering_attr_hideMinorContours_name">Minor depth contours</string>
+    <string name="rendering_attr_hideMinorContours_description">Hide minor depth contours</string>
+    <string name="rendering_attr_hideNoLNAM_name">OSM seamarks (some)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Hide OSM seamarks (some)</string>
+    <string name="rendering_attr_hideSpots_name">Spot soundings</string>
+    <string name="rendering_attr_hideSpots_description">Hide spot soundings</string>
+    <string name="rendering_attr_hideTidalFlats_name">Tidal flats</string>
+    <string name="rendering_attr_hideTidalFlats_description">Hide tidal flats</string>
+    <string name="rendering_attr_depthColorScheme_name">Depth color scheme</string>
+    <string name="rendering_attr_depthColorScheme_description">Depth color scheme</string>
+    <string name="rendering_attr_depthContoursDashed_name">Dashed depth contours</string>
+    <string name="rendering_attr_depthContoursDashed_description">Dashed depth contours</string>
+    <string name="rendering_attr_fairwayStyle_name">Fairway color</string>
+    <string name="rendering_attr_fairwayStyle_description">Color of fairways</string>
+    <string name="rendering_attr_safetyContour_name">Safety depth contour</string>
+    <string name="rendering_attr_safetyContour_description">Safety depth contour</string>
+    <string name="rendering_attr_shellsStyle_name">Shells style</string>
+    <string name="rendering_attr_shellsStyle_description">Style for shells on the seabed</string>
+    <string name="rendering_attr_showLNAMmarker_name">ENC markers</string>
+    <string name="rendering_attr_showLNAMmarker_description">Show ENC markers</string>
+    <string name="rendering_attr_spotDistance_name">Spot sounding distance</string>
+    <string name="rendering_attr_spotDistance_description">Spot sounding distance</string>
+    <string name="rendering_attr_spotSize_name">Spot sounding size</string>
+    <string name="rendering_attr_spotSize_description">Spot sounding size</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Tidal flat style</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Style of tidal flats</string>
+    <string name="rendering_attr_watercolor_name">Water color</string>
+    <string name="rendering_attr_watercolor_description">Color of water</string>
+
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Vehicle Metrics</string>
     <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
@@ -601,6 +660,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="visualized_by">Visualized by</string>
     <string name="wall_color">Wall color</string>
     <string name="track_line">Track line</string>
+
     <string name="fixed_height">Fixed height</string>
     <string name="downward_gradient">Downward gradient</string>
     <string name="upward_gradient">Upward gradient</string>
@@ -1372,7 +1432,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="restart_now">Restart now</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) is a more powerful map rendering engine, also featuring 2.5D view. Version 1 was the default prior to OsmAnd 4.3 and is still preferable for older devices.</string>
+    <string name="map_rendering_engine_descr">Version 1 was the default prior to OsmAnd 4.3 and is still preferable for older devices.
+\nVersion 2 (OpenGL) is a more powerful map rendering engine, also featuring 2.5D view.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
@@ -1549,6 +1610,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
+    <string name="show_local_names">Show local names</string>
     <string name="transport_hazmat_yes_desc">Select the applicable category.</string>
     <string name="transport_hazmat_no_desc">Roads and tunnels may restrict transporting hazardous materials.</string>
     <string name="transport_hazmat_title">Transporting of hazardous materials</string>
@@ -2158,7 +2220,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="select_another_colorization">Please select another type of coloring.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
-    <string name="rendering_attr_natureReserves_name">Nature reserve</string>
+    <string name="rendering_attr_natureReserves_name">Nature reserve and Protected areas</string>
     <string name="rendering_attr_natureReserves_description">Show nature reserve, protected areas, and national parks.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
@@ -4681,6 +4743,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="lang_cs">Czech</string>
     <string name="lang_da">Danish</string>
     <string name="lang_nl">Dutch</string>
+    <string name="lang_en_barebones">English (barebones)</string>
     <string name="lang_fi">Finnish</string>
     <string name="lang_fr">French</string>
     <string name="lang_ka">Georgian</string>

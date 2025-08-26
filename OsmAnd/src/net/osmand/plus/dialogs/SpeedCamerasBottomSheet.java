@@ -12,11 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -24,29 +24,11 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SpeedCamerasBottomSheet.class.getName();
-	private OsmandApplication app;
-
-	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment,
-	                                @Nullable ApplicationMode appMode, boolean usedOnMap) {
-		if (!fm.isStateSaved()) {
-			SpeedCamerasBottomSheet bottomSheet = new SpeedCamerasBottomSheet();
-			bottomSheet.setAppMode(appMode);
-			bottomSheet.setUsedOnMap(usedOnMap);
-			bottomSheet.setTargetFragment(targetFragment, 0);
-			bottomSheet.show(fm, TAG);
-		}
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		View root = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.bottom_sheet_icon_title_description, null);
-		((ImageView) root.findViewById(R.id.icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.img_speed_camera_warning));
+		View root = inflate(R.layout.bottom_sheet_icon_title_description);
+		((ImageView) root.findViewById(R.id.icon)).setImageDrawable(getIcon(R.drawable.img_speed_camera_warning));
 		((TextView) root.findViewById(R.id.title)).setText(R.string.speed_camera_pois);
 		((TextView) root.findViewById(R.id.description)).setText(getDescriptionText());
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(root).create());
@@ -60,9 +42,9 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
-			SpeedCamerasUninstallRestartBottomSheet.showInstance(fm);
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			SpeedCamerasUninstallRestartBottomSheet.showInstance(fragmentManager);
 		}
 		setDialogShowed();
 	}
@@ -90,6 +72,17 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void setDialogShowed() {
-		app.getSettings().SPEED_CAMERAS_ALERT_SHOWED.set(true);
+		settings.SPEED_CAMERAS_ALERT_SHOWED.set(true);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment,
+	                                @Nullable ApplicationMode appMode, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			SpeedCamerasBottomSheet bottomSheet = new SpeedCamerasBottomSheet();
+			bottomSheet.setAppMode(appMode);
+			bottomSheet.setUsedOnMap(usedOnMap);
+			bottomSheet.setTargetFragment(targetFragment, 0);
+			bottomSheet.show(fm, TAG);
+		}
 	}
 }
