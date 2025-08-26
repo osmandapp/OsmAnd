@@ -24,6 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.containers.PaintedText;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.AutoScaleTextView;
+import net.osmand.plus.widgets.FrameLayoutEx;
 import net.osmand.plus.widgets.MultiTextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -31,7 +32,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-public class OutlinedTextContainer extends FrameLayout {
+public class OutlinedTextContainer extends FrameLayoutEx {
 	private static final Log LOG = PlatformUtil.getLog(OutlinedTextContainer.class);
 
 	private TextView outlineTextView;
@@ -282,6 +283,10 @@ public class OutlinedTextContainer extends FrameLayout {
 	public void invalidateTextViews() {
 		outlineTextView.invalidate();
 		mainTextView.invalidate();
+	}
+
+	public TextPaint getPaint() {
+		return mainTextView.getPaint();
 	}
 
 	class AttrsHolder {
