@@ -15,8 +15,8 @@ public class InsetsUtils {
 		LEFT, TOP, RIGHT, BOTTOM
 	}
 
-
 	public static class InitialPadding {
+
 		public final int left, top, right, bottom;
 
 		public InitialPadding(@NonNull View view) {
