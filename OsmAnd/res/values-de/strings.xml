@@ -5886,4 +5886,5 @@
     <string name="rendering_attr_spotDistance_description">Punktmessungsabstand</string>
     <string name="rendering_attr_spotSize_name">Größe der Punktmessung</string>
     <string name="rendering_attr_spotSize_description">Größe der Punktmessung</string>
+    <string name="show_local_names">Lokale Namen anzeigen</string>
 </resources>
