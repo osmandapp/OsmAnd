@@ -2271,7 +2271,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			startRotating = false;
 			startZooming = false;
 			Location myLocation = app.getLocationProvider().getLastKnownLocation();
-			if (myLocation == null || myLocation.distanceTo(new Location("", initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude())) > CHANGE_LOCATION_DIFF_METERS) {
+			if (myLocation == null || MapUtils.getDistance(myLocation.getLatitude(), myLocation.getLongitude(),
+					initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude()) > CHANGE_LOCATION_DIFF_METERS) {
 				notifyLocationListeners(getLatitude(), getLongitude());
 			}
 		}
