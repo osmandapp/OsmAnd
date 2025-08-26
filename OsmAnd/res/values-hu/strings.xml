@@ -2558,7 +2558,7 @@
     <string name="osm_live_payment_annual_title">Évente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / hó</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / hó</string>
-    <string name="osm_live_payment_discount_descr">Takarítson meg ennyit: %1$s</string>
+    <string name="osm_live_payment_discount_descr">Takarítson meg %1$s-ot</string>
     <string name="osm_live_payment_current_subscription">Jelenlegi előfizetés</string>
     <string name="osm_live_payment_renews_monthly">Havonta megújul</string>
     <string name="osm_live_payment_renews_quarterly">Negyedévente megújul</string>
