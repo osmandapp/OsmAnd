@@ -4557,7 +4557,7 @@
     <string name="quick_action_cloud_layer">Butono por montri/kaŝi tavolon de nuboj sur la mapo.</string>
     <string name="quick_action_air_pressure_layer">Butono por montri/kaŝi tavolon de aerpremoj sur la mapo.</string>
     <string name="shared_string_next_sunset">Sekva sunsubiro</string>
-    <string name="switch_mode_by_tapping_on_widget">Baskulu la reĝimon per frapeti la fenestraĵon.</string>
+    <string name="switch_mode_by_tapping_on_widget">Baskuligu la reĝimon per frapeti la fenestraĵon.</string>
     <string name="temperature_layer">Tavolo de temperaturoj</string>
     <string name="cloud_layer">Tavolo de nuboj</string>
     <string name="wind_layer">Tavolo de ventoj</string>
@@ -5313,7 +5313,7 @@
     <string name="missing_maps_ignore">Uzi elŝutitajn mapojn</string>
     <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
     <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
-    <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskulas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskuligas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
     <string name="daynight_mode_night_summary">Ĉiam vidigas la mapon en nokta map-reĝimo, kiu taŭgas por uzi nokte kaj mallume.</string>
     <string name="daynight_mode_day_summary">Ĉiam vidigas mapon en taga map-reĝimo, kiu plej taŭgas por uzi tage.</string>
     <string name="daynight_mode_app_theme">Etoso de aplikaĵo</string>
