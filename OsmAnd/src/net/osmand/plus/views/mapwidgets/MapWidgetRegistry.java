@@ -15,6 +15,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -31,6 +32,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -125,6 +127,34 @@ public class MapWidgetRegistry {
 		if (recreateControls && mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
 		}
+	}
+
+	public void removeWidget(@NonNull MapActivity mapActivity,
+	                         @NonNull ApplicationMode appMode,
+	                         @NonNull MapWidgetInfo widgetInfo) {
+		List<Set<MapWidgetInfo>> widgets = getPagedWidgetsForPanel(
+				mapActivity, appMode, widgetInfo.getWidgetPanel(),
+				AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+
+		Set<MapWidgetInfo> rowSet = widgets.stream()
+				.filter(set -> set.contains(widgetInfo))
+				.findFirst()
+				.orElse(null);
+
+		enableDisableWidgetForMode(appMode, widgetInfo, false, true);
+
+		if (rowSet != null) {
+			recreateWidgets(rowSet);
+		}
+	}
+
+	private void recreateWidgets(@NonNull Set<MapWidgetInfo> mapWidgetInfos) {
+		mapWidgetInfos.stream()
+				.map(info -> info == null ? null : info.widget)
+				.filter(Objects::nonNull)
+				.filter(ISupportWidgetResizing.class::isInstance)
+				.map(w -> (ISupportWidgetResizing) w)
+				.forEach(ISupportWidgetResizing::recreateView);
 	}
 
 	public void addWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
