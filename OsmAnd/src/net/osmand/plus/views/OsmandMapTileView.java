@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
@@ -104,6 +105,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final long ANIMATION_PREVIEW_TIME = 1500;
 	private static final float ZOOM_STEP_TO_FIT = 0.05f;
 	private static final float MARGIN_PERCENT_TO_FIT = 0.8f;
+	private static final int CHANGE_LOCATION_DIFF_METERS = 1;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -2268,7 +2270,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);
 			startRotating = false;
 			startZooming = false;
-			notifyLocationListeners(getLatitude(), getLongitude());
+			Location myLocation = app.getLocationProvider().getLastKnownLocation();
+			if (myLocation == null || MapUtils.getDistance(myLocation.getLatitude(), myLocation.getLongitude(),
+					initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude()) > CHANGE_LOCATION_DIFF_METERS) {
+				notifyLocationListeners(getLatitude(), getLongitude());
+			}
 		}
 
 		@Override
