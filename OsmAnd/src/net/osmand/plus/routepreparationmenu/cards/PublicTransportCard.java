@@ -413,8 +413,9 @@ public class PublicTransportCard extends MapBaseCard {
 	}
 
 	private View createArrow() {
-		LinearLayout container = new LinearLayout(app);
-		ImageView arrow = new ImageView(app);
+		MapActivity mapActivity = getMapActivity();
+		LinearLayout container = new LinearLayout(mapActivity);
+		ImageView arrow = new ImageView(mapActivity);
 		Drawable icArrow = getContentIcon(R.drawable.ic_action_arrow_forward_16);
 		arrow.setImageDrawable(AndroidUtils.getDrawableForDirection(app, icArrow));
 		container.addView(arrow, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, AndroidUtils.dpToPx(app, 28)));
