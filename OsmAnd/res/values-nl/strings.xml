@@ -6185,4 +6185,5 @@
     <string name="max_axle_load_description">Geef de maximale asbelasting van je voertuig op om wegen en bruggen met gewichtsbeperkingen te vermijden.</string>
     <string name="lang_en_barebones">Engels (barebones)</string>
     <string name="shared_sting_osm_link">OSM-link</string>
+    <string name="show_local_names">Toon plaatselijke namen</string>
 </resources>
