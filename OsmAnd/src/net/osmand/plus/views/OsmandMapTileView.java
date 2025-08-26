@@ -105,6 +105,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final long ANIMATION_PREVIEW_TIME = 1500;
 	private static final float ZOOM_STEP_TO_FIT = 0.05f;
 	private static final float MARGIN_PERCENT_TO_FIT = 0.8f;
+	private static final int CHANGE_LOCATION_DIFF_METERS = 1;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -2270,7 +2271,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			startRotating = false;
 			startZooming = false;
 			Location myLocation = app.getLocationProvider().getLastKnownLocation();
-			if (myLocation == null || myLocation.distanceTo(new Location("", initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude())) > 1) {
+			if (myLocation == null || myLocation.distanceTo(new Location("", initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude())) > CHANGE_LOCATION_DIFF_METERS) {
 				notifyLocationListeners(getLatitude(), getLongitude());
 			}
 		}
