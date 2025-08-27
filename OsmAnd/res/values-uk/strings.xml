@@ -5616,7 +5616,7 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Використовуйте вибрані одиниці в назві.</string>
     <string name="remaining_fuel_description">Показує кількість палива, залишеного в резервуарі транспортного засобу</string>
     <string name="remaining_fuel">Залишився паливо</string>
-    <string name="obd_fuel_consumption">Питання палива</string>
+    <string name="obd_fuel_consumption">Споживання палива</string>
     <string name="reset_average_value">Скиньте середнє значення</string>
     <string name="shared_string_instant">Мить</string>
     <string name="show_minor_turns">Відображення на незначних перехрестях при прямому русі</string>
