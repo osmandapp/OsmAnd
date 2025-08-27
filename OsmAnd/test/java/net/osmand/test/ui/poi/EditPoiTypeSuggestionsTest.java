@@ -72,7 +72,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		while (!app.getPoiTypes().isInit()){
 			Thread.sleep(50);
 		}
-		app.getPoiTypes().setPoiTranslator(new MapPoiTypesTranslator(app, "fr"));
+		app.getPoiTypes().setPoiTranslator(new MapPoiTypesTranslator(app, new Locale("fr")));
 		skipAppStartDialogs(app);
 
 		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
