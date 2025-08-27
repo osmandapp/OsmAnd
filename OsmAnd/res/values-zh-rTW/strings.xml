@@ -3302,9 +3302,9 @@
     <string name="shared_string_delete_all_q">刪除全部？</string>
     <string name="delete_all_actions_message_q">刪除 %d 快速動作？</string>
     <string name="screen_timeout">螢幕逾時</string>
-    <string name="width_limit_description">提供您的車輛寬度，因為某些路徑的限制可能適用於超寬車輛。</string>
-    <string name="height_limit_description">提供您的車輛高度，因為某些路徑的限制可能適用於超高車輛。</string>
-    <string name="weight_limit_description">提供您的車輛重量，因為某些路徑的限制可能適用於重型車輛。</string>
+    <string name="width_limit_description">請提供你的車輛寬度，因為某些路徑的限制可能適用於超寬車輛。</string>
+    <string name="height_limit_description">請提供你的車輛高度，因為某些路徑的限制可能適用於超高車輛。</string>
+    <string name="weight_limit_description">請提供你的車輛重量，因為某些路徑的限制可能適用於重型車輛。</string>
     <string name="shared_string_tones">色調</string>
     <string name="shared_string_meters">公尺</string>
     <string name="details_dialog_decr">顯示或隱藏額外的地圖詳細資訊</string>
@@ -3334,7 +3334,7 @@
     <string name="app_mode_inline_skates">直排輪鞋</string>
     <string name="use_volume_buttons_as_zoom_descr">以使用裝置音量按鈕控制地圖縮放比例。</string>
     <string name="use_volume_buttons_as_zoom">音量按鈕縮放</string>
-    <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
+    <string name="lenght_limit_description">請提供你的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
     <string name="please_provide_point_name_error">請提供點的名稱</string>
     <string name="quick_action_remove_next_destination_descr">刪除您路徑上的下一個目的地。如果其為您最後的目的地，導航將會中止。</string>
     <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
@@ -5682,8 +5682,8 @@
     <string name="copy_as_new_folder">複製為新資料夾</string>
     <string name="add_to_a_folder">新增至資料夾</string>
     <string name="add_to_favorites">新增至收藏</string>
-    <string name="max_weight_at_full_load_description">提供您車輛滿載時的最大重量，以避開有重量限制的道路與橋樑。</string>
-    <string name="max_axle_load_description">提供您車輛的最大軸重，以避開有重量限制的道路與橋樑。</string>
+    <string name="max_weight_at_full_load_description">請提供你車輛滿載時的最大重量，以避開有重量限制的道路與橋樑。</string>
+    <string name="max_axle_load_description">請提供你車輛的最大軸重，以避開有重量限制的道路與橋樑。</string>
     <string name="private_access_routing_req_short">您的目的地位於私人區域。允許使用私人道路？</string>
     <string name="view_on_phone">在手機上檢視</string>
     <string name="lang_en_barebones">英文（簡易）</string>
