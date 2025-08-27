@@ -136,8 +136,10 @@ class OBDDispatcher(val debug: Boolean = false) {
 			return OBDResponse.OK
 		}
 
-		val fullCommand = "%02X%02X".format(command.commandGroup, command.command)
-		val commandResult = connection.run(fullCommand, command.command, command.commandType)
+		val fullCommand = if (command.isTextCommand()) command.textCommand!! else "%02X%02X".format(
+			command.commandGroup,
+			command.command)
+		val commandResult = connection.run(fullCommand, command)
 		commandResult.let {
 			when {
 				it.isValid() && it.result.size >= command.responseLength -> {
