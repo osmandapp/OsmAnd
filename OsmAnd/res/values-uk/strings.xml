@@ -5871,4 +5871,5 @@
     <string name="max_axle_load_description">Вкажіть максимальне навантаження на вісь вашого автомобіля, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
     <string name="lang_en_barebones">Англійська (базова)</string>
     <string name="shared_sting_osm_link">Посилання OSM</string>
+    <string name="show_local_names">Показати місцеві назви</string>
 </resources>

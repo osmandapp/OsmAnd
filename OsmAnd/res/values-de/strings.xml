@@ -5886,4 +5886,15 @@
     <string name="rendering_attr_spotDistance_description">Punktmessungsabstand</string>
     <string name="rendering_attr_spotSize_name">Größe der Punktmessung</string>
     <string name="rendering_attr_spotSize_description">Größe der Punktmessung</string>
+    <string name="show_local_names">Lokale Namen anzeigen</string>
+    <string name="shared_sting_osm_link">OSM-Link</string>
+    <string name="rendering_attr_hideLightSectors_name">Helle Bereiche</string>
+    <string name="rendering_attr_hideLightSectors_description">Helle Bereiche verbergen</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Quellen heller Bereiche</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Quellen heller Bereiche verbergen</string>
+    <string name="rendering_attr_hideMinorContours_name">Geringe Tiefenkonturen</string>
+    <string name="rendering_attr_hideMinorContours_description">Geringe Tiefenkonturen verbergen</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Watt-Stil</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Watt-Stile</string>
+    <string name="lang_en_barebones">Englisch (Wesentliches)</string>
 </resources>

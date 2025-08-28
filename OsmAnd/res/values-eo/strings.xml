@@ -5861,4 +5861,5 @@
     <string name="lang_en_barebones">Angla (minimuma)</string>
     <string name="release_5_2">• Versio estas prilaborata…</string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
+    <string name="show_local_names">Montri lokajn nomojn</string>
 </resources>

@@ -138,6 +138,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean favoritesChanged = this.favoritesChangedTime != favoritesChangedTime;
 		this.favoritesChangedTime = favoritesChangedTime;
 
+		cache.clear();
 		if (hasMapRenderer()) {
 			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
 					|| favoritesChanged || textScaleChanged || textVisibleChanged
@@ -149,7 +150,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				mapRendererChanged = false;
 			}
 		} else {
-			cache.clear();
 			if (showFavorites && favouritesHelper.isFavoritesLoaded()) {
 				if (tileBox.getZoom() >= START_ZOOM || customObjectsDelegate != null) {
 					float iconSize = getIconSize(view.getApplication());
