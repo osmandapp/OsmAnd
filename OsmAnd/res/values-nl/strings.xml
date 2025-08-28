@@ -314,7 +314,7 @@
     <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
     <string name="downloading_build">Downloaden versie…</string>
     <string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB\?</string>
-    <string name="loading_builds_failed">Het ophalen van de lijst met de versies van OsmAnd is mislukt</string>
+    <string name="loading_builds_failed">Kan de lijst met OsmAnd-builds niet ophalen</string>
     <string name="loading_builds">OsmAnd-versies worden geladen…</string>
     <string name="select_build_to_install">Kies de OsmAnd-versie om te installeren</string>
     <string name="contribution_activity">Installeer versie</string>
@@ -439,7 +439,7 @@
     <string name="map_screen_orientation_descr">Scherm-oriëntatie: staand, liggend of apparaatinstelling.</string>
     <string name="opening_hours_not_supported">Formaat Openingstijden kan niet gewijzigd worden.</string>
     <string name="add_new_rule">Nieuwe regel toevoegen</string>
-    <string name="transport_Routes">(Bus)Lijnen</string>
+    <string name="transport_Routes">Lijnen</string>
     <string name="transport_Stop">Halte</string>
     <string name="transport_stops">Haltes</string>
     <string name="transport_search_after">Aansluitende route</string>
@@ -500,7 +500,7 @@
     <string name="closing_changeset">Wijzigingenset sluiten…</string>
     <string name="commiting_node">Punt wordt vastgelegd…</string>
     <string name="loading_poi_obj">POI wordt geladen…</string>
-    <string name="auth_failed">Authorisatie mislukt</string>
+    <string name="auth_failed">Autorisatie mislukt</string>
     <string name="failed_op">mislukt</string>
     <string name="converting_names">Converteer plaatselijke/Engelse namen…</string>
     <string name="loading_streets_buildings">Straten/gebouwen worden geladen…</string>
@@ -511,7 +511,7 @@
     <string name="error_occurred_saving_gpx">Fout bij het opslaan van GPX-bestand.</string>
     <string name="error_calculating_route">Fout bij routeberekening.</string>
     <string name="error_calculating_route_occured">Fout bij routeberekening.</string>
-    <string name="empty_route_calculated">Fout: berekende route is leeg.</string>
+    <string name="empty_route_calculated">De berekende route is leeg.</string>
     <string name="arrived_at_destination">De bestemming is bereikt.</string>
     <string name="invalid_locations">Coördinaten zijn ongeldig</string>
     <string name="go_back_to_osmand">Ga terug naar de kaart</string>
@@ -1293,9 +1293,9 @@
     <string name="use_opengl_render_descr">Gebruik snelle hardware-gebaseerde OpenGL weergave (gebruikt mogelijk meer stroom en werkt mogelijk niet op oudere apparaten).</string>
     <string name="error_avoid_specific_road">Geen omleiding gevonden</string>
     <string name="no_internet_connection">Downloaden mislukt. Controleer de internetverbinding.</string>
-    <string name="download_tab_downloads">Alle downloads</string>
+    <string name="download_tab_downloads">Beschikbare downloads</string>
     <string name="download_tab_updates">Updates</string>
-    <string name="download_tab_local">Geïnstalleerd</string>
+    <string name="download_tab_local">Gedownload</string>
     <string name="navigate_point_easting">Oostwaarde</string>
     <string name="navigate_point_northing">Noordwaarde</string>
     <string name="navigate_point_zone">Zone</string>
@@ -2047,7 +2047,7 @@
     <string name="rendering_attr_contourWidth_description">Hoogtelijnen: dikte</string>
     <string name="rendering_attr_contourWidth_name">Hoogtelijnen: dikte</string>
     <string name="rendering_attr_hideWaterPolygons_description">Watervlakten</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlakten</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Watervlakten</string>
     <string name="auto_split_recording_title">Opname automatisch splitsen na een onderbreking</string>
     <string name="auto_split_recording_descr">Start een nieuw segment na een onderbreking van zes minuten. Begin een nieuwe track na een onderbreking van twee uur of na een lange onderbreking als de datum is veranderd.</string>
     <string name="navigate_point_olc">Open Location Code (OLC)</string>
@@ -2189,7 +2189,7 @@
     <string name="change_color">Kleur wijzigen</string>
     <string name="edit_name">Naam wijzigen</string>
     <string name="animate_my_location">Eigen positie animeren</string>
-    <string name="animate_my_location_desc">Schakel levendige kaartverschuiving in van \'Mijn positie\' tijdens navigatie.</string>
+    <string name="animate_my_location_desc">Vloeiende kaartverschuiving tijdens beweging. Geeft een kleine vertraging.</string>
     <string name="shared_string_slope">Helling</string>
     <string name="add_new_folder">Nieuwe map toevoegen</string>
     <string name="points_delete_multiple_succesful">Punt(en) verwijderd.</string>
@@ -2200,13 +2200,13 @@
     <string name="shared_string_paused">In pauze</string>
     <string name="lang_ber">Berbers</string>
     <string name="hillshade_menu_download_descr">Download ‘Reliëfschaduwkaarten’ om de verticale schaduwen te tonen.</string>
-    <string name="hillshade_purchase_header">Installeer de ‘Hoogtelijnen’-plug-in om hoogteverschillen in het terrein te visualiseren.</string>
+    <string name="hillshade_purchase_header">Installeer de ‘Topografie’-plug-in om hoogteverschillen in het terrein te visualiseren.</string>
     <string name="hide_from_zoom_level">Verberg starten vanaf zoom-niveau</string>
-    <string name="srtm_menu_download_descr">Download de Hoogtelijnenkaart voor deze regio.</string>
+    <string name="srtm_menu_download_descr">Download de \'Hoogtelijnen\'-kaart van deze regio.</string>
     <string name="shared_string_plugin">Plugin</string>
-    <string name="srtm_purchase_header">Koop en installeer de Hoogtelijnen-plugin om verticale gradatie zones te tonen.</string>
+    <string name="srtm_purchase_header">Koop en installeer de \'Topografie\'-plug-in om hoogteverschillen te tonen.</string>
     <string name="srtm_color_scheme">Kleurschema</string>
-    <string name="show_from_zoom_level">Toon vanaf dit zoom-niveau</string>
+    <string name="show_from_zoom_level">Weergave start vanaf zoomniveau</string>
     <string name="routing_attr_allow_private_name">Privé-wegen toestaan</string>
     <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
@@ -2363,8 +2363,8 @@
     <string name="move_all_to_history">Verplaats alles naar geschiedenis</string>
     <string name="show_direction">Toon afstand</string>
     <string name="sort_by">Sorteren op</string>
-    <string name="do_not_use_animations">Geen animaties</string>
-    <string name="do_not_use_animations_descr">Zet alle kaart animaties uit.</string>
+    <string name="do_not_use_animations">Verwijder animaties</string>
+    <string name="do_not_use_animations_descr">Schakelt kaart- en UI-animaties uit.</string>
     <string name="keep_showing_on_map">Verder wel op de kaart blijven tonen</string>
     <string name="exit_without_saving">Afsluiten zonder op te slaan?</string>
     <string name="line">Lijn</string>
@@ -2605,7 +2605,7 @@
     <string name="first_intermediate_dest_description">Voegt eerste stop toe</string>
     <string name="subsequent_dest_description">Bestemming naar boven schuiven en deze aanmaken</string>
     <string name="show_closed_notes">Gesloten opmerkingen tonen</string>
-    <string name="switch_osm_notes_visibility_desc">OSM-opmerkingen op de kaart tonen/verbergen.</string>
+    <string name="switch_osm_notes_visibility_desc">Toon/verberg OSM-opmerkingen op de kaart.</string>
     <string name="gpx_file_desc">GPX - geschikt voor export naar JOSM en andere OSM-editors.</string>
     <string name="osc_file_desc">OSC - geschikt voor export naar OpenStreetMap.</string>
     <string name="shared_string_gpx_file">GPX-bestand</string>
@@ -3870,7 +3870,7 @@
     <string name="announcement_time_arrive">Aankomst op bestemming</string>
     <string name="shared_string_turn">Afslag</string>
     <string name="announcement_time_intervals">Tijd- en afstandsintervallen</string>
-    <string name="announcement_time_descr">De aankondigingstijd van verschillende aankondigen hangt af van type en huidige snelheid.</string>
+    <string name="announcement_time_descr">De timing van de aankondiging van de verschillende spraakprompts hangt af van het type prompt, de huidige navigatiesnelheid en de standaard navigatiesnelheid.</string>
     <string name="announcement_time_title">Aankondigingstijd</string>
     <string name="start_recording">Start opname</string>
     <string name="show_track_on_map">Toon GPX-track op de kaart</string>
@@ -4002,7 +4002,7 @@
     <string name="shared_string_itinerary">Reisbeschrijving</string>
     <string name="trip_recording_logging_interval_info">Het registratie-interval stelt de tijdsperiode in waarin OsmAnd de huidige positiegegevens opvraagt.</string>
     <string name="show_start_dialog">Toon startdialoog</string>
-    <string name="customize_route_line">Pas de routelijn aan</string>
+    <string name="customize_route_line">Routelijn aanpassen</string>
     <string name="shared_string_route_line">Routelijn</string>
     <string name="specify_color_for_map_mode">Specificeer kleur de kaartmodus %1$s.</string>
     <string name="verify_email_address">Verifieer e-mailadres</string>
@@ -4201,7 +4201,7 @@
 \n
 \n</string>
     <string name="no_plugins_enabled">Je hebt geen plug-ins ingeschakeld. Je kan een lijst van beschikbare plug-ins vinden onder \'Menu\' → \'Plug-ins\'.</string>
-    <string name="delete_history_items_descr">Ben je zeker dat je de geselecteerde items uit je geschiedenis wil verwijderen?</string>
+    <string name="delete_history_items_descr">De geselecteerde items worden verwijderd uit de lijst.</string>
     <string name="use_external_timestamps">Gebruik externe tijdstempels</string>
     <string name="display_route_tracks">Tracks weergeven</string>
     <string name="android_auto_purchase_request_title">Koop OsmAnd Pro of Maps+ om OsmAnd met Android Auto te gebruiken</string>
@@ -4227,7 +4227,7 @@
     <string name="location_access_request_result">Goedgekeurd: %1$s Afgewezen: %2$s</string>
     <string name="safe_settings">Veilig</string>
     <string name="use_external_timestamps_description">Gebruik de tijdstempels van de online router om de geschatte tijd en gemiddelde snelheid aan te passen</string>
-    <string name="delete_history_items">Verwijder %1$s items uit je geschiedenis?</string>
+    <string name="delete_history_items">Verwijder %1$s item(s) uit je geschiedenis?</string>
     <string name="quick_action_toggle_preference">Een knop om te schakelen tussen je voorkeursstatus.</string>
     <string name="display_route_tracks_as_poi">Geef tracks weer als POI</string>
     <string name="android_auto_map_placeholder_title">De kaart wordt op het wagenscherm weergegeven.</string>
