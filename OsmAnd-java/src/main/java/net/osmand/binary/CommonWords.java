@@ -56,6 +56,14 @@ public class CommonWords {
 		}
 		return count;
 	}
+
+	public static void addExternalFrequentlyUsed(String string) {
+		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
+	}
+
+	public static void addExternalCommon(String string) {
+		commonWordsDictionary.put(string, commonWordsDictionary.size());
+	}
 	
 	static {
 		addFrequentlyUsed("santa");

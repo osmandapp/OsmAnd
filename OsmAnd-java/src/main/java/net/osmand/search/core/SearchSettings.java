@@ -42,6 +42,13 @@ public class SearchSettings {
 	private boolean addressSearch;
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 
+    public enum SearchVersion {
+		EXPAND_COMMON_WORDS,
+		EXPAND_ABBREVIATIONS,
+		DEFAULT
+	}	
+	private SearchVersion searchVersion = SearchVersion.DEFAULT;
+
 	public SearchSettings(SearchSettings s) {
 		if (s != null) {
 			this.radiusLevel = s.radiusLevel;
@@ -59,6 +66,7 @@ public class SearchSettings {
 			this.emptyQueryAllowed = s.emptyQueryAllowed;
 			this.sortByName = s.sortByName;
 			this.exportSettings = s.exportSettings;
+			this.searchVersion = s.searchVersion;
 		}
 	}
 	
@@ -298,5 +306,18 @@ public class SearchSettings {
 			s.searchTypes = searchTypes;
 		}
 		return s;
+	}
+
+	public SearchVersion getSearchVersion() {
+		return searchVersion;
+	}
+
+	public void setSearchVersion(SearchVersion searchVersion) {
+		this.searchVersion = searchVersion;
+		new MutableSearchManager(searchVersion);
+	}
+
+	public void setRegionLang(String lang) {
+		regionLang = lang;
 	}
 }

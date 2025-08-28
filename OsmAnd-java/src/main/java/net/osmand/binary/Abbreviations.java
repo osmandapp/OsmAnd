@@ -48,4 +48,8 @@ public class Abbreviations {
         }
         return changed ? r.toString() : phrase;
     }
+
+    public static void expandAbbreviations(String key, String fullName) {
+        abbreviations.put(key, fullName);
+    }
 }
