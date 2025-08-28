@@ -5,6 +5,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.settings.backend.preferences.OsmandPreference
+import net.osmand.plus.settings.enums.VolumeUnit.LITRES
 import net.osmand.plus.utils.next
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
@@ -59,12 +60,12 @@ class OBDFuelConsumptionWidget(
 	}
 
 	override fun getOnClickListener(): View.OnClickListener {
-		return View.OnClickListener { v: View? ->
+		return View.OnClickListener { _: View? ->
 			nextMode()
 		}
 	}
 
-	private fun nextMode(){
+	private fun nextMode() {
 		fuelConsumptionMode.set(fuelConsumptionMode.get().next())
 		updatePrefs(true)
 	}
@@ -85,8 +86,14 @@ class OBDFuelConsumptionWidget(
 			OBD_FUEL_CONSUMPTION_MODE
 		else OBD_FUEL_CONSUMPTION_MODE + customId
 
+		val defaultMode =
+			if (app.settings.UNIT_OF_VOLUME.get() == LITRES)
+				FuelConsumptionMode.VOLUME_PER_100_UNITS
+			else
+				FuelConsumptionMode.UNITS_PER_VOLUME
+
 		return settings.registerEnumStringPreference(
-			prefId, FuelConsumptionMode.VOLUME_PER_100_UNITS,
+			prefId, defaultMode,
 			FuelConsumptionMode.entries.toTypedArray(), FuelConsumptionMode::class.java
 		)
 			.makeProfile()
@@ -96,6 +103,9 @@ class OBDFuelConsumptionWidget(
 	enum class FuelConsumptionMode(
 		val fieldType: OBDTypeWidget
 	) {
+		UNITS_PER_VOLUME(
+			OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER
+		),
 		VOLUME_PER_100_UNITS(
 			OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM
 		),
@@ -109,11 +119,19 @@ class OBDFuelConsumptionWidget(
 			val leftText: String
 			val rightText: String
 
-			if (this == VOLUME_PER_100_UNITS) {
+			if (this == UNITS_PER_VOLUME) {
 				val unitRes = when (mc) {
-					MetricsConstants.KILOMETERS_AND_METERS -> R.string.km
-					MetricsConstants.NAUTICAL_MILES_AND_METERS, MetricsConstants.NAUTICAL_MILES_AND_FEET -> R.string.nm
-					else -> R.string.mile
+					MetricsConstants.KILOMETERS_AND_METERS -> R.string.kilometers
+					MetricsConstants.NAUTICAL_MILES_AND_METERS, MetricsConstants.NAUTICAL_MILES_AND_FEET -> R.string.si_nm
+					else -> R.string.miles
+				}
+				leftText = app.getString(unitRes)
+				rightText = volumeUnit.toSingleHumanString(app)
+			} else if (this == VOLUME_PER_100_UNITS) {
+				val unitRes = when (mc) {
+					MetricsConstants.KILOMETERS_AND_METERS -> R.string.kilometers
+					MetricsConstants.NAUTICAL_MILES_AND_METERS, MetricsConstants.NAUTICAL_MILES_AND_FEET -> R.string.si_nm
+					else -> R.string.miles
 				}
 				leftText = volumeUnit.toHumanString(app)
 				rightText = app.getString(
