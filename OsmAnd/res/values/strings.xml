@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="liter">Liter</string>
+    <string name="imperial_gallon">Imperial gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilometers</string>
+    <string name="miles">Miles</string>
+    <string name="mpg">MPG</string>
     <string name="backup_delete_data_warning_extended">This action will permanently remove all selected data from the cloud. It will not be possible to restore it later.</string>
     <string name="amount_of_total_used">%1$s of %2$s used</string>
     <string name="delete_data">Delete data</string>

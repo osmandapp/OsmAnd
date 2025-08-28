@@ -43,6 +43,7 @@ import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider
 import net.osmand.plus.settings.backend.preferences.ListStringPreference
+import net.osmand.plus.settings.enums.VolumeUnit
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
@@ -547,7 +548,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		connectionState = OBDConnectionState.DISCONNECTED
 		deviceInfo?.let {
 			connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED, it)
-			if(it.isBLE) {
+			if (it.isBLE) {
 				val device = getBLEOBDDeviceById(it.address);
 				device?.disconnect()
 			}
@@ -861,6 +862,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.VIN,
 			OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE,
 			OBDDataComputer.OBDTypeWidget.RPM -> data
+
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER -> getFormatDistancePerVolume(
+				data as Number)
 		}
 
 		return computerWidget.type.formatter.format(convertedData)
@@ -894,6 +898,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.VIN -> null
 
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistanceUnit()
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER -> getFormatDistancePerVolumeUnit()
 		}
 	}
 
@@ -935,6 +940,62 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		}
 		val volumeUnit = settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
 		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, "100$distanceUnit")
+	}
+
+	private fun getFormatDistancePerVolumeUnit(): String {
+		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
+		val distanceUnit: String = when (mc) {
+			MetricsConstants.MILES_AND_YARDS,
+			MetricsConstants.MILES_AND_FEET,
+			MetricsConstants.MILES_AND_METERS -> {
+				app.getString(R.string.mile)
+			}
+
+			MetricsConstants.NAUTICAL_MILES_AND_FEET,
+			MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
+				app.getString(R.string.nm)
+			}
+
+			else -> {
+				app.getString(R.string.km)
+			}
+		}
+		val volume = settings.UNIT_OF_VOLUME.get()
+		val volumeUnit = volume.getUnitSymbol(app)
+		return if ((mc == MetricsConstants.MILES_AND_FEET ||
+					mc == MetricsConstants.MILES_AND_YARDS ||
+					mc == MetricsConstants.MILES_AND_METERS) &&
+			(volume == VolumeUnit.US_GALLONS || volume == VolumeUnit.IMPERIAL_GALLONS))
+			app.getString(R.string.mpg)
+		else
+			app.getString(R.string.ltr_or_rtl_combine_via_slash, distanceUnit, volumeUnit)
+	}
+
+	private fun getFormatDistancePerVolume(metersPerLiter: Number): Float {
+		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
+		val volumeUnit = settings.UNIT_OF_VOLUME.get()
+		val metersPerLiterFloat = metersPerLiter.toFloat()
+
+		val volumePerLiter = OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, 1f)
+
+		val convertedDistance = when (mc) {
+			MetricsConstants.MILES_AND_YARDS,
+			MetricsConstants.MILES_AND_FEET,
+			MetricsConstants.MILES_AND_METERS -> {
+				metersPerLiterFloat / OsmAndFormatter.METERS_IN_ONE_MILE
+			}
+
+			MetricsConstants.NAUTICAL_MILES_AND_FEET,
+			MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
+				metersPerLiterFloat / OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
+			}
+
+			else -> {
+				metersPerLiterFloat / 1000f
+			}
+		}
+
+		return convertedDistance / volumePerLiter
 	}
 
 	private fun getFormatVolumePerDistance(litersPer100km: Number): Float {
