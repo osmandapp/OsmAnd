@@ -30,7 +30,7 @@ public class SearchPhrase {
 	private static Set<String> conjunctions = new TreeSet<>();
 	
 	private final Collator clt;
-	private final SearchSettings settings;
+	protected final SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
 	
 	private BinaryMapIndexReader fileRequest;
@@ -148,7 +148,7 @@ public class SearchPhrase {
 	}
 	
 	
-	private SearchPhrase(SearchSettings settings, Collator clt) {
+	protected SearchPhrase(SearchSettings settings, Collator clt) {
 		this.settings = settings;
 		this.clt = clt;
 	}
@@ -204,11 +204,19 @@ public class SearchPhrase {
 	public static SearchPhrase emptyPhrase(SearchSettings settings, Collator clt) {
 		return new SearchPhrase(settings, clt);
 	}
+
+	public SearchPhrase mutablePhrase(SearchSettings settings, Collator clt) {
+		return new SearchPhrase(settings, clt);
+	}
+
+	public static void expandConjunction(String conjunction) {
+		conjunctions.add(conjunction);
+	}
 	
 	// init search phrase
 	private SearchPhrase createNewSearchPhrase(final SearchSettings settings, String fullText, List<SearchWord> foundWords,
 											   String textToSearch) {
-		SearchPhrase sp = new SearchPhrase(settings, this.clt);
+		SearchPhrase sp = mutablePhrase(settings, this.clt);
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
 		sp.unknownSearchPhrase = textToSearch;
@@ -278,7 +286,7 @@ public class SearchPhrase {
 	}
 	
 	public SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
-		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
+		SearchPhrase sp = mutablePhrase(this.settings, this.clt);
 		addResult(res, sp);
 		SearchResult prnt = res.parentSearchResult;
 		while (prnt != null) {
