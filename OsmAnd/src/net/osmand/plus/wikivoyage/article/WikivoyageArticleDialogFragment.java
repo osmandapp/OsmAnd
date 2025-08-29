@@ -162,6 +162,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		populateArticle();
 	}
 

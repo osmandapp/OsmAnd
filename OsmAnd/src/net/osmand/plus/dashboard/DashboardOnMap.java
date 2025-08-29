@@ -83,6 +83,8 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -100,6 +102,7 @@ import net.osmand.render.RenderingClass;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -215,6 +218,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		waypointDialogHelper = new WaypointDialogHelper();
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = mapActivity.findViewById(R.id.dashboard);
+		InsetsUtils.setWindowInsetsListener(dashboardView, (v, insets) -> InsetsUtils.applyPadding(v, insets, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM)), true);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
 		OnClickListener listener = new OnClickListener() {
 			@Override

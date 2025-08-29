@@ -26,6 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -119,6 +120,8 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -138,6 +141,7 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -217,6 +221,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
+		EdgeToEdge.enable(this);
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
 		settings = app.getSettings();
@@ -236,7 +241,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		setContentView(R.layout.main);
 		enterToFullScreen();
 		// Navigation Drawer
-		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
+		View menuItems = findViewById(R.id.menuItems);
+/*		InsetsUtils.setWindowInsetsListener(findViewById(R.id.fragmentContainer), EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
+		InsetsUtils.setWindowInsetsListener(findViewById(R.id.dashboard), EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
+		InsetsUtils.setWindowInsetsListener(findViewById(R.id.routeMenuContainer), EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));*/
+		InsetsUtils.setWindowInsetsListener(menuItems, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());

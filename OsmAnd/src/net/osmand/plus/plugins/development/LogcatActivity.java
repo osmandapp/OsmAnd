@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,8 +20,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.util.EnumSet;
 
 public class LogcatActivity extends BaseLogcatActivity {
 
@@ -39,9 +43,9 @@ public class LogcatActivity extends BaseLogcatActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
+		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.recyclerview);
-
+		setContentView(R.layout.logcat_activity);
 		ActionBar supportActionBar = getSupportActionBar();
 		if (supportActionBar != null) {
 			supportActionBar.setTitle(R.string.logcat_buffer);

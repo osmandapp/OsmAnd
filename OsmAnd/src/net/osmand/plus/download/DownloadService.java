@@ -1,15 +1,12 @@
 package net.osmand.plus.download;
 
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC;
-import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
 import static net.osmand.plus.notifications.OsmandNotification.DOWNLOAD_NOTIFICATION_SERVICE_ID;
-import static net.osmand.plus.notifications.OsmandNotification.TOP_NOTIFICATION_SERVICE_ID;
 
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
@@ -17,7 +14,6 @@ import android.os.IBinder;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
@@ -71,7 +67,16 @@ public class DownloadService extends Service {
 		super.onDestroy();
 		OsmandApplication app = (OsmandApplication) getApplication();
 		app.setDownloadService(null);
+		stopForeground(app);
+	}
 
+	@Override
+	public void onTimeout(int startId, int fgsType) {
+		super.onTimeout(startId, fgsType);
+		stopForeground((OsmandApplication) getApplication());
+	}
+
+	private void stopForeground(@NonNull OsmandApplication app) {
 		// remove notification
 		stopForeground(STOP_FOREGROUND_REMOVE);
 		app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD);
