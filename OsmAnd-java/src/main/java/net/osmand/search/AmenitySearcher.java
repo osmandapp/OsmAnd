@@ -158,6 +158,7 @@ public class AmenitySearcher {
                                          Predicate<String> travelFileVisibility,
                                          ResultMatcher<Amenity> matcher) {
 
+        Set<Long> openAmenities = new HashSet<>();
         Set<Long> closedAmenities = new HashSet<>();
         List<Amenity> actualAmenities = new ArrayList<>();
 
@@ -184,9 +185,11 @@ public class AmenitySearcher {
                         for (Amenity amenity : foundAmenities) {
                             Long id = amenity.getId();
                             if (amenity.isClosed()) {
-                                closedAmenities.add(id);
+                                isDistinctAmenity(closedAmenities, id);
                             } else if (!closedAmenities.contains(id)) {
-                                actualAmenities.add(amenity);
+                                if (repo.isAuxiliaryData() || isDistinctAmenity(openAmenities, id)) {
+                                    actualAmenities.add(amenity);
+                                }
                             }
                         }
                     }
@@ -195,6 +198,10 @@ public class AmenitySearcher {
         }
 
         return actualAmenities;
+    }
+
+    private static boolean isDistinctAmenity(Set<Long> openAmenities, Long id) {
+        return openAmenities.add(id);
     }
 
     public Amenity searchDetailedAmenity(Request request, Settings settings) {

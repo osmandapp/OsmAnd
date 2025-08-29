@@ -362,7 +362,7 @@ public class MenuBuilder {
 	}
 
 	private void buildReviewsRow(ViewGroup view) {
-		// TODO: read reviews from file
+		// TODO: read reviews from file: this.amenity.reviews -> gz...
 		List<Review> reviewData = new ArrayList<>();
 		reviewData.add(new Review(80, "excellent espresso", "enigal", LocalDate.of(2025, Month.JULY, 13)));
 		reviewData.add(new Review(55, "The service could be better.", "pangloss", LocalDate.of(2025, Month.JULY, 11)));
