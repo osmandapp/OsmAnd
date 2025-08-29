@@ -1,21 +1,27 @@
 package net.osmand.plus.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
-import androidx.annotation.DimenRes;
-import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.EnumSet;
 
 /**
  * Base fragment class for all UI components in OsmAnd that directly extend Android's Fragment.
@@ -40,7 +46,7 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	protected boolean nightMode;
 
 	private LayoutInflater themedInflater;
-
+	protected WindowInsetsCompat lastRootInsets = null;
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,6 +61,30 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		saveAppModeToBundle(appMode, outState);
+	}
+
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		Activity activity = requireActivity();
+		if (activity instanceof MapActivity) {
+			InsetsUtils.setWindowInsetsListener(view, (view1, insets) -> {
+				InsetsUtils.applyPadding(view1, insets, getSideInsets());
+				lastRootInsets = insets;
+				onApplyInsets(insets);
+			}, true);
+		}
+	}
+
+	@Nullable
+	protected EnumSet<InsetSide> getSideInsets(){
+		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+	}
+
+	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
 	}
 
 	protected void updateNightMode() {

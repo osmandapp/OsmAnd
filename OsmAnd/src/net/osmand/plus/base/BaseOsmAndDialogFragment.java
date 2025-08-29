@@ -1,7 +1,9 @@
 package net.osmand.plus.base;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
@@ -18,8 +22,11 @@ import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.EnumSet;
 
 public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
 
@@ -30,6 +37,8 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	protected boolean nightMode;
 
 	private LayoutInflater themedInflater;
+
+	private WindowInsetsCompat lastInset;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +58,36 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	}
 
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		AndroidUtils.addStatusBarPadding21v(null, view);
+	public void onStart() {
+		super.onStart();
+		Dialog dialog = getDialog();
+
+		if (dialog != null && dialog.getWindow() != null) {
+			if (Build.VERSION.SDK_INT >= 36) {
+				//WindowCompat.enableEdgeToEdge(window);
+			} else {
+				WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), false);
+			}
+			View decor = dialog.getWindow().getDecorView();
+			InsetsUtils.setWindowInsetsListener(decor, (v, insets) -> {
+				InsetsUtils.applyPadding(v, insets, getSideInsets());
+				lastInset = insets;
+				onApplyInsets(insets);
+			}, true);
+		}
+	}
+
+	protected EnumSet<InsetSide> getSideInsets(){
+		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+	}
+
+	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
+	}
+
+	@Nullable
+	protected WindowInsetsCompat getLastInsets(){
+		return lastInset;
 	}
 
 	@Override

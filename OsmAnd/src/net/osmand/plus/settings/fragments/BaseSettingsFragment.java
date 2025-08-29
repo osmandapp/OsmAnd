@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -64,12 +65,15 @@ import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements IOsmAndFragment,
@@ -96,6 +100,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	private int statusBarColor = -1;
 	private boolean wasDrawerDisabled;
+
+	protected WindowInsetsCompat lastRootInsets = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,6 +156,24 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		updateToolbar();
+
+		Activity activity = requireActivity();
+		if (activity instanceof MapActivity) {
+			InsetsUtils.setWindowInsetsListener(view, (view1, insets) -> {
+				InsetsUtils.applyPadding(view1, insets, getSideInsets());
+				lastRootInsets = insets;
+				onApplyInsets(insets);
+			}, true);
+		}
+	}
+
+	@Nullable
+	protected EnumSet<InsetSide> getSideInsets(){
+		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+	}
+
+	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
 	}
 
 	@Override

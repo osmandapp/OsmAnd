@@ -787,10 +787,10 @@ public class AndroidUtils {
 	}
 
 	public static void addStatusBarPadding21v(@Nullable Activity activity, @NonNull View view) { //todo call InsetUtils instead with proper InsetSide
-		InsetsUtils.doOnApplyWindowInsets(view, EnumSet.of(
+		/*InsetsUtils.doOnApplyWindowInsets(view, EnumSet.of(
 				InsetsUtils.InsetSide.TOP,
 				InsetsUtils.InsetSide.BOTTOM
-		));
+		));*/
 	}
 
 	public static int resizeViewForKeyboard(Activity activity, View view, int layoutHeightPrevious) {
