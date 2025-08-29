@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,15 +43,9 @@ public class LogcatActivity extends BaseLogcatActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
+		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.logcat_activity);
-
-		View root = findViewById(R.id.root);
-		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
-				InsetsUtils.InsetSide.TOP,
-				InsetsUtils.InsetSide.BOTTOM
-		));
-
 		ActionBar supportActionBar = getSupportActionBar();
 		if (supportActionBar != null) {
 			supportActionBar.setTitle(R.string.logcat_buffer);

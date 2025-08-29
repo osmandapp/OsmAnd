@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
@@ -40,18 +41,13 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		app = getMyApplication();
 		app.applyTheme(this);
 		getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		EdgeToEdge.enable(this);
 
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setTitle(R.string.print_route);
 
 		setContentView(R.layout.print_dialog);
-
-		View root = findViewById(R.id.root);
-		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
-				InsetsUtils.InsetSide.TOP,
-				InsetsUtils.InsetSide.BOTTOM
-		));
 
 		webView = findViewById(R.id.printDialogWebview);
 

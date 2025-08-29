@@ -3,6 +3,7 @@ package net.osmand.plus.help;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentManager;
@@ -31,6 +32,7 @@ public class HelpActivity extends BaseLogcatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		app = getMyApplication();
 		app.applyTheme(this);
+		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 
 		articlesHelper = new HelpArticlesHelper(this);
@@ -42,13 +44,6 @@ public class HelpActivity extends BaseLogcatActivity {
 			actionBar.setElevation(5.0f);
 		}
 		setContentView(R.layout.help_activity);
-
-		View root = findViewById(R.id.root);
-		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
-				InsetsUtils.InsetSide.TOP,
-				InsetsUtils.InsetSide.BOTTOM
-		));
-
 		if (savedInstanceState == null) {
 			HelpMainFragment.showInstance(getSupportFragmentManager());
 		}

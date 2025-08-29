@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -108,6 +109,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		app = getMyApplication();
 		downloadThread = app.getDownloadThread();
 		app.applyTheme(this);
+		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 
 		DownloadResources indexes = downloadThread.getIndexes();
@@ -117,12 +119,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download_activity);
-
-		View root = findViewById(R.id.root);
-		InsetsUtils.doOnApplyWindowInsets(root, EnumSet.of(
-				InsetsUtils.InsetSide.TOP,
-				InsetsUtils.InsetSide.BOTTOM
-		));
 
 		updateToolbar();
 

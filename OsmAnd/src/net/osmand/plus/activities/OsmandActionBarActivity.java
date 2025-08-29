@@ -2,15 +2,20 @@ package net.osmand.plus.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 @SuppressLint("Registered")
@@ -47,6 +52,14 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
 		if (haveHomeButton) {
 			setupHomeButton();
+		}
+
+		View root = findViewById(R.id.root);
+		if (root != null) {
+			InsetsUtils.setWindowInsetsListener(root, EnumSet.of(
+					InsetSide.TOP,
+					InsetSide.BOTTOM
+			));
 		}
 	}
 
