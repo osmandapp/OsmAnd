@@ -83,6 +83,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import net.osmand.plus.utils.FPSManager;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -1923,11 +1924,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public boolean onTouchEvent(MotionEvent event) {
 		if (mapRenderer != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+				FPSManager.getInstance().setInteraction(FPSManager.Interaction.UI);
 				mapRenderer.suspendSymbolsUpdate();
 				targetChanged = false;
 				touchActive = true;
 			} else if (event.getAction() == MotionEvent.ACTION_UP
 					|| event.getAction() == MotionEvent.ACTION_CANCEL) {
+				FPSManager.getInstance().endInteraction(FPSManager.Interaction.UI);
 				mapRenderer.resumeSymbolsUpdate();
 				touchActive = false;
 				if (targetChanged) {
@@ -2043,6 +2046,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			} else {
 				mapRenderer.setResourceWorkerThreadsLimit(mapRenderer.getDefaultWorkerThreadsLimit() / 2);
 			}
+
+			FPSManager.getInstance().initialize(mapRenderer);
 		}
 	}
 

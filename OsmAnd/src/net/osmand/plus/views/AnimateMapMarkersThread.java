@@ -16,6 +16,7 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
+import net.osmand.plus.utils.FPSManager;
 
 public class AnimateMapMarkersThread {
 
@@ -81,8 +82,10 @@ public class AnimateMapMarkersThread {
 		stopped = false;
 		Thread t = new Thread(() -> {
 			try {
+				FPSManager.getInstance().setInteraction(FPSManager.Interaction.ANIMATION);
 				runnable.run();
 			} finally {
+				FPSManager.getInstance().endInteraction(FPSManager.Interaction.ANIMATION);
 				currentThread = null;
 			}
 		}, "Animating Map markers Thread");
@@ -162,7 +165,6 @@ public class AnimateMapMarkersThread {
 		if (mapRenderer != null) {
 			mapRenderer.resumeMapMarkersAnimation();
 			while (!stopped) {
-				mapRenderer.requestRender();
 				sleepToRedraw(true);
 				if (mapRenderer.isMapMarkersAnimationFinished()) {
 					break;
