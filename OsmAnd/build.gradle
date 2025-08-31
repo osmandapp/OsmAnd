@@ -1,3 +1,5 @@
+import com.android.build.gradle.tasks.MergeSourceSetFolders
+
 apply plugin: 'com.android.application'
 apply from: 'build-common.gradle'
 apply from: rootProject.file("versions.gradle")
@@ -51,7 +53,7 @@ android {
 		minSdkVersion osmand_minSdk
 		versionCode 5299
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "5.2.0"
+		versionName "5.2.1"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -221,18 +223,6 @@ android {
 }
 
 afterEvaluate {
-	android.applicationVariants.configureEach { variant ->
-		if (variant.name.contains('Opengldebug')) {
-			variant.javaCompileProvider.configure {
-				dependsOn collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore
-			}
-		} else {
-			variant.javaCompileProvider.configure {
-				dependsOn collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore
-			}
-		}
-	}
-
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
 	if (tskReqStr.contains("huawei")) {
@@ -240,20 +230,30 @@ afterEvaluate {
 	}
 }
 
-tasks.register('copyOsmAndCoreWithJNI') {
-	dependsOn buildOsmAndCore
-	doLast {
-		file("libs/armeabi-v7a").mkdirs()
-		copy { from("../../binaries/android/clang-armeabi-v7a/Debug/libOsmAndCoreWithJNI.so") into("libs/armeabi-v7a") }
+tasks.register('copyOsmAndCoreWithJNI', Copy) {
+	dependsOn tasks.named('buildOsmAndCore')
+	into(project.file('libs'))
+	from("../../binaries/android/clang-armeabi-v7a/Debug") { include 'libOsmAndCoreWithJNI.so'; into 'armeabi-v7a' }
+	from("../../binaries/android/clang-arm64-v8a/Release") { include 'libOsmAndCoreWithJNI.so'; into 'arm64-v8a' }
+	from("../../binaries/android/clang-x86/Debug")         { include 'libOsmAndCoreWithJNI.so'; into 'x86' }
+	from("../../binaries/android/clang-x86_64/Debug")      { include 'libOsmAndCoreWithJNI.so'; into 'x86_64' }
+}
 
-		file("libs/arm64-v8a").mkdirs()
-		copy { from("../../binaries/android/clang-arm64-v8a/Debug/libOsmAndCoreWithJNI.so") into("libs/arm64-v8a") }
+android.applicationVariants.configureEach { variant ->
+	def compile = variant.javaCompileProvider
+	compile.configure {
+		dependsOn tasks.named('collectExternalResources'),
+				tasks.named('buildOsmAndCore'),
+				tasks.named('cleanupDuplicatesInCore')
+	}
 
-		file("libs/x86").mkdirs()
-		copy { from("../../binaries/android/clang-x86/Debug/libOsmAndCoreWithJNI.so") into("libs/x86") }
-
-		file("libs/x86_64").mkdirs()
-		copy { from("../../binaries/android/clang-x86_64/Debug/libOsmAndCoreWithJNI.so") into("libs/x86_64") }
+	if (variant.name.contains('Opengl')) {
+		compile.configure {
+			dependsOn tasks.named('copyOsmAndCoreWithJNI')
+		}
+		tasks.named("merge${variant.name.capitalize()}JniLibFolders", MergeSourceSetFolders).configure {
+			dependsOn tasks.named('copyOsmAndCoreWithJNI')
+		}
 	}
 }
 
@@ -272,10 +272,10 @@ dependencies {
 
 afterEvaluate {
 	def remoteAarSnapshot = "master-snapshot"
-	def localAarFile = file("../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar")
+	def localAarFile = file("../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-release.aar")
 
 	def requestedTasks = gradle.startParameter.taskNames.join(",").toLowerCase()
-	def useLocalOsmAndCore = requestedTasks.contains("opengldebug") && localAarFile.exists()
+	def useLocalOsmAndCore = localAarFile.exists()
 
 	if (useLocalOsmAndCore) {
 		println "Using local OsmAndCore AAR (${localAarFile})"
@@ -283,8 +283,8 @@ afterEvaluate {
 		dependencies.add("opengldebugImplementation", files(localAarFile))
 	} else {
 		println "Using remote OsmAndCore snapshot (${remoteAarSnapshot})"
-		dependencies.add("openglImplementation", "net.osmand:OsmAndCore_androidNativeRelease:${remoteAarSnapshot}@aar")
-		dependencies.add("openglImplementation", "net.osmand:OsmAndCore_android:${remoteAarSnapshot}@aar")
+		dependencies.add("openglImplementation", "net.osmand:OsmAndCore_androidNativeRelease:${remoteAarSnapshot}@aar") {changing = true}
+		dependencies.add("openglImplementation", "net.osmand:OsmAndCore_android:${remoteAarSnapshot}@aar") {changing = true}
 		dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_androidNativeDebug:${remoteAarSnapshot}@aar")
 		dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_android:${remoteAarSnapshot}@aar")
 	}
