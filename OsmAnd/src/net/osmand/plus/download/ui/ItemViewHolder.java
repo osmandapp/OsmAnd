@@ -21,7 +21,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
@@ -49,6 +51,7 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -58,6 +61,7 @@ import java.util.List;
 public class ItemViewHolder {
 
 	protected final OsmandApplication app;
+	protected final View view;
 	protected final TextView tvName;
 	protected final TextView tvDesc;
 	protected final ImageView ivLeft;
@@ -73,8 +77,8 @@ public class ItemViewHolder {
 
 	protected final DownloadActivity context;
 
-	private final int textColorPrimary;
-	private final int textColorSecondary;
+	protected final int textColorPrimary;
+	protected final int textColorSecondary;
 
 	boolean showTypeInDesc;
 	boolean showTypeInName;
@@ -101,6 +105,7 @@ public class ItemViewHolder {
 	public ItemViewHolder(@NonNull View view, @NonNull DownloadActivity context) {
 		this.context = context;
 		this.app = context.getMyApplication();
+		this.view = view;
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
 		pbProgress = view.findViewById(R.id.progressBar);
 		btnRight = view.findViewById(R.id.rightButton);
@@ -157,11 +162,11 @@ public class ItemViewHolder {
 		weatherAvailable = InAppPurchaseUtils.isWeatherAvailable(app);
 	}
 
-	public void bindDownloadItem(DownloadItem downloadItem) {
+	public void bindDownloadItem(@NonNull DownloadItem downloadItem) {
 		bindDownloadItem(downloadItem, null);
 	}
 
-	public void bindDownloadItem(DownloadItem downloadItem, String cityName) {
+	public void bindDownloadItem(@NonNull DownloadItem downloadItem, @Nullable String cityName) {
 		initAppStatusVariables();
 		boolean isDownloading = downloadItem.isDownloading(context.getDownloadThread());
 		float progress = -1;
@@ -182,8 +187,8 @@ public class ItemViewHolder {
 		ViewCompat.setAccessibilityDelegate(ivBtnRight, new AccessibilityAssistant(context) {
 
 			@Override
-			public void onInitializeAccessibilityNodeInfo(View host,
-					AccessibilityNodeInfoCompat info) {
+			public void onInitializeAccessibilityNodeInfo(@NonNull View host,
+			                                              @NonNull AccessibilityNodeInfoCompat info) {
 				super.onInitializeAccessibilityNodeInfo(host, info);
 				info.setContentDescription(context.getString(R.string.shared_string_download) + tvName.getText());
 				info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
@@ -198,14 +203,13 @@ public class ItemViewHolder {
 		} else {
 			tvName.setTextColor(textColorSecondary);
 		}
-		int color = textColorSecondary;
+		int iconColor = textColorSecondary;
 		if (downloadItem.isDownloaded() && !isDownloading) {
-			int colorId = downloadItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
-			color = context.getColor(colorId);
+			iconColor = ColorUtilities.getColor(context, getIconColorId(downloadItem));
 		}
 		if (downloadItem.isDownloaded()) {
 			ivLeft.setImageDrawable(getContentIcon(context,
-					downloadItem.getType().getIconResource(), color));
+					downloadItem.getType().getIconResource(), iconColor));
 		} else if (disabled) {
 			ivLeft.setImageDrawable(getContentIcon(context,
 					downloadItem.getType().getIconResource(), textColorSecondary));
@@ -372,6 +376,11 @@ public class ItemViewHolder {
 		return disabled;
 	}
 
+	@ColorRes
+	protected int getIconColorId(@NonNull DownloadItem downloadItem) {
+		return downloadItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
+	}
+
 	private int getDownloadActionIconId(@NonNull DownloadItem item) {
 		return item instanceof MultipleDownloadItem ? R.drawable.ic_action_multi_download : R.drawable.ic_action_gsave_dark;
 	}
@@ -492,8 +501,7 @@ public class ItemViewHolder {
 
 	protected void download(DownloadItem item, DownloadResourceGroup parentOptional) {
 		boolean handled = false;
-		if (parentOptional != null && item instanceof IndexItem) {
-			IndexItem indexItem = (IndexItem) item;
+		if (parentOptional != null && item instanceof IndexItem indexItem) {
 			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
 			context.setDownloadItem(region, indexItem.getTargetFile(app).getAbsolutePath());
 		}
@@ -523,8 +531,7 @@ public class ItemViewHolder {
 	}
 
 	private void startDownload(DownloadItem item) {
-		if (item instanceof IndexItem) {
-			IndexItem indexItem = (IndexItem) item;
+		if (item instanceof IndexItem indexItem) {
 			context.startDownload(indexItem);
 		} else {
 			selectIndexesToDownload(item);
