@@ -1,5 +1,7 @@
 package net.osmand.plus.utils;
 
+import android.content.Context;
+import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -14,13 +16,31 @@ import java.util.EnumSet;
 
 public class InsetsUtils {
 
+	public static Insets getSysBars(@NonNull Context ctx, @Nullable WindowInsetsCompat insets) {
+		if (!isEdgeToEdgeSupported()) {
+			return Insets.of(0, AndroidUtils.getStatusBarHeight(ctx), 0, 0);
+		} else {
+			if (insets == null) {
+				return null;
+			} else {
+				return insets.getInsets(WindowInsetsCompat.Type.systemBars());
+			}
+		}
+	}
+
 	public enum InsetSide {
 		LEFT, TOP, RIGHT, BOTTOM
 	}
-
+	public static boolean isEdgeToEdgeSupported(){
+		return Build.VERSION.SDK_INT > 29;
+	}
 	public static void setWindowInsetsListener(@NonNull final View view,
 	                                           @NonNull final OnInsetsApplied callback,
 	                                           boolean consume) {
+		if (!isEdgeToEdgeSupported()) {
+			return;
+		}
+
 		ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
 			callback.onApply(v, insets);
 			return consume ? WindowInsetsCompat.CONSUMED : insets;
@@ -57,7 +77,7 @@ public class InsetsUtils {
 	public static void applyPadding(@NonNull View view,
 	                                @NonNull WindowInsetsCompat insets,
 	                                @Nullable EnumSet<InsetSide> sides) {
-		if (sides == null) {
+		if (sides == null || !isEdgeToEdgeSupported()) {
 			return;
 		}
 		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

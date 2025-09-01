@@ -70,8 +70,8 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 
 		Activity activity = requireActivity();
 		if (activity instanceof MapActivity) {
-			InsetsUtils.setWindowInsetsListener(view, (view1, insets) -> {
-				InsetsUtils.applyPadding(view1, insets, getSideInsets());
+			InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
+				InsetsUtils.applyPadding(v, insets, getSideInsets());
 				lastRootInsets = insets;
 				onApplyInsets(insets);
 			}, true);
@@ -80,7 +80,7 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 
 	@Nullable
 	protected EnumSet<InsetSide> getSideInsets(){
-		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+		return EnumSet.of(InsetSide.TOP);
 	}
 
 	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){

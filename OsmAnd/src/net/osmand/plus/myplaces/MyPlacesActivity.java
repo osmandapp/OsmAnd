@@ -8,11 +8,9 @@ import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -68,7 +66,6 @@ public class MyPlacesActivity extends TabActivity {
 		app = getMyApplication();
 		settings = app.getSettings();
 		app.applyTheme(this);
-		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");

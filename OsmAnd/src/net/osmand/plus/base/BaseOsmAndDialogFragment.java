@@ -62,23 +62,28 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		super.onStart();
 		Dialog dialog = getDialog();
 
-		if (dialog != null && dialog.getWindow() != null) {
+		if (dialog != null && dialog.getWindow() != null && Build.VERSION.SDK_INT > 29) {
 			if (Build.VERSION.SDK_INT >= 36) {
 				//WindowCompat.enableEdgeToEdge(window);
 			} else {
 				WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), false);
 			}
-			View decor = dialog.getWindow().getDecorView();
-			InsetsUtils.setWindowInsetsListener(decor, (v, insets) -> {
-				InsetsUtils.applyPadding(v, insets, getSideInsets());
-				lastInset = insets;
-				onApplyInsets(insets);
-			}, true);
+
 		}
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
+			InsetsUtils.applyPadding(v, insets, getSideInsets());
+			lastInset = insets;
+			onApplyInsets(insets);
+		}, true);
+	}
+
 	protected EnumSet<InsetSide> getSideInsets(){
-		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+		return EnumSet.of(InsetSide.TOP);
 	}
 
 	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){

@@ -33,6 +33,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -160,15 +161,14 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
-		setupHeightAndBackground(getView(), insets);
+		setupHeightAndBackground(getView(), insets.getInsets(WindowInsetsCompat.Type.systemBars()));
 	}
 
-	protected void setupHeightAndBackground(@Nullable View mainView, @NonNull WindowInsetsCompat insets) {
+	protected void setupHeightAndBackground(@Nullable View mainView, @NonNull Insets sysBars) {
 		Activity activity = getActivity();
 		if (activity == null || mainView == null) {
 			return;
 		}
-		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 		int screenHeight = AndroidUtils.getScreenHeight(requireActivity());
 		int availableHeight = screenHeight - sysBars.top - sysBars.bottom;
 		int contentHeight = getContentHeight(availableHeight);
@@ -199,9 +199,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected void setupHeightAndBackground(View mainView) {
-		WindowInsetsCompat insets = getLastInsets();
-		if (insets != null) {
-			setupHeightAndBackground(mainView, insets);
+		Insets ins = InsetsUtils.getSysBars(app, getLastInsets());
+		if (ins != null) {
+			setupHeightAndBackground(mainView, ins);
 		} else {
 			ViewCompat.requestApplyInsets(mainView);
 		}

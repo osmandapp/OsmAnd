@@ -5,8 +5,11 @@ import static net.osmand.plus.Version.FULL_VERSION_NAME;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.TalkbackUtils;
 import net.osmand.plus.utils.TalkbackUtils.TalkbackHandler;
 
@@ -45,6 +49,14 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		super.onResume();
 		initInAppPurchaseHelper();
 		getSupportFragmentManager().registerFragmentLifecycleCallbacks(lifecycleCallbacks, false);
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState){
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			EdgeToEdge.enable(this);
+		}
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override

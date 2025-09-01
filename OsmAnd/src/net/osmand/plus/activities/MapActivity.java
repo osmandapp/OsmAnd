@@ -26,7 +26,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -221,7 +220,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
-		EdgeToEdge.enable(this);
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
 		settings = app.getSettings();
@@ -242,9 +240,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		enterToFullScreen();
 		// Navigation Drawer
 		View menuItems = findViewById(R.id.menuItems);
-/*		InsetsUtils.setWindowInsetsListener(findViewById(R.id.fragmentContainer), EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
-		InsetsUtils.setWindowInsetsListener(findViewById(R.id.dashboard), EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
-		InsetsUtils.setWindowInsetsListener(findViewById(R.id.routeMenuContainer), EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));*/
+		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
+		InsetsUtils.setWindowInsetsListener(findViewById(R.id.dashboard), EnumSet.of(InsetSide.BOTTOM));
 		InsetsUtils.setWindowInsetsListener(menuItems, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {

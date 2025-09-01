@@ -10,21 +10,16 @@ import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintJobId;
 import android.print.PrintManager;
-import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.InsetsUtils;
 
 import org.apache.commons.logging.Log;
-
-import java.util.EnumSet;
 
 public class PrintDialogActivity extends ActionBarProgressActivity {
 
@@ -41,7 +36,6 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		app = getMyApplication();
 		app.applyTheme(this);
 		getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
-		EdgeToEdge.enable(this);
 
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);

@@ -1,9 +1,7 @@
 package net.osmand.plus.help;
 
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentManager;
@@ -11,9 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.BaseLogcatActivity;
-import net.osmand.plus.utils.InsetsUtils;
-
-import java.util.EnumSet;
 
 
 public class HelpActivity extends BaseLogcatActivity {
@@ -32,7 +27,6 @@ public class HelpActivity extends BaseLogcatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		app = getMyApplication();
 		app.applyTheme(this);
-		EdgeToEdge.enable(this);
 		super.onCreate(savedInstanceState);
 
 		articlesHelper = new HelpArticlesHelper(this);

@@ -169,7 +169,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Nullable
 	protected EnumSet<InsetSide> getSideInsets(){
-		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+		return EnumSet.of(InsetSide.TOP);
 	}
 
 	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){

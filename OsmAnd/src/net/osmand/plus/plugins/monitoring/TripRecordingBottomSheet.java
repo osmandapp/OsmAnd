@@ -691,7 +691,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	@Override
-	protected void setupHeightAndBackground(@Nullable View mainView, @NonNull WindowInsetsCompat insets) {
+	protected void setupHeightAndBackground(@Nullable View mainView, @NonNull Insets sysBars) {
 		Activity activity = getActivity();
 		if (activity == null || mainView == null) {
 			return;
@@ -700,7 +700,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			super.setupHeightAndBackground(mainView);
 			return;
 		}
-		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
