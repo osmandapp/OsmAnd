@@ -47,6 +47,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -64,6 +65,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 
@@ -400,6 +402,11 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 
 	private boolean isColoringTypeAvailable() {
 		return InAppPurchaseUtils.isColoringTypeAvailable(app);
+	}
+
+	@Nullable
+	protected EnumSet<InsetSide> getSideInsets(){
+		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

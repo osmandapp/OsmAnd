@@ -32,6 +32,7 @@ import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -40,6 +41,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 public class TravelRoutesFragment extends BaseFullScreenFragment {
@@ -429,6 +431,11 @@ public class TravelRoutesFragment extends BaseFullScreenFragment {
 		emptyView.setGravity(Gravity.CENTER);
 		emptyView.setText(titleId);
 		return emptyView;
+	}
+
+	@Nullable
+	protected EnumSet<InsetSide> getSideInsets(){
+		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

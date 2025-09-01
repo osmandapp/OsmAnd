@@ -30,6 +30,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingClass;
 import net.osmand.util.Algorithms;
@@ -38,6 +39,7 @@ import net.osmand.util.CollectionUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public abstract class MapRoutesFragment extends BaseFullScreenFragment implements CardListener {
@@ -207,6 +209,11 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 			return SkiRoutesFragment.class.getName();
 		}
 		return CustomRoutesFragment.class.getName();
+	}
+
+	@Nullable
+	protected EnumSet<InsetSide> getSideInsets(){
+		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String attrName) {

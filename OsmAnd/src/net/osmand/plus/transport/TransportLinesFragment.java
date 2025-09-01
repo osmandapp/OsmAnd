@@ -24,10 +24,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
+import java.util.EnumSet;
 import java.util.List;
 
 public class TransportLinesFragment extends BaseFullScreenFragment {
@@ -169,6 +171,11 @@ public class TransportLinesFragment extends BaseFullScreenFragment {
 
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 		AndroidUtils.setBackground(view, background);
+	}
+
+	@Nullable
+	protected EnumSet<InsetSide> getSideInsets(){
+		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
