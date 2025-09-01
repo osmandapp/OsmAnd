@@ -94,7 +94,6 @@ public class AsyncLoadingThread extends Thread {
 	}
 
 	private void updateBitmapTilesCache() {
-		log.info(">>>>> updateBitmapTilesCache");
 		int maxCacheSize = 0;
 		long currentTime = System.currentTimeMillis();
 		for (MapTileLayerSize layerSize : resourceManger.getMapTileLayerSizes()) {
