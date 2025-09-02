@@ -118,7 +118,7 @@ public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment 
 	}
 
 	private void setupButtons(@NonNull View view) {
-		View container = view.findViewById(R.id.buttons_container);
+		View container = view.findViewById(R.id.bottom_buttons_container);
 		container.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		DialogButton button = container.findViewById(R.id.dismiss_button);

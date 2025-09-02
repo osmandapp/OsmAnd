@@ -17,6 +17,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,8 +33,14 @@ import net.osmand.plus.quickaction.AddQuickActionsAdapter.ItemClickListener;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 public class AddQuickActionFragment extends BaseFullScreenFragment implements ItemClickListener, IAskDismissDialog {
 
@@ -48,6 +56,7 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 	private ImageView backButton;
 	private TextView title;
 	private ImageView searchButton;
+	private RecyclerView recyclerView;
 
 	private AddQuickActionController controller;
 	private boolean searchMode = false;
@@ -92,6 +101,17 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 		setupOnBackPressedCallback();
 
 		return view;
+	}
+
+	@Override
+	protected void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		InsetsUtils.applyPadding(recyclerView, insets, EnumSet.of(searchMode ? InsetSide.BOTTOM : InsetSide.RESET));
+	}
+
+	@Nullable
+	@Override
+	protected List<Integer> getRootScrollableViewIds() {
+		return null;
 	}
 
 	private void setupOnBackPressedCallback() {
@@ -177,7 +197,7 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 		adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
 		adapter.setAdapterMode(DEFAULT_MODE);
 		adapter.setMap(controller.getAdapterItems());
-		RecyclerView recyclerView = view.findViewById(R.id.content_list);
+		recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
 		updateAdapter();

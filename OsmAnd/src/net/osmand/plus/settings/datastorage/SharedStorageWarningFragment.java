@@ -245,7 +245,7 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 		DialogButton rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
 		View buttonsShadow = buttonsContainer.findViewById(R.id.buttons_shadow);
 		View buttonsDivider = buttonsContainer.findViewById(R.id.buttons_divider);
-		View bottomButtons = buttonsContainer.findViewById(R.id.buttons_container);
+		View bottomButtons = buttonsContainer.findViewById(R.id.bottom_buttons_container);
 
 		boolean folderSelected = folderFile != null;
 		if (folderSelected) {

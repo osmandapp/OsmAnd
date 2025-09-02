@@ -1,21 +1,33 @@
 package net.osmand.plus.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.ListFragment;
 
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Base fragment class for list-based screens in the OsmAnd application
@@ -39,6 +51,8 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 
 	private LayoutInflater themedInflater;
 
+	private WindowInsetsCompat lastInset;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +61,53 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 		iconsCache = app.getUIUtilities();
 		appMode = restoreAppMode(app, appMode, savedInstanceState, getArguments());
 		updateNightMode();
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		Activity activity = requireActivity();
+		if (activity instanceof MapActivity) {
+			InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
+				EnumSet<InsetSide> insetSides = getSideInsets();
+				View listView = null;
+				List<Integer> rootScrollableIds = getRootScrollableViewIds();
+				if (rootScrollableIds != null) {
+					for (int id : rootScrollableIds) {
+						listView = v.findViewById(id);
+						if (listView != null) break;
+					}
+				}
+
+
+				InsetsUtils.applyPadding(v, insets, insetSides);
+				if (listView != null) {
+					if (listView instanceof ViewGroup viewGroup) {
+						viewGroup.setClipToPadding(false);
+					}
+					InsetsUtils.applyPadding(listView, insets, EnumSet.of(InsetSide.BOTTOM));
+				}
+				lastInset = insets;
+				onApplyInsets(insets);
+			}, true);
+		}
+	}
+
+	@Nullable
+	protected EnumSet<InsetSide> getSideInsets(){
+		return null;
+	}
+
+	@Nullable
+	protected List<Integer> getRootScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(android.R.id.list);
+		return ids;
+	}
+
+	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
 	}
 
 	@Override

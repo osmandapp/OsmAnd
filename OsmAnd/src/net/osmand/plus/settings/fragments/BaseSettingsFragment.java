@@ -25,6 +25,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
@@ -73,7 +74,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements IOsmAndFragment,
@@ -159,8 +162,38 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		Activity activity = requireActivity();
 		if (activity instanceof MapActivity) {
-			InsetsUtils.setWindowInsetsListener(view, (view1, insets) -> {
-				InsetsUtils.applyPadding(view1, insets, getSideInsets());
+			InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
+				Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+				InsetsUtils.applyPadding(v, insets, getSideInsets());
+
+				View bottomContainer = null;
+				List<Integer> bottomContainers = getBottomContainersIds();
+				if (bottomContainers != null) {
+					for (int id : bottomContainers) {
+						bottomContainer = v.findViewById(id);
+						if (bottomContainer != null) break;
+					}
+				}
+
+				if (bottomContainer != null) {
+					if (bottomContainer instanceof ViewGroup viewGroup) {
+						viewGroup.setClipToPadding(false);
+					}
+					InsetsUtils.applyPadding(bottomContainer, insets, EnumSet.of(InsetSide.BOTTOM));
+					ViewGroup.LayoutParams layoutParams = bottomContainer.getLayoutParams();
+					int oldHeight = layoutParams.height;
+					if (oldHeight != ViewGroup.LayoutParams.MATCH_PARENT && oldHeight != ViewGroup.LayoutParams.WRAP_CONTENT) {
+						int initialHeight = (Integer) (view.getTag(R.id.initial_height) != null
+								? view.getTag(R.id.initial_height)
+								: oldHeight);
+
+						if (view.getTag(R.id.initial_height) == null) {
+							view.setTag(R.id.initial_height, oldHeight);
+						}
+						layoutParams.height = initialHeight + sysBars.bottom;
+						bottomContainer.setLayoutParams(layoutParams);
+					}
+				}
 				lastRootInsets = insets;
 				onApplyInsets(insets);
 			}, true);
@@ -170,6 +203,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Nullable
 	protected EnumSet<InsetSide> getSideInsets(){
 		return EnumSet.of(InsetSide.TOP);
+	}
+
+	@Nullable
+	protected List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
 	}
 
 	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){

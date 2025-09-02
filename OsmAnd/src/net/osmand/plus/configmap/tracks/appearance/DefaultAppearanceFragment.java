@@ -160,7 +160,7 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 		controller.getWidthCardController().setOnNeedScrollListener(y -> {
 			View view = getView();
 			if (view != null) {
-				int bottomVisibleY = view.findViewById(R.id.buttons_container).getTop();
+				int bottomVisibleY = view.findViewById(R.id.bottom_buttons_container).getTop();
 				if (y > bottomVisibleY) {
 					NestedScrollView scrollView = view.findViewById(R.id.scroll_view);
 					int diff = y - bottomVisibleY;

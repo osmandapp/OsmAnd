@@ -72,7 +72,7 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 		BottomSheetBehavior behavior = BottomSheetBehavior.from(scrollView);
 		behavior.setPeekHeight(getPeekHeight());
 
-		LinearLayout buttonsContainer = mainView.findViewById(R.id.buttons_container);
+		LinearLayout buttonsContainer = mainView.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundResource(getButtonsContainerBg());
 
 		if (!portrait) {
@@ -93,7 +93,7 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 			dismiss();
 		});
 		if (hideButtonsContainer()) {
-			mainView.findViewById(R.id.buttons_container).setVisibility(View.GONE);
+			mainView.findViewById(R.id.bottom_buttons_container).setVisibility(View.GONE);
 		} else {
 			int rightBottomButtonTextId = getRightBottomButtonTextId();
 			if (rightBottomButtonTextId != DEFAULT_VALUE) {

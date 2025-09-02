@@ -160,6 +160,12 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		return view;
 	}
 
+	@Nullable
+	@Override
+	protected List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -219,7 +225,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		saveButton.setOnClickListener(v -> savePressed());
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
 		saveButton.setTitleId(R.string.shared_string_save);
-		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.buttons_container), ColorUtilities.getListBgColorId(nightMode));
+		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.bottom_buttons_container), ColorUtilities.getListBgColorId(nightMode));
 	}
 
 	protected void setupNameChangeListener() {

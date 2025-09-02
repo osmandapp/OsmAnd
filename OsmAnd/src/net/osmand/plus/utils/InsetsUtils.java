@@ -29,7 +29,7 @@ public class InsetsUtils {
 	}
 
 	public enum InsetSide {
-		LEFT, TOP, RIGHT, BOTTOM
+		LEFT, TOP, RIGHT, BOTTOM, RESET
 	}
 	public static boolean isEdgeToEdgeSupported(){
 		return Build.VERSION.SDK_INT > 29;
@@ -68,7 +68,7 @@ public class InsetsUtils {
 	}
 
 	public static void setWindowInsetsListener(@NonNull final View view,
-	                                           @NonNull final EnumSet<InsetSide> sides) {
+	                                           @Nullable final EnumSet<InsetSide> sides) {
 		setWindowInsetsListener(view, (v, insets) -> {
 			applyPadding(v, insets, sides);
 		}, false);
@@ -82,6 +82,7 @@ public class InsetsUtils {
 		}
 		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 
+		boolean resetToInitial = sides.contains(InsetSide.RESET);
 		boolean left = sides.contains(InsetSide.LEFT);
 		boolean top = sides.contains(InsetSide.TOP);
 		boolean right = sides.contains(InsetSide.RIGHT);
@@ -107,12 +108,21 @@ public class InsetsUtils {
 			view.setTag(R.id.initial_padding_bottom, initialBottom);
 		}
 
-		view.setPadding(
-				left ? initialLeft + sysBars.left : view.getPaddingLeft(),
-				top ? initialTop + sysBars.top : view.getPaddingTop(),
-				right ? initialRight + sysBars.right : view.getPaddingRight(),
-				bottom ? initialBottom + sysBars.bottom : view.getPaddingBottom()
-		);
+		if (resetToInitial) {
+			view.setPadding(
+					initialLeft,
+					initialTop,
+					initialRight,
+					initialBottom
+			);
+		} else {
+			view.setPadding(
+					left ? initialLeft + sysBars.left : view.getPaddingLeft(),
+					top ? initialTop + sysBars.top : view.getPaddingTop(),
+					right ? initialRight + sysBars.right : view.getPaddingRight(),
+					bottom ? initialBottom + sysBars.bottom : view.getPaddingBottom()
+			);
+		}
 	}
 
 	public interface OnInsetsApplied {

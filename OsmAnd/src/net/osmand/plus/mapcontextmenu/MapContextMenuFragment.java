@@ -62,6 +62,7 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -87,6 +88,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
@@ -588,6 +590,12 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		fitPolygon();
 		created = true;
 		return view;
+	}
+
+	@Nullable
+	@Override
+	protected EnumSet<InsetSide> getSideInsets() {
+		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {

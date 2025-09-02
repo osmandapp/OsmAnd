@@ -112,7 +112,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			FrameLayout preferencesContainer = view.findViewById(android.R.id.list_container);
 			LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 			View bottomPanel = themedInflater.inflate(R.layout.control_bottom_buttons, preferencesContainer, false);
-			View buttonsContainer = bottomPanel.findViewById(R.id.buttons_container);
+			View buttonsContainer = bottomPanel.findViewById(R.id.bottom_buttons_container);
 			preferencesContainer.addView(bottomPanel);
 
 			buttonsContainer.findViewById(R.id.dismiss_button).setVisibility(View.GONE);

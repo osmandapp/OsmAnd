@@ -218,7 +218,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		saveButton.setOnClickListener(v -> savePressed());
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
 		saveButton.setTitleId(R.string.shared_string_save);
-		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.buttons_container), ColorUtilities.getListBgColorId(nightMode));
+		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.bottom_buttons_container), ColorUtilities.getListBgColorId(nightMode));
 
 		DialogButton dismissButton = view.findViewById(R.id.dismiss_button);
 		AndroidUiHelper.updateVisibility(dismissButton, false);

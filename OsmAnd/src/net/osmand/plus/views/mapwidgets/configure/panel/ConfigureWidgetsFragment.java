@@ -146,7 +146,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		fabNewWidget = view.findViewById(R.id.new_entry_fab);
 		bottomButtonsShadow = view.findViewById(R.id.buttons_shadow);
 		toolbarTitleView = toolbar.findViewById(R.id.toolbar_title);
-		bottomButtons = view.findViewById(R.id.buttons_container);
+		bottomButtons = view.findViewById(R.id.bottom_buttons_container);
 		shadowView = view.findViewById(R.id.shadow_view);
 
 		bottomButtons.setVisibility(View.GONE);

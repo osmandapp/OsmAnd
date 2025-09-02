@@ -132,7 +132,7 @@ public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 
 	private void setupRadioButtons(@NonNull View view) {
 		radioButtons = new ArrayList<>();
-		LinearLayout buttonsContainer = view.findViewById(R.id.buttons_container);
+		LinearLayout buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 
 		for (int i = 0; i < TrackApproximationType.values().length; i++) {
 			TrackApproximationType type = TrackApproximationType.values()[i];

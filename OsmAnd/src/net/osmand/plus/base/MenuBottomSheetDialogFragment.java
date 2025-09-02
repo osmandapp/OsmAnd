@@ -198,6 +198,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return EnumSet.of(InsetSide.BOTTOM);
 	}
 
+	@Nullable
+	protected List<Integer> getRootScrollableViewIds() {
+		return null;
+	}
+
 	protected void setupHeightAndBackground(View mainView) {
 		Insets ins = InsetsUtils.getSysBars(app, getLastInsets());
 		if (ins != null) {

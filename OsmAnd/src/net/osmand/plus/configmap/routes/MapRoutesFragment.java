@@ -216,6 +216,12 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 		return null;
 	}
 
+	@Nullable
+	@Override
+	protected List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String attrName) {
 		String name = getFragmentName(attrName);
 		FragmentManager manager = activity.getSupportFragmentManager();
