@@ -90,7 +90,7 @@ public class FPSManager {
                 }
             };
 
-            int idleInteractionTimerDelay = 200;
+            int idleInteractionTimerDelay = mapRenderer.getMaxHardwareFrameRate() / 1000;
             idleTimer.schedule(idleTimerTask, idleInteractionTimerDelay);
         }
     }
