@@ -6176,4 +6176,5 @@
     <string name="deleting">Menghapus…</string>
     <string name="release_5_1">• Menambahkan dukungan untuk pembelian web dan lintas platform\n\n • Memindahkan unit Suhu ke pengaturan Umum untuk akses yang lebih mudah\n\n • Menambahkan indikator daya baterai untuk sensor BLE\n\n • UI baru yang lebih intuitif untuk pemilihan titik di Navigasi\n\n • Visibilitas widget yang ditingkatkan dengan garis besar baru\n\n • Menambahkan penganalisis Tanjakan/Turunan\n\n • Integrasi Wikipedia &amp; Wikivoyage yang diperluas untuk lebih banyak POI.</string>
     <string name="show_rasterization_debug_tile">Tampilkan informasi rasterisasi ubin</string>
+    <string name="show_local_names">Tampilkan nama lokal</string>
 </resources>

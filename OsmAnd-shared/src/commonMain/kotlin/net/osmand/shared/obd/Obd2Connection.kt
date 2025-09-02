@@ -92,11 +92,13 @@ class Obd2Connection(
 
 	suspend fun run(
 		fullCommand: String,
-		command: Int,
-		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
+		command: OBDCommand): OBDResponse {
 		if (finished) {
 			return OBDResponse.ERROR
 		}
+		val commandCode = command.command
+		val commandType = command.commandType
+
 		var responseString = runImpl(fullCommand)
 		val originalResponseValue = responseString
 		responseString = normalizeResponseString(fullCommand, responseString, commandType)
@@ -105,15 +107,23 @@ class Obd2Connection(
 			return systemResponse
 		}
 		try {
-			var hexValues = toHexValues(responseString)
-			if (hexValues.size < 3 ||
-				hexValues[0] != commandType.code ||
-				hexValues[1] != command) {
-				log("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
+			if (command.isHexAnswer) {
+				var hexValues = toHexValues(responseString)
+				if (hexValues.size < 3 ||
+					hexValues[0] != commandType.code ||
+					hexValues[1] != commandCode) {
+					log("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
+				} else {
+					hexValues = hexValues.copyOfRange(2, hexValues.size)
+				}
+				return OBDResponse(hexValues)
 			} else {
-				hexValues = hexValues.copyOfRange(2, hexValues.size)
+				return OBDResponse(
+					responseString
+						.encodeToByteArray()
+						.map { it.toInt() }
+						.toIntArray())
 			}
-			return OBDResponse(hexValues)
 		} catch (e: IllegalArgumentException) {
 			log(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$responseString'"

@@ -1874,11 +1874,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				event.getAction() == MotionEvent.ACTION_SCROLL &&
 				event.getAxisValue(MotionEvent.AXIS_VSCROLL) != 0) {
 			RotatedTileBox tb = getCurrentRotatedTileBox();
-			double lat = tb.getLatFromPixel(event.getX(), event.getY());
-			double lon = tb.getLonFromPixel(event.getX(), event.getY());
+			LatLon latlon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, event.getX(), event.getY());
 			int zoomDir = event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0 ? -1 : 1;
 			int endZoom = normalizeZoomWithLimits(getZoom() + zoomDir);
-			getAnimatedDraggingThread().startMoving(lat, lon, endZoom);
+			float zoomFloatPart = getZoomFloatPart();
+			if (hasMapRenderer()) {
+				getAnimatedDraggingThread().startZooming(endZoom, zoomFloatPart, latlon, true);
+			} else {
+				getAnimatedDraggingThread().startMoving(latlon.getLatitude(), latlon.getLongitude(), endZoom, zoomFloatPart);
+			}
 			return true;
 		}
 		return false;

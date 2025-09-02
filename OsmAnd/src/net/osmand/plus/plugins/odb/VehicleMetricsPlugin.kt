@@ -214,6 +214,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				customId,
 				widgetsPanel)
 
+			// TODO: OBD Battery widget
+//			WidgetType.OBD_ALT_BATTERY_VOLTAGE -> return OBDTextWidget(
+//				mapActivity,
+//				WidgetType.OBD_ALT_BATTERY_VOLTAGE,
+//				OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
+//				customId,
+//				widgetsPanel)
+
 			WidgetType.OBD_BATTERY_VOLTAGE -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_BATTERY_VOLTAGE,
@@ -853,6 +861,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
+			OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT,
@@ -888,7 +897,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> getTemperatureUnit().symbol
 
+			OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE -> app.getString(R.string.unit_volt)
+
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME,
 			OBDDataComputer.OBDTypeWidget.VIN -> null

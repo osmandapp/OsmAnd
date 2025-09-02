@@ -205,6 +205,8 @@ open class OBDTextWidget(
 			WidgetType.OBD_CALCULATED_ENGINE_LOAD,
 			WidgetType.OBD_FUEL_PRESSURE,
 			WidgetType.OBD_THROTTLE_POSITION,
+				// TODO: add OBD alt battery widget
+//			WidgetType.OBD_ALT_BATTERY_VOLTAGE,
 			WidgetType.OBD_BATTERY_VOLTAGE,
 			WidgetType.OBD_AIR_INTAKE_TEMP,
 			WidgetType.ENGINE_OIL_TEMPERATURE,
