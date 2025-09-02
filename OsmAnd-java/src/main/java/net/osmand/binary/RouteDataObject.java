@@ -932,7 +932,7 @@ public class RouteDataObject {
 			int y = getPoint31YTile(k);
 			int kx = getPoint31XTile(k + 1);
 			int ky = getPoint31YTile(k + 1);
-			d += simplifyDistance(kx, ky, x, y);
+			d += MapUtils.squareRootDist31(kx, ky, x, y);
 
 		}
 		return d;
@@ -961,13 +961,9 @@ public class RouteDataObject {
 			px = getPoint31XTile(nx);
 			py = getPoint31YTile(nx);
 			// translate into meters
-			total += simplifyDistance(x, y, px, py);
+			total += MapUtils.squareRootDist31(x, y, px, py);
 		} while (total < dist);
 		return -Math.atan2(x - px, y - py);
-	}
-
-	private double simplifyDistance(int x, int y, int px, int py) {
-		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
 	}
 
 	public String coordinates() {
