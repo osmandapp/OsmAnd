@@ -42,7 +42,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.BaseLocalItem;
@@ -62,13 +61,14 @@ import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,17 +95,27 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.update_index_frament, container, false);
-		getMyActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.UPDATES_TAB_NUMBER);
+		requireMyActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.UPDATES_TAB_NUMBER);
 		return view;
 	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		setupOnItemLongClickListener();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		updateErrorMessage();
+	}
+
+	private void setupOnItemLongClickListener() {
 		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
 			if (position > 0) {
 				IndexItem indexItem = (IndexItem) getListAdapter().getItem(position);
-				LocalItem localItem = fetchLocalItem(indexItem);
+				LocalItem localItem = indexItem.toLocalItem(app);
 				if (localItem != null) {
 					showContextMenu(v, indexItem, localItem);
 					return true;
@@ -116,19 +126,13 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		updateErrorMessage();
-	}
-
-	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		invalidateListView(getMyActivity());
+		invalidateListView(requireMyActivity());
 		updateUpdateAllButton();
 		startLoadLiveMapsAsyncTask();
 	}
@@ -140,7 +144,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	@Override
 	public void onUpdatedIndexesList() {
-		invalidateListView(getMyActivity());
+		invalidateListView(requireMyActivity());
 		updateUpdateAllButton();
 	}
 
@@ -178,7 +182,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		View view = getView();
 		if (view == null) return;
 
-		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
+		DownloadResources indexes = requireMyActivity().getDownloadThread().getIndexes();
 		List<IndexItem> indexItems = indexes.getItemsToUpdate();
 		TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.isEmpty() || indexItems.get(0).getType() == null) {
@@ -201,15 +205,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			updateAllButton.setText(updateAllText);
 			updateAllButton.setOnClickListener(v -> {
 				DownloadActivity activity = getMyActivity();
-				if (indexItems.size() > 3) {
-					AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-					dialog.setTitle(R.string.update_all_maps);
-					dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
-					dialog.setNegativeButton(R.string.shared_string_cancel, null);
-					dialog.setPositiveButton(R.string.shared_string_update, (d, which) -> activity.startDownload(indexItems.toArray(new IndexItem[0])));
-					dialog.create().show();
-				} else {
-					activity.startDownload(indexItems.toArray(new IndexItem[0]));
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					if (indexItems.size() > 3) {
+						AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+						dialog.setTitle(R.string.update_all_maps);
+						dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
+						dialog.setNegativeButton(R.string.shared_string_cancel, null);
+						dialog.setPositiveButton(R.string.shared_string_update, (d, which) -> activity.startDownload(indexItems.toArray(new IndexItem[0])));
+						dialog.create().show();
+					} else {
+						activity.startDownload(indexItems.toArray(new IndexItem[0]));
+					}
 				}
 			});
 		}
@@ -254,39 +260,10 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 	}
 
-	@Override
-	public void onDeletionConfirmed(@NonNull BaseLocalItem localItem) {
-		performOperation(OperationType.DELETE_OPERATION, localItem);
-	}
-
-	public void performOperation(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
-		OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, this), items);
-	}
-
-	@Override
-	public void onOperationStarted() {
-		// TODO: show progress when any operation started
-	}
-
-	@Override
-	public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
-		// TODO: hide progress and update list items
-	}
-
-	@NonNull
-	public DownloadActivity requireMyActivity() {
-		return Objects.requireNonNull(getMyActivity());
-	}
-
-	@Nullable
-	public DownloadActivity getMyActivity() {
-		return (DownloadActivity) getActivity();
-	}
-
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		ActionBar actionBar = getMyActivity().getSupportActionBar();
+		ActionBar actionBar = requireMyActivity().getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		}
@@ -309,21 +286,21 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void showContextMenu(@NonNull View view,
-	                             @NonNull DownloadItem downloadItem,
+	private void showContextMenu(@NonNull View view, @NonNull IndexItem indexItem,
 	                             @NonNull LocalItem localItem) {
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		DownloadActivity activity = getMyActivity();
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) return;
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(getMyActivity())
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.info_button)
 				.setIcon(getContentIcon(R.drawable.ic_action_info_outlined))
-				.setOnClickListener(v -> showItemInfoScreen(localItem))
+				.setOnClickListener(v -> showInfoScreen(localItem))
 				.create());
 
 		LocalItemType type = localItem.getType();
-		if (type.isUpdateSupported() && downloadItem instanceof IndexItem indexItem) {
-			items.add(new PopUpMenuItem.Builder(getMyActivity())
+		if (type.isUpdateSupported()) {
+			items.add(new PopUpMenuItem.Builder(activity)
 					.setTitleId(R.string.shared_string_update)
 					.setIcon(getContentIcon(R.drawable.ic_action_update))
 					.setOnClickListener(v -> updateItem(indexItem))
@@ -333,7 +310,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		boolean backuped = localItem.isBackuped(app);
 		if (type.isBackupSupported() || backuped) {
 			OperationType operationType = backuped ? RESTORE_OPERATION : BACKUP_OPERATION;
-			items.add(new PopUpMenuItem.Builder(getMyActivity())
+			items.add(new PopUpMenuItem.Builder(activity)
 					.setTitleId(operationType.getTitleId())
 					.setIcon(getContentIcon(operationType.getIconId()))
 					.setOnClickListener(v -> performOperation(operationType, localItem))
@@ -341,13 +318,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 
 		if (type.isDeletionSupported()) {
-			items.add(new PopUpMenuItem.Builder(getMyActivity())
+			items.add(new PopUpMenuItem.Builder(activity)
 					.setTitleId(R.string.shared_string_remove)
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
-					.setOnClickListener(v -> {
-						FragmentManager manager = getMyActivity().getSupportFragmentManager();
-						DeleteConfirmationDialogController.showDialog(app, manager, localItem, UpdatesIndexFragment.this);
-					})
+					.setOnClickListener(v -> showDeleteConfirmationDialog(localItem))
+					.showTopDivider(!Algorithms.isEmpty(items))
 					.create());
 		}
 
@@ -356,10 +331,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
 		displayData.layoutId = R.layout.simple_popup_menu_item;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
 		PopUpMenu.show(displayData);
 	}
 
-	private void showItemInfoScreen(@NonNull LocalItem localItem) {
+	private void showInfoScreen(@NonNull LocalItem localItem) {
 		callActivity(activity -> {
 			FragmentManager manager = activity.getSupportFragmentManager();
 			LocalItemFragment.showInstance(manager, localItem, null);
@@ -373,10 +349,48 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 	}
 
-	@Nullable
-	private LocalItem fetchLocalItem(@NonNull DownloadItem downloadItem) {
-		// TODO: implement it in correct way
-		return null;
+	private void showDeleteConfirmationDialog(@NonNull LocalItem localItem) {
+		callActivity(activity -> {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			DeleteConfirmationDialogController.showDialog(app, manager, localItem, this);
+		});
+	}
+
+	@Override
+	public void onDeletionConfirmed(@NonNull BaseLocalItem localItem) {
+		performOperation(OperationType.DELETE_OPERATION, localItem);
+	}
+
+	public void performOperation(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
+		OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, this), items);
+	}
+
+	@Override
+	public void onOperationStarted() {
+		updateProgressVisibility(true);
+	}
+
+	@Override
+	public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
+		updateProgressVisibility(false);
+		if (!Algorithms.isEmpty(result)) {
+			app.showToastMessage(result);
+		}
+		DownloadActivity activity = getMyActivity();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			if (CollectionUtils.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION)) {
+				activity.getDownloadThread().runReloadIndexFiles();
+			} else {
+				activity.onUpdatedIndexesList();
+			}
+		}
+	}
+
+	protected void updateProgressVisibility(boolean visible) {
+		DownloadActivity activity = getMyActivity();
+		if (activity != null) {
+			activity.setSupportProgressBarIndeterminateVisibility(visible);
+		}
 	}
 
 	@Override
@@ -391,6 +405,16 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		invalidateListView(requireMyActivity());
 		updateUpdateAllButton();
 		startLoadLiveMapsAsyncTask();
+	}
+
+	@NonNull
+	public DownloadActivity requireMyActivity() {
+		return Objects.requireNonNull(getMyActivity());
+	}
+
+	@Nullable
+	public DownloadActivity getMyActivity() {
+		return (DownloadActivity) getActivity();
 	}
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {
