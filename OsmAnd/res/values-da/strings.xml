@@ -5897,4 +5897,5 @@
     <string name="rendering_attr_spotDistance_description">Punkt‑dybdemåling afstand</string>
     <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
     <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
+    <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
 </resources>
