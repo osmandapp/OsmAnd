@@ -5682,4 +5682,5 @@
     <string name="lang_en_barebones">Béarla (lom)</string>
     <string name="shared_sting_osm_link">Nasc OSM</string>
     <string name="show_local_names">Taispeáin ainmneacha áitiúla</string>
+    <string name="obd_alt_battery_voltage">Voltas ceallraí (oiriúntóir)</string>
 </resources>
