@@ -33,7 +33,7 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.delete_map_description, controller.getLocalItemName()))
+				.setDescription(getString(R.string.delete_map_description, controller.getItemName()))
 				.setTitle(getString(R.string.delete_map))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create());

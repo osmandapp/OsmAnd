@@ -13,11 +13,13 @@ public class DeleteConfirmationDialogController extends BaseDialogController {
 
 	private static final String PROCESS_ID = "delete_confirmation";
 
-	private BaseLocalItem localItem;
+	private final BaseLocalItem localItem;
 	private ConfirmDeletionListener listener;
 
-	public DeleteConfirmationDialogController(@NonNull OsmandApplication app) {
+	public DeleteConfirmationDialogController(@NonNull OsmandApplication app,
+	                                          @NonNull BaseLocalItem localItem) {
 		super(app);
+		this.localItem = localItem;
 	}
 
 	public void setListener(@NonNull ConfirmDeletionListener listener) {
@@ -31,7 +33,7 @@ public class DeleteConfirmationDialogController extends BaseDialogController {
 	}
 
 	@NonNull
-	public CharSequence getLocalItemName() {
+	public CharSequence getItemName() {
 		return localItem.getName(app);
 	}
 
@@ -54,8 +56,8 @@ public class DeleteConfirmationDialogController extends BaseDialogController {
 	                              @NonNull FragmentManager manager,
 	                              @NonNull BaseLocalItem localItem,
 	                              @NonNull ConfirmDeletionListener listener) {
-		DeleteConfirmationDialogController controller = new DeleteConfirmationDialogController(app);
-		controller.localItem = localItem;
+		DeleteConfirmationDialogController controller =
+				new DeleteConfirmationDialogController(app, localItem);
 		controller.setListener(listener);
 
 		DialogManager dialogManager = app.getDialogManager();

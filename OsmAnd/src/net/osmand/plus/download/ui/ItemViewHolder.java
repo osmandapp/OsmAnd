@@ -77,8 +77,8 @@ public class ItemViewHolder {
 
 	protected final DownloadActivity context;
 
-	protected final int textColorPrimary;
-	protected final int textColorSecondary;
+	private final int textColorPrimary;
+	private final int textColorSecondary;
 
 	boolean showTypeInDesc;
 	boolean showTypeInName;

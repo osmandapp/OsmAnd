@@ -29,6 +29,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Collator;
@@ -117,7 +118,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 				IndexItem indexItem = (IndexItem) getListAdapter().getItem(position);
 				LocalItem localItem = indexItem.toLocalItem(app);
 				if (localItem != null) {
-					showContextMenu(v, indexItem, localItem);
+					askShowContextMenu(v, indexItem, localItem);
 					return true;
 				}
 			}
@@ -286,10 +287,13 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void showContextMenu(@NonNull View view, @NonNull IndexItem indexItem,
-	                             @NonNull LocalItem localItem) {
-		DownloadActivity activity = getMyActivity();
-		if (!AndroidUtils.isActivityNotDestroyed(activity)) return;
+	private void askShowContextMenu(@NonNull View view, @NonNull IndexItem indexItem,
+	                                @NonNull LocalItem localItem) {
+		callActivity(activity -> showContextMenu(activity, view, indexItem, localItem));
+	}
+
+	private void showContextMenu(@NonNull FragmentActivity activity, @NonNull View view,
+	                             @NonNull IndexItem indexItem, @NonNull LocalItem localItem) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(activity)
@@ -402,9 +406,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		invalidateListView(requireMyActivity());
-		updateUpdateAllButton();
-		startLoadLiveMapsAsyncTask();
+		callActivity(activity -> {
+			invalidateListView(activity);
+			updateUpdateAllButton();
+			startLoadLiveMapsAsyncTask();
+		});
 	}
 
 	@NonNull
