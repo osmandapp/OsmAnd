@@ -1257,22 +1257,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (mapRenderer != null) {
 					layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
 				}
-				QuadPoint center = getRotatedTileBox().getCenterPixelPoint();
-				if (app.getOsmandMap().getMapView().isCarView()) {
-					NavigationSession navigationSession = app.getCarNavigationSession();
-					if (navigationSession != null) {
-						SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-						if (surfaceRenderer != null) {
-							Rect visibleArea = surfaceRenderer.getVisibleArea();
-							if (visibleArea != null) {
-								QuadPoint canvasCenter = new QuadPoint(visibleArea.left + (visibleArea.right - visibleArea.left) / 2f, visibleArea.top + (visibleArea.bottom - visibleArea.top) / 2f);
-								cachedAACanvasOffset = new QuadPoint(canvasCenter.x - center.x, canvasCenter.y - center.y);
-							}
-						}
-					}
-				} else {
-					cachedAACanvasOffset = new QuadPoint();
-				}
+				updateAACanvasOffset();
 				layer.onDraw(canvas, tileBox, drawSettings);
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
@@ -1289,7 +1274,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public QuadPoint getCachedAACanvasOffset() {
+	private void updateAACanvasOffset() {
+		cachedAACanvasOffset = new QuadPoint();
+		QuadPoint center = getRotatedTileBox().getCenterPixelPoint();
+		if (app.getOsmandMap().getMapView().isCarView()) {
+			NavigationSession navigationSession = app.getCarNavigationSession();
+			if (navigationSession != null) {
+				SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
+				if (surfaceRenderer != null) {
+					Rect visibleArea = surfaceRenderer.getVisibleArea();
+					if (visibleArea != null) {
+						QuadPoint canvasCenter = new QuadPoint(visibleArea.left + (visibleArea.right - visibleArea.left) / 2f, visibleArea.top + (visibleArea.bottom - visibleArea.top) / 2f);
+						cachedAACanvasOffset = new QuadPoint(canvasCenter.x - center.x, canvasCenter.y - center.y);
+					}
+				}
+			}
+		}
+	}
+
+	public QuadPoint getAACanvasOffset() {
 		return cachedAACanvasOffset;
 	}
 

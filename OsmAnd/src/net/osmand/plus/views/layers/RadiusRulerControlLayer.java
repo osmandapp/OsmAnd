@@ -325,7 +325,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private QuadPoint getCachedAACanvasOffset() {
-		return getApplication().getOsmandMap().getMapView().getCachedAACanvasOffset();
+		return getApplication().getOsmandMap().getMapView().getAACanvasOffset();
 	}
 
 	private void updateData(RotatedTileBox tb, QuadPoint center) {
