@@ -5538,8 +5538,6 @@
     <string name="obd_fuel_type">Typ paliva</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="simulate_obd">Simulovať OBD údaje</string>
-    <string name="obd_fuel_consumption_rate_l_km">Spotreba paliva (l/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje rýchlosť spotreby paliva podľa výpočtov (l/100 km)</string>
     <string name="liter">l</string>
     <string name="obd_fuel_level">Efektivita paliva (%)</string>
     <string name="obd_fuel_consumption_rate">Spotreba paliva</string>

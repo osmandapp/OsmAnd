@@ -3897,7 +3897,6 @@
     <string name="map_widget_monitoring_services">பதிவு சேவைகள்</string>
     <string name="live_monitoring_interval_descr">நிகழ்நிலை கண்காணிப்பு இடைவெளியைக் குறிப்பிடவும்.</string>
     <string name="amenity_type_man_made">மனிதன் தயாரிக்கப்பட்டான்</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">கணக்கீடுகளின் அடிப்படையில் வாகன எரிபொருள் நுகர்வு வீதத்தைக் காட்டுகிறது (எல்/100 கி.மீ)</string>
     <string name="selected_value">தேர்ந்தெடுக்கப்பட்ட மதிப்பு</string>
     <string name="sort_duration_descending">முதலில் நீண்ட காலம்</string>
     <string name="shared_string_yards">கெசம்</string>
@@ -3918,7 +3917,6 @@
     <string name="obd_air_intake_temp_desc">என்சின் உட்கொள்ளும் பன்மடங்கு நுழையும் காற்றின் வெப்பநிலையைக் காட்டுகிறது.</string>
     <string name="shared_string_dynamic">மாறும்</string>
     <string name="bt_start_pair_failed">சாதனத்துடன் இணைவதைத் தொடங்க முடியாது</string>
-    <string name="obd_fuel_consumption_rate_l_km">எரிபொருள் நுகர்வு வீதம் (எல்/100 கி.மீ)</string>
     <string name="route_guidance_desc">அடுத்த திருப்பத்திற்கான தூரம், சாலை பெயர், தற்போதைய தெரு பெயர் மற்றும் பாதை செய்தி உள்ளிட்ட நிகழ்நேர பாதை வழிகாட்டுதலை வழங்குகிறது. வழிசெலுத்தலின் போது விட்செட்டுகள் செயலில் உள்ளன.</string>
     <string name="obd_bluetooth_off_description">ச்கேனர்களைக் கண்டுபிடித்து இணைக்க புளூடூத்தை இயக்கவும்.</string>
     <string name="third_links">மூன்றாவது இணைப்புகள்</string>

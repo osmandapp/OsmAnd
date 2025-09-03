@@ -5561,8 +5561,6 @@
     <string name="obd_device_forget_sensor">Zapomenout skener</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Spotřeba paliva (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/100 km)</string>
     <string name="simulate_obd">Simulace dat OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Tlak paliva</string>

@@ -5554,8 +5554,6 @@
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="speedometer_maximum">Највише</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Приказује потрошњу горива возила на основу прорачуна (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km">Брзина потрошње горива (L/100 km)</string>
     <string name="simulate_obd">Опонашај податке днв</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Притисак горива</string>

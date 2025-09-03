@@ -12,6 +12,12 @@
 -->
 
     <string name="obd_alt_battery_voltage">Battery voltage (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Imperial gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilometers</string>
+    <string name="miles">Miles</string>
+    <string name="mpg">MPG</string>
     <string name="backup_delete_data_warning_extended">This action will permanently remove all selected data from the cloud. It will not be possible to restore it later.</string>
     <string name="amount_of_total_used">%1$s of %2$s used</string>
     <string name="delete_data">Delete data</string>
@@ -268,8 +274,6 @@
     <string name="speedometer_maximum">Maximum</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (L/100 km)</string>
     <string name="simulate_obd">Simulate obd data</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Fuel pressure</string>

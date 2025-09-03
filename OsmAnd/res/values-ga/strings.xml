@@ -3519,7 +3519,6 @@
     <string name="obd_fuel_consumption_desc">Taispeánann seo an ráta úsáide breosla ag an inneall, arna ríomh bunaithe ar bhreosla atá fágtha, méid an umair, agus an fad atá clúdaithe de réir mar a chinneann GPS.</string>
     <string name="average_temperature">Meánteocht</string>
     <string name="dynamic_icon_type_summary">Athruithe deilbhíní bunaithe ar staid an ghnímh.</string>
-    <string name="obd_fuel_consumption_rate_l_km">Ráta ídithe breosla (L/100 km)</string>
     <string name="obd_fuel_level_percent">Leibhéal breosla (%)</string>
     <string name="obd_fuel_left_km">Breosla fágtha (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Ráta ídithe breosla (DAB)</string>
@@ -4634,7 +4633,6 @@
     <string name="obd_engine_runtime_desc">Taispeánann sé cé chomh fada is atá an t-inneall ag rith ó cuireadh tús leis.</string>
     <string name="obd_connected_to_device">Ceangailte le %s</string>
     <string name="obd_not_connected_to_device">Dícheangailte ó %s</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Taispeáin ráta ídithe breosla feithicle bunaithe ar ríomhanna (L/100 km)</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brú breosla</string>
     <string name="obd_fuel_consumption_rate_sensor">Ráta ídithe breosla (braiteoir)</string>

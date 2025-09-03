@@ -5530,7 +5530,6 @@
     <string name="obd_connecting_to_device">Connessione a %s</string>
     <string name="bt_start_pair_failed">Impossibile iniziare l\'accoppiamento con il dispositivo</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (%/h)</string>
-    <string name="obd_fuel_consumption_rate_l_km">Tasso di consumo di carburante (l/100km)</string>
     <string name="simulate_obd">Simula i dati obd</string>
     <string name="obd_engine_runtime">Tempo di Accensione del Motore</string>
     <string name="obd_engine_runtime_desc">Indica il tempo di funzionamento del motore dall\'avvio.</string>
@@ -5553,7 +5552,6 @@
     <string name="obd_widget_engine_speed">Velocità del motore</string>
     <string name="obd_nothing_found_text">Nessuno scanner trovato</string>
     <string name="shared_string_dynamic">Dinamico</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/100km)</string>
     <string name="obd_fuel_level_liter">Livello carburante (l)</string>
     <string name="obd_fuel_level_percent">Livello carburante (%)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>

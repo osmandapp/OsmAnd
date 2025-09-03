@@ -5395,7 +5395,6 @@
     <string name="screen_is_locked_by_action_button">触摸屏已经锁定。轻按按钮以解锁。</string>
     <string name="obd_fuel_consumption_rate_percent_hour">燃料消耗率 （百分比%/小时）</string>
     <string name="connect_obd_instructions_step1">将扫描仪连接到车辆的 OBD-II 接口。</string>
-    <string name="obd_fuel_consumption_rate_l_km">燃料消耗率（升/100 公里）</string>
     <string name="obd_fuel_consumption_rate_l_h">燃料消耗率（升/小时）</string>
     <string name="obd_nothing_found_description">请检查以下内容：\n - 确保蓝牙已打开\n - 车辆发动机正在运转\n - 确保您的设备在扫描仪的扫描范围内。</string>
     <string name="screen_is_locked_by_external_button">触摸屏已锁定。要解锁，请按 %1$s 按钮，或轻点屏幕上的按钮。</string>
@@ -5435,7 +5434,6 @@
     <string name="obd_connecting_to_device">正在连接到 %s</string>
     <string name="l_100km">升/100 公里</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">显示根据计算得出的车辆燃料消耗率（百分比%/小时）</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">显示根据计算得出的车辆燃料消耗率（升/100 公里）</string>
     <string name="simulate_obd">模拟 OBD 数据</string>
     <string name="obd_fuel_consumption_rate_liter_hour">燃料消耗率</string>
     <string name="route_guidance">路线指引</string>
