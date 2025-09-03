@@ -15,7 +15,7 @@
     <string name="by_distance">S umeccaq</string>
     <string name="shared_string_error_short">Tuccḍa</string>
     <string name="searching_for_gps">Asideg…</string>
-    <string name="shared_string_settings">Iɣewwaṛen</string>
+    <string name="shared_string_settings">Iɣewwaren</string>
     <string name="shared_string_off">Yensa</string>
     <string name="shared_string_all">Meṛṛa</string>
     <string name="shared_string_name">Isem</string>
@@ -125,8 +125,8 @@
     <string name="shared_string_back">Uɣal</string>
     <string name="shared_string_share">Bḍu</string>
     <string name="shared_string_install">Sbedd</string>
-    <string name="hours_format"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/></string>
-    <string name="minutes_format"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/></string>
+    <string name="hours_format"><ph id="mtc_1" equiv-text="base64:JTEkZA=="></ph></string>
+    <string name="minutes_format"><ph id="mtc_1" equiv-text="base64:JTEkZA=="></ph></string>
     <string name="shared_string_bot">Aṛubut</string>
     <string name="expire_at">Azmez n tasewti</string>
     <string name="sharing_time">Beṭṭu</string>
@@ -181,7 +181,7 @@
     <string name="proxy_username">Nom d\'utilisateur</string>
     <string name="proxy_password">Awal n uɛeddi</string>
     <string name="proxy_key">Tasarut</string>
-    <string name="gpx_settings">Iɣewwaṛen</string>
+    <string name="gpx_settings">Iɣewwaren GPX</string>
     <string name="shared_string_select">Fren</string>
     <string name="timeline_no_data">Ulac isefka</string>
     <string name="shared_string_apply">Snes</string>
@@ -207,7 +207,7 @@
     <string name="successfully_sent_and_updated">Yettwazen akken iwata</string>
     <string name="last_updated_location">Adig aneggaru yettwaleqmen:</string>
     <string name="share_location_as_description">Ma tebɣiḍ ad teqqneḍ ddeqs n yibenkan ɣer yiwet n umiḍan Telegram, ilaq ad tesqedceḍ ibenk-nniḍen i beṭṭu n wadig-ik.</string>
-    <string name="welcome_descr"><b>Aneḍfaṛ OsmAnd </b> ad k-yeǧǧ ad tebḍuḍ adig-ik daɣen ad twaliḍ wid-nniḍen deg OsmAnd.<br/><br/>Asnas iseqdac API n Telegram, ihi tesriḍ amiḍan Telegram.</string>
+    <string name="welcome_descr"><b>Aneḍfaṛ OsmAnd </b> ad k-yeǧǧ ad tebḍuḍ adig-ik daɣen ad twaliḍ wid-nniḍen deg OsmAnd.<br></br><br></br>Asnas iseqdac API n Telegram, ihi tesriḍ amiḍan Telegram.</string>
     <string name="si_mi_meters">Amayel / Amitr</string>
     <string name="si_km_m">Ikilumitren/imitren</string>
     <string name="si_mi_yard">Miles/yards</string>

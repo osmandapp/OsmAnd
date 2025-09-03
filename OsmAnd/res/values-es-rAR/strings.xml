@@ -5731,4 +5731,5 @@
     <string name="max_axle_load_description">Indicá la carga máxima por eje del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
     <string name="shared_sting_osm_link">Enlace de OSM</string>
     <string name="lang_en_barebones">Inglés (básico)</string>
+    <string name="show_local_names">Mostrar nombres locales</string>
 </resources>

@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -183,7 +182,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
 				if (activity != null) {
 					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
-					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), nightMode);
+					AndroidUtils.openUrl(activity, wikipediaUrl, nightMode);
 				}
 			}
 		});

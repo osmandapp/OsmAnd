@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="obd_alt_battery_voltage">Battery voltage (adapter)</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Imperial gallon</string>
     <string name="us_gallon">US gallon</string>

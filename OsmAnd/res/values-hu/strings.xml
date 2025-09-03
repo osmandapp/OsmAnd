@@ -5812,4 +5812,6 @@
     <string name="max_axle_load_description">Adja meg a járműve maximális tengelyterhelését, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
     <string name="lang_en_barebones">Angol (csupasz)</string>
     <string name="shared_sting_osm_link">OSM hivatkozás</string>
+    <string name="show_local_names">Helyi nevek mutatása</string>
+    <string name="obd_alt_battery_voltage">Akkumulátor feszültség (adapter)</string>
 </resources>

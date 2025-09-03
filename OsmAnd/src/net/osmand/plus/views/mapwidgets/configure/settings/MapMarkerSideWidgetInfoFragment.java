@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -55,7 +54,6 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 	private long selectedIntervalMillis;
 	private long localSeekBarIntervalMillis;
 
-	private LayoutInflater themedInflater;
 	private LinearLayout buttonsCard;
 	private ApplicationMode selectedAppMode;
 	private Map<Long, String> availableIntervals;
@@ -90,8 +88,7 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		this.themedInflater = themedInflater;
-		themedInflater.inflate(R.layout.map_marker_side_widget_settings_fragment, container);
+		inflate(R.layout.map_marker_side_widget_settings_fragment, container);
 		buttonsCard = view.findViewById(R.id.items_container);
 		selectedAppMode = settings.getApplicationMode();
 		availableIntervals = getAvailableIntervals();
@@ -176,7 +173,7 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 	                                         boolean showTintedIcon,
 	                                         boolean showShortDivider,
 	                                         OnClickListener listener) {
-		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+		View view = inflate(R.layout.configure_screen_list_item, null);
 
 		Drawable icon = showTintedIcon
 				? getPaintedIcon(iconId, selectedAppMode.getProfileColor(nightMode))
@@ -205,7 +202,7 @@ public class MapMarkerSideWidgetInfoFragment extends BaseSimpleWidgetInfoFragmen
 		localSeekBarIntervalMillis = selectedIntervalMillis;
 		Context themedContext = UiUtilities.getThemedContext(requireActivity(), nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		View seekbarView = themedInflater.inflate(R.layout.map_marker_interval_dialog, null, false);
+		View seekbarView = inflate(R.layout.map_marker_interval_dialog, null, false);
 		builder.setView(seekbarView);
 		builder.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
 			selectedIntervalMillis = localSeekBarIntervalMillis;

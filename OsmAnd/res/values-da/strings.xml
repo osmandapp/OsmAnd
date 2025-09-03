@@ -5888,4 +5888,12 @@
     <string name="rendering_attr_shellsStyle_name">Skalstil</string>
     <string name="rendering_attr_shellsStyle_description">Stil for skaller på havbunden</string>
     <string name="lang_en_barebones">Engelsk (helt enkelt)</string>
+    <string name="show_local_names">Vis lokale navne</string>
+    <string name="rendering_attr_hideSpots_name">Punkt‑dybdemålinger</string>
+    <string name="rendering_attr_hideSpots_description">Skjul punkt‑dybdemålinger</string>
+    <string name="rendering_attr_spotDistance_name">Punkt‑dybdemåling afstand</string>
+    <string name="rendering_attr_spotDistance_description">Punkt‑dybdemåling afstand</string>
+    <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
+    <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
+    <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
 </resources>

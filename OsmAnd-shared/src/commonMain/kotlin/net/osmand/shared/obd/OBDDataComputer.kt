@@ -216,6 +216,11 @@ object OBDDataComputer {
 			OBD_BATTERY_VOLTAGE_COMMAND,
 			"obd_battery_voltage",
 			OBDComputerWidgetFormatter("%.2f")),
+		ADAPTER_BATTERY_VOLTAGE(
+			false,
+			OBD_ALT_BATTERY_VOLTAGE_COMMAND,
+			"obd_alt_battery_voltage",
+			OBDComputerWidgetFormatter("%.1f")),
 		FUEL_TYPE(
 			false,
 			OBD_FUEL_TYPE_COMMAND,
@@ -294,6 +299,7 @@ object OBDDataComputer {
 				ENGINE_OIL_TEMPERATURE,
 				SPEED,
 				BATTERY_VOLTAGE,
+				ADAPTER_BATTERY_VOLTAGE,
 				FUEL_CONSUMPTION_RATE_SENSOR,
 				FUEL_PRESSURE,
 				THROTTLE_POSITION,

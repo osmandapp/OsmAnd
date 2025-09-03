@@ -5846,4 +5846,6 @@
     <string name="max_axle_load_description">Наведите максимално осовинско оптерећење вашег возила како бисте избегли путеве и мостове са ограничењима тежине.</string>
     <string name="lang_en_barebones">Енглески (основни)</string>
     <string name="shared_sting_osm_link">ОСМ линк</string>
+    <string name="show_local_names">Прикажи локална имена</string>
+    <string name="obd_alt_battery_voltage">Напон батерије (адаптер)</string>
 </resources>

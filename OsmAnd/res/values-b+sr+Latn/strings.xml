@@ -5848,4 +5848,6 @@
     <string name="manage_storage">Upravljanje skladištem</string>
     <string name="lang_en_barebones">Engleski (osnovni)</string>
     <string name="shared_sting_osm_link">OSM link</string>
+    <string name="show_local_names">Prikaži lokalne nazive</string>
+    <string name="obd_alt_battery_voltage">Napon baterije (adapter)</string>
 </resources>

@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -233,8 +232,7 @@ public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements
 		button.setOnClickListener(view -> {
 			Activity activity = getActivity();
 			if (activity != null) {
-				String docsUrl = getString(R.string.docs_osmand_live);
-				AndroidUtils.openUrl(activity, Uri.parse(docsUrl), nightMode);
+				AndroidUtils.openUrl(activity, R.string.docs_osmand_live, nightMode);
 			}
 		});
 		container.addView(button);

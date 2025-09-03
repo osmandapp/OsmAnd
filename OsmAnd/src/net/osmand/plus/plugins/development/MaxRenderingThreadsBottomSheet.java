@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -33,8 +32,6 @@ import java.util.List;
 public class MaxRenderingThreadsBottomSheet extends BasePreferenceBottomSheet {
 
 	public static final String TAG = MaxRenderingThreadsBottomSheet.class.getSimpleName();
-
-	private OsmandApplication app;
 
 	private Integer[] range;
 	private int minValue;

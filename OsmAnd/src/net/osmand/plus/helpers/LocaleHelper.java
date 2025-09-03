@@ -222,10 +222,12 @@ public class LocaleHelper {
 		OsmAndFormatter.setTwelveHoursFormatting(twelveHoursFormatting, locale);
 	}
 
-	public Resources getLocalizedResources(@NonNull String language) {
-		return getLocalizedContext(new Locale(language)).getResources();
+	@NonNull
+	public Resources getLocalizedResources(@NonNull Locale locale) {
+		return getLocalizedContext(locale).getResources();
 	}
 
+	@NonNull
 	public Context getLocalizedContext(@NonNull Locale locale) {
 		Configuration configuration = app.getResources().getConfiguration();
 		configuration = new Configuration(configuration);

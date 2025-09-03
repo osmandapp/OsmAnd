@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.externalsensors.dialogs;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty.NAME;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.view.View;
@@ -83,7 +82,7 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		SpannableString spannable = UiUtilities.createClickableSpannable(docsLinkText, docsLinkText, unused -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
+				AndroidUtils.openUrl(activity, R.string.docs_external_sensors, nightMode);
 			}
 			return false;
 		});
