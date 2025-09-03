@@ -5815,4 +5815,5 @@
     <string name="lang_en_barebones">Angol (csupasz)</string>
     <string name="shared_sting_osm_link">OSM hivatkozás</string>
     <string name="show_local_names">Helyi nevek mutatása</string>
+    <string name="obd_alt_battery_voltage">Akkumulátor feszültség (adapter)</string>
 </resources>

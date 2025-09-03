@@ -5689,4 +5689,5 @@
     <string name="lang_en_barebones">英文（簡易）</string>
     <string name="shared_sting_osm_link">OSM 連結</string>
     <string name="show_local_names">顯示在地名稱</string>
+    <string name="obd_alt_battery_voltage">電池電壓（變壓器）</string>
 </resources>

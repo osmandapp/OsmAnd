@@ -5762,4 +5762,5 @@
     <string name="max_axle_load_description">Indiquez la charge maximale par essieu de votre véhicule pour éviter les routes et les ponts avec des limites de poids.</string>
     <string name="shared_sting_osm_link">Lien OSM</string>
     <string name="show_local_names">Afficher les noms locaux</string>
+    <string name="obd_alt_battery_voltage">Tension de la batterie (adaptateur)</string>
 </resources>
