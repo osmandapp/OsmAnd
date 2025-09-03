@@ -5710,7 +5710,7 @@
     <string name="ais_object_lost_timeouts_description">Zeitlimit-Werte festlegen, um verlorene AIS-Objekte zu identifizieren, wenn für eine bestimmte Zeit kein Signal empfangen wurde.</string>
     <string name="ais_object_lost_timeout_description">Zeitlimit für die Sichtbarkeit von AIS-Objekten festlegen: Wenn innerhalb der angegebenen Dauer kein Signal empfangen wird, wird das Objekt automatisch aus der Anzeige entfernt.</string>
     <string name="ais_cpa_settings">Einstellungen im Zusammenhang mit CPA</string>
-    <string name="ais_cpa_settings_description">Diese Werte bestimmen, wie AIS-Objekte angezeigt werden, wenn Sie sich der Position des Schiffes nähern.</string>
+    <string name="ais_cpa_settings_description">Diese Werte bestimmen, wie AIS-Objekte angezeigt werden, wenn Sie sich der Position des Schiffs nähern.</string>
     <string name="ais_cpa_warning_time">Warnzeit vor dem Punkt der größten Annäherung (CPA)</string>
     <string name="ais_cpa_warning_distance">Warnabstand für den Punkt der größten Annäherung (CPA)</string>
     <string name="map_grid">Kartenraster</string>
@@ -5815,7 +5815,7 @@
     <string name="threads_allocated_for_rendering_desc">Eine niedrigere Threadzuweisung kann die Kartendarstellung in einigen Fällen beschleunigen.</string>
     <string name="turn_by_turn_directions">Schritt-für-Schritt-Navigationsanweisungen</string>
     <string name="failed_to_connect">Verbindung zu %1s fehlgeschlagen</string>
-    <string name="map_orientation_portrait_inverted">README:- Der bevorzugte Weg, uns mit Übersetzungen zu helfen, ist über https://hosted.weblate.org/engage/osmand/ - Falls Sie eine strings.xml-Datei direkt bearbeiten, stellen Sie bitte sicher, dass: 1. Sie keine doppelten Strings produzieren (überprüfen Sie per Namen, ob der String bereits existiert) 2. Vor jedem Apostroph (Anführungszeichen) ein Backslash steht 3. Falls Sie die englische string.xml-Datei verändern, fügen Sie bitte neue Strings am Anfang der Datei hinzu, da dies periodische Überprüfungen vor Veröffentlichungen einfacher macht. Für Formulierungen und Beständigkeit siehe https://docs.osmand.net/docs/technical/contributions/translating-osmand Danke - Hardy</string>
+    <string name="map_orientation_portrait_inverted">Hochformat (umgekehrt)</string>
     <string name="reverse_mode_calculate_route">Route berechnen</string>
     <string name="reverse_mode_calculate_route_desc">Eine neue, optimierte Route zum Start berechnen.</string>
     <string name="reverse_mode_original_track">Originaler Track</string>
@@ -5833,7 +5833,7 @@
     <string name="altitude_metrics_description">Legt die Anzeigeeinheit für die Höhe in Widgets und Statistiken fest.</string>
     <string name="write_location_provider_description">Standortanbieter während der Aufzeichnung für jeden Aufnahmepunkt speichern</string>
     <string name="write_location_provider">Standortanbieter schreiben</string>
-    <string name="map_orientation_landscape_inverted">Landschaft (invertiert)</string>
+    <string name="map_orientation_landscape_inverted">Querformat (umgekehrt)</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Antwort</string>
