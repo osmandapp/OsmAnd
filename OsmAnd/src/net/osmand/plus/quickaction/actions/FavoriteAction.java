@@ -5,7 +5,7 @@ import static net.osmand.plus.quickaction.QuickActionIds.FAVORITE_ACTION_ID;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -61,7 +61,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		String title = getParams().get(KEY_NAME);
 		boolean showDialog = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 

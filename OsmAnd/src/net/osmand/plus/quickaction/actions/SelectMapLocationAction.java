@@ -2,7 +2,6 @@ package net.osmand.plus.quickaction.actions;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,21 +38,21 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
-		requestLocation(mapActivity);
+		requestLocation(mapActivity, params);
 	}
 
-	private void requestLocation(@NonNull MapActivity mapActivity) {
+	private void requestLocation(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		CenterMapLatLonExtractor extractor = new CenterMapLatLonExtractor();
 		if (isManualLocationSelection()) {
-			SelectLocationController.showDialog(mapActivity, extractor, createHandler());
+			SelectLocationController.showDialog(mapActivity, extractor, createHandler(params));
 		} else {
 			OsmandApplication app = mapActivity.getMyApplication();
-			onLocationSelected(mapActivity, extractor.extractLocation(app));
+			onLocationSelected(mapActivity, extractor.extractLocation(app), params);
 		}
 	}
 
 	@NonNull
-	private ILocationSelectionHandler<LatLon> createHandler() {
+	private ILocationSelectionHandler<LatLon> createHandler(@Nullable Bundle params) {
 		return new ILocationSelectionHandler<>() {
 			@Nullable
 			@Override
@@ -69,7 +68,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 			@Override
 			public void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon location) {
-				SelectMapLocationAction.this.onLocationSelected(mapActivity, location);
+				SelectMapLocationAction.this.onLocationSelected(mapActivity, location, params);
 			}
 
 			@Override
@@ -84,7 +83,8 @@ public abstract class SelectMapLocationAction extends QuickAction {
 		};
 	}
 
-	protected abstract void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon);
+	protected abstract void onLocationSelected(@NonNull MapActivity mapActivity,
+	                                           @NonNull LatLon latLon, @Nullable Bundle params);
 
 	@Nullable
 	protected abstract Object getLocationIcon(@NonNull MapActivity mapActivity);
