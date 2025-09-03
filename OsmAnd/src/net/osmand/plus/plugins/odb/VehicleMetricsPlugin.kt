@@ -596,6 +596,32 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	companion object {
 		private val LOG = PlatformUtil.getLog(VehicleMetricsPlugin::class.java)
 		val REQUEST_BT_PERMISSION_CODE = 50
+
+		fun getFormatDistancePerVolume(
+			metersPerLiter: Float,
+			mc: MetricsConstants,
+			volumeUnit: VolumeUnit): Float {
+			val litersInVolume = OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, 1f)
+
+			val distanceInMeters = when (mc) {
+				MetricsConstants.MILES_AND_YARDS,
+				MetricsConstants.MILES_AND_FEET,
+				MetricsConstants.MILES_AND_METERS -> {
+					OsmAndFormatter.METERS_IN_ONE_MILE
+				}
+
+				MetricsConstants.NAUTICAL_MILES_AND_FEET,
+				MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
+					OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
+				}
+
+				else -> {
+					OsmAndFormatter.METERS_IN_KILOMETER
+				}
+			}
+
+			return metersPerLiter / litersInVolume / distanceInMeters
+		}
 	}
 
 	override fun onIOError() {
@@ -975,27 +1001,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
 		val volumeUnit = settings.UNIT_OF_VOLUME.get()
 		val metersPerLiterFloat = metersPerLiter.toFloat()
-
-		val volumePerLiter = OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, 1f)
-
-		val convertedDistance = when (mc) {
-			MetricsConstants.MILES_AND_YARDS,
-			MetricsConstants.MILES_AND_FEET,
-			MetricsConstants.MILES_AND_METERS -> {
-				metersPerLiterFloat / OsmAndFormatter.METERS_IN_ONE_MILE
-			}
-
-			MetricsConstants.NAUTICAL_MILES_AND_FEET,
-			MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
-				metersPerLiterFloat / OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
-			}
-
-			else -> {
-				metersPerLiterFloat / 1000f
-			}
-		}
-
-		return convertedDistance / volumePerLiter
+		return getFormatDistancePerVolume(metersPerLiterFloat, mc, volumeUnit)
 	}
 
 	private fun getFormatVolumePerDistance(litersPer100km: Number): Float {
@@ -1007,11 +1013,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
 		return when (mc) {
 			MetricsConstants.MILES_AND_YARDS, MetricsConstants.MILES_AND_FEET, MetricsConstants.MILES_AND_METERS -> {
-				volumeResult * OsmAndFormatter.METERS_IN_ONE_MILE
+				volumeResult * OsmAndFormatter.METERS_IN_ONE_MILE / 1000
 			}
 
 			MetricsConstants.NAUTICAL_MILES_AND_FEET, MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
-				volumeResult * OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
+				volumeResult * OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE / 1000
 			}
 
 			else -> {

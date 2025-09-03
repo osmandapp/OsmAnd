@@ -12,11 +12,13 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDMainFragmentAdapter
+import net.osmand.plus.settings.enums.VolumeUnit
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.data.BTDeviceInfo
@@ -29,22 +31,28 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	RenameOBDDialog.OnDeviceNameChangedCallback, ForgetOBDDeviceDialog.ForgetDeviceListener {
 	private var handlerThread: HandlerThread? = null
 
-	enum class OBDDataType(var widgetType: OBDTypeWidget, val icon: Int?) {
-		VIN(OBDTypeWidget.VIN, null),
-		FUEL_TYPE(OBDTypeWidget.FUEL_TYPE, R.drawable.ic_action_fuel_tank),
-		TEMPERATURE_INTAKE(OBDTypeWidget.TEMPERATURE_INTAKE, R.drawable.ic_action_obd_temperature_intake),
-		TEMPERATURE_AMBIENT(OBDTypeWidget.TEMPERATURE_AMBIENT, R.drawable.ic_action_obd_temperature_outside),
-		TEMPERATURE_COOLANT(OBDTypeWidget.TEMPERATURE_COOLANT, R.drawable.ic_action_obd_temperature_coolant),
-		ENGINE_OIL_TEMPERATURE(OBDTypeWidget.ENGINE_OIL_TEMPERATURE, R.drawable.ic_action_obd_temperature_engine_oil),
-		RPM(OBDTypeWidget.RPM, R.drawable.ic_action_obd_engine_speed),
-		SPEED(OBDTypeWidget.SPEED, R.drawable.ic_action_obd_speed),
-		FUEL_CONSUMPTION_RATE_LITER_HOUR(OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR, R.drawable.ic_action_obd_fuel_consumption),
-		FUEL_CONSUMPTION_RATE_LITER_KM(OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM, R.drawable.ic_action_obd_fuel_consumption),
-		FUEL_LEFT_LITER(OBDTypeWidget.FUEL_LEFT_LITER, R.drawable.ic_action_obd_fuel_remaining),
-		CALCULATED_ENGINE_LOAD(OBDTypeWidget.CALCULATED_ENGINE_LOAD, R.drawable.ic_action_car_info),
-		FUEL_PRESSURE(OBDTypeWidget.FUEL_PRESSURE, R.drawable.ic_action_obd_fuel_pressure),
-		THROTTLE_POSITION(OBDTypeWidget.THROTTLE_POSITION, R.drawable.ic_action_obd_throttle_position),
-		BATTERY_VOLTAGE(OBDTypeWidget.BATTERY_VOLTAGE, R.drawable.ic_action_obd_battery_voltage)
+	enum class OBDDataType(val widgetType: (OsmandApplication) -> OBDTypeWidget, val icon: Int?) {
+		VIN({ OBDTypeWidget.VIN }, null),
+		FUEL_TYPE({ OBDTypeWidget.FUEL_TYPE }, R.drawable.ic_action_fuel_tank),
+		TEMPERATURE_INTAKE({ OBDTypeWidget.TEMPERATURE_INTAKE }, R.drawable.ic_action_obd_temperature_intake),
+		TEMPERATURE_AMBIENT({ OBDTypeWidget.TEMPERATURE_AMBIENT }, R.drawable.ic_action_obd_temperature_outside),
+		TEMPERATURE_COOLANT({ OBDTypeWidget.TEMPERATURE_COOLANT }, R.drawable.ic_action_obd_temperature_coolant),
+		ENGINE_OIL_TEMPERATURE({ OBDTypeWidget.ENGINE_OIL_TEMPERATURE }, R.drawable.ic_action_obd_temperature_engine_oil),
+		RPM({ OBDTypeWidget.RPM }, R.drawable.ic_action_obd_engine_speed),
+		SPEED({ OBDTypeWidget.SPEED }, R.drawable.ic_action_obd_speed),
+		FUEL_CONSUMPTION_RATE(
+			{ app ->
+				if (app.settings.UNIT_OF_VOLUME.get() == VolumeUnit.LITRES)
+					OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM
+				else
+					OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER
+			}, R.drawable.ic_action_obd_fuel_consumption
+		),
+		FUEL_LEFT_LITER({ OBDTypeWidget.FUEL_LEFT_LITER }, R.drawable.ic_action_obd_fuel_remaining),
+		CALCULATED_ENGINE_LOAD({ OBDTypeWidget.CALCULATED_ENGINE_LOAD }, R.drawable.ic_action_car_info),
+		FUEL_PRESSURE({ OBDTypeWidget.FUEL_PRESSURE }, R.drawable.ic_action_obd_fuel_pressure),
+		THROTTLE_POSITION({ OBDTypeWidget.THROTTLE_POSITION }, R.drawable.ic_action_obd_throttle_position),
+		BATTERY_VOLTAGE({ OBDTypeWidget.BATTERY_VOLTAGE }, R.drawable.ic_action_obd_battery_voltage)
 	}
 
 	data class OBDDataItem(val dataType: OBDDataType, val widget: OBDComputerWidget)
@@ -253,8 +261,8 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
 		items.add(OBDMainFragmentAdapter.TITLE_RECEIVED_TYPE)
 		OBDDataType.entries.forEach {
-			if (it.widgetType != OBDTypeWidget.VIN) {
-				items.add(OBDDataItem(it, OBDDataComputer.registerWidget(it.widgetType, it.widgetType.defaultAverageTime)))
+			if (it.widgetType(app) != OBDTypeWidget.VIN) {
+				items.add(OBDDataItem(it, OBDDataComputer.registerWidget(it.widgetType(app), it.widgetType(app).defaultAverageTime)))
 			}
 		}
 	}

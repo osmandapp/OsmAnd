@@ -5441,8 +5441,6 @@
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra la tasa de consumo del combustible, según los cálculos (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Tasa de consumo del combustible (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Muestra la tasa de consumo del combustible, según los cálculos (L/100 km)</string>
     <string name="simulate_obd">Simular datos OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Presión del combustible</string>

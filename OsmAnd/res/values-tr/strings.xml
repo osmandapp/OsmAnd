@@ -5502,7 +5502,6 @@
     <string name="litres">Litre</string>
     <string name="imperial_gallons">İngiliz galonu</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Yakıt tüketim oranı (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Yakıt tüketim oranı %/sa</string>
     <string name="obd_connecting_to_device">%s bağlantısı kuruluyor</string>
     <string name="us_gallons_unit">Galon</string>

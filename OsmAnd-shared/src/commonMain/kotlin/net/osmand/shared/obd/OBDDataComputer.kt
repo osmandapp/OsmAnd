@@ -19,7 +19,7 @@ private const val FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME = 5 * 60
 object OBDDataComputer {
 
 	private const val LITER_KM_CONSUMPTION_LIMIT = 100
-	private const val KM_LITER_CONSUMPTION_LIMIT = 1
+	private const val M_LITER_CONSUMPTION_LIMIT = 1000
 
 	private const val LITER_HOUR_CONSUMPTION_LIMIT = 100
 
@@ -180,12 +180,12 @@ object OBDDataComputer {
 		FUEL_CONSUMPTION_RATE_LITER_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.1f"),
+			"obd_fuel_consumption_rate", OBDComputerWidgetFormatter("%.1f"),
 			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_M_PER_LITER(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.1f"),
+			"obd_fuel_consumption_rate", OBDComputerWidgetFormatter("%.1f"),
 			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(
 			false,
@@ -416,7 +416,7 @@ object OBDDataComputer {
 							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (distance > 0 && difLiter > 0) {
 								val result = distance / difLiter
-								return if (result > KM_LITER_CONSUMPTION_LIMIT) {
+								return if (result > M_LITER_CONSUMPTION_LIMIT) {
 									Float.NaN
 								} else {
 									result

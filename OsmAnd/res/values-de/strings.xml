@@ -5603,8 +5603,6 @@
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="speedometer_maximum">Maximum</string>
-    <string name="obd_fuel_consumption_rate_l_km">Kraftstoffverbrauch (l/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Zeigt den rechnerischen Kraftstoffverbrauch des Fahrzeugs an (l/100 km)</string>
     <string name="simulate_obd">OBD-Daten simulieren</string>
     <string name="obd_fuel_pressure">Kraftstoffdruck</string>
     <string name="l_100km">l/100 km</string>

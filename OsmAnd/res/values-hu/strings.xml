@@ -5521,8 +5521,6 @@
     <string name="liter">l</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="l_100km">l/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Fogyasztás (l/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Megjeleníti a jármű számított távolságalapú üzemanyag fogyasztását (l/100 km)</string>
     <string name="simulate_obd">OBD adatok szimulálása</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Üzemanyagnyomás</string>
