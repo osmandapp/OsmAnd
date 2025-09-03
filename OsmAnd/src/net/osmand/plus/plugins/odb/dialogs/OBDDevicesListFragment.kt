@@ -68,10 +68,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 			UiUtilities.createClickableSpannable(docsLinkText, docsLinkText) { _: Void? ->
 				val activity = activity
 				if (activity != null) {
-					AndroidUtils.openUrl(
-						activity,
-						Uri.parse(getString(R.string.docs_obd_sensors)),
-						nightMode)
+					AndroidUtils.openUrl(activity, R.string.docs_obd_sensors, nightMode)
 				}
 				false
 			}

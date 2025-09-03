@@ -201,7 +201,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	public CharSequence getDescription(boolean linksEnabled) {
 		String infoUrl = app.getString(R.string.weather_global_forecast_system);
 		String description = app.getString(R.string.weather_plugin_description, infoUrl);
-		return linksEnabled ? UiUtilities.createUrlSpannable(description, infoUrl) : description;
+		return linksEnabled ? UiUtilities.createUrlSpannable(app, description, infoUrl) : description;
 	}
 
 	@Override

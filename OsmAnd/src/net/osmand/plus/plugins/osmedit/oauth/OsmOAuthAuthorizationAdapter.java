@@ -98,9 +98,7 @@ public class OsmOAuthAuthorizationAdapter {
 	}
 
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
-        Uri uri = Uri.parse(url);
-        Context context = root.getContext();
-        AndroidUtils.openUrl(context, uri, nightMode);
+        AndroidUtils.openUrl(root.getContext(), url, nightMode);
     }
 
     public void performGetRequest(String url, OAuthAsyncRequestCallback<Response> callback) {
