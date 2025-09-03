@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -784,7 +783,7 @@ public class MapActivityActions extends MapActions {
 			if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
 				String drawerLogoParams = app.getAppCustomization().getNavDrawerLogoUrl();
 				if (!Algorithms.isEmpty(drawerLogoParams)) {
-					AndroidUtils.openUrl(activity, Uri.parse(drawerLogoParams), nightMode);
+					AndroidUtils.openUrl(activity, drawerLogoParams, nightMode);
 				}
 			} else {
 				position -= menuItemsListView.getHeaderViewsCount();

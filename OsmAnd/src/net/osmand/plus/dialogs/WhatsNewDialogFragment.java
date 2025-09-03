@@ -4,7 +4,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_WHATS_NEW
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -63,8 +62,7 @@ public class WhatsNewDialogFragment extends BaseAlertDialogFragment {
 	private void showArticle() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			Uri uri = Uri.parse(getString(R.string.docs_latest_version));
-			AndroidUtils.openUrl(mapActivity, uri, nightMode);
+			AndroidUtils.openUrl(mapActivity, R.string.docs_latest_version, nightMode);
 		}
 	}
 

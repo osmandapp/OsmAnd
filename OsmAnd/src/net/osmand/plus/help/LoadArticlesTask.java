@@ -32,16 +32,22 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 	private final OsmandApplication app;
 
-	private final Set<String> languages = new LinkedHashSet<>();
-	private final Map<String, HelpArticle> topArticles = new LinkedHashMap<>();
-	private final Map<String, String> telegramChats = new LinkedHashMap<>();
-	private final Map<String, String> popularArticles = new LinkedHashMap<>();
+	private final Set<String> languages;
+	private final Map<String, String> telegramChats;
+	private final Map<String, String> popularArticles;
+	private final Map<String, HelpArticle> articles;
 
 	@Nullable
 	private final LoadArticlesListener listener;
 
-	public LoadArticlesTask(@NonNull OsmandApplication app, @Nullable LoadArticlesListener listener) {
+	public LoadArticlesTask(@NonNull OsmandApplication app, @NonNull Set<String> languages,
+			@NonNull Map<String, HelpArticle> articles,	@NonNull Map<String, String> telegramChats,
+			@NonNull Map<String, String> popularArticles, @Nullable LoadArticlesListener listener) {
 		this.app = app;
+		this.languages = languages;
+		this.telegramChats = telegramChats;
+		this.popularArticles = popularArticles;
+		this.articles = articles;
 		this.listener = listener;
 	}
 
@@ -121,7 +127,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 			lastArticlesPerLevel.add(null);
 		}
 		if (article.level == 2) {
-			topArticles.put(article.label, article);
+			articles.put(article.label, article);
 		} else {
 			HelpArticle parent = lastArticlesPerLevel.get(article.level - 2);
 			if (parent != null) {
@@ -135,7 +141,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
 			String key = iterator.next();
 			String url = json.getString(key);
-			map.put(key, createLocalizedUrl(url));
+			map.put(key, getLocalizedUrl(url));
 		}
 	}
 
@@ -152,21 +158,16 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 			if (available && (url.startsWith(DOCS_PATH_PREFIX) || !hasUrl)) {
 				int level = object.optInt("level");
 				String label = object.optString("label");
-				articles.add(new HelpArticle(createLocalizedUrl(url), label, level));
+				articles.add(new HelpArticle(getLocalizedUrl(url), label, level));
 			}
 		}
 		return articles;
 	}
 
 	@Nullable
-	private String createLocalizedUrl(@Nullable String url) {
+	private String getLocalizedUrl(@Nullable String url) {
 		if (!Algorithms.isEmpty(url) && url.startsWith(DOCS_PATH_PREFIX)) {
-			String language = app.getLanguage();
-			boolean useLocalizedUrl = languages.contains(language) && !"en".equals(language);
-			if (useLocalizedUrl) {
-				return SERVER_URL + "/" + language + url;
-			}
-			return SERVER_URL + url;
+			return HelpArticleUtils.getLocalizedUrl(app, SERVER_URL + url);
 		}
 		return url;
 	}
@@ -183,7 +184,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void unused) {
 		if (listener != null) {
-			listener.downloadFinished(topArticles, popularArticles, telegramChats);
+			listener.downloadFinished();
 		}
 	}
 
@@ -191,6 +192,6 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 		void downloadStarted();
 
-		void downloadFinished(@NonNull Map<String, HelpArticle> articles, @NonNull Map<String, String> popularArticles, @NonNull Map<String, String> telegramChats);
+		void downloadFinished();
 	}
 }
