@@ -829,7 +829,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(getString(R.string.advanced_coords_search).toUpperCase());
-		} else if (!searchEditText.getText().isEmpty()) {
+		} else if (!Algorithms.isEmpty(searchEditText.getText())) {
 			if (searchType.isTargetPoint()) {
 				if (word != null && word.getResult() != null) {
 					buttonToolbarText.setText(getString(R.string.shared_string_select).toUpperCase() + " " + word.getResult().localeName.toUpperCase());
