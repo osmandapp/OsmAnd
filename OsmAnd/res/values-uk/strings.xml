@@ -5871,4 +5871,10 @@
     <string name="shared_sting_osm_link">Посилання OSM</string>
     <string name="show_local_names">Показати місцеві назви</string>
     <string name="obd_alt_battery_voltage">Напруга акумулятора (адаптер)</string>
+    <string name="liter_single">Літр</string>
+    <string name="imperial_gallon">Імперський галон</string>
+    <string name="us_gallon">галон США</string>
+    <string name="kilometers">Кілометри</string>
+    <string name="miles">Милі</string>
+    <string name="mpg">MPG</string>
 </resources>
