@@ -5732,4 +5732,11 @@
     <string name="shared_sting_osm_link">Enlace de OSM</string>
     <string name="lang_en_barebones">Inglés (básico)</string>
     <string name="show_local_names">Mostrar nombres locales</string>
+    <string name="obd_alt_battery_voltage">Voltaje de la batería (adaptador)</string>
+    <string name="liter_single">Litro</string>
+    <string name="imperial_gallon">Galón imperial</string>
+    <string name="us_gallon">Galón estadounidense</string>
+    <string name="kilometers">Kilómetros</string>
+    <string name="miles">Millas</string>
+    <string name="mpg">MPG</string>
 </resources>
