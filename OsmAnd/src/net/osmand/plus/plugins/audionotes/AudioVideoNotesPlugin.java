@@ -815,7 +815,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private boolean stopMediaRecording(boolean restart, boolean showContextMenu) {
+	private boolean stopMediaRecording(boolean restart, boolean displayContextMenuOnFinish) {
 		boolean res = true;
 		AVActionType type = null;
 		if (isRecording()) {
@@ -830,7 +830,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			}
-			indexFile(true, mediaRecFile, showContextMenu);
+			indexFile(true, mediaRecFile, displayContextMenuOnFinish);
 			mediaRec.release();
 			mediaRec = null;
 			mediaRecFile = null;
@@ -1254,11 +1254,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void stopRecording(@NonNull MapActivity mapActivity,
-	                          boolean restart, boolean showContextMenu) {
+	                          boolean restart, boolean displayContextMenuOnFinish) {
 		if (!recordingDone) {
-			if (!restart || !stopMediaRecording(true, showContextMenu)) {
+			if (!restart || !stopMediaRecording(true, false)) {
 				recordingDone = true;
-				stopMediaRecording(false, showContextMenu);
+				stopMediaRecording(false, !restart && displayContextMenuOnFinish);
 				SHOW_RECORDINGS.set(true);
 				mapActivity.refreshMap();
 				closeRecordingMenu();
@@ -1304,7 +1304,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean indexSingleFile(@NonNull File file, boolean showContextMenu) {
+	public boolean indexSingleFile(@NonNull File file, boolean displayContextMenuOnFinish) {
 		boolean oldFileExist = recordingByFileName.containsKey(file.getName());
 		if (oldFileExist) {
 			return false;
@@ -1340,7 +1340,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (isRecording()) {
 			AVActionType type = currentRecording.getType();
 			finishRecording();
-			if (showContextMenu && isAbleToShowContextMenuOnFinish(type)) {
+			if (displayContextMenuOnFinish && isAbleToShowContextMenuOnFinish(type)) {
 				app.runInUIThread(() -> updateContextMenu(recording), 200);
 			}
 		}
@@ -1376,17 +1376,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			File[] files = avPath.listFiles();
 			if (files != null) {
 				for (File file : files) {
-					indexFile(registerNew, file, true);
+					indexFile(registerNew, file, false);
 				}
 			}
 		}
 		return null;
 	}
 
-	private void indexFile(boolean registerInGPX, @NonNull File file, boolean showContextMenu) {
+	private void indexFile(boolean registerInGPX, @NonNull File file, boolean displayContextMenuOnFinish) {
 		String name = file.getName();
 		if (CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {
-			boolean newFileIndexed = indexSingleFile(file, showContextMenu);
+			boolean newFileIndexed = indexSingleFile(file, displayContextMenuOnFinish);
 			if (newFileIndexed && registerInGPX) {
 				Recording recording = recordingByFileName.get(name);
 				if (recording != null
@@ -1672,7 +1672,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					FileOutputStream fos = new FileOutputStream(lastTakingPhoto);
 					fos.write(photoJpegData);
 					fos.close();
-					indexFile(true, lastTakingPhoto, true);
+					indexFile(true, lastTakingPhoto, false);
 				}
 			} catch (Exception error) {
 				logErr(error);
