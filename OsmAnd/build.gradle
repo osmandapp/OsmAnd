@@ -97,14 +97,6 @@ android {
 			java.srcDirs = ["src-google", "src-osmand"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
-		amazonFree {
-			java.srcDirs = ["src-amazon"]
-			manifest.srcFile "AndroidManifest-amazonFree.xml"
-		}
-		amazonFull {
-			java.srcDirs = ["src-amazon"]
-			manifest.srcFile "AndroidManifest-amazonFull.xml"
-		}
 		huawei {
 			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
@@ -146,18 +138,6 @@ android {
 			applicationId "net.osmand.plus"
 			resValue "string", "app_name", "OsmAnd+"
 			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
-		}
-		amazonFree {
-			dimension "version"
-			applicationId "net.osmand"
-			resValue "string", "app_name", "OsmAnd"
-			resValue "string", "app_edition", ""
-		}
-		amazonFull {
-			dimension "version"
-			applicationId "net.osmand.plus"
-			resValue "string", "app_name", "OsmAnd+"
-			resValue "string", "app_edition", ""
 		}
 		huawei {
 			dimension "version"
@@ -265,8 +245,6 @@ dependencies {
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
 	huaweiImplementation 'com.huawei.hms:appservice:6.8.0.300'
 
-	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
-	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
 }
 

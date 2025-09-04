@@ -5604,8 +5604,6 @@
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Viser køretøjets brændstofforbrug baseret på beregninger (%/t)</string>
     <string name="l_100km">L/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (L/100 km)</string>
     <string name="simulate_obd">Simulér obd-data</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brændstoftryk</string>
@@ -5890,4 +5888,12 @@
     <string name="rendering_attr_shellsStyle_name">Skalstil</string>
     <string name="rendering_attr_shellsStyle_description">Stil for skaller på havbunden</string>
     <string name="lang_en_barebones">Engelsk (helt enkelt)</string>
+    <string name="show_local_names">Vis lokale navne</string>
+    <string name="rendering_attr_hideSpots_name">Punkt‑dybdemålinger</string>
+    <string name="rendering_attr_hideSpots_description">Skjul punkt‑dybdemålinger</string>
+    <string name="rendering_attr_spotDistance_name">Punkt‑dybdemåling afstand</string>
+    <string name="rendering_attr_spotDistance_description">Punkt‑dybdemåling afstand</string>
+    <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
+    <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
+    <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
 </resources>

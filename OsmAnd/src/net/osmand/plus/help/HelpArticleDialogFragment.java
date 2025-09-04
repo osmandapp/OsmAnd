@@ -2,6 +2,8 @@ package net.osmand.plus.help;
 
 import static net.osmand.IndexConstants.ARTICLES_DIR;
 import static net.osmand.IndexConstants.HELP_ARTICLE_FILE_EXT;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -128,7 +130,9 @@ public class HelpArticleDialogFragment extends BaseFullScreenDialogFragment {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		return new File(dir, title + HELP_ARTICLE_FILE_EXT);
+		String name = articleUrl.replace(SERVER_URL, "");
+		name = ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).replaceAll("_");
+		return new File(dir, name + HELP_ARTICLE_FILE_EXT);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull String url, @NonNull String title) {

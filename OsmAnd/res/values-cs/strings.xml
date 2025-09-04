@@ -5561,8 +5561,6 @@
     <string name="obd_device_forget_sensor">Zapomenout skener</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Spotřeba paliva (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/100 km)</string>
     <string name="simulate_obd">Simulace dat OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Tlak paliva</string>
@@ -5805,4 +5803,9 @@
     <string name="write_location_provider">Zapsat poskytovatele polohy</string>
     <string name="altitude_metrics_description">Nastaví jednotku zobrazení nadmořské výšky ve widgetech a statistikách.</string>
     <string name="backup_delete_data_warning_extended">Tato akce trvale odstraní všechna vybraná data z cloudu. Později nebude možné je obnovit.</string>
+    <string name="amount_of_total_used">%1$s z %2$s použito</string>
+    <string name="delete_data">Smazat data</string>
+    <string name="manage_storage_delete_data_dialog_summary">Opravdu chcete odstranit %1$s z OsmAnd Cloud?\n\nMůžete je obnovit z koše do 30 dnů.</string>
+    <string name="manage_storage">Správa úložiště</string>
+    <string name="copy_as_new_folder">Kopírovat jako novou složku</string>
 </resources>

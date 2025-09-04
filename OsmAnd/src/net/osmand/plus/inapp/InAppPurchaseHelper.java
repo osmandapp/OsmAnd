@@ -751,8 +751,7 @@ public abstract class InAppPurchaseHelper {
 
 	protected boolean isSubscribedToExternalOsmAndPro() {
 		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
-			if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()
-					&& holder.state == SubscriptionState.ACTIVE) {
+			if (holder.linkedSubscription != null && holder.linkedSubscription.isOsmAndPro()) {
 				return true;
 			}
 		}
@@ -761,8 +760,7 @@ public abstract class InAppPurchaseHelper {
 
 	protected boolean isSubscribedToExternalMaps() {
 		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
-			if (holder.linkedSubscription != null && holder.linkedSubscription.isMaps()
-					&& holder.state == SubscriptionState.ACTIVE) {
+			if (holder.linkedSubscription != null && holder.linkedSubscription.isMaps()) {
 				return true;
 			}
 		}

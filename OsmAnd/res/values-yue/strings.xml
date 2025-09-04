@@ -207,8 +207,6 @@
     <string name="speedometer_maximum">最大</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">顯示根據計算得出的車輛燃料消耗率（%/小時）</string>
     <string name="l_100km">公升/100公里</string>
-    <string name="obd_fuel_consumption_rate_l_km">燃料消耗率（公升/100公里）</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">顯示根據計算而得的車輛燃料消耗率（公升/100公里）</string>
     <string name="simulate_obd">模擬 OBD 資料</string>
     <string name="kpa_unit">千帕</string>
     <string name="obd_fuel_pressure">燃料壓力</string>
@@ -5574,11 +5572,11 @@
     <string name="routing_attr_allow_skating_only_name">僅限滑冰路線</string>
     <string name="routing_attr_allow_skating_only_description">整理為自由式及專門滑冰的非正式路線</string>
     <string name="routing_attr_allow_classic_only_name">僅限傳統路線</string>
-    <string name="routing_attr_allow_classic_only_description">整理為傳統風格的非滑冰路線。包括供小型雪地摩托車使用的略經修整路線，以及由滑雪者人手開闢的路徑</string>
+    <string name="routing_attr_allow_classic_only_description">整理為傳統風格的非滑冰路線。包括供小型雪地摩托車使用的略經修整路線，以及由滑雪者人手開闢的路徑。</string>
     <string name="routing_attr_difficulty_preference_name">路線難度優先</string>
-    <string name="routing_attr_difficulty_preference_description">優先特定難度的路線，但若路線較短，亦可選擇難度更高或更低的路線</string>
+    <string name="routing_attr_difficulty_preference_description">優先特定難度的路線，但若路線較短，亦可選擇難度更高或更低的路線。</string>
     <string name="routing_attr_freeride_policy_name">自由滑雪</string>
-    <string name="routing_attr_freeride_policy_description">「自由滑雪」和「非正式路線」為非官方路線與通道。通常未經整理、未維護，且晚間未經檢查。請自行評估風險後進入。</string>
+    <string name="routing_attr_freeride_policy_description">「自由滑雪」和「非正式路線」為非官方路線與通道。通常未經整理、未維護，且夜間未經檢查。請自行評估風險後進入。</string>
     <string name="voice_prompts_timetable">語音提示時間</string>
     <string name="rendering_attr_hideNoLNAM_name">OSM 航路標識（部分）</string>
     <string name="rendering_attr_hideNoLNAM_description">隱藏 OSM 航路標識（部分）</string>
@@ -5636,4 +5634,19 @@
         <item quantity="other">%1$d（%2$d 個軌跡）</item>
     </plurals>
     <string name="navigate_point_olc_info_invalid">無效的 OLC\n</string>
+    <string name="max_axle_load_description">請提供你車輛的最大軸載重，以避開有限重的道路與橋樑。</string>
+    <string name="private_access_routing_req_short">你的目的地位於私人區域。是否允許使用私人道路？</string>
+    <string name="view_on_phone">在手機上檢視</string>
+    <string name="backup_delete_data_warning_extended">此動作將永久從雲端移除所有所選資料，無法復原。</string>
+    <string name="amount_of_total_used">已使用 %2$s 中的 %1$s</string>
+    <string name="delete_data">刪除資料</string>
+    <string name="manage_storage_delete_data_dialog_summary">確定要從 OsmAnd Cloud 刪除「%1$s」嗎？\n\n你可在 30 天內從垃圾桶還原。</string>
+    <string name="manage_storage">管理儲存空間</string>
+    <string name="copy_as_new_folder">複製為新資料夾</string>
+    <string name="add_to_a_folder">新增至資料夾</string>
+    <string name="add_to_favorites">新增至收藏</string>
+    <string name="max_weight_at_full_load_description">請提供你車輛滿載時的最大總重，以避開有限重的道路與橋樑。</string>
+    <string name="shared_sting_osm_link">OSM 連結</string>
+    <string name="show_local_names">顯示本地名稱</string>
+    <string name="lang_en_barebones">英文（精簡版）</string>
 </resources>

@@ -5560,7 +5560,6 @@
     <string name="obd_connected_to_device">Під\'єднано до %s</string>
     <string name="dynamic_icon_type_summary">Піктограма змінюється залежно від стану дії.</string>
     <string name="l_100km">л/100 км</string>
-    <string name="obd_fuel_consumption_rate_l_km">Швидкість споживання палива (л/100 км)</string>
     <string name="obd_not_connected_to_device">Від\'єднано від %s</string>
     <string name="obd_connecting_to_device">Під\'єднання до %s</string>
     <string name="obd_engine_runtime">Час виконання двигуна</string>
@@ -5572,7 +5571,6 @@
     <string name="obd_engine_oil_temperature_desc">Показує температуру моторного масла.</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Показує швидкість споживання палива транспортного засобу на основі розрахунків (L/H)</string>
     <string name="record_obd_data">Реєструйте показники автомобіля</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Показує швидкість споживання палива на основі розрахунків (л/100 км)</string>
     <string name="simulate_obd">Імітувати дані OBD</string>
     <string name="obd_throttle_position">Положення дросельної заслінки</string>
     <string name="speedometer_maximum">Максимум</string>
@@ -5616,7 +5614,7 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Використовуйте вибрані одиниці в назві.</string>
     <string name="remaining_fuel_description">Показує кількість палива, залишеного в резервуарі транспортного засобу</string>
     <string name="remaining_fuel">Залишився паливо</string>
-    <string name="obd_fuel_consumption">Питання палива</string>
+    <string name="obd_fuel_consumption">Споживання палива</string>
     <string name="reset_average_value">Скиньте середнє значення</string>
     <string name="shared_string_instant">Мить</string>
     <string name="show_minor_turns">Відображення на незначних перехрестях при прямому русі</string>
@@ -5872,4 +5870,5 @@
     <string name="lang_en_barebones">Англійська (базова)</string>
     <string name="shared_sting_osm_link">Посилання OSM</string>
     <string name="show_local_names">Показати місцеві назви</string>
+    <string name="obd_alt_battery_voltage">Напруга акумулятора (адаптер)</string>
 </resources>

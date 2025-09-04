@@ -5558,8 +5558,6 @@
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Prikazuje potrošnju goriva vozila na osnovu proračuna (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Potrošnja goriva stopa (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Prikazuje stopu potrošnje goriva vozila na osnovu proračuna (L/100 km)</string>
     <string name="simulate_obd">Simulirajte OBD podatke</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Pritisak goriva</string>
@@ -5851,4 +5849,5 @@
     <string name="lang_en_barebones">Engleski (osnovni)</string>
     <string name="shared_sting_osm_link">OSM link</string>
     <string name="show_local_names">Prikaži lokalne nazive</string>
+    <string name="obd_alt_battery_voltage">Napon baterije (adapter)</string>
 </resources>

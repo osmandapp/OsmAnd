@@ -4183,7 +4183,7 @@
     <string name="shared_string_articles">Artikler</string>
     <string name="shared_app_storage_description">Tilgang til delt minne har forsvunnet som følge av nye lagringstilgangsregler i Android.</string>
     <string name="internal_app_storage_description">Intern lagring, skjult fra alle brukere og andre programmer, så bare OsmAnd kan få tilgang til dine data.</string>
-    <string name="rendering_attr_natureReserves_name">Naturreservat</string>
+    <string name="rendering_attr_natureReserves_name">Naturreservat og vernede områder</string>
     <string name="icon_group_nautical">Nautisk</string>
     <string name="transparent_status_bar_descr">Vis kart under statusfeltet</string>
     <string name="is_disabled">%1$s er avskrudd</string>
@@ -4862,7 +4862,7 @@
     <string name="weather_prefs_descr">24-timer og 7-dagers værvarsel, oppdatert hver tredje time.</string>
     <string name="weather_pressure_inches_of_mercury">Tommer kvikksølv</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeter kvikksølv</string>
-    <string name="map_rendering_engine_descr">Versjon 1-opptegning var standard før OsmAnd 4.3, og er fremdeles å foretrekke for eldre enheter.\nVersjon 2 (OpenGL) er en raskere kartopptegningsmotor, som også har en 2.5D-visning.</string>
+    <string name="map_rendering_engine_descr">Versjon 1 var standard før OsmAnd 4.3, og er fremdeles å foretrekke for eldre enheter.\nVersjon 2 (OpenGL) er en kraftigere kartopptegningsmotor, som også har 2.5D-visning.</string>
     <string name="restart_now">Start på ny nå</string>
     <string name="shared_string_cross_buy">Krysskjøp</string>
     <string name="quick_action_current_location_widget_descr">En bryter for å vise eller skjule miniprogram for nåværende posisjon på kartet.</string>
@@ -5651,7 +5651,7 @@
     <string name="max_sensor_heartrate">Puls, maks.</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="target_elevation">Målhøyde</string>
-    <string name="display_distance_to_first_intermediate_summary">Viser tid og avstand til neste stopp først. Slå av for å alltid vise detaljer for målet.</string>
+    <string name="display_distance_to_first_intermediate_summary">Viser tid og avstand til neste stopp. Slå av dette alternativet for å alltid vise detaljer for det endelige målet isteden.</string>
     <string name="calculate_size">Beregn størrelse</string>
     <string name="display_distance_to_first_intermediate">Vis rutedetaljer for neste stopp</string>
     <string name="default_buttons_size_original_description">Hver knapp vil beholde sin egen størrelse.</string>
@@ -5696,8 +5696,8 @@
     <string name="shared_string_road_exit">Avkjøring</string>
     <string name="show_utm_grids_description">Vis rutenett i UTM-meter istedenfor WGS84</string>
     <string name="original_icon_description">Hvert punkt beholder sitt eget ikon.</string>
-    <string name="map_widget_route_information_desc">Viser beregnet ankomsttid, gjenværende reisetid og distanse for den aktuelle navigeringsruten.</string>
-    <string name="save_favorite_default_appearance">Bruke endringer på de eksisterende punkter i mappen eller kun på nye?</string>
+    <string name="map_widget_route_information_desc">Viser beregnet ankomsttid, gjenværende reisetid og distanse for den aktive navigeringsruten.</string>
+    <string name="save_favorite_default_appearance">Bruke endringer på alle eksisterende punkter i mappen eller kun på nylig tillagte?</string>
     <string name="original_color_description">Hvert punkt beholder sin egen farge.</string>
     <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
     <string name="apply_to_all_points">Bruk på alle punkter</string>
@@ -5749,4 +5749,19 @@
     <string name="labels_position">Påskrifters posisjon</string>
     <string name="customize_grid_color">Tilpass rutenettfarge</string>
     <string name="grid_color">Rutenettfarge</string>
+    <string name="manage_storage">Håndter lagring</string>
+    <string name="copy_as_new_folder">Kopier som ny mappe</string>
+    <string name="add_to_a_folder">Legg til i en mappe</string>
+    <string name="add_to_favorites">Legg til i favoritter</string>
+    <string name="view_on_phone">Vis på telefon</string>
+    <string name="average_elevation">Gjennomsnittlig høyde</string>
+    <string name="ascent">Stigning</string>
+    <string name="descent">Nedstigning</string>
+    <string name="map_orientations">Kartorienteringer</string>
+    <string name="shared_sting_osm_link">OSM-lenke</string>
+    <string name="show_dms_grids">Bruk DMS istedenfor grader</string>
+    <string name="show_dms_grids_description">Vis rutenett i grader, minutter, sekunder istedenfor grader</string>
+    <string name="show_dm_grids">Bruk DM istedenfor grader eller DMS</string>
+    <string name="show_dm_grids_description">Vis rutenett i grader og minutter istedenfor grader eller DMS</string>
+    <string name="show_local_names">Vis lokale navn</string>
 </resources>

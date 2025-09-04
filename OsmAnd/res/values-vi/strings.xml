@@ -586,8 +586,6 @@
     <string name="view_angle_description">Hiển thị vùng hình nón theo hướng bạn đang nhìn</string>
     <string name="quick_action_drawer_title">Menu ở cạnh</string>
     <string name="quick_action_search_view_desc">Một nút bật/tắt để mở hoặc đóng màn hình tìm kiếm.</string>
-    <string name="obd_fuel_consumption_rate_l_km">Mức tiêu thụ nhiên liêu (lít/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Hiện mức tiêu thụ nhiên liệu dựa trên sự tính toán (lít/100 km)</string>
     <string name="simulate_obd">Mô phỏng dữ liệu obd</string>
     <string name="quick_action_switch_compass_desc">Một nút bật/tắt để chuyển đổi hướng xoay của bản đồ.</string>
     <string name="add_widget_below">Thêm widget xuống dưới</string>

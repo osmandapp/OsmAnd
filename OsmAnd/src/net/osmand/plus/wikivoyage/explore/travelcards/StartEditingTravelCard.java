@@ -1,6 +1,5 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,13 +31,7 @@ public class StartEditingTravelCard extends BaseTravelCard {
 			holder.description.setText(R.string.start_editing_card_description);
 			holder.backgroundImage.setImageResource(R.drawable.img_help_wikivoyage_contribute);
 			holder.button.setText(R.string.start_editing);
-			holder.button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					AndroidUtils.openUrl(activity,
-							Uri.parse("https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org"), nightMode);
-				}
-			});
+			holder.button.setOnClickListener(v -> AndroidUtils.openUrl(activity, "https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org", nightMode));
 		}
 	}
 
