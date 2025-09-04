@@ -121,10 +121,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			if (selectedButton != null) {
 				app.getMapButtonsHelper().setQuickActionFabState(selectedButton.getButtonState(), true);
 			}
-
-			String message = String.format(mapActivity.getString(
-					R.string.application_profile_changed), appMode.toHumanString());
-			AndroidUtils.getApp(mapActivity).showShortToastMessage(message);
+			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.application_profile_changed, appMode.toHumanString());
 		}
 	}
 

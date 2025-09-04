@@ -495,9 +495,7 @@ public class OsmandSettings {
 		ApplicationMode appMode = getApplicationMode();
 		ApplicationMode nextAppMode = getSwitchedAppMode(appMode, next);
 		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
-			String pattern = ctx.getString(R.string.application_profile_changed);
-			String message = String.format(pattern, nextAppMode.toHumanString());
-			ctx.showShortToastMessage(message);
+			ctx.showShortToastMessage(R.string.application_profile_changed, nextAppMode.toHumanString());
 			return true;
 		}
 		return false;

@@ -258,7 +258,7 @@ public class LiveUpdatesFragment extends BaseFullScreenDialogFragment implements
 					updateToolbarSwitch(true);
 				} else {
 					updateToolbarSwitch(false);
-					app.showToastMessage(getString(R.string.osm_live_ask_for_purchase));
+					app.showToastMessage(R.string.osm_live_ask_for_purchase);
 
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
