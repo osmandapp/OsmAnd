@@ -245,18 +245,17 @@ public class WikiCoreHelper {
 	}
 
 	private static WikiImage parseImageDataFromFile(String imageUrl) {
+		String imageHiResUrl = imageUrl.replace("%20", " ").replace(" ", "_");
 		try {
 			imageUrl = URLDecoder.decode(imageUrl, "UTF-8");
-			String imageHiResUrl = imageUrl.replace(" ", "_");
-			String imageFileName = Algorithms.getFileWithoutDirs(imageUrl);
-			String imageName = Algorithms.getFileNameWithoutExtension(imageUrl);
-			String imageStubUrl = imageHiResUrl + "?width=" + THUMB_SIZE;
-			String imageIconUrl = imageHiResUrl + "?width=" + ICON_SIZE;
-			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl, imageIconUrl);
-		} catch (UnsupportedEncodingException e) {
+		} catch (IllegalArgumentException | UnsupportedEncodingException e) {
 			LOG.error(e.getLocalizedMessage());
 		}
-		return null;
+		String imageFileName = Algorithms.getFileWithoutDirs(imageUrl);
+		String imageName = Algorithms.getFileNameWithoutExtension(imageUrl);
+		String imageStubUrl = imageHiResUrl + "?width=" + THUMB_SIZE;
+		String imageIconUrl = imageHiResUrl + "?width=" + ICON_SIZE;
+		return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl, imageIconUrl);
 	}
 
 	private static <T> T sendWikipediaApiRequest(String url, Class<T> responseClass, boolean useGzip) {
