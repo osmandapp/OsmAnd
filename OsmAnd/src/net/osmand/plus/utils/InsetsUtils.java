@@ -163,8 +163,8 @@ public class InsetsUtils {
 	}
 
 	private static boolean shouldAllowProcessInsets(@NonNull ISupportInsets insetSupportedFragment) {
-		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment) {
-			return true;
+		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment dialogFragment) {
+			return dialogFragment.getDialog() != null && dialogFragment.getShowsDialog();
 		} else if (insetSupportedFragment.requireActivity() instanceof MapActivity) {
 			if (insetSupportedFragment instanceof BaseOsmAndFragment fragment) {
 				return fragment.getParentFragment() == null;
