@@ -28,6 +28,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Postcode;
 import net.osmand.data.Street;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
@@ -603,9 +604,9 @@ public class BinaryMapAddressReaderAdapter {
 	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
 		TIntArrayList loffsets = new TIntArrayList();
 		CollatorStringMatcher stringMatcher = new CollatorStringMatcher(req.nameQuery, req.matcherMode);
-		String postcode = Postcode.normalize(req.nameQuery, map.getCountryName());
+		String postcode = Algorithms.isEmpty(req.postcodeName) ? Postcode.normalize(req.nameQuery, map.getCountryName()) : req.postcodeName;
 		final CityMatcher postcodeMatcher = new DefaultCityMatcher(new CollatorStringMatcher(postcode, req.matcherMode));
-		final CityMatcher cityMatcher = new DefaultCityMatcher(stringMatcher);
+		final CityMatcher cityMatcher = Algorithms.isEmpty(req.cityName) ? new DefaultCityMatcher(stringMatcher) : new DefaultCityMatcher(new CollatorStringMatcher(req.cityName, req.matcherMode));
 		final CityMatcher cityPostcodeMatcher = new CityMatcher() {
 			@Override
 			public boolean matches(City city) {

@@ -45,12 +45,21 @@ public class VariantsSearchManager {
             Set<String> names = new HashSet<>();
             parseRegionNames(osmandRegions.getWorldRegion(), names);
             for (String name : names) {
-                CommonWords.addExternalFrequentlyUsed(name);
+                CommonWords.addExternalCommon(name);
             }            
+        }
+        for (String abbr : abbreviations.keySet()) {
+            SearchPhrase.expandConjunction(abbr);
+//            CommonWords.addExternalCommon(abbr);
         }
         for (String abbr : abbreviations.values()) {
             CommonWords.addExternalCommon(abbr);
         }
+        CommonWords.addExternalCommon("usa");
+        CommonWords.addExternalCommon("penn");
+        CommonWords.addExternalCommon("pa");
+        CommonWords.addExternalCommon("united states");
+        CommonWords.addExternalCommon("pennsylvania");
     }
     
     private void parseRegionNames(WorldRegion region, Set<String> result) {

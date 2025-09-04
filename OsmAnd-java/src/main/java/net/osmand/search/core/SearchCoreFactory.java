@@ -281,6 +281,107 @@ public class SearchCoreFactory {
 		}
 	}
 
+	public static class SearchAmericanAddressAPI extends SearchBaseAPI {
+		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
+		private static final int LIMIT = 10000;
+		private SearchBuildingAndIntersectionsByStreetAPI streetsApi;
+
+		public SearchAmericanAddressAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi) {
+			super(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE,
+					ObjectType.STREET, ObjectType.HOUSE, ObjectType.STREET_INTERSECTION);
+			this.streetsApi = streetsApi;
+		}
+		
+		@Override
+		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
+			if (!phrase.isUnknownSearchWordPresent() && !phrase.isEmptyQueryAllowed()) {
+				return false;
+			}
+			Map<String, String> map = AmericanVariants.parseAddress(phrase.getFullSearchPhrase());
+			System.out.println(map.toString());
+			final String street = map.get("street");
+			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
+			final List<SearchResult> immediateResults = new ArrayList<>();
+			final int priority = phrase.isNoSelectedType() ?
+					SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
+			ResultMatcher<MapObject> rm = new ResultMatcher<MapObject>() {
+				int limit = 0;
+				@Override
+				public boolean publish(MapObject object) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.object = object;
+					sr.file = currentFile[0];
+					sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+					sr.otherNames = object.getOtherNames(true);
+					sr.localeRelatedObjectName = sr.file.getRegionName();
+					sr.relatedObject = sr.file;
+					sr.location = object.getLocation();
+					sr.priorityDistance = 1;
+					sr.priority = priority;
+					if (object instanceof Street) {
+						if ( !phrase.isSearchTypeAllowed(ObjectType.STREET)) {
+							return false;
+						}
+						if (object.getName().startsWith("<")) {
+							return false;
+						}
+						sr.objectType = ObjectType.STREET;
+						sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+						sr.relatedObject = ((Street)object).getCity();
+					} else {
+						return false;
+					}					
+					limit ++;
+					immediateResults.add(sr);
+					return true;
+				}
+
+				@Override
+				public boolean isCancelled() {
+					return limit > LIMIT * phrase.getRadiusLevel() ||
+							resultMatcher.isCancelled();
+				}
+			};
+
+			ResultMatcher<MapObject> rawDataCollector = null;
+
+			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
+					SearchPhraseDataType.ADDRESS);
+			
+			final boolean locSpecified = phrase.getLastTokenLocation() != null;
+			LatLon loc = phrase.getLastTokenLocation();
+			String wordToSearch = Algorithms.isEmpty(street) ? phrase.getUnknownWordToSearch() : street;
+			while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
+				BinaryMapIndexReader r = offlineIterator.next();
+				currentFile[0] = r;
+				immediateResults.clear();
+				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
+						phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+								: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+				
+				req.cityName = map.get("city");
+				req.postcodeName = map.get("postcode");
+				
+				if (locSpecified) {
+					req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
+							phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
+				}
+				r.searchAddressDataByName(req);
+				resultMatcher.apiSearchRegionFinished(this, r, phrase);
+			}
+
+			for (SearchResult res : immediateResults) {
+				if (res.objectType == ObjectType.STREET) {
+					subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
+				}/* else {
+					SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+				}*/
+			}
+			
+			return true;
+		}
+	}
+
 	public static class SearchAddressByNameAPI extends SearchBaseAPI {
 
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
