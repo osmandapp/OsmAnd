@@ -25,7 +25,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
@@ -43,6 +42,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -80,7 +80,7 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements IOsmAndFragment,
-		OnPreferenceChangeListener, OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
+		OnPreferenceChangeListener, OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged, ISupportInsets {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
@@ -104,7 +104,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	private int statusBarColor = -1;
 	private boolean wasDrawerDisabled;
 
-	protected WindowInsetsCompat lastRootInsets = null;
+	private WindowInsetsCompat lastRootInsets = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -159,61 +159,49 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		updateToolbar();
-
-		Activity activity = requireActivity();
-		if (activity instanceof MapActivity) {
-			InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
-				Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-				InsetsUtils.applyPadding(v, insets, getSideInsets());
-
-				View bottomContainer = null;
-				List<Integer> bottomContainers = getBottomContainersIds();
-				if (bottomContainers != null) {
-					for (int id : bottomContainers) {
-						bottomContainer = v.findViewById(id);
-						if (bottomContainer != null) break;
-					}
-				}
-
-				if (bottomContainer != null) {
-					if (bottomContainer instanceof ViewGroup viewGroup) {
-						viewGroup.setClipToPadding(false);
-					}
-					InsetsUtils.applyPadding(bottomContainer, insets, EnumSet.of(InsetSide.BOTTOM));
-					ViewGroup.LayoutParams layoutParams = bottomContainer.getLayoutParams();
-					int oldHeight = layoutParams.height;
-					if (oldHeight != ViewGroup.LayoutParams.MATCH_PARENT && oldHeight != ViewGroup.LayoutParams.WRAP_CONTENT) {
-						int initialHeight = (Integer) (view.getTag(R.id.initial_height) != null
-								? view.getTag(R.id.initial_height)
-								: oldHeight);
-
-						if (view.getTag(R.id.initial_height) == null) {
-							view.setTag(R.id.initial_height, oldHeight);
-						}
-						layoutParams.height = initialHeight + sysBars.bottom;
-						bottomContainer.setLayoutParams(layoutParams);
-					}
-				}
-				lastRootInsets = insets;
-				onApplyInsets(insets);
-			}, true);
-		}
+		InsetsUtils.processInsets(this, view);
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	@Override
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return EnumSet.of(InsetSide.TOP);
 	}
 
 	@Nullable
-	protected List<Integer> getBottomContainersIds() {
+	@Override
+	public List<Integer> getBottomContainersIds() {
 		List<Integer> ids = new ArrayList<>();
 		ids.add(R.id.bottom_buttons_container);
 		return ids;
 	}
 
-	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return null;
+	}
 
+	@Nullable
+	@Override
+	public List<Integer> getFabIds() {
+		return null;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
+	}
+
+	@Nullable
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return lastRootInsets;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+		lastRootInsets = rootInsets;
 	}
 
 	@Override

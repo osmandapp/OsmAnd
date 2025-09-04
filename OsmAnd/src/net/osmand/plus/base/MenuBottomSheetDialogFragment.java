@@ -160,7 +160,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
 	}
 
-	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
 		setupHeightAndBackground(getView(), insets.getInsets(WindowInsetsCompat.Type.systemBars()));
 	}
 
@@ -194,17 +194,18 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
-	protected EnumSet<InsetSide> getSideInsets(){
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return EnumSet.of(InsetSide.BOTTOM);
 	}
 
 	@Nullable
-	protected List<Integer> getRootScrollableViewIds() {
+	@Override
+	public List<Integer> getScrollableViewIds() {
 		return null;
 	}
 
 	protected void setupHeightAndBackground(View mainView) {
-		Insets ins = InsetsUtils.getSysBars(app, getLastInsets());
+		Insets ins = InsetsUtils.getSysBars(app, getLastRootInsets());
 		if (ins != null) {
 			setupHeightAndBackground(mainView, ins);
 		} else {

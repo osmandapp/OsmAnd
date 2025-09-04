@@ -184,7 +184,7 @@ public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return null;
 	}
 

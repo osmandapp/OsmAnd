@@ -176,7 +176,7 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return null;
 	}
 

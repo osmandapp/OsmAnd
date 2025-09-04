@@ -212,13 +212,13 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return null;
 	}
 
 	@Nullable
 	@Override
-	protected List<Integer> getBottomContainersIds() {
+	public List<Integer> getBottomContainersIds() {
 		return null;
 	}
 

@@ -162,7 +162,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 
 	@Nullable
 	@Override
-	protected List<Integer> getBottomContainersIds() {
+	public List<Integer> getBottomContainersIds() {
 		return null;
 	}
 

@@ -4,20 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -45,7 +39,7 @@ import java.util.List;
  *
  * Note: Fragments based on DialogFragment or BottomSheetFragment should NOT inherit from this class.
  */
-public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
+public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment, ISupportInsets {
 
 	protected OsmandApplication app;
 	protected ApplicationMode appMode;
@@ -54,7 +48,8 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	protected boolean nightMode;
 
 	private LayoutInflater themedInflater;
-	protected WindowInsetsCompat lastRootInsets = null;
+	private WindowInsetsCompat lastRootInsets = null;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,71 +70,23 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
-		Activity activity = requireActivity();
-		if (activity instanceof MapActivity) {
-			InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
-				Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-				EnumSet<InsetSide> insetSides = getSideInsets();
-				InsetsUtils.applyPadding(v, insets, insetSides);
-
-				View listView = null;
-				List<Integer> rootScrollableIds = getRootScrollableViewIds();
-				if (rootScrollableIds != null) {
-					for (int id : rootScrollableIds) {
-						listView = v.findViewById(id);
-						if (listView != null) break;
-					}
-				}
-				if (listView != null) {
-					if (listView instanceof ViewGroup viewGroup) {
-						viewGroup.setClipToPadding(false);
-					}
-					InsetsUtils.applyPadding(listView, insets, EnumSet.of(InsetSide.BOTTOM));
-				}
-
-				View bottomContainer = null;
-				List<Integer> bottomContainers = getBottomContainersIds();
-				if (bottomContainers != null) {
-					for (int id : bottomContainers) {
-						bottomContainer = v.findViewById(id);
-						if (bottomContainer != null) break;
-					}
-				}
-
-				if (bottomContainer != null) {
-					if (bottomContainer instanceof ViewGroup viewGroup) {
-						viewGroup.setClipToPadding(false);
-					}
-					InsetsUtils.applyPadding(bottomContainer, insets, EnumSet.of(InsetSide.BOTTOM));
-					ViewGroup.LayoutParams layoutParams = bottomContainer.getLayoutParams();
-					int oldHeight = layoutParams.height;
-					if (oldHeight != ViewGroup.LayoutParams.MATCH_PARENT && oldHeight != ViewGroup.LayoutParams.WRAP_CONTENT) {
-						int initialHeight = (Integer) (view.getTag(R.id.initial_height) != null
-								? view.getTag(R.id.initial_height)
-								: oldHeight);
-
-						if (view.getTag(R.id.initial_height) == null) {
-							view.setTag(R.id.initial_height, oldHeight);
-						}
-						layoutParams.height = initialHeight + sysBars.bottom;
-						bottomContainer.setLayoutParams(layoutParams);
-					}
-				}
-				lastRootInsets = insets;
-				onApplyInsets(insets);
-			}, true);
-		}
+		InsetsUtils.processInsets(this, view);
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	public List<Integer> getFabIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.fab);
+		return ids;
+	}
+
+	@Nullable
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return EnumSet.of(InsetSide.TOP);
 	}
 
 	@Nullable
-	protected List<Integer> getRootScrollableViewIds() {
+	public List<Integer> getScrollableViewIds() {
 		List<Integer> ids = new ArrayList<>();
 		ids.add(R.id.scroll_view);
 		ids.add(R.id.recycler_view);
@@ -147,14 +94,25 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	}
 
 	@Nullable
-	protected List<Integer> getBottomContainersIds() {
+	public List<Integer> getBottomContainersIds() {
 		List<Integer> ids = new ArrayList<>();
 		ids.add(R.id.bottom_buttons_container);
 		return ids;
 	}
 
-	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
 
+	}
+
+	@Nullable
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return lastRootInsets;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+		lastRootInsets = rootInsets;
 	}
 
 	protected void updateNightMode() {

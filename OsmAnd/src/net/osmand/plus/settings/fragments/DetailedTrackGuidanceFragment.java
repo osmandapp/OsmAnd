@@ -100,7 +100,7 @@ public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 	}
 
 	private void setupApplyButton(@NonNull View view) {
-		AndroidUtils.setBackground(getContext(), view.findViewById(R.id.apply_button), getCardAndListBackgroundColorId(nightMode));
+		AndroidUtils.setBackground(getContext(), view.findViewById(R.id.bottom_buttons_container), getCardAndListBackgroundColorId(nightMode));
 		view.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
 		view.findViewById(R.id.buttons_divider).setVisibility(View.GONE);
 		applyButton = view.findViewById(R.id.right_bottom_button);
@@ -132,7 +132,7 @@ public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 
 	private void setupRadioButtons(@NonNull View view) {
 		radioButtons = new ArrayList<>();
-		LinearLayout buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
+		LinearLayout buttonsContainer = view.findViewById(R.id.buttons_container);
 
 		for (int i = 0; i < TrackApproximationType.values().length; i++) {
 			TrackApproximationType type = TrackApproximationType.values()[i];

@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
+public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment, ISupportInsets {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -41,7 +40,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 
 	private LayoutInflater themedInflater;
 
-	private WindowInsetsCompat lastInset;
+	private WindowInsetsCompat lastRootInsets = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,52 +77,49 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
-			EnumSet<InsetSide> insetSides = getSideInsets();
-
-			View listView = null;
-			List<Integer> rootScrollableIds = getRootScrollableViewIds();
-			if (rootScrollableIds != null) {
-				for (int id : rootScrollableIds) {
-					listView = v.findViewById(id);
-					if (listView != null) break;
-				}
-			}
-
-			if (listView != null) {
-				if (listView instanceof ViewGroup viewGroup) {
-					viewGroup.setClipToPadding(false);
-				}
-				InsetsUtils.applyPadding(listView, insets, EnumSet.of(InsetSide.BOTTOM));
-			} else if (insetSides != null) {
-				insetSides.add(InsetSide.BOTTOM);
-			}
-			InsetsUtils.applyPadding(v, insets, insetSides);
-			lastInset = insets;
-			onApplyInsets(insets);
-		}, true);
+		InsetsUtils.processInsets(this, view);
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	@Override
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return EnumSet.of(InsetSide.TOP);
 	}
 
 	@Nullable
-	protected List<Integer> getRootScrollableViewIds() {
+	@Override
+	public List<Integer> getScrollableViewIds() {
 		List<Integer> ids = new ArrayList<>();
 		ids.add(android.R.id.list);
 		ids.add(R.id.scroll_view);
 		return ids;
 	}
 
-	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+	@Nullable
+	@Override
+	public List<Integer> getFabIds() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
 
 	}
 
 	@Nullable
-	protected WindowInsetsCompat getLastInsets(){
-		return lastInset;
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return lastRootInsets;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+		lastRootInsets = rootInsets;
 	}
 
 	@Override

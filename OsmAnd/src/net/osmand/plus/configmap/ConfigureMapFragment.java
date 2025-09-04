@@ -309,7 +309,7 @@ public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDa
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return null;
 	}
 

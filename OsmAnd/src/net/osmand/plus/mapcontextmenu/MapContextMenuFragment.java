@@ -594,7 +594,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 	@Nullable
 	@Override
-	protected EnumSet<InsetSide> getSideInsets() {
+	public EnumSet<InsetSide> getRootInsetSides() {
 		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
 	}
 

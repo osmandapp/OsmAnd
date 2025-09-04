@@ -223,7 +223,7 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return null;
 	}
 

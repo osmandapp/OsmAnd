@@ -17,7 +17,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -38,7 +37,6 @@ import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -104,13 +102,13 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 	}
 
 	@Override
-	protected void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
 		InsetsUtils.applyPadding(recyclerView, insets, EnumSet.of(searchMode ? InsetSide.BOTTOM : InsetSide.RESET));
 	}
 
 	@Nullable
 	@Override
-	protected List<Integer> getRootScrollableViewIds() {
+	public List<Integer> getScrollableViewIds() {
 		return null;
 	}
 

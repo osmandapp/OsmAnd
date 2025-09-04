@@ -1,10 +1,8 @@
 package net.osmand.plus.base;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.ColorInt;
@@ -13,8 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.ListFragment;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -41,7 +37,7 @@ import java.util.List;
  * must instead extend this class (or one of its descendants like {@link BaseNestedListFragment})
  * to ensure proper UI behavior and access to shared resources.
  */
-public abstract class BaseOsmAndListFragment extends ListFragment implements IOsmAndFragment {
+public abstract class BaseOsmAndListFragment extends ListFragment implements IOsmAndFragment, ISupportInsets {
 
 	protected OsmandApplication app;
 	protected ApplicationMode appMode;
@@ -51,7 +47,7 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 
 	private LayoutInflater themedInflater;
 
-	private WindowInsetsCompat lastInset;
+	private WindowInsetsCompat lastRootInsets = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,48 +62,49 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
-		Activity activity = requireActivity();
-		if (activity instanceof MapActivity) {
-			InsetsUtils.setWindowInsetsListener(view, (v, insets) -> {
-				EnumSet<InsetSide> insetSides = getSideInsets();
-				View listView = null;
-				List<Integer> rootScrollableIds = getRootScrollableViewIds();
-				if (rootScrollableIds != null) {
-					for (int id : rootScrollableIds) {
-						listView = v.findViewById(id);
-						if (listView != null) break;
-					}
-				}
-
-
-				InsetsUtils.applyPadding(v, insets, insetSides);
-				if (listView != null) {
-					if (listView instanceof ViewGroup viewGroup) {
-						viewGroup.setClipToPadding(false);
-					}
-					InsetsUtils.applyPadding(listView, insets, EnumSet.of(InsetSide.BOTTOM));
-				}
-				lastInset = insets;
-				onApplyInsets(insets);
-			}, true);
-		}
+		InsetsUtils.processInsets(this, view);
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	@Override
+	public EnumSet<InsetSide> getRootInsetSides(){
 		return null;
 	}
 
 	@Nullable
-	protected List<Integer> getRootScrollableViewIds() {
+	@Override
+	public List<Integer> getScrollableViewIds() {
 		List<Integer> ids = new ArrayList<>();
 		ids.add(android.R.id.list);
 		return ids;
 	}
 
-	protected void onApplyInsets(@NonNull WindowInsetsCompat insets){
+	@Nullable
+	@Override
+	public List<Integer> getFabIds() {
+		return null;
+	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
+	}
+
+	@Nullable
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return lastRootInsets;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+		lastRootInsets = rootInsets;
 	}
 
 	@Override

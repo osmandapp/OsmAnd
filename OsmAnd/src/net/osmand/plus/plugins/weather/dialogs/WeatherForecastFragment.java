@@ -190,6 +190,14 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.main_content);
+		return ids;
+	}
+
 	private void setupPLayForecastButton(View view) {
 		View playForecastBtn = view.findViewById(R.id.play_forecast_button);
 		playForecastBtnIcon = view.findViewById(R.id.play_forecast_button_icon);
