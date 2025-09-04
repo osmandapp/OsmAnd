@@ -1338,7 +1338,7 @@
     <string name="no_overlay">无覆盖层</string>
     <string name="no_underlay">无衬底层</string>
     <string name="subscribe_email_desc">订阅我们的邮件列表，了解应用的折扣，并获得 3 个额外的地图下载！</string>
-    <string name="depth_contour_descr">海洋等深线和海洋标记。</string>
+    <string name="depth_contour_descr">海洋等深线和航海标志。</string>
     <string name="sea_depth_thanks">感谢你购买“航海等深线”</string>
     <string name="index_item_depth_contours_osmand_ext">航海等深线</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球航海深度点</string>
@@ -3814,7 +3814,7 @@
     <string name="lost_data_warning">所有未保存的数据将丢失。</string>
     <string name="trip_recording_save_and_continue">保存并继续</string>
     <string name="trip_recording_logging_interval_info">日志间隔设置 OsmAnd 请求当前位置数据的时间周期。</string>
-    <string name="rendering_attr_natureReserves_name">自然保护区</string>
+    <string name="rendering_attr_natureReserves_name">自然保护区和保护区</string>
     <string name="rendering_attr_natureReserves_description">展示自然保护区、保护区和国家公园。</string>
     <string name="osmand_cloud_create_account_descr">请输入您的电子邮件地址，我们会发送一个验证码到这个地址，
 \n你所有的数据都将与其相链接。</string>
@@ -5513,7 +5513,7 @@
     <string name="quick_action_move_map_left">地图向左</string>
     <string name="quick_action_first_intermediate">第一中继点</string>
     <string name="background_opacity">背景不透明度</string>
-    <string name="corner_radius">转角半径</string>
+    <string name="corner_radius">圆角半径</string>
     <string name="shared_string_interface">界面</string>
     <string name="quick_action_previous_screen_desc">切换到上一屏幕。</string>
     <string name="quick_action_new_route">新路线</string>
@@ -5566,7 +5566,7 @@
     <string name="routing_type">路线类型</string>
     <string name="ais_port_nmea_local_description">指定 OsmAnd 接收数据的 UDP 端口</string>
     <string name="shared_string_increase">增加</string>
-    <string name="default_buttons_opacity_original_description">每个按钮都会保留其背景不透明度。</string>
+    <string name="default_buttons_opacity_original_description">每个按钮保留其单独的背景不透明度。</string>
     <string name="save_favorite_default_appearance">将更改应用于文件夹中已存在的点，还是仅应用于新的点？</string>
     <string name="ais_address_settings_description">选择 NMEA 协议（UDP/TCP）并定义地址</string>
     <string name="popular_places_nearby">附近的热门地点</string>
@@ -5593,13 +5593,13 @@
     <string name="liter_per_hour">L/h</string>
     <string name="shared_string_decrease">减少</string>
     <string name="wikimedia">维基媒体</string>
-    <string name="original_icon_description">每个点都会保留其图标。</string>
+    <string name="original_icon_description">每个点保留其单独的图标。</string>
     <string name="travel_topics">旅行话题</string>
     <string name="action_icon">动作图标</string>
     <string name="routing_type_a_star_classic">A* 经典</string>
     <string name="gpx_approximation_cpp">基于路径规划（C++）</string>
-    <string name="original_color_description">每个点都会保留其颜色。</string>
-    <string name="original_shape_description">每个点都会保留其形状。</string>
+    <string name="original_color_description">每个点保留其单独的颜色。</string>
+    <string name="original_shape_description">每个点保留其单独的形状。</string>
     <string name="apply_to_all_points">应用至所有点</string>
     <string name="shared_string_road_exit">出口</string>
     <string name="ais_port_nmea_server">NMEA 数据源的 TCP 端口</string>
@@ -5610,8 +5610,8 @@
     <string name="ais_cpa_settings">与最近接近点相关的设置</string>
     <string name="no_photo_for_location_desc">此地点尚未添加任何用户的照片</string>
     <string name="map_widget_route_information_desc">显示预计到达时间、剩余旅行时间以及当前导航路线的距离。</string>
-    <string name="default_buttons_corners_original_description">每个按钮都会保留其转角半径。</string>
-    <string name="default_buttons_size_original_description">每个按钮都会保留其大小。</string>
+    <string name="default_buttons_corners_original_description">每个按钮保留其单独的圆角半径。</string>
+    <string name="default_buttons_size_original_description">每个按钮保留其单独的大小。</string>
     <string name="obd_fuel_level_liter">油量（升）</string>
     <string name="obd_device_forget_sensor">忘记扫描器</string>
     <string name="java_safe">Java（安全）</string>
@@ -5694,7 +5694,7 @@
     <string name="grid_color">网格颜色</string>
     <string name="shared_string_edges">边缘</string>
     <string name="labels_position">标签位置</string>
-    <string name="routing_attr_allow_ferries_description">允许通过渡轮航线规划路线</string>
+    <string name="routing_attr_allow_ferries_description">允许通过轮渡规划路线</string>
     <string name="wikidata">维基数据</string>
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="customize_grid_color">自定义网格颜色</string>
@@ -5857,8 +5857,8 @@
     <string name="rendering_attr_hideSpots_description">隐藏离散水深</string>
     <string name="rendering_attr_hideTidalFlats_name">潮间带</string>
     <string name="rendering_attr_hideTidalFlats_description">‌隐藏潮间带</string>
-    <string name="rendering_attr_depthColorScheme_name">水深色谱方案</string>
-    <string name="rendering_attr_depthColorScheme_description">水深色谱方案</string>
+    <string name="rendering_attr_depthColorScheme_name">深度配色方案</string>
+    <string name="rendering_attr_depthColorScheme_description">深度配色方案</string>
     <string name="rendering_attr_depthContoursDashed_name">‌虚线等深线</string>
     <string name="rendering_attr_depthContoursDashed_description">虚线等深线</string>
     <string name="rendering_attr_fairwayStyle_name">航道颜色</string>
@@ -5869,4 +5869,16 @@
     <string name="rendering_attr_shellsStyle_description">海底贝壳样式</string>
     <string name="rendering_attr_showLNAMmarker_name">电子海图标记</string>
     <string name="rendering_attr_showLNAMmarker_description">显示电子海图标记</string>
+    <string name="rendering_attr_spotDistance_name">‌离散水深间距</string>
+    <string name="rendering_attr_spotDistance_description">离散水深间距</string>
+    <string name="rendering_attr_spotSize_name">离散水深尺寸</string>
+    <string name="rendering_attr_spotSize_description">离散水深尺寸</string>
+    <string name="rendering_attr_tidalFlatStyle_name">潮间带样式</string>
+    <string name="rendering_attr_tidalFlatStyle_description">潮间带的样式</string>
+    <string name="rendering_attr_watercolor_name">水域颜色</string>
+    <string name="rendering_attr_watercolor_description">水域的颜色</string>
+    <string name="show_debug_tile">显示瓦片信息</string>
+    <string name="enable_msaa">启用 MSAA</string>
+    <string name="show_local_names">显示本地名称</string>
+    <string name="lang_en_barebones">英语（极简）</string>
 </resources>
