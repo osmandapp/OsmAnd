@@ -30,6 +30,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -143,6 +146,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	private int viewHeight;
 	private int zoomButtonsHeight;
 	private int statusBarHeight;
+	private int navBarHeight;
 
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
@@ -583,7 +587,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			if (forceUpdateLayout || bottom != oldBottom) {
 				forceUpdateLayout = false;
 				processScreenHeight((View) view.getParent());
-				runLayoutListener();
+				updateUi();
 			}
 		};
 
@@ -824,6 +828,35 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		viewHeight = container.getHeight();
 		screenHeight = AndroidUtils.getScreenHeight(activity);
 		statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
+	}
+
+	private void updateUi() {
+		WindowInsetsCompat insets = getLastRootInsets();
+		if (insets != null) {
+			Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+			if (sysBars.top != 0) {
+				statusBarHeight = sysBars.top;
+			}
+			if (sysBars.bottom != 0) {
+				navBarHeight = sysBars.bottom;
+			}
+			runLayoutListener();
+		} else {
+			ViewCompat.requestApplyInsets(view);
+		}
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		super.onApplyInsets(insets);
+		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+		if (sysBars.top != 0) {
+			statusBarHeight = sysBars.top;
+		}
+		if (sysBars.bottom != 0) {
+			navBarHeight = sysBars.bottom;
+		}
+		runLayoutListener();
 	}
 
 	public void openMenuFullScreen() {
@@ -1921,7 +1954,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	}
 
 	private int getHeaderOnlyTopY() {
-		return viewHeight - menuTitleHeight;
+		return viewHeight - menuTitleHeight - navBarHeight;
 	}
 
 	private int getFullScreenTopPosY() {
