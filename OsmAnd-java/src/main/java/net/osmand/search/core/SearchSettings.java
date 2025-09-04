@@ -314,7 +314,7 @@ public class SearchSettings {
 
 	public void setSearchVersion(SearchVersion searchVersion) {
 		this.searchVersion = searchVersion;
-		new MutableSearchManager(searchVersion);
+		new VariantsSearchManager(searchVersion);
 	}
 
 	public void setRegionLang(String lang) {

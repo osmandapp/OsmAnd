@@ -11,14 +11,14 @@ import net.osmand.util.Algorithms;
 import java.io.IOException;
 import java.util.*;
 
-public class MutableSearchManager {
+public class VariantsSearchManager {
     
-    public MutableSearchManager(SearchVersion version) {
+    public VariantsSearchManager(SearchVersion version) {
         init(version);
     }
 
     public static void main(String[] args) {
-        MutableSearchManager m = new MutableSearchManager(SearchVersion.EXPAND_COMMON_WORDS);
+        VariantsSearchManager m = new VariantsSearchManager(SearchVersion.EXPAND_COMMON_WORDS);
         m.expandCommonWords();
     }
 
