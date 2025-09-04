@@ -5896,4 +5896,10 @@
     <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
     <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
     <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Britisk gallon</string>
+    <string name="us_gallon">Amerikansk gallon</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Miles</string>
+    <string name="mpg">MPG</string>
 </resources>
