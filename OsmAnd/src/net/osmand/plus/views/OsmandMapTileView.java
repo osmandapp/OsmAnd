@@ -2098,8 +2098,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return animatedMapMarkersThread;
 	}
 
+	public void setPinchZoomMagnificationEnabled(boolean enabled) {
+		MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled = enabled;
+	}
+
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener, DoubleTapZoomListener {
 
+		public static boolean isPinchZoomMagnificationEnabled = false;
 		private static final float ZONE_0_ANGLE_THRESHOLD = 5;
 		private static final float ZONE_1_ANGLE_THRESHOLD = 15;
 		private static final float ZONE_2_ANGLE_THRESHOLD = 20;
@@ -2154,6 +2159,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					app.showToastMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(
 							p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), app));
 				}
+			}
+
+			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
+				mapRenderer.setViewportScale(0.0, false);
+				changeZoomPosition((float) 0, 0);
 			}
 		}
 
@@ -2296,7 +2306,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (deltaZoom != 0 || relAngle != 0) {
-				changeZoomPosition((float) deltaZoom, relAngle);
+				if (mapRenderer != null && isPinchZoomMagnificationEnabled && relativeToStart > 1.0) {
+					mapRenderer.setViewportScale(relativeToStart, false);
+
+					RotatedTileBox calc = initialViewport.copy();
+					float calcRotate = calc.getRotate() + relAngle;
+
+					int multiTouchCenterX;
+					int multiTouchCenterY;
+					if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
+						multiTouchCenterX = (int) multiTouchSupport.getCenterPoint().x;
+						multiTouchCenterY = (int) multiTouchSupport.getCenterPoint().y;
+					} else {
+						multiTouchCenterX = (int) initialMultiTouchCenterPoint.x;
+						multiTouchCenterY = (int) initialMultiTouchCenterPoint.y;
+					}
+
+					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
+					refreshMap();
+				} else {
+					changeZoomPosition((float) deltaZoom, relAngle);
+				}
 			}
 		}
 
