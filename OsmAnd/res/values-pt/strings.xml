@@ -5589,7 +5589,6 @@
     <string name="route_guidance_desc">Fornece orientação de percurso em tempo real, incluindo a distância até à próxima curva, o nome da estrada, o nome da rua atual e informações sobre a via de trânsito (faixa de rodagem). Os widgets estão ativos durante a navegação.</string>
     <string name="selected_delayed_profile">Perfil selecionado \"%s\"</string>
     <string name="speedometer_maximum">Máximo</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (L/100 km)</string>
     <string name="obd_engine_runtime_desc">Mostra há quanto tempo o motor está a funcionar desde que foi ligado.</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Taxa de consumo de combustível %/h</string>
     <string name="obd_bluetooth_off_description">Ative o Bluetooth para localizar e conectar scanners.</string>
@@ -5599,7 +5598,6 @@
     <string name="obd_calculated_engine_load">Carga calculada do motor</string>
     <string name="shared_string_instant">Instantâneo</string>
     <string name="obd_fuel_consumption_desc">Mostra a taxa de consumo de combustível pelo motor, calculada com base no combustível restante, no tamanho do depósito e na distância percorrida determinada pelo GPS.</string>
-    <string name="obd_fuel_consumption_rate_l_km">Consumo de combustível (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Mostra a taxa de consumo de combustível do veículo com base no sensor (L/h)</string>
     <string name="bt_start_pair_failed">Não é possível iniciar o emparelhamento com o dispositivo</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (%/h)</string>

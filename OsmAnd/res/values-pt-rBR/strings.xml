@@ -5941,7 +5941,6 @@
     <string name="shared_string_dynamic">Dinâmico</string>
     <string name="record_obd_data">Registre as métricas do veículo</string>
     <string name="bt_start_pair_failed">Não é possível iniciar o emparelhamento com o dispositivo</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (L/100 km)</string>
     <string name="obd_searching_text">Buscando por scanners</string>
     <string name="dynamic_icon_type_summary">O ícone muda com base no estado da ação.</string>
     <string name="obd_connected_to_device">Conectado a %s</string>
@@ -5951,7 +5950,6 @@
     <string name="obd_fuel_pressure_desc">Mostra a pressão dentro do sistema de combustível</string>
     <string name="percent_hour">%/h</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Taxa de consumo de combustível (L/100 km)</string>
     <string name="obd_engine_runtime_desc">Mostra há quanto tempo o motor está funcionando desde que foi ligado.</string>
     <string name="obd_throttle_position">Posição do acelerador</string>
     <string name="obd_engine_oil_temperature_desc">Mostra a temperatura do óleo do motor.</string>

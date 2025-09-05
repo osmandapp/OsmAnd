@@ -1,21 +1,12 @@
 package net.osmand.plus.base.dialog;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
-import androidx.annotation.Dimension;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.*;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.OnResultCallback;
@@ -74,16 +65,19 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 	// === Activity access ===
 
 	default void callActivity(@NonNull OnResultCallback<FragmentActivity> callback) {
-		FragmentActivity activity = getActivity();
-		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			callback.onResult(activity);
-		}
+		callActivity(FragmentActivity.class, callback);
 	}
 
 	default void callMapActivity(@NonNull OnResultCallback<MapActivity> callback) {
-		MapActivity mapActivity = getMapActivity();
-		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-			callback.onResult(mapActivity);
+		callActivity(MapActivity.class, callback);
+	}
+
+	default <T extends FragmentActivity> void callActivity(@NonNull Class<T> activityClass, @NonNull OnResultCallback<T> callback) {
+		FragmentActivity activity = getActivity();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			if (activityClass.isInstance(activity)) {
+				callback.onResult(activityClass.cast(activity));
+			}
 		}
 	}
 

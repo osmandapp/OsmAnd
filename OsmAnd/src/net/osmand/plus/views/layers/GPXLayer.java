@@ -75,7 +75,6 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;

@@ -21,6 +21,8 @@ public class OSMSettings {
 		TOLL("toll"), //$NON-NLS-1$
 		JUNCTION("junction"), //$NON-NLS-1$
 		
+		AREA("area"),
+		
 		
 		// transport
 		ROUTE("route"), //$NON-NLS-1$

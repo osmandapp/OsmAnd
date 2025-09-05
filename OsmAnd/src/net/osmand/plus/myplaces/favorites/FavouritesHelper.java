@@ -399,10 +399,10 @@ public class FavouritesHelper {
 		favouritesHelper.saveCurrentPointsIntoFile(true);
 
 		if (!addedPoints.isEmpty()) {
-			app.showShortToastMessage(app.getString(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size()));
+			app.showShortToastMessage(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size());
 		}
 		if (!duplicatePoints.isEmpty()) {
-			app.showShortToastMessage(app.getString(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size()));
+			app.showShortToastMessage(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size());
 		}
 	}
 

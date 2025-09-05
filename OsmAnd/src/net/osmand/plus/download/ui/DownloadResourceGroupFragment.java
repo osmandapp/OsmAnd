@@ -34,21 +34,13 @@ import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
-import net.osmand.plus.plugins.custom.CustomRegion;
-import net.osmand.plus.plugins.custom.CustomIndexItem;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.*;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.DownloadItem;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResourceGroupType;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.DownloadValidationManager;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.plugins.custom.CustomIndexItem;
+import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
@@ -58,7 +50,6 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -319,7 +310,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 				v -> {
 					String email = editText.getText().toString().trim();
 					if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
-						app.showToastMessage(getString(R.string.osm_live_enter_email));
+						app.showToastMessage(R.string.osm_live_enter_email);
 						return;
 					}
 					doSubscribe(email);
@@ -367,13 +358,13 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 					progress.dismiss();
 				}
 				if (response == null) {
-					app.showShortToastMessage(activity.getString(R.string.shared_string_unexpected_error));
+					app.showShortToastMessage(R.string.shared_string_unexpected_error);
 				} else {
 					try {
 						JSONObject obj = new JSONObject(response);
 						String responseEmail = obj.getString("email");
 						if (!email.equalsIgnoreCase(responseEmail)) {
-							app.showShortToastMessage(activity.getString(R.string.shared_string_unexpected_error));
+							app.showShortToastMessage(R.string.shared_string_unexpected_error);
 						} else {
 							int newDownloads = settings.NUMBER_OF_FREE_DOWNLOADS.get().intValue() - 3;
 							if (newDownloads < 0) {
@@ -387,10 +378,8 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 							activity.updateBanner();
 						}
 					} catch (JSONException e) {
-						String message = "JSON parsing error: "
-								+ (e.getMessage() == null ? "unknown" : e.getMessage());
-						app.showShortToastMessage(MessageFormat.format(
-								activity.getString(R.string.error_message_pattern), message));
+						String message = "JSON parsing error: " + (e.getMessage() == null ? "unknown" : e.getMessage());
+						app.showShortToastMessage(R.string.error_message_pattern, message);
 					}
 				}
 			}

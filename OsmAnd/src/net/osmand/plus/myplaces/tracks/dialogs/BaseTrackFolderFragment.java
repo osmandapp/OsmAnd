@@ -355,7 +355,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		sortFolders(selectedFolder, sortModesHelper, sortMode);
 		sortModesHelper.syncSettings();
 
-		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId())));
+		app.showToastMessage(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId()));
 	}
 
 	private void sortFolders(@NonNull TrackFolder trackFolder,

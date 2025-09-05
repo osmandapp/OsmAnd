@@ -73,7 +73,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public CharSequence getDescription(boolean linksEnabled) {
 		String docsUrl = app.getString(R.string.docs_plugin_nautical);
 		String description = app.getString(R.string.plugin_nautical_descr, docsUrl);
-		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
+		return linksEnabled ? UiUtilities.createUrlSpannable(app, description, docsUrl) : description;
 	}
 
 	@Override

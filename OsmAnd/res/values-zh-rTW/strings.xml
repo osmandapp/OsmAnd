@@ -5395,8 +5395,6 @@
     <string name="liter">公升</string>
     <string name="percent_hour">%/小時</string>
     <string name="l_100km">公升/100公里</string>
-    <string name="obd_fuel_consumption_rate_l_km">燃料消耗率（公升/100公里）</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">顯示根據計算而得的車輛燃料消耗率（公升/100公里）</string>
     <string name="simulate_obd">模擬 OBD 資料</string>
     <string name="kpa_unit">千帕</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">顯示根據計算得出的車輛燃料消耗率（%/小時）</string>
@@ -5689,4 +5687,11 @@
     <string name="lang_en_barebones">英文（簡易）</string>
     <string name="shared_sting_osm_link">OSM 連結</string>
     <string name="show_local_names">顯示在地名稱</string>
+    <string name="obd_alt_battery_voltage">電池電壓（變壓器）</string>
+    <string name="liter_single">公升</string>
+    <string name="imperial_gallon">英制加侖</string>
+    <string name="us_gallon">美制加侖</string>
+    <string name="kilometers">公里</string>
+    <string name="miles">英哩</string>
+    <string name="mpg">每公升英哩數</string>
 </resources>

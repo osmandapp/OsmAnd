@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +73,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_proxy_settings)), isNightMode());
+				AndroidUtils.openUrl(activity, R.string.docs_proxy_settings, isNightMode());
 			}
 		});
 		container.addView(button);

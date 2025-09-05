@@ -52,7 +52,6 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;

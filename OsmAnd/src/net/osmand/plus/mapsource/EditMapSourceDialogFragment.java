@@ -4,7 +4,6 @@ package net.osmand.plus.mapsource;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -405,8 +404,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 	}
 
 	private void onHelpClick() {
-		Context context = requireContext();
-		AndroidUtils.openUrl(context, Uri.parse(context.getString(R.string.docs_add_online_maps)), nightMode);
+		AndroidUtils.openUrl(requireContext(), R.string.docs_add_online_maps, nightMode);
 	}
 
 	private void showExitDialog() {

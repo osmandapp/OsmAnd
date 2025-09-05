@@ -65,6 +65,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -122,6 +123,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		this.builder.setLight(isLight());
 	}
 
+	@NonNull
+	public MenuBuilder getBuilder() {
+		return builder;
+	}
+
 	protected void onCreated() {
 	}
 
@@ -155,7 +161,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public void build(ViewGroup rootView) {
 		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
-			if (plugin.isMenuControllerSupported(this.getClass())) {
+			if (plugin.isMenuControllerSupported(this)) {
 				builder.addMenuPlugin(plugin);
 			}
 		}
@@ -179,12 +185,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		if (object != null) {
 			if (object instanceof Amenity) {
 				menuController = new AmenityMenuController(mapActivity, pointDescription, (Amenity) object);
-			} else if (object instanceof FavouritePoint) {
-				if (pointDescription.isParking()
-						|| (SpecialPointType.PARKING.equals(((FavouritePoint) object).getSpecialPointType()))) {
-					menuController = new ParkingPositionMenuController(mapActivity, pointDescription, (FavouritePoint) object);
+			} else if (object instanceof FavouritePoint point) {
+				if (pointDescription.isParking() || SpecialPointType.PARKING == point.getSpecialPointType()) {
+					menuController = new ParkingPositionMenuController(mapActivity, pointDescription, point);
 				} else {
-					menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
+					menuController = new FavouritePointMenuController(mapActivity, pointDescription, point, null);
 				}
 			} else if (object instanceof HistoryEntry) {
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (HistoryEntry) object);
@@ -195,7 +200,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof OsmPoint) {
 				menuController = new EditPOIMenuController(mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
-				menuController = WptPtMenuController.getInstance(mapActivity, pointDescription, (WptPt) object);
+				menuController = WptPtMenuController.getInstance(mapActivity, pointDescription, (WptPt) object, null);
 			} else if (object instanceof DownloadMapObject) {
 				menuController = new MapDataMenuController(mapActivity, pointDescription, (DownloadMapObject) object);
 			} else if (object instanceof OpenStreetNote) {
@@ -227,8 +232,24 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof ClickableWay) {
 				SelectedGpxPoint point = ((ClickableWay) object).getSelectedGpxPoint();
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, point);
-			}  else if (object instanceof BaseDetailsObject detailsObject) {
-				menuController = new PlaceDetailsMenuController(mapActivity, pointDescription, detailsObject);
+			} else if (object instanceof BaseDetailsObject detailsObject) {
+				if (detailsObject instanceof PlaceDetailsObject placeDetailsObject) {
+					WptPt wptPt = placeDetailsObject.getWptPt();
+					if (wptPt != null) {
+						menuController = WptPtMenuController.getInstance(mapActivity, pointDescription, wptPt, placeDetailsObject);
+					}
+					FavouritePoint point = placeDetailsObject.getFavouritePoint();
+					if (point != null) {
+						if (pointDescription.isParking() || SpecialPointType.PARKING == point.getSpecialPointType()) {
+							menuController = new ParkingPositionMenuController(mapActivity, pointDescription, point);
+						} else {
+							menuController = new FavouritePointMenuController(mapActivity, pointDescription, point, detailsObject.getSyntheticAmenity());
+						}
+					}
+				}
+				if (menuController == null) {
+					menuController = new PlaceDetailsMenuController(mapActivity, pointDescription, detailsObject);
+				}
 			} else if (object instanceof Pair) {
 				Pair<?, ?> pair = (Pair<?, ?>) object;
 				if (pair.second instanceof SelectedGpxPoint) {

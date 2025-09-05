@@ -2,7 +2,6 @@ package net.osmand.plus.wikipedia;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -114,7 +113,7 @@ public class WikiArticleHelper {
 				.setTitle(url)
 				.setMessage(R.string.online_webpage_warning)
 				.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-					AndroidUtils.openUrl(context, Uri.parse(url), nightMode);
+					AndroidUtils.openUrl(context, url, nightMode);
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();

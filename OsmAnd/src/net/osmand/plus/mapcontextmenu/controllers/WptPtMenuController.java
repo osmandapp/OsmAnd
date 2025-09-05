@@ -4,12 +4,15 @@ import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.mapcontextmenu.TitleButtonController;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -202,7 +205,9 @@ public class WptPtMenuController extends MenuController {
 		}
 	}
 
-	public static WptPtMenuController getInstance(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull WptPt wpt) {
-		return new WptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
+	public static WptPtMenuController getInstance(@NonNull MapActivity activity,
+			@NonNull PointDescription description, @NonNull WptPt wpt,
+			@Nullable PlaceDetailsObject detailsObject) {
+		return new WptPtMenuController(new WikivoyageWptPtMenuBuilder(activity, wpt, detailsObject), activity, description, wpt);
 	}
 }

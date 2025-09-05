@@ -2422,7 +2422,7 @@
     <string name="order_by">Sorteer op:</string>
     <string name="marker_show_distance_descr">Kies hoe afstand en richting aangeduid worden bij markeringen op de kaart:</string>
     <string name="all_markers_moved_to_history">Alle kaartmarkeringen zijn naar de geschiedenis verplaatst</string>
-    <string name="marker_moved_to_history">Kaartmerkering naar geschiedenis verplaatst</string>
+    <string name="marker_moved_to_history">Kaartmarkering naar geschiedenis verplaatst</string>
     <string name="marker_moved_to_active">Kaartmarkering actief gemaakt</string>
     <string name="passed">Laatst gebruikt: %1$s</string>
     <string name="make_active">Activeren</string>
@@ -5950,8 +5950,6 @@
     <string name="speedometer_maximum">Maximum</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Toont het brandstofverbruik van het voertuig op basis van berekeningen (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Brandstofverbruik (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Toont het brandstofverbruik van het voertuig op basis van berekeningen (L/100 km)</string>
     <string name="simulate_obd">Simuleer OBD-gegevens</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brandstofdruk</string>
@@ -6186,4 +6184,11 @@
     <string name="lang_en_barebones">Engels (barebones)</string>
     <string name="shared_sting_osm_link">OSM-link</string>
     <string name="show_local_names">Toon plaatselijke namen</string>
+    <string name="obd_alt_battery_voltage">Accuspanning (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Imperiale gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Mijl</string>
+    <string name="mpg">MPG</string>
 </resources>

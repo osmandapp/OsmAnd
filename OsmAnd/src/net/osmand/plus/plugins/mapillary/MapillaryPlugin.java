@@ -320,7 +320,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+	public boolean isMenuControllerSupported(MenuController menuController) {
 		return true;
 	}
 

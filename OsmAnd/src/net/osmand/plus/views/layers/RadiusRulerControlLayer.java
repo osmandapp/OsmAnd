@@ -23,7 +23,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.utils.OsmAndFormatterParams;
@@ -89,7 +88,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private final double[] degrees = new double[72];
 	private final String[] cardinalDirections = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
-	private QuadPoint cachedOffset = new QuadPoint();
 
 	private final int[] arcColors = {
 			Algorithms.parseColor("#00237BFF"),
@@ -214,21 +212,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 
 			QuadPoint center = tb.getCenterPixelPoint();
-			if (app.getOsmandMap().getMapView().isCarView()) {
-				NavigationSession navigationSession = app.getCarNavigationSession();
-				if (navigationSession != null) {
-					SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-					if (surfaceRenderer != null) {
-						Rect visibleArea = surfaceRenderer.getVisibleArea();
-						if (visibleArea != null) {
-							QuadPoint canvasCenter = new QuadPoint(visibleArea.left + (visibleArea.right - visibleArea.left) / 2f, visibleArea.top + (visibleArea.bottom - visibleArea.top ) / 2f);
-							cachedOffset = new QuadPoint(canvasCenter.x - center.x, canvasCenter.y - center.y);
-						}
-					}
-				}
-			} else {
-				cachedOffset = new QuadPoint();
-			}
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
 			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
@@ -333,12 +316,16 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center,
 	                            boolean nightMode, boolean radiusRulerNightMode) {
 		if (nightMode || radiusRulerNightMode) {
-			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2f + cachedOffset.x,
-					center.y - centerIconNight.getHeight() / 2f + cachedOffset.y, bitmapPaint);
+			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2f + getCachedAACanvasOffset().x,
+					center.y - centerIconNight.getHeight() / 2f + getCachedAACanvasOffset().y, bitmapPaint);
 		} else {
-			canvas.drawBitmap(centerIconDay, center.x - centerIconDay.getWidth() / 2f + cachedOffset.x,
-					center.y - centerIconDay.getHeight() / 2f + cachedOffset.y, bitmapPaint);
+			canvas.drawBitmap(centerIconDay, center.x - centerIconDay.getWidth() / 2f + getCachedAACanvasOffset().x,
+					center.y - centerIconDay.getHeight() / 2f + getCachedAACanvasOffset().y, bitmapPaint);
 		}
+	}
+
+	private QuadPoint getCachedAACanvasOffset() {
+		return getApplication().getOsmandMap().getMapView().getAACanvasOffset();
 	}
 
 	private void updateData(RotatedTileBox tb, QuadPoint center) {
@@ -440,7 +427,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			}
 
 			PointF screenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
-			points.add(new QuadPoint(screenPoint.x + cachedOffset.x, screenPoint.y + cachedOffset.y));
+			points.add(new QuadPoint(screenPoint.x + getCachedAACanvasOffset().x, screenPoint.y + getCachedAACanvasOffset().y));
 		}
 		if (points.size() > 0) {
 			arrays.add(points);
@@ -463,8 +450,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private void drawTextInPosition(@NonNull Canvas canvas, @NonNull String text, @NonNull PointF textPosition,
 	                                @NonNull RenderingLineAttributes attrs) {
 		if (!Float.isNaN(textPosition.x) && !Float.isNaN(textPosition.y)) {
-			canvas.drawText(text, textPosition.x + cachedOffset.x, textPosition.y + cachedOffset.y, attrs.paint3);
-			canvas.drawText(text, textPosition.x + cachedOffset.x, textPosition.y + cachedOffset.y, attrs.paint2);
+			canvas.drawText(text, textPosition.x + getCachedAACanvasOffset().x, textPosition.y + getCachedAACanvasOffset().y, attrs.paint3);
+			canvas.drawText(text, textPosition.x + getCachedAACanvasOffset().x, textPosition.y + getCachedAACanvasOffset().y, attrs.paint2);
 		}
 	}
 
@@ -571,10 +558,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 
 		arrow.reset();
-		arrow.moveTo(firstScreenPoint.x + cachedOffset.x, firstScreenPoint.y + cachedOffset.y);
-		arrow.lineTo(secondScreenPoint.x + cachedOffset.x, secondScreenPoint.y + cachedOffset.y);
-		arrow.lineTo(thirdScreenPoint.x + cachedOffset.x, thirdScreenPoint.y + cachedOffset.y);
-		arrow.lineTo(firstScreenPoint.x + cachedOffset.x, firstScreenPoint.y + cachedOffset.y);
+		arrow.moveTo(firstScreenPoint.x + getCachedAACanvasOffset().x, firstScreenPoint.y + getCachedAACanvasOffset().y);
+		arrow.lineTo(secondScreenPoint.x + getCachedAACanvasOffset().x, secondScreenPoint.y + getCachedAACanvasOffset().y);
+		arrow.lineTo(thirdScreenPoint.x + getCachedAACanvasOffset().x, thirdScreenPoint.y + getCachedAACanvasOffset().y);
+		arrow.lineTo(firstScreenPoint.x + getCachedAACanvasOffset().x, firstScreenPoint.y + getCachedAACanvasOffset().y);
 		arrow.close();
 		canvas.drawPath(arrow, shadowPaint);
 		canvas.drawPath(arrow, colorPaint);
@@ -587,10 +574,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			return;
 		}
 
-		LinearGradient shader = new LinearGradient(gradientArcStartPoint.x + cachedOffset.x,
-				gradientArcStartPoint.y + cachedOffset.y,
-				gradientArcEndPoint.x + cachedOffset.x,
-				gradientArcEndPoint.y + cachedOffset.y,
+		LinearGradient shader = new LinearGradient(gradientArcStartPoint.x + getCachedAACanvasOffset().x,
+				gradientArcStartPoint.y + getCachedAACanvasOffset().y,
+				gradientArcEndPoint.x + getCachedAACanvasOffset().x,
+				gradientArcEndPoint.y + getCachedAACanvasOffset().y,
 				arcColors, null, Shader.TileMode.CLAMP);
 		blueLinesPaint.setShader(shader);
 		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
@@ -605,9 +592,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
 			PointF screenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
 			if (arrowArc.isEmpty()) {
-				arrowArc.moveTo(screenPoint.x + cachedOffset.x, screenPoint.y + cachedOffset.y);
+				arrowArc.moveTo(screenPoint.x + getCachedAACanvasOffset().x, screenPoint.y + getCachedAACanvasOffset().y);
 			} else {
-				arrowArc.lineTo(screenPoint.x + cachedOffset.x, screenPoint.y + cachedOffset.y);
+				arrowArc.lineTo(screenPoint.x + getCachedAACanvasOffset().x, screenPoint.y + getCachedAACanvasOffset().y);
 			}
 		}
 		canvas.drawPath(arrowArc, blueLinesPaint);
@@ -644,16 +631,16 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			}
 
 			if (ordinaryCentStartScreenPoint != null && ordinaryCentStopScreenPoint != null) {
-				compass.moveTo(ordinaryCentStartScreenPoint.x + cachedOffset.x, ordinaryCentStartScreenPoint.y + cachedOffset.y);
-				compass.lineTo(ordinaryCentStopScreenPoint.x + cachedOffset.x, ordinaryCentStopScreenPoint.y + cachedOffset.y);
+				compass.moveTo(ordinaryCentStartScreenPoint.x + getCachedAACanvasOffset().x, ordinaryCentStartScreenPoint.y + getCachedAACanvasOffset().y);
+				compass.lineTo(ordinaryCentStopScreenPoint.x + getCachedAACanvasOffset().x, ordinaryCentStopScreenPoint.y + getCachedAACanvasOffset().y);
 			}
 
 			if (i % 9 == 0 && i != 18) {
 				PointF startScreenPoint = screenPointFromPoint(lineStartX, lineStartY, false, tb);
 				PointF stopScreenPoint = screenPointFromPoint(lineStopX, lineStopY, false, tb);
 				if (startScreenPoint != null && stopScreenPoint != null) {
-					redCompassLines.moveTo(startScreenPoint.x + cachedOffset.x, startScreenPoint.y + cachedOffset.y);
-					redCompassLines.lineTo(stopScreenPoint.x + cachedOffset.x, stopScreenPoint.y + cachedOffset.y);
+					redCompassLines.moveTo(startScreenPoint.x + getCachedAACanvasOffset().x, startScreenPoint.y + getCachedAACanvasOffset().y);
+					redCompassLines.lineTo(stopScreenPoint.x + getCachedAACanvasOffset().x, stopScreenPoint.y + getCachedAACanvasOffset().y);
 				}
 			}
 		}
@@ -728,8 +715,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				float h2 = AndroidUtils.getTextHeight(attrs.paint2);
 				float h3 = AndroidUtils.getTextHeight(attrs.paint3);
 				canvas.save();
-				canvas.drawText(cardinalDirection, point.x + cachedOffset.x, point.y + cachedOffset.y + h3 / 4, attrs.paint3);
-				canvas.drawText(cardinalDirection, point.x + cachedOffset.x, point.y + cachedOffset.y + h2 / 4, attrs.paint2);
+				canvas.drawText(cardinalDirection, point.x + getCachedAACanvasOffset().x, point.y + getCachedAACanvasOffset().y + h3 / 4, attrs.paint3);
+				canvas.drawText(cardinalDirection, point.x + getCachedAACanvasOffset().x, point.y + getCachedAACanvasOffset().y + h2 / 4, attrs.paint2);
 				canvas.restore();
 			}
 		}

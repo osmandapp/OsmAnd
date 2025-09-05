@@ -4705,7 +4705,6 @@
     <string name="special_routing_cpp">Spetsiaalse marsruutimise tüüp</string>
     <string name="auto_zoom_3d_angle">Autosuumi 3D nurk</string>
     <string name="litres">Liitreid</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Näitab arvutuslikku kütusekulu (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Näitab arvutuslikku kütusekulu (%/t)</string>
     <string name="shared_string_uphill">Ülesmäge</string>
     <string name="sound_beep_complex_loud">Piiksatus: keerukas ja vali</string>
@@ -4718,7 +4717,6 @@
     <string name="lang_zh_hans">hiina (lihtsustatud)</string>
     <string name="obd_calculated_engine_load">Arvutuslik mootori koormus</string>
     <string name="obd_connecting_to_device">Ühendame seadmega %s</string>
-    <string name="obd_fuel_consumption_rate_l_km">Kütusekulu (L/100 km)</string>
     <string name="obd_fuel_pressure">Kütuse rõhk</string>
     <string name="show_minor_turns_descr">Sõiduradasid kuvatase kõikidel mööduvatel ristmikel sõltumata hääljuhistest</string>
     <string name="current_temperature">Praegune temperatuur</string>

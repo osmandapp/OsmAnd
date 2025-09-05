@@ -3145,8 +3145,8 @@
     <string name="poi_boat_motorboat_rental_no">Моторні човни: немає</string>
     <string name="poi_boat_houseboat_rental_yes">Плавучі будинки: так</string>
     <string name="poi_boat_houseboat_rental_no">Плавучі будинки: немає</string>
-    <string name="poi_boat_pedalboat_rental_yes">Педальні човни: так</string>
-    <string name="poi_boat_pedalboat_rental_no">Педальні човни: немає</string>
+    <string name="poi_boat_pedalboat_rental_yes">Катамарани: так</string>
+    <string name="poi_boat_pedalboat_rental_no">Катамарани: немає</string>
     <string name="poi_boat_jetski_rental_yes">Гідроцикли: так</string>
     <string name="poi_boat_jetski_rental_no">Гідроцикли: немає</string>
     <string name="poi_boat_sailboat_rental_yes">Вітрильники: так</string>

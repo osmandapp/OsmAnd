@@ -54,6 +54,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String WEIGHT_RATING = "weightrating";
 	public static final String ALLOW_VIA_FERRATA = "allow_via_ferrata";
 	public static final String CHECK_ALLOW_PRIVATE_NEEDED = "check_allow_private_needed";
+	private static final double MIN_DISTANCE_SLOPE_ROUND = 10;
 
 	private static boolean USE_CACHE = true;
 	public static long TIMER = 0;
@@ -506,7 +507,7 @@ public class GeneralRouter implements VehicleRouter {
 			double dist = startIndex < endIndex ? heightArray[2 * knext] : heightArray[2 * k]  ;
 			double diff = heightArray[2 * knext + 1] - heightArray[2 * k + 1] ;
 			if(diff != 0 && dist > 0) {
-				double incl = Math.abs(diff / dist);
+				double incl = Math.abs(diff / Math.max(dist, MIN_DISTANCE_SLOPE_ROUND));
 				int percentIncl = (int) (incl * 100);
 				percentIncl = (percentIncl + 2)/ 3 * 3 - 2; // 1, 4, 7, 10, .   
 				if(percentIncl >= 1) {

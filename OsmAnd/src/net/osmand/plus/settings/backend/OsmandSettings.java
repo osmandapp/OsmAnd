@@ -495,9 +495,7 @@ public class OsmandSettings {
 		ApplicationMode appMode = getApplicationMode();
 		ApplicationMode nextAppMode = getSwitchedAppMode(appMode, next);
 		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
-			String pattern = ctx.getString(R.string.application_profile_changed);
-			String message = String.format(pattern, nextAppMode.toHumanString());
-			ctx.showShortToastMessage(message);
+			ctx.showShortToastMessage(R.string.application_profile_changed, nextAppMode.toHumanString());
 			return true;
 		}
 		return false;
@@ -1398,6 +1396,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ACCESSIBILITY_SMART_AUTOANNOUNCE =
 			new BooleanAccessibilityPreference(this, "accessibility_smart_autoannounce", true).makeProfile();
+
+	public final OsmandPreference<Boolean> ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION =
+			new BooleanAccessibilityPreference(this, "accessibility_pinch_zoom_magnification", false).makeProfile();
 
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference(this, "accessibility_autoannounce_period", 10000).makeProfile().cache();

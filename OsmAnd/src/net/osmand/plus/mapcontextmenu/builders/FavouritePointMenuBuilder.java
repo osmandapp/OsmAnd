@@ -6,7 +6,6 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -45,25 +44,24 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private final FavouritePoint point;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private Amenity amenity;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity,
-			@NonNull FavouritePoint point) {
-		super(mapActivity);
+	public FavouritePointMenuBuilder(@NonNull MapActivity activity, @NonNull FavouritePoint point, @Nullable Amenity amenity) {
+		super(activity);
 		this.point = point;
+		setAmenity(amenity);
 		setShowNearestWiki(true);
 		acquireAmenityExtensions();
 	}
 
 	private void acquireAmenityExtensions() {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
-
-		String originName = point.getAmenityOriginName();
-		Pair<Amenity, Map<String, String>> pair = helper.getAmenityWithExtensions(
-				point.getAmenityExtensions(), originName, point.getLatitude(), point.getLongitude());
-
-		amenity = pair.first;
-		amenityExtensions.putAll(pair.second);
+		if (amenity == null) {
+			String originName = point.getAmenityOriginName();
+			if (!Algorithms.isEmpty(originName)) {
+				amenity = helper.findAmenity(originName, point.getLatitude(), point.getLongitude());
+			}
+		}
+		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(), amenity));
 	}
 
 	@Nullable

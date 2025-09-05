@@ -517,7 +517,6 @@
     <string name="daynight_mode_day">กลางวันตลอด</string>
     <string name="bt_start_pair_failed">ไม่สามารถที่จะเริ่มต้นการเชื่อมต่อกับอุปกรณ์ได้</string>
     <string name="kpa_unit">กิโลปาสคาล</string>
-    <string name="obd_fuel_consumption_rate_l_km">อัตราการใช้พลังงาน (หน่วย ล./100 กม.)</string>
     <string name="obd_engine_oil_temperature">อุณหภูมิของน้ำมันเครื่องยนต์</string>
     <string name="obd_fuel_pressure_desc">แสดงแรงดันภายในระบบเชื้อเพลิง</string>
     <string name="obd_calculated_engine_load">การใช้งานเครื่องยนต์ที่คำนวณ</string>
@@ -690,7 +689,6 @@
     <string name="obd_fuel_type_methanol">เมทานอล</string>
     <string name="shared_string_control_start">เริ่มนำทาง</string>
     <string name="start_editing">เริ่มต้นการแก้ไข</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">แสดงอัตราการใช้พลังงานของยานพาหนะจากการคำนวณ (หน่วย ล./100 กม.)</string>
     <string name="screen_is_unlocked">หน้าจอสัมผัสปลดล็อกแล้ว</string>
     <string name="quick_action_verb_navigate">นำทาง</string>
     <string name="shared_string_volume">ระดับเสียง</string>

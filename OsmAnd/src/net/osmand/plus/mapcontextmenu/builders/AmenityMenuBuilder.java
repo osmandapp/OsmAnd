@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -65,23 +64,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 	public static final String WIKIPEDIA_ORG_WIKI_URL_PART = ".wikipedia.org/wiki/";
 
-	protected Amenity amenity;
-
 	protected AmenityUIHelper amenityUIHelper;
 	protected Map<String, String> extensions;
 	protected AdditionalInfoBundle infoBundle;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
-		this.amenity = amenity;
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
-	}
-
-	@NonNull
-	public Amenity getAmenity() {
-		return amenity;
 	}
 
 	@Override
@@ -183,7 +174,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
 				if (activity != null) {
 					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
-					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), nightMode);
+					AndroidUtils.openUrl(activity, wikipediaUrl, nightMode);
 				}
 			}
 		});

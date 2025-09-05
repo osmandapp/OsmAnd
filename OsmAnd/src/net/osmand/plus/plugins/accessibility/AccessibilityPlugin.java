@@ -35,6 +35,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.SPEECH_RATE);
 		pluginPreferences.add(settings.ACCESSIBILITY_SMART_AUTOANNOUNCE);
 		pluginPreferences.add(settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD);
+		pluginPreferences.add(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION);
 		pluginPreferences.add(settings.DIRECTION_STYLE);
 		pluginPreferences.add(settings.DIRECTION_AUDIO_FEEDBACK);
 		pluginPreferences.add(settings.DIRECTION_HAPTIC_FEEDBACK);

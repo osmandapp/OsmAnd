@@ -1824,7 +1824,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 						case SHOW_TOAST:
 							editingCtx.setChangesSaved();
 							if (savedGpxFile != null && !savedGpxFile.isShowCurrentTrack()) {
-								app.showToastMessage(MessageFormat.format(getString(R.string.gpx_saved_sucessfully), outFile.getAbsolutePath()));
+								app.showToastMessage(R.string.gpx_saved_sucessfully, outFile.getAbsolutePath());
 							}
 					}
 				}

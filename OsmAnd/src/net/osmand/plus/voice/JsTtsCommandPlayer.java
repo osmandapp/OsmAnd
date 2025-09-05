@@ -88,7 +88,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 				if (status != TextToSpeech.SUCCESS) {
 					ttsVoiceStatus = "NO INIT SUCCESS";
 					internalClear();
-					app.showToastMessage(app.getString(R.string.tts_initialization_error));
+					app.showToastMessage(R.string.tts_initialization_error);
 				} else if (mTts != null) {
 					Locale locale = new LocaleBuilder(app, mTts, language).buildLocale();
 					onSuccessfulTtsInit(locale, cSpeechRate);

@@ -5841,13 +5841,11 @@
     <string name="percent_hour">%/h</string>
     <string name="l_100km">L/100km</string>
     <string name="speedometer_maximum">Maxim</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Indică rata consumului de combustibil al vehiculului pe baza calculelor (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Indică rata consumului de combustibil al vehiculului pe baza calculelor (%/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Rata consumului de combustibil (senzor)</string>
     <string name="obd_how_to_connect">Cum să vă conectați:</string>
     <string name="connect_obd_instructions_step1">Conectați scanerul la portul OBD-II al autovehiculului.</string>
     <string name="connect_obd_instructions_step">1. Conectați scanerul la portul OBD-II al vehiculului.\n\n 2. Porniți motorul vehiculului \n\n 3. Activați Bluetooth pe dispozitiv\n\n 4. Atingeți „%1$s” și selectați scanerul din listă.</string>
-    <string name="obd_fuel_consumption_rate_l_km">Rata consumului de combustibil (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Indică rata consumului de combustibil al vehiculului pe baza senzorului (L/h)</string>
     <string name="obd_fuel_consumption_rate_l_h">Rata consumului de combustibil (L/h)</string>
     <string name="connect_obd_instructions_step2">Porniți motorul autovehiculului</string>

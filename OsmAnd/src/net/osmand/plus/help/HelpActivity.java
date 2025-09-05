@@ -8,20 +8,18 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.help.LoadArticlesTask.LoadArticlesListener;
 import net.osmand.plus.plugins.development.BaseLogcatActivity;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 
-public class HelpActivity extends BaseLogcatActivity {
+public class HelpActivity extends BaseLogcatActivity implements LoadArticlesListener {
 
 	private static final int LOGCAT_READ_MS = 5 * 1000;
 
 	private OsmandApplication app;
 	private HelpArticlesHelper articlesHelper;
-
-	@NonNull
-	public HelpArticlesHelper getArticlesHelper() {
-		return articlesHelper;
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +27,10 @@ public class HelpActivity extends BaseLogcatActivity {
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 
-		articlesHelper = new HelpArticlesHelper(this);
-		articlesHelper.loadArticles();
+		articlesHelper = app.getHelpArticlesHelper();
+		if (Algorithms.isEmpty(articlesHelper.getArticles()) && !articlesHelper.isLoadingArticles()) {
+			articlesHelper.loadArticles();
+		}
 
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
@@ -45,9 +45,16 @@ public class HelpActivity extends BaseLogcatActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		articlesHelper.addListener(this);
+	}
+
+	@Override
 	protected void onPause() {
 		super.onPause();
 		stopLogcatAsyncTask();
+		articlesHelper.removeListener(this);
 	}
 
 	public void updateContent() {
@@ -75,5 +82,24 @@ public class HelpActivity extends BaseLogcatActivity {
 	@Override
 	protected String getFilterLevel() {
 		return "";
+	}
+
+	@Override
+	public void downloadStarted() {
+		app.runInUIThread(() -> {
+			if (AndroidUtils.isActivityNotDestroyed(this)) {
+				setSupportProgressBarIndeterminateVisibility(true);
+			}
+		});
+	}
+
+	@Override
+	public void downloadFinished() {
+		app.runInUIThread(() -> {
+			if (AndroidUtils.isActivityNotDestroyed(this)) {
+				updateContent();
+				setSupportProgressBarIndeterminateVisibility(false);
+			}
+		});
 	}
 }

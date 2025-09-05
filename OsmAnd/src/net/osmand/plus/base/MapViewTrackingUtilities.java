@@ -581,7 +581,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				switchCompassToNextMode();
 			} else {
 				compassRequest = System.currentTimeMillis();
-				app.showShortToastMessage(app.getString(R.string.press_again_to_change_the_map_orientation));
+				app.showShortToastMessage(R.string.press_again_to_change_the_map_orientation);
 			}
 		} else {
 			compassRequest = 0;

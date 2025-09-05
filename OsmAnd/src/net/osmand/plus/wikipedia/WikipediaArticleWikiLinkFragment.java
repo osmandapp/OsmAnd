@@ -2,7 +2,6 @@ package net.osmand.plus.wikipedia;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,8 +14,8 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
 
@@ -59,7 +58,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setTitle(getString(R.string.open_wikipedia_link_online))
 				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
 				.setOnClickListener(v -> {
-					AndroidUtils.openUrl(ctx, Uri.parse(articleUrl), nightMode);
+					AndroidUtils.openUrl(ctx, articleUrl, nightMode);
 					dismiss();
 				})
 				.create();

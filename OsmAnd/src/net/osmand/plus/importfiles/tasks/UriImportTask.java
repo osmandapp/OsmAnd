@@ -111,7 +111,7 @@ public class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				importHelper.handleSqliteTileImport(tempUri, name + SQLITE_EXT);
 			}
 		} else {
-			app.showShortToastMessage(app.getString(R.string.file_import_error, tempFileName, error));
+			app.showShortToastMessage(R.string.file_import_error, tempFileName, error);
 		}
 	}
 

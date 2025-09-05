@@ -21,13 +21,13 @@ import net.osmand.plus.utils.UiUtilities;
 
 public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 
-	private final int primaryIconColor;
+	private final int defaultIconColor;
 	private final int secondaryIconColor;
 
 	public ManageCloudStorageAdapter(@NonNull Context context,
 	                                 @NonNull BaseBackupTypesController controller) {
 		super(context, controller);
-		primaryIconColor = ColorUtilities.getPrimaryIconColor(context, nightMode);
+		defaultIconColor = ColorUtilities.getDefaultIconColor(context, nightMode);
 		secondaryIconColor = ColorUtilities.getSecondaryIconColor(context, nightMode);
 	}
 
@@ -105,7 +105,7 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 		container.setContentDescription(getString(R.string.shared_string_delete));
 
 		ImageView ivIcon = view.findViewById(R.id.action_button);
-		int color = enabled ? primaryIconColor : secondaryIconColor;
+		int color = enabled ? defaultIconColor : secondaryIconColor;
 		ivIcon.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_delete_dark, color));
 	}
 

@@ -485,8 +485,8 @@ public class ImportHelper {
 						handleXmlFileImport(data, fileName);
 					}
 				} else {
-					app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext,
-							importType.getExtension().replaceAll("\\.", "").toUpperCase()));
+					app.showToastMessage(R.string.not_support_file_type_with_ext,
+							importType.getExtension().replaceAll("\\.", "").toUpperCase());
 				}
 			}
 		});

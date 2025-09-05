@@ -5671,7 +5671,6 @@
     <string name="change_activity">Byt aktivitet</string>
     <string name="obd_searching_text_description">Håll din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
     <string name="liter">l</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Visar fordents bränsleförbrukningstakt baserat på beräkningar (l/100 km)</string>
     <string name="obd_fuel_left_km">Återstående bränsle (km)</string>
     <string name="obd_fuel_consumption_rate_l_h">Bränsleförbrukningstakt (l/h)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Bränsleförbrukningstakt %/h</string>
@@ -5694,7 +5693,6 @@
     <string name="obd_engine_oil_temperature_desc">Visar motoroljans temperatur.</string>
     <string name="average_value_slider_description">Välj tidsintervall för mätning av medelvärdet.</string>
     <string name="obd_connecting_to_device">Ansluter till %s</string>
-    <string name="obd_fuel_consumption_rate_l_km">Bränsleförbrukningstakt (l/100 km)</string>
     <string name="simulate_obd">Simulera obd-data</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Visar fordonets bränsleförbrukningstakt baserat på beräkningar (l/h)</string>

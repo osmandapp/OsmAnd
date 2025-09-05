@@ -141,7 +141,7 @@ public class MenuBuilder {
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	protected boolean firstRow;
 	protected boolean matchWidthDivider;
-	private Amenity amenity;
+	protected Amenity amenity;
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
@@ -310,6 +310,10 @@ public class MenuBuilder {
 		this.customOnlinePhotosPosition = customOnlinePhotosPosition;
 	}
 
+	public Amenity getAmenity() {
+		return amenity;
+	}
+
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
 	}
@@ -412,7 +416,7 @@ public class MenuBuilder {
 
 	protected void buildPluginRows(@NonNull View view, @Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
-			plugin.buildContextMenuRows(this, view, object);
+			plugin.buildContextMenuRows(this, view, object, amenity);
 		}
 	}
 

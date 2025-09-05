@@ -4364,14 +4364,12 @@
     <string name="screen_is_locked_by_external_button">La pantalla tàctil està blocada. Per desblocar-la, premeu el botó %1$s o toqueu el botó a la pantalla.</string>
     <string name="screen_is_unlocked">La pantalla tàctil està desblocada.</string>
     <string name="screen_is_locked_by_action_button">La pantalla tàctil està blocada. Premeu el botó per desblocar-la.</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra el consum de combustible calculat del vehicle (l/100 km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra el consum de carburant calculat del vehicle (%/h)</string>
     <string name="simulate_obd">Dades odb estimades</string>
     <string name="obd_throttle_position">Posició de la cinta</string>
     <string name="kpa_unit">k Pa</string>
     <string name="obd_fuel_pressure">Pressió del combustible</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Consum de combustible (l/100 km)</string>
     <string name="quick_action_save_recorded_trip_and_continue">Desa el trajecte i continua</string>
     <string name="quick_action_new_trip_segment">Un botó per iniciar un nou segment en l\'enregistrament GPX de la traça en curs.</string>
     <string name="obd_fuel_type_gasoline">Gasolina</string>

@@ -5307,7 +5307,6 @@ POIの更新は利用できません</string>
     <string name="obd_fuel_consumption_rate_l_h">燃料消費率(L/h)</string>
     <string name="current_temperature">現在の気温</string>
     <string name="obd_fuel_consumption">燃料消費量</string>
-    <string name="obd_fuel_consumption_rate_l_km">燃料消費率(L/100 km)</string>
     <string name="remaining_fuel">燃料の残量</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_air_intake_temp_desc">エンジンのインテークマニホールドに流入する空気の温度を表示します。</string>
@@ -5328,7 +5327,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_instant">即時</string>
     <string name="average_temperature">平均気温</string>
     <string name="fuel_tank_capacity_description">タンク容量を入力し、燃料レベルと消費量を正確に追跡します</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">計算による車両の燃料消費率(L/100 km)を表示します</string>
     <string name="prediction_time_advanced_description">遅延が最小になるように予想時間を調整します。</string>
     <string name="shared_string_no_animation">アニメーション無し</string>
     <string name="position_animation_empty_banner_description">位置アイコンはアニメーションせずに新しい受信位置に移動します。</string>

@@ -5552,9 +5552,7 @@
     <string name="speedometer_maximum">Максимум</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Виджет показывает расход топлива транспортного средства на основе расчетов (%/ч)</string>
     <string name="simulate_obd">Имитировать данные OBD</string>
-    <string name="obd_fuel_consumption_rate_l_km">Расход топлива (л/100 км)</string>
     <string name="kpa_unit">кПа</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Виджет показывает расход топлива транспортного средства на основе расчетов (л/100 км)</string>
     <string name="movies_list">Список роликов</string>
     <string name="bt_start_pair_failed">Невозможно инициировать сопряжение с устройством</string>
     <string name="shared_string_dynamic">Динамический</string>

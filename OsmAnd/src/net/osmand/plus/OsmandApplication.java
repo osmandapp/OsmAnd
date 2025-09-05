@@ -62,6 +62,7 @@ import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
+import net.osmand.plus.help.HelpArticlesHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -213,6 +214,7 @@ public class OsmandApplication extends MultiDexApplication {
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
 	ExplorePlacesOnlineProvider explorePlacesProvider;
+	HelpArticlesHelper helpArticlesHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -674,6 +676,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public TrackSortModesHelper getTrackSortModesHelper() {
 		return trackSortModesHelper;
+	}
+
+	@NonNull
+	public HelpArticlesHelper getHelpArticlesHelper() {
+		return helpArticlesHelper;
 	}
 
 	public CommandPlayer getPlayer() {

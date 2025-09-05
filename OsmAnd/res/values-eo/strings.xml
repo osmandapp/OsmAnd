@@ -5543,8 +5543,6 @@
     <string name="bt_start_pair_failed">Ne povas ekigi kupli la aparaton</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (%/h)</string>
     <string name="l_100km">l/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Konsumo de brulaĵo (l/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/100 km)</string>
     <string name="simulate_obd">Simuli OBD-datumojn</string>
     <string name="obd_engine_runtime">Labortempo de motoro</string>
     <string name="obd_engine_runtime_desc">Montras kiel longe la motoro laboris ekde ĝia starto.</string>

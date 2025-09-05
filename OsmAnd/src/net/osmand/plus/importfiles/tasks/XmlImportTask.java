@@ -73,14 +73,14 @@ public class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 					if (builder != null) {
 						onImportFinished(destFileName);
 					} else {
-						app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
+						app.showToastMessage(R.string.file_does_not_contain_routing_rules, destFileName);
 					}
 				});
 			}
 		} else {
 			hideProgress();
 			notifyImportFinished();
-			app.showShortToastMessage(app.getString(R.string.file_import_error, destFileName, error));
+			app.showShortToastMessage(R.string.file_import_error, destFileName, error);
 		}
 	}
 

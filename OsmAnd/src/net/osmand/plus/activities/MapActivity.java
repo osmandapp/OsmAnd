@@ -209,6 +209,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			app.runInUIThread(() -> changeKeyguardFlags());
 		}
 	};
+
+	private final StateChangedListener<Boolean> pinchZoomMagnificationListener = new StateChangedListener<Boolean>() {
+		@Override
+		public void stateChanged(Boolean enabled) {
+			app.runInUIThread(() -> {
+				OsmandMapTileView mapView = getMapView();
+                mapView.setPinchZoomMagnificationEnabled(enabled);
+            });
+		}
+	};
 	private KeyEventHelper keyEventHelper;
 	private RouteCalculationProgressListener routeCalculationProgressCallback;
 	private TransportRouteCalculationProgressCallback transportRouteCalculationProgressCallback;
@@ -760,6 +770,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		settings.MAP_SCREEN_ORIENTATION.addListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(useSystemScreenTimeoutListener);
+		settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.addListener(pinchZoomMagnificationListener);
 
 		extendedMapActivity.onResume(this);
 
@@ -1038,6 +1049,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void onPauseActivity() {
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
+		settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.removeListener(pinchZoomMagnificationListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
 			DestinationReachedFragment.resetShownState();
 		}
@@ -1099,6 +1111,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		keyEventHelper.updateGlobalCommands();
 
 		OsmandMapTileView mapView = getMapView();
+		
+		mapView.setPinchZoomMagnificationEnabled(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get());
+		
 		MapLayers mapLayers = getMapLayers();
 		if (mapLayers.getMapInfoLayer() != null) {
 			mapLayers.getMapInfoLayer().recreateAllControls(this);
