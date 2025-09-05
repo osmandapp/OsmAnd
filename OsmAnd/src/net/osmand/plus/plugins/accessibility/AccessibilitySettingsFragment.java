@@ -86,6 +86,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		setupDirectionStylePref();
 		setupDirectionAudioFeedbackPref();
 		setupDirectionHapticFeedbackPref();
+		setupPinchZoomMagnificationPref();
 
 		setupCopyProfileSettingsPref();
 		setupResetToDefaultPref();
@@ -215,6 +216,11 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	private void setupDirectionHapticFeedbackPref() {
 		SwitchPreferenceEx directionHapticFeedback = findPreference(settings.DIRECTION_HAPTIC_FEEDBACK.getId());
 		directionHapticFeedback.setDescription(getString(R.string.access_direction_haptic_feedback_descr));
+	}
+
+	private void setupPinchZoomMagnificationPref() {
+		SwitchPreferenceEx pinchZoomMagnification = findPreference(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.getId());
+		pinchZoomMagnification.setDescription(getString(R.string.access_pinch_zoom_magnification_descr));
 	}
 
 	private void setupCopyProfileSettingsPref() {
