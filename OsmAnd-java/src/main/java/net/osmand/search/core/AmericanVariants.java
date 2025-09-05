@@ -121,7 +121,9 @@ public class AmericanVariants {
         suffixMap.put("\\bAv\\b", "Avenue");
         suffixMap.put("\\bAven\\b", "Avenue");
         suffixMap.put("\\bSt\\b", "Street");
+        suffixMap.put("\\bStrt\\b", "Street");
         suffixMap.put("\\bDr\\b", "Drive");
+        suffixMap.put("\\bDriv\\b", "Drive");
         suffixMap.put("\\bLn\\b", "Lane");
         suffixMap.put("\\bBlvd\\b", "Boulevard");
         suffixMap.put("\\bCt\\b", "Court");

@@ -300,6 +300,7 @@ public class SearchCoreFactory {
 			Map<String, String> map = AmericanVariants.parseAddress(phrase.getFullSearchPhrase());
 			System.out.println(map.toString());
 			final String street = map.get("street");
+			final String city = map.get("city");
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			final List<SearchResult> immediateResults = new ArrayList<>();
 			final int priority = phrase.isNoSelectedType() ?
@@ -318,12 +319,22 @@ public class SearchCoreFactory {
 					sr.location = object.getLocation();
 					sr.priorityDistance = 1;
 					sr.priority = priority;
-					if (object instanceof Street) {
+					if (object instanceof Street st) {
 						if ( !phrase.isSearchTypeAllowed(ObjectType.STREET)) {
 							return false;
 						}
 						if (object.getName().startsWith("<")) {
 							return false;
+						}
+						if (city != null) {
+							Set<String> cityNames = new HashSet<>();
+							cityNames.add(st.getCity().getName());
+							cityNames.add(st.getCity().getEnName(false));
+							cityNames.add(st.getCity().getEnName(true));
+							cityNames.addAll(st.getCity().getOtherNames());
+							if (!cityNames.contains(city)) {
+								return false;
+							}
 						}
 						sr.objectType = ObjectType.STREET;
 						sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
