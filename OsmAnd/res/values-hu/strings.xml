@@ -5814,4 +5814,10 @@
     <string name="shared_sting_osm_link">OSM hivatkozás</string>
     <string name="show_local_names">Helyi nevek mutatása</string>
     <string name="obd_alt_battery_voltage">Akkumulátor feszültség (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Angol gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilométer</string>
+    <string name="miles">Mérföld</string>
+    <string name="mpg">Mérf./gal</string>
 </resources>

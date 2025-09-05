@@ -5850,4 +5850,10 @@
     <string name="shared_sting_osm_link">OSM link</string>
     <string name="show_local_names">Prikaži lokalne nazive</string>
     <string name="obd_alt_battery_voltage">Napon baterije (adapter)</string>
+    <string name="liter_single">Litar</string>
+    <string name="imperial_gallon">Galon</string>
+    <string name="us_gallon">US galon</string>
+    <string name="kilometers">Kilometari</string>
+    <string name="miles">Milje</string>
+    <string name="mpg">MPG</string>
 </resources>

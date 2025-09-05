@@ -5896,4 +5896,9 @@
     <string name="rendering_attr_tidalFlatStyle_description">Stil der Wattflächen</string>
     <string name="lang_en_barebones">Englisch (wesentliches)</string>
     <string name="obd_alt_battery_voltage">Batteriespannung (Adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Imperiale Gallone</string>
+    <string name="us_gallon">Amerikanische Gallone</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Meilen</string>
 </resources>
