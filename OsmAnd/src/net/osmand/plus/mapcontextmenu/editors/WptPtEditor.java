@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.Amenity;
@@ -93,8 +94,7 @@ public class WptPtEditor extends PointEditor {
 			return gpxFile.getPointsGroups();
 		}
 		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.getCategory()) && categoryColor != 0) {
-			PointsGroup pointsGroup = new PointsGroup(wpt.getCategory(), wpt.getIconNameOrDefault(), wpt.getBackgroundType(), categoryColor);
-
+			PointsGroup pointsGroup = new PointsGroup(wpt.getCategory(), wpt.getIconNameOrDefault(), wpt.getBackgroundType(), categoryColor, wpt.isHidden());
 			Map<String, PointsGroup> predefinedCategory = new HashMap<>();
 			predefinedCategory.put(wpt.getCategory(), pointsGroup);
 			return predefinedCategory;

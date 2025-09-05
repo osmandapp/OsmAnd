@@ -4672,7 +4672,7 @@
     <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض الخريطة العادي . يمكنك العودة إلى مشغل العرض (3D)\" في الإعدادات.
 \n
 \nالرجاء دعم التحسينات من خلال توفير سجل الأخطاء الخاص بك.</string>
-    <string name="map_rendering_engine_descr">عرض 3D هو نمط عرض خرائط أسرع . كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.</string>
+    <string name="map_rendering_engine_descr">كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.\nعرض 3D هو نمط عرض خرائط أسرع .</string>
     <string name="rendering_attr_depthContourWidth_name">عرض الخط</string>
     <string name="shared_string_next_sunset">غروب الشمس القادم</string>
     <string name="shared_string_next_sunrise">شروق الشمس القادم</string>
@@ -5645,8 +5645,6 @@
     <string name="dynamic_icon_type_summary">تتغير الأيقونة استنادًا إلى حالة الإجراء.</string>
     <string name="obd_connected_to_device">متصّل بـ %s</string>
     <string name="obd_engine_runtime">مدة تشغيل المحرك</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">يعرض معدل استهلاك الوقود للمركبة بناءً على الحسابات (لتر/100 كم)</string>
-    <string name="obd_engine_oil_temperature">درجة حرارة زيت المحرك</string>
     <string name="obd_calculated_engine_load_desc">يعرض النسبة المئوية للطاقة المتوفرة للمحرك والتي يتم استخدامها في لحظة معينة.</string>
     <string name="obd_fuel_consumption_desc">يظهر معدل استخدام الوقود بواسطة المحرك، والذي يتم حسابه على أساس الوقود المتبقي وحجم الخزان والمسافة المقطوعة كما هو محدد بواسطة نظام تحديد المواقع العالمي (GPS).</string>
     <string name="obd_not_connected_to_device">تم قطع الاتصال بـ %s</string>
@@ -5682,7 +5680,6 @@
     <string name="obd_connecting_to_device">الاتصال بـ %s</string>
     <string name="bt_start_pair_failed">لا يمكن الاقتران بالجهاز</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">يعرض معدل استهلاك وقود السيارة بناءً على الحسابات (%/ساعة)</string>
-    <string name="obd_fuel_consumption_rate_l_km">معدل استهلاك الوقود (لتر/100 كم)</string>
     <string name="kpa_unit">كيلو باسكال</string>
     <string name="liter">لتر</string>
     <string name="obd_fuel_level_percent">مستوى الوقود (%)</string>
@@ -5793,7 +5790,6 @@
     <string name="add_widget">إضافة أداة (عنصر واجهة مستخدم)</string>
     <string name="wiki_around">الأماكن المشهورة القريبة</string>
     <string name="wikidata">ويكيداتا Wikidata</string>
-    <string name="read_on_wiki">اقرأ على مستوى ويكيبيديا</string>
     <string name="prediction_time_advanced_description">عدل الوقت التوقع لتقليل التأخير.</string>
     <string name="prediction_time">وقت التوقع</string>
     <string name="position_animation">مؤثرات الموقع الحركية</string>
@@ -5822,7 +5818,6 @@
     <string name="show_debug_tile_description">عرض معلومات حول رموز الخريطة لكل مربع</string>
     <string name="deactivated_map">خريطة معطلة</string>
     <string name="suggest_activate_map_msg">تم إلغاء تنشيط خريطة %1$s، \nقم بتنشيطها لعرض هذه المنطقة.</string>
-    <string name="show_symbols_debug_info">إظهار معلومات تصحيح أخطاء الرموز</string>
     <string name="unit_of_temperature_description">سيتم تطبيق الوحدات المحددة على جميع البيانات المتعلقة بدرجة الحرارة في الملف الشخصي الحالي.</string>
     <string name="shared_string_split_by">التقسيم حسب</string>
     <string name="uphill_downhill_split">الصعود / الهبوط</string>
@@ -5848,7 +5843,6 @@
     <string name="set_start_point">تحديد نقطة الانطلاق</string>
     <string name="set_intermediate_point">تعيين الوجهة الوسيطة</string>
     <string name="show_rasterization_debug_tile">إظهار معلومات تنقيط البلاط</string>
-    <string name="show_symbols_bboxes">إظهار الرموز bboxes</string>
     <string name="release_5_2">• جارِ العمل...</string>
     <string name="map_orientation_portrait_inverted">عمودي (مقلوب)</string>
 </resources>

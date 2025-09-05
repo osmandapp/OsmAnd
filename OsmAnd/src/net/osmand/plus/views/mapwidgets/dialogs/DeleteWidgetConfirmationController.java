@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.OnCompleteCallback;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -41,9 +42,12 @@ public class DeleteWidgetConfirmationController extends BaseDialogController {
 		this.onWidgetDeletedCallback = onWidgetDeletedCallback;
 	}
 
-	public void onDeleteActionConfirmed() {
-		widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
-		if (onWidgetDeletedCallback != null) onWidgetDeletedCallback.onComplete();
+	public void onDeleteActionConfirmed(@NonNull MapActivity activity) {
+		widgetRegistry.removeWidget(activity, appMode, widgetInfo);
+
+		if (onWidgetDeletedCallback != null) {
+			onWidgetDeletedCallback.onComplete();
+		}
 	}
 
 	public static void askUpdateListener(@NonNull OsmandApplication app,

@@ -87,7 +87,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
-			PointsGroup newGroup = new PointsGroup(groupName, group.getIconName(), group.getBackgroundType(), group.getColor());
+			PointsGroup newGroup = new PointsGroup(groupName, group.getIconName(), group.getBackgroundType(), group.getColor(), !isHidden());
 			Map<String, PointsGroup> groups = Collections.singletonMap(group.getName(), newGroup);
 
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);

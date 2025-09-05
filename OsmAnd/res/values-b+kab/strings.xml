@@ -236,7 +236,7 @@
     <string name="shared_string_email_address">Tansa imayl</string>
     <string name="looking_up_address">Anadi ɣef tansa</string>
     <string name="plugin_settings">Iseɣzaf</string>
-    <string name="shared_string_settings">Iɣewwaṛen</string>
+    <string name="shared_string_settings">Iɣewwaren</string>
     <string name="shared_string_address">Tansa</string>
     <string name="favourites_edit_dialog_category">Taggayt</string>
     <string name="search_history_street">Abrid : {0}, {1}</string>
@@ -250,7 +250,7 @@
     <string name="favourites">Inurifen</string>
     <string name="empty_state_favourites">Rnu ɣer imenyafen</string>
     <string name="wrong_input">Yir anekcam</string>
-    <string name="shared_string_options">Iɣewwaṛen</string>
+    <string name="shared_string_options">Tixtiṛiyin</string>
     <string name="mapillary_menu_title_username">Isem n useqdac</string>
     <string name="nearest_cities">Timdinin ig qarben</string>
     <string name="shared_string_add_to_map_markers">Rnu ar ticṛaḍ</string>
@@ -631,7 +631,7 @@
     <string name="show_number_pad">Sken-d anasiw umḍin</string>
     <string name="shared_string_paste">Senṭeḍ</string>
     <string name="what_is_here">Acu yellan dagi:</string>
-    <string name="context_menu_read_full_article">Γer amagrad akk</string>
+    <string name="context_menu_read_full_article">Ɣeṛ akk amagrad</string>
     <string name="context_menu_read_article">Ɣer amagrad</string>
     <string name="context_menu_points_of_group">Akk tinqiḍin n ugraw</string>
     <string name="open_from">Yeldi seg</string>
@@ -1077,7 +1077,7 @@
     <string name="searchpoi_activity">Fren</string>
     <string name="app_description">Tunigin</string>
     <string name="map_source">aɣbalu</string>
-    <string name="app_settings">Iɣewwaṛen</string>
+    <string name="app_settings">Iɣewwaren n usnas</string>
     <string name="reload_tile">Smiren</string>
     <string name="update_tile">leqqem</string>
     <string name="loading_data">Asali...</string>

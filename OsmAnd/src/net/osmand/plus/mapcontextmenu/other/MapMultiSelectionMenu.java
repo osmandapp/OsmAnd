@@ -13,7 +13,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
+import net.osmand.plus.views.layers.SelectedMapObject;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

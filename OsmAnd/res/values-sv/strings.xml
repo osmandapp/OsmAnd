@@ -4209,7 +4209,7 @@
     <string name="air_pressure_widget_desc">Visar lufttrycket för aktuellt centrum i kartan.</string>
     <string name="temperature_widget_desc">Visar temperatur för aktuellt centrum i kartan.</string>
     <string name="rendering_engine_failed">OsmAnds kartrendering har nyligen kraschat.</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) är en snabbare motor för kartrendering och har även 2,5D-visning. Rendering i version 1 var standard före OsmAnd 4.3 och är fortfarande att föredra för äldre enheter.</string>
+    <string name="map_rendering_engine_descr">Rendering i version 1 var standard före OsmAnd 4.3 och är fortfarande att föredra för äldre enheter.\nVersion 2 (OpenGL) är en snabbare motor för kartrendering och har även 2,5D-visning.</string>
     <string name="favorites_backup">Säkerhetskopiering av favoriter</string>
     <string name="ant_go_to_store">Gå till butik</string>
     <string name="map_widget_ant_bicycle_dist_desc">Visar längden på tillryggalagd sträcka</string>
@@ -5671,7 +5671,6 @@
     <string name="change_activity">Byt aktivitet</string>
     <string name="obd_searching_text_description">Håll din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
     <string name="liter">l</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Visar fordents bränsleförbrukningstakt baserat på beräkningar (l/100 km)</string>
     <string name="obd_fuel_left_km">Återstående bränsle (km)</string>
     <string name="obd_fuel_consumption_rate_l_h">Bränsleförbrukningstakt (l/h)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Bränsleförbrukningstakt %/h</string>
@@ -5694,7 +5693,6 @@
     <string name="obd_engine_oil_temperature_desc">Visar motoroljans temperatur.</string>
     <string name="average_value_slider_description">Välj tidsintervall för mätning av medelvärdet.</string>
     <string name="obd_connecting_to_device">Ansluter till %s</string>
-    <string name="obd_fuel_consumption_rate_l_km">Bränsleförbrukningstakt (l/100 km)</string>
     <string name="simulate_obd">Simulera obd-data</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Visar fordonets bränsleförbrukningstakt baserat på beräkningar (l/h)</string>
@@ -6028,7 +6026,6 @@
     <string name="monitoring_min_distance_descr_recommendation">Rekommendation: Ställ in 5 meter förskjutning om du inte vill spela in mindre detaljer om din rutt, och behöver inte ytterligare data om din viloperiod.</string>
     <string name="release_3_5">• Uppdaterade app- och profilinställningar: Inställningar är nu ordnade efter typ. Varje profil kan anpassas separat.\n\n• Ny karta nedladdning dialog föreslår en karta för att ladda ner medan du surfar\n\n• Mörka temafixar\n\n• Fast flera routingproblem runt om i världen\n\nUppdaterad baskarta med mer detaljerat vägnät\n\n• Fasta översvämmade områden runt om i världen\n\nSki Routing: Tillagd höjdprofil och ruttkomplexitet till ruttens detaljer\n\n• Andra bugfix</string>
     <string name="release_3_4">• Appprofiler: Skapa en anpassad profil för dina egna behov, med en anpassad ikon och färg\n\n• Nu anpassa någon profils standard och min/max hastigheter\n\n• Lägg till en widget för de aktuella koordinaterna\n\n• Lägga till alternativ för att visa kompassen och en radie härskare på kartan\n\n• Fix bakgrund track logging\n\n• Förbättrad bakgrundskarta nedladdningar\n\n• Returnerad \"Turn screen on\" -alternativ\n\n• Fast Wikipedia språkval\n\n• Fast kompassknapp beteende under navigering\n\n• Andra buggfixar</string>
-    <string name="show_symbols_debug_info">Visa felsökningsinformation för symboler</string>
     <string name="shared_string_threads">Trådar</string>
     <string name="threads_allocated_for_rendering">Trådar allokerade för rendering</string>
     <string name="threads_allocated_for_rendering_desc">Lägre tråd-allokering kan i vissa fall snabba upp kartrenderingen.</string>

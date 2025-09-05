@@ -38,7 +38,7 @@ public class GeocodingUtilities {
 	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 250;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 
-	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 45000;
+	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
 	public static final float DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME = 1000;
 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;

@@ -3437,7 +3437,7 @@
     <string name="delete_all_actions_message_q">Ĉu neinversigeble forigi %d rapidajn agojn\?</string>
     <string name="width_limit_description">Enigu larĝon de via veturilo, iuj vojaj limigoj aplikiĝas al larĝaj veturiloj.</string>
     <string name="height_limit_description">Enigu alton de via veturilo, iuj vojaj limigoj aplikiĝas al altaj veturiloj.</string>
-    <string name="weight_limit_description">Enigu pezon de via veturilo, iuj vojaj limigoj aplikiĝas al pezaj veturiloj.</string>
+    <string name="weight_limit_description">Enigu mason de via veturilo, iuj vojaj limigoj aplikiĝas al pezaj veturiloj.</string>
     <string name="shared_string_tones">tunoj</string>
     <string name="shared_string_meters">metroj</string>
     <string name="details_dialog_decr">Montri aŭ kaŝi pliajn detalojn sur la mapo</string>
@@ -4557,7 +4557,7 @@
     <string name="quick_action_cloud_layer">Butono por montri/kaŝi tavolon de nuboj sur la mapo.</string>
     <string name="quick_action_air_pressure_layer">Butono por montri/kaŝi tavolon de aerpremoj sur la mapo.</string>
     <string name="shared_string_next_sunset">Sekva sunsubiro</string>
-    <string name="switch_mode_by_tapping_on_widget">Baskulu la reĝimon per frapeti la fenestraĵon.</string>
+    <string name="switch_mode_by_tapping_on_widget">Baskuligu la reĝimon per frapeti la fenestraĵon.</string>
     <string name="temperature_layer">Tavolo de temperaturoj</string>
     <string name="cloud_layer">Tavolo de nuboj</string>
     <string name="wind_layer">Tavolo de ventoj</string>
@@ -4641,7 +4641,7 @@
     <string name="show_borders_of_downloaded_maps">Montri randojn de elŝutitaj mapoj</string>
     <string name="show_map_symbols">Montri simbolojn</string>
     <string name="show_map_symbols_desc">Tekstoj, trafiksignoj kaj aliaj.</string>
-    <string name="map_rendering_engine_descr">La map-bildigilo en versio 2 (OpenGL) estas pli potenca kaj subtenas 2,5-dimensian vidon. La map-bildigilo en versio 1 estis implicita ĝis OsmAnd 4.3 kaj plue estas konsilinda por pli malnovaj aparatoj.</string>
+    <string name="map_rendering_engine_descr">Versio 1 estis implicita antaŭ ol OsmAnd 4.3 kaj plue estas konsilinda por pli malnovaj aparatoj.\nVersio 2 (OpenGL) estas pli potenca map-bildigilo kaj subtenas 2,5-dimensian vidon.</string>
     <string name="si_nm_mt">Marmejloj/metroj</string>
     <string name="si_nm_ft">Marmejloj/futoj</string>
     <string name="av_audio_format_bottom_sheet_descr">Elekti sonformon. La ujaformo por sono estas 3GP.</string>
@@ -5313,7 +5313,7 @@
     <string name="missing_maps_ignore">Uzi elŝutitajn mapojn</string>
     <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
     <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
-    <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskulas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskuligas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
     <string name="daynight_mode_night_summary">Ĉiam vidigas la mapon en nokta map-reĝimo, kiu taŭgas por uzi nokte kaj mallume.</string>
     <string name="daynight_mode_day_summary">Ĉiam vidigas mapon en taga map-reĝimo, kiu plej taŭgas por uzi tage.</string>
     <string name="daynight_mode_app_theme">Etoso de aplikaĵo</string>
@@ -5543,8 +5543,6 @@
     <string name="bt_start_pair_failed">Ne povas ekigi kupli la aparaton</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (%/h)</string>
     <string name="l_100km">l/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Konsumo de brulaĵo (l/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/100 km)</string>
     <string name="simulate_obd">Simuli OBD-datumojn</string>
     <string name="obd_engine_runtime">Labortempo de motoro</string>
     <string name="obd_engine_runtime_desc">Montras kiel longe la motoro laboris ekde ĝia starto.</string>
@@ -5719,7 +5717,6 @@
     <string name="show_dms_grids_description">Montri la kradon en gradoj, minutoj kaj sekundoj anstataŭ nur en gradoj</string>
     <string name="show_mercator_grids">Uzi Merkator anstataŭ WGS aŭ UTM</string>
     <string name="show_mercator_grids_description">Montri la kradon en kilometroj laŭ merkatora projekcio anstataŭ laŭ WGS84 aŭ UTM</string>
-    <string name="read_on_wiki">Legi en Vikipedio</string>
     <string name="prediction_time_advanced_description">Alĝustigi antaŭkalkulan (anticipan) tempon por minimumigi prokraston.</string>
     <string name="routing_attr_allow_ferries_name">Permesi pramojn</string>
     <string name="grid_color">Koloro de krado</string>
@@ -5748,7 +5745,6 @@
     <string name="travel_guides">Gvidiloj</string>
     <string name="show_debug_tile">Montri informojn pri kahelo</string>
     <string name="show_debug_tile_description">Montri informojn pri simboloj por ĉiu map-kahelo</string>
-    <string name="show_symbols_debug_info">Montri senerarigajn informojn pri simboloj</string>
     <string name="deactivated_map">Malaktiva mapo</string>
     <string name="suggest_activate_map_msg">La mapo “%1$s” estas malaktiva,\naktivigu ĝin por bildigi tiun ĉi areon.</string>
     <string name="unit_of_temperature_description">Elektata mezurunuo estos aplikita al ĉiuj temperatur-rilataj datumoj en la nuna profilo.</string>
@@ -5776,7 +5772,6 @@
     <string name="deleting">Forigado…</string>
     <string name="deleting_history">Forigado de historio…</string>
     <string name="show_rasterization_debug_tile">Montri informojn pro bildigado de kaheloj</string>
-    <string name="show_symbols_bboxes">Montri limigajn kestojn de simboloj</string>
     <string name="shared_string_threads">Fadenoj</string>
     <string name="threads_allocated_for_rendering">Fadenoj asignitaj por bildigado</string>
     <string name="threads_allocated_for_rendering_desc">Malpliigo de asignitaj fadenoj povas iuokaze plirapidigi map-bildigadon.</string>
@@ -5835,8 +5830,8 @@
     <string name="rendering_attr_depthContoursDashed_description">Strekitaj profundec-kurboj</string>
     <string name="rendering_attr_fairwayStyle_name">Koloro de bu-markitaj akvovojoj</string>
     <string name="rendering_attr_fairwayStyle_description">Koloro de bu-markitaj akvovojoj</string>
-    <string name="rendering_attr_safetyContour_name">Koloro de sekura profundo</string>
-    <string name="rendering_attr_safetyContour_description">Koloro de sekura mara profundo</string>
+    <string name="rendering_attr_safetyContour_name">Konturo de sekura profundo</string>
+    <string name="rendering_attr_safetyContour_description">Konturo de sekura mara profundo</string>
     <string name="rendering_attr_shellsStyle_name">Stilo de ŝeloj</string>
     <string name="rendering_attr_shellsStyle_description">Aspekto de ŝeloj sur la marfundo</string>
     <string name="rendering_attr_showLNAMmarker_name">ENC-markiloj</string>
@@ -5849,4 +5844,20 @@
     <string name="rendering_attr_tidalFlatStyle_description">Aspekto de terenoj superakvataj dum maralfluoj</string>
     <string name="rendering_attr_watercolor_name">Koloro de akvo</string>
     <string name="rendering_attr_watercolor_description">Koloro de akvo</string>
+    <string name="backup_delete_data_warning_extended">Tiu ĉi ago neinversigeble forigos ĉiujn elektitajn datumojn el OsmAnd-nubo. Ne eblos restarigi ilin poste.</string>
+    <string name="amount_of_total_used">%1$s el %2$s uzata</string>
+    <string name="delete_data">Forigi datumojn</string>
+    <string name="manage_storage_delete_data_dialog_summary">Ĉu vi certe volas forigi %1$s-n el la OsmAnd-Nubo?\n\nVi povos restarigi ilin el la rubujo dum la sekvaj 30 tagoj.</string>
+    <string name="manage_storage">Administri datumojn</string>
+    <string name="copy_as_new_folder">Kopii kiel novan dosierujon</string>
+    <string name="add_to_a_folder">Aldoni al dosierujo</string>
+    <string name="add_to_favorites">Aldoni al ŝatataj</string>
+    <string name="max_weight_at_full_load_description">Enigu maksimuman mason de via veturilo je plena ŝarĝo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
+    <string name="max_axle_load_description">Enigu maksimuman mason prematan de akso de via veturilo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
+    <string name="private_access_routing_req_short">Via celo estas en privata areo. Ĉu ebligi navigi tra privataj vojoj?</string>
+    <string name="view_on_phone">Montri sur telefono</string>
+    <string name="lang_en_barebones">Angla (minimuma)</string>
+    <string name="release_5_2">• Versio estas prilaborata…</string>
+    <string name="shared_sting_osm_link">OSM-ligilo</string>
+    <string name="show_local_names">Montri lokajn nomojn</string>
 </resources>

@@ -502,7 +502,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public CharSequence getDescription(boolean linksEnabled) {
 		String docsUrl = app.getString(R.string.docs_plugin_osm);
 		String description = app.getString(R.string.osm_editing_plugin_description, docsUrl);
-		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
+		return linksEnabled ? UiUtilities.createUrlSpannable(app, description, docsUrl) : description;
 	}
 
 	@Override
@@ -578,31 +578,34 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
-		return AmenityMenuController.class.isAssignableFrom(menuControllerClass)
-				|| menuControllerClass == RenderedObjectMenuController.class;
+	public boolean isMenuControllerSupported(MenuController menuController) {
+		Amenity amenity = menuController.getBuilder().getAmenity();
+		return AmenityMenuController.class.isAssignableFrom(menuController.getClass())
+				|| menuController.getClass() == RenderedObjectMenuController.class || amenity != null;
 	}
 
 	@Override
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
-		Amenity amenity = null;
-		if (object instanceof Amenity) {
-			amenity = (Amenity) object;
-		} else if (object instanceof BaseDetailsObject detailsObject) {
-			amenity = detailsObject.getSyntheticAmenity();
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+			@Nullable Object object, @Nullable Amenity amenity) {
+		if (amenity == null) {
+			if (object instanceof Amenity) {
+				amenity = (Amenity) object;
+			} else if (object instanceof BaseDetailsObject detailsObject) {
+				amenity = detailsObject.getSyntheticAmenity();
+			}
 		}
+		String link = null;
 		if (amenity != null) {
-			String link = ObfConstants.getOsmUrlForId(amenity);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
-						0, false, null, true, 0, true, null, false);
-			}
+			link = ObfConstants.getOsmUrlForId(amenity);
 		} else if (object instanceof RenderedObject renderedObject) {
-			String link = ObfConstants.getOsmUrlForId(renderedObject);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
-						null, true, 0, true, null, false);
-			}
+			link = ObfConstants.getOsmUrlForId(renderedObject);
+		}
+		if (!Algorithms.isEmpty(link)) {
+			Drawable icon = menuBuilder.getRowIcon(R.drawable.ic_action_openstreetmap_logo);
+			String textPrefix = app.getString(R.string.shared_sting_osm_link);
+			menuBuilder.buildRow(view, icon, null, textPrefix, link, 0,
+					null, false, null, true, 0,
+					true, false, false, null, false);
 		}
 	}
 

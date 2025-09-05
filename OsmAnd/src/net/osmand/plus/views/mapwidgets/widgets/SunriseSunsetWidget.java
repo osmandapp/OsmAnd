@@ -58,7 +58,6 @@ public class SunriseSunsetWidget extends SimpleWidget {
 		this.mapView = mapActivity.getMapView();
 		setIcons(widgetState.getWidgetType());
 		setText(NO_VALUE, null);
-		setOnClickListener(getOnClickListener());
 		updateWidgetName();
 	}
 

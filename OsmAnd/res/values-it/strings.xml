@@ -3212,9 +3212,7 @@
     <string name="please_provide_profile_name_message">Dai un nome a questo profilo</string>
     <string name="open_settings">Apri le impostazioni</string>
     <string name="plugin_disabled">Plugin disabilitato</string>
-    <string name="plugin_disabled_descr">Questo plugin è un\' applicazione separata: disabilitandolo non lo rimuovi.
-\n
-\nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
+    <string name="plugin_disabled_descr">Questo plugin è un\'applicazione separata: disabilitandolo non lo rimuovi. \n \nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
     <string name="shared_string_menu">Menù</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="no_recalculation_setting">Disattiva ricalcolo</string>
@@ -4571,7 +4569,7 @@
     <string name="action_not_supported_with_map_style">Questa azione non è supportata dallo stile della mappa attuale.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_rendering_engine">Motore di rendering della mappa</string>
-    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D. Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.</string>
+    <string name="map_rendering_engine_descr">Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.\nVersione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D.</string>
     <string name="show_map_symbols">Mostra i simboli della mappa</string>
     <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
     <string name="depth_contours">Isobate</string>
@@ -4915,7 +4913,7 @@
     <string name="osmand_cloud_deletion_subscriptions_warning">Questo non eliminerà il tuo abbonamento OsmAnd Pro.</string>
     <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati da OsmAnd Cloud.</string>
     <string name="delete_account_warning">Eliminare l\'account %1$s?</string>
-    <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
+    <string name="backup_error_delete_account_email_match">L\'email non corrisponde al nome utente di accesso</string>
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
 \n
 \nInserisci l\'indirizzo email con cui ti sei registrato. Verrà inviata una password monouso per il passaggio successivo.</string>
@@ -5532,7 +5530,6 @@
     <string name="obd_connecting_to_device">Connessione a %s</string>
     <string name="bt_start_pair_failed">Impossibile iniziare l\'accoppiamento con il dispositivo</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (%/h)</string>
-    <string name="obd_fuel_consumption_rate_l_km">Tasso di consumo di carburante (l/100km)</string>
     <string name="simulate_obd">Simula i dati obd</string>
     <string name="obd_engine_runtime">Tempo di Accensione del Motore</string>
     <string name="obd_engine_runtime_desc">Indica il tempo di funzionamento del motore dall\'avvio.</string>
@@ -5555,7 +5552,6 @@
     <string name="obd_widget_engine_speed">Velocità del motore</string>
     <string name="obd_nothing_found_text">Nessuno scanner trovato</string>
     <string name="shared_string_dynamic">Dinamico</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/100km)</string>
     <string name="obd_fuel_level_liter">Livello carburante (l)</string>
     <string name="obd_fuel_level_percent">Livello carburante (%)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
@@ -5728,7 +5724,7 @@
     <string name="choose_location">Scegli un luogo</string>
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
-    <string name="show_image_previews">Mostra l\' immagine precedente</string>
+    <string name="show_image_previews">Mostra l\'immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Attiva la griglia delle coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
     <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
@@ -5769,7 +5765,6 @@
     <string name="save_to_device">Salva nel dispositivo</string>
     <string name="travel_guides">Guide</string>
     <string name="save_to_device_error">Errore di salvataggio sul dispositivo</string>
-    <string name="show_symbols_debug_info">Mostra info dei simboli di debug</string>
     <string name="show_debug_tile_description">Mostra le informazioni sui simboli della mappa di ogni riquadro</string>
     <string name="show_debug_tile">Mostra informazioni riquadro</string>
     <string name="deactivated_map">Mappa disattivata</string>
@@ -5823,4 +5818,12 @@
     <string name="enable_msaa">Abilita MSAA</string>
     <string name="average_elevation">Elevazione media</string>
     <string name="descent">Discesa</string>
+    <string name="private_access_routing_req_short">La destinazione è in un\'area privata. Abilitare l\'uso di strade private?</string>
+    <string name="view_on_phone">Vedi sul telefono</string>
+    <string name="ascent">Salita</string>
+    <string name="map_orientations_choose_description">Lasciare vuoto per passare tra le modalità disponibili, o aggiungere solo quelle preferite.</string>
+    <string name="map_orientations">Orientamento mappa</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Risposta</string>
 </resources>

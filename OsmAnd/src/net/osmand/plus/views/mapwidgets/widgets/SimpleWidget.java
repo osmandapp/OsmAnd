@@ -1,11 +1,14 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static android.view.View.INVISIBLE;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
+import android.text.TextPaint;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -50,7 +54,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	private boolean isFullRow;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
-			@Nullable String customId, @Nullable WidgetsPanel panel) {
+	                    @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
 		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
 
@@ -65,10 +69,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
-		view.setOnLongClickListener(v -> {
+		setOnLongClickListener(v -> {
 			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), panel, nightMode, true);
 			return true;
 		});
+		setOnClickListener(getOnClickListener());
 	}
 
 	@LayoutRes
@@ -81,6 +86,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		return isVerticalWidget() ? WidgetSize.MEDIUM : WidgetSize.SMALL;
 	}
 
+	@Override
 	public void updateValueAlign(boolean fullRow) {
 		if (WidgetSize.SMALL != getWidgetSizePref().get()) {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
@@ -180,7 +186,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 		imageView.setImageDrawable(oldImageView.getDrawable());
 		copyView(imageView, oldImageView);
-		view.setOnClickListener(getOnClickListener());
 		view.setVisibility(oldContainer.getVisibility());
 
 		copyTextView(textView, oldTextView);
@@ -229,14 +234,59 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	protected void updateWidgetName() {
-		String widgetName = getWidgetName();
-		if (widgetName != null && this.widgetName != null) {
+		String newWidgetName = getWidgetName();
+		if (newWidgetName != null && this.widgetName != null) {
+
 			String additionalName = getAdditionalWidgetName();
 			if (additionalName != null) {
-				widgetName = widgetName + ", " + additionalName;
+				newWidgetName = newWidgetName + ", " + additionalName;
 			}
-			this.widgetName.setText(widgetName);
+
+			String oldWidgetName = String.valueOf(this.widgetName.getText());
+			this.widgetName.setText(newWidgetName);
+
+			if (!oldWidgetName.equals(newWidgetName)) {
+				if (widgetName.getVisibility() == View.GONE) {
+					widgetName.setVisibility(INVISIBLE);
+				}
+				checkForMaxWidgetName();
+			}
 		}
+	}
+
+	private void checkForMaxWidgetName() {
+		if (widgetName == null) {
+			return;
+		}
+
+		widgetName.addViewChangeListener(new ViewChangeListener() {
+			@Override
+			public void onSizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight) {
+				String text = widgetName.getText().toString();
+
+				String firstFourSymbols = (text.length() > 4 ? text.substring(0, 4) : text).toUpperCase();
+
+				if (text.length() > 4) {
+					firstFourSymbols += "…";
+				}
+
+				int titleViewWidth = widgetName.getWidth();
+				if (titleViewWidth == 0) {
+					return;
+				}
+
+				TextPaint paint = widgetName.getPaint();
+				float requiredWidth = paint.measureText(firstFourSymbols);
+				float availableWidth = titleViewWidth - widgetName.getPaddingLeft() - widgetName.getPaddingRight();
+				boolean hideTitle = availableWidth < requiredWidth;
+				AndroidUiHelper.updateVisibility(widgetName, !hideTitle);
+			}
+
+			@Override
+			public void onVisibilityChanged(@NonNull View view, int visibility) {
+
+			}
+		});
 	}
 
 	@Nullable
@@ -246,7 +296,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@Override
 	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode,
-			@NonNull ApplicationMode appMode, @Nullable String customId) {
+	                                 @NonNull ApplicationMode appMode, @Nullable String customId) {
 		if (widgetState != null) {
 			widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
 		}

@@ -96,7 +96,8 @@ public abstract class CommandPlayer {
 		return voiceProviderDir.getName()
 				.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "")
 				.replace("-formal", "")
-				.replace("-casual", "");
+				.replace("-casual", "")
+				.replace("-barebones", "");
 	}
 
 	@NonNull

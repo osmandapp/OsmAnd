@@ -31,20 +31,22 @@ public class AsyncLoadingThread extends Thread {
 
 	@Override
 	public void run() {
+		int cacheCounter = 0;
+		long lastRequestTimestamp = 0;
 		while (true) {
 			try {
-				updateBitmapTilesCache();
-				int cacheCounter = 0;
+				if (lastRequestTimestamp != 0 && System.currentTimeMillis() - lastRequestTimestamp > 750) {
+					lastRequestTimestamp = 0;
+					updateBitmapTilesCache();
+				}
 				boolean tileLoaded = false;
 				boolean mapLoaded = false;
 				while (!requests.isEmpty()) {
 					cacheCounter++;
 					Object req = requests.pop();
-					if (req instanceof TileLoadDownloadRequest) {
-						TileLoadDownloadRequest request = (TileLoadDownloadRequest) req;
+					if (req instanceof TileLoadDownloadRequest request) {
 						tileLoaded |= resourceManger.hasRequestedTile(request);
-					} else if (req instanceof MapLoadRequest) {
-						MapLoadRequest request = (MapLoadRequest) req;
+					} else if (req instanceof MapLoadRequest request) {
 						if (!mapLoaded || request.forceLoadMap) {
 							resourceManger.getRenderer().loadMap(request.tileBox, resourceManger.getMapTileDownloader());
 							mapLoaded = !resourceManger.getRenderer().wasInterrupted();
@@ -58,12 +60,13 @@ public class AsyncLoadingThread extends Thread {
 						cacheCounter = 0;
 						updateBitmapTilesCache();
 					}
+					lastRequestTimestamp = System.currentTimeMillis();
 				}
 				if (tileLoaded || mapLoaded) {
 					// use downloader callback
 					resourceManger.getMapTileDownloader().fireLoadCallback(null);
 				}
-				sleep(750);
+				sleep(50);
 			} catch (InterruptedException | RuntimeException e) {
 				log.error(e, e);
 			}

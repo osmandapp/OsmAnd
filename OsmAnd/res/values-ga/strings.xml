@@ -2852,7 +2852,7 @@
     <string name="shared_string_class">Aicme</string>
     <string name="osmand_cloud_deletion_all_data_warning">Beidh na sonraí go léir ó OsmAnd Cloud %1$s. Tá sonraí ar an ngléas fós gan athrú.</string>
     <string name="disable_vertex_hillshade_3d">Díchumasaigh cnocán vertex i 3D</string>
-    <string name="map_rendering_engine_descr">Is inneall rindreála léarscáile níos cumhachtaí é Leagan 2 (OpenGL), ina bhfuil radharc 2.5D freisin. Ba é Leagan 1 an réamhshocrú roimh OsmAnd 4.3 agus is fearr fós é do ghléasanna níos sine.</string>
+    <string name="map_rendering_engine_descr">Ba é Leagan 1 an réamhshocrú roimh OsmAnd 4.3 agus is fearr fós é do ghléasanna níos sine.\nIs inneall rindreála léarscáile níos cumhachtaí é Leagan 2 (OpenGL), ina bhfuil radharc 2.5D freisin.</string>
     <string name="send_uuid_preference_desc">Úsáidtear UUID randamach chun léarscáileanna as líne a íoslódáil ó fhreastalaithe OsmAnd chun monatóireacht a dhéanamh ar úsáid chothrom acmhainní freastalaí, patrúin tráchta a thuar, agus tuarascálacha léarscáile míosúla gan ainm a ghiniúint.</string>
     <string name="altitude_correction">Ceartú ingearchló</string>
     <string name="save_track_to_gpx_descrp">Taifeadadh rian uathoibríoch-tús agus nascleanúint agus uathoibríoch-shábháil ina dhiaidh sin.</string>
@@ -3519,7 +3519,6 @@
     <string name="obd_fuel_consumption_desc">Taispeánann seo an ráta úsáide breosla ag an inneall, arna ríomh bunaithe ar bhreosla atá fágtha, méid an umair, agus an fad atá clúdaithe de réir mar a chinneann GPS.</string>
     <string name="average_temperature">Meánteocht</string>
     <string name="dynamic_icon_type_summary">Athruithe deilbhíní bunaithe ar staid an ghnímh.</string>
-    <string name="obd_fuel_consumption_rate_l_km">Ráta ídithe breosla (L/100 km)</string>
     <string name="obd_fuel_level_percent">Leibhéal breosla (%)</string>
     <string name="obd_fuel_left_km">Breosla fágtha (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Ráta ídithe breosla (DAB)</string>
@@ -4634,7 +4633,6 @@
     <string name="obd_engine_runtime_desc">Taispeánann sé cé chomh fada is atá an t-inneall ag rith ó cuireadh tús leis.</string>
     <string name="obd_connected_to_device">Ceangailte le %s</string>
     <string name="obd_not_connected_to_device">Dícheangailte ó %s</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Taispeáin ráta ídithe breosla feithicle bunaithe ar ríomhanna (L/100 km)</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brú breosla</string>
     <string name="obd_fuel_consumption_rate_sensor">Ráta ídithe breosla (braiteoir)</string>
@@ -5541,7 +5539,6 @@
     <string name="destination_first">Ceann scríbe ar dtús</string>
     <string name="poi_source">Foinse POI</string>
     <string name="wikidata">Vicísonraí</string>
-    <string name="read_on_wiki">Léigh ar Vicipéid</string>
     <string name="prediction_time_description">Beochan deilbhín suímh in OsmAnd le gach nuashonrú GPS (uair amháin sa soicind). D’fhéadfadh moill bheag tarlú, go háirithe le linn gluaiseachta tapa nó nuair a bhíonn an comhartha GPS éagobhsaí.</string>
     <string name="prediction_time_advanced_description">Coigeartaigh an t-am tuartha chun moill a laghdú.</string>
     <string name="prediction_time">Am tuar</string>
@@ -5568,7 +5565,6 @@
     <string name="travel_guides">Treoraithe</string>
     <string name="show_debug_tile">Taispeáin faisnéis tíleanna</string>
     <string name="show_debug_tile_description">Taispeáin faisnéis faoi shiombailí léarscáile gach tíle</string>
-    <string name="show_symbols_debug_info">Taispeáin eolas dífhabhtaithe siombailí</string>
     <string name="read_on">Léigh ar %1$s</string>
     <string name="unit_of_temperature_description">Cuirfear na haonaid roghnaithe i bhfeidhm ar na sonraí go léir a bhaineann le teocht sa phróifíl reatha.</string>
     <string name="deactivated_map">Léarscáil díghníomhachtaithe</string>
@@ -5595,7 +5591,6 @@
     <string name="osm_live_payment_3_years_title">Gach trí bliana</string>
     <string name="deleting">Ag scriosadh…</string>
     <string name="deleting_history">Stair á scriosadh…</string>
-    <string name="show_symbols_bboxes">Taispeáin boscaí siombailí</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
     <string name="release_5_2">• Obair ar siúl...</string>
     <string name="shared_string_threads">Snáitheanna</string>
@@ -5670,4 +5665,20 @@
     <string name="rendering_attr_tidalFlatStyle_description">Stíl na n-árasán taoide</string>
     <string name="rendering_attr_watercolor_name">Dath uisce</string>
     <string name="rendering_attr_watercolor_description">Dath an uisce</string>
+    <string name="private_access_routing_req_short">Tá do cheann scríbe i limistéar príobháideach. An bhfuil cead agat bóithre príobháideacha a úsáid?</string>
+    <string name="view_on_phone">Féach ar an bhfón</string>
+    <string name="backup_delete_data_warning_extended">Bainfear na sonraí roghnaithe go léir as an scamall go buan leis an ngníomh seo. Ní bheidh sé indéanta iad a athchóiriú níos déanaí.</string>
+    <string name="amount_of_total_used">%1$s de %2$s úsáidte</string>
+    <string name="delete_data">Scrios sonraí</string>
+    <string name="manage_storage_delete_data_dialog_summary">An bhfuil tú cinnte gur mian leat %1$s a scriosadh ó OsmAnd Cloud?\n\nIs féidir leat iad a athchóiriú ón mBruscar laistigh de 30 lá.</string>
+    <string name="manage_storage">Bainistigh stóráil</string>
+    <string name="copy_as_new_folder">Cóipeáil mar fhillteán nua</string>
+    <string name="add_to_a_folder">Cuir le fillteán</string>
+    <string name="add_to_favorites">Cuir le ceanáin</string>
+    <string name="max_weight_at_full_load_description">Cuir uasmheáchan d’fheithicle ar fáil ag lánualach chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
+    <string name="max_axle_load_description">Cuir ualach acastóra uasta do fheithicle ar fáil chun bóithre agus droichid a bhfuil teorainneacha meáchain orthu a sheachaint.</string>
+    <string name="lang_en_barebones">Béarla (lom)</string>
+    <string name="shared_sting_osm_link">Nasc OSM</string>
+    <string name="show_local_names">Taispeáin ainmneacha áitiúla</string>
+    <string name="obd_alt_battery_voltage">Voltas ceallraí (oiriúntóir)</string>
 </resources>

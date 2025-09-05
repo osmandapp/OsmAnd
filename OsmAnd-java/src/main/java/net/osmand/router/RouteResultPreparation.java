@@ -451,9 +451,9 @@ public class RouteResultPreparation {
 					// avoid small zigzags
 					float before = rr.getBearingEnd(next, distBearing);
 					float after = rr.getBearingBegin(next, distBearing);
-					if (rr.getDistance(next, plus) < distBearing) {
+					if (rr.getDistance(next, plus) < distBearing / 2) {
 						after = before;
-					} else if (rr.getDistance(next, !plus) < distBearing) {
+					} else if (rr.getDistance(next, !plus) < distBearing / 2) {
 						before = after;
 					}
 					double contAngle = Math.abs(MapUtils.degreesDiff(before, after));

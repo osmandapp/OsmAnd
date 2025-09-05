@@ -586,8 +586,6 @@
     <string name="view_angle_description">Hiển thị vùng hình nón theo hướng bạn đang nhìn</string>
     <string name="quick_action_drawer_title">Menu ở cạnh</string>
     <string name="quick_action_search_view_desc">Một nút bật/tắt để mở hoặc đóng màn hình tìm kiếm.</string>
-    <string name="obd_fuel_consumption_rate_l_km">Mức tiêu thụ nhiên liêu (lít/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Hiện mức tiêu thụ nhiên liệu dựa trên sự tính toán (lít/100 km)</string>
     <string name="simulate_obd">Mô phỏng dữ liệu obd</string>
     <string name="quick_action_switch_compass_desc">Một nút bật/tắt để chuyển đổi hướng xoay của bản đồ.</string>
     <string name="add_widget_below">Thêm widget xuống dưới</string>
@@ -960,7 +958,7 @@
     <string name="height_legend_description">Những bản đồ màu sắc của độ cao được dùng để thể hiện địa hình một cách trực quan.</string>
     <string name="shared_string_license">Giấy phép</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
-    <string name="map_rendering_engine_descr">Phiên bản 2 (OpenGL) là công cụ kết xuất bản đồ nhanh hơn, cũng bao gồm việc xem 2.5D. Kết xuất Phiên bản 1 là mặc định trước OsmAnd 4.3, và vẫn được ưu tiên cho những thiết bị cũ hơn.</string>
+    <string name="map_rendering_engine_descr">Kết xuất Phiên bản 1 là mặc định trước OsmAnd 4.3, và vẫn được ưu tiên cho những thiết bị cũ hơn.\nPhiên bản 2 (OpenGL) là công cụ kết xuất bản đồ nhanh hơn, cũng bao gồm việc xem 2.5D.</string>
     <string name="compass_always_visible">Luôn hiện</string>
     <string name="routing_attr_avoid_fords_description">Tránh khúc sông cạn</string>
     <string name="configure_map_description">Thay đổi phong cách bản đồ, các lớp, và các cài đặt khác.</string>
@@ -3474,7 +3472,6 @@
     <string name="speed_cameras_restart_descr">Khởi động lại ứng dụng để xoá tất cả dữ liệu camera tốc độ.</string>
     <string name="routing_attr_length_name">Chiều dài</string>
     <string name="clear_tiles_warning">Áp dụng những thay đổi này sẽ xoá dữ liệu đã lưu vào bộ nhớ đệm cho nguồn của mảng này</string>
-    <string name="read_on_wiki">Đọc trên Wikipedia</string>
     <string name="prediction_time_advanced_description">Điều chỉnh thời gian dự đoán để giảm thiểu độ trễ.</string>
     <string name="position_animation">Hiệu ứng chuyển động vị trí</string>
     <string name="popular_places">Địa điểm nổi tiếng</string>

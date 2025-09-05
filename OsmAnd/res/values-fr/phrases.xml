@@ -5053,7 +5053,6 @@
     <string name="poi_macedonian_orthodox_church">Église orthodoxe macédonienne</string>
     <string name="poi_congregational_church">Église congrégationaliste</string>
     <string name="poi_private_investigator">Détective privé</string>
-    <string name="poi_landmark_church">Église emblématique</string>
     <string name="poi_episcopal_church">Église épiscopale</string>
     <string name="poi_airline">Bureau de compagnie aérienne</string>
     <string name="poi_financial_advisor">Conseiller financier</string>
@@ -5074,7 +5073,6 @@
     <string name="poi_denomination_ukrainian_orthodox">Orthodoxe ukrainienne</string>
     <string name="poi_denomination_neo_pentecostal">Néo-pentecôtistes</string>
     <string name="poi_denomination_evangelical_lutheran">Évangélique luthérienne</string>
-    <string name="poi_denomination_landmark">Point de repère</string>
     <string name="poi_denomination_anabaptist">Anabaptiste</string>
     <string name="poi_denomination_thai_mahanikaya">Mahanikaya thaïlandais</string>
     <string name="poi_denomination_thai_thammayut">Thammayut thaïlandais</string>
@@ -5137,7 +5135,6 @@
     <string name="poi_denomination_kardecista">Kardéciste</string>
     <string name="poi_denomination_free_church_of_scotland">Église libre d\'Écosse</string>
     <string name="poi_denomination_catholic_apostolic">Catholique apostolique</string>
-    <string name="poi_denomination_iglesia_filipina_independiente">Église indépendante des Philippines</string>
     <string name="poi_denomination_sephardi">Séfarade</string>
     <string name="poi_denomination_welsh_independent">Indépendant gallois</string>
     <string name="poi_canoe_put_in">Mise à l\'eau du canoë</string>

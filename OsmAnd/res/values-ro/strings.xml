@@ -4751,7 +4751,7 @@
     <string name="restart_now">Repornește acum</string>
     <string name="map_rendering_engine_v1">Versiunea 1</string>
     <string name="map_rendering_engine_v2">Versiunea 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Versiunea 2 (OpenGL) este un motor de redare a hărților mai rapid, care oferă, de asemenea, o vizualizare 2.5D. Versiunea 1 de redare a fost cea implicită înainte de OsmAnd 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.</string>
+    <string name="map_rendering_engine_descr">Versiunea 1 de redare a fost cea implicită înainte de OsmAnd 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.\nVersiunea 2 (OpenGL) este un motor de redare a hărților mai rapid, care oferă, de asemenea, o vizualizare 2.5D.</string>
     <string name="show_map_symbols">Arată simbolurile hărții</string>
     <string name="show_map_symbols_desc">Text, indicatoare rutiere și altele.</string>
     <string name="shared_string_identifiers">Identificatori</string>
@@ -5841,13 +5841,11 @@
     <string name="percent_hour">%/h</string>
     <string name="l_100km">L/100km</string>
     <string name="speedometer_maximum">Maxim</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Indică rata consumului de combustibil al vehiculului pe baza calculelor (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Indică rata consumului de combustibil al vehiculului pe baza calculelor (%/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Rata consumului de combustibil (senzor)</string>
     <string name="obd_how_to_connect">Cum să vă conectați:</string>
     <string name="connect_obd_instructions_step1">Conectați scanerul la portul OBD-II al autovehiculului.</string>
     <string name="connect_obd_instructions_step">1. Conectați scanerul la portul OBD-II al vehiculului.\n\n 2. Porniți motorul vehiculului \n\n 3. Activați Bluetooth pe dispozitiv\n\n 4. Atingeți „%1$s” și selectați scanerul din listă.</string>
-    <string name="obd_fuel_consumption_rate_l_km">Rata consumului de combustibil (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Indică rata consumului de combustibil al vehiculului pe baza senzorului (L/h)</string>
     <string name="obd_fuel_consumption_rate_l_h">Rata consumului de combustibil (L/h)</string>
     <string name="connect_obd_instructions_step2">Porniți motorul autovehiculului</string>
@@ -5949,7 +5947,6 @@
     <string name="wikidata">date Wiki</string>
     <string name="prediction_time_advanced_description">Reglați timpul de predicție pentru a minimiza întârzierea.</string>
     <string name="prediction_time_description">Pictograma de poziție din OsmAnd se animă cu fiecare punct de date GPS primit (o dată pe secundă). O ușoară întârziere în mișcarea sa poate fi observată, în special atunci când utilizatorul se deplasează rapid sau când semnalul GPS fluctuează.</string>
-    <string name="read_on_wiki">Citiți pe Wikipedia</string>
     <string name="prediction_time">Durata de predicție</string>
     <string name="shared_string_no_animation">Fără animație</string>
     <string name="position_animation_empty_banner_description">Pictograma de poziție se mută la fiecare locație nouă primită fără animație.</string>

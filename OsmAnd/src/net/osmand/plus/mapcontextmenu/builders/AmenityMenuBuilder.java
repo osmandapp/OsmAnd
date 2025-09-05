@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -34,6 +33,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -64,23 +64,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 	public static final String WIKIPEDIA_ORG_WIKI_URL_PART = ".wikipedia.org/wiki/";
 
-	protected Amenity amenity;
-
 	protected AmenityUIHelper amenityUIHelper;
 	protected Map<String, String> extensions;
 	protected AdditionalInfoBundle infoBundle;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
-		this.amenity = amenity;
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
-	}
-
-	@NonNull
-	public Amenity getAmenity() {
-		return amenity;
 	}
 
 	@Override
@@ -182,7 +174,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
 				if (activity != null) {
 					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
-					AndroidUtils.openUrl(activity, Uri.parse(wikipediaUrl), nightMode);
+					AndroidUtils.openUrl(activity, wikipediaUrl, nightMode);
 				}
 			}
 		});
@@ -306,10 +298,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String text = app.getString(R.string.ltr_or_rtl_combine_via_space, title, count);
 
 			Context context = group.getContext();
-			AmenityInfoRow wikiInfo = new AmenityInfoRow(
-					NEAREST_WIKI_KEY, R.drawable.ic_action_popular_places, null, text,
-					null, true, getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY),
-					0, false, false, false, 1000, null, false, false, false, 0);
+			AmenityInfoRow wikiInfo = new AmenityInfoRow.Builder(NEAREST_WIKI_KEY)
+					.setIconId(R.drawable.ic_action_popular_places).setText(text)
+					.setCollapsableView(getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY))
+					.setOrder(1000)
+					.build();
 
 			View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
 
@@ -335,10 +328,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
 			Context context = group.getContext();
-			AmenityInfoRow poiInfo = new AmenityInfoRow(
-					NEAREST_POI_KEY, AmenityMenuController.getRightIconId(app, amenity), null, text,
-					null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
-					0, false, false, false, 1000, null, false, false, false, 0);
+			AmenityInfoRow poiInfo = new AmenityInfoRow.Builder(NEAREST_POI_KEY)
+					.setIconId(AmenityMenuController.getRightIconId(app, amenity)).setText(text)
+					.setCollapsableView(getCollapsableView(context, true, amenities, NEAREST_POI_KEY))
+					.setOrder(1000)
+					.build();
 
 			View wikiRow = group.findViewWithTag(NEAREST_WIKI_KEY);
 			int insertIndex = wikiRow != null

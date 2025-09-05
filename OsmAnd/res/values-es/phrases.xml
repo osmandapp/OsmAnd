@@ -3059,7 +3059,7 @@
     <string name="poi_motorcycle_services">Servicios</string>
     <string name="poi_motorcycle_type">Tipo de motocicleta</string>
     <string name="poi_zoo_petting_zoo">Zoológico interactivo</string>
-    <string name="poi_zoo_wildlife_park">Reserva natural</string>
+    <string name="poi_zoo_wildlife_park">Parque zoológico</string>
     <string name="poi_zoo_enclosure">Recinto</string>
     <string name="poi_zoo_safari_park">Parque safari</string>
     <string name="poi_zoo_birds">Aves</string>
@@ -4940,7 +4940,7 @@
     <string name="poi_dog_sled_yes">Trineo de perros: sí</string>
     <string name="poi_dog_sled_no">Trineo de perros: no</string>
     <string name="poi_atv_yes">ATV: sí</string>
-    <string name="poi_atv_no">ATV: no</string>
+    <string name="poi_atv_no">Quads: no</string>
     <string name="poi_access_notes">Notas de acceso</string>
     <string name="poi_piste_type">Tipo de pista</string>
     <string name="poi_network_nwn">Rutas nacionales de senderismo (NWN)</string>
@@ -5032,7 +5032,6 @@
     <string name="poi_latter_day_saints_church">Iglesia de los santos de los últimos días</string>
     <string name="poi_evangelical_lutheran_church">Iglesia evangélica luterana</string>
     <string name="poi_mennonite_church">Iglesia menonita</string>
-    <string name="poi_landmark_church">Iglesia landmark</string>
     <string name="poi_adventist_church">Iglesia adventista</string>
     <string name="poi_uniting_church">Iglesia unida</string>
     <string name="poi_apostolic_church">Iglesia apostólica</string>
@@ -5074,7 +5073,6 @@
     <string name="poi_denomination_ukrainian_orthodox">Ortodoxa ucraniana</string>
     <string name="poi_denomination_neo_pentecostal">Neopentecostal</string>
     <string name="poi_denomination_evangelical_lutheran">Luterana evangélica</string>
-    <string name="poi_denomination_landmark">Punto de referencia</string>
     <string name="poi_denomination_anabaptist">Anabaptista</string>
     <string name="poi_denomination_thai_mahanikaya">Mahanikaya tailandesa</string>
     <string name="poi_denomination_thai_thammayut">Thammayut tailandesa</string>
@@ -5137,7 +5135,10 @@
     <string name="poi_denomination_kardecista">Kardecista</string>
     <string name="poi_denomination_free_church_of_scotland">Iglesia libre de Escocia</string>
     <string name="poi_denomination_catholic_apostolic">Católico apostólico</string>
-    <string name="poi_denomination_iglesia_filipina_independiente"></string>
     <string name="poi_denomination_sephardi">Sefardí</string>
     <string name="poi_denomination_welsh_independent">Independiente galés</string>
+    <string name="poi_canoe_put_in">Embarco de canoas</string>
+    <string name="poi_canoe_egress">Desembarco de canoas</string>
+    <string name="poi_canoe_put_in_egress">Embarco y desembarco de canoas</string>
+    <string name="poi_whitewater_hazard">Peligro de aguas bravas</string>
 </resources>

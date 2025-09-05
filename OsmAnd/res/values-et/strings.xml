@@ -276,7 +276,7 @@
     <string name="route_duration">Aeg:</string>
     <string name="rendering_attr_showMtbRoutes_name">Maastrikuratta rajad</string>
     <string name="recalculate_route">Arvuta teekond uuesti</string>
-    <string name="route_stops_before">%1$s peatust varem</string>
+    <string name="route_stops_before">%1$s eelnevat peatust</string>
     <string name="route_calculation">Teekonna arvutamine</string>
     <string name="route_roundabout_short">Vali %1$d väljumine ja sõida otse</string>
     <string name="route_altitude">Teekonna tõus</string>
@@ -1011,7 +1011,7 @@
     <string name="traffic_warning_hazard">Oht</string>
     <string name="rendering_value_boldOutline_name">Paks kontuurjoon</string>
     <string name="no_updates_available">Uuendusi ei ole saadaval</string>
-    <string name="download_live_updates">Reaalajas uuendused</string>
+    <string name="download_live_updates">Andmeuuendused reaalajas</string>
     <string name="rendering_value_default13_name">Vaikimisi (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Vaikimisi (läbikumav türkiis)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX värv</string>
@@ -4084,7 +4084,7 @@
 \n
 \nPalun muuda salvestusruum jagatud salvestusruumist saadaolevaks salvestusruumiks, vastasel juhul kaotab rakendus juurdepääsu sinu andmetele, sealhulgas võrguühenduseta kaartidele, GPX-radadele ja muule sarnasele.</string>
     <string name="release_4_1">• Lisatud Android Auto esialgne tugi \n \n • Kasutajaliidese värskendus UTM -i koordinaatide otsimiseks \n \n • GPS filter GPX radade jaoks \n \n • Kõrguste vidin (Pro-versioonis) \n \n • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone \n \n • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili \n \n • Fikseeritud Mapillary kiht, pistikprogramm on nüüd vaikimisi keelatud \n \n • Lisatud ekraan rakenduse kogu ajaloo haldamiseks \n \n • Kaardi orientatsiooni ei lähtestata pärast rakenduse taaskäivitamist \n \n • Täiustatud SRTM kõrguse markerite renderdamine \n \n • Fikseeritud araabiakeelsete siltide kuvamine kaardil \n \n • Parandatud erinevad marsruutimisprobleemid</string>
-    <string name="rendering_attr_natureReserves_name">Looduskaitseala</string>
+    <string name="rendering_attr_natureReserves_name">Looduskaitseala ja muud kaitsealused alad</string>
     <string name="is_disabled">%1$s on välja lülitatud</string>
     <string name="history_is_disabled_descr">Selleks, et saaksid lihtsamini kasutada varasemaid tulemusi, võta kasutusele ajaloo salvestamine.</string>
     <string name="transparent_status_bar_descr">Näita olekuriba all kaarti</string>
@@ -4180,8 +4180,8 @@
     <string name="wikipedia_and_travel_maps">Vikipeedia ja reisikaardid</string>
     <string name="offline_weather_forecast">Ilmaennustus, mis ei vaja võrguühendust</string>
     <string name="shared_string_weather">Ilmateade</string>
-    <string name="map_rendering_engine_descr">Kaardimootori versioon 2 (OpenGL) on kiire ning sisaldab ka 2.5-mõõtmelise vaate. Kaardimootori versioon 1 oli esmase valikuna kasutusel kuni OsmAndi versioonini 4.3 ning on jätkuvalt mõistlik eelistus vanemates seadmetes.</string>
-    <string name="rendering_styles">Esitusviisi stiilid</string>
+    <string name="map_rendering_engine_descr">Kaardimootori versioon 1 oli esmase valikuna kasutusel kuni OsmAndi versioonini 4.3 ning on jätkuvalt mõistlik eelistus vanemates seadmetes.\nKaardimootori versioon 2 (OpenGL) on kiire ning sisaldab ka 2,5-mõõtmelise vaate.</string>
+    <string name="rendering_styles">Kaardi kuvamise stiilid</string>
     <string name="sort_subfolders">Sordi alamkaustad</string>
     <string name="empty_screen_view_selected_weather_data">Valitud ilmateate andmete kuvamiseks kaardil lülita see valik sisse.</string>
     <string name="save_track_to_gpx_descrp">Logi GPX teekond liikumise ajal ja hiljem salvesta automaatselt.</string>
@@ -4637,7 +4637,7 @@
     <string name="obd_battery_voltage">Aku pinge</string>
     <string name="obd_plugin_name">Sõiduki andmed</string>
     <string name="obd_widget_vehicle_speed">Sõiduki kiirus</string>
-    <string name="display_distance_to_first_intermediate_summary">Näitab aega ja vahemaad kuni esimese peatuseni. Kui lülitad välja, siis kuvatakse aega ja vahemaad kuni lõppsihtkohani.</string>
+    <string name="display_distance_to_first_intermediate_summary">Näitab aega ja vahemaad kuni järgmise peatuseni. Kui lülitad välja, siis kuvatakse aega ja vahemaad kuni lõppsihtkohani.</string>
     <string name="rendering_attr_showClimbingRoutes_description">Näita ronimismarsruute</string>
     <string name="default_buttons_opacity_original_description">Iga nupp säilitab oma tausta läbipaistmatuse.</string>
     <string name="vehicle_metrics_recording_description">Vali GPX-faili salvestatavad parameetrid.</string>
@@ -4704,8 +4704,7 @@
     <string name="sound_beep_simple">Piiksatus: lihtne</string>
     <string name="special_routing_cpp">Spetsiaalse marsruutimise tüüp</string>
     <string name="auto_zoom_3d_angle">Autosuumi 3D nurk</string>
-    <string name="litres">Liitrid</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Näitab arvutuslikku kütusekulu (L/100 km)</string>
+    <string name="litres">Liitreid</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Näitab arvutuslikku kütusekulu (%/t)</string>
     <string name="shared_string_uphill">Ülesmäge</string>
     <string name="sound_beep_complex_loud">Piiksatus: keerukas ja vali</string>
@@ -4718,7 +4717,6 @@
     <string name="lang_zh_hans">hiina (lihtsustatud)</string>
     <string name="obd_calculated_engine_load">Arvutuslik mootori koormus</string>
     <string name="obd_connecting_to_device">Ühendame seadmega %s</string>
-    <string name="obd_fuel_consumption_rate_l_km">Kütusekulu (L/100 km)</string>
     <string name="obd_fuel_pressure">Kütuse rõhk</string>
     <string name="show_minor_turns_descr">Sõiduradasid kuvatase kõikidel mööduvatel ristmikel sõltumata hääljuhistest</string>
     <string name="current_temperature">Praegune temperatuur</string>
@@ -4954,7 +4952,7 @@
     <string name="shared_string_avg_altitude">Keskmine kõrgus</string>
     <string name="shared_string_avg_speed">Miinimumkiirus</string>
     <string name="map_widget_route_information">Teekonna teave</string>
-    <string name="map_widget_route_information_desc">Kuvab antud teekonna kohta hinnangulist saabumisaega, allesjäänud reisiaega ja vahemaad.</string>
+    <string name="map_widget_route_information_desc">Kuvab aktiivse teekonna kohta hinnangulist saabumisaega, allesjäänud reisiaega ja vahemaad.</string>
     <string name="icon_group_industrial">Tööstus</string>
     <string name="rendering_attr_showFitnessTrails_name">Fitnessirajad</string>
     <string name="rendering_attr_showRunningRoutes_description">Näita jooksuradu</string>
@@ -5228,7 +5226,6 @@
     <string name="download_complete">Allalaadimine on lõppenud</string>
     <string name="calculating_altitude">Arvutame kõrgust</string>
     <string name="wikidata">Vikiandmed</string>
-    <string name="read_on_wiki">Loe Vikipeedias</string>
     <string name="map_widget_camera_tilt_desc">Näitab kaamera kaldenurka perspektiivis. Vaikimisi 90° (kallet pole).</string>
     <string name="routing_attr_allow_private_for_truck_name">Luba eratee kasutamine (veoauto jaoks)</string>
     <string name="av_notes_audio_widget_desc">Häälmärget saad salvestada vidinal klõpsides.</string>
@@ -5295,7 +5292,7 @@
     <string name="destination_first">Esmalt sihtkoht</string>
     <string name="intermediate_first">Esmalt teekonnapunkt</string>
     <string name="ais_address_settings">IP-aadressi seadistused</string>
-    <string name="no_photo_for_location_desc">Siia asukohta pole veel kasutajate fotosid lisatud</string>
+    <string name="no_photo_for_location_desc">Selle asukohta jaoks pole veel kasutajate fotosid lisatud</string>
     <string name="routing_attr_allow_ferries_description">Kaasa praamiliinid teekonna koostamisele</string>
     <string name="equator">Ekvaator</string>
     <string name="show_image_previews">Näita piltide eelvaateid</string>
@@ -5305,7 +5302,7 @@
     <string name="no_places_available">Nähtaval alala pole asukohti</string>
     <string name="shared_string_online_only">Vaid võrgus</string>
     <string name="travel_guides">Reisijuhid</string>
-    <string name="ais_address_settings_description">Vali NMEA protokoll (UDP/TCP) ja määra aadressid</string>
+    <string name="ais_address_settings_description">Vali NMEA protokoll (UDP/TCP) ja määra vastavad aadressid ja pordid</string>
     <string name="msg_favorites_skipped_as_existing">Kuna nad olid juba olemas, siis osa lemmikuid (%1$d) jäi vahele.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX-i teekonnapunktid (%1$d) on kopeeritud lemmikute hulka.</string>
     <string name="shared_string_offline_only">Vaid ilma võrguta</string>
@@ -5346,4 +5343,27 @@
     <string name="unit_volt">V</string>
     <string name="obd_fuel_level">Kütusesäästlikkus (%)</string>
     <string name="routing_attr_allow_ferries_name">Kaasa praamid</string>
+    <string name="backup_delete_data_warning_extended">Selle toiminguga eemaldad pilvest kõik valitud andmed ning neid ei saa hiljem taastada.</string>
+    <string name="amount_of_total_used">Kasutusel %1$s/%2$s</string>
+    <string name="delete_data">Kustuta andmed</string>
+    <string name="shared_sting_osm_link">OSM-i link</string>
+    <string name="lang_en_barebones">inglise (lihtne)</string>
+    <string name="max_axle_load_description">Sisesta oma sõiduki suurim lubatud teljekoormus ja saad vältida kaalupiirangutega teid ja sildu.</string>
+    <string name="max_weight_at_full_load_description">Sisesta oma sõiduki suurim lubatud kaal ja saad vältida kaalupiirangutega teid ja sildu.</string>
+    <string name="add_to_favorites">Lisa lemmikuks</string>
+    <string name="add_to_a_folder">Lisa kausta</string>
+    <string name="copy_as_new_folder">Kopeeri uue kaustana</string>
+    <string name="manage_storage">Halda andmeruumi</string>
+    <string name="manage_storage_delete_data_dialog_summary">Kas oled kindel, et soovid %1$s OsmAnd Cloudist kustutada?\n\nNeid andmeid saad Kustutatud failide kaustast taastada 30 päeva jooksul.</string>
+    <string name="deleting_history">Kustutan ajalugu…</string>
+    <string name="private_access_routing_req_short">Sinu sihtkoht on asub erakasutuses alal. Kas lubad kasutada teekonna koostamiseks erakasutuses teid?</string>
+    <string name="view_on_phone">Vaata telefonis</string>
+    <string name="average_elevation">Keskmine kõrgus</string>
+    <string name="ascent">Tõus</string>
+    <string name="descent">Laskumine</string>
+    <string name="next_turn_information_desc">Näitab järgmist ärapööret ja tänava nime.</string>
+    <string name="next_turn_information">Järgmise ärapöörde teave</string>
+    <string name="osm_live_payment_renews_3_years">Uueneb iga kolme aasta järel</string>
+    <string name="rendering_attr_watercolor_description">Vee värv</string>
+    <string name="rendering_attr_watercolor_name">Vee värv</string>
 </resources>

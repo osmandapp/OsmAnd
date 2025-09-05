@@ -37,8 +37,6 @@ public class ParkingMapWidget extends SimpleWidget {
 		setText(null, null);
 		setIcons(PARKING);
 		updateInfo(null);
-
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

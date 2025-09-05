@@ -495,9 +495,7 @@ public class OsmandSettings {
 		ApplicationMode appMode = getApplicationMode();
 		ApplicationMode nextAppMode = getSwitchedAppMode(appMode, next);
 		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
-			String pattern = ctx.getString(R.string.application_profile_changed);
-			String message = String.format(pattern, nextAppMode.toHumanString());
-			ctx.showShortToastMessage(message);
+			ctx.showShortToastMessage(R.string.application_profile_changed, nextAppMode.toHumanString());
 			return true;
 		}
 		return false;
@@ -1472,6 +1470,8 @@ public class OsmandSettings {
 		}
 
 	}.makeGlobal().makeShared().cache();
+
+	public final OsmandPreference<Boolean> MAP_SHOW_LOCAL_NAMES = new BooleanPreference(this, "map_show_local_names", false).makeGlobal().makeShared().cache();
 
 	public boolean usingEnglishNames() {
 		return MAP_PREFERRED_LOCALE.get().equals("en");

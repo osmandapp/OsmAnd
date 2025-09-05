@@ -131,7 +131,7 @@ public class MenuBuilder {
 
 	protected static final String[] arrowChars = {"=>", " - "};
 
-	protected OsmandApplication app;
+	public OsmandApplication app;
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
 	protected OsmAndAppCustomization customization;
@@ -141,7 +141,7 @@ public class MenuBuilder {
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	protected boolean firstRow;
 	protected boolean matchWidthDivider;
-	private Amenity amenity;
+	protected Amenity amenity;
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
@@ -310,6 +310,10 @@ public class MenuBuilder {
 		this.customOnlinePhotosPosition = customOnlinePhotosPosition;
 	}
 
+	public Amenity getAmenity() {
+		return amenity;
+	}
+
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
 	}
@@ -412,7 +416,7 @@ public class MenuBuilder {
 
 	protected void buildPluginRows(@NonNull View view, @Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
-			plugin.buildContextMenuRows(this, view, object);
+			plugin.buildContextMenuRows(this, view, object, amenity);
 		}
 	}
 
@@ -608,7 +612,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (nearestAmenities.size() > 0) {
+		if (!nearestAmenities.isEmpty()) {
 			String count = "(" + nearestAmenities.size() + ")";
 			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
 			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
@@ -654,7 +658,10 @@ public class MenuBuilder {
 		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
 		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
 		CollapsableView cv = getLocationCollapsableView(locationData);
-		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv, false, 1,
+		Drawable icon = getRowIcon(R.drawable.ic_action_get_my_location);
+		String textPrefix = app.getString(R.string.coordinates);
+		buildRow(view, icon,null, textPrefix, title, 0, null,
+				true, cv, false, 1, false, false,
 				false, null, false);
 	}
 
@@ -1171,7 +1178,7 @@ public class MenuBuilder {
 
 	}
 
-	protected CollapsableView getDistanceCollapsableView(Set<String> distanceData) {
+	public CollapsableView getDistanceCollapsableView(Set<String> distanceData) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (String distance : distanceData) {
 			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
@@ -1422,7 +1429,7 @@ public class MenuBuilder {
 		};
 	}
 
-	protected CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
+	public CollapsableView getCollapsableTextView(Context context, boolean collapsed, String text) {
 		TextViewEx textView = new TextViewEx(context);
 		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
 		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

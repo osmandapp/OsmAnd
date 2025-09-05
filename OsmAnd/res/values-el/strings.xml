@@ -4374,7 +4374,6 @@
     <string name="obd_fuel_consumption_rate_percent_hour">Ρυθμός κατανάλωσης καυσίμου %/ώ</string>
     <string name="shared_string_road_maps">Οδικοί χάρτες</string>
     <string name="obd_not_connected_to_device">Αποσυνδέθηκε από %s</string>
-    <string name="obd_fuel_consumption_rate_l_km">Ρυθμός κατανάλωσης καυσίμου (Λ/100 χλμ)</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Δείχνει τον ρυθμό κατανάλωσης καυσίμου του οχήματος βάσει υπολογισμών (%/ω)</string>
     <string name="obd_fuel_level_liter">Επίπεδο καυσίμου (λ)</string>
     <string name="obd_fuel_level_percent">Επίπεδο καυσίμου (%)</string>
@@ -4388,7 +4387,6 @@
     <string name="shared_string_offline">Εκτός σύνδεσης</string>
     <string name="weather_wind_kilimeters_per_hour">Χιλιόμετρα ανά ώρα</string>
     <string name="simulate_obd">Προσομοιώστε δεδομένα obd</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Δείχνει τον ρυθμό κατανάλωσης καυσίμου του οχήματος βάσει υπολογισμών (Λ/100 χλμ)</string>
     <string name="obd_vehicle_info">Πληροφορίες οχήματος</string>
     <string name="connect_obd_instructions_title">Το OsmAnd υποστηρίζει Bluetooth συνδέσεις προς OBD-II σαρωτές.</string>
     <string name="obd_how_to_connect">Πως να συνδέσετε:</string>
@@ -4927,7 +4925,6 @@
     <string name="distance_during_navigation">Απόσταση κατά την πλοήγηση</string>
     <string name="map_widget_distance">Απόσταση</string>
     <string name="map_widget_map_scale">Κλίμακα χάρτη</string>
-    <string name="show_symbols_debug_info">Εμφάνιση πληροφοριών για τα σύμβολα απασφαλμάτωσης</string>
     <string name="special_routing_cpp">Είδος ειδικής δρομολόγησης</string>
     <string name="plan_route_exit_dialog_descr">Απόρριψη όλων των αλλαγών στη σχεδιασμένη διαδρομή;</string>
     <string name="follow_track_descr">Επιλέξτε αρχείο ίχνους για ακολούθηση</string>

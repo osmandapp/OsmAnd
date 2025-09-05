@@ -482,8 +482,8 @@
     <string name="local_index_transport_data">Kollektivtrafikdata</string>
     <string name="local_index_map_data">Kortdata</string>
     <string name="local_indexes_cat_backup">Deaktiveret</string>
-    <string name="local_indexes_cat_tts">Talemeddelelser (TTS)</string>
-    <string name="local_indexes_cat_voice">Talemeddelelser (optaget)</string>
+    <string name="local_indexes_cat_tts">Stemmemeddelelser (TTS)</string>
+    <string name="local_indexes_cat_voice">Stemmemeddelelser (optaget)</string>
     <string name="local_indexes_cat_poi">Interessepunkt-data</string>
     <string name="ttsvoice">TTS stemme</string>
     <string name="search_offline_clear_search">Ny søgning</string>
@@ -1577,7 +1577,7 @@
     <string name="rate_this_app_long">Vurder OsmAnd på Google Play</string>
     <string name="user_hates_app_get_feedback">Fortæl os hvorfor.</string>
     <string name="user_hates_app_get_feedback_long">Fortæl om eventuelle forslag.</string>
-    <string name="download_live_updates">Realtidsopdateringer</string>
+    <string name="download_live_updates">Live opdateringer</string>
     <string name="delete_change">Slet ændring</string>
     <string name="try_again">Prøv igen</string>
     <string name="error_message_pattern">Fejl: {0}</string>
@@ -4079,7 +4079,7 @@
     <string name="purchases_feature_desc_android_auto">Giver dig OsmAnd offline kort og navigation på skærmen i dit køretøj og integreres med bilens betjeningselementer.</string>
     <string name="shared_string_details">Detaljer</string>
     <string name="shared_app_storage_description">Delt hukommelse er ikke længere tilgængelig på grund af ændret adgang til lagerplads i Android.</string>
-    <string name="rendering_attr_natureReserves_name">Naturreservat</string>
+    <string name="rendering_attr_natureReserves_name">Naturreservat og beskyttede områder</string>
     <string name="shared_string_articles">Artikler</string>
     <string name="internal_app_storage_description">Intern lagring, skjult for alle brugere og andre apps, så kun OsmAnd kan få adgang til dine data.</string>
     <string name="included_categories">Inkluderede kategorier</string>
@@ -4574,7 +4574,7 @@
     <string name="restart_now">Genstart nu</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) er en mere kraftfuld kortgengivelsesmotor, der også har 2,5D-visning. Version 1 var standard før OsmAnd 4.3 og er stadig at foretrække for ældre enheder.</string>
+    <string name="map_rendering_engine_descr">Version 1 var standard før OsmAnd 4.3 og er stadig at foretrække for ældre enheder. \nVersion 2 (OpenGL) er en mere kraftfuld kortgengivelsesmotor, der også har 2,5D-visning.</string>
     <string name="map_rendering_engine">Kortgengivelsesmotor</string>
     <string name="rendering_engine_failed_descr">OsmAnd er vendt tilbage til kortgengivelse efter \'Version 1\'. Du kan prøve at skifte tilbage til den nye \'Version 2 (OpenGL)\'-gengivelsesmotor i indstillingerne.
 \n
@@ -5080,7 +5080,7 @@
     <string name="standard_maps">Standardkort</string>
     <string name="shared_string_created">Oprettet</string>
     <string name="wikipedia_and_travel_maps">Wikipedia og rejsekort</string>
-    <string name="rendering_styles">Gengivelsesstile</string>
+    <string name="rendering_styles">Gengivelsesstilarter</string>
     <string name="sort_country_name_ascending">Landenavn: A – Z</string>
     <string name="weather_online">Vejr online</string>
     <string name="map_is_up_to_date">%1$s kort er opdateret.</string>
@@ -5118,7 +5118,7 @@
     <string name="reset_key_assignments_desc">Alle tastetildelinger for den valgte type fjernes.</string>
     <string name="key_event_action_previous_app_profile">Forrige app-profil</string>
     <string name="show_toast_about_key_pressed">Vis info om trykket tast</string>
-    <string name="topography_maps">Topografikort</string>
+    <string name="topography_maps">Topografiske kort</string>
     <string name="shared_string_rows">Rækker</string>
     <string name="key_event_action_move_left">Flyt til venstre</string>
     <string name="tripltek_promo">Tripltek-kampagne i %1$s months</string>
@@ -5604,8 +5604,6 @@
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Viser køretøjets brændstofforbrug baseret på beregninger (%/t)</string>
     <string name="l_100km">L/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (L/100 km)</string>
     <string name="simulate_obd">Simulér obd-data</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brændstoftryk</string>
@@ -5783,7 +5781,6 @@
     <string name="travel_guides">Guider</string>
     <string name="show_debug_tile">Vis information om kortflise</string>
     <string name="show_debug_tile_description">Vis information om kortsymboler for hver kortflise</string>
-    <string name="show_symbols_debug_info">Vis symboler fejlfindinginfo</string>
     <string name="deactivated_map">Deaktiveret kort</string>
     <string name="suggest_activate_map_msg">%1$s kort er deaktiveret,\naktiver for at se dette område.</string>
     <string name="unit_of_temperature_description">De valgte enheder anvendes på alle temperaturrelaterede data i den aktuelle profil.</string>
@@ -5810,7 +5807,6 @@
     <string name="deleting">Sletter…</string>
     <string name="deleting_history">Sletter historik…</string>
     <string name="show_rasterization_debug_tile">Vis oplysninger om rasterisering af kortfliser</string>
-    <string name="show_symbols_bboxes">Vis symbolers bboxer</string>
     <string name="release_5_2">• Arbejde i gang...</string>
     <string name="shared_string_threads">Tråde</string>
     <string name="threads_allocated_for_rendering">Tråde allokeret til rendering</string>
@@ -5818,7 +5814,7 @@
     <string name="turn_by_turn_directions">Sving-for-sving-vejledning</string>
     <string name="failed_to_connect">Kunne ikke forbinde til %1s</string>
     <string name="enable_msaa">Aktiver MSAA</string>
-    <string name="next_turn_information">Information om næste sving</string>
+    <string name="next_turn_information">Næste sving information</string>
     <string name="next_turn_information_desc">Viser den kommende svingretning og gadenavn.</string>
     <string name="description_purchases_fastspring">Du kan administrere dine køb via FastSprings portal for kontoadministration.</string>
     <string name="description_subscription_fastspring">Du kan administrere eller opsige dit abonnement via FastSprings portal for kontoadministration.</string>
@@ -5870,4 +5866,40 @@
     <string name="rendering_attr_tidalFlatStyle_description">Stil for tidevandsflader</string>
     <string name="rendering_attr_watercolor_name">Vandfarve</string>
     <string name="rendering_attr_watercolor_description">Farve på vand</string>
+    <string name="backup_delete_data_warning_extended">Denne handling vil permanent fjerne alle valgte data fra skyen. Det vil ikke være muligt at gendanne dem senere.</string>
+    <string name="amount_of_total_used">%1$s af %2$s brugt</string>
+    <string name="delete_data">Slet data</string>
+    <string name="manage_storage_delete_data_dialog_summary">Er du sikker på, at du vil slette %1$s fra OsmAnd Cloud?\n\nDu kan gendanne dem fra papirkurven inden for 30 dage.</string>
+    <string name="manage_storage">Administrer lagerplads</string>
+    <string name="copy_as_new_folder">Kopier som ny mappe</string>
+    <string name="add_to_a_folder">Tilføj til en mappe</string>
+    <string name="add_to_favorites">Tilføj til favoritter</string>
+    <string name="max_weight_at_full_load_description">Angiv dit køretøjs maksimale vægt ved fuld last for at undgå veje og broer med vægtbegrænsninger.</string>
+    <string name="max_axle_load_description">Angiv dit køretøjs maksimale akseltryk for at undgå veje og broer med vægtbegrænsninger.</string>
+    <string name="private_access_routing_req_short">Din destination ligger i et privat område. Tillad brug af private veje?</string>
+    <string name="view_on_phone">Vis på telefonen</string>
+    <string name="rendering_attr_hideLightSectors_name">Lyse sektorer</string>
+    <string name="rendering_attr_hideLightSectors_description">Skjul lyse sektorer</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Kilder til lyse sektorer</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Skjul kilder til lyse sektorer</string>
+    <string name="rendering_attr_hideMinorContours_name">Konturer af mindre dybder</string>
+    <string name="rendering_attr_hideMinorContours_description">Skjul konturer af mindre dybder</string>
+    <string name="shared_sting_osm_link">OSM-link</string>
+    <string name="rendering_attr_shellsStyle_name">Skalstil</string>
+    <string name="rendering_attr_shellsStyle_description">Stil for skaller på havbunden</string>
+    <string name="lang_en_barebones">Engelsk (helt enkelt)</string>
+    <string name="show_local_names">Vis lokale navne</string>
+    <string name="rendering_attr_hideSpots_name">Punkt‑dybdemålinger</string>
+    <string name="rendering_attr_hideSpots_description">Skjul punkt‑dybdemålinger</string>
+    <string name="rendering_attr_spotDistance_name">Punkt‑dybdemåling afstand</string>
+    <string name="rendering_attr_spotDistance_description">Punkt‑dybdemåling afstand</string>
+    <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
+    <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
+    <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Britisk gallon</string>
+    <string name="us_gallon">Amerikansk gallon</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Miles</string>
+    <string name="mpg">MPG</string>
 </resources>

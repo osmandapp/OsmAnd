@@ -9,12 +9,15 @@ enum class OBDCommand(
 	private val responseParser: (IntArray) -> OBDDataField<Any>,
 	val gpxTag: String?,
 	val commandType: Obd2Connection.COMMAND_TYPE = LIVE,
-	val isStale: Boolean = false) {
+	val isStale: Boolean = false,
+	val textCommand: String? = null,
+	val isHexAnswer: Boolean = true) {
 	OBD_CALCULATED_ENGINE_LOAD_COMMAND(0x01, 0x04, 1, OBDUtils::parsePercentResponse, "vm_runtime"),
 	OBD_THROTTLE_POSITION_COMMAND(0x01, 0x11, 1, OBDUtils::parsePercentResponse, "vm_tpos"),
 	OBD_ENGINE_OIL_TEMPERATURE_COMMAND(0x01, 0x5C, 1, OBDUtils::parseTempResponse, "vm_eotemp"),
 	OBD_FUEL_PRESSURE_COMMAND(0x01, 0x0A, 1, OBDUtils::parseFuelPressureResponse, "vm_fpress"),
 	OBD_BATTERY_VOLTAGE_COMMAND(0x01, 0x42, 2, OBDUtils::parseBatteryVoltageResponse, "vm_bvol"),
+	OBD_ALT_BATTERY_VOLTAGE_COMMAND(0, 0, 2, OBDUtils::parseAltBatteryVoltageResponse, "vm_bvol", textCommand = "AT RV", isHexAnswer = false),
 	OBD_AMBIENT_AIR_TEMPERATURE_COMMAND(0x01, 0x46, 1, OBDUtils::parseTempResponse, "vm_atemp"),
 	OBD_RPM_COMMAND(0x01, 0x0C, 2, OBDUtils::parseRpmResponse, "vm_espeed"),
 	OBD_ENGINE_RUNTIME_COMMAND(0x01, 0x1F, 2, OBDUtils::parseEngineRuntime, "vm_runtime"),
@@ -28,6 +31,10 @@ enum class OBDCommand(
 
 	fun parseResponse(response: IntArray): OBDDataField<Any> {
 		return responseParser.invoke(response)
+	}
+
+	fun isTextCommand(): Boolean {
+		return command == 0 && commandGroup == 0 && textCommand != null
 	}
 
 	companion object {

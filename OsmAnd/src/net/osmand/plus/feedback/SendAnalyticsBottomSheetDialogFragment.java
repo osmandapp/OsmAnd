@@ -6,9 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextPaint;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.URLSpan;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -30,6 +28,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.style.CustomURLSpan;
 
 import org.apache.commons.logging.Log;
 
@@ -104,13 +103,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		int start = text.indexOf(privacyPolicyText);
 		int end = start + privacyPolicyText.length();
 		String url = getString(R.string.osmand_privacy_policy);
-		spannable.setSpan(new URLSpan(url) {
-			@Override
-			public void updateDrawState(@NonNull TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
-			}
-		}, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannable.setSpan(new CustomURLSpan(url), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int linkTextColor = ColorUtilities.getActiveColor(app, nightMode);
 		spannable.setSpan(new ForegroundColorSpan(linkTextColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 

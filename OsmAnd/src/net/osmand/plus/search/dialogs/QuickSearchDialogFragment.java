@@ -549,7 +549,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(v -> {
-			if (!searchEditText.getText().isEmpty()) {
+			if (!searchEditText.getText().toString().isEmpty()) {
 				clearLastWord();
 			} else if (useMapCenter && location != null) {
 				useMapCenter = false;
@@ -1824,7 +1824,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void clearLastWord() {
-		if (!searchEditText.getText().isEmpty()) {
+		if (!searchEditText.getText().toString().isEmpty()) {
 			String newText = searchUICore.getPhrase().getTextWithoutLastWord();
 			searchEditText.setText(newText);
 			searchEditText.setSelection(newText.length());

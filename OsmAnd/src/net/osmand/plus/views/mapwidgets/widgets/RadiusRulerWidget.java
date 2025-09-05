@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -12,8 +14,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -34,7 +36,11 @@ public class RadiusRulerWidget extends SimpleWidget {
 
 		updateIcons();
 		setText(NO_VALUE, null);
-		setOnClickListener(v -> switchRadiusRulerMode());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> switchRadiusRulerMode();
 	}
 
 	private void switchRadiusRulerMode() {

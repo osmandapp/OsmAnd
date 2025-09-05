@@ -4478,7 +4478,7 @@ POIの更新は利用できません</string>
 \n可能であればエラーログを提供して頂き、改善のサポートをお願いします。</string>
     <string name="rendering_engine_failed">直近でOsmAndのマップレンダリングがクラッシュしました。</string>
     <string name="map_rendering_engine_v2">バージョン2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">バージョン2 (OpenGL)は、より高速なマップレンダリングエンジンとなっており、2.5次元表示も可能です。ちなみにバージョン1はOsmAnd 4.3以前の標準エンジンで、古い端末で動かす場合に適しています。</string>
+    <string name="map_rendering_engine_descr">ちなみにバージョン1はOsmAnd 4.3以前の標準エンジンで、古い端末で動かす場合に適しています。\nバージョン2 (OpenGL)は、より高速なマップレンダリングエンジンとなっており、2.5次元表示も可能です。</string>
     <string name="release_4_3">• 新しく高速なバージョン2 (OpenGL) マップレンダリング エンジン、2.5Dビューにも対応 \n \n• 移動中の場所の変化時におけるスムーズなアニメーション \n \n• マップの中心座標とジオロケーションの高度に関する新しいウィジェット \n \n• \"タップまでの距離”:テキストサイズに関するオプションを追加 \n \n• \"マップ マーカー\"ウィジェット:クリック動作を変更するオプションを追加 \n \n• \"位置配置\"オプションを修正 \n \n• GPX:\"link\"、\"cmt\"、\"desc\"タグ、およびカスタム拡張子のサポートを追加 \n \n• \"海図\"リストを再編成 \n \n• ANT+センサーのサポートを追加 \n \n• ダウンロード時UUIDを無効にするオプションを追加 \n \n• 標高に依存するウォーキング/ハイキング/ランニングトリップなどで、デフォルト速度を調整可能にした上での時間予測を採用 \n \n• 音声出力と音量スライダーの動作を修正</string>
     <string name="speak_gps_signal_status">GPS信号を見失ったときと再検出を通知する</string>
     <string name="rendering_attr_showMtbScale_name">MTBスケールを表示</string>
@@ -5307,7 +5307,6 @@ POIの更新は利用できません</string>
     <string name="obd_fuel_consumption_rate_l_h">燃料消費率(L/h)</string>
     <string name="current_temperature">現在の気温</string>
     <string name="obd_fuel_consumption">燃料消費量</string>
-    <string name="obd_fuel_consumption_rate_l_km">燃料消費率(L/100 km)</string>
     <string name="remaining_fuel">燃料の残量</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_air_intake_temp_desc">エンジンのインテークマニホールドに流入する空気の温度を表示します。</string>
@@ -5328,7 +5327,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_instant">即時</string>
     <string name="average_temperature">平均気温</string>
     <string name="fuel_tank_capacity_description">タンク容量を入力し、燃料レベルと消費量を正確に追跡します</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">計算による車両の燃料消費率(L/100 km)を表示します</string>
     <string name="prediction_time_advanced_description">遅延が最小になるように予想時間を調整します。</string>
     <string name="shared_string_no_animation">アニメーション無し</string>
     <string name="position_animation_empty_banner_description">位置アイコンはアニメーションせずに新しい受信位置に移動します。</string>
@@ -5367,7 +5365,6 @@ POIの更新は利用できません</string>
     <string name="auto_25_chars_route_tu">Uターンする</string>
     <string name="shared_string_create">作成</string>
     <string name="wikidata">Wikidata</string>
-    <string name="read_on_wiki">Wikipediaで読む</string>
     <string name="shared_string_edges">余白</string>
     <string name="labels_position">ラベルの位置</string>
     <string name="no_internet_descr">接続を確認して、もう一度お試しください。</string>

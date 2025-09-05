@@ -172,14 +172,18 @@ public class SelectedGpxFile {
 
 	public final void appendTrackPointToDisplay(@NonNull WptPt point, @NonNull OsmandApplication app) {
 		TrkSegment lastSegment;
-		if (processedPointsToDisplay.size() == 0) {
+		if (processedPointsToDisplay.isEmpty()) {
 			lastSegment = new TrkSegment();
 			processedPointsToDisplay.add(lastSegment);
 		} else {
 			lastSegment = processedPointsToDisplay.get(processedPointsToDisplay.size() - 1);
 		}
-
 		lastSegment.getPoints().add(point);
+
+		TrkSegment generalSegment = gpxFile != null ? gpxFile.getGeneralSegment() : null;
+		if (generalSegment != null) {
+			generalSegment.getPoints().add(point);
+		}
 
 		boolean hasCalculatedBounds = !bounds.hasInitialState();
 		if (hasCalculatedBounds) {

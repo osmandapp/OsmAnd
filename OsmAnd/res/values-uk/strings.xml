@@ -4553,7 +4553,7 @@
     <string name="dismiss_changes_descr">Усі зміни буде відхилено.</string>
     <string name="dismiss_changes">Відхилити зміни\?</string>
     <string name="restart_now">Перезапустити зараз</string>
-    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) — це потужніший механізм візуалізації карт, який також підтримує 2.5D-вигляд. Версія 1 була стандартною до OsmAnd 4.3 і все ще краща для старіших пристроїв.</string>
+    <string name="map_rendering_engine_descr">Версія 1 була стандартною до OsmAnd 4.3 і все ще краща для старіших пристроїв.\nВерсія 2 (OpenGL) — це потужніший механізм візуалізації карт, який також підтримує 2.5D-вигляд.</string>
     <string name="rendering_engine_failed">Стався збій рендерингу мап OsmAnd.</string>
     <string name="share_crash_log">Поділитися журналом збоїв</string>
     <string name="map_rendering_engine_v1">Версія 1</string>
@@ -5048,10 +5048,10 @@
     <string name="widget_available_ram_desc">Показує доступну пам\'ять, виділену для OsmAnd.</string>
     <string name="sort_size_descending">Спочатку більшого розміру</string>
     <string name="delete_map">Видалити мапу</string>
-    <string name="standard_maps">Стандартні мапи</string>
+    <string name="standard_maps">Стандартні карти</string>
     <string name="shared_string_created">Створено</string>
-    <string name="wikipedia_and_travel_maps">Вікіпедія та путівники</string>
-    <string name="rendering_styles">Стилі мап</string>
+    <string name="wikipedia_and_travel_maps">Вікіпедія та туристичні карти</string>
+    <string name="rendering_styles">Стилі рендерингу</string>
     <string name="sort_country_name_ascending">Назва країни: А – Я</string>
     <string name="weather_online">Погода онлайн</string>
     <string name="map_is_up_to_date">Мапа %1$s оновлена.</string>
@@ -5150,7 +5150,7 @@
     <string name="discard_changes_prompt">Відкинути зміни?</string>
     <string name="row_number">Рядок %1$s</string>
     <string name="key_assignments">Прив\'язки клавіш</string>
-    <string name="topography_maps">Топографічні мапи</string>
+    <string name="topography_maps">Топографічні карти</string>
     <string name="tripltek_promo">Промо Tripltek на %1$s місяців</string>
     <string name="tripltek_promo_description">Безплатний доступ до функцій, включно з необмеженим завантаженням мап, 3D-рельєф тощо за %1$s на місяць</string>
     <string name="clear_key_assignment">Очистити прив\'язку клавіш</string>
@@ -5560,7 +5560,6 @@
     <string name="obd_connected_to_device">Під\'єднано до %s</string>
     <string name="dynamic_icon_type_summary">Піктограма змінюється залежно від стану дії.</string>
     <string name="l_100km">л/100 км</string>
-    <string name="obd_fuel_consumption_rate_l_km">Швидкість споживання палива (л/100 км)</string>
     <string name="obd_not_connected_to_device">Від\'єднано від %s</string>
     <string name="obd_connecting_to_device">Під\'єднання до %s</string>
     <string name="obd_engine_runtime">Час виконання двигуна</string>
@@ -5572,7 +5571,6 @@
     <string name="obd_engine_oil_temperature_desc">Показує температуру моторного масла.</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Показує швидкість споживання палива транспортного засобу на основі розрахунків (L/H)</string>
     <string name="record_obd_data">Реєструйте показники автомобіля</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Показує швидкість споживання палива на основі розрахунків (л/100 км)</string>
     <string name="simulate_obd">Імітувати дані OBD</string>
     <string name="obd_throttle_position">Положення дросельної заслінки</string>
     <string name="speedometer_maximum">Максимум</string>
@@ -5616,7 +5614,7 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Використовуйте вибрані одиниці в назві.</string>
     <string name="remaining_fuel_description">Показує кількість палива, залишеного в резервуарі транспортного засобу</string>
     <string name="remaining_fuel">Залишився паливо</string>
-    <string name="obd_fuel_consumption">Питання палива</string>
+    <string name="obd_fuel_consumption">Споживання палива</string>
     <string name="reset_average_value">Скиньте середнє значення</string>
     <string name="shared_string_instant">Мить</string>
     <string name="show_minor_turns">Відображення на незначних перехрестях при прямому русі</string>
@@ -5693,7 +5691,7 @@
     <string name="show_utm_grids">Використовувати UTM замість WGS84</string>
     <string name="show_utm_grids_description">Показати сітку в метрах UTM замість WGS84</string>
     <string name="map_grid">Картографічні сітки</string>
-    <string name="no_places_available">Ніяких місць у видимій регіоні</string>
+    <string name="no_places_available">Немає місць у видимій області</string>
     <string name="no_photo_for_location_desc">Для цього місця ще не додано жодних фотографій користувачів</string>
     <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо, протягом %1$s місяців</string>
     <string name="shared_string_road_exit">Вихід</string>
@@ -5758,7 +5756,6 @@
     <string name="travel_guides">Путівника</string>
     <string name="show_debug_tile">Показати інформацію про плитку</string>
     <string name="show_debug_tile_description">Відображати інформацію про символи карти кожної плитки</string>
-    <string name="show_symbols_debug_info">Показати інформацію про налагодження символів</string>
     <string name="deactivated_map">Деактивована карта</string>
     <string name="suggest_activate_map_msg">Карта %1$s деактивована,\nактивуйте її, щоб переглянути цю область.</string>
     <string name="unit_of_temperature_description">Вибрані одиниці вимірювання будуть застосовані до всіх даних, пов\'язаних з температурою, у поточному профілі.</string>
@@ -5785,7 +5782,6 @@
     <string name="deleting">Видалення…</string>
     <string name="deleting_history">Видалення історії…</string>
     <string name="show_rasterization_debug_tile">Показати інформацію про растеризацію плиток</string>
-    <string name="show_symbols_bboxes">Показати символи bboxes</string>
     <string name="release_5_2">• Робота триває...</string>
     <string name="shared_string_threads">Теми</string>
     <string name="threads_allocated_for_rendering">Потоки, виділені для рендерингу</string>
@@ -5859,4 +5855,26 @@
     <string name="rendering_attr_tidalFlatStyle_description">Стиль припливних відмілин</string>
     <string name="rendering_attr_watercolor_name">Колір води</string>
     <string name="rendering_attr_watercolor_description">Колір з води</string>
+    <string name="private_access_routing_req_short">Ваш пункт призначення знаходиться на приватній території. Дозволити користування приватними дорогами?</string>
+    <string name="view_on_phone">Переглянути на телефоні</string>
+    <string name="backup_delete_data_warning_extended">Ця дія назавжди видалить усі вибрані дані з хмари. Відновити їх пізніше буде неможливо.</string>
+    <string name="amount_of_total_used">Використано %1$s з %2$s</string>
+    <string name="delete_data">Видалити дані</string>
+    <string name="manage_storage_delete_data_dialog_summary">Ви впевнені, що хочете видалити %1$s з OsmAnd Cloud?\n\nВи можете відновити їх з кошика протягом 30 днів.</string>
+    <string name="manage_storage">Керування сховищем</string>
+    <string name="copy_as_new_folder">Копіювати як нову папку</string>
+    <string name="add_to_a_folder">Додати до папки</string>
+    <string name="add_to_favorites">Додати до обраного</string>
+    <string name="max_weight_at_full_load_description">Вкажіть максимальну вагу вашого транспортного засобу при повному завантаженні, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
+    <string name="max_axle_load_description">Вкажіть максимальне навантаження на вісь вашого автомобіля, щоб уникнути доріг та мостів з обмеженнями ваги.</string>
+    <string name="lang_en_barebones">Англійська (базова)</string>
+    <string name="shared_sting_osm_link">Посилання OSM</string>
+    <string name="show_local_names">Показати місцеві назви</string>
+    <string name="obd_alt_battery_voltage">Напруга акумулятора (адаптер)</string>
+    <string name="liter_single">Літр</string>
+    <string name="imperial_gallon">Імперський галон</string>
+    <string name="us_gallon">галон США</string>
+    <string name="kilometers">Кілометри</string>
+    <string name="miles">Милі</string>
+    <string name="mpg">MPG</string>
 </resources>

@@ -576,7 +576,7 @@
     <string name="searchpoi_activity">POI kiválasztás</string>
     <string name="search_POI_level_btn">További találatok</string>
     <string name="incremental_search_city">Település keresése lépésenként</string>
-    <string name="incremental_search_street">Utca keresése</string>
+    <string name="incremental_search_street">Utca fokozatos keresése</string>
     <string name="incremental_search_building">Épület keresése növekményesen</string>
     <string name="choose_available_region">Régió kijelölése listából</string>
     <string name="choose_intersected_street">Keresztező utca kijelölése</string>
@@ -1301,7 +1301,7 @@
     <string name="error_avoid_specific_road">Nem található kerülőút</string>
     <string name="home_button">Otthon</string>
     <string name="map_update">Frissítés érhető el %1$s térképéhez</string>
-    <string name="search_for">Keresés</string>
+    <string name="search_for">Keresés erre:</string>
     <string name="shared_string_show_all">Összes megjelenítése</string>
     <string name="coordinates">Koordináták</string>
     <string name="dash_download_msg_none">Letölt offline térképeket\?</string>
@@ -2558,7 +2558,7 @@
     <string name="osm_live_payment_annual_title">Évente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / hó</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / hó</string>
-    <string name="osm_live_payment_discount_descr">Takarítson meg ennyit: %1$s</string>
+    <string name="osm_live_payment_discount_descr">Takarítson meg %1$s-ot</string>
     <string name="osm_live_payment_current_subscription">Jelenlegi előfizetés</string>
     <string name="osm_live_payment_renews_monthly">Havonta megújul</string>
     <string name="osm_live_payment_renews_quarterly">Negyedévente megújul</string>
@@ -4501,7 +4501,7 @@
     <string name="map_rendering_engine_v1">1-es verzió</string>
     <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
     <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az „1-es verziójú” térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban. \n\nTámogassa a fejlesztéseket a hibanaplója elküldésével.</string>
-    <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) egy erőteljesebbbb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.</string>
+    <string name="map_rendering_engine_descr">Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.\nA 2-es verzió (OpenGL) egy erőteljesebbbb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz.</string>
     <string name="rendering_engine_failed">Az OsmAnd térkép-megjelenítője nemrég összeomlott.</string>
     <string name="share_crash_log">Összeomlási napló megosztása</string>
     <string name="dismiss_changes">Változtatások elvetése\?</string>
@@ -5521,8 +5521,6 @@
     <string name="liter">l</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="l_100km">l/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Fogyasztás (l/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Megjeleníti a jármű számított távolságalapú üzemanyag fogyasztását (l/100 km)</string>
     <string name="simulate_obd">OBD adatok szimulálása</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Üzemanyagnyomás</string>
@@ -5678,7 +5676,6 @@
     <string name="position_animation_empty_banner_description">A pozícióikon animáció nélkül mozog az újonnan megkapott helyre.</string>
     <string name="prediction_time">Előrejelzési idő</string>
     <string name="prediction_time_advanced_description">Előrejelzési idő beállítása a késés minimalizálásához.</string>
-    <string name="read_on_wiki">Megtekintés a Wikipédián</string>
     <string name="shared_string_no_animation">Nincs animáció</string>
     <string name="position_animation">Pozíció animációja</string>
     <string name="wiki_around">Közeli népszerű helyek</string>
@@ -5701,7 +5698,6 @@
     <string name="travel_guides">Útikalauzok</string>
     <string name="show_debug_tile">Csempeadatok megjelenítése</string>
     <string name="show_debug_tile_description">Információk megjelenítése az egyes csempék térképjeleiről</string>
-    <string name="show_symbols_debug_info">Szimbólumok hibakeresési adatainak megjelenítése</string>
     <string name="unit_of_temperature_description">Az aktuális profil összes hőmérsékleti adata a kiválasztott mértékegységben fog megjelenni.</string>
     <string name="deactivated_map">Nem aktív térkép</string>
     <string name="suggest_activate_map_msg">%1$s térképe nem aktív,\naktiválja a terület megtekintéséhez.</string>
@@ -5729,7 +5725,6 @@
     <string name="deleting">Törlés…</string>
     <string name="deleting_history">Előzmények törlése…</string>
     <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
-    <string name="show_symbols_bboxes">Szimbólum határolókeretek mutatása</string>
     <string name="release_5_2">• Folyamatban lévő munka...</string>
     <string name="shared_string_threads">Szálak</string>
     <string name="threads_allocated_for_rendering">Rendereléshez lefoglalt szálak</string>
@@ -5803,4 +5798,26 @@
     <string name="rendering_attr_tidalFlatStyle_name">Árapály-síkság stílus</string>
     <string name="rendering_attr_tidalFlatStyle_description">Az árapály-síkságok stílusa</string>
     <string name="rendering_attr_spotDistance_name">Mélységi szondázás távolság</string>
+    <string name="private_access_routing_req_short">Az úticél magánterületen található. Engedélyezi a magánutak használatát?</string>
+    <string name="view_on_phone">Megtekintés telefonon</string>
+    <string name="backup_delete_data_warning_extended">Ez a művelet véglegesen eltávolítja az összes kiválasztott adatot a felhőből. Később sem lehet visszaállítani őket.</string>
+    <string name="amount_of_total_used">%1$s / %2$s használatban</string>
+    <string name="delete_data">Adatok törlése</string>
+    <string name="manage_storage_delete_data_dialog_summary">Biztosan törölni szeretné az OsmAnd Cloudból ezt: %1$s?\n\n30 napon belül még visszaállíthatja a Lomtárból.</string>
+    <string name="manage_storage">Tárhely kezelése</string>
+    <string name="copy_as_new_folder">Másolás új mappaként</string>
+    <string name="add_to_a_folder">Hozzáadás egy mappához</string>
+    <string name="add_to_favorites">Hozzáadás a kedvencekhez</string>
+    <string name="max_weight_at_full_load_description">Adja meg a járműve teljes terhelés melletti maximális súlyát, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
+    <string name="max_axle_load_description">Adja meg a járműve maximális tengelyterhelését, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
+    <string name="lang_en_barebones">Angol (csupasz)</string>
+    <string name="shared_sting_osm_link">OSM hivatkozás</string>
+    <string name="show_local_names">Helyi nevek mutatása</string>
+    <string name="obd_alt_battery_voltage">Akkumulátor feszültség (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Angol gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilométer</string>
+    <string name="miles">Mérföld</string>
+    <string name="mpg">Mérf./gal</string>
 </resources>

@@ -4698,7 +4698,7 @@
 \nMesedez, lagundu hobekuntzak egiten zure erroreen erregistroa emanez.</string>
     <string name="dismiss_changes_descr">Aldaketa guztiak baztertu egingo dira.</string>
     <string name="show_map_symbols">Erakutsi mapen ikurrak</string>
-    <string name="map_rendering_engine_descr">2. bertsioa (OpenGL) mapak errendatzeko motor azkarragoa da, 2.5D ikuspegia ere badu. 1 bertsioa errendatzea lehenetsia zen OsmAnd 4.3 baino lehen, eta oraindik hobe da gailu zaharrentzako.</string>
+    <string name="map_rendering_engine_descr">1 bertsioa errendatzea lehenetsia zen OsmAnd 4.3 baino lehen, eta oraindik hobe da gailu zaharrentzako.\n2. bertsioa (OpenGL) mapak errendatzeko motor azkarragoa da, 2.5D ikuspegia ere badu.</string>
     <string name="map_rendering_engine">Mapak errendatzeko motorra</string>
     <string name="external_sensors_support">Onartzen diren kanpoko sentsoreak</string>
     <string name="map_center_widget">Koordenatuak: Maparen erdigunea</string>

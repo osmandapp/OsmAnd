@@ -362,7 +362,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 		int elevationAngle = 0;
 		if (zoomParams != null && mapView.getElevationAngle() != DEFAULT_ELEVATION_ANGLE) {
-			elevationAngle  = settings.AUTO_ZOOM_3D_ANGLE.get();
+			elevationAngle = settings.AUTO_ZOOM_3D_ANGLE.get();
 		}
 		double latitude = predictedLocation != null ? predictedLocation.getLatitude() : location.getLatitude();
 		double longitude = predictedLocation != null ? predictedLocation.getLongitude() : location.getLongitude();
@@ -570,7 +570,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
-		// when user start dragging 
+		// when user start dragging
 		setMapLinkedToLocation(false);
 	}
 
@@ -581,7 +581,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				switchCompassToNextMode();
 			} else {
 				compassRequest = System.currentTimeMillis();
-				app.showShortToastMessage(app.getString(R.string.press_again_to_change_the_map_orientation));
+				app.showShortToastMessage(R.string.press_again_to_change_the_map_orientation);
 			}
 		} else {
 			compassRequest = 0;

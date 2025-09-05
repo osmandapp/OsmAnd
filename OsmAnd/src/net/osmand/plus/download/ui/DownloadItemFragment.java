@@ -3,7 +3,6 @@ package net.osmand.plus.download.ui;
 import static net.osmand.plus.download.ui.DownloadResourceGroupFragment.REGION_ID_DLG_KEY;
 
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -177,15 +176,14 @@ public class DownloadItemFragment extends BaseFullScreenDialogFragment implement
 			}
 			buttonView.setOnClickListener(v -> {
 				if (actionButton.getUrl() != null) {
-					AndroidUtils.openUrl(activity, Uri.parse(actionButton.getUrl()), nightMode);
+					AndroidUtils.openUrl(activity, actionButton.getUrl(), nightMode);
 				} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
 					boolean isDownloading = activity.getDownloadThread().isDownloading(indexItem);
 					if (!isDownloading) {
 						activity.startDownload(indexItem);
 					}
 				} else {
-					String text = activity.getString(R.string.download_unsupported_action, actionButton.getActionType());
-					AndroidUtils.getApp(activity).showShortToastMessage(text);
+					AndroidUtils.getApp(activity).showShortToastMessage(R.string.download_unsupported_action, actionButton.getActionType());
 				}
 			});
 			buttonsContainer.addView(buttonView);

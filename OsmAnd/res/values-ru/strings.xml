@@ -4533,7 +4533,7 @@
     <string name="map_widget_ant_bicycle_power">Мощность велосипеда</string>
     <string name="map_widget_rendering_fps">FPS отрисовки карты</string>
     <string name="rendering_engine_failed">Произошел сбой отрисовки карт OsmAnd.</string>
-    <string name="map_rendering_engine_descr">Версия 2 (OpenGL) - это более быстрый механизм отрисовки карт, поддерживающий 2,5D вид. Версия 1 использовалась по умолчанию до выхода OsmAnd 4.3 и по-прежнему предпочтительна для старых устройств.</string>
+    <string name="map_rendering_engine_descr">Версия 1 использовалась по умолчанию до выхода OsmAnd 4.3 и по-прежнему предпочтительна для старых устройств.\nВерсия 2 (OpenGL) - это более быстрый механизм отрисовки карт, поддерживающий 2,5D вид.</string>
     <string name="map_rendering_engine">Движок отрисовки карт</string>
     <string name="purchases_feature_desc_external_sensors">Отображение и запись данных с внешних датчиков: скорость велосипеда, мощность, каденс и частота сердцебиения.</string>
     <string name="map_widget_ant_bicycle_dist">Расстояние на велосипеде</string>
@@ -5552,9 +5552,7 @@
     <string name="speedometer_maximum">Максимум</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Виджет показывает расход топлива транспортного средства на основе расчетов (%/ч)</string>
     <string name="simulate_obd">Имитировать данные OBD</string>
-    <string name="obd_fuel_consumption_rate_l_km">Расход топлива (л/100 км)</string>
     <string name="kpa_unit">кПа</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Виджет показывает расход топлива транспортного средства на основе расчетов (л/100 км)</string>
     <string name="movies_list">Список роликов</string>
     <string name="bt_start_pair_failed">Невозможно инициировать сопряжение с устройством</string>
     <string name="shared_string_dynamic">Динамический</string>
@@ -5707,7 +5705,6 @@
     <string name="intermediate_first">Сначала промежуточный пункт</string>
     <string name="poi_source">Источник POI</string>
     <string name="routing_attr_allow_ferries_name">Разрешить паромы</string>
-    <string name="read_on_wiki">Читать в Википедии</string>
     <string name="position_animation_empty_banner_description">Значок положения перемещается в каждое новое полученное местоположение без анимации.</string>
     <string name="grid_color">Цвет сетки</string>
     <string name="shared_string_edges">По краям</string>
@@ -5741,7 +5738,6 @@
     <string name="read_on">Читайте на %1$s</string>
     <string name="suggest_activate_map_msg">%1$s карта деактивированна,\nактивируйте чтобы просмотреть эту местность.</string>
     <string name="hmd_promo_years">Акция HMD на %1$s лет</string>
-    <string name="show_symbols_debug_info">Показать информацию для отладки</string>
     <string name="shared_string_flat">Плоско</string>
     <string name="shared_string_switch">Переключатель</string>
     <string name="battery_level">Уровень заряда батареи</string>

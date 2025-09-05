@@ -334,7 +334,7 @@ public class FavouritesHelper {
 			}
 		}
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 		return true;
 	}
@@ -399,10 +399,10 @@ public class FavouritesHelper {
 		favouritesHelper.saveCurrentPointsIntoFile(true);
 
 		if (!addedPoints.isEmpty()) {
-			app.showShortToastMessage(app.getString(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size()));
+			app.showShortToastMessage(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size());
 		}
 		if (!duplicatePoints.isEmpty()) {
-			app.showShortToastMessage(app.getString(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size()));
+			app.showShortToastMessage(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size());
 		}
 	}
 
@@ -535,7 +535,7 @@ public class FavouritesHelper {
 	public boolean favouritePassed(@NonNull FavouritePoint point, boolean passed, boolean saveImmediately) {
 		point.setVisitedDate(passed ? System.currentTimeMillis() : 0);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 		FavoriteGroup group = getOrCreateGroup(point);
 		runSyncWithMarkers(group);
@@ -583,7 +583,7 @@ public class FavouritesHelper {
 			tmpFlatGroups.remove(group.getName());
 			flatGroups = tmpFlatGroups;
 			if (saveImmediately) {
-				saveCurrentPointsIntoFile(false);
+				saveCurrentPointsIntoFile(true);
 			}
 			removeFromMarkers(group);
 			return true;
@@ -753,7 +753,7 @@ public class FavouritesHelper {
 		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 	}
 
@@ -774,7 +774,7 @@ public class FavouritesHelper {
 		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 	}
 
@@ -796,7 +796,7 @@ public class FavouritesHelper {
 		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 	}
 
@@ -875,6 +875,7 @@ public class FavouritesHelper {
 			favoriteGroup.setColor(pointsGroup.getColor());
 			favoriteGroup.setIconName(pointsGroup.getIconName());
 			favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+			favoriteGroup.setVisible(!pointsGroup.isHidden());
 		}
 	}
 

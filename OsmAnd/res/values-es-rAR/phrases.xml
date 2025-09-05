@@ -151,7 +151,7 @@
     <string name="poi_toll_booth">Cabina de peaje</string>
     <string name="poi_border_control">Control fronterizo</string>
     <string name="poi_traffic_calming_bump">Lomo de burro (pequeño);Reductor de velocidad;Lomada;Lomo de toro;Badén;Banda de frenado</string>
-    <string name="poi_traffic_calming_hump">Resalte (grande);Lomada (grande);Reductor de velocidad (lomada, grande)</string>
+    <string name="poi_traffic_calming_hump">Reductor de velocidad (lomada grande);Resalte (grande);Lomada (grande)</string>
     <string name="poi_traffic_calming_cushion">Cojín berlinés</string>
     <string name="poi_traffic_calming_chicane">Chicana</string>
     <string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
@@ -3057,7 +3057,7 @@
     <string name="poi_life_ring">Aro salvavidas</string>
     <string name="poi_zoo_type">Tipo de zoológico</string>
     <string name="poi_zoo_petting_zoo">Zoológico interactivo</string>
-    <string name="poi_zoo_wildlife_park">Reserva natural</string>
+    <string name="poi_zoo_wildlife_park">Parque de vida silvestre</string>
     <string name="poi_zoo_enclosure">Recinto</string>
     <string name="poi_zoo_safari_park">Parque safari</string>
     <string name="poi_zoo_birds">Aves</string>
@@ -5032,7 +5032,6 @@
     <string name="poi_latter_day_saints_church">Iglesia de los santos del último día</string>
     <string name="poi_evangelical_lutheran_church">Iglesia evangélica luterana</string>
     <string name="poi_mennonite_church">Iglesia menonita</string>
-    <string name="poi_landmark_church">Iglesia emblemática</string>
     <string name="poi_adventist_church">Iglesia adventista</string>
     <string name="poi_uniting_church">Iglesia unida</string>
     <string name="poi_apostolic_church">Iglesia apostólica</string>
@@ -5077,7 +5076,6 @@
     <string name="poi_denomination_macedonian_orthodox">Ortodoxa macedonia</string>
     <string name="poi_denomination_church_of_god">Iglesia de Dios</string>
     <string name="poi_denomination_foursquare">Iglesia Cuadrangular</string>
-    <string name="poi_denomination_landmark">Landmarkismo</string>
     <string name="poi_denomination_anabaptist">Anabaptista</string>
     <string name="poi_denomination_thai_thammayut">Dhammayuttika Nikaya</string>
     <string name="poi_denomination_african_methodist_episcopal">Episcopal Metodista Africana</string>
@@ -5137,7 +5135,6 @@
     <string name="poi_denomination_kardecista">Kardecista</string>
     <string name="poi_denomination_free_church_of_scotland">Iglesia Libre de Escocia</string>
     <string name="poi_denomination_catholic_apostolic">Católica apostólica</string>
-    <string name="poi_denomination_iglesia_filipina_independiente">Iglesia Filipina Independiente</string>
     <string name="poi_denomination_sephardi">Sefardí</string>
     <string name="poi_denomination_welsh_independent">Independiente de Gales</string>
     <string name="poi_canoe_put_in">Ingreso de canoas</string>

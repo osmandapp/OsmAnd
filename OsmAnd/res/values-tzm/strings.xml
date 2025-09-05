@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="shared_string_local_maps">Takaṛḍa tadɣarant</string>
     <string name="icon_group_service">Tanafut</string>
@@ -18,4 +18,9 @@
     <string name="shared_string_status"/>
     <string name="shared_string_sort"/>
     <string name="shared_string_back"/>
+    <string name="liter_single"></string>
+    <string name="imperial_gallon"></string>
+    <string name="us_gallon"></string>
+    <string name="kilometers"></string>
+    <string name="miles"></string>
 </resources>

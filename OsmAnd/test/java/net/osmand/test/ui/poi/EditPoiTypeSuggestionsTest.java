@@ -72,7 +72,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		while (!app.getPoiTypes().isInit()){
 			Thread.sleep(50);
 		}
-		app.getPoiTypes().setPoiTranslator(new MapPoiTypesTranslator(app, "fr"));
+		app.getPoiTypes().setPoiTranslator(new MapPoiTypesTranslator(app, new Locale("fr")));
 		skipAppStartDialogs(app);
 
 		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
@@ -83,11 +83,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		app.runInUIThread(() -> PluginsHelper.enablePlugin(mapActivity, app, osmEditingPlugin, true));
 
 		LatLon latLon = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-		EditPoiDialogFragment editPoiDialogFragment =
-				EditPoiDialogFragment.createAddPoiInstance(latLon.getLatitude(), latLon.getLongitude(),
-						app);
-		editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
-				EditPoiDialogFragment.TAG);
+		EditPoiDialogFragment.showAddPoiInstance(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 
 		//check: magasin de v
 		writeText(R.id.poiTypeEditText, "magasin de v");

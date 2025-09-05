@@ -101,13 +101,13 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 					}
 					notifyImportFinished();
 				} else if (empty) {
-					app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
+					app.showShortToastMessage(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error));
 				}
 			});
 		} else {
 			hideProgress();
 			notifyImportFinished();
-			app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
+			app.showShortToastMessage(R.string.file_import_error, name, error);
 		}
 	}
 

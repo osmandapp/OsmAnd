@@ -131,7 +131,7 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 		shareButton = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		shareButton.setOnClickListener(v -> {
 			if (selectedItems.isEmpty()) {
-				app.showShortToastMessage(getString(R.string.no_items_selected_warning));
+				app.showShortToastMessage(R.string.no_items_selected_warning);
 			} else {
 				shareItems();
 			}
