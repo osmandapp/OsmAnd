@@ -46,7 +46,9 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			@Nullable PlaceDetailsObject detailsObject) {
 		super(mapActivity);
 		this.wpt = wpt;
-		setAmenity(detailsObject.getSyntheticAmenity());
+		if (detailsObject != null) {
+			setAmenity(detailsObject.getSyntheticAmenity());
+		}
 		setShowNearestWiki(true);
 		acquireAmenityExtensions();
 	}

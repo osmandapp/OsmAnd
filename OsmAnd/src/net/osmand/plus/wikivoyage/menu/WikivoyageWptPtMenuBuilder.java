@@ -32,7 +32,7 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	public WikivoyageWptPtMenuBuilder(@NonNull MapActivity activity, @NonNull WptPt wpt,
 			@Nullable PlaceDetailsObject detailsObject) {
 		super(activity, wpt, detailsObject);
-		updateImageLinkAndDescriptionTokens(detailsObject.getWptPt());
+		updateImageLinkAndDescriptionTokens(wpt);
 	}
 
 	public void updateImageLinkAndDescriptionTokens(@NonNull WptPt wpt) {
