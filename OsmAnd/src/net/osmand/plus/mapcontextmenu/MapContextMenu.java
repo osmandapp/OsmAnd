@@ -50,6 +50,7 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
@@ -1013,10 +1014,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void buttonFavoritePressed() {
 		Object object = getObject();
-		if (object instanceof FavouritePoint) {
+		FavouritePoint point = object instanceof FavouritePoint ? (FavouritePoint) object:null;
+		if (point == null && object instanceof PlaceDetailsObject detailsObject) {
+			point = detailsObject.getFavouritePoint();
+		}
+		if (point != null) {
 			FavoritePointEditor favoritePointEditor = getFavoritePointEditor();
 			if (favoritePointEditor != null) {
-				favoritePointEditor.edit((FavouritePoint) object);
+				favoritePointEditor.edit(point);
 			}
 		} else {
 			callMenuAction(true, new MenuAction() {
@@ -1217,10 +1222,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void editWptPt() {
 		Object object = getObject();
-		if (object instanceof WptPt) {
+		WptPt wptPt = object instanceof WptPt ? (WptPt) object:null;
+
+		if (wptPt == null && object instanceof PlaceDetailsObject detailsObject) {
+			wptPt = detailsObject.getWptPt();
+		}
+		if (wptPt != null) {
 			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 			if (wptPtPointEditor != null) {
-				wptPtPointEditor.edit((WptPt) object);
+				wptPtPointEditor.edit(wptPt);
 			}
 		}
 	}
