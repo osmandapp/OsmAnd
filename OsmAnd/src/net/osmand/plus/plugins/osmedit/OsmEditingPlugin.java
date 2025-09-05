@@ -578,18 +578,21 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
-		return AmenityMenuController.class.isAssignableFrom(menuControllerClass)
-				|| menuControllerClass == RenderedObjectMenuController.class;
+	public boolean isMenuControllerSupported(MenuController menuController) {
+		Amenity amenity = menuController.getBuilder().getAmenity();
+		return AmenityMenuController.class.isAssignableFrom(menuController.getClass())
+				|| menuController.getClass() == RenderedObjectMenuController.class || amenity != null;
 	}
 
 	@Override
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
-		Amenity amenity = null;
-		if (object instanceof Amenity) {
-			amenity = (Amenity) object;
-		} else if (object instanceof BaseDetailsObject detailsObject) {
-			amenity = detailsObject.getSyntheticAmenity();
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+			@Nullable Object object, @Nullable Amenity amenity) {
+		if (amenity == null) {
+			if (object instanceof Amenity) {
+				amenity = (Amenity) object;
+			} else if (object instanceof BaseDetailsObject detailsObject) {
+				amenity = detailsObject.getSyntheticAmenity();
+			}
 		}
 		String link = null;
 		if (amenity != null) {

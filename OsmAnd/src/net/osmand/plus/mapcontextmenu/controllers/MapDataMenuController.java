@@ -43,7 +43,7 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
+import net.osmand.plus.views.layers.SelectedMapObject;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

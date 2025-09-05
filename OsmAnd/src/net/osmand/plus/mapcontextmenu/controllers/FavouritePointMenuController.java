@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -40,33 +41,34 @@ public class FavouritePointMenuController extends MenuController {
 
 	private TransportStopController transportStopController;
 
-	public FavouritePointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull FavouritePoint fav) {
-		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
-		this.fav = fav;
+	public FavouritePointMenuController(@NonNull MapActivity activity,
+			@NonNull PointDescription description,
+			@NonNull FavouritePoint point, @Nullable Amenity amenity) {
+		super(new FavouritePointMenuBuilder(activity, point, amenity), description, activity);
+		this.fav = point;
 
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = activity.getMyApplication();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 
-		mapMarker = markersHelper.getMapMarker(fav);
+		mapMarker = markersHelper.getMapMarker(point);
 		if (mapMarker == null) {
-			mapMarker = markersHelper.getMapMarker(new LatLon(fav.getLatitude(), fav.getLongitude()));
+			mapMarker = markersHelper.getMapMarker(new LatLon(point.getLatitude(), point.getLongitude()));
 		}
 		if (mapMarker != null && mapMarker.history && !app.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 			mapMarker = null;
 		}
 		if (mapMarker != null) {
 			MapMarkerMenuController markerMenuController =
-					new MapMarkerMenuController(mapActivity, mapMarker.getPointDescription(mapActivity), mapMarker);
+					new MapMarkerMenuController(activity, mapMarker.getPointDescription(activity), mapMarker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		}
 		if (getObject() instanceof TransportStop) {
 			TransportStop stop = (TransportStop) getObject();
-			transportStopController = new TransportStopController(mapActivity, pointDescription, stop);
+			transportStopController = new TransportStopController(activity, description, stop);
 			transportStopController.processRoutes();
 		}
-
-		Amenity amenity = getBuilder().getAmenity();
+		amenity = getBuilder().getAmenity();
 		if (amenity != null) {
 			openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
 		}
@@ -215,10 +217,6 @@ public class FavouritePointMenuController extends MenuController {
 		} else {
 			return "";
 		}
-	}
-
-	private FavouritePointMenuBuilder getBuilder() {
-		return (FavouritePointMenuBuilder) builder;
 	}
 
 	@Override

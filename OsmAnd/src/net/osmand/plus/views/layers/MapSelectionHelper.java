@@ -48,7 +48,6 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
@@ -240,7 +239,7 @@ public class MapSelectionHelper {
 				} else if (renderedObject.getLabelLatLon() != null) {
 					result.setObjectLatLon(renderedObject.getLabelLatLon());
 				}
-				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.getPointLatLon();
+				LatLon searchLatLon = result.getObjectLatLon() != null ? result.getObjectLatLon() : result.getPointLatLon();
 
 				if (isOsmRoute && !osmRoutesAlreadyAdded) {
 					osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
@@ -327,7 +326,7 @@ public class MapSelectionHelper {
 					long id = jniAmenity.getId().getId().longValue();
 					Amenity requestAmenity = new Amenity();
 					requestAmenity.setId(id);
-					requestAmenity.setLocation(result.objectLatLon);
+					requestAmenity.setLocation(result.getObjectLatLon());
 
 					AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 					AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names);
@@ -371,7 +370,7 @@ public class MapSelectionHelper {
 							if (allowAmenityObjects) {
 								IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 								if (onPathMapSymbol == null) {
-									LatLon latLon = result.objectLatLon;
+									LatLon latLon = result.getObjectLatLon();
 									if (tags.containsKey(TAG_POI_LAT_LON)) {
 										LatLon l = parsePoiLatLon(tags.get(TAG_POI_LAT_LON));
 										latLon = l == null ? latLon : l;

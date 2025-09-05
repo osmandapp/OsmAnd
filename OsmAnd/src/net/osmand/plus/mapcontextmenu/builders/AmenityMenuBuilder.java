@@ -64,23 +64,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 	public static final String WIKIPEDIA_ORG_WIKI_URL_PART = ".wikipedia.org/wiki/";
 
-	protected Amenity amenity;
-
 	protected AmenityUIHelper amenityUIHelper;
 	protected Map<String, String> extensions;
 	protected AdditionalInfoBundle infoBundle;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
-		this.amenity = amenity;
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
-	}
-
-	@NonNull
-	public Amenity getAmenity() {
-		return amenity;
 	}
 
 	@Override

@@ -42,11 +42,13 @@ public class AmenitySearcher {
 
     public static class Request {
 
-       private final LatLon latLon;
-       private final Long osmId;
-       private final EntityType type;
-       private final String wikidata;
-       private  Collection<String> names;
+        private final LatLon latLon;
+        private final Long osmId;
+        private final EntityType type;
+        private final String wikidata;
+
+        private Collection<String> names;
+        private boolean checkOriginName;
 
         public Request(MapObject mapObject) {
             osmId = ObfConstants.getOsmObjectId(mapObject);
@@ -74,8 +76,13 @@ public class AmenitySearcher {
         }
 
         public Request(MapObject mapObject, List<String> names) {
+            this(mapObject, names, false);
+        }
+
+        public Request(MapObject mapObject, List<String> names, boolean checkOriginName) {
             this(mapObject);
             this.names = names;
+            this.checkOriginName = checkOriginName;
         }
     }
 
@@ -121,6 +128,11 @@ public class AmenitySearcher {
         result.addAll(travelMaps);
 
         return result;
+    }
+
+    public List<Amenity> searchAmenities(LatLon latLon, Settings settings) {
+        QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_RADIUS);
+        return searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true, settings.fileVisibility);
     }
 
     public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter, QuadRect rect,
@@ -207,34 +219,40 @@ public class AmenitySearcher {
 
     public BaseDetailsObject searchDetailedObject(Request request, Settings settings) {
         LatLon latLon = request.latLon;
-        Long osmId = request.osmId;
-        String wikidata = request.wikidata;
-        Collection<String> names = request.names;
+		if (latLon != null) {
+            int searchRadius = request.type == EntityType.RELATION ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
+            QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
 
-		if (latLon == null) {
-            return null;
-        }
-        int searchRadius = request.type == EntityType.RELATION ? AMENITY_SEARCH_RADIUS_FOR_RELATION : AMENITY_SEARCH_RADIUS;
-        QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
+            List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true, settings.fileVisibility);
 
-        List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true, settings.fileVisibility);
-
-        List<Amenity> filtered = new ArrayList<>();
-        if (osmId > 0 || wikidata != null) {
-            filtered = filterByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
-        }
-        if (Algorithms.isEmpty(filtered) && !Algorithms.isEmpty(names)) {
-            Amenity amenity = findByName(amenities, names, latLon, settings);
-            if (amenity != null) {
-                filtered = filterByOsmIdOrWikidata(
-                        amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
+            List<Amenity> filtered = filterAmenities(amenities, request, settings);
+            if (!Algorithms.isEmpty(filtered)) {
+                return new BaseDetailsObject(filtered, settings.language().get());
             }
         }
-        if (!Algorithms.isEmpty(filtered)) {
-	        return new BaseDetailsObject(filtered, settings.language().get());
-        }
-
         return null;
+    }
+
+    public List<Amenity> filterAmenities(Collection<Amenity> amenities, Request request, Settings settings) {
+        List<Amenity> filtered = new ArrayList<>();
+        LatLon latLon = request.latLon;
+        if (latLon != null) {
+            Long osmId = request.osmId;
+            String wikidata = request.wikidata;
+            if (osmId > 0 || wikidata != null) {
+                filtered = filterByOsmIdOrWikidata(amenities, osmId, latLon, wikidata);
+            }
+            Collection<String> names = request.names;
+            boolean checkOriginName = request.checkOriginName;
+            if (Algorithms.isEmpty(filtered) && !Algorithms.isEmpty(names)) {
+                Amenity amenity = findByName(amenities, names, latLon, settings, checkOriginName);
+                if (amenity != null) {
+                    filtered = filterByOsmIdOrWikidata(
+                            amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
+                }
+            }
+        }
+        return filtered;
     }
 
     private List<Amenity> filterByOsmIdOrWikidata(Collection<Amenity> amenities, long id, LatLon point, String wikidata) {
@@ -260,13 +278,13 @@ public class AmenitySearcher {
         return result;
     }
 
-    private Amenity findByName(Collection<Amenity> amenities, Collection<String> names, LatLon searchLatLon,
-                               Settings settings) {
+    private Amenity findByName(Collection<Amenity> amenities, Collection<String> names,
+                               LatLon searchLatLon, Settings settings, boolean checkOriginName) {
         if (!Algorithms.isEmpty(names) && !Algorithms.isEmpty(amenities)) {
             return amenities.stream()
                     .sorted(Comparator.comparingDouble(a -> MapUtils.getDistance(a.getLocation(), searchLatLon)))
                     .filter(amenity -> !amenity.isClosed())
-                    .filter(amenity -> namesMatcher(amenity, names, settings, false))
+                    .filter(amenity -> namesMatcher(amenity, names, settings, false, checkOriginName))
                     .findAny()
                     .orElseGet(() ->
                             amenities.stream()
@@ -280,14 +298,14 @@ public class AmenitySearcher {
                                     .findAny()
                                     .orElseGet(() ->
                                             amenities.stream()
-                                                    .filter(amenity -> namesMatcher(amenity, names, settings, true))
+                                                    .filter(amenity -> namesMatcher(amenity, names, settings, true, checkOriginName))
                                                     .findAny().orElse(null)));
         }
         return null;
     }
 
     private boolean namesMatcher(Amenity amenity, Collection<String> matchList, Settings settings,
-                                 boolean matchAllLanguagesAndAltNames) {
+                                 boolean matchAllLanguagesAndAltNames, boolean checkOriginName) {
         String lang = settings.language.get();
         boolean transliterate = settings.transliterate.get();
 
@@ -333,7 +351,11 @@ public class AmenitySearcher {
                 }
             }
         }
-
+        if (checkOriginName) {
+            if (matchList.contains(amenity.toStringEn())) {
+                return true;
+            }
+        }
         return false;
     }
 
