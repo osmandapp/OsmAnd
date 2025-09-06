@@ -1674,7 +1674,7 @@
     <string name="osm_edit_created_poi">Létrehozott OSM POI</string>
     <string name="map_legend">Térkép jelkulcs</string>
     <string name="favourites_edit_dialog_title">Kedvenc információk</string>
-    <string name="share_osm_edits_subject">OSM-szerkesztések megosztása az OsmAnddal</string>
+    <string name="share_osm_edits_subject">OsmAnddal megosztott OSM-szerkesztések</string>
     <string name="lang_nds">alnémet</string>
     <string name="lang_mk">macedón</string>
     <string name="lang_fy">fríz</string>
@@ -2443,7 +2443,7 @@
     <string name="hide_full_description">Teljes leírás elrejtése</string>
     <string name="show_full_description">Teljes leírás megjelenítése</string>
     <string name="open_wikipedia_link_online">Wikipédia-link megnyitása online</string>
-    <string name="open_wikipedia_link_online_description">A hivatkozás a böngészőben fog megnyílni.</string>
+    <string name="open_wikipedia_link_online_description">A hivatkozás böngészőben fog megnyílni.</string>
     <string name="read_wikipedia_offline">Wikipédia olvasása offline</string>
     <string name="download_all">Összes letöltése</string>
     <string name="shared_string_restart">App újraindítása</string>
@@ -3161,7 +3161,7 @@
     <string name="clear_recorded_data_warning">Törli a felvett adatokat\?</string>
     <string name="importing_from">Adatok importálása innen: %1$s</string>
     <string name="shared_string_importing">Importálás</string>
-    <string name="slope_read_more">A lejtési viszonyokról itt olvashat: %1$s.</string>
+    <string name="slope_read_more">A lejtviszonyokról itt olvashat: %1$s.</string>
     <string name="shared_string_rendering_style">Megjelenítés stílusa</string>
     <string name="shared_string_routing">Útvonaltervezés</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
@@ -3183,10 +3183,10 @@
     <string name="replace_all">Az összes cseréje</string>
     <string name="shared_string_terrain">Domborzat</string>
     <string name="hillshade_description">A domborzatárnyékolási térkép sötét árnyalatokkal jeleníti meg a lejtést, hegycsúcsokat és síkságokat.</string>
-    <string name="slope_description">A lejtésviszony színezéssel jeleníti meg a terep meredekségét.</string>
+    <string name="slope_description">A lejtviszony színezéssel jeleníti meg a terep meredekségét.</string>
     <string name="terrain_slider_description">Állítsa be a legkisebb és legnagyobb nagyítási szintet, amelyen a réteg megjelenjen.</string>
     <string name="hillshade_download_description">A domborzatárnyékolás térképen való megjelenítéséhez további térképek szükségesek.</string>
-    <string name="slope_download_description">A lejtési viszonyok térképen való megjelenítéséhez további térképek szükségesek.</string>
+    <string name="slope_download_description">A lejtviszonyok térképen való megjelenítéséhez további térképek szükségesek.</string>
     <string name="shared_string_transparency">Áttetszőség</string>
     <string name="shared_string_zoom_levels">Nagyítási szintek</string>
     <string name="shared_string_legend">Jelmagyarázat</string>
@@ -3197,7 +3197,7 @@
     <string name="select_distance_route_will_recalc">Jelölje ki a távolságot, amelytől kezdve az útvonal újra lesz számítva.</string>
     <string name="recalculate_route_distance_promo">Az útvonal újrastervezésre kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
     <string name="n_items_of_z">%1$s a %2$s-ból</string>
-    <string name="download_slope_maps">Lejtési viszonyok</string>
+    <string name="download_slope_maps">Lejtviszonyok</string>
     <string name="quick_action_terrain_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzati réteget.</string>
     <string name="delete_description">Leírás törlése</string>
     <string name="add_description">Leírás hozzáadása</string>
@@ -3781,7 +3781,7 @@
     <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak közötti távolságot. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
-    <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
+    <string name="route_line_use_gradient_coloring">Az útvonal a lejtviszonyok szerint színezett.</string>
     <string name="shared_string_min_height">Min. magasság</string>
     <string name="shared_string_max_height">Max. magasság</string>
     <string name="use_system_language">A rendszer nyelvének használata</string>
@@ -5820,4 +5820,6 @@
     <string name="kilometers">Kilométer</string>
     <string name="miles">Mérföld</string>
     <string name="mpg">Mérf./gal</string>
+    <string name="access_pinch_zoom_magnification">Csippentéses nagyítás engedélyezése</string>
+    <string name="access_pinch_zoom_magnification_descr">Csippentő mozdulatoknál a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
 </resources>
