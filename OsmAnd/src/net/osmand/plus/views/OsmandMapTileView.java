@@ -107,6 +107,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final float MARGIN_PERCENT_TO_FIT = 0.8f;
 	private static final int CHANGE_LOCATION_DIFF_METERS = 2;
 
+	private static final int LIMITED_MAX_FRAME_RATE = 20;
+	private static final int USER_INTERACTION_MAX_FRAME_RATE = 120;
+	private static final int ANIMATION_MAX_FRAME_RATE = 60;
+
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
 	private final FPSMeasurement additional = new FPSMeasurement();
@@ -2575,15 +2579,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return app.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 	}
 
-	public void applyBatterySavingModeSetting(MapRendererView mapRenderer) {
+	public void applyMaximumFrameRate(@NonNull MapRendererView mapRenderer) {
 		if (settings.BATTERY_SAVING_MODE.get()) {
-			mapRenderer.enableBatterySavingMode();
+			mapRenderer.setMaximumFrameRate(LIMITED_MAX_FRAME_RATE);
 		} else {
-			mapRenderer.disableBatterySavingMode();
+			mapRenderer.setMaximumFrameRate(touchActive ? USER_INTERACTION_MAX_FRAME_RATE : ANIMATION_MAX_FRAME_RATE);
 		}
 	}
 
-	public void applyDebugSettings(MapRendererView mapRenderer) {
+	public void applyDebugSettings(@NonNull MapRendererView mapRenderer) {
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		if (plugin != null) {
 			boolean show = settings.DEBUG_RENDERING_INFO.get();
