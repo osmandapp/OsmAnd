@@ -5563,13 +5563,11 @@
     <string name="obd_fuel_level_percent">Magn eldsneytis (%)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Hraði eldsneytiseyðslu</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Birtir eldsneytiseyðslu farartækis út frá útreikningum (%/klst)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Birtir eldsneytiseyðslu farartækis út frá útreikningum (L/100 km)</string>
     <string name="obd_fuel_pressure">Þrýstingur eldsneytis</string>
     <string name="simulate_obd">Líkja eftir OBD-gögnum</string>
     <string name="obd_not_connected_to_device">Aftengt frá %s</string>
     <string name="obd_connecting_to_device">Tengist við %s</string>
     <string name="bt_start_pair_failed">Mistókst að setja af stað pörun við tækið</string>
-    <string name="obd_fuel_consumption_rate_l_km">Eldsneytiseyðsla (L/100 km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Eldsneytiseyðsla (%/klst</string>
     <string name="obd_device_forget_sensor">Gleyma skynjara</string>
     <string name="obd_ambient_air_temp_desc">Sýnir hitastigið fyrir utan farartækið.</string>

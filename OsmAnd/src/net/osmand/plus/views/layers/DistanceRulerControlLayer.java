@@ -57,7 +57,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private static final int VERTICAL_OFFSET = 15;
 	private static final long DRAW_TIME = 4000;
-	private static final long DELAY_BEFORE_DRAW = 200;
+	private static final long DELAY_BEFORE_DRAW = 50;
 	private static final int DISTANCE_TEXT_SIZE = 16;
 	private static final int LABEL_OFFSET = 20;
 

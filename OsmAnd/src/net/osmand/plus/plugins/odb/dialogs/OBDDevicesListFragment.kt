@@ -68,10 +68,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 			UiUtilities.createClickableSpannable(docsLinkText, docsLinkText) { _: Void? ->
 				val activity = activity
 				if (activity != null) {
-					AndroidUtils.openUrl(
-						activity,
-						Uri.parse(getString(R.string.docs_obd_sensors)),
-						nightMode)
+					AndroidUtils.openUrl(activity, R.string.docs_obd_sensors, nightMode)
 				}
 				false
 			}
@@ -262,7 +259,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
 				OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
 			}
-			app.showShortToastMessage(app.getString(textId, deviceInfo.name))
+			app.showShortToastMessage(textId, deviceInfo.name)
 		}
 		updatePairedSensorsList()
 	}

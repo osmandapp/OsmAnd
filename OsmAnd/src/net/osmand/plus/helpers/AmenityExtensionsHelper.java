@@ -42,18 +42,6 @@ public class AmenityExtensionsHelper {
 		this.app = app;
 	}
 
-	@NonNull
-	public Pair<Amenity, Map<String, String>> getAmenityWithExtensions(
-			@NonNull Map<String, String> extensions, @Nullable String originName,
-			double lat, double lon) {
-		Amenity amenity = null;
-		if (!Algorithms.isEmpty(originName)) {
-			amenity = findAmenity(originName, lat, lon);
-		}
-		extensions = getUpdatedAmenityExtensions(extensions, amenity);
-		return Pair.create(amenity, extensions);
-	}
-
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
 		List<String> names = Collections.singletonList(nameEn);
@@ -62,7 +50,7 @@ public class AmenityExtensionsHelper {
 
 		Amenity requestAmenity = new Amenity();
 		requestAmenity.setLocation(new LatLon(lat, lon));
-		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names);
+		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
 		return searcher.searchDetailedAmenity(request, settings);
 	}
 

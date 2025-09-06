@@ -59,8 +59,6 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.shared.settings.enums.AltitudeMetrics;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -366,7 +364,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	private boolean isKeyToSkip(@NonNull String key) {
-		return startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, "lang_yes")
+		return startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
 				|| equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
 				|| (key.equals("note") && !osmEditingEnabled)
 				|| MapObject.isNameLangTag(key)
@@ -796,11 +794,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			if (description == null && locale != null && Algorithms.stringsEqual(locale.getLanguage(), "en")) {
 				description = localizations.get(key);
 			}
-			if (description == null) {
-				Map.Entry<String, String> entry = new ArrayList<>(localizations.entrySet()).get(0);
-				description = entry.getValue();
-			}
-			return Pair.create(description, locale);
+			return description != null ? Pair.create(description, locale) : null;
 		}
 		String description = amenity.getAdditionalInfo(key);
 		if (!Algorithms.isEmpty(description)) {

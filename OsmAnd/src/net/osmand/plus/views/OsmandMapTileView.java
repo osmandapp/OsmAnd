@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.os.Handler;
@@ -45,6 +46,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -129,6 +131,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private CanvasColors canvasColors;
 	private Boolean nightMode;
+	private QuadPoint cachedAACanvasOffset = new QuadPoint();
 
 	private float minAllowedElevationAngle = MIN_ALLOWED_ELEVATION_ANGLE;
 
@@ -1258,6 +1261,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (mapRenderer != null) {
 					layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
 				}
+				updateAACanvasOffset();
 				layer.onDraw(canvas, tileBox, drawSettings);
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
@@ -1274,9 +1278,31 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	private void updateAACanvasOffset() {
+		cachedAACanvasOffset = new QuadPoint();
+		QuadPoint center = getRotatedTileBox().getCenterPixelPoint();
+		if (app.getOsmandMap().getMapView().isCarView()) {
+			NavigationSession navigationSession = app.getCarNavigationSession();
+			if (navigationSession != null) {
+				SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
+				if (surfaceRenderer != null) {
+					Rect visibleArea = surfaceRenderer.getVisibleArea();
+					if (visibleArea != null) {
+						QuadPoint canvasCenter = new QuadPoint(visibleArea.left + (visibleArea.right - visibleArea.left) / 2f, visibleArea.top + (visibleArea.bottom - visibleArea.top) / 2f);
+						cachedAACanvasOffset = new QuadPoint(canvasCenter.x - center.x, canvasCenter.y - center.y);
+					}
+				}
+			}
+		}
+	}
+
+	public QuadPoint getAACanvasOffset() {
+		return cachedAACanvasOffset;
+	}
+
 	protected void drawMapPosition(Canvas canvas, float x, float y) {
-		canvas.drawCircle(x, y, 3 * getCurrentDensity(), paintCenter);
-		canvas.drawCircle(x, y, 7 * getCurrentDensity(), paintCenter);
+		canvas.drawCircle(x + cachedAACanvasOffset.x, y + cachedAACanvasOffset.y, 3 * getCurrentDensity(), paintCenter);
+		canvas.drawCircle(x + cachedAACanvasOffset.x, y + cachedAACanvasOffset.y, 7 * getCurrentDensity(), paintCenter);
 	}
 
 	private void refreshBufferImage(@NonNull DrawSettings drawSettings) {
@@ -2102,8 +2128,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return animatedMapMarkersThread;
 	}
 
+	public void setPinchZoomMagnificationEnabled(boolean enabled) {
+		MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled = enabled;
+	}
+
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener, DoubleTapZoomListener {
 
+		public static boolean isPinchZoomMagnificationEnabled = false;
 		private static final float ZONE_0_ANGLE_THRESHOLD = 5;
 		private static final float ZONE_1_ANGLE_THRESHOLD = 15;
 		private static final float ZONE_2_ANGLE_THRESHOLD = 20;
@@ -2158,6 +2189,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					app.showToastMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(
 							p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), app));
 				}
+			}
+
+			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
+				mapRenderer.setViewportScale(0.0, false);
+				changeZoomPosition((float) 0, 0);
 			}
 		}
 
@@ -2300,7 +2336,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (deltaZoom != 0 || relAngle != 0) {
-				changeZoomPosition((float) deltaZoom, relAngle);
+				if (mapRenderer != null && isPinchZoomMagnificationEnabled && relativeToStart > 1.0) {
+					mapRenderer.setViewportScale(relativeToStart, false);
+
+					RotatedTileBox calc = initialViewport.copy();
+					float calcRotate = calc.getRotate() + relAngle;
+
+					int multiTouchCenterX;
+					int multiTouchCenterY;
+					if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
+						multiTouchCenterX = (int) multiTouchSupport.getCenterPoint().x;
+						multiTouchCenterY = (int) multiTouchSupport.getCenterPoint().y;
+					} else {
+						multiTouchCenterX = (int) initialMultiTouchCenterPoint.x;
+						multiTouchCenterY = (int) initialMultiTouchCenterPoint.y;
+					}
+
+					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
+					refreshMap();
+				} else {
+					changeZoomPosition((float) deltaZoom, relAngle);
+				}
 			}
 		}
 

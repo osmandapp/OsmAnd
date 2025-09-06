@@ -5973,12 +5973,10 @@
     <string name="bt_start_pair_failed">Tidak dapat memulai penyandingan dengan perangkat</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarka perhitungan (%/j)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Tingkat konsumsi bahan bakar (L/100 km)</string>
     <string name="obd_not_connected_to_device">Terputus dari %s</string>
     <string name="obd_connected_to_device">Terhubung ke %s</string>
     <string name="shared_string_dynamic">Dinamis</string>
     <string name="obd_connecting_to_device">Menghubungkan ke %s</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarkan perhitungan (L/100 km)</string>
     <string name="simulate_obd">Simulasi data obd</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Tekanan bahan bakar</string>
@@ -6176,4 +6174,5 @@
     <string name="deleting">Menghapus…</string>
     <string name="release_5_1">• Menambahkan dukungan untuk pembelian web dan lintas platform\n\n • Memindahkan unit Suhu ke pengaturan Umum untuk akses yang lebih mudah\n\n • Menambahkan indikator daya baterai untuk sensor BLE\n\n • UI baru yang lebih intuitif untuk pemilihan titik di Navigasi\n\n • Visibilitas widget yang ditingkatkan dengan garis besar baru\n\n • Menambahkan penganalisis Tanjakan/Turunan\n\n • Integrasi Wikipedia &amp; Wikivoyage yang diperluas untuk lebih banyak POI.</string>
     <string name="show_rasterization_debug_tile">Tampilkan informasi rasterisasi ubin</string>
+    <string name="show_local_names">Tampilkan nama lokal</string>
 </resources>

@@ -49,7 +49,6 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		this.detailsObject = detailsObject;
 	}
 
-
 	@Override
 	protected void buildDescription(View view) {
 		List<Amenity> wikiAmenities = getWikiAmenities();

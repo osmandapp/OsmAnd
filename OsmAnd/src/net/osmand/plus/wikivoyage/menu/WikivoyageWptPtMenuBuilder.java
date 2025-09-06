@@ -3,13 +3,16 @@ package net.osmand.plus.wikivoyage.menu;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import net.osmand.plus.utils.PicassoUtils;
-import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.data.Amenity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
+import net.osmand.plus.utils.PicassoUtils;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -26,8 +29,9 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	private String mainImageUrl;
 	private HashMap<String, String> descTokens;
 
-	public WikivoyageWptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
-		super(mapActivity, wpt);
+	public WikivoyageWptPtMenuBuilder(@NonNull MapActivity activity, @NonNull WptPt wpt,
+			@Nullable PlaceDetailsObject detailsObject) {
+		super(activity, wpt, detailsObject);
 		updateImageLinkAndDescriptionTokens(wpt);
 	}
 

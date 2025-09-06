@@ -252,7 +252,8 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 			}
 			getMapView().applyMaximumFrameRate(mapRenderer);
 		}
-		float density = getContext().getResources().getDisplayMetrics().density;
+		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
+		float density = mapView.isCarView() ? mapView.getCarViewDensity() : getContext().getResources().getDisplayMetrics().density;
 		if (this.density != density) {
 			this.density = density;
 			updateResources();

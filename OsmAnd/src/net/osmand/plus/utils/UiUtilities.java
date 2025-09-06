@@ -30,14 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.UiContext;
+import androidx.annotation.*;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SwitchCompat;
@@ -60,12 +53,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.help.HelpArticleUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -76,6 +69,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.plus.widgets.style.CustomURLSpan;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -680,9 +674,14 @@ public class UiUtilities {
 	}
 
 	@NonNull
-	public static SpannableString createUrlSpannable(@NonNull String text, @NonNull String url) {
+	public static SpannableString createUrlSpannable(@NonNull OsmandApplication app, @NonNull String text, @NonNull String url) {
+		String localizedUrl = HelpArticleUtils.getLocalizedUrl(app, url);
+		if (!Algorithms.stringsEqual(localizedUrl, url)) {
+			text = text.replace(url, localizedUrl);
+		}
 		SpannableString spannable = new SpannableString(text);
-		setSpan(spannable, new CustomURLSpan(url), text, url);
+		setSpan(spannable, new CustomURLSpan(localizedUrl), text, localizedUrl);
+
 		return spannable;
 	}
 

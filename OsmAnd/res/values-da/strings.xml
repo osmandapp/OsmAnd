@@ -5604,8 +5604,6 @@
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Viser køretøjets brændstofforbrug baseret på beregninger (%/t)</string>
     <string name="l_100km">L/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (L/100 km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (L/100 km)</string>
     <string name="simulate_obd">Simulér obd-data</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brændstoftryk</string>
@@ -5897,4 +5895,11 @@
     <string name="rendering_attr_spotDistance_description">Punkt‑dybdemåling afstand</string>
     <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
     <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
+    <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Britisk gallon</string>
+    <string name="us_gallon">Amerikansk gallon</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Miles</string>
+    <string name="mpg">MPG</string>
 </resources>

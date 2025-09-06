@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.externalsensors.dialogs;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -62,9 +61,7 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
 					dismiss();
-					callActivity(activity -> {
-						AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
-					});
+					callActivity(activity -> AndroidUtils.openUrl(activity, R.string.docs_external_sensors, nightMode));
 				})
 				.create();
 		items.add(helpItem);
