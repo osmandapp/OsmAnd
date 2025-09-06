@@ -225,6 +225,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return ColorUtilities.getColor(getContext(), resId);
 	}
 
+	@NonNull
 	public OsmandMapTileView getMapView() {
 		return getApplication().getOsmandMap().getMapView();
 	}
@@ -245,8 +246,11 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
-			mapRenderer.addListener(this);
+		if (mapRenderer != null) {
+			if (areMapRendererViewEventsAllowed()) {
+				mapRenderer.addListener(this);
+			}
+			getMapView().applyMaximumFrameRate(mapRenderer);
 		}
 		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
 		float density = mapView.isCarView() ? mapView.getCarViewDensity() : getContext().getResources().getDisplayMetrics().density;
