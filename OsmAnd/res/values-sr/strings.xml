@@ -5854,4 +5854,6 @@
     <string name="kilometers">Километри</string>
     <string name="miles">Миље</string>
     <string name="mpg">МПГ</string>
+    <string name="access_pinch_zoom_magnification">Омогући увећање зумирањем штипањем</string>
+    <string name="access_pinch_zoom_magnification_descr">Користите скалирање приказног дела уместо дискретних нивоа зумирања за гестове штипања.</string>
 </resources>
