@@ -692,13 +692,13 @@
     <string name="poi_guest_house">Гостьовий будинок</string>
     <string name="poi_hostel">Хостел</string>
     <string name="poi_motel">Мотель</string>
-    <string name="poi_alpine_hut">Гірська хатина;Тимчасове укриття</string>
-    <string name="poi_chalet">Шале;Тимчасове укриття</string>
+    <string name="poi_alpine_hut">Гірська хатина;Укриття</string>
+    <string name="poi_chalet">Шале;Укриття</string>
     <string name="poi_apartment">Квартира</string>
-    <string name="poi_wilderness_hut">Лісова хатина;Тимчасове укриття</string>
-    <string name="poi_cabin">Хатинка;Тимчасове укриття</string>
-    <string name="poi_lean_to">Навіс;Тимчасове укриття</string>
-    <string name="poi_hunting_lodge">Мисливський будиночок;Тимчасове укриття</string>
+    <string name="poi_wilderness_hut">Лісова хатина;Укриття</string>
+    <string name="poi_cabin">Хатинка;Укриття</string>
+    <string name="poi_lean_to">Навіс;Укриття</string>
+    <string name="poi_hunting_lodge">Мисливський будиночок;Укриття</string>
     <string name="poi_place_of_worship">Місце поклоніння</string>
     <string name="poi_religion_christian">Християнство</string>
     <string name="poi_religion_jewish">Іудаїзм</string>
@@ -803,7 +803,7 @@
     <string name="poi_cemetery">Кладовище</string>
     <string name="poi_grave_yard">Поховання (мале)</string>
     <string name="poi_tomb">Гробниця</string>
-    <string name="poi_shelter">Тимчасове укриття</string>
+    <string name="poi_shelter">Укриття</string>
     <string name="poi_funicular">Фунікульор</string>
     <string name="poi_resort">Курорт</string>
     <string name="poi_hanami">Ханамі</string>
@@ -1342,7 +1342,7 @@
     <string name="poi_generator_source_solar">Джерело енергії: сонце</string>
     <string name="poi_social_facility_food_bank">Роздача їжі</string>
     <string name="poi_generator_source_hydro">Джерело енергії: вода</string>
-    <string name="poi_social_facility_shelter">Тимчасове укриття</string>
+    <string name="poi_social_facility_shelter">Притулок</string>
     <string name="poi_generator_source_wind">Джерело енергії: вітер</string>
     <string name="poi_social_facility_ambulatory_care">Амбулаторне лікування</string>
     <string name="poi_generator_source_geothermal">Джерело енергії: геотермальний</string>
@@ -4013,7 +4013,7 @@
     <string name="poi_permanent_camping_only">Лише;Лише постійний кемпінг</string>
     <string name="poi_permanent_camping_no">Ні</string>
     <string name="poi_permanent_camping_yes">Так;Постійний кемпінг</string>
-    <string name="poi_shelter_filter">Тимчасове укриття</string>
+    <string name="poi_shelter_filter">Укриття</string>
     <string name="poi_permanent_camping">Постійний кемпінг</string>
     <string name="poi_arch">Арки</string>
     <string name="poi_payment_calling_cards_no">Телефонні картки не приймаються</string>
