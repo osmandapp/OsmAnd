@@ -869,6 +869,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return touchActive || animatedDraggingThread.isAnimating();
 	}
 
+	public boolean isUserMapInteractionActive() {
+		return touchActive || animatedDraggingThread.isUserAnimationsActive();
+	}
+
 	public float getZoomFloatPart() {
 		return (float) currentViewport.getZoomFloatPart();
 	}
@@ -2636,11 +2640,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void applyMaximumFrameRate(@NonNull MapRendererView mapRenderer) {
+		int frameRate;
 		if (settings.BATTERY_SAVING_MODE.get()) {
-			mapRenderer.setMaximumFrameRate(LIMITED_MAX_FRAME_RATE);
+			frameRate = LIMITED_MAX_FRAME_RATE;
 		} else {
-			mapRenderer.setMaximumFrameRate(touchActive ? USER_INTERACTION_MAX_FRAME_RATE : ANIMATION_MAX_FRAME_RATE);
+			frameRate = isUserMapInteractionActive() ? USER_INTERACTION_MAX_FRAME_RATE : ANIMATION_MAX_FRAME_RATE;
 		}
+		mapRenderer.setMaximumFrameRate(frameRate);
 	}
 
 	public void applyDebugSettings(@NonNull MapRendererView mapRenderer) {
