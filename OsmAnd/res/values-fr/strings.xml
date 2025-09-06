@@ -1145,7 +1145,7 @@
     <string name="gpx_file_is_empty">Fichier GPX vide</string>
     <string name="shared_string_tracks">Traces</string>
     <string name="shared_string_my_favorites">Favoris</string>
-    <string name="shared_string_my_places">Mes Lieux</string>
+    <string name="shared_string_my_places">Mes lieux</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer le guidage pas à pas automatiquement</string>
     <string name="shared_string_selected_lowercase">sélectionné(s)</string>
