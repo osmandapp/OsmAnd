@@ -199,10 +199,10 @@
     <string name="unit_of_length">长度单位</string>
     <string name="si_mi_feet">英里/英尺</string>
     <string name="si_mi_yard">英里/码</string>
-    <string name="si_km_m">千米/米</string>
+    <string name="si_km_m">公里/米</string>
     <string name="yard">码</string>
     <string name="foot">英尺</string>
-    <string name="mile_per_hour">英里/时</string>
+    <string name="mile_per_hour">英里/小时</string>
     <string name="send_location_way_choose_title">共享位置使用</string>
     <string name="send_location">发送位置</string>
     <string name="context_menu_item_share_location">分享位置</string>
@@ -229,8 +229,8 @@
     <string name="amenity_type_tourism">旅游</string>
     <string name="amenity_type_transportation">运输</string>
     <string name="shared_string_io_error">I/O错误</string>
-    <string name="km">千米</string>
-    <string name="km_h">千米/时</string>
+    <string name="km">公里</string>
+    <string name="km_h">公里/小时</string>
     <string name="m">米</string>
     <string name="daynight_mode_day">白天</string>
     <string name="daynight_mode_night">夜晚</string>
@@ -938,15 +938,15 @@
     <string name="default_speed_system">速度测量</string>
     <string name="nm">海里</string>
     <string name="si_nm">海里</string>
-    <string name="si_kmh">千米每小时</string>
+    <string name="si_kmh">公里每小时</string>
     <string name="si_mph">英里每小时</string>
     <string name="si_m_s">米每秒</string>
-    <string name="si_min_km">分钟每千米</string>
+    <string name="si_min_km">分钟每公里</string>
     <string name="si_min_m">分钟每英里</string>
     <string name="si_nm_h">海里每小时（节）</string>
     <string name="nm_h">节</string>
     <string name="min_mile">分/米</string>
-    <string name="min_km">分/千米</string>
+    <string name="min_km">分钟/公里</string>
     <string name="m_s">米/秒</string>
     <string name="shared_string_navigation">导航</string>
     <string name="osmand_running_in_background">在后台运行</string>
@@ -4458,11 +4458,11 @@
 \n使用 OAuth 方法或您的 OSM 用户名和密码。</string>
     <string name="weather_offline_forecast">离线预测</string>
     <string name="weather_precip_milimeters">毫米</string>
-    <string name="weather_wind_mph">英里/时</string>
-    <string name="weather_wind_kmh">千米/时</string>
+    <string name="weather_wind_mph">英里/小时</string>
+    <string name="weather_wind_kmh">公里/小时</string>
     <string name="weather_wind_ms">米/秒</string>
     <string name="weather_wind_miles_per_hour">英里每小时</string>
-    <string name="weather_wind_kilimeters_per_hour">千米每小时</string>
+    <string name="weather_wind_kilimeters_per_hour">公里每小时</string>
     <string name="weather_wind_meters_per_second">米/秒</string>
     <string name="weather_widgets_secondary_desc">可以在天气插件设置中更改测量单位。</string>
     <string name="air_pressure_widget_desc">显示当前地图中心的气压。</string>
@@ -5424,7 +5424,7 @@
     <string name="fuel_tank_capacity_description">输入油箱容量，准确跟踪油量和消耗情况</string>
     <string name="fuel_tank_capacity">油箱容量</string>
     <string name="shared_strings_dimensions">尺寸规格</string>
-    <string name="litres">公升</string>
+    <string name="litres">升</string>
     <string name="us_gallons_unit">加仑</string>
     <string name="imperial_gallons">英制加仑</string>
     <string name="us_gallons">美制加仑</string>
@@ -5881,4 +5881,10 @@
     <string name="enable_msaa">启用 MSAA</string>
     <string name="show_local_names">显示本地名称</string>
     <string name="lang_en_barebones">英语（极简）</string>
+    <string name="liter_single">升</string>
+    <string name="imperial_gallon">英制加仑</string>
+    <string name="us_gallon">美制加仑</string>
+    <string name="kilometers">公里</string>
+    <string name="miles">英里</string>
+    <string name="mpg">英里/加仑</string>
 </resources>
