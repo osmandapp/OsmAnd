@@ -398,9 +398,25 @@ public class PointLocationLayer extends OsmandMapLayer
 		return locMarker;
 	}
 
+	private boolean containsLatLon(double lat, double lon) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (view == null || mapRenderer == null) {
+			return false;
+		}
+		RotatedTileBox tb = view.getRotatedTileBox();
+		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, lat, lon);
+		double tx = pixel.x;
+		double ty = pixel.y;
+		return tx >= 0 && tx <= tb.getPixWidth() && ty >= 0 && ty <= tb.getPixHeight();
+	}
+
 	private void updateMarker(@Nullable Location location, @Nullable PointI target31, long animationDuration) {
-		Float heading = locationProvider.getHeading();
 		if (location != null) {
+			boolean animateBearing = isAnimateMyLocation();
+			if (target31 == null && !containsLatLon(location.getLatitude(), location.getLongitude())) {
+				animationDuration = 0;
+				animateBearing = false;
+			}
 			updateMarkerPosition(location, target31, animationDuration);
 			if (location.hasBearing()) {
 				float bearing = location.getBearing() - 90.0f;
@@ -408,15 +424,18 @@ public class PointLocationLayer extends OsmandMapLayer
 				boolean updateBearing = cachedBearing == null || Math.abs(bearing - cachedBearing) > 0.1;
 				if (updateBearing) {
 					lastBearingCached = bearing;
-					boolean animateBearing = isAnimateMyLocation();
 					updateMarkerBearing(bearing, animateBearing);
 				}
 			}
 		}
+		Float heading = locationProvider.getHeading();
 		if (heading != null && showHeadingCached) {
 			Float cachedHeading = lastHeadingCached;
 			boolean updateHeading = cachedHeading == null || Math.abs(heading - cachedHeading) > 0.1;
-			if (updateHeading) {
+			if (location == null) {
+				location = getPointLocation();
+			}
+			if (updateHeading && location != null && containsLatLon(location.getLatitude(), location.getLongitude())) {
 				lastHeadingCached = heading;
 				updateMarkerHeading(heading);
 			}

@@ -14,7 +14,6 @@ import androidx.core.util.Pair;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -72,7 +71,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
 	private MapContextMenu contextMenu;
-	private StateChangedListener<Boolean> enable3DViewListener;
 
 	private boolean isMapLinkedToLocation = true;
 	private boolean movingToMyLocation;
@@ -190,7 +188,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val, false);
 				}
-			} else if (showViewAngle && headingChanged) {
+			} else if (showViewAngle && headingChanged && !mapView.hasMapRenderer()) {
 				mapView.refreshMap();
 			}
 		}

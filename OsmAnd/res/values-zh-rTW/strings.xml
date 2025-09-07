@@ -13,14 +13,14 @@
     <string name="intermediate_point">中途停靠點 %1$s</string>
     <string name="context_menu_item_last_intermediate_point">設為最後一個中途停靠點</string>
     <string name="context_menu_item_first_intermediate_point">設為第一個中途停靠點</string>
-    <string name="add_as_last_destination_point">新增為最後一個中途停靠點</string>
-    <string name="add_as_first_destination_point">新增為第一個中途停靠點</string>
+    <string name="add_as_last_destination_point">加入為最後一個中途停靠點</string>
+    <string name="add_as_first_destination_point">加入為第一個中途停靠點</string>
     <string name="replace_destination_point">替換目的地</string>
     <string name="new_destination_point_dialog">您已經設定了一個目的地：</string>
     <string name="shared_string_target_points">目的地</string>
     <string name="intermediate_point_too_far">中途停靠點 %1$s 離最近的道路太遠。</string>
     <string name="arrived_at_intermediate_point">已經抵達中途停靠點</string>
-    <string name="context_menu_item_intermediate_point">新增為中途停靠點</string>
+    <string name="context_menu_item_intermediate_point">加入為中途停靠點</string>
     <string name="map_widget_intermediate_distance">中途停靠點</string>
     <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
     <string name="add_tag">新增標籤</string>
@@ -908,7 +908,7 @@
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">已將中途停靠點依最佳路徑順序重新排列。</string>
-    <string name="audionotes_location_not_defined">輕觸「使用位置……」以新增註記到地點。</string>
+    <string name="audionotes_location_not_defined">輕觸「使用位置……」以添加註記到地點。</string>
     <string name="srtm_plugin_description">地形資訊，如等高線、山體陰影、坡度，可以幫助您直觀地評估地形、地貌、可通行性等。地形資訊可以在地圖上以等高線、地形陰影和/或坡度著色的方式呈現。\n \n基礎資料來自 SRTM 與 ASTER。 \n \n更多詳情請見 %1$s 。</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="av_camera_focus">相機對焦類型</string>
@@ -1009,7 +1009,7 @@
     <string name="shared_string_favorite">我的最愛</string>
     <string name="route_preferences">優先路徑</string>
     <string name="route_info">路徑資訊</string>
-    <string name="keep_and_add_destination_point">新增為後續目的地</string>
+    <string name="keep_and_add_destination_point">增設為後續目的地</string>
     <string name="use_displayed_track_for_navigation">使用顯示的軌跡用於導航嗎？</string>
     <string name="calculate_osmand_route_without_internet">離線計算的 OsmAnd 路段</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路徑</string>
@@ -1538,7 +1538,7 @@
     <string name="av_locations_descr">GPX 檔案加上地點。</string>
     <string name="av_locations">地點</string>
     <string name="contact_info">連絡資訊</string>
-    <string name="add_opening_hours">新增營業時間</string>
+    <string name="add_opening_hours">增設營業時間</string>
     <string name="poi_dialog_poi_type">POI 類型</string>
     <string name="number_of_rows_in_dash">在長劃 %1$s 的行數</string>
     <string name="please_specify_poi_type">請指定 POI 類型。</string>
@@ -1996,7 +1996,7 @@
     <string name="quick_action_map_underlay_title">地圖底層</string>
     <string name="quick_action_map_underlay_action">下加底層</string>
     <string name="quick_action_map_source_title">地圖來源</string>
-    <string name="quick_action_map_source_action">新增地圖來源</string>
+    <string name="quick_action_map_source_action">加入地圖來源</string>
     <string name="quick_action_map_source_switch">地圖來源變更為「%s」。</string>
     <string name="quick_action_btn_tutorial_title">更改按鈕位置</string>
     <string name="quick_action_btn_tutorial_descr">長按並拖動螢幕上的按鈕以改變位置。</string>
@@ -2136,7 +2136,7 @@
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
     <string name="save_poi_too_many_uppercase">名稱中包含過多大寫字母。是否要繼續？</string>
-    <string name="route_is_too_long_v2">對於較長的距離：如果在10分鐘內未找到路徑，請新增中轉目的地。</string>
+    <string name="route_is_too_long_v2">對於較長的距離：如果在10分鐘內未找到路徑，請加入中轉目的地。</string>
     <string name="display_zoom_level">顯示縮放比例：%1$s</string>
     <string name="srtm_color_scheme">色調配置</string>
     <string name="show_from_zoom_level">從此縮放比例開始顯示</string>
@@ -2554,7 +2554,7 @@
     <string name="run_full_osmand_header">啟動 OsmAnd？</string>
     <string name="lang_gn_py">瓜拉尼語</string>
     <string name="add_destination_point">設定目的地</string>
-    <string name="add_intermediate_point">新增中途停靠點</string>
+    <string name="add_intermediate_point">加入中途停靠點</string>
     <string name="add_start_point">設定起點</string>
     <string name="intermediate_waypoint">中途停靠點</string>
     <string name="transfers">移動</string>
@@ -2623,10 +2623,10 @@
     <string name="save_poi_value_exceed_length_title">「%s」值的長度</string>
     <string name="public_transport_warning_descr_blog">在我們的部落格上閱讀更多關於 OsmAnd 路徑規劃的資訊。</string>
     <string name="public_transport_warning_title">大眾運輸導航目前處於測試階段，可能會出現錯誤和不準確的情況。</string>
-    <string name="add_intermediate">新增中繼目的地</string>
+    <string name="add_intermediate">加入中繼目的地</string>
     <string name="transfers_size">%1$d 次轉乘</string>
-    <string name="add_start_and_end_points">新增出發地與目的地</string>
-    <string name="route_add_start_point">新增出發地</string>
+    <string name="add_start_and_end_points">增設出發地與目的地</string>
+    <string name="route_add_start_point">增設出發地</string>
     <string name="route_descr_select_start_point">選取出發地</string>
     <string name="rendering_attr_surface_unpaved_name">未鋪設</string>
     <string name="rendering_attr_surface_sand_name">沙地</string>
@@ -2711,7 +2711,7 @@
     <string name="app_mode_subway">捷運</string>
     <string name="app_mode_horse">馬</string>
     <string name="app_mode_helicopter">直升機</string>
-    <string name="osmand_routing_promo">新增您自行修改版本的 routing.xml 檔案到 ..osmand/routing</string>
+    <string name="osmand_routing_promo">加入您自行修改版本的 routing.xml 檔案到 ..osmand/routing</string>
     <string name="app_mode_skiing">滑雪</string>
     <string name="base_profile_descr_ski">滑雪</string>
     <string name="show_compass_ruler">顯示指南針與尺規</string>
@@ -3001,7 +3001,7 @@
     <string name="added_profiles">已新增設定檔</string>
     <string name="added_profiles_descr">外掛程式新增的設定檔</string>
     <string name="shared_string_turn_off">關閉</string>
-    <string name="new_plugin_added">已新增新的外掛程式</string>
+    <string name="new_plugin_added">已加入新的外掛程式</string>
     <string name="join_segments">新增線段</string>
     <string name="add_new_profile_q">新增新的設定檔「%1$s」？</string>
     <string name="save_heading">包含標題</string>
@@ -3172,7 +3172,7 @@
     <string name="download_slope_maps">坡度</string>
     <string name="quick_action_terrain_descr">用於顯示或隱藏地圖上地形圖層的按鈕。</string>
     <string name="delete_description">刪除描述</string>
-    <string name="add_description">新增描述</string>
+    <string name="add_description">添加描述</string>
     <string name="select_group">選取群組</string>
     <string name="select_shape">選取形狀</string>
     <string name="shared_string_circle">圓形</string>
@@ -3423,7 +3423,7 @@
     <string name="all_previous_segments_will_be_recalc">將使用所選的設定檔重新計算之前的所有部分。</string>
     <string name="open_saved_track">開啟已儲存的軌跡</string>
     <string name="shared_string_is_saved">已儲存</string>
-    <string name="one_point_error">請至少新增兩個點。</string>
+    <string name="one_point_error">請至少加入兩個點。</string>
     <string name="shared_string_redo">重做</string>
     <string name="release_3_8">• 更新「規劃路徑」功能：允許每個路段使用不同的導航類型並包含軌跡 \n \n • 新的軌跡外觀選項：選取顏色、厚度、開啟方向箭頭與開始與結束圖示 \n \n • 改善自行車節點的能見度 \n \n • 軌跡現在是可點擊的，且有包含基本資訊的內容選單 \n \n • 改進了搜尋演算法 \n \n • 改進了導航中的「跟隨軌跡」選項 \n \n • 修復設定檔的匯入／匯出問題</string>
     <string name="sort_last_modified">最後修改時間</string>
@@ -3464,7 +3464,7 @@
     <string name="navigate_point_mgrs">MGRS (軍事格線參照系統)</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd 使用 MGRS，其類似於 UTM NATO 格式。</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">新增至少兩個點</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">加入至少兩個點</string>
     <string name="manage_subscription">管理訂閱</string>
     <string name="subscription_payment_issue_title">點擊按鈕可在 Google Play 上設定付款方式，以恢復您的訂閱。</string>
     <string name="subscription_expired_title">OsmAnd Live 訂閱已過期</string>
@@ -3525,7 +3525,7 @@
     <string name="routing_attr_allow_intermittent_description">允許間歇水路</string>
     <string name="routing_attr_allow_intermittent_name">允許間歇水路</string>
     <string name="voice_prompts_timetable">語音提示時間</string>
-    <string name="add_online_routing_engine">新增線上路線引擎</string>
+    <string name="add_online_routing_engine">加入線上路線引擎</string>
     <string name="edit_online_routing_engine">編輯線上路線引擎</string>
     <string name="shared_string_subtype">子類型</string>
     <string name="shared_string_vehicle">車輛</string>
@@ -3544,7 +3544,7 @@
     <string name="online_routing_engines">線上路線計算引擎</string>
     <string name="shared_string_folders">資料夾</string>
     <string name="select_folder">選取資料夾</string>
-    <string name="select_folder_descr">選取資料夾或新增</string>
+    <string name="select_folder_descr">選取或新增資料夾</string>
     <string name="shared_string_empty">空</string>
     <string name="analyze_by_intervals">按間隔分析</string>
     <string name="upload_to_openstreetmap">上傳至 OpenStreetMap</string>
@@ -4142,7 +4142,7 @@
     <string name="widget_secondary_desc_part_of">%1$s 外掛程式的一部分。</string>
     <string name="elevation_profile_widget_desc">顯示目前路線的海拔和坡度資訊。</string>
     <string name="parking_widget_desc">顯示從螢幕中心到您的停車位的距離。</string>
-    <string name="mapillary_widget_desc">提供快速存取 Mapillary 應用程式以新增街道級別的圖像。</string>
+    <string name="mapillary_widget_desc">提供快速存取 Mapillary 應用程式以加入街道級別的圖像。</string>
     <string name="av_notes_choose_action_widget_desc">選擇動作。</string>
     <string name="radius_rules_widget_desc">半徑規則工具在地圖上選定的點周圍顯示距離圓圈。</string>
     <string name="current_time_widget_desc">顯示來自您裝置的即時時間</string>
@@ -4962,7 +4962,7 @@
     <string name="change_button">變更按鈕</string>
     <string name="download_to_device">下載到裝置</string>
     <string name="remove_widget_first">請先移除小工具</string>
-    <string name="add_row">新增列</string>
+    <string name="add_row">加入列</string>
     <string name="discard_changes_prompt">放棄變更嗎？</string>
     <string name="row_number">列 %1$s</string>
     <string name="tripltek_promo">Tripltek 促銷%1$s個月</string>
@@ -5027,7 +5027,7 @@
     <string name="sorted_sufolders_toast">已按「%2$s」排序「%1$s」中的子資料夾</string>
     <string name="custom_buttons">自訂按鈕</string>
     <string name="custom_map_button_name_present">如此按鈕已存在</string>
-    <string name="add_button">新增按鈕</string>
+    <string name="add_button">加入按鈕</string>
     <string name="special_routing_cpp">特殊路徑規劃類型</string>
     <string name="default_buttons">預設按鈕</string>
     <string name="speed_limit_warning">速限警告</string>
@@ -5128,11 +5128,11 @@
     <string name="clear_all_key_shortcuts">移除所有快捷鍵</string>
     <string name="no_assigned_keys_desc">選擇一個動作並透過點擊「新增」按鈕分配一個鍵。</string>
     <string name="new_key_assignment">分配新按鍵</string>
-    <string name="key_assignment_add_action">新增動作</string>
+    <string name="key_assignment_add_action">加入動作</string>
     <string name="clear_key_assignment_summary">將會移除所選動作的按鍵分配。</string>
     <string name="no_assigned_keys">沒有分配的按鍵</string>
     <string name="key_name_pattern">按鈕「%1$s」</string>
-    <string name="key_assignment_add_key">新增鍵</string>
+    <string name="key_assignment_add_key">加入鍵</string>
     <string name="action_icon">動作圖示</string>
     <string name="user_palette">使用者調色板</string>
     <string name="shared_string_colors">顏色</string>
@@ -5237,10 +5237,10 @@
     <string name="help_article_map_tracks_name">軌跡</string>
     <string name="route_roundabout_exit">自第 %1$d 個出口離開</string>
     <string name="help_article_map_routes_name">路線</string>
-    <string name="add_widget_above">在上方新增小工具</string>
-    <string name="add_widget_to_the_right">在右方新增小工具</string>
-    <string name="add_widget_to_the_left">在左方新增小工具</string>
-    <string name="add_widget_below">在下方新增小工具</string>
+    <string name="add_widget_above">在上方加入小工具</string>
+    <string name="add_widget_to_the_right">在右方加入小工具</string>
+    <string name="add_widget_to_the_left">在左方加入小工具</string>
+    <string name="add_widget_below">在下方加入小工具</string>
     <string name="battery_saving_mode">省電模式</string>
     <string name="delete_widget_description">這個小工具將被刪除。您稍後可以在組態畫面中將其還原。</string>
     <string name="delete_widget">刪除小工具？</string>
