@@ -5619,7 +5619,7 @@
     <string name="fuel_tank_capacity">Fassungsvermögen des Kraftstofftanks</string>
     <string name="litres">Liter</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="imperial_gallons">Imperiale Gallonen</string>
+    <string name="imperial_gallons">Britische Gallonen</string>
     <string name="us_gallons">US-Gallonen</string>
     <string name="unit_of_volume_description">Ausgewählte Einheiten werden für alle volumenabhängigen Daten im aktuellen Profil genutzt.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
@@ -5897,10 +5897,11 @@
     <string name="lang_en_barebones">Englisch (wesentliches)</string>
     <string name="obd_alt_battery_voltage">Batteriespannung (Adapter)</string>
     <string name="liter_single">Liter</string>
-    <string name="imperial_gallon">Imperiale Gallone</string>
-    <string name="us_gallon">Amerikanische Gallone</string>
+    <string name="imperial_gallon">Britische Gallone</string>
+    <string name="us_gallon">US-Gallone</string>
     <string name="kilometers">Kilometer</string>
     <string name="miles">Meilen</string>
     <string name="access_pinch_zoom_magnification">Zoom mit zwei Fingern aktivieren</string>
-    <string name="access_pinch_zoom_magnification_descr">Benutze die Skalierung des Ansichtsfensters statt diskreter Zoomstufen für Pinch-Gesten.</string>
+    <string name="access_pinch_zoom_magnification_descr">Verwenden Sie für Pinch-Gesten die Skalierung des Ansichtsfensters anstelle der separaten Zoomstufen.</string>
+    <string name="mpg">MPG</string>
 </resources>
