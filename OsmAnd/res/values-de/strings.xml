@@ -5901,4 +5901,6 @@
     <string name="us_gallon">Amerikanische Gallone</string>
     <string name="kilometers">Kilometer</string>
     <string name="miles">Meilen</string>
+    <string name="access_pinch_zoom_magnification">Zoom mit zwei Fingern aktivieren</string>
+    <string name="access_pinch_zoom_magnification_descr">Benutze die Skalierung des Ansichtsfensters statt diskreter Zoomstufen für Pinch-Gesten.</string>
 </resources>
