@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.EditTextEx;
@@ -80,7 +81,7 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			int statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode);
-			window.setStatusBarColor(statusBarColor);
+			AndroidUiHelper.setStatusBarColor(window, statusBarColor);
 		}
 		return dialog;
 	}

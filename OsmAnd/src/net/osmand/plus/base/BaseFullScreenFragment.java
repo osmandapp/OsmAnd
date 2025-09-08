@@ -7,6 +7,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 /**
  * Base class for full-screen fragments that are displayed as standalone screens
@@ -28,6 +29,7 @@ public class BaseFullScreenFragment extends BaseOsmAndFragment implements Transi
 	@Override
 	public void onResume() {
 		super.onResume();
+
 		Activity activity = getActivity();
 		if (activity != null) {
 			updateStatusBar(activity);
@@ -40,10 +42,11 @@ public class BaseFullScreenFragment extends BaseOsmAndFragment implements Transi
 	@Override
 	public void onPause() {
 		super.onPause();
+
 		Activity activity = getActivity();
 		if (activity != null) {
 			if (!(activity instanceof MapActivity) && statusBarColor != -1) {
-				activity.getWindow().setStatusBarColor(statusBarColor);
+				AndroidUiHelper.setStatusBarColor(activity, statusBarColor);
 			}
 			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
 				((MapActivity) activity).enterToFullScreen();
@@ -54,6 +57,7 @@ public class BaseFullScreenFragment extends BaseOsmAndFragment implements Transi
 	@Override
 	public void onDetach() {
 		super.onDetach();
+
 		if (getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
@@ -67,8 +71,7 @@ public class BaseFullScreenFragment extends BaseOsmAndFragment implements Transi
 		if (transitionAnimationAllowed) {
 			return super.onCreateAnimation(transit, enter, nextAnim);
 		}
-		Animation anim = new Animation() {
-		};
+		Animation anim = new Animation() {};
 		anim.setDuration(0);
 		return anim;
 	}
@@ -96,8 +99,7 @@ public class BaseFullScreenFragment extends BaseOsmAndFragment implements Transi
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
 			} else {
-				statusBarColor = activity.getWindow().getStatusBarColor();
-				activity.getWindow().setStatusBarColor(getColor(colorId));
+				statusBarColor = AndroidUiHelper.setStatusBarColor(activity, getColor(colorId));
 			}
 		}
 	}

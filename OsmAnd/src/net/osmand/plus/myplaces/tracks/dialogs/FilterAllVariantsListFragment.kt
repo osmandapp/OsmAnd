@@ -20,6 +20,7 @@ import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
@@ -109,10 +110,8 @@ class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolde
 
 	private fun updateStatusBarColor(window: Window?) {
 		window?.let {
-			val statusBarColor =
-				if (nightMode) R.color.status_bar_secondary_dark else R.color.status_bar_secondary_light
-			ContextCompat.getColor(requireContext(), statusBarColor)
-			window.statusBarColor = ContextCompat.getColor(requireContext(), statusBarColor)
+			val statusBarColor = if (nightMode) R.color.status_bar_secondary_dark else R.color.status_bar_secondary_light
+			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(requireContext(), statusBarColor))
 		}
 	}
 

@@ -15,9 +15,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class WikiBaseDialogFragment extends BaseFullScreenDialogFragment {
 
@@ -31,7 +32,7 @@ public class WikiBaseDialogFragment extends BaseFullScreenDialogFragment {
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(getColor(getStatusBarColor()));
+			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColor()));
 		}
 		return dialog;
 	}

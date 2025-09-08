@@ -64,7 +64,7 @@ public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment 
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(ContextCompat.getColor(activity, getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(activity, getStatusBarColorId()));
 		}
 		return dialog;
 	}

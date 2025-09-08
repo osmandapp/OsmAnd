@@ -21,6 +21,7 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 
 public abstract class CustomizableDialogFragment extends BaseFullScreenDialogFragment
@@ -61,7 +62,7 @@ public abstract class CustomizableDialogFragment extends BaseFullScreenDialogFra
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
 		}
 		return dialog;
 	}

@@ -24,10 +24,12 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
+import android.view.Window;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -171,6 +173,17 @@ public class AndroidUiHelper {
 	public static boolean isOrientationPortrait(@NonNull @UiContext Context context) {
 		int orientation = getScreenOrientation(context);
 		return orientation == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+	}
+
+	@ColorInt
+	public static int setStatusBarColor(@NonNull Activity activity, @ColorInt int color) {
+		return setStatusBarColor(activity.getWindow(), color);
+	}
+
+	public static int setStatusBarColor(@NonNull Window window, @ColorInt int color) {
+		int previousColor = window.getStatusBarColor();
+		window.setStatusBarColor(color);
+		return previousColor;
 	}
 
 	public static void setStatusBarContentColor(@Nullable View view, boolean nightMode) {

@@ -72,7 +72,7 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(ColorUtilities.getStatusBarColor(app, nightMode));
+			AndroidUiHelper.setStatusBarColor(window, ColorUtilities.getStatusBarColor(app, nightMode));
 		}
 		return dialog;
 	}

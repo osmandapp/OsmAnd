@@ -205,9 +205,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (!wasDrawerDisabled && activity instanceof MapActivity) {
 				((MapActivity) activity).enableDrawer();
 			}
-
 			if (!(activity instanceof MapActivity) && statusBarColor != -1) {
-				activity.getWindow().setStatusBarColor(statusBarColor);
+				AndroidUiHelper.setStatusBarColor(activity, statusBarColor);
 			}
 		}
 	}
@@ -237,8 +236,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
 			} else {
-				statusBarColor = activity.getWindow().getStatusBarColor();
-				activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+				statusBarColor = AndroidUiHelper.setStatusBarColor(activity, getColor(colorId));
 			}
 		}
 	}
