@@ -293,11 +293,11 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			boolean toolbarVisible = solidToolbarView != null && solidToolbarView.getVisibility() == View.VISIBLE;
 			if (toolbarVisible || !portrait) {
 				if (!nightMode) {
-					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+					AndroidUiHelper.setStatusBarContentColor(view, true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
 			} else if (!nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
+				AndroidUiHelper.setStatusBarContentColor(view, false);
 			}
 		}
 		return -1;

@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -36,6 +37,11 @@ public class HelpArticlesFragment extends BaseFullScreenFragment implements OnIt
 
 	private HelpArticle article;
 	private ContextMenuListAdapter adapter;
+
+	@Override
+	public int getStatusBarColorId() {
+		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {

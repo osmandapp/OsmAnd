@@ -106,7 +106,7 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 
 	private fun updateStatusBarColor(window: Window?) {
 		window?.let {
-			window.statusBarColor = getStatusBarSecondaryColor(requireContext(), nightMode)
+			AndroidUiHelper.setStatusBarColor(window, getStatusBarSecondaryColor(requireContext(), nightMode))
 		}
 	}
 

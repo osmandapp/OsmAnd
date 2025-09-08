@@ -156,7 +156,7 @@ public class SelectRouteActivityFragment extends CustomizableSingleSelectionDial
 		Window window = requireDialog().getWindow();
 		if (window != null) {
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), true);
-			window.setStatusBarColor(color);
+			AndroidUiHelper.setStatusBarColor(window, color);
 		}
 	}
 
