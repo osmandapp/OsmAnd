@@ -2,13 +2,10 @@ package net.osmand.plus.track;
 
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIBLE_TRACKS;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,22 +16,21 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.configmap.tracks.SelectTrackTabsHelper;
-import net.osmand.plus.configmap.tracks.TrackTabsHelper;
-import net.osmand.plus.shared.SharedUtil;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
-import net.osmand.shared.gpx.TrackItem;
+import net.osmand.plus.configmap.tracks.SelectTrackTabsHelper;
 import net.osmand.plus.configmap.tracks.TrackTab;
+import net.osmand.plus.configmap.tracks.TrackTabsHelper;
 import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.gpx.data.TrackFolder;
-import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -53,25 +49,15 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		return nightMode;
 	}
 
-	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 	}
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.select_track_fragment, container, false);
 
@@ -205,11 +191,13 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		return true;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener) {
+	public static void showInstance(@NonNull FragmentManager manager,
+			Object fileSelectionListener) {
 		showInstance(manager, fileSelectionListener, null);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener, @Nullable ItemVisibilityCallback itemVisibilityCallback) {
+	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener,
+			@Nullable ItemVisibilityCallback itemVisibilityCallback) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectTrackTabsFragment fragment = new SelectTrackTabsFragment();
 			fragment.fileSelectionListener = fileSelectionListener;

@@ -625,17 +625,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(requireActivity(), getTheme()) {
+	public Dialog createDialog(Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				onBackButtonPressed();
 			}
 		};
-		if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-			dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_Alpha;
-		}
-		return dialog;
 	}
 
 	private void onBackButtonPressed() {

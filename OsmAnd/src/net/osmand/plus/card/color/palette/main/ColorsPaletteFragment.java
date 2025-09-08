@@ -41,6 +41,11 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	private ColorsPaletteElements paletteElements;
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
@@ -48,24 +53,6 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 		if (controller != null) {
 			controller.bindPalette(this);
 		}
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
-		paletteElements = new ColorsPaletteElements(requireActivity(), nightMode);
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Nullable

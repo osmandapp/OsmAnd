@@ -78,7 +78,7 @@ public class SelectPointsFragment extends BaseFullScreenDialogFragment implement
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public Dialog createDialog(Bundle savedInstanceState) {
 		return new Dialog(requireContext(), getTheme()) {
 			@Override
 			public void onBackPressed() {

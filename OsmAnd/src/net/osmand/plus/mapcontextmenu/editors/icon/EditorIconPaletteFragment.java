@@ -60,6 +60,11 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 	private EditorIconScreenAdapter adapter;
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
@@ -73,18 +78,8 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
-		}
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		Dialog dialog = new Dialog(requireActivity(), getThemeId());
 		dialog.setOnKeyListener((d, keyCode, event) -> {
 			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {
 				onBackPressed();

@@ -1,14 +1,17 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.ActionBar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
@@ -24,6 +27,12 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 	protected boolean haveHomeButton = true;
 	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
 
+	@ColorRes
+	protected int getStatusBarColorId() {
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
+		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -61,13 +70,18 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 					InsetSide.BOTTOM
 			));
 		}
+		updateStatusBarColor();
+	}
+
+	public void updateStatusBarColor() {
+		AndroidUiHelper.setStatusBarColor(this, getColor(getStatusBarColorId()));
 	}
 
 	private void setupHomeButton() {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			OsmandApplication app = getMyApplication();
-			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+			boolean nightMode = app.getDaynightHelper().isNightMode(APP);
 			int iconId = AndroidUtils.getNavigationIconResId(app);
 			int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 

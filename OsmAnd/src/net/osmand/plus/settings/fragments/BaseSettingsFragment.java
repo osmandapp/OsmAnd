@@ -317,7 +317,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (isProfileDependent()) {
 			View view = getView();
 			if (view != null && !nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+				AndroidUiHelper.setStatusBarContentColor(view, true);
 			}
 			return ColorUtilities.getListBgColorId(nightMode);
 		} else {

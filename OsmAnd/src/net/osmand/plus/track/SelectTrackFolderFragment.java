@@ -6,14 +6,12 @@ import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -30,16 +28,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabType;
@@ -56,10 +51,13 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.SelectTrackTabsFragment.GpxDataItemSelectionListener;
-import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -96,20 +94,9 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		return true;
 	}
 
-	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 	}
 
 	@ColorRes
@@ -120,7 +107,8 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		importHelper = app.getImportHelper();
 		updateNightMode();
 		view = inflate(R.layout.select_track_folder_fragment, container, false);
@@ -337,9 +325,11 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		adapter.notifyDataSetChanged();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull BaseTracksTabsFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
-									@Nullable Object fileSelectionListener, @NonNull TrackFolder baseTrackFolder, @NonNull TrackFolder currentTrackFolder,
-									@Nullable ItemVisibilityCallback itemVisibilityCallback) {
+	public static void showInstance(@NonNull FragmentManager manager,
+			@NonNull BaseTracksTabsFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
+			@Nullable Object fileSelectionListener, @NonNull TrackFolder baseTrackFolder,
+			@NonNull TrackFolder currentTrackFolder,
+			@Nullable ItemVisibilityCallback itemVisibilityCallback) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectTrackFolderFragment fragment = new SelectTrackFolderFragment();
 			fragment.sortMode = sortMode;
@@ -390,7 +380,8 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		return new MultipleTracksImportListener(filesSize) {
 
 			@Override
-			public void onImportStarted() {}
+			public void onImportStarted() {
+			}
 
 			@Override
 			public void onImportFinished() {

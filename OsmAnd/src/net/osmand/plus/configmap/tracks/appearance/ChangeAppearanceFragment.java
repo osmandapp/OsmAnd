@@ -2,13 +2,11 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController.PROCESS_ID;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -46,23 +44,13 @@ public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment imple
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity activity = requireActivity();
-		Dialog dialog = new Dialog(activity, getThemeId()) {
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
 			@Override
 			public void onBackPressed() {
 				dismiss();
 			}
 		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, ColorUtilities.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Override

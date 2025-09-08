@@ -15,18 +15,15 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnAttachStateChangeListener;
-import android.view.Window;
-import android.view.WindowInsetsController;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
@@ -37,11 +34,16 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.UiContext;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.utils.InsetsUtils;
 
 /**
  * Created by dummy on 28.01.15.
@@ -180,10 +182,53 @@ public class AndroidUiHelper {
 		return setStatusBarColor(activity.getWindow(), color);
 	}
 
+	@ColorInt
 	public static int setStatusBarColor(@NonNull Window window, @ColorInt int color) {
-		int previousColor = window.getStatusBarColor();
-		window.setStatusBarColor(color);
+		int previousColor = -1;
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			View scrim = getOrCreateStatusBarScrim(window);
+			if (scrim != null) {
+				if (scrim.getBackground() instanceof ColorDrawable drawable) {
+					previousColor = drawable.getColor();
+				}
+				scrim.setBackgroundColor(color);
+			}
+		} else {
+			previousColor = window.getStatusBarColor();
+			window.setStatusBarColor(color);
+		}
 		return previousColor;
+	}
+
+	@Nullable
+	private static View getOrCreateStatusBarScrim(@NonNull Window window) {
+		View scrim = window.findViewById(R.id.status_bar_scrim);
+		if (scrim != null) {
+			return scrim;
+		} else {
+			View decorView = window.getDecorView();
+			if (decorView instanceof ViewGroup content) {
+				LayoutInflater inflater = LayoutInflater.from(window.getContext());
+				scrim = inflater.inflate(R.layout.status_bar_scrim, content, false);
+				content.addView(scrim);
+				setupStatusBarScrim(content, scrim);
+				return scrim;
+			}
+		}
+		return null;
+	}
+
+	private static void setupStatusBarScrim(@NonNull ViewGroup content, @NonNull View scrim) {
+		ViewCompat.setOnApplyWindowInsetsListener(content, (v, insets) -> {
+			Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.displayCutout());
+
+			ViewGroup.LayoutParams params = scrim.getLayoutParams();
+			if (params.height != sysBars.top) {
+				params.height = sysBars.top;
+				scrim.setLayoutParams(params);
+			}
+			return insets;
+		});
 	}
 
 	public static void setStatusBarContentColor(@Nullable View view, boolean nightMode) {
