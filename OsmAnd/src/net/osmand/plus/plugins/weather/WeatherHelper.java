@@ -21,6 +21,8 @@ import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
@@ -138,6 +140,8 @@ public class WeatherHelper {
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
+		
+		updateWeatherSource();
 	}
 
 	public boolean shouldUpdateForecastCache() {
@@ -199,6 +203,29 @@ public class WeatherHelper {
 			return false;
 		}
 		return updateBandsSettings(weatherResourcesManager);
+	}
+
+	public void updateWeatherSource() {
+		WeatherTileResourcesManager weatherResourcesManager = getWeatherResourcesManager();
+		if (weatherResourcesManager == null) {
+			return;
+		}
+		
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		if (plugin == null) {
+			return;
+		}
+		
+		WeatherSource weatherSource = plugin.getWeatherSource();
+		net.osmand.core.jni.WeatherSource coreWeatherSource;
+		
+		if (weatherSource == WeatherSource.ECMWF) {
+			coreWeatherSource = net.osmand.core.jni.WeatherSource.ECMWF;
+		} else {
+			coreWeatherSource = net.osmand.core.jni.WeatherSource.GFS;
+		}
+		
+		weatherResourcesManager.setWeatherSource(coreWeatherSource);
 	}
 
 	private boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
