@@ -5860,4 +5860,11 @@
     <string name="release_5_2">• Versio estas prilaborata…</string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
+    <string name="obd_alt_battery_voltage">Tensio de baterio (adaptilo)</string>
+    <string name="liter_single">litro</string>
+    <string name="imperial_gallon">brita galono</string>
+    <string name="us_gallon">usona galjono</string>
+    <string name="kilometers">Kilometroj</string>
+    <string name="miles">Mejloj</string>
+    <string name="mpg">Mejloj/galjono</string>
 </resources>
