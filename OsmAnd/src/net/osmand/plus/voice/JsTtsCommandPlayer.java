@@ -3,8 +3,12 @@ package net.osmand.plus.voice;
 import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.AudioTrack;
+import android.media.audiofx.DynamicsProcessing;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
@@ -37,6 +41,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	private static final String PEBBLE_ALERT = "PEBBLE_ALERT";
 
 	private static TextToSpeech mTts;
+	private DynamicsProcessing effects;
 
 	private final HashMap<String, String> params = new HashMap<>();
 
@@ -64,6 +69,10 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		if (app.accessibilityEnabled()) {
 			cSpeechRate = settings.SPEECH_RATE.get();
 		}
+
+		AudioManager audioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		params.put(TextToSpeech.Engine.KEY_PARAM_SESSION_ID, String.valueOf(audioManager.generateAudioSessionId()));
+
 		initializeEngine();
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, settings.AUDIO_MANAGER_STREAM
 				.getModeValue(app.getRoutingHelper().getAppMode()).toString());
@@ -107,6 +116,32 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 					}
 				}
 			});
+
+			DynamicsProcessing.Config cfg = new DynamicsProcessing.Config.Builder(
+					DynamicsProcessing.VARIANT_FAVOR_FREQUENCY_RESOLUTION,
+					1,
+					false,
+					0,
+					true,
+					1,
+					false,
+					0,
+					false)
+					.build();
+			effects = new DynamicsProcessing(0, Integer.parseInt(params.get(TextToSpeech.Engine.KEY_PARAM_SESSION_ID)), cfg);
+			effects.setEnabled(true);
+
+			DynamicsProcessing.MbcBand band = effects.getMbcBandByChannelIndex(0, 0);
+			band.setEnabled(true);
+			band.setAttackTime(10.0f);
+			band.setReleaseTime(150.0f);
+			band.setRatio(2.0f);
+			band.setThreshold(-20.0f);
+			band.setKneeWidth(2.0f);
+			band.setExpanderRatio(1.0f);
+			band.setPreGain(10.0f);
+			band.setPostGain(15);
+			effects.setMbcBandAllChannelsTo(0, band);
 		}
 	}
 
@@ -192,6 +227,9 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 			log.debug("ttsRequests=" + ttsRequests);
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
 			if (AudioFocusHelperImpl.playbackAuthorized) {
+				DynamicsProcessing.MbcBand band = effects.getMbcBandByChannelIndex(0, 0);
+				band.setPostGain(settings.VOICE_AMP_VOLUME.getModeValue(app.getRoutingHelper().getAppMode()));
+				effects.setMbcBandAllChannelsTo(0, band);
 				mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			} else {
 				stop();
@@ -254,6 +292,10 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	private void internalClear() {
 		ttsRequests = 0;
 		speechAllowed = false;
+		if (effects != null) {
+			effects.release();
+		}
+		effects = null;
 		if (mTts != null) {
 			mTts.shutdown();
 			mTts = null;
