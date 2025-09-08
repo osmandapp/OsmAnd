@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
@@ -116,7 +117,7 @@ public class EditDevicePropertyDialog extends BaseFullScreenDialogFragment {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			int statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode);
-			window.setStatusBarColor(statusBarColor);
+			AndroidUiHelper.setStatusBarColor(window, statusBarColor);
 		}
 		return dialog;
 	}

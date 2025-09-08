@@ -269,7 +269,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public int getStatusBarColorId() {
 		View view = getView();
 		if (!isNightMode() && view != null) {
-			AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+			AndroidUiHelper.setStatusBarContentColor(view, true);
 		}
 		return isNightMode() ? R.color.status_bar_main_dark : R.color.divider_color_light;
 	}

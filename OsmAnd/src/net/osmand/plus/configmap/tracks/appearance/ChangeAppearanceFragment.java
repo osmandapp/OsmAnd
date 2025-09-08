@@ -60,7 +60,7 @@ public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment imple
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(ColorUtilities.getColor(app, getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, ColorUtilities.getColor(app, getStatusBarColorId()));
 		}
 		return dialog;
 	}

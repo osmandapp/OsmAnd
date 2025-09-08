@@ -13,10 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.CustomAlert
@@ -85,8 +87,7 @@ class RenameOBDDialog : BaseFullScreenDialogFragment() {
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.attributes.windowAnimations = R.style.Animations_Alpha
 			}
-			val statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode)
-			window.statusBarColor = statusBarColor
+			AndroidUiHelper.setStatusBarColor(window, ColorUtilities.getActivityBgColor(ctx, nightMode))
 		}
 		return dialog
 	}

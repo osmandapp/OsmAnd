@@ -83,7 +83,7 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
 		}
 		dialog.setOnKeyListener((d, keyCode, event) -> {
 			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {
@@ -134,7 +134,7 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 		Window window = requireDialog().getWindow();
 		if (window != null) {
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), true);
-			window.setStatusBarColor(color);
+			AndroidUiHelper.setStatusBarColor(window, color);
 		}
 	}
 

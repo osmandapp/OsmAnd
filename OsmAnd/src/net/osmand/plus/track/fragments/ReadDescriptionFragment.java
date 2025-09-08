@@ -94,7 +94,7 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			int statusBarColor = nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
-			window.setStatusBarColor(ContextCompat.getColor(ctx, statusBarColor));
+			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(ctx, statusBarColor));
 		}
 		return dialog;
 	}

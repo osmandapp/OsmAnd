@@ -25,6 +25,7 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
@@ -98,7 +99,7 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
 		}
 		return dialog;
 	}

@@ -63,7 +63,7 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
 		}
 		return dialog;
 	}

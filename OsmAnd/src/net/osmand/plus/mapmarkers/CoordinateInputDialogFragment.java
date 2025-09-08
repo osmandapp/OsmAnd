@@ -213,7 +213,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 		if (window != null) {
 			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 			if (nightMode) {
-				window.setStatusBarColor(getColor(R.color.status_bar_main_dark));
+				AndroidUiHelper.setStatusBarColor(window, getColor(R.color.status_bar_main_dark));
 			}
 		}
 		return dialog;
