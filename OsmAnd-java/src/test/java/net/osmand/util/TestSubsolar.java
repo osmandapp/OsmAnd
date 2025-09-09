@@ -17,8 +17,8 @@ import net.osmand.data.LatLon;
 
 public class TestSubsolar {
 	static final int MAX_ITERATIONS = 1000;
-	static final int ALTITUDE_PRECISION = 100_000;
-	static final int AZIMUTH_PRECISION = 100_000;
+	static final int ALTITUDE_PRECISION = 1000;
+	static final int AZIMUTH_PRECISION = 1000;
 	
 	static boolean PRINT = false;
 	
@@ -26,15 +26,23 @@ public class TestSubsolar {
 		int tests = 0, duplicate = 0, fail = 0;
 		Map<Double, Integer> errorDistr = new TreeMap<Double, Integer>();
 	}
+	// STATS: Precision 0.001, Iterations 1000, Latitude <= 60
+	// Errors in meters (TESTS)
+	// Alt>= 25 (2091):  {1.0=4, 5.0=73, 10.0=314, 50.0=838, 100.0=848, 500.0=14}
+	// Alt>= 20 (2350): {1.0=4, 5.0=74, 10.0=335, 50.0=888, 100.0=948, 500.0=100, 1000.0=1}
+	// Alt>= 15 (2650): {1.0=4, 5.0=74, 10.0=356, 50.0=937, 100.0=1021, 500.0=173, 1000.0=34, 5000.0=12, 500000.0=17, 1000000.0=22}
+	// Alt>= 10 (2965): {1.0=4, 5.0=74, 10.0=363, 50.0=994, 100.0=1099, 500.0=236, 1000.0=35, 5000.0=47, 500000.0=30, 1000000.0=46, 1.0E7=37}
+
+
 	// examples
 	// https://github.com/cosinekitty/astronomy/blob/master/demo/java/src/main/java/io/github/cosinekitty/astronomy/demo/RiseSetCulm.java
 	public static void main(String[] args) throws InterruptedException {
-		double MIN_ALTITUDE = 20;
+		double MIN_ALTITUDE = 25;
 		Body body = Body.Sun;
 		double lon = 0;
 		Stats s = new Stats();
 		for (int m = 1; m <= 12; m++) {
-			for (double lat = -50; lat <= 50; lat += 5) {
+			for (double lat = -60; lat <= 60; lat += 5) {
 //		double lat = -60; {
 				for (int h = 0; h < 24; h++) {
 //			int h = 18; {
