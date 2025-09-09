@@ -252,7 +252,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		// Navigation Drawer
 		View menuItems = findViewById(R.id.menuItems);
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
-		InsetsUtils.setWindowInsetsListener(findViewById(R.id.dashboard), EnumSet.of(InsetSide.BOTTOM));
 		InsetsUtils.setWindowInsetsListener(menuItems, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
