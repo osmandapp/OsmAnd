@@ -48,6 +48,12 @@ import kotlin.math.round
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
+import net.osmand.shared.extensions.format
+import net.osmand.shared.util.KLock
+import net.osmand.shared.util.synchronized
+import kotlin.jvm.JvmName
+import kotlin.jvm.JvmOverloads
+import kotlin.jvm.JvmStatic
 
 /**
  * An invalid body was specified for the given function.
@@ -3634,7 +3640,7 @@ private fun getPlutoSegment(tt: Double): List<BodyGravCalc>? {
         return null     // Don't bother calculating a segment. Let the caller crawl backward/forward to this time
 
     val segIndex = clampIndex((tt - plutoStateTable[0].tt) / PLUTO_TIME_STEP, PLUTO_NUM_STATES-1)
-    return synchronized(plutoCache) {
+    return synchronized(plutoCacheLock) {
         plutoCache.getOrPut(segIndex) {
             val seg = mutableListOf<BodyGravCalc>()
 
@@ -10048,6 +10054,7 @@ private val plutoStateTable: Array<BodyState> = arrayOf(
 ,   BodyState(  730000.0, TerseVector(  4.243252837090, -30.118201690825, -10.707441231349), TerseVector( 3.1725847067411e-03,  1.6098461202270e-04, -9.0672150593868e-04))
 )
 private val plutoCache = hashMapOf<Int, List<BodyGravCalc>>()
+private val plutoCacheLock = KLock()
 
 //---------------------------------------------------------------------------------------
 // Models for Jupiter's four largest moons.
