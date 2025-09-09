@@ -38,7 +38,6 @@ public class HelpActivity extends BaseLogcatActivity implements LoadArticlesList
 			actionBar.setElevation(5.0f);
 		}
 		setContentView(R.layout.help_activity);
-
 		if (savedInstanceState == null) {
 			HelpMainFragment.showInstance(getSupportFragmentManager());
 		}

@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -41,6 +42,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -64,16 +66,21 @@ import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements IOsmAndFragment,
-		OnPreferenceChangeListener, OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
+		OnPreferenceChangeListener, OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged, ISupportInsets {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 
@@ -96,6 +103,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	private int statusBarColor = -1;
 	private boolean wasDrawerDisabled;
+
+	private WindowInsetsCompat lastRootInsets = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,6 +159,49 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		updateToolbar();
+		InsetsUtils.processInsets(this, view);
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides(){
+		return EnumSet.of(InsetSide.TOP);
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getFabIds() {
+		return null;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
+	}
+
+	@Nullable
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return lastRootInsets;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+		lastRootInsets = rootInsets;
 	}
 
 	@Override
@@ -265,7 +317,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (isProfileDependent()) {
 			View view = getView();
 			if (view != null && !nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+				AndroidUiHelper.setStatusBarContentColor(view, true);
 			}
 			return ColorUtilities.getListBgColorId(nightMode);
 		} else {

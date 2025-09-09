@@ -41,6 +41,11 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 
 	private View applyButton;
 
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -49,24 +54,13 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId) {
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
 			@Override
 			public void onBackPressed() {
 				dismiss();
 			}
 		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, ColorUtilities.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Override
@@ -160,7 +154,7 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 		controller.getWidthCardController().setOnNeedScrollListener(y -> {
 			View view = getView();
 			if (view != null) {
-				int bottomVisibleY = view.findViewById(R.id.buttons_container).getTop();
+				int bottomVisibleY = view.findViewById(R.id.bottom_buttons_container).getTop();
 				if (y > bottomVisibleY) {
 					NestedScrollView scrollView = view.findViewById(R.id.scroll_view);
 					int diff = y - bottomVisibleY;

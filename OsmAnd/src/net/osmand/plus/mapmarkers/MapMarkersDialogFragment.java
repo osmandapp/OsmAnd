@@ -69,8 +69,8 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(requireActivity(), getTheme()) {
+	public Dialog createDialog(Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				if (!dismissOptionsMenuFragment()) {
@@ -78,10 +78,6 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 				}
 			}
 		};
-		if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-			dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_Alpha;
-		}
-		return dialog;
 	}
 
 	@Nullable

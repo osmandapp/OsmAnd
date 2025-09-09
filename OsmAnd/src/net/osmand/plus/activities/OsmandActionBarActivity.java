@@ -1,44 +1,57 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
+import static net.osmand.plus.utils.InsetsUtils.InsetSide.BOTTOM;
+import static net.osmand.plus.utils.InsetsUtils.InsetSide.TOP;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.ActionBar;
 
-import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.InsetsUtils;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 @SuppressLint("Registered")
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
-	protected boolean haveHomeButton = true;
-	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
+	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
 
-	//should be called after set content view
-	protected void setupHomeButton() {
-		ActionBar supportActionBar = getSupportActionBar();
-		if (supportActionBar != null) {
-			OsmandApplication app = getMyApplication();
-			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-			int iconId = AndroidUtils.getNavigationIconResId(app);
-			int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+	@ColorRes
+	protected int getStatusBarColorId() {
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
+		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
 
-			supportActionBar.setHomeButtonEnabled(true);
-			supportActionBar.setDisplayHomeAsUpEnabled(true);
-			supportActionBar.setHomeAsUpIndicator(app.getUIUtilities().getIcon(iconId, colorId));
+	@ColorRes
+	protected int getNavigationBarColorId() {
+		return -1;
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			EdgeToEdge.enable(this);
 		}
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		for (ActivityResultListener listener : activityResultListeners) {
+		for (ActivityResultListener listener : resultListeners) {
 			if (listener.processResult(requestCode, resultCode, data)) {
 				removeActivityResultListener(listener);
 				return;
@@ -48,36 +61,53 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 	}
 
 	public void registerActivityResultListener(ActivityResultListener listener) {
-		if (!activityResultListeners.contains(listener)) {
-			activityResultListeners.add(listener);
+		if (!resultListeners.contains(listener)) {
+			resultListeners.add(listener);
 		}
 	}
 
 	public void removeActivityResultListener(ActivityResultListener listener) {
-		activityResultListeners.remove(listener);
+		resultListeners.remove(listener);
 	}
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-		if (haveHomeButton) {
-			setupHomeButton();
-		}
-    }
+	@Override
+	public void onContentChanged() {
+		super.onContentChanged();
 
-    @Override
-    public void setContentView(View view) {
-        super.setContentView(view);
-		if (haveHomeButton) {
-			setupHomeButton();
-		}
-    }
+		setupHomeButton();
+		updateStatusBarColor();
 
-    @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-        super.setContentView(view, params);
-		if (haveHomeButton) {
-			setupHomeButton();
+		View root = findViewById(R.id.root);
+		if (root != null) {
+			InsetsUtils.setWindowInsetsListener(root, EnumSet.of(TOP, BOTTOM));
 		}
-    }
+	}
+
+	protected void setupHomeButton() {
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			OsmandApplication app = getMyApplication();
+			boolean nightMode = app.getDaynightHelper().isNightMode(APP);
+			int iconId = AndroidUtils.getNavigationIconResId(app);
+			int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setHomeAsUpIndicator(app.getUIUtilities().getIcon(iconId, colorId));
+		}
+	}
+
+	public void updateStatusBarColor() {
+		int colorId = getStatusBarColorId();
+		if (colorId != -1) {
+			AndroidUiHelper.setStatusBarColor(this, getColor(colorId));
+		}
+	}
+
+	public void updateNavigationBarColor() {
+		int colorId = getNavigationBarColorId();
+		if (colorId != -1) {
+			AndroidUiHelper.setNavigationBarColor(this, getColor(colorId));
+		}
+	}
 }

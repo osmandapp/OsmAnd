@@ -32,7 +32,7 @@ public class HMDPromoFragment extends PromoCompanyFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-		View buttonsContainer = view != null ? view.findViewById(R.id.buttons_container) : null;
+		View buttonsContainer = view != null ? view.findViewById(R.id.bottom_buttons_container) : null;
 		if (buttonsContainer != null) {
 			buttonsContainer.setVisibility(GONE);
 		}

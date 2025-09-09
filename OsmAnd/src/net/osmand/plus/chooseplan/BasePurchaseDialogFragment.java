@@ -71,6 +71,11 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 		}
 	}
 
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
 	@ColorRes
 	protected int getStatusBarColorId() {
 		return ColorUtilities.getListBgColorId(nightMode);
@@ -85,23 +90,6 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 	@Override
 	protected boolean isUsedOnMap() {
 		return getMapActivity() != null;
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Nullable

@@ -57,7 +57,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		LinearLayout gl = new LinearLayout(this);
 		gl.setOrientation(LinearLayout.VERTICAL);
 		gl.setPadding(3, 3, 3, 3);
-		
+
 		TextView tv = new TextView(this);
 		tv.setText(R.string.test_voice_desrc);
 		tv.setPadding(0, 5, 0, 7);

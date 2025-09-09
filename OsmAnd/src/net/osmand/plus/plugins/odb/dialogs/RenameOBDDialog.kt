@@ -77,19 +77,12 @@ class RenameOBDDialog : BaseFullScreenDialogFragment() {
 		return true
 	}
 
-	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val ctx: Activity = requireActivity()
-		val themeId =
-			if (nightMode) R.style.OsmandDarkTheme_DarkActionbar else R.style.OsmandLightTheme_DarkActionbar_LightStatusBar
-		val dialog = Dialog(ctx, themeId)
-		val window = dialog.window
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.attributes.windowAnimations = R.style.Animations_Alpha
-			}
-			AndroidUiHelper.setStatusBarColor(window, ColorUtilities.getActivityBgColor(ctx, nightMode))
-		}
-		return dialog
+	override fun getThemeId(): Int {
+		return if (nightMode) R.style.OsmandDarkTheme_DarkActionbar else R.style.OsmandLightTheme_DarkActionbar_LightStatusBar
+	}
+
+	override fun getStatusBarColorId(): Int {
+		return ColorUtilities.getActivityBgColorId(nightMode)
 	}
 
 	private fun shouldClose(): Boolean {

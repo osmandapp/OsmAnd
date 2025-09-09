@@ -2,6 +2,7 @@ package net.osmand.plus.mapmarkers;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -125,6 +126,11 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 	}
 
 	@Override
+	protected int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_main_dark : -1;
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		newGpxFile = new GpxFile(Version.getFullVersion(app));
@@ -198,7 +204,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public Dialog createDialog(Bundle savedInstanceState) {
 		Dialog dialog = new Dialog(requireActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
@@ -211,10 +217,7 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 		};
 		Window window = dialog.getWindow();
 		if (window != null) {
-			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-			if (nightMode) {
-				AndroidUiHelper.setStatusBarColor(window, getColor(R.color.status_bar_main_dark));
-			}
+			window.setSoftInputMode(SOFT_INPUT_STATE_HIDDEN);
 		}
 		return dialog;
 	}

@@ -53,7 +53,7 @@ public class SelectRouteActivityFragment extends CustomizableSingleSelectionDial
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public Dialog createDialog(Bundle savedInstanceState) {
 		Dialog dialog = super.onCreateDialog(savedInstanceState);
 		dialog.setOnKeyListener((d, keyCode, event) -> {
 			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {

@@ -37,6 +37,11 @@ import java.util.List;
 
 public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment {
 
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
 	@ColorRes
 	protected int getStatusBarColorId() {
 		return ColorUtilities.getListBgColorId(nightMode);
@@ -49,25 +54,6 @@ public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment 
 
 	@NonNull
 	protected abstract List<OsmAndFeature> getFeatures();
-
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(activity, getStatusBarColorId()));
-		}
-		return dialog;
-	}
 
 	@Nullable
 	@Override
@@ -118,7 +104,7 @@ public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment 
 	}
 
 	private void setupButtons(@NonNull View view) {
-		View container = view.findViewById(R.id.buttons_container);
+		View container = view.findViewById(R.id.bottom_buttons_container);
 		container.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		DialogButton button = container.findViewById(R.id.dismiss_button);

@@ -2,13 +2,10 @@ package net.osmand.plus.card.color.palette.gradient;
 
 import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +37,11 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 	private AllGradientsPaletteAdapter adapter;
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
@@ -47,23 +49,6 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 		if (controller != null) {
 			controller.bindPalette(this);
 		}
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Nullable

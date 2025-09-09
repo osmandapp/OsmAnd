@@ -6,6 +6,7 @@ import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
+import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -119,6 +120,8 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -138,6 +141,7 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -246,7 +250,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		setContentView(R.layout.main);
 		enterToFullScreen();
 		// Navigation Drawer
+		View menuItems = findViewById(R.id.menuItems);
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
+		InsetsUtils.setWindowInsetsListener(findViewById(R.id.dashboard), EnumSet.of(InsetSide.BOTTOM));
+		InsetsUtils.setWindowInsetsListener(menuItems, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
@@ -474,7 +481,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
 		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
 
-		boolean nightMode = dayNightHelper.isNightMode(ThemeUsageContext.OVER_MAP);
+		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
 		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
 
 		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
@@ -796,8 +803,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	@Override
 	public void updateStatusBarColor() {
 		UiUtilities.updateStatusBarColor(this);
+	}
+
+	@Override
+	protected int getNavigationBarColorId() {
+		boolean nightMode = app.getDaynightHelper().isNightMode(OVER_MAP);
+		return ColorUtilities.getNavBarBackgroundColorId(nightMode);
 	}
 
 	public boolean isInAppPurchaseAllowed() {
@@ -1140,11 +1154,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		applyScreenOrientation();
 		app.getAppCustomization().updateMapMargins(this);
 		dashboardOnMap.onAppModeChanged();
-	}
-
-	public void updateNavigationBarColor() {
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		getWindow().setNavigationBarColor(ColorUtilities.getNavBarBackgroundColor(app, nightMode));
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {

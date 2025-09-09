@@ -52,6 +52,9 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
@@ -112,7 +115,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			FrameLayout preferencesContainer = view.findViewById(android.R.id.list_container);
 			LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 			View bottomPanel = themedInflater.inflate(R.layout.control_bottom_buttons, preferencesContainer, false);
-			View buttonsContainer = bottomPanel.findViewById(R.id.buttons_container);
+			View buttonsContainer = bottomPanel.findViewById(R.id.bottom_buttons_container);
 			preferencesContainer.addView(bottomPanel);
 
 			buttonsContainer.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
@@ -140,6 +143,20 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		}
 		updateApplyButtonEnable();
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(android.R.id.list_container);
+		return ids;
 	}
 
 	@Override

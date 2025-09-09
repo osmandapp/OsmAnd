@@ -21,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -82,7 +81,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 			AndroidUiHelper.setStatusBarColor(window, getResolvedColor(getStatusBarColor()));
 		}
-
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);

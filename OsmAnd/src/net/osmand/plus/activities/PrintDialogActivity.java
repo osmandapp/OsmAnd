@@ -42,6 +42,7 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		getSupportActionBar().setTitle(R.string.print_route);
 
 		setContentView(R.layout.print_dialog);
+
 		webView = findViewById(R.id.printDialogWebview);
 
 		Intent intent = getIntent();

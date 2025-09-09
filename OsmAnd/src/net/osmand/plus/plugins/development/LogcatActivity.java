@@ -40,8 +40,7 @@ public class LogcatActivity extends BaseLogcatActivity {
 		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.recyclerview);
-
+		setContentView(R.layout.logcat_activity);
 		ActionBar supportActionBar = getSupportActionBar();
 		if (supportActionBar != null) {
 			supportActionBar.setTitle(R.string.logcat_buffer);

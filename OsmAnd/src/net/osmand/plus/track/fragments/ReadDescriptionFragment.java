@@ -1,7 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,14 +8,12 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebSettings;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -46,6 +42,16 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 	protected enum ContentType {
 		PLAIN,
 		HTML
+	}
+
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
+	@Override
+	protected int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 	}
 
 	@Override
@@ -80,23 +86,6 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 	public void onResume() {
 		super.onResume();
 		updateContentView();
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			int statusBarColor = nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
-			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(ctx, statusBarColor));
-		}
-		return dialog;
 	}
 
 	private void setupToolbar(@NonNull View view) {

@@ -28,6 +28,7 @@ import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
@@ -41,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDataChangeUiAdapter,
 		InAppPurchaseListener, SelectGpxTaskListener {
@@ -304,6 +306,11 @@ public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDa
 	public static ConfigureMapFragment getVisibleInstance(@NonNull MapActivity mapActivity) {
 		FragmentManager fm = mapActivity.getSupportFragmentManager();
 		return (ConfigureMapFragment) fm.findFragmentByTag(TAG);
+	}
+
+	@Nullable
+	public Set<InsetSide> getRootInsetSides() {
+		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {

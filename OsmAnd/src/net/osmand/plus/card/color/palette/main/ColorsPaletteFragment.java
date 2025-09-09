@@ -2,14 +2,11 @@ package net.osmand.plus.card.color.palette.main;
 
 import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +38,11 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 	private ColorsPaletteElements paletteElements;
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
@@ -50,28 +52,12 @@ public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implemen
 		}
 	}
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
-		paletteElements = new ColorsPaletteElements(requireActivity(), nightMode);
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
-		}
-		return dialog;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
+		paletteElements = new ColorsPaletteElements(requireContext(), nightMode);
+
 		View view = inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);
 		setupColorsPalette(view);
