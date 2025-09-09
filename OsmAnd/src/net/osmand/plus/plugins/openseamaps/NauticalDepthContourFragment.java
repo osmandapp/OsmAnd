@@ -33,8 +33,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 
@@ -184,7 +184,7 @@ public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

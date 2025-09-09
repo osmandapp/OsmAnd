@@ -29,6 +29,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment, ISupportInsets {
 
@@ -62,15 +63,14 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	@Override
 	public void onStart() {
 		super.onStart();
-		Dialog dialog = getDialog();
 
+		Dialog dialog = getDialog();
 		if (dialog != null && dialog.getWindow() != null && Build.VERSION.SDK_INT > 29) {
 			if (Build.VERSION.SDK_INT >= 36) {
 				//WindowCompat.enableEdgeToEdge(window);
 			} else {
 				WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), false);
 			}
-
 		}
 	}
 
@@ -82,7 +82,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 
 	@Nullable
 	@Override
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return EnumSet.of(InsetSide.TOP);
 	}
 
@@ -107,7 +107,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		return null;
 	}
 
-	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
 
 	}
 

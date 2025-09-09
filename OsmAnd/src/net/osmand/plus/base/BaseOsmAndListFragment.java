@@ -22,8 +22,8 @@ import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Base fragment class for list-based screens in the OsmAnd application
@@ -67,7 +67,7 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 
 	@Nullable
 	@Override
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

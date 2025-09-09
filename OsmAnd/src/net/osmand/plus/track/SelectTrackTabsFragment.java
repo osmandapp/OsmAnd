@@ -56,8 +56,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.select_track_fragment, container, false);
 
@@ -191,13 +190,11 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		return true;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-			Object fileSelectionListener) {
+	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener) {
 		showInstance(manager, fileSelectionListener, null);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener,
-			@Nullable ItemVisibilityCallback itemVisibilityCallback) {
+	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener, @Nullable ItemVisibilityCallback itemVisibilityCallback) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectTrackTabsFragment fragment = new SelectTrackTabsFragment();
 			fragment.fileSelectionListener = fileSelectionListener;

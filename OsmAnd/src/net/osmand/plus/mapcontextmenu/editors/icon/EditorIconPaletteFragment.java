@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.editors.icon;
 
 import static net.osmand.plus.card.icon.IIconsPaletteController.ALL_ICONS_PROCESS_ID;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -79,7 +78,7 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 	@NonNull
 	@Override
 	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(requireActivity(), getThemeId());
+		Dialog dialog = super.createDialog(savedInstanceState);
 		dialog.setOnKeyListener((d, keyCode, event) -> {
 			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {
 				onBackPressed();

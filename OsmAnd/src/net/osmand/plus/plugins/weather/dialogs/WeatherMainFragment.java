@@ -36,8 +36,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.EnumSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class WeatherMainFragment extends BaseFullScreenFragment implements DownloadEvents, RemoveLocalForecastListener {
 
@@ -223,7 +223,7 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

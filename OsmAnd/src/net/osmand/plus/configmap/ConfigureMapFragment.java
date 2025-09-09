@@ -38,11 +38,11 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDataChangeUiAdapter,
 		InAppPurchaseListener, SelectGpxTaskListener {
@@ -309,7 +309,7 @@ public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDa
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

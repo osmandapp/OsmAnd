@@ -42,6 +42,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -194,7 +195,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides(){
 		return EnumSet.of(InsetSide.BOTTOM);
 	}
 

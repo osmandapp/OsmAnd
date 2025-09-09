@@ -33,7 +33,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.EnumSet;
+import java.util.Set;
 import java.util.List;
 
 public class CoordinatesGridController extends BaseDialogController {
@@ -209,7 +209,7 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	@Nullable
-	protected EnumSet<InsetSide> getSideInsets(){
+	protected Set<InsetSide> getSideInsets() {
 		return null;
 	}
 

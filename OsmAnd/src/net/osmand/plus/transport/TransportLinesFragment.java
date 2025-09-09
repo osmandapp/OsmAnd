@@ -29,8 +29,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class TransportLinesFragment extends BaseFullScreenFragment {
 
@@ -174,7 +174,7 @@ public class TransportLinesFragment extends BaseFullScreenFragment {
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

@@ -93,6 +93,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
@@ -598,7 +599,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 	@Nullable
 	@Override
-	public EnumSet<InsetSide> getRootInsetSides() {
+	public Set<InsetSide> getRootInsetSides() {
 		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
 	}
 

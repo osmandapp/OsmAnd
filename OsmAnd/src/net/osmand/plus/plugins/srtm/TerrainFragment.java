@@ -65,8 +65,8 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class TerrainFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents {
@@ -405,7 +405,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

@@ -39,8 +39,8 @@ import net.osmand.util.CollectionUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class MapRoutesFragment extends BaseFullScreenFragment implements CardListener {
 
@@ -212,7 +212,7 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

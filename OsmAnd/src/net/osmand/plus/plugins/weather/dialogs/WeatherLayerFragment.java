@@ -33,7 +33,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.EnumSet;
+import java.util.Set;
 
 public class WeatherLayerFragment extends BaseFullScreenFragment {
 
@@ -249,7 +249,7 @@ public class WeatherLayerFragment extends BaseFullScreenFragment {
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

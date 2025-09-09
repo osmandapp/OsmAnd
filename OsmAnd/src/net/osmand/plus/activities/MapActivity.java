@@ -6,6 +6,7 @@ import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
+import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -480,7 +481,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
 		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
 
-		boolean nightMode = dayNightHelper.isNightMode(ThemeUsageContext.OVER_MAP);
+		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
 		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
 
 		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
@@ -805,6 +806,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void updateStatusBarColor() {
 		UiUtilities.updateStatusBarColor(this);
+	}
+
+	@Override
+	protected int getNavigationBarColorId() {
+		boolean nightMode = app.getDaynightHelper().isNightMode(OVER_MAP);
+		return ColorUtilities.getNavBarBackgroundColorId(nightMode);
 	}
 
 	public boolean isInAppPurchaseAllowed() {
@@ -1147,11 +1154,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		applyScreenOrientation();
 		app.getAppCustomization().updateMapMargins(this);
 		dashboardOnMap.onAppModeChanged();
-	}
-
-	public void updateNavigationBarColor() {
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		getWindow().setNavigationBarColor(ColorUtilities.getNavBarBackgroundColor(app, nightMode));
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {

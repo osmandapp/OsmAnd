@@ -164,7 +164,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Nullable
 	@Override
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides(){
 		return EnumSet.of(InsetSide.TOP);
 	}
 

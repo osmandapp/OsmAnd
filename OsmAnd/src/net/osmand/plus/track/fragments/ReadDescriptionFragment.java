@@ -67,8 +67,7 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
@@ -172,8 +171,7 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 		}
 	}
 
-	public void setupWebViewClient(@NonNull View view) {
-	}
+	public void setupWebViewClient(@NonNull View view) { }
 
 	private String setupContentStyle(@NonNull String content, boolean isNight) {
 		StringBuilder sb = new StringBuilder();

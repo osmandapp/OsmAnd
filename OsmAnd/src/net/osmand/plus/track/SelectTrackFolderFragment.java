@@ -107,8 +107,7 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		importHelper = app.getImportHelper();
 		updateNightMode();
 		view = inflate(R.layout.select_track_folder_fragment, container, false);
@@ -325,11 +324,9 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		adapter.notifyDataSetChanged();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-			@NonNull BaseTracksTabsFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
-			@Nullable Object fileSelectionListener, @NonNull TrackFolder baseTrackFolder,
-			@NonNull TrackFolder currentTrackFolder,
-			@Nullable ItemVisibilityCallback itemVisibilityCallback) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull BaseTracksTabsFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
+									@Nullable Object fileSelectionListener, @NonNull TrackFolder baseTrackFolder, @NonNull TrackFolder currentTrackFolder,
+									@Nullable ItemVisibilityCallback itemVisibilityCallback) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectTrackFolderFragment fragment = new SelectTrackFolderFragment();
 			fragment.sortMode = sortMode;
@@ -380,8 +377,7 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		return new MultipleTracksImportListener(filesSize) {
 
 			@Override
-			public void onImportStarted() {
-			}
+			public void onImportStarted() {}
 
 			@Override
 			public void onImportFinished() {

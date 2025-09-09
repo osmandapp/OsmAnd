@@ -21,6 +21,7 @@ import net.osmand.plus.base.ISupportInsets;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class InsetsUtils {
 
@@ -38,16 +39,12 @@ public class InsetsUtils {
 		return Build.VERSION.SDK_INT >= MINIMUM_EDGE_TO_EDGE_SUPPORTED_API;
 	}
 
+	@Nullable
 	public static Insets getSysBars(@NonNull Context ctx, @Nullable WindowInsetsCompat insets) {
 		if (!isEdgeToEdgeSupported()) {
 			return Insets.of(0, AndroidUtils.getStatusBarHeight(ctx), 0, 0);
-		} else {
-			if (insets == null) {
-				return null;
-			} else {
-				return insets.getInsets(WindowInsetsCompat.Type.systemBars());
-			}
 		}
+		return insets != null ? insets.getInsets(WindowInsetsCompat.Type.systemBars()) : null;
 	}
 
 	public static void setWindowInsetsListener(@NonNull final View view,
@@ -83,16 +80,13 @@ public class InsetsUtils {
 		}
 	}
 
-	public static void setWindowInsetsListener(@NonNull final View view,
-	                                           @Nullable final EnumSet<InsetSide> sides) {
-		setWindowInsetsListener(view, (v, insets) -> {
-			applyPadding(v, insets, sides);
-		}, false);
+	public static void setWindowInsetsListener(@NonNull View view, @Nullable Set<InsetSide> sides) {
+		setWindowInsetsListener(view, (v, insets) -> applyPadding(v, insets, sides), false);
 	}
 
 	public static void applyPadding(@NonNull View view,
 	                                @NonNull WindowInsetsCompat insets,
-	                                @Nullable EnumSet<InsetSide> sides) {
+	                                @Nullable Set<InsetSide> sides) {
 		if (sides == null || !isEdgeToEdgeSupported()) {
 			return;
 		}
@@ -146,7 +140,7 @@ public class InsetsUtils {
 		if (!allowProcessInsets) {
 			return;
 		}
-		EnumSet<InsetSide> insetSides = insetSupportedFragment.getRootInsetSides();
+		Set<InsetSide> insetSides = insetSupportedFragment.getRootInsetSides();
 		List<Integer> rootScrollableIds = insetSupportedFragment.getScrollableViewIds();
 		List<Integer> bottomContainers = insetSupportedFragment.getBottomContainersIds();
 		List<Integer> fabs = insetSupportedFragment.getFabIds();
@@ -176,7 +170,7 @@ public class InsetsUtils {
 	}
 
 	private static void processRootInsetSides(@NonNull WindowInsetsCompat insets,
-	                                          @Nullable EnumSet<InsetSide> insetSides,
+	                                          @Nullable Set<InsetSide> insetSides,
 	                                          @NonNull View view){
 		InsetsUtils.applyPadding(view, insets, insetSides);
 	}
@@ -265,7 +259,7 @@ public class InsetsUtils {
 	                                        @NonNull WindowInsetsCompat insets,
 	                                        @Nullable List<Integer> rootScrollableIds,
 	                                        @NonNull View view,
-	                                        @Nullable EnumSet<InsetSide> insetSides) {
+	                                        @Nullable Set<InsetSide> insetSides) {
 		View listView = null;
 		if (rootScrollableIds != null) {
 			for (int id : rootScrollableIds) {

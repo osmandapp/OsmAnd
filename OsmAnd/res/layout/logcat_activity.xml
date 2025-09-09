@@ -5,13 +5,6 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/recycler_view"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/bg_color"
-		android:clipToPadding="false"
-		android:orientation="vertical"
-		android:scrollbars="vertical" />
+	<include layout="@layout/recyclerview" />
 
 </LinearLayout>

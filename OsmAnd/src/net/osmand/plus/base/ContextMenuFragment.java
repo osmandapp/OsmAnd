@@ -50,6 +50,7 @@ import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class ContextMenuFragment extends BaseFullScreenFragment implements MapControlsThemeProvider {
 
@@ -473,7 +474,7 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 
 	@Nullable
 	@Override
-	public EnumSet<InsetSide> getRootInsetSides() {
+	public Set<InsetSide> getRootInsetSides() {
 		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
 	}
 

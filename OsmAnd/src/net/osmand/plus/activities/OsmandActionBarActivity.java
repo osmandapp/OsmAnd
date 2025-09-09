@@ -1,11 +1,15 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
+import static net.osmand.plus.utils.InsetsUtils.InsetSide.BOTTOM;
+import static net.osmand.plus.utils.InsetsUtils.InsetSide.TOP;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.ColorRes;
 import androidx.appcompat.app.ActionBar;
 
@@ -15,7 +19,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -24,7 +27,6 @@ import java.util.List;
 @SuppressLint("Registered")
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
-	protected boolean haveHomeButton = true;
 	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
 
 	@ColorRes
@@ -32,6 +34,19 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 		OsmandApplication app = getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
 		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
+
+	@ColorRes
+	protected int getNavigationBarColorId() {
+		return -1;
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			EdgeToEdge.enable(this);
+		}
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override
@@ -59,25 +74,16 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 	public void onContentChanged() {
 		super.onContentChanged();
 
-		if (haveHomeButton) {
-			setupHomeButton();
-		}
+		setupHomeButton();
+		updateStatusBarColor();
 
 		View root = findViewById(R.id.root);
 		if (root != null) {
-			InsetsUtils.setWindowInsetsListener(root, EnumSet.of(
-					InsetSide.TOP,
-					InsetSide.BOTTOM
-			));
+			InsetsUtils.setWindowInsetsListener(root, EnumSet.of(TOP, BOTTOM));
 		}
-		updateStatusBarColor();
 	}
 
-	public void updateStatusBarColor() {
-		AndroidUiHelper.setStatusBarColor(this, getColor(getStatusBarColorId()));
-	}
-
-	private void setupHomeButton() {
+	protected void setupHomeButton() {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			OsmandApplication app = getMyApplication();
@@ -88,6 +94,20 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 			actionBar.setHomeButtonEnabled(true);
 			actionBar.setDisplayHomeAsUpEnabled(true);
 			actionBar.setHomeAsUpIndicator(app.getUIUtilities().getIcon(iconId, colorId));
+		}
+	}
+
+	public void updateStatusBarColor() {
+		int colorId = getStatusBarColorId();
+		if (colorId != -1) {
+			AndroidUiHelper.setStatusBarColor(this, getColor(colorId));
+		}
+	}
+
+	public void updateNavigationBarColor() {
+		int colorId = getNavigationBarColorId();
+		if (colorId != -1) {
+			AndroidUiHelper.setNavigationBarColor(this, getColor(colorId));
 		}
 	}
 }

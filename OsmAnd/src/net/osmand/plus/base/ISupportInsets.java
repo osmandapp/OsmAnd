@@ -8,13 +8,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public interface ISupportInsets {
 
 	@Nullable
-	EnumSet<InsetSide> getRootInsetSides();
+	Set<InsetSide> getRootInsetSides();
 
 	@Nullable
 	List<Integer> getFabIds();

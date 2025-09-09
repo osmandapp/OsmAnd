@@ -41,8 +41,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class TravelRoutesFragment extends BaseFullScreenFragment {
 
@@ -434,7 +434,7 @@ public class TravelRoutesFragment extends BaseFullScreenFragment {
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

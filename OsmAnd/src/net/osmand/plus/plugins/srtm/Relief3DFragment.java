@@ -27,7 +27,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.EnumSet;
+import java.util.Set;
 
 public class Relief3DFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents, MapOptionSliderListener {
 
@@ -176,7 +176,7 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

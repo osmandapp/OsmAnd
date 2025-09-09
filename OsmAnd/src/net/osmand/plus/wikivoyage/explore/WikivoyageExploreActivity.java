@@ -43,7 +43,6 @@ import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 
 public class WikivoyageExploreActivity extends TabActivity implements DownloadEvents, OnDialogFragmentResultListener,

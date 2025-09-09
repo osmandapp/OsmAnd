@@ -28,9 +28,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class WeatherContoursFragment extends BaseFullScreenFragment {
 
@@ -243,7 +243,7 @@ public class WeatherContoursFragment extends BaseFullScreenFragment {
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides() {
 		return null;
 	}
 

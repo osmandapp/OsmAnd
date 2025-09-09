@@ -40,7 +40,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.EnumSet;
+import java.util.Set;
 
 public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
@@ -275,7 +275,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
     }
 
     @Nullable
-    public EnumSet<InsetSide> getRootInsetSides(){
+    public Set<InsetSide> getRootInsetSides() {
         return null;
     }
 

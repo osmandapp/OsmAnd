@@ -1,6 +1,5 @@
 package net.osmand.plus.base;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Base fragment class for all UI components in OsmAnd that directly extend Android's Fragment.
@@ -81,7 +81,7 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment, ISu
 	}
 
 	@Nullable
-	public EnumSet<InsetSide> getRootInsetSides(){
+	public Set<InsetSide> getRootInsetSides(){
 		return EnumSet.of(InsetSide.TOP);
 	}
 
