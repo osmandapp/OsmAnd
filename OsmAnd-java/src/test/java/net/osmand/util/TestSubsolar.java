@@ -19,6 +19,7 @@ public class TestSubsolar {
 	static final int MAX_ITERATIONS = 1000;
 	static final int ALTITUDE_PRECISION = 1000;
 	static final int AZIMUTH_PRECISION = 1000;
+	static final double MIN_ALTITUDE = 30;
 	
 	static boolean PRINT = false;
 	
@@ -37,7 +38,6 @@ public class TestSubsolar {
 	// examples
 	// https://github.com/cosinekitty/astronomy/blob/master/demo/java/src/main/java/io/github/cosinekitty/astronomy/demo/RiseSetCulm.java
 	public static void main(String[] args) throws InterruptedException {
-		double MIN_ALTITUDE = 25;
 		Body body = Body.Sun;
 		double lon = 0;
 		Stats s = new Stats();
@@ -46,7 +46,7 @@ public class TestSubsolar {
 //		double lat = -60; {
 				for (int h = 0; h < 24; h++) {
 //			int h = 18; {
-					runTest(MIN_ALTITUDE, body, lat, lon, s, m, h);
+					runTest(body, lat, lon, s, m, h);
 				}
 			}
 		}
@@ -54,7 +54,7 @@ public class TestSubsolar {
 		System.out.println(s.errorDistr);
 	}
 
-	private static void runTest(double MIN_ALTITUDE, Body body, double lat, double lon, Stats s, int m, int h) {
+	private static void runTest(Body body, double lat, double lon, Stats s, int m, int h) {
 		String utcTimeString = String.format("2025-01-%02dT%02d:00:00Z", m, h);
 		long timeS = Instant.parse(utcTimeString).getEpochSecond() * 1000;
 		// timeS = System.currentTimeMillis();
