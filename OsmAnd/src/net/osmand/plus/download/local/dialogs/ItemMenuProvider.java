@@ -184,7 +184,7 @@ public class ItemMenuProvider implements MenuProvider {
 			menuItem.setOnMenuItemClickListener(i -> {
 				FragmentManager manager = fragment.getFragmentManager();
 				if (manager != null) {
-					DeleteConfirmationBottomSheet.showInstance(manager, fragment, item);
+					DeleteConfirmationDialogController.showDialog(app, manager, item, fragment);
 				}
 				return true;
 			});

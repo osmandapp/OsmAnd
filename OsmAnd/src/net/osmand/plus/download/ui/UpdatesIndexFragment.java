@@ -1,5 +1,7 @@
 package net.osmand.plus.download.ui;
 
+import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
+import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
 
 import android.content.Context;
@@ -28,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -42,7 +45,15 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.LocalOperationTask;
+import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
+import net.osmand.plus.download.local.OperationType;
+import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController;
+import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController.ConfirmDeletionListener;
+import net.osmand.plus.download.local.dialogs.LocalItemFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -51,15 +62,21 @@ import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class UpdatesIndexFragment extends BaseNestedListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
+public class UpdatesIndexFragment extends BaseNestedListFragment implements DownloadEvents,
+		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
@@ -71,6 +88,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		invalidateListView(requireContext());
 		startLoadLiveMapsAsyncTask();
 		setHasOptionsMenu(true);
+		DeleteConfirmationDialogController.askUpdateListener(app, this);
 	}
 
 	@Override
@@ -78,14 +96,34 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.update_index_frament, container, false);
-		getMyActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.UPDATES_TAB_NUMBER);
+		requireMyActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.UPDATES_TAB_NUMBER);
 		return view;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		setupOnItemLongClickListener();
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		updateErrorMessage();
+	}
+
+	private void setupOnItemLongClickListener() {
+		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
+			if (position > 0) {
+				IndexItem indexItem = (IndexItem) getListAdapter().getItem(position);
+				LocalItem localItem = indexItem.toLocalItem(app);
+				if (localItem != null) {
+					askShowContextMenu(v, indexItem, localItem);
+					return true;
+				}
+			}
+			return false;
+		});
 	}
 
 	@Override
@@ -95,7 +133,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	@Override
 	public void downloadHasFinished() {
-		invalidateListView(getMyActivity());
+		invalidateListView(requireMyActivity());
 		updateUpdateAllButton();
 		startLoadLiveMapsAsyncTask();
 	}
@@ -107,7 +145,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	@Override
 	public void onUpdatedIndexesList() {
-		invalidateListView(getMyActivity());
+		invalidateListView(requireMyActivity());
 		updateUpdateAllButton();
 	}
 
@@ -145,7 +183,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		View view = getView();
 		if (view == null) return;
 
-		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
+		DownloadResources indexes = requireMyActivity().getDownloadThread().getIndexes();
 		List<IndexItem> indexItems = indexes.getItemsToUpdate();
 		TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.isEmpty() || indexItems.get(0).getType() == null) {
@@ -168,15 +206,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			updateAllButton.setText(updateAllText);
 			updateAllButton.setOnClickListener(v -> {
 				DownloadActivity activity = getMyActivity();
-				if (indexItems.size() > 3) {
-					AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-					dialog.setTitle(R.string.update_all_maps);
-					dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
-					dialog.setNegativeButton(R.string.shared_string_cancel, null);
-					dialog.setPositiveButton(R.string.shared_string_update, (d, which) -> activity.startDownload(indexItems.toArray(new IndexItem[0])));
-					dialog.create().show();
-				} else {
-					activity.startDownload(indexItems.toArray(new IndexItem[0]));
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					if (indexItems.size() > 3) {
+						AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+						dialog.setTitle(R.string.update_all_maps);
+						dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
+						dialog.setNegativeButton(R.string.shared_string_cancel, null);
+						dialog.setPositiveButton(R.string.shared_string_update, (d, which) -> activity.startDownload(indexItems.toArray(new IndexItem[0])));
+						dialog.create().show();
+					} else {
+						activity.startDownload(indexItems.toArray(new IndexItem[0]));
+					}
 				}
 			});
 		}
@@ -208,12 +248,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	@Override
 	public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
 		if (position == 0) {
-			DownloadActivity activity = getMyActivity();
-			if (activity != null) {
+			callActivity(activity -> {
 				if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
 					LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), this);
 				}
-			}
+			});
 		} else {
 			IndexItem e = (IndexItem) getListAdapter().getItem(position);
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
@@ -222,14 +261,10 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 	}
 
-	public DownloadActivity getMyActivity() {
-		return (DownloadActivity) getActivity();
-	}
-
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		ActionBar actionBar = getMyActivity().getSupportActionBar();
+		ActionBar actionBar = requireMyActivity().getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		}
@@ -246,10 +281,120 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == RELOAD_ID) {
 			// re-create the thread
-			getMyActivity().getDownloadThread().runReloadIndexFiles();
+			requireMyActivity().getDownloadThread().runReloadIndexFiles();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void askShowContextMenu(@NonNull View view, @NonNull IndexItem indexItem,
+	                                @NonNull LocalItem localItem) {
+		callActivity(activity -> showContextMenu(activity, view, indexItem, localItem));
+	}
+
+	private void showContextMenu(@NonNull FragmentActivity activity, @NonNull View view,
+	                             @NonNull IndexItem indexItem, @NonNull LocalItem localItem) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		items.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.info_button)
+				.setIcon(getContentIcon(R.drawable.ic_action_info_outlined))
+				.setOnClickListener(v -> showInfoScreen(localItem))
+				.create());
+
+		LocalItemType type = localItem.getType();
+		if (type.isUpdateSupported()) {
+			items.add(new PopUpMenuItem.Builder(activity)
+					.setTitleId(R.string.shared_string_update)
+					.setIcon(getContentIcon(R.drawable.ic_action_update))
+					.setOnClickListener(v -> updateItem(indexItem))
+					.create());
+		}
+
+		boolean backuped = localItem.isBackuped(app);
+		if (type.isBackupSupported() || backuped) {
+			OperationType operationType = backuped ? RESTORE_OPERATION : BACKUP_OPERATION;
+			items.add(new PopUpMenuItem.Builder(activity)
+					.setTitleId(operationType.getTitleId())
+					.setIcon(getContentIcon(operationType.getIconId()))
+					.setOnClickListener(v -> performOperation(operationType, localItem))
+					.create());
+		}
+
+		if (type.isDeletionSupported()) {
+			items.add(new PopUpMenuItem.Builder(activity)
+					.setTitleId(R.string.shared_string_remove)
+					.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+					.setOnClickListener(v -> showDeleteConfirmationDialog(localItem))
+					.showTopDivider(!Algorithms.isEmpty(items))
+					.create());
+		}
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.layoutId = R.layout.simple_popup_menu_item;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
+	}
+
+	private void showInfoScreen(@NonNull LocalItem localItem) {
+		callActivity(activity -> {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			LocalItemFragment.showInstance(manager, localItem, null);
+		});
+	}
+
+	private void updateItem(@NonNull IndexItem indexItem) {
+		DownloadActivity activity = getMyActivity();
+		if (activity != null) {
+			activity.startDownload(indexItem);
+		}
+	}
+
+	private void showDeleteConfirmationDialog(@NonNull LocalItem localItem) {
+		callActivity(activity -> {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			DeleteConfirmationDialogController.showDialog(app, manager, localItem, this);
+		});
+	}
+
+	@Override
+	public void onDeletionConfirmed(@NonNull BaseLocalItem localItem) {
+		performOperation(OperationType.DELETE_OPERATION, localItem);
+	}
+
+	public void performOperation(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
+		OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, this), items);
+	}
+
+	@Override
+	public void onOperationStarted() {
+		updateProgressVisibility(true);
+	}
+
+	@Override
+	public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
+		updateProgressVisibility(false);
+		if (!Algorithms.isEmpty(result)) {
+			app.showToastMessage(result);
+		}
+		DownloadActivity activity = getMyActivity();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			if (CollectionUtils.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION)) {
+				activity.getDownloadThread().runReloadIndexFiles();
+			} else {
+				activity.onUpdatedIndexesList();
+			}
+		}
+	}
+
+	protected void updateProgressVisibility(boolean visible) {
+		DownloadActivity activity = getMyActivity();
+		if (activity != null) {
+			activity.setSupportProgressBarIndeterminateVisibility(visible);
+		}
 	}
 
 	@Override
@@ -261,9 +406,21 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		invalidateListView(getMyActivity());
-		updateUpdateAllButton();
-		startLoadLiveMapsAsyncTask();
+		callActivity(activity -> {
+			invalidateListView(activity);
+			updateUpdateAllButton();
+			startLoadLiveMapsAsyncTask();
+		});
+	}
+
+	@NonNull
+	public DownloadActivity requireMyActivity() {
+		return Objects.requireNonNull(getMyActivity());
+	}
+
+	@Nullable
+	public DownloadActivity getMyActivity() {
+		return (DownloadActivity) getActivity();
 	}
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {
@@ -337,7 +494,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			if (view == null) {
 				if (viewType == INDEX_ITEM) {
 					view = inflate(R.layout.two_line_with_images_list_item, parent, false);
-					view.setTag(new ItemViewHolder(view, getMyActivity()));
+					view.setTag(new ItemViewHolder(view, requireMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
 					if (showSubscriptionPurchaseBanner) {
 						view = inflate(R.layout.osm_subscription_banner_list_item, parent, false);
@@ -346,12 +503,9 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
 						CardView cardView = view.findViewById(R.id.card_view);
 						cardView.setCardBackgroundColor(stateList);
-						cardView.setOnClickListener(v -> {
-							FragmentActivity activity = getMyActivity();
-							if (activity != null) {
-								ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES);
-							}
-						});
+						cardView.setOnClickListener(v -> callActivity(activity ->
+								ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES))
+						);
 					} else {
 						view = inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
 						view.setBackground(null);
@@ -377,11 +531,12 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 				}
 			}
 			if (viewType == INDEX_ITEM) {
+				IndexItem indexItem = Objects.requireNonNull(getItem(position));
 				ItemViewHolder holder = (ItemViewHolder) view.getTag();
 				holder.setShowRemoteDate(true);
 				holder.setShowTypeInDesc(true);
 				holder.setShowParentRegionName(true);
-				holder.bindDownloadItem(getItem(position));
+				holder.bindDownloadItem(indexItem);
 			}
 			return view;
 		}
