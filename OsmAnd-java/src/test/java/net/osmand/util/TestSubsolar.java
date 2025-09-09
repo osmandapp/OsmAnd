@@ -2,6 +2,7 @@ package net.osmand.util;
 
 import java.time.Instant;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 import io.github.cosinekitty.astronomy.Aberration;
@@ -16,16 +17,28 @@ import io.github.cosinekitty.astronomy.Topocentric;
 import net.osmand.data.LatLon;
 
 public class TestSubsolar {
-	static final int MAX_ITERATIONS = 1000;
-	static final int ALTITUDE_PRECISION = 1000;
-	static final int AZIMUTH_PRECISION = 1000;
-	static final double MIN_ALTITUDE = 30;
+	static int MAX_ITERATIONS = 1000;
+	static int ALTITUDE_PRECISION = 1000;
+	static int AZIMUTH_PRECISION = 1000;
+	static double MIN_ALTITUDE = 30;
+	static double ERR = 0;
 	
 	static boolean PRINT = false;
+	
+	static Random RND = new Random(Instant.parse("2025-01-01T00:00:00Z").getEpochSecond());
 	
 	static class Stats {
 		int tests = 0, duplicate = 0, fail = 0;
 		Map<Double, Integer> errorDistr = new TreeMap<Double, Integer>();
+		
+		void calculateError(LatLon l, LatLon ch) {
+			double rndErr = roundError(MapUtils.getDistance(l, ch)) / 1000.0;
+			if (!errorDistr.containsKey(rndErr)) {
+				errorDistr.put(rndErr, 1);
+			} else {
+				errorDistr.put(rndErr, 1 + errorDistr.get(rndErr));
+			}
+		}
 	}
 	// STATS: Precision 0.001, Iterations 1000, Latitude <= 60
 	// Errors in meters (TESTS)
@@ -41,50 +54,98 @@ public class TestSubsolar {
 		Body body = Body.Sun;
 		double lon = 0;
 		Stats s = new Stats();
-		for (int m = 1; m <= 12; m++) {
-			for (double lat = -60; lat <= 60; lat += 5) {
-//		double lat = -60; {
-				for (int h = 0; h < 24; h++) {
-//			int h = 18; {
-					runTest(body, lat, lon, s, m, h);
-				}
-			}
+//		MIN_ALTITUDE = 20;
+//		ERR = 0.00;
+//		for (int m = 1; m <= 12; m++) {
+//			for (double lat = -60; lat <= 60; lat += 5) {
+//				for (int h = 0; h < 24; h++) {
+//					runSingleTest(body, lat, lon, s, m, h);
+//				}
+//			}
+//		}
+//		System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d\n ", s.tests, s.duplicate, s.fail);
+//		System.out.println(s.errorDistr);
+		
+		MIN_ALTITUDE = 20;
+		ERR = 1;
+		for (int minInc = 5; minInc <= 60; minInc += 5) {
+			System.out.println("MIN INC - " + minInc);
+			runMinutesTest(body, 40, lon, s, 6, minInc);
 		}
-		System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d\n ", s.tests, s.duplicate, s.fail);
-		System.out.println(s.errorDistr);
+		
+		// 52.3676, 4.9041
+//		System.out.println(calcCoordinatesOneShot(body, "2025-09-09T11:00:00Z", 168, 42));
+//		System.out.println(calcCoordinatesOneShot(body, "2025-09-09T13:30:00Z", 216, 37));
+//		System.out.println(calcCoordinatesOneShot(body, "2025-09-09T15:54:00Z", 252, 20));
+		
 	}
 
-	private static void runTest(Body body, double lat, double lon, Stats s, int m, int h) {
-		String utcTimeString = String.format("2025-01-%02dT%02d:00:00Z", m, h);
+	protected static LatLon calcCoordinatesOneShot(Body body, String timeS, double azm, double alt) {
+		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
+		LatLon projPoint = calculateProjPoint(body, time, PRINT);
+		return calculateCoordinatesIteration(body, time, projPoint, new Topocentric(azm, alt, 1, 1), null, PRINT);	
+	}
+
+	protected static void runMinutesTest(Body body, double lat, double lon, Stats s, int month, int minInc) {
+		double sumLat = 0, sumLon = 0;
+		int cnt = 0;
+		LatLon pnt = new LatLon(lat, lon);
+		int startHour = 12;
+		int hours = 4;
+		s.errorDistr.clear();
+		for (int min = 0; min < 60 * hours; min += minInc) {
+			String utcTimeString = String.format("2025-01-%02dT%02d:%02d:00Z", month, startHour + min / 60, min % 60);
+			long timeS = Instant.parse(utcTimeString).getEpochSecond() * 1000;
+			Time time = Time.fromMillisecondsSince1970(timeS);
+			Topocentric targetHor = error(calcAltitude(body, time, pnt, false));
+			if (targetHor.getAltitude() < MIN_ALTITUDE) {
+				continue;
+			}
+			LatLon projPoint = calculateProjPoint(body, time, PRINT);
+			LatLon coords = calculateCoordinatesIteration(body, time, projPoint, targetHor, pnt, PRINT);
+			sumLat += coords.getLatitude();
+			sumLon += coords.getLongitude();
+			cnt++;
+			s.calculateError(pnt, coords);
+		}
+		LatLon res = new LatLon(sumLat / cnt, sumLon / cnt);
+		double err = MapUtils.getDistance(res, pnt);
+		double rndErr = roundError(err);
+		System.out.printf("Error %.2f km - %d measurements \n", rndErr / 1000, cnt);
+		System.out.println("Error distribution " + s.errorDistr);
+		
+	}
+	
+	private static Topocentric error(Topocentric targetHor) {
+		return new Topocentric(targetHor.getAzimuth() + ERR * (RND.nextDouble() - 0.5), 
+				targetHor.getAltitude() + ERR * (RND.nextDouble() - 0.5), targetHor.getRa(), targetHor.getDec());
+	}
+
+	protected static void runSingleTest(Body body, double lat, double lon, Stats s, int month, int hour) {
+		String utcTimeString = String.format("2025-01-%02dT%02d:00:00Z", month, hour);
 		long timeS = Instant.parse(utcTimeString).getEpochSecond() * 1000;
-		// timeS = System.currentTimeMillis();
 		Time time = Time.fromMillisecondsSince1970(timeS);
 		LatLon pnt = new LatLon(lat, lon);
-		Topocentric targetHor = calcAltitude(body, time, pnt, PRINT);
+		Topocentric targetHor = error(calcAltitude(body, time, pnt, PRINT));
 		if (targetHor.getAltitude() < MIN_ALTITUDE) {
 			return;
 		}
-		LatLon subsolar = calculateSubsolar(body, time, PRINT);
-		LatLon coords = calculateCoordinatesIteration(body, time, subsolar, targetHor, pnt, PRINT);
+		LatLon projPoint = calculateProjPoint(body, time, PRINT);
+		LatLon coords = calculateCoordinatesIteration(body, time, projPoint, targetHor, pnt, PRINT);
 		double err = MapUtils.getDistance(coords, pnt);
-		double rndErr = roundError(err);
 		s.tests++;
-		if (!s.errorDistr.containsKey(rndErr)) {
-			s.errorDistr.put(rndErr, 1);
-		} else {
-			s.errorDistr.put(rndErr, 1 + s.errorDistr.get(rndErr));
-		}
+		s.calculateError(pnt, coords);
 		if (err > 1_000) {
 			s.duplicate++;
 			
 			System.out.println("\n----------------");
 			System.out.println(time.toDateTime());
-			System.out.println("SUBSOL  " + subsolar);
+			System.out.println("SUBSOL  " + projPoint);
 			System.out.printf("POINT %s (%.3f bearing, %.3f dist)\n", pnt,
-					pnt.toLocation().bearingTo(subsolar.toLocation()), pnt.toLocation().distanceTo(subsolar.toLocation())/ 1000f);
+					pnt.toLocation().bearingTo(projPoint.toLocation()), pnt.toLocation().distanceTo(projPoint.toLocation())/ 1000f);
 			Topocentric target = calcAltitude(body, time, pnt, true);
 			System.out.printf("CALC  %s (%.3f bearing, %.3f dist)\n", coords,
-					coords.toLocation().bearingTo(subsolar.toLocation()), coords.toLocation().distanceTo(subsolar.toLocation())/ 1000f);
+					coords.toLocation().bearingTo(projPoint.toLocation()), coords.toLocation().distanceTo(projPoint.toLocation())/ 1000f);
 			Topocentric calc = calcAltitude(body, time, coords, true);
 			double altErr = Math.abs(calc.getAltitude() - target.getAltitude());
 			double azmErr = Math.abs(Math.abs(calc.getAzimuth() - target.getAzimuth()));
@@ -92,7 +153,7 @@ public class TestSubsolar {
 				s.fail++;
 				System.err.println(altErr + " " + azmErr);
 			}
-			coords = calculateCoordinatesIteration(body, time, subsolar, targetHor, pnt, true);
+			coords = calculateCoordinatesIteration(body, time, projPoint, targetHor, pnt, true);
 			
 		}
 	}
@@ -147,7 +208,7 @@ public class TestSubsolar {
 
 	}
 	
-	private static LatLon calculateSubsolar(Body body, Time time, boolean print) {
+	private static LatLon calculateProjPoint(Body body, Time time, boolean print) {
 		Equatorial equ = Astronomy.equator(body, time, new Observer(0, 0, 0.0), EquatorEpoch.OfDate, Aberration.Corrected);
 		double greenwichSiderealTime = Astronomy.siderealTime(time);
 		double subsolarLatitude = equ.getDec();
@@ -212,7 +273,7 @@ public class TestSubsolar {
 //					+ MapUtils.degreesDiff(current.getAltitude(), targetAltitude));
 		}
 
-		if (print) {
+		if (print && check != null) {
 //			calcAltitude(body, time, pnt, true);
 			System.out.printf("ERROR %.3f km %d iterations, Lat %.5f Lon %.5f \n", MapUtils.getDistance(check, pnt)/1000, iter, pnt.getLatitude(),
 					pnt.getLongitude());
