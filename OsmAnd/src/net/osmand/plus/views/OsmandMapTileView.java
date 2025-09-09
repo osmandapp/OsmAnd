@@ -1292,8 +1292,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (surfaceRenderer != null) {
 					Rect visibleArea = surfaceRenderer.getVisibleArea();
 					if (visibleArea != null) {
-						QuadPoint canvasCenter = new QuadPoint(visibleArea.left + (visibleArea.right - visibleArea.left) / 2f, visibleArea.top + (visibleArea.bottom - visibleArea.top) / 2f);
-						cachedAACanvasOffset = new QuadPoint(canvasCenter.x - center.x, canvasCenter.y - center.y);
+
+						QuadPoint canvasCenter = new QuadPoint(visibleArea.left + (visibleArea.right - visibleArea.left) / 2f, (visibleArea.top + (visibleArea.bottom - visibleArea.top)) * surfaceRenderer.getCachedRatioY());
+						cachedAACanvasOffset = new QuadPoint(canvasCenter.x - center.x,
+								canvasCenter.y - center.y);
 					}
 				}
 			}

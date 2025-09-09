@@ -479,6 +479,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setWeatherSource(WeatherSource source) {
 		weatherSettings.weatherSource.set(source.getSettingValue());
+		weatherHelper.updateWeatherSource();
 	}
 
 	public boolean isAnyWeatherContourLinesEnabled() {

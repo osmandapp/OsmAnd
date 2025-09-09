@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.osmedit.quickactions;
 import static net.osmand.plus.quickaction.QuickActionIds.ADD_OSM_BUG_ACTION_ID;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -53,7 +52,7 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			double lat = latLon.getLatitude();

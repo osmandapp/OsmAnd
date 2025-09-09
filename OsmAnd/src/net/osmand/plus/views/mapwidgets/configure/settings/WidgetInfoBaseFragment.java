@@ -324,7 +324,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	}
 
 	private void setupApplyButton() {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		if (addNewWidgetMode) {
 			buttonsContainer.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 			DialogButton applyButton = view.findViewById(R.id.dismiss_button);

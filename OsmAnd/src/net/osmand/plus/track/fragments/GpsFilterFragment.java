@@ -333,7 +333,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		if (view != null && !isDismissing()) {
 			boolean nightMode = isNightMode();
 			if (!nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+				AndroidUiHelper.setStatusBarContentColor(view, true);
 			}
 			return ColorUtilities.getStatusBarColorId(nightMode);
 		}

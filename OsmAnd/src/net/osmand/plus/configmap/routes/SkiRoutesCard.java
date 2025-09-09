@@ -73,7 +73,7 @@ public class SkiRoutesCard extends MapBaseCard implements SelectStyleListener {
 			return;
 		}
 
-		LinearLayout bottomButtons = view.findViewById(R.id.buttons_container);
+		LinearLayout bottomButtons = view.findViewById(R.id.bottom_buttons_container);
 		bottomButtons.setPadding(0, 0, 0, 0);
 
 		View buttonsDivider = bottomButtons.findViewById(R.id.buttons_divider);

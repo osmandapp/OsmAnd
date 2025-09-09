@@ -24,7 +24,7 @@
 		tools:visibility="visible" />
 
 	<ListView
-		android:id="@+id/plugins_list"
+		android:id="@+id/scroll_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:dividerHeight="1dp"

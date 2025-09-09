@@ -56,7 +56,7 @@
 			app:srcCompat="@drawable/bg_shadow_list_top" />
 
 		<FrameLayout
-			android:id="@+id/buttons_container"
+			android:id="@+id/bottom_buttons_container"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/dialog_button_ex_height"
 			android:background="?attr/list_background_color"

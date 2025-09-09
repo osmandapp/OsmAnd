@@ -25,7 +25,7 @@ public class MapUtils {
 
 	public static final int ROUNDING_ERROR = 3;
 	private static final int EARTH_RADIUS_B = 6356752;
-	private static final int EARTH_RADIUS_A = 6378137;
+	public static final int EARTH_RADIUS_A = 6378137;
 	public static final double MIN_LATITUDE = -85.0511;
 	public static final double MAX_LATITUDE = 85.0511;
 	public static final double LATITUDE_TURN = 180.0;
@@ -835,6 +835,7 @@ public class MapUtils {
 
 		return new LatLon(Math.toDegrees(phi2), Math.toDegrees(lambda2));
 	}
+	
 
 	public static double getSqrtDistance(int startX, int startY, int endX, int endY) {
 		return Math.sqrt((double) (endX - startX) * (endX - startX) + (double) (endY - startY) * (endY - startY));

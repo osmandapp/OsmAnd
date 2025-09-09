@@ -34,7 +34,6 @@ import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickL
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import java.util.List;
@@ -79,9 +78,14 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment
 	}
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.Dialog90Dark : R.style.Dialog90Light;
+	}
+
+	@Override
 	@NonNull
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(UiUtilities.getThemedContext(requireActivity(), nightMode, R.style.Dialog90Light, R.style.Dialog90Dark), getTheme());
+	public Dialog createDialog(Bundle savedInstanceState) {
+		Dialog dialog = super.createDialog(savedInstanceState);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

@@ -149,7 +149,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 	}
 
 	private void updateButtons(View view) {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		btnApply.setButtonType(DialogButtonType.PRIMARY);
 		btnApply.setTitleId(R.string.shared_string_apply);

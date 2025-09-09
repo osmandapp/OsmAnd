@@ -85,7 +85,7 @@ public class VehicleMetricsRecordingFragment extends BaseFullScreenFragment {
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		Window window = requireMapActivity().getWindow();
 		if (window != null) {
-			window.setStatusBarColor(ContextCompat.getColor(requireMapActivity(), getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(requireMapActivity(), getStatusBarColorId()));
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), nightMode);
 		}
 

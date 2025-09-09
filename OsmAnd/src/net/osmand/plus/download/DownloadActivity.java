@@ -115,6 +115,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download_activity);
+
 		updateToolbar();
 
 		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);

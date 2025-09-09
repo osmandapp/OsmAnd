@@ -23,6 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
@@ -30,12 +33,16 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -82,7 +89,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		inflateMenuItems();
 		setupScrollShadow(mainView);
-		setupBottomButtons((ViewGroup) mainView);
+		setupBottomButtons(mainView.findViewById(R.id.main_container));
 		setupHeightAndBackground(mainView);
 		return mainView;
 	}
@@ -154,37 +161,57 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
 	}
 
-	protected void setupHeightAndBackground(View mainView) {
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
+		setupHeightAndBackground(getView(), insets.getInsets(WindowInsetsCompat.Type.systemBars()));
+	}
+
+	protected void setupHeightAndBackground(@Nullable View mainView, @NonNull Insets sysBars) {
 		Activity activity = getActivity();
-		if (activity == null) {
+		if (activity == null || mainView == null) {
 			return;
 		}
-		int screenHeight = AndroidUtils.getScreenHeight(activity);
-		int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-		int contentHeight = getContentHeight(screenHeight - statusBarHeight);
-
+		int screenHeight = AndroidUtils.getScreenHeight(requireActivity());
+		int availableHeight = screenHeight - sysBars.top - sysBars.bottom;
+		int contentHeight = getContentHeight(availableHeight);
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				obs.removeOnGlobalLayoutListener(this);
+				mainView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				View contentView = useScrollableItemsContainer()
+						? mainView.findViewById(R.id.scroll_view)
+						: itemsContainer;
 
-				View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
-					if (useScrollableItemsContainer() || useExpandableList()) {
-						contentView.getLayoutParams().height = contentHeight;
-						buttonsShadow.setVisibility(View.VISIBLE);
-					} else {
-						contentView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-					}
+					contentView.getLayoutParams().height = useScrollableItemsContainer() || useExpandableList()
+							? contentHeight
+							: ViewGroup.LayoutParams.WRAP_CONTENT;
+					if (useScrollableItemsContainer()) buttonsShadow.setVisibility(View.VISIBLE);
 					contentView.requestLayout();
 				}
 
-				// 8dp is the shadow height
-				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= dpToPx(8);
+				boolean showTopShadow = screenHeight - sysBars.top - mainView.getHeight() >= dpToPx(8);
 				drawTopShadow(showTopShadow);
 			}
 		});
+	}
+
+	public Set<InsetSide> getRootInsetSides(){
+		return EnumSet.of(InsetSide.BOTTOM);
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return null;
+	}
+
+	protected void setupHeightAndBackground(View mainView) {
+		Insets ins = InsetsUtils.getSysBars(app, getLastRootInsets());
+		if (ins != null) {
+			setupHeightAndBackground(mainView, ins);
+		} else {
+			ViewCompat.requestApplyInsets(mainView);
+		}
 	}
 
 	@NonNull
@@ -198,14 +225,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (activity == null || mainView == null) {
 			return;
 		}
+
+		Drawable bg;
 		if (AndroidUiHelper.isOrientationPortrait(activity)) {
-			AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg());
-			if (!showTopShadow) {
-				mainView.setPadding(0, 0, 0, 0);
-			}
+			bg = showTopShadow ? getPortraitBg(activity) : getColoredBg();
 		} else {
-			AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
+			bg = showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity);
 		}
+
+		AndroidUtils.setBackground(mainView.findViewById(R.id.main_container), bg);
 	}
 
 	private int getContentHeight(int availableScreenHeight) {

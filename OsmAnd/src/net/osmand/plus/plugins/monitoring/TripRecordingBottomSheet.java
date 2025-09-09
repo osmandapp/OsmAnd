@@ -32,7 +32,9 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -689,16 +691,15 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	@Override
-	protected void setupHeightAndBackground(View mainView) {
+	protected void setupHeightAndBackground(@Nullable View mainView, @NonNull Insets sysBars) {
 		Activity activity = getActivity();
-		if (activity == null) {
+		if (activity == null || mainView == null) {
 			return;
 		}
 		if (AndroidUiHelper.isOrientationPortrait(activity)) {
 			super.setupHeightAndBackground(mainView);
 			return;
 		}
-
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
@@ -707,7 +708,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 				View contentView = mainView.findViewById(R.id.scroll_view);
 				contentView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
 				contentView.requestLayout();
-				boolean showTopShadow = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity)
+				boolean showTopShadow = AndroidUtils.getScreenHeight(activity) - sysBars.top
 						- mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
 				drawTopShadow(showTopShadow);
 			}

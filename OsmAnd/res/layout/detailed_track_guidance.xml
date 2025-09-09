@@ -72,7 +72,6 @@
 		</ScrollView>
 
 		<include
-			android:id="@+id/apply_button"
 			layout="@layout/bottom_buttons"/>
 
 	</LinearLayout>

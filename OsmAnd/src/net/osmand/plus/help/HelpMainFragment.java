@@ -61,6 +61,11 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 	private ListView listView;
 
 	@Override
+	public int getStatusBarColorId() {
+		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);

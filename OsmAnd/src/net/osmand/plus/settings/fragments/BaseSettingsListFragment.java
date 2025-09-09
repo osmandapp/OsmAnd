@@ -92,7 +92,7 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 		selectedItemsSize = root.findViewById(R.id.file_size);
 		itemsSizeContainer = root.findViewById(R.id.file_size_container);
 		expandableList = root.findViewById(R.id.list);
-		buttonsContainer = root.findViewById(R.id.buttons_container);
+		buttonsContainer = root.findViewById(R.id.bottom_buttons_container);
 
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);

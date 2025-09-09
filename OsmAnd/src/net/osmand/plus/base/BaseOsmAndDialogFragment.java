@@ -1,14 +1,19 @@
 package net.osmand.plus.base;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
@@ -17,9 +22,16 @@ import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 
-public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment {
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+
+public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment, ISupportInsets {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -28,6 +40,8 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	protected boolean nightMode;
 
 	private LayoutInflater themedInflater;
+
+	private WindowInsetsCompat lastRootInsets = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +58,68 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		nightMode = resolveNightMode();
 		Context themedCtx = new ContextThemeWrapper(requireActivity(), getDialogThemeId());
 		themedInflater = LayoutInflater.from(themedCtx);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		Dialog dialog = getDialog();
+		if (dialog != null && dialog.getWindow() != null && Build.VERSION.SDK_INT > 29) {
+			if (Build.VERSION.SDK_INT >= 36) {
+				//WindowCompat.enableEdgeToEdge(window);
+			} else {
+				WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), false);
+			}
+		}
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		InsetsUtils.processInsets(this, view);
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return EnumSet.of(InsetSide.TOP);
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(android.R.id.list);
+		ids.add(R.id.scroll_view);
+		return ids;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getFabIds() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+
+	}
+
+	@Nullable
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return lastRootInsets;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+		lastRootInsets = rootInsets;
 	}
 
 	@Override

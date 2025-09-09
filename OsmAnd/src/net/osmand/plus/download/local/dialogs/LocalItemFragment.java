@@ -27,7 +27,6 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 import net.osmand.plus.download.local.OperationType;
-import net.osmand.plus.download.local.dialogs.DeleteConfirmationBottomSheet.ConfirmDeletionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -36,8 +35,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import java.io.File;
 import java.util.Map;
 
-public class LocalItemFragment extends LocalBaseFragment implements ConfirmDeletionListener,
-		OperationListener, OnMapSourceUpdateListener {
+public class LocalItemFragment extends LocalBaseFragment
+		implements OperationListener, OnMapSourceUpdateListener {
 
 	public static final String TAG = LocalItemFragment.class.getSimpleName();
 

@@ -181,7 +181,7 @@ public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragme
 		Window window = requireDialog().getWindow();
 		if (window != null) {
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), true);
-			window.setStatusBarColor(color);
+			AndroidUiHelper.setStatusBarColor(window, color);
 		}
 	}
 

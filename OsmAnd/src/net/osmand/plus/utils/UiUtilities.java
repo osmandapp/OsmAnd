@@ -754,7 +754,7 @@ public class UiUtilities {
 			colorId = R.color.status_bar_transparent_gradient;
 		}
 		if (colorId != -1) {
-			activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+			AndroidUiHelper.setStatusBarColor(activity, ContextCompat.getColor(activity, colorId));
 			AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 			return;
 		}
@@ -781,8 +781,7 @@ public class UiUtilities {
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
 			color = ContextCompat.getColor(activity, colorId);
 		}
-		activity.getWindow().setStatusBarColor(color);
-
+		AndroidUiHelper.setStatusBarColor(activity, color);
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 	}
 

@@ -24,7 +24,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.Set;
 
 public class Relief3DFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents, MapOptionSliderListener {
 
@@ -170,6 +173,11 @@ public class Relief3DFragment extends BaseFullScreenFragment implements View.OnC
 
 	protected void refreshMap() {
 		callMapActivity(MapActivity::refreshMap);
+	}
+
+	@Nullable
+	public Set<InsetSide> getRootInsetSides() {
+		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

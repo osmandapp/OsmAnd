@@ -30,6 +30,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -62,6 +65,7 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -87,7 +91,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
@@ -141,6 +147,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	private int viewHeight;
 	private int zoomButtonsHeight;
 	private int statusBarHeight;
+	private int navBarHeight;
 
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
@@ -581,13 +588,19 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			if (forceUpdateLayout || bottom != oldBottom) {
 				forceUpdateLayout = false;
 				processScreenHeight((View) view.getParent());
-				runLayoutListener();
+				updateUi();
 			}
 		};
 
 		fitPolygon();
 		created = true;
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {
@@ -816,6 +829,35 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		viewHeight = container.getHeight();
 		screenHeight = AndroidUtils.getScreenHeight(activity);
 		statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
+	}
+
+	private void updateUi() {
+		WindowInsetsCompat insets = getLastRootInsets();
+		if (insets != null) {
+			Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+			if (sysBars.top != 0) {
+				statusBarHeight = sysBars.top;
+			}
+			if (sysBars.bottom != 0) {
+				navBarHeight = sysBars.bottom;
+			}
+			runLayoutListener();
+		} else {
+			ViewCompat.requestApplyInsets(view);
+		}
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		super.onApplyInsets(insets);
+		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+		if (sysBars.top != 0) {
+			statusBarHeight = sysBars.top;
+		}
+		if (sysBars.bottom != 0) {
+			navBarHeight = sysBars.bottom;
+		}
+		runLayoutListener();
 	}
 
 	public void openMenuFullScreen() {
@@ -1913,7 +1955,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	}
 
 	private int getHeaderOnlyTopY() {
-		return viewHeight - menuTitleHeight;
+		return viewHeight - menuTitleHeight - navBarHeight;
 	}
 
 	private int getFullScreenTopPosY() {

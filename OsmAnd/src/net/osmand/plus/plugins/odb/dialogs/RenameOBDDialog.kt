@@ -13,10 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.CustomAlert
@@ -75,20 +77,12 @@ class RenameOBDDialog : BaseFullScreenDialogFragment() {
 		return true
 	}
 
-	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val ctx: Activity = requireActivity()
-		val themeId =
-			if (nightMode) R.style.OsmandDarkTheme_DarkActionbar else R.style.OsmandLightTheme_DarkActionbar_LightStatusBar
-		val dialog = Dialog(ctx, themeId)
-		val window = dialog.window
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.attributes.windowAnimations = R.style.Animations_Alpha
-			}
-			val statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode)
-			window.statusBarColor = statusBarColor
-		}
-		return dialog
+	override fun getThemeId(): Int {
+		return if (nightMode) R.style.OsmandDarkTheme_DarkActionbar else R.style.OsmandLightTheme_DarkActionbar_LightStatusBar
+	}
+
+	override fun getStatusBarColorId(): Int {
+		return ColorUtilities.getActivityBgColorId(nightMode)
 	}
 
 	private fun shouldClose(): Boolean {

@@ -2,13 +2,10 @@ package net.osmand.plus.settings.fragments.profileappearance;
 
 import static net.osmand.plus.card.icon.IIconsPaletteController.ALL_ICONS_PROCESS_ID;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +25,6 @@ import net.osmand.plus.card.icon.IIconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
 public class IconsPaletteFragment<IconData> extends BaseFullScreenDialogFragment implements IIconsPalette<IconData> {
@@ -39,6 +35,11 @@ public class IconsPaletteFragment<IconData> extends BaseFullScreenDialogFragment
 	private IconsPaletteElements<IconData> paletteElements;
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
@@ -46,23 +47,6 @@ public class IconsPaletteFragment<IconData> extends BaseFullScreenDialogFragment
 		if (controller != null) {
 			controller.bindPalette(this);
 		}
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Nullable
@@ -163,10 +147,6 @@ public class IconsPaletteFragment<IconData> extends BaseFullScreenDialogFragment
 			manager.unregister(ALL_ICONS_PROCESS_ID);
 			controller.onAllIconsScreenClosed();
 		}
-	}
-
-	protected int getStatusBarColorId() {
-		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,

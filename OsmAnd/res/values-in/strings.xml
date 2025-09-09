@@ -6175,4 +6175,13 @@
     <string name="release_5_1">• Menambahkan dukungan untuk pembelian web dan lintas platform\n\n • Memindahkan unit Suhu ke pengaturan Umum untuk akses yang lebih mudah\n\n • Menambahkan indikator daya baterai untuk sensor BLE\n\n • UI baru yang lebih intuitif untuk pemilihan titik di Navigasi\n\n • Visibilitas widget yang ditingkatkan dengan garis besar baru\n\n • Menambahkan penganalisis Tanjakan/Turunan\n\n • Integrasi Wikipedia &amp; Wikivoyage yang diperluas untuk lebih banyak POI.</string>
     <string name="show_rasterization_debug_tile">Tampilkan informasi rasterisasi ubin</string>
     <string name="show_local_names">Tampilkan nama lokal</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Mil</string>
+    <string name="mpg">MPG</string>
+    <string name="us_gallon">Galon AS</string>
+    <string name="imperial_gallon">Galon imperial</string>
+    <string name="liter_single">Liter</string>
+    <string name="obd_alt_battery_voltage">Voltase baterai (adaptor)</string>
+    <string name="access_pinch_zoom_magnification">Aktifkan perbesaran cubit</string>
+    <string name="access_pinch_zoom_magnification_descr">Gunakan skala layar dan bukan tingkat perbesaran diskret untuk gerakan mencubit.</string>
 </resources>

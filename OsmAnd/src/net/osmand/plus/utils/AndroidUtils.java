@@ -779,7 +779,7 @@ public class AndroidUtils {
 	}
 
 	public static void addStatusBarPadding21v(@NonNull Activity activity, @NonNull View view) {
-		if (isInFullScreenMode(activity)) {
+		if (!InsetsUtils.isEdgeToEdgeSupported() && isInFullScreenMode(activity)) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();

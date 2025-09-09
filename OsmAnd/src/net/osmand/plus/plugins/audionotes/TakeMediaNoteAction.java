@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.quickaction.MapButtonsHelper.KEY_EVENT_KEY;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,7 +29,8 @@ public abstract class TakeMediaNoteAction extends SelectMapLocationAction {
 		AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			if (plugin.isRecording()) {
-				plugin.stopRecording(mapActivity, false);
+				boolean showContextMenu = params == null || !params.containsKey(KEY_EVENT_KEY);
+				plugin.stopRecording(mapActivity, false, showContextMenu);
 			} else {
 				super.execute(mapActivity, params);
 			}
@@ -35,7 +38,7 @@ public abstract class TakeMediaNoteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			takeNote(mapActivity, plugin, latLon);

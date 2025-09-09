@@ -22,6 +22,8 @@ import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -37,11 +39,18 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 public abstract class ContextMenuFragment extends BaseFullScreenFragment implements MapControlsThemeProvider {
 
@@ -85,11 +94,13 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 	private int currentMenuState;
 	private int shadowHeight;
 	private int statusBarHeight;
+	private int navBarHeight;
 
 	private String preferredMapLang;
 	private boolean transliterateNames;
 
 	private ContextMenuFragmentListener listener;
+	private ViewGroup container;
 
 	public interface ContextMenuFragmentListener {
 		void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated);
@@ -236,7 +247,7 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 	                         Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = requireMapActivity();
-
+		this.container = container;
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
@@ -447,6 +458,38 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(getBottomScrollViewId());
+		return ids;
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		Insets sysBars = InsetsUtils.getSysBars(app, insets);
+		if (sysBars != null) {
+			statusBarHeight = sysBars.top;
+			navBarHeight = sysBars.bottom;
+			topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight) + getToolbarHeight();
+			processScreenHeight(container);
+			runLayoutListener();
+		}
+	}
+
 	public float getToolbarAlpha(int y) {
 		float a = 0;
 		if (portrait) {
@@ -639,7 +682,7 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			screenHeight = container.getHeight() + statusBarHeight;
-			viewHeight = screenHeight - statusBarHeight;
+			viewHeight = screenHeight - statusBarHeight - navBarHeight;
 			minHalfY = getMinHalfY(mapActivity);
 		}
 	}
@@ -666,7 +709,7 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int height = getMenuStatePosY(getCurrentMenuState());
-			return viewHeight - height - statusBarHeight;
+			return viewHeight - height - statusBarHeight - navBarHeight;
 		} else {
 			return 0;
 		}

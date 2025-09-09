@@ -30,7 +30,10 @@ import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.Set;
 
 public class WeatherLayerFragment extends BaseFullScreenFragment {
 
@@ -243,6 +246,11 @@ public class WeatherLayerFragment extends BaseFullScreenFragment {
 	private void updateScreenMode(@NonNull View view, boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.empty_screen), !enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
+	}
+
+	@Nullable
+	public Set<InsetSide> getRootInsetSides() {
+		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

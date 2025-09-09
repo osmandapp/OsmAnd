@@ -27,7 +27,7 @@ import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
+import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.gpx.SmartFolderUpdateListener
@@ -86,27 +86,19 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 		smartFolderHelper = app.smartFolderHelper
 	}
 
-	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val themeId =
-			if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
-		val dialog = object : Dialog(requireContext(), themeId) {
+	override fun getThemeId(): Int {
+		return if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
+	}
+
+	override fun getStatusBarColorId(): Int {
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
+	}
+
+	override fun createDialog(savedInstanceState: Bundle?): Dialog {
+		return object : Dialog(requireContext(), themeId) {
 			override fun onBackPressed() {
 				closeWithoutApply()
 			}
-		}
-		val window = dialog.window
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.attributes.windowAnimations = R.style.Animations_Alpha
-			}
-			updateStatusBarColor(window)
-		}
-		return dialog
-	}
-
-	private fun updateStatusBarColor(window: Window?) {
-		window?.let {
-			window.statusBarColor = getStatusBarSecondaryColor(requireContext(), nightMode)
 		}
 	}
 
@@ -318,7 +310,6 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 		adapter?.notifyDataSetChanged()
 		context?.let {
 			updateNightMode()
-			updateStatusBarColor(requireDialog().window)
 		}
 		filter.setCallback(CallbackWithObject<List<TrackItem>> { trackItems ->
 			updateProgressVisibility(false)

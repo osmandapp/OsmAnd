@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="poi_fuel_type">Doare trelosk (dour-tan)</string>
-    <string name="poi_fuel_avia_type">Doare trelosk (kirri-nij)</string>
+    <string name="poi_fuel_type">Doare trelosk</string>
+    <string name="poi_fuel_avia_type">Doare trelosk (nijerezioù)</string>
     <string name="poi_payment_type">Doare paeamant</string>
     <string name="poi_payment_fuel_type">Kardennoù trelosk (dour-tan)</string>
     <string name="poi_additional_type">Ouzhpenn</string>

@@ -14,6 +14,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
 import net.osmand.plus.configmap.MapColorPaletteController.IMapColorPaletteControllerListener;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class MapColorPaletteFragment extends ConfigureMapOptionFragment implements IMapColorPaletteControllerListener {
@@ -102,7 +103,7 @@ public class MapColorPaletteFragment extends ConfigureMapOptionFragment implemen
 
 	@Override
 	public void updateStatusBar() {
-		requireActivity().getWindow().setStatusBarColor(getResources().getColor(getStatusBarColorId(), null));
+		AndroidUiHelper.setStatusBarColor(requireActivity(), getResources().getColor(getStatusBarColorId(), null));
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

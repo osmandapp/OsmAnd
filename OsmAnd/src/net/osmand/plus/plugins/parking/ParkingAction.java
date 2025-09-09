@@ -39,7 +39,7 @@ public class ParkingAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		ParkingPositionPlugin plugin = PluginsHelper.getActivePlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			plugin.showAddParkingDialog(mapActivity, latLon.getLatitude(), latLon.getLongitude());

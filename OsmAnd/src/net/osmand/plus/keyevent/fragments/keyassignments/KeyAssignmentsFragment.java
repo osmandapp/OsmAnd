@@ -156,7 +156,7 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 	}
 
 	private void updateFabButton(@NonNull View view) {
-		FloatingActionButton addButton = view.findViewById(R.id.fabButton);
+		FloatingActionButton addButton = view.findViewById(R.id.fab);
 		addButton.setVisibility(controller.isDeviceTypeEditable() && !controller.isInEditMode() ? View.VISIBLE : View.GONE);
 		addButton.setOnClickListener(v -> controller.askAddAssignment(addButton));
 	}

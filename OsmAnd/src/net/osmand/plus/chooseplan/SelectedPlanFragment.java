@@ -164,7 +164,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		if (dialog != null && dialog.getWindow() != null) {
 			Window window = dialog.getWindow();
 			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-			window.setStatusBarColor(toolbarColor);
+			AndroidUiHelper.setStatusBarColor(window, toolbarColor);
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), mainView.getSystemUiVisibility(), !nightMode && !collapsed);
 		}
 

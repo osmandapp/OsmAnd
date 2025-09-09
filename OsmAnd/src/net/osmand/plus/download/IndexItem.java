@@ -9,6 +9,9 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
@@ -169,6 +172,29 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			entry.targetFile = getTargetFile(ctx);
 		}
 		return entry;
+	}
+
+	@Nullable
+	public LocalItem toLocalItem(@NonNull OsmandApplication app) {
+		File file = getExistedFile(app);
+		if (file != null) {
+			LocalItemType type = LocalItemUtils.getItemType(app, file);
+			if (type != null) {
+				LocalItem localItem = new LocalItem(file, type);
+				LocalItemUtils.updateItem(app, localItem);
+				return localItem;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public File getExistedFile(@NonNull OsmandApplication ctx) {
+		File file = getTargetFile(ctx);
+		if (!file.exists()) {
+			file = getBackupFile(ctx);
+		}
+		return file.exists() ? file : null;
 	}
 
 	public String getTargetFileName() {
