@@ -1,6 +1,8 @@
 package net.osmand.util;
 
 import java.time.Instant;
+import java.util.Map;
+import java.util.TreeMap;
 
 import io.github.cosinekitty.astronomy.Aberration;
 import io.github.cosinekitty.astronomy.Astronomy;
@@ -14,71 +16,109 @@ import io.github.cosinekitty.astronomy.Topocentric;
 import net.osmand.data.LatLon;
 
 public class TestSubsolar {
-	static final int MAX_ITERATIONS = 10000;
+	static final int MAX_ITERATIONS = 1000;
 	static final int ALTITUDE_PRECISION = 100_000;
 	static final int AZIMUTH_PRECISION = 100_000;
 	
 	static boolean PRINT = false;
+	
+	static class Stats {
+		int tests = 0, duplicate = 0, fail = 0;
+		Map<Double, Integer> errorDistr = new TreeMap<Double, Integer>();
+	}
 	// examples
 	// https://github.com/cosinekitty/astronomy/blob/master/demo/java/src/main/java/io/github/cosinekitty/astronomy/demo/RiseSetCulm.java
 	public static void main(String[] args) throws InterruptedException {
-
-		double MIN_ALTITUDE = 30;
+		double MIN_ALTITUDE = 20;
 		Body body = Body.Sun;
-		int tests = 0, duplicate = 0, fail = 0;
 		double lon = 0;
-		for(int m = 1; m <= 12; m++) {
-		for (double lat = -60; lat <= 60; lat +=1) {
-//		double lat = 20; {
-			for (int h = 0; h < 24; h++) {
+		Stats s = new Stats();
+		for (int m = 1; m <= 12; m++) {
+			for (double lat = -50; lat <= 50; lat += 5) {
+//		double lat = -60; {
+				for (int h = 0; h < 24; h++) {
 //			int h = 18; {
-				String utcTimeString = String.format("2025-01-%02dT%02d:00:00Z", m, h);
-				long timeS = Instant.parse(utcTimeString).getEpochSecond() * 1000;
-				// timeS = System.currentTimeMillis();
-				Time time = Time.fromMillisecondsSince1970(timeS);
-				LatLon pnt = new LatLon(lat, lon);
-				Topocentric targetHor = calcAltitude(body, time, pnt, PRINT);
-				if (targetHor.getAltitude() < MIN_ALTITUDE) {
-					continue;
-				}
-				LatLon subsolar = calculateSubsolar(body, time, PRINT);
-				LatLon coords = calculateCoordinatesIteration(body, time, subsolar, targetHor, pnt, PRINT);
-//				for (; iter < MAX_ITERATIONS; iter++) {
-//					Topocentric c = calcAltitude(body, time, coords, false);
-//					if (roundAlt(targetHor.getAltitude() - c.getAltitude()) == 0.0
-//							&& roundAzm(targetHor.getAzimuth() - c.getAzimuth()) == 0.0) {
-//						break;
-//					}
-//					coords = calculateCoordinates(body, time, coords, targetHor, pnt, PRINT);
-//				}
-				double err = MapUtils.getDistance(coords, pnt) / 1000;
-				tests++;
-				if (err > 1) {
-					duplicate++;
-					
-					System.out.println("\n----------------");
-					System.out.println(time.toDateTime());
-					System.out.println("SUBSOL  " + subsolar);
-					System.out.printf("POINT %s (%.3f bearing, %.3f dist)\n", pnt,
-							pnt.toLocation().bearingTo(subsolar.toLocation()), pnt.toLocation().distanceTo(subsolar.toLocation())/ 1000f);
-					Topocentric target = calcAltitude(body, time, pnt, true);
-					System.out.printf("CALC  %s (%.3f bearing, %.3f dist)\n", coords,
-							coords.toLocation().bearingTo(subsolar.toLocation()), coords.toLocation().distanceTo(subsolar.toLocation())/ 1000f);
-					Topocentric calc = calcAltitude(body, time, coords, true);
-					double altErr = Math.abs(calc.getAltitude() - target.getAltitude());
-					double azmErr = Math.abs(Math.abs(calc.getAzimuth() - target.getAzimuth()));
-					if (altErr > 1.0d / ALTITUDE_PRECISION  || azmErr > 1.0d / AZIMUTH_PRECISION ) {
-						fail++;
-						System.err.println(altErr + " " + azmErr);
-					}
-					coords = calculateCoordinatesIteration(body, time, subsolar, targetHor, pnt, true);
-					
+					runTest(MIN_ALTITUDE, body, lat, lon, s, m, h);
 				}
 			}
 		}
-		}
-		System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d ", tests, duplicate, fail);
+		System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d\n ", s.tests, s.duplicate, s.fail);
+		System.out.println(s.errorDistr);
 	}
+
+	private static void runTest(double MIN_ALTITUDE, Body body, double lat, double lon, Stats s, int m, int h) {
+		String utcTimeString = String.format("2025-01-%02dT%02d:00:00Z", m, h);
+		long timeS = Instant.parse(utcTimeString).getEpochSecond() * 1000;
+		// timeS = System.currentTimeMillis();
+		Time time = Time.fromMillisecondsSince1970(timeS);
+		LatLon pnt = new LatLon(lat, lon);
+		Topocentric targetHor = calcAltitude(body, time, pnt, PRINT);
+		if (targetHor.getAltitude() < MIN_ALTITUDE) {
+			return;
+		}
+		LatLon subsolar = calculateSubsolar(body, time, PRINT);
+		LatLon coords = calculateCoordinatesIteration(body, time, subsolar, targetHor, pnt, PRINT);
+		double err = MapUtils.getDistance(coords, pnt);
+		double rndErr = roundError(err);
+		s.tests++;
+		if (!s.errorDistr.containsKey(rndErr)) {
+			s.errorDistr.put(rndErr, 1);
+		} else {
+			s.errorDistr.put(rndErr, 1 + s.errorDistr.get(rndErr));
+		}
+		if (err > 1_000) {
+			s.duplicate++;
+			
+			System.out.println("\n----------------");
+			System.out.println(time.toDateTime());
+			System.out.println("SUBSOL  " + subsolar);
+			System.out.printf("POINT %s (%.3f bearing, %.3f dist)\n", pnt,
+					pnt.toLocation().bearingTo(subsolar.toLocation()), pnt.toLocation().distanceTo(subsolar.toLocation())/ 1000f);
+			Topocentric target = calcAltitude(body, time, pnt, true);
+			System.out.printf("CALC  %s (%.3f bearing, %.3f dist)\n", coords,
+					coords.toLocation().bearingTo(subsolar.toLocation()), coords.toLocation().distanceTo(subsolar.toLocation())/ 1000f);
+			Topocentric calc = calcAltitude(body, time, coords, true);
+			double altErr = Math.abs(calc.getAltitude() - target.getAltitude());
+			double azmErr = Math.abs(Math.abs(calc.getAzimuth() - target.getAzimuth()));
+			if (altErr > 1.0d / ALTITUDE_PRECISION  || azmErr > 1.0d / AZIMUTH_PRECISION ) {
+				s.fail++;
+				System.err.println(altErr + " " + azmErr);
+			}
+			coords = calculateCoordinatesIteration(body, time, subsolar, targetHor, pnt, true);
+			
+		}
+	}
+	
+	public static double roundError(double err) {
+        // Handle non-positive or very small inputs, returning 1.0 as a floor.
+        if (err <= 0) {
+            return 1.0;
+        }
+
+        // 1. Find the order of magnitude (the power of 10).
+        // e.g., for 78, exponent is 1; for 251, exponent is 2.
+        double exponent = Math.floor(Math.log10(err));
+        double powerOf10 = Math.pow(10, exponent);
+        // 2. Normalize the number to be between 1.0 and 10.0.
+        // e.g., 78 becomes 7.8; 251 becomes 2.51.
+        double normalizedErr = err / powerOf10;
+
+        // 3. Round the normalized number to 1, 5, or 10 based on thresholds.
+        double roundedNorm;
+        if (normalizedErr < 2.5) {
+            roundedNorm = 1.0;
+        } else if (normalizedErr < 7.5) {
+            roundedNorm = 5.0;
+        } else {
+            roundedNorm = 10.0;
+        }
+
+        // 4. Calculate the result by scaling back up.
+        double result = roundedNorm * powerOf10;
+        
+        // 5. Per the example 0.2 -> 1, if the result is less than 1, return 1.
+        return Math.max(1.0, result);
+    }
 	
 
 	private static Topocentric calcAltitude(Body body, Time time, LatLon point, boolean print) {
@@ -144,30 +184,22 @@ public class TestSubsolar {
 		int iter = 0;
 		double targetAltitude = targetHor.getAltitude();
 		double targetAzm = targetHor.getAzimuth();
-		double moveDistanceAngle = 90 - targetAltitude;
+		double altitudeFromSubsolar = 90 - targetAltitude;
 		double bearingFromSubsolar = 180 + targetAzm;
 		// initial step
-		pnt = move(subsolar, moveDistanceAngle, bearingFromSubsolar);
+		pnt = move(subsolar, altitudeFromSubsolar, bearingFromSubsolar);
 		Topocentric current = calcAltitude(body, time, pnt, false);
-		
 		double deltaAzimuth = MapUtils.degreesDiff(current.getAzimuth(), targetAzm);
-		for (; iter < MAX_ITERATIONS / 2 && roundAzm(deltaAzimuth) != 0; iter++) {
+		double deltaAltitude = MapUtils.degreesDiff(current.getAltitude(), targetAltitude);
+		for (; iter < MAX_ITERATIONS && (roundAzm(deltaAzimuth) != 0 || roundAlt(deltaAltitude) != 0); iter++) {
 			bearingFromSubsolar = bearingFromSubsolar - deltaAzimuth;
-			pnt = move(subsolar, moveDistanceAngle, bearingFromSubsolar);
+			pnt = move(subsolar, altitudeFromSubsolar + deltaAltitude, bearingFromSubsolar);
 			current = calcAltitude(body, time, pnt, false);
 			deltaAzimuth = MapUtils.degreesDiff(current.getAzimuth(), targetAzm);
+			deltaAltitude = MapUtils.degreesDiff(current.getAltitude(), targetAltitude);
 //			float actualBearing = subsolar.toLocation().bearingTo(pnt.toLocation());
 //			diff = MapUtils.degreesDiff(actualBearing, 180 + targetAzm);
 //			diff = MapUtils.degreesDiff(current.getAzimuth(), targetAzm);
-//			System.out.println("Diff azm=" + MapUtils.degreesDiff(current.getAzimuth(), targetAzm) + " alt="
-//					+ MapUtils.degreesDiff(current.getAltitude(), targetAltitude));
-		}
-
-		moveDistanceAngle = current.getAltitude() - targetAltitude;
-		for (; iter < MAX_ITERATIONS / 2 && roundAlt(moveDistanceAngle) != 0; iter++) {
-			moveDistanceAngle = current.getAltitude() - targetAltitude;
-			pnt = move(pnt, moveDistanceAngle, 180 + targetAzm);
-			current = calcAltitude(body, time, pnt, false);
 //			System.out.println("Diff azm=" + MapUtils.degreesDiff(current.getAzimuth(), targetAzm) + " alt="
 //					+ MapUtils.degreesDiff(current.getAltitude(), targetAltitude));
 		}
