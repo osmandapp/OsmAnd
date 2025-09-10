@@ -2861,6 +2861,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="photo_notes">Photo notes</string>
     <string name="route_recalculation">Route recalculation</string>
     <string name="accessibility_announce">Announce</string>
+    <string name="accessibility_independent_features">Independent features</string>
     <string name="login_and_pass">Username and password</string>
     <string name="osm_editing">OSM editing</string>
     <string name="app_mode_osm">OSM</string>
