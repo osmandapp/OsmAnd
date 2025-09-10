@@ -196,13 +196,20 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	public Set<InsetSide> getRootInsetSides(){
-		return EnumSet.of(InsetSide.BOTTOM);
+		return null;
 	}
 
 	@Nullable
 	@Override
 	public List<Integer> getScrollableViewIds() {
 		return null;
+	}
+
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
 	}
 
 	protected void setupHeightAndBackground(View mainView) {
