@@ -51,15 +51,15 @@ public class TestSubsolar {
 	// examples
 	// https://github.com/cosinekitty/astronomy/blob/master/demo/java/src/main/java/io/github/cosinekitty/astronomy/demo/RiseSetCulm.java
 	public static void main(String[] args) throws InterruptedException {
-		Body body = Body.Sun;
 		double lon = 0;
 		Stats s = new Stats();
+		
 //		MIN_ALTITUDE = 20;
 //		ERR = 0.00;
 //		for (int m = 1; m <= 12; m++) {
 //			for (double lat = -60; lat <= 60; lat += 5) {
 //				for (int h = 0; h < 24; h++) {
-//					runSingleTest(body, lat, lon, s, m, h);
+//					runSingleTest(Body.Sun, lat, lon, s, m, h);
 //				}
 //			}
 //		}
@@ -70,20 +70,27 @@ public class TestSubsolar {
 		ERR = 1;
 		for (int minInc = 5; minInc <= 60; minInc += 5) {
 			System.out.println("MIN INC - " + minInc);
-			runMinutesTest(body, 40, lon, s, 6, minInc);
+			runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
 		}
 		
 		// 52.3676, 4.9041
-//		System.out.println(calcCoordinatesOneShot(body, "2025-09-09T11:00:00Z", 168, 42));
-//		System.out.println(calcCoordinatesOneShot(body, "2025-09-09T13:30:00Z", 216, 37));
-//		System.out.println(calcCoordinatesOneShot(body, "2025-09-09T15:54:00Z", 252, 20));
+//		LatLon с1 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168, 42);
+//		LatLon с2 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168.5, 42.5);
+//		LatLon с3 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 167.5, 41.5);
+//		System.out.println(MapUtils.getDistance(с1, с2) + " " + MapUtils.getDistance(с1, с3));
+//		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T13:30:00Z", 216, 37));
+//		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T15:54:00Z", 252, 20));
+//		System.out.println(calcCoordinatesOneShot(Body.Moon, "2025-09-09T03:30:00Z", 230, 29));
+//		
 		
 	}
 
 	protected static LatLon calcCoordinatesOneShot(Body body, String timeS, double azm, double alt) {
 		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
 		LatLon projPoint = calculateProjPoint(body, time, PRINT);
-		return calculateCoordinatesIteration(body, time, projPoint, new Topocentric(azm, alt, 1, 1), null, PRINT);	
+		LatLon res = calculateCoordinatesIteration(body, time, projPoint, new Topocentric(azm, alt, 1, 1), null, PRINT);
+		System.out.println(res);
+		return res;
 	}
 
 	protected static void runMinutesTest(Body body, double lat, double lon, Stats s, int month, int minInc) {
