@@ -1398,7 +1398,7 @@ public class OsmandSettings {
 			new BooleanAccessibilityPreference(this, "accessibility_smart_autoannounce", true).makeProfile();
 
 	public final OsmandPreference<Boolean> ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION =
-			new BooleanAccessibilityPreference(this, "accessibility_pinch_zoom_magnification", false).makeProfile();
+			new BooleanPreference(this, "accessibility_pinch_zoom_magnification", false).makeProfile();
 
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference(this, "accessibility_autoannounce_period", 10000).makeProfile().cache();
