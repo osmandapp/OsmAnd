@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="edit_filter">Embann ar sil</string>
     <string name="subcategories">Isrummadoù</string>
@@ -19,8 +19,8 @@
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Anv diret ar pik</string>
-    <string name="transport_nearby_routes_within">Trehentadoù e-kichen</string>
-    <string name="transport_nearby_routes">NEPELL</string>
+    <string name="transport_nearby_routes_within">Hentadurioù dindan</string>
+    <string name="transport_nearby_routes">Dindan</string>
     <string name="enter_the_file_name">Enankit anv ar restr.</string>
     <string name="map_import_error">Fazi en ur enporzhiañ ar gartenn</string>
     <string name="map_imported_successfully">Kartenn enporzhiet gant berzh</string>
@@ -61,4 +61,52 @@
     <string name="select_nav_profile_dialog_title">Choaz doare Merdeiñ</string>
     <string name="logcat_buffer_descr">Sellit ha rannit deizlevrioù an arload (evit diveugañ).</string>
     <string name="permission_is_required">Ezhomm ho peus un aotre evit ober gant an dibab-mañ.</string>
+    <string name="liter_single">Litr</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="imperial_gallon">Gallon impalaerel</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="us_gallon">Gallon amerikan</string>
+    <string name="kilometers">Kilometroù</string>
+    <string name="miles">Miltirioù</string>
+    <string name="send_report">Kas an danevell</string>
+    <string name="mpg">MDG</string>
+    <string name="logcat_buffer">Skurzer Logcat</string>
+    <string name="shared_string_export">Ezporzhiañ</string>
+    <string name="day">Deiz</string>
+    <string name="delete_data">Dilemel ar roadennoù</string>
+    <string name="shared_string_yes">Ya</string>
+    <string name="yesterday">Dec\'h</string>
+    <string name="deactivated_map">Kartenn diweredekaet</string>
+    <string name="shared_string_map">Kartenn</string>
+    <string name="help_article_map_point_layers_on_map_name">Poentoù war ar gartenn</string>
+    <string name="shared_string_map_center">Kreiz ar gartenn</string>
+    <string name="help_article_troubleshooting_maps_data_name">Kartennoù &amp; roadennoù</string>
+    <string name="help_article_widgets_map_buttons_name">Boutonoù ar gartenn</string>
+    <string name="help_article_map_routes_name">Hentadurioù</string>
+    <string name="rotate_map_to">Reteradur ar gartenn</string>
+    <string name="map_widget_gps_info">Titouroù GPS</string>
+    <string name="map_widget_transparent">Widjetoù treuzwelus</string>
+    <string name="position_on_map_center">E-kreiz</string>
+    <string name="position_on_map_bottom">En traoñ</string>
+    <string name="map_widget_compass">Nadoz-vor</string>
+    <string name="layer_map_appearance">Kefluniañ ar skrammad</string>
+    <string name="transport_Routes">Hentadurioù</string>
+    <string name="route_members">Izili</string>
+    <string name="help_article_navigation_routing_name">Arventennoù an hentadur</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_setup_route_details_name">Munudoù an hentadur</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Prientiñ an hentadur</string>
+    <string name="map_widget_route_information">Titouroù an hentadur</string>
+    <string name="route_info">Titouroù an hentadur</string>
+    <string name="route_parameters">Arventennoù an hentadur</string>
+    <string name="quick_action_new_route">Hentadur nevez</string>
+    <string name="route_to">Da:</string>
+    <string name="route_via">Dre:</string>
+    <string name="route_from">Eus:</string>
+    <string name="layer_route">Hentadur</string>
+    <string name="plan_route_create_new_route">Sevel un hentadur nevez</string>
+    <string name="display_route_tracks">Diskouez ar roudoù</string>
+    <string name="poi_routes">Hentadurioù</string>
+    <string name="rendering_category_routes">Hentadurioù</string>
+    <string name="plan_route_import_track">Enporzhiañ ur roud</string>
 </resources>
