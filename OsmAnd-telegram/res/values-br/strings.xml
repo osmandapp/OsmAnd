@@ -4,4 +4,13 @@
     <string name="back_to_osmand">Distreiñ da OsmAnd</string>
     <string name="duration_ago">%1$e \'zo</string>
     <string name="shared_string_error_short">FAZI</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="shared_string_error">Fazi</string>
+    <string name="send_report">Kas an danevell</string>
+    <string name="logcat_buffer">Skurzer Logcat</string>
+    <string name="shared_string_export">Ezporzhiañ</string>
+    <string name="please_update_osmand">Hizivait OsmAnd evit gwelet ar roadennoù war ar gartenn</string>
+    <string name="shared_string_map">Kartenn</string>
+    <string name="show_on_map">Diskouez war ar gartenn</string>
 </resources>

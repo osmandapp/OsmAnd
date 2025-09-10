@@ -218,7 +218,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		waypointDialogHelper = new WaypointDialogHelper();
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = mapActivity.findViewById(R.id.dashboard);
-		InsetsUtils.setWindowInsetsListener(dashboardView, (v, insets) -> InsetsUtils.applyPadding(v, insets, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM)), true);
+		InsetsUtils.setWindowInsetsListener(dashboardView, (v, insets) -> InsetsUtils.applyPadding(v, insets, EnumSet.of(InsetSide.TOP)), true);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
 		OnClickListener listener = new OnClickListener() {
 			@Override

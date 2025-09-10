@@ -5131,7 +5131,7 @@
 \n
 \nVoer het e-mailadres in waarmee u bent geregistreerd. Er zal een eenmalig wachtwoord voor de volgende stap naar worden verzonden.</string>
     <string name="power_watts_unit">Watt</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Gebruik raster sqltieddb voor helling / heuvelkam</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Gebruik raster-SQLiteDB voor reliëfschaduw / helling</string>
     <string name="shared_string_avoid">Vermijd</string>
     <string name="free_favorites_backup_description">Registreer voor OsmAnd Cloud om een gratis back-up te maken van favorieten en instellingen.</string>
     <string name="get_osmand_cloud">Neem OsmAnd Cloud</string>

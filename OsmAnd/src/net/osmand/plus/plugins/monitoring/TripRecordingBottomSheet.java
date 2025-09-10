@@ -697,7 +697,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			return;
 		}
 		if (AndroidUiHelper.isOrientationPortrait(activity)) {
-			super.setupHeightAndBackground(mainView);
+			super.setupHeightAndBackground(mainView, sysBars);
 			return;
 		}
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

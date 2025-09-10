@@ -310,9 +310,9 @@ public class Amenity extends MapObject {
 
 	public StringBuilder printNamesAndAdditional() {
 		StringBuilder s = new StringBuilder();
-		Map<String, String> additionals = new HashMap<>();
-		Map<String, String> poi_type = new HashMap<>();
-		Map<String, String> text = new HashMap<>();
+		Map<String, String> additionals = new LinkedHashMap<>();
+		Map<String, String> poi_type = new LinkedHashMap<>();
+		Map<String, String> text = new LinkedHashMap<>();
 		if (additionalInfo != null) {
 			for (Map.Entry<String, String> e : additionalInfo.entrySet()) {
 				String key = e.getKey();

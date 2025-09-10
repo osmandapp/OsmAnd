@@ -5694,4 +5694,6 @@
     <string name="kilometers">公里</string>
     <string name="miles">英哩</string>
     <string name="mpg">每公升英哩數</string>
+    <string name="access_pinch_zoom_magnification">啟用雙指縮放功能</string>
+    <string name="access_pinch_zoom_magnification_descr">使用檢視區域縮放取代分段縮放層級來處理雙指手勢。</string>
 </resources>

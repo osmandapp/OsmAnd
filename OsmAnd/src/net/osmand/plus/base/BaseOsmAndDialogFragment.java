@@ -71,13 +71,8 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 			} else {
 				WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), false);
 			}
+			InsetsUtils.processInsets(this, dialog.getWindow().getDecorView());
 		}
-	}
-
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		InsetsUtils.processInsets(this, view);
 	}
 
 	@Nullable

@@ -31,20 +31,27 @@
             tools:background="@color/divider_color_dark"/>
 
         <FrameLayout
-            android:id="@+id/cancel_row"
+            android:id="@+id/bottom_buttons_container"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_sheet_cancel_button_height"
-            android:foreground="?attr/selectableItemBackground">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/cancel_row_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/shared_string_close"
-                android:textAllCaps="true"
-                android:textSize="@dimen/default_desc_text_size"
-                app:typefaceWeight="medium"/>
+            <FrameLayout
+                android:id="@+id/cancel_row"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/cancel_row_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/shared_string_close"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/default_desc_text_size"
+                    app:typefaceWeight="medium"/>
+            </FrameLayout>
+
         </FrameLayout>
 
     </LinearLayout>

@@ -38,6 +38,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -306,6 +307,14 @@ public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDa
 	public static ConfigureMapFragment getVisibleInstance(@NonNull MapActivity mapActivity) {
 		FragmentManager fm = mapActivity.getSupportFragmentManager();
 		return (ConfigureMapFragment) fm.findFragmentByTag(TAG);
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.list);
+		return ids;
 	}
 
 	@Nullable
