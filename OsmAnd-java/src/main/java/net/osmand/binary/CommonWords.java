@@ -1,7 +1,12 @@
 package net.osmand.binary;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import net.osmand.PlatformUtil;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
+import net.osmand.util.Algorithms;
+
+import java.io.IOException;
+import java.util.*;
 
 public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
@@ -55,6 +60,51 @@ public class CommonWords {
 			}
 		}
 		return count;
+	}
+
+	private static void addRegionNames() {
+		OsmandRegions osmandRegions = null;
+		try {
+			osmandRegions = PlatformUtil.getOsmandRegions();
+			System.out.println(osmandRegions);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		if (osmandRegions != null) {
+			Set<String> names = new HashSet<>();
+			parseRegionNames(osmandRegions.getWorldRegion(), names);
+			for (String name : names) {
+				CommonWords.addCommon(name);
+				if (name.contains(".")) {
+					CommonWords.addCommon(name.replace(".", ""));
+				}
+			}
+		}
+	}
+
+	private static void parseRegionNames(WorldRegion region, Set<String> result) {
+		List<WorldRegion> subregions = region.getSubregions();
+		for (WorldRegion s : subregions) {
+			String t = s.getRegionSearchText();
+			if (t != null) {
+				String[] ns = t.split(" ");
+				for (String n : ns) {
+					if (n.contains(";")) {
+						String[] ot = n.split(";");
+						for (String o : ot) {
+							if (o.length() > 1) {
+								result.add(o.toLowerCase());
+							}
+						}
+					} else {
+						if (n.length() > 1) {
+							result.add(n.toLowerCase());
+						}
+					}
+				}
+			}
+			parseRegionNames(s, result);
+		}
 	}
 	
 	static {
@@ -1274,6 +1324,204 @@ public class CommonWords {
 		addCommon("ταξίδια");
 		addCommon("ø");
 		addCommon("bane");
+		addCommon("prairie");
+		addCommon("point");
+		addCommon("viaduct");
+		addCommon("station");
+		addCommon("isles");
+		addCommon("radial");
+		addCommon("villages");
+		addCommon("curve");
+		addCommon("knolls");
+		addCommon("brook");
+		addCommon("forest");
+		addCommon("center");
+		addCommon("extension");
+		addCommon("station");
+		addCommon("vista");
+		addCommon("grove");
+		addCommon("courts");
+		addCommon("ferry");
+		addCommon("pine");
+		addCommon("glen");
+		addCommon("streets");
+		addCommon("ports");
+		addCommon("walk");
+		addCommon("underpass");
+		addCommon("springs");
+		addCommon("summit");
+		addCommon("wells");
+		addCommon("extension");
+		addCommon("burg");
+		addCommon("beach");
+		addCommon("center");
+		addCommon("branch");
+		addCommon("arcade");
+		addCommon("light");
+		addCommon("bottom");
+		addCommon("junction");
+		addCommon("centers");
+		addCommon("extensions");
+		addCommon("field");
+		addCommon("coves");
+		addCommon("vista");
+		addCommon("lodge");
+		addCommon("orchard");
+		addCommon("oval");
+		addCommon("stravenue");
+		addCommon("valleys");
+		addCommon("stream");
+		addCommon("fords");
+		addCommon("falls");
+		addCommon("camp");
+		addCommon("flat");
+		addCommon("cove");
+		addCommon("ridge");
+		addCommon("bluff");
+		addCommon("landing");
+		addCommon("meadows");
+		addCommon("roads");
+		addCommon("dale");
+		addCommon("forges");
+		addCommon("dam");
+		addCommon("harbors");
+		addCommon("forge");
+		addCommon("divide");
+		addCommon("divide");
+		addCommon("loops");
+		addCommon("branch");
+		addCommon("union");
+		addCommon("annex");
+		addCommon("ridge");
+		addCommon("shoals");
+		addCommon("crossroad");
+		addCommon("ridges");
+		addCommon("stravenue");
+		addCommon("prairie");
+		addCommon("knoll");
+		addCommon("trailer");
+		addCommon("mills");
+		addCommon("shoal");
+		addCommon("bluffs");
+		addCommon("canyon");
+		addCommon("harbor");
+		addCommon("garden");
+		addCommon("shore");
+		addCommon("view");
+		addCommon("radial");
+		addCommon("mission");
+		addCommon("keys");
+		addCommon("fort");
+		addCommon("burgs");
+		addCommon("springs");
+		addCommon("well");
+		addCommon("cliffs");
+		addCommon("groves");
+		addCommon("harbor");
+		addCommon("green");
+		addCommon("hollow");
+		addCommon("spring");
+		addCommon("heights");
+		addCommon("bayou");
+		addCommon("grove");
+		addCommon("points");
+		addCommon("shore");
+		addCommon("manor");
+		addCommon("plains");
+		addCommon("trailer");
+		addCommon("motorway");
+		addCommon("unions");
+		addCommon("bayou");
+		addCommon("forks");
+		addCommon("hill");
+		addCommon("lights");
+		addCommon("circles");
+		addCommon("heights");
+		addCommon("skyway");
+		addCommon("club");
+		addCommon("pines");
+		addCommon("ford");
+		addCommon("forge");
+		addCommon("cliff");
+		addCommon("fork");
+		addCommon("haven");
+		addCommon("pike");
+		addCommon("fort");
+		addCommon("squares");
+		addCommon("ferry");
+		addCommon("locks");
+		addCommon("course");
+		addCommon("garden");
+		addCommon("crossroads");
+		addCommon("mountain");
+		addCommon("causeway");
+		addCommon("canyon");
+		addCommon("common");
+		addCommon("junction");
+		addCommon("camp");
+		addCommon("junctions");
+		addCommon("gardens");
+		addCommon("ways");
+		addCommon("trace");
+		addCommon("neck");
+		addCommon("glens");
+		addCommon("summit");
+		addCommon("inlet");
+		addCommon("bluff");
+		addCommon("junctions");
+		addCommon("oval");
+		addCommon("knoll");
+		addCommon("key");
+		addCommon("crescent");
+		addCommon("rapids");
+		addCommon("loaf");
+		addCommon("causeway");
+		addCommon("commons");
+		addCommon("estates");
+		addCommon("corners");
+		addCommon("loops");
+		addCommon("corner");
+		addCommon("estate");
+		addCommon("mission");
+		addCommon("annex");
+		addCommon("manors");
+		addCommon("ranch");
+		addCommon("brooks");
+		addCommon("mill");
+		addCommon("mountains");
+		addCommon("drives");
+		addCommon("mountain");
+		addCommon("viaduct");
+		addCommon("spring");
+		addCommon("landing");
+		addCommon("orchard");
+		addCommon("gardens");
+		addCommon("hollow");
+		addCommon("greens");
+		addCommon("meadow");
+		addCommon("bottom");
+		addCommon("mountains");
+		addCommon("pike");
+		addCommon("ways");
+		addCommon("views");
+		addCommon("squares");
+		addCommon("lock");
+		addCommon("throughway");
+		addCommon("park");
+		addCommon("overpass");
+		addCommon("rapid");
+		addCommon("trafficway");
+		addCommon("annex");
+		addCommon("crescent");
+		addCommon("hills");
+		addCommon("lodge");
+		addCommon("plain");
+		addCommon("flats");
+		addCommon("fields");
+		addCommon("park");
+		addCommon("walk");
+
+		addRegionNames(); // add regions names and region abbreviations
 
 	}
 
