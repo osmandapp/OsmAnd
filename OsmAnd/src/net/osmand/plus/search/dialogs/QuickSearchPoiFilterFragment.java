@@ -61,6 +61,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
+
 	public static final String TAG = "QuickSearchPoiFilterFragment";
 
 	private static final String QUICK_SEARCH_POI_FILTER_ID_KEY = "quick_search_poi_filter_id_key";
@@ -85,7 +86,11 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private final ArrayList<String> showAllCategories = new ArrayList<>();
 	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 
-	public QuickSearchPoiFilterFragment() {
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
 	}
 
 	@Override
