@@ -91,14 +91,17 @@ public class TestSubsolar {
 		// aldebaran: { ra: 4.59, dec: 16.51, name: 'Aldebaran',
 		Astronomy.defineStar(Body.Star1, 4.59, 16.51, 100);
 		starAlt = 38.82;
-		LatLon l1 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Sun, 24.7, Body.Moon, 17.38);
-		LatLon l2 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Moon, 17.38);
-		LatLon l3 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Sun, 24.7);
+		
+		LatLon l11 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Sun, 24.7, Body.Moon, 17.38, true);
+		LatLon l12 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Sun, 24.7, Body.Moon, 17.38, false);
+		LatLon l21 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Moon, 17.38, true);
+		LatLon l22 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Moon, 17.38, false);
+		LatLon l31 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Sun, 24.7, true);
+		LatLon l32 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Sun, 24.7, false);
 		LatLon pnt = new LatLon(52.367, 4.904);
-		check(pnt, midPoint(l1, l1));
-		check(pnt, midPoint(l1, l2));
-		check(pnt, midPoint(l2, l3));
-		check(pnt, midPoint(l1, midPoint(l2, l3)));
+		System.out.println(l12 + " " + l11 + " " + l21 + " " + l22 + " " + l31 + " " + l32);
+		check(pnt, midPoint(l11, l21));
+		check(pnt, midPoint(l32, l21, l11));
 		
 		
 	}
@@ -107,11 +110,17 @@ public class TestSubsolar {
 		System.out.println(MapUtils.getDistance(check, l) / 1000.0 + " " + l);
 	}
 
-	private static LatLon midPoint(LatLon l1, LatLon l2) {
-		return new LatLon(l1.getLatitude() / 2 + l2.getLatitude() / 2, l1.getLongitude() / 2 + l2.getLongitude() / 2);
+	private static LatLon midPoint(LatLon... ls) {
+		double lon = 0;
+		double lat = 0;
+		for(int i = 0; i < ls.length; i++) {
+			lat += ls[i].getLatitude() / ls.length;
+			lon += ls[i].getLongitude() / ls.length;
+		}
+		return new LatLon(lat, lon);
 	}
 
-	protected static LatLon calcCoordinates2Bodies(String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2) {
+	protected static LatLon calcCoordinates2Bodies(String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2, boolean dir) {
 		MAX_ITERATIONS = 100000;
 		double ALT_PRECISION = 0.01;
 		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
@@ -128,13 +137,15 @@ public class TestSubsolar {
 //		System.out.println(projPoint2);
 		int iter = 0;
 		for (int magn = 1; magn <= 1000; magn *= 10) {
-			double deltaAround1 = closest1 == null ? 90 : closestDelta1;
-			double deltaAround2 = closest1 == null ? 90 : closestDelta2;
+			double deltaAround1 = closest1 == null ? (dir ? 90 : -90) : closestDelta1;
+			double deltaAround2 = closest1 == null ? (dir ? 90 : -90) : closestDelta2;
 			int steps = closest1 == null ? 9 : 15;
 			List<LatLon> points1 = new ArrayList<LatLon>();
 			List<Double> deltas1 = new ArrayList<Double>();
+			List<Double> alts1 = new ArrayList<Double>();
 			List<LatLon> points2 = new ArrayList<LatLon>();
 			List<Double> deltas2 = new ArrayList<Double>();
+			List<Double> alts2 = new ArrayList<Double>();
 			for (int i = -steps; i < steps; i++) {
 				double delta1 = deltaAround1 + i * 10.0 / magn;
 				double delta2 = deltaAround2 + i * 10.0 / magn;
@@ -158,8 +169,10 @@ public class TestSubsolar {
 				}
 				points1.add(pnt1);
 				deltas1.add(delta1);
+				alts1.add(alt1);
 				points2.add(pnt2);
 				deltas2.add(delta2);
+				alts2.add(alt2);
 				// System.out.println(target2.getAltitude() + " == "+ targetAlt2 + " " + iter);
 			}
 			for (int i = 0; i < points1.size(); i++) {
@@ -181,6 +194,7 @@ public class TestSubsolar {
 				}
 			}
 			System.out.println("-------");
+			
 			System.out.printf("Dist %.2f (iter %d), delta - %.3f %.3f, points - %s %s\n", minDist / 1000, iter,
 					closestDelta1, closestDelta2, closest1, closest2);
 		}
