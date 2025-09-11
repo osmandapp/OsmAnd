@@ -127,7 +127,7 @@ public class GalleryController implements IDialogController {
 	}
 
 	public static int getSettingsSpanCount(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			return app.getSettings().CONTEXT_GALLERY_SPAN_GRID_COUNT.get();
 		} else {
@@ -136,7 +136,7 @@ public class GalleryController implements IDialogController {
 	}
 
 	public static void setSpanSettings(@NonNull MapActivity mapActivity, int newSpanCount) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			app.getSettings().CONTEXT_GALLERY_SPAN_GRID_COUNT.set(newSpanCount);
 		} else {

@@ -24,7 +24,7 @@ public class TargetPointMenuController extends MenuController {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
 		builder.setShowNearestWiki(true);
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -35,7 +35,7 @@ public class TargetPointMenuController extends MenuController {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					TargetPoint tp = getTargetPoint();
-					OsmandApplication application = activity.getMyApplication();
+					OsmandApplication application = activity.getApp();
 					if (tp.start) {
 						application.getTargetPointsHelper().clearStartPoint(true);
 					} else if (tp.intermediate) {

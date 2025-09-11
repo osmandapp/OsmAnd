@@ -145,13 +145,13 @@ public class AddPOIAction extends SelectMapLocationAction {
 
 	@Override
 	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		OsmandSettings settings = mapActivity.getSettings();
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin == null) return;
 
 		Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
 		node.replaceTags(getTagsFromParams());
-		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getMyApplication());
+		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getApp());
 		if (Boolean.parseBoolean(getParams().get(KEY_DIALOG)) || editPoiData.hasEmptyValue()) {
 			Entity newEntity = editPoiData.getEntity();
 			EditPoiDialogFragment.showInstance(mapActivity, newEntity, true, getTagsFromParams());
@@ -230,7 +230,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_add_poi_layout, parent, false);
 		setupPointLocationView(view.findViewById(R.id.point_location_container), mapActivity);
 
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean isLightTheme = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
 		Drawable deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
@@ -331,7 +331,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 		});
 
 		int activeColor = ColorUtilities.getActiveColor(mapActivity, !isLightTheme);
-		onlineDocumentationButton.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
+		onlineDocumentationButton.setImageDrawable(mapActivity.getApp().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
 
 		parent.addView(view);
 	}

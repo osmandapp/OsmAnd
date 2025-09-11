@@ -86,7 +86,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	public WidgetsListAdapter(@NonNull MapActivity mapActivity, boolean nightMode,
 	                          @NonNull WidgetsAdapterListener listener, boolean isVerticalPanel, @NonNull ApplicationMode selectedAppMode) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.selectedAppMode = selectedAppMode;
 		this.nightMode = nightMode;
 		this.listener = listener;

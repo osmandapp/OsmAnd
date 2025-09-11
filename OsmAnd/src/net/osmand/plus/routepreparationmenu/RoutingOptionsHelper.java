@@ -118,7 +118,7 @@ public class RoutingOptionsHelper {
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
 		int selected = -1;
-		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
+		String selectedValue = mapActivity.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
 		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
@@ -170,7 +170,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void applyVoiceProvider(MapActivity mapActivity, String provider, boolean applyAllModes) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
 		OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
 		if (applyAllModes) {

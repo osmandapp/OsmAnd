@@ -105,7 +105,6 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -170,10 +169,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
 	private ExtendedMapActivity extendedMapActivity;
 
-	// App variables
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private LockHelper lockHelper;
 	private ImportHelper importHelper;
 	private IntentHelper intentHelper;
@@ -230,23 +225,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		long time = System.currentTimeMillis();
+		app.applyTheme(this);
+		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
-		long tm = System.currentTimeMillis();
-		app = getMyApplication();
-		settings = app.getSettings();
+		super.onCreate(savedInstanceState);
+
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
 		keyEventHelper = app.getKeyEventHelper();
 		restoreNavigationHelper = new RestoreNavigationHelper(app, this);
-		app.applyTheme(this);
-		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		getMapActions().setMapActivity(this);
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
 
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		enterToFullScreen();
 		// Navigation Drawer
@@ -307,8 +301,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		PluginsHelper.onMapActivityCreate(this);
 		importHelper = app.getImportHelper();
 		importHelper.setUiActivity(this);
-		if (System.currentTimeMillis() - tm > 50) {
-			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+		if (System.currentTimeMillis() - time > 50) {
+			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - time) + " ms");
 		}
 		mapView.refreshMap(true);
 
@@ -369,7 +363,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 
 			initListener = new MapAppInitializeListener(this);
-			getMyApplication().checkApplicationIsBeingInitialized(initListener);
+			app.checkApplicationIsBeingInitialized(initListener);
 		} else {
 			app.getOsmandMap().setupRenderingView();
 			restoreNavigationHelper.checkRestoreRoutingMode();
@@ -478,7 +472,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
-		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
+		DayNightHelper dayNightHelper = app.getDaynightHelper();
 
 		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
 		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
@@ -630,7 +624,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 
-		getMyApplication().getNotificationHelper().refreshNotifications();
+		app.getNotificationHelper().refreshNotifications();
 		// fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().hide();
@@ -963,13 +957,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onStart();
 		stopped = false;
 		lockHelper.onStart();
-		getMyApplication().getNotificationHelper().showNotifications();
+		app.getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
 	}
 
 	@Override
 	protected void onStop() {
-		getMyApplication().getNotificationHelper().removeNotifications(true);
+		app.getNotificationHelper().removeNotifications(true);
 		if (pendingPause) {
 			onPauseActivity();
 		}

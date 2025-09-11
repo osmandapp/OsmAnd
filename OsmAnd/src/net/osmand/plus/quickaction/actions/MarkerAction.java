@@ -49,7 +49,7 @@ public class MarkerAction extends SelectMapLocationAction {
 	@Override
 	@Nullable
 	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
-		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = mapActivity.getApp().getMapMarkersHelper();
 		MapMarkersLayer layer = mapActivity.getMapLayers().getMapMarkersLayer();
 		int colorIndex = markersHelper.getNextMarkerColorIndex(-1);
 		return layer.getMapMarkerShiftedBitmap(colorIndex);

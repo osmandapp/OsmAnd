@@ -32,7 +32,6 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -82,7 +81,7 @@ public class ConfigureMapDialogs {
 
 	protected static void showMapMagnifierDialog(@NonNull MapActivity activity, boolean nightMode,
 	                                             @NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter adapter) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 		OsmandSettings settings = app.getSettings();
 
@@ -133,7 +132,7 @@ public class ConfigureMapDialogs {
 			@NonNull MapActivity activity, boolean nightMode,
 			@NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter uiAdapter
 	) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 
 		OsmandMapTileView view = activity.getMapView();
@@ -169,7 +168,7 @@ public class ConfigureMapDialogs {
 		boolean[] transliterateNames = new boolean[1];
 		boolean[] showLocalNames = new boolean[1];
 
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 
@@ -268,7 +267,7 @@ public class ConfigureMapDialogs {
 			@NonNull CommonPreference<String> pref, @NonNull ContextMenuItem item,
 			@NonNull OnDataChangeUiAdapter uiAdapter, boolean nightMode
 	) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		String title = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
 		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
 		int selectedIndex = AndroidUtils.getRenderPropertySelectedValueIndex(app, p);
@@ -305,7 +304,7 @@ public class ConfigureMapDialogs {
 		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
 			return;
 		}
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		boolean[] checkedItems = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
 			checkedItems[i] = prefs.get(i).get();

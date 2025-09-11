@@ -35,7 +35,7 @@ public class AvoidRoadsDialog {
 
 	public static void showDialog(@NonNull MapActivity activity, @Nullable ApplicationMode mode) {
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 			AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
@@ -63,7 +63,7 @@ public class AvoidRoadsDialog {
 
 	@NonNull
 	private static ArrayAdapter<AvoidRoadInfo> createAdapter(@NonNull MapActivity activity, @NonNull List<AvoidRoadInfo> roadInfos, boolean nightMode) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 
 		LatLon mapLocation = activity.getMapLocation();
@@ -118,7 +118,7 @@ public class AvoidRoadsDialog {
 	private static void showOnMap(@NonNull MapActivity activity, double lat, double lon, String name) {
 		int zoom = Math.max(activity.getMapView().getZoom(), 15);
 		PointDescription pd = new PointDescription("", name);
-		activity.getMyApplication().getSettings().setMapLocationToShow(lat, lon, zoom, pd, false, null);
+		activity.getSettings().setMapLocationToShow(lat, lon, zoom, pd, false, null);
 		MapActivity.launchMapActivityMoveToTop(activity);
 	}
 }

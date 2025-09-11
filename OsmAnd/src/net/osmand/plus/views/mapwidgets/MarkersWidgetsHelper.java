@@ -35,7 +35,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 
 	public MarkersWidgetsHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		settings = mapActivity.getMyApplication().getSettings();
+		settings = mapActivity.getSettings();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 		widgetRegistry.addWidgetsRegistryListener(this);
 	}
@@ -136,7 +136,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 	}
 
 	public static void showMarkerOnMap(@NonNull MapActivity mapActivity, int index) {
-		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = mapActivity.getApp().getMapMarkersHelper();
 		if (index < markersHelper.getMapMarkers().size()) {
 			MapMarker marker = markersHelper.getMapMarkers().get(index);
 			OsmandMapTileView mapView = mapActivity.getMapView();

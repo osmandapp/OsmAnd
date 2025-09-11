@@ -191,16 +191,16 @@ public class ConfigureMapUtils {
 	}
 
 	protected static String getDayNightDescr(MapActivity activity) {
-		return activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity);
+		return activity.getSettings().DAYNIGHT_MODE.get().toHumanString(activity);
 	}
 
 	@DrawableRes
 	protected static int getDayNightIcon(MapActivity activity) {
-		return activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().getDefaultIcon();
+		return activity.getSettings().DAYNIGHT_MODE.get().getDefaultIcon();
 	}
 
 	protected static String getScale(MapActivity activity) {
-		int scale = (int) (activity.getMyApplication().getSettings().TEXT_SCALE.get() * 100);
+		int scale = (int) (activity.getSettings().TEXT_SCALE.get() * 100);
 		return scale + " %";
 	}
 }

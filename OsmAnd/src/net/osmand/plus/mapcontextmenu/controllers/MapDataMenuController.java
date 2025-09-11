@@ -72,7 +72,7 @@ public class MapDataMenuController extends MenuController {
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();
 		localItem = mapObject.getLocalItem();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		downloadThread = app.getDownloadThread();
 		if (indexItem != null) {
 			downloaded = indexItem.isDownloaded();
@@ -191,7 +191,7 @@ public class MapDataMenuController extends MenuController {
 		};
 
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
+			if (mapActivity.getSettings().isInternetConnectionAvailable()) {
 				downloadThread.runReloadIndexFiles();
 			}
 		}
@@ -202,7 +202,7 @@ public class MapDataMenuController extends MenuController {
 	private boolean isLiveUpdatesOn() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 			return InAppPurchaseUtils.isLiveUpdatesAvailable(app) && app.getSettings().IS_LIVE_UPDATES_ON.get();
 		}
 		return false;
@@ -378,7 +378,7 @@ public class MapDataMenuController extends MenuController {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
 			addPlainMenuItem(R.drawable.ic_action_data, null, indexItem.getRemoteDate(dateFormat), false, false, null);
 		} else if (localItem != null) {
-			addPlainMenuItem(R.drawable.ic_action_data, null, localItem.getDescription(mapActivity.getMyApplication()), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_data, null, localItem.getDescription(mapActivity.getApp()), false, false, null);
 		}
 	}
 
@@ -449,7 +449,7 @@ public class MapDataMenuController extends MenuController {
 				|| (otherLocalItems != null && otherLocalItems.size() > 0);
 
 		boolean internetConnectionAvailable =
-				mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable();
+				mapActivity.getSettings().isInternetConnectionAvailable();
 
 		boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 		if (isDownloading) {
@@ -488,7 +488,7 @@ public class MapDataMenuController extends MenuController {
 	private void deleteItem(File file) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			if (file.exists()) {
 				AlertDialog.Builder confirm = new AlertDialog.Builder(getMapActivity());
 				confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
@@ -567,7 +567,7 @@ public class MapDataMenuController extends MenuController {
 		DeleteFileTask(@NonNull MapActivity mapActivity, @NonNull File file) {
 			this.file = file;
 			this.mapActivityRef = new WeakReference<>(mapActivity);
-			this.app = mapActivity.getMyApplication();
+			this.app = mapActivity.getApp();
 		}
 
 		@Override
@@ -607,13 +607,13 @@ public class MapDataMenuController extends MenuController {
 
 		RestoreFromBackupTask(@NonNull MapActivity mapActivity, @NonNull LocalItem LocalItem) {
 			this.mapActivityRef = new WeakReference<>(mapActivity);
-			this.app = mapActivity.getMyApplication();
+			this.app = mapActivity.getApp();
 			this.localItem = LocalItem;
 		}
 
 		RestoreFromBackupTask(@NonNull MapActivity mapActivity, @NonNull IndexItem indexItem) {
 			this.mapActivityRef = new WeakReference<>(mapActivity);
-			this.app = mapActivity.getMyApplication();
+			this.app = mapActivity.getApp();
 			this.indexItem = indexItem;
 		}
 

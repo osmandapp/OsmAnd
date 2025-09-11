@@ -197,7 +197,7 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		if (location != null && !MapUtils.areLatLonEqual(menu.getMyLocation(), location)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-				mapActivity.getMyApplication().runInUIThread(() -> menu.updateMyLocation(mainView, location));
+				mapActivity.getApp().runInUIThread(() -> menu.updateMyLocation(mainView, location));
 			}
 		}
 	}

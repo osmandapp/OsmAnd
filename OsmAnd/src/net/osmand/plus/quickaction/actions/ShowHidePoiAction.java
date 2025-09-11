@@ -103,7 +103,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		PoiFiltersHelper helper = app.getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(helper);
 		boolean currentFilters = isCurrentFilters(app, poiFilters);
@@ -140,7 +140,7 @@ public class ShowHidePoiAction extends QuickAction {
 		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_show_hide_poi, parent, false);
 
 		RecyclerView list = view.findViewById(R.id.list);
-		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
+		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getApp().getPoiFilters());
 		Adapter adapter = new Adapter(poiFilters);
 		list.setAdapter(adapter);
 
@@ -271,7 +271,7 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	private void showSingleChoicePoiFilterDialog(MapActivity mapActivity, Adapter filtersAdapter) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 

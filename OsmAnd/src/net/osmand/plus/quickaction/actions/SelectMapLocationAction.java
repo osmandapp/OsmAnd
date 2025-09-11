@@ -46,7 +46,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 		if (isManualLocationSelection()) {
 			SelectLocationController.showDialog(mapActivity, extractor, createHandler(params));
 		} else {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			onLocationSelected(mapActivity, extractor.extractLocation(app), params);
 		}
 	}
@@ -131,7 +131,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 	}
 
 	protected void setupPointLocationView(@NonNull ViewGroup container, @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		PointLocationCardController controller = new PointLocationCardController(app, this);
 		MultiStateCard card = new MultiStateCard(mapActivity, controller);
 		container.addView(card.build());

@@ -314,7 +314,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	protected void addSpeedToPlainItems() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasSpeed() && l.getSpeed() > 0f) {
 				String speed = OsmAndFormatter.getFormattedSpeed(l.getSpeed(), app);
@@ -326,7 +326,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	protected void addAltitudeToPlainItems() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAltitude()) {
 				String alt = OsmAndFormatter.getFormattedAlt(l.getAltitude(), app);
@@ -338,7 +338,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	protected void addPrecisionToPlainItems() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAccuracy()) {
 				String acc;
@@ -504,7 +504,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MapActivity activity = getMapActivity();
 		SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 		if (activity != null && srtmPlugin != null && srtmPlugin.is3DReliefAllowed()) {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 			OsmandMapTileView mapView = activity.getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon(), altitude -> {
@@ -713,7 +713,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			leftDownloadButtonController.startIconId = R.drawable.ic_action_import;
 
 			boolean internetConnectionAvailable =
-					mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable();
+					mapActivity.getSettings().isInternetConnectionAvailable();
 
 			boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 			if (isDownloading) {
@@ -805,13 +805,13 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	protected void startDownload(MapActivity mapActivity, IndexItem indexItem) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (!Version.isPaidVersion(app)
 				&& DownloadActivityType.isCountedInDownloads(indexItem)
 				&& app.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 			ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
 		} else {
-			new DownloadValidationManager(mapActivity.getMyApplication())
+			new DownloadValidationManager(mapActivity.getApp())
 					.startDownload(mapActivity, indexItem);
 		}
 	}
@@ -819,11 +819,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	public void createMapDownloadControls(BinaryMapDataObject binaryMapDataObject, String selectedFullName) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandRegions osmandRegions = mapActivity.getMyApplication().getResourceManager().getOsmandRegions();
+			OsmandRegions osmandRegions = mapActivity.getApp().getResourceManager().getOsmandRegions();
 			downloadMapDataObject = binaryMapDataObject;
 			downloaded = downloadMapDataObject == null;
 			if (!downloaded) {
-				downloadThread = mapActivity.getMyApplication().getDownloadThread();
+				downloadThread = mapActivity.getApp().getDownloadThread();
 				downloadRegion = osmandRegions.getRegionData(selectedFullName);
 				if (downloadRegion != null && downloadRegion.isRegionMapDownload()) {
 					List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(downloadRegion);
@@ -860,7 +860,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				};
 
 				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-					if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
+					if (mapActivity.getSettings().isInternetConnectionAvailable()) {
 						downloadThread.runReloadIndexFiles();
 					}
 				}

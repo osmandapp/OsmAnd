@@ -80,7 +80,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		@Override
 		protected List<GeoParsedPoint> doInBackground(Void... nothing) {
 			try {
-				while (getMyApplication().isApplicationInitializing()) {
+				while (app.isApplicationInitializing()) {
 					Thread.sleep(200);
 				}
 				Uri uri = intent.getData();
@@ -106,8 +106,6 @@ public class GeoIntentActivity extends OsmandListActivity {
 				return;
 			}
 			try {
-				OsmandApplication app = getMyApplication();
-				OsmandSettings settings = app.getSettings();
 				GeoParsedPoint point = points.get(0);
 				if (point != null && point.isGeoPoint()) {
 					PointDescription pd = new PointDescription(point.getLatitude(), point.getLongitude());
