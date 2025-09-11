@@ -1,6 +1,8 @@
 package net.osmand.util;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -66,12 +68,12 @@ public class TestSubsolar {
 //		System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d\n ", s.tests, s.duplicate, s.fail);
 //		System.out.println(s.errorDistr);
 		
-		MIN_ALTITUDE = 20;
-		ERR = 1;
-		for (int minInc = 5; minInc <= 60; minInc += 5) {
-			System.out.println("MIN INC - " + minInc);
-			runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
-		}
+//		MIN_ALTITUDE = 20;
+//		ERR = 1;
+//		for (int minInc = 5; minInc <= 60; minInc += 5) {
+//			System.out.println("MIN INC - " + minInc);
+//			runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
+//		}
 		
 		// 52.3676, 4.9041
 //		LatLon с1 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168, 42);
@@ -82,9 +84,109 @@ public class TestSubsolar {
 //		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T15:54:00Z", 252, 20));
 //		System.out.println(calcCoordinatesOneShot(Body.Moon, "2025-09-09T03:30:00Z", 230, 29));
 //		
+		double starAlt; 
+		// capella
+		Astronomy.defineStar(Body.Star1, 5.28, 46.00, 100);
+		starAlt = 65.71;
+		// aldebaran: { ra: 4.59, dec: 16.51, name: 'Aldebaran',
+		Astronomy.defineStar(Body.Star1, 4.59, 16.51, 100);
+		starAlt = 38.82;
+		LatLon l1 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Sun, 24.7, Body.Moon, 17.38);
+		LatLon l2 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Moon, 17.38);
+		LatLon l3 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Sun, 24.7);
+		LatLon pnt = new LatLon(52.367, 4.904);
+		check(pnt, midPoint(l1, l1));
+		check(pnt, midPoint(l1, l2));
+		check(pnt, midPoint(l2, l3));
+		check(pnt, midPoint(l1, midPoint(l2, l3)));
+		
 		
 	}
 
+	private static void check(LatLon check, LatLon l) {
+		System.out.println(MapUtils.getDistance(check, l) / 1000.0 + " " + l);
+	}
+
+	private static LatLon midPoint(LatLon l1, LatLon l2) {
+		return new LatLon(l1.getLatitude() / 2 + l2.getLatitude() / 2, l1.getLongitude() / 2 + l2.getLongitude() / 2);
+	}
+
+	protected static LatLon calcCoordinates2Bodies(String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2) {
+		MAX_ITERATIONS = 100000;
+		double ALT_PRECISION = 0.01;
+		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
+		LatLon projPoint1 = calculateProjPoint(body1, time, PRINT);
+		LatLon projPoint2 = calculateProjPoint(body2, time, PRINT);
+		
+		
+		// initial step
+		LatLon closest1 = null, closest2 = null;
+		double minDist = -1;
+		double closestDelta1 = 0, closestDelta2 = 0;
+		float azm = projPoint1.toLocation().bearingTo(projPoint2.toLocation());
+//		System.out.println(projPoint1);
+//		System.out.println(projPoint2);
+		int iter = 0;
+		for (int magn = 1; magn <= 1000; magn *= 10) {
+			double deltaAround1 = closest1 == null ? 90 : closestDelta1;
+			double deltaAround2 = closest1 == null ? 90 : closestDelta2;
+			int steps = closest1 == null ? 9 : 15;
+			List<LatLon> points1 = new ArrayList<LatLon>();
+			List<Double> deltas1 = new ArrayList<Double>();
+			List<LatLon> points2 = new ArrayList<LatLon>();
+			List<Double> deltas2 = new ArrayList<Double>();
+			for (int i = -steps; i < steps; i++) {
+				double delta1 = deltaAround1 + i * 10.0 / magn;
+				double delta2 = deltaAround2 + i * 10.0 / magn;
+				double alt1 = targetAlt1;
+				LatLon pnt1 = move(projPoint1, 90 - alt1, azm + delta1);
+				Topocentric target1 = calcAltitude(body1, time, pnt1, false);
+				while (iter++ < MAX_ITERATIONS && Math.abs(target1.getAltitude() - targetAlt1) > ALT_PRECISION) {
+					alt1 -= (target1.getAltitude() - targetAlt1);
+					pnt1 = move(projPoint1, 90 - alt1, azm + delta1);
+					target1 = calcAltitude(body1, time, pnt1, false);
+				}
+
+				//	System.out.println(target1.getAltitude() + " == "+ targetAlt1 + " " + iter);
+				double alt2 = targetAlt2;
+				LatLon pnt2 = move(projPoint2, 90 - alt2, -(delta2 + azm));
+				Topocentric target2 = calcAltitude(body2, time, pnt2, false);
+				while (iter++ < MAX_ITERATIONS && Math.abs(target2.getAltitude() - targetAlt2) > ALT_PRECISION) {
+					alt2 -= (target2.getAltitude() - targetAlt2);
+					pnt2 = move(projPoint2, 90 - alt2, -(delta2 + azm));
+					target2 = calcAltitude(body2, time, pnt2, false);
+				}
+				points1.add(pnt1);
+				deltas1.add(delta1);
+				points2.add(pnt2);
+				deltas2.add(delta2);
+				// System.out.println(target2.getAltitude() + " == "+ targetAlt2 + " " + iter);
+			}
+			for (int i = 0; i < points1.size(); i++) {
+				for (int j = 0; j < points2.size(); j++) {
+					LatLon pnt1 = points1.get(i);
+					LatLon pnt2 = points2.get(j);
+					double delta1 = deltas1.get(i);
+					double delta2 = deltas2.get(j);
+					double dist = MapUtils.getDistance(pnt1, pnt2);
+//					System.out.println(
+//							delta1 + " " + delta2 + " " + (int) (MapUtils.getDistance(pnt1, pnt2) / 1000) + " " + pnt1 + " " + pnt2);
+					if (dist < minDist || minDist < 0) {
+						closestDelta1 = delta1;
+						closestDelta2 = delta2;
+						minDist = dist;
+						closest1 = pnt1;
+						closest2 = pnt2;
+					}
+				}
+			}
+			System.out.println("-------");
+			System.out.printf("Dist %.2f (iter %d), delta - %.3f %.3f, points - %s %s\n", minDist / 1000, iter,
+					closestDelta1, closestDelta2, closest1, closest2);
+		}
+		return closest1;
+	}
+	
 	protected static LatLon calcCoordinatesOneShot(Body body, String timeS, double azm, double alt) {
 		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
 		LatLon projPoint = calculateProjPoint(body, time, PRINT);
@@ -291,31 +393,5 @@ public class TestSubsolar {
 
 	
 
-	protected static LatLon calculateCoordinates(Body body, Time time, LatLon iterPoint, 
-			Topocentric targetHor, LatLon check, boolean print) {
-		LatLon pnt = iterPoint;
-		double targetAltitude = roundAlt(targetHor.getAltitude());
-		double targetAzm = roundAzm(targetHor.getAzimuth());
-		Topocentric current = calcAltitude(body, time, pnt, print);
-		double moveDistanceAngle = current.getAltitude() - targetAltitude;
-		double azmDistAngle = 0;
-		pnt = align(MapUtils.rhumbDestinationPoint(iterPoint.getLatitude(), iterPoint.getLongitude(),
-				Math.toRadians(moveDistanceAngle) * MapUtils.EARTH_RADIUS_A, 180 + targetAzm));
-		if (current.getAltitude() < 89.9) {
-			current = calcAltitude(body, time, pnt, print);
-			// move horizontal direction
-			azmDistAngle = Math.sin(Math.toRadians(current.getAzimuth() - targetAzm))
-					* current.getAltitude() /2;
-			pnt = align(MapUtils.rhumbDestinationPoint(pnt.getLatitude(), pnt.getLongitude(),
-					Math.toRadians(azmDistAngle) * MapUtils.EARTH_RADIUS_A, 90 + targetAzm));
-		}
-		if (print) {
-			System.out.printf("Move %.5f ^, %.5f > \n", moveDistanceAngle, azmDistAngle);
-			System.out.printf("Calc (err %.3f km) Lat %.5f Lon %.5f \n", MapUtils.getDistance(check, pnt)/1000, pnt.getLatitude(),
-					pnt.getLongitude());
-		}
-		return pnt;
-
-	}
 	
 }
