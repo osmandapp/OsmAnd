@@ -33,7 +33,7 @@ public class MapAppInitializeListener implements AppInitializeListener {
 
 	public MapAppInitializeListener(@NonNull MapActivity activity) {
 		this.activity = activity;
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 	}
 
 	@Override

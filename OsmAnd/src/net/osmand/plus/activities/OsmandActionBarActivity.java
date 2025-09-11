@@ -13,7 +13,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.ColorRes;
 import androidx.appcompat.app.ActionBar;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -31,7 +30,6 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
 	@ColorRes
 	protected int getStatusBarColorId() {
-		OsmandApplication app = getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
@@ -86,7 +84,6 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 	protected void setupHomeButton() {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
-			OsmandApplication app = getMyApplication();
 			boolean nightMode = app.getDaynightHelper().isNightMode(APP);
 			int iconId = AndroidUtils.getNavigationIconResId(app);
 			int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);

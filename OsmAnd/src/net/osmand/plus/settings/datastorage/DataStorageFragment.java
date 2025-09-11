@@ -90,7 +90,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		activity = requireActionBarActivity();
-		app = activity.getMyApplication();
+		app = activity.getApp();
 		Bundle args = getArguments();
 		if (args != null) {
 			storageMigration = args.getBoolean(STORAGE_MIGRATION, false);

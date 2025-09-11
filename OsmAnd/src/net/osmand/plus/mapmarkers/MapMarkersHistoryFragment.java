@@ -177,7 +177,7 @@ public class MapMarkersHistoryFragment extends BaseNestedFragment implements Map
 		ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
 		itemTouchHelper.attachToRecyclerView(recyclerView);
 
-		adapter = new MapMarkersHistoryAdapter(mapActivity.getMyApplication());
+		adapter = new MapMarkersHistoryAdapter(mapActivity.getApp());
 		adapter.setAdapterListener(view -> {
 			int pos = recyclerView.getChildAdapterPosition(view);
 			if (pos == RecyclerView.NO_POSITION) {

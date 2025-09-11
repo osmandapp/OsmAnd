@@ -35,7 +35,7 @@ public class DownloadGroupViewHolder {
 
 	private Drawable getIconForGroup(DownloadResourceGroup group) {
 		Drawable iconStart;
-		OsmandApplication app = ctx.getMyApplication();
+		OsmandApplication app = ctx.getApp();
 		UiUtilities cache = app.getUIUtilities();
 		if (group.getType() == DownloadResourceGroupType.VOICE_REC
 				|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
@@ -66,7 +66,7 @@ public class DownloadGroupViewHolder {
 	private Drawable getIconForDownloadedItems(DownloadResourceGroup group, @DrawableRes int iconId) {
 		int ic = getIconColorForOutdatedItems(group);
 		if (ic != 0) {
-			return ctx.getMyApplication().getUIUtilities().getIcon(iconId, ic);
+			return ctx.getApp().getUIUtilities().getIcon(iconId, ic);
 		}
 		return null;
 	}

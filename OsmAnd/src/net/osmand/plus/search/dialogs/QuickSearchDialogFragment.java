@@ -1898,7 +1898,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	                                   @Nullable LatLon latLon) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			mapActivity.getMyApplication().logEvent("search_open");
+			mapActivity.getApp().logEvent("search_open");
 
 			Bundle bundle = new Bundle();
 			if (object != null) {
@@ -1908,7 +1908,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				if (object instanceof PoiCategory c) {
 					objectLocalizedName = c.getTranslation();
 
-					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+					SearchUICore searchUICore = mapActivity.getApp().getSearchUICore().getCore();
 					SearchPhrase phrase = searchUICore.resetPhrase(objectLocalizedName + " ");
 					SearchResult sr = new SearchResult(phrase);
 					sr.localeName = objectLocalizedName;
@@ -1922,7 +1922,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 				} else if (object instanceof PoiUIFilter filter) {
 					objectLocalizedName = filter.getName();
-					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+					SearchUICore searchUICore = mapActivity.getApp().getSearchUICore().getCore();
 					SearchPhrase phrase = searchUICore.resetPhrase();
 					SearchResult sr = new SearchResult(phrase);
 					sr.localeName = objectLocalizedName;

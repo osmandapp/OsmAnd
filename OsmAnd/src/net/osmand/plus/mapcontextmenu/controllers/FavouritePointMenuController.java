@@ -47,7 +47,7 @@ public class FavouritePointMenuController extends MenuController {
 		super(new FavouritePointMenuBuilder(activity, point, amenity), description, activity);
 		this.fav = point;
 
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 
 		mapMarker = markersHelper.getMapMarker(point);
@@ -134,8 +134,8 @@ public class FavouritePointMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return PointImageUtils.getFromPoint(mapActivity.getMyApplication(),
-					mapActivity.getMyApplication().getFavoritesHelper().getColorWithCategory(fav,
+			return PointImageUtils.getFromPoint(mapActivity.getApp(),
+					mapActivity.getApp().getFavoritesHelper().getColorWithCategory(fav,
 							ContextCompat.getColor(mapActivity, R.color.color_favorite)), false, fav);
 		} else {
 			return null;
@@ -176,7 +176,7 @@ public class FavouritePointMenuController extends MenuController {
 	public Drawable getSecondLineTypeIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			FavouritesHelper helper = app.getFavoritesHelper();
 			String group = fav.getCategory();
 			Drawable line2icon = helper.getGroup(group) != null ? helper.getColoredIconForGroup(group) : null;

@@ -57,7 +57,7 @@ public abstract class MapWidget {
 
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
 		this.customId = customId;

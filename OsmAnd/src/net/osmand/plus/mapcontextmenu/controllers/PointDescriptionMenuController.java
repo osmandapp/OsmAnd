@@ -27,7 +27,7 @@ public class PointDescriptionMenuController extends MenuController {
 		builder.setShowNearestWiki(true);
 		initData();
 
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		OsmAndAppCustomization customization = app.getAppCustomization();
 		if (customization.isFeatureEnabled(CONTEXT_MENU_AVOID_ROADS_ID)

@@ -40,7 +40,7 @@ public class SearchOsmandRegionTask extends AsyncTask<Void, Void, BinaryMapDataO
 	protected void onPreExecute() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			regionSearcher = new OsmandRegionSearcher(mapActivity.getMyApplication(), latLon, zoom);
+			regionSearcher = new OsmandRegionSearcher(mapActivity.getApp(), latLon, zoom);
 		}
 	}
 

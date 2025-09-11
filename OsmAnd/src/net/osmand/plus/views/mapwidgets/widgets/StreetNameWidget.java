@@ -251,7 +251,7 @@ public class StreetNameWidget extends MapWidget {
 	public static boolean setShieldImage(@NonNull RoadShield shield,
 			@NonNull MapActivity mapActivity,
 			@NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RouteDataObject object = shield.getRdo();
 		StringBuilder additional = shield.getAdditional();
 		String shieldValue = shield.getValue();
@@ -429,7 +429,7 @@ public class StreetNameWidget extends MapWidget {
 		public boolean showClosestWaypointFirstInAddress = true;
 
 		public StreetNameWidgetParams(@NonNull MapActivity mapActivity, boolean showNextTurn) {
-			this.app = mapActivity.getMyApplication();
+			this.app = mapActivity.getApp();
 			this.mapActivity = mapActivity;
 			this.settings = app.getSettings();
 			this.routingHelper = app.getRoutingHelper();

@@ -61,7 +61,7 @@ public class WidgetsInitializer {
 	private WidgetsInitializer(MapActivity mapActivity, ApplicationMode appMode) {
 		this.mapActivity = mapActivity;
 		this.appMode = appMode;
-		app = mapActivity.getMyApplication();
+		app = mapActivity.getApp();
 		settings = app.getSettings();
 		factory = new MapWidgetsFactory(mapActivity);
 		creator = new WidgetInfoCreator(app, appMode);

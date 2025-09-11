@@ -52,7 +52,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	public MapMarkersActiveAdapter(@NonNull MapActivity mapActivity) {
 		setHasStableIds(true);
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		uiUtilities = app.getUIUtilities();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity);
 		markers = app.getMapMarkersHelper().getMapMarkers();

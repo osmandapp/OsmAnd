@@ -53,7 +53,7 @@ public class WikipediaPoiMenu {
 
 	public WikipediaPoiMenu(@NonNull MapActivity activity) {
 		this.activity = activity;
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 		this.settings = app.getSettings();
 		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}

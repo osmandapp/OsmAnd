@@ -578,7 +578,7 @@ public class ConfigureMapMenu {
 	public static ContextMenuItem createRenderingProperty(MapActivity activity, @DrawableRes int icon,
 	                                                      RenderingRuleProperty p, String id,
 	                                                      boolean nightMode) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 		if (p.isBoolean()) {
 			String name = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(), p.getName());
@@ -614,7 +614,7 @@ public class ConfigureMapMenu {
 	                                                             @DrawableRes int icon,
 	                                                             boolean nightMode,
 	                                                             @Nullable OnResultCallback<Boolean> callback) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);

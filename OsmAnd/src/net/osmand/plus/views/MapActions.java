@@ -588,7 +588,7 @@ public class MapActions {
 
 	public void startNavigationForGpx(@NonNull GpxFile gpxFile, @NonNull MapActivity mapActivity) {
 		MapActivityActions mapActions = mapActivity.getMapActions();
-		if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
+		if (mapActivity.getApp().getRoutingHelper().isFollowingMode()) {
 			WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
 			mapActions.stopNavigationActionConfirm(null, () -> {
 				MapActivity activity = activityRef.get();

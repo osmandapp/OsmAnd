@@ -9,8 +9,8 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class ActionBarProgressActivity extends OsmandActionBarActivity {
 

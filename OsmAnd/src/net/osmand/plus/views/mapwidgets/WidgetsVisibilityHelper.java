@@ -45,7 +45,7 @@ public class WidgetsVisibilityHelper {
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		app = mapActivity.getMyApplication();
+		app = mapActivity.getApp();
 		routingHelper = app.getRoutingHelper();
 		mapLayers = app.getOsmandMap().getMapLayers();
 		fragmentsHelper = mapActivity.getFragmentsHelper();
@@ -208,7 +208,7 @@ public class WidgetsVisibilityHelper {
 
 	public static boolean isWidgetEnabled(@NonNull MapActivity activity,
 			@NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();

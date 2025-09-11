@@ -63,11 +63,11 @@ public final class TransactionBuilder {
 						fragmentTransaction.add(R.id.content, newInstance, dashFragmentData.tag);
 					} catch (InstantiationException e) {
 						Log.v(TAG, "");
-						mapActivity.getMyApplication()
+						mapActivity.getApp()
 								.showToastMessage("Error showing dashboard " + dashFragmentData.tag);
 					} catch (IllegalAccessException e) {
 						Log.v(TAG, "");
-						mapActivity.getMyApplication()
+						mapActivity.getApp()
 								.showToastMessage("Error showing dashboard " + dashFragmentData.tag);
 					}
 				}
