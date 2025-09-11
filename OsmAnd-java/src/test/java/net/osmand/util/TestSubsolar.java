@@ -2,6 +2,7 @@ package net.osmand.util;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -84,30 +85,98 @@ public class TestSubsolar {
 //		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T15:54:00Z", 252, 20));
 //		System.out.println(calcCoordinatesOneShot(Body.Moon, "2025-09-09T03:30:00Z", 230, 29));
 //		
-		double starAlt; 
 		// capella
-		Astronomy.defineStar(Body.Star1, 5.28, 46.00, 100);
-		starAlt = 65.71;
+		Astronomy.defineStar(Body.Star1, 5.2781, 45.998, 5);
 		// aldebaran: { ra: 4.59, dec: 16.51, name: 'Aldebaran',
-		Astronomy.defineStar(Body.Star1, 4.59, 16.51, 100);
-		starAlt = 38.82;
-		
-		LatLon l11 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Sun, 24.7, Body.Moon, 17.38, true);
-		LatLon l12 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Sun, 24.7, Body.Moon, 17.38, false);
-		LatLon l21 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Moon, 17.38, true);
-		LatLon l22 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Moon, 17.38, false);
-		LatLon l31 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Sun, 24.7, true);
-		LatLon l32 = calcCoordinates2Bodies("2025-09-11T08:00:00Z", Body.Star1, starAlt, Body.Sun, 24.7, false);
-		LatLon pnt = new LatLon(52.367, 4.904);
-		System.out.println(l12 + " " + l11 + " " + l21 + " " + l22 + " " + l31 + " " + l32);
-		check(pnt, midPoint(l11, l21));
-		check(pnt, midPoint(l32, l21, l11));
-		
+		Astronomy.defineStar(Body.Star2, 4.5987, 16.5091, 5);
+		// betelgeuse: { ra: 5.92, dec: 7.41,
+		Astronomy.defineStar(Body.Star3, 5.919, 7.407, 5);
+		// Body.Star1 - 65.71
+		Body[] bodies = {Body.Sun, Body.Moon, Body.Star1, Body.Star2, Body.Star3};
+//		double[] alts = {24.65, 17.91, 65.71, 38.92, 40.04}; // timeanddate
+		double[] alts = {24.62, 17.85, 66, 39.14, 40.141}; // corrected ? 
+		String time = "2025-09-11T08:00:00Z";
+		LatLon testPnt = new LatLon(52.367, 4.904);
+		calcPositionBodies(bodies, alts, time, testPnt);
+		// compare altitudes
+		Time timeT = Time.fromMillisecondsSince1970(Instant.parse(time).getEpochSecond() * 1000);
+		for (int i = 0; i < bodies.length; i++) {
+			Topocentric alt = calcAltitude(bodies[i], timeT, testPnt, false);
+			System.out.printf("Body %s, correction %.3f\n", bodies[i], alt.getAltitude() - alts[i]);
+		}
 		
 	}
+	
+	public static List<List<LatLon>> clusterByProximity(List<LatLon> points, double thresholdDistanceMeters) {
+        List<List<LatLon>> clusters = new ArrayList<>();
+        // Make a copy to avoid modifying the original list
+        List<LatLon> remainingPoints = new ArrayList<>(points);
 
-	private static void check(LatLon check, LatLon l) {
-		System.out.println(MapUtils.getDistance(check, l) / 1000.0 + " " + l);
+        while (!remainingPoints.isEmpty()) {
+            // Start a new cluster with the first remaining point
+            List<LatLon> newCluster = new ArrayList<>();
+            LatLon clusterSeed = remainingPoints.remove(0);
+            newCluster.add(clusterSeed);
+            clusters.add(newCluster);
+
+            // Use an iterator to safely remove items while iterating
+            Iterator<LatLon> it = remainingPoints.iterator();
+            while (it.hasNext()) {
+                LatLon potentialMember = it.next();
+                // Check distance against the original seed point of the cluster
+                if (MapUtils.getDistance(clusterSeed, potentialMember) <= thresholdDistanceMeters) {
+                    newCluster.add(potentialMember);
+                    it.remove(); // Move point from remaining to the new cluster
+                }
+            }
+        }
+
+        return clusters;
+    }
+
+	private static LatLon calcPositionBodies(Body[] bodies, double[] alts, String time, LatLon check) {
+		long nt = System.nanoTime();
+		double MIN_THRESHOLD = 4_000;
+		double MAX_THRESHOLD = 500_000; 
+		int MIN_SIZE_CLUSTER = 3;
+		double threshold = MIN_THRESHOLD;
+		List<LatLon> l = new ArrayList<LatLon>();
+		for (int i = 0; i < bodies.length; i++) {
+			for (int j = i + 1; j < bodies.length; j++) {
+				LatLon a1 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], true);
+				if (a1 != null) {
+					l.add(a1);
+				}
+				LatLon a2 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], false);
+				if (a2 != null) {
+					l.add(a2);
+				}
+			}
+		}
+		
+		List<LatLon> maxSizeCluster = null;
+		while (maxSizeCluster == null && threshold < MAX_THRESHOLD) {
+			threshold *= 4;
+			List<List<LatLon>> clusters = clusterByProximity(l, threshold);
+			for (List<LatLon> cl : clusters) {
+				if (cl.size() > (maxSizeCluster != null ? maxSizeCluster.size() : MIN_SIZE_CLUSTER - 1)) {
+					maxSizeCluster = cl;
+				}
+//				check(check, midPoint(cl.toArray(new LatLon[0])), cl.size() + " " + cl);
+			}
+			
+		}
+		System.out.println("Calculation " + (System.nanoTime() - nt) / 1e9f + " seconds");
+		if (maxSizeCluster == null) {
+			return null;
+		}
+		LatLon res = midPoint(maxSizeCluster.toArray(new LatLon[0]));
+		check(check, res, maxSizeCluster.size() + " cluster, " + res);
+		return res;
+	}
+
+	private static void check(LatLon check, LatLon l, Object msg) {
+		System.out.printf("Error %.2f km %s \n", MapUtils.getDistance(check, l) / 1000.0, msg);
 	}
 
 	private static LatLon midPoint(LatLon... ls) {
@@ -123,6 +192,7 @@ public class TestSubsolar {
 	protected static LatLon calcCoordinates2Bodies(String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2, boolean dir) {
 		MAX_ITERATIONS = 100000;
 		double ALT_PRECISION = 0.01;
+		double MIN_THRESHOLD = 10000;
 		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
 		LatLon projPoint1 = calculateProjPoint(body1, time, PRINT);
 		LatLon projPoint2 = calculateProjPoint(body2, time, PRINT);
@@ -193,10 +263,12 @@ public class TestSubsolar {
 					}
 				}
 			}
-			System.out.println("-------");
 			
-			System.out.printf("Dist %.2f (iter %d), delta - %.3f %.3f, points - %s %s\n", minDist / 1000, iter,
-					closestDelta1, closestDelta2, closest1, closest2);
+		}
+		System.out.printf("Dist %.2f (iter %d), delta - %.3f %.3f, points - %s %s\n", minDist / 1000, iter,
+				closestDelta1, closestDelta2, closest1, closest2);
+		if (minDist > MIN_THRESHOLD) {
+			return null;
 		}
 		return closest1;
 	}
