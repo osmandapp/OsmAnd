@@ -31,9 +31,9 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.router.TransportRoutePlanner;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
-import net.osmand.router.TransportRouteResult;
+import net.osmand.router.transport.TransportRoutePlanner;
+import net.osmand.router.transport.TransportRouteResultSegment;
+import net.osmand.router.transport.TransportRouteResult;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;

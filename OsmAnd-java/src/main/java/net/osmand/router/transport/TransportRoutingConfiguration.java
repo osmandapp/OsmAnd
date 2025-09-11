@@ -1,14 +1,16 @@
-package net.osmand.router;
+package net.osmand.router.transport;
+
+import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RouteAttributeContext;
+import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
+import net.osmand.router.RoutingConfiguration;
 
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.router.GeneralRouter.RouteAttributeContext;
-import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
-
-public class TransportRoutingConfiguration {
+public class TransportRoutingConfiguration implements ITransportRoutingConfiguration {
 
 	public int ZOOM_TO_LOAD_TILES = 15;
 	
@@ -45,6 +47,7 @@ public class TransportRoutingConfiguration {
 	private Map<String, Float> speed = new TreeMap<String, Float>();
 	
 	
+	@Override
 	public float getSpeedByRouteType(String routeType) {
 		Float sl = speed.get(routeType);
 		if(sl == null) {
@@ -71,12 +74,69 @@ public class TransportRoutingConfiguration {
 	}
 	
 	
+	@Override
 	public int getChangeTime() {
-		return useSchedule ? 0 : changeTime;
+		return changeTime;
 	}
 	
+	@Override
 	public int getBoardingTime() {
 		return boardingTime;
+	}
+
+	@Override
+	public float getDefaultTravelSpeed() {
+		return defaultTravelSpeed;
+	}
+
+	@Override
+	public double getWalkSpeed() {
+		return walkSpeed;
+	}
+
+	@Override
+	public boolean getUseSchedule() {
+		return useSchedule;
+	}
+
+	@Override
+	public int getMaxRouteTime() {
+		return maxRouteTime;
+	}
+
+	@Override
+	public int getFinishTimeSeconds() {
+		return finishTimeSeconds;
+	}
+
+	@Override
+	public double getMaxRouteDistance() {
+		return maxRouteDistance;
+	}
+
+	@Override
+	public double getMaxRouteIncreaseSpeed() {
+		return maxRouteIncreaseSpeed;
+	}
+
+	@Override
+	public int getStopTime() {
+		return stopTime;
+	}
+
+	@Override
+	public int getMaxNumberOfChanges() {
+		return maxNumberOfChanges;
+	}
+
+	@Override
+	public int getScheduleTimeOfDay() {
+		return scheduleTimeOfDay;
+	}
+
+	@Override
+	public int getWalkRadius() {
+		return walkRadius;
 	}
 
 	public TransportRoutingConfiguration(GeneralRouter prouter, Map<String, String> params) {

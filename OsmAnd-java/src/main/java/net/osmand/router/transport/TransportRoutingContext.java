@@ -1,11 +1,12 @@
-package net.osmand.router;
+package net.osmand.router.transport;
 
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.router.TransportRoutePlanner.TransportRouteSegment;
+import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.Map;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-public class TransportRoutingContext {
+public class TransportRoutingContext implements ITransportRoutingContext {
 
 	public NativeLibrary library;
 	public RouteCalculationProgress calculationProgress;
@@ -57,12 +58,94 @@ public class TransportRoutingContext {
 		transportStopsReader = new TransportStopsRouteReader(Arrays.asList(readers));
 	}
 
+	@Override
+	public TransportRoutingConfiguration getCfg() {
+		return cfg;
+	}
+
+	@Override
+	public RouteCalculationProgress getCalculationProgress() {
+		return calculationProgress;
+	}
+
+	@Override
+	public TLongObjectHashMap<TransportRouteSegment> getVisitedSegments() {
+		return visitedSegments;
+	}
+
+	@Override
+	public void setFinishTimeSeconds(int finishTimeSeconds) {
+		this.finishTimeSeconds = finishTimeSeconds;
+	}
+
+	@Override
+	public int getFinishTimeSeconds() {
+		return finishTimeSeconds;
+	}
+
+	@Override
+	public void setStartCalcTime(long startCalcTime) {
+		this.startCalcTime = startCalcTime;
+	}
+
+	@Override
+	public long getStartCalcTime() {
+		return startCalcTime;
+	}
+
+	@Override
+	public void setVisitedRoutesCount(int visitedRoutesCount) {
+		this.visitedRoutesCount = visitedRoutesCount;
+	}
+
+	@Override
+	public int getVisitedRoutesCount() {
+		return visitedRoutesCount;
+	}
+
+	@Override
+	public void setVisitedStops(int visitedStops) {
+		this.visitedStops = visitedStops;
+	}
+
+	@Override
+	public int getVisitedStops() {
+		return visitedStops;
+	}
+
+	@Override
+	public int getQuadTreeSize() {
+		return quadTree.size();
+	}
+
+	@Override
+	public long getReadTime() {
+		return readTime;
+	}
+
+	@Override
+	public long getLoadTime() {
+		return loadTime;
+	}
+
+	@Override
+	public int getLoadedWays() {
+		return loadedWays;
+	}
+
+	@Override
+	public int getWrongLoadedWays() {
+		return wrongLoadedWays;
+	}
+
+	@Override
 	public List<TransportRouteSegment> getTransportStops(LatLon loc) throws IOException {
 		int y = MapUtils.get31TileNumberY(loc.getLatitude());
 		int x = MapUtils.get31TileNumberX(loc.getLongitude());
 		return getTransportStops(x, y, false, new ArrayList<TransportRouteSegment>());
 	}
 
+	@Override
 	public List<TransportRouteSegment> getTransportStops(int x, int y, boolean change, List<TransportRouteSegment> res) throws IOException {
 		return loadNativeTransportStops(x, y, change, res);
 	}

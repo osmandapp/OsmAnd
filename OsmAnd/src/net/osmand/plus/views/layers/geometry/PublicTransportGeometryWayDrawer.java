@@ -18,7 +18,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay.GeometryAnchorWayStyle;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay.GeometryTransportWayStyle;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
+import net.osmand.router.transport.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

@@ -30,8 +30,8 @@ import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
-import net.osmand.router.TransportRouteResult;
+import net.osmand.router.transport.TransportRouteResultSegment;
+import net.osmand.router.transport.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.util.Iterator;
