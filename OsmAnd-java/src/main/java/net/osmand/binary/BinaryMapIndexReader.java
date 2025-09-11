@@ -1816,6 +1816,9 @@ public class BinaryMapIndexReader {
 		StringMatcherMode matcherMode = StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 		SearchFilter searchFilter = null;
 
+		public String cityName = null;
+		public String postcodeName = null;
+
 		SearchPoiTypeFilter poiTypeFilter = null;
 		SearchPoiAdditionalFilter poiAdditionalFilter;
 
