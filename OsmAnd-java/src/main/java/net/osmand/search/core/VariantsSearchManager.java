@@ -46,6 +46,9 @@ public class VariantsSearchManager {
             parseRegionNames(osmandRegions.getWorldRegion(), names);
             for (String name : names) {
                 CommonWords.addExternalCommon(name);
+                if (name.contains(".")) {
+                    CommonWords.addExternalCommon(name.replace(".", ""));
+                }
             }            
         }
         for (String abbr : abbreviations.keySet()) {
@@ -55,11 +58,6 @@ public class VariantsSearchManager {
         for (String abbr : abbreviations.values()) {
             CommonWords.addExternalCommon(abbr);
         }
-        CommonWords.addExternalCommon("usa");
-        CommonWords.addExternalCommon("penn");
-        CommonWords.addExternalCommon("pa");
-        CommonWords.addExternalCommon("united states");
-        CommonWords.addExternalCommon("pennsylvania");
     }
     
     private void parseRegionNames(WorldRegion region, Set<String> result) {
@@ -69,10 +67,19 @@ public class VariantsSearchManager {
             if (t != null) {
                 String[] ns = t.split(" ");
                 for (String n : ns) {
-                    if (n.length() > 1) {
-                        result.add(n);
-                    } else if (!Algorithms.isEmpty(n)) {
-                        SearchPhrase.expandConjunction(n);
+                    if (n.contains(";")) {
+                        String[] ot = n.split(";");
+                        for (String o : ot) {
+                            if (o.length() > 1) {
+                                result.add(o.toLowerCase());
+                            }
+                        }
+                    } else {
+                        if (n.length() > 1) {
+                            result.add(n.toLowerCase());
+                        } else if (!Algorithms.isEmpty(n)) {
+                            SearchPhrase.expandConjunction(n);
+                        }
                     }
                 }                
             }            
