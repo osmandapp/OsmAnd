@@ -93,7 +93,6 @@ public class TestSubsolar {
 		// Body.Star1 - 65.71
 		Body[] bodies = {Body.Sun, Body.Moon, Body.Star1, Body.Star2, Body.Star3};
 		double[] alts = {24.65, 17.91, 65.71, 38.92, 40.04}; // timeanddate
-//		double[] alts = {24.62, 17.85, 66, 39.14, 40.14}; // ...? 
 		String time = "2025-09-11T08:00:00Z";
 		LatLon testPnt = new LatLon(52.367, 4.904);
 		calcPositionBodies(bodies, alts, time, testPnt);
@@ -140,15 +139,23 @@ public class TestSubsolar {
 		int MIN_SIZE_CLUSTER = 3;
 		double threshold = MIN_THRESHOLD;
 		List<LatLon> l = new ArrayList<LatLon>();
+		int found = 0;
+		int failed = 0;
 		for (int i = 0; i < bodies.length; i++) {
 			for (int j = i + 1; j < bodies.length; j++) {
 				LatLon a1 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], true);
 				if (a1 != null) {
+					found++;
 					l.add(a1);
+				} else {
+					failed++;
 				}
 				LatLon a2 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], false);
 				if (a2 != null) {
+					found++;
 					l.add(a2);
+				} else {
+					failed++;
 				}
 			}
 		}
@@ -170,7 +177,8 @@ public class TestSubsolar {
 			return null;
 		}
 		LatLon res = midPoint(maxSizeCluster.toArray(new LatLon[0]));
-		check(check, res, maxSizeCluster.size() + " cluster, " + res);
+		check(check, res, String.format("- %d cluster size from %d points (%d failed) %s", 
+				maxSizeCluster.size(), found, failed, res));
 		return res;
 	}
 
