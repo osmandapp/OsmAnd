@@ -133,6 +133,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private static final String QUICK_SEARCH_SHOW_TAB_KEY = "quick_search_show_tab_key";
 	private static final String QUICK_SEARCH_TYPE_KEY = "quick_search_type_key";
+	private static final double MIN_COMPASS_DEGREES_TO_UPDATE_CONTENT = 5.0;
 
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
@@ -1981,8 +1982,16 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void updateLocationUI(Location location, Float heading) {
-		this.location = location;
-		updateContent(heading);
+		if (shouldUpdateContent(location, this.location)) {
+			this.location = location;
+			updateContent(heading);
+		}
+	}
+
+	private boolean shouldUpdateContent(Location a, Location b) {
+		return b == null || a == null
+				|| !MapUtils.areLatLonEqual(a.getLatitude(), a.getLongitude(), b.getLatitude(), b.getLongitude())
+				|| Math.abs(MapUtils.degreesDiff(a.getBearing(), b.getBearing())) > MIN_COMPASS_DEGREES_TO_UPDATE_CONTENT;
 	}
 
 	private void updateContent(Float heading) {
