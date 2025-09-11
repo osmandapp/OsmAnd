@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.activities.OsmAndBuild.DATE_FORMAT;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 
 import android.app.ProgressDialog;
@@ -28,11 +29,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ContributionVersionActivity extends OsmandListActivity {
 
@@ -48,7 +47,6 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	public static final int ACTIVITY_TO_INSTALL = 23;
 
 	public final List<OsmAndBuild> downloadedBuilds = new ArrayList<>();
-	public final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 
 	public File pathToDownload;
 	public Date currentInstalledDate;
@@ -66,7 +64,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		String installDate = getApp().getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
 		if (installDate != null) {
 			try {
-				currentInstalledDate = dateFormat.parse(installDate);
+				currentInstalledDate = DATE_FORMAT.parse(installDate);
 			} catch (ParseException e) {
 			}
 		}
@@ -135,7 +133,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			app.showToastMessage(MessageFormat.format(getString(R.string.build_installed),
 					currentSelectedBuild.tag, AndroidUtils.formatDateTime(app, currentSelectedBuild.date.getTime())));
 		}
-		settings.CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
+		settings.CONTRIBUTION_INSTALL_APP_DATE.set(DATE_FORMAT.format(d));
 	}
 
 	@Override
