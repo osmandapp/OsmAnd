@@ -5869,7 +5869,7 @@
     <string name="ais_cpa_settings">CPAren ezarpenak</string>
     <string name="ais_cpa_warning_time">Hurbiltze puntu hurbilenera (CPA) iristeko abisua</string>
     <string name="travel_guides">Gidak</string>
-    <string name="prediction_time_description">Kokapenaren ikonoa OsmAnd-en jasotako GPS datu-puntu bakoitzarekin animatzen da (segundoko behin). Bere mugimenduan atzerapen txiki bat nabari daiteke, batez ere erabiltzailea azkar mugitzen ari denean edo GPS seinaleak fluktuatzen duenean.</string>
+    <string name="prediction_time_description">OsmAnd-en kokapen-ikonoa jasotako GPS datu-puntu bakoitzarekin animatzen da (segundoko behin). Bere mugimenduan atzerapen txiki bat nabari daiteke, batez ere erabiltzailea azkar mugitzen denean edo GPS seinalea ezegonkorra denean.</string>
     <string name="unit_of_temperature_description">Aukeratutako unitateak uneko profilean dauden tenperatura datu guztiei aplikatuko zaizkie.</string>
     <string name="deactivated_map">Mapa desaktibatuta</string>
     <string name="suggest_activate_map_msg">%1$s mapa desaktibatuta dago,\naktibatu zona hau ikusteko.</string>
@@ -5912,7 +5912,7 @@
     <string name="set_home">Ezarri etxea</string>
     <string name="set_intermediate_point">Ezarri tarteko helmuga</string>
     <string name="set_start_point">Ezarri abiapuntua</string>
-    <string name="position_animation_empty_banner_description">Kokapenaren ikonoa animaziorik gabeko kokapen berrietara mugitzen da.</string>
+    <string name="position_animation_empty_banner_description">Kokapenaren ikonoa kokapen berrietara mugitzen da trantsizio animaziorik gabe.</string>
     <string name="position_animation">Kokapenaren animazioa</string>
     <string name="poi_source">Interesgunearen jatorria</string>
     <string name="intermediate_first">Tarteko lehenengoa</string>
@@ -5929,7 +5929,7 @@
     <string name="prime_meridian">Zero meridianoa</string>
     <string name="equator">Ekuatorea</string>
     <string name="show_image_previews">Erakutsi irudien aurrebista</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Maparen koordenatuen saretaren ikusgarritasuna kontrolatzeko ekintza.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Gaitu/ezgaitu koordenatu sarearen ikusgaitasuna mapan.</string>
     <string name="layer_coordinates_grid">Koordenatuen sarea</string>
     <string name="choose_location">Aukeratu kokapen bat</string>
     <string name="point_location">Puntuaren kokapena</string>
@@ -5968,4 +5968,30 @@
     <string name="map_orientations_choose_description">Utzi hutsik erabilgarri dauden modu guztien artean aldatzeko, edo gehitu zure gogokoak bakarrik.</string>
     <string name="map_orientations">Maparen orientazioak</string>
     <string name="response">Erantzuna</string>
+    <string name="obd_alt_battery_voltage">Bateriaren tentsioa (egokigailua)</string>
+    <string name="liter_single">Litroa</string>
+    <string name="imperial_gallon">Galoi inperiala</string>
+    <string name="us_gallon">US galoia</string>
+    <string name="kilometers">Kilometro</string>
+    <string name="miles">Mila</string>
+    <string name="backup_delete_data_warning_extended">Ekintza honek hodeitik hautatutako datu guztiak betirako ezabatuko ditu. Gero ezingo dira lehengoratu.</string>
+    <string name="amount_of_total_used">%2$stik %1$s erabilita</string>
+    <string name="delete_data">Ezabatu datua</string>
+    <string name="manage_storage_delete_data_dialog_summary">Ziur zaude %1$s ezabatu nahi duzula OsmAnd hodeitik?\n\nLehengoratu dezakezu zakarrontzitik 30 egunetan.</string>
+    <string name="manage_storage">Kudeatu biltegiratzea</string>
+    <string name="copy_as_new_folder">Kopiatu karpeta berri gisa</string>
+    <string name="add_to_a_folder">Gehitu karpeta batera</string>
+    <string name="add_to_favorites">Gehitu gogokoetara</string>
+    <string name="max_weight_at_full_load_description">Eman zure ibilgailuaren gehienezko pisua karga osoan, pisu-mugak dituzten errepide eta zubiak saihesteko.</string>
+    <string name="max_axle_load_description">Eman zure ibilgailuaren ardatz-karga maximoa, pisu-mugak dituzten errepideak eta zubiak saihesteko.</string>
+    <string name="private_access_routing_req_short">Zure helmuga eremu pribatu batean dago. Baimendu errepide pribatuak erabiltzea?</string>
+    <string name="view_on_phone">Ikusi mugikorrean</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="n_a">N/A</string>
+    <string name="description_subscription_fastspring">Zure harpidetza kudeatu edo utzi ahal duzu Fastprig kontuen kudeaketarako atariaren bidez.</string>
+    <string name="shared_sting_osm_link">OSM esteka</string>
+    <string name="threads_allocated_for_rendering">Errendatzeko esleitutako hariak</string>
+    <string name="threads_allocated_for_rendering_desc">Harien esleipen txikiagoak mapa errendatzea bizkortu dezake kasu batzuetan.</string>
+    <string name="hmd_promo">HMD eskaintza %1$s hilabetez</string>
 </resources>
