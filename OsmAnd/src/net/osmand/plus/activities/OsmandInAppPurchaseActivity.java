@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import static net.osmand.plus.Version.FULL_VERSION_NAME;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -35,10 +37,21 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandInAppPurchaseActivity.class);
 
+	protected OsmandApplication app;
+	protected OsmandSettings settings;
+
 	private InAppPurchaseHelper purchaseHelper;
 	private boolean activityDestroyed;
 	private boolean activityHiddenForTalkback = false;
-	protected FragmentManager.FragmentLifecycleCallbacks lifecycleCallbacks = TalkbackUtils.getLifecycleCallbacks(this);
+	private FragmentLifecycleCallbacks lifecycleCallbacks = TalkbackUtils.getLifecycleCallbacks(this);
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(newBase);
+
+		this.app = (OsmandApplication) newBase.getApplicationContext();
+		this.settings = app.getSettings();
+	}
 
 	@Override
 	protected void onResume() {
@@ -85,8 +98,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	private void initInAppPurchaseHelper() {
 		stopInAppPurchaseHelper();
-		OsmandApplication app = getMyApplication();
-		OsmandSettings settings = app.getSettings();
 		if (purchaseHelper == null) {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (settings.isInternetConnectionAvailable()
@@ -181,8 +192,13 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	@NonNull
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
+	public OsmandApplication getApp() {
+		return app;
+	}
+
+	@NonNull
+	public OsmandSettings getSettings() {
+		return settings;
 	}
 
 	@Nullable
@@ -229,7 +245,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	public void onItemPurchased(String sku, boolean active) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (purchaseHelper != null && purchaseHelper.getSubscriptions().containsSku(sku)) {
-			getMyApplication().logEvent("live_osm_subscription_purchased");
+			app.logEvent("live_osm_subscription_purchased");
 		}
 		onInAppPurchaseItemPurchased(sku);
 		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
@@ -273,8 +289,9 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		fireInAppPurchaseDismissProgressOnFragments(getSupportFragmentManager(), taskType);
 	}
 
-	public void fireInAppPurchaseDismissProgressOnFragments(@NonNull FragmentManager fragmentManager,
-															InAppPurchaseTaskType taskType) {
+	public void fireInAppPurchaseDismissProgressOnFragments(
+			@NonNull FragmentManager fragmentManager,
+			InAppPurchaseTaskType taskType) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {

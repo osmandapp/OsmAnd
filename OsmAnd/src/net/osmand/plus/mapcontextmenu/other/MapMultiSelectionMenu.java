@@ -85,7 +85,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	private ApplicationMode getAppMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return mapActivity.getMyApplication().getSettings().getApplicationMode();
+			return mapActivity.getSettings().getApplicationMode();
 		}
 		return null;
 	}

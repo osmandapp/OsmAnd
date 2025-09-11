@@ -2199,6 +2199,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
 				mapRenderer.setViewportScale(0.0, false);
+				mapRenderer.setViewportShift(0, 0, false);
 				changeZoomPosition((float) 0, 0);
 			}
 		}
@@ -2343,8 +2344,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (deltaZoom != 0 || relAngle != 0) {
 				if (mapRenderer != null && isPinchZoomMagnificationEnabled && relativeToStart > 1.0) {
-					mapRenderer.setViewportScale(relativeToStart, false);
-
 					RotatedTileBox calc = initialViewport.copy();
 					float calcRotate = calc.getRotate() + relAngle;
 
@@ -2358,6 +2357,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						multiTouchCenterY = (int) initialMultiTouchCenterPoint.y;
 					}
 
+					mapRenderer.setViewportScale(relativeToStart, false);
+					mapRenderer.setViewportShift(multiTouchCenterX, view.getHeight() - multiTouchCenterY, false);
 					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
 					refreshMap();
 				} else {

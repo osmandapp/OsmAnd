@@ -138,7 +138,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	public static void setStyle(@NonNull MapActivity mapActivity, @NonNull String selectedStyle) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(selectedStyle);
 		if (loaded != null) {
 			OsmandMapTileView view = mapActivity.getMapView();

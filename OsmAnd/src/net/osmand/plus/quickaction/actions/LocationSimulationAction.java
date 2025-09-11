@@ -6,7 +6,6 @@ import static net.osmand.plus.quickaction.QuickActionIds.LOCATION_SIMULATION_ACT
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -95,7 +94,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			cutOffValue = getFloatFromParams(KEY_SIMULATION_CUTOFF, MIN_CUTOFF_DISTANCE);
 
 			if (!shouldUseSelectedGpxFile()) {
-				OsmAndLocationSimulation sim = mapActivity.getMyApplication().getLocationProvider().getLocationSimulation();
+				OsmAndLocationSimulation sim = mapActivity.getApp().getLocationProvider().getLocationSimulation();
 				if (sim.isRouteAnimating()) {
 					sim.startStopGpxAnimation(mapActivity);
 				} else {
@@ -124,7 +123,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	private void startStopSimulation(@Nullable GpxFile gpxFile, @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
@@ -137,7 +136,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
 		View root = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_simulate_location, parent, false);
 		parent.addView(root);
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		unselectGpxFileIfMissing();
 		setupSpeedUpSlider(root, app);
 		setupCutOffSlider(root, app, MAX_CUTOFF_DISTANCE);
@@ -145,7 +144,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	private void setupTrackToggleButton(@NonNull View container, @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean night = isNightMode(app);
 		LinearLayout trackToggle = container.findViewById(R.id.track_toggle);
 		trackToggleButton = new TextToggleButton(app, trackToggle, night);
@@ -402,7 +401,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	private void getGpxFile(@NonNull String gpxFilePath,
 	                        @NonNull MapActivity mapActivity,
 	                        @NonNull CallbackWithObject<GpxFile> onGpxFileAvailable) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (gpxFilePath.isEmpty()) {
 			onGpxFileAvailable.processResult(app.getSavingTrackHelper().getCurrentGpx());
 		} else {

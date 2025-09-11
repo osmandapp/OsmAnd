@@ -467,14 +467,14 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 					if (subtypes == null || (poiTypes != null && category.getPoiTypes().size() == poiTypes.size())) {
 						descView.setText(getString(R.string.shared_string_all));
 					} else {
-						StringBuilder sb = new StringBuilder();
-						for (String st : subtypes) {
-							if (!sb.isEmpty()) {
-								sb.append(", ");
+						StringBuilder builder = new StringBuilder();
+						for (String type : subtypes) {
+							if (!Algorithms.isEmpty(builder)) {
+								builder.append(", ");
 							}
-							sb.append(app.getPoiTypes().getPoiTranslation(st));
+							builder.append(app.getPoiTypes().getPoiTranslation(type));
 						}
-						descView.setText(sb.toString());
+						descView.setText(builder.toString());
 					}
 					descView.setVisibility(View.VISIBLE);
 				} else {

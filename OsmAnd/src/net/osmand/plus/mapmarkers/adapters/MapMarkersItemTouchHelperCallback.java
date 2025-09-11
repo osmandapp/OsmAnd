@@ -44,7 +44,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 		this.mapActivity = mapActivity;
 		this.adapter = adapter;
 		marginSides = mapActivity.getResources().getDimension(R.dimen.list_content_padding);
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		nightMode = mapActivity.getApp().getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		backgroundPaint.setColor(ColorUtilities.getDividerColor(mapActivity, nightMode));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -92,7 +92,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 	@Override
 	public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 		if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && viewHolder instanceof MapMarkerItemViewHolder) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			if (!iconHidden && isCurrentlyActive) {
 				((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.GONE);
 				iconHidden = true;

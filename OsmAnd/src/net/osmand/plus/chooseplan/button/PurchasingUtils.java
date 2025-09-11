@@ -98,7 +98,7 @@ public class PurchasingUtils {
 	                                   @NonNull String id,
 	                                   @StringRes int titleId,
 	                                   @StringRes int descriptionId) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {

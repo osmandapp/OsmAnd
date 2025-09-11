@@ -101,7 +101,7 @@ public class ReverseTrackModeDialogController extends BaseDialogController
 
 	public static void showDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
 	                              @NonNull OnResultCallback<ReverseTrackStrategy> onResultCallback) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		ReverseTrackModeDialogController controller = new ReverseTrackModeDialogController(app, appMode);
 		controller.setOnResultCallback(onResultCallback);
 

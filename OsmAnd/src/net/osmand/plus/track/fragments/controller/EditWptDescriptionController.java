@@ -27,7 +27,7 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 		if (wpt == null) {
 			return;
 		}
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 			GpxFile gpx = selectedGpxFile.getGpxFile();

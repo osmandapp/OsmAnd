@@ -113,7 +113,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 					showChooseDialog(mapActivity);
 					return;
 				}
-				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				String nextItem = getNextSelectedItem(mapActivity.getApp());
 				executeWithParams(mapActivity, nextItem);
 			}
 		}
@@ -121,7 +121,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		OsmandSettings settings = mapActivity.getSettings();
 		if (params.equals(LAYER_OSM_VECTOR)) {
 			settings.MAP_ONLINE_DATA.set(false);
 			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), null);
@@ -172,7 +172,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				OsmandApplication app = activity.getMyApplication();
+				OsmandApplication app = activity.getApp();
 
 				LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
 

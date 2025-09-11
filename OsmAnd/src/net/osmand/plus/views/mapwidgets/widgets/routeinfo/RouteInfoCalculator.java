@@ -29,7 +29,7 @@ public class RouteInfoCalculator {
 	private final TargetPointsHelper targetPointsHelper;
 
 	public RouteInfoCalculator(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		this.mapActivity = mapActivity;
 		this.mapTileView = mapActivity.getMapView();
 		this.routingHelper = app.getRoutingHelper();

@@ -276,7 +276,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param choose
 	 */
 	void showSetTimeLimitDialog(MapActivity mapActivity, DialogInterface choose) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		View setTimeParking = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.parking_set_time_limit, null);
 		AlertDialog.Builder setTime = new AlertDialog.Builder(mapActivity);

@@ -44,7 +44,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	public AddGpxPointBottomSheetHelper(@NonNull MapActivity mapActivity, @NonNull ContextMenuLayer layer) {
 		this.mapActivity = mapActivity;
 		menuLayer = layer;
-		app = mapActivity.getMyApplication();
+		app = mapActivity.getApp();
 
 		view = mapActivity.findViewById(R.id.add_gpx_point_bottom_sheet);
 		title = view.findViewById(R.id.add_gpx_point_bottom_sheet_title);

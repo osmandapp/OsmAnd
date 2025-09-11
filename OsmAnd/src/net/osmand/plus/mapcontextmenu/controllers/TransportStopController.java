@@ -118,7 +118,7 @@ public class TransportStopController extends MenuController {
 	private void processTransportStop(List<TransportStopRoute> routesOnTheSameExit, List<TransportStopRoute> routesNearby) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			boolean useEnglishNames = app.getSettings().usingEnglishNames();
 			if (transportStop.getTransportStopAggregated() == null) {
 				TransportStopHelper.processTransportStopAggregated(app, transportStop);

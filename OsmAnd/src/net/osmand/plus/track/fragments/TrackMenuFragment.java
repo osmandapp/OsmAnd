@@ -33,7 +33,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.Gravity;
@@ -1749,7 +1748,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
 	                                       boolean showCurrentTrack,
 	                                       @NonNull CallbackWithObject<SelectedGpxFile> callback) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		SelectedGpxFile selectedGpxFile;
 		if (showCurrentTrack) {
 			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();

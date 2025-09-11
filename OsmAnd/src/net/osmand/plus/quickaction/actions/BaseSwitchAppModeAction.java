@@ -3,7 +3,6 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_CONTROLS;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,7 +40,7 @@ public abstract class BaseSwitchAppModeAction extends QuickAction {
 	private static Toast delayedSwitchProfileToast;
 
 	public void delayedSwitchAppMode(@NonNull MapActivity mapActivity) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		OsmandSettings settings = mapActivity.getSettings();
 		ApplicationMode appMode = settings.getApplicationMode();
 		boolean next = shouldChangeForward();
 
@@ -56,10 +55,10 @@ public abstract class BaseSwitchAppModeAction extends QuickAction {
 		delayedSwitchProfileToast = Toast.makeText(mapActivity, messageDelayedSwitch, Toast.LENGTH_SHORT);
 		delayedSwitchProfileToast.show();
 
-		mapActivity.getMyApplication().runInUIThreadAndCancelPrevious(UI_HANDLER_MAP_CONTROLS + 1, () -> {
+		mapActivity.getApp().runInUIThreadAndCancelPrevious(UI_HANDLER_MAP_CONTROLS + 1, () -> {
 			if (delayedSwitchProfile != null && appMode != delayedSwitchProfile && settings.setApplicationMode(delayedSwitchProfile)) {
 				cancelDelayedToast();
-				mapActivity.getMyApplication().showShortToastMessage(R.string.application_profile_changed, delayedSwitchProfile.toHumanString());
+				mapActivity.getApp().showShortToastMessage(R.string.application_profile_changed, delayedSwitchProfile.toHumanString());
 			}
 			delayedSwitchProfileToast = null;
 			delayedSwitchProfile = null;

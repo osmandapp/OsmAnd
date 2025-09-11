@@ -161,7 +161,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract String getNextSelectedItem(OsmandApplication app);
 
 	protected void showChooseDialog(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		MapQuickActionLayer layer = mapActivity.getMapLayers().getMapQuickActionLayer();
 
 		QuickActionButton button = layer.getSelectedButton();

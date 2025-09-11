@@ -1,6 +1,5 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
@@ -15,12 +14,8 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -41,7 +36,7 @@ public class WidgetUtils {
 	public static void createNewWidget(@NonNull MapActivity activity, @NonNull MapWidgetInfo widgetInfo,
 	                                   @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode,
 	                                   boolean recreateControls, @Nullable String selectedWidget, @Nullable Boolean addToNext) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 
@@ -60,7 +55,7 @@ public class WidgetUtils {
 
 	private static void addWidgetToSpecificPlace(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
 	                                             @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode, @NonNull String selectedWidget, boolean addToNext) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
@@ -123,7 +118,7 @@ public class WidgetUtils {
 
 	private static void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
 									   @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();

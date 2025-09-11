@@ -36,7 +36,7 @@ public class NewAction extends QuickAction {
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
 		if (selectedButton != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			QuickActionButtonState buttonState = selectedButton.getButtonState();
 			AddQuickActionController.showAddQuickActionDialog(app, manager, buttonState);

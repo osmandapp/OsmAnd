@@ -29,7 +29,6 @@ import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 
@@ -70,7 +69,7 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 			showChooseDialog(mapActivity);
 			return;
 		}
-		String nextMode = getNextSelectedItem(mapActivity.getMyApplication());
+		String nextMode = getNextSelectedItem(mapActivity.getApp());
 		executeWithParams(mapActivity, nextMode);
 	}
 
@@ -114,7 +113,7 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 	public void executeWithParams(@NonNull MapActivity activity, String params) {
 		CompassMode compassMode = CompassMode.getModeForKey(params);
 		if (compassMode != null) {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 			MapViewTrackingUtilities trackingUtilities = app.getMapViewTrackingUtilities();
 			trackingUtilities.switchCompassModeTo(compassMode);
 

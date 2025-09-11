@@ -67,7 +67,7 @@ public class BannerAndDownloadFreeVersion {
 
 		if (isFinished) {
 			progressLayout.setOnClickListener(null);
-			updateDescriptionTextWithSize(activity.getMyApplication(), progressLayout);
+			updateDescriptionTextWithSize(activity.getApp(), progressLayout);
 			freeVersionBanner.updateFreeVersionBanner();
 		} else {
 			freeVersionBanner.setMinimizedFreeVersionBanner(true);

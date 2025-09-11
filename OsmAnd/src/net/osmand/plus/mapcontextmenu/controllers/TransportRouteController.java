@@ -200,7 +200,7 @@ public class TransportRouteController extends MenuController {
 			transportRoute.setStopIndex(stopIndex);
 			transportRoute.refStop = stop;
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-					transportRoute.getDescription(mapActivity.getMyApplication(), false));
+					transportRoute.getDescription(mapActivity.getApp(), false));
 
 			updateControllers();
 
@@ -256,7 +256,7 @@ public class TransportRouteController extends MenuController {
 			return;
 		}
 		List<TransportStop> stops = transportRoute.route.getForwardStops();
-		boolean useEnglishNames = mapActivity.getMyApplication().getSettings().usingEnglishNames();
+		boolean useEnglishNames = mapActivity.getSettings().usingEnglishNames();
 		int currentStop = transportRoute.getStopIndex();
 		int defaultIcon = transportRoute.type == null ? R.drawable.mx_route_bus_ref : transportRoute.type.getResourceId();
 		int startPosition = 0;

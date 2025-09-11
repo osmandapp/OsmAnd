@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.srtm;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -44,9 +43,9 @@ public class ContourLinesAction extends QuickAction {
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
-			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getMyApplication());
+			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getApp());
 			plugin.toggleContourLines(mapActivity, !enabled, () -> {
-				OsmandApplication app = mapActivity.getMyApplication();
+				OsmandApplication app = mapActivity.getApp();
 				RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 				if (contourLinesProp != null) {
 					OsmandSettings settings = app.getSettings();

@@ -2,7 +2,6 @@ package net.osmand.plus.quickaction.actions;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -51,7 +50,7 @@ public abstract class BaseMapZoomAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
-		changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
+		changeZoom(mapActivity.getApp(), shouldIncrement() ? 1 : -1);
 	}
 
 	private void changeZoom(@NonNull OsmandApplication app, int zoomStep) {

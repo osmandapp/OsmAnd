@@ -437,7 +437,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 		val fragmentWidthPx =
 			resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat() * density
 		val isLandScapeVisible = isLandScapeVisible()
-		if (!mapActivity.myApplication.settings.DO_NOT_USE_ANIMATIONS.get()) {
+		if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 			val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
 			valueAnimator.duration =
 				app.resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()

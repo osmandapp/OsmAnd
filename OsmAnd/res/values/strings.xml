@@ -3984,8 +3984,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="access_direction_audio_feedback_descr">Indicate target point direction by sound.</string>
     <string name="access_direction_haptic_feedback">Haptic directions</string>
     <string name="access_direction_haptic_feedback_descr">Indicate target point direction by vibration.</string>
-    <string name="access_pinch_zoom_magnification">Enable pinch zoom magnification</string>
-    <string name="access_pinch_zoom_magnification_descr">Use viewport scaling instead of discrete zoom levels for pinch gestures.</string>
+    <string name="access_pinch_zoom_magnification">Pinch zoom magnification</string>
+    <string name="access_pinch_zoom_magnification_descr">Use viewport scaling instead of discrete zoom levels during zoom-in gestures.</string>
     <string name="use_osm_live_routing_description">Enable navigation for OsmAnd Live changes.</string>
     <string name="use_osm_live_routing">OsmAnd Live navigation</string>
     <string name="access_no_destination">Accessibility plugin: No destination set</string>

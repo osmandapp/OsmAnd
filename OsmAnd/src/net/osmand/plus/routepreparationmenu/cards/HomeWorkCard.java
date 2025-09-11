@@ -60,7 +60,7 @@ public class HomeWorkCard extends MapBaseCard {
 			if (point == null) {
 				AddPointBottomSheetDialog.showInstance(mapActivity, pointType);
 			} else {
-				mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(
+				mapActivity.getApp().getTargetPointsHelper().navigateToPoint(
 						new LatLon(point.getLatitude(), point.getLongitude()),
 						true, -1, point.getPointDescription(app));
 				OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);

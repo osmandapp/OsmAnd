@@ -205,7 +205,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		this.mainView = null;
 		this.animationsHandler = null;
 		if (mapActivity != null) {
-			app = mapActivity.getMyApplication();
+			app = mapActivity.getApp();
 			portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			animationsHandler = new Handler();
 			selectNavPointController = new SelectNavigationPointController(app);
@@ -456,7 +456,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 
 		mainView = main;
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		updateStartPointView();
@@ -486,7 +486,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			return;
 		}
 
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
@@ -676,7 +676,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			if (card instanceof PreviousRouteCard) {
 				ApplicationMode lastAppMode = app.getSettings().LAST_ROUTE_APPLICATION_MODE.get();
 				ApplicationMode currentAppMode = app.getRoutingHelper().getAppMode();
@@ -717,7 +717,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void selectTrack(@NonNull GpxFile gpxFile, boolean showSelectionDialog, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			List<WptPt> points = gpxFile.getRoutePoints();
 			if (!points.isEmpty()) {
 				ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
@@ -808,7 +808,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			routingHelper.setAppMode(next);
 			if (app.getSettings().getApplicationMode() != ApplicationMode.DEFAULT) {
@@ -826,7 +826,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		int layoutDirection = AndroidUtils.getLayoutDirection(app);
 		ApplicationMode am = app.getRoutingHelper().getAppMode();
 		Set<ApplicationMode> selected = new HashSet<>();
@@ -927,7 +927,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		ApplicationMode applicationMode = routingHelper.getAppMode();
 		RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(applicationMode);
@@ -976,7 +976,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RoutingHelper helper = app.getRoutingHelper();
 		TargetPointsHelper targetHelper = app.getTargetPointsHelper();
 
@@ -1112,7 +1112,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createShowAlongTheRouteItems(MapActivity mapActivity, LinearLayout optionsContainer) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		ApplicationMode applicationMode = app.getRoutingHelper().getAppMode();
 		Set<PoiUIFilter> poiFilters = app.getPoiFilters().getSelectedPoiFilters();
 		boolean traffic = app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(applicationMode);
@@ -1138,7 +1138,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				View container = createToolbarSubOptionView(true, poiUIFilter.getName(), R.drawable.ic_action_remove_dark, !it.hasNext(), v -> {
 					MapActivity mapActivity1 = getMapActivity();
 					if (mapActivity1 != null) {
-						mapActivity1.getMyApplication().getPoiFilters()
+						mapActivity1.getApp().getPoiFilters()
 								.removeSelectedPoiFilter(poiUIFilter);
 						mapActivity1.refreshMap();
 						updateOptionsButtons();
@@ -1177,7 +1177,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createAvoidRoadsRoutingParameterButton(MapActivity mapActivity, LocalRoutingParameter parameter, RouteMenuAppModes mode, LinearLayout optionsContainer) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
 		if (item != null) {
 			item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
@@ -1219,7 +1219,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					R.drawable.ic_action_remove_dark, !iterator.hasNext(), v -> {
 						MapActivity activity = getMapActivity();
 						if (activity != null) {
-							OsmandApplication app = activity.getMyApplication();
+							OsmandApplication app = activity.getApp();
 							app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoadInfo);
 							app.getRoutingHelper().onSettingsChanged(true);
 							if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
@@ -1242,7 +1242,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void createAvoidParametersItems(MapActivity mapActivity, List<RoutingParameter> parameters,
 	                                        LocalRoutingParameter parameter, RouteMenuAppModes mode,
 	                                        LinearLayout item) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		OsmandSettings settings = mapActivity.getSettings();
 		for (int i = 0; i < parameters.size(); i++) {
 			RoutingParameter routingParameter = parameters.get(i);
 			View container = createToolbarSubOptionView(false, AndroidUtils.getRoutingStringPropertyName(
@@ -1273,7 +1273,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createLocalRoutingParameterGroupButton(MapActivity mapActivity, LocalRoutingParameter parameter, LinearLayout optionsContainer) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		OsmandSettings settings = mapActivity.getSettings();
 		LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) parameter;
 		String text = null;
 		LocalRoutingParameter selected = group.getSelected(settings);
@@ -1283,7 +1283,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		View item = createToolbarOptionView(false, text, parameter.getActiveIconId(), parameter.getDisabledIconId(), v -> {
 			MapActivity mapActv = getMapActivity();
 			if (mapActv != null) {
-				mapActv.getMyApplication().getRoutingOptionsHelper().showLocalRoutingParameterGroupDialog(group, mapActv, this::updateOptionsButtons);
+				mapActv.getApp().getRoutingOptionsHelper().showLocalRoutingParameterGroupDialog(group, mapActv, this::updateOptionsButtons);
 			}
 		});
 		if (item != null) {
@@ -1292,7 +1292,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createSimpleRoutingParameterButton(MapActivity mapActivity, LocalRoutingParameter parameter, LinearLayout optionsContainer) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		int colorActive = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 		int colorDisabled = ContextCompat.getColor(app, R.color.icon_color_default_light);
@@ -1348,7 +1348,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null) {
 			return null;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		LinearLayout item = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.route_option_btn, null);
 		TextView textView = item.findViewById(R.id.route_option_title);
 		ImageView imageView = item.findViewById(R.id.route_option_image_view);
@@ -1389,7 +1389,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null) {
 			return null;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		View container = mapActivity.getLayoutInflater().inflate(R.layout.route_options_container, null);
 		TextView routeOptionTV = container.findViewById(R.id.route_removable_option_title);
 		ImageView routeOptionImageView = container.findViewById(R.id.removable_option_icon);
@@ -1417,7 +1417,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void clickRouteGo() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			if (app.getRoutingHelper().isPublicTransportMode()) {
 				if (isTransportRouteCalculated() && hasTransportRoutes()) {
 					showRouteOnMap(mapActivity, app.getTransportRoutingHelper().getCurrentRoute());
@@ -1464,7 +1464,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		View viaLayout = mainView.findViewById(R.id.ViaLayout);
 
 		String viaDescription = generateViaDescription();
@@ -1504,7 +1504,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				GPXRouteParamsBuilder routeParams12 = activity.getRoutingHelper().getCurrentGPXRoute();
 				if (routeParams12 != null) {
 					AddPointBottomSheetDialog.showInstance(activity, PointType.TARGET);
-				} else if (activity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
+				} else if (activity.getApp().getTargetPointsHelper().checkPointToNavigateShort()) {
 					hide();
 					WaypointsFragment.showInstance(activity, true);
 				}
@@ -1536,7 +1536,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupViaText(View view) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			TextView title = view.findViewById(R.id.ViaView);
 			TextView description = view.findViewById(R.id.ViaSubView);
 			TextView buttonDescription = view.findViewById(R.id.via_button_description);
@@ -1585,7 +1585,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 
 		View toLayout = mainView.findViewById(R.id.ToLayout);
 		View viaLayout = mainView.findViewById(R.id.ViaLayout);
@@ -1658,7 +1658,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean isFinishPointFromTrack() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 			if (routeParams != null) {
 				TargetPoint target = app.getTargetPointsHelper().getPointToNavigate();
@@ -1692,7 +1692,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 
 		FrameLayout fromButton = mainView.findViewById(R.id.from_button);
-		boolean isFollowTrack = mapActivity.getMyApplication().getRoutingHelper().getCurrentGPXRoute() != null;
+		boolean isFollowTrack = mapActivity.getApp().getRoutingHelper().getCurrentGPXRoute() != null;
 
 		if (isFollowTrack) {
 			fromButton.setVisibility(View.GONE);
@@ -1708,7 +1708,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		fromButton.setOnClickListener(view -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				OsmandApplication app = activity.getMyApplication();
+				OsmandApplication app = activity.getApp();
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 				TargetPoint startPoint = targetPointsHelper.getPointToStart();
 				TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
@@ -1761,13 +1761,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void updateFromIcon(View parentView) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			Location loc = app.getLocationProvider().getLastKnownLocation();
 			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) && loc != null
 					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
 
 			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(AppCompatResources.getDrawable(mapActivity,
-					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
+					mapActivity.getApp().getTargetPointsHelper().getPointToStart() == null
 							? locationIconResByStatus : R.drawable.list_startpoint));
 		}
 	}
@@ -1869,7 +1869,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			return;
 		}
 
-		boolean isFollowTrack = mapActivity.getMyApplication().getRoutingHelper().getCurrentGPXRoute() != null;
+		boolean isFollowTrack = mapActivity.getApp().getRoutingHelper().getCurrentGPXRoute() != null;
 		if (isFollowTrack) {
 			openFollowTrackFragment(mapActivity);
 		} else {
@@ -1932,7 +1932,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			customizingRouteLine = true;
-			ApplicationMode routingAppMode = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
+			ApplicationMode routingAppMode = mapActivity.getApp().getRoutingHelper().getAppMode();
 			RouteLineAppearanceFragment.showInstance(mapActivity, routingAppMode);
 		}
 	}
@@ -1965,7 +1965,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapMarker m = null;
-			List<MapMarker> mapMarkers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
+			List<MapMarker> mapMarkers = mapActivity.getApp().getMapMarkersHelper().getMapMarkers();
 			if (index != -1 && mapMarkers.size() > index) {
 				m = mapMarkers.get(index);
 			}
@@ -1993,7 +1993,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private Drawable getIconOrig(int iconId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
+			UiUtilities iconsCache = mapActivity.getApp().getUIUtilities();
 			return iconsCache.getIcon(iconId, 0);
 		} else {
 			return null;
@@ -2105,7 +2105,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public String generateViaDescription() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			List<TargetPoint> points = targets.getIntermediatePointsNavigation();
 			if (points.size() == 0) {
@@ -2137,7 +2137,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupFromText(View view) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			TargetPoint start = mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart();
+			TargetPoint start = mapActivity.getApp().getTargetPointsHelper().getPointToStart();
 			String name = null;
 			if (start != null) {
 				name = start.getOnlyName().length() > 0 ? start.getOnlyName() :
@@ -2153,7 +2153,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						startPointRequest = null;
 						updateMenu();
 					}, null);
-					mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(startPointRequest);
+					mapActivity.getApp().getGeocodingLookupService().lookupAddress(startPointRequest);
 				}
 			}
 
@@ -2173,7 +2173,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupToText(View view) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			TextView toText = view.findViewById(R.id.toText);
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			TargetPoint finish = targets.getPointToNavigate();
@@ -2248,7 +2248,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
 				mapActivity.updateStatusBarColor();
-				RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+				RoutingHelper routingHelper = mapActivity.getApp().getRoutingHelper();
 				menuBackStack.clear();
 				if (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode()) {
 					menuBackStack.push(new MapRouteMenuStateHolder(this, ROUTE_INFO, currentMenuState, fragment.getArguments()));
@@ -2354,7 +2354,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@NonNull
 	public QuadRect getRouteRect(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		QuadRect rect = new QuadRect(0, 0, 0, 0);
 		if (isTransportRouteCalculated()) {

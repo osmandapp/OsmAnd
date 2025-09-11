@@ -66,7 +66,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 	public HistoryAdapter(@NonNull MapActivity activity, @Nullable OnItemSelectedListener listener,
 			boolean nightMode) {
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 		this.listener = listener;
 		this.nightMode = nightMode;
 		activeColorId = ColorUtilities.getActiveColorId(nightMode);

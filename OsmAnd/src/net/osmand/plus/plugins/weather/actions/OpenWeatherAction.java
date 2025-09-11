@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.weather.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.OPEN_WEATHER_ACTION_ID;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,10 +40,10 @@ public class OpenWeatherAction extends QuickAction {
 		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (weatherPlugin != null) {
 			if(!PluginsHelper.isEnabled(WeatherPlugin.class)){
-				PluginsHelper.enablePlugin(mapActivity, mapActivity.getMyApplication(), weatherPlugin, true);
+				PluginsHelper.enablePlugin(mapActivity, mapActivity.getApp(), weatherPlugin, true);
 			}
 
-			mapActivity.getMyApplication().logEvent("weatherForecastOpen");
+			mapActivity.getApp().logEvent("weatherForecastOpen");
 			WeatherForecastFragment.showInstance(mapActivity.getSupportFragmentManager());
 		}
 	}

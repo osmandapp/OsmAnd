@@ -64,7 +64,7 @@ public class AmenityMenuController extends MenuController {
 		acquireTransportStopController(mapActivity, pointDescription);
 
 		String mapNameForMarker = amenity.getName() + "_" + amenity.getType().getKeyName();
-		marker = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarker(mapNameForMarker, amenity.getLocation());
+		marker = mapActivity.getApp().getMapMarkersHelper().getMapMarker(mapNameForMarker, amenity.getLocation());
 		if (marker != null) {
 			MapMarkerMenuController markerMenuController =
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
@@ -120,7 +120,7 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	void openTrack(MapActivity mapActivity) {
-		TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
+		TravelHelper travelHelper = mapActivity.getApp().getTravelHelper();
 		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
 			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
 			String name = amenity.getTagContent(Amenity.ROUTE_NAME);

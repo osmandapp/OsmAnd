@@ -112,7 +112,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 					showChooseDialog(mapActivity);
 					return;
 				}
-				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				String nextItem = getNextSelectedItem(mapActivity.getApp());
 				executeWithParams(mapActivity, nextItem);
 			}
 		}
@@ -122,7 +122,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			OsmandSettings settings = mapActivity.getSettings();
 			boolean hasOverlay = !params.equals(KEY_NO_OVERLAY);
 			if (hasOverlay) {
 				settings.MAP_OVERLAY.set(params);
@@ -182,7 +182,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				OsmandApplication app = activity.getMyApplication();
+				OsmandApplication app = activity.getApp();
 				Map<String, String> entriesMap = app.getSettings().getTileSourceEntries();
 				entriesMap.put(KEY_NO_OVERLAY, activity.getString(R.string.no_overlay));
 				boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);

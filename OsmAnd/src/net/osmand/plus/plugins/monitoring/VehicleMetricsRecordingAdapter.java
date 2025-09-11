@@ -48,7 +48,7 @@ public class VehicleMetricsRecordingAdapter extends RecyclerView.Adapter<Recycle
 		this.listener = listener;
 		this.nightMode = nightMode;
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 	}
 
@@ -158,7 +158,7 @@ public class VehicleMetricsRecordingAdapter extends RecyclerView.Adapter<Recycle
 		}
 
 		public void bindView(@NonNull MapActivity mapActivity, @NonNull VehicleMetricsItem commandItem, boolean nightMode, boolean lastItemInCategory) {
-			int dp48 = getDimen(mapActivity.getMyApplication(), R.dimen.bottom_sheet_list_item_height);
+			int dp48 = getDimen(mapActivity.getApp(), R.dimen.bottom_sheet_list_item_height);
 			itemView.setMinimumHeight(dp48);
 
 			titleView.setText(commandItem.nameId);

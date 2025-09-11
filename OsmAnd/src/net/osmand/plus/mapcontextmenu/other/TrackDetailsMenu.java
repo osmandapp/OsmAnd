@@ -250,7 +250,7 @@ public class TrackDetailsMenu {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity != null && gpxItem != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			GpxFile groupGpx = gpxItem.group.getGpxFile();
 			if (gpxItem.chartPointLayer == ChartPointLayer.GPX) {
 				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.getPath()) == null;
@@ -289,7 +289,7 @@ public class TrackDetailsMenu {
 					&& gpxItem.wasHidden && gpxItem.group != null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
-				GpxSelectionHelper helper = mapActivity.getMyApplication().getSelectedGpxHelper();
+				GpxSelectionHelper helper = mapActivity.getApp().getSelectedGpxHelper();
 				helper.selectGpxFile(gpxItem.group.getGpxFile(), params);
 			}
 			TrackDetailsToolbarController toolbarController = this.toolbarController;
@@ -573,7 +573,7 @@ public class TrackDetailsMenu {
 		if (mapActivity == null || gpxItem == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		UiUtilities ic = app.getUIUtilities();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		GpxTrackAnalysis analysis = gpxItem.analysis;

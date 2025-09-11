@@ -88,7 +88,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 				showChooseDialog(mapActivity);
 				return;
 			}
-			String nextStyle = getNextSelectedItem(mapActivity.getMyApplication());
+			String nextStyle = getNextSelectedItem(mapActivity.getApp());
 			executeWithParams(mapActivity, nextStyle);
 		} else {
 			AndroidUtils.getApp(mapActivity).showToastMessage(R.string.quick_action_need_to_add_item_to_list);
@@ -97,7 +97,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(params);
 		if (loaded != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
@@ -160,7 +160,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	@Override
 	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return view -> {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 

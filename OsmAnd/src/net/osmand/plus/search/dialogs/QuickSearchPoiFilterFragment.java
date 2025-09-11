@@ -359,17 +359,17 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	}
 
 	private void applyFilterFields() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		if (!Algorithms.isEmpty(nameFilterText)) {
-			sb.append(nameFilterText);
+			builder.append(nameFilterText);
 		}
 		for (String param : selectedPoiAdditionals) {
-			if (!sb.isEmpty()) {
-				sb.append(" ");
+			if (!Algorithms.isEmpty(builder)) {
+				builder.append(" ");
 			}
-			sb.append(param);
+			builder.append(param);
 		}
-		filter.setFilterByName(sb.toString());
+		filter.setFilterByName(builder.toString());
 	}
 
 	private void processFilterFields() {

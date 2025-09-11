@@ -47,7 +47,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		selectedPoint = selectedGpxPoint.getSelectedPoint();
 		analysis = selectedGpxPoint.getSelectedGpxFile() == null
 				? new GpxTrackAnalysis()
-				: selectedGpxPoint.getSelectedGpxFile().getTrackAnalysis(mapActivity.getMyApplication());
+				: selectedGpxPoint.getSelectedGpxFile().getTrackAnalysis(mapActivity.getApp());
 	}
 
 	@Override

@@ -12,13 +12,8 @@ import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.router.GeneralRouter;
-import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 public class MapRouteCalculationProgressListener implements RouteCalculationProgressListener {
 
@@ -31,7 +26,7 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 
 	public MapRouteCalculationProgressListener(@NonNull MapActivity activity) {
 		this.activity = activity;
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 		this.settings = app.getSettings();
 		this.routingHelper = app.getRoutingHelper();
 	}

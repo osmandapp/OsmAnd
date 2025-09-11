@@ -3,7 +3,6 @@ package net.osmand.plus.quickaction;
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_COORDINATE_GRID_ACTION_ID;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,7 +38,7 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		requireGridHelper(app).toggleEnable();
 		mapActivity.refreshMap();
 	}

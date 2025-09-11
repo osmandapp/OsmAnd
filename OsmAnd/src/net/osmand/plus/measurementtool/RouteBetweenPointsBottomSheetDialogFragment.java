@@ -20,16 +20,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
@@ -308,7 +305,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 				dist += MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon());
 			}
 		}
-		return OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication());
+		return OsmAndFormatter.getFormattedDistance(dist, mapActivity.getApp());
 	}
 
 	public static void showInstance(FragmentManager fm, Fragment targetFragment,

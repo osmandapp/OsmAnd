@@ -89,7 +89,7 @@ public class MapFocusDialogController extends BaseDialogController
 	}
 
 	public static void showDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		MapFocusDialogController controller = new MapFocusDialogController(app, appMode);
 
 		DialogManager dialogManager = app.getDialogManager();

@@ -14,6 +14,6 @@ public abstract class AbstractCard {
 
 	public AbstractCard(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 	}
 }

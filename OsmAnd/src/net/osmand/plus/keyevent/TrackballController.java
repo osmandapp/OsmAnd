@@ -25,7 +25,7 @@ public class TrackballController {
 	}
 
 	public boolean onTrackballEvent(@NonNull MotionEvent event) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		if (app.getSettings().USE_TRACKBALL_FOR_MOVEMENTS.get()) {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();

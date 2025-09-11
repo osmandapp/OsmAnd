@@ -1,12 +1,11 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.activities.OsmAndBuild.DATE_FORMAT;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,63 +14,57 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.base.OsmandListActivity;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URLConnection;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ContributionVersionActivity extends OsmandListActivity {
 
-	private static ContributionVersionActivityThread thread = new ContributionVersionActivityThread();
-	private static final int DOWNLOAD_BUILDS_LIST = 1;
-	private static final int INSTALL_BUILD = 2;
-	private static final int ACTIVITY_TO_INSTALL = 23;
+	private static ContributionVersionsThread VERSIONS_THREAD = new ContributionVersionsThread();
 
-	private static final String URL_TO_RETRIEVE_BUILDS = "https://osmand.net/builds";
-	private static final String URL_GET_BUILD = "https://osmand.net/";
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({DOWNLOAD_BUILDS_LIST, INSTALL_BUILD, ACTIVITY_TO_INSTALL})
+	public @interface OperationType {
+	}
 
-	private ProgressDialog progressDlg;
-	private Date currentInstalledDate;
+	public static final int DOWNLOAD_BUILDS_LIST = 1;
+	public static final int INSTALL_BUILD = 2;
+	public static final int ACTIVITY_TO_INSTALL = 23;
 
-	private final List<OsmAndBuild> downloadedBuilds = new ArrayList<>();
-	private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
-	private File pathToDownload;
-	private OsmAndBuild currentSelectedBuild = null;
+	public final List<OsmAndBuild> downloadedBuilds = new ArrayList<>();
+
+	public File pathToDownload;
+	public Date currentInstalledDate;
+	public OsmAndBuild currentSelectedBuild;
+
+	public ProgressDialog progressDlg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		pathToDownload = getMyApplication().getAppPath(DOWNLOAD_BUILD_NAME);
-		setContentView(R.layout.default_list_view);
+		pathToDownload = getApp().getAppPath(DOWNLOAD_BUILD_NAME);
+		setContentView(R.layout.contribution_version_activity);
 		getSupportActionBar().setSubtitle(R.string.select_build_to_install);
 
-		String installDate = getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
+		String installDate = getApp().getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
 		if (installDate != null) {
 			try {
-				currentInstalledDate = dateFormat.parse(installDate);
+				currentInstalledDate = DATE_FORMAT.parse(installDate);
 			} catch (ParseException e) {
 			}
 		}
@@ -80,8 +73,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		startThreadOperation(DOWNLOAD_BUILDS_LIST, getString(R.string.loading_builds), -1);
 	}
 
-	private void startThreadOperation(int operationId, String message, int total) {
-
+	private void startThreadOperation(@OperationType int operationId, String message, int total) {
 		progressDlg = new ProgressDialog(this);
 		progressDlg.setTitle(getString(R.string.loading_smth, ""));
 		progressDlg.setMessage(message);
@@ -94,24 +86,24 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		}
 		progressDlg.show();
 //		progressFileDlg.setCancelable(false);
-		if (thread.getState() == Thread.State.TERMINATED || thread.getOperationId() != operationId) {
-			thread = new ContributionVersionActivityThread();
-			thread.setOperationId(operationId);
+		if (VERSIONS_THREAD.getState() == Thread.State.TERMINATED || VERSIONS_THREAD.getOperationId() != operationId) {
+			VERSIONS_THREAD = new ContributionVersionsThread();
+			VERSIONS_THREAD.setOperationId(operationId);
 		}
-		thread.setActivity(this);
-		if (thread.getState() == Thread.State.NEW) {
-			thread.start();
+		VERSIONS_THREAD.setActivity(this);
+		if (VERSIONS_THREAD.getState() == Thread.State.NEW) {
+			VERSIONS_THREAD.start();
 		}
 	}
 
-	protected void endThreadOperation(int operationId, Exception e) {
+	protected void endThreadOperation(@OperationType int operationId, Exception e) {
 		if (progressDlg != null) {
 			progressDlg.dismiss();
 			progressDlg = null;
 		}
 		if (operationId == DOWNLOAD_BUILDS_LIST) {
 			if (e != null) {
-				getMyApplication().showToastMessage(getString(R.string.loading_builds_failed) + " : " + e.getMessage());
+				getApp().showToastMessage(getString(R.string.loading_builds_failed) + " : " + e.getMessage());
 				finish();
 			} else {
 				setListAdapter(new OsmandBuildsAdapter(downloadedBuilds));
@@ -137,68 +129,11 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	}
 
 	private void updateInstalledApp(boolean showMessage, Date d) {
-		OsmandApplication app = getMyApplication();
 		if (showMessage) {
 			app.showToastMessage(MessageFormat.format(getString(R.string.build_installed),
 					currentSelectedBuild.tag, AndroidUtils.formatDateTime(app, currentSelectedBuild.date.getTime())));
 		}
-		app.getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
-	}
-
-	protected void executeThreadOperation(int operationId) throws Exception {
-		if (operationId == DOWNLOAD_BUILDS_LIST) {
-			URLConnection connection = NetworkUtils.getHttpURLConnection(URL_TO_RETRIEVE_BUILDS);
-			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-			parser.setInput(connection.getInputStream(), "UTF-8");
-			int next;
-			while ((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (next == XmlPullParser.START_TAG && parser.getName().equals("build")) { //$NON-NLS-1$
-					if ("osmand".equalsIgnoreCase(parser.getAttributeValue(null, "type"))) {
-
-						String path = parser.getAttributeValue(null, "path"); //$NON-NLS-1$
-						String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
-						String date = parser.getAttributeValue(null, "timestamp"); //$NON-NLS-1$
-						String tag = parser.getAttributeValue(null, "tag"); //$NON-NLS-1$
-						Date d = null;
-						if (date != null) {
-							try {
-								d = new Date(Long.parseLong(date));
-							} catch (RuntimeException e) {
-								e.printStackTrace();
-							}
-						}
-						OsmAndBuild build = new OsmAndBuild(path, size, d, tag);
-						if (!Version.isFreeVersion(getMyApplication()) || path.contains("default")) {
-							downloadedBuilds.add(build);
-						}
-					}
-				}
-			}
-		} else if (operationId == INSTALL_BUILD) {
-			URLConnection connection = NetworkUtils.getHttpURLConnection(URL_GET_BUILD + currentSelectedBuild.path);
-			if (pathToDownload.exists()) {
-				pathToDownload.delete();
-			}
-			int bufflen = 16000;
-			byte[] buffer = new byte[bufflen];
-			InputStream is = connection.getInputStream();
-			FileOutputStream fout = new FileOutputStream(pathToDownload);
-			try {
-				int totalRead = 0;
-				int read;
-				while ((read = is.read(buffer, 0, bufflen)) != -1) {
-					fout.write(buffer, 0, read);
-					totalRead += read;
-					if (totalRead > 1024) {
-						progressDlg.incrementProgressBy(totalRead / 1024);
-						totalRead %= 1024;
-					}
-				}
-			} finally {
-				fout.close();
-				is.close();
-			}
-		}
+		settings.CONTRIBUTION_INSTALL_APP_DATE.set(DATE_FORMAT.format(d));
 	}
 
 	@Override
@@ -209,7 +144,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		thread.setActivity(null);
+		VERSIONS_THREAD.setActivity(null);
 		if (progressDlg != null) {
 			progressDlg.dismiss();
 			progressDlg = null;
@@ -221,15 +156,11 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		final OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag,
-				AndroidUtils.formatDateTime(getMyApplication(), item.date.getTime()), item.size));
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				currentSelectedBuild = item;
-				int kb = (int) (Double.parseDouble(item.size) * 1024);
-				startThreadOperation(INSTALL_BUILD, getString(R.string.downloading_build), kb);
-			}
+				AndroidUtils.formatDateTime(app, item.date.getTime()), item.size));
+		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+			currentSelectedBuild = item;
+			int kb = (int) (Double.parseDouble(item.size) * 1024);
+			startThreadOperation(INSTALL_BUILD, getString(R.string.downloading_build), kb);
 		});
 
 		builder.setNegativeButton(R.string.shared_string_no, null);
@@ -258,7 +189,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			if (build.date != null) {
 				TextView description = (TextView) row.findViewById(R.id.download_descr);
 				StringBuilder format = new StringBuilder();
-				format.append(AndroidUtils.formatDateTime(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
+				format.append(AndroidUtils.formatDateTime(app, build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
 				description.setText(format.toString());
 				int color = getColor(R.color.text_color_secondary_dark);
 				if (currentInstalledDate != null) {
@@ -271,58 +202,6 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			}
 
 			return row;
-		}
-	}
-
-	private static class ContributionVersionActivityThread extends Thread {
-		private ContributionVersionActivity activity;
-		private int operationId;
-
-		public void setActivity(ContributionVersionActivity activity) {
-			this.activity = activity;
-		}
-
-		public int getOperationId() {
-			return operationId;
-		}
-
-		public void setOperationId(int operationId) {
-			this.operationId = operationId;
-		}
-
-		@Override
-		public void run() {
-			Exception ex = null;
-			try {
-				if (this.activity != null) {
-					this.activity.executeThreadOperation(operationId);
-				}
-			} catch (Exception e) {
-				ex = e;
-			}
-			final Exception e = ex;
-			if (this.activity != null) {
-				this.activity.runOnUiThread(() -> {
-					if (activity != null) {
-						activity.endThreadOperation(operationId, e);
-					}
-				});
-			}
-		}
-	}
-
-	private static class OsmAndBuild {
-		public String path;
-		public String size;
-		public Date date;
-		public String tag;
-
-		public OsmAndBuild(String path, String size, Date date, String tag) {
-			super();
-			this.path = path;
-			this.size = size;
-			this.date = date;
-			this.tag = tag;
 		}
 	}
 }

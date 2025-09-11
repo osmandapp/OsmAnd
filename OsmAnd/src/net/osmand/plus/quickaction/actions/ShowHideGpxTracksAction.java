@@ -3,7 +3,6 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_GPX_TRACKS_ACTION_ID;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -37,7 +36,7 @@ public class ShowHideGpxTracksAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
-		GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication()
+		GpxSelectionHelper selectedGpxHelper = mapActivity.getApp()
 			.getSelectedGpxHelper();
 		if (selectedGpxHelper.isAnyGpxFileSelected()) {
 			selectedGpxHelper.clearAllGpxFilesToShow(true);

@@ -26,7 +26,7 @@ public class MapWidgetsFactory {
 
 	public MapWidgetsFactory(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		app = mapActivity.getMyApplication();
+		app = mapActivity.getApp();
 	}
 
 	@Nullable

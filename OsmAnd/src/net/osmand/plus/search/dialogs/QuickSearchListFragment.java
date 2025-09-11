@@ -284,7 +284,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 	                             double latitude, double longitude, int zoom,
 	                             @Nullable PointDescription pointDescription, Object object) {
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			QuickSearchType searchType = dialogFragment.getSearchType();
 			if (searchType.isTargetPoint()) {
 				String name = null;

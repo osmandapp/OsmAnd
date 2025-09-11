@@ -468,7 +468,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	protected OsmandApplication getMyApplication() {
-		return mapActivity.getMyApplication();
+		return mapActivity.getApp();
 	}
 
 	public ArrayAdapter<?> getListAdapter() {
@@ -693,7 +693,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void updateListAdapter(ContextMenuAdapter cm) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		ApplicationMode appMode = settings.getApplicationMode();
 
@@ -816,8 +816,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		String filter = null;
 		String txt = "";
 		OsmandMapTileView mv = mapActivity.getMapView();
-		if (!mapActivity.getMyApplication().isApplicationInitializing()) {
-			if (mv.getZoom() < 11 && !mapActivity.getMyApplication().getResourceManager().containsBasemap()) {
+		if (!mapActivity.getApp().isApplicationInitializing()) {
+			if (mv.getZoom() < 11 && !mapActivity.getApp().getResourceManager().containsBasemap()) {
 				filter = "basemap";
 				txt = mapActivity.getString(R.string.shared_string_download) + " "
 						+ mapActivity.getString(R.string.base_world_map);
@@ -836,7 +836,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		String f = filter;
 		btn.setOnClickListener(v -> {
 			hideDashboard(false);
-			Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+			Intent intent = new Intent(mapActivity, mapActivity.getApp().getAppCustomization()
 					.getDownloadIndexActivity());
 			if (f != null && !f.equals("basemap")) {
 				intent.putExtra(DownloadActivity.FILTER_KEY, f);
@@ -848,7 +848,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void scheduleDownloadButtonCheck() {
-		mapActivity.getMyApplication().runInUIThread(() -> {
+		mapActivity.getApp().runInUIThread(() -> {
 			if (isVisible()) {
 				updateDownloadBtn();
 			}

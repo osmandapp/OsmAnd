@@ -16,8 +16,8 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
 
     @Override
     public boolean onClick(PointF point, RotatedTileBox tileBox) {
-        if (activity.getMyApplication().accessibilityEnabled()) {
-            activity.getMyApplication().getLocationProvider().emitNavigationHint();
+        if (activity.getApp().accessibilityEnabled()) {
+            activity.getApp().getLocationProvider().emitNavigationHint();
             return true;
         }
         return false;
@@ -25,7 +25,7 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
 
     @Override
     public boolean onLongClick(PointF point, RotatedTileBox tileBox) {
-        if (activity.getMyApplication().accessibilityEnabled() && activity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+        if (activity.getApp().accessibilityEnabled() && activity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
             PointF centerPixel = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             activity.getMapLayers().getContextMenuLayer().showContextMenu(centerPixel, tileBox, true);
             return true;

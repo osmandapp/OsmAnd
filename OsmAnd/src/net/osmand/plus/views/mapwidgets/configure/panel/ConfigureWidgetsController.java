@@ -43,7 +43,7 @@ public class ConfigureWidgetsController implements IDialogController {
 	public void openAddNewWidgetScreen(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel selectedPanel,
 	                                   @NonNull String widgetId, @NonNull ApplicationMode selectedAppMode, @Nullable Fragment target) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (widgetType == null) {
 			return;
 		}

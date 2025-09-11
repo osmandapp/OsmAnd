@@ -104,7 +104,7 @@ public class ItemViewHolder {
 
 	public ItemViewHolder(@NonNull View view, @NonNull DownloadActivity context) {
 		this.context = context;
-		this.app = context.getMyApplication();
+		this.app = context.getApp();
 		this.view = view;
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
 		pbProgress = view.findViewById(R.id.progressBar);

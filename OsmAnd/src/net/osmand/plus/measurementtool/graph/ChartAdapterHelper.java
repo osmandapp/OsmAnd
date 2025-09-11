@@ -103,7 +103,7 @@ public class ChartAdapterHelper {
 	                                           @NonNull TrackDetailsMenu detailsMenu) {
 		RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit, recalculateXAxis) -> {
 			ElevationChart chart = graphAdapter.getChart();
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			if (!app.getRoutingHelper().isFollowingMode()) {
 				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit, recalculateXAxis);
 				mapActivity.refreshMap();

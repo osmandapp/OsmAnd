@@ -63,7 +63,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 	private static Amenity getSyntheticAmenity(@NonNull MapActivity mapActivity,
 			@NonNull RenderedObject renderedObject) {
 		Amenity am = new Amenity();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		MapPoiTypes mapPoiTypes = app.getPoiTypes();
 		am.setType(mapPoiTypes.getOtherPoiCategory());
 		am.setSubType("");

@@ -42,7 +42,7 @@ public class WidgetsSettingsHelper {
 	private ApplicationMode appMode;
 
 	public WidgetsSettingsHelper(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
 		this.appMode = appMode;

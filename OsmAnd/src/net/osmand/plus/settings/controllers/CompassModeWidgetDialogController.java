@@ -33,7 +33,7 @@ public class CompassModeWidgetDialogController extends BaseCompassModeDialogCont
 	}
 
 	public static void showDialog(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		CompassModeWidgetDialogController controller = new CompassModeWidgetDialogController(app);
 
 		DialogManager dialogManager = app.getDialogManager();

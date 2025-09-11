@@ -66,7 +66,7 @@ public class ChangeMarkerPositionController implements ILocationSelectionHandler
 
 	public static void showDialog(@NonNull MapActivity mapActivity,
 	                              @NonNull ChangeMarkerPositionHandler handler) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		ChangeMarkerPositionController controller = new ChangeMarkerPositionController(app, handler);
 		SelectLocationController.showDialog(mapActivity, new CenterMapLatLonExtractor(), controller);
 	}

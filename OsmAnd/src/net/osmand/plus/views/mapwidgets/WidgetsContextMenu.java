@@ -37,7 +37,7 @@ public class WidgetsContextMenu {
 	                            @Nullable String customId, @Nullable List<PopUpMenuItem> widgetActions,
 	                            WidgetsPanel widgetsPanel, boolean nightMode, boolean usedOnMap) {
 		boolean verticalWidget = widgetsPanel.isPanelVertical();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		List<PopUpMenuItem> items = new ArrayList<>();
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();

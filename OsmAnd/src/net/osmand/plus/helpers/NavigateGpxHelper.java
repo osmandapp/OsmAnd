@@ -55,7 +55,7 @@ public class NavigateGpxHelper {
 
 	public NavigateGpxHelper(@NonNull MapActivity mapActivity, @NonNull GpxFile gpxFile,
 	                         @NonNull GpxNavigationParams navigationParams) {
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.mapActivityRef = new WeakReference<>(mapActivity);
 		this.gpxFile = gpxFile;
 		this.navigationParams = navigationParams;
@@ -146,7 +146,7 @@ public class NavigateGpxHelper {
 	public static boolean saveAndNavigateGpx(@NonNull MapActivity mapActivity, @NonNull NavigateGpxParams params) {
 		GpxFile gpxFile = loadGpxFile(mapActivity, params.getData(), params.getUri());
 		if (gpxFile != null && gpxFile.getError() == null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 
 			String fileName = params.getFileName();
 			String updatedFileName = updateFileNameIfNeeded(app, gpxFile, fileName);
@@ -186,13 +186,13 @@ public class NavigateGpxHelper {
 	                                    @Nullable LatLon to, @Nullable PointDescription toDesc,
 	                                    @Nullable ApplicationMode mode, boolean checkLocationPermission,
 	                                    @Nullable Boolean passWholeRoute) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		MapViewTrackingUtilities mapViewTrackingUtilities = mapActivity.getMapViewTrackingUtilities();
 		if (gpx == null) {
 			settings.setApplicationMode(mode);
-			TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+			TargetPointsHelper targets = mapActivity.getApp().getTargetPointsHelper();
 			targets.removeAllWayPoints(false, true);
 			targets.navigateToPoint(to, true, -1, toDesc);
 		}

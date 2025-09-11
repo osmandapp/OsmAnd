@@ -367,7 +367,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							canceled -> {
 								MapActivity mapActv = mapActivityRef.get();
 								if (mapActv != null && !mapActv.isFinishing()) {
-									String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
+									String overlayMapDescr = mapActv.getSettings().MAP_OVERLAY.get();
 									boolean hasOverlayDescription = overlayMapDescr != null;
 									overlayMapDescr = hasOverlayDescription ? overlayMapDescr
 											: mapActv.getString(R.string.shared_string_none);

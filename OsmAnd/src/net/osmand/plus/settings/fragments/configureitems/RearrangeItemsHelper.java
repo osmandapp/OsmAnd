@@ -65,7 +65,7 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 	public RearrangeItemsHelper(@NonNull ConfigureMenuItemsFragment fragment) {
 		this.fragment = fragment;
 		this.mapActivity = (MapActivity) fragment.requireActivity();
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 	}
 

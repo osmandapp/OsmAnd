@@ -56,7 +56,7 @@ public class LanesWidget extends MapWidget {
 			@Nullable WidgetsPanel panel) {
 		super(mapActivity, LANES, customId, panel);
 
-		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		routingHelper = mapActivity.getApp().getRoutingHelper();
 		lanesImage = view.findViewById(R.id.map_lanes);
 		lanesText = view.findViewById(R.id.map_lanes_dist_text);
 		lanesShadowText = view.findViewById(R.id.map_lanes_dist_text_shadow);

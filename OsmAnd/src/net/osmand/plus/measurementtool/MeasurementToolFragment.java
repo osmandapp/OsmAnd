@@ -18,7 +18,6 @@ import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KE
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -2075,7 +2074,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	}
 
 	public static boolean showSnapToRoadsDialog(@NonNull MapActivity activity, boolean showSnapWarning) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		GpxFile gpxFile = app.getRoutingHelper().getCurrentGPX();
 		if (gpxFile != null) {
 			GpxData gpxData = new GpxData(gpxFile);
@@ -2130,7 +2129,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	public static boolean showInstance(@NonNull MapActivity activity, @NonNull GpxFile gpxFile,
 	                                   int segmentIndex, int modes) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		GpxData gpxData = new GpxData(gpxFile);
 
 		QuadRect rect = gpxData.getRect();

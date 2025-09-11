@@ -25,7 +25,7 @@ public class MenuObjectUtils {
 	                                                     @NonNull List<RenderedObject> objects,
 	                                                     @NonNull LatLon latLon) {
 		List<MenuObject> result = new ArrayList<>();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		IContextMenuProvider contextObject = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 		for (RenderedObject object : objects) {
 			result.add(createMenuObject(object, contextObject, latLon, mapActivity));

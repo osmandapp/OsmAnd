@@ -47,7 +47,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	@Override
 	public MeasureToolItemVH onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+		nightMode = mapActivity.getApp().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = inflater.inflate(R.layout.measure_points_list_item, viewGroup, false);
 		if (!nightMode) {
@@ -60,7 +60,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	@Override
 	public void onBindViewHolder(@NonNull MeasureToolItemVH holder, int pos) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		UiUtilities iconsCache = app.getUIUtilities();
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));
 		holder.iconReorder.setOnTouchListener((view, event) -> {

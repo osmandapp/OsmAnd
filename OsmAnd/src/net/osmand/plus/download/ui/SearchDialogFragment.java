@@ -298,7 +298,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 
 		public SearchListAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
-			this.osmandRegions = ctx.getMyApplication().getRegions();
+			this.osmandRegions = ctx.getApp().getRegions();
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
@@ -448,7 +448,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 			private SearchRequest<Amenity> searchCityRequest;
 
 			public SearchIndexFilter() {
-				this.osmandRegions = ctx.getMyApplication().getRegions();
+				this.osmandRegions = ctx.getApp().getRegions();
 			}
 
 			public void cancelFilter() {

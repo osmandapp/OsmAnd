@@ -473,7 +473,7 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
-			if (constraint == null || constraint.isEmpty()) {
+			if (Algorithms.isEmpty(constraint)) {
 				results.values = null;
 				results.count = 1;
 			} else {

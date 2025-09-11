@@ -67,7 +67,7 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 	public void bindView(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener, @NonNull ImageCard imageCard,
 	                     @NonNull ImageHolderType type, Integer viewWidth, @NonNull NetworkImageLoader imageLoader, boolean nightMode) {
 		this.type = type;
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		UiUtilities uiUtilities = app.getUIUtilities();
 		setupView(mapActivity, viewWidth, nightMode);
 
@@ -192,7 +192,7 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void setupView(@NonNull MapActivity mapActivity, Integer viewWidth, boolean nightMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		int sizeInPx;
 		if (type == SPAN_RESIZABLE) {
 			int spanCount = GalleryController.getSettingsSpanCount(mapActivity);

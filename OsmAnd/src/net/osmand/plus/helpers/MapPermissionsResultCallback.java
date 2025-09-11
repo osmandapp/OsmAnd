@@ -31,7 +31,7 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
 			@NonNull int[] grantResults) {
 		if (grantResults.length > 0) {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 
 			PluginsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			activity.getMapActions().onRequestPermissionsResult(requestCode, permissions, grantResults);

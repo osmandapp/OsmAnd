@@ -22,7 +22,7 @@ public class VoiceProviderDialog {
 	public static final String MORE_VALUE = "MORE_VALUE";
 
 	public static void showVoiceProviderDialog(@NonNull MapActivity activity, ApplicationMode appMode, boolean applyAllModes) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		RoutingOptionsHelper routingOptionsHelper = app.getRoutingOptionsHelper();

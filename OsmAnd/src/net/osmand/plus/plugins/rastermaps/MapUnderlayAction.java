@@ -112,7 +112,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 					showChooseDialog(mapActivity);
 					return;
 				}
-				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				String nextItem = getNextSelectedItem(mapActivity.getApp());
 				executeWithParams(mapActivity, nextItem);
 			}
 		}
@@ -122,7 +122,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			OsmandSettings settings = mapActivity.getSettings();
 			boolean hasUnderlay = !params.equals(KEY_NO_UNDERLAY);
 			if (hasUnderlay) {
 				settings.MAP_UNDERLAY.set(params);
@@ -181,7 +181,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	@Override
 	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return view -> {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 
 			Map<String, String> entriesMap = app.getSettings().getTileSourceEntries();
 			entriesMap.put(KEY_NO_UNDERLAY, activity.getString(R.string.no_underlay));

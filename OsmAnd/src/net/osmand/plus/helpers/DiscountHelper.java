@@ -98,7 +98,7 @@ public class DiscountHelper {
 	private static final String FEATURE_NAUTICAL = "nautical";
 
 	public static void checkAndDisplay(MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
 			return;
@@ -133,7 +133,7 @@ public class DiscountHelper {
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					return AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
+					return AndroidNetworkUtils.sendRequest(mapActivity.getApp(),
 							URL, pms, "Requesting discount info...", false, false);
 				} catch (Exception e) {
 					logError("Requesting discount info error: ", e);
@@ -153,7 +153,7 @@ public class DiscountHelper {
 	@SuppressLint("SimpleDateFormat")
 	private static void processDiscountResponse(String response, MapActivity mapActivity) {
 		try {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			JSONObject obj = new JSONObject(response);
 			if (obj.length() == 0) {
 				return;
@@ -286,7 +286,7 @@ public class DiscountHelper {
 	}
 
 	private static void showDiscountBanner(MapActivity mapActivity, ControllerData data) {
-		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
+		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getApp().getPackageName());
 		DiscountBarController toolbarController = new DiscountBarController();
 		if (data.bgColor != -1) {
 			LayerDrawable bgLand = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
@@ -310,7 +310,7 @@ public class DiscountHelper {
 		}
 		if (!Algorithms.isEmpty(data.url)) {
 			View.OnClickListener clickListener = v -> {
-				mapActivity.getMyApplication().logEvent("motd_click");
+				mapActivity.getApp().logEvent("motd_click");
 				mBannerVisible = false;
 				mapActivity.hideTopToolbar(toolbarController);
 				openUrl(mapActivity, data.url);
@@ -320,7 +320,7 @@ public class DiscountHelper {
 			toolbarController.setOnTextBtnClickListener(clickListener);
 		}
 		toolbarController.setOnCloseButtonClickListener(v -> {
-			mapActivity.getMyApplication().logEvent("motd_close");
+			mapActivity.getApp().logEvent("motd_close");
 			mBannerVisible = false;
 			mapActivity.hideTopToolbar(toolbarController);
 		});
@@ -339,7 +339,7 @@ public class DiscountHelper {
 
 	public static void openUrl(MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
 				InAppPurchase fullVersion = purchaseHelper.getFullVersion();
@@ -374,7 +374,7 @@ public class DiscountHelper {
 		} else if (url.startsWith(SHOW_POI_PREFIX)) {
 			String names = url.substring(SHOW_POI_PREFIX.length());
 			if (!names.isEmpty()) {
-				OsmandApplication app = mapActivity.getMyApplication();
+				OsmandApplication app = mapActivity.getApp();
 				MapPoiTypes poiTypes = app.getPoiTypes();
 				Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 				for (String name : names.split(",")) {

@@ -107,7 +107,7 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		view = inflater.inflate(R.layout.route_waypoints_fragment, parent, false);
@@ -431,7 +431,7 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 					if (t.getOriginalPointDescription() != null
 							&& t.getOriginalPointDescription().isSearchingAddress(ctx)) {
 						AddressLookupRequest lookupRequest = new AddressLookupRequest(t.getLatLon(), address -> reloadListAdapter(listAdapter), null);
-						ctx.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+						ctx.getApp().getGeocodingLookupService().lookupAddress(lookupRequest);
 					}
 				}
 			}
@@ -537,7 +537,7 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 	                                    LocationPointWrapper point,
 	                                    ArrayAdapter<Object> adapter, boolean nightMode,
 	                                    boolean flat, int position) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = inflate(R.layout.route_waypoint_item);
 		}
@@ -597,8 +597,8 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 	                                        View localView, LocationPointWrapper ps,
 	                                        boolean mapCenter, boolean nightMode,
 	                                        boolean edit, boolean topBar) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		WaypointHelper wh = mapActivity.getMyApplication().getWaypointHelper();
+		OsmandApplication app = mapActivity.getApp();
+		WaypointHelper wh = mapActivity.getApp().getWaypointHelper();
 		LocationPoint point = ps.getPoint();
 		TextView text = localView.findViewById(R.id.waypoint_text);
 		if (!topBar) {

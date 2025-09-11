@@ -173,7 +173,7 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 			progressDialog.dismiss();
 			onAddressDetermined.processResult(address);
 		}, null);
-		mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+		mapActivity.getApp().getGeocodingLookupService().lookupAddress(lookupRequest);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	}
 
 	private void setupTrackToggleButton(@NonNull View container, @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean night = isNightMode(mapActivity);
 		LinearLayout trackToggle = container.findViewById(R.id.track_toggle);
 		trackToggleButton = new TextToggleButton(app, trackToggle, night);
@@ -319,7 +319,7 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	}
 
 	private void setupWaypointAppearanceToggle(@NonNull View container, @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean night = isNightMode(mapActivity);
 		boolean usePredefinedAppearance = predefinedWaypoint != null || shouldUsePredefinedAppearance();
 		LinearLayout appearanceToggle = container.findViewById(R.id.appearance_toggle);
@@ -562,7 +562,7 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	private void getGpxFile(@NonNull String gpxFilePath,
 	                        @NonNull MapActivity mapActivity,
 	                        @NonNull CallbackWithObject<GpxFile> onGpxFileAvailable) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (gpxFilePath.isEmpty()) {
 			onGpxFileAvailable.processResult(app.getSavingTrackHelper().getCurrentGpx());
 		} else {
@@ -616,6 +616,6 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	}
 
 	private boolean isNightMode(@NonNull MapActivity mapActivity) {
-		return mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+		return mapActivity.getApp().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }
