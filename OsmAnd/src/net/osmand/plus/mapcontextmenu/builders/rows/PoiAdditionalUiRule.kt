@@ -30,7 +30,7 @@ class PoiAdditionalUiRule(
         poiType: PoiType?,
         key: String,
         value: String,
-        subtype: String
+        subtype: String?
     ) {
         fillRow(PoiRowParams(
             app = app,

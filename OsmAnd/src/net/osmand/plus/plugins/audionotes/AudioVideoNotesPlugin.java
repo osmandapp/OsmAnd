@@ -50,6 +50,7 @@ import androidx.core.app.ActivityCompat;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
@@ -815,7 +816,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private boolean stopMediaRecording(boolean restart, boolean displayContextMenuOnFinish) {
+	private boolean stopMediaRecording(boolean restart, boolean showContextMenu) {
 		boolean res = true;
 		AVActionType type = null;
 		if (isRecording()) {
@@ -830,7 +831,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			}
-			indexFile(true, mediaRecFile, displayContextMenuOnFinish);
+			indexFile(true, mediaRecFile, showContextMenu ? this::updateContextMenu : null);
 			mediaRec.release();
 			mediaRec = null;
 			mediaRecFile = null;
@@ -1254,11 +1255,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void stopRecording(@NonNull MapActivity mapActivity,
-	                          boolean restart, boolean displayContextMenuOnFinish) {
+	                          boolean restart, boolean showContextMenu) {
 		if (!recordingDone) {
 			if (!restart || !stopMediaRecording(true, false)) {
 				recordingDone = true;
-				stopMediaRecording(false, !restart && displayContextMenuOnFinish);
+				stopMediaRecording(false, !restart && showContextMenu);
 				SHOW_RECORDINGS.set(true);
 				mapActivity.refreshMap();
 				closeRecordingMenu();
@@ -1277,7 +1278,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return new LatLon(lat, lon);
 	}
 
-	private void updateContextMenu(Recording rec) {
+	private void updateContextMenu(@Nullable Recording rec) {
 		if (mapActivity != null && rec != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			menu.show(new LatLon(rec.getLatitude(), rec.getLongitude()), audioNotesLayer.getObjectName(rec), rec);
@@ -1304,7 +1305,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean indexSingleFile(@NonNull File file, boolean displayContextMenuOnFinish) {
+	public boolean indexSingleFile(@NonNull File file,
+	                               @Nullable OnResultCallback<Recording> onRecordingFinished) {
 		boolean oldFileExist = recordingByFileName.containsKey(file.getName());
 		if (oldFileExist) {
 			return false;
@@ -1340,16 +1342,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (isRecording()) {
 			AVActionType type = currentRecording.getType();
 			finishRecording();
-			if (displayContextMenuOnFinish && isAbleToShowContextMenuOnFinish(type)) {
-				app.runInUIThread(() -> updateContextMenu(recording), 200);
+			if (onRecordingFinished != null && type != AVActionType.REC_AUDIO
+					&& (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO)) {
+				app.runInUIThread(() -> onRecordingFinished.onResult(recording), 200);
 			}
 		}
 
 		return true;
-	}
-
-	private boolean isAbleToShowContextMenuOnFinish(@NonNull AVActionType type) {
-		return  type != AVActionType.REC_AUDIO && (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO);
 	}
 
 	@Override
@@ -1376,17 +1375,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			File[] files = avPath.listFiles();
 			if (files != null) {
 				for (File file : files) {
-					indexFile(registerNew, file, false);
+					indexFile(registerNew, file, null);
 				}
 			}
 		}
 		return null;
 	}
 
-	private void indexFile(boolean registerInGPX, @NonNull File file, boolean displayContextMenuOnFinish) {
+	private void indexFile(boolean registerInGPX, @NonNull File file,
+	                       @Nullable OnResultCallback<Recording> onRecordingFinished) {
 		String name = file.getName();
 		if (CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {
-			boolean newFileIndexed = indexSingleFile(file, displayContextMenuOnFinish);
+			boolean newFileIndexed = indexSingleFile(file, onRecordingFinished);
 			if (newFileIndexed && registerInGPX) {
 				Recording recording = recordingByFileName.get(name);
 				if (recording != null
@@ -1672,7 +1672,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					FileOutputStream fos = new FileOutputStream(lastTakingPhoto);
 					fos.write(photoJpegData);
 					fos.close();
-					indexFile(true, lastTakingPhoto, false);
+					indexFile(true, lastTakingPhoto, null);
 				}
 			} catch (Exception error) {
 				logErr(error);

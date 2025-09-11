@@ -1,6 +1,9 @@
 package net.osmand.util;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -51,9 +54,8 @@ public class TestSubsolar {
 	// examples
 	// https://github.com/cosinekitty/astronomy/blob/master/demo/java/src/main/java/io/github/cosinekitty/astronomy/demo/RiseSetCulm.java
 	public static void main(String[] args) throws InterruptedException {
-		double lon = 0;
-		Stats s = new Stats();
-		
+//		Stats s = new Stats();
+//		double lon = 0;
 //		MIN_ALTITUDE = 20;
 //		ERR = 0.00;
 //		for (int m = 1; m <= 12; m++) {
@@ -66,12 +68,12 @@ public class TestSubsolar {
 //		System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d\n ", s.tests, s.duplicate, s.fail);
 //		System.out.println(s.errorDistr);
 		
-		MIN_ALTITUDE = 20;
-		ERR = 1;
-		for (int minInc = 5; minInc <= 60; minInc += 5) {
-			System.out.println("MIN INC - " + minInc);
-			runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
-		}
+//		MIN_ALTITUDE = 20;
+//		ERR = 1;
+//		for (int minInc = 5; minInc <= 60; minInc += 5) {
+//			System.out.println("MIN INC - " + minInc);
+//			runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
+//		}
 		
 		// 52.3676, 4.9041
 //		LatLon с1 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168, 42);
@@ -82,9 +84,204 @@ public class TestSubsolar {
 //		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T15:54:00Z", 252, 20));
 //		System.out.println(calcCoordinatesOneShot(Body.Moon, "2025-09-09T03:30:00Z", 230, 29));
 //		
+		// capella
+		Astronomy.defineStar(Body.Star1, 5.2781, 45.998, 5);
+		// aldebaran: { ra: 4.59, dec: 16.51, name: 'Aldebaran',
+		Astronomy.defineStar(Body.Star2, 4.5987, 16.5091, 5);
+		// betelgeuse: { ra: 5.92, dec: 7.41,
+		Astronomy.defineStar(Body.Star3, 5.919, 7.407, 5);
+		// Body.Star1 - 65.71
+		Body[] bodies = {Body.Sun, Body.Moon, Body.Star1, Body.Star2, Body.Star3};
+		double[] alts = {24.65, 17.91, 65.71, 38.92, 40.04}; // timeanddate
+		String time = "2025-09-11T08:00:00Z";
+		LatLon testPnt = new LatLon(52.367, 4.904);
+		calcPositionBodies(bodies, alts, time, testPnt);
+		// compare altitudes
+		Time timeT = Time.fromMillisecondsSince1970(Instant.parse(time).getEpochSecond() * 1000);
+		for (int i = 0; i < bodies.length; i++) {
+			Topocentric alt = calcAltitude(bodies[i], timeT, testPnt, false);
+			System.out.printf("Body %s, correction %.3f\n", bodies[i], alt.getAltitude() - alts[i]);
+		}
 		
 	}
+	
+	public static List<List<LatLon>> clusterByProximity(List<LatLon> points, double thresholdDistanceMeters) {
+        List<List<LatLon>> clusters = new ArrayList<>();
+        // Make a copy to avoid modifying the original list
+        List<LatLon> remainingPoints = new ArrayList<>(points);
 
+        while (!remainingPoints.isEmpty()) {
+            // Start a new cluster with the first remaining point
+            List<LatLon> newCluster = new ArrayList<>();
+            LatLon clusterSeed = remainingPoints.remove(0);
+            newCluster.add(clusterSeed);
+            clusters.add(newCluster);
+
+            // Use an iterator to safely remove items while iterating
+            Iterator<LatLon> it = remainingPoints.iterator();
+            while (it.hasNext()) {
+                LatLon potentialMember = it.next();
+                // Check distance against the original seed point of the cluster
+                if (MapUtils.getDistance(clusterSeed, potentialMember) <= thresholdDistanceMeters) {
+                    newCluster.add(potentialMember);
+                    it.remove(); // Move point from remaining to the new cluster
+                }
+            }
+        }
+
+        return clusters;
+    }
+
+	private static LatLon calcPositionBodies(Body[] bodies, double[] alts, String time, LatLon check) {
+		long nt = System.nanoTime();
+		double MIN_THRESHOLD = 4_000;
+		double MAX_THRESHOLD = 500_000; 
+		int MIN_SIZE_CLUSTER = 3;
+		double threshold = MIN_THRESHOLD;
+		List<LatLon> l = new ArrayList<LatLon>();
+		int found = 0;
+		int failed = 0;
+		for (int i = 0; i < bodies.length; i++) {
+			for (int j = i + 1; j < bodies.length; j++) {
+				LatLon a1 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], true);
+				if (a1 != null) {
+					found++;
+					l.add(a1);
+				} else {
+					failed++;
+				}
+				LatLon a2 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], false);
+				if (a2 != null) {
+					found++;
+					l.add(a2);
+				} else {
+					failed++;
+				}
+			}
+		}
+		
+		List<LatLon> maxSizeCluster = null;
+		while (maxSizeCluster == null && threshold < MAX_THRESHOLD) {
+			threshold *= 4;
+			List<List<LatLon>> clusters = clusterByProximity(l, threshold);
+			for (List<LatLon> cl : clusters) {
+				if (cl.size() > (maxSizeCluster != null ? maxSizeCluster.size() : MIN_SIZE_CLUSTER - 1)) {
+					maxSizeCluster = cl;
+				}
+//				check(check, midPoint(cl.toArray(new LatLon[0])), cl.size() + " " + cl);
+			}
+			
+		}
+		System.out.println("Calculation " + (System.nanoTime() - nt) / 1e9f + " seconds");
+		if (maxSizeCluster == null) {
+			return null;
+		}
+		LatLon res = midPoint(maxSizeCluster.toArray(new LatLon[0]));
+		check(check, res, String.format("- %d cluster size from %d points (%d failed) %s", 
+				maxSizeCluster.size(), found, failed, res));
+		return res;
+	}
+
+	private static void check(LatLon check, LatLon l, Object msg) {
+		System.out.printf("Error %.2f km %s \n", MapUtils.getDistance(check, l) / 1000.0, msg);
+	}
+
+	private static LatLon midPoint(LatLon... ls) {
+		double lon = 0;
+		double lat = 0;
+		for(int i = 0; i < ls.length; i++) {
+			lat += ls[i].getLatitude() / ls.length;
+			lon += ls[i].getLongitude() / ls.length;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	protected static LatLon calcCoordinates2Bodies(String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2, boolean dir) {
+		MAX_ITERATIONS = 100000;
+		double ALT_PRECISION = 0.01;
+		double MIN_THRESHOLD = 10000;
+		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
+		LatLon projPoint1 = calculateProjPoint(body1, time, PRINT);
+		LatLon projPoint2 = calculateProjPoint(body2, time, PRINT);
+		
+		
+		// initial step
+		LatLon closest1 = null, closest2 = null;
+		double minDist = -1;
+		double closestDelta1 = 0, closestDelta2 = 0;
+		float azm = projPoint1.toLocation().bearingTo(projPoint2.toLocation());
+//		System.out.println(projPoint1);
+//		System.out.println(projPoint2);
+		int iter = 0;
+		// magnitude - 100 (2km), 1000 (200m), 10000 (20m)
+		for (int magn = 1; magn <= 10000; magn *= 10) {
+			double deltaAround1 = closest1 == null ? (dir ? 90 : -90) : closestDelta1;
+			double deltaAround2 = closest1 == null ? (dir ? 90 : -90) : closestDelta2;
+			int steps = closest1 == null ? 9 : 25;
+			List<LatLon> points1 = new ArrayList<LatLon>();
+			List<Double> deltas1 = new ArrayList<Double>();
+			List<Double> alts1 = new ArrayList<Double>();
+			List<LatLon> points2 = new ArrayList<LatLon>();
+			List<Double> deltas2 = new ArrayList<Double>();
+			List<Double> alts2 = new ArrayList<Double>();
+			for (int i = -steps; i < steps; i++) {
+				double delta1 = deltaAround1 + i * 10.0 / magn;
+				double delta2 = deltaAround2 + i * 10.0 / magn;
+				double alt1 = targetAlt1;
+				LatLon pnt1 = move(projPoint1, 90 - alt1, azm + delta1);
+				Topocentric target1 = calcAltitude(body1, time, pnt1, false);
+				while (iter++ < MAX_ITERATIONS && Math.abs(target1.getAltitude() - targetAlt1) > ALT_PRECISION) {
+					alt1 -= (target1.getAltitude() - targetAlt1);
+					pnt1 = move(projPoint1, 90 - alt1, azm + delta1);
+					target1 = calcAltitude(body1, time, pnt1, false);
+				}
+
+				//	System.out.println(target1.getAltitude() + " == "+ targetAlt1 + " " + iter);
+				double alt2 = targetAlt2;
+				LatLon pnt2 = move(projPoint2, 90 - alt2, -(delta2 + azm));
+				Topocentric target2 = calcAltitude(body2, time, pnt2, false);
+				while (iter++ < MAX_ITERATIONS && Math.abs(target2.getAltitude() - targetAlt2) > ALT_PRECISION) {
+					alt2 -= (target2.getAltitude() - targetAlt2);
+					pnt2 = move(projPoint2, 90 - alt2, -(delta2 + azm));
+					target2 = calcAltitude(body2, time, pnt2, false);
+				}
+				points1.add(pnt1);
+				deltas1.add(delta1);
+				alts1.add(alt1);
+				points2.add(pnt2);
+				deltas2.add(delta2);
+				alts2.add(alt2);
+				// System.out.println(target2.getAltitude() + " == "+ targetAlt2 + " " + iter);
+			}
+			
+			for (int i = 0; i < points1.size(); i++) {
+				for (int j = 0; j < points2.size(); j++) {
+					LatLon pnt1 = points1.get(i);
+					LatLon pnt2 = points2.get(j);
+					double delta1 = deltas1.get(i);
+					double delta2 = deltas2.get(j);
+					double dist = MapUtils.getDistance(pnt1, pnt2);
+//					System.out.println(
+//							delta1 + " " + delta2 + " " + (int) (MapUtils.getDistance(pnt1, pnt2) / 1000) + " " + pnt1 + " " + pnt2);
+					if (dist < minDist || minDist < 0) {
+						closestDelta1 = delta1;
+						closestDelta2 = delta2;
+						minDist = dist;
+						closest1 = pnt1;
+						closest2 = pnt2;
+					}
+				}
+			}
+			
+		}
+		System.out.printf("Dist %.2f (iter %d), delta - %.3f %.3f, points - %s %s\n", minDist / 1000, iter,
+				closestDelta1, closestDelta2, closest1, closest2);
+		if (minDist > MIN_THRESHOLD) {
+			return null;
+		}
+		return closest1;
+	}
+	
 	protected static LatLon calcCoordinatesOneShot(Body body, String timeS, double azm, double alt) {
 		Time time = Time.fromMillisecondsSince1970(Instant.parse(timeS).getEpochSecond() * 1000);
 		LatLon projPoint = calculateProjPoint(body, time, PRINT);
@@ -204,9 +401,14 @@ public class TestSubsolar {
 //		double distancely = 10;
 //		Astronomy.defineStar(Body.Star1, dec, ra, distancely);
 		Observer observer = new Observer(point.getLatitude(), point.getLongitude(), 0.0);
-//		Equatorial equ_2000 = Astronomy.equator(body, time, observer, EquatorEpoch.J2000, Aberration.Corrected);
-		Equatorial equ = Astronomy.equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected);
-		Topocentric hor = Astronomy.horizon(time, observer, equ.getRa(), equ.getDec(), Refraction.None); // Refraction.Normal
+		Equatorial equ;
+		// planets needs to be tested with time and date
+		if (body != Body.Sun && body != Body.Moon) {
+			equ = Astronomy.equator(body, time, observer, EquatorEpoch.J2000, Aberration.Corrected);
+		} else {
+			equ = Astronomy.equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected);
+		}
+		Topocentric hor = Astronomy.horizon(time, observer, equ.getRa(), equ.getDec(), Refraction.Normal); // Refraction.Normal
 		if (print) {
 			System.out.printf("%-8s %4.5f° alt, %4.5f°\n", body, hor.getAltitude(), hor.getAzimuth());
 		}
@@ -291,31 +493,5 @@ public class TestSubsolar {
 
 	
 
-	protected static LatLon calculateCoordinates(Body body, Time time, LatLon iterPoint, 
-			Topocentric targetHor, LatLon check, boolean print) {
-		LatLon pnt = iterPoint;
-		double targetAltitude = roundAlt(targetHor.getAltitude());
-		double targetAzm = roundAzm(targetHor.getAzimuth());
-		Topocentric current = calcAltitude(body, time, pnt, print);
-		double moveDistanceAngle = current.getAltitude() - targetAltitude;
-		double azmDistAngle = 0;
-		pnt = align(MapUtils.rhumbDestinationPoint(iterPoint.getLatitude(), iterPoint.getLongitude(),
-				Math.toRadians(moveDistanceAngle) * MapUtils.EARTH_RADIUS_A, 180 + targetAzm));
-		if (current.getAltitude() < 89.9) {
-			current = calcAltitude(body, time, pnt, print);
-			// move horizontal direction
-			azmDistAngle = Math.sin(Math.toRadians(current.getAzimuth() - targetAzm))
-					* current.getAltitude() /2;
-			pnt = align(MapUtils.rhumbDestinationPoint(pnt.getLatitude(), pnt.getLongitude(),
-					Math.toRadians(azmDistAngle) * MapUtils.EARTH_RADIUS_A, 90 + targetAzm));
-		}
-		if (print) {
-			System.out.printf("Move %.5f ^, %.5f > \n", moveDistanceAngle, azmDistAngle);
-			System.out.printf("Calc (err %.3f km) Lat %.5f Lon %.5f \n", MapUtils.getDistance(check, pnt)/1000, pnt.getLatitude(),
-					pnt.getLongitude());
-		}
-		return pnt;
-
-	}
 	
 }
