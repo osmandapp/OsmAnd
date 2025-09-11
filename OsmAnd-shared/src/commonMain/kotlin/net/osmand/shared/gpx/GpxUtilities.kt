@@ -74,6 +74,12 @@ object GpxUtilities {
 	const val POINT_SPEED = "speed"
 	const val POINT_BEARING = "bearing"
 
+	const val MIN_ELEVATION: String = "min_ele"
+	const val MAX_ELEVATION: String = "max_ele"
+	const val AVG_ELEVATION: String = "avg_ele"
+	const val DIFF_ELEVATION_UP: String = "diff_ele_up"
+	const val DIFF_ELEVATION_DOWN: String = "diff_ele_down"
+
 	const val TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A'
 	const val TRAVEL_GPX_CONVERT_FIRST_DIST = 5000
 	const val TRAVEL_GPX_CONVERT_MULT_1 = 2

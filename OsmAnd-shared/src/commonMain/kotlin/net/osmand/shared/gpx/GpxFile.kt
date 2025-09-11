@@ -14,6 +14,7 @@ import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.io.KFile
+import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
 import kotlin.collections.set
 
@@ -306,9 +307,30 @@ class GpxFile : GpxExtensions {
 			analysis.setGpxParameters(parameters)
 		}
 
+		analysis.hasElevationMetricsInTags = parseElevationMetricsTags(analysis)
+
 		val segments = getSplitSegments(analysis, fromDistance, toDistance)
 		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, *segments.toTypedArray())
 		return analysis
+	}
+
+	private fun parseElevationMetricsTags(analysis: GpxTrackAnalysis): Boolean {
+		val minElevation = getExtensionsToRead().get(GpxUtilities.MIN_ELEVATION)
+		val maxElevation = getExtensionsToRead().get(GpxUtilities.MAX_ELEVATION)
+		val avgElevation = getExtensionsToRead().get(GpxUtilities.AVG_ELEVATION)
+		val diffElevationUp = getExtensionsToRead().get(GpxUtilities.DIFF_ELEVATION_UP)
+		val diffElevationDown = getExtensionsToRead().get(GpxUtilities.DIFF_ELEVATION_DOWN)
+
+		if (minElevation != null && maxElevation != null) {
+			analysis.minElevation = KAlgorithms.parseDoubleSilently(minElevation, 0.0)
+			analysis.maxElevation = KAlgorithms.parseDoubleSilently(maxElevation, 0.0)
+			analysis.avgElevation = KAlgorithms.parseDoubleSilently(avgElevation, 0.0)
+			analysis.diffElevationUp = KAlgorithms.parseDoubleSilently(diffElevationUp, 0.0)
+			analysis.diffElevationDown = KAlgorithms.parseDoubleSilently(diffElevationDown, 0.0)
+			return true
+		}
+
+		return false
 	}
 
 	private fun getSplitSegments(
