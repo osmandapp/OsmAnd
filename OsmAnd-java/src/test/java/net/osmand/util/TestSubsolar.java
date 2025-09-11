@@ -54,9 +54,8 @@ public class TestSubsolar {
 	// examples
 	// https://github.com/cosinekitty/astronomy/blob/master/demo/java/src/main/java/io/github/cosinekitty/astronomy/demo/RiseSetCulm.java
 	public static void main(String[] args) throws InterruptedException {
-		double lon = 0;
-		Stats s = new Stats();
-		
+//		Stats s = new Stats();
+//		double lon = 0;
 //		MIN_ALTITUDE = 20;
 //		ERR = 0.00;
 //		for (int m = 1; m <= 12; m++) {
@@ -93,8 +92,8 @@ public class TestSubsolar {
 		Astronomy.defineStar(Body.Star3, 5.919, 7.407, 5);
 		// Body.Star1 - 65.71
 		Body[] bodies = {Body.Sun, Body.Moon, Body.Star1, Body.Star2, Body.Star3};
-//		double[] alts = {24.65, 17.91, 65.71, 38.92, 40.04}; // timeanddate
-		double[] alts = {24.62, 17.85, 66, 39.14, 40.141}; // corrected ? 
+		double[] alts = {24.65, 17.91, 65.71, 38.92, 40.04}; // timeanddate
+//		double[] alts = {24.62, 17.85, 66, 39.14, 40.14}; // ...? 
 		String time = "2025-09-11T08:00:00Z";
 		LatLon testPnt = new LatLon(52.367, 4.904);
 		calcPositionBodies(bodies, alts, time, testPnt);
@@ -206,10 +205,11 @@ public class TestSubsolar {
 //		System.out.println(projPoint1);
 //		System.out.println(projPoint2);
 		int iter = 0;
-		for (int magn = 1; magn <= 1000; magn *= 10) {
+		// magnitude - 100 (2km), 1000 (200m), 10000 (20m)
+		for (int magn = 1; magn <= 10000; magn *= 10) {
 			double deltaAround1 = closest1 == null ? (dir ? 90 : -90) : closestDelta1;
 			double deltaAround2 = closest1 == null ? (dir ? 90 : -90) : closestDelta2;
-			int steps = closest1 == null ? 9 : 15;
+			int steps = closest1 == null ? 9 : 25;
 			List<LatLon> points1 = new ArrayList<LatLon>();
 			List<Double> deltas1 = new ArrayList<Double>();
 			List<Double> alts1 = new ArrayList<Double>();
@@ -245,6 +245,7 @@ public class TestSubsolar {
 				alts2.add(alt2);
 				// System.out.println(target2.getAltitude() + " == "+ targetAlt2 + " " + iter);
 			}
+			
 			for (int i = 0; i < points1.size(); i++) {
 				for (int j = 0; j < points2.size(); j++) {
 					LatLon pnt1 = points1.get(i);
@@ -392,9 +393,14 @@ public class TestSubsolar {
 //		double distancely = 10;
 //		Astronomy.defineStar(Body.Star1, dec, ra, distancely);
 		Observer observer = new Observer(point.getLatitude(), point.getLongitude(), 0.0);
-//		Equatorial equ_2000 = Astronomy.equator(body, time, observer, EquatorEpoch.J2000, Aberration.Corrected);
-		Equatorial equ = Astronomy.equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected);
-		Topocentric hor = Astronomy.horizon(time, observer, equ.getRa(), equ.getDec(), Refraction.None); // Refraction.Normal
+		Equatorial equ;
+		// planets needs to be tested with time and date
+		if (body != Body.Sun && body != Body.Moon) {
+			equ = Astronomy.equator(body, time, observer, EquatorEpoch.J2000, Aberration.Corrected);
+		} else {
+			equ = Astronomy.equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected);
+		}
+		Topocentric hor = Astronomy.horizon(time, observer, equ.getRa(), equ.getDec(), Refraction.Normal); // Refraction.Normal
 		if (print) {
 			System.out.printf("%-8s %4.5f° alt, %4.5f°\n", body, hor.getAltitude(), hor.getAzimuth());
 		}
