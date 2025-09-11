@@ -18,12 +18,10 @@ public class HelpActivity extends BaseLogcatActivity implements LoadArticlesList
 
 	private static final int LOGCAT_READ_MS = 5 * 1000;
 
-	private OsmandApplication app;
 	private HelpArticlesHelper articlesHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		app = getMyApplication();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 

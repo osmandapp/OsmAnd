@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.monitoring.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.SAVE_RECORDED_TRIP_AND_CONTINUE_ACTION;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -43,7 +42,7 @@ public class SaveRecordedTripAndContinueAction extends BaseMonitoringAction {
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			if (!isRecordingTrack()) {
 				app.showToastMessage(R.string.start_trip_recording_first_m);
 			} else if (!hasDataToSave()) {

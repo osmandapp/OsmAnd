@@ -198,7 +198,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			}
 		});
 
-		DialogManager dialogManager = mapActivity.getMyApplication().getDialogManager();
+		DialogManager dialogManager = mapActivity.getApp().getDialogManager();
 		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
 		if (controller == null) {
 			dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(app));
@@ -2216,7 +2216,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 		int slideInAnim = 0;
 		int slideOutAnim = 0;
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+		if (!mapActivity.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 			slideInAnim = R.anim.slide_in_bottom;
 			slideOutAnim = R.anim.slide_out_bottom;
 

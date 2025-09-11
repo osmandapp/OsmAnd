@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.Amenity;
@@ -160,16 +159,16 @@ public class WptPtEditor extends PointEditor {
 
 		this.gpxFile = gpxFile;
 		SelectedGpxFile selectedGpxFile =
-				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
+				mapActivity.getApp().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 		gpxSelected = selectedGpxFile != null;
 
 		if (!Algorithms.isEmpty(categoryName)) {
-			FavoriteGroup category = mapActivity.getMyApplication()
+			FavoriteGroup category = mapActivity.getApp()
 					.getFavoritesHelper()
 					.getGroup(categoryName);
 
 			if (category == null) {
-				mapActivity.getMyApplication()
+				mapActivity.getApp()
 						.getFavoritesHelper()
 						.addFavoriteGroup(categoryName, categoryColor);
 			}
@@ -192,7 +191,7 @@ public class WptPtEditor extends PointEditor {
 		isNew = false;
 		categoryColor = 0;
 		SelectedGpxFile selectedGpxFile =
-				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(wpt);
+				mapActivity.getApp().getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null) {
 			gpxSelected = true;
 			gpxFile = selectedGpxFile.getGpxFile();
@@ -210,7 +209,7 @@ public class WptPtEditor extends PointEditor {
 		this.isNew = true;
 		this.processedObject = ProcessedObject.WAYPOINT_TEMPLATE;
 		this.categoryColor = 0;
-		this.gpxSelected = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath()) != null;
+		this.gpxSelected = mapActivity.getApp().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath()) != null;
 		this.gpxFile = gpxFile;
 		this.wpt = from != null ? from : new WptPt();
 		showEditorFragment();

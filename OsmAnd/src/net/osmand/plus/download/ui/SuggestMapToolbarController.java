@@ -45,7 +45,7 @@ public abstract class SuggestMapToolbarController extends TopToolbarController {
 		super(TopToolbarControllerType.SUGGEST_MAP);
 		SuggestMapToolbarController.regionName = regionName;
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		this.mainView = UiUtilities.inflate(mapActivity, nightMode, R.layout.banner_suggest_map);

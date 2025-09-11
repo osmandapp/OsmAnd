@@ -64,7 +64,7 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public EditKeyAssignmentAdapter(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
 	                                @NonNull EditKeyAssignmentController controller, boolean usedOnMap) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.controller = controller;

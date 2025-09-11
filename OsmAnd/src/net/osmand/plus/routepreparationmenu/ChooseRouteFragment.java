@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -141,7 +140,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 		List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
 		int routeIndex = 0;

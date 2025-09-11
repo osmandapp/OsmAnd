@@ -55,7 +55,7 @@ public class WidgetViewHolder extends RecyclerView.ViewHolder {
 	public void bind(@NonNull MapActivity mapActivity, @NonNull ApplicationMode selectedAppMode, @NonNull WidgetsAdapterListener listener,
 	                 @NonNull ItemTouchHelper itemTouchHelper, @NonNull WidgetItem widgetItem,
 	                 @NonNull WidgetIconsHelper iconsHelper, int position, boolean nightMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 
 		title.setText(widgetItem.mapWidgetInfo.getTitle(app));
 

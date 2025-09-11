@@ -1,16 +1,17 @@
 package net.osmand.plus.base;
 
-import android.app.ActionBar;
+import static androidx.appcompat.app.ActionBar.NAVIGATION_MODE_STANDARD;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -18,20 +19,18 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
 
-public abstract class OsmandListActivity extends
-		ActionBarProgressActivity implements AdapterView.OnItemClickListener {
+public abstract class OsmandListActivity extends ActionBarProgressActivity implements OnItemClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		getSupportActionBar().setNavigationMode(NAVIGATION_MODE_STANDARD);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		OsmandApplication app = getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		getListView().setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 		getListView().setDivider(app.getUIUtilities().getIcon(R.drawable.divider_solid, ColorUtilities.getDividerColorId(nightMode)));
@@ -51,7 +50,7 @@ public abstract class OsmandListActivity extends
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconDark, int menuItemType) {
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (iconDark != 0) {
-			menuItem.setIcon(getMyApplication().getUIUtilities().getIcon(iconDark));
+			menuItem.setIcon(app.getUIUtilities().getIcon(iconDark));
 		}
 		menuItem.setOnMenuItemClickListener(this::onOptionsItemSelected);
 		menuItem.setShowAsAction(menuItemType);

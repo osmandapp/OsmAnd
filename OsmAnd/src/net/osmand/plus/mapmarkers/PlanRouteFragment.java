@@ -786,7 +786,7 @@ public class PlanRouteFragment extends BaseFullScreenFragment
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			boolean markersListOpened = mapActivity.getMyApplication().getMapMarkersHelper()
+			boolean markersListOpened = mapActivity.getApp().getMapMarkersHelper()
 					.getPlanRouteContext()
 					.isMarkersListOpened();
 			boolean fullscreen = portrait && markersListOpened;

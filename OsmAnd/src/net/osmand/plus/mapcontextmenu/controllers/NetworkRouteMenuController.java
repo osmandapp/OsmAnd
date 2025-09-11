@@ -24,7 +24,7 @@ public class NetworkRouteMenuController extends MenuController {
 	                                  @NonNull PointDescription pointDescription,
 	                                  @NonNull Pair<?, ?> object) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
-		app = mapActivity.getMyApplication();
+		app = mapActivity.getApp();
 		pair = (Pair<RouteKey, QuadRect>) object;
 
 		builder.setShowNearestWiki(true);

@@ -52,7 +52,7 @@ public class EditPOIMenuController extends MenuController {
 				MapActivity activity = getMapActivity();
 				if (plugin != null && activity != null) {
 					OsmPoint point = getOsmPoint();
-					OsmandApplication app = activity.getMyApplication();
+					OsmandApplication app = activity.getApp();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 					boolean isLogged = client.isValidToken()
 							|| !Algorithms.isEmpty(plugin.OSM_USER_NAME_OR_EMAIL.get())
@@ -186,7 +186,7 @@ public class EditPOIMenuController extends MenuController {
 			String poiTranslation = osmP.getEntity().getTag(POI_TYPE_TAG);
 			MapActivity mapActivity = getMapActivity();
 			if (poiTranslation != null && mapActivity != null) {
-				Map<String, PoiType> poiTypeMap = mapActivity.getMyApplication().getPoiTypes().getAllTranslatedNames(false);
+				Map<String, PoiType> poiTypeMap = mapActivity.getApp().getPoiTypes().getAllTranslatedNames(false);
 				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
 				if (poiType != null) {
 					String id = null;

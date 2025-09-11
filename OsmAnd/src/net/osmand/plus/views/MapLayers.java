@@ -518,7 +518,7 @@ public class MapLayers {
 			@Nullable CallbackWithObject<String> callback,
 			@NonNull String layerKey
 	) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		switch (layerKey) {
 			case LAYER_OSM_VECTOR:

@@ -46,7 +46,7 @@ public class PageViewHolder extends RecyclerView.ViewHolder {
 	public void bind(@NonNull MapActivity mapActivity, @NonNull WidgetsAdapterListener listener,
 	                 @NonNull ItemTouchHelper itemTouchHelper, @NonNull WidgetsListAdapter adapter,
 	                 int position, @NonNull PageItem pageItem, boolean isVerticalPanel, boolean nightMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 
 		updateTitle(app, pageItem, isVerticalPanel);
 		updateButtons(app, listener, pageItem, position, nightMode);

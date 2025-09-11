@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnResultCallback;
@@ -44,7 +43,6 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.SelectTrackTabsFragment;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
@@ -153,7 +151,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		OsmandApplication app = getMyApplication();
 		if (app == null && mapActivity != null) {
-			app = mapActivity.getMyApplication();
+			app = mapActivity.getApp();
 		}
 		if (mapActivity != null && !appModeListenerAdded) {
 			app.getSettings().APPLICATION_MODE.addListener(this);
@@ -342,7 +340,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return false;
 		}
 
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (!(object instanceof RenderedObject)) {
 			AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
 			AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
@@ -443,7 +441,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (init(latLon, pointDescription, object)) {
-				mapActivity.getMyApplication().logEvent("open_context_menu");
+				mapActivity.getApp().logEvent("open_context_menu");
 				showInternal();
 			}
 		}
@@ -518,7 +516,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (mapActivity != null) {
 				Object object = getObject();
 				if (object instanceof MapMarker) {
-					mapActivity.getMyApplication().getMapMarkersHelper().removeListener(this);
+					mapActivity.getApp().getMapMarkersHelper().removeListener(this);
 				}
 				MenuController menuController = getMenuController();
 				if (menuController != null) {
@@ -592,7 +590,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		autoHide = true;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMyApplication().runInUIThread(() -> {
+			mapActivity.getApp().runInUIThread(() -> {
 				if (autoHide) {
 					hide();
 				}
@@ -907,7 +905,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		int res = R.drawable.ic_action_gdirections_dark;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+			RoutingHelper routingHelper = mapActivity.getApp().getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
 				res = R.drawable.ic_action_waypoint;
 			}
@@ -943,7 +941,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (navigateInPedestrianMode()) {
-				mapActivity.getMyApplication().getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
+				mapActivity.getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
 			}
 			mapActivity.getMapActions().navigateButton();
 		}
@@ -1152,8 +1150,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addAsLastIntermediate() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(getLatLon(),
-					true, mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size(),
+			mapActivity.getApp().getTargetPointsHelper().navigateToPoint(getLatLon(),
+					true, mapActivity.getApp().getTargetPointsHelper().getIntermediatePoints().size(),
 					getPointDescriptionForTarget());
 			close();
 		}
@@ -1162,7 +1160,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addWptPt() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 
 			PointDescription pointDescription = getPointDescription();
 			String title = getTitleStr();
@@ -1209,9 +1207,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				wptPtPointEditor.add(gpxFile, wptPt, categoryName, categoryColor, skipDialog);
 			} else {
 				List<SelectedGpxFile> list
-						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+						= mapActivity.getApp().getSelectedGpxHelper().getSelectedGPXFiles();
 				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack())) {
-					GpxFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+					GpxFile currentGpxFile = mapActivity.getApp().getSavingTrackHelper().getCurrentGpx();
 					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
 				} else {
 					addNewWptToGPXFile(wptPt, categoryName, categoryColor, skipDialog);
@@ -1571,7 +1569,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private void updateMyLocation(Location location, boolean updateLocationUi) {
 		MapActivity mapActivity = getMapActivity();
 		if (location == null && mapActivity != null) {
-			location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			location = mapActivity.getApp().getLocationProvider().getLastStaleKnownLocation();
 		}
 		if (location != null) {
 			if (updateLocationUi) {

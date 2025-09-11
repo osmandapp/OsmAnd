@@ -108,7 +108,7 @@ public class ParkingPositionMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return PointImageUtils.getFromPoint(mapActivity.getMyApplication(),
+			return PointImageUtils.getFromPoint(mapActivity.getApp(),
 					ContextCompat.getColor(mapActivity, R.color.parking_icon_background), false, fav);
 		} else {
 			return null;

@@ -201,9 +201,9 @@ public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmA
 		}
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
-			mapActivity.getMyApplication().runInUIThread(() -> {
+			mapActivity.getApp().runInUIThread(() -> {
 				if (location == null) {
-					location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+					location = mapActivity.getApp().getLocationProvider().getLastKnownLocation();
 				}
 				adapter.notifyDataSetChanged();
 			});

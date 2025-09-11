@@ -103,10 +103,10 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		isNew = true;
 		if (categoryName != null && !categoryName.isEmpty()) {
-			FavoriteGroup category = mapActivity.getMyApplication().getFavoritesHelper()
+			FavoriteGroup category = mapActivity.getApp().getFavoritesHelper()
 					.getGroup(categoryName);
 			if (category == null) {
-				mapActivity.getMyApplication().getFavoritesHelper().addFavoriteGroup(categoryName, categoryColor);
+				mapActivity.getApp().getFavoritesHelper().addFavoriteGroup(categoryName, categoryColor);
 			}
 		} else {
 			categoryName = "";

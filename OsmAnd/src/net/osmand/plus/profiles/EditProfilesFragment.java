@@ -152,7 +152,7 @@ public class EditProfilesFragment extends BaseFullScreenFragment {
 		applyButton.setOnClickListener(v -> {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			if (mapActivity != null) {
-				OsmandApplication app = mapActivity.getMyApplication();
+				OsmandApplication app = mapActivity.getApp();
 
 				if (!deletedModesKeys.isEmpty()) {
 					List<ApplicationMode> deletedModes = new ArrayList<>();

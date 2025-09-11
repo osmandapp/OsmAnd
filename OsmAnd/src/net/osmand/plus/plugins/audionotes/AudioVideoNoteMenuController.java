@@ -156,7 +156,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		if (!mIsFileAvailable || mapActivity == null) {
 			return;
 		}
-		boolean accessibilityEnabled = mapActivity.getMyApplication().accessibilityEnabled();
+		boolean accessibilityEnabled = mapActivity.getApp().accessibilityEnabled();
 		rightTitleButtonController.visible = true;
 		if (!mRecording.isPhoto()) {
 			if (mPlugin.isPlaying(mRecording)) {

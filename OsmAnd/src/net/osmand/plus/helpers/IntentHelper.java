@@ -104,7 +104,7 @@ public class IntentHelper {
 
 	public IntentHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 
 		registerDeviceListener = getRegisterDeviceListener();

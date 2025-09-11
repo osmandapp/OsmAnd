@@ -37,7 +37,7 @@ public class RouteUtils {
 	public static void showRendererSnackbarForAttr(@NonNull MapActivity activity,
 	                                               @NonNull String attrName, boolean nightMode,
 	                                               @Nullable CommonPreference<Boolean> pref) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		String renderer = getRendererForAttr(attrName);
 		if (renderer != null) {
 			String rendererName = RendererRegistry.getRendererName(app, renderer);
