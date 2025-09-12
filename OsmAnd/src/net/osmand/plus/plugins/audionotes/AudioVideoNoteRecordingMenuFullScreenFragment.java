@@ -11,9 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // TODO: consider extending BaseFullScreenFragment instead of BaseOsmAndFragment.
 // This fragment behaves like a full-screen UI and shares common logic.
@@ -26,9 +29,16 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends BaseOsmAndFra
 	private boolean dismissing;
 
 	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
+	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
-	                         @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		return inflate(R.layout.recording_note_fragment_fullscreen, container, false);
 	}
@@ -65,14 +75,15 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends BaseOsmAndFra
 	}
 
 	public static void showInstance(@NonNull AudioVideoNoteRecordingMenuFullScreen menu) {
-		FragmentManager fragmentManager = menu.requireMapActivity().getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = menu.requireMapActivity().getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			AudioVideoNoteRecordingMenuFullScreenFragment fragment = new AudioVideoNoteRecordingMenuFullScreenFragment();
 			fragment.menu = menu;
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
+			manager.executePendingTransactions();
 		}
 	}
 }
