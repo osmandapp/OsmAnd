@@ -1,5 +1,6 @@
 package net.osmand.util;
 
+import java.io.InputStreamReader;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import io.github.cosinekitty.astronomy.Aberration;
 import io.github.cosinekitty.astronomy.Astronomy;
@@ -41,6 +45,21 @@ public class TestSubsolar {
 			} else {
 				errorDistr.put(rndErr, 1 + errorDistr.get(rndErr));
 			}
+		}
+	}
+	
+	static class Star {
+		double ra;
+		double dec;
+		double app_ma;
+		String name;
+		String key; 
+		
+		String wid;
+		
+		@Override
+		public String toString() {
+			return String.format("%s (%s) - %.3f, %.3f deg, %.1f mag", name, wid, ra, dec, app_ma);
 		}
 	}
 	// STATS: Precision 0.001, Iterations 1000, Latitude <= 60
@@ -84,17 +103,14 @@ public class TestSubsolar {
 //		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T15:54:00Z", 252, 20));
 //		System.out.println(calcCoordinatesOneShot(Body.Moon, "2025-09-09T03:30:00Z", 230, 29));
 //		
-		// capella
-		Astronomy.defineStar(Body.Star1, 5.2781, 45.998, 5);
-		// aldebaran: { ra: 4.59, dec: 16.51, name: 'Aldebaran',
-		Astronomy.defineStar(Body.Star2, 4.5987, 16.5091, 5);
-		// betelgeuse: { ra: 5.92, dec: 7.41,
-		Astronomy.defineStar(Body.Star3, 5.919, 7.407, 5);
-		// Body.Star1 - 65.71
-		Body[] bodies = {Body.Sun, Body.Moon, Body.Star1, Body.Star2, Body.Star3};
+		
+		
+		String[] bodiesStr = {"Sun", "Moon", "capella", "aldebaran", "betelgeuse"};
 		double[] alts = {24.65, 17.91, 65.71, 38.92, 40.04}; // timeanddate
 		String time = "2025-09-11T08:00:00Z";
 		LatLon testPnt = new LatLon(52.367, 4.904);
+		
+		Body[] bodies = initBodies(bodiesStr);
 		calcPositionBodies(bodies, alts, time, testPnt);
 		// compare altitudes
 		Time timeT = Time.fromMillisecondsSince1970(Instant.parse(time).getEpochSecond() * 1000);
@@ -103,6 +119,32 @@ public class TestSubsolar {
 			System.out.printf("Body %s, correction %.3f\n", bodies[i], alt.getAltitude() - alts[i]);
 		}
 		
+	}
+
+	private static Body[] initBodies(String[] bodiesStr) {
+		Map<String, Star> mapStars = new Gson().fromJson(new InputStreamReader(TestSubsolar.class.getResourceAsStream("/stars/stars.json")),
+				new TypeToken<Map<String, Star>>(){}.getType());
+		
+		for(String key : mapStars.keySet()) {
+			mapStars.get(key).key = key;
+		}
+		Body[] bodies = new Body[bodiesStr.length];
+		int starInd = 0;
+		Body[] starConstants = {Body.Star1, Body.Star2, Body.Star3, Body.Star4, Body.Star5 };
+		for(int i = 0; i < bodies.length; i++) {
+			Star star = mapStars.get(bodiesStr[i].toLowerCase());
+			if(star != null) {
+				bodies[i] = starConstants[starInd++];
+				Astronomy.defineStar(bodies[i], star.ra, star.dec, 5);
+				System.out.println("Define " + star.name + " " + starInd + " "  + star.ra + ", " + star.dec);
+			} else {
+				bodies[i] = Body.valueOf(bodiesStr[i]);
+				if (bodies[i] == null) {
+					throw new IllegalArgumentException(bodiesStr[i]);
+				}
+			}
+		}
+		return bodies;
 	}
 	
 	public static List<List<LatLon>> clusterByProximity(List<LatLon> points, double thresholdDistanceMeters) {
