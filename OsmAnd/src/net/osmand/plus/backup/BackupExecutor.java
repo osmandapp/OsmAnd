@@ -65,7 +65,7 @@ public class BackupExecutor extends ThreadPoolExecutor {
 		updateActiveCommands();
 		if (command.getStatus() == AsyncTask.Status.PENDING) {
 			activeCommands = CollectionUtils.addToList(activeCommands, command);
-			OsmAndTaskManager.executeTask(command, this, null);
+			OsmAndTaskManager.executeTask(command, this, (Object[]) null);
 		}
 	}
 
