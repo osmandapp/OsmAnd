@@ -66,7 +66,6 @@ public class CommonWords {
 		OsmandRegions osmandRegions = null;
 		try {
 			osmandRegions = PlatformUtil.getOsmandRegions();
-			System.out.println(osmandRegions);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
