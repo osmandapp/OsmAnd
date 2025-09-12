@@ -104,6 +104,10 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		if(fileName == null) {
+			dismiss();
+			return;
+		}
 		if (savedInstanceState == null) {
 			collectTracks();
 		} else {

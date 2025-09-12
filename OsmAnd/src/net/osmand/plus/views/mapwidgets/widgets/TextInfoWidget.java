@@ -121,7 +121,9 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 
 	public void setContentTitle(String text) {
 		contentTitle = text;
-		setContentDescription(combine(textView.getText(), smallTextView.getText()));
+		if (textView != null && smallTextView != null) {
+			setContentDescription(combine(textView.getText(), smallTextView.getText()));
+		}
 	}
 
 	public void setText(String text, String subtext) {

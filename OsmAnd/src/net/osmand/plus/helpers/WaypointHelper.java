@@ -30,6 +30,7 @@ import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -233,7 +234,8 @@ public class WaypointHelper {
 	}
 
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
-		Location lastProjection = app.getRoutingHelper().getLastProjection();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		Location lastProjection = routingHelper == null ? null : routingHelper.getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
 		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, lastProjection, delta);
