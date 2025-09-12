@@ -307,7 +307,7 @@ class GpxFile : GpxExtensions {
 			analysis.setGpxParameters(parameters)
 		}
 
-		analysis.hasElevationMetricsInTags = parseElevationMetricsTags(analysis)
+		analysis.hasElevationMetricsInGpx = parseElevationMetricsTags(analysis)
 
 		val segments = getSplitSegments(analysis, fromDistance, toDistance)
 		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, *segments.toTypedArray())

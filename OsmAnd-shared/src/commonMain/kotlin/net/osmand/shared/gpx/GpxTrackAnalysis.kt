@@ -56,7 +56,7 @@ class GpxTrackAnalysis {
 	var maxDistanceBetweenPoints = 0.0F
 
 	var hasSpeedInTrack = false
-	var hasElevationMetricsInTags = false
+	var hasElevationMetricsInGpx = false
 
 	fun getGpxParameter(parameter: GpxParameter): Any? {
 		return parameters[parameter] ?: parameter.defaultValue
@@ -256,7 +256,7 @@ class GpxTrackAnalysis {
 	}
 
 	fun hasElevationMetrics(): Boolean {
-		return hasElevationMetricsInTags || hasElevationData()
+		return hasElevationMetricsInGpx || hasElevationData()
 	}
 
 	fun hasData(tag: String): Boolean {
