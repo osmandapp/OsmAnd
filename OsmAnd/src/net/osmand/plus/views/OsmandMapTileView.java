@@ -2344,9 +2344,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (deltaZoom != 0 || relAngle != 0) {
 				if (mapRenderer != null && isPinchZoomMagnificationEnabled && relativeToStart > 1.0) {
-					RotatedTileBox calc = initialViewport.copy();
-					float calcRotate = calc.getRotate() + relAngle;
-
 					int multiTouchCenterX;
 					int multiTouchCenterY;
 					if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
@@ -2357,10 +2354,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						multiTouchCenterY = (int) initialMultiTouchCenterPoint.y;
 					}
 
-					mapRenderer.setViewportScale(relativeToStart, false);
-					mapRenderer.setViewportShift(multiTouchCenterX, view.getHeight() - multiTouchCenterY, false);
-					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
-					refreshMap();
+					PointI multiTouchLocation = new PointI();
+					if (mapRenderer.getLocationFromScreenPoint(new PointI(multiTouchCenterX, multiTouchCenterY), multiTouchLocation)) {
+						PointI target31 = mapRenderer.getTarget();
+
+						int initialLocationX = MapUtils.get31TileNumberX(initialCenterLatLon.getLongitude());
+						int initialLocationY = MapUtils.get31TileNumberY(initialCenterLatLon.getLatitude());
+
+						int targetX = target31.getX() - (multiTouchLocation.getX() - initialLocationX);
+						int targetY = target31.getY() - (multiTouchLocation.getY() - initialLocationY);
+
+						float calcRotate = initialViewport.getRotate() + relAngle;
+
+						mapRenderer.setTarget(new PointI(targetX, targetY));
+						mapRenderer.setViewportScale(relativeToStart, false);
+						mapRenderer.setViewportShift(multiTouchCenterX, view.getHeight() - multiTouchCenterY, false);
+						rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
+						refreshMap();
+					}
 				} else {
 					changeZoomPosition((float) deltaZoom, relAngle);
 				}
