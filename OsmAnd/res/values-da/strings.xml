@@ -134,7 +134,7 @@
 \nSolnedgang: %2$s</string>
     <string name="day_night_info">Dag/nat information</string>
     <string name="map_widget_vector_attributes">Gengivelsesegenskaber</string>
-    <string name="map_widget_renderer">Kortstilart</string>
+    <string name="map_widget_renderer">Kortstil</string>
     <string name="layer_map_appearance">Konfigurer skærm</string>
     <string name="show_lanes">Vognbaner</string>
     <string name="avoid_unpaved">Ingen ikke-asfalterede veje</string>
@@ -2046,7 +2046,7 @@
     <string name="configure_screen_quick_action">Genvej</string>
     <string name="quick_action_item_action">Genvej %d</string>
     <string name="quick_action_item_screen">Skærm %d</string>
-    <string name="quick_action_map_style_switch">Korttypografien er ændret til \"%s\".</string>
+    <string name="quick_action_map_style_switch">Kortstil ændret til \"%s\".</string>
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
     <string name="quick_action_navigation_voice_off">Aktiver talevejledning</string>
     <string name="quick_action_navigation_voice_on">Deaktiver talevejledning</string>
@@ -2084,9 +2084,9 @@
     <string name="quick_action_gpx_category_descr">Vælg en valgfri kategori.</string>
     <string name="quick_action_poi_list">IP-liste</string>
     <string name="quick_action_sh_poi_descr">Tilføj en eller flere IP-kategorier der skal vises på kortet.</string>
-    <string name="quick_action_map_style_action">Tilføj en kortstilart</string>
+    <string name="quick_action_map_style_action">Tilføj en kortstil</string>
     <string name="quick_action_empty_param_error">Udfyld alle parametre</string>
-    <string name="quick_action_map_styles">Kortstilarter</string>
+    <string name="quick_action_map_styles">Kortstile</string>
     <string name="quick_action_map_overlay_title">Kortoverlejringer</string>
     <string name="quick_action_map_overlay_action">Tilføj overlejring</string>
     <string name="quick_action_map_underlay_title">Kortunderlejring</string>
@@ -3707,7 +3707,7 @@
     <string name="update_all_maps_added">Opdatér alle kort, der er tilføjet %1$s\?</string>
     <string name="shared_string_feet">fod</string>
     <string name="shared_string_itinerary">Rejseplan</string>
-    <string name="route_line_use_map_style_width">Brug standardbredde for kortformat (%1$s).</string>
+    <string name="route_line_use_map_style_width">Brug standardbredde for kortstil (%1$s).</string>
     <string name="route_line_use_map_style_color">Brug standardfarve for kortstil (%1$s).</string>
     <string name="poi_routes">Ruter</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Undgå miljøzoner</string>
@@ -4617,7 +4617,7 @@
     <string name="weather_prefs_descr">24-timers og 7-dages prognose, der opdateres hver 3. time</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="action_not_supported_with_map_style">Denne handling understøttes ikke af den valgte korttype.</string>
+    <string name="action_not_supported_with_map_style">Denne handling understøttes ikke af den valgte kortstil.</string>
     <string name="shared_string_weather">Vejr</string>
     <string name="weather_plugin_description">Giver
 \n- 24-timers og 7-dages vejrprognose med 5 lag
@@ -4992,7 +4992,7 @@
     <string name="help_article_map_raster_maps_name">Rasterkort (Online / Offline)</string>
     <string name="help_article_map_tracks_on_map_name">Spor og ruter</string>
     <string name="help_article_map_track_context_menu_name">Kontekstmenu for spor</string>
-    <string name="help_article_map_vector_maps_name">Vektorkort (kortstilarter)</string>
+    <string name="help_article_map_vector_maps_name">Vektorkort (kortstile)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_guidance_name">Navigationsvejledning</string>
