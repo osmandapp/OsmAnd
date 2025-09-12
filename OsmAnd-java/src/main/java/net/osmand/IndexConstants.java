@@ -107,6 +107,7 @@ public class IndexConstants {
 	public static final String CLR_PALETTE_DIR = "color-palette/";
 	public static final String WEATHER_FORECAST_DIR = "weather_forecast/";
 	public static final String MODEL_3D_DIR = "models/";
+	public static final String OPENGL_SHADERS_CACHE_DIR = "opengl_shaders_cache/";
 
 	public static final String VOICE_PROVIDER_SUFFIX = "-tts";
 	public static final String MODEL_NAME_PREFIX = "model_";

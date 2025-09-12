@@ -126,13 +126,13 @@ public class QuickSearchListItem {
 		if (searchResult.object instanceof Amenity amenity) {
 			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
 			if (amenity.isRouteTrack()) {
-				String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
-				if (distance != null) {
+				String metrics = AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app);
+				if (metrics != null) {
 					if (alternateName == null) {
-						alternateName = distance;
+						alternateName = metrics;
 					} else {
 						alternateName = app.
-								getString(R.string.ltr_or_rtl_combine_via_bold_point, distance, alternateName);
+								getString(R.string.ltr_or_rtl_combine_via_bold_point, metrics, alternateName);
 					}
 				}
 			}

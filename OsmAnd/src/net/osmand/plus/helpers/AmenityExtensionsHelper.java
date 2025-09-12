@@ -7,8 +7,6 @@ import static net.osmand.data.Amenity.WIKIPEDIA;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -20,12 +18,14 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.search.AmenitySearcher;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -102,8 +102,35 @@ public class AmenityExtensionsHelper {
 	}
 
 	@Nullable
-	public static String getAmenityDistanceFormatted(@NonNull Amenity amenity,
-			@NonNull OsmandApplication app) {
+	public static String getAmenityMetricsFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+		String distance = getAmenityDistanceFormatted(amenity, app);
+		String uphill = getAmenityTagMetersFormatted(amenity, app, TravelGpx.DIFF_ELEVATION_UP);
+		String downhill = getAmenityTagMetersFormatted(amenity, app, TravelGpx.DIFF_ELEVATION_DOWN);
+		List<String> metrics = new ArrayList<>();
+		if (distance != null) {
+			metrics.add(distance);
+		}
+		if (uphill != null) {
+			metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);
+		}
+		if (downhill != null) {
+			metrics.add(TrkSegment.SegmentSlopeType.DOWNHILL.getSymbol() + downhill);
+		}
+		return metrics.isEmpty() ? null : String.join(" ", metrics);
+	}
+
+	@Nullable
+	private static String getAmenityTagMetersFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app,
+	                                                   @NonNull String tag) {
+		float meters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(tag), 0);
+		if (meters > 0) {
+			return OsmAndFormatter.getFormattedDistance(meters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		}
+		return null;
+	}
+
+	@Nullable
+	private static String getAmenityDistanceFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
 		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
 		float km = Algorithms.parseFloatSilently(distanceTag, 0);
 

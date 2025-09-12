@@ -3,15 +3,12 @@ package net.osmand.plus.quickaction;
 import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
 
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -20,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -42,8 +38,8 @@ import java.util.List;
  * Created by rosty on 12/27/16.
  */
 
-public class CreateEditActionDialog extends BaseFullScreenDialogFragment
-		implements CallbackWithObject<Object>, OnConfirmButtonClickListener, IAskDismissDialog {
+public class CreateEditActionDialog extends BaseFullScreenDialogFragment implements CallbackWithObject<Object>,
+		OnConfirmButtonClickListener, IAskDismissDialog {
 
 	public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
@@ -72,30 +68,10 @@ public class CreateEditActionDialog extends BaseFullScreenDialogFragment
 		}
 	}
 
-	@Override
-	protected int getDialogStyle() {
-		return DialogFragment.STYLE_NORMAL;
-	}
-
-	@Override
-	protected int getThemeId() {
-		return nightMode ? R.style.Dialog90Dark : R.style.Dialog90Light;
-	}
-
-	@Override
-	@NonNull
-	public Dialog createDialog(Bundle savedInstanceState) {
-		Dialog dialog = super.createDialog(savedInstanceState);
-		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		return dialog;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent,
-	                         @Nullable Bundle savedInstanceState) {
+			@Nullable Bundle savedInstanceState) {
 		View view = inflate(R.layout.quick_action_create_edit_dialog, parent, false);
 		setupToolbar(view);
 		setupHeader(view, savedInstanceState);
