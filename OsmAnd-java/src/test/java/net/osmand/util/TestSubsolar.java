@@ -37,6 +37,8 @@ public class TestSubsolar {
 	static class Stats {
 		int tests = 0, duplicate = 0, fail = 0;
 		Map<Double, Integer> errorDistr = new TreeMap<Double, Integer>();
+		int maxClusterSize, iterations, failed, found;
+		public float calcTime;
 		
 		void calculateError(LatLon l, LatLon ch) {
 			double rndErr = roundError(MapUtils.getDistance(l, ch)) / 1000.0;
@@ -72,62 +74,127 @@ public class TestSubsolar {
 
 	// examples
 	// https://github.com/cosinekitty/astronomy/blob/master/demo/java/src/main/java/io/github/cosinekitty/astronomy/demo/RiseSetCulm.java
+	
+	private static boolean ESTIMATE_ERR_SUN_ALT_AZM = false;
+	private static boolean ESTIMATE_ERR_BY_SUN_ALT_AZM_MULT_MIN = false;
+	private static boolean SINGLE_APPROXIMATE_BY_ALT_AZM = false;
+	private static boolean APPROXIMATE_BY_BODIES_ALTITUDES = false;
+	private static boolean APPROXIMATE_JUST_BY_ALTITUDES = true;
 	public static void main(String[] args) throws InterruptedException {
-//		Stats s = new Stats();
-//		double lon = 0;
-//		MIN_ALTITUDE = 20;
-//		ERR = 0.00;
-//		for (int m = 1; m <= 12; m++) {
-//			for (double lat = -60; lat <= 60; lat += 5) {
-//				for (int h = 0; h < 24; h++) {
-//					runSingleTest(Body.Sun, lat, lon, s, m, h);
-//				}
-//			}
-//		}
-//		System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d\n ", s.tests, s.duplicate, s.fail);
-//		System.out.println(s.errorDistr);
 		
-//		MIN_ALTITUDE = 20;
-//		ERR = 1;
-//		for (int minInc = 5; minInc <= 60; minInc += 5) {
-//			System.out.println("MIN INC - " + minInc);
-//			runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
-//		}
+		if (ESTIMATE_ERR_SUN_ALT_AZM) {
+			double lon = 0;
+			MAX_ITERATIONS = 1000;
+			MIN_ALTITUDE = 20;
+			Stats s = new Stats();
+			ERR = 0.01;
+			for (int m = 1; m <= 12; m++) {
+				for (double lat = -60; lat <= 60; lat += 5) {
+					for (int h = 0; h < 24; h++) {
+						runSingleTest(Body.Sun, lat, lon, s, m, h);
+					}
+				}
+			}
+			System.out.printf("-------\n\nTESTS %d, duplicate %d, failed %d\n ", s.tests, s.duplicate, s.fail);
+			System.out.println(s.errorDistr);
+		}
+
+		if (ESTIMATE_ERR_BY_SUN_ALT_AZM_MULT_MIN) {
+			Stats s = new Stats();
+			double lon = 0;
+			MIN_ALTITUDE = 20;
+			ERR = 0.01;
+			for (int minInc = 5; minInc <= 60; minInc += 5) {
+				System.out.println("MIN INC - " + minInc);
+				runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
+			}
+		}
+		if (SINGLE_APPROXIMATE_BY_ALT_AZM) {
+			// 52.3676, 4.9041
+			LatLon с1 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168, 42);
+			LatLon с2 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168.5, 42.5);
+			LatLon с3 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 167.5, 41.5);
+			System.out.println(MapUtils.getDistance(с1, с2) + " " + MapUtils.getDistance(с1, с3));
+			System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T13:30:00Z", 216, 37));
+			System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T15:54:00Z", 252, 20));
+			System.out.println(calcCoordinatesOneShot(Body.Moon, "2025-09-09T03:30:00Z", 230, 29));
+		}
 		
-		// 52.3676, 4.9041
-//		LatLon с1 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168, 42);
-//		LatLon с2 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 168.5, 42.5);
-//		LatLon с3 = calcCoordinatesOneShot(Body.Sun, "2025-09-09T11:00:00Z", 167.5, 41.5);
-//		System.out.println(MapUtils.getDistance(с1, с2) + " " + MapUtils.getDistance(с1, с3));
-//		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T13:30:00Z", 216, 37));
-//		System.out.println(calcCoordinatesOneShot(Body.Sun, "2025-09-09T15:54:00Z", 252, 20));
-//		System.out.println(calcCoordinatesOneShot(Body.Moon, "2025-09-09T03:30:00Z", 230, 29));
-//		
+
+		if (APPROXIMATE_BY_BODIES_ALTITUDES) {
+			Map<String, Star> mapStars = initStars();
+			Stats s = new Stats();
+			String time = "2025-09-11T08:00:00Z";
+			LatLon testPnt = new LatLon(52.367, 4.904);
+			
+			
+			String[] bodiesStr = { "Sun", "Moon", "capella", "aldebaran", "betelgeuse" };
+			double[] alts = { 24.65, 17.91, 65.71, 38.92, 40.04 }; // timeanddate
+//			double[] alts = { 24.5, 17.8, 65.8, 38.7, 40 }; // rough errors
+			Body[] bodies = initBodies(mapStars, bodiesStr);
+			LatLon res = calcPositionBodies(s, bodies, alts, time, testPnt);
+			check(testPnt, res,
+					String.format("- %d cluster size from %d points (%d failed, %d iterations) - %.3f sec\n %s",
+							s.maxClusterSize, s.found, s.failed, s.iterations, s.calcTime, res));
+			// compare altitudes
+			Time timeT = Time.fromMillisecondsSince1970(Instant.parse(time).getEpochSecond() * 1000);
+			for (int i = 0; i < bodies.length; i++) {
+				Topocentric alt = calcAltitude(bodies[i], timeT, testPnt, false);
+				System.out.printf("Body %s, err correction %.3f\n", bodies[i], alt.getAltitude() - alts[i]);
+			}
+		}
 		
-		
-		String[] bodiesStr = {"Sun", "Moon", "capella", "aldebaran", "betelgeuse"};
-		double[] alts = {24.65, 17.91, 65.71, 38.92, 40.04}; // timeanddate
-		String time = "2025-09-11T08:00:00Z";
-		LatLon testPnt = new LatLon(52.367, 4.904);
-		
-		Body[] bodies = initBodies(bodiesStr);
-		calcPositionBodies(bodies, alts, time, testPnt);
-		// compare altitudes
-		Time timeT = Time.fromMillisecondsSince1970(Instant.parse(time).getEpochSecond() * 1000);
-		for (int i = 0; i < bodies.length; i++) {
-			Topocentric alt = calcAltitude(bodies[i], timeT, testPnt, false);
-			System.out.printf("Body %s, correction %.3f\n", bodies[i], alt.getAltitude() - alts[i]);
+		if (APPROXIMATE_JUST_BY_ALTITUDES) {
+			Map<String, Star> mapStars = initStars();
+			List<Star> stars = new ArrayList<Star>(mapStars.values());
+			Stats s = new Stats();
+			String time = "2025-09-11T08:00:00Z";
+			LatLon testPnt = new LatLon(52.367, 4.904);
+			
+			double[] alts = { 17.91, 65.71, 40.04, 38.92 }; // timeanddate
+			for(int i = 0; i < stars.size(); i++ ) {
+				System.out.println("--- " + stars.get(i).key);
+				for (int j = 0; j < stars.size(); j++) {
+					if (j == i) {
+						continue;
+					}
+					String[] bodiesStr = { "Moon", stars.get(i).key, stars.get(j).key};
+					LatLon res = calcPositionBodies(s, initBodies(mapStars, bodiesStr), alts, time, testPnt);
+					if (res != null) {
+						System.out.println(stars.get(i).key + " " + stars.get(j).key +".... ");
+						for (int k = 0; k < stars.size(); k++) {
+							if (j == k || i == k) {
+								continue;
+							}
+							String[] bodiesStr2 = { "Moon", stars.get(i).key, stars.get(j).key, stars.get(k).key};
+							LatLon detailedRes = calcPositionBodies(s, initBodies(mapStars, bodiesStr2), alts, time, testPnt);
+							if (detailedRes != null) {
+								System.out.println(
+										stars.get(i).key + " " + stars.get(j).key + " " + stars.get(k).key + "!!");
+								check(testPnt, res, String.format(
+										"- %d cluster size from %d points (%d failed, %d iterations) - %.3f sec",
+										s.maxClusterSize, s.found, s.failed, s.iterations, s.calcTime));
+							}
+						}
+						
+					}
+				}
+			}
 		}
 		
 	}
-
-	private static Body[] initBodies(String[] bodiesStr) {
+	
+	private static Map<String, Star> initStars() {
 		Map<String, Star> mapStars = new Gson().fromJson(new InputStreamReader(TestSubsolar.class.getResourceAsStream("/stars/stars.json")),
 				new TypeToken<Map<String, Star>>(){}.getType());
 		
 		for(String key : mapStars.keySet()) {
 			mapStars.get(key).key = key;
 		}
+		return mapStars;
+	}
+
+	private static Body[] initBodies(Map<String, Star> mapStars, String[] bodiesStr) {
 		Body[] bodies = new Body[bodiesStr.length];
 		int starInd = 0;
 		Body[] starConstants = {Body.Star1, Body.Star2, Body.Star3, Body.Star4, Body.Star5 };
@@ -136,7 +203,7 @@ public class TestSubsolar {
 			if(star != null) {
 				bodies[i] = starConstants[starInd++];
 				Astronomy.defineStar(bodies[i], star.ra, star.dec, 5);
-				System.out.println("Define " + star.name + " " + starInd + " "  + star.ra + ", " + star.dec);
+//				System.out.println("Define " + star.name + " " + starInd + " "  + star.ra + ", " + star.dec);
 			} else {
 				bodies[i] = Body.valueOf(bodiesStr[i]);
 				if (bodies[i] == null) {
@@ -174,30 +241,30 @@ public class TestSubsolar {
         return clusters;
     }
 
-	private static LatLon calcPositionBodies(Body[] bodies, double[] alts, String time, LatLon check) {
+	private static LatLon calcPositionBodies(Stats s, Body[] bodies, double[] alts, String time, LatLon check) {
 		long nt = System.nanoTime();
 		double MIN_THRESHOLD = 4_000;
 		double MAX_THRESHOLD = 500_000; 
 		int MIN_SIZE_CLUSTER = 3;
 		double threshold = MIN_THRESHOLD;
 		List<LatLon> l = new ArrayList<LatLon>();
-		int found = 0;
-		int failed = 0;
+		s.found = 0;
+		s.failed = 0;
 		for (int i = 0; i < bodies.length; i++) {
 			for (int j = i + 1; j < bodies.length; j++) {
-				LatLon a1 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], true);
+				LatLon a1 = calcCoordinates2Bodies(s, time, bodies[i], alts[i], bodies[j], alts[j], true);
 				if (a1 != null) {
-					found++;
+					s.found++;
 					l.add(a1);
 				} else {
-					failed++;
+					s.failed++;
 				}
-				LatLon a2 = calcCoordinates2Bodies(time, bodies[i], alts[i], bodies[j], alts[j], false);
+				LatLon a2 = calcCoordinates2Bodies(s, time, bodies[i], alts[i], bodies[j], alts[j], false);
 				if (a2 != null) {
-					found++;
+					s.found++;
 					l.add(a2);
 				} else {
-					failed++;
+					s.failed++;
 				}
 			}
 		}
@@ -214,18 +281,17 @@ public class TestSubsolar {
 			}
 			
 		}
-		System.out.println("Calculation " + (System.nanoTime() - nt) / 1e9f + " seconds");
+		s.calcTime += (System.nanoTime() - nt) / 1e9f;
 		if (maxSizeCluster == null) {
+			s.maxClusterSize = 0;
 			return null;
 		}
-		LatLon res = midPoint(maxSizeCluster.toArray(new LatLon[0]));
-		check(check, res, String.format("- %d cluster size from %d points (%d failed) %s", 
-				maxSizeCluster.size(), found, failed, res));
-		return res;
+		s.maxClusterSize = maxSizeCluster.size();
+		return midPoint(maxSizeCluster.toArray(new LatLon[0]));
 	}
 
 	private static void check(LatLon check, LatLon l, Object msg) {
-		System.out.printf("Error %.2f km %s \n", MapUtils.getDistance(check, l) / 1000.0, msg);
+		System.out.printf("Error %.2f km %s \n", l == null ?  Float.POSITIVE_INFINITY : MapUtils.getDistance(check, l) / 1000.0, msg);
 	}
 
 	private static LatLon midPoint(LatLon... ls) {
@@ -238,7 +304,7 @@ public class TestSubsolar {
 		return new LatLon(lat, lon);
 	}
 
-	protected static LatLon calcCoordinates2Bodies(String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2, boolean dir) {
+	protected static LatLon calcCoordinates2Bodies(Stats s, String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2, boolean dir) {
 		MAX_ITERATIONS = 100000;
 		double ALT_PRECISION = 0.01;
 		double MIN_THRESHOLD = 10000;
@@ -248,7 +314,7 @@ public class TestSubsolar {
 		
 		
 		// initial step
-		LatLon closest1 = null, closest2 = null;
+		LatLon closest1 = null;
 		double minDist = -1;
 		double closestDelta1 = 0, closestDelta2 = 0;
 		float azm = projPoint1.toLocation().bearingTo(projPoint2.toLocation());
@@ -310,14 +376,14 @@ public class TestSubsolar {
 						closestDelta2 = delta2;
 						minDist = dist;
 						closest1 = pnt1;
-						closest2 = pnt2;
 					}
 				}
 			}
 			
 		}
-		System.out.printf("Dist %.2f (iter %d), delta - %.3f %.3f, points - %s %s\n", minDist / 1000, iter,
-				closestDelta1, closestDelta2, closest1, closest2);
+		s.iterations += iter;
+//		System.out.printf("Dist %.2f (iter %d), delta - %.3f %.3f, points - %s %s\n", minDist / 1000, iter,
+//				closestDelta1, closestDelta2, closest1, closest2);
 		if (minDist > MIN_THRESHOLD) {
 			return null;
 		}
