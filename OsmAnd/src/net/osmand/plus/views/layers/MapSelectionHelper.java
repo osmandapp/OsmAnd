@@ -373,7 +373,7 @@ public class MapSelectionHelper {
 									LatLon latLon = result.getObjectLatLon();
 									if (tags.containsKey(TAG_POI_LAT_LON)) {
 										LatLon l = parsePoiLatLon(tags.get(TAG_POI_LAT_LON));
-										latLon = l == null ? latLon : l;
+										latLon = l == null ? latLon : l; // TODO apply to renderedObject.setLabelLatLon
 										tags.remove(TAG_POI_LAT_LON);
 									}
 
