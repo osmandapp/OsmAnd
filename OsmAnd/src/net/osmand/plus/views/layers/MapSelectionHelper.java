@@ -69,8 +69,6 @@ public class MapSelectionHelper {
 	private static final Log log = PlatformUtil.getLog(MapSelectionHelper.class);
 	private static final int TILE_SIZE = 256;
 
-	private static final String TAG_POI_LAT_LON = "osmand_poi_lat_lon";
-
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final OsmandMapTileView view;
@@ -370,13 +368,6 @@ public class MapSelectionHelper {
 							if (allowAmenityObjects) {
 								IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 								if (onPathMapSymbol == null) {
-									LatLon latLon = result.getObjectLatLon();
-									if (tags.containsKey(TAG_POI_LAT_LON)) {
-										LatLon l = parsePoiLatLon(tags.get(TAG_POI_LAT_LON));
-										latLon = l == null ? latLon : l; // TODO apply to renderedObject.setLabelLatLon
-										tags.remove(TAG_POI_LAT_LON);
-									}
-
 									boolean allowRenderedObjects = !isOsmRoute && !isClickableWay
 											&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
 
