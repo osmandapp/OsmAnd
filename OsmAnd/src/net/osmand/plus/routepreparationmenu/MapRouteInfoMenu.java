@@ -109,7 +109,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
-import net.osmand.router.TransportRouteResult;
+import net.osmand.router.transport.TransportRouteResult;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;

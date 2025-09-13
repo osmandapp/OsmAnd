@@ -1,4 +1,4 @@
-package net.osmand.router;
+package net.osmand.router.transport;
 
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
@@ -9,20 +9,20 @@ import java.util.Locale;
 
 public class TransportRouteResult {
 
-	List<TransportRoutePlanner.TransportRouteResultSegment> segments  = new ArrayList<TransportRoutePlanner.TransportRouteResultSegment>(4);
+	List<TransportRouteResultSegment> segments  = new ArrayList<TransportRouteResultSegment>(4);
 	double finishWalkDist;
 	double routeTime;
-	private final TransportRoutingConfiguration cfg;
+	private final ITransportRoutingConfiguration cfg;
 
-	public TransportRouteResult(TransportRoutingContext ctx) {
-		cfg = ctx.cfg;
+	public TransportRouteResult(ITransportRoutingContext ctx) {
+		cfg = ctx.getCfg();
 	}
 
 	public TransportRouteResult(TransportRoutingConfiguration cfg) {
 		this.cfg = cfg;
 	}
 
-	public List<TransportRoutePlanner.TransportRouteResultSegment> getSegments() {
+	public List<TransportRouteResultSegment> getSegments() {
 		return segments;
 	}
 
@@ -34,13 +34,13 @@ public class TransportRouteResult {
 		this.routeTime = routeTime;
 	}
 
-	public void addSegment(TransportRoutePlanner.TransportRouteResultSegment seg) {
+	public void addSegment(TransportRouteResultSegment seg) {
 		segments.add(seg);
 	}
 
 	public double getWalkDist() {
 		double d = finishWalkDist;
-		for (TransportRoutePlanner.TransportRouteResultSegment s : segments) {
+		for (TransportRouteResultSegment s : segments) {
 			d += s.walkDist;
 		}
 		return d;
@@ -51,7 +51,7 @@ public class TransportRouteResult {
 	}
 
 	public double getWalkSpeed() {
-		return  cfg.walkSpeed;
+		return  cfg.getWalkSpeed();
 	}
 
 	public double getRouteTime() {
@@ -60,14 +60,14 @@ public class TransportRouteResult {
 
 	public int getStops() {
 		int stops = 0;
-		for(TransportRoutePlanner.TransportRouteResultSegment s : segments) {
+		for(TransportRouteResultSegment s : segments) {
 			stops += (s.end - s.start);
 		}
 		return stops;
 	}
 
 	public boolean isRouteStop(TransportStop stop) {
-		for(TransportRoutePlanner.TransportRouteResultSegment s : segments) {
+		for(TransportRouteResultSegment s : segments) {
 			if (s.getTravelStops().contains(stop)) {
 				return true;
 			}
@@ -75,8 +75,8 @@ public class TransportRouteResult {
 		return false;
 	}
 
-	public TransportRoutePlanner.TransportRouteResultSegment getRouteStopSegment(TransportStop stop) {
-		for(TransportRoutePlanner.TransportRouteResultSegment s : segments) {
+	public TransportRouteResultSegment getRouteStopSegment(TransportStop stop) {
+		for(TransportRouteResultSegment s : segments) {
 			if (s.getTravelStops().contains(stop)) {
 				return s;
 			}
@@ -86,7 +86,7 @@ public class TransportRouteResult {
 
 	public double getTravelDist() {
 		double d = 0;
-		for (TransportRoutePlanner.TransportRouteResultSegment s : segments) {
+		for (TransportRouteResultSegment s : segments) {
 			d += s.getTravelDist();
 		}
 		return d;
@@ -94,8 +94,8 @@ public class TransportRouteResult {
 
 	public double getTravelTime() {
 		double t = 0;
-		for (TransportRoutePlanner.TransportRouteResultSegment s : segments) {
-			if (cfg.useSchedule) {
+		for (TransportRouteResultSegment s : segments) {
+			if (cfg.getUseSchedule()) {
 				TransportSchedule sts = s.route.getSchedule();
 				for (int k = s.start; k < s.end; k++) {
 					t += sts.getAvgStopIntervals()[k] * 10;
@@ -109,7 +109,7 @@ public class TransportRouteResult {
 	}
 
 	public double getWalkTime() {
-		return getWalkDist() / cfg.walkSpeed;
+		return getWalkDist() / cfg.getWalkSpeed();
 	}
 
 	public double getChangeTime() {
@@ -119,6 +119,8 @@ public class TransportRouteResult {
 	public double getBoardingTime() {
 		return cfg.getBoardingTime();
 	}
+
+
 
 	public int getChanges() {
 		return segments.size() - 1;
@@ -131,7 +133,7 @@ public class TransportRouteResult {
 				getStops(), getChanges(), routeTime / 60, getWalkDist(), getWalkTime() / 60.0,
 				getTravelDist(), getTravelTime() / 60.0));
 		for(int i = 0; i < segments.size(); i++) {
-			TransportRoutePlanner.TransportRouteResultSegment s = segments.get(i);
+			TransportRouteResultSegment s = segments.get(i);
 			String time = "";
 			String arriveTime = "";
 			if(s.depTime != -1) {

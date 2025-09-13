@@ -27,11 +27,11 @@ import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
-import net.osmand.router.TransportRoutePlanner;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
-import net.osmand.router.TransportRouteResult;
-import net.osmand.router.TransportRoutingConfiguration;
-import net.osmand.router.TransportRoutingContext;
+import net.osmand.router.transport.TransportRoutePlanner;
+import net.osmand.router.transport.TransportRouteResultSegment;
+import net.osmand.router.transport.TransportRouteResult;
+import net.osmand.router.transport.TransportRoutingConfiguration;
+import net.osmand.router.transport.TransportRoutingContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

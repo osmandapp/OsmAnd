@@ -75,7 +75,7 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.router.TransportRouteResult;
+import net.osmand.router.transport.TransportRouteResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 

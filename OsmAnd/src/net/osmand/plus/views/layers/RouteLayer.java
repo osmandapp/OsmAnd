@@ -39,7 +39,7 @@ import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
-import net.osmand.router.TransportRouteResult;
+import net.osmand.router.transport.TransportRouteResult;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
