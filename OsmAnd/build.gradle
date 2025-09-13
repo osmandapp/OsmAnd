@@ -204,11 +204,11 @@ afterEvaluate {
 	android.applicationVariants.configureEach { variant ->
 		if (variant.name.contains('Opengldebug')) {
 			variant.javaCompileProvider.configure {
-				dependsOn collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore
+				dependsOn collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI
 			}
 		} else {
 			variant.javaCompileProvider.configure {
-				dependsOn collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore
+				dependsOn collectExternalResources, buildOsmAndCore
 			}
 		}
 	}

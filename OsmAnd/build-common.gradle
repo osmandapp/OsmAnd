@@ -52,9 +52,6 @@ android {
 			res.srcDirs = ["test/res"]
 			assets.srcDirs = ["test/assets"]
 		}
-		legacy {
-			jniLibs.srcDirs = ["libc++"]
-		}
 	}
 
 	flavorDimensions "coreversion", "abi"
@@ -332,32 +329,6 @@ tasks.register('buildOsmAndCore', Exec) {
 		commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath()
 	} else {
 		commandLine "cmd", "/c", "echo", "Not supported"
-	}
-}
-
-tasks.register('cleanupDuplicatesInCore') {
-	dependsOn(buildOsmAndCore)
-
-	// Capture paths at configuration time using Gradle's layout API
-	def targetDirs = [
-			'armeabi-v7a': [source: layout.projectDirectory.file("libs/armeabi-v7a/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/armeabi-v7a/libc++_shared.so")],
-			'arm64-v8a': [source: layout.projectDirectory.file("libs/arm64-v8a/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/arm64-v8a/libc++_shared.so")],
-			'x86': [source: layout.projectDirectory.file("libs/x86/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/x86/libc++_shared.so")],
-			'x86_64': [source: layout.projectDirectory.file("libs/x86_64/libc++_shared.so"), dest: layout.projectDirectory.file("libc++/x86_64/libc++_shared.so")]
-	]
-
-	doLast {
-		targetDirs.each { arch, paths ->
-			def destFile = paths.dest.asFile
-			def destDir = destFile.getParentFile()
-
-			destDir.mkdirs()
-			if (paths.source.asFile.exists()) {
-				if (!paths.source.asFile.renameTo(destFile)) {
-					logger.error("Failed to move file from ${paths.source.asFile} to ${destFile}.")
-				}
-			}
-		}
 	}
 }
 
