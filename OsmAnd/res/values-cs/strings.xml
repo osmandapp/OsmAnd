@@ -5808,4 +5808,11 @@
     <string name="manage_storage_delete_data_dialog_summary">Opravdu chcete odstranit %1$s z OsmAnd Cloud?\n\nMůžete je obnovit z koše do 30 dnů.</string>
     <string name="manage_storage">Správa úložiště</string>
     <string name="copy_as_new_folder">Kopírovat jako novou složku</string>
+    <string name="imperial_gallon">imperiální galon</string>
+    <string name="us_gallon">americký galon</string>
+    <string name="kilometers">Kilometry</string>
+    <string name="add_to_a_folder">Přidat do složky</string>
+    <string name="add_to_favorites">Přidat k oblíbeným</string>
+    <string name="max_weight_at_full_load_description">Uveďte maximální hmotnost vašeho vozidla při plném naložení, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
+    <string name="max_axle_load_description">Uveďte maximální nosnost náprav svého vozidla, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
 </resources>
