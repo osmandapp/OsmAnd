@@ -36,12 +36,15 @@ class HeaderViewHolder extends ViewHolder {
 		String size = String.valueOf(tracksCount);
 		String description = app.getString(R.string.import_tracks_descr, fileName, size);
 
-		int index = description.indexOf(fileName);
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-
 		SpannableString spannable = new SpannableString(description);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + fileName.length(), 0);
-		spannable.setSpan(new ForegroundColorSpan(activeColor), index, index + fileName.length(), 0);
+		int index;
+		if (fileName != null) {
+			index = description.indexOf(fileName);
+			int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+
+			spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + fileName.length(), 0);
+			spannable.setSpan(new ForegroundColorSpan(activeColor), index, index + fileName.length(), 0);
+		}
 
 		index = description.lastIndexOf(size);
 		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + size.length(), 0);
