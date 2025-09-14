@@ -5767,6 +5767,7 @@
     <string name="kilometers">Kilomètres</string>
     <string name="miles">Milles</string>
     <string name="mpg">MPG</string>
-    <string name="access_pinch_zoom_magnification">Activer le zoom par pincement</string>
-    <string name="access_pinch_zoom_magnification_descr">Les gestes de pincement effectuent une mise à l\'échelle de la fenêtre au lieu de zoomer.</string>
+    <string name="access_pinch_zoom_magnification">Agrandissement par pincement</string>
+    <string name="access_pinch_zoom_magnification_descr">Utilisez la mise à l\'échelle de la fenêtre d\'affichage au lieu de niveaux de zoom discrets pendant les gestes de zoom avant.</string>
+    <string name="accessibility_independent_features">Fonctionnalités indépendantes</string>
 </resources>

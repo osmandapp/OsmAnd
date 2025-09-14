@@ -319,7 +319,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		for (MapButton button : getAllMapButtons()) {
 			button.update();
 		}
-		mapHudLayout.updateButtons();
+		if(mapHudLayout != null) {
+			mapHudLayout.updateButtons();
+		}
 	}
 
 	@Override

@@ -357,7 +357,7 @@ public class ShareMenu extends BaseMenuController {
 			return this;
 		}
 
-		public NativeShareDialogBuilder build(@NonNull OsmandApplication app){
+		public NativeShareDialogBuilder build(@NonNull OsmandApplication app) {
 			Intent sendIntent = new Intent(Intent.ACTION_SEND);
 			sendIntent.setType(type);
 

@@ -1112,7 +1112,7 @@
     <string name="poi_rest_area">停车休息区</string>
     <string name="poi_motorway_junction">高速公路出口</string>
     <string name="poi_aeroway_terminal">机场航站楼</string>
-    <string name="poi_public_transport_stop_position">公共交通停靠位置</string>
+    <string name="poi_public_transport_stop_position">公共交通站点位置</string>
     <string name="poi_garages">车库</string>
     <string name="poi_vehicle_ramp">车辆坡道</string>
     <string name="poi_fuel_coal">燃料：煤</string>

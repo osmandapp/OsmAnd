@@ -5816,6 +5816,7 @@
     <string name="kilometers">Kilométer</string>
     <string name="miles">Mérföld</string>
     <string name="mpg">Mérf./gal</string>
-    <string name="access_pinch_zoom_magnification">Csippentéses nagyítás engedélyezése</string>
-    <string name="access_pinch_zoom_magnification_descr">Csippentő mozdulatoknál a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
+    <string name="access_pinch_zoom_magnification">Csippentéses nagyítás</string>
+    <string name="access_pinch_zoom_magnification_descr">Nagyítás közben a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
+    <string name="accessibility_independent_features">Független funkciók</string>
 </resources>

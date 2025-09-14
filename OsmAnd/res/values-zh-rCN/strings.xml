@@ -1383,7 +1383,7 @@
     <string name="rendering_attr_hideWaterPolygons_description">隐藏水系</string>
     <string name="rendering_attr_hideWaterPolygons_name">水系</string>
     <string name="routing_attr_allow_motorway_name">使用高速公路</string>
-    <string name="routing_attr_allow_motorway_description">允许高速公路。</string>
+    <string name="routing_attr_allow_motorway_description">允许进入高速公路。</string>
     <string name="route_roundabout_short">在 %1$d 出口驶离并继续</string>
     <string name="shared_string_appearance">外观</string>
     <string name="trip_rec_notification_settings">开启快速记录</string>
@@ -2534,7 +2534,7 @@
     <string name="save_poi_value_exceed_length">将“%s”标签的长度缩短为 255 个字符以下。</string>
     <string name="save_poi_value_exceed_length_title">“%s”值的长度</string>
     <string name="public_transport_warning_descr_blog">在我们的博客上了解更多与 OsmAnd 路线计算相关的信息。</string>
-    <string name="public_transport_warning_title">公共交通导航目前处于测试阶段，可能出现错误和信息不准确。</string>
+    <string name="public_transport_warning_title">公共交通导航系统当前处于测试阶段，可能存在错误和不准确。</string>
     <string name="add_intermediate">新增中间目的地</string>
     <string name="route_add_start_point">添加出发地</string>
     <string name="route_descr_select_start_point">选择出发地</string>

@@ -700,17 +700,29 @@ public class GpxUiHelper {
 	}
 
 	public static void shareGpx(@NonNull Context context, @NonNull Activity activity, @NonNull File file) {
+		shareGpx(context, activity, file, null, null);
+	}
+
+	public static void shareGpx(@NonNull Context context, @NonNull Activity activity,
+	                            @NonNull File file, @Nullable String extraText,
+	                            @Nullable String extraSubject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		Uri fileUri = AndroidUtils.getUriForFile(context, file);
 		boolean singleTop = !(activity instanceof MapActivity);
 
-		new NativeShareDialogBuilder()
+		NativeShareDialogBuilder builder = new NativeShareDialogBuilder()
 				.addFileWithSaveAction(file, app, activity, singleTop)
 				.setChooserTitle(app.getString(R.string.shared_string_share))
 				.setExtraStream(fileUri)
 				.setNewTask(context instanceof OsmandApplication)
-				.setType("application/gpx+xml")
-				.build(app);
+				.setType("application/gpx+xml");
+		if (!Algorithms.isEmpty(extraText)) {
+			builder.setExtraText(extraText);
+		}
+		if (!Algorithms.isEmpty(extraSubject)) {
+			builder.setExtraSubject(extraSubject);
+		}
+		builder.build(app);
 	}
 
 	@NonNull

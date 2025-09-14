@@ -112,40 +112,43 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 
 	private void onSuccessfulTtsInit(@NonNull Locale locale, float speechRate) {
 		speechAllowed = true;
-		switch (mTts.isLanguageAvailable(locale)) {
-			case TextToSpeech.LANG_NOT_SUPPORTED:
-				ttsVoiceStatus = locale.getDisplayName() + ": LANG_NOT_SUPPORTED";
-				ttsVoiceUsed = getVoiceUsed();
-				break;
-			case TextToSpeech.LANG_MISSING_DATA:
-				ttsVoiceStatus = locale.getDisplayName() + ": LANG_MISSING_DATA";
-				ttsVoiceUsed = getVoiceUsed();
-				break;
-			case TextToSpeech.LANG_AVAILABLE:
-				ttsVoiceStatus = locale.getDisplayName() + ": LANG_AVAILABLE";
-			case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-				ttsVoiceStatus = "-".equals(ttsVoiceStatus)
-						? locale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE"
-						: ttsVoiceStatus;
-			case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-				try {
-					mTts.setLanguage(locale);
-				} catch (Exception e) {
-					log.error(e);
-					if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
-						mTts.setLanguage(Locale.getDefault());
-					} else {
-						app.showToastMessage("TTS language not available");
+		TextToSpeech mTts = JsTtsCommandPlayer.mTts;
+		if(mTts != null) {
+			switch (mTts.isLanguageAvailable(locale)) {
+				case TextToSpeech.LANG_NOT_SUPPORTED:
+					ttsVoiceStatus = locale.getDisplayName() + ": LANG_NOT_SUPPORTED";
+					ttsVoiceUsed = getVoiceUsed();
+					break;
+				case TextToSpeech.LANG_MISSING_DATA:
+					ttsVoiceStatus = locale.getDisplayName() + ": LANG_MISSING_DATA";
+					ttsVoiceUsed = getVoiceUsed();
+					break;
+				case TextToSpeech.LANG_AVAILABLE:
+					ttsVoiceStatus = locale.getDisplayName() + ": LANG_AVAILABLE";
+				case TextToSpeech.LANG_COUNTRY_AVAILABLE:
+					ttsVoiceStatus = "-".equals(ttsVoiceStatus)
+							? locale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE"
+							: ttsVoiceStatus;
+				case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
+					try {
+						mTts.setLanguage(locale);
+					} catch (Exception e) {
+						log.error(e);
+						if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
+							mTts.setLanguage(Locale.getDefault());
+						} else {
+							app.showToastMessage("TTS language not available");
+						}
 					}
-				}
-				if (speechRate != 1) {
-					mTts.setSpeechRate(speechRate);
-				}
-				ttsVoiceStatus = "-".equals(ttsVoiceStatus)
-						? locale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE"
-						: ttsVoiceStatus;
-				ttsVoiceUsed = getVoiceUsed();
-				break;
+					if (speechRate != 1) {
+						mTts.setSpeechRate(speechRate);
+					}
+					ttsVoiceStatus = "-".equals(ttsVoiceStatus)
+							? locale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE"
+							: ttsVoiceStatus;
+					ttsVoiceUsed = getVoiceUsed();
+					break;
+			}
 		}
 	}
 
