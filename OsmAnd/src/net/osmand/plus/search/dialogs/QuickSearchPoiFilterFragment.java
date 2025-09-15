@@ -263,14 +263,6 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		return view;
 	}
 
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
-	}
-
 	private void updateApplyButton() {
 		boolean hasChanges = !nameFilterText.equals(nameFilterTextOrig) || !selectedPoiAdditionals.equals(selectedPoiAdditionalsOrig);
 		bottomButtonContainer.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
