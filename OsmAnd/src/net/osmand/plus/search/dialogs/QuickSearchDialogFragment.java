@@ -590,6 +590,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
 	private void showFilterOnMap(@Nullable PoiUIFilter filter, @Nullable String title) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {

@@ -5901,7 +5901,7 @@
     <string name="us_gallon">US-Gallone</string>
     <string name="kilometers">Kilometer</string>
     <string name="miles">Meilen</string>
-    <string name="access_pinch_zoom_magnification">Zoom mit zwei Fingern aktivieren</string>
-    <string name="access_pinch_zoom_magnification_descr">Verwenden Sie für Pinch-Gesten die Skalierung des Ansichtsfensters anstelle der separaten Zoomstufen.</string>
+    <string name="access_pinch_zoom_magnification">Zoom mit zwei Fingern</string>
+    <string name="access_pinch_zoom_magnification_descr">Verwenden Sie für Zoom-Gesten die Skalierung des Ansichtsfensters anstelle der separaten Zoomstufen.</string>
     <string name="mpg">MPG</string>
 </resources>

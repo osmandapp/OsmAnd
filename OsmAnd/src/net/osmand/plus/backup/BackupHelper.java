@@ -509,7 +509,7 @@ public class BackupHelper {
 		checkRegistered();
 		try {
 			OsmAndTaskManager.executeTask(new DeleteFilesCommand(this, remoteFiles, byVersion, listener),
-					executor == null ? this.executor : executor, null).get();
+					executor == null ? this.executor : executor, (Object[]) null).get();
 		} catch (ExecutionException | InterruptedException e) {
 			if (listener != null) {
 				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));

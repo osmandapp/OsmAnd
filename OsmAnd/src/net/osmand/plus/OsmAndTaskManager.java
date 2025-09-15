@@ -5,6 +5,7 @@ import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -94,11 +95,11 @@ public class OsmAndTaskManager {
 		
 	}
 
-	public static <P, T extends AsyncTask<P, ?, ?>> T executeTask(@NonNull T task, @NonNull P... params) {
+	public static <P, T extends AsyncTask<P, ?, ?>> T executeTask(@NonNull T task, @Nullable P... params) {
 		return executeTask(task, THREAD_POOL_EXECUTOR, params);
 	}
 
-	public static <P, T extends AsyncTask<P, ?, ?>> T executeTask(@NonNull T task, @NonNull Executor executor, @NonNull P... params) {
+	public static <P, T extends AsyncTask<P, ?, ?>> T executeTask(@NonNull T task, @NonNull Executor executor, @Nullable P... params) {
 		if (PluginsHelper.isDevelopment()) {
 			LOG.info("Submitting task: " + task.getClass().getName());
 		}

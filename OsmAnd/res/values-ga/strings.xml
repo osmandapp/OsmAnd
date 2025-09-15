@@ -5687,6 +5687,7 @@
     <string name="kilometers">Ciliméadair</string>
     <string name="miles">Míle</string>
     <string name="mpg">MPG</string>
-    <string name="access_pinch_zoom_magnification">Cumasaigh formhéadú súmáil pinch</string>
-    <string name="access_pinch_zoom_magnification_descr">Bain úsáid as scálú radhairc in ionad leibhéil súmála ar leith le haghaidh gothaí pinch.</string>
+    <string name="access_pinch_zoom_magnification">Formhéadú súmáil pinch</string>
+    <string name="access_pinch_zoom_magnification_descr">Bain úsáid as scálú radhairc in ionad leibhéil súmála ar leith le linn gothaí súmála isteach.</string>
+    <string name="accessibility_independent_features">Gnéithe neamhspleácha</string>
 </resources>

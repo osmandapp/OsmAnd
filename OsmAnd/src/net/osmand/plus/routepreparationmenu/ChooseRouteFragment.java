@@ -64,6 +64,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.save.SaveDirectionsAsyncTask;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -526,8 +527,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 	}
 
 	private void shareLink(@NonNull OsmandApplication app) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
 			sendIntent.setType("text/plain");
@@ -535,16 +535,15 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
 
 			AndroidUtils.startActivityIfSafe(activity, chooserIntent);
-		}
+		});
 	}
 
 	private void shareFile(@NonNull OsmandApplication app) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
 			GpxFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-			Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.getPath()));
+
 			File dir = new File(app.getCacheDir(), "share");
 			if (!dir.exists()) {
 				dir.mkdir();
@@ -552,22 +551,14 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			File dst = new File(dir, "route.gpx");
 
 			SaveGpxHelper.saveGpx(dst, gpx, errorMessage -> {
-				if (errorMessage == null) {
-					Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
-							routingHelper.getGeneralRouteInformation(), IntentHelper.generateRouteUrl(app)).toString()));
-					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
-					sendIntent.setType("text/plain");
-					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
-
-					AndroidUtils.startActivityIfSafe(activity, chooserIntent);
+				Context context = getContext();
+				if (errorMessage == null && context != null) {
+					String extraText = generateCurrentRouteGpxSummary();
+					String subject = getString(R.string.share_route_subject);
+					GpxUiHelper.shareGpx(context, activity, dst, extraText, subject);
 				}
 			});
-		}
+		});
 	}
 
 	void print() {
@@ -612,6 +603,16 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			}
 		}
 		return file;
+	}
+
+	@NonNull
+	private String generateCurrentRouteGpxSummary() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		return Html.fromHtml(
+				generateHtml(routingHelper.getRouteDirections(),
+				routingHelper.getGeneralRouteInformation(),
+				IntentHelper.generateRouteUrl(app)).toString()
+		).toString();
 	}
 
 	private StringBuilder generateHtml(List<RouteDirectionInfo> directionInfos, String title,

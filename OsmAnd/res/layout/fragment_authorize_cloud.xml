@@ -79,22 +79,30 @@
 
 	</LinearLayout>
 
-	<net.osmand.plus.widgets.dialogbutton.DialogButton
-		android:id="@+id/sign_up_button"
+	<LinearLayout
+		android:id="@+id/bottom_buttons_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginHorizontal="@dimen/content_padding"
-		app:dialogButtonBottomMargin="@dimen/content_padding"
-		app:dialogButtonTitle="@string/shared_string_get"
-		app:dialogButtonType="primary" />
+		android:orientation="vertical">
 
-	<net.osmand.plus.widgets.dialogbutton.DialogButton
-		android:id="@+id/sign_in_button"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginHorizontal="@dimen/content_padding"
-		app:dialogButtonBottomMargin="@dimen/content_padding"
-		app:dialogButtonType="secondary"
-		tools:dialogButtonTitle="@string/register_opr_have_account" />
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/sign_up_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			app:dialogButtonBottomMargin="@dimen/content_padding"
+			app:dialogButtonTitle="@string/shared_string_get"
+			app:dialogButtonType="primary" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/sign_in_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			app:dialogButtonBottomMargin="@dimen/content_padding"
+			app:dialogButtonType="secondary"
+			tools:dialogButtonTitle="@string/register_opr_have_account" />
+
+	</LinearLayout>
 
 </LinearLayout>

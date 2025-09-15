@@ -160,6 +160,14 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		return mainView;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);

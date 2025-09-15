@@ -6191,6 +6191,7 @@
     <string name="kilometers">Kilometer</string>
     <string name="miles">Mijl</string>
     <string name="mpg">MPG</string>
-    <string name="access_pinch_zoom_magnification_descr">Gebruik de schaal van het venster in plaats van afzonderlijke zoomniveau\'s voor knijpbewegingen.</string>
-    <string name="access_pinch_zoom_magnification">Gebruik knijp-zoom vergroting</string>
+    <string name="access_pinch_zoom_magnification_descr">Gebruik de schaal van het venster in plaats van zoomniveaus tijdens inzoombewegingen.</string>
+    <string name="access_pinch_zoom_magnification">Knijp-zoom vergroting</string>
+    <string name="accessibility_independent_features">Onafhankelijke functies</string>
 </resources>
