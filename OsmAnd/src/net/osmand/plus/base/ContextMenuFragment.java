@@ -460,22 +460,10 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 
 	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
 	public List<Integer> getScrollableViewIds() {
 		List<Integer> ids = new ArrayList<>();
-		ids.add(getBottomScrollViewId());
+		ids.add(getCardsContainerViewId());
 		return ids;
-	}
-
-	@Nullable
-	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
 	}
 
 	@Override
@@ -682,7 +670,7 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			screenHeight = container.getHeight() + statusBarHeight;
-			viewHeight = screenHeight - statusBarHeight - navBarHeight;
+			viewHeight = screenHeight - statusBarHeight;
 			minHalfY = getMinHalfY(mapActivity);
 		}
 	}
@@ -709,7 +697,7 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int height = getMenuStatePosY(getCurrentMenuState());
-			return viewHeight - height - statusBarHeight - navBarHeight;
+			return viewHeight - height - statusBarHeight;
 		} else {
 			return 0;
 		}

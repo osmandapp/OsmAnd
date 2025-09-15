@@ -104,7 +104,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 	public void updateNavigationBarColor() {
 		int colorId = getNavigationBarColorId();
 		if (colorId != -1) {
-			AndroidUiHelper.setNavigationBarColor(this, getColor(colorId));
+			//AndroidUiHelper.setNavigationBarColor(this, getColor(colorId));
 		}
 	}
 }

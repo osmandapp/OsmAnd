@@ -59,6 +59,7 @@
 	</ScrollView>
 
         <LinearLayout
+	        android:id="@+id/bottom_buttons_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/wikivoyage_show_images_dialog_buttons_height"
             android:paddingLeft="@dimen/list_header_padding"

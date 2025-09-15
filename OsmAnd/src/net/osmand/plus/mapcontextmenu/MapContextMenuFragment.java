@@ -599,8 +599,10 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.context_menu_bottom_view);
+		return ids;
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {

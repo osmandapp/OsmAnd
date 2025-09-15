@@ -120,13 +120,14 @@
     <include layout="@layout/divider" />
 
     <FrameLayout
-        android:id="@+id/add_button"
+        android:id="@+id/bottom_buttons_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_button_ex_height"
         android:background="?attr/bg_color"
         android:visibility="gone">
 
         <LinearLayout
+            android:id="@+id/add_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dialog_button_height"
             android:layout_gravity="center"
