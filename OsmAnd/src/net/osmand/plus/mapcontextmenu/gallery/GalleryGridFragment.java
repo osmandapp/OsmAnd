@@ -108,6 +108,14 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.content_list);
+		return ids;
+	}
+
 	@NonNull
 	private ImageCardListener getImageCardListener() {
 		return imageCard -> GalleryPhotoPagerFragment.showInstance(requireMapActivity(),

@@ -173,6 +173,19 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 				null, ColorUtilities.getActiveColor(app, nightMode), null);
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return null;
+	}
+
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.quadruple_bottom_buttons);
+		return ids;
+	}
+
 	@Override
 	protected void setupBottomButtons(ViewGroup view) {
 		int contentPadding = getDimensionPixelSize(R.dimen.content_padding);

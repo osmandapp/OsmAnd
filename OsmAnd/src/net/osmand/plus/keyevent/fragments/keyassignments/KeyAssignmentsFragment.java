@@ -148,7 +148,7 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 	}
 
 	private void updateSaveButton(@NonNull View view) {
-		View bottomButtons = view.findViewById(R.id.bottom_buttons);
+		View bottomButtons = view.findViewById(R.id.bottom_buttons_container);
 		bottomButtons.setVisibility(controller.isInEditMode() ? View.VISIBLE : View.GONE);
 		DialogButton applyButton = view.findViewById(R.id.save_button);
 		applyButton.setOnClickListener(v -> controller.askSaveChanges());
