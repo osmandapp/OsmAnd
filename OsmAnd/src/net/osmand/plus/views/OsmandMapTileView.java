@@ -2332,7 +2332,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 			}
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
-					(int) initialMultiTouchCenterPoint.x, view.getHeight() - (int) initialMultiTouchCenterPoint.y);
+					(int) initialMultiTouchCenterPoint.x, (int) initialMultiTouchCenterPoint.y);
 			startRotating = false;
 			startZooming = false;
 			Location myLocation = app.getLocationProvider().getLastKnownLocation();
