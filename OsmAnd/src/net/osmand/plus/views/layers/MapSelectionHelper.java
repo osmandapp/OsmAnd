@@ -475,23 +475,17 @@ public class MapSelectionHelper {
 
 	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
 		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.getPointLatLon(), routeId);
-		if (travelGpx != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
-			WptPt selectedPoint = new WptPt();
-			selectedPoint.setLat(result.getPointLatLon().getLatitude());
-			selectedPoint.setLon(result.getPointLatLon().getLongitude());
-			SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
-			result.collect(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
+		if (travelGpx != null && travelGpx.getAmenity() != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
+			result.collect(travelGpx.getAmenity(), mapLayers.getPoiMapLayer());
 		} else if (travelGpx == null) {
 			log.error("addTravelGpx() searchTravelGpx() travelGpx is null");
 		}
 	}
 
-	private boolean addClickableWay(@NonNull MapSelectionResult result,	@Nullable ClickableWay clickableWay) {
+	private void addClickableWay(@NonNull MapSelectionResult result, @Nullable ClickableWay clickableWay) {
 		if (clickableWay != null && isUniqueClickableWay(result.getAllObjects(), clickableWay)) {
 			result.collect(clickableWay, clickableWayHelper.getContextMenuProvider());
-			return true;
 		}
-		return false;
 	}
 
 	private List<String> getNames(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
@@ -540,12 +534,14 @@ public class MapSelectionHelper {
 	}
 
 	private boolean isUniqueTravelGpx(@NonNull List<SelectedMapObject> selectedObjects,
-			@NonNull TravelGpx travelGpx) {
+	                                  @NonNull TravelGpx travelGpx) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
 			Object object = selectedObject.object();
-			if (object instanceof Pair && selectedObject.provider() instanceof GPXLayer
-					&& ((Pair<?, ?>) object).first instanceof TravelGpx gpx && travelGpx.equals(gpx)) {
-				return false;
+			if (object instanceof SelectedGpxPoint gpxPoint && selectedObject.provider() instanceof GPXLayer) {
+				String gpxRouteId = gpxPoint.getSelectedGpxFile().getGpxFile().getExtensionsToRead().get(ROUTE_ID);
+				if (Algorithms.stringsEqual(travelGpx.getRouteId(), gpxRouteId)) {
+					return false;
+				}
 			}
 		}
 		return isUniqueGpxFileName(selectedObjects, travelGpx.getGpxFileName() + GPX_FILE_EXT);

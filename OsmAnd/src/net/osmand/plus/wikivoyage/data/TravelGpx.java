@@ -63,13 +63,17 @@ public class TravelGpx extends TravelArticle {
 
 	public boolean isSuperRoute = false;
 
+	@Nullable
+	private Amenity amenity;
+
 	private String amenitySubType;
 	private String amenityRegionName;
 
 	public TravelGpx() {
 	}
 
-	public TravelGpx(Amenity amenity) {
+	public TravelGpx(@NonNull Amenity amenity) {
+		this.amenity = amenity;
 		amenitySubType = amenity.getSubType();
 		amenityRegionName = amenity.getRegionName();
 		String enTitle = amenity.getName("en");
@@ -209,5 +213,10 @@ public class TravelGpx extends TravelArticle {
 			return amenitySubType.replace(ROUTES_PREFIX, "").split(";")[0];
 		}
 		return null;
+	}
+
+	@Nullable
+	public Amenity getAmenity() {
+		return amenity;
 	}
 }
