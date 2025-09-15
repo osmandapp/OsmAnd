@@ -124,6 +124,10 @@ public class AmenityMenuController extends MenuController {
 		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
 			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
 			String name = amenity.getTagContent(Amenity.ROUTE_NAME);
+			if (name == null || lang == null) {
+				LOG.error(amenity.toString() + ": name/lang is null");
+				return;
+			}
 			TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 			if (article != null) {
 				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
