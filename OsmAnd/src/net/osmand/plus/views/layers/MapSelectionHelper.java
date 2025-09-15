@@ -1,12 +1,10 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.TRAVEL_MAP_TO_POI_TAG;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
@@ -56,7 +54,6 @@ import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -399,15 +396,6 @@ public class MapSelectionHelper {
 	}
 
 	@Nullable
-	private LatLon parsePoiLatLon(String value) {
-		if (value == null) {
-			return null;
-		}
-		GeoParsedPoint p = MapUtils.decodeShortLinkString(value);
-		return new LatLon(p.getLatitude(), p.getLongitude());
-	}
-
-	@Nullable
 	private String getMapIconName(MapSymbolInformation symbolInfo) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null && rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
@@ -486,18 +474,6 @@ public class MapSelectionHelper {
 		if (clickableWay != null && isUniqueClickableWay(result.getAllObjects(), clickableWay)) {
 			result.collect(clickableWay, clickableWayHelper.getContextMenuProvider());
 		}
-	}
-
-	private List<String> getNames(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
-		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
-		String caption = obfMapObject.getCaptionInNativeLanguage();
-		if (!caption.isEmpty()) {
-			names.add(caption);
-		}
-		if (!Algorithms.isEmpty(tags) && tags.containsKey(TRAVEL_MAP_TO_POI_TAG) && "point".equals(tags.get(ROUTE))) {
-			names.add(tags.get(TRAVEL_MAP_TO_POI_TAG));
-		}
-		return names;
 	}
 
 	private void addGeometry(@Nullable BaseDetailsObject detailObj,	@NonNull ObfMapObject obfMapObject) {
@@ -621,8 +597,8 @@ public class MapSelectionHelper {
 		return true;
 	}
 
-	private boolean addAmenity(@NonNull MapSelectionResult result,
-			@NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
+	private void addAmenity(@NonNull MapSelectionResult result,
+	                        @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
 		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 		AmenitySearcher.Request request = new AmenitySearcher.Request(object);
@@ -636,9 +612,7 @@ public class MapSelectionHelper {
 			if (!isTransportStop(result.getAllObjects(), detail)) {
 				result.collect(detail, mapLayers.getPoiMapLayer());
 			}
-			return true;
 		}
-		return false;
 	}
 
 	private boolean isTransportStop(@NonNull List<SelectedMapObject> selectedObjects, @NonNull BaseDetailsObject detail) {
