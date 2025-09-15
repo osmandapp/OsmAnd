@@ -29,13 +29,13 @@ public class OsmNotesMenu {
 	private static final Integer[] zoomIntValues = {8, 9, 10, 11, 12, 13, 14, 15, 16};
 
 	public static ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
+		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getApp());
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
 
 	private static void createLayersItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean nightMode = isNightMode(app);
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 

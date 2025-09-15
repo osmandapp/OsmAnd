@@ -5691,7 +5691,7 @@
     <string name="show_utm_grids">Використовувати UTM замість WGS84</string>
     <string name="show_utm_grids_description">Показати сітку в метрах UTM замість WGS84</string>
     <string name="map_grid">Картографічні сітки</string>
-    <string name="no_places_available">Ніяких місць у видимій регіоні</string>
+    <string name="no_places_available">Немає місць у видимій області</string>
     <string name="no_photo_for_location_desc">Для цього місця ще не додано жодних фотографій користувачів</string>
     <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо, протягом %1$s місяців</string>
     <string name="shared_string_road_exit">Вихід</string>
@@ -5871,4 +5871,13 @@
     <string name="shared_sting_osm_link">Посилання OSM</string>
     <string name="show_local_names">Показати місцеві назви</string>
     <string name="obd_alt_battery_voltage">Напруга акумулятора (адаптер)</string>
+    <string name="liter_single">Літр</string>
+    <string name="imperial_gallon">Імперський галон</string>
+    <string name="us_gallon">галон США</string>
+    <string name="kilometers">Кілометри</string>
+    <string name="miles">Милі</string>
+    <string name="mpg">MPG</string>
+    <string name="access_pinch_zoom_magnification">Збільшення масштабування щипками</string>
+    <string name="access_pinch_zoom_magnification_descr">Використовуйте масштабування області перегляду замість дискретних рівнів масштабування під час жестів збільшення.</string>
+    <string name="accessibility_independent_features">Незалежні функції</string>
 </resources>

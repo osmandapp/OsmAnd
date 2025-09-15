@@ -72,7 +72,7 @@ public abstract class BaseLogcatActivity extends ActionBarProgressActivity imple
 
 		@Override
 		protected File doInBackground(Void... voids) {
-			File file = activityRef.get().getMyApplication().getAppPath(LOGCAT_PATH);
+			File file = activityRef.get().getApp().getAppPath(LOGCAT_PATH);
 			try {
 				if (file.exists()) {
 					file.delete();
@@ -98,7 +98,7 @@ public abstract class BaseLogcatActivity extends ActionBarProgressActivity imple
 		protected void onPostExecute(File file) {
 			BaseLogcatActivity activity = this.activityRef.get();
 			activity.setSupportProgressBarIndeterminateVisibility(false);
-			activity.getMyApplication().getFeedbackHelper().sendCrashLog(file);
+			activity.getApp().getFeedbackHelper().sendCrashLog(file);
 		}
 	}
 }

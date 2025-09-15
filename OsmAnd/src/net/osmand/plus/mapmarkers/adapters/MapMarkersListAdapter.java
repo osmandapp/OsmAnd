@@ -69,7 +69,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		locDescription = new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
 				mapActivity.getString(R.string.shared_string_location));
 		this.mapActivity = mapActivity;
-		inRoundTrip = mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
+		inRoundTrip = mapActivity.getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
 		reloadData();
 	}
 
@@ -87,7 +87,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		UiUtilities iconsCache = app.getUIUtilities();
 
@@ -254,7 +254,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			return false;
 		}
 		int offset = showLocationItem ? 1 : 0;
-		Collections.swap(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers(), from - offset, to - offset);
+		Collections.swap(mapActivity.getApp().getMapMarkersHelper().getMapMarkers(), from - offset, to - offset);
 		Collections.swap(items, from, to);
 		notifyItemMoved(from, to);
 		return true;
@@ -286,7 +286,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	public void reloadData() {
 		items.clear();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		showLocationItem = myLoc != null;
 		inRoundTrip = app.getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
@@ -294,7 +294,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			lookupLocationAddress(app);
 			items.add(myLoc);
 		}
-		items.addAll(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers());
+		items.addAll(mapActivity.getApp().getMapMarkersHelper().getMapMarkers());
 		calculateStartAndFinishPos();
 		showRoundTripItem = inRoundTrip && !inDragAndDrop && startPos != -1;
 		if (showRoundTripItem) {
@@ -323,7 +323,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	private void calculateStartAndFinishPos() {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean startCalculated = false;
 		boolean finishCalculated = false;
 		boolean firstSelectedMarkerCalculated = false;

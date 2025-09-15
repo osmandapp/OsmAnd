@@ -20,6 +20,7 @@ import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenDialogFragment
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
@@ -89,30 +90,19 @@ class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolde
 		}
 	}
 
-	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val themeId =
-			if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
-		val dialog = object : Dialog(requireContext(), themeId) {
+	override fun getThemeId(): Int {
+		return if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
+	}
+
+	override fun getStatusBarColorId(): Int {
+		return if (nightMode) R.color.status_bar_secondary_dark else R.color.status_bar_secondary_light
+	}
+
+	override fun createDialog(savedInstanceState: Bundle?): Dialog {
+		return object : Dialog(requireContext(), themeId) {
 			override fun onBackPressed() {
 				closeWithoutApply()
 			}
-		}
-		val window = dialog.window
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.attributes.windowAnimations = R.style.Animations_Alpha
-			}
-			updateStatusBarColor(window)
-		}
-		return dialog
-	}
-
-	private fun updateStatusBarColor(window: Window?) {
-		window?.let {
-			val statusBarColor =
-				if (nightMode) R.color.status_bar_secondary_dark else R.color.status_bar_secondary_light
-			ContextCompat.getColor(requireContext(), statusBarColor)
-			window.statusBarColor = ContextCompat.getColor(requireContext(), statusBarColor)
 		}
 	}
 
@@ -214,7 +204,6 @@ class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolde
 		super.onResume()
 		context?.let {
 			updateNightMode()
-			updateStatusBarColor(requireDialog().window)
 		}
 	}
 

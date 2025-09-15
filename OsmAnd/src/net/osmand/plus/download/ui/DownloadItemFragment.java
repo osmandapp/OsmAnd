@@ -183,8 +183,7 @@ public class DownloadItemFragment extends BaseFullScreenDialogFragment implement
 						activity.startDownload(indexItem);
 					}
 				} else {
-					String text = activity.getString(R.string.download_unsupported_action, actionButton.getActionType());
-					AndroidUtils.getApp(activity).showShortToastMessage(text);
+					AndroidUtils.getApp(activity).showShortToastMessage(R.string.download_unsupported_action, actionButton.getActionType());
 				}
 			});
 			buttonsContainer.addView(buttonView);

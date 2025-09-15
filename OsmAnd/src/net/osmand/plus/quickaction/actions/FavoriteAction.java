@@ -5,7 +5,7 @@ import static net.osmand.plus.quickaction.QuickActionIds.FAVORITE_ACTION_ID;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -61,7 +61,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		String title = getParams().get(KEY_NAME);
 		boolean showDialog = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 
@@ -99,7 +99,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 			}
 
 			private void onClick(String title, boolean autoFill) {
-				mapActivity.getMyApplication().getGeocodingLookupService().cancel(lookupRequest);
+				mapActivity.getApp().getGeocodingLookupService().cancel(lookupRequest);
 				dismissProgressDialog();
 				addFavorite(mapActivity, latLon, title, autoFill);
 			}
@@ -110,7 +110,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 			dismissProgressDialog();
 			addFavorite(mapActivity, latLon, address, !showDialog);
 		}, null);
-		mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+		mapActivity.getApp().getGeocodingLookupService().lookupAddress(lookupRequest);
 	}
 
 	@NonNull
@@ -170,7 +170,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 	}
 
 	private void setupUIDefaults(@NonNull View root, @NonNull MapActivity mapActivity) {
-		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
+		FavouritesHelper helper = mapActivity.getApp().getFavoritesHelper();
 		AutoCompleteTextViewEx categoryEdit = root.findViewById(R.id.category_edit);
 		ImageView categoryImage = root.findViewById(R.id.category_image);
 

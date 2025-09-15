@@ -2,20 +2,28 @@ package net.osmand.plus.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
-import androidx.annotation.DimenRes;
-import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Base fragment class for all UI components in OsmAnd that directly extend Android's Fragment.
@@ -31,7 +39,7 @@ import net.osmand.plus.utils.UiUtilities;
  *
  * Note: Fragments based on DialogFragment or BottomSheetFragment should NOT inherit from this class.
  */
-public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
+public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment, ISupportInsets {
 
 	protected OsmandApplication app;
 	protected ApplicationMode appMode;
@@ -40,6 +48,7 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	protected boolean nightMode;
 
 	private LayoutInflater themedInflater;
+	private WindowInsetsCompat lastRootInsets = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +64,55 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		saveAppModeToBundle(appMode, outState);
+	}
+
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		InsetsUtils.processInsets(this, view);
+	}
+
+	@Nullable
+	public List<Integer> getFabIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.fab);
+		return ids;
+	}
+
+	@Nullable
+	public Set<InsetSide> getRootInsetSides(){
+		return EnumSet.of(InsetSide.TOP);
+	}
+
+	@Nullable
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.scroll_view);
+		ids.add(R.id.recycler_view);
+		return ids;
+	}
+
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
+
+	}
+
+	@Nullable
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return lastRootInsets;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+		lastRootInsets = rootInsets;
 	}
 
 	protected void updateNightMode() {

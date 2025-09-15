@@ -70,7 +70,7 @@ public class ItemMenuProvider implements MenuProvider {
 		this.activity = activity;
 		this.fragment = fragment;
 		this.nightMode = fragment.isNightMode();
-		app = activity.getMyApplication();
+		app = activity.getApp();
 		uiUtilities = app.getUIUtilities();
 	}
 
@@ -184,7 +184,7 @@ public class ItemMenuProvider implements MenuProvider {
 			menuItem.setOnMenuItemClickListener(i -> {
 				FragmentManager manager = fragment.getFragmentManager();
 				if (manager != null) {
-					DeleteConfirmationBottomSheet.showInstance(manager, fragment, item);
+					DeleteConfirmationDialogController.showDialog(app, manager, item, fragment);
 				}
 				return true;
 			});

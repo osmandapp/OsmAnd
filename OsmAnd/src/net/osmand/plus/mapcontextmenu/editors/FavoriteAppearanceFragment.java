@@ -85,6 +85,11 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		registerFavoriteAppearanceController();
 	}
 
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -93,24 +98,13 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId) {
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
 			@Override
 			public void onBackPressed() {
 				dismiss();
 			}
 		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ColorUtilities.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	private void registerFavoriteAppearanceController() {
@@ -218,7 +212,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		saveButton.setOnClickListener(v -> savePressed());
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
 		saveButton.setTitleId(R.string.shared_string_save);
-		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.buttons_container), ColorUtilities.getListBgColorId(nightMode));
+		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.bottom_buttons_container), ColorUtilities.getListBgColorId(nightMode));
 
 		DialogButton dismissButton = view.findViewById(R.id.dismiss_button);
 		AndroidUiHelper.updateVisibility(dismissButton, false);

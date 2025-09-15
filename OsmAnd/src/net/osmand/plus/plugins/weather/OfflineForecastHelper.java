@@ -489,7 +489,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				StringBuilder fileName = new StringBuilder()
 						.append(getWeatherName(app, app.getRegions(), regionId)).append(" ")
 						.append(WEATHER_FORECAST.getString(app));
-				app.showToastMessage(app.getString(R.string.item_deleted, fileName));
+				app.showToastMessage(R.string.item_deleted, fileName);
 			}
 		}
 		regionsRemoveInProgress = CollectionUtils.removeAllFromList(regionsRemoveInProgress, regionIdsList);

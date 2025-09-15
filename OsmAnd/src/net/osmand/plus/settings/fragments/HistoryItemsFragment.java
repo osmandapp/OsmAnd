@@ -131,7 +131,7 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 		shareButton = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		shareButton.setOnClickListener(v -> {
 			if (selectedItems.isEmpty()) {
-				app.showShortToastMessage(getString(R.string.no_items_selected_warning));
+				app.showShortToastMessage(R.string.no_items_selected_warning);
 			} else {
 				shareItems();
 			}
@@ -170,7 +170,7 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 	}
 
 	protected void setupButtons(@NonNull View view) {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 
 		deleteButton = view.findViewById(R.id.right_bottom_button);

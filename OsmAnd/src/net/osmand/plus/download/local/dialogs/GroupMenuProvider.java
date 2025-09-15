@@ -64,7 +64,7 @@ public class GroupMenuProvider implements MenuProvider {
 		this.activity = activity;
 		this.fragment = fragment;
 		this.nightMode = fragment.isNightMode();
-		app = activity.getMyApplication();
+		app = activity.getApp();
 		uiUtilities = app.getUIUtilities();
 	}
 

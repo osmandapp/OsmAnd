@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/selected_row"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:minHeight="@dimen/bottom_sheet_list_item_height"
+	android:orientation="horizontal"
+	tools:showIn="@layout/import_track_item">
+
+	<androidx.appcompat.widget.AppCompatCheckBox
+		android:id="@+id/compound_button"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:background="@null"
+		android:clickable="false"
+		android:focusable="false"
+		android:focusableInTouchMode="false" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		style="@style/TitleStyle.Medium"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="@string/shared_string_select"
+		android:textColor="?attr/active_color_basic" />
+
+</LinearLayout>

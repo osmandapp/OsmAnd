@@ -7,7 +7,6 @@ import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -98,7 +97,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	                          @NonNull ApplicationMode appMode, @NonNull TrackFolder rootFolder) {
 		this.activity = activity;
 		this.rootFolder = rootFolder;
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 		this.appMode = appMode;
 		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();

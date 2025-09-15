@@ -66,7 +66,7 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			toolbarLayout = view.findViewById(R.id.toolbar_layout);
-			buttonsContainer = view.findViewById(R.id.buttons_container);
+			buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 			progressBar = view.findViewById(R.id.progress_bar);
 
 			description = header.findViewById(R.id.description);

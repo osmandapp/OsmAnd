@@ -25,6 +25,7 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
@@ -70,6 +71,11 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 		}
 	}
 
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
 	@ColorRes
 	protected int getStatusBarColorId() {
 		return ColorUtilities.getListBgColorId(nightMode);
@@ -84,23 +90,6 @@ public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFra
 	@Override
 	protected boolean isUsedOnMap() {
 		return getMapActivity() != null;
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Nullable

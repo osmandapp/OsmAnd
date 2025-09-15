@@ -73,7 +73,7 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
             return null;
         }
         MapActivity mapActivity = (MapActivity) fragment.getActivity();
-        OsmandApplication app = mapActivity.getMyApplication();
+        OsmandApplication app = mapActivity.getApp();
         MeasurementEditingContext editingContext = fragment.getEditingCtx();
         Exception res = null;
 

@@ -15,7 +15,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,25 +55,20 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 
 	private RequiredMapsController controller;
 
+	@Override
+	protected int getStatusBarColorId() {
+		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
+
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity activity = requireActivity();
-		Dialog dialog = new Dialog(activity, getThemeId()) {
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
 			@Override
 			public void onBackPressed() {
 				closeDialog();
 			}
 		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ColorUtilities.getStatusBarColor(app, nightMode));
-		}
-		return dialog;
 	}
 
 	public void closeDialog() {

@@ -76,8 +76,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
     // Do not clutter GPX with tags that are always generated.
     private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
-            "date", "distance", "route_name", "route_bbox_radius",
-            "avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
+            "date", "distance", "route_name", "route_bbox_radius", "start_ele", "ele_graph",
             "avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
     );
 

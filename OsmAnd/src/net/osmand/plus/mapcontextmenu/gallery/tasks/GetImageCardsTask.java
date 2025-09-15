@@ -56,7 +56,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 
 	public GetImageCardsTask(@NonNull MapActivity mapActivity, @NonNull LatLon latLon,
 	                         @Nullable Map<String, String> params, @Nullable GetImageCardsListener imageCardsListener, @NonNull NetworkResponseListener networkResponseListener) {
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.mapActivity = mapActivity;
 		this.latLon = latLon;
 		this.params = params;

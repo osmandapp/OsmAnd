@@ -5826,4 +5826,5 @@
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Risposta</string>
+    <string name="accessibility_independent_features">Caratteristiche indipendenti</string>
 </resources>

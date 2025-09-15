@@ -47,7 +47,7 @@ public class AMapPointMenuController extends MenuController {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.point = point;
 		pointDrawable = getPointDrawable();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		Map<String, AidlContextMenuButtonsWrapper> buttonsParamsMap = app.getAidlApi().getContextMenuButtonsParams();
 		if (!buttonsParamsMap.isEmpty()) {
 			additionalButtonsControllers = new ArrayList<>();
@@ -143,7 +143,7 @@ public class AMapPointMenuController extends MenuController {
 		if (activity != null) {
 			float speed = getPointSpeed();
 			if (speed != NO_VALUE) {
-				return OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
+				return OsmAndFormatter.getFormattedSpeed(speed, activity.getApp());
 			}
 		}
 		return super.getAdditionalInfoStr();
@@ -156,7 +156,7 @@ public class AMapPointMenuController extends MenuController {
 		if (activity != null) {
 			float bearing = getPointBearing();
 			if (bearing != NO_VALUE) {
-				return OsmAndFormatter.getFormattedAzimuth(bearing, activity.getMyApplication());
+				return OsmAndFormatter.getFormattedAzimuth(bearing, activity.getApp());
 			}
 		}
 		return super.getSubtypeStr();
@@ -198,11 +198,11 @@ public class AMapPointMenuController extends MenuController {
 					int buttonId = contextMenuButton.getButtonId();
 					String pointId = point.getId();
 					String layerId = point.getLayerId();
-					mapActivity.getMyApplication().getAidlApi().contextMenuCallbackButtonClicked(callbackId, buttonId, pointId, layerId);
+					mapActivity.getApp().getAidlApi().contextMenuCallbackButtonClicked(callbackId, buttonId, pointId, layerId);
 				}
 			}
 		};
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		titleButtonController.caption = contextMenuButton.getLeftTextCaption();
 		titleButtonController.rightTextCaption = contextMenuButton.getRightTextCaption();
 		titleButtonController.startIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getLeftIconName());
@@ -218,7 +218,7 @@ public class AMapPointMenuController extends MenuController {
 		if (activity != null) {
 			String iconName = point.getParams().get(AMapPoint.POINT_TYPE_ICON_NAME_PARAM);
 			if (!TextUtils.isEmpty(iconName)) {
-				return AndroidUtils.getDrawableId(activity.getMyApplication(), iconName);
+				return AndroidUtils.getDrawableId(activity.getApp(), iconName);
 			}
 		}
 		if (!TextUtils.isEmpty(point.getShortName())) {

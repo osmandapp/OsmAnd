@@ -20,6 +20,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
@@ -51,6 +54,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	private boolean dismissing;
 	private boolean wasDrawerDisabled;
 
+	private int statusBarHeight;
+	private int navBarHeight;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) requireActivity();
@@ -77,6 +83,8 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			View cancelRow = view.findViewById(R.id.cancel_row);
 			AndroidUtils.setBackground(context, cancelRow, getListBgColorId(nightMode));
 		}
+		View bottomButtonContainer = view.findViewById(R.id.bottom_buttons_container);
+		AndroidUtils.setBackground(context, bottomButtonContainer, getListBgColorId(nightMode));
 
 		listView = view.findViewById(R.id.list);
 		if (menu.isLandscapeLayout()) {
@@ -132,8 +140,33 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		tvCancelRow.setTextColor(ColorUtilities.getColor(context, cancelRowColorId));
 		View cancelRow = view.findViewById(R.id.cancel_row);
 		cancelRow.setOnClickListener(view -> dismiss());
-
+		updateUi();
 		return view;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		setInsets(insets);
+	}
+
+	private void updateUi() {
+		WindowInsetsCompat insets = getLastRootInsets();
+		if (insets != null) {
+			setInsets(insets);
+		} else {
+			ViewCompat.requestApplyInsets(view);
+		}
+	}
+
+	private void setInsets(@NonNull WindowInsetsCompat insets) {
+		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+		if (sysBars.top != 0) {
+			statusBarHeight = sysBars.top;
+		}
+		if (sysBars.bottom != 0) {
+			navBarHeight = sysBars.bottom;
+		}
+		view.getViewTreeObserver().addOnGlobalLayoutListener(this);
 	}
 
 	@Override
@@ -147,7 +180,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			maxHeight += childView.getMeasuredHeight();
 		}
 
-		listView.setSelectionFromTop(0, -maxHeight);
+		listView.setSelectionFromTop(0, -maxHeight - statusBarHeight - navBarHeight);
 
 		ViewTreeObserver obs = view.getViewTreeObserver();
 		obs.removeOnGlobalLayoutListener(this);
@@ -158,7 +191,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		if (minHeight == 0) {
 			int headerHeight = getDimensionPixelSize(R.dimen.multi_selection_header_height);
 			int listItemHeight = getDimensionPixelSize(R.dimen.list_item_height);
-			minHeight = headerHeight + listItemHeight;
+			minHeight = headerHeight + listItemHeight - navBarHeight;
 		}
 		if (scrollY <= minHeight && !initialScroll) {
 			dismiss();
@@ -270,7 +303,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	public static void showInstance(@NonNull MapActivity mapActivity) {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			OsmandSettings settings = app.getSettings();
 			MapContextMenu contextMenu = mapActivity.getContextMenu();
 			MapMultiSelectionMenu menu = contextMenu.getMultiSelectionMenu();

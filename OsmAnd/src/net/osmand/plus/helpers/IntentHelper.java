@@ -27,8 +27,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.mapcontextmenu.editors.FavoriteAppearanceFragment;
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
@@ -51,8 +49,6 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
-import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.myplaces.favorites.dialogs.EditFavoriteGroupDialogFragment;
 import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -108,7 +104,7 @@ public class IntentHelper {
 
 	public IntentHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 
 		registerDeviceListener = getRegisterDeviceListener();
@@ -450,9 +446,9 @@ public class IntentHelper {
 						error -> {
 							if (error == null) {
 								String downloaded = app.getString(R.string.shared_string_download_successful);
-								app.showShortToastMessage(app.getString(R.string.ltr_or_rtl_combine_via_colon, downloaded, fileName));
+								app.showShortToastMessage(R.string.ltr_or_rtl_combine_via_colon, downloaded, fileName);
 							} else {
-								app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
+								app.showShortToastMessage(R.string.error_occurred_loading_gpx);
 							}
 							return true;
 						});
@@ -630,10 +626,10 @@ public class IntentHelper {
 					app.getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false, -1);
 					mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false, true);
 				} catch (NumberFormatException e) {
-					app.showToastMessage(app.getString(R.string.navigation_intent_invalid, schemeSpecificPart));
+					app.showToastMessage(R.string.navigation_intent_invalid, schemeSpecificPart);
 				}
 			} else {
-				app.showToastMessage(app.getString(R.string.navigation_intent_invalid, schemeSpecificPart));
+				app.showToastMessage(R.string.navigation_intent_invalid, schemeSpecificPart);
 			}
 			clearIntent(intent);
 		}

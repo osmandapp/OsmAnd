@@ -91,7 +91,7 @@ public class PluginsFragment extends BaseFullScreenFragment implements PluginSta
 
 		adapter = new PluginsListAdapter(this, requireContext());
 
-		ListView listView = view.findViewById(R.id.plugins_list);
+		ListView listView = view.findViewById(R.id.scroll_view);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener((parent, view1, position, id) -> {
 			Object tag = view1.getTag();

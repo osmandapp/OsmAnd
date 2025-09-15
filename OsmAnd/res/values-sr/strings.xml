@@ -5848,4 +5848,13 @@
     <string name="shared_sting_osm_link">ОСМ линк</string>
     <string name="show_local_names">Прикажи локална имена</string>
     <string name="obd_alt_battery_voltage">Напон батерије (адаптер)</string>
+    <string name="liter_single">Литар</string>
+    <string name="imperial_gallon">Империјални галон</string>
+    <string name="us_gallon">Амерички галон</string>
+    <string name="kilometers">Километри</string>
+    <string name="miles">Миље</string>
+    <string name="mpg">МПГ</string>
+    <string name="access_pinch_zoom_magnification">Увећање зумирања штипањем прстију</string>
+    <string name="access_pinch_zoom_magnification_descr">Користите скалирање приказног дела уместо дискретних нивоа зумирања током покрета зумирања.</string>
+    <string name="accessibility_independent_features">Независне карактеристике</string>
 </resources>

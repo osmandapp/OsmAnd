@@ -224,11 +224,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			boolean nightMode = isNightMode();
 			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
 				if (!nightMode) {
-					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+					AndroidUiHelper.setStatusBarContentColor(view, true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
 			} else if (!nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
+				AndroidUiHelper.setStatusBarContentColor(view, false);
 			}
 		}
 		return -1;
@@ -406,7 +406,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
-			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!mapActivity.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				slideInAnim = R.anim.slide_in_bottom;
 				slideOutAnim = R.anim.slide_out_bottom;
 			}
@@ -473,7 +473,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
-			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!mapActivity.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				if (portrait) {
 					slideInAnim = R.anim.slide_in_bottom;
 					slideOutAnim = R.anim.slide_out_bottom;

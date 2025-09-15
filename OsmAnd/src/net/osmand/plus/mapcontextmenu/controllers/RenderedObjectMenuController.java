@@ -39,7 +39,7 @@ public class RenderedObjectMenuController extends MenuController {
 		super(new RenderedObjectMenuBuilder(mapActivity, renderedObject), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		setRenderedObject(renderedObject);
-		mapPoiTypes = mapActivity.getMyApplication().getPoiTypes();
+		mapPoiTypes = mapActivity.getApp().getPoiTypes();
 		poiTranslator = mapPoiTypes != null ? mapPoiTypes.getPoiTranslator() : null;
 	}
 

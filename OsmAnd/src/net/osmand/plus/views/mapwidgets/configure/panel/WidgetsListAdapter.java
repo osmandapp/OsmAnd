@@ -86,7 +86,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	public WidgetsListAdapter(@NonNull MapActivity mapActivity, boolean nightMode,
 	                          @NonNull WidgetsAdapterListener listener, boolean isVerticalPanel, @NonNull ApplicationMode selectedAppMode) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.selectedAppMode = selectedAppMode;
 		this.nightMode = nightMode;
 		this.listener = listener;
@@ -202,7 +202,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		if (isVerticalPanel) {
 			Integer multipleComplexIndex = multipleComplexWidgetsInRowIndex(items);
 			if (multipleComplexIndex != null) {
-				app.showToastMessage(app.getString(R.string.complex_widget_alert, getComplexWidgetName(multipleComplexIndex, items)));
+				app.showToastMessage(R.string.complex_widget_alert, getComplexWidgetName(multipleComplexIndex, items));
 				listener.restoreBackup();
 				return;
 			}
@@ -403,7 +403,7 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 				tempItems.remove(position);
 				Integer multipleComplexIndex = multipleComplexWidgetsInRowIndex(tempItems);
 				if (multipleComplexIndex != null) {
-					app.showToastMessage(app.getString(R.string.complex_widget_alert, getComplexWidgetName(multipleComplexIndex, tempItems)));
+					app.showToastMessage(R.string.complex_widget_alert, getComplexWidgetName(multipleComplexIndex, tempItems));
 					return;
 				}
 			}

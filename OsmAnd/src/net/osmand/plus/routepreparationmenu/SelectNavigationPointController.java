@@ -28,7 +28,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
-import net.osmand.plus.views.layers.MapSelectionResult.SelectedMapObject;
+import net.osmand.plus.views.layers.SelectedMapObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.Objects;

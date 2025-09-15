@@ -89,7 +89,7 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 		btnRecalcDest.setCompoundDrawablesWithIntrinsicBounds(directionIcon, null, null, null);
 		btnRecalcDest.setOnClickListener(v -> {
 			if (mapActivity != null) {
-				TargetPointsHelper helper = mapActivity.getMyApplication().getTargetPointsHelper();
+				TargetPointsHelper helper = mapActivity.getApp().getTargetPointsHelper();
 				TargetPoint target = helper.getPointToNavigate();
 
 				dismiss();
@@ -105,7 +105,7 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 
 		Button btnFindParking = view.findViewById(R.id.findParkingButton);
 
-		ApplicationMode routingAppMode = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
+		ApplicationMode routingAppMode = mapActivity.getApp().getRoutingHelper().getAppMode();
 
 		if (!routingAppMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			btnFindParking.setVisibility(View.GONE);
@@ -114,7 +114,7 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 		Drawable parkingIcon = uiUtilities.getIcon(R.drawable.ic_action_parking_dark, !nightMode);
 		btnFindParking.setCompoundDrawablesWithIntrinsicBounds(parkingIcon, null, null, null);
 		btnFindParking.setOnClickListener(v -> {
-			PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
+			PoiFiltersHelper helper = mapActivity.getApp().getPoiFilters();
 			PoiUIFilter parkingFilter = helper.getFilterById(PoiUIFilter.STD_PREFIX + "parking");
 			mapActivity.getFragmentsHelper().showQuickSearch(parkingFilter);
 			dismiss();
@@ -217,7 +217,7 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 	}
 
 	public static void show(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmAndAppCustomization customization = app.getAppCustomization();
 		if (!shown && customization.isFeatureEnabled(FRAGMENT_DESTINATION_REACHED_ID)) {
 			shown = true;

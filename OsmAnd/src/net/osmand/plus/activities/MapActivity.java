@@ -6,6 +6,7 @@ import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
+import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -104,7 +105,6 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -119,6 +119,8 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -138,6 +140,7 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -165,10 +168,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private BroadcastReceiver screenOffReceiver;
 	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
 	private ExtendedMapActivity extendedMapActivity;
-
-	// App variables
-	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	private LockHelper lockHelper;
 	private ImportHelper importHelper;
@@ -209,6 +208,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			app.runInUIThread(() -> changeKeyguardFlags());
 		}
 	};
+
+	private final StateChangedListener<Boolean> pinchZoomMagnificationListener = new StateChangedListener<Boolean>() {
+		@Override
+		public void stateChanged(Boolean enabled) {
+			app.runInUIThread(() -> {
+				OsmandMapTileView mapView = getMapView();
+                mapView.setPinchZoomMagnificationEnabled(enabled);
+            });
+		}
+	};
 	private KeyEventHelper keyEventHelper;
 	private RouteCalculationProgressListener routeCalculationProgressCallback;
 	private TransportRouteCalculationProgressCallback transportRouteCalculationProgressCallback;
@@ -216,27 +225,28 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		long time = System.currentTimeMillis();
+		app.applyTheme(this);
+		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
-		long tm = System.currentTimeMillis();
-		app = getMyApplication();
-		settings = app.getSettings();
+		super.onCreate(savedInstanceState);
+
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
 		keyEventHelper = app.getKeyEventHelper();
 		restoreNavigationHelper = new RestoreNavigationHelper(app, this);
-		app.applyTheme(this);
-		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		getMapActions().setMapActivity(this);
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
 
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		enterToFullScreen();
 		// Navigation Drawer
+		View menuItems = findViewById(R.id.menuItems);
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
+		InsetsUtils.setWindowInsetsListener(menuItems, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
@@ -291,8 +301,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		PluginsHelper.onMapActivityCreate(this);
 		importHelper = app.getImportHelper();
 		importHelper.setUiActivity(this);
-		if (System.currentTimeMillis() - tm > 50) {
-			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+		if (System.currentTimeMillis() - time > 50) {
+			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - time) + " ms");
 		}
 		mapView.refreshMap(true);
 
@@ -353,7 +363,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 
 			initListener = new MapAppInitializeListener(this);
-			getMyApplication().checkApplicationIsBeingInitialized(initListener);
+			app.checkApplicationIsBeingInitialized(initListener);
 		} else {
 			app.getOsmandMap().setupRenderingView();
 			restoreNavigationHelper.checkRestoreRoutingMode();
@@ -462,9 +472,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void setupProgressBar(@NonNull ProgressBar pb, boolean indeterminate) {
-		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
+		DayNightHelper dayNightHelper = app.getDaynightHelper();
 
-		boolean nightMode = dayNightHelper.isNightMode(ThemeUsageContext.OVER_MAP);
+		boolean nightMode = dayNightHelper.isNightMode(OVER_MAP);
 		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode(ThemeUsageContext.MAP);
 
 		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
@@ -505,7 +515,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (dashboardOnMap.onBackPressed()) {
 			return;
 		}
-		if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+		if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
 			closeDrawer();
 			return;
 		}
@@ -614,7 +624,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 
-		getMyApplication().getNotificationHelper().refreshNotifications();
+		app.getNotificationHelper().refreshNotifications();
 		// fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().hide();
@@ -760,6 +770,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		settings.MAP_SCREEN_ORIENTATION.addListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(useSystemScreenTimeoutListener);
+		settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.addListener(pinchZoomMagnificationListener);
 
 		extendedMapActivity.onResume(this);
 
@@ -785,8 +796,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	@Override
 	public void updateStatusBarColor() {
 		UiUtilities.updateStatusBarColor(this);
+	}
+
+	@Override
+	protected int getNavigationBarColorId() {
+		boolean nightMode = app.getDaynightHelper().isNightMode(OVER_MAP);
+		return ColorUtilities.getNavBarBackgroundColorId(nightMode);
 	}
 
 	public boolean isInAppPurchaseAllowed() {
@@ -939,13 +957,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onStart();
 		stopped = false;
 		lockHelper.onStart();
-		getMyApplication().getNotificationHelper().showNotifications();
+		app.getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
 	}
 
 	@Override
 	protected void onStop() {
-		getMyApplication().getNotificationHelper().removeNotifications(true);
+		app.getNotificationHelper().removeNotifications(true);
 		if (pendingPause) {
 			onPauseActivity();
 		}
@@ -1038,6 +1056,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void onPauseActivity() {
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
+		settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.removeListener(pinchZoomMagnificationListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
 			DestinationReachedFragment.resetShownState();
 		}
@@ -1099,6 +1118,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		keyEventHelper.updateGlobalCommands();
 
 		OsmandMapTileView mapView = getMapView();
+		
+		mapView.setPinchZoomMagnificationEnabled(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.get());
+		
 		MapLayers mapLayers = getMapLayers();
 		if (mapLayers.getMapInfoLayer() != null) {
 			mapLayers.getMapInfoLayer().recreateAllControls(this);
@@ -1125,11 +1147,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		applyScreenOrientation();
 		app.getAppCustomization().updateMapMargins(this);
 		dashboardOnMap.onAppModeChanged();
-	}
-
-	public void updateNavigationBarColor() {
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		getWindow().setNavigationBarColor(ColorUtilities.getNavBarBackgroundColor(app, nightMode));
 	}
 
 	public void updateMapSettings(boolean updateMapRenderer) {

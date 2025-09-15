@@ -21,14 +21,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import net.osmand.plus.*;
+import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.LockableViewPager;
+import net.osmand.plus.OnDialogFragmentResultListener;
+import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -55,7 +59,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	private static final int EXPLORE_POSITION = 0;
 	private static final int SAVED_ARTICLES_POSITION = 1;
 
-	private OsmandApplication app;
 	private boolean nightMode;
 	protected List<WeakReference<Fragment>> fragments = new ArrayList<>();
 
@@ -63,8 +66,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		app = getMyApplication();
-		OsmandSettings settings = app.getSettings();
 		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		int themeId = nightMode ? R.style.OsmandDarkTheme_NoActionbar : R.style.OsmandLightTheme_NoActionbar_LightStatusBar;
@@ -79,9 +80,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			if (settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_NoAnimation;
 			}
-			window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
+			AndroidUiHelper.setStatusBarColor(window, getResolvedColor(getStatusBarColor()));
 		}
-
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
@@ -158,7 +158,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 			setIntent(null);
 		}
-		getMyApplication().getDownloadThread().setUiActivity(this);
+		getApp().getDownloadThread().setUiActivity(this);
 		app.getTravelHelper().getBookmarksHelper().addListener(this);
 	}
 
@@ -180,7 +180,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	@Override
 	protected void onPause() {
 		super.onPause();
-		getMyApplication().getDownloadThread().resetUiActivity(this);
+		getApp().getDownloadThread().resetUiActivity(this);
 		app.getTravelHelper().getBookmarksHelper().removeListener(this);
 	}
 
@@ -385,7 +385,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		private final boolean resetData;
 
 		LoadWikivoyageData(WikivoyageExploreActivity activity, boolean resetData) {
-			travelHelper = activity.getMyApplication().getTravelHelper();
+			travelHelper = activity.getApp().getTravelHelper();
 			activityRef = new WeakReference<>(activity);
 			this.resetData = resetData;
 		}

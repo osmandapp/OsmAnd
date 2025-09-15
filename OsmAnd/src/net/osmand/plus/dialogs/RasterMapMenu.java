@@ -37,7 +37,7 @@ public class RasterMapMenu {
 
 	public static ContextMenuAdapter createListAdapter(MapActivity mapActivity,
 	                                                   RasterMapType type) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
+		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getApp());
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
 	}
@@ -45,7 +45,7 @@ public class RasterMapMenu {
 	private static void createLayersItems(ContextMenuAdapter contextMenuAdapter,
 	                                      MapActivity mapActivity,
 	                                      RasterMapType type) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);
 		assert plugin != null;

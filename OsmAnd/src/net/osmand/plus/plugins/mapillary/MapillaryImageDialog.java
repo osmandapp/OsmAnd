@@ -96,7 +96,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	public MapillaryImageDialog(@NonNull MapActivity mapActivity, @NonNull Bundle bundle) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		restoreFields(bundle);
-		this.iconsCache = mapActivity.getMyApplication().getUIUtilities();
+		this.iconsCache = mapActivity.getApp().getUIUtilities();
 	}
 
 	public MapillaryImageDialog(MapActivity mapActivity, String imageId, String sequenceId,
@@ -111,7 +111,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.viewerUrl = viewerUrl;
 		this.latLon = latLon;
 		this.compassAngle = compassAngle;
-		this.iconsCache = mapActivity.getMyApplication().getUIUtilities();
+		this.iconsCache = mapActivity.getApp().getUIUtilities();
 		this.sync = sync;
 	}
 
@@ -171,7 +171,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				mapView.getAnimatedDraggingThread().startMoving(
 						latLon.getLatitude(), latLon.getLongitude(), mapView.getZoom());
 			} else {
-				mapActivity.getMyApplication().getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
+				mapActivity.getApp().getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
 			}
 		} else {
 			mapActivity.refreshMap();
@@ -421,7 +421,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		if (nzoom < map.getMinimumZoomSupported()) {
 			return;
 		}
-		ResourceManager mgr = getMapActivity().getMyApplication().getResourceManager();
+		ResourceManager mgr = getMapActivity().getApp().getResourceManager();
 		QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
@@ -536,7 +536,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				// ignore
 			}
 			if (isValidRequest()) {
-				return AndroidNetworkUtils.downloadImage(getMapActivity().getMyApplication(), imageUrl);
+				return AndroidNetworkUtils.downloadImage(getMapActivity().getApp(), imageUrl);
 			} else {
 				return null;
 			}

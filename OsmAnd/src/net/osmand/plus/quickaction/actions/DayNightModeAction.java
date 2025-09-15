@@ -4,7 +4,6 @@ import static net.osmand.plus.quickaction.QuickActionIds.DAY_NIGHT_MODE_ACTION_I
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -34,10 +33,10 @@ public class DayNightModeAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
-		if (mapActivity.getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP)) {
-			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
+		if (mapActivity.getApp().getDaynightHelper().isNightMode(ThemeUsageContext.MAP)) {
+			mapActivity.getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
 		} else {
-			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.NIGHT);
+			mapActivity.getSettings().DAYNIGHT_MODE.set(DayNightMode.NIGHT);
 		}
 	}
 

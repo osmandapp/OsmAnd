@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
@@ -25,6 +26,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -39,24 +41,27 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private Amenity amenity;
 
-	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
+	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt,
+			@Nullable PlaceDetailsObject detailsObject) {
 		super(mapActivity);
 		this.wpt = wpt;
+		if (detailsObject != null) {
+			setAmenity(detailsObject.getSyntheticAmenity());
+		}
 		setShowNearestWiki(true);
 		acquireAmenityExtensions();
 	}
 
 	private void acquireAmenityExtensions() {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
-
-		String originName = wpt.getAmenityOriginName();
-		Pair<Amenity, Map<String, String>> pair = helper.getAmenityWithExtensions(
-				wpt.getExtensionsToRead(), originName, wpt.getLatitude(), wpt.getLongitude());
-
-		amenity = pair.first;
-		amenityExtensions.putAll(pair.second);
+		if (amenity == null) {
+			String originName = wpt.getAmenityOriginName();
+			if (!Algorithms.isEmpty(originName)) {
+				amenity = helper.findAmenity(originName, wpt.getLatitude(), wpt.getLongitude());
+			}
+		}
+		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(wpt.getExtensionsToRead(), amenity));
 	}
 
 	@Override
@@ -80,16 +85,14 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildDescription(View view) {
-		if (Algorithms.isEmpty(wpt.getDesc())) {
-			return;
+		if (!Algorithms.isEmpty(wpt.getDesc())) {
+			String textPrefix = app.getString(R.string.shared_string_description);
+			View.OnClickListener clickListener = v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.getDesc(), textPrefix);
+
+			buildRow(view, null, null, textPrefix, wpt.getDesc(), 0,
+					null, false, null, true, 10,
+					false, false, false, clickListener, matchWidthDivider);
 		}
-
-		String textPrefix = app.getString(R.string.shared_string_description);
-		View.OnClickListener clickListener = v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.getDesc(), textPrefix);
-
-		buildRow(view, null, null, textPrefix, wpt.getDesc(), 0,
-				null, false, null, true, 10,
-				false, false, false, clickListener, matchWidthDivider);
 	}
 
 	@Override
@@ -142,8 +145,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null) {
 			List<WptPt> points = selectedGpxFile.getGpxFile().getPointsList();
-			GpxFile gpx = selectedGpxFile.getGpxFile();
-			if (points.size() > 0) {
+			if (!points.isEmpty()) {
+				GpxFile gpx = selectedGpxFile.getGpxFile();
 				String title = view.getContext().getString(R.string.context_menu_points_of_group);
 				File file = new File(gpx.getPath());
 				String gpxName = file.getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");

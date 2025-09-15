@@ -174,7 +174,7 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public Dialog createDialog(Bundle savedInstanceState) {
 		return new Dialog(requireActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
@@ -473,7 +473,7 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
-			if (constraint == null || constraint.isEmpty()) {
+			if (Algorithms.isEmpty(constraint)) {
 				results.values = null;
 				results.count = 1;
 			} else {

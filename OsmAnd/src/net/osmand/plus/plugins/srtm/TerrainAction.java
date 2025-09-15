@@ -4,7 +4,6 @@ import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_ACTION_ID;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,7 +40,7 @@ public class TerrainAction extends QuickAction {
 		if (plugin != null) {
 			plugin.toggleTerrain(!plugin.isTerrainLayerEnabled(), () -> {
 				if (plugin.isTerrainLayerEnabled()) {
-					PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+					PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getApp(), plugin, true);
 				}
 				plugin.updateLayers(mapActivity, mapActivity);
 				mapActivity.refreshMapComplete();

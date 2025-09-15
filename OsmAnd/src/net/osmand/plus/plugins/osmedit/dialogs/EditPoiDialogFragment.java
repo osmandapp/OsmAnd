@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 import android.app.Activity;
@@ -17,7 +18,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -91,6 +91,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 	private static final int ADVANCED_TAB = 1;
+	public static final int AMENITY_TEXT_LENGTH = 255;
 
 	public static final HashSet<String> BASIC_TAGS = new HashSet<String>();
 
@@ -113,8 +114,6 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	private OnSaveButtonClickListener onSaveButtonClickListener;
 	private OsmandTextFieldBoxes poiTypeTextInputLayout;
 	private View view;
-
-	public static final int AMENITY_TEXT_LENGTH = 255;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -309,9 +308,9 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = super.onCreateDialog(savedInstanceState);
-		dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+	public Dialog createDialog(Bundle savedInstanceState) {
+		Dialog dialog = super.createDialog(savedInstanceState);
+		dialog.getWindow().setSoftInputMode(SOFT_INPUT_STATE_VISIBLE);
 		return dialog;
 	}
 

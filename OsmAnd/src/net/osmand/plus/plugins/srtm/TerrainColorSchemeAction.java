@@ -96,10 +96,10 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 				showChooseDialog(mapActivity);
 				return;
 			}
-			String nextStyle = getNextSelectedItem(mapActivity.getMyApplication());
+			String nextStyle = getNextSelectedItem(mapActivity.getApp());
 			executeWithParams(mapActivity, nextStyle);
 		} else {
-			mapActivity.getMyApplication().showToastMessage(R.string.quick_action_need_to_add_item_to_list);
+			mapActivity.getApp().showToastMessage(R.string.quick_action_need_to_add_item_to_list);
 		}
 	}
 
@@ -156,7 +156,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	@Override
 	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
 		return view -> {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = activity.getApp();
 			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 

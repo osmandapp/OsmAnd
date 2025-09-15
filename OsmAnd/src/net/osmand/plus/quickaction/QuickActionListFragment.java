@@ -147,7 +147,7 @@ public class QuickActionListFragment extends BaseFullScreenFragment implements Q
 		View view = inflate(R.layout.quick_action_list, container, false);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		fab = view.findViewById(R.id.fabButton);
+		fab = view.findViewById(R.id.fab);
 		fab.setOnClickListener(v -> showAddQuickActionDialog());
 
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);

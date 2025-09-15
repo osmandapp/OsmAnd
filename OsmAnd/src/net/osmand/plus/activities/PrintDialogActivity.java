@@ -25,7 +25,6 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 
 	private static final Log log = PlatformUtil.getLog(PrintDialogActivity.class);
 
-	private OsmandApplication app;
 	private WebView webView;
 	private PrintJobId printJobId;
 
@@ -33,7 +32,6 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 	public void onCreate(Bundle icicle) {
 		//This has to be called before setContentView and you must use the
 		//class in com.actionbarsherlock.view and NOT android.view
-		app = getMyApplication();
 		app.applyTheme(this);
 		getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 
@@ -42,6 +40,7 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		getSupportActionBar().setTitle(R.string.print_route);
 
 		setContentView(R.layout.print_dialog);
+
 		webView = findViewById(R.id.printDialogWebview);
 
 		Intent intent = getIntent();

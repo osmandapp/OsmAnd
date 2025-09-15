@@ -392,11 +392,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			boolean nightMode = isNightMode();
 			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
 				if (!nightMode) {
-					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+					AndroidUiHelper.setStatusBarContentColor(view, true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
 			} else if (!nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
+				AndroidUiHelper.setStatusBarContentColor(view, false);
 			}
 		}
 		return -1;
@@ -600,7 +600,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void setupButtons() {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		DialogButton saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setButtonType(DialogButtonType.PRIMARY);

@@ -303,7 +303,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				.setCustomView(switchStartAndEndView)
 				.setOnClickListener(v -> {
 					callMapActivity(activity -> {
-						OsmandApplication app = activity.getMyApplication();
+						OsmandApplication app = activity.getApp();
 						TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 						TargetPoint startPoint = targetsHelper.getPointToStart();
 						if (startPoint == null) {
@@ -385,7 +385,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				menu.selectMapMarker(mapMarker, pointType);
 				dismiss();
 			} else {
-				TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+				TargetPointsHelper targetPointsHelper = mapActivity.getApp().getTargetPointsHelper();
 				Pair<LatLon, PointDescription> pair = getLocationAndDescrFromItem(item);
 				LatLon ll = pair.first;
 				PointDescription name = pair.second;

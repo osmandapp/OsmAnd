@@ -61,6 +61,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
+
 	public static final String TAG = "QuickSearchPoiFilterFragment";
 
 	private static final String QUICK_SEARCH_POI_FILTER_ID_KEY = "quick_search_poi_filter_id_key";
@@ -85,7 +86,11 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private final ArrayList<String> showAllCategories = new ArrayList<>();
 	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 
-	public QuickSearchPoiFilterFragment() {
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
 	}
 
 	@Override
@@ -359,17 +364,17 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	}
 
 	private void applyFilterFields() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		if (!Algorithms.isEmpty(nameFilterText)) {
-			sb.append(nameFilterText);
+			builder.append(nameFilterText);
 		}
 		for (String param : selectedPoiAdditionals) {
-			if (!sb.isEmpty()) {
-				sb.append(" ");
+			if (!Algorithms.isEmpty(builder)) {
+				builder.append(" ");
 			}
-			sb.append(param);
+			builder.append(param);
 		}
-		filter.setFilterByName(sb.toString());
+		filter.setFilterByName(builder.toString());
 	}
 
 	private void processFilterFields() {

@@ -114,7 +114,7 @@ public class ShareMenu extends BaseMenuController {
 	private static void showNativeShareDialog(@NonNull ShareMenu menu, @NonNull MapActivity activity) {
 		menu.setupSharingFields(activity);
 
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		List<ShareItem> items = ShareItem.getNativeShareItems();
 		ChooserAction[] actions = new ChooserAction[items.size()];
 
@@ -143,7 +143,7 @@ public class ShareMenu extends BaseMenuController {
 
 		Intent shareIntent = Intent.createChooser(sendIntent, null);
 		shareIntent.putExtra(Intent.EXTRA_CHOOSER_CUSTOM_ACTIONS, actions);
-		AndroidUtils.startActivityIfSafe(activity.getMyApplication(), sendIntent, shareIntent);
+		AndroidUtils.startActivityIfSafe(activity.getApp(), sendIntent, shareIntent);
 	}
 
 	private void setupSharingFields(@NonNull MapActivity activity) {
@@ -357,7 +357,7 @@ public class ShareMenu extends BaseMenuController {
 			return this;
 		}
 
-		public NativeShareDialogBuilder build(@NonNull OsmandApplication app){
+		public NativeShareDialogBuilder build(@NonNull OsmandApplication app) {
 			Intent sendIntent = new Intent(Intent.ACTION_SEND);
 			sendIntent.setType(type);
 

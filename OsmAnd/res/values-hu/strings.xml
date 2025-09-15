@@ -774,7 +774,7 @@
     <string name="map_widget_renderer">Térképstílus</string>
     <string name="osmand_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - kompakt vektoros térképek az egész világról \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n - Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - éjszakai/nappali nézet automatikus átkapcsolása \n - sebességfüggő térképnagyítás \n - térképigazítás iránytű vagy mozgásirány szerint \n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok \n \n Az OsmAnd ezen ingyenes verziójának korlátozásai: \n - letölthető térképek számának korlátozása \n - wikipédia-POI offline elérés nélkül \n \n Az OsmAndot aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testreszabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtviszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testreszabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtési viszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
     <string name="avoid_motorway">Autópálya nélkül</string>
     <string name="snap_to_road">Úthoz illesztés</string>
@@ -834,11 +834,7 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videójegyzetek</string>
-    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás, lejtviszonyok segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sok minden mást. A topográfiai információk a térképen szintvonalakkal, domborzatárnyékolással és/vagy meredekségszínezéssel ábrázolhatók.
-\n
-\nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak.
-\n
-\nTovábbi információk: %1$s.</string>
+    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás, lejtési viszonyok segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sok minden mást. A topográfiai információk a térképen szintvonalakkal, domborzatárnyékolással és/vagy meredekségszínezéssel ábrázolhatók. \n \nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak. \n \nTovábbi információk: %1$s.</string>
     <string name="recording_is_recorded">Hang-/videofelvétel. A leállításhoz koppintson az A/V modulra.</string>
     <string name="recording_playing">A megadott felvétel egyik hangfájljának a lejátszása elindult.
 \n%1$s</string>
@@ -1674,7 +1670,7 @@
     <string name="osm_edit_created_poi">Létrehozott OSM POI</string>
     <string name="map_legend">Térkép jelkulcs</string>
     <string name="favourites_edit_dialog_title">Kedvenc információk</string>
-    <string name="share_osm_edits_subject">OSM-szerkesztések megosztása az OsmAnddal</string>
+    <string name="share_osm_edits_subject">OsmAnddal megosztott OSM-szerkesztések</string>
     <string name="lang_nds">alnémet</string>
     <string name="lang_mk">macedón</string>
     <string name="lang_fy">fríz</string>
@@ -2443,7 +2439,7 @@
     <string name="hide_full_description">Teljes leírás elrejtése</string>
     <string name="show_full_description">Teljes leírás megjelenítése</string>
     <string name="open_wikipedia_link_online">Wikipédia-link megnyitása online</string>
-    <string name="open_wikipedia_link_online_description">A hivatkozás a böngészőben fog megnyílni.</string>
+    <string name="open_wikipedia_link_online_description">A hivatkozás böngészőben fog megnyílni.</string>
     <string name="read_wikipedia_offline">Wikipédia olvasása offline</string>
     <string name="download_all">Összes letöltése</string>
     <string name="shared_string_restart">App újraindítása</string>
@@ -3183,7 +3179,7 @@
     <string name="replace_all">Az összes cseréje</string>
     <string name="shared_string_terrain">Domborzat</string>
     <string name="hillshade_description">A domborzatárnyékolási térkép sötét árnyalatokkal jeleníti meg a lejtést, hegycsúcsokat és síkságokat.</string>
-    <string name="slope_description">A lejtésviszony színezéssel jeleníti meg a terep meredekségét.</string>
+    <string name="slope_description">A lejtési viszony színezéssel jeleníti meg a terep meredekségét.</string>
     <string name="terrain_slider_description">Állítsa be a legkisebb és legnagyobb nagyítási szintet, amelyen a réteg megjelenjen.</string>
     <string name="hillshade_download_description">A domborzatárnyékolás térképen való megjelenítéséhez további térképek szükségesek.</string>
     <string name="slope_download_description">A lejtési viszonyok térképen való megjelenítéséhez további térképek szükségesek.</string>
@@ -3781,7 +3777,7 @@
     <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak közötti távolságot. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
-    <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
+    <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint színezett.</string>
     <string name="shared_string_min_height">Min. magasság</string>
     <string name="shared_string_max_height">Max. magasság</string>
     <string name="use_system_language">A rendszer nyelvének használata</string>
@@ -3898,7 +3894,7 @@
     <string name="purchases_feature_desc_combined_wiki">Fedezze fel a Wikipédia szócikkeit útközben, internetkapcsolat nélkül. Offline adatok országok szerinti bontásban, minden nyelven.</string>
     <string name="purchases_feature_desc_wikipedia">A Wikipédia összes, helyhez kapcsolódó szócikkét elérhetővé teszi offline módon, így a térképen egyszerű koppintásokkal megismerheti az utazás során meglátogatott helyeket. Ne felejtse el letölteni az adott régiók Wikipédia-térképfájljait.</string>
     <string name="purchases_feature_desc_wikivoyage">Fedezze fel a Wikivoyage útikalauzt offline módon. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
-    <string name="purchases_feature_desc_terrain">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtviszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
+    <string name="purchases_feature_desc_terrain">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtési viszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
     <string name="purchases_feature_desc_nautical">Hozzáférés a tengeri mélységadatokhoz</string>
     <string name="backup_error_no_valid_subscription">Jelenleg nincs érvényes előfizetése</string>
     <string name="backup_error_user_is_not_registered">Ezzel az e-mail-címmel nincs regisztrált felhasználó</string>
@@ -4829,7 +4825,7 @@
     <string name="terrain_map">Domborzati térkép (3D)</string>
     <string name="relief_3d_description">Birtokolja és figyelje meg környéke vagy akár az egész kontinens méretarányos modelljét.</string>
     <string name="slope_legend_description">A lejtés színekkel jelzi a terep meredekségét. A lejtési viszonyokról bővebben itt olvashat: %1$s.</string>
-    <string name="terrain_category_description">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtviszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
+    <string name="terrain_category_description">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtési viszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
     <string name="shared_string_deleting">Törlés folyamatban</string>
     <string name="delete_account_warning">Törli a fiókot: %1$s?</string>
     <string name="osmand_cloud_delete_account_confirmation">Fiók törlése\?</string>
@@ -4981,7 +4977,7 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Napszak” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
+    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Napszak” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtési viszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
     <string name="app_mode_baby_transport">Babakocsi</string>
     <string name="app_mode_paragliding">Siklóernyőzés</string>
@@ -5814,4 +5810,13 @@
     <string name="shared_sting_osm_link">OSM hivatkozás</string>
     <string name="show_local_names">Helyi nevek mutatása</string>
     <string name="obd_alt_battery_voltage">Akkumulátor feszültség (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Angol gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilométer</string>
+    <string name="miles">Mérföld</string>
+    <string name="mpg">Mérf./gal</string>
+    <string name="access_pinch_zoom_magnification">Csippentéses nagyítás</string>
+    <string name="access_pinch_zoom_magnification_descr">Nagyítás közben a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
+    <string name="accessibility_independent_features">Független funkciók</string>
 </resources>

@@ -78,7 +78,7 @@ public class SelectPointsFragment extends BaseFullScreenDialogFragment implement
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public Dialog createDialog(Bundle savedInstanceState) {
 		return new Dialog(requireContext(), getTheme()) {
 			@Override
 			public void onBackPressed() {
@@ -187,7 +187,7 @@ public class SelectPointsFragment extends BaseFullScreenDialogFragment implement
 
 	private void setupButtons(@NonNull View view) {
 		View buttonsContainer = view.findViewById(R.id.control_buttons);
-		View container = buttonsContainer.findViewById(R.id.buttons_container);
+		View container = buttonsContainer.findViewById(R.id.bottom_buttons_container);
 		container.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		applyButton = container.findViewById(R.id.right_bottom_button);

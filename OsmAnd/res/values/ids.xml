@@ -22,4 +22,11 @@
     <item name="elevation_widget_show_slopes" type="id"/>
     <item name="elevation_widget_hide_slopes" type="id"/>
 
+
+    <item name="initial_margin_bottom" type="id"/>
+    <item name="initial_height" type="id"/>
+    <item name="initial_padding_left" type="id"/>
+    <item name="initial_padding_top" type="id"/>
+    <item name="initial_padding_right" type="id"/>
+    <item name="initial_padding_bottom" type="id"/>
 </resources>

@@ -70,10 +70,11 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 			}
 		}
 		pref.setSummary(deviceName);
+		SensorWidgetDataFieldType sensorType = dataType.getSensorType();
 		if (deviceFound) {
-			pref.setIcon(getActiveIcon(dataType.getSensorType().disconnectedIconId));
+			pref.setIcon(getActiveIcon(sensorType.disconnectedIconId));
 		} else {
-			pref.setIcon(getIcon(dataType.getSensorType().disconnectedIconId));
+			pref.setIcon(getContentIcon(sensorType.disconnectedIconId));
 		}
 	}
 

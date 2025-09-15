@@ -162,7 +162,7 @@ public class WaypointDialogHelper {
 	}
 
 	public static void switchStartAndFinish(@NonNull MapActivity mapActivity, boolean updateRoute) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 		TargetPoint finish = targetsHelper.getPointToNavigate();
 		TargetPoint start = targetsHelper.getPointToStart();
@@ -192,7 +192,7 @@ public class WaypointDialogHelper {
 	}
 
 	public static void reverseAllPoints(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 
 		TargetPoint finish = targetsHelper.getPointToNavigate();
@@ -229,13 +229,13 @@ public class WaypointDialogHelper {
 	}
 
 	public static void clearAllIntermediatePoints(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		app.getTargetPointsHelper().clearAllIntermediatePoints(true);
 		updateControls(mapActivity);
 	}
 
 	public static void replaceStartWithFirstIntermediate(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 
 		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
@@ -250,7 +250,7 @@ public class WaypointDialogHelper {
 	public static void deletePoint(@NonNull MapActivity mapActivity,
 	                               @Nullable ArrayAdapter<Object> adapter, @NonNull Object item,
 	                               @NonNull List<LocationPointWrapper> deletedPoints) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (item instanceof LocationPointWrapper point && adapter != null) {
 			if (point.type == WaypointHelper.TARGETS && adapter instanceof StableArrayAdapter stableAdapter) {
 				updateAfterDeleteWaypoint(mapActivity, stableAdapter.getPosition(point));

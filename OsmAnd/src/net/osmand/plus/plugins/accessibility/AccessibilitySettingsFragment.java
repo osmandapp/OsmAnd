@@ -37,6 +37,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	private static final String ACCESSIBILITY_OPTIONS = "accessibility_options";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
+	private static final String INDEPENDENT_ACCESSIBILITY = "independent_accessibility";
 
 	private AccessibilityStateChangeListener accessibilityListener;
 
@@ -86,6 +87,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		setupDirectionStylePref();
 		setupDirectionAudioFeedbackPref();
 		setupDirectionHapticFeedbackPref();
+		setupPinchZoomMagnificationPref();
 
 		setupCopyProfileSettingsPref();
 		setupResetToDefaultPref();
@@ -217,6 +219,11 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		directionHapticFeedback.setDescription(getString(R.string.access_direction_haptic_feedback_descr));
 	}
 
+	private void setupPinchZoomMagnificationPref() {
+		SwitchPreferenceEx pinchZoomMagnification = findPreference(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.getId());
+		pinchZoomMagnification.setDescription(getString(R.string.access_pinch_zoom_magnification_descr));
+	}
+
 	private void setupCopyProfileSettingsPref() {
 		Preference copyProfilePrefs = findPreference(COPY_PLUGIN_SETTINGS);
 		copyProfilePrefs.setIcon(getActiveIcon(R.drawable.ic_action_copy));
@@ -295,6 +302,8 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 				String prefId = preference.getKey();
 				if (!settings.ACCESSIBILITY_MODE.getId().equals(prefId)
 						&& !settings.SPEECH_RATE.getId().equals(prefId)
+						&& !settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.getId().equals(prefId)
+						&& !INDEPENDENT_ACCESSIBILITY.equals(prefId)
 						&& !RESET_TO_DEFAULT.equals(prefId)
 						&& !COPY_PLUGIN_SETTINGS.equals(prefId)
 						&& !ACCESSIBILITY_OPTIONS.equals(prefId))

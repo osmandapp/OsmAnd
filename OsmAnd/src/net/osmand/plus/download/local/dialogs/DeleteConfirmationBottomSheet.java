@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -21,12 +19,21 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 
 	public static final String TAG = ConfirmationBottomSheet.class.getSimpleName();
 
-	private BaseLocalItem localItem;
+	private DeleteConfirmationDialogController controller;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		controller = DeleteConfirmationDialogController.getExistedInstance(app);
+		if (controller == null) {
+			dismiss();
+		}
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.delete_map_description, localItem.getName(requireContext())))
+				.setDescription(getString(R.string.delete_map_description, controller.getItemName()))
 				.setTitle(getString(R.string.delete_map))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create());
@@ -34,9 +41,7 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		if (getTargetFragment() instanceof ConfirmDeletionListener listener) {
-			listener.onDeletionConfirmed(localItem);
-		}
+		controller.onDeleteConfirmed();
 		dismiss();
 	}
 
@@ -62,17 +67,15 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 		return true;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target, @NonNull BaseLocalItem localItem) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			DeleteConfirmationBottomSheet fragment = new DeleteConfirmationBottomSheet();
-			fragment.localItem = localItem;
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
-		}
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		controller.finishProcessIfNeeded(getActivity());
 	}
 
-	public interface ConfirmDeletionListener {
-		void onDeletionConfirmed(@NonNull BaseLocalItem localItem);
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			new DeleteConfirmationBottomSheet().show(manager, TAG);
+		}
 	}
 }

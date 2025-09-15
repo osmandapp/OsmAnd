@@ -71,6 +71,22 @@
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
+	<PreferenceCategory
+		android:key="independent_accessibility"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/accessibility_independent_features" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="accessibility_pinch_zoom_magnification"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/access_pinch_zoom_magnification" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
 	<Preference
 		android:key="copy_plugin_settings"
 		android:layout="@layout/preference_button"

@@ -82,6 +82,14 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_container);
+		return ids;
+	}
+
 	protected void setupBottomContainer(@NonNull View bottomContainer) {
 	}
 

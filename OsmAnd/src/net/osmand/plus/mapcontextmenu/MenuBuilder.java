@@ -141,7 +141,7 @@ public class MenuBuilder {
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	protected boolean firstRow;
 	protected boolean matchWidthDivider;
-	private Amenity amenity;
+	protected Amenity amenity;
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
@@ -208,7 +208,7 @@ public class MenuBuilder {
 
 	public MenuBuilder(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.customization = app.getAppCustomization();
 		this.menuRowBuilder = new MenuRowBuilder(mapActivity);
 		this.plainMenuItems = new LinkedList<>();
@@ -308,6 +308,10 @@ public class MenuBuilder {
 
 	public void setCustomOnlinePhotosPosition(boolean customOnlinePhotosPosition) {
 		this.customOnlinePhotosPosition = customOnlinePhotosPosition;
+	}
+
+	public Amenity getAmenity() {
+		return amenity;
 	}
 
 	public void setAmenity(Amenity amenity) {
@@ -412,7 +416,7 @@ public class MenuBuilder {
 
 	protected void buildPluginRows(@NonNull View view, @Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
-			plugin.buildContextMenuRows(this, view, object);
+			plugin.buildContextMenuRows(this, view, object, amenity);
 		}
 	}
 
@@ -1330,7 +1334,7 @@ public class MenuBuilder {
 		titleView.setTextSize(16);
 		int textColor = ColorUtilities.getPrimaryTextColor(app, !light);
 		titleView.setTextColor(textColor);
-		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
+		String desc = route.getDescription(getMapActivity().getApp(), true);
 		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark);
 		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
 
@@ -1416,7 +1420,7 @@ public class MenuBuilder {
 			OsmandMapTileView mapView = getMapActivity().getMapView();
 			MapContextMenu mm = getMapActivity().getContextMenu();
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-					r.getDescription(getMapActivity().getMyApplication(), false));
+					r.getDescription(getMapActivity().getApp(), false));
 			mm.show(latLon, pd, r);
 			TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 			stopsLayer.setRoute(r);

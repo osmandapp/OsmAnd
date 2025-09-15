@@ -2422,7 +2422,7 @@
     <string name="order_by">Sorteer op:</string>
     <string name="marker_show_distance_descr">Kies hoe afstand en richting aangeduid worden bij markeringen op de kaart:</string>
     <string name="all_markers_moved_to_history">Alle kaartmarkeringen zijn naar de geschiedenis verplaatst</string>
-    <string name="marker_moved_to_history">Kaartmerkering naar geschiedenis verplaatst</string>
+    <string name="marker_moved_to_history">Kaartmarkering naar geschiedenis verplaatst</string>
     <string name="marker_moved_to_active">Kaartmarkering actief gemaakt</string>
     <string name="passed">Laatst gebruikt: %1$s</string>
     <string name="make_active">Activeren</string>
@@ -5131,7 +5131,7 @@
 \n
 \nVoer het e-mailadres in waarmee u bent geregistreerd. Er zal een eenmalig wachtwoord voor de volgende stap naar worden verzonden.</string>
     <string name="power_watts_unit">Watt</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Gebruik raster sqltieddb voor helling / heuvelkam</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Gebruik raster-SQLiteDB voor reliëfschaduw / helling</string>
     <string name="shared_string_avoid">Vermijd</string>
     <string name="free_favorites_backup_description">Registreer voor OsmAnd Cloud om een gratis back-up te maken van favorieten en instellingen.</string>
     <string name="get_osmand_cloud">Neem OsmAnd Cloud</string>
@@ -6185,4 +6185,13 @@
     <string name="shared_sting_osm_link">OSM-link</string>
     <string name="show_local_names">Toon plaatselijke namen</string>
     <string name="obd_alt_battery_voltage">Accuspanning (adapter)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Imperiale gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Mijl</string>
+    <string name="mpg">MPG</string>
+    <string name="access_pinch_zoom_magnification_descr">Gebruik de schaal van het venster in plaats van zoomniveaus tijdens inzoombewegingen.</string>
+    <string name="access_pinch_zoom_magnification">Knijp-zoom vergroting</string>
+    <string name="accessibility_independent_features">Onafhankelijke functies</string>
 </resources>

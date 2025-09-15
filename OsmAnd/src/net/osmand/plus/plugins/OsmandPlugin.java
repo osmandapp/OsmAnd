@@ -301,14 +301,15 @@ public abstract class OsmandPlugin {
 	/*
 	 * Return true in case if plugin should fill the map context menu with buildContextMenuRows method.
 	 */
-	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+	public boolean isMenuControllerSupported(MenuController menuController) {
 		return false;
 	}
 
 	/*
 	 * Add menu rows to the map context menu.
 	 */
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+			@Nullable Object object, @Nullable Amenity amenity) {
 	}
 
 	/*

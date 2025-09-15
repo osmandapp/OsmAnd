@@ -664,7 +664,7 @@ public class QuickSearchHelper implements ResourceListener {
 		controller.setOnTitleClickListener(listener);
 		controller.setOnCloseButtonClickListener(v -> hidePoiFilterOnMap(mapActivity, controller, action));
 		controller.setTitle(filter.getName());
-		PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
+		PoiFiltersHelper helper = mapActivity.getApp().getPoiFilters();
 		helper.replaceSelectedPoiFilters(filter);
 		mapActivity.showTopToolbar(controller);
 		mapActivity.refreshMap();
@@ -674,7 +674,7 @@ public class QuickSearchHelper implements ResourceListener {
 	                                       @NonNull TopToolbarController controller,
 	                                       @Nullable Runnable action) {
 		mapActivity.hideTopToolbar(controller);
-		mapActivity.getMyApplication().getPoiFilters().restoreSelectedPoiFilters();
+		mapActivity.getApp().getPoiFilters().restoreSelectedPoiFilters();
 		mapActivity.refreshMap();
 		if (action != null) {
 			action.run();

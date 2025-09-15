@@ -84,7 +84,7 @@ public class RateUsHelper {
 	}
 
 	public static void showRateDialog(@NonNull MapActivity mapActivity) {
-		if (Version.isGooglePlayInstalled(mapActivity.getMyApplication())) {
+		if (Version.isGooglePlayInstalled(mapActivity.getApp())) {
 			showInAppRateDialog(mapActivity);
 		} else {
 			RateUsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());

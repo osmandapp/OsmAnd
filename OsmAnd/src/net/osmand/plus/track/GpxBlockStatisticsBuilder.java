@@ -350,7 +350,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_ALTITUDE: {
-				if (analysis.hasElevationData()) {
+				if (analysis.hasElevationMetrics()) {
 					items.add(statBlock);
 				}
 				break;
@@ -469,9 +469,11 @@ public class GpxBlockStatisticsBuilder {
 							list.add(item.secondType);
 						}
 					}
-					displayItem.chartTypes = list.size() > 0 ? list.toArray(new GPXDataSetType[0]) : null;
-					displayItem.locationOnMap = displayItem.locationStart;
-					actionsListener.openAnalyzeOnMap(displayItem);
+					if (!list.isEmpty()) {
+						displayItem.chartTypes = list.toArray(new GPXDataSetType[0]);
+						displayItem.locationOnMap = displayItem.locationStart;
+						actionsListener.openAnalyzeOnMap(displayItem);
+					}
 				}
 			});
 			Drawable icon = app.getUIUtilities().getIcon(item.imageResId, item.imageColorId);

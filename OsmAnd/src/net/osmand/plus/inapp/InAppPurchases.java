@@ -1405,6 +1405,9 @@ public abstract class InAppPurchases {
 
 		public static InAppPurchaseExternalSubscription buildFromJson(@NonNull OsmandApplication ctx,
 																	  @NonNull JSONObject json) throws Exception {
+			if (!json.has("cross-platform")) {
+				return null;
+			}
 			boolean crossPlatform = json.getString("cross-platform").equals("true");
 			if (!crossPlatform) {
 				throw new IllegalArgumentException("Subscription is not cross-platform");
@@ -1487,6 +1490,9 @@ public abstract class InAppPurchases {
 
 		public static InAppPurchaseExternalInApp buildFromJson(@NonNull OsmandApplication ctx,
 														@NonNull JSONObject json) throws Exception {
+			if (!json.has("cross-platform")) {
+				return null;
+			}
 			boolean crossPlatform = json.getString("cross-platform").equals("true");
 			if (!crossPlatform) {
 				throw new IllegalArgumentException("InApp is not cross-platform");

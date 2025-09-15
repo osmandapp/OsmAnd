@@ -132,7 +132,7 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 	}
 
 	private void setupActionButtons(@NonNull View view) {
-		ViewGroup container = view.findViewById(R.id.buttons_container);
+		ViewGroup container = view.findViewById(R.id.bottom_buttons_container);
 		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		setupAttachRoadsButton(container, inflater);
 		container.addView(inflater.inflate(R.layout.divider_half_item_with_background, container, false));
@@ -162,7 +162,7 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 	}
 
 	private void updateButtons(View view) {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.list_background_color));
 		applyButton.setOnClickListener(v -> openApproximation());
 		cancelButton.setOnClickListener(v -> {

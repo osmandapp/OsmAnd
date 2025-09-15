@@ -80,7 +80,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private static final boolean SUGGEST_TO_DOWNLOAD_BASEMAP = false;
 	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP;
 
-	private OsmandApplication app;
 	private DownloadIndexesThread downloadThread;
 
 	private final List<TabItem> tabs = new ArrayList<>();
@@ -103,7 +102,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		app = getMyApplication();
 		downloadThread = app.getDownloadThread();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
@@ -115,6 +113,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download_activity);
+
 		updateToolbar();
 
 		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
@@ -289,7 +288,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) {
 					RestartActivity.doRestart(this);
 				} else if (fileName.startsWith(FileNameTranslationHelper.SEA_DEPTH)) {
-					app.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
+					settings.getCustomRenderBooleanProperty("depthContours").set(true);
 				}
 			}
 			downloadItem = null;

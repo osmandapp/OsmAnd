@@ -6,7 +6,6 @@ import static net.osmand.plus.quickaction.QuickActionIds.LOCK_SCREEN_ACTION;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -49,13 +48,13 @@ public class LockScreenAction extends QuickAction {
 	}
 
 	private void toggleLockScreen(@NonNull MapActivity mapActivity, @Nullable KeyEvent event){
-		mapActivity.getMyApplication().getLockHelper().toggleLockScreen();
+		mapActivity.getApp().getLockHelper().toggleLockScreen();
 		mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
 		showToast(mapActivity, event);
 	}
 
 	private void showToast(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		String toastString;
 		if (app.getLockHelper().isScreenLocked()) {
 			if (event != null) {
@@ -68,7 +67,7 @@ public class LockScreenAction extends QuickAction {
 		} else {
 			toastString = app.getString(R.string.screen_is_unlocked);
 		}
-		mapActivity.getMyApplication().showToastMessage(toastString);
+		mapActivity.getApp().showToastMessage(toastString);
 	}
 
 	@Override

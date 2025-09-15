@@ -47,7 +47,7 @@ public class FreeVersionBanner {
 
 	public FreeVersionBanner(@NonNull View view, @NonNull DownloadActivity activity) {
 		this.activity = activity;
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 		this.settings = app.getSettings();
 
 		freeVersionBanner = view.findViewById(R.id.freeVersionBanner);

@@ -63,48 +63,7 @@
 			tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 			tools:listitem="@layout/item_gpx_stat_block" />
 
-		<LinearLayout
-			android:id="@+id/waypoints_row"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/selectableItemBackground"
-			android:minHeight="@dimen/bottom_sheet_list_item_height"
-			android:orientation="horizontal">
-
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/icon"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding_small"
-				android:layout_marginRight="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding_small"
-				android:src="@drawable/ic_action_folder"
-				tools:tint="?attr/active_color_basic" />
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/title"
-				style="@style/TitleStyle"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_weight="1"
-				android:text="@string/shared_string_waypoints"
-				android:textColor="?android:textColorPrimary" />
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/counter"
-				style="@style/TitleStyle"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:textColor="?android:textColorSecondary"
-				tools:text="7/14" />
-
-		</LinearLayout>
+		<include layout="@layout/waypoints_row" />
 
 		<View
 			android:id="@+id/buttons_divider"
@@ -112,38 +71,7 @@
 			android:layout_height="1dp"
 			android:background="?attr/divider_color_basic" />
 
-		<LinearLayout
-			android:id="@+id/selected_row"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/selectableItemBackground"
-			android:minHeight="@dimen/bottom_sheet_list_item_height"
-			android:orientation="horizontal">
-
-			<androidx.appcompat.widget.AppCompatCheckBox
-				android:id="@+id/compound_button"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding_small"
-				android:layout_marginRight="@dimen/content_padding"
-				android:layout_marginBottom="@dimen/content_padding_small"
-				android:background="@null"
-				android:clickable="false"
-				android:focusable="false"
-				android:focusableInTouchMode="false" />
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/title"
-				style="@style/TitleStyle.Medium"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:text="@string/shared_string_select"
-				android:textColor="?attr/active_color_basic" />
-
-		</LinearLayout>
+		<include layout="@layout/selected_row" />
 
 	</LinearLayout>
 
