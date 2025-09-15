@@ -80,6 +80,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private EditText editText;
 	private TextView applyFilterButton;
 	private View applyFilterButtonShadow;
+	private View bottomButtonContainer;
 	private final Set<String> selectedPoiAdditionals = new TreeSet<>();
 	private Set<String> selectedPoiAdditionalsOrig = new TreeSet<>();
 	private final ArrayList<String> collapsedCategories = new ArrayList<>();
@@ -247,6 +248,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 		applyFilterButtonShadow = view.findViewById(R.id.bottomButtonShadow);
 		applyFilterButton = view.findViewById(R.id.bottomButton);
+		bottomButtonContainer = view.findViewById(R.id.bottom_buttons_container);
 		applyFilterButton.setText(getString(R.string.apply_filters));
 		applyFilterButton.setOnClickListener(v -> {
 			applyFilterFields();
@@ -263,7 +265,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 	private void updateApplyButton() {
 		boolean hasChanges = !nameFilterText.equals(nameFilterTextOrig) || !selectedPoiAdditionals.equals(selectedPoiAdditionalsOrig);
-		applyFilterButton.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
+		bottomButtonContainer.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
 		applyFilterButtonShadow.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
 	}
 

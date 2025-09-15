@@ -115,6 +115,14 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	private OsmandTextFieldBoxes poiTypeTextInputLayout;
 	private View view;
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -94,6 +94,14 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 	private boolean searchCancelled;
 	private Collator collator;
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -179,7 +187,7 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 		});
 
 		bottomBarShadow = view.findViewById(R.id.bottomBarShadow);
-		bottomBar = view.findViewById(R.id.bottomBar);
+		bottomBar = view.findViewById(R.id.bottom_buttons_container);
 		button = view.findViewById(R.id.button);
 		barTitle = view.findViewById(R.id.barTitle);
 		barSubTitle = view.findViewById(R.id.barSubTitle);

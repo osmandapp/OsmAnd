@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
@@ -34,6 +35,9 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogFragment {
 
@@ -67,6 +71,19 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 				R.string.shared_string_show_on_map, this, nightMode, this::hide);
 
 		updateUpDownBtn();
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return null;
+	}
+
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.triple_bottom_buttons);
+		return ids;
 	}
 
 	@Override

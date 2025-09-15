@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -23,6 +24,8 @@ import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+
+import java.util.List;
 
 public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragment {
 
@@ -49,6 +52,12 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 		});
 		setupHeightAndBackground(view);
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return null;
 	}
 
 	private void sendResult() {

@@ -22,6 +22,9 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.AndroidUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = AskMapDownloadFragment.class.getSimpleName();
@@ -77,6 +80,14 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 		view.findViewById(R.id.actionButtonCancel).setOnClickListener(v -> dismiss());
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.root_view);
+		return ids;
 	}
 
 	@Override

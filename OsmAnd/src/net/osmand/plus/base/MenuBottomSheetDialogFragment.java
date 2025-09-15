@@ -196,19 +196,33 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	public Set<InsetSide> getRootInsetSides(){
-		return null;
+		return EnumSet.of(InsetSide.TOP);
 	}
 
 	@Nullable
 	@Override
 	public List<Integer> getScrollableViewIds() {
-		return null;
+		List<Integer> ids = new ArrayList<>();
+		if (hideButtonsContainer()) {
+			if (useScrollableItemsContainer()) {
+				ids.add(R.id.scrollable_items_container);
+			} else {
+				ids.add(R.id.non_scrollable_items_container);
+			}
+		}
+		return ids;
 	}
 
 	@Nullable
 	public List<Integer> getBottomContainersIds() {
 		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
+		if (!hideButtonsContainer()) {
+			if (useVerticalButtons()) {
+				ids.add(R.id.buttons_container);
+			} else {
+				ids.add(R.id.bottom_buttons_container);
+			}
+		}
 		return ids;
 	}
 

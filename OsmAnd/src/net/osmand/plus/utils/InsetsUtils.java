@@ -159,14 +159,7 @@ public class InsetsUtils {
 	private static boolean shouldAllowProcessInsets(@NonNull ISupportInsets insetSupportedFragment) {
 		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment dialogFragment) {
 			return dialogFragment.getDialog() != null && dialogFragment.getShowsDialog();
-		} else if (insetSupportedFragment.requireActivity() instanceof MapActivity) {
-			if (insetSupportedFragment instanceof BaseOsmAndFragment fragment) {
-				return fragment.getParentFragment() == null;
-			} else {
-				return true;
-			}
-		}
-		return false;
+		} else return insetSupportedFragment.requireActivity() instanceof MapActivity;
 	}
 
 	private static void processRootInsetSides(@NonNull WindowInsetsCompat insets,
@@ -224,7 +217,7 @@ public class InsetsUtils {
 	private static void processBottomContainerInsets(@NonNull WindowInsetsCompat insets,
 	                                                 @Nullable List<Integer> bottomContainers,
 	                                                 @NonNull View view){
-		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime());
 
 		View bottomContainer = null;
 		if (bottomContainers != null) {
@@ -272,8 +265,6 @@ public class InsetsUtils {
 				viewGroup.setClipToPadding(false);
 			}
 			InsetsUtils.applyPadding(listView, insets, EnumSet.of(InsetSide.BOTTOM));
-		} else if (insetSupportedFragment instanceof BaseOsmAndDialogFragment && insetSides != null) {
-			insetSides.add(InsetSide.BOTTOM);
 		}
 	}
 }

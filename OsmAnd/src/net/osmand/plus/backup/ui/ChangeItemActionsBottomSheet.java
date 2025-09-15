@@ -36,7 +36,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
@@ -78,6 +83,20 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		descriptionView.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
 				getString(R.string.last_synchronized), BackupUiUtils.getTimeString(app, item.time)));
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.second_icon), false);
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
 	}
 
 	private void setupDownloadAction(@NonNull View view) {

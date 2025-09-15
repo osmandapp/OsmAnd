@@ -87,6 +87,7 @@
 
 
 		<LinearLayout
+			android:id="@+id/bottom_buttons_container"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/bottom_sheet_cancel_button_height"
 			android:background="?attr/wikivoyage_bottom_bar_bg_color">

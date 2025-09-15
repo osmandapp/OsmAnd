@@ -28,6 +28,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior.BottomSheetCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = AdditionalActionsBottomSheetDialogFragment.class.getSimpleName();
@@ -131,6 +134,14 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		}
 
 		return mainView;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.cancel_row_background);
+		return ids;
 	}
 
 	@Override

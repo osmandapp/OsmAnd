@@ -24,17 +24,11 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragment {
 
@@ -52,8 +46,16 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	private View headerSelectAll;
 	private View headerShadow;
 	private View footerShadow;
-	private FrameLayout addButton;
+	private FrameLayout buttonsContainer;
 	private boolean selectAll;
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -121,9 +123,11 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 		toolbar.setNavigationOnClickListener(v -> dismissFragment());
 		TextView title = root.findViewById(R.id.title);
 		title.setText(poiCategory.getTranslation());
-		addButton = root.findViewById(R.id.add_button);
+
+		buttonsContainer = root.findViewById(R.id.bottom_buttons_container);
 		updateAddBtnVisibility();
-		addButton.setOnClickListener(v -> dismissFragment());
+		root.findViewById(R.id.add_button).setOnClickListener(v -> dismissFragment());
+
 		listView = root.findViewById(R.id.list);
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			@Override
@@ -189,8 +193,8 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	}
 
 	private void updateAddBtnVisibility() {
-		if (addButton != null) {
-			addButton.setVisibility(adapter.getSelectedItems().isEmpty() ? View.GONE : View.VISIBLE);
+		if (buttonsContainer != null) {
+			buttonsContainer.setVisibility(adapter.getSelectedItems().isEmpty() ? View.GONE : View.VISIBLE);
 		}
 	}
 

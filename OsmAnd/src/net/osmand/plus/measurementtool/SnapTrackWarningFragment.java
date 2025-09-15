@@ -40,6 +40,9 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 
 	public static final int REQUEST_CODE = 1000;
@@ -118,6 +121,14 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 		return rootView;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.buttons_container);
+		return ids;
+	}
+
 	private void setupControlButtons(@NonNull View view) {
 		MapActivity activity = requireMapActivity();
 		MapLayers mapLayers = activity.getMapLayers();
@@ -132,7 +143,7 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 	}
 
 	private void setupActionButtons(@NonNull View view) {
-		ViewGroup container = view.findViewById(R.id.bottom_buttons_container);
+		ViewGroup container = view.findViewById(R.id.buttons_container);
 		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		setupAttachRoadsButton(container, inflater);
 		container.addView(inflater.inflate(R.layout.divider_half_item_with_background, container, false));
@@ -162,7 +173,7 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 	}
 
 	private void updateButtons(View view) {
-		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
+		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.list_background_color));
 		applyButton.setOnClickListener(v -> openApproximation());
 		cancelButton.setOnClickListener(v -> {

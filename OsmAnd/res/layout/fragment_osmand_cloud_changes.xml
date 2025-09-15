@@ -31,7 +31,7 @@
 		android:id="@+id/pager"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		app:layout_constraintBottom_toTopOf="@+id/buttons_container"
+		app:layout_constraintBottom_toTopOf="@+id/bottom_buttons_container"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/appbar">
@@ -49,11 +49,12 @@
 		app:layout_constraintStart_toStartOf="parent" />
 
 	<LinearLayout
-		android:id="@+id/buttons_container"
+		android:id="@+id/bottom_buttons_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
 		android:orientation="vertical"
+		android:background="?attr/list_background_color"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent">
@@ -61,7 +62,6 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/list_background_color"
 			android:minHeight="@dimen/bottom_sheet_title_height"
 			android:orientation="horizontal">
 

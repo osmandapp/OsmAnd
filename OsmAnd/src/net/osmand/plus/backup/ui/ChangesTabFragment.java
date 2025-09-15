@@ -33,10 +33,12 @@ import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public abstract class ChangesTabFragment extends BaseFullScreenFragment implements OnPrepareBackupListener,
 		OnBackupSyncListener {
@@ -77,6 +79,12 @@ public abstract class ChangesTabFragment extends BaseFullScreenFragment implemen
 		recyclerView.setLayoutAnimation(null);
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return null;
 	}
 
 	@Override

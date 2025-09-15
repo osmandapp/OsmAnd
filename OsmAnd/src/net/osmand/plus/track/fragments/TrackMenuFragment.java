@@ -157,6 +157,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
@@ -253,6 +254,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public int getMainLayoutId() {
 		return R.layout.track_menu;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_navigation);
+		return ids;
 	}
 
 	@Override

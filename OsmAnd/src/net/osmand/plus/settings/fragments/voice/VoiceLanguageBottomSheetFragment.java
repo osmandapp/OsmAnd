@@ -31,10 +31,13 @@ import net.osmand.plus.settings.fragments.voice.VoiceItemsAdapter.VoiceItemsList
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents, VoiceItemsListener {
 
@@ -72,6 +75,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		validationManager = new DownloadValidationManager(app);
 		selectedVoiceType = defineSelectedVoiceType();
 		loadVoiceItems();
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return EnumSet.of(InsetSide.TOP);
 	}
 
 	@NonNull

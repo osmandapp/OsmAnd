@@ -143,6 +143,7 @@
 		android:background="?attr/divider_color" />
 
 	<LinearLayout
+		android:id="@+id/bottom_buttons_container"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"

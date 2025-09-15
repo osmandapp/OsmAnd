@@ -134,7 +134,7 @@ public class EditKeyAssignmentFragment extends BaseFullScreenFragment
 		boolean editMode = controller.isInEditMode();
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_edit), !editMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_overflow_menu), !editMode);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_buttons), editMode);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_buttons_container), editMode);
 		updateToolbarTitle(view);
 		updateSaveButton(view);
 		updateViewContent();
