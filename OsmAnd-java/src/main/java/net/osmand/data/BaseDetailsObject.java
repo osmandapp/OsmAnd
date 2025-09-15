@@ -236,7 +236,7 @@ public class BaseDetailsObject {
 		sortObjects();
 		Set<String> contentLocales = new TreeSet<>();
 		for (Object object : objects) {
-			mergeObject(object, contentLocales);
+			mergeObject(object, contentLocales, objects.size() == 1);
 		}
 		if (!Algorithms.isEmpty(contentLocales)) {
 			syntheticAmenity.updateContentLocales(contentLocales);
@@ -251,13 +251,13 @@ public class BaseDetailsObject {
 		}
 	}
 
-	protected void mergeObject(Object object, Set<String> contentLocales) {
+	protected void mergeObject(Object object, Set<String> contentLocales, boolean isSingleObject) {
 		if (object instanceof Amenity amenity) {
-			processAmenity(amenity, contentLocales);
+			processAmenity(amenity, contentLocales, isSingleObject);
 		} else if (object instanceof TransportStop transportStop) {
 			Amenity amenity = transportStop.getAmenity();
 			if (amenity != null) {
-				processAmenity(amenity, contentLocales);
+				processAmenity(amenity, contentLocales, isSingleObject);
 			} else {
 				processId(transportStop);
 				syntheticAmenity.copyNames(transportStop);
@@ -292,7 +292,7 @@ public class BaseDetailsObject {
 		}
 	}
 
-	protected void processAmenity(Amenity amenity, Set<String> contentLocales) {
+	protected void processAmenity(Amenity amenity, Set<String> contentLocales, boolean isSingleObject) {
 		processId(amenity);
 
 		LatLon location = amenity.getLocation();
@@ -324,8 +324,9 @@ public class BaseDetailsObject {
 			syntheticAmenity.setTravelEloNumber(travelElo);
 		}
 		syntheticAmenity.copyNames(amenity);
-		if (getResourceType(amenity) != SearchResultResource.TRAVEL
-				|| getLangForTravel(amenity).equals(this.lang)) {
+		boolean shouldCopyAdditionalInfo = getResourceType(amenity) != SearchResultResource.TRAVEL
+				|| getLangForTravel(amenity).equals(this.lang); // avoid articles in another language
+		if (isSingleObject || shouldCopyAdditionalInfo) {
 			syntheticAmenity.copyAdditionalInfo(amenity, false);
 		}
 		processPolygonCoordinates(amenity.getX(), amenity.getY());
