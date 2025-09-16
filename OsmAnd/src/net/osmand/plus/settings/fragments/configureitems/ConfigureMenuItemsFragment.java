@@ -39,6 +39,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implements CopyAppModePrefsListener, OnChangeSettingListener {
@@ -96,6 +97,14 @@ public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implement
 		setupBottomButtons(view);
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.profiles_list);
+		return ids;
 	}
 
 	private void setupToolbar(@NonNull View view) {

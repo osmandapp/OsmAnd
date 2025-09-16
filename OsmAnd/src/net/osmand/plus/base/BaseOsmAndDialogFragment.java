@@ -71,7 +71,17 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 			} else {
 				WindowCompat.setDecorFitsSystemWindows(dialog.getWindow(), false);
 			}
+		}
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		Dialog dialog = getDialog();
+		if (dialog != null && dialog.getWindow() != null && Build.VERSION.SDK_INT > 29) {
 			InsetsUtils.processInsets(this, dialog.getWindow().getDecorView());
+		} else {
+			InsetsUtils.processInsets(this, view);
 		}
 	}
 
@@ -93,12 +103,6 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	@Nullable
 	@Override
 	public List<Integer> getFabIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
 		return null;
 	}
 

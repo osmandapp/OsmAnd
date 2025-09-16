@@ -126,6 +126,13 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 		return root;
 	}
 
+	@Nullable
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.list);
+		return ids;
+	}
+
 	protected abstract void onContinueButtonClickAction();
 
 	@Override

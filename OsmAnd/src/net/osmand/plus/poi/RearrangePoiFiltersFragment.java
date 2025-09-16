@@ -237,6 +237,21 @@ public class RearrangePoiFiltersFragment extends BaseFullScreenDialogFragment im
 		return mainView;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.profiles_list);
+		return ids;
+	}
+
+	@Nullable
+	public List<Integer> getBottomContainersIds(){
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
+
 	@Override
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		if (filterDeleted && resultCallback != null) {
