@@ -68,6 +68,7 @@ import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.TrackItem;
@@ -81,6 +82,7 @@ import net.osmand.shared.util.KAlgorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -163,6 +165,12 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 		setupAdapter(view);
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return null;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogcatActivity extends BaseLogcatActivity {
 
@@ -50,6 +54,14 @@ public class LogcatActivity extends BaseLogcatActivity {
 		recyclerView = findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.recycler_view);
+		return ids;
 	}
 
 	@Override

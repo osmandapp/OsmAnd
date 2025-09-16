@@ -14,9 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ISupportInsets;
 
 import java.util.EnumSet;
@@ -136,36 +134,32 @@ public class InsetsUtils {
 	}
 
 	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView) {
-		boolean allowProcessInsets = shouldAllowProcessInsets(insetSupportedFragment);
-		if (!allowProcessInsets) {
-			return;
-		}
 		Set<InsetSide> insetSides = insetSupportedFragment.getRootInsetSides();
 		List<Integer> rootScrollableIds = insetSupportedFragment.getScrollableViewIds();
 		List<Integer> bottomContainers = insetSupportedFragment.getBottomContainersIds();
 		List<Integer> fabs = insetSupportedFragment.getFabIds();
 
 		InsetsUtils.setWindowInsetsListener(rootView, (v, insets) -> {
-			processScrollInsets(insetSupportedFragment, insets, rootScrollableIds, v, insetSides);
+			processScrollInsets(insets, rootScrollableIds, v);
 			processBottomContainerInsets(insets, bottomContainers, v);
 			processFabInsets(insets, fabs, v);
-			processRootInsetSides(insets, insetSides, v);
+			processRootInsetSides(insetSupportedFragment, insets, insetSides, v);
 
 			insetSupportedFragment.setLastRootInsets(insets);
 			insetSupportedFragment.onApplyInsets(insets);
 		}, true);
 	}
 
-	private static boolean shouldAllowProcessInsets(@NonNull ISupportInsets insetSupportedFragment) {
-		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment dialogFragment) {
-			return dialogFragment.getDialog() != null && dialogFragment.getShowsDialog();
-		} else return insetSupportedFragment.requireActivity() instanceof MapActivity;
-	}
-
-	private static void processRootInsetSides(@NonNull WindowInsetsCompat insets,
+	private static void processRootInsetSides(ISupportInsets insetSupportedFragment, @NonNull WindowInsetsCompat insets,
 	                                          @Nullable Set<InsetSide> insetSides,
 	                                          @NonNull View view){
-		InsetsUtils.applyPadding(view, insets, insetSides);
+		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment dialogFragment) {
+			if (dialogFragment.getDialog() != null && dialogFragment.getShowsDialog()) {
+				InsetsUtils.applyPadding(view, insets, insetSides);
+			}
+		} else {
+			InsetsUtils.applyPadding(view, insets, insetSides);
+		}
 	}
 
 	private static void processFabInsets(@NonNull WindowInsetsCompat insets,
@@ -214,7 +208,7 @@ public class InsetsUtils {
 		}
 	}
 
-	private static void processBottomContainerInsets(@NonNull WindowInsetsCompat insets,
+	public static void processBottomContainerInsets(@NonNull WindowInsetsCompat insets,
 	                                                 @Nullable List<Integer> bottomContainers,
 	                                                 @NonNull View view){
 		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime());
@@ -248,11 +242,9 @@ public class InsetsUtils {
 		}
 	}
 
-	private static void processScrollInsets(@NonNull ISupportInsets insetSupportedFragment,
-	                                        @NonNull WindowInsetsCompat insets,
+	private static void processScrollInsets(@NonNull WindowInsetsCompat insets,
 	                                        @Nullable List<Integer> rootScrollableIds,
-	                                        @NonNull View view,
-	                                        @Nullable Set<InsetSide> insetSides) {
+	                                        @NonNull View view) {
 		View listView = null;
 		if (rootScrollableIds != null) {
 			for (int id : rootScrollableIds) {

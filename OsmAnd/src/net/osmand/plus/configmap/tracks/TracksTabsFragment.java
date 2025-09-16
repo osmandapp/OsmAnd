@@ -120,6 +120,20 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return super.getScrollableViewIds();
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.buttons_container);
+		return ids;
+	}
+
 	private void setupToolbar(@NonNull View view) {
 		progressBar = view.findViewById(R.id.progress_bar);
 		View appbar = view.findViewById(R.id.appbar);

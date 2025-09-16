@@ -31,6 +31,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 
@@ -95,6 +96,14 @@ public class MyPlacesActivity extends TabActivity {
 				}
 			}
 		}
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottomControls);
+		return ids;
 	}
 
 	public void updateToolbar() {

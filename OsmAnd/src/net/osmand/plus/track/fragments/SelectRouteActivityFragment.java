@@ -32,6 +32,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SelectRouteActivityFragment extends CustomizableSingleSelectionDialogFragment {
 
 	private SelectRouteActivityController controller;
@@ -72,6 +75,14 @@ public class SelectRouteActivityFragment extends CustomizableSingleSelectionDial
 		setupSearch(view);
 		onScreenModeChanged();
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.recycler_view);
+		return ids;
 	}
 
 	@Override

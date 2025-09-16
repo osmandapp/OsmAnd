@@ -17,16 +17,23 @@
 	    android:layout_marginEnd="0dp"
 	    android:layout_marginStart="0dp" />
 
-    <net.osmand.plus.widgets.ButtonEx
-        android:id="@+id/updateAllButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="?attr/downloadButtonBackground"
-        android:text="@string/update_all"
-        android:textColor="?android:textColorPrimary"
-        android:textAllCaps="true"
-        tools:visibility="visible"
-        android:visibility="gone"/>
+	<FrameLayout
+		android:id="@+id/bottom_buttons_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<net.osmand.plus.widgets.ButtonEx
+			android:id="@+id/updateAllButton"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:background="?attr/downloadButtonBackground"
+			android:text="@string/update_all"
+			android:textColor="?android:textColorPrimary"
+			android:textAllCaps="true"
+			tools:visibility="visible"
+			android:visibility="gone"/>
+
+	</FrameLayout>
 
 </LinearLayout>

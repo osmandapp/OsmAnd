@@ -131,6 +131,14 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		populateData(true);
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_navigation);
+		return ids;
+	}
+
 	@Override
 	public void onAttachFragment(@NonNull Fragment fragment) {
 		fragments.add(new WeakReference<>(fragment));

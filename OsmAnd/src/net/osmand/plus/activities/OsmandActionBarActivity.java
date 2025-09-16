@@ -5,26 +5,33 @@ import static net.osmand.plus.utils.InsetsUtils.InsetSide.BOTTOM;
 import static net.osmand.plus.utils.InsetsUtils.InsetSide.TOP;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 @SuppressLint("Registered")
-public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
+public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity implements ISupportInsets {
 
 	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
 
@@ -77,7 +84,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
 		View root = findViewById(R.id.root);
 		if (root != null) {
-			InsetsUtils.setWindowInsetsListener(root, EnumSet.of(TOP, BOTTOM));
+			InsetsUtils.processInsets(this, root);
 		}
 	}
 
@@ -106,5 +113,51 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 		if (colorId != -1) {
 			//AndroidUiHelper.setNavigationBarColor(this, getColor(colorId));
 		}
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return EnumSet.of(TOP);
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getFabIds() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		return null;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+
+	}
+
+	@NonNull
+	@Override
+	public Activity requireActivity() {
+		return this;
+	}
+
+	@Nullable
+	@Override
+	public WindowInsetsCompat getLastRootInsets() {
+		return null;
+	}
+
+	@Override
+	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
+
 	}
 }

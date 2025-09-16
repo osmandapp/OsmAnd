@@ -85,12 +85,6 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 		return null;
 	}
 
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
-	}
-
 	@Override
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets){
 

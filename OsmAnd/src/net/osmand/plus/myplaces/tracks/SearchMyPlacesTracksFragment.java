@@ -91,6 +91,22 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.recycler_view);
+		return ids;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.buttons_container);
+		return ids;
+	}
+
 	@NonNull
 	protected SearchTracksAdapter createAdapter(@NonNull Context context, List<TrackItem> trackItems) {
 		if (externalFilter != null) {

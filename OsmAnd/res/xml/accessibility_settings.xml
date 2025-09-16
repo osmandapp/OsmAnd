@@ -25,6 +25,13 @@
 		tools:icon="@drawable/ic_world_globe_dark"
 		tools:summary="50 %" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="accessibility_pinch_zoom_magnification"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/access_pinch_zoom_magnification" />
+
 	<PreferenceCategory
 		android:key="announce"
 		android:layout="@layout/preference_category_with_descr"
@@ -66,22 +73,6 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/access_direction_haptic_feedback" />
-
-	<Preference
-		android:layout="@layout/simple_divider_item"
-		android:selectable="false" />
-
-	<PreferenceCategory
-		android:key="independent_accessibility"
-		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/accessibility_independent_features" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="accessibility_pinch_zoom_magnification"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/access_pinch_zoom_magnification" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
