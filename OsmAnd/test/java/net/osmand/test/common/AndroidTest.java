@@ -39,6 +39,7 @@ public abstract class AndroidTest {
 		registerIdlingResources(appInitIdlingResource);
 
 		Espresso.onIdle();
+		app.showShortToastMessage(this.getClass().getSimpleName());
 	}
 
 	@After
