@@ -9,7 +9,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.EspressoUtils.waitForView;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
 import static net.osmand.test.common.Interactions.setRouteStart;
-import static net.osmand.test.common.Interactions.startNavigation;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static org.hamcrest.Matchers.allOf;
@@ -109,7 +108,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		closeButton.perform(click());
 
 		setRouteStart(START);
-		startNavigation();
+		app.getOsmandMap().getMapActions().startNavigation();
 
 		idlingResource = new ObserveDistToFinishIdlingResource(app);
 		registerIdlingResources(idlingResource);

@@ -9,7 +9,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
 import static net.osmand.test.common.Interactions.setRouteEnd;
 import static net.osmand.test.common.Interactions.setRouteStart;
-import static net.osmand.test.common.Interactions.startNavigation;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
@@ -69,7 +68,7 @@ public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 		openNavigationMenu();
 		setRouteStart(START);
 		setRouteEnd(END);
-		startNavigation();
+		app.getOsmandMap().getMapActions().startNavigation();
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		ViewInteraction alarmWidget = onView(withId(R.id.map_alarm_warning));

@@ -36,18 +36,6 @@ public class Interactions {
 		skipSpeedCamerasBottomSheet();
 	}
 
-	public static void startNavigation() throws Throwable {
-		ViewInteraction frameLayout = EspressoUtils.waitForView(
-				Matchers.allOf(withId(R.id.start_button),
-						net.osmand.test.common.Matchers.childAtPosition(
-								net.osmand.test.common.Matchers.childAtPosition(
-										withId(R.id.control_buttons),
-										1),
-								2),
-						isDisplayed()));
-		frameLayout.perform(click());
-	}
-
 	public static void setRouteStart(@NonNull LatLon start) throws Throwable {
 		setRouteStartEnd(start, true);
 	}
