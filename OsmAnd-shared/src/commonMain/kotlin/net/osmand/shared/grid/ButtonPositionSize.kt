@@ -311,19 +311,35 @@ class ButtonPositionSize {
 				MOVE_DESCENDANTS_HORIZONTAL -> xMove = true
 			}
 
-			var newX = if (xMove) space + overlap.marginX + overlap.width else toMove.marginX
-			var newY = if (yMove) space + overlap.marginY + overlap.height else toMove.marginY
+			val forceYOnly = overlap.isFullWidth || overlap.moveDescendants == MOVE_DESCENDANTS_VERTICAL
+			val forceXOnly = overlap.isFullHeight || overlap.moveDescendants == MOVE_DESCENDANTS_HORIZONTAL
+			val overlapHorizontalOnly = overlap.xMove && !overlap.yMove
+			val overlapVerticalOnly   = overlap.yMove && !overlap.xMove
+			var planX = false
+			var planY = false
+			when {
+				forceYOnly && yMove -> planY = true
+				forceXOnly && xMove -> planX = true
+				overlapHorizontalOnly && yMove -> planY = true
+				overlapVerticalOnly && xMove   -> planX = true
+				else -> {
+					if (xMove) planX = true
+					if (yMove) planY = true
+				}
+			}
 
+			var newX = if (planX) space + overlap.marginX + overlap.width else toMove.marginX
+			var newY = if (planY) space + overlap.marginY + overlap.height else toMove.marginY
 			if (newX + toMove.width > totalWidth) {
 				newX = max(0, totalWidth - toMove.width)
-				if (!yMove) {
+				if (!planY) {
 					val desired = space + overlap.marginY + overlap.height
 					newY = max(0, min(desired, totalHeight - toMove.height))
 				}
 			}
 			if (newY + toMove.height > totalHeight) {
 				newY = max(0, totalHeight - toMove.height)
-				if (!xMove) {
+				if (!planX) {
 					val desired = space + overlap.marginX + overlap.width
 					newX = max(0, min(desired, totalWidth - toMove.width))
 				}
