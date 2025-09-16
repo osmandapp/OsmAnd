@@ -122,6 +122,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode, true);
 			return true;
 		});
+		setOnClickListener(getOnClickListener());
 	}
 
 	public void updateWidgetView() {
@@ -579,6 +580,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		}
 	}
 
+	@Nullable
 	protected View.OnClickListener getOnClickListener() {
 		return null;
 	}
