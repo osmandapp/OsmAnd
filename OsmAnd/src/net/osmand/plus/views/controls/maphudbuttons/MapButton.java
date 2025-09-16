@@ -292,6 +292,10 @@ public abstract class MapButton extends FrameLayoutEx implements OnAttachStateCh
 			this.invalidated = false;
 			updateContent();
 		}
+		updateCustomDrawable();
+	}
+
+	private void updateCustomDrawable(){
 		if (imageView.getDrawable() instanceof CompassDrawable drawable) {
 			float mapRotation = mapActivity.getMapRotate();
 			if (drawable.getMapRotation() != mapRotation) {
