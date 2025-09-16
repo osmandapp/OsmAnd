@@ -5848,4 +5848,16 @@
     <string name="description_purchases_fastspring">Þú getur sýslað með innkaup þín í gegnum FastSpring aðgangsstýringavefinn.</string>
     <string name="description_subscription_fastspring">Þú getur sýslað með eða sagt upp áskriftinni þinni í gegnum FastSpring aðgangsstýringavefinn.</string>
     <string name="shared_sting_osm_link">OSM-tengill</string>
+    <string name="obd_alt_battery_voltage">Rafhlöðuspenna (hleðslutæki)</string>
+    <string name="liter_single">Lítri</string>
+    <string name="imperial_gallon">Breskt gallon</string>
+    <string name="us_gallon">Bandarískt gallon</string>
+    <string name="kilometers">Kílómetrar</string>
+    <string name="miles">Mílur</string>
+    <string name="mpg">MÁG</string>
+    <string name="reverse_mode_original_track_desc">Fylgja nákvæmum ferli til baka á upphafsstað.\nAðvörun: Þetta getur verið hættulegt þar sem þetta reiknar ekki með einstefnugötum.</string>
+    <string name="show_local_names">Birta staðvær nöfn</string>
+    <string name="accessibility_independent_features">Sjálfstæðir eiginleikar</string>
+    <string name="access_pinch_zoom_magnification">Aðdráttur við að klípa saman</string>
+    <string name="access_pinch_zoom_magnification_descr">Nota kvörðun á skoðunarglugga í stað aðgreindra aðdráttarstiga í bendingum.</string>
 </resources>
