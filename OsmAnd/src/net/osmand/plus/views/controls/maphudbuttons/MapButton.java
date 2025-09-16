@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -290,6 +291,19 @@ public abstract class MapButton extends FrameLayoutEx implements OnAttachStateCh
 			this.appearanceParams = params;
 			this.invalidated = false;
 			updateContent();
+		}
+		updateCustomDrawable();
+	}
+
+	private void updateCustomDrawable(){
+		if (imageView.getDrawable() instanceof CompassDrawable drawable) {
+			float mapRotation = mapActivity.getMapRotate();
+			if (drawable.getMapRotation() != mapRotation) {
+				drawable.setMapRotation(mapRotation);
+				imageView.invalidate();
+			}
+			CompassMode compassMode = settings.getCompassMode();
+			setContentDescription(app.getString(compassMode.getTitleId()));
 		}
 	}
 
