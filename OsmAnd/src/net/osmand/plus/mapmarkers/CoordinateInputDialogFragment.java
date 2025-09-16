@@ -500,6 +500,14 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 		});
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.keyboard_layout);
+		return ids;
+	}
+
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);

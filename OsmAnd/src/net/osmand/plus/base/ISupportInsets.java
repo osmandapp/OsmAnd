@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 
+import net.osmand.plus.R;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +25,11 @@ public interface ISupportInsets {
 	List<Integer> getScrollableViewIds();
 
 	@Nullable
-	List<Integer> getBottomContainersIds();
+	default List<Integer> getBottomContainersIds(){
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
 
 	void onApplyInsets(@NonNull WindowInsetsCompat insets);
 

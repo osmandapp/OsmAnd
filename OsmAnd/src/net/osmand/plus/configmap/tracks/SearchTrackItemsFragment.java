@@ -32,7 +32,9 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.io.KFile;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements OsmAndCompassListener,
@@ -61,6 +63,14 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 	@LayoutRes
 	protected int getLayoutId() {
 		return R.layout.gpx_search_items_fragment;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.recycler_view);
+		return ids;
 	}
 
 	protected void setupFragment(View view) {
