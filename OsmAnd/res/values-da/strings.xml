@@ -5168,7 +5168,7 @@
     <string name="row_number">Række %1$s</string>
     <string name="key_bindings">Tastetildelinger</string>
     <string name="trash_is_empty">Papirkurven er tom</string>
-    <string name="key_event_action_move_to_my_location">Flyt til Min placering</string>
+    <string name="key_event_action_move_to_my_location">Flyt til min placering</string>
     <string name="clear_key_assignment">Ryd tastetildeling</string>
     <string name="not_specified">Ikke specificeret</string>
     <string name="download_to_device">Download til enhed</string>
@@ -5386,7 +5386,7 @@
     <string name="quick_action_verb_turn_on_off">Tænd / sluk</string>
     <string name="quick_action_verb_start_stop">Start / stop</string>
     <string name="quick_action_previous_app_profile">App-profil til forrige</string>
-    <string name="quick_action_next_app_profile">App profile to næste</string>
+    <string name="quick_action_next_app_profile">App-profil til næste</string>
     <string name="app_profile">App-profil</string>
     <string name="shared_string_create">Opret</string>
     <string name="shared_string_replace">Erstat</string>
@@ -5454,10 +5454,10 @@
     <string name="y_axis_description">Vælg op til to muligheder for Y-aksen.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">Vandrestiers sværhedsgrad</string>
-    <string name="quick_action_previous_screen_desc">En skifter til at navigere til den forrige skærm.</string>
+    <string name="quick_action_previous_screen_desc">En skifter til at gå til den forrige skærm.</string>
     <string name="quick_action_previous_screen_title">Forrige skærm</string>
     <string name="quick_action_verb_navigate">Naviger</string>
-    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenuen.</string>
+    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenu.</string>
     <string name="quick_action_drawer_title">Sidemenu</string>
     <string name="quick_action_search_view_desc">En skifter til at åbne eller lukke søgevisning.</string>
     <string name="quick_action_switch_compass_desc">En skifter til at skifte kortorientering.</string>
@@ -5834,7 +5834,7 @@
     <string name="ascent">Opstigning</string>
     <string name="descent">Nedstigning</string>
     <string name="map_orientations_choose_description">Lad den være tom for at skifte mellem alle tilgængelige tilstande, eller tilføj kun dine foretrukne.</string>
-    <string name="map_orientations">Kortets retninger</string>
+    <string name="map_orientations">Kortorienteringer</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Svar</string>
