@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AmenityExtensionsHelper {
+	public static final double MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW = 1.0;
 
 	private static final Log LOG = PlatformUtil.getLog(AmenityExtensionsHelper.class);
 
@@ -103,46 +104,36 @@ public class AmenityExtensionsHelper {
 
 	@Nullable
 	public static String getAmenityMetricsFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
-		String distance = getAmenityDistanceFormatted(amenity, app);
-		String uphill = getAmenityTagMetersFormatted(amenity, app, TravelGpx.DIFF_ELEVATION_UP);
-		String downhill = getAmenityTagMetersFormatted(amenity, app, TravelGpx.DIFF_ELEVATION_DOWN);
+		float distMeters = getAmenityDistanceMeters(amenity);
+		float upMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_UP), 0);
+		float downMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_DOWN), 0);
+
+		String dist = OsmAndFormatter.getFormattedDistance(distMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		String uphill = OsmAndFormatter.getFormattedDistance(upMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		String downhill = OsmAndFormatter.getFormattedDistance(downMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+
 		List<String> metrics = new ArrayList<>();
-		if (distance != null) {
-			metrics.add(distance);
+		if (distMeters > 0) {
+			metrics.add(dist);
+			if (upMeters > 0 && upMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+				metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);
+			}
+			if (downMeters > 0 && downMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+				metrics.add(TrkSegment.SegmentSlopeType.DOWNHILL.getSymbol() + downhill);
+			}
 		}
-		if (uphill != null) {
-			metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);
-		}
-		if (downhill != null) {
-			metrics.add(TrkSegment.SegmentSlopeType.DOWNHILL.getSymbol() + downhill);
-		}
+
 		return metrics.isEmpty() ? null : String.join(" ", metrics);
 	}
 
-	@Nullable
-	private static String getAmenityTagMetersFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app,
-	                                                   @NonNull String tag) {
-		float meters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(tag), 0);
-		if (meters > 0) {
-			return OsmAndFormatter.getFormattedDistance(meters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
-		}
-		return null;
-	}
-
-	@Nullable
-	private static String getAmenityDistanceFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+	private static float getAmenityDistanceMeters(Amenity amenity) {
 		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
 		float km = Algorithms.parseFloatSilently(distanceTag, 0);
-
-		if (km > 0) {
-			if (!distanceTag.contains(".")) {
-				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
-				// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
-				km /= 1000;
-			}
-			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		if (km > 0 && !distanceTag.contains(".")) {
+			// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
+			// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
+			km /= 1000;
 		}
-
-		return null;
+		return km * 1000;
 	}
 }
