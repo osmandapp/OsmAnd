@@ -122,6 +122,14 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 		return mainView;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
+	}
+
 	private void updateContent() {
 		setupButtons();
 		setupProgress();

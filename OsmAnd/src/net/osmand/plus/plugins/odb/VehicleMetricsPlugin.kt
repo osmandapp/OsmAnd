@@ -555,7 +555,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private fun onDisconnected(deviceInfo: BTDeviceInfo?) {
 		connectionState = OBDConnectionState.DISCONNECTED
 		deviceInfo?.let {
-			connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED, it)
+			app.runInUIThread({connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED, it)})
 			if (it.isBLE) {
 				val device = getBLEOBDDeviceById(it.address);
 				device?.disconnect()

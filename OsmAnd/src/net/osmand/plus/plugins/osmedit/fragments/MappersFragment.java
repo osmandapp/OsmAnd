@@ -41,11 +41,13 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MappersFragment extends BaseFullScreenFragment {
@@ -112,6 +114,13 @@ public class MappersFragment extends BaseFullScreenFragment {
 		fullUpdate();
 
 		return mainView;
+	}
+
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	@Override

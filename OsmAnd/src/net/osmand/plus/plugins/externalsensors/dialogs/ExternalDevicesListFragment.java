@@ -31,6 +31,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableP
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog.OnSaveSensorPropertyCallback;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -89,6 +90,12 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		TextView learnMore = view.findViewById(R.id.learn_more_button);
 		UiUtilities.setupClickableText(learnMore, spannable, nightMode);
 
+		if(!InsetsUtils.isEdgeToEdgeSupported()){
+			Toolbar toolbar = view.findViewById(R.id.toolbar);
+			toolbar.setFitsSystemWindows(true);
+			view.setFitsSystemWindows(false);
+		}
+
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_empty));
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_additional));
 		setupOpenBtSettingsButton(view.findViewById(R.id.bt_settings_button_container));
@@ -96,6 +103,14 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		disconnectedListAdapter = new PairedDevicesAdapter(app, nightMode, this);
 		connectedList.setAdapter(connectedListAdapter);
 		disconnectedList.setAdapter(disconnectedListAdapter);
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	private void setupPairSensorButton(@NonNull View view) {

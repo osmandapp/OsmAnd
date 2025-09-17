@@ -32,6 +32,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -47,6 +48,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ConfigureScreenFragment extends BaseFullScreenFragment implements QuickActionUpdatesListener,
 		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener {
@@ -90,6 +92,7 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		View view = inflate(R.layout.fragment_configure_screen, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			view.setFitsSystemWindows(true);
 		}
 
 		appBar = view.findViewById(R.id.appbar);
@@ -107,6 +110,14 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 		}
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	@Override

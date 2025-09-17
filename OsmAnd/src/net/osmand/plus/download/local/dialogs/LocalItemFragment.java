@@ -33,6 +33,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LocalItemFragment extends LocalBaseFragment
@@ -76,6 +78,14 @@ public class LocalItemFragment extends LocalBaseFragment
 		updateContent();
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	private void setupToolbar(@NonNull View view) {

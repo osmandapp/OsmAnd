@@ -89,6 +89,14 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		return mainView;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
+	}
+
 	@Override
 	protected void updateContent(boolean progress) {
 		updateHeader();

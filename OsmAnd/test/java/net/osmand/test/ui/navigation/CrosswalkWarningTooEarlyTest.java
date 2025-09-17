@@ -128,12 +128,6 @@ public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 		return ApplicationProvider.getApplicationContext().getResources().getString(id);
 	}
 
-	@Override
-	public void cleanUp() {
-		super.cleanUp();
-		app.stopNavigation();
-	}
-
 	private static class TestWidget {
 		@IdRes
 		int descriptionId;

@@ -5868,6 +5868,6 @@
     <string name="miles">Mejloj</string>
     <string name="mpg">Mejloj/galjono</string>
     <string name="access_pinch_zoom_magnification">Pinĉi por momente pligrandigi</string>
-    <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestoj pligrandigo.</string>
+    <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestoj de pligrandigo.</string>
     <string name="accessibility_independent_features">Sendependaj ebloj</string>
 </resources>

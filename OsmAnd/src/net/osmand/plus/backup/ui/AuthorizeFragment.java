@@ -63,6 +63,9 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegisterUserListener,
 		OnRegisterDeviceListener, OnSendCodeListener, OnCheckCodeListener {
 
@@ -153,6 +156,14 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 		setupKeyboardListener();
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	@Override

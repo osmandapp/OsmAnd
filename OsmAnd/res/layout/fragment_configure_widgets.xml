@@ -5,7 +5,6 @@
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
 	android:clickable="true"
-	android:fitsSystemWindows="true"
 	android:clipChildren="false"
 	android:clipToPadding="false"
 	android:focusable="true">

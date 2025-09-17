@@ -38,6 +38,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SelectKeyCodeFragment extends BaseFullScreenFragment implements KeyEvent.Callback {
@@ -94,6 +96,14 @@ public class SelectKeyCodeFragment extends BaseFullScreenFragment implements Key
 		setupDescription(view);
 		setupApplyButton(view);
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	@Override

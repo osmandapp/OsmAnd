@@ -17,8 +17,8 @@
     <string name="shared_string_off">Kikapcsolva</string>
     <string name="accessibility_default">Android rendszerbeállítások szerint</string>
     <string name="backToMenu">Vissza a menübe</string>
-    <string name="zoomOut">Kicsinyít</string>
-    <string name="zoomIn">Nagyít</string>
+    <string name="zoomOut">Kicsinyítés</string>
+    <string name="zoomIn">Nagyítás</string>
     <string name="zoomIs">Nagyítási szint:</string>
     <string name="north">észak</string>
     <string name="north_north_east">észak-északkelet</string>
@@ -485,7 +485,7 @@
     <string name="hint_search_online">Online keresés: házszám, utca, település</string>
     <string name="search_offline_address">Offline</string>
     <string name="search_online_address">Online keresés</string>
-    <string name="max_level_download_tile">Maximális online nagyítás</string>
+    <string name="max_level_download_tile">Max. online nagyítás</string>
     <string name="max_level_download_tile_descr">Ne böngésszen online térképeket ezen nagyítási szint felett.</string>
     <string name="route_general_information">Teljes távolság: %1$s. Utazási idő: %2$d óra %3$d perc.</string>
     <string name="router_service_descr">Online vagy offline útvonaltervező szolgáltatás.</string>

@@ -125,8 +125,9 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 			devicesSettingsCollection.addListener(this);
 		}
 	}
-/*
-*/
+
+	/*
+	 */
 	void initBLE() {
 		BluetoothManager bluetoothManager = (BluetoothManager) activity.getSystemService(Context.BLUETOOTH_SERVICE);
 		bluetoothAdapter = bluetoothManager.getAdapter();
@@ -254,20 +255,22 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				return;
 			}
 			ScanRecord scanRecord = result.getScanRecord();
-			if (scanRecord != null && isSupportedBleDevice(scanRecord)) {
+			if (scanRecord != null) {
 				String address = result.getDevice().getAddress();
 				DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
 				String deviceName;
 				deviceName = settings == null ? result.getDevice().getName() : settings.getParams().get(NAME);
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
-				for (ParcelUuid uuid : uuids) {
-					BLEAbstractDevice device = BLEAbstractDevice.createDeviceByUUID(
-							bluetoothAdapter, uuid.getUuid(), address, deviceName, result.getRssi());
-					if (device != null) {
-						if (!devices.containsKey(device.getDeviceId())) {
-							addFoundBLEDevice(device);
+				if (uuids != null) {
+					for (ParcelUuid uuid : uuids) {
+						BLEAbstractDevice device = BLEAbstractDevice.createDeviceByUUID(
+								bluetoothAdapter, uuid.getUuid(), address, deviceName, result.getRssi());
+						if (device != null) {
+							if (!devices.containsKey(device.getDeviceId())) {
+								addFoundBLEDevice(device);
+							}
+							break;
 						}
-						break;
 					}
 				}
 			}
@@ -491,32 +494,33 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 		}
 		*/
 	}
-/*
-	private void tryToReconnectToDevice(@NonNull AbstractDevice<?> device) {
-		ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
-		if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId()) && scheduler != null) {
-			ScheduledFuture<?> future = scheduler.schedule(() -> {
-				if(activity != null && device.connect(app, activity)) {
-					ScheduledFuture<?> checkFuture = scheduler.schedule(() -> {
-						checkReconnectDeviceResult(device.getDeviceId());
-					}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
-					reconnectingDevices.put(device.getDeviceId(), checkFuture);
-				}
-			}, RECONNECT_DEVICE_DELAY, TimeUnit.SECONDS);
-			reconnectingDevices.put(device.getDeviceId(), future);
-		}
-	}
 
-	private void checkReconnectDeviceResult(@NonNull String deviceId) {
-		Activity activity = this.activity;
-		if (reconnectingDevices.remove(deviceId) != null && activity != null) {
-			AbstractDevice<?> device = getAnyDevice(deviceId);
-			if (device != null) {
-				app.showShortToastMessage(R.string.failed_to_connect, device.getName());
+	/*
+		private void tryToReconnectToDevice(@NonNull AbstractDevice<?> device) {
+			ScheduledExecutorService scheduler = reconnectToDeviceScheduler;
+			if (!device.isDisconnected() && !reconnectingDevices.containsKey(device.getDeviceId()) && scheduler != null) {
+				ScheduledFuture<?> future = scheduler.schedule(() -> {
+					if(activity != null && device.connect(app, activity)) {
+						ScheduledFuture<?> checkFuture = scheduler.schedule(() -> {
+							checkReconnectDeviceResult(device.getDeviceId());
+						}, RECONNECT_DEVICE_TIMEOUT, TimeUnit.SECONDS);
+						reconnectingDevices.put(device.getDeviceId(), checkFuture);
+					}
+				}, RECONNECT_DEVICE_DELAY, TimeUnit.SECONDS);
+				reconnectingDevices.put(device.getDeviceId(), future);
 			}
 		}
-	}
-*/
+
+		private void checkReconnectDeviceResult(@NonNull String deviceId) {
+			Activity activity = this.activity;
+			if (reconnectingDevices.remove(deviceId) != null && activity != null) {
+				AbstractDevice<?> device = getAnyDevice(deviceId);
+				if (device != null) {
+					app.showShortToastMessage(R.string.failed_to_connect, device.getName());
+				}
+			}
+		}
+	*/
 	@Override
 	public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
 		for (SensorDataField dataField : data.getDataFields()) {
@@ -681,7 +685,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 					.setReportDelay(0L)
 					.build();
 
-			bleScanner.startScan(filters, scanSettings, bleScanCallback);
+			bleScanner.startScan(null, scanSettings, bleScanCallback);
 			bleScanning = true;
 		}
 	}

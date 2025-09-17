@@ -4,7 +4,6 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:fitsSystemWindows="true"
 	android:clickable="true"
 	android:focusable="true">
 
@@ -14,7 +13,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@android:color/transparent"
-		android:fitsSystemWindows="true"
 		app:elevation="0dp">
 
 		<com.google.android.material.appbar.CollapsingToolbarLayout

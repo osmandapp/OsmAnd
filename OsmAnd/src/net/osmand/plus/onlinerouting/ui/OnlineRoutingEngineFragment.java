@@ -42,6 +42,7 @@ import net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -145,7 +146,9 @@ public class OnlineRoutingEngineFragment extends BaseFullScreenFragment implemen
 		updateCardViews(nameCard, typeCard, vehicleCard, exampleCard);
 
 		showShadowBelowButtons();
-		showButtonsAboveKeyboard();
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			showButtonsAboveKeyboard();
+		}
 		hideKeyboardOnScroll();
 
 		return view;

@@ -137,11 +137,13 @@ public class InsetsUtils {
 		Set<InsetSide> insetSides = insetSupportedFragment.getRootInsetSides();
 		List<Integer> rootScrollableIds = insetSupportedFragment.getScrollableViewIds();
 		List<Integer> bottomContainers = insetSupportedFragment.getBottomContainersIds();
+		List<Integer> collapsingAppBarLayoutIds = insetSupportedFragment.getCollapsingAppBarLayoutId();
 		List<Integer> fabs = insetSupportedFragment.getFabIds();
 
 		InsetsUtils.setWindowInsetsListener(rootView, (v, insets) -> {
 			processScrollInsets(insets, rootScrollableIds, v);
 			processBottomContainerInsets(insets, bottomContainers, v);
+			processCollapsingAppBarLayoutInsets(insets, collapsingAppBarLayoutIds, insetSides, v);
 			processFabInsets(insets, fabs, v);
 			processRootInsetSides(insetSupportedFragment, insets, insetSides, v);
 
@@ -205,6 +207,25 @@ public class InsetsUtils {
 				fab.setLayoutParams(p1);
 			}
 
+		}
+	}
+
+	public static void processCollapsingAppBarLayoutInsets(@NonNull WindowInsetsCompat insets,
+	                                                       @Nullable List<Integer> bottomContainers,
+	                                                       Set<InsetSide> insetSides, @NonNull View view) {
+		View bottomContainer = null;
+		if (bottomContainers != null) {
+			for (int id : bottomContainers) {
+				bottomContainer = view.findViewById(id);
+				if (bottomContainer != null) break;
+			}
+		}
+
+		if (bottomContainer != null) {
+			InsetsUtils.applyPadding(bottomContainer, insets, EnumSet.of(InsetSide.TOP));
+			if (insetSides != null) {
+				insetSides.remove(InsetSide.TOP);
+			}
 		}
 	}
 

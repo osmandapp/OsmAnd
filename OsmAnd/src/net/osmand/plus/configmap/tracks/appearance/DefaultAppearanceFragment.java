@@ -32,6 +32,9 @@ import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
 
 	private static final String TAG = DefaultAppearanceFragment.class.getSimpleName();
@@ -82,6 +85,14 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 		setupApplyButton(view);
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	@Override

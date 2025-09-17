@@ -27,6 +27,7 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationList
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -73,11 +74,23 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		listContainer = mainView.findViewById(R.id.list_container);
 
+		if(!InsetsUtils.isEdgeToEdgeSupported()){
+			mainView.setFitsSystemWindows(true);
+		}
+
 		setupToolbar();
 		createFeaturesList();
 		setupSignInWithOsmButton();
 
 		return mainView;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	private void setupToolbar() {

@@ -229,6 +229,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		}
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			view.setFitsSystemWindows(true);
 		}
 		promoBannerContainer = view.findViewById(R.id.promo_banner_container);
 		promoBanner = view.findViewById(R.id.promo_banner);
@@ -241,6 +242,14 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		updateStatusBar();
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	protected void initParams(@NonNull Bundle bundle) {
