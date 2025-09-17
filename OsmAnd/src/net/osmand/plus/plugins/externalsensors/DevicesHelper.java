@@ -254,7 +254,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				return;
 			}
 			ScanRecord scanRecord = result.getScanRecord();
-			if (scanRecord != null && isSupportedBleDevice(scanRecord)) {
+			if (scanRecord != null) {
 				String address = result.getDevice().getAddress();
 				DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
 				String deviceName;
