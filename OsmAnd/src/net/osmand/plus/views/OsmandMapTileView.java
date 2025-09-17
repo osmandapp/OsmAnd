@@ -2199,9 +2199,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
-				mapRenderer.setViewportScale(0.0, false);
+				// 1) Convert the pinch into a real zoom/rotation (uses native pinch model)
+				changeZoomPosition(0f, 0f); // this calls zoomAndRotateToAnimate(...)
+
+				// 2) Re-anchor to the pinch center so the same tile stays under the finger
+				final int cx, cy;
+				if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
+				    cx = (int) multiTouchSupport.getCenterPoint().x;
+				    cy = (int) multiTouchSupport.getCenterPoint().y;
+				} else {
+				    cx = (int) initialMultiTouchCenterPoint.x;
+				    cy = (int) initialMultiTouchCenterPoint.y;
+				}
+				mapRenderer.setMapTarget(new PointI(cx, cy), initialCenterTile);
+
+				// 3) Now clear the magnification by returning to identity
+				mapRenderer.setViewportScale(1.0, false);
 				mapRenderer.setViewportShift(0, 0, false);
-				changeZoomPosition((float) 0, 0);
+				refreshMap();
 			}
 		}
 
