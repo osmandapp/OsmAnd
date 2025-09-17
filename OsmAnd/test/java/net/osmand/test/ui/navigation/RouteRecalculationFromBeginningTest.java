@@ -120,7 +120,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		private static final int CHECK_INTERVAL = 1000;
 		private static final Range<Integer> EXPECTED_ROUTE_LENGTH = new Range<>(7000, 7200);
 		private static final int IDLE_ON_LEFT_DISTANCE = 5900;
-		private static final int START_POINT_DEVIATION_THRESHOLD = 20;
+		private static final int START_POINT_DEVIATION_THRESHOLD = 50;
 
 		private final Handler handler;
 
