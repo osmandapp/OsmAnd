@@ -106,6 +106,30 @@ public abstract class ImportDuplicatesFragment extends BaseFullScreenFragment {
 		return root;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.buttons_container);
+		return ids;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.nested_scroll);
+		return ids;
+	}
+
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

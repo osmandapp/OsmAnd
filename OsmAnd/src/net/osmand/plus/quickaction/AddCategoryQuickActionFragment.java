@@ -28,6 +28,9 @@ import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddCategoryQuickActionFragment extends BaseFullScreenFragment
 		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
 
@@ -71,11 +74,20 @@ public class AddCategoryQuickActionFragment extends BaseFullScreenFragment
 		View view = inflate(R.layout.fragment_add_category_quick_action, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			view.setFitsSystemWindows(true);
 		}
 		setupToolbar(view);
 		setupContent(view);
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	private void setupToolbar(@NonNull View view) {

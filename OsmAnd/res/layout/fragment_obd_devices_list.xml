@@ -5,13 +5,12 @@
 	android:layout_height="match_parent"
 	android:background="?attr/bg_color"
 	android:clickable="true"
-	android:fitsSystemWindows="false"
 	android:focusable="true">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/toolbar_height_expanded"
+		android:layout_height="wrap_content"
 		android:background="?attr/actionModeBackground">
 
 		<com.google.android.material.appbar.CollapsingToolbarLayout
@@ -31,7 +30,6 @@
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
-				android:fitsSystemWindows="true"
 				app:layout_collapseMode="pin"
 				app:menu="@menu/ble_sensors_menu">
 

@@ -25,6 +25,11 @@ public interface ISupportInsets {
 	List<Integer> getScrollableViewIds();
 
 	@Nullable
+	default List<Integer> getCollapsingAppBarLayoutId(){
+		return null;
+	}
+
+	@Nullable
 	default List<Integer> getBottomContainersIds(){
 		List<Integer> ids = new ArrayList<>();
 		ids.add(R.id.bottom_buttons_container);
