@@ -71,11 +71,11 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 	@After
 	public void cleanUp() {
 		super.cleanUp();
-		app.stopNavigation();
 
 		if (idlingResource != null) {
 			unregisterIdlingResources(idlingResource);
 		}
+		app.stopNavigation();
 	}
 
 	@Test
