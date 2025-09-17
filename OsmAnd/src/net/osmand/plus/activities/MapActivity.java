@@ -402,10 +402,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		simulatedLocationsListener = new LoadSimulatedLocationsListener() {
 			@Override
 			public void onLocationsStartedLoading() {
-				if (!isRouteBeingCalculated()) {
-					ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
-					AndroidUiHelper.updateVisibility(progressBar, true);
-				}
+				updateProgress(true);
 			}
 
 			@Override
@@ -417,10 +414,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
-				if (!isRouteBeingCalculated()) {
-					ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
-					AndroidUiHelper.updateVisibility(progressBar, false);
-				}
+				updateProgress(false);
 			}
 		};
 		app.getLocationProvider().getLocationSimulation().addListener(simulatedLocationsListener);
@@ -433,6 +427,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		transportRouteCalculationProgressCallback = null;
 		app.getRoutingHelper().removeCalculationProgressListener(routeCalculationProgressCallback);
 		routeCalculationProgressCallback = null;
+	}
+
+	public void updateProgress(boolean visible) {
+		app.runInUIThread(() -> {
+			if (!isRouteBeingCalculated()) {
+				AndroidUiHelper.updateVisibility(findViewById(R.id.map_horizontal_progress), visible);
+			}
+		});
 	}
 
 	public void updateProgress(int progress) {
