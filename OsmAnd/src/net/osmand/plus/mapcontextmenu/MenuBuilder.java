@@ -87,7 +87,6 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.reviews.Review;
 import net.osmand.plus.reviews.Reviews;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
@@ -114,6 +113,8 @@ import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.reviews.ReviewJsonCodec;
+import net.osmand.reviews.Review;
 import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
@@ -125,9 +126,15 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.StreamSupport;
 
 public class MenuBuilder {
 
@@ -343,8 +350,6 @@ public class MenuBuilder {
 			buildTitleRow(view);
 		}
 		buildWithinRow(view);
-		// TODO: only if there are reviews
-		buildReviewsRow(view);
 		buildNearestRows(view, object);
 
 		if (needBuildPlainMenuItems()) {
@@ -361,19 +366,6 @@ public class MenuBuilder {
 		}
 	}
 
-	private void buildReviewsRow(ViewGroup view) {
-		// TODO: read reviews from file: this.amenity.reviews -> gz...
-		List<Review> reviewData = new ArrayList<>();
-		reviewData.add(new Review(80, "excellent espresso", "enigal", LocalDate.of(2025, Month.JULY, 13)));
-		reviewData.add(new Review(55, "The service could be better.", "pangloss", LocalDate.of(2025, Month.JULY, 11)));
-		CollapsableView cv = getReviewCollapsibleView(reviewData);
-
-		// TODO: these should be precalculated for a POI
-		int meanRating = reviewData.stream().mapToInt(Review::getRating).sum() / reviewData.size();
-		String title = app.getString(R.string.aggregate_rating, Reviews.INSTANCE.formatStarRating(meanRating), reviewData.size());
-		buildRow(view, getRowIcon(R.drawable.ic_action_review), null, app.getString(R.string.reviews), title, 0, null, true, cv, false, 1,
-				false, false, false, null, false);
-	}
 
 	public void buildNearestRows(@NonNull ViewGroup view, @Nullable Object object) {
 		buildNearestWikiRow(view);
@@ -1165,22 +1157,6 @@ public class MenuBuilder {
 
 	protected void copyToClipboard(String text, Context ctx) {
 		menuRowBuilder.copyToClipboard(text, ctx);
-	}
-
-	protected CollapsableView getReviewCollapsibleView(List<Review> reviewData) {
-		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-		for (Review review : reviewData) {
-			View container = createRowContainer(mapActivity, null);
-			buildReviewRow(container, review);
-			llv.addView(container);
-		}
-		return new CollapsableView(llv, this, true);
-	}
-
-	private void buildReviewRow(View container, Review review) {
-		String starRating = Reviews.INSTANCE.formatStarRating(review.getRating());
-		String footer = String.format("%s - %s", review.getDate(), review.getAuthor());
-		buildDetailsRow(container, null, review.getOpinion(), starRating, footer, null, false, null);
 	}
 
 	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {

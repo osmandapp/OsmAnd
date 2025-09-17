@@ -8,6 +8,12 @@ object Reviews {
 
     /**
      * @param rating a rating in the range 1..100
+     * @return a float star rating of 0..5 stars
+     */
+    fun numericalStarRating(rating: Int): Float = rating.toFloat() / 20
+
+    /**
+     * @param rating a rating in the range 1..100
      * @return a string showing rating of 0..5 stars
      */
     fun formatStarRating(rating: Int): String =
