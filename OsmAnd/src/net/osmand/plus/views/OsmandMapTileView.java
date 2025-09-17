@@ -2198,17 +2198,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
-				// (1) Convert the pinch into a real zoom/rotation (use native pinch model)
+				// 1) Convert the pinch into a real zoom/rotation (uses native pinch model)
 				changeZoomPosition(0f, 0f); // this calls zoomAndRotateToAnimate(...)
-				// (2) Re-anchor to the pinch center so the same tile stays under the finger
+
+				// 2) Re-anchor to the pinch center so the same tile stays under the finger
+				final int cx, cy;
 				if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
-					mapRenderer.setMapTarget(new PointI((int) multiTouchSupport.getCenterPoint().x,
-														(int) multiTouchSupport.getCenterPoint().y), initialCenterTile);
+				    cx = (int) multiTouchSupport.getCenterPoint().x;
+				    cy = (int) multiTouchSupport.getCenterPoint().y;
 				} else {
-					mapRenderer.setMapTarget(new PointI((int) initialMultiTouchCenterPoint.x,
-														(int) initialMultiTouchCenterPoint.y), initialCenterTile);
+				    cx = (int) initialMultiTouchCenterPoint.x;
+				    cy = (int) initialMultiTouchCenterPoint.y;
 				}
-				// (3) Clear the magnification by returning to identity
+				mapRenderer.setMapTarget(new PointI(cx, cy), initialCenterTile);
+
+				// 3) Now clear the magnification by returning to identity
 				mapRenderer.setViewportScale(1.0, false);
 				mapRenderer.setViewportShift(0, 0, false);
 				refreshMap();
