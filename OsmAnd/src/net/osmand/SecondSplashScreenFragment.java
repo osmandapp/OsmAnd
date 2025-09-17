@@ -52,6 +52,7 @@ public class SecondSplashScreenFragment extends BaseFullScreenFragment {
 		nightMode = settings.isSupportSystemTheme() && !settings.isLightSystemTheme();
 
 		RelativeLayout view = new RelativeLayout(activity);
+		view.setId(R.id.bottom_buttons_container);
 		view.setClickable(true);
 		view.setFocusable(true);
 		view.setOnClickListener(null);

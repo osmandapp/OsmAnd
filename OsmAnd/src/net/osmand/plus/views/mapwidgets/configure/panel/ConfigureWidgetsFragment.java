@@ -135,6 +135,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		view = inflate(R.layout.fragment_configure_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			view.setFitsSystemWindows(true);
 		}
 		appBar = view.findViewById(R.id.appbar);
 
@@ -175,6 +176,14 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		updateScreen();
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	@Override

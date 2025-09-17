@@ -143,6 +143,14 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		return view;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
+	}
+
 	private void setupCards(){
 		FragmentActivity activity = requireActivity();
 		ViewGroup cardContainer = view.findViewById(R.id.cards_container);

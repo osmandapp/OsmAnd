@@ -47,6 +47,9 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DeleteAccountFragment extends BaseFullScreenFragment implements OnDeleteAccountListener {
 
 	public static final String TAG = DeleteAccountFragment.class.getSimpleName();
@@ -104,6 +107,14 @@ public class DeleteAccountFragment extends BaseFullScreenFragment implements OnD
 		setupButtons(view);
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	@Override

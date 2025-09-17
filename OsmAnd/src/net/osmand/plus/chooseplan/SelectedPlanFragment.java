@@ -30,6 +30,7 @@ import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -101,6 +102,14 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
+		if (!InsetsUtils.isEdgeToEdgeSupported() && view != null) {
+			view.setFitsSystemWindows(true);
+			View appbar = view.findViewById(R.id.appbar);
+			if (appbar != null) {
+				appbar.setFitsSystemWindows(true);
+			}
+		}
+
 		setupToolbar();
 		setupHeader();
 		createFeaturesPreview();
@@ -113,6 +122,14 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		fullUpdate();
 
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	private void fullUpdate() {
