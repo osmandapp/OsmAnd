@@ -681,7 +681,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 					.setReportDelay(0L)
 					.build();
 
-			bleScanner.startScan(filters, scanSettings, bleScanCallback);
+			bleScanner.startScan(null, scanSettings, bleScanCallback);
 			bleScanning = true;
 		}
 	}
