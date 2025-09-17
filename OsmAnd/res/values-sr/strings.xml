@@ -4184,7 +4184,7 @@
     <string name="save_track_to_gpx_descrp">Самостално покрени снимање трага током навођења и самостално сачувај након тога.</string>
     <string name="gpx_no_routes_title">Нема рута</string>
     <string name="gpx_no_routes_descr">Можете користити алатку \"%1$s\" ради додавања руте у датотеку.</string>
-    <string name="quick_action_add_route_descr">Дугме за покретање путање од средине заслона.</string>
+    <string name="quick_action_add_route_descr">Дугме за покретање руте од средине екрана.</string>
     <string name="please_provide_group_name_message">Молим, именујте групу.</string>
     <string name="selected_waypoints_descr">Одабране пролазне тачке биће додате трагу \"%1$s\"</string>
     <string name="shared_string_reading_file">Читање датотеке…</string>
@@ -4464,7 +4464,7 @@
     <string name="purchases_feature_desc_external_sensors">Приказуј и снимај податке из спољашњих пријемника: брзину бицикла, снагу бицикла, брзину и број откуцаја срца.</string>
     <string name="weather_wind_kn">kn</string>
     <string name="shared_string_open">Отвори</string>
-    <string name="open_weather_action_description">Омогућава да отворите заслон са опширним временским приликама.</string>
+    <string name="open_weather_action_description">Омогућава да отворите заслон са опширним предвиђањем времена.</string>
     <string name="rendering_attr_weatherCloudContours_name">Линије обриса облака</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Линије обриса падавина</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Линије обриса налета ветрова</string>
@@ -5084,7 +5084,7 @@
         <item quantity="other">%1$d (%2$d трагова)</item>
     </plurals>
     <string name="searching_matching_tracks">Претражи све подударајуће трагове</string>
-    <string name="key_event_action_move_up">Помери горе</string>
+    <string name="key_event_action_move_up">Помери на горе</string>
     <string name="key_event_action_previous_app_profile">Претходни профил апликације</string>
     <string name="configure_filter">Кофигуриши филтер</string>
     <string name="no_config_smart_folder_title">Није конфигурисано</string>
@@ -5095,7 +5095,7 @@
     <string name="cloud_trash_clear_confirmation">Обрисати трајно све ставке из канте отпада?</string>
     <string name="empty_smart_folder_title">Нема подударајуће стазе</string>
     <string name="key_event_action_emit_navigation_hint">Пошаљи савет за навигацију</string>
-    <string name="key_event_action_move_down">Помери доле</string>
+    <string name="key_event_action_move_down">Помери на доле</string>
     <string name="key_event_action_next_app_profile">Следећи профил апликације</string>
     <string name="key_event_action_open_search_view">Отвори преглед претраге</string>
     <string name="key_event_action_open_navigation_view">Отвори преглед навигације</string>
@@ -5321,7 +5321,7 @@
     <string name="missing_maps_ignore_details">Да ли преузете карте покривају вашу путању? Крећите се помоћу њих уколико познајете област.</string>
     <string name="quick_action_map_underlay">Подслој</string>
     <string name="quick_action_map_overlay">Надслој</string>
-    <string name="quick_action_to_my_location">Ка мом положају</string>
+    <string name="quick_action_to_my_location">Ка Мојој локацији</string>
     <string name="shared_string_set">Постави</string>
     <string name="shared_string_simulate">Опонашај</string>
     <string name="quick_action_remove_next_destination">Следећа одредишна тачка</string>
@@ -5330,15 +5330,15 @@
     <string name="quick_action_terrain_color_scheme">Теренска шема боја</string>
     <string name="quick_action_directions_from">Почетна тачка</string>
     <string name="quick_action_destination">Одредиште</string>
-    <string name="quick_action_move_map_left">Карту према лево</string>
-    <string name="quick_action_move_map_right">Карту према десно</string>
-    <string name="quick_action_move_map_down">Карту наниже</string>
-    <string name="quick_action_move_map_up">Карту навише</string>
-    <string name="quick_action_new_route">Нова путања</string>
-    <string name="quick_action_previous_app_profile">Пребаци програм на претходни налог</string>
-    <string name="quick_action_next_app_profile">Пребаци програм на следећи налог</string>
+    <string name="quick_action_move_map_left">Мапу према лево</string>
+    <string name="quick_action_move_map_right">Мапу према десно</string>
+    <string name="quick_action_move_map_down">Мапу на доле</string>
+    <string name="quick_action_move_map_up">Мапу на горе</string>
+    <string name="quick_action_new_route">Нова рута</string>
+    <string name="quick_action_previous_app_profile">Додај профил претходном</string>
+    <string name="quick_action_next_app_profile">Додај профил следећем</string>
     <string name="app_profile">Налог програма</string>
-    <string name="shared_string_create">Створи</string>
+    <string name="shared_string_create">Креирај</string>
     <string name="shared_string_replace">Замени</string>
     <string name="quick_action_display_position_in_center">Приказуј положај увек у средишту</string>
     <string name="quick_action_terrain">Врста бојења околиша</string>
@@ -5352,7 +5352,7 @@
     <string name="quick_action_verb_pause_resume">Застани / настави</string>
     <string name="quick_action_verb_turn_on_off">Укључи / искључи</string>
     <string name="quick_action_verb_start_stop">Крени / заустави</string>
-    <string name="weather_screen">Заслон временских прилика</string>
+    <string name="weather_screen">Екран временске прогнозе</string>
     <string name="energy_avg_info_description">Ниво батерије у минути: %1$s
 \nПотрошња енергије (mAh): %2$s</string>
     <string name="rendering_avg_info">Статистика приказивања (просечно 1 / 5/ 15 минута)</string>
@@ -5409,15 +5409,15 @@
     <string name="app_mode_suv">СУВ</string>
     <string name="y_axis_description">Изаберите до две могућности за осу У.</string>
     <string name="rendering_attr_alpineHiking_name">Степен тежине пешачких стаза</string>
-    <string name="quick_action_previous_screen_desc">Прекидач за навођење на претходни заслон.</string>
-    <string name="quick_action_previous_screen_title">Претходни заслон</string>
-    <string name="quick_action_verb_navigate">Наводите</string>
-    <string name="quick_action_drawer_desc">Прекидач за приказ или сакривање бочног изборника.</string>
-    <string name="quick_action_drawer_title">Бочни изборник</string>
+    <string name="quick_action_previous_screen_desc">Прекидач за навигацију на претходни екран.</string>
+    <string name="quick_action_previous_screen_title">Претходни екран</string>
+    <string name="quick_action_verb_navigate">Навигација</string>
+    <string name="quick_action_drawer_desc">Прекидач за приказ или сакривање бочног менија.</string>
+    <string name="quick_action_drawer_title">Бочни мени</string>
     <string name="quick_action_search_view_desc">Прекидач за отварање или затварање приказа претраге.</string>
     <string name="quick_action_search_view_title">Приказ претраге</string>
-    <string name="quick_action_navigation_view_desc">Прекидач за отварање или затварање приказа навођења.</string>
-    <string name="quick_action_navigation_view_title">Приказ навођења</string>
+    <string name="quick_action_navigation_view_desc">Прекидач за отварање или затварање приказа навигације.</string>
+    <string name="quick_action_navigation_view_title">Приказ навигације</string>
     <string name="quick_action_switch_compass_desc">Прекидач за промену усмерења карте.</string>
     <string name="shared_string_interface">Сучеље</string>
     <string name="corner_radius">Полупречник угла</string>
@@ -5786,7 +5786,7 @@
     <string name="ascent">Успон</string>
     <string name="descent">Спуст</string>
     <string name="map_orientations_choose_description">Оставите празним ради пребацивања између свих доступних начина, или додајте своје омиљене.</string>
-    <string name="map_orientations">Усмерења карте</string>
+    <string name="map_orientations">Усмерења мапе</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Одговор</string>
