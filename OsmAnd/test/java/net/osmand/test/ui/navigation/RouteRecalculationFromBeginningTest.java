@@ -75,7 +75,6 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		if (idlingResource != null) {
 			unregisterIdlingResources(idlingResource);
 		}
-		app.stopNavigation();
 	}
 
 	@Test
