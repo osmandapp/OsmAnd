@@ -286,8 +286,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		printGCInformation(false);
 		hctx.clearAll(stPoints, endPoints);
 		printf(SL >= 0,
-				"Routing %.1f ms: load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
-				(System.nanoTime() - startTime) / 1e6, 
+				"Routing %.1f ms (ctx %s): load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
+				(System.nanoTime() - startTime) / 1e6, hctx.hashCode() + "", 
 				hctx.stats.loadPointsTime, hctx.stats.searchPointsTime,
 				hctx.stats.routingTime, hctx.stats.addQueueTime + hctx.stats.pollQueueTime,
 				hctx.stats.loadEdgesTime, hctx.stats.loadEdgesCnt, hctx.stats.prepTime,

@@ -22,7 +22,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -69,13 +68,11 @@ public class ClickableWayHelper {
     );
 
     private final OsmandApplication app;
-    private final OsmandMapTileView view;
     private final ClickableWayMenuProvider activator;
 
-    public ClickableWayHelper(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
+    public ClickableWayHelper(@NonNull OsmandApplication app) {
         this.app = app;
-        this.view = view;
-        this.activator = new ClickableWayMenuProvider(view, this::readHeightData, this::openAsGpxFile);
+        this.activator = new ClickableWayMenuProvider(app, this::readHeightData, this::openAsGpxFile);
     }
 
     @NonNull
@@ -228,7 +225,7 @@ public class ClickableWayHelper {
     }
 
     private boolean openAsGpxFile(@Nullable ClickableWay clickableWay) {
-        MapActivity mapActivity = view.getMapActivity();
+        MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
         if (clickableWay != null && mapActivity != null) {
             GpxFile gpxFile = clickableWay.getGpxFile();
             GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
