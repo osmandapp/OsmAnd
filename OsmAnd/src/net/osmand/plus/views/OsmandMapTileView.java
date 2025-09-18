@@ -2319,16 +2319,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			initialViewport = getRotatedTileBox();
 			MapRendererView mapRenderer = getMapRenderer();
 			// Remember the tile31 under the pinch center so we can re-center later
-			PointI elevatedTile = NativeUtilities.get31FromElevatedPixel(mapRenderer, (int) initialMultiTouchCenterPoint.x,
-					(int) initialMultiTouchCenterPoint.y);
-			if (elevatedTile != null) {
-				initialCenterTile = elevatedTile;
-			} else {
-				// Fallback if elevated lookup fails
-				initialCenterTile = new PointI();
-				mapRenderer.getLocationFromScreenPoint(new PointI((int) initialMultiTouchCenterPoint.x,
-						(int) initialMultiTouchCenterPoint.y), initialCenterTile);
-			}
+			initialCenterTile = new PointI();
+			mapRenderer.getLocationFromScreenPoint(new PointI((int) initialMultiTouchCenterPoint.x,
+					(int) initialMultiTouchCenterPoint.y), initialCenterTile);
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
 					(int) initialMultiTouchCenterPoint.x, view.getHeight() - (int) initialMultiTouchCenterPoint.y);
 			startRotating = false;
