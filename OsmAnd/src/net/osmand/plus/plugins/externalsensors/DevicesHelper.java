@@ -49,6 +49,7 @@ import net.osmand.plus.plugins.externalsensors.devices.ant.AntTemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBPICPDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBikeSCDDevice;
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLECarlyDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEHeartRateDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
@@ -85,6 +86,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 
 	private final static List<UUID> SUPPORTED_BLE_SERVICE_UUIDS = Arrays.asList(
 			BLEOBDDevice.Companion.getServiceUUID(),
+			BLECarlyDevice.Companion.getServiceUUID(),
 			BLEBikeSCDDevice.getServiceUUID(),
 			BLEHeartRateDevice.getServiceUUID(),
 			BLERunningSCDDevice.getServiceUUID(),

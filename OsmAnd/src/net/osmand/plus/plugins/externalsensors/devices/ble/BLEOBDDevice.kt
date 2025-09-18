@@ -20,7 +20,7 @@ import okio.Timeout
 import java.util.UUID
 import kotlin.math.min
 
-class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
+open class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 	BLEAbstractDevice(bluetoothAdapter, deviceId), Source, Sink {
 	private val log = PlatformUtil.getLog("OBD2")
 
