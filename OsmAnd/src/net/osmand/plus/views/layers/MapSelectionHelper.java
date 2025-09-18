@@ -41,7 +41,6 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.clickable.ClickableWay;
-import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -74,14 +73,11 @@ public class MapSelectionHelper {
 	private Map<LatLon, BackgroundType> touchedFullMapObjects = new HashMap<>();
 	private Map<LatLon, BackgroundType> touchedSmallMapObjects = new HashMap<>();
 
-	private final ClickableWayHelper clickableWayHelper;
-
 	public MapSelectionHelper(@NonNull Context context) {
 		app = (OsmandApplication) context.getApplicationContext();
 		settings = app.getSettings();
 		view = app.getOsmandMap().getMapView();
 		mapLayers = app.getOsmandMap().getMapLayers();
-		clickableWayHelper = new ClickableWayHelper(app, view);
 	}
 
 	@NonNull
@@ -204,7 +200,7 @@ public class MapSelectionHelper {
 
 				boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 				boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
-				boolean isClickableWay = clickableWayHelper.isClickableWay(renderedObject);
+				boolean isClickableWay = app.getClickableWayHelper().isClickableWay(renderedObject);
 
 				if (!isClickableWay && !isTravelGpx && !isOsmRoute && (renderedObject.getId() == null
 						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
@@ -244,7 +240,8 @@ public class MapSelectionHelper {
 					if (isTravelGpx) {
 						addTravelGpx(result, travelGpxFilter);
 					} else if (isClickableWay) {
-						addClickableWay(result, clickableWayHelper.loadClickableWay(result.getPointLatLon(), renderedObject));
+						addClickableWay(result, app.getClickableWayHelper()
+								.loadClickableWay(result.getPointLatLon(), renderedObject));
 					}
 				}
 
@@ -345,7 +342,7 @@ public class MapSelectionHelper {
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
-							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
+							boolean isClickableWay = app.getClickableWayHelper().isClickableWay(obfMapObject, tags);
 
 							if (isOsmRoute && !osmRoutesAlreadyAdded) {
 								osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
@@ -355,8 +352,8 @@ public class MapSelectionHelper {
 								if (isTravelGpx) {
 									addTravelGpx(result, tags.get(ROUTE_ID));
 								} else if (isClickableWay) {
-									addClickableWay(result,
-											clickableWayHelper.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
+									addClickableWay(result, app.getClickableWayHelper()
+											.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
 								}
 							}
 
@@ -472,7 +469,7 @@ public class MapSelectionHelper {
 
 	private void addClickableWay(@NonNull MapSelectionResult result, @Nullable ClickableWay clickableWay) {
 		if (clickableWay != null && isUniqueClickableWay(result.getAllObjects(), clickableWay)) {
-			result.collect(clickableWay, clickableWayHelper.getContextMenuProvider());
+			result.collect(clickableWay, app.getClickableWayHelper().getContextMenuProvider());
 		}
 	}
 
