@@ -1760,21 +1760,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
-	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
 				marginTopPx, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
-			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
 				marginTopPx, marginLeftPx, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
 	}
 
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
-			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border, boolean rotate) {
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border, boolean rotate) {
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
@@ -1835,7 +1835,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void animateToState(double clat, double clon, @NonNull Zoom zoom,
-	                           float finalRotation, float elevationAngle, long animationDuration, boolean notifyListener) {
+							   float finalRotation, float elevationAngle, long animationDuration, boolean notifyListener) {
 		animatedDraggingThread.animateToPreview(clat, clon,
 				zoom, finalRotation, elevationAngle, animationDuration, notifyListener);
 	}
@@ -1867,7 +1867,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitLocationToMap(double clat, double clon, int zoom,
-	                             int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean animated) {
+								 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean animated) {
 		RotatedTileBox tb = currentViewport.copy();
 		int dy = 0;
 		int dx = 0;
@@ -1901,7 +1901,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitLocationToMap(double clat, double clon, int zoom,
-	                             int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
+								 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
 		fitLocationToMap(clat, clon, zoom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0, animated);
 	}
 
@@ -2198,30 +2198,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 				mapRenderer.setViewportScale(0.0, false);
-=======
-				// 1) Convert the pinch into a real zoom/rotation (uses native pinch model)
-				changeZoomPosition(0f, 0f); // this calls zoomAndRotateToAnimate(...)
-
-				// 2) Re-anchor to the pinch center so the same tile stays under the finger
-				final int cx, cy;
-				if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
-				    cx = (int) multiTouchSupport.getCenterPoint().x;
-				    cy = (int) multiTouchSupport.getCenterPoint().y;
-				} else {
-				    cx = (int) initialMultiTouchCenterPoint.x;
-				    cy = (int) initialMultiTouchCenterPoint.y;
-				}
-				mapRenderer.setMapTarget(new PointI(cx, cy), initialCenterTile);
-
-				// 3) Now clear the magnification by returning to identity
-				mapRenderer.setViewportScale(1.0, false);
->>>>>>> parent of d4405019a1 (Update OsmandMapTileView.java)
-=======
-				mapRenderer.setViewportScale(0.0, false);
->>>>>>> parent of 70025ecaf4 (Pinch zoom magnifier: Convert pinch to real zoom/rotation and re-anchor before clearing)
 				mapRenderer.setViewportShift(0, 0, false);
 				changeZoomPosition((float) 0, 0);
 			}
