@@ -2200,6 +2200,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mapRenderer.setViewportScale(0.0, false);
 =======
 				// 1) Convert the pinch into a real zoom/rotation (uses native pinch model)
@@ -2219,6 +2220,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// 3) Now clear the magnification by returning to identity
 				mapRenderer.setViewportScale(1.0, false);
 >>>>>>> parent of d4405019a1 (Update OsmandMapTileView.java)
+=======
+				mapRenderer.setViewportScale(0.0, false);
+>>>>>>> parent of 70025ecaf4 (Pinch zoom magnifier: Convert pinch to real zoom/rotation and re-anchor before clearing)
 				mapRenderer.setViewportShift(0, 0, false);
 				changeZoomPosition((float) 0, 0);
 			}
