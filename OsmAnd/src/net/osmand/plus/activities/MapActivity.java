@@ -803,12 +803,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		UiUtilities.updateStatusBarColor(this);
 	}
 
-	@Override
-	protected int getNavigationBarColorId() {
-		boolean nightMode = app.getDaynightHelper().isNightMode(OVER_MAP);
-		return ColorUtilities.getNavBarBackgroundColorId(nightMode);
-	}
-
 	public boolean isInAppPurchaseAllowed() {
 		return true;
 	}
