@@ -5,6 +5,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.AssetUtils.copyAssetToFile;
+import static net.osmand.test.common.EspressoUtils.waitForView;
 import static net.osmand.test.common.OsmAndDialogInteractions.checkViewText;
 import static net.osmand.test.common.OsmAndDialogInteractions.clearText;
 import static net.osmand.test.common.OsmAndDialogInteractions.isContextMenuOpened;
@@ -30,6 +31,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.AppSettings;
 
@@ -67,10 +69,10 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 		AppSettings.setLocale(app, Locale.FRANCE);
 
 		activityRule.launchActivity(null);
-		if(app.getPoiTypes().isInit()) {
+		if (app.getPoiTypes().isInit()) {
 			app.reInitPoiTypes();
 		}
-		while (!app.getPoiTypes().isInit()){
+		while (!app.getPoiTypes().isInit()) {
 			Thread.sleep(50);
 		}
 		app.getPoiTypes().setPoiTranslator(new MapPoiTypesTranslator(app, new Locale("fr")));
@@ -116,7 +118,10 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 				.perform(ViewActions.click());
 		checkViewText(R.id.poiTypeEditText, "Magasin de vélos");
 
-		onView(withId(R.id.saveButton)).perform(ViewActions.click());
+		AndroidUtils.hideSoftKeyboard(mapActivity, mapActivity.findViewById(R.id.poiTypeEditText));
+
+		waitForView(withId(R.id.saveButton)).perform(ViewActions.click());
+
 		waitForAnyView(2000, 50, withId(R.id.context_menu_layout));
 		assertTrue(isContextMenuOpened());
 	}
