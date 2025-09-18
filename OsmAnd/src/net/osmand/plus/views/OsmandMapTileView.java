@@ -2028,7 +2028,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						targetPixelY = targetPixelPosition.getY();
 						touchPoint = multiTouchSupport.getFirstPoint();
 						findFirstTouchMapLocation(touchPoint.x, touchPoint.y);
-						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
 					rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 				} else if (primaryClear) {
@@ -2199,20 +2198,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
-				// (1) Convert the pinch into a real zoom/rotation (use native pinch model)
-				changeZoomPosition(0f, 0f); // this calls zoomAndRotateToAnimate(...)
-				// (2) Re-anchor to the pinch center so the same tile stays under the finger
-				if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
-					mapRenderer.setMapTarget(new PointI((int) multiTouchSupport.getCenterPoint().x,
-														(int) multiTouchSupport.getCenterPoint().y), initialCenterTile);
-				} else {
-					mapRenderer.setMapTarget(new PointI((int) initialMultiTouchCenterPoint.x,
-														(int) initialMultiTouchCenterPoint.y), initialCenterTile);
-				}
-				// (3) Clear the magnification by returning to identity
-				mapRenderer.setViewportScale(1.0, false);
+				mapRenderer.setViewportScale(0.0, false);
 				mapRenderer.setViewportShift(0, 0, false);
-				refreshMap();
+				changeZoomPosition((float) 0, 0);
 			}
 		}
 

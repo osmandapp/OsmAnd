@@ -32,7 +32,6 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.purchase.data.PurchaseUiData;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -238,6 +237,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 			@Override
 			public void onPurchaseCanceled() {
+				stop(true);
+			}
+
+			@Override
+			public void onError() {
 				stop(true);
 			}
 		});
@@ -758,12 +762,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	@Override
 	protected boolean isBillingManagerExists() {
 		return getBillingManager() != null;
-	}
-
-	@Override
-	protected boolean isBillingUnavailable() {
-		BillingManager manager = getBillingManager();
-		return  manager == null || manager.getBillingClientResponseCode() == BillingClient.BillingResponseCode.BILLING_UNAVAILABLE;
 	}
 
 	@Override

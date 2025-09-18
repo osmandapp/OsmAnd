@@ -1041,14 +1041,11 @@ public abstract class InAppPurchaseHelper {
 
 	protected abstract boolean isBillingManagerExists();
 
-	protected abstract boolean isBillingUnavailable();
-
 	protected abstract void destroyBillingManager();
 
 	protected void stop(boolean taskDone) {
 		logDebug("Destroying helper.");
 		InAppPurchaseTaskType task = activeTask;
-		boolean billingUnavailable = isBillingUnavailable();
 		if (isBillingManagerExists()) {
 			if (taskDone) {
 				processingTask = false;
@@ -1065,7 +1062,7 @@ public abstract class InAppPurchaseHelper {
 			inventoryRequestPending = false;
 			requestInventory(false);
 		} else {
-			if (task == InAppPurchaseTaskType.REQUEST_INVENTORY && billingUnavailable) {
+			if (task == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 				applyPurchases();
 			}
 		}

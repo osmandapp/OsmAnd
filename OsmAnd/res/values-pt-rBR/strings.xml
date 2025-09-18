@@ -6222,4 +6222,20 @@
     <string name="rendering_attr_hideFerries_description">Ocultar rotas de balsa</string>
     <string name="rendering_attr_hideMinorContours_name">Contornos de profundidade menores</string>
     <string name="rendering_attr_hideMinorContours_description">Ocultar contornos de profundidade menores</string>
+    <string name="obd_alt_battery_voltage">Tensão da bateria (adaptador)</string>
+    <string name="liter_single">Litro</string>
+    <string name="imperial_gallon">Galão imperial</string>
+    <string name="us_gallon">Galão americano</string>
+    <string name="kilometers">Quilómetros</string>
+    <string name="miles">Milhas</string>
+    <string name="mpg">MPG</string>
+    <string name="rendering_attr_hideFairways_name">Caminhos</string>
+    <string name="rendering_attr_hideFairways_description">Ocultar caminhos</string>
+    <string name="rendering_attr_hideLightSectors_name">Setores claros</string>
+    <string name="rendering_attr_hideLightSectors_description">Ocultar setores claros</string>
+    <string name="rendering_attr_fairwayStyle_name">Cor do caminho</string>
+    <string name="rendering_attr_fairwayStyle_description">Cor de caminhos</string>
+    <string name="show_local_names">Mostrar nomes locais</string>
+    <string name="access_pinch_zoom_magnification">Ampliação com zoom por pinçamento</string>
+    <string name="access_pinch_zoom_magnification_descr">Use o dimensionamento da janela de visualização em vez de níveis de zoom discretos durante os gestos de zoom.</string>
 </resources>

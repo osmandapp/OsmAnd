@@ -103,7 +103,7 @@ public class TestSubsolar {
 			Stats s = new Stats();
 			double lon = 0;
 			MIN_ALTITUDE = 20;
-			ERR = 0.01;
+			ERR = 1;
 			for (int minInc = 5; minInc <= 60; minInc += 5) {
 				System.out.println("MIN INC - " + minInc);
 				runMinutesTest(Body.Sun, 40, lon, s, 6, minInc);
@@ -128,11 +128,12 @@ public class TestSubsolar {
 			LatLon testPnt = new LatLon(52.367, 4.904);
 			
 			
-			String[] bodiesStr = { "Sun", "Moon", "capella", "aldebaran", "betelgeuse" };
+//			String[] bodiesStr = { "Sun", "Moon", "capella", "aldebaran", "betelgeuse" };
+			String[] bodiesStr = { "Sun", "Moon", "pollux", "aldebaran", "regulus" }; // incorrect
 			double[] alts = { 24.65, 17.91, 65.71, 38.92, 40.04 }; // timeanddate
 //			double[] alts = { 24.5, 17.8, 65.8, 38.7, 40 }; // rough errors
 			Body[] bodies = initBodies(mapStars, bodiesStr);
-			LatLon res = calcPositionBodies(s, bodies, alts, time, testPnt);
+			LatLon res = calcPositionBodies(s, bodies, alts, time, null, 0);
 			check(testPnt, res,
 					String.format("- %d cluster size from %d points (%d failed, %d iterations) - %.3f sec\n %s",
 							s.maxClusterSize, s.found, s.failed, s.iterations, s.calcTime, res));
@@ -150,6 +151,13 @@ public class TestSubsolar {
 			Stats s = new Stats();
 			String time = "2025-09-11T08:00:00Z";
 			LatLon testPnt = new LatLon(52.367, 4.904);
+			double aroundThresholdKm = 1000;
+			LatLon aroundPnt = new LatLon(48, 5);
+			
+			if (MapUtils.getDistance(aroundPnt, testPnt) / 1000 > aroundThresholdKm) {
+				System.out.println(MapUtils.getDistance(aroundPnt, testPnt)/1000 + " km - around point is outside radius");
+				return;
+			}
 			
 			double[] alts = { 17.91, 65.71, 40.04, 38.92 }; // timeanddate
 			for(int i = 0; i < stars.size(); i++ ) {
@@ -159,7 +167,7 @@ public class TestSubsolar {
 						continue;
 					}
 					String[] bodiesStr = { "Moon", stars.get(i).key, stars.get(j).key};
-					LatLon res = calcPositionBodies(s, initBodies(mapStars, bodiesStr), alts, time, testPnt);
+					LatLon res = calcPositionBodies(s, initBodies(mapStars, bodiesStr), alts, time, aroundPnt, aroundThresholdKm);
 					if (res != null) {
 						System.out.println(stars.get(i).key + " " + stars.get(j).key +".... ");
 						for (int k = 0; k < stars.size(); k++) {
@@ -167,7 +175,7 @@ public class TestSubsolar {
 								continue;
 							}
 							String[] bodiesStr2 = { "Moon", stars.get(i).key, stars.get(j).key, stars.get(k).key};
-							LatLon detailedRes = calcPositionBodies(s, initBodies(mapStars, bodiesStr2), alts, time, testPnt);
+							LatLon detailedRes = calcPositionBodies(s, initBodies(mapStars, bodiesStr2), alts, time, aroundPnt, aroundThresholdKm);
 							if (detailedRes != null) {
 								System.out.println(
 										stars.get(i).key + " " + stars.get(j).key + " " + stars.get(k).key + "!!");
@@ -241,7 +249,8 @@ public class TestSubsolar {
         return clusters;
     }
 
-	private static LatLon calcPositionBodies(Stats s, Body[] bodies, double[] alts, String time, LatLon check) {
+	private static LatLon calcPositionBodies(Stats s, Body[] bodies, double[] alts, String time, 
+			LatLon aroundPnt, double aroundThresholdKm) {
 		long nt = System.nanoTime();
 		double MIN_THRESHOLD = 4_000;
 		double MAX_THRESHOLD = 500_000; 
@@ -252,21 +261,30 @@ public class TestSubsolar {
 		s.failed = 0;
 		for (int i = 0; i < bodies.length; i++) {
 			for (int j = i + 1; j < bodies.length; j++) {
-				LatLon a1 = calcCoordinates2Bodies(s, time, bodies[i], alts[i], bodies[j], alts[j], true);
+				LatLon a1 = calcCoordinates2Bodies(s, time, bodies[i], alts[i], bodies[j], alts[j], 
+						true, aroundPnt, aroundThresholdKm);
 				if (a1 != null) {
-					s.found++;
-					l.add(a1);
+					if (aroundPnt == null || MapUtils.getDistance(a1, aroundPnt) < aroundThresholdKm * 1000) {
+						s.found++;
+						l.add(a1);
+					}
 				} else {
 					s.failed++;
 				}
-				LatLon a2 = calcCoordinates2Bodies(s, time, bodies[i], alts[i], bodies[j], alts[j], false);
+				LatLon a2 = calcCoordinates2Bodies(s, time, bodies[i], alts[i], bodies[j], alts[j], 
+						false, aroundPnt, aroundThresholdKm);
 				if (a2 != null) {
-					s.found++;
-					l.add(a2);
+					if (aroundPnt == null || MapUtils.getDistance(a2, aroundPnt) < aroundThresholdKm * 1000) {
+						s.found++;
+						l.add(a2);
+					}
 				} else {
 					s.failed++;
 				}
 			}
+		}
+		if (l.size() < MIN_SIZE_CLUSTER) {
+			return null;
 		}
 		
 		List<LatLon> maxSizeCluster = null;
@@ -304,7 +322,8 @@ public class TestSubsolar {
 		return new LatLon(lat, lon);
 	}
 
-	protected static LatLon calcCoordinates2Bodies(Stats s, String timeS, Body body1, double targetAlt1, Body body2, double targetAlt2, boolean dir) {
+	protected static LatLon calcCoordinates2Bodies(Stats s, String timeS, Body body1, double targetAlt1, 
+			Body body2, double targetAlt2, boolean dir, LatLon check, double thresholdKm) {
 		MAX_ITERATIONS = 100000;
 		double ALT_PRECISION = 0.01;
 		double MIN_THRESHOLD = 10000;
@@ -328,10 +347,8 @@ public class TestSubsolar {
 			int steps = closest1 == null ? 9 : 25;
 			List<LatLon> points1 = new ArrayList<LatLon>();
 			List<Double> deltas1 = new ArrayList<Double>();
-			List<Double> alts1 = new ArrayList<Double>();
 			List<LatLon> points2 = new ArrayList<LatLon>();
 			List<Double> deltas2 = new ArrayList<Double>();
-			List<Double> alts2 = new ArrayList<Double>();
 			for (int i = -steps; i < steps; i++) {
 				double delta1 = deltaAround1 + i * 10.0 / magn;
 				double delta2 = deltaAround2 + i * 10.0 / magn;
@@ -355,10 +372,8 @@ public class TestSubsolar {
 				}
 				points1.add(pnt1);
 				deltas1.add(delta1);
-				alts1.add(alt1);
 				points2.add(pnt2);
 				deltas2.add(delta2);
-				alts2.add(alt2);
 				// System.out.println(target2.getAltitude() + " == "+ targetAlt2 + " " + iter);
 			}
 			
@@ -378,6 +393,10 @@ public class TestSubsolar {
 						closest1 = pnt1;
 					}
 				}
+			}
+			if (check != null && magn > 1 && minDist < thresholdKm * 1000 * 10
+					&& MapUtils.getDistance(check, closest1) > thresholdKm * 1000) {
+				return null;
 			}
 			
 		}

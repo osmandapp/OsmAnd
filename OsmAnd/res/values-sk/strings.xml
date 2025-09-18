@@ -5886,4 +5886,13 @@
     <string name="shared_sting_osm_link">Odkaz OSM</string>
     <string name="show_local_names">Zobraziť lokálne názvy</string>
     <string name="lang_en_barebones">Anglicky (jednoduchý)</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Imperiálny galón</string>
+    <string name="us_gallon">Americký galón</string>
+    <string name="kilometers">Kilometre</string>
+    <string name="miles">Míle</string>
+    <string name="mpg">Míľ na galón</string>
+    <string name="accessibility_independent_features">Nezávislé funkcie</string>
+    <string name="access_pinch_zoom_magnification">Zväčšenie roztiahnutím prstov</string>
+    <string name="access_pinch_zoom_magnification_descr">Pri gestách priblíženia použiť zväčšenie pohľadu namiesto diskrétnych úrovní priblíženia.</string>
 </resources>

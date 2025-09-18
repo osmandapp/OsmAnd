@@ -36,6 +36,10 @@ android {
 		// additionalParameters "--no-version-vectors"
 	}
 
+	testOptions {
+		animationsDisabled = true
+	}
+
 	sourceSets {
 		main {
 			manifest.srcFile "AndroidManifest.xml"

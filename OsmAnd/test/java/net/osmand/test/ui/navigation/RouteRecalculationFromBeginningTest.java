@@ -8,8 +8,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.EspressoUtils.waitForView;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
-import static net.osmand.test.common.Interactions.setRouteStart;
+import static net.osmand.test.common.Interactions.startNavigation;
 import static net.osmand.test.common.Matchers.childAtPosition;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithText;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithId;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static org.hamcrest.Matchers.allOf;
 
@@ -75,6 +77,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		if (idlingResource != null) {
 			unregisterIdlingResources(idlingResource);
 		}
+		app.stopNavigation();
 	}
 
 	@Test
@@ -83,8 +86,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 		openNavigationMenu();
 
-		ViewInteraction linearLayout = waitForView(allOf(withId(R.id.map_options_route_button), isDisplayed()));
-		linearLayout.perform(click());
+		clickViewWithId(R.id.map_options_route_button);
 
 		ViewInteraction linearLayout2 = onView(
 				childAtPosition(
@@ -95,19 +97,16 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 						6));
 		linearLayout2.perform(scrollTo(), click());
 
-		ViewInteraction allTab = onView(allOf(withId(android.R.id.text1),
-				withText(app.getString(TrackTabType.ALL.titleId))));
-		allTab.perform(click());
+		clickViewWithText(app.getString(TrackTabType.ALL.titleId));
 
-		ViewInteraction trackItemView = onView(allOf(withId(R.id.title),
+		ViewInteraction trackItemView = waitForView(allOf(withId(R.id.title),
 				withText(GpxHelper.INSTANCE.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
 		trackItemView.perform(click());
 
-		ViewInteraction closeButton = onView(allOf(withId(R.id.close_button), isDisplayed()));
-		closeButton.perform(click());
+		clickViewWithId(R.id.close_button);
 
-		setRouteStart(START);
-		app.getOsmandMap().getMapActions().startNavigation();
+		app.getTargetPointsHelper().setStartPoint(START, true, null);
+		startNavigation();
 
 		idlingResource = new ObserveDistToFinishIdlingResource(app);
 		registerIdlingResources(idlingResource);

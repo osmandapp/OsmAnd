@@ -1,19 +1,21 @@
 package net.osmand.test.common;
 
-import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.matcher.ViewMatchers.Visibility.VISIBLE;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static net.osmand.test.common.EspressoUtils.waitForView;
 import static net.osmand.test.common.Matchers.hasOnClickListener;
 import static net.osmand.test.common.SystemDialogInteractions.hasTextEventually;
 import static net.osmand.test.common.SystemDialogInteractions.isViewVisible;
 import static org.hamcrest.Matchers.allOf;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -26,6 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.core.StringRegularExpression;
 import org.hamcrest.core.StringStartsWith;
 
@@ -40,7 +43,7 @@ public class OsmAndDialogInteractions {
 
 	public static void skipFirstUsageDialog() {
 		try {
-			ViewInteraction skipButton = EspressoUtils.waitForView(allOf(withId(R.id.skip_button),
+			ViewInteraction skipButton = waitForView(allOf(withId(R.id.skip_button),
 					hasOnClickListener(),
 					isDisplayed()), 500);
 			skipButton.perform(click());
@@ -50,7 +53,7 @@ public class OsmAndDialogInteractions {
 
 	public static void skipSpeedCamerasBottomSheet() {
 		try {
-			EspressoUtils.waitForView(allOf(withId(R.id.button_text),
+			waitForView(allOf(withId(R.id.button_text),
 					withText(R.string.keep_active),
 					isDisplayed()), 500);
 			Espresso.pressBack();
@@ -62,7 +65,7 @@ public class OsmAndDialogInteractions {
 		try {
 			String template = EspressoUtils.escapeRegex(ctx.getString(R.string.continue_follow_previous_route_auto, "<NUMBER>"));
 			String regex = template.replace("<NUMBER>", "\\d+");
-			EspressoUtils.waitForView(allOf(
+			waitForView(allOf(
 					withText(StringRegularExpression.matchesRegex(regex)),
 					isDisplayed()), 500);
 			Espresso.pressBack();
@@ -72,7 +75,7 @@ public class OsmAndDialogInteractions {
 
 	public static void skipWhatsNewDialog(@NonNull Context ctx) {
 		try {
-			EspressoUtils.waitForView(allOf(
+			waitForView(allOf(
 					withText(StringStartsWith.startsWith(ctx.getString(R.string.whats_new))),
 					isDisplayed()), 500);
 			Espresso.pressBack();
@@ -82,7 +85,7 @@ public class OsmAndDialogInteractions {
 
 	public static void skipArrivedDestinationDialog() {
 		try {
-			EspressoUtils.waitForView(allOf(
+			waitForView(allOf(
 					withText(R.string.arrived_at_destination),
 					isDisplayed()), 500);
 			Espresso.pressBack();
@@ -90,40 +93,44 @@ public class OsmAndDialogInteractions {
 		}
 	}
 
-	public static void clickButtonWithText(@StringRes int textId) {
-		onView(CustomMatchers.first(allOf(withText(textId), isDisplayed()))).perform(click());
+	public static void clickViewWithText(@StringRes int textId) throws Throwable {
+		waitForView(CustomMatchers.first(allOf(withText(textId), isDisplayed()))).perform(click());
 	}
 
-	public static void clickButtonWithContentDescription(@StringRes int textId) {
-		onView(CustomMatchers.first(allOf(withContentDescription(textId), isDisplayed()))).perform(click());
+	public static void clickViewWithContentDescription(@StringRes int textId) throws Throwable {
+		waitForView(CustomMatchers.first(allOf(withContentDescription(textId), isDisplayed()))).perform(click());
 	}
 
-	public static void clickButtonWithId(@IdRes int id) {
-		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(click());
+	public static void clickViewWithId(@IdRes int id) throws Throwable {
+		waitForView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(click());
 	}
 
-	public static void clickButtonWithText(@NonNull String textId) {
-		onView(CustomMatchers.first(allOf(withText(textId), isDisplayed()))).perform(click());
+	public static void clickViewWithText(@NonNull String textId) throws Throwable {
+		waitForView(CustomMatchers.first(allOf(withText(textId), isDisplayed()))).perform(click());
 	}
 
-	public static void clickMapButtonWithId(@IdRes int id) {
-		onView(CustomMatchers.first(allOf(withId(id), isDisplayed(), isAssignableFrom(MapButton.class)))).perform(click());
+	public static void clickMapButtonWithId(@IdRes int id) throws Throwable {
+		waitForView(CustomMatchers.first(allOf(withId(id), isDisplayed(), isAssignableFrom(MapButton.class)))).perform(click());
 	}
 
-	public static void writeText(@IdRes int id, @NonNull String text) {
-		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(typeText(text));
+	public static void writeText(@IdRes int id, @NonNull String text) throws Throwable {
+		waitForView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(typeText(text));
 	}
 
-	public static void checkViewText(@IdRes int id, @NonNull String text) {
-		onView(withId(id)).check(hasTextEventually(text));
+	public static void checkViewText(@IdRes int id, @NonNull String text) throws Throwable {
+		waitForView(withId(id)).check(hasTextEventually(text));
 	}
 
-	public static void clearText(@IdRes int id) {
+	public static void clearText(@IdRes int id) throws Throwable {
 		replaceText(id, "");
 	}
 
-	public static void replaceText(@IdRes int id, @NonNull String newText) {
-		onView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(ViewActions.replaceText(newText));
+	public static void replaceText(@IdRes int id, @NonNull String newText) throws Throwable {
+		waitForView(CustomMatchers.first(allOf(withId(id), isDisplayed()))).perform(ViewActions.replaceText(newText));
+	}
+
+	public static Matcher<View> isDisplayed() {
+		return withEffectiveVisibility(VISIBLE);
 	}
 
 	public static boolean isContextMenuOpened() {
@@ -138,7 +145,8 @@ public class OsmAndDialogInteractions {
 		app.getOsmandMap().getMapView().refreshMap();
 	}
 
-	public static void moveAndZoomMap(@NonNull OsmandApplication app, double latitude, double longitude, int zoom) {
+	public static void moveAndZoomMap(@NonNull OsmandApplication app, double latitude,
+			double longitude, int zoom) {
 		app.getOsmandMap().getMapView().setLatLon(latitude, longitude);
 		app.getOsmandMap().getMapView().setIntZoom(zoom);
 	}
