@@ -8,7 +8,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.EspressoUtils.waitForView;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
-import static net.osmand.test.common.Interactions.setRouteStart;
+import static net.osmand.test.common.Interactions.startNavigation;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static org.hamcrest.Matchers.allOf;
@@ -75,6 +75,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		if (idlingResource != null) {
 			unregisterIdlingResources(idlingResource);
 		}
+		app.stopNavigation();
 	}
 
 	@Test
@@ -106,8 +107,8 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		ViewInteraction closeButton = onView(allOf(withId(R.id.close_button), isDisplayed()));
 		closeButton.perform(click());
 
-		setRouteStart(START);
-		app.getOsmandMap().getMapActions().startNavigation();
+		app.getTargetPointsHelper().setStartPoint(START, true, null);
+		startNavigation();
 
 		idlingResource = new ObserveDistToFinishIdlingResource(app);
 		registerIdlingResources(idlingResource);
