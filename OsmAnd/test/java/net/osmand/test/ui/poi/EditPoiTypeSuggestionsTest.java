@@ -4,7 +4,6 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static net.osmand.test.common.AppSettings.setLocale;
 import static net.osmand.test.common.AssetUtils.copyAssetToFile;
 import static net.osmand.test.common.OsmAndDialogInteractions.checkViewText;
 import static net.osmand.test.common.OsmAndDialogInteractions.clearText;
@@ -32,6 +31,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.test.common.AppSettings;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -63,8 +63,9 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 	}
 
 	@Test
-	public void testPoiTypeSuggestions() throws InterruptedException {
-		setLocale(app, Locale.FRANCE);
+	public void testPoiTypeSuggestions() throws Throwable {
+		AppSettings.setLocale(app, Locale.FRANCE);
+
 		activityRule.launchActivity(null);
 		if(app.getPoiTypes().isInit()) {
 			app.reInitPoiTypes();

@@ -3,8 +3,6 @@ package net.osmand.test.ui.map;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static net.osmand.test.common.AppSettings.showFavorites;
-import static net.osmand.test.common.AppSettings.showWikiOnMap;
 import static net.osmand.test.common.AssetUtils.copyAssetToFile;
 import static net.osmand.test.common.OsmAndDialogInteractions.isContextMenuOpened;
 import static net.osmand.test.common.OsmAndDialogInteractions.isMultiSelectionMenuOpened;
@@ -35,6 +33,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.test.common.AppSettings;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -66,8 +65,8 @@ public class POIClickTest extends AndroidTest {
 
 	@Test
 	public void testClickOnMApPoint() throws Throwable {
-		showWikiOnMap(app);
-		showFavorites(app, true);
+		AppSettings.showWikiOnMap(app);
+		AppSettings.showFavorites(app, true);
 		app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
 		activityRule.launchActivity(null);
 		double lattitude = 50.452880;
@@ -96,7 +95,7 @@ public class POIClickTest extends AndroidTest {
 		pressBack();
 		boolean isClosed = waitForViewDisappeared(2000, 50, withId(R.id.context_menu_layout));
 		assertTrue(isClosed);
-		showFavorites(app, false);
+		AppSettings.showFavorites(app, false);
 		refreshMap(app);
 		onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
 		waitForAnyView(2000, 50, withId(R.id.context_menu_layout));

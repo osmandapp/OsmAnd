@@ -9,7 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
-import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithId;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithId;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipSpeedCamerasBottomSheet;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
@@ -38,7 +38,7 @@ public class Interactions {
 	}
 
 	public static void startNavigation() throws Throwable {
-		clickButtonWithId(R.id.start_button);
+		clickViewWithId(R.id.start_button);
 	}
 
 	public static void setRouteStart(@NonNull LatLon start) throws Throwable {
