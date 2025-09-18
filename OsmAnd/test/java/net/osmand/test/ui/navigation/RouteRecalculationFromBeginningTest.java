@@ -98,7 +98,10 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		linearLayout2.perform(scrollTo(), click());
 
 		clickViewWithText(app.getString(TrackTabType.ALL.titleId));
-		clickViewWithText(GpxHelper.INSTANCE.getGpxTitle(SELECTED_GPX_NAME));
+
+		ViewInteraction trackItemView = waitForView(allOf(withId(R.id.title),
+				withText(GpxHelper.INSTANCE.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
+		trackItemView.perform(click());
 
 		clickViewWithId(R.id.close_button);
 
