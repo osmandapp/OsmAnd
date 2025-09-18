@@ -1,5 +1,6 @@
 package net.osmand.test.ui.poi;
 
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -118,7 +119,7 @@ public class EditPoiTypeSuggestionsTest extends AndroidTest {
 				.perform(ViewActions.click());
 		checkViewText(R.id.poiTypeEditText, "Magasin de vélos");
 
-		AndroidUtils.hideSoftKeyboard(mapActivity, mapActivity.findViewById(R.id.poiTypeEditText));
+		closeSoftKeyboard();
 
 		waitForView(withId(R.id.saveButton)).perform(ViewActions.click());
 
