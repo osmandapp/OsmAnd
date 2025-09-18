@@ -2028,6 +2028,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						targetPixelY = targetPixelPosition.getY();
 						touchPoint = multiTouchSupport.getFirstPoint();
 						findFirstTouchMapLocation(touchPoint.x, touchPoint.y);
+						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
 					rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 				} else if (primaryClear) {
