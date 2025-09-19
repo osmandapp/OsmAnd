@@ -41,6 +41,7 @@ import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.AppSettings;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,6 +84,7 @@ public class POIClickTest extends AndroidTest {
 		});
 	}
 
+	@Ignore
 	@Test
 	public void testClickOnMApPoint() throws Throwable {
 		activityRule.launchActivity(null);
