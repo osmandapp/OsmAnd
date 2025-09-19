@@ -53,6 +53,10 @@ public class POIClickTest extends AndroidTest {
 	@Rule
 	public ActivityTestRule<MapActivity> activityRule = new ActivityTestRule<>(MapActivity.class, true, false);
 
+	private double lattitude = 50.452880;
+	private double longitude = 30.514269;
+	private int zoom = 14;
+
 	@Before
 	public void setup() {
 		super.setup();
@@ -61,27 +65,26 @@ public class POIClickTest extends AndroidTest {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-
-	@Test
-	public void testClickOnMApPoint() throws Throwable {
 		AppSettings.showWikiOnMap(app);
 		AppSettings.showFavorites(app, true);
 		app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
-		activityRule.launchActivity(null);
-		double lattitude = 50.452880;
-		double longitude = 30.514269;
-		int zoom = 14;
 
 		FavouritePoint favouritePoint = new FavouritePoint(lattitude, longitude, "TestFavorite", "");
 		app.getFavoritesHelper().doAddFavorite("TestFavorite", "", "Test description for test favorite", "", 0xffff0000, BackgroundType.CIRCLE, FavouritePoint.DEFAULT_UI_ICON_ID, favouritePoint);
+	}
+
+	@Test
+	public void testClickOnMApPoint() throws Throwable {
+		activityRule.launchActivity(null);
 
 		skipAppStartDialogs(app);
+
 		moveAndZoomMap(app, lattitude, longitude, zoom);
+		refreshMap(app);
 		float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 		float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
+
 		onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
 
 		waitForView(withId(R.id.multi_selection_main_view));
