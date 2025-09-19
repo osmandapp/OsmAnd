@@ -49,10 +49,12 @@ public class AmenitySearcher {
 
         private Collection<String> names;
         private boolean checkOriginName;
+        private Map<String, String> tags;
 
         public Request(MapObject mapObject) {
             osmId = ObfConstants.getOsmObjectId(mapObject);
             type = ObfConstants.getOsmEntityType(mapObject);
+            tags = null;
 
             if (mapObject instanceof Amenity amenity) {
                 latLon = mapObject.getLocation();
@@ -63,6 +65,7 @@ public class AmenitySearcher {
                 latLon = renderedObject.getLatLon();
                 names = renderedObject.getOriginalNames();
                 wikidata = renderedObject.getTagValue(WIKIDATA);
+                tags = renderedObject.getTags();
             } else if (mapObject instanceof TransportStop stop) {
                 latLon = mapObject.getLocation();
                 names = stop.getOtherNames();
@@ -251,6 +254,9 @@ public class AmenitySearcher {
                             amenities, amenity.getOsmId(), amenity.getLocation(), amenity.getWikidata());
                 }
             }
+            if (Algorithms.isEmpty(filtered) && !Algorithms.isEmpty(request.tags)) {
+                filtered = filterByLatLonAndType(amenities, latLon, request.tags);
+            }
         }
         return filtered;
     }
@@ -273,6 +279,23 @@ public class AmenitySearcher {
                         result.add(amenity);
                     }
                 }
+            }
+        }
+        return result;
+    }
+
+    private List<Amenity> filterByLatLonAndType(Collection<Amenity> amenities, LatLon point, Map<String, String> tags) {
+        List<Amenity> result = new ArrayList<>();
+        for (Amenity amenity : amenities) {
+            if (amenity.getLocation().equals(point)) {
+                String type = amenity.getSubType();
+                for (String v : tags.values()) {
+                    if (type.equals(v)) {
+                        result.add(amenity);
+                        break;
+                    }
+                }
+                break;
             }
         }
         return result;
