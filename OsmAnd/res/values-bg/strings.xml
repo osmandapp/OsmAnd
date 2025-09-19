@@ -4639,7 +4639,7 @@
     <string name="ais_object_lost_timeouts">Време за изчакване на приемането на сигнал от AIS</string>
     <string name="ais_object_lost_timeouts_description">Задаване на стойности на времето за разпознаване на изгубени обекти на AIS, ако не е получен сигнал за определено време.</string>
     <string name="ais_load_data">Зареждане на данни от AIS от файл</string>
-    <string name="ais_address_settings_description">Изберете протокол за NMEA (UDP/TCP) и въведете адресите</string>
+    <string name="ais_address_settings_description">Изберете протокол на NMEA (UDP/TCP) и въведете съответните адреси и портове</string>
     <string name="ais_address_nmea_server_description">Определете IP адреса на източника на данни от NMEA (ако се използва TCP)</string>
     <string name="ais_port_nmea_server_description">Определяне на номера на TCP порта на източника на данни от NMEA</string>
     <string name="ais_address_settings">Настройки на IP адрес</string>
@@ -4648,7 +4648,7 @@
     <string name="ais_port_nmea_server">TCP порт на източника на данни от NMEA</string>
     <string name="ais_port_nmea_local">UDP порт на местния приемник на данни от NMEA</string>
     <string name="ais_port_nmea_local_description">Определяне на порт на UPD, на който OsmAnd получава данни от NMEA</string>
-    <string name="ais_object_lost_timeout">Време на показване на изгубен обект</string>
+    <string name="ais_object_lost_timeout">Време на показване на изгубен кораб</string>
     <string name="auto_25_chars_route_tshl">Завийте остро наляво</string>
     <string name="routing_attr_avoid_cobblestone_name">Без калдъръм</string>
     <string name="routing_attr_avoid_cobblestone_description">Без калдъръм</string>
