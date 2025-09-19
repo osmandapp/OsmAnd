@@ -34,6 +34,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.AppSettings;
 
@@ -44,6 +47,7 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -70,7 +74,6 @@ public class POIClickTest extends AndroidTest {
 		app.getAppInitializer().addOnFinishListener(new OnResultCallback<AppInitializer>() {
 			@Override
 			public void onResult(AppInitializer result) {
-				AppSettings.showWikiOnMap(app);
 				AppSettings.showFavorites(app, true);
 				app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
 
@@ -87,12 +90,20 @@ public class POIClickTest extends AndroidTest {
 		skipAppStartDialogs(app);
 
 		moveAndZoomMap(app, lattitude, longitude, zoom);
-		refreshMap(app);
+
+		WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
+		plugin.toggleWikipediaPoi(true, null);
+
 		float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 		float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
 		Thread.sleep(10000);
+		app.getOsmandMap().getMapView().refreshMapComplete();
+		Thread.sleep(5000);
 
 		onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
+		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
+
+		app.showToastMessage("selectedPoiFilters " + selectedPoiFilters);
 
 		waitForView(withId(R.id.multi_selection_main_view));
 		assertTrue(isMultiSelectionMenuOpened());
