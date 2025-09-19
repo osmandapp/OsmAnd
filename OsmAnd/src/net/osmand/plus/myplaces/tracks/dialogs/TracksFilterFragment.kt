@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
@@ -113,6 +112,12 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 				app,
 				if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
 		return view
+	}
+
+	override fun getBottomContainersIds(): MutableList<Int>? {
+		val ids: MutableList<Int> = ArrayList()
+		ids.add(R.id.buttons_container)
+		return ids
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

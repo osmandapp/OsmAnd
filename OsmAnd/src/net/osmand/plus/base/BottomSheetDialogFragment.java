@@ -16,6 +16,9 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BottomSheetDialogFragment extends BaseOsmAndDialogFragment {
 
 	private OnDialogFragmentResultListener dialogFragmentResultListener;
@@ -39,6 +42,14 @@ public abstract class BottomSheetDialogFragment extends BaseOsmAndDialogFragment
 	@Nullable
 	@Override
 	public abstract View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+	@Override
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
 
 	@Override
 	public void onAttach(@NonNull Context context) {

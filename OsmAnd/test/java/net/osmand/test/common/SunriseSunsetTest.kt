@@ -1,25 +1,18 @@
 package net.osmand.test.common
 
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.IdlingPolicies
-import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.IdlingResource
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import net.osmand.plus.OsmandApplication
-import net.osmand.plus.settings.backend.OsmandSettings
-import net.osmand.plus.settings.enums.SimulationMode
 import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit
+import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 class SunriseSunsetTest : AndroidTest() {
+
 	@Test
 	fun testTimeFormat() {
+		AppSettings.setLocale(app, Locale.US)
+
 		val time1h1m = 61L * 60 * 1000
 		val time1h = 60L * 60 * 1000
 		val time59m = 59L * 60 * 1000

@@ -1,6 +1,8 @@
 package net.osmand.plus.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ISupportInsets;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -135,47 +136,49 @@ public class InsetsUtils {
 		}
 	}
 
-	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView) {
-		boolean allowProcessInsets = shouldAllowProcessInsets(insetSupportedFragment);
-		if (!allowProcessInsets) {
-			return;
-		}
+	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView, @Nullable View paddingsView) {
 		Set<InsetSide> insetSides = insetSupportedFragment.getRootInsetSides();
 		List<Integer> rootScrollableIds = insetSupportedFragment.getScrollableViewIds();
 		List<Integer> bottomContainers = insetSupportedFragment.getBottomContainersIds();
+		List<Integer> collapsingAppBarLayoutIds = insetSupportedFragment.getCollapsingAppBarLayoutId();
 		List<Integer> fabs = insetSupportedFragment.getFabIds();
 
 		InsetsUtils.setWindowInsetsListener(rootView, (v, insets) -> {
-			processScrollInsets(insetSupportedFragment, insets, rootScrollableIds, v, insetSides);
-			processBottomContainerInsets(insets, bottomContainers, v);
-			processFabInsets(insets, fabs, v);
-			processRootInsetSides(insets, insetSides, v);
+			View processedView = paddingsView != null ? paddingsView : v;
+			processScrollInsets(insets, rootScrollableIds, processedView);
+			processBottomContainerInsets(insets, bottomContainers, processedView);
+			processCollapsingAppBarLayoutInsets(insets, collapsingAppBarLayoutIds, insetSides, processedView);
+			processFabInsets(insets, fabs, processedView);
+			processRootInsetSides(insetSupportedFragment, insets, insetSides, processedView);
 
 			insetSupportedFragment.setLastRootInsets(insets);
 			insetSupportedFragment.onApplyInsets(insets);
 		}, true);
 	}
 
-	private static boolean shouldAllowProcessInsets(@NonNull ISupportInsets insetSupportedFragment) {
-		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment dialogFragment) {
-			return dialogFragment.getDialog() != null && dialogFragment.getShowsDialog();
-		} else if (insetSupportedFragment.requireActivity() instanceof MapActivity) {
-			if (insetSupportedFragment instanceof BaseOsmAndFragment fragment) {
-				return fragment.getParentFragment() == null;
-			} else {
-				return true;
-			}
+	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment) {
+		int colorId = insetSupportedFragment.getNavigationBarColorId();
+		Activity activity = insetSupportedFragment.requireActivity();
+		if (colorId != -1) {
+			AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId));
+		} else {
+			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT);
 		}
-		return false;
 	}
 
-	private static void processRootInsetSides(@NonNull WindowInsetsCompat insets,
+	public static void processRootInsetSides(ISupportInsets insetSupportedFragment, @NonNull WindowInsetsCompat insets,
 	                                          @Nullable Set<InsetSide> insetSides,
 	                                          @NonNull View view){
-		InsetsUtils.applyPadding(view, insets, insetSides);
+		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment dialogFragment) {
+			if (dialogFragment.getDialog() != null && dialogFragment.getShowsDialog()) {
+				InsetsUtils.applyPadding(view, insets, insetSides);
+			}
+		} else {
+			InsetsUtils.applyPadding(view, insets, insetSides);
+		}
 	}
 
-	private static void processFabInsets(@NonNull WindowInsetsCompat insets,
+	public static void processFabInsets(@NonNull WindowInsetsCompat insets,
 	                                     @Nullable List<Integer> fabs,
 	                                     @NonNull View view){
 		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -221,10 +224,29 @@ public class InsetsUtils {
 		}
 	}
 
-	private static void processBottomContainerInsets(@NonNull WindowInsetsCompat insets,
+	public static void processCollapsingAppBarLayoutInsets(@NonNull WindowInsetsCompat insets,
+	                                                       @Nullable List<Integer> bottomContainers,
+	                                                       Set<InsetSide> insetSides, @NonNull View view) {
+		View bottomContainer = null;
+		if (bottomContainers != null) {
+			for (int id : bottomContainers) {
+				bottomContainer = view.findViewById(id);
+				if (bottomContainer != null) break;
+			}
+		}
+
+		if (bottomContainer != null) {
+			InsetsUtils.applyPadding(bottomContainer, insets, EnumSet.of(InsetSide.TOP));
+			if (insetSides != null) {
+				insetSides.remove(InsetSide.TOP);
+			}
+		}
+	}
+
+	public static void processBottomContainerInsets(@NonNull WindowInsetsCompat insets,
 	                                                 @Nullable List<Integer> bottomContainers,
 	                                                 @NonNull View view){
-		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime());
 
 		View bottomContainer = null;
 		if (bottomContainers != null) {
@@ -255,11 +277,9 @@ public class InsetsUtils {
 		}
 	}
 
-	private static void processScrollInsets(@NonNull ISupportInsets insetSupportedFragment,
-	                                        @NonNull WindowInsetsCompat insets,
+	public static void processScrollInsets(@NonNull WindowInsetsCompat insets,
 	                                        @Nullable List<Integer> rootScrollableIds,
-	                                        @NonNull View view,
-	                                        @Nullable Set<InsetSide> insetSides) {
+	                                        @NonNull View view) {
 		View listView = null;
 		if (rootScrollableIds != null) {
 			for (int id : rootScrollableIds) {
@@ -272,8 +292,6 @@ public class InsetsUtils {
 				viewGroup.setClipToPadding(false);
 			}
 			InsetsUtils.applyPadding(listView, insets, EnumSet.of(InsetSide.BOTTOM));
-		} else if (insetSupportedFragment instanceof BaseOsmAndDialogFragment && insetSides != null) {
-			insetSides.add(InsetSide.BOTTOM);
 		}
 	}
 }

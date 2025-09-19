@@ -1473,9 +1473,7 @@
 \nNení potřeba stahovat samostatný soubor, tento pohled používá standardní mapové soubory. 
 \n 
 \nTento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty možnosti „Styl mapy“ v „Nastavení mapy“.</string>
-    <string name="plugin_nautical_descr">Obohatí vaši mapu o informace o plavebních trasách, navigačních světlech, nebezpečných námořních zónách, zónách s omezením plavby nebo kotvení atd. Pro použití si stáhněte příslušné námořní mapy a povolte styl \"Námořní mapa\" v \"Nastavení mapy\".
-\n
-\nDalší informace naleznete na adrese %1$s.</string>
+    <string name="plugin_nautical_descr">Obohatí vaši mapu o informace o plavebních trasách, navigačních světlech, nebezpečných námořních zónách, zónách s omezením plavby nebo kotvení atd. Pro použití si stáhněte příslušné námořní mapy a povolte styl „Plavební mapa“ v „Nastavení mapy“. \n \nDalší informace naleznete na adrese %1$s.</string>
     <string name="plugin_ski_descr">Navrženo pro navigaci v oblastech zimních sportů: Sjezdovky, vleky a běžkařské tratě jsou označeny barevnými čarami, které označují obtížnost. Chcete-li tento modul používat, povolte jej a přejděte také do \"Nastavení mapy\" a vyberte styl mapy \"Zima a lyžování\".</string>
     <string name="index_name_netherlands">Evropa - Holandsko</string>
     <string name="rendering_value__name">Výchozí</string>
@@ -4196,7 +4194,7 @@
     <string name="rendering_value_omit_name">Vynechat</string>
     <string name="rendering_attr_seabedDetail_description">Další textové informace o povrchu mořského dna, kategorii a druhu mořského porostu</string>
     <string name="save_track_to_gpx_descrp">Automaticky spustit záznam stopy v průběhu navigace a potom uložit.</string>
-    <string name="quick_action_add_route_descr">Tlačítko pro zahájení trasy uprostřed obrazovky.</string>
+    <string name="quick_action_add_route_descr">Tlačítko pro spuštění trasy ze středu obrazovky.</string>
     <string name="please_provide_group_name_message">Pojmenujte prosím skupinu.</string>
     <string name="gpx_no_routes_title">Neexistují žádné trasy</string>
     <string name="gpx_no_routes_descr">K přidání trasy do souboru můžete použít nástroj „%1$s“.</string>
@@ -4284,7 +4282,7 @@
     <string name="routing_attr_motor_type_diesel_name">Nafta</string>
     <string name="rendering_attr_showRunningRoutes_description">Zobrazení běžeckých tras</string>
     <string name="av_audio_format_bottom_sheet_descr">Vyberte zvukový formát. Formát kontejneru typu souboru pro zvuk je 3GPP (.3gp).</string>
-    <string name="open_weather_action_description">Umožňuje otevřít obrazovku s podrobnými informacemi o počasí.</string>
+    <string name="open_weather_action_description">Umožňuje vám otevřít obrazovku s podrobnými informacemi o počasí.</string>
     <string name="average_speed_skip_stops_desc">Rychlost menší než %1$s bude započítaná a ovlivní vaši průměrnou rychlost.</string>
     <string name="weather_offline_forecast">Předpověď v režimu offline</string>
     <string name="auto_25_chars_route_tr_kl">Zahněte vpravo a držte se vlevo</string>
@@ -4955,7 +4953,7 @@
     <string name="help_article_map_interact_with_map_name">Interakce s mapou</string>
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
-    <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
+    <string name="help_article_map_legend_nautical_map_name">Plavební styl mapy</string>
     <string name="release_4_6">• Android Auto: Přidán 3D režim \n \n• Stopy: Přidány filtry a chytré složky, paměť optimalizována pro velké soubory \n \n• Vylepšený horní a dolní panel nástrojů \n \n• Vylepšená správa lokálních zdrojů \n \n• Nastavitelné funkce tlačítek v externích ovladačích \n \n• Nové nástroje \"Klouzavý poměr\" a \"Pozice slunce\" \n \n• OsmAnd Cloud: Nově přístupné smazané soubory \n \n• Vylepšené obarvení stop novým symetrickým gradientem v režimu Svahy \n \n• Opraveny problémy s průhledným stavovým řádkem \n \n• Přidána podpora pro nástroj teploty ANT+ \n \n• Přidán nástroj \"Dostupná paměť RAM\"</string>
     <string name="app_mode_baby_transport">Přeprava dětí</string>
     <string name="sensor_temperature_desc">Zobrazuje teplotu ze snímače</string>
@@ -5101,12 +5099,12 @@
     <string name="restore_from_trash">Obnovit z koše</string>
     <string name="shared_string_show_less">Zobrazit méně</string>
     <string name="key_event_action_activity_back_pressed">Stisknutý návrat z aktivity</string>
-    <string name="key_event_action_move_left">Posunout doleva</string>
+    <string name="key_event_action_move_left">Přesunout vlevo</string>
     <string name="help_article_search_search_poi_name">Hledat body zájmu</string>
     <string name="open_issue_on_github">Otevřít hlášení na GitHubu</string>
     <string name="help_article_troubleshooting_general_name">Všeobecné</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Záznam stop</string>
-    <string name="key_event_action_move_up">Posunout nahoru</string>
+    <string name="key_event_action_move_up">Přesunout nahoru</string>
     <string name="key_event_action_previous_app_profile">Předchozí profil aplikace</string>
     <string name="key_event_action_change_map_orientation">Změnit orientaci mapy</string>
     <string name="trash_is_empty_banner_desc">Soubory odstraněné z OsmAnd Cloud zde budou k dispozici ještě %1$s dní poté.</string>
@@ -5116,7 +5114,7 @@
     <string name="copy_build_version">Kopírovat verzi sestavení</string>
     <string name="shared_string_checked">Zvoleno</string>
     <string name="key_event_action_zoom_in">Přiblížit</string>
-    <string name="key_event_action_next_app_profile">Následující profil aplikace</string>
+    <string name="key_event_action_next_app_profile">Další profil aplikace</string>
     <string name="key_event_action_open_search_view">Otevřít vyhledávání</string>
     <string name="key_event_action_open_navigation_view">Otevřít navigaci</string>
     <string name="shared_string_empty_trash">Vyprázdnit koš</string>
@@ -5124,7 +5122,7 @@
     <string name="cloud_trash_clear_confirmation">Natrvalo smazat všechny položky z koše?</string>
     <string name="about_osmand">O aplikaci OsmAnd</string>
     <string name="report_an_issues">Nahlásit problém</string>
-    <string name="key_event_action_move_to_my_location">Přesunout na moji polohu</string>
+    <string name="key_event_action_move_to_my_location">Přesunout na mou polohu</string>
     <string name="remove_type_q">Odstranit typ \"%1$s\"?</string>
     <string name="shared_string_not_checked">Nezvoleno</string>
     <string name="cloud_item_restored">%1$s je obnoveno do cloudu.</string>
@@ -5138,7 +5136,7 @@
         <item quantity="other">%1$d (%2$d stop)</item>
     </plurals>
     <string name="user_guide">Uživatelská příručka</string>
-    <string name="key_event_action_move_right">Posunout doprava</string>
+    <string name="key_event_action_move_right">Přesunout vpravo</string>
     <string name="delete_trash_item_confirmation_desc">Smazat \"%1$s\" natrvalo?</string>
     <string name="shared_string_trash">Koš</string>
     <string name="help_article_start_with_main_menu_name">Hlavní menu</string>
@@ -5168,7 +5166,7 @@
     <string name="shared_string_license">Licence</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_all_tracks">Všechny stopy</string>
-    <string name="key_event_action_move_down">Posunout dolů</string>
+    <string name="key_event_action_move_down">Přesunout dolů</string>
     <string name="add_new_type">Přidat nový typ</string>
     <string name="key_bindings">Přiřazení kláves</string>
     <string name="external_input_device_title">Externí vstupní zařízení</string>
@@ -5263,7 +5261,7 @@
     <string name="location_radius">Poloměr polohy</string>
     <string name="quick_action_remove_next_destination">Další cílový bod</string>
     <string name="location_radius_description">Zobrazí oblast ve tvaru kruhu znázorňující přesnost vaší aktuální polohy</string>
-    <string name="quick_action_to_my_location">K mojí poloze</string>
+    <string name="quick_action_to_my_location">Na mou polohu</string>
     <string name="quick_action_move_map_left">Mapa doleva</string>
     <string name="quick_action_map_underlay">Podklad</string>
     <string name="choose_map_orientation">Zvolte orientaci mapy</string>
@@ -5376,8 +5374,8 @@
     <string name="detailed_track_guidance_description">OsmAnd přizpůsobí vaši stopu blízkým silnicím pro vylepšené navádění krok za krokem.</string>
     <string name="change_terrain_color_scheme">Změnit barevné schéma terénu</string>
     <string name="play_weather_forecast">Přehrát předpověď počasí</string>
-    <string name="quick_action_previous_app_profile">Profil aplikace k předchozí</string>
-    <string name="quick_action_next_app_profile">Profil aplikace k další</string>
+    <string name="quick_action_previous_app_profile">Na předchozí profil aplikace</string>
+    <string name="quick_action_next_app_profile">Na další profil aplikace</string>
     <string name="missing_maps_ignore_details">Pokrývají stažené mapy vaši trasu? Navigujte podle nich, pokud oblast dobře znáte.</string>
     <string name="show_debug_info">Zobrazit informace o ladění</string>
     <string name="route_line_use_coloring_speed">Linie trasy je barevně odlišena podle rychlosti pohybu.</string>
@@ -5442,18 +5440,18 @@
     <string name="drawer_button_description">Otevře hlavní nabídku.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Zobrazit stezky pro terénní kola</string>
     <string name="type_of_activity">Typ aktivity</string>
-    <string name="quick_action_drawer_desc">Přepínač pro zobrazení nebo skrytí postranní nabídky.</string>
+    <string name="quick_action_drawer_desc">Přepínač pro zobrazení nebo skrytí boční nabídky.</string>
     <string name="corner_radius">Poloměr rohu</string>
-    <string name="quick_action_verb_navigate">Navigace</string>
-    <string name="quick_action_drawer_title">Boční menu</string>
+    <string name="quick_action_verb_navigate">Navigovat</string>
+    <string name="quick_action_drawer_title">Boční nabídka</string>
     <string name="quick_action_navigation_view_title">Zobrazení navigace</string>
     <string name="shared_string_dp">dp</string>
-    <string name="quick_action_previous_screen_desc">Přepínač k přechodu na předchozí obrazovku.</string>
+    <string name="quick_action_previous_screen_desc">Přepínač pro navigaci na předchozí obrazovku.</string>
     <string name="shared_string_interface">Rozhraní</string>
     <string name="quick_action_previous_screen_title">Předchozí obrazovka</string>
     <string name="quick_action_search_view_desc">Přepínač pro otevření nebo zavření zobrazení vyhledávání.</string>
-    <string name="quick_action_search_view_title">Zobrazení hledání</string>
-    <string name="quick_action_navigation_view_desc">Přepínač pro otevření nebo zavření navigačního zobrazení.</string>
+    <string name="quick_action_search_view_title">Zobrazení vyhledávání</string>
+    <string name="quick_action_navigation_view_desc">Přepínač pro otevření nebo zavření zobrazení navigace.</string>
     <string name="quick_action_switch_compass_desc">Přepínač pro přepínání orientace mapy.</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Otevřít v prohlížeči</string>
@@ -5808,4 +5806,73 @@
     <string name="manage_storage_delete_data_dialog_summary">Opravdu chcete odstranit %1$s z OsmAnd Cloud?\n\nMůžete je obnovit z koše do 30 dnů.</string>
     <string name="manage_storage">Správa úložiště</string>
     <string name="copy_as_new_folder">Kopírovat jako novou složku</string>
+    <string name="imperial_gallon">Imperiální galon</string>
+    <string name="us_gallon">americký galon</string>
+    <string name="kilometers">Kilometry</string>
+    <string name="add_to_a_folder">Přidat do složky</string>
+    <string name="add_to_favorites">Přidat k oblíbeným</string>
+    <string name="max_weight_at_full_load_description">Uveďte maximální hmotnost vašeho vozidla při plném naložení, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
+    <string name="max_axle_load_description">Uveďte maximální nosnost náprav svého vozidla, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
+    <string name="obd_alt_battery_voltage">Napětí baterie (adaptér)</string>
+    <string name="liter_single">Litr</string>
+    <string name="miles">Míle</string>
+    <string name="mpg">MPG</string>
+    <string name="private_access_routing_req_short">Váš cíl je v soukromé oblasti. Chcete povolit použití soukromých cest?</string>
+    <string name="view_on_phone">Zobrazit na telefonu</string>
+    <string name="average_elevation">Průměrná nadmořská výška</string>
+    <string name="ascent">Stoupání</string>
+    <string name="descent">Klesání</string>
+    <string name="map_orientations_choose_description">Ponechte prázdné pro přepínání mezi všemi dostupnými režimy, nebo přidejte pouze vaše preferované.</string>
+    <string name="map_orientations">Orientace mapy</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Odpověď</string>
+    <string name="shared_sting_osm_link">Odkaz na OSM</string>
+    <string name="marine_renderer">Námořní</string>
+    <string name="marine_render_descr">Vysoce přizpůsobitelný Námořní styl navigace. Založený na Plavebním stylu. Funguje nejlépe s celosvětovou mapou námořních značek a volitelnými hloubkovými mapami.</string>
+    <string name="rendering_attr_hideAreas_name">Hloubkové oblasti</string>
+    <string name="rendering_attr_hideAreas_description">Skrýt hloubkové oblasti</string>
+    <string name="rendering_attr_hideContours_name">Hloubkové vrstevnice</string>
+    <string name="rendering_attr_hideContours_description">Skrýt hloubkové vrstevnice</string>
+    <string name="rendering_attr_hideFairways_name">Splavné části</string>
+    <string name="rendering_attr_hideFairways_description">Skrýt splavné části</string>
+    <string name="rendering_attr_hideFerries_name">Trasy trajektů</string>
+    <string name="rendering_attr_hideFerries_description">Skrýt trasy trajektů</string>
+    <string name="rendering_attr_hideLightSectors_name">Světelné sektory</string>
+    <string name="rendering_attr_hideLightSectors_description">Skrýt světelné sektory</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Zdroje světelných sektorů</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Skrýt zdroje světelných sektorů</string>
+    <string name="rendering_attr_hideMinorContours_name">Doplňkové hloubkové vrstevnice</string>
+    <string name="rendering_attr_hideMinorContours_description">Skrýt doplňkové hloubkové vrstevnice</string>
+    <string name="rendering_attr_hideNoLNAM_name">Námořní značky OSM (některé)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Skrýt námořní značky OSM (některé)</string>
+    <string name="rendering_attr_hideSpots_name">Bodová měření hloubky</string>
+    <string name="rendering_attr_hideSpots_description">Skrýt bodová měření hloubky</string>
+    <string name="rendering_attr_hideTidalFlats_name">Wattová pobřeží</string>
+    <string name="rendering_attr_hideTidalFlats_description">Skrýt watttová pobřeží</string>
+    <string name="rendering_attr_depthColorScheme_name">Hloubkové barevné schéma</string>
+    <string name="rendering_attr_depthColorScheme_description">Hloubkové barevné schéma</string>
+    <string name="rendering_attr_depthContoursDashed_name">Přerušované hloubkové vrstevnice</string>
+    <string name="rendering_attr_depthContoursDashed_description">Přerušované hloubkové vrstevnice</string>
+    <string name="rendering_attr_fairwayStyle_name">Barva splavné části</string>
+    <string name="rendering_attr_fairwayStyle_description">Barva splavných částí</string>
+    <string name="rendering_attr_safetyContour_name">Bezpečnostní hloubková vrstevnice</string>
+    <string name="rendering_attr_safetyContour_description">Bezpečnostní hloubková vrstevnice</string>
+    <string name="rendering_attr_shellsStyle_name">Styl mušlí</string>
+    <string name="rendering_attr_shellsStyle_description">Styl mušlí na mořském dně</string>
+    <string name="rendering_attr_showLNAMmarker_name">Značky ENC</string>
+    <string name="rendering_attr_showLNAMmarker_description">Zobrazit značky ENC</string>
+    <string name="rendering_attr_spotDistance_name">Vzdálenost bodového měření</string>
+    <string name="rendering_attr_spotDistance_description">Vzdálenost bodového měření</string>
+    <string name="rendering_attr_spotSize_name">Velikost bodového měření</string>
+    <string name="rendering_attr_spotSize_description">Velikost bodového měření</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Styl wattových pobřeží</string>
+    <string name="rendering_attr_tidalFlatStyle_description">Styl wattových pobřeží</string>
+    <string name="rendering_attr_watercolor_name">Barva vody</string>
+    <string name="rendering_attr_watercolor_description">Barva vody</string>
+    <string name="show_local_names">Zobrazit místní názvy</string>
+    <string name="accessibility_independent_features">Nezávislé funkce</string>
+    <string name="access_pinch_zoom_magnification">Zvětšení sevřením a roztažením prstů</string>
+    <string name="access_pinch_zoom_magnification_descr">Při gestech přiblížení použít škálování viewportu namísto diskrétních úrovní přiblížení.</string>
+    <string name="lang_en_barebones">Angličtina (základní)</string>
 </resources>

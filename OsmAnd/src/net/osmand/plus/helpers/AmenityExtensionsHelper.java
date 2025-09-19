@@ -7,8 +7,6 @@ import static net.osmand.data.Amenity.WIKIPEDIA;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -20,12 +18,14 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.search.AmenitySearcher;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AmenityExtensionsHelper {
+	public static final double MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW = 1.0;
 
 	private static final Log LOG = PlatformUtil.getLog(AmenityExtensionsHelper.class);
 
@@ -102,20 +103,37 @@ public class AmenityExtensionsHelper {
 	}
 
 	@Nullable
-	public static String getAmenityDistanceFormatted(@NonNull Amenity amenity,
-			@NonNull OsmandApplication app) {
-		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
-		float km = Algorithms.parseFloatSilently(distanceTag, 0);
+	public static String getAmenityMetricsFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+		float distMeters = getAmenityDistanceMeters(amenity);
+		float upMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_UP), 0);
+		float downMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_DOWN), 0);
 
-		if (km > 0) {
-			if (!distanceTag.contains(".")) {
-				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
-				// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
-				km /= 1000;
+		String dist = OsmAndFormatter.getFormattedDistance(distMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		String uphill = OsmAndFormatter.getFormattedDistance(upMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		String downhill = OsmAndFormatter.getFormattedDistance(downMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+
+		List<String> metrics = new ArrayList<>();
+		if (distMeters > 0) {
+			metrics.add(dist);
+			if (upMeters > 0 && upMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+				metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);
 			}
-			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+			if (downMeters > 0 && downMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+				metrics.add(TrkSegment.SegmentSlopeType.DOWNHILL.getSymbol() + downhill);
+			}
 		}
 
-		return null;
+		return metrics.isEmpty() ? null : String.join(" ", metrics);
+	}
+
+	private static float getAmenityDistanceMeters(Amenity amenity) {
+		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
+		float km = Algorithms.parseFloatSilently(distanceTag, 0);
+		if (km > 0 && !distanceTag.contains(".")) {
+			// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
+			// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
+			km /= 1000;
+		}
+		return km * 1000;
 	}
 }

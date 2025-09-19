@@ -97,27 +97,34 @@
 
     </FrameLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/bottom_buttons_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/color_dialog_buttons">
+        android:layout_height="wrap_content">
 
-        <net.osmand.plus.widgets.TextViewEx
-            android:id="@+id/bottomButton"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="?attr/selectableItemBackground"
-            android:gravity="center"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/card_and_list_background_light"
-            android:textSize="@dimen/default_sub_text_size"
-            android:text="@string/apply_filters"
-            app:typefaceWeight="medium"
-            android:textAllCaps="true"
-	        android:paddingStart="16dp"
-	        android:paddingEnd="16dp" />
+            android:layout_height="wrap_content"
+            android:background="?attr/color_dialog_buttons">
 
-    </LinearLayout>
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/bottomButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingLeft="16dp"
+                android:paddingEnd="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/apply_filters"
+                android:textAllCaps="true"
+                android:textColor="@color/card_and_list_background_light"
+                android:textSize="@dimen/default_sub_text_size"
+                app:typefaceWeight="medium" />
+
+        </FrameLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

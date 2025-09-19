@@ -32,6 +32,9 @@ public abstract class AndroidTest {
 		app = ((OsmandApplication) targetContext.getApplicationContext());
 		settings = app.getSettings();
 
+//		settings.USE_OPENGL_RENDER.set(false);
+		settings.setPreferenceForAllModes(settings.DO_NOT_USE_ANIMATIONS.getId(), true);
+
 		EspressoUtils.grantPermissions(app);
 		IdlingPolicies.setIdlingResourceTimeout(5, MINUTES);
 
@@ -39,6 +42,7 @@ public abstract class AndroidTest {
 		registerIdlingResources(appInitIdlingResource);
 
 		Espresso.onIdle();
+		app.showShortToastMessage(this.getClass().getSimpleName());
 	}
 
 	@After

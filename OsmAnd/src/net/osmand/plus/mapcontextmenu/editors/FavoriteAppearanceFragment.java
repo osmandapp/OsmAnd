@@ -47,7 +47,9 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 
@@ -139,6 +141,14 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		setupButtons();
 		setupCards();
 		return view;
+	}
+
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
 	}
 
 	private void setupCards(){

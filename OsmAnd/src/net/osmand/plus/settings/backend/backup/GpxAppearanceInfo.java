@@ -50,6 +50,7 @@ public class GpxAppearanceInfo {
 	public static final String TAG_MIN_FILTER_ALTITUDE = "min_filter_altitude";
 	public static final String TAG_MAX_FILTER_ALTITUDE = "max_filter_altitude";
 	public static final String TAG_MAX_FILTER_HDOP = "max_filter_hdop";
+	public static final String TAG_IS_JOIN_SEGMENTS = "is_join_segments";
 
 	public static final Set<String> gpxAppearanceTags = Set.of(
 			TAG_COLOR,
@@ -74,7 +75,8 @@ public class GpxAppearanceInfo {
 			TAG_MAX_FILTER_SPEED,
 			TAG_MIN_FILTER_ALTITUDE,
 			TAG_MAX_FILTER_ALTITUDE,
-			TAG_MAX_FILTER_HDOP
+			TAG_MAX_FILTER_HDOP,
+			TAG_IS_JOIN_SEGMENTS
 	);
 
 	public static boolean isGpxAppearanceTag(@NonNull String tag) {

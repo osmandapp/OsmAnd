@@ -5867,6 +5867,7 @@
     <string name="kilometers">Kilometroj</string>
     <string name="miles">Mejloj</string>
     <string name="mpg">Mejloj/galjono</string>
-    <string name="access_pinch_zoom_magnification">Aktivigi momentan pligrandigon per pinĉi</string>
-    <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestojn de pinĉo.</string>
+    <string name="access_pinch_zoom_magnification">Pinĉi por momente pligrandigi</string>
+    <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestoj de pligrandigo.</string>
+    <string name="accessibility_independent_features">Sendependaj ebloj</string>
 </resources>

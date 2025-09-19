@@ -7,8 +7,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
-import static net.osmand.test.common.Interactions.setRouteEnd;
-import static net.osmand.test.common.Interactions.setRouteStart;
 import static net.osmand.test.common.Interactions.startNavigation;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static org.hamcrest.Matchers.allOf;
@@ -29,6 +27,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.ResourcesImporter;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -67,8 +66,8 @@ public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 		skipAppStartDialogs(app);
 
 		openNavigationMenu();
-		setRouteStart(START);
-		setRouteEnd(END);
+		app.getTargetPointsHelper().setStartPoint(START, true, null);
+		app.getTargetPointsHelper().navigateToPoint(END, true, -1);
 		startNavigation();
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -85,7 +84,6 @@ public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 		do {
 			leftDistance = routingHelper.getLeftDistance();
 			if (leftDistance > 0) {
-
 				if (leftDistance > widget.leftDistanceShow + delta) {
 					checkAlarmWidgetNotDisplayed(alarmWidget, leftDistance, widget.descriptionId);
 				} else if (leftDistance < widget.leftDistanceShow - delta && leftDistance > widget.leftDistanceHide + delta) {
@@ -103,7 +101,14 @@ public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 		} while (leftDistance > 50);
 	}
 
-	private void checkAlarmWidgetNotDisplayed(@NonNull ViewInteraction alarmWidget, int leftDistance, @IdRes int descriptionId) {
+	@After
+	public void cleanUp() {
+		super.cleanUp();
+		app.stopNavigation();
+	}
+
+	private void checkAlarmWidgetNotDisplayed(@NonNull ViewInteraction alarmWidget,
+			int leftDistance, @IdRes int descriptionId) {
 		try {
 			alarmWidget.check(matches(not(isDisplayed())));
 		} catch (Throwable e) {
@@ -116,12 +121,13 @@ public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 		}
 	}
 
-	private void checkAlarmWidgetDisplayed(@NonNull ViewInteraction alarmWidget, int leftDistance, @IdRes int descriptionId) {
+	private void checkAlarmWidgetDisplayed(@NonNull ViewInteraction alarmWidget, int leftDistance,
+			@IdRes int descriptionId) {
 		try {
 			alarmWidget.check(matches(allOf(isDisplayed(), withContentDescription(descriptionId))));
 		} catch (Throwable e) {
-			throw new AssertionError(getString(descriptionId) + " alarm still was not shown ("
-					+ leftDistance + " m to finish)");
+			throw new AssertionError(getString(descriptionId)
+					+ " alarm still was not shown (" + leftDistance + " m to finish)");
 		}
 	}
 

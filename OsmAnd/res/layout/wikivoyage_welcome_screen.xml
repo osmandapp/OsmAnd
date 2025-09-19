@@ -35,6 +35,7 @@
 	</FrameLayout>
 
 	<LinearLayout
+		android:id="@+id/description_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_marginLeft="@dimen/wikivoyage_welcome_content_margin"

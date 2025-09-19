@@ -126,6 +126,21 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 		return root;
 	}
 
+	@Nullable
+	@Override
+	public List<Integer> getCollapsingAppBarLayoutId() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.appbar);
+		return ids;
+	}
+
+	@Nullable
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.list);
+		return ids;
+	}
+
 	protected abstract void onContinueButtonClickAction();
 
 	@Override

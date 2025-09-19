@@ -7,6 +7,7 @@ import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL_TEXT;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.WPT_EXTRA_TAGS;
 import static net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION;
 
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.WptPt;
 
@@ -36,11 +37,11 @@ import net.osmand.util.MapUtils;
 public class TravelGpx extends TravelArticle {
 
 	public static final String DISTANCE = "distance";
-	public static final String DIFF_ELEVATION_UP = "diff_ele_up";
-	public static final String DIFF_ELEVATION_DOWN = "diff_ele_down";
-	public static final String MAX_ELEVATION = "max_ele";
-	public static final String MIN_ELEVATION = "min_ele";
-	public static final String AVERAGE_ELEVATION = "avg_ele";
+	public static final String MAX_ELEVATION = GpxUtilities.MAX_ELEVATION;
+	public static final String MIN_ELEVATION = GpxUtilities.MIN_ELEVATION;
+	public static final String AVG_ELEVATION = GpxUtilities.AVG_ELEVATION;
+	public static final String DIFF_ELEVATION_UP = GpxUtilities.DIFF_ELEVATION_UP;
+	public static final String DIFF_ELEVATION_DOWN = GpxUtilities.DIFF_ELEVATION_DOWN;
 	public static final String START_ELEVATION = "start_ele";
 	public static final String ELE_GRAPH = "ele_graph";
 	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
@@ -62,13 +63,17 @@ public class TravelGpx extends TravelArticle {
 
 	public boolean isSuperRoute = false;
 
+	@Nullable
+	private Amenity amenity;
+
 	private String amenitySubType;
 	private String amenityRegionName;
 
 	public TravelGpx() {
 	}
 
-	public TravelGpx(Amenity amenity) {
+	public TravelGpx(@NonNull Amenity amenity) {
+		this.amenity = amenity;
 		amenitySubType = amenity.getSubType();
 		amenityRegionName = amenity.getRegionName();
 		String enTitle = amenity.getName("en");
@@ -84,7 +89,7 @@ public class TravelGpx extends TravelArticle {
 		diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
 		diffElevationDown = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_DOWN), 0);
 		minElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MIN_ELEVATION), 0);
-		avgElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(AVERAGE_ELEVATION), 0);
+		avgElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(AVG_ELEVATION), 0);
 		maxElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MAX_ELEVATION), 0);
 		String radius = amenity.getTagContent(ROUTE_BBOX_RADIUS);
 		if (radius != null) {
@@ -208,5 +213,10 @@ public class TravelGpx extends TravelArticle {
 			return amenitySubType.replace(ROUTES_PREFIX, "").split(";")[0];
 		}
 		return null;
+	}
+
+	@Nullable
+	public Amenity getAmenity() {
+		return amenity;
 	}
 }

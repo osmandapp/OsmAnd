@@ -9,6 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithId;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipSpeedCamerasBottomSheet;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
@@ -37,15 +38,7 @@ public class Interactions {
 	}
 
 	public static void startNavigation() throws Throwable {
-		ViewInteraction frameLayout = EspressoUtils.waitForView(
-				Matchers.allOf(withId(R.id.start_button),
-						net.osmand.test.common.Matchers.childAtPosition(
-								net.osmand.test.common.Matchers.childAtPosition(
-										withId(R.id.control_buttons),
-										1),
-								2),
-						isDisplayed()));
-		frameLayout.perform(click());
+		clickViewWithId(R.id.start_button);
 	}
 
 	public static void setRouteStart(@NonNull LatLon start) throws Throwable {

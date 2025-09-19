@@ -134,7 +134,7 @@
 \nSolnedgang: %2$s</string>
     <string name="day_night_info">Dag/nat information</string>
     <string name="map_widget_vector_attributes">Gengivelsesegenskaber</string>
-    <string name="map_widget_renderer">Kortstilart</string>
+    <string name="map_widget_renderer">Kortstil</string>
     <string name="layer_map_appearance">Konfigurer skærm</string>
     <string name="show_lanes">Vognbaner</string>
     <string name="avoid_unpaved">Ingen ikke-asfalterede veje</string>
@@ -2046,7 +2046,7 @@
     <string name="configure_screen_quick_action">Genvej</string>
     <string name="quick_action_item_action">Genvej %d</string>
     <string name="quick_action_item_screen">Skærm %d</string>
-    <string name="quick_action_map_style_switch">Korttypografien er ændret til \"%s\".</string>
+    <string name="quick_action_map_style_switch">Kortstil ændret til \"%s\".</string>
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
     <string name="quick_action_navigation_voice_off">Aktiver talevejledning</string>
     <string name="quick_action_navigation_voice_on">Deaktiver talevejledning</string>
@@ -2084,9 +2084,9 @@
     <string name="quick_action_gpx_category_descr">Vælg en valgfri kategori.</string>
     <string name="quick_action_poi_list">IP-liste</string>
     <string name="quick_action_sh_poi_descr">Tilføj en eller flere IP-kategorier der skal vises på kortet.</string>
-    <string name="quick_action_map_style_action">Tilføj en kortstilart</string>
+    <string name="quick_action_map_style_action">Tilføj en kortstil</string>
     <string name="quick_action_empty_param_error">Udfyld alle parametre</string>
-    <string name="quick_action_map_styles">Kortstilarter</string>
+    <string name="quick_action_map_styles">Kortstile</string>
     <string name="quick_action_map_overlay_title">Kortoverlejringer</string>
     <string name="quick_action_map_overlay_action">Tilføj overlejring</string>
     <string name="quick_action_map_underlay_title">Kortunderlejring</string>
@@ -3707,7 +3707,7 @@
     <string name="update_all_maps_added">Opdatér alle kort, der er tilføjet %1$s\?</string>
     <string name="shared_string_feet">fod</string>
     <string name="shared_string_itinerary">Rejseplan</string>
-    <string name="route_line_use_map_style_width">Brug standardbredde for kortformat (%1$s).</string>
+    <string name="route_line_use_map_style_width">Brug standardbredde for kortstil (%1$s).</string>
     <string name="route_line_use_map_style_color">Brug standardfarve for kortstil (%1$s).</string>
     <string name="poi_routes">Ruter</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Undgå miljøzoner</string>
@@ -4617,7 +4617,7 @@
     <string name="weather_prefs_descr">24-timers og 7-dages prognose, der opdateres hver 3. time</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="action_not_supported_with_map_style">Denne handling understøttes ikke af den valgte korttype.</string>
+    <string name="action_not_supported_with_map_style">Denne handling understøttes ikke af den valgte kortstil.</string>
     <string name="shared_string_weather">Vejr</string>
     <string name="weather_plugin_description">Giver
 \n- 24-timers og 7-dages vejrprognose med 5 lag
@@ -4992,7 +4992,7 @@
     <string name="help_article_map_raster_maps_name">Rasterkort (Online / Offline)</string>
     <string name="help_article_map_tracks_on_map_name">Spor og ruter</string>
     <string name="help_article_map_track_context_menu_name">Kontekstmenu for spor</string>
-    <string name="help_article_map_vector_maps_name">Vektorkort (kortstilarter)</string>
+    <string name="help_article_map_vector_maps_name">Vektorkort (kortstile)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_guidance_name">Navigationsvejledning</string>
@@ -5168,7 +5168,7 @@
     <string name="row_number">Række %1$s</string>
     <string name="key_bindings">Tastetildelinger</string>
     <string name="trash_is_empty">Papirkurven er tom</string>
-    <string name="key_event_action_move_to_my_location">Flyt til Min placering</string>
+    <string name="key_event_action_move_to_my_location">Flyt til min placering</string>
     <string name="clear_key_assignment">Ryd tastetildeling</string>
     <string name="not_specified">Ikke specificeret</string>
     <string name="download_to_device">Download til enhed</string>
@@ -5386,7 +5386,7 @@
     <string name="quick_action_verb_turn_on_off">Tænd / sluk</string>
     <string name="quick_action_verb_start_stop">Start / stop</string>
     <string name="quick_action_previous_app_profile">App-profil til forrige</string>
-    <string name="quick_action_next_app_profile">App profile to næste</string>
+    <string name="quick_action_next_app_profile">App-profil til næste</string>
     <string name="app_profile">App-profil</string>
     <string name="shared_string_create">Opret</string>
     <string name="shared_string_replace">Erstat</string>
@@ -5454,10 +5454,10 @@
     <string name="y_axis_description">Vælg op til to muligheder for Y-aksen.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">Vandrestiers sværhedsgrad</string>
-    <string name="quick_action_previous_screen_desc">En skifter til at navigere til den forrige skærm.</string>
+    <string name="quick_action_previous_screen_desc">En skifter til at gå til den forrige skærm.</string>
     <string name="quick_action_previous_screen_title">Forrige skærm</string>
     <string name="quick_action_verb_navigate">Naviger</string>
-    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenuen.</string>
+    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenu.</string>
     <string name="quick_action_drawer_title">Sidemenu</string>
     <string name="quick_action_search_view_desc">En skifter til at åbne eller lukke søgevisning.</string>
     <string name="quick_action_switch_compass_desc">En skifter til at skifte kortorientering.</string>
@@ -5834,7 +5834,7 @@
     <string name="ascent">Opstigning</string>
     <string name="descent">Nedstigning</string>
     <string name="map_orientations_choose_description">Lad den være tom for at skifte mellem alle tilgængelige tilstande, eller tilføj kun dine foretrukne.</string>
-    <string name="map_orientations">Kortets retninger</string>
+    <string name="map_orientations">Kortorienteringer</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Svar</string>
@@ -5902,6 +5902,7 @@
     <string name="kilometers">Kilometer</string>
     <string name="miles">Miles</string>
     <string name="mpg">MPG</string>
-    <string name="access_pinch_zoom_magnification">Aktivér forstørrelse med knibezoom</string>
-    <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering i stedet for separate zoomniveauer til pinch-bevægelser.</string>
+    <string name="access_pinch_zoom_magnification">Forstørrelse med knibezoom</string>
+    <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering i stedet for separate zoom-niveauer ved zoom-bevægelser.</string>
+    <string name="accessibility_independent_features">Uafhængige funktioner</string>
 </resources>

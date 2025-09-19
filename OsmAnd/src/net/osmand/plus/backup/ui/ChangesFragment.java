@@ -86,7 +86,7 @@ public class ChangesFragment extends BaseFullScreenFragment implements OnPrepare
 		View view = inflate(R.layout.fragment_osmand_cloud_changes, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
-		buttonsContainer = view.findViewById(R.id.buttons_container);
+		buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 
 		setupTabs(view);
 		setupToolbar(view);

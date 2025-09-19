@@ -16,5 +16,5 @@ data class PoiRowParams(
 	val rule: PoiAdditionalUiRule,
 	val key: String,
 	val value: String,
-	val subtype: String
+	val subtype: String?
 )

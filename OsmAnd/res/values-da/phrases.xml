@@ -4265,4 +4265,7 @@
     <string name="poi_museum_war">Krig</string>
     <string name="poi_museum_agriculture">Landbrug</string>
     <string name="poi_museum_paleontology">Palæontologi</string>
+    <string name="poi_museum_aviation">Luftfart</string>
+    <string name="poi_club_aviation">Flyveklub</string>
+    <string name="poi_route_activity_type_ultralight_aviation">Ultralet luftfart</string>
 </resources>

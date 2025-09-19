@@ -62,7 +62,7 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		InsetsUtils.processInsets(this, view);
+		InsetsUtils.processInsets(this, view, null);
 	}
 
 	@Nullable
@@ -82,12 +82,6 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 	@Nullable
 	@Override
 	public List<Integer> getFabIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
 		return null;
 	}
 

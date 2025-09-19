@@ -91,6 +91,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 	private static final int ADVANCED_TAB = 1;
+	public static final int AMENITY_TEXT_LENGTH = 255;
 
 	public static final HashSet<String> BASIC_TAGS = new HashSet<String>();
 
@@ -114,7 +115,13 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	private OsmandTextFieldBoxes poiTypeTextInputLayout;
 	private View view;
 
-	public static final int AMENITY_TEXT_LENGTH = 255;
+	@Nullable
+	@Override
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

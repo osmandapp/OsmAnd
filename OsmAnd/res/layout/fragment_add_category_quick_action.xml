@@ -6,7 +6,6 @@
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
 	android:clickable="true"
-	android:fitsSystemWindows="true"
 	android:focusable="true">
 
 	<com.google.android.material.appbar.AppBarLayout

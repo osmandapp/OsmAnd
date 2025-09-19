@@ -599,8 +599,10 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM);
+	public List<Integer> getScrollableViewIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.context_menu_bottom_view);
+		return ids;
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {
@@ -940,6 +942,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		}
 
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0);
+		updateNavBarColor();
 	}
 
 	private void restoreCustomMapRatio() {
@@ -1975,6 +1978,15 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 				return getFullScreenTopPosY();
 			default:
 				return 0;
+		}
+	}
+
+	@Override
+	public int getNavigationBarColorId() {
+		if (menu.getCurrentMenuState() == MenuState.HEADER_ONLY && menu.isVisible()) {
+			return nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
+		} else {
+			return super.getNavigationBarColorId();
 		}
 	}
 

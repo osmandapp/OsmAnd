@@ -61,6 +61,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
+
 	public static final String TAG = "QuickSearchPoiFilterFragment";
 
 	private static final String QUICK_SEARCH_POI_FILTER_ID_KEY = "quick_search_poi_filter_id_key";
@@ -79,13 +80,18 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private EditText editText;
 	private TextView applyFilterButton;
 	private View applyFilterButtonShadow;
+	private View bottomButtonContainer;
 	private final Set<String> selectedPoiAdditionals = new TreeSet<>();
 	private Set<String> selectedPoiAdditionalsOrig = new TreeSet<>();
 	private final ArrayList<String> collapsedCategories = new ArrayList<>();
 	private final ArrayList<String> showAllCategories = new ArrayList<>();
 	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 
-	public QuickSearchPoiFilterFragment() {
+	@Nullable
+	public List<Integer> getBottomContainersIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids.add(R.id.bottom_buttons_container);
+		return ids;
 	}
 
 	@Override
@@ -242,6 +248,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 		applyFilterButtonShadow = view.findViewById(R.id.bottomButtonShadow);
 		applyFilterButton = view.findViewById(R.id.bottomButton);
+		bottomButtonContainer = view.findViewById(R.id.bottom_buttons_container);
 		applyFilterButton.setText(getString(R.string.apply_filters));
 		applyFilterButton.setOnClickListener(v -> {
 			applyFilterFields();
@@ -258,7 +265,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 	private void updateApplyButton() {
 		boolean hasChanges = !nameFilterText.equals(nameFilterTextOrig) || !selectedPoiAdditionals.equals(selectedPoiAdditionalsOrig);
-		applyFilterButton.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
+		bottomButtonContainer.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
 		applyFilterButtonShadow.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
 	}
 
