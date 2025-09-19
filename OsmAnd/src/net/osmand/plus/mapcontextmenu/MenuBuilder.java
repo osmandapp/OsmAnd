@@ -90,6 +90,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -1457,10 +1458,13 @@ public class MenuBuilder {
 			button.setText(name);
 
 			button.setOnClickListener(v -> {
+				ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
 				if (poi.isRouteTrack()) {
 					TravelHelper travelHelper = app.getTravelHelper();
 					TravelGpx travelGpx = new TravelGpx(poi);
 					travelHelper.openTrackMenu(travelGpx, getMapActivity(), poi.getGpxFileName(null), poi.getLocation(), true);
+				} else if (clickableWayHelper.isClickableWayAmenity(poi)) {
+					System.err.printf("XXX TODO\n");
 				} else {
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);

@@ -15,6 +15,7 @@ import net.osmand.binary.HeightDataLoader.Cancellable;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -117,6 +118,10 @@ public class ClickableWayHelper {
         }
         QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
         return loadClickableWay(selectedLatLon, bbox, xPoints, yPoints, osmId, name, tags);
+    }
+
+    public boolean isClickableWayAmenity(Amenity amenity) {
+        return isClickableWayTags(amenity.getName(), amenity.getOsmTags());
     }
 
     private ClickableWay loadClickableWay(LatLon selectedLatLon, QuadRect bbox,
