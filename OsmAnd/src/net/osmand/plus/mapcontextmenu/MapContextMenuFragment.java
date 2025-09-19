@@ -83,7 +83,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.router.TransportRouteResult;
+import net.osmand.router.transport.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
