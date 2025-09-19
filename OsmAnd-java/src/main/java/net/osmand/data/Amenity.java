@@ -979,4 +979,38 @@ public class Amenity extends MapObject {
 		return typeName + " " + localName; // $NON-NLS-1$
 	}
 
+	public Map<String, String> getOsmTags() {
+		Map<String, String> result = new LinkedHashMap<>();
+
+		Map<String, String> amenityTags = new LinkedHashMap<>();
+		for (String amenityTag : getAdditionalInfoKeys()) {
+			amenityTags.put(amenityTag, getAdditionalInfo(amenityTag));
+		}
+
+		String amenityName = getName();
+		if (!Algorithms.isEmpty(amenityName)) {
+			result.put(NAME, amenityName);
+		}
+
+		PoiCategory category = getType();
+		String subTypesList = getSubType();
+
+		if (subTypesList != null) {
+			for (String subType : subTypesList.split(";")) {
+				PoiType type = category.getPoiTypeByKeyName(subType);
+				if (type != null) {
+					result.putAll(type.getOsmTagsValues());
+					for (PoiType additional : type.getPoiAdditionals()) {
+						if (amenityTags.remove(additional.getKeyName()) != null) {
+							result.putAll(additional.getOsmTagsValues());
+						}
+					}
+				}
+			}
+		}
+
+		result.putAll(amenityTags); // unresolved residues
+
+		return result;
+	}
 }
