@@ -170,6 +170,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
 		if (config.CACHE_CALCULATION_CONTEXT) {
+			if (config.cacheCtx != null && config.cacheCtx != hctx) {
+				System.out.printf("Recreate routing cache context %s -> %s \n", config.cacheCtx.hashCode() + "",
+						hctx == null ? "" : hctx.hashCode() + "");
+			}
 			config.cacheCtx = (HHRoutingContext<NetworkDBPoint>) hctx;
 		}
 		if (hctx == null) {
