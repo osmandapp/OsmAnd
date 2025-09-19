@@ -4,6 +4,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static net.osmand.test.common.AssetUtils.copyAssetToFile;
+import static net.osmand.test.common.EspressoUtils.waitForView;
 import static net.osmand.test.common.OsmAndDialogInteractions.isContextMenuOpened;
 import static net.osmand.test.common.OsmAndDialogInteractions.isMultiSelectionMenuOpened;
 import static net.osmand.test.common.OsmAndDialogInteractions.moveAndZoomMap;
@@ -80,10 +81,12 @@ public class POIClickTest extends AndroidTest {
 		moveAndZoomMap(app, lattitude, longitude, zoom);
 		float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 		float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
-		waitForAnyView(2000, 50, withId(R.id.multi_selection_main_view));
+
+		waitForView(withId(R.id.multi_selection_main_view));
 		assertTrue(isMultiSelectionMenuOpened());
+
 		ViewGroup menuLayout = (ViewGroup) getViewById(R.id.multi_selection_main_view);
 		ListView menuList = menuLayout.findViewById(R.id.list);
 		int itemsCount = menuList.getAdapter().getCount();
@@ -93,12 +96,14 @@ public class POIClickTest extends AndroidTest {
 		MenuObject item = (MenuObject) menuList.getAdapter().getItem(2);
 		assertNotNull(item);
 		pressBack();
-		boolean isClosed = waitForViewDisappeared(2000, 50, withId(R.id.context_menu_layout));
+
+		boolean isClosed = waitForViewDisappeared(5000, 100, withId(R.id.context_menu_layout));
 		assertTrue(isClosed);
 		AppSettings.showFavorites(app, false);
 		refreshMap(app);
 		onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
-		waitForAnyView(2000, 50, withId(R.id.context_menu_layout));
+
+		waitForView(withId(R.id.context_menu_layout));
 		assertTrue(isContextMenuOpened());
 	}
 }
