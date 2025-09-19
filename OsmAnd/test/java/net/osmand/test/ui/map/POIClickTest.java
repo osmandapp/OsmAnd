@@ -12,7 +12,6 @@ import static net.osmand.test.common.OsmAndDialogInteractions.refreshMap;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static net.osmand.test.common.SystemDialogInteractions.clickInView;
 import static net.osmand.test.common.SystemDialogInteractions.getViewById;
-import static net.osmand.test.common.SystemDialogInteractions.waitForAnyView;
 import static net.osmand.test.common.SystemDialogInteractions.waitForViewDisappeared;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,10 +24,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
+import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.DataSourceType;
 import net.osmand.data.FavouritePoint;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
@@ -65,12 +66,18 @@ public class POIClickTest extends AndroidTest {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		AppSettings.showWikiOnMap(app);
-		AppSettings.showFavorites(app, true);
-		app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
 
-		FavouritePoint favouritePoint = new FavouritePoint(lattitude, longitude, "TestFavorite", "");
-		app.getFavoritesHelper().doAddFavorite("TestFavorite", "", "Test description for test favorite", "", 0xffff0000, BackgroundType.CIRCLE, FavouritePoint.DEFAULT_UI_ICON_ID, favouritePoint);
+		app.getAppInitializer().addOnFinishListener(new OnResultCallback<AppInitializer>() {
+			@Override
+			public void onResult(AppInitializer result) {
+				AppSettings.showWikiOnMap(app);
+				AppSettings.showFavorites(app, true);
+				app.getSettings().WIKI_DATA_SOURCE_TYPE.set(DataSourceType.ONLINE);
+
+				FavouritePoint favouritePoint = new FavouritePoint(lattitude, longitude, "TestFavorite", "");
+				app.getFavoritesHelper().doAddFavorite("TestFavorite", "", "Test description for test favorite", "", 0xffff0000, BackgroundType.CIRCLE, FavouritePoint.DEFAULT_UI_ICON_ID, favouritePoint);
+			}
+		});
 	}
 
 	@Test
@@ -83,7 +90,7 @@ public class POIClickTest extends AndroidTest {
 		refreshMap(app);
 		float x = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixXFromLatLon(lattitude, longitude);
 		float y = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getPixYFromLatLon(lattitude, longitude);
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 
 		onView(withId(R.id.map_view_with_layers)).perform(clickInView(x, y));
 
