@@ -735,6 +735,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		}
 		int zoom = tileBox.getZoom();
 		MapRendererView mapRenderer = getMapRenderer();
+		LOG.debug("shouldDraw " + shouldDraw(zoom) + " dataChanged " + dataChanged + " selectedPoiFilters " + selectedPoiFilters + " places " + data.getResults() + " has mapRenderer " + (mapRenderer != null));
 		if (mapRenderer != null) {
 			if (shouldDraw(zoom)) {
 				float textScale = app.getOsmandMap().getTextScale();
@@ -856,6 +857,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
+		LOG.debug("shouldDraw "+shouldDraw(zoom)+"dataChanged " + dataChanged + " selectedPoiFilters " + selectedPoiFilters
+				+ " places " + data.getDisplayedResults() + " has mapRenderer " + (mapRenderer != null));
 		mapTextLayer.putData(this, fullObjects);
 		mapActivityInvalidated = false;
 	}

@@ -84,7 +84,7 @@ public class POIClickTest extends AndroidTest {
 		});
 	}
 
-	@Ignore
+//	@Ignore
 	@Test
 	public void testClickOnMApPoint() throws Throwable {
 		activityRule.launchActivity(null);
