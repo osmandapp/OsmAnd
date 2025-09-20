@@ -1342,93 +1342,59 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public int getCurrentMenuState() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getCurrentMenuState();
-		} else {
-			return MenuState.HEADER_ONLY;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getCurrentMenuState() : MenuState.HEADER_ONLY;
 	}
 
 	public float getHalfScreenMaxHeightKoef() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getHalfScreenMaxHeightKoef();
-		} else {
-			return .75f;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getHalfScreenMaxHeightKoef() : .75f;
 	}
 
 	public int getSlideInAnimation() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSlideInAnimation();
-		} else {
-			return 0;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSlideInAnimation() : 0;
 	}
 
 	public int getSlideOutAnimation() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSlideOutAnimation();
-		} else {
-			return 0;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSlideOutAnimation() : 0;
 	}
 
+	@Nullable
 	public TitleButtonController getLeftTitleButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getLeftTitleButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getLeftTitleButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getRightTitleButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getRightTitleButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getRightTitleButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getBottomTitleButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getBottomTitleButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getBottomTitleButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getLeftDownloadButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getLeftDownloadButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getLeftDownloadButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getRightDownloadButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getRightDownloadButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getRightDownloadButtonController() : null;
 	}
 
+	@Nullable
 	public List<Pair<TitleButtonController, TitleButtonController>> getAdditionalButtonsControllers() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalButtonsControllers();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalButtonsControllers() : null;
 	}
 
 	@Nullable
@@ -1445,12 +1411,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	@Nullable
 	public TitleProgressController getTitleProgressController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getTitleProgressController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getTitleProgressController() : null;
 	}
 
 	public boolean supportZoomIn() {
