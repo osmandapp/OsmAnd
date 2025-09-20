@@ -204,7 +204,7 @@ public class GeneralRouter implements VehicleRouter {
 		this.attributes = new LinkedHashMap<String, String>();
 		this.parameterValues = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
-		while(e.hasNext()){
+		while (e.hasNext()) {
 			Entry<String, String> next = e.next();
 			addAttribute(next.getKey(), next.getValue());
 		}
