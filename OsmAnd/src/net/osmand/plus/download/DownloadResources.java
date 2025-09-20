@@ -438,10 +438,12 @@ public class DownloadResources extends DownloadResourceGroup {
 			String basename = item.getBasename();
 			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase());
 			if (region != null) {
-				if (!groupByRegion.containsKey(region)) {
-					groupByRegion.put(region, new ArrayList<>());
+				if (!isMapCreatedByJoiningSubregions(region, type)) {
+					if (!groupByRegion.containsKey(region)) {
+						groupByRegion.put(region, new ArrayList<>());
+					}
+					groupByRegion.get(region).add(item);
 				}
-				groupByRegion.get(region).add(item);
 			} else {
 				String fileName = item.getFileName();
 				if (fileName.contains("World")) {
@@ -553,6 +555,12 @@ public class DownloadResources extends DownloadResourceGroup {
 		trimEmptyGroups();
 		updateLoadedFiles();
 		return true;
+	}
+
+	private boolean isMapCreatedByJoiningSubregions(@NonNull WorldRegion region,
+	                                                @NonNull DownloadActivityType type) {
+		return type == DownloadActivityType.NORMAL_FILE && region.isMapJoinType()
+				|| type == DownloadActivityType.ROADS_FILE && region.isRoadsJoinType();
 	}
 
 	private void replaceIndividualSrtmWithGroups(@NonNull WorldRegion region) {
