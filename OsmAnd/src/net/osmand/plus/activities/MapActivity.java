@@ -890,16 +890,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				boolean containsPrevious = tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude());
 				mapContextMenu.setMapZoom(containsPrevious ? tb.getZoom() : zoom);
 
-				if (toShow instanceof GpxDisplayItem) {
-					trackDetailsMenu.setGpxItem((GpxDisplayItem) toShow);
+				if (toShow instanceof GpxDisplayItem displayItem) {
+					trackDetailsMenu.setGpxItem(displayItem);
 					trackDetailsMenu.show();
 				} else if (mapRouteInfoMenu.isVisible()) {
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapRouteInfoMenu.updateMenu();
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
-				} else if (toShow instanceof GpxFile) {
+				} else if (toShow instanceof GpxFile gpxFile) {
 					hideContextAndRouteInfoMenues();
-					GpxFile gpxFile = (GpxFile) toShow;
 					SelectedGpxFile selectedGpxFile;
 					if (gpxFile.isShowCurrentTrack()) {
 						selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
@@ -910,18 +909,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					}
 
 					TrackAppearanceFragment.showInstance(this, selectedGpxFile, null);
-				} else if (toShow instanceof QuadRect) {
-					QuadRect qr = (QuadRect) toShow;
+				} else if (toShow instanceof QuadRect qr) {
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-				} else if (toShow instanceof NewGpxPoint) {
-					NewGpxPoint newGpxPoint = (NewGpxPoint) toShow;
+				} else if (toShow instanceof NewGpxPoint newGpxPoint) {
 					QuadRect qr = newGpxPoint.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
-				} else if (toShow instanceof GpxData) {
+				} else if (toShow instanceof GpxData gpxData) {
 					hideContextAndRouteInfoMenues();
 
-					GpxData gpxData = (GpxData) toShow;
 					QuadRect qr = gpxData.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					MeasurementEditingContext editingContext = new MeasurementEditingContext(app);

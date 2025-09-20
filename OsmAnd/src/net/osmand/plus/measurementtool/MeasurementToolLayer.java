@@ -928,6 +928,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		return null;
 	}
 
+	@Nullable
 	public WptPt addPoint(boolean addPointBefore) {
 		if (pressedPointLatLon != null) {
 			WptPt pt = new WptPt();
@@ -1102,11 +1103,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public PointDescription getObjectName(Object o) {
 		return null;
-	}
-
-	@Override
-	public boolean disableSingleTap() {
-		return isInMeasurementMode();
 	}
 
 	@Override

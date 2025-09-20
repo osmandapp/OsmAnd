@@ -102,6 +102,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	protected TitleButtonController leftDownloadButtonController;
 	protected TitleButtonController rightDownloadButtonController;
 	protected List<Pair<TitleButtonController, TitleButtonController>> additionalButtonsControllers;
+
+	protected BottomButtonController detailsButtonController;
+	protected BottomButtonController mainButtonController;
+
 	protected TitleProgressController titleProgressController;
 
 	protected TopToolbarController toolbarController;
@@ -121,6 +125,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		this.builder.setCollapseExpandListener(this);
 		this.currentMenuState = getInitialMenuState();
 		this.builder.setLight(isLight());
+		createBottomButtonsControllers(mapActivity);
+	}
+
+	private void createBottomButtonsControllers(@NonNull MapActivity mapActivity) {
+		ContextMenuButtonsFactory factory = new ContextMenuButtonsFactory(this);
+		mainButtonController = factory.createMainButtonController(mapActivity);
 	}
 
 	@NonNull
@@ -442,6 +452,16 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public List<Pair<TitleButtonController, TitleButtonController>> getAdditionalButtonsControllers() {
 		return additionalButtonsControllers;
+	}
+
+	@NonNull
+	public BottomButtonController getDetailsButtonController() {
+		return detailsButtonController;
+	}
+
+	@NonNull
+	public BottomButtonController getMainButtonController() {
+		return mainButtonController;
 	}
 
 	public TitleProgressController getTitleProgressController() {

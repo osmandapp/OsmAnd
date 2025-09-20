@@ -496,14 +496,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public boolean navigateInPedestrianMode() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.navigateInPedestrianMode();
-		}
-		return false;
-	}
-
 	public boolean close() {
 		return close(true);
 	}
@@ -935,16 +927,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return menuController.getNearbyTransportStopRoutes();
 		}
 		return null;
-	}
-
-	public void navigateButtonPressed() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			if (navigateInPedestrianMode()) {
-				mapActivity.getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
-			}
-			mapActivity.getMapActions().navigateButton();
-		}
 	}
 
 	public boolean zoomInPressed() {
@@ -1449,6 +1431,19 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	@Nullable
+	public BottomButtonController getDetailsButtonController() {
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getDetailsButtonController() : null;
+	}
+
+	@Nullable
+	public BottomButtonController getMainActionButtonController() {
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getMainButtonController() : null;
+	}
+
+	@Nullable
 	public TitleProgressController getTitleProgressController() {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {

@@ -559,18 +559,20 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		TextView detailsButton = view.findViewById(R.id.context_menu_details_button);
 		detailsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
 		detailsButton.setOnClickListener(view -> openMenuHalfScreen());
-		TextView directionsButton = view.findViewById(R.id.context_menu_directions_button);
-		int iconResId = R.drawable.ic_action_gdirections_dark;
-		if (menu.navigateInPedestrianMode()) {
-			iconResId = R.drawable.ic_action_pedestrian_dark;
+
+		TextView mainActionButton = view.findViewById(R.id.context_menu_directions_button);
+		BottomButtonController mainButtonController = menu.getMainActionButtonController();
+		if (mainButtonController != null) {
+			mainActionButton.setText(mainButtonController.getCaption());
+			Drawable drawable = getIcon(mainButtonController.getIconId(), bottomButtonsColor);
+			mainActionButton.setTextColor(getColor(bottomButtonsColor));
+
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+					mainActionButton, null, null, drawable, null);
+			int contentPaddingHalf = (int) getDimension(R.dimen.content_padding_half);
+			mainActionButton.setCompoundDrawablePadding(contentPaddingHalf);
+			mainActionButton.setOnClickListener(v -> mainButtonController.buttonPressed());
 		}
-		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
-		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
-				directionsButton, null, null, drawable, null);
-		int contentPaddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
-		directionsButton.setCompoundDrawablePadding(contentPaddingHalf);
-		directionsButton.setOnClickListener(view -> menu.navigateButtonPressed());
 
 		buildBottomView();
 
