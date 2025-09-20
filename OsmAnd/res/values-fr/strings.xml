@@ -5575,7 +5575,7 @@
     <string name="ais_cpa_warning_time">Délai d\'avertissement avant le point d\'approche le plus proche (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Les navires sont surlignés en rouge si le CPA (point d\'approche le plus proche) est inférieur au seuil défini et que le TCPA (temps jusqu\'au CPA) se situe dans le délai d\'avertissement défini dans le paramètre « Délai d\'avertissement pour atteindre le CPA ».</string>
     <string name="plugin_ais_tracker_disclaimer">AVERTISSEMENT\n\nCe plugin est un projet amateur et n\'est pas destiné à être utilisé dans des applications critiques. Sa fiabilité et sa précision ne sont pas garanties. Ne comptez pas sur ce logiciel pour la navigation, la sécurité des personnes ou toute autre opération essentielle.</string>
-    <string name="ais_ship_lost_timeout_description">Définir le délai pour la visibilité des bateaux : après ce délai sans réception de signal, le symbole du bateau changera sur l\'écran : il sera barré.</string>
+    <string name="ais_ship_lost_timeout_description">Définir le délai pour la visibilité des bateaux : après ce délai sans réception de signal, le symbole du bateau changera sur l\'écran : il sera barré.</string>
     <string name="ais_cpa_settings">Paramètres liés au CPA</string>
     <string name="ais_cpa_settings_description">Ces valeurs déterminent la manière dont les objets AIS s\'affichent lorsqu\'ils s\'approchent de la position du navire.</string>
     <string name="ais_cpa_warning_distance">Distance d\'avertissement pour le Point d\'Approche le plus proche (CPA)</string>

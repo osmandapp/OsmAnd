@@ -5795,8 +5795,8 @@
     <string name="ais_object_lost_timeouts_description">Stel onderbrekingswaardes in om verloren AIS-objecten te identificeren wanneer er geen signaal wordt ontvangen voor een gespecificeerde tijd.</string>
     <string name="ais_object_lost_timeout">Onderbreking voor zichtbaarheid wanneer het object is verloren</string>
     <string name="ais_object_lost_timeout_description">Stel een time-out in voor de zichtbaarheid van het AIS-object: als er binnen de opgegeven tijd geen signaal wordt ontvangen, wordt het object automatisch van het scherm verwijderd.</string>
-    <string name="ais_ship_lost_timeout">Time-out van de zichtbaarheid van het schip – verwijderen als er binnen de ingestelde tijd geen AIS-signaal wordt ontvangen.</string>
-    <string name="ais_ship_lost_timeout_description">Stel de onderbreking in voor de zichtbaarheid van het schip: Na deze tijd zonder een signaal-ontvangst, zal het schip-icoon op het scherm veranderen van staat: Het zal doorgekruist zijn.</string>
+    <string name="ais_ship_lost_timeout">Time-out verouderde scheepspositie</string>
+    <string name="ais_ship_lost_timeout_description">Stel de time-out in voor de zichtbaarheid van het niet actuele schip: Na deze tijd zonder een signaal-ontvangst, zal het schip-icoon doorgekruist zijn.</string>
     <string name="ais_cpa_settings">Instellingen gerelateerd aan CPA</string>
     <string name="ais_cpa_settings_description">Deze waardes bepalen hoe AIS-objecten worden weergegeven wanneer ze naderen tot de positie van het eigen schip.</string>
     <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nDeze plugin is een hobbyproject en is niet bedoeld voor gebruik in kritieke omgevingen. Er wordt geen garantie gegeven op betrouwbaarheid of nauwkeurigheid. Vertrouw op geen enkele manier op deze software voor navigatie, persoonlijke veiligheid, of andere belangrijke doeleinden.</string>
