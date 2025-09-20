@@ -556,9 +556,14 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
+
 		TextView detailsButton = view.findViewById(R.id.context_menu_details_button);
-		detailsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		detailsButton.setOnClickListener(view -> openMenuHalfScreen());
+		BottomButtonController detailsButtonController = menu.getDetailsButtonController();
+		if (detailsButtonController != null) {
+			detailsButton.setText(detailsButtonController.getCaption());
+			detailsButton.setTextColor(getColor(bottomButtonsColor));
+			detailsButton.setOnClickListener(v -> detailsButtonController.buttonPressed());
+		}
 
 		TextView mainActionButton = view.findViewById(R.id.context_menu_directions_button);
 		BottomButtonController mainButtonController = menu.getMainActionButtonController();

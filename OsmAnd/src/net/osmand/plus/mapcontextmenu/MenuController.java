@@ -130,6 +130,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	private void createBottomButtonsControllers(@NonNull MapActivity mapActivity) {
 		ContextMenuButtonsFactory factory = new ContextMenuButtonsFactory(this);
+		detailsButtonController = factory.createDetailButtonController();
 		mainButtonController = factory.createMainButtonController(mapActivity);
 	}
 

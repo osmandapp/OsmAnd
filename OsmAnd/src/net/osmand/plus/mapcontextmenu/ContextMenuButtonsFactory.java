@@ -13,6 +13,11 @@ public class ContextMenuButtonsFactory {
 	}
 
 	@NonNull
+	public BottomButtonController createDetailButtonController() {
+		return new DetailsButtonController(controller);
+	}
+
+	@NonNull
 	public BottomButtonController createMainButtonController(@NonNull MapActivity mapActivity) {
 		return isInMeasurementMode(mapActivity)
 				? new AddPlanRoutePointButtonController(controller)
