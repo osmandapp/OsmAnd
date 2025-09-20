@@ -1454,44 +1454,32 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	@NonNull
 	public CharSequence getSubtypeStr() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSubtypeStr();
-		}
-		return "";
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSubtypeStr() : "";
 	}
 
+	@Nullable
 	public Drawable getSubtypeIcon() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSubtypeIcon();
-		}
-		return null;
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSubtypeIcon() : null;
 	}
 
 	public int getAdditionalInfoColor() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalInfoColorId();
-		}
-		return 0;
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalInfoColorId() : 0;
 	}
 
+	@NonNull
 	public CharSequence getAdditionalInfo() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalInfoStr();
-		}
-		return "";
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalInfoStr() : "";
 	}
 
 	public int getAdditionalInfoIconRes() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalInfoIconRes();
-		}
-		return 0;
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalInfoIconRes() : 0;
 	}
 
 	public boolean isMapDownloaded() {
