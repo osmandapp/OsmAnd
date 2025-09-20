@@ -228,7 +228,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
 				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
-					printf(SL > 0, "Too many recalculations (stop)\n");
+					if (SL >= 0) {
+						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx);
+					}
 					hctx.clearAll(stPoints, endPoints);
 					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
@@ -292,14 +294,20 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		printGCInformation(false);
 		hctx.clearAll(stPoints, endPoints);
-		printf(SL >= 0,
-				"Routing %.1f ms (ctx %s): load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
-				(System.nanoTime() - startTime) / 1e6, hctx.hashCode() + "", 
+		if (SL >= 0) {
+			printFinalMessage("", start, end, startTime, hctx);
+		}
+		return route;
+	}
+
+	private void printFinalMessage(String msg, LatLon start, LatLon end, long startTime, HHRoutingContext<T> hctx) {
+		printf(true,
+				"Routing %s, %.1f ms (ctx %s): load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
+				msg, (System.nanoTime() - startTime) / 1e6, hctx.hashCode() + "", 
 				hctx.stats.loadPointsTime, hctx.stats.searchPointsTime,
 				hctx.stats.routingTime, hctx.stats.addQueueTime + hctx.stats.pollQueueTime,
 				hctx.stats.loadEdgesTime, hctx.stats.loadEdgesCnt, hctx.stats.prepTime,
 				hctx.config.toString(start, end), hctx.getRoutingInfo());
-		return route;
 	}
 
 	public static TreeMap<String, String> getFilteredTags(GeneralRouter generalRouter) {
