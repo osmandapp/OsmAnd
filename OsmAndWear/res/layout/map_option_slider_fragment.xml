@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/slider_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/color_transparent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/shared_string_scale"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<TextView
+			android:id="@+id/scale_value"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size" />
+
+	</LinearLayout>
+
+	<com.google.android.material.slider.Slider
+		android:id="@+id/slider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:stepSize="1" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:background="?attr/dashboard_divider"
+		android:focusable="false" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding"
+		android:text="@string/vertical_exaggeration_description"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size" />
+
+</LinearLayout>
