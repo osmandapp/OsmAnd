@@ -5567,7 +5567,7 @@
     <string name="ais_port_nmea_local_description">Définir le port UDP sur lequel OsmAnd reçoit les données NMEA</string>
     <string name="ais_object_lost_timeouts">Paramétrage du délai d\'expiration d\'un signal de réception AIS</string>
     <string name="ais_object_lost_timeouts_description">Définir les délais au-delà desquels les objets sont considérés comme perdus parce qu\'aucun signal AIS n\'a été reçu.</string>
-    <string name="ais_object_lost_timeout">Délai avant masquage d\'un objet perdu</string>
+    <string name="ais_object_lost_timeout">Délai d\'expiration de la visibilité en cas de perte du navire</string>
     <string name="plugin_ais_tracker_name">Suivi AIS du navire</string>
     <string name="no_places_available">Aucun lieu dans la zone visible</string>
     <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour cet emplacement</string>
@@ -5575,12 +5575,12 @@
     <string name="ais_cpa_warning_time">Délai d\'avertissement avant le point d\'approche le plus proche (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Les navires sont surlignés en rouge si le CPA (point d\'approche le plus proche) est inférieur au seuil défini et que le TCPA (temps jusqu\'au CPA) se situe dans le délai d\'avertissement défini dans le paramètre « Délai d\'avertissement pour atteindre le CPA ».</string>
     <string name="plugin_ais_tracker_disclaimer">AVERTISSEMENT\n\nCe plugin est un projet amateur et n\'est pas destiné à être utilisé dans des applications critiques. Sa fiabilité et sa précision ne sont pas garanties. Ne comptez pas sur ce logiciel pour la navigation, la sécurité des personnes ou toute autre opération essentielle.</string>
-    <string name="ais_ship_lost_timeout_description">Définir le délai pour la visibilité des bateaux : après ce délai sans réception de signal, le symbole du bateau changera sur l\'écran : il sera barré.</string>
+    <string name="ais_ship_lost_timeout_description">Définir un délai de péremption : en l\'absence de réception de signal et au-delà de ce délai, le symbole du navire sera barré.</string>
     <string name="ais_cpa_settings">Paramètres liés au CPA</string>
     <string name="ais_cpa_settings_description">Ces valeurs déterminent la manière dont les objets AIS s\'affichent lorsqu\'ils s\'approchent de la position du navire.</string>
     <string name="ais_cpa_warning_distance">Distance d\'avertissement pour le Point d\'Approche le plus proche (CPA)</string>
     <string name="ais_cpa_warning_time_description">Si le TCPA (temps jusqu\'au point d\'approche le plus proche) avec un autre navire tombe en dessous du seuil défini, le navire est surligné en rouge.</string>
-    <string name="ais_ship_lost_timeout">Délai d\'expiration de la visibilité du navire - supprimer si aucun signal AIS n\'est reçu dans le délai défini.</string>
+    <string name="ais_ship_lost_timeout">Délai de péremption du signal du navire</string>
     <string name="plugin_ais_tracker_description">Affiche les positions AIS et les informations sur les navires à proximité. Les données AIS sont reçues via le réseau depuis un récepteur AIS externe.</string>
     <string name="hmd_promo_description">Accès gratuit aux fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s mois</string>
     <string name="shared_string_road_exit">Sortie</string>
