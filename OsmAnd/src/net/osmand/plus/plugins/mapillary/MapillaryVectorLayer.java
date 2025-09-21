@@ -517,8 +517,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof MapillaryImage) {
-			MapillaryImage image = (MapillaryImage) o;
+		if (o instanceof MapillaryImage image) {
 			return new LatLon(image.getLatitude(), image.getLongitude());
 		}
 		return null;

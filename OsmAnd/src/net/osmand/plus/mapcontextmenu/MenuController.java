@@ -42,6 +42,7 @@ import net.osmand.plus.mapcontextmenu.controllers.*;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.measurementtool.PlanRoutePoint;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisObject;
@@ -243,6 +244,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof ClickableWay) {
 				SelectedGpxPoint point = ((ClickableWay) object).getSelectedGpxPoint();
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, point);
+			} else if (object instanceof PlanRoutePoint planRoutePoint) {
+				menuController = new PlanRoutePointMenuController(mapActivity, pointDescription, planRoutePoint);
 			} else if (object instanceof BaseDetailsObject detailsObject) {
 				if (detailsObject instanceof PlaceDetailsObject placeDetailsObject) {
 					WptPt wptPt = placeDetailsObject.getWptPt();

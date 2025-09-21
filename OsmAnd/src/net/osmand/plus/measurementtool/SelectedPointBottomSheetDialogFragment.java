@@ -1,12 +1,9 @@
 package net.osmand.plus.measurementtool;
 
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +26,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-
-import java.util.List;
-import java.util.Map;
 
 public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -298,12 +289,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@NonNull
 	private String getTitle() {
-		int pos = editingCtx.getSelectedPointPosition();
-		String pointName = editingCtx.getPoints().get(pos).getName();
-		if (!TextUtils.isEmpty(pointName)) {
-			return pointName;
-		}
-		return getString(R.string.ltr_or_rtl_combine_via_dash, getString(R.string.plugin_distance_point), String.valueOf(pos + 1));
+		return getPlanRoutePoint().getTitle(app);
 	}
 
 	@NonNull
@@ -312,60 +298,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (mapActivity == null) {
 			return "";
 		}
-
-		StringBuilder description = new StringBuilder();
-		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
-		int pos = editingCtx.getSelectedPointPosition();
-		List<WptPt> points = editingCtx.getPoints();
-		WptPt pt = points.get(pos);
-		String pointDesc = pt.getDesc();
-		if (!TextUtils.isEmpty(pointDesc)) {
-			description.append(pointDesc);
-		} else if (pos < 1 && before) {
-			description.append(getString(R.string.start_point));
-		} else {
-			float distance = getTrimmedDistance(editingCtx, before);
-			description.append(OsmAndFormatter.getFormattedDistance(distance, app));
-		}
-		double elevation = pt.getEle();
-		if (!Double.isNaN(elevation)) {
-			description.append("  ").append((getString(R.string.altitude)).charAt(0)).append(": ");
-			description.append(OsmAndFormatter.getFormattedAlt(elevation, app));
-		}
-		float speed = (float) pt.getSpeed();
-		if (speed != 0) {
-			description.append("  ").append((getString(R.string.shared_string_speed)).charAt(0)).append(": ");
-			description.append(OsmAndFormatter.getFormattedSpeed(speed, app));
-		}
-		return description.toString();
+		return getPlanRoutePoint().getDescription(before, app);
 	}
 
-	private float getTrimmedDistance(@NonNull MeasurementEditingContext editingCtx, boolean before) {
-		List<WptPt> points = editingCtx.getPoints();
-		Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = editingCtx.getRoadSegmentData();
-		int pointIndex = editingCtx.getSelectedPointPosition();
-		float dist = 0;
-		int startIdx;
-		int endIdx;
-		if (before) {
-			startIdx = 1;
-			endIdx = pointIndex;
-		} else {
-			startIdx = pointIndex + 1;
-			endIdx = points.size() - 1;
-		}
-		for (int i = startIdx; i <= endIdx; i++) {
-			WptPt first = points.get(i - 1);
-			WptPt second = points.get(i);
-			Pair<WptPt, WptPt> pair = Pair.create(first, second);
-			RoadSegmentData segment = roadSegmentData.get(pair);
-			boolean routeSegmentBuilt = segment != null && segment.getDistance() > 0;
-			dist += routeSegmentBuilt
-					? segment.getDistance()
-					: MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon());
-		}
-
-		return dist;
+	private PlanRoutePoint getPlanRoutePoint() {
+		return new PlanRoutePoint(editingCtx.getSelectedPointPosition(), editingCtx);
 	}
 
 	@Nullable
