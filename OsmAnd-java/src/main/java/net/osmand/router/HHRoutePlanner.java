@@ -302,7 +302,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 	private void printFinalMessage(String msg, LatLon start, LatLon end, long startTime, HHRoutingContext<T> hctx) {
 		printf(true,
-				"Routing %s, %.1f ms (ctx %s): load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
+				"Routing%s %.1f ms (ctx %s): load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
 				msg, (System.nanoTime() - startTime) / 1e6, hctx.hashCode() + "", 
 				hctx.stats.loadPointsTime, hctx.stats.searchPointsTime,
 				hctx.stats.routingTime, hctx.stats.addQueueTime + hctx.stats.pollQueueTime,
