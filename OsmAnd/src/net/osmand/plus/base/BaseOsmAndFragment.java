@@ -70,7 +70,7 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment, ISu
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		InsetsUtils.processInsets(this, view);
+		InsetsUtils.processInsets(this, view, null);
 	}
 
 	@Nullable
