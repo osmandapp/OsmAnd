@@ -16,6 +16,7 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -24,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
@@ -116,6 +118,17 @@ public class ClickableWayHelper {
             xPoints.add(points31.get(i).getX());
             yPoints.add(points31.get(i).getY());
         }
+        QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
+        return loadClickableWay(selectedLatLon, bbox, xPoints, yPoints, osmId, name, tags);
+    }
+
+    public ClickableWay loadClickableWay(@NonNull Amenity amenity) {
+        long osmId = amenity.getOsmId();
+        String name = amenity.getName();
+        TIntArrayList xPoints = amenity.getX();
+        TIntArrayList yPoints = amenity.getY();
+        LatLon selectedLatLon = amenity.getLocation();
+        Map<String, String> tags = amenity.getOsmTags();
         QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
         return loadClickableWay(selectedLatLon, bbox, xPoints, yPoints, osmId, name, tags);
     }
@@ -241,5 +254,16 @@ public class ClickableWayHelper {
             return true;
         }
         return false;
+    }
+
+    public void openClickableWayAmenity(Amenity amenity, boolean adjustMapPosition) {
+        AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+        AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+        BaseDetailsObject detailedObject = amenitySearcher.searchDetailedObject(amenity, settings);
+        if (detailedObject != null) {
+            ClickableWay clickableWay = loadClickableWay(detailedObject.getSyntheticAmenity());
+            readHeightData(clickableWay, null);
+            openAsGpxFile(clickableWay);
+        }
     }
 }

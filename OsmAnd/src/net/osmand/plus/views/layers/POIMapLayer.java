@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers;
 import static net.osmand.core.android.MapRendererContext.SELECTED_POI_SECTION;
 import static net.osmand.core.android.MapRendererContext.TOP_PLACES_POI_SECTION;
 import static net.osmand.data.PointDescription.POINT_TYPE_POI;
-import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
@@ -1052,7 +1051,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				travelHelper.openTrackMenu(article, activity, name, amenity.getLocation(), false);
 				return true; // TravelArticle
 			} else if (clickableWayHelper.isClickableWayAmenity(amenity)) {
-				System.err.printf("XXX TODO\n");
+				clickableWayHelper.openClickableWayAmenity(amenity, false);
 				return true; // ClickableWay
 			}
 		}

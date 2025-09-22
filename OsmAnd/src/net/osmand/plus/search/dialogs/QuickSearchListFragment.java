@@ -245,8 +245,8 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 				travelHelper.openTrackMenu(travelGpx, activity, amenity.getGpxFileName(null), amenity.getLocation(), true);
 				return; // TravelGpx
 			} else if (clickableWayHelper.isClickableWayAmenity(amenity)) {
-				System.err.printf("XXX TODO\n");
-				return; // ClickableWay TODO prevent open POI menu
+				clickableWayHelper.openClickableWayAmenity(amenity, true);
+				return; // ClickableWay
 			}
 		}
 		showOnMap(activity, dialogFragment,

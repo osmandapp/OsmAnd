@@ -1464,7 +1464,7 @@ public class MenuBuilder {
 					TravelGpx travelGpx = new TravelGpx(poi);
 					travelHelper.openTrackMenu(travelGpx, getMapActivity(), poi.getGpxFileName(null), poi.getLocation(), true);
 				} else if (clickableWayHelper.isClickableWayAmenity(poi)) {
-					System.err.printf("XXX TODO\n");
+					clickableWayHelper.openClickableWayAmenity(amenity, true);
 				} else {
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
