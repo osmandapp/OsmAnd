@@ -559,8 +559,8 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	private boolean isMapCreatedByJoiningSubregions(@NonNull WorldRegion region,
 	                                                @NonNull DownloadActivityType type) {
-		return type == DownloadActivityType.NORMAL_FILE && region.isMapJoinType()
-				|| type == DownloadActivityType.ROADS_FILE && region.isRoadsJoinType();
+		return type == DownloadActivityType.NORMAL_FILE && region.isRegionJoinMapDownload()
+				|| type == DownloadActivityType.ROADS_FILE && region.isRegionJoinRoadsDownload();
 	}
 
 	private void replaceIndividualSrtmWithGroups(@NonNull WorldRegion region) {
