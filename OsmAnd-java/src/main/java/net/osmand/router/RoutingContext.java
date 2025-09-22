@@ -483,21 +483,21 @@ public class RoutingContext {
 			int clt = getCurrentlyLoadedTiles();
 			long us1 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 			unloadUnusedTiles(memoryLimit);
+			memoryHits++;
+			if (config.memoryMaxHits >= 0 && config.memoryMaxHits < memoryHits) {
+				throwNotEnoughMemory();
+			}
 			if (h1 != 0 && getCurrentlyLoadedTiles() != clt) {
-				memoryHits++;
-				if (config.memoryMaxHits >= 0 && config.memoryMaxHits < memoryHits) {
-					throwNotEnoughMemory();
-				}
 				int sz2 = getCurrentEstimatedSize();
 				long h2 = runGCUsedMemory();
 				float mb = (1 << 20);
-				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb + " actual");
+				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb + " actual " + memoryHits);
 				log.warn("Used after " + h2 / mb + " of " + Runtime.getRuntime().totalMemory() / mb );
 			} else {
 				float mb = (1 << 20);
 				int sz2 = getCurrentEstimatedSize();
 				log.warn("Unload tiles :  occupied before " + sz1 / mb + " Mb - now  " + sz2 / mb + "MB "
-						+ memoryLimit / mb + " limit MB " + config.memoryLimitation / mb);
+						+ memoryLimit / mb + " limit MB " + config.memoryLimitation / mb + " "  + memoryHits);
 				long us2 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 				log.warn("Used memory before " + us1 / mb + " after " + us1 / mb );
 			}
