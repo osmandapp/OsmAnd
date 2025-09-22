@@ -100,6 +100,7 @@ public class RoutingContext {
 	public TileStatistics global = new TileStatistics();
 	// updated by route planner in bytes
 	public int memoryOverhead = 0;
+	public int memoryHits = 0; // reset each routing run
 	public float routingTime = 0;
 
 	// callback of processing segments
@@ -208,6 +209,7 @@ public class RoutingContext {
 	}
 	
 	public void unloadAllData(RoutingContext except) {
+		memoryHits = 0;
 		for (RoutingSubregionTile tl : subregionTiles) {
 			if (tl.isLoaded()) {
 				if(except == null || except.searchSubregionTile(tl.subregion) < 0){
@@ -482,6 +484,10 @@ public class RoutingContext {
 			long us1 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 			unloadUnusedTiles(memoryLimit);
 			if (h1 != 0 && getCurrentlyLoadedTiles() != clt) {
+				memoryHits++;
+				if (config.memoryMaxHits >= 0 && config.memoryMaxHits < memoryHits) {
+					throwNotEnoughMemory();
+				}
 				int sz2 = getCurrentEstimatedSize();
 				long h2 = runGCUsedMemory();
 				float mb = (1 << 20);
@@ -976,6 +982,14 @@ public class RoutingContext {
 	protected void finalize() throws Throwable {
 		deleteNativeRoutingContext();
 		super.finalize();
+	}
+
+	public void throwNotEnoughMemory() {
+		throw new IllegalStateException(
+				String.format("There is not enough memory %.5f, %.5f -> %.5f, %.5f - limit  %d  MB",
+						MapUtils.get31LatitudeY(startY), MapUtils.get31LongitudeX(startX),
+						MapUtils.get31LatitudeY(targetY), MapUtils.get31LongitudeX(targetX),
+						config.memoryLimitation / (1 << 20)));		
 	}
 
 }
