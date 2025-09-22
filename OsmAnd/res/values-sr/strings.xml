@@ -5647,9 +5647,9 @@
     <string name="ais_address_nmea_server_description">Одредите адресу ИП извора података НМЕА (ако се користи ТЦП)</string>
     <string name="ais_port_nmea_local">Прикључник УДП местног пријемника података НМЕА</string>
     <string name="ais_port_nmea_local_description">Одредите прикључник УДП на који ОсмАнд прима податке НМЕА</string>
-    <string name="ais_object_lost_timeout">Временско ограничење видљивости при губљењу предмета</string>
+    <string name="ais_object_lost_timeout">Временско ограничење видљивости при губљењу брода</string>
     <string name="ais_object_lost_timeout_description">Подесите временско ограничење за видљивост АИС објекта: Ако се не прими сигнал у наведеном временском периоду, објекат ће аутоматски бити уклоњен са приказа.</string>
-    <string name="ais_ship_lost_timeout_description">Подесите временско ограничење видљивости брода: Након овог времена без пријема знака, знак брода ће променити своје стање на заслону: Биће прецртан.</string>
+    <string name="ais_ship_lost_timeout_description">Подесите временско ограничење застареле видљивост за брод: након овог времена без пријема сигнала, симбол брода ће бити прецртан.</string>
     <string name="ais_cpa_settings">Подешавања која се односе на ЦПА</string>
     <string name="ais_cpa_settings_description">Ове вредности одређују како се АИС објекти приказују када се приближе сопственој позицији пловила.</string>
     <string name="ais_cpa_warning_time">Време упозорења пре најближе тачке приближавања (ЦПА)</string>
@@ -5660,7 +5660,7 @@
     <string name="plugin_ais_tracker_description">Приказује АИС позиције и информације о оближњим пловилима. АИС подаци се примају преко мреже са спољног АИС пријемника.</string>
     <string name="plugin_ais_tracker_disclaimer">ОДРИЦАЊЕ ОДГОВОРНОСТИ\n\nОвај додатак је хоби пројекат и није намењен за употребу у критичним апликацијама. Не гарантује поузданост или тачност. Не ослањајте се на овај софтвер за навигацију, безбедност живота или било које друге битне операције.</string>
     <string name="ais_object_lost_timeouts_description">Подесите вредности временског ограничења раду препознавања изгубљених предмета АИС уколико није примљен знак одређено време.</string>
-    <string name="ais_ship_lost_timeout">Временско ограничење видљивости брода - уклони ако се не прими АИС сигнал у подешеном временском периоду.</string>
+    <string name="ais_ship_lost_timeout">Временско ограничење за брод је застарело</string>
     <string name="ais_object_lost_timeouts">Подешавања временског ограничења за пријем АИС сигнала</string>
     <string name="show_grids">Прикажи мрежу мапе</string>
     <string name="show_grids_description">Дозволи приказ мреже преко мапе</string>
