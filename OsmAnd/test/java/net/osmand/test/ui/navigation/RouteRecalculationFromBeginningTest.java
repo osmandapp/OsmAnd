@@ -1,38 +1,31 @@
 package net.osmand.test.ui.navigation;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static net.osmand.test.common.EspressoUtils.waitForView;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
-import static net.osmand.test.common.Interactions.setRouteStart;
-import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
-import static org.hamcrest.Matchers.allOf;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Range;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.test.espresso.Espresso;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
+import androidx.test.rule.GrantPermissionRule;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.TrackTabType;
-import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.plus.importfiles.SaveImportedGpxListener;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
+import net.osmand.util.Algorithms;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,13 +49,28 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 	private ObserveDistToFinishIdlingResource idlingResource;
 
+	private GpxFile gpxFile;
+
 	@Before
 	@Override
 	public void setup() {
 		super.setup();
 		enableSimulation(SPEED_KM_PER_HOUR);
 		try {
-			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME), null);
+			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME), new SaveImportedGpxListener() {
+				@Override
+				public void onGpxSaved(@Nullable String error, @NonNull GpxFile gpxFile) {
+					if (Algorithms.isEmpty(error) && gpxFile.getError() == null) {
+						RouteRecalculationFromBeginningTest.this.gpxFile = gpxFile;
+
+						KQuadRect rect = gpxFile.getRect();
+						if (rect.getLeft() != 0 && rect.getRight() != 0) {
+							app.getOsmandMap().getMapView().fitRectToMap(rect.getLeft(), rect.getRight(),
+									rect.getTop(), rect.getBottom(), (int) rect.width(), (int) rect.height(), 0);
+						}
+					}
+				}
+			});
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -75,6 +83,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		if (idlingResource != null) {
 			unregisterIdlingResources(idlingResource);
 		}
+		app.stopNavigation();
 	}
 
 	@Test
@@ -83,30 +92,9 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 		openNavigationMenu();
 
-		ViewInteraction linearLayout = waitForView(allOf(withId(R.id.map_options_route_button), isDisplayed()));
-		linearLayout.perform(click());
+		app.getOsmandMap().getMapActions().setGPXRouteParams(gpxFile);
+		app.getTargetPointsHelper().setStartPoint(START, true, null);
 
-		ViewInteraction linearLayout2 = onView(
-				childAtPosition(
-						allOf(withId(R.id.scrollable_items_container),
-								childAtPosition(
-										withId(R.id.scroll_view),
-										0)),
-						6));
-		linearLayout2.perform(scrollTo(), click());
-
-		ViewInteraction allTab = onView(allOf(withId(android.R.id.text1),
-				withText(app.getString(TrackTabType.ALL.titleId))));
-		allTab.perform(click());
-
-		ViewInteraction trackItemView = onView(allOf(withId(R.id.title),
-				withText(GpxHelper.INSTANCE.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
-		trackItemView.perform(click());
-
-		ViewInteraction closeButton = onView(allOf(withId(R.id.close_button), isDisplayed()));
-		closeButton.perform(click());
-
-		setRouteStart(START);
 		app.getOsmandMap().getMapActions().startNavigation();
 
 		idlingResource = new ObserveDistToFinishIdlingResource(app);

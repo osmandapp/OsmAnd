@@ -1,7 +1,7 @@
 package net.osmand.test.ui.basic;
 
-import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithContentDescription;
-import static net.osmand.test.common.OsmAndDialogInteractions.clickButtonWithText;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithContentDescription;
+import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithText;
 import static net.osmand.test.common.OsmAndDialogInteractions.clickMapButtonWithId;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static net.osmand.test.common.OsmAndDialogInteractions.writeText;
@@ -13,6 +13,7 @@ import androidx.test.rule.ActivityTestRule;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.test.common.AndroidTest;
+import net.osmand.test.common.OsmAndDialogInteractions;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,12 +35,12 @@ public class SimpleClickTest extends AndroidTest {
 		skipAppStartDialogs(app);
 
 		clickMapButtonWithId(R.id.map_menu_button);
-		clickButtonWithText(R.string.maps_and_resources);
+		clickViewWithText(R.string.maps_and_resources);
 
-		clickButtonWithContentDescription(R.string.shared_string_search);
+		clickViewWithContentDescription(R.string.shared_string_search);
 		writeText(R.id.searchEditText, "Kyiv");
 
-		clickButtonWithText("Kyiv");
+		OsmAndDialogInteractions.clickViewWithText("Kyiv");
 
 	}
 }

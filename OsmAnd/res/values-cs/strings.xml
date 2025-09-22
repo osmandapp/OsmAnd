@@ -5666,10 +5666,10 @@
     <string name="ais_port_nmea_local_description">Definovat UDP port, kde bude OsmAnd získávat data NMEA</string>
     <string name="ais_object_lost_timeouts">Nastavení časového limitu pro příjem signálu AIS</string>
     <string name="ais_object_lost_timeouts_description">Nastavit hodnoty pro rozpoznání ztracených objektů AIS, pokud nebyl po určitou dobu obdržen žádný signál.</string>
-    <string name="ais_object_lost_timeout">Časový limit pro viditelnost při ztrátě objektu</string>
+    <string name="ais_object_lost_timeout">Časový limit pro viditelnost při ztrátě lodi</string>
     <string name="ais_object_lost_timeout_description">Nastavit časový limit viditelnosti objektů AIS: pokud není během určené doby obdržen žádný signál, bude objekt automaticky odstraněn z obrazovky.</string>
-    <string name="ais_ship_lost_timeout">Časový limit viditelnosti lodi – odstranit, pokud není v nastavené době přijat žádný signál AIS.</string>
-    <string name="ais_ship_lost_timeout_description">Nastavit časový limit viditelnosti lodě: po tomto čase bez příjmu signálu změní symbol lodě svůj stav na obrazovce: bude přeškrtnutý.</string>
+    <string name="ais_ship_lost_timeout">Časový limit zastarání lodi</string>
+    <string name="ais_ship_lost_timeout_description">Nastavit časový limit zastarání viditelnosti lodě: po tomto čase bez příjmu signálu bude symbol lodě přeškrtnutý.</string>
     <string name="ais_cpa_settings">Nastavení týkající se CPA</string>
     <string name="ais_cpa_settings_description">Tyto hodnoty určují, jak se zobrazí objekty AIS, když se přiblíží k vlastní poloze plavidla.</string>
     <string name="ais_cpa_warning_time">Výstražná doba před dosažením nejbližšího bodu přiblížení (CPA)</string>

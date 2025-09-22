@@ -5168,7 +5168,7 @@
     <string name="row_number">Række %1$s</string>
     <string name="key_bindings">Tastetildelinger</string>
     <string name="trash_is_empty">Papirkurven er tom</string>
-    <string name="key_event_action_move_to_my_location">Flyt til Min placering</string>
+    <string name="key_event_action_move_to_my_location">Flyt til min placering</string>
     <string name="clear_key_assignment">Ryd tastetildeling</string>
     <string name="not_specified">Ikke specificeret</string>
     <string name="download_to_device">Download til enhed</string>
@@ -5386,7 +5386,7 @@
     <string name="quick_action_verb_turn_on_off">Tænd / sluk</string>
     <string name="quick_action_verb_start_stop">Start / stop</string>
     <string name="quick_action_previous_app_profile">App-profil til forrige</string>
-    <string name="quick_action_next_app_profile">App profile to næste</string>
+    <string name="quick_action_next_app_profile">App-profil til næste</string>
     <string name="app_profile">App-profil</string>
     <string name="shared_string_create">Opret</string>
     <string name="shared_string_replace">Erstat</string>
@@ -5454,10 +5454,10 @@
     <string name="y_axis_description">Vælg op til to muligheder for Y-aksen.</string>
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">Vandrestiers sværhedsgrad</string>
-    <string name="quick_action_previous_screen_desc">En skifter til at navigere til den forrige skærm.</string>
+    <string name="quick_action_previous_screen_desc">En skifter til at gå til den forrige skærm.</string>
     <string name="quick_action_previous_screen_title">Forrige skærm</string>
     <string name="quick_action_verb_navigate">Naviger</string>
-    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenuen.</string>
+    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenu.</string>
     <string name="quick_action_drawer_title">Sidemenu</string>
     <string name="quick_action_search_view_desc">En skifter til at åbne eller lukke søgevisning.</string>
     <string name="quick_action_switch_compass_desc">En skifter til at skifte kortorientering.</string>
@@ -5685,8 +5685,8 @@
     <string name="map_widget_route_information_desc">Viser den forventede ankomsttid, resterende rejsetid og afstand for den aktive navigationsrute.</string>
     <string name="shared_string_default_view">Standardvisning</string>
     <string name="plugin_ais_tracker_disclaimer">ANSVARSFRASKRIVELSE\n\nDenne udvidelse er et hobbyprojekt og er ikke beregnet til brug i vitale applikationer. Det garanterer ikke for pålidelighed eller nøjagtighed. Stol ikke på denne software til navigation, livsvigtig sikkerhed eller andre vigtige handlinger.</string>
-    <string name="ais_ship_lost_timeout_description">Indstil timeout for skibets synlighed: Efter denne tid uden signalmodtagelse vil skibssymbolet ændre tilstand på skærmen: Det bliver streget ud.</string>
-    <string name="ais_object_lost_timeout">Timeout for synlighed, når objektet går tabt</string>
+    <string name="ais_ship_lost_timeout_description">Indstil timeout for skibs forældet synlighed: Efter dette tidsrum uden signalmodtagelse vil skibssymbolet blive streget ud.</string>
+    <string name="ais_object_lost_timeout">Timeout for synlighed, når skib mistes</string>
     <string name="ais_object_lost_timeout_description">Indstil en timeout for AIS-objektets synlighed: Hvis der ikke modtages noget signal inden for den angivne varighed, fjernes objektet automatisk fra skærmen.</string>
     <string name="ais_load_data">Indlæs AIS-data fra fil</string>
     <string name="ais_cpa_warning_distance_description">Skibe fremhæves med rødt, hvis CPA (Closest Point of Approach) er under den definerede tærskel, og TCPA (Time to CPA) falder inden for den advarselstid, der er angivet i indstillingen \'Advarselstid til at nå CPA\'.</string>
@@ -5702,7 +5702,7 @@
     <string name="ais_port_nmea_local_description">Definer UPD-port, hvor OsmAnd modtager NMEA-data</string>
     <string name="ais_object_lost_timeouts">Timeout-indstillinger for modtagelse af AIS-signaler</string>
     <string name="ais_object_lost_timeouts_description">Indstil timeout-værdier for at identificere mistede AIS-objekter, hvis der ikke er modtaget noget signal i et bestemt tidsrum.</string>
-    <string name="ais_ship_lost_timeout">Timeout for skibs synlighed – fjern, hvis der ikke modtages noget AIS-signal inden for den indstillede varighed.</string>
+    <string name="ais_ship_lost_timeout">Skib forældet timeout</string>
     <string name="ais_cpa_settings">Indstillinger relateret til CPA</string>
     <string name="ais_cpa_settings_description">Disse værdier bestemmer, hvordan AIS-objekter vises, når de nærmer sig fartøjets egen position.</string>
     <string name="ais_cpa_warning_time">Advarselstid før Closest Point of Approach (CPA)</string>
@@ -5834,7 +5834,7 @@
     <string name="ascent">Opstigning</string>
     <string name="descent">Nedstigning</string>
     <string name="map_orientations_choose_description">Lad den være tom for at skifte mellem alle tilgængelige tilstande, eller tilføj kun dine foretrukne.</string>
-    <string name="map_orientations">Kortets retninger</string>
+    <string name="map_orientations">Kortorienteringer</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Svar</string>

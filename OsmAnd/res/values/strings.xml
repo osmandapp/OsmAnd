@@ -165,10 +165,10 @@
     <string name="ais_port_nmea_local_description">Define UPD port where OsmAnd receives NMEA data</string>
     <string name="ais_object_lost_timeouts">Timeout settings for AIS signal reception</string>
     <string name="ais_object_lost_timeouts_description">Set timeout values to identify lost AIS objects if no signal was received for a specific time.</string>
-    <string name="ais_object_lost_timeout">Timeout for visibility when object is lost</string>
+    <string name="ais_object_lost_timeout">Timeout for visibility when ship is lost</string>
     <string name="ais_object_lost_timeout_description">Set a timeout for AIS object visibility: If no signal is received within the specified duration, the object will be automatically removed from the display.</string>
-    <string name="ais_ship_lost_timeout">Ship visibility timeout - remove if no AIS signal received within set duration.</string>
-    <string name="ais_ship_lost_timeout_description">Set timeout for ship visibility: After this time without signal reception, the ship symbol will change its state on screen: It will be crossed out.</string>
+    <string name="ais_ship_lost_timeout">Ship outdated timeout</string>
+    <string name="ais_ship_lost_timeout_description">Set timeout for ship outdated visibility: after this time without signal reception, the ship symbol will be crossed out.</string>
     <string name="ais_cpa_settings">Settings related to CPA</string>
     <string name="ais_cpa_settings_description">These values determine how AIS objects are displayed when they approach the vessel\'s own position.</string>
     <string name="ais_cpa_warning_time">Warning time before the Closest Point of Approach (CPA)</string>

@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
-import static net.osmand.plus.utils.InsetsUtils.InsetSide.BOTTOM;
 import static net.osmand.plus.utils.InsetsUtils.InsetSide.TOP;
 
 import android.annotation.SuppressLint;
@@ -16,8 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BottomSheetDialog;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -39,11 +44,6 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 	protected int getStatusBarColorId() {
 		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
 		return ColorUtilities.getStatusBarColorId(nightMode);
-	}
-
-	@ColorRes
-	protected int getNavigationBarColorId() {
-		return -1;
 	}
 
 	@Override
@@ -84,8 +84,45 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 
 		View root = findViewById(R.id.root);
 		if (root != null) {
-			InsetsUtils.processInsets(this, root);
+			InsetsUtils.processInsets(this, root, null);
 		}
+
+		getSupportFragmentManager().registerFragmentLifecycleCallbacks(
+				new FragmentLifecycleCallbacks() {
+					@Override
+					public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+						if (f instanceof ISupportInsets) {
+							((ISupportInsets) f).updateNavBarColor();
+						}
+					}
+
+					@Override
+					public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+						super.onFragmentDestroyed(fm, f);
+						Fragment top = getTopFragment(fm);
+						if (top == null) {
+							updateNavBarColor();
+
+						} else if (f instanceof BaseOsmAndDialogFragment) {
+							if (top instanceof ISupportInsets) {
+								((ISupportInsets) top).updateNavBarColor();
+							}
+						}
+					}
+				}, false
+		);
+	}
+
+	@Nullable
+	private Fragment getTopFragment(FragmentManager fm) {
+		List<Fragment> fragments = fm.getFragments();
+		for (int i = fragments.size() - 1; i >= 0; i--) {
+			Fragment frag = fragments.get(i);
+			if (frag != null && frag.isVisible()) {
+				return frag;
+			}
+		}
+		return null;
 	}
 
 	protected void setupHomeButton() {
@@ -109,10 +146,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 	}
 
 	public void updateNavigationBarColor() {
-		int colorId = getNavigationBarColorId();
-		if (colorId != -1) {
-			//AndroidUiHelper.setNavigationBarColor(this, getColor(colorId));
-		}
+		updateNavBarColor();
 	}
 
 	@Nullable

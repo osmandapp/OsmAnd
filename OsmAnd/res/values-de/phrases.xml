@@ -4221,7 +4221,7 @@
     <string name="poi_tiles">Fliesengeschäft</string>
     <string name="poi_toilets_handwashing_yes">Waschbecken: ja</string>
     <string name="poi_avalanche_transceiver">Lawinen-Opfer-Detektor; AVD; LVS-Gerät</string>
-    <string name="poi_toilets_paper_supplied_no">Papierspender: nein</string>
+    <string name="poi_toilets_paper_supplied_no">Toilettenpapier: nein</string>
     <string name="poi_toilets_hands_drying_yes">Handtrockner: ja</string>
     <string name="poi_telecommunication">Telekommunikation</string>
     <string name="poi_handwashing_hand_cleaning_paste_no">Handreinigungspaste: nein</string>
@@ -4257,7 +4257,7 @@
     <string name="poi_toilets_position_squat">Toilettenposition: hockend</string>
     <string name="poi_gender_segregated_yes">Geschlechtertrennung: ja</string>
     <string name="poi_gender_segregated_no">Geschlechtertrennung: nein</string>
-    <string name="poi_toilets_paper_supplied_yes">Papierspender: ja</string>
+    <string name="poi_toilets_paper_supplied_yes">Toilettenpapier: ja</string>
     <string name="poi_toilets_hands_drying_no">Handtrockner: nein</string>
     <string name="poi_toilets_handwashing_no">Waschbecken: nein</string>
     <string name="poi_handwashing_soap_yes">Seife: ja</string>

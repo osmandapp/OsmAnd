@@ -5648,7 +5648,7 @@
     <string name="ais_port_nmea_local">UDP port lokalnog NMEA prijemnika podataka</string>
     <string name="ais_port_nmea_local_description">Definiši UDP port na koji OsmAnd prima NMEA podatke</string>
     <string name="ais_object_lost_timeouts">Podešavanja vremenskog ograničenja za prijem AIS signala</string>
-    <string name="ais_ship_lost_timeout">Vremensko ograničenje vidljivosti broda - uklonite ako u zadanom trajanju nije primljen AIS signal.</string>
+    <string name="ais_ship_lost_timeout">Vremenska vidljivosti broda je istekla</string>
     <string name="ais_cpa_settings">Podešavanja koja se odnose na CPA</string>
     <string name="ais_cpa_settings_description">Ove vrednosti definišu prezentaciju AIS objekata koji se mogu previše približiti sopstvenoj poziciji.</string>
     <string name="ais_cpa_warning_distance">Upozorenje udaljenosti za najbližu tačku približavanja (CPA)</string>
@@ -5660,8 +5660,8 @@
     <string name="ais_port_nmea_server_description">Definiši broj TCP porta NMEA izvora podataka</string>
     <string name="ais_cpa_warning_time_description">Ako je TCPA (vreme za dostizanje CPA sa drugim plovilom) manji od ove vrednosti, plovilo je označeno crvenom bojom.</string>
     <string name="ais_cpa_warning_distance_description">Plovila su označena crvenom bojom ako je CPA (Najbliža tačka pristupa) je ispod definisanog praga i TCPA (Vreme za CPA) spada u vreme upozorenja postavljeno u \"Vreme upozorenja da se postigne CPA\" podešavanje.</string>
-    <string name="ais_object_lost_timeout">Vremensko ograničenje za vidljivost kada se objekat izgubi</string>
-    <string name="ais_ship_lost_timeout_description">Podesi vremensko ograničenje za vidljivost broda: Nakon ovog vremena bez prijema signala, simbol broda će promeniti svoje stanje na ekranu: Biće precrtan.</string>
+    <string name="ais_object_lost_timeout">Vreme isteka vidljivosti izgubljenog broda</string>
+    <string name="ais_ship_lost_timeout_description">Podesi vremensko ograničenje za vidljivost broda: Nakon ovog vremena bez prijema signala, simbol broda će promeniti svoje stanje na ekranu, biće precrtan.</string>
     <string name="ais_cpa_warning_time">Vreme upozorenja da se stigne do najbliže tačke pristupa (CPA)</string>
     <string name="ais_port_nmea_server">TCP port NMEA izvora podataka</string>
     <string name="map_grid">Mreže mape</string>
