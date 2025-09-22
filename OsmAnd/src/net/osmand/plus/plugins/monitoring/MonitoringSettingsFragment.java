@@ -7,6 +7,7 @@ import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.settings.controllers.BatteryOptimizationController.isIgnoringBatteryOptimizations;
+import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -33,6 +34,7 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -115,6 +117,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		setupSaveTrackIntervalPref();
 
 		setupSaveGlobalTrackIntervalPref();
+		setupChimeIntervalPref();
 		setupSaveTrackMinDistancePref();
 		setupSaveTrackPrecisionPref();
 		setupSaveTrackMinSpeedPref();
@@ -183,6 +186,22 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			entry.put((minute * 60) * 1000, minute + " " + getString(R.string.int_min));
 		}
 		return entry;
+	}
+
+	private void setupChimeIntervalPref() {
+		HashMap<Object, String> entry = new LinkedHashMap<>();
+		entry.put(0, app.getString(R.string.shared_string_off));
+		for (int value : new int[] {30, 60, 150, 300, 600, 1500, 3000, 6000, 15000}) {
+			double roundedDist = OsmAndFormatter.calculateRoundedDist(value, app);
+			entry.put((int) roundedDist, OsmAndFormatter.getFormattedDistanceInterval(app, roundedDist, NO_TRAILING_ZEROS));
+		}
+		ListPreferenceEx chimeInterval = findPreference(settings.CHIME_INTERVAL.getId());
+		chimeInterval.setEntries(entry.values().toArray(new String[0]));
+		chimeInterval.setEntryValues(entry.keySet().toArray());
+		ApplicationMode selectedAppMode = getSelectedAppMode();
+		chimeInterval.setValue(settings.CHIME_INTERVAL.getModeValue(selectedAppMode));
+		chimeInterval.setIcon(getActiveIcon(R.drawable.ic_action_volume_up));
+		chimeInterval.setDescription(R.string.chime_interval_descr);
 	}
 
 	private void setupSaveTrackMinDistancePref() {

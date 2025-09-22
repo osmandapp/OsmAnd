@@ -153,6 +153,14 @@
 		android:title="@string/monitoring_notification"
 		tools:icon="@drawable/ic_action_notification" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="chime_interval"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/chime_interval"
+		tools:icon="@drawable/ic_action_volume_up"
+		tools:summary="@string/shared_string_off" />
+
 	<Preference
 		android:key="notification_divider"
 		android:layout="@layout/simple_divider_item"

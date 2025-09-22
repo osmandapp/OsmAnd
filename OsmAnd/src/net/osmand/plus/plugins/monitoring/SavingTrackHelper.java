@@ -93,6 +93,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	private final OsmandSettings settings;
 
 	private final SelectedGpxFile currentTrack;
+	private final ChimePlayer chimePlayer;
 
 	private int currentTrackIndex = 1;
 	private boolean shouldRecordSimulation = false;
@@ -119,6 +120,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		currentTrack.setGpxFile(gpxFile, app);
 		prepareCurrentTrackForRecording();
 		app.getRoutingHelper().addListener(this);
+		this.chimePlayer = new ChimePlayer(app);
 	}
 
 	@Override
@@ -541,6 +543,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 			insertData(wptPt, pluginsInfo);
 			app.getNotificationHelper().refreshNotification(NotificationType.GPX);
+			chimePlayer.playChime(distance);
 		}
 	}
 
