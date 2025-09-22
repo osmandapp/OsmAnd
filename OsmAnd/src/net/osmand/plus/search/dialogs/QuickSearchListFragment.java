@@ -39,6 +39,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
@@ -232,6 +233,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 			return;
 		}
 		if (pair.second instanceof Amenity amenity) {
+			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
 			if (amenity.isRouteTrack() && !amenity.isSuperRoute()) {
 				TravelHelper travelHelper = app.getTravelHelper();
 				TravelGpx travelGpx = new TravelGpx(amenity);
@@ -242,6 +244,9 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 
 				travelHelper.openTrackMenu(travelGpx, activity, amenity.getGpxFileName(null), amenity.getLocation(), true);
 				return; // TravelGpx
+			} else if (clickableWayHelper.isClickableWayAmenity(amenity)) {
+				clickableWayHelper.openClickableWayAmenity(amenity, true);
+				return; // ClickableWay
 			}
 		}
 		showOnMap(activity, dialogFragment,
