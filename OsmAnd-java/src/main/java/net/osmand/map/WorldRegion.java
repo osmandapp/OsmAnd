@@ -47,6 +47,8 @@ public class WorldRegion implements Serializable {
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
 	protected boolean regionRoadsDownload;
+	protected boolean regionJoinMapDownload;
+	protected boolean regionJoinRoadsDownload;
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
 	protected List<LatLon> polygon;
@@ -91,6 +93,14 @@ public class WorldRegion implements Serializable {
 
 	public boolean isRegionRoadsDownload() {
 		return regionRoadsDownload;
+	}
+
+	public boolean isRegionJoinMapDownload() {
+		return regionJoinMapDownload;
+	}
+
+	public boolean isRegionJoinRoadsDownload() {
+		return regionJoinRoadsDownload;
 	}
 
 	public String getLocaleName() {
