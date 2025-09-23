@@ -1964,6 +1964,9 @@ public class OsmandSettings {
 		AUDIO_USAGE[5] = new IntPreference(this, "audio_usage_5", 5).makeGlobal().makeShared().cache(); /*AudioManager.STREAM_NOTIFICATION -> AudioAttributes.USAGE_NOTIFICATION*/
 	}
 
+	// "low" is +5db, "normal" is +10db, "loud" is +15db
+	public final OsmandPreference<Float> VOICE_AMP_VOLUME = new FloatPreference(this, "voice_amp_volume", 10.0f).makeProfile().cache();
+
 	// For now this can be changed only in TestVoiceActivity
 	public final OsmandPreference<Integer>[] VOICE_PROMPT_DELAY = new IntPreference[10];
 
