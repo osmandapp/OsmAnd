@@ -77,7 +77,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 		String timeSpan = Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled());
 		String timeMoving = Algorithms.formatDuration((int) (analysis.getTimeMoving() / 1000), app.accessibilityEnabled());
-		String timeSpanTitle = app.getString(R.string.duration) + " / " + app.getString(R.string.moving_time);
+		String timeSpanTitle = app.getString(R.string.shared_string_time_span) + " / " + app.getString(R.string.moving_time);
 		buildInfoRow(view, getThemedIcon(R.drawable.ic_action_time_span), timeSpanTitle,
 				timeSpan + " / " + timeMoving);
 
