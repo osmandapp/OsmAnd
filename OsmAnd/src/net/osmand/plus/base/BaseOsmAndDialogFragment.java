@@ -79,9 +79,9 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		super.onViewCreated(view, savedInstanceState);
 		Dialog dialog = getDialog();
 		if (dialog != null && dialog.getWindow() != null && Build.VERSION.SDK_INT > 29) {
-			InsetsUtils.processInsets(this, dialog.getWindow().getDecorView());
+			InsetsUtils.processInsets(this, dialog.getWindow().getDecorView(), view);
 		} else {
-			InsetsUtils.processInsets(this, view);
+			InsetsUtils.processInsets(this, view, null);
 		}
 	}
 

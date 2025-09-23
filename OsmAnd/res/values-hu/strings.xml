@@ -3164,7 +3164,7 @@
     <string name="use_system_screen_timeout_promo">Alapértelmezésben le van tiltva: amíg az OsmAnd az előtérben fut, a képernyő nem kapcsol ki.
 \n
 \nHa engedélyezve van, az OsmAnd az időkorlátra vonatkozó rendszerbeállítást használja.</string>
-    <string name="use_system_screen_timeout">Képernyő-időkorlát: rendszerbeállítás használata</string>
+    <string name="use_system_screen_timeout">Képernyő-időkorlát: a rendszerbeállítás használata</string>
     <string name="copy_coordinates">Koordináták másolása</string>
     <string name="route_recalculation_dist_descr">Az útvonal újratervezésre kerül, amennyiben az útvonaltól való távolság nagyobb, mint a megadott paraméter</string>
     <string name="route_recalculation_dist_title">Legkisebb távolság, amely felett újraszámítja az útvonalat</string>
@@ -5599,12 +5599,12 @@
     <string name="shared_string_default_view">Alapértelmezett nézet</string>
     <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktív navigációs útvonal távolságát.</string>
     <string name="ais_cpa_warning_distance_description">A hajók piros színnel vannak kiemelve, ha a CPA (Legközelebbi megközelítési pont) kisebb, mint a beállított küszöbérték, és a TCPA a \'Figyelmeztetési idő a CPA eléréséhez\' érték alá esik.</string>
-    <string name="ais_object_lost_timeout_description">Állítsa be az AIS objektumok láthatóságának időtkorlátját: a jel vétele nélkül ennyi idő után kerül az AIS objektum automatikusan eltávolításra a képernyőről.</string>
+    <string name="ais_object_lost_timeout_description">Állítsa be az AIS objektumok láthatóságának időkorlátját: a jel vétele nélkül ennyi idő után kerül az AIS objektum automatikusan eltávolításra a képernyőről.</string>
     <string name="ais_load_data">AIS adatok betöltése fájlból</string>
     <string name="ais_port_nmea_local_description">Határozza meg azt az UPD portot, amelyen az OsmAnd NMEA adatokat kaphat</string>
-    <string name="ais_object_lost_timeouts_description">Állítsa be az időtúllépési értékeket az elveszett AIS objektumok azonosításához, ha egy adott ideig nem érkezett jel.</string>
-    <string name="ais_object_lost_timeout">A láthatóság időtúllépése az objektum elvesztésekor</string>
-    <string name="ais_ship_lost_timeout_description">Állítsa be a hajó láthatóságának időtúllépését: a jel vétele nélkül ennyi idő után kerül megváltozásra a hajó szimbólum állapota a képernyőn, kihúzásra kerül.</string>
+    <string name="ais_object_lost_timeouts_description">Állítsa be az időkorlát értékeket az elveszett AIS objektumok azonosításához, amikor egy adott ideig nem érkezett jel.</string>
+    <string name="ais_object_lost_timeout">Láthatósági időkorlát a hajó elvesztésekor</string>
+    <string name="ais_ship_lost_timeout_description">Állítsa be a hajó láthatóságának időkorlátját: jel vétele nélkül ennyi idő után kerül kihúzásra a hajó szimbólum.</string>
     <string name="plugin_ais_tracker_disclaimer">FIGYELMEZTETÉS\n\nEz a plugin egy hobbiprojekt és nem kritikus alkalmazásokban való használatra szánták. Nem garantálja a megbízhatóságot vagy a pontosságot. Ne hagyatkozzon erre a szoftverre navigáció, életveszély vagy bármilyen más kritikus művelet elvégzésekor.</string>
     <string name="ais_address_settings">IP-cím beállításai</string>
     <string name="ais_address_settings_description">Válassza az NMEA protokollt (UDP/TCP) és adja meg a megfelelő címeket és portokat</string>
@@ -5615,8 +5615,8 @@
     <string name="ais_port_nmea_server">Az NMEA adatforrás TCP portja</string>
     <string name="ais_port_nmea_server_description">Határozza meg az NMEA adatforrás TCP portszámát</string>
     <string name="ais_port_nmea_local">Helyi NMEA adatfogadó UDP portja</string>
-    <string name="ais_object_lost_timeouts">Időtúllépési beállítások az AIS jel fogadásához</string>
-    <string name="ais_ship_lost_timeout">A hajó láthatóságának időtúllépése, törlődik, ha a beállított időtartamon belül nem érkezik AIS-jel.</string>
+    <string name="ais_object_lost_timeouts">Időkorlát beállítások az AIS jel fogadásához</string>
+    <string name="ais_ship_lost_timeout">Hajó láthatóságának időkorlátja</string>
     <string name="ais_cpa_settings">A CPA-val kapcsolatos beállítások</string>
     <string name="ais_cpa_settings_description">Ezek az értékek határozzák meg, hogyan jelennek meg az AIS-objektumok, amikor megközelítik a hajó saját pozícióját.</string>
     <string name="ais_cpa_warning_time">Figyelmeztetési idő a legközelebbi megközelítési pont (CPA) előtt</string>

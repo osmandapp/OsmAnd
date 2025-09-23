@@ -5683,7 +5683,7 @@
     <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
     <string name="ais_address_settings">Impostazioni dell\'indirizzo IP</string>
     <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e specifica gli indirizzi e le porte corrispondenti</string>
-    <string name="ais_ship_lost_timeout">Timeout per la visibilità della nave quando non viene ricevuto alcun segnale</string>
+    <string name="ais_ship_lost_timeout">Timeout per la visibilità della nave quando non viene ricevuto alcun segnale.</string>
     <string name="ais_port_nmea_local">Porta UDP locale del ricevitore dati NMEA</string>
     <string name="ais_object_lost_timeouts_description">Imposta valori di timeout per identificare oggetti AIS persi se non viene ricevuto alcun segnale per un periodo di tempo specifico.</string>
     <string name="ais_nmea_protocol">Protocollo per la ricezione dei dati NMEA</string>

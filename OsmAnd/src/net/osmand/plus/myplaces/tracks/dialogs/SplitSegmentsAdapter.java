@@ -95,7 +95,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 				String points = String.valueOf(currentGpxDisplayItem.analysis.getPoints());
 				overviewTextView.setText(getString(R.string.ltr_or_rtl_combine_with_brackets, overview, points));
 
-				String timeSpan = getString(R.string.shared_string_time_span);
+				String timeSpan = getString(R.string.duration);
 				String formattedDuration = Algorithms.formatDuration(currentGpxDisplayItem.analysis.getDurationInSeconds(), app.accessibilityEnabled());
 				TextView tvDuration = convertView.findViewById(R.id.fragment_count_text);
 				tvDuration.setText(getString(R.string.ltr_or_rtl_combine_via_colon, timeSpan, formattedDuration));
@@ -189,7 +189,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 						} else {
 							distanceOrTimeSpanValue.setText("-");
 						}
-						distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
+						distanceOrTimeSpanText.setText(app.getString(R.string.duration));
 					} else if (trackGroup != null && trackGroup.isSplitTime()) {
 						distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, !nightMode ? R.color.gpx_split_segment_icon_color : 0));
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));

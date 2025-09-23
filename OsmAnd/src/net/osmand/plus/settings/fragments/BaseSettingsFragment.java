@@ -159,7 +159,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		updateToolbar();
-		InsetsUtils.processInsets(this, view);
+		InsetsUtils.processInsets(this, view, null);
 	}
 
 	@Nullable

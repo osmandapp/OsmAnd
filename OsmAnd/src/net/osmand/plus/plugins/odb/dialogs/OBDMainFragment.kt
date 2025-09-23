@@ -53,7 +53,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		FUEL_PRESSURE({ OBDTypeWidget.FUEL_PRESSURE }, R.drawable.ic_action_obd_fuel_pressure),
 		THROTTLE_POSITION({ OBDTypeWidget.THROTTLE_POSITION }, R.drawable.ic_action_obd_throttle_position),
 		BATTERY_VOLTAGE({ OBDTypeWidget.BATTERY_VOLTAGE }, R.drawable.ic_action_obd_battery_voltage),
-		ADAPTER_BATTERY_VOLTAGE({ OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE}, R.drawable.ic_action_obd_battery_voltage)
+		ADAPTER_BATTERY_VOLTAGE({ OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE}, R.drawable.ic_action_obd2_connector_voltage)
 	}
 
 	data class OBDDataItem(val dataType: OBDDataType, val widget: OBDComputerWidget)

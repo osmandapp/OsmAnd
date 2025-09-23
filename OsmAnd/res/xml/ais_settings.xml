@@ -38,17 +38,18 @@
         android:layout="@layout/preference_category_with_descr"
         android:title="@string/ais_object_lost_timeouts" />
 
-    <net.osmand.plus.settings.preferences.ListPreferenceEx
-        android:key="ais_object_lost_timeout"
-        android:layout="@layout/preference_with_descr"
-        android:title="@string/ais_object_lost_timeout"
-        tools:summary="@string/ais_object_lost_timeout_description" />
 
     <net.osmand.plus.settings.preferences.ListPreferenceEx
         android:key="ais_ship_lost_timeout"
         android:layout="@layout/preference_with_descr"
         android:title="@string/ais_ship_lost_timeout"
         tools:summary="@string/ais_ship_lost_timeout_description" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_object_lost_timeout"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_object_lost_timeout"
+        tools:summary="@string/ais_object_lost_timeout_description" />
 
     <PreferenceCategory
         android:key="ais_cpa_settings"

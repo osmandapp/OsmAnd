@@ -2197,7 +2197,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 			}
 
-			if (mapRenderer != null && isPinchZoomMagnificationEnabled) {
+			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
 				mapRenderer.setViewportScale(0.0, false);
 				mapRenderer.setViewportShift(0, 0, false);
 				changeZoomPosition((float) 0, 0);
@@ -2318,7 +2318,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			initialViewport = getRotatedTileBox();
 			MapRendererView mapRenderer = getMapRenderer();
 			// Remember the tile31 under the pinch center so we can re-center later
-			if (mapRenderer != null) {
+			if (isPinchZoomMagnificationEnabled && mapRenderer != null) {
 				PointI elevatedTile = NativeUtilities.get31FromElevatedPixel(mapRenderer, (int) initialMultiTouchCenterPoint.x,
 						(int) initialMultiTouchCenterPoint.y);
 				if (elevatedTile != null) {
@@ -2356,7 +2356,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			if (deltaZoom != 0 || relAngle != 0) {
-				if (mapRenderer != null && isPinchZoomMagnificationEnabled && relativeToStart > 1.0) {
+				if (isPinchZoomMagnificationEnabled && relativeToStart > 1.0 && mapRenderer != null ) {
 					int multiTouchCenterX;
 					int multiTouchCenterY;
 					if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {

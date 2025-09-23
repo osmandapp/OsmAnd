@@ -5764,4 +5764,6 @@
     <string name="show_dm_grids">Bruk DM istedenfor grader eller DMS</string>
     <string name="show_dm_grids_description">Vis rutenett i grader og minutter istedenfor grader eller DMS</string>
     <string name="show_local_names">Vis lokale navn</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="liter_single">Liter</string>
 </resources>

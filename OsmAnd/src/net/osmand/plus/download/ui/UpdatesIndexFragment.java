@@ -334,7 +334,6 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
-		displayData.layoutId = R.layout.simple_popup_menu_item;
 		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
 		PopUpMenu.show(displayData);
 	}

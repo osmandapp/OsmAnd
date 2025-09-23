@@ -457,6 +457,8 @@ public class RoutePlannerFrontEnd {
 			}
 			if (routeDirection != null) {
 				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+			} else {
+				ctx.precalculatedRouteDirection = null;
 			}
 			ctx.calculationProgress.nextIteration();
 			res = runNativeRouting(ctx, recalculationEnd, null);
@@ -686,7 +688,7 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	public RouteCalcResult searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
+	RouteCalcResult searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 	                                                  PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 		if (recalculationEnd != null) {
@@ -696,6 +698,8 @@ public class RoutePlannerFrontEnd {
 		}
 		if (routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+		} else {
+			ctx.precalculatedRouteDirection = null;
 		}
 		if (ctx.nativeLib != null) {
 			ctx.startX = start.preciseX;

@@ -15,6 +15,8 @@ import net.osmand.binary.HeightDataLoader.Cancellable;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -22,8 +24,8 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
@@ -69,13 +71,11 @@ public class ClickableWayHelper {
     );
 
     private final OsmandApplication app;
-    private final OsmandMapTileView view;
     private final ClickableWayMenuProvider activator;
 
-    public ClickableWayHelper(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
+    public ClickableWayHelper(@NonNull OsmandApplication app) {
         this.app = app;
-        this.view = view;
-        this.activator = new ClickableWayMenuProvider(view, this::readHeightData, this::openAsGpxFile);
+        this.activator = new ClickableWayMenuProvider(app, this::readHeightData, this::openAsGpxFile);
     }
 
     @NonNull
@@ -120,6 +120,21 @@ public class ClickableWayHelper {
         }
         QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
         return loadClickableWay(selectedLatLon, bbox, xPoints, yPoints, osmId, name, tags);
+    }
+
+    public ClickableWay loadClickableWay(@NonNull Amenity amenity) {
+        long osmId = amenity.getOsmId();
+        String name = amenity.getName();
+        TIntArrayList xPoints = amenity.getX();
+        TIntArrayList yPoints = amenity.getY();
+        LatLon selectedLatLon = amenity.getLocation();
+        Map<String, String> tags = amenity.getOsmTags();
+        QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
+        return loadClickableWay(selectedLatLon, bbox, xPoints, yPoints, osmId, name, tags);
+    }
+
+    public boolean isClickableWayAmenity(Amenity amenity) {
+        return isClickableWayTags(amenity.getName(), amenity.getOsmTags());
     }
 
     private ClickableWay loadClickableWay(LatLon selectedLatLon, QuadRect bbox,
@@ -228,7 +243,7 @@ public class ClickableWayHelper {
     }
 
     private boolean openAsGpxFile(@Nullable ClickableWay clickableWay) {
-        MapActivity mapActivity = view.getMapActivity();
+        MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
         if (clickableWay != null && mapActivity != null) {
             GpxFile gpxFile = clickableWay.getGpxFile();
             GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
@@ -239,5 +254,16 @@ public class ClickableWayHelper {
             return true;
         }
         return false;
+    }
+
+    public void openClickableWayAmenity(Amenity amenity, boolean adjustMapPosition) {
+        AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+        AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+        BaseDetailsObject detailedObject = amenitySearcher.searchDetailedObject(amenity, settings);
+        if (detailedObject != null) {
+            ClickableWay clickableWay = loadClickableWay(detailedObject.getSyntheticAmenity());
+            readHeightData(clickableWay, null);
+            openAsGpxFile(clickableWay);
+        }
     }
 }

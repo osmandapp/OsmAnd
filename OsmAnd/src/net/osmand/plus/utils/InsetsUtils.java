@@ -1,6 +1,8 @@
 package net.osmand.plus.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -133,7 +136,7 @@ public class InsetsUtils {
 		}
 	}
 
-	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView) {
+	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView, @Nullable View paddingsView) {
 		Set<InsetSide> insetSides = insetSupportedFragment.getRootInsetSides();
 		List<Integer> rootScrollableIds = insetSupportedFragment.getScrollableViewIds();
 		List<Integer> bottomContainers = insetSupportedFragment.getBottomContainersIds();
@@ -141,18 +144,29 @@ public class InsetsUtils {
 		List<Integer> fabs = insetSupportedFragment.getFabIds();
 
 		InsetsUtils.setWindowInsetsListener(rootView, (v, insets) -> {
-			processScrollInsets(insets, rootScrollableIds, v);
-			processBottomContainerInsets(insets, bottomContainers, v);
-			processCollapsingAppBarLayoutInsets(insets, collapsingAppBarLayoutIds, insetSides, v);
-			processFabInsets(insets, fabs, v);
-			processRootInsetSides(insetSupportedFragment, insets, insetSides, v);
+			View processedView = paddingsView != null ? paddingsView : v;
+			processScrollInsets(insets, rootScrollableIds, processedView);
+			processBottomContainerInsets(insets, bottomContainers, processedView);
+			processCollapsingAppBarLayoutInsets(insets, collapsingAppBarLayoutIds, insetSides, processedView);
+			processFabInsets(insets, fabs, processedView);
+			processRootInsetSides(insetSupportedFragment, insets, insetSides, processedView);
 
 			insetSupportedFragment.setLastRootInsets(insets);
 			insetSupportedFragment.onApplyInsets(insets);
 		}, true);
 	}
 
-	private static void processRootInsetSides(ISupportInsets insetSupportedFragment, @NonNull WindowInsetsCompat insets,
+	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment) {
+		int colorId = insetSupportedFragment.getNavigationBarColorId();
+		Activity activity = insetSupportedFragment.requireActivity();
+		if (colorId != -1) {
+			AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId));
+		} else {
+			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT);
+		}
+	}
+
+	public static void processRootInsetSides(ISupportInsets insetSupportedFragment, @NonNull WindowInsetsCompat insets,
 	                                          @Nullable Set<InsetSide> insetSides,
 	                                          @NonNull View view){
 		if (insetSupportedFragment instanceof BaseOsmAndDialogFragment dialogFragment) {
@@ -164,7 +178,7 @@ public class InsetsUtils {
 		}
 	}
 
-	private static void processFabInsets(@NonNull WindowInsetsCompat insets,
+	public static void processFabInsets(@NonNull WindowInsetsCompat insets,
 	                                     @Nullable List<Integer> fabs,
 	                                     @NonNull View view){
 		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -263,7 +277,7 @@ public class InsetsUtils {
 		}
 	}
 
-	private static void processScrollInsets(@NonNull WindowInsetsCompat insets,
+	public static void processScrollInsets(@NonNull WindowInsetsCompat insets,
 	                                        @Nullable List<Integer> rootScrollableIds,
 	                                        @NonNull View view) {
 		View listView = null;

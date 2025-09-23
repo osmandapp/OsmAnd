@@ -5455,7 +5455,7 @@
     <string name="shared_string_avg_altitude">Ort. yükseklik</string>
     <string name="shared_string_avg_speed">Min. hız</string>
     <string name="default_buttons_corners_original_description">Her buton kendi köşe ayarında kalacak.</string>
-    <string name="shared_string_engine"></string>
+    <string name="shared_string_engine"/>
     <string name="shared_string_hour">Saat</string>
     <string name="obd_throttle_position">Gaz Kelebeği Konumu</string>
     <string name="obd_calculated_engine_load_desc">Motorun anlık kullanılabilir gücünü yüzde olarak gösterir.</string>
@@ -5506,7 +5506,7 @@
     <string name="obd_connecting_to_device">%s bağlantısı kuruluyor</string>
     <string name="us_gallons_unit">Galon</string>
     <string name="us_gallons">Amerikan galonu</string>
-    <string name="unit_of_volume"></string>
+    <string name="unit_of_volume"/>
     <string name="speedometer_maximum">Maksimum</string>
     <string name="obd_not_connected_to_device">%s bağlantısı kesildi</string>
     <string name="obd_connected_to_device">%s bağlantısı kuruldu</string>
@@ -5637,7 +5637,7 @@
     <string name="quick_action_photo_note">Fotoğraflı not</string>
     <string name="quick_action_to_my_location">Konumuma</string>
     <string name="rendering_avg_info_details">Son 1000 karedeki FPS: %1$s\nİşlemci (çekirdek): %2$s\nİşlemci (boşta):%3$s\nİşlemci (GPU\'yu bekleyen): %4$s</string>
-    <string name="shared_string_replace"></string>
+    <string name="shared_string_replace"/>
     <string name="quick_action_display_position_in_center">Mevcut konumu her zaman ortada göster</string>
     <string name="quick_action_terrain_color_scheme">Yüzey renk düzeni</string>
     <string name="quick_action_directions_from">Başlangıç noktası</string>

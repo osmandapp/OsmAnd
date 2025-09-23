@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapLayers;
@@ -127,7 +129,12 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		if (subtype != null) {
 			am.setSubType(subtype);
 		}
-		am.setId(renderedObject.getId());
+		Entity.EntityType type = ObfConstants.getOsmEntityType(renderedObject);
+		if (type != null) {
+			long osmId = ObfConstants.getOsmObjectId(renderedObject);
+			long objectId = ObfConstants.createMapObjectIdFromOsmId(osmId, type);
+			am.setId(objectId);
+		}
 		am.setAdditionalInfo(additionalInfo);
 		am.setX(renderedObject.getX());
 		am.setY(renderedObject.getY());

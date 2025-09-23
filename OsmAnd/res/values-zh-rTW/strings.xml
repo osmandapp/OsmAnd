@@ -5490,9 +5490,9 @@
     <string name="ais_port_nmea_local">本機 NMEA 資料接收器的 UDP 連接埠</string>
     <string name="ais_port_nmea_local_description">定義 OsmAnd 接收 NMEA 資料的 UDP 連接埠</string>
     <string name="ais_object_lost_timeouts">AIS 訊號消失顯示逾時時設定</string>
-    <string name="ais_object_lost_timeout">物件訊號消失後顯示逾時時間</string>
-    <string name="ais_ship_lost_timeout">船舶訊號消失後顯示逾時時間。</string>
-    <string name="ais_ship_lost_timeout_description">設定船隻符號顯示逾時時間：劃掉指定時間內未接收到訊號的船隻。</string>
+    <string name="ais_object_lost_timeout">船隻訊號消失後顯示逾時時間</string>
+    <string name="ais_ship_lost_timeout">船隻過期逾時</string>
+    <string name="ais_ship_lost_timeout_description">設定船隻符號顯示過期逾時時間：若在此時間後仍未收到訊號，船隻符號將被劃掉。</string>
     <string name="ais_cpa_settings">與 CPA 相關的設定</string>
     <string name="ais_cpa_settings_description">這些值決定 AIS 物件接近船隻本身位置時的顯示方式。</string>
     <string name="ais_cpa_warning_time">最短距離 (CPA) 前的警告時間</string>

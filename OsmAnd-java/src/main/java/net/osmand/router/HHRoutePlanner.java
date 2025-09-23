@@ -148,7 +148,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return c;
 	}
 
-	public static HHNetworkRouteRes cancelledStatus() {
+	public static <T extends NetworkDBPoint> HHNetworkRouteRes cancelledStatus(HHRoutingContext<T> hctx, TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
+		hctx.clearAll(stPoints, endPoints);
 		return new HHNetworkRouteRes("Routing was cancelled.");
 	}
 	
@@ -170,6 +171,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
 		if (config.CACHE_CALCULATION_CONTEXT) {
+			if (config.cacheCtx != null && config.cacheCtx != hctx) {
+				System.out.printf("Recreate routing cache context %s -> %s \n", config.cacheCtx.hashCode() + "",
+						hctx == null ? "" : hctx.hashCode() + "");
+			}
 			config.cacheCtx = (HHRoutingContext<NetworkDBPoint>) hctx;
 		}
 		if (hctx == null) {
@@ -199,11 +204,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
 			if (finalPnt == null) {
 				printf(SL > 0, " finalPnt is null (stop)\n");
+				hctx.clearAll(stPoints, endPoints);
 				return new HHNetworkRouteRes("No finalPnt found (points might be filtered by params)");
 			}
 			calcCount++;
 			if (progress.isCancelled) {
-				return cancelledStatus();
+				return cancelledStatus(hctx, stPoints, endPoints);
 			}
 			route = createRouteSegmentFromFinalPoint(hctx, finalPnt);
 			time = (System.nanoTime() - time) ;
@@ -215,14 +221,17 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			time = System.nanoTime();
 			recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
 			if (progress.isCancelled) {
-				return cancelledStatus();
+				return cancelledStatus(hctx, stPoints, endPoints);
 			}
 			time = (System.nanoTime() - time);
 			printf((firstIterationTime == 0 || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, "%.2f ms\n", time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
 				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
-					printf(SL > 0, "Too many recalculations (stop)\n");
+					if (SL >= 0) {
+						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx);
+					}
+					hctx.clearAll(stPoints, endPoints);
 					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
@@ -239,7 +248,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long time = System.nanoTime();
 			calcAlternativeRoute(hctx, route, stPoints, endPoints, progress);
 			if (progress.isCancelled) {
-				return cancelledStatus();
+				return cancelledStatus(hctx, stPoints, endPoints);
 			}
 			hctx.stats.altRoutingTime += (System.nanoTime() - time) / 1e6;
 			hctx.stats.routingTime += hctx.stats.altRoutingTime;
@@ -249,7 +258,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			for (HHNetworkRouteRes alt : route.altRoutes) {
 				retrieveSegmentsGeometry(hctx, rrp, alt, hctx.config.ROUTE_ALL_ALT_SEGMENTS, progress);
 				if (progress.isCancelled) {
-					return cancelledStatus();
+					return cancelledStatus(hctx, stPoints, endPoints);
 				}
 			}
 			altRoutes = (System.nanoTime() - time) / 1e6;
@@ -269,7 +278,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.println("  Detailed progress: " + hctx.rctx.calculationProgress.getInfo(null));
 		}
 		if (progress.isCancelled) {
-			return cancelledStatus();
+			return cancelledStatus(hctx, stPoints, endPoints);
 		}
 		if (hctx.config.ROUTE_ALL_SEGMENTS && route.detailed != null) {
 			route.detailed = rrp.prepareResult(hctx.rctx, route.detailed).detailed;
@@ -285,14 +294,20 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		printGCInformation(false);
 		hctx.clearAll(stPoints, endPoints);
-		printf(SL >= 0,
-				"Routing %.1f ms: load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
-				(System.nanoTime() - startTime) / 1e6, 
+		if (SL >= 0) {
+			printFinalMessage("", start, end, startTime, hctx);
+		}
+		return route;
+	}
+
+	private void printFinalMessage(String msg, LatLon start, LatLon end, long startTime, HHRoutingContext<T> hctx) {
+		printf(true,
+				"Routing%s %.1f ms (ctx %s): load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
+				msg, (System.nanoTime() - startTime) / 1e6, hctx.hashCode() + "", 
 				hctx.stats.loadPointsTime, hctx.stats.searchPointsTime,
 				hctx.stats.routingTime, hctx.stats.addQueueTime + hctx.stats.pollQueueTime,
 				hctx.stats.loadEdgesTime, hctx.stats.loadEdgesCnt, hctx.stats.prepTime,
 				hctx.config.toString(start, end), hctx.getRoutingInfo());
-		return route;
 	}
 
 	public static TreeMap<String, String> getFilteredTags(GeneralRouter generalRouter) {

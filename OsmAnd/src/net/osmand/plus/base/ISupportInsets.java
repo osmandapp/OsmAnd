@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
 import java.util.ArrayList;
@@ -45,4 +46,12 @@ public interface ISupportInsets {
 	WindowInsetsCompat getLastRootInsets();
 
 	void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets);
+
+	default int getNavigationBarColorId(){
+		return -1;
+	}
+
+	default void updateNavBarColor(){
+		InsetsUtils.processNavBarColor(this);
+	}
 }
