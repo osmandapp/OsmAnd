@@ -564,6 +564,9 @@ public class OsmandRegions {
 		rd.regionSearchText = getSearchIndex(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
 		rd.regionRoadsDownload = isDownloadOfType(object, ROADS_TYPE);
+		rd.regionJoinMapDownload = isDownloadOfType(object, MAP_JOIN_TYPE);
+		rd.regionJoinRoadsDownload = isDownloadOfType(object, ROADS_JOIN_TYPE);
+
 		return rd;
 	}
 

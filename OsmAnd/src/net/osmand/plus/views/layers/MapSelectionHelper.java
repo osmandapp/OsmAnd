@@ -499,6 +499,9 @@ public class MapSelectionHelper {
 	private boolean isUniqueClickableWay(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull ClickableWay clickableWay) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (selectedObject.object() instanceof Amenity that && clickableWay.getOsmId() == that.getOsmId()) {
+				return false; // skip if ClickableWayAmenity is selected
+			}
 			if (selectedObject.object() instanceof ClickableWay that && clickableWay.getOsmId() == that.getOsmId()) {
 				return false;
 			}

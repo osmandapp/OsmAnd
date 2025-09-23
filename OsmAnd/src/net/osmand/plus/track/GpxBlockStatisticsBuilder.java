@@ -308,7 +308,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataTimeSpan(float timeSpan) {
-		prepareData(app.getString(R.string.shared_string_time_span),
+		prepareData(app.getString(R.string.duration),
 				Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()),
 				R.drawable.ic_action_time_span_16, GPXDataSetType.SPEED, null, ItemType.ITEM_TIME_SPAN);
 	}

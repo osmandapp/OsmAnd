@@ -22,6 +22,7 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ActiveDownloadsDialogFragment extends BaseAlertDialogFragment implements DownloadEvents {
 
@@ -91,11 +92,13 @@ public class ActiveDownloadsDialogFragment extends BaseAlertDialogFragment imple
 				viewHolder.setSilentCancelDownload(true);
 				viewHolder.setShowTypeInDesc(true);
 				viewHolder.setShowProgressInDescr(true);
+				viewHolder.setShowParentRegionName(true);
+				viewHolder.setUseShortName(false);
 				convertView.setTag(viewHolder);
 			}
 			ItemViewHolder viewHolder = (ItemViewHolder) convertView.getTag();
 			IndexItem item = getItem(position);
-			viewHolder.bindDownloadItem(item);
+			viewHolder.bindDownloadItem(Objects.requireNonNull(item));
 			return convertView;
 		}
 	}

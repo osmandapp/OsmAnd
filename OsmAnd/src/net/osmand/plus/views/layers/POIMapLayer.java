@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers;
 import static net.osmand.core.android.MapRendererContext.SELECTED_POI_SECTION;
 import static net.osmand.core.android.MapRendererContext.TOP_PLACES_POI_SECTION;
 import static net.osmand.data.PointDescription.POINT_TYPE_POI;
-import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
@@ -57,6 +56,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -1033,23 +1033,26 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public boolean showMenuAction(@Nullable Object object) {
 		Amenity amenity = getAmenity(object);
 		MapActivity activity = view.getMapActivity();
-		if (activity != null && amenity != null && amenity.getType().getKeyName().equals(ROUTES)) {
-			String subType = amenity.getSubType();
+		if (activity != null && amenity != null) {
 			TravelHelper travelHelper = app.getTravelHelper();
-			if (subType.equals(ROUTE_ARTICLE)) {
+			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
+			if (amenity.isRouteTrack()) {
+				TravelGpx travelGpx = new TravelGpx(amenity);
+				travelHelper.openTrackMenu(travelGpx, activity, amenity.getGpxFileName(null), amenity.getLocation(), false);
+				return true; // TravelGpx
+			} else if (amenity.isRouteArticle()) {
 				String lang = app.getLanguage();
 				lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
 				String name = amenity.getGpxFileName(lang);
 				TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 				if (article == null) {
-					return true;
+					return false;
 				}
 				travelHelper.openTrackMenu(article, activity, name, amenity.getLocation(), false);
-				return true;
-			} else if (amenity.isRouteTrack()) {
-				TravelGpx travelGpx = new TravelGpx(amenity);
-				travelHelper.openTrackMenu(travelGpx, activity, amenity.getGpxFileName(null), amenity.getLocation(), false);
-				return true;
+				return true; // TravelArticle
+			} else if (clickableWayHelper.isClickableWayAmenity(amenity)) {
+				clickableWayHelper.openClickableWayAmenity(amenity, false);
+				return true; // ClickableWay
 			}
 		}
 		return false;
