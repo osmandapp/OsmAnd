@@ -1096,7 +1096,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		if (!excludeUntouchableObjects && isInMeasurementMode() && editingCtx.getSelectedPointPosition() == -1) {
 			PointF point = result.getPoint();
 			if (selectPoint(point.x, point.y, false)) {
-				result.collect(new PlanRoutePoint(editingCtx.getSelectedPointPosition(), editingCtx), this);
+				result.collect(new PlanRoutePoint(editingCtx.getSelectedPointPosition()), this);
 			}
 		}
 	}
@@ -1104,7 +1104,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean showMenuAction(@Nullable Object o) {
 		if (o instanceof PlanRoutePoint point) {
-			selectPoint(point.getIndex());
+			selectPoint(point.getPosition());
 			return true;
 		}
 		return false;
