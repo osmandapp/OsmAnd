@@ -34,6 +34,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionRules;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.Algorithms;
 
@@ -304,8 +305,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-			boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		PointF point = result.getPoint();
 		RotatedTileBox tileBox = result.getTileBox();
 		if (Algorithms.isEmpty(objects) || tileBox.getZoom() < START_ZOOM) {

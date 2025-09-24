@@ -328,8 +328,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		if (isLayerEnabled()) {
 			collectFromPoint(result);
 		}

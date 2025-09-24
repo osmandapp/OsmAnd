@@ -28,6 +28,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionRules;
 import net.osmand.plus.views.layers.SelectedMapObject;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
@@ -118,10 +119,14 @@ public class SelectNavigationPointController {
 	private Pair<LatLon, PointDescription> fetchMapObject(@NonNull OsmandMapTileView mapView,
 	                                                      @NonNull RotatedTileBox tileBox,
 	                                                      @NonNull PointF point) {
+		MapSelectionRules rules = new MapSelectionRules();
+		rules.setUnknownLocation(true);
+		rules.setOnlyTouchableObjects(true);
+
 		MapSelectionResult result = new MapSelectionResult(mapView.getApplication(), tileBox, point);
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
-				provider.collectObjectsFromPoint(result, true, true);
+				provider.collectObjectsFromPoint(result, rules);
 				for (SelectedMapObject selectedMapObject : result.getAllObjects()) {
 					Object object = selectedMapObject.object();
 					LatLon latLon = provider.getObjectLocation(object);

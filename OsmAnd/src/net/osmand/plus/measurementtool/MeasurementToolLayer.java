@@ -32,6 +32,7 @@ import net.osmand.plus.views.Renderable.StandardTrack;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionRules;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.TilePointsProvider;
@@ -1091,9 +1092,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (!excludeUntouchableObjects && isInMeasurementMode() && editingCtx.getSelectedPointPosition() == -1) {
+	public boolean customizeMapSelectionRules(@NonNull MapSelectionRules rules) {
+		if (isInMeasurementMode()) {
+			rules.setOnlyPoints(true);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
+		if (isInMeasurementMode() && !rules.isOnlyTouchableObjects() && editingCtx.getSelectedPointPosition() == -1) {
 			PointF point = result.getPoint();
 			if (selectPoint(point.x, point.y, false)) {
 				result.collect(new PlanRoutePoint(editingCtx.getSelectedPointPosition()), this);

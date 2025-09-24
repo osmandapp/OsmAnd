@@ -663,8 +663,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
@@ -673,7 +672,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		RotatedTileBox tileBox = result.getTileBox();
 		if (tileBox.getZoom() < START_ZOOM
 				|| !settings.SHOW_MAP_MARKERS.get()
-				|| excludeUntouchableObjects
+				|| rules.isOnlyTouchableObjects()
 				|| Algorithms.isEmpty(mapMarkers)) {
 			return;
 		}
@@ -698,14 +697,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean selectMarkerOnSingleTap = settings.SELECT_MARKER_ON_SINGLE_TAP.get();
 
 		for (MapMarker marker : mapMarkers) {
-			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
+			if ((!rules.isUnknownLocation() && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
 					boolean add = mapRenderer != null
 							? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
 							: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
 					if (add) {
-						if (!unknownLocation && selectMarkerOnSingleTap) {
+						if (!rules.isUnknownLocation() && selectMarkerOnSingleTap) {
 							result.collect(marker, this);
 						} else {
 							if (isMarkerOnFavorite(marker) && settings.SHOW_FAVORITES.get()

@@ -846,9 +846,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (result.getTileBox().getZoom() >= 3 && !excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
+		if (result.getTileBox().getZoom() >= 3 && !rules.isOnlyTouchableObjects()) {
 			getMyLocationFromPoint(result);
 		}
 	}

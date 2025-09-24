@@ -461,9 +461,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	// IContextMenuProvider
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
+		if (rules.isOnlyTouchableObjects() || rules.isOnlyPoints()) {
 			return;
 		}
 
