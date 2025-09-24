@@ -5875,4 +5875,6 @@
     <string name="access_pinch_zoom_magnification">Zvětšení sevřením a roztažením prstů</string>
     <string name="access_pinch_zoom_magnification_descr">Při gestech přiblížení použít škálování viewportu namísto diskrétních úrovní přiblížení.</string>
     <string name="lang_en_barebones">Angličtina (základní)</string>
+    <string name="show_spherical_map">Zobrazit sférickou mapu</string>
+    <string name="show_spherical_map_description">Zobrazit sférický model Země</string>
 </resources>
