@@ -60,7 +60,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	// if point is present without map with HH routing it will iterate each time with MAX_POINTS_CLUSTER_ROUTING
 	public static final double MAX_INC_COST_CORR = 10.0;
 	// this constant should dynamically change if route is not found
-	private static final double EXCLUDE_PRIORITY_CONSTANT = 0.2;
+	static final double EXCLUDE_PRIORITY_CONSTANT = 0.0; // see comments below
 	
 	private static boolean ASSERT_COST_INCREASING = false;
 	private static boolean ASSERT_AND_CORRECT_DIST_SMALLER = true;
@@ -371,10 +371,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				// here we always copy array but in C++ we could be more efficient
 				rdo.types = tint.toArray();
 				pnt.rtExclude = !currentCtx.rctx.getRouter().acceptLine(rdo);
-				if (!pnt.rtExclude) {
-					// constant should be reduced if route is not found
-					pnt.rtExclude = currentCtx.rctx.getRouter().defineSpeedPriority(rdo, pnt.end > pnt.start) < EXCLUDE_PRIORITY_CONSTANT;
-				}
+				// This might speed up for certain avoid parameters 
+				// but produces unpredictably wrong results (prefer_unpaved) when shortcuts are calculated - error 300%  
+//				if (!pnt.rtExclude) {
+//					// constant should be reduced if route is not found
+//					pnt.rtExclude = currentCtx.rctx.getRouter().defineSpeedPriority(rdo, pnt.end > pnt.start) < EXCLUDE_PRIORITY_CONSTANT;
+//				}
 				if (pnt.rtExclude) {
 					filtered++;
 				}
