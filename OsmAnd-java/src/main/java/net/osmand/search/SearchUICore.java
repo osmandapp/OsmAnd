@@ -54,6 +54,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -109,6 +110,7 @@ public class SearchUICore {
 		private SearchPhrase phrase;
 		private boolean useLimit;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
+		private static final Integer DOMINATED_CITY_CRITERIA = 5;
 
 		public SearchResultCollection(SearchPhrase phrase) {
 			this.phrase = phrase;
@@ -198,6 +200,7 @@ public class SearchUICore {
 					}
 				}
 			}
+			calculateAddressString();
 			if (SearchUICore.isDebugMode()) {
 				LOG.info("Search results added. Current results=" + this.searchResults.size());
 			}
@@ -216,6 +219,36 @@ public class SearchUICore {
 			return phrase;
 		}
 
+		public void calculateAddressString() {
+			String dominatedCity = "";
+			Map<String, Integer> cities = new TreeMap<String, Integer>();
+			for (SearchResult s : searchResults) {
+				if (!Algorithms.isEmpty(s.cityName)) {
+					Integer freq = cities.get(s.cityName);
+					if (freq == null) {
+						freq = 0;
+					}
+					freq++;
+					if (freq >= DOMINATED_CITY_CRITERIA) {
+						dominatedCity = s.cityName;
+						break;
+					}
+					cities.put(s.cityName, freq);
+
+				}
+			}
+			for (SearchResult s : searchResults) {
+				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
+					String streetName = amenity.getStreetName();
+					if (dominatedCity.equals(s.cityName) && !Algorithms.isEmpty(streetName)) {
+						s.alternateName = streetName + ", " + s.cityName;
+					} else {
+						s.alternateName = s.cityName;
+					}
+				}
+			}
+		}
+		
 		public void sortSearchResults() {
 			if (debugMode) {
 				LOG.info("Sorting search results <" + phrase + "> Results=" + searchResults.size());
@@ -968,9 +1001,6 @@ public class SearchUICore {
 			if (Algorithms.isEmpty(object.localeName) && object.alternateName != null) {
 				object.localeName = object.alternateName;
 				object.alternateName = null;
-			}
-			if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
-				object.alternateName = object.cityName;
 			}
 			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
