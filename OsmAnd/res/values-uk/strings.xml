@@ -5870,7 +5870,7 @@
     <string name="lang_en_barebones">Англійська (базова)</string>
     <string name="shared_sting_osm_link">Посилання OSM</string>
     <string name="show_local_names">Показати місцеві назви</string>
-    <string name="obd_alt_battery_voltage">Напруга акумулятора (адаптер)</string>
+    <string name="obd_alt_battery_voltage">Напруга адаптера</string>
     <string name="liter_single">Літр</string>
     <string name="imperial_gallon">Імперський галон</string>
     <string name="us_gallon">галон США</string>
@@ -5880,4 +5880,6 @@
     <string name="access_pinch_zoom_magnification">Збільшення масштабування щипками</string>
     <string name="access_pinch_zoom_magnification_descr">Використовуйте масштабування області перегляду замість дискретних рівнів масштабування під час жестів збільшення.</string>
     <string name="accessibility_independent_features">Незалежні функції</string>
+    <string name="show_spherical_map">Показати сферичну карту</string>
+    <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
 </resources>
