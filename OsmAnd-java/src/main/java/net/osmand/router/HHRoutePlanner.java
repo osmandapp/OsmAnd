@@ -470,14 +470,14 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			while(it.hasNext()) {
 				it.advance();
 				NetworkDBPointRouteInfo pi = it.value().rt(false);
-				printf(DEBUG_VERBOSE_LEVEL > 1, "\t\t Start point %d cost %.2f, dist = %.2f\n",
+				printf(DEBUG_VERBOSE_LEVEL > 1, "   Start point %d cost %.2f, dist = %.2f\n",
 						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
 			}
 			it = endPoints.iterator();
 			while(it.hasNext()) {
 				it.advance();
 				NetworkDBPointRouteInfo pi = it.value().rt(true);
-				printf(DEBUG_VERBOSE_LEVEL > 1, "\t\t End point %d cost %.2f, dist = %.2f\n",
+				printf(DEBUG_VERBOSE_LEVEL > 1, "   End point %d cost %.2f, dist = %.2f\n",
 						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
 			}
 		}
