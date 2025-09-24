@@ -5859,4 +5859,5 @@
     <string name="access_pinch_zoom_magnification">Zumiranje prstima</string>
     <string name="access_pinch_zoom_magnification_descr">Koristite zum prikaza umesto diskretnih nivoa zumiranja za gestove prstiju.</string>
     <string name="accessibility_independent_features">Nezavisne karakteristike</string>
+    <string name="show_spherical_map_description">Prikaz sferoidnog modela Zemlje</string>
 </resources>
