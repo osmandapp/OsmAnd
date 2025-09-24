@@ -465,25 +465,24 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
-		if (HHRoutingConfig.STATS_VERBOSE_LEVEL > 0) {
+		if (DEBUG_VERBOSE_LEVEL > 1) {
 			TLongObjectIterator<T> it = stPoints.iterator();
-			printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\t Found %d start points", stPoints.size());
 			while(it.hasNext()) {
 				it.advance();
 				NetworkDBPointRouteInfo pi = it.value().rt(false);
-				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\t\t Start point %d cost %.2f, dist = %.2f",
+				printf(DEBUG_VERBOSE_LEVEL > 1, "\t\t Start point %d cost %.2f, dist = %.2f\n",
 						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
 			}
 			it = endPoints.iterator();
-			printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\t Found %d end points", endPoints.size());
 			while(it.hasNext()) {
 				it.advance();
 				NetworkDBPointRouteInfo pi = it.value().rt(true);
-				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\t\t End point %d cost %.2f, dist = %.2f",
+				printf(DEBUG_VERBOSE_LEVEL > 1, "\t\t End point %d cost %.2f, dist = %.2f\n",
 						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
 			}
 		}
-		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first (%d) / last (%d) segments...%.2f ms\n",
+				stPoints.size(), endPoints.size(), hctx.stats.searchPointsTime);
 	}
 
 	private void calcAlternativeRoute(HHRoutingContext<T> hctx, HHNetworkRouteRes route, TLongObjectHashMap<T> stPoints,
