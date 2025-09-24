@@ -5680,7 +5680,7 @@
     <string name="lang_en_barebones">Béarla (lom)</string>
     <string name="shared_sting_osm_link">Nasc OSM</string>
     <string name="show_local_names">Taispeáin ainmneacha áitiúla</string>
-    <string name="obd_alt_battery_voltage">Voltas ceallraí (oiriúntóir)</string>
+    <string name="obd_alt_battery_voltage">Voltas an oiriúnaitheora</string>
     <string name="liter_single">Lítear</string>
     <string name="imperial_gallon">Galún impiriúil</string>
     <string name="us_gallon">Galún SAM</string>
@@ -5690,4 +5690,6 @@
     <string name="access_pinch_zoom_magnification">Formhéadú súmáil pinch</string>
     <string name="access_pinch_zoom_magnification_descr">Bain úsáid as scálú radhairc in ionad leibhéil súmála ar leith le linn gothaí súmála isteach.</string>
     <string name="accessibility_independent_features">Gnéithe neamhspleácha</string>
+    <string name="show_spherical_map">Taispeáin léarscáil sféarúil</string>
+    <string name="show_spherical_map_description">Taispeáin samhail sféaróideach den Domhan</string>
 </resources>

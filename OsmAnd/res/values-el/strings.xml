@@ -5502,4 +5502,5 @@
     <string name="add_to_favorites">Προσθήκη στα αγαπημένα</string>
     <string name="view_on_phone">Προβολή στο Τηλέφωνο</string>
     <string name="private_access_routing_req_short">Ο προορισμός σας είναι σε ιδιωτική περιοχή. Να επιτραπεί η χρήση ιδιωτικών δρόμων;</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Πατήστε το γραφικό στοιχείο για εναλλαγή λειτουργιών.</string>
 </resources>

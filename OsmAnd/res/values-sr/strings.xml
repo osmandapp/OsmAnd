@@ -5847,7 +5847,7 @@
     <string name="lang_en_barebones">Енглески (основни)</string>
     <string name="shared_sting_osm_link">Веза ОСМ-а</string>
     <string name="show_local_names">Прикажи локална имена</string>
-    <string name="obd_alt_battery_voltage">Напон батерије (пуњач)</string>
+    <string name="obd_alt_battery_voltage">Напон пуњача</string>
     <string name="liter_single">Литар</string>
     <string name="imperial_gallon">Империјални галон</string>
     <string name="us_gallon">Амерички галон</string>
@@ -5857,4 +5857,6 @@
     <string name="access_pinch_zoom_magnification">Увећање приближавања штипањем прстију</string>
     <string name="access_pinch_zoom_magnification_descr">Користите сразмерно увећање приказа уместо постепених увећања приликом знакова приближавања.</string>
     <string name="accessibility_independent_features">Независне карактеристике</string>
+    <string name="show_spherical_map">Прикажи сферичну мапу</string>
+    <string name="show_spherical_map_description">Приказ сфероидног модела Земље</string>
 </resources>

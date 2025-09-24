@@ -258,4 +258,9 @@
     <string name="buffer_time_descr">Μέγιστος χρόνος για την αποθήκευση σημείων στην ενδιάμεση μνήμη</string>
     <string name="buffer_time">Χρόνος λήξης ενδιάμεσης μνήμης</string>
     <string name="gps_points_in_buffer">απεστάλησαν (%1$d στην ενδιάμεση μνήμη)</string>
+    <string name="timeline_available_for_free_now">Το χρονολόγιο είναι χαρακτηριστικό διαθέσιμο τώρα δωρεάν.</string>
+    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="battery_optimization_description">Απενεργοποιήστε την βελτιστοποίηση μπαταρίας για το OsmAnd Tracker ώστε να μην σβήσει ξαφνικά όσο είναι στο παρασκήνιο.</string>
+    <string name="logout_from_osmand_telegram_descr">Σίγουρα θέλετε να αποσυνδεθείτε από το OsmAnd Tracker ώστε να μην κοινοποιείτε την τοποθεσία ή να βλέπετε την τοποθεσία των άλλων;</string>
+    <string name="logout_from_osmand_telegram">Αποσύνδεση από το OsmAnd Tracker;</string>
 </resources>

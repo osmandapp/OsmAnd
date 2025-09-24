@@ -79,6 +79,10 @@ public class SavedArticlesTabFragment extends BaseFullScreenFragment implements 
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		if (adapter != null && adapter.getItemCount() == 0) {
+			savedArticlesUpdated();
+		}
 		if (dataHelper != null) {
 			dataHelper.addListener(this);
 		}

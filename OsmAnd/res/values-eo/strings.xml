@@ -5860,7 +5860,7 @@
     <string name="release_5_2">• Versio estas prilaborata…</string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
-    <string name="obd_alt_battery_voltage">Tensio de baterio (adaptilo)</string>
+    <string name="obd_alt_battery_voltage">Tensio de adaptilo</string>
     <string name="liter_single">litro</string>
     <string name="imperial_gallon">brita galono</string>
     <string name="us_gallon">usona galjono</string>
@@ -5870,4 +5870,6 @@
     <string name="access_pinch_zoom_magnification">Pinĉi por momente pligrandigi</string>
     <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestoj de pligrandigo.</string>
     <string name="accessibility_independent_features">Sendependaj ebloj</string>
+    <string name="show_spherical_map">Vidigi sferan mapon</string>
+    <string name="show_spherical_map_description">Vidigi sferoidan modelon de Tero</string>
 </resources>

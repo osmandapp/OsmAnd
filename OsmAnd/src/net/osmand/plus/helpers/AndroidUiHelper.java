@@ -230,42 +230,46 @@ public class AndroidUiHelper {
 	private static void setupSystemBarScrims(@NonNull Window window) {
 		View decorView = window.getDecorView();
 		ViewCompat.setOnApplyWindowInsetsListener(decorView, (v, insets) -> {
-			View statusBarScrim = v.findViewById(R.id.status_bar_scrim);
-			if (statusBarScrim != null) {
-				Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars()
-						| WindowInsetsCompat.Type.displayCutout()
-				);
-				ViewGroup.LayoutParams params = statusBarScrim.getLayoutParams();
-				if (params.height != statusBarInsets.top) {
-					params.height = statusBarInsets.top;
-					statusBarScrim.setLayoutParams(params);
-				}
-			}
-			View navBarScrim = v.findViewById(R.id.navigation_bar_scrim);
-			if (navBarScrim != null) {
-				Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
-				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) navBarScrim.getLayoutParams();
-				if (navBarInsets.bottom > 0) {
-					params.height = navBarInsets.bottom;
-					params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-					params.gravity = Gravity.BOTTOM;
-				} else if (navBarInsets.left > 0) {
-					params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-					params.width = navBarInsets.left;
-					params.gravity = Gravity.START;
-				} else if (navBarInsets.right > 0) {
-					params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-					params.width = navBarInsets.right;
-					params.gravity = Gravity.END;
-				} else {
-					params.height = 0;
-					params.width = 0;
-				}
-				navBarScrim.setLayoutParams(params);
-			}
+			processSystemBarScrims(insets, v);
 			return insets;
 		});
 		ViewCompat.requestApplyInsets(decorView);
+	}
+
+	public static void processSystemBarScrims(@NonNull WindowInsetsCompat insets, @NonNull View view) {
+		View statusBarScrim = view.findViewById(R.id.status_bar_scrim);
+		if (statusBarScrim != null) {
+			Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars()
+					| WindowInsetsCompat.Type.displayCutout()
+			);
+			ViewGroup.LayoutParams params = statusBarScrim.getLayoutParams();
+			if (params.height != statusBarInsets.top) {
+				params.height = statusBarInsets.top;
+				statusBarScrim.setLayoutParams(params);
+			}
+		}
+		View navBarScrim = view.findViewById(R.id.navigation_bar_scrim);
+		if (navBarScrim != null) {
+			Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) navBarScrim.getLayoutParams();
+			if (navBarInsets.bottom > 0) {
+				params.height = navBarInsets.bottom;
+				params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+				params.gravity = Gravity.BOTTOM;
+			} else if (navBarInsets.left > 0) {
+				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+				params.width = navBarInsets.left;
+				params.gravity = Gravity.START;
+			} else if (navBarInsets.right > 0) {
+				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+				params.width = navBarInsets.right;
+				params.gravity = Gravity.END;
+			} else {
+				params.height = 0;
+				params.width = 0;
+			}
+			navBarScrim.setLayoutParams(params);
+		}
 	}
 
 	public static void setStatusBarContentColor(@Nullable View view, boolean nightMode) {
