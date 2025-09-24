@@ -5813,7 +5813,7 @@
     <string name="add_to_favorites">Přidat k oblíbeným</string>
     <string name="max_weight_at_full_load_description">Uveďte maximální hmotnost vašeho vozidla při plném naložení, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
     <string name="max_axle_load_description">Uveďte maximální nosnost náprav svého vozidla, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
-    <string name="obd_alt_battery_voltage">Napětí baterie (adaptér)</string>
+    <string name="obd_alt_battery_voltage">Napětí adaptéru</string>
     <string name="liter_single">Litr</string>
     <string name="miles">Míle</string>
     <string name="mpg">MPG</string>
