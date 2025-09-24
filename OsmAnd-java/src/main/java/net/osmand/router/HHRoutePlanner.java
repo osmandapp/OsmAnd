@@ -16,6 +16,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
 
+import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -41,6 +42,7 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointCost;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPointRouteInfo;
 import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
 import net.osmand.router.HHRouteDataStructure.RoutingStats;
 import net.osmand.router.RouteCalculationProgress.HHIteration;
@@ -463,6 +465,24 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
+		if (HHRoutingConfig.STATS_VERBOSE_LEVEL > 1) {
+			TLongObjectIterator<T> it = stPoints.iterator();
+			printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 1, "\t Found %d start points", stPoints.size());
+			while(it.hasNext()) {
+				it.advance();
+				NetworkDBPointRouteInfo pi = it.value().rt(false);
+				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 1, "\t\t Start point %d cost %.2f, dist = %.2f",
+						pi.rtRouteToPoint.index, pi.rtCost, pi.rtDistanceFromStart);	
+			}
+			it = endPoints.iterator();
+			printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 1, "\t Found %d end points", endPoints.size());
+			while(it.hasNext()) {
+				it.advance();
+				NetworkDBPointRouteInfo pi = it.value().rt(true);
+				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 1, "\t\t End point %d cost %.2f, dist = %.2f",
+						pi.rtRouteToPoint.index, pi.rtCost, pi.rtDistanceFromStart);	
+			}
+		}
 		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
 	}
 
