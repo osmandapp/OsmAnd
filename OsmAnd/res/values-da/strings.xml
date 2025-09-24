@@ -5895,7 +5895,7 @@
     <string name="rendering_attr_spotDistance_description">Punkt‑dybdemåling afstand</string>
     <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
     <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
-    <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
+    <string name="obd_alt_battery_voltage">Adapterspænding</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Britisk gallon</string>
     <string name="us_gallon">Amerikansk gallon</string>
@@ -5905,4 +5905,6 @@
     <string name="access_pinch_zoom_magnification">Forstørrelse med knibezoom</string>
     <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering i stedet for separate zoom-niveauer ved zoom-bevægelser.</string>
     <string name="accessibility_independent_features">Uafhængige funktioner</string>
+    <string name="show_spherical_map">Vis sfærisk kort</string>
+    <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
 </resources>
