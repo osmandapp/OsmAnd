@@ -472,7 +472,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				it.advance();
 				NetworkDBPointRouteInfo pi = it.value().rt(false);
 				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\t\t Start point %d cost %.2f, dist = %.2f",
-						pi.rtRouteToPoint.index, pi.rtCost, pi.rtDistanceFromStart);	
+						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
 			}
 			it = endPoints.iterator();
 			printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\t Found %d end points", endPoints.size());
@@ -480,7 +480,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				it.advance();
 				NetworkDBPointRouteInfo pi = it.value().rt(true);
 				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\t\t End point %d cost %.2f, dist = %.2f",
-						pi.rtRouteToPoint.index, pi.rtCost, pi.rtDistanceFromStart);	
+						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
 			}
 		}
 		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
