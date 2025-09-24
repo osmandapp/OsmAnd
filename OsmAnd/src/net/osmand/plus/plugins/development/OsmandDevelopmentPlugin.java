@@ -94,6 +94,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
 	private final StateChangedListener<Boolean> msaaListener;
+	private final StateChangedListener<Boolean> sphericalListener;
 
 	private static final Log LOG_termal = PlatformUtil.getLog("ThermalState");
 
@@ -152,6 +153,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			recreateAndroidAutoRenderer();
 		};
 		settings.ENABLE_MSAA.addListener(msaaListener);
+
+		sphericalListener = change -> {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				mapRenderer.setFlatEarth(!settings.SPHERICAL_MAP.get());
+			}
+		};
+		settings.SPHERICAL_MAP.addListener(sphericalListener);
 	}
 
 	@Override
