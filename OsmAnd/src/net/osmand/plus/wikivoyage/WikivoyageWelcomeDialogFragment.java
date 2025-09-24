@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 
 import java.util.ArrayList;
@@ -25,6 +26,11 @@ import java.util.List;
 public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 
 	public static final String TAG = WikivoyageWelcomeDialogFragment.class.getSimpleName();
+
+	@Override
+	protected int getStatusBarColorId() {
+		return -1;
+	}
 
 	@Nullable
 	@Override

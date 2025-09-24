@@ -1,5 +1,7 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.plus.helpers.AndroidUiHelper.processSystemBarScrims;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -150,6 +152,7 @@ public class InsetsUtils {
 			processCollapsingAppBarLayoutInsets(insets, collapsingAppBarLayoutIds, insetSides, processedView);
 			processFabInsets(insets, fabs, processedView);
 			processRootInsetSides(insetSupportedFragment, insets, insetSides, processedView);
+			processSystemBarScrims(insets, v);
 
 			insetSupportedFragment.setLastRootInsets(insets);
 			insetSupportedFragment.onApplyInsets(insets);
