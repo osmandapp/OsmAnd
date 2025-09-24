@@ -32,6 +32,7 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -47,6 +48,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class HelpMainFragment extends BaseFullScreenFragment implements OnItemClickListener, OnItemLongClickListener {
 
@@ -63,6 +65,12 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 	@Override
 	public int getStatusBarColorId() {
 		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
+
+	@Nullable
+	@Override
+	public Set<InsetSide> getRootInsetSides() {
+		return null;
 	}
 
 	@Override

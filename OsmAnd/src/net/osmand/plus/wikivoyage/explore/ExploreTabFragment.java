@@ -87,6 +87,10 @@ public class ExploreTabFragment extends BaseFullScreenFragment implements Downlo
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		if (adapter != null && adapter.getItemCount() == 0) {
+			populateData();
+		}
 		app.getTravelHelper().getBookmarksHelper().addListener(this);
 	}
 
@@ -106,38 +110,38 @@ public class ExploreTabFragment extends BaseFullScreenFragment implements Downlo
 
 	@Override
 	public void downloadInProgress() {
-			IndexItem current = app.getDownloadThread().getCurrentDownloadingItem();
-			if (current != null && current != currentDownloadingIndexItem) {
-				currentDownloadingIndexItem = current;
-				removeRedundantCards();
-			}
-			adapter.updateDownloadUpdateCard(true);
-			adapter.updateNeededMapsCard(true);
+		IndexItem current = app.getDownloadThread().getCurrentDownloadingItem();
+		if (current != null && current != currentDownloadingIndexItem) {
+			currentDownloadingIndexItem = current;
+			removeRedundantCards();
+		}
+		adapter.updateDownloadUpdateCard(true);
+		adapter.updateNeededMapsCard(true);
 	}
 
 	@Override
 	public void downloadHasFinished() {
-			TravelHelper travelHelper = app.getTravelHelper();
-			if (travelHelper.isAnyTravelBookPresent()) {
-				app.getTravelHelper().initializeDataOnAppStartup();
-				WikivoyageExploreActivity exploreActivity = getExploreActivity();
-				if (exploreActivity != null) {
-					exploreActivity.populateData(true);
-				}
-			} else {
-				removeRedundantCards();
+		TravelHelper travelHelper = app.getTravelHelper();
+		if (travelHelper.isAnyTravelBookPresent()) {
+			app.getTravelHelper().initializeDataOnAppStartup();
+			WikivoyageExploreActivity exploreActivity = getExploreActivity();
+			if (exploreActivity != null) {
+				exploreActivity.populateData(true);
 			}
+		} else {
+			removeRedundantCards();
+		}
 	}
 
 	@Override
 	public void savedArticlesUpdated() {
-			DownloadIndexesThread downloadThread = app.getDownloadThread();
-			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-				waitForIndexes = true;
-				downloadThread.runReloadIndexFilesSilent();
-			} else {
-				checkDownloadIndexes();
-			}
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			waitForIndexes = true;
+			downloadThread.runReloadIndexFilesSilent();
+		} else {
+			checkDownloadIndexes();
+		}
 	}
 
 	@Nullable
