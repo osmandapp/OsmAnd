@@ -134,7 +134,7 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.setAzimuth(0);
 			atlasMapRendererView.removeAllSymbolsProviders();
 			atlasMapRendererView.resumeSymbolsUpdate();
-			atlasMapRendererView.setFlatEarth(!settings.SPHERICAL_MAP.get());
+			//atlasMapRendererView.setFlatEarth(!settings.SPHERICAL_MAP.get());
 			float elevationAngle = mapView.normalizeElevationAngle(settings.getLastKnownMapElevation());
 			atlasMapRendererView.setElevationAngle(elevationAngle);
 			atlasMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
