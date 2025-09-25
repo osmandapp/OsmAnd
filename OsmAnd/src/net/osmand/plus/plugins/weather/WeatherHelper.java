@@ -206,17 +206,21 @@ public class WeatherHelper {
 	}
 
 	public void updateWeatherSource() {
-		WeatherTileResourcesManager weatherResourcesManager = getWeatherResourcesManager();
-		if (weatherResourcesManager == null) {
-			return;
-		}
-		
 		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (plugin == null) {
 			return;
 		}
 		
 		WeatherSource weatherSource = plugin.getWeatherSource();
+		updateWeatherSource(weatherSource);
+	}
+
+	public void updateWeatherSource(WeatherSource weatherSource) {
+		WeatherTileResourcesManager weatherResourcesManager = getWeatherResourcesManager();
+		if (weatherResourcesManager == null) {
+			return;
+		}
+		
 		net.osmand.core.jni.WeatherSource coreWeatherSource;
 		
 		if (weatherSource == WeatherSource.ECMWF) {
