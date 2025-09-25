@@ -23,7 +23,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.receivers.AndroidAutoActionReceiver;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.TalkbackUtils;
@@ -45,7 +44,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	private boolean activityDestroyed;
 	private boolean activityHiddenForTalkback = false;
 	private FragmentLifecycleCallbacks lifecycleCallbacks = TalkbackUtils.getLifecycleCallbacks(this);
-	private final AndroidAutoActionReceiver androidAutoReceiver = new AndroidAutoActionReceiver();
 
 	@Override
 	protected void attachBaseContext(Context newBase) {
@@ -58,8 +56,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	@Override
 	protected void onResume() {
 		super.onResume();
-		androidAutoReceiver.setActivity(this);
-		AndroidUtils.registerBroadcastReceiver(this, AndroidAutoActionReceiver.INTENT_SHOW_FRAGMENT, androidAutoReceiver, true);
 		initInAppPurchaseHelper();
 		getSupportFragmentManager().registerFragmentLifecycleCallbacks(lifecycleCallbacks, false);
 	}
@@ -67,8 +63,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	@Override
 	protected void onPause() {
 		super.onPause();
-		unregisterReceiver(androidAutoReceiver);
-		androidAutoReceiver.setActivity(null);
 		getSupportFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
 	}
 
