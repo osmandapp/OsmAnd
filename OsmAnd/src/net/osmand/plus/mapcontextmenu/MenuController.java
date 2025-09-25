@@ -283,9 +283,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return menuController;
 	}
 
-	public void update(PointDescription pointDescription, Object object) {
+	public void update(PointDescription pointDescription, Object object, LatLon latLon) {
 		setPointDescription(pointDescription);
 		setObject(object);
+		setLatLon(latLon);
 	}
 
 	protected void setPointDescription(PointDescription pointDescription) {

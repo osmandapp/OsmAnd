@@ -17,12 +17,13 @@ public class AddPlanRoutePointButtonController extends BottomButtonController {
 	public void buttonPressed() {
 		MapActivity mapActivity = controller.getMapActivity();
 		if (mapActivity != null) {
+			MapContextMenu menu = mapActivity.getContextMenu();
 			LatLon latLon = controller.getLatLon();
 			MeasurementToolFragment fragment = mapActivity.getFragmentsHelper().getMeasurementToolFragment();
 			if (fragment != null && latLon != null) {
 				fragment.addPoint(latLon);
 			}
-			mapActivity.getContextMenu().hide();
+			menu.hide();
 		}
 	}
 }
