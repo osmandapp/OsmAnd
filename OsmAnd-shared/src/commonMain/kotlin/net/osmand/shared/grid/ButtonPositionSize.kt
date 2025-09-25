@@ -328,8 +328,18 @@ class ButtonPositionSize {
 				}
 			}
 
-			var newX = if (planX) space + overlap.marginX + overlap.width else toMove.marginX
-			var newY = if (planY) space + overlap.marginY + overlap.height else toMove.marginY
+			val desiredX = space + overlap.marginX + overlap.width
+			val desiredY = space + overlap.marginY + overlap.height
+			var newX = if (planX) desiredX else toMove.marginX
+			var newY = if (planY) desiredY else toMove.marginY
+			if (planY && desiredY < toMove.marginY && !overlap.isFullWidth) {
+				newY = toMove.marginY
+				if (!planX) newX = desiredX
+			}
+			if (planY && !overlap.isFullWidth && (newY + toMove.height > totalHeight)) {
+				newY = toMove.marginY
+				if (!planX) newX = desiredX
+			}
 			if (newX + toMove.width > totalWidth) {
 				newX = max(0, totalWidth - toMove.width)
 				if (!planY) {
