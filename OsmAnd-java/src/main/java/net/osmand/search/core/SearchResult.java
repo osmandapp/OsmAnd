@@ -321,4 +321,8 @@ public class SearchResult {
 	public boolean isFullPhraseEqualLocaleName() {
 		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
 	}
+
+	public long getId() {
+		return file.getId(this);
+	}
 }

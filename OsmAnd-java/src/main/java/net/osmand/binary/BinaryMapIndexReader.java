@@ -10,18 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +19,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -2993,9 +2985,72 @@ public class BinaryMapIndexReader {
 		}
 	}
 
-	
 	@Override
 	public String toString() {
 		return file.getName();
+	}
+
+	private Map<String, String> getTags(BinaryMapDataObject obj) {
+		Map<String, String> tags = new HashMap<>();
+
+		TIntObjectHashMap<String> names = obj.objectNames;
+		int[] keys = names.keys();
+		for (int key : keys) {
+			TagValuePair pair = obj.getMapIndex().decodeType(key);
+			if (pair == null)
+				continue;
+
+			String v = names.get(key);
+			if (v != null) {
+				tags.put(pair.tag, v);
+			}
+
+		}
+		return tags;
+	}
+
+	public long getId(SearchResult result) {
+		if (result.location == null || result.localeName == null)
+			return -1;
+
+		final double d = 0.0005; // ~55m at the equator – tight enough to target the object
+		LatLon p1 = new LatLon(result.location.getLatitude() + d, result.location.getLongitude() - d);
+		LatLon p2 = new LatLon(result.location.getLatitude() - d, result.location.getLongitude() + d);
+
+		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> request = new BinaryMapIndexReader.SearchRequest<>();
+		request.left = MapUtils.get31TileNumberX(p1.getLongitude());
+		request.right = MapUtils.get31TileNumberX(p2.getLongitude());
+		request.top = MapUtils.get31TileNumberY(p1.getLatitude());
+		request.bottom = MapUtils.get31TileNumberY(p2.getLatitude());
+
+		request.resultMatcher = new ResultMatcher<>() {
+			@Override
+			public boolean publish(BinaryMapDataObject obj) {
+				// Use address tags to match SearchResult types against BinaryMapDataObject names
+				String tag = ObjectType.HOUSE.equals(result.objectType) ? "addr:housenumber" : "name";
+				Map<String, String> tags = getTags(obj);
+				if (tags.isEmpty())
+					return false;
+
+				String value = tags.get(tag);
+				return value != null && value.equals(result.localeName);
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+
+		List<BinaryMapDataObject> found;
+		try {
+			found = searchMapIndex(request);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		if (!found.isEmpty()) {
+			return found.get(0).id;
+		}
+		return -1;
 	}
 }
