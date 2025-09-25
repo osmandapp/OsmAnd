@@ -65,7 +65,6 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -91,9 +90,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
@@ -129,6 +126,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
 	private BoundsChangeListener mainViewBoundsChangeListener;
+	private OnBackPressedCallback backPressedCallback;
 	private boolean forceUpdateLayout;
 
 	private boolean portrait;
@@ -185,18 +183,6 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		menu = mapActivity.getContextMenu();
 		mainViewBoundsChangeListener = new BoundsChangeListener(displayPositionManager, false);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		boolean enabled = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment() == null;
-		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
-			public void handleOnBackPressed() {
-				if (menu.isVisible() && menu.isClosable()) {
-					if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
-						menu.openMenuHeaderOnly();
-					} else {
-						menu.close();
-					}
-				}
-			}
-		});
 
 		DialogManager dialogManager = mapActivity.getApp().getDialogManager();
 		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
@@ -602,6 +588,25 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		fitPolygon();
 		created = true;
 		return view;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		MapActivity activity = requireMapActivity();
+		boolean enabled = activity.getFragmentsHelper().getQuickSearchDialogFragment() == null;
+		backPressedCallback = new OnBackPressedCallback(enabled) {
+			public void handleOnBackPressed() {
+				if (menu.isVisible() && menu.isClosable()) {
+					if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
+						menu.openMenuHeaderOnly();
+					} else {
+						menu.close();
+					}
+				}
+			}
+		};
+		view.post(() -> activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback));
 	}
 
 	@Nullable
@@ -1413,6 +1418,10 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			MapLayers mapLayers = activity.getMapLayers();
 			List<MapButton> mapButtons = Arrays.asList(zoomInButton, zoomOutButton);
 			mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
+		}
+		if (backPressedCallback != null) {
+			backPressedCallback.remove();
+			backPressedCallback = null;
 		}
 	}
 

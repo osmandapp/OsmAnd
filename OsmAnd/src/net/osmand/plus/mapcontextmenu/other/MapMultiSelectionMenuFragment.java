@@ -49,6 +49,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	private ListView listView;
 	private MultiSelectionArrayAdapter listAdapter;
 	private MapMultiSelectionMenu menu;
+	private OnBackPressedCallback backPressedCallback;
 
 	private int minHeight;
 	private boolean initialScroll = true;
@@ -63,13 +64,6 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 		super.onCreate(savedInstanceState);
-
-		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				menu.hide();
-			}
-		});
 	}
 
 	@Nullable
@@ -150,6 +144,20 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		cancelRow.setOnClickListener(view -> menu.hide());
 		updateUi();
 		return view;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		backPressedCallback = new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				if (menu != null) {
+					menu.hide();
+				}
+			}
+		};
+		view.post(() -> requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback));
 	}
 
 	@Override
@@ -298,6 +306,15 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 				}
 			}
 		});
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (backPressedCallback != null) {
+			backPressedCallback.remove();
+			backPressedCallback = null;
+		}
 	}
 
 	@Nullable
