@@ -3,7 +3,7 @@ package net.osmand.plus.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import net.osmand.plus.activities.MapActivity
+import androidx.appcompat.app.AppCompatActivity
 import net.osmand.plus.routepreparationmenu.RequiredMapsFragment
 import net.osmand.util.Algorithms
 
@@ -13,7 +13,7 @@ class AndroidAutoActionReceiver : BroadcastReceiver() {
 		const val INTENT_KEY_SHOW_FRAGMENT_NAME: String = "INTENT_KEY_SHOW_FRAGMENT_NAME"
 	}
 
-	var activity: MapActivity? = null
+	var activity: AppCompatActivity? = null
 
 	override fun onReceive(context: Context, intent: Intent) {
 		activity?.apply {
