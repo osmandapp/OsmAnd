@@ -423,7 +423,7 @@ public class GeocodingUtilities {
 	
 	public static RoutingContext buildDefaultContextForPOI(BinaryMapIndexReader index) throws FileNotFoundException, IOException {
 		BinaryMapIndexReader geocoding = new BinaryMapIndexReader(new RandomAccessFile(index.getFile(), "r"), index);
-		RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
+		RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
 		RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", memoryLimit);
 		RoutingContext ctx = new RoutePlannerFrontEnd().buildRoutingContext(config, null, new BinaryMapIndexReader[] {geocoding}, RouteCalculationMode.NORMAL);
 		return ctx;
