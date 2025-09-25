@@ -12,13 +12,18 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,6 +116,17 @@ public class GeocodingUtilities {
 			}
 			return dist;
 		}
+		
+		public String getBuildingString() {
+			if (building != null) {
+				if(buildingInterpolation != null) {
+					return buildingInterpolation;
+				} else {
+					return building.getName();
+				}
+			}
+			return null;
+		}
 
 		public void resetDistance() {
 			dist = -1;
@@ -127,12 +143,9 @@ public class GeocodingUtilities {
 		@Override
 		public String toString() {
 			StringBuilder bld = new StringBuilder();
-			if (building != null) {
-				if(buildingInterpolation != null) {
-					bld.append(buildingInterpolation);
-				} else {
-					bld.append(building.getName());
-				}
+			String bldStr = getBuildingString();
+			if (bldStr != null) {
+				bld.append(bldStr);
 			}
 			if (street != null) {
 				bld.append(" str. ").append(street.getName()).append(" city ").append(city.getName());
@@ -406,6 +419,14 @@ public class GeocodingUtilities {
 			}
 		}
 		return streetBuildings;
+	}
+	
+	public static RoutingContext buildDefaultContextForPOI(BinaryMapIndexReader index) throws FileNotFoundException, IOException {
+		BinaryMapIndexReader geocoding = new BinaryMapIndexReader(new RandomAccessFile(index.getFile(), "r"), index);
+		RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
+		RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", memoryLimit);
+		RoutingContext ctx = new RoutePlannerFrontEnd().buildRoutingContext(config, null, new BinaryMapIndexReader[] {geocoding}, RouteCalculationMode.NORMAL);
+		return ctx;
 	}
 
 	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {
