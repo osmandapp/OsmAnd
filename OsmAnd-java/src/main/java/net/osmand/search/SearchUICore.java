@@ -240,10 +240,12 @@ public class SearchUICore {
 			for (SearchResult s : searchResults) {
 				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
 					String streetName = amenity.getStreetName();
+					String hno = amenity.getHousenumber();
+					String addr = streetName + (Algorithms.isEmpty(hno) ? "" : " " + hno);
 					if (dominatedCity.equals(s.cityName) && !Algorithms.isEmpty(streetName)) {
-						s.alternateName = streetName + ", " + s.cityName;
+						s.alternateName = addr + ", " + s.cityName;
 					} else {
-						s.alternateName = s.cityName;
+						s.alternateName = s.cityName + ", " + addr;
 					}
 				}
 			}
