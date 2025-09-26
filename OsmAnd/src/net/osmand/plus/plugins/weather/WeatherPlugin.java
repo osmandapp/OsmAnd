@@ -93,6 +93,10 @@ import java.util.Date;
 import java.util.List;
 
 public class WeatherPlugin extends OsmandPlugin {
+	
+	public interface WeatherSourceChangeListener {
+		void onWeatherSourceChanged(WeatherSource newSource);
+	}
 
 	private static final Log log = PlatformUtil.getLog(WeatherPlugin.class);
 
@@ -106,6 +110,8 @@ public class WeatherPlugin extends OsmandPlugin {
 	private WeatherRasterLayer weatherLayerLow;
 	private WeatherRasterLayer weatherLayerHigh;
 	private WeatherContourLayer weatherContourLayer;
+	
+	private final List<WeatherSourceChangeListener> weatherSourceChangeListeners = new ArrayList<>();
 
 	@Nullable
 	private Date forecastDate;
@@ -478,8 +484,22 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	public void setWeatherSource(WeatherSource source) {
+		weatherHelper.updateWeatherSource(source);
 		weatherSettings.weatherSource.set(source.getSettingValue());
-		weatherHelper.updateWeatherSource();
+
+		for (WeatherSourceChangeListener listener : weatherSourceChangeListeners) {
+			listener.onWeatherSourceChanged(source);
+		}
+	}
+	
+	public void addWeatherSourceChangeListener(WeatherSourceChangeListener listener) {
+		if (!weatherSourceChangeListeners.contains(listener)) {
+			weatherSourceChangeListeners.add(listener);
+		}
+	}
+	
+	public void removeWeatherSourceChangeListener(WeatherSourceChangeListener listener) {
+		weatherSourceChangeListeners.remove(listener);
 	}
 
 	public boolean isAnyWeatherContourLinesEnabled() {

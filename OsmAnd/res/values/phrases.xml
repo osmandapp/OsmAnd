@@ -4177,13 +4177,13 @@
 
 	<string name="poi_rescue_box">Rescue box</string>
 
-	<string name="poi_hazard_additional_erosion">Hazard: erosion</string>
-	<string name="poi_hazard_additional_falling_rocks">Hazard: rockfall</string>
-	<string name="poi_hazard_additional_nuclear">Hazard: nuclear</string>
-	<string name="poi_hazard_additional_flood">Hazard: flood</string>
-	<string name="poi_hazard_additional_avalanche">Hazard: avalanche</string>
-	<string name="poi_hazard_additional_minefield">Hazard: minefield</string>
-	<string name="poi_hazard_additional_contamination">Hazard: contamination</string>
+	<string name="poi_hazard_additional_erosion">Erosion</string>
+	<string name="poi_hazard_additional_falling_rocks">Rockfall</string>
+	<string name="poi_hazard_additional_nuclear">Nuclear</string>
+	<string name="poi_hazard_additional_flood">Flood</string>
+	<string name="poi_hazard_additional_avalanche">Avalanche</string>
+	<string name="poi_hazard_additional_minefield">Minefield</string>
+	<string name="poi_hazard_additional_contamination">Contamination</string>
 
 	<string name="poi_defibrillator_location">Location</string>
 
@@ -5740,5 +5740,19 @@
 	<string name="poi_canoe_egress">Canoe take-out</string>
 	<string name="poi_canoe_put_in_egress">Canoe launch and take-out</string>
 	<string name="poi_whitewater_hazard">Whitewater hazard</string>
+
+	<string name="poi_hazard_additional_hole">Hole</string>
+	<string name="poi_hazard_additional_curve">Curve</string>
+	<string name="poi_hazard_additional_curves">Curves</string>
+	<string name="poi_hazard_additional_pedestrians">Pedestrians</string>
+	<string name="poi_hazard_additional_children">Children</string>
+	<string name="poi_hazard_additional_animal_crossing">Animal crossing</string>
+	<string name="poi_hazard_additional_dangerous_junction">Dangerous junction</string>
+	<string name="poi_hazard_additional_school_zone">School zone</string>
+	<string name="poi_hazard_additional_cyclists">Cyclists</string>
+	<string name="poi_hazard_additional_shooting_range">Shooting range</string>
+	<string name="poi_hazard_additional_queues_likely">Queues likely</string>
+	<string name="poi_hazard_additional_side_winds">Side winds</string>
+	<string name="poi_hazard_additional_ice">Ice</string>
 
 </resources>

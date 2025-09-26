@@ -50,6 +50,7 @@ import java.util.List;
 public class RequiredMapsFragment extends BaseFullScreenDialogFragment implements IAskRefreshDialogCompletely, DownloadEvents {
 
 	private static final String TAG = RequiredMapsFragment.class.getSimpleName();
+	public static final String OPEN_FRAGMENT_KEY = "REQUIRED_MAPS_FRAGMENT_OPEN_FRAGMENT_KEY";
 
 	private View view;
 

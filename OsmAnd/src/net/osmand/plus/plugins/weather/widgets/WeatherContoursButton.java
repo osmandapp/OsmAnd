@@ -30,6 +30,7 @@ import java.util.List;
 public class WeatherContoursButton extends MapButton {
 
 	private final WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+    private WeatherPlugin.WeatherSourceChangeListener weatherSourceChangeListener;
 
 	public WeatherContoursButton(@NonNull Context context) {
 		this(context, null);
@@ -42,6 +43,22 @@ public class WeatherContoursButton extends MapButton {
 	public WeatherContoursButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		setOnClickListener(v -> chooseContours());
+
+        if (plugin != null) {
+            weatherSourceChangeListener = newSource -> {
+                if (newSource == net.osmand.plus.plugins.weather.enums.WeatherSource.ECMWF) {
+                    WeatherContour selected = plugin.getSelectedForecastContoursType();
+                    if (selected == WeatherContour.WIND || selected == WeatherContour.CLOUDS) {
+                        plugin.setSelectedForecastContoursType(null);
+                        if (mapActivity != null) {
+                            mapActivity.refreshMap();
+                        }
+                    }
+                }
+                updateColors(nightMode);
+            };
+            plugin.addWeatherSourceChangeListener(weatherSourceChangeListener);
+        }
 	}
 
 	@NonNull
@@ -62,6 +79,15 @@ public class WeatherContoursButton extends MapButton {
 		return true;
 	}
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (plugin != null && weatherSourceChangeListener != null) {
+            plugin.removeWeatherSourceChangeListener(weatherSourceChangeListener);
+            weatherSourceChangeListener = null;
+        }
+    }
+
 	@Override
 	protected void updateColors(boolean nightMode) {
 		boolean contourSelected = plugin.getSelectedForecastContoursType() != null;
@@ -78,6 +104,8 @@ public class WeatherContoursButton extends MapButton {
 	private void chooseContours() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		List<PopUpMenuItem> items = new ArrayList<>();
+        boolean isECMWF = plugin != null
+                && plugin.getWeatherSource() == net.osmand.plus.plugins.weather.enums.WeatherSource.ECMWF;
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_none)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_thermometer))
@@ -90,7 +118,10 @@ public class WeatherContoursButton extends MapButton {
 				.create()
 		);
 
-		for (WeatherContour weatherContour : WeatherContour.values()) {
+        for (WeatherContour weatherContour : WeatherContour.values()) {
+            if (isECMWF && (weatherContour == WeatherContour.WIND || weatherContour == WeatherContour.CLOUDS)) {
+                continue;
+            }
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(weatherContour.getTitleId())
 					.setIcon(uiUtilities.getThemedIcon(weatherContour.getIconId()))

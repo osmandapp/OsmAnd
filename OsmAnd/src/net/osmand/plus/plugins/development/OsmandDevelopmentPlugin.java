@@ -158,7 +158,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
-				//mapRenderer.setFlatEarth(!settings.SPHERICAL_MAP.get());
+				mapRenderer.setFlatEarth(!settings.SPHERICAL_MAP.get());
 			}
 		};
 		settings.SPHERICAL_MAP.addListener(sphericalListener);

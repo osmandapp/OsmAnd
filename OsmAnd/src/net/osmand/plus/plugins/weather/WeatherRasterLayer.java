@@ -47,6 +47,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	private long cachedDateTime;
 
 	private final List<StateChangedListener<Float>> alphaChangeListeners = new ArrayList<>();
+	private StateChangedListener<String> weatherSourceChangeListener;
 
 	public enum WeatherLayer {
 		LOW,
@@ -75,6 +76,19 @@ public class WeatherRasterLayer extends BaseMapLayer {
 				alphaChangeListeners.add(listener);
 			}
 		}
+
+		weatherSourceChangeListener = change -> {
+			WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
+			MapRendererView mapRenderer = getMapRenderer();
+
+			if (mapRenderer == null || resourcesManager == null || resourcesManager.getBandSettings().empty()) {
+				return;
+			}
+
+			resetLayerProvider();
+			recreateLayerProvider(mapRenderer, resourcesManager);
+		};
+		weatherSettings.weatherSource.addListener(weatherSourceChangeListener);
 	}
 
 	public long getDateTime() {
@@ -143,6 +157,9 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	protected void cleanupResources() {
 		super.cleanupResources();
 		resetLayerProvider();
+		if (weatherSourceChangeListener != null) {
+			weatherSettings.weatherSource.removeListener(weatherSourceChangeListener);
+		}
 	}
 
 	@Override

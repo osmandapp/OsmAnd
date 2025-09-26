@@ -55,6 +55,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.RequiredMapsFragment;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -503,6 +504,11 @@ public class IntentHelper {
 				if (openMapMarkersGroupsExtra != null) {
 					MapMarkersDialogFragment.showInstance(mapActivity, openMapMarkersGroupsExtra.getString(MapMarkersGroup.MARKERS_SYNC_GROUP_ID));
 				}
+				clearIntent(intent);
+			}
+			if(intent.hasExtra(RequiredMapsFragment.OPEN_FRAGMENT_KEY)) {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				RequiredMapsFragment.showInstance(fragmentManager);
 				clearIntent(intent);
 			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_SETTINGS)) {

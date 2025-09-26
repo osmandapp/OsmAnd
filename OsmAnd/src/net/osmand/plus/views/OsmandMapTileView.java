@@ -1640,7 +1640,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointI secondPosition = new PointI((int) secondPoint.x, (int) secondPoint.y);
 			scrollDistanceX = 0.0f;
 			scrollDistanceY = 0.0f;
-			mapRenderer.setMapTarget(firstPosition, new PointI(firstTouchLocationX, firstTouchLocationY));
 			PointD zoomAndRotation = new PointD();
 			boolean canChange = mapRenderer.getZoomAndRotationAfterPinch(
 					new PointI(firstTouchLocationX, firstTouchLocationY), firstTouchLocationHeight, firstPosition,
@@ -1664,7 +1663,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					float visualZoom = finalZoomFloatPart >= 0
 							? 1 + finalZoomFloatPart
 							: 1 + 0.5f * finalZoomFloatPart;
-					mapRenderer.setFlatZoom(ZoomLevel.swigToEnum(zoomLevel), visualZoom);
+					mapRenderer.setFlatZoom(ZoomLevel.swigToEnum(zoomLevel), visualZoom, false, true);
 					float zoomMagnifier = app.getOsmandMap().getMapDensity();
 					mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 
@@ -1679,10 +1678,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (startRotating) {
 					float angleShift = (float) zoomAndRotation.getY();
 					this.rotate = MapUtils.unifyRotationTo360(this.rotate - angleShift);
-					mapRenderer.setAzimuth(-this.rotate);
+					mapRenderer.setAzimuth(-this.rotate, false, true);
 					currentViewport.setRotate(this.rotate);
 				}
 			}
+			mapRenderer.setMapTarget(firstPosition, new PointI(firstTouchLocationX, firstTouchLocationY));
 			PointI target31 = mapRenderer.getState().getTarget31();
 			currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(target31.getY()), MapUtils.get31LongitudeX(target31.getX()));
 			refreshMap();
