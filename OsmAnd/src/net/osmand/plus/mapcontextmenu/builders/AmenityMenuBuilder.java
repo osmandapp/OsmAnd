@@ -32,6 +32,7 @@ import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -120,10 +121,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (!hasShortDescription && allowOnlineWiki) {
 			description = createWikipediaArticleList(filteredInfo);
 		}
-		boolean descriptionCollapsed[] = {true};
+		boolean[] descriptionCollapsed = {true};
 		if (!Algorithms.isEmpty(description)) {
-			View rowView = buildRow(view, 0, null, description, 0, true,
-					null, false, 0, false, null, false);
+			View rowView = buildRow(view, new BuildRowAttrs.Builder().setText(description)
+					.setCollapsable(true).markLabelUndefined().build());
 			TextViewEx textView = rowView.findViewById(R.id.text);
 			final String descriptionToSet = description;
 			textView.setOnClickListener(v -> {

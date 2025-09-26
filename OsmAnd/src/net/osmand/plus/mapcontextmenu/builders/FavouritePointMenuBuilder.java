@@ -5,6 +5,7 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -120,10 +122,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			color = favoriteGroup.isVisible() ? (color | 0xff000000) : getColor(disabledColor);
-			String name = view.getContext().getString(R.string.context_menu_points_of_group);
-			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
-					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, point),
-					false, 0, false, null, false);
+			Context context = view.getContext();
+			String name = context.getString(R.string.context_menu_points_of_group);
+			Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);
+			CollapsableView collapsableView = getCollapsableFavouritesView(context, true, favoriteGroup, point);
+			buildRow(view, new BuildRowAttrs.Builder().setText(name).setIcon(icon).setCollapsable(true).setCollapsableView(collapsableView).markLabelUndefined().build());
 		}
 	}
 

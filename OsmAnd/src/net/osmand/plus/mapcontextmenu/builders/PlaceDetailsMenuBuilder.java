@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.SearchTravelArticlesTask;
 import net.osmand.plus.widgets.TextViewEx;
@@ -131,8 +132,9 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 				String title = app.getString(R.string.travel_guides);
 				CollapsableView collapsableView = getGuidesCollapsableView(articles);
 				View container = createRowContainer(group.getContext(), TRAVEL_GUIDES_KEY);
-				buildRow(container, iconId, null, title, 0, true,
-						collapsableView, false, 1, false, null, false);
+				buildRow(container, new BuildRowAttrs.Builder().setIconId(iconId)
+						.setText(title).setCollapsable(true).setCollapsableView(collapsableView)
+						.setTextLinesLimit(1).markLabelUndefined().build());
 
 				group.addView(container, position);
 				buildNearestRowDividerIfMissing(group, position);

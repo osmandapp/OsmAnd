@@ -10,6 +10,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
@@ -34,15 +35,11 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		if (osmPoint instanceof OsmNotesPoint) {
-			OsmNotesPoint notes = (OsmNotesPoint) osmPoint;
+		if (osmPoint instanceof OsmNotesPoint notes) {
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_note_dark).setText(notes.getText()).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_group).setText(notes.getAuthor()).markLabelUndefined().build());
 
-			buildRow(view, R.drawable.ic_action_note_dark, null, notes.getText(), 0, false, null, false, 0, false, null, false);
-			buildRow(view, R.drawable.ic_group, null, notes.getAuthor(), 0, false, null, false, 0, false, null, false);
-
-		} else if (osmPoint instanceof OpenstreetmapPoint) {
-			OpenstreetmapPoint point = (OpenstreetmapPoint) osmPoint;
-
+		} else if (osmPoint instanceof OpenstreetmapPoint point) {
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
 				if (POI_TYPE_TAG.equals(e.getKey())) {
 					String poiTranslation = e.getValue();
@@ -63,7 +60,7 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 					if (resId == 0) {
 						resId = R.drawable.ic_action_folder_stroke;
 					}
-					buildRow(view, resId, null, poiTranslation, 0, false, null, false, 0, false, null, false);
+					buildRow(view, new BuildRowAttrs.Builder().setIconId(resId).setText(poiTranslation).markLabelUndefined().build());
 					break;
 				}
 			}
@@ -74,7 +71,7 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 					continue;
 				}
 				String text = e.getKey() + "=" + e.getValue();
-				buildRow(view, R.drawable.ic_action_info_dark, null, text, 0, false, null, false, 0, false, null, false);
+				buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_info_dark).setText(text).markLabelUndefined().build());
 			}
 		}
 	}
