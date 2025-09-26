@@ -4667,4 +4667,5 @@
     <string name="poi_socket_nema_14_50_voltage">Разъём: NEMA 14-50: напряжение</string>
     <string name="poi_socket_type3c_current">Разъём: Type 3c: текущий</string>
     <string name="poi_socket_type3a_output_high">Высоко</string>
+    <string name="poi_hazard_additional_side_winds">Боковой ветер</string>
 </resources>
