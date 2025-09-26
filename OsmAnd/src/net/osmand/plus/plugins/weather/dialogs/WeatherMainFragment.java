@@ -33,11 +33,11 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.Iterator;
-import java.util.Set;
 
 public class WeatherMainFragment extends BaseFullScreenFragment implements DownloadEvents, RemoveLocalForecastListener {
 
@@ -222,9 +222,11 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
 	}
 
-	@Nullable
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

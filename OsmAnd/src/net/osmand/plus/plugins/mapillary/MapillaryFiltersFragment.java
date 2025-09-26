@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.FragmentManager;
@@ -25,7 +24,8 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -40,7 +40,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Set;
 
 public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
@@ -274,9 +273,11 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         button.setEnabled(enabled);
     }
 
-    @Nullable
-    public Set<InsetSide> getRootInsetSides() {
-        return null;
+    @Override
+    public InsetTargetsCollection getInsetTargets() {
+        InsetTargetsCollection collection = super.getInsetTargets();
+        collection.removeType(Type.ROOT_INSET);
+        return collection;
     }
 
     public static void showInstance(@NonNull FragmentManager fragmentManager) {

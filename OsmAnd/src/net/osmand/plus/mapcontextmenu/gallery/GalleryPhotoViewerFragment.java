@@ -24,13 +24,12 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.imageview.GalleryImageView;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 
 import org.apache.commons.logging.Log;
-
-import java.util.Set;
 
 public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	private static final Log LOG = PlatformUtil.getLog(GalleryPhotoViewerFragment.class);
@@ -68,10 +67,11 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private void setupImageView(@NonNull ViewGroup view) {

@@ -33,16 +33,16 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -195,35 +195,29 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
-	public Set<InsetSide> getRootInsetSides(){
-		return EnumSet.of(InsetSide.TOP);
-	}
-
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+
+		collection.removeType(Type.SCROLLABLE);
 		if (hideButtonsContainer()) {
 			if (useScrollableItemsContainer()) {
-				ids.add(R.id.scrollable_items_container);
+				collection.replace(InsetTarget.createScrollable(R.id.scrollable_items_container));
 			} else {
-				ids.add(R.id.non_scrollable_items_container);
+				collection.replace(InsetTarget.createScrollable(R.id.non_scrollable_items_container));
 			}
 		}
-		return ids;
-	}
 
-	@Nullable
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
+		collection.removeType(Type.BOTTOM_CONTAINER);
 		if (!hideButtonsContainer()) {
 			if (useVerticalButtons()) {
-				ids.add(R.id.buttons_container);
+				collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container));
 			} else {
-				ids.add(R.id.bottom_buttons_container);
+				collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
 			}
 		}
-		return ids;
+
+		return collection;
 	}
 
 	protected void setupHeightAndBackground(View mainView) {

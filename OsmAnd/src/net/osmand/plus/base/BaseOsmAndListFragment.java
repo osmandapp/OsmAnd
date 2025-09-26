@@ -11,19 +11,18 @@ import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.ListFragment;
 
+import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Base fragment class for list-based screens in the OsmAnd application
@@ -65,24 +64,15 @@ public abstract class BaseOsmAndListFragment extends ListFragment implements IOs
 		InsetsUtils.processInsets(this, view, null);
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(android.R.id.list);
-		return ids;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getFabIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.removeType(Type.ROOT_INSET);
+		collection.removeType(Type.FAB);
+		collection.removeType(Type.COLLAPSING_APPBAR);
+		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
+		collection.add(InsetTarget.createScrollable(android.R.id.list));
+		return collection;
 	}
 
 	@Override

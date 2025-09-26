@@ -30,6 +30,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -83,8 +84,11 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetsUtils.OnInsetsApplied;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -227,7 +231,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				mapActivity.getFragmentsHelper().dismissSettingsScreens();
 			}
 		};
-		toolbar = dashboardView.findViewById(R.id.toolbar);
+		toolbar = dashboardView.findViewById(R.id.dashboard_toolbar_container);
 		ObservableScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
 		listView = dashboardView.findViewById(R.id.dash_list_view);
 		//listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -275,6 +279,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		initActionButtons();
 		dashboardView.addView(actionButton);
+
+		InsetsUtils.setWindowInsetsListener(dashboardView.findViewById(R.id.dashboard), (view, insets) -> {
+			InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
+
+			targetsCollection.replace(InsetTarget.createOneSided(true, false,
+					view.findViewById(R.id.dashboard_content_container)));
+
+			targetsCollection.add(InsetTarget.createOneSided(true, true,
+					view.findViewById(R.id.dashboard_toolbar_container)));
+
+			InsetsUtils.processInsets(dashboardView.findViewById(R.id.dashboard), targetsCollection, insets);
+		}, false);
 	}
 
 	private void updateListBackgroundHeight() {
@@ -639,6 +655,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			}
 		}
 		mapActivity.updateStatusBarColor();
+
+
+
+
+		if(dashboardView.isAttachedToWindow()){
+			ViewCompat.requestApplyInsets(dashboardView);
+		}
 	}
 
 	private void updateVisibilityStack(@NonNull DashboardType type, boolean visible) {
@@ -875,13 +898,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			animateDashboard(true);
 		} else {
 			dashboardView.findViewById(R.id.animateContent).setVisibility(View.VISIBLE);
-			dashboardView.findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+			dashboardView.findViewById(R.id.dashboard_toolbar_container).setVisibility(View.VISIBLE);
 		}
 	}
 
 	private void animateDashboard(boolean show) {
 		View content = dashboardView.findViewById(R.id.animateContent);
-		View toolbar = dashboardView.findViewById(R.id.toolbar);
+		View toolbar = dashboardView.findViewById(R.id.dashboard_toolbar_container);
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
 		if (animationCoordinates != null) {
@@ -951,7 +974,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (!animation) {
 			dashboardView.setVisibility(View.GONE);
 			dashboardView.findViewById(R.id.animateContent).setVisibility(View.GONE);
-			dashboardView.findViewById(R.id.toolbar).setVisibility(View.GONE);
+			dashboardView.findViewById(R.id.dashboard_toolbar_container).setVisibility(View.GONE);
 		} else {
 			animateDashboard(false);
 		}
@@ -1180,7 +1203,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
 			gradientToolbar.setAlpha((int) ((1 - t) * 255));
 			setAlpha(dashboardView, (int) (t * 128), 0);
-			View toolbar = dashboardView.findViewById(R.id.toolbar);
+			View toolbar = dashboardView.findViewById(R.id.dashboard_toolbar_container);
 			updateMapShadowColor(malpha);
 			if (t < 1) {
 				//noinspection deprecation

@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.R;
@@ -27,9 +29,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior.BottomSheetCallback;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -136,12 +135,11 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		return mainView;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.cancel_row_background);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.cancel_row_background));
+		return collection;
 	}
 
 	@Override

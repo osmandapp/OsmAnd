@@ -47,7 +47,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -66,8 +67,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 
 public class TerrainFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents {
 
@@ -404,9 +403,11 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		return InAppPurchaseUtils.isColoringTypeAvailable(app);
 	}
 
-	@Nullable
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

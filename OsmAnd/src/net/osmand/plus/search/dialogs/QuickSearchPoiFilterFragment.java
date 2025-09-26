@@ -87,13 +87,6 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private final ArrayList<String> showAllCategories = new ArrayList<>();
 	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 
-	@Nullable
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
-	}
-
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
 	                         @Nullable ViewGroup container,

@@ -13,11 +13,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.ComponentActivity;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -33,13 +33,14 @@ import net.osmand.plus.quickaction.AddQuickActionsAdapter.ItemClickListener;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.InsetTargetBuilder;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
-
-import java.util.EnumSet;
-import java.util.List;
 
 public class AddQuickActionFragment extends BaseFullScreenFragment implements ItemClickListener, IAskDismissDialog {
 
@@ -49,6 +50,7 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 	public static final String QUICK_ACTION_SEARCH_KEY = "quick_action_search_key";
 	public static final String QUICK_ACTION_SEARCH_MODE_KEY = "quick_action_search_mode_key";
 
+	private View view;
 	private AddQuickActionsAdapter adapter;
 	private ImageButton clearSearchQuery;
 	private EditText searchEditText;
@@ -90,7 +92,7 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_add_quick_action, container, false);
+		view = inflate(R.layout.fragment_add_quick_action, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
@@ -104,13 +106,22 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 
 	@Override
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
-		InsetsUtils.applyPadding(recyclerView, insets, EnumSet.of(searchMode ? InsetSide.BOTTOM : InsetSide.RESET));
+		InsetTargetBuilder builder = InsetTarget.createCustomBuilder(recyclerView);
+		if (searchMode) {
+			builder.portraitSides(InsetSide.BOTTOM);
+			builder.landscapeSides(InsetSide.BOTTOM, InsetSide.RIGHT, InsetSide.LEFT);
+		} else {
+			builder.portraitSides(InsetSide.RESET);
+			builder.landscapeSides(InsetSide.RESET, InsetSide.RIGHT, InsetSide.LEFT);
+		}
+		InsetsUtils.applyPadding(view, insets, builder.build());
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection targetsCollection = super.getInsetTargets();
+		targetsCollection.removeType(Type.SCROLLABLE);
+		return targetsCollection;
 	}
 
 	private void setupOnBackPressedCallback() {
@@ -173,6 +184,10 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 		}
 		updateToolbar();
 		updateAdapter();
+
+		if (view.isAttachedToWindow()) {
+			ViewCompat.requestApplyInsets(view);
+		}
 	}
 
 	private void updateToolbar() {

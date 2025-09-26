@@ -25,14 +25,14 @@ import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public abstract class LocalBaseFragment extends BaseFullScreenFragment implements OperationListener,
 		ConfirmDeletionListener, DownloadEvents, OnMapSourceUpdateListener, RenameCallback {
@@ -54,10 +54,11 @@ public abstract class LocalBaseFragment extends BaseFullScreenFragment implement
 		DeleteConfirmationDialogController.askUpdateListener(app, this);
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	@Override
