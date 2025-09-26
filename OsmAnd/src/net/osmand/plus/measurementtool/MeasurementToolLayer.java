@@ -1113,7 +1113,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean showMenuAction(@Nullable Object o) {
 		if (o instanceof PlanRoutePoint point) {
-			selectPoint(point.getPosition());
+			selectPoint(point.position());
 			return true;
 		}
 		return false;

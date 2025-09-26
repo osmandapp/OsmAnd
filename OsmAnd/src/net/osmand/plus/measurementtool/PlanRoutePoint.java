@@ -16,10 +16,10 @@ import net.osmand.util.MapUtils;
 import java.util.List;
 import java.util.Map;
 
-public class PlanRoutePointUtils {
+public record PlanRoutePoint(int position) {
 
 	@NonNull
-	public String getPointTitle(@Nullable MapActivity activity, int position) {
+	public String getTitle(@Nullable MapActivity activity) {
 		if (activity == null) return "";
 		MeasurementEditingContext editingCtx = activity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 
@@ -32,7 +32,7 @@ public class PlanRoutePointUtils {
 	}
 
 	@NonNull
-	public String getPointSummary(@Nullable MapActivity mapActivity, int position, boolean before) {
+	public String getSummary(@Nullable MapActivity mapActivity, boolean before) {
 		if (mapActivity == null) return "";
 		OsmandApplication app = mapActivity.getApp();
 		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
@@ -83,10 +83,9 @@ public class PlanRoutePointUtils {
 			RoadSegmentData segment = roadSegmentData.get(pair);
 			boolean routeSegmentBuilt = segment != null && segment.getDistance() > 0;
 			dist += (float) (routeSegmentBuilt
-								? segment.getDistance()
-								: MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon()));
+					? segment.getDistance()
+					: MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon()));
 		}
 		return dist;
 	}
-
 }

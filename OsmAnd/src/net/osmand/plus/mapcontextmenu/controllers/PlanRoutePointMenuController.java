@@ -11,19 +11,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.PlanRoutePoint;
-import net.osmand.plus.measurementtool.PlanRoutePointUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
 public class PlanRoutePointMenuController extends MenuController {
 
-	private final PlanRoutePointUtils planRoutePointUtils;
 	private PlanRoutePoint point;
 
 	public PlanRoutePointMenuController(@NonNull MapActivity mapActivity, PointDescription pointDescription,
 	                                    @Nullable PlanRoutePoint point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.point = point;
-		this.planRoutePointUtils = new PlanRoutePointUtils();
 	}
 
 	@Override
@@ -47,13 +44,13 @@ public class PlanRoutePointMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		return planRoutePointUtils.getPointTitle(getMapActivity(), point.getPosition());
+		return point.getTitle(getMapActivity());
 	}
 
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		return planRoutePointUtils.getPointSummary(getMapActivity(), point.getPosition(), true);
+		return point.getSummary(getMapActivity(), true);
 	}
 
 	@Override

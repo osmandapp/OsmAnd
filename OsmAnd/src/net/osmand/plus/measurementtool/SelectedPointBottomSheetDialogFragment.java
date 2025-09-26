@@ -34,7 +34,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	public static final String TAG = SelectedPointBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SelectedPointBottomSheetDialogFragment.class);
 	private MeasurementEditingContext editingCtx;
-	private PlanRoutePointUtils planRoutePointUtils;
+	private PlanRoutePoint point;
 
 	@Nullable
 	@Override
@@ -54,7 +54,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			return;
 		}
 		editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
-		planRoutePointUtils = new PlanRoutePointUtils();
+		point = new PlanRoutePoint(editingCtx.getSelectedPointPosition());
 
 		View titleView = inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp);
 		TextView title = titleView.findViewById(R.id.title);
@@ -291,16 +291,12 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@NonNull
 	private String getTitle() {
-		return planRoutePointUtils.getPointTitle(getMapActivity(), getSelectedPointPosition());
+		return point.getTitle(getMapActivity());
 	}
 
 	@NonNull
 	private String getDescription(boolean before) {
-		return planRoutePointUtils.getPointSummary(getMapActivity(), getSelectedPointPosition(), before);
-	}
-
-	private int getSelectedPointPosition() {
-		return editingCtx.getSelectedPointPosition();
+		return point.getSummary(getMapActivity(), before);
 	}
 
 	@Nullable
