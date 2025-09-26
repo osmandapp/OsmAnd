@@ -280,8 +280,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		});
 		menuBuilder.buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_photo_street)
 				.setText(app.getString(R.string.street_level_imagery))
-				.setCollapsable(true).setCollapsableView(collapsableView).setTextLinesLimit(1)
-				.markLabelUndefined().build());
+				.setCollapsable(true).setCollapsableView(collapsableView).setTextLinesLimit(1).build());
 
 		if (needUpdateOnly && mapillaryCards != null) {
 			mapillaryCardsRow.setCards(mapillaryCards);

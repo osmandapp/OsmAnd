@@ -36,8 +36,10 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		if (osmPoint instanceof OsmNotesPoint notes) {
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_note_dark).setText(notes.getText()).markLabelUndefined().build());
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_group).setText(notes.getAuthor()).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_note_dark)
+					.setText(notes.getText()).setTextPrefix(app.getString(R.string.poi_note)).build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_group)
+					.setText(notes.getAuthor()).setTextPrefix(app.getString(R.string.shared_string_author)).build());
 
 		} else if (osmPoint instanceof OpenstreetmapPoint point) {
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
@@ -60,7 +62,9 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 					if (resId == 0) {
 						resId = R.drawable.ic_action_folder_stroke;
 					}
-					buildRow(view, new BuildRowAttrs.Builder().setIconId(resId).setText(poiTranslation).markLabelUndefined().build());
+					String textPrefix = app.getString(R.string.shared_string_type);
+					buildRow(view, new BuildRowAttrs.Builder().setIconId(resId)
+							.setText(poiTranslation).setTextPrefix(textPrefix).build());
 					break;
 				}
 			}
@@ -70,8 +74,9 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 						e.getKey().startsWith(Entity.REMOVE_TAG_PREFIX)) {
 					continue;
 				}
-				String text = e.getKey() + "=" + e.getValue();
-				buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_info_dark).setText(text).markLabelUndefined().build());
+				buildRow(view, new BuildRowAttrs.Builder()
+						.setIconId(R.drawable.ic_action_info_dark)
+						.setText(e.getValue()).setTextPrefix(e.getKey()).build());
 			}
 		}
 	}

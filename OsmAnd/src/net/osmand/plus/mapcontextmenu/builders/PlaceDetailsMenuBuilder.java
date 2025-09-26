@@ -132,9 +132,9 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 				String title = app.getString(R.string.travel_guides);
 				CollapsableView collapsableView = getGuidesCollapsableView(articles);
 				View container = createRowContainer(group.getContext(), TRAVEL_GUIDES_KEY);
-				buildRow(container, new BuildRowAttrs.Builder().setIconId(iconId)
-						.setText(title).setCollapsable(true).setCollapsableView(collapsableView)
-						.setTextLinesLimit(1).markLabelUndefined().build());
+				buildRow(container, new BuildRowAttrs.Builder().setIconId(iconId).setText(title)
+						.setCollapsable(true).setCollapsableView(collapsableView)
+						.setTextLinesLimit(1).build());
 
 				group.addView(container, position);
 				buildNearestRowDividerIfMissing(group, position);

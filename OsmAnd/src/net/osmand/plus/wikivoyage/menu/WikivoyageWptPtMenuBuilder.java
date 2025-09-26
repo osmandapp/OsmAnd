@@ -68,22 +68,29 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 		String direction = descTokens.get(KEY_DIRECTIONS);
 
 		if (!Algorithms.isEmpty(phones)) {
-			buildRow(view, new BuildRowAttrs.Builder().setText(phones).setIconId(R.drawable.ic_action_call_dark).setNumber(true).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setText(phones).setIconId(R.drawable.ic_action_call_dark)
+					.setNumber(true).setTextPrefix(app.getString(R.string.phone)).build());
 		}
 		if (wpt.getLink() != null && !Algorithms.isEmpty(wpt.getLink().getHref())) {
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_world_globe_dark).setText(wpt.getLink().getHref()).markLabelUndefined().setUrl(true).build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_world_globe_dark)
+					.setText(wpt.getLink().getHref()).setTextPrefix(app.getString(R.string.shared_string_link))
+					.setUrl(true).build());
 		}
 		if (!Algorithms.isEmpty(emails)) {
-			buildRow(view, new BuildRowAttrs.Builder().setText(emails).markLabelUndefined().setIconId(R.drawable.ic_action_message).setEmail(true).build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_message)
+					.setText(emails).setTextPrefix(app.getString(R.string.poi_email)).setEmail(true).build());
 		}
 		if (!Algorithms.isEmpty(workingHours)) {
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_time).setText(workingHours).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_time)
+					.setText(workingHours).setTextPrefix(app.getString(R.string.opening_hours)).build());
 		}
 		if (!Algorithms.isEmpty(direction)) {
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_gdirections_dark).setText(direction).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_gdirections_dark)
+					.setText(direction).setTextPrefix(app.getString(R.string.poi_direction)).build());
 		}
 		if (!Algorithms.isEmpty(price)) {
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_price_tag).setText(price).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_price_tag)
+					.setText(price).setTextPrefix(app.getString(R.string.shared_string_price)).build());
 		}
 	}
 

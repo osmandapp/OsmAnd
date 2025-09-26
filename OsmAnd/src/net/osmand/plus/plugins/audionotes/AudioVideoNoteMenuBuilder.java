@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -38,7 +39,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 		File file = recording.getFile();
 		if (file != null) {
 
-			buildDateRow(view, recording.getFile().lastModified());
+			buildDateRow(view, app.getString(R.string.created_on), recording.getFile().lastModified());
 			buildPlainMenuItems(view);
 
 			if (recording.isPhoto()) {

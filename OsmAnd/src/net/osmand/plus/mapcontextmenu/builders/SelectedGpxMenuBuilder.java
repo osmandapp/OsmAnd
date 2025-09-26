@@ -94,7 +94,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		String startEndTimeTitle = app.getString(R.string.shared_string_start_time) + " - " + app.getString(R.string.shared_string_end_time);
 		buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_time_start))
 				.setTextPrefix(startEndTimeTitle).setText(startFormat.format(start) + " - " + endFormat.format(end))
-				.setMatchWithDivider(true).markLabelUndefined().build());
+				.setMatchWithDivider(true).build());
 	}
 
 	public void buildElevationRows(View view) {
@@ -113,11 +113,11 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 			buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_altitude_descent))
 					.setTextPrefix(app.getString(R.string.ascent_descent)).setText(asc + " / " + desc)
-					.setMatchWithDivider(true).markLabelUndefined().build());
+					.setMatchWithDivider(true).build());
 			buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_altitude_descent))
 					.setTextPrefix(app.getString(R.string.distance_moving))
 					.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistanceMoving(), app))
-					.setMatchWithDivider(true).markLabelUndefined().build());
+					.setMatchWithDivider(true).build());
 		}
 	}
 
@@ -144,7 +144,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_time_start))
 					.setTextPrefix(app.getString(R.string.shared_string_time))
 					.setText(format.format(selectedPoint.getTime()))
-					.setMatchWithDivider(true).markLabelUndefined().build());
+					.setMatchWithDivider(true).build());
 		}
 		if (!Double.isNaN(selectedPoint.getEle())) {
 			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_altitude), app.getString(R.string.altitude),

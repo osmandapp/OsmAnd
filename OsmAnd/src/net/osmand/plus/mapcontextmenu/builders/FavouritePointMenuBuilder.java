@@ -88,7 +88,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		boolean light = isLightContent();
-		buildDateRow(view, point.getTimestamp());
+		buildDateRow(view, app.getString(R.string.created_on), point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
@@ -126,7 +126,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			String name = context.getString(R.string.context_menu_points_of_group);
 			Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);
 			CollapsableView collapsableView = getCollapsableFavouritesView(context, true, favoriteGroup, point);
-			buildRow(view, new BuildRowAttrs.Builder().setText(name).setIcon(icon).setCollapsable(true).setCollapsableView(collapsableView).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setText(name).setIcon(icon).setCollapsable(true).setCollapsableView(collapsableView).build());
 		}
 	}
 

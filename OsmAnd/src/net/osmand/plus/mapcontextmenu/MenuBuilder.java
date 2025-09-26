@@ -405,7 +405,6 @@ public class MenuBuilder {
 			buildRow(view, new BuildRowAttrs.Builder()
 					.setIconId(item.getIconId())
 					.setText(item.getText())
-					.markLabelUndefined()
 					.setButtonText(item.getButtonText())
 					.setCollapsable(item.isCollapsable())
 					.setCollapsableView(item.getCollapsableView())
@@ -446,7 +445,7 @@ public class MenuBuilder {
 		if (mapContextMenu != null) {
 			String title = mapContextMenu.getTitleStr();
 			if (title.length() > TITLE_LIMIT) {
-				buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_note_dark).markLabelUndefined().build());
+				buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_note_dark).build());
 			}
 		}
 	}
@@ -607,7 +606,7 @@ public class MenuBuilder {
 		firstRow = position == 0 || isDividerAtPosition(viewGroup1, position - 1);
 		int iconId = AmenityMenuController.getRightIconId(app, amenity);
 		CollapsableView collapsableView = getCollapsableView(amenitiesRow.getContext(), true, amenities, key);
-		buildRow(amenitiesRow, new BuildRowAttrs.Builder().setIconId(iconId).setText(text).markLabelUndefined()
+		buildRow(amenitiesRow, new BuildRowAttrs.Builder().setIconId(iconId).setText(text)
 				.setCollapsable(true).setCollapsableView(collapsableView).build());
 		viewGroup1.addView(amenitiesRow, position);
 		buildNearestRowDividerIfMissing(viewGroup1, position);
@@ -626,14 +625,8 @@ public class MenuBuilder {
 			String count = "(" + nearestAmenities.size() + ")";
 			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
 			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
-			buildRow(view, new BuildRowAttrs.Builder()
-					.setIconId(iconId)
-					.setText(text)
-					.setCollapsable(true)
-					.setCollapsableView(collapsableView)
-					.markLabelUndefined()
-					.build()
-			);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(iconId).setText(text)
+					.setCollapsable(true).setCollapsableView(collapsableView).build());
 		}
 	}
 
@@ -662,7 +655,7 @@ public class MenuBuilder {
 		buildRow(view, new BuildRowAttrs.Builder()
 				.setIconId(R.drawable.ic_action_photo).setText(app.getString(R.string.online_photos))
 				.setCollapsable(true).setCollapsableView(collapsableView)
-				.setTextLinesLimit(1).markLabelUndefined().build());
+				.setTextLinesLimit(1).build());
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
@@ -674,15 +667,10 @@ public class MenuBuilder {
 	private void buildCoordinatesRow(View view) {
 		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
 		String title = Objects.requireNonNull(locationData.remove(PointDescription.LOCATION_LIST_HEADER));
-		buildRow(view, new BuildRowAttrs.Builder()
-				.setText(title)
-				.markLabelUndefined()
-				.setIconId(R.drawable.ic_action_get_my_location)
-				.setTextPrefix(app.getString(R.string.coordinates))
-				.setCollapsable(true)
+		buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_get_my_location)
+				.setTextPrefix(app.getString(R.string.coordinates)).setCollapsable(true)
 				.setCollapsableView(getLocationCollapsableView(locationData))
-				.setTextLinesLimit(1)
-				.build());
+				.setTextLinesLimit(1).build());
 	}
 
 	public void startLoadingImages() {
@@ -768,14 +756,14 @@ public class MenuBuilder {
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, false);
 			buildRow(view, new BuildRowAttrs.Builder().setText(app.getString(R.string.transport_Routes))
 					.setCollapsable(collapsableView != null).setCollapsableView(collapsableView)
-					.setMatchWithDivider(true).markLabelUndefined().build());
+					.setMatchWithDivider(true).build());
 		}
 		if (showNearbyTransportRoutes()) {
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
 			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS_UI, app);
 			buildRow(view, new BuildRowAttrs.Builder().setText(routesWithingDistance)
 					.setCollapsable(collapsableView != null).setCollapsableView(collapsableView)
-					.setMatchWithDivider(true).markLabelUndefined().build());
+					.setMatchWithDivider(true).build());
 		}
 	}
 
@@ -1255,24 +1243,25 @@ public class MenuBuilder {
 		container.addView(button);
 	}
 
-	protected void buildDateRow(@NonNull View view, long timestamp) {
+	protected void buildDateRow(@NonNull View view, @NonNull String textPrefix, long timestamp) {
 		if (timestamp > 0) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(timestamp);
 			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_data)
 					.setText(dateFormat.format(date) + " — " + timeFormat.format(date))
-					.markLabelUndefined().build());
+					.setTextPrefix(textPrefix).build());
 		}
 	}
 
 	protected void buildCommentRow(@NonNull View view, @Nullable String comment) {
 		if (!Algorithms.isEmpty(comment)) {
-			View row = buildRow(view, new BuildRowAttrs.Builder()
-					.setIconId(R.drawable.ic_action_note_dark).setText(comment).setNeedLinks(true)
-					.setTextLinesLimit(10).markLabelUndefined().build());
-			row.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(row.getContext(),
-					app, comment, row.getResources().getString(R.string.poi_dialog_comment)));
+			String textPrefix = app.getString(R.string.poi_dialog_comment);
+			View row = buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_note_dark)
+					.setText(comment).setTextPrefix(textPrefix)
+					.setNeedLinks(true).setTextLinesLimit(10).build());
+			row.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(
+					row.getContext(), app, comment, textPrefix));
 		}
 	}
 
@@ -1283,18 +1272,18 @@ public class MenuBuilder {
 	public void buildCustomAddressLine(LinearLayout ll) {
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, false, null, onClickListener));
+	public void addPlainMenuItem(int iconId, String text, String textPrefix, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, textPrefix, needLinks, isUrl, false, null, onClickListener));
 	}
 
-	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, buttonText, text, needLinks, isUrl, false, null, onClickListener));
+	public void addPlainMenuItem(int iconId, String buttonText, String text, String textPrefix, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		plainMenuItems.add(new PlainMenuItem(iconId, buttonText, text, textPrefix, needLinks, isUrl, false, null, onClickListener));
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
+	public void addPlainMenuItem(int iconId, String text, String textPrefix, boolean needLinks, boolean isUrl,
 	                             boolean collapsable, CollapsableView collapsableView,
 	                             OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, collapsable, collapsableView, onClickListener));
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, textPrefix, needLinks, isUrl, collapsable, collapsableView, onClickListener));
 	}
 
 	public void clearPlainMenuItems() {
@@ -1622,8 +1611,7 @@ public class MenuBuilder {
 		String text = app.getString(R.string.wiki_around);
 		CollapsableView collapsableView = new CollapsableView(view, this, false);
 		buildRow(row, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_wikipedia)
-				.setText(text).setCollapsable(true).setCollapsableView(collapsableView)
-				.markLabelUndefined().build());
+				.setText(text).setCollapsable(true).setCollapsableView(collapsableView).build());
 		viewGroup.addView(row);
 	}
 

@@ -123,8 +123,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 		boolean[] descriptionCollapsed = {true};
 		if (!Algorithms.isEmpty(description)) {
-			View rowView = buildRow(view, new BuildRowAttrs.Builder().setText(description)
-					.setCollapsable(true).markLabelUndefined().build());
+			View rowView = buildRow(view, new BuildRowAttrs.Builder().setText(description).setCollapsable(true).build());
 			TextViewEx textView = rowView.findViewById(R.id.text);
 			final String descriptionToSet = description;
 			textView.setOnClickListener(v -> {

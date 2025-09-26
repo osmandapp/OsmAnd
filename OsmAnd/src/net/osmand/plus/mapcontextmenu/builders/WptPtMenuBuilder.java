@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Pair;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -13,7 +12,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -108,21 +106,21 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		buildDateRow(view, wpt.getTime());
+		buildDateRow(view, app.getString(R.string.created_on), wpt.getTime());
 		if (wpt.getSpeed() > 0) {
 			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_speed)
 					.setText(OsmAndFormatter.getFormattedSpeed((float) wpt.getSpeed(), app))
-					.markLabelUndefined().build());
+					.setTextPrefix(app.getString(R.string.shared_string_speed)).build());
 		}
 		if (!Double.isNaN(wpt.getEle())) {
 			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_altitude)
 					.setText(OsmAndFormatter.getFormattedDistance((float) wpt.getEle(), app))
-					.markLabelUndefined().build());
+					.setTextPrefix(app.getString(R.string.altitude)).build());
 		}
 		if (!Double.isNaN(wpt.getHdop())) {
 			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_gps_info)
-					.setText(Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int) wpt.getHdop())
-					.markLabelUndefined().build());
+					.setText("" + (int) wpt.getHdop())
+					.setTextPrefix(Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop))).build());
 		}
 		prepareDescription(wpt, view);
 		buildCommentRow(view, wpt.getComment());
@@ -159,7 +157,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_type_waypoints_group, color);
 				CollapsableView collapsableView = getCollapsableWaypointsView(context, true, gpx, wpt);
 				buildRow(view, new BuildRowAttrs.Builder().setText(title).setIcon(icon)
-						.setSecondaryText(gpxName).setCollapsable(true).markLabelUndefined()
+						.setSecondaryText(gpxName).setCollapsable(true)
 						.setCollapsableView(collapsableView).build());
 			}
 		}

@@ -40,8 +40,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 		String description = GpxUiHelper.getDescription(app, item.analysis, false);
 		String[] lines = description.split("\n");
 		for (String line : lines) {
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_info_dark)
-					.setText(line).markLabelUndefined().build());
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_info_dark).setText(line).build());
 		}
 	}
 
