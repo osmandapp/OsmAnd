@@ -63,8 +63,7 @@ public class FavouritePointMenuController extends MenuController {
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		}
-		if (getObject() instanceof TransportStop) {
-			TransportStop stop = (TransportStop) getObject();
+		if (getObject() instanceof TransportStop stop) {
 			transportStopController = new TransportStopController(activity, description, stop);
 			transportStopController.processRoutes();
 		}

@@ -151,12 +151,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		PointF point = result.getPoint();
 		RotatedTileBox tileBox = result.getTileBox();
 		List<AvoidRoadInfo> impassableRoads = avoidRoadsHelper.getImpassableRoads();
-		if (tileBox.getZoom() >= START_ZOOM && !excludeUntouchableObjects && !Algorithms.isEmpty(impassableRoads)) {
+		if (tileBox.getZoom() >= START_ZOOM && !rules.isOnlyTouchableObjects() && !Algorithms.isEmpty(impassableRoads)) {
 			MapRendererView mapRenderer = getMapRenderer();
 			float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
 			QuadRect screenArea = new QuadRect(

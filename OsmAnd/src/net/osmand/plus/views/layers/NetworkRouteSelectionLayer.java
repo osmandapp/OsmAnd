@@ -187,7 +187,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 
 	}
 

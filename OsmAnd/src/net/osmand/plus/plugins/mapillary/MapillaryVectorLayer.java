@@ -46,6 +46,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.MapSelectionRules;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.util.MapUtils;
@@ -508,8 +509,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		if (map != null && result.getTileBox().getZoom() >= MIN_POINTS_ZOOM) {
 			collectImagesFromPoint(result);
 		}
@@ -517,8 +517,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof MapillaryImage) {
-			MapillaryImage image = (MapillaryImage) o;
+		if (o instanceof MapillaryImage image) {
 			return new LatLon(image.getLatitude(), image.getLongitude());
 		}
 		return null;
