@@ -68,6 +68,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private final HHRouteRegionPointsCtx<T> predefinedRegions;
 	private HHRoutingContext<T> currentCtx; // never null
 	
+	// select specifically high cost params
+	// for example prefer_unpaved has higher cost > avoid_toll param, so it's better to select profile with prefer_unpaved shortcuts  
+	private static final Set<String> HIGH_COST_PARAMS = Set.of("prefer_unpaved");   
+	
+	
 	
 	public static HHRoutePlanner<NetworkDBPoint> createDB(RoutingContext ctx, HHRoutingDB networkDB) {
 		return new HHRoutePlanner<NetworkDBPoint>(ctx,
@@ -708,6 +713,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		
 		public int extraParam = 0;
 		public int matchParam = 0;
+		public int highCostParam = 0;
 		public boolean containsStartEnd;
 		public double sumIntersects;
 		
@@ -806,6 +812,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				if (!ls.contains(p)) {
 					g.extraParam++;
 				} else {
+					if (HIGH_COST_PARAMS.contains(p)) {
+						g.highCostParam++;
+					}
 					g.matchParam++;
 				}
 			}
@@ -822,6 +831,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					return o1.extraParam < o2.extraParam ? -1 : 1;
 				} else if (o1.matchParam != o2.matchParam) {
 					return o1.matchParam > o2.matchParam ? -1 : 1;
+				} else if (o1.highCostParam != o2.highCostParam) {
+					return o1.highCostParam > o2.highCostParam ? -1 : 1;
 				}
 				return -Double.compare(o1.sumIntersects, o2.sumIntersects); // higher is better
 			}

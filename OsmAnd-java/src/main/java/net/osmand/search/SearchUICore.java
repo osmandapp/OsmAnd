@@ -239,11 +239,17 @@ public class SearchUICore {
 			}
 			for (SearchResult s : searchResults) {
 				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
-					String streetName = amenity.getStreetName();
-					if (dominatedCity.equals(s.cityName) && !Algorithms.isEmpty(streetName)) {
-						s.alternateName = streetName + ", " + s.cityName;
-					} else {
+					if (Algorithms.isEmpty(amenity.getStreetName())) {
 						s.alternateName = s.cityName;
+						continue;
+					} else {
+						String hno = amenity.getHousenumber();
+						String addr = amenity.getStreetName() + (Algorithms.isEmpty(hno) ? "" : " " + hno);
+						if (dominatedCity.equals(s.cityName)) {
+							s.alternateName = addr + ", " + s.cityName;
+						} else {
+							s.alternateName = s.cityName + ", " + addr;
+						}
 					}
 				}
 			}

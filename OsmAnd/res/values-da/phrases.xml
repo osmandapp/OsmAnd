@@ -3549,12 +3549,12 @@
     <string name="reddit">Reddit</string>
     <string name="poi_climbing_crag_filter">Klatringskrog</string>
     <string name="poi_hazard_additional_erosion">Fare: erosion</string>
-    <string name="poi_hazard_additional_falling_rocks">Fare: stenskred</string>
-    <string name="poi_hazard_additional_nuclear">Fare: nuklear</string>
-    <string name="poi_hazard_additional_flood">Fare: oversvømmelse</string>
-    <string name="poi_hazard_additional_avalanche">Fare: lavine</string>
-    <string name="poi_hazard_additional_minefield">Fare: minefelt</string>
-    <string name="poi_hazard_additional_contamination">Fare: kontaminering</string>
+    <string name="poi_hazard_additional_falling_rocks">Stenskred</string>
+    <string name="poi_hazard_additional_nuclear">Nuklear</string>
+    <string name="poi_hazard_additional_flood">Oversvømmelse</string>
+    <string name="poi_hazard_additional_avalanche">Lavine</string>
+    <string name="poi_hazard_additional_minefield">Minefelt</string>
+    <string name="poi_hazard_additional_contamination">Kontaminering</string>
     <string name="poi_defibrillator_location">Placering</string>
     <string name="poi_changing_table_yes">Ja;Puslebord: ja</string>
     <string name="poi_changing_table_no">Nej;Puslebord: nej</string>
@@ -4268,4 +4268,17 @@
     <string name="poi_museum_aviation">Luftfart</string>
     <string name="poi_club_aviation">Flyveklub</string>
     <string name="poi_route_activity_type_ultralight_aviation">Ultralet luftfart</string>
+    <string name="poi_hazard_additional_queues_likely">Kødannelse sandsynlig</string>
+    <string name="poi_hazard_additional_side_winds">Sidevinde</string>
+    <string name="poi_hazard_additional_ice">Is</string>
+    <string name="poi_hazard_additional_hole">Hul</string>
+    <string name="poi_hazard_additional_curve">Kurve</string>
+    <string name="poi_hazard_additional_curves">Kurver</string>
+    <string name="poi_hazard_additional_pedestrians">Fodgængere</string>
+    <string name="poi_hazard_additional_children">Børn</string>
+    <string name="poi_hazard_additional_animal_crossing">Krydsende dyr</string>
+    <string name="poi_hazard_additional_dangerous_junction">Farligt vejkryds</string>
+    <string name="poi_hazard_additional_school_zone">Skolezone</string>
+    <string name="poi_hazard_additional_cyclists">Cyklister</string>
+    <string name="poi_hazard_additional_shooting_range">Skydebane</string>
 </resources>

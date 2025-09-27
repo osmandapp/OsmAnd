@@ -1694,7 +1694,7 @@
     <string name="poi_denomination_greek_catholic">Caitliceach Gréagach</string>
     <string name="poi_denomination_unitarian">Úinitéireach</string>
     <string name="poi_denomination_wesleyan">WesleyanName</string>
-    <string name="poi_denomination_shaktism">Shaktism</string>
+    <string name="poi_denomination_shaktism">Shaktachas</string>
     <string name="poi_internet_access_fee_no">Rochtain idirlín: gan táille</string>
     <string name="poi_funicular">Cáblach</string>
     <string name="poi_library">Leabharlann</string>
@@ -2424,8 +2424,8 @@
     <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
     <string name="poi_rtsa_scale_3a">3A</string>
     <string name="poi_rtsa_scale_3b">3B</string>
-    <string name="poi_hazard_additional_falling_rocks">Guais: titim carraige</string>
-    <string name="poi_hazard_additional_nuclear">Guais: núicléach</string>
+    <string name="poi_hazard_additional_falling_rocks">Titim charraige</string>
+    <string name="poi_hazard_additional_nuclear">Núicléach</string>
     <string name="poi_changing_table_no">Ní hea; Tábla á athrú: níl</string>
     <string name="poi_changing_table_limited">Teoranta; Tábla á athrú: teoranta</string>
     <string name="poi_vehicle_yes">Rochtain ar fheithicil: tá</string>
@@ -2515,7 +2515,7 @@
     <string name="poi_first_aid">Garchabhair</string>
     <string name="poi_canadian_football">Peil Cheanada</string>
     <string name="poi_cabin">Cábán; Foscadh</string>
-    <string name="poi_religion_scientologist">Scientologism</string>
+    <string name="poi_religion_scientologist">Scientologyachas</string>
     <string name="poi_religion_pagan">Págántacht</string>
     <string name="poi_denomination_baptist">Baiste</string>
     <string name="poi_beacon_safe_water">Rabhchán uisce sábháilte</string>
@@ -2647,8 +2647,8 @@
     <string name="poi_service_vehicle_tyres_yes">Boinn</string>
     <string name="poi_blood_donation">Tabhartas fola</string>
     <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
-    <string name="poi_hazard_additional_minefield">Guais: minefield</string>
-    <string name="poi_hazard_additional_contamination">Guais: éilliú</string>
+    <string name="poi_hazard_additional_minefield">Páirc Mianach</string>
+    <string name="poi_hazard_additional_contamination">Éilliú</string>
     <string name="poi_motorcar_customers">Rochtain motorcar: custaiméirí</string>
     <string name="poi_bicycle_dismount">Rochtain rothar: dífheistiú</string>
     <string name="poi_horse_permissive">Rochtain capall: ceadaitheach</string>
@@ -3063,7 +3063,7 @@
     <string name="poi_denomination_mormon">MormonName</string>
     <string name="poi_denomination_greek_orthodox">Ceartchreidmheach Gréagach</string>
     <string name="poi_denomination_iglesia_ni_cristo">Eaglais agus Críost</string>
-    <string name="poi_denomination_adventist">Adventist</string>
+    <string name="poi_denomination_adventist">Aidbhintíoch</string>
     <string name="poi_denomination_nazarene">NazareneName</string>
     <string name="poi_denomination_congregational">Pobal</string>
     <string name="poi_denomination_old_believers">Seanchreidmhigh</string>
@@ -4359,7 +4359,7 @@
     <string name="poi_service_vehicle_insurance_yes">Árachas</string>
     <string name="poi_via_ferrata">Trí ferrata</string>
     <string name="poi_glacier_type_hanging">Crochta</string>
-    <string name="poi_glacier_type_icefall">Oighear</string>
+    <string name="poi_glacier_type_icefall">Eas oighir</string>
     <string name="poi_glacier_type_rock">Rac-cheol</string>
     <string name="poi_glacier_type_shelf">Scairbh</string>
     <string name="poi_glacier_type_remnant">Iarsma</string>
@@ -4405,9 +4405,9 @@
     <string name="poi_flare">Gás flare; Cruach Flare</string>
     <string name="poi_change_delete">Réad scriosta</string>
     <string name="poi_rescue_box">Bosca tarrthála</string>
-    <string name="poi_hazard_additional_erosion">Guais: creimeadh</string>
-    <string name="poi_hazard_additional_flood">Guais: tuile</string>
-    <string name="poi_hazard_additional_avalanche">Guais: Avalanche</string>
+    <string name="poi_hazard_additional_erosion">Creimeadh</string>
+    <string name="poi_hazard_additional_flood">Tuilte</string>
+    <string name="poi_hazard_additional_avalanche">Maidhm shléibhe</string>
     <string name="poi_changing_table_location_male_toilet">Suíomh an tábla a athrú: leithreas fireann</string>
     <string name="poi_hookah_lounge">Tolglann Hookah</string>
     <string name="poi_motorcar_no">Rochtain motorcar: níl</string>
@@ -5141,4 +5141,17 @@
     <string name="poi_canoe_egress">Beir leat i gcanú</string>
     <string name="poi_canoe_put_in_egress">Seoladh agus tabhairt amach canú</string>
     <string name="poi_whitewater_hazard">Sheoladh agus tabhairt amach canú</string>
+    <string name="poi_hazard_additional_hole">Poll</string>
+    <string name="poi_hazard_additional_curve">Cuar</string>
+    <string name="poi_hazard_additional_curves">Cuair</string>
+    <string name="poi_hazard_additional_pedestrians">Coisithe</string>
+    <string name="poi_hazard_additional_children">Leanaí</string>
+    <string name="poi_hazard_additional_animal_crossing">Trasnú ainmhithe</string>
+    <string name="poi_hazard_additional_dangerous_junction">Acomhal contúirteach</string>
+    <string name="poi_hazard_additional_school_zone">Crios scoile</string>
+    <string name="poi_hazard_additional_cyclists">Rothaithe</string>
+    <string name="poi_hazard_additional_shooting_range">Raon lámhaigh</string>
+    <string name="poi_hazard_additional_queues_likely">Scuainí dóchúla</string>
+    <string name="poi_hazard_additional_side_winds">Gaotha taobh</string>
+    <string name="poi_hazard_additional_ice">Oighear</string>
 </resources>

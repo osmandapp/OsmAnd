@@ -1220,7 +1220,7 @@
     <string name="poi_fee_yes">Так;Комісія</string>
     <string name="poi_fee_no">Ні</string>
     <string name="poi_drinking_water_yes">Так;Питна вода</string>
-    <string name="poi_drinking_water_no">Ні</string>
+    <string name="poi_drinking_water_no">Ні;Питна вода</string>
     <string name="poi_supervised_yes">Контрольований об\'єкт</string>
     <string name="poi_supervised_no">Об\'єкт без нагляду</string>
     <string name="poi_seasonal_yes">Так;Сезонний</string>
@@ -3553,13 +3553,13 @@
     <string name="poi_rescue_box">Рятувальний ящик</string>
     <string name="poi_climbing_crag">Скеля для скелелазіння</string>
     <string name="reddit">Reddit</string>
-    <string name="poi_hazard_additional_erosion">Небезпека: ерозія</string>
-    <string name="poi_hazard_additional_falling_rocks">Небезпека: каменепад</string>
-    <string name="poi_hazard_additional_nuclear">Небезпека: радіація</string>
-    <string name="poi_hazard_additional_flood">Небезпека: повінь</string>
-    <string name="poi_hazard_additional_avalanche">Небезпека: лавина</string>
-    <string name="poi_hazard_additional_minefield">Небезпека: мінне поле</string>
-    <string name="poi_hazard_additional_contamination">Небезпека: забруднення</string>
+    <string name="poi_hazard_additional_erosion">Ерозія</string>
+    <string name="poi_hazard_additional_falling_rocks">Каменепад</string>
+    <string name="poi_hazard_additional_nuclear">Радіація</string>
+    <string name="poi_hazard_additional_flood">Повінь</string>
+    <string name="poi_hazard_additional_avalanche">Лавина</string>
+    <string name="poi_hazard_additional_minefield">Мінне поле</string>
+    <string name="poi_hazard_additional_contamination">Забруднення</string>
     <string name="poi_defibrillator_location">Розташування</string>
     <string name="poi_changing_table_yes">Так;Сповивальний стіл: так</string>
     <string name="poi_changing_table_no">Ні;Сповивальний стіл: ні</string>
@@ -5141,4 +5141,17 @@
     <string name="poi_canoe_egress">Винос каное</string>
     <string name="poi_canoe_put_in_egress">Спуск і витяг каное</string>
     <string name="poi_whitewater_hazard">Небезпека бурхливої води</string>
+    <string name="poi_hazard_additional_hole">Отвір</string>
+    <string name="poi_hazard_additional_curve">Кривизна</string>
+    <string name="poi_hazard_additional_curves">Криві</string>
+    <string name="poi_hazard_additional_pedestrians">Пішоходи</string>
+    <string name="poi_hazard_additional_children">Діти</string>
+    <string name="poi_hazard_additional_animal_crossing">Перетин тварин</string>
+    <string name="poi_hazard_additional_dangerous_junction">Небезпечне перехрестя</string>
+    <string name="poi_hazard_additional_school_zone">Шкільна зона</string>
+    <string name="poi_hazard_additional_cyclists">Велосипедисти</string>
+    <string name="poi_hazard_additional_shooting_range">Стрілецький тир</string>
+    <string name="poi_hazard_additional_queues_likely">Ймовірні черги</string>
+    <string name="poi_hazard_additional_side_winds">Бічні вітри</string>
+    <string name="poi_hazard_additional_ice">Лід</string>
 </resources>
