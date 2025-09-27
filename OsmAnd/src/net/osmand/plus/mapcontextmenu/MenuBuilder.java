@@ -405,6 +405,7 @@ public class MenuBuilder {
 			buildRow(view, new BuildRowAttrs.Builder()
 					.setIconId(item.getIconId())
 					.setText(item.getText())
+					.setTextPrefix(item.getTextPrefix())
 					.setButtonText(item.getButtonText())
 					.setCollapsable(item.isCollapsable())
 					.setCollapsableView(item.getCollapsableView())
