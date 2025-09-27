@@ -1,7 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
-import android.util.Pair;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -12,12 +12,12 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
@@ -89,9 +89,9 @@ public class WptPtMenuBuilder extends MenuBuilder {
 			String textPrefix = app.getString(R.string.shared_string_description);
 			View.OnClickListener clickListener = v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, wpt.getDesc(), textPrefix);
 
-			buildRow(view, null, null, textPrefix, wpt.getDesc(), 0,
-					null, false, null, true, 10,
-					false, false, false, clickListener, matchWidthDivider);
+			buildRow(view, new BuildRowAttrs.Builder().setTextPrefix(textPrefix).setText(wpt.getDesc())
+					.setNeedLinks(true).setTextLinesLimit(10).setOnClickListener(clickListener)
+					.setMatchWithDivider(matchWidthDivider).build());
 		}
 	}
 
@@ -106,19 +106,21 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		buildDateRow(view, wpt.getTime());
+		buildDateRow(view, app.getString(R.string.created_on), wpt.getTime());
 		if (wpt.getSpeed() > 0) {
-			buildRow(view, R.drawable.ic_action_speed,
-					null, OsmAndFormatter.getFormattedSpeed((float) wpt.getSpeed(), app), 0, false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_speed)
+					.setText(OsmAndFormatter.getFormattedSpeed((float) wpt.getSpeed(), app))
+					.setTextPrefix(app.getString(R.string.shared_string_speed)).build());
 		}
 		if (!Double.isNaN(wpt.getEle())) {
-			buildRow(view, R.drawable.ic_action_altitude,
-					null, OsmAndFormatter.getFormattedDistance((float) wpt.getEle(), app), 0, false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_altitude)
+					.setText(OsmAndFormatter.getFormattedDistance((float) wpt.getEle(), app))
+					.setTextPrefix(app.getString(R.string.altitude)).build());
 		}
 		if (!Double.isNaN(wpt.getHdop())) {
-			buildRow(view, R.drawable.ic_action_gps_info,
-					null, Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int) wpt.getHdop(), 0,
-					false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_gps_info)
+					.setText("" + (int) wpt.getHdop())
+					.setTextPrefix(Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop))).build());
 		}
 		prepareDescription(wpt, view);
 		buildCommentRow(view, wpt.getComment());
@@ -146,14 +148,17 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		if (selectedGpxFile != null) {
 			List<WptPt> points = selectedGpxFile.getGpxFile().getPointsList();
 			if (!points.isEmpty()) {
+				Context context = view.getContext();
 				GpxFile gpx = selectedGpxFile.getGpxFile();
-				String title = view.getContext().getString(R.string.context_menu_points_of_group);
+				String title = context.getString(R.string.context_menu_points_of_group);
 				File file = new File(gpx.getPath());
 				String gpxName = file.getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");
 				int color = getPointColor(wpt, getFileColor(selectedGpxFile));
-				buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_type_waypoints_group, color), null, title, 0, gpxName,
-						true, getCollapsableWaypointsView(view.getContext(), true, gpx, wpt),
-						false, 0, false, null, false);
+				Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_type_waypoints_group, color);
+				CollapsableView collapsableView = getCollapsableWaypointsView(context, true, gpx, wpt);
+				buildRow(view, new BuildRowAttrs.Builder().setText(title).setIcon(icon)
+						.setSecondaryText(gpxName).setCollapsable(true)
+						.setCollapsableView(collapsableView).build());
 			}
 		}
 	}

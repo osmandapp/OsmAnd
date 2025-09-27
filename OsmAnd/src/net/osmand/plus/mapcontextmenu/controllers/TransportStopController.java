@@ -109,7 +109,7 @@ public class TransportStopController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		Amenity amenity = transportStop.getAmenity();
 		if (amenity != null) {
-			AmenityMenuController.addTypeMenuItem(amenity, builder);
+			AmenityMenuController.addTypeMenuItem(getApplication(), amenity, builder);
 		} else {
 			super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		}

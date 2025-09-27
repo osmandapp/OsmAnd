@@ -7,18 +7,20 @@ public class PlainMenuItem {
 	private final int iconId;
 	private final String buttonText;
 	private final String text;
+	private final String textPrefix;
 	private final boolean needLinks;
 	private final boolean url;
 	private final boolean collapsable;
 	private final CollapsableView collapsableView;
 	private final View.OnClickListener onClickListener;
 
-	public PlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean url,
-	                     boolean collapsable, CollapsableView collapsableView,
-	                     View.OnClickListener onClickListener) {
+	public PlainMenuItem(int iconId, String buttonText, String text, String textPrefix,
+	                     boolean needLinks, boolean url, boolean collapsable,
+	                     CollapsableView collapsableView, View.OnClickListener onClickListener) {
 		this.iconId = iconId;
 		this.buttonText = buttonText;
 		this.text = text;
+		this.textPrefix = textPrefix;
 		this.needLinks = needLinks;
 		this.url = url;
 		this.collapsable = collapsable;
@@ -36,6 +38,10 @@ public class PlainMenuItem {
 
 	public String getText() {
 		return text;
+	}
+
+	public String getTextPrefix() {
+		return textPrefix;
 	}
 
 	public boolean isNeedLinks() {

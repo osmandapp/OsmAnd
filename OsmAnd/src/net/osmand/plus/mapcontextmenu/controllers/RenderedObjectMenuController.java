@@ -241,7 +241,7 @@ public class RenderedObjectMenuController extends MenuController {
 				if (entry.getKey().equalsIgnoreCase("maxheight")) {
 					AbstractPoiType pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
 					if (pt != null) {
-						addPlainMenuItem(R.drawable.ic_action_note_dark, null, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
+						addPlainMenuItem(R.drawable.ic_action_note_dark, null, entry.getValue(), pt.getTranslation(), false, false, null);
 					}
 				}
 			}

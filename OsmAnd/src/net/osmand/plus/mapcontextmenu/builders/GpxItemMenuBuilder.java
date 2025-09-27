@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -39,7 +40,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 		String description = GpxUiHelper.getDescription(app, item.analysis, false);
 		String[] lines = description.split("\n");
 		for (String line : lines) {
-			buildRow(view, R.drawable.ic_action_info_dark, null, line, 0, false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_info_dark).setText(line).build());
 		}
 	}
 

@@ -88,12 +88,12 @@ public class AisObjectMenuController extends MenuController {
     private void addMenuItem(@NonNull String type, @Nullable String value) {
         if (value != null) {
             if (!value.isEmpty()) {
-                addPlainMenuItem(0, value, type, false, false, null);
+                addPlainMenuItem(0, value, type, null, false, false, null);
             }
         }
     }
     private void addMenuItem(@NonNull String type, @Nullable String value,
-                             @Nullable SortedSet<Integer> msgTypes, Integer selection[]) {
+                             @Nullable SortedSet<Integer> msgTypes, Integer[] selection) {
         if (msgTypes != null) {
             for (Integer i : selection) {
                 if (msgTypes.contains(i)) {
