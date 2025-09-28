@@ -5148,4 +5148,10 @@
     <string name="poi_hazard_additional_children">Infanoj</string>
     <string name="poi_hazard_additional_animal_crossing">Transpaŝantaj bestoj</string>
     <string name="poi_hazard_additional_dangerous_junction">Danĝera vojkruciĝo</string>
+    <string name="poi_hazard_additional_school_zone">Lernejo proksime</string>
+    <string name="poi_hazard_additional_cyclists">Biciklantoj</string>
+    <string name="poi_hazard_additional_shooting_range">Pafejo</string>
+    <string name="poi_hazard_additional_queues_likely">Oftaj trafik-ŝtopiĝoj</string>
+    <string name="poi_hazard_additional_side_winds">Flankaj ventoj</string>
+    <string name="poi_hazard_additional_ice">Glacio</string>
 </resources>
