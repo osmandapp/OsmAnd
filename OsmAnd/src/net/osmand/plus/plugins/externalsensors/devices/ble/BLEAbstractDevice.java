@@ -69,9 +69,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	                                                   @NonNull UUID uuid, @NonNull String address,
 	                                                   @NonNull String name, int rssi) {
 		BLEAbstractDevice device = null;
-		if (BLEOBDDevice.Companion.getServiceUUID().equals(uuid)) {
-			device = new BLEOBDDevice(bluetoothAdapter, address);
-		} else if (BLEHeartRateDevice.getServiceUUID().equals(uuid)) {
+		if (BLEHeartRateDevice.getServiceUUID().equals(uuid)) {
 			device = new BLEHeartRateDevice(bluetoothAdapter, address);
 		} else if (BLETemperatureDevice.getServiceUUID().equals(uuid)) {
 			device = new BLETemperatureDevice(bluetoothAdapter, address);
@@ -81,8 +79,6 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			device = new BLERunningSCDDevice(bluetoothAdapter, address);
 		} else if (BLEBPICPDevice.getServiceUUID().equals(uuid)) {
 			device = new BLEBPICPDevice(bluetoothAdapter, address);
-		} else {
-			device = new BLEOBDDevice(bluetoothAdapter, address);
 		}
 		if (device != null) {
 			device.deviceName = name;
@@ -343,13 +339,19 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 		BluetoothGattDescriptor descriptor =
 				characteristic.getDescriptor(GattAttributes.UUID_CHARACTERISTIC_CLIENT_CONFIG);
-		descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-		enqueueCommand(() -> {
-			if (!bluetoothGatt.writeDescriptor(descriptor)) {
-				LOG.error("Device writeDescriptor failed " + getName());
+		if (descriptor == null) {
+			LOG.error("Device CONFIG Descriptor missed for characteristic " + characteristic);
+		} else {
+			descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+			enqueueCommand(() -> {
+				if (!bluetoothGatt.writeDescriptor(descriptor)) {
+					LOG.error("Device writeDescriptor failed " + getName());
+				} else {
+					LOG.debug("Device writeDescriptor success " + characteristic);
+				}
 				completedCommand();
-			}
-		});
+			});
+		}
 	}
 
 	private boolean enqueueCommand(@NonNull Runnable command) {

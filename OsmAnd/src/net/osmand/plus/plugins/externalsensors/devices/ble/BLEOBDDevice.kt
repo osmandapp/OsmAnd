@@ -20,7 +20,7 @@ import okio.Timeout
 import java.util.UUID
 import kotlin.math.min
 
-class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
+class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String, val uuid: String) :
 	BLEAbstractDevice(bluetoothAdapter, deviceId), Source, Sink {
 	private val log = PlatformUtil.getLog("OBD2")
 
@@ -56,13 +56,30 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 
 	@SuppressLint("MissingPermission")
 	override fun onGattServicesDiscovered(gatt: BluetoothGatt, status: Int) {
-		super.onGattServicesDiscovered(gatt, status)
+		var readCharacteristicSet = false
 		if (status == BluetoothGatt.GATT_SUCCESS) {
-			val obdService = gatt.getService(serviceUUID)
-			writeCharacteristic =
-				obdService?.getCharacteristic(GattAttributes.UUID_CHARACTERISTIC_OBD_WRITE)
-			isReady = true
-			deviceReadyListener?.onDeviceReadyStateChange(true)
+			for (service in gatt.services) {
+				if (Algorithms.stringsEqual(service.uuid.toString(), uuid)) {
+					for (characteristic in service.characteristics) {
+						val characteristicProp = characteristic.properties
+						val writeDescriptor =
+							characteristic.getDescriptor(GattAttributes.UUID_CHARACTERISTIC_CLIENT_CONFIG)
+						if ((characteristicProp and BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0 && writeDescriptor != null) {
+							bleReadSensor.requestCharacteristic(characteristic)
+							readCharacteristicSet = true
+						}
+						if ((characteristicProp and BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+							writeCharacteristic = characteristic
+						}
+						if (readCharacteristicSet && writeCharacteristic != null) {
+							isReady = true
+							deviceReadyListener?.onDeviceReadyStateChange(true)
+							break
+						}
+					}
+				}
+			}
+
 		}
 	}
 
@@ -95,11 +112,6 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 			}
 
 		}
-	}
-
-	companion object {
-		val serviceUUID: UUID
-			get() = GattAttributes.UUID_CHARACTERISTIC_OBD_SCANNER
 	}
 
 	override fun flush() {

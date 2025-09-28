@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentLinkedQueue
 
 class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.deviceId + "_OBD") {
 	private val lastOBDData: ConcurrentLinkedQueue<OBDData> = ConcurrentLinkedQueue()
+	private var readCharacteristicUUID = GattAttributes.UUID_CHARACTERISTIC_UNDEFINED
 
 	class OBDData internal constructor(val timestamp: Long, val response: String) : SensorData {
 		override fun getDataFields(): List<SensorDataField> {
@@ -44,8 +45,13 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 		return Collections.emptyList()
 	}
 
+	fun requestCharacteristic(characteristics: BluetoothGattCharacteristic) {
+		readCharacteristicUUID = characteristics.uuid
+		requestCharacteristic(listOf(characteristics))
+	}
+
 	override fun getRequestedCharacteristicUUID(): UUID {
-		return GattAttributes.UUID_CHARACTERISTIC_OBD_READ
+		return readCharacteristicUUID
 	}
 
 	override fun getName(): String {
