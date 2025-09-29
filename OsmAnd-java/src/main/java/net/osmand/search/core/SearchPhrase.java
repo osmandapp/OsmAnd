@@ -786,11 +786,11 @@ public class SearchPhrase {
     }
 
 	public static class NameStringMatcher implements StringMatcher {
-
+		private static final Pattern DIGIT_SEP_LETTER = Pattern.compile("(\\d)\\s*[-–—/\\\\.]?\\s*(\\p{L})");
 		private CollatorStringMatcher sm;
 
 		public NameStringMatcher(String namePart, StringMatcherMode mode) {
-			sm = new CollatorStringMatcher(namePart, mode);
+			sm = new CollatorStringMatcher(normalizeHouseNumber(namePart), mode);
 		}
 		
 		public boolean matches(Collection<String> map) {
@@ -807,14 +807,22 @@ public class SearchPhrase {
 
 		@Override
 		public boolean matches(String name) {
-			if (name == null || name.length() == 0) {
+			if (name == null || name.isEmpty()) {
 				return false;
 			}
-			return sm.matches(name);
+			return sm.matches(normalizeHouseNumber(name));
 		}
-		
+
+		private static String normalizeHouseNumber(String s) {
+			if (s == null || s.isEmpty()) {
+				return s;
+			}
+
+			// Collapse a single separator between trailing digits and an immediately following letter
+			return DIGIT_SEP_LETTER.matcher(s).replaceAll("$1$2");
+		}
 	}
-	
+
 	public int countUnknownWordsMatchMainResult(SearchResult sr) {
 		return countUnknownWordsMatchInternal(sr, null, 0);
 	}
@@ -911,11 +919,21 @@ public class SearchPhrase {
 	
 	public NameStringMatcher getUnknownWordToSearchBuildingNameMatcher() {
 		int ind = getUnknownWordToSearchBuildingInd();
-		if(ind > 0) {
-			return getUnknownNameStringMatcher(ind - 1);
+		boolean complete;
+		String word;
+		if (ind > 0) {
+			// The building token is one of otherUnknownWords at index ind-1
+			int tokenIndex = ind - 1;
+			complete = tokenIndex < otherUnknownWords.size() - 1 || isLastUnknownSearchWordComplete();
+			word = otherUnknownWords.get(tokenIndex);
 		} else {
-			return getFirstUnknownNameStringMatcher();
+			complete = isFirstUnknownSearchWordComplete();
+			word = firstUnknownSearchWord;
 		}
+		StringMatcherMode mode = (complete ?
+				StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
+				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		return new NameStringMatcher(word, mode);
 	}
 	
 	public String getUnknownWordToSearchBuilding() {
