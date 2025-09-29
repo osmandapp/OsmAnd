@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
@@ -91,9 +92,9 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		}
 		String startEndTimeTitle = app.getString(R.string.shared_string_start_time) + " - " + app.getString(R.string.shared_string_end_time);
-		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, startEndTimeTitle,
-				startFormat.format(start) + " - " + endFormat.format(end), 0, null,
-				false, null, false, 0, false, false, false, null, true);
+		buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_time_start))
+				.setTextPrefix(startEndTimeTitle).setText(startFormat.format(start) + " - " + endFormat.format(end))
+				.setMatchWithDivider(true).build());
 	}
 
 	public void buildElevationRows(View view) {
@@ -110,13 +111,13 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 			String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
 			String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
-			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_descent), null, app.getString(R.string.ascent_descent),
-					asc + " / " + desc, 0, null,
-					false, null, false, 0, false, false, false, null, true);
-
-			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_descent), null, app.getString(R.string.distance_moving),
-					OsmAndFormatter.getFormattedDistance(analysis.getTotalDistanceMoving(), app), 0, null,
-					false, null, false, 0, false, false, false, null, true);
+			buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_altitude_descent))
+					.setTextPrefix(app.getString(R.string.ascent_descent)).setText(asc + " / " + desc)
+					.setMatchWithDivider(true).build());
+			buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_altitude_descent))
+					.setTextPrefix(app.getString(R.string.distance_moving))
+					.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistanceMoving(), app))
+					.setMatchWithDivider(true).build());
 		}
 	}
 
@@ -140,9 +141,10 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 		if (selectedPoint.getTime() != 0) {
 			DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-			buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, app.getString(R.string.shared_string_time),
-					format.format(selectedPoint.getTime()), 0, null,
-					false, null, false, 0, false, false, false, null, true);
+			buildRow(view, new BuildRowAttrs.Builder().setIcon(getThemedIcon(R.drawable.ic_action_time_start))
+					.setTextPrefix(app.getString(R.string.shared_string_time))
+					.setText(format.format(selectedPoint.getTime()))
+					.setMatchWithDivider(true).build());
 		}
 		if (!Double.isNaN(selectedPoint.getEle())) {
 			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_altitude), app.getString(R.string.altitude),
@@ -259,10 +261,8 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		}
 	}
 
-	private void buildInfoRow(View view, Drawable icon, String textPrefix, String text){
-		buildRow(view, icon, null, textPrefix,
-				text, 0, null,
-				false, null, false, 0, false, false, false, null, false);
+	private void buildInfoRow(View view, Drawable icon, String textPrefix, String text) {
+		buildRow(view, new BuildRowAttrs.Builder().setIcon(icon).setTextPrefix(textPrefix).setText(text).build());
 	}
 
 	private void buildCategoryView(View view, String name) {

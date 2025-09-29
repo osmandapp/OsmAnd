@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import net.osmand.data.Amenity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
@@ -67,34 +68,29 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 		String direction = descTokens.get(KEY_DIRECTIONS);
 
 		if (!Algorithms.isEmpty(phones)) {
-			buildRow(view, R.drawable.ic_action_call_dark,
-					null, phones, 0,
-					false, null, false, 0, false, true, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setText(phones).setIconId(R.drawable.ic_action_call_dark)
+					.setNumber(true).setTextPrefix(app.getString(R.string.phone)).build());
 		}
 		if (wpt.getLink() != null && !Algorithms.isEmpty(wpt.getLink().getHref())) {
-			buildRow(view, R.drawable.ic_world_globe_dark,
-					null, wpt.getLink().getHref(), 0,
-					false, null, false, 0, true, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_world_globe_dark)
+					.setText(wpt.getLink().getHref()).setTextPrefix(app.getString(R.string.shared_string_link))
+					.setUrl(true).build());
 		}
 		if (!Algorithms.isEmpty(emails)) {
-			buildRow(view, R.drawable.ic_action_message,
-					null, emails, 0,
-					false, null, false, 0, false, false, true, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_message)
+					.setText(emails).setTextPrefix(app.getString(R.string.poi_email)).setEmail(true).build());
 		}
 		if (!Algorithms.isEmpty(workingHours)) {
-			buildRow(view, R.drawable.ic_action_time,
-					null, workingHours, 0,
-					false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_time)
+					.setText(workingHours).setTextPrefix(app.getString(R.string.opening_hours)).build());
 		}
 		if (!Algorithms.isEmpty(direction)) {
-			buildRow(view, R.drawable.ic_action_gdirections_dark,
-					null, direction, 0,
-					false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_gdirections_dark)
+					.setText(direction).setTextPrefix(app.getString(R.string.poi_direction)).build());
 		}
 		if (!Algorithms.isEmpty(price)) {
-			buildRow(view, R.drawable.ic_action_price_tag,
-					null, price, 0,
-					false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_price_tag)
+					.setText(price).setTextPrefix(app.getString(R.string.shared_string_price)).build());
 		}
 	}
 
