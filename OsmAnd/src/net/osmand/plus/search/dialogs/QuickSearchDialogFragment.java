@@ -2210,6 +2210,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			poiUIFilter = app.getPoiFilters().getFilter(topIndexFilter, acceptedTypes);
 			processTopIndexAfterLoad = ProcessTopIndex.NO;
 			return poiUIFilter;
+		} else if (processAfter == ProcessTopIndex.MAP) {
+			return app.getPoiFilters().getFilter(topIndexFilter, null);
 		}
 		processTopIndexAfterLoad = processAfter;
 		return null;
