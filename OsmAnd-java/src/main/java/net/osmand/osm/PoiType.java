@@ -1,5 +1,6 @@
 package net.osmand.osm;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -313,5 +314,18 @@ public class PoiType extends AbstractPoiType {
 
 	public void setMinCount(int minCount) {
 		this.minCount = minCount;
+	}
+
+	public Map<String, String> getOsmTagsValues() {
+		Map<String, String> tags = new LinkedHashMap<>();
+		String tag1 = getRawOsmTag(), val1 = getOsmValue();
+		if (tag1 != null && val1 != null) {
+			tags.put(tag1, val1);
+		}
+		String tag2 = getOsmTag2(), val2 = getOsmValue2();
+		if (tag2 != null && val2 != null) {
+			tags.put(tag2, val2);
+		}
+		return tags;
 	}
 }

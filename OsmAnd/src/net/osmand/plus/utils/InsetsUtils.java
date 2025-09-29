@@ -1,5 +1,7 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.plus.helpers.AndroidUiHelper.processSystemBarScrims;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -157,6 +159,7 @@ public class InsetsUtils {
 		InsetsUtils.setWindowInsetsListener(rootView, (v, insets) -> {
 			View processedView = paddingsView != null ? paddingsView : v;
 			processInsets(processedView, targetsCollection, insets);
+			processSystemBarScrims(insets, v);
 
 			insetSupportedFragment.setLastRootInsets(insets);
 			insetSupportedFragment.onApplyInsets(insets);

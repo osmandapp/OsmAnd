@@ -77,6 +77,7 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 	private TimeSlider timeSlider;
 	private RulerWidget rulerWidget;
 	private WeatherWidgetsPanel widgetsPanel;
+	private WeatherPlugin.WeatherSourceChangeListener weatherSourceChangeListener;
 	private Handler progressUpdateHandler;
 	private Handler animateForecastHandler;
 
@@ -489,6 +490,14 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 		mapActivity.getMapLayers().getMapInfoLayer().addAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.GONE);
 		updateSelectedDate(selectedDate.getTime(), false, false);
+		
+		weatherSourceChangeListener = newSource -> {
+			MapActivity activity = requireMapActivity();
+			if (activity != null) {
+				activity.getMapLayers().getMapInfoLayer().updateSideWidgets();
+			}
+		};
+		plugin.addWeatherSourceChangeListener(weatherSourceChangeListener);
 	}
 
 	@Override
@@ -500,6 +509,11 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 		mapActivity.getMapLayers().getMapInfoLayer().removeAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.VISIBLE);
 		updateSelectedDate(null, false, false);
+		
+		if (weatherSourceChangeListener != null) {
+			plugin.removeWeatherSourceChangeListener(weatherSourceChangeListener);
+			weatherSourceChangeListener = null;
+		}
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {

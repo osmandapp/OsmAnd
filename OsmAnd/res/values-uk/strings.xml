@@ -5671,7 +5671,7 @@
     <string name="ais_port_nmea_local_description">Визначте порт UPD, через який OsmAnd отримує дані NMEA</string>
     <string name="ais_object_lost_timeouts">Параметри тайм-ауту для прийому сигналу AIS</string>
     <string name="ais_object_lost_timeouts_description">Встановіть значення часу очікування для визначення втрачених об’єктів AIS, якщо протягом певного часу не було отримано сигнал.</string>
-    <string name="ais_object_lost_timeout">Час очікування для видимості, коли об’єкт втрачено</string>
+    <string name="ais_object_lost_timeout">Тайм-аут для видимості, коли судно втрачено</string>
     <string name="ais_cpa_settings">Налаштування, пов\'язані з CPA</string>
     <string name="ais_cpa_settings_description">Ці значення визначають, як відображаються об\'єкти AIS, коли вони наближаються до власного положення судна.</string>
     <string name="ais_cpa_warning_time">Час попередження перед точкою найближчого зближення (CPA)</string>
@@ -5680,9 +5680,9 @@
     <string name="plugin_ais_tracker_description">Відображає позиції AIS та інформацію про судна поблизу. Дані AIS надходять через мережу від зовнішнього приймача AIS.</string>
     <string name="ais_load_data">Завантажити дані AIS з файлу</string>
     <string name="plugin_ais_tracker_disclaimer">ВІДМОВА ВІД ВІДПОВІДАЛЬНОСТІ\n\nЦей плагін є хобі-проектом і не призначений для використання в критично важливих програмах. Він не гарантує надійності чи точності. Не покладайтеся на це програмне забезпечення для навігації, безпеки життя чи будь-яких інших важливих операцій.</string>
-    <string name="ais_ship_lost_timeout">Час очікування видимості судна – видалити, якщо протягом встановленого часу не отримано сигналу AIS.</string>
+    <string name="ais_ship_lost_timeout">Застарілий час очікування відправлення</string>
     <string name="ais_cpa_warning_distance_description">Судна виділяються червоним кольором, якщо CPA (найближча точка підходу) знаходиться нижче визначеного порогу, а TCPA (час до CPA) потрапляє в час попередження, встановлений у налаштуванні «Час попередження про досягнення CPA».</string>
-    <string name="ais_ship_lost_timeout_description">Встановити тайм-аут для видимості корабля: після закінчення цього часу без прийому сигналу символ корабля змінить свій стан на екрані: він буде перекреслений.</string>
+    <string name="ais_ship_lost_timeout_description">Встановіть тайм-аут для видимості застарілого судна: після закінчення цього часу без прийому сигналу символ судна буде перекреслено.</string>
     <string name="ais_port_nmea_server_description">Визначте номер порту TCP джерела даних NMEA</string>
     <string name="ais_object_lost_timeout_description">Встановіть тайм-аут для видимості об\'єкта AIS: Якщо протягом заданого часу не буде отримано сигнал, об\'єкт буде автоматично видалено з дисплея.</string>
     <string name="ais_cpa_warning_distance">Відстань попередження для точки наближення (CPA)</string>
@@ -5870,7 +5870,7 @@
     <string name="lang_en_barebones">Англійська (базова)</string>
     <string name="shared_sting_osm_link">Посилання OSM</string>
     <string name="show_local_names">Показати місцеві назви</string>
-    <string name="obd_alt_battery_voltage">Напруга акумулятора (адаптер)</string>
+    <string name="obd_alt_battery_voltage">Напруга адаптера</string>
     <string name="liter_single">Літр</string>
     <string name="imperial_gallon">Імперський галон</string>
     <string name="us_gallon">галон США</string>
@@ -5880,4 +5880,6 @@
     <string name="access_pinch_zoom_magnification">Збільшення масштабування щипками</string>
     <string name="access_pinch_zoom_magnification_descr">Використовуйте масштабування області перегляду замість дискретних рівнів масштабування під час жестів збільшення.</string>
     <string name="accessibility_independent_features">Незалежні функції</string>
+    <string name="show_spherical_map">Показати сферичну карту</string>
+    <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
 </resources>

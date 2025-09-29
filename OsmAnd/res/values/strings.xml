@@ -11,7 +11,8 @@
 	Thx - Hardy
 -->
 
-    <string name="obd_alt_battery_voltage">Battery voltage (adapter)</string>
+    <string name="shared_string_price">Price</string>
+    <string name="obd_alt_battery_voltage">Adapter voltage</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Imperial gallon</string>
     <string name="us_gallon">US gallon</string>
@@ -628,6 +629,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
+    <string name="show_spherical_map">Show spherical map</string>
+    <string name="show_spherical_map_description">Display spheroidal model of the Earth</string>
     <string name="show_debug_tile">Show tile information</string>
     <string name="show_rasterization_debug_tile">Show tile rasterization information</string>
     <string name="show_debug_tile_description">Display information about map symbols of each tile</string>

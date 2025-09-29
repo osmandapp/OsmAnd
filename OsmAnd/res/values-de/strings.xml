@@ -516,7 +516,7 @@
     <string name="daynight_mode_night">Nacht</string>
     <string name="daynight_mode_auto">Sonnenaufgang/-untergang</string>
     <string name="daynight_mode_sensor">Umgebungslicht-Sensor</string>
-    <string name="daynight_descr">Wechsel zwischen Tag- und Nacht-Anzeige einstellen.</string>
+    <string name="daynight_descr">Wechsel zwischen Tag- und Nachtanzeige einstellen.</string>
     <string name="daynight">Tag-/Nacht-Modus</string>
     <string name="download_files_question">Lade {0} Datei(en) ({1} MB)?</string>
     <string name="items_were_selected">{0} Punkt(e) ausgewählt</string>
@@ -5686,7 +5686,7 @@
     <string name="shared_string_default_view">Standardansicht</string>
     <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktive Navigationsroute an.</string>
     <string name="ais_nmea_protocol_description">Protokoll für NMEA-Datenempfang auswählen</string>
-    <string name="ais_ship_lost_timeout_description">Zeitlimit für die Schiffssichtbarkeit einstellen: Nach dieser Zeit ohne Signalempfang ändert das Schiffssymbol seinen Status auf dem Bildschirm: Es wird durchgestrichen.</string>
+    <string name="ais_ship_lost_timeout_description">Zeitlimit für die Sichtbarkeit veralteter Schiffe festlegen: Nach Ablauf dieser Zeit ohne Signalempfang wird das Schiffssymbol durchgestrichen.</string>
     <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
     <string name="ais_cpa_warning_time_description">Wenn die TCPA (Zeit bis zum nächsten Annäherungspunkt) zu einem anderen Schiff unter den festgelegten Schwellenwert fällt, wird das Schiff rot markiert.</string>
     <string name="ais_port_nmea_local_description">UDP-Port definieren, an dem OsmAnd NMEA-Daten empfängt</string>
@@ -5695,8 +5695,8 @@
     <string name="ais_load_data">AIS-Daten aus Datei laden</string>
     <string name="ais_address_nmea_server">IP-Adresse der NMEA-Datenquelle</string>
     <string name="ais_port_nmea_local">UDP-Port des lokalen NMEA-Datenempfängers</string>
-    <string name="ais_object_lost_timeout">Zeitlimit für die Sichtbarkeit bei Objektverlust</string>
-    <string name="ais_ship_lost_timeout">Zeitlimit für die Sichtbarkeit des Schiffs – entfernen, wenn innerhalb der festgelegten Dauer kein AIS-Signal empfangen wird.</string>
+    <string name="ais_object_lost_timeout">Zeitlimit für die Sichtbarkeit bei Schiffsverlust</string>
+    <string name="ais_ship_lost_timeout">Zeitüberschreitung bei veraltetem Schiff</string>
     <string name="ais_cpa_warning_distance_description">Schiffe werden rot hervorgehoben, wenn der CPA (Nächster Annäherungspunkt) unter dem festgelegten Schwellenwert liegt und die TCPA (Zeit bis zum CPA) innerhalb der in der Einstellung ‚Warnzeit bis zum Erreichen des CPA‘ festgelegten Warnzeit liegt.</string>
     <string name="plugin_ais_tracker_disclaimer">HAFTUNGSAUSSCHLUSS\n\nDieses Plugin ist ein Hobbyprojekt und nicht für den Einsatz in kritischen Anwendungen vorgesehen. Es garantiert keine Zuverlässigkeit oder Genauigkeit. Verlassen Sie sich nicht auf diese Software für die Navigation, die Sicherheit von Leben oder andere wichtige Vorgänge.</string>
     <string name="plugin_ais_tracker_description">Zeigt AIS-Positionen und Informationen zu Schiffen in der Nähe an. Die AIS-Daten werden über das Netzwerk von einem externen AIS-Empfänger empfangen.</string>
@@ -5895,7 +5895,7 @@
     <string name="rendering_attr_tidalFlatStyle_name">Watt-Stil</string>
     <string name="rendering_attr_tidalFlatStyle_description">Stil der Wattflächen</string>
     <string name="lang_en_barebones">Englisch (wesentliches)</string>
-    <string name="obd_alt_battery_voltage">Batteriespannung (Adapter)</string>
+    <string name="obd_alt_battery_voltage">Adapterspannung</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Britische Gallone</string>
     <string name="us_gallon">US-Gallone</string>
@@ -5905,4 +5905,6 @@
     <string name="access_pinch_zoom_magnification_descr">Verwenden Sie für Zoom-Gesten die Skalierung des Ansichtsfensters anstelle der separaten Zoomstufen.</string>
     <string name="mpg">MPG</string>
     <string name="accessibility_independent_features">Unabhängige Funktionen</string>
+    <string name="show_spherical_map">Sphärische Karte anzeigen</string>
+    <string name="show_spherical_map_description">Sphäroidisches Modell der Erde anzeigen</string>
 </resources>

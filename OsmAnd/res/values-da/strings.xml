@@ -3483,7 +3483,7 @@
     <string name="gpx_monitoring_stop">Pause turoptagelse</string>
     <string name="gpx_monitoring_start">Genoptage turoptagelse</string>
     <string name="previous_segment">Foregående segmenter</string>
-    <string name="system_default_theme">System standard</string>
+    <string name="system_default_theme">Systemstandard</string>
     <string name="all_previous_segments">Alle tidligere segmenter</string>
     <string name="open_saved_track">Åbn gemt spor</string>
     <string name="shared_string_is_saved">er gemt</string>
@@ -5685,8 +5685,8 @@
     <string name="map_widget_route_information_desc">Viser den forventede ankomsttid, resterende rejsetid og afstand for den aktive navigationsrute.</string>
     <string name="shared_string_default_view">Standardvisning</string>
     <string name="plugin_ais_tracker_disclaimer">ANSVARSFRASKRIVELSE\n\nDenne udvidelse er et hobbyprojekt og er ikke beregnet til brug i vitale applikationer. Det garanterer ikke for pålidelighed eller nøjagtighed. Stol ikke på denne software til navigation, livsvigtig sikkerhed eller andre vigtige handlinger.</string>
-    <string name="ais_ship_lost_timeout_description">Indstil timeout for skibets synlighed: Efter denne tid uden signalmodtagelse vil skibssymbolet ændre tilstand på skærmen: Det bliver streget ud.</string>
-    <string name="ais_object_lost_timeout">Timeout for synlighed, når objektet går tabt</string>
+    <string name="ais_ship_lost_timeout_description">Indstil timeout for skibs forældet synlighed: Efter dette tidsrum uden signalmodtagelse vil skibssymbolet blive streget ud.</string>
+    <string name="ais_object_lost_timeout">Timeout for synlighed, når skib mistes</string>
     <string name="ais_object_lost_timeout_description">Indstil en timeout for AIS-objektets synlighed: Hvis der ikke modtages noget signal inden for den angivne varighed, fjernes objektet automatisk fra skærmen.</string>
     <string name="ais_load_data">Indlæs AIS-data fra fil</string>
     <string name="ais_cpa_warning_distance_description">Skibe fremhæves med rødt, hvis CPA (Closest Point of Approach) er under den definerede tærskel, og TCPA (Time to CPA) falder inden for den advarselstid, der er angivet i indstillingen \'Advarselstid til at nå CPA\'.</string>
@@ -5702,7 +5702,7 @@
     <string name="ais_port_nmea_local_description">Definer UPD-port, hvor OsmAnd modtager NMEA-data</string>
     <string name="ais_object_lost_timeouts">Timeout-indstillinger for modtagelse af AIS-signaler</string>
     <string name="ais_object_lost_timeouts_description">Indstil timeout-værdier for at identificere mistede AIS-objekter, hvis der ikke er modtaget noget signal i et bestemt tidsrum.</string>
-    <string name="ais_ship_lost_timeout">Timeout for skibs synlighed – fjern, hvis der ikke modtages noget AIS-signal inden for den indstillede varighed.</string>
+    <string name="ais_ship_lost_timeout">Skib forældet timeout</string>
     <string name="ais_cpa_settings">Indstillinger relateret til CPA</string>
     <string name="ais_cpa_settings_description">Disse værdier bestemmer, hvordan AIS-objekter vises, når de nærmer sig fartøjets egen position.</string>
     <string name="ais_cpa_warning_time">Advarselstid før Closest Point of Approach (CPA)</string>
@@ -5895,7 +5895,7 @@
     <string name="rendering_attr_spotDistance_description">Punkt‑dybdemåling afstand</string>
     <string name="rendering_attr_spotSize_name">Punkt‑dybdemåling størrelse</string>
     <string name="rendering_attr_spotSize_description">Punkt‑dybdemåling størrelse</string>
-    <string name="obd_alt_battery_voltage">Batterispænding (adapter)</string>
+    <string name="obd_alt_battery_voltage">Adapterspænding</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Britisk gallon</string>
     <string name="us_gallon">Amerikansk gallon</string>
@@ -5905,4 +5905,6 @@
     <string name="access_pinch_zoom_magnification">Forstørrelse med knibezoom</string>
     <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering i stedet for separate zoom-niveauer ved zoom-bevægelser.</string>
     <string name="accessibility_independent_features">Uafhængige funktioner</string>
+    <string name="show_spherical_map">Vis sfærisk kort</string>
+    <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
 </resources>

@@ -292,7 +292,9 @@ public class AmenityMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 	}
 
-	public static void addTypeMenuItem(@NonNull Amenity amenity, @NonNull MenuBuilder builder) {
+	public static void addTypeMenuItem(@NonNull Context context,
+	                                   @NonNull Amenity amenity, @NonNull MenuBuilder builder) {
+		String textPrefix = context.getString(R.string.shared_string_type);
 		String typeStr = getTypeStr(amenity);
 		if (!Algorithms.isEmpty(typeStr)) {
 			int resId = getRightIconId(builder.getApplication(), amenity);
@@ -303,7 +305,7 @@ public class AmenityMenuController extends MenuController {
 			if (resId == 0) {
 				resId = R.drawable.ic_action_folder_stroke;
 			}
-			builder.addPlainMenuItem(resId, typeStr, false, false, null);
+			builder.addPlainMenuItem(resId, typeStr, textPrefix, false, false, null);
 		}
 	}
 

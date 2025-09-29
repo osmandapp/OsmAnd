@@ -4154,7 +4154,7 @@
     <string name="walking_route_osmc_description">Χρωματίζονται οι διαδρομές ανάλογα με το δικό του τοπικό χρώμα (αν υπάρχει στο OpenStreetMap) και τον τύπο (διεθνές, περιφερειακό, τοπικό).</string>
     <string name="rendering_attr_showRunningRoutes_name">Διαδρομές τρεξίματος</string>
     <string name="routeInfo_horse_scale_name">Δυσκολία μονοπατιών ιππασίας</string>
-    <string name="rendering_attr_natureReserves_name">Φυσικό καταφύγιο</string>
+    <string name="rendering_attr_natureReserves_name">Καταφύγιο άγριας ζωής και Προστατευόμενες περιοχές</string>
     <string name="quick_action_parking_place">Θέση στάθμευσης</string>
     <string name="quick_action_video_note">Σημείωση βίντεο</string>
     <string name="quick_action_verb_show_hide">Εμφάνιση / Απόκρυψη</string>
@@ -5485,4 +5485,22 @@
     <string name="generate_slope_from_3d_maps">Παραγωγή raster χαρτών κλίσης εδάφους από 3D χάρτες</string>
     <string name="generate_hillshade_from_3d_maps">Παραγωγή raster χαρτών σκίασης ανάγλυφου από 3D χάρτες</string>
     <string name="disable_vertex_hillshade_3d">Απενεργοποίηση κορυφών σκίασης ανάγλυφου σε 3D</string>
+    <string name="obd_alt_battery_voltage">Τάση μπαταρίας (αντάπτορας)</string>
+    <string name="liter_single">Λίτρο</string>
+    <string name="imperial_gallon">Αυτοκρατορικό γαλόνι</string>
+    <string name="us_gallon">Αμερικάνικο γαλόνι</string>
+    <string name="kilometers">Χιλιόμετρα</string>
+    <string name="miles">Μίλια</string>
+    <string name="mpg">ΜΑΓ (Μίλια Ανά Γαλόνι)</string>
+    <string name="amount_of_total_used">%1$s από %2$s χρησιμοποιήθηκαν</string>
+    <string name="delete_data">Διαγραφή δεδομένων</string>
+    <string name="backup_delete_data_warning_extended">Αυτή η ενέργεια θα διαγράψει μόνιμα όλα τα επιλεγμένα δεδομένα από το cloud. Δεν θα είναι δυνατή η επαναφορά τους αργότερα.</string>
+    <string name="manage_storage_delete_data_dialog_summary">Σίγουρα θέλετε να διαγράψετε %1$s από το OsmAnd Cloud;\n\nΜπορείτε να τα επαναφέρετε από τον Κάδο εντός 30 ημερών.</string>
+    <string name="manage_storage">Διαχείριση αποθηκευτικού χώρου</string>
+    <string name="copy_as_new_folder">Αντιγραφή ως νέος φάκελος</string>
+    <string name="add_to_a_folder">Προσθήκη σε φάκελο</string>
+    <string name="add_to_favorites">Προσθήκη στα αγαπημένα</string>
+    <string name="view_on_phone">Προβολή στο Τηλέφωνο</string>
+    <string name="private_access_routing_req_short">Ο προορισμός σας είναι σε ιδιωτική περιοχή. Να επιτραπεί η χρήση ιδιωτικών δρόμων;</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Πατήστε το γραφικό στοιχείο για εναλλαγή λειτουργιών.</string>
 </resources>

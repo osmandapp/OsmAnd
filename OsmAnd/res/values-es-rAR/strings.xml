@@ -5531,9 +5531,9 @@
     <string name="ais_port_nmea_server">Puerto TCP para el orígen de datos NMEA</string>
     <string name="ais_port_nmea_server_description">Definí el número de puerto TCP del orígen de datos NMEA</string>
     <string name="ais_object_lost_timeouts">Ajustes del tiempo límite para la recepción de la señal AIS</string>
-    <string name="ais_object_lost_timeout">Tiempo máximo de visibilidad al perder el objeto</string>
+    <string name="ais_object_lost_timeout">Tiempo máximo de visibilidad al perder el barco</string>
     <string name="ais_object_lost_timeout_description">Definí el tiempo máximo de visibilidad de los objetos AIS: Si no hay señal dentro de este tiempo, el objeto se quitará automáticamente de la pantalla.</string>
-    <string name="ais_ship_lost_timeout">Tiempo máximo visible del barco: quitar si no se reciben señales AIS dentro del tiempo definido.</string>
+    <string name="ais_ship_lost_timeout">Tiempo máximo visible del barco</string>
     <string name="ais_cpa_settings">Ajustes relacionados con el CPA</string>
     <string name="ais_cpa_settings_description">Estos valores determinan cómo mostrar los objetos AIS al acercarse a la ubicación del barco.</string>
     <string name="ais_cpa_warning_time">Tiempo de aviso antes del Punto de Aproximación más Cercano (CPA)</string>
@@ -5542,7 +5542,7 @@
     <string name="ais_cpa_warning_distance_description">Los barcos se resaltan en rojo si el CPA (Punto de Aproximación más Cercano) es inferior a este valor y el TCPA (Tiempo hasta el CPA) está dentro del tiempo de advertencia definido en la opción «Tiempo de aviso para alcanzar el CPA».</string>
     <string name="plugin_ais_tracker_name">Localizador de buques AIS</string>
     <string name="plugin_ais_tracker_description">Muestra las ubicaciones del AIS e información sobre las embarcaciones circundantes. Los datos AIS se reciben a través de la red desde un receptor AIS externo.</string>
-    <string name="ais_ship_lost_timeout_description">Definir el tiempo máximo para ver el barco: Después de este tiempo sin recibir señal, el símbolo del barco cambiará su estado en pantalla: Estará tachado.</string>
+    <string name="ais_ship_lost_timeout_description">Definí el tiempo máximo para ver el barco: Después de este tiempo sin recibir señal, el símbolo del barco se tachará.</string>
     <string name="ais_port_nmea_local_description">Definí el puerto UPD donde OsmAnd recibe los datos NMEA</string>
     <string name="ais_port_nmea_local">Puerto UDP del receptor local de datos NMEA</string>
     <string name="show_utm_grids_description">Muestra la cuadrícula en metros UTM, en lugar de WGS84</string>
@@ -5732,7 +5732,7 @@
     <string name="shared_sting_osm_link">Enlace de OSM</string>
     <string name="lang_en_barebones">Inglés (básico)</string>
     <string name="show_local_names">Mostrar nombres locales</string>
-    <string name="obd_alt_battery_voltage">Voltaje de la batería (adaptador)</string>
+    <string name="obd_alt_battery_voltage">Voltaje del adaptador</string>
     <string name="liter_single">Litro</string>
     <string name="imperial_gallon">Galón imperial</string>
     <string name="us_gallon">Galón estadounidense</string>
@@ -5742,4 +5742,6 @@
     <string name="accessibility_independent_features">Características independientes</string>
     <string name="access_pinch_zoom_magnification">Zum mediante pellizcos</string>
     <string name="access_pinch_zoom_magnification_descr">Usá el escalado de la ventana gráfica en lugar de los niveles de zum discretos durante los gestos de acercamiento.</string>
+    <string name="show_spherical_map">Mostrar mapa esférico</string>
+    <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
 </resources>

@@ -3986,7 +3986,7 @@
     <string name="shared_string_feet">voet</string>
     <string name="srtm_unit_format">Eenheid van hoogtelijnen</string>
     <string name="srtm_download_list_help_message">OsmAnd biedt contourlijngegevens in meters en voet aan. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
-    <string name="srtm_download_single_help_message">Selecteer a.u.b. een variant. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
+    <string name="srtm_download_single_help_message">Selecteer a.u.b. een eenheid. Je zal het bestand opnieuw moeten downloaden om het formaat te wijzigen.</string>
     <string name="exit_number">Afritnummer</string>
     <string name="announce_when_exceeded">Aankondigen wanneer overschreden</string>
     <string name="user_points">Gebruikerspunten</string>
@@ -5405,7 +5405,7 @@
     <string name="help_article_plan_route_coordinate_input_name">Coördinateninvoer</string>
     <string name="help_article_troubleshooting_maps_data_name">Kaarten &amp; Data</string>
     <string name="help_article_widgets_name">Kaartwidgets</string>
-    <string name="github_discussion">Github-discussie</string>
+    <string name="github_discussion">GitHub-discussie</string>
     <string name="rendering_attr_alpineHiking_description">Type moeilijkheidsgraad voor de routes.</string>
     <string name="filter_by_name">Filter op naam</string>
     <string name="help_article_widgets_info_widgets_name">Informatieve widgets</string>
@@ -5585,7 +5585,7 @@
     <string name="most_viewed">Meest bekeken</string>
     <string name="write_heading">Richting opschrijven</string>
     <string name="empty_smart_folder_title">Geen overeenkomende track</string>
-    <string name="open_issue_on_github">Open een issue op Github</string>
+    <string name="open_issue_on_github">Open een issue op GitHub</string>
     <string name="write_heading_description">Sla richting op voor ieder trackpunt tijdens het opnemen</string>
     <string name="avg_sensor_bycicle_power">Fietsvermogen, gemiddeld</string>
     <string name="complex_widget_alert">%1$s widget kan alleen op zijn eigen rij geplaatst worden.</string>
@@ -5793,10 +5793,10 @@
     <string name="ais_port_nmea_local_description">Definieer UDP-poort waar OsmAnd data ontvangt</string>
     <string name="ais_object_lost_timeouts">Onderbrekingsinstellingen voor AIS-signaalontvangst</string>
     <string name="ais_object_lost_timeouts_description">Stel onderbrekingswaardes in om verloren AIS-objecten te identificeren wanneer er geen signaal wordt ontvangen voor een gespecificeerde tijd.</string>
-    <string name="ais_object_lost_timeout">Onderbreking voor zichtbaarheid wanneer het object is verloren</string>
+    <string name="ais_object_lost_timeout">Tijdslimiet voor zichtbaarheid nadat het schip is verdwenen</string>
     <string name="ais_object_lost_timeout_description">Stel een time-out in voor de zichtbaarheid van het AIS-object: als er binnen de opgegeven tijd geen signaal wordt ontvangen, wordt het object automatisch van het scherm verwijderd.</string>
-    <string name="ais_ship_lost_timeout">Time-out van de zichtbaarheid van het schip – verwijderen als er binnen de ingestelde tijd geen AIS-signaal wordt ontvangen.</string>
-    <string name="ais_ship_lost_timeout_description">Stel de onderbreking in voor de zichtbaarheid van het schip: Na deze tijd zonder een signaal-ontvangst, zal het schip-icoon op het scherm veranderen van staat: Het zal doorgekruist zijn.</string>
+    <string name="ais_ship_lost_timeout">Time-out verouderde scheepspositie</string>
+    <string name="ais_ship_lost_timeout_description">Stel de time-out in voor de zichtbaarheid van het niet actuele schip: Na deze tijd zonder een signaal-ontvangst, zal het schip-icoon doorgekruist zijn.</string>
     <string name="ais_cpa_settings">Instellingen gerelateerd aan CPA</string>
     <string name="ais_cpa_settings_description">Deze waardes bepalen hoe AIS-objecten worden weergegeven wanneer ze naderen tot de positie van het eigen schip.</string>
     <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nDeze plugin is een hobbyproject en is niet bedoeld voor gebruik in kritieke omgevingen. Er wordt geen garantie gegeven op betrouwbaarheid of nauwkeurigheid. Vertrouw op geen enkele manier op deze software voor navigatie, persoonlijke veiligheid, of andere belangrijke doeleinden.</string>

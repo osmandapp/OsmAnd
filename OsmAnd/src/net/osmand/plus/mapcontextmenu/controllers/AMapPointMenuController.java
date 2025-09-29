@@ -81,10 +81,10 @@ public class AMapPointMenuController extends MenuController {
 	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription,
-			LatLon latLon) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		String textPrefix = getString(R.string.shared_string_details);
 		for (String detail : point.getDetails()) {
-			builder.addPlainMenuItem(R.drawable.ic_action_info_dark, detail, true, false, null);
+			builder.addPlainMenuItem(R.drawable.ic_action_info_dark, detail, textPrefix, true, false, null);
 		}
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 	}

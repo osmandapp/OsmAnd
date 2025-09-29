@@ -134,7 +134,6 @@ public class BinaryMapIndexReader {
 
 	private static final String BASEMAP_NAME = "basemap";
 
-
 	public BinaryMapIndexReader(final RandomAccessFile raf, File file) throws IOException {
 		this.raf = raf;
 		this.file = file;
@@ -194,15 +193,19 @@ public class BinaryMapIndexReader {
 	public OsmAndOwner getOwner() {
 		return owner;
 	}
+	
+	public void init() throws IOException {
+		init(true);
+	}
 
-	private void init() throws IOException {
+	public void init(boolean checkFileComplete) throws IOException {
 		boolean initCorrectly = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (!initCorrectly) {
+				if (!initCorrectly && checkFileComplete) {
 					//throw new IOException("Corrupted file. It should be ended as it starts with version"); //$NON-NLS-1$
 					throw new IOException("Corrupt file, it should have ended as it starts with version: " + file.getAbsolutePath()); //$NON-NLS-1$
 				}

@@ -5480,11 +5480,11 @@
     <string name="ais_port_nmea_server_description">Sainmhínigh uimhir phoirt TCP na foinse sonraí NMEA</string>
     <string name="ais_port_nmea_local_description">Sainmhínigh calafort UDP ina bhfaigheann Osmondon sonraí NMEA</string>
     <string name="ais_object_lost_timeouts">Socruithe am istigh le haghaidh glactha comhartha AIS</string>
-    <string name="ais_object_lost_timeout">Teorainn ama le haghaidh infheictheachta nuair a chailltear réad</string>
+    <string name="ais_object_lost_timeout">Am scoir le haghaidh infheictheachta nuair a chailltear an long</string>
     <string name="ais_object_lost_timeouts_description">Socraigh luachanna am istigh chun réada AIS caillte a shainaithint mura bhfuarthas comhartha ar feadh tréimhse ama ar leith.</string>
     <string name="ais_object_lost_timeout_description">Socraigh am scoir le haghaidh infheictheacht réada AIS: Mura bhfaightear aon chomhartha laistigh den tréimhse shonraithe, bainfear an réad den taispeáint go huathoibríoch.</string>
-    <string name="ais_ship_lost_timeout">Am scoir infheictheachta loinge - bain é mura bhfaightear comhartha AIS laistigh den tréimhse socraithe.</string>
-    <string name="ais_ship_lost_timeout_description">Socraigh teorainn ama le haghaidh infheictheacht na loinge: Tar éis an ama seo gan glacadh comhartha, athróidh siombail na loinge a staid ar an scáileán: Déanfar é a thrasnú amach.</string>
+    <string name="ais_ship_lost_timeout">Am scoir atá as dáta don loingseoireacht</string>
+    <string name="ais_ship_lost_timeout_description">Socraigh an t-am scoir le haghaidh infheictheachta as dáta loinge: tar éis an ama seo gan glacadh comhartha, cuirfear cros ar shiombail na loinge.</string>
     <string name="ais_cpa_settings">Socruithe a bhaineann le CPA</string>
     <string name="ais_cpa_settings_description">Cinneann na luachanna seo conas a thaispeántar réada AIS nuair a thagann siad i ngar do shuíomh an tsoithigh féin.</string>
     <string name="ais_cpa_warning_distance">Fad rabhaidh don Phointe Cur Chuige Is gaire (CPA)</string>
@@ -5680,7 +5680,7 @@
     <string name="lang_en_barebones">Béarla (lom)</string>
     <string name="shared_sting_osm_link">Nasc OSM</string>
     <string name="show_local_names">Taispeáin ainmneacha áitiúla</string>
-    <string name="obd_alt_battery_voltage">Voltas ceallraí (oiriúntóir)</string>
+    <string name="obd_alt_battery_voltage">Voltas an oiriúnaitheora</string>
     <string name="liter_single">Lítear</string>
     <string name="imperial_gallon">Galún impiriúil</string>
     <string name="us_gallon">Galún SAM</string>
@@ -5690,4 +5690,6 @@
     <string name="access_pinch_zoom_magnification">Formhéadú súmáil pinch</string>
     <string name="access_pinch_zoom_magnification_descr">Bain úsáid as scálú radhairc in ionad leibhéil súmála ar leith le linn gothaí súmála isteach.</string>
     <string name="accessibility_independent_features">Gnéithe neamhspleácha</string>
+    <string name="show_spherical_map">Taispeáin léarscáil sféarúil</string>
+    <string name="show_spherical_map_description">Taispeáin samhail sféaróideach den Domhan</string>
 </resources>
