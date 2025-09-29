@@ -143,6 +143,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.add(InsetTarget.createLeftSideContainer(true, R.id.control_buttons));
 		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container).landscapeLeftSided(true));
+		collection.add(InsetTarget.createLeftSideContainer(true, true, modesLayoutToolbar));
 		return collection;
 	}
 
