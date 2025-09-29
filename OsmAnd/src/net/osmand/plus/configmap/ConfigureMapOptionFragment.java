@@ -24,6 +24,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
@@ -87,7 +88,10 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_container));
+		collection.removeType(Type.LANDSCAPE_SIDES);
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_container).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true, R.id.main_view));
+		collection.add(InsetTarget.createHorizontalLandscape(true, R.id.toolbar, R.id.main_content));
 		return collection;
 	}
 

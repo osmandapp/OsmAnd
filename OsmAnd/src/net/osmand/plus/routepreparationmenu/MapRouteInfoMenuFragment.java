@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -51,6 +54,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	@Override
 	public int getTopViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
+	@IdRes
+	protected int getToolbarViewId() {
 		return R.id.route_menu_top_shadow_all;
 	}
 
@@ -127,6 +136,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			}
 		}
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createLeftSideContainer(true, R.id.control_buttons));
+		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container).landscapeLeftSided(true));
+		return collection;
 	}
 
 	@Override

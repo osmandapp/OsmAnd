@@ -314,14 +314,7 @@ public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDa
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createCustomBuilder(R.id.list)
-				.portraitSides(InsetSide.BOTTOM)
-				.landscapeSides(InsetSide.BOTTOM, InsetSide.LEFT)
-				.clipToPadding(true)
-				.adjustHeight(true)
-				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
-				.build());
-
+		collection.replace(InsetTarget.createScrollable(R.id.list).landscapeLeftSided(true));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}

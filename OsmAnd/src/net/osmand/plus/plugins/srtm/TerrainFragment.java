@@ -47,6 +47,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -406,6 +407,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}

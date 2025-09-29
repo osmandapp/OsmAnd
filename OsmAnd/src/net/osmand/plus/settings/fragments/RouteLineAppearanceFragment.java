@@ -77,6 +77,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	@Override
+	protected int getToolbarViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
 	public int getHeaderViewHeight() {
 		return 0;
 	}

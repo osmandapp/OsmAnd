@@ -24,6 +24,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
@@ -186,6 +187,7 @@ public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}

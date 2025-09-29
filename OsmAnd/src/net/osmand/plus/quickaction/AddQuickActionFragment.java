@@ -106,7 +106,7 @@ public class AddQuickActionFragment extends BaseFullScreenFragment implements It
 
 	@Override
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
-		InsetTargetBuilder builder = InsetTarget.createCustomBuilder(recyclerView);
+		InsetTargetBuilder builder = InsetTarget.createCustomBuilder(recyclerView).applyPadding(true);
 		if (searchMode) {
 			builder.portraitSides(InsetSide.BOTTOM);
 			builder.landscapeSides(InsetSide.BOTTOM, InsetSide.RIGHT, InsetSide.LEFT);

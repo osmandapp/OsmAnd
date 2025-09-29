@@ -599,7 +599,21 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createScrollable(R.id.context_menu_bottom_view));
+		collection.replace(InsetTarget.createScrollable(R.id.context_menu_bottom_view).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true, mainView));
+		collection.replace(InsetTarget.createHorizontalLandscape(true,
+				R.id.context_menu_top_view,
+				R.id.transport_badges_container,
+				R.id.additional_info_row_container,
+				R.id.title_button_container,
+				R.id.download_buttons_container,
+				R.id.title_bottom_button_container,
+				R.id.additional_buttons_container,
+				R.id.title_progress_container,
+				R.id.buttons_top_border,
+				R.id.context_menu_buttons,
+				R.id.buttons_bottom_border,
+				R.id.context_menu_bottom_buttons));
 		return collection;
 	}
 

@@ -24,6 +24,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -276,6 +277,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
     @Override
     public InsetTargetsCollection getInsetTargets() {
         InsetTargetsCollection collection = super.getInsetTargets();
+        collection.replace(InsetTarget.createBottomContainer(R.id.mapillary_filters_linear_layout).landscapeLeftSided(true));
         collection.removeType(Type.ROOT_INSET);
         return collection;
     }

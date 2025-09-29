@@ -137,6 +137,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -258,9 +259,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
+	protected int getToolbarViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_navigation));
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_navigation).landscapeLeftSided(true).adjustWidth(true));
+		collection.add(InsetTarget.createHorizontalLandscape(true, R.id.header_container));
+		collection.replace(InsetTarget.createCustomBuilder(R.id.display_groups_button_container).landscapeSides(InsetSide.RIGHT).preferMargin(true));
+		collection.add(InsetTarget.createCustomBuilder(R.id.back_button_container).landscapeSides(InsetSide.LEFT).preferMargin(true));
 		return collection;
 	}
 

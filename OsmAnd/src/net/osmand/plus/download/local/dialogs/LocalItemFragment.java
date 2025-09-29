@@ -80,13 +80,6 @@ public class LocalItemFragment extends LocalBaseFragment
 		return view;
 	}
 
-	@Override
-	public InsetTargetsCollection getInsetTargets() {
-		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
-		return collection;
-	}
-
 	private void setupToolbar(@NonNull View view) {
 		toolbarLayout = view.findViewById(R.id.toolbar_layout);
 		ViewCompat.setElevation(toolbarLayout, 5);

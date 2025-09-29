@@ -20,7 +20,19 @@ public class InsetTargetsCollection {
 		targets.computeIfAbsent(target.getType(), k -> new ArrayList<>()).add(target);
 	}
 
+	public void add(@NonNull InsetTarget.InsetTargetBuilder builder) {
+		InsetTarget target = builder.build();
+		targets.computeIfAbsent(target.getType(), k -> new ArrayList<>()).add(target);
+	}
+
 	public void replace(@NonNull InsetTarget target) {
+		List<InsetTarget> list = new ArrayList<>();
+		list.add(target);
+		targets.put(target.getType(), list);
+	}
+
+	public void replace(@NonNull InsetTarget.InsetTargetBuilder builder) {
+		InsetTarget target = builder.build();
 		List<InsetTarget> list = new ArrayList<>();
 		list.add(target);
 		targets.put(target.getType(), list);

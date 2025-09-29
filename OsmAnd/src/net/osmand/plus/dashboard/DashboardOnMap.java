@@ -30,7 +30,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -88,7 +87,6 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
-import net.osmand.plus.utils.InsetsUtils.OnInsetsApplied;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -282,11 +280,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		InsetsUtils.setWindowInsetsListener(dashboardView.findViewById(R.id.dashboard), (view, insets) -> {
 			InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
-
-			targetsCollection.replace(InsetTarget.createOneSided(true, false,
+			targetsCollection.replace(InsetTarget.createCustomBuilder(view)
+					.portraitSides(InsetSide.TOP)
+					.landscapeSides(InsetSide.TOP)
+					.applyPadding(true)
+					.build());
+			targetsCollection.replace(InsetTarget.createLeftSideContainer(true,
 					view.findViewById(R.id.dashboard_content_container)));
-
-			targetsCollection.add(InsetTarget.createOneSided(true, true,
+			targetsCollection.add(InsetTarget.createLeftSideContainer(true, true,
 					view.findViewById(R.id.dashboard_toolbar_container)));
 
 			InsetsUtils.processInsets(dashboardView.findViewById(R.id.dashboard), targetsCollection, insets);

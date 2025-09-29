@@ -14,7 +14,7 @@ import java.util.EnumSet;
 
 public final class InsetTarget {
 
-	public enum Type {ROOT_INSET, BOTTOM_CONTAINER, FAB, COLLAPSING_APPBAR, SCROLLABLE, SIDED, CUSTOM}
+	public enum Type {ROOT_INSET, BOTTOM_CONTAINER, FAB, COLLAPSING_APPBAR, SCROLLABLE, SIDED, CUSTOM, LANDSCAPE_SIDES}
 
 	private final int[] viewIds;
 	private final View[] views;
@@ -26,8 +26,8 @@ public final class InsetTarget {
 
 	private final boolean clipToPadding;
 	private final boolean adjustHeight;
+	private final boolean adjustWidth;
 	private final boolean preferMargin;
-	private final boolean leftSided;
 	private final boolean applyPadding;
 
 	private InsetTarget(InsetTargetBuilder b) {
@@ -36,12 +36,12 @@ public final class InsetTarget {
 		this.type = b.type;
 		this.typeMask = b.typeMask;
 		this.applyPadding = b.applyPadding;
-		this.portraitSides = b.portraitSides != null ? b.portraitSides : null;
-		this.landscapeSides = b.landscapeSides != null ? b.landscapeSides : null;
+		this.portraitSides = b.portraitSides != null ? b.portraitSides : EnumSet.noneOf(InsetsUtils.InsetSide.class);;
+		this.landscapeSides = b.landscapeSides != null ? b.landscapeSides : EnumSet.noneOf(InsetsUtils.InsetSide.class);;
 		this.clipToPadding = b.clipToPadding;
 		this.adjustHeight = b.adjustHeight;
+		this.adjustWidth = b.adjustWidth;
 		this.preferMargin = b.preferMargin;
-		this.leftSided = b.leftSided;
 	}
 
 	public int[] getViewIds() {
@@ -64,13 +64,14 @@ public final class InsetTarget {
 		return adjustHeight;
 	}
 
+	public boolean isAdjustWidth() {
+		return adjustWidth;
+	}
+
 	public boolean isClipToPadding() {
 		return clipToPadding;
 	}
 
-	public boolean isLeftSided() {
-		return leftSided;
-	}
 	public int getTypeMask() {
 		return typeMask;
 	}
@@ -84,7 +85,7 @@ public final class InsetTarget {
 		return isLandscape ? landscapeSides : portraitSides;
 	}
 
-	public static InsetTarget createFab(int... ids) {
+	public static InsetTargetBuilder createFab(int... ids) {
 		return builder(ids)
 				.type(Type.FAB)
 				.portraitSides(InsetsUtils.InsetSide.BOTTOM)
@@ -92,66 +93,94 @@ public final class InsetTarget {
 				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
 				.preferMargin(true)
 				.clipToPadding(false)
-				.adjustHeight(false)
-				.build();
+				.adjustHeight(false);
 	}
 
-	public static InsetTarget createScrollable(int... ids) {
+	public static InsetTargetBuilder createScrollable(int... ids) {
 		return builder(ids)
 				.type(Type.SCROLLABLE)
-				.portraitSides(InsetsUtils.InsetSide.BOTTOM)
-				.landscapeSides(InsetsUtils.InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT)
+				.portraitSides(InsetSide.BOTTOM)
+				.landscapeSides(InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT)
 				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
 				.clipToPadding(true)
-				.build();
+				.applyPadding(true);
 	}
 
-	public static InsetTarget createBottomContainer(int... ids) {
+	public static InsetTargetBuilder createBottomContainer(int... ids) {
 		return builder(ids)
 				.type(Type.BOTTOM_CONTAINER)
 				.portraitSides(InsetSide.BOTTOM)
 				.landscapeSides(InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT)
 				.clipToPadding(true)
+				.applyPadding(true)
 				.adjustHeight(true)
-				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
-				.build();
+				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout());
 	}
 
-	public static InsetTarget createCollapsingAppBar(int... ids) {
+	public static InsetTargetBuilder createCollapsingAppBar(int... ids) {
 		return builder(ids)
 				.type(Type.COLLAPSING_APPBAR)
 				.portraitSides(InsetsUtils.InsetSide.TOP)
-				.landscapeSides(InsetsUtils.InsetSide.TOP)
-				.build();
+				.landscapeSides(InsetsUtils.InsetSide.TOP);
 	}
 
-	public static InsetTarget createOneSided(boolean leftSided, int... ids) {
+	public static InsetTargetBuilder createLeftSideContainer(boolean leftSided, int... ids) {
+		return createLeftSideContainer(leftSided, false, ids);
+
+	}
+
+	public static InsetTargetBuilder createLeftSideContainer(boolean leftSided, boolean applyPadding, int... ids) {
 		return builder(ids)
 				.type(Type.SIDED)
 				.portraitSides()
-				.landscapeSides(leftSided ? InsetSide.LEFT : InsetSide.RIGHT)
-				.leftSided(leftSided)
-				.build();
-	}
-
-	public static InsetTarget createOneSided(boolean leftSided, boolean applyPadding, View... ids) {
-		return builder(ids)
-				.type(Type.SIDED)
-				.portraitSides()
-				.landscapeSides(leftSided ? InsetSide.LEFT : InsetSide.RIGHT)
+				.landscapeSides()
 				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
-				.leftSided(leftSided)
-				.applyPadding(applyPadding)
-				.build();
+				.landscapeLeftSided(leftSided)
+				.adjustWidth(true)
+				.applyPadding(applyPadding);
 	}
 
-	public static InsetTarget createHorizontalLandscape(int... ids) {
+	public static InsetTargetBuilder createLeftSideContainer(boolean leftSided, View... ids) {
+		return createLeftSideContainer(leftSided, false, ids);
+	}
+
+	public static InsetTargetBuilder createLeftSideContainer(boolean leftSided, boolean applyPadding, View... ids) {
 		return builder(ids)
-				.type(Type.CUSTOM)
+				.type(Type.SIDED)
+				.portraitSides()
+				.landscapeSides()
+				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
+				.landscapeLeftSided(leftSided)
+				.adjustWidth(true)
+				.applyPadding(applyPadding);
+	}
+
+	public static InsetTargetBuilder createHorizontalLandscape(Boolean leftSided, int... ids) {
+		return builder(ids)
+				.type(Type.LANDSCAPE_SIDES)
 				.portraitSides()
 				.landscapeSides(InsetSide.LEFT, InsetSide.RIGHT)
-				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
-				.build();
+				.landscapeLeftSided(leftSided)
+				.applyPadding(true)
+				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout());
+	}
+
+	public static InsetTargetBuilder createHorizontalLandscape(Boolean leftSided, View... ids) {
+		return builder(ids)
+				.type(Type.LANDSCAPE_SIDES)
+				.portraitSides()
+				.landscapeSides(InsetSide.LEFT, InsetSide.RIGHT)
+				.landscapeLeftSided(leftSided)
+				.applyPadding(true)
+				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout());
+	}
+
+	public static InsetTargetBuilder createHorizontalLandscape(View... ids) {
+		return createHorizontalLandscape(null, ids);
+	}
+
+	public static InsetTargetBuilder createHorizontalLandscape(int... ids) {
+		return createHorizontalLandscape(null, ids);
 	}
 
 	public static InsetTargetBuilder createCustomBuilder(int... ids) {
@@ -164,12 +193,11 @@ public final class InsetTarget {
 				.type(Type.CUSTOM);
 	}
 
-	public static InsetTarget createRootInset() {
+	public static InsetTargetBuilder createRootInset() {
 		return builder(0)
 				.type(Type.ROOT_INSET)
 				.portraitSides(InsetsUtils.InsetSide.TOP)
-				.landscapeSides(InsetsUtils.InsetSide.TOP)
-				.build();
+				.landscapeSides(InsetsUtils.InsetSide.TOP);
 	}
 
 	public static InsetTargetBuilder builder(int... viewIds) {
@@ -185,13 +213,14 @@ public final class InsetTarget {
 		private final View[] views;
 		private Type type = Type.CUSTOM;
 		@InsetsType
-		private int typeMask = WindowInsetsCompat.Type.systemBars();
+		private int typeMask = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout();
 		private EnumSet<InsetsUtils.InsetSide> portraitSides;
 		private EnumSet<InsetsUtils.InsetSide> landscapeSides;
 		private boolean clipToPadding;
 		private boolean adjustHeight;
+		private boolean adjustWidth;
 		private boolean preferMargin;
-		private boolean leftSided;
+		private Boolean landscapeLeftSided = null;
 		private boolean applyPadding;
 
 		private InsetTargetBuilder(int[] viewIds, View[] views) {
@@ -233,13 +262,18 @@ public final class InsetTarget {
 			return this;
 		}
 
+		public InsetTargetBuilder adjustWidth(boolean value) {
+			this.adjustWidth = value;
+			return this;
+		}
+
 		public InsetTargetBuilder preferMargin(boolean value) {
 			this.preferMargin = value;
 			return this;
 		}
 
-		public InsetTargetBuilder leftSided(boolean leftSided) {
-			this.leftSided = leftSided;
+		public InsetTargetBuilder landscapeLeftSided(@Nullable Boolean leftSided) {
+			this.landscapeLeftSided = leftSided;
 			return this;
 		}
 
@@ -249,6 +283,15 @@ public final class InsetTarget {
 		}
 
 		public InsetTarget build() {
+			if (landscapeLeftSided != null) {
+				if (landscapeLeftSided) {
+					landscapeSides.add(InsetSide.LEFT);
+					landscapeSides.remove(InsetSide.RIGHT);
+				} else {
+					landscapeSides.remove(InsetSide.LEFT);
+					landscapeSides.add(InsetSide.RIGHT);
+				}
+			}
 			return new InsetTarget(this);
 		}
 	}
