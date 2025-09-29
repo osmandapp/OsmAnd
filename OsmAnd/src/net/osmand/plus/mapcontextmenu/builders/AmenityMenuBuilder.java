@@ -228,10 +228,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		processRoutePointAmenityTags(view);
 		buildInternalRows(view);
 
-		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
-			amenityUIHelper.buildWikiDataRow(view);
-		}
-
 		buildNearestRows((ViewGroup) view);
 		buildAltNamesRow((ViewGroup) view);
 		buildNamesRow((ViewGroup) view);
