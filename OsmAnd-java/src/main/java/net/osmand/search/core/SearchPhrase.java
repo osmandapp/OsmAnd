@@ -916,24 +916,14 @@ public class SearchPhrase {
 		} 
 		return 0;
 	}
-	
+
 	public NameStringMatcher getUnknownWordToSearchBuildingNameMatcher() {
 		int ind = getUnknownWordToSearchBuildingInd();
-		boolean complete;
-		String word;
-		if (ind > 0) {
-			// The building token is one of otherUnknownWords at index ind-1
-			int tokenIndex = ind - 1;
-			complete = tokenIndex < otherUnknownWords.size() - 1 || isLastUnknownSearchWordComplete();
-			word = otherUnknownWords.get(tokenIndex);
+		if(ind > 0) {
+			return getUnknownNameStringMatcher(ind - 1);
 		} else {
-			complete = isFirstUnknownSearchWordComplete();
-			word = firstUnknownSearchWord;
+			return getFirstUnknownNameStringMatcher();
 		}
-		StringMatcherMode mode = (complete ?
-				StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
-				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-		return new NameStringMatcher(word, mode);
 	}
 	
 	public String getUnknownWordToSearchBuilding() {
