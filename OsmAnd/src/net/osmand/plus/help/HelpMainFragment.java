@@ -32,7 +32,8 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -67,12 +68,6 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	@Nullable
-	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
-	}
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -93,6 +88,13 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 		updateContent();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	@Override

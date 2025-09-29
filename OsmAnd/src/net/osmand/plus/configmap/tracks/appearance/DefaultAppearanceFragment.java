@@ -2,13 +2,11 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController.PROCESS_ID;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -28,12 +26,11 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.configmap.tracks.ConfirmDefaultAppearanceBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
 
@@ -87,12 +84,11 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	@Override

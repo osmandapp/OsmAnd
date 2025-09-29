@@ -26,6 +26,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import java.util.*;
@@ -48,14 +50,6 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	private View footerShadow;
 	private FrameLayout buttonsContainer;
 	private boolean selectAll;
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -174,6 +168,13 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 		searchCloseIcon.setOnClickListener(view -> clearSearch());
 		listView.setAdapter(adapter);
 		return root;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection targetsCollection = super.getInsetTargets();
+		targetsCollection.replace(InsetTarget.createScrollable(R.id.list));
+		return targetsCollection;
 	}
 
 	@Override

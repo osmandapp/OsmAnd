@@ -18,6 +18,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/dashboard_content_container"
             android:layout_width="@dimen/dashboard_land_width"
             android:layout_height="match_parent"
             android:background="#70000000"
@@ -88,8 +89,10 @@
 
     </LinearLayout>
 
-    <include layout="@layout/dashboard_toolbar"
-             android:layout_height="@dimen/dashboard_map_toolbar"
-             android:layout_width="@dimen/dashboard_land_width"/>
+    <include
+        android:id="@+id/dashboard_toolbar_container"
+        layout="@layout/dashboard_toolbar"
+        android:layout_width="@dimen/dashboard_land_width"
+        android:layout_height="@dimen/dashboard_map_toolbar" />
 
 </FrameLayout>

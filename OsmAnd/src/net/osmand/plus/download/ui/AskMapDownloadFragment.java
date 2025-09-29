@@ -21,9 +21,8 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.AndroidUtils;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 
@@ -82,12 +81,11 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.root_view);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.root_view));
+		return collection;
 	}
 
 	@Override

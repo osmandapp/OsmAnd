@@ -39,6 +39,8 @@ import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener
 import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -191,12 +193,11 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.main_content);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_content));
+		return collection;
 	}
 
 	private void setupPLayForecastButton(View view) {

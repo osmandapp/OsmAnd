@@ -27,6 +27,8 @@ import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.gpx.SmartFolderUpdateListener
@@ -114,10 +116,10 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 		return view
 	}
 
-	override fun getBottomContainersIds(): MutableList<Int>? {
-		val ids: MutableList<Int> = ArrayList()
-		ids.add(R.id.buttons_container)
-		return ids
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container))
+		return collection
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
