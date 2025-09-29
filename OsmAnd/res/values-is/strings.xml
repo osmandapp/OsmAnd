@@ -5660,12 +5660,12 @@
     <string name="plugin_ais_tracker_description">Birtir AIS-staðsetningar og upplýsingar um nálæg skip. AIS-gögnin fást í gegnum netkerfi frá utanaðkomandi AIS-móttakara.</string>
     <string name="plugin_ais_tracker_disclaimer">FYRIRVARI\n\nÞessi viðbót er áhugaverkefni sem er ekki hannað fyrir sérstakan áreiðanleika eða nákvæmni. Ekki reiða þig á virkni þessa hugbúnaðar á neinn þann hátt sem hefði úrslitaþýðingu fyrir leiðsögn, öryggi mannslífa eða mikilvægar aðgerðir.</string>
     <string name="ais_object_lost_timeout_description">Settu tímamörk fyrir sýnileika AIS-atriða: ef ekkert merki hefur borist eftir þennan tíma, verður atriðið sjálfkrafa fjarlægt af skjánum.</string>
-    <string name="ais_ship_lost_timeout">Tímamörk sýnileika skips - fjarlægja ef ekkert AIS-merki berst innan stilltra tímamarka.</string>
+    <string name="ais_ship_lost_timeout">Tímamörk á úreldingu skips</string>
     <string name="ais_ship_lost_timeout_description">Settu tímamörk fyrir sýnileika skips: ef ekkert merki hefur borist eftir þennan tíma, breytist tákn skipsins á skjánum: krossað verður yfir það.</string>
     <string name="ais_cpa_settings">Stillingar sem tengjast CPA-árekstrarviðvörun</string>
     <string name="ais_cpa_settings_description">Þessi gildi skilgreina framsetningu AIS-atriða þegar þau nálgast eigin staðsetningu skipsins.</string>
     <string name="ais_object_lost_timeouts_description">Settu gildi tímamarka við að auðkenna týnd AIS-atriði ef ekkert merki hefur borist í tiltekinn tíma.</string>
-    <string name="ais_object_lost_timeout">Tímamörk sýnileika þegar AIS-atriði týnist</string>
+    <string name="ais_object_lost_timeout">Tímamörk sýnileika þegar skip týnist</string>
     <string name="ais_cpa_warning_distance">Vegalengd CPA-árekstrarviðvörunar (Closest Point of Approach)</string>
     <string name="map_widget_route_information_desc">Birtir áætlaðan komutíma, ferðatíma sem eftir er og heildarlengd virkrar siglingaleiðar.</string>
     <string name="show_grids_description">Leyfa birtingu hnitanets yfir landakortinu</string>
@@ -5848,7 +5848,7 @@
     <string name="description_purchases_fastspring">Þú getur sýslað með innkaup þín í gegnum FastSpring aðgangsstýringavefinn.</string>
     <string name="description_subscription_fastspring">Þú getur sýslað með eða sagt upp áskriftinni þinni í gegnum FastSpring aðgangsstýringavefinn.</string>
     <string name="shared_sting_osm_link">OSM-tengill</string>
-    <string name="obd_alt_battery_voltage">Rafhlöðuspenna (hleðslutæki)</string>
+    <string name="obd_alt_battery_voltage">Spenna hleðslutækis</string>
     <string name="liter_single">Lítri</string>
     <string name="imperial_gallon">Breskt gallon</string>
     <string name="us_gallon">Bandarískt gallon</string>
@@ -5860,4 +5860,8 @@
     <string name="accessibility_independent_features">Sjálfstæðir eiginleikar</string>
     <string name="access_pinch_zoom_magnification">Aðdráttur við að klípa saman</string>
     <string name="access_pinch_zoom_magnification_descr">Nota kvörðun á skoðunarglugga í stað aðgreindra aðdráttarstiga í bendingum.</string>
+    <string name="marine_render_descr">Einstaklega sérsníðanlegur siglingastíll. Byggt á sjávartengda stílnum. Virkar betur með Nautical World Seamarks kortinu og valkvæðu dýptarkortunum.</string>
+    <string name="show_spherical_map">Sýna kúlulaga kort</string>
+    <string name="show_spherical_map_description">Birta kúlulaga líkan af Jörðinni</string>
+    <string name="release_5_1">• Bætt við stuðningi við innkaup á vefnum í mörgum stýrikerfum\n\n • Hitaeiningar færðar í Almennar stillingar til að þær finnist betur\n\n • Bætt við rafhleðslumerki fyrir BLE-skynjara\n\n • Nýtt og betra viðmót til að velja punkta í leiðsögn\n\n • Bættur sýnileiki viðmótshluta með nýjum útlínum\n\n • Bætt við greiningu á Hækkun/Lækkun\n\n • Ítarlegri samþætting Wikipedia og Wikivoyage á fleiri merkisstöðum.</string>
 </resources>
