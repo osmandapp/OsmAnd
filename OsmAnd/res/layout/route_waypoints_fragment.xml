@@ -198,6 +198,7 @@
 			android:background="@drawable/bg_contextmenu_shadow_top_light" />
 
 		<include
+			android:id="@+id/bottom_buttons_container"
 			layout="@layout/route_info_menu_control_buttons"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/route_info_list_item_height"

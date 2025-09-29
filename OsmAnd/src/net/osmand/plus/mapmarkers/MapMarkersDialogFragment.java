@@ -36,14 +36,15 @@ import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment implements OnGroupSyncedListener {
 
@@ -183,18 +184,12 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 		return mainView;
 	}
 
-		@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.map_markers_bottom_navigation);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.replace(InsetTarget.createBottomContainer(R.id.map_markers_bottom_navigation));
+		return collection;
 	}
 
 	@Override

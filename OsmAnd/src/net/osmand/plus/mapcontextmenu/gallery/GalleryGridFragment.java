@@ -29,6 +29,8 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,12 +110,10 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		return view;
 	}
 
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.content_list);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.content_list));
+		return collection;
 	}
 
 	@NonNull

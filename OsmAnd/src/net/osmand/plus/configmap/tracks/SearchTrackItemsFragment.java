@@ -25,6 +25,8 @@ import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.ScreenPositionData;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -32,9 +34,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.io.KFile;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements OsmAndCompassListener,
@@ -65,12 +65,11 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 		return R.layout.gpx_search_items_fragment;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.recycler_view);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.recycler_view));
+		return collection;
 	}
 
 	protected void setupFragment(View view) {

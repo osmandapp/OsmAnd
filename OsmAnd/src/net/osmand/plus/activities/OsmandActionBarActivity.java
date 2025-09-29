@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
-import static net.osmand.plus.utils.InsetsUtils.InsetSide.TOP;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,19 +20,17 @@ import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.base.BottomSheetDialog;
-import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 @SuppressLint("Registered")
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity implements ISupportInsets {
@@ -149,28 +146,14 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		updateNavBarColor();
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return EnumSet.of(TOP);
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getFabIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.removeType(Type.FAB);
+		collection.removeType(Type.SCROLLABLE);
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.add(InsetTarget.createRootInset());
+		return collection;
 	}
 
 	@Override

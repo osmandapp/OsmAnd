@@ -65,7 +65,8 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -91,9 +92,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
@@ -597,12 +596,25 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.context_menu_bottom_view);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.context_menu_bottom_view).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true, mainView));
+		collection.replace(InsetTarget.createHorizontalLandscape(true,
+				R.id.context_menu_top_view,
+				R.id.transport_badges_container,
+				R.id.additional_info_row_container,
+				R.id.title_button_container,
+				R.id.download_buttons_container,
+				R.id.title_bottom_button_container,
+				R.id.additional_buttons_container,
+				R.id.title_progress_container,
+				R.id.buttons_top_border,
+				R.id.context_menu_buttons,
+				R.id.buttons_bottom_border,
+				R.id.context_menu_bottom_buttons));
+		return collection;
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {

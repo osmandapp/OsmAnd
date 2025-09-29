@@ -21,7 +21,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -31,7 +32,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class HelpArticlesFragment extends BaseFullScreenFragment implements OnItemClickListener {
 
@@ -43,12 +43,6 @@ public class HelpArticlesFragment extends BaseFullScreenFragment implements OnIt
 	@Override
 	public int getStatusBarColorId() {
 		return ColorUtilities.getStatusBarColorId(nightMode);
-	}
-
-	@Nullable
-	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
 	}
 
 	@Override
@@ -79,6 +73,13 @@ public class HelpArticlesFragment extends BaseFullScreenFragment implements OnIt
 		listView.setOnItemClickListener(this);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	@Override

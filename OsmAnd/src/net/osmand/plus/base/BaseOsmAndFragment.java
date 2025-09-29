@@ -16,14 +16,10 @@ import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Base fragment class for all UI components in OsmAnd that directly extend Android's Fragment.
@@ -73,31 +69,15 @@ public class BaseOsmAndFragment extends Fragment implements IOsmAndFragment, ISu
 		InsetsUtils.processInsets(this, view, null);
 	}
 
-	@Nullable
-	public List<Integer> getFabIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.fab);
-		return ids;
-	}
-
-	@Nullable
-	public Set<InsetSide> getRootInsetSides(){
-		return EnumSet.of(InsetSide.TOP);
-	}
-
-	@Nullable
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.scroll_view);
-		ids.add(R.id.recycler_view);
-		return ids;
-	}
-
-	@Nullable
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.add(InsetTarget.createFab(R.id.fab));
+		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
+		collection.add(InsetTarget.createScrollable(R.id.scroll_view, R.id.recycler_view));
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.modes_toggle, R.id.toolbar, R.id.tab_layout));
+		collection.add(InsetTarget.createRootInset());
+		return collection;
 	}
 
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets){

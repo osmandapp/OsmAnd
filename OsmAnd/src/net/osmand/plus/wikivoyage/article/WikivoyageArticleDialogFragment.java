@@ -40,6 +40,8 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
@@ -160,12 +162,11 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		return mainView;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
+		return collection;
 	}
 
 	@Override

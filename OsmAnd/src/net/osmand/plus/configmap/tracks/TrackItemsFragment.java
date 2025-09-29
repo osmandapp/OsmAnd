@@ -18,11 +18,11 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.track.BaseTracksTabsFragment;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.MapUtils;
 
-import java.util.List;
 import java.util.Set;
 
 public class TrackItemsFragment extends BaseFullScreenFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer {
@@ -71,16 +71,12 @@ public class TrackItemsFragment extends BaseFullScreenFragment implements OsmAnd
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private void setupAdapter(@NonNull TrackTab trackTab) {

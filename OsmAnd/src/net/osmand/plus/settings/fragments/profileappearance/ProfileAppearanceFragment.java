@@ -44,6 +44,9 @@ import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -51,9 +54,6 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen {
 
@@ -145,18 +145,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(android.R.id.list_container);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.replace(InsetTarget.createScrollable(R.id.list_container));
+		return collection;
 	}
 
 	@Override

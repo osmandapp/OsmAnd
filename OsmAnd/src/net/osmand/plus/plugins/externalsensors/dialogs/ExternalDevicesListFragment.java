@@ -31,6 +31,8 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableP
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog.OnSaveSensorPropertyCallback;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -105,12 +107,11 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		disconnectedList.setAdapter(disconnectedListAdapter);
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	private void setupPairSensorButton(@NonNull View view) {

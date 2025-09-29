@@ -31,6 +31,8 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvi
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
@@ -91,20 +93,12 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.recycler_view);
-		return ids;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.buttons_container);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.recycler_view));
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container));
+		return collection;
 	}
 
 	@NonNull

@@ -30,6 +30,8 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -126,19 +128,12 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 		return root;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
-	}
-
-	@Nullable
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.list);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.list));
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	protected abstract void onContinueButtonClickAction();

@@ -27,9 +27,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 public class AddCategoryQuickActionFragment extends BaseFullScreenFragment
 		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
@@ -82,12 +81,11 @@ public class AddCategoryQuickActionFragment extends BaseFullScreenFragment
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	private void setupToolbar(@NonNull View view) {

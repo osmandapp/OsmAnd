@@ -24,7 +24,9 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -34,7 +36,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 
@@ -183,9 +184,12 @@ public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 		}
 	}
 
-	@Nullable
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

@@ -5,10 +5,12 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.LocaleHelper;
@@ -97,7 +99,7 @@ public class MapSelectionResult {
 		}
 		List<SelectedMapObject> other = new ArrayList<>();
 		List<SelectedMapObject> mapObjects = new ArrayList<>(allObjects);
-		List<BaseDetailsObject> detailsObjects = processPointsWithAmenities(mapObjects, other);
+		List<BaseDetailsObject> detailsObjects = processPointsWithMapObjects(mapObjects, other);
 
 		detailsObjects.addAll(processObjects(mapObjects, other));
 
@@ -139,7 +141,7 @@ public class MapSelectionResult {
 	}
 
 	@NonNull
-	private List<BaseDetailsObject> processPointsWithAmenities(
+	private List<BaseDetailsObject> processPointsWithMapObjects(
 			@NonNull List<SelectedMapObject> mapObjects,
 			@NonNull List<SelectedMapObject> other) {
 		List<BaseDetailsObject> detailsObjects = new ArrayList<>();
@@ -148,7 +150,7 @@ public class MapSelectionResult {
 			if (object instanceof WptPt point) {
 				String originName = point.getAmenityOriginName();
 				if (!Algorithms.isEmpty(originName)) {
-					List<Amenity> filtered = filterAmenities(originName);
+					List<? extends MapObject> filtered = filterMapObjects(originName, mapObjects);
 					if (!Algorithms.isEmpty(filtered)) {
 						PlaceDetailsObject detailsObject = new PlaceDetailsObject(filtered, searchSettings.language().get());
 						detailsObject.addObject(point);
@@ -160,7 +162,7 @@ public class MapSelectionResult {
 			if (object instanceof FavouritePoint point) {
 				String originName = point.getAmenityOriginName();
 				if (!Algorithms.isEmpty(originName)) {
-					List<Amenity> filtered = filterAmenities(originName);
+					List<? extends MapObject> filtered = filterMapObjects(originName, mapObjects);
 					if (!Algorithms.isEmpty(filtered)) {
 						PlaceDetailsObject detailsObject = new PlaceDetailsObject(filtered, searchSettings.language().get());
 						detailsObject.addObject(point);
@@ -192,16 +194,30 @@ public class MapSelectionResult {
 	}
 
 	@Nullable
-	public List<Amenity> filterAmenities(@NonNull String nameEn) {
-		if (amenities == null) {
-			amenities = searcher.searchAmenities(pointLatLon, searchSettings);
+	public List<? extends MapObject> filterMapObjects(@NonNull String nameEn, @NonNull List<SelectedMapObject> selectedMapObjects) {
+		if (nameEn.startsWith("Amenity")) {
+			if (amenities == null) {
+				amenities = searcher.searchAmenities(pointLatLon, searchSettings);
+			}
+			List<String> names = Collections.singletonList(nameEn);
+			Amenity requestAmenity = new Amenity();
+			requestAmenity.setLocation(pointLatLon);
+			AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
+			return searcher.filterAmenities(amenities, request, searchSettings);
+		} else if (nameEn.startsWith("MapObject")) {
+			List<MapObject> result = new ArrayList<>();
+			for (SelectedMapObject smo : selectedMapObjects) {
+				Object object = smo.object();
+				if (object instanceof MapObject mapObject) {
+					long osmId = ObfConstants.getOsmObjectId(mapObject);
+					if (nameEn.contains(String.valueOf(osmId))) {
+						result.add(mapObject);
+					}
+				}
+			}
+			return result;
 		}
-		List<String> names = Collections.singletonList(nameEn);
-
-		Amenity requestAmenity = new Amenity();
-		requestAmenity.setLocation(pointLatLon);
-		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
-		return searcher.filterAmenities(amenities, request, searchSettings);
+		return null;
 	}
 
 	@NonNull

@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
@@ -34,10 +33,10 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogFragment {
 
@@ -73,17 +72,12 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 		updateUpDownBtn();
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
-	}
-
-	@Nullable
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.triple_bottom_buttons);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.replace(InsetTarget.createBottomContainer(R.id.triple_bottom_buttons));
+		return collection;
 	}
 
 	@Override

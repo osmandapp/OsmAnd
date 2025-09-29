@@ -265,15 +265,11 @@ public class TransportRouteController extends MenuController {
 			if (currentStop > 0) {
 				addPlainMenuItem(defaultIcon, mapActivity.getString(R.string.shared_string_show),
 						mapActivity.getString(R.string.route_stops_before, String.valueOf(currentStop)),
-						false, false, new OnClickListener() {
-
-							@Override
-							public void onClick(View arg0) {
-								MapActivity activity = getMapActivity();
-								if (activity != null) {
-									MapContextMenu menu = activity.getContextMenu();
-									menu.showOrUpdate(latLon, getPointDescription(), transportRoute);
-								}
+						null, false, false, v -> {
+							MapActivity activity = getMapActivity();
+							if (activity != null) {
+								MapContextMenu menu = activity.getContextMenu();
+								menu.showOrUpdate(latLon, getPointDescription(), transportRoute);
 							}
 						});
 			}
@@ -285,13 +281,8 @@ public class TransportRouteController extends MenuController {
 				name = getStopType();
 			}
 			addPlainMenuItem(currentStop == i ? R.drawable.ic_action_marker_dark : defaultIcon,
-					null, name, false, false, new OnClickListener() {
-
-						@Override
-						public void onClick(View arg0) {
-							showTransportStop(stop, false, -1);
-						}
-					});
+					null, name, null, false, false,
+					v -> showTransportStop(stop, false, -1));
 		}
 	}
 

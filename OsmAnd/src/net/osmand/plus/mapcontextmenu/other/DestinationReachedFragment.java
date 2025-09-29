@@ -31,6 +31,8 @@ import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 /**
  * Fragment that appears when the user reaches the destination.
@@ -129,6 +131,13 @@ public class DestinationReachedFragment extends BaseOsmAndFragment implements Ro
 					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_view));
+		return collection;
 	}
 
 	@Override

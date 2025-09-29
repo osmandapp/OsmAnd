@@ -101,10 +101,10 @@ public class OsmBugMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		String link = "https://www.openstreetmap.org/note/" + bug.getId();
-		addPlainMenuItem(R.drawable.ic_action_openstreetmap_logo, null, link, true, true, null);
+		addPlainMenuItem(R.drawable.ic_action_openstreetmap_logo, null, link, getString(R.string.shared_sting_osm_link), true, true, null);
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		for (String description : bug.getCommentDescriptionList()) {
-			addPlainMenuItem(R.drawable.ic_action_note_dark, null, description, true, false, null);
+			addPlainMenuItem(R.drawable.ic_action_note_dark, null, description, getString(R.string.shared_string_description), true, false, null);
 		}
 	}
 

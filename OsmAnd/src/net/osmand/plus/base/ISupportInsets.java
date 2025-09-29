@@ -7,34 +7,17 @@ import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public interface ISupportInsets {
 
-	@Nullable
-	Set<InsetSide> getRootInsetSides();
+	default InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
 
-	@Nullable
-	List<Integer> getFabIds();
-
-	@Nullable
-	List<Integer> getScrollableViewIds();
-
-	@Nullable
-	default List<Integer> getCollapsingAppBarLayoutId(){
-		return null;
-	}
-
-	@Nullable
-	default List<Integer> getBottomContainersIds(){
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
+		return collection;
 	}
 
 	void onApplyInsets(@NonNull WindowInsetsCompat insets);

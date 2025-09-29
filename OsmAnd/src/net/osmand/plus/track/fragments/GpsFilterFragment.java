@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -99,6 +100,12 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public float getMiddleStateKoef() {
 		return 0.5f;
+	}
+
+	@Override
+	@IdRes
+	protected int getToolbarViewId() {
+		return R.id.toolbar;
 	}
 
 	@Override

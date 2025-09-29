@@ -5732,7 +5732,7 @@
     <string name="shared_sting_osm_link">Enlace de OSM</string>
     <string name="lang_en_barebones">Inglés (básico)</string>
     <string name="show_local_names">Mostrar nombres locales</string>
-    <string name="obd_alt_battery_voltage">Voltaje de la batería (adaptador)</string>
+    <string name="obd_alt_battery_voltage">Voltaje del adaptador</string>
     <string name="liter_single">Litro</string>
     <string name="imperial_gallon">Galón imperial</string>
     <string name="us_gallon">Galón estadounidense</string>
@@ -5742,4 +5742,6 @@
     <string name="accessibility_independent_features">Características independientes</string>
     <string name="access_pinch_zoom_magnification">Zum mediante pellizcos</string>
     <string name="access_pinch_zoom_magnification_descr">Usá el escalado de la ventana gráfica en lugar de los niveles de zum discretos durante los gestos de acercamiento.</string>
+    <string name="show_spherical_map">Mostrar mapa esférico</string>
+    <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
 </resources>

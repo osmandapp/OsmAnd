@@ -35,11 +35,12 @@ import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomShee
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implements CopyAppModePrefsListener, OnChangeSettingListener {
@@ -99,12 +100,11 @@ public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implement
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.profiles_list);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.profiles_list));
+		return collection;
 	}
 
 	private void setupToolbar(@NonNull View view) {

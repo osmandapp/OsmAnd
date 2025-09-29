@@ -5,14 +5,12 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController.PROCESS_ID;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -42,14 +40,14 @@ import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 
@@ -143,12 +141,11 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	private void setupCards(){

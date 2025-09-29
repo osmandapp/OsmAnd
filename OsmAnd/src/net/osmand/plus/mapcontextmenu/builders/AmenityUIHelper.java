@@ -224,6 +224,9 @@ public class AmenityUIHelper extends MenuBuilder {
 		for (AmenityInfoRow info : descriptions) {
 			buildAmenityRow(view, info);
 		}
+		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
+			buildWikiDataRow(view);
+		}
 	}
 
 	public void buildWikiDataRow(@NonNull View view) {

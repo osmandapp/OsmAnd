@@ -30,6 +30,8 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvi
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
@@ -42,6 +44,7 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 
 	private TrackDetailsMenu menu;
 	private MapDisplayPositionManager displayPositionManager;
+	private View view;
 	private View mainView;
 	private BoundsChangeListener boundsChangeListener;
 
@@ -87,7 +90,7 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 	                         Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = requireMapActivity();
-		View view = inflate(R.layout.track_details, container, false);
+		view = inflate(R.layout.track_details, container, false);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		}
@@ -143,6 +146,13 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		});
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createLeftSideContainer(true, view).build());
+		return collection;
 	}
 
 	@Override

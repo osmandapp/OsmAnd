@@ -14,7 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
@@ -23,9 +24,6 @@ import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.Ca
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
-import java.util.Set;
 
 public abstract class GroupEditorFragment extends EditorFragment {
 
@@ -85,23 +83,12 @@ public abstract class GroupEditorFragment extends EditorFragment {
 		return view;
 	}
 
-
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private void setupCategoryNameTextBox() {

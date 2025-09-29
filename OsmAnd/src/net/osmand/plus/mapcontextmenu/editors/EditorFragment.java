@@ -42,6 +42,8 @@ import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -160,10 +162,11 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		return collection;
 	}
 
 	@Override

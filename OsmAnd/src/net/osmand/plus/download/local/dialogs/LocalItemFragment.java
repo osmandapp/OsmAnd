@@ -31,10 +31,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class LocalItemFragment extends LocalBaseFragment
@@ -78,14 +78,6 @@ public class LocalItemFragment extends LocalBaseFragment
 		updateContent();
 
 		return view;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
 	}
 
 	private void setupToolbar(@NonNull View view) {

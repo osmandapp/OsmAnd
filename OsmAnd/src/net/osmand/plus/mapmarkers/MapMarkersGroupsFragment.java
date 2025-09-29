@@ -34,7 +34,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -57,8 +58,6 @@ import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
-import java.util.List;
-import java.util.Set;
 
 public class MapMarkersGroupsFragment extends BaseNestedFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -331,22 +330,13 @@ public class MapMarkersGroupsFragment extends BaseNestedFragment implements OsmA
 		return mainView;
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.removeType(Type.SCROLLABLE);
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private HistoryMarkerMenuFragmentListener createHistoryMarkerMenuListener() {

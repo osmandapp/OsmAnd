@@ -43,6 +43,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
@@ -237,19 +239,12 @@ public class RearrangePoiFiltersFragment extends BaseFullScreenDialogFragment im
 		return mainView;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.profiles_list);
-		return ids;
-	}
-
-	@Nullable
-	public List<Integer> getBottomContainersIds(){
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.profiles_list));
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
+		return collection;
 	}
 
 	@Override

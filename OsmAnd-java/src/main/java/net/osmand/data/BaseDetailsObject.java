@@ -49,13 +49,19 @@ public class BaseDetailsObject {
 		addObject(object);
 	}
 
-	public BaseDetailsObject(List<Amenity> amenities, String lang) {
+	public BaseDetailsObject(List<? extends MapObject> mapObjects, String lang) {
 		this(Algorithms.isEmpty(lang) ? "en" : lang);
 
-		for (Amenity amenity : amenities) {
-			addObject(amenity);
+		boolean containsAmenity = false;
+		for (MapObject mo : mapObjects) {
+			addObject(mo);
+			if (mo instanceof Amenity) {
+				containsAmenity = true;
+			}
 		}
-		objectCompleteness = ObjectCompleteness.FULL;
+		if (!objects.isEmpty()) {
+			objectCompleteness = containsAmenity ? ObjectCompleteness.FULL : ObjectCompleteness.COMBINED;
+		}
 	}
 
 	public Amenity getSyntheticAmenity() {

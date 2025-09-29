@@ -3,6 +3,7 @@ package net.osmand;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.data.Amenity.WIKIDATA;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -711,6 +712,17 @@ public class NativeLibrary {
 			String tags = ObfConstants.getPrintTags(this);
 			s += s.contains(link) ? "" : " " + link;
 			s += s.contains(tags) ? "" : " " + tags;
+			return s;
+		}
+
+		@Override
+		public String toStringEn() {
+			String s = "MapObject " + name + " ";
+			s += ObfConstants.getOsmEntityType(this) + "/";
+			s += ObfConstants.getOsmObjectId(this);
+			if (this.getTags().containsKey(WIKIDATA)) {
+				s += " " + this.getTags().get(WIKIDATA);
+			}
 			return s;
 		}
 

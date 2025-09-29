@@ -14,9 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.utils.AndroidUtils;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 // TODO: consider extending BaseFullScreenFragment instead of BaseOsmAndFragment.
 // This fragment behaves like a full-screen UI and shares common logic.
@@ -28,11 +27,11 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends BaseOsmAndFra
 	private AudioVideoNoteRecordingMenuFullScreen menu;
 	private boolean dismissing;
 
-	@Nullable
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
+		return collection;
 	}
 
 	@Nullable

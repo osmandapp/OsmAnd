@@ -45,6 +45,8 @@ import net.osmand.plus.routepreparationmenu.data.PointType;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.DynamicListView.DragIcon;
@@ -232,6 +234,16 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 		applyDayNightMode();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.main_view).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true,R.id.control_buttons));
+		collection.add(InsetTarget.createLeftSideContainer(true, mainView));
+		return collection;
 	}
 
 	private boolean isHasActivePoints() {

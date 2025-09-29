@@ -402,8 +402,17 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getButtonText(), item.getText(), 0, item.isCollapsable(), item.getCollapsableView(),
-					item.isNeedLinks(), 0, item.isUrl(), item.getOnClickListener(), false);
+			buildRow(view, new BuildRowAttrs.Builder()
+					.setIconId(item.getIconId())
+					.setText(item.getText())
+					.setTextPrefix(item.getTextPrefix())
+					.setButtonText(item.getButtonText())
+					.setCollapsable(item.isCollapsable())
+					.setCollapsableView(item.getCollapsableView())
+					.setNeedLinks(item.isNeedLinks())
+					.setUrl(item.isUrl())
+					.setOnClickListener(item.getOnClickListener())
+					.build());
 		}
 	}
 
@@ -437,7 +446,7 @@ public class MenuBuilder {
 		if (mapContextMenu != null) {
 			String title = mapContextMenu.getTitleStr();
 			if (title.length() > TITLE_LIMIT) {
-				buildRow(view, R.drawable.ic_action_note_dark, null, title, 0, false, null, false, 0, false, null, false);
+				buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_note_dark).build());
 			}
 		}
 	}
@@ -598,8 +607,8 @@ public class MenuBuilder {
 		firstRow = position == 0 || isDividerAtPosition(viewGroup1, position - 1);
 		int iconId = AmenityMenuController.getRightIconId(app, amenity);
 		CollapsableView collapsableView = getCollapsableView(amenitiesRow.getContext(), true, amenities, key);
-		buildRow(amenitiesRow, iconId, null, text, 0, true, collapsableView,
-				false, 0, false, null, false);
+		buildRow(amenitiesRow, new BuildRowAttrs.Builder().setIconId(iconId).setText(text)
+				.setCollapsable(true).setCollapsableView(collapsableView).build());
 		viewGroup1.addView(amenitiesRow, position);
 		buildNearestRowDividerIfMissing(viewGroup1, position);
 	}
@@ -617,8 +626,8 @@ public class MenuBuilder {
 			String count = "(" + nearestAmenities.size() + ")";
 			text = app.getString(R.string.ltr_or_rtl_combine_via_space, text, count);
 			CollapsableView collapsableView = getCollapsableView(view.getContext(), true, nearestAmenities, amenityKey);
-			buildRow(view, iconId, null, text, 0, true, collapsableView,
-					false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(iconId).setText(text)
+					.setCollapsable(true).setCollapsableView(collapsableView).build());
 		}
 	}
 
@@ -644,8 +653,10 @@ public class MenuBuilder {
 				startLoadingImages();
 			}
 		});
-		buildRow(view, R.drawable.ic_action_photo, null, app.getString(R.string.online_photos), 0, true,
-				collapsableView, false, 1, false, null, false);
+		buildRow(view, new BuildRowAttrs.Builder()
+				.setIconId(R.drawable.ic_action_photo).setText(app.getString(R.string.online_photos))
+				.setCollapsable(true).setCollapsableView(collapsableView)
+				.setTextLinesLimit(1).build());
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
@@ -656,14 +667,11 @@ public class MenuBuilder {
 
 	private void buildCoordinatesRow(View view) {
 		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
-		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
-		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
-		CollapsableView cv = getLocationCollapsableView(locationData);
-		Drawable icon = getRowIcon(R.drawable.ic_action_get_my_location);
-		String textPrefix = app.getString(R.string.coordinates);
-		buildRow(view, icon,null, textPrefix, title, 0, null,
-				true, cv, false, 1, false, false,
-				false, null, false);
+		String title = Objects.requireNonNull(locationData.remove(PointDescription.LOCATION_LIST_HEADER));
+		buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_get_my_location)
+				.setTextPrefix(app.getString(R.string.coordinates)).setCollapsable(true)
+				.setCollapsableView(getLocationCollapsableView(locationData))
+				.setTextLinesLimit(1).build());
 	}
 
 	public void startLoadingImages() {
@@ -747,14 +755,16 @@ public class MenuBuilder {
 		buildDescription(view);
 		if (showLocalTransportRoutes()) {
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, false);
-			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, collapsableView != null, collapsableView,
-					false, 0, false, null, true);
+			buildRow(view, new BuildRowAttrs.Builder().setText(app.getString(R.string.transport_Routes))
+					.setCollapsable(collapsableView != null).setCollapsableView(collapsableView)
+					.setMatchWithDivider(true).build());
 		}
 		if (showNearbyTransportRoutes()) {
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
 			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS_UI, app);
-			buildRow(view, 0, null, routesWithingDistance, 0, collapsableView != null, collapsableView,
-					false, 0, false, null, true);
+			buildRow(view, new BuildRowAttrs.Builder().setText(routesWithingDistance)
+					.setCollapsable(collapsableView != null).setCollapsableView(collapsableView)
+					.setMatchWithDivider(true).build());
 		}
 	}
 
@@ -796,35 +806,22 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-	                     boolean collapsable, @Nullable CollapsableView collapsableView,
-	                     boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
-		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
-				needLinks, textLinesLimit, isUrl, onClickListener, matchWidthDivider);
-	}
-
-	public View buildRow(View view, Drawable icon, String buttonText, String text, int textColor, String secondaryText,
-	                     boolean collapsable, @Nullable CollapsableView collapsableView, boolean needLinks,
-	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
-		return buildRow(view, icon, buttonText, null, text, textColor, secondaryText, collapsable, collapsableView,
-				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
-	}
-
-	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
-	                     boolean collapsable, @Nullable CollapsableView collapsableView,
-	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
-		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, null, text, textColor, null, collapsable, collapsableView,
-				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
-	}
-
-	public View buildRow(View view, Drawable icon, String buttonText, String textPrefix, String text,
-	                     int textColor, String secondaryText, boolean collapsable, @Nullable CollapsableView collapsableView, boolean needLinks,
-	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+	@NonNull
+	public View buildRow(@NonNull View view, @NonNull BuildRowAttrs attrs) {
 		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
 		}
+
+		int iconId = attrs.getIconId();
+		Drawable icon = attrs.getIcon();
+		if (icon == null && iconId != 0) {
+			icon = getRowIcon(iconId);
+		}
+		String textPrefix = attrs.getTextPrefix();
+		String text = attrs.getText();
+		String secondaryText = attrs.getSecondaryText();
 
 		LinearLayout baseView = new LinearLayout(view.getContext());
 		baseView.setOrientation(LinearLayout.VERTICAL);
@@ -836,13 +833,10 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-		ll.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				String textToCopy = Algorithms.isEmpty(textPrefix) ? text : textPrefix + ": " + text;
-				copyToClipboard(textToCopy, view.getContext());
-				return true;
-			}
+		ll.setOnLongClickListener(v -> {
+			String textToCopy = Algorithms.isEmpty(textPrefix) ? text : textPrefix + ": " + text;
+			copyToClipboard(textToCopy, view.getContext());
+			return true;
 		});
 
 		baseView.addView(ll);
@@ -904,19 +898,21 @@ public class MenuBuilder {
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
-		if (isUrl || isNumber || isEmail) {
+		if (attrs.isUrl() || attrs.isNumber() || attrs.isEmail()) {
 			textView.setTextColor(linkTextColor);
-		} else if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
+		} else if (attrs.isNeedLinks() && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
 			textView.setOnTouchListener(new ClickableSpanTouchListener());
 			AndroidUtils.removeLinkUnderline(textView);
 		}
+		int textLinesLimit = attrs.getTextLinesLimit();
 		if (textLinesLimit > 0) {
 			textView.setMinLines(1);
 			textView.setMaxLines(textLinesLimit);
 			textView.setEllipsize(TextUtils.TruncateAt.END);
 		}
+		int textColor = attrs.getTextColor();
 		if (textColor > 0) {
 			textView.setTextColor(getColor(textColor));
 		}
@@ -936,6 +932,7 @@ public class MenuBuilder {
 		}
 
 		//Button
+		String buttonText = attrs.getButtonText();
 		if (!TextUtils.isEmpty(buttonText)) {
 			TextViewEx buttonTextView = new TextViewEx(view.getContext());
 			LinearLayout.LayoutParams buttonTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -950,6 +947,8 @@ public class MenuBuilder {
 		}
 
 		ImageView iconViewCollapse = new ImageView(view.getContext());
+		boolean collapsable = attrs.isCollapsable();
+		CollapsableView collapsableView = attrs.getCollapsableView();
 		if (collapsable && collapsableView != null) {
 			// Icon
 			LinearLayout llIconCollapse = new LinearLayout(view.getContext());
@@ -965,18 +964,15 @@ public class MenuBuilder {
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
-						collapsableView.getContentView().setVisibility(View.GONE);
-						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
-						collapsableView.setCollapsed(true);
-					} else {
-						collapsableView.getContentView().setVisibility(View.VISIBLE);
-						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
-						collapsableView.setCollapsed(false);
-					}
+			ll.setOnClickListener(v -> {
+				if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
+					collapsableView.getContentView().setVisibility(View.GONE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+					collapsableView.setCollapsed(true);
+				} else {
+					collapsableView.getContentView().setVisibility(View.VISIBLE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(false));
+					collapsableView.setCollapsed(false);
 				}
 			});
 			if (collapsableView.isCollapsed()) {
@@ -990,9 +986,10 @@ public class MenuBuilder {
 			baseView.addView(collapsableView.getContentView());
 		}
 
+		OnClickListener onClickListener = attrs.getOnClickListener();
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
-		} else if (isUrl) {
+		} else if (attrs.isUrl()) {
 			ll.setOnClickListener(v -> {
 				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
 					Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -1000,13 +997,13 @@ public class MenuBuilder {
 					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 				}
 			});
-		} else if (isNumber) {
+		} else if (attrs.isNumber()) {
 			ll.setOnClickListener(v -> {
 				if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
 					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
 				}
 			});
-		} else if (isEmail) {
+		} else if (attrs.isEmail()) {
 			ll.setOnClickListener(v -> {
 				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
 					Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -1020,7 +1017,7 @@ public class MenuBuilder {
 
 		rowBuilt();
 
-		setDividerWidth(matchWidthDivider);
+		setDividerWidth(attrs.isMatchWithDivider());
 
 		return ll;
 	}
@@ -1247,22 +1244,25 @@ public class MenuBuilder {
 		container.addView(button);
 	}
 
-	protected void buildDateRow(@NonNull View view, long timestamp) {
+	protected void buildDateRow(@NonNull View view, @NonNull String textPrefix, long timestamp) {
 		if (timestamp > 0) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(timestamp);
-			buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
-					0, false, null, false, 0, false, null, false);
+			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_data)
+					.setText(dateFormat.format(date) + " — " + timeFormat.format(date))
+					.setTextPrefix(textPrefix).build());
 		}
 	}
 
 	protected void buildCommentRow(@NonNull View view, @Nullable String comment) {
 		if (!Algorithms.isEmpty(comment)) {
-			View row = buildRow(view, R.drawable.ic_action_note_dark, null, comment, 0,
-					false, null, true, 10, false, null, false);
-			row.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(row.getContext(),
-					app, comment, row.getResources().getString(R.string.poi_dialog_comment)));
+			String textPrefix = app.getString(R.string.poi_dialog_comment);
+			View row = buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_note_dark)
+					.setText(comment).setTextPrefix(textPrefix)
+					.setNeedLinks(true).setTextLinesLimit(10).build());
+			row.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(
+					row.getContext(), app, comment, textPrefix));
 		}
 	}
 
@@ -1273,18 +1273,18 @@ public class MenuBuilder {
 	public void buildCustomAddressLine(LinearLayout ll) {
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, false, null, onClickListener));
+	public void addPlainMenuItem(int iconId, String text, String textPrefix, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, textPrefix, needLinks, isUrl, false, null, onClickListener));
 	}
 
-	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, buttonText, text, needLinks, isUrl, false, null, onClickListener));
+	public void addPlainMenuItem(int iconId, String buttonText, String text, String textPrefix, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		plainMenuItems.add(new PlainMenuItem(iconId, buttonText, text, textPrefix, needLinks, isUrl, false, null, onClickListener));
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
+	public void addPlainMenuItem(int iconId, String text, String textPrefix, boolean needLinks, boolean isUrl,
 	                             boolean collapsable, CollapsableView collapsableView,
 	                             OnClickListener onClickListener) {
-		plainMenuItems.add(new PlainMenuItem(iconId, null, text, needLinks, isUrl, collapsable, collapsableView, onClickListener));
+		plainMenuItems.add(new PlainMenuItem(iconId, null, text, textPrefix, needLinks, isUrl, collapsable, collapsableView, onClickListener));
 	}
 
 	public void clearPlainMenuItems() {
@@ -1611,8 +1611,8 @@ public class MenuBuilder {
 		view.addView(banner);
 		String text = app.getString(R.string.wiki_around);
 		CollapsableView collapsableView = new CollapsableView(view, this, false);
-		buildRow(row, R.drawable.ic_action_wikipedia, null, text, 0, true, collapsableView,
-				false, 0, false, null, false);
+		buildRow(row, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_wikipedia)
+				.setText(text).setCollapsable(true).setCollapsableView(collapsableView).build());
 		viewGroup.addView(row);
 	}
 

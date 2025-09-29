@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.MapObject;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
@@ -22,8 +23,8 @@ public class PlaceDetailsObject extends BaseDetailsObject {
 		super(object, lang);
 	}
 
-	public PlaceDetailsObject(List<Amenity> amenities, String lang) {
-		super(amenities, lang);
+	public PlaceDetailsObject(List<? extends MapObject> mapObjects, String lang) {
+		super(mapObjects, lang);
 	}
 
 	@Nullable

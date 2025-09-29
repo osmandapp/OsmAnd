@@ -21,6 +21,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonsAdapter.ItemClickListener;
 
 import java.util.List;
@@ -55,6 +57,13 @@ public abstract class BaseMapButtonsFragment extends BaseFullScreenFragment impl
 		setupContent(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection targetsCollection = super.getInsetTargets();
+		targetsCollection.replace(InsetTarget.createScrollable(R.id.content_list));
+		return targetsCollection;
 	}
 
 	protected void setupToolbar(@NonNull View view) {

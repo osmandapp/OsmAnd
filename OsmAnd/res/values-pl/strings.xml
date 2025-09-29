@@ -5743,13 +5743,13 @@
     <string name="ais_port_nmea_server_description">Zdefiniuj numer portu TCP źródła danych NMEA</string>
     <string name="ais_port_nmea_local">Port UDP lokalnego odbiornika danych NMEA</string>
     <string name="ais_object_lost_timeouts">Ustawienia limitu czasu odbioru sygnału AIS</string>
-    <string name="ais_object_lost_timeout">Limit czasu widoczności w przypadku utraty obiektu</string>
+    <string name="ais_object_lost_timeout">Limit czasu widoczności w przypadku utraty statku</string>
     <string name="ais_object_lost_timeout_description">Ustaw limit czasu widoczności obiektu AIS: Jeżeli w określonym czasie nie zostanie odebrany żaden sygnał, obiekt zostanie automatycznie usunięty z ekranu.</string>
-    <string name="ais_ship_lost_timeout">Przekroczenie limitu widoczności statku – usuń, jeśli w określonym czasie nie odebrano sygnału AIS.</string>
+    <string name="ais_ship_lost_timeout">Retencja widoczności statku</string>
     <string name="ais_load_data">Wczytaj dane AIS z pliku</string>
     <string name="ais_port_nmea_local_description">Zdefiniuj port UDP, na którym OsmAnd odbiera dane NMEA</string>
     <string name="ais_object_lost_timeouts_description">Ustaw wartości limitu czasu, aby zidentyfikować utracone obiekty AIS, jeśli przez określony czas nie odebrano żadnego sygnału.</string>
-    <string name="ais_ship_lost_timeout_description">Ustawianie limitu czasu widoczności statku: Po upływie tego czasu bez odbioru sygnału symbol statku zmieni swój stan na ekranie: Zostanie przekreślony.</string>
+    <string name="ais_ship_lost_timeout_description">Ustawianie retencji widoczności statku: Po upływie tego czasu bez odbioru sygnału symbol statku zostanie przekreślony.</string>
     <string name="ais_cpa_settings">Ustawienia dotyczące CPA</string>
     <string name="ais_cpa_settings_description">Wartości te określają sposób wyświetlania obiektów AIS w momencie zbliżania się do pozycji statku.</string>
     <string name="popular_places_nearby">Popularne miejsca w pobliżu</string>
@@ -6109,4 +6109,14 @@
     <string name="rendering_attr_fairwayStyle_name">Kolor tras wodnych</string>
     <string name="rendering_attr_fairwayStyle_description">Kolor tras wodnych</string>
     <string name="lang_en_barebones">Angielski (prosty)</string>
+    <string name="obd_alt_battery_voltage">Napięcie adaptera</string>
+    <string name="liter_single">Litr</string>
+    <string name="imperial_gallon">Galon angielski</string>
+    <string name="us_gallon">Galon amerykański</string>
+    <string name="kilometers">Kilometry</string>
+    <string name="miles">Mile</string>
+    <string name="mpg">Mil na galon</string>
+    <string name="ascent">Wzniesienie</string>
+    <string name="descent">Spadek</string>
+    <string name="shared_sting_osm_link">Link OSM</string>
 </resources>

@@ -94,14 +94,6 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 	private boolean searchCancelled;
 	private Collator collator;
 
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.bottom_buttons_container);
-		return ids;
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

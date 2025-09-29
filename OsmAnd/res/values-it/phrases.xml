@@ -2488,7 +2488,7 @@
     <string name="poi_crop_cranberry">Raccolta: mirtillo rosso</string>
     <string name="poi_surveillance_outdoor">Sorveglianza: esterna</string>
     <string name="poi_surveillance_public">Sorveglianza: luogo pubblico</string>
-    <string name="poi_clothes_babies">Bambini</string>
+    <string name="poi_clothes_babies">Bebè</string>
     <string name="poi_clothes_denim">Jeans</string>
     <string name="poi_clothes_suits">Tute</string>
     <string name="poi_clothes_vintage">Vintage</string>
@@ -3505,7 +3505,7 @@
     <string name="poi_mountain_area">Area montuosa</string>
     <string name="poi_climbing_grade_advanced">Avanzato</string>
     <string name="poi_climbing_quality_medium">Media</string>
-    <string name="poi_hazard_additional_contamination">Pericolo: contaminazione</string>
+    <string name="poi_hazard_additional_contamination">Contaminazione</string>
     <string name="poi_furniture_bed">Letto;Arredamento</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Medicina tropicale</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psichiatria adulta</string>
@@ -3861,11 +3861,11 @@
     <string name="poi_glacier_type_ice_tongue">Lingua di ghiaccio</string>
     <string name="poi_hazard_erosion">Pericolo erosione</string>
     <string name="poi_bulk_purchase_only">Solo;Solo acquisto all\'ingrosso</string>
-    <string name="poi_hazard_additional_nuclear">Pericolo: nucleare</string>
-    <string name="poi_hazard_additional_avalanche">Pericolo: valanga</string>
-    <string name="poi_hazard_additional_erosion">Pericolo: erosione</string>
-    <string name="poi_hazard_additional_falling_rocks">Pericolo: caduta massi</string>
-    <string name="poi_hazard_additional_flood">Pericolo: inondazione</string>
+    <string name="poi_hazard_additional_nuclear">Nucleare</string>
+    <string name="poi_hazard_additional_avalanche">Valanga</string>
+    <string name="poi_hazard_additional_erosion">Erosione</string>
+    <string name="poi_hazard_additional_falling_rocks">Caduta massi</string>
+    <string name="poi_hazard_additional_flood">Inondazione</string>
     <string name="poi_motor_vehicle_customers">Accesso veicoli a motore: clienti</string>
     <string name="poi_shop_security">Negozio di sicurezza</string>
     <string name="poi_bowling_alley">Centro bowling</string>
@@ -4203,7 +4203,7 @@
     <string name="poi_climbing_rock_sandstone">Roccia da arrampicata: arenaria</string>
     <string name="poi_glacier_type_icecap">Calotta glaciale</string>
     <string name="poi_substation_valve_group">Gruppo valvola</string>
-    <string name="poi_hazard_additional_minefield">Pericolo: campo minato</string>
+    <string name="poi_hazard_additional_minefield">Campo minato</string>
     <string name="poi_hookah_lounge">Sala narghilè</string>
     <string name="poi_climbing_boulder_yes">Arrampicata su massi: si</string>
     <string name="poi_motorcycle_private">Accesso motociclette: privato</string>
@@ -4699,4 +4699,22 @@
     <string name="poi_church_of_christ">Chiesa di Cristo</string>
     <string name="poi_free_flying_rigid_no">Deltaplani rigidi: no</string>
     <string name="poi_climbing_adventure">Percorso di arrampicata</string>
+    <string name="poi_hazard_additional_ice">Ghiaccio</string>
+    <string name="poi_hazard_additional_side_winds">Venti laterali</string>
+    <string name="poi_hazard_additional_queues_likely">Possibili code</string>
+    <string name="poi_hazard_additional_shooting_range">Poligono di tiro</string>
+    <string name="poi_hazard_additional_cyclists">Ciclisti</string>
+    <string name="poi_hazard_additional_school_zone">Scuola nelle vicinanze</string>
+    <string name="poi_hazard_additional_dangerous_junction">Incrocio pericoloso</string>
+    <string name="poi_hazard_additional_animal_crossing">Attraversamento animali</string>
+    <string name="poi_hazard_additional_children">Bambini</string>
+    <string name="poi_hazard_additional_pedestrians">Pedoni</string>
+    <string name="poi_hazard_additional_curves">Curve</string>
+    <string name="poi_hazard_additional_curve">Curva</string>
+    <string name="poi_hazard_additional_hole">Buca</string>
+    <string name="poi_route_point_category">Categoria di viaggio</string>
+    <string name="poi_tutoring">Tutoraggio</string>
+    <string name="poi_interior_design">Progettazione interni</string>
+    <string name="poi_visa">Visa</string>
+    <string name="poi_courier">Ufficio del corriere</string>
 </resources>

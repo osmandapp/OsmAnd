@@ -239,8 +239,9 @@ public class SearchUICore {
 			}
 			for (SearchResult s : searchResults) {
 				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
+					String city = s.cityName == null ? "" : s.cityName; 
 					if (Algorithms.isEmpty(amenity.getStreetName())) {
-						s.alternateName = s.cityName;
+						s.alternateName = city;
 						continue;
 					} else {
 						String hno = amenity.getHousenumber();
@@ -248,7 +249,7 @@ public class SearchUICore {
 						if (dominatedCity.equals(s.cityName)) {
 							s.alternateName = addr + ", " + s.cityName;
 						} else {
-							s.alternateName = s.cityName + ", " + addr;
+							s.alternateName = (city.length() == 0 ? "" : (s.cityName + ", ")) + addr;
 						}
 					}
 				}

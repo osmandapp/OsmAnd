@@ -32,6 +32,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapControlsLayer;
@@ -39,9 +41,6 @@ import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 
@@ -121,12 +120,11 @@ public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 		return rootView;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.buttons_container);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.buttons_container));
+		return collection;
 	}
 
 	private void setupControlButtons(@NonNull View view) {

@@ -117,7 +117,8 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
@@ -139,7 +140,6 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -242,9 +242,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		setContentView(R.layout.main);
 		enterToFullScreen();
 		// Navigation Drawer
-		View menuItems = findViewById(R.id.menuItems);
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
-		InsetsUtils.setWindowInsetsListener(menuItems, EnumSet.of(InsetSide.TOP, InsetSide.BOTTOM));
+
+		InsetsUtils.setWindowInsetsListener(findViewById(R.id.menuItems), (view, insets) -> {
+			InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
+			targetsCollection.replace(InsetTarget.createCustomBuilder(view)
+					.portraitSides(InsetSide.TOP, InsetSide.BOTTOM).landscapeSides(InsetSide.TOP)
+					.applyPadding(true).build());
+			targetsCollection.replace(InsetTarget.createLeftSideContainer(true, true, view));
+
+			InsetsUtils.processInsets(view, targetsCollection, insets);
+		}, false);
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
