@@ -109,7 +109,7 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 						createLocalFile(result, item, fileName, file, file.lastModified());
 					}
 				} else {
-					createLocalFile(result, item, fileName, file, file.lastModified(), item.getInfoModifiedTime());
+					createLocalFile(result, item, fileName, file, file.lastModified());
 				}
 			} else {
 				createLocalFile(result, item, fileName, null, item.getLastModifiedTime());
@@ -120,17 +120,13 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 
 	private void createLocalFile(@NonNull List<LocalFile> result, @NonNull SettingsItem item,
 			@NonNull String fileName, @Nullable File file, long lastModifiedTime) {
-		createLocalFile(result, item, fileName, file, lastModifiedTime, 0);
-	}
-
-	private void createLocalFile(@NonNull List<LocalFile> result, @NonNull SettingsItem item,
-			@NonNull String fileName, @Nullable File file, long lastModifiedTime, long infoModifiedTime) {
 		LocalFile localFile = new LocalFile();
 		localFile.file = file;
 		localFile.item = item;
 		localFile.fileName = fileName;
 		localFile.localModifiedTime = lastModifiedTime;
 
+		long infoModifiedTime = item.getInfoModifiedTime();
 		if (infoModifiedTime > 0) {
 			localFile.localModifiedTime = Math.max(lastModifiedTime, infoModifiedTime);
 		} else {

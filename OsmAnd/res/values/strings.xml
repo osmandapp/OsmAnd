@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="track_folder_appearance">Track folder appearance</string>
     <string name="shared_string_price">Price</string>
     <string name="obd_alt_battery_voltage">Adapter voltage</string>
     <string name="liter_single">Liter</string>

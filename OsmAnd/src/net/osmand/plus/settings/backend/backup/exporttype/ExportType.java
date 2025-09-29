@@ -38,6 +38,7 @@ public enum ExportType {
 	AVOID_ROADS(new AvoidRoadsExportType()),
 	FAVORITES(new FavoritesExportType()),
 	TRACKS(new TracksExportType()),
+	GPX_DIR(new GpxDirExportType()),
 	OSM_NOTES(new OsmNotesExportType()),
 	OSM_EDITS(new OsmEditsExportType()),
 	MULTIMEDIA_NOTES(new MultimediaNotesExportType()),
