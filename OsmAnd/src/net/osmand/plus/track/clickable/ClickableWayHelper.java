@@ -2,6 +2,9 @@ package net.osmand.plus.track.clickable;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
+import static net.osmand.gpx.clickable.ClickableWayTags.CLICKABLE_TAGS;
+import static net.osmand.gpx.clickable.ClickableWayTags.getGpxColorByTags;
+import static net.osmand.gpx.clickable.ClickableWayTags.isClickableWayTags;
 
 // THINK use similar icon="piste_high_difficulty" for no-name pistes
 // THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
@@ -40,36 +43,10 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
 public class ClickableWayHelper {
-    public static final Set<String> CLICKABLE_TAGS =
-            Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale",
-                    "snowmobile=yes", "snowmobile=designated", "snowmobile=permissive"
-            );
-    public static final Map<String, String> FORBIDDEN_TAGS =
-            Map.of("area", "yes", "access", "no", "aerialway", "*");
-    public static final Set<String> REQUIRED_TAGS_ANY =
-            Set.of("name", "ref", "piste:name", "mtb:name");
-    public static final Map<String, String> GPX_COLORS = Map.ofEntries(
-            Map.entry("0", "brown"),
-            Map.entry("1", "green"),
-            Map.entry("2", "blue"),
-            Map.entry("3", "red"),
-            Map.entry("4", "black"),
-            Map.entry("5", "black"),
-            Map.entry("6", "black"),
-            Map.entry("novice", "green"),
-            Map.entry("easy", "blue"),
-            Map.entry("intermediate", "red"),
-            Map.entry("advanced", "black"),
-            Map.entry("expert", "black"),
-            Map.entry("freeride", "yellow")
-            // others are default (red)
-    );
-
     private final OsmandApplication app;
     private final ClickableWayMenuProvider activator;
 
@@ -177,53 +154,12 @@ public class ClickableWayHelper {
         return new ClickableWay(gpxFile, osmId, name, selectedLatLon, bbox);
     }
 
-    @Nullable
-    private String getGpxColorByTags(Map<String, String> tags) {
-        for (String t : CLICKABLE_TAGS) {
-            String val = tags.get(t);
-            if (val != null) {
-                for (Map.Entry<String, String> matchColor : GPX_COLORS.entrySet()) {
-                    if (val.contains(matchColor.getKey())) {
-                        return matchColor.getValue();
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
     private QuadRect calcSearchQuadRect(TIntArrayList x, TIntArrayList y) {
         QuadRect bbox = new QuadRect();
         for (int i = 0; i < Math.min(x.size(), y.size()); i++) {
             bbox.expand(x.get(i), y.get(i), x.get(i), y.get(i));
         }
         return bbox; // (int)MapUtils.measuredDist31((int)bbox.left, (int)bbox.top, (int)bbox.right, (int)bbox.bottom);
-    }
-
-    private boolean isClickableWayTags(@Nullable String name, @NonNull Map<String, String> tags) {
-        for (Map.Entry<String, String> forbidden : FORBIDDEN_TAGS.entrySet()) {
-            if (forbidden.getValue().equals(tags.get(forbidden.getKey()))
-                    || "*".equals(forbidden.getValue()) && tags.containsKey(forbidden.getKey())
-            ) {
-                return false;
-            }
-        }
-        for (String required : REQUIRED_TAGS_ANY) {
-            // some objects have name passed from object props but not in the tags
-            boolean isRequiredNameFound = "name".equals(required) && !Algorithms.isEmpty(name);
-            if (tags.containsKey(required) || isRequiredNameFound) {
-                for (String key : tags.keySet()) {
-                    if (CLICKABLE_TAGS.contains(key)) {
-                        return true;
-                    }
-                    String value = tags.get(key); // snowmobile=yes, etc
-                    if (value != null && CLICKABLE_TAGS.contains(key + "=" + value)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     private boolean readHeightData(@Nullable ClickableWay clickableWay, @Nullable Cancellable canceller) {
@@ -241,8 +177,11 @@ public class ClickableWayHelper {
         }
         return false;
     }
-
     private boolean openAsGpxFile(@Nullable ClickableWay clickableWay) {
+        return openAsGpxFile(clickableWay, true);
+    }
+
+    private boolean openAsGpxFile(@Nullable ClickableWay clickableWay, boolean adjustMapPosition) {
         MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
         if (clickableWay != null && mapActivity != null) {
             GpxFile gpxFile = clickableWay.getGpxFile();
@@ -250,7 +189,7 @@ public class ClickableWayHelper {
             String safeFileName = clickableWay.getGpxFileName() + GPX_FILE_EXT;
             File file = new File(FileUtils.getTempDir(app), safeFileName);
             WptPt selectedPoint = clickableWay.getSelectedGpxPoint().getSelectedPoint();
-            GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, selectedPoint, analysis, null, true);
+            GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, selectedPoint, analysis, null, adjustMapPosition);
             return true;
         }
         return false;
@@ -263,7 +202,7 @@ public class ClickableWayHelper {
         if (detailedObject != null) {
             ClickableWay clickableWay = loadClickableWay(detailedObject.getSyntheticAmenity());
             readHeightData(clickableWay, null);
-            openAsGpxFile(clickableWay);
+            openAsGpxFile(clickableWay, adjustMapPosition);
         }
     }
 }
