@@ -107,7 +107,7 @@
     <include layout="@layout/divider" />
 
     <FrameLayout
-        android:id="@+id/save_button_bg"
+        android:id="@+id/bottom_buttons_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/dialog_button_ex_height"
