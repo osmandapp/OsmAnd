@@ -4532,7 +4532,7 @@
     <string name="speed_mode">Snelheidsmodus</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notitie labels</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Notitie labels tonen</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematische weergave van iconen bij lage zoomniveau\'s</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Een schematische weergave van iconen bij lage zoomniveaus voor POI\'s die normaal niet getoond worden</string>
     <string name="waypoint_template">Tussenstop sjabloon</string>
     <string name="distance_circles">Afstand cirkels</string>
     <string name="routing_attr_avoid_4wd_only_description">Vermijd wegen alleen geschikt voor 4x4 voertuigen</string>
@@ -6196,4 +6196,5 @@
     <string name="accessibility_independent_features">Onafhankelijke functies</string>
     <string name="show_spherical_map">Toon bolvormige kaart</string>
     <string name="show_spherical_map_description">Toon bolvormig model van de aarde</string>
+    <string name="shared_string_price">Prijs</string>
 </resources>
