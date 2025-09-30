@@ -786,13 +786,12 @@ public class SearchPhrase {
     }
 
 	public static class NameStringMatcher implements StringMatcher {
-		private static final Pattern DIGIT_SEP_LETTER = Pattern.compile("(\\d)\\s*[-–—/\\\\.]?\\s*(\\p{L})");
 		private CollatorStringMatcher sm;
 
 		public NameStringMatcher(String namePart, StringMatcherMode mode) {
-			sm = new CollatorStringMatcher(normalizeHouseNumber(namePart), mode);
+			sm = new CollatorStringMatcher(namePart, mode);
 		}
-		
+
 		public boolean matches(Collection<String> map) {
 			if(map == null) {
 				return false;
@@ -810,16 +809,33 @@ public class SearchPhrase {
 			if (name == null || name.isEmpty()) {
 				return false;
 			}
-			return sm.matches(normalizeHouseNumber(name));
+			return sm.matches(name);
+		}
+	}
+
+	public static class BuldingNameStringMatcher extends NameStringMatcher {
+		private static final Pattern pattern = Pattern.compile("(\\d)\\s*[-–—/\\\\.]?\\s*(\\p{L})");
+
+		public BuldingNameStringMatcher(String namePart, boolean complete) {
+			super(normalize(namePart), complete ?
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
+					StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		}
 
-		private static String normalizeHouseNumber(String s) {
+		@Override
+		public boolean matches(String name) {
+			if (name == null || name.isEmpty()) {
+				return false;
+			}
+			return super.matches(normalize(name));
+		}
+
+		private static String normalize(String s) {
 			if (s == null || s.isEmpty()) {
 				return s;
 			}
-
 			// Collapse a single separator between trailing digits and an immediately following letter
-			return DIGIT_SEP_LETTER.matcher(s).replaceAll("$1$2");
+			return pattern.matcher(s).replaceAll("$1$2");
 		}
 	}
 
@@ -919,10 +935,12 @@ public class SearchPhrase {
 
 	public NameStringMatcher getUnknownWordToSearchBuildingNameMatcher() {
 		int ind = getUnknownWordToSearchBuildingInd();
-		if(ind > 0) {
-			return getUnknownNameStringMatcher(ind - 1);
+		if (ind > 0) {
+			int tokenIndex = ind - 1;
+			return new BuldingNameStringMatcher(otherUnknownWords.get(tokenIndex),
+					tokenIndex < otherUnknownWords.size() - 1 || isLastUnknownSearchWordComplete());
 		} else {
-			return getFirstUnknownNameStringMatcher();
+			return new BuldingNameStringMatcher(firstUnknownSearchWord, isFirstUnknownSearchWordComplete());
 		}
 	}
 	
