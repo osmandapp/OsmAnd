@@ -19,6 +19,8 @@ import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnDeviceNameChangedCallback
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
@@ -90,10 +92,10 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		}
 	}
 
-	override fun getCollapsingAppBarLayoutId(): MutableList<Int>? {
-		val ids: MutableList<Int> = java.util.ArrayList()
-		ids.add(R.id.appbar)
-		return ids
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar))
+		return collection
 	}
 
 	private fun setupPairSensorButton(view: View, @StringRes titleId: Int) {

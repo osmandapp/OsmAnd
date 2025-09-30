@@ -358,16 +358,22 @@ public class GeneralRouter implements VehicleRouter {
 	
 	public int registerTagValueAttribute(String tag, String value) {
 		String key = tag +"$"+value;
-		if(universalRules.containsKey(key)) {
+		if (universalRules.containsKey(key)) {
 			return universalRules.get(key);
 		}
-		int id = universalRules.size();
-		universalRulesById.add(key);
-		universalRules.put(key, id);
-		if(!tagRuleMask.containsKey(tag)) {
-			tagRuleMask.put(tag, new BitSet());
+		int id = registerSyncTagValue(this, tag, key);
+		return id;
+	}
+
+	// Important: as we keep parent copy we need static synchronized to lock on all instances
+	private synchronized static int registerSyncTagValue(GeneralRouter r, String tag, String key) {
+		int id = r.universalRules.size();
+		r.universalRulesById.add(key);
+		r.universalRules.put(key, id);
+		if(!r.tagRuleMask.containsKey(tag)) {
+			r.tagRuleMask.put(tag, new BitSet());
 		}
-		tagRuleMask.get(tag).set(id);
+		r.tagRuleMask.get(tag).set(id);
 		return id;
 	}
 	

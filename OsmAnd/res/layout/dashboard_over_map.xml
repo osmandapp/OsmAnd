@@ -84,6 +84,7 @@
 
     </FrameLayout>
 
-    <include layout="@layout/dashboard_toolbar"/>
+    <include layout="@layout/dashboard_toolbar"
+	    android:id="@+id/dashboard_toolbar_container"/>
 
 </FrameLayout>

@@ -222,7 +222,7 @@ public class FavouritePointMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		Amenity amenity = getBuilder().getAmenity();
 		if (amenity != null) {
-			AmenityMenuController.addTypeMenuItem(amenity, builder);
+			AmenityMenuController.addTypeMenuItem(getApplication(), amenity, builder);
 		}
 	}
 }

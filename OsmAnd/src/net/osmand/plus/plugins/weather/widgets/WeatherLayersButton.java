@@ -11,8 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherHelper;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -30,6 +33,8 @@ import java.util.List;
 public class WeatherLayersButton extends MapButton {
 
 	private final WeatherHelper weatherHelper;
+	private final WeatherPlugin weatherPlugin;
+	private WeatherPlugin.WeatherSourceChangeListener weatherSourceChangeListener;
 
 	public WeatherLayersButton(@NonNull Context context) {
 		this(context, null);
@@ -42,8 +47,29 @@ public class WeatherLayersButton extends MapButton {
 	public WeatherLayersButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		this.weatherHelper = app.getWeatherHelper();
+		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 
 		setOnClickListener(v -> chooseLayers());
+		
+		if (weatherPlugin != null) {
+			weatherSourceChangeListener = newSource -> {
+				updateColors(nightMode);
+				if (newSource == WeatherSource.ECMWF) {
+					for (WeatherBand band : weatherHelper.getWeatherBands()) {
+						boolean isWindOrCloud = band.getBandIndex() == WeatherBand.WEATHER_BAND_WIND_SPEED || 
+											   band.getBandIndex() == WeatherBand.WEATHER_BAND_CLOUD;
+						if (isWindOrCloud && band.isForecastBandVisible()) {
+							band.setForecastBandVisible(false);
+						}
+					}
+
+					if (mapActivity != null) {
+						mapActivity.refreshMap();
+					}
+				}
+			};
+			weatherPlugin.addWeatherSourceChangeListener(weatherSourceChangeListener);
+		}
 	}
 
 	@NonNull
@@ -65,6 +91,15 @@ public class WeatherLayersButton extends MapButton {
 	}
 
 	@Override
+	protected void onDetachedFromWindow() {
+		super.onDetachedFromWindow();
+		if (weatherSourceChangeListener != null && weatherPlugin != null) {
+			weatherPlugin.removeWeatherSourceChangeListener(weatherSourceChangeListener);
+			weatherSourceChangeListener = null;
+		}
+	}
+
+	@Override
 	protected void updateColors(boolean nightMode) {
 		Context context = getContext();
 		boolean anySelected = weatherHelper.getVisibleForecastBands().size() > 0;
@@ -80,23 +115,38 @@ public class WeatherLayersButton extends MapButton {
 	private void chooseLayers() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		WeatherSource currentSource = weatherPlugin != null ? weatherPlugin.getWeatherSource() : WeatherSource.GFS;
+		boolean isECMWF = currentSource == WeatherSource.ECMWF;
+		
 		for (WeatherBand band : weatherHelper.getWeatherBands()) {
 			boolean selected = band.isForecastBandVisible();
+			boolean isWindOrCloud = band.getBandIndex() == WeatherBand.WEATHER_BAND_WIND_SPEED || 
+								   band.getBandIndex() == WeatherBand.WEATHER_BAND_CLOUD;
+			boolean shouldDisable = isECMWF && isWindOrCloud;
+
+			if (shouldDisable) {
+				continue;
+			}
+			
 			Drawable icon = selected ? uiUtilities.getIcon(band.getIconId(),
 					ColorUtilities.getActiveColorId(nightMode)) : uiUtilities.getThemedIcon(band.getIconId());
-			menuItems.add(new PopUpMenuItem.Builder(app)
+			
+			PopUpMenuItem.Builder builder = new PopUpMenuItem.Builder(app)
 					.setTitle(band.getMeasurementName())
 					.setIcon(icon)
 					.showCompoundBtn(activeColor)
-					.setOnClickListener(v -> {
-						boolean visible = !band.isForecastBandVisible();
-						band.setForecastBandVisible(visible);
-						mapActivity.refreshMap();
-					})
 					.showTopDivider(band.getBandIndex() == WeatherBand.WEATHER_BAND_WIND_ANIMATION)
-					.setSelected(selected)
-					.create()
-			);
+					.setSelected(selected);
+			
+			if (!shouldDisable) {
+				builder.setOnClickListener(v -> {
+					boolean visible = !band.isForecastBandVisible();
+					band.setForecastBandVisible(visible);
+					mapActivity.refreshMap();
+				});
+			}
+			
+			menuItems.add(builder.create());
 		}
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 		displayData.anchorView = this;

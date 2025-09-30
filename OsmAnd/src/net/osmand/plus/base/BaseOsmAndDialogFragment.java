@@ -22,14 +22,11 @@ import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
 
 public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndFragment, ISupportInsets {
 
@@ -85,25 +82,15 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		}
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return EnumSet.of(InsetSide.TOP);
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(android.R.id.list);
-		ids.add(R.id.scroll_view);
-		return ids;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getFabIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.removeType(Type.FAB);
+		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
+		collection.add(InsetTarget.createScrollable(R.id.scroll_view, android.R.id.list));
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.modes_toggle, R.id.toolbar, R.id.tab_layout, R.id.toolbar_edit));
+		collection.add(InsetTarget.createRootInset());
+		return collection;
 	}
 
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {

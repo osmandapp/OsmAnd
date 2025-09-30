@@ -39,6 +39,8 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		implements OnClickListener, OnGlobalLayoutListener, ObservableScrollViewCallbacks {
@@ -158,6 +160,14 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			}
 		};
 		view.post(() -> requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback));
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createLeftSideContainer(true, view));
+		collection.replace(InsetTarget.createHorizontalLandscape(true, R.id.list, R.id.bottom_buttons_container));
+		return collection;
 	}
 
 	@Override

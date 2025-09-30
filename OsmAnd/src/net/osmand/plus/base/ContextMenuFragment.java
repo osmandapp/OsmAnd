@@ -39,18 +39,15 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
 
 public abstract class ContextMenuFragment extends BaseFullScreenFragment implements MapControlsThemeProvider {
 
@@ -140,6 +137,11 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 
 	@IdRes
 	public int getTopViewId() {
+		return 0;
+	}
+
+	@IdRes
+	protected int getToolbarViewId() {
 		return 0;
 	}
 
@@ -458,12 +460,19 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(getCardsContainerViewId());
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createScrollable(getCardsContainerViewId()).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true, R.id.control_buttons, getMainViewId()));
+		collection.replace(InsetTarget.createHorizontalLandscape(true, R.id.bottom_buttons_container));
+
+		if (getToolbarViewId() != 0) {
+			collection.add(InsetTarget.createHorizontalLandscape(true, getToolbarViewId()));
+		}
+		return collection;
 	}
 
 	@Override

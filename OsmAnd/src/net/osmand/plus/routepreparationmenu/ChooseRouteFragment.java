@@ -70,6 +70,8 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
@@ -123,6 +125,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 
 	private boolean publicTransportMode;
 	private boolean needAdjustMap;
+	private View view;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -162,7 +165,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 		}
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-		View view = LayoutInflater.from(context).inflate(R.layout.fragment_show_all_routes, null);
+		view = LayoutInflater.from(context).inflate(R.layout.fragment_show_all_routes, null);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		View solidToolbarView = view.findViewById(R.id.toolbar_layout);
 		this.solidToolbarView = solidToolbarView;
@@ -219,6 +222,13 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 		buildZoomButtons(view);
 		buildMenuButtons(view);
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createLeftSideContainer(true, view));
+		return collection;
 	}
 
 	private void updateElementsPosition(@NonNull RouteDetailsFragment fragment) {

@@ -223,6 +223,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
 		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
 		debugRenderingInfo.setIconSpaceReserved(false);
+
+		SwitchPreferenceEx spherePref = findPreference(settings.SPHERICAL_MAP.getId());
+		spherePref.setIconSpaceReserved(false);
+		spherePref.setDescription(R.string.show_spherical_map_description);
 	}
 
 	private void setupMaxRenderingThreadsPref() {

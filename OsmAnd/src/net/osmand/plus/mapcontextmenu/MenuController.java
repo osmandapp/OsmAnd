@@ -310,8 +310,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return true;
 	}
 
-	public void addPlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
-		builder.addPlainMenuItem(iconId, buttonText, text, needLinks, isUrl, onClickListener);
+	public void addPlainMenuItem(int iconId, String buttonText, String text, String textPrefix, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		builder.addPlainMenuItem(iconId, buttonText, text,textPrefix, needLinks, isUrl, onClickListener);
 	}
 
 	public void clearPlainMenuItems() {
@@ -333,7 +333,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasSpeed() && l.getSpeed() > 0f) {
 				String speed = OsmAndFormatter.getFormattedSpeed(l.getSpeed(), app);
-				addPlainMenuItem(R.drawable.ic_action_speed, null, speed, false, false, null);
+				String textPrefix = getString(R.string.shared_string_speed);
+				addPlainMenuItem(R.drawable.ic_action_speed, null, speed, textPrefix, false, false, null);
 			}
 		}
 	}
@@ -345,7 +346,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAltitude()) {
 				String alt = OsmAndFormatter.getFormattedAlt(l.getAltitude(), app);
-				addPlainMenuItem(R.drawable.ic_action_altitude_average, null, alt, false, false, null);
+				String textPrefix = getString(R.string.average_altitude);
+				addPlainMenuItem(R.drawable.ic_action_altitude_average, null, alt, textPrefix, false, false, null);
 			}
 		}
 	}
@@ -365,8 +367,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					acc = String.format(app.getString(R.string.precision_hdop),
 							OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app));
 				}
-
-				addPlainMenuItem(R.drawable.ic_action_ruler_circle, null, acc, false, false, null);
+				addPlainMenuItem(R.drawable.ic_action_ruler_circle, null, acc, null, false, false, null);
 			}
 		}
 	}

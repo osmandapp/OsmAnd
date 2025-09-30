@@ -5666,10 +5666,10 @@
     <string name="ais_port_nmea_local_description">Definovat UDP port, kde bude OsmAnd získávat data NMEA</string>
     <string name="ais_object_lost_timeouts">Nastavení časového limitu pro příjem signálu AIS</string>
     <string name="ais_object_lost_timeouts_description">Nastavit hodnoty pro rozpoznání ztracených objektů AIS, pokud nebyl po určitou dobu obdržen žádný signál.</string>
-    <string name="ais_object_lost_timeout">Časový limit pro viditelnost při ztrátě objektu</string>
+    <string name="ais_object_lost_timeout">Časový limit pro viditelnost při ztrátě lodi</string>
     <string name="ais_object_lost_timeout_description">Nastavit časový limit viditelnosti objektů AIS: pokud není během určené doby obdržen žádný signál, bude objekt automaticky odstraněn z obrazovky.</string>
-    <string name="ais_ship_lost_timeout">Časový limit viditelnosti lodi – odstranit, pokud není v nastavené době přijat žádný signál AIS.</string>
-    <string name="ais_ship_lost_timeout_description">Nastavit časový limit viditelnosti lodě: po tomto čase bez příjmu signálu změní symbol lodě svůj stav na obrazovce: bude přeškrtnutý.</string>
+    <string name="ais_ship_lost_timeout">Časový limit zastarání lodi</string>
+    <string name="ais_ship_lost_timeout_description">Nastavit časový limit zastarání viditelnosti lodě: po tomto čase bez příjmu signálu bude symbol lodě přeškrtnutý.</string>
     <string name="ais_cpa_settings">Nastavení týkající se CPA</string>
     <string name="ais_cpa_settings_description">Tyto hodnoty určují, jak se zobrazí objekty AIS, když se přiblíží k vlastní poloze plavidla.</string>
     <string name="ais_cpa_warning_time">Výstražná doba před dosažením nejbližšího bodu přiblížení (CPA)</string>
@@ -5813,7 +5813,7 @@
     <string name="add_to_favorites">Přidat k oblíbeným</string>
     <string name="max_weight_at_full_load_description">Uveďte maximální hmotnost vašeho vozidla při plném naložení, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
     <string name="max_axle_load_description">Uveďte maximální nosnost náprav svého vozidla, abyste se vyhnuli silnicím a mostům s hmotnostními omezeními.</string>
-    <string name="obd_alt_battery_voltage">Napětí baterie (adaptér)</string>
+    <string name="obd_alt_battery_voltage">Napětí adaptéru</string>
     <string name="liter_single">Litr</string>
     <string name="miles">Míle</string>
     <string name="mpg">MPG</string>
@@ -5875,4 +5875,6 @@
     <string name="access_pinch_zoom_magnification">Zvětšení sevřením a roztažením prstů</string>
     <string name="access_pinch_zoom_magnification_descr">Při gestech přiblížení použít škálování viewportu namísto diskrétních úrovní přiblížení.</string>
     <string name="lang_en_barebones">Angličtina (základní)</string>
+    <string name="show_spherical_map">Zobrazit sférickou mapu</string>
+    <string name="show_spherical_map_description">Zobrazit sférický model Země</string>
 </resources>

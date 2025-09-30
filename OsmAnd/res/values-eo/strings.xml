@@ -5681,15 +5681,15 @@
     <string name="plugin_ais_tracker_name">Spurilo de AIS-ŝipoj</string>
     <string name="shared_string_default_view">Implicita vido</string>
     <string name="ais_cpa_settings">Agordoj pri CPA</string>
-    <string name="ais_object_lost_timeout">Templimo por videblo de perditaj objektoj</string>
+    <string name="ais_object_lost_timeout">Templimo por videblo de perditaj ŝipoj</string>
     <string name="shared_string_avg_speed">Minimuma rapido</string>
     <string name="ais_nmea_protocol">Protokolo por ricevi NMEA-datumojn</string>
     <string name="show_grids">Montri kradon</string>
     <string name="ais_port_nmea_local">UDP-pordo de loka NMEA-datum-ricevilo</string>
     <string name="ais_port_nmea_local_description">Difini UPD-pordon je kiu OsmAnd ricevas NMEA-datumojn</string>
     <string name="ais_object_lost_timeouts">Templimo por ricevi AIS-signalojn</string>
-    <string name="ais_ship_lost_timeout">Templimo por videblo de ŝipo kiam neniu signalo riceviĝas.</string>
-    <string name="ais_ship_lost_timeout_description">Agordi templimon por videblo de ŝipo: post tiu tempo sen ricevi signalon, la emblemo de ŝipo sur la ekrano estos trastrekita.</string>
+    <string name="ais_ship_lost_timeout">Templimo por malaktualaj ŝipoj</string>
+    <string name="ais_ship_lost_timeout_description">Agordi templimon por videblo de malaktuala ŝipo: post tiu tempo sen ricevi signalon, la emblemo de ŝipo sur la ekrano estos trastrekita.</string>
     <string name="ais_cpa_warning_time_description">Se la tempo por atingi CPA kun alia ŝipo (TCPA) kun alia ŝipo estas malpli granda ol tiu ĉi valoro, la ŝipo estos markita ruĝe.</string>
     <string name="no_photo_for_location_desc">Neniu foto de uzanto aldonita al tiu ĉi loko</string>
     <string name="show_utm_grids_description">Montri la kradon en metroj laŭ UTM anstataŭ laŭ WGS84</string>
@@ -5860,7 +5860,7 @@
     <string name="release_5_2">• Versio estas prilaborata…</string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
-    <string name="obd_alt_battery_voltage">Tensio de baterio (adaptilo)</string>
+    <string name="obd_alt_battery_voltage">Tensio de adaptilo</string>
     <string name="liter_single">litro</string>
     <string name="imperial_gallon">brita galono</string>
     <string name="us_gallon">usona galjono</string>
@@ -5870,4 +5870,6 @@
     <string name="access_pinch_zoom_magnification">Pinĉi por momente pligrandigi</string>
     <string name="access_pinch_zoom_magnification_descr">Uzi skaladon de vidujo anstataŭ diskretajn nivelojn de pligrandigo por gestoj de pligrandigo.</string>
     <string name="accessibility_independent_features">Sendependaj ebloj</string>
+    <string name="show_spherical_map">Vidigi sferan mapon</string>
+    <string name="show_spherical_map_description">Vidigi sferoidan modelon de Tero</string>
 </resources>

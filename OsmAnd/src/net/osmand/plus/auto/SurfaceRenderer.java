@@ -411,6 +411,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 							offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
 							offscreenMapRendererView.setAzimuth(0);
+							offscreenMapRendererView.setFlatEarth(!getApp().getSettings().SPHERICAL_MAP.get());
 							offscreenMapRendererView.removeAllSymbolsProviders();
 							offscreenMapRendererView.resumeSymbolsUpdate();
 							offscreenMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);

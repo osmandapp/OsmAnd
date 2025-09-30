@@ -20,6 +20,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -1150,14 +1151,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				title = "";
 			}
 
-			Amenity amenity = null;
+			MapObject mapObject = null;
+			Object object = getObject();
 			if (pointDescription.isPoi()) {
-				Object object = getObject();
-				if (object instanceof Amenity) {
-					amenity = (Amenity) object;
+				if (object instanceof Amenity amenity) {
+					mapObject = amenity;
 				} else if (object instanceof BaseDetailsObject detailsObject) {
-					amenity = detailsObject.getSyntheticAmenity();
+					mapObject = detailsObject.getSyntheticAmenity();
 				}
+			}
+			if (object instanceof RenderedObject renderedObject) {
+				mapObject = renderedObject;
 			}
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
@@ -1168,10 +1172,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				GpxFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
+					wptPtPointEditor.add(gpxFile, getLatLon(), title, mapObject);
 				}
 			} else {
-				addNewWptToGPXFile(title, amenity);
+				addNewWptToGPXFile(title, mapObject);
 			}
 		}
 	}
@@ -1232,21 +1236,21 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(@Nullable String title, @Nullable Amenity amenity) {
+	public void addNewWptToGPXFile(@Nullable String title, @Nullable MapObject mapObject) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			addNewWptToGPXFileImpl(mapActivity, title, amenity);
+			addNewWptToGPXFileImpl(mapActivity, title, mapObject);
 		}
 	}
 
 	private void addNewWptToGPXFileImpl(@NonNull MapActivity mapActivity,
-	                                    @Nullable String title, @Nullable Amenity amenity) {
+	                                    @Nullable String title, @Nullable MapObject mapObject) {
 		SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
+					wptPtPointEditor.add(gpxFile, getLatLon(), title, mapObject);
 				}
 			}
 		};
