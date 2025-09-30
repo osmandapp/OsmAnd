@@ -4195,7 +4195,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на загальних масштабах</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на загальних масштабах</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичне зображення піктограм з низьким рівнем масштабування для тих точок інтересу, які зазвичай не відображаються</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Підвищення видимості для водних тунелів</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Підвищення видимості для водних тунелів</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
@@ -5882,4 +5882,5 @@
     <string name="accessibility_independent_features">Незалежні функції</string>
     <string name="show_spherical_map">Показати сферичну карту</string>
     <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
+    <string name="shared_string_price">Ціна</string>
 </resources>
