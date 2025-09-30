@@ -393,8 +393,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-			boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		if (settings.SHOW_FAVORITES.get() && result.getTileBox().getZoom() >= START_ZOOM) {
 			collectFavoritesFromPoint(result);
 		}

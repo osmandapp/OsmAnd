@@ -977,12 +977,11 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 
 	public interface IContextMenuProvider {
 
-		/**
-		 * @param excludeUntouchableObjects Touchable objects are objects that
-		 *                                  change appearance when touched on map
-		 */
-		void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-		                             boolean unknownLocation, boolean excludeUntouchableObjects);
+		default boolean customizeMapSelectionRules(@NonNull MapSelectionRules rules) {
+			return false;
+		}
+
+		void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules);
 
 		LatLon getObjectLocation(Object o);
 
