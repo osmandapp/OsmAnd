@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class GeocodingUtilities {
 
-	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
+	static final Log LOG = PlatformUtil.getLog(GeocodingUtilities.class);
 
 	// Location to test parameters https://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
 	// BUG https://www.openstreetmap.org/#map=19/50.9356/13.35348 (hno 26) street is 
@@ -48,6 +48,8 @@ public class GeocodingUtilities {
 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
 	public static final float DISTANCE_BUILDING_PROXIMITY = 100;
+	
+	public static int GEOCODING_POI_MEMORY = 512; 
 
 
 	public static final Comparator<GeocodingResult> DISTANCE_COMPARATOR = new Comparator<GeocodingResult>() {
@@ -423,7 +425,7 @@ public class GeocodingUtilities {
 	
 	public static RoutingContext buildDefaultContextForPOI(BinaryMapIndexReader index) throws FileNotFoundException, IOException {
 		BinaryMapIndexReader geocoding = new BinaryMapIndexReader(new RandomAccessFile(index.getFile(), "r"), index);
-		RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
+		RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(GEOCODING_POI_MEMORY, GEOCODING_POI_MEMORY);
 		RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", memoryLimit);
 		RoutingContext ctx = new RoutePlannerFrontEnd().buildRoutingContext(config, null, new BinaryMapIndexReader[] {geocoding}, RouteCalculationMode.NORMAL);
 		return ctx;

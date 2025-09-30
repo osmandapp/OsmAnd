@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionRules;
 import net.osmand.shared.gpx.primitives.WptPt;
 
 public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuProvider {
@@ -54,6 +55,6 @@ public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuPr
     }
 
     @Override
-    public void collectObjectsFromPoint(@NonNull MapSelectionResult result, boolean unknownLocation, boolean excludeUntouchableObjects) {
+    public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
     }
 }

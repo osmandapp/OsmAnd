@@ -100,18 +100,34 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	MapSelectionResult collectObjectsFromMap(@NonNull PointF point,
-			@NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
+	MapSelectionResult collectObjectsFromMap(@NonNull PointF point, @NonNull RotatedTileBox tileBox,
+	                                         boolean showUnknownLocation) {
+		MapSelectionRules rules = createCustomizedMapSelectionRules(showUnknownLocation);
 		MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
 
-		collectObjectsFromLayers(result, showUnknownLocation, false);
+		collectObjectsFromLayers(result, rules, false);
 		collectObjectsFromMap(result, point, tileBox);
 
 		if (result.isEmpty()) {
-			collectObjectsFromLayers(result, showUnknownLocation, true);
+			collectObjectsFromLayers(result, rules, true);
 		}
 		result.groupByOsmIdAndWikidataId();
 		return result;
+	}
+
+	@NonNull
+	private MapSelectionRules createCustomizedMapSelectionRules(boolean showUnknownLocation) {
+		MapSelectionRules rules = new MapSelectionRules();
+		rules.setUnknownLocation(showUnknownLocation);
+
+		for (OsmandMapLayer layer : view.getLayers()) {
+			if (layer instanceof IContextMenuProvider provider) {
+				if (provider.customizeMapSelectionRules(rules)) {
+					break;
+				}
+			}
+		}
+		return rules;
 	}
 
 	private void collectObjectsFromMap(@NonNull MapSelectionResult result,
@@ -125,22 +141,26 @@ public class MapSelectionHelper {
 	}
 
 	protected void collectObjectsFromLayers(@NonNull MapSelectionResult result,
-			boolean unknownLocation, boolean secondaryObjects) {
+	                                        @NonNull MapSelectionRules rules, boolean secondaryObjects) {
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider && (!provider.isSecondaryProvider() || secondaryObjects)) {
-				provider.collectObjectsFromPoint(result, unknownLocation, false);
+				provider.collectObjectsFromPoint(result, rules);
 			}
 		}
 	}
 
-	public void acquireTouchedMapObjects(@NonNull RotatedTileBox tileBox, @NonNull PointF point,
-			boolean unknownLocation) {
+	public void acquireTouchedMapObjects(@NonNull RotatedTileBox tileBox,
+	                                     @NonNull PointF point, boolean unknownLocation) {
+		MapSelectionRules rules = new MapSelectionRules();
+		rules.setOnlyTouchableObjects(true);
+		rules.setUnknownLocation(unknownLocation);
+
 		Map<LatLon, BackgroundType> touchedMapObjectsFull = new HashMap<>();
 		Map<LatLon, BackgroundType> touchedMapObjectsSmall = new HashMap<>();
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider provider) {
 				MapSelectionResult result = new MapSelectionResult(app, tileBox, point);
-				provider.collectObjectsFromPoint(result, unknownLocation, true);
+				provider.collectObjectsFromPoint(result, rules);
 				for (SelectedMapObject selectedObject : result.getAllObjects()) {
 					Object object = selectedObject.object();
 					LatLon latLon = provider.getObjectLocation(object);

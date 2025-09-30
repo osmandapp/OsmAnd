@@ -183,7 +183,7 @@ public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
 		saveBtn.setBackgroundResource(nightMode ? R.drawable.dlg_btn_primary_dark : R.drawable.dlg_btn_primary_light);
-		FrameLayout saveBtnBg = root.findViewById(R.id.save_button_bg);
+		FrameLayout saveBtnBg = root.findViewById(R.id.bottom_buttons_container);
 		saveBtnBg.setBackgroundColor(ContextCompat.getColor(app, btnBgColorRes));
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
 		saveBtnTitle.setTypeface(FontCache.getMediumFont());

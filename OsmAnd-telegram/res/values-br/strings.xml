@@ -13,4 +13,6 @@
     <string name="please_update_osmand">Hizivait OsmAnd evit gwelet ar roadennoù war ar gartenn</string>
     <string name="shared_string_map">Kartenn</string>
     <string name="show_on_map">Diskouez war ar gartenn</string>
+    <string name="location_source_summary">Ampleg, staliet diwar Google Play ez implij OsmAnd servijoù Google Play evit dibab al lec\'hiadur.\n\nMa teu ganeoc\'h titouroù lec\'hiadur amresis pe mard implijit un ardivink a ya en-dro hep servijoù Google Play, klaskit tremen d\'an API Android</string>
+    <string name="location_source">Mamenn al lec\'hiadur</string>
 </resources>

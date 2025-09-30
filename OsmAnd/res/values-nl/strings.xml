@@ -6184,7 +6184,7 @@
     <string name="lang_en_barebones">Engels (barebones)</string>
     <string name="shared_sting_osm_link">OSM-link</string>
     <string name="show_local_names">Toon plaatselijke namen</string>
-    <string name="obd_alt_battery_voltage">Accuspanning (adapter)</string>
+    <string name="obd_alt_battery_voltage">Adapterspanning</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Imperiale gallon</string>
     <string name="us_gallon">US gallon</string>
@@ -6194,4 +6194,6 @@
     <string name="access_pinch_zoom_magnification_descr">Gebruik de schaal van het venster in plaats van zoomniveaus tijdens inzoombewegingen.</string>
     <string name="access_pinch_zoom_magnification">Knijp-zoom vergroting</string>
     <string name="accessibility_independent_features">Onafhankelijke functies</string>
+    <string name="show_spherical_map">Toon bolvormige kaart</string>
+    <string name="show_spherical_map_description">Toon bolvormig model van de aarde</string>
 </resources>

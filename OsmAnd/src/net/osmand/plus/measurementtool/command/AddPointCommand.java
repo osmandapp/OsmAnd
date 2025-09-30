@@ -45,7 +45,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 		MeasurementEditingContext ctx = getEditingCtx();
 		addPointBefore = ctx.isInAddPointBeforeMode();
 		List<WptPt> points = ctx.getPoints();
-		if (points.size() > 0) {
+		if (!points.isEmpty()) {
 			WptPt prevPt = points.get(points.size() - 1);
 			prevPointProfile = prevPt.getProfileType();
 		}

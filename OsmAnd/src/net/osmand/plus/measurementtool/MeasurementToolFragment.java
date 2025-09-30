@@ -1686,6 +1686,12 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		}
 	}
 
+	public void addPoint(@NonNull LatLon latLon) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, latLon));
+		doAddOrMovePointCommonStuff();
+	}
+
 	private void addPoint() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, false));
