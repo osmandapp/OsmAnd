@@ -34,7 +34,6 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -45,6 +44,9 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.charts.ChartModeBottomSheet;
 import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
@@ -173,17 +175,12 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 				null, ColorUtilities.getActiveColor(app, nightMode), null);
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
-	}
-
-	@Nullable
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.quadruple_bottom_buttons);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.replace(InsetTarget.createBottomContainer(R.id.quadruple_bottom_buttons));
+		return collection;
 	}
 
 	@Override

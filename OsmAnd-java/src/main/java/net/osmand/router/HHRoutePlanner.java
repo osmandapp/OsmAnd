@@ -16,6 +16,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
 
+import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -41,6 +42,7 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointCost;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPointRouteInfo;
 import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
 import net.osmand.router.HHRouteDataStructure.RoutingStats;
 import net.osmand.router.RouteCalculationProgress.HHIteration;
@@ -58,13 +60,18 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	// if point is present without map with HH routing it will iterate each time with MAX_POINTS_CLUSTER_ROUTING
 	public static final double MAX_INC_COST_CORR = 10.0;
 	// this constant should dynamically change if route is not found
-	private static final double EXCLUDE_PRIORITY_CONSTANT = 0.2;
+	static final double EXCLUDE_PRIORITY_CONSTANT = 0.0; // see comments below
 	
 	private static boolean ASSERT_COST_INCREASING = false;
 	private static boolean ASSERT_AND_CORRECT_DIST_SMALLER = true;
 	private final Class<T> pointClass;
 	private final HHRouteRegionPointsCtx<T> predefinedRegions;
 	private HHRoutingContext<T> currentCtx; // never null
+	
+	// select specifically high cost params
+	// for example prefer_unpaved has higher cost > avoid_toll param, so it's better to select profile with prefer_unpaved shortcuts  
+	private static final Set<String> HIGH_COST_PARAMS = Set.of("prefer_unpaved");   
+	
 	
 	
 	public static HHRoutePlanner<NetworkDBPoint> createDB(RoutingContext ctx, HHRoutingDB networkDB) {
@@ -369,10 +376,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				// here we always copy array but in C++ we could be more efficient
 				rdo.types = tint.toArray();
 				pnt.rtExclude = !currentCtx.rctx.getRouter().acceptLine(rdo);
-				if (!pnt.rtExclude) {
-					// constant should be reduced if route is not found
-					pnt.rtExclude = currentCtx.rctx.getRouter().defineSpeedPriority(rdo, pnt.end > pnt.start) < EXCLUDE_PRIORITY_CONSTANT;
-				}
+				// This might speed up for certain avoid parameters 
+				// but produces unpredictably wrong results (prefer_unpaved) when shortcuts are calculated - error 300%  
+//				if (!pnt.rtExclude) {
+//					// constant should be reduced if route is not found
+//					pnt.rtExclude = currentCtx.rctx.getRouter().defineSpeedPriority(rdo, pnt.end > pnt.start) < EXCLUDE_PRIORITY_CONSTANT;
+//				}
 				if (pnt.rtExclude) {
 					filtered++;
 				}
@@ -463,7 +472,24 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
-		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
+		if (DEBUG_VERBOSE_LEVEL > 1) {
+			TLongObjectIterator<T> it = stPoints.iterator();
+			while(it.hasNext()) {
+				it.advance();
+				NetworkDBPointRouteInfo pi = it.value().rt(false);
+				printf(DEBUG_VERBOSE_LEVEL > 1, "   Start point %d cost %.2f, dist = %.2f\n",
+						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
+			}
+			it = endPoints.iterator();
+			while(it.hasNext()) {
+				it.advance();
+				NetworkDBPointRouteInfo pi = it.value().rt(true);
+				printf(DEBUG_VERBOSE_LEVEL > 1, "   End point %d cost %.2f, dist = %.2f\n",
+						it.value().index, pi.rtCost, pi.rtDistanceFromStart);	
+			}
+		}
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first (%d) / last (%d) segments...%.2f ms\n",
+				stPoints.size(), endPoints.size(), hctx.stats.searchPointsTime);
 	}
 
 	private void calcAlternativeRoute(HHRoutingContext<T> hctx, HHNetworkRouteRes route, TLongObjectHashMap<T> stPoints,
@@ -687,6 +713,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		
 		public int extraParam = 0;
 		public int matchParam = 0;
+		public int highCostParam = 0;
 		public boolean containsStartEnd;
 		public double sumIntersects;
 		
@@ -785,6 +812,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				if (!ls.contains(p)) {
 					g.extraParam++;
 				} else {
+					if (HIGH_COST_PARAMS.contains(p)) {
+						g.highCostParam++;
+					}
 					g.matchParam++;
 				}
 			}
@@ -801,6 +831,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					return o1.extraParam < o2.extraParam ? -1 : 1;
 				} else if (o1.matchParam != o2.matchParam) {
 					return o1.matchParam > o2.matchParam ? -1 : 1;
+				} else if (o1.highCostParam != o2.highCostParam) {
+					return o1.highCostParam > o2.highCostParam ? -1 : 1;
 				}
 				return -Double.compare(o1.sumIntersects, o2.sumIntersects); // higher is better
 			}

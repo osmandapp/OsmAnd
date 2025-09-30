@@ -40,15 +40,14 @@ import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DeleteAccountFragment extends BaseFullScreenFragment implements OnDeleteAccountListener {
 
@@ -109,12 +108,11 @@ public class DeleteAccountFragment extends BaseFullScreenFragment implements OnD
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	@Override

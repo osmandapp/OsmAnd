@@ -87,7 +87,9 @@ public class Amenity extends MapObject {
 	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
 	public static final int DEFAULT_ELO = 900;
-
+	public static final String ADDR_STREET = "addr_street";
+	public static final String ADDR_HOUSENUMBER = "addr_housenumber";
+	
 	private String subType;
 	private PoiCategory type;
 	// duplicate for fast access
@@ -378,6 +380,14 @@ public class Amenity extends MapObject {
 
 	public String getSite() {
 		return getAdditionalInfo(WEBSITE);
+	}
+	
+	public String getStreetName() {
+		return getAdditionalInfo(ADDR_STREET);
+	}
+	
+	public String getHousenumber() {
+		return getAdditionalInfo(ADDR_HOUSENUMBER);
 	}
 
 	public void setSite(String site) {

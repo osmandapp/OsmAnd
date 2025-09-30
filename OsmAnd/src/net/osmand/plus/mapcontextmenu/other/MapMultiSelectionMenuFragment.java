@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -38,6 +39,8 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 		implements OnClickListener, OnGlobalLayoutListener, ObservableScrollViewCallbacks {
@@ -48,6 +51,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	private ListView listView;
 	private MultiSelectionArrayAdapter listAdapter;
 	private MapMultiSelectionMenu menu;
+	private OnBackPressedCallback backPressedCallback;
 
 	private int minHeight;
 	private boolean initialScroll = true;
@@ -100,7 +104,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			int padding = screenHeight - cancelButtonHeight;
 			paddingView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, padding));
 			paddingView.setClickable(true);
-			paddingView.setOnClickListener(v -> dismiss());
+			paddingView.setOnClickListener(v -> menu.hide());
 
 			FrameLayout shadowContainer = new FrameLayout(context);
 			shadowContainer.setLayoutParams(new FrameLayout.LayoutParams(
@@ -139,9 +143,31 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 				: R.color.multi_selection_menu_close_btn_light;
 		tvCancelRow.setTextColor(ColorUtilities.getColor(context, cancelRowColorId));
 		View cancelRow = view.findViewById(R.id.cancel_row);
-		cancelRow.setOnClickListener(view -> dismiss());
+		cancelRow.setOnClickListener(view -> menu.hide());
 		updateUi();
 		return view;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		backPressedCallback = new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				if (menu != null) {
+					menu.hide();
+				}
+			}
+		};
+		view.post(() -> requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback));
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createLeftSideContainer(true, view));
+		collection.replace(InsetTarget.createHorizontalLandscape(true, R.id.list, R.id.bottom_buttons_container));
+		return collection;
 	}
 
 	@Override
@@ -194,7 +220,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			minHeight = headerHeight + listItemHeight - navBarHeight;
 		}
 		if (scrollY <= minHeight && !initialScroll) {
-			dismiss();
+			menu.hide();
 		}
 	}
 
@@ -268,20 +294,18 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 	@Override
 	public void onStop() {
 		super.onStop();
-		if (!dismissing) {
-			menu.onStop();
-		}
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		callMapActivity(mapActivity -> {
+			if (!dismissing && !mapActivity.isChangingConfigurations()) {
+				menu.onStop();
+			}
 			mapActivity.getContextMenu().setBaseFragmentVisibility(true);
 			mapActivity.getMapLayers().getMapControlsLayer().setControlsClickable(true);
-		}
+		});
 	}
 
 	public void dismiss() {
 		dismissing = true;
-		MapActivity mapActivity = getMapActivity();
-		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+		callMapActivity(mapActivity -> {
 			MapContextMenu contextMenu = mapActivity.getContextMenu();
 			if (contextMenu.isVisible()) {
 				contextMenu.hide();
@@ -291,6 +315,15 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 					manager.popBackStack();
 				}
 			}
+		});
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (backPressedCallback != null) {
+			backPressedCallback.remove();
+			backPressedCallback = null;
 		}
 	}
 

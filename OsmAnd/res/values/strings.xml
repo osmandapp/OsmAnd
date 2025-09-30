@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_price">Price</string>
     <string name="obd_alt_battery_voltage">Adapter voltage</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Imperial gallon</string>
@@ -1817,7 +1818,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Note tags</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Show note tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons at low zooms</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">A schematic representation of icons at low zoom levels for those POIs that are not usually displayed</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Increase visibility for waterway tunnels</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Increase visibility for waterway tunnels</string>
     <string name="shared_string_not_used">Not used</string>

@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -86,6 +87,8 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		if (amenity != null) {
 			setAmenity(amenity);
+		} else if (object instanceof RenderedObject renderedObject) {
+			setMapObject(renderedObject);
 		}
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
@@ -94,6 +97,13 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setAmenityOriginName(amenity.toStringEn());
 		favorite.setIconId(RenderingIcons.getPreselectedIconId(app, amenity));
 		favorite.setAmenityExtensions(amenity.getAmenityExtensions(app.getPoiTypes(), true));
+	}
+
+	private void setMapObject(@NonNull RenderedObject renderedObject) {
+		favorite.setAmenityOriginName(renderedObject.toStringEn());
+		if (renderedObject.getIconRes() != null) {
+			favorite.setIconId(RenderingIcons.getResId(renderedObject.getIconRes()));
+		}
 	}
 
 	public void add(LatLon latLon, String title, String categoryName, int categoryColor, boolean autoFill) {

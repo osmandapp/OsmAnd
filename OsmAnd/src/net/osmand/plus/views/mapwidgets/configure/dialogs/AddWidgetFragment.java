@@ -32,7 +32,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -44,7 +45,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class AddWidgetFragment extends BaseWidgetFragment {
@@ -85,12 +85,13 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getCollapsingAppBarLayoutId() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.appbar);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		collection.replace(InsetTarget.createScrollable(R.id.scroll_view));
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.toolbar_layout));
+		return collection;
 	}
 
 	@Override

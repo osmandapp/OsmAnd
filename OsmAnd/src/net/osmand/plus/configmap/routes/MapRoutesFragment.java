@@ -30,7 +30,9 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingClass;
 import net.osmand.util.Algorithms;
@@ -40,7 +42,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public abstract class MapRoutesFragment extends BaseFullScreenFragment implements CardListener {
 
@@ -211,15 +212,13 @@ public abstract class MapRoutesFragment extends BaseFullScreenFragment implement
 		return CustomRoutesFragment.class.getName();
 	}
 
-	@Nullable
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
-	}
-
-	@Nullable
 	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.removeType(Type.ROOT_INSET);
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String attrName) {

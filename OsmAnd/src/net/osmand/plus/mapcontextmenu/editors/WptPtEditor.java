@@ -4,6 +4,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.data.MapObject;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -121,7 +123,7 @@ public class WptPtEditor extends PointEditor {
 		return TAG;
 	}
 
-	public void add(GpxFile gpxFile, LatLon latLon, String title, @Nullable Amenity amenity) {
+	public void add(GpxFile gpxFile, LatLon latLon, String title, MapObject mapObject) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -137,7 +139,7 @@ public class WptPtEditor extends PointEditor {
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 		wpt.setName(title);
 
-		if (amenity != null) {
+		if (mapObject instanceof Amenity amenity) {
 			int preselectedIconId = RenderingIcons.getPreselectedIconId(app, amenity);
 			String preselectedIconName = RenderingIcons.getBigIconName(preselectedIconId);
 			if (!Algorithms.isEmpty(preselectedIconName)) {
@@ -145,6 +147,11 @@ public class WptPtEditor extends PointEditor {
 			}
 			wpt.setAmenityOriginName(amenity.toStringEn());
 			wpt.getExtensionsToWrite().putAll(amenity.getAmenityExtensions(app.getPoiTypes(), true));
+		} else if (mapObject instanceof RenderedObject renderedObject) {
+			wpt.setAmenityOriginName(renderedObject.toStringEn());
+			if (renderedObject.getIconRes() != null) {
+				wpt.setIconName(renderedObject.getIconRes());
+			}
 		}
 
 		showEditorFragment();

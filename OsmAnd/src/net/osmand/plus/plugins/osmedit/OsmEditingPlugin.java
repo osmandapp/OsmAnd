@@ -38,6 +38,7 @@ import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -603,9 +604,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (!Algorithms.isEmpty(link)) {
 			Drawable icon = menuBuilder.getRowIcon(R.drawable.ic_action_openstreetmap_logo);
 			String textPrefix = app.getString(R.string.shared_sting_osm_link);
-			menuBuilder.buildRow(view, icon, null, textPrefix, link, 0,
-					null, false, null, true, 0,
-					true, false, false, null, false);
+			menuBuilder.buildRow(view, new BuildRowAttrs.Builder()
+					.setIcon(icon).setTextPrefix(textPrefix).setText(link)
+					.setNeedLinks(true).setUrl(true).build());
 		}
 	}
 

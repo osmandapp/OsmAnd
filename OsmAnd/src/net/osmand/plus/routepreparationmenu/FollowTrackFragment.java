@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -110,6 +111,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	public float getMiddleStateKoef() {
 		return 0.5f;
+	}
+
+	@Override
+	@IdRes
+	protected int getToolbarViewId() {
+		return R.id.route_menu_top_shadow_all;
 	}
 
 	@Override

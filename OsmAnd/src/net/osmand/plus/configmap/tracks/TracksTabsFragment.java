@@ -3,15 +3,12 @@ package net.osmand.plus.configmap.tracks;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.res.ColorStateList;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -54,6 +51,8 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -120,18 +119,11 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		return view;
 	}
 
-	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		return super.getScrollableViewIds();
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.buttons_container);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container));
+		return collection;
 	}
 
 	private void setupToolbar(@NonNull View view) {

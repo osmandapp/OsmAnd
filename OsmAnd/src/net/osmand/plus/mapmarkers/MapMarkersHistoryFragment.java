@@ -28,7 +28,8 @@ import net.osmand.plus.base.BaseNestedFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
@@ -38,9 +39,6 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 import net.osmand.plus.settings.fragments.MarkersHistorySettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
-
-import java.util.List;
-import java.util.Set;
 
 public class MapMarkersHistoryFragment extends BaseNestedFragment implements MapMarkerChangedListener, OnPreferenceChanged {
 
@@ -201,22 +199,13 @@ public class MapMarkersHistoryFragment extends BaseNestedFragment implements Map
 		return mainView;
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getScrollableViewIds() {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public List<Integer> getBottomContainersIds() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.removeType(Type.SCROLLABLE);
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private View getEmptyView(@NonNull View mainView, boolean nightMode) {

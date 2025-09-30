@@ -1658,12 +1658,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-			boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		if (result.getTileBox().getZoom() >= START_ZOOM) {
 			collectWptFromPoint(result);
 
-			if (!excludeUntouchableObjects) {
+			if (!rules.isOnlyTouchableObjects() && !rules.isOnlyPoints()) {
 				collectTracksFromPoint(result, false);
 			}
 		}

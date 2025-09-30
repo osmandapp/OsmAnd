@@ -65,7 +65,8 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -91,9 +92,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
@@ -129,6 +128,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
 	private BoundsChangeListener mainViewBoundsChangeListener;
+	private OnBackPressedCallback backPressedCallback;
 	private boolean forceUpdateLayout;
 
 	private boolean portrait;
@@ -185,18 +185,6 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		menu = mapActivity.getContextMenu();
 		mainViewBoundsChangeListener = new BoundsChangeListener(displayPositionManager, false);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		boolean enabled = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment() == null;
-		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
-			public void handleOnBackPressed() {
-				if (menu.isVisible() && menu.isClosable()) {
-					if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
-						menu.openMenuHeaderOnly();
-					} else {
-						menu.close();
-					}
-				}
-			}
-		});
 
 		DialogManager dialogManager = mapActivity.getApp().getDialogManager();
 		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
@@ -556,21 +544,28 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
+
 		TextView detailsButton = view.findViewById(R.id.context_menu_details_button);
-		detailsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		detailsButton.setOnClickListener(view -> openMenuHalfScreen());
-		TextView directionsButton = view.findViewById(R.id.context_menu_directions_button);
-		int iconResId = R.drawable.ic_action_gdirections_dark;
-		if (menu.navigateInPedestrianMode()) {
-			iconResId = R.drawable.ic_action_pedestrian_dark;
+		BottomButtonController detailsButtonController = menu.getDetailsButtonController();
+		if (detailsButtonController != null) {
+			detailsButton.setText(detailsButtonController.getCaption());
+			detailsButton.setTextColor(getColor(bottomButtonsColor));
+			detailsButton.setOnClickListener(v -> detailsButtonController.buttonPressed());
 		}
-		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
-		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
-				directionsButton, null, null, drawable, null);
-		int contentPaddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
-		directionsButton.setCompoundDrawablePadding(contentPaddingHalf);
-		directionsButton.setOnClickListener(view -> menu.navigateButtonPressed());
+
+		TextView mainActionButton = view.findViewById(R.id.context_menu_directions_button);
+		BottomButtonController mainButtonController = menu.getMainActionButtonController();
+		if (mainButtonController != null) {
+			mainActionButton.setText(mainButtonController.getCaption());
+			Drawable drawable = getIcon(mainButtonController.getIconId(), bottomButtonsColor);
+			mainActionButton.setTextColor(getColor(bottomButtonsColor));
+
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+					mainActionButton, null, null, drawable, null);
+			int contentPaddingHalf = (int) getDimension(R.dimen.content_padding_half);
+			mainActionButton.setCompoundDrawablePadding(contentPaddingHalf);
+			mainActionButton.setOnClickListener(v -> mainButtonController.buttonPressed());
+		}
 
 		buildBottomView();
 
@@ -597,12 +592,45 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		return view;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		MapActivity activity = requireMapActivity();
+		boolean enabled = activity.getFragmentsHelper().getQuickSearchDialogFragment() == null;
+		backPressedCallback = new OnBackPressedCallback(enabled) {
+			public void handleOnBackPressed() {
+				if (menu.isVisible() && menu.isClosable()) {
+					if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
+						menu.openMenuHeaderOnly();
+					} else {
+						menu.close();
+					}
+				}
+			}
+		};
+		view.post(() -> activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback));
+	}
+
 	@Nullable
 	@Override
-	public List<Integer> getScrollableViewIds() {
-		List<Integer> ids = new ArrayList<>();
-		ids.add(R.id.context_menu_bottom_view);
-		return ids;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.context_menu_bottom_view).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true, mainView));
+		collection.replace(InsetTarget.createHorizontalLandscape(true,
+				R.id.context_menu_top_view,
+				R.id.transport_badges_container,
+				R.id.additional_info_row_container,
+				R.id.title_button_container,
+				R.id.download_buttons_container,
+				R.id.title_bottom_button_container,
+				R.id.additional_buttons_container,
+				R.id.title_progress_container,
+				R.id.buttons_top_border,
+				R.id.context_menu_buttons,
+				R.id.buttons_bottom_border,
+				R.id.context_menu_bottom_buttons));
+		return collection;
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {
@@ -1406,6 +1434,10 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			MapLayers mapLayers = activity.getMapLayers();
 			List<MapButton> mapButtons = Arrays.asList(zoomInButton, zoomOutButton);
 			mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
+		}
+		if (backPressedCallback != null) {
+			backPressedCallback.remove();
+			backPressedCallback = null;
 		}
 	}
 

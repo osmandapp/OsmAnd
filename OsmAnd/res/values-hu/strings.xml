@@ -5809,7 +5809,7 @@
     <string name="lang_en_barebones">Angol (csupasz)</string>
     <string name="shared_sting_osm_link">OSM hivatkozás</string>
     <string name="show_local_names">Helyi nevek mutatása</string>
-    <string name="obd_alt_battery_voltage">Akkumulátor feszültség (adapter)</string>
+    <string name="obd_alt_battery_voltage">Adapter feszültség</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Angol gallon</string>
     <string name="us_gallon">US gallon</string>
@@ -5819,4 +5819,6 @@
     <string name="access_pinch_zoom_magnification">Csippentéses nagyítás</string>
     <string name="access_pinch_zoom_magnification_descr">Nagyítás közben a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
     <string name="accessibility_independent_features">Független funkciók</string>
+    <string name="show_spherical_map">Szférikus térkép megjelenítése</string>
+    <string name="show_spherical_map_description">A Föld gömbmodelljének megjelenítése</string>
 </resources>

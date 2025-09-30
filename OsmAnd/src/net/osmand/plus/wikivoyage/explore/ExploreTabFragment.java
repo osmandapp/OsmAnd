@@ -30,7 +30,8 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.utils.InsetsUtils.InsetSide;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -41,7 +42,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ExploreTabFragment extends BaseFullScreenFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
@@ -78,15 +78,20 @@ public class ExploreTabFragment extends BaseFullScreenFragment implements Downlo
 		return mainView;
 	}
 
-	@Nullable
 	@Override
-	public Set<InsetSide> getRootInsetSides() {
-		return null;
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		if (adapter != null && adapter.getItemCount() == 0) {
+			populateData();
+		}
 		app.getTravelHelper().getBookmarksHelper().addListener(this);
 	}
 
@@ -106,38 +111,38 @@ public class ExploreTabFragment extends BaseFullScreenFragment implements Downlo
 
 	@Override
 	public void downloadInProgress() {
-			IndexItem current = app.getDownloadThread().getCurrentDownloadingItem();
-			if (current != null && current != currentDownloadingIndexItem) {
-				currentDownloadingIndexItem = current;
-				removeRedundantCards();
-			}
-			adapter.updateDownloadUpdateCard(true);
-			adapter.updateNeededMapsCard(true);
+		IndexItem current = app.getDownloadThread().getCurrentDownloadingItem();
+		if (current != null && current != currentDownloadingIndexItem) {
+			currentDownloadingIndexItem = current;
+			removeRedundantCards();
+		}
+		adapter.updateDownloadUpdateCard(true);
+		adapter.updateNeededMapsCard(true);
 	}
 
 	@Override
 	public void downloadHasFinished() {
-			TravelHelper travelHelper = app.getTravelHelper();
-			if (travelHelper.isAnyTravelBookPresent()) {
-				app.getTravelHelper().initializeDataOnAppStartup();
-				WikivoyageExploreActivity exploreActivity = getExploreActivity();
-				if (exploreActivity != null) {
-					exploreActivity.populateData(true);
-				}
-			} else {
-				removeRedundantCards();
+		TravelHelper travelHelper = app.getTravelHelper();
+		if (travelHelper.isAnyTravelBookPresent()) {
+			app.getTravelHelper().initializeDataOnAppStartup();
+			WikivoyageExploreActivity exploreActivity = getExploreActivity();
+			if (exploreActivity != null) {
+				exploreActivity.populateData(true);
 			}
+		} else {
+			removeRedundantCards();
+		}
 	}
 
 	@Override
 	public void savedArticlesUpdated() {
-			DownloadIndexesThread downloadThread = app.getDownloadThread();
-			if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-				waitForIndexes = true;
-				downloadThread.runReloadIndexFilesSilent();
-			} else {
-				checkDownloadIndexes();
-			}
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			waitForIndexes = true;
+			downloadThread.runReloadIndexFilesSilent();
+		} else {
+			checkDownloadIndexes();
+		}
 	}
 
 	@Nullable

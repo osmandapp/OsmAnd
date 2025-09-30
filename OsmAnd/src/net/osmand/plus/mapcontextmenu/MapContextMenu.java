@@ -20,6 +20,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -396,7 +397,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 			menuController = getMenuController();
 		} else {
-			menuController.update(pointDescription, object);
+			menuController.update(pointDescription, object, latLon);
 		}
 		initTitle();
 
@@ -494,14 +495,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (active && displayDistanceDirection()) {
 			updateLocation(false, true, false);
 		}
-	}
-
-	public boolean navigateInPedestrianMode() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.navigateInPedestrianMode();
-		}
-		return false;
 	}
 
 	public boolean close() {
@@ -937,16 +930,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return null;
 	}
 
-	public void navigateButtonPressed() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			if (navigateInPedestrianMode()) {
-				mapActivity.getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
-			}
-			mapActivity.getMapActions().navigateButton();
-		}
-	}
-
 	public boolean zoomInPressed() {
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
@@ -1168,14 +1151,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				title = "";
 			}
 
-			Amenity amenity = null;
+			MapObject mapObject = null;
+			Object object = getObject();
 			if (pointDescription.isPoi()) {
-				Object object = getObject();
-				if (object instanceof Amenity) {
-					amenity = (Amenity) object;
+				if (object instanceof Amenity amenity) {
+					mapObject = amenity;
 				} else if (object instanceof BaseDetailsObject detailsObject) {
-					amenity = detailsObject.getSyntheticAmenity();
+					mapObject = detailsObject.getSyntheticAmenity();
 				}
+			}
+			if (object instanceof RenderedObject renderedObject) {
+				mapObject = renderedObject;
 			}
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
@@ -1186,10 +1172,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				GpxFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
+					wptPtPointEditor.add(gpxFile, getLatLon(), title, mapObject);
 				}
 			} else {
-				addNewWptToGPXFile(title, amenity);
+				addNewWptToGPXFile(title, mapObject);
 			}
 		}
 	}
@@ -1250,21 +1236,21 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(@Nullable String title, @Nullable Amenity amenity) {
+	public void addNewWptToGPXFile(@Nullable String title, @Nullable MapObject mapObject) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			addNewWptToGPXFileImpl(mapActivity, title, amenity);
+			addNewWptToGPXFileImpl(mapActivity, title, mapObject);
 		}
 	}
 
 	private void addNewWptToGPXFileImpl(@NonNull MapActivity mapActivity,
-	                                    @Nullable String title, @Nullable Amenity amenity) {
+	                                    @Nullable String title, @Nullable MapObject mapObject) {
 		SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
+					wptPtPointEditor.add(gpxFile, getLatLon(), title, mapObject);
 				}
 			}
 		};
@@ -1360,102 +1346,77 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public int getCurrentMenuState() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getCurrentMenuState();
-		} else {
-			return MenuState.HEADER_ONLY;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getCurrentMenuState() : MenuState.HEADER_ONLY;
 	}
 
 	public float getHalfScreenMaxHeightKoef() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getHalfScreenMaxHeightKoef();
-		} else {
-			return .75f;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getHalfScreenMaxHeightKoef() : .75f;
 	}
 
 	public int getSlideInAnimation() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSlideInAnimation();
-		} else {
-			return 0;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSlideInAnimation() : 0;
 	}
 
 	public int getSlideOutAnimation() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSlideOutAnimation();
-		} else {
-			return 0;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSlideOutAnimation() : 0;
 	}
 
+	@Nullable
 	public TitleButtonController getLeftTitleButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getLeftTitleButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getLeftTitleButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getRightTitleButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getRightTitleButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getRightTitleButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getBottomTitleButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getBottomTitleButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getBottomTitleButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getLeftDownloadButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getLeftDownloadButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getLeftDownloadButtonController() : null;
 	}
 
+	@Nullable
 	public TitleButtonController getRightDownloadButtonController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getRightDownloadButtonController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getRightDownloadButtonController() : null;
 	}
 
+	@Nullable
 	public List<Pair<TitleButtonController, TitleButtonController>> getAdditionalButtonsControllers() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalButtonsControllers();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalButtonsControllers() : null;
 	}
 
+	@Nullable
+	public BottomButtonController getDetailsButtonController() {
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getDetailsButtonController() : null;
+	}
+
+	@Nullable
+	public BottomButtonController getMainActionButtonController() {
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getMainButtonController() : null;
+	}
+
+	@Nullable
 	public TitleProgressController getTitleProgressController() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getTitleProgressController();
-		} else {
-			return null;
-		}
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getTitleProgressController() : null;
 	}
 
 	public boolean supportZoomIn() {
@@ -1497,44 +1458,32 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	@NonNull
 	public CharSequence getSubtypeStr() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSubtypeStr();
-		}
-		return "";
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSubtypeStr() : "";
 	}
 
+	@Nullable
 	public Drawable getSubtypeIcon() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getSubtypeIcon();
-		}
-		return null;
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getSubtypeIcon() : null;
 	}
 
 	public int getAdditionalInfoColor() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalInfoColorId();
-		}
-		return 0;
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalInfoColorId() : 0;
 	}
 
+	@NonNull
 	public CharSequence getAdditionalInfo() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalInfoStr();
-		}
-		return "";
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalInfoStr() : "";
 	}
 
 	public int getAdditionalInfoIconRes() {
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return menuController.getAdditionalInfoIconRes();
-		}
-		return 0;
+		MenuController controller = getMenuController();
+		return controller != null ? controller.getAdditionalInfoIconRes() : 0;
 	}
 
 	public boolean isMapDownloaded() {
