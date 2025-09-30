@@ -4099,7 +4099,7 @@
     <string name="predefined_waypoint_appearance_description">Appuyer sur cette action enregistre automatiquement le point de passage avec les paramètres prédéfinis.</string>
     <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvre l’écran « Ajouter un point de passage » dans lequel vous pourrez définir son nom et son apparence.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icônes à zoom faible</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Une représentation schématique des icônes à faible niveau de zoom pour les POI qui ne sont généralement pas affichés</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Afficher les tunnels sur voie navigable</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Augmenter la visibilité des tunnels sur voie navigable</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Attributs note</string>
