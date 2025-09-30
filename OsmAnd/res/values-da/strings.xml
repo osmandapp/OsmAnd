@@ -4209,12 +4209,12 @@
     <string name="shared_string_not_used">Ikke anvendt</string>
     <string name="navigate_point_format_swiss_grid">Schweizisk koordinatsystem (CH1903)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Retmig-mærker</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Øg synlighed af vandveje</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Øg synlighed af vandvejstunneler</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis retmig-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Bemærkning-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Vis bemærkning-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">En skematisk repræsentation af ikoner ved lave zoomniveauer for de interessepunkter, som ikke normalt vises</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Øg synlighed af vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
@@ -5907,4 +5907,5 @@
     <string name="accessibility_independent_features">Uafhængige funktioner</string>
     <string name="show_spherical_map">Vis sfærisk kort</string>
     <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
+    <string name="shared_string_price">Pris</string>
 </resources>
