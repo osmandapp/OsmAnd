@@ -4114,7 +4114,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Íconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los íconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de los iconos a bajos niveles de zum para aquellos puntos de interés que no suelen mostrarse</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="shared_string_used">Usados</string>
@@ -5810,4 +5810,5 @@
     <string name="access_pinch_zoom_magnification">Zum mediante pellizcos</string>
     <string name="access_pinch_zoom_magnification_descr">Usa el escalado de la ventana gráfica en lugar de los niveles de zum discretos durante los gestos de acercamiento.</string>
     <string name="lang_en_barebones">Inglés (básico)</string>
+    <string name="shared_string_price">Precio</string>
 </resources>
