@@ -2120,6 +2120,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(null), TracksSortMode.values());
+	public final CommonPreference<FavoritesSortMode> FAVORITES_SORT_MODE = new EnumStringPreference<>(this, "favorites_sort_mode", FavoritesSortMode.getDefaultSortMode(), FavoritesSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
