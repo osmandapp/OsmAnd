@@ -208,7 +208,6 @@ public class MapLayers {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
 				mapVectorLayer.setSymbolsAlpha(255 - change);
-				mapRenderer.requestRender();
 			}
 		});
 		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
@@ -217,7 +216,6 @@ public class MapLayers {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
 				gpxLayer.setInvalidated(true);
-				mapRenderer.requestRender();
 			}
 		});
 		app.getSettings().ENABLE_3D_MAPS.addListener(enable3DMapsListener);

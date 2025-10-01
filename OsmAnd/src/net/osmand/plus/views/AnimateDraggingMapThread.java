@@ -27,6 +27,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.EnumSet;
+import net.osmand.plus.utils.FPSManager;
 
 /**
  * Thread for animated dragging.
@@ -217,15 +218,18 @@ public class AnimateDraggingMapThread implements TouchListener {
 		}
 	}
 
-	public synchronized void startThreadAnimating(@NonNull Runnable runnable) {
+	public synchronized void startThreadAnimating(@NonNull Runnable runnable,
+												  FPSManager.Interaction interaction) {
 		stopAnimatingSync();
 		stopped = false;
 		Thread t = new Thread(() -> {
 			try {
+				FPSManager.getInstance().setInteraction(interaction);
 				suspendSymbolsUpdate();
 				runnable.run();
 			} finally {
 				currentThread = null;
+				FPSManager.getInstance().endInteraction(interaction);
 				resumeSymbolsUpdate();
 			}
 		}, "Animating Map Thread");
@@ -282,7 +286,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				animatingMapMove = false;
 				animatingMapTilt = false;
 				animatingMapRotation = false;
-			});
+			}, FPSManager.Interaction.ANIMATION);
 		}
 
 	}
@@ -470,7 +474,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				animatingMoveInThread(mMoveX, mMoveY, animationDuration, notifyListener, null);
 			}
 			animatingMapMove = false;
-		});
+		}, FPSManager.Interaction.ANIMATION);
 	}
 
 	public void startMoving(double finalLat, double finalLon) {
@@ -566,6 +570,12 @@ public class AnimateDraggingMapThread implements TouchListener {
 			}
 		}
 
+		FPSManager.Interaction interaction = FPSManager.Interaction.ANIMATION;
+		net.osmand.Location location = app.getLocationProvider().getLastKnownLocation();
+		if (location != null && !location.hasAccuracy()) {
+			interaction = FPSManager.Interaction.IMPRECISE_ANIMATION;
+		}
+
 		startThreadAnimating(() -> {
 			animatingMapMove = true;
 			setTargetValues(endZoom, endZoomFloatPart, finalLat, finalLon);
@@ -612,7 +622,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				pendingRotateAnimation();
 			}
 			animatingMapMove = false;
-		});
+		}, interaction);
 	}
 
 	public int calculateMoveZoom(RotatedTileBox rb, double finalLat, double finalLon, float[] mSt) {
@@ -674,7 +684,6 @@ public class AnimateDraggingMapThread implements TouchListener {
 		}
 		RotatedTileBox tb = tileView.getCurrentRotatedTileBox();
 		while (!stopped) {
-			mapRenderer.requestRender();
 			sleepToRedraw(true);
 			mapRenderer = getMapRenderer();
 			if (mapRenderer == null) {
@@ -926,7 +935,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 				pendingRotateAnimation();
 			}
-		});
+		}, FPSManager.Interaction.UI);
 	}
 
 	public void startDragging(float velocityX, float velocityY,
@@ -1008,7 +1017,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				resetInterpolation();
 				pendingRotateAnimation();
 			}
-		});
+		}, FPSManager.Interaction.UI);
 	}
 
 	public void startTilting(float elevationAngle, float elevationTime) {
@@ -1074,7 +1083,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				resetInterpolation();
 			}
 			animatingMapTilt = false;
-		});
+		}, FPSManager.Interaction.UI);
 
 	}
 
@@ -1134,7 +1143,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				animatingMapAnimator();
 				animatingMapRotation = false;
 				targetRotate = TARGET_NO_ROTATION;
-			});
+			}, FPSManager.Interaction.ANIMATION);
 		} else {
 			if (!isAnimating()) {
 				clearTargetValues();
@@ -1144,7 +1153,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				startThreadAnimating(() -> {
 					targetRotate = rotate;
 					pendingRotateAnimation();
-				});
+				}, FPSManager.Interaction.IDLE);
 			} else {
 				this.targetRotate = rotate;
 			}

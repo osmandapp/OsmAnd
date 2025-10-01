@@ -83,10 +83,5 @@ public class OsmAndMapLayersView extends View {
 		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		DrawSettings drawSettings = new DrawSettings(nightMode, false);
 		mapView.drawOverMap(canvas, mapView.getRotatedTileBox(), drawSettings);
-
-		MapRendererView mapRenderer = mapView.getMapRenderer();
-		if (mapRenderer != null) {
-			mapRenderer.requestRender();
-		}
 	}
 }
