@@ -12,6 +12,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -381,10 +382,15 @@ public class SearchUICore {
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
 			boolean isSameType = r1.objectType == r2.objectType;
+			boolean interpolated = false;
 			if (isSameType) {
 				ObjectType type = r1.objectType;
 				if (type == ObjectType.INDEX_ITEM || type == ObjectType.GPX_TRACK) {
 					return Algorithms.objectEquals(r1.localeName, r2.localeName);
+				}
+				if (r2.objectType == ObjectType.HOUSE && r2.object instanceof Building building) {
+					boolean streetEquals = r1.localeRelatedObjectName.equals(r2.localeRelatedObjectName);
+					interpolated = streetEquals && building.getInterpolationType() != null;
 				}
 			}
 			if (r1.location != null && r2.location != null &&
@@ -435,7 +441,11 @@ public class SearchUICore {
 							}
 						}
 					} else if (ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
-						similarityRadius = 100;
+						if (interpolated) {
+							similarityRadius = 1000;
+						} else {
+							similarityRadius = 100;
+						}
 					}
 					return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
 				}
@@ -1151,6 +1161,7 @@ public class SearchUICore {
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
+		COMPARE_INTERPOLATED,
 		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
 		COMPARE_BY_NAME,
 		COMPARE_BY_DISTANCE,
@@ -1219,6 +1230,17 @@ public class SearchUICore {
 				}
 				break;
 			}
+			case COMPARE_INTERPOLATED:
+				if (o1.object instanceof Building building1 &&
+						o2.object instanceof Building building2) {
+					boolean interpolated1 = building1.getInterpolationType() != null;
+					boolean interpolated2 = building2.getInterpolationType() != null;
+					if (interpolated1 != interpolated2) {
+						// interpolated second
+						return interpolated1 ? 1 : -1;
+					}
+				}
+				break;
 			case COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT:
 				double ps1 = o1.parentSearchResult == null ? 0 : o1.parentSearchResult.getSearchDistance(c.loc);
 				double ps2 = o2.parentSearchResult == null ? 0 : o2.parentSearchResult.getSearchDistance(c.loc);
