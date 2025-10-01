@@ -127,9 +127,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private void startNetworkListener() {
 		int proto = plugin.AIS_NMEA_PROTOCOL.get();
 		if (proto == AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP) {
-			this.listener = new AisMessageListener(plugin.AIS_NMEA_UDP_PORT.get(), this);
+			this.listener = new AisMessageListener(this, plugin.AIS_NMEA_UDP_PORT.get());
 		} else if (proto == AisTrackerPlugin.AIS_NMEA_PROTOCOL_TCP) {
-			this.listener = new AisMessageListener(plugin.AIS_NMEA_IP_ADDRESS.get(), plugin.AIS_NMEA_TCP_PORT.get(), this);
+			this.listener = new AisMessageListener(this, plugin.AIS_NMEA_IP_ADDRESS.get(), plugin.AIS_NMEA_TCP_PORT.get());
 		}
 	}
 

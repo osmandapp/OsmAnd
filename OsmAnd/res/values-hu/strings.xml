@@ -4131,7 +4131,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme címkék (javítandó objektumok) megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképszerkesztői megjegyzés) címkék megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonok kis nagyításnál</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Alacsony nagyításnál ikonok sematikus ábrázolása azoknál POI-knál, amelyek általában nincsenek megjelenítve</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak láthatóságának fokozása</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Vízi alagutak láthatóságának fokozása</string>
     <string name="navigate_point_format_swiss_grid_plus">Svájci koordináták (CH1903+)</string>
@@ -5821,4 +5821,5 @@
     <string name="accessibility_independent_features">Független funkciók</string>
     <string name="show_spherical_map">Szférikus térkép megjelenítése</string>
     <string name="show_spherical_map_description">A Föld gömbmodelljének megjelenítése</string>
+    <string name="shared_string_price">Ár</string>
 </resources>

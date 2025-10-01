@@ -3902,7 +3902,7 @@
     <string name="gpx_no_routes_title">Nema ruta</string>
     <string name="save_track_to_gpx_descrp">Autamatski pokreni snimanje trase tokom navođenja i automatski sačuvaj nakon toga.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme oznake</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Šematski prikaz sličica pri malom približavanju</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Šematski prikaz ikona pri malom zumiranju za one TOI koji se obično ne prikazuju</string>
     <string name="distance_between_points">Udaljenost između tačaka</string>
     <string name="save_as_copy">Sačuvaj kao kupiju</string>
     <string name="storage_migration_wrong_folder_warning">Nema podataka OsmAnda u odabranom folderu. Pokušaj ponovo.</string>
@@ -5861,4 +5861,5 @@
     <string name="accessibility_independent_features">Nezavisne karakteristike</string>
     <string name="show_spherical_map_description">Prikaz sferoidnog modela Zemlje</string>
     <string name="show_spherical_map">Prikaži sferičnu mapu</string>
+    <string name="shared_string_price">Cena</string>
 </resources>

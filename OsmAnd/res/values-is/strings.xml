@@ -4184,7 +4184,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Merki minnispunkta</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Birta merki minnispunkta</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Táknmyndir við lítinn aðdrátt</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematísk birting táknmynda við lítinn aðdrátt</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematísk birting táknmynda við lítinn aðdrátt fyrir þá merkisstaði sem venjulega eru ekki birtir</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Auka sýnileika ganga sem siglt er í gegnum</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Auka sýnileika ganga sem siglt er í gegnum</string>
     <string name="waypoint_template">Sniðmát ferilpunkts</string>
@@ -5864,4 +5864,5 @@
     <string name="show_spherical_map">Sýna kúlulaga kort</string>
     <string name="show_spherical_map_description">Birta kúlulaga líkan af Jörðinni</string>
     <string name="release_5_1">• Bætt við stuðningi við innkaup á vefnum í mörgum stýrikerfum\n\n • Hitaeiningar færðar í Almennar stillingar til að þær finnist betur\n\n • Bætt við rafhleðslumerki fyrir BLE-skynjara\n\n • Nýtt og betra viðmót til að velja punkta í leiðsögn\n\n • Bættur sýnileiki viðmótshluta með nýjum útlínum\n\n • Bætt við greiningu á Hækkun/Lækkun\n\n • Ítarlegri samþætting Wikipedia og Wikivoyage á fleiri merkisstöðum.</string>
+    <string name="shared_string_price">Verð</string>
 </resources>

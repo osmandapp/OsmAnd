@@ -29,6 +29,7 @@ import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.TransportStopHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -241,7 +242,8 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		return amenity.isRouteTrack()
+		ClickableWayHelper clickableWayHelper = getApplication().getClickableWayHelper();
+		return amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)
 				? getTypeWithDistanceStr(amenity, getApplication())
 				: getTypeStr(amenity);
 	}

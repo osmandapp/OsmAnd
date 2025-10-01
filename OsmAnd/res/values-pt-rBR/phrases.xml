@@ -3548,13 +3548,13 @@
     <string name="poi_climbing_crag_filter">Penhasco de escalada</string>
     <string name="poi_climbing_crag">Penhasco de escalada</string>
     <string name="reddit">Reddit</string>
-    <string name="poi_hazard_additional_erosion">Perigo: erosão</string>
-    <string name="poi_hazard_additional_falling_rocks">Perigo: queda de rochas</string>
-    <string name="poi_hazard_additional_nuclear">Perigo: nuclear</string>
-    <string name="poi_hazard_additional_flood">Perigo: inundação</string>
-    <string name="poi_hazard_additional_avalanche">Perigo: avalanche</string>
-    <string name="poi_hazard_additional_minefield">Perigo: campo minado</string>
-    <string name="poi_hazard_additional_contamination">Perigo: contaminação</string>
+    <string name="poi_hazard_additional_erosion">Erosão</string>
+    <string name="poi_hazard_additional_falling_rocks">Queda de rochas</string>
+    <string name="poi_hazard_additional_nuclear">Nuclear</string>
+    <string name="poi_hazard_additional_flood">Inundação</string>
+    <string name="poi_hazard_additional_avalanche">Avalanche</string>
+    <string name="poi_hazard_additional_minefield">Campo minado</string>
+    <string name="poi_hazard_additional_contamination">Contaminação</string>
     <string name="poi_defibrillator_location">Localização</string>
     <string name="poi_changing_table_yes">Sim;Trocador de fraldas: sim</string>
     <string name="poi_changing_table_no">Não;Trocador de fraldas: não</string>
@@ -5141,4 +5141,16 @@
     <string name="poi_atv_yes">Moto quatro: sim</string>
     <string name="poi_atv_no">Moto quatro: não</string>
     <string name="poi_denomination_brethren">Brethren</string>
+    <string name="poi_hazard_additional_hole">Buraco</string>
+    <string name="poi_hazard_additional_curve">Curva</string>
+    <string name="poi_hazard_additional_curves">Curvas</string>
+    <string name="poi_hazard_additional_pedestrians">Pedestres</string>
+    <string name="poi_hazard_additional_children">Crianças</string>
+    <string name="poi_hazard_additional_animal_crossing">Cruzamento de animais</string>
+    <string name="poi_hazard_additional_dangerous_junction">Cruzamento perigoso</string>
+    <string name="poi_hazard_additional_school_zone">Zona escolar</string>
+    <string name="poi_hazard_additional_cyclists">Ciclistas</string>
+    <string name="poi_hazard_additional_shooting_range">Campo de tiro</string>
+    <string name="poi_hazard_additional_side_winds">Ventos laterais</string>
+    <string name="poi_hazard_additional_ice">Gelo</string>
 </resources>

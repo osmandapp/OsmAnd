@@ -104,6 +104,7 @@ public class AisObject {
         initLatLon(lat, lon);
         initObjectClass();
     }
+
     public AisObject(int mmsi, int msgType, int timeStamp, int navStatus, int manInd, int heading,
                      double cog, double sog, double lat, double lon, double rot) {
         initObj(mmsi, msgType);
@@ -117,6 +118,7 @@ public class AisObject {
         this.ais_rot = rot;
         initObjectClass();
     }
+
     public AisObject(int mmsi, int msgType, int timeStamp, int altitude,
                      double cog, double sog, double lat, double lon) {
         initObj(mmsi, msgType);
@@ -127,6 +129,7 @@ public class AisObject {
         this.ais_sog = sog;
         initObjectClass();
     }
+
     public AisObject(int mmsi, int msgType, int timeStamp, int heading,
                      double cog, double sog, double lat, double lon,
                      int shipType, int dimensionToBow, int dimensionToStern,
@@ -141,6 +144,7 @@ public class AisObject {
         this.ais_shipType = shipType;
         initObjectClass();
     }
+
     public AisObject(int mmsi, int msgType, int imo, @Nullable String callSign, @Nullable String shipName,
                      int shipType, int dimensionToBow, int dimensionToStern,
                      int dimensionToPort, int dimensionToStarboard,
@@ -174,9 +178,11 @@ public class AisObject {
         this.ais_aidType = aidType;
         initObjectClass();
     }
+
     public AisObject(@NonNull AisObject ais) {
         this.set(ais);
     }
+
     private String getCountryCode(Integer mmsi) {
         String mmsiString = mmsi.toString();
 
@@ -464,12 +470,12 @@ public class AisObject {
         }
     }
 
-    private void updateBitmap(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint) {
+    private void updateBitmap(@NonNull AisTrackerLayer layer, @NonNull Paint paint) {
         if (isLost(vesselLostTimeoutInMinutes)) {
-            setBitmap(mapLayer);
+            setBitmap(layer);
         } else {
             if (!this.bitmapValid) {
-                setBitmap(mapLayer);
+                setBitmap(layer);
             }
             if (checkCpaWarning()) {
                 activateCpaWarning();
@@ -723,238 +729,132 @@ public class AisObject {
     }
     @NonNull
     public String getShipTypeString() {
-        switch (this.ais_shipType) {
-            case INVALID_SHIP_TYPE: // not initialized
-                return("unknown");
-            case 20:
-                return("Wing in ground (WIG)");
-            case 21:
-                return("WIG, Hazardous category A");
-            case 22:
-                return("WIG, Hazardous category B");
-            case 23:
-                return("WIG, Hazardous category C");
-            case 24:
-                return("WIG, Hazardous category D");
-            case 30:
-                return("Fishing");
-            case 31:
-                return("Towing");
-            case 32:
-                return("Towing");
-            case 33:
-                return("Dredging");
-            case 34:
-                return("Diving ops");
-            case 35:
-                return("Military ops");
-            case 36:
-                return("Sailing");
-            case 37:
-                return("Pleasure Craft");
-            case 40:
-                return("High Speed Craft (HSC)");
-            case 41:
-                return("HSC, Hazardous category A");
-            case 42:
-                return("HSC, Hazardous category B");
-            case 43:
-                return("HSC, Hazardous category C");
-            case 44:
-                return("HSC, Hazardous category D");
-            case 49: // HSC, No additional information
-                return("High Speed Craft (HSC)");
-            case 50:
-                return("Pilot Vessel");
-            case 51:
-                return("Search and Rescue vessel");
-            case 52:
-                return("Tug");
-            case 53:
-                return("Port Tender");
-            case 54:
-                return("Anti-pollution equipment");
-            case 55:
-                return("Law Enforcement");
-            case 56:
-                return("Spare - Local Vessel");
-            case 57:
-                return("Spare - Local Vessel");
-            case 58:
-                return("Medical Transport");
-            case 59:
-                return("Noncombatant ship according to RR Resolution No. 18");
-            case 60:
-                return("Passenger");
-            case 61:
-                return("Passenger, Hazardous category A");
-            case 62:
-                return("Passenger, Hazardous category B");
-            case 63:
-                return("Passenger, Hazardous category C");
-            case 64:
-                return("Passenger, Hazardous category D");
-            case 69: // Passenger, No additional information
-                return("Passenger/Cruise/Ferry");
-            case 70: // Cargo, all ships of this type
-                return("Cargo");
-            case 71:
-                return("Cargo, Hazardous category A");
-            case 72:
-                return("Cargo, Hazardous category B");
-            case 73:
-                return("Cargo, Hazardous category C");
-            case 74:
-                return("Cargo, Hazardous category D");
-            case 79: // Cargo, No additional information
-                return("Cargo");
-            case 80: // Tanker, all ships of this type
-                return("Tanker");
-            case 81:
-                return("Tanker, Hazardous category A");
-            case 82:
-                return("Tanker, Hazardous category B");
-            case 83:
-                return("Tanker, Hazardous category C");
-            case 84:
-                return("Tanker, Hazardous category D");
-            case 89: // Tanker, No additional information
-                return("Tanker");
-            case 90: // Other Type, all ships of this type
-                return("Other Type");
-            case 91:
-                return("Other Type, Hazardous category A");
-            case 92:
-                return("Other Type, Hazardous category B");
-            case 93:
-                return("Other Type, Hazardous category C");
-            case 94:
-                return("Other Type, Hazardous category D");
-            case 99: // Other Type, no additional information
-                return("Other Type");
-            default:
-                return Integer.toString(ais_shipType);
-        }
+		return switch (this.ais_shipType) {
+			case INVALID_SHIP_TYPE -> "unknown"; // not initialized
+			case 20 -> "Wing in ground (WIG)";
+			case 21 -> "WIG, Hazardous category A";
+			case 22 -> "WIG, Hazardous category B";
+			case 23 -> "WIG, Hazardous category C";
+			case 24 -> "WIG, Hazardous category D";
+			case 30 -> "Fishing";
+			case 31 -> "Towing";
+			case 32 -> "Towing";
+			case 33 -> "Dredging";
+			case 34 -> "Diving ops";
+			case 35 -> "Military ops";
+			case 36 -> "Sailing";
+			case 37 -> "Pleasure Craft";
+			case 40 -> "High Speed Craft (HSC)";
+			case 41 -> "HSC, Hazardous category A";
+			case 42 -> "HSC, Hazardous category B";
+			case 43 -> "HSC, Hazardous category C";
+			case 44 -> "HSC, Hazardous category D";
+			case 49 -> "High Speed Craft (HSC)"; // HSC, No additional information
+			case 50 -> "Pilot Vessel";
+			case 51 -> "Search and Rescue vessel";
+			case 52 -> "Tug";
+			case 53 -> "Port Tender";
+			case 54 -> "Anti-pollution equipment";
+			case 55 -> "Law Enforcement";
+			case 56 -> "Spare - Local Vessel";
+			case 57 -> "Spare - Local Vessel";
+			case 58 -> "Medical Transport";
+			case 59 -> "Noncombatant ship according to RR Resolution No. 18";
+			case 60 -> "Passenger";
+			case 61 -> "Passenger, Hazardous category A";
+			case 62 -> "Passenger, Hazardous category B";
+			case 63 -> "Passenger, Hazardous category C";
+			case 64 -> "Passenger, Hazardous category D";
+			case 69 -> "Passenger/Cruise/Ferry"; // Passenger, No additional information
+			case 70 -> "Cargo"; // Cargo, all ships of this type
+			case 71 -> "Cargo, Hazardous category A";
+			case 72 -> "Cargo, Hazardous category B";
+			case 73 -> "Cargo, Hazardous category C";
+			case 74 -> "Cargo, Hazardous category D";
+			case 79 -> "Cargo"; // Cargo, No additional information
+			case 80 -> "Tanker"; // Tanker, all ships of this type
+			case 81 -> "Tanker, Hazardous category A";
+			case 82 -> "Tanker, Hazardous category B";
+			case 83 -> "Tanker, Hazardous category C";
+			case 84 -> "Tanker, Hazardous category D";
+			case 89 -> "Tanker"; // Tanker, No additional information
+			case 90 -> "Other Type"; // Other Type, all ships of this type
+			case 91 -> "Other Type, Hazardous category A";
+			case 92 -> "Other Type, Hazardous category B";
+			case 93 -> "Other Type, Hazardous category C";
+			case 94 -> "Other Type, Hazardous category D";
+			case 99 -> "Other Type"; // Other Type, no additional information
+			default -> Integer.toString(ais_shipType);
+		};
     }
     @NonNull
     public String getNavStatusString() {
-        switch (this.ais_navStatus) {
-            // see https://gpsd.gitlab.io/gpsd/AIVDM.html#_types_1_2_and_3_position_report_class_a
-            case 0:
-                return("Under way using engine");
-            case 1:
-                return("At anchor");
-            case 2:
-                return("Not under command");
-            case 3:
-                return("Restricted manoeuverability");
-            case 4:
-                return("Constrained by her draught");
-            case 5:
-                return("Moored");
-            case 6:
-                return("Aground");
-            case 8:
-                return("Under way sailing");
-            case 11:
-                return("Power-driven vessel towing astern (regional use)");
-            case 12:
-                return("Power-driven vessel pushing ahead or towing alongside (regional use)");
-            case 7:
-                return("Engaged in Fishing");
-            case 14:
-                return("AIS-SART is active");
-            case INVALID_NAV_STATUS: // no valid value
-                return("unknown");
-            default:
-                return(Integer.toString(ais_navStatus));
-        }
+		return switch (this.ais_navStatus) {
+			// see https://gpsd.gitlab.io/gpsd/AIVDM.html#_types_1_2_and_3_position_report_class_a
+			case 0 -> "Under way using engine";
+			case 1 -> "At anchor";
+			case 2 -> "Not under command";
+			case 3 -> "Restricted manoeuverability";
+			case 4 -> "Constrained by her draught";
+			case 5 -> "Moored";
+			case 6 -> "Aground";
+			case 8 -> "Under way sailing";
+			case 11 -> "Power-driven vessel towing astern (regional use)";
+			case 12 -> "Power-driven vessel pushing ahead or towing alongside (regional use)";
+			case 7 -> "Engaged in Fishing";
+			case 14 -> "AIS-SART is active";
+			case INVALID_NAV_STATUS -> "unknown"; // no valid value
+			default -> Integer.toString(ais_navStatus);
+		};
     }
     @NonNull
     public String getManIndString() {
         // see https://gpsd.gitlab.io/gpsd/AIVDM.html#_types_1_2_and_3_position_report_class_a
-        switch (this.ais_manInd) {
-            case 0:
-                return("Not available");
-            case 1:
-                return("No special maneuver");
-            case 2:
-                return("Special maneuver");
-            default:
-                return(Integer.toString(ais_manInd));
-        }
+		return switch (this.ais_manInd) {
+			case 0 -> "Not available";
+			case 1 -> "No special maneuver";
+			case 2 -> "Special maneuver";
+			default -> Integer.toString(ais_manInd);
+		};
     }
     @NonNull
     public String getAidTypeString() {
-        switch (this.ais_aidType) {
-            // see https://gpsd.gitlab.io/gpsd/AIVDM.html#_type_21_aid_to_navigation_report
-            case 0:
-                return("not specified");
-            case 1:
-                return("Reference point");
-            case 2:
-                return("RACON (radar transponder marking a navigation hazard)");
-            case 3:
-                return("Fixed structure off shore");
-            case 4:
-                return("Spare, Reserved for future use");
-            case 5:
-                return("Light, without sectors");
-            case 6:
-                return("Light, with sectors");
-            case 7:
-                return("Leading Light Front");
-            case 8:
-                return("Leading Light Rear");
-            case 9:
-                return("Beacon, Cardinal N");
-            case 10:
-                return("Beacon, Cardinal E");
-            case 11:
-                return("Beacon, Cardinal S");
-            case 12:
-                return("Beacon, Cardinal W");
-            case 13:
-                return("Beacon, Port hand");
-            case 14:
-                return("Beacon, Starboard hand");
-            case 15:
-                return("Beacon, Preferred Channel port hand");
-            case 16:
-                return("Beacon, Preferred Channel starboard hand");
-            case 17:
-                return("Beacon, Isolated danger");
-            case 18:
-                return("Beacon, Safe wate");
-            case 19:
-                return("Beacon, Special mark");
-            case 20:
-                return("Cardinal Mark N");
-            case 21:
-                return("Cardinal Mark E");
-            case 22:
-                return("Cardinal Mark S");
-            case 23:
-                return("Cardinal Mark W");
-            case 24:
-                return("Port hand Mark");
-            case 25:
-                return("Starboard hand Mark");
-            case 26:
-                return("Preferred Channel Port hand");
-            case 27:
-                return("Preferred Channel Starboard hand");
-            case 28:
-                return("Isolated danger");
-            case 29:
-                return("Safe Water");
-            case 30:
-                return("Special Mark");
-            case 31:
-                return("Light Vessel / LANBY / Rigs");
-            default:
-                return(Integer.toString(ais_aidType));
-        }
+		return switch (this.ais_aidType) {
+			// see https://gpsd.gitlab.io/gpsd/AIVDM.html#_type_21_aid_to_navigation_report
+			case 0 -> "not specified";
+			case 1 -> "Reference point";
+			case 2 -> "RACON (radar transponder marking a navigation hazard)";
+			case 3 -> "Fixed structure off shore";
+			case 4 -> "Spare, Reserved for future use";
+			case 5 -> "Light, without sectors";
+			case 6 -> "Light, with sectors";
+			case 7 -> "Leading Light Front";
+			case 8 -> "Leading Light Rear";
+			case 9 -> "Beacon, Cardinal N";
+			case 10 -> "Beacon, Cardinal E";
+			case 11 -> "Beacon, Cardinal S";
+			case 12 -> "Beacon, Cardinal W";
+			case 13 -> "Beacon, Port hand";
+			case 14 -> "Beacon, Starboard hand";
+			case 15 -> "Beacon, Preferred Channel port hand";
+			case 16 -> "Beacon, Preferred Channel starboard hand";
+			case 17 -> "Beacon, Isolated danger";
+			case 18 -> "Beacon, Safe wate";
+			case 19 -> "Beacon, Special mark";
+			case 20 -> "Cardinal Mark N";
+			case 21 -> "Cardinal Mark E";
+			case 22 -> "Cardinal Mark S";
+			case 23 -> "Cardinal Mark W";
+			case 24 -> "Port hand Mark";
+			case 25 -> "Starboard hand Mark";
+			case 26 -> "Preferred Channel Port hand";
+			case 27 -> "Preferred Channel Starboard hand";
+			case 28 -> "Isolated danger";
+			case 29 -> "Safe Water";
+			case 30 -> "Special Mark";
+			case 31 -> "Light Vessel / LANBY / Rigs";
+			default -> Integer.toString(ais_aidType);
+		};
     }
     private float getDistanceOrBearing(boolean needBearing) {
         Location aisLocation = getLocation();
@@ -1007,9 +907,7 @@ public class AisObject {
 	    updateBitmap(layer, paint);
 
         Bitmap lostBitmap = layer.getBitmap(R.drawable.mm_ais_vessel_cross);
-
-        if (bitmap == null || lostBitmap == null)
-        {
+        if (bitmap == null || lostBitmap == null) {
             return;
         }
 
@@ -1040,17 +938,16 @@ public class AisObject {
         directionLine = lineBuilder.buildAndAddToCollection(vectorLinesCollection);
     }
 
-    public void updateAisRenderData(OsmandMapTileView TileView,
+    public void updateAisRenderData(@Nullable OsmandMapTileView mapView,
                                     @NonNull AisTrackerLayer mapLayer, @NonNull Paint paint) {
         // Call updateBitmap to update marker color
         updateBitmap(mapLayer, paint);
 
-        if (activeMarker == null || restMarker == null || lostMarker == null || directionLine == null)
-        {
+        if (activeMarker == null || restMarker == null || lostMarker == null || directionLine == null) {
             return;
         }
 
-        int currentZoom = TileView != null ? TileView.getZoom() : 0;
+        int currentZoom = mapView != null ? mapView.getZoom() : 0;
         if (currentZoom < AisTrackerLayer.START_ZOOM) {
             activeMarker.setIsHidden(true);
             restMarker.setIsHidden(true);
@@ -1091,7 +988,7 @@ public class AisObject {
             restMarker.setPosition(markerLocation);
             lostMarker.setPosition(markerLocation);
 
-            int inverseZoom = TileView != null ? TileView.getMaxZoom() - TileView.getZoom() : 0;
+            int inverseZoom = mapView.getMaxZoom() - mapView.getZoom();
             float lineLength = speedFactor * (float)MapUtils.getPowZoom(inverseZoom) * bitmap.getHeight() * 0.75f;
 
             double theta = Math.toRadians(rotation);
