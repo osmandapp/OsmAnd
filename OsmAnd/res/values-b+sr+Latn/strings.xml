@@ -4260,7 +4260,7 @@
     <string name="release_4_0">• Smeštanje u Cloud\n\n • Dodat je noćni način rada za prikaz mapa \"Topo\"\n\n • Dodata je mogućnost da se izohipse preuzmu u stopama\n\n • Trasa sada mogu biti obojene po visini, brzini ili nagibu\n\n • Osvežen je prozor \"Snimanje ruta\"\n\n • Udaljenost na klik je pomerena iz lenjira sa prečnikom u posebnu mogućnost\n\n • Planiranje puta: sada možeš promeniti mogućnosti navođenja, pristupiti podešavanjima mape i tražiti po mapi bez napuštanja planiranja puta\n\n • Novi prikaz \"Kupovina\" sa podrobnim podacima o kupovini \n \n • Dodata je mogućnost promene izgleda linije rute\n\n • Ažuriranje OsmAnda Live su pomerena u \"Preuzimanja &gt; Ažuriranja\"</string>
     <string name="backup_error_user_is_not_registered">Nijedan korisnik nije registrovan sa tom adresom e-mail adresom</string>
     <string name="backup_error_token_is_not_valid_or_expired">Nevažeći ili je istekao token</string>
-    <string name="no_activity_for_intent">Ugradi program koji može da izvede ovu radnju.</string>
+    <string name="no_activity_for_intent">Instalirajte aplikaciju koja može da izvede ovu radnju.</string>
     <string name="empty_category_name">Ime kategorije je prazno</string>
     <string name="available_until">Dostupno do %1$s</string>
     <string name="backup_error_no_subscription">Nema pretplate</string>
