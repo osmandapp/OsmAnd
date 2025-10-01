@@ -204,6 +204,10 @@ public class SearchPhrase {
 	public static SearchPhrase emptyPhrase(SearchSettings settings, Collator clt) {
 		return new SearchPhrase(settings, clt);
 	}
+
+	public static void expandConjunction(String conjunction) {
+		conjunctions.add(conjunction);
+	}
 	
 	// init search phrase
 	private SearchPhrase createNewSearchPhrase(final SearchSettings settings, String fullText, List<SearchWord> foundWords,
