@@ -1,5 +1,10 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.data.Amenity.DESCRIPTION;
+import static net.osmand.data.Amenity.NAME;
+import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
+
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.view.View;
@@ -10,14 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.LatLon;
-import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
-import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
-import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.primitives.RouteActivity;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.OsmRouteType;
@@ -30,34 +33,26 @@ import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.RouteActivity;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.data.Amenity.DESCRIPTION;
-import static net.osmand.data.Amenity.NAME;
-import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
+import java.util.*;
 
 public class TrackTagsInfoCard extends BaseMetadataCard {
 	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION);
 	private static final String HIDDEN_OSMC_TAGS_PREFIX = "osmc_";
+	private static final String HIDDEN_OSMAND_TAGS_PREFIX = "osmand_";
 	public static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
 	public static final String OSM_WAY_URL = "https://www.openstreetmap.org/way/";
 	private static final Map<String, Integer> TRANSLATABLE_KEYS = new HashMap<>();
@@ -142,7 +137,6 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 				}
 			}
 		}
-
 		updateVisibility(view, true);
 	}
 
@@ -238,14 +232,15 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 		return view;
 	}
 
-	private void setupClickableContent(@NonNull View view, @NonNull OnClickListener onClickListener) {
+	private void setupClickableContent(@NonNull View view, @NonNull OnClickListener listener) {
 		TextView tvContent = view.findViewById(R.id.title);
 		tvContent.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
-		tvContent.setOnClickListener(onClickListener);
+		tvContent.setOnClickListener(listener);
 	}
 
 	@NonNull
-	private View addInfoRow(@NonNull ViewGroup container, @NonNull String key, @NonNull String value, boolean needLinks, boolean showDivider) {
+	private View addInfoRow(@NonNull ViewGroup container, @NonNull String key,
+			@NonNull String value, boolean needLinks, boolean showDivider) {
 		View view = themedInflater.inflate(R.layout.list_item_with_descr, container, false);
 
 		TextView tvLabel = view.findViewById(R.id.description);
@@ -311,7 +306,7 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 		if ("relation_id".equals(key) || "way_id".equals(key)) {
 			return PluginsHelper.isEnabled(OsmEditingPlugin.class);
 		}
-		return true;
+		return !key.startsWith(HIDDEN_OSMAND_TAGS_PREFIX);
 	}
 
 	private static class RouteTag {
@@ -353,11 +348,14 @@ public class TrackTagsInfoCard extends BaseMetadataCard {
 				return poiType.getTranslation();
 			} else {
 				String stringKey = key.toLowerCase().replace(":", "_");
-				String translatedAsPoiName = AndroidUtils.getStringByProperty(app, "poi_" + stringKey);
-				if (!Algorithms.isEmpty(translatedAsPoiName)) {
-					return translatedAsPoiName;
+				String translatedName = AndroidUtils.getStringByProperty(app, "poi_" + stringKey);
+				if (Algorithms.isEmpty(translatedName)) {
+					translatedName = AndroidUtils.getRenderingStringPropertyName(app, stringKey, null);
 				}
-				return Algorithms.capitalizeFirstLetterAndLowercase(key);
+				if (Algorithms.isEmpty(translatedName)) {
+					translatedName = Algorithms.capitalizeFirstLetterAndLowercase(key);
+				}
+				return translatedName;
 			}
 		}
 

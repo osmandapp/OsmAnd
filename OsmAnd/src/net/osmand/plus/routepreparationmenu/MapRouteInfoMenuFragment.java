@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -51,6 +54,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	@Override
 	public int getTopViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
+	@IdRes
+	protected int getToolbarViewId() {
 		return R.id.route_menu_top_shadow_all;
 	}
 
@@ -127,6 +136,15 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			}
 		}
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createLeftSideContainer(true, R.id.control_buttons));
+		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container).landscapeLeftSided(true));
+		collection.add(InsetTarget.createLeftSideContainer(true, true, modesLayoutToolbar));
+		return collection;
 	}
 
 	@Override
@@ -224,11 +242,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			boolean nightMode = isNightMode();
 			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
 				if (!nightMode) {
-					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+					AndroidUiHelper.setStatusBarContentColor(view, true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
 			} else if (!nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
+				AndroidUiHelper.setStatusBarContentColor(view, false);
 			}
 		}
 		return -1;
@@ -280,7 +298,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	private void adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null || menu.isSelectFromMapTouch() || mapActivity == null) {
+		if (menu == null || menu.isSelectFromMap() || mapActivity == null) {
 			return;
 		}
 
@@ -406,7 +424,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
-			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!mapActivity.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				slideInAnim = R.anim.slide_in_bottom;
 				slideOutAnim = R.anim.slide_out_bottom;
 			}
@@ -473,7 +491,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
-			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!mapActivity.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				if (portrait) {
 					slideInAnim = R.anim.slide_in_bottom;
 					slideOutAnim = R.anim.slide_out_bottom;

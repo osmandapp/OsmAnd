@@ -2,19 +2,11 @@ package net.osmand.plus.views.layers.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Pair;
@@ -32,6 +24,7 @@ import androidx.annotation.StringRes;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
+import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapMarker;
@@ -39,9 +32,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.utils.ColorUtilities;
@@ -49,18 +45,13 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class OsmandMapLayer implements MapRendererViewListener {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
@@ -76,6 +67,9 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected boolean mapActivityInvalidated;
 	protected boolean mapRendererChanged;
 	protected boolean invalidated;
+
+	protected boolean debugRenderingInfo;
+	protected static float lastSymbolsLoadingTime;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -177,11 +171,14 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		this.mapActivity = mapActivity;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapActivity != null) {
+			debugRenderingInfo = getApplication().getSettings().DEBUG_RENDERING_INFO.get() &&
+					PluginsHelper.isActive(OsmandDevelopmentPlugin.class);
 			if (mapRenderer != null) {
 				mapRenderer.addListener(this);
 			}
 			mapActivityInvalidated = true;
 		} else {
+			debugRenderingInfo = false;
 			if (mapRenderer != null) {
 				mapRenderer.removeListener(this);
 			}
@@ -195,6 +192,10 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		} else {
 			mapRendererChanged = true;
 		}
+	}
+
+	public void setMapRendererChanged(boolean mapRendererChanged) {
+		this.mapRendererChanged = mapRendererChanged;
 	}
 
 	@NonNull
@@ -224,6 +225,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return ColorUtilities.getColor(getContext(), resId);
 	}
 
+	@NonNull
 	public OsmandMapTileView getMapView() {
 		return getApplication().getOsmandMap().getMapView();
 	}
@@ -244,10 +246,14 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
-			mapRenderer.addListener(this);
+		if (mapRenderer != null) {
+			if (areMapRendererViewEventsAllowed()) {
+				mapRenderer.addListener(this);
+			}
+			getMapView().applyMaximumFrameRate(mapRenderer);
 		}
-		float density = getContext().getResources().getDisplayMetrics().density;
+		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
+		float density = mapView.isCarView() ? mapView.getCarViewDensity() : getContext().getResources().getDisplayMetrics().density;
 		if (this.density != density) {
 			this.density = density;
 			updateResources();
@@ -260,6 +266,16 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
+		if (debugRenderingInfo) {
+			float symbolsLoadingTime = mapRenderer.getSymbolsLoadingTime();
+			if (symbolsLoadingTime > 0 && lastSymbolsLoadingTime != symbolsLoadingTime) {
+				String performanceMetricsResult = NativeCore.getLastPerformanceMetricsResult();
+				if (!Algorithms.isEmpty(performanceMetricsResult)) {
+					getApplication().showToastMessage(performanceMetricsResult + " at " + getMapView().getZoom() + "z");
+				}
+			}
+			lastSymbolsLoadingTime = symbolsLoadingTime;
+		}
 	}
 
 	@Override
@@ -291,11 +307,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		return false;
-	}
-
-	@SafeVarargs
-	public final <Params> void executeTaskInBackground(AsyncTask<Params, ?, ?> task, Params... params) {
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 
 	public boolean isPresentInFullObjects(LatLon latLon) {
@@ -503,6 +514,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (mapRenderer != null && mapMarkersCollection != null) {
 			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
 			mapMarkersCollection = null;
+			movableObject = null;
 		}
 	}
 
@@ -825,7 +837,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 					extended.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
 					Task task = new Task(original, extended);
 					if (currentTask == null) {
-						executeTaskInBackground(task);
+						OsmAndTaskManager.executeTask(task);
 					} else {
 						pendingTask = task;
 					}
@@ -840,7 +852,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 					TileBoxRequest extendedRequest = request.extend(request.width / 2, request.height / 2);
 					Task task = new Task(request, extendedRequest);
 					if (currentTask == null) {
-						executeTaskInBackground(task);
+						OsmAndTaskManager.executeTask(task);
 					} else {
 						pendingTask = task;
 					}
@@ -931,7 +943,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 				}
 				currentTask = null;
 				if (pendingTask != null) {
-					executeTaskInBackground(pendingTask);
+					OsmAndTaskManager.executeTask(pendingTask);
 					pendingTask = null;
 				} else {
 					fireDataReadyCallback(results, displayedResults);
@@ -1078,4 +1090,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 	}
 
+	public long getPointOrder(Object object) {
+		return getPointsOrder();
+	}
 }

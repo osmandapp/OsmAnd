@@ -5,9 +5,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.weather.units.TemperatureUnit
 import net.osmand.plus.settings.backend.preferences.CommonPreference
-import net.osmand.plus.settings.backend.preferences.OsmandPreference
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings
 import net.osmand.plus.views.mapwidgets.WidgetType
@@ -25,8 +23,9 @@ open class OBDTextWidget(
 	widgetType: WidgetType,
 	private val fieldType: OBDTypeWidget,
 	customId: String?,
-	widgetsPanel: WidgetsPanel?) :
-	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel), OBDWidgetOptions {
+	widgetsPanel: WidgetsPanel?
+) :
+	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel) {
 	private val plugin = PluginsHelper.requirePlugin(VehicleMetricsPlugin::class.java)
 	protected var widgetComputer: OBDComputerWidget
 	private var cacheTextData: String? = null
@@ -34,12 +33,10 @@ open class OBDTextWidget(
 
 	var measuredIntervalPref: CommonPreference<Long>? = null
 	var averageModePref: CommonPreference<Boolean>? = null
-	var temperatureUnitPref: OsmandPreference<TemperatureUnit>? = null
 
 	companion object {
 		private const val MEASURED_INTERVAL_PREF_ID = "average_obd_measured_interval_millis"
 		private const val AVERAGE_MODE_PREF_ID = "average_obd_mode"
-		private const val TEMPERATURE_UNIT_PREF = "temperature_unit_pref"
 		const val DEFAULT_INTERVAL_MILLIS: Long = 30 * 60 * 1000L
 		fun formatIntervals(app: OsmandApplication, interval: Long): String {
 			val seconds = interval < 60 * 1000
@@ -55,10 +52,6 @@ open class OBDTextWidget(
 	init {
 		// 0 - for instant
 		var averageTimeSeconds = 0
-
-		if (isTemperatureWidget()){
-			temperatureUnitPref = registerTemperaturePref(customId)
-		}
 
 		if (supportsAverageMode()) {
 			measuredIntervalPref = registerMeasuredIntervalPref(customId)
@@ -153,8 +146,8 @@ open class OBDTextWidget(
 	}
 
 	private fun updateSimpleWidgetInfoImpl() {
-		val subtext: String? = plugin?.getWidgetUnit(widgetComputer, this)
-		val textData: String = plugin?.getWidgetValue(widgetComputer, this) ?: NO_VALUE
+		val subtext: String? = plugin.getWidgetUnit(widgetComputer)
+		val textData: String = plugin.getWidgetValue(widgetComputer)
 		if (!Algorithms.objectEquals(textData, cacheTextData) ||
 			!Algorithms.objectEquals(subtext, cacheSubTextData)
 		) {
@@ -195,19 +188,6 @@ open class OBDTextWidget(
 			.cache()
 	}
 
-	private fun registerTemperaturePref(customId: String?): OsmandPreference<TemperatureUnit> {
-		val prefId = if (Algorithms.isEmpty(customId))
-			TEMPERATURE_UNIT_PREF
-		else TEMPERATURE_UNIT_PREF + customId
-
-		return settings.registerEnumStringPreference(
-			prefId, TemperatureUnit.CELSIUS,
-			TemperatureUnit.entries.toTypedArray(), TemperatureUnit::class.java
-		)
-			.makeProfile()
-			.cache()
-	}
-
 	fun isTemperatureWidget(): Boolean {
 		return when (widgetType) {
 			WidgetType.OBD_AIR_INTAKE_TEMP,
@@ -225,6 +205,8 @@ open class OBDTextWidget(
 			WidgetType.OBD_CALCULATED_ENGINE_LOAD,
 			WidgetType.OBD_FUEL_PRESSURE,
 			WidgetType.OBD_THROTTLE_POSITION,
+				// TODO: add OBD alt battery widget
+//			WidgetType.OBD_ALT_BATTERY_VOLTAGE,
 			WidgetType.OBD_BATTERY_VOLTAGE,
 			WidgetType.OBD_AIR_INTAKE_TEMP,
 			WidgetType.ENGINE_OIL_TEMPERATURE,
@@ -233,9 +215,5 @@ open class OBDTextWidget(
 
 			else -> false
 		}
-	}
-
-	override fun getTemperatureUnit(): TemperatureUnit {
-		return temperatureUnitPref?.get() ?: app.weatherHelper.weatherSettings.weatherTempUnit.get()
 	}
 }

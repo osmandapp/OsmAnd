@@ -11,6 +11,7 @@ import net.osmand.plus.base.dialog.data.DisplayItem
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.AlertDialogExtra
 import net.osmand.plus.widgets.alert.CustomAlert
@@ -33,16 +34,14 @@ class SmartFolderOptionsController(
 	override fun getDisplayData(processId: String): DisplayData? {
 		val iconsCache = app.uiUtilities
 		val displayData = DisplayData()
-		iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, app.daynightHelper.isNightMode)
+		val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
+		iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, nightMode)
 		displayData.addDisplayItem(
 			DisplayItem()
 				.setTitle(smartFolder.getName())
 				.setDescription("${smartFolder.getTrackItems().size} ${app.getString(R.string.shared_string_tracks)}")
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
-				.setIcon(
-					iconsCache.getActiveIcon(
-						R.drawable.ic_action_folder_smart,
-						app.daynightHelper.isNightMode))
+				.setIcon(iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, nightMode))
 				.setShowBottomDivider(true, 0)
 		)
 		val dividerPadding = calculateSubtitleDividerPadding()

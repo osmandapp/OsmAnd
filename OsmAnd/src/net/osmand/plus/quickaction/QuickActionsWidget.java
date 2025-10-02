@@ -37,6 +37,7 @@ import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
 import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -106,7 +107,7 @@ public class QuickActionsWidget extends LinearLayout {
 	}
 
 	private void setupLayout(@NonNull Context context, int pageCount) {
-		boolean light = settings.isLightContent() && !app.getDaynightHelper().isNightMode();
+		boolean light = !app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		inflate(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme), R.layout.quick_action_widget, this);
 
@@ -171,7 +172,7 @@ public class QuickActionsWidget extends LinearLayout {
 
 	private void updateControls(int position) {
 		OsmandApplication application = ((OsmandApplication) getContext().getApplicationContext());
-		boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
+		boolean light = !application.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 		int colorEnabled = light ? R.color.icon_color_default_light : R.color.card_and_list_background_light;
 		int colorDisabled = light ? R.color.icon_color_default_dark : R.color.white_50_transparent;
@@ -196,7 +197,7 @@ public class QuickActionsWidget extends LinearLayout {
 
 	private View createPageView(@NonNull ViewGroup container, int position) {
 		Context context = getContext();
-		boolean light = settings.isLightContent() && !app.getDaynightHelper().isNightMode();
+		boolean light = !app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		LayoutInflater inflater = UiUtilities.getInflater(context, !light);
 
 		View page = inflater.inflate(R.layout.quick_action_widget_page, container, false);
@@ -228,7 +229,7 @@ public class QuickActionsWidget extends LinearLayout {
 
 				view.setOnClickListener(v -> {
 					if (selectionListener != null) {
-						selectionListener.onActionSelected(buttonState, action);
+						selectionListener.onActionSelected(action, null, false);
 					}
 				});
 //				if (action.isActionEditable()) {

@@ -17,6 +17,7 @@ import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.configmap.tracks.TrackTabsHelper
+import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -41,7 +42,7 @@ class TracksFoldersScreen(
         })
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         setupTrackFolders(templateBuilder)
         val actionStripBuilder = ActionStrip.Builder()
@@ -93,15 +94,16 @@ class TracksFoldersScreen(
         }
         templateBuilder.setLoading(false)
         var itemsCount = 1
-        for (trackTab in trackTabsHelper.getSortedTrackTabs(false)) {
+        for (trackTab in trackTabsHelper.getSortedTrackTabs(true)) {
             if (trackTab.type != TrackTabType.FOLDER) {
                 continue
             }
             if (itemsCount == contentLimit) {
                 break
             }
-            val title = trackTab.getName()
-            val iconColorId = ColorUtilities.getDefaultIconColorId(app.daynightHelper.isNightMode)
+            val title = trackTab.getDirName(includingSubdirs = true)
+            val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
+            val iconColorId = ColorUtilities.getDefaultIconColorId(nightMode)
             val iconDrawable = app.uiUtilities.getIcon(trackTab.type.iconId, iconColorId)
             val icon = CarIcon.Builder(
                 IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(iconDrawable))).build()

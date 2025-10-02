@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes.PoiTranslator;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -14,17 +15,26 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.lang.reflect.Field;
+import java.util.Locale;
 
 public class MapPoiTypesTranslator implements PoiTranslator {
 
 	private static final Log LOG = PlatformUtil.getLog(MapPoiTypesTranslator.class);
 
 	private final OsmandApplication app;
-	private final Resources resources;
+	private final Resources enResources;
+	private final Resources localizedResources;
 
 	public MapPoiTypesTranslator(@NonNull OsmandApplication app) {
+		this(app, Locale.getDefault());
+	}
+
+	public MapPoiTypesTranslator(@NonNull OsmandApplication app, @NonNull Locale locale) {
 		this.app = app;
-		resources = app.getLocaleHelper().getLocalizedResources("en");
+
+		LocaleHelper helper = app.getLocaleHelper();
+		enResources = helper.getLocalizedResources(new Locale("en"));
+		localizedResources = helper.getLocalizedResources(locale);
 	}
 
 	@Override
@@ -48,7 +58,7 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 			Field f = R.string.class.getField("poi_" + keyName);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
-				String val = app.getString(in);
+				String val = localizedResources.getString(in);
 				if (val != null) {
 					int ind = val.indexOf(';');
 					if (ind > 0) {
@@ -80,7 +90,7 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 			Field f = R.string.class.getField("poi_" + keyName);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
-				String val = app.getString(in);
+				String val = localizedResources.getString(in);
 				if (val != null) {
 					int ind = val.indexOf(';');
 					if (ind > 0) {
@@ -100,7 +110,7 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 
 	@Override
 	public String getAllLanguagesTranslationSuffix() {
-		return app.getString(R.string.shared_string_all_languages).toLowerCase();
+		return localizedResources.getString(R.string.shared_string_all_languages).toLowerCase();
 	}
 
 	@Override
@@ -114,14 +124,14 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 
 	@Override
 	public String getEnTranslation(String keyName) {
-		if (resources == null) {
+		if (enResources == null) {
 			return Algorithms.capitalizeFirstLetter(keyName.replace('_', ' '));
 		}
 		try {
 			Field f = R.string.class.getField("poi_" + keyName);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
-				String val = resources.getString(in);
+				String val = enResources.getString(in);
 				if (val != null) {
 					int ind = val.indexOf(';');
 					if (ind > 0) {

@@ -18,6 +18,7 @@ import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.io.KFile
+import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.settings.enums.SpeedConstants
 import net.osmand.shared.util.KStringMatcher
@@ -46,6 +47,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	override fun getSpeedSystem(): SpeedConstants? = app.settings.SPEED_SYSTEM.get()
 
 	override fun getMetricSystem(): MetricsConstants? = app.settings.METRIC_SYSTEM.get()
+
+	override fun getAltitudeMetric(): AltitudeMetrics? = app.settings.ALTITUDE_METRIC.get()
 
 	override fun isGpxFileVisible(path: String): Boolean =
 		app.selectedGpxHelper.getSelectedFileByPath(path) != null
@@ -95,7 +98,8 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 	private fun searchNearestCity(latLon: KLatLon, callback: CityNameCallback) {
 		val cityTypes = City.CityType.entries.associateBy { it.name.lowercase() }
 		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, CITY_SEARCH_RADIUS)
-		val cities = app.resourceManager.searchAmenities(object : SearchPoiTypeFilter {
+		val travelFileVisibility = app.resourceManager.defaultAmenitySearchSettings.fileVisibility;
+		val cities = app.resourceManager.amenitySearcher.searchAmenities(object : SearchPoiTypeFilter {
 			override fun accept(type: PoiCategory, subcategory: String): Boolean {
 				return cityTypes.containsKey(subcategory)
 			}
@@ -103,7 +107,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 			override fun isEmpty(): Boolean {
 				return false
 			}
-		}, rect, false)
+		}, rect, false, travelFileVisibility)
 
 		if (cities.isNotEmpty()) {
 			sortAmenities(cities, cityTypes, latLon)

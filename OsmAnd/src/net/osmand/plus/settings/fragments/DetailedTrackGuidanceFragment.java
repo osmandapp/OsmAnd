@@ -25,7 +25,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.TrackApproximationType;
@@ -38,7 +38,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
+public class DetailedTrackGuidanceFragment extends BaseFullScreenFragment {
 
 	private static final String TAG = DetailedTrackGuidanceFragment.class.getSimpleName();
 	private static final String DETAILED_TRACK_GUIDANCE_KEY = "detailed_track_guidance_key";
@@ -71,7 +71,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.detailed_track_guidance, container, false);
+		View view = inflate(R.layout.detailed_track_guidance, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		AppBarLayout appBarLayout = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
@@ -100,7 +100,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupApplyButton(@NonNull View view) {
-		AndroidUtils.setBackground(getContext(), view.findViewById(R.id.apply_button), getCardAndListBackgroundColorId(nightMode));
+		AndroidUtils.setBackground(getContext(), view.findViewById(R.id.bottom_buttons_container), getCardAndListBackgroundColorId(nightMode));
 		view.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
 		view.findViewById(R.id.buttons_divider).setVisibility(View.GONE);
 		applyButton = view.findViewById(R.id.right_bottom_button);
@@ -136,7 +136,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 
 		for (int i = 0; i < TrackApproximationType.values().length; i++) {
 			TrackApproximationType type = TrackApproximationType.values()[i];
-			View button = themedInflater.inflate(R.layout.bottom_sheet_item_with_descr_and_left_radio_btn, buttonsContainer, false);
+			View button = inflate(R.layout.bottom_sheet_item_with_descr_and_left_radio_btn, buttonsContainer, false);
 			boolean isSelected = changedTrackGuidance == type;
 			boolean shouldShowDivider = i != TrackApproximationType.values().length - 1;
 			setupRadioButton(button, type.getNameRes(), isSelected, shouldShowDivider, v -> {
@@ -233,17 +233,19 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMapActivity().disableDrawer();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMapActivity().enableDrawer();
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull ApplicationMode mode,

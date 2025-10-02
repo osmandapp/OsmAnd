@@ -24,7 +24,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -36,7 +36,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class EditKeyAssignmentFragment extends BaseOsmAndFragment
+public class EditKeyAssignmentFragment extends BaseFullScreenFragment
 		implements IAskRefreshDialogCompletely, IAskDismissDialog, InputDevicesEventListener {
 
 	public static final String TAG = EditKeyAssignmentFragment.class.getSimpleName();
@@ -61,7 +61,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_edit_key_assignment, container);
+		View view = inflate(R.layout.fragment_edit_key_assignment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		if (!settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
 			AndroidUiHelper.setSharedElementTransition(this, view, TRANSITION_NAME);
@@ -134,7 +134,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		boolean editMode = controller.isInEditMode();
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_edit), !editMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_overflow_menu), !editMode);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_buttons), editMode);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_buttons_container), editMode);
 		updateToolbarTitle(view);
 		updateSaveButton(view);
 		updateViewContent();
@@ -144,7 +144,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	private Drawable getNavigationIcon() {
 		int color = getPrimaryIconColor(app, nightMode);
 		int navIconId = controller.isInEditMode() ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app);
-		return getPaintedContentIcon(navIconId, color);
+		return getPaintedIcon(navIconId, color);
 	}
 
 	private void updateViewContent() {
@@ -200,11 +200,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		if (activity != null) {
 			activity.onBackPressed();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	@Override

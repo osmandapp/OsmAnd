@@ -1701,7 +1701,7 @@
     <string name="poi_water_utility">Vandens komunalinių paslaugų biuras</string>
     <string name="poi_barbecue_grill">Grilis: taip</string>
     <string name="poi_outpost">Parduotuvės pristatymo vieta</string>
-    <string name="poi_whitewater_rapid_name">Upės slenksčio pavadinimas</string>
+    <string name="poi_rapids_name">Upės slenksčio pavadinimas</string>
     <string name="poi_pottery">Keramika</string>
     <string name="poi_flooring">Grindų dangų parduotuvė</string>
     <string name="poi_socket_type3_output_high">Aukšta</string>
@@ -2592,4 +2592,11 @@
     <string name="poi_state_abandoned">Būsena: apleista</string>
     <string name="poi_state_active">Būsena: aktyvi</string>
     <string name="poi_state_detour">Būsena: apylanka</string>
+    <string name="poi_archaeological_site">Archeologinė vietovė</string>
+    <string name="poi_place_of_worship">Maldos vieta</string>
+    <string name="poi_historic_manor">Istorinis dvaras</string>
+    <string name="poi_townhall">Rotušė</string>
+    <string name="poi_highway_crossing">Kelio perėja</string>
+    <string name="poi_cross">Kryžius</string>
+    <string name="poi_property_management">Nekilnojamojo turto valdymo biuras</string>
 </resources>

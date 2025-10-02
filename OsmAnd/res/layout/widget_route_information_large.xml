@@ -35,7 +35,7 @@
         android:layout_marginEnd="16dp"
         android:layout_weight="1">
 
-        <net.osmand.plus.widgets.MultiTextViewEx
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
             android:id="@+id/primary_line_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -44,12 +44,13 @@
             android:maxLines="1"
             android:textColor="?android:textColorPrimary"
             android:textSize="36sp"
-            app:primaryText="20:33"
-            app:secondaryText="13 h 2 m"
-            app:separator=" • "
-            app:separatorColor="?android:textColorSecondary" />
+            app:textViewType="multi"
+            app:multiTextViewEx_primaryText="20:33"
+            app:multiTextViewEx_secondaryText="13 h 2 m"
+            app:multiTextViewEx_separator=" • "
+            app:multiTextViewEx_separatorColor="?android:textColorSecondary" />
 
-        <net.osmand.plus.widgets.MultiTextViewEx
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
             android:id="@+id/secondary_line_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -58,10 +59,11 @@
             android:maxLines="1"
             android:textColor="?android:textColorPrimary"
             android:textSize="24sp"
-            app:separator=" • "
-            app:separatorColor="?android:textColorSecondary"
-            tools:primaryText="331 km"
-            tools:primaryTextColor="?android:textColorSecondary" />
+            app:textViewType="multi"
+            app:multiTextViewEx_separator=" • "
+            app:multiTextViewEx_separatorColor="?android:textColorSecondary"
+            tools:multiTextViewEx_primaryText="331 km"
+            tools:multiTextViewEx_primaryTextColor="?android:textColorSecondary" />
 
     </FrameLayout>
 
@@ -81,7 +83,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="12dp">
 
-        <net.osmand.plus.widgets.TextViewEx
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
             android:id="@+id/primary_line_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -92,7 +94,7 @@
             android:textSize="36sp"
             tools:text="01:27" />
 
-        <net.osmand.plus.widgets.TextViewEx
+        <net.osmand.plus.views.mapwidgets.OutlinedTextContainer
             android:id="@+id/secondary_line_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

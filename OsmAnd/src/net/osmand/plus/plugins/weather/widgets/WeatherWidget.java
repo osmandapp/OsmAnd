@@ -69,6 +69,7 @@ public class WeatherWidget extends SimpleWidget {
 	private PointI lastDisplayedForecastPoint31;
 	private long lastDisplayedForecastTime;
 	private WeatherPlugin plugin;
+	private WeatherSource cachedWeatherSource;
 
 	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel, short band) {
 		super(mapActivity, widgetType, customId, panel);
@@ -86,7 +87,6 @@ public class WeatherWidget extends SimpleWidget {
 		this.callback.swigReleaseOwnership();
 		setIcons(widgetType);
 		setText(NO_VALUE, null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override
@@ -171,10 +171,15 @@ public class WeatherWidget extends SimpleWidget {
 		if (lastPotition31 == null || lastZoom == null || lastDateTime == 0) {
 			return true;
 		}
+		
+		WeatherSource currentWeatherSource = plugin.getWeatherSource();
+		boolean weatherSourceChanged = cachedWeatherSource != currentWeatherSource;
+		
 		return point31.getX() != lastPotition31.getX()
 				|| point31.getY() != lastPotition31.getY()
 				|| zoom.ordinal() != lastZoom.ordinal()
-				|| dateTime != lastDateTime;
+				|| dateTime != lastDateTime
+				|| weatherSourceChanged;
 	}
 
 	@Override
@@ -213,6 +218,7 @@ public class WeatherWidget extends SimpleWidget {
 			lastPotition31 = point31;
 			lastZoom = zoom;
 			lastDateTime = dateTime;
+			cachedWeatherSource = plugin.getWeatherSource();
 			resourcesManager.obtainValueAsync(request, callback.getBinding());
 		}
 	}

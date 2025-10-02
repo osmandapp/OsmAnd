@@ -447,11 +447,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	protected String getMapObjectPreferredLang(MapObject object, String defaultLanguage) {
-		if (object instanceof Amenity) {
-			Amenity amenity = (Amenity) object;
-			if (amenity.getType().isWiki()) {
-				return getWikiArticleLanguage(amenity.getSupportedContentLocales(), defaultLanguage);
-			}
+		if (object instanceof Amenity amenity && amenity.getType().isWiki()) {
+			return getWikiArticleLanguage(amenity.getSupportedContentLocales(), defaultLanguage);
 		}
 		return null;
 	}

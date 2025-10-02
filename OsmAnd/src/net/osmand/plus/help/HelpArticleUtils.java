@@ -1,10 +1,8 @@
 package net.osmand.plus.help;
 
-import static net.osmand.plus.help.LoadArticlesTask.DOCS_LINKS_URL;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -15,13 +13,16 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.Locale;
 
 public class HelpArticleUtils {
+
+	public static final String DOCS_PATH_PREFIX = "/docs/user/";
+	public static final String DOCS_LINKS_URL = SERVER_URL + DOCS_PATH_PREFIX;
+	public static final String DOCS_SERVER_URL = "https://docs.osmand.net";
 
 	@NonNull
 	public static String getTelegramChatName(@NonNull OsmandApplication app, @NonNull String key) {
@@ -61,13 +62,35 @@ public class HelpArticleUtils {
 		if (key.endsWith("/")) {
 			key = key.substring(0, key.length() - 1);
 		}
-		String name = key.replace(DOCS_LINKS_URL, "").replace("-", "_")
-				.replace("/", "_").replace(" ", "_");
+		int index = key.indexOf(DOCS_PATH_PREFIX);
+		key = index != -1 ? key.substring(index + DOCS_PATH_PREFIX.length()) : key.replace(DOCS_LINKS_URL, "");
+		String name = key.replace("-", "_").replace("/", "_").replace(" ", "_");
 
 		if (!Algorithms.isEmpty(name) && name.charAt(name.length() - 1) == '_') {
 			name = name.substring(0, name.length() - 1);
 		}
 		return name;
+	}
+
+	@NonNull
+	public static String getLocalizedUrl(@NonNull OsmandApplication app, @NonNull String url) {
+		if (url.startsWith(DOCS_LINKS_URL)) {
+			return getLocalizedUrl(app, SERVER_URL, url);
+		} else if (url.startsWith(DOCS_SERVER_URL)) {
+			return getLocalizedUrl(app, DOCS_SERVER_URL, url);
+		}
+		return url;
+	}
+
+	@NonNull
+	private static String getLocalizedUrl(@NonNull OsmandApplication app, @NonNull String serverUrl, @NonNull String url) {
+		String language = app.getLanguage().toLowerCase();
+		boolean useLocalizedUrl = !Algorithms.stringsEqual("en", language)
+				&& app.getHelpArticlesHelper().getLanguages().contains(language);
+		if (useLocalizedUrl) {
+			return url.replaceFirst(serverUrl, serverUrl + "/" + language);
+		}
+		return url;
 	}
 
 	@Nullable
@@ -199,24 +222,6 @@ public class HelpArticleUtils {
 	}
 
 	@NonNull
-	public static ContextMenuItem createCategory(@NonNull String title) {
-		return new ContextMenuItem(null)
-				.setTitle(title)
-				.setCategory(true)
-				.setLayout(R.layout.help_category_header);
-	}
-
-	@NonNull
-	public static ContextMenuItem createMenuItem(@NonNull String title, @Nullable String description,
-	                                             @DrawableRes int iconId, @Nullable ItemClickListener listener) {
-		return new ContextMenuItem(null)
-				.setIcon(iconId)
-				.setTitle(title)
-				.setDescription(description)
-				.setListener(listener);
-	}
-
-	@NonNull
 	public static ContextMenuItem createArticleItem(@NonNull FragmentActivity activity, @NonNull HelpArticle article) {
 		String title = HelpArticleUtils.getArticleName(activity, article);
 		return new ContextMenuItem(null)
@@ -231,23 +236,5 @@ public class HelpArticleUtils {
 					}
 					return false;
 				});
-	}
-
-	@NonNull
-	public static ItemClickListener getUrlItemClickListener(@NonNull FragmentActivity activity, @NonNull String url) {
-		return (uiAdapter, view, item, isChecked) -> {
-			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			AndroidUtils.startActivityIfSafe(activity, intent);
-			return false;
-		};
-	}
-
-	@NonNull
-	public static ItemClickListener getArticleItemClickListener(@NonNull FragmentActivity activity, @NonNull String title, @NonNull String url) {
-		return (uiAdapter, view, item, isChecked) -> {
-			FragmentManager manager = activity.getSupportFragmentManager();
-			HelpArticleDialogFragment.showInstance(manager, url, title);
-			return false;
-		};
 	}
 }

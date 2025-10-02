@@ -7,7 +7,6 @@ import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,8 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.shared.SharedUtil;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -47,7 +45,9 @@ import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -70,13 +70,7 @@ import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class TrackFoldersHelper implements OnTrackFileMoveListener {
@@ -103,7 +97,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	                          @NonNull ApplicationMode appMode, @NonNull TrackFolder rootFolder) {
 		this.activity = activity;
 		this.rootFolder = rootFolder;
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 		this.appMode = appMode;
 		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();
@@ -213,7 +207,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file == null ? null : SharedUtil.jFile(file), true, result -> {
 					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null);
-					detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					OsmAndTaskManager.executeTask(detailsTask);
 					return true;
 				}))
 				.create());
@@ -240,7 +234,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file == null ? null : SharedUtil.jFile(file), true, gpxFile -> {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, activity, gpxFile);
 					return true;
 				}))
 				.create());
@@ -449,7 +443,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				reloadTracks();
 			}
 		});
-		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(deleteFilesTask);
 	}
 
 	public void deleteTrackFolder(@NonNull TrackFolder folder) {
@@ -562,7 +556,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			}
 			return true;
 		});
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull FragmentStateHolder fragment) {

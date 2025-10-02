@@ -2,7 +2,6 @@ package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -11,18 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.routepreparationmenu.SortTargetPointsTask;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routepreparationmenu.SortTargetPointsTask;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -162,7 +162,7 @@ public class WaypointDialogHelper {
 	}
 
 	public static void switchStartAndFinish(@NonNull MapActivity mapActivity, boolean updateRoute) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 		TargetPoint finish = targetsHelper.getPointToNavigate();
 		TargetPoint start = targetsHelper.getPointToStart();
@@ -192,12 +192,14 @@ public class WaypointDialogHelper {
 	}
 
 	public static void reverseAllPoints(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 
 		TargetPoint finish = targetsHelper.getPointToNavigate();
 		TargetPoint start = targetsHelper.getPointToStart();
-		switchStartAndFinish(app, start, finish, false);
+		if (finish != null) {
+			switchStartAndFinish(app, start, finish, false);
+		}
 
 		List<TargetPoint> points = targetsHelper.getIntermediatePoints();
 		Collections.reverse(points);
@@ -227,13 +229,13 @@ public class WaypointDialogHelper {
 	}
 
 	public static void clearAllIntermediatePoints(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		app.getTargetPointsHelper().clearAllIntermediatePoints(true);
 		updateControls(mapActivity);
 	}
 
 	public static void replaceStartWithFirstIntermediate(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 
 		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
@@ -248,7 +250,7 @@ public class WaypointDialogHelper {
 	public static void deletePoint(@NonNull MapActivity mapActivity,
 	                               @Nullable ArrayAdapter<Object> adapter, @NonNull Object item,
 	                               @NonNull List<LocationPointWrapper> deletedPoints) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (item instanceof LocationPointWrapper point && adapter != null) {
 			if (point.type == WaypointHelper.TARGETS && adapter instanceof StableArrayAdapter stableAdapter) {
 				updateAfterDeleteWaypoint(mapActivity, stableAdapter.getPosition(point));
@@ -285,6 +287,6 @@ public class WaypointDialogHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	public static void sortAllTargets(@NonNull MapActivity mapActivity) {
-		new SortTargetPointsTask(mapActivity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(new SortTargetPointsTask(mapActivity));
 	}
 }

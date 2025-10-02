@@ -2,17 +2,20 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.OPEN_NAVIGATION_VIEW_ACTION;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.utils.UiUtilities;
 
 public class OpenNavigationViewAction extends QuickAction {
 
@@ -33,14 +36,13 @@ public class OpenNavigationViewAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		mapActivity.getMapActions().doRoute();
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text))
 				.setText(R.string.quick_action_navigation_view_desc);
 		parent.addView(view);

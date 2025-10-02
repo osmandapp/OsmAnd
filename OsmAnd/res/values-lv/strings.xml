@@ -2245,6 +2245,7 @@ Apraksta laukumu: %1$s x %2$s</string>
  • Wikipēdijas POIs, apskates vietu apmeklēšanai
  • neierobežotas lejupielādes caur aplikāciju
  • Kompaktās bezsaistes vektoru kartes tiek atjaunotas vismaz reizi mēnesī
+
  • Izvēle starp pilna reģiona datiem vai tikai ceļa sazarojumu (piemērs: visa Japāna 700MB vai 200MB tikai ar ceļa sazarojumu)
  "</string>
     <string name="osmand_plus_extended_description_part6">Velobraucēju un kājāmgājēju iespējas

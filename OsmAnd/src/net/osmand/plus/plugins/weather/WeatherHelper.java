@@ -14,12 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
@@ -28,6 +31,7 @@ import net.osmand.plus.plugins.weather.WeatherWebClient.DownloadState;
 import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
+import net.osmand.plus.settings.enums.TemperatureUnitsMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
@@ -52,6 +56,7 @@ public class WeatherHelper {
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
 	private List<WeakReference<WeatherWebClientListener>> downloadStateListeners = new ArrayList<>();
+	private final StateChangedListener<TemperatureUnitsMode> temperaturePreferenceListener = weatherUnit -> updateBandsSettings();
 	private WeatherWebClient webClient;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
@@ -68,6 +73,8 @@ public class WeatherHelper {
 		weatherBands.put(WEATHER_BAND_CLOUD, WeatherBand.withWeatherBand(app, WEATHER_BAND_CLOUD));
 		weatherBands.put(WEATHER_BAND_PRECIPITATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRECIPITATION));
 		weatherBands.put(WEATHER_BAND_WIND_ANIMATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_WIND_ANIMATION));
+
+		app.getSettings().UNIT_OF_TEMPERATURE.addListener(temperaturePreferenceListener);
 	}
 
 	@NonNull
@@ -133,6 +140,8 @@ public class WeatherHelper {
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
+		
+		updateWeatherSource();
 	}
 
 	public boolean shouldUpdateForecastCache() {
@@ -194,6 +203,33 @@ public class WeatherHelper {
 			return false;
 		}
 		return updateBandsSettings(weatherResourcesManager);
+	}
+
+	public void updateWeatherSource() {
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		if (plugin == null) {
+			return;
+		}
+		
+		WeatherSource weatherSource = plugin.getWeatherSource();
+		updateWeatherSource(weatherSource);
+	}
+
+	public void updateWeatherSource(WeatherSource weatherSource) {
+		WeatherTileResourcesManager weatherResourcesManager = getWeatherResourcesManager();
+		if (weatherResourcesManager == null) {
+			return;
+		}
+		
+		net.osmand.core.jni.WeatherSource coreWeatherSource;
+		
+		if (weatherSource == WeatherSource.ECMWF) {
+			coreWeatherSource = net.osmand.core.jni.WeatherSource.ECMWF;
+		} else {
+			coreWeatherSource = net.osmand.core.jni.WeatherSource.GFS;
+		}
+		
+		weatherResourcesManager.setWeatherSource(coreWeatherSource);
 	}
 
 	private boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {

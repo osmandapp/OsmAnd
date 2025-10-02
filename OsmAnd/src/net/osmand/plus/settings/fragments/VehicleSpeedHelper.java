@@ -29,6 +29,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.SpeedSliderType;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -48,7 +49,7 @@ public class VehicleSpeedHelper {
 		this.app = app;
 		this.mode = mode;
 		this.settings = app.getSettings();
-		this.nightMode = !settings.isLightContentForMode(mode);
+		this.nightMode = app.getDaynightHelper().isNightMode(mode, ThemeUsageContext.APP);
 	}
 
 	public void showSeekbarSettingsDialog(@NonNull Activity activity) {

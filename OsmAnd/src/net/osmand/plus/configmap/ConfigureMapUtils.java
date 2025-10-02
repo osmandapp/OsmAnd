@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 public class ConfigureMapUtils {
 
-	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kk", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sr-Latn", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh", "zh-Hans", "zh-Hant"};
+	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kk", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sr-latn", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh", "zh-hans", "zh-hant"};
 
 	@NonNull
 	public static Map<String, String> getSorterMapLanguages(@NonNull OsmandApplication app) {
@@ -180,7 +180,7 @@ public class ConfigureMapUtils {
 		return enabled + "/" + count;
 	}
 
-	protected static String getRenderDescr(OsmandApplication app) {
+	public static String getRenderDescr(OsmandApplication app) {
 		RendererRegistry registry = app.getRendererRegistry();
 		RenderingRulesStorage storage = registry.getCurrentSelectedRenderer();
 		if (storage == null) {
@@ -191,16 +191,16 @@ public class ConfigureMapUtils {
 	}
 
 	protected static String getDayNightDescr(MapActivity activity) {
-		return activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity);
+		return activity.getSettings().DAYNIGHT_MODE.get().toHumanString(activity);
 	}
 
 	@DrawableRes
 	protected static int getDayNightIcon(MapActivity activity) {
-		return activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().getDefaultIcon();
+		return activity.getSettings().DAYNIGHT_MODE.get().getDefaultIcon();
 	}
 
 	protected static String getScale(MapActivity activity) {
-		int scale = (int) (activity.getMyApplication().getSettings().TEXT_SCALE.get() * 100);
+		int scale = (int) (activity.getSettings().TEXT_SCALE.get() * 100);
 		return scale + " %";
 	}
 }

@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.RoutingConfiguration.Builder;
@@ -72,14 +73,14 @@ public class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 					if (builder != null) {
 						onImportFinished(destFileName);
 					} else {
-						app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
+						app.showToastMessage(R.string.file_does_not_contain_routing_rules, destFileName);
 					}
 				});
 			}
 		} else {
 			hideProgress();
 			notifyImportFinished();
-			app.showShortToastMessage(app.getString(R.string.file_import_error, destFileName, error));
+			app.showShortToastMessage(R.string.file_import_error, destFileName, error);
 		}
 	}
 
@@ -93,7 +94,8 @@ public class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
 					app.getString(R.string.is_imported, filename), Snackbar.LENGTH_LONG);
-			UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+			UiUtilities.setupSnackbar(snackbar, nightMode);
 			snackbar.show();
 		}
 	}

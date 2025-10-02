@@ -17,7 +17,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -25,7 +24,8 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
@@ -34,7 +34,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragment
+public abstract class BasePurchaseDialogFragment extends BaseFullScreenDialogFragment
 		implements InAppPurchaseListener, OnOffsetChangedListener, OnScrollChangedListener {
 
 	public static final String SCROLL_POSITION = "scroll_position";
@@ -71,6 +71,11 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		}
 	}
 
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
 	@ColorRes
 	protected int getStatusBarColorId() {
 		return ColorUtilities.getListBgColorId(nightMode);
@@ -87,29 +92,12 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		return getMapActivity() != null;
 	}
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColorId()));
-		}
-		return dialog;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		mainView = themedInflater.inflate(getLayoutId(), container, false);
+		mainView = inflate(getLayoutId(), container, false);
 		appBar = mainView.findViewById(R.id.appbar);
 		scrollView = mainView.findViewById(R.id.scroll_view);
 
@@ -178,15 +166,6 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	protected boolean isRequestingInventory() {
 		return purchaseHelper != null && purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY;
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 
 	@Override

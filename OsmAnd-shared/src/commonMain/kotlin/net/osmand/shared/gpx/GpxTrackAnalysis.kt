@@ -46,12 +46,17 @@ class GpxTrackAnalysis {
 	var top = 0.0
 	var bottom = 0.0
 
+	var segmentSlopeType: TrkSegment.SegmentSlopeType? = null
+	var slopeCount: Int? = null
+	var slopeValue: Double? = null
+
 	var pointAttributes = mutableListOf<PointAttributes>()
 	var availableAttributes = mutableSetOf<String>()
 
 	var maxDistanceBetweenPoints = 0.0F
 
 	var hasSpeedInTrack = false
+	var hasElevationMetricsInGpx = false
 
 	fun getGpxParameter(parameter: GpxParameter): Any? {
 		return parameters[parameter] ?: parameter.defaultValue
@@ -120,6 +125,10 @@ class GpxTrackAnalysis {
 	var maxSensorHr: Int
 		get() = getGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE) as Int
 		set(value) = setGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE, value)
+
+	var minSensorHr: Int
+		get() = getGpxParameter(GpxParameter.MIN_SENSOR_HEART_RATE) as Int
+		set(value) = setGpxParameter(GpxParameter.MIN_SENSOR_HEART_RATE, value)
 
 	var points: Int
 		get() = getGpxParameter(GpxParameter.POINTS) as Int
@@ -244,6 +253,10 @@ class GpxTrackAnalysis {
 
 	fun hasElevationData(): Boolean {
 		return hasData(POINT_ELEVATION)
+	}
+
+	fun hasElevationMetrics(): Boolean {
+		return hasElevationMetricsInGpx || hasElevationData()
 	}
 
 	fun hasData(tag: String): Boolean {
@@ -404,16 +417,18 @@ class GpxTrackAnalysis {
 					maxElevation = maxOf(point.ele, maxElevation)
 				}
 
-				val firstPoint = false
-				val lastPoint = false
+				var firstPoint = false
+				var lastPoint = false
 				if (s.segment.generalSegment) {
 					distanceOfSingleSegment += calculations[0]
 					if (point.firstPoint) {
+						firstPoint = j > 0;
 						distanceOfSingleSegment = 0f
 						timeMovingOfSingleSegment = 0
 						distanceMovingOfSingleSegment = 0f
 					}
 					if (point.lastPoint) {
+						lastPoint = j < numberOfPoints - 1;
 						totalDistanceWithoutGaps += distanceOfSingleSegment
 						timeMovingWithoutGaps += timeMovingOfSingleSegment
 						totalDistanceMovingWithoutGaps += distanceMovingOfSingleSegment
@@ -438,7 +453,9 @@ class GpxTrackAnalysis {
 				}
 
 				if (attribute.heartRate > 0) {
-					maxSensorHr = maxOf(attribute.heartRate.toInt(), maxSensorHr)
+					val hr = attribute.heartRate.toInt()
+					maxSensorHr = maxOf(hr, maxSensorHr)
+					minSensorHr = if (minSensorHr == 0) hr else minOf(hr, minSensorHr)
 					sensorHrCount++
 					totalSensorHrSum += attribute.heartRate
 				}
@@ -541,16 +558,13 @@ class GpxTrackAnalysis {
 
 	private fun getExpectedRouteSegmentDuration(segment: SplitSegment): Long {
 		val routeSegments = segment.segment.routeSegments
-		if (!segment.segment.generalSegment) {
-			var result: Long = 0
-			for (routeSegment in routeSegments) {
-				result += (1000 * KAlgorithms.parseFloatSilently(
-					routeSegment.segmentTime, 0.0f
-				)).toLong()
-			}
-			return result
+		var result: Long = 0
+		for (routeSegment in routeSegments) {
+			result += (1000 * KAlgorithms.parseFloatSilently(
+				routeSegment.segmentTime, 0.0f
+			)).toLong()
 		}
-		return 0
+		return result
 	}
 
 	private fun processAverageValues(
@@ -579,8 +593,9 @@ class GpxTrackAnalysis {
 		approximator.approximate()
 		val distances = approximator.getDistances()
 		val elevations = approximator.getElevations()
-		if (distances != null && elevations != null) {
-			val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations)
+		val indexes = approximator.getSurvivedIndexes()
+		if (distances != null && elevations != null && indexes != null) {
+			val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations, indexes)
 			elevationDiffsCalc.calculateElevationDiffs()
 			diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
 			diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
@@ -608,11 +623,15 @@ class GpxTrackAnalysis {
 	}
 
 	private fun getElevationDiffsCalculator(
-		distances: DoubleArray, elevations: DoubleArray
+		distances: DoubleArray, elevations: DoubleArray, indexes: IntArray
 	): ElevationDiffsCalculator {
 		return object : ElevationDiffsCalculator() {
 			override fun getPointDistance(index: Int): Double {
 				return distances[index]
+			}
+
+			override fun getPointIndex(index: Int): Int {
+				return indexes[index]
 			}
 
 			override fun getPointElevation(index: Int): Double {

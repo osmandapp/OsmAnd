@@ -14,6 +14,7 @@ import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxFile.Companion.XML_COLON
 import net.osmand.shared.gpx.GpxFormatter.formatDecimal
 import net.osmand.shared.gpx.GpxFormatter.formatLatLon
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.gpx.primitives.Author
 import net.osmand.shared.gpx.primitives.Bounds
 import net.osmand.shared.gpx.primitives.Copyright
@@ -62,7 +63,8 @@ object GpxUtilities {
 	const val OSMAND_EXTENSIONS_PREFIX = "osmand:"
 	const val OSM_PREFIX = "osm_tag_"
 	const val AMENITY_PREFIX = "amenity_"
-	const val AMENITY_ORIGIN_EXTENSION = "amenity_origin"
+	const val ORIGIN_EXTENSION = "origin"
+	const val AMENITY_ORIGIN_EXTENSION = AMENITY_PREFIX + ORIGIN_EXTENSION
 	const val ACTIVITY_TYPE = OSMAND_EXTENSIONS_PREFIX + "activity"
 
 	const val GAP_PROFILE_TYPE = "gap"
@@ -72,6 +74,12 @@ object GpxUtilities {
 	const val POINT_ELEVATION = "ele"
 	const val POINT_SPEED = "speed"
 	const val POINT_BEARING = "bearing"
+
+	const val MIN_ELEVATION = "min_ele"
+	const val MAX_ELEVATION = "max_ele"
+	const val AVG_ELEVATION = "avg_ele"
+	const val DIFF_ELEVATION_UP = "diff_ele_up"
+	const val DIFF_ELEVATION_DOWN = "diff_ele_down"
 
 	const val TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A'
 	const val TRAVEL_GPX_CONVERT_FIRST_DIST = 5000
@@ -277,10 +285,20 @@ object GpxUtilities {
 			this.color = color
 		}
 
+		constructor(name: String, iconName: String?, backgroundType: String?, color: Int, hidden: Boolean) : this(
+			name
+		) {
+			this.iconName = iconName
+			this.backgroundType = backgroundType
+			this.color = color
+			this.hidden = hidden
+		}
+
 		constructor(point: WptPt) : this(point.category ?: "") {
 			color = point.getColor()
 			iconName = point.getIconName()
 			backgroundType = point.getBackgroundType()
+			hidden = point.isHidden()
 		}
 
 		fun isHidden(): Boolean {
@@ -343,10 +361,19 @@ object GpxUtilities {
 	}
 
 	fun convert(splitSegments: List<SplitSegment>): List<GpxTrackAnalysis> {
+		return convert(splitSegments, null)
+	}
+
+	fun convert(splitSegments: List<SplitSegment>, pointsAnalyser: TrackPointsAnalyser?): List<GpxTrackAnalysis> {
 		val list = mutableListOf<GpxTrackAnalysis>()
 		for (segment in splitSegments) {
 			val analysis = GpxTrackAnalysis()
-			analysis.prepareInformation(0, null, segment)
+			analysis.prepareInformation(0, pointsAnalyser, segment)
+			if (segment.segmentSlopeType != null && segment.slopeCount != null && segment.slopeValue != null) {
+				analysis.segmentSlopeType = segment.segmentSlopeType
+				analysis.slopeCount = segment.slopeCount
+				analysis.slopeValue = segment.slopeValue
+			}
 			list.add(analysis)
 		}
 		return list

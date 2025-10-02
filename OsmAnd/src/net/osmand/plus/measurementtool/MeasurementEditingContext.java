@@ -1112,6 +1112,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			public void onCalculationFinish() {
 				calculatedPairs = 0;
 				pointsToCalculateSize = 0;
+				progressListener.refresh();
 			}
 		};
 		params.alternateResultListener = route -> {
@@ -1147,7 +1148,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			roadSegmentData.put(currentPair, new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, originalRoute));
 			application.runInUIThread(() -> {
 				updateSegmentsForSnap(true, false);
-				progressListener.refresh();
 				RouteCalculationParams params1 = getParams(false);
 				if (params1 != null) {
 					application.getRoutingHelper().startRouteCalculationThread(params1);

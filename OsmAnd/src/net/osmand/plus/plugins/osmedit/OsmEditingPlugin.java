@@ -23,6 +23,7 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
@@ -37,6 +38,7 @@ import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -66,6 +68,7 @@ import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
@@ -306,36 +309,27 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int resId = item.getTitleId();
 			if (resId == R.string.context_menu_item_create_poi) {
-				EditPoiDialogFragment editPoiDialogFragment =
-						EditPoiDialogFragment.createAddPoiInstance(latitude, longitude,
-								mapActivity.getMyApplication());
-				editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
-						EditPoiDialogFragment.TAG);
+				EditPoiDialogFragment.showAddPoiInstance(mapActivity, latitude, longitude);
 			} else if (resId == R.string.context_menu_item_open_note) {
 				openOsmNote(mapActivity, latitude, longitude, "", false);
 			} else if (resId == R.string.context_menu_item_modify_note) {
 				modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 			} else if (resId == R.string.poi_context_menu_modify) {
-				if (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null) {
-					EditPoiDialogFragment.showEditInstance(mapActivity, ((TransportStop) selectedObj).getAmenity());
-				} else if (selectedObj instanceof MapObject) {
-					EditPoiDialogFragment.showEditInstance(mapActivity, (MapObject) selectedObj);
+				Amenity amenity = getAmenity(selectedObj);
+				if (amenity != null) {
+					EditPoiDialogFragment.showEditInstance(mapActivity, amenity);
+				} else if (selectedObj instanceof MapObject mapObject) {
+					EditPoiDialogFragment.showEditInstance(mapActivity, mapObject);
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
-				EditPoiDialogFragment.createInstance(entity, false)
-						.show(mapActivity.getSupportFragmentManager(), EditPoiDialogFragment.TAG);
+				EditPoiDialogFragment.showInstance(mapActivity, entity, false);
 			}
 			return true;
 		};
 		boolean isEditable = false;
-		if (selectedObj instanceof Amenity || (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null)) {
-			Amenity amenity;
-			if (selectedObj instanceof Amenity) {
-				amenity = (Amenity) selectedObj;
-			} else {
-				amenity = ((TransportStop) selectedObj).getAmenity();
-			}
+		Amenity amenity = getAmenity(selectedObj);
+		if (amenity != null) {
 			if (!amenity.getType().isWiki()) {
 				if (settings.isInternetConnectionAvailable() && ObfConstants.isOsmUrlAvailable(amenity)) {
 					isEditable = true;
@@ -379,6 +373,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setOrder(OPEN_OSM_NOTE_ITEM_ORDER)
 					.setListener(listener));
 		}
+	}
+
+	@Nullable
+	private Amenity getAmenity(@NonNull Object selectedObj) {
+		if (selectedObj instanceof Amenity amenity) {
+			return amenity;
+		} else if (selectedObj instanceof TransportStop stop) {
+			return stop.getAmenity();
+		} else if (selectedObj instanceof BaseDetailsObject detailsObject) {
+			return detailsObject.getSyntheticAmenity();
+		}
+		return null;
 	}
 
 	public void openOsmNote(@NonNull MapActivity mapActivity, double latitude, double longitude,
@@ -475,7 +481,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				})
 				.setItemDeleteAction(SHOW_OSM_EDITS));
 
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
 		while (iterator.hasNext()) {
 			RenderingRuleProperty property = iterator.next();
@@ -497,7 +503,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public CharSequence getDescription(boolean linksEnabled) {
 		String docsUrl = app.getString(R.string.docs_plugin_osm);
 		String description = app.getString(R.string.osm_editing_plugin_description, docsUrl);
-		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
+		return linksEnabled ? UiUtilities.createUrlSpannable(app, description, docsUrl) : description;
 	}
 
 	@Override
@@ -573,24 +579,34 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
-		return menuControllerClass == AmenityMenuController.class || menuControllerClass == RenderedObjectMenuController.class;
+	public boolean isMenuControllerSupported(MenuController menuController) {
+		Amenity amenity = menuController.getBuilder().getAmenity();
+		return AmenityMenuController.class.isAssignableFrom(menuController.getClass())
+				|| menuController.getClass() == RenderedObjectMenuController.class || amenity != null;
 	}
 
 	@Override
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, Object object) {
-		if (object instanceof Amenity amenity) {
-			String link = ObfConstants.getOsmUrlForId(amenity);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
-						0, false, null, true, 0, true, null, false);
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+			@Nullable Object object, @Nullable Amenity amenity) {
+		if (amenity == null) {
+			if (object instanceof Amenity) {
+				amenity = (Amenity) object;
+			} else if (object instanceof BaseDetailsObject detailsObject) {
+				amenity = detailsObject.getSyntheticAmenity();
 			}
+		}
+		String link = null;
+		if (amenity != null) {
+			link = ObfConstants.getOsmUrlForId(amenity);
 		} else if (object instanceof RenderedObject renderedObject) {
-			String link = ObfConstants.getOsmUrlForId(renderedObject);
-			if (!Algorithms.isEmpty(link)) {
-				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
-						null, true, 0, true, null, false);
-			}
+			link = ObfConstants.getOsmUrlForId(renderedObject);
+		}
+		if (!Algorithms.isEmpty(link)) {
+			Drawable icon = menuBuilder.getRowIcon(R.drawable.ic_action_openstreetmap_logo);
+			String textPrefix = app.getString(R.string.shared_sting_osm_link);
+			menuBuilder.buildRow(view, new BuildRowAttrs.Builder()
+					.setIcon(icon).setTextPrefix(textPrefix).setText(link)
+					.setNeedLinks(true).setUrl(true).build());
 		}
 	}
 

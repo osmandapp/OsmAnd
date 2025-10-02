@@ -57,6 +57,8 @@ public class GalleryImageView extends AppCompatImageView {
 
 	private boolean imageRenderedAtLeastOnce;
 	private boolean onDrawReady;
+	private boolean pendingScaleUpdate;
+	private Drawable lastDrawable;
 
 	public GalleryImageView(@NonNull Context context) {
 		this(context, null);
@@ -92,6 +94,7 @@ public class GalleryImageView extends AppCompatImageView {
 		setScaleType(ScaleType.MATRIX);
 		setState(State.NONE);
 		onDrawReady = false;
+		pendingScaleUpdate = false;
 
 		super.setOnTouchListener(new GalleryImageOnTouchListener());
 	}
@@ -108,29 +111,39 @@ public class GalleryImageView extends AppCompatImageView {
 	@Override
 	public void setImageResource(@DrawableRes int resId) {
 		super.setImageResource(resId);
+		lastDrawable = getDrawable();
 		savePreviousImageValues();
-		fitImageToView();
+		scheduleImageUpdate();
 	}
 
 	@Override
 	public void setImageBitmap(Bitmap bm) {
 		super.setImageBitmap(bm);
+		lastDrawable = getDrawable();
 		savePreviousImageValues();
-		fitImageToView();
+		scheduleImageUpdate();
 	}
 
 	@Override
 	public void setImageDrawable(@Nullable Drawable drawable) {
 		super.setImageDrawable(drawable);
+		lastDrawable = drawable;
 		savePreviousImageValues();
-		fitImageToView();
+		scheduleImageUpdate();
 	}
 
 	@Override
 	public void setImageURI(@Nullable Uri uri) {
 		super.setImageURI(uri);
+		lastDrawable = getDrawable();
 		savePreviousImageValues();
-		fitImageToView();
+		scheduleImageUpdate();
+	}
+
+	private void scheduleImageUpdate() {
+		pendingScaleUpdate = true;
+		requestLayout();
+		invalidate();
 	}
 
 	@Override
@@ -171,12 +184,26 @@ public class GalleryImageView extends AppCompatImageView {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		onDrawReady = true;
-		imageRenderedAtLeastOnce = true;
+
+		if (pendingScaleUpdate) {
+			pendingScaleUpdate = false;
+			fitImageToView();
+		}
+
 		if (delayedZoomParams != null) {
 			setZoom(delayedZoomParams.scale, delayedZoomParams.focusX, delayedZoomParams.focusY, delayedZoomParams.scaleType);
 			delayedZoomParams = null;
 		}
+
 		super.onDraw(canvas);
+
+		if (getDrawable() != null
+				&& getDrawable().getIntrinsicWidth() > 0
+				&& getDrawable().getIntrinsicHeight() > 0
+				&& getWidth() > 0
+				&& getHeight() > 0) {
+			imageRenderedAtLeastOnce = true;
+		}
 	}
 
 	@Override
@@ -314,7 +341,11 @@ public class GalleryImageView extends AppCompatImageView {
 		viewHeight = setViewSize(heightMode, heightSize, drawableHeight);
 
 		setMeasuredDimension(viewWidth, viewHeight);
-		fitImageToView();
+
+		// Important: Check if the drawable has changed and update if necessary
+		if (drawable != lastDrawable || pendingScaleUpdate) {
+			fitImageToView();
+		}
 	}
 
 	private void fitImageToView() {
@@ -323,6 +354,9 @@ public class GalleryImageView extends AppCompatImageView {
 			return;
 		}
 		if (currentMatrix == null || previousMatrix == null) {
+			return;
+		}
+		if (viewWidth == 0 || viewHeight == 0) {
 			return;
 		}
 
@@ -341,6 +375,7 @@ public class GalleryImageView extends AppCompatImageView {
 				break;
 			case CENTER_INSIDE:
 				scaleX = scaleY = Math.min(1, Math.min(scaleX, scaleY));
+				break;
 			case FIT_CENTER:
 				scaleX = scaleY = Math.min(scaleX, scaleY);
 				break;
@@ -383,6 +418,9 @@ public class GalleryImageView extends AppCompatImageView {
 		}
 		fixTrans();
 		setImageMatrix(currentMatrix);
+
+		// Force a redraw after matrix change
+		invalidate();
 	}
 
 	private int setViewSize(int mode, int size, int drawableSize) {

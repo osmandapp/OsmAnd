@@ -248,6 +248,7 @@
         <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_light</item>
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_light</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_light</item>
+        <item name="dlg_btn_stroked_secondary_content">@color/dlg_btn_stroked_secondary_content_light</item>
         <item name="dlg_btn_transparent">@drawable/dlg_btn_transparent_light</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
         <item name="dlg_btn_tertiary_text">@color/button_color_active_light</item>

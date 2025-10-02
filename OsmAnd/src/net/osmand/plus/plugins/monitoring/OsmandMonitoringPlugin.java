@@ -144,7 +144,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public CharSequence getDescription(boolean linksEnabled) {
 		String docsUrl = app.getString(R.string.docs_plugin_trip_recording);
 		String description = app.getString(R.string.record_plugin_description, docsUrl);
-		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
+		return linksEnabled ? UiUtilities.createUrlSpannable(app, description, docsUrl) : description;
 	}
 
 	@Override
@@ -329,9 +329,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					GpxFile gpxFile = null;
 					File file = null;
 					if (!Algorithms.isEmpty(gpxFilesByName)) {
-						String gpxFileName = gpxFilesByName.keySet().iterator().next();
-						gpxFile = gpxFilesByName.get(gpxFileName);
-						file = getSavedGpxFile(gpxFileName + GPX_FILE_EXT);
+						String name = gpxFilesByName.keySet().iterator().next();
+						gpxFile = gpxFilesByName.get(name);
+						file = new File(gpxFile.getPath());
 					}
 					boolean fileExists = file != null && file.exists();
 					boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
@@ -339,8 +339,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						if (openTrack) {
 							TrackMenuFragment.openTrack(fragmentActivity, file, null);
 						} else {
+							boolean showOnMap = app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null;
+							if (showOnMap) {
+								app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
+							}
 							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
-							SaveGPXBottomSheet.showInstance(fragmentManager, file.getAbsolutePath());
+							SaveGPXBottomSheet.showInstance(fragmentManager, file);
 						}
 					}
 				}
@@ -349,20 +353,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 			}
 		}, (Void) null);
-	}
-
-	@Nullable
-	private File getSavedGpxFile(@NonNull String relativeFileNameWithExt) {
-		File recDir = app.getAppCustomization().getTracksDir();
-		List<GPXInfo> gpxInfoList = new ArrayList<>();
-		GpxUiHelper.readGpxDirectory(recDir, gpxInfoList, "", false);
-		for (GPXInfo gpxInfo : gpxInfoList) {
-			if (relativeFileNameWithExt.equals(gpxInfo.getFileName())) {
-				return new File(recDir, relativeFileNameWithExt);
-			}
-		}
-
-		return null;
 	}
 
 	public void updateWidgets() {

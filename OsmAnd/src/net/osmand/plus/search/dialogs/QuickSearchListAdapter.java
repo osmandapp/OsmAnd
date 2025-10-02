@@ -1,13 +1,11 @@
 package net.osmand.plus.search.dialogs;
 
-import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +13,10 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.StringMatcher;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -30,13 +24,12 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.WikiItemViewHolder;
-import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.search.listitems.*;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.*;
@@ -44,17 +37,13 @@ import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
@@ -63,6 +52,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private final FragmentActivity activity;
 	private AccessibilityAssistant accessibilityAssistant;
 	private final LayoutInflater inflater;
+	private final boolean nightMode;
 	@Nullable
 	private PoiUIFilter poiUIFilter;
 
@@ -86,11 +76,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		void reloadData();
 	}
 
-	public QuickSearchListAdapter(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+	public QuickSearchListAdapter(@NonNull OsmandApplication app,
+	                              @NonNull FragmentActivity activity, boolean nightMode) {
 		super(activity, R.layout.search_list_item);
 		this.app = app;
 		this.activity = activity;
-		this.inflater = UiUtilities.getInflater(activity, isNightMode());
+		this.nightMode = nightMode;
+		this.inflater = UiUtilities.getInflater(activity, nightMode);
 
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
@@ -306,14 +298,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		TextView description = view.findViewById(R.id.description);
 		description.setText(R.string.search_history_is_disabled_descr);
 
-		int color = ColorUtilities.getActivityBgColor(app, isNightMode());
+		int color = ColorUtilities.getActivityBgColor(app, nightMode);
 		View cardContainer = view.findViewById(R.id.card_container);
 		AndroidUtils.setBackground(cardContainer, new ColorDrawable(color));
 
 		TextView analyseButtonDescr = view.findViewById(R.id.settings_button);
 		FrameLayout analyseButton = view.findViewById(R.id.settings_button_container);
-		AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_light, R.drawable.btn_border_dark);
-		AndroidUtils.setBackground(app, analyseButtonDescr, isNightMode(), R.drawable.ripple_light, R.drawable.ripple_dark);
+		AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		analyseButton.setOnClickListener(disabledHistoryItem.getOnClickListener());
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), false);
@@ -430,7 +422,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private LinearLayout bindWikiItem(@Nullable View convertView, @NonNull QuickSearchListItem item) {
 		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, item.getSearchResult());
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
-		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, isNightMode());
+		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, nightMode);
 		holder.bindItem(wikiItem, poiUIFilter, useMapCenter);
 		return view;
 	}
@@ -446,7 +438,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				// remove item after downloading
 				remove(listItem);
 			} else {
-				bindIndexItem(view, indexItem, activity, isNightMode());
+				bindIndexItem(view, indexItem, activity, nightMode);
 			}
 		} else if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
 			view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
@@ -544,7 +536,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private void setupBackground(View view) {
-		view.setBackgroundColor(ColorUtilities.getListBgColor(app, isNightMode()));
+		view.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	private void setupDivider(int position,
@@ -637,10 +629,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			toloc = item.getSearchResult().location;
 		}
 		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
-	}
-
-	private boolean isNightMode() {
-		return !app.getSettings().isLightContent();
 	}
 
 	public void setPoiUIFilter(@Nullable PoiUIFilter poiUIFilter) {

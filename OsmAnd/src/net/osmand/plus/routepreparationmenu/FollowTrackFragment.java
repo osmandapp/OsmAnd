@@ -13,7 +13,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -111,6 +114,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	@Override
+	@IdRes
+	protected int getToolbarViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
 	public int getInitialMenuState() {
 		return MenuState.HALF_SCREEN;
 	}
@@ -202,7 +211,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackPaths(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
-			if (list.size() > 0) {
+			if (!list.isEmpty()) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
 				tracksCard = new TracksToFollowCard(mapActivity, this, list, defaultCategory);
 				tracksCard.setListener(this);
@@ -333,11 +342,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			boolean nightMode = isNightMode();
 			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
 				if (!nightMode) {
-					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+					AndroidUiHelper.setStatusBarContentColor(view, true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
 			} else if (!nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
+				AndroidUiHelper.setStatusBarContentColor(view, false);
 			}
 		}
 		return -1;
@@ -454,7 +463,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 							selectTrackToFollow(gpxFile, true);
 							updateSelectionMode(false);
 						} else {
-							app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
+							app.showShortToastMessage(R.string.error_occurred_loading_gpx);
 						}
 						importHelper.setGpxImportListener(null);
 					}
@@ -528,7 +537,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	private void setupButtons(View view) {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 
 		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
@@ -589,5 +598,19 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			app.getRoutingHelper().onSettingsChanged(true);
 		}
 		updateSelectionMode(false);
+	}
+
+	public static boolean showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		FollowTrackFragment fragment = new FollowTrackFragment();
+		String tag = fragment.getFragmentTag();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+			manager.beginTransaction()
+					.replace(R.id.routeMenuContainer, fragment, tag)
+					.addToBackStack(tag)
+					.commitAllowingStateLoss();
+			return true;
+		}
+		return false;
 	}
 }

@@ -44,13 +44,6 @@
 			android:orientation="vertical"
 			android:visibility="gone">
 
-			<include
-				layout="@layout/map_compass_button"
-				android:layout_width="@dimen/map_small_button_size"
-				android:layout_height="@dimen/map_small_button_size"
-				android:layout_marginStart="@dimen/map_button_margin"
-				android:layout_marginTop="@dimen/map_small_button_margin" />
-
 			<androidx.legacy.widget.Space
 				android:layout_width="1dp"
 				android:layout_height="0dp"

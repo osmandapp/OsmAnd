@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -60,7 +61,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.recyclerview_fragment, container, false);
+		View view = inflate(R.layout.recyclerview_fragment, container, false);
 
 		DownloadActivity activity = requireDownloadActivity();
 		activity.getAccessibilityAssistant().registerPage(view, LOCAL_TAB_NUMBER);
@@ -158,7 +159,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 		LocalItemsLoaderTask task = asyncLoader;
 		if (task == null || task.getStatus() == AsyncTask.Status.FINISHED || task.isCancelled()) {
 			asyncLoader = new LocalItemsLoaderTask(app, this);
-			asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(asyncLoader);
 		}
 	}
 

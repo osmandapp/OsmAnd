@@ -3,12 +3,13 @@ package net.osmand.plus.plugins.srtm;
 import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_ACTION_ID;
 
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -16,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.utils.UiUtilities;
 
 public class TerrainAction extends QuickAction {
 
@@ -33,12 +35,12 @@ public class TerrainAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			plugin.toggleTerrain(!plugin.isTerrainLayerEnabled(), () -> {
 				if (plugin.isTerrainLayerEnabled()) {
-					PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+					PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getApp(), plugin, true);
 				}
 				plugin.updateLayers(mapActivity, mapActivity);
 				mapActivity.refreshMapComplete();
@@ -47,9 +49,8 @@ public class TerrainAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text))
 				.setText(R.string.quick_action_terrain_descr);
 		parent.addView(view);

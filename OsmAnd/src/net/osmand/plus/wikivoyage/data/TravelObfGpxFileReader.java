@@ -34,7 +34,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
@@ -43,8 +42,8 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.resources.AmenityIndexRepository;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
@@ -77,8 +76,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
     // Do not clutter GPX with tags that are always generated.
     private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
-            "date", "distance", "route_name", "route_bbox_radius",
-            "avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
+            "date", "distance", "route_name", "route_bbox_radius", "start_ele", "ele_graph",
             "avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
     );
 
@@ -343,7 +341,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             currentAmenities.clear();
 
-            if (!isPoiSectionIntersects(repo, pointRequest)) {
+            if (!repo.isPoiSectionIntersects(pointRequest)) {
                 continue;
             }
 
@@ -405,17 +403,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             if (!repo.getReaderPoiIndexes().isEmpty() && !Algorithms.objectEquals(
                     repo.getReaderPoiIndexes().get(0).getName(), that.getAmenityRegionName())) {
                 return true; // skip inappropriate RegionName
-            }
-        }
-        return false;
-    }
-
-    private boolean isPoiSectionIntersects(AmenityIndexRepository repo,
-                                           BinaryMapIndexReader.SearchRequest<Amenity> pointRequest) {
-        for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
-            if (pointRequest.intersects(
-                    poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31())) {
-                return true;
             }
         }
         return false;

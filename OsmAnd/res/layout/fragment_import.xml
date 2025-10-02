@@ -21,7 +21,6 @@
 		app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 	<LinearLayout
-		android:id="@+id/buttons_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
@@ -37,6 +36,7 @@
 		<include layout="@layout/divider" />
 
 		<LinearLayout
+			android:id="@+id/bottom_buttons_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="?attr/bg_color"

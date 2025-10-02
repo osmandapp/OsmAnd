@@ -5,6 +5,7 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -44,24 +46,24 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private final FavouritePoint point;
 	private final Map<String, String> amenityExtensions = new HashMap<>();
-	private Amenity amenity;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint point) {
-		super(mapActivity);
+	public FavouritePointMenuBuilder(@NonNull MapActivity activity, @NonNull FavouritePoint point, @Nullable Amenity amenity) {
+		super(activity);
 		this.point = point;
+		setAmenity(amenity);
 		setShowNearestWiki(true);
 		acquireAmenityExtensions();
 	}
 
 	private void acquireAmenityExtensions() {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
-
-		String amenityOriginName = point.getAmenityOriginName();
-		if (amenityOriginName != null) {
-			amenity = helper.findAmenity(amenityOriginName, point.getLatitude(), point.getLongitude());
+		if (amenity == null) {
+			String originName = point.getAmenityOriginName();
+			if (!Algorithms.isEmpty(originName)) {
+				amenity = helper.findAmenity(originName, point.getLatitude(), point.getLongitude());
+			}
 		}
-		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(),
-				point.getAmenityOriginName(), point.getLatitude(), point.getLongitude()));
+		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(), amenity));
 	}
 
 	@Nullable
@@ -70,7 +72,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
+	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId,
+			String text, String amenityKey) {
 		if (amenity == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
@@ -85,11 +88,12 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		boolean light = isLightContent();
-		buildDateRow(view, point.getTimestamp());
+		buildDateRow(view, app.getString(R.string.created_on), point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
-			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
@@ -106,7 +110,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
+	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description,
+			@NonNull String title) {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
@@ -117,14 +122,16 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			color = favoriteGroup.isVisible() ? (color | 0xff000000) : getColor(disabledColor);
-			String name = view.getContext().getString(R.string.context_menu_points_of_group);
-			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
-					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, point),
-					false, 0, false, null, false);
+			Context context = view.getContext();
+			String name = context.getString(R.string.context_menu_points_of_group);
+			Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);
+			CollapsableView collapsableView = getCollapsableFavouritesView(context, true, favoriteGroup, point);
+			buildRow(view, new BuildRowAttrs.Builder().setText(name).setIcon(icon).setCollapsable(true).setCollapsableView(collapsableView).build());
 		}
 	}
 
-	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, @NonNull FavoriteGroup group, FavouritePoint selectedPoint) {
+	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed,
+			@NonNull FavoriteGroup group, FavouritePoint selectedPoint) {
 		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<FavouritePoint> points = group.getPoints();

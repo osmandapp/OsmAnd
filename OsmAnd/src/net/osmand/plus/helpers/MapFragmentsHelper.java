@@ -22,11 +22,12 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.XMasDialogFragment;
+import net.osmand.plus.dialogs.selectlocation.SelectLocationFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -80,12 +81,12 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	}
 
 	@Nullable
-	public BaseOsmAndFragment getVisibleBaseOsmAndFragment(int... ids) {
+	public BaseFullScreenFragment getVisibleBaseFullScreenFragment(int... ids) {
 		for (int id : ids) {
 			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment
-					&& ((BaseOsmAndFragment) fragment).getStatusBarColorId() != -1) {
-				return (BaseOsmAndFragment) fragment;
+			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseFullScreenFragment
+					&& ((BaseFullScreenFragment) fragment).getStatusBarColorId() != -1) {
+				return (BaseFullScreenFragment) fragment;
 			}
 		}
 		return null;
@@ -118,16 +119,20 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	public void updateFragments() {
 		FragmentManager manager = getSupportFragmentManager();
 		for (Fragment fragment : manager.getFragments()) {
-			try {
-				manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
-				manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
-			} catch (IllegalStateException e) {
-				LOG.error("Error updating fragment " + fragment.getClass().getSimpleName(), e);
-			}
+			updateFragment(manager, fragment);
 		}
 		DashboardOnMap dashboard = activity.getDashboard();
 		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
 			dashboard.refreshContent(true);
+		}
+	}
+
+	public void updateFragment(@NonNull FragmentManager manager, @NonNull Fragment fragment) {
+		try {
+			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
+			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
+		} catch (IllegalStateException e) {
+			LOG.error("Error updating fragment " + fragment.getClass().getSimpleName(), e);
 		}
 	}
 
@@ -140,6 +145,13 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 		}
 		for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
 			fragmentManager.popBackStack();
+		}
+	}
+
+	public void onStop() {
+		QuickSearchDialogFragment quickSearchFragment = getQuickSearchDialogFragment();
+		if (quickSearchFragment != null && quickSearchFragment.isSearchHidden()) {
+			quickSearchFragment.closeSearch();
 		}
 	}
 
@@ -196,6 +208,14 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	@Nullable
 	public DownloadTilesFragment getDownloadTilesFragment() {
 		return getFragment(DownloadTilesFragment.TAG);
+	}
+
+	@Nullable
+	public SelectLocationFragment getSelectMapLocationFragment() {
+		if (getConfigureMapOptionFragment() instanceof SelectLocationFragment fragment) {
+			return fragment;
+		}
+		return null;
 	}
 
 	@Nullable
@@ -303,7 +323,7 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	public void showXMasDialog() {
 		SecondSplashScreenFragment.SHOW = false;
 		dismissSecondSplashScreen();
-		new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
+		XMasDialogFragment.showInstance(getSupportFragmentManager());
 	}
 
 	public void dismissSecondSplashScreen() {

@@ -17,6 +17,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -138,7 +139,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 				return true;
 			};
 			selectionTask = new NetworkRouteSelectionTask(activity, pair.first, pair.second, callback);
-			selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(selectionTask);
 		}
 	}
 
@@ -186,12 +187,34 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 
 	}
 
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	public void clearCachedGpx(@NonNull GpxFile gpxFile) {
+		RouteKey routeKey = RouteKey.fromGpxFile(gpxFile);
+
+		if (!routesCache.containsKey(routeKey)) {
+			routeKey = findKeyByValue(gpxFile);
+		}
+
+		if (routeKey != null) {
+			routesCache.remove(routeKey);
+		}
+	}
+
+	private RouteKey findKeyByValue(@NonNull GpxFile gpxFile) {
+		for (Map.Entry<RouteKey, GpxFile> entry : routesCache.entrySet()) {
+			if (entry.getValue() == gpxFile ||
+					Algorithms.stringsEqual(entry.getValue().getPath(), gpxFile.getPath())) {
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 }

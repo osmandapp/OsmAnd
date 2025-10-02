@@ -10,7 +10,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -40,7 +39,7 @@ public class RenderedObjectMenuController extends MenuController {
 		super(new RenderedObjectMenuBuilder(mapActivity, renderedObject), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		setRenderedObject(renderedObject);
-		mapPoiTypes = mapActivity.getMyApplication().getPoiTypes();
+		mapPoiTypes = mapActivity.getApp().getPoiTypes();
 		poiTranslator = mapPoiTypes != null ? mapPoiTypes.getPoiTranslator() : null;
 	}
 
@@ -124,18 +123,20 @@ public class RenderedObjectMenuController extends MenuController {
 		String translation = poiTranslator.getTranslation(amenity.getSubType());
 
 		for (String key : amenity.getAdditionalInfoKeys()) {
+			String translationKey = key.replace("osmand_", "").replace(":", "_");
 			String value = amenity.getAdditionalInfo(key);
 			if (!Algorithms.isEmpty(translation)) {
 				break;
 			}
+			// nameStr uses (key_value - value - key) sequence
 			if (Algorithms.isEmpty(translation)) {
-				translation = poiTranslator.getTranslation(key + "_" + value);
+				translation = poiTranslator.getTranslation(translationKey + "_" + value);
 			}
 			if (Algorithms.isEmpty(translation)) {
 				translation = poiTranslator.getTranslation(value);
 			}
 			if (Algorithms.isEmpty(translation)) {
-				translation = poiTranslator.getTranslation(key);
+				translation = poiTranslator.getTranslation(translationKey);
 			}
 		}
 
@@ -152,7 +153,7 @@ public class RenderedObjectMenuController extends MenuController {
 	}
 
 	private String getTranslatedType(RenderedObject renderedObject) {
-		if (poiTranslator == null) {
+		if (poiTranslator == null || mapPoiTypes == null) {
 			return "";
 		}
 		PoiType pt = null;
@@ -162,35 +163,44 @@ public class RenderedObjectMenuController extends MenuController {
 		String separate = null;
 		String single = null;
 		for (Map.Entry<String, String> e : renderedObject.getTags().entrySet()) {
-			if (e.getKey().startsWith("name")) {
+			String key = e.getKey();
+			String value = e.getValue();
+			String translationKey = key.replace("osmand_", "").replace(":", "_");
+			if (key.startsWith("name")) {
 				continue;
 			}
-			if (Algorithms.isEmpty(e.getValue()) && otherPt == null) {
-				otherPt = mapPoiTypes.getPoiTypeByKey(e.getKey());
+			if (Algorithms.isEmpty(value) && otherPt == null) {
+				otherPt = mapPoiTypes.getPoiTypeByKey(key);
 			}
-			pt = mapPoiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
-			if (pt == null && e.getKey().startsWith("osmand_")) {
-				String key = e.getKey().replace("osmand_", "");
-				pt = mapPoiTypes.getPoiTypeByKey(key + "_" + e.getValue());
+			pt = mapPoiTypes.getPoiTypeByKey(key + "_" + value);
+			if (pt == null && key.startsWith("osmand_")) {
+				pt = mapPoiTypes.getPoiTypeByKey(key.replace("osmand_", "") + "_" + value);
 			}
 			if (pt != null) {
 				break;
 			}
-			firstTag = firstTag.isEmpty() ? e.getKey() + ": " + e.getValue() : firstTag;
-			if (poiTranslator != null && !Algorithms.isEmpty(e.getValue())) {
-				String t = poiTranslator.getTranslation(e.getKey() + "_" + e.getValue());
+			firstTag = firstTag.isEmpty() ? key + ": " + value : firstTag;
+			if (!Algorithms.isEmpty(value)) {
+				// typeStr uses (key - key_value - value) sequence
+				String t = poiTranslator.getTranslation(translationKey);
+				if (Algorithms.isEmpty(t)) {
+					t = poiTranslator.getTranslation(translationKey + "_" + value);
+				}
+				if (Algorithms.isEmpty(t)) {
+					t = poiTranslator.getTranslation(value);
+				}
 				if (translated == null && !Algorithms.isEmpty(t)) {
 					translated = t;
 				}
-				String t1 = poiTranslator.getTranslation(e.getKey());
-				String t2 = poiTranslator.getTranslation(e.getValue());
+				String t1 = poiTranslator.getTranslation(key);
+				String t2 = poiTranslator.getTranslation(value);
 				if (separate == null && t1 != null && t2 != null) {
 					separate = t1 + ": " + t2.toLowerCase();
 				}
-				if (single == null && t2 != null && !e.getValue().equals("yes") && !e.getValue().equals("no")) {
+				if (single == null && t2 != null && !value.equals("yes") && !value.equals("no")) {
 					single = t2;
 				}
-				if (e.getKey().equals("amenity")) {
+				if (key.equals("amenity")) {
 					translated = t2;
 				}
 			}
@@ -231,7 +241,7 @@ public class RenderedObjectMenuController extends MenuController {
 				if (entry.getKey().equalsIgnoreCase("maxheight")) {
 					AbstractPoiType pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
 					if (pt != null) {
-						addPlainMenuItem(R.drawable.ic_action_note_dark, null, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
+						addPlainMenuItem(R.drawable.ic_action_note_dark, null, entry.getValue(), pt.getTranslation(), false, false, null);
 					}
 				}
 			}

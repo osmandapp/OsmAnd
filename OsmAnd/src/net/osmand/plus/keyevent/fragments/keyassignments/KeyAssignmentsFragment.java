@@ -24,7 +24,7 @@ import com.google.android.material.transition.Hold;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.listener.EventType;
@@ -34,7 +34,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class KeyAssignmentsFragment extends BaseOsmAndFragment
+public class KeyAssignmentsFragment extends BaseFullScreenFragment
 		implements IAskRefreshDialogCompletely, InputDevicesEventListener {
 
 	public static final String TAG = KeyAssignmentsFragment.class.getSimpleName();
@@ -61,7 +61,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_key_assignments_list, container, false);
+		View view = inflate(R.layout.fragment_key_assignments_list, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
@@ -143,12 +143,12 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		boolean enabled = controller.hasAssignments() || editMode;
 		int actionIconId = editMode ? R.drawable.ic_action_key_assignment_remove : R.drawable.ic_action_edit_outlined;
 		int actionIconColor = enabled ? ColorUtilities.getPrimaryIconColor(app, nightMode) : ColorUtilities.getDisabledTextColor(app, nightMode);
-		ivActionButton.setImageDrawable(getPaintedContentIcon(actionIconId, actionIconColor));
+		ivActionButton.setImageDrawable(getPaintedIcon(actionIconId, actionIconColor));
 		actionButton.setEnabled(enabled);
 	}
 
 	private void updateSaveButton(@NonNull View view) {
-		View bottomButtons = view.findViewById(R.id.bottom_buttons);
+		View bottomButtons = view.findViewById(R.id.bottom_buttons_container);
 		bottomButtons.setVisibility(controller.isInEditMode() ? View.VISIBLE : View.GONE);
 		DialogButton applyButton = view.findViewById(R.id.save_button);
 		applyButton.setOnClickListener(v -> controller.askSaveChanges());
@@ -156,7 +156,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 	}
 
 	private void updateFabButton(@NonNull View view) {
-		FloatingActionButton addButton = view.findViewById(R.id.fabButton);
+		FloatingActionButton addButton = view.findViewById(R.id.fab);
 		addButton.setVisibility(controller.isDeviceTypeEditable() && !controller.isInEditMode() ? View.VISIBLE : View.GONE);
 		addButton.setOnClickListener(v -> controller.askAddAssignment(addButton));
 	}
@@ -198,11 +198,6 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		if (activity != null) {
 			activity.onBackPressed();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	@Override

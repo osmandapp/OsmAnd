@@ -40,9 +40,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialog;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.resources.ResourceManager;
@@ -96,7 +96,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	public MapillaryImageDialog(@NonNull MapActivity mapActivity, @NonNull Bundle bundle) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		restoreFields(bundle);
-		this.iconsCache = mapActivity.getMyApplication().getUIUtilities();
+		this.iconsCache = mapActivity.getApp().getUIUtilities();
 	}
 
 	public MapillaryImageDialog(MapActivity mapActivity, String imageId, String sequenceId,
@@ -111,7 +111,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.viewerUrl = viewerUrl;
 		this.latLon = latLon;
 		this.compassAngle = compassAngle;
-		this.iconsCache = mapActivity.getMyApplication().getUIUtilities();
+		this.iconsCache = mapActivity.getApp().getUIUtilities();
 		this.sync = sync;
 	}
 
@@ -171,7 +171,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				mapView.getAnimatedDraggingThread().startMoving(
 						latLon.getLatitude(), latLon.getLongitude(), mapView.getZoom());
 			} else {
-				mapActivity.getMyApplication().getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
+				mapActivity.getApp().getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
 			}
 		} else {
 			mapActivity.refreshMap();
@@ -284,14 +284,14 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		noInternetView.findViewById(R.id.retry_button).setOnClickListener(v -> {
 			DownloadImageTask downloadTask = new DownloadImageTask(staticImageView,
 					downloadRequestNumber.incrementAndGet(), downloadRequestNumber);
-			MenuBuilder.execute(downloadTask);
+			OsmAndTaskManager.executeTask(downloadTask);
 			fetchSequence();
 		});
 
 		if (!Algorithms.isEmpty(imageUrl)) {
 			DownloadImageTask downloadTask = new DownloadImageTask(staticImageView,
 					downloadRequestNumber.incrementAndGet(), downloadRequestNumber);
-			MenuBuilder.execute(downloadTask);
+			OsmAndTaskManager.executeTask(downloadTask);
 			fetchSequence();
 		}
 		updateArrowButtons();
@@ -407,7 +407,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.imageId = image.getImageId();
 		this.imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + image.getImageId();
 		this.viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + image.getImageId();
-		MenuBuilder.execute(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
+		OsmAndTaskManager.executeTask(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
 		setImageLocation(latLon, compassAngle, false);
 	}
 
@@ -421,7 +421,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		if (nzoom < map.getMinimumZoomSupported()) {
 			return;
 		}
-		ResourceManager mgr = getMapActivity().getMyApplication().getResourceManager();
+		ResourceManager mgr = getMapActivity().getApp().getResourceManager();
 		QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
@@ -536,7 +536,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				// ignore
 			}
 			if (isValidRequest()) {
-				return AndroidNetworkUtils.downloadImage(getMapActivity().getMyApplication(), imageUrl);
+				return AndroidNetworkUtils.downloadImage(getMapActivity().getApp(), imageUrl);
 			} else {
 				return null;
 			}

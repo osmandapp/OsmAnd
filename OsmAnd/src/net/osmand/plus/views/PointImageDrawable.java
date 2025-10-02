@@ -27,6 +27,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 public class PointImageDrawable extends Drawable {
 
+	public static final int MIN_ICON_SIZE_PX = 4;
 	public static final int ICON_SIZE_VECTOR_PX = 12;
 	public static final int DEFAULT_SIZE_ON_MAP_DP = 16;
 
@@ -163,7 +164,7 @@ public class PointImageDrawable extends Drawable {
 		if (scale != this.scale || this.mapIconSize == 0) {
 			this.scale = scale;
 			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
-			this.mapIconSize = Math.round((scale * pixels / ICON_SIZE_VECTOR_PX * ICON_SIZE_VECTOR_PX));
+			this.mapIconSize = Math.max(Math.round((scale * pixels / ICON_SIZE_VECTOR_PX * ICON_SIZE_VECTOR_PX)), MIN_ICON_SIZE_PX);
 			this.backSize = (int) (scale * getIntrinsicWidth());
 			mapIconBitmap = getBitmapFromVectorDrawable(mapIcon);
 		}

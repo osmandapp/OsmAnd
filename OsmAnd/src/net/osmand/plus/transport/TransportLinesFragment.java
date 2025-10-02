@@ -19,17 +19,21 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class TransportLinesFragment extends BaseOsmAndFragment {
+public class TransportLinesFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = TransportLinesFragment.class.getSimpleName();
 
@@ -52,7 +56,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		isShowAnyTransport = menu.isShowAnyTransport();
 
 		updateNightMode();
-		view = inflate(R.layout.fragment_transport_lines, container);
+		view = inflate(R.layout.fragment_transport_lines, container, false);
 
 		setupMainToggle();
 		setupTransportStopsToggle();
@@ -103,7 +107,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 			RenderingRuleProperty property = rules.get(i);
 			String attrName = property.getAttrName();
 			if (!TransportType.TRANSPORT_STOPS.getAttrName().equals(attrName)) {
-				View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_switch, list, false);
+				View view = inflate(R.layout.bottom_sheet_item_with_switch, list, false);
 				boolean showDivider = i < rules.size() - 1;
 				setupButton(
 						view,
@@ -134,7 +138,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	public static void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,
 	                               boolean showDivider, @Nullable OnClickListener listener) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		ImageView ivIcon = view.findViewById(R.id.icon);
@@ -168,6 +172,14 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 		AndroidUtils.setBackground(view, background);
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

@@ -34,7 +34,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
@@ -54,7 +54,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
+public class VehicleMetricsRecordingFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 	public static final String SELECTED_COMMANDS_KEY = "selected_commands_key";
@@ -81,11 +81,11 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.vehicle_metrics_recording_fragment, container, false);
+		View view = inflate(R.layout.vehicle_metrics_recording_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		Window window = requireMapActivity().getWindow();
 		if (window != null) {
-			window.setStatusBarColor(ContextCompat.getColor(requireMapActivity(), getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarColor(window, ContextCompat.getColor(requireMapActivity(), getStatusBarColorId()));
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), nightMode);
 		}
 
@@ -226,10 +226,6 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 		return commandItems;
 	}
 
-	public int getDimen(@DimenRes int id) {
-		return getResources().getDimensionPixelSize(id);
-	}
-
 	private void updateToolbarNavigationIcon() {
 		navigationIcon.setOnClickListener(view -> dismiss());
 	}
@@ -247,22 +243,19 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		requireMapActivity().disableDrawer();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		requireMapActivity().enableDrawer();
-	}
-
-	@NonNull
-	private MapActivity requireMapActivity() {
-		MapActivity mapActivity = (MapActivity) getMyActivity();
-		if (mapActivity == null) {
-			throw new IllegalStateException(this + " not attached to MapActivity.");
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
 		}
-		return mapActivity;
 	}
 
 	private void applyPreferenceWithSnackBar(@NonNull Serializable newValue) {

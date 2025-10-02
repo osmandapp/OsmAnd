@@ -1,5 +1,8 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
+import static net.osmand.plus.views.mapwidgets.TopToolbarController.NO_COLOR;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -27,13 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.UiContext;
+import androidx.annotation.*;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SwitchCompat;
@@ -55,7 +52,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.help.HelpArticleUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.render.RenderingIcons;
@@ -63,6 +61,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.TextViewEx;
@@ -70,6 +69,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.plus.widgets.style.CustomURLSpan;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -622,6 +622,17 @@ public class UiUtilities {
 	}
 
 	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId) {
+		return inflate(ctx, nightMode, layoutId, null, false);
+	}
+
+	@NonNull
+	public static View inflate(@NonNull Context ctx, boolean nightMode, @LayoutRes int layoutId,
+	                           @Nullable ViewGroup root, boolean attachToRoot) {
+		return getInflater(ctx, nightMode).inflate(layoutId, root, attachToRoot);
+	}
+
+	@NonNull
 	public static LayoutInflater getInflater(@NonNull Context ctx, boolean nightMode) {
 		return LayoutInflater.from(getThemedContext(ctx, nightMode));
 	}
@@ -663,9 +674,14 @@ public class UiUtilities {
 	}
 
 	@NonNull
-	public static SpannableString createUrlSpannable(@NonNull String text, @NonNull String url) {
+	public static SpannableString createUrlSpannable(@NonNull OsmandApplication app, @NonNull String text, @NonNull String url) {
+		String localizedUrl = HelpArticleUtils.getLocalizedUrl(app, url);
+		if (!Algorithms.stringsEqual(localizedUrl, url)) {
+			text = text.replace(url, localizedUrl);
+		}
 		SpannableString spannable = new SpannableString(text);
-		setSpan(spannable, new CustomURLSpan(url), text, url);
+		setSpan(spannable, new CustomURLSpan(localizedUrl), text, localizedUrl);
+
 		return spannable;
 	}
 
@@ -713,14 +729,14 @@ public class UiUtilities {
 	public static void updateStatusBarColor(@NonNull MapActivity activity) {
 		int colorId = -1;
 		boolean nightModeForContent = true;
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 		MapLayers mapLayers = activity.getMapLayers();
 
 		MapFragmentsHelper fragmentsHelper = activity.getFragmentsHelper();
-		BaseOsmAndFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+		BaseFullScreenFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.fragmentContainer);
 		BaseSettingsFragment settingsFragmentAboveDashboard = fragmentsHelper.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
-		BaseOsmAndFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+		BaseFullScreenFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 		if (fragmentAboveDashboard != null) {
 			colorId = fragmentAboveDashboard.getStatusBarColorId();
 			nightModeForContent = fragmentAboveDashboard.getContentStatusBarNightMode();
@@ -738,34 +754,34 @@ public class UiUtilities {
 			colorId = R.color.status_bar_transparent_gradient;
 		}
 		if (colorId != -1) {
-			activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+			AndroidUiHelper.setStatusBarColor(activity, ContextCompat.getColor(activity, colorId));
 			AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 			return;
 		}
 
-		int color = TopToolbarController.NO_COLOR;
-		boolean mapControlsVisible = activity.findViewById(R.id.map_hud_layout).getVisibility() == View.VISIBLE;
-		boolean topToolbarVisible = mapLayers.getMapInfoLayer().isTopToolbarViewVisible();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		MapInfoLayer infoLayer = mapLayers.getMapInfoLayer();
+		boolean mapControlsVisible = infoLayer.isMapControlsVisible();
+		boolean topToolbarVisible = infoLayer.isTopToolbarViewVisible();
+		boolean nightMode = app.getDaynightHelper().isNightMode(OVER_MAP);
 
-		TopToolbarController toolbarController = mapLayers.getMapInfoLayer().getTopToolbarController();
+		int color = NO_COLOR;
+		TopToolbarController toolbarController = infoLayer.getTopToolbarController();
 		if (toolbarController != null && mapControlsVisible && topToolbarVisible) {
-			color = toolbarController.getStatusBarColor(activity, night);
+			color = toolbarController.getStatusBarColor(activity, nightMode);
 		}
-		if (color == TopToolbarController.NO_COLOR) {
+		if (color == NO_COLOR) {
 			ApplicationMode appMode = settings.getApplicationMode();
 			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, night);
+			int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, nightMode);
 			if (colorIdForTopWidget != -1) {
-				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, night);
+				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, nightMode);
 			}
 
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
 			color = ContextCompat.getColor(activity, colorId);
 		}
-		activity.getWindow().setStatusBarColor(color);
-
+		AndroidUiHelper.setStatusBarColor(activity, color);
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 	}
 

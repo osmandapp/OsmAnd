@@ -2,13 +2,11 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController.PROCESS_ID;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -24,7 +22,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
@@ -37,7 +35,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
+public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
 
 	private static final String TAG = ChangeAppearanceFragment.class.getSimpleName();
 
@@ -46,23 +44,13 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity activity = requireActivity();
-		Dialog dialog = new Dialog(activity, getThemeId()) {
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
 			@Override
 			public void onBackPressed() {
 				dismiss();
 			}
 		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ColorUtilities.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Override
@@ -77,7 +65,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_tracks_change_appearance, container);
+		View view = inflate(R.layout.fragment_tracks_change_appearance, container, false);
 		view.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
 		setupToolbar(view);
@@ -183,7 +171,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		controller.getWidthCardController().setOnNeedScrollListener(y -> {
 			View view = getView();
 			if (view != null) {
-				int bottomVisibleY = view.findViewById(R.id.buttons_container).getTop();
+				int bottomVisibleY = view.findViewById(R.id.bottom_buttons_container).getTop();
 				if (y > bottomVisibleY) {
 					ScrollView scrollView = view.findViewById(R.id.scroll_view);
 					int diff = y - bottomVisibleY;

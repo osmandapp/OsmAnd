@@ -38,7 +38,7 @@
 				android:layout_marginBottom="@dimen/content_padding_half"
 				app:srcCompat="@drawable/widget_coordinates_latitude_day" />
 
-			<net.osmand.plus.widgets.TextViewEx
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/first_coordinate"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
 				android:layout_marginBottom="@dimen/content_padding_half"
 				app:srcCompat="@drawable/widget_coordinates_longitude_day" />
 
-			<net.osmand.plus.widgets.TextViewEx
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/second_coordinate"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"

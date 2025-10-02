@@ -2,37 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/buttons_container"
+	android:id="@+id/bottom_buttons_container"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/dialog_button_ex_height"
-	android:gravity="center"
+	android:gravity="top"
 	android:layout_gravity="bottom"
 	android:orientation="horizontal"
 	android:paddingHorizontal="@dimen/content_padding">
 
-	<net.osmand.plus.widgets.dialogbutton.DialogButton
-		android:id="@+id/dismiss_button"
-		android:layout_width="0dp"
-		android:layout_weight="1"
-		android:layout_height="wrap_content"
-		app:dialogButtonType="secondary"
-		tools:dialogButtonTitle="@string/shared_string_close"/>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_ex_height"
+		android:gravity="center">
 
-	<View
-		android:id="@+id/buttons_divider"
-		android:layout_width="@dimen/content_padding"
-		android:layout_height="match_parent"
-		android:visibility="gone"
-		tools:visibility="visible" />
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/dismiss_button"
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondary"
+			tools:dialogButtonTitle="@string/shared_string_close"/>
 
-	<net.osmand.plus.widgets.dialogbutton.DialogButton
-		android:id="@+id/right_bottom_button"
-		android:layout_width="0dp"
-		android:layout_weight="1"
-		android:layout_height="wrap_content"
-		app:dialogButtonType="primary"
-		android:visibility="gone"
-		tools:visibility="visible"
-		tools:dialogButtonTitle="@string/shared_string_apply" />
+		<View
+			android:id="@+id/buttons_divider"
+			android:layout_width="@dimen/content_padding"
+			android:layout_height="match_parent"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/right_bottom_button"
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			app:dialogButtonType="primary"
+			android:visibility="gone"
+			tools:visibility="visible"
+			tools:dialogButtonTitle="@string/shared_string_apply" />
+
+	</LinearLayout>
 
 </LinearLayout>

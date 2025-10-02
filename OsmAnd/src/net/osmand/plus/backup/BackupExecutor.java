@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.CollectionUtils;
 
@@ -64,7 +65,7 @@ public class BackupExecutor extends ThreadPoolExecutor {
 		updateActiveCommands();
 		if (command.getStatus() == AsyncTask.Status.PENDING) {
 			activeCommands = CollectionUtils.addToList(activeCommands, command);
-			command.executeOnExecutor(this);
+			OsmAndTaskManager.executeTask(command, this, (Object[]) null);
 		}
 	}
 

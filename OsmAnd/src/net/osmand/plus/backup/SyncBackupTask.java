@@ -2,6 +2,7 @@ package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
@@ -21,6 +22,7 @@ import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -40,7 +42,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	private final SyncOperationType operation;
 	private final OnBackupSyncListener syncListener;
-	private final boolean singleOperation;
+	private final boolean syncOperation;
 
 	private int maxProgress;
 	private int importProgress;
@@ -53,7 +55,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		this.app = app;
 		this.key = key;
 		this.operation = operation;
-		this.singleOperation = operation != SYNC_OPERATION_SYNC;
+		this.syncOperation = operation == SYNC_OPERATION_SYNC;
 		this.syncListener = syncListener;
 		this.backupHelper = app.getBackupHelper();
 		this.networkSettingsHelper = app.getNetworkSettingsHelper();
@@ -102,8 +104,16 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		if (syncListener != null) {
 			syncListener.onBackupSyncStarted();
 		}
-		if (settingsItems.size() > 0 && operation != SYNC_OPERATION_UPLOAD) {
-			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this);
+		if (operation != SYNC_OPERATION_UPLOAD) {
+			if (!Algorithms.isEmpty(settingsItems)) {
+				try {
+					networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this);
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+			} else {
+				onImportFinished(false, false, settingsItems);
+			}
 		} else if (operation != SYNC_OPERATION_DOWNLOAD) {
 			uploadNewItems();
 		} else {
@@ -134,15 +144,20 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	private void uploadNewItems() {
+		BackupInfo info = backupHelper.getBackup().getBackupInfo();
+		if (info != null) {
+			uploadNewItems(info.itemsToUpload, info.itemsToDelete, info.itemsToLocalDelete);
+		}
+	}
+
+	private void uploadNewItems(@NonNull List<SettingsItem> itemsToUpload,
+	                            @NonNull List<SettingsItem> itemsToDelete,
+	                            @NonNull List<SettingsItem> itemsToLocalDelete) {
 		if (isCancelled()) {
 			return;
 		}
 		try {
-			BackupInfo info = backupHelper.getBackup().getBackupInfo();
-			List<SettingsItem> itemsToUpload = info.itemsToUpload;
-			List<SettingsItem> itemsToDelete = info.itemsToDelete;
-			List<SettingsItem> itemsToLocalDelete = info.itemsToLocalDelete;
-			if (itemsToUpload.size() > 0 || itemsToDelete.size() > 0 || itemsToLocalDelete.size() > 0) {
+			if (!itemsToUpload.isEmpty() || !itemsToDelete.isEmpty() || !itemsToLocalDelete.isEmpty()) {
 				networkSettingsHelper.exportSettings(BACKUP_ITEMS_KEY, itemsToUpload, itemsToDelete, itemsToLocalDelete, this);
 			} else {
 				onSyncFinished(null);
@@ -175,7 +190,9 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
-		startSync();
+		if (syncOperation) {
+			startSync();
+		}
 	}
 
 	@Override
@@ -187,11 +204,20 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		if (succeed) {
 			BackupUtils.updateCacheForItems(app, items);
 		}
-		if (singleOperation) {
-			onSyncFinished(null);
-		} else {
+		if (syncOperation) {
 			uploadNewItems();
+		} else if (operation == SYNC_OPERATION_DOWNLOAD && !isSingleItemOperation()) {
+			BackupInfo info = backupHelper.getBackup().getBackupInfo();
+			if (info != null) {
+				uploadNewItems(Collections.emptyList(), Collections.emptyList(), info.itemsToLocalDelete);
+			}
+		} else {
+			onSyncFinished(null);
 		}
+	}
+
+	private boolean isSingleItemOperation() {
+		return !SYNC_ITEMS_KEY.equals(key);
 	}
 
 	@Override

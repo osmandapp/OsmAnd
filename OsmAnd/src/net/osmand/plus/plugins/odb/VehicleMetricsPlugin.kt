@@ -14,7 +14,6 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.MainThread
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -30,10 +29,21 @@ import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
+import net.osmand.plus.plugins.externalsensors.DevicesHelper
+import net.osmand.plus.plugins.externalsensors.VehicleMetricsBLEDeviceHelper
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener
+import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice
+import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.plugins.weather.units.TemperatureUnit
 import net.osmand.plus.settings.backend.ApplicationMode
+import net.osmand.plus.settings.backend.preferences.CommonPreference
+import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider
 import net.osmand.plus.settings.backend.preferences.ListStringPreference
+import net.osmand.plus.settings.enums.VolumeUnit
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
@@ -68,6 +78,9 @@ import org.json.JSONObject
 import java.util.UUID
 
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadStatusListener {
+
+	private val DEVICES_SEARCH_TIMEOUT: Int = 20000
+
 	private var mapActivity: MapActivity? = null
 
 	private val handler = Handler(Looper.getMainLooper())
@@ -77,6 +90,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private var currentReconnectAttempt = 0
 
 	private var connectionState = OBDConnectionState.DISCONNECTED
+	val OBD_DEVICES_SETTINGS_PREF_ID: String = "obd_devices_settings"
 
 	val USED_OBD_DEVICES =
 		registerStringPreference("used_obd_devices", "").makeGlobal().cache();
@@ -91,6 +105,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
 	private var connectedDeviceInfo: BTDeviceInfo? = null
 	private var scanDevicesListener: ScanOBDDevicesListener? = null
+	private var scanBLEDevicesListener: ScanBLEDevicesListener? = null
+
 	private var connectionStateListener: ConnectionStateListener? = null
 	private var pairingDevice: BTDeviceInfo? = null
 
@@ -109,6 +125,20 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	interface ConnectionStateListener {
 		fun onStateChanged(state: OBDConnectionState, deviceInfo: BTDeviceInfo)
 	}
+
+	private val deviceSettingsPreferenceProvider: CommonPreferenceProvider<String> =
+		object : CommonPreferenceProvider<String> {
+			override fun getPreference(): CommonPreference<String> {
+				return registerStringPref(OBD_DEVICES_SETTINGS_PREF_ID, "")
+			}
+		}
+
+	fun registerStringPref(prefId: String, defValue: String?): CommonPreference<String> {
+		return registerStringPreference(prefId, defValue).makeGlobal().makeShared()
+	}
+
+	private val devicesHelper: DevicesHelper =
+		VehicleMetricsBLEDeviceHelper(this, app, deviceSettingsPreferenceProvider)
 
 	private fun BluetoothSocket?.safeClose() {
 		try {
@@ -185,6 +215,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				customId,
 				widgetsPanel)
 
+			// TODO: OBD Battery widget
+//			WidgetType.OBD_ALT_BATTERY_VOLTAGE -> return OBDTextWidget(
+//				mapActivity,
+//				WidgetType.OBD_ALT_BATTERY_VOLTAGE,
+//				OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
+//				customId,
+//				widgetsPanel)
+
 			WidgetType.OBD_BATTERY_VOLTAGE -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_BATTERY_VOLTAGE,
@@ -260,7 +298,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	override fun init(app: OsmandApplication, activity: Activity?): Boolean {
 		settings.SIMULATE_OBD_DATA.addListener(simulateOBDListener)
+		devicesHelper.setActivity(activity)
 		return true
+	}
+
+	override fun disable(app: OsmandApplication) {
+		super.disable(app)
+		devicesHelper.disconnectDevices()
+		devicesHelper.deinitBLE()
 	}
 
 	private val simulateOBDListener = StateChangedListener<Boolean> { enabled ->
@@ -273,14 +318,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		mapActivity: MapActivity,
 		helper: ContextMenuAdapter) {
 		if (isActive) {
-			helper.addItem(ContextMenuItem(DRAWER_VEHICLE_METRICS_ID)
-				.setTitleId(R.string.obd_plugin_name, mapActivity)
-				.setIcon(R.drawable.ic_action_car_info)
-				.setListener { _: OnDataChangeUiAdapter?, _: View?, _: ContextMenuItem?, _: Boolean ->
-					app.logEvent("obdOpen")
-					OBDDevicesListFragment.showInstance(mapActivity.supportFragmentManager)
-					true
-				})
+			helper.addItem(
+				ContextMenuItem(DRAWER_VEHICLE_METRICS_ID)
+					.setTitleId(R.string.obd_plugin_name, mapActivity)
+					.setIcon(R.drawable.ic_action_car_info)
+					.setListener { _: OnDataChangeUiAdapter?, _: View?, _: ContextMenuItem?, _: Boolean ->
+						app.logEvent("obdOpen")
+						OBDDevicesListFragment.showInstance(mapActivity.supportFragmentManager)
+						true
+					})
 		}
 	}
 
@@ -308,6 +354,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	@MainThread
 	fun disconnect(forgetCurrentDeviceConnected: Boolean) {
+		LOG.info("VMPlugin disconnect")
 		obdDispatcher?.stopReading()
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
@@ -354,14 +401,25 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	@SuppressLint("MissingPermission")
 	@MainThread
 	private fun connectToObdInternal(activity: Activity, deviceInfo: BTDeviceInfo) {
-		if (connectionState != OBDConnectionState.DISCONNECTED) {
-			disconnect(false)
-		}
 		currentReconnectAttempt--
 		if (currentReconnectAttempt < 0) {
 			return
 		}
+		saveDeviceToUsedOBDDevicesList(deviceInfo)
 		LOG.debug("connectToObd $deviceInfo reconnectCount $currentReconnectAttempt")
+		if (deviceInfo.isBLE) {
+			val bleDevice = getBLEOBDDeviceById(deviceInfo.address)
+			if (bleDevice != null) {
+				if (!devicesHelper.isDevicePaired(bleDevice)) {
+					devicesHelper.setDevicePaired(bleDevice, true)
+				}
+				connectDevice(activity, bleDevice, deviceInfo)
+			}
+			return
+		}
+		if (connectionState != OBDConnectionState.DISCONNECTED) {
+			disconnect(true)
+		}
 		if (BLEUtils.isBLEEnabled(activity)) {
 			if (AndroidUtils.hasBLEPermission(activity)) {
 				onConnecting(deviceInfo)
@@ -389,6 +447,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	private fun createOBDDispatcher(): OBDDispatcher {
+		LOG.info("createOBDDispatcher")
 		obdDispatcher?.apply {
 			setReadStatusListener(null)
 			stopReading()
@@ -418,6 +477,37 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			}
 
 			override fun disconnect() {
+			}
+		})
+	}
+
+	fun connectToDevice(device: BLEOBDDevice) {
+		createOBDDispatcher().connect(object : OBDConnector {
+
+			override fun connect(): Pair<Source, Sink> {
+				return Pair(device, device)
+			}
+
+			override fun disconnect() {
+				LOG.debug("VMPlugin OBDConnector disconnect")
+				app.runInUIThread {
+					disconnect(true)
+				}
+			}
+
+			override fun onConnectionSuccess() {
+				LOG.debug("VMPlugin OBDConnector success")
+				app.runInUIThread {
+					val deviceToConnect = BTDeviceInfo(
+						device.name,
+						device.deviceId,
+						true)
+					onDeviceConnected(deviceToConnect)
+				}
+			}
+
+			override fun onConnectionFailed() {
+				LOG.debug("VMPlugin OBDConnector failed")
 			}
 		})
 	}
@@ -465,7 +555,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private fun onDisconnected(deviceInfo: BTDeviceInfo?) {
 		connectionState = OBDConnectionState.DISCONNECTED
 		deviceInfo?.let {
-			connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED, it)
+			app.runInUIThread({connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED, it)})
+			if (it.isBLE) {
+				val device = getBLEOBDDeviceById(it.address);
+				device?.disconnect()
+			}
 		}
 	}
 
@@ -510,6 +604,32 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	companion object {
 		private val LOG = PlatformUtil.getLog(VehicleMetricsPlugin::class.java)
 		val REQUEST_BT_PERMISSION_CODE = 50
+
+		fun getFormatDistancePerVolume(
+			metersPerLiter: Float,
+			mc: MetricsConstants,
+			volumeUnit: VolumeUnit): Float {
+			val litersInVolume = OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, 1f)
+
+			val distanceInMeters = when (mc) {
+				MetricsConstants.MILES_AND_YARDS,
+				MetricsConstants.MILES_AND_FEET,
+				MetricsConstants.MILES_AND_METERS -> {
+					OsmAndFormatter.METERS_IN_ONE_MILE
+				}
+
+				MetricsConstants.NAUTICAL_MILES_AND_FEET,
+				MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
+					OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
+				}
+
+				else -> {
+					OsmAndFormatter.METERS_IN_KILOMETER
+				}
+			}
+
+			return metersPerLiter / litersInVolume / distanceInMeters
+		}
 	}
 
 	override fun onIOError() {
@@ -553,7 +673,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
 		if (deviceInfo.address.isNotEmpty()) {
 			val currentList = getUsedOBDDevicesList().toMutableList()
-			val savedDevice = currentList.find { it.address == deviceInfo.address }
+			val savedDevice = currentList.find { it.address == deviceInfo.address && it.isBLE == deviceInfo.isBLE}
 			if (savedDevice == null) {
 				currentList.add(deviceInfo)
 				writeUsedOBDDevicesList(currentList)
@@ -567,14 +687,21 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		}
 	}
 
-	fun setDeviceName(address: String, newName: String) {
-		removeDeviceToUsedOBDDevicesList(address)
-		saveDeviceToUsedOBDDevicesList(BTDeviceInfo(newName, address))
+	fun setDeviceName(address: String, newName: String, isBLE: Boolean) {
+		removeDeviceToUsedOBDDevicesList(address, isBLE)
+		saveDeviceToUsedOBDDevicesList(BTDeviceInfo(newName, address, isBLE))
 	}
 
-	fun removeDeviceToUsedOBDDevicesList(address: String) {
-		val device = getUsedOBDDevicesList().find { info -> info.address == address }
+	fun removeDeviceToUsedOBDDevicesList(address: String, isBLE: Boolean) {
+		val device =
+			getUsedOBDDevicesList().find { info -> info.address == address && info.isBLE == isBLE }
 		if (device != null) {
+			if (isBLE) {
+				val bleDevice = getBLEOBDDeviceById(address)
+				bleDevice?.let {
+					devicesHelper.setDevicePaired(it, false)
+				}
+			}
 			removeDeviceToUsedOBDDevicesList(device)
 		}
 	}
@@ -708,25 +835,27 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	override fun mapActivityCreate(activity: MapActivity) {
 		super.mapActivityCreate(activity)
 		connectToLastConnectedDevice(activity, RECONNECT_ATTEMPTS_COUNT)
+		devicesHelper.setActivity(activity)
+	}
+
+	override fun mapActivityDestroy(activity: MapActivity) {
+		super.mapActivityDestroy(activity)
+		devicesHelper.setActivity(null)
 	}
 
 	private fun connectToLastConnectedDevice(activity: MapActivity, attemptsCount: Int) {
 		val lastConnectedDevice = getLastConnectedDevice()
 		val registry = app.osmandMap.mapLayers.mapWidgetRegistry
 		if (connectedDeviceInfo == null && lastConnectedDevice != null && registry.allWidgets.any {
-				it.widget is OBDTextWidget &&  it.isEnabledForAppMode(app.settings.applicationMode)}) {
+				it.widget is OBDTextWidget && it.isEnabledForAppMode(app.settings.applicationMode)
+			}) {
 			currentReconnectAttempt = attemptsCount
 			connectToObdInternal(activity, lastConnectedDevice)
 		}
 	}
 
-	fun getWidgetValue(computerWidget: OBDDataComputer.OBDComputerWidget): String {
-		return getWidgetValue(computerWidget, null)
-	}
-
 	fun getWidgetValue(
-		computerWidget: OBDDataComputer.OBDComputerWidget,
-		obdWidgetOptions: OBDWidgetOptions?): String {
+		computerWidget: OBDDataComputer.OBDComputerWidget): String {
 		val data = computerWidget.computeValue()
 		if (data == "N/A") {
 			return "N/A"
@@ -747,8 +876,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(
-				data as Number,
-				obdWidgetOptions)
+				data as Number)
 
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> getFormattedVolume(data as Number)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHour(
@@ -760,6 +888,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
+			OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT,
@@ -768,18 +897,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.VIN,
 			OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE,
 			OBDDataComputer.OBDTypeWidget.RPM -> data
+
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER -> getFormatDistancePerVolume(
+				data as Number)
 		}
 
 		return computerWidget.type.formatter.format(convertedData)
 	}
 
 	fun getWidgetUnit(computerWidget: OBDDataComputer.OBDComputerWidget): String? {
-		return getWidgetUnit(computerWidget, null)
-	}
-
-	fun getWidgetUnit(
-		computerWidget: OBDDataComputer.OBDComputerWidget,
-		obdWidgetOptions: OBDWidgetOptions?): String? {
 		return when (computerWidget.type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getSpeedUnit()
 			OBDDataComputer.OBDTypeWidget.RPM -> app.getString(R.string.rpm_unit)
@@ -799,15 +925,17 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> (obdWidgetOptions?.getTemperatureUnit()?.symbol
-				?: getTemperatureUnit().symbol)
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> getTemperatureUnit().symbol
 
+			OBDDataComputer.OBDTypeWidget.ADAPTER_BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE -> app.getString(R.string.unit_volt)
+
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME,
 			OBDDataComputer.OBDTypeWidget.VIN -> null
 
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistanceUnit()
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER -> getFormatDistancePerVolumeUnit()
 		}
 	}
 
@@ -817,10 +945,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			data.toFloat())
 	}
 
-	private fun getConvertedTemperature(data: Number, obdWidgetOptions: OBDWidgetOptions?): Float {
-		val temperatureUnit = obdWidgetOptions?.getTemperatureUnit() ?: getTemperatureUnit()
+	private fun getConvertedTemperature(data: Number): Float {
 		val temperature = data.toFloat()
-		return if (temperatureUnit == TemperatureUnit.CELSIUS) {
+		return if (getTemperatureUnit() == TemperatureUnit.CELSIUS) {
 			temperature
 		} else {
 			temperature * 1.8f + 32
@@ -852,6 +979,42 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, "100$distanceUnit")
 	}
 
+	private fun getFormatDistancePerVolumeUnit(): String {
+		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
+		val distanceUnit: String = when (mc) {
+			MetricsConstants.MILES_AND_YARDS,
+			MetricsConstants.MILES_AND_FEET,
+			MetricsConstants.MILES_AND_METERS -> {
+				app.getString(R.string.mile)
+			}
+
+			MetricsConstants.NAUTICAL_MILES_AND_FEET,
+			MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
+				app.getString(R.string.nm)
+			}
+
+			else -> {
+				app.getString(R.string.km)
+			}
+		}
+		val volume = settings.UNIT_OF_VOLUME.get()
+		val volumeUnit = volume.getUnitSymbol(app)
+		return if ((mc == MetricsConstants.MILES_AND_FEET ||
+					mc == MetricsConstants.MILES_AND_YARDS ||
+					mc == MetricsConstants.MILES_AND_METERS) &&
+			(volume == VolumeUnit.US_GALLONS || volume == VolumeUnit.IMPERIAL_GALLONS))
+			app.getString(R.string.mpg)
+		else
+			app.getString(R.string.ltr_or_rtl_combine_via_slash, distanceUnit, volumeUnit)
+	}
+
+	private fun getFormatDistancePerVolume(metersPerLiter: Number): Float {
+		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
+		val volumeUnit = settings.UNIT_OF_VOLUME.get()
+		val metersPerLiterFloat = metersPerLiter.toFloat()
+		return getFormatDistancePerVolume(metersPerLiterFloat, mc, volumeUnit)
+	}
+
 	private fun getFormatVolumePerDistance(litersPer100km: Number): Float {
 		val volumeResult: Float
 		val volumeUnit = settings.UNIT_OF_VOLUME.get()
@@ -861,11 +1024,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
 		return when (mc) {
 			MetricsConstants.MILES_AND_YARDS, MetricsConstants.MILES_AND_FEET, MetricsConstants.MILES_AND_METERS -> {
-				volumeResult * OsmAndFormatter.METERS_IN_ONE_MILE
+				volumeResult * OsmAndFormatter.METERS_IN_ONE_MILE / 1000
 			}
 
 			MetricsConstants.NAUTICAL_MILES_AND_FEET, MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
-				volumeResult * OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
+				volumeResult * OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE / 1000
 			}
 
 			else -> {
@@ -913,7 +1076,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	private fun getTemperatureUnit(): TemperatureUnit {
-		return app.weatherHelper.weatherSettings.weatherTempUnit.get()
+		return app.settings.temperatureUnit
 	}
 
 	override fun attachAdditionalInfoToRecordedTrack(location: Location, json: JSONObject) {
@@ -957,5 +1120,68 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		mapActivity?.let {
 			connectToLastConnectedDevice(it, RECALCULATE_RECONNECT_ATTEMPTS_COUNT)
 		}
+	}
+
+	fun getBLEOBDDeviceById(deviceId: String): BLEOBDDevice? {
+		val device = devicesHelper.getAnyDevice(deviceId)
+		return if (device is BLEOBDDevice) device else null
+	}
+
+	fun searchBLEDevices() {
+		devicesHelper.scanBLEDevices(true)
+		Handler(Looper.myLooper()!!).postDelayed(
+			{ this.finishBLEDevicesSearch() },
+			DEVICES_SEARCH_TIMEOUT.toLong())
+	}
+
+	fun onBLEDeviceFound(device: BLEOBDDevice) {
+		scanBLEDevicesListener?.onDeviceFound(device)
+	}
+
+	fun finishBLEDevicesSearch() {
+		devicesHelper.scanBLEDevices(false)
+		scanBLEDevicesListener?.onScanFinished(
+			devicesHelper.unpairedDevices
+				.filterIsInstance<BLEOBDDevice>())
+	}
+
+	fun setScanBLEDevicesListener(listener: ScanBLEDevicesListener?) {
+		scanBLEDevicesListener = listener
+	}
+
+	interface ScanBLEDevicesListener {
+		fun onScanFinished(foundDevices: List<BLEOBDDevice>)
+		fun onDeviceFound(foundDevice: BLEOBDDevice)
+	}
+
+	private fun isDevicePaired(device: AbstractDevice<*>): Boolean {
+		return devicesHelper.isDevicePaired(device)
+	}
+
+	private fun connectDevice(activity: Activity?, device: BLEOBDDevice, deviceInfo: BTDeviceInfo) {
+		if (isDevicePaired(device)) {
+			devicesHelper.setDeviceEnabled(device, true)
+		}
+		device.addListener(object : DeviceListener {
+			override fun onDeviceConnecting(device: AbstractDevice<*>) {
+				onConnecting(deviceInfo)
+			}
+
+			override fun onDeviceConnect(
+				device: AbstractDevice<*>,
+				result: DeviceConnectionResult,
+				error: String?) {
+				onDeviceConnected(deviceInfo)
+			}
+
+			override fun onDeviceDisconnect(device: AbstractDevice<*>) {
+				onDisconnected(deviceInfo)
+			}
+
+			override fun onSensorData(sensor: AbstractSensor, data: SensorData) {
+			}
+
+		})
+		devicesHelper.connectDevice(activity, device)
 	}
 }

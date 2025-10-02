@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.osmedit.quickactions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.ADD_OSM_BUG_ACTION_ID;
 
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -20,6 +20,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditsLayer;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.Objects;
 
@@ -43,15 +44,15 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
-		super.execute(mapActivity);
+			super.execute(mapActivity, params);
 		}
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			double lat = latLon.getLatitude();
@@ -78,9 +79,8 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_add_bug, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_add_bug, parent, false);
 		setupPointLocationView(view.findViewById(R.id.point_location_container), mapActivity);
 
 		SwitchCompat swShowDialog = view.findViewById(R.id.dialogSwitch);

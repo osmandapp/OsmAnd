@@ -17,7 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -25,7 +24,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -38,8 +36,6 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	private static final String FOLDER_NAME_KEY = "folder_name_key";
 	private static final String FOLDER_PATH_KEY = "folder_path_key";
 
-	private OsmandApplication app;
-
 	private TextInputEditText editText;
 	private TextInputLayout nameTextBox;
 
@@ -51,7 +47,6 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 
 		if (savedInstanceState != null) {
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
@@ -66,7 +61,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.add_new_folder)));
 
-		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.track_name_edit_text, null);
+		View view = inflate(R.layout.track_name_edit_text);
 		nameTextBox = view.findViewById(R.id.name_text_box);
 		int textBoxBgColorId = nightMode ? R.color.card_and_list_background_light : R.color.activity_background_color_light;
 		int textBoxBgColor = ContextCompat.getColor(app, textBoxBgColorId);
@@ -93,7 +88,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 				.create();
 		items.add(editFolderName);
 
-		items.add(new DividerSpaceItem(app, AndroidUtils.dpToPx(app, 12)));
+		items.add(new DividerSpaceItem(app, dpToPx(12)));
 	}
 
 	@Override
@@ -138,8 +133,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		AndroidUtils.hideSoftKeyboard(requireActivity(), editText);
 		Fragment fragment = getTargetFragment();
 		if (!Algorithms.isBlank(folderName)) {
-			if (fragment instanceof OnTrackFolderAddListener) {
-				OnTrackFolderAddListener listener = (OnTrackFolderAddListener) fragment;
+			if (fragment instanceof OnTrackFolderAddListener listener) {
 				listener.onTrackFolderAdd(folderName);
 			}
 			dismiss();

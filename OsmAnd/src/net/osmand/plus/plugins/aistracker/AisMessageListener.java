@@ -12,7 +12,6 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.DatagramSocket;
@@ -35,7 +34,7 @@ public class AisMessageListener {
     private SentenceReader sentenceReader = null;
     private Stack<SentenceListener> listenerList = null;
 
-    public AisMessageListener(int port, @NonNull AisTrackerLayer layer) {
+    public AisMessageListener(@NonNull AisTrackerLayer layer, int port) {
         initMembers(layer);
         try {
             udpSocket = new DatagramSocket(port);
@@ -60,7 +59,7 @@ public class AisMessageListener {
         }
     }
 
-    public AisMessageListener(@NonNull String serverIp, int serverPort, @NonNull AisTrackerLayer layer) {
+    public AisMessageListener(@NonNull AisTrackerLayer layer, @NonNull String serverIp, int serverPort) {
         initMembers(layer);
         TimerTask taskCheckNetworkConnection = new TimerTask() {
             @Override
@@ -88,6 +87,7 @@ public class AisMessageListener {
         this.timer = new Timer();
         timer.schedule(taskCheckNetworkConnection, 1000, 30000);
     }
+
     private void initMembers(@NonNull AisTrackerLayer aisLayer) {
         this.layer = aisLayer;
         this.udpSocket = null;
@@ -170,7 +170,7 @@ public class AisMessageListener {
         return (tcpSocket != null) && (tcpStream != null);
     }
 
-    private void handleAisMessage(int aisType, Object obj) {
+    protected void handleAisMessage(int aisType, Object obj) {
         AisObject ais = null;
         int msgType = 0;
         int mmsi = 0;

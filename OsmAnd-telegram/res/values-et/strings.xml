@@ -100,10 +100,10 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (sõnumirakendus) on kasutusel inimestega kontakteerumiseks ja suhtlemiseks.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker on üks Telegrami avatud platvormi kasutavaid kliente. Teie kontaktid saavad kasutada mis tahes muud Telegrami klienti.</string>
-    <string name="privacy_policy_agree">Vajutades „Jätka“ nõustud Telegram\'i ja OsmAnd\'i rakenduste privaatsuspoliitika tingimustega.</string>
+    <string name="privacy_policy_agree">Vajutades „Jätka“ nõustud Telegrami ja OsmAndi rakenduste andmekaitsepõhimõtete tingimustega.</string>
     <string name="shared_string_accept">Nõustu</string>
-    <string name="telegram_privacy_policy">Telegram privaatsuspoliitika</string>
-    <string name="osmand_privacy_policy">OsmAnd privaatsuspoliitika</string>
+    <string name="telegram_privacy_policy">Telegrami andmekaitsepõhimõtted</string>
+    <string name="osmand_privacy_policy">OsmAndi andmekaitsepõhimõtted</string>
     <string name="how_it_works">Kuidas see töötab</string>
     <string name="received_gps_points">Saadud GPX punktid: %1$s</string>
     <string name="shared_string_appearance">Välimus</string>

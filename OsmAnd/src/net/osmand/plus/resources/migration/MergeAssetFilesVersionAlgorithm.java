@@ -57,13 +57,13 @@ public class MergeAssetFilesVersionAlgorithm {
 			// Check if file and assets entry versions are not the same
 			if (destFile.lastModified() != versionTime) {
 				// Check if file from assets and existed file have the same content
-				try(InputStream fileIS = new FileInputStream(destFile)) {
+				try (InputStream fileIS = new FileInputStream(destFile)) {
 					InputStream assetIS = assetManager.open(entry.source, AssetManager.ACCESS_STREAMING);
 					if (isContentIdentical(fileIS, assetIS)) {
 						// If content has not been changed, we can set version from assets
 						boolean updated = destFile.setLastModified(versionTime);
 					}
-				} catch (IOException e) {
+				} catch (Exception e) {
 					LOG.error("Error while checking files content equality: " + e.getMessage());
 				}
 			}

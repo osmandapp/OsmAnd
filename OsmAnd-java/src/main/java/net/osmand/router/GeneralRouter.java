@@ -54,6 +54,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String WEIGHT_RATING = "weightrating";
 	public static final String ALLOW_VIA_FERRATA = "allow_via_ferrata";
 	public static final String CHECK_ALLOW_PRIVATE_NEEDED = "check_allow_private_needed";
+	private static final double MIN_DISTANCE_SLOPE_ROUND = 10;
 
 	private static boolean USE_CACHE = true;
 	public static long TIMER = 0;
@@ -203,7 +204,7 @@ public class GeneralRouter implements VehicleRouter {
 		this.attributes = new LinkedHashMap<String, String>();
 		this.parameterValues = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
-		while(e.hasNext()){
+		while (e.hasNext()) {
 			Entry<String, String> next = e.next();
 			addAttribute(next.getKey(), next.getValue());
 		}
@@ -357,16 +358,22 @@ public class GeneralRouter implements VehicleRouter {
 	
 	public int registerTagValueAttribute(String tag, String value) {
 		String key = tag +"$"+value;
-		if(universalRules.containsKey(key)) {
+		if (universalRules.containsKey(key)) {
 			return universalRules.get(key);
 		}
-		int id = universalRules.size();
-		universalRulesById.add(key);
-		universalRules.put(key, id);
-		if(!tagRuleMask.containsKey(tag)) {
-			tagRuleMask.put(tag, new BitSet());
+		int id = registerSyncTagValue(this, tag, key);
+		return id;
+	}
+
+	// Important: as we keep parent copy we need static synchronized to lock on all instances
+	private synchronized static int registerSyncTagValue(GeneralRouter r, String tag, String key) {
+		int id = r.universalRules.size();
+		r.universalRulesById.add(key);
+		r.universalRules.put(key, id);
+		if(!r.tagRuleMask.containsKey(tag)) {
+			r.tagRuleMask.put(tag, new BitSet());
 		}
-		tagRuleMask.get(tag).set(id);
+		r.tagRuleMask.get(tag).set(id);
 		return id;
 	}
 	
@@ -506,7 +513,7 @@ public class GeneralRouter implements VehicleRouter {
 			double dist = startIndex < endIndex ? heightArray[2 * knext] : heightArray[2 * k]  ;
 			double diff = heightArray[2 * knext + 1] - heightArray[2 * k + 1] ;
 			if(diff != 0 && dist > 0) {
-				double incl = Math.abs(diff / dist);
+				double incl = Math.abs(diff / Math.max(dist, MIN_DISTANCE_SLOPE_ROUND));
 				int percentIncl = (int) (incl * 100);
 				percentIncl = (percentIncl + 2)/ 3 * 3 - 2; // 1, 4, 7, 10, .   
 				if(percentIncl >= 1) {

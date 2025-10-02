@@ -10,6 +10,8 @@ import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.Subscriptio
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.IN_GRACE_PERIOD;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.UNDEFINED;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -26,6 +28,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,43 +37,53 @@ import java.util.Locale;
 
 public class PurchaseUiDataUtils {
 
-	public static final int INVALID = -1;
+	public static final int UNDEFINED_TIME = -1;
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app, @NonNull InAppPurchase purchase) {
-		return createUiData(app, purchase, purchase.getPurchaseTime(),
-				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()));
+		long expireTime = UNDEFINED_TIME;
+		SubscriptionState subscriptionState = null;
+		if (purchase instanceof InAppSubscription) {
+			expireTime = ((InAppSubscription) purchase).getExpireTime();
+			subscriptionState = ((InAppSubscription) purchase).getState();
+		}
+		return createUiData(app, purchase, null, null, purchase.getPurchaseTime(), expireTime,
+				app.getInAppPurchaseHelper().getPurchaseOriginBySku(purchase.getSku()), subscriptionState);
 	}
 
+	@SuppressLint("DiscouragedApi")
 	@Nullable
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app,
 											  @NonNull InAppPurchase purchase,
-											  long purchaseTime,
-											  @NonNull PurchaseOrigin origin) {
+											  @Nullable String name, @Nullable String icon,
+											  long purchaseTime, long expireTime,
+											  @NonNull PurchaseOrigin origin,
+											  @Nullable SubscriptionState subscriptionState) {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 
 		String sku = purchase.getSku();
-		String title = app.getString(R.string.shared_string_undefined);
-		int iconId;
+		String title = name;
+		int iconId = !Algorithms.isEmpty(icon) ? app.getResources().getIdentifier(icon, "drawable", app.getPackageName()) : 0;
 		String purchaseType;
-		long expireTime = INVALID;
-		boolean liveUpdateSubscription = purchases.isLiveUpdatesSubscription(purchase);
+		boolean liveUpdateSubscription = purchases.isLiveUpdates(purchase);
 		boolean autoRenewing = false;
 		boolean renewVisible = false;
-		SubscriptionState subscriptionState = UNDEFINED;
+		if (subscriptionState == null) {
+			subscriptionState = UNDEFINED;
+		}
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
-		if (purchases.isOsmAndProSubscription(purchase)) {
-			title = app.getString(R.string.osmand_pro);
-			iconId = R.drawable.ic_action_osmand_pro_logo_colored;
-		} else if (purchases.isLiveUpdatesSubscription(purchase)) {
-			title = app.getString(R.string.osm_live);
-			iconId = R.drawable.ic_action_subscription_osmand_live;
-		} else if (purchases.isMapsSubscription(purchase) || purchases.isFullVersion(purchase)) {
-			title = app.getString(R.string.maps_plus);
-			iconId = R.drawable.ic_action_osmand_maps_plus;
+		if (purchases.isOsmAndPro(purchase)) {
+			title = Algorithms.isEmpty(title) ? app.getString(R.string.osmand_pro) : title;
+			iconId = iconId == 0 ? R.drawable.ic_action_osmand_pro_logo_colored : iconId;
+		} else if (purchases.isLiveUpdates(purchase)) {
+			title = Algorithms.isEmpty(title) ? app.getString(R.string.osm_live) : title;
+			iconId = iconId == 0 ? R.drawable.ic_action_subscription_osmand_live : iconId;
+		} else if (purchases.isMaps(purchase) || purchases.isFullVersion(purchase)) {
+			title = Algorithms.isEmpty(title) ? app.getString(R.string.maps_plus) : title;
+			iconId = iconId == 0 ? R.drawable.ic_action_osmand_maps_plus : iconId;
 		} else {
 			return null;
 		}
@@ -79,23 +92,27 @@ public class PurchaseUiDataUtils {
 			InAppSubscription subscription = (InAppSubscription) purchase;
 			purchaseType = app.getString(subscription.getPeriodTypeString());
 
-			subscriptionState = subscription.getState();
-			if (subscription.isPurchased() && subscription.getPurchaseInfo() != null) {
-				autoRenewing = subscription.getPurchaseInfo().isAutoRenewing();
-				subscriptionState = ACTIVE;
-			} else if (subscriptionState != UNDEFINED) {
-				autoRenewing = subscriptionState == ACTIVE || subscriptionState == IN_GRACE_PERIOD;
-			}
-			expireTime = subscription.getExpireTime();
-			if (expireTime == 0) {
-				expireTime = subscription.getCalculatedExpiredTime();
-			}
-			if (!autoRenewing && subscriptionState != ACTIVE && subscriptionState != CANCELLED) {
-				if (purchases.isMapsSubscription(subscription)) {
-					boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
-					renewVisible = !isFullVersion && !InAppPurchaseUtils.isSubscribedToAny(app, false);
-				} else if (purchases.isOsmAndProSubscription(subscription)) {
-					renewVisible = !InAppPurchaseUtils.isOsmAndProAvailable(app, false);
+			if (origin == purchaseHelper.getPlatformOrigin()) {
+				subscriptionState = subscription.getState();
+				if (subscription.isPurchased() && subscription.getPurchaseInfo() != null) {
+					autoRenewing = subscription.getPurchaseInfo().isAutoRenewing();
+					subscriptionState = ACTIVE;
+				} else if (subscriptionState != UNDEFINED) {
+					autoRenewing = subscriptionState == ACTIVE || subscriptionState == IN_GRACE_PERIOD;
+				}
+				if (expireTime == UNDEFINED_TIME) {
+					expireTime = subscription.getExpireTime();
+					if (expireTime == 0) {
+						expireTime = subscription.getCalculatedExpiredTime();
+					}
+				}
+				if (!autoRenewing && subscriptionState != ACTIVE && subscriptionState != CANCELLED) {
+					if (purchases.isMaps(subscription)) {
+						boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
+						renewVisible = !isFullVersion && !InAppPurchaseUtils.isSubscribedToAny(app, false);
+					} else if (purchases.isOsmAndPro(subscription)) {
+						renewVisible = !InAppPurchaseUtils.isOsmAndProAvailable(app, false);
+					}
 				}
 			}
 		} else {
@@ -144,11 +161,11 @@ public class PurchaseUiDataUtils {
 	public static boolean shouldShowBackupSubscription(@NonNull OsmandApplication app,
 	                                                   @NonNull List<InAppPurchase> mainPurchases) {
 		OsmandSettings settings = app.getSettings();
-		if (settings.BACKUP_PURCHASE_ACTIVE.get()) {
+		if (settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != PurchaseOrigin.UNDEFINED) {
 			InAppPurchaseHelper helper = app.getInAppPurchaseHelper();
 			InAppPurchases purchases = helper.getInAppPurchases();
 			for (InAppPurchase purchase : mainPurchases) {
-				if (purchases.isOsmAndProSubscription(purchase)) {
+				if (purchases.isOsmAndPro(purchase)) {
 					String sku = purchase.getSku();
 					return settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != helper.getPurchaseOriginBySku(sku);
 				}

@@ -3,13 +3,13 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.MAP_STYLE_ACTION_ID;
 
 import android.content.Context;
-import android.content.DialogInterface;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -22,6 +22,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -79,7 +80,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		List<String> mapStyles = getFilteredStyles();
 		if (!Algorithms.isEmpty(mapStyles)) {
 			boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
@@ -87,7 +88,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 				showChooseDialog(mapActivity);
 				return;
 			}
-			String nextStyle = getNextSelectedItem(mapActivity.getMyApplication());
+			String nextStyle = getNextSelectedItem(mapActivity.getApp());
 			executeWithParams(mapActivity, nextStyle);
 		} else {
 			AndroidUtils.getApp(mapActivity).showToastMessage(R.string.quick_action_need_to_add_item_to_list);
@@ -96,7 +97,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(params);
 		if (loaded != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
@@ -158,59 +159,53 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				OsmandApplication app = activity.getMyApplication();
-				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		return view -> {
+			OsmandApplication app = activity.getApp();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 
-				AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
-				bld.setTitle(R.string.renderers);
+			AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
+			bld.setTitle(R.string.renderers);
 
-				Map<String, String> renderers = app.getRendererRegistry().getRenderers(false);
-				List<String> disabledRendererNames = PluginsHelper.getDisabledRendererNames();
+			Map<String, String> renderers = app.getRendererRegistry().getRenderers(false);
+			List<String> disabledRendererNames = PluginsHelper.getDisabledRendererNames();
 
-				if (!Algorithms.isEmpty(disabledRendererNames)) {
-					Iterator<Map.Entry<String, String>> iterator = renderers.entrySet().iterator();
-					while (iterator.hasNext()) {
-						String rendererVal = iterator.next().getValue();
-						String rendererFileName = Algorithms.getFileWithoutDirs(rendererVal);
-						if (disabledRendererNames.contains(rendererFileName)) {
-							iterator.remove();
-						}
+			if (!Algorithms.isEmpty(disabledRendererNames)) {
+				Iterator<Map.Entry<String, String>> iterator = renderers.entrySet().iterator();
+				while (iterator.hasNext()) {
+					String rendererVal = iterator.next().getValue();
+					String rendererFileName = Algorithms.getFileWithoutDirs(rendererVal);
+					if (disabledRendererNames.contains(rendererFileName)) {
+						iterator.remove();
 					}
 				}
-
-				List<String> visibleNamesList = new ArrayList<>();
-				List<String> items = new ArrayList<>(renderers.keySet());
-				for (String item : items) {
-					String name = RendererRegistry.getRendererName(activity, item);
-					visibleNamesList.add(name);
-				}
-
-				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
-
-				arrayAdapter.addAll(visibleNamesList);
-				bld.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-
-						String renderer = items.get(i);
-						RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
-
-						if (loaded != null) {
-
-							adapter.addItem(renderer, activity);
-						}
-
-						dialogInterface.dismiss();
-					}
-				});
-
-				bld.setNegativeButton(R.string.shared_string_dismiss, null);
-				bld.show();
 			}
+
+			List<String> visibleNamesList = new ArrayList<>();
+			List<String> items = new ArrayList<>(renderers.keySet());
+			for (String item : items) {
+				String name = RendererRegistry.getRendererName(activity, item);
+				visibleNamesList.add(name);
+			}
+
+			ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
+
+			arrayAdapter.addAll(visibleNamesList);
+			bld.setAdapter(arrayAdapter, (dialogInterface, i) -> {
+
+				String renderer = items.get(i);
+				RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
+
+				if (loaded != null) {
+
+					adapter.addItem(renderer, activity);
+				}
+
+				dialogInterface.dismiss();
+			});
+
+			bld.setNegativeButton(R.string.shared_string_dismiss, null);
+			bld.show();
 		};
 	}
 
@@ -254,7 +249,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getTitle(List<String> filters) {
+	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 
 		if (filters.isEmpty()) return "";
 

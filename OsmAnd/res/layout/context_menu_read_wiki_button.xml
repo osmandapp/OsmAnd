@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.widgets.dialogbutton.DialogButton xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/read_wiki_button"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="@dimen/content_padding"
+	app:dialogButtonBottomMargin="@dimen/content_padding_small"
+	app:dialogButtonType="stroked_secondary"
+	tools:dialogButtonIcon="@drawable/ic_plugin_wikipedia"
+	tools:dialogButtonTitle="@string/context_menu_read_full_article" />

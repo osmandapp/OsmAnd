@@ -1,7 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,19 +8,17 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebSettings;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
 import net.osmand.plus.utils.AndroidUtils;
@@ -31,7 +27,7 @@ import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.util.Algorithms;
 
-public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment implements OnSaveDescriptionCallback {
+public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragment implements OnSaveDescriptionCallback {
 
 	public static final String TAG = ReadDescriptionFragment.class.getSimpleName();
 
@@ -49,6 +45,16 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
+	@Override
+	protected int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
@@ -63,7 +69,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
+		View view = inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
 		AppCompatImageView imageView = view.findViewById(R.id.main_image);
 		PicassoUtils.setupImageViewByUrl(app, imageView, getImageUrl(), true);
@@ -80,23 +86,6 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	public void onResume() {
 		super.onResume();
 		updateContentView();
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			int statusBarColor = nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
-			window.setStatusBarColor(ContextCompat.getColor(ctx, statusBarColor));
-		}
-		return dialog;
 	}
 
 	private void setupToolbar(@NonNull View view) {

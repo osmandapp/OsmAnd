@@ -26,7 +26,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -35,13 +35,15 @@ import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomShee
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.List;
 
-public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements CopyAppModePrefsListener, OnChangeSettingListener {
+public class ConfigureMenuItemsFragment extends BaseFullScreenFragment implements CopyAppModePrefsListener, OnChangeSettingListener {
 
 	public static final String TAG = ConfigureMenuItemsFragment.class.getName();
 
@@ -88,7 +90,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements Co
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
+		View view = inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
@@ -98,9 +100,16 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements Co
 		return view;
 	}
 
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.profiles_list));
+		return collection;
+	}
+
 	private void setupToolbar(@NonNull View view) {
 		AppBarLayout appbar = view.findViewById(R.id.appbar);
-		View toolbar = themedInflater.inflate(R.layout.global_preference_toolbar, appbar, false);
+		View toolbar = inflate(R.layout.global_preference_toolbar, appbar, false);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 		appbar.addView(toolbar);
 
@@ -167,21 +176,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements Co
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).disableDrawer();
-		}
+		callMapActivity(MapActivity::disableDrawer);
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			((MapActivity) activity).enableDrawer();
-		}
+		callMapActivity(MapActivity::enableDrawer);
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected String name = null;
 	protected String enName = null;
 	/**
-	 * Looks like: {ru=Москва, dz=མོསི་ཀོ...} and does not contain values of OSM tags "name" and "name:en",
+	 * Looks like: {dz=མོསི་ཀོ...} and does not contain values of OSM tags "name" and "name:en",
 	 * see {@link name} and {@link enName} respectively.
 	 */
 	protected Map<String, String> names = null;
@@ -66,7 +66,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			setEnName(name);
 		} else {
 			if (names == null) {
-				names = new HashMap<String, String>();
+				names = new LinkedHashMap<String, String>();
 			}
 			names.put(lang, unzipContent(name));
 		}
@@ -75,7 +75,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public void setNames(Map<String, String> name) {
 		if (name != null) {
 			if (names == null) {
-				names = new HashMap<String, String>();
+				names = new LinkedHashMap<String, String>();
 			}
 			names.putAll(name);
 		}
@@ -85,7 +85,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if ((!includeEn || Algorithms.isEmpty(enName)) && names == null) {
 			return Collections.emptyMap();
 		}
-		Map<String, String> mp = new HashMap<String, String>();
+		Map<String, String> mp = new LinkedHashMap<>();
 		if (names != null) {
 			Iterator<Entry<String, String>> it = names.entrySet().iterator();
 			while (it.hasNext()) {
@@ -135,7 +135,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 					key = key.substring("name:".length());
 				}
 				if (names == null) {
-					names = new HashMap<String, String>();
+					names = new LinkedHashMap<>();
 				}
 				if (overwrite || Algorithms.isEmpty(names.get(key))) {
 					names.put(key, e.getValue());
@@ -374,7 +374,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 		if (json.has("names")) {
 			JSONObject namesObj = json.getJSONObject("names");
-			o.names = new HashMap<>();
+			o.names = new LinkedHashMap<>();
 			Iterator<String> iterator = namesObj.keys();
 			while (iterator.hasNext()) {
 				String key = iterator.next();

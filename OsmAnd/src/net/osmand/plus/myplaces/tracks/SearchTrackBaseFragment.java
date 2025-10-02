@@ -26,7 +26,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.shared.gpx.TrackItem;
@@ -46,7 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener,
+public abstract class SearchTrackBaseFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, TrackItemsContainer, SortTracksListener {
 
 	protected final ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
@@ -83,7 +83,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(getLayoutId(), container, false);
+		View view = inflate(getLayoutId(), container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		Fragment fragment = getTargetFragment();
@@ -181,7 +181,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		Window window = requireDialog().getWindow();
 		if (window != null) {
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), true);
-			window.setStatusBarColor(color);
+			AndroidUiHelper.setStatusBarColor(window, color);
 		}
 	}
 

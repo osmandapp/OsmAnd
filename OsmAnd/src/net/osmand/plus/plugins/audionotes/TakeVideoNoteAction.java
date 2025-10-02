@@ -13,9 +13,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
 
-public class TakeVideoNoteAction extends SelectMapLocationAction {
+public class TakeVideoNoteAction extends TakeMediaNoteAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(TAKE_VIDEO_NOTE_ACTION_ID,
 			"video.note", TakeVideoNoteAction.class).
@@ -32,19 +31,9 @@ public class TakeVideoNoteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin != null) {
-			super.execute(mapActivity);
-		}
-	}
-
-	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
-		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin != null) {
-			plugin.recordVideo(latLon.getLatitude(), latLon.getLongitude(), mapActivity, false);
-		}
+	protected void takeNote(@NonNull MapActivity mapActivity,
+	                        @NonNull AudioVideoNotesPlugin plugin, @NonNull LatLon latLon) {
+		plugin.recordVideo(latLon.getLatitude(), latLon.getLongitude(), mapActivity, false);
 	}
 
 	@Override

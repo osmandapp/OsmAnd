@@ -23,17 +23,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryGridFragment extends BaseOsmAndFragment {
+public class GalleryGridFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = GalleryGridFragment.class.getSimpleName();
 
@@ -67,7 +69,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.gallery_grid_fragment, container, false);
+		View view = inflate(R.layout.gallery_grid_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupScaleDetector();
@@ -108,6 +110,12 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.content_list));
+		return collection;
+	}
+
 	@NonNull
 	private ImageCardListener getImageCardListener() {
 		return imageCard -> GalleryPhotoPagerFragment.showInstance(requireMapActivity(),
@@ -115,7 +123,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupScaleDetector() {
-		scaleDetector = new ScaleGestureDetector(app, new ScaleGestureDetector.OnScaleGestureListener() {
+		scaleDetector = new ScaleGestureDetector(requireMapActivity(), new ScaleGestureDetector.OnScaleGestureListener() {
 			@Override
 			public boolean onScale(@NonNull ScaleGestureDetector detector) {
 				if (zoomedForPinch) {
@@ -199,7 +207,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), !nightMode);
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
@@ -225,16 +233,6 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return (MapActivity) requireActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

@@ -269,7 +269,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			LinearLayout cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
@@ -307,7 +307,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		if (mapActivity == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		RouteStatisticCard statisticCard = new RouteStatisticCard(mapActivity, gpxFile, v -> openDetails());
 		statisticCard.setTransparentBackground(true);
 		statisticCard.setListener(this);
@@ -905,7 +905,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		if (mapActivity == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 
 		String routeDescription = transportStopRoute.getDescription(app);
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
@@ -1040,7 +1040,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		});
 		baseView.addView(ll);
 
-		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_pedestrian_dark, getActiveColor());
+		Drawable icon = getPaintedIcon(R.drawable.ic_action_pedestrian_dark, getActiveColor());
 		ImageView iconView = new ImageView(view.getContext());
 		iconView.setImageDrawable(AndroidUtils.getDrawableForDirection(view.getContext(), icon));
 		FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(24), dpToPx(24));
@@ -1309,7 +1309,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public View createRouteBadge(@NonNull MapActivity mapActivity, TransportStopRoute transportStopRoute) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		LinearLayout convertView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		if (transportStopRoute != null) {
 			String routeDescription = transportStopRoute.getDescription(app);
@@ -1428,11 +1428,11 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			Location loc = helper.getLocationFromRouteDirection(routeDirectionInfo);
 			if (loc != null) {
 				MapRouteInfoMenu.directionInfo = directionInfoIndex;
-				OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+				OsmandSettings settings = mapActivity.getSettings();
 				settings.setMapLocationToShow(loc.getLatitude(), loc.getLongitude(),
 						Math.max(13, settings.getLastKnownMapZoom()),
 						new PointDescription(PointDescription.POINT_TYPE_MARKER,
-								routeDirectionInfo.getDescriptionRoutePart() + " " + getTimeDescription(mapActivity.getMyApplication(), routeDirectionInfo)),
+								routeDirectionInfo.getDescriptionRoutePart() + " " + getTimeDescription(mapActivity.getApp(), routeDirectionInfo)),
 						false, null);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);
 				dismiss();

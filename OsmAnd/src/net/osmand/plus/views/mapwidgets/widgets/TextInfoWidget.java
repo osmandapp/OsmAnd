@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -29,9 +31,8 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	protected String contentTitle;
 
 	protected ImageView imageView;
-	protected TextView textView;
-	protected TextView textViewShadow;
-	protected TextView smallTextView;
+	protected OutlinedTextContainer textView;
+	protected OutlinedTextContainer smallTextView;
 	protected TextView smallTextViewShadow;
 	protected View container;
 	protected View emptyBanner;
@@ -43,6 +44,7 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	private int nightIconId;
 
 	private Integer cachedMetricSystem;
+	private Integer cachedAltitudeMetric;
 	private Integer cachedAngularUnits;
 
 
@@ -53,7 +55,6 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
-		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
@@ -120,7 +121,9 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 
 	public void setContentTitle(String text) {
 		contentTitle = text;
-		setContentDescription(combine(textView.getText(), smallTextView.getText()));
+		if (textView != null && smallTextView != null) {
+			setContentDescription(combine(textView.getText(), smallTextView.getText()));
+		}
 	}
 
 	public void setText(String text, String subtext) {
@@ -144,9 +147,6 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 
 	private void setText(String text) {
 		textView.setText(text);
-		if (textViewShadow != null) {
-			textViewShadow.setText(text);
-		}
 	}
 
 	private void setSmallText(String text) {
@@ -163,6 +163,11 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 			updateNeeded = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
 			cachedMetricSystem = metricSystem;
 		}
+		if (isAltitudeMetricDepended()) {
+			int altitudeMetric = app.getSettings().ALTITUDE_METRIC.get().ordinal();
+			updateNeeded = cachedAltitudeMetric == null || cachedAltitudeMetric != altitudeMetric;
+			cachedAltitudeMetric = altitudeMetric;
+		}
 		if (isAngularUnitsDepended()) {
 			int angularUnits = app.getSettings().ANGULAR_UNITS.get().ordinal();
 			updateNeeded |= cachedAngularUnits == null || cachedAngularUnits != angularUnits;
@@ -175,12 +180,20 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 		return false;
 	}
 
+	public boolean isAltitudeMetricDepended() {
+		return false;
+	}
+
 	public boolean isAngularUnitsDepended() {
 		return false;
 	}
 
-	public void setOnClickListener(@Nullable OnClickListener onClickListener) {
-		view.setOnClickListener(onClickListener);
+	public void setOnClickListener(@Nullable OnClickListener listener) {
+		view.setOnClickListener(listener);
+	}
+
+	public void setOnLongClickListener(@Nullable OnLongClickListener listener) {
+		view.setOnLongClickListener(listener);
 	}
 
 	@Override
@@ -188,8 +201,10 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 		super.updateColors(textState);
 		updateTextColor(smallTextView, smallTextViewShadow, textState.textColor, textState.textShadowColor,
 				textState.textBold, textState.textShadowRadius);
-		updateTextColor(textView, textViewShadow, textState.textColor, textState.textShadowColor,
-				textState.textBold, textState.textShadowRadius);
+
+		updateTextOutline(textView, textState);
+		updateTextContainer(textView, textState);
+
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
@@ -240,5 +255,10 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	@DrawableRes
 	public int getIconId(boolean nightMode) {
 		return nightMode ? nightIconId : dayIconId;
+	}
+
+	@DrawableRes
+	public int getMapIconId(boolean nightMode) {
+		return getIconId(nightMode);
 	}
 }

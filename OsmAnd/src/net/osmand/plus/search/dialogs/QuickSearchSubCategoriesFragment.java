@@ -1,6 +1,5 @@
 package net.osmand.plus.search.dialogs;
 
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -24,20 +23,16 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
+public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = QuickSearchSubCategoriesFragment.class.getName();
 	private static final String CATEGORY_NAME_KEY = "category_key";
@@ -53,21 +48,8 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private View headerSelectAll;
 	private View headerShadow;
 	private View footerShadow;
-	private FrameLayout addButton;
+	private FrameLayout buttonsContainer;
 	private boolean selectAll;
-
-	public static void showInstance(@NonNull FragmentManager fm,
-									@Nullable Fragment targetFragment,
-									@NonNull PoiCategory poiCategory,
-									@Nullable Set<String> acceptedCategories,
-									boolean selectAll) {
-		QuickSearchSubCategoriesFragment fragment = new QuickSearchSubCategoriesFragment();
-		fragment.setPoiCategory(poiCategory);
-		fragment.setSelectAll(selectAll);
-		fragment.setAcceptedCategories(acceptedCategories);
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.show(fm, TAG);
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -126,23 +108,20 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_subcategories, container, false);
+		View root = inflate(R.layout.fragment_subcategories, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, color);
+		Drawable icClose = getIcon(R.drawable.ic_arrow_back, color);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> dismissFragment());
 		TextView title = root.findViewById(R.id.title);
 		title.setText(poiCategory.getTranslation());
-		addButton = root.findViewById(R.id.add_button);
+
+		buttonsContainer = root.findViewById(R.id.bottom_buttons_container);
 		updateAddBtnVisibility();
-		addButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismissFragment();
-			}
-		});
+		root.findViewById(R.id.add_button).setOnClickListener(v -> dismissFragment());
+
 		listView = root.findViewById(R.id.list);
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			@Override
@@ -163,14 +142,11 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		headerSelectAll.setVerticalScrollBarEnabled(false);
 		selectAllSwitch = headerSelectAll.findViewById(R.id.select_all);
 		selectAllSwitch.setChecked(selectAll);
-		selectAllSwitch.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				selectAll = !selectAll;
-				selectAllSwitch.setChecked(selectAll);
-				adapter.selectAll(selectAll);
-				updateAddBtnVisibility();
-			}
+		selectAllSwitch.setOnClickListener(v -> {
+			selectAll = !selectAll;
+			selectAllSwitch.setChecked(selectAll);
+			adapter.selectAll(selectAll);
+			updateAddBtnVisibility();
 		});
 		listView.addFooterView(footerShadow);
 		listView.addHeaderView(headerSelectAll);
@@ -183,47 +159,43 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		});
 		ImageView searchIcon = root.findViewById(R.id.search_icon);
 		searchIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_search_dark, nightMode));
-		searchIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				searchEditText.requestFocus();
-				AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
-			}
+		searchIcon.setOnClickListener(view -> {
+			searchEditText.requestFocus();
+			AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
 		});
 		ImageView searchCloseIcon = root.findViewById(R.id.search_close);
 		searchCloseIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_cancel, nightMode));
-		searchCloseIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				clearSearch();
-			}
-		});
+		searchCloseIcon.setOnClickListener(view -> clearSearch());
 		listView.setAdapter(adapter);
 		return root;
 	}
 
 	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection targetsCollection = super.getInsetTargets();
+		targetsCollection.replace(InsetTarget.createScrollable(R.id.list));
+		return targetsCollection;
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
-		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
-			@Override
-			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() == KeyEvent.ACTION_DOWN) {
-						return true;
-					} else {
-						dismissFragment();
-						return true;
-					}
+		getDialog().setOnKeyListener((dialog, keyCode, event) -> {
+			if (keyCode == KeyEvent.KEYCODE_BACK) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					return true;
+				} else {
+					dismissFragment();
+					return true;
 				}
-				return false;
 			}
+			return false;
 		});
 	}
 
 	private void updateAddBtnVisibility() {
-		if (addButton != null) {
-			addButton.setVisibility(adapter.getSelectedItems().isEmpty() ? View.GONE : View.VISIBLE);
+		if (buttonsContainer != null) {
+			buttonsContainer.setVisibility(adapter.getSelectedItems().isEmpty() ? View.GONE : View.VISIBLE);
 		}
 	}
 
@@ -276,5 +248,20 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 
 	public void setAcceptedCategories(Set<String> acceptedCategories) {
 		this.acceptedCategories = acceptedCategories;
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @Nullable Fragment targetFragment,
+	                                @NonNull PoiCategory poiCategory,
+	                                @Nullable Set<String> acceptedCategories,
+	                                boolean selectAll) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			QuickSearchSubCategoriesFragment fragment = new QuickSearchSubCategoriesFragment();
+			fragment.setPoiCategory(poiCategory);
+			fragment.setSelectAll(selectAll);
+			fragment.setAcceptedCategories(acceptedCategories);
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.show(manager, TAG);
+		}
 	}
 }

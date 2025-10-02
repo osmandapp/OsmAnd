@@ -464,4 +464,14 @@ public class ColorUtilities {
 	public static int getTransparentColor(@NonNull Context ctx) {
 		return getColor(ctx, R.color.color_transparent);
 	}
+
+	@ColorInt
+	public static int getNavBarBackgroundColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getNavBarBackgroundColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getNavBarBackgroundColorId(boolean nightMode) {
+		return nightMode ? R.color.navigation_bar_bg_dark : R.color.navigation_bar_bg_light;
+	}
 }

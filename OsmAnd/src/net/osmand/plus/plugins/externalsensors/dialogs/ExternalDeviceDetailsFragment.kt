@@ -156,7 +156,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         connectionState?.setCompoundDrawablesWithIntrinsicBounds(signalLevelIcon, null, null, null);
 
         var batteryLevelValue = device.batteryLevel.toString()
-        batteryLevel?.text = batteryLevelValue
+        batteryLevel?.text = if(device.hasBatteryLevel()) batteryLevelValue else app.getString(R.string.n_a)
         if (device.batteryLevel == BATTERY_UNKNOWN_LEVEL_VALUE) {
             batteryLevelValue = app.getString(R.string.res_unknown)
         }
@@ -172,7 +172,11 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
                 } else {
                     if (nightMode) R.drawable.bg_widget_type_disconnected_icon_dark else R.drawable.bg_widget_type_disconnected_icon_light
                 })
-            widgetIcon.setImageResource(if (!isConnected) it.disconnectedIconId else if (nightMode) it.nightIconId else it.dayIconId)
+	        if (!isConnected) {
+		        widgetIcon.setImageDrawable(getContentIcon(it.disconnectedIconId))
+	        } else {
+		        widgetIcon.setImageResource(if (nightMode) it.nightIconId else it.dayIconId)
+	        }
         }
     }
 

@@ -313,10 +313,6 @@
     <string name="poi_pitch">Idrettsbane</string>
     <string name="poi_place_of_worship">Religiøst sted</string>
     <string name="poi_grave_yard">Kirkegård</string>
-    <string name="poi_route_hiking_iwn_poi">Internasjonal vandrerute</string>
-    <string name="poi_route_hiking_nwn_poi">Nasjonal vandrerute</string>
-    <string name="poi_route_hiking_rwn_poi">Regional vandrerute</string>
-    <string name="poi_route_hiking_lwn_poi">Lokal vandrerute</string>
     <string name="poi_crossing_traffic_signals">Med trafikklys</string>
     <string name="poi_building">Bygning</string>
     <string name="poi_car_wash_no">Nei;Bilvask: nei</string>
@@ -1801,7 +1797,6 @@
     <string name="poi_club_theatre">Teaterklubb</string>
     <string name="poi_club_charity">Veldedighetsklubb</string>
     <string name="poi_lcn_ref">Lokal sykkelnettverksnode</string>
-    <string name="poi_route_hiking_ref_poi">Fotturrutereferanse</string>
     <string name="poi_collection_times">Tømmingstider</string>
     <string name="poi_water_point">Vannpunkt</string>
     <string name="poi_recycling_small_electrical_appliances">Småelektrisk utstyr</string>
@@ -1952,11 +1947,9 @@
     <string name="poi_diet_pescetarian_no">Pesco-vegetarisk: nei</string>
     <string name="poi_waste_accepted">Akseptert avfall</string>
     <string name="poi_route_track_point">Andre rutepunkter</string>
-    <string name="poi_activities_bicycle">Sykling</string>
-    <string name="poi_activities_pedestrian">Gåing</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Tunnel forbudt for fotgjengere</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel forbudt for syklister</string>
-    <string name="poi_activities_running">Løping</string>
+    <string name="poi_route_activity_type_e_mountain_bike">El-terrengsykkel</string>
     <string name="poi_route_activity_type_gravel_biking">Grusveisykling</string>
     <string name="poi_cafe_yes">Ja</string>
     <string name="poi_route_activity_type_e_biking">El-sykling</string>
@@ -1967,4 +1960,6 @@
     <string name="poi_dog_sled_yes">Hundeslede: ja</string>
     <string name="poi_dog_sled_no">Hundeslede: nei</string>
     <string name="poi_contact_website">Nettsted</string>
+    <string name="poi_travel_agency">Reisebyrå</string>
+    <string name="poi_route_point_category">Reisekategori</string>
 </resources>

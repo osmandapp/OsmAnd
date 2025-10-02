@@ -48,7 +48,7 @@ public enum WidgetType {
 	// Top panel
 	COORDINATES_MAP_CENTER("coordinates_map_center", R.string.coordinates_widget_map_center, R.string.coordinates_widget_map_center_desc, R.drawable.widget_coordinates_map_center_day, R.drawable.widget_coordinates_map_center_night, R.string.docs_widget_coordinates, WidgetGroup.COORDINATES_WIDGET, TOP),
 	COORDINATES_CURRENT_LOCATION("coordinates_current_location", R.string.coordinates_widget_current_location, R.string.coordinates_widget_current_location_desc, R.drawable.widget_coordinates_location_day, R.drawable.widget_coordinates_location_night, R.string.docs_widget_coordinates, WidgetGroup.COORDINATES_WIDGET, TOP),
-	STREET_NAME("street_name", R.string.street_name, R.string.street_name_widget_desc, R.drawable.widget_street_name_day, R.drawable.widget_street_name_night, R.string.docs_widget_street_name, null, TOP),
+	STREET_NAME("street_name", R.string.street_name, R.string.street_name_widget_desc, R.drawable.widget_street_name_day, R.drawable.widget_street_name_night, R.string.docs_widget_street_name, null, BOTTOM),
 	MARKERS_TOP_BAR("map_markers_top", R.string.map_markers_bar, R.string.map_markers_bar_widget_desc, R.drawable.widget_markers_topbar_day, R.drawable.widget_markers_topbar_night, R.string.docs_widget_markers, null, TOP),
 	LANES("lanes", R.string.show_lanes, R.string.lanes_widgets_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_lanes, null, ROUTE_GUIDANCE, TOP),
 
@@ -107,6 +107,8 @@ public enum WidgetType {
 	ENGINE_OIL_TEMPERATURE("obd_engine_oil_temperature", R.string.obd_engine_oil_temperature, R.string.obd_engine_oil_temperature_desc, R.drawable.widget_obd_temperature_engine_oil_day, R.drawable.widget_obd_temperature_engine_oil_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_obd_temperature_outside_day, R.drawable.widget_obd_temperature_outside_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_obd_battery_voltage_day, R.drawable.widget_obd_battery_voltage_night, 0, VEHICLE_METRICS, RIGHT),
+	//todo Add OBD alt voltage widget
+//	OBD_ALT_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_obd_battery_voltage_day, R.drawable.widget_obd_battery_voltage_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_obd_temperature_coolant_day, R.drawable.widget_obd_temperature_coolant_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_REMAINING_FUEL("obd_remaining_fuel", R.string.remaining_fuel, R.string.remaining_fuel_description, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_CALCULATED_ENGINE_LOAD("obd_calculated_engine_load", R.string.obd_calculated_engine_load, R.string.obd_calculated_engine_load_desc, R.drawable.widget_obd_engine_calculated_load_day, R.drawable.widget_obd_engine_calculated_load_night, 0, VEHICLE_METRICS, RIGHT),
@@ -372,6 +374,8 @@ public enum WidgetType {
 			return new LanesWidgetInfoFragment();
 		} else if (this == ROUTE_INFO) {
 			return new RouteInfoWidgetInfoFragment();
+		} else if (this == STREET_NAME) {
+			return new StreetNameWidgetInfoFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {

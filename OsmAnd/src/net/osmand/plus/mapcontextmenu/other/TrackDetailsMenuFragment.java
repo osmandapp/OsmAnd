@@ -22,7 +22,7 @@ import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
@@ -30,32 +30,25 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvi
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
 import java.util.List;
 
-public class TrackDetailsMenuFragment extends BaseOsmAndFragment
+public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		implements OsmAndLocationListener, ICoveredScreenRectProvider {
 
 	public static final String TAG = "TrackDetailsMenuFragment";
 
 	private TrackDetailsMenu menu;
 	private MapDisplayPositionManager displayPositionManager;
+	private View view;
 	private View mainView;
 	private BoundsChangeListener boundsChangeListener;
 
 	private boolean locationUpdateStarted;
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
-	}
-
-	@NonNull
-	private MapActivity requireMapActivity() {
-		return (MapActivity) requireMyActivity();
-	}
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -97,7 +90,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 	                         Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = requireMapActivity();
-		View view = themedInflater.inflate(R.layout.track_details, container, false);
+		view = inflate(R.layout.track_details, container, false);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		}
@@ -156,6 +149,13 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 	}
 
 	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createLeftSideContainer(true, view).build());
+		return collection;
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		if (menu == null || menu.getGpxItem() == null) {
@@ -207,7 +207,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 		if (location != null && !MapUtils.areLatLonEqual(menu.getMyLocation(), location)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-				mapActivity.getMyApplication().runInUIThread(() -> menu.updateMyLocation(mainView, location));
+				mapActivity.getApp().runInUIThread(() -> menu.updateMyLocation(mainView, location));
 			}
 		}
 	}
@@ -293,11 +293,11 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.add(portrait ? R.id.bottomFragmentContainer : R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

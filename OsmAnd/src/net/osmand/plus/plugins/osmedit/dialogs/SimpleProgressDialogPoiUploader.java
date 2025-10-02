@@ -3,6 +3,9 @@ package net.osmand.plus.plugins.osmedit.dialogs;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -26,15 +29,11 @@ public class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploade
 
 	@Override
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
-		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
-				R.string.uploading,
-				R.string.local_openstreetmap_uploading,
-				ProgressDialog.STYLE_HORIZONTAL);
-		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.requirePlugin(OsmEditingPlugin.class);
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(mapActivity,
 				mapActivity.getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
-			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+			public void uploadEnded(@NonNull Map<OsmPoint, String> loadErrorsMap) {
 				super.uploadEnded(loadErrorsMap);
 				mapActivity.getContextMenu().close();
 				OsmBugsLayer l = mapActivity.getMapView().getLayerByClass(OsmBugsLayer.class);
@@ -44,9 +43,14 @@ public class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploade
 				}
 			}
 		};
-		dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, listener, plugin, points.length, closeChangeSet, anonymously);
-		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
+				showProgressDialog(), listener, plugin, points.length, closeChangeSet, anonymously);
+		OsmAndTaskManager.executeTask(uploadTask, points);
+	}
+
+	@NonNull
+	private ProgressDialogFragment showProgressDialog() {
+		return ProgressDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+				R.string.uploading, R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 	}
 }

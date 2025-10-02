@@ -13,12 +13,13 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -28,6 +29,10 @@ import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
@@ -42,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
+public class ConfigureMapFragment extends BaseFullScreenFragment implements OnDataChangeUiAdapter,
 		InAppPurchaseListener, SelectGpxTaskListener {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
@@ -304,6 +309,14 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	public static ConfigureMapFragment getVisibleInstance(@NonNull MapActivity mapActivity) {
 		FragmentManager fm = mapActivity.getSupportFragmentManager();
 		return (ConfigureMapFragment) fm.findFragmentByTag(TAG);
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.list).landscapeLeftSided(true));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {

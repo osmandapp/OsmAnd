@@ -44,6 +44,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.WidgetSize;
@@ -261,7 +262,7 @@ public class SpeedometerWidget {
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean nightMode = drawSettings != null ? drawSettings.isNightMode() : app.getDaynightHelper().isNightMode();
+		boolean nightMode = drawSettings != null ? drawSettings.isNightMode() : app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		updateInfo(drawSettings, false, nightMode);
 	}
 

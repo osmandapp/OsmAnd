@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -49,6 +50,7 @@ public class SearchResult {
 
 	public String localeName;
 	public String alternateName;
+	public String cityName;
 	public Collection<String> otherNames;
 
 	public String localeRelatedObjectName;
@@ -56,6 +58,15 @@ public class SearchResult {
 	public double distRelatedObjectName;
 
 	private double unknownPhraseMatchWeight = 0;
+
+	public enum SearchResultResource {
+		DETAILED,
+		WIKIPEDIA,
+		BASEMAP,
+		TRAVEL
+	}
+
+	private SearchResultResource searchResultResource;
 
 	public SearchResult() {
 		this.requiredSearchPhrase = SearchPhrase.emptyPhrase();
@@ -83,11 +94,15 @@ public class SearchResult {
 			// don't overload with poi types
 		} else {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
-			if (allWordsMatched(localeName, completeMatchRes)) {
-				// ignore other names
-			} else if (otherNames != null) {
+			boolean matched = false;
+			matched = allWordsMatched(localeName, completeMatchRes);
+			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
+				matched = allWordsMatched(alternateName, completeMatchRes);
+			}
+			if (!matched && otherNames != null) {
 				for (String otherName : otherNames) {
 					if (allWordsMatched(otherName, completeMatchRes)) {
+						matched = true;
 						break;
 					}
 				}
@@ -275,5 +290,35 @@ public class SearchResult {
 			}
 		}
 		return b.toString();
+	}
+
+	public SearchResultResource getResourceType() {
+		if (searchResultResource == null) {
+			searchResultResource = SearchResultResource.DETAILED;
+			if (object != null && object instanceof Amenity amenity) {
+				searchResultResource = amenity.getType().isWiki() ? SearchResultResource.WIKIPEDIA : searchResultResource;
+			}
+			if (file != null) {
+				searchResultResource = file.getFile().getName().contains(".travel") ? SearchResultResource.TRAVEL : searchResultResource;
+				searchResultResource = file.isBasemap() ? SearchResultResource.BASEMAP : searchResultResource;
+			}
+		}
+		return searchResultResource;
+	}
+
+	public Collection<String> getOtherWordsMatch() {
+		return otherWordsMatch;
+	}
+
+	public void setOtherWordsMatch(Collection<String> set) {
+		otherWordsMatch = set;
+	}
+
+	public void setUnknownPhraseMatchWeight(double weight) {
+		unknownPhraseMatchWeight = weight;
+	}
+
+	public boolean isFullPhraseEqualLocaleName() {
+		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
 	}
 }

@@ -44,6 +44,9 @@ import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -93,7 +96,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			imported = args.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		}
 		screenController = ProfileAppearanceController.getInstance(app, this, modeKey, imported);
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+		requireActionBarActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
@@ -112,7 +115,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			FrameLayout preferencesContainer = view.findViewById(android.R.id.list_container);
 			LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 			View bottomPanel = themedInflater.inflate(R.layout.control_bottom_buttons, preferencesContainer, false);
-			View buttonsContainer = bottomPanel.findViewById(R.id.buttons_container);
+			View buttonsContainer = bottomPanel.findViewById(R.id.bottom_buttons_container);
 			preferencesContainer.addView(bottomPanel);
 
 			buttonsContainer.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
@@ -140,6 +143,14 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		}
 		updateApplyButtonEnable();
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.replace(InsetTarget.createScrollable(R.id.list_container));
+		return collection;
 	}
 
 	@Override

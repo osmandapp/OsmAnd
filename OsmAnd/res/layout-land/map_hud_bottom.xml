@@ -65,7 +65,7 @@
 					android:orientation="horizontal">
 
 
-					<FrameLayout
+					<net.osmand.plus.widgets.FrameLayoutEx
 						android:id="@+id/measurement_buttons"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content">
@@ -87,7 +87,8 @@
 							android:layout_height="@dimen/map_button_size"
 							android:layout_gravity="bottom"
 							android:visibility="gone" />
-					</FrameLayout>
+
+					</net.osmand.plus.widgets.FrameLayoutEx>
 
 				</LinearLayout>
 			</LinearLayout>
@@ -155,13 +156,6 @@
 		</FrameLayout>
 
 	</LinearLayout>
-
-	<include
-		layout="@layout/move_marker_bottom_sheet"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom|start"
-		tools:visibility="visible" />
 
 	<include
 		layout="@layout/add_gpx_point_bottom_sheet"

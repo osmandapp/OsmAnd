@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,15 +30,17 @@ import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
+public abstract class ChangesTabFragment extends BaseFullScreenFragment implements OnPrepareBackupListener,
 		OnBackupSyncListener {
 
 	protected BackupHelper backupHelper;
@@ -65,7 +68,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		FragmentActivity activity = requireActivity();
-		View view = themedInflater.inflate(R.layout.fragment_changes_tab, container, false);
+		View view = inflate(R.layout.fragment_changes_tab, container, false);
 
 		adapter = new ChangesAdapter(app, this, nightMode);
 
@@ -79,11 +82,23 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	}
 
 	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		backupHelper.addPrepareBackupListener(this);
 		settingsHelper.addBackupSyncListener(this);
 		updateAdapter();
+
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ChangesFragment changesFragment) {
+			changesFragment.setupBottomButtons();
+		}
 	}
 
 	@Override
@@ -135,16 +150,19 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	public void uploadLocalVersions() {
 		for (CloudChangeItem item : items) {
-			if (item.operation != SYNC_OPERATION_DELETE && item.localFile != null && !settingsHelper.isSyncing(item.fileName)) {
-				settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, SYNC_OPERATION_UPLOAD);
+			LocalFile file = item.localFile;
+			if (item.operation != SYNC_OPERATION_DELETE && file != null && !settingsHelper.isSyncing(item.fileName)) {
+				settingsHelper.syncSettingsItems(item.fileName, file, item.remoteFile, UNIQUE, SYNC_OPERATION_UPLOAD);
 			}
 		}
 	}
 
 	public void downloadCloudVersions() {
 		for (CloudChangeItem item : items) {
-			if (item.operation != SYNC_OPERATION_DELETE && item.remoteFile != null && !settingsHelper.isSyncing(item.fileName)) {
-				settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, SYNC_OPERATION_DOWNLOAD);
+			RemoteFile file = item.remoteFile;
+			if (file != null && !settingsHelper.isSyncing(item.fileName)
+					&& (item.operation != SYNC_OPERATION_DELETE || !file.isDeleted())) {
+				settingsHelper.syncSettingsItems(item.fileName, item.localFile, file, UNIQUE, SYNC_OPERATION_DOWNLOAD);
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package net.osmand.plus.wikipedia;
 
+import static net.osmand.data.Amenity.CONTENT;
 import static net.osmand.plus.wikipedia.WikipediaOptionsBottomSheetDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE;
 
 import android.annotation.SuppressLint;
@@ -8,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -21,6 +21,7 @@ import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
@@ -70,7 +71,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View mainView = themedInflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
+		View mainView = inflate(R.layout.wikipedia_dialog_fragment, container, false);
 
 		setupToolbar(mainView.findViewById(R.id.toolbar));
 
@@ -79,14 +80,9 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		options.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light));
 		options.setOnClickListener(v -> {
 			FragmentManager manager = getFragmentManager();
-			if (manager == null) {
-				return;
+			if (manager != null) {
+				WikipediaOptionsBottomSheetDialogFragment.showInstance(manager, WikipediaDialogFragment.this);
 			}
-			WikipediaOptionsBottomSheetDialogFragment fragment = new WikipediaOptionsBottomSheetDialogFragment();
-			fragment.setUsedOnMap(false);
-			fragment.setTargetFragment(WikipediaDialogFragment.this,
-					WikipediaOptionsBottomSheetDialogFragment.REQUEST_CODE);
-			fragment.show(manager, WikipediaOptionsBottomSheetDialogFragment.TAG);
 		});
 		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), nightMode,
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
@@ -177,6 +173,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		populateArticle();
 	}
 
@@ -210,14 +207,18 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				langSelected = "en";
 			}
 
-			article = amenity.getDescription(langSelected);
+			String content = amenity.getTagContent(CONTENT, langSelected);
+			if (Algorithms.isEmpty(content)) {
+				content = amenity.getDescription(langSelected);
+			}
+			article = content;
 			title = amenity.getName(langSelected);
 			articleToolbarText.setText(title);
 			readFullArticleButton.setOnClickListener(view -> {
 				String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
 				Context context = getContext();
 				if (context != null) {
-					AndroidUtils.openUrl(context, Uri.parse(article), nightMode);
+					AndroidUtils.openUrl(context, article, nightMode);
 				}
 			});
 
@@ -264,10 +265,11 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
+	@Override
 	@NonNull
-	protected Drawable getIcon(int resId) {
+	public Drawable getIcon(@DrawableRes int resId) {
 		int colorId = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
-		return getIcon(resId, colorId);
+		return requireIcon(resId, colorId);
 	}
 
 	@Override
@@ -280,17 +282,15 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @NonNull Amenity amenity,
-			@Nullable String lang) {
-		FragmentManager manager = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)
-				&& amenity.getType().isWiki()) {
-
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull Amenity amenity, @Nullable String lang) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
 			WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 			if (lang == null && plugin != null) {
 				OsmandApplication app = (OsmandApplication) activity.getApplication();
-				String preferredlocale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-				lang = plugin.getMapObjectsLocale(amenity, preferredlocale);
+				String preferredLocale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+				lang = plugin.getMapObjectsLocale(amenity, preferredLocale);
 			}
 			WikipediaDialogFragment fragment = new WikipediaDialogFragment();
 			fragment.setAmenity(amenity);

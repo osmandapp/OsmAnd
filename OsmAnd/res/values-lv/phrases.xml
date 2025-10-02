@@ -1125,10 +1125,6 @@
     <string name="poi_nwn_ref">Nacionālais kājām ceļotāju tīkla mezgls</string>
     <string name="poi_rwn_ref">Reğionālais kājām ceļotāju tīkla mezgls</string>
     <string name="poi_lwn_ref">Vietējais kājām ceļotāju tīkla mezgls</string>
-    <string name="poi_route_hiking_iwn_poi">Starptautiskais kājām ceļotāju maršruts</string>
-    <string name="poi_route_hiking_nwn_poi">Nacionālais kājām ceļotāju maršruts</string>
-    <string name="poi_route_hiking_rwn_poi">Reğionālais kājām ceļotāju maršruts</string>
-    <string name="poi_route_hiking_lwn_poi">Vietējais kājām ceļotāju maršruts</string>
     <string name="poi_opening_hours">Darba stundas</string>
     <string name="poi_collection_times">Savākšanas laiks</string>
     <string name="poi_description">Apraksts</string>
@@ -1203,7 +1199,6 @@
     <string name="poi_daymark">Dienas bāka</string>
     <string name="poi_seamark_dyke">Aizsprosts</string>
     <string name="poi_kent_carriage_gap">Kenta pārvadājumu sprauga</string>
-    <string name="poi_route_hiking_ref_poi">Kājām ceļotāju reference</string>
     <string name="poi_crossing_traffic_signals">Ar luksoforu</string>
     <string name="poi_crossing_uncontrolled">Neregulējama</string>
     <string name="poi_crossing_unmarked">Neatzīmēta</string>

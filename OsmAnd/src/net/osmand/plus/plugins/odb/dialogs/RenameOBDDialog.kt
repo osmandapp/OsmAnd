@@ -9,25 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseOsmAndDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
+import net.osmand.plus.widgets.alert.AlertDialogData
+import net.osmand.plus.widgets.alert.CustomAlert
 import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
-class RenameOBDDialog : BaseOsmAndDialogFragment() {
+class RenameOBDDialog : BaseFullScreenDialogFragment() {
 	private var textInput: ExtendedEditText? = null
 	private var propertyOldValueValue: String? = null
 	private var deviceAddress: String? = null
+	private var isBLE: Boolean = false
 	private var device: BTDeviceInfo? = null
 	val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 
@@ -56,6 +59,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 		val args = arguments
 		if (args != null) {
 			deviceAddress = args.getString(DEVICE_ADDRESS_KEY)
+			isBLE = args.getBoolean(BLE_KEY)
 			textInput?.inputType = EditorInfo.TYPE_CLASS_TEXT
 			propertyName.setText(R.string.shared_string_name)
 			propertyValueView.hasClearButton = true
@@ -73,20 +77,12 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 		return true
 	}
 
-	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val ctx: Activity = requireActivity()
-		val themeId =
-			if (nightMode) R.style.OsmandDarkTheme_DarkActionbar else R.style.OsmandLightTheme_DarkActionbar_LightStatusBar
-		val dialog = Dialog(ctx, themeId)
-		val window = dialog.window
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.attributes.windowAnimations = R.style.Animations_Alpha
-			}
-			val statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode)
-			window.statusBarColor = statusBarColor
-		}
-		return dialog
+	override fun getThemeId(): Int {
+		return if (nightMode) R.style.OsmandDarkTheme_DarkActionbar else R.style.OsmandLightTheme_DarkActionbar_LightStatusBar
+	}
+
+	override fun getStatusBarColorId(): Int {
+		return ColorUtilities.getActivityBgColorId(nightMode)
 	}
 
 	private fun shouldClose(): Boolean {
@@ -123,13 +119,11 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 	}
 
 	private fun showDismissDialog() {
-		val themedContext = UiUtilities.getThemedContext(requireContext(), isNightMode(false))
-		val dismissDialog = AlertDialog.Builder(themedContext)
-		dismissDialog.setTitle(getString(R.string.shared_string_dismiss))
-		dismissDialog.setMessage(getString(R.string.exit_without_saving))
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null)
-		dismissDialog.setPositiveButton(R.string.shared_string_exit) { dialog: DialogInterface?, which: Int -> dismiss() }
-		dismissDialog.show()
+		val dialogData = AlertDialogData(requireContext(), nightMode)
+			.setTitle(R.string.shared_string_dismiss)
+			.setNegativeButton(R.string.shared_string_cancel, null)
+			.setPositiveButton(R.string.shared_string_exit) { _: DialogInterface?, _: Int -> dismiss() }
+		CustomAlert.showSimpleMessage(dialogData, R.string.exit_without_saving)
 	}
 
 	private fun onSaveEditedText(newName: String) {
@@ -137,7 +131,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 		if (target is OnDeviceNameChangedCallback) {
 			plugin?.let {
 				deviceAddress?.let { address ->
-					it.setDeviceName(address, newName)
+					it.setDeviceName(address, newName, isBLE)
 					target.onNameChanged()
 				}
 			}
@@ -151,16 +145,18 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 	companion object {
 		const val TAG = "RenameOBDDialog"
 		private const val DEVICE_ADDRESS_KEY = "device_address"
+		private const val BLE_KEY = "BLE_KEY"
 		fun showInstance(
 			activity: FragmentActivity,
 			target: Fragment?,
 			device: BTDeviceInfo) {
 			require(target is OnDeviceNameChangedCallback) { "target fragment should implement OnSaveSensorNameCallback" }
 			val fragmentManager = activity.supportFragmentManager
-			if (!fragmentManager.isStateSaved) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				val fragment = RenameOBDDialog()
 				val args = Bundle()
 				args.putString(DEVICE_ADDRESS_KEY, device.address)
+				args.putBoolean(BLE_KEY, device.isBLE)
 				fragment.arguments = args
 				fragment.setTargetFragment(target, 0)
 				fragment.show(fragmentManager, TAG)

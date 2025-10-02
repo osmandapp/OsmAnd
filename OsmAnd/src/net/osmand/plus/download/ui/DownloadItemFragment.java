@@ -3,7 +3,6 @@ package net.osmand.plus.download.ui;
 import static net.osmand.plus.download.ui.DownloadResourceGroupFragment.REGION_ID_DLG_KEY;
 
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,14 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
@@ -38,7 +39,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class DownloadItemFragment extends DialogFragment implements DownloadEvents {
+public class DownloadItemFragment extends BaseFullScreenDialogFragment implements DownloadEvents {
 
 	public static final String ITEM_ID_DLG_KEY = "index_item_dialog_key";
 
@@ -56,19 +57,11 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 	private View descriptionContainer;
 	private ViewGroup buttonsContainer;
 
-	private boolean nightMode;
-
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = !getMyApplication().getSettings().isLightContent();
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.item_info_fragment, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		View view = inflate(R.layout.item_info_fragment, container, false);
 
 		if (savedInstanceState != null) {
 			regionId = savedInstanceState.getString(REGION_ID_DLG_KEY);
@@ -80,17 +73,12 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 		}
 
 		toolbar = view.findViewById(R.id.toolbar);
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(requireContext()));
+		Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 
-		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
+		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) requireActivity(), false);
 
 		description = view.findViewById(R.id.description);
 		imagesPager = view.findViewById(R.id.images_pager);
@@ -142,8 +130,7 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 	}
 
 	private void reloadData() {
-		DownloadActivity activity = getDownloadActivity();
-		OsmandApplication app = activity.getMyApplication();
+		DownloadActivity activity = (DownloadActivity) requireActivity();
 		DownloadResources indexes = activity.getDownloadThread().getIndexes();
 		group = indexes.getGroupById(regionId);
 		CustomIndexItem indexItem = (CustomIndexItem) group.getItemByIndex(itemIndex);
@@ -189,15 +176,14 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 			}
 			buttonView.setOnClickListener(v -> {
 				if (actionButton.getUrl() != null) {
-					AndroidUtils.openUrl(activity, Uri.parse(actionButton.getUrl()), nightMode);
+					AndroidUtils.openUrl(activity, actionButton.getUrl(), nightMode);
 				} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
 					boolean isDownloading = activity.getDownloadThread().isDownloading(indexItem);
 					if (!isDownloading) {
 						activity.startDownload(indexItem);
 					}
 				} else {
-					String text = activity.getString(R.string.download_unsupported_action, actionButton.getActionType());
-					AndroidUtils.getApp(activity).showShortToastMessage(text);
+					AndroidUtils.getApp(activity).showShortToastMessage(R.string.download_unsupported_action, actionButton.getActionType());
 				}
 			});
 			buttonsContainer.addView(buttonView);
@@ -220,20 +206,16 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 		}
 	}
 
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-
-	private DownloadActivity getDownloadActivity() {
-		return (DownloadActivity) getActivity();
-	}
-
-	public static DownloadItemFragment createInstance(String regionId, int itemIndex) {
-		Bundle bundle = new Bundle();
-		bundle.putString(REGION_ID_DLG_KEY, regionId);
-		bundle.putInt(ITEM_ID_DLG_KEY, itemIndex);
-		DownloadItemFragment fragment = new DownloadItemFragment();
-		fragment.setArguments(bundle);
-		return fragment;
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull String regionId, int itemIndex) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle bundle = new Bundle();
+			bundle.putString(REGION_ID_DLG_KEY, regionId);
+			bundle.putInt(ITEM_ID_DLG_KEY, itemIndex);
+			DownloadItemFragment fragment = new DownloadItemFragment();
+			fragment.setArguments(bundle);
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

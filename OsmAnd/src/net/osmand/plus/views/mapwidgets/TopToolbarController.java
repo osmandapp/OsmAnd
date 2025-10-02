@@ -31,7 +31,7 @@ public class TopToolbarController {
 		MEASUREMENT_TOOL,
 		WEATHER,
 		POI_FILTER,
-		DOWNLOAD_MAP
+		SUGGEST_MAP
 	}
 
 	public static final int NO_COLOR = -1;

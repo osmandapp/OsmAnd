@@ -23,8 +23,6 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 
 	public SecondNextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, customId, SECOND_NEXT_TURN, panel, true);
-
-		setOnClickListener(getOnClickListener());
 	}
 
 	/**
@@ -59,7 +57,7 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 	@Override
 	public void updateNavigationInfo(@Nullable DrawSettings drawSettings) {
 		boolean followingMode = routingHelper.isFollowingMode() || locationProvider.getLocationSimulation().isRouteAnimating();
-		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity);
+		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity, true);
 		CurrentStreetName streetName = params.streetName;
 		TurnType turnType = null;
 		boolean deviatedFromRoute = false;
@@ -74,9 +72,9 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 				}
 			}
 			if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
-				streetName = TripUtils.getStreetName(app, info, info.directionInfo);
+				streetName = TripUtils.getStreetName(info);
 				if (verticalWidget && Algorithms.isEmpty(streetName.text)) {
-					streetName.text = info.directionInfo.getDescriptionRoutePart();
+					streetName.text = info.directionInfo.getDescriptionRoutePart(true);
 				}
 				turnType = info.directionInfo.getTurnType();
 				turnImminent = info.imminent;

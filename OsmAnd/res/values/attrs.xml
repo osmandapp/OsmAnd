@@ -156,6 +156,7 @@
 		<attr name="dlg_btn_secondary_harmful_text" format="reference" />
 		<attr name="dlg_btn_transparent" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
+		<attr name="dlg_btn_stroked_secondary_content" format="reference" />
 		<attr name="dlg_btn_tertiary_text" format="reference" />
 		<attr name="dlg_btn_tertiary_harmful" format="reference" />
 		<attr name="stroked_btn_contour" format="reference" />
@@ -237,6 +238,49 @@
         <attr name="setIcon" format="reference" />
     </declare-styleable>
 
+	<declare-styleable name="OutlinedTextContainer">
+		<attr name="android:textColor" />
+		<attr name="android:textSize" />
+		<attr name="android:fontFamily" />
+		<attr name="android:gravity" />
+		<attr name="android:text" />
+		<attr name="android:maxLines" />
+		<attr name="android:ellipsize" />
+		<attr name="android:includeFontPadding" />
+		<attr name="android:letterSpacing" />
+		<attr name="android:lineSpacingExtra" />
+		<attr name="android:lineSpacingMultiplier" />
+		<attr name="android:autoSizeMaxTextSize" />
+		<attr name="android:autoSizeMinTextSize" />
+		<attr name="android:autoSizeStepGranularity" />
+		<attr name="android:autoSizeTextType" />
+		<attr name="android:textAllCaps" />
+
+		<attr name="outlineColor" format="color" />
+		<attr name="outlineWidth" format="dimension" />
+		<attr name="textViewType" format="enum">
+			<enum name="normal" value="0" />
+			<enum name="autoScale" value="1" />
+			<enum name="multi" value="2" />
+		</attr>
+
+		<!-- AutoScaleTextView attributes -->
+		<attr name="autoScale_minTextSize" format="dimension" />
+		<attr name="autoScale_maxTextSize" format="dimension" />
+
+		<!-- MultiTextViewEx attributes -->
+		<attr name="multiTextViewEx_separator" format="string" />
+		<attr name="multiTextViewEx_separatorColor" format="reference" />
+
+		<attr name="multiTextViewEx_primaryText" format="string" />
+		<attr name="multiTextViewEx_secondaryText" format="string" />
+		<attr name="multiTextViewEx_tertiaryText" format="string" />
+
+		<attr name="multiTextViewEx_primaryTextColor" format="reference" />
+		<attr name="multiTextViewEx_secondaryTextColor" format="reference" />
+		<attr name="multiTextViewEx_tertiaryTextColor" format="reference" />
+	</declare-styleable>
+
 	<declare-styleable name="HorizontalChipsView">
 		<attr name="chipTitleColor" format="reference" />
 		<attr name="chipTitleSelectedColor" format="reference" />
@@ -277,8 +321,9 @@
 			<enum name="secondaryHarmful" value="3" />
 			<enum name="secondaryActive" value="4" />
 			<enum name="stroked" value="5" />
-			<enum name="tertiary" value="6" />
-			<enum name="tertiary_harmful" value="7" />
+			<enum name="stroked_secondary" value="6" />
+			<enum name="tertiary" value="7" />
+			<enum name="tertiary_harmful" value="8" />
 		</attr>
 		<attr name="dialogButtonTopMargin" format="dimension" />
 		<attr name="dialogButtonBottomMargin" format="dimension" />

@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SavedArticlesTabFragment extends BaseOsmAndFragment implements TravelLocalDataHelper.Listener {
+public class SavedArticlesTabFragment extends BaseFullScreenFragment implements TravelLocalDataHelper.Listener {
 
 	protected static final Log LOG = PlatformUtil.getLog(SavedArticlesTabFragment.class);
 
@@ -43,7 +45,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		dataHelper = app.getTravelHelper().getBookmarksHelper();
-		View mainView = themedInflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
+		View mainView = inflate(R.layout.fragment_saved_articles_tab, container, false);
 
 		adapter = new SavedArticlesRvAdapter(app);
 		adapter.setListener(article -> {
@@ -69,8 +71,19 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	}
 
 	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
+
+		if (adapter != null && adapter.getItemCount() == 0) {
+			savedArticlesUpdated();
+		}
 		if (dataHelper != null) {
 			dataHelper.addListener(this);
 		}

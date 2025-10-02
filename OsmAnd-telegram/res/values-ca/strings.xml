@@ -156,7 +156,7 @@
     <string name="enter_password">Introduïu la contrasenya</string>
     <string name="password_descr">Contrasenya de Telegram</string>
     <string name="shared_string_login">Inicia sessió</string>
-    <string name="shared_string_logout">Tanca la sessió</string>
+    <string name="shared_string_logout">Tanca sessió</string>
     <string name="initialization">S\'està iniciant</string>
     <string name="logging_out">S\'està tancant</string>
     <string name="gps_network_not_enabled">Voleu activa la ubicació\?</string>
@@ -214,7 +214,7 @@
     <string name="nm_h">nusos</string>
     <string name="mile_per_hour">mph</string>
     <string name="shared_string_second_short">seg</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> us permet compartir la vostra posició i veure la dels altres a OsmAnd.<br/> <br/>L\'aplicació utilitza l\'API de Telegram, per tant us cal un compte de Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> us permet compartir la vostra posició i veure la dels altres a OsmAnd.<br></br> <br></br>L\'aplicació utilitza l\'API de Telegram, per tant us cal un compte de Telegram.</string>
     <string name="direction">Adreça</string>
     <string name="precision">Precisió</string>
     <string name="altitude">Altitud</string>

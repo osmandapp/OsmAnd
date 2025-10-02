@@ -1,19 +1,17 @@
 package net.osmand.plus.plugins.osmedit.menu;
 
 import android.content.Context;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -31,13 +29,13 @@ public class OsmNotesMenu {
 	private static final Integer[] zoomIntValues = {8, 9, 10, 11, 12, 13, 14, 15, 16};
 
 	public static ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
+		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getApp());
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
 
 	private static void createLayersItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean nightMode = isNightMode(app);
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 
@@ -132,6 +130,6 @@ public class OsmNotesMenu {
 	}
 
 	public static boolean isNightMode(@NonNull OsmandApplication app) {
-		return app.getDaynightHelper().isNightMode(true);
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }

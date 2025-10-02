@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -39,13 +39,15 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImportCompleteFragment extends BaseOsmAndFragment {
+public class ImportCompleteFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
 
@@ -94,7 +96,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_import_complete, container, false);
+		View root = inflate(R.layout.fragment_import_complete, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 
 		TextView description = root.findViewById(R.id.description);
@@ -122,6 +124,15 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			}
 		});
 		return root;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.button_container));
+		collection.replace(InsetTarget.createScrollable(R.id.nested_scroll));
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	@Override
@@ -191,8 +202,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				break;
 			case AVOID_ROADS:
 				if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-					new AvoidRoadsBottomSheetDialogFragment()
-							.show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+					AvoidRoadsBottomSheetDialogFragment.showInstance(activity, null, null, null, null);
 				}
 				break;
 			case TRACKS:

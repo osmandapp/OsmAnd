@@ -219,6 +219,7 @@
         <item name="dlg_btn_secondary_harmful_text">@color/color_osm_edit_delete</item>
         <item name="dlg_btn_transparent">@drawable/dlg_btn_transparent_dark</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
+        <item name="dlg_btn_stroked_secondary_content">@color/dlg_btn_stroked_secondary_content_dark</item>
         <item name="dlg_btn_tertiary_text">@color/active_color_primary_dark</item>
         <item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_night</item>

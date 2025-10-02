@@ -1,30 +1,27 @@
 package net.osmand.plus.track.fragments;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.EditTextEx;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
+public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = EditDescriptionFragment.class.getSimpleName();
 
@@ -37,7 +34,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.dialog_edit_gpx_description, container, false);
+		View view = inflate(R.layout.dialog_edit_gpx_description, container, false);
 
 		etText = view.findViewById(R.id.description);
 		etText.requestFocus();
@@ -68,21 +65,14 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 		return true;
 	}
 
-	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			int statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode);
-			window.setStatusBarColor(statusBarColor);
-		}
-		return dialog;
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
+	@Override
+	protected int getStatusBarColorId() {
+		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
 	private boolean shouldClose() {
@@ -111,19 +101,16 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void showDismissDialog() {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode(false));
-		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
-		dismissDialog.setMessage(getString(R.string.exit_without_saving));
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
-		dismissDialog.show();
+		AlertDialogData dialogData = new AlertDialogData(requireActivity(), nightMode)
+				.setTitle(R.string.shared_string_dismiss)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
+		CustomAlert.showSimpleMessage(dialogData, R.string.exit_without_saving);
 	}
 
 	private boolean onSaveEditedText(@NonNull String editedText) {
 		Fragment target = getTargetFragment();
-		if (target instanceof OnSaveDescriptionCallback) {
-			OnSaveDescriptionCallback callback = (OnSaveDescriptionCallback) target;
+		if (target instanceof OnSaveDescriptionCallback callback) {
 			return callback.onSaveEditedDescription(editedText, this::dismiss);
 		}
 		return false;
@@ -131,7 +118,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String description, @Nullable Fragment target) {
 		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			EditDescriptionFragment fragment = new EditDescriptionFragment();
 			Bundle args = new Bundle();
 			args.putString(CONTENT_KEY, description);

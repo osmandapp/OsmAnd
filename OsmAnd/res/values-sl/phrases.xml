@@ -1462,9 +1462,6 @@
     <string name="poi_seasonal_dry_season">Suha sezona</string>
     <string name="poi_disused">Neuporabljeno</string>
     <string name="poi_collection_times">Čas zbiranja</string>
-    <string name="poi_route_hiking_ref_poi">Sklic na pohodniško pot</string>
-    <string name="poi_route_hiking_rwn_poi">Regionalna pohodniška pot</string>
-    <string name="poi_route_hiking_nwn_poi">Nacionalna pohodniška pot</string>
     <string name="poi_rwn_ref">Vozlišče regionalnega pohodniškega omrežja</string>
     <string name="poi_nwn_ref">Vozlišče nacionalnega pohodniškega omrežja</string>
     <string name="poi_iwn_ref">Vozlišče mednarodnega pohodniškega omrežja</string>
@@ -1688,7 +1685,6 @@
     <string name="poi_piste_grooming_classic_skating">Klasično + drsanje</string>
     <string name="poi_icn_ref">Vozlišče mednarodnega kolesarskega omrežja</string>
     <string name="poi_lcn_ref">Vozlišče lokalnega kolesarskega omrežja</string>
-    <string name="poi_route_hiking_iwn_poi">Mednarodna pohodniška pot</string>
     <string name="poi_operator">Operater</string>
     <string name="poi_seasonal_summer">Poletje</string>
     <string name="poi_crossing_uncontrolled">Nenadzorovano</string>
@@ -1827,7 +1823,6 @@
     <string name="poi_kent_carriage_gap">Prehod za kočije Kent</string>
     <string name="poi_highway_crossing">Prehod za pešce</string>
     <string name="poi_rcn_ref">Vozlišče regionalnega kolesarskega omrežja</string>
-    <string name="poi_route_hiking_lwn_poi">Lokalna pohodniška pot</string>
     <string name="poi_wheelchair_no">Ne</string>
     <string name="poi_trade_plumbing">Vodovodni material</string>
     <string name="poi_trade_tile">Dobava ploščic</string>
@@ -3063,7 +3058,7 @@
     <string name="poi_adult_gaming_centre">Prizorišče s plačljivimi igrami za odrasle</string>
     <string name="poi_amusement_arcade">Prizorišče s plačljivimi igrami</string>
     <string name="poi_outpost">Dostavno mesto v trgovini</string>
-    <string name="poi_whitewater_rapid_name">Ime rečnih brzic</string>
+    <string name="poi_rapids_name">Ime rečnih brzic</string>
     <string name="poi_socket_schuko_output_medium">Srednja</string>
     <string name="poi_socket_cee_blue_output_medium">Srednja</string>
     <string name="poi_socket_schuko_output_high">Visoka</string>
@@ -4620,7 +4615,9 @@
     <string name="poi_direction">Smer</string>
     <string name="poi_roundtrip_yes">Krožno: da</string>
     <string name="poi_roundtrip_no">Krožno: ne</string>
+    <string name="poi_socket_typee_output">Vtičnica: Type E: izhod</string>
     <string name="poi_checkpoint_cycling">Kolesarska kontrolna točka</string>
+    <string name="poi_state_abandoned">Stanje: zapuščeno</string>
     <string name="poi_state_approved">Stanje: odobreno</string>
     <string name="poi_state_detour">Stanje: obvoz</string>
     <string name="poi_healthcare_speciality_pharmacology">Farmakologija</string>
@@ -4658,6 +4655,8 @@
     <string name="poi_healthcare_speciality_fertility">Plodnost</string>
     <string name="poi_healthcare_speciality_massage_therapy">Masažna terapija</string>
     <string name="poi_healthcare_speciality_vascular_surgery">Vaskularna kirurgija</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ajurveda</string>
+    <string name="poi_healthcare_speciality_reflexology">Refleksologija</string>
     <string name="poi_healthcare_speciality_anthroposophical">Antropozofija</string>
     <string name="poi_healthcare_speciality_applied_kinesiology">Uporabna kineziologija</string>
     <string name="poi_healthcare_speciality_aromatherapy">Aromaterapija</string>

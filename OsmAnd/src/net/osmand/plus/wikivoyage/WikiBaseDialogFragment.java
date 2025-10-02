@@ -2,10 +2,7 @@ package net.osmand.plus.wikivoyage;
 
 import static net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColorId;
 
-import android.app.Dialog;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.Window;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -15,25 +12,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
-public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
+public class WikiBaseDialogFragment extends BaseFullScreenDialogFragment {
 
-	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
-		Dialog dialog = new Dialog(getContext(), themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(getColor(getStatusBarColor()));
-		}
-		return dialog;
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
 	}
 
 	@Override
@@ -43,11 +30,6 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 			transaction.addToBackStack(tag);
 			show(transaction, tag);
 		}
-	}
-
-	@Override
-	protected Drawable getContentIcon(int id) {
-		return getIcon(id, R.color.icon_color_default_light);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int iconId) {

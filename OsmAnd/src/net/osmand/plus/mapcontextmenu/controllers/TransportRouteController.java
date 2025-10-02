@@ -200,7 +200,7 @@ public class TransportRouteController extends MenuController {
 			transportRoute.setStopIndex(stopIndex);
 			transportRoute.refStop = stop;
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-					transportRoute.getDescription(mapActivity.getMyApplication(), false));
+					transportRoute.getDescription(mapActivity.getApp(), false));
 
 			updateControllers();
 
@@ -256,7 +256,7 @@ public class TransportRouteController extends MenuController {
 			return;
 		}
 		List<TransportStop> stops = transportRoute.route.getForwardStops();
-		boolean useEnglishNames = mapActivity.getMyApplication().getSettings().usingEnglishNames();
+		boolean useEnglishNames = mapActivity.getSettings().usingEnglishNames();
 		int currentStop = transportRoute.getStopIndex();
 		int defaultIcon = transportRoute.type == null ? R.drawable.mx_route_bus_ref : transportRoute.type.getResourceId();
 		int startPosition = 0;
@@ -265,15 +265,11 @@ public class TransportRouteController extends MenuController {
 			if (currentStop > 0) {
 				addPlainMenuItem(defaultIcon, mapActivity.getString(R.string.shared_string_show),
 						mapActivity.getString(R.string.route_stops_before, String.valueOf(currentStop)),
-						false, false, new OnClickListener() {
-
-							@Override
-							public void onClick(View arg0) {
-								MapActivity activity = getMapActivity();
-								if (activity != null) {
-									MapContextMenu menu = activity.getContextMenu();
-									menu.showOrUpdate(latLon, getPointDescription(), transportRoute);
-								}
+						null, false, false, v -> {
+							MapActivity activity = getMapActivity();
+							if (activity != null) {
+								MapContextMenu menu = activity.getContextMenu();
+								menu.showOrUpdate(latLon, getPointDescription(), transportRoute);
 							}
 						});
 			}
@@ -285,13 +281,8 @@ public class TransportRouteController extends MenuController {
 				name = getStopType();
 			}
 			addPlainMenuItem(currentStop == i ? R.drawable.ic_action_marker_dark : defaultIcon,
-					null, name, false, false, new OnClickListener() {
-
-						@Override
-						public void onClick(View arg0) {
-							showTransportStop(stop, false, -1);
-						}
-					});
+					null, name, null, false, false,
+					v -> showTransportStop(stop, false, -1));
 		}
 	}
 

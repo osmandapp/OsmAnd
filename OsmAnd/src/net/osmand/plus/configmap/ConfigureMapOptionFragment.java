@@ -19,25 +19,32 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
+public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = ConfigureMapOptionFragment.class.getSimpleName();
 
 	private RulerWidget rulerWidget;
 	private DialogButton applyButton;
+	private List<MapButton> mapButtons = new ArrayList<>();
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -60,9 +67,10 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity activity = requireMapActivity();
-		View view = themedInflater.inflate(R.layout.configure_map_option_fragment, container, false);
+		View view = inflate(R.layout.configure_map_option_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
+		mapButtons = new ArrayList<>();
 		setupApplyButton(applyButton = view.findViewById(R.id.apply_button));
 		setupToolBar(view);
 		buildZoomButtons(view);
@@ -75,6 +83,16 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		refreshControlsButtons();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.LANDSCAPE_SIDES);
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_container).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true, R.id.main_view));
+		collection.add(InsetTarget.createHorizontalLandscape(true, R.id.toolbar, R.id.main_content));
+		return collection;
 	}
 
 	protected void setupBottomContainer(@NonNull View bottomContainer) {
@@ -110,15 +128,19 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_in_button));
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_zoom_out_button));
-		controlsLayer.addCustomizedDefaultMapButton(view.findViewById(R.id.map_my_location_button));
+		mapButtons.add(view.findViewById(R.id.map_zoom_in_button));
+		mapButtons.add(view.findViewById(R.id.map_zoom_out_button));
+		mapButtons.add(view.findViewById(R.id.map_my_location_button));
+		controlsLayer.addCustomizedDefaultMapButtons(mapButtons);
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
-		activity.getMapLayers().getMapControlsLayer().addCustomMapButton(view.findViewById(R.id.map_compass_button));
+
+		MapButton compassButton = view.findViewById(R.id.map_compass_button);
+		controlsLayer.addCustomMapButton(compassButton);
+		mapButtons.add(compassButton);
 	}
 
 	private void setupBackgroundShadow(@NonNull View view) {
@@ -159,9 +181,10 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			ViewGroup container = view.findViewById(R.id.hud_button_container);
-			Map3DButton map3DButton = (Map3DButton) themedInflater.inflate(R.layout.map_3d_button, container, false);
+			MapButton map3DButton = (Map3DButton) inflate(R.layout.map_3d_button, container, false);
 			activity.getMapLayers().getMapControlsLayer().addCustomMapButton(map3DButton);
 			container.addView(map3DButton);
+			mapButtons.add(map3DButton);
 		}
 	}
 
@@ -202,7 +225,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			MapLayers mapLayers = activity.getMapLayers();
-			mapLayers.getMapControlsLayer().clearCustomMapButtons();
+			mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -215,20 +238,5 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 	private void refreshControlsButtons() {
 		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
 	}
 }

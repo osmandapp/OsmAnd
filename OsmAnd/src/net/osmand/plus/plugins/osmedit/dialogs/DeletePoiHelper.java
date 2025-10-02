@@ -14,6 +14,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,6 +26,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -52,7 +54,7 @@ public class DeletePoiHelper {
 	}
 
 	public void deletePoiWithDialog(Amenity amenity) {
-		new AsyncTask<Amenity, Void, Entity>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Amenity, Void, Entity>() {
 
 			@Override
 			protected Entity doInBackground(Amenity... params) {
@@ -63,12 +65,12 @@ public class DeletePoiHelper {
 			protected void onPostExecute(Entity entity) {
 				deletePoiWithDialog(entity);
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, amenity);
+		}, amenity);
 	}
 
 	void deletePoiWithDialog(Entity entity) {
 		OsmandApplication app = AndroidUtils.getApp(activity);
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		if (entity == null) {
 			app.showToastMessage(R.string.poi_cannot_be_found);

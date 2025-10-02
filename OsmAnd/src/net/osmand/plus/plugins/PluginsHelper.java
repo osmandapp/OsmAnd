@@ -21,8 +21,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -40,6 +39,7 @@ import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCa
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin.PluginInstallListener;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.custom.CustomRegion;
@@ -56,9 +56,9 @@ import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.render.RendererRegistry.RendererEventListener;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -112,9 +112,7 @@ public class PluginsHelper {
 		checkMarketPlugin(app, new SRTMPlugin(app));
 		allPlugins.add(new WeatherPlugin(app));
 		checkMarketPlugin(app, new NauticalMapsPlugin(app));
-		if (Version.isDeveloperVersion(app)) {
-			allPlugins.add(new AisTrackerPlugin(app));
-		}
+		allPlugins.add(new AisTrackerPlugin(app));
 		checkMarketPlugin(app, new SkiMapsPlugin(app));
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app));
@@ -332,15 +330,13 @@ public class PluginsHelper {
 	}
 
 	private static void registerAppInitializingDependedProperties(@NonNull OsmandApplication app) {
-		app.getAppInitializer().addListener(new AppInitializeListener() {
-
+		app.getRendererRegistry().addRendererEventListener(new RendererEventListener() {
 			@Override
-			public void onFinish(@NonNull AppInitializer init) {
+			public void onRendererSelected(RenderingRulesStorage storage) {
 				registerRenderingPreferences(app);
 			}
 		});
 	}
-
 
 	public static void onRequestPermissionsResult(int requestCode, String[] permissions,
 	                                              int[] grantResults) {
@@ -932,7 +928,7 @@ public class PluginsHelper {
 		}
 		AndroidNetworkUtils.sendRequestAsync(app, ONLINE_PLUGINS_URL, params, null,
 				false, false, (resultJson, error, resultCode) -> {
-					new AsyncTask<Void, Void, List<OnlineOsmandPlugin>>() {
+					OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, List<OnlineOsmandPlugin>>() {
 						@Override
 						protected List<OnlineOsmandPlugin> doInBackground(Void... voids) {
 							List<OnlineOsmandPlugin> plugins = new ArrayList<>();
@@ -958,7 +954,7 @@ public class PluginsHelper {
 								callback.onFetchComplete(plugins);
 							}
 						}
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+					});
 				});
 	}
 }

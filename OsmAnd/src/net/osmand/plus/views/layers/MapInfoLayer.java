@@ -1,6 +1,8 @@
 package net.osmand.plus.views.layers;
 
 
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -150,6 +152,11 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
+	@Nullable
+	public TopToolbarView getTopToolbarView() {
+		return topToolbarView;
+	}
+
 	private void resetCashedTheme() {
 		themeId = -1;
 	}
@@ -185,6 +192,10 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	public boolean isTopToolbarViewVisible() {
 		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
+	}
+
+	public boolean isMapControlsVisible() {
+		return mapHudLayout != null && mapHudLayout.getVisibility() == VISIBLE;
 	}
 
 	public void updateSideWidgets() {

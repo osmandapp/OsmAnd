@@ -1,40 +1,24 @@
 package net.osmand.plus.settings.backend.backup;
 
-import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
-import static net.osmand.shared.gpx.GpxParameter.COLOR;
-import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
-import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
-import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_HDOP;
-import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_SPEED;
-import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
-import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_SPEED;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.shared.gpx.GpxParameter.SMOOTHING_THRESHOLD;
-import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.WIDTH;
+import static net.osmand.shared.gpx.GpxParameter.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
+import net.osmand.shared.util.KAlgorithms;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -66,6 +50,7 @@ public class GpxAppearanceInfo {
 	public static final String TAG_MIN_FILTER_ALTITUDE = "min_filter_altitude";
 	public static final String TAG_MAX_FILTER_ALTITUDE = "max_filter_altitude";
 	public static final String TAG_MAX_FILTER_HDOP = "max_filter_hdop";
+	public static final String TAG_IS_JOIN_SEGMENTS = "is_join_segments";
 
 	public static final Set<String> gpxAppearanceTags = Set.of(
 			TAG_COLOR,
@@ -90,7 +75,8 @@ public class GpxAppearanceInfo {
 			TAG_MAX_FILTER_SPEED,
 			TAG_MIN_FILTER_ALTITUDE,
 			TAG_MAX_FILTER_ALTITUDE,
-			TAG_MAX_FILTER_HDOP
+			TAG_MAX_FILTER_HDOP,
+			TAG_IS_JOIN_SEGMENTS
 	);
 
 	public static boolean isGpxAppearanceTag(@NonNull String tag) {
@@ -156,7 +142,9 @@ public class GpxAppearanceInfo {
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {
-		writeParam(json, TAG_COLOR, color);
+		if (color != null && color != 0) {
+			writeParam(json, TAG_COLOR, KAlgorithms.INSTANCE.colorToString(color));
+		}
 		writeParam(json, TAG_WIDTH, width);
 		writeParam(json, TAG_SHOW_ARROWS, showArrows);
 		writeParam(json, TAG_START_FINISH, showStartFinish);
@@ -185,7 +173,7 @@ public class GpxAppearanceInfo {
 	public static GpxAppearanceInfo fromJson(@NonNull JSONObject json) {
 		GpxAppearanceInfo gpxAppearanceInfo = new GpxAppearanceInfo();
 		boolean hasAnyParam = json.has(TAG_COLOR);
-		gpxAppearanceInfo.color = json.optInt(TAG_COLOR);
+		gpxAppearanceInfo.color = GpxUtilities.INSTANCE.parseColor(json.optString(TAG_COLOR));
 		hasAnyParam |= json.has(TAG_WIDTH);
 		gpxAppearanceInfo.width = json.optString(TAG_WIDTH);
 		hasAnyParam |= json.has(TAG_SHOW_ARROWS);
@@ -256,7 +244,8 @@ public class GpxAppearanceInfo {
 		return null;
 	}
 
-	private static void writeParam(@NonNull JSONObject json, @NonNull String name, @Nullable Object value) throws JSONException {
+	private static void writeParam(@NonNull JSONObject json, @NonNull String name,
+			@Nullable Object value) throws JSONException {
 		if (value instanceof Integer) {
 			if ((Integer) value != 0) {
 				json.putOpt(name, value);
@@ -278,7 +267,8 @@ public class GpxAppearanceInfo {
 		}
 	}
 
-	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name, double value) throws JSONException {
+	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name,
+			double value) throws JSONException {
 		if (!Double.isNaN(value)) {
 			json.putOpt(name, value);
 		}

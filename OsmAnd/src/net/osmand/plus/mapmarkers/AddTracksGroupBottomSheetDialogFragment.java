@@ -9,17 +9,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
@@ -31,11 +34,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-;
-
 public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
-	private OsmandApplication app;
 	private GpxDbHelper dbHelper;
 
 	private ProcessGpxTask asyncProcessor;
@@ -64,7 +64,6 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
 		dbHelper = app.getGpxDbHelper();
 	}
 
@@ -77,7 +76,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		lookingForTracksText = mainView.findViewById(R.id.looking_for_tracks_text);
 
 		asyncProcessor = new ProcessGpxTask();
-		asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(asyncProcessor);
 	}
 
 	@Override
@@ -100,13 +99,12 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		GpxDataItem dataItem = gpxList.get(position - 1);
 		GpxTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null && !Algorithms.isEmpty(analysis.getWptCategoryNames())) {
-			Bundle args = new Bundle();
-			args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, dataItem.getFile().absolutePath());
-
-			SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(false);
-			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+			Fragment parent = getParentFragment();
+			if (parent != null) {
+				FragmentManager fragmentManager = parent.getChildFragmentManager();
+				String path = dataItem.getFile().absolutePath();
+				SelectWptCategoriesBottomSheetDialogFragment.showInstance(fragmentManager, path);
+			}
 		} else {
 			GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
 			File gpx = SharedUtil.jFile(dataItem.getFile());
@@ -149,6 +147,15 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		setupHeightAndBackground(getView());
 	}
 
+	public static void showInstance(@NonNull FragmentManager childFragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, TAG)) {
+			AddGroupBottomSheetDialogFragment fragment = new AddTracksGroupBottomSheetDialogFragment();
+			fragment.setUsedOnMap(false);
+			fragment.setReenterTransition(true);
+			fragment.show(childFragmentManager, TAG);
+		}
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	private class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {
 
@@ -180,7 +187,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		private void processGPXFolder(File gpxPath, String gpxSubfolder) {
 			for (File gpxFile : listFilesSorted(gpxPath)) {
 				if (gpxFile.isDirectory()) {
-					String sub = gpxSubfolder.length() == 0 ?
+					String sub = gpxSubfolder.isEmpty() ?
 							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
 					processGPXFolder(gpxFile, sub);
 				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {

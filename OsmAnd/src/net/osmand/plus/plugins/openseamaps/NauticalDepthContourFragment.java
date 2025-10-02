@@ -17,13 +17,16 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -34,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class NauticalDepthContourFragment extends BaseOsmAndFragment {
+public class NauticalDepthContourFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = NauticalDepthContourFragment.class.getSimpleName();
 
@@ -68,7 +71,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
+		View view = inflate(R.layout.fragment_nautical_depth_contours, container, false);
 
 		setupHeader(view);
 		setupPropertyPreferences(view);
@@ -179,6 +182,14 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 			default:
 				return null;
 		}
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
@@ -25,7 +26,7 @@ public abstract class BaseMenuController {
 	protected boolean nightMode;
 
 	public BaseMenuController(@NonNull MapActivity mapActivity) {
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.mapActivity = mapActivity;
 		init();
 	}
@@ -56,7 +57,7 @@ public abstract class BaseMenuController {
 
 	public void updateNightMode() {
 		if (mapActivity != null) {
-			nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			nightMode = mapActivity.getApp().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		}
 	}
 
@@ -92,7 +93,7 @@ public abstract class BaseMenuController {
 
 	protected Drawable getIconOrig(int iconId) {
 		if (mapActivity != null) {
-			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
+			UiUtilities iconsCache = mapActivity.getApp().getUIUtilities();
 			return iconsCache.getIcon(iconId, 0);
 		} else {
 			return null;
@@ -105,7 +106,7 @@ public abstract class BaseMenuController {
 
 	protected Drawable getIcon(int iconId, int colorId) {
 		if (mapActivity != null) {
-			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
+			UiUtilities iconsCache = mapActivity.getApp().getUIUtilities();
 			return iconsCache.getIcon(iconId, colorId);
 		} else {
 			return null;

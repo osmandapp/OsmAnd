@@ -2,7 +2,6 @@ package net.osmand.plus.wikipedia;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -13,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -65,7 +65,7 @@ public class WikiArticleHelper {
 	public void showWikiArticle(@Nullable List<LatLon> locations, @NonNull String url) {
 		if (!Algorithms.isEmpty(locations)) {
 			articleSearchTask = new WikiArticleSearchTask(locations, url, activity, nightMode);
-			articleSearchTask.execute();
+			OsmAndTaskManager.executeTask(articleSearchTask);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class WikiArticleHelper {
 				.setTitle(url)
 				.setMessage(R.string.online_webpage_warning)
 				.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-					AndroidUtils.openUrl(context, Uri.parse(url), nightMode);
+					AndroidUtils.openUrl(context, url, nightMode);
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();

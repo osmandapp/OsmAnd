@@ -21,6 +21,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -52,9 +53,9 @@ public class WikipediaPoiMenu {
 
 	public WikipediaPoiMenu(@NonNull MapActivity activity) {
 		this.activity = activity;
-		this.app = activity.getMyApplication();
+		this.app = activity.getApp();
 		this.settings = app.getSettings();
-		this.nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	@NonNull
@@ -109,41 +110,39 @@ public class WikipediaPoiMenu {
 				.setListener(listener)
 				.setSelected(enabled));
 
-		if (enabled) {
-			adapter.addItem(new ContextMenuItem(null)
-					.setLayout(R.layout.list_item_divider));
+		adapter.addItem(new ContextMenuItem(null)
+				.setLayout(R.layout.list_item_divider));
 
-			summary = plugin.getLanguagesSummary();
-			adapter.addItem(new ContextMenuItem(null)
-					.setTitleId(languageActionStringId, activity)
-					.setIcon(R.drawable.ic_action_map_language)
-					.setDescription(summary)
-					.hideCompoundButton(true)
-					.setListener(listener));
+		summary = plugin.getLanguagesSummary();
+		adapter.addItem(new ContextMenuItem(null)
+				.setTitleId(languageActionStringId, activity)
+				.setIcon(R.drawable.ic_action_map_language)
+				.setDescription(summary)
+				.hideCompoundButton(true)
+				.setListener(listener));
 
-			adapter.addItem(new ContextMenuItem(null)
-					.setLayout(R.layout.list_item_divider));
+		adapter.addItem(new ContextMenuItem(null)
+				.setLayout(R.layout.list_item_divider));
 
-			DataSourceType sourceType = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
-			boolean online = sourceType == ONLINE;
-			summary = app.getString(online ? R.string.shared_string_online_only : R.string.shared_string_offline_only);
-			adapter.addItem(new ContextMenuItem(null)
-					.setTitleId(R.string.poi_source, activity)
-					.setLayout(R.layout.list_item_with_selector)
-					.setIcon(sourceType.iconId)
-					.setSecondaryIcon(R.drawable.ic_action_arrow_down)
-					.setColor(app, online ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
-					.setDescription(summary)
-					.setListener(listener));
+		DataSourceType sourceType = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
+		boolean online = sourceType == ONLINE;
+		summary = app.getString(online ? R.string.shared_string_online_only : R.string.shared_string_offline_only);
+		adapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.poi_source, activity)
+				.setLayout(R.layout.list_item_with_selector)
+				.setIcon(sourceType.iconId)
+				.setSecondaryIcon(R.drawable.ic_action_arrow_down)
+				.setColor(app, online ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
+				.setDescription(summary)
+				.setListener(listener));
 
-			boolean showPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
-			adapter.addItem(new ContextMenuItem(null)
-					.setTitleId(R.string.show_image_previews, activity)
-					.setIcon(showPreviews ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled)
-					.setColor(app, showPreviews ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
-					.setListener(listener)
-					.setSelected(showPreviews));
-		}
+		boolean showPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+		adapter.addItem(new ContextMenuItem(null)
+				.setTitleId(R.string.show_image_previews, activity)
+				.setIcon(showPreviews ? R.drawable.ic_action_photo : R.drawable.ic_action_image_disabled)
+				.setColor(app, showPreviews ? ColorUtilities.getActiveColorId(nightMode) : INVALID_ID)
+				.setListener(listener)
+				.setSelected(showPreviews));
 
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {

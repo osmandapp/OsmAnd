@@ -29,7 +29,7 @@
 				android:layoutDirection="rtl"
 				android:orientation="horizontal">
 
-				<TextView
+				<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 					android:id="@+id/widget_text_small"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
 					android:textSize="@dimen/simple_widget_description_text_size"
 					tools:text="Unit" />
 
-				<TextView
+				<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 					android:id="@+id/widget_name"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
@@ -74,7 +74,7 @@
 					android:gravity="center"
 					app:srcCompat="@drawable/ic_action_remove_dark" />
 
-				<TextView
+				<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 					android:id="@+id/widget_text"
 					android:layout_width="wrap_content"
 					android:layout_height="match_parent"

@@ -8,6 +8,7 @@ abstract class ElevationApproximator {
 
 	private var distances: DoubleArray? = null
 	private var elevations: DoubleArray? = null
+	private var survivedIndexes : IntArray? = null
 
 	abstract fun getPointLatitude(index: Int): Double
 
@@ -23,6 +24,10 @@ abstract class ElevationApproximator {
 
 	fun getElevations(): DoubleArray? {
 		return elevations
+	}
+
+	fun getSurvivedIndexes(): IntArray? {
+		return survivedIndexes
 	}
 
 	fun approximate(): Boolean {
@@ -44,8 +49,12 @@ abstract class ElevationApproximator {
 				survivedCount++
 			}
 		}
-		survived[pointsCount - 1] = true
-		survivedCount++
+
+		if (!getPointElevation(pointsCount - 1).isNaN()) {
+			survived[pointsCount - 1] = true
+			survivedCount++
+		}
+
 		if (survivedCount < 2) {
 			return false
 		}
@@ -74,10 +83,18 @@ abstract class ElevationApproximator {
 			return false
 		}
 
-		survived[0] = true
-		survived[pointsCount - 1] = true
-		val distances = DoubleArray(survivedCount + 2)
-		val elevations = DoubleArray(survivedCount + 2)
+		if (!getPointElevation(0).isNaN()) {
+			survived[0] = true
+			survivedCount++
+		}
+		if (!getPointElevation(pointsCount - 1).isNaN()) {
+			survived[pointsCount - 1] = true
+			survivedCount++
+		}
+
+		val distances = DoubleArray(survivedCount)
+		val elevations = DoubleArray(survivedCount)
+		val survivedIndexes = IntArray(survivedCount)
 		var k = 0
 		lastSurvived = 0
 		for (i in 0 until pointsCount) {
@@ -89,11 +106,13 @@ abstract class ElevationApproximator {
 				getPointLatitude(lastSurvived), getPointLongitude(lastSurvived)
 			)
 			elevations[k] = getPointElevation(i)
+			survivedIndexes[k] = i
 			k++
 			lastSurvived = i
 		}
 		this.distances = distances
 		this.elevations = elevations
+		this.survivedIndexes = survivedIndexes
 		return true
 	}
 }

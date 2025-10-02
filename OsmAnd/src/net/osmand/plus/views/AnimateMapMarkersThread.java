@@ -122,7 +122,7 @@ public class AnimateMapMarkersThread {
 		MapMarkersAnimator animator = getAnimator();
 		if (mapRenderer != null && animator != null) {
 			animator.animatePositionTo(mapMarker, target31, animationDuration / 1000f, TimingFunction.Linear);
-			startThreadAnimating(() -> animatingMapMarkersAnimator(mapRenderer));
+			startThreadAnimating(() -> animatingMapMarkersAnimator());
 		}
 	}
 
@@ -132,7 +132,7 @@ public class AnimateMapMarkersThread {
 		if (mapRenderer != null && animator != null) {
 			animator.animateDirectionTo(mapMarker, iconKey, (float) Utilities.normalizedAngleDegrees(direction),
 					animationDuration / 1000f, TimingFunction.Linear);
-			startThreadAnimating(() -> animatingMapMarkersAnimator(mapRenderer));
+			startThreadAnimating(() -> animatingMapMarkersAnimator());
 		}
 	}
 
@@ -142,31 +142,31 @@ public class AnimateMapMarkersThread {
 		if (mapRenderer != null && animator != null) {
 			animator.animateModel3DDirectionTo(mapMarker, (float) Utilities.normalizedAngleDegrees(direction),
 					animationDuration / 1000f, TimingFunction.Linear);
-			startThreadAnimating(() -> animatingMapMarkersAnimator(mapRenderer));
+			startThreadAnimating(() -> animatingMapMarkersAnimator());
 		}
 	}
 
 	public void animatePositionAndDirectionTo(@NonNull MapMarker mapMarker, @NonNull PointI target31, long positionAnimationDuration,
-	                                          @NonNull SWIGTYPE_p_void iconKey, float direction, long directionAnimationDuration) {
+											  @NonNull SWIGTYPE_p_void iconKey, float direction, long directionAnimationDuration) {
 		MapRendererView mapRenderer = getMapRenderer();
 		MapMarkersAnimator animator = getAnimator();
 		if (mapRenderer != null && animator != null) {
 			animator.animatePositionTo(mapMarker, target31, positionAnimationDuration / 1000f, TimingFunction.Linear);
 			animator.animateDirectionTo(mapMarker, iconKey, (float) Utilities.normalizedAngleDegrees(direction),
 					directionAnimationDuration / 1000f, TimingFunction.Linear);
-			startThreadAnimating(() -> animatingMapMarkersAnimator(mapRenderer));
+			startThreadAnimating(() -> animatingMapMarkersAnimator());
 		}
 	}
-	private void animatingMapMarkersAnimator(@NonNull MapRendererView mapRenderer) {
-		MapRendererView renderer = getMapRenderer();
-		if (renderer != null) {
-			renderer.resumeMapMarkersAnimation();
-		}
-		while (!stopped) {
-			mapRenderer.requestRender();
-			sleepToRedraw(true);
-			if (mapRenderer.isMapMarkersAnimationFinished()) {
-				break;
+	private void animatingMapMarkersAnimator() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.resumeMapMarkersAnimation();
+			while (!stopped) {
+				mapRenderer.requestRender();
+				sleepToRedraw(true);
+				if (mapRenderer.isMapMarkersAnimationFinished()) {
+					break;
+				}
 			}
 		}
 		tileView.refreshMap();

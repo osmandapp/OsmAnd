@@ -2,7 +2,10 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.NEW_ACTION_ID;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -29,11 +32,11 @@ public class NewAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
 		if (selectedButton != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			QuickActionButtonState buttonState = selectedButton.getButtonState();
 			AddQuickActionController.showAddQuickActionDialog(app, manager, buttonState);

@@ -5,7 +5,7 @@ import static net.osmand.plus.quickaction.QuickActionIds.FAVORITE_ACTION_ID;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -30,6 +30,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
@@ -60,7 +61,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		String title = getParams().get(KEY_NAME);
 		boolean showDialog = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 
@@ -98,7 +99,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 			}
 
 			private void onClick(String title, boolean autoFill) {
-				mapActivity.getMyApplication().getGeocodingLookupService().cancel(lookupRequest);
+				mapActivity.getApp().getGeocodingLookupService().cancel(lookupRequest);
 				dismissProgressDialog();
 				addFavorite(mapActivity, latLon, title, autoFill);
 			}
@@ -109,7 +110,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 			dismissProgressDialog();
 			addFavorite(mapActivity, latLon, address, !showDialog);
 		}, null);
-		mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+		mapActivity.getApp().getGeocodingLookupService().lookupAddress(lookupRequest);
 	}
 
 	@NonNull
@@ -125,9 +126,8 @@ public class FavoriteAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View root = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_add_favorite, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View root = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_add_favorite, parent, false);
 		setupPointLocationView(root.findViewById(R.id.point_location_container), mapActivity);
 		parent.addView(root);
 
@@ -170,7 +170,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 	}
 
 	private void setupUIDefaults(@NonNull View root, @NonNull MapActivity mapActivity) {
-		FavouritesHelper helper = mapActivity.getMyApplication().getFavoritesHelper();
+		FavouritesHelper helper = mapActivity.getApp().getFavoritesHelper();
 		AutoCompleteTextViewEx categoryEdit = root.findViewById(R.id.category_edit);
 		ImageView categoryImage = root.findViewById(R.id.category_image);
 

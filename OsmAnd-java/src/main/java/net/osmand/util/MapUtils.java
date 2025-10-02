@@ -25,7 +25,7 @@ public class MapUtils {
 
 	public static final int ROUNDING_ERROR = 3;
 	private static final int EARTH_RADIUS_B = 6356752;
-	private static final int EARTH_RADIUS_A = 6378137;
+	static final int EARTH_RADIUS_A = 6378137;
 	public static final double MIN_LATITUDE = -85.0511;
 	public static final double MAX_LATITUDE = 85.0511;
 	public static final double LATITUDE_TURN = 180.0;
@@ -34,10 +34,9 @@ public class MapUtils {
 	public static final double LONGITUDE_TURN = 360.0;
 	public static final double DEFAULT_LATLON_PRECISION = 0.00001;
 	public static final double HIGH_LATLON_PRECISION = 0.0000001;
+	public static final double METERS_IN_DEGREE = 111320;
 
-	// TODO change the hostname back to osm.org once HTTPS works for it
-	// https://github.com/openstreetmap/operations/issues/2
-	private static final String BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/";
+	private static final String BASE_SHORT_OSM_URL = "https://osm.org/go/"; //"https://openstreetmap.org/go/";
 
 	/**
 	 * This array is a lookup table that translates 6-bit positive integer
@@ -834,6 +833,35 @@ public class MapUtils {
 
 		return new LatLon(Math.toDegrees(phi2), Math.toDegrees(lambda2));
 	}
+	
+	 public static LatLon greatCircleDestinationPoint(double lat, double lon, double distance, double bearing) {
+	        double radius = EARTH_RADIUS_A;
+	        // Angular distance in radians
+	        double angularDistance = distance / radius;
+	        // Convert inputs from degrees to radians
+	        double latRad = Math.toRadians(lat);
+	        double lonRad = Math.toRadians(lon);
+	        double bearingRad = Math.toRadians(bearing);
+	        // Calculate destination latitude
+	        double destLatRad = Math.asin(
+	                Math.sin(latRad) * Math.cos(angularDistance) +
+	                Math.cos(latRad) * Math.sin(angularDistance) * Math.cos(bearingRad)
+	        );
+	        // Calculate destination longitude
+	        double y = Math.sin(bearingRad) * Math.sin(angularDistance) * Math.cos(latRad);
+	        double x = Math.cos(angularDistance) - Math.sin(latRad) * Math.sin(destLatRad);
+	        double destLonRad = lonRad + Math.atan2(y, x);
+
+	        // Convert final coordinates from radians back to degrees
+	        double destLat = Math.toDegrees(destLatRad);
+	        double destLon = Math.toDegrees(destLonRad);
+	        // Normalize longitude to the range -180 to +180 degrees
+	        destLon = (destLon + 540) % 360 - 180;
+	        return new LatLon(destLat, destLon);
+	    }
+	    
+	    
+	
 
 	public static double getSqrtDistance(int startX, int startY, int endX, int endY) {
 		return Math.sqrt((double) (endX - startX) * (endX - startX) + (double) (endY - startY) * (endY - startY));
@@ -884,5 +912,50 @@ public class MapUtils {
 			dist = dist * (iteration % 2 == 1 ? mult1 : mult2);
 		}
 		return dist;
+	}
+
+	public static void inflateBBox31(QuadRect bbox, int dx, int dy) {
+		if (bbox.left <= bbox.right) {
+			bbox.left -= dx;
+			bbox.right += dx;
+		} else {
+			bbox.left += dx;
+			bbox.right -= dx;
+		}
+		if (bbox.top <= bbox.bottom) {
+			bbox.top -= dy;
+			bbox.bottom += dy;
+		} else {
+			bbox.top += dy;
+			bbox.bottom -= dy;
+		}
+		int INT31_MAX = (1 << 31) - 1;
+		bbox.top = Math.min(Math.max(0, bbox.top), INT31_MAX);
+		bbox.left = Math.min(Math.max(0, bbox.left), INT31_MAX);
+		bbox.right = Math.min(Math.max(0, bbox.right), INT31_MAX);
+		bbox.bottom = Math.min(Math.max(0, bbox.bottom), INT31_MAX);
+	}
+
+	public static void inflateBBoxLatLon(QuadRect bbox, double dx, double dy) {
+		if (bbox.left <= bbox.right) {
+			bbox.left -= dx;
+			bbox.right += dx;
+		} else {
+			bbox.left += dx;
+			bbox.right -= dx;
+		}
+		if (bbox.top >= bbox.bottom) {
+			bbox.top += dy;
+			bbox.bottom -= dy;
+		} else {
+			bbox.top -= dy;
+			bbox.bottom += dy;
+		}
+		// clamp X/longitude [-180,180]
+		bbox.left = Math.max(-180.0, Math.min(180.0, bbox.left));
+		bbox.right = Math.max(-180.0, Math.min(180.0, bbox.right));
+		// clamp Y/latitude [-90,90]
+		bbox.top = Math.max(-90.0, Math.min(90.0, bbox.top));
+		bbox.bottom = Math.max(-90.0, Math.min(90.0, bbox.bottom));
 	}
 }

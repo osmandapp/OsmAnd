@@ -32,7 +32,7 @@ public class CustomizableSingleSelectionDialogFragment extends CustomizableDialo
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(getLayoutId(), container);
+		View view = inflate(getLayoutId(), container, false);
 		if (displayData != null) {
 			adapter = new SingleSelectionAdapter(app, requireContext(), getController());
 			setupToolbar(view);

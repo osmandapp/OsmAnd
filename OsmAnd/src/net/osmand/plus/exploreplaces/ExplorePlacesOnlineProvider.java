@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import static net.osmand.binary.ObfConstants.createMapObjectIdFromOsmId;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -34,19 +36,11 @@ import org.apache.commons.logging.Log;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
 
-// TODO use gzip in loading +
-// TODO errors shouldn'go with empty response "" into cache! +
-// TODO remove checks poi type subtype null +
-// TODO display all data downloaded even if maps are not loaded
-// TODO: why recreate provider when new points are loaded? that causes blinking
-// TODO: scheduleImageRefreshes in layer is incorrect it starts downloading all images and stops interacting
-// TODO images shouldn't be queried if they are not visible in all lists! size doesn't matter !
-// TODO show on map close button is not visible +
-// TODO layer sometimes becomes non-interactive - MAP FPS drops
-// TODO Context menu doesn't work correctly and duplicates actual POI +
-// TODO compass is not rotating +
 // Extra: display new categories from web
+
 public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(ExplorePlacesOnlineProvider.class);
@@ -128,9 +122,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 	@NonNull
 	private List<String> getPreferredLangs() {
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		if (Algorithms.isEmpty(preferredLang)) {
-			preferredLang = app.getLanguage();
-		}
 		Set<String> languages = new LinkedHashSet<>();
 		WikipediaPlugin plugin = PluginsHelper.requirePlugin(WikipediaPlugin.class);
 		if (plugin.hasCustomSettings()) {
@@ -139,8 +130,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 				languages.add(preferredLang);
 			}
 			languages.addAll(langs);
-		} else {
-			languages.add(preferredLang);
 		}
 		return new ArrayList<>(languages);
 	}
@@ -201,9 +190,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, languages);
 						cachedPlaces = new ArrayList<>();
 						for (OsmandApiFeatureData item : places) {
-							if (Algorithms.isEmpty(item.properties.photoTitle)) {
-								continue;
-							}
 							Amenity amenity = createAmenity(item);
 							if (amenity != null) {
 								filterAmenity(amenity, filteredAmenities, rect, uniqueIds, loadAll);
@@ -268,7 +254,6 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		WikiDataProperties properties = featureData.properties;
 
 		amenity.setAdditionalInfo(WIKIDATA, app.getString(R.string.wikidata_id_pattern, properties.id));
-		amenity.setId(properties.osmid);
 		amenity.setName(properties.wikiTitle);
 		amenity.setEnName(TransliterationHelper.transliterate(amenity.getName()));
 		amenity.setDescription(properties.wikiDesc);
@@ -277,22 +262,36 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 			amenity.updateContentLocales(Set.of(properties.wikiLangs.split(",")));
 		}
 
-		WikiImage imageData = WikiHelper.INSTANCE.getImageData(properties.photoTitle);
-		amenity.setWikiPhoto(imageData.getImageHiResUrl());
-		amenity.setWikiIconUrl(imageData.getImageIconUrl());
-		amenity.setWikiImageStubUrl(imageData.getImageStubUrl());
+		if (!Algorithms.isEmpty(properties.photoTitle)) {
+			WikiImage imageData = WikiHelper.INSTANCE.getImageData(properties.photoTitle);
+			amenity.setWikiPhoto(imageData.getImageHiResUrl());
+			amenity.setWikiIconUrl(imageData.getImageIconUrl());
+			amenity.setWikiImageStubUrl(imageData.getImageStubUrl());
+		}
 		amenity.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
 
 		String poitype = properties.poitype;
-		if (!Algorithms.isEmpty(poitype)) {
-			PoiCategory category = app.getPoiTypes().getPoiCategoryByName(poitype);
-			amenity.setType(category != null ? category : app.getPoiTypes().getOtherPoiCategory());
+		String subtype = properties.poisubtype;
+		PoiCategory wikiCategory = app.getPoiTypes().getPoiCategoryByName("osmwiki");
+		PoiCategory category = Algorithms.isEmpty(poitype) ? null : app.getPoiTypes().getPoiCategoryByName(poitype);
+		if (Algorithms.isEmpty(subtype) || category == null) {
+			category = wikiCategory;
+			subtype = "wikiplace";
 		}
-		amenity.setSubType(properties.poisubtype);
+		if (category == null) {
+			return null;
+		}
+		amenity.setType(category);
+		amenity.setSubType(subtype);
+		if (properties.osmid > 0) {
+			amenity.setId(createMapObjectIdFromOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
+		} else {
+			amenity.setId(-Long.parseLong(properties.id));
+		}
 		//amenity.setTravelTopic(properties.wikiTitle);
 		//amenity.setWikiCategory(properties.wikiDesc);
 		amenity.setTravelEloNumber(properties.elo != null ? properties.elo.intValue() : DEFAULT_ELO);
-		return amenity.getType() != null ? amenity : null;
+		return amenity;
 	}
 
 	@SuppressLint("DefaultLocale")

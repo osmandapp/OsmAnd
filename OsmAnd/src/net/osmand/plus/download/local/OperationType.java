@@ -8,8 +8,8 @@ import net.osmand.plus.R;
 public enum OperationType {
 
 	DELETE_OPERATION(R.string.shared_string_delete, R.drawable.ic_action_delete_outlined),
-	BACKUP_OPERATION(R.string.local_index_mi_backup, R.drawable.ic_type_archive),
-	RESTORE_OPERATION(R.string.local_index_mi_restore, R.drawable.ic_type_archive),
+	BACKUP_OPERATION(R.string.local_index_mi_backup, R.drawable.ic_action_box_closed_arrow),
+	RESTORE_OPERATION(R.string.local_index_mi_restore, R.drawable.ic_action_box_open_arrow),
 	CLEAR_TILES_OPERATION(R.string.clear_tile_data, R.drawable.ic_action_remove_dark);
 
 	@StringRes

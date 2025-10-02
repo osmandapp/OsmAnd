@@ -6,7 +6,6 @@ import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
-import android.os.AsyncTask;
 import android.view.Display;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.core.util.Pair;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -25,6 +23,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -72,7 +71,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
 	private MapContextMenu contextMenu;
-	private StateChangedListener<Boolean> enable3DViewListener;
 
 	private boolean isMapLinkedToLocation = true;
 	private boolean movingToMyLocation;
@@ -190,7 +188,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val, false);
 				}
-			} else if (showViewAngle && headingChanged) {
+			} else if (showViewAngle && headingChanged && !mapView.hasMapRenderer()) {
 				mapView.refreshMap();
 			}
 		}
@@ -229,8 +227,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void detectCurrentRegion(@NonNull LatLon latLon,
 	                                @NonNull CallbackWithObject<WorldRegion> onRegionDetected) {
-		new DetectRegionTask(app, onRegionDetected)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+		OsmAndTaskManager.executeTask(new DetectRegionTask(app, onRegionDetected), latLon);
 	}
 
 	@Override
@@ -363,7 +360,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 		int elevationAngle = 0;
 		if (zoomParams != null && mapView.getElevationAngle() != DEFAULT_ELEVATION_ANGLE) {
-			elevationAngle  = settings.AUTO_ZOOM_3D_ANGLE.get();
+			elevationAngle = settings.AUTO_ZOOM_3D_ANGLE.get();
 		}
 		double latitude = predictedLocation != null ? predictedLocation.getLatitude() : location.getLatitude();
 		double longitude = predictedLocation != null ? predictedLocation.getLongitude() : location.getLongitude();
@@ -403,7 +400,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private boolean animateMyLocation(@NonNull Location location) {
-		return settings.ANIMATE_MY_LOCATION.get() && !isSmallSpeedForAnimation(location) && !movingToMyLocation;
+		return settings.ANIMATE_MY_LOCATION.get() && !movingToMyLocation;
 	}
 
 	public boolean isShowViewAngle() {
@@ -528,6 +525,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}, delay * 1000L);
 	}
 
+	public void resetBackToLocation() {
+		if (app.hasMessagesInUiThread(AUTO_FOLLOW_MSG_ID)) {
+			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
+			if (autoFollow > 0 && routingHelper.isFollowingMode() && !routePlanningMode) {
+				backToLocationWithDelay(autoFollow);
+			}
+		}
+	}
+
 	public boolean isMapLinkedToLocation() {
 		return isMapLinkedToLocation;
 	}
@@ -562,7 +568,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
-		// when user start dragging 
+		// when user start dragging
 		setMapLinkedToLocation(false);
 	}
 
@@ -573,7 +579,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				switchCompassToNextMode();
 			} else {
 				compassRequest = System.currentTimeMillis();
-				app.showShortToastMessage(app.getString(R.string.press_again_to_change_the_map_orientation));
+				app.showShortToastMessage(R.string.press_again_to_change_the_map_orientation);
 			}
 		} else {
 			compassRequest = 0;

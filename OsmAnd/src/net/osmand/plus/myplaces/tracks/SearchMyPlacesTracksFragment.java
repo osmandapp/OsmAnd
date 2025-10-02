@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
@@ -31,6 +31,8 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvi
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
@@ -89,6 +91,14 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		setupBottomMenu(view);
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.recycler_view));
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container));
+		return collection;
 	}
 
 	@NonNull
@@ -233,7 +243,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
 				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
-						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(false));
+						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(ThemeUsageContext.APP));
 			}
 		});
 

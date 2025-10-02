@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/list_background_color"
-    android:clickable="true"
+    android:orientation="vertical"
     android:focusable="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -18,19 +18,18 @@
     <ScrollView
         android:id="@+id/segments_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/dialog_button_ex_height">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/segments_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/dialog_button_ex_height"
             android:paddingBottom="@dimen/context_menu_buttons_bottom_height" />
 
     </ScrollView>
 
     <include layout="@layout/control_bottom_buttons" />
 
-</FrameLayout>
+</LinearLayout>

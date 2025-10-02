@@ -19,7 +19,7 @@ import androidx.core.widget.CompoundButtonCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -280,7 +280,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		for (ExportType exportType : items.getTypes()) {
 			if (!Algorithms.isEmpty(selectedItemsMap.get(exportType))) {
 				selectedTypes++;
-				itemsSize += calculateItemsSize(items.getItemsForType(exportType));
+				itemsSize += BackupUtils.calculateItemsSize(items.getItemsForType(exportType));
 			}
 		}
 		String description;
@@ -293,20 +293,6 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 		String formattedSize = AndroidUtils.formatSize(app, itemsSize);
 		return itemsSize == 0 ? description : app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
-	}
-
-	public static long calculateItemsSize(List<?> items) {
-		long itemsSize = 0;
-		for (Object item : items) {
-			if (item instanceof FileSettingsItem) {
-				itemsSize += ((FileSettingsItem) item).getSize();
-			} else if (item instanceof File) {
-				itemsSize += ((File) item).length();
-			} else if (item instanceof RemoteFile) {
-				itemsSize += ((RemoteFile) item).getZipSize();
-			}
-		}
-		return itemsSize;
 	}
 
 	private String getSelectedTypeDescr(@NonNull ExportType exportType, List<?> items) {
@@ -323,8 +309,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((FileSettingsItem) object).getSize();
 					} else if (object instanceof File) {
 						itemsSize += ((File) object).length();
-					} else if (object instanceof MapMarkersGroup) {
-						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
+					} else if (object instanceof MapMarkersGroup markersGroup) {
 						if (Algorithms.stringsEqual(markersGroup.getId(), ExportType.ACTIVE_MARKERS.name())
 								|| Algorithms.stringsEqual(markersGroup.getId(), ExportType.HISTORY_MARKERS.name())) {
 							itemsSize += ((MapMarkersGroup) object).getMarkers().size();

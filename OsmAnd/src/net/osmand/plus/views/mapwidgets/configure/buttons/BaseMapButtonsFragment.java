@@ -16,16 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonsAdapter.ItemClickListener;
 
 import java.util.List;
 
-public abstract class BaseMapButtonsFragment extends BaseOsmAndFragment implements CopyAppModePrefsListener, ItemClickListener {
+public abstract class BaseMapButtonsFragment extends BaseFullScreenFragment implements CopyAppModePrefsListener, ItemClickListener {
 
 	protected Toolbar toolbar;
 	protected RecyclerView recyclerView;
@@ -45,7 +47,7 @@ public abstract class BaseMapButtonsFragment extends BaseOsmAndFragment implemen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_configure_map_buttons, container, false);
+		View view = inflate(R.layout.fragment_configure_map_buttons, container, false);
 
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -55,6 +57,13 @@ public abstract class BaseMapButtonsFragment extends BaseOsmAndFragment implemen
 		setupContent(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection targetsCollection = super.getInsetTargets();
+		targetsCollection.replace(InsetTarget.createScrollable(R.id.content_list));
+		return targetsCollection;
 	}
 
 	protected void setupToolbar(@NonNull View view) {
@@ -105,20 +114,5 @@ public abstract class BaseMapButtonsFragment extends BaseOsmAndFragment implemen
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 }

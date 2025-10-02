@@ -812,7 +812,7 @@
     <string name="poi_traffic_calming_bump">Limitator de viteză</string>
     <string name="poi_border_control">Control de frontieră</string>
     <string name="poi_toll_booth">Cabină de taxare</string>
-    <string name="poi_lift_gate">Platformă hidraulică</string>
+    <string name="poi_lift_gate">Barieră auto cu braț</string>
     <string name="poi_city_wall">Zid oraș</string>
     <string name="poi_gate">Poartă</string>
     <string name="poi_mountain_pass">Trecătoare</string>
@@ -1154,11 +1154,6 @@
     <string name="poi_phone">Telefon</string>
     <string name="poi_description">Descriere</string>
     <string name="poi_collection_times">Timpii de colectare</string>
-    <string name="poi_route_hiking_ref_poi">Referință traseu de drumeție</string>
-    <string name="poi_route_hiking_lwn_poi">Traseu local de drumeție</string>
-    <string name="poi_route_hiking_rwn_poi">Traseu regional de drumeție</string>
-    <string name="poi_route_hiking_nwn_poi">Traseu național de drumeție</string>
-    <string name="poi_route_hiking_iwn_poi">Traseu internațional de drumeție</string>
     <string name="poi_lwn_ref">Nod de rețea de drumeție locală</string>
     <string name="poi_rwn_ref">Nod al rețelei regionale de drumeții</string>
     <string name="poi_nwn_ref">Nod al rețelei naționale de drumeții</string>
@@ -3584,7 +3579,7 @@
     <string name="poi_water_utility">Birou de serviciu public de apă</string>
     <string name="poi_barbecue_grill">Grătar pentru grătar: da</string>
     <string name="poi_outpost">Punct de livrare al magazinului</string>
-    <string name="poi_whitewater_rapid_name">Nume repeziș</string>
+    <string name="poi_rapids_name">Nume repeziș</string>
     <string name="poi_pottery">Ceramică</string>
     <string name="poi_flooring">Magazin de pardoseli</string>
     <string name="poi_socket_schuko_output_low">Scăzut</string>
@@ -4642,6 +4637,8 @@
     <string name="poi_impromptu">Improvizat</string>
     <string name="poi_reservation">Rezervare</string>
     <string name="poi_us_maps_recreation_area_facility">Facilitatea zonei de recreere</string>
+    <string name="poi_healthcare_speciality_venereology">Venerologie</string>
+    <string name="poi_healthcare_speciality_pedorthist">Ortezist</string>
     <string name="poi_distance">Distanță</string>
     <string name="poi_cycle_network">Rețea de ciclism</string>
     <string name="poi_state_proposed">Stare: propus</string>
@@ -4660,6 +4657,7 @@
     <string name="poi_from">De la</string>
     <string name="poi_to">Către</string>
     <string name="poi_live_music">Muzică live</string>
+    <string name="poi_healthcare_speciality_palliative">Paliativă</string>
     <string name="poi_healthcare_speciality_denturist">Protezist</string>
     <string name="poi_healthcare_speciality_pediatric">Pediatrică</string>
     <string name="poi_healthcare_speciality_cosmetic">Cosmetică</string>
@@ -4680,6 +4678,9 @@
     <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Camping în sălbăticie</string>
     <string name="poi_us_maps_recreation_area_activity_dog_sledding">Sănii trase de câini</string>
     <string name="poi_us_maps_recreation_area_activity_hiking">Hiking</string>
+    <string name="poi_healthcare_speciality_ayurveda">Ayurveda</string>
+    <string name="poi_healthcare_speciality_travel_clinic">Clinică ambulantă</string>
+    <string name="poi_healthcare_speciality_sleep">Somnologie</string>
     <string name="poi_healthcare_speciality_proctology">Proctologie</string>
     <string name="poi_healthcare_speciality_audiology">Audiologie</string>
     <string name="poi_healthcare_speciality_autism">Autism</string>
@@ -4715,6 +4716,8 @@
     <string name="poi_healthcare_speciality_diabetology">Diabetologie</string>
     <string name="poi_healthcare_speciality_pharmacology">Farmacologie</string>
     <string name="poi_border_zone">Frontieră</string>
+    <string name="poi_healthcare_speciality_pain_control">Controlul durerii</string>
+    <string name="poi_healthcare_speciality_chronic">Cronic</string>
     <string name="poi_state_inuse">Stare: în folosință</string>
     <string name="poi_healthcare_speciality_physical_therapy">Fizioterapie</string>
     <string name="poi_healthcare_speciality_microbiology">Microbiologie</string>
@@ -4994,4 +4997,13 @@
     <string name="poi_hazard_yes">Pericol</string>
     <string name="poi_hazard_additional_slippery_road">Drum alunecos</string>
     <string name="poi_hazard_additional_landslide">Pericol: alunecări de teren</string>
+    <string name="poi_network_lhn">Rețea locală de cai (LHN)</string>
+    <string name="poi_network_nhn">Rețeaua națională pentru cai (NHN)</string>
+    <string name="poi_network_rhn">Rețeaua regională pentru cai (RHN)</string>
+    <string name="poi_area_highway">Zona de mobilitate</string>
+    <string name="poi_area_highway_footway">Zonă pietonală</string>
+    <string name="poi_footway">Pasarelă</string>
+    <string name="poi_travel_agency">Agenție de turism</string>
+    <string name="poi_steps">Pași</string>
+    <string name="poi_area_highway_steps">Zona scărilor</string>
 </resources>

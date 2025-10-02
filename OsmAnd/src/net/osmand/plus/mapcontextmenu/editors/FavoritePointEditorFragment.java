@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -100,12 +101,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	private void replacePressed() {
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_FAVORITE, getFavorite());
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			SelectFavouriteToReplaceBottomSheet.showInstance(activity, args);
-		}
+		callActivity(activity -> SelectFavouriteToReplaceBottomSheet.showInstance(activity, getFavorite()));
 	}
 
 	@Nullable
@@ -230,7 +226,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
 			if (editor.isNew()) {
-				doAddFavorite(name, category, description, address, color, backgroundType, iconId);
+				FavouritePoint favouritePoint = getFavorite();
+				if(favouritePoint != null) {
+					favouritesHelper.doAddFavorite(name, category, description, address, color, backgroundType, iconId, favouritePoint);
+				}
 			} else {
 				doEditFavorite(favorite, name, category, description, address, color, backgroundType, iconId, favouritesHelper);
 			}
@@ -262,29 +261,13 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		helper.editFavouriteName(favorite, name, category, description, address);
 	}
 
-	private void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
-	                           BackgroundType backgroundType, @DrawableRes int iconId) {
-		FavouritePoint favorite = getFavorite();
-		if (favorite != null) {
-			favorite.setName(name);
-			favorite.setCategory(category);
-			favorite.setDescription(description);
-			favorite.setAddress(address);
-			favorite.setColor(color);
-			favorite.setBackgroundType(backgroundType);
-			favorite.setIconId(iconId);
-			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
-			favouritesHelper.addFavourite(favorite);
-		}
-	}
-
 	@Override
 	protected void delete(boolean needDismiss) {
 		FragmentActivity activity = getActivity();
 		FavouritePoint favorite = getFavorite();
 		if (activity != null && favorite != null) {
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, favorite.getName()));
 			builder.setNegativeButton(R.string.shared_string_no, null);
@@ -453,15 +436,15 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {
-		showAutoFillInstance(mapActivity, false);
+		showInstance(mapActivity, false);
 	}
 
-	public static void showAutoFillInstance(MapActivity mapActivity, boolean skipConfirmationDialog) {
+	public static void showInstance(MapActivity mapActivity, boolean skipConfirmationDialog) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
-			if (fragmentManager.findFragmentByTag(tag) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag, true)) {
 				FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
 				fragment.skipConfirmationDialog = skipConfirmationDialog;
 				fragmentManager.beginTransaction()

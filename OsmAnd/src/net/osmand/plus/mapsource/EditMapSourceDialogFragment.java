@@ -4,7 +4,6 @@ package net.osmand.plus.mapsource;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -41,9 +40,10 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
@@ -62,7 +62,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
-public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
+public class EditMapSourceDialogFragment extends BaseFullScreenDialogFragment
 		implements OnZoomSetListener, OnExpireValueSetListener, OnMercatorSelectedListener,
 		OnTileStorageFormatSelectedListener {
 
@@ -137,7 +137,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
-		View root = themedInflater.inflate(R.layout.fragment_edit_map_source, container, false);
+		View root = inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
@@ -183,7 +183,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
 		saveBtn.setBackgroundResource(nightMode ? R.drawable.dlg_btn_primary_dark : R.drawable.dlg_btn_primary_light);
-		FrameLayout saveBtnBg = root.findViewById(R.id.save_button_bg);
+		FrameLayout saveBtnBg = root.findViewById(R.id.bottom_buttons_container);
 		saveBtnBg.setBackgroundColor(ContextCompat.getColor(app, btnBgColorRes));
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
 		saveBtnTitle.setTypeface(FontCache.getMediumFont());
@@ -383,7 +383,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
 			}
 			if (storageChanged) {
-				new DeleteTilesTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+				OsmAndTaskManager.executeTask(new DeleteTilesTask(app), f);
 			}
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OnMapSourceUpdateListener) {
@@ -404,8 +404,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void onHelpClick() {
-		Context context = requireContext();
-		AndroidUtils.openUrl(context, Uri.parse(context.getString(R.string.docs_add_online_maps)), nightMode);
+		AndroidUtils.openUrl(requireContext(), R.string.docs_add_online_maps, nightMode);
 	}
 
 	private void showExitDialog() {

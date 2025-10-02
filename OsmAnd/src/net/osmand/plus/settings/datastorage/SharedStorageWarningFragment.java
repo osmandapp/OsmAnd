@@ -23,9 +23,10 @@ import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
@@ -40,6 +41,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -52,7 +55,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SharedStorageWarningFragment extends BaseOsmAndFragment implements OnConfirmMigrationSkipListener, DocumentFilesCollectListener, StorageSelectionListener {
+public class SharedStorageWarningFragment extends BaseFullScreenFragment implements OnConfirmMigrationSkipListener, DocumentFilesCollectListener, StorageSelectionListener {
 
 	public static final String TAG = SharedStorageWarningFragment.class.getSimpleName();
 
@@ -106,7 +109,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.shared_storage_warning, container, false);
+		mainView = inflate(R.layout.shared_storage_warning, container, false);
 
 		stepsContainer = mainView.findViewById(R.id.steps_container);
 		foldersContainer = mainView.findViewById(R.id.migration_folders);
@@ -119,6 +122,13 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		ViewCompat.setNestedScrollingEnabled(mainView.findViewById(R.id.list), true);
 
 		return mainView;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	private void updateContent() {
@@ -244,7 +254,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		DialogButton rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
 		View buttonsShadow = buttonsContainer.findViewById(R.id.buttons_shadow);
 		View buttonsDivider = buttonsContainer.findViewById(R.id.buttons_divider);
-		View bottomButtons = buttonsContainer.findViewById(R.id.buttons_container);
+		View bottomButtons = buttonsContainer.findViewById(R.id.bottom_buttons_container);
 
 		boolean folderSelected = folderFile != null;
 		if (folderSelected) {
@@ -253,7 +263,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 				if (activity != null) {
 					StorageMigrationAsyncTask copyFilesTask = new StorageMigrationAsyncTask(activity,
 							documentFiles, selectedStorage, filesSize, usedOnMap);
-					copyFilesTask.executeOnExecutor(singleThreadExecutor);
+					OsmAndTaskManager.executeTask(copyFilesTask, singleThreadExecutor);
 					dismiss();
 				}
 			});
@@ -324,13 +334,12 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			fragmentManager.beginTransaction()
 					.remove(this)
 					.commitAllowingStateLoss();
-		}
+		});
 	}
 
 	private boolean collectingFiles() {
@@ -346,7 +355,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private void updateSelectedFolderFiles(@NonNull Uri uri) {
 		stopCollectFilesTask();
 		collectTask = new DocumentFilesCollectTask(app, uri, this);
-		collectTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(collectTask, singleThreadExecutor);
 	}
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {

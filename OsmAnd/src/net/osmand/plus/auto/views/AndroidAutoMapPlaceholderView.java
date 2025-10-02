@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,7 +43,7 @@ public class AndroidAutoMapPlaceholderView extends FrameLayout {
 	public AndroidAutoMapPlaceholderView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightMode();
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		inflate(UiUtilities.getThemedContext(context, nightMode), R.layout.android_auto_map_placeholder, this);
 
 		container = findViewById(R.id.container);

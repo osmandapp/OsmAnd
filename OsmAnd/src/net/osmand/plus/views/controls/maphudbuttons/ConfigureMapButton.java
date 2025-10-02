@@ -31,8 +31,10 @@ public class ConfigureMapButton extends MapButton {
 		buttonState = app.getMapButtonsHelper().getConfigureMapButtonState();
 
 		setOnClickListener(v -> {
-			MapActivity.clearPrevActivityIntent();
-			mapActivity.getDashboard().setDashboardVisibility(true, CONFIGURE_MAP, AndroidUtils.getCenterViewCoordinates(v));
+			if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+				MapActivity.clearPrevActivityIntent();
+				mapActivity.getDashboard().setDashboardVisibility(true, CONFIGURE_MAP, AndroidUtils.getCenterViewCoordinates(v));
+			}
 		});
 	}
 

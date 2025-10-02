@@ -22,6 +22,8 @@ import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -37,13 +39,17 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 
-public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeProvider {
+public abstract class ContextMenuFragment extends BaseFullScreenFragment implements MapControlsThemeProvider {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -85,11 +91,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	private int currentMenuState;
 	private int shadowHeight;
 	private int statusBarHeight;
+	private int navBarHeight;
 
 	private String preferredMapLang;
 	private boolean transliterateNames;
 
 	private ContextMenuFragmentListener listener;
+	private ViewGroup container;
 
 	public interface ContextMenuFragmentListener {
 		void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated);
@@ -129,6 +137,11 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	@IdRes
 	public int getTopViewId() {
+		return 0;
+	}
+
+	@IdRes
+	protected int getToolbarViewId() {
 		return 0;
 	}
 
@@ -202,25 +215,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		return menuFullHeight;
 	}
 
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
-	}
-
 	public ContextMenuFragmentListener getListener() {
 		return listener;
 	}
@@ -255,7 +249,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	                         Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = requireMapActivity();
-
+		this.container = container;
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
@@ -464,6 +458,33 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		mainView.setOnTouchListener(slideTouchListener);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createScrollable(getCardsContainerViewId()).landscapeLeftSided(true));
+		collection.replace(InsetTarget.createLeftSideContainer(true, R.id.control_buttons, getMainViewId()));
+		collection.replace(InsetTarget.createHorizontalLandscape(true, R.id.bottom_buttons_container));
+
+		if (getToolbarViewId() != 0) {
+			collection.add(InsetTarget.createHorizontalLandscape(true, getToolbarViewId()));
+		}
+		return collection;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		Insets sysBars = InsetsUtils.getSysBars(app, insets);
+		if (sysBars != null) {
+			statusBarHeight = sysBars.top;
+			navBarHeight = sysBars.bottom;
+			topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight) + getToolbarHeight();
+			processScreenHeight(container);
+			runLayoutListener();
+		}
 	}
 
 	public float getToolbarAlpha(int y) {
@@ -1069,23 +1090,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 	}
 
-	public int dpToPx(float dp) {
-		return AndroidUtils.dpToPx(app, dp);
-	}
-
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
 		ShareMenu.copyToClipboardWithToast(ctx, text, false);
-	}
-
-	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {
-		String tag = fragment.getFragmentTag();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
-			manager.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, tag)
-					.addToBackStack(tag)
-					.commitAllowingStateLoss();
-			return true;
-		}
-		return false;
 	}
 }

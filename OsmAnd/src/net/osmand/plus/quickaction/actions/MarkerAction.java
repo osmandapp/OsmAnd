@@ -3,6 +3,7 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.MARKER_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +33,7 @@ public class MarkerAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		double lat = latLon.getLatitude();
 		double lon = latLon.getLongitude();
 
@@ -48,7 +49,7 @@ public class MarkerAction extends SelectMapLocationAction {
 	@Override
 	@Nullable
 	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
-		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = mapActivity.getApp().getMapMarkersHelper();
 		MapMarkersLayer layer = mapActivity.getMapLayers().getMapMarkersLayer();
 		int colorIndex = markersHelper.getNextMarkerColorIndex(-1);
 		return layer.getMapMarkerShiftedBitmap(colorIndex);

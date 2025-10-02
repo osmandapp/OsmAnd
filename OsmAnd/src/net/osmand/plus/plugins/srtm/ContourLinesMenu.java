@@ -29,6 +29,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -54,15 +55,15 @@ public class ContourLinesMenu {
 
 	public static ContextMenuAdapter createListAdapter(MapActivity mapActivity) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
-		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
+		PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getApp(), plugin, true);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getApp());
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
 
 	private static void createLayersItems(@NonNull ContextMenuAdapter contextMenuAdapter,
 	                                      @NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		boolean srtmEnabled = PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseUtils.isContourLinesAvailable(app);
@@ -144,7 +145,7 @@ public class ContourLinesMenu {
 			}
 		};
 
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = mapActivity.getApp().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int toggleIconColorId;
 		int toggleIconId;
 		if (selected) {
@@ -265,7 +266,7 @@ public class ContourLinesMenu {
 	}
 
 	private static ContextMenuItem createSrtmDownloadItem(MapActivity mapActivity, SrtmDownloadItem srtmDownloadItem) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 
 		ContextMenuItem item = new ContextMenuItem(null)
@@ -292,7 +293,7 @@ public class ContourLinesMenu {
 	                                                            SrtmDownloadItem srtmDownloadItem) {
 		return (uiAdapter, view, item, isChecked) -> {
 
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			DownloadIndexesThread downloadThread = app.getDownloadThread();
 			IndexItem indexItem = srtmDownloadItem.getIndexItem(downloadThread);
 

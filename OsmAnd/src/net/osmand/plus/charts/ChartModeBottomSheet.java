@@ -1,8 +1,6 @@
 package net.osmand.plus.charts;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -15,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -36,7 +32,6 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = ChartModeBottomSheet.class.getSimpleName();
 
-	private OsmandApplication app;
 	private LinearLayout container;
 	private GraphModeListener listener;
 	private final List<View> itemViews = new ArrayList<>();
@@ -48,20 +43,17 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requiredMyApplication();
-		selectedXAxisMode = listener.getSelectedAxisType();
-		selectedYAxisMode.addAll(listener.getSelectedDataSetTypes());
+		if (listener == null || listener.getSelectedAxisType() == null) {
+			dismiss();
+		} else {
+			selectedXAxisMode = listener.getSelectedAxisType();
+			selectedYAxisMode.addAll(listener.getSelectedDataSetTypes());
+		}
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context context = getContext();
-		if (context == null) {
-			return;
-		}
-
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View itemView = inflater.inflate(R.layout.chart_mode_bottom_sheet, null, false);
+		View itemView = inflate(R.layout.chart_mode_bottom_sheet);
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(itemView)
 				.create());
@@ -93,8 +85,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		container.removeAllViews();
 		itemViews.clear();
 		for (GPXDataSetAxisType type : getAvailableXTypes(listener.getAnalysis())) {
-			LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-			View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_radio_btn, null, false);
+			View itemView = inflate(R.layout.bottom_sheet_item_with_radio_btn);
 
 			itemView.setTag(type);
 			itemView.setOnClickListener(v -> {
@@ -179,10 +170,9 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private View createDivider(){
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View divider = inflater.inflate(R.layout.divider, null, false);
+		View divider = inflate(R.layout.divider);
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 8), params.rightMargin, AndroidUtils.dpToPx(app, 8));
+		params.setMargins(params.leftMargin, dpToPx(8), params.rightMargin, dpToPx(8));
 		divider.setLayoutParams(params);
 		return divider;
 	}
@@ -192,8 +182,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 			return;
 		}
 		GPXDataSetType singleSetType = types[0];
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View itemView = inflater.inflate(R.layout.bottom_sheet_item_title_icon_with_checkbox, null, false);
+		View itemView = inflate(R.layout.bottom_sheet_item_title_icon_with_checkbox);
 
 		itemView.setTag(singleSetType);
 		itemView.setOnClickListener(v -> {
@@ -227,13 +216,14 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 			int screenHeight = AndroidUtils.getScreenHeight(activity);
 			int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
 			int navBarHeight = AndroidUtils.getNavBarHeight(activity);
-			int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+			int buttonsHeight = getDimensionPixelSize(R.dimen.dialog_button_ex_height);
 
-			return screenHeight - statusBarHeight - buttonsHeight - navBarHeight - getResources().getDimensionPixelSize(R.dimen.toolbar_height);
+			return screenHeight - statusBarHeight - buttonsHeight - navBarHeight - getDimensionPixelSize(R.dimen.toolbar_height);
 		}
 		return super.getCustomHeight();
 	}
 
+	@NonNull
 	private TextToggleButton.TextRadioItem createRadioButton(int titleId, boolean showYAxis) {
 		TextToggleButton.TextRadioItem item = new TextToggleButton.TextRadioItem(getString(titleId));
 		item.setOnClickListener((radioItem, view) -> {
@@ -247,6 +237,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		return item;
 	}
 
+	@NonNull
 	public static List<GPXDataSetAxisType> getAvailableXTypes(GpxTrackAnalysis analysis) {
 		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
 		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {

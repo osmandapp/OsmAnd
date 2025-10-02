@@ -171,7 +171,7 @@ public class TrackDisplayHelper {
 		return filterGroups(true, filterTypes);
 	}
 
-	private boolean hasFilterType(GpxDisplayItemType filterType, GpxDisplayItemType[] filterTypes) {
+	private static boolean hasFilterType(GpxDisplayItemType filterType, GpxDisplayItemType[] filterTypes) {
 		for (GpxDisplayItemType type : filterTypes) {
 			if (type == filterType) {
 				return true;
@@ -182,13 +182,17 @@ public class TrackDisplayHelper {
 
 	@NonNull
 	private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups, GpxDisplayItemType[] filterTypes) {
-		List<GpxDisplayGroup> groups = new ArrayList<>();
-		for (GpxDisplayGroup group : getGpxFile(useDisplayGroups)) {
+		return filterGroups(getGpxFile(useDisplayGroups), filterTypes);
+	}
+
+	public static List<GpxDisplayGroup> filterGroups(@NonNull List<GpxDisplayGroup> groups, @NonNull GpxDisplayItemType[] filterTypes) {
+		List<GpxDisplayGroup> filteredGroup = new ArrayList<>();
+		for (GpxDisplayGroup group : groups) {
 			if (hasFilterType(group.getType(), filterTypes)) {
-				groups.add(group);
+				filteredGroup.add(group);
 			}
 		}
-		return groups;
+		return filteredGroup;
 	}
 
 	public static List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {

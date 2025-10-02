@@ -27,7 +27,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListener;
 import net.osmand.plus.importfiles.ui.TrackPointsAdapter.OnItemSelectedListener;
@@ -51,7 +51,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SelectPointsFragment extends BaseOsmAndDialogFragment implements OnExitConfirmedListener,
+public class SelectPointsFragment extends BaseFullScreenDialogFragment implements OnExitConfirmedListener,
 		OnItemSelectedListener, OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();
@@ -78,7 +78,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public Dialog createDialog(Bundle savedInstanceState) {
 		return new Dialog(requireContext(), getTheme()) {
 			@Override
 			public void onBackPressed() {
@@ -95,7 +95,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.select_track_points_fragment, container, false);
+		View view = inflate(R.layout.select_track_points_fragment, container, false);
 
 		setupToolbar(view);
 		setupButtons(view);
@@ -187,7 +187,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	private void setupButtons(@NonNull View view) {
 		View buttonsContainer = view.findViewById(R.id.control_buttons);
-		View container = buttonsContainer.findViewById(R.id.buttons_container);
+		View container = buttonsContainer.findViewById(R.id.bottom_buttons_container);
 		container.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		applyButton = container.findViewById(R.id.right_bottom_button);

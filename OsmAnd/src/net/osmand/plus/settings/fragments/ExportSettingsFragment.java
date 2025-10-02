@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.backend.backup.exporttype.ExportType.MAP_
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +24,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -40,14 +40,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class ExportSettingsFragment extends BaseSettingsListFragment {
 
@@ -167,12 +162,6 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		checkExportingFile();
-	}
-
-	@Override
 	public void onPause() {
 		super.onPause();
 		if (exportingStarted) {
@@ -267,11 +256,16 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		if (exportListener == null) {
 			exportListener = new SettingsExportListener() {
 
+				WeakReference<FragmentActivity> activityRef = new WeakReference<>(requireActivity());
+
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
 					dismissExportProgressDialog();
 					if (succeed) {
-						shareProfile(file);
+						FragmentActivity activity = activityRef.get();
+						if (activity != null) {
+							shareProfile(file, activity);
+						}
 						dismissFragment();
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
@@ -298,7 +292,11 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 				app.getFileSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissExportProgressDialog();
-				shareProfile(file);
+
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					shareProfile(file, activity);
+				}
 				dismissFragment();
 			}
 		}
@@ -317,16 +315,13 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		return new File(tempDir, fileName + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
 	}
 
-	private void shareProfile(@NonNull File file) {
-		Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-		sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
-		sendIntent.setType("*/*");
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-		Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
-		AndroidUtils.startActivityIfSafe(app, chooserIntent);
+	private void shareProfile(@NonNull File file, @NonNull FragmentActivity activity) {
+		new NativeShareDialogBuilder()
+				.addFileWithSaveAction(file, app, activity, false)
+				.setChooserTitle(getString(R.string.shared_string_share))
+				.setExtraStream(AndroidUtils.getUriForFile(app, file))
+				.setExtraSubject(file.getName())
+				.build(app);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull ApplicationMode appMode,

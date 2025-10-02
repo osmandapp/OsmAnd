@@ -861,7 +861,7 @@ public class BinaryMapRouteReaderAdapter {
 		idTables.clear();
 		restrictions.clear();
 		List<String> stringTable = null;
-		while(true){
+		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
@@ -874,12 +874,12 @@ public class BinaryMapRouteReaderAdapter {
 					fromr.restrictions = new long[it.value().length()];
 					RestrictionInfo val = it.value();
 					for (int k = 0; k < fromr.restrictions.length; k++) {
-						if(val != null) {
+						if (val != null) {
 							long via = 0;
-							if(val.viaWay != 0) {
-								via = idTables.get((int)val.viaWay);
+							if (val.viaWay != 0) {
+								via = idTables.get((int) val.viaWay);
 							}
-							fromr.setRestriction(k, idTables.get((int)val.toWay), val.type, via);
+							fromr.setRestriction(k, idTables.get((int) val.toWay), val.type, via);
 						}
 						val = val.next;
 					}
@@ -897,9 +897,9 @@ public class BinaryMapRouteReaderAdapter {
 							}
 						}
 						if (o.pointNames != null && stringTable != null) {
-							for(String[] ar : o.pointNames) {
-								if(ar != null) {
-									for(int j = 0; j < ar.length; j++) {
+							for (String[] ar : o.pointNames) {
+								if (ar != null) {
+									for (int j = 0; j < ar.length; j++) {
 										ar[j] = stringTable.get(ar[j].charAt(0));
 									}
 								}
@@ -908,27 +908,27 @@ public class BinaryMapRouteReaderAdapter {
 					}
 				}
 				return;
-			case RouteDataBlock.DATAOBJECTS_FIELD_NUMBER :
+			case RouteDataBlock.DATAOBJECTS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				RouteDataObject obj = readRouteDataObject(routeTree.routeReg, routeTree.left, routeTree.top);
-				while(obj.id >= routeTree.dataObjects.size()) {
+				while (obj.id >= routeTree.dataObjects.size()) {
 					routeTree.dataObjects.add(null);
 				}
-				routeTree.dataObjects.set((int) obj.id,obj);
+				routeTree.dataObjects.set((int) obj.id, obj);
 				codedIS.popLimit(oldLimit);
 				break;
-			case RouteDataBlock.IDTABLE_FIELD_NUMBER :
+			case RouteDataBlock.IDTABLE_FIELD_NUMBER:
 				long routeId = 0;
 				length = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) length);
-				idLoop : while(true){
+				idLoop: while (true) {
 					int ts = codedIS.readTag();
 					int tags = WireFormat.getTagFieldNumber(ts);
 					switch (tags) {
 					case 0:
 						break idLoop;
-					case IdTable.ROUTEID_FIELD_NUMBER  :
+					case IdTable.ROUTEID_FIELD_NUMBER:
 						routeId += codedIS.readSInt64();
 						idTables.add(routeId);
 						break;
@@ -939,12 +939,12 @@ public class BinaryMapRouteReaderAdapter {
 				}
 				codedIS.popLimit(oldLimit);
 				break;
-			case RouteDataBlock.RESTRICTIONS_FIELD_NUMBER :
+			case RouteDataBlock.RESTRICTIONS_FIELD_NUMBER:
 				length = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) length);
 				RestrictionInfo ri = new RestrictionInfo();
 				long from = 0;
-				idLoop : while(true){
+				idLoop: while (true) {
 					int ts = codedIS.readTag();
 					int tags = WireFormat.getTagFieldNumber(ts);
 					switch (tags) {
@@ -968,7 +968,7 @@ public class BinaryMapRouteReaderAdapter {
 					}
 				}
 				RestrictionInfo prev = restrictions.get(from);
-				if(prev != null) {
+				if (prev != null) {
 					while (prev.next != null) {
 						prev = prev.next;
 					}
@@ -978,7 +978,7 @@ public class BinaryMapRouteReaderAdapter {
 				}
 				codedIS.popLimit(oldLimit);
 				break;
-			case RouteDataBlock.STRINGTABLE_FIELD_NUMBER :
+			case RouteDataBlock.STRINGTABLE_FIELD_NUMBER:
 				length = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimitLong((long) length);
 				stringTable = map.readStringTable();

@@ -26,6 +26,7 @@ import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -257,7 +258,7 @@ public class TripHelper {
 				TURN_LANE_IMAGE_SIZE * density);
 		lanesDrawable.lanes = lanes;
 		lanesDrawable.imminent = imminent == 0;
-		lanesDrawable.isNightMode = app.getDaynightHelper().isNightMode();
+		lanesDrawable.isNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		lanesDrawable.updateBounds(); // prefer 500 x 74 dp
 		return drawableToBitmap(lanesDrawable, lanesDrawable.getIntrinsicWidth(), lanesDrawable.getIntrinsicHeight());
 	}
@@ -268,7 +269,7 @@ public class TripHelper {
 		drawable.setBounds(0, 0, width, height);
 		drawable.setTurnType(turnType);
 		drawable.setTurnImminent(imminent, deviatedFromRoute);
-		drawable.updateColors(app.getDaynightHelper().isNightMode());
+		drawable.updateColors(app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP));
 		return drawableToBitmap(drawable, width, height);
 	}
 
@@ -300,7 +301,7 @@ public class TripHelper {
 		int leftTimeSec = 0;
 		int leftDistance = 0;
 		if (settings.USE_LEFT_DISTANCE_TO_INTERMEDIATE.get()) {
-			leftDistance = routingHelper.getLeftTimeNextIntermediate();
+			leftDistance = routingHelper.getLeftDistanceNextIntermediate();
 			leftTimeSec = routingHelper.getLeftTimeNextIntermediate();
 		}
 		if (leftDistance == 0) {

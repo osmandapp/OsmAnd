@@ -40,6 +40,7 @@ import net.osmand.core.jni.interface_IQueryController;
 import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.ProgressHelper;
@@ -488,7 +489,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				StringBuilder fileName = new StringBuilder()
 						.append(getWeatherName(app, app.getRegions(), regionId)).append(" ")
 						.append(WEATHER_FORECAST.getString(app));
-				app.showToastMessage(app.getString(R.string.item_deleted, fileName));
+				app.showToastMessage(R.string.item_deleted, fileName);
 			}
 		}
 		regionsRemoveInProgress = CollectionUtils.removeAllFromList(regionsRemoveInProgress, regionIdsList);
@@ -870,13 +871,13 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	private void runAsync(@NonNull Runnable runnable) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... voids) {
 				runnable.run();
 				return null;
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 	private void runInUiThread(@NonNull Runnable runnable) {

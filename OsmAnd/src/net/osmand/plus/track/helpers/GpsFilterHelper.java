@@ -24,8 +24,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
@@ -74,7 +76,7 @@ public class GpsFilterHelper {
 			gpsFilterTask.cancel(false);
 		}
 		gpsFilterTask = new GpsFilterTask(app, filteredSelectedGpxFile, listeners);
-		gpsFilterTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(gpsFilterTask, singleThreadExecutor);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -229,7 +231,7 @@ public class GpsFilterHelper {
 				this.selectedMinValue = getMinValue();
 			}
 
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 
 			blackTextSpan = new ForegroundColorSpan(ColorUtilities.getPrimaryTextColor(app, nightMode));
 			greyTextSpan = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));

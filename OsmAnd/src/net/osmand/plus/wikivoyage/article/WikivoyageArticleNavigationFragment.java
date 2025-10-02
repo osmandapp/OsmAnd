@@ -5,14 +5,12 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,15 +19,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
@@ -60,9 +59,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context ctx = getContext();
-		if (ctx == null) {
-			return;
-		}
+		if (ctx == null) return;
 
 		if (savedInstanceState != null) {
 			selectedLang = savedInstanceState.getString(SELECTED_LANG_KEY);
@@ -79,7 +76,6 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			return;
 		}
 
-		OsmandApplication app = requiredMyApplication();
 		article = app.getTravelHelper().getArticleById(articleId, selectedLang, false, null);
 		if (article == null) {
 			return;
@@ -90,7 +86,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 		if (navigationMap == null) {
 			items.add(new ProgressItem());
-			new BuildNavigationTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(new BuildNavigationTask(app));
 		} else {
 			ExpandableListAdapter listAdapter = createNavigationListView(navigationMap);
 			LinearLayout container = new LinearLayout(ctx);
@@ -125,7 +121,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	                                   @Nullable Fragment targetFragment,
 	                                   @NonNull TravelArticleIdentifier articleId,
 	                                   @NonNull String selectedLang) {
-		try {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			Bundle args = new Bundle();
 			args.putParcelable(ARTICLE_ID_KEY, articleId);
 			args.putString(SELECTED_LANG_KEY, selectedLang);
@@ -136,9 +132,8 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			fragment.setArguments(args);
 			fragment.show(fm, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
@@ -209,8 +204,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			boolean selected = childTitle.equals(article.getTitle()) || parentsList.contains(childTitle);
 
 			if (convertView == null) {
-				convertView = LayoutInflater.from(context)
-						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
+				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView txtListChild = convertView.findViewById(R.id.item_label);
 			txtListChild.setText(childTitle);
@@ -234,29 +228,24 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			String groupTitle = ((WikivoyageSearchResult) getGroup(groupPosition)).getArticleTitle();
 			boolean selected = parentsList.contains(groupTitle) || article.getTitle().equals(groupTitle);
 			if (convertView == null) {
-				convertView = LayoutInflater.from(context)
-						.inflate(R.layout.wikivoyage_contents_list_item, parent, false);
+				convertView = inflate(R.layout.wikivoyage_contents_list_item, parent, false);
 			}
 			TextView lblListHeader = convertView.findViewById(R.id.item_label);
 			lblListHeader.setText(groupTitle);
 			if (selected) {
-				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.icon_color_active_dark : R.color.icon_color_active_light));
+				lblListHeader.setTextColor(ColorUtilities.getActiveIconColor(app, nightMode));
 			} else {
 				lblListHeader.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 			}
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
-			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
+			adjustIndicator(app, groupPosition, isExpanded, convertView, !nightMode);
 			ImageView indicator = convertView.findViewById(R.id.explicit_indicator);
-			indicator.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (isExpanded) {
-						expListView.collapseGroup(groupPosition);
-					} else {
-						expListView.expandGroup(groupPosition);
-					}
+			indicator.setOnClickListener(v -> {
+				if (isExpanded) {
+					expListView.collapseGroup(groupPosition);
+				} else {
+					expListView.expandGroup(groupPosition);
 				}
 			});
 			return convertView;
@@ -274,8 +263,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	private ExpandableListAdapter createNavigationListView(Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
-		Context ctx = requireContext();
-		OsmandApplication app = AndroidUtils.getApp(ctx);
+		Context ctx = getThemedContext();
 
 		expListView = new ExpandableListView(ctx);
 		ExpandableListAdapter listAdapter = new ExpandableListAdapter(ctx, navigationMap);
@@ -293,9 +281,9 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		expListView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
 			WikivoyageSearchResult articleItem = listAdapter.getArticleItem(groupPosition, childPosition);
 			if (groupPosition == 0 && !showWikivoyageArticleDialogFragment(articleItem)) {
-				String selectTravelBook = ctx.getString(R.string.select_travel_book);
+				String selectTravelBook = getString(R.string.select_travel_book);
 				String title = articleItem.getArticleTitle();
-				String toastTitle = ctx.getString(R.string.ltr_or_rtl_combine_via_colon_with_space, selectTravelBook, title);
+				String toastTitle = getString(R.string.ltr_or_rtl_combine_via_colon_with_space, selectTravelBook, title);
 				app.showToastMessage(toastTitle);
 			}
 			dismiss();
@@ -316,15 +304,12 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	private boolean showWikivoyageArticleDialogFragment(@NonNull WikivoyageSearchResult articleItem) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			String title = articleItem.getArticleTitle();
-			String lang = articleItem.getLangs().get(0);
-			TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
-			if (articleId != null) {
-				WikivoyageArticleDialogFragment.showInstance(app, getParentFragmentManager(), articleId, lang);
-				return true;
-			}
+		String title = articleItem.getArticleTitle();
+		String lang = articleItem.getLangs().get(0);
+		TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
+		if (articleId != null) {
+			WikivoyageArticleDialogFragment.showInstance(app, getParentFragmentManager(), articleId, lang);
+			return true;
 		}
 		return false;
 	}

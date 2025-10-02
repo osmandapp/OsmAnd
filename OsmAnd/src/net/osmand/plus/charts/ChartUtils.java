@@ -47,6 +47,7 @@ import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -509,7 +510,7 @@ public class ChartUtils {
 		dataSet.setDivX(divX);
 		dataSet.setUnits(mainUnitY);
 
-		boolean nightMode = !settings.isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
 		setupDataSet(app, dataSet, color, color, drawFilled, graphType == GPXDataSetType.ALTITUDE_EXTRM, useRightAxis, nightMode);
 		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
@@ -570,8 +571,7 @@ public class ChartUtils {
 	                                                       boolean setYAxisMinimum,
 	                                                       boolean drawFilled,
 	                                                       boolean calcWithoutGaps) {
-		OsmandSettings settings = app.getSettings();
-		boolean nightMode = !settings.isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
@@ -714,7 +714,7 @@ public class ChartUtils {
 	                                                       boolean drawFilled,
 	                                                       boolean calcWithoutGaps) {
 		OsmandSettings settings = app.getSettings();
-		boolean nightMode = !settings.isLightContent();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;

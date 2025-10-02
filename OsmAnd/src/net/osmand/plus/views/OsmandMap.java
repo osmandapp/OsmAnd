@@ -119,9 +119,6 @@ public class OsmandMap {
 
 	public void setupRenderingView() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		for (RenderingViewSetupListener listener : renderingViewSetupListeners) {
-			listener.onSetupRenderingView();
-		}
 		NavigationSession navigationSession = app.getCarNavigationSession();
 		if (navigationSession != null) {
 			if (navigationSession.hasStarted()) {
@@ -135,6 +132,9 @@ public class OsmandMap {
 			}
 		} else if (mapView.getMapActivity() == null) {
 			app.getMapViewTrackingUtilities().setMapView(null);
+		}
+		for (RenderingViewSetupListener listener : renderingViewSetupListeners) {
+			listener.onSetupRenderingView();
 		}
 	}
 

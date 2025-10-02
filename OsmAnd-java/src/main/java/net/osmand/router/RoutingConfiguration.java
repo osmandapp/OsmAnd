@@ -42,6 +42,7 @@ public class RoutingConfiguration {
 	// 1.1 tile load parameters (should not affect routing)
 	public int ZOOM_TO_LOAD_TILES = 16;
 	public long memoryLimitation;
+	public long memoryMaxHits = -1;
 	public long nativeMemoryLimitation;
 
 	// 1.2 Build A* graph in backward/forward direction (can affect results)

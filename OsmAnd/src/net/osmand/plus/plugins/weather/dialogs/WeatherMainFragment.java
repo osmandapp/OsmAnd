@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -29,14 +29,18 @@ import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.WeatherSettings;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.Iterator;
 
-public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadEvents, RemoveLocalForecastListener {
+public class WeatherMainFragment extends BaseFullScreenFragment implements DownloadEvents, RemoveLocalForecastListener {
 
 	public static final String TAG = WeatherMainFragment.class.getSimpleName();
 
@@ -56,17 +60,17 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 		forecastHelper = app.getOfflineForecastHelper();
 		weatherSettings = weatherHelper.getWeatherSettings();
 		weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_weather_main, container, false);
+		View view = inflate(R.layout.fragment_weather_main, container, false);
 
 		setupHeader(view);
-		setupWeatherLayers(view, themedInflater);
+		setupWeatherLayers(view);
 		setupWeatherContours(view);
 		setupOfflineForecastCard(view);
 
@@ -107,12 +111,12 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 		app.runInUIThread(mapActivity::refreshMap);
 	}
 
-	private void setupWeatherLayers(@NonNull View view, @NonNull LayoutInflater inflater) {
+	private void setupWeatherLayers(@NonNull View view) {
 		ViewGroup container = view.findViewById(R.id.weather_layers_list);
 		Iterator<WeatherBand> iterator = weatherHelper.getWeatherBands().iterator();
 		while (iterator.hasNext()) {
 			WeatherBand weatherBand = iterator.next();
-			View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_additional_right_desc, container, false);
+			View itemView = inflate(R.layout.bottom_sheet_item_with_additional_right_desc, container, false);
 			setupOnOffButton(itemView, weatherBand.getIconId(), weatherBand.getMeasurementName(),
 					null, weatherBand.isBandVisible(), iterator.hasNext(), v -> {
 						MapActivity mapActivity = (MapActivity) getMyActivity();
@@ -155,7 +159,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		Drawable icon = getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);
@@ -217,6 +221,14 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 	private void updateScreenMode(@NonNull View view, boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.empty_screen), !enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

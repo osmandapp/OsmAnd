@@ -194,12 +194,12 @@ public class EditorIconController extends BaseDialogController {
 		for (PoiCategory poiCategory : poiCategories) {
 			List<PoiType> poiTypeList = new ArrayList<>(poiCategory.getPoiTypes());
 			poiTypeList.sort(Comparator.comparing(AbstractPoiType::getTranslation));
-			List<String> iconKeys = new ArrayList<>();
+			Set<String> iconKeys = new LinkedHashSet<>();
 			for (PoiType poiType : poiTypeList) {
 				EditorIconUtils.retrieveIconKey(poiType, iconKeys::add);
 			}
 			if (!Algorithms.isEmpty(iconKeys)) {
-				categories.add(new IconsCategory(poiCategory.getKeyName(), poiCategory.getTranslation(), iconKeys));
+				categories.add(new IconsCategory(poiCategory.getKeyName(), poiCategory.getTranslation(), new ArrayList<>(iconKeys)));
 			}
 		}
 		return categories;

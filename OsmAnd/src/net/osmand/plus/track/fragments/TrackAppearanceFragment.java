@@ -134,6 +134,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
+	protected int getToolbarViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
 	public boolean isHeaderViewDetached() {
 		return false;
 	}
@@ -392,11 +397,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			boolean nightMode = isNightMode();
 			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
 				if (!nightMode) {
-					AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+					AndroidUiHelper.setStatusBarContentColor(view, true);
 				}
 				return ColorUtilities.getDividerColorId(nightMode);
 			} else if (!nightMode) {
-				AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), false);
+				AndroidUiHelper.setStatusBarContentColor(view, false);
 			}
 		}
 		return -1;
@@ -600,7 +605,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void setupButtons() {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		DialogButton saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
@@ -837,14 +842,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable Fragment target) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TrackAppearanceFragment fragment = new TrackAppearanceFragment();
 			fragment.setRetainInstance(true);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setTargetFragment(target, 0);
 
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

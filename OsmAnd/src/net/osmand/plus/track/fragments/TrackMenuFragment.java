@@ -33,7 +33,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.Gravity;
@@ -63,6 +62,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -135,10 +135,14 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.shared.data.KQuadRect;
@@ -252,6 +256,21 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public int getMainLayoutId() {
 		return R.layout.track_menu;
+	}
+
+	@Override
+	protected int getToolbarViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_navigation).landscapeLeftSided(true).adjustWidth(true));
+		collection.add(InsetTarget.createHorizontalLandscape(true, R.id.header_container));
+		collection.replace(InsetTarget.createCustomBuilder(R.id.display_groups_button_container).landscapeSides(InsetSide.RIGHT).preferMargin(true));
+		collection.add(InsetTarget.createCustomBuilder(R.id.back_button_container).landscapeSides(InsetSide.LEFT).preferMargin(true));
+		return collection;
 	}
 
 	@Override
@@ -1177,7 +1196,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				}
 			} else if (buttonIndex == ANALYZE_ON_MAP_BUTTON_INDEX) {
 				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null);
-				detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(detailsTask);
 				hide();
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
 				TrkSegment segment = gpxFile.getGeneralSegment();
@@ -1193,7 +1212,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
 				}
 			} else if (buttonIndex == SHARE_BUTTON_INDEX) {
-				GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+				GpxUiHelper.saveAndShareGpxWithAppearance(app, mapActivity, gpxFile);
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
 				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
@@ -1345,8 +1364,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		int y = getMenuStatePosY(getCurrentMenuState());
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapView();
-			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
+			OsmandMapTileView tileView = mapActivity.getMapView();
+			RotatedTileBox tb = tileView.getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			int marginStartPx = 0;
@@ -1358,8 +1377,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(mapActivity);
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
-			if (r.getLeft() != 0 && r.getRight() != 0) {
-				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
+
+			boolean contains = tileView.fullyContains(tb, r.getLeft(), r.getTop(), r.getRight(), r.getBottom());
+			if (!contains && r.getLeft() != 0 && r.getRight() != 0) {
+				tileView.fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
 						tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
 			}
 			adjustMapPosition = false;
@@ -1745,7 +1766,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
 	                                       boolean showCurrentTrack,
 	                                       @NonNull CallbackWithObject<SelectedGpxFile> callback) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		SelectedGpxFile selectedGpxFile;
 		if (showCurrentTrack) {
 			selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
@@ -1803,8 +1824,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable GpxTrackAnalysis analyses,
 	                                   @Nullable RouteKey routeKey,
 	                                   @Nullable Bundle params) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
 
@@ -1841,7 +1862,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				fragment.setLatLon(latLonRect);
 			}
 
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

@@ -1,22 +1,22 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.mapcontextmenu.TitleButtonController;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 public class SelectedGpxMenuController extends MenuController {
 
@@ -48,7 +48,7 @@ public class SelectedGpxMenuController extends MenuController {
 				GpxFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
 
 				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, selectedPoint);
-				detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(detailsTask);
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.analyze_on_map);

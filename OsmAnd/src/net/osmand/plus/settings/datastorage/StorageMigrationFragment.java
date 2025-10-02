@@ -25,7 +25,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -34,6 +34,8 @@ import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -47,7 +49,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StorageMigrationFragment extends BaseOsmAndDialogFragment implements StorageMigrationListener {
+public class StorageMigrationFragment extends BaseFullScreenDialogFragment implements StorageMigrationListener {
 
 	private static final String TAG = StorageMigrationFragment.class.getSimpleName();
 
@@ -61,6 +63,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private static final String ESTIMATED_SIZE_KEY = "estimated_size";
 	private static final String EXISTING_FILES_KEY = "existing_files";
 	private static final String SELECTED_STORAGE_KEY = "selected_storage";
+	private static final String CURRENT_STORAGE_KEY = "current_storage";
 
 	private StorageItem selectedStorage;
 	private StorageItem currentStorage;
@@ -90,6 +93,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		if (savedInstanceState != null && filesSize == null) {
 			filesCount = savedInstanceState.getInt(FILES_COUNT_KEY);
 			remainingSize = savedInstanceState.getLong(REMAINING_SIZE_KEY);
@@ -98,6 +102,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			copyFinished = savedInstanceState.getBoolean(COPY_FINISHED_KEY);
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 			selectedStorage = savedInstanceState.getParcelable(SELECTED_STORAGE_KEY);
+			currentStorage = savedInstanceState.getParcelable(CURRENT_STORAGE_KEY);
 
 			long size = savedInstanceState.getLong(FILES_SIZE_KEY);
 			long estimatedSize = savedInstanceState.getLong(ESTIMATED_SIZE_KEY);
@@ -121,12 +126,17 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		mainView = themedInflater.inflate(R.layout.copy_files_fragment, container, false);
+		mainView = inflate(R.layout.copy_files_fragment, container, false);
 		ViewCompat.setNestedScrollingEnabled(mainView.findViewById(R.id.list), true);
-
 		updateContent();
-
 		return mainView;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	@Override
@@ -141,6 +151,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		outState.putLong(FILES_SIZE_KEY, filesSize.first);
 		outState.putLong(ESTIMATED_SIZE_KEY, filesSize.second);
 		outState.putParcelable(SELECTED_STORAGE_KEY, selectedStorage);
+		outState.putParcelable(CURRENT_STORAGE_KEY, currentStorage);
 
 		ArrayList<String> filePaths = new ArrayList<>();
 		for (File file : existingFiles) {

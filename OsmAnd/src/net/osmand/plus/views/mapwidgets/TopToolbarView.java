@@ -5,8 +5,11 @@ import static net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarCo
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,18 +23,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.controls.MapHudLayout.ViewChangeListener;
-import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.ViewChangeProvider;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
+import net.osmand.plus.widgets.FrameLayoutEx;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Set;
 
-public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
+public class TopToolbarView extends FrameLayoutEx implements ViewChangeProvider {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -54,9 +55,11 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 	private SwitchCompat topBarSwitch;
 	private View shadowView;
 
-	private final Set<ViewChangeListener> viewChangeListeners = new HashSet<>();
-
 	private boolean nightMode;
+
+	private int savedInitialGravity = 0;
+	private int savedInitialWidth = 0;
+	private float savedInitialScreenX = 0f;
 
 	public TopToolbarView(@NonNull Context context) {
 		this(context, null);
@@ -324,25 +327,87 @@ public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 		updateColors();
 	}
 
+	public void saveInitialViewParams() {
+		getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				ViewTreeObserver vto = getViewTreeObserver();
+				if (vto.isAlive()) {
+					vto.removeOnGlobalLayoutListener(this);
+				}
+				int[] toolbarLocationOnScreen = new int[2];
+				getLocationOnScreen(toolbarLocationOnScreen);
+				savedInitialWidth = getMeasuredWidth();
+				savedInitialScreenX = toolbarLocationOnScreen[0];
+			}
+		});
+
+		if (getLayoutParams() instanceof LinearLayout.LayoutParams layoutParams) {
+			savedInitialGravity = layoutParams.gravity;
+		}
+	}
+
+	public void restoreSavedParams() {
+		ViewGroup.LayoutParams params = getLayoutParams();
+
+		if (params instanceof LinearLayout.LayoutParams layoutParams) {
+			layoutParams.gravity = savedInitialGravity;
+		}
+
+		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+		setLayoutParams(params);
+	}
+
+	public void adjustForOverlay(View overlayView) {
+		int[] fragmentLocationOnScreen = new int[2];
+		overlayView.getLocationOnScreen(fragmentLocationOnScreen);
+
+		int fragmentLeftEdge = fragmentLocationOnScreen[0];
+		int fragmentRightEdge = fragmentLocationOnScreen[0] + overlayView.getWidth();
+		boolean isRtl = AndroidUtils.isLayoutRtl(getContext());
+		int padding = AndroidUtils.dpToPx(app, 12f);
+
+		if (isRtl) {
+			int toolbarRightEdge = (int) (savedInitialScreenX + savedInitialWidth);
+			if (fragmentLeftEdge < toolbarRightEdge - padding) {
+				int overlapWidth = toolbarRightEdge - fragmentLeftEdge;
+				int newToolbarWidth = savedInitialWidth - overlapWidth + padding;
+
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = Math.max(newToolbarWidth, 0);
+				setLayoutParams(layoutParams);
+			} else {
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = savedInitialWidth;
+				setLayoutParams(layoutParams);
+			}
+		} else {
+			if (fragmentRightEdge > savedInitialScreenX + padding) {
+				int overlapWidth = (int) (fragmentRightEdge - savedInitialScreenX);
+
+				int newToolbarWidth = savedInitialWidth - overlapWidth + padding;
+
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = Math.max(newToolbarWidth, 0);
+				setLayoutParams(layoutParams);
+			} else {
+				ViewGroup.LayoutParams layoutParams = getLayoutParams();
+				layoutParams.width = savedInitialWidth;
+				setLayoutParams(layoutParams);
+			}
+		}
+	}
+
+	public void setupAnimationParams() {
+		if (getLayoutParams() instanceof LinearLayout.LayoutParams layoutParams) {
+			layoutParams.gravity = Gravity.END;
+			setLayoutParams(layoutParams);
+		}
+	}
+
 	public boolean isNightMode() {
 		return nightMode;
-	}
-
-	@NonNull
-	@Override
-	public Collection<ViewChangeListener> getViewChangeListeners() {
-		return viewChangeListeners;
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		super.onSizeChanged(w, h, oldw, oldh);
-		notifySizeChanged(this, w, h, oldw, oldh);
-	}
-
-	@Override
-	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-		notifyVisibilityChanged(changedView, visibility);
 	}
 }

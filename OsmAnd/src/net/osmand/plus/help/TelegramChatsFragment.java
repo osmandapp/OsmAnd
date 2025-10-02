@@ -20,7 +20,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
@@ -32,7 +32,7 @@ import net.osmand.util.Algorithms;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemClickListener {
+public class TelegramChatsFragment extends BaseFullScreenFragment implements OnItemClickListener {
 
 	private static final String TAG = TelegramChatsFragment.class.getSimpleName();
 
@@ -56,7 +56,7 @@ public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemC
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.help_articles_fragment, container, false);
+		View view = inflate(R.layout.help_articles_fragment, container, false);
 
 		ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
 
@@ -137,10 +137,10 @@ public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemC
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull LinkedHashMap<String, String> telegramChats) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Map<String, String> telegramChats) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
-			bundle.putSerializable(TELEGRAM_CHATS, telegramChats);
+			bundle.putSerializable(TELEGRAM_CHATS, new LinkedHashMap<>(telegramChats));
 
 			TelegramChatsFragment fragment = new TelegramChatsFragment();
 			fragment.setArguments(bundle);

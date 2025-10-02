@@ -3,7 +3,6 @@ package net.osmand.plus.feedback;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
 
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -25,11 +24,8 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		View titleView = View.inflate(new ContextThemeWrapper(requireContext(), themeRes), R.layout.crash_title, null);
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(titleView)
-				.create();
-		items.add(titleItem);
+		View titleView = inflate(R.layout.crash_title);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(titleView).create());
 	}
 
 	@Override
@@ -39,23 +35,22 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = requiredMyApplication();
 		app.getFeedbackHelper().sendCrashLog();
 		dismiss();
 	}
 
 	public static boolean shouldShow(@Nullable OsmandSettings settings, @NonNull MapActivity activity) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_CRASH_ID)) {
 			return app.getAppInitializer().checkPreviousRunsForExceptions(activity, settings != null);
 		}
 		return false;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			CrashBottomSheetDialogFragment fragment = new CrashBottomSheetDialogFragment();
-			fragment.show(manager, TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 }

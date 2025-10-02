@@ -1,22 +1,34 @@
 package net.osmand.plus;
 
+import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
+
 import android.os.AsyncTask;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.plugins.PluginsHelper;
+
+import org.apache.commons.logging.Log;
+
+import java.util.concurrent.Executor;
 
 public class OsmAndTaskManager {
 
+	private static final Log LOG = PlatformUtil.getLog(OsmAndTaskManager.class);
+
 	private final OsmandApplication app;
 
-	public OsmAndTaskManager(OsmandApplication app) {
+	public OsmAndTaskManager(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
-	
-	
 	public <Params, Progress, Result> OsmAndTask<Params, Progress, Result> runInBackground(
 			OsmAndTaskRunnable<Params, Progress, Result> r, Params... params) {
 		InternalTaskExecutor<Params, Progress, Result> exec = new InternalTaskExecutor<Params, Progress, Result>(r);
 		r.exec = exec;
-		exec.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+		executeTask(exec, params);
 		return exec;
 	}
 
@@ -52,7 +64,7 @@ public class OsmAndTaskManager {
 
 		@Override
 		public void executeWithParams(Params... params) {
-			execute(params);
+			executeTask(this, params);
 		}
 	}
 	
@@ -81,5 +93,16 @@ public class OsmAndTaskManager {
 		
 		protected void onProgressUpdate(Progress... values) {}
 		
+	}
+
+	public static <P, T extends AsyncTask<P, ?, ?>> T executeTask(@NonNull T task, @Nullable P... params) {
+		return executeTask(task, THREAD_POOL_EXECUTOR, params);
+	}
+
+	public static <P, T extends AsyncTask<P, ?, ?>> T executeTask(@NonNull T task, @NonNull Executor executor, @Nullable P... params) {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.info("Submitting task: " + task.getClass().getName());
+		}
+		return (T) task.executeOnExecutor(executor, params);
 	}
 }

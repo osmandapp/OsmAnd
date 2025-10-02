@@ -1,25 +1,16 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
-import static net.osmand.shared.gpx.GpxUtilities.ADDRESS_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.AMENITY_ORIGIN_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
-import static net.osmand.shared.gpx.GpxUtilities.BACKGROUND_TYPE_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.COLOR_NAME_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.ICON_NAME_EXTENSION;
-import static net.osmand.shared.gpx.GpxUtilities.PROFILE_TYPE_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.Arrays;
@@ -34,7 +25,7 @@ public class AdditionalInfoBundle {
 	private static final List<String> HIDDEN_EXTENSIONS = Arrays.asList(
 			COLOR_NAME_EXTENSION, ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,
 			PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION, AMENITY_ORIGIN_EXTENSION,
-			TYPE, SUBTYPE
+			TYPE, SUBTYPE, ORIGIN_EXTENSION
 	);
 
 	private final OsmandApplication app;
@@ -42,9 +33,10 @@ public class AdditionalInfoBundle {
 	private Map<String, String> filteredAdditionalInfo = null;
 	private Map<String, Object> localizedAdditionalInfo = null;
 
+	private List<String> customHiddenExtensions;
 
 	public AdditionalInfoBundle(@NonNull OsmandApplication app,
-	                            @Nullable Map<String, String> additionalInfo) {
+			@Nullable Map<String, String> additionalInfo) {
 		this.app = app;
 		this.additionalInfo = additionalInfo;
 	}
@@ -70,12 +62,8 @@ public class AdditionalInfoBundle {
 				} else {
 					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
 				}
-				if (MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key) instanceof PoiType that) {
-					if (that.isHidden()) {
-						continue;
-					}
-				}
-				if (!HIDDEN_EXTENSIONS.contains(key)) {
+				if (!HIDDEN_EXTENSIONS.contains(key) && (Algorithms.isEmpty(customHiddenExtensions)
+						|| !customHiddenExtensions.contains(key))) {
 					result.put(key, get(key));
 				}
 			}
@@ -84,7 +72,7 @@ public class AdditionalInfoBundle {
 		return filteredAdditionalInfo;
 	}
 
-	public boolean containsAny(@NonNull String ... keys) {
+	public boolean containsAny(@NonNull String... keys) {
 		return CollectionUtils.containsAny(getAdditionalInfoKeys(), keys);
 	}
 
@@ -106,5 +94,11 @@ public class AdditionalInfoBundle {
 		String str = additionalInfo.get(key);
 		str = Amenity.unzipContent(str);
 		return str;
+	}
+
+	public void setCustomHiddenExtensions(List<String> customHiddenExtensions) {
+		this.filteredAdditionalInfo = null;
+		this.localizedAdditionalInfo = null;
+		this.customHiddenExtensions = customHiddenExtensions;
 	}
 }

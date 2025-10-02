@@ -20,7 +20,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
@@ -30,9 +30,12 @@ import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 
-public class WeatherLayerFragment extends BaseOsmAndFragment {
+public class WeatherLayerFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = WeatherLayerFragment.class.getSimpleName();
 
@@ -72,7 +75,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_weather_layer, container, false);
+		View view = inflate(R.layout.fragment_weather_layer, container, false);
 
 		if (weatherBand != null) {
 			setupHeader(view);
@@ -177,7 +180,8 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 	private void setupMeasurementUnitsBlock(@NonNull View view) {
 		View container = view.findViewById(R.id.measurement_units_block);
-		if (weatherBand.getBandIndex() != WEATHER_BAND_CLOUD) {
+		int bandIndex = weatherBand.getBandIndex();
+		if (bandIndex != WEATHER_BAND_CLOUD && bandIndex != WEATHER_BAND_TEMPERATURE) {
 			container.setVisibility(View.VISIBLE);
 			View card = container.findViewById(R.id.measurement_units_card);
 			View button = card.findViewById(R.id.measurement_units_button);
@@ -212,10 +216,10 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		if (preference != null) {
 			OnClickListener listener = v -> {
 				int selected = (int) v.getTag();
-				settings.setPreference(weatherBand.getBandUnitPref().getId(), selected);
+				settings.setPreference(preference.getId(), selected);
 				updateMeasurementUnitsCard(view);
 				weatherHelper.updateBandsSettings();
-				refreshMap((MapActivity) getMyActivity());
+				refreshMap((MapActivity) requireMyActivity());
 			};
 			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 			int selectedIndex = weatherBand.getAvailableBandUnits().indexOf(preference.get());
@@ -225,26 +229,31 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 	@Nullable
 	public String getEmptyStateDesc() {
-		switch (weatherBand.getBandIndex()) {
-			case WEATHER_BAND_CLOUD:
-				return app.getString(R.string.empty_screen_weather_clouds_layer);
-			case WEATHER_BAND_TEMPERATURE:
-				return app.getString(R.string.empty_screen_weather_temperature_layer);
-			case WEATHER_BAND_PRESSURE:
-				return app.getString(R.string.empty_screen_weather_pressure_layer);
-			case WEATHER_BAND_WIND_ANIMATION:
-			case WEATHER_BAND_WIND_SPEED:
-				return app.getString(R.string.empty_screen_weather_wind_layer);
-			case WEATHER_BAND_PRECIPITATION:
-				return app.getString(R.string.empty_screen_weather_precipitation_layer);
-			default:
-				return null;
-		}
+		return switch (weatherBand.getBandIndex()) {
+			case WEATHER_BAND_CLOUD -> app.getString(R.string.empty_screen_weather_clouds_layer);
+			case WEATHER_BAND_TEMPERATURE ->
+					app.getString(R.string.empty_screen_weather_temperature_layer);
+			case WEATHER_BAND_PRESSURE ->
+					app.getString(R.string.empty_screen_weather_pressure_layer);
+			case WEATHER_BAND_WIND_ANIMATION, WEATHER_BAND_WIND_SPEED ->
+					app.getString(R.string.empty_screen_weather_wind_layer);
+			case WEATHER_BAND_PRECIPITATION ->
+					app.getString(R.string.empty_screen_weather_precipitation_layer);
+			default -> null;
+		};
 	}
 
 	private void updateScreenMode(@NonNull View view, boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.empty_screen), !enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

@@ -13,7 +13,6 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.settings.controllers.BatteryOptimizationController;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
@@ -23,6 +22,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.shared.settings.enums.AltitudeMetrics;
 
 public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
@@ -36,7 +36,6 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override
@@ -65,8 +64,8 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 		this.currentTrackIndex = currentTrackIndex;
 		if (isUpdateNeeded() || cachedElevationDiff != elevationDiff) {
 			cachedElevationDiff = elevationDiff;
-			MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
-			FormattedValue formattedUphill = OsmAndFormatter.getFormattedAltitudeValue(elevationDiff, app, metricsConstants);
+			AltitudeMetrics altitudeMetrics = settings.ALTITUDE_METRIC.get();
+			FormattedValue formattedUphill = OsmAndFormatter.getFormattedAltitudeValue(elevationDiff, app, altitudeMetrics);
 			setText(formattedUphill.value, formattedUphill.unit);
 		}
 	}

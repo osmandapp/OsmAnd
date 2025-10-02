@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -43,8 +42,9 @@ public class HHRouteDataStructure {
 		double MAX_INC_COST_CF = 1.25;
 		int MAX_COUNT_REITERATION = 30; // 3 is enough for 90%, 30 is for 10% (100-750km with 1.5m months live updates)
 		Double INITIAL_DIRECTION = null;
-		
-		
+
+		boolean STRICT_BEST_GROUP_MAPS = false; // derived from RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS
+
 		boolean ROUTE_LAST_MILE = false;
 		boolean ROUTE_ALL_SEGMENTS = false;
 		boolean ROUTE_ALL_ALT_SEGMENTS = false;
@@ -58,7 +58,6 @@ public class HHRouteDataStructure {
 		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
 		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
 
-		
 		double MAX_COST;
 		int MAX_DEPTH = -1; // max depth to go to
 		int MAX_SETTLE_POINTS = -1; // max points to settle
@@ -69,7 +68,7 @@ public class HHRouteDataStructure {
 		boolean USE_MIDPOINT;
 		int MIDPOINT_ERROR = 3;
 		int MIDPOINT_MAX_DEPTH = 20 + MIDPOINT_ERROR;
-		
+
 		public static HHRoutingConfig dijkstra(int direction) {
 			HHRoutingConfig df = new HHRoutingConfig();
 			df.HEURISTIC_COEFFICIENT = 0;
@@ -124,7 +123,6 @@ public class HHRouteDataStructure {
 			return this;
 		}
 
-		
 		public HHRoutingConfig useShortcuts() {
 			USE_CH_SHORTCUTS = true;
 			return this;
@@ -150,6 +148,11 @@ public class HHRouteDataStructure {
 			return this;
 		}
 
+		public HHRoutingConfig applyCalculateMissingMaps(boolean calculateMissingMaps) {
+			STRICT_BEST_GROUP_MAPS = calculateMissingMaps;
+			return this;
+		}
+
 		@Override
 		public String toString() {
 			return toString(null, null);
@@ -160,9 +163,7 @@ public class HHRouteDataStructure {
 					end == null ? "?" : end.toString(), (int) HEURISTIC_COEFFICIENT, (int) DIJKSTRA_DIRECTION);
 		}
 	}
-	
-	
-	
+
 	public static class HHRouteRegionPointsCtx<T extends NetworkDBPoint> {
 		final HHRoutingDB networkDB;
 		final BinaryMapIndexReader file;
@@ -292,22 +293,20 @@ public class HHRouteDataStructure {
 		public void clearVisited(TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
 			queue(false).clear();
 			queue(true).clear();
-			Iterator<T> it = queueAdded.iterator();
-			while (it.hasNext()) {
-				NetworkDBPoint p = it.next();
+			for (NetworkDBPoint p : queueAdded) {
 				FinalRouteSegment pos = p.rt(false).rtDetailedRoute;
 				FinalRouteSegment rev = p.rt(true).rtDetailedRoute;
 				p.clearRouting();
-				if (stPoints.containsKey(p.index) && pos != null) {
+				if (pos != null && stPoints.containsKey(p.index)) {
 					p.setDistanceToEnd(false, distanceToEnd(false, p));
 					p.setDetailedParentRt(false, pos);
-				} 
-				if (endPoints.containsKey(p.index) && rev != null) {
+				}
+				if (rev != null && endPoints.containsKey(p.index)) {
 					p.setDistanceToEnd(true, distanceToEnd(true, p));
 					p.setDetailedParentRt(true, rev);
 				}
-				it.remove();
 			}
+			queueAdded.clear();
 			visited.clear();
 			visitedRev.clear();
 		}

@@ -5,7 +5,6 @@
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
 	android:clickable="true"
-	android:fitsSystemWindows="true"
 	android:clipChildren="false"
 	android:clipToPadding="false"
 	android:focusable="true">
@@ -184,7 +183,7 @@
 	<include layout="@layout/bottom_buttons" />
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
-		android:id="@+id/new_entry_fab"
+		android:id="@+id/fab"
 		style="@style/MaterialOsmandFab"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

@@ -13,6 +13,7 @@ import net.osmand.IProgress;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.*;
@@ -20,7 +21,11 @@ import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.commands.*;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.inapp.InAppPurchases;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -103,6 +108,7 @@ public class BackupHelper {
 
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();
+	private long maximumAccountSize;
 
 	private final BackupListeners backupListeners = new BackupListeners();
 
@@ -165,6 +171,32 @@ public class BackupHelper {
 		return purchasedSubscription != null ? purchasedSubscription.getOrderId() : null;
 	}
 
+	public long getMaximumAccountSize() {
+		return maximumAccountSize;
+	}
+
+	public boolean isBackupSubscriptionsExpired() {
+		if (InAppPurchaseUtils.isBackupAvailable(app)) {
+			return false;
+		}
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		InAppPurchases purchases = purchaseHelper.getInAppPurchases();
+
+		boolean subscriptionsExpired = false;
+		for (InAppPurchase purchase : purchaseHelper.getEverMadeMainPurchases()) {
+			if (purchases.isOsmAndPro(purchase) && purchase instanceof InAppSubscription subscription) {
+				SubscriptionState state = subscription.getState();
+				if (state.isActive() || subscription.isPurchased()) {
+					return false;
+				}
+				if (state.isGone()) {
+					subscriptionsExpired = true;
+				}
+			}
+		}
+		return subscriptionsExpired;
+	}
+
 	@Nullable
 	private Map<String, LocalFile> getPreparedLocalFiles() {
 		if (isBackupPreparing()) {
@@ -215,9 +247,17 @@ public class BackupHelper {
 	}
 
 	public void logout() {
-		settings.BACKUP_PROMOCODE.resetToDefault();
+		resetBackupPurchase();
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
+	}
+
+	public void resetBackupPurchase() {
+		settings.BACKUP_PROMOCODE.resetToDefault();
+		settings.BACKUP_PURCHASE_ACTIVE.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_SKU.resetToDefault();
+		settings.BACKUP_SUBSCRIPTION_ORIGIN.resetToDefault();
+		app.getInAppPurchaseHelper().resetPurchases();
 	}
 
 	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType) {
@@ -468,8 +508,8 @@ public class BackupHelper {
 			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
-			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
-					.executeOnExecutor(executor == null ? this.executor : executor).get();
+			OsmAndTaskManager.executeTask(new DeleteFilesCommand(this, remoteFiles, byVersion, listener),
+					executor == null ? this.executor : executor, (Object[]) null).get();
 		} catch (ExecutionException | InterruptedException e) {
 			if (listener != null) {
 				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));
@@ -501,6 +541,7 @@ public class BackupHelper {
 							String totalZipSize = res.getString("totalZipSize");
 							String totalFiles = res.getString("totalFiles");
 							String totalFileVersions = res.getString("totalFileVersions");
+							maximumAccountSize = Algorithms.parseLongSilently(res.getString("maximumAccountSize"), 0);
 							JSONArray allFiles = res.getJSONArray("allFiles");
 							for (int i = 0; i < allFiles.length(); i++) {
 								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
@@ -647,7 +688,7 @@ public class BackupHelper {
 	@SuppressLint("StaticFieldLeak")
 	void collectLocalFiles(@Nullable OnCollectLocalFilesListener listener) {
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new CollectLocalFilesTask(app, listener);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -655,6 +696,6 @@ public class BackupHelper {
 			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
 			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
 			@Nullable OnGenerateBackupInfoListener listener) {
-		new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener).executeOnExecutor(executor);
+		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener), executor);
 	}
 }

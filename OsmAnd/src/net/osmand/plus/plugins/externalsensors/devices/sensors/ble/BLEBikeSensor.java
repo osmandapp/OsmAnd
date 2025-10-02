@@ -259,7 +259,8 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 			lastWheelRevolutions = wheelRevolutions;
 			this.lastWheelEventTime = lastWheelEventTime;
 
-		} else if (crankRevPreset) {
+		}
+		if (crankRevPreset) {
 			int crankRevolutions = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 1);
 			int lastCrankEventTime = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 3);
 			if (lastCrankRevolutions >= 0) {

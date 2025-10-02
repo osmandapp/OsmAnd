@@ -1,6 +1,5 @@
 package net.osmand.plus.auto.screens
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.car.app.CarContext
@@ -32,7 +31,7 @@ class LandingScreen(
         })
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val app = app
         for (category in PlaceCategory.entries) {
@@ -57,9 +56,6 @@ class LandingScreen(
         actionStripBuilder.addAction(settingsAction)
         actionStripBuilder.addAction(createSearchAction())
         val mapActionStripBuilder = ActionStrip.Builder()
-            .addAction(
-                Action.Builder(Action.PAN)
-                    .build())
             .addAction(
                 Action.Builder()
                     .setIcon(

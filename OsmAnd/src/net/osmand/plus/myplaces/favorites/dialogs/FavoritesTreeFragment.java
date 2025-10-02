@@ -14,8 +14,8 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +36,8 @@ import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -44,6 +46,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.DeleteFavoritesTask;
@@ -54,15 +57,20 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask;
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavoritesListener;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -153,7 +161,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				adapter.synchronizeGroups();
 			}
 		});
-		task.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(task, singleThreadExecutor);
 	}
 
 	@Override
@@ -163,7 +171,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		listView = view.findViewById(android.R.id.list);
 		adapter.synchronizeGroups();
 		if (!adapter.isEmpty()) {
-			boolean nightMode = !app.getSettings().isLightContent();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			View searchView = inflater.inflate(R.layout.search_fav_list_item, listView, false);
 			searchView.setBackgroundResource(ColorUtilities.getListBgColorId(nightMode));
 
@@ -188,7 +196,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
-		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		emptyImageView.setImageResource(!nightMode ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
 		Button importButton = emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(view1 -> importFavourites());
 		listView.setEmptyView(emptyView);
@@ -231,6 +240,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 		}
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(android.R.id.list));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	@Override
@@ -588,7 +605,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	public void shareFavorites(@Nullable FavoriteGroup group) {
 		ShareFavoritesAsyncTask shareFavoritesTask = new ShareFavoritesAsyncTask(app, group, this);
-		shareFavoritesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(shareFavoritesTask);
 	}
 
 	private void initListExpandedState() {
@@ -656,8 +673,24 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	@Override
-	public void shareFavoritesFinished() {
+	public void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription) {
 		updateProgressVisibility(false);
+		if (destFile.exists()) {
+			OsmandActionBarActivity activity = requireMyActivity();
+			String type = "text/plain";
+			String extraText = String.valueOf(pointsDescription);
+			String extraSubject = app.getString(R.string.share_fav_subject);
+
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			new NativeShareDialogBuilder()
+					.addFileWithSaveAction(destFile, app, activity, true)
+					.setChooserTitle(extraSubject)
+					.setExtraSubject(extraSubject)
+					.setExtraText(extraText)
+					.setExtraStream(AndroidUtils.getUriForFile(app, destFile))
+					.setType(type)
+					.build(app);
+		}
 	}
 
 	private void setupGetOsmAndCloudButton(@NonNull View view) {

@@ -8,18 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.SpecialPointType;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -46,25 +40,10 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 	}
 
 	private void copyToFavorites() {
-		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
-		for (GpxDisplayItem item : group.getDisplayItems()) {
-			if (item.locationStart != null) {
-				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
-				if (!Algorithms.isEmpty(item.description)) {
-					point.setDescription(item.description);
-				}
-				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
-					plugin.updateParkingPoint(point);
-				}
-				favouritesHelper.addFavourite(point, true, false, false, null);
-			}
-		}
-		favouritesHelper.saveCurrentPointsIntoFile(true);
-
+		favouritesHelper.copyToFavorites(group, groupName);
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnGroupNameChangeListener) {
-			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;
+		if (fragment instanceof OnTrackGroupChangeListener listener) {
 			listener.onTrackGroupChanged();
 		}
 		dismiss();

@@ -3,15 +3,12 @@ package net.osmand.plus.configmap.tracks;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.res.ColorStateList;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -25,6 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
@@ -53,6 +51,8 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -90,38 +90,40 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		return nightMode;
 	}
 
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId) {
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
 			@Override
 			public void onBackPressed() {
 				TracksTabsFragment.this.onBackPressed();
 			}
 		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ContextCompat.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.tracks_fragment, container, false);
+		View view = inflate(R.layout.tracks_fragment, container, false);
 
 		setupToolbar(view);
 		setupTabLayout(view);
 		setupButtons(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container));
+		return collection;
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -372,7 +374,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, result -> {
 					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null);
-					detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					OsmAndTaskManager.executeTask(detailsTask);
 					dismiss();
 					return true;
 				}))
@@ -399,7 +401,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, activity, gpxFile);
 					return true;
 				}))
 				.create());
@@ -477,7 +479,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				reloadTracks();
 			}
 		});
-		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(deleteFilesTask);
 	}
 
 	@Override

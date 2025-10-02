@@ -25,7 +25,6 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 	public NextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
 			@Nullable WidgetsPanel panel, boolean horizontalMini) {
 		super(mapActivity, customId, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, panel, horizontalMini);
-		setOnClickListener(getOnClickListener());
 	}
 
 	/**
@@ -53,7 +52,7 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 //				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
-				if (routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
+				if (routingHelper.isOnRoute()) {
 					routingHelper.getVoiceRouter().announceCurrentDirection(null);
 				}
 			}
@@ -64,7 +63,7 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 	public void updateNavigationInfo(@Nullable DrawSettings drawSettings) {
 		boolean followingMode = routingHelper.isFollowingMode()
 				|| locationProvider.getLocationSimulation().isRouteAnimating();
-		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity);
+		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity, true);
 		CurrentStreetName streetName = params.streetName;
 		TurnType turnType = null;
 		boolean deviatedFromRoute = false;
@@ -79,9 +78,9 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 			} else {
 				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
 				if (info != null && info.distanceTo >= 0 && info.directionInfo != null) {
-					streetName = TripUtils.getStreetName(app, info, info.directionInfo);
+					streetName = TripUtils.getStreetName(info);
 					if (verticalWidget && Algorithms.isEmpty(streetName.text)) {
-						streetName.text = info.directionInfo.getDescriptionRoutePart();
+						streetName.text = info.directionInfo.getDescriptionRoutePart(true);
 					}
 					turnType = info.directionInfo.getTurnType();
 					nextTurnDistance = info.distanceTo;

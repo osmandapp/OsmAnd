@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_DESTINATION_REACHED_ID;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
@@ -20,6 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
@@ -29,11 +30,20 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
-public class DestinationReachedFragment extends Fragment implements RouteCalculationProgressListener {
+/**
+ * Fragment that appears when the user reaches the destination.
+ *
+ * Although visually similar to a BottomSheet, this screen is implemented
+ * as a standard full-screen Fragment due to legacy design and internal logic.
+ *
+ * ⚠️ Do not convert to BottomSheetFragment without carefully evaluating its integration,
+ * as it may rely on full-screen behavior and custom navigation handling.
+ */
+public class DestinationReachedFragment extends BaseOsmAndFragment implements RouteCalculationProgressListener {
 
 	public static final String TAG = DestinationReachedFragment.class.getSimpleName();
 
@@ -42,10 +52,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 	private static boolean shown;
 
 	private MapActivity mapActivity;
-	private OsmandApplication app;
-	private UiUtilities iconsCache;
 	private MapContextMenu ctxMenu;
-	private boolean nighMode;
 	private boolean isLandscapeLayout;
 	private boolean shouldHideMenu;
 
@@ -53,10 +60,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mapActivity = (MapActivity) requireActivity();
-		app = mapActivity.getMyApplication();
-		iconsCache = app.getUIUtilities();
 		ctxMenu = mapActivity.getContextMenu();
-		nighMode = app.getDaynightHelper().isNightModeForMapControls();
 		isLandscapeLayout = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		app.getRoutingHelper().addCalculationProgressListener(this);
 		if (savedInstanceState != null) {
@@ -66,28 +70,28 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, nighMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
-		LayoutInflater inf = LayoutInflater.from(ctx);
-		View view = inf.inflate(R.layout.dest_reached_menu_fragment, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater,
+	                         @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
+		View view = inflate(R.layout.dest_reached_menu_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		view.setOnClickListener(v -> finishNavigation());
 
 		ImageButton btnClose = view.findViewById(R.id.closeImageButton);
-		btnClose.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, !nighMode));
+		btnClose.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		btnClose.setOnClickListener(v -> finishNavigation());
 
 		Button btnRemoveDest = view.findViewById(R.id.removeDestButton);
-		btnRemoveDest.setCompoundDrawablesWithIntrinsicBounds(
-				iconsCache.getIcon(R.drawable.ic_action_done, !nighMode), null, null, null);
+		Drawable doneIcon = uiUtilities.getIcon(R.drawable.ic_action_done, !nightMode);
+		btnRemoveDest.setCompoundDrawablesWithIntrinsicBounds(doneIcon, null, null, null);
 		btnRemoveDest.setOnClickListener(v -> finishNavigation());
 
 		Button btnRecalcDest = view.findViewById(R.id.recalcDestButton);
-		btnRecalcDest.setCompoundDrawablesWithIntrinsicBounds(
-				iconsCache.getIcon(R.drawable.ic_action_gdirections_dark, !nighMode), null, null, null);
+		Drawable directionIcon = uiUtilities.getIcon(R.drawable.ic_action_gdirections_dark, !nightMode);
+		btnRecalcDest.setCompoundDrawablesWithIntrinsicBounds(directionIcon, null, null, null);
 		btnRecalcDest.setOnClickListener(v -> {
 			if (mapActivity != null) {
-				TargetPointsHelper helper = mapActivity.getMyApplication().getTargetPointsHelper();
+				TargetPointsHelper helper = mapActivity.getApp().getTargetPointsHelper();
 				TargetPoint target = helper.getPointToNavigate();
 
 				dismiss();
@@ -103,16 +107,16 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 
 		Button btnFindParking = view.findViewById(R.id.findParkingButton);
 
-		ApplicationMode appMode = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
+		ApplicationMode routingAppMode = mapActivity.getApp().getRoutingHelper().getAppMode();
 
-		if (!appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+		if (!routingAppMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			btnFindParking.setVisibility(View.GONE);
 		}
 
-		btnFindParking.setCompoundDrawablesWithIntrinsicBounds(
-				iconsCache.getIcon(R.drawable.ic_action_parking_dark, !nighMode), null, null, null);
+		Drawable parkingIcon = uiUtilities.getIcon(R.drawable.ic_action_parking_dark, !nightMode);
+		btnFindParking.setCompoundDrawablesWithIntrinsicBounds(parkingIcon, null, null, null);
 		btnFindParking.setOnClickListener(v -> {
-			PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
+			PoiFiltersHelper helper = mapActivity.getApp().getPoiFilters();
 			PoiUIFilter parkingFilter = helper.getFilterById(PoiUIFilter.STD_PREFIX + "parking");
 			mapActivity.getFragmentsHelper().showQuickSearch(parkingFilter);
 			dismiss();
@@ -120,13 +124,20 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 
 		View mainView = view.findViewById(R.id.main_view);
 		if (isLandscapeLayout) {
-			AndroidUtils.setBackground(view.getContext(), mainView, nighMode,
+			AndroidUtils.setBackground(view.getContext(), mainView, nightMode,
 					R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
 		} else {
-			AndroidUtils.setBackground(view.getContext(), mainView, nighMode,
+			AndroidUtils.setBackground(view.getContext(), mainView, nightMode,
 					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_view));
+		return collection;
 	}
 
 	@Override
@@ -167,13 +178,11 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		targetPointsHelper.removeWayPoint(true, -1);
 		MapContextMenu ctxMenu = mapActivity.getContextMenu();
 		Object contextMenuObj = ctxMenu.getObject();
-		if (ctxMenu.isActive() && contextMenuObj instanceof TargetPoint) {
-			TargetPoint targetPoint = (TargetPoint) contextMenuObj;
+		if (ctxMenu.isActive() && contextMenuObj instanceof TargetPoint targetPoint) {
 			if (!targetPoint.start && !targetPoint.intermediate) {
 				ctxMenu.close();
 			}
 		}
-		OsmandSettings settings = app.getSettings();
 		settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		dismiss();
@@ -217,7 +226,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 	}
 
 	public static void show(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmAndAppCustomization customization = app.getAppCustomization();
 		if (!shown && customization.isFeatureEnabled(FRAGMENT_DESTINATION_REACHED_ID)) {
 			shown = true;
@@ -228,13 +237,13 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		}
 	}
 
-	private static void showInstance(@NonNull MapActivity mapActivity) {
-		FragmentManager fm = mapActivity.getSupportFragmentManager();
+	private static void showInstance(@NonNull FragmentActivity activity) {
+		FragmentManager fm = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			int slideInAnim = R.anim.slide_in_bottom;
 			int slideOutAnim = R.anim.slide_out_bottom;
-			if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-				boolean isRtl = AndroidUtils.isLayoutRtl(mapActivity);
+			if (!AndroidUiHelper.isOrientationPortrait(activity)) {
+				boolean isRtl = AndroidUtils.isLayoutRtl(activity);
 				slideInAnim = isRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
 				slideOutAnim = isRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
 			}

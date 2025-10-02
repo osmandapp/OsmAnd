@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +27,7 @@ import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -41,6 +41,7 @@ import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MapLayerType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
@@ -366,7 +367,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							canceled -> {
 								MapActivity mapActv = mapActivityRef.get();
 								if (mapActv != null && !mapActv.isFinishing()) {
-									String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
+									String overlayMapDescr = mapActv.getSettings().MAP_OVERLAY.get();
 									boolean hasOverlayDescription = overlayMapDescr != null;
 									overlayMapDescr = hasOverlayDescription ? overlayMapDescr
 											: mapActv.getString(R.string.shared_string_none);
@@ -529,7 +530,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			app.showToastMessage(R.string.internet_not_available);
 			return;
 		}
-		AsyncTask<Void, Void, List<TileSourceTemplate>> t = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
+		AsyncTask<Void, Void, List<TileSourceTemplate>> task = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
 			@Override
 			protected List<TileSourceTemplate> doInBackground(Void... params) {
 				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app), true);
@@ -592,7 +593,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				});
 			}
 		};
-		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	public static void defineNewEditLayer(@NonNull FragmentActivity activity, @Nullable Fragment targetFragment, @Nullable String editedFileName) {
@@ -650,7 +651,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return false;
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		return app.getDaynightHelper().isNightMode(context instanceof MapActivity);
+		boolean usedOnMap = context instanceof MapActivity;
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	private static int getThemeRes(Context context) {

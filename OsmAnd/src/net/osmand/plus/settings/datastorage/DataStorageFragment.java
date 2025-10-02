@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -89,8 +89,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		app = getMyApplication();
-		activity = getMyActivity();
+		activity = requireActionBarActivity();
+		app = activity.getApp();
 		Bundle args = getArguments();
 		if (args != null) {
 			storageMigration = args.getBoolean(STORAGE_MIGRATION, false);
@@ -165,9 +165,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if (newValue instanceof Bundle) {
+		if (newValue instanceof Bundle resultData) {
 			//results from BottomSheets
-			Bundle resultData = (Bundle) newValue;
 			if (resultData.containsKey(ChangeDataStorageBottomSheet.TAG)) {
 				boolean moveMaps = resultData.getBoolean(MOVE_DATA);
 				newDataStorage = resultData.getParcelable(CHOSEN_DIRECTORY);
@@ -361,7 +360,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	private void updateSelectedFolderFiles(@NonNull File file) {
 		stopCollectFilesTask();
 		collectTask = new FilesCollectTask(app, file, this);
-		collectTask.executeOnExecutor(singleThreadExecutor);
+		OsmAndTaskManager.executeTask(collectTask, singleThreadExecutor);
 	}
 
 	@Override
@@ -401,7 +400,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	private void moveData(@NonNull List<File> files,
 	                      @NonNull Pair<Long, Long> filesSize) {
 		moveFileTask = new MoveFilesTask(activity, currentDataStorage, newDataStorage, files, filesSize, this, this);
-		moveFileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(moveFileTask);
 	}
 
 	private void showErrorDialog(@NonNull String error) {

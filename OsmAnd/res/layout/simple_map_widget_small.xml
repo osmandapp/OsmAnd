@@ -25,7 +25,7 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:srcCompat="@drawable/ic_action_remove_dark" />
 
-		<TextView
+		<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
 			app:layout_constraintStart_toEndOf="@+id/widget_text"
 			app:layout_constraintTop_toTopOf="parent">
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/widget_name"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
 				android:textSize="@dimen/simple_widget_description_text_size"
 				tools:text="Widget name" />
 
-			<TextView
+			<net.osmand.plus.views.mapwidgets.OutlinedTextContainer
 				android:id="@+id/widget_text_small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

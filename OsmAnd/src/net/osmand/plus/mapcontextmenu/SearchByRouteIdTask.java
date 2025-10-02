@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -60,10 +61,11 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
     @Override
     protected List<Amenity> doInBackground(Void... params) {
         List<Amenity> amenities = new ArrayList<>();
+        AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
         switch (searchType) {
             case MEMBERS:
                 if (!Algorithms.isEmpty(routeMembersIds)) {
-                    Map<String, List<Amenity>> members = app.getResourceManager().searchRouteMembers(routeMembersIds);
+                    Map<String, List<Amenity>> members = amenitySearcher.searchRouteMembers(routeMembersIds);
                     for (Map.Entry<String, List<Amenity>> entry : members.entrySet()) {
                         List<Amenity> val = entry.getValue();
                         if (!Algorithms.isEmpty(val)) {
@@ -74,7 +76,7 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
                 break;
             case RELATED:
                 if (!Algorithms.isEmpty(routeId)) {
-                    Map<String, List<Amenity>> related = app.getResourceManager().searchRouteMembers(routeId);
+                    Map<String, List<Amenity>> related = amenitySearcher.searchRouteMembers(routeId);
                     List<Amenity> list = new ArrayList<>();
                     for (Map.Entry<String, List<Amenity>> entry : related.entrySet()) {
                         List<Amenity> val = entry.getValue();
@@ -86,7 +88,7 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
                     for (Amenity am : list) {
                         LatLon l = am.getLocation();
                         if (!latLonHashSet.contains(l)) {
-                            if (amenity == null || !amenity.getId().equals(am.getId())) {
+                            if (amenity == null || !Algorithms.objectEquals(am.getId(), amenity.getId())) {
                                 amenities.add(am);
                             }
                         }
@@ -96,7 +98,7 @@ public class SearchByRouteIdTask extends AsyncTask<Void, Void, List<Amenity>> {
                 break;
             case PART_OF:
                 if (!Algorithms.isEmpty(routeId)) {
-                    List<Amenity> list =  app.getResourceManager().searchRoutePartOf(routeId);
+                    List<Amenity> list =  amenitySearcher.searchRoutePartOf(routeId);
                     HashSet<String> routeIdHash = new HashSet<>();
                     for (Amenity am : list) {
                         String routeId = am.getAdditionalInfo(Amenity.ROUTE_ID);

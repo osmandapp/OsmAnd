@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -21,14 +19,16 @@ import com.google.android.material.appbar.AppBarLayout
 import net.osmand.CallbackWithObject
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseOsmAndDialogFragment
+import net.osmand.plus.base.BaseFullScreenDialogFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
+import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.gpx.SmartFolderUpdateListener
@@ -36,12 +36,10 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.gpx.filters.BaseTrackFilter
-import net.osmand.shared.gpx.filters.DateTrackFilter
 import net.osmand.shared.gpx.filters.FilterChangedListener
-import net.osmand.shared.gpx.filters.TrackFilterType
 import net.osmand.util.Algorithms
 
-class TracksFilterFragment : BaseOsmAndDialogFragment(),
+class TracksFilterFragment : BaseFullScreenDialogFragment(),
 	FilterChangedListener, SmartFolderUpdateListener {
 	companion object {
 		val TAG: String = TracksFilterFragment::class.java.simpleName
@@ -89,27 +87,19 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		smartFolderHelper = app.smartFolderHelper
 	}
 
-	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val themeId =
-			if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
-		val dialog = object : Dialog(requireContext(), themeId) {
+	override fun getThemeId(): Int {
+		return if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
+	}
+
+	override fun getStatusBarColorId(): Int {
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
+	}
+
+	override fun createDialog(savedInstanceState: Bundle?): Dialog {
+		return object : Dialog(requireContext(), themeId) {
 			override fun onBackPressed() {
 				closeWithoutApply()
 			}
-		}
-		val window = dialog.window
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.attributes.windowAnimations = R.style.Animations_Alpha
-			}
-			updateStatusBarColor(window)
-		}
-		return dialog
-	}
-
-	private fun updateStatusBarColor(window: Window?) {
-		window?.let {
-			window.statusBarColor = getStatusBarSecondaryColor(requireContext(), nightMode)
 		}
 	}
 
@@ -124,6 +114,12 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				app,
 				if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
 		return view
+	}
+
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container))
+		return collection
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -321,7 +317,6 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		adapter?.notifyDataSetChanged()
 		context?.let {
 			updateNightMode()
-			updateStatusBarColor(requireDialog().window)
 		}
 		filter.setCallback(CallbackWithObject<List<TrackItem>> { trackItems ->
 			updateProgressVisibility(false)

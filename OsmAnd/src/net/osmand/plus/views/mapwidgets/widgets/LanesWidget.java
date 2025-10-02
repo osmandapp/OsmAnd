@@ -21,11 +21,13 @@ import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
@@ -54,7 +56,7 @@ public class LanesWidget extends MapWidget {
 			@Nullable WidgetsPanel panel) {
 		super(mapActivity, LANES, customId, panel);
 
-		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		routingHelper = mapActivity.getApp().getRoutingHelper();
 		lanesImage = view.findViewById(R.id.map_lanes);
 		lanesText = view.findViewById(R.id.map_lanes_dist_text);
 		lanesShadowText = view.findViewById(R.id.map_lanes_dist_text_shadow);
@@ -191,8 +193,8 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
-		super.detachView(widgetsPanel);
+	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+		super.detachView(widgetsPanel, widgets, mode);
 		// Clear in case link to previous view of LanesWidget is lost
 		getSpecialContainer().removeView(view);
 	}

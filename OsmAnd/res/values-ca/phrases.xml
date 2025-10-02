@@ -863,11 +863,6 @@
     <string name="poi_node_networks">Xarxa de nodes de senderisme/ciclisme</string>
     <string name="poi_hiking_routes">Rutes de senderisme</string>
     <string name="poi_traffic_enforcement">Control de trànsit</string>
-    <string name="poi_route_hiking_iwn_poi">Ruta internacional de senderisme</string>
-    <string name="poi_route_hiking_nwn_poi">Ruta nacional de senderisme</string>
-    <string name="poi_route_hiking_rwn_poi">Ruta senderista regional</string>
-    <string name="poi_route_hiking_lwn_poi">Ruta senderista local</string>
-    <string name="poi_route_hiking_ref_poi">Referència de ruta senderista</string>
     <string name="poi_access_private">Accés privat</string>
     <string name="poi_access_no">Sense accés</string>
     <string name="poi_access_destination">Accés a la destinació</string>

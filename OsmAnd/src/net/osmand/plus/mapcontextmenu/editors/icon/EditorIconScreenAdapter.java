@@ -22,6 +22,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconSearchResult;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
@@ -149,7 +150,7 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap, appMode);
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 
 	static class IconsCategoryViewHolder extends ViewHolder {

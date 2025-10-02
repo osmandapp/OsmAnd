@@ -23,6 +23,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -42,6 +43,7 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionRules;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.OsmBugsTileProvider;
 import net.osmand.util.Algorithms;
@@ -371,7 +373,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		bug.setLatitude(latitude);
 		bug.setLongitude(longitude);
 		if (autofill) {
-			executeTaskInBackground(new HandleOsmNoteAsyncTask(getOsmBugsUtil(bug), local, bug, null, message,
+			OsmAndTaskManager.executeTask(new HandleOsmNoteAsyncTask(getOsmBugsUtil(bug), local, bug, null, message,
 					Action.CREATE, getHandleBugListener(mapActivity)));
 		} else {
 			showBugDialog(mapActivity, bug, Action.CREATE, message);
@@ -513,8 +515,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
 		if (result.getTileBox().getZoom() >= startZoom) {
 			collectBugsFromPoint(result);
 		}

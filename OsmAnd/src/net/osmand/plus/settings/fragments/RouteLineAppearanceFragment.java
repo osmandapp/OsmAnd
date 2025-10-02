@@ -77,6 +77,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	@Override
+	protected int getToolbarViewId() {
+		return R.id.route_menu_top_shadow_all;
+	}
+
+	@Override
 	public int getHeaderViewHeight() {
 		return 0;
 	}
@@ -269,7 +274,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public int getStatusBarColorId() {
 		View view = getView();
 		if (!isNightMode() && view != null) {
-			AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
+			AndroidUiHelper.setStatusBarContentColor(view, true);
 		}
 		return isNightMode() ? R.color.status_bar_main_dark : R.color.divider_color_light;
 	}
@@ -284,7 +289,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void setupButtons(View view) {
-		View buttonsContainer = view.findViewById(R.id.buttons_container);
+		View buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setButtonType(DialogButtonType.PRIMARY);

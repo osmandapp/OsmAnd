@@ -26,7 +26,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.utils.ColorUtilities;
@@ -35,7 +35,12 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.List;
 
-public abstract class PromoCompanyFragment extends BaseOsmAndDialogFragment {
+public abstract class PromoCompanyFragment extends BaseFullScreenDialogFragment {
+
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
 
 	@ColorRes
 	protected int getStatusBarColorId() {
@@ -50,29 +55,10 @@ public abstract class PromoCompanyFragment extends BaseOsmAndDialogFragment {
 	@NonNull
 	protected abstract List<OsmAndFeature> getFeatures();
 
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ContextCompat.getColor(activity, getStatusBarColorId()));
-		}
-		return dialog;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = themedInflater.inflate(R.layout.fragment_company_promo, container, false);
+		View view = inflate(R.layout.fragment_company_promo, container, false);
 
 		setupToolbar(view);
 		setupContent(view);
@@ -100,7 +86,7 @@ public abstract class PromoCompanyFragment extends BaseOsmAndDialogFragment {
 
 	@NonNull
 	private View createFeatureView(@NonNull OsmAndFeature feature, @NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.purchase_dialog_list_item, container, false);
+		View view = inflate(R.layout.purchase_dialog_list_item, container, false);
 
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setImageResource(feature.getIconId(nightMode));
@@ -118,7 +104,7 @@ public abstract class PromoCompanyFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void setupButtons(@NonNull View view) {
-		View container = view.findViewById(R.id.buttons_container);
+		View container = view.findViewById(R.id.bottom_buttons_container);
 		container.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		DialogButton button = container.findViewById(R.id.dismiss_button);

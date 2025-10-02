@@ -72,6 +72,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	private boolean animatingMapMove;
 	private boolean animatingMapRotation;
 	private boolean animatingMapTilt;
+	private boolean userAnimationsActive;
 	private volatile boolean inconsistentMapTarget;
 	private volatile boolean targetChanged;
 	private volatile int targetPixelX;
@@ -472,6 +473,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 		});
 	}
 
+	public void startMoving(double finalLat, double finalLon) {
+		startMoving(finalLat, finalLon, tileView.getZoom());
+	}
+
 	public void startMoving(double finalLat, double finalLon, int finalIntZoom) {
 		startMoving(finalLat, finalLon, finalIntZoom, 0.0f);
 	}
@@ -641,6 +646,16 @@ public class AnimateDraggingMapThread implements TouchListener {
 		if (mapRenderer == null) {
 			return;
 		}
+		boolean userAnimationsActive = false;
+		MapAnimator animator = getAnimator();
+		if (animator != null) {
+			QListIAnimation userAnimations = animator.getAnimations(userInteractionAnimationKey);
+			userAnimationsActive = !userAnimations.isEmpty();
+			this.userAnimationsActive = userAnimationsActive;
+			if (userAnimationsActive) {
+				tileView.applyMaximumFrameRate(mapRenderer);
+			}
+		}
 		int targetIntZoom = this.targetIntZoom;
 		double targetFloatZoom = this.targetFloatZoom;
 
@@ -704,6 +719,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 			if (mapRenderer.isMapAnimationFinished()) {
 				break;
 			}
+		}
+		this.userAnimationsActive = false;
+		if (userAnimationsActive && mapRenderer != null) {
+			tileView.applyMaximumFrameRate(mapRenderer);
 		}
 		if (animateZoom && mapRenderer != null) {
 			if (targetIntZoom > 0) {
@@ -819,6 +838,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 	public boolean isAnimatingMapTilt() {
 		return animatingMapTilt;
+	}
+
+	public boolean isUserAnimationsActive() {
+		return userAnimationsActive;
 	}
 
 	public void startZooming(int zoomEnd, double zoomPart, @Nullable LatLon zoomingLatLon, boolean notifyListener) {

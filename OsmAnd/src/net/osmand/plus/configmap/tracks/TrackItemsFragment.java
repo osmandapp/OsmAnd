@@ -16,14 +16,16 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.track.BaseTracksTabsFragment;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.MapUtils;
 
 import java.util.Set;
 
-public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer {
+public class TrackItemsFragment extends BaseFullScreenFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
@@ -48,7 +50,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.recycler_view_fragment, container, false);
+		View view = inflate(R.layout.recycler_view_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		recyclerView = view.findViewById(R.id.recycler_view);
@@ -67,6 +69,14 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 			setupAdapter(trackTab);
 		}
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.BOTTOM_CONTAINER);
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private void setupAdapter(@NonNull TrackTab trackTab) {
@@ -148,7 +158,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 				if (location == null) {
 					location = app.getLocationProvider().getLastKnownLocation();
 				}
-				adapter.notifyDataSetChanged();
+				adapter.notifyItemRangeChanged(0, adapter.getItemCount());
 			});
 		}
 	}

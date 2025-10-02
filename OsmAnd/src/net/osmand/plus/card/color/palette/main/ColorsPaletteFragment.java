@@ -2,14 +2,11 @@ package net.osmand.plus.card.color.palette.main;
 
 import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
@@ -33,12 +30,17 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
-public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements IColorsPalette {
+public class ColorsPaletteFragment extends BaseFullScreenDialogFragment implements IColorsPalette {
 
 	public static final String TAG = ColorsPaletteFragment.class.getSimpleName();
 
 	private IColorsPaletteController controller;
 	private ColorsPaletteElements paletteElements;
+
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,29 +52,13 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 		}
 	}
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
-		paletteElements = new ColorsPaletteElements(requireActivity(), nightMode);
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
-		}
-		return dialog;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_palette, container, false);
+		paletteElements = new ColorsPaletteElements(requireContext(), nightMode);
+
+		View view = inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);
 		setupColorsPalette(view);
 		return view;

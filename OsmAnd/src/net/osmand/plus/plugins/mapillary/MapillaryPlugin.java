@@ -24,6 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
+import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -41,6 +42,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -258,7 +260,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		if (controller == null) {
 			return;
 		}
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		boolean needUpdateOnly = mapillaryCardsRow != null && mapillaryCardsRow.getMenuBuilder() == menuBuilder;
 
 		mapillaryCardsRow = new CardsRowBuilder(menuBuilder);
@@ -276,8 +278,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 				menuBuilder.startLoadingImages();
 			}
 		});
-		menuBuilder.buildRow(view, R.drawable.ic_action_photo_street, null, app.getString(R.string.street_level_imagery), 0, true,
-				collapsableView, false, 1, false, null, false);
+		menuBuilder.buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_photo_street)
+				.setText(app.getString(R.string.street_level_imagery))
+				.setCollapsable(true).setCollapsableView(collapsableView).setTextLinesLimit(1).build());
 
 		if (needUpdateOnly && mapillaryCards != null) {
 			mapillaryCardsRow.setCards(mapillaryCards);
@@ -319,7 +322,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+	public boolean isMenuControllerSupported(MenuController menuController) {
 		return true;
 	}
 
@@ -388,12 +391,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 			Intent intent = new Intent(ACTION_VIEW, uri)
 					.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			if (!AndroidUtils.startActivityIfSafe(app, intent)) {
-				new MapillaryInstallDialogFragment()
-						.show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
+				MapillaryInstallDialogFragment.showInstance(activity);
 			}
 			success = true;
 		} else {
-			new MapillaryInstallDialogFragment().show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
+			MapillaryInstallDialogFragment.showInstance(activity);
 		}
 		return success;
 	}

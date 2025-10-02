@@ -3,6 +3,7 @@ package net.osmand;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.data.Amenity.WIKIDATA;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -714,6 +715,17 @@ public class NativeLibrary {
 			return s;
 		}
 
+		@Override
+		public String toStringEn() {
+			String s = "MapObject " + name + " ";
+			s += ObfConstants.getOsmEntityType(this) + "/";
+			s += ObfConstants.getOsmObjectId(this);
+			if (this.getTags().containsKey(WIKIDATA)) {
+				s += " " + this.getTags().get(WIKIDATA);
+			}
+			return s;
+		}
+
 		public List<LatLon> getPolygon() {
 			List<LatLon> res = new ArrayList<>();
 			for (int i = 0; i < this.x.size(); i++) {
@@ -742,6 +754,18 @@ public class NativeLibrary {
 				bottom = Math.max(bottom, y);
 			}
 			return new QuadRect(MapUtils.get31LongitudeX(left), MapUtils.get31LatitudeY(top), MapUtils.get31LongitudeX(right), MapUtils.get31LatitudeY(bottom));
+		}
+
+		public LatLon getLatLon() {
+			LatLon latLon = getLabelLatLon();
+			if (latLon == null && getLabelX() != 0) {
+				latLon = new LatLon(MapUtils.get31LatitudeY(getLabelY()), MapUtils.get31LongitudeX(getLabelX()));
+			}
+			QuadRect rect = getRectLatLon();
+			if (latLon == null && rect != null) {
+				latLon = new LatLon(rect.centerY(), rect.centerX());
+			}
+			return latLon;
 		}
 	}
 }

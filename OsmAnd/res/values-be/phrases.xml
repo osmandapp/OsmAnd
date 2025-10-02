@@ -859,15 +859,10 @@
     <string name="poi_nwn_ref">Пункт нацыянальнай сеткі пешых маршрутаў</string>
     <string name="poi_rwn_ref">Пункт рэгіянальнай сеткі пешых маршрутаў</string>
     <string name="poi_lwn_ref">Пункт мясцовай сеткі пешых маршрутаў</string>
-    <string name="poi_route_hiking_iwn_poi">Міжнародны пешы маршрут</string>
-    <string name="poi_route_hiking_nwn_poi">Нацыянальны пешы маршрут</string>
-    <string name="poi_route_hiking_rwn_poi">Рэгіянальны пешы маршрут</string>
-    <string name="poi_route_hiking_lwn_poi">Мясцовы пешы маршрут</string>
     <string name="poi_node_networks">Вузлы пешаходнай ці рованай сеткі</string>
     <string name="poi_hiking_routes">Пешыя маршруты</string>
     <string name="poi_traffic_enforcement">Кантроль руху</string>
     <string name="poi_collection_times">Гадзіны вымання</string>
-    <string name="poi_route_hiking_ref_poi">Абазначэнне пешага маршруту</string>
     <string name="poi_access_private">Прыватны доступ</string>
     <string name="poi_access_no">Няма доступу</string>
     <string name="poi_access_permissive">Доступ дазволены ўладальнікам</string>
@@ -3412,7 +3407,7 @@
     <string name="poi_socket_schuko_output_low">Нізкая</string>
     <string name="poi_flooring">Крама падлогавых пакрыццяў</string>
     <string name="poi_pottery">Гліняны посуд</string>
-    <string name="poi_whitewater_rapid_name">Назва рачных парогаў</string>
+    <string name="poi_rapids_name">Назва рачных парогаў</string>
     <string name="poi_outpost">Пункт дастаўкі заказаў</string>
     <string name="poi_barbecue_grill">Мангал: так</string>
     <string name="poi_water_utility">Офіс водазабяспячэння</string>

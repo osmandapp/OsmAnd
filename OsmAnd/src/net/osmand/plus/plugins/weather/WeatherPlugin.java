@@ -40,6 +40,7 @@ import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
@@ -58,6 +59,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.plugins.weather.enums.WeatherSource;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -91,6 +93,10 @@ import java.util.Date;
 import java.util.List;
 
 public class WeatherPlugin extends OsmandPlugin {
+	
+	public interface WeatherSourceChangeListener {
+		void onWeatherSourceChanged(WeatherSource newSource);
+	}
 
 	private static final Log log = PlatformUtil.getLog(WeatherPlugin.class);
 
@@ -104,6 +110,8 @@ public class WeatherPlugin extends OsmandPlugin {
 	private WeatherRasterLayer weatherLayerLow;
 	private WeatherRasterLayer weatherLayerHigh;
 	private WeatherContourLayer weatherContourLayer;
+	
+	private final List<WeatherSourceChangeListener> weatherSourceChangeListeners = new ArrayList<>();
 
 	@Nullable
 	private Date forecastDate;
@@ -117,7 +125,10 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherSettings = weatherHelper.getWeatherSettings();
 
 		for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
-			pluginPreferences.add(weatherBand.getBandUnitPref());
+			CommonPreference<? extends WeatherUnit> preference = weatherBand.getBandUnitPref();
+			if (preference != null) {
+				pluginPreferences.add(preference);
+			}
 		}
 
 		ApplicationMode[] noAppMode = {};
@@ -189,14 +200,14 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnableByDefault() {
-		return true;
+		return !Version.isHMDBuild();
 	}
 
 	@Override
 	public CharSequence getDescription(boolean linksEnabled) {
 		String infoUrl = app.getString(R.string.weather_global_forecast_system);
 		String description = app.getString(R.string.weather_plugin_description, infoUrl);
-		return linksEnabled ? UiUtilities.createUrlSpannable(description, infoUrl) : description;
+		return linksEnabled ? UiUtilities.createUrlSpannable(app, description, infoUrl) : description;
 	}
 
 	@Override
@@ -269,19 +280,19 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Nullable
 	@Override
 	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		switch (widgetType) {
-			case WEATHER_TEMPERATURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_TEMPERATURE);
-			case WEATHER_PRECIPITATION_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRECIPITATION);
-			case WEATHER_WIND_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_WIND_SPEED);
-			case WEATHER_CLOUDS_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_CLOUD);
-			case WEATHER_AIR_PRESSURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRESSURE);
-		}
-		return null;
+		return switch (widgetType) {
+			case WEATHER_TEMPERATURE_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_TEMPERATURE);
+			case WEATHER_PRECIPITATION_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRECIPITATION);
+			case WEATHER_WIND_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_WIND_SPEED);
+			case WEATHER_CLOUDS_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_CLOUD);
+			case WEATHER_AIR_PRESSURE_WIDGET ->
+					new WeatherWidget(mapActivity, widgetType, customId, widgetsPanel, WEATHER_BAND_PRESSURE);
+			default -> null;
+		};
 	}
 
 	@Nullable
@@ -473,7 +484,22 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	public void setWeatherSource(WeatherSource source) {
+		weatherHelper.updateWeatherSource(source);
 		weatherSettings.weatherSource.set(source.getSettingValue());
+
+		for (WeatherSourceChangeListener listener : weatherSourceChangeListeners) {
+			listener.onWeatherSourceChanged(source);
+		}
+	}
+	
+	public void addWeatherSourceChangeListener(WeatherSourceChangeListener listener) {
+		if (!weatherSourceChangeListeners.contains(listener)) {
+			weatherSourceChangeListeners.add(listener);
+		}
+	}
+	
+	public void removeWeatherSourceChangeListener(WeatherSourceChangeListener listener) {
+		weatherSourceChangeListeners.remove(listener);
 	}
 
 	public boolean isAnyWeatherContourLinesEnabled() {

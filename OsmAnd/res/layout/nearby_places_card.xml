@@ -1,112 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/activity_background_color"
-	android:orientation="vertical">
-
-	<include layout="@layout/list_item_divider" />
+	app:shimmer_base_alpha="1.0"
+	app:shimmer_highlight_alpha="0.2">
 
 	<LinearLayout
-		android:id="@+id/nearby_title_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/list_background_color"
-		android:orientation="horizontal">
+		android:background="?attr/activity_background_color"
+		android:orientation="vertical">
 
-		<net.osmand.plus.widgets.TextViewEx
-			style="@style/TitleStyle.Medium"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginTop="@dimen/content_padding_small"
-			android:layout_marginBottom="@dimen/content_padding_small"
-			android:layout_weight="1"
-			android:text="@string/popular_places_nearby"
-			android:textColor="?android:textColorPrimary" />
-
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/explicit_indicator"
-			android:layout_width="@dimen/context_menu_padding_margin_large"
-			android:layout_height="match_parent"
-			android:layout_gravity="center_vertical"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:scaleType="center" />
-	</LinearLayout> <!--Title-->
-
-	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
-		android:id="@+id/progress_bar"
-		style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-		android:layout_width="match_parent"
-		android:layout_height="4dp"
-		android:layout_gravity="center"
-		android:indeterminate="true"
-		android:visibility="gone"
-		app:mpb_progressStyle="horizontal"
-		app:mpb_useIntrinsicPadding="false"
-		tools:visibility="visible" />
-
-	<FrameLayout
-		android:id="@+id/card_content"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		<include layout="@layout/list_item_divider" />
 
 		<LinearLayout
+			android:id="@+id/nearby_title_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:background="?attr/list_background_color"
+			android:orientation="horizontal">
 
-			<androidx.recyclerview.widget.RecyclerView
-				android:id="@+id/nearByList"
+			<net.osmand.plus.widgets.TextViewEx
+				style="@style/TitleStyle.Medium"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_marginBottom="@dimen/content_padding_small"
+				android:layout_weight="1"
+				android:text="@string/popular_places_nearby"
+				android:textColor="?android:textColorPrimary" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/explicit_indicator"
+				android:layout_width="@dimen/context_menu_padding_margin_large"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:scaleType="center" />
+		</LinearLayout> <!--Title-->
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:layout_gravity="center"
+			android:indeterminate="true"
+			android:visibility="gone"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_useIntrinsicPadding="false"
+			tools:visibility="visible" />
+
+		<com.facebook.shimmer.ShimmerFrameLayout
+			android:id="@+id/card_content"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:shimmer_auto_start="false">
+
+			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/list_background_color"
-				android:padding="0dp" />
-
-			<FrameLayout
-				android:id="@+id/show_all_button"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="?attr/list_background_color"
-				android:minHeight="@dimen/route_info_list_item_height"
 				android:orientation="vertical">
 
-				<View
-					android:id="@+id/divider_list"
+				<androidx.recyclerview.widget.RecyclerView
+					android:id="@+id/nearByList"
 					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:layout_gravity="top"
-					android:layout_marginStart="@dimen/content_padding"
-					android:background="?attr/divider_color_basic" />
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/show_all_btn"
-					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical|start"
-					android:layout_marginStart="@dimen/content_padding"
-					android:paddingTop="@dimen/list_header_padding"
-					android:paddingBottom="@dimen/list_header_padding"
-					android:text="@string/shared_string_show_all"
-					android:textAllCaps="true"
-					android:textColor="?attr/active_color_basic"
-					android:textSize="@dimen/default_sub_text_size"
-					app:typefaceWeight="medium"
-					tools:text="SHOW ALL"
-					tools:visibility="visible" />
-			</FrameLayout>
+					android:background="?attr/list_background_color"
+					android:padding="0dp" />
 
-		</LinearLayout>
+				<FrameLayout
+					android:id="@+id/show_all_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/list_background_color"
+					android:minHeight="@dimen/route_info_list_item_height"
+					android:orientation="vertical">
 
-	</FrameLayout> <!--Card content-->
+					<View
+						android:id="@+id/divider_list"
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:layout_gravity="top"
+						android:layout_marginStart="@dimen/content_padding"
+						android:background="?attr/divider_color_basic" />
 
-	<include layout="@layout/nearby_places_no_internet" />
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/show_all_btn"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical|start"
+						android:layout_marginStart="@dimen/content_padding"
+						android:paddingTop="@dimen/list_header_padding"
+						android:paddingBottom="@dimen/list_header_padding"
+						android:text="@string/shared_string_show_all"
+						android:textAllCaps="true"
+						android:textColor="?attr/active_color_basic"
+						android:textSize="@dimen/default_sub_text_size"
+						app:typefaceWeight="medium"
+						tools:text="SHOW ALL"
+						tools:visibility="visible" />
+				</FrameLayout>
 
-	<include layout="@layout/empty_nearby_places" />
+			</LinearLayout>
 
-	<include layout="@layout/list_item_divider" />
+		</com.facebook.shimmer.ShimmerFrameLayout> <!--Card content-->
 
-</LinearLayout>
+		<include layout="@layout/nearby_places_no_internet" />
+
+		<include layout="@layout/empty_nearby_places" />
+
+		<include layout="@layout/list_item_divider" />
+
+	</LinearLayout>
+</FrameLayout>

@@ -31,7 +31,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
@@ -42,6 +42,7 @@ import net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -57,7 +58,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements OnSelectProfileCallback {
+public class OnlineRoutingEngineFragment extends BaseFullScreenFragment implements OnSelectProfileCallback {
 
 
 	public static final String TAG = OnlineRoutingEngineFragment.class.getSimpleName();
@@ -122,8 +123,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		view = themedInflater.inflate(
-				R.layout.online_routing_engine_fragment, container, false);
+		view = inflate(R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = view.findViewById(R.id.segments_container);
 		scrollView = view.findViewById(R.id.segments_scroll);
 		buttonsShadow = view.findViewById(R.id.buttons_shadow);
@@ -146,7 +146,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		updateCardViews(nameCard, typeCard, vehicleCard, exampleCard);
 
 		showShadowBelowButtons();
-		showButtonsAboveKeyboard();
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			showButtonsAboveKeyboard();
+		}
 		hideKeyboardOnScroll();
 
 		return view;
@@ -368,8 +370,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void setupResultsContainer() {
-		testResultsContainer = themedInflater.inflate(
-				R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
+		testResultsContainer = inflate(R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
 		testResultsContainer.setVisibility(View.GONE);
 		segmentsContainer.addView(testResultsContainer);
 	}
@@ -592,16 +593,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			if (!fragmentManager.isStateSaved()) {
 				fragmentManager.popBackStack();
 			}
-		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
 		}
 	}
 

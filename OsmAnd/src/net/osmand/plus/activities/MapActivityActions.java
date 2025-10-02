@@ -9,10 +9,8 @@ import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -56,12 +54,14 @@ import net.osmand.plus.profiles.data.RoutingProfilesHolder;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapActions;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
@@ -148,20 +148,27 @@ public class MapActivityActions extends MapActions {
 	}
 
 	public void addActionsToAdapter(double latitude, double longitude,
-			ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+			ContextMenuAdapter adapter, Object object, boolean configureMenu) {
 		MapActivity activity = getMapActivity();
 		if (activity == null) {
 			return;
 		}
 		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 
+		WptPt wptPt = object instanceof WptPt point ? point : null;
+		FavouritePoint favouritePoint = object instanceof FavouritePoint point ? point : null;
+
+		if (object instanceof PlaceDetailsObject detailsObject) {
+			wptPt = detailsObject.getWptPt();
+			favouritePoint = detailsObject.getFavouritePoint();
+		}
 		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_ADD_ID)
-				.setTitleId(selectedObj instanceof FavouritePoint ? R.string.favourites_context_menu_edit : R.string.shared_string_add, activity)
-				.setIcon(selectedObj instanceof FavouritePoint ? R.drawable.ic_action_edit_dark : R.drawable.ic_action_favorite_stroke)
+				.setTitleId(favouritePoint != null ? R.string.favourites_context_menu_edit : R.string.shared_string_add, activity)
+				.setIcon(favouritePoint != null ? R.drawable.ic_action_edit_dark : R.drawable.ic_action_favorite_stroke)
 				.setOrder(10));
 		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_MARKER_ID)
-				.setTitleId(selectedObj instanceof MapMarker ? R.string.shared_string_edit : R.string.shared_string_marker, activity)
-				.setIcon(selectedObj instanceof MapMarker ? R.drawable.ic_action_edit_dark : R.drawable.ic_action_flag_stroke)
+				.setTitleId(object instanceof MapMarker ? R.string.shared_string_edit : R.string.shared_string_marker, activity)
+				.setIcon(object instanceof MapMarker ? R.drawable.ic_action_edit_dark : R.drawable.ic_action_flag_stroke)
 				.setOrder(20));
 		adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_SHARE_ID)
 				.setTitleId(R.string.shared_string_share, activity)
@@ -181,7 +188,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setOrder(SEARCH_NEAR_ITEM_ORDER));
 
-		PluginsHelper.registerMapContextMenu(activity, latitude, longitude, adapter, selectedObj, configureMenu);
+		PluginsHelper.registerMapContextMenu(activity, latitude, longitude, adapter, object, configureMenu);
 
 		ItemClickListener listener = (callback, view, item, isChecked) -> {
 			int resId = item.getTitleId();
@@ -206,8 +213,7 @@ public class MapActivityActions extends MapActions {
 
 		if (configureMenu) {
 			adapter.addItem(addGpxItem);
-		} else if (selectedObj instanceof WptPt
-				&& gpxHelper.getSelectedGPXFile((WptPt) selectedObj) != null) {
+		} else if (wptPt != null && gpxHelper.getSelectedGPXFile(wptPt) != null) {
 			adapter.addItem(editGpxItem);
 		} else if (!gpxHelper.getSelectedGPXFiles().isEmpty()
 				|| (PluginsHelper.isActive(OsmandMonitoringPlugin.class))) {
@@ -233,19 +239,17 @@ public class MapActivityActions extends MapActions {
 		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(activity, latitude, longitude, adapter));
 	}
 
-	public void showAdditionalActionsFragment(ContextMenuAdapter adapter,
-			AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener listener) {
+	public void showAdditionalActionsFragment(ContextMenuAdapter adapter, ContextMenuItemClickListener listener) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
-			actionsBottomSheetDialogFragment.setAdapter(adapter, listener);
-			actionsBottomSheetDialogFragment.show(activity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+			AdditionalActionsBottomSheetDialogFragment.showInstance(activity, adapter, listener);
 		}
 	}
 
 	public ContextMenuItemClickListener getContextMenuItemClickListener(MapActivity activity, double latitude,
 			double longitude, ContextMenuAdapter adapter) {
-		ViewCreator viewCreator = new ViewCreator(activity, !settings.isLightContent());
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		ViewCreator viewCreator = new ViewCreator(activity, nightMode);
 		ContextMenuListAdapter listAdapter = adapter.toListAdapter(activity, viewCreator);
 
 		return (view, position) -> {
@@ -344,7 +348,7 @@ public class MapActivityActions extends MapActions {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			if (drawerMode == DRAWER_MODE_SWITCH_PROFILE) {
 				return createSwitchProfileOptionsMenu(activity, adapter, nightMode);
 			}
@@ -358,7 +362,7 @@ public class MapActivityActions extends MapActions {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			return createNormalOptionsMenu(activity, adapter, nightMode);
 		}
 		return adapter;
@@ -760,7 +764,7 @@ public class MapActivityActions extends MapActions {
 		if (activity == null) {
 			return;
 		}
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		ListView menuItemsListView = activity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(activity, nightMode));
 		if (drawerLogoHeader != null) {
@@ -786,7 +790,7 @@ public class MapActivityActions extends MapActions {
 			if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
 				String drawerLogoParams = app.getAppCustomization().getNavDrawerLogoUrl();
 				if (!Algorithms.isEmpty(drawerLogoParams)) {
-					AndroidUtils.openUrl(activity, Uri.parse(drawerLogoParams), nightMode);
+					AndroidUtils.openUrl(activity, drawerLogoParams, nightMode);
 				}
 			} else {
 				position -= menuItemsListView.getHeaderViewsCount();

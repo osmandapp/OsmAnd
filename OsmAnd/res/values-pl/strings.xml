@@ -73,9 +73,7 @@
     <string name="shared_string_no_thanks">Niepotrzebne</string>
     <string name="basemap_missing">Pobierz podstawową mapę świata, by uzyskać poglądowe pokrycie całego świata na niskich stopniach przybliżenia.</string>
     <string name="vector_data_missing">Pobierz dane (\"offline\") by używać map offline.</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nPrzytrzymaj dłużej, aby wyświetlić opcje"</string>
+    <string name="local_index_gpx_info_show">\n\nPrzytrzymaj dłużej, aby wyświetlić opcje</string>
     <string name="local_index_installed">Wersja lokalna</string>
     <string name="local_index_items_backuped">Zdezaktywowano %1$d z %2$d elementów.</string>
     <string name="local_index_items_deleted">Usunięto %1$d z %2$d elementów.</string>
@@ -568,7 +566,7 @@
 \n
 \nPobieraj mapy kafelkowe bezpośrednio online albo przygotuj je do użytku w trybie offline (ręcznie skopiowane do katalogu danych OsmAnd) jako baza danych SQLite, którą można utworzyć za pomocą różnych narzędzi do przygotowywania map od innych firm.</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle poprzez okresowe wybudzanie urządzenia GPS (przy wyłączonym ekranie).</string>
-    <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala to np. na dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
+    <string name="osmand_accessibility_description">Umożliwia bezpośredni dostęp do funkcji ułatwień dostępu urządzenia w OsmAnd. Ułatwia to np. dostosowywanie tempa mowy w przypadku głosów przetwarzanych na mowę, konfigurowanie nawigacji za pomocą pada kierunkowego, sterowanie zoomem za pomocą trackballa lub korzystanie z funkcji przetwarzania tekstu na mowę, na przykład do automatycznego ogłaszania swojej pozycji.</string>
     <string name="osmand_development_plugin_description">Zapewnia funkcjonalność do testowania i debugowania OsmAnd: symuluj trasy nawigacji, monitoruj renderowanie ekranu, sprawdzaj wydajność itp. Ta wtyczka nie jest wymagana do normalnego użytkowania aplikacji.</string>
     <string name="plugins_screen">Wtyczki</string>
     <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność.</string>
@@ -702,7 +700,7 @@
     <string name="rendering_attr_noPolygons_name">Wielokąty</string>
     <string name="rendering_attr_appMode_name">Tryb renderowania</string>
     <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
-    <string name="rendering_attr_contourLines_description">Wyświetl od stopnia przybliżenia (wymaga danych poziomic):</string>
+    <string name="rendering_attr_contourLines_description">Wyświetlanie z poziomu powiększenia (wymaga danych linii konturowej):</string>
     <string name="rendering_attr_contourLines_name">Wyświetl poziomice</string>
     <string name="rendering_attr_hmRendered_description">Zwiększ liczbę szczegółów pokazywanych na mapie.</string>
     <string name="rendering_attr_hmRendered_name">Wyświetl więcej szczegółów na mapie</string>
@@ -928,12 +926,12 @@
     <string name="shared_string_control_stop">Zakończ</string>
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Uwagi audio/wideo</string>
-    <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd dla poziomic w trybie offline</string>
+    <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do tworzenia obiektów topograficznych offline, takich jak linie poziomicowe, cieniowanie wzniesień, nachylenie</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
     <string name="dropbox_plugin_description">Synchronizuj trasy i uwagi audio/wideo ze swoim kontem Dropbox.</string>
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
     <string name="intermediate_points_change_order">Zmień kolejność</string>
-    <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej poziomice, aby wspomóc dalszy rozwój.</string>
+    <string name="srtm_paid_version_msg">Prosimy o rozważenie zakupu wtyczki „Topografia”, aby wspomóc dalszy rozwój.</string>
     <string name="srtm_paid_version_title">Wtyczka Topografia</string>
     <string name="recording_context_menu_arecord">Zrób uwagę audio</string>
     <string name="recording_context_menu_vrecord">Zrób uwagę wideo</string>
@@ -1071,7 +1069,7 @@
     <string name="route_descr_destination">Cel</string>
     <string name="base_world_map">Mapa podstawowa</string>
     <string name="map_magnifier">Przybliżenie</string>
-    <string name="auto_zoom_none">Brak automatycznego przybliżania</string>
+    <string name="auto_zoom_none">Wyłącz automatyczne zbliżanie mapy</string>
     <string name="auto_zoom_close">Zbliżenie</string>
     <string name="auto_zoom_far">Widok pośredni</string>
     <string name="auto_zoom_farthest">Widok szeroki</string>
@@ -1225,9 +1223,7 @@
 \n Punkty wyznaczonej trasy %2$s</string>
     <string name="gpx_selection_points">%1$s \nPunkty</string>
     <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nPrzytrzymaj dłużej, aby wyświetlić na mapie"</string>
+    <string name="selected_gpx_info_show">\n\nPrzytrzymaj dłużej, aby wyświetlić na mapie</string>
     <string name="delay_navigation_start">Rozpocznij nawigację automatycznie</string>
     <string name="shared_string_selected_lowercase">wybrano</string>
     <string name="gpx_split_interval">Interwał podziału</string>
@@ -1389,7 +1385,7 @@
     <string name="rendering_attr_transportStops_name">Przystanki transportu miejskiego</string>
     <string name="navigate_point_easting">Linia współrzędnych \"x\"</string>
     <string name="download_tab_local">Pobrane</string>
-    <string name="no_internet_connection">Pobieranie niemożliwe. Proszę sprawdzić połączenie internetowe.</string>
+    <string name="no_internet_connection">Brak połączenia internetowego</string>
     <string name="voices">Komunikaty głosowe</string>
     <string name="traffic_warning_railways">Przejazd kolejowy</string>
     <string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
@@ -1473,7 +1469,7 @@
 \n 
 \nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy.</string>
     <string name="watch">Oglądaj</string>
-    <string name="rendering_attr_pisteRoutes_name">Stoki narciarskie</string>
+    <string name="rendering_attr_pisteRoutes_name">Trasy narciarskie</string>
     <string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
     <string name="world_ski_missing">Aby wyświetlić obiekty narciarskie, należy pobrać specjalną mapę offline.</string>
     <string name="nautical_maps_missing">Aby wyświetlać mapy żeglugowe, należy pobrać specjalną mapę offline.</string>
@@ -1870,7 +1866,7 @@
     <string name="shared_string_status">Status</string>
     <string name="add_time_span">Dodaj przedział czasowy</string>
     <string name="road_blocked">Droga zablokowana</string>
-    <string name="switch_start_finish">Zamień punkt początkowy i cel trasy</string>
+    <string name="switch_start_finish">Zamień punkt początkowy z celem trasy</string>
     <string name="rendering_attr_hideIcons_name">Ikony użytecznych miejsc</string>
     <string name="rec_split">Dzielenie nagrań</string>
     <string name="rec_split_title">Dzielenie rejestrowanych nagrań</string>
@@ -2075,8 +2071,8 @@
     <string name="rendering_value_low_name">Mała</string>
     <string name="rendering_attr_contourWidth_description">Szerokość izolinii</string>
     <string name="rendering_attr_contourWidth_name">Szerokość izolinii</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Woda</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ukryj wodę</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Ukryj obszary wodne</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Woda</string>
     <string name="configure_screen_quick_action">Szybka czynność</string>
     <string name="quick_action_item_action">Czynność %d</string>
     <string name="quick_action_item_screen">Ekran %d</string>
@@ -2199,8 +2195,8 @@
     <string name="subscribe_email_error">Błąd</string>
     <string name="quick_action_auto_zoom_on">Włącz automatyczne powiększanie</string>
     <string name="quick_action_auto_zoom_off">Wyłącz automatyczne powiększanie</string>
-    <string name="quick_action_auto_zoom">Przełącz automatyczne przybliżanie</string>
-    <string name="quick_action_auto_zoom_desc">Przycisk do włączania lub wyłączania automatycznego zoomu z regulacją prędkości.</string>
+    <string name="quick_action_auto_zoom">Mapa z automatycznym powiększeniem</string>
+    <string name="quick_action_auto_zoom_desc">Przycisk umożliwiający włączanie i wyłączanie automatycznego powiększania sterowanego prędkością.</string>
     <string name="quick_action_add_destination_desc">Przycisk ustalenia celu trasy w położeniu na środku ekranu; poprzednio ustalony cel zamieniony będzie na ostatni cel pośredni.</string>
     <string name="quick_action_replace_destination_desc">Przycisk do wyśrodkowania na ekranie nowego celu podróży, zastępujący poprzednio wybrany cel podróży (jeśli istnieje).</string>
     <string name="quick_action_add_first_intermediate_desc">Przycisk umożliwiający wyśrodkowanie ekranu jako pierwszego pośredniego celu podróży.</string>
@@ -2227,7 +2223,7 @@
     <string name="shared_string_in_name">w %1$s</string>
     <string name="shared_string_overview">Podsumowanie</string>
     <string name="animate_my_location">Animowanie położenia</string>
-    <string name="animate_my_location_desc">Animuje aktualne położenie na mapie podczas nawigacji.</string>
+    <string name="animate_my_location_desc">Płynne przesuwanie mapy w ruchu. Wprowadza lekkie opóźnienie.</string>
     <string name="osmand_extended_description_part2">Nawigacja GPS 
 \n • Możesz wybrać pomiędzy trybem offline (brak kosztów roamingu za granicą) lub online (szybciej) 
 \n • Podpowiedzi głosowe zakręt-za-zakrętem poprowadzą cię do celu (nagrane lub syntetyzowane głosy) 
@@ -2256,20 +2252,7 @@
     <string name="hillshade_purchase_header">Zainstaluj wtyczkę „Topografia”, aby wyświetlić stopniowane obszary pionowe.</string>
     <string name="hillshade_menu_download_descr">Pobierz nakładkę mapy „Mapa cieniowana”, aby wyświetlić cieniowanie pionowe.</string>
     <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę „Topografia”, aby wyświetlić stopniowane obszary pionowe.</string>
-    <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: 
-\n • Europa Zachodnia: **** 
-\n • Europa Wschodnia: *** 
-\n • Rosja: *** 
-\n • Ameryka Północna: *** 
-\n • Ameryka Południowa: ** 
-\n • Azja: ** 
-\n • Japonia i Korea: *** 
-\n • Bliski Wschód: ** 
-\n • Afryka: ** 
-\n • Antarktyda: * 
-\n Jest możliwe pobranie map większości krajów na świecie! 
-\n Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, …
-\n</string>
+    <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: \n • Europa Zachodnia: **** \n • Europa Wschodnia: *** \n • Rosja: *** \n • Ameryka Północna: *** \n • Ameryka Południowa: ** \n • Azja: ** \n • Japonia i Korea: *** \n • Bliski Wschód: ** \n • Afryka: ** \n • Antarktyda: * \n Jest możliwe pobranie map większości krajów na świecie! \n Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, …</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
     <string name="quick_action_showhide_osmbugs_descr">Przycisk do wyświetlania lub ukrywania uwag OSM na mapie.</string>
     <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
@@ -2331,11 +2314,7 @@
     <string name="retry">Ponów</string>
     <string name="save_route_point">Zapisz punkt trasy</string>
     <string name="route_point_one">Punkt 1 trasy</string>
-    <string name="osmand_extended_description_part7">Pomagaj rozwijać OSM
-\n • Raportowanie o błędach danych
-\n • Przesyłaj bezpośrednio z aplikacji trasy GPX do OSM
-\n • Dodawaj Użyteczne Miejsca (POI) i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)
-\n</string>
+    <string name="osmand_extended_description_part7">Pomagaj rozwijać OSM \n • Raportowanie o błędach danych \n • Przesyłaj bezpośrednio z aplikacji trasy GPX do OSM \n • Dodawaj Użyteczne Miejsca (POI) i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)</string>
     <string name="live_monitoring_max_interval_to_send">Bufor czasowy do śledzenia online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Określa czas przechowywania wysyłanych położeń bez połączenia</string>
     <string name="mappilary_no_internet_desc">Zdjęcia z Mapillary są dostępne tylko online.</string>
@@ -2362,8 +2341,8 @@
     <string name="move_point">Przesuń punkt</string>
     <string name="keep_showing_on_map">Wyświetlanie na mapie</string>
     <string name="exit_without_saving">Zakończyć bez zapisywania?</string>
-    <string name="do_not_use_animations">Wyłączenie animacji</string>
-    <string name="do_not_use_animations_descr">Wyłącza animacje mapy.</string>
+    <string name="do_not_use_animations">Usuń animacje</string>
+    <string name="do_not_use_animations_descr">Wyłącza animacje mapy i interfejsu użytkownika.</string>
     <string name="move_all_to_history">Przenieś wszystkie do historii</string>
     <string name="show_direction">Wskaźnik odległości</string>
     <string name="sort_by">Kolejność sortowania</string>
@@ -2536,7 +2515,7 @@
     <string name="empty_state_markers_groups_desc">Importuj ulubione grupy lub punkty trasy jako znaczniki.</string>
     <string name="rendering_attr_whiteWaterSports_name">Sporty spływowe</string>
     <string name="group_deleted">Usunięto grupę</string>
-    <string name="clear_all_intermediates">Wyczyść wszystkie punkty pośrednie</string>
+    <string name="clear_all_intermediates">Wyczyść wszystkie miejsca docelowe pośrednie</string>
     <string name="nothing_found_in_radius">Nic nie znaleziono:</string>
     <string name="select_waypoints_category_description">Można dodać wszystkie punkty pośrednie trasy lub wybrać osobne kategorie.</string>
     <string name="shared_string_total">Łącznie</string>
@@ -2661,10 +2640,10 @@
     <string name="off_road_render_descr">Do jazdy off-road, oparty na stylu „Topo” i do użycia z zielonym podkładem. Zmniejszona szerokość głównych dróg, zwiększona szerokość szlaków, ścieżek, dróg rowerowych itp.</string>
     <string name="nautical_render_descr">Do nawigacji morskiej. Zawiera boje, latarnie morskie, drogi rzeczne, drogi morskie, porty, obiekty żeglugi i izobaty.</string>
     <string name="ski_map_render_descr">Do narciarstwa. Zawiera trasy zjazdowe, wyciągi narciarskie, trasy biegowe itp. Przyciemnia dodatkowe obiekty mapy.</string>
-    <string name="light_rs_render_descr">Prosty styl dla nawigacji drogowej. Delikatny styl nocny, poziomice, kontrastujące drogi w kolorze pomarańczowym, przyciemnione drugoplanowe obiekty mapy.</string>
+    <string name="light_rs_render_descr">Prosty styl jazdy. Delikatny tryb nocny, kontrastujące pomarańczowe drogi, przyciemnione drugorzędne obiekty na mapie i elementy topograficzne, takie jak linie poziomicowe.</string>
     <string name="topo_render_descr">Do uprawiania turystyki pieszej, trekkingu i kolarstwa przyrodniczego. Czytelny na zewnątrz. Kontrastujące drogi i naturalne obiekty, różne rodzaje tras, zaawansowane opcje izolinii, dodatkowe szczegóły. Regulacja integralności powierzchni odróżnia jakość drogi. Brak trybu nocnego.</string>
     <string name="touring_view_render_descr">Styl turystyczny o wysokim kontraście i maksymalnej szczegółowości. Zawiera wszystkie opcje domyślnego stylu OsmAnd, wyświetlając jak najwięcej szczegółów, w szczególności drogi, ścieżki i inne sposoby podróżowania. Czyste rozróżnienie typów dróg jak w atlasie turystycznym. Nadaje się do użytku w dzień, w nocy i na zewnątrz.</string>
-    <string name="default_render_descr">Styl ogólnego przeznaczenia. Wyraźnie pokazuje w gęsto zaludnionych miastach. Zawiera poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
+    <string name="default_render_descr">Styl uniwersalny. Gęste miasta przedstawione w przejrzysty sposób. Zawiera trasy, jakość nawierzchni, ograniczenia dostępu, osłony drogowe, renderowanie ścieżek zgodnie ze skalą SAC/CAI, elementy sportów wodnych, cechy topograficzne, takie jak poziomice.</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
@@ -2715,12 +2694,7 @@
 \n• Kompaktowe mapy wektorowe w trybie offline aktualizowane co najmniej raz w miesiącu
 \n 
 \n• Wybór między kompletnymi danymi regionu lub tylko z siecią dróg (Przykład: Cała Japonia to 700 MB lub 200 MB dla części sieci drogowej)</string>
-    <string name="osmand_plus_extended_description_part5">Funkcje bezpieczeństwa
-\n• Opcjonalne automatyczne przełączanie widoku dzień/noc
-\n• Opcjonalny wyświetlacz ograniczenia prędkości z przypomnieniem, jeśli go przekroczysz
-\n• Opcjonalne powiększanie zależne od prędkości
-\n• Udostępnij swoją lokalizację, aby Twoi znajomi mogli Cię znaleźć
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Funkcje bezpieczeństwa \n• Opcjonalne automatyczne przełączanie widoku dzień/noc \n• Opcjonalny wyświetlacz ograniczenia prędkości z przypomnieniem, jeśli go przekroczysz \n• Opcjonalne powiększanie zależne od prędkości \n• Udostępnij swoją lokalizację, aby Twoi znajomi mogli Cię znaleźć</string>
     <string name="osmand_plus_extended_description_part6">Funkcje dla pieszych i rowerzystów
 \n• Oglądanie chodu, piesze wycieczki i ścieżki rowerowe, idealne do zajęć na świeżym powietrzu
 \n• Specjalne tryby kierowania i wyświetlania dla rowerów i pieszych
@@ -2728,13 +2702,7 @@
 \nOpcjonalne dopasowywanie do lokalnego pliku GPX lub usługi online
 \n• Opcjonalny wyświetlacz prędkości i wysokości
 \n• Wyświetlanie warstwic i cieniowania rzeźby terenu (poprzez dodatkowa wtyczkę)</string>
-    <string name="osmand_plus_extended_description_part7">Przyczyń się do rozwoju OSM
-\n• Zgłoś błędy danych
-\n• Przesyłaj ścieżki GPX do OSM bezpośrednio z aplikacji
-\n• Dodaj punkty POI i bezpośrednio prześlij je do OSM (lub później, jeśli jesteś offline)
-\n• Opcjonalne nagrywanie podróży również w tle (gdy urządzenie znajduje się w trybie uśpienia)
-\nOsmAnd jest aktywnie rozwijanym oprogramowaniem typu open source. Każdy może wnieść swój wkład do aplikacji poprzez zgłaszanie błędów, ulepszanie tłumaczeń lub kodowanie nowych funkcji. Dodatkowo projekt opiera się na wkładzie finansowym na finansowanie kodowania i testowania nowych funkcjonalności.
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Przyczyń się do rozwoju OSM \n• Zgłoś błędy danych \n• Przesyłaj ścieżki GPX do OSM bezpośrednio z aplikacji \n• Dodaj punkty POI i bezpośrednio prześlij je do OSM (lub później, jeśli jesteś offline) \n• Opcjonalne nagrywanie podróży również w tle (gdy urządzenie znajduje się w trybie uśpienia) \nOsmAnd jest aktywnie rozwijanym oprogramowaniem typu open source. Każdy może wnieść swój wkład do aplikacji poprzez zgłaszanie błędów, ulepszanie tłumaczeń lub kodowanie nowych funkcji. Dodatkowo projekt opiera się na wkładzie finansowym na finansowanie kodowania i testowania nowych funkcjonalności.</string>
     <string name="test_voice_desrc">Naciśnij przycisk i słuchaj odpowiedniego komunikatu głosowego, aby zidentyfikować brakujące lub błędne monity</string>
     <string name="ask_for_location_permission">Proszę przyznać uprawnienia udostępniania położenia, aby kontynuować.</string>
     <string name="rendering_value_black_name">Czarny</string>
@@ -2774,9 +2742,9 @@
     <string name="shared_string_width">Szerokość</string>
     <string name="shared_string_height">Wysokość</string>
     <string name="add_destination_point">Ustal cel trasy</string>
-    <string name="add_intermediate_point">Dodaj punkt pośredni</string>
+    <string name="add_intermediate_point">Dodaj cel pośredni</string>
     <string name="add_start_point">Ustal położenie początkowe</string>
-    <string name="intermediate_waypoint">Punkt pośredni</string>
+    <string name="intermediate_waypoint">Cel pośredni</string>
     <string name="transfers">przesiadki</string>
     <string name="on_foot">pieszo</string>
     <string name="route_way">Trasa</string>
@@ -2824,7 +2792,7 @@
     <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
     <string name="public_transport_warning_title">Nawigacja transportem publicznym jest obecnie w fazie testów beta. Mogą pojawić się błędy i nieścisłości.</string>
-    <string name="add_intermediate">Dodaj punkt pośredni</string>
+    <string name="add_intermediate">Dodaj cel pośredni</string>
     <string name="transfers_size">%1$d transfery</string>
     <string name="add_start_and_end_points">Dodaj punkty początkowe i końcowe</string>
     <string name="rendering_attr_surface_grass_paver_name">Bruk z trawą</string>
@@ -3223,7 +3191,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferuje drogi nieutwardzone.</string>
     <string name="layer_osm_edits">Zmiany OSM</string>
     <string name="quick_action_contour_lines_descr">Przycisk wyświetlający lub ukrywający izolinie na mapie.</string>
-    <string name="quick_action_hillshade_descr">Przycisk do pokazywania lub ukrywania cieniowania na mapie.</string>
+    <string name="quick_action_hillshade_descr">Przycisk umożliwiający pokazywanie lub ukrywanie cieniowania wzniesień na mapie.</string>
     <string name="tts_initialization_error">Nie można uruchomić mechanizmu zamiany tekstu na mowę.</string>
     <string name="shared_preference">Wspólne</string>
     <string name="simulate_your_location_gpx_descr">Symuluje położenie, używając zarejestrowanej trasy GPX.</string>
@@ -3436,7 +3404,7 @@
     <string name="delete_description">Usuń opis</string>
     <string name="quick_action_terrain_descr">Przycisk do wyświetlania lub ukrywania warstwy terenu na mapie.</string>
     <string name="download_slope_maps">Nachylenie</string>
-    <string name="terrain_empty_state_text">Wyświetla cieniowania lub nachylenia na mapie. Przeczytaj więcej o tego rodzaju mapach na naszej stronie.</string>
+    <string name="terrain_empty_state_text">Pokazuje na mapie cieniowanie lub nachylenie wzniesień. Więcej informacji o tych typach map znajdziesz na naszej stronie.</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Poziom powiększenia</string>
     <string name="shared_string_transparency">Przejrzystość</string>
@@ -3444,7 +3412,7 @@
     <string name="slope_download_description">Do wyświetlania nachylenia terenu wymagane są dodatkowe mapy.</string>
     <string name="terrain_slider_description">Ustaw minimalny i maksymalny poziom powiększenia, na których będzie wyświetlana warstwa.</string>
     <string name="slope_description">Nachylenie używa kolorów do wizualizacji stromości terenu.</string>
-    <string name="hillshade_description">Mapa cieniowana wykorzystuje ciemne odcienie do wyświetlania stoków, szczytów i nizin.</string>
+    <string name="hillshade_description">Mapa cieniowania używa ciemnych odcieni do pokazania zboczy, szczytów i nizin.</string>
     <string name="shared_string_terrain">Teren</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="shared_string_square">Kwadrat</string>
@@ -3537,7 +3505,7 @@
 \nSubskrypcja odnawia się, chyba że zostanie anulowana przed wybranym okresem odnowienia.
 \n
 \nZarządzaj lub anuluj swoje subskrypcje w ustawieniach Google Play w dowolnym momencie.</string>
-    <string name="release_3_7">• Nowe mapy stoków offline \n \n • Pełna personalizacja Ulubionych i Punktów GPX - niestandardowe kolory, ikony, kształty \n \n • Dostosowywanie kolejności elementów w menu kontekstowym, konfiguracji mapy i menu podręcznym \n \n • Wikipedia jako osobna warstwa w konfiguracji mapy, wybierz tylko potrzebne języki \n \n • Tworzenie własnego filtru użytecznych miejsc/map z pełną elastycznością \n \n • Dodano opcje przywracania ustawień profili niestandardowych \n \n • Pełne trasy GPX z nawigacji obsługują pasy ruchu i pełne instrukcje skrętu \n \n • Naprawiono rozmiary interfejsu użytkownika na tabletach \n \n • Naprawiono błędy z RTL \n \n</string>
+    <string name="release_3_7">• Nowe mapy offline stoków\n\n• Pełna personalizacja Ulubionych i punktów GPX – niestandardowe kolory, ikony, kształty\n\n• Możliwość dostosowania kolejności elementów w „Menu kontekstowym”, „Konfiguruj mapę” i „Szufladzie”\n\n• Wikipedia jako osobna warstwa w Konfiguruj mapę, wybór tylko potrzebnych języków\n\n• Twórz własne filtry POI / mapy z pełną elastycznością\n\n• Dodano opcje przywracania ustawień dla niestandardowych profili\n\n• Pełne trasy GPX z nawigacji obsługują pasy ruchu i kompletne instrukcje skrętu\n\n• Naprawiono rozmiary interfejsu użytkownika na tabletach\n\n• Naprawiono błędy z RTL\n\n</string>
     <string name="back_to_editing">Powrót do edycji</string>
     <string name="create_edit_poi">Utwórz lub edytuj użyteczne miejsce</string>
     <string name="add_edit_favorite">Dodaj lub edytuj ulubione miejsce</string>
@@ -3683,7 +3651,7 @@
     <string name="add_segment_to_the_track">Dodaj do pliku trasy</string>
     <string name="shared_string_gpx_files">Trasy</string>
     <string name="layer_gpx_layer">Trasy</string>
-    <string name="monitoring_control_start">REC</string>
+    <string name="monitoring_control_start">Nagraj</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie trasy do pliku GPX</string>
     <string name="shared_string_gpx_route">Śledź trasę</string>
     <string name="empty_state_my_tracks">Dodaj pliki trasy</string>
@@ -3914,7 +3882,7 @@
     <string name="uploading_count">Przesyłanie %1$d z %2$d</string>
     <string name="uploaded_count">Przesłano %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Wybierz zmiany do przesłania</string>
-    <string name="hillshade_slope_contour_lines">Mapa cieniowana / Nachylenie / Poziomice</string>
+    <string name="hillshade_slope_contour_lines">Linie poziomicowe / Cieniowanie / Nachylenie</string>
     <string name="activity_type_water_name">Zbiornik wodny</string>
     <string name="activity_type_winter_name">Zimowe</string>
     <string name="activity_type_snowmobile_name">Skuter śnieżny</string>
@@ -4015,7 +3983,7 @@
     <string name="shared_string_max_height">Max. wysokość</string>
     <string name="language_description">Wybierz preferowany język i rodzaj nawigacji głosowej.</string>
     <string name="tts_description">Funkcja Text-to-speech (TTS) potrafi wymówić wszystkie rodzaje instrukcji: nazwy ulic, instrukcje skrętu, nazwy punktów POI itp.</string>
-    <string name="tts_title">TTS</string>
+    <string name="tts_title">Tekst na mowę</string>
     <string name="recorded_description">Nagrany głos brzmi lepiej, ale może wymówić tylko wcześniej nagrane frazy: instrukcje skrętu. Nie można wypowiadać nazw ulic ani punktów POI.</string>
     <string name="use_system_language">Użyj języka systemu</string>
     <string name="shared_string_itinerary">Plan podróży</string>
@@ -4116,7 +4084,7 @@
     <string name="complete_purchase">Zakończ zakup</string>
     <string name="regular_price">Standardowa cena</string>
     <string name="purchases_feature_desc_nautical">Uzyskaj dostęp do informacji o głębokości morskiej</string>
-    <string name="purchases_feature_desc_terrain">Poziomice terenu, pełna mapa cieniowana w ciemnych odcieniach oraz mapy nachylenia z kolorami pokazującymi szczyty i niziny.</string>
+    <string name="purchases_feature_desc_terrain">Poziomice terenu, cieniowanie wzgórz w skali szarości i wskazanie nachylenia w skali kolorów, umożliwiające prezentację szczytów i nizin.</string>
     <string name="purchases_feature_desc_wikivoyage">Przeglądaj Wikipodróże w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_wikipedia">Udostępnia wszystkie artykuły Wikipedii związane z miejscami w trybie offline, pomagając Ci dowiedzieć się o miejscach, które odwiedzasz podczas podróży, za pomocą prostych dotknięć mapy. Nie zapomnij pobrać plików map Wikipedii dla odpowiednich regionów.</string>
     <string name="purchases_feature_desc_combined_wiki">Przeglądaj artykuły z Wikipedii w podróży, bez połączenia z Internetem. Dane w trybie offline podzielone według krajów i dostępne we wszystkich językach.</string>
@@ -4225,7 +4193,7 @@
     <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
     <string name="remove_group_from_markers">Usuń grupę z listy znaczników</string>
     <string name="routeInfo_tracktype_description">Pokoloruj trasę lub linię śladu według składu powierzchni. Zwykle stosuje się, gdy sieć dróg jest w dużej mierze nieutwardzona.</string>
-    <string name="start_point">Start</string>
+    <string name="start_point">Początek</string>
     <string name="mapillary_menu_filter_description_new">Filtrowanie obrazów według daty lub typu. Aktywne tylko w zbliżeniu.</string>
     <string name="service_is_not_available_please_try_later">Usługa niedostępna. Spróbuj ponownie później.</string>
     <string name="shared_string_files">Pliki</string>
@@ -4244,7 +4212,7 @@
     <string name="shared_app_storage_description">Pamięć współdzielona nie jest już dostępna z powodu zmienionego dostępu do pamięci masowej systemu Android.</string>
     <string name="internal_app_storage_description">Pamięć wewnętrzna, ukryta przed wszystkimi użytkownikami i innymi aplikacjami, dzięki czemu tylko OsmAnd może uzyskać dostęp do Twoich danych.</string>
     <string name="shared_storage_warning_title">Zmiany w zasadach dostępu do pamięci masowej</string>
-    <string name="rendering_attr_natureReserves_name">Rezerwat przyrody</string>
+    <string name="rendering_attr_natureReserves_name">Rezerwaty przyrody i obszary chronione</string>
     <string name="clear_all_history_warning">Wyczyścić wszystkie wpisy historii aplikacji, w tym historię wyszukiwania, nawigacji i znaczników\?</string>
     <string name="markers_history_is_disabled_descr">Włącz historię, aby zapamiętać listę odwiedzonych znaczników mapy.</string>
     <string name="search_history_is_disabled_descr">Historię wyszukiwania można włączyć w ustawieniach.</string>
@@ -4313,8 +4281,8 @@
     <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
     <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość</string>
     <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę dostępnych wtyczek znajdziesz w \'Menu\' → \'Wtyczki\'.</string>
-    <string name="delete_history_items_descr">Usunąć wybrane elementy historii\?</string>
-    <string name="delete_history_items">Liczba elementów historii do usunięcia %1$s. Usunąć\?</string>
+    <string name="delete_history_items_descr">Wybrane wpisy zostaną usunięte z listy.</string>
+    <string name="delete_history_items">Usunąć %1$s element(ów) historii?</string>
     <string name="display_route_tracks">Wyświetlanie ścieżek</string>
     <string name="display_route_tracks_as_poi">Wyświetl ścieżki jako punkty POI</string>
     <string name="quick_action_toggle_preference">Zmiana preferencji.</string>
@@ -4373,7 +4341,7 @@
     <string name="migration_files_present">%1$d plik(i) (%2$s) już obecny w miejscu docelowym \"%3$s\" i nie nadpisany.</string>
     <string name="map_marker_options">Opcje znaczników mapy</string>
     <string name="shared_string_size">Rozmiar</string>
-    <string name="created_on">Utworzono</string>
+    <string name="created_on">Utworzono w</string>
     <string name="show_parameter_seekbar">Pokaż pasek wyszukiwania parametrów</string>
     <string name="shared_string_grade">Stopień</string>
     <string name="storage_found_files_size">Znaleziono %1$s plików %2$s</string>
@@ -4404,8 +4372,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Pokaż tagi notatek</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małych powiększeniach</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematyczne wyświetlanie ikon przy małych powiększeniach</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunele dróg wodnych</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Zwiększ widoczność tuneli wodnych</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Zwiększenie widoczności tuneli wodnych</string>
     <string name="turn_arrows">Strzałki skrętu</string>
     <string name="turn_arrows_descr">Kontroluj widoczność strzałek skrętów na liniach trasy.</string>
     <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe o powierzchni dna morskiego, połączone typy powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
@@ -4553,7 +4521,7 @@
     <string name="routing_attr_hazmat_category_description">Kategoria materiałów niebezpiecznych / Rozważ uprawnienia dostępu do materiałów niebezpiecznych</string>
     <string name="routing_attr_avoid_4wd_only_name">Unikaj dróg dla pojazdów z napędem na 4 koła</string>
     <string name="distance_circles">Kręgi odległości</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ukryj obszary wojskowe</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Tereny wojskowe</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ukryj obszary wojskowe</string>
     <string name="shared_string_mode">Tryb</string>
     <string name="time_to_navigation_point_widget_settings_desc">Stuknij widżet, aby przełączyć tryby.</string>
@@ -4626,7 +4594,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Pokaż dedykowane szlaki kolarstwa górskiego.</string>
     <string name="auto_25_chars_route_tl_kl">Skręć w lewo i trzymaj się lewej strony</string>
     <string name="connect_with_straight_line">Połącz z linią prostą</string>
-    <string name="attach_roads_descr">Przybliżaj swoją trasę do dozwolonych dróg, aby wyznaczać trasę między punktami i kojarz dokładne instrukcje dotyczące skrętów oraz właściwości trasy.</string>
+    <string name="attach_roads_descr">Dołącz ślad do dróg, aby uzyskać szczegółowe informacje o trasie, w tym wskazówki zakręt po zakręcie i atrybuty dróg.</string>
     <string name="attach_roads_warning">Do dróg można dołączyć tylko nagrany ślad.</string>
     <string name="without_profiles_changing">Bez zmiany profili</string>
     <string name="shared_string_only_missing">Brakuje tylko</string>
@@ -4646,7 +4614,7 @@
     <string name="widget_with_dot">Widżet.</string>
     <string name="compass_visible_if_map_rotated_desc">Ukryty, gdy Północ jest na górze</string>
     <string name="compass_always_visible">Zawsze widoczny</string>
-    <string name="compass_click_desc">Wskazówka: Stuknij przycisk kompasu, aby przełączyć tryb orientacji mapy.</string>
+    <string name="compass_click_desc">Stuknij dwukrotnie przycisk kompasu, aby przełączyć tryb orientacji mapy.</string>
     <string name="marker_1st">Pierwszy znacznik mapy</string>
     <string name="average_speed_skip_stops_desc">Prędkość mniejsza niż %1$s zostanie zliczona i wpłynie na średnią prędkość.</string>
     <string name="auto_backup_title">Automatyczne tworzenie kopii zapasowych</string>
@@ -4703,7 +4671,7 @@
     <string name="precipitation_widget_desc">Pokazuje opady dla bieżącego centrum mapy.</string>
     <string name="weather_widget_group_desc">Zestaw widżetów pokazujących różne informacje o pogodzie.</string>
     <string name="action_not_supported_with_map_style">Ta czynność nie jest obsługiwana przez wybrany styl mapy.</string>
-    <string name="map_rendering_engine_descr">Wersja 2 (OpenGL) jest szybszym silnikiem renderowania map, posiada również widok 2.5D. Renderowanie w wersji 1 było domyślne przed OsmAndem 4.3 i nadal jest preferowane dla starszych urządzeń.</string>
+    <string name="map_rendering_engine_descr">Wersja 1 była domyślna przed OsmAnd 4.3 i nadal jest preferowana dla starszych urządzeń.\nWersja 2 (OpenGL) to bardziej wydajny silnik renderujący mapy, oferujący również widok 2,5W.</string>
     <string name="map_widget_rendering_fps">FPS renderowania mapy</string>
     <string name="map_widget_rendering_fps_desc">Pokazuje, jak szybko mapa i jej elementy są wyświetlane i odświeżane, wyrażone w klatkach na sekundę (FPS).</string>
     <string name="purchases_feature_desc_cross_buy">Korzystaj z funkcji subskrypcji na różnych platformach (Android/iOS/web) bez dodatkowych kosztów.</string>
@@ -4893,7 +4861,7 @@
     <string name="mtb_imba_full">Międzynarodowe Stowarzyszenie Kolarstwa Górskiego (IMBA)</string>
     <string name="av_audio_format_bottom_sheet_descr">Wybierz format wyjścia dźwięku. Typ pliku dźwięku to 3GPP (.3gp).</string>
     <string name="choose_what_to_sync">Wybierz co synchronizować</string>
-    <string name="cloud_sync_progress">Synchronizacja…%1$s</string>
+    <string name="cloud_sync_progress">Synchronizacja… %1$s</string>
     <string name="checking_progress">Sprawdzanie…</string>
     <string name="shared_string_modified">Zmieniony</string>
     <string name="res_unknown">Nieznany</string>
@@ -4955,7 +4923,7 @@
     <string name="shared_string_yards">jardów</string>
     <string name="shared_string_apply_changes">Zatwierdź zmiany</string>
     <string name="shared_string_kilograms">kilogramów</string>
-    <string name="sort_duration_ascending">Krótkotrwały</string>
+    <string name="sort_duration_ascending">Najpierw najkrótszy czas trwania</string>
     <string name="selected_value">Wybrana wartość</string>
     <string name="shared_string_add_manually">Dodaj ręcznie…</string>
     <string name="cloud_version_confirm_delete">Usunąć \"%1$s\" z OsmAnd Cloud\?</string>
@@ -5152,15 +5120,15 @@
     <string name="error_calculate">Wynik obliczeń jest pusty</string>
     <string name="there_are_no_connected_sensors_of_this_type">Brak podłączonych czujników tego typu</string>
     <string name="shared_string_close_the_dialog">Zamknij okno dialogowe</string>
-    <string name="calculate_offline_altitude_descr">Obliczanie wysokości w trybie offline na podstawie danych mapy wysokości. Różnice w stosunku do wysokości rejestrowanej przez urządzenie mogą być wykorzystane jako korekcja wysokości.</string>
+    <string name="calculate_offline_altitude_descr">Oblicz wysokość w trybie offline, na podstawie danych z mapy terenu (3W). Różnice w stosunku do wysokości zarejestrowanej przez urządzenie mogą być wykorzystane jako korekta wysokości.</string>
     <string name="external_sensors_not_found">Nie znaleziono czujników</string>
     <string name="external_sensors_source_of_data">Źródło danych</string>
     <string name="power_watts_unit">Waty</string>
     <string name="revolutions_per_minute_unit">obr./min</string>
-    <string name="relief_3d">Relief 3D</string>
+    <string name="relief_3d">Rzeźba terenu 3W</string>
     <string name="terrain_map">Mapa terenu (3D)</string>
     <string name="save_track_external_sensors_data">Dane</string>
-    <string name="relief_3d_description">Posiadaj i obserwuj model w skali swojej okolicy lub całego kontynentu.</string>
+    <string name="relief_3d_description">Posiadaj i obserwuj model swojej okolicy lub całego kontynentu w skali.</string>
     <string name="slope_legend_description">Nachylenie używa kolorów do wizualizacji nachylenia terenu. Więcej informacji na temat stoków można znaleźć w %1$s.</string>
     <string name="terrain_category_description">Linie konturu terenu, pełna mapa cieni wzgórz z ciemnymi odcieniami i mapy zboczy z kolorami pokazującymi szczyty i niziny.</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gazy</string>
@@ -5181,9 +5149,9 @@
     <string name="free_favorites_backup_description">Zarejestruj się w OsmAnd Cloud, aby uzyskać bezpłatną kopię zapasową ulubionych i ustawień.</string>
     <string name="free_favorites_backup">Darmowa kopia zapasowa ulubionych</string>
     <string name="get_osmand_cloud">Pozyskaj OsmAnd Cloud</string>
-    <string name="write_bearing_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania</string>
-    <string name="write_bearing">Rzeźby</string>
-    <string name="write_heading_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania</string>
+    <string name="write_bearing_description">Zapisz namiar na każdy punkt trasy podczas nagrywania</string>
+    <string name="write_bearing">Zapisz kierunek</string>
+    <string name="write_heading_description">Zapisuj kierunek dla każdego punktu śladu podczas nagrywania</string>
     <string name="osmand_cloud_deleting_account_descr">W ciągu kilku chwil wszystkie dane i konto zostaną usunięte z OsmAnd Cloud.
 \n
 \nWszystkie dane na urządzeniu pozostaną nietknięte.</string>
@@ -5203,9 +5171,9 @@
     <string name="osmand_cloud_deletion_all_data_warning">Wszystkie dane z OsmAnd Cloud zostaną %1$s. Dane na urządzeniu pozostaną nienaruszone.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Nie spowoduje to anulowania subskrypcji OsmAnd Pro.</string>
     <string name="manage_subscriptions">Zarządzanie subskrypcjami.</string>
-    <string name="delete_account_warning">Czy na pewno chcesz usunąć konto %1$s?</string>
+    <string name="delete_account_warning">Usunąć konto %1$s?</string>
     <string name="shared_string_deleting">Usuwanie</string>
-    <string name="deleting_complete">Usuwanie zakończone</string>
+    <string name="deleting_complete">Usunięto pomyślnie</string>
     <string name="delete_account">Usuń konto</string>
     <string name="backup_error_delete_account_email_match">Adres e-mail nie pasuje do nazwy użytkownika</string>
     <string name="verify_account_deletion_descr">Przed usunięciem konta musimy je zweryfikować.
@@ -5227,8 +5195,8 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="rendering_value_caiScale_description">Włoski Klub Alpejski (Italian Alpine Club)</string>
     <string name="shared_string_checked">Sprawdzano</string>
-    <string name="write_heading">Napisz nagłówek</string>
-    <string name="map_widget_group_glide_desc">Widżety pokazują współczynnik poślizgu do docelowego lub średni współczynnik poślizgu dla bieżącej podróży.</string>
+    <string name="write_heading">Wprowadź nagłówek</string>
+    <string name="map_widget_group_glide_desc">Widżety wyświetlają stosunek przebytej odległości do utraconej wysokości – względem celu lub jako średnią dla całej trasy.</string>
     <string name="map_widget_glide_average_desc">Pokazuje średni współczynnik poślizgu dla ustawionego interwału.</string>
     <string name="average_glide_time_interval_desc">Określa interwał czasowy dla uśredniania poślizgu.</string>
     <string name="average_glide_ratio">Średni współczynnik poślizgu</string>
@@ -5271,7 +5239,7 @@
     <string name="app_mode_baby_transport">Transport dziecka</string>
     <string name="filter_by_name">Filtruj według nazwy</string>
     <string name="shared_string_reset_all">Resetuj wszystko</string>
-    <string name="help_article_navigation_guidance_name">Wskazówki</string>
+    <string name="help_article_navigation_guidance_name">Wskazówki nawigacyjne</string>
     <string name="filter_tracks_count">Filtr: %d</string>
     <string name="date_of_creation">Data utworzenia</string>
     <string name="filter_screen_title">Filtr</string>
@@ -5295,7 +5263,7 @@
     <string name="widget_available_ram">Dostępna pamięć RAM</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="terrain_maps">Mapy terenu</string>
-    <string name="delete_map_description">Czy na pewno chcesz usunąć mapę %1$s?</string>
+    <string name="delete_map_description">Usunąć mapę %1$s?</string>
     <string name="open_issue_on_github">Otwórz problem na GitHubie</string>
     <string name="about_osmand">O aplikacji OsmAnd</string>
     <string name="user_guide">Samouczek</string>
@@ -5334,7 +5302,7 @@
     <string name="help_article_widgets_name">Widżety mapy</string>
     <string name="help_article_personal_name">Moje dane</string>
     <string name="help_article_purchases_android_name">Zakupy na Androidzie</string>
-    <string name="telegram_chats_descr">Dołącz do jednego z naszych lokalnych czatów telegramowych.</string>
+    <string name="telegram_chats_descr">Dołącz do jednego z naszych lokalnych czatów na Telegramie.</string>
     <string name="report_an_issues">Zgłoś problem</string>
     <string name="telegram_chats">Czaty Telegramowe</string>
     <string name="help_article_plan_route_web_name">Internetowy planer tras</string>
@@ -5346,7 +5314,7 @@
     <string name="help_article_personal_storage_name">Przechowywanie</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O wyznaczaniu trasy OsmAnd</string>
     <string name="shared_string_setup">Ustawienie</string>
-    <string name="smart_folder_name_present">Taki mądry folder już istnieje</string>
+    <string name="smart_folder_name_present">Taki inteligentny folder już istnieje</string>
     <string name="smart_folder_saved">Zapisano inteligentny folder</string>
     <string name="help_article_purchases_giveaway_name">Upominek</string>
     <string name="add_smart_folder">Dodaj mądry folder</string>
@@ -5356,13 +5324,13 @@
     <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie inteligentnego folderu „%1$s”. (Żadne ścieżki nie zostaną usunięte.)</string>
     <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX \n \n • Bezpłatna kopia zapasowa ulubionych i ustawień w „OsmAnd Cloud” \n \n • Nowy format map terenu z obsługą rzeźby terenu 3D \n \n • Zarządzanie ścieżkami: zaktualizowany interfejs użytkownika, dodane sortowanie, obsługa zagnieżdżonych folderów \n \n • Android Auto: nowe menu startowe umożliwiające dostęp do ulubionych, tras i kategorii POI \n \n • Jedna lista widżetów dla panelu górnego/dolnego \n \n • Nowy profil „Pociąg”, pozwala na obliczanie tras kolejowych \n \n • Linie konturowe działają z dowolnym „źródłem mapy” \n \n • Rozszerzona lista domyślnych działań dla klawiatur zewnętrznych \n \n • Niestandardowe pliki wyznaczania tras, dodane opcje usuwania lub zastępowania \n \n • Dodano opcję „Ogłaszaj zboczenie z trasy” \n \n • Ekran startowy: dodano opcję przywracania stanu OsmAnd z pliku \n \n • Dodano klasy „Materiały niebezpieczne” w nawigacji dla ciężarówek w Ameryce Północnej \n \n • Dodano obsługę trasy „Via ferrata” dla pieszych \n \n • Dodano skalę „CAI” do klasyfikacji trudności tras \n \n • Naprawiono wybór języka dla poszczególnych aplikacji \n \n • Dodano obsługę ikon tematycznych \n \n • OsmAnd Cloud: dodano opcję usunięcia konta \n \n • Dostępność: docelowy rozmiar dotykowy dla przycisków zmieniony na 48 dp; naprawiono problem z interfejsem mapy widocznym dla czytników ekranu \n \n • Przerobiono japońskie komunikaty głosowe \n \n • Przerobiono zmianę wysokości i ocenę nachylenia \n \n</string>
     <string name="empty_smart_folder_title">Brak pasującej trasy</string>
-    <string name="empty_smart_folder_description">Wszystkie pasujące trasy pojawią się tutaj automatycznie</string>
+    <string name="empty_smart_folder_description">Pasujące ścieżki pokażą się tutaj</string>
     <string name="configure_filter">Skonfiguruj filtr</string>
     <string name="no_config_smart_folder_title">Nieskonfigurowane</string>
     <string name="discard_filter_changes">Odrzuć zmiany filtrów</string>
     <string name="shared_string_loading">Wczytywanie</string>
-    <string name="discard_filter_changes_prompt">Czy na pewno chcesz zresetować wszystkie filtry?</string>
-    <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
+    <string name="discard_filter_changes_prompt">Zresetować wszystkie filtry?</string>
+    <string name="no_config_smart_folder_description">Inteligentne foldery umożliwiają grupowanie śladów na podstawie zastosowanych filtrów</string>
     <string name="loading_tracks">Ponowne wczytywanie tras</string>
     <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
     <string name="cloud_trash_clear_confirmation">Trwale usunąć wszystkie elementy z kosza?</string>
@@ -5371,13 +5339,13 @@
     <string name="trash_is_empty_banner_desc">Pliki usunięte z OsmAnd Cloud będą dostępne tutaj przez %1$s dni.</string>
     <string name="shared_string_empty_trash">Opróżnij kosz</string>
     <string name="shared_string_delete_immediately">Usuń natychmiast</string>
-    <string name="shared_string_is_deleted">%1$s został usunięty.</string>
+    <string name="shared_string_is_deleted">%1$s jest usunięty.</string>
     <string name="cloud_item_restored">%1$s zostało przywrócone do Cloud.</string>
     <string name="trash_alert_card_desc">Elementy w koszu zostaną usunięte po %1$s dniach.</string>
     <string name="trash_is_empty">Kosz jest pusty</string>
     <string name="shared_string_trash">Śmieci</string>
     <string name="shared_string_delete_item">Usuń element</string>
-    <string name="change_button">Przycisk zmiany</string>
+    <string name="change_button">Zmień przycisk</string>
     <string name="enable_to_use_external_input_device">Umożliwia korzystanie z zewnętrznego urządzenia wejściowego z OsmAnd</string>
     <string name="root_folder">Główny folder</string>
     <string name="shared_string_rows">Rzędy</string>
@@ -5388,18 +5356,18 @@
     <string name="shared_string_show_less">Pokaż mniej</string>
     <string name="shared_string_button">Przycisk</string>
     <string name="folder">Folder</string>
-    <string name="key_event_action_take_media_note">Uwaga dla mediów</string>
+    <string name="key_event_action_take_media_note">Notatka mediów</string>
     <string name="shared_string_action">Akcja</string>
     <string name="add_new_type">Dodaj nowy typ</string>
     <string name="key_event_action_move_up">Przesuń w górę</string>
-    <string name="key_event_action_open_search_view">Otwórz widok wyszukiwania</string>
-    <string name="key_event_action_zoom_out">Powiększenie</string>
+    <string name="key_event_action_open_search_view">Otwórz widok wyszukiwarki</string>
+    <string name="key_event_action_zoom_out">Pomniejsz</string>
     <string name="key_event_action_toggle_drower">Pokaż/ukryj menu boczne</string>
     <string name="key_event_action_move_to_my_location">Przenieś do mojej lokalizacji</string>
-    <string name="not_specified">Nie określono</string>
+    <string name="not_specified">Nie podano</string>
     <string name="download_to_device">Pobierz na urządzenie</string>
     <string name="key_event_action_move_down">Przesuń w dół</string>
-    <string name="key_event_category_actions">Akcje</string>
+    <string name="key_event_category_actions">Czynności</string>
     <string name="precise_distance_numbers">Dokładna odległość</string>
     <string name="shared_string_author">Autor</string>
     <string name="add_new_button">Dodaj nowy przycisk</string>
@@ -5412,30 +5380,28 @@
     <string name="shared_string_all_tracks">Wszystkie trasy</string>
     <string name="shared_string_extensions">Rozszerzenia</string>
     <string name="shared_string_license">Licencja</string>
-    <string name="any_connected_with_device">Dowolne połączenie: %s</string>
+    <string name="any_connected_with_device">Każde połączone: %s</string>
     <string name="max_sensor_temperature">Temperatura, wartość max</string>
-    <string name="max_sensor_heartrate">Maksymalne tętno</string>
-    <string name="shared_string_next_event">Następne zdarzenie</string>
-    <string name="key_assignments_already_cleared_message">Wszystkie kluczowe zadania są już wyczyszczone</string>
+    <string name="max_sensor_heartrate">Tętno, maksymalne</string>
+    <string name="shared_string_next_event">Następne wydarzenie</string>
+    <string name="key_assignments_already_cleared_message">Wszystkie przypisania klawiszowe są już wyczyszczone</string>
     <string name="shared_string_eta">ETA</string>
-    <string name="zoom_animated">Animowane powiększenie</string>
-    <string name="rendering_attr_showToll_name">Pokaż ograniczenia opłat drogowych</string>
+    <string name="zoom_animated">Animacja powiększenia</string>
+    <string name="rendering_attr_showToll_name">Pokaż opłaty drogowe</string>
     <string name="clear_key_assignment_desc">Powiązanie klawiszy dla wybranej akcji zostanie wyczyszczone i ustawione na \"Brak\".</string>
-    <string name="clear_key_assignment">Wyczyść przypisanie przycisków</string>
-    <string name="key_assignments">Główne zadania</string>
-    <string name="any_connected">Dowolny połączony</string>
+    <string name="clear_key_assignment">Wyczyść przypisanie klawiszy</string>
+    <string name="key_assignments">Przypisania klawiszy</string>
+    <string name="any_connected">Każde połączone</string>
     <string name="complex_widget_alert">Widżet %1$s można umieścić tylko w osobnym wierszu.</string>
-    <string name="previous_row_has_complex_widget">Poprzedni wiersz ma złożony widżet</string>
+    <string name="previous_row_has_complex_widget">Poprzedni rząd ma złożony widżet</string>
     <string name="see_all_plans">Zobacz wszystkie plany</string>
-    <string name="battery_optimization_banner_content">Optymalizacja baterii systemu Android może powodować luki i niedokładności w nagranych ścieżkach.</string>
+    <string name="battery_optimization_banner_content">Optymalizacja baterii systemu Android może powodować niedokładności w nagranych ścieżkach.</string>
     <string name="dont_ask_anymore">Nie pytaj więcej</string>
     <string name="battery_optimization_settings">Ustawienia optymalizacji baterii</string>
-    <string name="battery_optimization_desc">Optymalizacja baterii w systemie Android może powodować luki i niedokładności w nagranych ścieżkach
-\n
-\nJeśli wystąpi którykolwiek z tych problemów, możesz spróbować zmienić zużycie baterii na \"Nieograniczone\".</string>
+    <string name="battery_optimization_desc">Optymalizacja baterii w systemie Android może powodować luki i niedokładności w nagranych ścieżkach.\n\nJeśli wystąpi którykolwiek z tych problemów możesz spróbować zmienić zużycie baterii na \"Bez ograniczeń\".</string>
     <string name="battery_optimization">Optymalizacja baterii</string>
     <string name="shared_string_activity">Aktywność</string>
-    <string name="shared_string_additional">Dodatki</string>
+    <string name="shared_string_additional">Dodatkowe</string>
     <string name="custom_map_button_name_present">Taki przycisk już istnieje</string>
     <string name="shared_string_keywords">Słowa kluczowe</string>
     <string name="add_button">Dodaj przycisk</string>
@@ -5451,8 +5417,8 @@
     <string name="shared_string_speedometer">Prędkościomierz</string>
     <string name="lang_ta_in">Tamil (Indie)</string>
     <string name="shared_string_limit">Ograniczenie</string>
-    <string name="when_exceeded">Po przekroczeniu</string>
-    <string name="speedometer_description">Pokazuje bieżącą prędkość zgłoszoną przez GPS</string>
+    <string name="when_exceeded">Przy przekraczaniu</string>
+    <string name="speedometer_description">Pokazuje bieżącą prędkość poprzez GPS</string>
     <string name="avg_sensor_temperature">Temperatura, wartość średnia</string>
     <string name="routing_type_a_star_2_phase">A* 2-fazowy</string>
     <string name="routing_type_a_star_classic">A* klasyczny</string>
@@ -5474,7 +5440,7 @@
 \n
 \n</string>
     <string name="shared_sting_all_colors">Wszystkie kolory</string>
-    <string name="avg_sensor_heartrate">Średnie tętno</string>
+    <string name="avg_sensor_heartrate">Tętno, średnie</string>
     <string name="unchanged_parameter_summary">Każda ścieżka zachowa swoje parametry.</string>
     <string name="map_widget_map_scale">Skala mapy</string>
     <string name="track_vertical_exaggeration_description">Zmieniając wartość skali, można zmienić wysokość ścieżki 3D.</string>
@@ -5519,12 +5485,12 @@
     <string name="round_up">Zaokrąglij w górę</string>
     <string name="apply_only_to_new">Stosuj tylko do nowych</string>
     <string name="shared_string_unchanged">Niezmienione</string>
-    <string name="map_text">Napisy na mapie</string>
+    <string name="map_text">Renderowanie mapy</string>
     <string name="allow_display_on_top_description">Zezwalaj na wyświetlanie tekstów map jeden na drugim</string>
     <string name="routing_attr_avoid_cobblestone_description">Unikaj kocich łbów</string>
     <string name="change_terrain_color_scheme">Zmień schemat kolorów terenu</string>
     <string name="travel_topics">Tematyka podróży</string>
-    <string name="missing_maps_ignore">Skorzystaj z istniejących map</string>
+    <string name="missing_maps_ignore">Skorzystaj z pobranych map</string>
     <string name="play_weather_forecast">Odtwórz prognozę pogody</string>
     <string name="rendering_value_dark_orange_name">Ciemnopomarańczowy</string>
     <string name="clear_all_key_shortcuts_summary">Wszystkie przypisania klawiszy dla wybranego typu zostaną usunięte.</string>
@@ -5548,51 +5514,51 @@
     <string name="user_palette">Paleta użytkownika</string>
     <string name="track_line">Linia trasy</string>
     <string name="fixed_height">Stała wysokość</string>
-    <string name="downward_gradient">Nachylenie w dół</string>
-    <string name="explore_3d_track_description">Przeglądaj tor w interaktywnym 3D! Wizualizuj wysokość, prędkość i inne parametry bezpośrednio na mapie.</string>
+    <string name="downward_gradient">Przejście w dół</string>
+    <string name="explore_3d_track_description">Przeglądaj trasę w interaktywnym widoku 3D! Wizualizuj wysokość, prędkość i inne parametry bezpośrednio na mapie.</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="steps_per_minute_unit">SPM</string>
-    <string name="use_terrain_maps">Użyj map terenu</string>
+    <string name="use_terrain_maps">Użyj map terenowych</string>
     <string name="delete_actions_button_confirmation">Czy na pewno chcesz usunąć \"%1$s\" ze wszystkimi dodanymi akcjami?</string>
     <string name="use_terrain_maps_summary">Używa map terenu dla danych wysokości. Geometria toru pozostaje niezmieniona.</string>
-    <string name="distance_during_navigation">Odległość podczas nawigacji</string>
-    <string name="auto_zoom_discrete">Dyskretny</string>
-    <string name="rendering_attr_padusDisplayMode_name">Tryb wyświetlania terenów publicznych</string>
-    <string name="use_nearby_roads">Używaj pobliskich dróg</string>
-    <string name="vertical_exaggeration_description">Zmieniając wartość skali, można podkreślić płaskorzeźbę 3D.</string>
-    <string name="vertical_exaggeration">Pionowe wyolbrzymienie</string>
-    <string name="gpx_approximation_cpp">Oparte na routingu (C++)</string>
-    <string name="fix_north_up">Włącz stałą północ</string>
-    <string name="gpx_approximation">Przybliżenie GPX</string>
+    <string name="distance_during_navigation">Dystans podczas nawigacji</string>
+    <string name="auto_zoom_discrete">Natcyhmiastowy</string>
+    <string name="rendering_attr_padusDisplayMode_name">Tryb wyświetlania obszarów publicznych</string>
+    <string name="use_nearby_roads">Używaj dróg w pobliżu</string>
+    <string name="vertical_exaggeration_description">Zmieniając wartość skali, można zróżnicować głębię 3D.</string>
+    <string name="vertical_exaggeration">Pionowe wybrzuszenie</string>
+    <string name="gpx_approximation_cpp">Oparte na kierunku trasy (C++)</string>
+    <string name="fix_north_up">Północ zawsze na górze</string>
+    <string name="gpx_approximation">Szacowanie GPX</string>
     <string name="daynight_mode_sensor_summary">Wykorzystuje czujnik światła urządzenia do przełączania między jasnym i ciemnym motywem w zależności od poziomu oświetlenia otoczenia.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automatycznie przełącza się między motywami dziennym i nocnym w oparciu o lokalne godziny wschodu i zachodu słońca.</string>
     <string name="daynight_mode_night_summary">Zawsze wyświetla mapę w ciemnym motywie, dostosowanym do warunków nocnych lub słabego oświetlenia.</string>
     <string name="daynight_mode_day_summary">Zawsze wyświetla mapę w jasnym motywie, idealnym do widoczności w ciągu dnia.</string>
     <string name="daynight_mode_app_theme_summary">Wyświetlanie mapy jest zgodne z ogólnym motywem aplikacji - tryb dzienny dla jasnego motywu i tryb nocny dla ciemnego motywu</string>
     <string name="daynight_mode_app_theme">Motyw aplikacji</string>
-    <string name="key_event_action_continuous_zoom_out">Ciągłe pomniejszanie</string>
-    <string name="key_event_action_continuous_zoom_in">Ciągłe powiększanie</string>
+    <string name="key_event_action_continuous_zoom_out">Pomniejszanie mapy</string>
+    <string name="key_event_action_continuous_zoom_in">Powiększanie mapy</string>
     <string name="remove_key_assignment_summary">Przypisanie klawisza dla wybranej akcji zostanie usunięte.</string>
     <string name="remove_key_assignment">Usuń przypisanie klawisza</string>
     <string name="map_settings_weather_wind_animation">Animacja wiatru</string>
     <string name="tomorrow">Jutro</string>
-    <string name="auto_zoom_smooth">Płynny</string>
+    <string name="auto_zoom_smooth">Płynne</string>
     <string name="shared_string_modify">Modyfikuj</string>
     <string name="data_source">Źródło danych</string>
     <string name="weather_data_sources_prompt">OsmAnd dostarcza dane pogodowe z dwóch źródeł:</string>
     <string name="weather_source_ecmwf_description">Europejskie Centrum Prognoz Średnioterminowych</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
-    <string name="upward_gradient">Nachylenie w górę</string>
+    <string name="upward_gradient">Przejście w górę</string>
     <string name="route_line_use_coloring_speed">Linia trasy jest kolorowana według prędkości ruchu.</string>
     <string name="change_default_tracks_appearance_confirmation">Zastosować zmiany do istniejących ścieżek w folderze czy tylko do nowych?</string>
     <string name="fix_north_up_descr">Nie obracaj mapy za pomocą gestów w orientacji Północ na górze</string>
     <string name="upload_local_versions">Prześlij wersje lokalne</string>
-    <string name="download_cloud_versions">Pobieranie wersji chmurowych</string>
+    <string name="download_cloud_versions">Pobierz wersje z chmury</string>
     <string name="weather_source_GFS_description">Globalny system prognoz z Krajowych Centrów Prognoz Środowiskowych</string>
-    <string name="missing_maps_ignore_details">Niektóre już pobrane mapy mogą być odpowiednie dla danej trasy. Jeśli znasz obszar i mapy, możesz spróbować wyznaczyć trasę przy użyciu istniejących map.</string>
-    <string name="use_nearby_roads_summary">Korzysta z mapy offline, aby znaleźć pobliskie drogi i dane wysokościowe. Może dostosować geometrię toru.</string>
-    <string name="retrieve_elevation_data_summary">OsmAnd może pobierać dane o wysokości z pobliskich dróg lub map terenu.</string>
+    <string name="missing_maps_ignore_details">Pobrane mapy zasłaniają Twoją trasę? Nawiguj z nimi jeżeli okolica jest Tobie znana.</string>
+    <string name="use_nearby_roads_summary">Korzysta z mapy offline, aby znaleźć pobliskie drogi i dane wysokości. Może dostosować geometrię trasy.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd może pobierać dane o wysokości z pobliskich dróg lub map terenowych.</string>
     <string name="relief_3d_download_description">Do wyświetlania terenu na mapie wymagane są dodatkowe mapy.</string>
     <string name="compass_click_north_is_up">Aby zmienić tryb orientacji, kliknij i przytrzymaj</string>
     <string name="detailed_track_guidance_description">OsmAnd dopasuje trasę do pobliskich dróg, zapewniając lepsze prowadzenie zakręt po zakręcie.</string>
@@ -5608,7 +5574,6 @@
     <string name="quick_action_drawer_desc">Przełącznik do pokazywania lub ukrywania menu bocznego.</string>
     <string name="quick_action_drawer_title">Menu boczne</string>
     <string name="shared_string_interface">Interfejs</string>
-    <string name="obd_fuel_consumption_rate_l_km">Wskaźnik zużycia paliwa (l/100 km)</string>
     <string name="shared_string_dynamic">Dynamiczny</string>
     <string name="obd_connected_to_device">Połączono z %s</string>
     <string name="obd_not_connected_to_device">Rozłączono z %s</string>
@@ -5616,8 +5581,7 @@
     <string name="bt_start_pair_failed">Nie można rozpocząć parowania z urządzeniem</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Pokazuje zużycie paliwa pojazdu na podstawie obliczeń (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Pokazuje zużycie paliwa pojazdu na podstawie obliczeń (l/100 km)</string>
-    <string name="simulate_obd">Symuluj dane obd</string>
+    <string name="simulate_obd">Symulowanie danych obd</string>
     <string name="dynamic_icon_type_summary">Ikona zmienia się w zależności od stanu akcji.</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Ciśnienie paliwa</string>
@@ -5638,7 +5602,7 @@
     <string name="obd_fuel_consumption_rate_sensor">Wskaźnik zużycia paliwa (czujnik)</string>
     <string name="obd_battery_voltage_desc">Pokazuje poziom napięcia akumulatora pojazdu</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Użyj wybranych jednostek w nazwie.</string>
-    <string name="route_guidance_desc">Zapewnia w czasie rzeczywistym wskazówki dotyczące trasy, w tym odległość do następnego zakrętu, nazwę drogi, nazwę bieżącej ulicy i informacje o pasie. Widżety są aktywne podczas nawigacji.</string>
+    <string name="route_guidance_desc">Wyświetla wskazówki nawigacyjne w czasie rzeczywistym, w tym odległość od następnego skrętu, nazwa ulicy, oraz informacje o pasach drogowych. Widżety są aktywne podczas nawigacji.</string>
     <string name="rendering_attr_padusHideBoundaries_name">Ukryj granice gruntów publicznych</string>
     <string name="obd_plugin_name">Metryki pojazdu</string>
     <string name="rendering_attr_alpineHiking_name">Stopień trudności szlaków turystycznych</string>
@@ -5664,7 +5628,7 @@
     <string name="reset_average_value">Zresetuj średnią wartość</string>
     <string name="obd_fuel_consumption">Zużycie paliwa</string>
     <string name="driving_region_uk">Wielka Brytania i podobne</string>
-    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="tracker_item">Monitor OsmAnd</string>
     <string name="quick_action_map_style">Styl mapy</string>
     <string name="obd_engine_oil_temperature">Temperatura oleju silnikowego</string>
     <string name="quick_action_photo_note">Uwaga fotograficzna</string>
@@ -5677,7 +5641,7 @@
     <string name="quick_action_map_overlay">Nakładka</string>
     <string name="vehicle_metrics_recording_description">Wybierz parametry, które mają zostać zapisane w pliku GPX.</string>
     <string name="battery_saving_mode">Tryb oszczędzania baterii</string>
-    <string name="preview_next_turn">Podgląd następnego zakrętu</string>
+    <string name="preview_next_turn">Podgląd następnego ruchu</string>
     <string name="obd_throttle_position_desc">Pokazuje kąt płyty przepustnicy w korpusie przepustnicy.</string>
     <string name="obd_calculated_engine_load_desc">Pokazuje procent dostępnej mocy silnika wykorzystywanej w danym momencie.</string>
     <string name="obd_speed_desc">Pokazuje prędkość z czujnika prędkości pojazdu (VSS).</string>
@@ -5687,13 +5651,13 @@
     <string name="obd_ambient_air_temp_desc">Pokazuje temperaturę na zewnątrz pojazdu.</string>
     <string name="remaining_fuel_description">Pokazuje ilość paliwa pozostałego w zbiorniku pojazdu</string>
     <string name="obd_air_intake_temp_desc">Pokazuje temperaturę powietrza wpływającego do kolektora dolotowego silnika.</string>
-    <string name="obd_bluetooth_off_description">Włącz Bluetooth, znajdź i podłącz skanery.</string>
+    <string name="obd_bluetooth_off_description">Włącz Bluetooth, aby znaleźć i połączyć skanery.</string>
     <string name="obd_device_forget_sensor">Zapomnij skaner</string>
     <string name="connect_obd_instructions_step4">Kliknij \'%1$s\' i wybierz swój skaner z listy.</string>
     <string name="screen_is_unlocked">Ekran dotykowy jest odblokowany.</string>
     <string name="percent_unit">%</string>
-    <string name="route_guidance">Prowadzenie po trasie</string>
-    <string name="new_trip_segment">Nowy odcinek wycieczki</string>
+    <string name="route_guidance">Wskazówki nawigacyjne</string>
+    <string name="new_trip_segment">Nowy odcinek podróży</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Wskaźnik zużycia paliwa %/h</string>
     <string name="obd_widget_engine_speed">Obroty silnika</string>
@@ -5705,7 +5669,7 @@
     <string name="obd_fuel_left_km">Pozostało paliwa (km)</string>
     <string name="connect_obd_instructions_step2">Włącz silnik swojego pojazdu</string>
     <string name="obd_searching_text">Wyszukiwanie skanerów</string>
-    <string name="new_segment_started_m">Rozpoczął nagrywanie nowego fragmentu ścieżki.</string>
+    <string name="new_segment_started_m">Rozpoczęto nagrywanie nowego fragmentu ścieżki.</string>
     <string name="lock_screen">Zablokuj ekran</string>
     <string name="start_trip_recording_first_m">Najpierw rozpocznij nagrywanie podróży.</string>
     <string name="quick_action_save_recorded_trip_and_continue">Nagrana podróż i kontynuacja</string>
@@ -5729,7 +5693,7 @@
     <string name="obd_fuel_type_diesel">Diesel</string>
     <string name="obd_fuel_type_cng">CNG</string>
     <string name="obd_fuel_type_propane">Propan</string>
-    <string name="obd_air_intake_temp">Temperatura wlotu</string>
+    <string name="obd_air_intake_temp">Temperatura nawiewu wewnętrznego</string>
     <string name="obd_fuel_consumption_rate_l_h">Wskaźnik zużycia paliwa (L/h)</string>
     <string name="obd_fuel_level_percent">Poziom paliwa (%)</string>
     <string name="raster_layers_action_descr">Zmień warstwy rastrowe</string>
@@ -5751,11 +5715,11 @@
     <string name="search_action_descr">Otwiera wyszukiwanie.</string>
     <string name="map_3d_mode_action_descr">Zmień nachylenie mapy.</string>
     <string name="drawer_button_description">Otwiera menu główne.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Terenowe szlaki rowerowe</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Terenowa trasa rowerowa</string>
     <string name="obd_fuel_type_not_provided">Nie podano rodzaju paliwa</string>
     <string name="obd_fuel_type_gasoline">Benzyna</string>
     <string name="obd_fuel_type_ethanol">Etanol</string>
-    <string name="obd_widget_group">Wskaźniki pojazdu</string>
+    <string name="obd_widget_group">Jednostki pojazdu</string>
     <string name="average_value_slider_description">Wybierz przedział czasu dla pomiaru wartości średniej.</string>
     <string name="obd_fuel_consumption_rate_scanner">Wskaźnik zużycia paliwa (obd)</string>
     <string name="obd_nothing_found_description">Sprawdź następujące elementy:\n – Upewnij się, że Bluetooth jest włączony\n – Silnik pojazdu pracuje\n – Upewnij się, że Twoje urządzenie znajduje się w zasięgu skanera.</string>
@@ -5763,14 +5727,14 @@
     <string name="liter_per_hour">L/h</string>
     <string name="obd_fuel_consumption_desc">Pokazuje stopień zużycia paliwa przez silnik, obliczony na podstawie pozostałego paliwa, wielkości zbiornika i przebytej odległości określonej przez GPS.</string>
     <string name="average_temperature">Średnia temperatura</string>
-    <string name="show_minor_turns_descr">Pasy będą wyświetlane na wszystkich mijanych skrzyżowaniach, niezależnie od instrukcji głosowych</string>
+    <string name="show_minor_turns_descr">Pasy ruchu będą wyświetlane na wszystkich mijanych skrzyżowaniach, niezależnie od instrukcji głosowych</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Pokazuje zużycie paliwa pojazdu na podstawie czujnika (L/h)</string>
     <string name="show_minor_turns">Wyświetlaj na mniejszych skrzyżowaniach podczas jazdy na wprost</string>
     <string name="connect_obd_instructions_step">1. Podłącz skaner do portu OBD-II pojazdu.\n\n2. Włącz silnik swojego pojazdu\n\n3. Włącz Bluetooth w swoim urządzeniu\n\n4. Kliknij \'%1$s\' i wybierz swój skaner z listy.</string>
     <string name="configure_map_description">Zmień styl mapy, warstwy i inne ustawienia.</string>
     <string name="lock_screen_description">Włącza lub wyłącza funkcję ekranu dotykowego, aby zapobiec przypadkowym dotknięciom</string>
     <string name="ais_address_settings">Ustawienia adresu IP</string>
-    <string name="ais_address_settings_description">Wybierz protokół NMEA (UDP/TCP) i zdefiniuj adresy</string>
+    <string name="ais_address_settings_description">Wybierz protokół NMEA (UDP/TCP) i podaj odpowiednie adresy i porty</string>
     <string name="ais_nmea_protocol">Protokół odbioru danych NMEA</string>
     <string name="ais_nmea_protocol_description">Wybierz protokół odbioru danych NMEA</string>
     <string name="ais_address_nmea_server">Adres IP źródła danych NMEA</string>
@@ -5779,22 +5743,380 @@
     <string name="ais_port_nmea_server_description">Zdefiniuj numer portu TCP źródła danych NMEA</string>
     <string name="ais_port_nmea_local">Port UDP lokalnego odbiornika danych NMEA</string>
     <string name="ais_object_lost_timeouts">Ustawienia limitu czasu odbioru sygnału AIS</string>
-    <string name="ais_object_lost_timeout">Limit czasu widoczności w przypadku utraty obiektu</string>
-    <string name="ais_object_lost_timeout_description">Ustaw limit czasu widoczności obiektów AIS: Po upływie tego czasu bez odbioru sygnału obiekt AIS zostanie usunięty z ekranu.</string>
-    <string name="ais_ship_lost_timeout">Przekroczenie limitu widoczności statku w przypadku braku odbioru sygnału</string>
+    <string name="ais_object_lost_timeout">Limit czasu widoczności w przypadku utraty statku</string>
+    <string name="ais_object_lost_timeout_description">Ustaw limit czasu widoczności obiektu AIS: Jeżeli w określonym czasie nie zostanie odebrany żaden sygnał, obiekt zostanie automatycznie usunięty z ekranu.</string>
+    <string name="ais_ship_lost_timeout">Retencja widoczności statku</string>
     <string name="ais_load_data">Wczytaj dane AIS z pliku</string>
     <string name="ais_port_nmea_local_description">Zdefiniuj port UDP, na którym OsmAnd odbiera dane NMEA</string>
     <string name="ais_object_lost_timeouts_description">Ustaw wartości limitu czasu, aby zidentyfikować utracone obiekty AIS, jeśli przez określony czas nie odebrano żadnego sygnału.</string>
-    <string name="ais_ship_lost_timeout_description">Ustawianie limitu czasu widoczności statku: Po upływie tego czasu bez odbioru sygnału symbol statku zmieni swój stan na ekranie: Zostanie przekreślony.</string>
+    <string name="ais_ship_lost_timeout_description">Ustawianie retencji widoczności statku: Po upływie tego czasu bez odbioru sygnału symbol statku zostanie przekreślony.</string>
     <string name="ais_cpa_settings">Ustawienia dotyczące CPA</string>
-    <string name="ais_cpa_settings_description">Wartości te określają sposób prezentacji obiektów AIS, które mogą znajdować się zbyt blisko własnej pozycji.</string>
+    <string name="ais_cpa_settings_description">Wartości te określają sposób wyświetlania obiektów AIS w momencie zbliżania się do pozycji statku.</string>
     <string name="popular_places_nearby">Popularne miejsca w pobliżu</string>
     <string name="recently_visited">Ostatnio odwiedzone</string>
-    <string name="shared_string_road_exit">Wyjdź</string>
+    <string name="shared_string_road_exit">Wyjedź</string>
     <string name="hmd_promo">Promocja HMD na %1$s miesięcy</string>
     <string name="show_image_previews">Pokaż podgląd obrazu</string>
     <string name="choose_location">Wybierz lokalizację</string>
     <string name="point_location">Położenie punktu</string>
     <string name="layer_coordinates_grid">Siatka współrzędnych</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Akcja kontrolująca widoczność siatki współrzędnych na mapie.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Przełącz widoczność siatki współrzędnych na mapie.</string>
+    <string name="shared_string_edges">Krawędzie</string>
+    <string name="labels_position">Pozycja etykiet</string>
+    <string name="customize_grid_color">Dostosuj kolor siatki</string>
+    <string name="grid_color">Kolor siatki</string>
+    <string name="obd_plugin_description">Monitoruj kluczowe parametry pojazdu za pomocą protokołu OBD-II. Dostęp do danych, w tym:\n • Prędkość obrotowa silnika, Czas pracy silnika, Obliczone obciążenie silnika\n • Zużycie paliwa, Ciśnienie paliwa, Pozostała ilość paliwa\n • Temperatura wlotu, Temperatura otoczenia, Temperatura płynu chłodzącego, Temperatura oleju silnikowego\n • Prędkość pojazdu, Położenie przepustnicy, Napięcie akumulatora\n</string>
+    <string name="add_to_navigation">Dodaj do nawigacji</string>
+    <string name="shared_string_all_icons">Wszystkie ikony</string>
+    <string name="wikidata">Wikidata</string>
+    <string name="routing_attr_allow_ferries_name">Zezwól na promy</string>
+    <string name="route_members">Członkowie</string>
+    <string name="row_height">Wysokość rzędu</string>
+    <string name="shared_string_offline_only">Tylko offline</string>
+    <string name="shared_string_online_only">Tylko online</string>
+    <string name="prediction_time_description">Ikona pozycji w OsmAnd animuje się przy każdej aktualizacji GPS (raz na sekundę). Może wystąpić niewielkie opóźnienie, szczególnie podczas szybkiego ruchu lub gdy sygnał GPS jest niestabilny.</string>
+    <string name="shared_string_no_animation">Brak animacji</string>
+    <string name="position_animation_empty_banner_description">Ikona pozycji jest aktualizowana za każdym razem, gdy zostanie odebrana nowa lokalizacja, bez żadnej animacji przejścia.</string>
+    <string name="position_animation">Animacja pozycji</string>
+    <string name="msg_favorites_skipped_as_existing">Ulubione punkty (%1$d) zostały pominięte, ponieważ już istniały.</string>
+    <string name="multipoligon_related">Powiązane</string>
+    <string name="route_part_of">Część</string>
+    <string name="prediction_time_advanced_description">Dostosuj czas przewidywania, aby zminimalizować opóźnienie.</string>
+    <string name="prediction_time">Czas przewidywania</string>
+    <string name="poi_source">Źródło POI</string>
+    <string name="routing_attr_allow_ferries_description">Zezwalaj na wyznaczanie tras promami</string>
+    <string name="equator">Równik</string>
+    <string name="shared_string_manual">Ręczny</string>
+    <string name="saved_to_device">Zapisano na urządzeniu</string>
+    <string name="save_to_device_error">Błąd zapisywania na urządzeniu</string>
+    <string name="save_to_device">Zapisz na urządzeniu</string>
+    <string name="add_widget">Dodaj widżet</string>
+    <string name="destination_first">Najpierw miejsce docelowe</string>
+    <string name="display_priority">Priorytet wyświetlania</string>
+    <string name="meridian_180">180 południk</string>
+    <string name="prime_meridian">Południk zerowy</string>
+    <string name="msg_gpx_waypoints_copied_to_favorites">Punkty trasy GPX (%1$d) skopiowano do ulubionych.</string>
+    <string name="us_gallons">Galony amerykańskie</string>
+    <string name="us_gallons_unit">galon</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Dwupaliwowy zasilany etanolem</string>
+    <string name="plugin_ais_tracker_name">Śledzenie statków AIS</string>
+    <string name="shared_string_default_view">Widok domyślny</string>
+    <string name="shared_string_avg_speed">Min. prędkość</string>
+    <string name="obd_fuel_type_bifuel_cng">Dwupaliwowy zasilany CNG</string>
+    <string name="shared_string_length">Długość</string>
+    <string name="shared_string_instant">Natychmiastowy</string>
+    <string name="save_favorite_default_appearance">Czy zastosować zmiany do wszystkich istniejących punktów w folderze, czy tylko do nowododanych?</string>
+    <string name="original_color_description">Każdy punkt zachowuje swój własny kolor.</string>
+    <string name="original_icon_description">Każdy punkt zachowuje swoją własną ikonę.</string>
+    <string name="shared_string_avg_altitude">Średnia wysokość</string>
+    <string name="selected_delayed_profile">Wybrany profil \"%s\"</string>
+    <string name="popular_places">Popularne miejsca</string>
+    <string name="show_list">Pokaż listę</string>
+    <string name="shared_string_map_center">Środek mapy</string>
+    <string name="plugin_ais_tracker_description">Wyświetla pozycje AIS i informacje o pobliskich statkach. Dane AIS są odbierane przez sieć z zewnętrznego odbiornika AIS.</string>
+    <string name="contour_layers_action_descr">Zmień warstwy konturowe</string>
+    <string name="shared_string_interpolation">Interpolacja</string>
+    <string name="location_interpolation_percent">Procent interpolacji lokalizacji</string>
+    <string name="apply_to_all_points">Zastosuj do wszystkich punktów</string>
+    <string name="original_shape_description">Każdy punkt zachowuje swój własny kształt.</string>
+    <string name="hmd_promo_description">Bezpłatny dostęp do funkcji, w tym nieograniczonego pobierania map, map 3D itp., przez %1$s miesięcy</string>
+    <string name="map_widget_route_information">Informacje o trasie</string>
+    <string name="calculating_indication_message">Obliczanie…</string>
+    <string name="reset_average_speed">Zresetuj średnią prędkość</string>
+    <string name="intermediate_first">Najpierw średniozaawansowane</string>
+    <string name="obd_fuel_type_bifuel_methanol">Dwupaliwowy zasilany metanolem</string>
+    <string name="ais_cpa_warning_time_description">Jeżeli czas TCPA (czas do najbliższego punktu podejścia) dla innego statku spadnie poniżej określonego progu, statek ten zostanie podświetlony na czerwono.</string>
+    <string name="no_photo_for_location_desc">Dla tej lokalizacji nie dodano jeszcze żadnych zdjęć użytkowników</string>
+    <string name="display_distance_to_first_intermediate_summary">Wyświetla czas i odległość do następnego przystanku. Wyłącz tę opcję, aby zawsze wyświetlać szczegóły dotyczące celu podróży.</string>
+    <string name="change_activity">Zmień aktywność</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Dwupaliwowy zasilany benzyną</string>
+    <string name="obd_fuel_type_bifuel_lpg">Dwupaliwowy zasilany LPG</string>
+    <string name="ais_cpa_warning_time">Czas ostrzegania przed najbliższym punktem podejścia (CPA)</string>
+    <string name="ais_cpa_warning_distance">Odległość ostrzegawcza dla najbliższego punktu podejścia (CPA)</string>
+    <string name="no_places_available">Brak miejsc w widocznym regionie</string>
+    <string name="map_widget_route_information_desc">Wyświetla dla aktywnej trasy nawigacyjnej szacowany czas przyjazdu, pozostały czas podróży i odległość.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Trasy wspinaczkowe</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Pokaż trasy wspinaczkowe</string>
+    <string name="calculate_size">Oblicz rozmiar</string>
+    <string name="default_buttons_size_original_description">Każdy przycisk zachowuje swój własny rozmiar.</string>
+    <string name="default_buttons_corners_original_description">Każdy przycisk zachowuje swój własny promień narożnika.</string>
+    <string name="default_buttons_opacity_original_description">Każdy przycisk zachowuje własne krycie tła.</string>
+    <string name="type_of_activity">Rodzaj aktywności</string>
+    <string name="choose_location_on_map">Wybierz lokalizację na mapie.</string>
+    <string name="ais_cpa_warning_distance_description">Statki są podświetlane na czerwono, jeśli CPA (najbliższy punkt zbliżenia) znajduje się poniżej określonego progu, a TCPA (czas do CPA) mieści się w czasie ostrzegawczym ustawionym w ustawieniu „Czas ostrzegawczy przed osiągnięciem CPA”.</string>
+    <string name="display_distance_to_first_intermediate">Pokaż szczegóły trasy dla następnego przystanku</string>
+    <string name="battery">bateria</string>
+    <string name="ski_route_switch_style_description">Odkrywaj stoki narciarskie, wyciągi i nie tylko dzięki mapom w stylu zimowym i narciarskim.</string>
+    <string name="deleting">Usuwanie…</string>
+    <string name="shared_string_split_by">Podziel według</string>
+    <string name="deleting_history">Usuwanie historii…</string>
+    <string name="release_5_1">• Dodano obsługę zakupów internetowych i międzyplatformowych\n\n• Przeniesiono jednostki temperatury do ustawień ogólnych dla łatwiejszego dostępu\n\n• Dodano wskaźnik poziomu naładowania baterii dla czujników BLE\n\n• Nowy, bardziej intuicyjny interfejs użytkownika do wyboru punktów w Nawigacji\n\n• Ulepszona widoczność widżetów dzięki nowemu obrysowi\n\n• Dodano analizator podjazdów i zjazdów\n\n• Rozszerzono integrację z Wikipedią i Wikivoyage o więcej punktów POI.</string>
+    <string name="sensor_data">Dane z czujników</string>
+    <string name="battery_level">Poziom naładowania baterii</string>
+    <string name="set_parking_position">Ustaw pozycję parkowania</string>
+    <string name="three_years_subscription">Trzyletnia subskrypcja</string>
+    <string name="set_work">Ustaw parametry pracy</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s na %2$s</string>
+    <string name="osm_live_payment_renews_3_years">Odnawia się co trzy lata</string>
+    <string name="years_3">Trzy lata</string>
+    <string name="osm_live_payment_3_years_title">Co trzy lata</string>
+    <string name="show_toast_about_key_pressed">Pokaż komunikat typu „toast” po naciśnięciu klawisza</string>
+    <string name="key_event_category_map_interactions">Interakcje z mapą</string>
+    <string name="tripltek_promo">Promocja Tripltek na %1$s miesięcy</string>
+    <string name="uphill_downhill_split">Pod górę / Z góry</string>
+    <string name="unit_of_temperature_description">Wybrane jednostki zostaną zastosowane do wszystkich danych związanych z temperaturą w bieżącym profilu.</string>
+    <string name="deactivated_map">Dezaktywowana mapa</string>
+    <string name="suggest_activate_map_msg">mapa %1$s jest dezaktywowana,\naktywuj ją, aby wyświetlić ten obszar.</string>
+    <string name="travel_guides">Przewodnik</string>
+    <string name="quick_action_search_view_title">Okno wyszukiwania</string>
+    <string name="obd_engine_coolant_temp">Temperatura płynu chłodzącego</string>
+    <string name="quick_action_new_trip_segment">Przycisk do rozpoczęcia nowego segmentu w trwającym nagrywaniu śladu GPX.</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Pojazd dwupaliwowy zasilany wodorem</string>
+    <string name="set_home">Ustaw lokalizację domową</string>
+    <string name="set_intermediate_point">Ustaw cel pośredni</string>
+    <string name="quick_action_start_pause_recording">Przycisk do rozpoczęcia, wstrzymania lub wznowienia nagrywania śladu GPX.</string>
+    <string name="obd_fuel_consumption_rate_desc">Wyświetla zużycie paliwa pojazdu na podstawie danych z OBD i lokalizacji</string>
+    <string name="plugin_ais_tracker_disclaimer">ZASTRZEŻENIE\n\nTa wtyczka jest projektem hobbystycznym i nie jest przeznaczona do użytku w aplikacjach o znaczeniu krytycznym. Nie gwarantuje ona niezawodności ani dokładności. Nie należy polegać na tym oprogramowaniu do nawigacji, zapewnienia bezpieczeństwa życia ani do wykonywania innych niezbędnych operacji.</string>
+    <string name="key_event_action_next_app_profile">Następny profil aplikacji</string>
+    <string name="key_event_action_previous_app_profile">Poprzedni profil aplikacji</string>
+    <string name="key_bindings">Skróty klawiszowe</string>
+    <string name="release_4_9">• Dodano przeglądarkę obrazów w trybie pełnoekranowym dla zdjęć z Wikimedia\n\n• Wprowadzono nową wtyczkę „Vehicle Metrics” do monitorowania parametrów pojazdu za pomocą protokołu OBD-II\n\n• Dodano możliwość przypisywania aktywności do śladów i filtrowania ich według aktywności\n\n• Wprowadzono nowe szybkie akcje do rejestrowania podróży i blokowania ekranu dotykowego\n\n• Dodano możliwość dostosowania wyglądu przycisków mapy oraz dokładną siatkę\n\n• Dodano menu kontekstowe i akcję „Zresetuj średnią prędkość” dla widżetów\n\n• Dodano nową warstwę trasy: „Szlaki dla motocykli terenowych”\n\n• Naprawiono automatyczne nagrywanie śladu podczas nawigacji\n\n• Naprawiono problem z odwróconymi współrzędnymi w trybie RTL (od prawej do lewej)\n\n• Naprawiono pominięte dane z czujników podczas nagrywania bieżącego śladu\n\n• Dodano informacje o okolicznych terenach dla wybranego punktu\n\n• Dodano szybką akcję do kontrolowania widoczności edycji OSM\n\n• Rozdzielono parametry widoczności dla opcji koloryzacji terenu\n\n• Dodano ikonę z możliwością kliknięcia w celu wyświetlenia informacji o dostępie lub innych cechach drogi lub ścieżki</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Silnik hybrydowy zasilany benzyną</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Przycisk do zapisania aktualnie rejestrowanej trasy jako pliku GPX i kontynuowania nagrywania nowego śladu bez przerwy.</string>
+    <string name="quick_action_switch_compass_desc">Przełącznik do zmiany orientacji mapy.</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="add_widget_above">Dodaj widżet powyżej</string>
+    <string name="hmd_promo_years">Promocja HMD na %1$s lat</string>
+    <string name="read_on">Czytaj dalej na %1$s</string>
+    <string name="route_roundabout_exit">Zjedź zjazdem numer %1$d</string>
+    <string name="add_widget_to_the_left">Dodaj widżet po lewej</string>
+    <string name="add_widget_to_the_right">Dodaj widżet po prawej</string>
+    <string name="hmd_promo_description_years">Bezpłatny dostęp do funkcji, w tym nieograniczonego pobierania map, trójwymiarowej rzeźby terenu itp., przez %1$s lat</string>
+    <string name="add_widget_below">Dodaj widżet poniżej</string>
+    <string name="shared_string_switch">Przełącz</string>
+    <string name="shared_string_flat">Płaski</string>
+    <string name="set_start_point">Ustaw pozycję początkową</string>
+    <string name="help_article_map_tracks_name">Ścieżki</string>
+    <string name="third_links">Linki trzecie</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Pokaż terenowe trasy rowerowe</string>
+    <string name="obd_fuel_type_bifuel_propane">Dwupaliwowe zasilanie propanem</string>
+    <string name="obd_fuel_type_bifuel_electricity">Dwupaliwowe zasilanie elektryczne</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Dwupalinowe zasilanie elektryczne i silnik spalinowy</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Etanol hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_diesel">Diesel hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_electric">Elektryczny hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Elektryczny hybrydowy i silnik spalinowy</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Regeneracyjny hybrydowy</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Wodorowy hybrydowy</string>
+    <string name="obd_fuel_type_hydrogen">Wodorowy</string>
+    <string name="obd_fuel_type_unknown">Nieznany typ paliwa</string>
+    <string name="vehicle_metrics_plugin_settings">Ustawienia jednostek pojazdu</string>
+    <string name="rpm_unit">obroty/s</string>
+    <string name="obd_rpm_desc">Wyświetla tachometr obrotów/s pojazdu nad sensorem OBD</string>
+    <string name="obd_fuel_level_desc">Wyświetla poziom paliwa pojazdu nad sensorem OBD</string>
+    <string name="obd_fuel_left_distance_desc">Wyświetla szacowany dystans, przez który pojazd może przejechać na pozostałym paliwie, nad sensorem OBD</string>
+    <string name="obd_fuel_type_desc">Wyświetla typ paliwa pojazdu nad sensorem OBD</string>
+    <string name="obd_ambient_air_temp">Temperatura powietrza</string>
+    <string name="obd_battery_voltage">Moc baterii w woltach</string>
+    <string name="obd_fuel_level">Efektywność paliwowa (%)</string>
+    <string name="obd_fuel_consumption_rate">Częstotliwość konsumpcji paliwa</string>
+    <string name="obd_fuel_left_liters">Pozostałe paliwo (litry)</string>
+    <string name="obd_fuel_type">Typ paliwa</string>
+    <string name="obd_support">Wsparcie OBD</string>
+    <string name="background_opacity">Przezroczystość tła</string>
+    <string name="corner_radius">Zaokrąglenie krawędzi</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="quick_action_search_view_desc">Przełącznik do otwierania lub zamykania widoku szukania.</string>
+    <string name="quick_action_navigation_view_desc">Przełącznik do otwierania lub zamykania widoku nawigacji.</string>
+    <string name="quick_action_navigation_view_title">Widok nawigacji</string>
+    <string name="detailed_track_guidance">Szczegółowy przewodnik po trasie</string>
+    <string name="quick_action_routes_summary">Przełącznik do pokazania lub ukrycia %1$s na mapie.</string>
+    <string name="hugerock_promo">Promocja Hugerock na %1$s miesiące</string>
+    <string name="hugerock_promo_description">Darmowy dostęp do funkcji w tym nielimitowane pobieranie map, widok 3D itp. przez %1$s miesięcy</string>
+    <string name="driving_region_india">Indie</string>
+    <string name="auto_25_chars_route_kl">Trzymaj się lewej strony</string>
+    <string name="auto_25_chars_route_kr">Trzymaj się prawej strony</string>
+    <string name="auto_25_chars_route_tr">Skręć w prawo</string>
+    <string name="auto_25_chars_route_tshr">Skręć ostro w prawo</string>
+    <string name="auto_25_chars_route_tslr">Skręć lekko w prawo</string>
+    <string name="auto_25_chars_route_tl">Skręć w lewo</string>
+    <string name="auto_25_chars_route_tshl">Skręć ostro w lewo</string>
+    <string name="auto_25_chars_route_tsll">Skręć lekko w lewo</string>
+    <string name="auto_25_chars_route_tu">Zawróć</string>
+    <string name="resting_position">Pozycja spoczynkowa</string>
+    <string name="navigation_position">Pozycja nawigacyjna</string>
+    <string name="resting_navigation_position">Pozycja spoczynkowa i nawigacyjna</string>
+    <string name="view_angle_description">Wyświetla strzałkę wskazującą kierunek w którym jesteś skierowany</string>
+    <string name="view_angle">Kąt widzenia</string>
+    <string name="location_radius_description">Wyświetla okrągły obszar który wskazuje obecną dokładność lokalizacji</string>
+    <string name="location_radius">Promień lokalizacji</string>
+    <string name="rendering_value_pale_name">Granica</string>
+    <string name="choose_map_orientation">Wybierz orientację mapy</string>
+    <string name="energy_avg_info">Statystyki energii (średnio 1 / 5 / 15 minut)</string>
+    <string name="energy_avg_info_description">Poziom baterii co minutę: %1$s\nKonsumpcja energii (mAh): %2$s</string>
+    <string name="rendering_avg_info">Statystyki renderowania (średnio 1 / 5 / 15 minut)</string>
+    <string name="rendering_avg_info_details">Kl./s przez ostatnie tysiąc klatek: %1$s\nProcesor (kafelki): %2$s\nProcesor (czas nieaktywności): %3$s\nProcesor (czas oczekiwania na kartę graficzną): %4$s</string>
+    <string name="quick_action_location_by_gpx">Lokalizacja przez GPX</string>
+    <string name="quick_action_terrain_color_scheme">Schemat kolorów terenu</string>
+    <string name="quick_action_directions_from">Punkt początkowy</string>
+    <string name="quick_action_destination">Kierunek</string>
+    <string name="quick_action_to_my_location">Do mojej lokalizacji</string>
+    <string name="quick_action_move_map_left">Mapa na lewo</string>
+    <string name="quick_action_move_map_right">Mapa na prawo</string>
+    <string name="quick_action_move_map_down">Mapa w dół</string>
+    <string name="quick_action_move_map_up">Mapa w górę</string>
+    <string name="quick_action_new_route">Nowy kierunek</string>
+    <string name="quick_action_previous_app_profile">Profil aplikacji do poprzedniego</string>
+    <string name="quick_action_next_app_profile">Profil aplikacji do następnego</string>
+    <string name="app_profile">Profil aplikacji</string>
+    <string name="shared_string_set">Ustaw</string>
+    <string name="shared_string_create">Utwórz</string>
+    <string name="shared_string_replace">Zastąp</string>
+    <string name="shared_string_simulate">Symuluj</string>
+    <string name="quick_action_display_position_in_center">Pozycja zawsze na środku</string>
+    <string name="quick_action_terrain">Typ koloryzacji terenu</string>
+    <string name="quick_action_map_underlay">Podłóż</string>
+    <string name="quick_action_audio_note">Notatka audio</string>
+    <string name="quick_action_video_note">Notatka wideo</string>
+    <string name="quick_action_track_waypoint">Punkt ścieżki</string>
+    <string name="quick_action_parking_place">Miejsce parkowania</string>
+    <string name="quick_action_verb_show_hide">Pokaż / Ukryj</string>
+    <string name="quick_action_verb_pause_resume">Wstrzymaj / Wznów</string>
+    <string name="quick_action_verb_turn_on_off">Włącz / Wyłącz</string>
+    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="weather_screen">Ekran pogodowy</string>
+    <string name="profile_icon">Ikona profilu</string>
+    <string name="navigation_position_icon_summary">Ikona wyświetla się, gdy włączona jest nawigacja lub poruszasz się.</string>
+    <string name="navigation_position_icon">Pozycja ikony nawigacji</string>
+    <string name="resting_position_icon_summary">Ikona wyświetla się, gdy nie poruszasz się.</string>
+    <string name="resting_position_icon">Pozycja ikony spoczynku</string>
+    <string name="show_rasterization_debug_tile">Wyświetl informacje o rasteryzacji kafelków</string>
+    <string name="show_debug_tile_description">Wyświetl informacje o symbolach na każdym kafelku</string>
+    <string name="show_grids">Wyświetl siatkę na mapie</string>
+    <string name="show_grids_description">Zezwól na wyświetlanie siatki przed mapą</string>
+    <string name="show_utm_grids">Użyj UTM zamiast WGS84</string>
+    <string name="show_utm_grids_description">Wyświetl siatkę w metrach UTM zamiast WGS84</string>
+    <string name="show_mercator_grids">Użyj Mercator zamiast WGS84 lub UTM</string>
+    <string name="show_mercator_grids_description">Pokaż siatkę w kilometrach Mercator zamiast WGS84 lub UTM</string>
+    <string name="show_dms_grids">Użyj DMS zamiast stopni</string>
+    <string name="show_dms_grids_description">Wyświetl siatkę w stopniach, minutach i sekundach zamiast w stopniach</string>
+    <string name="show_dm_grids">Użyj DM zamiast stopni lub DMS</string>
+    <string name="show_dm_grids_description">Wyświetl siatkę w stopniach i minutach zamiast w stopniach lub DMS</string>
+    <string name="map_grid">Siatki mapy</string>
+    <string name="java_safe">Java (Bezpieczny)</string>
+    <string name="gpx_approximation_java">Oparte na kierunku trasy (Java)</string>
+    <string name="gpx_approximation_geo_cpp">Oparte na geometrii (C++, szybkie)</string>
+    <string name="gpx_approximation_geo_java">Oparte na geometrii (Java, szybkie)</string>
+    <string name="routing_type">Typ kierunkowania trasy</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Ukryj granice obszarów publicznych ale zostaw obszary</string>
+    <string name="shared_string_link">Łącze</string>
+    <string name="max_sensor_cadence">Kadencja rowerowa, maksymalna</string>
+    <string name="avg_sensor_cadence">Kadencja rowerowa, średnia</string>
+    <string name="max_sensor_bycicle_power">Moc rowerowa, maksymalna</string>
+    <string name="avg_sensor_bycicle_power">Moc rowerowa, średnia</string>
+    <string name="max_sensor_speed">Prędkościomierz, maksymalny</string>
+    <string name="avg_sensor_speed">Prędkościomierz, średni</string>
+    <string name="zoom_non_animated">Powiększanie bez animacji</string>
+    <string name="rendering_attr_showToll_description">Pokaż opłaty na drogach</string>
+    <string name="reset_key_assignments_desc">Wszystkie przypisania klawiszowe dla wybranego typu zostaną usunięte.</string>
+    <string name="reset_key_assignments">Resetuj przypisania klawiszowe</string>
+    <string name="target_elevation">Cel wysokości</string>
+    <string name="tripltek_promo_description">Darmowy dostęp do funkcji w tym nielimitowane pobieranie map, widok 3D itp. przez %1$s miesięcy</string>
+    <string name="remove_widget_first">Proszę usunąć najpierw widżet</string>
+    <string name="key_is_already_assigned_error">Klawisz \"%1$s\" jest już przypisany do akcji: \"%2$s\"</string>
+    <string name="press_button_to_link_with_action">Naciśnij przycisk na swoim urządzeniu aby przypisać go do akcji: %1$s</string>
+    <string name="change_key_binding">Zmień przypisanie klawiszy</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Otwórz dane siatki WunderLINQ</string>
+    <string name="key_event_action_activity_back_pressed">Akcja wstecz naciśnięta</string>
+    <string name="key_event_action_emit_navigation_hint">Emituj wskazówkę nawigacyjną</string>
+    <string name="remove_type_q">Usunąć typ \"%1$s\"?</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d ścieżka)</item>
+        <item quantity="few">%1$d (%2$d ścieżek)</item>
+        <item quantity="many">%1$d (%2$d ścieżek)</item>
+        <item quantity="other">%1$d (%2$d ścieżek)</item>
+    </plurals>
+    <string name="release_5_2">• Praca w trakcie...</string>
+    <string name="quick_action_first_intermediate">Pierwszy od dołu</string>
+    <string name="altitude_metrics_description">Ustawia jednostkę wyświetlania wysokości w widżetach i statystykach.</string>
+    <string name="write_location_provider_description">Zapisz dostawcę lokalizacji dla każdego punktu śledzenia podczas nagrywania</string>
+    <string name="write_location_provider">Napisz dostawcę lokalizacji</string>
+    <string name="map_orientation_portrait_inverted">Portret (odwrócony)</string>
+    <string name="map_orientation_landscape_inverted">Krajobraz (odwrócony)</string>
+    <string name="reverse_mode_calculate_route">Oblicz trasę</string>
+    <string name="reverse_mode_calculate_route_desc">Oblicz nową, zoptymalizowaną trasę do punktu startowego.</string>
+    <string name="reverse_mode_original_track">Oryginalna ścieżka</string>
+    <string name="reverse_mode_original_track_desc">Podążaj dokładnie tą samą trasą, aż do startu.\nUwaga: Może to być niebezpieczne, ponieważ ignoruje ruch jednokierunkowy na drogach.</string>
+    <string name="reverse_mode">Tryb odwrotny</string>
+    <string name="n_a">N/D</string>
+    <string name="next_turn_information">Informacje o następnym zakręcie</string>
+    <string name="next_turn_information_desc">Pokazuje kierunek nadchodzącego skrętu i nazwę ulicy.</string>
+    <string name="description_purchases_fastspring">Zakupami możesz zarządzać poprzez portal zarządzania kontem FastSpring.</string>
+    <string name="description_subscription_fastspring">Możesz zarządzać swoją subskrypcją i ją anulować za pośrednictwem portalu zarządzania kontem FastSpring.</string>
+    <string name="manage_purchases">Zarządzaj zakupami</string>
+    <string name="wiki_around">Popularne miejsca w pobliżu</string>
+    <string name="private_access_routing_req_short">Twój cel znajduje się na terenie prywatnym. Czy zezwalasz na korzystanie z dróg prywatnych?</string>
+    <string name="view_on_phone">Wyświetl na telefonie</string>
+    <string name="average_elevation">Średnia wysokość</string>
+    <string name="map_orientations_choose_description">Pozostaw puste pole, aby móc przełączać się między wszystkimi dostępnymi trybami, lub dodaj tylko preferowane.</string>
+    <string name="map_orientations">Orientacje mapy</string>
+    <string name="ble_prefix_pattern">%s •</string>
+    <string name="device_address_with_prefix">%1$s%2$s</string>
+    <string name="response">Odpowiedź</string>
+    <string name="failed_to_connect">Nie udało się połączyć z %1s</string>
+    <string name="shared_string_threads">Wątki</string>
+    <string name="threads_allocated_for_rendering">Wątki przydzielone do renderowania</string>
+    <string name="threads_allocated_for_rendering_desc">Mniejsza liczba wątków przydzielonych do tej funkcji może w niektórych przypadkach przyspieszyć renderowanie mapy.</string>
+    <string name="turn_by_turn_directions">Wskazówki dotyczące zakrętów</string>
+    <string name="marine_renderer">Styl marynistyczny</string>
+    <string name="marine_render_descr">Wysoce konfigurowalny styl nawigacji morskiej. Oparty na stylu żeglarskim. Działa lepiej z mapą Nautical World Seamarks i opcjonalnymi mapami głębokości.</string>
+    <string name="rendering_attr_hideAreas_name">Obszary głębokości</string>
+    <string name="rendering_attr_hideAreas_description">Ukryj obszary głębokości</string>
+    <string name="rendering_attr_hideContours_name">Kontury głębokości</string>
+    <string name="rendering_attr_hideContours_description">Ukryj kontury głębokości</string>
+    <string name="rendering_attr_hideFairways_name">Tory wodne</string>
+    <string name="rendering_attr_hideFairways_description">Ukryj tory wodne</string>
+    <string name="rendering_attr_hideFerries_name">Trasy promowe</string>
+    <string name="rendering_attr_hideFerries_description">Ukryj trasy promowe</string>
+    <string name="rendering_attr_hideMinorContours_name">Kontury małej głębokości</string>
+    <string name="rendering_attr_hideMinorContours_description">Ukryj kontury małej głębokości</string>
+    <string name="rendering_attr_hideNoLNAM_name">Znaki morskie OSM (niektóre)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Ukryj znaki morskie OSM (niektóre)</string>
+    <string name="rendering_attr_depthColorScheme_name">Paleta kolorów głębi</string>
+    <string name="rendering_attr_depthColorScheme_description">Paleta kolorów głębi</string>
+    <string name="rendering_attr_showLNAMmarker_name">Markery ENC</string>
+    <string name="rendering_attr_showLNAMmarker_description">Wyświetl markery ENC</string>
+    <string name="rendering_attr_watercolor_name">Kolor wody</string>
+    <string name="rendering_attr_watercolor_description">Kolor wody</string>
+    <string name="show_debug_tile">Pokaż informacje o kafelku</string>
+    <string name="enable_msaa">Włącz MSAA</string>
+    <string name="cant_load_map_styles">Nie można wczytać stylów mapy.</string>
+    <string name="special_routing_cpp">Specjalny typ wyznaczania trasy</string>
+    <string name="backup_delete_data_warning_extended">Ta czynność spowoduje trwałe usunięcie wszystkich wybranych danych z chmury. Nie będzie możliwe ich późniejsze przywrócenie.</string>
+    <string name="amount_of_total_used">Użyte %1$s z %2$s</string>
+    <string name="delete_data">Usuń dane</string>
+    <string name="manage_storage">Zarządzaj przechowywaniem</string>
+    <string name="manage_storage_delete_data_dialog_summary">Czy na pewno chcesz usunąć %1$s z OsmAnd Cloud?\n\nMożesz je przywrócić z Kosza w ciągu 30 dni.</string>
+    <string name="copy_as_new_folder">Skopiuj jako nowy folder</string>
+    <string name="add_to_a_folder">Dodaj do folderu</string>
+    <string name="add_to_favorites">Dodaj do ulubionych</string>
+    <string name="max_weight_at_full_load_description">Podaj maksymalną masę pojazdu przy pełnym załadunku, aby uniknąć dróg i mostów z ograniczeniami wagowymi.</string>
+    <string name="max_axle_load_description">Podaj maksymalny nacisk na oś pojazdu, aby uniknąć dróg i mostów z ograniczeniami wagowymi.</string>
+    <string name="rendering_attr_depthContoursDashed_name">Kropkowane kontury głębokości</string>
+    <string name="rendering_attr_depthContoursDashed_description">Kropkowane kontury głębokości</string>
+    <string name="rendering_attr_safetyContour_name">Kontur bezpiecznej głębokości</string>
+    <string name="rendering_attr_safetyContour_description">Kontur bezpiecznej głębokości</string>
+    <string name="rendering_attr_fairwayStyle_name">Kolor tras wodnych</string>
+    <string name="rendering_attr_fairwayStyle_description">Kolor tras wodnych</string>
+    <string name="lang_en_barebones">Angielski (prosty)</string>
+    <string name="obd_alt_battery_voltage">Napięcie adaptera</string>
+    <string name="liter_single">Litr</string>
+    <string name="imperial_gallon">Galon angielski</string>
+    <string name="us_gallon">Galon amerykański</string>
+    <string name="kilometers">Kilometry</string>
+    <string name="miles">Mile</string>
+    <string name="mpg">Mil na galon</string>
+    <string name="ascent">Wzniesienie</string>
+    <string name="descent">Spadek</string>
+    <string name="shared_sting_osm_link">Link OSM</string>
 </resources>

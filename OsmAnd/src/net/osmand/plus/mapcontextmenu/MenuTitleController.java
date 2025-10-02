@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
@@ -46,7 +45,7 @@ public abstract class MenuTitleController {
 	public OsmandApplication getMyApplication() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			return activity.getMyApplication();
+			return activity.getApp();
 		} else {
 			return null;
 		}

@@ -35,12 +35,11 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
-import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -51,11 +50,12 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBackupListener, OnBackupSyncListener {
+public class ChangesFragment extends BaseFullScreenFragment implements OnPrepareBackupListener, OnBackupSyncListener {
 
 	public static final String TAG = ChangesFragment.class.getSimpleName();
 
@@ -83,10 +83,10 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_changes, container, false);
+		View view = inflate(R.layout.fragment_osmand_cloud_changes, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
-		buttonsContainer = view.findViewById(R.id.buttons_container);
+		buttonsContainer = view.findViewById(R.id.bottom_buttons_container);
 
 		setupTabs(view);
 		setupToolbar(view);
@@ -201,7 +201,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		pagerSlidingTabStrip.setViewPager(viewPager);
 	}
 
-	private void setupBottomButtons() {
+	public void setupBottomButtons() {
 		boolean syncing = settingsHelper.isBackupSyncing();
 		boolean preparing = backupHelper.isBackupPreparing();
 
@@ -222,7 +222,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 				}
 				setupBottomButtons();
 			});
-			boolean enabled = !syncing && !preparing && hasItems();
+			boolean enabled = !syncing && !preparing && syncAvailable();
 			button.setEnabled(enabled);
 			button.setTitleId(tabType.buttonTextId);
 
@@ -231,7 +231,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 				int activeColor = ColorUtilities.getButtonSecondaryTextColor(app, nightMode);
 
 				TextView textView = button.findViewById(R.id.button_text);
-				Drawable icon = getPaintedContentIcon(tabType.buttonIconId, enabled ? activeColor : defaultColor);
+				Drawable icon = getPaintedIcon(tabType.buttonIconId, enabled ? activeColor : defaultColor);
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 				textView.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.content_padding_small));
 			}
@@ -250,18 +250,12 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		AndroidUiHelper.updateVisibility(button, syncing);
 	}
 
-	private boolean hasItems() {
+	private boolean syncAvailable() {
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();
-		if (info != null) {
-			switch (tabType) {
-				case RECENT_CHANGES_REMOTE:
-					return BackupUtils.getItemsMapForRestore(info, backup.getSettingsItems()).size() > 0;
-				case RECENT_CHANGES_LOCAL:
-					return info.filteredFilesToDelete.size() + info.filteredFilesToUpload.size() > 0;
-				default:
-					return false;
-			}
+		if (info != null && CollectionUtils.equalsToAny(tabType, RECENT_CHANGES_REMOTE, RECENT_CHANGES_LOCAL)) {
+			ChangesTabFragment fragment = getSelectedFragment();
+			return fragment != null && !Algorithms.isEmpty(fragment.items);
 		}
 		return false;
 	}
@@ -338,11 +332,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
 		}
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public enum RecentChangesType {

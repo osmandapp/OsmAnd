@@ -2,6 +2,11 @@ package net.osmand.plus.mapcontextmenu.gallery;
 
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment.SELECTED_POSITION_KEY;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.LayoutInflater;
@@ -13,18 +18,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.imageview.GalleryImageView;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.shared.util.ImageLoaderCallback;
+import net.osmand.shared.util.LoadingImage;
 
 import org.apache.commons.logging.Log;
 
-public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
+public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	private static final Log LOG = PlatformUtil.getLog(GalleryPhotoViewerFragment.class);
 
 	public static final String TAG = GalleryPhotoViewerFragment.class.getSimpleName();
@@ -33,6 +40,7 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 
 	private GalleryImageView imageView;
 	private int selectedPosition = 0;
+	private LoadingImage loadingImage;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,11 +60,18 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		ViewGroup view = (ViewGroup) themedInflater.inflate(R.layout.gallery_photo_item, container, false);
+		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_item, container, false);
 
 		setupImageView(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private void setupImageView(@NonNull ViewGroup view) {
@@ -65,7 +80,14 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 		if (controller != null) {
 			ImageCard imageCard = controller.getOnlinePhotoCards().get(selectedPosition);
 			if (imageCard != null) {
-				downloadThumbnail(imageCard);
+				if (loadingImage != null) {
+					loadingImage.cancel();
+				}
+				if (!app.getSettings().isInternetConnectionAvailable()) {
+					downloadHiResImage(imageCard, true);
+				} else{
+					downloadThumbnail(imageCard);
+				}
 			}
 		}
 
@@ -85,36 +107,103 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	private void downloadThumbnail(@NonNull ImageCard imageCard) {
 		String thumbnailUrl = imageCard.getThumbnailUrl();
 		if (thumbnailUrl != null) {
-			Picasso.get()
-					.load(thumbnailUrl)
-					.into(imageView, new Callback() {
-						@Override
-						public void onSuccess() {
-							downloadHiResImage(imageCard);
-						}
+			loadingImage = controller.getImageLoader().loadImage(thumbnailUrl, new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
 
-						@Override
-						public void onError(Exception e) {
-							downloadHiResImage(imageCard);
-							LOG.error(e);
-						}
-					});
+				}
+
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					Drawable previous = new ColorDrawable(Color.TRANSPARENT);
+					Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
+
+					AndroidUiHelper.crossFadeDrawables(imageView,
+							previous,
+							next);
+
+					downloadHiResImage(imageCard, false);
+				}
+
+				@Override
+				public void onError() {
+					downloadHiResImage(imageCard, true);
+				}
+			}, false);
 		} else {
-			downloadHiResImage(imageCard);
+			downloadHiResImage(imageCard, false);
 		}
 	}
 
-	private void downloadHiResImage(@NonNull ImageCard imageCard) {
-		Picasso.get()
-				.load(imageCard.getGalleryFullSizeUrl())
-				.placeholder(imageView.getDrawable())
-				.into(imageView);
+	private void downloadHiResImage(@NonNull ImageCard imageCard, boolean loadPreviewOnError) {
+		String hiResUrl = imageCard.getGalleryFullSizeUrl();
+		if (hiResUrl != null) {
+			loadingImage = controller.getImageLoader().loadImage(imageCard.getGalleryFullSizeUrl(), new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
+
+				}
+
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					Drawable previous = imageView.getDrawable() != null ? imageView.getDrawable() : new ColorDrawable(Color.TRANSPARENT);
+					Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
+
+					AndroidUiHelper.crossFadeDrawables(imageView,
+							previous,
+							next);
+				}
+
+				@Override
+				public void onError() {
+					if (loadPreviewOnError) {
+						tryLoadCachePreviewImage(imageCard);
+					} else {
+						LOG.error("Unable to download hi res image: " + hiResUrl);
+					}
+				}
+			}, false);
+		}
+	}
+
+	private void tryLoadCachePreviewImage(@NonNull ImageCard imageCard) {
+		String imageUrl = imageCard.getImageUrl();
+		if (imageUrl != null) {
+			loadingImage = controller.getImageLoader().loadImage(imageUrl, new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
+
+				}
+
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					Drawable previous = new ColorDrawable(Color.TRANSPARENT);
+					Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
+
+					AndroidUiHelper.crossFadeDrawables(imageView,
+							previous,
+							next);
+				}
+
+				@Override
+				public void onError() {
+				}
+			}, false);
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		imageView.resetZoom();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (loadingImage != null) {
+			loadingImage.cancel();
+		}
 	}
 
 	@Override

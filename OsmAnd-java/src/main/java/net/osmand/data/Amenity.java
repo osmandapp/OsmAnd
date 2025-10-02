@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import static net.osmand.gpx.GPXUtilities.*;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
@@ -9,6 +10,7 @@ import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.ObfConstants;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -17,7 +19,6 @@ import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.wiki.WikiCoreHelper;
 
 import org.json.JSONObject;
 
@@ -30,12 +31,19 @@ import gnu.trove.list.array.TIntArrayList;
 public class Amenity extends MapObject {
 
 	public static final String WEBSITE = "website";
+	public static final String URL = "url";
 	public static final String PHONE = "phone";
 	public static final String MOBILE = "mobile";
+	public static final String BRAND = "brand";
+	public static final String OPERATOR = "operator";
 	public static final String DESCRIPTION = "description";
 	public static final String SHORT_DESCRIPTION = "short_description";
 	public static final String ROUTE = "route";
 	public static final String OPENING_HOURS = "opening_hours";
+	public static final String POPULATION = "population";
+	public static final String WIDTH = "width";
+	public static final String HEIGHT = "height";
+	public static final String DISTANCE = "distance";
 	public static final String SERVICE_TIMES = "service_times";
 	public static final String COLLECTION_TIMES = "collection_times";
 	public static final String CONTENT = "content";
@@ -60,6 +68,7 @@ public class Amenity extends MapObject {
 	public static final String ROUTE_ID_OSM_PREFIX = "O"; // indexed in POI-section
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
+	public static final String ROUTE_ACTIVITY_TYPE = "route_activity_type";
 	public static final String WIKI_PHOTO = "wiki_photo";
 	public static final String WIKI_CATEGORY = "wiki_category";
 	public static final String TRAVEL_TOPIC = "travel_topic";
@@ -78,7 +87,9 @@ public class Amenity extends MapObject {
 	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
 	public static final int DEFAULT_ELO = 900;
-
+	public static final String ADDR_STREET = "addr_street";
+	public static final String ADDR_HOUSENUMBER = "addr_housenumber";
+	
 	private String subType;
 	private PoiCategory type;
 	// duplicate for fast access
@@ -96,7 +107,6 @@ public class Amenity extends MapObject {
 	private String wikiIconUrl;
 	private String wikiImageStubUrl;
 	private int travelElo = 0;
-
 	private Set<String> contentLocales;
 
 	public int getOrder() {
@@ -287,11 +297,28 @@ public class Amenity extends MapObject {
 		}
 	}
 
+	public void copyAdditionalInfo(Amenity amenity, boolean overwrite) {
+		copyAdditionalInfo(amenity.getInternalAdditionalInfoMap(), overwrite);
+	}
+
+	public void copyAdditionalInfo(Map<String, String> map, boolean overwrite) {
+		if (overwrite || additionalInfo == null) {
+			setAdditionalInfo(map);
+		} else {
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				String key = entry.getKey();
+				if (!additionalInfo.containsKey(key)) {
+					setAdditionalInfo(key, entry.getValue());
+				}
+			}
+		}
+	}
+
 	public StringBuilder printNamesAndAdditional() {
 		StringBuilder s = new StringBuilder();
-		Map<String, String> additionals = new HashMap<>();
-		Map<String, String> poi_type = new HashMap<>();
-		Map<String, String> text = new HashMap<>();
+		Map<String, String> additionals = new LinkedHashMap<>();
+		Map<String, String> poi_type = new LinkedHashMap<>();
+		Map<String, String> text = new LinkedHashMap<>();
 		if (additionalInfo != null) {
 			for (Map.Entry<String, String> e : additionalInfo.entrySet()) {
 				String key = e.getKey();
@@ -357,6 +384,14 @@ public class Amenity extends MapObject {
 
 	public String getSite() {
 		return getAdditionalInfo(WEBSITE);
+	}
+	
+	public String getStreetName() {
+		return getAdditionalInfo(ADDR_STREET);
+	}
+	
+	public String getHousenumber() {
+		return getAdditionalInfo(ADDR_HOUSENUMBER);
 	}
 
 	public void setSite(String site) {
@@ -515,17 +550,16 @@ public class Amenity extends MapObject {
 	public String getTravelElo() {
 		return getAdditionalInfo(TRAVEL_ELO);
 	}
+	public String getWikidata() {
+		return getAdditionalInfo(WIKIDATA);
+	}
 
 	public int getTravelEloNumber() {
 		if (travelElo > 0) {
 			return travelElo;
 		}
 		String travelEloStr = getTravelElo();
-		try {
-			travelElo = Integer.parseInt(travelEloStr);
-		} catch (NumberFormatException e) {
-			travelElo = DEFAULT_ELO;
-		}
+		travelElo = Algorithms.parseIntSilently(travelEloStr, DEFAULT_ELO);
 		return travelElo;
 	}
 
@@ -703,6 +737,10 @@ public class Amenity extends MapObject {
 
 	public boolean isRoutePoint() {
 		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
+	}
+
+	public boolean isRouteArticle() {
+		return Algorithms.stringsEqual(ROUTE_ARTICLE, subType);
 	}
 
 	public boolean isSuperRoute() {
@@ -922,5 +960,83 @@ public class Amenity extends MapObject {
 
 	public void setY(TIntArrayList y) {
 		this.y = y;
+	}
+
+	public String getRouteActivityType() {
+		if (!isRouteTrack() && !isSuperRoute()) {
+			return "";
+		}
+		for (Map.Entry<String, String> entry : additionalInfo.entrySet()) {
+			if (entry.getKey().startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
+				return MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey()).getTranslation();
+			}
+		}
+		return "";
+	}
+
+	public Long getOsmId() {
+		Long id = getId();
+		if (id == null) {
+			return null;
+		}
+		if (ObfConstants.isShiftedID(id)) {
+			return ObfConstants.getOsmId(id);
+		} else {
+			return id >> AMENITY_ID_RIGHT_SHIFT;
+		}
+	}
+
+	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
+		String typeName = amenity.getSubTypeStr();
+		String localName = amenity.getName(locale, transliterate);
+		if (typeName != null && localName.contains(typeName)) {
+			// type is contained in name e.g.
+			// localName = "Bakery the Corner"
+			// type = "Bakery"
+			// no need to repeat this
+			return localName;
+		}
+		if (Algorithms.isEmpty(localName) && amenity.isRouteTrack()) {
+			localName = amenity.getAdditionalInfo(Amenity.ROUTE_ID);
+		}
+		if (Algorithms.isEmpty(localName)) {
+			return typeName;
+		}
+		return typeName + " " + localName; // $NON-NLS-1$
+	}
+
+	public Map<String, String> getOsmTags() {
+		Map<String, String> result = new LinkedHashMap<>();
+
+		Map<String, String> amenityTags = new LinkedHashMap<>();
+		for (String amenityTag : getAdditionalInfoKeys()) {
+			amenityTags.put(amenityTag, getAdditionalInfo(amenityTag));
+		}
+
+		String amenityName = getName();
+		if (!Algorithms.isEmpty(amenityName)) {
+			result.put(NAME, amenityName);
+		}
+
+		PoiCategory category = getType();
+		String subTypesList = getSubType();
+
+		if (subTypesList != null) {
+			for (String subType : subTypesList.split(";")) {
+				PoiType type = category.getPoiTypeByKeyName(subType);
+				if (type != null) {
+					result.putAll(type.getOsmTagsValues());
+					for (PoiType additional : type.getPoiAdditionals()) {
+						if (amenityTags.remove(additional.getKeyName()) != null) {
+							result.putAll(additional.getOsmTagsValues());
+						}
+					}
+				}
+			}
+		}
+
+		result.putAll(amenityTags); // unresolved residues
+
+		return result;
 	}
 }

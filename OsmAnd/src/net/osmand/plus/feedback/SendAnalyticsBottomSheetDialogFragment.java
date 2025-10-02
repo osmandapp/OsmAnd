@@ -6,15 +6,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextPaint;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.URLSpan;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -30,6 +26,9 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.style.CustomURLSpan;
 
 import org.apache.commons.logging.Log;
 
@@ -43,27 +42,19 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		Context context = getContext();
-		if (context == null || app == null) {
-			return;
-		}
+		Context themedContext = getThemedContext();
+		View titleView = inflate(R.layout.make_better_title);
+		items.add(new SimpleBottomSheetItem.Builder().setCustomView(titleView).create());
 
-		View titleView = View.inflate(new ContextThemeWrapper(context, themeRes), R.layout.make_better_title, null);
-		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(titleView)
-				.create();
-		items.add(titleItem);
+		items.add(new SubtitleDividerItem(themedContext));
 
-		items.add(new SubtitleDividerItem(context));
-
-		if (app.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.isSet()) {
-			sendAnonymousMapDownloadsData = app.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get();
+		if (settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.isSet()) {
+			sendAnonymousMapDownloadsData = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get();
 		} else {
 			sendAnonymousMapDownloadsData = true;
 		}
-		if (app.getSettings().SEND_ANONYMOUS_APP_USAGE_DATA.isSet()) {
-			sendAnonymousAppUsageData = app.getSettings().SEND_ANONYMOUS_APP_USAGE_DATA.get();
+		if (settings.SEND_ANONYMOUS_APP_USAGE_DATA.isSet()) {
+			sendAnonymousAppUsageData = settings.SEND_ANONYMOUS_APP_USAGE_DATA.get();
 		} else {
 			sendAnonymousAppUsageData = true;
 		}
@@ -84,7 +75,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new LongDescriptionItem(getString(R.string.downloaded_maps_collect_descr)));
 
-		items.add(new SubtitmeListDividerItem(context));
+		items.add(new SubtitmeListDividerItem(themedContext));
 
 		BottomSheetItemWithCompoundButton[] visitedScreensItem = new BottomSheetItemWithCompoundButton[1];
 		visitedScreensItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -103,7 +94,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new LongDescriptionItem(getString(R.string.visited_screens_collect_descr)));
 
-		items.add(new DividerItem(context));
+		items.add(new DividerItem(themedContext));
 
 		String privacyPolicyText = getString(R.string.shared_string_privacy_policy);
 		String text = getString(R.string.privacy_and_security_change_descr, privacyPolicyText);
@@ -112,14 +103,8 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		int start = text.indexOf(privacyPolicyText);
 		int end = start + privacyPolicyText.length();
 		String url = getString(R.string.osmand_privacy_policy);
-		spannable.setSpan(new URLSpan(url) {
-			@Override
-			public void updateDrawState(@NonNull TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
-			}
-		}, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		int linkTextColor = ContextCompat.getColor(context, !nightMode ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
+		spannable.setSpan(new CustomURLSpan(url), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		int linkTextColor = ColorUtilities.getActiveColor(app, nightMode);
 		spannable.setSpan(new ForegroundColorSpan(linkTextColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		LongDescriptionItem descriptionItem = new LongDescriptionItem(spannable);
@@ -144,8 +129,6 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		OsmandApplication app = requiredMyApplication();
-		OsmandSettings settings = app.getSettings();
 		settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.set(false);
 		settings.SEND_ANONYMOUS_APP_USAGE_DATA.set(false);
 		settings.SEND_ANONYMOUS_DATA_REQUEST_PROCESSED.set(true);
@@ -154,8 +137,6 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = requiredMyApplication();
-		OsmandSettings settings = app.getSettings();
 		settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.set(sendAnonymousMapDownloadsData);
 		settings.SEND_ANONYMOUS_APP_USAGE_DATA.set(sendAnonymousAppUsageData);
 		settings.SEND_ANONYMOUS_DATA_REQUEST_PROCESSED.set(true);
@@ -164,9 +145,8 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	private void informAnalyticsPrefsUpdate() {
-		Fragment target = getTargetFragment();
-		if (target instanceof OnSendAnalyticsPrefsUpdate) {
-			((OnSendAnalyticsPrefsUpdate) target).onAnalyticsPrefsUpdate();
+		if (getTargetFragment() instanceof OnSendAnalyticsPrefsUpdate onSendAnalyticsPrefsUpdate) {
+			onSendAnalyticsPrefsUpdate.onAnalyticsPrefsUpdate();
 		}
 	}
 
@@ -190,23 +170,19 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG, true)) {
+			SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fm, TAG);
 
-				OsmandSettings settings = app.getSettings();
-				int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
-				OsmandPreference<Integer> lastRequestNS = settings.SEND_ANONYMOUS_DATA_LAST_REQUEST_NS;
-				if (numberOfStarts != lastRequestNS.get()) {
-					OsmandPreference<Integer> counter = settings.SEND_ANONYMOUS_DATA_REQUESTS_COUNT;
-					counter.set(counter.get() + 1);
-					lastRequestNS.set(numberOfStarts);
-				}
+			OsmandSettings settings = app.getSettings();
+			int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
+			OsmandPreference<Integer> lastRequestNS = settings.SEND_ANONYMOUS_DATA_LAST_REQUEST_NS;
+			if (numberOfStarts != lastRequestNS.get()) {
+				OsmandPreference<Integer> counter = settings.SEND_ANONYMOUS_DATA_REQUESTS_COUNT;
+				counter.set(counter.get() + 1);
+				lastRequestNS.set(numberOfStarts);
 			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
 		}
 	}
 

@@ -3,27 +3,20 @@ package net.osmand.plus.utils;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.PointF;
-import android.os.AsyncTask;
 import android.util.Pair;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.ColorARGB;
-import net.osmand.core.jni.FColorARGB;
-import net.osmand.core.jni.FColorRGB;
-import net.osmand.core.jni.IconData;
-import net.osmand.core.jni.OsmAndCore;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SingleSkImage;
-import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.TileId;
-import net.osmand.core.jni.TileIdList;
-import net.osmand.core.jni.Utilities;
+import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.utils.HeightsResolverTask.HeightsResolverCallback;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -33,10 +26,6 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class NativeUtilities {
 
@@ -294,7 +283,7 @@ public class NativeUtilities {
 			} else {
 				HeightsResolverCallback heightsCallback = heights -> callback.onResult(heights != null && heights.length > 0 ? (double) heights[0] : null);
 				HeightsResolverTask task = new HeightsResolverTask(Collections.singletonList(latLon), heightsCallback);
-				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				OsmAndTaskManager.executeTask(task);
 			}
 		} else {
 			callback.onResult(null);
@@ -333,8 +322,14 @@ public class NativeUtilities {
 	}
 
 	@NonNull
-	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
-	                                        double lat, double lon) {
+	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer,
+			@NonNull RotatedTileBox tileBox, @NonNull LatLon latLon) {
+		return getPixelFromLatLon(mapRenderer, tileBox, latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	@NonNull
+	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer,
+			@NonNull RotatedTileBox tileBox, double lat, double lon) {
 		PointI screenPoint = getScreenPointFromLatLon(mapRenderer, lat, lon);
 		if (screenPoint != null) {
 			return new PointF(screenPoint.getX(), screenPoint.getY());

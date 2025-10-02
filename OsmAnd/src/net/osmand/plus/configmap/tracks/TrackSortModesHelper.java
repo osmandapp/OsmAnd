@@ -40,7 +40,7 @@ public class TrackSortModesHelper {
 	@NonNull
 	public TracksSortMode requireSortMode(@Nullable String id) {
 		TracksSortMode sortMode = id != null ? getSortMode(id) : null;
-		return sortMode != null ? sortMode : TracksSortMode.getDefaultSortMode();
+		return sortMode != null ? sortMode : TracksSortMode.getDefaultSortMode(id);
 	}
 
 	@Nullable

@@ -3,10 +3,12 @@ package net.osmand.plus.plugins.rastermaps;
 import static net.osmand.plus.quickaction.QuickActionIds.MAP_OVERLAY_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -23,6 +25,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -51,7 +54,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected String getTitle(List<Pair<String, String>> filters) {
+	protected String getTitle(List<Pair<String, String>> filters, @NonNull Context ctx) {
 
 		if (filters.isEmpty()) return "";
 
@@ -99,7 +102,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
@@ -109,7 +112,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 					showChooseDialog(mapActivity);
 					return;
 				}
-				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				String nextItem = getNextSelectedItem(mapActivity.getApp());
 				executeWithParams(mapActivity, nextItem);
 			}
 		}
@@ -119,7 +122,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			OsmandSettings settings = mapActivity.getSettings();
 			boolean hasOverlay = !params.equals(KEY_NO_OVERLAY);
 			if (hasOverlay) {
 				settings.MAP_OVERLAY.set(params);
@@ -179,10 +182,10 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				OsmandApplication app = activity.getMyApplication();
+				OsmandApplication app = activity.getApp();
 				Map<String, String> entriesMap = app.getSettings().getTileSourceEntries();
 				entriesMap.put(KEY_NO_OVERLAY, activity.getString(R.string.no_overlay));
-				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 				ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());

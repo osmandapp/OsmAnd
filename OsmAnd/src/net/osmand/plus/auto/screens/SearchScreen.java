@@ -24,7 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.SearchHelper;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -68,8 +68,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		this.settingsAction = settingsAction;
 
 		getLifecycle().addObserver(this);
-		getApp().getAppInitializer().addListener(this);
-		reloadHistory();
 	}
 
 	@NonNull
@@ -85,9 +83,16 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		destroyed = true;
 	}
 
+	@Override
+	protected void onFirstGetTemplate() {
+		super.onFirstGetTemplate();
+		getApp().getAppInitializer().addListener(this);
+		reloadHistory();
+	}
+
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		String searchQuery = getSearchHelper().getSearchQuery();
 		String searchHint = getSearchHelper().getSearchHint();
 		SearchTemplate.Builder builder = new SearchTemplate.Builder(new SearchCallback() {
@@ -275,7 +280,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 				}
 
 				// History
-				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+				SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 				List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.SEARCH, true, false);
 				if (!Algorithms.isEmpty(results)) {
 					recentResults.addAll(results);

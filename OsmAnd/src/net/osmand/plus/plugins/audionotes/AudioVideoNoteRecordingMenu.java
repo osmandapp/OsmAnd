@@ -132,7 +132,7 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void update() {
 		CurrentRecording recording = plugin.getCurrentRecording();
-		UiUtilities iconsCache = requireMapActivity().getMyApplication().getUIUtilities();
+		UiUtilities iconsCache = requireMapActivity().getApp().getUIUtilities();
 
 		ImageView leftButtonIcon = view.findViewById(R.id.leftButtonIcon);
 		View leftButtonView = view.findViewById(R.id.leftButtonView);
@@ -192,7 +192,7 @@ public class AudioVideoNoteRecordingMenu {
 		if (plugin.getCurrentRecording() != null) {
 			TextView timeText = view.findViewById(R.id.timeText);
 			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
-			timeText.setText(Algorithms.formatDuration(duration, requireMapActivity().getMyApplication().accessibilityEnabled()));
+			timeText.setText(Algorithms.formatDuration(duration, requireMapActivity().getApp().accessibilityEnabled()));
 		}
 	}
 

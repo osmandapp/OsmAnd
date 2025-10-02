@@ -2103,17 +2103,13 @@
     <string name="poi_historic_threshing_floor">歴史的な脱穀場</string>
     <string name="poi_historic_railway">歴史的な鉄道</string>
     <string name="poi_iwn_ref">ハイキングネットワークの交点(複数の国境越えがある超長距離)</string>
-    <string name="poi_route_hiking_iwn_poi">ハイキング経路(複数の国境越えがある超長距離)</string>
     <string name="poi_lwn_ref">ハイキングネットワークの交点(地域内の短距離)</string>
-    <string name="poi_route_hiking_lwn_poi">ハイキング経路(地域内の短距離)</string>
     <string name="poi_locomotive">展示機関車</string>
     <string name="poi_nwn_ref">ハイキングネットワークの交点(国を横断するような長距離)</string>
-    <string name="poi_route_hiking_nwn_poi">ハイキング経路(国を横断するような長距離)</string>
     <string name="poi_pa">Pa(マオリ族の要塞居留地)</string>
     <string name="poi_bird_hide">野鳥観察舎</string>
     <string name="poi_wildlife_hide">野生動物観察舎</string>
     <string name="poi_rwn_ref">ハイキングネットワークの交点(地域をまたぐ中距離)</string>
-    <string name="poi_route_hiking_rwn_poi">ハイキング経路(地域をまたぐ中距離)</string>
     <string name="poi_sanitary_dump_station_yes">トレーラーハウス等のタンク内排泄物処理所:有り</string>
     <string name="poi_sanitary_dump_station_no">トレーラーハウス等のタンク内排泄物処理所:無し</string>
     <string name="poi_sanitary_dump_station">トレーラーハウス等のタンク内排泄物処理所</string>
@@ -2270,7 +2266,6 @@
     <string name="poi_content_manure">貯蔵:肥料</string>
     <string name="poi_content_slurry">貯蔵庫:懸濁液</string>
     <string name="poi_content_oil">貯蔵:油・オイル</string>
-    <string name="poi_route_hiking_ref_poi">ハイキングルートの参照番号</string>
     <string name="poi_free_flying_site_orientation_n">離陸の方向指示:北</string>
     <string name="poi_free_flying_site_orientation_ne">離陸の方向指示:北東</string>
     <string name="poi_free_flying_site_orientation_e">離陸の方向指示:東</string>
@@ -3397,7 +3392,7 @@
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
     <string name="poi_flooring">床用品店</string>
     <string name="poi_pottery">陶芸工房・窯場</string>
-    <string name="poi_whitewater_rapid_name">激流・急流箇所の名前</string>
+    <string name="poi_rapids_name">激流・急流箇所の名前</string>
     <string name="poi_outpost">通販用集配所</string>
     <string name="poi_barbecue_grill">バーベキュー用グリル:有り</string>
     <string name="poi_water_utility">水道事業所</string>

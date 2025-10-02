@@ -17,7 +17,7 @@
     <string name="degree_celsius">°C</string>
     <string name="amazon_market">Amazon</string>
     <string name="huawei_market">Huawei</string>
-    <string name="fastspring_market">FastSpring</string>
+    <string name="osmand_web_market">OsmAnd Web (FastSpring)</string>
     <string name="apple_app_store">Apple App Store</string>
     <string name="google_play">Google Play</string>
     <string name="google_play_services">Google Play Services</string>

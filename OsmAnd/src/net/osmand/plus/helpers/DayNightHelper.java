@@ -22,6 +22,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;
@@ -110,63 +111,51 @@ public class DayNightHelper implements SensorEventListener {
 		return preferenceStateListener;
 	}
 
-	public boolean isNightMode(boolean usedOnMap) {
-		return isNightMode(usedOnMap, new RequestThemeParams());
+	/**
+	 * @deprecated This method relies on the active application mode, which may produce incorrect theme results
+	 * when editing a profile different from the active one. Use {@link #isNightMode(ApplicationMode, ThemeUsageContext)}
+	 * instead and pass an explicit {@link ApplicationMode} to ensure correct theme resolution.
+	 */
+	@Deprecated
+	public boolean isNightMode(@NonNull ThemeUsageContext usageContext) {
+		return isNightMode(settings.getApplicationMode(), usageContext);
 	}
 
-	public boolean isNightMode(boolean usedOnMap, @NonNull ApplicationMode appMode) {
-		return isNightMode(usedOnMap, new RequestThemeParams(appMode));
-	}
-
-	public boolean isNightMode(boolean usedOnMap, @NonNull RequestThemeParams params) {
-		if (usedOnMap) {
-			return isNightModeForMapControls(params);
-		} else {
-			return !settings.isLightContentForMode(params.requireAppMode(app));
+	public boolean isNightMode(@NonNull ApplicationMode appMode,
+	                           @NonNull ThemeUsageContext usageContext) {
+		boolean appNightMode = !settings.isLightContentForMode(appMode);
+		if (usageContext == ThemeUsageContext.APP) {
+			return appNightMode;
 		}
-	}
 
-	public boolean isNightModeForMapControls() {
-		return isNightModeForMapControls(new RequestThemeParams());
-	}
-
-	public boolean isNightModeForMapControlsForProfile(ApplicationMode mode) {
-		return isNightModeForMapControls(new RequestThemeParams(mode));
-	}
-
-	public boolean isNightModeForMapControls(@NonNull RequestThemeParams params) {
-		if (settings.isLightContentForMode(params.requireAppMode(app))) {
-			return isNightModeForProfile(params);
-		} else {
+		if (usageContext == ThemeUsageContext.OVER_MAP && appNightMode) {
+			// Use Dark theme for UI over map if App Theme is Dark
 			return true;
 		}
-	}
 
-	public boolean isNightMode() {
-		return isNightModeForProfile(new RequestThemeParams());
-	}
-
-	private boolean isNightModeForProfile(@NonNull RequestThemeParams params) {
-		ApplicationMode appMode = params.requireAppMode(app);
 		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.getModeValue(appMode);
-		if (externalMapThemeProvider != null && !params.shouldIgnoreExternalProvider()) {
+		if (externalMapThemeProvider != null) {
 			DayNightMode providedTheme = externalMapThemeProvider.getMapTheme();
 			dayNightMode = providedTheme != null ? providedTheme : dayNightMode;
 		}
+
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession != null && carNavigationSession.isStateAtLeast(State.CREATED)) {
 			boolean carDarkMode = carNavigationSession.getCarContext().isDarkMode();
 			dayNightMode = carDarkMode ? DayNightMode.NIGHT : DayNightMode.DAY;
 		}
+
 		if (dayNightMode.isDay()) {
 			return false;
-		} else if (dayNightMode.isNight()) {
+		}
+		if (dayNightMode.isNight()) {
 			return true;
-		} else if (dayNightMode.isAuto()) { // We are in auto mode!
+		}
+		if (dayNightMode.isAuto()) {
 			long currentTime = System.currentTimeMillis();
 			// allow recalculation each 60 seconds
 			if (currentTime - lastTime > 60000) {
-				lastTime = System.currentTimeMillis();
+				lastTime = currentTime;
 				try {
 					SunriseSunset daynightSwitch = getSunriseSunset();
 					if (daynightSwitch != null) {
@@ -181,10 +170,12 @@ public class DayNightHelper implements SensorEventListener {
 				}
 			}
 			return lastNightMode;
-		} else if (dayNightMode.isSensor()) {
+		}
+		if (dayNightMode.isSensor()) {
 			return lastNightMode;
-		} else if (dayNightMode.isAppTheme()) {
-			return !settings.isLightContentForMode(appMode);
+		}
+		if (dayNightMode.isAppTheme()) {
+			return appNightMode;
 		}
 		return false;
 	}

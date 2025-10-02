@@ -154,6 +154,11 @@ class GpxDataItem(
 				gpxFile.get3DWallColoringType()
 			)
 
+			GpxParameter.JOIN_SEGMENTS -> setParameter(
+					GpxParameter.JOIN_SEGMENTS,
+					gpxFile.isJoinSegments()
+			)
+
 			else -> {}
 		}
 	}

@@ -56,6 +56,7 @@ import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -200,10 +201,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupRoutingPrefs() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		PreferenceScreen screen = getPreferenceScreen();
 		ApplicationMode am = getSelectedAppMode();
 
@@ -598,26 +595,26 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void showSeekbarSettingsDialog(Activity activity, ApplicationMode mode) {
-		if (activity == null || mode == null) {
+	private void showSeekbarSettingsDialog(Activity activity, ApplicationMode appMode) {
+		if (activity == null || appMode == null) {
 			return;
 		}
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		float[] angleValue = {mode.getStrAngle()};
-		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
+		float[] angleValue = {appMode.getStrAngle()};
+		boolean nightMode = app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.APP);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		View sliderView = LayoutInflater.from(themedContext).inflate(
 				R.layout.recalculation_angle_dialog, null, false);
 		builder.setView(sliderView);
 		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-			mode.setStrAngle(angleValue[0]);
+			appMode.setStrAngle(angleValue[0]);
 			updateAllSettings();
-			app.getRoutingHelper().onSettingsChanged(mode);
+			app.getRoutingHelper().onSettingsChanged(appMode);
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 
-		int selectedModeColor = mode.getProfileColor(nightMode);
+		int selectedModeColor = appMode.getProfileColor(nightMode);
 		setupAngleSlider(angleValue, sliderView, nightMode, selectedModeColor);
 		builder.show();
 	}

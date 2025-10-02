@@ -4,11 +4,12 @@ import static net.osmand.plus.quickaction.QuickActionIds.MAP_SOURCE_ACTION_ID;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -20,6 +21,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -53,7 +55,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected String getTitle(List<Pair<String, String>> filters) {
+	protected String getTitle(List<Pair<String, String>> filters, @NonNull Context ctx) {
 
 		if (filters.isEmpty()) return "";
 
@@ -101,7 +103,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
@@ -111,7 +113,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 					showChooseDialog(mapActivity);
 					return;
 				}
-				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				String nextItem = getNextSelectedItem(mapActivity.getApp());
 				executeWithParams(mapActivity, nextItem);
 			}
 		}
@@ -119,7 +121,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		OsmandSettings settings = mapActivity.getSettings();
 		if (params.equals(LAYER_OSM_VECTOR)) {
 			settings.MAP_ONLINE_DATA.set(false);
 			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), null);
@@ -170,7 +172,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				OsmandApplication app = activity.getMyApplication();
+				OsmandApplication app = activity.getApp();
 
 				LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
 
@@ -179,7 +181,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 				List<Map.Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
-				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 

@@ -4,12 +4,14 @@ import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.mapcontextmenu.TitleButtonController;
+import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -44,7 +46,7 @@ public class WptPtMenuController extends MenuController {
 		super(menuBuilder, pointDescription, mapActivity);
 		this.wpt = wpt;
 
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 
 		mapMarker = markersHelper.getMapMarker(wpt);
@@ -59,7 +61,7 @@ public class WptPtMenuController extends MenuController {
 			public void buttonPressed() {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					GpxSelectionHelper selectionHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
+					GpxSelectionHelper selectionHelper = mapActivity.getApp().getSelectedGpxHelper();
 					SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedGPXFile(wpt);
 					if (selectedGpxFile != null) {
 						SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wpt);
@@ -143,7 +145,7 @@ public class WptPtMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return PointImageUtils.getFromPoint(mapActivity.getMyApplication(),
+			return PointImageUtils.getFromPoint(mapActivity.getApp(),
 					wpt.getColor(ContextCompat.getColor(mapActivity, R.color.gpx_color_point)), false, wpt);
 		} else {
 			return null;
@@ -169,7 +171,7 @@ public class WptPtMenuController extends MenuController {
 	public String getTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxSelectionHelper helper = mapActivity.getMyApplication().getSelectedGpxHelper();
+			GpxSelectionHelper helper = mapActivity.getApp().getSelectedGpxHelper();
 			SelectedGpxFile selectedGpxFile = helper.getSelectedGPXFile(wpt);
 			StringBuilder sb = new StringBuilder();
 			sb.append(mapActivity.getString(R.string.shared_string_waypoint));
@@ -202,7 +204,9 @@ public class WptPtMenuController extends MenuController {
 		}
 	}
 
-	public static WptPtMenuController getInstance(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull WptPt wpt) {
-		return new WptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
+	public static WptPtMenuController getInstance(@NonNull MapActivity activity,
+			@NonNull PointDescription description, @NonNull WptPt wpt,
+			@Nullable PlaceDetailsObject detailsObject) {
+		return new WptPtMenuController(new WikivoyageWptPtMenuBuilder(activity, wpt, detailsObject), activity, description, wpt);
 	}
 }

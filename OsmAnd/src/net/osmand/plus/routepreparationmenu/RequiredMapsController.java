@@ -86,17 +86,21 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private void updateMapsToDownload() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
-		this.mapsToDownload = collectMapsForRegions(result.getMapsToDownload());
-		this.missingMaps = collectMapsForRegions(result.getMissingMaps());
-		List<WorldRegion> usedMapRegions = result.getUsedMaps();
-		this.usedMapsPresent = !Algorithms.isEmpty(usedMapRegions);
-		this.usedMaps = collectMapsForRegions(usedMapRegions);
+
+		List<WorldRegion> used = result != null ? result.getUsedMaps() : Collections.emptyList();
+		List<WorldRegion> missing = result != null ? result.getMissingMaps() : Collections.emptyList();
+		List<WorldRegion> download = result != null ? result.getMapsToDownload() : Collections.emptyList();
+
+		this.mapsToDownload = collectMapsForRegions(download);
+		this.missingMaps = collectMapsForRegions(missing);
+		this.usedMapsPresent = !Algorithms.isEmpty(used);
+		this.usedMaps = collectMapsForRegions(used);
 	}
 
 	private List<DownloadItem> collectMapsForRegions(@NonNull List<WorldRegion> regions) {
 		List<DownloadItem> result = new ArrayList<>();
-		DownloadResources resources = app.getDownloadThread().getIndexes();
 		if (!Algorithms.isEmpty(regions)) {
+			DownloadResources resources = app.getDownloadThread().getIndexes();
 			for (WorldRegion missingRegion : regions) {
 				for (DownloadItem downloadItem : resources.getDownloadItems(missingRegion)) {
 					if (downloadItem.getType() == DownloadActivityType.NORMAL_FILE) {

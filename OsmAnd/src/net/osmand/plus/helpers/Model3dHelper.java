@@ -12,6 +12,7 @@ import net.osmand.core.jni.ObjParser;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -70,16 +71,11 @@ public class Model3dHelper {
 
 	private void processCallback(@NonNull String modelName, @Nullable Model3D model, @Nullable CallbackWithObject<Model3D> callback) {
 		if (callback != null) {
-			if (pendingCallbacks.containsKey(modelName)) {
-				List<CallbackWithObject<Model3D>> callbacks = pendingCallbacks.get(modelName);
-				if (callbacks != null) {
-					callbacks.remove(callback);
-					if (!callbacks.isEmpty()) {
-						for (CallbackWithObject<Model3D> pendingCallback : callbacks) {
-							pendingCallback.processResult(model);
-						}
-					}
-					pendingCallbacks.remove(modelName);
+			List<CallbackWithObject<Model3D>> callbacks = pendingCallbacks.remove(modelName);
+			if (callbacks != null) {
+				callbacks.remove(callback);
+				for (CallbackWithObject<Model3D> pendingCallback : callbacks) {
+					pendingCallback.processResult(model);
 				}
 			}
 			callback.processResult(model);
@@ -114,7 +110,7 @@ public class Model3dHelper {
 		}
 
 		modelsInProgress.add(modelName);
-		new Load3dModelTask(dir, model -> {
+		OsmAndTaskManager.executeTask(new Load3dModelTask(dir, model -> {
 			if (model == null) {
 				failedModels.add(modelName);
 			} else {
@@ -123,7 +119,7 @@ public class Model3dHelper {
 			modelsInProgress.remove(modelName);
 			processCallback(modelName, model, callback);
 			return true;
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}));
 	}
 
 	@NonNull

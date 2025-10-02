@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayData;
@@ -21,9 +21,10 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 
-public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragment
+public abstract class CustomizableDialogFragment extends BaseFullScreenDialogFragment
 		implements IDialog, IAskDismissDialog, IAskRefreshDialogCompletely, IDialogNightModeInfoProvider {
 
 	private static final String PROCESS_ID_ATTR = "process_id";
@@ -37,6 +38,11 @@ public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragmen
 	}
 
 	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.manager = app.getDialogManager();
@@ -47,23 +53,6 @@ public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragmen
 			manager.register(processId, this);
 			refreshDisplayData();
 		}
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		updateNightMode();
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(getColor(getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Override
@@ -86,11 +75,6 @@ public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragmen
 
 	private void refreshDisplayData() {
 		displayData = manager.getDisplayData(processId);
-	}
-
-	@Override
-	public boolean isNightMode() {
-		return nightMode;
 	}
 
 	protected void onItemClicked(@NonNull DisplayItem item) {
@@ -120,10 +104,6 @@ public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragmen
 	}
 
 	protected abstract void updateContent(@NonNull View view);
-
-	protected int getStatusBarColorId() {
-		return ColorUtilities.getStatusBarColorId(nightMode);
-	}
 
 	@Nullable
 	protected BaseDialogController getController() {

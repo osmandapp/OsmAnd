@@ -8,6 +8,7 @@ import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
+import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
+import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
@@ -327,7 +334,7 @@ public class FavouritesHelper {
 			}
 		}
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 		return true;
 	}
@@ -366,25 +373,72 @@ public class FavouritesHelper {
 		}
 	}
 
-	public boolean addFavourite(@NonNull FavouritePoint point) {
-		return addFavourite(point, true, true, true, null);
+	public void copyToFavorites(@NonNull GpxDisplayGroup displayGroup, @NonNull String groupName) {
+		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
+		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
+
+		List<FavouritePoint> addedPoints = new ArrayList<>();
+		List<FavouritePoint> duplicatePoints = new ArrayList<>();
+		AddFavoriteOptions options = new AddFavoriteOptions().setLookupAddress(true);
+
+		for (GpxDisplayItem item : displayGroup.getDisplayItems()) {
+			if (item.locationStart != null) {
+				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
+				if (!Algorithms.isEmpty(item.description)) {
+					point.setDescription(item.description);
+				}
+				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
+					plugin.updateParkingPoint(point);
+				}
+				switch (favouritesHelper.addFavourite(point, options)) {
+					case ADDED -> addedPoints.add(point);
+					case DUPLICATE -> duplicatePoints.add(point);
+				}
+			}
+		}
+		favouritesHelper.saveCurrentPointsIntoFile(true);
+
+		if (!addedPoints.isEmpty()) {
+			app.showShortToastMessage(R.string.msg_gpx_waypoints_copied_to_favorites, addedPoints.size());
+		}
+		if (!duplicatePoints.isEmpty()) {
+			app.showShortToastMessage(R.string.msg_favorites_skipped_as_existing, duplicatePoints.size());
+		}
 	}
 
-	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave,
-	                            boolean saveAsync, @Nullable PointsGroup pointsGroup) {
+	public boolean addFavourite(@NonNull FavouritePoint point) {
+		return addFavourite(point, new AddFavoriteOptions().enableAll()) == AddFavoriteResult.ADDED;
+	}
+
+	@NonNull
+	public AddFavoriteResult addFavourite(@NonNull FavouritePoint point, @NonNull AddFavoriteOptions options) {
+		return addFavourite(point, null, options);
+	}
+
+	@NonNull
+	public AddFavoriteResult addFavourite(@NonNull FavouritePoint point,
+	                                      @Nullable PointsGroup pointsGroup,
+	                                      @NonNull AddFavoriteOptions options) {
 		if (Double.isNaN(point.getAltitude()) || point.getAltitude() == 0) {
 			initAltitude(point);
 		}
-		if (point.getName().isEmpty() && flatGroups.containsKey(point.getCategory())) {
-			return true;
+
+		String pointName = point.getName();
+		FavoriteGroup favoriteGroup = flatGroups.get(point.getCategory());
+		if (favoriteGroup != null && pointName.isEmpty()) {
+			return AddFavoriteResult.IGNORED;
 		}
-		if (lookupAddress && !point.isAddressSpecified()) {
+		if (favoriteGroup != null && favoriteGroup.containsPointByName(pointName)) {
+			return AddFavoriteResult.DUPLICATE;
+		}
+
+		if (options.lookupAddress && !point.isAddressSpecified()) {
 			lookupAddress(point);
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
 
 		FavoriteGroup group = getOrCreateGroup(point, pointsGroup);
-		if (!point.getName().isEmpty()) {
+		if (!pointName.isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
 				point.setColor(getParkingIconColor());
@@ -394,9 +448,9 @@ public class FavouritesHelper {
 			group.getPoints().add(point);
 			addFavouritePoint(point);
 		}
-		if (sortAndSave) {
+		if (options.sortAndSave) {
 			sortAll();
-			saveCurrentPointsIntoFile(saveAsync);
+			saveCurrentPointsIntoFile(options.saveAsync);
 		}
 
 		runSyncWithMarkers(group);
@@ -404,7 +458,7 @@ public class FavouritesHelper {
 			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		}
 
-		return true;
+		return AddFavoriteResult.ADDED;
 	}
 
 	public void lookupAddress(@NonNull FavouritePoint point) {
@@ -481,7 +535,7 @@ public class FavouritesHelper {
 	public boolean favouritePassed(@NonNull FavouritePoint point, boolean passed, boolean saveImmediately) {
 		point.setVisitedDate(passed ? System.currentTimeMillis() : 0);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 		FavoriteGroup group = getOrCreateGroup(point);
 		runSyncWithMarkers(group);
@@ -529,7 +583,7 @@ public class FavouritesHelper {
 			tmpFlatGroups.remove(group.getName());
 			flatGroups = tmpFlatGroups;
 			if (saveImmediately) {
-				saveCurrentPointsIntoFile(false);
+				saveCurrentPointsIntoFile(true);
 			}
 			removeFromMarkers(group);
 			return true;
@@ -699,7 +753,7 @@ public class FavouritesHelper {
 		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 	}
 
@@ -720,7 +774,7 @@ public class FavouritesHelper {
 		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 	}
 
@@ -742,7 +796,7 @@ public class FavouritesHelper {
 		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(true);
 		}
 	}
 
@@ -821,6 +875,7 @@ public class FavouritesHelper {
 			favoriteGroup.setColor(pointsGroup.getColor());
 			favoriteGroup.setIconName(pointsGroup.getIconName());
 			favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+			favoriteGroup.setVisible(!pointsGroup.isHidden());
 		}
 	}
 
@@ -837,5 +892,18 @@ public class FavouritesHelper {
 			favouritePoints.addAll(group.getPoints());
 		}
 		return favouritePoints;
+	}
+
+	public void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
+	                          BackgroundType backgroundType, @DrawableRes int iconId, @NonNull FavouritePoint favorite) {
+		favorite.setName(name);
+		favorite.setCategory(category);
+		favorite.setDescription(description);
+		favorite.setAddress(address);
+		favorite.setColor(color);
+		favorite.setBackgroundType(backgroundType);
+		favorite.setIconId(iconId);
+		app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+		addFavourite(favorite);
 	}
 }

@@ -81,17 +81,16 @@
 					android:background="@null"
 					android:clickable="false"
 					android:focusable="false"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingRight="@dimen/content_padding" />
+					android:paddingHorizontal="@dimen/content_padding" />
 
 			</FrameLayout>
 
-			<ImageView
+			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/pro_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:src="@drawable/img_button_pro_day"
-				android:layout_marginRight="@dimen/content_padding"
+				app:srcCompat="@drawable/img_button_pro_day"
+				android:layout_marginEnd="@dimen/content_padding"
 				android:visibility="gone"/>
 
 		</LinearLayout>

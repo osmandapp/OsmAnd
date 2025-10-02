@@ -12,6 +12,7 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Build;
 
@@ -40,6 +41,7 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.help.HelpArticlesHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
@@ -68,9 +70,13 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -98,12 +104,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 public class AppInitializer implements IProgress {
 
@@ -254,6 +263,12 @@ public class AppInitializer implements IProgress {
 		notifyEvent(INDEX_REGION_BOUNDARIES);
 	}
 
+	public void reInitPoiTypes() {
+		MapPoiTypes.setDefault(new MapPoiTypes(null));
+		app.poiTypes = MapPoiTypes.getDefaultNoInit();
+		initPoiTypes();
+	}
+
 	private void initPoiTypes() {
 		app.poiTypes.setForbiddenTypes(app.settings.getForbiddenTypes());
 		if (app.getAppPath(SETTINGS_DIR + "poi_types.xml").exists()) {
@@ -312,6 +327,7 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
+		app.searchHistoryHelper = startupInit(new SearchHistoryHelper(app), SearchHistoryHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
@@ -337,6 +353,8 @@ public class AppInitializer implements IProgress {
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
 		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app), ExplorePlacesOnlineProvider.class);
+		app.helpArticlesHelper = startupInit(new HelpArticlesHelper(app), HelpArticlesHelper.class);
+		app.clickableWayHelper = startupInit(new ClickableWayHelper(app), ClickableWayHelper.class);
 		initOpeningHoursParser();
 	}
 
@@ -401,7 +419,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	public static void loadRoutingFiles(@NonNull OsmandApplication app, @Nullable LoadRoutingFilesCallback callback) {
-		new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Map<String, RoutingConfiguration.Builder>>() {
 
 			@Override
 			protected Map<String, RoutingConfiguration.Builder> doInBackground(Void... voids) {
@@ -454,7 +472,7 @@ public class AppInitializer implements IProgress {
 				return defaultAttributes;
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 
@@ -494,7 +512,11 @@ public class AppInitializer implements IProgress {
 		try {
 			notifyStart();
 			startBgTime = System.currentTimeMillis();
-			app.getRendererRegistry().initRenderers();
+			if (isFirstTime()) {
+				importBundledSettingsSync();
+				notifyEvent(BUNDLED_OSF_IMPORTED);
+			}
+			app.getRendererRegistry().initRenderers(warnings);
 			notifyEvent(INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
@@ -524,8 +546,10 @@ public class AppInitializer implements IProgress {
 			notifyEvent(SEARCH_UI_CORE_INITIALIZED);
 			checkLiveUpdatesAlerts();
 			connectToBRouter();
+			app.helpArticlesHelper.loadArticles();
+			notifyEvent(HELP_ARTICLES_INITIALIZED);
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			LOG.error(e);
 			warnings.add(e.getMessage());
 		} finally {
 			appInitializing = false;
@@ -591,7 +615,7 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	public void initOpenglAsync(@Nullable InitOpenglListener listener) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 
 			@Override
 			protected Void doInBackground(Void... voids) {
@@ -605,7 +629,7 @@ public class AppInitializer implements IProgress {
 					listener.onOpenglInitialized();
 				}
 			}
-		}.executeOnExecutor(initOpenglSingleThreadExecutor);
+		}, initOpenglSingleThreadExecutor);
 	}
 
 	private void initOpenGl() {
@@ -673,6 +697,73 @@ public class AppInitializer implements IProgress {
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}
 		notifyEvent(NATIVE_INITIALIZED);
+	}
+
+	private void importBundledSettingsSync() {
+		AssetManager assets = app.getAssets();
+		String[] osfFiles;
+		try {
+			osfFiles = assets.list("osf");
+			if (osfFiles == null) {
+				return;
+			}
+		} catch (IOException e) {
+			return;
+		}
+		Arrays.sort(osfFiles);
+
+		File cacheDir = app.getCacheDir();
+		for (String filename : osfFiles) {
+			String assetOsfPath = "osf/" + filename;
+			File tempOsfFile = new File(cacheDir, filename + ".tmp");
+			try {
+				ResourceManager.copyAssets(assets, assetOsfPath, tempOsfFile, null);
+				importBundledOsf(tempOsfFile, 30);
+			} catch (IOException e) {
+				LOG.error("Error importing bundled settings file: " + assetOsfPath, e);
+			}
+			LOG.info("Imported bundled settings file: " + filename);
+		}
+	}
+
+	private void importBundledOsf(@NonNull File file, int timeoutSec) {
+		final Semaphore semaphore = new Semaphore(0);
+		long start = System.currentTimeMillis();
+		app.getFileSettingsHelper().collectSettings(file, "", 1, (succeed, empty, items) -> {
+			if (succeed && !items.isEmpty()) {
+				for (SettingsItem item : items) {
+					item.setShouldReplace(true);
+				}
+				app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
+							@Override
+							public void onImportFinished(boolean succeed, boolean needRestart,
+														 @NonNull List<SettingsItem> importedItems) {
+								if (!succeed) {
+									LOG.error("Import bundled settings failed for " + file.getName());
+								}
+								LOG.info("Import bundled settings done for " + file.getName() + " in " + (System.currentTimeMillis() - start) + " ms");
+								semaphore.release();
+							}
+						}
+				);
+			} else {
+				LOG.error("Error importing bundled settings file: " + file.getName() + " succeed=" + succeed
+						+ " items=" + items.size() + " empty=" + empty);
+				semaphore.release();
+			}
+		}
+		);
+
+		try {
+			boolean acquired = semaphore.tryAcquire(timeoutSec, TimeUnit.SECONDS);
+			if (!acquired) {
+				LOG.warn("Import bundled settings (Semaphore) still running after "
+						+ timeoutSec + " seconds, continuing startup.");
+			}
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			LOG.error("Interrupted while waiting for settings import (Semaphore)", e);
+		}
 	}
 
 	public void notifyStart() {

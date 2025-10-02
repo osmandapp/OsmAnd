@@ -73,7 +73,7 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 	@Override
 	protected void onContinueButtonClickAction() {
 		if (adapter.getData().isEmpty()) {
-			app.showShortToastMessage(getString(R.string.shared_string_nothing_selected));
+			app.showShortToastMessage(R.string.shared_string_nothing_selected);
 		} else {
 			importItems();
 		}

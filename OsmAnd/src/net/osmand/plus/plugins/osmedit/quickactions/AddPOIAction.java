@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -57,8 +58,10 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
@@ -133,28 +136,25 @@ public class AddPOIAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
-			super.execute(mapActivity);
+			super.execute(mapActivity, params);
 		}
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
+		OsmandSettings settings = mapActivity.getSettings();
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin == null) return;
 
 		Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
 		node.replaceTags(getTagsFromParams());
-		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getMyApplication());
+		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getApp());
 		if (Boolean.parseBoolean(getParams().get(KEY_DIALOG)) || editPoiData.hasEmptyValue()) {
 			Entity newEntity = editPoiData.getEntity();
-			EditPoiDialogFragment editPoiDialogFragment =
-					EditPoiDialogFragment.createInstance(newEntity, true, getTagsFromParams());
-			editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
-					EditPoiDialogFragment.TAG);
+			EditPoiDialogFragment.showInstance(mapActivity, newEntity, true, getTagsFromParams());
 		} else {
 			OpenstreetmapUtil mOpenstreetmapUtil;
 			if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
@@ -226,15 +226,14 @@ public class AddPOIAction extends SelectMapLocationAction {
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_add_poi_layout, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_add_poi_layout, parent, false);
 		setupPointLocationView(view.findViewById(R.id.point_location_container), mapActivity);
 
-		OsmandApplication application = mapActivity.getMyApplication();
-		boolean isLightTheme = application.getSettings().isLightContent();
+		OsmandApplication app = mapActivity.getApp();
+		boolean isLightTheme = !app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
-		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
+		Drawable deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
 
 		LinearLayout editTagsLineaLayout = view.findViewById(R.id.editTagsList);
 
@@ -242,7 +241,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		HashSet<String> tagKeys = new HashSet<>();
 		HashSet<String> valueKeys = new HashSet<>();
-		for (AbstractPoiType abstractPoiType : getAllTranslatedNames(application).values()) {
+		for (AbstractPoiType abstractPoiType : getAllTranslatedNames(app).values()) {
 			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 		}
 		addPoiToStringSet(getPoiTypes(mapActivity).getOtherMapCategory(), tagKeys, valueKeys);
@@ -273,13 +272,13 @@ public class AddPOIAction extends SelectMapLocationAction {
 			public void afterTextChanged(Editable s) {
 				String tp = s.toString();
 				putTagIntoParams(POI_TYPE_TAG, tp);
-				PoiCategory category = getCategory(application);
+				PoiCategory category = getCategory(app);
 
 				if (category != null) {
 					poiTypeTextInputLayout.setHint(category.getTranslation());
 				}
 
-				String add = application.getString(R.string.shared_string_add);
+				String add = app.getString(R.string.shared_string_add);
 
 				if (title != null) {
 
@@ -288,7 +287,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 							|| title.getText().toString().equals((add + " "))) {
 
 						if (!tp.isEmpty()) {
-							title.setText(application.getString(R.string.ltr_or_rtl_combine_via_space, add, tp));
+							title.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, add, tp));
 							prevType = title.getText().toString();
 						}
 					}
@@ -314,10 +313,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 				if (expandButtonPressed) {
 					PoiCategory category = getCategory(mapActivity);
 					PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(mapActivity).getOtherPoiCategory();
-					PoiSubTypeDialogFragment f =
-							PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
-					f.setOnItemSelectListener(poiTypeEditText::setText);
-					f.show(mapActivity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
+					PoiSubTypeDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), tempPoiCategory, poiTypeEditText::setText);
 					return true;
 				}
 			}
@@ -328,14 +324,14 @@ public class AddPOIAction extends SelectMapLocationAction {
 
 		ImageButton onlineDocumentationButton = view.findViewById(R.id.onlineDocumentationButton);
 		onlineDocumentationButton.setOnClickListener(v -> {
-			String url = application.getString(R.string.url_osm_wiki_map_features);
+			String url = app.getString(R.string.url_osm_wiki_map_features);
 			Uri uri = Uri.parse(url);
 			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 			AndroidUtils.startActivityIfSafe(mapActivity, intent);
 		});
 
 		int activeColor = ColorUtilities.getActiveColor(mapActivity, !isLightTheme);
-		onlineDocumentationButton.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
+		onlineDocumentationButton.setImageDrawable(mapActivity.getApp().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
 
 		parent.addView(view);
 	}

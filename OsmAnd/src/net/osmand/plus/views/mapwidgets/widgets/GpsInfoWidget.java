@@ -22,7 +22,6 @@ public class GpsInfoWidget extends SimpleWidget {
 		super(mapActivity, GPS_INFO, customId, widgetsPanel);
 		setIcons(GPS_INFO);
 		setText(null, null);
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override

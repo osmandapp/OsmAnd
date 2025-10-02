@@ -79,6 +79,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		setupAccessibilityPermissionPref();
 		setupAccessibilityModePref();
 		setupSpeechRatePref();
+		setupPinchZoomMagnificationPref();
 
 		setupSmartAutoAnnouncePref();
 		setupAutoAnnouncePeriodPref();
@@ -217,6 +218,11 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		directionHapticFeedback.setDescription(getString(R.string.access_direction_haptic_feedback_descr));
 	}
 
+	private void setupPinchZoomMagnificationPref() {
+		SwitchPreferenceEx pinchZoomMagnification = findPreference(settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.getId());
+		pinchZoomMagnification.setDescription(getString(R.string.access_pinch_zoom_magnification_descr));
+	}
+
 	private void setupCopyProfileSettingsPref() {
 		Preference copyProfilePrefs = findPreference(COPY_PLUGIN_SETTINGS);
 		copyProfilePrefs.setIcon(getActiveIcon(R.drawable.ic_action_copy));
@@ -295,6 +301,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 				String prefId = preference.getKey();
 				if (!settings.ACCESSIBILITY_MODE.getId().equals(prefId)
 						&& !settings.SPEECH_RATE.getId().equals(prefId)
+						&& !settings.ACCESSIBILITY_PINCH_ZOOM_MAGNIFICATION.getId().equals(prefId)
 						&& !RESET_TO_DEFAULT.equals(prefId)
 						&& !COPY_PLUGIN_SETTINGS.equals(prefId)
 						&& !ACCESSIBILITY_OPTIONS.equals(prefId))

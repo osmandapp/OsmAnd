@@ -5,7 +5,7 @@
     <string name="poi_emergency">Спешна помощ</string>
     <string name="poi_transportation">Транспорт</string>
     <string name="poi_road_obstacle">Препятствие на пътя</string>
-    <string name="poi_filling_station">Станция за зареждане</string>
+    <string name="poi_filling_station">Бензиностанция</string>
     <string name="poi_personal_transport">Личен транспорт</string>
     <string name="poi_public_transport">Обществен транспорт</string>
     <string name="poi_air_transport">Въздушен транспорт</string>
@@ -146,7 +146,7 @@
     <string name="poi_traffic_signals">Светофар</string>
     <string name="poi_vehicle_inspection">ГТП</string>
     <string name="poi_car_wash">Автомивка</string>
-    <string name="poi_fuel">Бензиностанция</string>
+    <string name="poi_fuel">Бензиностанция;Газостанция</string>
     <string name="poi_fuel_diesel">Дизел</string>
     <string name="poi_fuel_gtl_diesel">GTL дизел</string>
     <string name="poi_fuel_hgv_diesel">Дизел за камиони</string>
@@ -166,7 +166,7 @@
     <string name="poi_fuel_e20">E20</string>
     <string name="poi_fuel_lh2">Течен водород</string>
     <string name="poi_fuel_electricity">Електричество</string>
-    <string name="poi_electricity_combined_charging">Станция за зареждане;Станция за зареждане на електромобили;Станция за зареждане на EV;Точка за зареждане;Зарядна станция;Електронна заряднс станция;Оборудване за зсхранване на електромобили</string>
+    <string name="poi_electricity_combined_charging">Станция за зареждане;Станция за зареждане на електромобили;Станция за зареждане на EV;Точка за зареждане;Зарядна станция;Електронна зарядна станция;Оборудване за захранване на електромобили</string>
     <string name="poi_compressed_air">Сгъстен въздух</string>
     <string name="poi_parking">Паркинг</string>
     <string name="poi_motorcycle_parking">Паркинг за мотоциклети</string>
@@ -550,7 +550,7 @@
     <string name="poi_automated">Автоматизация</string>
     <string name="poi_skate">Магазин за скейтбордове</string>
     <string name="poi_blowhole">Дупка</string>
-    <string name="poi_hazard_additional_avalanche">Опасност: лавини</string>
+    <string name="poi_hazard_additional_avalanche">Лавини</string>
     <string name="poi_toilets_hands_drying_no">Изсушаване на ръце: не</string>
     <string name="poi_toilets_hands_drying_yes">Изсушаване на ръце: да</string>
     <string name="poi_gender_segregated_no">Разделение по пол: не</string>
@@ -697,4 +697,30 @@
     <string name="poi_dog_sled_no">Кучешки впряг: не</string>
     <string name="poi_atv_yes">АТВ: да</string>
     <string name="poi_atv_no">АТВ: не</string>
+    <string name="poi_hazard_additional_minefield">Минно поле</string>
+    <string name="poi_hazard_additional_contamination">Замърсяване</string>
+    <string name="poi_defibrillator_location">Местоположение</string>
+    <string name="poi_changing_table_yes">Да;Маса за повиване: да</string>
+    <string name="poi_changing_table_no">Не;Маса за повиване: не</string>
+    <string name="poi_changing_table_limited">Ограничено;Маса за повиване: ограничено</string>
+    <string name="poi_changing_table_location_room">Местоположение на масата за повиване: стая</string>
+    <string name="poi_changing_table_location_male_toilet">Местоположение на масата за повиване: мъжка тоалетна</string>
+    <string name="poi_changing_table_location_female_toilet">Местоположение на масата за повиване: женска тоалетна</string>
+    <string name="poi_changing_table_location_unisex_toilet">Местоположение на масата за повиване: обща тоалетна</string>
+    <string name="poi_changing_table_count">Брой на масите за повиване</string>
+    <string name="poi_changing_table_fee_yes">Такса маса за повиване: да</string>
+    <string name="poi_changing_table_fee_no">Такса маса за повиване: не</string>
+    <string name="poi_hazard_additional_flood">Наводнение</string>
+    <string name="poi_rtsa_scale_1a">1A</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
+    <string name="poi_rtsa_scale_1b">1B</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
+    <string name="poi_rtsa_scale_2a">2A</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2A*</string>
+    <string name="poi_rtsa_scale_2b">2B</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
+    <string name="poi_rtsa_scale_3a">3A</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3A*</string>
+    <string name="poi_rtsa_scale_3b">3B</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
 </resources>

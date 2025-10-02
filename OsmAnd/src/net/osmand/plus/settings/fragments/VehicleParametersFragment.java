@@ -66,7 +66,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 				showDimensionsCategory(parameters, routerProfile, derivedProfile);
 				showFuelCategory(parameters, routerProfile);
-				showOtherCategory(parameters, routerProfile);
+				showOtherCategory(parameters, routerProfile, derivedProfile);
 			}
 		} else {
 			setupCategoryPref(R.string.shared_string_other);
@@ -74,7 +74,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void showOtherCategory(@NonNull Map<String, RoutingParameter> parameters, @Nullable GeneralRouterProfile routerProfile) {
+	private void showOtherCategory(@NonNull Map<String, RoutingParameter> parameters, @Nullable GeneralRouterProfile routerProfile,
+	                               @Nullable String derivedProfile) {
 		boolean shouldShowOtherCategory = parameters.get(MAX_AXLE_LOAD) != null
 				|| parameters.get(WEIGHT_RATING) != null
 				|| routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT;
@@ -82,8 +83,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			addDividerPref();
 			setupCategoryPref(R.string.shared_string_other);
 		}
-		setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
-		setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
+
+		setupVehiclePropertyPref(parameters.get(MAX_AXLE_LOAD), routerProfile, derivedProfile);
+		setupVehiclePropertyPref(parameters.get(WEIGHT_RATING), routerProfile, derivedProfile);
 		if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
 			setupDefaultSpeedPref();
 		}
@@ -306,6 +308,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			case VEHICLE_WIDTH -> getPersistentPrefIcon(R.drawable.ic_action_width_limit);
 			case VEHICLE_LENGTH -> getPersistentPrefIcon(R.drawable.ic_action_length_limit);
 			case MOTOR_TYPE -> getPersistentPrefIcon(R.drawable.ic_action_fuel);
+			case MAX_AXLE_LOAD -> getPersistentPrefIcon(R.drawable.ic_action_hgv_axle_load);
+			case WEIGHT_RATING -> getPersistentPrefIcon(R.drawable.ic_action_hgv_full_load);
 			default -> null;
 		};
 	}

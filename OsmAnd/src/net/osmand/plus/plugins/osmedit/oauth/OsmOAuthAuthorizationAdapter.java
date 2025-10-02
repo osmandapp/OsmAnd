@@ -17,6 +17,7 @@ import com.github.scribejava.core.model.Verb;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -29,8 +30,6 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class OsmOAuthAuthorizationAdapter {
@@ -99,9 +98,7 @@ public class OsmOAuthAuthorizationAdapter {
 	}
 
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
-        Uri uri = Uri.parse(url);
-        Context context = root.getContext();
-        AndroidUtils.openUrl(context, uri, nightMode);
+        AndroidUtils.openUrl(root.getContext(), url, nightMode);
     }
 
     public void performGetRequest(String url, OAuthAsyncRequestCallback<Response> callback) {
@@ -119,7 +116,7 @@ public class OsmOAuthAuthorizationAdapter {
     }
 
     public void authorize(String oauthVerifier, OsmOAuthHelper helper) {
-        new AuthorizeAsyncTask(helper).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, oauthVerifier);
+	    OsmAndTaskManager.executeTask(new AuthorizeAsyncTask(helper), oauthVerifier);
     }
 
 

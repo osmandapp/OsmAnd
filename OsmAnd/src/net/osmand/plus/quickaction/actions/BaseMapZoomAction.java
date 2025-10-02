@@ -1,12 +1,13 @@
 package net.osmand.plus.quickaction.actions;
 
+import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
@@ -14,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseMapZoomAction extends QuickAction {
 
@@ -33,23 +35,22 @@ public abstract class BaseMapZoomAction extends QuickAction {
 	@Override
 	public boolean onKeyDown(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		if (isContinuous()) {
-			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
-			return true;
+			onActionSelected(mapActivity, event);
 		}
-		return super.onKeyDown(mapActivity, keyCode, event);
+		return true;
 	}
 
 	@Override
 	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		if (!isContinuous()) {
-			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
+			return super.onKeyUp(mapActivity, keyCode, event);
 		}
-		return super.onKeyUp(mapActivity, keyCode, event);
+		return true;
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
+		changeZoom(mapActivity.getApp(), shouldIncrement() ? 1 : -1);
 	}
 
 	private void changeZoom(@NonNull OsmandApplication app, int zoomStep) {
@@ -61,9 +62,8 @@ public abstract class BaseMapZoomAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(getQuickActionDescription()));
 		parent.addView(view);
 	}

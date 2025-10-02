@@ -77,7 +77,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:text="@string/shared_string_time_span"
+					android:text="@string/duration"
 					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size" />
 

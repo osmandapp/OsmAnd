@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -85,16 +86,14 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 		items.add(preferenceBtn[0]);
 
 		DividerItem dividerItem = new DividerItem(ctx);
-		int topMargin = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_subtitle_margin);
-		int startMargin = ctx.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int topMargin = getDimensionPixelSize(R.dimen.context_menu_subtitle_margin);
+		int startMargin = getDimensionPixelSize(R.dimen.content_padding);
 		dividerItem.setMargins(startMargin, topMargin, 0, 0);
 		items.add(dividerItem);
-		items.add(new DividerSpaceItem(ctx, ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_small)));
+		items.add(new DividerSpaceItem(ctx, getDimensionPixelSize(R.dimen.content_padding_small)));
 
 		sliderView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.bottom_sheet_item_slider_with_two_text, null);
 		AndroidUiHelper.updateVisibility(sliderView, !keepScreenOnEnabled);
-
-		Context themedCtx = UiUtilities.getThemedContext(ctx, nightMode);
 
 		TextView tvSliderTitle = sliderView.findViewById(android.R.id.title);
 		tvSliderTitle.setText(getString(R.string.wake_time));
@@ -107,13 +106,10 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 		slider.setStepSize(1);
 		slider.setValueFrom(1);
 		slider.setValueTo(listPreference.getEntryValues().length - 1);
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-				if (fromUser) {
-					selectedEntryIndex = (int) value;
-					tvSliderSummary.setText(listPreference.getEntries()[selectedEntryIndex]);
-				}
+		slider.addOnChangeListener((sliderView, value, fromUser) -> {
+			if (fromUser) {
+				selectedEntryIndex = (int) value;
+				tvSliderSummary.setText(listPreference.getEntries()[selectedEntryIndex]);
 			}
 		});
 
@@ -133,9 +129,9 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		for (BaseBottomSheetItem item : items) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				BottomSheetItemWithCompoundButton itemWithCompoundButton = (BottomSheetItemWithCompoundButton) item;
+			if (item instanceof BottomSheetItemWithCompoundButton itemWithCompoundButton) {
 				itemWithCompoundButton.getCompoundButton().setSaveEnabled(false);
 			}
 		}
@@ -185,17 +181,19 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 	                                   @Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
 	                                   boolean profileDependent) {
 		try {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, prefId);
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+				Bundle args = new Bundle();
+				args.putString(PREFERENCE_ID, prefId);
 
-			WakeTimeBottomSheet fragment = new WakeTimeBottomSheet();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setApplyQueryType(applyQueryType);
-			fragment.setTargetFragment(target, 0);
-			fragment.setProfileDependent(profileDependent);
-			fragment.show(fragmentManager, TAG);
+				WakeTimeBottomSheet fragment = new WakeTimeBottomSheet();
+				fragment.setArguments(args);
+				fragment.setUsedOnMap(usedOnMap);
+				fragment.setAppMode(appMode);
+				fragment.setApplyQueryType(applyQueryType);
+				fragment.setTargetFragment(target, 0);
+				fragment.setProfileDependent(profileDependent);
+				fragment.show(fragmentManager, TAG);
+			}
 			return true;
 		} catch (RuntimeException e) {
 			return false;

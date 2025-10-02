@@ -62,7 +62,6 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
 	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
-	public static final int TOP_PLACES_LIMIT = 15;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
@@ -205,6 +204,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public boolean isWikiFilter() {
 		return filterId.startsWith(STD_PREFIX + WIKI_PLACE) || isTopWikiFilter();
+	}
+
+	public boolean isRatingSorted() {
+		return isWikiFilter();
 	}
 
 	public boolean isTopWikiFilter() {
@@ -388,8 +391,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom, ResultMatcher<Amenity> matcher) {
 		Set<Amenity> results = new HashSet<>();
-		List<Amenity> tempResults = currentSearchResult;
-		if (tempResults != null) {
+		if (currentSearchResult != null) {
+			List<Amenity> tempResults = new ArrayList<>(currentSearchResult);
 			for (Amenity a : tempResults) {
 				LatLon l = a.getLocation();
 				if (l != null && l.getLatitude() <= top && l.getLatitude() >= bottom
@@ -411,7 +414,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locs, int poiSearchDeviationRadius) {
-		return app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius, this, wrapResultMatcher(null));
+		return app.getResourceManager().getAmenitySearcher().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius, this, wrapResultMatcher(null));
 	}
 
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
@@ -489,7 +492,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public PoiFilterUtils.AmenityNameFilter getKeyNameFilter(String key, String value) {
 		return amenity -> {
 			String val = amenity.getAdditionalInfo(key);
-			return val != null && val.equals(value);
+			return val != null && val.equalsIgnoreCase(value);
 		};
 	}
 

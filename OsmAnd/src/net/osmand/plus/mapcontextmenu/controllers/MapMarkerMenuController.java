@@ -36,7 +36,7 @@ public class MapMarkerMenuController extends MenuController {
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
-					MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
+					MapMarkersHelper markersHelper = activity.getApp().getMapMarkersHelper();
 					MapMarker marker = getMapMarker();
 					if (marker.history) {
 						markersHelper.restoreMarkerFromHistory(marker, 0);
@@ -57,7 +57,7 @@ public class MapMarkerMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						OsmandApplication app = activity.getMyApplication();
+						OsmandApplication app = activity.getApp();
 						MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 						markersHelper.moveMarkerToTop(getMapMarker());
 						activity.getContextMenu().close();
@@ -118,7 +118,7 @@ public class MapMarkerMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), mapMarker.colorIndex);
+			return MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getApp(), mapMarker.colorIndex);
 		} else {
 			return null;
 		}

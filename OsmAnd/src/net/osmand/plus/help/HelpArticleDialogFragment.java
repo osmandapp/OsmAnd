@@ -2,6 +2,8 @@ package net.osmand.plus.help;
 
 import static net.osmand.IndexConstants.ARTICLES_DIR;
 import static net.osmand.IndexConstants.HELP_ARTICLE_FILE_EXT;
+import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
+import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -17,24 +19,21 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class HelpArticleDialogFragment extends DialogFragment {
+public class HelpArticleDialogFragment extends BaseFullScreenDialogFragment {
 
 	private static final String TAG = HelpArticleDialogFragment.class.getSimpleName();
 
 	private static final String ARTICLE_URL_KEY = "url";
 	private static final String ARTICLE_TITLE_KEY = "name";
-
-	private OsmandApplication app;
 
 	private String title;
 	private String articleUrl;
@@ -42,12 +41,6 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = (OsmandApplication) requireActivity().getApplication();
-
-		boolean nightMode = !app.getSettings().isLightContent();
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-
 		Bundle args = getArguments();
 		if (args != null) {
 			articleUrl = args.getString(ARTICLE_URL_KEY);
@@ -58,11 +51,10 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_help_article, container, false);
-
+		updateNightMode();
+		View view = inflate(R.layout.fragment_help_article, container, false);
 		setupToolbar(view);
 		setupWebView(view, savedInstanceState);
-
 		return view;
 	}
 
@@ -138,7 +130,9 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		return new File(dir, title + HELP_ARTICLE_FILE_EXT);
+		String name = articleUrl.replace(SERVER_URL, "");
+		name = ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).replaceAll("_");
+		return new File(dir, name + HELP_ARTICLE_FILE_EXT);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull String url, @NonNull String title) {

@@ -10,6 +10,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
+import net.osmand.search.AmenitySearcher;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -45,8 +46,11 @@ public class PoiUIFilterDataProvider {
             return searchWikiOnline(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
                     filter.wrapResultMatcher(matcher));
         } else {
-            return app.getResourceManager().searchAmenities(filter, filter.additionalFilter, topLatitude, leftLongitude,
-                    bottomLatitude, rightLongitude, zoom, true, filter.wrapResultMatcher(matcher));
+            AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+            AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+            return amenitySearcher.searchAmenities(filter, filter.additionalFilter, topLatitude, leftLongitude,
+                    bottomLatitude, rightLongitude, zoom, true, settings.fileVisibility(),
+                    filter.wrapResultMatcher(matcher));
         }
     }
 

@@ -2,16 +2,18 @@ package net.osmand.plus.quickaction;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_COORDINATE_GRID_ACTION_ID;
 
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 
 public class ShowHideCoordinatesGridAction extends QuickAction {
@@ -24,7 +26,7 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 			.nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
-	private CoordinatesGridSettings gridSettings;
+	private transient CoordinatesGridSettings gridSettings;
 
 	public ShowHideCoordinatesGridAction() {
 		super(TYPE);
@@ -35,16 +37,15 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
+		OsmandApplication app = mapActivity.getApp();
 		requireGridHelper(app).toggleEnable();
 		mapActivity.refreshMap();
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(
 				R.string.quick_action_showhide_coordinates_grid_descr);
 		parent.addView(view);

@@ -1,14 +1,12 @@
 package net.osmand.plus.plugins.odb.dialogs
 
 import android.content.Intent
-import android.net.Uri
 import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
@@ -21,6 +19,9 @@ import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnDeviceNameChangedCallback
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
+import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
@@ -65,10 +66,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 			UiUtilities.createClickableSpannable(docsLinkText, docsLinkText) { _: Void? ->
 				val activity = activity
 				if (activity != null) {
-					AndroidUtils.openUrl(
-						activity,
-						Uri.parse(getString(R.string.docs_obd_sensors)),
-						nightMode)
+					AndroidUtils.openUrl(activity, R.string.docs_obd_sensors, nightMode)
 				}
 				false
 			}
@@ -89,6 +87,15 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		connectInstructions.text = String.format(
 			app.getString(R.string.connect_obd_instructions_step4),
 			app.getString(R.string.external_device_details_connect))
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			view.fitsSystemWindows = false
+		}
+	}
+
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar))
+		return collection
 	}
 
 	private fun setupPairSensorButton(view: View, @StringRes titleId: Int) {
@@ -126,6 +133,9 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	override fun setupToolbar(view: View) {
 		super.setupToolbar(view)
 		val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			toolbar.fitsSystemWindows = true
+		}
 		toolbar.setOnMenuItemClickListener { item: MenuItem ->
 			if (item.itemId == R.id.action_add) {
 				showPairNewSensorBottomSheet()
@@ -162,15 +172,15 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	private fun updatePairedSensorsList() {
 		if (view != null) {
 			vehicleMetricsPlugin.let { plugin ->
-				val connectedDevice = plugin.getConnectedDeviceInfo()
-				val connectedDevices: List<BTDeviceInfo> =
-					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
+				var connectedDevice = plugin.getConnectedDeviceInfo()
+				val connectedDevices: MutableList<BTDeviceInfo> =
+					if (connectedDevice == null) ArrayList() else mutableListOf(connectedDevice)
 				val usedDevices = plugin.getUsedOBDDevicesList().toMutableList()
 				if (settings.SIMULATE_OBD_DATA.get()) {
 					usedDevices.add(BTDeviceInfo("Simulation Device", ""))
 				}
 				val disconnectedDevices =
-					usedDevices.filter { it.address != connectedDevice?.address }
+					usedDevices.filter { !(it.address == connectedDevice?.address && it.isBLE == connectedDevice?.isBLE) }
 						.toMutableList()
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 					emptyView?.visibility = View.VISIBLE
@@ -220,11 +230,11 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		ForgetOBDDeviceDialog.showInstance(
 			requireActivity().supportFragmentManager,
 			this,
-			device.address)
+			device.address, device.isBLE)
 	}
 
-	override fun onForgetSensorConfirmed(deviceId: String) {
-		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId)
+	override fun onForgetSensorConfirmed(deviceId: String, isBLE: Boolean) {
+		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId, isBLE)
 		updatePairedSensorsList()
 	}
 
@@ -259,7 +269,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
 				OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
 			}
-			app.showShortToastMessage(app.getString(textId, deviceInfo.name))
+			app.showShortToastMessage(textId, deviceInfo.name)
 		}
 		updatePairedSensorsList()
 	}

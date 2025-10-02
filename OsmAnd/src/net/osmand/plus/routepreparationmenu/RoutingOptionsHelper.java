@@ -41,6 +41,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -117,7 +118,7 @@ public class RoutingOptionsHelper {
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
 		int selected = -1;
-		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
+		String selectedValue = mapActivity.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
 		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
@@ -169,7 +170,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void applyVoiceProvider(MapActivity mapActivity, String provider, boolean applyAllModes) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
 		OsmandPreference<String> VP = app.getSettings().VOICE_PROVIDER;
 		if (applyAllModes) {
@@ -224,9 +225,10 @@ public class RoutingOptionsHelper {
 		if (rp != null) {
 			if (gpxParam.id == R.string.gpx_option_reverse_route) {
 				rp.setReverse(selected);
+				rp.setReverseStrategy(settings.GPX_REVERSE_STRATEGY.get());
 				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints(app);
-				if (ps.size() > 0) {
+				if (!ps.isEmpty()) {
 					Location firstLoc = ps.get(0);
 					Location lastLoc = ps.get(ps.size() - 1);
 					TargetPoint pointToStart = tg.getPointToStart();
@@ -597,7 +599,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightModeForMapControls();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 
 	private List<String> getRoutingParametersForProfileType(ApplicationMode appMode) {

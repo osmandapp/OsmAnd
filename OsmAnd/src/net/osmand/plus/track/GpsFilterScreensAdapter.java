@@ -52,7 +52,7 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	                               @NonNull Fragment target,
 	                               @NonNull FilteredSelectedGpxFile filteredSelectedGpxFile,
 	                               boolean nightMode) {
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.mapActivity = mapActivity;
 		this.target = target;
 		this.filteredSelectedGpxFile = filteredSelectedGpxFile;

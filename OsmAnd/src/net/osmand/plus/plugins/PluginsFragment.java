@@ -25,7 +25,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
@@ -38,7 +38,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import org.apache.commons.logging.Log;
 
-public class PluginsFragment extends BaseOsmAndFragment implements PluginStateListener {
+public class PluginsFragment extends BaseFullScreenFragment implements PluginStateListener {
 
 	private static final Log log = PlatformUtil.getLog(PluginsFragment.class);
 
@@ -47,17 +47,12 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	public static final String OPEN_PLUGINS = "open_plugins";
 
 	private PluginsListAdapter adapter;
-	private LayoutInflater themedInflater;
 	private boolean wasDrawerDisabled;
 	private ProgressBar progressBar;
 
 	@Override
 	public int getStatusBarColorId() {
 		return ColorUtilities.getStatusBarColorId(nightMode);
-	}
-
-	public LayoutInflater getThemedInflater() {
-		return themedInflater;
 	}
 
 	@Override
@@ -67,9 +62,8 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				FragmentActivity activity = getActivity();
-				if (activity instanceof MapActivity) {
+				if (activity instanceof MapActivity mapActivity) {
 					dismissImmediate();
-					MapActivity mapActivity = (MapActivity) activity;
 					mapActivity.launchPrevActivityIntent();
 				}
 			}
@@ -79,8 +73,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.plugins, container, false);
+		View view = inflate(R.layout.plugins, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
 
@@ -98,7 +91,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 		adapter = new PluginsListAdapter(this, requireContext());
 
-		ListView listView = view.findViewById(R.id.plugins_list);
+		ListView listView = view.findViewById(R.id.scroll_view);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener((parent, view1, position, id) -> {
 			Object tag = view1.getTag();
@@ -132,8 +125,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		Activity activity = getActivity();
 		PluginsHelper.checkInstalledMarketPlugins(app, activity);
 		adapter.notifyDataSetChanged();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = ((MapActivity) activity);
+		if (activity instanceof MapActivity mapActivity) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();

@@ -16,20 +16,22 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.backup.BackupUtils;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -40,7 +42,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
+public abstract class BaseSettingsListFragment extends BaseFullScreenFragment implements OnItemSelectedListener {
 
 	public static final String SETTINGS_LIST_TAG = "settings_list_tag";
 
@@ -86,24 +88,24 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View root = themedInflater.inflate(R.layout.fragment_import, container, false);
+		View root = inflate(R.layout.fragment_import, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 
 		selectedItemsSize = root.findViewById(R.id.file_size);
 		itemsSizeContainer = root.findViewById(R.id.file_size_container);
 		expandableList = root.findViewById(R.id.list);
-		buttonsContainer = root.findViewById(R.id.buttons_container);
+		buttonsContainer = root.findViewById(R.id.bottom_buttons_container);
 
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		ViewCompat.setNestedScrollingEnabled(expandableList, true);
 
-		header = themedInflater.inflate(R.layout.list_item_description_header, null);
+		header = inflate(R.layout.list_item_description_header);
 		headerDivider = header.findViewById(R.id.divider);
 		headerShadow = header.findViewById(R.id.card_bottom_divider);
 		expandableList.addHeaderView(header);
 
-		availableSpaceContainer = themedInflater.inflate(R.layout.enough_space_warning_card, null);
+		availableSpaceContainer = inflate(R.layout.enough_space_warning_card);
 		availableSpaceDescr = availableSpaceContainer.findViewById(R.id.warning_descr);
 
 		continueBtn = root.findViewById(R.id.continue_button);
@@ -124,6 +126,14 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		updateAvailableSpace();
 
 		return root;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.list));
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	protected abstract void onContinueButtonClickAction();
@@ -167,7 +177,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 
 	private void setupToolbar(Toolbar toolbar) {
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
+		toolbar.setNavigationIcon(getPaintedIcon(R.drawable.ic_action_close, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
 			if (hasSelectedData()) {
@@ -191,7 +201,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	}
 
 	protected void updateAvailableSpace() {
-		long calculatedSize = ExportSettingsAdapter.calculateItemsSize(adapter.getData());
+		long calculatedSize = BackupUtils.calculateItemsSize(adapter.getData());
 		if (calculatedSize != 0) {
 			selectedItemsSize.setText(AndroidUtils.formatSize(app, calculatedSize));
 
@@ -233,16 +243,6 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 			expandableList.removeHeaderView(availableSpaceContainer);
 			AndroidUiHelper.updateVisibility(headerShadow, true);
 			AndroidUiHelper.updateVisibility(headerDivider, false);
-		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
 		}
 	}
 

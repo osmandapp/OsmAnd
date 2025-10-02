@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBar;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -50,7 +51,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			progress.setOnCancelListener(dialog -> task.cancel(true));
 			progress.setCancelable(true);
 
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			OsmAndTaskManager.executeTask(task);
 			setIntent(null);
 		}
 	}
@@ -79,7 +80,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		@Override
 		protected List<GeoParsedPoint> doInBackground(Void... nothing) {
 			try {
-				while (getMyApplication().isApplicationInitializing()) {
+				while (app.isApplicationInitializing()) {
 					Thread.sleep(200);
 				}
 				Uri uri = intent.getData();
@@ -105,8 +106,6 @@ public class GeoIntentActivity extends OsmandListActivity {
 				return;
 			}
 			try {
-				OsmandApplication app = getMyApplication();
-				OsmandSettings settings = app.getSettings();
 				GeoParsedPoint point = points.get(0);
 				if (point != null && point.isGeoPoint()) {
 					PointDescription pd = new PointDescription(point.getLatitude(), point.getLongitude());

@@ -3,12 +3,14 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.DISPLAY_POSITION_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -16,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.UiUtilities;
 
 public class DisplayPositionAction extends QuickAction {
 
@@ -39,7 +42,7 @@ public class DisplayPositionAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		CommonPreference<Integer> pref = getPreference(mapActivity);
 		int currentState = pref.get();
 		pref.set((currentState == 2) ? 0 : currentState + 1);
@@ -52,9 +55,8 @@ public class DisplayPositionAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-		View view = inflater.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		TextView tvDescription = view.findViewById(R.id.text);
 		tvDescription.setText(R.string.quick_action_toggle_preference);
 		parent.addView(view);

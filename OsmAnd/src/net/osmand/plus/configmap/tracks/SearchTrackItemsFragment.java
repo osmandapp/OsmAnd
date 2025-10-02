@@ -25,6 +25,8 @@ import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.ScreenPositionData;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -61,6 +63,13 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 	@LayoutRes
 	protected int getLayoutId() {
 		return R.layout.gpx_search_items_fragment;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.recycler_view));
+		return collection;
 	}
 
 	protected void setupFragment(View view) {

@@ -15,33 +15,38 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnAttachStateChangeListener;
-import android.view.WindowInsetsController;
-import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.annotation.UiContext;
+import androidx.annotation.*;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.utils.InsetsUtils;
 
 /**
  * Created by dummy on 28.01.15.
  */
 public class AndroidUiHelper {
+
+	public static final int ANIMATION_DURATION = 300;
 
 	private static final int ORIENTATION_0 = 0;
 	private static final int ORIENTATION_90 = 3;
@@ -158,14 +163,113 @@ public class AndroidUiHelper {
 		}
 	}
 
-	public static boolean isXLargeDevice(@NonNull Activity ctx) {
-		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
-		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+	public static boolean isTablet(@NonNull Context context) {
+		Configuration config = context.getResources().getConfiguration();
+		return config.smallestScreenWidthDp >= 600;
 	}
 
 	public static boolean isOrientationPortrait(@NonNull @UiContext Context context) {
 		int orientation = getScreenOrientation(context);
 		return orientation == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+	}
+
+	@ColorInt
+	public static int setStatusBarColor(@NonNull Activity activity, @ColorInt int color) {
+		return setStatusBarColor(activity.getWindow(), color);
+	}
+
+	@ColorInt
+	public static int setStatusBarColor(@NonNull Window window, @ColorInt int color) {
+		int previousColor = -1;
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			View scrim = getOrCreateScrim(window, R.id.status_bar_scrim, R.layout.status_bar_scrim);
+			if (scrim != null) {
+				if (scrim.getBackground() instanceof ColorDrawable drawable) {
+					previousColor = drawable.getColor();
+				}
+				scrim.setBackgroundColor(color);
+			}
+		} else {
+			previousColor = window.getStatusBarColor();
+			window.setStatusBarColor(color);
+		}
+		return previousColor;
+	}
+
+	public static void setNavigationBarColor(@NonNull Activity activity, @ColorInt int color) {
+		setNavigationBarColor(activity.getWindow(), color);
+	}
+
+	public static void setNavigationBarColor(@NonNull Window window, @ColorInt int color) {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			View scrim = getOrCreateScrim(window, R.id.navigation_bar_scrim, R.layout.navigation_bar_scrim);
+			if (scrim != null) {
+				scrim.setBackgroundColor(color);
+			}
+		} else {
+			window.setNavigationBarColor(color);
+		}
+	}
+
+	@Nullable
+	private static View getOrCreateScrim(@NonNull Window window, @IdRes int scrimId, @LayoutRes int layoutId) {
+		View scrim = window.findViewById(scrimId);
+		if (scrim == null) {
+			View decorView = window.getDecorView();
+			if (decorView instanceof ViewGroup content) {
+				LayoutInflater inflater = LayoutInflater.from(window.getContext());
+				scrim = inflater.inflate(layoutId, content, false);
+				content.addView(scrim);
+
+				setupSystemBarScrims(window);
+			}
+		}
+		return scrim;
+	}
+
+	private static void setupSystemBarScrims(@NonNull Window window) {
+		View decorView = window.getDecorView();
+		ViewCompat.setOnApplyWindowInsetsListener(decorView, (v, insets) -> {
+			processSystemBarScrims(insets, v);
+			return insets;
+		});
+		ViewCompat.requestApplyInsets(decorView);
+	}
+
+	public static void processSystemBarScrims(@NonNull WindowInsetsCompat insets, @NonNull View view) {
+		View statusBarScrim = view.findViewById(R.id.status_bar_scrim);
+		if (statusBarScrim != null) {
+			Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars()
+					| WindowInsetsCompat.Type.displayCutout()
+			);
+			ViewGroup.LayoutParams params = statusBarScrim.getLayoutParams();
+			if (params.height != statusBarInsets.top) {
+				params.height = statusBarInsets.top;
+				statusBarScrim.setLayoutParams(params);
+			}
+		}
+		View navBarScrim = view.findViewById(R.id.navigation_bar_scrim);
+		if (navBarScrim != null) {
+			Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) navBarScrim.getLayoutParams();
+			if (navBarInsets.bottom > 0) {
+				params.height = navBarInsets.bottom;
+				params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+				params.gravity = Gravity.BOTTOM;
+			} else if (navBarInsets.left > 0) {
+				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+				params.width = navBarInsets.left;
+				params.gravity = Gravity.START;
+			} else if (navBarInsets.right > 0) {
+				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+				params.width = navBarInsets.right;
+				params.gravity = Gravity.END;
+			} else {
+				params.height = 0;
+				params.width = 0;
+			}
+			navBarScrim.setLayoutParams(params);
+		}
 	}
 
 	public static void setStatusBarContentColor(@Nullable View view, boolean nightMode) {
@@ -213,6 +317,19 @@ public class AndroidUiHelper {
 				}
 			}
 		});
+	}
+
+	public static void crossFadeDrawables(@NonNull ImageView imageView, @NonNull Drawable... drawables) {
+		if (drawables.length < 2) {
+			if (drawables.length == 1) {
+				imageView.setImageDrawable(drawables[0]);
+			}
+			return;
+		}
+
+		TransitionDrawable transitionDrawable = new TransitionDrawable(drawables);
+		imageView.setImageDrawable(transitionDrawable);
+		transitionDrawable.startTransition(ANIMATION_DURATION);
 	}
 
 	public static void updateActionBarVisibility(@Nullable AppCompatActivity activity, boolean visible) {

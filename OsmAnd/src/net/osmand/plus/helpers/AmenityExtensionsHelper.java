@@ -1,36 +1,39 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.MAPILLARY;
 import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
 import static net.osmand.data.Amenity.WIKIPEDIA;
-import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.search.AmenitySearcher;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AmenityExtensionsHelper {
+	public static final double MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW = 1.0;
 
 	private static final Log LOG = PlatformUtil.getLog(AmenityExtensionsHelper.class);
 
@@ -42,23 +45,21 @@ public class AmenityExtensionsHelper {
 
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+		List<String> names = Collections.singletonList(nameEn);
+		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 
-		for (Amenity amenity : amenities) {
-			if (Algorithms.stringsEqual(amenity.toStringEn(), nameEn)) {
-				return amenity;
-			}
-		}
-		return null;
+		Amenity requestAmenity = new Amenity();
+		requestAmenity.setLocation(new LatLon(lat, lon));
+		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
+		return searcher.searchDetailedAmenity(request, settings);
 	}
 
 	@NonNull
-	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> savedExtensions,
-	                                                       @Nullable String amenityOriginName,
-	                                                       double lat, double lon) {
+	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> extensions,
+			@Nullable Amenity amenity) {
 		Map<String, String> updatedExtensions = new HashMap<>();
-		for (Map.Entry<String, String> entry : savedExtensions.entrySet()) {
+		for (Map.Entry<String, String> entry : extensions.entrySet()) {
 			String key = entry.getKey();
 			String value = entry.getValue();
 			if (key.startsWith(AMENITY_PREFIX)) {
@@ -69,11 +70,8 @@ public class AmenityExtensionsHelper {
 				updatedExtensions.put(key, value);
 			}
 		}
-		if (amenityOriginName != null) {
-			Amenity amenity = findAmenity(amenityOriginName, lat, lon);
-			if (amenity != null) {
-				updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
-			}
+		if (amenity != null) {
+			updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
 		}
 		return updatedExtensions;
 	}
@@ -105,19 +103,37 @@ public class AmenityExtensionsHelper {
 	}
 
 	@Nullable
-	public static String getAmenityDistanceFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
-		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
-		float km = Algorithms.parseFloatSilently(distanceTag, 0);
+	public static String getAmenityMetricsFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+		float distMeters = getAmenityDistanceMeters(amenity);
+		float upMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_UP), 0);
+		float downMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_DOWN), 0);
 
-		if (km > 0) {
-			if (!distanceTag.contains(".")) {
-				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
-				// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
-				km /= 1000;
+		String dist = OsmAndFormatter.getFormattedDistance(distMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		String uphill = OsmAndFormatter.getFormattedDistance(upMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		String downhill = OsmAndFormatter.getFormattedDistance(downMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+
+		List<String> metrics = new ArrayList<>();
+		if (distMeters > 0) {
+			metrics.add(dist);
+			if (upMeters > 0 && upMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+				metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);
 			}
-			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+			if (downMeters > 0 && downMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+				metrics.add(TrkSegment.SegmentSlopeType.DOWNHILL.getSymbol() + downhill);
+			}
 		}
 
-		return null;
+		return metrics.isEmpty() ? null : String.join(" ", metrics);
+	}
+
+	private static float getAmenityDistanceMeters(Amenity amenity) {
+		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
+		float km = Algorithms.parseFloatSilently(distanceTag, 0);
+		if (km > 0 && !distanceTag.contains(".")) {
+			// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
+			// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
+			km /= 1000;
+		}
+		return km * 1000;
 	}
 }

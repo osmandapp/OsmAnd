@@ -54,8 +54,7 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
-		View view = themedInflater.inflate(R.layout.bottom_sheet_track_group_list, null);
+		View view = inflate(R.layout.bottom_sheet_track_group_list);
 
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.sort_by);
@@ -83,8 +82,7 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 		@NonNull
 		@Override
 		public SortModeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
-			return new SortModeViewHolder(inflater.inflate(R.layout.list_item_two_icons, parent, false));
+			return new SortModeViewHolder(inflate(R.layout.list_item_two_icons, parent, false));
 		}
 
 		@Override
@@ -100,8 +98,7 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 			holder.itemView.setOnClickListener(view -> {
 				Fragment target = getTargetFragment();
 				int adapterPosition = holder.getAdapterPosition();
-				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof SortTracksListener) {
-					SortTracksListener sortTracksListener = (SortTracksListener) target;
+				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof SortTracksListener sortTracksListener) {
 					boolean sortSubFolders = false;
 					Bundle bundle = getArguments();
 					if (bundle != null && bundle.containsKey(SORT_SUB_FOLDERS_KEY)){

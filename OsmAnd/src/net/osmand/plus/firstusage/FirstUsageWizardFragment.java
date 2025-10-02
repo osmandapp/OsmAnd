@@ -36,17 +36,12 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.*;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -58,6 +53,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -77,7 +73,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.*;
 
-public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
+public class FirstUsageWizardFragment extends BaseFullScreenFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents, StorageSelectionListener, FirstUsageActionsListener {
 
 	public static final String TAG = FirstUsageWizardFragment.class.getSimpleName();
@@ -114,16 +110,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private ProgressBar wizardProgressBarCircle;
 	private FragmentActivity activity;
 
-	enum WizardType {
-		SEARCH_LOCATION,
-		NO_INTERNET,
-		NO_LOCATION,
-		SEARCH_MAP,
-		MAP_FOUND,
-		MAP_DOWNLOAD,
-		MAP_DOWNLOADED,
-	}
-
 	public void setWizardType(WizardType wizardType, boolean updateWizardView) {
 		this.wizardType = wizardType;
 		if (updateWizardView && isAdded()) {
@@ -157,7 +143,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		wizardButton = view.findViewById(R.id.wizard_action_button);
 		wizardProgressBarCircle = view.findViewById(R.id.wizard_progress_bar_icon);
 
-		if (!AndroidUiHelper.isOrientationPortrait(activity) && !AndroidUiHelper.isXLargeDevice(activity)) {
+		if (!AndroidUiHelper.isOrientationPortrait(activity) && !AndroidUiHelper.isTablet(activity)) {
 			TextView wizardDescription = view.findViewById(R.id.wizard_description);
 			wizardDescription.setMinimumHeight(0);
 			wizardDescription.setMinHeight(0);
@@ -284,7 +270,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				deviceNightMode = false;
 				break;
 			case Configuration.UI_MODE_NIGHT_UNDEFINED:
-				deviceNightMode = !app.getSettings().isLightContent();
+				deviceNightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 				break;
 		}
 	}
@@ -312,18 +298,12 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	private void setupActionButton() {
 		ImageButton otherButton = view.findViewById(R.id.actions_button);
-		FirstUsageActionsBottomSheet bottomSheetDialogFragment = new FirstUsageActionsBottomSheet();
-		bottomSheetDialogFragment.setTargetFragment(this, 0);
-		otherButton.setOnClickListener(view -> bottomSheetDialogFragment.show(activity.getSupportFragmentManager(), null));
+		otherButton.setOnClickListener(v -> FirstUsageActionsBottomSheet.showInstance(activity, this));
 	}
 
 	private void setupLocationButton() {
 		ImageButton locationButton = view.findViewById(R.id.location_button);
-		FirstUsageLocationBottomSheet bottomSheetDialogFragment = new FirstUsageLocationBottomSheet();
-		bottomSheetDialogFragment.setTargetFragment(this, 0);
-		locationButton.setOnClickListener(view -> {
-			bottomSheetDialogFragment.show(activity.getSupportFragmentManager(), null);
-		});
+		locationButton.setOnClickListener(v -> FirstUsageLocationBottomSheet.showInstance(activity, this));
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -336,7 +316,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					if (app.isUserAndroidIdAllowed()) {
 						pms.put("aid", app.getUserAndroidId());
 					}
-					new AsyncTask<Void, Void, String>() {
+					OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 						@Override
 						protected String doInBackground(Void... params) {
@@ -376,7 +356,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 								showNoLocationWizard(true);
 							}
 						}
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					});
 				} else {
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						ActivityCompat.requestPermissions(activity,
@@ -812,20 +792,11 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		}
 	}
 
-	@Nullable
-	protected MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
-
 	private void logError(String msg, Throwable e) {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	public static boolean showFragment(@NonNull FragmentActivity activity) {
+	public static boolean showInstance(@NonNull FragmentActivity activity) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (!wizardClosed && AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			FirstUsageWizardFragment fragment = new FirstUsageWizardFragment();

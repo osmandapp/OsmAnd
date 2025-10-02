@@ -33,6 +33,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -90,6 +92,13 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
+	}
+
+	@Override
 	protected void updateContent(boolean progress) {
 		updateHeader();
 		updateToolbar();
@@ -114,7 +123,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	private View createFeatureItemView(@NonNull OsmAndFeature feature) {
-		View view = themedInflater.inflate(R.layout.purchase_dialog_list_item, listContainer, false);
+		View view = inflate(R.layout.purchase_dialog_list_item, listContainer, false);
 		view.setTag(feature);
 		view.setOnClickListener(v -> selectFeature(feature));
 		bindFeatureItem(view, feature, false);

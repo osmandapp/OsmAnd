@@ -25,7 +25,7 @@ public class MenuObjectUtils {
 	                                                     @NonNull List<RenderedObject> objects,
 	                                                     @NonNull LatLon latLon) {
 		List<MenuObject> result = new ArrayList<>();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		IContextMenuProvider contextObject = app.getOsmandMap().getMapLayers().getPoiMapLayer();
 		for (RenderedObject object : objects) {
 			result.add(createMenuObject(object, contextObject, latLon, mapActivity));
@@ -33,14 +33,15 @@ public class MenuObjectUtils {
 		return result;
 	}
 
-	public static MenuObject createMenuObject(@NonNull Object selectedObj,
-	                                          @Nullable IContextMenuProvider contextObject,
-	                                          @NonNull LatLon latLon, @Nullable MapActivity mapActivity) {
+	@NonNull
+	public static MenuObject createMenuObject(@NonNull Object object,
+			@Nullable IContextMenuProvider provider, @NonNull LatLon latLon,
+			@Nullable MapActivity activity) {
 		LatLon ll = null;
 		PointDescription pointDescription = null;
-		if (contextObject != null) {
-			ll = contextObject.getObjectLocation(selectedObj);
-			pointDescription = contextObject.getObjectName(selectedObj);
+		if (provider != null) {
+			ll = provider.getObjectLocation(object);
+			pointDescription = provider.getObjectName(object);
 		}
 		if (ll == null) {
 			ll = latLon;
@@ -48,7 +49,7 @@ public class MenuObjectUtils {
 		if (pointDescription == null) {
 			pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
 		}
-		return new MenuObject(ll, pointDescription, selectedObj, mapActivity);
+		return new MenuObject(ll, pointDescription, object, activity);
 	}
 
 	@NonNull

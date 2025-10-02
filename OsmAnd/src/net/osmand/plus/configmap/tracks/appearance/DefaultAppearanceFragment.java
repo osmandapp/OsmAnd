@@ -2,13 +2,11 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController.PROCESS_ID;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -21,18 +19,20 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.configmap.tracks.ConfirmDefaultAppearanceBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
+public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
 
 	private static final String TAG = DefaultAppearanceFragment.class.getSimpleName();
 
@@ -40,6 +40,11 @@ public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implemen
 	private DefaultAppearanceController controller;
 
 	private View applyButton;
+
+	@Override
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
 
 	@ColorRes
 	public int getStatusBarColorId() {
@@ -49,24 +54,13 @@ public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implemen
 
 	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		updateNightMode();
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId) {
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
 			@Override
 			public void onBackPressed() {
 				dismiss();
 			}
 		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ColorUtilities.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
 	}
 
 	@Override
@@ -81,13 +75,20 @@ public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implemen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.fragment_tracks_default_appearance, container);
+		View view = inflate(R.layout.fragment_tracks_default_appearance, container, false);
 
 		setupToolbar(view);
 		setupCards(view);
 		setupApplyButton(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	@Override
@@ -160,7 +161,7 @@ public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implemen
 		controller.getWidthCardController().setOnNeedScrollListener(y -> {
 			View view = getView();
 			if (view != null) {
-				int bottomVisibleY = view.findViewById(R.id.buttons_container).getTop();
+				int bottomVisibleY = view.findViewById(R.id.bottom_buttons_container).getTop();
 				if (y > bottomVisibleY) {
 					NestedScrollView scrollView = view.findViewById(R.id.scroll_view);
 					int diff = y - bottomVisibleY;

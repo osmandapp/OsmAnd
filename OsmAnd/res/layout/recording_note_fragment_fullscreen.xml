@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<net.osmand.plus.widgets.FrameLayoutEx
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recording_note_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +32,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/buttonsContainer"
+        android:id="@+id/bottom_buttons_container"
         android:layout_width="match_parent"
         android:layout_height="108dp"
         android:layout_gravity="bottom"
@@ -197,4 +197,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</net.osmand.plus.widgets.FrameLayoutEx>

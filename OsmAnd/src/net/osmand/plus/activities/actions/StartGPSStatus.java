@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -35,7 +35,7 @@ public class StartGPSStatus {
 
 	public StartGPSStatus(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 	}
 	
@@ -139,6 +139,6 @@ public class StartGPSStatus {
 	}
 
 	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightModeForMapControls();
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }

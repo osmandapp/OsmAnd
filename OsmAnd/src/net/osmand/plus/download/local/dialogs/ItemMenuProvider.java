@@ -8,7 +8,6 @@ import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +29,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -70,7 +70,7 @@ public class ItemMenuProvider implements MenuProvider {
 		this.activity = activity;
 		this.fragment = fragment;
 		this.nightMode = fragment.isNightMode();
-		app = activity.getMyApplication();
+		app = activity.getApp();
 		uiUtilities = app.getUIUtilities();
 	}
 
@@ -115,10 +115,6 @@ public class ItemMenuProvider implements MenuProvider {
 		}
 		LocalItemType type = item.getType();
 		if (item instanceof LocalItem localItem) {
-			boolean backuped = localItem.isBackuped(app);
-			if (type.isBackupSupported() || backuped) {
-				addOperationItem(menu, localItem, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
-			}
 			if (type.isUpdateSupported()) {
 				menuItem = menu.add(0, R.string.shared_string_update, Menu.NONE, R.string.shared_string_update);
 				menuItem.setIcon(getIcon(R.drawable.ic_action_update, colorId));
@@ -127,6 +123,10 @@ public class ItemMenuProvider implements MenuProvider {
 					updateItem(localItem);
 					return true;
 				});
+			}
+			boolean backuped = localItem.isBackuped(app);
+			if (type.isBackupSupported() || backuped) {
+				addOperationItem(menu, localItem, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
 			}
 			if (type == TILES_DATA) {
 				menuItem = menu.add(0, R.string.calculate_size, Menu.NONE, R.string.calculate_size);
@@ -184,7 +184,7 @@ public class ItemMenuProvider implements MenuProvider {
 			menuItem.setOnMenuItemClickListener(i -> {
 				FragmentManager manager = fragment.getFragmentManager();
 				if (manager != null) {
-					DeleteConfirmationBottomSheet.showInstance(manager, fragment, item);
+					DeleteConfirmationDialogController.showDialog(app, manager, item, fragment);
 				}
 				return true;
 			});
@@ -202,8 +202,7 @@ public class ItemMenuProvider implements MenuProvider {
 	}
 
 	public void performOperation(@NonNull LocalItem localItem, @NonNull OperationType type) {
-		LocalOperationTask task = new LocalOperationTask(app, type, fragment);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
+		OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, fragment), localItem);
 	}
 
 	private void exportItem(@NonNull LocalItem localItem, @NonNull ExportType settingsType) {
@@ -223,7 +222,7 @@ public class ItemMenuProvider implements MenuProvider {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 			LocalOperationTask task = new LocalOperationTask(app, CLEAR_TILES_OPERATION, fragment);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
+			OsmAndTaskManager.executeTask(task, localItem);
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName(context)));

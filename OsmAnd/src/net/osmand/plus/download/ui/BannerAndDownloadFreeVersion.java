@@ -67,12 +67,12 @@ public class BannerAndDownloadFreeVersion {
 
 		if (isFinished) {
 			progressLayout.setOnClickListener(null);
-			updateDescriptionTextWithSize(activity.getMyApplication(), progressLayout);
+			updateDescriptionTextWithSize(activity.getApp(), progressLayout);
 			freeVersionBanner.updateFreeVersionBanner();
 		} else {
 			freeVersionBanner.setMinimizedFreeVersionBanner(true);
 			freeVersionBanner.updateAvailableDownloads();
-			progressLayout.setOnClickListener(v -> new ActiveDownloadsDialogFragment().show(activity.getSupportFragmentManager(), "dialog"));
+			progressLayout.setOnClickListener(v -> ActiveDownloadsDialogFragment.showInstance(activity));
 
 			String message = progressTask.getDescription();
 			boolean indeterminate = progressTask.isIndeterminate();

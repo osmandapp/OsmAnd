@@ -874,10 +874,6 @@
     <string name="poi_entrance_main">hłowny zachod</string>
     <string name="poi_entrance">zachod</string>
     <string name="poi_entrance_exit">wuchod</string>
-    <string name="poi_route_hiking_iwn_poi">mjezynarodna pućowanska šćežka</string>
-    <string name="poi_route_hiking_nwn_poi">nacionalna pućowanska šćežka</string>
-    <string name="poi_route_hiking_rwn_poi">regionalna pućowanska šćežka</string>
-    <string name="poi_route_hiking_lwn_poi">lokalna pućowanska šćežka</string>
     <string name="poi_opening_hours">wotewrjenske časy</string>
     <string name="poi_description">wopis</string>
     <string name="poi_phone">telefon</string>

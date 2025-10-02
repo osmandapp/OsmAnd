@@ -1808,11 +1808,6 @@
     <string name="poi_abandoned_poi">كائن مهجور</string>
     <string name="poi_abandoned">مهجور</string>
     <string name="poi_collection_times">أوقات الجمع</string>
-    <string name="poi_route_hiking_ref_poi">مرجع مسار المشي</string>
-    <string name="poi_route_hiking_lwn_poi">طريق المشي المحلي</string>
-    <string name="poi_route_hiking_rwn_poi">مسار المشي الإقليمي</string>
-    <string name="poi_route_hiking_nwn_poi">طريق المشي الوطني</string>
-    <string name="poi_route_hiking_iwn_poi">طريق المشي/هايكنق الدولي</string>
     <string name="poi_lwn_ref">عقدة شبكة المشي المحلية</string>
     <string name="poi_rwn_ref">عقدة شبكة المشي الإقليمية</string>
     <string name="poi_nwn_ref">عقدة شبكة المشي القومية</string>
@@ -3547,7 +3542,7 @@
     <string name="poi_water_utility">مكتب مرافق المياه</string>
     <string name="poi_barbecue_grill">شواية: نعم</string>
     <string name="poi_outpost">نقطة تسليم المحل</string>
-    <string name="poi_whitewater_rapid_name">اسم منحدرات النهر</string>
+    <string name="poi_rapids_name">اسم منحدرات النهر</string>
     <string name="poi_pottery">فخار</string>
     <string name="poi_flooring">متجر الأرضيات</string>
     <string name="poi_socket_schuko_output_low">منخفض</string>

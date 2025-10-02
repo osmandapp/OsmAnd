@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
@@ -79,6 +81,14 @@ public abstract class GroupEditorFragment extends EditorFragment {
 		setupCategoryNameEditText();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	private void setupCategoryNameTextBox() {

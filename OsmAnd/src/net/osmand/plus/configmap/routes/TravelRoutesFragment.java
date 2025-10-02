@@ -25,13 +25,16 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -42,7 +45,7 @@ import net.osmand.util.Algorithms;
 import java.util.Collections;
 import java.util.List;
 
-public class TravelRoutesFragment extends BaseOsmAndFragment {
+public class TravelRoutesFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = TravelRoutesFragment.class.getSimpleName();
 	private static final String TRAVEL_TYPE_KEY = "travel_type_key";
@@ -99,7 +102,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.travel_routes_fragment, container, false);
+		View view = inflate(R.layout.travel_routes_fragment, container, false);
 
 		showHideTopShadow(view);
 		setupHeader(view);
@@ -153,7 +156,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		int disabledColor = AndroidUtils.getColorFromAttr(itemView.getContext(), R.attr.default_icon_color);
 
 		title.setText(name);
-		icon.setImageDrawable(getPaintedContentIcon(imageId, selected ? selectedColor : disabledColor));
+		icon.setImageDrawable(getPaintedIcon(imageId, selected ? selectedColor : disabledColor));
 		if (description != null) {
 			switch (descriptionType) {
 				case HIDDEN:
@@ -431,8 +434,16 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		return emptyView;
 	}
 
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_container).landscapeLeftSided(true));
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
+	}
+
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager.beginTransaction()
 					.replace(R.id.content, new TravelRoutesFragment(), TAG)
 					.commitAllowingStateLoss();

@@ -3,12 +3,13 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.SWITCH_PROFILE_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.gson.Gson;
@@ -23,6 +24,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
@@ -52,7 +54,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getTitle(List<String> filters) {
+	protected String getTitle(List<String> filters, @NonNull Context ctx) {
 		List<String> profileNames = new ArrayList<>();
 		for (String key : filters) {
 			ApplicationMode appMode = getModeForKey(key);
@@ -91,7 +93,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		List<String> profiles = loadListFromParams();
 		if (profiles.size() == 0) {
 			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.profiles_for_action_not_found);
@@ -103,7 +105,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			showChooseDialog(mapActivity);
 			return;
 		}
-		String nextProfile = getNextSelectedItem(mapActivity.getMyApplication());
+		String nextProfile = getNextSelectedItem(mapActivity.getApp());
 		executeWithParams(mapActivity, nextProfile);
 	}
 
@@ -111,7 +113,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		ApplicationMode appMode = getModeForKey(params);
 		if (appMode != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			app.getSettings().setApplicationMode(appMode);
 
 			MapLayers mapLayers = mapActivity.getMapLayers();
@@ -119,10 +121,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			if (selectedButton != null) {
 				app.getMapButtonsHelper().setQuickActionFabState(selectedButton.getButtonState(), true);
 			}
-
-			String message = String.format(mapActivity.getString(
-					R.string.application_profile_changed), appMode.toHumanString());
-			AndroidUtils.getApp(mapActivity).showShortToastMessage(message);
+			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.application_profile_changed, appMode.toHumanString());
 		}
 	}
 
@@ -208,7 +207,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	protected int getItemIconColor(OsmandApplication app, String item) {
 		ApplicationMode appMode = getModeForKey(item);
 		if (appMode != null) {
-			boolean nightMode = !app.getSettings().isLightContent();
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
 			return appMode.getProfileColor(nightMode);
 		}
 		return super.getItemIconColor(app, item);
@@ -216,15 +215,12 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 	@Override
 	protected View.OnClickListener getOnAddBtnClickListener(MapActivity activity, Adapter adapter) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CreateEditActionDialog targetFragment = (CreateEditActionDialog) activity
-						.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
-				List<String> selectedProfilesKeys = new ArrayList<>(adapter.getItemsList());
-				SelectMultipleProfilesBottomSheet.showInstance(activity, targetFragment,
-						selectedProfilesKeys, selectedProfilesKeys, false);
-			}
+		return v -> {
+			CreateEditActionDialog targetFragment = (CreateEditActionDialog) activity
+					.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
+			List<String> selectedProfilesKeys = new ArrayList<>(adapter.getItemsList());
+			SelectMultipleProfilesBottomSheet.showInstance(activity, targetFragment,
+					selectedProfilesKeys, selectedProfilesKeys, false);
 		};
 	}
 

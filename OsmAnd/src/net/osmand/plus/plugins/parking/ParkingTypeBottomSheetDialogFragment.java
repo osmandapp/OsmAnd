@@ -2,7 +2,10 @@ package net.osmand.plus.plugins.parking;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
@@ -11,6 +14,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.utils.AndroidUtils;
 
 
 public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -61,11 +65,25 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				plugin.setParkingPosition(latitude, longitude, false);
 			}
 			mapActivity.refreshMap();
-			mapActivity.getMyApplication().getFavoritesHelper().setParkingPoint(plugin.getParkingPosition(), null, plugin.getParkingTime(), plugin.isParkingEventAdded());
+			mapActivity.getApp().getFavoritesHelper().setParkingPoint(plugin.getParkingPosition(), null, plugin.getParkingTime(), plugin.isParkingEventAdded());
 			if (!limited) {
 				plugin.showContextMenuIfNeeded(mapActivity, true);
 			}
 			dismiss();
 		}
 	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, double lat, double lon) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putDouble(LAT_KEY, lat);
+			args.putDouble(LON_KEY, lon);
+
+			ParkingTypeBottomSheetDialogFragment fragment = new ParkingTypeBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
 }

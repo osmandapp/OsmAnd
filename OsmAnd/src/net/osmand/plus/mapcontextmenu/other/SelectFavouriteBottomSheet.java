@@ -2,14 +2,9 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,15 +13,13 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.settings.enums.FavoritesSortMode;
 import net.osmand.util.MapUtils;
 
 import java.text.Collator;
@@ -34,167 +27,125 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFragment
-		implements OsmAndLocationListener, OsmAndCompassListener {
+public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFragment implements OsmAndLocationListener, OsmAndCompassListener {
 
 	public static final String TAG = SelectFavouriteBottomSheet.class.getSimpleName();
 
-	private static final String IS_SORTED = "sorted";
-	private static final String SORTED_BY_TYPE = "sorted_by_type";
+	protected FavouritesHelper favouritesHelper;
+	private final List<FavouritePoint> points = new ArrayList<>();
 
-	private static final int SORT_TYPE_DIST = 1;
-	private static final int SORT_TYPE_NAME = 2;
-	private static final int SORT_TYPE_CATEGORY = 3;
+	private RecyclerView recyclerView;
+	private FavouritesAdapter adapter;
 
-	protected OsmandApplication app;
-	protected FavouritesHelper mFavouritesHelper;
-	private final List<FavouritePoint> mPoints = new ArrayList<>();
+	protected float lastHeading;
+	protected Location location;
+	protected boolean locationUpdateStarted;
+	protected FavoritesSortMode sortMode = FavoritesSortMode.getDefaultSortMode();
+	protected boolean compassUpdateAllowed = true;
 
-	private FavouritesAdapter mAdapter;
-
-	protected boolean mIsSorted;
-	protected float mLastHeading;
-	protected Location mLocation;
-	protected boolean mLocationUpdateStarted;
-	protected int mSortByDist = SORT_TYPE_DIST;
-	protected boolean mCompassUpdateAllowed = true;
-
-	private RecyclerView rvPoints;
-
-	private FavoritesListener mFavouritesListener;
+	private FavoritesListener favoritesListener;
 
 	@Override
 	public void createMenuItems(@Nullable Bundle savedInstanceState) {
-		app = getMyApplication();
-		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
-			mSortByDist = savedInstanceState.getInt(SORTED_BY_TYPE);
-		}
-		mAdapter = new FavouritesAdapter(requireContext(), mPoints);
-		mFavouritesHelper = app.getFavoritesHelper();
-		if (mFavouritesHelper.isFavoritesLoaded()) {
+		sortMode = settings.FAVORITES_SORT_MODE.get();
+
+		adapter = new FavouritesAdapter(requireContext(), points);
+		favouritesHelper = app.getFavoritesHelper();
+		if (favouritesHelper.isFavoritesLoaded()) {
 			loadFavorites();
 		} else {
-			mFavouritesHelper.addListener(getFavouritesListener());
+			favouritesHelper.addListener(getFavouritesListener());
 		}
-		rvPoints = new RecyclerView(getContext());
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		rvPoints = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.recyclerview, null);
-		rvPoints.setLayoutManager(new LinearLayoutManager(getContext()));
+		recyclerView = (RecyclerView) inflate(R.layout.recyclerview);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		sortFavourites();
 		BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
-				.setButtonIcons(null, getIconForButton(getNextType(mSortByDist)))
-				.setButtonTitle(getTextForButton(getNextType(mSortByDist)))
+				.setButtonIcons(null, getIconForButton(sortMode.next()))
+				.setButtonTitle(getTextForButton(sortMode.next()))
 				.setOnButtonClickListener(v -> {
-					mSortByDist = getNextType(mSortByDist);
+					sortMode = sortMode.next();
+					settings.FAVORITES_SORT_MODE.set(sortMode);
+
 					sortFavourites();
-					int next = getNextType(mSortByDist);
+					FavoritesSortMode next = sortMode.next();
 					title[0].setButtonIcons(null, getIconForButton(next));
 					title[0].setButtonText(getTextForButton(next));
-					title[0].setDescription(getTextForButton(mSortByDist));
+					title[0].setDescription(getTextForButton(sortMode));
 				})
-				.setDescription(getTextForButton(mSortByDist))
+				.setDescription(getTextForButton(sortMode))
 				.setTitle(getString(R.string.favourites))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr_and_button)
 				.create();
 		items.add(title[0]);
 
-		mAdapter.setItemClickListener(v -> {
-			int position = rvPoints.getChildAdapterPosition(v);
+		adapter.setItemClickListener(v -> {
+			int position = recyclerView.getChildAdapterPosition(v);
 			if (position == RecyclerView.NO_POSITION) {
 				return;
 			}
-			onFavouriteSelected(mPoints.get(position));
+			onFavouriteSelected(points.get(position));
 		});
-		rvPoints.setAdapter(mAdapter);
-		rvPoints.addOnScrollListener(new RecyclerView.OnScrollListener() {
+		recyclerView.setAdapter(adapter);
+		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
 			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 				super.onScrollStateChanged(recyclerView, newState);
-				mCompassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
+				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
 			}
 		});
 		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(rvPoints)
+				.setCustomView(recyclerView)
 				.create());
 	}
 
 	private FavoritesListener getFavouritesListener() {
-		if (mFavouritesListener == null) {
-			mFavouritesListener = new FavoritesListener() {
+		if (favoritesListener == null) {
+			favoritesListener = new FavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					loadFavorites();
-					mAdapter.notifyDataSetChanged();
+					adapter.notifyDataSetChanged();
 				}
 			};
 		}
-		return mFavouritesListener;
+		return favoritesListener;
 	}
 
 	private void loadFavorites() {
-		mPoints.clear();
-		mPoints.addAll(getMyApplication().getFavoritesHelper().getVisibleFavouritePoints());
-		if (mPoints.isEmpty()) {
-			mPoints.addAll(getMyApplication().getFavoritesHelper().getFavouritePoints());
+		points.clear();
+		points.addAll(app.getFavoritesHelper().getVisibleFavouritePoints());
+		if (points.isEmpty()) {
+			points.addAll(app.getFavoritesHelper().getFavouritePoints());
 		}
 	}
 
 	private void sortFavourites() {
-		Collator inst = Collator.getInstance();
-		Location stale = app.getLocationProvider().getLastStaleKnownLocation();
-		LatLon latLon = stale != null ? new LatLon(stale.getLatitude(), stale.getLongitude()) :
-				app.getMapViewTrackingUtilities().getMapLocation();
+		Collator collator = Collator.getInstance();
+		Location location = app.getLocationProvider().getLastStaleKnownLocation();
+		LatLon latLon = location != null ? new LatLon(location.getLatitude(), location.getLongitude())
+				: app.getMapViewTrackingUtilities().getMapLocation();
 
-		Collections.sort(mPoints, (lhs, rhs) -> {
-			if (mSortByDist == SORT_TYPE_DIST && latLon != null) {
-				double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
-						lhs.getLongitude());
-				double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),
-						rhs.getLongitude());
-				return Double.compare(ld, rd);
-			} else if (mSortByDist == SORT_TYPE_CATEGORY) {
-				int cat = inst.compare(lhs.getCategoryDisplayName(getMyApplication()), rhs.getCategoryDisplayName(getMyApplication()));
-				if (cat != 0) {
-					return cat;
-				}
-			}
-			int name = inst.compare(lhs.getDisplayName(getMyApplication()), rhs.getDisplayName(getMyApplication()));
-			return name;
-		});
+		FavouritesComparator comparator = new FavouritesComparator(app, collator, latLon, sortMode);
+		Collections.sort(points, comparator);
 
-		mIsSorted = true;
-		mAdapter.notifyDataSetChanged();
-		rvPoints.getLayoutManager().scrollToPosition(0);
+		adapter.notifyDataSetChanged();
+		recyclerView.getLayoutManager().scrollToPosition(0);
 	}
 
-	private Drawable getIconForButton(int type) {
-		return getIcon(type == SORT_TYPE_DIST ? R.drawable.ic_action_list_sort : R.drawable.ic_action_sort_by_name,
-				nightMode ? R.color.multi_selection_menu_close_btn_dark : R.color.multi_selection_menu_close_btn_light);
+	private Drawable getIconForButton(@NonNull FavoritesSortMode sortMode) {
+		int colorId = nightMode ? R.color.multi_selection_menu_close_btn_dark : R.color.multi_selection_menu_close_btn_light;
+		return getIcon(sortMode.getIconId(), colorId);
 	}
 
-	private String getTextForButton(int sortByDist) {
-		int r = R.string.sort_by_distance;
-		if (sortByDist == SORT_TYPE_CATEGORY) {
-			r = R.string.sort_by_category;
-		} else if (sortByDist == SORT_TYPE_NAME) {
-			r = R.string.sort_by_name;
-		}
-		return getString(r);
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(IS_SORTED, mIsSorted);
-		outState.putInt(SORTED_BY_TYPE, mSortByDist);
+	@NonNull
+	private String getTextForButton(@NonNull FavoritesSortMode sortMode) {
+		return getString(sortMode.getNameId());
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && !mLocationUpdateStarted) {
-			mLocationUpdateStarted = true;
+		if (!locationUpdateStarted) {
+			locationUpdateStarted = true;
 			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 			app.getLocationProvider().addCompassListener(this);
 			app.getLocationProvider().addLocationListener(this);
@@ -203,9 +154,8 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && mLocationUpdateStarted) {
-			mLocationUpdateStarted = false;
+		if (locationUpdateStarted) {
+			locationUpdateStarted = false;
 			app.getLocationProvider().removeLocationListener(this);
 			app.getLocationProvider().removeCompassListener(this);
 			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
@@ -213,29 +163,23 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	}
 
 	private void updateLocationUi() {
-		if (!mCompassUpdateAllowed) {
-			return;
-		}
-		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null && mAdapter != null) {
-			mapActivity.getMyApplication().runInUIThread(() -> {
-				mAdapter.notifyDataSetChanged();
-			});
+		if (compassUpdateAllowed && adapter != null) {
+			app.runInUIThread(adapter::notifyDataSetChanged);
 		}
 	}
 
 	@Override
 	public void updateLocation(@NonNull Location location) {
-		if (!MapUtils.areLatLonEqual(mLocation, location)) {
-			mLocation = location;
+		if (!MapUtils.areLatLonEqual(this.location, location)) {
+			this.location = location;
 			updateLocationUi();
 		}
 	}
 
 	@Override
 	public void updateCompassValue(float value) {
-		if (Math.abs(MapUtils.degreesDiff(mLastHeading, value)) > 5) {
-			mLastHeading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, value)) > 5) {
+			lastHeading = value;
 			updateLocationUi();
 		}
 	}
@@ -250,9 +194,9 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
-		if (mFavouritesListener != null) {
-			app.getFavoritesHelper().removeListener(mFavouritesListener);
-			mFavouritesListener = null;
+		if (favoritesListener != null) {
+			app.getFavoritesHelper().removeListener(favoritesListener);
+			favoritesListener = null;
 		}
 	}
 
@@ -263,21 +207,8 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	@Override
 	protected int getCustomHeight() {
-		return AndroidUtils.dpToPx(getContext(), 300);
-	}
-
-	private static int getNextType(int type) {
-		return type % SORT_TYPE_CATEGORY + 1;
-	}
-
-	public static void showFragment(@NonNull FragmentActivity activity,
-	                                @NonNull DialogFragment fragment) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			fragment.show(fm, SelectFavouriteBottomSheet.TAG);
-		}
+		return dpToPx(300);
 	}
 
 	protected abstract void onFavouriteSelected(@NonNull FavouritePoint favourite);
-
 }

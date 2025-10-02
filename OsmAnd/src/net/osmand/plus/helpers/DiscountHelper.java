@@ -21,6 +21,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -30,6 +31,7 @@ import net.osmand.plus.chooseplan.MapsPlusPlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -49,10 +51,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 public class DiscountHelper {
@@ -87,8 +91,14 @@ public class DiscountHelper {
 	private static final String CHOOSE_PLAN_TYPE_PRO = "osmand-pro";
 	private static final String CHOOSE_PLAN_TYPE_MAPS_PLUS = "osmand-maps-plus";
 
+	private static final String FEATURE_PRO = "pro";
+	private static final String FEATURE_MAPS = "maps";
+	private static final String FEATURE_LIVE = "live_maps";
+	private static final String FEATURE_CONTOURS = "contours";
+	private static final String FEATURE_NAUTICAL = "nautical";
+
 	public static void checkAndDisplay(MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
 		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
 			return;
@@ -108,18 +118,22 @@ public class DiscountHelper {
 		pms.put("nd", String.valueOf(app.getAppInitializer().getFirstInstalledDays()));
 		pms.put("ns", String.valueOf(app.getAppInitializer().getNumberOfStarts()));
 		pms.put("lang", app.getLanguage() + "");
+		List<String> features = getFeatures(app);
+		if (!features.isEmpty()) {
+			pms.put("features", TextUtils.join(",", features));
+		}
 		try {
 			if (app.isUserAndroidIdAllowed()) {
 				pms.put("aid", app.getUserAndroidId());
 			}
 		} catch (Exception ignore) {
 		}
-		new AsyncTask<Void, Void, String>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					return AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
+					return AndroidNetworkUtils.sendRequest(mapActivity.getApp(),
 							URL, pms, "Requesting discount info...", false, false);
 				} catch (Exception e) {
 					logError("Requesting discount info error: ", e);
@@ -133,13 +147,13 @@ public class DiscountHelper {
 					processDiscountResponse(response, mapActivity);
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 	@SuppressLint("SimpleDateFormat")
 	private static void processDiscountResponse(String response, MapActivity mapActivity) {
 		try {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			JSONObject obj = new JSONObject(response);
 			if (obj.length() == 0) {
 				return;
@@ -223,6 +237,26 @@ public class DiscountHelper {
 		}
 	}
 
+	private static List<String> getFeatures(@NonNull OsmandApplication app) {
+		List<String> res = new ArrayList<>();
+		if (InAppPurchaseUtils.isOsmAndProPurchased(app) || InAppPurchaseUtils.isPromoSubscribed(app)) {
+			res.add(FEATURE_PRO);
+		}
+		if (InAppPurchaseUtils.isMapsPlusPurchased(app) || InAppPurchaseUtils.isFullVersionPurchased(app)) {
+			res.add(FEATURE_MAPS);
+		}
+		if (InAppPurchaseUtils.isLiveUpdatesPurchased(app)) {
+			res.add(FEATURE_LIVE);
+		}
+		if (InAppPurchaseUtils.isContourLinesPurchased(app)) {
+			res.add(FEATURE_CONTOURS);
+		}
+		if (InAppPurchaseUtils.isDepthContoursPurchased(app)) {
+			res.add(FEATURE_NAUTICAL);
+		}
+		return res;
+	}
+
 	public static boolean validateUrl(OsmandApplication app, String url) {
 		if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
 			String inAppSku = url.substring(INAPP_PREFIX.length());
@@ -252,7 +286,7 @@ public class DiscountHelper {
 	}
 
 	private static void showDiscountBanner(MapActivity mapActivity, ControllerData data) {
-		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
+		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getApp().getPackageName());
 		DiscountBarController toolbarController = new DiscountBarController();
 		if (data.bgColor != -1) {
 			LayerDrawable bgLand = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
@@ -276,7 +310,7 @@ public class DiscountHelper {
 		}
 		if (!Algorithms.isEmpty(data.url)) {
 			View.OnClickListener clickListener = v -> {
-				mapActivity.getMyApplication().logEvent("motd_click");
+				mapActivity.getApp().logEvent("motd_click");
 				mBannerVisible = false;
 				mapActivity.hideTopToolbar(toolbarController);
 				openUrl(mapActivity, data.url);
@@ -286,7 +320,7 @@ public class DiscountHelper {
 			toolbarController.setOnTextBtnClickListener(clickListener);
 		}
 		toolbarController.setOnCloseButtonClickListener(v -> {
-			mapActivity.getMyApplication().logEvent("motd_close");
+			mapActivity.getApp().logEvent("motd_close");
 			mBannerVisible = false;
 			mapActivity.hideTopToolbar(toolbarController);
 		});
@@ -305,7 +339,7 @@ public class DiscountHelper {
 
 	public static void openUrl(MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
-			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandApplication app = mapActivity.getApp();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
 				InAppPurchase fullVersion = purchaseHelper.getFullVersion();
@@ -320,9 +354,9 @@ public class DiscountHelper {
 					InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
-							if (purchases.isMapsSubscription(p)) {
+							if (purchases.isMaps(p)) {
 								MapsPlusPlanFragment.showInstance(mapActivity, p.getSku());
-							} else if (purchases.isOsmAndProSubscription(p)) {
+							} else if (purchases.isOsmAndPro(p)) {
 								OsmAndProPlanFragment.showInstance(mapActivity, p.getSku());
 							} else {
 								ChoosePlanFragment.showDefaultInstance(mapActivity);
@@ -340,7 +374,7 @@ public class DiscountHelper {
 		} else if (url.startsWith(SHOW_POI_PREFIX)) {
 			String names = url.substring(SHOW_POI_PREFIX.length());
 			if (!names.isEmpty()) {
-				OsmandApplication app = mapActivity.getMyApplication();
+				OsmandApplication app = mapActivity.getApp();
 				MapPoiTypes poiTypes = app.getPoiTypes();
 				Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 				for (String name : names.split(",")) {
@@ -565,6 +599,31 @@ public class DiscountHelper {
 
 	}
 
+	private static class NotPurchasedFeatureCondition extends Condition {
+
+		NotPurchasedFeatureCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "not_purchased_feature";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			return switch (value) {
+				case FEATURE_PRO -> !InAppPurchaseUtils.isOsmAndProPurchased(app) && !InAppPurchaseUtils.isPromoSubscribed(app);
+				case FEATURE_MAPS ->
+						!InAppPurchaseUtils.isMapsPlusPurchased(app) && !InAppPurchaseUtils.isFullVersionPurchased(app);
+				case FEATURE_LIVE -> !InAppPurchaseUtils.isLiveUpdatesPurchased(app);
+				case FEATURE_CONTOURS -> !InAppPurchaseUtils.isContourLinesPurchased(app);
+				case FEATURE_NAUTICAL -> !InAppPurchaseUtils.isDepthContoursPurchased(app);
+				default -> false;
+			};
+		}
+	}
+
 	private abstract static class InAppPurchaseCondition extends Condition {
 
 		InAppPurchases inAppPurchases;
@@ -701,6 +760,7 @@ public class DiscountHelper {
 		Conditions(OsmandApplication app) {
 			this.app = app;
 			conditions = new Condition[] {
+					new NotPurchasedFeatureCondition(app),
 					new NotPurchasedSubscriptionCondition(app),
 					new PurchasedSubscriptionCondition(app),
 					new NotPurchasedInAppPurchaseCondition(app),

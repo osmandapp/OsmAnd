@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -34,7 +34,7 @@ class NavigationHistoryExportType extends AbstractExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		boolean onlyPoints = false;
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+		SearchHistoryHelper helper = app.getSearchHistoryHelper();
 		return helper.getHistoryEntries(HistorySource.NAVIGATION, onlyPoints);
 	}
 

@@ -4358,9 +4358,9 @@
     <string name="routing_attr_carriage_restrictions_description">Улічваць дазволы на доступу для гужавых транспартных сродкаў</string>
     <string name="add_group_to_markers">Дадаць групу ў спіс адзнак</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедыя і Wikivoyage ў аўтаномным рэжыме</string>
-    <string name="delete_history_items">Выдаліць %1$s элемент(аў) гісторыі\?</string>
+    <string name="delete_history_items">Выдаліць %1$s элемент(аў) гісторыі?</string>
     <string name="folder_access_denied">Патрабуецца дазвол на доступ да выбранага каталога.</string>
-    <string name="delete_history_items_descr">Выдаліць вылучаныя элементы гісторыі\?</string>
+    <string name="delete_history_items_descr">Выдаліць вылучаныя элементы гісторыі?</string>
     <string name="routeInfo_horse_scale_name">Складанасць конных сцежак</string>
     <string name="transparent_status_bar">Празрыстая панэль стану</string>
     <string name="save_as_copy">Захаваць як копію</string>
@@ -4784,7 +4784,7 @@
     <string name="determine_location">Вызначыць ваша месцазнаходжанне</string>
     <string name="favorites_backup">Рэзервовая копія ўлюбёнага</string>
     <string name="app_mode_moped">Мапед</string>
-    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) - гэта больш хуткі рухавік адмалёўкі мапы, які падтрымлівае 2.5D-выгляд. Адмалёўка першай версіі была прадвызначанай да OsmAnd 4.3 і па-ранейшаму з\'яўляецца пераважнай для старых прылад.</string>
+    <string name="map_rendering_engine_descr">Адмалёўка першай версіі была прадвызначанай да OsmAnd 4.3 і па-ранейшаму з\'яўляецца пераважнай для старых прылад.\nВерсія 2 (OpenGL) - гэта больш хуткі рухавік адмалёўкі мапы, які падтрымлівае 2.5D-выгляд.</string>
     <string name="rendering_engine_failed_descr">OsmAnd вярнуўся да рухавіка адмалёўкі мапы \'Версія 1\'. Вы можаце паспрабаваць пераключыцца на новы рухавік адмалёўкі \'Версія 2 (OpenGL)\' праз налады.
 \n
 \nКалі ласка, падтрымайце паляпшэнні, падаўшы свой журнал памылак.</string>

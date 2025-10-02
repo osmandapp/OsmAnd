@@ -55,7 +55,7 @@ public class Version {
 	}
 
 	public static boolean isGooglePlayEnabled() {
-		return !isHuawei() && !isAmazon();
+		return !isHuawei() && !isAmazon() && !isHMDBuild();
 	}
 
 	public static boolean isMarketEnabled() {
@@ -63,7 +63,7 @@ public class Version {
 	}
 
 	public static boolean isInAppPurchaseSupported() {
-		return isGooglePlayEnabled() || isHuawei() || isAmazon();
+		return isGooglePlayEnabled() || isHuawei() || isAmazon() || isHMDBuild();
 	}
 
 	public static boolean isGooglePlayInstalled(@NonNull OsmandApplication app) {

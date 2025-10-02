@@ -89,7 +89,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 
 	@NonNull
 	@Override
-	public Template onGetTemplate() {
+	public Template getTemplate() {
 		ItemList.Builder listBuilder = new ItemList.Builder();
 		setupFavorites(listBuilder);
 		return new PlaceListNavigationTemplate.Builder()
@@ -135,7 +135,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
 		}
-		adjustMapToRect(location, mapRect);
 	}
 
 	private void onClickFavorite(@NonNull FavouritePoint point) {

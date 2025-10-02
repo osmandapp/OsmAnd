@@ -185,11 +185,8 @@
 	<string name="poi_healthcare_speciality_clinic">Healthcare speciality: clinic</string>
 	<string name="poi_healthcare_speciality_psychotherapist">Healthcare speciality: psychotherapist</string>
 	<string name="poi_healthcare_speciality_laboratory">Healthcare speciality: laboratory</string>
-	<string name="poi_us_maps_recreation_area_activity">Recreation area activity</string>
-	<string name="poi_us_maps_recreation_area_open_status">Recreation area access status</string>
 	<string name="poi_impromptu">Impromptu</string>
 	<string name="poi_reservation">Reservation</string>
-	<string name="poi_us_maps_recreation_area_facility">Recreation area facility</string>
 	<string name="poi_live_music">Live music</string>
 	<string name="poi_cash_in">Cash deposit</string>
 	<string name="poi_camp_site_type">Camp site type</string>
@@ -877,7 +874,7 @@
 
 	<string name="poi_denomination_catholic">Catholic</string>
 	<string name="poi_denomination_baptist">Baptist</string>
-	<string name="poi_denomination_roman_catholic">Roman catholic</string>
+	<string name="poi_denomination_roman_catholic">Roman Catholic</string>
 	<string name="poi_denomination_orthodox">Orthodox</string>
 	<string name="poi_denomination_lutheran">Lutheran</string>
 	<string name="poi_denomination_sunni">Sunni</string>
@@ -886,56 +883,124 @@
 	<string name="poi_denomination_anglican">Anglican</string>
 	<string name="poi_denomination_presbyterian">Presbyterian</string>
 	<string name="poi_denomination_evangelical">Evangelical</string>
-	<string name="poi_denomination_russian_orthodox">Russian orthodox</string>
+	<string name="poi_denomination_russian_orthodox">Russian Orthodox</string>
 	<string name="poi_denomination_pentecostal">Pentecostal</string>
 	<string name="poi_denomination_mormon">Mormon</string>
-	<string name="poi_denomination_jehovahs_witness">Jehovahs witness</string>
-	<string name="poi_denomination_greek_orthodox">Greek orthodox</string>
+	<string name="poi_denomination_jehovahs_witness">Jehovahs Witness</string>
+	<string name="poi_denomination_greek_orthodox">Greek Orthodox</string>
 	<string name="poi_denomination_reformed">Reformed</string>
-	<string name="poi_denomination_seventh_day_adventist">Seventh day adventist</string>
-	<string name="poi_denomination_new_apostolic">New apostolic</string>
+	<string name="poi_denomination_seventh_day_adventist">Seventh Day Adventist</string>
+	<string name="poi_denomination_new_apostolic">New Apostolic</string>
 	<string name="poi_denomination_church_of_england">Church of England</string>
 	<string name="poi_denomination_episcopal">Episcopal</string>
 	<string name="poi_denomination_shia">Shia</string>
 	<string name="poi_denomination_united">United</string>
-	<string name="poi_denomination_greek_catholic">Greek catholic</string>
+	<string name="poi_denomination_greek_catholic">Greek Catholic</string>
 	<string name="poi_denomination_tibetan">Tibetan</string>
-	<string name="poi_denomination_united_reformed">United reformed</string>
+	<string name="poi_denomination_united_reformed">United Reformed</string>
 	<string name="poi_denomination_church_of_scotland">Church of Scotland</string>
-	<string name="poi_denomination_salvation_army">Salvation army</string>
-	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+	<string name="poi_denomination_salvation_army">Salvation Army</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
 	<string name="poi_denomination_uniting">Uniting</string>
 	<string name="poi_denomination_mennonite">Mennonite</string>
 	<string name="poi_denomination_quaker">Quaker</string>
-	<string name="poi_denomination_bulgarian_orthodox">Bulgarian orthodox</string>
-	<string name="poi_denomination_assemblies_of_god">Assemblies of god</string>
+	<string name="poi_denomination_bulgarian_orthodox">Bulgarian Orthodox</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblies of God</string>
 	<string name="poi_denomination_nondenominational">Nondenominational</string>
 	<string name="poi_denomination_adventist">Adventist</string>
 	<string name="poi_denomination_nazarene">Nazarene</string>
-	<string name="poi_denomination_united_methodist">United methodist</string>
+	<string name="poi_denomination_united_methodist">United Methodist</string>
 	<string name="poi_denomination_congregational">Congregational</string>
-	<string name="poi_denomination_old_believers">Old believers</string>
-	<string name="poi_denomination_serbian_orthodox">Serbian orthodox</string>
+	<string name="poi_denomination_old_believers">Old Believers</string>
+	<string name="poi_denomination_serbian_orthodox">Serbian Orthodox</string>
 	<string name="poi_denomination_spiritist">Spiritist</string>
-	<string name="poi_denomination_armenian_apostolic">Armenian apostolic</string>
-	<string name="poi_denomination_dutch_reformed">Dutch reformed</string>
+	<string name="poi_denomination_armenian_apostolic">Armenian Apostolic</string>
+	<string name="poi_denomination_dutch_reformed">Dutch Reformed</string>
 	<string name="poi_denomination_apostolic">Apostolic</string>
 	<string name="poi_denomination_reform">Reform</string>
-	<string name="poi_denomination_latter_day_saints">Latter day saints</string>
-	<string name="poi_denomination_church_of_christ">Church of christ</string>
-	<string name="poi_denomination_united_church_of_christ">United church of christ</string>
-	<string name="poi_denomination_georgian_orthodox">Georgian orthodox</string>
+	<string name="poi_denomination_latter_day_saints">Latter Day Saints</string>
+	<string name="poi_denomination_church_of_christ">Church of Christ</string>
+	<string name="poi_denomination_united_church_of_christ">United Church of Christ</string>
+	<string name="poi_denomination_georgian_orthodox">Georgian Orthodox</string>
 	<string name="poi_denomination_scientist">Scientist</string>
-	<string name="poi_denomination_romanian_orthodox">Romanian orthodox</string>
-	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Ethiopian orthodox tewahedo</string>
+	<string name="poi_denomination_romanian_orthodox">Romanian Orthodox</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Ethiopian Orthodox Tewahedo</string>
 	<string name="poi_denomination_unitarian">Unitarian</string>
-	<string name="poi_denomination_coptic_orthodox">Coptic orthodox</string>
+	<string name="poi_denomination_coptic_orthodox">Coptic Orthodox</string>
 	<string name="poi_denomination_wesleyan">Wesleyan</string>
 	<string name="poi_denomination_shaktism">Shaktism</string>
 	<string name="poi_denomination_shingon_shu">Shingon shu</string>
 	<string name="poi_denomination_maronite">Maronite</string>
 	<string name="poi_denomination_mahayana">Mahayana</string>
-
+	<string name="poi_denomination_ukrainian_greek_catholic">Ukrainian Greek Catholic</string>
+	<string name="poi_denomination_ukrainian_orthodox">Ukrainian Orthodox</string>
+	<string name="poi_denomination_neo_pentecostal">Neo-pentecostal</string>
+	<string name="poi_denomination_evangelical_lutheran">Evangelical Lutheran</string>
+	<string name="poi_denomination_anabaptist">Anabaptist</string>
+	<string name="poi_denomination_thai_mahanikaya">Thai Mahanikaya</string>
+	<string name="poi_denomination_thai_thammayut">Thai Thammayut</string>
+	<string name="poi_denomination_african_methodist_episcopal">African Methodist Episcopal</string>
+	<string name="poi_denomination_soto">Soto</string>
+	<string name="poi_denomination_macedonian_orthodox">Macedonian Orthodox</string>
+	<string name="poi_denomination_southern_baptist">Southern Baptist</string>
+	<string name="poi_denomination_jodo_shinshu">Jodo Shinshu</string>
+	<string name="poi_denomination_african_methodist_episcopal_zion">African Methodist Episcopal Zion</string>
+	<string name="poi_denomination_christ_scientist">Christ Scientist</string>
+	<string name="poi_denomination_nichiren">Nichiren</string>
+	<string name="poi_denomination_church_of_god">Church Of God</string>
+	<string name="poi_denomination_brethren">Brethren</string>
+	<string name="poi_denomination_free_evangelical">Free Evangelical</string>
+	<string name="poi_denomination_alevi">Alevi</string>
+	<string name="poi_denomination_bektashi">Bektashi</string>
+	<string name="poi_denomination_ibadi">Ibadi</string>
+	<string name="poi_denomination_ismaili">Ismaili</string>
+	<string name="poi_denomination_sufi">Sufi</string>
+	<string name="poi_denomination_rinzai">Rinzai</string>
+	<string name="poi_denomination_old_catholic">Old catholic</string>
+	<string name="poi_denomination_shaivism">Shaivism</string>
+	<string name="poi_denomination_pkn">Protestant Church in the Netherlands</string>
+	<string name="poi_denomination_zen">Zen</string>
+	<string name="poi_denomination_vaishnavism">Vaishnavism</string>
+	<string name="poi_denomination_hare_krishna">Hare Krishna</string>
+	<string name="poi_denomination_foursquare">Foursquare</string>
+	<string name="poi_denomination_conservative">Conservative</string>
+	<string name="poi_denomination_ashkenazi">Ashkenazi</string>
+	<string name="poi_denomination_hasidic">Hasidic</string>
+	<string name="poi_denomination_lubavitch">Lubavitch</string>
+	<string name="poi_denomination_theravada">Theravada</string>
+	<string name="poi_denomination_tiantai">Tiantai</string>
+	<string name="poi_denomination_scottish_episcopal">Scottish Episcopal</string>
+	<string name="poi_denomination_polish_catholic">Polish Catholic</string>
+	<string name="poi_denomination_moravian">Moravian</string>
+	<string name="poi_denomination_disciples_of_christ">Disciples Of Christ</string>
+	<string name="poi_denomination_charismatic">Charismatic</string>
+	<string name="poi_denomination_ecumenical">Ecumenical</string>
+	<string name="poi_denomination_fsspx">Society of Saint Pius X</string>
+	<string name="poi_denomination_syriac_orthodox">Syriac Orthodox</string>
+	<string name="poi_denomination_laestadian">Laestadian</string>
+	<string name="poi_denomination_philippine_independent">Philippine Independent</string>
+	<string name="poi_denomination_exclusive_brethren">Exclusive Brethren</string>
+	<string name="poi_denomination_church_of_god_in_christ">Church Of God In Christ</string>
+	<string name="poi_denomination_czechoslovak_hussite">Czechoslovak Hussite</string>
+	<string name="poi_denomination_la_luz_del_mundo">La Luz Del Mundo</string>
+	<string name="poi_denomination_christadelphian">Christadelphian</string>
+	<string name="poi_denomination_eritrean_orthodox">Eritrean Orthodox</string>
+	<string name="poi_denomination_antiochian_orthodox">Antiochian Orthodox</string>
+	<string name="poi_denomination_mariavite">Mariavite</string>
+	<string name="poi_denomination_mission_covenant_church_of_sweden">Mission Covenant Church Of Sweden</string>
+	<string name="poi_denomination_gelug">Gelug</string>
+	<string name="poi_denomination_vajrayana">Vajrayana</string>
+	<string name="poi_denomination_slavic">Slavic</string>
+	<string name="poi_denomination_celtic">Celtic</string>
+	<string name="poi_denomination_marthoma">Mar Thoma</string>
+	<string name="poi_denomination_free_methodist">Free Methodist</string>
+	<string name="poi_denomination_churches_of_christ">Churches Of Christ</string>
+	<string name="poi_denomination_kardecista">Kardecista</string>
+	<string name="poi_denomination_free_church_of_scotland">Free Church Of Scotland</string>
+	<string name="poi_denomination_catholic_apostolic">Catholic Apostolic</string>
+	<string name="poi_denomination_sephardi">Sephardi</string>
+	<string name="poi_denomination_welsh_independent">Welsh Independent</string>
+	
 	<string name="poi_internet_access_wlan">Internet access: wlan</string>
 	<string name="poi_internet_access_terminal">Internet access: terminal</string>
 	<string name="poi_internet_access_wired">Internet access: wired</string>
@@ -3949,7 +4014,7 @@
 	<string name="poi_flooring">Flooring store</string>
 	<string name="poi_pottery">Pottery</string>
 
-	<string name="poi_whitewater_rapid_name">Name of the river rapids</string>
+	<string name="poi_rapids_name">Name of the river rapids</string>
 
 	<string name="poi_outpost">Shop\'s delivery point</string>
 
@@ -4112,13 +4177,13 @@
 
 	<string name="poi_rescue_box">Rescue box</string>
 
-	<string name="poi_hazard_additional_erosion">Hazard: erosion</string>
-	<string name="poi_hazard_additional_falling_rocks">Hazard: rockfall</string>
-	<string name="poi_hazard_additional_nuclear">Hazard: nuclear</string>
-	<string name="poi_hazard_additional_flood">Hazard: flood</string>
-	<string name="poi_hazard_additional_avalanche">Hazard: avalanche</string>
-	<string name="poi_hazard_additional_minefield">Hazard: minefield</string>
-	<string name="poi_hazard_additional_contamination">Hazard: contamination</string>
+	<string name="poi_hazard_additional_erosion">Erosion</string>
+	<string name="poi_hazard_additional_falling_rocks">Rockfall</string>
+	<string name="poi_hazard_additional_nuclear">Nuclear</string>
+	<string name="poi_hazard_additional_flood">Flood</string>
+	<string name="poi_hazard_additional_avalanche">Avalanche</string>
+	<string name="poi_hazard_additional_minefield">Minefield</string>
+	<string name="poi_hazard_additional_contamination">Contamination</string>
 
 	<string name="poi_defibrillator_location">Location</string>
 
@@ -5213,14 +5278,6 @@
 	<string name="poi_healthcare_speciality_massage_therapy">Massage therapy</string>
 	<string name="poi_healthcare_speciality_vascular_surgery">Vascular surgery</string>
 
-	<string name="poi_checkpoint_cycling">Cycling checkpoint</string>
-
-	<string name="poi_emergency_bay">Emergency bay</string>
-
-	<string name="poi_dressing_room">Dressing room</string>
-
-	<string name="poi_osmand_access_main_tag">Access</string>
-
 	<string name="poi_healthcare_speciality_ayurveda">Ayurveda</string>
 	<string name="poi_healthcare_speciality_reflexology">Reflexology</string>
 	<string name="poi_healthcare_speciality_anthroposophical">Anthroposophical</string>
@@ -5264,6 +5321,11 @@
 	<string name="poi_healthcare_speciality_physical_therapy">Physical therapy</string>
 	<string name="poi_healthcare_speciality_microbiology">Microbiology</string>
 	<string name="poi_healthcare_speciality_venereology">Venereology</string>
+
+	<string name="poi_checkpoint_cycling">Cycling checkpoint</string>
+	<string name="poi_emergency_bay">Emergency bay</string>
+	<string name="poi_dressing_room">Dressing room</string>
+	<string name="poi_osmand_access_main_tag">Access</string>
 
 	<string name="poi_from">From</string>
 	<string name="poi_to">To</string>
@@ -5313,18 +5375,21 @@
 	<string name="poi_padus_public_access_unknown">Access: unknown</string>
 	<string name="poi_padus_public_access_closed">Access: closed</string>
 
+	<string name="poi_us_maps_recreation_area_open_status">Recreation area access status</string>
+	<string name="poi_us_maps_recreation_area_activity">Recreation area activity</string>
 	<string name="poi_us_maps_recreation_area_activity_backpacking">Backpacking</string>
 	<string name="poi_us_maps_recreation_area_activity_beachcombing">Beachcombing</string>
 	<string name="poi_us_maps_recreation_area_activity_bicycling">Bicycling</string>
 	<string name="poi_us_maps_recreation_area_activity_big_game_hunting">Big Game Hunting</string>
 	<string name="poi_us_maps_recreation_area_activity_boating_motorized">Motorized boating</string>
 	<string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Non-motorized boating</string>
-	<string name="poi_us_maps_recreation_area_facility_cabin_rentals">Cabin rentals</string>
 	<string name="poi_us_maps_recreation_area_activity_campground_camping">Campground camping</string>
 	<string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Camping and cabins</string>
 	<string name="poi_us_maps_recreation_area_activity_caving">Caving</string>
 	<string name="poi_us_maps_recreation_area_activity_climbing">Climbing</string>
 	<string name="poi_us_maps_recreation_area_activity_day_hiking">Day hiking</string>
+	<string name="poi_us_maps_recreation_area_activity_day_use_site">Day use area;Day use site;Day-use area;Day-use site;Day-use recreation area;Day-use recreation site</string>
+	<string name="poi_us_maps_recreation_area_activity_description">Activity description</string>
 	<string name="poi_us_maps_recreation_area_activity_disc_golf">Disc golf</string>
 	<string name="poi_us_maps_recreation_area_activity_dispersed_camping">Dispersed camping</string>
 	<string name="poi_us_maps_recreation_area_activity_dog_sledding">Dog sledding</string>
@@ -5359,6 +5424,7 @@
 	<string name="poi_us_maps_recreation_area_activity_other_activities">Other activities</string>
 	<string name="poi_us_maps_recreation_area_activity_outdoor_learning">Outdoor learning</string>
 	<string name="poi_us_maps_recreation_area_activity_picnicking">Picnicking</string>
+	<string name="poi_us_maps_recreation_area_activity_poi">Point Of Interest</string>
 	<string name="poi_us_maps_recreation_area_activity_river_and_stream_fishing">River and stream fishing</string>
 	<string name="poi_us_maps_recreation_area_activity_road_cycling">Road cycling</string>
 	<string name="poi_us_maps_recreation_area_activity_rock_climbing">Rock climbing</string>
@@ -5368,6 +5434,7 @@
 	<string name="poi_us_maps_recreation_area_activity_salt_water_fishing">Salt water fishing</string>
 	<string name="poi_us_maps_recreation_area_activity_sand_play">Sand play</string>
 	<string name="poi_us_maps_recreation_area_activity_scenic_driving">Scenic driving</string>
+	<string name="poi_us_maps_recreation_area_activity_scenic_overlook">Scenic overlook</string>
 	<string name="poi_us_maps_recreation_area_activity_scuba_diving">Scuba diving</string>
 	<string name="poi_us_maps_recreation_area_activity_skiing_snowboarding">Skiing and snowboarding</string>
 	<string name="poi_us_maps_recreation_area_activity_sledding_tubing">Sledding tubing</string>
@@ -5404,28 +5471,27 @@
 	<string name="poi_us_maps_recreation_area_forest_name">Forest name</string>
 	<string name="poi_us_maps_recreation_area_reservation_info">Reservation info</string>
 	<string name="poi_us_maps_recreation_area_restrictions">Restrictions info</string>
-	<string name="poi_us_maps_recreation_area_activity_description">Activity description</string>
+
 	<string name="poi_us_maps_recreation_area_accessibility_info">Accessibility info</string>
 
-	<string name="poi_us_maps_recreation_area_activity_poi">Point Of Interest</string>
-	<string name="poi_us_maps_recreation_area_activity_scenic_overlook">Scenic overlook</string>
-	<string name="poi_us_maps_recreation_area_activity_day_use_site">Day use area;Day use site;Day-use area;Day-use site;Day-use recreation area;Day-use recreation site</string>
-	<string name="poi_us_maps_recreation_area_facility_cabin">Cabin</string>
+	<string name="poi_us_maps_recreation_area_facility">Recreation area facility</string>
 	<string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Airplane landing strip</string>
-	<string name="poi_us_maps_recreation_area_facility_ranger_station_office">Ranger Station/Field Office</string>
 	<string name="poi_us_maps_recreation_area_facility_boat_launch">Boat launch</string>
 	<string name="poi_us_maps_recreation_area_facility_boat_ramp">Boat ramp</string>
 	<string name="poi_us_maps_recreation_area_facility_boat_takeout">Boat takeout</string>
+	<string name="poi_us_maps_recreation_area_facility_cabin">Cabin</string>
+	<string name="poi_us_maps_recreation_area_facility_cabin_rentals">Cabin rentals</string>
 	<string name="poi_us_maps_recreation_area_facility_fire_lookout">Fire lookout</string>
 	<string name="poi_us_maps_recreation_area_facility_group_shelter">Group shelter</string>
 	<string name="poi_us_maps_recreation_area_facility_horse_stanchion">Horse stanchion</string>
 	<string name="poi_us_maps_recreation_area_facility_horse_corral">Horse corral</string>
 	<string name="poi_us_maps_recreation_area_facility_lighthouse">Lighthouse</string>
 	<string name="poi_us_maps_recreation_area_facility_natural_endangered_area">Natural/Endangered Area</string>
+	<string name="poi_us_maps_recreation_area_facility_parking">Parking area</string>
+	<string name="poi_us_maps_recreation_area_facility_ranger_station_office">Ranger Station/Field Office</string>
 	<string name="poi_us_maps_recreation_area_facility_rapid">Rapid</string>
 	<string name="poi_us_maps_recreation_area_facility_rv_dump_station">RV dump station</string>
 	<string name="poi_us_maps_recreation_area_facility_warming_hut">Warming hut</string>
-	<string name="poi_us_maps_recreation_area_facility_parking">Parking area</string>
 	
 	<string name="poi_nfs_yes">Managed by United States Forest Service</string>
 	<string name="poi_blm_yes">Managed by Bureau Of Land Management</string>
@@ -5561,6 +5627,9 @@
 	<string name="poi_network_ncn">National cycling routes (NCN)</string>
 	<string name="poi_network_rcn">Regional cycling routes (RCN)</string>
 	<string name="poi_network_lcn">Local cycling routes (LCN)</string>
+	<string name="poi_network_nhn">National horse network (NHN)</string>
+	<string name="poi_network_rhn">Regional horse network (RHN)</string>
+	<string name="poi_network_lhn">Local horse network (LHN)</string>
 
 	<string name="poi_mosque">Mosque</string>
 	<string name="poi_buddhist_temple">Buddhist temple</string>
@@ -5594,5 +5663,96 @@
 	<string name="poi_hazard_yes">Hazard</string>
 	<string name="poi_hazard_additional_slippery_road">Slippery road</string>
 
+	<string name="poi_steps">Steps</string>
+	<string name="poi_footway">Walkway</string>
+	<string name="poi_area_highway">Mobility area</string>
+	<string name="poi_area_highway_steps">Stairway area</string>
+	<string name="poi_area_highway_footway">Walkable area</string>
+	<string name="poi_travel_agency">Travel agency</string>
+
+	<string name="poi_mormon_church">Mormon church</string>
+	<string name="poi_seventh_day_adventist_church">Seventh day adventist church</string>
+	<string name="poi_reformed_church">Reformed church</string>
+	<string name="poi_ethiopian_orthodox_church">Ethiopian orthodox church</string>
+	<string name="poi_romanian_orthodox_church">Romanian orthodox church</string>
+	<string name="poi_serbian_orthodox_church">Serbian orthodox church</string>
+	<string name="poi_greek_catholic_church">Greek catholic church</string>
+	<string name="poi_united_methodist_church">United methodist church</string>
+	<string name="poi_ukrainian_greek_catholic_church">Ukrainian greek catholic church</string>
+	<string name="poi_episcopal_church">Episcopal church</string>
+	<string name="poi_iglesia_ni_cristo_church">Iglesia ni cristo church</string>
+	<string name="poi_nondenominational_church">Nondenominational church</string>
+	<string name="poi_georgian_orthodox_church">Georgian orthodox church</string>
+	<string name="poi_new_apostolic_church">New apostolic church</string>
+	<string name="poi_ukrainian_orthodox_church">Ukrainian orthodox church</string>
+	<string name="poi_united_church">United church</string>
+	<string name="poi_assemblies_of_god_church">Assemblies of god church</string>
+	<string name="poi_church_of_scotland">Church of scotland</string>
+	<string name="poi_salvation_army_church">Salvation army church</string>
+	<string name="poi_armenian_apostolic_church">Armenian apostolic church</string>
+	<string name="poi_quaker_church">Quaker church</string>
+	<string name="poi_church_of_christ">Church of christ</string>
+	<string name="poi_neo_pentecostal_church">Neo-pentecostal church</string>
+	<string name="poi_latter_day_saints_church">Latter day saints church</string>
+	<string name="poi_evangelical_lutheran_church">Evangelical lutheran church</string>
+	<string name="poi_mennonite_church">Mennonite church</string>
+	<string name="poi_adventist_church">Adventist church</string>
+	<string name="poi_uniting_church">Uniting church</string>
+	<string name="poi_apostolic_church">Apostolic church</string>
+	<string name="poi_united_church_of_christ">United church of christ</string>
+	<string name="poi_united_reformed_church">United reformed church</string>
+	<string name="poi_anabaptist_church">Anabaptist church</string>
+	<string name="poi_bulgarian_orthodox_church">Bulgarian orthodox church</string>
+	<string name="poi_african_methodist_episcopal_church">African methodist episcopal church</string>
+	<string name="poi_macedonian_orthodox_church">Macedonian orthodox church</string>
+	<string name="poi_southern_baptist_church">Southern baptist church</string>
+	<string name="poi_congregational_church">Congregational church</string>
+	<string name="poi_spiritist_church">Spiritist church</string>
+
+	<string name="poi_christian_church">Christian church</string>
+
+	<string name="poi_financial_advisor">Financial advisor</string>
+	<string name="poi_security">Security office</string>
+	<string name="poi_construction_company">Construction company</string>
+	<string name="poi_union">Union office</string>
+	<string name="poi_office_charity">Charity office</string>
+	<string name="poi_courier">Courier office</string>
+	<string name="poi_moving_company">Moving company</string>
+	<string name="poi_surveyor">Surveyor office</string>
+	<string name="poi_graphic_design">Graphic design office</string>
+	<string name="poi_office_university">University office</string>
+	<string name="poi_transport">Transport office</string>
+	<string name="poi_harbour_master">Harbour master</string>
+	<string name="poi_bail_bond_agent">Bail bond agent</string>
+	<string name="poi_translator">Translator</string>
+	<string name="poi_private_investigator">Private investigator</string>
+	<string name="poi_visa">Visa</string>
+	<string name="poi_interior_design">Interior design</string>
+	<string name="poi_chamber">Chamber</string>
+	<string name="poi_tutoring">Tutoring</string>
+	<string name="poi_politician">Politician office</string>
+	<string name="poi_adoption_agency">Adoption agency</string>
+	<string name="poi_international_organization">International organization</string>
+	<string name="poi_airline">Airline office</string>
+	<string name="poi_route_point_category">Travel category</string>
+
+	<string name="poi_canoe_put_in">Canoe launch</string>
+	<string name="poi_canoe_egress">Canoe take-out</string>
+	<string name="poi_canoe_put_in_egress">Canoe launch and take-out</string>
+	<string name="poi_whitewater_hazard">Whitewater hazard</string>
+
+	<string name="poi_hazard_additional_hole">Hole</string>
+	<string name="poi_hazard_additional_curve">Curve</string>
+	<string name="poi_hazard_additional_curves">Curves</string>
+	<string name="poi_hazard_additional_pedestrians">Pedestrians</string>
+	<string name="poi_hazard_additional_children">Children</string>
+	<string name="poi_hazard_additional_animal_crossing">Animal crossing</string>
+	<string name="poi_hazard_additional_dangerous_junction">Dangerous junction</string>
+	<string name="poi_hazard_additional_school_zone">School zone</string>
+	<string name="poi_hazard_additional_cyclists">Cyclists</string>
+	<string name="poi_hazard_additional_shooting_range">Shooting range</string>
+	<string name="poi_hazard_additional_queues_likely">Queues likely</string>
+	<string name="poi_hazard_additional_side_winds">Side winds</string>
+	<string name="poi_hazard_additional_ice">Ice</string>
 
 </resources>

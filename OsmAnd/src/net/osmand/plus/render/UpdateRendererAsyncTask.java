@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -57,9 +56,6 @@ public class UpdateRendererAsyncTask extends AsyncTask<Void, Void, Boolean> {
 	}
 
 	protected void onPostExecute(Boolean changed) {
-		if (changed) {
-			PluginsHelper.registerRenderingPreferences(app);
-		}
 		if (callback != null) {
 			callback.processResult(changed);
 		}

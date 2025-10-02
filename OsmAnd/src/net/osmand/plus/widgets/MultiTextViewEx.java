@@ -72,6 +72,26 @@ public class MultiTextViewEx extends TextViewEx {
 		setMultiText(values);
 	}
 
+	public void init(String separator, int separatorColor,
+	                  String primaryText, String secondaryText, String tertiaryText,
+	                   int primaryColor, int secondaryColor, int tertiaryColor) {
+		this.separator = separator;
+		this.separator = Algorithms.isEmpty(separator) ? " " : separator;
+		this.separatorColor = separatorColor;
+
+		List<PaintedText> values = new ArrayList<>();
+		if (!TextUtils.isEmpty(primaryText)) {
+			values.add(new PaintedText(primaryText, primaryColor));
+		}
+		if (!TextUtils.isEmpty(secondaryText)) {
+			values.add(new PaintedText(secondaryText, secondaryColor));
+		}
+		if (!TextUtils.isEmpty(tertiaryText)) {
+			values.add(new PaintedText(tertiaryText, tertiaryColor));
+		}
+		setMultiText(values);
+	}
+
 	public void setMultiText(@NonNull Collection<PaintedText> texts) {
 		if (texts.isEmpty()) {
 			setText("");
@@ -87,6 +107,28 @@ public class MultiTextViewEx extends TextViewEx {
 			first = false;
 		}
 		setText(builder);
+	}
+
+	public void setOutlineMultiText(@NonNull Collection<PaintedText> texts, int outlineColor) {
+		if (texts.isEmpty()) {
+			setText("");
+			return;
+		}
+		SpannableStringBuilder builder = new SpannableStringBuilder();
+		boolean first = true;
+		for (PaintedText pt : texts) {
+			if (!first) {
+				builder.append(createColorSpannable(separator, outlineColor));
+			}
+			builder.append(createOutlineSpannable(pt, outlineColor));
+			first = false;
+		}
+		setText(builder);
+	}
+
+	@NonNull
+	private CharSequence createOutlineSpannable(@NonNull PaintedText paintedText, int outlineColor) {
+		return createColorSpannable(paintedText.getText().toString(), outlineColor);
 	}
 
 	@NonNull

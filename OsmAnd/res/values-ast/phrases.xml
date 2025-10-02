@@ -1027,7 +1027,7 @@
     <string name="poi_water_utility">Water utility office</string>
     <string name="poi_barbecue_grill">Barbecue grill: yes</string>
     <string name="poi_outpost">Shop\'s delivery point</string>
-    <string name="poi_whitewater_rapid_name">Name of the river rapids</string>
+    <string name="poi_rapids_name">Name of the river rapids</string>
     <string name="poi_pottery">Pottery</string>
     <string name="poi_flooring">Flooring store</string>
     <string name="poi_socket_schuko_output_low">Low</string>
@@ -2793,11 +2793,6 @@
     <string name="poi_description">Descripción</string>
     <string name="poi_collection_times">Collection times</string>
     <string name="poi_opening_hours">Hores d\'apertura</string>
-    <string name="poi_route_hiking_ref_poi">Hiking route reference</string>
-    <string name="poi_route_hiking_lwn_poi">Sienda llocal</string>
-    <string name="poi_route_hiking_rwn_poi">Sienda rexonal</string>
-    <string name="poi_route_hiking_nwn_poi">Sienda nacional</string>
-    <string name="poi_route_hiking_iwn_poi">Sienda internacional</string>
     <string name="poi_lwn_ref">Local hiking network node</string>
     <string name="poi_rwn_ref">Regional hiking network node</string>
     <string name="poi_nwn_ref">National hiking network node</string>

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -44,7 +45,7 @@ public class WidgetsVisibilityHelper {
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		app = mapActivity.getMyApplication();
+		app = mapActivity.getApp();
 		routingHelper = app.getRoutingHelper();
 		mapLayers = app.getOsmandMap().getMapLayers();
 		fragmentsHelper = mapActivity.getFragmentsHelper();
@@ -76,8 +77,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowTopCoordinatesWidget() {
-		return !isExplorePLacesMode() &&
-				!mapActivity.shouldHideTopControls()
+		return !mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
 				&& !isInRouteLineAppearanceMode()
@@ -88,9 +88,13 @@ public class WidgetsVisibilityHelper {
 				&& shouldShowElementOnActiveScreen(TOP_COORDINATES_WIDGET);
 	}
 
+	public boolean shouldShowBottomWidgets() {
+		return isExplorePlacesPresentHidden() && !isContextMenuFragmentVisible();
+	}
+
 	public boolean shouldHideVerticalWidgets() {
 		return isMapRouteInfoMenuVisible()
-				|| isExplorePLacesMode()
+				|| isExplorePlacesMode()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
 				|| isInRouteLineAppearanceMode()
@@ -192,10 +196,10 @@ public class WidgetsVisibilityHelper {
 		 */
 	}
 
-	public boolean shouldShowDownloadMapWidget() {
+	public boolean shouldShowSuggestMapBanner() {
 		return !isInRouteLineAppearanceMode()
 				&& !isInConfigureMapOptionMode()
-				&& shouldShowElementOnActiveScreen(DOWNLOAD_MAP_WIDGET);
+				&& shouldShowElementOnActiveScreen(SUGGEST_MAP_BANNER);
 	}
 
 	public boolean shouldShowSpeedometer() {
@@ -204,7 +208,7 @@ public class WidgetsVisibilityHelper {
 
 	public static boolean isWidgetEnabled(@NonNull MapActivity activity,
 			@NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -320,8 +324,18 @@ public class WidgetsVisibilityHelper {
 		return fragmentsHelper.getGpsFilterFragment() != null;
 	}
 
-	private boolean isExplorePLacesMode() {
-		return fragmentsHelper.getExplorePlacesFragment() != null;
+	private boolean isExplorePlacesMode() {
+		ExplorePlacesFragment fragment = fragmentsHelper.getExplorePlacesFragment();
+		return fragment != null && !fragment.isListHidden();
+	}
+
+	private boolean isExplorePlacesPresentHidden() {
+		ExplorePlacesFragment fragment = fragmentsHelper.getExplorePlacesFragment();
+		return fragment != null && (fragment.isListHidden() || fragment.isHidden());
+	}
+
+	private boolean isSelectMapLocationMode() {
+		return fragmentsHelper.getSelectMapLocationFragment() != null;
 	}
 
 	public boolean isInConfigureMapOptionMode() {
@@ -383,7 +397,7 @@ public class WidgetsVisibilityHelper {
 	private boolean shouldShowElementOnActiveScreen(VisibleElements element) {
 		for (VisibilityScreens screen : VisibilityScreens.values()) {
 			if (screen.isVisibleInMode(this)) {
-				return screen.elements.contains(element);
+				return screen.visibleElements.contains(element);
 			}
 		}
 		return true;
@@ -400,26 +414,25 @@ public class WidgetsVisibilityHelper {
 		TOP_BUTTONS,
 		BACK_TO_LOCATION_BUTTON,
 		ELEVATION_PROFILE_WIDGET,
-		DOWNLOAD_MAP_WIDGET,
+		SUGGEST_MAP_BANNER,
 		FAB_BUTTON,
 		SPEEDOMETER
 	}
 
 	public enum VisibilityScreens {
-
 		EXPLORE_PLACES(),
 		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
-		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, DOWNLOAD_MAP_WIDGET, TOP_BUTTONS, COMPASS),
-		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, DOWNLOAD_MAP_WIDGET),
-		TRACK_APPEARANCE_MODE(DOWNLOAD_MAP_WIDGET),
+		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, SUGGEST_MAP_BANNER, TOP_BUTTONS, COMPASS),
+		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, SUGGEST_MAP_BANNER),
+		TRACK_APPEARANCE_MODE(SUGGEST_MAP_BANNER),
 		SELECTING_TILES_ZONE_MODE(),
-		GPS_FILTERING_MODE();
+		GPS_FILTERING_MODE(),
+		SELECT_MAP_LOCATION(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON);
 
+		public final List<VisibleElements> visibleElements = new ArrayList<>();
 
-		public final List<VisibleElements> elements = new ArrayList<>();
-
-		VisibilityScreens(VisibleElements... elements) {
-			this.elements.addAll(Arrays.asList(elements));
+		VisibilityScreens(@NonNull VisibleElements... visibleElements) {
+			this.visibleElements.addAll(Arrays.asList(visibleElements));
 		}
 
 		boolean isVisibleInMode(@NonNull WidgetsVisibilityHelper helper) {
@@ -430,7 +443,8 @@ public class WidgetsVisibilityHelper {
 				case TRACK_APPEARANCE_MODE -> helper.isInTrackAppearanceMode();
 				case SELECTING_TILES_ZONE_MODE -> helper.isSelectingTilesZone();
 				case GPS_FILTERING_MODE -> helper.isInGpsFilteringMode();
-				case EXPLORE_PLACES -> helper.isExplorePLacesMode();
+				case EXPLORE_PLACES -> helper.isExplorePlacesMode();
+				case SELECT_MAP_LOCATION -> helper.isSelectMapLocationMode();
 			};
 		}
 	}

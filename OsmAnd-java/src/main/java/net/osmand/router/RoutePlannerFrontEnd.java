@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.map.OsmandRegions;
 import org.apache.commons.logging.Log;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -48,7 +50,8 @@ public class RoutePlannerFrontEnd {
 	}
 	
 	public static HHRoutingConfig defaultHHConfig() {
-		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED)
+				.applyCalculateMissingMaps(RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS);
 	}
 	
 	public enum RouteCalculationMode {
@@ -395,8 +398,9 @@ public class RoutePlannerFrontEnd {
 			targets.addAll(intermediates);
 		}
 		targets.add(end);
+		OsmandRegions osmandRegions = PlatformUtil.getOsmandRegions();
 		if (CALCULATE_MISSING_MAPS) {
-			MissingMapsCalculator calculator = new MissingMapsCalculator(PlatformUtil.getOsmandRegions());
+			MissingMapsCalculator calculator = new MissingMapsCalculator(osmandRegions);
 			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
 				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
 			}
@@ -405,6 +409,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
 		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
+			calculateRegionsWithAllRoutePoints(ctx, osmandRegions, start, targets);
 			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
 				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
@@ -452,6 +457,8 @@ public class RoutePlannerFrontEnd {
 			}
 			if (routeDirection != null) {
 				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+			} else {
+				ctx.precalculatedRouteDirection = null;
 			}
 			ctx.calculationProgress.nextIteration();
 			res = runNativeRouting(ctx, recalculationEnd, null);
@@ -479,6 +486,35 @@ public class RoutePlannerFrontEnd {
 		ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 		RouteResultPreparation.printResults(ctx, start, end, res.detailed);
 		return res;
+	}
+
+	private void calculateRegionsWithAllRoutePoints(RoutingContext ctx, OsmandRegions osmandRegions,
+	                                                LatLon start, List<LatLon> targets) throws IOException {
+		Map<String, Integer> regionCounter = new LinkedHashMap<>();
+
+		getRegionsOfPoint(start, regionCounter, osmandRegions);
+		for (LatLon target : targets) {
+			getRegionsOfPoint(target, regionCounter, osmandRegions);
+		}
+
+		int allPoints = 1 + targets.size();
+		List<String> result = new ArrayList<>();
+
+		for (String region : regionCounter.keySet()) {
+			if (regionCounter.get(region) == allPoints) {
+				result.add(region);
+			}
+		}
+
+		ctx.regionsCoveringStartAndTargets = result.toArray(new String[0]);
+	}
+
+	private void getRegionsOfPoint(LatLon ll, Map<String, Integer> regionCounter, OsmandRegions or) throws IOException {
+		List<BinaryMapDataObject> foundRegions = or.getRegionsToDownload(ll.getLatitude(), ll.getLongitude());
+		for (BinaryMapDataObject region : foundRegions) {
+			String name = or.getDownloadName(region);
+			regionCounter.put(name, regionCounter.getOrDefault(name, 0) + 1);
+		}
 	}
 
 	private void setStartEndToCtx(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) {
@@ -652,7 +688,7 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	public RouteCalcResult searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
+	RouteCalcResult searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 	                                                  PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 		if (recalculationEnd != null) {
@@ -662,6 +698,8 @@ public class RoutePlannerFrontEnd {
 		}
 		if (routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+		} else {
+			ctx.precalculatedRouteDirection = null;
 		}
 		if (ctx.nativeLib != null) {
 			ctx.startX = start.preciseX;

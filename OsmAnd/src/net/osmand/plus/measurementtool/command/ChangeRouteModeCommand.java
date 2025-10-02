@@ -140,7 +140,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		MeasurementEditingContext editingCtx = getEditingCtx();
 		editingCtx.getPoints().clear();
 		editingCtx.addPoints(newPoints);
-		if (newPoints.isEmpty()) {
+		if (newPoints.isEmpty() || newPoints.get(newPoints.size() - 1).isGap()) {
 			editingCtx.setAppMode(newMode);
 		} else {
 			WptPt lastPoint = newPoints.get(newPoints.size() - 1);

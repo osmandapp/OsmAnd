@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.development;
 import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -44,20 +43,16 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 	@Override
 	public void onCreate(Bundle icicle) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		app.applyTheme(this);
 		super.onCreate(icicle);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
-		}
+
+		getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
-		OsmandApplication app = ((OsmandApplication) getApplication());
-		
-		
 		LinearLayout gl = new LinearLayout(this);
 		gl.setOrientation(LinearLayout.VERTICAL);
 		gl.setPadding(3, 3, 3, 3);
-		
+
 		TextView tv = new TextView(this);
 		tv.setText(R.string.test_voice_desrc);
 		tv.setPadding(0, 5, 0, 7);
@@ -80,7 +75,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	private void selectVoice(LinearLayout ll) {
 		String[] entries;
 		String[] entrieValues;
-		Set<String> voiceFiles = getMyApplication().getRoutingOptionsHelper().getVoiceFiles(this);
+		Set<String> voiceFiles = app.getRoutingOptionsHelper().getVoiceFiles(this);
 		entries = new String[voiceFiles.size() ];
 		entrieValues = new String[voiceFiles.size() ];
 		int k = 0;
@@ -88,41 +83,36 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		for (String s : voiceFiles) {
 			entries[k] = s;
 			entrieValues[k] = s;
-			if(s.equals(((OsmandApplication) getApplication()).getSettings().VOICE_PROVIDER.get())) {
+			if(s.equals(settings.VOICE_PROVIDER.get())) {
 				selected = k;
 			}
 			k++;
 		}
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		bld.setSingleChoiceItems(entrieValues, selected, new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				OsmandApplication app = (OsmandApplication) getApplication();
-				getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ")");
-				app.getSettings().VOICE_PROVIDER.set(entrieValues[which]);
-				app.initVoiceCommandPlayer(TestVoiceActivity.this,
-						app.getSettings().APPLICATION_MODE.get(), () -> {
-							CommandPlayer commandPlayer = app.getRoutingHelper().getVoiceRouter().getPlayer();
-							if (commandPlayer == null) {
-								app.showShortToastMessage("Voice player not initialized");
-							} else {
-								osmandVoice = entrieValues[which];
-								osmandVoiceLang = commandPlayer.getLanguage();
-								addButtons(ll, commandPlayer);
-							}
-						}, true, true, true, false);
-				dialog.dismiss();
-			}
+		bld.setSingleChoiceItems(entrieValues, selected, (dialog, which) -> {
+			getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ")");
+			settings.VOICE_PROVIDER.set(entrieValues[which]);
+			app.initVoiceCommandPlayer(TestVoiceActivity.this,
+					settings.APPLICATION_MODE.get(), () -> {
+						CommandPlayer commandPlayer = app.getRoutingHelper().getVoiceRouter().getPlayer();
+						if (commandPlayer == null) {
+							app.showShortToastMessage("Voice player not initialized");
+						} else {
+							osmandVoice = entrieValues[which];
+							osmandVoiceLang = commandPlayer.getLanguage();
+							addButtons(ll, commandPlayer);
+						}
+					}, true, true, true, false);
+			dialog.dismiss();
 		});
 		bld.show();
 	}
 
 	private String getVoiceSystemInfo() {
 		String v ="";
-		v += " \u25CF App routing profile: " + ((OsmandApplication) getApplication()).getRoutingHelper().getAppMode().getStringKey();
+		v += " \u25CF App routing profile: " + app.getRoutingHelper().getAppMode().getStringKey();
 
-		int stream = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.getModeValue(((OsmandApplication) getApplication()).getRoutingHelper().getAppMode());
+		int stream = settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
 		if (stream == 3) {
 			v += "\n \u25CF Voice guidance output: Media/music audio";
 		} else if (stream == 5) {
@@ -145,7 +135,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}
 
-		//OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
+		//OsmandPreference<Integer> pref = settings.VOICE_PROMPT_DELAY[stream];
 		//if(pref != null) {
 		//	v += "\n \u25CF Voice prompt delay for selected output: " + pref.get() + "\u00A0ms";
 		//}
@@ -232,11 +222,11 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "System info and settings:", builder(p));
 		addButton(ll, "\u25BA (11.1) (TAP TO FULLY POPULATE)\n" + getVoiceSystemInfo(), builder(p).attention(""));
 		addButton(ll, "\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
-				((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY
-				[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.getModeValue(((OsmandApplication) getApplication()).getRoutingHelper().getAppMode())].get() +
+				settings.VOICE_PROMPT_DELAY
+				[settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode())].get() +
 				"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)", builder(p).attention(""));
 		addButton(ll, "\u25BA (11.3) (TAP TO TOGGLE)\n \u25CF Display each TTS utterance on screen: " +
-				((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get().toString(), builder(p).attention(""));
+				settings.DISPLAY_TTS_UTTERANCE.get().toString(), builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -293,8 +283,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					// app.showToastMessage("Info refreshed.");
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
-					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.getModeValue(((OsmandApplication) getApplication()).getRoutingHelper().getAppMode());
-					OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams];
+					int ams = settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
+					OsmandPreference<Integer> pref = settings.VOICE_PROMPT_DELAY[ams];
 					if (pref != null) {
 						if (pref.get() >= 3000) {
 							pref.set(0);
@@ -304,17 +294,17 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						// app.showToastMessage("Voice prompt delay changed to " + pref.get() + "\u00A0ms.");
 					}
 					buttonDelay.setText("\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
-							((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() +
+							settings.VOICE_PROMPT_DELAY[ams].get() +
 							"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)");
 				}
 				if (description.startsWith("\u25BA (11.3)")) {
-					if (((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get() == false) {
-						((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.set(true);
+					if (settings.DISPLAY_TTS_UTTERANCE.get() == false) {
+						settings.DISPLAY_TTS_UTTERANCE.set(true);
 					} else {
-						((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.set(false);
+						settings.DISPLAY_TTS_UTTERANCE.set(false);
 					}
 					buttonDisplay.setText("\u25BA (11.3) (TAP TO TOGGLE)\n \u25CF Display each TTS utterance on screen: " +
-							((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get().toString());
+							settings.DISPLAY_TTS_UTTERANCE.get().toString());
 				}
 			}
 		});

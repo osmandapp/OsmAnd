@@ -18,6 +18,7 @@ import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
@@ -133,6 +134,6 @@ class InputDevicesController {
 	}
 
 	private boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap, appMode);
+		return app.getDaynightHelper().isNightMode(appMode, ThemeUsageContext.valueOf(usedOnMap));
 	}
 }

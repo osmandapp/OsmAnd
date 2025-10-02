@@ -429,8 +429,7 @@ public class ExternalApiHelper {
 				}
 
 			} else if (API_CMD_GET_INFO.equals(cmd)) {
-
-				Location location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+				Location location = mapActivity.getApp().getLocationProvider().getLastKnownLocation();
 				if (location != null) {
 					result.putExtra(PARAM_LAT, location.getLatitude());
 					result.putExtra(PARAM_LON, location.getLongitude());
@@ -580,7 +579,7 @@ public class ExternalApiHelper {
 				int actionNumber = Integer.parseInt(uri.getQueryParameter(PARAM_QUICK_ACTION_NUMBER));
 				List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 				if (actionNumber >= 0 && actionNumber < actionsList.size()) {
-					MapButtonsHelper.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+					MapButtonsHelper.produceAction(actionsList.get(actionNumber)).onActionSelected(mapActivity, null);
 					resultCode = Activity.RESULT_OK;
 				} else {
 					resultCode = RESULT_CODE_ERROR_QUICK_ACTION_NOT_FOUND;
@@ -721,7 +720,7 @@ public class ExternalApiHelper {
 	                                     boolean showSearchResults, boolean checkLocationPermission) {
 
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (showSearchResults) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
@@ -747,7 +746,7 @@ public class ExternalApiHelper {
 						public void onSearchComplete(List<AidlSearchResultWrapper> resultSet) {
 							MapActivity mapActivity = mapActivityRef.get();
 							if (mapActivity != null) {
-								mapActivity.getMyApplication().runInUIThread(() -> {
+								mapActivity.getApp().runInUIThread(() -> {
 									ProgressDialog dialog = dlgRef.get();
 									if (dialog != null) {
 										dialog.dismiss();
@@ -759,7 +758,7 @@ public class ExternalApiHelper {
 												PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
 										startNavigation(mapActivity, mode, from, fromDesc, to, toDesc, checkLocationPermission);
 									} else {
-										mapActivity.getMyApplication().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
+										mapActivity.getApp().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
 									}
 								});
 							}

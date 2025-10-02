@@ -19,6 +19,9 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -54,7 +57,7 @@ public abstract class MapWidget {
 
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
-		this.app = mapActivity.getMyApplication();
+		this.app = mapActivity.getApp();
 		this.settings = app.getSettings();
 		this.mapActivity = mapActivity;
 		this.customId = customId;
@@ -62,7 +65,7 @@ public abstract class MapWidget {
 		this.iconsCache = app.getUIUtilities();
 		this.locationProvider = app.getLocationProvider();
 		this.routingHelper = app.getRoutingHelper();
-		this.nightMode = app.getDaynightHelper().isNightMode();
+		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		this.visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
 		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
 
@@ -103,7 +106,7 @@ public abstract class MapWidget {
 		container.addView(view);
 	}
 
-	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
+	public void detachView(@NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
 		ViewParent parent = view.getParent();
 		if (parent instanceof ViewGroup) {
 			((ViewGroup) parent).removeView(view);
@@ -157,6 +160,25 @@ public abstract class MapWidget {
 			boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
+		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
+
+		text.setTextColor(textColor);
+		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+	}
+
+	public static void updateTextColor(@NonNull OutlinedTextContainer text, @Nullable TextView textShadow,
+			@ColorInt int textColor, @ColorInt int textShadowColor,
+			boolean boldText, int shadowRadius) {
+		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
+
+		updateTextShadow(textShadow, textShadowColor, shadowRadius, typefaceStyle);
+
+		text.setTextColor(textColor);
+		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		text.showOutline(false);
+	}
+
+	private static void updateTextShadow(@Nullable TextView textShadow, @ColorInt int textShadowColor, int shadowRadius, int typefaceStyle){
 		if (textShadow != null) {
 			if (shadowRadius > 0) {
 				AndroidUiHelper.updateVisibility(textShadow, true);
@@ -169,8 +191,34 @@ public abstract class MapWidget {
 				AndroidUiHelper.updateVisibility(textShadow, false);
 			}
 		}
-		text.setTextColor(textColor);
-		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
+	}
+
+	public static void updateTextOutline(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {
+		if (textContainer == null) {
+			return;
+		}
+
+		if (textState.textShadowRadius > 0) {
+			textContainer.setStrokeWidth(textState.textShadowRadius);
+			int color = textState.textShadowColor;
+			if (color != 0) {
+				textContainer.setStrokeColor(textState.textShadowColor);
+			}
+			textContainer.showOutline(true);
+		} else {
+			textContainer.showOutline(false);
+		}
+		textContainer.invalidateTextViews();
+	}
+
+	public static void updateTextContainer(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {
+		if (textContainer == null) {
+			return;
+		}
+
+		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
+		textContainer.setTextColor(textState.textColor);
+		textContainer.setTypeface(Typeface.DEFAULT, typefaceStyle);
 	}
 
 	@NonNull

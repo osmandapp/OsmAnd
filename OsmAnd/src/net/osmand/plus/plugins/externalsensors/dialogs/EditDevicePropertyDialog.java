@@ -13,26 +13,27 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.util.Algorithms;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
+public class EditDevicePropertyDialog extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = "EditDeviceNameDialog";
 
@@ -50,14 +51,14 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.dialog_edit_device_name, container, false);
+		View view = inflate(R.layout.dialog_edit_device_name, container, false);
 
 		propertyName = view.findViewById(R.id.property_name);
 		textInput = view.findViewById(R.id.description);
 		textInput.requestFocus();
 
 		propertyValueView = view.findViewById(R.id.property_value);
-		propertyValueView.setClearButton(app.getUIUtilities().getIcon(R.drawable.ic_action_cancel, nightMode));
+		propertyValueView.setClearButton(getContentIcon(R.drawable.ic_action_cancel));
 
 		view.findViewById(R.id.btn_close).setOnClickListener(v -> {
 			if (shouldClose()) {
@@ -104,21 +105,14 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 		return true;
 	}
 
-	@NonNull
 	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(ctx, themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			int statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode);
-			window.setStatusBarColor(statusBarColor);
-		}
-		return dialog;
+	protected int getThemeId() {
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+	}
+
+	@Override
+	protected int getStatusBarColorId() {
+		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
 	private boolean shouldClose() {
@@ -148,19 +142,16 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 	}
 
 	private void showDismissDialog() {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode(false));
-		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
-		dismissDialog.setMessage(getString(R.string.exit_without_saving));
-		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
-		dismissDialog.show();
+		AlertDialogData dialogData = new AlertDialogData(requireActivity(), nightMode)
+				.setTitle(R.string.shared_string_dismiss)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
+		CustomAlert.showSimpleMessage(dialogData, R.string.exit_without_saving);
 	}
 
 	private void onSaveEditedText(@NonNull String newName) {
 		Fragment target = getTargetFragment();
-		if (target instanceof OnSaveSensorPropertyCallback && property != null) {
-			OnSaveSensorPropertyCallback callback = (OnSaveSensorPropertyCallback) target;
+		if (target instanceof OnSaveSensorPropertyCallback callback && property != null) {
 			callback.changeSensorPropertyValue(deviceId, property, newName);
 		}
 	}
@@ -173,7 +164,7 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 			throw new IllegalArgumentException("target fragment should implement OnSaveSensorNameCallback");
 		}
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			EditDevicePropertyDialog fragment = new EditDevicePropertyDialog();
 			Bundle args = new Bundle();
 			ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);

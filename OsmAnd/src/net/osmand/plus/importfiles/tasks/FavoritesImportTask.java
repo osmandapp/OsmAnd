@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -57,7 +58,7 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 			favoritesHelper.deleteFavourite(favourite, false);
 
 			PointsGroup pointsGroup = pointsGroups.get(favourite.getCategory());
-			favoritesHelper.addFavourite(favourite, false, false, false, pointsGroup);
+			favoritesHelper.addFavourite(favourite, pointsGroup, new AddFavoriteOptions());
 
 			if (plugin != null && favourite.getSpecialPointType() == SpecialPointType.PARKING) {
 				plugin.updateParkingPoint(favourite);

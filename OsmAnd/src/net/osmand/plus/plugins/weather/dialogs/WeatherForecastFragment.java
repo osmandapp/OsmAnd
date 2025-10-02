@@ -26,7 +26,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherContour;
@@ -39,14 +39,14 @@ import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener
 import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
@@ -58,7 +58,7 @@ import org.apache.commons.logging.Log;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class WeatherForecastFragment extends BaseOsmAndFragment implements WeatherWebClientListener {
+public class WeatherForecastFragment extends BaseFullScreenFragment implements WeatherWebClientListener {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
 	private final Log log = PlatformUtil.getLog(WeatherForecastFragment.class);
@@ -77,6 +77,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private TimeSlider timeSlider;
 	private RulerWidget rulerWidget;
 	private WeatherWidgetsPanel widgetsPanel;
+	private WeatherPlugin.WeatherSourceChangeListener weatherSourceChangeListener;
 	private Handler progressUpdateHandler;
 	private Handler animateForecastHandler;
 
@@ -94,6 +95,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private int animationStartStep;
 	private int animateStepCount;
 	private int animationStartStepCount;
+
+	private List<MapButton> mapButtons = new ArrayList<>();
 
 	private enum AnimationState {
 		IDLE,
@@ -172,13 +175,14 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity activity = requireMapActivity();
-		View view = themedInflater.inflate(R.layout.fragment_weather_forecast, container, false);
+		View view = inflate(R.layout.fragment_weather_forecast, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
 		widgetsPanel = view.findViewById(R.id.weather_widgets_panel);
 		widgetsPanel.setupWidgets(activity, nightMode);
 		widgetsPanel.nightMode = nightMode;
 
+		mapButtons = new ArrayList<>();
 		setupPLayForecastButton(view);
 		setupToolBar(view);
 		setupWeatherButtons(view);
@@ -187,6 +191,13 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		buildZoomButtons(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_content));
+		return collection;
 	}
 
 	private void setupPLayForecastButton(View view) {
@@ -343,23 +354,29 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		ZoomInButton zoomInBtn = view.findViewById(R.id.map_zoom_in_button);
-		if (zoomInBtn != null) {
-			layer.addCustomizedDefaultMapButton(zoomInBtn);
+		MapButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+		if (zoomInButton != null) {
+			mapButtons.add(zoomInButton);
 		}
-		ZoomOutButton zoomOutBtn = view.findViewById(R.id.map_zoom_out_button);
-		if (zoomOutBtn != null) {
-			layer.addCustomizedDefaultMapButton(zoomOutBtn);
+		MapButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+		if (zoomOutButton != null) {
+			mapButtons.add(zoomOutButton);
 		}
-		MyLocationButton myLocationBtn = view.findViewById(R.id.map_my_location_button);
-		if (myLocationBtn != null) {
-			layer.addCustomizedDefaultMapButton(myLocationBtn);
+		MapButton myLocationButton = view.findViewById(R.id.map_my_location_button);
+		if (myLocationButton != null) {
+			mapButtons.add(myLocationButton);
 		}
+		layer.addCustomizedDefaultMapButtons(mapButtons);
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
-		activity.getMapLayers().getMapControlsLayer().addCustomMapButton(view.findViewById(R.id.map_compass_button));
+
+		MapButton compassButton = view.findViewById(R.id.map_compass_button);
+		if (compassButton != null) {
+			layer.addCustomMapButton(compassButton);
+			mapButtons.add(compassButton);
+		}
 	}
 
 	private void setupDatesView(@NonNull View view) {
@@ -412,7 +429,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		});
 		toolbar.setTitle(R.string.shared_string_weather);
 		toolbar.setBackgroundColor(app.getColor(nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
-		toolbar.getMenu().findItem(R.id.weather_data_source).setVisible(false);
+		toolbar.getMenu().findItem(R.id.weather_data_source).setVisible(true);
 		toolbar.setOnMenuItemClickListener(item -> {
 			if (item.getItemId() == R.id.weather_data_source) {
 				onOptionBtnClicked();
@@ -473,6 +490,14 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		mapActivity.getMapLayers().getMapInfoLayer().addAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.GONE);
 		updateSelectedDate(selectedDate.getTime(), false, false);
+		
+		weatherSourceChangeListener = newSource -> {
+			MapActivity activity = requireMapActivity();
+			if (activity != null) {
+				activity.getMapLayers().getMapInfoLayer().updateSideWidgets();
+			}
+		};
+		plugin.addWeatherSourceChangeListener(weatherSourceChangeListener);
 	}
 
 	@Override
@@ -484,6 +509,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		mapActivity.getMapLayers().getMapInfoLayer().removeAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.VISIBLE);
 		updateSelectedDate(null, false, false);
+		
+		if (weatherSourceChangeListener != null) {
+			plugin.removeWeatherSourceChangeListener(weatherSourceChangeListener);
+			weatherSourceChangeListener = null;
+		}
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
@@ -497,7 +527,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapLayers mapLayers = mapActivity.getMapLayers();
-			mapLayers.getMapControlsLayer().clearCustomMapButtons();
+			mapLayers.getMapControlsLayer().removeCustomMapButtons(mapButtons);
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -520,21 +550,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			plugin.setSelectedContoursType(previousWeatherContour);
 		}
 		super.onDestroy();
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return ((MapActivity) requireActivity());
 	}
 
 	@NonNull

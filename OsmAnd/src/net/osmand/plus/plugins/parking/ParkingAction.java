@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.parking;
 import static net.osmand.plus.quickaction.QuickActionIds.PARKING_ACTION_ID;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,14 +32,14 @@ public class ParkingAction extends SelectMapLocationAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		if (PluginsHelper.isActive(ParkingPositionPlugin.class)) {
-			super.execute(mapActivity);
+			super.execute(mapActivity, params);
 		}
 	}
 
 	@Override
-	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon, @Nullable Bundle params) {
 		ParkingPositionPlugin plugin = PluginsHelper.getActivePlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			plugin.showAddParkingDialog(mapActivity, latLon.getLatitude(), latLon.getLongitude());

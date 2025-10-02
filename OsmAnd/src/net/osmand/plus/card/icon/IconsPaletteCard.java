@@ -93,14 +93,16 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 
 	private void askScrollToTargetIconPosition(@Nullable IconData targetIcon, boolean useSmoothScroll) {
 		int targetPosition = paletteAdapter.indexOf(targetIcon);
-		LinearLayoutManager lm = (LinearLayoutManager) rvIcons.getLayoutManager();
-		int firstVisiblePosition = lm != null ? lm.findFirstCompletelyVisibleItemPosition() : 0;
-		int lastVisiblePosition = lm != null ? lm.findLastCompletelyVisibleItemPosition() : paletteAdapter.getItemCount();
-		if (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition) {
-			if (useSmoothScroll) {
-				rvIcons.smoothScrollToPosition(targetPosition);
-			} else {
-				rvIcons.scrollToPosition(targetPosition);
+		LinearLayoutManager layoutManager = (LinearLayoutManager) rvIcons.getLayoutManager();
+		if (layoutManager != null && targetPosition >= 0 && targetPosition < paletteAdapter.getItemCount()) {
+			int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+			int lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition();
+			if (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition) {
+				if (useSmoothScroll) {
+					rvIcons.smoothScrollToPosition(targetPosition);
+				} else {
+					rvIcons.scrollToPosition(targetPosition);
+				}
 			}
 		}
 	}

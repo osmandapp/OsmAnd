@@ -115,6 +115,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:layout_gravity="center_horizontal"
+				android:scaleType="centerCrop"
 				android:contentDescription="@string/popular_places_nearby"
 				android:visibility="gone" />
 		</FrameLayout>

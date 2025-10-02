@@ -31,14 +31,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
-import net.osmand.plus.myplaces.tracks.DialogClosedListener;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksComparator;
 import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController;
@@ -50,6 +48,7 @@ import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
@@ -62,12 +61,15 @@ import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFil
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.TrackItem;
@@ -81,10 +83,11 @@ import net.osmand.shared.util.KAlgorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment implements FragmentStateHolder,
+public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment implements FragmentStateHolder,
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener, OsmAuthorizationListener,
 		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener,
 		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem>, SmartFolderOptionsListener {
@@ -166,6 +169,13 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 
@@ -189,7 +199,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
+		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK && selectedFolder != null) {
 			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 			if (foldersHelper != null) {
 				foldersHelper.handleImport(data, SharedUtil.jFile(selectedFolder.getDirFile()));
@@ -209,7 +219,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	protected void setupAdapter(@NonNull View view) {
-		adapter = new TrackFoldersAdapter(view.getContext(), nightMode);
+		adapter = new TrackFoldersAdapter(view.getContext(), nightMode, selectedFolder);
 		adapter.setSortTracksListener(this);
 		adapter.setTrackGroupsListener(this);
 		adapter.setTrackSelectionListener(this);
@@ -355,7 +365,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		sortFolders(selectedFolder, sortModesHelper, sortMode);
 		sortModesHelper.syncSettings();
 
-		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId())));
+		app.showToastMessage(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId()));
 	}
 
 	private void sortFolders(@NonNull TrackFolder trackFolder,

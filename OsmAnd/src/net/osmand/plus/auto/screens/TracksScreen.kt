@@ -16,6 +16,7 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.shared.SharedUtil
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripUtils
@@ -56,7 +57,7 @@ class TracksScreen(
 	override fun onCreate(owner: LifecycleOwner) {
 		super.onCreate(owner)
 		loadTracksTask = LoadTracksTask()
-		loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+		OsmAndTaskManager.executeTask(loadTracksTask)
 	}
 
 	override fun onDestroy(owner: LifecycleOwner) {
@@ -80,7 +81,7 @@ class TracksScreen(
         }
     }
 
-    override fun onGetTemplate(): Template {
+    override fun getTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         val title = if (trackTab.type == TrackTabType.ALL) {
             app.getString(R.string.sort_last_modified)

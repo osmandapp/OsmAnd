@@ -810,11 +810,6 @@
     <string name="poi_lcn_ref">Nod rhwydwaith beicio lleol</string>
     <string name="poi_iwn_ref">Nod rhwydwaith heicio rhyngwladol</string>
     <string name="poi_nwn_ref">Nod rhwydwaith heicio cenedlaethol</string>
-    <string name="poi_route_hiking_iwn_poi">Llwybr cerdded rhyngwladol</string>
-    <string name="poi_route_hiking_nwn_poi">Llwybr cerdded cenedlaethol</string>
-    <string name="poi_route_hiking_rwn_poi">Llwybr cerdded rhanbarthol</string>
-    <string name="poi_route_hiking_lwn_poi">Llwybr cerdded lleol</string>
-    <string name="poi_route_hiking_ref_poi">Cyfeirnod llwybr heicio</string>
     <string name="poi_description">Disgrifiad</string>
     <string name="poi_website">Gwefan</string>
     <string name="poi_fax">Ffacs</string>
@@ -3121,7 +3116,7 @@
     <string name="poi_socket_schuko_output_high">Uchel</string>
     <string name="poi_flooring">Storfa lloriau</string>
     <string name="poi_pottery">Crochenwaith</string>
-    <string name="poi_whitewater_rapid_name">Enw dyfroedd gwylltion yr afon</string>
+    <string name="poi_rapids_name">Enw dyfroedd gwylltion yr afon</string>
     <string name="poi_outpost">Man danfon y siop</string>
     <string name="poi_barbecue_grill">Gril barbeciw: oes</string>
     <string name="poi_water_utility">Swyddfa cyfleustodau dŵr</string>

@@ -11,27 +11,34 @@ import android.widget.ImageView.ScaleType;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 
 public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 
 	public static final String TAG = WikivoyageWelcomeDialogFragment.class.getSimpleName();
 
+	@Override
+	protected int getStatusBarColorId() {
+		return -1;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
 
-		View mainView = inflate(R.layout.fragment_wikivoyage_welcome_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_welcome_dialog, container, false);
 
-		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(getContext()));
+		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(requireContext()));
 		ImageView backBtn = mainView.findViewById(R.id.back_button);
 		backBtn.setImageDrawable(icBack);
 		backBtn.setOnClickListener(v -> dismiss());
@@ -41,17 +48,21 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 		mainImage.setScaleType(portrait ? ScaleType.CENTER_CROP : ScaleType.CENTER_INSIDE);
 		mainImage.setImageResource(imgId);
 
-		mainView.findViewById(R.id.continue_button).setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				dismiss();
-				Intent intent = new Intent(activity, WikivoyageExploreActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				activity.startActivity(intent);
-			}
-		});
+		mainView.findViewById(R.id.continue_button).setOnClickListener(v -> callActivity(activity -> {
+			dismiss();
+			Intent intent = new Intent(activity, WikivoyageExploreActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			activity.startActivity(intent);
+		}));
 
 		return mainView;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.description_container));
+		return collection;
 	}
 
 	@Override
@@ -59,12 +70,11 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 		return nightMode ? R.color.wikivoyage_welcome_bg_dark : R.color.wikivoyage_welcome_bg_light;
 	}
 
-	public static boolean showInstance(FragmentManager fm) {
-		try {
-			new WikivoyageWelcomeDialogFragment().show(fm, TAG);
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			new WikivoyageWelcomeDialogFragment().show(fragmentManager, TAG);
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

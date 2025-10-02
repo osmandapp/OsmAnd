@@ -12,13 +12,18 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +35,7 @@ import java.util.Map;
 
 public class GeocodingUtilities {
 
-	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
+	static final Log LOG = PlatformUtil.getLog(GeocodingUtilities.class);
 
 	// Location to test parameters https://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
 	// BUG https://www.openstreetmap.org/#map=19/50.9356/13.35348 (hno 26) street is 
@@ -38,11 +43,13 @@ public class GeocodingUtilities {
 	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 250;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 
-	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 45000;
+	public static final int DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
 	public static final float DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME = 1000;
 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
 	public static final float DISTANCE_BUILDING_PROXIMITY = 100;
+	
+	public static int GEOCODING_POI_MEMORY = 512; 
 
 
 	public static final Comparator<GeocodingResult> DISTANCE_COMPARATOR = new Comparator<GeocodingResult>() {
@@ -111,6 +118,17 @@ public class GeocodingUtilities {
 			}
 			return dist;
 		}
+		
+		public String getBuildingString() {
+			if (building != null) {
+				if(buildingInterpolation != null) {
+					return buildingInterpolation;
+				} else {
+					return building.getName();
+				}
+			}
+			return null;
+		}
 
 		public void resetDistance() {
 			dist = -1;
@@ -127,12 +145,9 @@ public class GeocodingUtilities {
 		@Override
 		public String toString() {
 			StringBuilder bld = new StringBuilder();
-			if (building != null) {
-				if(buildingInterpolation != null) {
-					bld.append(buildingInterpolation);
-				} else {
-					bld.append(building.getName());
-				}
+			String bldStr = getBuildingString();
+			if (bldStr != null) {
+				bld.append(bldStr);
 			}
 			if (street != null) {
 				bld.append(" str. ").append(street.getName()).append(" city ").append(city.getName());
@@ -406,6 +421,14 @@ public class GeocodingUtilities {
 			}
 		}
 		return streetBuildings;
+	}
+	
+	public static RoutingContext buildDefaultContextForPOI(BinaryMapIndexReader index) throws FileNotFoundException, IOException {
+		BinaryMapIndexReader geocoding = new BinaryMapIndexReader(new RandomAccessFile(index.getFile(), "r"), index);
+		RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(GEOCODING_POI_MEMORY, GEOCODING_POI_MEMORY);
+		RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", memoryLimit);
+		RoutingContext ctx = new RoutePlannerFrontEnd().buildRoutingContext(config, null, new BinaryMapIndexReader[] {geocoding}, RouteCalculationMode.NORMAL);
+		return ctx;
 	}
 
 	public List<GeocodingResult> sortGeocodingResults(List<BinaryMapIndexReader> list, List<GeocodingResult> res) throws IOException {

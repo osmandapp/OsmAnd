@@ -23,12 +23,14 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -232,7 +234,8 @@ public class WaypointHelper {
 	}
 
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
-		Location lastProjection = app.getRoutingHelper().getLastProjection();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		Location lastProjection = routingHelper == null ? null : routingHelper.getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
 		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, lastProjection, delta);
@@ -787,7 +790,7 @@ public class WaypointHelper {
 	}
 
 	private void runAsync(@NonNull Runnable runnable, @Nullable OnCompleteCallback callback) {
-		new AsyncTask<Void, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... voids) {
 				runnable.run();
@@ -800,6 +803,6 @@ public class WaypointHelper {
 					callback.onComplete();
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 }

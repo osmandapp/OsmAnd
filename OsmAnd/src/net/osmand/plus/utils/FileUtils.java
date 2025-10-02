@@ -4,8 +4,6 @@ import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -225,6 +223,7 @@ public class FileUtils {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
+				app.getOsmandMap().getMapLayers().getRouteSelectionLayer().clearCachedGpx(selected.getGpxFile());
 			}
 			app.getGpxDbHelper().remove(SharedUtil.kFile(file));
 			app.getSmartFolderHelper().onGpxFileDeleted(SharedUtil.kFile(file));
@@ -450,6 +449,14 @@ public class FileUtils {
 		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
 		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
 		return new File(backupDir, fileName);
+	}
+
+	public static boolean isProbablyDir(@NonNull File file) {
+		return file.exists() ? file.isDirectory() : file.getPath().endsWith("/") || !file.getName().contains(".");
+	}
+
+	public static boolean isProbablyDir(@NonNull String path) {
+		return isProbablyDir(new File(path));
 	}
 
 	public interface RenameCallback {

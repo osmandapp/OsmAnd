@@ -3,7 +3,6 @@ package net.osmand.plus.settings.fragments;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
 
-import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
@@ -89,7 +87,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (DIALOGS_AND_NOTIFICATIONS_PREF_ID.equals(prefId)) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
-				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_DOWNLOAD_MAP_DIALOG.get());
+				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_SUGGEST_MAP_DIALOG.get());
 				imageView.setEnabled(enabled);
 			}
 		} else if (SEND_UNIQUE_USER_IDENTIFIER_PREF_ID.equals(prefId)) {
@@ -147,12 +145,10 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	public void onPreferenceChanged(@NonNull String prefId) {
 		if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
 			// recreate activity to update locale
-			Activity activity = getActivity();
-			OsmandApplication app = getMyApplication();
-			if (app != null && activity != null) {
+			callActivity(activity -> {
 				app.getLocaleHelper().checkPreferredLocale();
 				RestartActivity.doRestart(activity);
-			}
+			});
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupUninstallSpeedCamerasPref();
 		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
@@ -275,7 +271,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupDialogsAndNotificationsPref() {
 		boolean showStartupMessages = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get();
-		boolean showDownloadMapDialog = settings.SHOW_DOWNLOAD_MAP_DIALOG.get();
+		boolean showDownloadMapDialog = settings.SHOW_SUGGEST_MAP_DIALOG.get();
 		String summary;
 		if (showStartupMessages && showDownloadMapDialog) {
 			summary = getString(R.string.shared_string_all);

@@ -5,13 +5,13 @@ import static net.osmand.plus.download.local.OperationType.CLEAR_TILES_OPERATION
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
@@ -21,10 +21,12 @@ import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 import net.osmand.plus.download.local.OperationType;
-import net.osmand.plus.download.local.dialogs.DeleteConfirmationBottomSheet.ConfirmDeletionListener;
+import net.osmand.plus.download.local.dialogs.DeleteConfirmationDialogController.ConfirmDeletionListener;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -32,7 +34,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class LocalBaseFragment extends BaseOsmAndFragment implements OperationListener,
+public abstract class LocalBaseFragment extends BaseFullScreenFragment implements OperationListener,
 		ConfirmDeletionListener, DownloadEvents, OnMapSourceUpdateListener, RenameCallback {
 
 	private final Map<String, IndexItem> itemsToUpdate = new HashMap<>();
@@ -49,6 +51,14 @@ public abstract class LocalBaseFragment extends BaseOsmAndFragment implements Op
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		DeleteConfirmationDialogController.askUpdateListener(app, this);
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	@Override
@@ -95,7 +105,7 @@ public abstract class LocalBaseFragment extends BaseOsmAndFragment implements Op
 
 	public void performOperation(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
 		LocalOperationTask task = new LocalOperationTask(app, type, this);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, items);
+		OsmAndTaskManager.executeTask(task, items);
 	}
 
 	@Override

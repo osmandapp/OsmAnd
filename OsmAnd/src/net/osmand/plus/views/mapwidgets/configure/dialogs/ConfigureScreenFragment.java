@@ -23,7 +23,7 @@ import com.google.android.material.appbar.AppBarLayout.Behavior;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
@@ -32,6 +32,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -48,14 +50,13 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
+public class ConfigureScreenFragment extends BaseFullScreenFragment implements QuickActionUpdatesListener,
 		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
 	private MapWidgetRegistry widgetRegistry;
 	private WidgetsSettingsHelper widgetsSettingsHelper;
-	private ApplicationMode selectedAppMode;
 
 	private MapActivity mapActivity;
 
@@ -80,18 +81,18 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mapActivity = (MapActivity) requireMyActivity();
-		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, selectedAppMode);
+		widgetsSettingsHelper = new WidgetsSettingsHelper(mapActivity, appMode);
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_configure_screen, container, false);
+		View view = inflate(R.layout.fragment_configure_screen, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			view.setFitsSystemWindows(true);
 		}
 
 		appBar = view.findViewById(R.id.appbar);
@@ -109,6 +110,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		}
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createCollapsingAppBar(R.id.appbar));
+		return collection;
 	}
 
 	@Override
@@ -219,7 +227,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			item.bgSelectedColor = bgSelectedColor;
 			item.contentDescription = mode.toHumanString();
 			item.tag = mode;
-			if (Algorithms.objectEquals(selectedAppMode, mode)) {
+			if (Algorithms.objectEquals(appMode, mode)) {
 				selectedItem = item;
 			}
 			items.add(item);
@@ -227,10 +235,9 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		modesToggle.setItems(items);
 		modesToggle.setSelected(selectedItem);
 		modesToggle.setOnSelectChipListener(chip -> {
-			if (chip.tag instanceof ApplicationMode) {
-				ApplicationMode mode = (ApplicationMode) chip.tag;
-				if (!Algorithms.stringsEqual(mode.getStringKey(), selectedAppMode.getStringKey())) {
-					selectedAppMode = mode;
+			if (chip.tag instanceof ApplicationMode mode) {
+				if (!Algorithms.stringsEqual(mode.getStringKey(), appMode.getStringKey())) {
+					setAppMode(mode);
 					modesToggle.scrollTo(chip);
 					settings.setApplicationMode(mode);
 					updateFragment();
@@ -271,7 +278,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.setAppMode(appMode);
 		widgetsSettingsHelper.resetConfigureScreenSettings();
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
@@ -283,7 +290,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		if (mapActivity == null) {
 			return;
 		}
-		widgetsSettingsHelper.setAppMode(selectedAppMode);
+		widgetsSettingsHelper.setAppMode(appMode);
 		widgetsSettingsHelper.copyConfigureScreenSettings(fromAppMode);
 		recreateControlsCompletely(mapActivity);
 		updateFragment();
@@ -349,21 +356,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			speedometerListener = change -> app.runInUIThread(() -> updateCard(otherCard));
 		}
 		return speedometerListener;
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
 	}
 
 	private void updateFragment() {

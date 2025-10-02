@@ -16,7 +16,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 /**
  * control that shows a distance between
@@ -37,8 +36,6 @@ public class ParkingMapWidget extends SimpleWidget {
 		setText(null, null);
 		setIcons(PARKING);
 		updateInfo(null);
-
-		setOnClickListener(getOnClickListener());
 	}
 
 	@Override
@@ -67,7 +64,7 @@ public class ParkingMapWidget extends SimpleWidget {
 					cachedMeters = 0;
 					setText(null, null);
 				} else {
-					String distance = OsmAndFormatter.getFormattedDistance(cachedMeters, mapActivity.getMyApplication());
+					String distance = OsmAndFormatter.getFormattedDistance(cachedMeters, mapActivity.getApp());
 					int ls = distance.lastIndexOf(' ');
 					if (ls == -1) {
 						setText(distance, null);

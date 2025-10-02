@@ -19,7 +19,6 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.OsmandMapTileView;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public final CommonPreference<Float> AIS_CPA_WARNING_DISTANCE;
 	public static final Float AIS_CPA_WARNING_DEFAULT_DISTANCE = 1.0f;
 
-	public AisTrackerPlugin(OsmandApplication app) {
+	public AisTrackerPlugin(@NonNull OsmandApplication app) {
 		super(app);
 		/* "ais_nmea_protocol" etc. is a reference to the content of xml/ais_settings.xml */
 		AIS_NMEA_PROTOCOL = registerIntPreference(AIS_NMEA_PROTOCOL_ID, AIS_NMEA_PROTOCOL_UDP);
@@ -71,8 +70,6 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_SHIP_LOST_TIMEOUT = registerIntPreference(AIS_SHIP_LOST_TIMEOUT_ID, AIS_SHIP_LOST_DEFAULT_TIMEOUT);
 		AIS_CPA_WARNING_TIME = registerIntPreference(AIS_CPA_WARNING_TIME_ID, AIS_CPA_DEFAULT_WARNING_TIME);
 		AIS_CPA_WARNING_DISTANCE = registerFloatPreference(AIS_CPA_WARNING_DISTANCE_ID, AIS_CPA_WARNING_DEFAULT_DISTANCE);
-
-		Log.d("AisTrackerPlugin", "constructor");
 	}
 
 	@Override
@@ -92,7 +89,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 	@Override
 	public CharSequence getDescription(boolean linksEnabled) {
-		return app.getString(R.string.plugin_ais_tracker_description).concat("\n\n").concat(app.getString(R.string.plugin_ais_tracker_disclaimer));
+		return app.getString(R.string.plugin_ais_tracker_description).concat("\n\n")
+				.concat(app.getString(R.string.plugin_ais_tracker_disclaimer));
 	}
 
 	@Override
@@ -112,7 +110,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 	@Override
 	public List<ApplicationMode> getAddedAppModes() {
-		return Arrays.asList(ApplicationMode.BOAT);
+		return Collections.singletonList(ApplicationMode.BOAT);
 	}
 
 	@Override
@@ -157,7 +155,6 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		} else {
 			if (layer != null) {
 				mapView.removeLayer(layer);
-				layer.cleanup();
 				layer = null;
 				mapView.refreshMap();
 			}

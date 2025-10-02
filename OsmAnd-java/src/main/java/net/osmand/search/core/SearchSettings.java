@@ -32,7 +32,8 @@ public class SearchSettings {
 	private List<BinaryMapIndexReader> offlineIndexes = new ArrayList<>();
 	private int radiusLevel = 1;
 	private int totalLimit = -1;
-	private String lang;
+	private String appLang;
+	private String mapLang;
 	private boolean transliterateIfMissing;
 	private ObjectType[] searchTypes;
 	private boolean emptyQueryAllowed;
@@ -42,9 +43,10 @@ public class SearchSettings {
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 
 	public SearchSettings(SearchSettings s) {
-		if(s != null) {
+		if (s != null) {
 			this.radiusLevel = s.radiusLevel;
-			this.lang = s.lang;
+			this.appLang = s.appLang;
+			this.mapLang = s.mapLang;
 			this.transliterateIfMissing = s.transliterateIfMissing;
 			this.totalLimit = s.totalLimit;
 			this.offlineIndexes = s.offlineIndexes;
@@ -75,14 +77,23 @@ public class SearchSettings {
 	public int getRadiusLevel() {
 		return radiusLevel;
 	}
-	
-	public String getLang() {
-		return lang;
+
+	public String getAppLang() {
+		return appLang;
 	}
-	
+
+	public String getLang() {
+		return mapLang;
+	}
+
 	public SearchSettings setLang(String lang, boolean transliterateIfMissing) {
+		return setLangs(lang, lang, transliterateIfMissing);
+	}
+
+	public SearchSettings setLangs(String appLang, String mapLang, boolean transliterateIfMissing) {
 		SearchSettings s = new SearchSettings(this);
-		s.lang = lang;
+		s.appLang = appLang;
+		s.mapLang = mapLang;
 		s.transliterateIfMissing = transliterateIfMissing;
 		return s;
 	}
@@ -245,7 +256,8 @@ public class SearchSettings {
 		}
 		json.put("radiusLevel", radiusLevel);
 		json.put("totalLimit", totalLimit);
-		json.put("lang", lang);
+		json.put("lang", mapLang);
+		json.put("appLang", appLang);
 		json.put("transliterateIfMissing", transliterateIfMissing);
 		json.put("emptyQueryAllowed", emptyQueryAllowed);
 		json.put("sortByName", sortByName);
@@ -270,8 +282,12 @@ public class SearchSettings {
 		s.transliterateIfMissing = json.optBoolean("transliterateIfMissing", false);
 		s.emptyQueryAllowed = json.optBoolean("emptyQueryAllowed", false);
 		s.sortByName = json.optBoolean("sortByName", false);
+
 		if (json.has("lang")) {
-			s.lang = json.getString("lang");
+			s.mapLang = json.getString("lang");
+		}
+		if (json.has("appLang")) {
+			s.appLang = json.getString("appLang");
 		}
 		if (json.has("regionLang")) {
 			s.regionLang = json.getString("regionLang");

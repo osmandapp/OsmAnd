@@ -29,7 +29,11 @@ object RouteActivityHelper {
 	private var cachedGroups = mutableListOf<RouteActivityGroup>()
 	private var cachedActivities = mutableListOf<RouteActivity>()
 
-	fun findRouteActivity(id: String?) = id?.let { getActivities().firstOrNull { it.id == id } }
+	fun findRouteActivity(id: String?) = id?.let {
+		getActivities().firstOrNull {
+			it.id == id
+		}
+	}
 
 	fun getActivityGroups(): List<RouteActivityGroup> {
 		if (cachedGroups.isEmpty()) {
@@ -119,6 +123,8 @@ object RouteActivityHelper {
 		val json = Json.parseToJsonElement(activitiesJsonStr)
 		val groupsArray = json.jsonObject["groups"] as JsonArray
 
+		val cachedGroups = mutableListOf<RouteActivityGroup>()
+		val cachedActivities = mutableListOf<RouteActivity>()
 		for (groupElement in groupsArray) {
 			val groupJson = groupElement.jsonObject
 			val id = groupJson["id"]!!.jsonPrimitive.content
@@ -140,6 +146,8 @@ object RouteActivityHelper {
 			}
 			cachedGroups.add(activitiesGroup)
 		}
+		this.cachedGroups = cachedGroups
+		this.cachedActivities = cachedActivities
 	}
 
 	private fun runAsync(block: suspend () -> Unit) {

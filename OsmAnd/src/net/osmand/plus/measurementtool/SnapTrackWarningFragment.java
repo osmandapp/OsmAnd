@@ -29,9 +29,11 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapControlsLayer;
@@ -40,7 +42,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
-public class SnapTrackWarningFragment extends BaseOsmAndFragment {
+public class SnapTrackWarningFragment extends BaseFullScreenFragment {
 
 	public static final int REQUEST_CODE = 1000;
 	public static final int CANCEL_RESULT_CODE = 2;
@@ -86,7 +88,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
-		View rootView = themedInflater.inflate(R.layout.fragment_plan_route_warning, container, false);
+		View rootView = inflate(R.layout.fragment_plan_route_warning, container, false);
 
 		applyButton = rootView.findViewById(R.id.right_bottom_button);
 		cancelButton = rootView.findViewById(R.id.dismiss_button);
@@ -105,21 +107,28 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 			mapControlsContainer.setVisibility(View.GONE);
 			TypedValue typedValueAttr = new TypedValue();
 			int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
-			getMapActivity().getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
+			getThemedContext().getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			rootView.setBackgroundResource(typedValueAttr.resourceId);
 			LinearLayout mainView = rootView.findViewById(R.id.main_view);
 			FrameLayout.LayoutParams params;
 			params = (FrameLayout.LayoutParams) mainView.getLayoutParams();
 			params.gravity = TOP;
-			int landscapeWidth = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
+			int landscapeWidth = getDimensionPixelSize(R.dimen.dashboard_land_width);
 			rootView.setLayoutParams(new FrameLayout.LayoutParams(landscapeWidth, MATCH_PARENT));
 		}
 		refreshControlsButtons();
 		return rootView;
 	}
 
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.buttons_container));
+		return collection;
+	}
+
 	private void setupControlButtons(@NonNull View view) {
-		MapActivity activity = getMapActivity();
+		MapActivity activity = requireMapActivity();
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 
@@ -214,15 +223,6 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 
 	private void refreshControlsButtons() {
 		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
-	}
-
-	public MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		} else {
-			return null;
-		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {

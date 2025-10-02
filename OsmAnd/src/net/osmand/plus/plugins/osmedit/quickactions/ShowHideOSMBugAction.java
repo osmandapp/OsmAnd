@@ -2,12 +2,14 @@ package net.osmand.plus.plugins.osmedit.quickactions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_OSM_BUG_ACTION_ID;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -16,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.utils.UiUtilities;
 
 public class ShowHideOSMBugAction extends QuickAction {
 
@@ -34,7 +37,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
+	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			plugin.SHOW_OSM_BUGS.set(!plugin.SHOW_OSM_BUGS.get());
@@ -44,9 +47,8 @@ public class ShowHideOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
+		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(
 				R.string.quick_action_showhide_osmbugs_descr);
 		parent.addView(view);

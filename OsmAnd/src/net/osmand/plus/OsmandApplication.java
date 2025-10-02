@@ -62,6 +62,7 @@ import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
+import net.osmand.plus.help.HelpArticlesHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -92,6 +93,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -100,6 +102,7 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -184,6 +187,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
+	SearchHistoryHelper searchHistoryHelper;
 	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
@@ -211,6 +215,8 @@ public class OsmandApplication extends MultiDexApplication {
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
 	ExplorePlacesOnlineProvider explorePlacesProvider;
+	HelpArticlesHelper helpArticlesHelper;
+	ClickableWayHelper clickableWayHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -321,7 +327,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	private void createInUiThread() {
 		new Toast(AndroidUtils.createDisplayContext(this)); // activate in UI thread to avoid further exceptions
-		new AsyncTask<View, Void, Void>() {
+		OsmAndTaskManager.executeTask(new AsyncTask<View, Void, Void>() {
 			@Override
 			protected Void doInBackground(View... params) {
 				return null;
@@ -329,7 +335,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 			protected void onPostExecute(Void result) {
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 	@NonNull
@@ -591,8 +597,16 @@ public class OsmandApplication extends MultiDexApplication {
 		return searchUICore;
 	}
 
+	public SearchHistoryHelper getSearchHistoryHelper() {
+		return searchHistoryHelper;
+	}
+
 	public TravelHelper getTravelHelper() {
 		return travelHelper;
+	}
+
+	public ClickableWayHelper getClickableWayHelper() {
+		return clickableWayHelper;
 	}
 
 	public TravelRendererHelper getTravelRendererHelper() {
@@ -668,6 +682,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public TrackSortModesHelper getTrackSortModesHelper() {
 		return trackSortModesHelper;
+	}
+
+	@NonNull
+	public HelpArticlesHelper getHelpArticlesHelper() {
+		return helpArticlesHelper;
 	}
 
 	public CommandPlayer getPlayer() {
@@ -1032,9 +1051,13 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
-				if (isAppInForeground()) {
-					LOG.info(">>>> APP startForegroundService = " + usageIntent);
-					context.startForegroundService(intent);
+				try {
+					if (isAppInForeground()) {
+						LOG.info(">>>> APP startForegroundService = " + usageIntent);
+						context.startForegroundService(intent);
+					}
+				} catch (IllegalStateException e) {
+					LOG.error("Failed to start foreground service: " + e.getMessage(), e);
 				}
 			});
 		} else {
@@ -1043,21 +1066,24 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void setupDrivingRegion(@NonNull WorldRegion worldRegion) {
-		DrivingRegion drivingRegion = null;
-		RegionParams params = worldRegion.getParams();
+		DrivingRegion drivingRegion = getDrivingRegion(worldRegion.getParams());
+		if (drivingRegion != null) {
+			settings.executePreservingPrefTimestamp(() -> settings.DRIVING_REGION.set(drivingRegion));
+		}
+	}
+
+	@Nullable
+	private DrivingRegion getDrivingRegion(@NonNull RegionParams params) {
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
 		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MILES_AND_FEET : KILOMETERS_AND_METERS;
 		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MILES_AND_METERS : KILOMETERS_AND_METERS;
 		for (DrivingRegion region : DrivingRegion.values()) {
 			if (region.leftHandDriving == leftHand && (region.defMetrics == mc1 || region.defMetrics == mc2)) {
-				drivingRegion = region;
-				break;
+				return region;
 			}
 		}
-		if (drivingRegion != null) {
-			settings.DRIVING_REGION.set(drivingRegion);
-		}
+		return null;
 	}
 
 	@NonNull
@@ -1134,5 +1160,9 @@ public class OsmandApplication extends MultiDexApplication {
 				LOG.error(e);
 			}
 		}
+	}
+
+	public void reInitPoiTypes() {
+		appInitializer.reInitPoiTypes();
 	}
 }

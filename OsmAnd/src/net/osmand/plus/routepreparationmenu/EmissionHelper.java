@@ -6,18 +6,17 @@ import static net.osmand.plus.routing.RoutingHelperUtils.getParameterForDerivedP
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.populateListParameters;
 import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -116,7 +115,7 @@ public class EmissionHelper {
 					return true;
 				};
 				DetectRegionTask task = new DetectRegionTask(app, onRegionDetected);
-				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+				OsmAndTaskManager.executeTask(task, latLon);
 			}
 		} else {
 			callback.processResult(getFormattedEmission(motorType, meters, motorType.fuelEmissionFactor));

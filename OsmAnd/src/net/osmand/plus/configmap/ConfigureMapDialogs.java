@@ -32,7 +32,6 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -82,7 +81,7 @@ public class ConfigureMapDialogs {
 
 	protected static void showMapMagnifierDialog(@NonNull MapActivity activity, boolean nightMode,
 	                                             @NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter adapter) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 		OsmandSettings settings = app.getSettings();
 
@@ -133,7 +132,7 @@ public class ConfigureMapDialogs {
 			@NonNull MapActivity activity, boolean nightMode,
 			@NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter uiAdapter
 	) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 
 		OsmandMapTileView view = activity.getMapView();
@@ -167,8 +166,9 @@ public class ConfigureMapDialogs {
 
 		int[] selectedLanguageIndex = new int[1];
 		boolean[] transliterateNames = new boolean[1];
+		boolean[] showLocalNames = new boolean[1];
 
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		OsmandSettings settings = app.getSettings();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 
@@ -191,8 +191,10 @@ public class ConfigureMapDialogs {
 		}
 		selectedLanguageIndex[0] = selected;
 		transliterateNames[0] = settings.MAP_TRANSLITERATE_NAMES.get();
+		showLocalNames[0] = settings.MAP_SHOW_LOCAL_NAMES.get();
 
 		OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
+		OnCheckedChangeListener showLocalNamesListener = (buttonView, isChecked) -> showLocalNames[0] = isChecked;
 
 		ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(
 				ctx, R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
@@ -208,12 +210,20 @@ public class ConfigureMapDialogs {
 					v.findViewById(R.id.topDivider).setVisibility(View.VISIBLE);
 					v.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
 					v.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
-					TextView switchText = v.findViewById(R.id.switchText);
-					switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
-					SwitchCompat check = v.findViewById(R.id.check);
-					check.setChecked(transliterateNames[0]);
-					check.setOnCheckedChangeListener(translitChangdListener);
-					UiUtilities.setupCompoundButton(nightMode, profileColor, check);
+					
+					TextView transliterateTitle = v.findViewById(R.id.transliterate_title);
+					transliterateTitle.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
+					SwitchCompat transliterateSwitch = v.findViewById(R.id.transliterate_switch);
+					transliterateSwitch.setChecked(transliterateNames[0]);
+					transliterateSwitch.setOnCheckedChangeListener(translitChangdListener);
+					UiUtilities.setupCompoundButton(nightMode, profileColor, transliterateSwitch);
+
+					TextView localNamesTitle = v.findViewById(R.id.local_names_title);
+					localNamesTitle.setText(R.string.show_local_names);
+					SwitchCompat localNamesSwitch = v.findViewById(R.id.local_names_switch);
+					localNamesSwitch.setChecked(showLocalNames[0]);
+					localNamesSwitch.setOnCheckedChangeListener(showLocalNamesListener);
+					UiUtilities.setupCompoundButton(nightMode, profileColor, localNamesSwitch);
 				} else {
 					checkedTextView.setChecked(position == selectedLanguageIndex[0]);
 					v.findViewById(R.id.topDivider).setVisibility(View.GONE);
@@ -237,6 +247,7 @@ public class ConfigureMapDialogs {
 		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
 			view.getSettings().MAP_TRANSLITERATE_NAMES.set(selectedLanguageIndex[0] > 0 && transliterateNames[0]);
+			view.getSettings().MAP_SHOW_LOCAL_NAMES.set(selectedLanguageIndex[0] > 0 && showLocalNames[0]);
 			AlertDialog dlg = (AlertDialog) dialog;
 			int index = dlg.getListView().getCheckedItemPosition();
 			view.getSettings().MAP_PREFERRED_LOCALE.set(
@@ -256,7 +267,7 @@ public class ConfigureMapDialogs {
 			@NonNull CommonPreference<String> pref, @NonNull ContextMenuItem item,
 			@NonNull OnDataChangeUiAdapter uiAdapter, boolean nightMode
 	) {
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		String title = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
 		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
 		int selectedIndex = AndroidUtils.getRenderPropertySelectedValueIndex(app, p);
@@ -293,7 +304,7 @@ public class ConfigureMapDialogs {
 		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
 			return;
 		}
-		OsmandApplication app = activity.getMyApplication();
+		OsmandApplication app = activity.getApp();
 		boolean[] checkedItems = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
 			checkedItems[i] = prefs.get(i).get();

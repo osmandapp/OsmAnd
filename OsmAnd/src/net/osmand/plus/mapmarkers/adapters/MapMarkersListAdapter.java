@@ -11,6 +11,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -68,7 +69,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		locDescription = new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
 				mapActivity.getString(R.string.shared_string_location));
 		this.mapActivity = mapActivity;
-		inRoundTrip = mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
+		inRoundTrip = mapActivity.getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
 		reloadData();
 	}
 
@@ -86,8 +87,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		OsmandApplication app = mapActivity.getApp();
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		UiUtilities iconsCache = app.getUIUtilities();
 
 		boolean locationItem = showLocationItem && pos == 0;
@@ -109,8 +110,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			marker = (MapMarker) item;
 		}
 
-		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
-		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.card_and_list_background_light : R.color.activity_background_color_dark));
+		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
+		holder.title.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.card_and_list_background_light : R.color.activity_background_color_dark));
 		holder.title.setText(location != null ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
 		holder.iconDirection.setVisibility(View.GONE);
 		holder.optionsBtn.setVisibility(roundTripFinishItem ? View.VISIBLE : View.GONE);
@@ -119,34 +120,19 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			TypedValue outValue = new TypedValue();
 			mapActivity.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
 			holder.optionsBtn.setBackgroundResource(outValue.resourceId);
-			holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					listener.onDisableRoundTripClick();
-				}
-			});
+			holder.optionsBtn.setOnClickListener(view -> listener.onDisableRoundTripClick());
 		}
-		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_main_dark : R.color.divider_color_light));
+		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.app_bar_main_dark : R.color.divider_color_light));
 		holder.divider.setVisibility(lastMarkerItem ? View.GONE : View.VISIBLE);
 		holder.checkBox.setVisibility(roundTripFinishItem ? View.GONE : View.VISIBLE);
 		if (!roundTripFinishItem) {
-			holder.checkBox.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					listener.onCheckBoxClick(holder.itemView);
-				}
-			});
-			holder.checkBoxContainer.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					holder.checkBox.performClick();
-				}
-			});
+			holder.checkBox.setOnClickListener(view -> listener.onCheckBoxClick(holder.itemView));
+			holder.checkBoxContainer.setOnClickListener(view -> holder.checkBox.performClick());
 		}
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 		holder.iconReorder.setVisibility(View.VISIBLE);
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));
-		holder.description.setTextColor(ColorUtilities.getDefaultIconColor(app, night));
+		holder.description.setTextColor(ColorUtilities.getDefaultIconColor(app, nightMode));
 
 		holder.firstDescription.setVisibility((start || finish) ? View.VISIBLE : View.GONE);
 		if (start) {
@@ -180,20 +166,17 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.checkBox.setChecked(marker.selected);
 
 			holder.iconReorder.setAlpha(1f);
-			holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View view, MotionEvent event) {
-					if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-						inDragAndDrop = true;
-						if (showRoundTripItem) {
-							int roundTripItemPos = finishPos;
-							reloadData();
-							notifyItemRemoved(roundTripItemPos);
-						}
-						listener.onDragStarted(holder);
+			holder.iconReorder.setOnTouchListener((view, event) -> {
+				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+					inDragAndDrop = true;
+					if (showRoundTripItem) {
+						int roundTripItemPos = finishPos;
+						reloadData();
+						notifyItemRemoved(roundTripItemPos);
 					}
-					return false;
+					listener.onDragStarted(holder);
 				}
+				return false;
 			});
 
 			String descr;
@@ -214,7 +197,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		holder.leftPointSpace.setVisibility(visibility);
 		holder.rightPointSpace.setVisibility(visibility);
 		if (showDistance) {
-			holder.distance.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_distance : R.color.color_myloc_distance));
+			holder.distance.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.color_distance : R.color.color_myloc_distance));
 			LatLon first = firstSelectedMarker && useLocation
 					? new LatLon(myLoc.getLatitude(), myLoc.getLongitude())
 					: getPreviousSelectedMarkerLatLon(pos);
@@ -271,7 +254,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			return false;
 		}
 		int offset = showLocationItem ? 1 : 0;
-		Collections.swap(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers(), from - offset, to - offset);
+		Collections.swap(mapActivity.getApp().getMapMarkersHelper().getMapMarkers(), from - offset, to - offset);
 		Collections.swap(items, from, to);
 		notifyItemMoved(from, to);
 		return true;
@@ -303,7 +286,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	public void reloadData() {
 		items.clear();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		showLocationItem = myLoc != null;
 		inRoundTrip = app.getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
@@ -311,7 +294,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			lookupLocationAddress(app);
 			items.add(myLoc);
 		}
-		items.addAll(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers());
+		items.addAll(mapActivity.getApp().getMapMarkersHelper().getMapMarkers());
 		calculateStartAndFinishPos();
 		showRoundTripItem = inRoundTrip && !inDragAndDrop && startPos != -1;
 		if (showRoundTripItem) {
@@ -340,7 +323,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	private void calculateStartAndFinishPos() {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		boolean startCalculated = false;
 		boolean finishCalculated = false;
 		boolean firstSelectedMarkerCalculated = false;

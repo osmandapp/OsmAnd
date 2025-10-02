@@ -25,7 +25,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.render.RendererRegistry.IRendererLoadedEventListener;
+import net.osmand.plus.render.RendererRegistry.RendererEventListener;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -47,7 +47,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class TravelRendererHelper implements IRendererLoadedEventListener {
+public class TravelRendererHelper implements RendererEventListener {
 
 	private static final Log log = PlatformUtil.getLog(TravelRendererHelper.class);
 	private static final String FILE_PREFERENCE_PREFIX = "travel_file_";
@@ -96,7 +96,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 
 	private void addListeners() {
 		addShowTravelPrefListener();
-		rendererRegistry.addRendererLoadedEventListener(this);
+		rendererRegistry.addRendererEventListener(this);
 		fileVisibilityPropertiesListener = change -> {
 			for (OnFileVisibilityChangeListener listener : fileVisibilityListeners) {
 				listener.fileVisibilityChanged();

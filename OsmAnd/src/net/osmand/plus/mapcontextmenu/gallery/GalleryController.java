@@ -1,11 +1,10 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -13,16 +12,11 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.LoadImagesMetadataTask;
 import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class GalleryController implements IDialogController {
 
@@ -30,11 +24,18 @@ public class GalleryController implements IDialogController {
 	private final OsmandApplication app;
 
 	private ImageCardsHolder currentCardsHolder;
+
+	private final NetworkImageLoader imageLoader;
 	private final List<WeakReference<DownloadMetadataListener>> listeners = new LinkedList<>();
 	private final Set<WikiImageCard> downloadingMetadata = new HashSet<>();
 
 	public GalleryController(@NonNull OsmandApplication app) {
 		this.app = app;
+		imageLoader = new NetworkImageLoader(app, true);
+	}
+
+	public NetworkImageLoader getImageLoader() {
+		return imageLoader;
 	}
 
 	@NonNull
@@ -71,7 +72,7 @@ public class GalleryController implements IDialogController {
 		}
 		downloadingMetadata.addAll(cards);
 		LoadImagesMetadataTask task = new LoadImagesMetadataTask(app, cards);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	public void notifyMetaDataUpdated(@NonNull Set<String> updatedMediaTagImages) {
@@ -126,7 +127,7 @@ public class GalleryController implements IDialogController {
 	}
 
 	public static int getSettingsSpanCount(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			return app.getSettings().CONTEXT_GALLERY_SPAN_GRID_COUNT.get();
 		} else {
@@ -135,7 +136,7 @@ public class GalleryController implements IDialogController {
 	}
 
 	public static void setSpanSettings(@NonNull MapActivity mapActivity, int newSpanCount) {
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = mapActivity.getApp();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			app.getSettings().CONTEXT_GALLERY_SPAN_GRID_COUNT.set(newSpanCount);
 		} else {

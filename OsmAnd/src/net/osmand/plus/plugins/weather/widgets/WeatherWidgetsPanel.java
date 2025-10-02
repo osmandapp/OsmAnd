@@ -28,6 +28,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.WidgetsContainer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import java.util.ArrayList;
@@ -120,8 +121,14 @@ public class WeatherWidgetsPanel extends LinearLayout implements WidgetsContaine
 			textState.night = nightMode;
 			widget.updateColors(textState);
 			widgetView.findViewById(R.id.widget_bg).setBackgroundResource(nightMode ? R.color.list_background_color_dark : R.color.widget_background_color_light);
-			((TextView) widgetView.findViewById(R.id.widget_text)).setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), nightMode));
-			((TextView) widgetView.findViewById(R.id.widget_text_small)).setTextColor(ColorUtilities.getSecondaryTextColor(getContext(), nightMode));
+			OutlinedTextContainer widgetText = widgetView.findViewById(R.id.widget_text);
+
+			widgetText.setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), nightMode));
+			widgetText.showOutline(false);
+
+			OutlinedTextContainer widgetSmallText = widgetView.findViewById(R.id.widget_text_small);
+			widgetSmallText.setTextColor(ColorUtilities.getSecondaryTextColor(getContext(), nightMode));
+			widgetSmallText.showOutline(false);
 		}
 	}
 }

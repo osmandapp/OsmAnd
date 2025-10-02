@@ -171,13 +171,13 @@
     <string name="shared_string_hour_short">時</string>
     <string name="shared_string_minute_short">分</string>
     <string name="shared_string_second_short">秒</string>
-    <string name="welcome_descr"><b>OsmAnd 追蹤器</b>可以讓您分享您的位置，並在 OsmAnd 中看到其他人的位置。<br/> <br/>應用程式使用 Telegram API，所以您需要一個 Telegram 帳號。</string>
+    <string name="welcome_descr"><b>OsmAnd 追蹤器</b>可以讓您分享您的位置，並在 OsmAnd 中看到其他人的位置。<br></br> <br></br>應用程式使用 Telegram API，所以您需要一個 Telegram 帳號。</string>
     <string name="my_location">我的位置</string>
     <string name="live_now">即時狀況</string>
     <string name="monitoring_is_enabled">監視已啟用</string>
     <string name="monitoring_is_disabled">監視已停用</string>
     <string name="time_on_the_move">移動時間</string>
-    <string name="average_altitude">平均海拔</string>
+    <string name="average_altitude">平均海拔高度</string>
     <string name="average_speed">平均速率</string>
     <string name="open_in_osmand">在 OsmAnd 中顯示</string>
     <string name="end_date">結束日期</string>
@@ -215,7 +215,7 @@
     <string name="shared_string_search">搜尋</string>
     <string name="direction">方向</string>
     <string name="precision">精確</string>
-    <string name="altitude">高度</string>
+    <string name="altitude">海拔</string>
     <string name="bearing">方位</string>
     <string name="proxy_key">金鑰</string>
     <string name="proxy_password">密碼</string>
@@ -252,7 +252,7 @@
     <string name="time_zone_descr">選取要在您位置訊息中顯示的時區。</string>
     <string name="time_zone">時區</string>
     <string name="units_and_formats">單位與格式</string>
-    <string name="unit_of_length_descr">變更距離的測量方式。</string>
+    <string name="unit_of_length_descr">選擇距離的顯示單位。</string>
     <string name="unit_of_length">長度單位</string>
     <string name="unit_of_speed_system_descr">定義速度單位。</string>
     <string name="unit_of_speed_system">速度單位</string>

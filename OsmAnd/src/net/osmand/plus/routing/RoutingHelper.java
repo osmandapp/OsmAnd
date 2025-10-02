@@ -21,6 +21,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.RouteExporter;
@@ -48,7 +49,7 @@ public class RoutingHelper {
 	// 3) calculate max allowed deviation before route recalculation * multiplier
 	private static final float POS_TOLERANCE = 60; // 60m or 30m + accuracy
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
-	private static final int MAX_POSSIBLE_SPEED = 140;// 504 km/h
+	private static final int MAX_POSSIBLE_SPEED = 340; // ~ 1 Mach
 	private static final boolean ENABLE_LOG_POS_PROCESSED = false;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
@@ -324,6 +325,10 @@ public class RoutingHelper {
 		return intermediatePoints;
 	}
 
+	public boolean isOnRoute() {
+		return isRouteCalculated() && !isDeviatedFromRoute();
+	}
+
 	public boolean isRouteCalculated() {
 		return route.isCalculated();
 	}
@@ -449,6 +454,12 @@ public class RoutingHelper {
 				if (RoutingHelperUtils.identifyUTurnIsNeeded(this, currentLocation, posTolerance)) {
 					isDeviatedFromRoute = true;
 				}
+				// 4.5. Disable recalculation in tunnels (tunnel locations are simulated)
+				if (calculateRoute && SimulationProvider.isTunnelLocationSimulated(currentLocation)) {
+					log.info("Ignore route recalculation in tunnel: " + currentLocation); //$NON-NLS-1$
+					isDeviatedFromRoute = false;
+					calculateRoute = false;
+				}
 				// 5. Update Voice router
 				// Do not update in route planning mode
 				boolean inRecalc = (calculateRoute || isRouteBeingCalculated());
@@ -500,12 +511,12 @@ public class RoutingHelper {
 		}
 	}
 
-	private boolean isLocationJumping(Location currentLocation, boolean targetPointsChanged) {
+	private boolean isLocationJumping(@NonNull Location currentLocation, boolean targetPointsChanged) {
 		if (route.hasMissingMaps() && lastGoodRouteLocation != null && !targetPointsChanged) {
 			double time = currentLocation.getTime() - lastGoodRouteLocation.getTime();
 			double dist = currentLocation.distanceTo(lastGoodRouteLocation);
 			if (time > 0) {
-				double speed = dist / (time / 1000);
+				double speed = dist / (time / 1000.0);
 				return speed > MAX_POSSIBLE_SPEED;
 			}
 		}
@@ -801,8 +812,8 @@ public class RoutingHelper {
 	}
 
 	@NonNull
-	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n) {
-		return new CurrentStreetName(this, n);
+	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n, boolean showNextTurn) {
+		return new CurrentStreetName(this, n, showNextTurn);
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {

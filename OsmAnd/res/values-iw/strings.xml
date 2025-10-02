@@ -1474,7 +1474,7 @@
     <string name="download_tab_downloads">כל ההורדות</string>
     <string name="download_tab_updates">עדכונים</string>
     <string name="download_tab_local">מקומי</string>
-    <string name="no_internet_connection">לא ניתן להוריד, נא לבדוק את החיבור שלך לאינטרנט.</string>
+    <string name="no_internet_connection">אין חיבור לאינטרנט</string>
     <string name="everything_up_to_date">כל הקבצים עדכניים</string>
     <string name="use_opengl_render">שימוש בעיבוד OpenGL</string>
     <string name="search_for">חיפוש אחר</string>
@@ -2184,7 +2184,7 @@
     <string name="rendering_value_low_name">נמוכה</string>
     <string name="rendering_attr_contourWidth_description">עובי קו מתאר</string>
     <string name="rendering_attr_contourWidth_name">עובי קו מתאר</string>
-    <string name="rendering_attr_hideWaterPolygons_description">מים</string>
+    <string name="rendering_attr_hideWaterPolygons_description">הסתרת מים</string>
     <string name="rendering_attr_hideWaterPolygons_name">הסתרת מים</string>
     <string name="routing_attr_allow_motorway_name">להשתמש בדרכים סלולות</string>
     <string name="routing_attr_allow_motorway_description">מאפשר דרכים סלולות.</string>
@@ -4255,8 +4255,8 @@
     <string name="option_available_only_in_osmand_pro">זמין כחלק ממינוי OsmAnd Pro.</string>
     <string name="display_route_tracks_as_poi">הצגת מסלולים כנקודות עניין</string>
     <string name="quick_action_toggle_preference">מתג להחלפת העדפה.</string>
-    <string name="delete_history_items_descr">למחוק את פריטי ההיסטוריה הנבחרים\?</string>
-    <string name="delete_history_items">למחוק %1$s פריטי היסטוריה\?</string>
+    <string name="delete_history_items_descr">הרשומות הנבחרות נמחקות מהרשימה.</string>
+    <string name="delete_history_items">למחוק %1$s פריטי היסטוריה?</string>
     <string name="copying_file">הקובץ %1$s מועתק…</string>
     <string name="progress_complete">%1$s הושלמו</string>
     <string name="storage_copied_files_size">%1$s קבצים הועתקו %2$s</string>
@@ -5001,4 +5001,6 @@
     <string name="default_buttons_size_original_description">על כל כפתור לשמור את הגודל שלו.</string>
     <string name="calculating_indication_message">מתבצע חישוב…</string>
     <string name="cant_load_map_styles">לא ניתן לטעון סגנונות מפה.</string>
+    <string name="wiki_around">מקומות נפוצים בקרבת מקום</string>
+    <string name="deleting_history">ההיסטוריה נמחקת…</string>
 </resources>

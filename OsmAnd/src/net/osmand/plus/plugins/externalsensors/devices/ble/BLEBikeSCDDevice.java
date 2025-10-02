@@ -9,7 +9,6 @@ import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBikeSensor;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
