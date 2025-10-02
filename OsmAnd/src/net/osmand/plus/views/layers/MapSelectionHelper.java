@@ -3,15 +3,9 @@ package net.osmand.plus.views.layers;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-//import static net.osmand.osm.OsmRouteType.HIKING;
-//import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-//import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
-//import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
-//import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 
 import android.content.Context;
 import android.graphics.PointF;
-//import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +13,6 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
-//import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.*;
@@ -31,15 +24,11 @@ import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstancePara
 import net.osmand.data.*;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-//import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
-//import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.settings.backend.OsmandSettings;
-//import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
@@ -47,10 +36,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
-//import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.search.AmenitySearcher;
-//import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -66,7 +53,6 @@ public class MapSelectionHelper {
 	private static final int TILE_SIZE = 256;
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
 
@@ -75,7 +61,6 @@ public class MapSelectionHelper {
 
 	public MapSelectionHelper(@NonNull Context context) {
 		app = (OsmandApplication) context.getApplicationContext();
-		settings = app.getSettings();
 		view = app.getOsmandMap().getMapView();
 		mapLayers = app.getOsmandMap().getMapLayers();
 	}
@@ -208,7 +193,6 @@ public class MapSelectionHelper {
 			double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			Set<Long> uniqueRenderedObjectIds = new HashSet<>();
-//			boolean osmRoutesAlreadyAdded = false;
 			for (RenderedObject renderedObject : renderedObjects) {
 				Long objectId = renderedObject.getId();
 				if (objectId != null && uniqueRenderedObjectIds.contains(objectId)) {
@@ -252,10 +236,6 @@ public class MapSelectionHelper {
 				}
 				LatLon searchLatLon = result.getObjectLatLon() != null ? result.getObjectLatLon() : result.getPointLatLon();
 
-//				if (isOsmRoute && !osmRoutesAlreadyAdded) {
-//					osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
-//				}
-
 				if (isTravelGpx) {
 					addTravelGpx(result, travelGpxFilter);
 				} else if (isClickableWay && !isOldOsmRoute) {
@@ -290,7 +270,6 @@ public class MapSelectionHelper {
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
-//			boolean osmRoutesAlreadyAdded = false;
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 			for (int i = 0; i < symbols.size(); i++) {
@@ -361,10 +340,6 @@ public class MapSelectionHelper {
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOldOsmRoute = !Algorithms.isEmpty(NetworkRouteSelector.getRouteKeys(tags));
 							boolean isClickableWay = app.getClickableWayHelper().isClickableWay(obfMapObject, tags);
-
-//							if (isOsmRoute && !osmRoutesAlreadyAdded) {
-//								osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
-//							}
 
 							if (isTravelGpx) {
 								addTravelGpx(result, tags.get(ROUTE_ID));
@@ -538,80 +513,6 @@ public class MapSelectionHelper {
 		}
 		return isUniqueGpxFileName(selectedObjects, travelGpx.getGpxFileName() + GPX_FILE_EXT);
 	}
-
-//	private boolean addOsmRoutesAround(@NonNull MapSelectionResult result,
-//			@NonNull RotatedTileBox tileBox, @NonNull PointF point,
-//			@NonNull NetworkRouteSelectorFilter selectorFilter) {
-//		if (Algorithms.isEmpty(selectorFilter.typeFilter)) {
-//			return false;
-//		}
-//		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi()) * 1.5f);
-//		LatLon minLatLon = NativeUtilities.getLatLonFromElevatedPixel(view.getMapRenderer(), tileBox,
-//				point.x - searchRadius, point.y - searchRadius);
-//		LatLon maxLatLon = NativeUtilities.getLatLonFromElevatedPixel(view.getMapRenderer(), tileBox,
-//				point.x + searchRadius, point.y + searchRadius);
-//		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
-//				maxLatLon.getLongitude(), maxLatLon.getLatitude());
-//		return putRouteGpxToSelected(result.getAllObjects(), mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
-//	}
-
-//	private NetworkRouteSelectorFilter createRouteFilter() {
-//		NetworkRouteSelectorFilter routeSelectorFilter = new NetworkRouteSelectorFilter();
-//		Set<OsmRouteType> filteredOsmRouteTypes = new HashSet<>();
-//		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
-//				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
-//		for (RenderingRuleProperty property : customRules) {
-//			String attrName = property.getAttrName();
-//			OsmRouteType osmRouteType = OsmRouteType.getByRenderingProperty(attrName);
-//			if (osmRouteType != null) {
-//				boolean enabled;
-//				if (HIKING.getRenderingPropertyAttr().equals(attrName)) {
-//					CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
-//					enabled = property.containsValue(pref.get());
-//				} else {
-//					enabled = settings.getRenderBooleanPropertyValue(property);
-//				}
-//				if (enabled) {
-//					filteredOsmRouteTypes.add(osmRouteType);
-//				}
-//			}
-//		}
-//		if (!Algorithms.isEmpty(filteredOsmRouteTypes)) {
-//			routeSelectorFilter.typeFilter = filteredOsmRouteTypes;
-//		}
-//		return routeSelectorFilter;
-//	}
-
-//	private boolean putRouteGpxToSelected(@NonNull List<SelectedMapObject> selectedObjects,
-//			@NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
-//			@NonNull NetworkRouteSelectorFilter selectorFilter) {
-//		int added = 0;
-//		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
-//		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
-//		Map<RouteKey, GpxFile> routes = new LinkedHashMap<>();
-//		try {
-//			routes = routeSelector.getRoutes(rect, false, null);
-//		} catch (Exception e) {
-//			log.error(e);
-//		}
-//		for (RouteKey routeKey : routes.keySet()) {
-//			if (isUniqueOsmRoute(selectedObjects, routeKey)) {
-//				selectedObjects.add(new SelectedMapObject(new Pair<>(routeKey, rect), provider));
-//				added++;
-//			}
-//		}
-//		return added > 0;
-//	}
-
-//	private boolean isUniqueOsmRoute(@NonNull List<SelectedMapObject> selectedObjects, @NonNull RouteKey tmpKey) {
-//		for (SelectedMapObject selectedObject : selectedObjects) {
-//			Object object = selectedObject.object();
-//			if (object instanceof Pair && ((Pair<?, ?>) object).first instanceof RouteKey key && key.equals(tmpKey)) {
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
 
 	private void addAmenity(@NonNull MapSelectionResult result,
 	                        @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
