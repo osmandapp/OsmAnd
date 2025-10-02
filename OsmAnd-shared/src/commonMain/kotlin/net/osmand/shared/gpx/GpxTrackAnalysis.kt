@@ -58,6 +58,10 @@ class GpxTrackAnalysis {
 	var hasSpeedInTrack = false
 	var hasElevationMetricsInGpx = false
 
+	var lastUphill: ElevationDiffsCalculator.SlopeInfo? = null
+	var lastDownhill: ElevationDiffsCalculator.SlopeInfo? = null
+
+
 	fun getGpxParameter(parameter: GpxParameter): Any? {
 		return parameters[parameter] ?: parameter.defaultValue
 	}
@@ -599,6 +603,15 @@ class GpxTrackAnalysis {
 			elevationDiffsCalc.calculateElevationDiffs()
 			diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
 			diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
+
+			val segLastUp = elevationDiffsCalc.getLastUphill()
+			if (segLastUp != null) {
+				this.lastUphill = segLastUp
+			}
+			val segLastDown = elevationDiffsCalc.getLastDownhill()
+			if (segLastDown != null) {
+				this.lastDownhill = segLastDown
+			}
 		}
 	}
 

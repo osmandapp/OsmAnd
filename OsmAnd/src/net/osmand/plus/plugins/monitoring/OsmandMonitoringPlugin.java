@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_MONITORING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DOWNHILL;
@@ -22,6 +21,12 @@ import net.osmand.plus.plugins.monitoring.actions.FinishTripRecordingAction;
 import net.osmand.plus.plugins.monitoring.actions.SaveRecordedTripAndContinueAction;
 import net.osmand.plus.plugins.monitoring.actions.StartNewTripSegmentAction;
 import net.osmand.plus.plugins.monitoring.actions.TripRecordingAction;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingSlopeWidgetState;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidgetState;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidgetState;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingSlopeWidget;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.NavigationService;
@@ -40,9 +45,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -206,17 +209,31 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Nullable
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		switch (widgetType) {
-			case TRIP_RECORDING_DISTANCE:
-				return new TripRecordingDistanceWidget(mapActivity, customId, widgetsPanel);
-			case TRIP_RECORDING_TIME:
-				return new TripRecordingTimeWidget(mapActivity, customId, widgetsPanel);
-			case TRIP_RECORDING_UPHILL:
-				return new TripRecordingUphillWidget(mapActivity, customId, widgetsPanel);
-			case TRIP_RECORDING_DOWNHILL:
-				return new TripRecordingDownhillWidget(mapActivity, customId, widgetsPanel);
-		}
-		return null;
+		return switch (widgetType) {
+			case TRIP_RECORDING_DISTANCE -> {
+				TripRecordingDistanceWidgetState distanceWidgetState = new TripRecordingDistanceWidgetState(app, customId, WidgetType.TRIP_RECORDING_DISTANCE);
+				yield new TripRecordingDistanceWidget(mapActivity, distanceWidgetState, customId, widgetsPanel);
+			}
+			case TRIP_RECORDING_TIME ->
+					new TripRecordingTimeWidget(mapActivity, customId, widgetsPanel);
+			case TRIP_RECORDING_UPHILL -> {
+				TripRecordingElevationWidgetState widgetState = new TripRecordingElevationWidgetState(app, true, customId, WidgetType.TRIP_RECORDING_UPHILL);
+				yield new TripRecordingUphillWidget(mapActivity, widgetState, customId, widgetsPanel);
+			}
+			case TRIP_RECORDING_DOWNHILL -> {
+				TripRecordingElevationWidgetState uphillWidgetState = new TripRecordingElevationWidgetState(app, false, customId, WidgetType.TRIP_RECORDING_DOWNHILL);
+				yield new TripRecordingDownhillWidget(mapActivity, uphillWidgetState, customId, widgetsPanel);
+			}
+			case TRIP_RECORDING_AVERAGE_SLOPE -> {
+				TripRecordingSlopeWidgetState slopeWidgetState = new TripRecordingSlopeWidgetState(app, customId, WidgetType.TRIP_RECORDING_AVERAGE_SLOPE);
+				yield new TripRecordingSlopeWidget(mapActivity, slopeWidgetState, WidgetType.TRIP_RECORDING_AVERAGE_SLOPE, customId, widgetsPanel);
+			}
+			case TRIP_RECORDING_MAX_SPEED -> {
+				TripRecordingMaxSpeedWidgetState maxSpeedWidgetState = new TripRecordingMaxSpeedWidgetState(app, customId, WidgetType.TRIP_RECORDING_MAX_SPEED);
+				yield new TripRecordingMaxSpeedWidget(mapActivity, maxSpeedWidgetState, WidgetType.TRIP_RECORDING_MAX_SPEED, customId, widgetsPanel);
+			}
+			default -> null;
+		};
 	}
 
 	@Override
