@@ -32,7 +32,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	private final OsmandPreference<Boolean> arrivalTimeOtherwiseTimeToGoPref;
 
 	private boolean cachedArrivalTimeOtherwiseTimeToGo;
-	private int cachedLeftSeconds;
+	private long cachedTargetSeconds = -1;
 
 	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, getWidgetType(widgetState.isIntermediate()), customId, widgetsPanel);
@@ -85,7 +85,6 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int leftSeconds = 0;
-
 		boolean timeModeUpdated = arrivalTimeOtherwiseTimeToGoPref.get() != cachedArrivalTimeOtherwiseTimeToGo;
 		if (timeModeUpdated) {
 			cachedArrivalTimeOtherwiseTimeToGo = arrivalTimeOtherwiseTimeToGoPref.get();
@@ -95,9 +94,13 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 
 		if (routingHelper.isRouteCalculated()) {
 			leftSeconds = widgetState.isIntermediate() ? routingHelper.getLeftTimeNextIntermediate() : routingHelper.getLeftTime();
-			boolean updateIntervalPassed = Math.abs(leftSeconds - cachedLeftSeconds) > UPDATE_INTERVAL_SECONDS;
+			long targetLeftSeconds = leftSeconds;
+			if (targetLeftSeconds != 0) {
+				targetLeftSeconds += System.currentTimeMillis() / 1000;
+			}
+			boolean updateIntervalPassed = Math.abs(targetLeftSeconds - cachedTargetSeconds) > UPDATE_INTERVAL_SECONDS;
 			if (leftSeconds != 0 && (updateIntervalPassed || timeModeUpdated)) {
-				cachedLeftSeconds = leftSeconds;
+				cachedTargetSeconds = targetLeftSeconds;
 				if (arrivalTimeOtherwiseTimeToGoPref.get()) {
 					updateArrivalTime(leftSeconds);
 				} else {
@@ -106,8 +109,8 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 			}
 		}
 
-		if (leftSeconds == 0 && cachedLeftSeconds != 0) {
-			cachedLeftSeconds = 0;
+		if (leftSeconds == 0 && cachedTargetSeconds != 0) {
+			cachedTargetSeconds = 0;
 			setText(null, null);
 		}
 	}
