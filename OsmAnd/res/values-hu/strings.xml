@@ -4365,10 +4365,7 @@
     <string name="download_complete">A letöltés kész</string>
     <string name="shared_string_duplicate">Másolat készítése</string>
     <string name="auto_backup_title">Automatikus biztonsági mentés</string>
-    <string name="trip_recording_downhill_widget_desc">Összeadja a jelenleg rögzített út lejtőinek hosszát.</string>
-    <string name="trip_recording_uphill_widget_desc">Összeadja a jelenleg rögzített út emelkedőinek hosszát.</string>
     <string name="trip_recording_duration_widget_desc">Megjeleníti a jelenleg rögzített út idejét.</string>
-    <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás hosszát.</string>
     <string name="true_bearing_wdiget_desc">A valódi észak és a célpont közötti, az Ön tartózkodási helyéről megfigyelt szög.</string>
     <string name="relative_bearing_widget_desc">Megjeleníti a haladási iránya és a célpont közötti szöget.</string>
     <string name="widget_with_dot">Modul.</string>

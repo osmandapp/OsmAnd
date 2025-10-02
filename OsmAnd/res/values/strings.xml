@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents or the last descent of the currently recorded trip.</string>
+    <string name="trip_recording_uphill_widget_desc">Shows the sum of all climbs or the last climb of the currently recorded trip.</string>
+    <string name="trip_recording_distance_widget_desc">Shows the total distance for your currently recorded trip, with modes to view the distance of the last ascent and descent.</string>
     <string name="trip_recording_max_speed_widget_description">Shows the maximum speed for the currently recorded trip. Tap to switch between the overall max speed and the max speed from the last uphill or downhill.</string>
     <string name="trip_recording_average_slope_widget_description">Shows the average slope for the last downhill or uphill section of the currently recorded trip.</string>
     <string name="average_slope">Average slope</string>
@@ -1564,10 +1567,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="av_notes_photo_widget_desc">Tapping the widget lets you take a photo.</string>
     <string name="av_notes_video_widget_desc">Tapping the widget lets you record a video.</string>
     <string name="av_notes_audio_widget_desc">Tapping the widget lets you take an audio note.</string>
-    <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents of the currently recorded trip.</string>
-    <string name="trip_recording_uphill_widget_desc">Shows the sum of all the climbs of the currently recorded trip.</string>
     <string name="trip_recording_duration_widget_desc">Shows the currently recorded trip time.</string>
-    <string name="trip_recording_distance_widget_desc">Shows the currently recorded trip distance.</string>
     <string name="true_bearing_wdiget_desc">Angle between true north and the target point observed from your location.</string>
     <string name="relative_bearing_widget_desc">Shows the angle between your forward movement direction and the target point.</string>
     <string name="second_marker_widget_desc">You can configure the widget to show the distance or Estimated time of arrival left to the second map marker.</string>

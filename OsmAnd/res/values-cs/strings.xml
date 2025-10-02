@@ -4451,7 +4451,6 @@
     <string name="transport_hazmat_yes_desc">Vyberte příslušnou kategorii.</string>
     <string name="routing_attr_hazmat_category_name">Kategorie nebezpečného nákladu</string>
     <string name="transport_hazmat_no_desc">Silnice a tunely mohou omezovat přepravu nebezpečných materiálů.</string>
-    <string name="trip_recording_downhill_widget_desc">Zobrazuje součet všech klesání aktuálně zaznamenané jízdy.</string>
     <string name="distance_to_intermediate_widget_desc">Widget zobrazuje vzdálenost, která zbývá do prvního mezilehlého bodu. Po překročení mezilehlých bodů se vzdálenost aktualizuje k dalšímu mezilehlému bodu.</string>
     <string name="shared_string_large">Velký</string>
     <string name="auto_25_chars_route_tr_kr">Zahněte vpravo a držte se vpravo</string>
@@ -4573,8 +4572,6 @@
     <string name="auto_25_chars_route_roundabout_kl">Použijte %1$d. výjezd a držte se vlevo</string>
     <string name="duplacate_widget_added_snackbar">Do seznamu se přidává duplicitní nástroj.</string>
     <string name="av_notes_audio_widget_desc">Klepnutím na nástroj můžete pořídit zvukovou poznámku.</string>
-    <string name="trip_recording_uphill_widget_desc">Zobrazuje součet všech stoupání aktuálně zaznamenané cesty.</string>
-    <string name="trip_recording_distance_widget_desc">Zobrazuje aktuálně zaznamenanou vzdálenost jízdy.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Barevné schéma hloubkových vrstevnic</string>
     <string name="next_turn_widget_desc">Nástroj zobrazuje informace o příštím odbočení s obrázkem manévru a vzdáleností k němu.</string>
     <string name="widget_with_dot">Nástroj.</string>

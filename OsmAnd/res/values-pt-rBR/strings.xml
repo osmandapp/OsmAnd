@@ -4623,11 +4623,9 @@
     <string name="favorite_confirm_delete_group">Excluir o grupo \"%1$s\" e todos os pontos incluídos (%2$d)?</string>
     <string name="av_notes_photo_widget_desc">Tocar no widget permite tirar uma foto.</string>
     <string name="av_notes_video_widget_desc">Tocar no widget permite gravar um vídeo.</string>
-    <string name="trip_recording_downhill_widget_desc">Mostra a soma de todos os descendentes da viagem atualmente gravada.</string>
     <string name="trip_recording_duration_widget_desc">Mostra o tempo decorrido da viagem atual a ser gravada.</string>
     <string name="time_to_destination_widget_desc">O widget mostra \"Hora de chegada\" ou \"Hora de ir\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo da rota a partir do local atual.</string>
     <string name="av_notes_audio_widget_desc">Tocar no widget permite que você faça uma nota de áudio.</string>
-    <string name="trip_recording_distance_widget_desc">Mostra a distância decorrida da viagem atual a ser gravada.</string>
     <string name="connect_with_straight_line">Conecte-se com uma linha reta</string>
     <string name="attach_roads_descr">Anexe sua trilha às estradas para obter informações detalhadas da rota, incluindo instruções passo a passo e atributos da estrada.</string>
     <string name="duplacate_widget_added_snackbar">Um widget duplicado está sendo adicionado à lista.</string>
@@ -4645,7 +4643,6 @@
     <string name="distance_to_intermediate_widget_desc">O widget mostra a distância restante até o primeiro ponto intermediário. Uma vez que os pontos intermediários são passados, a distância será atualizada para o próximo ponto intermediário.</string>
     <string name="second_next_turn_widget_desc">O widget mostra informações sobre sua segunda próxima curva, que é ativada se a curva estiver próxima.</string>
     <string name="shared_string_duplicate">Duplicar</string>
-    <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atualmente registrada.</string>
     <string name="relative_bearing_widget_desc">Mostra o ângulo entre a direção do seu movimento para frente e o ponto alvo.</string>
     <string name="second_marker_widget_desc">Você pode configurar o widget para mostrar a distância ou o tempo estimado de chegada até o segundo marcador do mapa.</string>
     <string name="first_marker_widget_desc">Você pode configurar o widget para mostrar a distância ou o tempo estimado de chegada até o primeiro marcador do mapa.</string>
