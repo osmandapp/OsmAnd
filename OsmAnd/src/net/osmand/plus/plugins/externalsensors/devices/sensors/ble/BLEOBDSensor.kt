@@ -50,6 +50,15 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 		requestCharacteristic(listOf(characteristics))
 	}
 
+	fun isReadCharacteristicsSet(): Boolean {
+		return readCharacteristicUUID != GattAttributes.UUID_CHARACTERISTIC_UNDEFINED
+	}
+
+	override fun requestReadCharacteristic(): Boolean {
+		return false
+	}
+
+
 	override fun getRequestedCharacteristicUUID(): UUID {
 		return readCharacteristicUUID
 	}

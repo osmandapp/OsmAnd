@@ -156,11 +156,12 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
 				fireDeviceDisconnectedEvent();
 				gatt.close();
+				LOG.debug("GATT disconnected (newState == BluetoothProfile.STATE_DISCONNECTED)");
 				bluetoothGatt = null;
 				setCurrentState(DeviceConnectionState.DISCONNECTED);
 			}
 		} else {
-			LOG.debug("GATT disconnected");
+			LOG.debug("GATT disconnected (status != GATT_SUCCESS)");
 			fireDeviceDisconnectedEvent();
 			gatt.close();
 			bluetoothGatt = null;
@@ -246,9 +247,14 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		@Override
 		public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
 			super.onDescriptorWrite(gatt, descriptor, status);
-			completedCommand();
+			onDescriptorWriteCompleted();
+
 		}
 	};
+
+	protected void onDescriptorWriteCompleted() {
+		completedCommand();
+	}
 
 	@SuppressLint("MissingPermission")
 	@Override
@@ -259,7 +265,13 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		}
 		if (isDisconnected()) {
 			if (bluetoothAdapter == null) {
-				LOG.debug("BluetoothAdapter not initialized");
+				LOG.debug("BluetoothAdapter not initialized on connect");
+				return false;
+			}
+
+			device = bluetoothAdapter.getRemoteDevice(deviceId);
+			if (device == null) {
+				LOG.debug("Device not found");
 				return false;
 			}
 
@@ -275,15 +287,8 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				}
 			}
 
-			device = bluetoothAdapter.getRemoteDevice(deviceId);
-
-			if (device == null) {
-				LOG.debug("Device not found");
-				return false;
-			}
-
 			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
-			LOG.debug("Trying to create new connection " + device.getAddress());
+			LOG.debug("Trying to create new connection " + device.getAddress() + ". gatt " + bluetoothGatt);
 			setCurrentState(DeviceConnectionState.CONNECTING);
 			for (DeviceListener listener : listeners) {
 				listener.onDeviceConnecting(this);
@@ -297,7 +302,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	public boolean disconnect() {
 		setCurrentState(DeviceConnectionState.DISCONNECTED);
 		if (bluetoothAdapter == null || bluetoothGatt == null) {
-			LOG.debug("BluetoothAdapter not initialized");
+			LOG.debug("BluetoothAdapter not initialized on disconnect");
 			return false;
 		}
 		bluetoothGatt.disconnect();
@@ -329,10 +334,11 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic,
 	                                          boolean enabled) {
-		if (bluetoothAdapter == null || bluetoothGatt == null) {
+		BluetoothGatt gatt = bluetoothGatt;
+		if (bluetoothAdapter == null || gatt == null) {
 			return;
 		}
-		boolean res = bluetoothGatt.setCharacteristicNotification(characteristic, enabled);
+		boolean res = gatt.setCharacteristicNotification(characteristic, enabled);
 		if (!res) {
 			LOG.error("Device setCharacteristicNotification failed " + getName());
 		}
@@ -344,12 +350,12 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		} else {
 			descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
 			enqueueCommand(() -> {
-				if (!bluetoothGatt.writeDescriptor(descriptor)) {
+				if (!gatt.writeDescriptor(descriptor)) {
 					LOG.error("Device writeDescriptor failed " + getName());
+					completedCommand();
 				} else {
 					LOG.debug("Device writeDescriptor success " + characteristic);
 				}
-				completedCommand();
 			});
 		}
 	}

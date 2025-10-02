@@ -44,17 +44,9 @@ class VehicleMetricsBLEDeviceHelper(
 		uuid: ParcelUuid,
 		address: String,
 		deviceName: String): BLEAbstractDevice {
-		val uuidString = uuid.uuid.toString()
-		val device = BLEOBDDevice(bluetoothAdapter, address, uuidString)
+		val device = BLEOBDDevice(bluetoothAdapter, address)
 		device.setDeviceName(deviceName)
 		device.rssi = result.rssi
-
-		var settings = devicesSettingsCollection.getDeviceSettings(address)
-		if (settings == null) {
-			settings = DevicesSettingsCollection.createDeviceSettings(device.deviceId, device, true)
-		}
-		settings.setUuid(uuidString)
-		devicesSettingsCollection.setDeviceSettings(address, settings)
 		return device
 	}
 }
