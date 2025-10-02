@@ -269,8 +269,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				if (pair.second instanceof SelectedGpxPoint) {
 					menuController = new SelectedGpxMenuController(mapActivity, pointDescription,
 							(SelectedGpxPoint) ((Pair<?, ?>) object).second);
-				} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
-					menuController = new NetworkRouteMenuController(mapActivity, pointDescription, pair);
+//				} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
+//					menuController = new NetworkRouteMenuController(mapActivity, pointDescription, pair);
 				}
 			}
 		}

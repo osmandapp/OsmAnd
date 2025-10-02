@@ -223,7 +223,7 @@ public class FileUtils {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
-				app.getOsmandMap().getMapLayers().getRouteSelectionLayer().clearCachedGpx(selected.getGpxFile());
+//				app.getOsmandMap().getMapLayers().getRouteSelectionLayer().clearCachedGpx(selected.getGpxFile());
 			}
 			app.getGpxDbHelper().remove(SharedUtil.kFile(file));
 			app.getSmartFolderHelper().onGpxFileDeleted(SharedUtil.kFile(file));
