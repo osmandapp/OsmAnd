@@ -5149,7 +5149,7 @@
     <string name="add_row">Додати рядок</string>
     <string name="discard_changes_prompt">Відкинути зміни?</string>
     <string name="row_number">Рядок %1$s</string>
-    <string name="key_assignments">Прив\'язки клавіш</string>
+    <string name="key_assignments">Прив\'язки клавіші</string>
     <string name="topography_maps">Топографічні карти</string>
     <string name="tripltek_promo">Промо Tripltek на %1$s місяців</string>
     <string name="tripltek_promo_description">Безплатний доступ до функцій, включно з необмеженим завантаженням мап, 3D-рельєф тощо за %1$s на місяць</string>
@@ -5202,7 +5202,7 @@
     <string name="shared_string_limit">Обмеження</string>
     <string name="when_exceeded">Коли перевищено</string>
     <string name="custom_map_button_name_present">Така кнопка вже присутня</string>
-    <string name="add_button">Додати кнопку</string>
+    <string name="add_button">Додати кнопка</string>
     <string name="default_buttons">Типові кнопки</string>
     <string name="speed_limit_warning">Попередження щодо обмеження швидкості</string>
     <string name="speedometer_description">Показує вашу поточну швидкість за даними GPS</string>
@@ -5315,7 +5315,7 @@
     <string name="new_key_assignment">Нове призначення кнопки</string>
     <string name="key_name_pattern">Кнопка \"%1$s\"</string>
     <string name="assigned_keys">Призначені кнопки</string>
-    <string name="key_assignment_add_key">Додати кнопку</string>
+    <string name="key_assignment_add_key">Додати ключ</string>
     <string name="action_icon">Піктограма дії</string>
     <string name="key_assignment_add_action">Додати дію</string>
     <string name="missing_maps_ignore">Використати завантажені мапи</string>
