@@ -4186,7 +4186,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Montri ŝlosilojn «fixme»</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Montri ŝlosilojn «note»</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Bildsimboloj je malgrandigo</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skiza montrado de bildsimboloj je malaltaj skal-niveloj</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Je malaltaj skal-niveloj, skize bildigi bildsimbolojn de interesejoj, kiuj ne estas kutime montrataj</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Plividebligi akvovojojn en tuneloj</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Plividebligi akvovojojn en tuneloj</string>
     <string name="shared_string_not_used">Neuzata</string>
@@ -5872,4 +5872,5 @@
     <string name="accessibility_independent_features">Sendependaj ebloj</string>
     <string name="show_spherical_map">Vidigi sferan mapon</string>
     <string name="show_spherical_map_description">Vidigi sferoidan modelon de Tero</string>
+    <string name="shared_string_price">Prezo</string>
 </resources>
