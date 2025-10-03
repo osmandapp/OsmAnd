@@ -132,6 +132,10 @@ public class Amenity extends MapObject {
 		this.tagGroups = tagGroups;
 	}
 
+	public boolean hasTagGroups() {
+		return tagGroups != null && !tagGroups.isEmpty();
+	}
+
 	public void setRegionName(String regionName) {
 		this.regionName = regionName;
 	}
@@ -889,11 +893,45 @@ public class Amenity extends MapObject {
 		return alternateName;
 	}
 
+	public boolean matchCity(String cityName) {
+		if (tagGroups == null) {
+			return false;
+		}
+		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
+			City.CityType type = null;
+			List<String> names = new ArrayList<>();
+			for (TagValuePair tagValue : entry.getValue()) {
+				if (tagValue.tag.startsWith("name") || tagValue.tag.endsWith("name")) {
+					names.add(tagValue.value);
+				}
+				if (tagValue.tag.equals("place")) {
+					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
+					if (!isCityTypeAccept(type)) {
+						break;
+					}
+				}
+			}
+			if (isCityTypeAccept(type) && names.contains(cityName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public String getCityFromTagGroups(String lang) {
 		if (tagGroups == null) {
 			return null;
 		}
 		String result = null;
+		Map<City.CityType, String> places = new TreeMap<>(new Comparator<City.CityType>() {
+			@Override
+			public int compare(City.CityType o1, City.CityType o2) {
+				if (o1 == o2) {
+					return 0;
+				}
+				return o1.getPopulation() > o2.getPopulation() ? -1 : 1;
+			}
+		});
 		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
 			String translated = "";
 			String nonTranslated = "";
@@ -911,8 +949,11 @@ public class Amenity extends MapObject {
 			}
 			String name = translated.isEmpty() ? nonTranslated : translated;
 			if (!name.isEmpty() && isCityTypeAccept(type)) {
-				result = result == null ? name : result + ", " + name;
+				places.put(type, name);
 			}
+		}
+		for (Map.Entry<City.CityType, String> e : places.entrySet()) {
+			result = result == null ? e.getValue() : result + ", " + e.getValue();
 		}
 		return result;
 	}
