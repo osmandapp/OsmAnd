@@ -1010,5 +1010,9 @@ public class SearchPhrase {
 		}
 		return lastUnknownSearchWordComplete;
 	}
+
+	public List<NameStringMatcher> getUnknownWordsMatcher() {
+		return unknownWordsMatcher;
+	}
 	
 }

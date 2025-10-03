@@ -94,8 +94,8 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 700;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 700;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
-	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
-	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
+	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
+	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
 
@@ -392,6 +392,13 @@ public class SearchCoreFactory {
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
 						SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 						searchPoiInCity(nphrase, res, resultMatcher);
+					} else if (!Algorithms.isEmpty(phrase.getUnknownWordsMatcher())) {
+						List<NameStringMatcher> nms = phrase.getUnknownWordsMatcher();
+						for (NameStringMatcher n : nms) {
+							if (n.matches(res.localeName) || n.matches(res.otherNames)) {
+								searchPoiInCity(phrase, res, resultMatcher);
+							}
+						}
 					}
 					if (limit++ > LIMIT * phrase.getRadiusLevel()) {
 						break;
@@ -699,16 +706,14 @@ public class SearchCoreFactory {
 				}
 			};
 
-			ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher = null;//getDynamicTagGroupsMatcher(phrase);
-
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
-					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom, null,
+					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom,
 					matcher, rawDataCollector);
 
 			SearchRequest<Amenity> reqUnlimited = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
-					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null,
+					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 					matcher, rawDataCollector);
 
 			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
@@ -2048,22 +2053,5 @@ public class SearchCoreFactory {
 		PoiSubType subType;
 		String value;
 		String translatedValue;
-	}
-
-	public boolean matchCityInAmenity(SearchPhrase phrase, Amenity amenity) {
-		if (!phrase.hasCityName()) {
-			return false;
-		}
-		boolean matchCity = false;
-		boolean matchInName = false;
-		for (String cityName : phrase.getKnownCityNames()) {
-			matchCity = matchCity || amenity.matchCity(cityName);
-			matchInName = matchInName || amenity.getName().contains(cityName);
-			matchInName = matchInName || amenity.getOtherNames().contains(cityName);
-		}
-		if (matchCity || matchInName) {
-			return true;
-		}
-		return false;
 	}
 }
