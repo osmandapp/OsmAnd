@@ -4338,12 +4338,9 @@
     <string name="auto_25_chars_route_tu_kr">Faites demi-tour et restez à droite</string>
     <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis restez à gauche</string>
     <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis restez à droite</string>
-    <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet en cours d’enregistrement.</string>
-    <string name="trip_recording_downhill_widget_desc">Affiche la somme de toutes les descentes du trajet enregistré.</string>
     <string name="true_bearing_wdiget_desc">Angle entre le Nord vrai et la destination depuis votre position.</string>
     <string name="relative_bearing_widget_desc">Affiche l\'angle entre la direction de votre déplacement et la destination.</string>
     <string name="next_turn_widget_desc">Le widget illustre la prochaine bifurcation avec une image et vous indique la distance qui vous en sépare.</string>
-    <string name="trip_recording_uphill_widget_desc">Affiche le dénivelé positif cumulé du trajet en cours d\'enregistrement.</string>
     <string name="second_next_turn_widget_desc">Le widget vous informe de la seconde bifurcation à venir et s\'active à l\'approche de cette bifurcation.</string>
     <string name="duplacate_widget_added_snackbar">Une copie du widget est en cours d\'ajout à la liste.</string>
     <string name="second_marker_widget_desc">Vous pouvez configurer le widget pour afficher la Distance restante ou l\'Heure estimée d’arrivée jusqu\'au second marqueur.</string>

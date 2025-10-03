@@ -4866,7 +4866,6 @@
     <string name="time_to_intermediate_widget_desc">Visar \"Ankomsttid\" eller \"Återstående restid\" till första mellanliggande punkt. Tiden uppdateras kontinuerligt under navigeringen, och så fort en punkt passeras uppdateras den till nästa mellanliggande punkt.</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trådbusslinjer</string>
     <string name="shared_string_copy_to">Kopiera till</string>
-    <string name="trip_recording_downhill_widget_desc">Visar sammanlagda höjdmeter nedför i den pågående spårinspelningen.</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_attr_lightDetail_description">Standard: Namn (ljustyp.grupp.period). Ändra till info om sektorerna, karaktär för en specifik sektor, eller mindre info</string>
     <string name="poi_categories">Intressepunkt-kategorier</string>
@@ -4933,14 +4932,12 @@
     <string name="widget_with_dot">Widget.</string>
     <string name="no_config_smart_folder_title">Inte konfigurerat</string>
     <string name="compass_visible_if_map_rotated">Synlig när kartan är roterad</string>
-    <string name="trip_recording_distance_widget_desc">Visar längden för pågående spårinspelning.</string>
     <string name="gpx_no_routes_descr">Du kan använda verktyget \"%1$s\" för att lägga till en rutt till filen.</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="use_latin_name_if_missing">Om det saknas, använd translittererat namn</string>
     <string name="routing_attr_hazmat_category_usa_7_name">Radioaktiva ämnen</string>
     <string name="live_update_frequency_week_variant">Kartuppdateringar kollas varje vecka.</string>
     <string name="select_suggested_points">Välj föreslagna punkter</string>
-    <string name="trip_recording_uphill_widget_desc">Visar sammanlagda höjdmeter uppför i den pågående spårinspelningen.</string>
     <string name="quick_action_terrain_descr">En knapp för att visa eller dölja terränglager på kartan.</string>
     <string name="map_2d_mode_action">2D-läge</string>
     <string name="second_marker_widget_desc">Du kan ställa in widgeten att visa avstånd eller uppskattad restid kvar till den andra kartmarkören.</string>

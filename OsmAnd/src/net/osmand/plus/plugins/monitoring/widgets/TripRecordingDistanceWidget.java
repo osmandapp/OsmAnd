@@ -7,30 +7,35 @@ import android.view.View;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidgetState.TripRecordingDistanceMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 public class TripRecordingDistanceWidget extends SimpleWidget {
 
 	private static final long BLINK_DELAY_MILLIS = 500;
 
+	private final TripRecordingDistanceWidgetState distanceWidgetState;
 	private final SavingTrackHelper savingTrackHelper;
 
 	private long cachedLastUpdateTime;
 
-	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingDistanceWidgetState distanceWidgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, TRIP_RECORDING_DISTANCE, customId, widgetsPanel);
 		savingTrackHelper = app.getSavingTrackHelper();
-
+		this.distanceWidgetState = distanceWidgetState;
 		updateInfo(null);
 	}
 
@@ -42,6 +47,10 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 				plugin.askShowTripRecordingDialog(mapActivity);
 			}
 		};
+	}
+
+	public TripRecordingDistanceWidgetState getDistanceWidgetState() {
+		return distanceWidgetState;
 	}
 
 	@Override
@@ -57,26 +66,50 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 			return;
 		}
 
-		long lastUpdateTime = cachedLastUpdateTime;
-		boolean globalRecording = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-		boolean recording = savingTrackHelper.getIsRecording();
-		boolean liveMonitoring = plugin.isLiveMonitoringEnabled();
-		float distance = savingTrackHelper.getDistance();
+		TripRecordingDistanceMode recordingDistanceMode = distanceWidgetState.getDistanceModePreference().get();
+		if (recordingDistanceMode == TripRecordingDistanceMode.TOTAL_DISTANCE) {
+			long lastUpdateTime = cachedLastUpdateTime;
+			boolean globalRecording = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+			boolean recording = savingTrackHelper.getIsRecording();
+			boolean liveMonitoring = plugin.isLiveMonitoringEnabled();
+			float distance = savingTrackHelper.getDistance();
 
-		setText(distance);
-		setIcons(globalRecording, liveMonitoring, recording);
+			setText(distance);
+			setIcons(globalRecording, liveMonitoring, recording);
 
-		if (distance > 0) {
-			lastUpdateTime = app.getSavingTrackHelper().getLastTimeUpdated();
+			if (distance > 0) {
+				lastUpdateTime = app.getSavingTrackHelper().getLastTimeUpdated();
+			}
+
+			if (lastUpdateTime != cachedLastUpdateTime && (globalRecording || recording)) {
+				cachedLastUpdateTime = lastUpdateTime;
+
+				// Make bling effect
+				setIcons(false, liveMonitoring, true);
+				app.runInUIThread(() -> setIcons(globalRecording, liveMonitoring, !globalRecording), BLINK_DELAY_MILLIS);
+			}
+		} else {
+			GpxTrackAnalysis analysis = savingTrackHelper.getCurrentTrack().getTrackAnalysis(app);
+			SlopeInfo slopeInfo = recordingDistanceMode == TripRecordingDistanceMode.LAST_DOWNHILL ? analysis.getLastDownhill() : analysis.getLastUphill();
+			if (slopeInfo != null) {
+				setText((float) slopeInfo.getDistance());
+			}
+			setIcons(distanceWidgetState.getDistanceModePreference().get().getIcon(false), distanceWidgetState.getDistanceModePreference().get().getIcon(true));
 		}
+	}
 
-		if (lastUpdateTime != cachedLastUpdateTime && (globalRecording || recording)) {
-			cachedLastUpdateTime = lastUpdateTime;
-
-			// Make bling effect
-			setIcons(false, liveMonitoring, true);
-			app.runInUIThread(() -> setIcons(globalRecording, liveMonitoring, !globalRecording), BLINK_DELAY_MILLIS);
+	@Nullable
+	@Override
+	protected String getAdditionalWidgetName() {
+		if (distanceWidgetState != null) {
+			return getString(distanceWidgetState.getDistanceModePreference().get().titleId);
 		}
+		return null;
+	}
+
+	@StringRes
+	protected int getAdditionalWidgetNameDivider() {
+		return R.string.ltr_or_rtl_combine_via_colon;
 	}
 
 	private void setText(float distance) {

@@ -1000,7 +1000,6 @@
     <string name="auto_25_chars_route_tr_kl">Rẽ phải và hướng về bên trái</string>
     <string name="auto_25_chars_route_tr_kr">Rẽ phải và hướng về bên phải</string>
     <string name="auto_25_chars_route_roundabout_kr">Đi theo lối ra số %1$d và hướng về bên phải</string>
-    <string name="trip_recording_distance_widget_desc">Hiện khoảng cách của chuyến đi đang được ghi.</string>
     <string name="first_marker_widget_desc">Bạn có thể điều chỉnh widget để hiện khoảng cách hoặc thời gian dự kiến đến điểm đánh dấu thứ nhất.</string>
     <string name="distance_to_destination_widget_desc">Widget hiện khoảng cách còn lại cho tới điểm đến cuối cùng.</string>
     <string name="second_next_turn_widget_desc">Widget hiện thông tin về lối rẽ thứ hai nếu đến gần.</string>
@@ -1039,7 +1038,6 @@
     <string name="auto_25_chars_route_tl_kr">Rẽ trái và hướng về bên phải</string>
     <string name="max_speed_widget_desc">Hiện tốc độ tối đa cho con đường hiện đang đi.</string>
     <string name="current_speed_widget_desc">Hiện tốc độ hiện tại của bạn được lấy từ GPS.</string>
-    <string name="trip_recording_downhill_widget_desc">Hiện tổng những lần đi xuống của chuyến đi đang được ghi.</string>
     <string name="map_widget_distance_to_intermediate">Khoảng cách đến điểm trung gian</string>
     <string name="speak_route_recalculation">Thông báo việc tính toán lại tuyến đường</string>
     <string name="reset_all_settings_desc">Đặt lại tất cả cài đặt về mặc định?</string>
@@ -1061,7 +1059,6 @@
     <string name="map_rendering_engine">Công cụ kết xuất bản đồ</string>
     <string name="shared_string_duplicate">Nhân bản</string>
     <string name="av_notes_photo_widget_desc">Chạm vào widget sẽ cho phép bạn chụp một tấm ảnh.</string>
-    <string name="trip_recording_uphill_widget_desc">Hiện tổng những lần đi lên của chuyến đi đang được ghi.</string>
     <string name="includes_osm_changes_until">Bao gồm những thay đổi OSM đã tạo cho đến %1$s.</string>
     <string name="live_update_frequency_week_variant">Những bản cập nhật cho bản đồ được kiểm tra hàng tuần.</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Các khu vực quân sự</string>

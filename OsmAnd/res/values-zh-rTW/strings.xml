@@ -4253,9 +4253,7 @@
     <string name="av_notes_photo_widget_desc">輕觸即可拍照。</string>
     <string name="av_notes_video_widget_desc">輕觸開始錄影。</string>
     <string name="av_notes_audio_widget_desc">輕觸錄製語音筆記。</string>
-    <string name="trip_recording_uphill_widget_desc">顯示目前記錄旅程的所有上坡總和。</string>
     <string name="trip_recording_duration_widget_desc">顯示目前記錄旅程的時間。</string>
-    <string name="trip_recording_distance_widget_desc">顯示目前記錄旅程的距離。</string>
     <string name="true_bearing_wdiget_desc">從您的位置觀察到的真北與目標點之間的角度。</string>
     <string name="time_to_intermediate_widget_desc">小工具顯示「到達時間」或「剩餘時間」到第一個中轉點。時間在導航期間不斷更新，一旦中轉點過去，時間將更新到下一個中轉點。</string>
     <string name="auto_25_chars_route_tl_kr">向左轉並靠右</string>
@@ -4272,7 +4270,6 @@
     <string name="auto_25_chars_route_roundabout_kl">在 %1$d 出口離開並靠左</string>
     <string name="auto_backup_preference_desc">預設情況下，Android 會儲存收藏、地圖權杖與 OsmAnd 設定的備份，可用來在新裝置或重新安裝後還原它們。備份會被限制在 25 MB 內。 \n使用 OsmAnd Cloud 時，可能會在重新安裝後導致誤解。</string>
     <string name="auto_25_chars_route_roundabout_kr">在 %1$d 出口離開並靠右</string>
-    <string name="trip_recording_downhill_widget_desc">顯示目前記錄旅程的所有下坡總和。</string>
     <string name="second_marker_widget_desc">設定顯示第二個地圖標記的距離或預估抵達時間。</string>
     <string name="first_marker_widget_desc">設定顯示第一個地圖標記的距離或預估抵達時間。</string>
     <string name="distance_to_intermediate_widget_desc">即時追蹤中轉點距離，自動更新至下一個中轉點。</string>

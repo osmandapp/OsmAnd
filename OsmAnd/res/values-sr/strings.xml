@@ -4412,16 +4412,13 @@
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Велико</string>
-    <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли обрисати групу \"%1$s\" и све придружене тачке (%2$d)?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>
     <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
     <string name="download_complete">Преузимање је завршено</string>
-    <string name="trip_recording_uphill_widget_desc">Приказује укупно све успоне на путу који се тренутно снима.</string>
     <string name="side_marker_eta">Процењено време доласка</string>
     <string name="true_bearing_wdiget_desc">Угао између правог Севера и циљане тачке гледано са Вашег положаја.</string>
     <string name="relative_bearing_widget_desc">Приказује угао између правца Вашег кретања и циљане тачке.</string>
-    <string name="trip_recording_distance_widget_desc">Приказује удаљеност тренутног пута.</string>
     <string name="lang_ckb">Средњекурдски</string>
     <string name="weather_offline_forecast">Ванмрежне временске прилике</string>
     <string name="shared_string_weather">Временске прилике</string>

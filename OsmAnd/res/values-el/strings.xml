@@ -4905,10 +4905,7 @@
     <string name="distance_circles">Κύκλοι απόστασης</string>
     <string name="map_widget_rendering_fps_desc">Δείχνει πόσο γρήγορα ο χάρτης και τα στοιχεία του χάρτη προβάλλονται και ανανεώνονται, εκφρασμένο σε πλαίσια ανά δευτερόλεπτο (FPS).</string>
     <string name="map_widget_target_distance_desc">Δείχνει την απόσταση μεταξύ κάμερας και τοποθεσίας στόχου.</string>
-    <string name="trip_recording_downhill_widget_desc">Δείχνει το άρθροισμα όλων των καταβάσεων στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
-    <string name="trip_recording_uphill_widget_desc">Δείχνει το άρθροισμα όλων των αναβάσεων στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
     <string name="trip_recording_duration_widget_desc">Δείχνει τον χρόνο της τρέχουσας καταγεγραμμένης διαδρομής.</string>
-    <string name="trip_recording_distance_widget_desc">Δείχνει την απόσταση της τρέχουσας καταγεγραμμένης διαδρομής.</string>
     <string name="average_speed_skip_stops">Λαμβάνει τις στάσεις υπ\'όψιν</string>
     <string name="map_widget_distance_to_intermediate">Απόσταση μέχρι ενδιάμεση</string>
     <string name="map_widget_time_to_destination">Χρόνος μέχρι προορισμό</string>

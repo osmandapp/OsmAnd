@@ -3446,7 +3446,6 @@
     <string name="mapillary_widget_desc">Осигурява бърз достъп до приложението Mapillary за добавяне на снимки от улицата.</string>
     <string name="zoom_levels_difference_description">Голямата разлика между нивата на увеличенията може да направи размера на изтеглените данни по-голям.</string>
     <string name="external_sensors_plugin_description">Получава достъп до външни сензори, за отчитане например на сърдечен ритъм, скорост на велосипеда, мощност на колоездене или каданса. Необходимо е устройството да е свързано със съответните сензори чрез протокола за безжична персонална мрежа ANT+.</string>
-    <string name="trip_recording_distance_widget_desc">Показва текущото записано пропътувано разстояние.</string>
     <string name="shared_string_two">Две</string>
     <string name="shared_string_one">Едно</string>
     <string name="quick_action_map_overlay_switch">Насложената карта е променена на „%s“.</string>
@@ -3499,8 +3498,6 @@
     <string name="announcement_time_descr">Времето за оповестяване на различните гласови напътствия зависи от вида напътствие, моментната скорост и скоростта по подразбиране.</string>
     <string name="voice_announcements">Гласови напътствия</string>
     <string name="shared_string_shows">Показва</string>
-    <string name="trip_recording_downhill_widget_desc">Показва сумата от всички спускания на записваното в момента пътуване.</string>
-    <string name="trip_recording_uphill_widget_desc">Показва сумата от всички изкачвания на записваното в момента пътуване.</string>
     <string name="distance_to_intermediate_widget_desc">Приспособлението показва разстоянието до първата междинна точка. При достигане на междинна точка, времето се обновява да показва оставащото до следващата междинна точка.</string>
     <string name="lang_ckb">Централен кюрдски</string>
     <string name="rendering_attr_showTramRoutes_name">Трамвайни маршрути</string>
