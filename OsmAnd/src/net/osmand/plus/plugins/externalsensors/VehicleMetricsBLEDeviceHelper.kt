@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors
 
+import android.bluetooth.le.ScanResult
+import android.os.ParcelUuid
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
@@ -37,4 +39,14 @@ class VehicleMetricsBLEDeviceHelper(
 		}
 	}
 
+	override fun createBLEDevice(
+		result: ScanResult,
+		uuid: ParcelUuid,
+		address: String,
+		deviceName: String): BLEAbstractDevice {
+		val device = BLEOBDDevice(bluetoothAdapter, address)
+		device.setDeviceName(deviceName)
+		device.rssi = result.rssi
+		return device
+	}
 }
