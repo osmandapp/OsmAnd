@@ -87,7 +87,6 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.reviews.Reviews;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -113,8 +112,6 @@ import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.reviews.ReviewJsonCodec;
-import net.osmand.reviews.Review;
 import net.osmand.shared.wiki.WikiHelper;
 import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
@@ -125,16 +122,14 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.StreamSupport;
 
 public class MenuBuilder {
 
