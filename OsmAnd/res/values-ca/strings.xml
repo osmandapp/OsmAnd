@@ -3479,7 +3479,7 @@
     <string name="navigate_to_track_descr">Navega des de la meva ubicació fins a la traça</string>
     <string name="add_address">Afegeix una adreça</string>
     <string name="shared_string_file_name">Nom del fitxer</string>
-    <string name="monitoring_control_start">REC</string>
+    <string name="monitoring_control_start">Enregistrament</string>
     <string name="disable_recording_once_app_killed_descrp">L\'enregistrament de traces s\'aturarà quan es mati l\'aplicació (mitjançant aplicacions recents). (Les indicacions en segon pla d\'OsmAnd desapareixeran de la barra de notificacions Android.)</string>
     <string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general dels desplaçaments (s\'activa mitjançant el giny del mapa \'Enregistrament de ruta\').</string>
     <string name="simplified_track">Traça simplificada</string>
@@ -3686,7 +3686,7 @@
     <string name="location_source">Sistema d\'ubicació</string>
     <string name="estimated_download_size">Tamany de baixada estimat</string>
     <string name="always_ask_waypoint_appearance_description">Al prémer aquesta acció s’obrirà la pantalla \"Afegir punt de ruta\", en la qual podrà canviar el nom i l’aparença.</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualització esquemàtica de les icones en els zooms baixos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representació esquemàtica de les icones en baixa ampliació per aquest PDIs que normalment no es mostren</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Augmenta la visibilitat dels túnels de les vies navegables</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Tot</string>
@@ -4639,10 +4639,10 @@
     <string name="ais_port_nmea_local_description">Defineix el port UPD on OsmAnd rep dades NMEA</string>
     <string name="ais_object_lost_timeouts">Paràmetres de temps d\'espera per a la recepció del senyal AIS</string>
     <string name="ais_object_lost_timeouts_description">Estableix els valors de temps d\'espera per identificar els objectes AIS perduts si no s\'ha rebut cap senyal durant un temps específic.</string>
-    <string name="ais_object_lost_timeout">Temps d\'espera per a la visibilitat quan es perd l\'objecte</string>
+    <string name="ais_object_lost_timeout">Temps d\'espera per a la visibilitat quan es perd el senyal d\'un vaixell</string>
     <string name="ais_object_lost_timeout_description">Estableix un temps d\'espera per a la visibilitat de l\'objecte AIS: Si no es rep cap senyal dins de la durada especificada, l\'objecte serà eliminat automàticament de la pantalla.</string>
-    <string name="ais_ship_lost_timeout">Temps d\'espera de la visibilitat del vaixell: elimina si no es rep cap senyal AIS dins de la durada establerta.</string>
-    <string name="ais_ship_lost_timeout_description">Defineix el temps d\'espera per a la visibilitat del vaixell: Després d\'aquest temps sense recepció de senyal, el símbol del vaixell canviarà el seu estat a la pantalla: es creuarà.</string>
+    <string name="ais_ship_lost_timeout">Temps d\'espera vençut pel vaixell</string>
+    <string name="ais_ship_lost_timeout_description">Establiu el temps d\'espera per visualitzar el vaixell: transcorregut aquest temps sense recepció de senyal, el símbol del vaixell es barrarà.</string>
     <string name="ais_cpa_settings">Paràmetres relacionats amb CPA</string>
     <string name="ais_cpa_settings_description">Aquests valors determinen com es mostren els objectes AIS quan s\'acosten a la posició del vaixell.</string>
     <string name="ais_cpa_warning_time">Temps d\'avís abans del punt més proper d\'aproximació (CPA)</string>
@@ -4911,7 +4911,7 @@
     <string name="key_event_action_activity_back_pressed">S\'ha premut l\'activitat</string>
     <string name="key_event_action_emit_navigation_hint">Emet el consell de navegació</string>
     <string name="key_event_action_zoom_out">Redueix</string>
-    <string name="key_event_action_zoom_in">Amplia</string>
+    <string name="key_event_action_zoom_in">Apropa</string>
     <string name="key_event_action_move_right">Mou a la dreta</string>
     <string name="key_event_action_move_left">Mou a l\'esquerra</string>
     <string name="key_event_action_move_down">Mou avall</string>
@@ -5817,4 +5817,19 @@
     <string name="release_4_3">• Nou, més ràpid Versió 2 (OpenGL) motor de renderització de mapes, amb vista 2.5D\n\n • Animació suau dels canvis d\'ubicació mentre està en moviment\n\n • Nous ginys per a les coordenades del centre del mapa i l\'elevació de geolocalitzacions\n\n • \"Distància per tocar\": s\'han afegit opcions de mida de text\n\n • Giny \"Map marker\": s\'ha afegit l\'opció per canviar el comportament del clic\n\n • Esmena l\'opció \"Position placement\"\n\n • GPX: s\'ha afegit el suport per a les etiquetes \"link\", \"cmt\", \"desc\" i per a qualsevol extensió personalitzada\n\n • Llista reorganitzada de \"mapes nàutics\"\n\n • S\'ha afegit la implementació per a sensors ANT\n\n • S\'ha afegit l\'opció per desactivar la baixada UUID\n\n • Previsió ajustable de velocitat per defecte per als temps de caminada/senderisme/sortida dependents de l\'elevació\n\n • Comportament fix de la sortida d\'àudio i del control lliscant de volum</string>
     <string name="release_4_0">• Còpia de seguretat al núvol\n\n • S\'ha afegit el mode nocturn per a l\'estil de mapa \"Topo\"\n\n • S\'ha afegit l\'opció de baixar les línies de contorn als peus\n\n • Les pistes ara es poden acolorir per l\'altitud, la velocitat o el pendent\n\n • S\'ha actualitzat el diàleg \"Enregistrament de retalls\"\n\n • Distància de l\'aixeta moguda des del regle del radi en una opció separada\n\n • Plan Route: Ara pots canviar les opcions de navegació, accedir a la configuració del mapa i cercar sense sortir de la planificació de la ruta\n\n • Nova pantalla \"Purchase\" amb informació detallada de compra\n\n • S\'ha afegit l\'opció per a canviar l\'aparença de la línia de ruta\n\n • Actualitzacions d\'OsmAnd Live mogudes a \"Descarrega &gt; Actualitzacions\"</string>
     <string name="lang_en_barebones">Anglès (barebones)</string>
+    <string name="shared_string_price">Preu</string>
+    <string name="obd_alt_battery_voltage">Tensió adaptador</string>
+    <string name="liter_single">Litre</string>
+    <string name="imperial_gallon">Galó Imperial</string>
+    <string name="us_gallon">Galó dels EUA</string>
+    <string name="kilometers">Quilòmetres</string>
+    <string name="miles">Milles</string>
+    <string name="mpg">Milles per galó</string>
+    <string name="shared_sting_osm_link">Enllaç OSM</string>
+    <string name="show_spherical_map">Mostra el mapa esfèric</string>
+    <string name="show_spherical_map_description">Mostra el model esferoïdal de la Terra</string>
+    <string name="show_local_names">Mostra les denominacions locals</string>
+    <string name="accessibility_independent_features">Característiques independents</string>
+    <string name="access_pinch_zoom_magnification">Control tàctil d\'escala per pinçament</string>
+    <string name="access_pinch_zoom_magnification_descr">Utilitza el subconjunt d\'escales ja definides, en comptes de tot rang, durant l\'ampliació gestual.</string>
 </resources>
