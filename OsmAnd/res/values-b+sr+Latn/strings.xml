@@ -5862,4 +5862,6 @@
     <string name="show_spherical_map_description">Prikaz sferoidnog modela Zemlje</string>
     <string name="show_spherical_map">Prikaži sferičnu mapu</string>
     <string name="shared_string_price">Cena</string>
+    <string name="rendering_attr_showSkiSlopes_name">Prikaži skijaške staze</string>
+    <string name="rendering_attr_showSkiSlopes_description">Pokazati lake ski staze</string>
 </resources>
