@@ -152,6 +152,10 @@ public class SearchPhrase {
 		return knownCityNames.contains(cityName);
 	}
 
+	public List<String> getKnownCityNames() {
+		return knownCityNames;
+	}
+
 	public void addCityName(String cityName) {
 		if (knownCityNames == null) {
 			knownCityNames = new ArrayList<>();

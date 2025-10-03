@@ -408,6 +408,9 @@ public class SearchCoreFactory {
 				LatLon oldLocation = nphrase.getSettings().getOriginalLocation();
 				newPhrase.setOriginalLocation(res.location);//city location
 				newPhrase.addCityName(res.localeName);
+				if (res.object instanceof City city) {
+					newPhrase.addCityName(city.getName());
+				}
 
 				poiApi.search(newPhrase, resultMatcher);
 
@@ -633,6 +636,21 @@ public class SearchCoreFactory {
 					if (ids.contains(poiID)) {
 						return false;
 					}
+					if (phrase.hasCityName()) {
+						boolean matchCity = false;
+						boolean matchInName = false;
+						for (String cityName : phrase.getKnownCityNames()) {
+							matchCity = matchCity || object.matchCity(cityName);
+							matchInName = matchInName || object.getName().contains(cityName);
+							matchInName = matchInName || object.getOtherNames().contains(cityName);
+							if (matchCity || matchInName) {
+								break;
+							}
+						}
+						if (!matchCity && !matchInName) {
+							return false;
+						}
+					}
 					SearchResult sr = new SearchResult(phrase);
 					sr.otherNames = object.getOtherNames(true);
 					sr.localeName = object.getName(phrase.getSettings().getLang());
@@ -681,17 +699,17 @@ public class SearchCoreFactory {
 				}
 			};
 
-			ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher = getDynamicTagGroupsMatcher(phrase);
+			ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher = null;//getDynamicTagGroupsMatcher(phrase);
 
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
 					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom, null,
-					matcher, rawDataCollector, dynamicTagGroupsMatcher);
+					matcher, rawDataCollector);
 
 			SearchRequest<Amenity> reqUnlimited = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
 					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null,
-					matcher, rawDataCollector, dynamicTagGroupsMatcher);
+					matcher, rawDataCollector);
 
 			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
 			if (fileRequest != null) {
@@ -1285,8 +1303,6 @@ public class SearchCoreFactory {
 				}
 			}
 
-			ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher = getDynamicTagGroupsMatcher(phrase);
-
 			this.nameFilter = nameFilter;
 			if (poiTypeFilter != null || poiAdditionalFilter != null) {
 				int radius = BBOX_RADIUS;
@@ -1296,7 +1312,7 @@ public class SearchCoreFactory {
 						radius = BBOX_RADIUS_NEAREST;
 					}
 				}
-				if (dynamicTagGroupsMatcher != null) {
+				if (phrase.hasCityName()) {
 					radius = BBOX_RADIUS_CITIES;
 				}
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
@@ -1304,12 +1320,12 @@ public class SearchCoreFactory {
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader r : offlineIndexes) {
 					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r,
-							searchedPois, poiAdditionals, countExtraWords, dynamicTagGroupsMatcher);
+							searchedPois, poiAdditionals, countExtraWords);
 					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
 						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
 					}
 					SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest((int) bbox.left,
-							(int) bbox.right, (int) bbox.top, (int) bbox.bottom, -1, poiTypeFilter, poiAdditionalFilter, rm, dynamicTagGroupsMatcher);
+							(int) bbox.right, (int) bbox.top, (int) bbox.bottom, -1, poiTypeFilter, poiAdditionalFilter, rm);
 					r.searchPoi(req);
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
@@ -1321,8 +1337,7 @@ public class SearchCoreFactory {
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter,
 		                                                final SearchResultMatcher resultMatcher, final String nameFilter,
 		                                                final BinaryMapIndexReader selected, final Set<String> searchedPois,
-		                                                final Collection<String> poiAdditionals, final int countExtraWords,
-														ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher) {
+		                                                final Collection<String> poiAdditionals, final int countExtraWords) {
 
 
 			final NameStringMatcher ns = nameFilter == null ? null : new NameStringMatcher(nameFilter, CHECK_STARTS_FROM_SPACE);
@@ -1379,12 +1394,11 @@ public class SearchCoreFactory {
 						if (ns.matches(res.localeName) || ns.matches(res.otherNames)) {
 							phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
 							match = true;
-						} else if (dynamicTagGroupsMatcher != null && object.hasTagGroups()) {
-							for (List<BinaryMapIndexReader.TagValuePair> list : object.getTagGroups().values()) {
-								if (dynamicTagGroupsMatcher.publish(list)) {
-									match = true;
-									break;
-								}
+						} else if (phrase.hasCityName()) {
+							for (String cityName : phrase.getKnownCityNames()) {
+								match = match || object.matchCity(cityName);
+								match = match || object.getName().contains(cityName);
+								match = match || object.getOtherNames().contains(cityName);
 							}
 						}
 						if (!match) {
@@ -1462,36 +1476,6 @@ public class SearchCoreFactory {
 			}
 			return -1;
 		}
-	}
-
-	private static ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> getDynamicTagGroupsMatcher(SearchPhrase phrase) {
-		int countWords = SearchPhrase.countWords(phrase.getFullSearchPhrase());
-		if (!phrase.hasCityName() && countWords < 2) {
-			return null;
-		}
-		
-		String searchQuery = phrase.getFullSearchPhrase().toLowerCase();
-		return new ResultMatcher<>() {
-			@Override
-			public boolean publish(List<BinaryMapIndexReader.TagValuePair> object) {
-				for (BinaryMapIndexReader.TagValuePair tagValue : object) {
-					if (tagValue.tag.startsWith("name")) {
-						if (phrase.hasCityName()) {
-							if (phrase.hasCityName() && phrase.containsCityName(tagValue.value)) {
-								return true;
-							}
-						} else if (searchQuery.contains(tagValue.value.toLowerCase())) {
-							return true;
-						}
-					}
-				}
-				return false;
-			}
-				@Override
-			public boolean isCancelled() {
-				return false;
-			}
-		};
 	}
 
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {
@@ -2064,5 +2048,22 @@ public class SearchCoreFactory {
 		PoiSubType subType;
 		String value;
 		String translatedValue;
+	}
+
+	public boolean matchCityInAmenity(SearchPhrase phrase, Amenity amenity) {
+		if (!phrase.hasCityName()) {
+			return false;
+		}
+		boolean matchCity = false;
+		boolean matchInName = false;
+		for (String cityName : phrase.getKnownCityNames()) {
+			matchCity = matchCity || amenity.matchCity(cityName);
+			matchInName = matchInName || amenity.getName().contains(cityName);
+			matchInName = matchInName || amenity.getOtherNames().contains(cityName);
+		}
+		if (matchCity || matchInName) {
+			return true;
+		}
+		return false;
 	}
 }

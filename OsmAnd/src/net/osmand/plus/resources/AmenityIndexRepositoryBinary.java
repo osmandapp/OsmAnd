@@ -179,7 +179,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	                                                  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
-				filter, additionalFilter, matcher, null);
+				filter, additionalFilter, matcher);
 		List<Amenity> result = null;
 		try {
 			BinaryMapIndexReader reader = getOpenReader();

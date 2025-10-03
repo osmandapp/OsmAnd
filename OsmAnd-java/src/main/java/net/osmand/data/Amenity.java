@@ -893,6 +893,31 @@ public class Amenity extends MapObject {
 		return alternateName;
 	}
 
+	public boolean matchCity(String cityName) {
+		if (tagGroups == null) {
+			return false;
+		}
+		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
+			City.CityType type = null;
+			List<String> names = new ArrayList<>();
+			for (TagValuePair tagValue : entry.getValue()) {
+				if (tagValue.tag.startsWith("name") || tagValue.tag.endsWith("name")) {
+					names.add(tagValue.value);
+				}
+				if (tagValue.tag.equals("place")) {
+					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
+					if (!isCityTypeAccept(type)) {
+						break;
+					}
+				}
+			}
+			if (isCityTypeAccept(type) && names.contains(cityName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public String getCityFromTagGroups(String lang) {
 		if (tagGroups == null) {
 			return null;
