@@ -5908,4 +5908,6 @@
     <string name="show_spherical_map">Sphärische Karte anzeigen</string>
     <string name="show_spherical_map_description">Sphäroidisches Modell der Erde anzeigen</string>
     <string name="shared_string_price">Preis</string>
+    <string name="rendering_attr_showSkiSlopes_name">Skipisten anzeigen</string>
+    <string name="rendering_attr_showSkiSlopes_description">Einfache Skipisten anzeigen</string>
 </resources>
