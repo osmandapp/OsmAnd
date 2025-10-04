@@ -5822,4 +5822,6 @@
     <string name="show_spherical_map">Szférikus térkép megjelenítése</string>
     <string name="show_spherical_map_description">A Föld gömbmodelljének megjelenítése</string>
     <string name="shared_string_price">Ár</string>
+    <string name="rendering_attr_showSkiSlopes_name">Sípályák mutatása</string>
+    <string name="rendering_attr_showSkiSlopes_description">Egyszerű sípályák megjelenítése</string>
 </resources>
