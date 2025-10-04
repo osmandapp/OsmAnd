@@ -5908,4 +5908,6 @@
     <string name="show_spherical_map">Vis sfærisk kort</string>
     <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
     <string name="shared_string_price">Pris</string>
+    <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
+    <string name="rendering_attr_showSkiSlopes_description">Vis forenklede skiløjper</string>
 </resources>
