@@ -1481,7 +1481,8 @@ public class SearchCoreFactory {
 						// streets related to city
 						pub = false;
 					} else if (phrase.isUnknownSearchWordPresent()
-							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
+							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))
+							&& !phrase.getFullSearchPhrase().contains(res.localeName)) {
 						continue;
 					}
 					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
