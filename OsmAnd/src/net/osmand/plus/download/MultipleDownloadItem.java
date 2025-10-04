@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MultipleDownloadItem extends DownloadItem {
@@ -182,6 +183,19 @@ public class MultipleDownloadItem extends DownloadItem {
 
 	@Override
 	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
-		return "";
+		long lastTimestamp = getTimestamp(remote);
+		return lastTimestamp <= 0 ? "" : dateFormat.format(new Date(lastTimestamp));
+	}
+
+	@Override
+	public long getTimestamp(boolean remote) {
+		long lastTimestamp = -1;
+		for (DownloadItem item : items) {
+			long date = item.getTimestamp(remote);
+			if (lastTimestamp < date) {
+				lastTimestamp = date;
+			}
+		}
+		return lastTimestamp;
 	}
 }

@@ -179,6 +179,8 @@ public class ItemViewHolder {
 		String name;
 		if (showTypeInName) {
 			name = downloadItem.getType().getString(context);
+		} else if (downloadItem instanceof MultipleDownloadItem multipleDownloadItem) {
+			name = getMultipleDownloadItemTitle(multipleDownloadItem);
 		} else {
 			name = downloadItem.getVisibleName(context, app.getRegions(), showParentRegionName, useShortName);
 		}
@@ -279,28 +281,39 @@ public class ItemViewHolder {
 		}
 	}
 
+	@NonNull
+	private String getMultipleDownloadItemTitle(@NonNull MultipleDownloadItem downloadItem) {
+		String regionName = downloadItem.getRelatedRegion().getLocaleName();
+		String count = String.valueOf(downloadItem.getItemsToDownload().size());
+		return app.getString(R.string.ltr_or_rtl_combine_via_dash, regionName, count);
+	}
+
 	private void setupCommonMultipleDescription(@NonNull MultipleDownloadItem item) {
-		String regionsHeader = context.getString(R.string.regions);
-		String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
-		String allRegionsCount = String.valueOf(item.getAllItems().size());
-		String leftToDownloadCount = String.valueOf(item.getItemsToDownload().size());
+		String fullDescription;
+		if (!showTypeInDesc) {
+			String regionsHeader = context.getString(R.string.regions);
+			String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
+			String allRegionsCount = String.valueOf(item.getAllItems().size());
+			String leftToDownloadCount = String.valueOf(item.getItemsToDownload().size());
 
-		String header = allRegionsHeader;
-		String count = allRegionsCount;
-		if (item.hasActualDataToDownload()) {
-			if (!item.isDownloaded()) {
-				header = allRegionsHeader;
-				count = leftToDownloadCount;
-			} else {
-				header = regionsHeader;
-				count = String.format(
-						context.getString(R.string.ltr_or_rtl_combine_via_slash),
-						leftToDownloadCount,
-						allRegionsCount);
+			String header = allRegionsHeader;
+			String count = allRegionsCount;
+			if (item.hasActualDataToDownload()) {
+				if (!item.isDownloaded()) {
+					header = allRegionsHeader;
+					count = leftToDownloadCount;
+				} else {
+					header = regionsHeader;
+					count = String.format(
+							context.getString(R.string.ltr_or_rtl_combine_via_slash),
+							leftToDownloadCount,
+							allRegionsCount);
+				}
 			}
+			fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
+		} else {
+			fullDescription = item.getType().getString(context);
 		}
-
-		String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
 		String additionalDescription = item.getAdditionalDescription(context);
 		if (additionalDescription != null) {
 			fullDescription += " " + additionalDescription;
@@ -309,6 +322,12 @@ public class ItemViewHolder {
 			fullDescription = context.getString(
 					R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
 					item.getSizeDescription(context));
+		}
+		String date = item.getDate(dateFormat, showRemoteDate);
+		if (!Algorithms.isEmpty(date)) {
+			fullDescription = context.getString(
+					R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
+					date);
 		}
 		tvDesc.setText(fullDescription);
 	}
