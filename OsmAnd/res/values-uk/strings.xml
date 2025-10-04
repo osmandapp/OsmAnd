@@ -5883,4 +5883,6 @@
     <string name="show_spherical_map">Показати сферичну карту</string>
     <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
     <string name="shared_string_price">Ціна</string>
+    <string name="rendering_attr_showSkiSlopes_name">Показати гірськолижні схили</string>
+    <string name="rendering_attr_showSkiSlopes_description">Показати спрощені гірськолижні схили</string>
 </resources>
