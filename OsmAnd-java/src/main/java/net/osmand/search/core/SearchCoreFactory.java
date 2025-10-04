@@ -1586,7 +1586,7 @@ public class SearchCoreFactory {
 				}
 				String lw = phrase.getUnknownWordToSearchBuilding();
 				NameStringMatcher buildingMatch = phrase.getUnknownWordToSearchBuildingNameMatcher();
-				NameStringMatcher startMatch = new NameStringMatcher(lw, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+				NameStringMatcher startMatch = new SearchPhrase.BuldingNameStringMatcher(lw, false);
 				for (Building b : s.getBuildings()) {
 					SearchResult res = new SearchResult(phrase);
 					boolean interpolation = b.belongsToInterpolation(lw);
@@ -1594,7 +1594,7 @@ public class SearchCoreFactory {
 							|| !phrase.isSearchTypeAllowed(ObjectType.HOUSE)) {
 						continue;
 					}
-					if(interpolation) {
+					if (interpolation) {
 						res.localeName = lw;
 						res.location = b.getLocation(b.interpolation(lw));
 					} else {
