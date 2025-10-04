@@ -5873,4 +5873,6 @@
     <string name="show_spherical_map">Vidigi sferan mapon</string>
     <string name="show_spherical_map_description">Vidigi sferoidan modelon de Tero</string>
     <string name="shared_string_price">Prezo</string>
+    <string name="rendering_attr_showSkiSlopes_name">Skiaj descendejoj</string>
+    <string name="rendering_attr_showSkiSlopes_description">Montri simpligitajn skiajn descendejojn</string>
 </resources>
