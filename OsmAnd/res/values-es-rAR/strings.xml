@@ -5745,4 +5745,6 @@
     <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
     <string name="shared_string_price">Precio</string>
+    <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esquí</string>
+    <string name="rendering_attr_showSkiSlopes_description">Mostrar pistas de esquí simplificadas</string>
 </resources>
