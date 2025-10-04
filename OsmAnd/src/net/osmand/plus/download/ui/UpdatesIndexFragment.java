@@ -151,7 +151,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	public void invalidateListView(@NonNull Context context) {
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getItemsToUpdate();
+		List<IndexItem> indexItems = indexes.getIndividualItemsToUpdate();
 
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, indexItems,
@@ -168,7 +168,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getItemsToUpdate();
+		List<IndexItem> indexItems = indexes.getIndividualItemsToUpdate();
 		if (getListAdapter() != null && indexItems.isEmpty()) {
 			errorMessage = getString(indexes.isDownloadedFromInternet
 					? R.string.everything_up_to_date
@@ -184,7 +184,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = requireMyActivity().getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getItemsToUpdate();
+		List<IndexItem> indexItems = indexes.getIndividualItemsToUpdate();
 		TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.isEmpty() || indexItems.get(0).getType() == null) {
 			if (!Algorithms.isEmpty(errorMessage)) {
