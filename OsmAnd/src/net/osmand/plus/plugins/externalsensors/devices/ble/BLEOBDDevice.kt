@@ -1,15 +1,20 @@
 package net.osmand.plus.plugins.externalsensors.devices.ble
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothProfile
 import android.bluetooth.BluetoothStatusCodes
+import android.content.Context
 import android.os.Build
 import net.osmand.PlatformUtil
+import net.osmand.plus.plugins.externalsensors.BleDeviceUuidFinder
+import net.osmand.plus.plugins.externalsensors.BleDeviceUuidFinder.DeviceFoundCallback
 import net.osmand.plus.plugins.externalsensors.DeviceType
 import net.osmand.plus.plugins.externalsensors.GattAttributes
+import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionState
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEOBDSensor
 import net.osmand.util.Algorithms
 import okio.Buffer
@@ -17,18 +22,19 @@ import okio.IOException
 import okio.Sink
 import okio.Source
 import okio.Timeout
-import java.util.UUID
 import kotlin.math.min
 
 class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 	BLEAbstractDevice(bluetoothAdapter, deviceId), Source, Sink {
-	private val log = PlatformUtil.getLog("OBD2")
+	private val log = PlatformUtil.getLog("BLEAbstractDevice")
 
 	var response: String = ""
+	var uuid: String? = null
 
 	private var bufferToRead: String? = null
 	private var deviceReadyListener: DeviceReadyListener? = null
-	private var isReady = false
+	var isReady = false
+		private set
 	private val bleReadSensor: BLEOBDSensor = BLEOBDSensor(this)
 
 	interface DeviceReadyListener {
@@ -56,14 +62,35 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 
 	@SuppressLint("MissingPermission")
 	override fun onGattServicesDiscovered(gatt: BluetoothGatt, status: Int) {
-		super.onGattServicesDiscovered(gatt, status)
+		var readCharacteristicSet = false
 		if (status == BluetoothGatt.GATT_SUCCESS) {
-			val obdService = gatt.getService(serviceUUID)
-			writeCharacteristic =
-				obdService?.getCharacteristic(GattAttributes.UUID_CHARACTERISTIC_OBD_WRITE)
-			isReady = true
-			deviceReadyListener?.onDeviceReadyStateChange(true)
+			for (service in gatt.services) {
+				if (Algorithms.stringsEqual(service.uuid.toString(), uuid)) {
+					for (characteristic in service.characteristics) {
+						val characteristicProp = characteristic.properties
+						val writeDescriptor =
+							characteristic.getDescriptor(GattAttributes.UUID_CHARACTERISTIC_CLIENT_CONFIG)
+						if ((characteristicProp and BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0 && writeDescriptor != null) {
+							bleReadSensor.requestCharacteristic(characteristic)
+							readCharacteristicSet = true
+						}
+						if ((characteristicProp and BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+							writeCharacteristic = characteristic
+						}
+						if (readCharacteristicSet && writeCharacteristic != null) {
+							return
+						}
+					}
+				}
+			}
+
 		}
+	}
+
+	override fun onDescriptorWriteCompleted() {
+		super.onDescriptorWriteCompleted()
+		isReady = writeCharacteristic != null && bleReadSensor.isReadCharacteristicsSet()
+		deviceReadyListener?.onDeviceReadyStateChange(true)
 	}
 
 	@SuppressLint("MissingPermission")
@@ -95,11 +122,6 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 			}
 
 		}
-	}
-
-	companion object {
-		val serviceUUID: UUID
-			get() = GattAttributes.UUID_CHARACTERISTIC_OBD_SCANNER
 	}
 
 	override fun flush() {
@@ -164,5 +186,28 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 		val result = super.disconnect()
 		bleReadSensor.resetData()
 		return result
+	}
+
+	private fun baseConnectImpl(context: Context, activity: Activity?) {
+		super.connect(context, activity)
+	}
+
+	override fun connect(context: Context, activity: Activity?): Boolean {
+		if (uuid == null) {
+			currentState = DeviceConnectionState.CONNECTING
+			val deviceFinder = BleDeviceUuidFinder(deviceId, object : DeviceFoundCallback {
+				override fun onDeviceFound(uuid: String?) {
+					currentState = DeviceConnectionState.DISCONNECTED
+					if (uuid != null) {
+						this@BLEOBDDevice.uuid = uuid
+						baseConnectImpl(context, activity)
+					}
+				}
+			})
+			deviceFinder.startScanning()
+		} else {
+			baseConnectImpl(context, activity)
+		}
+		return true
 	}
 }

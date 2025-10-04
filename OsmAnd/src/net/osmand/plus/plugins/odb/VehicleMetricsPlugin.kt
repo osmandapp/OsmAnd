@@ -555,7 +555,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private fun onDisconnected(deviceInfo: BTDeviceInfo?) {
 		connectionState = OBDConnectionState.DISCONNECTED
 		deviceInfo?.let {
-			app.runInUIThread({connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED, it)})
+			app.runInUIThread({
+				connectionStateListener?.onStateChanged(
+					OBDConnectionState.DISCONNECTED,
+					it)
+			})
 			if (it.isBLE) {
 				val device = getBLEOBDDeviceById(it.address);
 				device?.disconnect()
@@ -577,7 +581,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
 		}
-		connectionStateListener?.onStateChanged(OBDConnectionState.CONNECTED, btDeviceInfo)
+		app.runInUIThread({
+			connectionStateListener?.onStateChanged(
+				OBDConnectionState.CONNECTED,
+				btDeviceInfo)
+		})
 	}
 
 	override fun getSettingsScreenType(): SettingsScreenType {
@@ -673,7 +681,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
 		if (deviceInfo.address.isNotEmpty()) {
 			val currentList = getUsedOBDDevicesList().toMutableList()
-			val savedDevice = currentList.find { it.address == deviceInfo.address && it.isBLE == deviceInfo.isBLE}
+			val savedDevice =
+				currentList.find { it.address == deviceInfo.address && it.isBLE == deviceInfo.isBLE }
 			if (savedDevice == null) {
 				currentList.add(deviceInfo)
 				writeUsedOBDDevicesList(currentList)
@@ -1135,6 +1144,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	fun onBLEDeviceFound(device: BLEOBDDevice) {
+		LOG.debug("onBLEDeviceFound: ${device.name} - ${device.uuid}")
 		scanBLEDevicesListener?.onDeviceFound(device)
 	}
 

@@ -614,7 +614,7 @@ public class OsmandAidlApi {
 				MapActivity mapActivity = mapActivityRef.get();
 				AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
-					plugin.stopRecording(mapActivity, false);
+					plugin.stopAndSaveRecording(mapActivity);
 				}
 			}
 		};

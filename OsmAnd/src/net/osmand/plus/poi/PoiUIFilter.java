@@ -421,10 +421,12 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double bottomLatitude, double leftLongitude,
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
-		currentSearchResult = dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		List<Amenity> tempSearchResult = dataProvider.searchAmenities(
+				lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
 		if (isTopWikiFilter()) {
-			Collections.sort(currentSearchResult, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
+			Collections.sort(tempSearchResult, (p1, p2) -> p2.getTravelEloNumber() - p1.getTravelEloNumber());
 		}
+		currentSearchResult = tempSearchResult;
 		return currentSearchResult;
 	}
 

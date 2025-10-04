@@ -16,6 +16,7 @@ import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -36,11 +37,16 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		if (osmPoint instanceof OsmNotesPoint notes) {
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_note_dark)
-					.setText(notes.getText()).setTextPrefix(app.getString(R.string.poi_note)).build());
-			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_group)
-					.setText(notes.getAuthor()).setTextPrefix(app.getString(R.string.shared_string_author)).build());
-
+			String text = notes.getText();
+			String author = notes.getAuthor();
+			if (!Algorithms.isEmpty(text)) {
+				buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_note_dark)
+						.setText(text).setTextPrefix(app.getString(R.string.poi_note)).build());
+			}
+			if (!Algorithms.isEmpty(author)) {
+				buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_group)
+						.setText(author).setTextPrefix(app.getString(R.string.shared_string_author)).build());
+			}
 		} else if (osmPoint instanceof OpenstreetmapPoint point) {
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
 				if (POI_TYPE_TAG.equals(e.getKey())) {

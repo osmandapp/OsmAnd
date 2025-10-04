@@ -21,7 +21,7 @@ public abstract class BLEAbstractSensor extends AbstractSensor {
 
 	private static final Log LOG = PlatformUtil.getLog(BLEAbstractSensor.class);
 
-	private BluetoothGattCharacteristic notifyCharacteristic;
+	protected BluetoothGattCharacteristic notifyCharacteristic;
 
 	public BLEAbstractSensor(@NonNull BLEAbstractDevice device, @NonNull String sensorId) {
 		super(device, sensorId);
@@ -51,19 +51,27 @@ public abstract class BLEAbstractSensor extends AbstractSensor {
 	@NonNull
 	public abstract UUID getRequestedCharacteristicUUID();
 
+	protected boolean requestReadCharacteristic() {
+		return true;
+	}
+
+	protected boolean requestNotifyCharacteristic() {
+		return true;
+	}
+
 	public void requestCharacteristic(@NonNull List<BluetoothGattCharacteristic> characteristics) {
 		for (BluetoothGattCharacteristic characteristic : characteristics) {
 			if (getRequestedCharacteristicUUID().equals(characteristic.getUuid())) {
 				BLEAbstractDevice bleDevice = getBLEDevice();
 				final int characteristicProp = characteristic.getProperties();
-				if ((characteristicProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+				if ((characteristicProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0 && requestReadCharacteristic()) {
 					if (notifyCharacteristic != null) {
 						bleDevice.setCharacteristicNotification(notifyCharacteristic, false);
 						notifyCharacteristic = null;
 					}
 					bleDevice.readCharacteristic(characteristic);
 				}
-				if ((characteristicProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+				if ((characteristicProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0 && requestNotifyCharacteristic()) {
 					notifyCharacteristic = characteristic;
 					bleDevice.setCharacteristicNotification(characteristic, true);
 				}

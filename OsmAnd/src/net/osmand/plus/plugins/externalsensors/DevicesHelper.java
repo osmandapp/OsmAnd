@@ -34,7 +34,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DevicePreferencesListener;
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
@@ -71,10 +70,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 
 public abstract class DevicesHelper implements DeviceListener, DevicePreferencesListener {
@@ -84,14 +79,13 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	private static final Log LOG = PlatformUtil.getLog(DevicesHelper.class);
 
 	private final static List<UUID> SUPPORTED_BLE_SERVICE_UUIDS = Arrays.asList(
-			BLEOBDDevice.Companion.getServiceUUID(),
 			BLEBikeSCDDevice.getServiceUUID(),
 			BLEHeartRateDevice.getServiceUUID(),
 			BLERunningSCDDevice.getServiceUUID(),
 			BLETemperatureDevice.getServiceUUID());
 
 	private OsmandApplication app;
-	private DevicesSettingsCollection devicesSettingsCollection;
+	protected DevicesSettingsCollection devicesSettingsCollection;
 	protected final Map<String, AbstractDevice<?>> devices = new ConcurrentHashMap<>();
 	private List<AntAbstractDevice<?>> antSearchableDevices = new ArrayList<>();
 
@@ -100,7 +94,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 
 	private Activity activity;
 	private boolean installAntPluginAsked;
-	private BluetoothAdapter bluetoothAdapter;
+	protected BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
 
 	protected DevicesHelper(@NonNull OsmandApplication app, @NonNull CommonPreferenceProvider<String> preferenceProvider) {
@@ -164,7 +158,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				if (deviceSettings.getDeviceType() == null) {
 					devicesSettingsCollection.removeDeviceSettings(deviceId);
 				} else {
-					AbstractDevice<?> device = createDevice(deviceSettings.getDeviceType(), deviceId);
+					AbstractDevice<?> device = createDevice(deviceSettings.getDeviceType(), deviceId, deviceSettings);
 					if (device != null) {
 						devices.put(deviceId, device);
 						updateDeviceProperties(device);
@@ -186,33 +180,27 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	}
 
 	@Nullable
-	private AbstractDevice<?> createDevice(@NonNull DeviceType deviceType, @NonNull String deviceId) {
-		switch (deviceType) {
-			case ANT_HEART_RATE:
-				return new AntHeartRateDevice(deviceId);
-			case ANT_TEMPERATURE:
-				return new AntTemperatureDevice(deviceId);
-			case ANT_BICYCLE_POWER:
-				return new AntBikePowerDevice(deviceId);
-			case ANT_BICYCLE_SC:
-				return new AntBikeSpeedCadenceDevice(deviceId);
-			case ANT_BICYCLE_SD:
-				return new AntBikeSpeedDistanceDevice(deviceId);
-			case BLE_OBD:
-				return bluetoothAdapter != null ? new BLEOBDDevice(bluetoothAdapter, deviceId) : null;
-			case BLE_TEMPERATURE:
-				return bluetoothAdapter != null ? new BLETemperatureDevice(bluetoothAdapter, deviceId) : null;
-			case BLE_HEART_RATE:
-				return bluetoothAdapter != null ? new BLEHeartRateDevice(bluetoothAdapter, deviceId) : null;
-			case BLE_BLOOD_PRESSURE:
-				return bluetoothAdapter != null ? new BLEBPICPDevice(bluetoothAdapter, deviceId) : null;
-			case BLE_BICYCLE_SCD:
-				return bluetoothAdapter != null ? new BLEBikeSCDDevice(bluetoothAdapter, deviceId) : null;
-			case BLE_RUNNING_SCDS:
-				return bluetoothAdapter != null ? new BLERunningSCDDevice(bluetoothAdapter, deviceId) : null;
-			default:
-				return null;
-		}
+	protected AbstractDevice<?> createDevice(@NonNull DeviceType deviceType, @NonNull String deviceId, @NonNull DeviceSettings deviceSettings) {
+		return switch (deviceType) {
+			case ANT_HEART_RATE -> new AntHeartRateDevice(deviceId);
+			case ANT_TEMPERATURE -> new AntTemperatureDevice(deviceId);
+			case ANT_BICYCLE_POWER -> new AntBikePowerDevice(deviceId);
+			case ANT_BICYCLE_SC -> new AntBikeSpeedCadenceDevice(deviceId);
+			case ANT_BICYCLE_SD -> new AntBikeSpeedDistanceDevice(deviceId);
+			case BLE_OBD ->
+					bluetoothAdapter != null ? new BLEOBDDevice(bluetoothAdapter, deviceId) : null;
+			case BLE_TEMPERATURE ->
+					bluetoothAdapter != null ? new BLETemperatureDevice(bluetoothAdapter, deviceId) : null;
+			case BLE_HEART_RATE ->
+					bluetoothAdapter != null ? new BLEHeartRateDevice(bluetoothAdapter, deviceId) : null;
+			case BLE_BLOOD_PRESSURE ->
+					bluetoothAdapter != null ? new BLEBPICPDevice(bluetoothAdapter, deviceId) : null;
+			case BLE_BICYCLE_SCD ->
+					bluetoothAdapter != null ? new BLEBikeSCDDevice(bluetoothAdapter, deviceId) : null;
+			case BLE_RUNNING_SCDS ->
+					bluetoothAdapter != null ? new BLERunningSCDDevice(bluetoothAdapter, deviceId) : null;
+			default -> null;
+		};
 	}
 
 	public boolean isAntScanning() {
@@ -263,8 +251,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 				if (uuids != null) {
 					for (ParcelUuid uuid : uuids) {
-						BLEAbstractDevice device = BLEAbstractDevice.createDeviceByUUID(
-								bluetoothAdapter, uuid.getUuid(), address, deviceName, result.getRssi());
+						BLEAbstractDevice device = createBLEDevice(result, uuid, address, deviceName);
 						if (device != null) {
 							if (!devices.containsKey(device.getDeviceId())) {
 								addFoundBLEDevice(device);
@@ -286,6 +273,12 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 			LOG.error("BLE scan failed. Error " + errorCode);
 		}
 	};
+
+	@Nullable
+	protected BLEAbstractDevice createBLEDevice(ScanResult result, ParcelUuid uuid, String address, String deviceName) {
+		return BLEAbstractDevice.createDeviceByUUID(
+				bluetoothAdapter, uuid.getUuid(), address, deviceName, result.getRssi());
+	}
 
 	protected abstract void addFoundBLEDevice(@NonNull BLEAbstractDevice device);
 
@@ -452,7 +445,7 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 				} else if (bleScanning && isBLEDevice(device)) {
 					// skip
 				} else {
-					onDeviceConnectSucceed(device);
+					app.runInUIThread(() -> onDeviceConnectSucceed(device));
 				}
 				break;
 			case DEPENDENCY_NOT_INSTALLED:

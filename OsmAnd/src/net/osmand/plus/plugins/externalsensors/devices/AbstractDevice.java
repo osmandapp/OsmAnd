@@ -86,6 +86,10 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		return rssi;
 	}
 
+	public void setRssi(int rssi) {
+		this.rssi = rssi;
+	}
+
 	public DeviceConnectionState getCurrentState() {
 		return state;
 	}

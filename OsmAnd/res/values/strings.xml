@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="rendering_attr_showSkiSlopes_name">Show ski slopes</string>
+    <string name="rendering_attr_showSkiSlopes_description">Show simplified ski slopes</string>
     <string name="shared_string_price">Price</string>
     <string name="obd_alt_battery_voltage">Adapter voltage</string>
     <string name="liter_single">Liter</string>

@@ -35,9 +35,15 @@ public class DevicesSettingsCollection {
 		final String deviceId;
 		final DeviceType deviceType;
 		boolean enabled;
+		String uuid;
 		Map<DeviceChangeableProperty, String> additionalParams = new LinkedHashMap<>();
 
 		public DeviceSettings(String deviceId, @NonNull AbstractDevice<?> device, boolean deviceEnabled) {
+			this( deviceId, device, deviceEnabled, null);
+		}
+
+		public DeviceSettings(String deviceId, @NonNull AbstractDevice<?> device, boolean deviceEnabled, @Nullable String uuid) {
+			this.uuid = uuid;
 			this.deviceId = deviceId;
 			this.deviceType = device.getDeviceType();
 			this.enabled = deviceEnabled;
@@ -73,6 +79,14 @@ public class DevicesSettingsCollection {
 			if (additionalParams == null) {
 				additionalParams = new LinkedHashMap<>();
 			}
+		}
+
+		public String getUuid() {
+			return uuid;
+		}
+
+		public void setUuid(String uuid) {
+			this.uuid = uuid;
 		}
 	}
 	public interface DevicePreferencesListener {
@@ -117,6 +131,7 @@ public class DevicesSettingsCollection {
 		settings.remove(deviceId);
 	}
 
+	@NonNull
 	public static DeviceSettings createDeviceSettings(String deviceId, @NonNull AbstractDevice<?> device, boolean deviceEnabled) {
 		return new DeviceSettings(deviceId, device, deviceEnabled);
 	}

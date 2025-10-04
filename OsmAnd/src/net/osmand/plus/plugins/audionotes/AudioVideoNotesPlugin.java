@@ -209,11 +209,24 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private double actionLat;
 	private double actionLon;
 	private int runAction = -1;
+	private final OnResultCallback<Recording> defaultRecordingSavedCallback = this::updateContextMenu;
 
 	public enum AVActionType {
 		REC_AUDIO,
 		REC_VIDEO,
-		REC_PHOTO
+		REC_PHOTO;
+
+		public boolean isPhoto() {
+			return this == REC_PHOTO;
+		}
+
+		public boolean isAudio() {
+			return this == REC_AUDIO;
+		}
+
+		public boolean isVideo() {
+			return this == REC_VIDEO;
+		}
 	}
 
 	public static int getIconIdForRecordingFile(@NonNull File file) {
@@ -540,7 +553,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityScreenOff(@NonNull MapActivity activity) {
-		stopRecording(activity, false);
+		stopAndSaveRecording(activity);
 	}
 
 	@Override
@@ -577,7 +590,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					actionLat = latLon.getLatitude();
 					actionLon = latLon.getLongitude();
 				}
-				stopRecording(activity, false);
+				stopAndSaveRecording(activity);
 			}
 			finishRecording();
 		}
@@ -596,6 +609,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			throw new IllegalStateException("Plugin " + this + " not attached to MapActivity.");
 		}
 		return mapActivity;
+	}
+
+	@Nullable
+	public AVActionType getCurrentRecordingType() {
+		return isRecording() ? currentRecording.getType() : null;
 	}
 
 	public boolean isRecording() {
@@ -816,13 +834,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private boolean stopMediaRecording(boolean restart, boolean showContextMenu) {
-		boolean res = true;
-		AVActionType type = null;
-		if (isRecording()) {
-			type = currentRecording.getType();
-		}
-		if (type == null || type == AVActionType.REC_AUDIO) {
+	private void stopMediaRecording(boolean save, boolean notifyOnSaved) {
+		AVActionType type = getCurrentRecordingType();
+		if (type == null || type.isAudio()) {
 			unmuteStreamMusicAndOutputGuidance();
 		}
 		if (mediaRec != null) {
@@ -831,41 +845,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			}
-			indexFile(true, mediaRecFile, showContextMenu ? this::updateContextMenu : null);
+			if (save) {
+				indexFile(true, mediaRecFile, notifyOnSaved);
+			} else {
+				finishRecording();
+			}
 			mediaRec.release();
 			mediaRec = null;
 			mediaRecFile = null;
-
-			if (type == null) {
-				res = false;
-			} else if (restart) {
-				try {
-					cam.lock();
-					if (AV_RECORDER_SPLIT.get()) {
-						cleanupSpace();
-					}
-
-					currentRecording = new CurrentRecording(type);
-					MediaRecorder mr = new MediaRecorder();
-					LatLon latLon = getNextRecordingLocation();
-					File f = getBaseFileName(latLon.getLatitude(), latLon.getLongitude(), app, MPEG4_EXTENSION);
-
-					cam.unlock();
-					mr.setCamera(cam);
-					initMediaRecorder(mr, CamcorderProfile.get(AV_VIDEO_QUALITY.get()), f);
-					mr.prepare();
-					mr.start();
-					mediaRec = mr;
-					mediaRecFile = f;
-
-				} catch (Exception e) {
-					app.showToastMessage(e.getMessage());
-					log.error(e.getMessage(), e);
-					res = false;
-				}
-			}
 		}
-		return res;
 	}
 
 	public void recordAudio(double lat, double lon, @NonNull MapActivity activity) {
@@ -1250,20 +1238,68 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mapActivity.refreshMap();
 	}
 
-	public void stopRecording(@NonNull MapActivity mapActivity, boolean restart) {
-		stopRecording(mapActivity, restart, true);
+	public boolean restartRecording(@NonNull MapActivity mapActivity) {
+		AVActionType type = getCurrentRecordingType();
+
+		// Stop media recording and save previously recorded data
+		stopMediaRecording(true, false);
+
+		boolean success = false;
+		if (type != null) {
+			success = tryRestartRecording(type);
+		}
+		if (!success) {
+			// Finish recording if it's not possible to restart
+			stopRecordingWithoutSaving(mapActivity);
+		}
+		return success;
 	}
 
-	public void stopRecording(@NonNull MapActivity mapActivity,
-	                          boolean restart, boolean showContextMenu) {
+	private boolean tryRestartRecording(@NonNull AVActionType type) {
+		try {
+			cam.lock();
+			if (AV_RECORDER_SPLIT.get()) {
+				cleanupSpace();
+			}
+
+			currentRecording = new CurrentRecording(type);
+			MediaRecorder mr = new MediaRecorder();
+			LatLon latLon = getNextRecordingLocation();
+			File f = getBaseFileName(latLon.getLatitude(), latLon.getLongitude(), app, MPEG4_EXTENSION);
+
+			cam.unlock();
+			mr.setCamera(cam);
+			initMediaRecorder(mr, CamcorderProfile.get(AV_VIDEO_QUALITY.get()), f);
+			mr.prepare();
+			mr.start();
+			mediaRec = mr;
+			mediaRecFile = f;
+
+		} catch (Exception e) {
+			app.showToastMessage(e.getMessage());
+			log.error(e.getMessage(), e);
+			return false;
+		}
+		return true;
+	}
+
+	public void stopRecordingWithoutSaving(@NonNull MapActivity mapActivity) {
+		stopRecording(mapActivity, false, false);
+	}
+
+	public void stopAndSaveRecording(@NonNull MapActivity mapActivity) {
+		stopRecording(mapActivity, true, true);
+	}
+
+	public void stopRecording(@NonNull MapActivity mapActivity, boolean save, boolean notifyOnSaved) {
 		if (!recordingDone) {
-			if (!restart || !stopMediaRecording(true, false)) {
-				recordingDone = true;
-				stopMediaRecording(false, !restart && showContextMenu);
+			recordingDone = true;
+			stopMediaRecording(save, notifyOnSaved);
+			if (save) {
 				SHOW_RECORDINGS.set(true);
 				mapActivity.refreshMap();
-				closeRecordingMenu();
 			}
+			closeRecordingMenu();
 		}
 	}
 
@@ -1305,8 +1341,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean indexSingleFile(@NonNull File file,
-	                               @Nullable OnResultCallback<Recording> onRecordingFinished) {
+	public boolean indexSingleFile(@NonNull File file, boolean notify) {
 		boolean oldFileExist = recordingByFileName.containsKey(file.getName());
 		if (oldFileExist) {
 			return false;
@@ -1342,13 +1377,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (isRecording()) {
 			AVActionType type = currentRecording.getType();
 			finishRecording();
-			if (onRecordingFinished != null && type != AVActionType.REC_AUDIO
-					&& (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO)) {
-				app.runInUIThread(() -> onRecordingFinished.onResult(recording), 200);
+			if (notify && !type.isAudio() && (!AV_RECORDER_SPLIT.get() || !type.isVideo())) {
+				notifyRecordingSaved(recording);
 			}
 		}
 
 		return true;
+	}
+
+	private void notifyRecordingSaved(@NonNull Recording recording) {
+		app.runInUIThread(() -> defaultRecordingSavedCallback.onResult(recording), 200);
 	}
 
 	@Override
@@ -1375,18 +1413,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			File[] files = avPath.listFiles();
 			if (files != null) {
 				for (File file : files) {
-					indexFile(registerNew, file, null);
+					indexFile(registerNew, file, false);
 				}
 			}
 		}
 		return null;
 	}
 
-	private void indexFile(boolean registerInGPX, @NonNull File file,
-	                       @Nullable OnResultCallback<Recording> onRecordingFinished) {
+	private void indexFile(boolean registerInGPX, @NonNull File file, boolean notifyOnSaved) {
 		String name = file.getName();
 		if (CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {
-			boolean newFileIndexed = indexSingleFile(file, onRecordingFinished);
+			boolean newFileIndexed = indexSingleFile(file, notifyOnSaved);
 			if (newFileIndexed && registerInGPX) {
 				Recording recording = recordingByFileName.get(name);
 				if (recording != null
@@ -1672,7 +1709,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					FileOutputStream fos = new FileOutputStream(lastTakingPhoto);
 					fos.write(photoJpegData);
 					fos.close();
-					indexFile(true, lastTakingPhoto, null);
+					indexFile(true, lastTakingPhoto, false);
 				}
 			} catch (Exception error) {
 				logErr(error);
