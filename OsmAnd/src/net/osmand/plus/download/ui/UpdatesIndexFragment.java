@@ -116,11 +116,13 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	private void setupOnItemLongClickListener() {
 		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
 			if (position > 0) {
-				IndexItem indexItem = (IndexItem) getListAdapter().getItem(position);
-				LocalItem localItem = indexItem.toLocalItem(app);
-				if (localItem != null) {
-					askShowContextMenu(v, indexItem, localItem);
-					return true;
+				DownloadItem downloadItem = (IndexItem) getListAdapter().getItem(position);
+				if (downloadItem instanceof IndexItem indexItem) {
+					LocalItem localItem = indexItem.toLocalItem(app);
+					if (localItem != null) {
+						askShowContextMenu(v, indexItem, localItem);
+						return true;
+					}
 				}
 			}
 			return false;
@@ -257,7 +259,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 				}
 			});
 		} else {
-			IndexItem e = (IndexItem) getListAdapter().getItem(position);
+			DownloadItem e = (DownloadItem) getListAdapter().getItem(position);
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
 			OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
 			ls.onClick(v);
@@ -538,6 +540,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 				holder.setShowRemoteDate(true);
 				holder.setShowTypeInDesc(true);
 				holder.setShowParentRegionName(true);
+				holder.setUpdatesMode(true);
 				holder.bindDownloadItem(downloadItem);
 			}
 			return view;

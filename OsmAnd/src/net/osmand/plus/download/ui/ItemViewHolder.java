@@ -39,6 +39,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.*;
+import net.osmand.plus.download.SelectIndexesHelper.MultiSelectionMode;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
@@ -87,6 +88,7 @@ public class ItemViewHolder {
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
+	boolean isUpdatesMode;
 
 	private final DateFormat dateFormat;
 
@@ -152,6 +154,10 @@ public class ItemViewHolder {
 
 	public void setUseShortName(boolean useShortName) {
 		this.useShortName = useShortName;
+	}
+
+	public void setUpdatesMode(boolean inUpdatesMode) {
+		this.isUpdatesMode = inUpdatesMode;
 	}
 
 	private void initAppStatusVariables() {
@@ -558,7 +564,8 @@ public class ItemViewHolder {
 	}
 
 	private void selectIndexesToDownload(@NonNull DownloadItem item) {
-		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate, indexes -> {
+		MultiSelectionMode mode = isUpdatesMode ? MultiSelectionMode.UPDATE : MultiSelectionMode.DOWNLOAD;
+		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate, mode, indexes -> {
 			IndexItem[] indexesArray = new IndexItem[indexes.size()];
 			context.startDownload(indexes.toArray(indexesArray));
 		});
