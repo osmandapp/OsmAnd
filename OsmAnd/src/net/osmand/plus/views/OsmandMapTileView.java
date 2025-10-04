@@ -2260,6 +2260,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onActionCancel() {
 			multiTouch = false;
+			multiTouchEndTime = 0;
 		}
 
 		@Override
