@@ -10,6 +10,7 @@ import java.util.Arrays;
 /**
  * Encodes/Decodes a collection of {@link Review}s as JSON.
  */
+// TODO: use something other than GSON
 public final class ReviewJsonCodec {
     private final Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
