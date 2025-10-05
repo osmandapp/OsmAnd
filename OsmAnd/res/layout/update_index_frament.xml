@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_weight="1"
-	    android:layout_marginEnd="0dp"
-	    android:layout_marginStart="0dp" />
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:layout_marginTop="0dp"
+		android:layout_marginStart="0dp"
+		android:layout_marginRight="0dp"
+		tools:listitem="@layout/two_line_with_images_list_item" />
 
 	<FrameLayout
 		android:id="@+id/bottom_buttons_container"
@@ -32,8 +30,7 @@
 			android:textColor="?android:textColorPrimary"
 			android:textAllCaps="true"
 			tools:visibility="visible"
-			android:visibility="gone"/>
-
+			android:visibility="gone" />
 	</FrameLayout>
 
 </LinearLayout>

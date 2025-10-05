@@ -2,7 +2,6 @@ package net.osmand.plus.download.ui;
 
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -17,10 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +28,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -38,7 +37,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseNestedListFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivity;
@@ -46,6 +45,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
@@ -73,20 +73,23 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-public class UpdatesIndexFragment extends BaseNestedListFragment implements DownloadEvents,
+public class UpdatesIndexFragment extends BaseOsmAndFragment implements DownloadEvents,
 		OperationListener, ConfirmDeletionListener, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
 	private static final int RELOAD_ID = 5;
-	private UpdateIndexAdapter listAdapter;
+
+	private UpdatesAdapter adapter;
 	private String errorMessage;
 	private LoadLiveMapsTask loadLiveMapsTask;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		invalidateListView(requireContext());
+		invalidateListView();
 		startLoadLiveMapsAsyncTask();
 		setHasOptionsMenu(true);
 		DeleteConfirmationDialogController.askUpdateListener(app, this);
@@ -96,15 +99,16 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.update_index_frament, container, false);
+
+		View view = inflater.inflate(R.layout.update_index_frament, container, false);
+		app = (OsmandApplication) requireActivity().getApplication();
+
+		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+		recyclerView.setAdapter(adapter);
+
 		requireMyActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.UPDATES_TAB_NUMBER);
 		return view;
-	}
-
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		setupOnItemLongClickListener();
 	}
 
 	@Override
@@ -113,58 +117,44 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		updateErrorMessage();
 	}
 
-	private void setupOnItemLongClickListener() {
-		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
-			if (position > 0) {
-				DownloadItem downloadItem = (IndexItem) getListAdapter().getItem(position);
-				if (downloadItem instanceof IndexItem indexItem) {
-					LocalItem localItem = indexItem.toLocalItem(app);
-					if (localItem != null) {
-						askShowContextMenu(v, indexItem, localItem);
-						return true;
-					}
-				}
-			}
-			return false;
-		});
-	}
-
-	@Override
-	public ArrayAdapter<?> getAdapter() {
-		return listAdapter;
-	}
-
 	@Override
 	public void downloadHasFinished() {
-		invalidateListView(requireMyActivity());
+		invalidateListView();
 		updateUpdateAllButton();
 		startLoadLiveMapsAsyncTask();
 	}
 
 	@Override
 	public void downloadInProgress() {
-		listAdapter.notifyDataSetChanged();
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void onUpdatedIndexesList() {
-		invalidateListView(requireMyActivity());
+		invalidateListView();
 		updateUpdateAllButton();
 	}
 
-	public void invalidateListView(@NonNull Context context) {
+	public void invalidateListView() {
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate();
 
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
-		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, downloadItems,
-				!InAppPurchaseUtils.isLiveUpdatesAvailable(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
+		List<DownloadItem> items = new ArrayList<>(indexes.getGroupedItemsToUpdate());
+
 		Collator collator = OsmAndCollator.primaryCollator();
-		listAdapter.sort((downloadItem1, downloadItem2) -> collator.compare(
-				downloadItem1.getVisibleName(app, osmandRegions),
-				downloadItem2.getVisibleName(app, osmandRegions)
+		items.sort((o1, o2) -> collator.compare(
+				o1.getVisibleName(app, osmandRegions),
+				o2.getVisibleName(app, osmandRegions)
 		));
-		setListAdapter(listAdapter);
+
+		if (adapter == null) {
+			boolean showBanner = !InAppPurchaseUtils.isLiveUpdatesAvailable(app)
+					|| settings.SHOULD_SHOW_FREE_VERSION_BANNER.get();
+			adapter = new UpdatesAdapter(requireContext(), items, showBanner);
+		} else {
+			adapter.setVisibleItems(downloadItems);
+		}
 		updateErrorMessage();
 	}
 
@@ -174,7 +164,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
 		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate();
-		if (getListAdapter() != null && downloadItems.isEmpty()) {
+		if (adapter != null && downloadItems.isEmpty()) {
 			errorMessage = getString(indexes.isDownloadedFromInternet
 					? R.string.everything_up_to_date
 					: R.string.no_index_file_to_download);
@@ -240,29 +230,13 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	}
 
 	private void startLoadLiveMapsAsyncTask() {
-		loadLiveMapsTask = new LoadLiveMapsTask(listAdapter, app);
+		loadLiveMapsTask = new LoadLiveMapsTask(adapter, app);
 		OsmAndTaskManager.executeTask(loadLiveMapsTask);
 	}
 
 	private void stopLoadLiveMapsAsyncTask() {
 		if (loadLiveMapsTask != null && loadLiveMapsTask.getStatus() == AsyncTask.Status.RUNNING) {
 			loadLiveMapsTask.cancel(false);
-		}
-	}
-
-	@Override
-	public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-		if (position == 0) {
-			callActivity(activity -> {
-				if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
-					LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), this);
-				}
-			});
-		} else {
-			DownloadItem e = (DownloadItem) getListAdapter().getItem(position);
-			ItemViewHolder vh = (ItemViewHolder) v.getTag();
-			OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
-			ls.onClick(v);
 		}
 	}
 
@@ -411,7 +385,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		callActivity(activity -> {
-			invalidateListView(activity);
+			invalidateListView();
 			updateUpdateAllButton();
 			startLoadLiveMapsAsyncTask();
 		});
@@ -427,13 +401,44 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return (DownloadActivity) getActivity();
 	}
 
-	private class UpdateIndexAdapter extends ArrayAdapter<DownloadItem> implements LocalIndexInfoAdapter {
+	private class UpdatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements LocalIndexInfoAdapter  {
 
-		private static final int DOWNLOAD_ITEM = 0;
-		private static final int OSM_LIVE_BANNER = 1;
+		private static final int TYPE_MULTIPLE_DOWNLOAD = 0;
+		private static final int TYPE_INDEX_ITEM = 1;
+		private static final int TYPE_OSM_LIVE_BANNER = 2;
 
+		private final Context context;
+		private final List<Object> visibleItems = new ArrayList<>();
 		private final List<LocalItem> localItems = new ArrayList<>();
+		private final Set<String> nestedItemsKeys = new HashSet<>();
+		private final Set<String> expandedKeys = new HashSet<>();
 		private final boolean showSubscriptionPurchaseBanner;
+
+		public UpdatesAdapter(Context context, List<DownloadItem> items, boolean showSubscriptionPurchaseBanner) {
+			this.context = context;
+			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
+			setVisibleItems(items);
+		}
+
+		public void setVisibleItems(@NonNull List<DownloadItem> items) {
+			visibleItems.clear();
+			nestedItemsKeys.clear();
+			visibleItems.add(TYPE_OSM_LIVE_BANNER);
+			for (DownloadItem downloadItem : items) {
+				if (downloadItem instanceof MultipleDownloadItem mdi) {
+					visibleItems.add(mdi);
+					if (isCategoryExpanded(mdi)) {
+						visibleItems.addAll(mdi.getAllIndexes());
+					}
+					for (IndexItem indexItem : mdi.getAllIndexes()) {
+						nestedItemsKeys.add(getIndexItemId(indexItem));
+					}
+				} else if (downloadItem instanceof IndexItem indexItem) {
+					visibleItems.add(indexItem);
+				}
+			}
+			notifyDataSetChanged();
+		}
 
 		@Override
 		public void addData(@NonNull List<LocalItem> indexes) {
@@ -447,112 +452,204 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			notifyDataSetChanged();
 		}
 
-		@Override
-		public void onDataUpdated() {
-
-		}
-
-		public UpdateIndexAdapter(Context context, int resource, List<DownloadItem> items, boolean showSubscriptionPurchaseBanner) {
-			super(context, resource, items);
-			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
-		}
-
 		public boolean isShowSubscriptionPurchaseBanner() {
 			return showSubscriptionPurchaseBanner;
 		}
 
 		@Override
-		public int getCount() {
-			return super.getCount() + 1;
-		}
-
-		@Override
-		public DownloadItem getItem(int position) {
-			if (position == 0) {
-				return null;
-			} else {
-				return super.getItem(position - 1);
-			}
-		}
-
-		@Override
-		public int getPosition(DownloadItem item) {
-			return super.getPosition(item) + 1;
-		}
-
-		@Override
-		public int getViewTypeCount() {
-			return 2;
-		}
-
-		@Override
 		public int getItemViewType(int position) {
-			return position == 0 ? OSM_LIVE_BANNER : DOWNLOAD_ITEM;
+			Object item = visibleItems.get(position);
+			if (position == 0) {
+				return TYPE_OSM_LIVE_BANNER;
+			} else if (item instanceof MultipleDownloadItem) {
+				return TYPE_MULTIPLE_DOWNLOAD;
+			} else {
+				return TYPE_INDEX_ITEM;
+			}
 		}
 
 		@NonNull
 		@Override
-		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-			View view = convertView;
-			int viewType = getItemViewType(position);
-			if (view == null) {
-				if (viewType == DOWNLOAD_ITEM) {
-					view = inflate(R.layout.two_line_with_images_list_item, parent, false);
-					view.setTag(new ItemViewHolder(view, requireMyActivity()));
-				} else if (viewType == OSM_LIVE_BANNER) {
-					if (showSubscriptionPurchaseBanner) {
-						view = inflate(R.layout.osm_subscription_banner_list_item, parent, false);
-						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
-								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
-								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
-						CardView cardView = view.findViewById(R.id.card_view);
-						cardView.setCardBackgroundColor(stateList);
-						cardView.setOnClickListener(v -> callActivity(activity ->
-								ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES))
-						);
-					} else {
-						view = inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
-						view.setBackground(null);
-						AndroidUiHelper.setVisibility(View.GONE, view.findViewById(R.id.compound_button));
-						((ImageView) view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_action_subscription_osmand_live);
-						TextView tvTitle = view.findViewById(R.id.title);
-						tvTitle.setText(R.string.download_live_updates);
-						AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
-						TextView countView = view.findViewById(R.id.description);
-						AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
-						Drawable additionalIconDrawable = getContentIcon(R.drawable.ic_action_update);
-						((ImageView) view.findViewById(R.id.additional_button_icon)).setImageDrawable(additionalIconDrawable);
-						LinearLayout additionalButton = view.findViewById(R.id.additional_button);
-						TypedValue typedValue = new TypedValue();
-						app.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
-						additionalButton.setBackgroundResource(typedValue.resourceId);
-						additionalButton.setOnClickListener(v -> {
-							if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
-								showUpdateDialog(getActivity(), getFragmentManager(), UpdatesIndexFragment.this);
-							}
-						});
-					}
+		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+			LayoutInflater inflater = getThemedInflater();
+			if (viewType == TYPE_OSM_LIVE_BANNER) {
+				View v = inflater.inflate(showSubscriptionPurchaseBanner
+						? R.layout.osm_subscription_banner_list_item
+						: R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp,
+						parent, false);
+				return new OsmLiveBannerVH(v, showSubscriptionPurchaseBanner);
+			} else if (viewType == TYPE_MULTIPLE_DOWNLOAD) {
+				View v = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
+				return new MultiItemVH(v);
+			} else {
+				View v = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
+				return new IndexItemVH(v);
+			}
+		}
+
+		@Override
+		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+			Object item = visibleItems.get(position);
+			if (holder instanceof MultiItemVH multiItemVH && item instanceof MultipleDownloadItem mdi) {
+				multiItemVH.bindView(mdi);
+			} else if (holder instanceof IndexItemVH indexItemVH && item instanceof IndexItem indexItem) {
+				indexItemVH.bindView(indexItem);
+			}
+		}
+
+		@Override
+		public int getItemCount() {
+			return visibleItems.size();
+		}
+
+		class OsmLiveBannerVH extends RecyclerView.ViewHolder {
+
+			OsmLiveBannerVH(View v, boolean showSubscriptionPurchaseBanner) {
+				super(v);
+				if (showSubscriptionPurchaseBanner) {
+					ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
+							R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
+							R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
+					CardView cardView = v.findViewById(R.id.card_view);
+					cardView.setCardBackgroundColor(stateList);
+					cardView.setOnClickListener(click -> callActivity(activity ->
+							ChoosePlanFragment.showInstance((FragmentActivity) context, OsmAndFeature.HOURLY_MAP_UPDATES))
+					);
+				} else {
+					v.setBackground(null);
+					v.findViewById(R.id.compound_button).setVisibility(View.GONE);
+					AndroidUiHelper.setVisibility(View.GONE, v.findViewById(R.id.compound_button));
+					((ImageView) v.findViewById(R.id.icon)).setImageResource(R.drawable.ic_action_subscription_osmand_live);
+
+					TextView tvTitle = v.findViewById(R.id.title);
+					tvTitle.setText(R.string.download_live_updates);
+
+					AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
+					TextView countView = v.findViewById(R.id.description);
+					AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
+
+					Drawable additionalIconDrawable = getContentIcon(R.drawable.ic_action_update);
+					((ImageView) v.findViewById(R.id.additional_button_icon)).setImageDrawable(additionalIconDrawable);
+					LinearLayout additionalButton = v.findViewById(R.id.additional_button);
+					TypedValue typedValue = new TypedValue();
+					app.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
+					additionalButton.setBackgroundResource(typedValue.resourceId);
+
+					OnClickListener onClickListener = click -> callActivity(activity -> {
+						if (!adapter.isShowSubscriptionPurchaseBanner()) {
+							LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), UpdatesIndexFragment.this);
+						}
+					});
+					additionalButton.setOnClickListener(onClickListener);
+					v.setOnClickListener(onClickListener);
 				}
 			}
-			if (viewType == DOWNLOAD_ITEM) {
-				DownloadItem downloadItem = Objects.requireNonNull(getItem(position));
-				ItemViewHolder holder = (ItemViewHolder) view.getTag();
+		}
+
+		class MultiItemVH extends RecyclerView.ViewHolder {
+			TextView title;
+			ImageView expandIcon;
+
+			MultiItemVH(@NonNull View itemView) {
+				super(itemView);
+				title = itemView.findViewById(R.id.title);
+				expandIcon = itemView.findViewById(R.id.expandIcon);
+				expandIcon.setVisibility(View.VISIBLE);
+				itemView.findViewById(R.id.expand_button_divider).setVisibility(View.VISIBLE);
+				itemView.setTag(new ItemViewHolder(itemView, requireMyActivity()));
+				itemView.setOnClickListener(v -> toggleExpanded(getAdapterPosition()));
+			}
+
+			void bindView(@NonNull MultipleDownloadItem downloadItem) {
+				ItemViewHolder holder = (ItemViewHolder) itemView.getTag();
 				holder.setShowRemoteDate(true);
 				holder.setShowTypeInDesc(true);
 				holder.setShowParentRegionName(true);
 				holder.setUpdatesMode(true);
 				holder.bindDownloadItem(downloadItem);
+				int indicatorIconId = isCategoryExpanded(downloadItem)
+						? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
+				expandIcon.setImageDrawable(getContentIcon(indicatorIconId));
 			}
-			return view;
+		}
+
+		class IndexItemVH extends RecyclerView.ViewHolder {
+
+			IndexItemVH(@NonNull View itemView) {
+				super(itemView);
+				itemView.setTag(new ItemViewHolder(itemView, requireMyActivity()));
+			}
+
+			void bindView(@NonNull IndexItem item) {
+				ItemViewHolder holder = (ItemViewHolder) itemView.getTag();
+				holder.setShowRemoteDate(true);
+				holder.setShowTypeInDesc(true);
+				holder.setShowParentRegionName(true);
+				holder.setShowStartIcon(!isNestedItem(item));
+				holder.setUpdatesMode(true);
+				holder.bindDownloadItem(item);
+				itemView.setOnClickListener(v -> {
+					ItemViewHolder vh = (ItemViewHolder) v.getTag();
+					OnClickListener ls = vh.getRightButtonAction(item, vh.getClickAction(item));
+					ls.onClick(v);
+				});
+				itemView.setOnLongClickListener(v -> {
+					LocalItem localItem = item.toLocalItem(app);
+					if (localItem != null) {
+						askShowContextMenu(v, item, localItem);
+						return true;
+					}
+					return false;
+				});
+			}
+		}
+
+		private void toggleExpanded(int position) {
+			Object item = visibleItems.get(position);
+			if (!(item instanceof MultipleDownloadItem mdi)) return;
+
+			if (isCategoryExpanded(mdi)) {
+				visibleItems.removeAll(mdi.getAllIndexes());
+				setCategoryExpanded(mdi, false);
+			} else {
+				int insertPos = position + 1;
+				List<IndexItem> children = mdi.getAllIndexes();
+				visibleItems.addAll(insertPos, children);
+				setCategoryExpanded(mdi, true);
+			}
+			notifyDataSetChanged();
+		}
+
+		private boolean isCategoryExpanded(@NonNull MultipleDownloadItem mdi) {
+			return expandedKeys.contains(getCategoryId(mdi));
+		}
+
+		private void setCategoryExpanded(@NonNull MultipleDownloadItem mdi, boolean expanded) {
+			String key = getCategoryId(mdi);
+			if (expanded) {
+				expandedKeys.add(key);
+			} else {
+				expandedKeys.remove(key);
+			}
+		}
+
+		private boolean isNestedItem(@NonNull IndexItem indexItem) {
+			return nestedItemsKeys.contains(getIndexItemId(indexItem));
+		}
+
+		@NonNull
+		private String getCategoryId(@NonNull MultipleDownloadItem mdi) {
+			return mdi.getType().getTag()  + "_" + mdi.getRelatedRegion().getRegionId();
+		}
+
+		@NonNull
+		private String getIndexItemId(@NonNull IndexItem indexItem) {
+			return indexItem.getBasename();
 		}
 	}
 
 	@Override
-	public void processFinish() {
-	}
-
-	@Override
 	public List<LocalItem> getMapsToUpdate() {
-		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.localItems, settings);
+		return LiveUpdatesFragment.getMapsToUpdate(adapter.localItems, settings);
 	}
 }

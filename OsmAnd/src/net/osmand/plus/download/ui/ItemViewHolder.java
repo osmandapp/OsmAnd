@@ -83,6 +83,7 @@ public class ItemViewHolder {
 
 	boolean showTypeInDesc;
 	boolean showTypeInName;
+	boolean showStartIcon = true;
 	boolean useShortName;
 	boolean showParentRegionName;
 	boolean showRemoteDate;
@@ -152,6 +153,10 @@ public class ItemViewHolder {
 		this.showTypeInName = showTypeInName;
 	}
 
+	public void setShowStartIcon(boolean showStartIcon) {
+		this.showStartIcon = showStartIcon;
+	}
+
 	public void setUseShortName(boolean useShortName) {
 		this.useShortName = useShortName;
 	}
@@ -185,8 +190,6 @@ public class ItemViewHolder {
 		String name;
 		if (showTypeInName) {
 			name = downloadItem.getType().getString(context);
-		} else if (downloadItem instanceof MultipleDownloadItem multipleDownloadItem) {
-			name = getMultipleDownloadItemTitle(multipleDownloadItem);
 		} else {
 			name = downloadItem.getVisibleName(context, app.getRegions(), showParentRegionName, useShortName);
 		}
@@ -225,6 +228,7 @@ public class ItemViewHolder {
 			ivLeft.setImageDrawable(getThemedIcon(context,
 					downloadItem.getType().getIconResource()));
 		}
+		ivLeft.setVisibility(showStartIcon ? View.VISIBLE : View.INVISIBLE);
 		tvDesc.setTextColor(textColorSecondary);
 
 		if (!isDownloading) {
@@ -285,13 +289,6 @@ public class ItemViewHolder {
 			tvDesc.setVisibility(View.GONE);
 			pbProgress.setVisibility(View.GONE);
 		}
-	}
-
-	@NonNull
-	private String getMultipleDownloadItemTitle(@NonNull MultipleDownloadItem downloadItem) {
-		String regionName = downloadItem.getRelatedRegion().getLocaleName();
-		String count = String.valueOf(downloadItem.getItemsToDownload().size());
-		return app.getString(R.string.ltr_or_rtl_combine_via_dash, regionName, count);
 	}
 
 	private void setupCommonMultipleDescription(@NonNull MultipleDownloadItem item) {

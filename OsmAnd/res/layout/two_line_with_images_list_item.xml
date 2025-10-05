@@ -6,15 +6,14 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:minHeight="@dimen/list_item_height"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?android:selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/list_item_height"
-        android:paddingLeft="@dimen/list_content_padding"
         android:paddingStart="@dimen/list_content_padding"
-        android:paddingRight="0dp"
         android:paddingEnd="0dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -22,7 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/favorites_icon_right_margin"
             tools:src="@drawable/ic_map"
             android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
@@ -70,18 +68,41 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="@dimen/dashFavIconMargin"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/expandIcon"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_marginHorizontal="@dimen/content_padding_small"
+            android:rotation="0"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_arrow_down"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <View
+            android:id="@+id/expand_button_divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="12dp"
+            android:layout_gravity="center"
+            android:background="?attr/divider_color_basic"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/secondaryIcon"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:scaleType="center"
             android:visibility="gone"
             tools:src="@drawable/ic_action_import"
-            tools:visibility="visible"
-            android:layout_marginStart="@dimen/dashFavIconMargin" />
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/rightButton"
@@ -89,9 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/dashFavIconMargin"
-            android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:layout_marginEnd="@dimen/list_header_padding"
-            android:layout_marginRight="@dimen/list_header_padding"
             android:minWidth="@dimen/list_header_height"
             android:minHeight="@dimen/list_content_padding_large"
             android:paddingStart="@dimen/bottom_sheet_exit_button_margin"
