@@ -2139,7 +2139,7 @@
     <string name="shared_string_move">Verschieben</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
-    <string name="shared_string_time_span">Dauer</string>
+    <string name="shared_string_time_span">Zeitspanne</string>
     <string name="shared_string_max">Max.</string>
     <string name="shared_string_start_time">Startzeitpunkt</string>
     <string name="shared_string_end_time">Endzeitpunkt</string>
@@ -2788,7 +2788,7 @@
     <string name="quick_action_day_night_mode">%s Modus</string>
     <string name="routing_attr_avoid_sett_name">Keine Pflastersteine</string>
     <string name="routing_attr_avoid_sett_description">Vermeidet Pflastersteine</string>
-    <string name="shared_string_degrees">Grad</string>
+    <string name="shared_string_degrees">Grade</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkeleinheit</string>
     <string name="angular_measeurement_descr">Ändern, in welcher Einheit Azimut gemessen wird.</string>
