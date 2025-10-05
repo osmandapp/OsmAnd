@@ -5614,7 +5614,7 @@
     <string name="av_audio_sample_rate">Brzina uzorkovanja zvuka</string>
     <string name="av_audio_sample_rate_descr">Izaberi brzinu uzorkovanja zvuka.</string>
     <string name="connect_new_scanner">Poveži novi skener</string>
-    <string name="auto_zoom_3d_angle">Auto zum 3D ugao</string>
+    <string name="auto_zoom_3d_angle">Auto zumiranje 3D ugao</string>
     <string name="vehicle_metrics_recording_description">Izaberite parametre koji će biti snimljeni u GPX fajlu.</string>
     <string name="shared_string_engine">Motor</string>
     <string name="location_interpolation_percent">Procenat interpolacije pozicije</string>

@@ -599,7 +599,7 @@
     <string name="voice_provider">Гласовно навођење</string>
     <string name="monitoring_settings">Снимање путовања</string>
     <string name="monitoring_settings_descr">Подесите како снимати своја путовања.</string>
-    <string name="duration">Трајање</string>
+    <string name="duration">Trajanje</string>
     <string name="distance">Растојање</string>
     <string name="shared_string_all">Све</string>
     <string name="shared_string_waypoints">Пролазне тачке</string>
@@ -5612,7 +5612,7 @@
     <string name="av_audio_sample_rate">Брзина узорковања звука</string>
     <string name="av_audio_sample_rate_descr">Изабери брзину узорковања звука.</string>
     <string name="connect_new_scanner">Повежи нови пријемник</string>
-    <string name="auto_zoom_3d_angle">Самостално приближавање просторног угла</string>
+    <string name="auto_zoom_3d_angle">Ауто зумирање 3Д угао</string>
     <string name="vehicle_metrics_recording_description">Изаберите параметре који ће бити снимљени у ГПКС фајлу.</string>
     <string name="shared_string_engine">Мотор</string>
     <string name="shared_string_interpolation">Интерполација</string>
@@ -5860,4 +5860,6 @@
     <string name="show_spherical_map">Прикажи сферичну мапу</string>
     <string name="show_spherical_map_description">Приказ сфероидног модела Земље</string>
     <string name="shared_string_price">Цена</string>
+    <string name="rendering_attr_showSkiSlopes_name">Прикажи скијашке стазе</string>
+    <string name="rendering_attr_showSkiSlopes_description">Приказати лаке ски стазе</string>
 </resources>

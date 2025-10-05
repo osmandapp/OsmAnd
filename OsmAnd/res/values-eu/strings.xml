@@ -5994,4 +5994,8 @@
     <string name="threads_allocated_for_rendering">Errendatzeko esleitutako hariak</string>
     <string name="threads_allocated_for_rendering_desc">Harien esleipen txikiagoak mapa errendatzea bizkortu dezake kasu batzuetan.</string>
     <string name="hmd_promo">HMD eskaintza %1$s hilabetez</string>
+    <string name="rendering_attr_showSkiSlopes_name">Erakutsi eski-pistak</string>
+    <string name="rendering_attr_showSkiSlopes_description">Erakutsi sinplifikatutako eski-pistak</string>
+    <string name="shared_string_price">Prezioa</string>
+    <string name="hmd_promo_description">Funtzioetarako sarbide librea, besteak beste, mapak mugarik gabe deskargatzea, 3D erliebea eta abar. %1$s hilabetean</string>
 </resources>
