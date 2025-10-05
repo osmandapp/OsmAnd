@@ -5733,7 +5733,7 @@
     <string name="backup_error_failed_to_transfer_file">Falha ao transferir arquivo(s) da nuvem.</string>
     <string name="daynight_mode_night_summary">Sempre exibe o mapa em um tema escuro, adequado para condições noturnas ou de baixa luminosidade.</string>
     <string name="daynight_mode_day_summary">Sempre exibe o mapa em um tema claro, ideal para visibilidade durante o dia.</string>
-    <string name="remove_key_assignment_summary">A atribuição de tecla para a ação selecionada será removida.</string>
+    <string name="remove_key_assignment_summary">A atribuição da tecla para a ação selecionada será removida.</string>
     <string name="remove_key_assignment">Remover atribuição de tecla</string>
     <string name="daynight_mode_app_theme_summary">A exibição do mapa se alinha ao tema geral do aplicativo - modo dia para um tema claro e modo noite para um tema escuro</string>
     <string name="daynight_mode_sensor_summary">Usa o sensor de luz do dispositivo para alternar entre temas claros e escuros de acordo com os níveis de luz ambiente.</string>

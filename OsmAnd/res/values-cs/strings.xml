@@ -1262,7 +1262,7 @@
 \nDalší informace naleznete na adrese %1$s.</string>
     <string name="record_plugin_name">Záznam cesty</string>
     <string name="int_hour">h</string>
-    <string name="duration">Trvání</string>
+    <string name="duration">Délka</string>
     <string name="distance">Vzdálenost</string>
     <string name="index_tours">Cesty</string>
     <string name="shared_string_all">Všechny</string>
@@ -5878,4 +5878,6 @@
     <string name="show_spherical_map">Zobrazit sférickou mapu</string>
     <string name="show_spherical_map_description">Zobrazit sférický model Země</string>
     <string name="shared_string_price">Cena</string>
+    <string name="rendering_attr_showSkiSlopes_name">Zobrazit sjezdovky</string>
+    <string name="rendering_attr_showSkiSlopes_description">Zobrazit zjednodušené sjezdovky</string>
 </resources>

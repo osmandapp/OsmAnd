@@ -5693,4 +5693,6 @@
     <string name="show_spherical_map">Taispeáin léarscáil sféarúil</string>
     <string name="show_spherical_map_description">Taispeáin samhail sféaróideach den Domhan</string>
     <string name="shared_string_price">Praghas</string>
+    <string name="rendering_attr_showSkiSlopes_name">Taispeáin fánaí sciála</string>
+    <string name="rendering_attr_showSkiSlopes_description">Taispeáin fánaí sciála simplithe</string>
 </resources>

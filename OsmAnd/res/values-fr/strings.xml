@@ -5773,4 +5773,6 @@
     <string name="show_spherical_map">Afficher la carte sphérique</string>
     <string name="show_spherical_map_description">Afficher le modèle sphéroïdal de la Terre</string>
     <string name="shared_string_price">Prix</string>
+    <string name="rendering_attr_showSkiSlopes_name">Afficher les pistes de ski</string>
+    <string name="rendering_attr_showSkiSlopes_description">Afficher les pistes de ski de façon simplifiée</string>
 </resources>
