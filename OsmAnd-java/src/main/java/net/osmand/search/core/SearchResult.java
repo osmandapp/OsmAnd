@@ -82,11 +82,11 @@ public class SearchResult {
 			return unknownPhraseMatchWeight;
 		}
 		// normalize number to get as power, so we get numbers > 1
-		unknownPhraseMatchWeight = getSumPhraseMatchWeight() / Math.pow(MAX_PHRASE_WEIGHT_TOTAL, getDepth() - 1);
+		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null) / Math.pow(MAX_PHRASE_WEIGHT_TOTAL, getDepth() - 1);
 		return unknownPhraseMatchWeight;
 	}
 
-	private double getSumPhraseMatchWeight() {
+	private double getSumPhraseMatchWeight(SearchResult exactResult) {
 		double res = ObjectType.getTypeWeight(objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
@@ -95,26 +95,29 @@ public class SearchResult {
 		} else {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
 			boolean matched = false;
-			matched = allWordsMatched(localeName, completeMatchRes);
+			matched = allWordsMatched(localeName, exactResult, completeMatchRes);
 			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
-				matched = allWordsMatched(alternateName, completeMatchRes);
+				matched = allWordsMatched(alternateName, exactResult, completeMatchRes);
 			}
 			if (!matched && otherNames != null) {
 				for (String otherName : otherNames) {
-					if (allWordsMatched(otherName, completeMatchRes)) {
+					if (allWordsMatched(otherName, exactResult, completeMatchRes)) {
 						matched = true;
 						break;
 					}
 				}
 			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
-			if (completeMatchRes.allWordsInPhraseAreInResult) {
+			if (matched) {
 				res = getPhraseWeightForCompleteMatch(completeMatchRes);
+				System.out.println(objectType + " " + localeName + " " + localeRelatedObjectName + "  "+ res);
+			} else {
+				System.out.println(objectType + " ! " + localeName + " " + localeRelatedObjectName + "  "+ res);
 			}
 		}
 		if (parentSearchResult != null) {
 			// parent search result should not change weight of current result, so we divide by MAX_TYPES_BASE_10^2
-			res = res + parentSearchResult.getSumPhraseMatchWeight() / (MAX_PHRASE_WEIGHT_TOTAL);
+			res = res + parentSearchResult.getSumPhraseMatchWeight(exactResult == null ? this : exactResult) / (MAX_PHRASE_WEIGHT_TOTAL);
 		}
 		return res;
 	}
@@ -149,7 +152,7 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean allWordsMatched(String name, CheckWordsMatchCount cnt) {
+	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		List<String> localResultNames;
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
@@ -163,6 +166,14 @@ public class SearchResult {
 		if (searchPhraseNames.isEmpty()) {
 			return false;
 		}
+		while (exactResult != null && exactResult != this) {
+			List<String> lst = exactResult.getSearchPhraseNames();
+			for (String l : lst) {
+				searchPhraseNames.remove(l);
+			}
+			exactResult = exactResult.parentSearchResult;
+		}
+		
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
 			wordMatched = false;
