@@ -117,7 +117,7 @@ public class SearchResult {
 			if (matched) {
 				res = getPhraseWeightForCompleteMatch(completeMatchRes);
 //				System.out.println(objectType + " " + localeName + " " + localeRelatedObjectName + "  "+ res);
-//			} else {
+			} else {
 //				System.out.println(objectType + " ! " + localeName + " " + localeRelatedObjectName + "  "+ res);
 			}
 		}
@@ -134,9 +134,9 @@ public class SearchResult {
 		if (completeMatchRes.allWordsEqual && requiredSearchPhrase.getLastTokenLocation() != null && this.location != null) {
 			boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
 					this.location) <= NEAREST_METERS_LIMIT;
-			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
+//			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
 				res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
-			}
+//			}
 		}
 		return res;
 	}
