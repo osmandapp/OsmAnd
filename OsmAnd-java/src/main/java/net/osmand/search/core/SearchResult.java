@@ -82,7 +82,9 @@ public class SearchResult {
 			return unknownPhraseMatchWeight;
 		}
 		// normalize number to get as power, so we get numbers > 1
-		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null) / Math.pow(MAX_PHRASE_WEIGHT_TOTAL, getDepth() - 1);
+		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null);
+//		System.out.println(" ---- " + this + " " + unknownPhraseMatchWeight);
+//		unknownPhraseMatchWeight /= Math.pow(MAX_PHRASE_WEIGHT_TOTAL, getDepth() - 1);
 		return unknownPhraseMatchWeight;
 	}
 
@@ -96,6 +98,10 @@ public class SearchResult {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
 			boolean matched = false;
 			matched = allWordsMatched(localeName, exactResult, completeMatchRes);
+			// incorrect fix
+//			if (!matched && object instanceof Street s) { // parentSearchResult == null &&
+//				matched = allWordsMatched(localeName + " " + s.getCity().getName(requiredSearchPhrase.getSettings().getLang()), exactResult, completeMatchRes);
+//			}
 			if (!matched && alternateName != null && !Algorithms.objectEquals(cityName, alternateName)) {
 				matched = allWordsMatched(alternateName, exactResult, completeMatchRes);
 			}
@@ -110,9 +116,9 @@ public class SearchResult {
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (matched) {
 				res = getPhraseWeightForCompleteMatch(completeMatchRes);
-				System.out.println(objectType + " " + localeName + " " + localeRelatedObjectName + "  "+ res);
-			} else {
-				System.out.println(objectType + " ! " + localeName + " " + localeRelatedObjectName + "  "+ res);
+//				System.out.println(objectType + " " + localeName + " " + localeRelatedObjectName + "  "+ res);
+//			} else {
+//				System.out.println(objectType + " ! " + localeName + " " + localeRelatedObjectName + "  "+ res);
 			}
 		}
 		if (parentSearchResult != null) {
@@ -211,6 +217,13 @@ public class SearchResult {
 		}
 		if (ow != null) {
 			searchPhraseNames.addAll(ow);
+		}
+		// when parent result was recreated with same phrase (it doesn't have preselected word)
+		// SearchCoreFactory.subSearchApiOrPublish
+		if (parentSearchResult != null && requiredSearchPhrase == parentSearchResult.requiredSearchPhrase) {
+			for (String s : parentSearchResult.getOtherWordsMatch()) {
+				searchPhraseNames.remove(s);
+			}
 		}
 
 		return searchPhraseNames;
