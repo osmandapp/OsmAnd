@@ -5,8 +5,10 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -179,6 +181,15 @@ public class MultipleDownloadItem extends DownloadItem {
 	@Override
 	public String getAdditionalDescription(Context ctx) {
 		return null;
+	}
+
+	@Override
+	public String getVisibleName(@NonNull Context ctx, @NonNull OsmandRegions regions,
+	                             boolean includingParent, @Nullable WorldRegion baseParentRegion,
+	                             boolean useShortName) {
+		String regionName = getRelatedRegion().getLocaleName();
+		String count = String.valueOf(getItemsToDownload().size());
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_dash, regionName, count);
 	}
 
 	@Override

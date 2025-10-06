@@ -116,7 +116,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	private void setupOnItemLongClickListener() {
 		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
 			if (position > 0) {
-				DownloadItem downloadItem = (IndexItem) getListAdapter().getItem(position);
+				DownloadItem downloadItem = (DownloadItem) getListAdapter().getItem(position);
 				if (downloadItem instanceof IndexItem indexItem) {
 					LocalItem localItem = indexItem.toLocalItem(app);
 					if (localItem != null) {
@@ -447,11 +447,6 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			notifyDataSetChanged();
 		}
 
-		@Override
-		public void onDataUpdated() {
-
-		}
-
 		public UpdateIndexAdapter(Context context, int resource, List<DownloadItem> items, boolean showSubscriptionPurchaseBanner) {
 			super(context, resource, items);
 			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
@@ -545,10 +540,6 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			}
 			return view;
 		}
-	}
-
-	@Override
-	public void processFinish() {
 	}
 
 	@Override
