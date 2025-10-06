@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
+import static net.osmand.plus.backup.BackupUtils.BACKUP_TYPE_PREFIX;
+import static net.osmand.plus.backup.BackupUtils.VERSION_HISTORY_PREFIX;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.util.CollectionUtils.addAllIfNotContains;
 import static net.osmand.util.CollectionUtils.addIfNotContains;
@@ -101,6 +103,16 @@ public enum ExportType {
 		return instance.isMap();
 	}
 
+	@NonNull
+	public ExportCategory getRelatedExportCategory() {
+		return instance.getRelatedExportCategory();
+	}
+
+	@NonNull
+	public ExportType getAdditionalExportType() {
+		return instance.getAdditionalExportType();
+	}
+
 	public boolean isRelatedToCategory(@NonNull ExportCategory exportCategory) {
 		return instance.isRelatedToCategory(exportCategory);
 	}
@@ -109,9 +121,25 @@ public enum ExportType {
 		return instance.isAvailableInFreeVersion();
 	}
 
+	public boolean isHidden() {
+		return this == GPX_DIR;
+	}
+
 	public boolean isEnabled() {
 		Class<? extends OsmandPlugin> clazz = instance.getRelatedPluginClass();
 		return clazz == null || PluginsHelper.isActive(clazz);
+	}
+
+	@NonNull
+	public String getBackupTypePrefId() {
+		String key = this == GPX_DIR ? TRACKS.name() : name();
+		return BACKUP_TYPE_PREFIX + key;
+	}
+
+	@NonNull
+	public String getVersionHistoryTypePrefId() {
+		String key = this == GPX_DIR ? TRACKS.name() : name();
+		return VERSION_HISTORY_PREFIX + key;
 	}
 
 	@Nullable
@@ -169,6 +197,11 @@ public enum ExportType {
 	@NonNull
 	public static List<ExportType> enabledValues() {
 		return filterElementsWithCondition(valuesList(), ExportType::isEnabled);
+	}
+
+	@NonNull
+	public static List<ExportType> visibleValues() {
+		return filterElementsWithCondition(valuesList(), type -> type.isEnabled() && !type.isHidden());
 	}
 
 	@NonNull
