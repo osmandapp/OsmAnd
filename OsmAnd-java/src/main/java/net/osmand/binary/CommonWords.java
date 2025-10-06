@@ -3,7 +3,6 @@ package net.osmand.binary;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.util.*;
@@ -832,8 +831,6 @@ public class CommonWords {
 		addFrequentlyUsed("augusta");
 		addFrequentlyUsed("neuburger");
 
-
-
 		addCommon("la");
 		addCommon("via");
 		addCommon("rua");
@@ -905,7 +902,7 @@ public class CommonWords {
 		addCommon("un");
 		addCommon("nw");
 
-
+		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
 
 		addCommon("van");
 		addCommon("road");
@@ -959,7 +956,7 @@ public class CommonWords {
 		addCommon("viale");
 		addCommon("loop");
 		
-		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
+//		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
 
 		addCommon("bridge");
 		addCommon("embankment");
