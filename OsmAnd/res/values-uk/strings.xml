@@ -4195,7 +4195,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на загальних масштабах</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на загальних масштабах</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичне зображення піктограм з низьким рівнем масштабування для тих точок інтересу, які зазвичай не відображаються</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Підвищення видимості для водних тунелів</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Підвищення видимості для водних тунелів</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
@@ -5149,7 +5149,7 @@
     <string name="add_row">Додати рядок</string>
     <string name="discard_changes_prompt">Відкинути зміни?</string>
     <string name="row_number">Рядок %1$s</string>
-    <string name="key_assignments">Прив\'язки клавіш</string>
+    <string name="key_assignments">Прив\'язки клавіші</string>
     <string name="topography_maps">Топографічні карти</string>
     <string name="tripltek_promo">Промо Tripltek на %1$s місяців</string>
     <string name="tripltek_promo_description">Безплатний доступ до функцій, включно з необмеженим завантаженням мап, 3D-рельєф тощо за %1$s на місяць</string>
@@ -5202,7 +5202,7 @@
     <string name="shared_string_limit">Обмеження</string>
     <string name="when_exceeded">Коли перевищено</string>
     <string name="custom_map_button_name_present">Така кнопка вже присутня</string>
-    <string name="add_button">Додати кнопку</string>
+    <string name="add_button">Додати кнопка</string>
     <string name="default_buttons">Типові кнопки</string>
     <string name="speed_limit_warning">Попередження щодо обмеження швидкості</string>
     <string name="speedometer_description">Показує вашу поточну швидкість за даними GPS</string>
@@ -5315,7 +5315,7 @@
     <string name="new_key_assignment">Нове призначення кнопки</string>
     <string name="key_name_pattern">Кнопка \"%1$s\"</string>
     <string name="assigned_keys">Призначені кнопки</string>
-    <string name="key_assignment_add_key">Додати кнопку</string>
+    <string name="key_assignment_add_key">Додати ключ</string>
     <string name="action_icon">Піктограма дії</string>
     <string name="key_assignment_add_action">Додати дію</string>
     <string name="missing_maps_ignore">Використати завантажені мапи</string>
@@ -5632,7 +5632,7 @@
     <string name="obd_ambient_air_temp_desc">Показує температуру поза транспортним засобом.</string>
     <string name="obd_engine_coolant_temp_desc">Показує температуру теплоносія двигуна</string>
     <string name="obd_air_intake_temp_desc">Показує температуру повітря, що надходить у впускний колектор двигуна.</string>
-    <string name="auto_zoom_3d_angle">Автомасштаб кута 3D</string>
+    <string name="auto_zoom_3d_angle">Автоматичне масштабування 3D-кута</string>
     <string name="preview_next_turn">Попередній перегляд наступного повороту</string>
     <string name="av_audio_sample_rate">Швидкість вибірки аудіо</string>
     <string name="vehicle_metrics_recording_description">Виберіть параметри, які слід записати у файл gpx.</string>
@@ -5882,4 +5882,7 @@
     <string name="accessibility_independent_features">Незалежні функції</string>
     <string name="show_spherical_map">Показати сферичну карту</string>
     <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
+    <string name="shared_string_price">Ціна</string>
+    <string name="rendering_attr_showSkiSlopes_name">Показати гірськолижні схили</string>
+    <string name="rendering_attr_showSkiSlopes_description">Показати спрощені гірськолижні схили</string>
 </resources>

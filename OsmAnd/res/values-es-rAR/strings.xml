@@ -4066,7 +4066,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Íconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los íconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de los iconos a bajos niveles de zum para aquellos puntos de interés que no suelen mostrarse</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
@@ -5744,4 +5744,7 @@
     <string name="access_pinch_zoom_magnification_descr">Usá el escalado de la ventana gráfica en lugar de los niveles de zum discretos durante los gestos de acercamiento.</string>
     <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
+    <string name="shared_string_price">Precio</string>
+    <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esquí</string>
+    <string name="rendering_attr_showSkiSlopes_description">Mostrar pistas de esquí simplificadas</string>
 </resources>

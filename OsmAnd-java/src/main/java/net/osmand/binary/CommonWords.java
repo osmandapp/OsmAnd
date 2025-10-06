@@ -1,7 +1,12 @@
 package net.osmand.binary;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import net.osmand.PlatformUtil;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
+import net.osmand.util.Algorithms;
+
+import java.io.IOException;
+import java.util.*;
 
 public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
@@ -55,6 +60,50 @@ public class CommonWords {
 			}
 		}
 		return count;
+	}
+
+	private static void addRegionNames() {
+		OsmandRegions osmandRegions = null;
+		try {
+			osmandRegions = PlatformUtil.getOsmandRegions();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		if (osmandRegions != null) {
+			Set<String> names = new HashSet<>();
+			parseRegionNames(osmandRegions.getWorldRegion(), names);
+			for (String name : names) {
+				CommonWords.addCommon(name);
+				if (name.contains(".")) {
+					CommonWords.addCommon(name.replace(".", ""));
+				}
+			}
+		}
+	}
+
+	private static void parseRegionNames(WorldRegion region, Set<String> result) {
+		List<WorldRegion> subregions = region.getSubregions();
+		for (WorldRegion s : subregions) {
+			String t = s.getRegionSearchText();
+			if (t != null) {
+				String[] ns = t.split(" ");
+				for (String n : ns) {
+					if (n.contains(";")) {
+						String[] ot = n.split(";");
+						for (String o : ot) {
+							if (o.length() > 1) {
+								result.add(o.toLowerCase());
+							}
+						}
+					} else {
+						if (n.length() > 1) {
+							result.add(n.toLowerCase());
+						}
+					}
+				}
+			}
+			parseRegionNames(s, result);
+		}
 	}
 	
 	static {
@@ -1274,6 +1323,22 @@ public class CommonWords {
 		addCommon("ταξίδια");
 		addCommon("ø");
 		addCommon("bane");
+		addCommon("villages");
+		addCommon("stravenue");
+		addCommon("forge");
+		addCommon("loops");
+		addCommon("crossroad");
+		addCommon("ridges");
+		addCommon("motorway");
+		addCommon("squares");
+		addCommon("ways");
+		addCommon("junctions");
+		addCommon("drives");
+		addCommon("throughway");
+		addCommon("trafficway");
+		addCommon("plaine");
+
+		addRegionNames(); // add regions names and region abbreviations
 
 	}
 

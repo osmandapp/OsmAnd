@@ -4678,7 +4678,7 @@
     <string name="quick_action_add_route_descr">Cnaipe chun bealach a thosú ó lár an scáileáin.</string>
     <string name="rendering_attr_seabedDetail_name">Sonraí ghrinneall na farraige</string>
     <string name="rendering_attr_seabedDetail_description">Eolas téacs breise ar ghrinneall na farraige surface_qualification, cineálacha dromchla comhcheangailte, catagóir agus tacsón fiailí nó seagrass</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Taispeáint scéimreach deilbhíní ag zúmálacha ísle</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Léiriú scéimeach ar dheilbhíní ag leibhéil súmála ísle do na POIanna sin nach dtaispeántar de ghnáth</string>
     <string name="turn_arrows_descr">Roghnaigh cé acu a léirítear saigheada cas ar líne an bhealaigh.</string>
     <string name="migration_files_present">%1$d comhad(í) (%2$s) atá ann cheana féin ag an sprioc \'%3$s\' agus gan é a fhorscríobh.</string>
     <string name="memory_allocated_for_routing">Cuimhne leithdháilte le haghaidh ródú</string>
@@ -5692,4 +5692,7 @@
     <string name="accessibility_independent_features">Gnéithe neamhspleácha</string>
     <string name="show_spherical_map">Taispeáin léarscáil sféarúil</string>
     <string name="show_spherical_map_description">Taispeáin samhail sféaróideach den Domhan</string>
+    <string name="shared_string_price">Praghas</string>
+    <string name="rendering_attr_showSkiSlopes_name">Taispeáin fánaí sciála</string>
+    <string name="rendering_attr_showSkiSlopes_description">Taispeáin fánaí sciála simplithe</string>
 </resources>

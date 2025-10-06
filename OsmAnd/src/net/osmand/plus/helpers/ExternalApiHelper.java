@@ -412,7 +412,7 @@ public class ExternalApiHelper {
 					finish = true;
 				} else {
 					if (API_CMD_STOP_AV_REC.equals(cmd)) {
-						plugin.stopRecording(mapActivity, false);
+						plugin.stopAndSaveRecording(mapActivity);
 					} else {
 						double lat = Double.parseDouble(uri.getQueryParameter(PARAM_LAT));
 						double lon = Double.parseDouble(uri.getQueryParameter(PARAM_LON));

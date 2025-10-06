@@ -843,7 +843,7 @@
     <string name="modify_transparency">Definir transparencia (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga\?</string>
     <string name="first_time_msg">Gracias por usar OsmAnd. Descarga datos regionales sin conexión a través de «Menú → Descargar mapas» para ver los mapas, ubicar direcciones, buscar PDI, encontrar transporte público y más.</string>
-    <string name="basemap_was_selected_to_download">El mapa base necesario para proporcionar la funcionalidad básica, está en la cola de descarga.</string>
+    <string name="basemap_was_selected_to_download">El mapa base necesario para proveer la funcionalidad básica, está en la cola de descarga.</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
     <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en el dispositivo.</string>
@@ -2071,8 +2071,7 @@
     <string name="navigate_point_olc">Código de Ubicación Abierto (OLC)</string>
     <string name="navigate_point_olc_info_invalid">OLC inválido
 \n</string>
-    <string name="navigate_point_olc_info_short">OLC corto
-\nProporciona un código completo</string>
+    <string name="navigate_point_olc_info_short">OLC corto \nIngresa un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo y válido.
 \nÁrea representada: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_switch">Mapa superpuesto cambiado a «%s».</string>
@@ -2483,7 +2482,7 @@
     <string name="group_deleted">Grupo borrado</string>
     <string name="select_waypoints_category_description">Agrega todos los puntos de referencia de la traza o elige las categorías separadas.</string>
     <string name="shared_string_total">Total</string>
-    <string name="nothing_found_in_radius">No se pudo encontrar nada:</string>
+    <string name="nothing_found_in_radius">No se encontró nada:</string>
     <string name="shared_string_travel_guides">Guías turísticas</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
@@ -2585,7 +2584,7 @@
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     <string name="increase_search_radius_to">Ampliar el radio de búsqueda a %1$s</string>
     <string name="thank_you_for_feedback">Gracias por tus comentarios</string>
-    <string name="poi_cannot_be_found">No se pudo encontrar el nodo o la vía.</string>
+    <string name="poi_cannot_be_found">No se encontró el nodo o la vía.</string>
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDanos tu opinión</string>
     <string name="test_voice_desrc">Pulsa un botón y escucha su correspondiente aviso por voz para saber si falta o está defectuoso</string>
@@ -3342,14 +3341,14 @@
     <string name="quick_action_switch_profile_descr">El botón de acción alterna entre los perfiles elegidos.</string>
     <string name="shared_string_add_profile">Agregar perfil</string>
     <string name="change_application_profile">Cambiar perfil de la aplicación</string>
-    <string name="profiles_for_action_not_found">No se pudo encontrar ninguno de estos perfiles.</string>
+    <string name="profiles_for_action_not_found">No se encontró ninguno de estos perfiles.</string>
     <string name="unsupported_type_error">Tipo no admitido</string>
     <string name="index_item_world_basemap_detailed">Mapa mundial general (detallado)</string>
     <string name="gpx_parse_error">Se encontraron problemas con un archivo GPX.
 \n
 \nContacta con la asistencia de OsmAnd para investigar.</string>
-    <string name="width_limit_description">Proporciona el ancho del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
-    <string name="weight_limit_description">Proporciona el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
+    <string name="width_limit_description">Indica el ancho del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
+    <string name="weight_limit_description">Indica el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
     <string name="vessel_width_limit_description">Define el ancho de la embarcación para evitar puentes estrechos</string>
     <string name="vessel_height_warning_link">Definir altura de la embarcación</string>
     <string name="vessel_height_warning">Define la altura de la embarcación para evitar puentes bajos. Si el puente es móvil, se usa la altura en estado abierto.</string>
@@ -3377,7 +3376,7 @@
     <string name="screen_control">Control de pantalla</string>
     <string name="pseudo_mercator_projection">Proyección de pseudo-Mercator</string>
     <string name="online_map_url_helper_text">Ingresa o pega la URL del repositorio en línea.</string>
-    <string name="online_map_name_helper_text">Proporciona un nombre para el repositorio del mapa en línea.</string>
+    <string name="online_map_name_helper_text">Ingresa un nombre para el repositorio del mapa en línea.</string>
     <string name="one_image_per_tile">Un archivo de imagen por tesela</string>
     <string name="mercator_projection">Proyección de Mercator</string>
     <string name="map_source_zoom_levels_descr">Afectan a la pantalla al usarlos como mapa, superposición o subyacencia.
@@ -3388,7 +3387,7 @@
     <string name="map_source_zoom_levels">Define un nivel de zum mínimo y máximo para mostrar o cargar el mapa en línea.</string>
     <string name="keep_screen_on">Mantener la pantalla encendida</string>
     <string name="keep_screen_off">Mantener la pantalla apagada</string>
-    <string name="height_limit_description">Proporciona la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
+    <string name="height_limit_description">Indica la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Exporta o importa acciones rápidas con perfiles de aplicación.</string>
     <string name="expire_time_descr">Las teselas almacenadas se renovarán después de los minutos definidos. Deja este campo vacío para que nunca se renueven las teselas de este repositorio. \n \nUn día son 1440 minutos. \nUna semana son 10 080 minutos. \nUn mes son 43 829 minutos.</string>
     <string name="expire_time">Tiempo de expiración</string>
@@ -3426,7 +3425,7 @@
     <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
     <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia, una guía de bolsillo sin conexión que incluye artículos sobre objetos y destinos.</string>
     <string name="please_provide_point_name_error">Agrega un nombre para el punto</string>
-    <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
+    <string name="lenght_limit_description">Indica la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
     <string name="app_mode_motor_scooter">Motoneta (motor)</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta de enduro</string>
     <string name="track_show_start_finish_icons">Mostrar los íconos de inicio y fin</string>
@@ -3972,7 +3971,7 @@
     <string name="routeInfo_tracktype_description">Colorea la ruta o el trazado de la vía por su composición superficial. Suele aplicarse cuando la red de caminos está en gran parte sin pavimentar.</string>
     <string name="routeInfo_winter_ice_road_description">Colorea la ruta o el trazado de la vía según la clasificación del camino en invierno.</string>
     <string name="routeInfo_smoothness_description">Clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
-    <string name="routeInfo_surface_description">Proporciona información sobre la superficie física de los caminos y senderos.</string>
+    <string name="routeInfo_surface_description">Provee información sobre la superficie física de los caminos y senderos.</string>
     <string name="routeInfo_roadClass_description">Colorea la ruta o el trazado de la vía según la clasificación del camino.</string>
     <string name="add_group_to_markers">Agregar grupo a la lista de marcadores</string>
     <string name="remove_group_from_markers">Quitar grupo de la lista de marcadores</string>
@@ -4115,7 +4114,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Íconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los íconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de los iconos a bajos niveles de zum para aquellos puntos de interés que no suelen mostrarse</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="shared_string_used">Usados</string>
@@ -4264,7 +4263,7 @@
     <string name="coordinates_widget_desc">Muestra las coordenadas geográficas de la ubicación actual.</string>
     <string name="navigation_points">Puntos de navegación</string>
     <string name="colour_of_circles">Color de los círculos</string>
-    <string name="mapillary_widget_desc">Proporciona un acceso rápido a la aplicación Mapillary para agregar imágenes a nivel de calle.</string>
+    <string name="mapillary_widget_desc">Provee un acceso rápido a la aplicación Mapillary para agregar imágenes a nivel de calle.</string>
     <string name="magnetic_bearing_widget_desc">Ángulo entre el norte magnético y el punto objetivo observado desde la ubicación.</string>
     <string name="time_to_go_desc">Tiempo en minutos u horas necesario para llegar al destino.</string>
     <string name="arrival_time_widget_desc">Hora de llegada al punto de destino.</string>
@@ -4272,7 +4271,7 @@
     <string name="lanes_widgets_desc">Muestra la disposición actual de los carriles del camino y destaca por cual se debe circular al navegar.</string>
     <string name="map_markers_bar_widget_desc">Muestra la distancia y la dirección al siguiente marcador desde la ubicación actual. Puede configurarse para ver 1 o 2 marcadores.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">Proporciona un acceso rápido para iniciar o parar una nota de audio, video o foto.</string>
+    <string name="audio_video_notes_desc">Provee un acceso rápido para iniciar o parar una nota de audio, video o foto.</string>
     <string name="bearing_desc">Muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados o milirradianes).</string>
     <string name="navigation_points_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o el tiempo restante, los próximos giros, el rumbo, el nombre de la calle actual o siguiente, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="route_maneuvers_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
@@ -4486,7 +4485,7 @@
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
     <string name="map_rendering_engine_v2">Versión 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">La versión 1, era la predefinida antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos.\nLa versión 2 (OpenGL) es un motor de renderizado de mapas más potente, que también ofrece una vista 2.5D.</string>
+    <string name="map_rendering_engine_descr">La versión 1, era la predefinida antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos. \nLa versión 2 (OpenGL) es un motor de renderizado de mapas más potente, que también ofrece una vista 2.5D.</string>
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
     <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
     <string name="show_map_symbols">Mostrar símbolos del mapa</string>
@@ -5468,7 +5467,7 @@
     <string name="rendering_attr_showDirtbikeTrails_name">Senderos para motos todoterreno</string>
     <string name="liter_per_hour">L/h</string>
     <string name="release_4_9">• Se agregó un visor de imágenes de Wikimedia a pantalla completa\n\n• Se agregó un nuevo complemento «Estadísticas del vehículo» para supervisar el rendimiento del vehículo mediante el protocolo OBD-II\n\n• Se agregó la posibilidad de asignar actividades a las trazas y filtrarlas en consecuencia\n\n• Se implementaron nuevas acciones rápidas para la grabación de viajes y el bloqueo de la pantalla táctil\n\n• Se agregó la personalización de los botones del mapa y una cuadrícula precisa\n\n• Se agregó a los widgets un menú contextual y la acción «Restablecer velocidad media»\n\n• Se agregó una nueva capa de ruta «Senderos para motos todoterreno»\n\n• Se corrigió la «Grabación automática de la traza al navegar»\n\n• Se corrigió el problema con las coordenadas invertidas en RTL\n\n• Se corrigió la falta de datos del sensor para la traza en curso\n\n• Se agregó información sobre las áreas circundantes para el punto marcado\n\n• Se agregó una acción rápida para controlar la visibilidad de las ediciones de OSM\n\n• Se separaron los parámetros de visibilidad para las opciones de coloración del terreno\n\n• Se agregó un ícono táctil para mostrar el acceso u otros atributos de caminos o senderos</string>
-    <string name="route_guidance_desc">Proporciona orientación sobre la ruta en tiempo real, incluida la distancia hasta el próximo giro, el nombre de la ruta, la calle actual e información sobre el carril. Los widgets se activan al navegar.</string>
+    <string name="route_guidance_desc">Indica la orientación sobre la ruta en tiempo real, incluida la distancia hasta el próximo giro, el nombre de la ruta, la calle actual e información sobre el carril. Los widgets se activan al navegar.</string>
     <string name="route_guidance">Guías de ruta</string>
     <string name="obd_widget_vehicle_speed">Velocidad del vehículo</string>
     <string name="obd_widget_engine_speed">Revoluciones del motor</string>
@@ -5549,9 +5548,9 @@
     <string name="ais_port_nmea_server_description">Define el número de puerto TCP del orígen de datos NMEA</string>
     <string name="ais_object_lost_timeouts">Ajustes del tiempo límite para la recepción de la señal AIS</string>
     <string name="ais_object_lost_timeouts_description">Define valores de tiempo límite para identificar objetos AIS perdidos, si no se recibió ninguna señal durante un tiempo específico.</string>
-    <string name="ais_object_lost_timeout">Tiempo máximo de visibilidad al perder el objeto</string>
-    <string name="ais_ship_lost_timeout">Tiempo máximo visible del barco: quitar si no se reciben señales AIS dentro del tiempo definido.</string>
-    <string name="ais_ship_lost_timeout_description">Definir el tiempo máximo para ver el barco: Después de este tiempo sin recibir señal, el símbolo del barco cambiará su estado en pantalla: Estará tachado.</string>
+    <string name="ais_object_lost_timeout">Tiempo máximo de visibilidad al perder el barco</string>
+    <string name="ais_ship_lost_timeout">Tiempo máximo visible del barco</string>
+    <string name="ais_ship_lost_timeout_description">Define el tiempo máximo para ver el barco: Después de este tiempo sin recibir señal, el símbolo del barco se tachará.</string>
     <string name="ais_cpa_settings">Ajustes relacionados con el CPA</string>
     <string name="ais_cpa_warning_time_description">Si el TCPA (Tiempo hasta el Punto de Aproximación más Cercano) con otro barco cae por debajo del umbral definido, este se resalta en rojo.</string>
     <string name="ais_cpa_warning_distance">Distancia de aviso para el Punto de Aproximación más Cercano (CPA)</string>
@@ -5786,4 +5785,30 @@
     <string name="rendering_attr_tidalFlatStyle_description">Estilo de las llanuras intermareales</string>
     <string name="rendering_attr_watercolor_name">Color del agua</string>
     <string name="rendering_attr_watercolor_description">Color del agua</string>
+    <string name="obd_alt_battery_voltage">Voltaje del adaptador</string>
+    <string name="liter_single">Litro</string>
+    <string name="imperial_gallon">Galón imperial</string>
+    <string name="us_gallon">Galón estadounidense</string>
+    <string name="kilometers">Kilómetros</string>
+    <string name="miles">Millas</string>
+    <string name="mpg">MPG</string>
+    <string name="backup_delete_data_warning_extended">Esta acción quitará de la nube todos los datos marcados. No podrás restaurarlos luego.</string>
+    <string name="amount_of_total_used">Usado %1$s de %2$s</string>
+    <string name="delete_data">Borrar datos</string>
+    <string name="manage_storage_delete_data_dialog_summary">¿Borrar %1$s de OsmAnd Cloud?\n\nTendrás hasta 30 días para restaurarlo de la papelera.</string>
+    <string name="manage_storage">Gestionar almacenamiento</string>
+    <string name="copy_as_new_folder">Copiar como nueva carpeta</string>
+    <string name="add_to_a_folder">Agregar a una carpeta</string>
+    <string name="add_to_favorites">Agregar a favoritos</string>
+    <string name="max_weight_at_full_load_description">Indica el peso bruto máximo del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
+    <string name="max_axle_load_description">Indica la carga máxima por eje del vehículo, para así evitar caminos y puentes con restricciones de peso.</string>
+    <string name="shared_sting_osm_link">Enlace de OSM</string>
+    <string name="show_spherical_map">Mostrar mapa esférico</string>
+    <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
+    <string name="show_local_names">Mostrar nombres locales</string>
+    <string name="accessibility_independent_features">Características independientes</string>
+    <string name="access_pinch_zoom_magnification">Zum mediante pellizcos</string>
+    <string name="access_pinch_zoom_magnification_descr">Usa el escalado de la ventana gráfica en lugar de los niveles de zum discretos durante los gestos de acercamiento.</string>
+    <string name="lang_en_barebones">Inglés (básico)</string>
+    <string name="shared_string_price">Precio</string>
 </resources>

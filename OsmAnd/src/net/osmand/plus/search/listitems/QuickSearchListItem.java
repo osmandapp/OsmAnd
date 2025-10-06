@@ -30,6 +30,7 @@ import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.search.core.CustomSearchPoiFilter;
@@ -124,8 +125,9 @@ public class QuickSearchListItem {
 		String typeName = getTypeName(app, searchResult);
 		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity amenity) {
+			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
 			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
-			if (amenity.isRouteTrack()) {
+			if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
 				String metrics = AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app);
 				if (metrics != null) {
 					if (alternateName == null) {
@@ -357,9 +359,11 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				if (amenity.isRouteTrack()) {
+				boolean isClickableWay = app.getClickableWayHelper().isClickableWayAmenity(amenity);
+				if (isClickableWay || amenity.isRouteTrack()) {
 					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, nightMode);
+					Drawable shieldIcon = NetworkRouteDrawable
+							.getIconByAmenityShieldTags(amenity, app, nightMode, isClickableWay);
 					if (shieldIcon != null) {
 						return shieldIcon;
 					}
