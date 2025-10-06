@@ -4193,7 +4193,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizzazione schematica delle icone a basso zoom</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una visualizzazione schematica delle icone a bassi livelli di ingrandimento per questi POI che non sono usualmente mostrati</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_value_omit_name">Ometti</string>
