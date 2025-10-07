@@ -115,60 +115,41 @@ abstract class ElevationDiffsCalculator {
 			val start = extremums[i - 1]
 			val end = extremums[i]
 			val eleDiffSumm = end.ele - start.ele
-			val horizDist = end.dist - start.dist
 
 			if (eleDiffSumm > 0) {
 				diffElevationUp += eleDiffSumm
-				currentUphill = processLastSlope(true, currentUphill, currentDownhill, start, end,  eleDiffSumm)
+				currentUphill = processLastSlope(currentUphill, start, end, eleDiffSumm) { lastUphill = it }
 				currentDownhill = null
 			} else if (eleDiffSumm < 0) {
 				val elevAbs = -eleDiffSumm
 				diffElevationDown += elevAbs
-				currentDownhill = processLastSlope(false, currentUphill, currentDownhill, start, end, elevAbs)
+				currentDownhill = processLastSlope(currentDownhill, start, end, elevAbs) { lastDownhill = it }
 				currentUphill = null
 			}
 		}
 	}
 
 	private fun processLastSlope(
-		isUphill: Boolean,
-		currentUphill: SlopeInfo?,
-		currentDownhill: SlopeInfo?,
+		current: SlopeInfo?,
 		start: Extremum,
 		end: Extremum,
 		eleDiffSumm: Double,
+		setter: (SlopeInfo) -> Unit
 	): SlopeInfo {
-		if (isUphill) {
-			val updatedUphill: SlopeInfo = if (currentUphill != null && currentUphill.endPointIndex == start.index) {
-				currentUphill.copy(
-					endPointIndex = end.index,
-					elevDiff = currentUphill.elevDiff + eleDiffSumm,
-				)
-			} else {
-				SlopeInfo(
-					startPointIndex = start.index,
-					endPointIndex = end.index,
-					elevDiff = eleDiffSumm,
-				)
-			}
-			lastUphill = updatedUphill
-			return updatedUphill
+		val updated = if (current != null && current.endPointIndex == start.index) {
+			current.copy(
+				endPointIndex = end.index,
+				elevDiff = current.elevDiff + eleDiffSumm
+			)
 		} else {
-			val updatedDownhill: SlopeInfo = if (currentDownhill != null && currentDownhill.endPointIndex == start.index) {
-				currentDownhill.copy(
-					endPointIndex = end.index,
-					elevDiff = currentDownhill.elevDiff + eleDiffSumm,
-				)
-			} else {
-				SlopeInfo(
-					startPointIndex = start.index,
-					endPointIndex = end.index,
-					elevDiff = eleDiffSumm,
-				)
-			}
-			lastDownhill = updatedDownhill
-			return updatedDownhill
+			SlopeInfo(
+				startPointIndex = start.index,
+				endPointIndex = end.index,
+				elevDiff = eleDiffSumm
+			)
 		}
+		setter(updated)
+		return updated
 	}
 
 	companion object {

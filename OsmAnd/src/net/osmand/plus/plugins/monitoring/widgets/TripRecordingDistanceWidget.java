@@ -47,6 +47,7 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 		savingTrackHelper = app.getSavingTrackHelper();
 		this.distanceWidgetState = distanceWidgetState;
 		updateInfo(null);
+		updateWidgetView();
 	}
 
 	@Override
@@ -118,7 +119,7 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 
 		if (slopeInfo == null
 				|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
-				|| slopeInfo.getElevDiff() < newSlopeInfo.getElevDiff()) {
+				|| slopeInfo.getDistance() < newSlopeInfo.getDistance()) {
 			slopeInfo = newSlopeInfo;
 		}
 		if (slopeInfo != null) {

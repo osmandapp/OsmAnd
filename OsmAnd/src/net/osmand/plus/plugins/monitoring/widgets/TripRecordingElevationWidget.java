@@ -13,7 +13,6 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState.TripRecordingElevationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.SunPositionMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;

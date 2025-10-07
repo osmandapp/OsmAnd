@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
-import static net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState.TripRecordingElevationMode.LAST;
 import static net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState.TripRecordingElevationMode.TOTAL;
 
 import androidx.annotation.DrawableRes;
@@ -54,20 +53,17 @@ public class TripRecordingElevationWidgetState extends WidgetState {
 
 	@Override
 	public void changeToNextState() {
-		if(elevationModePreference.get() == TOTAL){
-			elevationModePreference.set(LAST);
-		} else{
-			elevationModePreference.set(TOTAL);
-		}
+		TripRecordingElevationMode currentMode = elevationModePreference.get();
+		elevationModePreference.set(currentMode.next());
 	}
 
 	@StringRes
-	public int getModeTitleId(){
+	public int getModeTitleId() {
 		return elevationModePreference.get().getTitleId(isUphillType);
 	}
 
 	@DrawableRes
-	public int getModeIconId(boolean nightMode){
+	public int getModeIconId(boolean nightMode) {
 		return elevationModePreference.get().getIcon(isUphillType, nightMode);
 	}
 
@@ -77,7 +73,7 @@ public class TripRecordingElevationWidgetState extends WidgetState {
 	}
 
 	@Override
-	public void copyPrefsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId){
+	public void copyPrefsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
 		registerElevationModePreference(customId).setModeValue(appMode, elevationModePreference.getModeValue(sourceAppMode));
 	}
 
@@ -137,5 +133,10 @@ public class TripRecordingElevationWidgetState extends WidgetState {
 			}
 		}
 
+		@NonNull
+		public TripRecordingElevationMode next() {
+			int nextItemIndex = (ordinal() + 1) % values().length;
+			return values()[nextItemIndex];
+		}
 	}
 }
