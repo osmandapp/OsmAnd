@@ -76,8 +76,8 @@ public class TripRecordingDistanceWidgetState extends WidgetState {
 	public enum TripRecordingDistanceMode {
 
 		TOTAL_DISTANCE(R.string.total_distance, R.drawable.widget_trip_recording_distance_day, R.drawable.widget_trip_recording_distance_night),
-		LAST_DOWNHILL(R.string.shared_string_last_downhill, R.drawable.widget_trip_recording_distance_last_downhill_day, R.drawable.widget_trip_recording_distance_last_downhill_day),
-		LAST_UPHILL(R.string.shared_string_last_uphill, R.drawable.widget_trip_recording_distance_last_uphill_day, R.drawable.widget_trip_recording_distance_last_uphill_day);
+		LAST_DOWNHILL(R.string.shared_string_last_downhill, R.drawable.widget_trip_recording_distance_last_downhill_day, R.drawable.widget_trip_recording_distance_last_downhill_night),
+		LAST_UPHILL(R.string.shared_string_last_uphill, R.drawable.widget_trip_recording_distance_last_uphill_day, R.drawable.widget_trip_recording_distance_last_uphill_night);
 
 		@StringRes
 		final int titleId;

@@ -61,7 +61,7 @@ public class TripRecordingSlopeWidget extends SimpleWidget {
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
-		double elevationSlope = getSlope(this.currentTrackIndex != currentTrackIndex);
+		int elevationSlope = getSlope(this.currentTrackIndex != currentTrackIndex);
 		this.currentTrackIndex = currentTrackIndex;
 		if (forceUpdate || isUpdateNeeded() || cachedSlope != elevationSlope) {
 			cachedSlope = elevationSlope;
@@ -70,7 +70,7 @@ public class TripRecordingSlopeWidget extends SimpleWidget {
 		}
 	}
 
-	protected double getSlope(boolean reset) {
+	protected int getSlope(boolean reset) {
 		if (reset) {
 			lastSlope = 0;
 		}

@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState.TripRecordingElevationMode;
-import net.osmand.plus.plugins.monitoring.widgets.TripRecordingSlopeWidgetState.AverageSlopeMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetInfoFragment;
@@ -30,7 +29,6 @@ public class TripRecordingElevationWidgetInfoFragment extends BaseSimpleWidgetIn
 	private ImageView iconMode;
 	private int selectedMode;
 
-
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
@@ -44,7 +42,7 @@ public class TripRecordingElevationWidgetInfoFragment extends BaseSimpleWidgetIn
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		if(elevationModePreference != null){
+		if (elevationModePreference != null) {
 			View modeButton = inflate(R.layout.bottom_sheet_item_with_descr_72dp, container);
 			iconMode = container.findViewById(R.id.icon);
 			titleMode = container.findViewById(R.id.title);
@@ -59,7 +57,7 @@ public class TripRecordingElevationWidgetInfoFragment extends BaseSimpleWidgetIn
 	private void showElevationModeDialog() {
 		CharSequence[] items = new CharSequence[TripRecordingElevationMode.values().length];
 		for (int i = 0; i < TripRecordingElevationMode.values().length; i++) {
-			items[i] = getString(TripRecordingElevationMode.values()[i].getTitleId(true));
+			items[i] = getString(TripRecordingElevationMode.values()[i].getTitleId(widget.isUphillType()));
 		}
 
 		AlertDialogData dialogData = new AlertDialogData(titleMode.getContext(), nightMode)

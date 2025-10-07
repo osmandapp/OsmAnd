@@ -13,6 +13,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidgetState.TripRecordingDistanceMode;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidgetState.MaxSpeedMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -26,6 +27,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.ElevationDiffsCalculator;
+import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -39,6 +41,7 @@ public class TripRecordingMaxSpeedWidget extends SimpleWidget {
 
 	protected final SavingTrackHelper savingTrackHelper;
 	protected int currentTrackIndex;
+	protected SlopeInfo slopeInfo;
 
 	protected double cachedMaxSpeed = -1;
 	private int lastMaxSpeed;
@@ -82,16 +85,31 @@ public class TripRecordingMaxSpeedWidget extends SimpleWidget {
 	protected float getMaxSpeed(boolean reset) {
 		if (reset) {
 			lastMaxSpeed = 0;
+			slopeInfo = null;
 		}
 		MaxSpeedMode mode = widgetState.getMaxSpeedModePreference().get();
 		if (mode == MaxSpeedMode.TOTAL) {
 			lastMaxSpeed = (int) getAnalysis().getMaxSpeed();
-		} else if (mode == MaxSpeedMode.LAST_UPHILL && getAnalysis().getLastUphill() != null) {
-			lastMaxSpeed = (int) getAnalysis().getLastUphill().getMaxSpeed();
-		} else if (mode == MaxSpeedMode.LAST_DOWNHILL && getAnalysis().getLastDownhill() != null) {
-			lastMaxSpeed = (int) getAnalysis().getLastDownhill().getMaxSpeed();
+		} else {
+			return getLastSlopeMaxSpeed(mode);
 		}
 		return lastMaxSpeed;
+	}
+
+	private float getLastSlopeMaxSpeed(@NonNull MaxSpeedMode mode) {
+		GpxTrackAnalysis analysis = savingTrackHelper.getCurrentTrack().getTrackAnalysis(app);
+		SlopeInfo newSlopeInfo = mode == MaxSpeedMode.LAST_DOWNHILL ? analysis.getLastDownhill() : analysis.getLastUphill();
+		if (newSlopeInfo == null) {
+			return 0;
+		}
+
+		if (slopeInfo == null
+				|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
+				|| slopeInfo.getMaxSpeed() < newSlopeInfo.getMaxSpeed()) {
+			slopeInfo = newSlopeInfo;
+		}
+
+		return (float) slopeInfo.getMaxSpeed();
 	}
 
 	@Nullable
