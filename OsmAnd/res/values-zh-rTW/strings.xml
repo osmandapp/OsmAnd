@@ -4030,7 +4030,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">註記標籤</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">顯示註記標籤</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低縮放比例的圖示</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放比例圖示的示意圖</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放層級下通常不顯示的興趣點圖示示意圖</string>
     <string name="rendering_attr_showWaterwayTunnels_name">顯示地下水道</string>
     <string name="rendering_attr_showWaterwayTunnels_description">顯示或隱藏地下水道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
@@ -5696,4 +5696,5 @@
     <string name="accessibility_independent_features">獨立功能</string>
     <string name="show_spherical_map">顯示球面地圖</string>
     <string name="show_spherical_map_description">顯示地球的球面模型</string>
+    <string name="shared_string_price">價格</string>
 </resources>

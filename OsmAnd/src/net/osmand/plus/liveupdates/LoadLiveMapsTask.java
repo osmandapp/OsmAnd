@@ -21,7 +21,8 @@ public class LoadLiveMapsTask extends AsyncTask<Void, LocalItem, Void> implement
 
 		void clearData();
 
-		void onDataUpdated();
+		default void onDataUpdated() {
+		}
 	}
 
 	private final LocalIndexInfoAdapter adapter;

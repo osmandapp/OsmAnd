@@ -66,7 +66,7 @@ public class ManageCloudStorageController extends BaseBackupTypesController {
 	@Override
 	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
 		String name = getString(exportCategory.getTitleId());
-		List<ExportType> typesToDelete = new ArrayList<>(getCategoryItems(exportCategory).getTypes());
+		List<ExportType> typesToDelete = new ArrayList<>(getCategoryItems(exportCategory).getVisibleTypes());
 		showConfirmDeleteDataDialog(name, () -> onClearTypesConfirmed(typesToDelete));
 	}
 

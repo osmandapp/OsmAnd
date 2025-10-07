@@ -34,7 +34,7 @@ public class AisMessageListener {
     private SentenceReader sentenceReader = null;
     private Stack<SentenceListener> listenerList = null;
 
-    public AisMessageListener(int port, @NonNull AisTrackerLayer layer) {
+    public AisMessageListener(@NonNull AisTrackerLayer layer, int port) {
         initMembers(layer);
         try {
             udpSocket = new DatagramSocket(port);
@@ -59,7 +59,7 @@ public class AisMessageListener {
         }
     }
 
-    public AisMessageListener(@NonNull String serverIp, int serverPort, @NonNull AisTrackerLayer layer) {
+    public AisMessageListener(@NonNull AisTrackerLayer layer, @NonNull String serverIp, int serverPort) {
         initMembers(layer);
         TimerTask taskCheckNetworkConnection = new TimerTask() {
             @Override
@@ -87,6 +87,7 @@ public class AisMessageListener {
         this.timer = new Timer();
         timer.schedule(taskCheckNetworkConnection, 1000, 30000);
     }
+
     private void initMembers(@NonNull AisTrackerLayer aisLayer) {
         this.layer = aisLayer;
         this.udpSocket = null;

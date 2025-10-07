@@ -29,8 +29,8 @@ public abstract class TakeMediaNoteAction extends SelectMapLocationAction {
 		AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			if (plugin.isRecording()) {
-				boolean showContextMenu = params == null || !params.containsKey(KEY_EVENT_KEY);
-				plugin.stopRecording(mapActivity, false, showContextMenu);
+				boolean notifyListeners = params == null || !params.containsKey(KEY_EVENT_KEY);
+				plugin.stopRecording(mapActivity, true, notifyListeners);
 			} else {
 				super.execute(mapActivity, params);
 			}

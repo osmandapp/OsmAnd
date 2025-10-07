@@ -6031,4 +6031,18 @@
     <string name="next_turn_information">Information om nästa sväng</string>
     <string name="next_turn_information_desc">Visar nästkommande svängriktning och gatunamn.</string>
     <string name="manage_purchases">Hantera köp</string>
+    <string name="shared_string_price">Pris</string>
+    <string name="obd_alt_battery_voltage">Adapter spänning</string>
+    <string name="liter_single">Liter</string>
+    <string name="imperial_gallon">Imperial gallon</string>
+    <string name="us_gallon">US gallon</string>
+    <string name="kilometers">Kilometer</string>
+    <string name="miles">Miles (engelsk mil)</string>
+    <string name="mpg">MPG</string>
+    <string name="backup_delete_data_warning_extended">Denna åtgärd kommer permanent att ta bort alla valda data från molnet. Det är inte möjligt att återställa det senare.</string>
+    <string name="amount_of_total_used">%1$s av %2$s använt</string>
+    <string name="delete_data">Radera data</string>
+    <string name="manage_storage_delete_data_dialog_summary">Är du säker på att du vill ta bort %1$s från OsmAnd Cloud?\n\nDu kan återställa dem från papperskorgen inom 30 dagar.</string>
+    <string name="manage_storage">Hantera lagring</string>
+    <string name="copy_as_new_folder">Kopiera som ny mapp</string>
 </resources>

@@ -266,11 +266,12 @@ public class AudioVideoNoteRecordingMenu {
 			if (recording != null) {
 				if (recording.getType() == AVActionType.REC_PHOTO) {
 					plugin.shoot();
-				} else {
-					plugin.stopRecording(mapActivity, restart);
-					if (restart) {
+				} else if (restart) {
+					if (plugin.restartRecording(mapActivity)) {
 						startCounter();
 					}
+				} else {
+					plugin.stopAndSaveRecording(mapActivity);
 				}
 			}
 		}, delay);

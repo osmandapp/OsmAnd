@@ -3947,7 +3947,7 @@
     <string name="cancel_anytime_in_amazon_app">Annuller det når som helst via Amazon-appen</string>
     <string name="amz_manage_subscription_descr">Administrer dit abonnement ved at bruge Amazon-appen eller Amazon.com-webstedet.</string>
     <string name="empty_category_name">Tomt kategorinavn</string>
-    <string name="no_activity_for_intent">Der blev ikke fundet egnede applikationer til at udføre denne handling.</string>
+    <string name="no_activity_for_intent">Installer en app, der kan udføre denne handling.</string>
     <string name="voice_prompts_timetable">Tidspunkter for stemmemeddelelser</string>
     <string name="system_screen_timeout_descr">Slukker skærmen i henhold til systemets skærm-timeout.</string>
     <string name="system_screen_timeout">Brug systemets skærm-timeout</string>
@@ -4209,12 +4209,12 @@
     <string name="shared_string_not_used">Ikke anvendt</string>
     <string name="navigate_point_format_swiss_grid">Schweizisk koordinatsystem (CH1903)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Retmig-mærker</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Øg synlighed af vandveje</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Øg synlighed af vandvejstunneler</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis retmig-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Bemærkning-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Vis bemærkning-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">En skematisk repræsentation af ikoner ved lave zoomniveauer for de interessepunkter, som ikke normalt vises</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Øg synlighed af vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
@@ -5107,7 +5107,7 @@
     <string name="searching_matching_tracks">Søg alle matchende spor</string>
     <string name="cloud_trash_clear_confirmation">Slet alle elementer i papirkurven permanent?</string>
     <string name="key_event_action_zoom_in">Zoom ind</string>
-    <string name="key_assignments">Nøgletildelinger</string>
+    <string name="key_assignments">Tastetilknytninger</string>
     <string name="change_button">Skift knap</string>
     <string name="enable_to_use_external_input_device">Aktivér brugen af ekstern input enhed med OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Skift kortets orientering</string>
@@ -5163,7 +5163,7 @@
     <string name="trash_alert_card_desc">Elementer i papirkurven vil blive slettet efter %1$s dage.</string>
     <string name="external_input_device_title">Ekstern inputenhed</string>
     <string name="row_number">Række %1$s</string>
-    <string name="key_bindings">Tastetildelinger</string>
+    <string name="key_bindings">Tastetilknytninger</string>
     <string name="trash_is_empty">Papirkurven er tom</string>
     <string name="key_event_action_move_to_my_location">Flyt til min placering</string>
     <string name="clear_key_assignment">Ryd tastetildeling</string>
@@ -5348,8 +5348,8 @@
     <string name="daynight_mode_app_theme">App-tema</string>
     <string name="key_event_action_continuous_zoom_out">Kontinuerligt zoom ud</string>
     <string name="key_event_action_continuous_zoom_in">Kontinuerligt zoom ind</string>
-    <string name="remove_key_assignment_summary">Tasttildeling for den valgte handling fjernes.</string>
-    <string name="remove_key_assignment">Fjern tasttildeling</string>
+    <string name="remove_key_assignment_summary">Tastetildeling for den valgte handling fjernes.</string>
+    <string name="remove_key_assignment">Fjern tastetildeling</string>
     <string name="map_settings_weather_wind_animation">Animation af vind</string>
     <string name="tomorrow">I morgen</string>
     <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema — dagtilstand for et lyst tema og nattilstand for et mørkt tema</string>
@@ -5904,4 +5904,7 @@
     <string name="accessibility_independent_features">Uafhængige funktioner</string>
     <string name="show_spherical_map">Vis sfærisk kort</string>
     <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
+    <string name="shared_string_price">Pris</string>
+    <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
+    <string name="rendering_attr_showSkiSlopes_description">Vis forenklede skiløjper</string>
 </resources>

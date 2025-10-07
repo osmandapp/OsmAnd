@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog.ADD_FAVORITE_TO_ROUTE_REQUEST_CODE;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,8 +20,6 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.data.PointType;
 import net.osmand.plus.utils.AndroidUtils;
 
-import static net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog.ADD_FAVORITE_TO_ROUTE_REQUEST_CODE;
-
 public class SelectFavouriteToGoBottomSheet extends SelectFavouriteBottomSheet {
 
 	public static final String POINT_TYPE_KEY = "point_type";
@@ -27,7 +27,7 @@ public class SelectFavouriteToGoBottomSheet extends SelectFavouriteBottomSheet {
 	protected PointType mPointType;
 
 	@Override
-	public void createMenuItems(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+	public void createMenuItems(@Nullable Bundle savedInstanceState) {
 		super.createMenuItems(savedInstanceState);
 		Bundle args = getArguments();
 		if (args != null) {
@@ -97,7 +97,7 @@ public class SelectFavouriteToGoBottomSheet extends SelectFavouriteBottomSheet {
 	}
 
 	public static void showInstance(@NonNull MapActivity activity,
-	                                @NonNull Fragment target, @NonNull PointType pointType) {
+			@NonNull Fragment target, @NonNull PointType pointType) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();

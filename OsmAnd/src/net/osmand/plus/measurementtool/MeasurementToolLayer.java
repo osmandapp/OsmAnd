@@ -30,7 +30,9 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.MapSelectionResult;
+import net.osmand.plus.views.layers.MapSelectionRules;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.TilePointsProvider;
@@ -51,7 +53,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider {
+public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection {
 
 	private static final int START_ZOOM = 8;
 	private static final int MIN_POINTS_PERCENTILE = 20;
@@ -928,6 +930,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		return null;
 	}
 
+	@Nullable
 	public WptPt addPoint(boolean addPointBefore) {
 		if (pressedPointLatLon != null) {
 			WptPt pt = new WptPt();
@@ -1089,9 +1092,31 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void collectObjectsFromPoint(@NonNull MapSelectionResult result,
-	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+	public boolean customizeMapSelectionRules(@NonNull MapSelectionRules rules) {
+		if (isInMeasurementMode()) {
+			rules.setOnlyPoints(true);
+			return true;
+		}
+		return false;
+	}
 
+	@Override
+	public void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules) {
+		if (isInMeasurementMode() && !rules.isOnlyTouchableObjects() && editingCtx.getSelectedPointPosition() == -1) {
+			PointF point = result.getPoint();
+			if (selectPoint(point.x, point.y, false)) {
+				result.collect(new PlanRoutePoint(editingCtx.getSelectedPointPosition()), this);
+			}
+		}
+	}
+
+	@Override
+	public boolean showMenuAction(@Nullable Object o) {
+		if (o instanceof PlanRoutePoint point) {
+			selectPoint(point.position());
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -1105,11 +1130,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public boolean disableSingleTap() {
-		return isInMeasurementMode();
-	}
-
-	@Override
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isInMeasurementMode();
 	}
@@ -1119,6 +1139,22 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		l.setLatitude(lat);
 		l.setLongitude(lon);
 		return l;
+	}
+
+	@Override
+	public int getOrder(Object o) {
+		return -1;
+	}
+
+	@Override
+	public void setSelectedObject(Object o) {
+	}
+
+	@Override
+	public void clearSelectedObject() {
+		if (editingCtx != null) {
+			editingCtx.setSelectedPointPosition(-1);
+		}
 	}
 
 	interface OnSingleTapListener {

@@ -40,7 +40,7 @@ public class BackupDataController extends SwitchBackupTypesController {
 	@NonNull
 	protected Map<ExportType, List<?>> collectSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
-		for (ExportType exportType : ExportType.values()) {
+		for (ExportType exportType : ExportType.visibleValues()) {
 			boolean enabled = backupHelper.getBackupTypePref(exportType).get();
 			boolean available = InAppPurchaseUtils.isExportTypeAvailable(app, exportType);
 

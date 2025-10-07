@@ -109,4 +109,9 @@
     <string name="poi_routes">Hentadurioù</string>
     <string name="rendering_category_routes">Hentadurioù</string>
     <string name="plan_route_import_track">Enporzhiañ ur roud</string>
+    <string name="download_depth_countours">Trolinenn an donder merdeel</string>
+    <string name="location_source">Mamenn al lec\'hiadur</string>
+    <string name="days_2_4">Deiz</string>
+    <string name="manage_storage_delete_data_dialog_summary">Ha sur oc\'h e vennit diverkañ %1$s diwar Koumoulenn OsmAnd ?\n\nAdkavout anezho er gest a c\'hellit ober e-pad 30 devezh.</string>
+    <string name="days_5">Deizioù</string>
 </resources>

@@ -604,4 +604,12 @@ public class DownloadActivityType {
 	public static boolean isDefaultVoiceTTS(@NonNull OsmandApplication app, @NonNull DownloadItem item) {
 		return isVoiceTTS(item) && Algorithms.stringsEqual(app.getLanguage(), item.getBasename().replaceAll("-tts", ""));
 	}
+
+	@Override
+	public String toString() {
+		return "DownloadActivityType{" +
+				"tag='" + tag + '\'' +
+				", orderIndex=" + orderIndex +
+				'}';
+	}
 }

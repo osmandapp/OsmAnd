@@ -28,6 +28,7 @@ import net.osmand.plus.settings.backend.backup.items.*;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
+import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -175,6 +176,7 @@ public abstract class SettingsHelper {
 		List<HistoryEntry> historyNavigationEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
+		List<GpxDirItem> gpxDirItems = new ArrayList<>();
 
 		for (Object object : data) {
 			if (object instanceof ButtonStateBean) {
@@ -226,6 +228,8 @@ public abstract class SettingsHelper {
 				result.add((GlobalSettingsItem) object);
 			} else if (object instanceof OnlineRoutingEngine) {
 				onlineRoutingEngines.add((OnlineRoutingEngine) object);
+			} else if (object instanceof GpxDirItem dirItem) {
+				gpxDirItems.add(dirItem);
 			}
 		}
 		if (!buttonStateBeans.isEmpty()) {
@@ -325,6 +329,16 @@ public abstract class SettingsHelper {
 		if (!itineraryGroups.isEmpty()) {
 			ItinerarySettingsItem baseItem = getBaseItem(SettingsItemType.ITINERARY_GROUPS, ItinerarySettingsItem.class, settingsItems);
 			result.add(new ItinerarySettingsItem(app, baseItem, itineraryGroups));
+		}
+		if (!gpxDirItems.isEmpty()) {
+			GpxDirSettingsItem baseItem = getBaseItem(SettingsItemType.GPX_DIR, GpxDirSettingsItem.class, settingsItems);
+			for (GpxDirItem dirItem : gpxDirItems) {
+				if (export) {
+					result.add(new GpxDirSettingsItem(app, dirItem));
+				} else {
+					result.add(new GpxDirSettingsItem(app, baseItem, dirItem));
+				}
+			}
 		}
 		return result;
 	}
