@@ -5772,4 +5772,15 @@
     <string name="shared_string_price">Prix</string>
     <string name="rendering_attr_showSkiSlopes_name">Afficher les pistes de ski</string>
     <string name="rendering_attr_showSkiSlopes_description">Afficher les pistes de ski de façon simplifiée</string>
+    <string name="track_folder_appearance">Apparence du dossier de piste</string>
+    <string name="update_maps">Mettre à jour les cartes</string>
+    <string name="reconnect">Se Reconnecter</string>
+    <string name="trip_recording_downhill_widget_desc">Affiche la somme de toutes les descentes ou la dernière descente du trajet actuellement enregistré.</string>
+    <string name="trip_recording_uphill_widget_desc">Affiche la somme de toutes les ascensions ou la dernière ascension du trajet actuellement enregistré.</string>
+    <string name="trip_recording_distance_widget_desc">Affiche la distance totale de votre trajet actuellement enregistré, avec des modes pour afficher la distance de la dernière ascension et descente.</string>
+    <string name="trip_recording_max_speed_widget_description">Affiche la vitesse maximale du trajet actuellement enregistré. Appuyez pour basculer entre la vitesse maximale globale et la vitesse maximale de la dernière montée ou descente.</string>
+    <string name="trip_recording_average_slope_widget_description">Affiche la pente moyenne de la dernière section en descente ou en montée du trajet actuellement enregistré.</string>
+    <string name="average_slope">Pente moyenne</string>
+    <string name="shared_string_last_uphill">Dernière montée</string>
+    <string name="shared_string_last_downhill">Dernière descente</string>
 </resources>
