@@ -664,7 +664,7 @@ public class PoiFiltersHelper {
 					}
 				} else {
 					filter = app.getPoiFilters().getSearchByNamePOIFilter();
-					String searchWord = searchPhrase.getUnknownWordToSearch();
+					String searchWord = searchPhrase.hasCityName() ? searchPhrase.getCitySearchWord() : searchPhrase.getUnknownWordToSearch();
 					if (!Algorithms.isEmpty(searchWord)) {
 						filter.setFilterByName(searchWord);
 						filter.clearCurrentResults();
