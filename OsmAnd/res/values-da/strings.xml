@@ -4440,9 +4440,6 @@
     <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
     <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du optage en video.</string>
     <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du optage en lydnote.</string>
-    <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedstigninger på den aktuelt registreret tur.</string>
-    <string name="trip_recording_uphill_widget_desc">Viser summen af alle opstigninger på den aktuelt registreret tur.</string>
-    <string name="trip_recording_distance_widget_desc">Viser den aktuelt registrerede turafstand.</string>
     <string name="true_bearing_wdiget_desc">Vinkel mellem det sande nord og målpunktet observeret fra din placering.</string>
     <string name="relative_bearing_widget_desc">Viser vinklen mellem din fremadgående bevægelsesretning og målpunktet.</string>
     <string name="second_marker_widget_desc">Du kan indstille modulet til at vise afstanden eller den anslået ankomsttid for den anden kortmarkør.</string>
@@ -5908,4 +5905,6 @@
     <string name="show_spherical_map">Vis sfærisk kort</string>
     <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
     <string name="shared_string_price">Pris</string>
+    <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
+    <string name="rendering_attr_showSkiSlopes_description">Vis forenklede skiløjper</string>
 </resources>

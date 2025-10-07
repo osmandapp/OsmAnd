@@ -241,7 +241,6 @@
     <string name="start_up_message_pref">رسالة البدء</string>
     <string name="benefits_for_contributors_secondary_descr">سجل الدخول إلى خريطة الشارع المفتوح للتحقق مما إذا كنت مؤهلا للحصول على تحديثات خرائط شهرية أو ساعية غير محدودة .</string>
     <string name="use_two_phase_routing">استخدام خوارزمية توجيه من مرحلتين A*</string>
-    <string name="trip_recording_downhill_widget_desc">عرض مجموعة الرحلات المسجلة الحالية.</string>
     <string name="street_name_widget_desc">ويدجت عرض اسم الشارع الحالي مع سهم الموقع المستقيم أو اسم الشارع التالي مع الاتجاهات التي يجب إكمالها.</string>
     <string name="layer_poi">نقاط الاهتمام…</string>
     <string name="quick_action_air_pressure_layer">مفتاح تبديل لإظهار أو إخفاء طبقة ضغط الهواء على الخريطة.</string>
@@ -2518,7 +2517,6 @@
     <string name="available_maps">الخرائط الموجودة</string>
     <string name="speak_pedestrian">ممرات الراجلين</string>
     <string name="lang_sc">السردينية</string>
-    <string name="trip_recording_distance_widget_desc">يظهر مسافة الرحلة المسجلة حاليا.</string>
     <string name="lang_ru">الروسية</string>
     <string name="disable_complex_routing">تعطيل الطرق المعقدة</string>
     <string name="shared_string_buttons">أزرار</string>
@@ -2720,7 +2718,6 @@
     <string name="route_via">عبر:</string>
     <string name="write_bearing_description">حفظ الوجهة لكل نقطة متابعة خلال التسجيل</string>
     <string name="save_track_to_gpx_globally_headline">تسجيل المسار حسب الطلب</string>
-    <string name="trip_recording_uphill_widget_desc">عرض مجموع عمليات التسلق المسجلة حاليا.</string>
     <string name="configure_map">ضبط الخريطة</string>
     <string name="rendering_attr_tracktype_grade1_name">الصلبة (المعبدة)</string>
     <string name="storage_found_files_descr">اضغط على \"%1$s\" لنسخ %2$s ملف من \"%3$s\" إلى \"%4$s\". قد يستغرق بعض الوقت.</string>

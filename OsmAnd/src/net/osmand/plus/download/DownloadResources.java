@@ -49,6 +49,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
+	private List<DownloadItem> groupedItemsToUpdate = new ArrayList<>();
 	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
@@ -65,8 +66,14 @@ public class DownloadResources extends DownloadResourceGroup {
 		this.app = app;
 	}
 
-	public List<IndexItem> getItemsToUpdate() {
+	@NonNull
+	public List<IndexItem> getIndividualItemsToUpdate() {
 		return itemsToUpdate;
+	}
+
+	@NonNull
+	public List<DownloadItem> getGroupedItemsToUpdate() {
+		return groupedItemsToUpdate;
 	}
 
 	@Nullable
@@ -299,15 +306,15 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private void recalculateFilesToUpdate() {
-		List<IndexItem> stillUpdate = new ArrayList<IndexItem>();
-		for (IndexItem item : itemsToUpdate) {
+		List<IndexItem> stillUpdate = new ArrayList<>();
+		for (IndexItem item : getIndividualItemsToUpdate()) {
 			DateFormat format = app.getResourceManager().getDateFormat();
 			checkIfItemOutdated(item, format);
 			if (item.isOutdated()) {
 				stillUpdate.add(item);
 			}
 		}
-		itemsToUpdate = stillUpdate;
+		setItemsToUpdate(stillUpdate);
 	}
 
 	private Map<String, String> listWithAlternatives(java.text.DateFormat dateFormat, File file,
@@ -342,9 +349,11 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private void prepareFilesToUpdate() {
+		List<IndexItem> itemsToUpdate = new ArrayList<>();
 		List<IndexItem> filtered = rawResources;
 		if (filtered != null) {
-			itemsToUpdate.clear();
+			this.itemsToUpdate.clear();
+			this.groupedItemsToUpdate.clear();
 			DateFormat format = app.getResourceManager().getDateFormat();
 			for (IndexItem item : filtered) {
 				boolean outdated = checkIfItemOutdated(item, format);
@@ -354,6 +363,41 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 			}
 		}
+		setItemsToUpdate(itemsToUpdate);
+	}
+
+	private void setItemsToUpdate(@NonNull List<IndexItem> itemsToUpdate) {
+		this.itemsToUpdate = itemsToUpdate;
+		this.groupedItemsToUpdate = groupItemsByRegion(itemsToUpdate);
+	}
+
+	@NonNull
+	private List<DownloadItem> groupItemsByRegion(@NonNull List<IndexItem> items) {
+		OsmandRegions regions = app.getRegions();
+		List<DownloadItem> result = new ArrayList<>();
+		Map<UpdateKey, List<IndexItem>> map = new LinkedHashMap<>();
+		for (IndexItem item : items) {
+			String baseName = item.getBasename();
+			WorldRegion countryRegion = regions.getCountryRegionDataByDownloadName(baseName);
+			if (countryRegion != null) {
+				UpdateKey key = new UpdateKey(item.getType(), countryRegion);
+				map.computeIfAbsent(key, k -> new ArrayList<>()).add(item);
+			} else {
+				result.add(item);
+			}
+		}
+		for (Map.Entry<UpdateKey, List<IndexItem>> entry : map.entrySet()) {
+			UpdateKey key = entry.getKey();
+			List<IndexItem> indexItems = entry.getValue();
+			if (indexItems != null && !indexItems.isEmpty()) {
+				if (indexItems.size() > 1) {
+					result.add(new MultipleDownloadItem(key.region(), new ArrayList<>(indexItems), key.type()));
+				} else {
+					result.add(indexItems.get(0));
+				}
+			}
+		}
+		return result;
 	}
 
 	protected boolean prepareData(List<IndexItem> resources) {
@@ -886,4 +930,6 @@ public class DownloadResources extends DownloadResourceGroup {
 		return downloadRegion.getSuperregion() != null
 				&& addIndexItem(downloadThread, type, downloadRegion.getSuperregion(), res);
 	}
+
+	private record UpdateKey(DownloadActivityType type, WorldRegion region) {}
 }

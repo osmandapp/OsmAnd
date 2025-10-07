@@ -4510,9 +4510,6 @@
     <string name="av_notes_photo_widget_desc">النقرعلى الودجت يسمح لك بالتقاط صورة.</string>
     <string name="av_notes_video_widget_desc">النقرعلى الودجت يسمح لك بالتقاط الفيديو.</string>
     <string name="av_notes_audio_widget_desc">النقرعلى الودجت يسمح لك بتدوين الملاحظات الصوتية.</string>
-    <string name="trip_recording_downhill_widget_desc">عرض مجموعة الرحلات المسجلة الحالية.</string>
-    <string name="trip_recording_uphill_widget_desc">عرض مجموع عمليات التسلق المسجلة حاليا.</string>
-    <string name="trip_recording_distance_widget_desc">يظهر مسافة الرحلة المسجلة حاليا.</string>
     <string name="true_bearing_wdiget_desc">الزاوية بين الشمال الحقيقي ونقطة الهدف التي تم تعيينها من موقعك.</string>
     <string name="relative_bearing_widget_desc">يوضح الزاوية بين اتجاه الحركة إلى الأمام والنقطة المستهدفة.</string>
     <string name="connect_with_straight_line">الاتصال بخط مستقيم</string>

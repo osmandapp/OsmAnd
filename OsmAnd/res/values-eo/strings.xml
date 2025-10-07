@@ -4435,9 +4435,6 @@
     <string name="av_notes_photo_widget_desc">Fenestraĵo ebliganta fari foton.</string>
     <string name="av_notes_video_widget_desc">Fenestraĵo ebliganta registri filman noton.</string>
     <string name="av_notes_audio_widget_desc">Fenestraĵo ebliganta registri sonan noton.</string>
-    <string name="trip_recording_distance_widget_desc">Montras distancon de la nune registrata spuro.</string>
-    <string name="trip_recording_downhill_widget_desc">Montras sumon (horizontale) de ĉiuj malsupreniroj por la nune registrata spuro.</string>
-    <string name="trip_recording_uphill_widget_desc">Montras sumon (horizontale) de ĉiuj supreniroj por la nune registrata spuro.</string>
     <string name="trip_recording_duration_widget_desc">Montras daŭron de la nune registrata spuro.</string>
     <string name="true_bearing_wdiget_desc">Angulo inter la vera nordo, via pozicio kaj la alcela loko.</string>
     <string name="first_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la unua map-marko.</string>
@@ -5873,4 +5870,6 @@
     <string name="show_spherical_map">Vidigi sferan mapon</string>
     <string name="show_spherical_map_description">Vidigi sferoidan modelon de Tero</string>
     <string name="shared_string_price">Prezo</string>
+    <string name="rendering_attr_showSkiSlopes_name">Skiaj descendejoj</string>
+    <string name="rendering_attr_showSkiSlopes_description">Montri simpligitajn skiajn descendejojn</string>
 </resources>

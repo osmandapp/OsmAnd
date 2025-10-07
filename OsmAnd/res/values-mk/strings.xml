@@ -4622,10 +4622,7 @@
     <string name="av_notes_photo_widget_desc">Dopiranjeto na vidžetot ovozmozuva fotografiranje.</string>
     <string name="av_notes_video_widget_desc">Dopiranjeto na vidzetot ovozmozuva zapocnuvanje na snimanje video.</string>
     <string name="av_notes_audio_widget_desc">Dopiranjeto na vidzetot ovozmozuva zapocnuvanje na snimanje audio zabeleski.</string>
-    <string name="trip_recording_downhill_widget_desc">Go prikazuva zbirot na site spustanja na tekovnoto snimeno patuvanje.</string>
-    <string name="trip_recording_uphill_widget_desc">Go prikazuva zbirot na site kacuvanja na tekovnoto snimeno patuvanje.</string>
     <string name="trip_recording_duration_widget_desc">Go prikazuva vremeto na snimanjeto na patekata, vremetraenjeto vo minuti/casovi od momentalno snimenoto patuvanje.</string>
-    <string name="trip_recording_distance_widget_desc">Go prikazuva rastojanieto na tekovno snimenoto patuvanje.</string>
     <string name="time_to_intermediate_widget_desc">Vidzetot pokazuva „Vreme na pristignuvanje“ ili „Vreme za odenje“ do prvata sredna tocka. Vremeto postojano se azurira za vreme na navigacijata, stom ce pominat srednite tocki, vremeto ce se azurira na slednata sredna tocka.</string>
     <string name="download_complete">Simnuvanjeto e kompletno</string>
     <string name="compass_visible_if_map_rotated_desc">Skrieno koga sever e gore</string>

@@ -4193,7 +4193,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizzazione schematica delle icone a basso zoom</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una visualizzazione schematica delle icone a bassi livelli di ingrandimento per questi POI che non sono usualmente mostrati</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_value_omit_name">Ometti</string>
@@ -4415,13 +4415,10 @@
     <string name="auto_25_chars_route_tl_kr">Svolta a sinistra e mantieni la destra</string>
     <string name="auto_25_chars_route_tr_kl">Svolta a destra e mantieni la sinistra</string>
     <string name="auto_25_chars_route_tr_kr">Svolta a destra e mantieni la destra</string>
-    <string name="trip_recording_distance_widget_desc">Mostra la distanza del percorso attualmente registrato.</string>
     <string name="true_bearing_wdiget_desc">Angolo fra il nord reale e il punto di destinazione osservato dalla tua posizione.</string>
-    <string name="trip_recording_uphill_widget_desc">Mostra il totale di tutte le salite del percorso attualmente registrato.</string>
     <string name="connect_with_straight_line">Collega con una linea retta</string>
     <string name="shared_string_only_missing">Solo mancanti</string>
     <string name="download_tiles">Scarica tile</string>
-    <string name="trip_recording_downhill_widget_desc">Mostra il totale di tutte le discese del percorso attualmente registrato.</string>
     <string name="relative_bearing_widget_desc">Mostra l\'angolo fra la propria direzione di movimento e il punto di destinazione.</string>
     <string name="distance_to_destination_widget_desc">Il widget mostra la distanza all\'ultimo punto di destinazione.</string>
     <string name="widget_with_dot">Widget.</string>
