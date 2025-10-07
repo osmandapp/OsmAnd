@@ -39,13 +39,11 @@ class OBDRemainingFuelWidget(
 		return remainingFuelMode.get().fieldType
 	}
 
-	override fun getOnClickListener(): View.OnClickListener {
-		return View.OnClickListener { v: View? ->
-			nextMode()
-		}
+	override fun onWidgetClicked() {
+		nextMode()
 	}
 
-	private fun nextMode(){
+	private fun nextMode() {
 		remainingFuelMode.set(remainingFuelMode.get().next())
 		updatePrefs(true)
 	}

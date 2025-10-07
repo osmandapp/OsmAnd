@@ -48,6 +48,10 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		void onDeviceDisconnect(@NonNull AbstractDevice<?> device);
 
 		void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data);
+
+		default void onDeviceConnectionFailed(@NonNull AbstractDevice<?> device) {
+
+		}
 	}
 
 	public AbstractDevice(@NonNull String deviceId) {
@@ -159,6 +163,12 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 	public void fireSensorDataEvent(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
 		for (DeviceListener listener : listeners) {
 			listener.onSensorData(sensor, data);
+		}
+	}
+
+	public void fireDeviceConnectionFailed() {
+		for (DeviceListener listener : listeners) {
+			listener.onDeviceConnectionFailed(this);
 		}
 	}
 

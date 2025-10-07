@@ -10,6 +10,7 @@ import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice.DeviceReadyListener
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider
+import net.osmand.shared.data.BTDeviceInfo
 
 class VehicleMetricsBLEDeviceHelper(
 	private val vehicleMetricsPlugin: VehicleMetricsPlugin,
@@ -48,5 +49,15 @@ class VehicleMetricsBLEDeviceHelper(
 		device.setDeviceName(deviceName)
 		device.rssi = result.rssi
 		return device
+	}
+
+	override fun onDeviceConnectionFailed(device: AbstractDevice<*>) {
+		super.onDeviceConnectionFailed(device)
+		if (device is BLEOBDDevice) {
+			vehicleMetricsPlugin.onDeviceConnectionFailed(
+				BTDeviceInfo(
+					device.name,
+					device.deviceId, true))
+		}
 	}
 }
