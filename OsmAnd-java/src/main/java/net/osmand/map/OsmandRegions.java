@@ -479,12 +479,16 @@ public class OsmandRegions {
 		}
 	}
 
-
 	public WorldRegion getRegionData(String fullName) {
 		if (WorldRegion.WORLD.equals(fullName)) {
 			return worldRegion;
 		}
 		return fullNamesToRegionData.get(fullName);
+	}
+
+	public WorldRegion getCountryRegionDataByDownloadName(String downloadName) {
+		WorldRegion region = getRegionDataByDownloadName(downloadName);
+		return region != null ? region.getCountryRegion() : null;
 	}
 
 	public WorldRegion getRegionDataByDownloadName(String downloadName) {

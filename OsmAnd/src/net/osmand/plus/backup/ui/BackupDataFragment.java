@@ -79,7 +79,7 @@ public class BackupDataFragment extends BackupTypesFragment {
 		TextView tvSummary = view.findViewById(android.R.id.summary);
 		long totalUsed = 0;
 		for (ExportCategory category : ExportCategory.values()) {
-			for (ExportType exportType : controller.getCategoryItems(category).getTypes()) {
+			for (ExportType exportType : controller.getCategoryItems(category).getVisibleTypes()) {
 				totalUsed += BackupUtils.calculateItemsSize(controller.getItemsForType(exportType));
 			}
 		}

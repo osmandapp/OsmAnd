@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -239,7 +240,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 			String additionalName = getAdditionalWidgetName();
 			if (additionalName != null) {
-				newWidgetName = newWidgetName + ", " + additionalName;
+				newWidgetName = getString(getAdditionalWidgetNameDivider(), newWidgetName, additionalName);
 			}
 
 			String oldWidgetName = String.valueOf(this.widgetName.getText());
@@ -307,6 +308,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		return null;
 	}
 
+	@StringRes
+	protected int getAdditionalWidgetNameDivider() {
+		return R.string.ltr_or_rtl_combine_via_comma;
+	}
+
 	private void copyTextView(@Nullable TextView newTextView, @Nullable TextView oldTextView) {
 		if (newTextView != null && oldTextView != null) {
 			newTextView.setTextColor(oldTextView.getCurrentTextColor());
@@ -352,6 +358,13 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 			imageView.setVisibility(View.GONE);
 		}
 		imageView.invalidate();
+	}
+
+	public void updateIcon(){
+		int iconId = getIconId();
+		if (iconId != 0) {
+			setImageDrawable(iconId);
+		}
 	}
 
 	@Override

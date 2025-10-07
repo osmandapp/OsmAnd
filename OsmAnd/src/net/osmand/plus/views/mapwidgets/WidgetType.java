@@ -21,6 +21,10 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingSlopeInfoFragment;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceInfoFragment;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidgetInfoFragment;
+import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetInfoFragment;
 import net.osmand.plus.plugins.odb.OBDWidgetSettingFragment;
 import net.osmand.plus.plugins.odb.OBDRemainingFuelWidget;
 import net.osmand.plus.plugins.odb.dialogs.FuelConsumptionSettingFragment;
@@ -75,6 +79,8 @@ public enum WidgetType {
 	TRIP_RECORDING_TIME("trip_recording_time", R.string.map_widget_trip_recording_duration, R.string.trip_recording_duration_widget_desc, R.drawable.widget_track_recording_duration_day, R.drawable.widget_track_recording_duration_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_UPHILL("trip_recording_uphill", R.string.map_widget_trip_recording_uphill, R.string.trip_recording_uphill_widget_desc, R.drawable.widget_track_recording_uphill_day, R.drawable.widget_track_recording_uphill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_DOWNHILL("trip_recording_downhill", R.string.map_widget_trip_recording_downhill, R.string.trip_recording_downhill_widget_desc, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
+	TRIP_RECORDING_AVERAGE_SLOPE("trip_recording_average_slope", R.string.average_slope, R.string.trip_recording_average_slope_widget_description, R.drawable.widget_track_recording_average_slope_uphill_day, R.drawable.widget_track_recording_average_slope_uphill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
+	TRIP_RECORDING_MAX_SPEED("trip_recording_max_speed", R.string.shared_string_max_speed, R.string.trip_recording_max_speed_widget_description, R.drawable.widget_track_recording_max_speed_day, R.drawable.widget_track_recording_max_speed_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 
 	CURRENT_TIME("plain_time", R.string.map_widget_plain_time, R.string.current_time_widget_desc, R.drawable.widget_time_day, R.drawable.widget_time_night, R.string.docs_widget_current_time, null, RIGHT),
 	BATTERY("battery", R.string.map_widget_battery, R.string.battery_widget_desc, R.drawable.widget_battery_day, R.drawable.widget_battery_night, R.string.docs_widget_battery, null, RIGHT),
@@ -384,6 +390,11 @@ public enum WidgetType {
 				return OBDSettingFragment;
 			}
 
+			WidgetInfoBaseFragment tripRecordingFragment = getTripRecordingWidgetSettings(ctx, widgetInfo);
+			if (tripRecordingFragment != null) {
+				return tripRecordingFragment;
+			}
+
 			return new BaseSimpleWidgetInfoFragment();
 		} else if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing) {
 			if (widgetInfo.widgetPanel.isPanelVertical()) {
@@ -391,6 +402,25 @@ public enum WidgetType {
 			}
 		}
 		return new WidgetInfoBaseFragment();
+	}
+
+	@Nullable
+	private WidgetInfoBaseFragment getTripRecordingWidgetSettings(@NonNull Context ctx,
+	                                                    @Nullable MapWidgetInfo widgetInfo) {
+		if (widgetInfo == null || !isPurchased(ctx)) {
+			return null;
+		}
+		if (this == TRIP_RECORDING_UPHILL || this == TRIP_RECORDING_DOWNHILL) {
+			return new TripRecordingElevationWidgetInfoFragment();
+		} else if (this == TRIP_RECORDING_AVERAGE_SLOPE) {
+			return new TripRecordingSlopeInfoFragment();
+		} else if (this == TRIP_RECORDING_DISTANCE) {
+			return new TripRecordingDistanceInfoFragment();
+		} else if (this == TRIP_RECORDING_MAX_SPEED) {
+			return new TripRecordingMaxSpeedWidgetInfoFragment();
+		}
+
+		return null;
 	}
 
 	@Nullable

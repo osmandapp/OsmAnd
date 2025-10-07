@@ -4422,12 +4422,9 @@
     <string name="av_notes_photo_widget_desc">Торкнувшись віджета, можна зробити знімок.</string>
     <string name="av_notes_video_widget_desc">Торкнувшись віджета, можна розпочати запис відео.</string>
     <string name="av_notes_audio_widget_desc">Торкнувшись віджета, можна зробити аудіопримітку.</string>
-    <string name="trip_recording_downhill_widget_desc">Показує суму всіх спусків поточної записаної поїздки.</string>
-    <string name="trip_recording_uphill_widget_desc">Показує суму всіх підйомів поточної записаної поїздки.</string>
     <string name="true_bearing_wdiget_desc">Кут між напрямком на північ та цільовою точкою, який спостерігається з вашого поточного місця перебування.</string>
     <string name="relative_bearing_widget_desc">Показує кут між напрямком руху вперед і цільовою точкою.</string>
     <string name="trip_recording_duration_widget_desc">Показує поточний записаний час поїздки.</string>
-    <string name="trip_recording_distance_widget_desc">Показує поточну записану відстань поїздки.</string>
     <string name="second_marker_widget_desc">Ви можете налаштувати віджет, щоб показувати відстань або очікуваний час прибуття до другої позначки на мапі.</string>
     <string name="time_to_destination_widget_desc">Віджет показує «Час прибуття» або «Час йти» до останнього пункту призначення. Час постійно оновлюється під час навігації та дорівнює часу маршруту від поточного місцезнаходження.</string>
     <string name="distance_to_intermediate_widget_desc">Віджет показує відстань, що залишилася до першої проміжної точки. Після проходження проміжної точки значення буде оновлене, щоб показувати відстань до наступної проміжної точки.</string>
@@ -5632,7 +5629,7 @@
     <string name="obd_ambient_air_temp_desc">Показує температуру поза транспортним засобом.</string>
     <string name="obd_engine_coolant_temp_desc">Показує температуру теплоносія двигуна</string>
     <string name="obd_air_intake_temp_desc">Показує температуру повітря, що надходить у впускний колектор двигуна.</string>
-    <string name="auto_zoom_3d_angle">Автомасштаб кута 3D</string>
+    <string name="auto_zoom_3d_angle">Автоматичне масштабування 3D-кута</string>
     <string name="preview_next_turn">Попередній перегляд наступного повороту</string>
     <string name="av_audio_sample_rate">Швидкість вибірки аудіо</string>
     <string name="vehicle_metrics_recording_description">Виберіть параметри, які слід записати у файл gpx.</string>
@@ -5883,4 +5880,6 @@
     <string name="show_spherical_map">Показати сферичну карту</string>
     <string name="show_spherical_map_description">Відображення сфероїдальної моделі Землі</string>
     <string name="shared_string_price">Ціна</string>
+    <string name="rendering_attr_showSkiSlopes_name">Показати гірськолижні схили</string>
+    <string name="rendering_attr_showSkiSlopes_description">Показати спрощені гірськолижні схили</string>
 </resources>

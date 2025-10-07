@@ -4623,10 +4623,7 @@
     <string name="included_in_your_current_plan">Zawarte w bieżącym planie \"%1$s\"</string>
     <string name="av_notes_video_widget_desc">Stuknięcie widżetu umożliwia nagranie filmu.</string>
     <string name="av_notes_audio_widget_desc">Stuknięcie widżetu pozwala na zrobienie notatki dźwiękowej.</string>
-    <string name="trip_recording_downhill_widget_desc">Pokazuje sumę wszystkich zjazdów aktualnie zarejestrowanej podróży.</string>
-    <string name="trip_recording_uphill_widget_desc">Pokazuje sumę wszystkich podjazdów aktualnie zarejestrowanej podróży.</string>
     <string name="trip_recording_duration_widget_desc">Pokazuje aktualnie zarejestrowany czas podróży.</string>
-    <string name="trip_recording_distance_widget_desc">Pokazuje aktualnie zarejestrowany dystans podróży.</string>
     <string name="true_bearing_wdiget_desc">Kąt między rzeczywistą północą a punktem docelowym obserwowanym z Twojej lokalizacji.</string>
     <string name="relative_bearing_widget_desc">Pokazuje kąt między kierunkiem ruchu do przodu a punktem docelowym.</string>
     <string name="bearing_desc">Pokazuje bezwzględne lub względne namiary na cel w jednostkach kątowych (w trybie 180 stopni, 360 stopni lub miliradianów).</string>

@@ -4038,8 +4038,6 @@
 \nJika Anda menggunakan OsmAnd Cloud, hal ini dapat menyebabkan kesalahpahaman setelah penginstalan ulang.</string>
     <string name="duplacate_widget_added_snackbar">Widget duplikat ditambahkan berikutnya dalam daftar.</string>
     <string name="shared_string_duplicate">Duplikat</string>
-    <string name="trip_recording_downhill_widget_desc">Menampilkan jumlah semua turunan dari perjalanan yang direkam saat ini.</string>
-    <string name="trip_recording_uphill_widget_desc">Menunjukkan jumlah semua pendakian dari perjalanan yang sedang direkam.</string>
     <string name="storage_directory_readonly_desc">Diubah ke memori internal karena folder penyimpanan data yang dipilih dilindungi dari penulisan. Mohon pilih direktori penyimpanan yang dapat dituliskan.</string>
     <string name="osm_recipient_stat">Penyuntingan %1$s, jumlah %2$s mBTC</string>
     <string name="select_map_marker">Pilih penanda peta</string>
@@ -4110,7 +4108,6 @@
     <string name="rendering_attr_depthContourColorScheme_description">Skema warna garis kontur</string>
     <string name="add_points_to_map_markers_q">Tambahkan semua titik sebagai penanda peta\?</string>
     <string name="show_polygons">Tampilkan poligon</string>
-    <string name="trip_recording_distance_widget_desc">Menampilkan jarak perjalanan yang direkam saat ini.</string>
     <string name="true_bearing_wdiget_desc">Sudut antara utara sebenarnya dan titik sasaran yang diobservasi dari lokasi Anda.</string>
     <string name="relative_bearing_widget_desc">Menampilkan sudut antara arah gerakan depan Anda dan titik sasaran.</string>
     <string name="second_marker_widget_desc">Anda dapat mengatur widget untuk menampilkan jarak atau Perkiraan waktu tiba ke penanda peta kedua.</string>

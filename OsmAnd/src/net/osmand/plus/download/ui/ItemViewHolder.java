@@ -39,6 +39,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.*;
+import net.osmand.plus.download.SelectIndexesHelper.MultiSelectionMode;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
@@ -87,6 +88,7 @@ public class ItemViewHolder {
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
+	boolean isUpdatesMode;
 
 	private final DateFormat dateFormat;
 
@@ -152,6 +154,10 @@ public class ItemViewHolder {
 
 	public void setUseShortName(boolean useShortName) {
 		this.useShortName = useShortName;
+	}
+
+	public void setUpdatesMode(boolean inUpdatesMode) {
+		this.isUpdatesMode = inUpdatesMode;
 	}
 
 	private void initAppStatusVariables() {
@@ -280,27 +286,31 @@ public class ItemViewHolder {
 	}
 
 	private void setupCommonMultipleDescription(@NonNull MultipleDownloadItem item) {
-		String regionsHeader = context.getString(R.string.regions);
-		String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
-		String allRegionsCount = String.valueOf(item.getAllItems().size());
-		String leftToDownloadCount = String.valueOf(item.getItemsToDownload().size());
+		String fullDescription;
+		if (!showTypeInDesc) {
+			String regionsHeader = context.getString(R.string.regions);
+			String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
+			String allRegionsCount = String.valueOf(item.getAllItems().size());
+			String leftToDownloadCount = String.valueOf(item.getItemsToDownload().size());
 
-		String header = allRegionsHeader;
-		String count = allRegionsCount;
-		if (item.hasActualDataToDownload()) {
-			if (!item.isDownloaded()) {
-				header = allRegionsHeader;
-				count = leftToDownloadCount;
-			} else {
-				header = regionsHeader;
-				count = String.format(
-						context.getString(R.string.ltr_or_rtl_combine_via_slash),
-						leftToDownloadCount,
-						allRegionsCount);
+			String header = allRegionsHeader;
+			String count = allRegionsCount;
+			if (item.hasActualDataToDownload()) {
+				if (!item.isDownloaded()) {
+					header = allRegionsHeader;
+					count = leftToDownloadCount;
+				} else {
+					header = regionsHeader;
+					count = String.format(
+							context.getString(R.string.ltr_or_rtl_combine_via_slash),
+							leftToDownloadCount,
+							allRegionsCount);
+				}
 			}
+			fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
+		} else {
+			fullDescription = item.getType().getString(context);
 		}
-
-		String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
 		String additionalDescription = item.getAdditionalDescription(context);
 		if (additionalDescription != null) {
 			fullDescription += " " + additionalDescription;
@@ -309,6 +319,12 @@ public class ItemViewHolder {
 			fullDescription = context.getString(
 					R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
 					item.getSizeDescription(context));
+		}
+		String date = item.getDate(dateFormat, showRemoteDate);
+		if (!Algorithms.isEmpty(date)) {
+			fullDescription = context.getString(
+					R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
+					date);
 		}
 		tvDesc.setText(fullDescription);
 	}
@@ -539,7 +555,8 @@ public class ItemViewHolder {
 	}
 
 	private void selectIndexesToDownload(@NonNull DownloadItem item) {
-		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate, indexes -> {
+		MultiSelectionMode mode = isUpdatesMode ? MultiSelectionMode.UPDATE : MultiSelectionMode.DOWNLOAD;
+		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate, mode, indexes -> {
 			IndexItem[] indexesArray = new IndexItem[indexes.size()];
 			context.startDownload(indexes.toArray(indexesArray));
 		});

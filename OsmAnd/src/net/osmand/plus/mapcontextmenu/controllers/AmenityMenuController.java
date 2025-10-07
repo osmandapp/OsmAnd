@@ -317,8 +317,9 @@ public class AmenityMenuController extends MenuController {
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
-		return amenity.isRouteTrack()
-				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight())
+		boolean isClickableWay = getApplication().getClickableWayHelper().isClickableWayAmenity(amenity);
+		return isClickableWay || amenity.isRouteTrack()
+				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight(), isClickableWay)
 				: null;
 	}
 }

@@ -1321,10 +1321,7 @@
     <string name="av_notes_photo_widget_desc">輕觸即可拍攝照片</string>
     <string name="av_notes_video_widget_desc">輕觸即可錄製影片</string>
     <string name="av_notes_audio_widget_desc">輕觸即可錄音</string>
-    <string name="trip_recording_downhill_widget_desc">顯示目前記錄旅程的所有下坡總和。</string>
-    <string name="trip_recording_uphill_widget_desc">顯示目前記錄旅程的所有上坡總和。</string>
     <string name="trip_recording_duration_widget_desc">顯示目前記錄旅程的時間。</string>
-    <string name="trip_recording_distance_widget_desc">顯示目前記錄旅程的距離。</string>
     <string name="true_bearing_wdiget_desc">從您的位置觀察到的真北與目標點之間的角度。</string>
     <string name="relative_bearing_widget_desc">顯示您前進方向與目標點之間的角度。</string>
     <string name="second_marker_widget_desc">設定顯示到第二個地圖標記的距離或預計抵達時間</string>

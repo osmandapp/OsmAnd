@@ -71,7 +71,6 @@ public class MapLayers {
 	private MapTileLayer mapTileLayer;
 	private MapVectorLayer mapVectorLayer;
 	private GPXLayer gpxLayer;
-	private NetworkRouteSelectionLayer routeSelectionLayer;
 	private RouteLayer routeLayer;
 	private PreviewRouteLineLayer previewRouteLineLayer;
 	private POIMapLayer poiMapLayer;
@@ -134,9 +133,6 @@ public class MapLayers {
 		gpxLayer = new GPXLayer(app);
 		gpxLayer.setPointsOrder(0.9f);
 		mapView.addLayer(gpxLayer, 0.9f, -5.0f);
-
-		routeSelectionLayer = new NetworkRouteSelectionLayer(app);
-		mapView.addLayer(routeSelectionLayer, 0.99f);
 
 		// route layer, 6-th in the order
 		routeLayer = new RouteLayer(app);
@@ -616,10 +612,6 @@ public class MapLayers {
 
 	public GPXLayer getGpxLayer() {
 		return gpxLayer;
-	}
-
-	public NetworkRouteSelectionLayer getRouteSelectionLayer() {
-		return routeSelectionLayer;
 	}
 
 	public ContextMenuLayer getContextMenuLayer() {

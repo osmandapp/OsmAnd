@@ -24,6 +24,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.SelectIndexesHelper.MultiSelectionMode;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -305,7 +306,7 @@ public class ContourLinesMenu {
 				uiAdapter.onDataSetChanged();
 			} else {
 				DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
-				SelectIndexesHelper.showDialog(srtmDownloadItem, mapActivity, dateFormat, true, items -> {
+				SelectIndexesHelper.showDialog(srtmDownloadItem, mapActivity, dateFormat, true, MultiSelectionMode.DOWNLOAD, items -> {
 					IndexItem[] toDownload = new IndexItem[items.size()];
 					new DownloadValidationManager(app).startDownload(mapActivity, items.toArray(toDownload));
 					item.setProgress(ContextMenuItem.INVALID_ID);
@@ -322,8 +323,7 @@ public class ContourLinesMenu {
 	private static ProgressListener getSrtmItemProgressListener(SrtmDownloadItem srtmDownloadItem,
 	                                                            DownloadIndexesThread downloadThread) {
 		return (progressObject, progress, adapter, itemId, position) -> {
-			if (progressObject instanceof IndexItem) {
-				IndexItem progressItem = (IndexItem) progressObject;
+			if (progressObject instanceof IndexItem progressItem) {
 				if (srtmDownloadItem.getIndexItem(downloadThread).compareTo(progressItem) == 0) {
 					ContextMenuItem item = adapter.getItem(position);
 					if (item != null) {

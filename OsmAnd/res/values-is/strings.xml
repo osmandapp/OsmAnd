@@ -4433,12 +4433,9 @@
     <string name="second_marker_widget_desc">Þú getur stillt viðmótshlutann til að birta vegalengd eða áætlaðan komutíma vinstra megin við seinna kortamerkið.</string>
     <string name="first_marker_widget_desc">Þú getur stillt viðmótshlutann til að birta vegalengd eða áætlaðan komutíma vinstra megin við fyrra kortamerkið.</string>
     <string name="time_to_destination_widget_desc">Viðmótshlutinn sýnir \"Komutími\" eða \"Tími til stefnu\" að síðasta áfangastaðnum. Tíminn er uppfærður í sífellu á meðan leiðsögn stendur og samsvarar tíma leiðarinnar frá fyrirliggjandi staðsetningu.</string>
-    <string name="trip_recording_distance_widget_desc">Birtir vegalengd leiðarinnar sem verið er að skrá.</string>
     <string name="av_notes_video_widget_desc">Ef ýtt er á viðmótshluta er hægt að ræsa upptöku á myndskeiði.</string>
     <string name="av_notes_audio_widget_desc">Ef ýtt er á viðmótshluta er hægt að taka upp hljóðskrá með athugasemdum.</string>
     <string name="true_bearing_wdiget_desc">Horn milli réttvísandi norðurs og markpunkts miðað við staðsetningu þína.</string>
-    <string name="trip_recording_downhill_widget_desc">Sýnir summu allra lækkana í leiðinni sem verið er að skrá.</string>
-    <string name="trip_recording_uphill_widget_desc">Sýnir summu allra hækkana í leiðinni sem verið er að skrá.</string>
     <string name="trip_recording_duration_widget_desc">Birtir tímalengd fyrir leiðina sem verið er að skrá.</string>
     <string name="average_speed_skip_stops_desc">Hraði undir %1$s mun teljast með við útreikning á meðalhraða.</string>
     <string name="second_next_turn_widget_desc">Viðmótshlutinn sýnir upplýsingar um þarnæstu beygju sem þú þarft að taka og er virk innan tiltekinnar nálægðar.</string>

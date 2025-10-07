@@ -4292,10 +4292,7 @@
     <string name="av_notes_photo_widget_desc">Pulsá el widget para fotografiar.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar una nota de voz.</string>
     <string name="av_notes_video_widget_desc">Pulsá el widget para grabar un video.</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
-    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
     <string name="second_marker_widget_desc">Podés configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
     <string name="time_to_destination_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al último punto de destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de la ruta desde la ubicación actual.</string>
@@ -5745,4 +5742,6 @@
     <string name="show_spherical_map">Mostrar mapa esférico</string>
     <string name="show_spherical_map_description">Muestra un modelo esferoidal de la Tierra</string>
     <string name="shared_string_price">Precio</string>
+    <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esquí</string>
+    <string name="rendering_attr_showSkiSlopes_description">Mostrar pistas de esquí simplificadas</string>
 </resources>

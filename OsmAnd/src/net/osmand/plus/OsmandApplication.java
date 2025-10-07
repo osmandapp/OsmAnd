@@ -878,6 +878,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
+	public File getAppPath() {
+		return getAppPath(null);
+	}
+
+	@NonNull
 	public File getAppPath(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new File(externalStorageDirectory, child);

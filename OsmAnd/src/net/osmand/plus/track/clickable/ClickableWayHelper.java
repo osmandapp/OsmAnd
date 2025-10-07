@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.gpx.clickable.ClickableWayTags.CLICKABLE_TAGS;
 import static net.osmand.gpx.clickable.ClickableWayTags.getGpxColorByTags;
+import static net.osmand.gpx.clickable.ClickableWayTags.getGpxShieldTags;
 import static net.osmand.gpx.clickable.ClickableWayTags.isClickableWayTags;
 
 // THINK use similar icon="piste_high_difficulty" for no-name pistes
@@ -149,6 +150,7 @@ public class ClickableWayHelper {
         String color = getGpxColorByTags(tags);
         if (color != null) {
             gpxFile.setColor(color);
+            gpxFile.getExtensionsToWrite().putAll(getGpxShieldTags(color));
         }
 
         return new ClickableWay(gpxFile, osmId, name, selectedLatLon, bbox);

@@ -35,6 +35,7 @@ public class SelectIndexesHelper {
 	private final boolean showRemoteDate;
 	private final List<DownloadItem> itemsToDownload;
 	private final DownloadItem downloadItem;
+	private final MultiSelectionMode multiSelectionMode;
 	private final boolean useMetricByDefault;
 
 	private SelectionBottomSheet<DownloadItem> dialog;
@@ -43,11 +44,13 @@ public class SelectIndexesHelper {
 	                            @NonNull AppCompatActivity activity,
 	                            @NonNull DateFormat dateFormat,
 	                            boolean showRemoteDate,
+								@NonNull MultiSelectionMode multiSelectionMode,
 	                            @NonNull ItemsToDownloadSelectedListener listener) {
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.activity = activity;
 		this.dateFormat = dateFormat;
 		this.showRemoteDate = showRemoteDate;
+		this.multiSelectionMode = multiSelectionMode;
 		this.listener = listener;
 		this.downloadItem = downloadItem;
 		this.itemsToDownload = getItemsToDownload(downloadItem);
@@ -58,9 +61,10 @@ public class SelectIndexesHelper {
 	                              @NonNull AppCompatActivity a,
 	                              @NonNull DateFormat df,
 	                              boolean showRemoteDate,
+								  @NonNull MultiSelectionMode multiSelectionMode,
 	                              @NonNull ItemsToDownloadSelectedListener l) {
 
-		SelectIndexesHelper h = new SelectIndexesHelper(di, a, df, showRemoteDate, l);
+		SelectIndexesHelper h = new SelectIndexesHelper(di, a, df, showRemoteDate, multiSelectionMode, l);
 		if (di.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			if (di instanceof MultipleDownloadItem) {
 				h.showSrtmMultipleSelectionDialog();
@@ -93,7 +97,7 @@ public class SelectIndexesHelper {
 		msDialog.setDialogStateListener(new DialogStateListener() {
 			@Override
 			public void onDialogCreated() {
-				dialog.setTitle(app.getString(R.string.welmode_download_maps));
+				dialog.setTitle(app.getString(multiSelectionMode.dialogTitleId));
 			}
 		});
 
@@ -266,7 +270,7 @@ public class SelectIndexesHelper {
 		String total = app.getString(R.string.shared_string_total);
 		String description = app.getString(R.string.ltr_or_rtl_combine_via_colon, total, size);
 		dialog.setTitleDescription(description);
-		String btnTitle = app.getString(R.string.shared_string_download);
+		String btnTitle = app.getString(multiSelectionMode.actionButtonTitleId);
 		if (sizeToDownload > 0) {
 			btnTitle = app.getString(R.string.ltr_or_rtl_combine_via_dash, btnTitle, size);
 		}
@@ -300,6 +304,19 @@ public class SelectIndexesHelper {
 		} else {
 			// download all regions again
 			return md.getAllItems();
+		}
+	}
+
+	public enum MultiSelectionMode {
+		DOWNLOAD(R.string.welmode_download_maps, R.string.shared_string_download),
+		UPDATE(R.string.update_maps, R.string.shared_string_update);
+
+		private final int dialogTitleId;
+		private final int actionButtonTitleId;
+
+		MultiSelectionMode(int dialogTitleId, int actionButtonTitleId) {
+			this.dialogTitleId = dialogTitleId;
+			this.actionButtonTitleId = actionButtonTitleId;
 		}
 	}
 

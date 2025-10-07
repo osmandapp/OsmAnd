@@ -359,9 +359,11 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				if (amenity.isRouteTrack()) {
+				boolean isClickableWay = app.getClickableWayHelper().isClickableWayAmenity(amenity);
+				if (isClickableWay || amenity.isRouteTrack()) {
 					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, nightMode);
+					Drawable shieldIcon = NetworkRouteDrawable
+							.getIconByAmenityShieldTags(amenity, app, nightMode, isClickableWay);
 					if (shieldIcon != null) {
 						return shieldIcon;
 					}

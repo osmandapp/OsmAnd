@@ -72,7 +72,7 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 
 	@Override
 	protected void onContinueButtonClickAction() {
-		if (adapter.getData().isEmpty()) {
+		if (getSelectedData().isEmpty()) {
 			app.showShortToastMessage(R.string.shared_string_nothing_selected);
 		} else {
 			importItems();
@@ -95,7 +95,7 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 
 	private void importItems() {
 		if (file != null && settingsItems != null) {
-			List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
+			List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(getSelectedData(), settingsItems, false);
 			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(file, settingsItems, selectedItems, getDuplicatesListener());
 		}

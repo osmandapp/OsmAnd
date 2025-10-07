@@ -513,7 +513,7 @@ public class MapActivityActions extends MapActions {
 
 		String d = getString(R.string.maps_and_resources);
 		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
-			List<IndexItem> items = app.getDownloadThread().getIndexes().getItemsToUpdate();
+			List<IndexItem> items = app.getDownloadThread().getIndexes().getIndividualItemsToUpdate();
 			if (!Algorithms.isEmpty(items)) {
 				d += " (" + items.size() + ")";
 			}

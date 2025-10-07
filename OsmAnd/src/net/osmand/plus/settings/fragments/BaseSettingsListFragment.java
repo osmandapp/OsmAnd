@@ -201,7 +201,7 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 	}
 
 	protected void updateAvailableSpace() {
-		long calculatedSize = BackupUtils.calculateItemsSize(adapter.getData());
+		long calculatedSize = BackupUtils.calculateItemsSize(getSelectedData());
 		if (calculatedSize != 0) {
 			selectedItemsSize.setText(AndroidUtils.formatSize(app, calculatedSize));
 
@@ -246,6 +246,32 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 		}
 	}
 
+	@NonNull
+	protected List<Object> getSelectedData() {
+		List<Object> selectedItems = new ArrayList<>();
+		for (Map.Entry<ExportType, List<?>> entry : selectedItemsMap.entrySet()) {
+			ExportType type = entry.getKey();
+			List<?> items = entry.getValue();
+			selectedItems.addAll(items);
+
+			List<?> additional = getAdditionalItems(type);
+			if (!Algorithms.isEmpty(additional)) {
+				selectedItems.addAll(additional);
+			}
+		}
+		return selectedItems;
+	}
+
+	@Nullable
+	private List<?> getAdditionalItems(@NonNull ExportType type) {
+		ExportType additional = type.getAdditionalExportType();
+		if (additional != null) {
+			SettingsCategoryItems categoryItems = dataList.get(type.getRelatedExportCategory());
+			return categoryItems != null ? categoryItems.getItemsForType(ExportType.GPX_DIR) : null;
+		}
+		return null;
+	}
+
 	@Override
 	public void onCategorySelected(@NonNull ExportCategory exportCategory, boolean selected) {
 		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
@@ -266,7 +292,7 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 	@Nullable
 	protected List<?> getItemsForType(@NonNull ExportType exportType) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
-			if (categoryItems.getTypes().contains(exportType)) {
+			if (categoryItems.getVisibleTypes().contains(exportType)) {
 				return categoryItems.getItemsForType(exportType);
 			}
 		}

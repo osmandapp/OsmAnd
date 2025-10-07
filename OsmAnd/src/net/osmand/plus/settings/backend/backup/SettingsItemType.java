@@ -11,6 +11,7 @@ public enum SettingsItemType {
 	FILE,
 	RESOURCES,
 	GPX,
+	GPX_DIR,
 	QUICK_ACTIONS,
 	POI_UI_FILTERS,
 	MAP_SOURCES,

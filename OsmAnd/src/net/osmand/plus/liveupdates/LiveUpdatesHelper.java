@@ -260,7 +260,8 @@ public class LiveUpdatesHelper {
 	}
 
 	public interface LiveUpdateListener {
-		void processFinish();
+		default void processFinish() {
+		}
 
 		List<LocalItem> getMapsToUpdate();
 	}

@@ -3725,9 +3725,7 @@
     <string name="external_device_blood_pressure">혈압</string>
     <string name="trip_rec_notification_settings">빠른 녹화 켜기</string>
     <string name="round_trip">왕복</string>
-    <string name="trip_recording_uphill_widget_desc">현재 기록된 여행의 모든 등반의 합계를 표시합니다.</string>
     <string name="live_monitoring_descr">여행 기록을 사용하여 현재 위치를 공유할 수 있습니다.</string>
-    <string name="trip_recording_downhill_widget_desc">현재 기록된 여행의 모든 내리막의 합계를 표시합니다.</string>
     <string name="private_access_routing_req">목적지는 개인 출입이 가능한 지역에 있습니다. 이 여행에 사유 도로를 사용할 수 있습니까?</string>
     <string name="shared_string_chest">가슴</string>
     <string name="planning_trip_item">여행 계획하기</string>
@@ -4609,7 +4607,6 @@
     <string name="rendering_attr_smoothness_very_bad_name">매우 나쁨</string>
     <string name="rendering_attr_smoothness_very_horrible_name">아주 끔찍한</string>
     <string name="new_filter_desc">새 필터의 이름을 입력하면 \'카테고리\' 탭에 추가됩니다.</string>
-    <string name="trip_recording_distance_widget_desc">현재 기록된 이동 거리를 표시합니다.</string>
     <string name="time_to_go_desc">목적지에 도달해야 할 분 또는 시간.</string>
     <string name="routeInfo_horse_scale_name">말길의 난이도</string>
     <string name="routing_attr_carriage_restrictions_name">차량 제한</string>

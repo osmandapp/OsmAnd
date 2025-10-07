@@ -70,7 +70,7 @@ public class ManageCloudStorageAdapter extends BackupTypesAdapter {
 		ExportCategory category = controller.getCategory(groupPosition);
 		SettingsCategoryItems categoryItems = controller.getCategoryItems(category);
 
-		ExportType exportType = categoryItems.getTypes().get(childPosition);
+		ExportType exportType = categoryItems.getVisibleTypes().get(childPosition);
 		long size = calculateExportTypeSize(exportType);
 
 		TextView tvTitle = view.findViewById(R.id.title);

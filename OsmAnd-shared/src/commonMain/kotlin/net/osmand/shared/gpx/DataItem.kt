@@ -28,6 +28,10 @@ abstract class DataItem(val file: KFile) {
 		return hasData() && GpxParameter.getAppearanceParameters().any { key -> map[key] != null }
 	}
 
+	fun hasParameter(parameter: GpxParameter): Boolean {
+		return map[parameter] != null
+	}
+
 	abstract fun getParameters(): Map<GpxParameter, Any?>
 
 	fun <T> requireParameter(parameter: GpxParameter): T {
@@ -63,7 +67,8 @@ abstract class DataItem(val file: KFile) {
 	fun increaseAnalysisParametersVersion() = analysisParametersVersion.incrementAndGet()
 
 	open fun isValidValue(parameter: GpxParameter, value: Any?): Boolean {
-		return true
+		return (value == null && parameter.isNullSupported())
+				|| (value != null && parameter.typeClass == value::class)
 	}
 
 	override fun hashCode(): Int {

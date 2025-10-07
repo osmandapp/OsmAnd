@@ -25,11 +25,6 @@ class GpxDataItem(
 		updateAnalysisParameters()
 	}
 
-	override fun isValidValue(parameter: GpxParameter, value: Any?): Boolean {
-		return (value == null && parameter.isNullSupported())
-				|| (value != null && parameter.typeClass == value::class)
-	}
-
 	fun copyData(item: GpxDataItem) {
 		for (entry in item.map.entries) {
 			val parameter = entry.key

@@ -59,10 +59,8 @@ class OBDFuelConsumptionWidget(
 		updateSimpleWidgetInfo(null)
 	}
 
-	override fun getOnClickListener(): View.OnClickListener {
-		return View.OnClickListener { _: View? ->
-			nextMode()
-		}
+	override fun onWidgetClicked() {
+		nextMode()
 	}
 
 	private fun nextMode() {

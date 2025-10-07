@@ -54,7 +54,9 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxDirSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
@@ -63,6 +65,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.io.KFile;
@@ -321,6 +324,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			setupBottomSheetItemForFile(item, file);
 		} else if (object instanceof GpxSettingsItem settingsItem) {
 			setupBottomSheetItemForGpx(item, settingsItem.getFile(), settingsItem.getAppearanceInfo());
+		}  else if (object instanceof GpxDirSettingsItem settingsItem) {
+			item.setTitle(settingsItem.getPublicName(app));
+			item.setIcon(getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
+		} else if (object instanceof GpxDirItem dirItem) {
+			item.setTitle(GpxHelper.INSTANCE.getGpxTitle(dirItem.getFile().name()));
+			item.setIcon(getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
 		} else if (object instanceof FileSettingsItem settingsItem) {
 			setupBottomSheetItemForFile(item, settingsItem.getFile());
 		} else if (object instanceof AvoidRoadInfo avoidRoadInfo) {
@@ -375,6 +384,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (object instanceof OnlineRoutingEngine onlineRoutingEngine) {
 			item.setTitle(onlineRoutingEngine.getName(app));
 			item.setIcon(getIcon(R.drawable.ic_world_globe_dark, getItemIconColor(object)));
+		} else if (object instanceof SettingsItem settingsItem) {
+			item.setTitle(settingsItem.getPublicName(app));
 		}
 	}
 
@@ -465,7 +476,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			if (dataItem != null) {
 				return getTrackDescrForDataItem(dataItem);
 			}
-		} else if (appearanceInfo != null) {
+		} else if (appearanceInfo != null && appearanceInfo.totalDistance != null && appearanceInfo.wptPoints != null) {
 			String dist = OsmAndFormatter.getFormattedDistance(appearanceInfo.totalDistance, app);
 			String points = appearanceInfo.wptPoints + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
 			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, dist);

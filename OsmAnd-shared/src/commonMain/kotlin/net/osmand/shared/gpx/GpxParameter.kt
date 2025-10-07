@@ -88,23 +88,28 @@ enum class GpxParameter(
 		}
 	}
 
-	fun isAppearanceParameter(): Boolean = appearanceParameters.contains(this)
+	fun isAppearanceParameter(): Boolean = APPEARANCE_PARAMETERS.contains(this)
+
+	fun isGpxDirParameter(): Boolean = GPX_DIR_PARAMETERS.contains(this)
 
 	companion object {
-		private val appearanceParameters = listOf(
+
+		private val APPEARANCE_PARAMETERS = listOf(
 			COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS,
 			SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL,
 			TRACK_3D_LINE_POSITION_TYPE, TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE, COLOR_PALETTE
 		)
 
-		fun getAppearanceParameters(): List<GpxParameter> = appearanceParameters
-
-		fun getGpxDirParameters(): List<GpxParameter> {
-			val list = mutableListOf(
-				FILE_NAME, FILE_DIR, FILE_LAST_MODIFIED_TIME
-			)
-			list.addAll(getAppearanceParameters())
-			return list
+		private val GPX_DIR_PARAMETERS: List<GpxParameter> = buildList {
+			add(FILE_NAME)
+			add(FILE_DIR)
+			add(FILE_LAST_MODIFIED_TIME)
+			addAll(APPEARANCE_PARAMETERS)
+			add(APPEARANCE_LAST_MODIFIED_TIME)
 		}
+
+		fun getAppearanceParameters(): List<GpxParameter> = APPEARANCE_PARAMETERS
+
+		fun getGpxDirParameters(): List<GpxParameter> = GPX_DIR_PARAMETERS
 	}
 }

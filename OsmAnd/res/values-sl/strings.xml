@@ -4611,13 +4611,10 @@
     <string name="auto_backup_title">Samodejno varnostno kopiranje</string>
     <string name="av_notes_video_widget_desc">S tapanjem gradnika lahko začneš snemati videoposnetek.</string>
     <string name="av_notes_audio_widget_desc">S tapanjem gradnika lahko snemaš zvočni zapis.</string>
-    <string name="trip_recording_downhill_widget_desc">Prikazuje vsoto vseh spustov trenutnega posnetega potovanja.</string>
-    <string name="trip_recording_uphill_widget_desc">Prikazuje vsoto vseh vzponov trenutnega posnetega potovanja.</string>
     <string name="trip_recording_duration_widget_desc">Prikazuje trenutno zabeležen čas potovanja.</string>
     <string name="auto_25_chars_route_roundabout_kr">Izberi %1$d izvoz in drži se desne</string>
     <string name="shared_string_duplicate">Podvoji</string>
     <string name="av_notes_photo_widget_desc">S tapanjem gradnika lahko posnameš fotografijo.</string>
-    <string name="trip_recording_distance_widget_desc">Prikazuje trenutno zabeleženo razdaljo potovanja.</string>
     <string name="auto_backup_preference_desc">Android privzeto shranjuje varnostne kopije priljubljenih, žetonov zemljevidov in nastavitev OsmAnd, da jih lahko obnoviš v novih napravah ali po ponovni namestitvi. Ta varnostna kopija je omejena na 25 MB.
 \nKo uporabljaš storitev OsmAnd Cloud, lahko to po ponovni namestitvi povzroči nesporazume.</string>
     <string name="duplacate_widget_added_snackbar">Podvojeni gradnik je bil dodan na seznam.</string>

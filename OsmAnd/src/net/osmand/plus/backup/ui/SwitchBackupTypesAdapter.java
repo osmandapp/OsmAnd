@@ -51,10 +51,10 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 		TextView description = view.findViewById(R.id.description);
 		description.setText(getGroupSummary(category));
 
-		List<ExportType> selectedTypes = controller.getSelectedTypes(items.getTypes());
+		List<ExportType> selectedTypes = controller.getSelectedTypes(items.getVisibleTypes());
 		CompoundButton compoundButton = view.findViewById(R.id.switch_widget);
 		boolean available = controller.isBackupAvailable();
-		compoundButton.setChecked(available && selectedTypes.size() == items.getTypes().size());
+		compoundButton.setChecked(available && selectedTypes.size() == items.getVisibleTypes().size());
 		compoundButton.setEnabled(available);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 		View switchContainer = view.findViewById(R.id.switch_container);
@@ -85,7 +85,7 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 		ExportCategory category = controller.getCategory(groupPosition);
 		SettingsCategoryItems categoryItems = controller.getCategoryItems(category);
 
-		ExportType exportType = categoryItems.getTypes().get(childPosition);
+		ExportType exportType = categoryItems.getVisibleTypes().get(childPosition);
 		List<?> items = categoryItems.getItemsForType(exportType);
 		List<?> selectedItems = controller.getSelectedItemsOfType(exportType);
 
@@ -122,16 +122,16 @@ public class SwitchBackupTypesAdapter extends BackupTypesAdapter {
 	@NonNull
 	private String getGroupSummary(@NonNull ExportCategory category) {
 		SettingsCategoryItems items = controller.getCategoryItems(category);
-		List<ExportType> selectedTypes = controller.getSelectedTypes(items.getTypes());
+		List<ExportType> selectedTypes = controller.getSelectedTypes(items.getVisibleTypes());
 		long itemsSize = items.calculateSize(selectedTypes);
 
 		String description;
 		if (selectedTypes.isEmpty()) {
 			description = getString(R.string.shared_string_none);
-		} else if (selectedTypes.size() == items.getTypes().size()) {
+		} else if (selectedTypes.size() == items.getVisibleTypes().size()) {
 			description = getString(R.string.shared_string_all);
 		} else {
-			description = getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes.size()), String.valueOf(items.getTypes().size()));
+			description = getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes.size()), String.valueOf(items.getVisibleTypes().size()));
 		}
 		String formattedSize = AndroidUtils.formatSize(app, itemsSize);
 		return itemsSize == 0 ? description : getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);

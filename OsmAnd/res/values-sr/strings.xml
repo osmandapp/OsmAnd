@@ -599,7 +599,7 @@
     <string name="voice_provider">Гласовно навођење</string>
     <string name="monitoring_settings">Снимање путовања</string>
     <string name="monitoring_settings_descr">Подесите како снимати своја путовања.</string>
-    <string name="duration">Трајање</string>
+    <string name="duration">Trajanje</string>
     <string name="distance">Растојање</string>
     <string name="shared_string_all">Све</string>
     <string name="shared_string_waypoints">Пролазне тачке</string>
@@ -4412,16 +4412,13 @@
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Велико</string>
-    <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли обрисати групу \"%1$s\" и све придружене тачке (%2$d)?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>
     <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
     <string name="download_complete">Преузимање је завршено</string>
-    <string name="trip_recording_uphill_widget_desc">Приказује укупно све успоне на путу који се тренутно снима.</string>
     <string name="side_marker_eta">Процењено време доласка</string>
     <string name="true_bearing_wdiget_desc">Угао између правог Севера и циљане тачке гледано са Вашег положаја.</string>
     <string name="relative_bearing_widget_desc">Приказује угао између правца Вашег кретања и циљане тачке.</string>
-    <string name="trip_recording_distance_widget_desc">Приказује удаљеност тренутног пута.</string>
     <string name="lang_ckb">Средњекурдски</string>
     <string name="weather_offline_forecast">Ванмрежне временске прилике</string>
     <string name="shared_string_weather">Временске прилике</string>
@@ -5612,7 +5609,7 @@
     <string name="av_audio_sample_rate">Брзина узорковања звука</string>
     <string name="av_audio_sample_rate_descr">Изабери брзину узорковања звука.</string>
     <string name="connect_new_scanner">Повежи нови пријемник</string>
-    <string name="auto_zoom_3d_angle">Самостално приближавање просторног угла</string>
+    <string name="auto_zoom_3d_angle">Ауто зумирање 3Д угао</string>
     <string name="vehicle_metrics_recording_description">Изаберите параметре који ће бити снимљени у ГПКС фајлу.</string>
     <string name="shared_string_engine">Мотор</string>
     <string name="shared_string_interpolation">Интерполација</string>
@@ -5860,4 +5857,6 @@
     <string name="show_spherical_map">Прикажи сферичну мапу</string>
     <string name="show_spherical_map_description">Приказ сфероидног модела Земље</string>
     <string name="shared_string_price">Цена</string>
+    <string name="rendering_attr_showSkiSlopes_name">Прикажи скијашке стазе</string>
+    <string name="rendering_attr_showSkiSlopes_description">Приказати лаке ски стазе</string>
 </resources>

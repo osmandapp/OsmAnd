@@ -37,6 +37,7 @@ import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
+import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
@@ -198,6 +199,9 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				}
 				itemHolder.title.setText(groupName);
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_flag, activeColorRes));
+			} else if (currentItem instanceof GpxDirItem dirItem) {
+				itemHolder.title.setText(GpxHelper.INSTANCE.getGpxTitle(dirItem.getFile().name()));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 			}
 			itemHolder.divider.setVisibility(shouldShowDivider(position) ? View.VISIBLE : View.GONE);
 		}

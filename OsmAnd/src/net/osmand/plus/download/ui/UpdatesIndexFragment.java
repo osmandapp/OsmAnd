@@ -43,6 +43,7 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.BaseLocalItem;
@@ -115,11 +116,13 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	private void setupOnItemLongClickListener() {
 		getListView().setOnItemLongClickListener((parent, v, position, id) -> {
 			if (position > 0) {
-				IndexItem indexItem = (IndexItem) getListAdapter().getItem(position);
-				LocalItem localItem = indexItem.toLocalItem(app);
-				if (localItem != null) {
-					askShowContextMenu(v, indexItem, localItem);
-					return true;
+				DownloadItem downloadItem = (DownloadItem) getListAdapter().getItem(position);
+				if (downloadItem instanceof IndexItem indexItem) {
+					LocalItem localItem = indexItem.toLocalItem(app);
+					if (localItem != null) {
+						askShowContextMenu(v, indexItem, localItem);
+						return true;
+					}
 				}
 			}
 			return false;
@@ -151,14 +154,16 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	public void invalidateListView(@NonNull Context context) {
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getItemsToUpdate();
+		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate();
 
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
-		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, indexItems,
+		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, downloadItems,
 				!InAppPurchaseUtils.isLiveUpdatesAvailable(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
 		Collator collator = OsmAndCollator.primaryCollator();
-		listAdapter.sort((indexItem, indexItem2) -> collator.compare(indexItem.getVisibleName(app, osmandRegions),
-				indexItem2.getVisibleName(app, osmandRegions)));
+		listAdapter.sort((downloadItem1, downloadItem2) -> collator.compare(
+				downloadItem1.getVisibleName(app, osmandRegions),
+				downloadItem2.getVisibleName(app, osmandRegions)
+		));
 		setListAdapter(listAdapter);
 		updateErrorMessage();
 	}
@@ -168,8 +173,8 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getItemsToUpdate();
-		if (getListAdapter() != null && indexItems.isEmpty()) {
+		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate();
+		if (getListAdapter() != null && downloadItems.isEmpty()) {
 			errorMessage = getString(indexes.isDownloadedFromInternet
 					? R.string.everything_up_to_date
 					: R.string.no_index_file_to_download);
@@ -184,7 +189,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		if (view == null) return;
 
 		DownloadResources indexes = requireMyActivity().getDownloadThread().getIndexes();
-		List<IndexItem> indexItems = indexes.getItemsToUpdate();
+		List<IndexItem> indexItems = indexes.getIndividualItemsToUpdate();
 		TextView updateAllButton = view.findViewById(R.id.updateAllButton);
 		if (indexItems.isEmpty() || indexItems.get(0).getType() == null) {
 			if (!Algorithms.isEmpty(errorMessage)) {
@@ -254,7 +259,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 				}
 			});
 		} else {
-			IndexItem e = (IndexItem) getListAdapter().getItem(position);
+			DownloadItem e = (DownloadItem) getListAdapter().getItem(position);
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
 			OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
 			ls.onClick(v);
@@ -422,9 +427,9 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return (DownloadActivity) getActivity();
 	}
 
-	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {
+	private class UpdateIndexAdapter extends ArrayAdapter<DownloadItem> implements LocalIndexInfoAdapter {
 
-		private static final int INDEX_ITEM = 0;
+		private static final int DOWNLOAD_ITEM = 0;
 		private static final int OSM_LIVE_BANNER = 1;
 
 		private final List<LocalItem> localItems = new ArrayList<>();
@@ -442,12 +447,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			notifyDataSetChanged();
 		}
 
-		@Override
-		public void onDataUpdated() {
-
-		}
-
-		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean showSubscriptionPurchaseBanner) {
+		public UpdateIndexAdapter(Context context, int resource, List<DownloadItem> items, boolean showSubscriptionPurchaseBanner) {
 			super(context, resource, items);
 			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
 		}
@@ -462,7 +462,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 
 		@Override
-		public IndexItem getItem(int position) {
+		public DownloadItem getItem(int position) {
 			if (position == 0) {
 				return null;
 			} else {
@@ -471,7 +471,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 
 		@Override
-		public int getPosition(IndexItem item) {
+		public int getPosition(DownloadItem item) {
 			return super.getPosition(item) + 1;
 		}
 
@@ -482,7 +482,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 		@Override
 		public int getItemViewType(int position) {
-			return position == 0 ? OSM_LIVE_BANNER : INDEX_ITEM;
+			return position == 0 ? OSM_LIVE_BANNER : DOWNLOAD_ITEM;
 		}
 
 		@NonNull
@@ -491,7 +491,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			View view = convertView;
 			int viewType = getItemViewType(position);
 			if (view == null) {
-				if (viewType == INDEX_ITEM) {
+				if (viewType == DOWNLOAD_ITEM) {
 					view = inflate(R.layout.two_line_with_images_list_item, parent, false);
 					view.setTag(new ItemViewHolder(view, requireMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
@@ -529,20 +529,17 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 					}
 				}
 			}
-			if (viewType == INDEX_ITEM) {
-				IndexItem indexItem = Objects.requireNonNull(getItem(position));
+			if (viewType == DOWNLOAD_ITEM) {
+				DownloadItem downloadItem = Objects.requireNonNull(getItem(position));
 				ItemViewHolder holder = (ItemViewHolder) view.getTag();
 				holder.setShowRemoteDate(true);
 				holder.setShowTypeInDesc(true);
 				holder.setShowParentRegionName(true);
-				holder.bindDownloadItem(indexItem);
+				holder.setUpdatesMode(true);
+				holder.bindDownloadItem(downloadItem);
 			}
 			return view;
 		}
-	}
-
-	@Override
-	public void processFinish() {
 	}
 
 	@Override

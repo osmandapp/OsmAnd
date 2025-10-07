@@ -175,7 +175,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	private long size;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
-		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
+		super(app, FileUtils.getRelativeAppPath(app, file.getPath()));
 		this.file = file;
 		this.appPath = app.getAppPath(null);
 		String fileName = getFileName();

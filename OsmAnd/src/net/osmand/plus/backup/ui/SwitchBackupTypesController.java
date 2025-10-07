@@ -71,7 +71,7 @@ public abstract class SwitchBackupTypesController extends BaseBackupTypesControl
 	@Override
 	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
 		SettingsCategoryItems categoryItems = getCategoryItems(exportCategory);
-		List<ExportType> exportTypes = categoryItems.getTypes();
+		List<ExportType> exportTypes = categoryItems.getVisibleTypes();
 		applyTypesSelection(exportTypes, selected);
 	}
 

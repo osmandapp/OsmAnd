@@ -19,13 +19,26 @@ public class SettingsCategoryItems {
 		this.itemsMap = itemsMap;
 	}
 
+	@NonNull
 	public List<ExportType> getTypes() {
 		return new ArrayList<>(itemsMap.keySet());
 	}
 
+	@NonNull
+	public List<ExportType> getVisibleTypes() {
+		List<ExportType> types = new ArrayList<>();
+		for (ExportType type : getTypes()) {
+			if (!type.isHidden()) {
+				types.add(type);
+			}
+		}
+		return types;
+	}
+
+	@NonNull
 	public List<ExportType> getNotEmptyTypes() {
 		List<ExportType> notEmptyTypes = new ArrayList<>();
-		for (ExportType exportType : getTypes()) {
+		for (ExportType exportType : getVisibleTypes()) {
 			if (!Algorithms.isEmpty(itemsMap.get(exportType))) {
 				notEmptyTypes.add(exportType);
 			}
@@ -34,7 +47,7 @@ public class SettingsCategoryItems {
 	}
 
 	public long calculateSize() {
-		return calculateSize(getTypes());
+		return calculateSize(getVisibleTypes());
 	}
 
 	public long calculateSize(@NonNull Collection<ExportType> exportTypes) {

@@ -11,7 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
-import net.osmand.osm.OsmRouteType;
+import net.osmand.gpx.clickable.ClickableWayTags;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -78,12 +78,18 @@ public class NetworkRouteDrawable extends Drawable {
 	}
 
 	@Nullable
-	public static Drawable getIconByAmenityShieldTags(@NonNull Amenity amenity,
-	                                                  @NonNull OsmandApplication app, boolean nightMode) {
+	public static Drawable getIconByAmenityShieldTags(@NonNull Amenity amenity, @NonNull OsmandApplication app,
+	                                                  boolean nightMode, boolean isClickableWay) {
 		Map<String, String> shieldTags = new HashMap<>();
 		for (String tag : amenity.getAdditionalInfoKeys()) {
 			String value = amenity.getAdditionalInfo(tag);
 			shieldTags.put(tag, value);
+		}
+		if (isClickableWay) {
+			String color = ClickableWayTags.getGpxColorByTags(amenity.getOsmTags());
+			if (color != null) {
+				shieldTags.putAll(ClickableWayTags.getGpxShieldTags(color));
+			}
 		}
 		RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
 		if (shieldRouteKey != null) {

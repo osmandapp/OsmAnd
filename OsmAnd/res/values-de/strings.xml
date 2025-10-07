@@ -2139,7 +2139,7 @@
     <string name="shared_string_move">Verschieben</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
-    <string name="shared_string_time_span">Dauer</string>
+    <string name="shared_string_time_span">Zeitspanne</string>
     <string name="shared_string_max">Max.</string>
     <string name="shared_string_start_time">Startzeitpunkt</string>
     <string name="shared_string_end_time">Endzeitpunkt</string>
@@ -2788,7 +2788,7 @@
     <string name="quick_action_day_night_mode">%s Modus</string>
     <string name="routing_attr_avoid_sett_name">Keine Pflastersteine</string>
     <string name="routing_attr_avoid_sett_description">Vermeidet Pflastersteine</string>
-    <string name="shared_string_degrees">Grad</string>
+    <string name="shared_string_degrees">Grade</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkeleinheit</string>
     <string name="angular_measeurement_descr">Ändern, in welcher Einheit Azimut gemessen wird.</string>
@@ -4456,8 +4456,6 @@
     <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget kann ein Foto aufgenommen werden.</string>
     <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget kann ein Video aufgenommen werden.</string>
     <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget kann eine Audionotiz aufgenommen werden.</string>
-    <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
-    <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Ausgewiesene Mountainbikestrecken anzeigen.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farbschema der Tiefenlinien</string>
@@ -4473,7 +4471,6 @@
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
     <string name="compass_click_desc">Doppeltes Tippen auf die Kompass-Schaltfläche wechselt den Kartenausrichtungsmodus.</string>
     <string name="compass_desc">Zeigt Richtung Norden.</string>
-    <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
     <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
     <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
@@ -5908,4 +5905,6 @@
     <string name="show_spherical_map">Sphärische Karte anzeigen</string>
     <string name="show_spherical_map_description">Sphäroidisches Modell der Erde anzeigen</string>
     <string name="shared_string_price">Preis</string>
+    <string name="rendering_attr_showSkiSlopes_name">Skipisten anzeigen</string>
+    <string name="rendering_attr_showSkiSlopes_description">Einfache Skipisten anzeigen</string>
 </resources>

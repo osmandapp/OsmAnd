@@ -4478,7 +4478,6 @@
     <string name="ant_missing_dependency_descr">Neuspešno pronalaženje odgovarajuće službe \"%1$s\"\nTreba da ugradiš ili osvežiš ANT + službu priključaka \nDa li želiš da pokreneš skladište igara za to?</string>
     <string name="worldwide_maps">Mape sveta</string>
     <string name="favorite_delete_group">Obriši grupu</string>
-    <string name="trip_recording_uphill_widget_desc">Prikazuje ukupno sve uspone na putu koji se trenutno snima.</string>
     <string name="map_settings_weather_wind">Vetar</string>
     <string name="shared_string_time_left">Preostalo vreme</string>
     <string name="checking_progress">Proveravam…</string>
@@ -4820,7 +4819,6 @@
     <string name="check_for_updates">Proveri osveženja</string>
     <string name="download_cloud_version">Preuzmi izdanje iz Cloud-a</string>
     <string name="shared_string_do_not_exist">Ne postoji</string>
-    <string name="trip_recording_downhill_widget_desc">Prikazuje ukupno sve nizbrdice na putu koji se trenutno snima.</string>
     <string name="time_to_destination_widget_desc">Ova vidžet prikazuje \"Vreme pristizanja\" ili \"Preostalo vreme\" na poslednjoj dolaznoj tački. Vreme se stalno osvežava prilikom navođenja i jednako je vremenu rute iz trenutne lokacije.</string>
     <string name="time_to_intermediate_widget_desc">Vidžet prikazuje \"Vreme pristizanja\" ili \"Preostalo vreme\" na prvom međuodredištu. Vreme se stalno osvežava prilikom navođenja, a kada se prolazne tačke prođu, vreme će biti osveženo na sledećoj prolaznoj tački.</string>
     <string name="marker_2nd">Sledeći marker</string>
@@ -5066,7 +5064,6 @@
 \nPrilikom korišćenja OsmAnd Cloud, ovo može odvesti do nerazumevanja nakon ponovne ugradnje.</string>
     <string name="shared_string_duplicate">Dupliraj</string>
     <string name="av_notes_audio_widget_desc">Tapni na vidžet za snimanje zvučne beleške.</string>
-    <string name="trip_recording_distance_widget_desc">Prikazuje ukupnu daljinu puta.</string>
     <string name="true_bearing_wdiget_desc">Ugao između pravog severa i ciljne tačke gledano sa tvoje lokacije.</string>
     <string name="sound_beep_minimal">Bip: najtiši</string>
     <string name="tripltek_promo_description">Besplatan pristup funkcijama, uključujući i neograničeno preuzimanja mapa, 3D teren i sl. za %1$s mesečno</string>
@@ -5614,7 +5611,7 @@
     <string name="av_audio_sample_rate">Brzina uzorkovanja zvuka</string>
     <string name="av_audio_sample_rate_descr">Izaberi brzinu uzorkovanja zvuka.</string>
     <string name="connect_new_scanner">Poveži novi skener</string>
-    <string name="auto_zoom_3d_angle">Auto zum 3D ugao</string>
+    <string name="auto_zoom_3d_angle">Auto zumiranje 3D ugao</string>
     <string name="vehicle_metrics_recording_description">Izaberite parametre koji će biti snimljeni u GPX fajlu.</string>
     <string name="shared_string_engine">Motor</string>
     <string name="location_interpolation_percent">Procenat interpolacije pozicije</string>
@@ -5862,4 +5859,6 @@
     <string name="show_spherical_map_description">Prikaz sferoidnog modela Zemlje</string>
     <string name="show_spherical_map">Prikaži sferičnu mapu</string>
     <string name="shared_string_price">Cena</string>
+    <string name="rendering_attr_showSkiSlopes_name">Prikaži skijaške staze</string>
+    <string name="rendering_attr_showSkiSlopes_description">Pokazati lake ski staze</string>
 </resources>

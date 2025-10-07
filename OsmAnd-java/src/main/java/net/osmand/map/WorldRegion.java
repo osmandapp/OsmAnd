@@ -158,6 +158,20 @@ public class WorldRegion implements Serializable {
 		}
 	}
 
+	public WorldRegion getCountryRegion() {
+		WorldRegion region = this;
+		while (region != null) {
+			WorldRegion parent = region.getSuperregion();
+			// If the parent exists and is a continent, the current region is a country
+			if (parent != null && parent.isContinent()) {
+				return region;
+			}
+			region = parent;
+		}
+		// If we reached the top without finding a country, return null
+		return null;
+	}
+
 	public List<WorldRegion> getSubregions() {
 		return subregions;
 	}

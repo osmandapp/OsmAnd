@@ -16,6 +16,7 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,8 +39,8 @@ public class ImportedSettingsItemsAdapter extends
 		this.itemsMap = itemsMap;
 		this.nightMode = nightMode;
 		this.listener = listener;
-		uiUtils = app.getUIUtilities();
-		itemsTypes = new ArrayList<>(itemsMap.keySet());
+		this.uiUtils = app.getUIUtilities();
+		this.itemsTypes = CollectionUtils.filterElementsWithCondition(itemsMap.keySet(), type -> !type.isHidden());
 		Collections.sort(itemsTypes);
 	}
 
@@ -176,12 +177,16 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_folder_favorites, activeColorRes));
 				holder.title.setText(R.string.favorites_backup);
 				break;
+			case GPX_DIR:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_polygom_dark, activeColorRes));
+				holder.title.setText(R.string.track_folder_appearance);
+				break;
 		}
 	}
 
 	@Override
 	public int getItemCount() {
-		return itemsMap.keySet().size();
+		return itemsTypes.size();
 	}
 
 	public static class ItemViewHolder extends RecyclerView.ViewHolder {

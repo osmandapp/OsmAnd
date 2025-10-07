@@ -52,4 +52,8 @@ interface IExportType {
 	@Nullable
 	Class<? extends OsmandPlugin> getRelatedPluginClass();
 
+	@Nullable
+	default ExportType getAdditionalExportType() {
+		return null;
+	}
 }

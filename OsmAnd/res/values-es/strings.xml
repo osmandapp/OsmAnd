@@ -4325,10 +4325,8 @@
     <string name="shared_string_only_missing">Solo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
     <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y mantente a la izquierda</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar una nota de voz.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
     <string name="calculate_online_altitude_descr">Calcula la elevación en línea desde los servidores de OsmAnd, basándose en las imágenes de satélite y en los modelos digitales de elevación. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="co2_mission">Emisión de CO2</string>
@@ -4382,7 +4380,6 @@
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
     <string name="rotate_map_manual_opt">Rotación manual</string>
-    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
