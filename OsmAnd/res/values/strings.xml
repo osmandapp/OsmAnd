@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="update_maps">Update maps</string>
     <string name="rendering_attr_showSkiSlopes_name">Show ski slopes</string>
     <string name="rendering_attr_showSkiSlopes_description">Show simplified ski slopes</string>
     <string name="shared_string_price">Price</string>
