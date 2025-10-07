@@ -161,10 +161,10 @@ public class GpxAppearanceInfo {
 		if (trackVisualizationType != null) {
 			writeParam(json, TAG_LINE_3D_VISUALIZATION_BY_TYPE, trackVisualizationType.getTypeName());
 		}
-		if (trackVisualizationType != null) {
+		if (trackWallColorType != null) {
 			writeParam(json, TAG_LINE_3D_VISUALIZATION_WALL_COLOR_TYPE, trackWallColorType.getTypeName());
 		}
-		if (trackVisualizationType != null) {
+		if (trackLinePositionType != null) {
 			writeParam(json, TAG_LINE_3D_VISUALIZATION_POSITION_TYPE, trackLinePositionType.getTypeName());
 		}
 		writeParam(json, TAG_VERTICAL_EXAGGERATION_SCALE, verticalExaggeration);
