@@ -1271,20 +1271,12 @@ public class MapRenderRepositories {
 			return LanguagePreference.LocalizedAndNative;
 		}
 		
-		if (showLocal && transliterate) {
-			return LanguagePreference.NativeAndLocalizedOrTransliterated;
-		}
-		
-		if (!showLocal && transliterate) {
+		if (showLocal) {
 			return LanguagePreference.LocalizedOrTransliteratedAndNative;
 		}
-		
-		if (transliterate && !showLocal) {
-			return LanguagePreference.LocalizedOrTransliterated;
-		}
-		
-		return LanguagePreference.LocalizedOrNative;
-	}
+
+        return LanguagePreference.LocalizedOrTransliterated;
+    }
 
 	public static boolean useAppLocaleForMap(@NonNull OsmandApplication app, int zoom) {
 		boolean replaceLocalNamesToAppLocale = zoom <= REPLACE_LOCAL_NAMES_MAX_ZOOM;

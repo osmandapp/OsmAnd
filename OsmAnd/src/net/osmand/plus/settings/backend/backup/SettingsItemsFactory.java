@@ -5,29 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.DataSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.DownloadsItem;
-import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
-import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.MarkersSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.NavigationHistorySettingsItem;
-import net.osmand.plus.settings.backend.backup.items.OnlineRoutingSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.OsmEditsSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.ResourcesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.backend.backup.items.SuggestedDownloadsItem;
+import net.osmand.plus.settings.backend.backup.items.*;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -179,6 +157,9 @@ public class SettingsItemsFactory {
 				break;
 			case GPX:
 				item = new GpxSettingsItem(app, json);
+				break;
+			case GPX_DIR:
+				item = new GpxDirSettingsItem(app, json);
 				break;
 			case ONLINE_ROUTING_ENGINES:
 				item = new OnlineRoutingSettingsItem(app, json);

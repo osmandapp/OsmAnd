@@ -39,7 +39,7 @@ public class VersionHistoryController extends SwitchBackupTypesController {
 	@NonNull
 	protected Map<ExportType, List<?>> collectSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
-		for (ExportType exportType : ExportType.values()) {
+		for (ExportType exportType : ExportType.visibleValues()) {
 			if (backupHelper.getVersionHistoryTypePref(exportType).get()) {
 				selectedItemsMap.put(exportType, getItemsForType(exportType));
 			}

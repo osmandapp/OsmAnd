@@ -450,6 +450,11 @@ public class FileUtils {
 		return new File(backupDir, fileName);
 	}
 
+	@NonNull
+	public static String getRelativeAppPath(@NonNull OsmandApplication app, @NonNull String path) {
+		return path.replace(app.getAppPath().getPath(), "");
+	}
+
 	public static boolean isProbablyDir(@NonNull File file) {
 		return file.exists() ? file.isDirectory() : file.getPath().endsWith("/") || !file.getName().contains(".");
 	}

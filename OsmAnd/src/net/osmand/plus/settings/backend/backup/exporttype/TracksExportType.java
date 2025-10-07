@@ -3,7 +3,6 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
@@ -13,6 +12,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxDataItem;
 
 import java.io.File;
@@ -80,5 +80,11 @@ class TracksExportType extends AbstractFileExportType {
 	@Override
 	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return null;
+	}
+
+	@Nullable
+	@Override
+	public ExportType getAdditionalExportType() {
+		return ExportType.GPX_DIR;
 	}
 }

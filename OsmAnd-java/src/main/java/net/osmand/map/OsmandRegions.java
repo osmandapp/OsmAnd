@@ -479,12 +479,16 @@ public class OsmandRegions {
 		}
 	}
 
-
 	public WorldRegion getRegionData(String fullName) {
 		if (WorldRegion.WORLD.equals(fullName)) {
 			return worldRegion;
 		}
 		return fullNamesToRegionData.get(fullName);
+	}
+
+	public WorldRegion getCountryRegionDataByDownloadName(String downloadName) {
+		WorldRegion region = getRegionDataByDownloadName(downloadName);
+		return region != null ? region.getCountryRegion() : null;
 	}
 
 	public WorldRegion getRegionDataByDownloadName(String downloadName) {
@@ -613,10 +617,11 @@ public class OsmandRegions {
 		while (it.hasNext()) {
 			it.advance();
 			TagValuePair tp = mi.decodeType(it.key());
-			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")) {
+			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")
+					|| tp.tag.startsWith("alt_name") || tp.tag.startsWith("short_name")
+					|| tp.tag.equals("name:abbreviation") || tp.tag.equals("ref")) {
 				final String vl = it.value().toLowerCase();
-//				if (!CollatorStringMatcher.ccontains(clt, ind.toString(), vl)) {
-				if (ind.indexOf(vl) == -1) {
+				if (ind.indexOf(vl) == -1 || tp.tag.equals("ref")) {
 					ind.append(" ").append(vl);
 				}
 			}

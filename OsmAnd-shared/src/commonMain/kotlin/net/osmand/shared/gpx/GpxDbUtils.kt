@@ -16,6 +16,7 @@ object GpxDbUtils {
 	private const val GPX_TABLE_INDEX = "indexNameDir"
 	private const val GPX_DIR_TABLE_INDEX = "gpxDirIndexNameDir"
 	private const val GPX_APPEARANCE_TRIGGER = "triggerGpxAppearanceLastModified"
+	private const val GPX_DIR_APPEARANCE_TRIGGER = "triggerGpxDirAppearanceLastModified"
 
 	fun getCreateGpxTableQuery(): String {
 		return getCreateTableQuery(GpxParameter.entries, GPX_TABLE_NAME)
@@ -84,7 +85,8 @@ object GpxDbUtils {
 		db.execSQL(getGpxIndexQuery())
 		db.execSQL(getCreateGpxDirTableQuery())
 		db.execSQL(getGpxDirIndexQuery())
-		db.execSQL(getCreateAppearanceTriggerQuery())
+		db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER))
+		db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER))
 	}
 
 	fun onUpgrade(database: GpxDatabase, db: SQLiteConnection, oldVersion: Int, newVersion: Int) {
@@ -206,7 +208,10 @@ object GpxDbUtils {
 			}
 		}
 		if (oldVersion < 31) {
-			db.execSQL(getCreateAppearanceTriggerQuery())
+			db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER))
+		}
+		if (oldVersion < 33) {
+			db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER))
 		}
 	}
 
@@ -306,7 +311,7 @@ object GpxDbUtils {
 		return (GpxDatabase.DB_VERSION shl 10) + analysisVersion
 	}
 
-	private fun getCreateAppearanceTriggerQuery(): String {
+	private fun getCreateAppearanceTriggerQuery(tableName: String, triggerName: String): String {
 		val stampColumn = GpxParameter.APPEARANCE_LAST_MODIFIED_TIME.columnName
 		val appearance = GpxParameter.getAppearanceParameters()
 		val columnNames  = appearance.joinToString(", ") { it.columnName }
@@ -314,12 +319,12 @@ object GpxDbUtils {
 			"OLD.${it.columnName} IS NOT NEW.${it.columnName}"
 		}
 		val sb = StringBuilder()
-		sb.appendLine("CREATE TRIGGER IF NOT EXISTS $GPX_APPEARANCE_TRIGGER")
-		sb.appendLine("AFTER UPDATE OF $columnNames ON $GPX_TABLE_NAME")
+		sb.appendLine("CREATE TRIGGER IF NOT EXISTS $triggerName")
+		sb.appendLine("AFTER UPDATE OF $columnNames ON $tableName")
 		sb.appendLine("FOR EACH ROW")
 		sb.appendLine("WHEN $changeCondition")
 		sb.appendLine("BEGIN")
-		sb.appendLine("UPDATE $GPX_TABLE_NAME")
+		sb.appendLine("UPDATE $tableName")
 		sb.appendLine("SET $stampColumn = CAST(strftime('%s','now') AS INTEGER) * 1000")
 		sb.appendLine("WHERE rowid = NEW.rowid;")
 		sb.append("END;")

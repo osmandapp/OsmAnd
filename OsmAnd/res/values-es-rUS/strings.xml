@@ -4367,10 +4367,7 @@
     <string name="av_notes_photo_widget_desc">Pulsa el widget para fotografiar.</string>
     <string name="av_notes_video_widget_desc">Pulsa el widget para grabar un video.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar una nota de voz.</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
-    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
     <string name="second_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>

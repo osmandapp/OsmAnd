@@ -599,7 +599,7 @@
     <string name="voice_provider">Гласовно навођење</string>
     <string name="monitoring_settings">Снимање путовања</string>
     <string name="monitoring_settings_descr">Подесите како снимати своја путовања.</string>
-    <string name="duration">Трајање</string>
+    <string name="duration">Trajanje</string>
     <string name="distance">Растојање</string>
     <string name="shared_string_all">Све</string>
     <string name="shared_string_waypoints">Пролазне тачке</string>
@@ -3978,7 +3978,7 @@
     <string name="cancel_anytime_in_amazon_app">Откажите било када кроз програм Амазон</string>
     <string name="amz_manage_subscription_descr">Управљајте својом претплатом користећи програм Амазон или странице веба Амазона.</string>
     <string name="empty_category_name">Име врсте је празно</string>
-    <string name="no_activity_for_intent">Уградите програм који може да изведе ову радњу.</string>
+    <string name="no_activity_for_intent">Инсталирајте апликацију која може да изведе ову радњу.</string>
     <string name="no_items_of_type_message">Немате ни једну ставку ове врсте</string>
     <string name="routeInfo_tracktype_description">Обојите путању или линију трага према саставу површине. Обично се примењује када је путна мрежа углавном непресвучена.</string>
     <string name="backup_deleting_all_data">Бришем све податке…</string>
@@ -4159,7 +4159,7 @@
     <string name="navigate_point_format_swiss_grid">Швајцарска мрежа (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Швајцарска мрежа (CH1903+)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Сличице при малом увећању</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Шематски приказ сличица при малом приближавању</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Шематски приказ икона на ниским нивоима зумирања за оне ТОИ које се обично не приказују</string>
     <string name="always_ask_waypoint_appearance_description">Додиром на ову радњу отвориће се заслон \"Додај пролазну тачку\", где можете променити име и појаву.</string>
     <string name="shared_string_open_street_map">ОпенСтритМап</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Ознаке поправке</string>
@@ -4412,16 +4412,13 @@
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Велико</string>
-    <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли обрисати групу \"%1$s\" и све придружене тачке (%2$d)?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>
     <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
     <string name="download_complete">Преузимање је завршено</string>
-    <string name="trip_recording_uphill_widget_desc">Приказује укупно све успоне на путу који се тренутно снима.</string>
     <string name="side_marker_eta">Процењено време доласка</string>
     <string name="true_bearing_wdiget_desc">Угао између правог Севера и циљане тачке гледано са Вашег положаја.</string>
     <string name="relative_bearing_widget_desc">Приказује угао између правца Вашег кретања и циљане тачке.</string>
-    <string name="trip_recording_distance_widget_desc">Приказује удаљеност тренутног пута.</string>
     <string name="lang_ckb">Средњекурдски</string>
     <string name="weather_offline_forecast">Ванмрежне временске прилике</string>
     <string name="shared_string_weather">Временске прилике</string>
@@ -5280,18 +5277,18 @@
     <string name="travel_topics">Предмети путовања</string>
     <string name="play_weather_forecast">Пусти временске прилике</string>
     <string name="change_terrain_color_scheme">Промена обрасца боја тла</string>
-    <string name="clear_all_key_shortcuts_summary">Сва додељења дугмади за изабрану врсту ће бити уклоњена.</string>
-    <string name="no_assigned_keys_desc">Изаберите дејство и доделите дугме додиром на дугме „Додај“.</string>
-    <string name="new_key_assignment">Ново додељење дугмади</string>
+    <string name="clear_all_key_shortcuts_summary">Сва додељења тастера за изабрани тип ће бити уклоњена.</string>
+    <string name="no_assigned_keys_desc">Изаберите акцију и доделите тастер додиром на дугме „Додај“.</string>
+    <string name="new_key_assignment">Ново додељење тастера</string>
     <string name="key_name_pattern">Дугме \"%1$s\"</string>
-    <string name="key_assignment_add_key">Додај дугме</string>
-    <string name="no_assigned_keys">Нема додељених дугмади</string>
+    <string name="key_assignment_add_key">Додај тастер</string>
+    <string name="no_assigned_keys">Нема додељених тастера</string>
     <string name="shared_string_key">Дугме</string>
     <string name="wall_height">Висина зида</string>
-    <string name="clear_all_key_shortcuts">Уклони све пречице дугмади</string>
+    <string name="clear_all_key_shortcuts">Уклони све пречице тастера</string>
     <string name="rendering_value_dark_orange_name">Тамно поморанџаста</string>
     <string name="clear_key_assignment_summary">Додељивање дугмади за изабрано дејство ће бити обрисано.</string>
-    <string name="key_assignment_add_action">Додај дејство</string>
+    <string name="key_assignment_add_action">Додај акцију</string>
     <string name="assigned_keys">Додељена дугмад</string>
     <string name="action_icon">Сличица дејства</string>
     <string name="user_palette">Кориснички образац боја</string>
@@ -5307,8 +5304,8 @@
     <string name="daynight_mode_day_summary">Увек приказује мапу у светлој теми, идеално за видљивост током дана.</string>
     <string name="daynight_mode_app_theme">Тема програма</string>
     <string name="key_event_action_continuous_zoom_out">Непрекидно умањење</string>
-    <string name="remove_key_assignment_summary">Додељивање дугмади за изабрану радњу ће бити уклоњено.</string>
-    <string name="remove_key_assignment">Уклони додељивање дугмади</string>
+    <string name="remove_key_assignment_summary">Додељивање тастера за изабрану радњу ће бити уклоњено.</string>
+    <string name="remove_key_assignment">Уклони додељивање тастера</string>
     <string name="daynight_mode_app_theme_summary">Приказ мапе је у складу са општом темом апликације — дневни режим за светлу тему и ноћни режим за тамну тему</string>
     <string name="key_event_action_continuous_zoom_in">Непрекидно увећање</string>
     <string name="weather_data_sources_prompt">ОсмАнд пружа податке временских прилика из два извора:</string>
@@ -5612,7 +5609,7 @@
     <string name="av_audio_sample_rate">Брзина узорковања звука</string>
     <string name="av_audio_sample_rate_descr">Изабери брзину узорковања звука.</string>
     <string name="connect_new_scanner">Повежи нови пријемник</string>
-    <string name="auto_zoom_3d_angle">Самостално приближавање просторног угла</string>
+    <string name="auto_zoom_3d_angle">Ауто зумирање 3Д угао</string>
     <string name="vehicle_metrics_recording_description">Изаберите параметре који ће бити снимљени у ГПКС фајлу.</string>
     <string name="shared_string_engine">Мотор</string>
     <string name="shared_string_interpolation">Интерполација</string>
@@ -5859,4 +5856,7 @@
     <string name="accessibility_independent_features">Независне карактеристике</string>
     <string name="show_spherical_map">Прикажи сферичну мапу</string>
     <string name="show_spherical_map_description">Приказ сфероидног модела Земље</string>
+    <string name="shared_string_price">Цена</string>
+    <string name="rendering_attr_showSkiSlopes_name">Прикажи скијашке стазе</string>
+    <string name="rendering_attr_showSkiSlopes_description">Приказати лаке ски стазе</string>
 </resources>

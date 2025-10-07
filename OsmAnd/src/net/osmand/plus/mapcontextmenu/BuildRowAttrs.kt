@@ -8,7 +8,7 @@ class BuildRowAttrs private constructor(
     val iconId: Int,
     val buttonText: String?,
     val textPrefix: String?,
-    val text: String,
+    val text: String?,
     val secondaryText: String?,
     val textColor: Int,
     val isCollapsable: Boolean,
@@ -22,7 +22,7 @@ class BuildRowAttrs private constructor(
     val isMatchWithDivider: Boolean
 ) {
     class Builder {
-        private lateinit var text: String
+        private var text: String? = null
         private var icon: Drawable? = null
         private var iconId: Int = 0
         private var buttonText: String? = null
@@ -39,7 +39,7 @@ class BuildRowAttrs private constructor(
         private var onClickListener: OnClickListener? = null
         private var matchWithDivider: Boolean = false
 
-        fun setText(v: String) = apply { text = v }
+        fun setText(v: String?) = apply { text = v }
         fun setIcon(v: Drawable?) = apply { icon = v }
         fun setIconId(v: Int) = apply { iconId = v }
         fun setButtonText(v: String?) = apply { buttonText = v }

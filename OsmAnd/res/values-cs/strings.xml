@@ -1262,7 +1262,7 @@
 \nDalší informace naleznete na adrese %1$s.</string>
     <string name="record_plugin_name">Záznam cesty</string>
     <string name="int_hour">h</string>
-    <string name="duration">Trvání</string>
+    <string name="duration">Délka</string>
     <string name="distance">Vzdálenost</string>
     <string name="index_tours">Cesty</string>
     <string name="shared_string_all">Všechny</string>
@@ -3935,7 +3935,7 @@
     <string name="icon_group_nautical">Plavební</string>
     <string name="routeInfo_roadClass_description">Obarvit čáru trasy nebo stopy podle klasifikace cesty.</string>
     <string name="no_items_of_type_message">Nemáte žádné položky tohoto typu</string>
-    <string name="no_activity_for_intent">Nainstalujte aplikaci, která může vykonat tuto akci.</string>
+    <string name="no_activity_for_intent">Nainstalujte si aplikaci, která dokáže provést tuto akci.</string>
     <string name="empty_category_name">Prázdný název kategorie</string>
     <string name="reset_to_original">Resetovat do původního stavu</string>
     <string name="attribute">Atribut</string>
@@ -4184,7 +4184,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Značky poznámek</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Zobrazit značky poznámek</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony při malém přiblížení</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazení ikon při malém přiblížení</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazení ikon při malých úrovních přiblížení pro body zájmu, které nejsou obvykle zobrazeny</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Zvýšit viditelnost tunelů vodních cest</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Zvýšit viditelnost tunelů vodních cest</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -4451,7 +4451,6 @@
     <string name="transport_hazmat_yes_desc">Vyberte příslušnou kategorii.</string>
     <string name="routing_attr_hazmat_category_name">Kategorie nebezpečného nákladu</string>
     <string name="transport_hazmat_no_desc">Silnice a tunely mohou omezovat přepravu nebezpečných materiálů.</string>
-    <string name="trip_recording_downhill_widget_desc">Zobrazuje součet všech klesání aktuálně zaznamenané jízdy.</string>
     <string name="distance_to_intermediate_widget_desc">Widget zobrazuje vzdálenost, která zbývá do prvního mezilehlého bodu. Po překročení mezilehlých bodů se vzdálenost aktualizuje k dalšímu mezilehlému bodu.</string>
     <string name="shared_string_large">Velký</string>
     <string name="auto_25_chars_route_tr_kr">Zahněte vpravo a držte se vpravo</string>
@@ -4573,8 +4572,6 @@
     <string name="auto_25_chars_route_roundabout_kl">Použijte %1$d. výjezd a držte se vlevo</string>
     <string name="duplacate_widget_added_snackbar">Do seznamu se přidává duplicitní nástroj.</string>
     <string name="av_notes_audio_widget_desc">Klepnutím na nástroj můžete pořídit zvukovou poznámku.</string>
-    <string name="trip_recording_uphill_widget_desc">Zobrazuje součet všech stoupání aktuálně zaznamenané cesty.</string>
-    <string name="trip_recording_distance_widget_desc">Zobrazuje aktuálně zaznamenanou vzdálenost jízdy.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Barevné schéma hloubkových vrstevnic</string>
     <string name="next_turn_widget_desc">Nástroj zobrazuje informace o příštím odbočení s obrázkem manévru a vzdáleností k němu.</string>
     <string name="widget_with_dot">Nástroj.</string>
@@ -5350,7 +5347,7 @@
     <string name="change_default_tracks_appearance_confirmation">Použít změny na stávající stopy ve složce, nebo pouze na nové?</string>
     <string name="backup_error_failed_to_transfer_file">Přenos souborů v cloudu se nezdařil.</string>
     <string name="contact_support_retry">Zkuste to znovu nebo kontaktujte podporu</string>
-    <string name="clear_all_key_shortcuts_summary">Všechna přiřazení kláves pro vybraný typ budou odstraněna.</string>
+    <string name="clear_all_key_shortcuts_summary">Všechny přiřazené klávesy pro vybraný typ budou odstraněny.</string>
     <string name="no_assigned_keys">Žádné přiřazené klávesy</string>
     <string name="action_icon">Ikona akce</string>
     <string name="assigned_keys">Přiřazené klávesy</string>
@@ -5367,7 +5364,7 @@
     <string name="gpx_approximation_geo_java">Na základě geometrie (Java, rychlé)</string>
     <string name="key_name_pattern">Klávesa \"%1$s\"</string>
     <string name="key_assignment_add_action">Přidat akci</string>
-    <string name="new_key_assignment">Nové přiřazení kláves</string>
+    <string name="new_key_assignment">Přiřazení nové klávesy</string>
     <string name="top_and_bottom">Nahoře a dole</string>
     <string name="wall_color">Barva zdi</string>
     <string name="use_nearby_roads">Použít blízké cesty</string>
@@ -5399,8 +5396,8 @@
     <string name="route_line_use_coloring_altitude">Linie trasy je barevně odlišena podle nadmořské výšky.</string>
     <string name="key_event_action_continuous_zoom_out">Plynulé oddálení</string>
     <string name="key_event_action_continuous_zoom_in">Plynulé přiblížení</string>
-    <string name="remove_key_assignment_summary">Přiřazení kláves pro vybranou akci bude odstraněno.</string>
-    <string name="remove_key_assignment">Odstranit přiřazení kláves</string>
+    <string name="remove_key_assignment_summary">Přiřazení klávesy pro vybranou akci bude odstraněno.</string>
+    <string name="remove_key_assignment">Odstranit přiřazení klávesy</string>
     <string name="explore_3d_track_description">Prozkoumejte trať v interaktivním 3D! Vizualizujte výšku, rychlost a další údaje přímo na mapě.</string>
     <string name="tomorrow">Zítra</string>
     <string name="disable_map_layers">Vypnout mapové vrstvy</string>
@@ -5877,4 +5874,7 @@
     <string name="lang_en_barebones">Angličtina (základní)</string>
     <string name="show_spherical_map">Zobrazit sférickou mapu</string>
     <string name="show_spherical_map_description">Zobrazit sférický model Země</string>
+    <string name="shared_string_price">Cena</string>
+    <string name="rendering_attr_showSkiSlopes_name">Zobrazit sjezdovky</string>
+    <string name="rendering_attr_showSkiSlopes_description">Zobrazit zjednodušené sjezdovky</string>
 </resources>

@@ -2,6 +2,8 @@ package net.osmand.binary;
 
 import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
 import static net.osmand.render.RenderingRulesStorage.POLYGON_RULES;
+import static net.osmand.util.MapUtils.get31LatitudeY;
+import static net.osmand.util.MapUtils.get31LongitudeX;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
@@ -13,6 +15,7 @@ import java.util.Map;
 
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.LatLon;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -391,6 +394,10 @@ public class BinaryMapDataObject {
 		int average = l << (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
 		int label31Y = (average + this.labelY) << LABEL_SHIFT;
 		return label31Y;
+	}
+	
+	public LatLon getLabelLatLon() {
+		return new LatLon(get31LatitudeY(getLabelY()), get31LongitudeX(getLabelX()));
 	}
 
 	public int[] getCoordinates() {

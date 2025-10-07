@@ -2981,7 +2981,6 @@
     <string name="shared_string_cross_buy">Trascheannach</string>
     <string name="ant_missing_dependency">Spleáchas ar Iarraidh</string>
     <string name="shared_string_only_missing">Ar iarraidh amháin</string>
-    <string name="trip_recording_downhill_widget_desc">Taispeánann seo suim gach sliocht den turas atá taifeadta faoi láthair.</string>
     <string name="average_speed_widget_desc">Taispeánann seo meánluas an turais reatha.</string>
     <string name="rendering_attr_horseScale_name">Deacracht na gcosán capall</string>
     <string name="osm_carto_render_descr">Cosúil le stíl OpenStreetMap-carto a úsáidtear ar phríomhshuíomh OSM</string>
@@ -4314,7 +4313,6 @@
     <string name="voice_is_not_available_title">Roghnaigh pacáiste pras gutha</string>
     <string name="searchpoi_activity">Roghnaigh POI</string>
     <string name="navigate_point_format_DMS">DDD MM SS. S</string>
-    <string name="trip_recording_distance_widget_desc">Taispeánann seo an t-achar turais atá taifeadta faoi láthair.</string>
     <string name="analytics_pref_title">Anailísíocht</string>
     <string name="price_and_discount">%1$s • Sábháil%2$s</string>
     <string name="turn_screen_on_sensor_descr">Casfaidh do lámh trasna an scáileáin air.</string>
@@ -4678,7 +4676,7 @@
     <string name="quick_action_add_route_descr">Cnaipe chun bealach a thosú ó lár an scáileáin.</string>
     <string name="rendering_attr_seabedDetail_name">Sonraí ghrinneall na farraige</string>
     <string name="rendering_attr_seabedDetail_description">Eolas téacs breise ar ghrinneall na farraige surface_qualification, cineálacha dromchla comhcheangailte, catagóir agus tacsón fiailí nó seagrass</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Taispeáint scéimreach deilbhíní ag zúmálacha ísle</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Léiriú scéimeach ar dheilbhíní ag leibhéil súmála ísle do na POIanna sin nach dtaispeántar de ghnáth</string>
     <string name="turn_arrows_descr">Roghnaigh cé acu a léirítear saigheada cas ar líne an bhealaigh.</string>
     <string name="migration_files_present">%1$d comhad(í) (%2$s) atá ann cheana féin ag an sprioc \'%3$s\' agus gan é a fhorscríobh.</string>
     <string name="memory_allocated_for_routing">Cuimhne leithdháilte le haghaidh ródú</string>
@@ -4830,7 +4828,6 @@
     <string name="downward_gradient">Grádán síos</string>
     <string name="reset_key_assignments">Athshocraigh tascanna eochracha</string>
     <string name="searching_matching_tracks">Cuardaigh gach rian meaitseála</string>
-    <string name="trip_recording_uphill_widget_desc">Taispeánann sé suim na ndreapadóirí go léir ar an turas atá taifeadta faoi láthair.</string>
     <string name="true_bearing_wdiget_desc">Uillinn idir fíor-thuaidh agus an spriocphointe a breathnaíodh ó do shuíomh.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Scéim dathanna línte comhrianta doimhneachta</string>
     <string name="explore_plans">Déan iniúchadh ar Phleananna</string>
@@ -5692,4 +5689,7 @@
     <string name="accessibility_independent_features">Gnéithe neamhspleácha</string>
     <string name="show_spherical_map">Taispeáin léarscáil sféarúil</string>
     <string name="show_spherical_map_description">Taispeáin samhail sféaróideach den Domhan</string>
+    <string name="shared_string_price">Praghas</string>
+    <string name="rendering_attr_showSkiSlopes_name">Taispeáin fánaí sciála</string>
+    <string name="rendering_attr_showSkiSlopes_description">Taispeáin fánaí sciála simplithe</string>
 </resources>

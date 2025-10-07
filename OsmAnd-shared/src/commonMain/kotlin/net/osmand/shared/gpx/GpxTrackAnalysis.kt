@@ -58,6 +58,10 @@ class GpxTrackAnalysis {
 	var hasSpeedInTrack = false
 	var hasElevationMetricsInGpx = false
 
+	var lastUphill: ElevationDiffsCalculator.SlopeInfo? = null
+	var lastDownhill: ElevationDiffsCalculator.SlopeInfo? = null
+
+
 	fun getGpxParameter(parameter: GpxParameter): Any? {
 		return parameters[parameter] ?: parameter.defaultValue
 	}
@@ -599,7 +603,60 @@ class GpxTrackAnalysis {
 			elevationDiffsCalc.calculateElevationDiffs()
 			diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
 			diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
+
+			val segLastUp = elevationDiffsCalc.getLastUphill()
+			val segLastDown = elevationDiffsCalc.getLastDownhill()
+
+			if (segLastUp != null) {
+				val upDist = calculateTotalDistanceForSlope(segLastUp, indexes, distances)
+				val upMaxSpeed = calculateMaxSpeedForSlope(segLastUp, segment)
+				this.lastUphill = segLastUp.copy(distance = upDist, maxSpeed = upMaxSpeed)
+			}
+			if (segLastDown != null) {
+				val downDist = calculateTotalDistanceForSlope(segLastDown, indexes, distances)
+				val downMaxSpeed = calculateMaxSpeedForSlope(segLastDown, segment)
+				this.lastDownhill = segLastDown.copy(distance = downDist, maxSpeed = downMaxSpeed)
+			}
 		}
+	}
+
+	private fun calculateTotalDistanceForSlope(
+		slope: ElevationDiffsCalculator.SlopeInfo?,
+		indexes: IntArray,
+		distances: DoubleArray
+	): Double {
+		if (slope == null) return 0.0
+		val startIdxPos = indexes.indexOf(slope.startPointIndex)
+		val endIdxPos = indexes.indexOf(slope.endPointIndex)
+		if (startIdxPos == -1 || endIdxPos == -1 || endIdxPos <= startIdxPos) return 0.0
+
+		var total = 0.0
+		for (i in (startIdxPos + 1)..endIdxPos) {
+			total += distances[i]
+		}
+		return total
+	}
+
+	private fun calculateMaxSpeedForSlope(
+		slope: ElevationDiffsCalculator.SlopeInfo?,
+		segment: SplitSegment
+	): Double {
+		if (slope == null) return 0.0
+		val startIdx = slope.startPointIndex
+		val endIdx = slope.endPointIndex
+		if (startIdx > endIdx) return 0.0
+		var maxSpeed = 0.0
+		for (i in startIdx..endIdx) {
+			val pt = segment[i]
+			val hasAttributes = pt.attributes != null
+			val speed = if (hasAttributes) pt.attributes?.speed?.toDouble() else pt.speed
+			if (speed != null) {
+				if (speed > maxSpeed) {
+					maxSpeed = speed.toDouble()
+				}
+			}
+		}
+		return maxSpeed
 	}
 
 	private fun getElevationApproximator(segment: SplitSegment): ElevationApproximator {

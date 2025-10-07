@@ -115,7 +115,7 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 			remoteFiles = Collections.emptyMap();
 		}
 		Map<ExportType, List<?>> dataToOperate = new EnumMap<>(ExportType.class);
-		for (ExportType exportType : ExportType.enabledValues()) {
+		for (ExportType exportType : ExportType.visibleValues()) {
 			List<RemoteFile> filesByType = new ArrayList<>();
 			for (RemoteFile remoteFile : remoteFiles.values()) {
 				if (ExportType.findBy(remoteFile) == exportType) {
@@ -181,7 +181,7 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 	@NonNull
 	public List<?> getItemsForType(@NonNull ExportType exportType) {
 		for (SettingsCategoryItems categoryItems : data.values()) {
-			if (categoryItems.getTypes().contains(exportType)) {
+			if (categoryItems.getVisibleTypes().contains(exportType)) {
 				return categoryItems.getItemsForType(exportType);
 			}
 		}
