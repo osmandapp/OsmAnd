@@ -211,26 +211,26 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		return switch (widgetType) {
 			case TRIP_RECORDING_DISTANCE -> {
-				TripRecordingDistanceWidgetState distanceWidgetState = new TripRecordingDistanceWidgetState(app, customId, WidgetType.TRIP_RECORDING_DISTANCE);
+				TripRecordingDistanceWidgetState distanceWidgetState = new TripRecordingDistanceWidgetState(app, customId, widgetType);
 				yield new TripRecordingDistanceWidget(mapActivity, distanceWidgetState, customId, widgetsPanel);
 			}
 			case TRIP_RECORDING_TIME ->
 					new TripRecordingTimeWidget(mapActivity, customId, widgetsPanel);
 			case TRIP_RECORDING_UPHILL -> {
-				TripRecordingElevationWidgetState widgetState = new TripRecordingElevationWidgetState(app, true, customId, WidgetType.TRIP_RECORDING_UPHILL);
+				TripRecordingElevationWidgetState widgetState = new TripRecordingElevationWidgetState(app, true, customId, widgetType);
 				yield new TripRecordingUphillWidget(mapActivity, widgetState, customId, widgetsPanel);
 			}
 			case TRIP_RECORDING_DOWNHILL -> {
-				TripRecordingElevationWidgetState uphillWidgetState = new TripRecordingElevationWidgetState(app, false, customId, WidgetType.TRIP_RECORDING_DOWNHILL);
+				TripRecordingElevationWidgetState uphillWidgetState = new TripRecordingElevationWidgetState(app, false, customId, widgetType);
 				yield new TripRecordingDownhillWidget(mapActivity, uphillWidgetState, customId, widgetsPanel);
 			}
 			case TRIP_RECORDING_AVERAGE_SLOPE -> {
-				TripRecordingSlopeWidgetState slopeWidgetState = new TripRecordingSlopeWidgetState(app, customId, WidgetType.TRIP_RECORDING_AVERAGE_SLOPE);
-				yield new TripRecordingSlopeWidget(mapActivity, slopeWidgetState, WidgetType.TRIP_RECORDING_AVERAGE_SLOPE, customId, widgetsPanel);
+				TripRecordingSlopeWidgetState slopeWidgetState = new TripRecordingSlopeWidgetState(app, customId, widgetType);
+				yield new TripRecordingSlopeWidget(mapActivity, slopeWidgetState, widgetType, customId, widgetsPanel);
 			}
 			case TRIP_RECORDING_MAX_SPEED -> {
-				TripRecordingMaxSpeedWidgetState maxSpeedWidgetState = new TripRecordingMaxSpeedWidgetState(app, customId, WidgetType.TRIP_RECORDING_MAX_SPEED);
-				yield new TripRecordingMaxSpeedWidget(mapActivity, maxSpeedWidgetState, WidgetType.TRIP_RECORDING_MAX_SPEED, customId, widgetsPanel);
+				TripRecordingMaxSpeedWidgetState maxSpeedWidgetState = new TripRecordingMaxSpeedWidgetState(app, customId, widgetType);
+				yield new TripRecordingMaxSpeedWidget(mapActivity, maxSpeedWidgetState, widgetType, customId, widgetsPanel);
 			}
 			default -> null;
 		};
