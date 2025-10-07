@@ -4436,8 +4436,6 @@
     <string name="auto_25_chars_route_tr_kl">Поверните направо и держитесь левее</string>
     <string name="auto_25_chars_route_tr_kr">Поверните направо и держитесь правее</string>
     <string name="trip_recording_duration_widget_desc">Виджет показывает текущее записанное время маршрута.</string>
-    <string name="trip_recording_uphill_widget_desc">Показывает сумму всех подъёмов в текущем записываемом маршруте.</string>
-    <string name="trip_recording_downhill_widget_desc">Показывает сумму всех спусков в текущем записываемом маршруте.</string>
     <string name="auto_25_chars_route_roundabout_kr">Сверните на %1$d съезд и держитесь правее</string>
     <string name="auto_25_chars_route_roundabout_kl">Сверните на %1$d съезд и держитесь левее</string>
     <string name="av_notes_photo_widget_desc">Нажатие на виджет позволяет сделать снимок.</string>
@@ -4451,7 +4449,6 @@
     <string name="compass_desc">Кнопка с указателем севера.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
-    <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
     <string name="second_next_turn_widget_desc">Виджет показывает информацию о вашем втором следующем повороте, который включается, если поворот находится на расстоянии приближения.</string>
     <string name="next_turn_widget_desc">Виджет показывает информацию о вашем следующем повороте с изображением маневра и расстояния до него.</string>
     <string name="auto_25_chars_route_tl_kl">Поверните налево и держитесь левее</string>

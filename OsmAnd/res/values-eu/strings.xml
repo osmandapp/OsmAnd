@@ -4469,10 +4469,7 @@
     <string name="av_notes_photo_widget_desc">Trepeta sakatu argazki bat ateratzeko.</string>
     <string name="av_notes_video_widget_desc">Trepeta sakatu bideo-grabaketa bat abiarazteko.</string>
     <string name="av_notes_audio_widget_desc">Trepeta sakatu audio-oharrak hartzeko.</string>
-    <string name="trip_recording_downhill_widget_desc">Grabatutako bidaiaren jaitsiera guztien batura erakusten du.</string>
-    <string name="trip_recording_uphill_widget_desc">Grabatutako bidaiaren igoera guztien batura erakusten du.</string>
     <string name="trip_recording_duration_widget_desc">Uneko arrastoaren grabazio denbora erakusten du.</string>
-    <string name="trip_recording_distance_widget_desc">Grabatutako bidaiaren distantzia erakusten du.</string>
     <string name="true_bearing_wdiget_desc">Iparraldearen eta zure kokapenetik ikusitako helburu-puntuaren arteko angelua.</string>
     <string name="relative_bearing_widget_desc">Zure mugimenduaren norabidearen eta helburu-puntuaren arteko angelua erakusten du.</string>
     <string name="second_marker_widget_desc">Widget-a konfigura dezakezu bigarren mapa-markatzaileari geratzen den distantzia edo helmuga-ordu estimatua erakusteko.</string>

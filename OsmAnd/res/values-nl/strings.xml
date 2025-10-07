@@ -4568,7 +4568,6 @@
     <string name="auto_25_chars_route_tr_kr">Sla rechtsaf en houd rechts aan</string>
     <string name="auto_25_chars_route_roundabout_kr">Afslag %1$d nemen en rechts aanhouden</string>
     <string name="trip_recording_duration_widget_desc">Toont de tijdsduur van deze opgenomen rit.</string>
-    <string name="trip_recording_distance_widget_desc">Toont de afgelegde afstand van deze opgenomen rit.</string>
     <string name="nautical_depth_points">Dieptepunten van de zee</string>
     <string name="map_marker_interval_dialog_desc">Vermeld het tijdsinterval waarin de gemiddelde snelheid zal worden berekend, voor de verwachte aankomsttijd.</string>
     <string name="compass_desc">Toont richting naar het noorden.</string>
@@ -4648,7 +4647,6 @@
     <string name="external_sensor_widgets">Externe sensors</string>
     <string name="map_widget_target_distance_desc">Toont de afstand van camera tot doelwit.</string>
     <string name="coordinates_widget_current_location_desc">Toont geografische coördinaten van de huidige locatie</string>
-    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen van deze opgenomen rit.</string>
     <string name="time_to_intermediate_widget_desc">De widget toon \"Aankomsttijd\" of \"Tijd nog te gaan\" tot het eerstvolgende punt halverwege. Tijdsduur wordt voortdurend bijgewerkt tijdens navigatie. Zodra tussenliggend punt is gepasseerd, wordt de tijd bijgewerkt tot het volgende tussenliggende punt.</string>
     <string name="next_turn_widget_desc">De widget toont informatie over uw volgende afslag met afbeelding van de beweging en afstand ertoe.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Kleurschema van dieptelijnen</string>
@@ -4795,7 +4793,6 @@
     <string name="auto_backup_preference_desc">Android maakt standaard een reservekopie van favorieten, kaart tekens en OsmAnd instellingen, om het te herstellen op nieuwe toestellen of na herinstallatie. De kopie kan tot 25 MB groot zijn.
 \nAls u ook OsmAnd Cloud gebruikt, kan dat tot tegenstrijdheden leiden na herinstallatie.</string>
     <string name="av_notes_video_widget_desc">Door te tikken op de widget kun je een video opnemen.</string>
-    <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen van deze opgenomen rit.</string>
     <string name="true_bearing_wdiget_desc">Hoek tussen het ware noorden en het doelpunt gezien van uw locatie.</string>
     <string name="relative_bearing_widget_desc">Toont de hoek tussen de richting van uw voorwaartse beweging en het doelpunt.</string>
     <string name="first_marker_widget_desc">U kunt de widget instellen om de afstand of de verwachte aankomsttijd te tonen, tot de eerste markering.</string>
