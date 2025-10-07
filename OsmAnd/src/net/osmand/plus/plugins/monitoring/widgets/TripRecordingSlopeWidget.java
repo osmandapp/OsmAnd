@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
+import static net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.showOnMap;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,12 +13,18 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingSlopeWidgetState.AverageSlopeMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.ElevationDiffsCalculator;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripRecordingSlopeWidget extends SimpleWidget {
 	private final TripRecordingSlopeWidgetState widgetState;
@@ -74,6 +82,21 @@ public class TripRecordingSlopeWidget extends SimpleWidget {
 			lastSlope = (int) (slopeInfo.getElevDiff() / slopeInfo.getDistance() * 100);
 		}
 		return lastSlope;
+	}
+
+	@Nullable
+	@Override
+	protected List<PopUpMenuItem> getWidgetActions() {
+		List<PopUpMenuItem> actions = new ArrayList<>();
+		UiUtilities uiUtilities = app.getUIUtilities();
+		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		actions.add(new PopUpMenuItem.Builder(app)
+				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_center_on_track, iconColor))
+				.setTitleId(R.string.show_track_on_map)
+				.setOnClickListener(item -> showOnMap(mapActivity))
+				.showTopDivider(true)
+				.create());
+		return actions;
 	}
 
 	@Override

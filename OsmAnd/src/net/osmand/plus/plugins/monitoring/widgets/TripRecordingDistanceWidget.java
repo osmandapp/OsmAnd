@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
+import static net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.showOnMap;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DISTANCE;
 
 import android.view.View;
@@ -15,17 +16,26 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidgetState.TripRecordingDistanceMode;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripRecordingDistanceWidget extends SimpleWidget {
 
 	private static final long BLINK_DELAY_MILLIS = 500;
+
+	protected int currentTrackIndex;
+	protected SlopeInfo slopeInfo;
 
 	private final TripRecordingDistanceWidgetState distanceWidgetState;
 	private final SavingTrackHelper savingTrackHelper;
@@ -89,12 +99,30 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 				app.runInUIThread(() -> setIcons(globalRecording, liveMonitoring, !globalRecording), BLINK_DELAY_MILLIS);
 			}
 		} else {
-			GpxTrackAnalysis analysis = savingTrackHelper.getCurrentTrack().getTrackAnalysis(app);
-			SlopeInfo slopeInfo = recordingDistanceMode == TripRecordingDistanceMode.LAST_DOWNHILL ? analysis.getLastDownhill() : analysis.getLastUphill();
-			if (slopeInfo != null) {
-				setText((float) slopeInfo.getDistance());
-			}
+			setLastSlopeDistance(recordingDistanceMode);
 			setIcons(distanceWidgetState.getDistanceModePreference().get().getIcon(false), distanceWidgetState.getDistanceModePreference().get().getIcon(true));
+		}
+	}
+
+	private void setLastSlopeDistance(@NonNull TripRecordingDistanceMode recordingDistanceMode) {
+		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
+		GpxTrackAnalysis analysis = savingTrackHelper.getCurrentTrack().getTrackAnalysis(app);
+		if (this.currentTrackIndex != currentTrackIndex) {
+			slopeInfo = null;
+		}
+		SlopeInfo newSlopeInfo = recordingDistanceMode == TripRecordingDistanceMode.LAST_DOWNHILL ? analysis.getLastDownhill() : analysis.getLastUphill();
+		if (newSlopeInfo == null) {
+			setText(0);
+			return;
+		}
+
+		if (slopeInfo == null
+				|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
+				|| slopeInfo.getElevDiff() < newSlopeInfo.getElevDiff()) {
+			slopeInfo = newSlopeInfo;
+		}
+		if (slopeInfo != null) {
+			setText((float) slopeInfo.getDistance());
 		}
 	}
 
@@ -105,6 +133,21 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 			return getString(distanceWidgetState.getDistanceModePreference().get().titleId);
 		}
 		return null;
+	}
+
+	@Nullable
+	@Override
+	protected List<PopUpMenuItem> getWidgetActions() {
+		List<PopUpMenuItem> actions = new ArrayList<>();
+		UiUtilities uiUtilities = app.getUIUtilities();
+		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		actions.add(new PopUpMenuItem.Builder(app)
+				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_center_on_track, iconColor))
+				.setTitleId(R.string.show_track_on_map)
+				.setOnClickListener(item -> showOnMap(mapActivity))
+				.showTopDivider(true)
+				.create());
+		return actions;
 	}
 
 	@StringRes

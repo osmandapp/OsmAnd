@@ -14,6 +14,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidgetState.TripRecordingElevationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.SunPositionMode;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.gpx.ElevationDiffsCalculator;
+import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
@@ -29,12 +34,15 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 	protected final TripRecordingElevationWidgetState widgetState;
 	protected final SavingTrackHelper savingTrackHelper;
 	protected int currentTrackIndex;
-
+	protected SlopeInfo slopeInfo;
 	protected double cachedElevationDiff = -1;
 	protected double cachedLastElevation = -1;
 	private final boolean isUphillType;
@@ -124,6 +132,25 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 		return true;
 	}
 
+	@Nullable
+	@Override
+	protected List<PopUpMenuItem> getWidgetActions() {
+		List<PopUpMenuItem> actions = new ArrayList<>();
+		UiUtilities uiUtilities = app.getUIUtilities();
+		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		actions.add(new PopUpMenuItem.Builder(app)
+				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_center_on_track, iconColor))
+				.setTitleId(R.string.show_track_on_map)
+				.setOnClickListener(item -> showOnMap(mapActivity))
+				.showTopDivider(true)
+				.create());
+		return actions;
+	}
+
+	public static void showOnMap(@NonNull MapActivity mapActivity) {
+		TrackMenuFragment.showInstance(mapActivity, mapActivity.getApp().getSavingTrackHelper().getCurrentTrack(), null);
+	}
+
 	protected abstract double getElevationDiff(boolean reset);
 	protected abstract double getLastElevation(boolean reset);
 
@@ -135,7 +162,6 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 	public static class TripRecordingUphillWidget extends TripRecordingElevationWidget {
 
 		private double diffElevationUp;
-		private double lastElevation;
 
 		public TripRecordingUphillWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingElevationWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 			super(mapActivity, widgetState, TRIP_RECORDING_UPHILL, customId, widgetsPanel);
@@ -152,18 +178,24 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 		protected double getLastElevation(boolean reset) {
 			if (reset) {
-				lastElevation = 0;
+				slopeInfo = null;
 			}
-			if (getAnalysis().getLastUphill() != null) {
-				lastElevation = getAnalysis().getLastUphill().getElevDiff();
+			SlopeInfo newSlopeInfo = getAnalysis().getLastUphill();
+			if (newSlopeInfo == null) {
+				return slopeInfo != null ? slopeInfo.getElevDiff() : 0;
 			}
-			return lastElevation;
+
+			if (slopeInfo == null
+					|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
+					|| slopeInfo.getElevDiff() < newSlopeInfo.getElevDiff()) {
+				slopeInfo = newSlopeInfo;
+			}
+			return slopeInfo.getElevDiff();
 		}
 	}
 
 	public static class TripRecordingDownhillWidget extends TripRecordingElevationWidget {
 		private double diffElevationDown;
-		private double lastElevation;
 
 		public TripRecordingDownhillWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingElevationWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 			super(mapActivity, widgetState, TRIP_RECORDING_DOWNHILL, customId, widgetsPanel);
@@ -180,12 +212,19 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 		protected double getLastElevation(boolean reset) {
 			if (reset) {
-				lastElevation = 0;
+				slopeInfo = null;
 			}
-			if (getAnalysis().getLastDownhill() != null) {
-				lastElevation = getAnalysis().getLastDownhill().getElevDiff();
+			SlopeInfo newSlopeInfo = getAnalysis().getLastDownhill();
+			if (newSlopeInfo == null) {
+				return slopeInfo != null ? slopeInfo.getElevDiff() : 0;
 			}
-			return lastElevation;
+
+			if (slopeInfo == null
+					|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
+					|| slopeInfo.getElevDiff() < newSlopeInfo.getElevDiff()) {
+				slopeInfo = newSlopeInfo;
+			}
+			return slopeInfo.getElevDiff();
 		}
 	}
 }

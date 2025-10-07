@@ -18,13 +18,9 @@ abstract class ElevationDiffsCalculator {
 	data class SlopeInfo(
 		val startPointIndex: Int,
 		val endPointIndex: Int,
-		val startDist: Double,
-		val endDist: Double,
-		val startEle: Double,
-		val endEle: Double,
 		val elevDiff: Double,
-		val distance: Double,
-		val isUphill: Boolean
+		val distance: Double = 0.0,
+		val maxSpeed: Double = 0.0
 	)
 
 	private var lastUphill: SlopeInfo? = null
@@ -123,12 +119,12 @@ abstract class ElevationDiffsCalculator {
 
 			if (eleDiffSumm > 0) {
 				diffElevationUp += eleDiffSumm
-				currentUphill = processLastSlope(true, currentUphill, currentDownhill, start, end, eleDiffSumm, 0.0, horizDist)
+				currentUphill = processLastSlope(true, currentUphill, currentDownhill, start, end,  eleDiffSumm)
 				currentDownhill = null
 			} else if (eleDiffSumm < 0) {
 				val elevAbs = -eleDiffSumm
 				diffElevationDown += elevAbs
-				currentDownhill = processLastSlope(false, currentUphill, currentDownhill, start, end, eleDiffSumm, elevAbs, horizDist)
+				currentDownhill = processLastSlope(false, currentUphill, currentDownhill, start, end, elevAbs)
 				currentUphill = null
 			}
 		}
@@ -141,29 +137,18 @@ abstract class ElevationDiffsCalculator {
 		start: Extremum,
 		end: Extremum,
 		eleDiffSumm: Double,
-		elevAbs: Double,
-		horizDist: Double
 	): SlopeInfo {
 		if (isUphill) {
 			val updatedUphill: SlopeInfo = if (currentUphill != null && currentUphill.endPointIndex == start.index) {
 				currentUphill.copy(
 					endPointIndex = end.index,
-					endDist = end.dist,
-					endEle = end.ele,
 					elevDiff = currentUphill.elevDiff + eleDiffSumm,
-					distance = currentUphill.distance + horizDist
 				)
 			} else {
 				SlopeInfo(
 					startPointIndex = start.index,
 					endPointIndex = end.index,
-					startDist = start.dist,
-					endDist = end.dist,
-					startEle = start.ele,
-					endEle = end.ele,
 					elevDiff = eleDiffSumm,
-					distance = horizDist,
-					isUphill = true
 				)
 			}
 			lastUphill = updatedUphill
@@ -172,22 +157,13 @@ abstract class ElevationDiffsCalculator {
 			val updatedDownhill: SlopeInfo = if (currentDownhill != null && currentDownhill.endPointIndex == start.index) {
 				currentDownhill.copy(
 					endPointIndex = end.index,
-					endDist = end.dist,
-					endEle = end.ele,
-					elevDiff = currentDownhill.elevDiff + elevAbs,
-					distance = currentDownhill.distance + horizDist
+					elevDiff = currentDownhill.elevDiff + eleDiffSumm,
 				)
 			} else {
 				SlopeInfo(
 					startPointIndex = start.index,
 					endPointIndex = end.index,
-					startDist = start.dist,
-					endDist = end.dist,
-					startEle = start.ele,
-					endEle = end.ele,
-					elevDiff = elevAbs,
-					distance = horizDist,
-					isUphill = false
+					elevDiff = eleDiffSumm,
 				)
 			}
 			lastDownhill = updatedDownhill

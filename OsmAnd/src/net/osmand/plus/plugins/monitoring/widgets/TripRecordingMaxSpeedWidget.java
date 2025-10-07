@@ -1,22 +1,37 @@
 package net.osmand.plus.plugins.monitoring.widgets;
 
+import static net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.showOnMap;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingMaxSpeedWidgetState.MaxSpeedMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FormattedValue;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.ElevationDiffsCalculator;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.WptPt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripRecordingMaxSpeedWidget extends SimpleWidget {
 	private final TripRecordingMaxSpeedWidgetState widgetState;
@@ -31,7 +46,7 @@ public class TripRecordingMaxSpeedWidget extends SimpleWidget {
 
 
 	public TripRecordingMaxSpeedWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingMaxSpeedWidgetState widgetState, @NonNull WidgetType widgetType,
-	                                @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+	                                   @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		savingTrackHelper = app.getSavingTrackHelper();
@@ -54,29 +69,44 @@ public class TripRecordingMaxSpeedWidget extends SimpleWidget {
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
-		double maxSpeed = getMaxSpeed(this.currentTrackIndex != currentTrackIndex);
+		float maxSpeed = getMaxSpeed(this.currentTrackIndex != currentTrackIndex);
 		this.currentTrackIndex = currentTrackIndex;
 		if (forceUpdate || isUpdateNeeded() || cachedMaxSpeed != maxSpeed) {
 			cachedMaxSpeed = maxSpeed;
 			forceUpdate = false;
-			setText(String.valueOf(maxSpeed), "%");
+			FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(maxSpeed, app);
+			setText(formattedSpeed.value, formattedSpeed.unit);
 		}
 	}
 
-	protected double getMaxSpeed(boolean reset) {
+	protected float getMaxSpeed(boolean reset) {
 		if (reset) {
 			lastMaxSpeed = 0;
 		}
 		MaxSpeedMode mode = widgetState.getMaxSpeedModePreference().get();
-		if(mode == MaxSpeedMode.TOTAL){
+		if (mode == MaxSpeedMode.TOTAL) {
 			lastMaxSpeed = (int) getAnalysis().getMaxSpeed();
-		} else{
-			/*ElevationDiffsCalculator.SlopeInfo slopeInfo = mode == MaxSpeedMode.LAST_UPHILL ? getAnalysis().getLastUphill() : getAnalysis().getLastDownhill();
-			if (slopeInfo != null) {
-				lastMaxSpeed = (int) (slopeInfo.() / slopeInfo.getDistance() * 100);
-			}*/
+		} else if (mode == MaxSpeedMode.LAST_UPHILL && getAnalysis().getLastUphill() != null) {
+			lastMaxSpeed = (int) getAnalysis().getLastUphill().getMaxSpeed();
+		} else if (mode == MaxSpeedMode.LAST_DOWNHILL && getAnalysis().getLastDownhill() != null) {
+			lastMaxSpeed = (int) getAnalysis().getLastDownhill().getMaxSpeed();
 		}
 		return lastMaxSpeed;
+	}
+
+	@Nullable
+	@Override
+	protected List<PopUpMenuItem> getWidgetActions() {
+		List<PopUpMenuItem> actions = new ArrayList<>();
+		UiUtilities uiUtilities = app.getUIUtilities();
+		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		actions.add(new PopUpMenuItem.Builder(app)
+				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_center_on_track, iconColor))
+				.setTitleId(R.string.show_track_on_map)
+				.setOnClickListener(item -> showOnMap(mapActivity))
+				.showTopDivider(true)
+				.create());
+		return actions;
 	}
 
 	@Override
