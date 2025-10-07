@@ -88,7 +88,7 @@ public abstract class BackupTypesAdapter extends OsmandBaseExpandableListAdapter
 	@Override
 	public int getChildrenCount(int i) {
 		ExportCategory category = controller.getCategory(i);
-		return controller.getCategoryItems(category).getTypes().size();
+		return controller.getCategoryItems(category).getVisibleTypes().size();
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public abstract class BackupTypesAdapter extends OsmandBaseExpandableListAdapter
 	public Object getChild(int groupPosition, int childPosition) {
 		ExportCategory category = controller.getCategory(groupPosition);
 		SettingsCategoryItems categoryItems = controller.getCategoryItems(category);
-		ExportType exportType = categoryItems.getTypes().get(groupPosition);
+		ExportType exportType = categoryItems.getVisibleTypes().get(groupPosition);
 		return categoryItems.getItemsForType(exportType).get(childPosition);
 	}
 

@@ -1,7 +1,9 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.shared.gpx.GpxParameter.*;
+import static net.osmand.shared.gpx.GpxParameter.APPEARANCE_LAST_MODIFIED_TIME;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.content.Context;
 
@@ -19,6 +21,7 @@ import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.DataItem;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxFile;
@@ -68,7 +71,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 	void readFromJson(@NonNull JSONObject json) throws JSONException {
 		subtype = FileSubtype.GPX;
 		super.readFromJson(json);
-		appearanceInfo = GpxAppearanceInfo.fromJson(json);
+		appearanceInfo = new GpxAppearanceInfo(json);
 	}
 
 	@Override
@@ -118,18 +121,12 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
-		int splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType();
+		Integer splitType = appearanceInfo.splitType != null
+				? GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType() : null;
 		boolean splitChanged = Algorithms.objectEquals(dataItem.getParameter(SPLIT_TYPE), splitType)
 				|| Algorithms.objectEquals(dataItem.getParameter(SPLIT_INTERVAL), appearanceInfo.splitInterval);
 
-		dataItem.setParameter(COLOR, appearanceInfo.color);
-		dataItem.setParameter(WIDTH, appearanceInfo.width);
-		dataItem.setParameter(SHOW_ARROWS, appearanceInfo.showArrows);
-		dataItem.setParameter(SHOW_START_FINISH, appearanceInfo.showStartFinish);
-		dataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType());
-		dataItem.setParameter(SPLIT_INTERVAL, appearanceInfo.splitInterval);
-		dataItem.setParameter(COLORING_TYPE, appearanceInfo.coloringType);
-		dataItem.setParameter(COLOR_PALETTE, appearanceInfo.gradientPaletteName);
+		appearanceInfo.setParameters(dataItem);
 
 		app.getGpxDbHelper().updateDataItem(dataItem);
 		app.getGpxDbHelper().updateDataItemParameter(dataItem, APPEARANCE_LAST_MODIFIED_TIME, file.lastModified());

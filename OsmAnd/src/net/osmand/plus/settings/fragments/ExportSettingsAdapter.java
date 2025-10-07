@@ -93,7 +93,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		subTextTv.setText(getCategoryDescr(category, exportMode));
 
 		int selectedTypes = 0;
-		for (ExportType exportType : items.getTypes()) {
+		for (ExportType exportType : items.getVisibleTypes()) {
 			if (!Algorithms.isEmpty(selectedItemsMap.get(exportType))) {
 				selectedTypes++;
 			}
@@ -138,7 +138,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 		ExportCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems categoryItems = itemsMap.get(category);
-		ExportType exportType = categoryItems.getTypes().get(childPosition);
+		ExportType exportType = categoryItems.getVisibleTypes().get(childPosition);
 		List<?> items = categoryItems.getItemsForType(exportType);
 		List<?> selectedItems = selectedItemsMap.get(exportType);
 
@@ -201,7 +201,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	@Override
 	public int getChildrenCount(int i) {
-		return itemsMap.get(itemsTypes.get(i)).getTypes().size();
+		return itemsMap.get(itemsTypes.get(i)).getVisibleTypes().size();
 	}
 
 	@Override
@@ -212,7 +212,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		SettingsCategoryItems categoryItems = itemsMap.get(itemsTypes.get(groupPosition));
-		ExportType exportType = categoryItems.getTypes().get(groupPosition);
+		ExportType exportType = categoryItems.getVisibleTypes().get(groupPosition);
 		return categoryItems.getItemsForType(exportType).get(childPosition);
 	}
 
@@ -265,19 +265,11 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 
-	public List<? super Object> getData() {
-		List<Object> selectedItems = new ArrayList<>();
-		for (List<?> items : selectedItemsMap.values()) {
-			selectedItems.addAll(items);
-		}
-		return selectedItems;
-	}
-
 	private String getCategoryDescr(ExportCategory category, boolean exportMode) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
-		for (ExportType exportType : items.getTypes()) {
+		for (ExportType exportType : items.getVisibleTypes()) {
 			if (!Algorithms.isEmpty(selectedItemsMap.get(exportType))) {
 				selectedTypes++;
 				itemsSize += BackupUtils.calculateItemsSize(items.getItemsForType(exportType));
@@ -286,10 +278,10 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		String description;
 		if (selectedTypes == 0 && exportMode) {
 			description = app.getString(R.string.shared_string_none);
-		} else if (selectedTypes == items.getTypes().size()) {
+		} else if (selectedTypes == items.getVisibleTypes().size()) {
 			description = app.getString(R.string.shared_string_all);
 		} else {
-			description = app.getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes), String.valueOf(items.getTypes().size()));
+			description = app.getString(R.string.ltr_or_rtl_combine_via_slash, String.valueOf(selectedTypes), String.valueOf(items.getVisibleTypes().size()));
 		}
 		String formattedSize = AndroidUtils.formatSize(app, itemsSize);
 		return itemsSize == 0 ? description : app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
