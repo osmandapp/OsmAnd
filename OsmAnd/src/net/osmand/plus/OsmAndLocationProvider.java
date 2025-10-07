@@ -97,6 +97,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private final AtomicInteger locationRequestsCounter = new AtomicInteger();
 	private final AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
 
+	private static final double SLEEP_RADIUS_THRESHOLD = 15.0;
+	private static final long SLEEP_DETECTION_TIME = 10 * 1000;
+	private static final long SLEEP_UPDATE_INTERVAL = 20 * 1000;
+
+	private net.osmand.Location sleepStartLocation = null;
+	private long sleepStartTime = 0;
+	private long lastSleepModeUpdateTime = 0;
+	private boolean isSleepMode = false;
 
 	private long lastTimeGPSLocationFixed;
 	private long lastTimeLocationFixed;
@@ -640,6 +648,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (locationSimulation.isRouteAnimating() || shouldIgnoreLocation(location)) {
 			return;
 		}
+
+		if (skipLocationUpdate(location)) {
+			Log.d("LocationProvider", "Skipping location update: lat=" + location.getLatitude() + ", lon=" + location.getLongitude());
+			return;
+		}
+		
 		prevLocation = location;
 		if (location != null && isPointAccurateForRouting(location) && !isTunnelLocationSimulated(location)) {
 			lastTimeLocationFixed = System.currentTimeMillis();
@@ -671,6 +685,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (shouldIgnoreLocation(location)) {
 			return;
 		}
+
+		if (skipLocationUpdate(location)) {
+			Log.d("LocationProvider", "Skipping location update: lat=" + location.getLatitude() + ", lon=" + location.getLongitude());
+			return;
+		}
+		
 		prevLocation = location;
 		if (location == null) {
 			gpsInfo.reset();
@@ -714,6 +734,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void notifyGpsLocationRecovered() {
 		if (gpsSignalLost) {
 			gpsSignalLost = false;
+			resetSleepDetection();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
 				routingHelper.getVoiceRouter().gpsLocationRecover();
@@ -885,4 +906,56 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					REQUEST_LOCATION_PERMISSION);
 		}
 	}
+
+	public void resetSleepDetection() {
+		sleepStartLocation = null;
+		sleepStartTime = 0;
+		lastSleepModeUpdateTime = 0;
+		isSleepMode = false;
+	}
+
+	private void resetSleepMode(net.osmand.Location newLocation, long currentTime, boolean enableSleep) {
+		sleepStartLocation = newLocation;
+		sleepStartTime = currentTime;
+		lastSleepModeUpdateTime = currentTime;
+		isSleepMode = enableSleep;
+	}
+
+	private boolean skipLocationUpdate(net.osmand.Location newLocation) {
+		if (newLocation == null) {
+			return false;
+		}
+
+		long currentTime = System.currentTimeMillis();
+
+		if (sleepStartLocation == null) {
+			resetSleepMode(newLocation, currentTime, false);
+			return false;
+		}
+
+		double distanceFromStart = MapUtils.getDistance(sleepStartLocation, newLocation);
+		long timeSinceStart = currentTime - sleepStartTime;
+
+		if (!isSleepMode) {
+			if (timeSinceStart >= SLEEP_DETECTION_TIME) {
+				resetSleepMode(newLocation, currentTime, true);
+				return true;
+			}
+
+			return false;
+		}
+
+		if (distanceFromStart > SLEEP_RADIUS_THRESHOLD) {
+			resetSleepMode(newLocation, currentTime, false);
+			return false;
+		}
+
+		long timeSinceUpdate = currentTime - lastSleepModeUpdateTime;
+		if (timeSinceUpdate > SLEEP_UPDATE_INTERVAL) {
+			lastSleepModeUpdateTime = currentTime;
+			return false;
+		}
+
+		return true;
+    }
 }
