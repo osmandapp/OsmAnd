@@ -88,7 +88,7 @@ public class RouteUtils {
 		attrs.put(MTB.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
 		attrs.put(HIKING.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
 		attrs.put(ALPINE.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
-		attrs.put(SKI.getRenderingPropertyAttr(), RendererRegistry.WINTER_SKI_RENDER);
+		attrs.put(SKI_ROUTES.getRenderingPropertyAttr(), RendererRegistry.WINTER_SKI_RENDER);
 		attrs.put(HORSE.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
 		attrs.put(WATER.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
 		return attrs;
@@ -107,7 +107,7 @@ public class RouteUtils {
 		} else if (HIKING.getRenderingPropertyAttr().equals(attrName)
 				|| ALPINE.getRenderingPropertyAttr().equals(attrName)) {
 			return R.drawable.ic_action_trekking_dark;
-		} else if (SKI.getRenderingPropertyAttr().equals(attrName)) {
+		} else if (SKI_ROUTES.getRenderingPropertyAttr().equals(attrName)) {
 			return R.drawable.ic_action_skiing;
 		} else if (FITNESS.getRenderingPropertyAttr().equals(attrName)) {
 			return R.drawable.mx_sport_athletics;

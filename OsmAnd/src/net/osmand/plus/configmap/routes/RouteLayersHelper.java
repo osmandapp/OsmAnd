@@ -4,7 +4,7 @@ import static net.osmand.osm.OsmRouteType.ALPINE;
 import static net.osmand.osm.OsmRouteType.BICYCLE;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.osm.OsmRouteType.MTB;
-import static net.osmand.osm.OsmRouteType.SKI;
+import static net.osmand.osm.OsmRouteType.SKI_ROUTES;
 import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_SCALE_SCHEME_ATTR;
 import static net.osmand.plus.configmap.routes.AlpineHikingCard.getDifficultyClassificationDescription;
 import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
@@ -68,7 +68,7 @@ public class RouteLayersHelper {
 		alpineHikingPreference = settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr());
 		alpineHikingScaleScheme = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
 
-		skiRoutePreference = settings.getCustomRenderBooleanProperty(SKI.getRenderingPropertyAttr());
+		skiRoutePreference = settings.getCustomRenderBooleanProperty(SKI_ROUTES.getRenderingPropertyAttr());
 	}
 
 	@Nullable
@@ -98,7 +98,7 @@ public class RouteLayersHelper {
 			toggleHikingRoutes();
 		} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
 			toggleAlpineHikingRoutes();
-		} else if (SKI.getRenderingPropertyAttr().equals(attrName)) {
+		} else if (SKI_ROUTES.getRenderingPropertyAttr().equals(attrName)) {
 			toggleSkiRoutes();
 		} else {
 			CommonPreference<Boolean> preference = settings.getCustomRenderBooleanProperty(attrName);
@@ -115,7 +115,7 @@ public class RouteLayersHelper {
 			return isHikingRoutesEnabled();
 		} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
 			return isAlpineHikingRoutesEnabled();
-		}  else if (SKI.getRenderingPropertyAttr().equals(attrName)) {
+		}  else if (SKI_ROUTES.getRenderingPropertyAttr().equals(attrName)) {
 			return isSkiRoutesEnabled();
 		} else {
 			return settings.getCustomRenderBooleanProperty(attrName).get();
@@ -132,7 +132,7 @@ public class RouteLayersHelper {
 			return app.getString(R.string.rendering_attr_hikingRoutesOSMC_name);
 		} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
 			return app.getString(R.string.rendering_attr_alpineHiking_name);
-		} else if (SKI.getRenderingPropertyAttr().equals(attrName)) {
+		} else if (SKI_ROUTES.getRenderingPropertyAttr().equals(attrName)) {
 			return app.getString(R.string.help_article_navigation_routing_ski_routing_name);
 		}
 		return AndroidUtils.getRenderingStringPropertyName(app, attrName, attrName);

@@ -3,7 +3,7 @@ package net.osmand.plus.configmap;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 import static net.osmand.osm.OsmRouteType.ALPINE;
 import static net.osmand.osm.OsmRouteType.HIKING;
-import static net.osmand.osm.OsmRouteType.SKI;
+import static net.osmand.osm.OsmRouteType.SKI_ROUTES;
 import static net.osmand.plus.configmap.ConfigureMapUtils.getPropertyForAttr;
 import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
 import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE;
@@ -278,7 +278,7 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter adapter,
 							@NonNull View view, @NonNull ContextMenuItem item) {
-						if (property != null || SKI.getRenderingPropertyAttr().equals(attrName)) {
+						if (property != null || SKI_ROUTES.getRenderingPropertyAttr().equals(attrName)) {
 							routeLayersHelper.setSelectedAttrName(attrName);
 							activity.getDashboard().setDashboardVisibility(true, MAP_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 						} else {

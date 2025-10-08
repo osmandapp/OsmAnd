@@ -1,6 +1,6 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.osm.OsmRouteType.SKI;
+import static net.osmand.osm.OsmRouteType.SKI_ROUTES;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.content.Context;
@@ -144,7 +144,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			OsmandMapTileView view = mapActivity.getMapView();
 			OsmandSettings settings = view.getSettings();
 			settings.RENDERER.set(selectedStyle);
-			CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(SKI.getRenderingPropertyAttr());
+			CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(SKI_ROUTES.getRenderingPropertyAttr());
 			if (pisteRoutesPref.get()) {
 				pisteRoutesPref.set(settings.RENDERER.get().equals(RendererRegistry.WINTER_SKI_RENDER));
 			}
