@@ -5629,7 +5629,7 @@
     <string name="connect_new_scanner">Připojit nový skener</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Vyberte parametry, které se mají zaznamenat do souboru GPX.</string>
-    <string name="auto_zoom_3d_angle">Úhel automatického 3D zoomu</string>
+    <string name="auto_zoom_3d_angle">3D úhel automatického přiblížení</string>
     <string name="location_interpolation_percent">Procento interpolace polohy</string>
     <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
     <string name="shared_string_interpolation">Interpolace</string>
@@ -5877,4 +5877,15 @@
     <string name="shared_string_price">Cena</string>
     <string name="rendering_attr_showSkiSlopes_name">Zobrazit sjezdovky</string>
     <string name="rendering_attr_showSkiSlopes_description">Zobrazit zjednodušené sjezdovky</string>
+    <string name="track_folder_appearance">Vzhled složky stop</string>
+    <string name="update_maps">Aktualizovat mapy</string>
+    <string name="reconnect">Znovu připojit</string>
+    <string name="trip_recording_downhill_widget_desc">Zobrazuje součet všech klesání nebo posledního klesání aktuálně zaznamenané jízdy.</string>
+    <string name="trip_recording_uphill_widget_desc">Zobrazí součet všech stoupání nebo posledního stoupání aktuálně zaznamenané jízdy.</string>
+    <string name="trip_recording_distance_widget_desc">Zobrazuje celkovou vzdálenost aktuálně zaznamenané jízdy, s režimy pro zobrazení vzdálenosti posledního stoupání a klesání.</string>
+    <string name="trip_recording_max_speed_widget_description">Zobrazí maximální rychlost aktuálně zaznamenané jízdy. Klepněte pro přepnutí mezi celkovou maximální rychlostí a maximální rychlostí z posledního stoupání nebo klesání.</string>
+    <string name="trip_recording_average_slope_widget_description">Zobrazí průměrný sklon poslední sekce klesání nebo stoupání aktuálně zaznamenané jízdy.</string>
+    <string name="average_slope">Průměrný sklon</string>
+    <string name="shared_string_last_uphill">Poslední stoupání</string>
+    <string name="shared_string_last_downhill">Poslední klesání</string>
 </resources>
