@@ -16,13 +16,13 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CommonWords;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.data.*;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
@@ -353,7 +353,7 @@ public class SearchCoreFactory {
 				BinaryMapIndexReader r = offlineIndexes.next();
 				if (!townCities.containsKey(r)) {
 					BinaryMapIndexReader.buildAddressRequest(null);
-					List<City> l = r.getCities(null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE);
 					townCities.put(r, l);
 					for (City c  : l) {
 						c.setReferenceFile(r);
@@ -416,7 +416,7 @@ public class SearchCoreFactory {
 				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
 				final List<SearchResult> immediateResults = new ArrayList<>();
-				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
+//				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
 				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
 				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate search before
@@ -1711,7 +1711,7 @@ public class SearchCoreFactory {
 		private int olcPhraseHash;
 		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
-		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
+//		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
 		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
 		
 		private SearchAmenityByNameAPI amenitiesApi;
@@ -1944,9 +1944,9 @@ public class SearchCoreFactory {
 			return SEARCH_LOCATION_PRIORITY;
 		}
 		
-		private boolean isSearchDone(SearchPhrase phrase) {
-			return cachedParsedCode != null;
-		}
+//		private boolean isSearchDone(SearchPhrase phrase) {
+//			return cachedParsedCode != null;
+//		}
 
 		private String formatLatLon(double latLon) {
 			return latLonFormatter.format(latLon);

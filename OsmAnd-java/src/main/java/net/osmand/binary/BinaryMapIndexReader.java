@@ -59,6 +59,7 @@ import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -699,18 +700,17 @@ public class BinaryMapIndexReader {
 		return null;
 	}
 
-	public List<City> getCities(SearchRequest<City> resultMatcher,
-	                            int cityType) throws IOException {
-		return getCities(resultMatcher, null, null, cityType);
+	public List<City> getCities(SearchRequest<City> resultMatcher, CityBlocks type) throws IOException {
+		return getCities(resultMatcher, null, null, type);
 	}
 
 
-	public List<City> getCities(SearchRequest<City> resultMatcher, StringMatcher matcher, String lang, int cityType)
+	public List<City> getCities(SearchRequest<City> resultMatcher, StringMatcher matcher, String lang, CityBlocks type)
 			throws IOException {
 		List<City> cities = new ArrayList<City>();
 		for (AddressRegion r : addressIndexes) {
 			for (CitiesBlock block : r.cities) {
-				if (block.type == cityType) {
+				if (type != null && block.type == type.index) {
 					codedIS.seek(block.filePointer);
 					long old = codedIS.pushLimitLong((long) block.length);
 					addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
@@ -721,16 +721,15 @@ public class BinaryMapIndexReader {
 		return cities;
 	}
 	
-	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher,  
-			int cityType) throws IOException {
+	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher, CityBlocks cityType) throws IOException {
 		return getCities(region, resultMatcher, null, cityType);
 	}
 	
 	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher, StringMatcher matcher,  
-			int cityType) throws IOException {
+			CityBlocks cityType) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		for (CitiesBlock block : region.cities) {
-			if (block.type == cityType) {
+			if (cityType != null && block.type == cityType.index) {
 				codedIS.seek(block.filePointer);
 				long old = codedIS.pushLimitLong((long) block.length);
 				addressAdapter.readCities(cities, resultMatcher, matcher, region.attributeTagsTable);
@@ -2759,7 +2758,7 @@ public class BinaryMapIndexReader {
 	private static void testAddressSearch(BinaryMapIndexReader reader) throws IOException {
 		// test address index search
 		final Map<String, Integer> streetFreq = new HashMap<String, Integer>();
-		List<City> cs = reader.getCities(null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+		List<City> cs = reader.getCities(null, CityBlocks.CITY_TOWN_TYPE);
 		for (City c : cs) {
 			int buildings = 0;
 			reader.preloadStreets(c, null);
@@ -2772,7 +2771,7 @@ public class BinaryMapIndexReader {
 			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName(true) + " " + c.getName("ru"));
 		}
 //		int[] count = new int[1];
-		List<City> villages = reader.getCities(buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+		List<City> villages = reader.getCities(buildAddressRequest((ResultMatcher<City>) null), CityBlocks.VILLAGES_TYPE);
 		for (City v : villages) {
 			reader.preloadStreets(v, null);
 			for (Street s : v.getStreets()) {
