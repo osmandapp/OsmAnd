@@ -741,7 +741,12 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected boolean isPurchasedExternalOsmAndPro() {
-		return true;
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (holder.linkedPurchase != null && holder.linkedPurchase.isOsmAndPro()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected boolean isSubscribedToExternalOsmAndPro() {
