@@ -4380,7 +4380,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">הצגת תגיות הערה</string>
     <string name="rendering_attr_showWaterwayTunnels_description">שיפור המראה של תעלות דרכי מים</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">תגיות הערה</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">תצוגה סכמתית של סלים ברמות תקריב נמוכות</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">ייצוג סכמתי של סמלים ברמות תקריב נמוכות לנקודות עניין שלא מוצגות בדרך כלל</string>
     <string name="rendering_attr_showWaterwayTunnels_name">שיפור המראה של תעלות דרכי מים</string>
     <string name="rendering_attr_seabedDetail_name">פרט קרקעית הים</string>
     <string name="track_file">קובץ מסלולים</string>
