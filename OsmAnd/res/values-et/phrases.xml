@@ -973,7 +973,6 @@
     <string name="poi_recreation_ground">Puhkeala</string>
     <string name="poi_village_green">Külaplats</string>
     <string name="poi_sailing">Purjetamine</string>
-    <string name="poi_piste_downhill">Allasõidunõlv</string>
     <string name="poi_piste_nordic">Murdmaarada</string>
     <string name="poi_piste_skitour">Suusamatkanõlv</string>
     <string name="poi_piste_hike">Matkanõlv</string>
@@ -4955,7 +4954,6 @@
     <string name="poi_piste_oneway">Ühesuunaline rada/nõlv</string>
     <string name="poi_route_activity_type_hiking">Matkarajad</string>
     <string name="poi_route_activity_type_walking">Jalutamisrajad</string>
-    <string name="poi_route_activity_type_skiing">Suusarajad</string>
     <string name="poi_route_activity_type_road_cycling">Maanteerattasõidu rajad</string>
     <string name="poi_route_activity_type_mountain_biking">Mägirattasõidu rajad</string>
     <string name="poi_network_iwn">Rahvusvaheline matkatee (IWN)</string>

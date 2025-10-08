@@ -1603,7 +1603,6 @@
     <string name="poi_denomination_maronite">Maronit</string>
     <string name="poi_club_freemasonry">Pondok Masonik</string>
     <string name="poi_piste">Piste</string>
-    <string name="poi_piste_downhill">Piste menurun</string>
     <string name="poi_piste_nordic">Piste nordik</string>
     <string name="poi_piste_skitour">Piste skitour</string>
     <string name="poi_piste_sled">Jalur kereta luncur</string>
@@ -1938,7 +1937,6 @@
     <string name="poi_route_activity_type_backpacking">Backpacking</string>
     <string name="poi_route_activity_type_walking">Rute Jalan Kaki</string>
     <string name="poi_route_activity_type_cross_country_skiing">Ski Lintas Alam</string>
-    <string name="poi_route_activity_type_skiing">Rute Ski</string>
     <string name="poi_route_activity_type_touring">Touring</string>
     <string name="poi_route_activity_type_gliding_sailplane">Melayang (Pesawat Layar)</string>
     <string name="poi_route_activity_type_hang_gliding">Hang Gliding</string>

@@ -485,7 +485,6 @@
     <string name="poi_club_tourism">Turistaklub</string>
     <string name="poi_club_charity">Jótékonysági klub</string>
     <string name="poi_piste">Sípálya</string>
-    <string name="poi_piste_downhill">Lesikló pálya</string>
     <string name="poi_piste_nordic">Sífutónyom</string>
     <string name="poi_piste_skitour">Túrasínyom</string>
     <string name="poi_piste_hike">Túrapálya</string>
@@ -4946,7 +4945,6 @@
     <string name="poi_atv_no">Terepjáróval nem használható</string>
     <string name="poi_access_notes">Megjegyzés a használathoz</string>
     <string name="poi_route_activity_type_ski_touring">Sítúrázás</string>
-    <string name="poi_route_activity_type_skiing">Síútvonalak</string>
     <string name="poi_route_activity_type_snowmobiling">Hójárózás</string>
     <string name="poi_network_cycling">Útvonalhálózat (kerékpározás)</string>
     <string name="poi_route_track_point">Útvonalpontok</string>
