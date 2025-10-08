@@ -32,6 +32,7 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -94,6 +95,7 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.removeType(Type.ROOT_INSET);
+		collection.replace(InsetTarget.createScrollable(R.id.list_view));
 		return collection;
 	}
 

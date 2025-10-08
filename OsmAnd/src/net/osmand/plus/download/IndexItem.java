@@ -111,6 +111,11 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		return description;
 	}
 
+	@Override
+	public long getTimestamp(boolean remote) {
+		return remote ? getTimestamp() : getLocalTimestamp();
+	}
+
 	public long getTimestamp() {
 		return timestamp;
 	}

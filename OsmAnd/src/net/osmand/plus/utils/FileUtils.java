@@ -223,7 +223,6 @@ public class FileUtils {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
-				app.getOsmandMap().getMapLayers().getRouteSelectionLayer().clearCachedGpx(selected.getGpxFile());
 			}
 			app.getGpxDbHelper().remove(SharedUtil.kFile(file));
 			app.getSmartFolderHelper().onGpxFileDeleted(SharedUtil.kFile(file));
@@ -449,6 +448,11 @@ public class FileUtils {
 		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
 		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
 		return new File(backupDir, fileName);
+	}
+
+	@NonNull
+	public static String getRelativeAppPath(@NonNull OsmandApplication app, @NonNull String path) {
+		return path.replace(app.getAppPath().getPath(), "");
 	}
 
 	public static boolean isProbablyDir(@NonNull File file) {

@@ -1683,7 +1683,6 @@
     <string name="location_on_map">Kokapena:\n Lat %1$s\n Lon %2$s</string>
     <string name="notes">A/V oharrak</string>
     <string name="online_map">Sareko mapa</string>
-    <string name="rendering_attr_pisteRoutes_name">Ski pistak</string>
     <string name="free">%1$s libre</string>
     <string name="device_memory">Gailuaren memoria</string>
     <string name="world_ski_missing">Deskargatu ski pistak ikusteko lineaz kanpoko mapa berezia.</string>
@@ -4469,10 +4468,7 @@
     <string name="av_notes_photo_widget_desc">Trepeta sakatu argazki bat ateratzeko.</string>
     <string name="av_notes_video_widget_desc">Trepeta sakatu bideo-grabaketa bat abiarazteko.</string>
     <string name="av_notes_audio_widget_desc">Trepeta sakatu audio-oharrak hartzeko.</string>
-    <string name="trip_recording_downhill_widget_desc">Grabatutako bidaiaren jaitsiera guztien batura erakusten du.</string>
-    <string name="trip_recording_uphill_widget_desc">Grabatutako bidaiaren igoera guztien batura erakusten du.</string>
     <string name="trip_recording_duration_widget_desc">Uneko arrastoaren grabazio denbora erakusten du.</string>
-    <string name="trip_recording_distance_widget_desc">Grabatutako bidaiaren distantzia erakusten du.</string>
     <string name="true_bearing_wdiget_desc">Iparraldearen eta zure kokapenetik ikusitako helburu-puntuaren arteko angelua.</string>
     <string name="relative_bearing_widget_desc">Zure mugimenduaren norabidearen eta helburu-puntuaren arteko angelua erakusten du.</string>
     <string name="second_marker_widget_desc">Widget-a konfigura dezakezu bigarren mapa-markatzaileari geratzen den distantzia edo helmuga-ordu estimatua erakusteko.</string>
@@ -5313,7 +5309,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">OsmAnd ibilbidei buruz</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Oinezko ibilbideak</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Garraio publikoko ibilbideak</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Eski ibilbideak</string>
     <string name="app_mode_baby_transport">Haurren garraioa</string>
     <string name="help_article_personal_name">Nire datuak</string>
     <string name="help_article_personal_import_export_name">Inportatu / Esportatu</string>
@@ -5994,4 +5989,8 @@
     <string name="threads_allocated_for_rendering">Errendatzeko esleitutako hariak</string>
     <string name="threads_allocated_for_rendering_desc">Harien esleipen txikiagoak mapa errendatzea bizkortu dezake kasu batzuetan.</string>
     <string name="hmd_promo">HMD eskaintza %1$s hilabetez</string>
+    <string name="rendering_attr_showSkiSlopes_name">Erakutsi eski-pistak</string>
+    <string name="rendering_attr_showSkiSlopes_description">Erakutsi sinplifikatutako eski-pistak</string>
+    <string name="shared_string_price">Prezioa</string>
+    <string name="hmd_promo_description">Funtzioetarako sarbide librea, besteak beste, mapak mugarik gabe deskargatzea, 3D erliebea eta abar. %1$s hilabetean</string>
 </resources>

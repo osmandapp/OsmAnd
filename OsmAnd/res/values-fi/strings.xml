@@ -1158,7 +1158,6 @@
 \nPit %2$s</string>
     <string name="watch">Katso</string>
     <string name="online_map">Online kartta</string>
-    <string name="rendering_attr_pisteRoutes_name">Laskettelurinteet</string>
     <string name="device_memory">Laitteen muisti</string>
     <string name="rendering_attr_pisteGrooming_name">Rinnehuolto</string>
     <string name="world_ski_missing">Näyttääksesi hiihtokartat tarvitsee ladata erityinen offline kartta.</string>
@@ -4352,7 +4351,6 @@
     <string name="empty_tracks">Sinulla ei ole jälkitiedostoja.</string>
     <string name="discard_filter_changes_prompt">Alustetaanko kaikki suodattimet?</string>
     <string name="widget_available_ram">Saatavilla oleva RAM</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Hiihtoreititys</string>
     <string name="help_article_start_with_main_menu_name">Päävalikko</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Räjähteet</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Kaasut</string>

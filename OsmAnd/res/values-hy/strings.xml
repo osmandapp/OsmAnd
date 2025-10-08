@@ -954,7 +954,6 @@
     <string name="notes">A/V նշումներ</string>
     <string name="online_map">Առցանց քարտեզ</string>
     <string name="roads_only">Միայն ճանապարհները</string>
-    <string name="rendering_attr_pisteRoutes_name">Լեռնադահուկային երթուղիները</string>
     <string name="free">Ազատ է %1$s</string>
     <string name="device_memory">Սարքի հիշողությունը</string>
     <string name="rendering_attr_pisteGrooming_name">Լեռնադահուկորդ երթուղու տեսակը</string>

@@ -114,4 +114,10 @@
     <string name="days_2_4">Deiz</string>
     <string name="manage_storage_delete_data_dialog_summary">Ha sur oc\'h e vennit diverkañ %1$s diwar Koumoulenn OsmAnd ?\n\nAdkavout anezho er gest a c\'hellit ober e-pad 30 devezh.</string>
     <string name="days_5">Deizioù</string>
+    <string name="shared_string_price">Priz</string>
+    <string name="week">Sizhun</string>
+    <string name="weeks_2_4">Sizhunvezhioù</string>
+    <string name="weeks_5">Sizhunvezhioù</string>
+    <string name="month">Miz</string>
+    <string name="shared_string_close">Seriñ</string>
 </resources>

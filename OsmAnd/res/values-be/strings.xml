@@ -1371,7 +1371,6 @@
     <string name="rendering_attr_pisteGrooming_name">Дагляд трасы</string>
     <string name="free">Вольна %1$s</string>
     <string name="device_memory">Памяць прылады</string>
-    <string name="rendering_attr_pisteRoutes_name">Лыжныя трасы</string>
     <string name="roads_only">Толькі дарогі</string>
     <string name="watch">Сачыць</string>
     <string name="notes">Нататкі аўдыё/відэа</string>
@@ -4650,10 +4649,7 @@
     <string name="time_to_intermediate_widget_desc">Віджэт паказвае \"Час прыбыцця\" або \"Час да прыбыцця\" да першага прамежкавага пункта. Час стала абнаўляецца падчас навігацыі. Калі прамежкавы пункт мінуты, час будзе абноўлены да наступнага прамежкавага пункта.</string>
     <string name="distance_to_intermediate_widget_desc">Віджэт паказвае адлегласць да першага прамежкавага пункта. Пасля таго, як прамежкавы пункт будзе мінуты, адлегласць абновіцца да наступнага прамежкавага пункта.</string>
     <string name="distance_to_destination_widget_desc">Віджэт паказвае адлегласць да апошняга пункта прызначэння.</string>
-    <string name="trip_recording_downhill_widget_desc">Паказвае колькасць усіх з\'ездаў бягучай запісанай паездкі.</string>
-    <string name="trip_recording_uphill_widget_desc">Паказвае суму ўсіх пад\'ёмаў у бягучай запісанай паездцы.</string>
     <string name="trip_recording_duration_widget_desc">Паказвае час бягучай запісанай паездкі.</string>
-    <string name="trip_recording_distance_widget_desc">Паказвае адлегласць бягучай запісанай паездкі.</string>
     <string name="true_bearing_wdiget_desc">Вугал паміж сапраўднай поўначчу і мэтавым пунктам, які назіраецца з вашага месцазнаходжання.</string>
     <string name="relative_bearing_widget_desc">Паказвае вугал паміж вашым напрамкам руху наперад і мэтавым пунктам.</string>
     <string name="second_marker_widget_desc">Вы можаце наладзіць віджэт на адлюстраванне адлегласці або прыблізнага часу прыбыцця да другой адзнакі на мапе.</string>

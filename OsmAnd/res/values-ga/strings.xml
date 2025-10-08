@@ -864,7 +864,6 @@
     <string name="km_h">km/u</string>
     <string name="shared_string_apply_changes">Cuir athruithe i bhfeidhm</string>
     <string name="si_nm_ft">Muirmhílte/troigh</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Bealaí sciála</string>
     <string name="shared_string_selected_lowercase">roghnaithe</string>
     <string name="cloud_layer">Sraith na scamall</string>
     <string name="routing_attr_freeride_policy_allow_name">Ceadaigh</string>
@@ -2817,7 +2816,6 @@
     <string name="layer_hillshade">Ciseal Hillshade</string>
     <string name="map_text_size">Clómhéid an mhapa</string>
     <string name="accessibility_prefs_descr">Roghnaigh deilbhín, dath agus ainm</string>
-    <string name="rendering_attr_pisteRoutes_name">Bealaí ski</string>
     <string name="text_size_descr">Socraigh méid an téacs ar an léarscáil.</string>
     <string name="gpx_selection_point">Pointe %1$s</string>
     <string name="routing_attr_avoid_ferries_name">Gan báid farantóireachta</string>
@@ -2981,7 +2979,6 @@
     <string name="shared_string_cross_buy">Trascheannach</string>
     <string name="ant_missing_dependency">Spleáchas ar Iarraidh</string>
     <string name="shared_string_only_missing">Ar iarraidh amháin</string>
-    <string name="trip_recording_downhill_widget_desc">Taispeánann seo suim gach sliocht den turas atá taifeadta faoi láthair.</string>
     <string name="average_speed_widget_desc">Taispeánann seo meánluas an turais reatha.</string>
     <string name="rendering_attr_horseScale_name">Deacracht na gcosán capall</string>
     <string name="osm_carto_render_descr">Cosúil le stíl OpenStreetMap-carto a úsáidtear ar phríomhshuíomh OSM</string>
@@ -4314,7 +4311,6 @@
     <string name="voice_is_not_available_title">Roghnaigh pacáiste pras gutha</string>
     <string name="searchpoi_activity">Roghnaigh POI</string>
     <string name="navigate_point_format_DMS">DDD MM SS. S</string>
-    <string name="trip_recording_distance_widget_desc">Taispeánann seo an t-achar turais atá taifeadta faoi láthair.</string>
     <string name="analytics_pref_title">Anailísíocht</string>
     <string name="price_and_discount">%1$s • Sábháil%2$s</string>
     <string name="turn_screen_on_sensor_descr">Casfaidh do lámh trasna an scáileáin air.</string>
@@ -4830,7 +4826,6 @@
     <string name="downward_gradient">Grádán síos</string>
     <string name="reset_key_assignments">Athshocraigh tascanna eochracha</string>
     <string name="searching_matching_tracks">Cuardaigh gach rian meaitseála</string>
-    <string name="trip_recording_uphill_widget_desc">Taispeánann sé suim na ndreapadóirí go léir ar an turas atá taifeadta faoi láthair.</string>
     <string name="true_bearing_wdiget_desc">Uillinn idir fíor-thuaidh agus an spriocphointe a breathnaíodh ó do shuíomh.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Scéim dathanna línte comhrianta doimhneachta</string>
     <string name="explore_plans">Déan iniúchadh ar Phleananna</string>
@@ -5695,4 +5690,15 @@
     <string name="shared_string_price">Praghas</string>
     <string name="rendering_attr_showSkiSlopes_name">Taispeáin fánaí sciála</string>
     <string name="rendering_attr_showSkiSlopes_description">Taispeáin fánaí sciála simplithe</string>
+    <string name="track_folder_appearance">Cuma fillteán rianta</string>
+    <string name="update_maps">Nuashonraigh léarscáileanna</string>
+    <string name="reconnect">Athcheangail</string>
+    <string name="trip_recording_downhill_widget_desc">Taispeánann sé suim na n-ísliú go léir nó an t-ísliú deireanach den turas atá taifeadta faoi láthair.</string>
+    <string name="trip_recording_uphill_widget_desc">Taispeánann sé suim na ndreaptha go léir nó an dreapadh deireanach den turas atá taifeadta faoi láthair.</string>
+    <string name="trip_recording_distance_widget_desc">Taispeáin an t-achar iomlán don turas atá taifeadta agat faoi láthair, le modhanna chun fad an dul suas agus an tsliocht deiridh a fheiceáil.</string>
+    <string name="trip_recording_max_speed_widget_description">Taispeánann sé an luas uasta don turas atá taifeadta faoi láthair. Beartaíonn chun aistriú idir an luas uasta foriomlán agus an luas uasta ón gcnoc deireanach suas nó síos cnoc.</string>
+    <string name="trip_recording_average_slope_widget_description">Taispeánann sé an meánfhána don chuid dheireanach síos an cnoc nó suas an cnoc den turas atá taifeadta faoi láthair.</string>
+    <string name="average_slope">Meán fána</string>
+    <string name="shared_string_last_uphill">Deireanach suas an cnoc</string>
+    <string name="shared_string_last_downhill">Deireanach síos an cnoc</string>
 </resources>

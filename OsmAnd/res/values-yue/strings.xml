@@ -782,7 +782,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">關於 OsmAnd 路線</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">行人導航</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">公共交通導航</string>
-    <string name="help_article_navigation_routing_ski_routing_name">滑雪導航</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">直線導航 (飛行器)</string>
     <string name="help_article_navigation_routing_train_routing_name">火車導航</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">經由路徑導航</string>
@@ -1321,10 +1320,7 @@
     <string name="av_notes_photo_widget_desc">輕觸即可拍攝照片</string>
     <string name="av_notes_video_widget_desc">輕觸即可錄製影片</string>
     <string name="av_notes_audio_widget_desc">輕觸即可錄音</string>
-    <string name="trip_recording_downhill_widget_desc">顯示目前記錄旅程的所有下坡總和。</string>
-    <string name="trip_recording_uphill_widget_desc">顯示目前記錄旅程的所有上坡總和。</string>
     <string name="trip_recording_duration_widget_desc">顯示目前記錄旅程的時間。</string>
-    <string name="trip_recording_distance_widget_desc">顯示目前記錄旅程的距離。</string>
     <string name="true_bearing_wdiget_desc">從您的位置觀察到的真北與目標點之間的角度。</string>
     <string name="relative_bearing_widget_desc">顯示您前進方向與目標點之間的角度。</string>
     <string name="second_marker_widget_desc">設定顯示到第二個地圖標記的距離或預計抵達時間</string>
@@ -4029,7 +4025,6 @@
     <string name="notes">音訊與視訊註記</string>
     <string name="online_map">線上地圖</string>
     <string name="roads_only">僅道路</string>
-    <string name="rendering_attr_pisteRoutes_name">滑雪路線</string>
     <string name="free">%1$s 可用</string>
     <string name="device_memory">裝置記憶體</string>
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>

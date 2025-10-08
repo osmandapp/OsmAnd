@@ -136,6 +136,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.toolbar, R.id.progress_bar, R.id.search_container, R.id.view_pager));
 		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_navigation));
 		return collection;
 	}

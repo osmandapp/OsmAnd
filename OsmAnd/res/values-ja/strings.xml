@@ -1442,7 +1442,6 @@ POIの更新は利用できません</string>
     <string name="notes">記録したメモ</string>
     <string name="online_map">オンラインマップ</string>
     <string name="roads_only">道路のみ</string>
-    <string name="rendering_attr_pisteRoutes_name">スキー場</string>
     <string name="free">空き %1$s</string>
     <string name="device_memory">本体メモリー</string>
     <string name="rendering_attr_pisteGrooming_name">ゲレンデ圧雪</string>
@@ -4518,7 +4517,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_widget">ウィジェット</string>
     <string name="map_widget_camera_distance">カメラの仰角</string>
     <string name="go_to_marker_location">マーカーの場所に移動</string>
-    <string name="trip_recording_uphill_widget_desc">現在記録されている旅程の全上昇距離の合計を表示します。</string>
     <string name="no_widgets_descr">利用可能なウィジェットの一覧から、1つ以上のウィジェットを追加します。</string>
     <string name="map_widget_ant_heart_rate">心拍数</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A(制限なし)</string>
@@ -4532,7 +4530,6 @@ POIの更新は利用できません</string>
     <string name="snackbar_page_removed">\"ページ%1$s\"は削除されました。</string>
     <string name="map_widget_distance_to_destination">目的地までの距離</string>
     <string name="apply_to_existing">既存に適用</string>
-    <string name="trip_recording_distance_widget_desc">現在記録されている走行距離を表示します。</string>
     <string name="live_update_frequency_hour_variant">マップの更新は1時間ごとにチェックされます。</string>
     <string name="live_update_frequency_day_variant">マップの更新は日ごとにチェックされます。</string>
     <string name="rendering_attr_depthContourWidth_description">等深線の幅</string>
@@ -4556,7 +4553,6 @@ POIの更新は利用できません</string>
     <string name="ant_missing_dependency">依存関係が不明</string>
     <string name="shared_string_duplicate">複製</string>
     <string name="av_notes_photo_widget_desc">ウィジェットをタップすると、写真を撮ることができます。</string>
-    <string name="trip_recording_downhill_widget_desc">現在記録されている旅程の全下降距離の合計を表示します。</string>
     <string name="shared_string_cross_buy">クロスバイ</string>
     <string name="terms_of_service_desc">マップをダウンロードすると、%1$sと%2$sに同意したことになります。</string>
     <string name="shared_string_terms_of_use">利用規約</string>

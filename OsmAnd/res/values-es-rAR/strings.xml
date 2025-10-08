@@ -142,7 +142,6 @@
     <string name="notes">Notas multimedia</string>
     <string name="online_map">Mapa en línea</string>
     <string name="roads_only">Sólo caminos</string>
-    <string name="rendering_attr_pisteRoutes_name">Rutas de esquí</string>
     <string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de estacionamiento</string>
     <string name="gps_status">Estado del GPS</string>
@@ -4292,10 +4291,7 @@
     <string name="av_notes_photo_widget_desc">Pulsá el widget para fotografiar.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar una nota de voz.</string>
     <string name="av_notes_video_widget_desc">Pulsá el widget para grabar un video.</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
-    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
     <string name="second_marker_widget_desc">Podés configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
     <string name="time_to_destination_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al último punto de destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de la ruta desde la ubicación actual.</string>
@@ -4831,7 +4827,6 @@
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Navegación en bicicleta (MTB)</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Navegación directa al destino (bote)</string>
     <string name="help_article_navigation_routing_horse_routing_name">Navegación de ruta a caballo</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Navegación en esquí</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navegar con una traza</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Navegación en línea recta (avión)</string>
     <string name="help_article_navigation_routing_train_routing_name">Navegación en tren</string>
@@ -5747,4 +5742,15 @@
     <string name="shared_string_price">Precio</string>
     <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esquí</string>
     <string name="rendering_attr_showSkiSlopes_description">Mostrar pistas de esquí simplificadas</string>
+    <string name="track_folder_appearance">Aspecto de la carpeta de trazas</string>
+    <string name="update_maps">Actualizar mapas</string>
+    <string name="reconnect">Reconectar</string>
+    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
+    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actual registrado</string>
+    <string name="trip_recording_distance_widget_desc">Muestra la distancia total del recorrido actual registrado, con modos para ver la distancia del último ascenso y descenso.</string>
+    <string name="trip_recording_max_speed_widget_description">Muestra la velocidad máxima del viaje actual registrado. Pulsá para cambiar entre la velocidad máxima general y la velocidad máxima del último ascenso o descenso.</string>
+    <string name="trip_recording_average_slope_widget_description">Muestra la pendiente media del último ascenso o descenso del viaje actual registrado.</string>
+    <string name="average_slope">Pendiente media</string>
+    <string name="shared_string_last_uphill">Último ascenso</string>
+    <string name="shared_string_last_downhill">Último descenso</string>
 </resources>

@@ -1493,10 +1493,10 @@
     <string name="poi_denotation_landmark">Landemerke</string>
     <string name="poi_hazard">Fare</string>
     <string name="poi_defibrillator_location">Plassering</string>
-    <string name="poi_hazard_additional_contamination">Fare: Forgiftelse</string>
-    <string name="poi_hazard_additional_minefield">Fare: Minefelt</string>
-    <string name="poi_hazard_additional_avalanche">Fare: Snøskred</string>
-    <string name="poi_hazard_additional_flood">Fare: Oversvømmelse</string>
+    <string name="poi_hazard_additional_contamination">Forurensning</string>
+    <string name="poi_hazard_additional_minefield">Minefelt</string>
+    <string name="poi_hazard_additional_avalanche">Snøskred</string>
+    <string name="poi_hazard_additional_flood">Oversvømmelse</string>
     <string name="poi_generator_source_biomass">Energikilde: Biomasse</string>
     <string name="poi_motorhome_yes">Ja</string>
     <string name="poi_bus_yes">Ja;Buss;Busser</string>
@@ -1962,4 +1962,13 @@
     <string name="poi_contact_website">Nettsted</string>
     <string name="poi_travel_agency">Reisebyrå</string>
     <string name="poi_route_point_category">Reisekategori</string>
+    <string name="poi_hazard_additional_ice">Is</string>
+    <string name="poi_hazard_additional_side_winds">Sidevinder</string>
+    <string name="poi_hazard_additional_cyclists">Syklister</string>
+    <string name="poi_hazard_additional_pedestrians">Fotgjengere</string>
+    <string name="poi_hazard_additional_hole">Hull</string>
+    <string name="poi_hazard_additional_children">Barn</string>
+    <string name="poi_hazard_additional_dangerous_junction">Farlig kryss</string>
+    <string name="poi_hazard_additional_falling_rocks">Steinras</string>
+    <string name="poi_hazard_additional_erosion">Erosjon</string>
 </resources>

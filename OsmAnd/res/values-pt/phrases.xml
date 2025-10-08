@@ -865,7 +865,6 @@
     <string name="poi_club_sailing">Clube de vela</string>
     <string name="poi_club_scout">Clube de escoteiros</string>
     <string name="poi_piste">Pista</string>
-    <string name="poi_piste_downhill">Pista de descida</string>
     <string name="poi_piste_nordic">Pista nórdica</string>
     <string name="poi_piste_skitour">Pista de passeio</string>
     <string name="poi_piste_hike">Pista de caminhada</string>
@@ -4959,7 +4958,6 @@
     <string name="poi_route_activity_type_road_cycling">Rotas de ciclismo de estrada</string>
     <string name="poi_network_rcn">Rotas regionais de ciclismo (RCN)</string>
     <string name="poi_network_lcn">Rotas de ciclismo locais (LCN)</string>
-    <string name="poi_route_activity_type_skiing">Rotas de esqui</string>
     <string name="poi_osmwiki">Lugares populares (Wikipedia)</string>
     <string name="poi_network_foot">Rede de rotas (caminhadas)</string>
     <string name="poi_route_activity_type_mountain_biking">Rotas MTB (ciclismo de montanha)</string>

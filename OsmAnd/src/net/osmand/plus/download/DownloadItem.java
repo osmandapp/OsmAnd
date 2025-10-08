@@ -95,6 +95,8 @@ public abstract class DownloadItem {
 
 	public abstract String getDate(@NonNull DateFormat dateFormat, boolean remote);
 
+	public abstract long getTimestamp(boolean remote);
+
 	@NonNull
 	public static String getFormattedMb(@NonNull Context ctx, double sizeInMb) {
 		String size = String.format(Locale.US, "%.2f", sizeInMb);

@@ -901,7 +901,8 @@ public class CommonWords {
 		addCommon("y");
 		addCommon("un");
 		addCommon("nw");
-
+		
+		// Push higher than roads to avoid problem with "Drive A 21"
 		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
 
 		addCommon("van");
@@ -956,8 +957,6 @@ public class CommonWords {
 		addCommon("viale");
 		addCommon("loop");
 		
-//		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
-
 		addCommon("bridge");
 		addCommon("embankment");
 		addCommon("township");

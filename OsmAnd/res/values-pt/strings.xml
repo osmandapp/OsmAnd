@@ -1394,7 +1394,6 @@
     <string name="notes">Notas áudio/vídeo</string>
     <string name="online_map">Mapa online</string>
     <string name="roads_only">Apenas estradas</string>
-    <string name="rendering_attr_pisteRoutes_name">Rotas de esqui</string>
     <string name="free">%1$s livre</string>
     <string name="device_memory">Memória do dispositivo</string>
     <string name="world_ski_missing">Para mostrar mapas de esqui, tem de descarregar o mapa offline especial.</string>
@@ -4428,10 +4427,7 @@
     <string name="download_complete">Descarregamento concluído</string>
     <string name="av_notes_video_widget_desc">Tocar no widget permite começar a gravar um vídeo.</string>
     <string name="av_notes_audio_widget_desc">Tocar no widget permite gravar notas de áudio.</string>
-    <string name="trip_recording_downhill_widget_desc">Mostra a soma de todas as descidas da viagem atual gravada.</string>
-    <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atual gravada.</string>
     <string name="trip_recording_duration_widget_desc">Mostra o tempo decorrido da viagem atual a ser gravada.</string>
-    <string name="trip_recording_distance_widget_desc">Mostra a distância decorrida da viagem atual a ser gravada.</string>
     <string name="time_to_destination_widget_desc">Mostra a \"hora de chegada\" ou o \"tempo a percorrer\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo de rota da localização atual.</string>
     <string name="time_to_intermediate_widget_desc">Mostra o \"tempo de chegada\" ou o \"tempo a percorrer\" até ao primeiro ponto intermédio. O tempo é constantemente atualizado durante a navegação, uma vez passados os pontos intermédios, o tempo será atualizado para o próximo ponto intermédio.</string>
     <string name="distance_to_destination_widget_desc">Mostra a distância restante até ao último ponto de destino.</string>
@@ -5108,7 +5104,6 @@
     <string name="widget_available_ram">RAM disponível</string>
     <string name="trash_is_empty">O lixo está vazio</string>
     <string name="key_event_action_move_to_my_location">Mover para minha localização</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Roteamento de esqui</string>
     <string name="not_specified">Não especificado</string>
     <string name="help_article_widgets_name">Widgets do mapa</string>
     <string name="help_article_personal_name">Meus dados</string>

@@ -837,7 +837,6 @@
     <string name="poi_club_sailing">Клуб вітрильного спорту</string>
     <string name="poi_club_scout">Клуб скаутів</string>
     <string name="poi_piste">Лижна траса</string>
-    <string name="poi_piste_downhill">Швидкісний спуск</string>
     <string name="poi_piste_nordic">Прогулянкова або бігова лижня</string>
     <string name="poi_piste_skitour">Траса скі-тур</string>
     <string name="poi_piste_hike">Лижна траса для походів</string>
@@ -4956,7 +4955,6 @@
     <string name="poi_lit">Освітлення</string>
     <string name="poi_route_activity_type_hiking">Піші маршрути</string>
     <string name="poi_route_activity_type_walking">Піші маршрути</string>
-    <string name="poi_route_activity_type_skiing">Лижні траси</string>
     <string name="poi_route_activity_type_road_cycling">Шосейні велосипедні маршрути</string>
     <string name="poi_network_foot">Мережа маршрутів (пішохідні)</string>
     <string name="poi_network_iwn">Міжнародні пішохідні маршрути (IWN)</string>

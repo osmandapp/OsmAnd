@@ -1332,7 +1332,6 @@
     <string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
     <string name="free">%1$s voľných</string>
     <string name="device_memory">Pamäť zariadenia</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžiarske trasy</string>
     <string name="share_note">Zdieľať poznámku</string>
     <string name="notes">A/V poznámky</string>
     <string name="online_map">Online mapa</string>
@@ -4432,7 +4431,6 @@
     <string name="av_notes_photo_widget_desc">Stlačenie nástroja vám umožní snímať fotografiu.</string>
     <string name="av_notes_audio_widget_desc">Stlačenie nástroja vám umožní nahrať audio-poznámku.</string>
     <string name="trip_recording_duration_widget_desc">Zobrazuje časovú dĺžku práve zaznamenávaného výletu.</string>
-    <string name="trip_recording_distance_widget_desc">Zobrazuje vzdialenosť práve zaznamenávaného výletu.</string>
     <string name="second_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k druhej mapovej značke.</string>
     <string name="first_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k prvej mapovej značke.</string>
     <string name="time_to_destination_widget_desc">Nástroj zobrazuje \"Čas príjazdu\" alebo \"Zostávajúci čas\" k poslednému cieľovému bodu. Čas je stále aktualizovaný počas navigácie a rovná sa času trasy z aktuálnej pozície.</string>
@@ -4446,8 +4444,6 @@
     <string name="auto_backup_preference_desc">Predvolene ukladá Android zálohy obľúbených bodov, mapových značiek a nastavení OsmAnd, aby ich mohol obnoviť na novom zariadení alebo po opätovnej inštalácii. Táto záloha je obmedzená na 25 MB.
 \nPri použití OsmAnd Cloud toto môže viesť k nejasnostiam po opätovnej inštalácii.</string>
     <string name="av_notes_video_widget_desc">Stlačenie nástroja vám umožní nahrať video.</string>
-    <string name="trip_recording_uphill_widget_desc">Zobrazuje súčet všetkých výstupov v práve zaznamenávanom výlete.</string>
-    <string name="trip_recording_downhill_widget_desc">Zobrazuje súčet všetkých zostupov v práve zaznamenávanom výlete.</string>
     <string name="true_bearing_wdiget_desc">Uhol medzi skutočným severom a cieľovým bodom pozorovaný z aktuálnej pozície.</string>
     <string name="relative_bearing_widget_desc">Zobrazuje uhol medzi vaším smerom pohybu a cieľovým bodom.</string>
     <string name="time_to_intermediate_widget_desc">Nástroj zobrazuje \"Čas príjazdu\" alebo \"Zostávajúci čas\" k prvému prechodnému bodu. Čas je stále aktualizovaný počas navigácie, a keď je prechodný bod dosiahnutý, čas sa aktualizuje na ďalší prechodný bod.</string>
@@ -4962,7 +4958,6 @@
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Navigácia automobilov (nákladných, motocyklov)</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Navigácia verejnou dopravou</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Navigácia lyžiarov</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigácia podľa stopy</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigácia podľa značiek</string>
     <string name="help_article_personal_import_export_name">Import / Export</string>

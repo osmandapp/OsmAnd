@@ -175,6 +175,11 @@ public class SrtmDownloadItem extends DownloadItem {
 	}
 
 	@Override
+	public long getTimestamp(boolean remote) {
+		return getIndexItem().getTimestamp(remote);
+	}
+
+	@Override
 	@Nullable
 	public String getAdditionalDescription(Context ctx) {
 		return getAbbreviationInScopes(ctx, this);

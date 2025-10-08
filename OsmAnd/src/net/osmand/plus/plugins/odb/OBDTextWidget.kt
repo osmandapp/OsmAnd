@@ -85,38 +85,63 @@ open class OBDTextWidget(
 	}
 
 	override fun getOnClickListener(): View.OnClickListener? {
-		return if (supportsAverageMode() && averageModePref != null) {
-			View.OnClickListener { v: View? ->
-				averageModePref?.let {
-					it.set(!it.get())
-					updatePrefs(true)
-				}
+		return View.OnClickListener { _: View? ->
+			if (!plugin.isConnected() && plugin.hasLastConnectedDevice()) {
+				plugin.connectToLastConnectedDevice(VehicleMetricsPlugin.SINGLE_CONNECT_ATTEMPT_COUNT)
 			}
-		} else {
-			null
+			onWidgetClicked()
+		}
+	}
+
+	protected open fun onWidgetClicked() {
+		if (supportsAverageMode() && averageModePref != null) {
+			averageModePref?.let {
+				it.set(!it.get())
+				updatePrefs(true)
+			}
 		}
 	}
 
 	override fun getWidgetActions(): MutableList<PopUpMenuItem>? {
-		if (supportsAverageMode() && averageModePref?.get() == true) {
-			val actions: MutableList<PopUpMenuItem> = ArrayList()
-			val uiUtilities = app.uiUtilities
-			val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
-
-			actions.add(PopUpMenuItem.Builder(app)
-				.setIcon(
-					uiUtilities.getPaintedIcon(
-						R.drawable.ic_action_reset_to_default_dark,
-						iconColor
+		val actions: MutableList<PopUpMenuItem> = ArrayList()
+		val uiUtilities = app.uiUtilities
+		val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
+		if (!plugin.isConnected() && plugin.hasLastConnectedDevice()) {
+			actions.add(
+				PopUpMenuItem.Builder(app)
+					.setIcon(
+						uiUtilities.getPaintedIcon(
+							R.drawable.ic_action_refresh_dark,
+							iconColor
+						)
 					)
-				)
-				.setTitleId(R.string.reset_average_value)
-				.setOnClickListener { item: PopUpMenuItem? -> resetAverageValue() }
-				.showTopDivider(true)
-				.create())
-			return actions
+					.setTitleId(R.string.reconnect)
+					.setOnClickListener { _: PopUpMenuItem? ->
+						plugin.connectToLastConnectedDevice(
+							VehicleMetricsPlugin.SINGLE_CONNECT_ATTEMPT_COUNT)
+					}
+					.create())
 		}
-		return null
+
+		if (supportsAverageMode() && averageModePref?.get() == true) {
+			actions.add(
+				PopUpMenuItem.Builder(app)
+					.setIcon(
+						uiUtilities.getPaintedIcon(
+							R.drawable.ic_action_reset_to_default_dark,
+							iconColor
+						)
+					)
+					.setTitleId(R.string.reset_average_value)
+					.setOnClickListener { item: PopUpMenuItem? -> resetAverageValue() }
+					.showTopDivider(true)
+					.create())
+		}
+		return if (actions.isEmpty()) {
+			null
+		} else {
+			actions
+		}
 	}
 
 	private fun resetAverageValue() {
@@ -167,7 +192,7 @@ open class OBDTextWidget(
 	}
 
 	fun getWidgetOBDCommand(): OBDCommand {
-		return  fieldType.requiredCommand
+		return fieldType.requiredCommand
 	}
 
 	private fun registerAverageModePref(customId: String?): CommonPreference<Boolean> {

@@ -1154,7 +1154,6 @@
     <string name="shared_string_export">Eksporter</string>
     <string name="shared_string_collapse">Fold sammen</string>
     <string name="shared_string_video">Video</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiruter</string>
     <string name="rendering_attr_pisteGrooming_name">Løypepreparering</string>
     <string name="routing_attr_avoid_borders_description">Unngår kryssing av riksgrenser</string>
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
@@ -4322,7 +4321,7 @@
     <string name="please_provide_group_name_message">Gi gruppen et navn.</string>
     <string name="rendering_attr_seabedDetail_description">Ytterligere tekstinfo om overflatebeskaffenhet til havbunnen, kombinerte overflatetyper, kategori og art for tang og sjøgress.</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Øk synlighet for vannveitunneler</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skjematisk visning av ikoner ved lav forstørrelse</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">En skjematisk representasjon av ikoner ved lave zoomnivåer for de interessepunkter som normalt ikke vises</string>
     <string name="gpx_no_routes_title">Det finnes ingen ruter</string>
     <string name="gpx_no_routes_descr">Du kan bruke «%1$s»-verktøyet for å lagre ruten i en fil.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis fiksmeg-etiketter</string>
@@ -4704,11 +4703,8 @@
     <string name="map_widget_altitude_desc">Viser høyden til gjeldende posisjon eller høyden til gjeldende kartsenter.</string>
     <string name="external_sensors_plugin_description">Får tilgang til eksterne sensorer for å lese av f.eks. pulsen din, sykkelhastighet, sykkelkraft eller tråkkfrekvens. Krever at enheten er koblet til respektive sensorer via den trådløse personlige nettverksprotokollen ANT+.</string>
     <string name="trip_recording_duration_widget_desc">Viser tiden for det gjeldende turopptaket.</string>
-    <string name="trip_recording_downhill_widget_desc">Viser summen av alle nedstigninger for det gjeldende turopptaket.</string>
     <string name="speak_gps_signal_status">Meld om GPS-signaltap og gjenopprettelse</string>
     <string name="speak_route_recalculation">Meld om omberegning av rute</string>
-    <string name="trip_recording_distance_widget_desc">Viser distansen for det gjeldende turopptaket.</string>
-    <string name="trip_recording_uphill_widget_desc">Viser summen av alle stigninger for det gjeldende turopptaket.</string>
     <string name="map_widget_rendering_fps">Kartgjengivelse FPS</string>
     <string name="shared_string_identifiers">Identifikatorer</string>
     <string name="terms_of_service_desc">Ved å laste ned kart godtar du %1$s og %2$s.</string>
@@ -5247,7 +5243,6 @@
     <string name="help_article_purchases_android_name">Android-kjøp</string>
     <string name="help_article_purchases_ios_name">iOS-kjøp</string>
     <string name="help_article_start_with_first_steps_name">Første trinn</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skiruting</string>
     <string name="help_article_search_search_all_name">Søk alle</string>
     <string name="help_article_troubleshooting_general_name">Generelt</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Sporopptak</string>
@@ -5766,4 +5761,14 @@
     <string name="show_local_names">Vis lokale navn</string>
     <string name="kilometers">Kilometer</string>
     <string name="liter_single">Liter</string>
+    <string name="trip_recording_downhill_widget_desc">Viser summen av alle nedstigninger eller den siste nedstigningen for det gjeldende turopptaket.</string>
+    <string name="trip_recording_uphill_widget_desc">Viser summen av alle stigninger eller den siste stigningen for det gjeldende turopptaket.</string>
+    <string name="trip_recording_distance_widget_desc">Viser den totale distansen for det gjeldende turopptaket, med moduser for å vise distansen for siste oppstigning og nedstigning.</string>
+    <string name="shared_string_price">Pris</string>
+    <string name="obd_alt_battery_voltage">Adapterspenning</string>
+    <string name="shared_string_no_animation">Ingen animasjon</string>
+    <string name="position_animation">Posisjonsanimering</string>
+    <string name="show_spherical_map">Vis sfærisk kart</string>
+    <string name="show_spherical_map_description">Vis sfæroidemodell av jorden</string>
+    <string name="update_maps">Oppdater kart</string>
 </resources>

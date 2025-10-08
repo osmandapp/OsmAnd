@@ -1676,7 +1676,6 @@
     <string name="location_on_map">Yer:
 \nEnl %1$s
 \nByl %2$s</string>
-    <string name="rendering_attr_pisteRoutes_name">Kayak pistleri</string>
     <string name="free">%1$s boş</string>
     <string name="rendering_attr_pisteGrooming_name">Pist tımar</string>
     <string name="world_ski_missing">Kayak tesislerini görüntülemek için özel çevrim dışı haritayı indirin.</string>
@@ -4651,12 +4650,10 @@
     <string name="download_complete">İndirme tamamlandı</string>
     <string name="trip_recording_duration_widget_desc">Kaydedilmekte olan yolculuk süresini gösterir.</string>
     <string name="auto_25_chars_route_tr_kr">Sağa dönün ve sağdan devam edin</string>
-    <string name="trip_recording_uphill_widget_desc">Mevcut kayıtlı seyahatin toplam tüm çıkışlarını gösterir.</string>
     <string name="connect_with_straight_line">Bir düz çizgi ile bağlayın</string>
     <string name="attach_roads_warning">Yollara yalnızca bir kayıtlı izlenen yol eklenebilir.</string>
     <string name="without_profiles_changing">Profilleri değiştirmeden</string>
     <string name="shared_string_only_missing">Sadece eksik olanlar</string>
-    <string name="trip_recording_downhill_widget_desc">Mevcut kayıtlı seyahatin toplam tüm inişlerini gösterir.</string>
     <string name="compass_visible_if_map_rotated_desc">Kuzey yukarıdayken gizli</string>
     <string name="average_speed_skip_stops_desc">%1$s altındaki hızlar sayılır ve ortalama hızı etkiler.</string>
     <string name="auto_25_chars_route_tl_kl">Sola dönün ve soldan devam edin</string>
@@ -4674,7 +4671,6 @@
     <string name="av_notes_audio_widget_desc">Widget\'a dokunmak bir sesli not almanızı sağlar.</string>
     <string name="av_notes_photo_widget_desc">Widget\'a dokunmak bir fotoğraf çekmenizi sağlar.</string>
     <string name="av_notes_video_widget_desc">Widget\'a dokunmak bir video kaydı başlatmanızı sağlar.</string>
-    <string name="trip_recording_distance_widget_desc">Kaydedilmekte olan yolculuk mesafesini gösterir.</string>
     <string name="relative_bearing_widget_desc">İlerlediğiniz hareket yönü ile hedef nokta arasındaki açıyı gösterir.</string>
     <string name="true_bearing_wdiget_desc">Gerçek kuzey ile bulunduğunuz yerden gözlemlenen hedef noktası arasındaki açı.</string>
     <string name="first_marker_widget_desc">Widget\'ı, birinci harita işaretleyicisine kalan mesafeyi veya tahmini varış zamanını gösterecek şekilde ayarlayabilirsiniz.</string>
@@ -5673,7 +5669,6 @@
     <string name="help_article_navigation_routing_train_routing_name">Tren rotası</string>
     <string name="help_article_plan_route_coordinate_input_name">Koordinat girişi</string>
     <string name="help_article_plan_route_name">Rota planla</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Kayak rotası</string>
     <string name="help_article_navigation_routing_osmand_routing_name">OsmAnd rota oluşturma hakkında</string>
     <string name="help_article_navigation_routing_name">Rota parametreleri</string>
     <string name="help_article_navigation_setup_route_navigation_name">Rota Hazırlığı</string>

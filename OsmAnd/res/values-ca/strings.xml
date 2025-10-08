@@ -1452,7 +1452,6 @@
     <string name="rename_failed">No s\'ha pogut canviar el nom.</string>
     <string name="back_to_map">Torna al mapa</string>
     <string name="location_on_map">Posició:\n Lat %1$s\n Lon %2$s</string>
-    <string name="rendering_attr_pisteRoutes_name">Rutes d\'esquí</string>
     <string name="shared_string_release">Alliberat</string>
     <string name="shared_string_message">Missatge</string>
     <string name="agps_data_last_downloaded">Dades A-GPS baixades: %1$s</string>
@@ -4012,7 +4011,6 @@
     <string name="import_as_one_track">Importa com una pista</string>
     <string name="use_latin_name_if_missing">Utilitzeu el nom llatí si no hi ha</string>
     <string name="offline_cache">Memòria cau fora de línia</string>
-    <string name="trip_recording_downhill_widget_desc">Mostra la suma de tots els descensos del viatge registrat actualment.</string>
     <string name="distance_by_tap_use_description">Toqueu el mapa per veure la distància entre la vostra ubicació actual i el punt tocat.
 \nToqueu amb 2 dits el mapa per veure la distància entre els punts en què heu fet clic</string>
     <string name="transport_hazmat_title">Transport de materials perillosos</string>
@@ -4513,7 +4511,6 @@
     <string name="compass_click_north_is_up">Per canviar el mode d\'orientació feu clic i manteniu</string>
     <string name="help_article_map_raster_maps_name">Mapes de bits (connexió / desconnexió)</string>
     <string name="help_article_map_track_context_menu_name">Menú de context de les traces</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Ruta d\'esquí</string>
     <string name="simulation_real_mode_desc">En trams rectes, la velocitat s\'estimarà propera a la velocitat màxima permesa.\nAls encreuaments, la estimació serà inferior.\nTambé s\'estimaran reduccions addicionals prop de semàfors, senyals d\'stop, etc.</string>
     <string name="obd_support">Suport OBD</string>
     <string name="help_article_map_legend_nautical_map_name">Mapa tipus nàutic</string>
@@ -5221,9 +5218,7 @@
     <string name="quick_action_current_location_widget_descr">Un commutador per a mostrar o ocultar el giny d\'ubicació actual en el mapa.</string>
     <string name="included_in_your_current_plan">Inclòs en el pla actual \"%1$s\"</string>
     <string name="shared_string_only_missing">Només falta</string>
-    <string name="trip_recording_uphill_widget_desc">Mostra la suma de totes les pujades del viatge actualment enregistrat.</string>
     <string name="trip_recording_duration_widget_desc">Mostra el temps de viatge actualment registrat.</string>
-    <string name="trip_recording_distance_widget_desc">Mostra la distància de viatge actualment registrada.</string>
     <string name="true_bearing_wdiget_desc">Angle entre el nord veritable i el punt de destinació observat des de la vostra ubicació.</string>
     <string name="relative_bearing_widget_desc">Mostra l\'angle entre la direcció del moviment cap endavant i el punt de destinació.</string>
     <string name="second_marker_widget_desc">Podeu configurar el giny per a mostrar la distància o l\'hora estimada d\'arribada a l\'esquerra al segon marcador del mapa.</string>

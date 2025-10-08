@@ -201,6 +201,8 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 					if (uuid != null) {
 						this@BLEOBDDevice.uuid = uuid
 						baseConnectImpl(context, activity)
+					} else {
+						fireDeviceConnectionFailed()
 					}
 				}
 			})

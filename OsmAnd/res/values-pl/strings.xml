@@ -1469,7 +1469,6 @@
 \n 
 \nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy.</string>
     <string name="watch">Oglądaj</string>
-    <string name="rendering_attr_pisteRoutes_name">Trasy narciarskie</string>
     <string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
     <string name="world_ski_missing">Aby wyświetlić obiekty narciarskie, należy pobrać specjalną mapę offline.</string>
     <string name="nautical_maps_missing">Aby wyświetlać mapy żeglugowe, należy pobrać specjalną mapę offline.</string>
@@ -4623,10 +4622,7 @@
     <string name="included_in_your_current_plan">Zawarte w bieżącym planie \"%1$s\"</string>
     <string name="av_notes_video_widget_desc">Stuknięcie widżetu umożliwia nagranie filmu.</string>
     <string name="av_notes_audio_widget_desc">Stuknięcie widżetu pozwala na zrobienie notatki dźwiękowej.</string>
-    <string name="trip_recording_downhill_widget_desc">Pokazuje sumę wszystkich zjazdów aktualnie zarejestrowanej podróży.</string>
-    <string name="trip_recording_uphill_widget_desc">Pokazuje sumę wszystkich podjazdów aktualnie zarejestrowanej podróży.</string>
     <string name="trip_recording_duration_widget_desc">Pokazuje aktualnie zarejestrowany czas podróży.</string>
-    <string name="trip_recording_distance_widget_desc">Pokazuje aktualnie zarejestrowany dystans podróży.</string>
     <string name="true_bearing_wdiget_desc">Kąt między rzeczywistą północą a punktem docelowym obserwowanym z Twojej lokalizacji.</string>
     <string name="relative_bearing_widget_desc">Pokazuje kąt między kierunkiem ruchu do przodu a punktem docelowym.</string>
     <string name="bearing_desc">Pokazuje bezwzględne lub względne namiary na cel w jednostkach kątowych (w trybie 180 stopni, 360 stopni lub miliradianów).</string>
@@ -5223,7 +5219,6 @@
     <string name="sensor_temperature_desc">Pokazuje temperaturę z czujnika</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_routing_horse_routing_name">Trasa konna</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Trasy narciarskie</string>
     <string name="help_article_navigation_routing_name">Parametry trasy</string>
     <string name="help_article_navigation_routing_moped_routing_name">Trasa motoroweru</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Wyznaczanie tras łodzi</string>

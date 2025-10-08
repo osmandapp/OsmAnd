@@ -2034,7 +2034,6 @@
     <string name="notes">Note A/V</string>
     <string name="online_map">Hartă online</string>
     <string name="roads_only">Doar drumurile</string>
-    <string name="rendering_attr_pisteRoutes_name">Trasee de schi</string>
     <string name="free">Disponibil %1$s</string>
     <string name="device_memory">Memorie dispozitiv</string>
     <string name="edit_group">Editează grupul</string>
@@ -4663,7 +4662,6 @@
     <string name="without_profiles_changing">Fără schimbarea profilurilor</string>
     <string name="shared_string_only_missing">Doar lipsă</string>
     <string name="download_tiles">Descarcă segmente de hartă</string>
-    <string name="trip_recording_uphill_widget_desc">Arată suma tuturor urcărilor din călătoria înregistrată.</string>
     <string name="attach_roads_warning">Doar un traseu înregistrat poate fi atașat la drumuri.</string>
     <string name="auto_25_chars_route_tr_kl">Virați la dreapta și păstrați stânga</string>
     <string name="auto_25_chars_route_tu_kl">Efectuați o întoarcere în U și păstrați stânga</string>
@@ -4672,7 +4670,6 @@
     <string name="shared_string_duplicate">Duplică</string>
     <string name="av_notes_photo_widget_desc">Atingerea widgetului vă permite să faceți o fotografie.</string>
     <string name="av_notes_audio_widget_desc">Atingerea widgetului vă permite să înregistrați o notă audio.</string>
-    <string name="trip_recording_downhill_widget_desc">Arată suma tuturor coborârilor din călătoria înregistrată.</string>
     <string name="relative_bearing_widget_desc">Arată unghiul dintre direcția de deplasare înainte și punctul țintă.</string>
     <string name="first_marker_widget_desc">Puteți configura widgetul să arăte distanța sau timpul estimat până la sosirea la primul marcaj de pe hartă.</string>
     <string name="auto_25_chars_route_roundabout_kr">Luați-o pe ieșirea %1$d și păstrați banda dreaptă</string>
@@ -4681,7 +4678,6 @@
     <string name="auto_25_chars_route_tl_kr">Virați la stânga și păstrați dreapta</string>
     <string name="auto_25_chars_route_tr_kr">Virați la dreapta și păstrați dreapta</string>
     <string name="av_notes_video_widget_desc">Atingerea widgetului vă permite să înregistrați un video.</string>
-    <string name="trip_recording_distance_widget_desc">Arată distanța înregistrată a călătoriei.</string>
     <string name="true_bearing_wdiget_desc">Unghiul dintre nordul geografic și punctul țintă observat din locația dumneavoastră.</string>
     <string name="second_marker_widget_desc">Puteți configura widgetul să arăte distanța sau timpul estimat până la sosirea la cel de-al doilea marcaj de pe hartă.</string>
     <string name="auto_backup_preference_desc">În mod implicit, Android salvează backupuri ale favoritelor, ale token-urilor de hartă și ale setărilor OsmAnd pentru a le putea restaura pe dispozitive noi sau după reinstalare. Aceast backup este limitat la 25 MB.
@@ -5272,7 +5268,6 @@
     <string name="sensor_temperature_desc">Afișează temperatura de la senzor</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_routing_horse_routing_name">Rutare pentru călărie</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Rutare pentru schiat</string>
     <string name="help_article_personal_name">Informațiile mele</string>
     <string name="help_article_navigation_routing_brouter_name">BRuter</string>
     <string name="help_article_navigation_routing_name">Parametrii rutei</string>

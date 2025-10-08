@@ -70,6 +70,8 @@ import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.CollatorFilteredAdapter;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
@@ -304,6 +306,13 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 		});
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.tab_layout_container, R.id.toolbar, R.id.name_container, R.id.poi_type_container, R.id.viewpager).build());
+		return collection;
 	}
 
 	@NonNull

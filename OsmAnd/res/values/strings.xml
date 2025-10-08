@@ -11,8 +11,19 @@
 	Thx - Hardy
 -->
 
+    <string name="track_folder_appearance">Track folder appearance</string>
+    <string name="update_maps">Update maps</string>
+    <string name="reconnect">Reconnect</string>
     <string name="rendering_attr_showSkiSlopes_name">Show ski slopes</string>
     <string name="rendering_attr_showSkiSlopes_description">Show simplified ski slopes</string>
+    <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents or the last descent of the currently recorded trip.</string>
+    <string name="trip_recording_uphill_widget_desc">Shows the sum of all climbs or the last climb of the currently recorded trip.</string>
+    <string name="trip_recording_distance_widget_desc">Shows the total distance for your currently recorded trip, with modes to view the distance of the last ascent and descent.</string>
+    <string name="trip_recording_max_speed_widget_description">Shows the maximum speed for the currently recorded trip. Tap to switch between the overall max speed and the max speed from the last uphill or downhill.</string>
+    <string name="trip_recording_average_slope_widget_description">Shows the average slope for the last downhill or uphill section of the currently recorded trip.</string>
+    <string name="average_slope">Average slope</string>
+    <string name="shared_string_last_uphill">Last uphill</string>
+    <string name="shared_string_last_downhill">Last downhill</string>
     <string name="shared_string_price">Price</string>
     <string name="obd_alt_battery_voltage">Adapter voltage</string>
     <string name="liter_single">Liter</string>
@@ -83,7 +94,7 @@
     <string name="osm_live_payment_3_years_title">Every three years</string>
     <string name="three_years_subscription">Three year subscription</string>
     <string name="shared_string_switch">Switch</string>
-	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
+    <string name="ski_route_switch_style_description">Explore ski routes, slopes, and lifts with the "Winter and Ski" map style.</string>
     <string name="battery">battery</string>
     <string name="sensor_data">Sensor data</string>
     <string name="battery_level">Battery level</string>
@@ -969,7 +980,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="help_article_navigation_routing_osmand_routing_name">About OsmAnd routing</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Pedestrian routing</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Public Transport routing</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Ski routing</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Ski slopes and routes</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Straight line routing (Aircraft)</string>
     <string name="help_article_navigation_routing_train_routing_name">Train routing</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigate by track</string>
@@ -1562,10 +1573,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="av_notes_photo_widget_desc">Tapping the widget lets you take a photo.</string>
     <string name="av_notes_video_widget_desc">Tapping the widget lets you record a video.</string>
     <string name="av_notes_audio_widget_desc">Tapping the widget lets you take an audio note.</string>
-    <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents of the currently recorded trip.</string>
-    <string name="trip_recording_uphill_widget_desc">Shows the sum of all the climbs of the currently recorded trip.</string>
     <string name="trip_recording_duration_widget_desc">Shows the currently recorded trip time.</string>
-    <string name="trip_recording_distance_widget_desc">Shows the currently recorded trip distance.</string>
     <string name="true_bearing_wdiget_desc">Angle between true north and the target point observed from your location.</string>
     <string name="relative_bearing_widget_desc">Shows the angle between your forward movement direction and the target point.</string>
     <string name="second_marker_widget_desc">You can configure the widget to show the distance or Estimated time of arrival left to the second map marker.</string>
@@ -4511,7 +4519,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="notes">A/V notes</string>
     <string name="online_map">Online map</string>
     <string name="roads_only">Roads only</string>
-    <string name="rendering_attr_pisteRoutes_name">Ski routes</string>
+    <string name="rendering_attr_pisteRoutes_name">Ski slopes and routes</string>
     <string name="free">Free %1$s </string>
     <string name="device_memory">Device memory</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>

@@ -1339,7 +1339,6 @@
     <string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
     <string name="free">Ledig %1$s</string>
     <string name="device_memory">Lagerplads</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiruter</string>
     <string name="roads_only">Kun veje</string>
     <string name="notes">A/V-noter</string>
     <string name="online_map">Online kort</string>
@@ -4440,9 +4439,6 @@
     <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
     <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du optage en video.</string>
     <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du optage en lydnote.</string>
-    <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedstigninger på den aktuelt registreret tur.</string>
-    <string name="trip_recording_uphill_widget_desc">Viser summen af alle opstigninger på den aktuelt registreret tur.</string>
-    <string name="trip_recording_distance_widget_desc">Viser den aktuelt registrerede turafstand.</string>
     <string name="true_bearing_wdiget_desc">Vinkel mellem det sande nord og målpunktet observeret fra din placering.</string>
     <string name="relative_bearing_widget_desc">Viser vinklen mellem din fremadgående bevægelsesretning og målpunktet.</string>
     <string name="second_marker_widget_desc">Du kan indstille modulet til at vise afstanden eller den anslået ankomsttid for den anden kortmarkør.</string>
@@ -5010,7 +5006,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnd-ruteberegning</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Fodgænger-ruteberegning</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Offentlig transport ruteberegning</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skiløb-ruteberegning</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Lige linje ruteberegning (fly)</string>
     <string name="help_article_navigation_routing_train_routing_name">Tog-ruteberegning</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Naviger efter spor</string>
@@ -5910,4 +5905,15 @@
     <string name="shared_string_price">Pris</string>
     <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
     <string name="rendering_attr_showSkiSlopes_description">Vis forenklede skiløjper</string>
+    <string name="track_folder_appearance">Spor-mappens udseende</string>
+    <string name="update_maps">Opdatér kort</string>
+    <string name="reconnect">Genopret forbindelse</string>
+    <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedstigninger på den aktuelt registreret tur.</string>
+    <string name="trip_recording_uphill_widget_desc">Viser summen af alle opstigninger på den aktuelt registreret tur.</string>
+    <string name="trip_recording_distance_widget_desc">Viser den samlede afstand for din aktuelt registrerede tur med mulighed for at se afstanden for den sidste stigning og nedstigning.</string>
+    <string name="trip_recording_max_speed_widget_description">Viser den maksimale hastighed for den aktuelt registrerede tur. Tryk for at skifte mellem den samlede maksimale hastighed og den maksimale hastighed fra den sidste op- eller nedkørsel.</string>
+    <string name="trip_recording_average_slope_widget_description">Viser den gennemsnitlige hældning for det sidste nedadgående eller opadgående afsnit af den aktuelt registrerede tur.</string>
+    <string name="average_slope">Gennemsnitlig hældning</string>
+    <string name="shared_string_last_uphill">Sidste stigning</string>
+    <string name="shared_string_last_downhill">Sidste nedkørsel</string>
 </resources>

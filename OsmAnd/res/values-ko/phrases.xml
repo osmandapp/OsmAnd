@@ -663,7 +663,6 @@
     <string name="poi_gasometer">가스 계량기</string>
     <string name="poi_silo">실로</string>
     <string name="poi_storage_tank">저장 탱크</string>
-    <string name="poi_piste_downhill">내리막</string>
     <string name="poi_piste_nordic">노르딕</string>
     <string name="poi_piste_skitour">스키여행</string>
     <string name="poi_piste_hike">하이킹</string>

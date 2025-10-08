@@ -955,7 +955,6 @@
     <string name="poi_club_sailing">航海俱樂部</string>
     <string name="poi_club_scout">童子軍俱樂部</string>
     <string name="poi_piste">滑雪道</string>
-    <string name="poi_piste_downhill">下坡滑雪路線</string>
     <string name="poi_piste_nordic">北歐滑雪道</string>
     <string name="poi_piste_skitour">滑雪旅遊滑雪道</string>
     <string name="poi_piste_hike">徒步滑雪路線</string>
@@ -4900,7 +4899,6 @@
     <string name="poi_route_activity_type_cross_country_skiing">越野滑雪</string>
     <string name="poi_route_activity_type_ice_skating">溜冰</string>
     <string name="poi_route_activity_type_ski_touring">滑雪旅遊</string>
-    <string name="poi_route_activity_type_skiing">滑雪路線</string>
     <string name="poi_route_activity_type_snowboarding">單板滑雪</string>
     <string name="poi_route_activity_type_snowmobiling">雪地電單車</string>
     <string name="poi_route_activity_type_snowshoeing">雪鞋</string>

@@ -78,7 +78,8 @@ public class SearchPhrase {
 		conjunctions.add("et");
 		conjunctions.add("y");
 		conjunctions.add("и");
-		// short 
+		
+		// short - issues for perfect matching "Drive A"
 //		conjunctions.add("f");
 //		conjunctions.add("u");
 //		conjunctions.add("jl.");

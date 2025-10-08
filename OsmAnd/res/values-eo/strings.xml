@@ -475,7 +475,6 @@
     <string name="notes">Sonaj/videaj notoj</string>
     <string name="online_map">Enreta mapo</string>
     <string name="roads_only">Nur vojoj</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiaj kursoj</string>
     <string name="free">Libera %1$s</string>
     <string name="gps_status">Stato de GPS</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
@@ -4435,9 +4434,6 @@
     <string name="av_notes_photo_widget_desc">Fenestraĵo ebliganta fari foton.</string>
     <string name="av_notes_video_widget_desc">Fenestraĵo ebliganta registri filman noton.</string>
     <string name="av_notes_audio_widget_desc">Fenestraĵo ebliganta registri sonan noton.</string>
-    <string name="trip_recording_distance_widget_desc">Montras distancon de la nune registrata spuro.</string>
-    <string name="trip_recording_downhill_widget_desc">Montras sumon (horizontale) de ĉiuj malsupreniroj por la nune registrata spuro.</string>
-    <string name="trip_recording_uphill_widget_desc">Montras sumon (horizontale) de ĉiuj supreniroj por la nune registrata spuro.</string>
     <string name="trip_recording_duration_widget_desc">Montras daŭron de la nune registrata spuro.</string>
     <string name="true_bearing_wdiget_desc">Angulo inter la vera nordo, via pozicio kaj la alcela loko.</string>
     <string name="first_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la unua map-marko.</string>
@@ -4950,7 +4946,6 @@
     <string name="glide_ratio_to_target">Glisrilato necesa por celo</string>
     <string name="map_widget_group_glide_ratio">Glisrilato</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Publikaj transportiloj</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skiado</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Rekta linio (aviadilo)</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigi laŭ spuro</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigi laŭ markoj</string>

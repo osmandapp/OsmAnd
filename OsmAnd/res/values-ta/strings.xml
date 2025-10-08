@@ -1420,7 +1420,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">ஒச்மண்ட் ரூட்டிங் பற்றி</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">பாதசாரி ரூட்டிங்</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">பொது போக்குவரத்து ரூட்டிங்</string>
-    <string name="help_article_navigation_routing_ski_routing_name">ச்கை ரூட்டிங்</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">நேர் லைன் ரூட்டிங் (விமானம்)</string>
     <string name="help_article_navigation_routing_train_routing_name">ரயில் ரூட்டிங்</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">டிராக் மூலம் செல்லவும்</string>
@@ -1506,10 +1505,7 @@
     <string name="av_notes_photo_widget_desc">விட்செட்டைத் தட்டினால் புகைப்படம் எடுக்க உங்களை அனுமதிக்கிறது.</string>
     <string name="av_notes_video_widget_desc">விட்செட்டைத் தட்டினால் வீடியோவைப் பதிவுசெய்க உங்களை அனுமதிக்கிறது.</string>
     <string name="av_notes_audio_widget_desc">விட்செட்டைத் தட்டினால் ஆடியோ குறிப்பு எடுக்க உங்களை அனுமதிக்கிறது.</string>
-    <string name="trip_recording_downhill_widget_desc">தற்போதைய பதிவு செய்யப்பட்ட பயணத்தின் அனைத்து சந்ததியினரின் கூட்டுத்தொகையைக் காட்டுகிறது.</string>
-    <string name="trip_recording_uphill_widget_desc">தற்போது பதிவுசெய்யப்பட்ட பயணத்தின் அனைத்து ஏறுதல்களின் தொகையையும் காட்டுகிறது.</string>
     <string name="trip_recording_duration_widget_desc">தற்போது பதிவு செய்யப்பட்ட பயண நேரத்தைக் காட்டுகிறது.</string>
-    <string name="trip_recording_distance_widget_desc">தற்போது பதிவு செய்யப்பட்ட பயண தூரத்தைக் காட்டுகிறது.</string>
     <string name="relative_bearing_widget_desc">உங்கள் முன்னோக்கி இயக்கம் திசைக்கும் இலக்கு புள்ளிக்கும் இடையிலான கோணத்தைக் காட்டுகிறது.</string>
     <string name="second_marker_widget_desc">இரண்டாவது வரைபட குறிப்பானுக்கு எஞ்சியிருக்கும் தூரத்தை அல்லது மதிப்பிடப்பட்ட நேரத்தைக் காட்ட நீங்கள் விட்செட்டை உள்ளமைக்கலாம்.</string>
     <string name="first_marker_widget_desc">முதல் வரைபட குறிப்பானுக்கு எஞ்சியிருக்கும் வருகையின் தூரம் அல்லது மதிப்பிடப்பட்ட நேரத்தைக் காட்ட நீங்கள் விட்செட்டை உள்ளமைக்கலாம்.</string>
@@ -2539,7 +2535,6 @@
     <string name="rendering_attr_alpineHiking_description">வழிகளுக்கான வகைப்பாடு வகைகளில் தொல்லை.</string>
     <string name="rendering_attr_highway_class_bridleway_name">பிரிட்ல்வே</string>
     <string name="routing_attr_avoid_share_taxi_name">பங்கு டாக்சி இல்லை</string>
-    <string name="rendering_attr_pisteRoutes_name">ச்கை பாதைகள்</string>
     <string name="rendering_attr_piste_type_sled_name">ச்லெட்</string>
     <string name="rendering_attr_noPolygons_description">வரைபடத்தில் உள்ள அனைத்து ஏரியல் லேண்ட் அம்சங்களையும் வெளிப்படையானதாக ஆக்குங்கள்.</string>
     <string name="routing_attr_allow_classic_only_description">ச்கேட்டிங் பாதைகள் இல்லாமல் மட்டுமே கிளாசிக் பாணிக்கு வழிகள் உருவாகின. ஒரு சிறிய ச்னோமொபைல் மூலம் தளர்வான பிச்டுடன் வளர்ந்த வழிகள் இதில் அடங்கும்.</string>

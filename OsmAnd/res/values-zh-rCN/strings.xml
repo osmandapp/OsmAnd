@@ -1615,7 +1615,6 @@
 \n 经度 %2$s</string>
     <string name="watch">查看</string>
     <string name="notes">音视频注记</string>
-    <string name="rendering_attr_pisteRoutes_name">滑雪路线</string>
     <string name="free">%1$s 可用</string>
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="world_ski_missing">下载专用的离线地图以显示滑雪设施。</string>
@@ -4151,7 +4150,6 @@
     <string name="auto_25_chars_route_tr_kl">向右转并靠左</string>
     <string name="auto_25_chars_route_tl_kr">向左转并靠右</string>
     <string name="auto_25_chars_route_tl_kl">向左转并靠左</string>
-    <string name="trip_recording_downhill_widget_desc">显示当前记录的行程中所有下降高度的总和。</string>
     <string name="compass_desc">显示向北的方向。</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">显示节点网络自行车路线</string>
     <string name="live_update_frequency_week_variant">每周检查一次地图更新。</string>
@@ -4167,9 +4165,7 @@
     <string name="av_notes_photo_widget_desc">点击小部件可以让你拍下照片。</string>
     <string name="av_notes_video_widget_desc">点击小部件可以让你录制一个视频。</string>
     <string name="av_notes_audio_widget_desc">点击小工具可让您留下一条音频注释。</string>
-    <string name="trip_recording_uphill_widget_desc">显示当前记录的行程中所有爬升高度的总和。</string>
     <string name="trip_recording_duration_widget_desc">显示当前记录的行程时间。</string>
-    <string name="trip_recording_distance_widget_desc">显示当前记录的行程距离。</string>
     <string name="true_bearing_wdiget_desc">从您所在位置观察到的真北与目标点之间的角度。</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深线配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深线宽度</string>
@@ -4905,7 +4901,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">关于 OsmAnd 路线规划</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">步行路线规划</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">公共交通路线规划</string>
-    <string name="help_article_navigation_routing_ski_routing_name">滑雪路线规划</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">按照轨迹导航</string>
     <string name="help_article_navigation_guidance_name">导航指引</string>
     <string name="help_article_personal_name">我的数据</string>

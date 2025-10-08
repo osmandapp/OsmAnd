@@ -2216,7 +2216,6 @@
     <string name="osmand_distance_planning_plugin_description">Δημιουργείστε μονοπάτια πατώντας τον χάρτη, ή χρησιμοποιώντας ή τροποποιώντας υφιστάμενα αρχεία GPX, για τη σχεδίαση ταξιδιού και μέτρηση της απόστασης μεταξύ σημείων. Το αποτέλεσμα μπορεί να αποθηκευτεί ως αρχείο GPX για μεταγενέστερη χρήση στην καθοδήγηση.</string>
     <string name="watch">Παρακολούθηση</string>
     <string name="online_map">Χάρτης με σύνδεση</string>
-    <string name="rendering_attr_pisteRoutes_name">Χιονοδρομικές διαδρομές</string>
     <string name="rendering_attr_pisteGrooming_name">Συντήρηση πίστας</string>
     <string name="world_ski_missing">Μεταφορτώστε τον ειδικό χάρτη χωρίς σύνδεση για να εμφανίσετε εγκαταστάσεις χιονοδρομίας.</string>
     <string name="nautical_maps_missing">Μεταφορτώστε τον ειδικό χάρτη χωρίς σύνδεση για να εμφανίσετε ναυτικές λεπτομέρειες.</string>
@@ -3940,7 +3939,6 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="shared_string_apply_changes">Εφαρμογή αλλαγών</string>
     <string name="si_nm_ft">Ναυτικά μίλια/πόδια</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Δρομολόγηση με σκι</string>
     <string name="no_bt_permission">Δεν έχει δοθεί άδεια Bluetooth</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Τοξικές και Μολυσματικές Ουσίες</string>
     <string name="shared_string_migration">Μετεγκατάσταση</string>
@@ -4905,10 +4903,7 @@
     <string name="distance_circles">Κύκλοι απόστασης</string>
     <string name="map_widget_rendering_fps_desc">Δείχνει πόσο γρήγορα ο χάρτης και τα στοιχεία του χάρτη προβάλλονται και ανανεώνονται, εκφρασμένο σε πλαίσια ανά δευτερόλεπτο (FPS).</string>
     <string name="map_widget_target_distance_desc">Δείχνει την απόσταση μεταξύ κάμερας και τοποθεσίας στόχου.</string>
-    <string name="trip_recording_downhill_widget_desc">Δείχνει το άρθροισμα όλων των καταβάσεων στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
-    <string name="trip_recording_uphill_widget_desc">Δείχνει το άρθροισμα όλων των αναβάσεων στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
     <string name="trip_recording_duration_widget_desc">Δείχνει τον χρόνο της τρέχουσας καταγεγραμμένης διαδρομής.</string>
-    <string name="trip_recording_distance_widget_desc">Δείχνει την απόσταση της τρέχουσας καταγεγραμμένης διαδρομής.</string>
     <string name="average_speed_skip_stops">Λαμβάνει τις στάσεις υπ\'όψιν</string>
     <string name="map_widget_distance_to_intermediate">Απόσταση μέχρι ενδιάμεση</string>
     <string name="map_widget_time_to_destination">Χρόνος μέχρι προορισμό</string>

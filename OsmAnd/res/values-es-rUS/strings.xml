@@ -142,7 +142,6 @@
     <string name="notes">Notas multimedia</string>
     <string name="online_map">Mapa en línea</string>
     <string name="roads_only">Sólo caminos</string>
-    <string name="rendering_attr_pisteRoutes_name">Rutas de esquí</string>
     <string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de estacionamiento</string>
     <string name="gps_status">Estado del GPS</string>
@@ -4367,10 +4366,7 @@
     <string name="av_notes_photo_widget_desc">Pulsa el widget para fotografiar.</string>
     <string name="av_notes_video_widget_desc">Pulsa el widget para grabar un video.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar una nota de voz.</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
-    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
     <string name="second_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
@@ -4913,7 +4909,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Sobre la navegación en OsmAnd</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Navegación a pie</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Navegación en transporte público</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Navegación en esquí</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Navegación en línea recta (avión)</string>
     <string name="help_article_navigation_routing_train_routing_name">Navegación en tren</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navegar con una traza</string>
