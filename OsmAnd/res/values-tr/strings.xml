@@ -1676,7 +1676,6 @@
     <string name="location_on_map">Yer:
 \nEnl %1$s
 \nByl %2$s</string>
-    <string name="rendering_attr_pisteRoutes_name">Kayak pistleri</string>
     <string name="free">%1$s boş</string>
     <string name="rendering_attr_pisteGrooming_name">Pist tımar</string>
     <string name="world_ski_missing">Kayak tesislerini görüntülemek için özel çevrim dışı haritayı indirin.</string>
@@ -5670,7 +5669,6 @@
     <string name="help_article_navigation_routing_train_routing_name">Tren rotası</string>
     <string name="help_article_plan_route_coordinate_input_name">Koordinat girişi</string>
     <string name="help_article_plan_route_name">Rota planla</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Kayak rotası</string>
     <string name="help_article_navigation_routing_osmand_routing_name">OsmAnd rota oluşturma hakkında</string>
     <string name="help_article_navigation_routing_name">Rota parametreleri</string>
     <string name="help_article_navigation_setup_route_navigation_name">Rota Hazırlığı</string>

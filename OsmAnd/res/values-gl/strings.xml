@@ -1479,7 +1479,6 @@
     <string name="notes">Notas multimedia</string>
     <string name="online_map">Mapa na rede</string>
     <string name="roads_only">Só estradas</string>
-    <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>
     <string name="device_memory">Memoria do dispositivo</string>
     <string name="world_ski_missing">Baixar o mapa especial sen conexión para amosar as instalacións de esquí.</string>
     <string name="remove_the_tag">ELIMINAR ETIQUETA</string>

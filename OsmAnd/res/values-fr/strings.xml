@@ -1373,7 +1373,6 @@
     <string name="notes">Notes A/V</string>
     <string name="online_map">Carte en ligne</string>
     <string name="roads_only">Routes uniquement</string>
-    <string name="rendering_attr_pisteRoutes_name">Itinéraires à ski</string>
     <string name="watch">Suivre</string>
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Partager la note</string>
@@ -4881,7 +4880,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">À propos des guidages OsmAnd</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Navigation à pied</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Navigation en transports publics</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Navigation à ski</string>
     <string name="help_article_navigation_routing_train_routing_name">Navigation en train</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Naviguer par trace</string>
     <string name="help_article_personal_profiles_name">Profils (paramètres)</string>

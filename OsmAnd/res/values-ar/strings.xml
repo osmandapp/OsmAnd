@@ -1268,7 +1268,6 @@
     <string name="daynight">وضع نهاري/ليلي</string>
     <string name="plugin_nautical_name">الخرائط البحرية</string>
     <string name="plugin_ski_name">خريطة التزلج</string>
-    <string name="rendering_attr_pisteRoutes_name">مسارات تزلج</string>
     <string name="index_item_world_ski">خريطة التزلج العالمية</string>
     <string name="index_item_world_seamarks">خريطة العلامات البحرية العالمية</string>
     <string name="amenity_type_transportation">نقل</string>
@@ -5047,7 +5046,6 @@
     <string name="help_article_navigation_routing_car_based_routing_name">توجيه السيارة (شاحنة ، دراجة نارية)</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">التوجيه المباشر إلى نقطة (قارب)</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">توجيه المشاة</string>
-    <string name="help_article_navigation_routing_ski_routing_name">توجيه التزلج</string>
     <string name="help_article_plan_route_web_name">مخطط مسار الانترنت</string>
     <string name="help_article_purchases_giveaway_name">تبرع</string>
     <string name="help_article_troubleshooting_general_name">عام</string>

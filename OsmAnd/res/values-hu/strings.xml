@@ -1364,7 +1364,6 @@
     <string name="device_memory">Eszköz memóriája</string>
     <string name="free">%1$s szabad</string>
     <string name="roads_only">Csak utak</string>
-    <string name="rendering_attr_pisteRoutes_name">Sípályák</string>
     <string name="rendering_attr_pisteGrooming_name">Sípálya kezeltség</string>
     <string name="watch">Óra</string>
     <string name="notes">Hang/videó jegyzetek</string>
@@ -4943,7 +4942,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Az OsmAnd útvonaltervezésről</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Útvonaltervezés gyalogláshoz</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Útvonaltervezés tömegközledéshez</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Útvonaltervezés síeléshez</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Útvonaltervezés légvonalban (repülés)</string>
     <string name="help_article_navigation_routing_train_routing_name">Útvonaltervezés vonathoz</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigálás nyomvonallal</string>

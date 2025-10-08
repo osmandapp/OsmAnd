@@ -1439,7 +1439,6 @@
     <string name="notes">הערות ק/ו</string>
     <string name="online_map">מפה מקוונת</string>
     <string name="roads_only">דרכים בלבד</string>
-    <string name="rendering_attr_pisteRoutes_name">מסלולי סקי</string>
     <string name="free">%1$s פנויים</string>
     <string name="device_memory">זיכרון המכשיר</string>
     <string name="rendering_attr_pisteGrooming_name">פילוס שלג</string>
@@ -4845,7 +4844,6 @@
     <string name="map_widget_glide_average_desc">מציג את יחס הגלישה הממוצע לטווח שהוגדר.</string>
     <string name="help_article_map_legend_ski_map_name">סגנון מפה סקי</string>
     <string name="help_article_map_legend_osmand_name">סגנון מפה OsmAnd</string>
-    <string name="help_article_navigation_routing_ski_routing_name">ניווט לסקי</string>
     <string name="help_article_map_point_layers_on_map_name">נקודות על המפה</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">ניווט להולכי רגל</string>
     <string name="help_article_navigation_guidance_name">הנחיות ניווט</string>

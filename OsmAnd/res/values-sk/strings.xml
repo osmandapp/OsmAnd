@@ -1332,7 +1332,6 @@
     <string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
     <string name="free">%1$s voľných</string>
     <string name="device_memory">Pamäť zariadenia</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžiarske trasy</string>
     <string name="share_note">Zdieľať poznámku</string>
     <string name="notes">A/V poznámky</string>
     <string name="online_map">Online mapa</string>
@@ -4959,7 +4958,6 @@
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Navigácia automobilov (nákladných, motocyklov)</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Navigácia verejnou dopravou</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Navigácia lyžiarov</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigácia podľa stopy</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigácia podľa značiek</string>
     <string name="help_article_personal_import_export_name">Import / Export</string>

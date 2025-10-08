@@ -1309,7 +1309,6 @@
     <string name="world_ski_missing">스키 지도를 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다.</string>
     <string name="nautical_maps_missing">항해 지도 표시 하려면 특정 오프라인 지도를 다운로드 해야 합니다</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming (손질)</string>
-    <string name="rendering_attr_pisteRoutes_name">스키 슬로프</string>
     <string name="free">무료 %1$s</string>
     <string name="device_memory">장치 메모리</string>
     <string name="roads_only">도로 전용</string>
@@ -3577,7 +3576,6 @@
     <string name="routing_attr_avoid_share_taxi_name">공유 택시 없음</string>
     <string name="routing_attr_avoid_bus_description">버스와 무궤도전차를 피함</string>
     <string name="application_profiles_descr">앱에 표시할 프로필을 선택하세요.</string>
-    <string name="help_article_navigation_routing_ski_routing_name">스키 경로</string>
     <string name="help_article_navigation_routing_train_routing_name">열차 노선</string>
     <string name="routing_attr_hazmat_category_usa_3_name">가연성 액체</string>
     <string name="first_intermediate_dest_description">초기 정지 추가</string>

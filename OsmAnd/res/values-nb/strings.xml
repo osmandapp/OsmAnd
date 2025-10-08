@@ -1154,7 +1154,6 @@
     <string name="shared_string_export">Eksporter</string>
     <string name="shared_string_collapse">Fold sammen</string>
     <string name="shared_string_video">Video</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiruter</string>
     <string name="rendering_attr_pisteGrooming_name">Løypepreparering</string>
     <string name="routing_attr_avoid_borders_description">Unngår kryssing av riksgrenser</string>
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
@@ -5244,7 +5243,6 @@
     <string name="help_article_purchases_android_name">Android-kjøp</string>
     <string name="help_article_purchases_ios_name">iOS-kjøp</string>
     <string name="help_article_start_with_first_steps_name">Første trinn</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skiruting</string>
     <string name="help_article_search_search_all_name">Søk alle</string>
     <string name="help_article_troubleshooting_general_name">Generelt</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Sporopptak</string>

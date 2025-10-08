@@ -1321,7 +1321,6 @@
     <string name="notes">A/V бележки</string>
     <string name="online_map">Онлайн карта</string>
     <string name="roads_only">Само пътища</string>
-    <string name="rendering_attr_pisteRoutes_name">Ски маршрути</string>
     <string name="free">Свободни %1$s</string>
     <string name="device_memory">Памет на устройството</string>
     <string name="parking_place">Паркинг място</string>

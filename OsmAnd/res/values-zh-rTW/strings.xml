@@ -1298,7 +1298,6 @@
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="free">%1$s 可用</string>
     <string name="device_memory">裝置記憶體</string>
-    <string name="rendering_attr_pisteRoutes_name">滑雪路線</string>
     <string name="roads_only">僅道路</string>
     <string name="watch">觀看</string>
     <string name="notes">音訊與視訊註記</string>
@@ -4849,7 +4848,6 @@
     <string name="send_logcat_log_descr">詳細的紀錄檔</string>
     <string name="send_crash_log_descr">僅包含關於當機的資訊</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">大眾運輸導航</string>
-    <string name="help_article_navigation_routing_ski_routing_name">滑雪導航</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">直線導航 (飛行器)</string>
     <string name="help_article_navigation_routing_train_routing_name">火車導航</string>
     <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
