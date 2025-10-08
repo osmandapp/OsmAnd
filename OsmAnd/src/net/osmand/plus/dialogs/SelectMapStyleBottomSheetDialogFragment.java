@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.osm.RenderingPropertyAttr;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,6 +28,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RendererRegistry;
@@ -144,10 +146,10 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			OsmandMapTileView view = mapActivity.getMapView();
 			OsmandSettings settings = view.getSettings();
 			settings.RENDERER.set(selectedStyle);
-			CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(SKI_ROUTES.getRenderingPropertyAttr());
-			if (pisteRoutesPref.get()) {
-				pisteRoutesPref.set(settings.RENDERER.get().equals(RendererRegistry.WINTER_SKI_RENDER));
-			}
+
+			RouteLayersHelper routeLayersHelper = app.getRouteLayersHelper();
+			routeLayersHelper.toggleSkiRoutes(settings.RENDERER.get().equals(RendererRegistry.WINTER_SKI_RENDER));
+
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
 			mapActivity.refreshMapComplete();
 			DashboardOnMap dashboard = mapActivity.getDashboard();

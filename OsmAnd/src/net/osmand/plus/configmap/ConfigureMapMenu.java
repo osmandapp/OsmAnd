@@ -298,12 +298,11 @@ public class ConfigureMapMenu {
 						if (adapter != null) {
 							adapter.onDataSetChanged();
 						}
-						if (property != null) {
-							activity.refreshMapComplete();
-							activity.updateLayers();
-						} else {
+						if (property == null) {
 							RouteUtils.showRendererSnackbarForAttr(activity, attrName, nightMode, null);
 						}
+						activity.refreshMapComplete();
+						activity.updateLayers();
 						return false;
 					}
 				});

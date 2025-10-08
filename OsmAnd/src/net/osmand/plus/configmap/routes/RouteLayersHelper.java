@@ -5,6 +5,7 @@ import static net.osmand.osm.OsmRouteType.BICYCLE;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.osm.OsmRouteType.MTB;
 import static net.osmand.osm.OsmRouteType.SKI_ROUTES;
+import static net.osmand.osm.RenderingPropertyAttr.SKI_SLOPES;
 import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_SCALE_SCHEME_ATTR;
 import static net.osmand.plus.configmap.routes.AlpineHikingCard.getDifficultyClassificationDescription;
 import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
@@ -44,7 +45,8 @@ public class RouteLayersHelper {
 	private final CommonPreference<Boolean> alpineHikingPreference;
 	private final CommonPreference<String> alpineHikingScaleScheme;
 
-	private final CommonPreference<Boolean> skiRoutePreference;
+	private final CommonPreference<Boolean> pisteRoutesPreference;
+	private final CommonPreference<Boolean> showSkiSlopesPreference;
 
 	@Nullable
 	private String selectedAttrName;
@@ -68,7 +70,8 @@ public class RouteLayersHelper {
 		alpineHikingPreference = settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr());
 		alpineHikingScaleScheme = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
 
-		skiRoutePreference = settings.getCustomRenderBooleanProperty(SKI_ROUTES.getRenderingPropertyAttr());
+		pisteRoutesPreference = settings.getCustomRenderBooleanProperty(SKI_ROUTES.getRenderingPropertyAttr());
+		showSkiSlopesPreference = settings.getCustomRenderBooleanProperty(SKI_SLOPES.getAttrName());
 	}
 
 	@Nullable
@@ -275,11 +278,12 @@ public class RouteLayersHelper {
 	}
 
 	public void toggleSkiRoutes(boolean enabled) {
-		skiRoutePreference.set(enabled);
+		pisteRoutesPreference.set(enabled);
+		showSkiSlopesPreference.set(enabled);
 	}
 
 	public boolean isSkiRoutesEnabled() {
-		return skiRoutePreference.get();
+		return pisteRoutesPreference.get();
 	}
 
 	// Alpine hiking routes
