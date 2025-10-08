@@ -5859,4 +5859,15 @@
     <string name="shared_string_price">Цена</string>
     <string name="rendering_attr_showSkiSlopes_name">Прикажи скијашке стазе</string>
     <string name="rendering_attr_showSkiSlopes_description">Приказати лаке ски стазе</string>
+    <string name="track_folder_appearance">Изглед фолдера за праћење</string>
+    <string name="update_maps">Ажурирај мапе</string>
+    <string name="reconnect">Поново се повежите</string>
+    <string name="trip_recording_downhill_widget_desc">Приказује збир свих спуштања или последње спуштање тренутно забележеног путовања.</string>
+    <string name="trip_recording_uphill_widget_desc">Приказује збир свих успона или последњи успон тренутно забележеног путовања.</string>
+    <string name="trip_recording_distance_widget_desc">Приказује укупну удаљеност за ваше тренутно забележено путовање, са режимима за приказ удаљености последњег успона и спуста.</string>
+    <string name="trip_recording_max_speed_widget_description">Приказује максималну брзину за тренутно забележено путовање. Додирните да бисте прелазили између укупне максималне брзине и максималне брзине са последњег успона или спуста.</string>
+    <string name="trip_recording_average_slope_widget_description">Приказује просечан нагиб за последњу низбрдицу или узбрдицу тренутно снимљеног путовања.</string>
+    <string name="average_slope">Просечан нагиб</string>
+    <string name="shared_string_last_uphill">Последњи успон</string>
+    <string name="shared_string_last_downhill">Последња низбрдица</string>
 </resources>
