@@ -7,13 +7,11 @@ import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
-import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -31,22 +29,53 @@ import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
-import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
 public class BinaryMapAddressReaderAdapter {
+	
+	public enum CityBlocks {
+		UNKNOWN_TYPE(0, false), // for future versions
+		CITY_TOWN_TYPE(1, true),
+		// the correct type is -1, this is order in sections for postcode
+		POSTCODES_TYPE(2, true),
+		VILLAGES_TYPE(3, true),
+		STREET_TYPE(4, false);
 
-	public final static int CITY_TOWN_TYPE = 1;
-	// the correct type is -1, this is order in sections for postcode
-	public final static int POSTCODES_TYPE = 2;
-	public final static int VILLAGES_TYPE = 3;
-	public final static int STREET_TYPE = 4;
+		public final int index;
+		public final boolean cityGroupType;
 
-	private static final Log LOG = PlatformUtil.getLog(BinaryMapAddressReaderAdapter.class);
-	public final static List<Integer> TYPES = Arrays.asList(CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE);
-	public final static int[] CITY_TYPES = {CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE};
+		CityBlocks(int index, boolean cityGroupType) {
+			this.index = index;
+			this.cityGroupType = cityGroupType;
+		}
+		
+		public static CityBlocks getByType(int index) {
+			for (CityBlocks c : values()) {
+				if (c.index == index) {
+					return c;
+				}
+			}
+			return UNKNOWN_TYPE;
+		}
+		
+		
+		public static List<Integer> allTypes(boolean includingStreets) {
+			List<Integer> lst = new ArrayList<Integer>();
+			for (CityBlocks c : values()) {
+				if (c != UNKNOWN_TYPE && c != STREET_TYPE) {
+					lst.add(c.index);
+				} else if (c == STREET_TYPE && includingStreets) {
+					lst.add(c.index);
+				}
+			}
+			return lst;
+		}
+		
+	}
+	
+	
 
 	public static class AddressRegion extends BinaryIndexPart {
 		String enName;
@@ -612,7 +641,6 @@ public class BinaryMapAddressReaderAdapter {
 				return city.isPostcode() ? postcodeMatcher.matches(city) : cityMatcher.matches(city);
 			}
 		};
-		long time = System.currentTimeMillis();
 		long indexOffset = 0;
 		while (true) {
 			if (req.isCancelled()) {
@@ -671,13 +699,13 @@ public class BinaryMapAddressReaderAdapter {
 					}
 				}
 				if (typeFilter == null) {
-					typeFilter = TYPES;
+					typeFilter = CityBlocks.allTypes(true);
 				}
 				for (int i = 0; i < typeFilter.size() && !req.isCancelled(); i++) {
 					TIntArrayList list = refs[typeFilter.get(i)];
 					TIntArrayList listContainer = refsContainer[typeFilter.get(i)];
 					
-					if (typeFilter.get(i) == STREET_TYPE) {
+					if (typeFilter.get(i) == CityBlocks.STREET_TYPE.index) {
 						TIntLongHashMap mp = new TIntLongHashMap();
 						for (int j = 0; j < list.size(); j++) {
 							mp.put(list.get(j), listContainer.get(j));
