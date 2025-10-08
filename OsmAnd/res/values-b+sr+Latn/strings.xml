@@ -5861,4 +5861,7 @@
     <string name="shared_string_price">Cena</string>
     <string name="rendering_attr_showSkiSlopes_name">Prikaži skijaške staze</string>
     <string name="rendering_attr_showSkiSlopes_description">Pokazati lake ski staze</string>
+    <string name="update_maps">Ažuriranje mapa</string>
+    <string name="reconnect">Ponovno povezivanje</string>
+    <string name="track_folder_appearance">Izgled foldera za trase</string>
 </resources>

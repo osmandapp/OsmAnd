@@ -5692,4 +5692,15 @@
     <string name="shared_string_price">Praghas</string>
     <string name="rendering_attr_showSkiSlopes_name">Taispeáin fánaí sciála</string>
     <string name="rendering_attr_showSkiSlopes_description">Taispeáin fánaí sciála simplithe</string>
+    <string name="track_folder_appearance">Cuma fillteán rianta</string>
+    <string name="update_maps">Nuashonraigh léarscáileanna</string>
+    <string name="reconnect">Athcheangail</string>
+    <string name="trip_recording_downhill_widget_desc">Taispeánann sé suim na n-ísliú go léir nó an t-ísliú deireanach den turas atá taifeadta faoi láthair.</string>
+    <string name="trip_recording_uphill_widget_desc">Taispeánann sé suim na ndreaptha go léir nó an dreapadh deireanach den turas atá taifeadta faoi láthair.</string>
+    <string name="trip_recording_distance_widget_desc">Taispeáin an t-achar iomlán don turas atá taifeadta agat faoi láthair, le modhanna chun fad an dul suas agus an tsliocht deiridh a fheiceáil.</string>
+    <string name="trip_recording_max_speed_widget_description">Taispeánann sé an luas uasta don turas atá taifeadta faoi láthair. Beartaíonn chun aistriú idir an luas uasta foriomlán agus an luas uasta ón gcnoc deireanach suas nó síos cnoc.</string>
+    <string name="trip_recording_average_slope_widget_description">Taispeánann sé an meánfhána don chuid dheireanach síos an cnoc nó suas an cnoc den turas atá taifeadta faoi láthair.</string>
+    <string name="average_slope">Meán fána</string>
+    <string name="shared_string_last_uphill">Deireanach suas an cnoc</string>
+    <string name="shared_string_last_downhill">Deireanach síos an cnoc</string>
 </resources>

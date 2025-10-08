@@ -5070,7 +5070,7 @@
     <string name="poi_area_highway">Út területe</string>
     <string name="poi_denomination_ukrainian_greek_catholic">Ukrán görögkatolikus</string>
     <string name="poi_denomination_ukrainian_orthodox">Ukrán ortodox</string>
-    <string name="poi_denomination_evangelical_lutheran"></string>
+    <string name="poi_denomination_evangelical_lutheran">Evangélikus lutheránus</string>
     <string name="poi_denomination_anabaptist">Anabaptista</string>
     <string name="poi_denomination_african_methodist_episcopal">Afrikai metodista episzkopális</string>
     <string name="poi_denomination_macedonian_orthodox">Macedón ortodox</string>
@@ -5099,4 +5099,21 @@
     <string name="poi_canoe_put_in">Kenuindító hely</string>
     <string name="poi_canoe_egress">Kenukiemelő hely</string>
     <string name="poi_canoe_put_in_egress">Kenuindító és -kiemelő hely</string>
+    <string name="poi_denomination_neo_pentecostal">Neopünkösdista</string>
+    <string name="poi_denomination_southern_baptist">Déli baptista</string>
+    <string name="poi_denomination_charismatic">Karizmatikus</string>
+    <string name="poi_hazard_additional_hole">Gödör</string>
+    <string name="poi_hazard_additional_curve">Útkanyarulat</string>
+    <string name="poi_hazard_additional_curves">Útkanyarulatok</string>
+    <string name="poi_hazard_additional_pedestrians">Gyalogosok</string>
+    <string name="poi_hazard_additional_children">Gyermekek</string>
+    <string name="poi_hazard_additional_animal_crossing">Állatok</string>
+    <string name="poi_hazard_additional_dangerous_junction">Veszélyes kereszteződés</string>
+    <string name="poi_hazard_additional_school_zone">Iskolai zóna</string>
+    <string name="poi_hazard_additional_cyclists">Kerékpárosok</string>
+    <string name="poi_hazard_additional_shooting_range">Lőtér</string>
+    <string name="poi_hazard_additional_side_winds">Oldalszél</string>
+    <string name="poi_hazard_additional_ice">Jég</string>
+    <string name="poi_hazard_additional_queues_likely">Torlódásveszély</string>
+    <string name="poi_whitewater_hazard">Vadvízi veszély</string>
 </resources>

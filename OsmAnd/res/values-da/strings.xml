@@ -5907,4 +5907,15 @@
     <string name="shared_string_price">Pris</string>
     <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
     <string name="rendering_attr_showSkiSlopes_description">Vis forenklede skiløjper</string>
+    <string name="track_folder_appearance">Spor-mappens udseende</string>
+    <string name="update_maps">Opdatér kort</string>
+    <string name="reconnect">Genopret forbindelse</string>
+    <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedstigninger på den aktuelt registreret tur.</string>
+    <string name="trip_recording_uphill_widget_desc">Viser summen af alle opstigninger på den aktuelt registreret tur.</string>
+    <string name="trip_recording_distance_widget_desc">Viser den samlede afstand for din aktuelt registrerede tur med mulighed for at se afstanden for den sidste stigning og nedstigning.</string>
+    <string name="trip_recording_max_speed_widget_description">Viser den maksimale hastighed for den aktuelt registrerede tur. Tryk for at skifte mellem den samlede maksimale hastighed og den maksimale hastighed fra den sidste op- eller nedkørsel.</string>
+    <string name="trip_recording_average_slope_widget_description">Viser den gennemsnitlige hældning for det sidste nedadgående eller opadgående afsnit af den aktuelt registrerede tur.</string>
+    <string name="average_slope">Gennemsnitlig hældning</string>
+    <string name="shared_string_last_uphill">Sidste stigning</string>
+    <string name="shared_string_last_downhill">Sidste nedkørsel</string>
 </resources>

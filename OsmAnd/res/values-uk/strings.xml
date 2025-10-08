@@ -5882,4 +5882,15 @@
     <string name="shared_string_price">Ціна</string>
     <string name="rendering_attr_showSkiSlopes_name">Показати гірськолижні схили</string>
     <string name="rendering_attr_showSkiSlopes_description">Показати спрощені гірськолижні схили</string>
+    <string name="track_folder_appearance">Зовнішній вигляд папки треків</string>
+    <string name="update_maps">Оновити карти</string>
+    <string name="reconnect">Знову підключитися</string>
+    <string name="trip_recording_downhill_widget_desc">Показує суму всіх спусків або останній спуск поточної записаної поїздки.</string>
+    <string name="trip_recording_uphill_widget_desc">Показує суму всіх підйомів або останній підйом поточної записаної подорожі.</string>
+    <string name="trip_recording_distance_widget_desc">Показує загальну відстань вашої поточної записаної подорожі, з режимами перегляду відстані останнього підйому та спуску.</string>
+    <string name="trip_recording_max_speed_widget_description">Показує максимальну швидкість для поточної записаної поїздки. Натисніть, щоб перемикатися між загальною максимальною швидкістю та максимальною швидкістю з останнього підйому або спуску.</string>
+    <string name="trip_recording_average_slope_widget_description">Показує середній нахил для останньої ділянки спуску або підйому поточної записаної поїздки.</string>
+    <string name="average_slope">Середній нахил</string>
+    <string name="shared_string_last_uphill">Останній підйом</string>
+    <string name="shared_string_last_downhill">Останній спуск</string>
 </resources>
