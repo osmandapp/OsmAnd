@@ -36,12 +36,16 @@ import com.google.protobuf.WireFormat;
 public class BinaryMapAddressReaderAdapter {
 	
 	public enum CityBlocks {
+//		UNKNOWN_TYPE(-1, false), // for future versions
+//		BORDER_TYPE(0, false), // to avoid crash < 5.2 assign to 0
 		UNKNOWN_TYPE(0, false), // for future versions
 		CITY_TOWN_TYPE(1, true),
 		// the correct type is -1, this is order in sections for postcode
 		POSTCODES_TYPE(2, true),
 		VILLAGES_TYPE(3, true),
-		STREET_TYPE(4, false);
+		STREET_TYPE(4, false),
+//		BORDER_TYPE(5, false), // crash ?
+		;
 
 		public final int index;
 		public final boolean cityGroupType;
@@ -61,13 +65,11 @@ public class BinaryMapAddressReaderAdapter {
 		}
 		
 		
-		public static List<Integer> allTypes(boolean includingStreets) {
-			List<Integer> lst = new ArrayList<Integer>();
+		public static List<CityBlocks> allTypes() {
+			List<CityBlocks> lst = new ArrayList<CityBlocks>();
 			for (CityBlocks c : values()) {
-				if (c != UNKNOWN_TYPE && c != STREET_TYPE) {
-					lst.add(c.index);
-				} else if (c == STREET_TYPE && includingStreets) {
-					lst.add(c.index);
+				if (c != UNKNOWN_TYPE) {
+					lst.add(c);
 				}
 			}
 			return lst;
@@ -629,7 +631,10 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
-	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
+	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<CityBlocks> typeFilter) throws IOException {
+		if (typeFilter == null) {
+			typeFilter = CityBlocks.allTypes();
+		}
 		TIntArrayList loffsets = new TIntArrayList();
 		CollatorStringMatcher stringMatcher = new CollatorStringMatcher(req.nameQuery, req.matcherMode);
 		String postcode = Postcode.normalize(req.nameQuery, map.getCountryName());
@@ -664,7 +669,7 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
 				// also offsets can be randomly skipped by limit
 				loffsets.sort();
-				
+				// TODO check crash!
 				TIntArrayList[] refs = new TIntArrayList[5];
 				TIntArrayList[] refsContainer = new TIntArrayList[5];
 				for (int i = 0; i < refs.length; i++) {
@@ -698,14 +703,14 @@ public class BinaryMapAddressReaderAdapter {
 						return;
 					}
 				}
-				if (typeFilter == null) {
-					typeFilter = CityBlocks.allTypes(true);
-				}
-				for (int i = 0; i < typeFilter.size() && !req.isCancelled(); i++) {
-					TIntArrayList list = refs[typeFilter.get(i)];
-					TIntArrayList listContainer = refsContainer[typeFilter.get(i)];
-					
-					if (typeFilter.get(i) == CityBlocks.STREET_TYPE.index) {
+				
+				for (CityBlocks block : typeFilter) {
+					if (req.isCancelled()) {
+						break;
+					}
+					TIntArrayList list = refs[block.index];
+					TIntArrayList listContainer = refsContainer[block.index];
+					if (block == CityBlocks.STREET_TYPE) {
 						TIntLongHashMap mp = new TIntLongHashMap();
 						for (int j = 0; j < list.size(); j++) {
 							mp.put(list.get(j), listContainer.get(j));

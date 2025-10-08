@@ -1392,7 +1392,7 @@ public class BinaryMapIndexReader {
 		return dataObject;
 	}
 
-	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
+	public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req, List<CityBlocks> typeFilter) throws IOException {
 		for (AddressRegion reg : addressIndexes) {
 			if (reg.indexNameOffset != -1) {
 				codedIS.seek(reg.indexNameOffset);

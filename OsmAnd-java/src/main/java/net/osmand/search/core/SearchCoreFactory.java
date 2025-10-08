@@ -477,28 +477,29 @@ public class SearchCoreFactory {
 								sr.objectType = ObjectType.POSTCODE;
 								sr.priorityDistance = 0;
 							} else {
+								// TODO not correct object type is not village probably
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
 									return false;
 								}
-								City c = null;
+								City closestCity = null;
 								if (closestCities == null) {
 									closestCities = townCitiesQR.queryInBox(villagesBbox, new ArrayList<City>());
 								}
 								double minDist = -1;
 								double pDist = -1;
-								for (City s : closestCities) {
-									double ll = MapUtils.getDistance(s.getLocation(), object.getLocation());
-									double pd = s.getType() == CityType.CITY ? ll : ll * 10;
-									if(minDist == -1 || pd < pDist) {
-										c = s;
+								for (City city : closestCities) {
+									double ll = MapUtils.getDistance(city.getLocation(), object.getLocation());
+									double pd = city.getType() == CityType.CITY ? ll : ll * 10;
+									if (minDist == -1 || pd < pDist) {
+										closestCity = city;
 										minDist = ll;
-										pDist = pd ;
+										pDist = pd;
 									}
 								}
-								if (c != null) {
-									sr.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-									sr.relatedObject = c;
+								if (closestCity != null) {
+									sr.localeRelatedObjectName = closestCity.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+									sr.relatedObject = closestCity;
 									sr.distRelatedObjectName = minDist;
 								}
 								sr.objectType = ObjectType.VILLAGE;
