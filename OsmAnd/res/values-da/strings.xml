@@ -1339,7 +1339,6 @@
     <string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
     <string name="free">Ledig %1$s</string>
     <string name="device_memory">Lagerplads</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiruter</string>
     <string name="roads_only">Kun veje</string>
     <string name="notes">A/V-noter</string>
     <string name="online_map">Online kort</string>
@@ -5007,7 +5006,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnd-ruteberegning</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Fodgænger-ruteberegning</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Offentlig transport ruteberegning</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skiløb-ruteberegning</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Lige linje ruteberegning (fly)</string>
     <string name="help_article_navigation_routing_train_routing_name">Tog-ruteberegning</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Naviger efter spor</string>

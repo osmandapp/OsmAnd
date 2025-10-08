@@ -2608,7 +2608,6 @@
     <string name="delete_all_confirmation">نعم، حذف الكل</string>
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
     <string name="show_polygons">عرض المضلعات</string>
-    <string name="rendering_attr_pisteRoutes_name">منحدرات تزلج</string>
     <string name="routing_attr_avoid_motorway_name">الطرق السريعة</string>
     <string name="osm_live_payment_discount_descr">وفر %1$s</string>
     <string name="map_underlay_descr">اختيار الخريطة الأساسية التي تقوم عليه الخريطة</string>
@@ -4615,7 +4614,6 @@
     <string name="shared_string_apply_changes">أعتماد التغيرات</string>
     <string name="si_nm_ft">ميل بحري/قدم</string>
     <string name="on_foot">سيرا على الأقدام</string>
-    <string name="help_article_navigation_routing_ski_routing_name">توجيه التزلج</string>
     <string name="live_monitoring_m">التتبع المباشر (GPX مطلوب)</string>
     <string name="lang_es_us">الإسبانية (الأمريكية)</string>
     <string name="shared_string_selected_lowercase">محدد</string>

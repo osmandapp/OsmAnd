@@ -1683,7 +1683,6 @@
     <string name="location_on_map">Kokapena:\n Lat %1$s\n Lon %2$s</string>
     <string name="notes">A/V oharrak</string>
     <string name="online_map">Sareko mapa</string>
-    <string name="rendering_attr_pisteRoutes_name">Ski pistak</string>
     <string name="free">%1$s libre</string>
     <string name="device_memory">Gailuaren memoria</string>
     <string name="world_ski_missing">Deskargatu ski pistak ikusteko lineaz kanpoko mapa berezia.</string>
@@ -5310,7 +5309,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">OsmAnd ibilbidei buruz</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Oinezko ibilbideak</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Garraio publikoko ibilbideak</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Eski ibilbideak</string>
     <string name="app_mode_baby_transport">Haurren garraioa</string>
     <string name="help_article_personal_name">Nire datuak</string>
     <string name="help_article_personal_import_export_name">Inportatu / Esportatu</string>

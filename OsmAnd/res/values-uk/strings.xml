@@ -1331,7 +1331,6 @@
     <string name="traffic_warning">Попередження на дорозі</string>
     <string name="local_index_description">Натисніть на будь-який наявний елемент для перегляду додаткових відомостей, утримуйте, щоб його вимкнути або вилучити. Наявні дані на пристрої (%1$s вільно):</string>
     <string name="watch">Перегляд</string>
-    <string name="rendering_attr_pisteRoutes_name">Лижні маршрути</string>
     <string name="rendering_attr_pisteGrooming_name">Тип лижні</string>
     <string name="routing_attr_no_new_routing_name">Не використовувати правила маршрутизації версії 1.9</string>
     <string name="navigate_point_northing">Північної широти</string>
@@ -4975,7 +4974,6 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Маршрутизація від точки до точки (Човен)</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Пішохідні маршрути</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Маршрути громадського транспорту</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Лижні маршрути</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Прямолінійні маршрути (Літак)</string>
     <string name="help_article_navigation_routing_train_routing_name">Маршрути потягів</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Навігація за треком</string>

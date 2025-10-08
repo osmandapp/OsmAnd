@@ -1469,7 +1469,6 @@
 \n 
 \nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy.</string>
     <string name="watch">Oglądaj</string>
-    <string name="rendering_attr_pisteRoutes_name">Trasy narciarskie</string>
     <string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
     <string name="world_ski_missing">Aby wyświetlić obiekty narciarskie, należy pobrać specjalną mapę offline.</string>
     <string name="nautical_maps_missing">Aby wyświetlać mapy żeglugowe, należy pobrać specjalną mapę offline.</string>
@@ -5220,7 +5219,6 @@
     <string name="sensor_temperature_desc">Pokazuje temperaturę z czujnika</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_routing_horse_routing_name">Trasa konna</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Trasy narciarskie</string>
     <string name="help_article_navigation_routing_name">Parametry trasy</string>
     <string name="help_article_navigation_routing_moped_routing_name">Trasa motoroweru</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Wyznaczanie tras łodzi</string>

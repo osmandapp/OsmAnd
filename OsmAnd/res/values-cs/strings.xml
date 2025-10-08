@@ -1386,7 +1386,6 @@
     <string name="notes">A/V poznámky</string>
     <string name="online_map">On-line mapa</string>
     <string name="roads_only">Pouze cesty</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžařské trasy</string>
     <string name="free">%1$s volných</string>
     <string name="device_memory">Paměť zařízení</string>
     <string name="shared_string_audio">Audio</string>
@@ -5004,7 +5003,6 @@
     <string name="help_article_navigation_routing_horse_routing_name">Koňské stezky</string>
     <string name="filter_screen_title">Filtr</string>
     <string name="widget_available_ram">Dostupná paměť RAM</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Lyžařská navigace</string>
     <string name="help_article_personal_name">Moje data</string>
     <string name="help_article_purchases_android_name">Nákupy pro Android</string>
     <string name="help_article_plan_route_web_name">Webový plánovač tras</string>

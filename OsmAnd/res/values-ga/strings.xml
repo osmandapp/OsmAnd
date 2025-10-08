@@ -864,7 +864,6 @@
     <string name="km_h">km/u</string>
     <string name="shared_string_apply_changes">Cuir athruithe i bhfeidhm</string>
     <string name="si_nm_ft">Muirmhílte/troigh</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Bealaí sciála</string>
     <string name="shared_string_selected_lowercase">roghnaithe</string>
     <string name="cloud_layer">Sraith na scamall</string>
     <string name="routing_attr_freeride_policy_allow_name">Ceadaigh</string>
@@ -2817,7 +2816,6 @@
     <string name="layer_hillshade">Ciseal Hillshade</string>
     <string name="map_text_size">Clómhéid an mhapa</string>
     <string name="accessibility_prefs_descr">Roghnaigh deilbhín, dath agus ainm</string>
-    <string name="rendering_attr_pisteRoutes_name">Bealaí ski</string>
     <string name="text_size_descr">Socraigh méid an téacs ar an léarscáil.</string>
     <string name="gpx_selection_point">Pointe %1$s</string>
     <string name="routing_attr_avoid_ferries_name">Gan báid farantóireachta</string>
