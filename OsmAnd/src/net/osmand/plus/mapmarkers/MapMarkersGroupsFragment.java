@@ -34,6 +34,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -334,7 +335,8 @@ public class MapMarkersGroupsFragment extends BaseNestedFragment implements OsmA
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.removeType(Type.BOTTOM_CONTAINER);
-		collection.removeType(Type.SCROLLABLE);
+		collection.replace(InsetTarget.createScrollable(R.id.list));
+		collection.replace(InsetTarget.createFab(R.id.add_group_fab));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}

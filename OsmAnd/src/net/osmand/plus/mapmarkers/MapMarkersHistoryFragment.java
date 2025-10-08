@@ -28,6 +28,7 @@ import net.osmand.plus.base.BaseNestedFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
@@ -203,7 +204,7 @@ public class MapMarkersHistoryFragment extends BaseNestedFragment implements Map
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.removeType(Type.BOTTOM_CONTAINER);
-		collection.removeType(Type.SCROLLABLE);
+		collection.replace(InsetTarget.createScrollable(R.id.list));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}
