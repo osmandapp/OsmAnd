@@ -2123,7 +2123,6 @@
     <string name="poi_cemetery">Reilig</string>
     <string name="poi_grave_yard">Reilig</string>
     <string name="poi_piste">Amhrán</string>
-    <string name="poi_piste_downhill">Fánaí síos an cnoc</string>
     <string name="poi_community_centre">Ionad pobail</string>
     <string name="poi_swimming_pool">Linn snámha</string>
     <string name="poi_water_park">Páirc uisce</string>
@@ -4955,7 +4954,6 @@
     <string name="poi_piste_oneway">Piste ar aon nós</string>
     <string name="poi_route_activity_type_road_cycling">Bealaí rothaíochta bóthair</string>
     <string name="poi_route_activity_type_walking">Bealaí siúil</string>
-    <string name="poi_route_activity_type_skiing">Bealaí sciála</string>
     <string name="poi_route_activity_type_hiking">Bealaí fánaíochta</string>
     <string name="poi_route_activity_type_mountain_biking">Bealaí MTB (rothar sléibhe)</string>
     <string name="poi_network_icn">Bealaí rothaíochta idirnáisiúnta (ICN)</string>

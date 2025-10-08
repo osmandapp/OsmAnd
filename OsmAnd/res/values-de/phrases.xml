@@ -815,7 +815,6 @@
     <string name="poi_lodging">Unterkunft</string>
     <string name="poi_religious">Heilige Stätte</string>
     <string name="poi_hanami">Kirschblütenfest</string>
-    <string name="poi_piste_downhill">Abfahrtspiste</string>
     <string name="poi_piste_sleigh">Zugschlitten-Strecke</string>
     <string name="poi_piste_sled">Schlittenbahn</string>
     <string name="poi_piste_snow_park">Winter-Funpark</string>
@@ -4953,7 +4952,6 @@
     <string name="poi_piste_type">Pistentyp</string>
     <string name="poi_piste_oneway">Piste einspurig</string>
     <string name="poi_route_activity_type_hiking">Wanderrouten</string>
-    <string name="poi_route_activity_type_skiing">Skirouten</string>
     <string name="poi_route_activity_type_road_cycling">Straßenradwege</string>
     <string name="poi_network_foot">Streckennetz (Wandern)</string>
     <string name="poi_network_cycling">Streckennetz (Radfahren)</string>

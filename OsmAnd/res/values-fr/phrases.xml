@@ -665,7 +665,6 @@
     <string name="poi_gasometer">Réservoir de gaz</string>
     <string name="poi_silo">Silo</string>
     <string name="poi_storage_tank">Cuve de stockage</string>
-    <string name="poi_piste_downhill">Piste de ski alpin</string>
     <string name="poi_piste_nordic">Piste de ski nordique</string>
     <string name="poi_piste_skitour">Itinéraire de ski de randonnée</string>
     <string name="poi_piste_hike">Itinéraire de marche nordique</string>
@@ -4902,7 +4901,6 @@
     <string name="poi_route_activity_type_snowshoeing">Raquettes à neige</string>
     <string name="poi_route_activity_type_snowmobiling">Motoneige</string>
     <string name="poi_route_activity_type_e_biking">Vélo électrique</string>
-    <string name="poi_route_activity_type_skiing">Itinéraires de ski</string>
     <string name="poi_route_activity_type_snowboarding">Snowboard</string>
     <string name="poi_route_activity_type_e_mountain_bike">VTT électrique</string>
     <string name="poi_route_activity_type_gravel_biking">Vélo de gravier</string>

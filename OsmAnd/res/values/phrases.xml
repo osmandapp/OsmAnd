@@ -1066,7 +1066,7 @@
 	<string name="poi_club_scout">Scout club</string>
 
 	<string name="poi_piste">Piste</string>
-	<string name="poi_piste_downhill">Downhill piste</string>
+	<string name="poi_piste_downhill">Downhill piste;Ski piste;Ski slope</string>
 	<string name="poi_piste_nordic">Nordic piste</string>
 	<string name="poi_piste_skitour">Skitour piste</string>
 	<string name="poi_piste_hike">Hike piste</string>
@@ -5550,7 +5550,7 @@
 	<string name="poi_route_activity_type_cross_country_skiing">Cross-Country Skiing</string>
 	<string name="poi_route_activity_type_ice_skating">Ice Skating</string>
 	<string name="poi_route_activity_type_ski_touring">Ski Touring</string>
-	<string name="poi_route_activity_type_skiing">Skiing routes</string>
+	<string name="poi_route_activity_type_skiing">Ski routes</string>
 	<string name="poi_route_activity_type_snowboarding">Snowboarding</string>
 	<string name="poi_route_activity_type_snowmobiling">Snowmobiling</string>
 	<string name="poi_route_activity_type_snowshoeing">Snowshoeing</string>

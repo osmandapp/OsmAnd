@@ -680,7 +680,6 @@
     <string name="poi_club_sailing">Klub jedriličara</string>
     <string name="poi_club_scout">Izviđački klub</string>
     <string name="poi_piste">Staza</string>
-    <string name="poi_piste_downhill">Staza za spust</string>
     <string name="poi_piste_nordic">Nordijska staza</string>
     <string name="poi_piste_hike">Pešačka staza</string>
     <string name="poi_piste_snow_park">Snežni park</string>
@@ -4953,7 +4952,6 @@
     <string name="poi_piste_type">Tip staze</string>
     <string name="poi_piste_oneway">Staza je jednosmerna</string>
     <string name="poi_lit">Osvetljenje</string>
-    <string name="poi_route_activity_type_skiing">Skijaške rute</string>
     <string name="poi_route_activity_type_road_cycling">Drumske biciklističke rute</string>
     <string name="poi_network_cycling">Mreža ruta (biciklizam)</string>
     <string name="poi_network_nwn">Nacionalne pešačke rute (NWN)</string>

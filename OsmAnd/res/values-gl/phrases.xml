@@ -591,7 +591,6 @@
     <string name="poi_denomination_united_church_of_christ">Igrexa Unida de Cristo</string>
     <string name="poi_tomb">Tomba</string>
     <string name="poi_piste">Pista</string>
-    <string name="poi_piste_downhill">Pista de esquí</string>
     <string name="poi_piste_nordic">Pista de esquí nórdico</string>
     <string name="poi_ski_rental">Alugamento de esquís</string>
     <string name="poi_gallery">Galería de arte</string>
@@ -4904,7 +4903,6 @@
     <string name="poi_route_activity_type_cross_country_skiing">Cruz-País Skiing</string>
     <string name="poi_route_activity_type_ice_skating">Patinaxe de xeo</string>
     <string name="poi_route_activity_type_ski_touring">O esquí que Visita</string>
-    <string name="poi_route_activity_type_skiing">Skiing Rutas</string>
     <string name="poi_route_activity_type_snowboarding">Snowboarding</string>
     <string name="poi_route_activity_type_snowmobiling">Snowmobiling</string>
     <string name="poi_route_activity_type_snowshoeing">Snowshoeing</string>
