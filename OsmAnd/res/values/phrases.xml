@@ -5755,4 +5755,9 @@
 	<string name="poi_hazard_additional_side_winds">Side winds</string>
 	<string name="poi_hazard_additional_ice">Ice</string>
 
+	<string name="poi_historic_spacecraft">Historic spacecraft</string>
+	<string name="poi_barrier_chain">Chain barrier</string>
+	<string name="poi_barrier_log">Log</string>
+	<string name="poi_barrier_sliding_gate">Sliding gate</string>
+
 </resources>
