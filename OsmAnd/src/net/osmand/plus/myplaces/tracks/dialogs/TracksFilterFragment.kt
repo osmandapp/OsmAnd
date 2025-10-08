@@ -119,6 +119,8 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 	override fun getInsetTargets(): InsetTargetsCollection {
 		val collection = super.getInsetTargets()
 		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container))
+		collection.replace(InsetTarget.createScrollable(R.id.filters_list))
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.buttons_container))
 		return collection
 	}
 
