@@ -9,15 +9,21 @@ import java.util.*;
 public class City extends MapObject {
 	public enum CityType {
 		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
-		// district special type and it is not registered as a city
-		CITY(10000, 100000),
-		TOWN(4000, 20000),
-		VILLAGE(1300, 1000),
-		HAMLET(1000, 100),
-		SUBURB(400, 5000),
-		BOROUGH(400, 2500),
+		CITY(10000, 100000), // 1. City
+		TOWN(4000, 20000), // 2. Town
+		VILLAGE(1300, 1000), // 3. Village 
+		HAMLET(1000, 100), // 4. Hamlet - Small village
+		SUBURB(400, 5000), // 5. Could be district of city, could have own streets 
+		// 5.2 stored in city / villages sections written as city type
+		BOUNDARY(0, 0), // 6. boundary no streets
+		// 5.3 stored in city / villages sections written as city type
+		POSTCODE(500, 1000), // 7. write this could be activated after 5.2 release
+		
+		// not stored entities no id assigned  
+		BOROUGH(400, 2500), // 
 		DISTRICT(400, 10000),
-		NEIGHBOURHOOD(300, 500);
+		NEIGHBOURHOOD(300, 500), 
+		;
 		
 		private final double radius;
 		private final int population;
@@ -36,7 +42,8 @@ public class City extends MapObject {
 		}
 		
 		public boolean storedAsSeparateAdminEntity() {
-			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH;
+			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH 
+					&& this != BOUNDARY && this != POSTCODE;
 		}
 
 		public static String valueToString(CityType t) {
@@ -51,26 +58,12 @@ public class City extends MapObject {
 				return CityType.TOWN;
 			}
 			for (CityType t : CityType.values()) {
-				if (t.name().equalsIgnoreCase(place)) {
+				if (t.name().equalsIgnoreCase(place) 
+						&& t != BOUNDARY && t != POSTCODE) {
 					return t;
 				}
 			}
 			return null;
-		}
-		
-		public static String typeToString(CityType type) {
-			if (type == null) {
-				return null;
-			}
-			return type.name().toLowerCase();
-		}
-		
-		static public Set<String> getAllCityTypeStrings() {
-			Set<String> cityTypeStrings = new HashSet<>();
-			for (CityType type : CityType.values()) {
-				cityTypeStrings.add(typeToString(type));
-			}
-			return cityTypeStrings;
 		}
 		
 		
@@ -94,7 +87,7 @@ public class City extends MapObject {
 	}
 	
 	public City(String postcode, long id) {
-		this.type = null;
+		this.type = CityType.POSTCODE;
 		this.name = this.enName = postcode;
 		this.id = id;
 	}
@@ -104,7 +97,7 @@ public class City extends MapObject {
 	}
 	
 	public boolean isPostcode(){
-		return type == null;
+		return type == CityType.POSTCODE;
 	}
 	
 	public String getPostcode() {
