@@ -1,9 +1,5 @@
 package net.osmand.binary;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.set.TIntSet;
-import gnu.trove.set.hash.TIntHashSet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.WireFormat;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.TIntSet;
+import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -29,10 +31,6 @@ import net.osmand.data.Postcode;
 import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
-
-
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.WireFormat;
 
 public class BinaryMapAddressReaderAdapter {
 	
@@ -380,6 +378,18 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.CityIndex.NAME_EN_FIELD_NUMBER:
 				String enName = codedIS.readString();
 				c.setEnName(enName);
+				break;
+			case OsmandOdb.CityIndex.BOUNDARY_FIELD_NUMBER:
+				int size = codedIS.readRawVarint32();
+				long old = codedIS.pushLimitLong((long) size);
+				TIntArrayList lst = new TIntArrayList();
+				while (codedIS.getBytesUntilLimit() > 0) {
+					lst.add(codedIS.readRawVarint32());
+				}
+				codedIS.popLimit(old);
+				if (c != null) {
+					c.setBbox31(lst.toArray());
+				}
 				break;
 			case OsmandOdb.CityIndex.NAME_FIELD_NUMBER:
 				String name = codedIS.readString();
