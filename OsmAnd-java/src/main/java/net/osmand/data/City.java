@@ -47,7 +47,8 @@ public class City extends MapObject {
 		}
 		
 		public boolean storedAsSeparateAdminEntity() {
-			if (this == CITY && this == TOWN && this == VILLAGE && this == HAMLET && this == SUBURB) {
+			if (this == CITY || this == TOWN || this == VILLAGE || 
+					this == HAMLET || this == SUBURB) {
 				return true;
 			}
 			return false;
