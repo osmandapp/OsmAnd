@@ -132,7 +132,6 @@ public class AisObjectMenuController extends MenuController {
                             ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
             if (this.app != null) {
                 Location ownPosition = app.getLocationProvider().getLastKnownLocation();
-                AisObject.setOwnPosition(ownPosition);
                 float distance = aisObject.getDistanceInNauticalMiles();
                 float bearing = aisObject.getBearing();
                 if (distance >= 0.0f) {
