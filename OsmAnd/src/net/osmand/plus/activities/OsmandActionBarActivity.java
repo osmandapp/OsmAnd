@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
+import net.osmand.plus.help.HelpActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -81,7 +82,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 
 		View root = findViewById(R.id.root);
 		if (root != null) {
-			InsetsUtils.processInsets(this, root, null);
+			InsetsUtils.processInsets(this, root, null, false);
 		}
 
 		getSupportFragmentManager().registerFragmentLifecycleCallbacks(

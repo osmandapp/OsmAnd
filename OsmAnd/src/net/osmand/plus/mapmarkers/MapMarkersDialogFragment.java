@@ -189,6 +189,7 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.removeType(Type.SCROLLABLE);
 		collection.replace(InsetTarget.createBottomContainer(R.id.map_markers_bottom_navigation));
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.app_bar));
 		return collection;
 	}
 

@@ -2862,7 +2862,6 @@
     <string name="osmand_accessibility_description">Gi pravi funkciite za pristapnost na uredot direktno dostapni vo OsmAnd. Toa go olesnuva na pr. prilagoduvanje na brzinata na govorot za glasovi od tekst vo govor, konfiguriranje na navigacija so D-pad, koristenje na trackball za kontrola na zumiranje ili povratni informacii od tekst vo govor, na primer za avtomatsko objavuvanje na vašata pozicija.</string>
     <string name="osmand_distance_planning_plugin_description">Kreirajte pateki so dopiranje na kartata ili so koristenje ili menuvanje na postoečkite GPX-datoteki, za da planirate patuvanje i da go izmerite rastojanieto pomeǵu točkite. Rezultatot može da se začuva kako datoteka GPX za da se koristi podocna za nasoki.</string>
     <string name="osmand_development_plugin_description">Postavki za funkcii za razvoj i otstranuvanje greški, kako što se simulacija na navigacija, izvedba na renderiranje ili glasovno pottiknuvanje. Nameneto za programeri, ne e potrebno za normalna upotreba na aplikacii.</string>
-    <string name="rendering_attr_pisteRoutes_name">Ledeni nagibi</string>
     <string name="m_s">m/s</string>
     <string name="plugin_nautical_name">Prikaz na nautička karta</string>
     <string name="osm_editing_plugin_name">Ureduvanje na OpenStreetMap</string>

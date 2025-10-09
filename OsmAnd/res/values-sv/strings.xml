@@ -1360,7 +1360,6 @@
     <string name="rendering_attr_pisteGrooming_name">Pist- och spårpreparering</string>
     <string name="free">Ledigt %1$s</string>
     <string name="device_memory">Intern lagring</string>
-    <string name="rendering_attr_pisteRoutes_name">Skidbackar</string>
     <string name="roads_only">Endast vägar</string>
     <string name="notes">A/V anteckningar</string>
     <string name="online_map">Online-karta</string>
@@ -4851,7 +4850,6 @@
     <string name="help_article_navigation_setup_route_navigation_name">Ruttförberedelser</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Fotgängarvägvisning</string>
     <string name="help_article_navigation_routing_online_routing_name">Onlinevägvisning</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skidvägvisning</string>
     <string name="help_article_navigation_routing_moped_routing_name">Mopedvägvisning</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Båtvägvisning</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Cykelvägvisning (MTB)</string>

@@ -7,13 +7,11 @@ import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
-import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -31,22 +29,55 @@ import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
-import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
 public class BinaryMapAddressReaderAdapter {
+	
+	public enum CityBlocks {
+//		UNKNOWN_TYPE(-1, false), // for future versions
+//		BORDER_TYPE(0, false), // to avoid crash < 5.2 assign to 0
+		UNKNOWN_TYPE(0, false), // for future versions
+		CITY_TOWN_TYPE(1, true),
+		// the correct type is -1, this is order in sections for postcode
+		POSTCODES_TYPE(2, true),
+		VILLAGES_TYPE(3, true),
+		STREET_TYPE(4, false),
+//		BORDER_TYPE(5, false), // crash ?
+		;
 
-	public final static int CITY_TOWN_TYPE = 1;
-	// the correct type is -1, this is order in sections for postcode
-	public final static int POSTCODES_TYPE = 2;
-	public final static int VILLAGES_TYPE = 3;
-	public final static int STREET_TYPE = 4;
+		public final int index;
+		public final boolean cityGroupType;
 
-	private static final Log LOG = PlatformUtil.getLog(BinaryMapAddressReaderAdapter.class);
-	public final static List<Integer> TYPES = Arrays.asList(CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE);
-	public final static int[] CITY_TYPES = {CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE};
+		CityBlocks(int index, boolean cityGroupType) {
+			this.index = index;
+			this.cityGroupType = cityGroupType;
+		}
+		
+		public static CityBlocks getByType(int index) {
+			for (CityBlocks c : values()) {
+				if (c.index == index) {
+					return c;
+				}
+			}
+			return UNKNOWN_TYPE;
+		}
+		
+		
+		public static List<CityBlocks> allTypes() {
+			List<CityBlocks> lst = new ArrayList<CityBlocks>();
+			for (CityBlocks c : values()) {
+				if (c != UNKNOWN_TYPE) {
+					lst.add(c);
+				}
+			}
+			return lst;
+		}
+		
+	}
+	
+	
 
 	public static class AddressRegion extends BinaryIndexPart {
 		String enName;
@@ -600,7 +631,10 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
-	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<Integer> typeFilter) throws IOException {
+	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, List<CityBlocks> typeFilter) throws IOException {
+		if (typeFilter == null) {
+			typeFilter = CityBlocks.allTypes();
+		}
 		TIntArrayList loffsets = new TIntArrayList();
 		CollatorStringMatcher stringMatcher = new CollatorStringMatcher(req.nameQuery, req.matcherMode);
 		String postcode = Postcode.normalize(req.nameQuery, map.getCountryName());
@@ -612,7 +646,6 @@ public class BinaryMapAddressReaderAdapter {
 				return city.isPostcode() ? postcodeMatcher.matches(city) : cityMatcher.matches(city);
 			}
 		};
-		long time = System.currentTimeMillis();
 		long indexOffset = 0;
 		while (true) {
 			if (req.isCancelled()) {
@@ -636,7 +669,7 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
 				// also offsets can be randomly skipped by limit
 				loffsets.sort();
-				
+				// TODO check crash!
 				TIntArrayList[] refs = new TIntArrayList[5];
 				TIntArrayList[] refsContainer = new TIntArrayList[5];
 				for (int i = 0; i < refs.length; i++) {
@@ -670,14 +703,14 @@ public class BinaryMapAddressReaderAdapter {
 						return;
 					}
 				}
-				if (typeFilter == null) {
-					typeFilter = TYPES;
-				}
-				for (int i = 0; i < typeFilter.size() && !req.isCancelled(); i++) {
-					TIntArrayList list = refs[typeFilter.get(i)];
-					TIntArrayList listContainer = refsContainer[typeFilter.get(i)];
-					
-					if (typeFilter.get(i) == STREET_TYPE) {
+				
+				for (CityBlocks block : typeFilter) {
+					if (req.isCancelled()) {
+						break;
+					}
+					TIntArrayList list = refs[block.index];
+					TIntArrayList listContainer = refsContainer[block.index];
+					if (block == CityBlocks.STREET_TYPE) {
 						TIntLongHashMap mp = new TIntLongHashMap();
 						for (int j = 0; j < list.size(); j++) {
 							mp.put(list.get(j), listContainer.get(j));

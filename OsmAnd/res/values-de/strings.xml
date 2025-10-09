@@ -1456,7 +1456,6 @@
     <string name="notes">Audio-/Videonotizen</string>
     <string name="online_map">Online-Karte</string>
     <string name="roads_only">Nur Straßen</string>
-    <string name="rendering_attr_pisteRoutes_name">Skirouten</string>
     <string name="shared_string_export">Exportieren</string>
     <string name="watch">Ansehen</string>
     <string name="share_note">Notiz mitteilen</string>
@@ -5026,7 +5025,6 @@
     <string name="copy_build_version">Build-Version kopieren</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Sprachansagen / Benachrichtigungen</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Fußgänger-Routenführung</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Ski-Routenführung</string>
     <string name="help_article_navigation_routing_train_routing_name">Zug-Routenführung</string>
     <string name="help_article_navigation_routing_name">Routenparameter</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Routenführung öffentlicher Verkehrsmittel</string>

@@ -1615,7 +1615,6 @@
 \n 经度 %2$s</string>
     <string name="watch">查看</string>
     <string name="notes">音视频注记</string>
-    <string name="rendering_attr_pisteRoutes_name">滑雪路线</string>
     <string name="free">%1$s 可用</string>
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="world_ski_missing">下载专用的离线地图以显示滑雪设施。</string>
@@ -4902,7 +4901,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">关于 OsmAnd 路线规划</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">步行路线规划</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">公共交通路线规划</string>
-    <string name="help_article_navigation_routing_ski_routing_name">滑雪路线规划</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">按照轨迹导航</string>
     <string name="help_article_navigation_guidance_name">导航指引</string>
     <string name="help_article_personal_name">我的数据</string>

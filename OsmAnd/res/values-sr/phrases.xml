@@ -680,7 +680,6 @@
     <string name="poi_club_sailing">Клуб једриличара</string>
     <string name="poi_club_scout">Извиђачки клуб</string>
     <string name="poi_piste">Стаза</string>
-    <string name="poi_piste_downhill">Стаза низбрдо</string>
     <string name="poi_piste_nordic">Нордијска стаза</string>
     <string name="poi_piste_hike">Пешачка стаза</string>
     <string name="poi_piste_snow_park">Снежни парк</string>
@@ -4966,7 +4965,6 @@
     <string name="poi_network_rcn">Регионалне бициклистичке руте (РЦН)</string>
     <string name="poi_network_nwn">Националне пешачке руте (НВН)</string>
     <string name="poi_network_foot">Мрежа рута (пјешачење)</string>
-    <string name="poi_route_activity_type_skiing">Скијашке руте</string>
     <string name="poi_route_activity_type_walking">Пешачке руте</string>
     <string name="poi_osmwiki">Омиљена места (Википедија)</string>
     <string name="poi_buddhist_temple">Будистички храм</string>

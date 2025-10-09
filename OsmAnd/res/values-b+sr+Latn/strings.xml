@@ -1524,7 +1524,6 @@
     <string name="rendering_attr_roadStyle_description">Izgled puta</string>
     <string name="parking_place">Mesta za parkiranje</string>
     <string name="rendering_attr_pisteGrooming_name">Ravnanje staze</string>
-    <string name="rendering_attr_pisteRoutes_name">Skijaške rute</string>
     <string name="days_behind">prethodni dani</string>
     <string name="debugging_and_development">OsmAnd razvoj</string>
     <string name="osmand_development_plugin_description">Podešavanja za razvoj i otklanjanje grešaka kao što su simuliranje navođenja, učinak iscrtavanja ili glasovni upiti. Namenjeno programerima, nepotrebno prilikom normalnog korišćenja.</string>
@@ -4625,7 +4624,6 @@
     <string name="help_article_navigation_guidance_voice_navigation_name">Glasovna uputstva / obaveštenja</string>
     <string name="help_article_navigation_routing_name">Parametri rute</string>
     <string name="help_article_navigation_routing_brouter_name">BiRuter</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Ski rute</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Rutiranje hodanjem</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">rutiranje pravom linijom (letelicom)</string>
     <string name="help_article_navigation_routing_train_routing_name">Rutiranje vozom</string>
@@ -5861,4 +5859,7 @@
     <string name="shared_string_price">Cena</string>
     <string name="rendering_attr_showSkiSlopes_name">Prikaži skijaške staze</string>
     <string name="rendering_attr_showSkiSlopes_description">Pokazati lake ski staze</string>
+    <string name="update_maps">Ažuriranje mapa</string>
+    <string name="reconnect">Ponovno povezivanje</string>
+    <string name="track_folder_appearance">Izgled foldera za trase</string>
 </resources>

@@ -3535,7 +3535,6 @@
     <string name="tts_missing_language_data_title">Data hilang</string>
     <string name="track_points">Titik trek</string>
     <string name="days_behind">hari di belakang</string>
-    <string name="rendering_attr_pisteRoutes_name">Rute ski</string>
     <string name="rendering_attr_pisteGrooming_name">Perawatan piste</string>
     <string name="gpx_selection_points">%1$s
 \nTitik</string>
@@ -5326,7 +5325,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Tentang perutean OsmAnd</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Perutean pejalan kaki</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Perutean transportasi umum</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Perutean ski</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Perutean garis lurus (Pesawat)</string>
     <string name="help_article_navigation_routing_train_routing_name">Perutean kereta</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigasi dengan trek</string>

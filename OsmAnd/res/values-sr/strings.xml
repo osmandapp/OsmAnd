@@ -1529,7 +1529,6 @@
     <string name="lang_ht">Хаићански</string>
     <string name="lang_gl">Галицијски</string>
     <string name="lang_ast">Астуријски</string>
-    <string name="rendering_attr_pisteRoutes_name">Скијашке руте</string>
     <string name="rendering_value_germanRoadAtlas_name">Немачки атлас путева</string>
     <string name="rendering_value_highContrastRoads_name">Путеви са великим контрастом</string>
     <string name="rendering_value_americanRoadAtlas_name">Амерички атлас путева</string>
@@ -4955,7 +4954,6 @@
     <string name="help_article_navigation_routing_horse_routing_name">Путања јахања коња</string>
     <string name="free_ride">Бесплатна вожња</string>
     <string name="external_sensor_name_property_description">Име пријемника</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Путања скијања</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Отровне и заразне твари</string>
     <string name="shared_string_deleting">Брисање</string>
     <string name="help_article_widgets_name">Справице карте</string>

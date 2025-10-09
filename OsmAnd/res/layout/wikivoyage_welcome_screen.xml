@@ -10,6 +10,7 @@
 	android:orientation="vertical">
 
 	<FrameLayout
+		android:id="@+id/top_content"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 

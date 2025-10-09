@@ -1251,7 +1251,6 @@
     <string name="poi_club_charity">Club di carità</string>
     <string name="poi_club_freemasonry">Loggia massonica</string>
     <string name="poi_piste">Pista</string>
-    <string name="poi_piste_downhill">Pista di discesa</string>
     <string name="poi_piste_nordic">Pista sci nordico</string>
     <string name="poi_piste_sleigh">Pista di slitta</string>
     <string name="poi_piste_sled">Pista da slitta</string>
@@ -4572,7 +4571,6 @@
     <string name="poi_route_activity_type_swimming_outdoor">Nuoto all\'aperto</string>
     <string name="poi_route_activity_type_car">Automobile</string>
     <string name="poi_route_activity_type_hiking">Percorsi escursionistici</string>
-    <string name="poi_route_activity_type_skiing">Percorsi sciistici</string>
     <string name="poi_route_activity_type_snowboarding">Snowboard</string>
     <string name="poi_route_activity_type_canoe">Canottaggio</string>
     <string name="poi_route_activity_type_windsurfing">Windsurf</string>
