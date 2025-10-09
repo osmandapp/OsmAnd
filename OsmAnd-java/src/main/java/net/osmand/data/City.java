@@ -77,6 +77,7 @@ public class City extends MapObject {
 	private List<Street> listOfStreets = new ArrayList<Street>();
 	private String postcode = null;
 	private City closestCity = null;
+	private int[] bbox31 = null;
 	
 	private static long POSTCODE_INTERNAL_ID = -1000;
 	public static City createPostcode(String postcode){
@@ -98,6 +99,14 @@ public class City extends MapObject {
 
 	public String getIsInValue() {
 		return isin;
+	}
+	
+	public int[] getBbox31() {
+		return bbox31;
+	}
+	
+	public void setBbox31(int[] bbox31) {
+		this.bbox31 = bbox31;
 	}
 	
 	public boolean isPostcode(){
