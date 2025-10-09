@@ -14875,6 +14875,10 @@ public final class OsmandOdb {
         Postcodes(1, 2),
         /**
          * <code>Villages = 3;</code>
+         *
+         * <pre>
+         * BoundaryType = 0; // added as 0 to not cause crashes &lt; 5.2
+         * </pre>
          */
         Villages(2, 3),
         ;
@@ -14889,6 +14893,10 @@ public final class OsmandOdb {
         public static final int Postcodes_VALUE = 2;
         /**
          * <code>Villages = 3;</code>
+         *
+         * <pre>
+         * BoundaryType = 0; // added as 0 to not cause crashes &lt; 5.2
+         * </pre>
          */
         public static final int Villages_VALUE = 3;
 
@@ -20770,6 +20778,7 @@ public final class OsmandOdb {
      *
      * <pre>
      * should be written the first (for city), for postcode is optional
+     * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
      * </pre>
      */
     boolean hasCityType();
@@ -20778,6 +20787,7 @@ public final class OsmandOdb {
      *
      * <pre>
      * should be written the first (for city), for postcode is optional
+     * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
      * </pre>
      */
     int getCityType();
@@ -20909,6 +20919,32 @@ public final class OsmandOdb {
      * </pre>
      */
     int getShiftToCityBlockIndex();
+
+    // repeated uint32 boundary = 12;
+    /**
+     * <code>repeated uint32 boundary = 12;</code>
+     *
+     * <pre>
+     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getBoundaryList();
+    /**
+     * <code>repeated uint32 boundary = 12;</code>
+     *
+     * <pre>
+     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * </pre>
+     */
+    int getBoundaryCount();
+    /**
+     * <code>repeated uint32 boundary = 12;</code>
+     *
+     * <pre>
+     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * </pre>
+     */
+    int getBoundary(int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.CityIndex}
@@ -21025,6 +21061,27 @@ public final class OsmandOdb {
               shiftToCityBlockIndex_ = input.readFixed32();
               break;
             }
+            case 96: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                boundary_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              boundary_.add(input.readUInt32());
+              break;
+            }
+            case 98: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200) && input.getBytesUntilLimit() > 0) {
+                boundary_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                boundary_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -21038,6 +21095,9 @@ public final class OsmandOdb {
         }
         if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           attributeValues_ = new com.google.protobuf.UnmodifiableLazyStringList(attributeValues_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          boundary_ = java.util.Collections.unmodifiableList(boundary_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -21079,6 +21139,7 @@ public final class OsmandOdb {
      *
      * <pre>
      * should be written the first (for city), for postcode is optional
+     * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
      * </pre>
      */
     public boolean hasCityType() {
@@ -21089,6 +21150,7 @@ public final class OsmandOdb {
      *
      * <pre>
      * should be written the first (for city), for postcode is optional
+     * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
      * </pre>
      */
     public int getCityType() {
@@ -21322,6 +21384,41 @@ public final class OsmandOdb {
       return shiftToCityBlockIndex_;
     }
 
+    // repeated uint32 boundary = 12;
+    public static final int BOUNDARY_FIELD_NUMBER = 12;
+    private java.util.List<java.lang.Integer> boundary_;
+    /**
+     * <code>repeated uint32 boundary = 12;</code>
+     *
+     * <pre>
+     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getBoundaryList() {
+      return boundary_;
+    }
+    /**
+     * <code>repeated uint32 boundary = 12;</code>
+     *
+     * <pre>
+     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * </pre>
+     */
+    public int getBoundaryCount() {
+      return boundary_.size();
+    }
+    /**
+     * <code>repeated uint32 boundary = 12;</code>
+     *
+     * <pre>
+     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * </pre>
+     */
+    public int getBoundary(int index) {
+      return boundary_.get(index);
+    }
+
     private void initFields() {
       cityType_ = 0;
       name_ = "";
@@ -21332,6 +21429,7 @@ public final class OsmandOdb {
       attributeTagIds_ = java.util.Collections.emptyList();
       attributeValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       shiftToCityBlockIndex_ = 0;
+      boundary_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -21383,6 +21481,9 @@ public final class OsmandOdb {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeFixed32(10, shiftToCityBlockIndex_);
+      }
+      for (int i = 0; i < boundary_.size(); i++) {
+        output.writeUInt32(12, boundary_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -21438,6 +21539,15 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(10, shiftToCityBlockIndex_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < boundary_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(boundary_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getBoundaryList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -21573,6 +21683,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000080);
         shiftToCityBlockIndex_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
+        boundary_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -21640,6 +21752,11 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000040;
         }
         result.shiftToCityBlockIndex_ = shiftToCityBlockIndex_;
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          boundary_ = java.util.Collections.unmodifiableList(boundary_);
+          bitField0_ = (bitField0_ & ~0x00000200);
+        }
+        result.boundary_ = boundary_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -21701,6 +21818,16 @@ public final class OsmandOdb {
         if (other.hasShiftToCityBlockIndex()) {
           setShiftToCityBlockIndex(other.getShiftToCityBlockIndex());
         }
+        if (!other.boundary_.isEmpty()) {
+          if (boundary_.isEmpty()) {
+            boundary_ = other.boundary_;
+            bitField0_ = (bitField0_ & ~0x00000200);
+          } else {
+            ensureBoundaryIsMutable();
+            boundary_.addAll(other.boundary_);
+          }
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -21747,6 +21874,7 @@ public final class OsmandOdb {
        *
        * <pre>
        * should be written the first (for city), for postcode is optional
+       * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
        * </pre>
        */
       public boolean hasCityType() {
@@ -21757,6 +21885,7 @@ public final class OsmandOdb {
        *
        * <pre>
        * should be written the first (for city), for postcode is optional
+       * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
        * </pre>
        */
       public int getCityType() {
@@ -21767,6 +21896,7 @@ public final class OsmandOdb {
        *
        * <pre>
        * should be written the first (for city), for postcode is optional
+       * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
        * </pre>
        */
       public Builder setCityType(int value) {
@@ -21780,6 +21910,7 @@ public final class OsmandOdb {
        *
        * <pre>
        * should be written the first (for city), for postcode is optional
+       * 0. City, 1. Town, 2. Village, 3. Hamlet, 4. Suburb, 5. Boundary (5.2) 6. Postcode (5.3)...
        * </pre>
        */
       public Builder clearCityType() {
@@ -22272,6 +22403,100 @@ public final class OsmandOdb {
       public Builder clearShiftToCityBlockIndex() {
         bitField0_ = (bitField0_ & ~0x00000100);
         shiftToCityBlockIndex_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 boundary = 12;
+      private java.util.List<java.lang.Integer> boundary_ = java.util.Collections.emptyList();
+      private void ensureBoundaryIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          boundary_ = new java.util.ArrayList<java.lang.Integer>(boundary_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+      /**
+       * <code>repeated uint32 boundary = 12;</code>
+       *
+       * <pre>
+       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getBoundaryList() {
+        return java.util.Collections.unmodifiableList(boundary_);
+      }
+      /**
+       * <code>repeated uint32 boundary = 12;</code>
+       *
+       * <pre>
+       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * </pre>
+       */
+      public int getBoundaryCount() {
+        return boundary_.size();
+      }
+      /**
+       * <code>repeated uint32 boundary = 12;</code>
+       *
+       * <pre>
+       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * </pre>
+       */
+      public int getBoundary(int index) {
+        return boundary_.get(index);
+      }
+      /**
+       * <code>repeated uint32 boundary = 12;</code>
+       *
+       * <pre>
+       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * </pre>
+       */
+      public Builder setBoundary(
+          int index, int value) {
+        ensureBoundaryIsMutable();
+        boundary_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 boundary = 12;</code>
+       *
+       * <pre>
+       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * </pre>
+       */
+      public Builder addBoundary(int value) {
+        ensureBoundaryIsMutable();
+        boundary_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 boundary = 12;</code>
+       *
+       * <pre>
+       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * </pre>
+       */
+      public Builder addAllBoundary(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureBoundaryIsMutable();
+        super.addAll(values, boundary_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 boundary = 12;</code>
+       *
+       * <pre>
+       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * </pre>
+       */
+      public Builder clearBoundary() {
+        boundary_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -76152,172 +76377,173 @@ public final class OsmandOdb {
       "ssNameIndexDataAtom\022\014\n\004name\030\001 \001(\t\022\016\n\006nam",
       "eEn\030\002 \001(\t\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030" +
       "\005 \003(\005\022\030\n\020shiftToCityIndex\030\006 \003(\005\022\014\n\004xy16\030" +
-      "\007 \003(\r\"\260\001\n\tCityIndex\022\021\n\tcity_type\030\001 \001(\r\022\014" +
+      "\007 \003(\r\"\302\001\n\tCityIndex\022\021\n\tcity_type\030\001 \001(\r\022\014" +
       "\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(" +
       "\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(\r\022\027\n\017attributeTagI" +
       "ds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(\t\022\035\n\025shi" +
-      "ftToCityBlockIndex\030\n \001(\007\"\202\001\n\016CityBlockIn" +
-      "dex\022\030\n\020shiftToCityIndex\030\004 \001(\007\022,\n\tbuildin" +
-      "gs\030\n \003(\0132\031.OsmAnd.OBF.BuildingIndex\022(\n\007s" +
-      "treets\030\014 \003(\0132\027.OsmAnd.OBF.StreetIndex\"\345\001",
-      "\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002" +
-      " \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\0225\n\rintersecti" +
-      "ons\030\005 \003(\0132\036.OsmAnd.OBF.StreetIntersectio" +
-      "n\022\n\n\002id\030\006 \001(\004\022\027\n\017attributeTagIds\030\007 \003(\r\022\027" +
-      "\n\017attributeValues\030\010 \003(\t\022,\n\tbuildings\030\014 \003" +
-      "(\0132\031.OsmAnd.OBF.BuildingIndex\"\221\001\n\022Street" +
-      "Intersection\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 " +
-      "\001(\t\022\024\n\014intersectedX\030\004 \002(\021\022\024\n\014intersected" +
-      "Y\030\005 \002(\021\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attr" +
-      "ibuteValues\030\010 \003(\t\"\230\002\n\rBuildingIndex\022\014\n\004n",
-      "ame\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\r\n\005name2\030\003 \001(" +
-      "\t\022\020\n\010name_en2\030\004 \001(\t\022\025\n\rinterpolation\030\005 \001" +
-      "(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002" +
-      "y2\030\n \001(\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(\t\022\027" +
-      "\n\017attributeTagIds\030\017 \003(\r\022\027\n\017attributeValu" +
-      "es\030\020 \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020at" +
-      "tributeValues2\030\022 \003(\t\"=\n\017TransportRoutes\022" +
-      "*\n\006routes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRo" +
-      "ute\"\371\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004ty" +
-      "pe\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022",
-      "\014\n\004name\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distan" +
-      "ce\030\010 \001(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017" +
-      " \003(\0132\036.OsmAnd.OBF.TransportRouteStop\0224\n\014" +
-      "reverseStops\030\020 \003(\0132\036.OsmAnd.OBF.Transpor" +
-      "tRouteStop\022\020\n\010geometry\030\021 \001(\014\0228\n\014schedule" +
-      "Trip\030\022 \003(\0132\".OsmAnd.OBF.TransportRouteSc" +
-      "hedule\022\027\n\017attributeTagIds\030\023 \003(\r\022\036\n\026attri" +
-      "buteTextTagValues\030\024 \003(\014\"Q\n\031IncompleteTra" +
-      "nsportRoutes\0224\n\006routes\030\006 \003(\0132$.OsmAnd.OB" +
-      "F.IncompleteTransportRoute\"{\n\030Incomplete",
-      "TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r" +
-      "\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\r\022\020\n\010route" +
-      "Ref\030\007 \002(\r\022\024\n\014missingStops\030\010 \003(\r\"\244\001\n\026Tran" +
-      "sportRouteSchedule\022\030\n\020avgStopIntervals\030\001" +
-      " \001(\014\022\030\n\020avgWaitIntervals\030\002 \001(\014\022\025\n\rtripIn" +
-      "tervals\030\003 \001(\014\022?\n\nexceptions\030\010 \003(\0132+.OsmA" +
-      "nd.OBF.TransportRouteScheduleException\"\313" +
-      "\001\n\037TransportRouteScheduleException\022\023\n\013tr" +
-      "ipIndexes\030\001 \003(\r\022\023\n\013stopIndexes\030\002 \003(\r\022\021\n\t" +
-      "available\030\003 \001(\010\022\024\n\014delayArrival\030\005 \003(\r\022\031\n",
-      "\021deltaWaitInterval\030\006 \003(\005\022\034\n\024dayOfWeekRes" +
-      "triction\030\007 \003(\r\022\034\n\024dayOfYearRestriction\030\010" +
-      " \003(\r\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n" +
-      "\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007" +
-      "name_en\030\007 \001(\r\"\332\001\n\rTransportStop\022\n\n\002dx\030\001 " +
-      "\002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(" +
-      "\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additionalNamePair" +
-      "s\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmAnd.OBF.Tran" +
-      "sportStopExit\022\016\n\006routes\030\020 \003(\r\022\030\n\020deleted" +
-      "RoutesIds\030\024 \003(\004\022\021\n\troutesIds\030\026 \003(\004\"8\n\021Tr",
-      "ansportStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022" +
-      "\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportStopsTree\022\014\n\004l" +
-      "eft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n" +
-      "\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAnd" +
-      ".OBF.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132\031" +
-      ".OsmAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001(" +
-      "\004\"\357\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t" +
-      "\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.TransportR" +
-      "outes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Transp" +
-      "ortStopsTree\022?\n\020incompleteRoutes\030\010 \001(\0132%",
-      ".OsmAnd.OBF.IncompleteTransportRoutes\022,\n" +
-      "\013stringTable\030\t \002(\0132\027.OsmAnd.OBF.StringTa" +
-      "ble\"\312\002\n\016OsmAndPoiIndex\022\014\n\004name\030\001 \002(\t\022-\n\n" +
-      "boundaries\030\002 \002(\0132\031.OsmAnd.OBF.OsmAndTile" +
-      "Box\0228\n\017categoriesTable\030\003 \003(\0132\037.OsmAnd.OB" +
-      "F.OsmAndCategoryTable\0221\n\tnameIndex\030\004 \001(\013" +
-      "2\036.OsmAnd.OBF.OsmAndPoiNameIndex\0226\n\rsubt" +
-      "ypesTable\030\005 \001(\0132\037.OsmAnd.OBF.OsmAndSubty" +
-      "pesTable\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd.OBF.Osm" +
-      "AndPoiBox\022-\n\007poiData\030\t \003(\0132\034.OsmAnd.OBF.",
-      "OsmAndPoiBoxData\"\331\001\n\022OsmAndPoiNameIndex\022" +
-      "-\n\005table\030\003 \002(\0132\036.OsmAnd.OBF.IndexedStrin" +
-      "gTable\022C\n\004data\030\005 \003(\01325.OsmAnd.OBF.OsmAnd" +
-      "PoiNameIndex.OsmAndPoiNameIndexData\032O\n\026O" +
-      "smAndPoiNameIndexData\0225\n\005atoms\030\003 \003(\0132&.O" +
-      "smAnd.OBF.OsmAndPoiNameIndexDataAtom\"Q\n\032" +
-      "OsmAndPoiNameIndexDataAtom\022\014\n\004zoom\030\002 \001(\r" +
-      "\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\"" +
-      ">\n\023OsmAndCategoryTable\022\020\n\010category\030\001 \002(\t" +
-      "\022\025\n\rsubcategories\030\003 \003(\t\"E\n\023OsmAndSubtype",
-      "sTable\022.\n\010subtypes\030\004 \003(\0132\034.OsmAnd.OBF.Os" +
-      "mAndPoiSubtype\"\205\001\n\020OsmAndPoiSubtype\022\014\n\004n" +
-      "ame\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016\n\006isText\030\003 \002" +
-      "(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021subtypeValuesSi" +
-      "ze\030\006 \001(\r\022\024\n\014subtypeValue\030\010 \003(\t\"2\n\021OsmAnd" +
-      "PoiTagGroup\022\n\n\002id\030\001 \002(\r\022\021\n\ttagValues\030\005 \003" +
-      "(\t\"T\n\022OsmAndPoiTagGroups\022\017\n\003ids\030\002 \003(\rB\002\020" +
-      "\001\022-\n\006groups\030\005 \003(\0132\035.OsmAnd.OBF.OsmAndPoi" +
-      "TagGroup\"\340\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022" +
-      "\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories",
-      "\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategories\022" +
-      "1\n\ttagGroups\030\010 \001(\0132\036.OsmAnd.OBF.OsmAndPo" +
-      "iTagGroups\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OB" +
-      "F.OsmAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023O" +
-      "smAndPoiCategories\022\022\n\ncategories\030\003 \003(\r\022\025" +
-      "\n\rsubcategories\030\005 \003(\r\"i\n\020OsmAndPoiBoxDat" +
-      "a\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n" +
-      "\007poiData\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBox" +
-      "DataAtom\"\234\002\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030" +
-      "\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n",
-      "\rsubcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006na" +
-      "meEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n" +
-      " \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004not" +
-      "e\030\r \001(\t\022\026\n\016textCategories\030\016 \003(\r\022\022\n\ntextV" +
-      "alues\030\017 \003(\t\022\023\n\013precisionXY\030\020 \001(\005\022\025\n\ttagG" +
-      "roups\030\021 \003(\rB\002\020\001\"\032\n\007IdTable\022\017\n\007routeId\030\001 " +
-      "\003(\022\"F\n\017RestrictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004" +
-      "from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tR" +
-      "outeData\022\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004" +
-      " \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022",
-      "\017\n\007routeId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005" +
-      "\n\022OsmAndRoutingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005ru" +
-      "les\030\002 \003(\01320.OsmAnd.OBF.OsmAndRoutingInde" +
-      "x.RouteEncodingRule\022>\n\trootBoxes\030\003 \003(\0132+" +
-      ".OsmAnd.OBF.OsmAndRoutingIndex.RouteData" +
-      "Box\022A\n\014basemapBoxes\030\004 \003(\0132+.OsmAnd.OBF.O" +
-      "smAndRoutingIndex.RouteDataBox\022=\n\006blocks" +
-      "\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRoutingIndex.R" +
-      "outeDataBlock\032;\n\021RouteEncodingRule\022\013\n\003ta" +
-      "g\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014R",
-      "outeDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021" +
-      "\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftTo" +
-      "Data\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.O" +
-      "smAndRoutingIndex.RouteDataBox\032\303\001\n\016Route" +
-      "DataBlock\022$\n\007idTable\030\005 \001(\0132\023.OsmAnd.OBF." +
-      "IdTable\022*\n\013dataObjects\030\006 \003(\0132\025.OsmAnd.OB" +
-      "F.RouteData\0221\n\014restrictions\030\007 \003(\0132\033.OsmA" +
-      "nd.OBF.RestrictionData\022,\n\013stringTable\030\010 " +
-      "\001(\0132\027.OsmAnd.OBF.StringTable\"\231\010\n\024OsmAndH" +
-      "HRoutingIndex\022\017\n\007edition\030\001 \002(\003\022\017\n\007profil",
-      "e\030\002 \002(\t\022\025\n\rprofileParams\030\003 \003(\t\022/\n\016tagVal" +
-      "uesTable\030\004 \001(\0132\027.OsmAnd.OBF.StringTable\022" +
-      "E\n\npointBoxes\030\005 \002(\01321.OsmAnd.OBF.OsmAndH" +
-      "HRoutingIndex.HHRoutePointsBox\022L\n\rpointS" +
-      "egments\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHRouti" +
-      "ngIndex.HHRouteBlockSegments\032\324\001\n\020HHRoute" +
-      "PointsBox\022\014\n\004left\030\002 \002(\021\022\r\n\005right\030\003 \002(\021\022\013" +
-      "\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002(\021\022@\n\005boxes\030\006 \003" +
-      "(\01321.OsmAnd.OBF.OsmAndHHRoutingIndex.HHR" +
-      "outePointsBox\022D\n\006points\030\007 \003(\01324.OsmAnd.O",
-      "BF.OsmAndHHRoutingIndex.HHRouteNetworkPo" +
-      "int\032\366\001\n\023HHRouteNetworkPoint\022\n\n\002id\030\001 \002(\005\022" +
-      "\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\020\n\010globalId\030\004 \002(" +
-      "\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021roadStartEndIndex\030\006" +
-      " \002(\005\022\021\n\tclusterId\030\007 \001(\005\022\023\n\013dualPointId\030\010" +
-      " \001(\005\022\025\n\rdualClusterId\030\t \001(\005\022\022\n\nprofileId" +
-      "s\030\n \003(\005\022\022\n\npartialInd\030\013 \001(\005\022\027\n\013tagValueI" +
-      "ds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRouteBlockSegments\022\024\n" +
-      "\014idRangeStart\030\001 \002(\005\022\025\n\ridRangeLength\030\002 \002" +
-      "(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013innerBlocks\030\006 \003",
-      "(\01325.OsmAnd.OBF.OsmAndHHRoutingIndex.HHR" +
-      "outeBlockSegments\022L\n\rpointSegments\030\004 \003(\013" +
-      "25.OsmAnd.OBF.OsmAndHHRoutingIndex.HHRou" +
-      "tePointSegments\032?\n\024HHRoutePointSegments\022" +
-      "\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013segmentsOut\030\003 \002(\014" +
-      "\"T\n\013OsmAndOwner\022\014\n\004name\030\001 \002(\t\022\020\n\010resourc" +
-      "e\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010pluginid" +
-      "\030\004 \001(\tB\036\n\021net.osmand.binaryB\tOsmandOdb"
+      "ftToCityBlockIndex\030\n \001(\007\022\020\n\010boundary\030\014 \003" +
+      "(\r\"\202\001\n\016CityBlockIndex\022\030\n\020shiftToCityInde" +
+      "x\030\004 \001(\007\022,\n\tbuildings\030\n \003(\0132\031.OsmAnd.OBF." +
+      "BuildingIndex\022(\n\007streets\030\014 \003(\0132\027.OsmAnd.",
+      "OBF.StreetIndex\"\345\001\n\013StreetIndex\022\014\n\004name\030" +
+      "\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004" +
+      " \002(\021\0225\n\rintersections\030\005 \003(\0132\036.OsmAnd.OBF" +
+      ".StreetIntersection\022\n\n\002id\030\006 \001(\004\022\027\n\017attri" +
+      "buteTagIds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(" +
+      "\t\022,\n\tbuildings\030\014 \003(\0132\031.OsmAnd.OBF.Buildi" +
+      "ngIndex\"\221\001\n\022StreetIntersection\022\014\n\004name\030\002" +
+      " \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n\014intersectedX\030\004 " +
+      "\002(\021\022\024\n\014intersectedY\030\005 \002(\021\022\027\n\017attributeTa" +
+      "gIds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(\t\"\230\002\n\r",
+      "BuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002" +
+      " \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010name_en2\030\004 \001(\t\022\025\n" +
+      "\rinterpolation\030\005 \001(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y\030\010 \002" +
+      "(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001(\021\022\n\n\002id\030\r \001(\004\022\020" +
+      "\n\010postcode\030\016 \001(\t\022\027\n\017attributeTagIds\030\017 \003(" +
+      "\r\022\027\n\017attributeValues\030\020 \003(\t\022\030\n\020attributeT" +
+      "agIds2\030\021 \003(\r\022\030\n\020attributeValues2\030\022 \003(\t\"=" +
+      "\n\017TransportRoutes\022*\n\006routes\030\006 \003(\0132\032.OsmA" +
+      "nd.OBF.TransportRoute\"\371\002\n\016TransportRoute" +
+      "\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operator\030\004",
+      " \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r\022\017\n\007name_" +
+      "en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022\r\n\005color\030\t \001(" +
+      "\r\0223\n\013directStops\030\017 \003(\0132\036.OsmAnd.OBF.Tran" +
+      "sportRouteStop\0224\n\014reverseStops\030\020 \003(\0132\036.O" +
+      "smAnd.OBF.TransportRouteStop\022\020\n\010geometry" +
+      "\030\021 \001(\014\0228\n\014scheduleTrip\030\022 \003(\0132\".OsmAnd.OB" +
+      "F.TransportRouteSchedule\022\027\n\017attributeTag" +
+      "Ids\030\023 \003(\r\022\036\n\026attributeTextTagValues\030\024 \003(" +
+      "\014\"Q\n\031IncompleteTransportRoutes\0224\n\006routes" +
+      "\030\006 \003(\0132$.OsmAnd.OBF.IncompleteTransportR",
+      "oute\"{\n\030IncompleteTransportRoute\022\n\n\002id\030\001" +
+      " \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003" +
+      "ref\030\005 \001(\r\022\020\n\010routeRef\030\007 \002(\r\022\024\n\014missingSt" +
+      "ops\030\010 \003(\r\"\244\001\n\026TransportRouteSchedule\022\030\n\020" +
+      "avgStopIntervals\030\001 \001(\014\022\030\n\020avgWaitInterva" +
+      "ls\030\002 \001(\014\022\025\n\rtripIntervals\030\003 \001(\014\022?\n\nexcep" +
+      "tions\030\010 \003(\0132+.OsmAnd.OBF.TransportRouteS" +
+      "cheduleException\"\313\001\n\037TransportRouteSched" +
+      "uleException\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n\013sto" +
+      "pIndexes\030\002 \003(\r\022\021\n\tavailable\030\003 \001(\010\022\024\n\014del",
+      "ayArrival\030\005 \003(\r\022\031\n\021deltaWaitInterval\030\006 \003" +
+      "(\005\022\034\n\024dayOfWeekRestriction\030\007 \003(\r\022\034\n\024dayO" +
+      "fYearRestriction\030\010 \003(\r\"W\n\022TransportRoute" +
+      "Stop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021" +
+      "\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"\332\001\n\rTran" +
+      "sportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030" +
+      "\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023" +
+      "additionalNamePairs\030\010 \001(\014\022,\n\005exits\030\t \003(\013" +
+      "2\035.OsmAnd.OBF.TransportStopExit\022\016\n\006route" +
+      "s\030\020 \003(\r\022\030\n\020deletedRoutesIds\030\024 \003(\004\022\021\n\trou",
+      "tesIds\030\026 \003(\004\"8\n\021TransportStopExit\022\n\n\002dx\030" +
+      "\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022Trans" +
+      "portStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002" +
+      "(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010subtr" +
+      "ees\030\007 \003(\0132\036.OsmAnd.OBF.TransportStopsTre" +
+      "e\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd.OBF.TransportS" +
+      "top\022\016\n\006baseId\030\020 \001(\004\"\357\001\n\024OsmAndTransportI" +
+      "ndex\022\014\n\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.Osm" +
+      "And.OBF.TransportRoutes\022-\n\005stops\030\006 \001(\0132\036" +
+      ".OsmAnd.OBF.TransportStopsTree\022?\n\020incomp",
+      "leteRoutes\030\010 \001(\0132%.OsmAnd.OBF.Incomplete" +
+      "TransportRoutes\022,\n\013stringTable\030\t \002(\0132\027.O" +
+      "smAnd.OBF.StringTable\"\312\002\n\016OsmAndPoiIndex" +
+      "\022\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031.Osm" +
+      "And.OBF.OsmAndTileBox\0228\n\017categoriesTable" +
+      "\030\003 \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTable\022" +
+      "1\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAndPo" +
+      "iNameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.OsmA" +
+      "nd.OBF.OsmAndSubtypesTable\022\'\n\005boxes\030\006 \003(" +
+      "\0132\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiData\030\t",
+      " \003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\331\001\n\022O" +
+      "smAndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.OsmAn" +
+      "d.OBF.IndexedStringTable\022C\n\004data\030\005 \003(\01325" +
+      ".OsmAnd.OBF.OsmAndPoiNameIndex.OsmAndPoi" +
+      "NameIndexData\032O\n\026OsmAndPoiNameIndexData\022" +
+      "5\n\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiNam" +
+      "eIndexDataAtom\"Q\n\032OsmAndPoiNameIndexData" +
+      "Atom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r" +
+      "\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryTable" +
+      "\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(",
+      "\t\"E\n\023OsmAndSubtypesTable\022.\n\010subtypes\030\004 \003" +
+      "(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n\020Osm" +
+      "AndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002" +
+      " \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022" +
+      "\031\n\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtypeVal" +
+      "ue\030\010 \003(\t\"2\n\021OsmAndPoiTagGroup\022\n\n\002id\030\001 \002(" +
+      "\r\022\021\n\ttagValues\030\005 \003(\t\"T\n\022OsmAndPoiTagGrou" +
+      "ps\022\017\n\003ids\030\002 \003(\rB\002\020\001\022-\n\006groups\030\005 \003(\0132\035.Os" +
+      "mAnd.OBF.OsmAndPoiTagGroup\"\340\001\n\014OsmAndPoi" +
+      "Box\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003",
+      " \002(\021\0223\n\ncategories\030\004 \001(\0132\037.OsmAnd.OBF.Os" +
+      "mAndPoiCategories\0221\n\ttagGroups\030\010 \001(\0132\036.O" +
+      "smAnd.OBF.OsmAndPoiTagGroups\022*\n\010subBoxes" +
+      "\030\n \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013shif" +
+      "tToData\030\016 \001(\007\"@\n\023OsmAndPoiCategories\022\022\n\n" +
+      "categories\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"" +
+      "i\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002" +
+      " \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAn" +
+      "d.OBF.OsmAndPoiBoxDataAtom\"\234\002\n\024OsmAndPoi" +
+      "BoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\nc",
+      "ategories\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014" +
+      "\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004" +
+      "\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005" +
+      "phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategor" +
+      "ies\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precisi" +
+      "onXY\030\020 \001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdT" +
+      "able\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData" +
+      "\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005" +
+      "\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002" +
+      "(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001",
+      "(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013st" +
+      "ringNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014" +
+      "\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF" +
+      ".OsmAndRoutingIndex.RouteEncodingRule\022>\n" +
+      "\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRout" +
+      "ingIndex.RouteDataBox\022A\n\014basemapBoxes\030\004 " +
+      "\003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex.Rout" +
+      "eDataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.Os" +
+      "mAndRoutingIndex.RouteDataBlock\032;\n\021Route" +
+      "EncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t",
+      "\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 " +
+      "\002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006botto" +
+      "m\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 " +
+      "\003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex.Rout" +
+      "eDataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005" +
+      " \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataObjects" +
+      "\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restric" +
+      "tions\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionData" +
+      "\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF.Strin" +
+      "gTable\"\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007editi",
+      "on\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofilePara" +
+      "ms\030\003 \003(\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.OsmAn" +
+      "d.OBF.StringTable\022E\n\npointBoxes\030\005 \002(\01321." +
+      "OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteP" +
+      "ointsBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAnd" +
+      ".OBF.OsmAndHHRoutingIndex.HHRouteBlockSe" +
+      "gments\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002(" +
+      "\021\022\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030" +
+      "\005 \002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAnd" +
+      "HHRoutingIndex.HHRoutePointsBox\022D\n\006point",
+      "s\030\007 \003(\01324.OsmAnd.OBF.OsmAndHHRoutingInde" +
+      "x.HHRouteNetworkPoint\032\366\001\n\023HHRouteNetwork" +
+      "Point\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(" +
+      "\021\022\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021r" +
+      "oadStartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(" +
+      "\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId\030" +
+      "\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd\030" +
+      "\013 \001(\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRou" +
+      "teBlockSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n" +
+      "\ridRangeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022",
+      "J\n\013innerBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAnd" +
+      "HHRoutingIndex.HHRouteBlockSegments\022L\n\rp" +
+      "ointSegments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHH" +
+      "RoutingIndex.HHRoutePointSegments\032?\n\024HHR" +
+      "outePointSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n" +
+      "\013segmentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004nam" +
+      "e\030\001 \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013description" +
+      "\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.b" +
+      "inaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -76419,7 +76645,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_CityIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_CityIndex_descriptor,
-              new java.lang.String[] { "CityType", "Name", "NameEn", "Id", "X", "Y", "AttributeTagIds", "AttributeValues", "ShiftToCityBlockIndex", });
+              new java.lang.String[] { "CityType", "Name", "NameEn", "Id", "X", "Y", "AttributeTagIds", "AttributeValues", "ShiftToCityBlockIndex", "Boundary", });
           internal_static_OsmAnd_OBF_CityBlockIndex_descriptor =
             getDescriptor().getMessageTypes().get(11);
           internal_static_OsmAnd_OBF_CityBlockIndex_fieldAccessorTable = new
