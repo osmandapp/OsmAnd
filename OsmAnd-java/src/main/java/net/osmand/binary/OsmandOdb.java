@@ -20920,31 +20920,25 @@ public final class OsmandOdb {
      */
     int getShiftToCityBlockIndex();
 
-    // repeated uint32 boundary = 12;
+    // optional bytes boundary = 12;
     /**
-     * <code>repeated uint32 boundary = 12;</code>
+     * <code>optional bytes boundary = 12;</code>
      *
      * <pre>
-     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * array of bytes int32
+     * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
      * </pre>
      */
-    java.util.List<java.lang.Integer> getBoundaryList();
+    boolean hasBoundary();
     /**
-     * <code>repeated uint32 boundary = 12;</code>
+     * <code>optional bytes boundary = 12;</code>
      *
      * <pre>
-     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * array of bytes int32
+     * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
      * </pre>
      */
-    int getBoundaryCount();
-    /**
-     * <code>repeated uint32 boundary = 12;</code>
-     *
-     * <pre>
-     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
-     * </pre>
-     */
-    int getBoundary(int index);
+    com.google.protobuf.ByteString getBoundary();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.CityIndex}
@@ -21061,25 +21055,9 @@ public final class OsmandOdb {
               shiftToCityBlockIndex_ = input.readFixed32();
               break;
             }
-            case 96: {
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
-                boundary_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000200;
-              }
-              boundary_.add(input.readUInt32());
-              break;
-            }
             case 98: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200) && input.getBytesUntilLimit() > 0) {
-                boundary_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000200;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                boundary_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
+              bitField0_ |= 0x00000080;
+              boundary_ = input.readBytes();
               break;
             }
           }
@@ -21095,9 +21073,6 @@ public final class OsmandOdb {
         }
         if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           attributeValues_ = new com.google.protobuf.UnmodifiableLazyStringList(attributeValues_);
-        }
-        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
-          boundary_ = java.util.Collections.unmodifiableList(boundary_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -21384,39 +21359,30 @@ public final class OsmandOdb {
       return shiftToCityBlockIndex_;
     }
 
-    // repeated uint32 boundary = 12;
+    // optional bytes boundary = 12;
     public static final int BOUNDARY_FIELD_NUMBER = 12;
-    private java.util.List<java.lang.Integer> boundary_;
+    private com.google.protobuf.ByteString boundary_;
     /**
-     * <code>repeated uint32 boundary = 12;</code>
+     * <code>optional bytes boundary = 12;</code>
      *
      * <pre>
-     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * array of bytes int32
+     * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getBoundaryList() {
+    public boolean hasBoundary() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional bytes boundary = 12;</code>
+     *
+     * <pre>
+     * array of bytes int32
+     * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getBoundary() {
       return boundary_;
-    }
-    /**
-     * <code>repeated uint32 boundary = 12;</code>
-     *
-     * <pre>
-     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
-     * </pre>
-     */
-    public int getBoundaryCount() {
-      return boundary_.size();
-    }
-    /**
-     * <code>repeated uint32 boundary = 12;</code>
-     *
-     * <pre>
-     * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
-     * </pre>
-     */
-    public int getBoundary(int index) {
-      return boundary_.get(index);
     }
 
     private void initFields() {
@@ -21429,7 +21395,7 @@ public final class OsmandOdb {
       attributeTagIds_ = java.util.Collections.emptyList();
       attributeValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       shiftToCityBlockIndex_ = 0;
-      boundary_ = java.util.Collections.emptyList();
+      boundary_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -21482,8 +21448,8 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeFixed32(10, shiftToCityBlockIndex_);
       }
-      for (int i = 0; i < boundary_.size(); i++) {
-        output.writeUInt32(12, boundary_.get(i));
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(12, boundary_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -21540,14 +21506,9 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed32Size(10, shiftToCityBlockIndex_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < boundary_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(boundary_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getBoundaryList().size();
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(12, boundary_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -21683,7 +21644,7 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000080);
         shiftToCityBlockIndex_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        boundary_ = java.util.Collections.emptyList();
+        boundary_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
@@ -21752,9 +21713,8 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000040;
         }
         result.shiftToCityBlockIndex_ = shiftToCityBlockIndex_;
-        if (((bitField0_ & 0x00000200) == 0x00000200)) {
-          boundary_ = java.util.Collections.unmodifiableList(boundary_);
-          bitField0_ = (bitField0_ & ~0x00000200);
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000080;
         }
         result.boundary_ = boundary_;
         result.bitField0_ = to_bitField0_;
@@ -21818,15 +21778,8 @@ public final class OsmandOdb {
         if (other.hasShiftToCityBlockIndex()) {
           setShiftToCityBlockIndex(other.getShiftToCityBlockIndex());
         }
-        if (!other.boundary_.isEmpty()) {
-          if (boundary_.isEmpty()) {
-            boundary_ = other.boundary_;
-            bitField0_ = (bitField0_ & ~0x00000200);
-          } else {
-            ensureBoundaryIsMutable();
-            boundary_.addAll(other.boundary_);
-          }
-          onChanged();
+        if (other.hasBoundary()) {
+          setBoundary(other.getBoundary());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -22407,96 +22360,58 @@ public final class OsmandOdb {
         return this;
       }
 
-      // repeated uint32 boundary = 12;
-      private java.util.List<java.lang.Integer> boundary_ = java.util.Collections.emptyList();
-      private void ensureBoundaryIsMutable() {
-        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
-          boundary_ = new java.util.ArrayList<java.lang.Integer>(boundary_);
-          bitField0_ |= 0x00000200;
-         }
-      }
+      // optional bytes boundary = 12;
+      private com.google.protobuf.ByteString boundary_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>repeated uint32 boundary = 12;</code>
+       * <code>optional bytes boundary = 12;</code>
        *
        * <pre>
-       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * array of bytes int32
+       * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getBoundaryList() {
-        return java.util.Collections.unmodifiableList(boundary_);
+      public boolean hasBoundary() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>repeated uint32 boundary = 12;</code>
+       * <code>optional bytes boundary = 12;</code>
        *
        * <pre>
-       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * array of bytes int32
+       * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
        * </pre>
        */
-      public int getBoundaryCount() {
-        return boundary_.size();
+      public com.google.protobuf.ByteString getBoundary() {
+        return boundary_;
       }
       /**
-       * <code>repeated uint32 boundary = 12;</code>
+       * <code>optional bytes boundary = 12;</code>
        *
        * <pre>
-       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * array of bytes int32
+       * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
        * </pre>
        */
-      public int getBoundary(int index) {
-        return boundary_.get(index);
-      }
-      /**
-       * <code>repeated uint32 boundary = 12;</code>
-       *
-       * <pre>
-       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
-       * </pre>
-       */
-      public Builder setBoundary(
-          int index, int value) {
-        ensureBoundaryIsMutable();
-        boundary_.set(index, value);
+      public Builder setBoundary(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        boundary_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 boundary = 12;</code>
+       * <code>optional bytes boundary = 12;</code>
        *
        * <pre>
-       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
-       * </pre>
-       */
-      public Builder addBoundary(int value) {
-        ensureBoundaryIsMutable();
-        boundary_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 boundary = 12;</code>
-       *
-       * <pre>
-       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
-       * </pre>
-       */
-      public Builder addAllBoundary(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureBoundaryIsMutable();
-        super.addAll(values, boundary_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 boundary = 12;</code>
-       *
-       * <pre>
-       * 5.2: 4 first ints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+       * array of bytes int32
+       * 5.2: 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
        * </pre>
        */
       public Builder clearBoundary() {
-        boundary_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000200);
+        boundary_ = getDefaultInstance().getBoundary();
         onChanged();
         return this;
       }
@@ -76381,8 +76296,8 @@ public final class OsmandOdb {
       "\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(" +
       "\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(\r\022\027\n\017attributeTagI" +
       "ds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(\t\022\035\n\025shi" +
-      "ftToCityBlockIndex\030\n \001(\007\022\020\n\010boundary\030\014 \003" +
-      "(\r\"\202\001\n\016CityBlockIndex\022\030\n\020shiftToCityInde" +
+      "ftToCityBlockIndex\030\n \001(\007\022\020\n\010boundary\030\014 \001" +
+      "(\014\"\202\001\n\016CityBlockIndex\022\030\n\020shiftToCityInde" +
       "x\030\004 \001(\007\022,\n\tbuildings\030\n \003(\0132\031.OsmAnd.OBF." +
       "BuildingIndex\022(\n\007streets\030\014 \003(\0132\027.OsmAnd.",
       "OBF.StreetIndex\"\345\001\n\013StreetIndex\022\014\n\004name\030" +
