@@ -9,15 +9,15 @@ import java.util.*;
 public class City extends MapObject {
 	public enum CityType {
 		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
-		CITY(10000, 100000), // 1. City
-		TOWN(4000, 20000), // 2. Town
-		VILLAGE(1300, 1000), // 3. Village 
-		HAMLET(1000, 100), // 4. Hamlet - Small village
-		SUBURB(400, 5000), // 5. Could be district of city, could have own streets 
+		CITY(10000, 100000), // 0. City
+		TOWN(4000, 20000), // 1. Town
+		VILLAGE(1300, 1000), // 2. Village 
+		HAMLET(1000, 100), // 3. Hamlet - Small village
+		SUBURB(400, 5000), // 4. Could be district of city, could have own streets - introduced to avoid duplicate streets in city 
 		// 5.2 stored in city / villages sections written as city type
-		BOUNDARY(0, 0), // 6. boundary no streets
+		BOUNDARY(0, 0), // 5. boundary no streets
 		// 5.3 stored in city / villages sections written as city type
-		POSTCODE(500, 1000), // 7. write this could be activated after 5.2 release
+		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
 		
 		// not stored entities no id assigned  
 		BOROUGH(400, 2500), // 
@@ -42,6 +42,10 @@ public class City extends MapObject {
 		}
 		
 		public boolean storedAsSeparateAdminEntity() {
+			if (this == CITY && this == TOWN && this == VILLAGE && this == HAMLET && this == SUBURB) {
+				return true;
+			}
+				
 			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH 
 					&& this != BOUNDARY && this != POSTCODE;
 		}

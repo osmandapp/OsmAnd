@@ -239,11 +239,14 @@ public class EntityParser {
 		return b;
 	}
 
-	public static City parseCity(Node el) {
-		return parseCity(el, CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue())));
+	public static City parseCity(Entity el) {
+		return parseCity(el, null);
 	}
 
 	public static City parseCity(Entity el, CityType t) {
+		if (t == null) {
+			t = CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue()));
+		}
 		if (t == null) {
 			return null;
 		}
