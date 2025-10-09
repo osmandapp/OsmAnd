@@ -81,8 +81,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	private long lastMessageReceived = 0;
 	private Location fakeOwnPosition = null; // used for test purposes to fake own position
 
-	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener();
-	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener();
+	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener(true);
+	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener(true);
 
 	public class AisDataManager implements AisDataListener {
 
@@ -411,7 +411,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			if (aisListener.checkTcpSocket()) {
 				if (((System.currentTimeMillis() - getAndUpdateLastMessageReceived()) / 1000) > 20) {
 					Log.d("AisTrackerLayer", "checkTcpConnection(): restart TCP socket");
-					restartNetworkListener();
+					restartNetworkListener(false);
 					return true;
 				}
 			}
@@ -419,8 +419,11 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public void restartNetworkListener() {
+	public void restartNetworkListener(boolean clearData) {
 		stopAisListener();
+		if (clearData) {
+			aisDataManager.cleanupResources();
+		}
 		startAisNetworkListener();
 	}
 
