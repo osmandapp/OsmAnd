@@ -245,7 +245,7 @@ public class EntityParser {
 
 	public static City parseCity(Entity el, CityType t) {
 		if (t == null) {
-			t = CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue()));
+			t = CityType.valueFromEntity(el);
 		}
 		if (t == null) {
 			return null;

@@ -3,6 +3,9 @@ package net.osmand.data;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+
 import java.util.*;
 
 
@@ -13,16 +16,18 @@ public class City extends MapObject {
 		TOWN(4000, 20000), // 1. Town
 		VILLAGE(1300, 1000), // 2. Village 
 		HAMLET(1000, 100), // 3. Hamlet - Small village
-		SUBURB(400, 5000), // 4. Could be district of city, could have own streets - introduced to avoid duplicate streets in city 
+		SUBURB(400, 5000), // 4. Mostly district of the city (introduced to avoid duplicate streets in city) - 
+						   // however BOROUGH, DISTRICT, NEIGHBOURHOOD could be used as well for that purpose
+						   // Main difference stores own streets to search and list by it  
 		// 5.2 stored in city / villages sections written as city type
 		BOUNDARY(0, 0), // 5. boundary no streets
 		// 5.3 stored in city / villages sections written as city type
 		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
 		
-		// not stored entities no id assigned  
+		// not stored entities but registered to uniquely identify streets as SUBURB
 		BOROUGH(400, 2500), // 
 		DISTRICT(400, 10000),
-		NEIGHBOURHOOD(300, 500), 
+		NEIGHBOURHOOD(300, 500), //
 		;
 		
 		private final double radius;
@@ -45,18 +50,32 @@ public class City extends MapObject {
 			if (this == CITY && this == TOWN && this == VILLAGE && this == HAMLET && this == SUBURB) {
 				return true;
 			}
-				
-			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH 
-					&& this != BOUNDARY && this != POSTCODE;
+			return false;
+//			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH 
+//					&& this != BOUNDARY && this != POSTCODE;
 		}
 
 		public static String valueToString(CityType t) {
 			return t.toString().toLowerCase();
 		}
 
+		public static CityType valueFromEntity(Entity e) {
+			String place = e.getTag(OSMTagKey.PLACE);
+			if ("locality".equals(place) && "townland".equals(e.getTag(OSMTagKey.LOCALITY))) {
+				// Irish townlands are very similar to suburb 
+				// however they could be separate polygons not inside town or city  
+				return CityType.SUBURB;
+			}
+			return valueFromString(place);
+		}
+		
+		// to be used only by amenity
 		public static CityType valueFromString(String place) {
 			if (place == null) {
 				return null;
+			}
+			if ("township".equals(place)) {
+				return CityType.TOWN;
 			}
 			if ("township".equals(place)) {
 				return CityType.TOWN;
