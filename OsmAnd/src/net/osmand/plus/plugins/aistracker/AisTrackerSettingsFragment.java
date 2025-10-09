@@ -167,46 +167,19 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		boolean restartNetworkListener = false;
 		if (preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_IP_ADDRESS_ID)) {
 			if (!isValidIpV4Address(newValue.toString())) {
 				showAlertDialog("Only IPv4 address accepted (\"a.b.c.d\", where a,b,c,d in range 0..255).");
 				return false;
 			}
-			restartNetworkListener = true;
 		} else if (preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_TCP_PORT_ID) ||
 				preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_UDP_PORT_ID)) {
 			if (!isValidPortNumber(newValue.toString())) {
 				showAlertDialog("Only numerical values accepted in range 0..65535.");
 				return false;
 			}
-			restartNetworkListener = true;
-		} else if (preference.getKey().equals(AisTrackerPlugin.AIS_OBJ_LOST_TIMEOUT_ID)) {
-			if (newValue instanceof Integer) {
-				AisObject.setMaxObjectAge((Integer) newValue);
-			}
-		} else if (preference.getKey().equals(AisTrackerPlugin.AIS_SHIP_LOST_TIMEOUT_ID)) {
-			if (newValue instanceof Integer) {
-				AisObject.setVesselLostTimeout((Integer) newValue);
-			}
-		} else if (preference.getKey().equals(AisTrackerPlugin.AIS_CPA_WARNING_TIME_ID)) {
-			if (newValue instanceof Integer) {
-				AisObject.setCpaWarningTime((Integer) newValue);
-			}
-		} else if (preference.getKey().equals(AisTrackerPlugin.AIS_CPA_WARNING_DISTANCE_ID)) {
-			if (newValue instanceof Float) {
-				AisObject.setCpaWarningDistance((Float) newValue);
-			}
-		} else if (preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_PROTOCOL_ID)) {
-			restartNetworkListener = true;
 		}
-
-		boolean ret = super.onPreferenceChange(preference, newValue);
-		AisTrackerLayer layer = plugin.getLayer();
-		if ((layer != null) && (restartNetworkListener)) {
-			layer.restartNetworkListener();
-		}
-		return ret;
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	private static boolean isValidIpV4Address(@Nullable String value) {

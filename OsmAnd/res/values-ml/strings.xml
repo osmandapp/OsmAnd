@@ -1997,7 +1997,6 @@
     <string name="location_on_map">സ്ഥാനം:
 \nഅക്ഷാംശം %1$s
 \nരേഖാംശം %2$s</string>
-    <string name="rendering_attr_pisteRoutes_name">സ്കീ ചരിവുകൾ</string>
     <string name="proxy_pref_descr">ഒരു പ്രോക്സി സെർവർ വ്യക്തമാക്കുക.</string>
     <string name="routing_attr_no_new_routing_name">റൂട്ടിങ്ങ് റൂളുകൾ v1.9 ഇല്ല</string>
     <string name="routing_attr_no_new_routing_description">V1.9 ൽ അവതരിപ്പിച്ച റൂട്ടിങ്ങ് നിയമങ്ങൾ ഉപയോഗിക്കരുത്.</string>

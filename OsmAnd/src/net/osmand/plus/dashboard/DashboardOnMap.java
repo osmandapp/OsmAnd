@@ -289,6 +289,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					view.findViewById(R.id.dashboard_content_container)));
 			targetsCollection.add(InsetTarget.createLeftSideContainer(true, true,
 					view.findViewById(R.id.dashboard_toolbar_container)));
+			targetsCollection.add(InsetTarget.createLeftSideContainer(true, true,
+					view.findViewById(R.id.dash_list_view)));
 
 			InsetsUtils.processInsets(dashboardView.findViewById(R.id.dashboard), targetsCollection, insets);
 		}, false);

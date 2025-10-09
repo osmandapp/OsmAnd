@@ -1698,7 +1698,6 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Krāsas pēc infrastruktūras veida</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Krāsas pēc OSMC simbola</string>
     <string name="local_recordings_delete_all_confirm">Vai vēlaties izdzēst %1$d ierakstus\?</string>
-    <string name="rendering_attr_pisteRoutes_name">Slēpošanas trases</string>
     <string name="rendering_attr_roadStyle_description">Pārklājuma veidi</string>
     <string name="routing_attr_avoid_stairs_name">Bez kāpnēm</string>
     <string name="routing_attr_avoid_stairs_description">Bez kāpnēm</string>

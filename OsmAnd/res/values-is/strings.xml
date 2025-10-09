@@ -818,7 +818,6 @@
 \nLengd %2$s</string>
     <string name="online_map">Nettengt kort</string>
     <string name="roads_only">Einungis vegir</string>
-    <string name="rendering_attr_pisteRoutes_name">Skíðaleiðir</string>
     <string name="free">Laust %1$s</string>
     <string name="device_memory">Minni tækis</string>
     <string name="rendering_attr_pisteGrooming_name">Verið að troða leið</string>
@@ -5123,7 +5122,6 @@
     <string name="empty_name">Autt heiti</string>
     <string name="shared_string_show_icon">Birta táknmynd</string>
     <string name="max_altitude">Hámarkshæð</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Leiðagerð fyrir skíði</string>
     <string name="any_connected_with_device">Allt sem er tengt: %s</string>
     <string name="rendering_attr_lightDetail_description">Sjálfgefið: heiti sjómerkis (skammstöfun ljósmerkis.hópur.tímalengd), veldu viðbótarupplýsingar á geirum 1 til 3 eða skammstafanir á geirum 1,2,3,4,5</string>
     <string name="simulation_position_description">Veldu ferilskrá sem verður notuð sem grunnur fyrir hreyfingu staðsetningar.</string>

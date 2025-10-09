@@ -475,7 +475,6 @@
     <string name="notes">Sonaj/videaj notoj</string>
     <string name="online_map">Enreta mapo</string>
     <string name="roads_only">Nur vojoj</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiaj kursoj</string>
     <string name="free">Libera %1$s</string>
     <string name="gps_status">Stato de GPS</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
@@ -4947,7 +4946,6 @@
     <string name="glide_ratio_to_target">Glisrilato necesa por celo</string>
     <string name="map_widget_group_glide_ratio">Glisrilato</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Publikaj transportiloj</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skiado</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Rekta linio (aviadilo)</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigi laŭ spuro</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigi laŭ markoj</string>

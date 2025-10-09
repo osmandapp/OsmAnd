@@ -37,6 +37,7 @@
 			app:liftOnScroll="false">
 			<!-- TODO change theme -->
 			<LinearLayout
+				android:id="@+id/name_container"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap">
@@ -67,6 +68,7 @@
 			</LinearLayout>
 
 			<LinearLayout
+				android:id="@+id/poi_type_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/content_padding_half"
@@ -117,15 +119,24 @@
 					tools:src="@drawable/ic_action_help" />
 			</LinearLayout>
 
-			<com.google.android.material.tabs.TabLayout
-				android:id="@+id/tab_layout"
+			<FrameLayout
+				android:id="@+id/tab_layout_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/bg_color"
-				app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"
-				app:tabIndicatorColor="@color/osmand_orange"
-				app:tabSelectedTextColor="@color/osmand_orange"
-				app:tabTextColor="@android:color/darker_gray" />
+				android:background="?attr/bg_color">
+
+				<com.google.android.material.tabs.TabLayout
+					android:id="@+id/tab_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/bg_color"
+					app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"
+					app:tabIndicatorColor="@color/osmand_orange"
+					app:tabSelectedTextColor="@color/osmand_orange"
+					app:tabTextColor="@android:color/darker_gray" />
+
+			</FrameLayout>
+
 		</com.google.android.material.appbar.AppBarLayout>
 
 		<androidx.viewpager2.widget.ViewPager2

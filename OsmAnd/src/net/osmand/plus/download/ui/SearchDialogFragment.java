@@ -1,5 +1,6 @@
 package net.osmand.plus.download.ui;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -42,6 +43,9 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
@@ -175,6 +179,15 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		searchEditText.requestFocus();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.freeVersionBanner, R.id.downloadProgressLayout, R.id.toolbar).build());
+		collection.replace(InsetTarget.createScrollable(android.R.id.list).build());
+		collection.add(InsetTarget.createScrollable(listView).build());
+		return collection;
 	}
 
 	@Override

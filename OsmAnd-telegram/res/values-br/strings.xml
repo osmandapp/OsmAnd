@@ -16,4 +16,8 @@
     <string name="location_source_summary">Ampleg, staliet diwar Google Play ez implij OsmAnd servijoù Google Play evit dibab al lec\'hiadur.\n\nMa teu ganeoc\'h titouroù lec\'hiadur amresis pe mard implijit un ardivink a ya en-dro hep servijoù Google Play, klaskit tremen d\'an API Android</string>
     <string name="location_source">Mamenn al lec\'hiadur</string>
     <string name="last_response_duration">Respont diwezhañ : %1$s \'zo</string>
+    <string name="last_response">Respont diwezhañ</string>
+    <string name="shared_string_group">Strollad</string>
+    <string name="shared_string_close">Seriñ</string>
+    <string name="shared_string_account">Kont</string>
 </resources>

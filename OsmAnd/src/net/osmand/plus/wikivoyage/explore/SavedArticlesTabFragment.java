@@ -74,6 +74,7 @@ public class SavedArticlesTabFragment extends BaseFullScreenFragment implements 
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.removeType(Type.ROOT_INSET);
+		collection.removeType(Type.SCROLLABLE);
 		return collection;
 	}
 

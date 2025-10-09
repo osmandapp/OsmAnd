@@ -94,7 +94,7 @@
     <string name="osm_live_payment_3_years_title">Every three years</string>
     <string name="three_years_subscription">Three year subscription</string>
     <string name="shared_string_switch">Switch</string>
-	<string name="ski_route_switch_style_description">Explore ski slopes, lifts, and more with the "Winter and Ski" map style.</string>
+    <string name="ski_route_switch_style_description">Explore ski routes, slopes, and lifts with the "Winter and Ski" map style.</string>
     <string name="battery">battery</string>
     <string name="sensor_data">Sensor data</string>
     <string name="battery_level">Battery level</string>
@@ -980,7 +980,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="help_article_navigation_routing_osmand_routing_name">About OsmAnd routing</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Pedestrian routing</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Public Transport routing</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Ski routing</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Ski slopes and routes</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Straight line routing (Aircraft)</string>
     <string name="help_article_navigation_routing_train_routing_name">Train routing</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigate by track</string>
@@ -4519,7 +4519,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="notes">A/V notes</string>
     <string name="online_map">Online map</string>
     <string name="roads_only">Roads only</string>
-    <string name="rendering_attr_pisteRoutes_name">Ski routes</string>
+    <string name="rendering_attr_pisteRoutes_name">Ski slopes and routes</string>
     <string name="free">Free %1$s </string>
     <string name="device_memory">Device memory</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>

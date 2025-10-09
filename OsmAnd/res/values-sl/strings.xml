@@ -1408,7 +1408,6 @@
     <string name="shared_string_disable">Onemogoči</string>
     <string name="plugin_install_needs_network">Za namestitev tega vtičnika je potrebna internetna povezava.</string>
     <string name="shared_string_get">Pridobi</string>
-    <string name="rendering_attr_pisteRoutes_name">Smučišča</string>
     <string name="free">Na voljo je še %1$s</string>
     <string name="device_memory">Pomnilnik naprave</string>
     <string name="rendering_attr_pisteGrooming_name">Teptanje smučarskih prog</string>

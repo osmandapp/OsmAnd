@@ -1612,7 +1612,6 @@
     <string name="poi_club_sailing">படகோட்டம் கிளப்</string>
     <string name="poi_club_scout">சாரணர் கிளப்</string>
     <string name="poi_piste">பிச்டே</string>
-    <string name="poi_piste_downhill">கீழ்நோக்கி பிச்டே</string>
     <string name="poi_piste_nordic">நோர்டிக் பிச்டே</string>
     <string name="poi_piste_skitour">ச்கை டூர்</string>
     <string name="poi_piste_hike">உயர்வு பிச்டே</string>
@@ -4949,7 +4948,6 @@
     <string name="poi_osmwiki">பிரபலமான இடங்கள் (விக்கிபீடியா)</string>
     <string name="poi_route_activity_type_hiking">ஐக்கிங் வழிகள்</string>
     <string name="poi_route_activity_type_walking">நடைபயிற்சி வழிகள்</string>
-    <string name="poi_route_activity_type_skiing">பனிச்சறுக்கு வழிகள்</string>
     <string name="poi_route_activity_type_mountain_biking">எம்டிபி வழிகள் (மலை பைக்)</string>
     <string name="poi_route_activity_type_road_cycling">சாலை சைக்கிள் ஓட்டுதல் வழிகள்</string>
     <string name="poi_footway">நடைபாதை</string>

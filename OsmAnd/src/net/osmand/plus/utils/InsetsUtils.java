@@ -154,6 +154,10 @@ public class InsetsUtils {
 	}
 
 	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView, @Nullable View paddingsView) {
+		processInsets(insetSupportedFragment, rootView, paddingsView, true);
+	}
+
+	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView, @Nullable View paddingsView, boolean consume) {
 		InsetTargetsCollection targetsCollection = insetSupportedFragment.getInsetTargets();
 
 		InsetsUtils.setWindowInsetsListener(rootView, (v, insets) -> {
@@ -163,7 +167,7 @@ public class InsetsUtils {
 
 			insetSupportedFragment.setLastRootInsets(insets);
 			insetSupportedFragment.onApplyInsets(insets);
-		}, true);
+		}, consume);
 	}
 
 	public static void processInsets(View root, InsetTargetsCollection collection, @NonNull WindowInsetsCompat insets) {

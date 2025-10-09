@@ -1200,7 +1200,6 @@
     <string name="notes">Bilješke</string>
     <string name="online_map">Online karta</string>
     <string name="roads_only">Samo ceste</string>
-    <string name="rendering_attr_pisteRoutes_name">Skijališta</string>
     <string name="free">"Slobodno %1$s "</string>
     <string name="device_memory">Memorija uređaja</string>
     <string name="world_ski_missing">Kako bi se prikazale skijaške karte, potrebno je preuzeti posebne offline karte</string>

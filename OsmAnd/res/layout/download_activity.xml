@@ -11,11 +11,19 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<net.osmand.plus.views.controls.PagerSlidingTabStrip
-			android:id="@+id/sliding_tabs"
+		<FrameLayout
+			android:id="@+id/sliding_tabs_container"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/list_item_height"
-			android:background="?attr/colorPrimary" />
+			android:layout_height="wrap_content"
+			android:background="?attr/pstsTabBackground" >
+
+			<net.osmand.plus.views.controls.PagerSlidingTabStrip
+				android:id="@+id/sliding_tabs"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/list_item_height"
+				android:background="?attr/colorPrimary" />
+
+		</FrameLayout>
 
 		<FrameLayout
 			android:layout_width="match_parent"

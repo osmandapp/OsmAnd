@@ -80,7 +80,6 @@
     <string name="notes">Audio/video märkmed</string>
     <string name="online_map">Veebikaart</string>
     <string name="roads_only">Ainult teed</string>
-    <string name="rendering_attr_pisteRoutes_name">Suusamarsruudid</string>
     <string name="free">Vaba %1$s</string>
     <string name="device_memory">Seadme mälu</string>
     <string name="edit_group">Muuda gruppi</string>
@@ -5005,7 +5004,6 @@
     <string name="help_article_widgets_nav_widgets_name">Tee juhatamise vidinad</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Otseteekonna koostamine paadisõiduks</string>
     <string name="help_article_navigation_routing_horse_routing_name">Teekonna koostamine ratsutamiseks</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Teekonna koostamine suusatamiseks</string>
     <string name="help_article_navigation_routing_online_routing_name">Teekonna koostamine võrguühenduse abil</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Teave OsmAndi teekonna koostamise kohta</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Teekonna koostamine autosõiduks (veoauto, mootorratas)</string>

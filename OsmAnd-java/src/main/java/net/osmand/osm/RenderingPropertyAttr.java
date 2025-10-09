@@ -7,7 +7,8 @@ public enum RenderingPropertyAttr {
 	MTB_ROUTES("showMtbRoutes", ".route.mtb"),
 	ALPINE_HIKING("alpineHiking", ".road.alpinehiking"),
 	HORSE_ROUTES("horseRoutes", ".route.horse"),
-	PISTE_ROUTES("pisteRoutes", ".route.piste"),
+	PISTE_ROUTES("pisteRoutes", ".route.piste"), // TravelGpx OSM routes
+	SKI_SLOPES("showSkiSlopes", null), // ClickableWay OSM ways
 	WHITE_WATER_SPORTS("whiteWaterSports", null),
 	RUNNING_ROUTES("showRunningRoutes", ".route.running"),
 	FITNESS_TRAILS("showFitnessTrails", ".route.fitness_trail"),

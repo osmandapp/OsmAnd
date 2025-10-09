@@ -1442,7 +1442,6 @@ POIの更新は利用できません</string>
     <string name="notes">記録したメモ</string>
     <string name="online_map">オンラインマップ</string>
     <string name="roads_only">道路のみ</string>
-    <string name="rendering_attr_pisteRoutes_name">スキー場</string>
     <string name="free">空き %1$s</string>
     <string name="device_memory">本体メモリー</string>
     <string name="rendering_attr_pisteGrooming_name">ゲレンデ圧雪</string>

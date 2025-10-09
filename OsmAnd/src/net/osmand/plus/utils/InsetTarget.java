@@ -106,6 +106,16 @@ public final class InsetTarget {
 				.applyPadding(true);
 	}
 
+	public static InsetTargetBuilder createScrollable(View... ids) {
+		return builder(ids)
+				.type(Type.SCROLLABLE)
+				.portraitSides(InsetSide.BOTTOM)
+				.landscapeSides(InsetSide.BOTTOM, InsetSide.LEFT, InsetSide.RIGHT)
+				.typeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout())
+				.clipToPadding(true)
+				.applyPadding(true);
+	}
+
 	public static InsetTargetBuilder createBottomContainer(int... ids) {
 		return builder(ids)
 				.type(Type.BOTTOM_CONTAINER)

@@ -788,7 +788,6 @@
     <string name="poi_club_tourism">Turisma klubejo</string>
     <string name="poi_club_charity">Almoza klubejo</string>
     <string name="poi_piste">Skivojo</string>
-    <string name="poi_piste_downhill">Skivojo alpa (malsuprenira)</string>
     <string name="poi_piste_nordic">Skivojo nordia (skikurada)</string>
     <string name="poi_piste_skitour">Skivojo ski-ekskursa</string>
     <string name="poi_piste_hike">Skivojo marŝada</string>
@@ -4978,7 +4977,6 @@
     <string name="poi_presbyterian_church">Presbiterianisma kirko</string>
     <string name="poi_access_main_tag">Aliro</string>
     <string name="poi_route_activity_type_hiking">Piediradaj kursoj</string>
-    <string name="poi_route_activity_type_skiing">Skivojoj</string>
     <string name="poi_sled_yes">Glitveturilo: jes</string>
     <string name="poi_sled_no">Glitveturilo: ne</string>
     <string name="poi_dog_sled_yes">Glitveturilo (tirata de hundoj): jes</string>

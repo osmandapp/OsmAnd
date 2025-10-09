@@ -42,7 +42,7 @@ public class AisLoadTask extends AsyncTask<Void, Void, String> {
 	protected void onPostExecute(String error) {
 		if (Algorithms.isEmpty(error)) {
 			if (file.exists()) {
-				plugin.getSimulationProvider().startSimulation(file);
+				plugin.startAisSimulation(file);
 			}
 		} else {
 			LOG.error(error);

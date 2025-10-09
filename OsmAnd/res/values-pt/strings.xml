@@ -1394,7 +1394,6 @@
     <string name="notes">Notas áudio/vídeo</string>
     <string name="online_map">Mapa online</string>
     <string name="roads_only">Apenas estradas</string>
-    <string name="rendering_attr_pisteRoutes_name">Rotas de esqui</string>
     <string name="free">%1$s livre</string>
     <string name="device_memory">Memória do dispositivo</string>
     <string name="world_ski_missing">Para mostrar mapas de esqui, tem de descarregar o mapa offline especial.</string>
@@ -5105,7 +5104,6 @@
     <string name="widget_available_ram">RAM disponível</string>
     <string name="trash_is_empty">O lixo está vazio</string>
     <string name="key_event_action_move_to_my_location">Mover para minha localização</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Roteamento de esqui</string>
     <string name="not_specified">Não especificado</string>
     <string name="help_article_widgets_name">Widgets do mapa</string>
     <string name="help_article_personal_name">Meus dados</string>

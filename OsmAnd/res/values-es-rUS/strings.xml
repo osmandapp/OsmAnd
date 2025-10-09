@@ -142,7 +142,6 @@
     <string name="notes">Notas multimedia</string>
     <string name="online_map">Mapa en línea</string>
     <string name="roads_only">Sólo caminos</string>
-    <string name="rendering_attr_pisteRoutes_name">Rutas de esquí</string>
     <string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de estacionamiento</string>
     <string name="gps_status">Estado del GPS</string>
@@ -4910,7 +4909,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Sobre la navegación en OsmAnd</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Navegación a pie</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Navegación en transporte público</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Navegación en esquí</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Navegación en línea recta (avión)</string>
     <string name="help_article_navigation_routing_train_routing_name">Navegación en tren</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navegar con una traza</string>

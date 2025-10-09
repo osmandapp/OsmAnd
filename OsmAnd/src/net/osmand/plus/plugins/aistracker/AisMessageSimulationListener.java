@@ -6,11 +6,11 @@ import java.io.File;
 
 public class AisMessageSimulationListener extends AisMessageListener  {
 
-    private int simulatedMessageLatencyTime = 0;
+    private final int simulatedMessageLatencyTime;
 
-    public AisMessageSimulationListener(@NonNull AisTrackerLayer layer, @NonNull File file,
+    public AisMessageSimulationListener(@NonNull AisDataListener dataListener, @NonNull File file,
                                         int simulatedLatencyTime) {
-        super(layer, file);
+        super(dataListener, file);
         simulatedMessageLatencyTime = simulatedLatencyTime;
     }
 

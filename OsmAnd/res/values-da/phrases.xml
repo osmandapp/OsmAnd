@@ -662,7 +662,6 @@
     <string name="poi_reservoir">Reservoir</string>
     <string name="poi_silo">Silo</string>
     <string name="poi_storage_tank">Lagertank</string>
-    <string name="poi_piste_downhill">Styrtløbspiste</string>
     <string name="poi_piste_nordic">Langrendpiste</string>
     <string name="poi_piste_skitour">Skitouring piste</string>
     <string name="poi_piste_hike">Vandrepiste</string>
@@ -4281,4 +4280,7 @@
     <string name="poi_hazard_additional_school_zone">Skolezone</string>
     <string name="poi_hazard_additional_cyclists">Cyklister</string>
     <string name="poi_hazard_additional_shooting_range">Skydebane</string>
+    <string name="poi_barrier_log">Stamme</string>
+    <string name="poi_barrier_chain">Kæde</string>
+    <string name="poi_barrier_sliding_gate">Skydelåge</string>
 </resources>

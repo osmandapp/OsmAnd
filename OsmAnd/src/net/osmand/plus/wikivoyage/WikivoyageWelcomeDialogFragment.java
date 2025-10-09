@@ -62,6 +62,7 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createBottomContainer(R.id.description_container));
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.top_content));
 		return collection;
 	}
 

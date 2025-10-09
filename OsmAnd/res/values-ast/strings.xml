@@ -2370,7 +2370,6 @@
     <string name="nautical_maps_missing">Download the special offline map to display nautical details.</string>
     <string name="world_ski_missing">Download the special offline map to display skiing facilities.</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>
-    <string name="rendering_attr_pisteRoutes_name">Ski slopes</string>
     <string name="watch">Watch</string>
     <string name="share_note">Share note</string>
     <string name="back_to_map">Back to map</string>

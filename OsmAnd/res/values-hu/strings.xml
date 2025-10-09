@@ -1364,7 +1364,6 @@
     <string name="device_memory">Eszköz memóriája</string>
     <string name="free">%1$s szabad</string>
     <string name="roads_only">Csak utak</string>
-    <string name="rendering_attr_pisteRoutes_name">Sípályák</string>
     <string name="rendering_attr_pisteGrooming_name">Sípálya kezeltség</string>
     <string name="watch">Óra</string>
     <string name="notes">Hang/videó jegyzetek</string>
@@ -4943,7 +4942,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Az OsmAnd útvonaltervezésről</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Útvonaltervezés gyalogláshoz</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Útvonaltervezés tömegközledéshez</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Útvonaltervezés síeléshez</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Útvonaltervezés légvonalban (repülés)</string>
     <string name="help_article_navigation_routing_train_routing_name">Útvonaltervezés vonathoz</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigálás nyomvonallal</string>
@@ -5821,4 +5819,15 @@
     <string name="shared_string_price">Ár</string>
     <string name="rendering_attr_showSkiSlopes_name">Sípályák megjelenítése</string>
     <string name="rendering_attr_showSkiSlopes_description">Egyszerűsített sípályák megjelenítése</string>
+    <string name="track_folder_appearance">Nyomvonalakat tartalmazó mappa megjelenése</string>
+    <string name="update_maps">Térképek frissítése</string>
+    <string name="reconnect">Újbóli csatlakozás</string>
+    <string name="trip_recording_downhill_widget_desc">Megjeleníti az összes lejtés összegét vagy a jelenleg rögzített utazás utolsó lejtőjét.</string>
+    <string name="trip_recording_uphill_widget_desc">Megjeleníti az összes emelkedés összegét vagy a jelenleg rögzített utazás utolsó emelkedőjét.</string>
+    <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás teljes hosszát, adott esetben az utolsó emelkedés és lejtés hosszával együtt.</string>
+    <string name="trip_recording_max_speed_widget_description">Megjeleníti az aktuálisan rögzített utazás legnagyobb sebességét. Koppintással válthat az általános maximális sebesség és az utolsó emelkedőn vagy lejtőn elért maximális sebesség között.</string>
+    <string name="trip_recording_average_slope_widget_description">Megjeleníti az aktuálisan rögzített utazás utolsó lejtő vagy emelkedő szakaszának átlagos meredekségét.</string>
+    <string name="average_slope">Átlagos meredekség</string>
+    <string name="shared_string_last_uphill">Utolsó emelkedő</string>
+    <string name="shared_string_last_downhill">Utolsó lejtő</string>
 </resources>

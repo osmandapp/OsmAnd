@@ -35,6 +35,6 @@ public class ShowHideSkiSlopesAction extends BaseRouteQuickAction {
 	@NonNull
 	@Override
 	protected OsmRouteType getOsmRouteType() {
-		return OsmRouteType.SKI;
+		return OsmRouteType.SKI_ROUTES;
 	}
 }

@@ -51,7 +51,7 @@ class RouteTypesComparator implements Comparator<MenuObject> {
 				FERRY.getName(), CANOE.getName());
 		/*addRouteTypes(ApplicationMode.AIRCRAFT);*/ // No available types yet
 		addRouteTypes(ApplicationMode.SKI,
-				SKI.getName(), INLINE_SKATES.getName());
+				SKI_ROUTES.getName(), INLINE_SKATES.getName());
 		addRouteTypes(ApplicationMode.HORSE,
 				HORSE.getName());
 	}

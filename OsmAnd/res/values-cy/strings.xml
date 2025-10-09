@@ -2105,7 +2105,6 @@
     <string name="rendering_attr_trainLightrailRoutes_name">Llwybrau trenau</string>
     <string name="traffic_warning_speed_limit">Terfyn cyflymder</string>
     <string name="gps_status">Statws GPS</string>
-    <string name="rendering_attr_pisteRoutes_name">Llethrau sgïo</string>
     <string name="rendering_attr_currentTrackWidth_name">Lled GPX</string>
     <string name="rendering_value_translucent_red_name">Coch tryleu</string>
     <string name="rendering_value_translucent_green_name">Gwyrdd tryleu</string>

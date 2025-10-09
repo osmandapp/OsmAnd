@@ -1452,7 +1452,6 @@
     <string name="rename_failed">No s\'ha pogut canviar el nom.</string>
     <string name="back_to_map">Torna al mapa</string>
     <string name="location_on_map">Posició:\n Lat %1$s\n Lon %2$s</string>
-    <string name="rendering_attr_pisteRoutes_name">Rutes d\'esquí</string>
     <string name="shared_string_release">Alliberat</string>
     <string name="shared_string_message">Missatge</string>
     <string name="agps_data_last_downloaded">Dades A-GPS baixades: %1$s</string>
@@ -4512,7 +4511,6 @@
     <string name="compass_click_north_is_up">Per canviar el mode d\'orientació feu clic i manteniu</string>
     <string name="help_article_map_raster_maps_name">Mapes de bits (connexió / desconnexió)</string>
     <string name="help_article_map_track_context_menu_name">Menú de context de les traces</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Ruta d\'esquí</string>
     <string name="simulation_real_mode_desc">En trams rectes, la velocitat s\'estimarà propera a la velocitat màxima permesa.\nAls encreuaments, la estimació serà inferior.\nTambé s\'estimaran reduccions addicionals prop de semàfors, senyals d\'stop, etc.</string>
     <string name="obd_support">Suport OBD</string>
     <string name="help_article_map_legend_nautical_map_name">Mapa tipus nàutic</string>

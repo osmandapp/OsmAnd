@@ -78,48 +78,55 @@
             android:indeterminate="true" />
 
         <FrameLayout
-            android:id="@+id/search_box"
+            android:id="@+id/search_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/text_margin_small"
-            android:layout_marginRight="@dimen/text_margin_small"
-            android:background="?attr/wikivoyage_travel_card_bg"
-            android:layout_marginEnd="@dimen/text_margin_small"
-            android:layout_marginStart="@dimen/text_margin_small">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/search_button"
+            <FrameLayout
+                android:id="@+id/search_box"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:gravity="center_vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_margin_small"
+                android:layout_marginRight="@dimen/text_margin_small"
+                android:background="?attr/wikivoyage_travel_card_bg"
+                android:layout_marginEnd="@dimen/text_margin_small"
+                android:layout_marginStart="@dimen/text_margin_small">
 
-                <TextView
-                    android:id="@+id/search_hint"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/content_padding"
-                    android:layout_marginStart="@dimen/content_padding"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:text="@string/wikivoyage_search_hint"
-                    android:textSize="@dimen/default_list_text_size"
-                    tools:textColor="?attr/searchbar_text_hint" />
+                <LinearLayout
+                    android:id="@+id/search_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottom_sheet_list_item_height"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:gravity="center_vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/search_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/content_padding_small"
-                    android:layout_marginRight="@dimen/content_padding_small"
-                    android:contentDescription="@string/shared_string_search"
-                    tools:src="@drawable/ic_action_search_dark"
-                    android:layout_marginEnd="@dimen/content_padding_small"
-                    android:layout_marginStart="@dimen/content_padding_small" />
+                    <TextView
+                        android:id="@+id/search_hint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/content_padding"
+                        android:layout_marginStart="@dimen/content_padding"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="@string/wikivoyage_search_hint"
+                        android:textSize="@dimen/default_list_text_size"
+                        tools:textColor="?attr/searchbar_text_hint" />
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/search_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/content_padding_small"
+                        android:layout_marginRight="@dimen/content_padding_small"
+                        android:contentDescription="@string/shared_string_search"
+                        tools:src="@drawable/ic_action_search_dark"
+                        android:layout_marginEnd="@dimen/content_padding_small"
+                        android:layout_marginStart="@dimen/content_padding_small" />
+
+                </LinearLayout>
+
+            </FrameLayout>
 
         </FrameLayout>
 

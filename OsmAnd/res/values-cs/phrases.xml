@@ -583,7 +583,6 @@
     <string name="poi_club_shooting">Střelecký klub</string>
     <string name="poi_club_tourism">Turistický klub</string>
     <string name="poi_club_charity">Charitativní klub</string>
-    <string name="poi_piste_downhill">Sjezdová trať</string>
     <string name="poi_piste_hike">Zimní pěší trasa</string>
     <string name="poi_piste_sleigh">Trať pro tažené saně</string>
     <string name="poi_piste_sled">Trať pro saně</string>
@@ -4955,7 +4954,6 @@
     <string name="poi_piste_oneway">Jednosměrná sjezdovka</string>
     <string name="poi_route_activity_type_walking">Pěší trasy</string>
     <string name="poi_route_activity_type_hiking">Turistické trasy</string>
-    <string name="poi_route_activity_type_skiing">Trasy pro lyžování</string>
     <string name="poi_route_activity_type_road_cycling">Silniční cyklistické trasy</string>
     <string name="poi_network_rcn">Regionální cyklotrasy (RCN)</string>
     <string name="poi_network_ncn">Národní cyklotrasy (NCN)</string>
@@ -5154,4 +5152,8 @@
     <string name="poi_hazard_additional_queues_likely">Pravděpodobné fronty</string>
     <string name="poi_hazard_additional_side_winds">Boční vítr</string>
     <string name="poi_hazard_additional_ice">Led</string>
+    <string name="poi_historic_spacecraft">Historická kosmická loď</string>
+    <string name="poi_barrier_chain">Řetězová bariéra</string>
+    <string name="poi_barrier_log">Kmen</string>
+    <string name="poi_barrier_sliding_gate">Posuvná brána</string>
 </resources>

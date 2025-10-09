@@ -5,8 +5,10 @@ import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription
 import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +47,9 @@ import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -133,6 +138,20 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		listView.setAdapter(listAdapter);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.LANDSCAPE_SIDES);
+		Dialog dialog = getDialog();
+		boolean isInnerDialog = dialog != null && dialog.getWindow() != null;
+		if (!isInnerDialog) {
+			collection.removeType(Type.ROOT_INSET);
+		} else{
+			collection.add(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.freeVersionBanner, R.id.downloadProgressLayout, R.id.toolbar).build());
+		}
+		return collection;
 	}
 
 	private void addSubscribeEmailRow() {

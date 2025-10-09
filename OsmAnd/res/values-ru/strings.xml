@@ -1747,7 +1747,6 @@
     <string name="shared_string_message">Сообщение</string>
     <string name="shared_string_do_not_use">Не использовать</string>
     <string name="shared_string_address">Адрес</string>
-    <string name="rendering_attr_pisteRoutes_name">Горнолыжные маршруты</string>
     <string name="shared_string_show_description">Показать описание.</string>
     <string name="shared_string_places">Места</string>
     <string name="shared_string_search">Поиск</string>
@@ -4945,7 +4944,6 @@
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Автомобиль (грузовик, мотоцикл)</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Пешеход</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Лыжи</string>
     <string name="help_article_navigation_routing_osmand_routing_name">О маршрутизации OsmAnd</string>
     <string name="help_article_navigation_setup_route_details_name">Детали маршрута</string>
     <string name="help_article_navigation_setup_route_navigation_name">Подготовка маршрута</string>

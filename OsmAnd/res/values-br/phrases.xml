@@ -405,4 +405,22 @@
     <string name="poi_cafe_yes">Ya</string>
     <string name="poi_route_bus_ref">Karr-boutin</string>
     <string name="poi_route_train_ref">Tren</string>
+    <string name="poi_post_office_type">Doare</string>
+    <string name="poi_dry_cleaning_filter">Naetaerezh</string>
+    <string name="poi_dog">Chas</string>
+    <string name="poi_animal_shelter_dog">Chas</string>
+    <string name="poi_animal_shelter_cat">Kizhier</string>
+    <string name="poi_animal_shelter_dog_cat">Chas, kizhier</string>
+    <string name="poi_animal_shelter_bird">Lapoused</string>
+    <string name="poi_animal_shelter_fish">Pesked</string>
+    <string name="poi_seasonal_spring">Nevezamzer</string>
+    <string name="poi_seasonal_summer">Hañv</string>
+    <string name="poi_seasonal_autumn">Diskar-amzer</string>
+    <string name="poi_seasonal_winter">Goañv</string>
+    <string name="poi_second_hand_only">Nemet</string>
+    <string name="poi_service_parts">Lodennoù</string>
+    <string name="poi_animal_shelter_horse">Kezeg</string>
+    <string name="poi_animal_shelter_mammal">Bronneged</string>
+    <string name="poi_backrest_yes">Gant un teuliad</string>
+    <string name="poi_backrest_no">Hep un teuliad</string>
 </resources>

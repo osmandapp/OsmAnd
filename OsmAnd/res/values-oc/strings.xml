@@ -648,7 +648,6 @@
     <string name="postcode">Còde postau</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="shared_string_deselect_all">Deseleccionar tot</string>
-    <string name="rendering_attr_pisteRoutes_name">Pistas d\'esquí</string>
     <string name="rendering_attr_busRoutes_name">Linhas de bus</string>
     <string name="always_center_position_on_map">Plaçar de lònga la posicion au centre</string>
     <string name="routing_attr_avoid_unpaved_description">Evitar lei rotas non enquitranadas</string>

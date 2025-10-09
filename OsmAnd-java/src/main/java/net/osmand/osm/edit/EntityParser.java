@@ -6,12 +6,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
@@ -25,8 +27,10 @@ public class EntityParser {
 
 	public static void parseMapObject(MapObject mo, Entity e, Map<String, String> tags) {
 		mo.setId(e.getId());
-		if(mo instanceof Amenity) {
-			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
+		if (mo instanceof Amenity || mo instanceof City || mo instanceof Street 
+				|| mo instanceof Building) {
+			mo.setId(ObfConstants.createMapObjectIdFromOsmId(e.getId(), EntityType.valueOf(e)));
+//			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
 		}
 		if (mo.getName().length() == 0) {
 			mo.setName(tags.get(OSMTagKey.NAME.getValue()));
@@ -235,12 +239,15 @@ public class EntityParser {
 		return b;
 	}
 
-	public static City parseCity(Node el) {
-		return parseCity(el, CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue())));
+	public static City parseCity(Entity el) {
+		return parseCity(el, null);
 	}
 
 	public static City parseCity(Entity el, CityType t) {
-		if(t == null) {
+		if (t == null) {
+			t = CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue()));
+		}
+		if (t == null) {
 			return null;
 		}
 		City c = new City(t);

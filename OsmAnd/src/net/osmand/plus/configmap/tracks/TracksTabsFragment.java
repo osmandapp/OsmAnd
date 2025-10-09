@@ -123,6 +123,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_container));
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.appbar));
 		return collection;
 	}
 

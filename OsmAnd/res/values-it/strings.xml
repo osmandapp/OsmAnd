@@ -1331,7 +1331,6 @@
     <string name="rendering_attr_pisteGrooming_name">Piste per sci da fondo</string>
     <string name="free">Libera %1$s</string>
     <string name="device_memory">Memoria dispositivo</string>
-    <string name="rendering_attr_pisteRoutes_name">Piste da sci</string>
     <string name="roads_only">Solo strade</string>
     <string name="watch">Guarda</string>
     <string name="notes">Note A/V</string>
@@ -4966,7 +4965,6 @@
     <string name="help_article_navigation_guidance_name">Guida alla navigazione</string>
     <string name="help_article_navigation_routing_horse_routing_name">Itinerario a cavallo</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Percorso a piedi</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Percorsi sciistici</string>
     <string name="help_article_navigation_routing_train_routing_name">Percorso dei treni</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Naviga per traccia</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Naviga per marcatori</string>

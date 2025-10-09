@@ -541,7 +541,6 @@
     <string name="poi_club_tourism">Clube de turismo</string>
     <string name="poi_club_charity">Clube de caridade</string>
     <string name="poi_piste">Pista</string>
-    <string name="poi_piste_downhill">Pista de descida</string>
     <string name="poi_piste_nordic">Pista nórdica</string>
     <string name="poi_piste_skitour">Pista de passeio</string>
     <string name="poi_piste_hike">Pista de caminhada</string>
@@ -4866,7 +4865,6 @@
     <string name="poi_route_activity_type_road_running">Corrida de rua</string>
     <string name="poi_route_activity_type_trail_running">Corrida de trilha</string>
     <string name="poi_route_activity_type_trekking">Caminhada</string>
-    <string name="poi_route_activity_type_skiing">Rotas de esqui</string>
     <string name="poi_route_activity_type_snowmobiling">Mobil de neve</string>
     <string name="poi_route_activity_type_snowshoeing">Caminhada na neve</string>
     <string name="poi_route_activity_type_e_biking">Bicicleta elétrica</string>

@@ -554,7 +554,6 @@
     <string name="poi_club_shooting">Club de tiro</string>
     <string name="poi_club_tourism">Club de turismo</string>
     <string name="poi_club_charity">Club de caridad</string>
-    <string name="poi_piste_downhill">Pista de descenso</string>
     <string name="poi_piste_nordic">Pista nórdica</string>
     <string name="poi_piste_hike">Pista de senderismo</string>
     <string name="poi_piste_sleigh">Pista de trineo (animales)</string>
@@ -5003,7 +5002,6 @@
     <string name="poi_route_activity_type_ski_touring">Esquí de travesía</string>
     <string name="poi_route_activity_type_snowshoeing">Raquetas de nieve</string>
     <string name="poi_route_activity_type_e_biking">Bicicleta eléctrica</string>
-    <string name="poi_route_activity_type_skiing">Rutas de esquí</string>
     <string name="poi_route_activity_type_snowboarding">Tabla sobre nieve (snowboarding)</string>
     <string name="poi_route_activity_type_snowmobiling">Moto de nieve</string>
     <string name="poi_mormon_church">Iglesia mormona</string>

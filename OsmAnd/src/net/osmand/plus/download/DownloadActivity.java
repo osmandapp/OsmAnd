@@ -6,6 +6,8 @@ import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +49,10 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 
@@ -169,6 +175,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			filterGroup = bundle.getString(FILTER_GROUP);
 			localItemType = LocalItemType.getByName(bundle.getString(LOCAL_ITEM_TYPE));
 		}
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.freeVersionBanner, R.id.downloadProgressLayout).build());
+		return collection;
 	}
 
 	public void updateToolbar() {

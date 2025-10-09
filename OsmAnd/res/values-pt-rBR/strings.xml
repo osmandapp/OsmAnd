@@ -184,7 +184,6 @@
     <string name="notes">Notas A/V</string>
     <string name="online_map">Mapa on-line</string>
     <string name="roads_only">Apenas estradas</string>
-    <string name="rendering_attr_pisteRoutes_name">Rotas de esqui</string>
     <string name="free">Livre %1$s</string>
     <string name="device_memory">Memória do aparelho</string>
     <string name="world_ski_missing">Faça o download do mapa off-line especial para exibir as instalações de esqui.</string>
@@ -5330,7 +5329,6 @@
     <string name="filter_screen_title">Filtro</string>
     <string name="external_sensor_name_property_description">Nome do sensor</string>
     <string name="widget_available_ram">RAM disponível</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Roteamento de esqui</string>
     <string name="help_article_widgets_name">Widgets no mapa</string>
     <string name="help_article_personal_name">Meus dados</string>
     <string name="help_article_purchases_android_name">Compras no Android</string>

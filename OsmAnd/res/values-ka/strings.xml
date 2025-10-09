@@ -2066,7 +2066,6 @@
     <string name="shared_string_items">ნივთები</string>
     <string name="days_behind">დღე გავიდა</string>
     <string name="roads_only">მხოლოდ გზები</string>
-    <string name="rendering_attr_pisteRoutes_name">სასრიალო ტრასები</string>
     <string name="device_memory">მოწყობილობის მეხსიერება</string>
     <string name="free">თავისუფალია %1$s</string>
     <string name="rendering_attr_pisteGrooming_name">თხილამურების მოვლა</string>
