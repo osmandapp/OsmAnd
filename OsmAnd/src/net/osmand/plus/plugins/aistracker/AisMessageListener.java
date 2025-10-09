@@ -25,7 +25,6 @@ import java.util.TimerTask;
 
 public class AisMessageListener {
 
-    private AisTrackerLayer layer;
     private Timer timer;
     private DatagramSocket udpSocket;
     private Socket tcpSocket;
@@ -33,14 +32,19 @@ public class AisMessageListener {
     private InputStream fileStream;
     private SentenceReader sentenceReader = null;
     private Stack<SentenceListener> listenerList = null;
+    private AisDataListener dataListener;
 
-    public AisMessageListener(@NonNull AisTrackerLayer layer, int port) {
-        initMembers(layer);
+    public interface AisDataListener {
+        void onAisObjectReceived(@NonNull AisObject ais);
+    }
+
+    public AisMessageListener(@NonNull AisDataListener dataListener, int udpPort) {
+        initMembers(dataListener);
         try {
-            udpSocket = new DatagramSocket(port);
+            udpSocket = new DatagramSocket(udpPort);
             udpSocket.setReuseAddress(true);
             initListeners();
-            Log.d("AisMessageListener","new UDP listener, Port " + port);
+            Log.d("AisMessageListener","new UDP listener, Port " + udpPort);
         }
         catch (Exception e) {
             Log.e("AisMessageListener","exception: " + e.getMessage());
@@ -48,8 +52,8 @@ public class AisMessageListener {
         }
     }
 
-    public AisMessageListener(@NonNull AisTrackerLayer layer, @NonNull File file) {
-        initMembers(layer);
+    public AisMessageListener(@NonNull AisDataListener dataListener, @NonNull File file) {
+        initMembers(dataListener);
         try {
             fileStream = new FileInputStream(file);
             initListeners();
@@ -59,8 +63,8 @@ public class AisMessageListener {
         }
     }
 
-    public AisMessageListener(@NonNull AisTrackerLayer layer, @NonNull String serverIp, int serverPort) {
-        initMembers(layer);
+    public AisMessageListener(@NonNull AisDataListener dataListener, @NonNull String serverIp, int serverPort) {
+        initMembers(dataListener);
         TimerTask taskCheckNetworkConnection = new TimerTask() {
             @Override
             public void run() {
@@ -88,8 +92,8 @@ public class AisMessageListener {
         timer.schedule(taskCheckNetworkConnection, 1000, 30000);
     }
 
-    private void initMembers(@NonNull AisTrackerLayer aisLayer) {
-        this.layer = aisLayer;
+    private void initMembers(@NonNull AisDataListener dataListener) {
+        this.dataListener = dataListener;
         this.udpSocket = null;
         this.tcpSocket = null;
         this.tcpStream = null;
@@ -124,6 +128,7 @@ public class AisMessageListener {
             Log.e("AisMessageListener", "sentenceReader not initialized");
         }
     }
+
     private void removeListeners() {
         if (sentenceReader != null) {
             sentenceReader.stop();
@@ -139,10 +144,10 @@ public class AisMessageListener {
             }
         }
     }
+
     public void stopListener() {
         if (this.timer != null) {
             this.timer.cancel();
-            this.timer.purge();
             this.timer = null;
         }
         removeListeners();
@@ -404,8 +409,9 @@ public class AisMessageListener {
                 Log.e("AisMessageListener","handleAisMessage() invalid argument aisType: "+ aisType);
                 return;
         }
-        layer.updateAisObjectList(ais);
+        dataListener.onAisObjectReceived(ais);
     }
+
     private void initEmbeddedLister(int aisType, @NonNull SentenceListener listener) {
         //AisMessageListener.this.sentenceReader.addSentenceListener(listener); // listen to all (!) NMEA messages
         AisMessageListener.this.sentenceReader.addSentenceListener(listener, SentenceId.VDM);
@@ -413,6 +419,7 @@ public class AisMessageListener {
         AisMessageListener.this.listenerList.push(listener);
         Log.d("AisMessageListener","Listener Type " + aisType + " started");
     }
+
     private class AisListener01 extends AbstractAISMessageListener<AISMessage01> {
         public AisListener01() { initEmbeddedLister(1, this); }
         @Override
@@ -420,6 +427,7 @@ public class AisMessageListener {
             handleAisMessage(1, msg);
         }
     }
+
     private class AisListener02 extends AbstractAISMessageListener<AISMessage02> {
         public AisListener02() { initEmbeddedLister(2, this); }
         @Override
@@ -427,6 +435,7 @@ public class AisMessageListener {
             handleAisMessage(2, msg);
         }
     }
+
     private class AisListener03 extends AbstractAISMessageListener<AISMessage03> {
         public AisListener03() { initEmbeddedLister(3, this); }
         @Override
@@ -434,6 +443,7 @@ public class AisMessageListener {
             handleAisMessage(3, msg);
         }
     }
+
     private class AisListener04 extends AbstractAISMessageListener<AISMessage04> {
         public AisListener04() { initEmbeddedLister(4, this); }
         @Override
@@ -441,6 +451,7 @@ public class AisMessageListener {
             handleAisMessage(4, msg);
         }
     }
+
     private class AisListener05 extends AbstractAISMessageListener<AISMessage05> {
         public AisListener05() { initEmbeddedLister(5, this); }
         @Override
@@ -448,6 +459,7 @@ public class AisMessageListener {
             handleAisMessage(5, msg);
         }
     }
+
     private class AisListener09 extends AbstractAISMessageListener<AISMessage09> {
         public AisListener09() { initEmbeddedLister(9, this); }
         @Override
@@ -455,6 +467,7 @@ public class AisMessageListener {
             handleAisMessage(9, msg);
         }
     }
+
     private class AisListener18 extends AbstractAISMessageListener<AISMessage18> {
         public AisListener18() { initEmbeddedLister(18, this); }
         @Override
@@ -462,6 +475,7 @@ public class AisMessageListener {
             handleAisMessage(18, msg);
         }
     }
+
     private class AisListener19 extends AbstractAISMessageListener<AISMessage19> {
         public AisListener19() { initEmbeddedLister(19, this); }
         @Override
@@ -469,6 +483,7 @@ public class AisMessageListener {
             handleAisMessage(19, msg);
         }
     }
+
     private class AisListener21 extends AbstractAISMessageListener<AISMessage21> {
         public AisListener21() { initEmbeddedLister(21, this); }
         @Override
@@ -476,6 +491,7 @@ public class AisMessageListener {
             handleAisMessage(21, msg);
         }
     }
+
     private class AisListener24 extends AbstractAISMessageListener<AISMessage24> {
         public AisListener24() { initEmbeddedLister(24, this); }
         @Override
@@ -483,6 +499,7 @@ public class AisMessageListener {
             handleAisMessage(24, msg);
         }
     }
+
     private class AisListener27 extends AbstractAISMessageListener<AISMessage27> {
         public AisListener27() { initEmbeddedLister(27, this); }
         @Override
