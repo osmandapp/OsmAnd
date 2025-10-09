@@ -674,9 +674,8 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
 				// also offsets can be randomly skipped by limit
 				loffsets.sort();
-				// TODO check crash!
-				TIntArrayList[] refs = new TIntArrayList[5];
-				TIntArrayList[] refsToCities = new TIntArrayList[5];
+				TIntArrayList[] refs = new TIntArrayList[CityBlocks.STREET_TYPE.index + 1];
+				TIntArrayList[] refsToCities = new TIntArrayList[CityBlocks.STREET_TYPE.index + 1];
 				for (int i = 0; i < refs.length; i++) {
 					refs[i] = new TIntArrayList();
 					refsToCities[i] = new TIntArrayList();
@@ -847,8 +846,10 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case AddressNameIndexDataAtom.TYPE_FIELD_NUMBER:
 				int type = codedIS.readInt32();
-				toAdd = refs[type];
-				toAddCity = refsToCities[type];
+				if (type >= 0 && type < refs.length) {
+					toAdd = refs[type];
+					toAddCity = refsToCities[type];
+				}
 				break;
 			default:
 				skipUnknownField(t);
