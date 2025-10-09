@@ -5152,4 +5152,8 @@
     <string name="poi_hazard_additional_queues_likely">Scuainí dóchúla</string>
     <string name="poi_hazard_additional_side_winds">Gaotha taobh</string>
     <string name="poi_hazard_additional_ice">Oighear</string>
+    <string name="poi_historic_spacecraft">Spásárthaí stairiúla</string>
+    <string name="poi_barrier_chain">Bacainn slabhra</string>
+    <string name="poi_barrier_log">Loga</string>
+    <string name="poi_barrier_sliding_gate">Geata sleamhnáin</string>
 </resources>
