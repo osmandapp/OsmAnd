@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 
@@ -17,8 +18,6 @@ import org.apache.commons.logging.Log;
 public class AutoBackupHelper implements OnPrepareBackupListener {
 
 	private static final Log log = PlatformUtil.getLog(AutoBackupHelper.class);
-
-	private static final String LAST_AUTO_BACKUP_ATTEMPT = "last_auto_backup_attempt";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -30,6 +29,14 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		this.settings = app.getSettings();
 		this.backupHelper = app.getBackupHelper();
 		this.settingsHelper = app.getNetworkSettingsHelper();
+
+		initListeners();
+	}
+
+	private void initListeners() {
+		for (ExportType type : ExportType.enabledValues()) {
+			addListener(type);
+		}
 	}
 
 	public void runAutoBackup() {
@@ -58,10 +65,23 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult result) {
-		if (!settingsHelper.isBackupSyncing() && result.isAutoSync()) {
+		if (!settingsHelper.isBackupSyncing() && result != null && result.isAutoSync()) {
 			BackupInfo info = result.getBackupInfo();
 			if (info != null && info.hasFilteredFiles()) {
 				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC);
+			}
+		}
+	}
+
+	private void addListener(@NonNull ExportType type) {
+		switch (type) {
+			case FAVORITES: {
+				app.getFavoritesHelper().addListener(new FavoritesListener() {
+					@Override
+					public void onSavingFavoritesFinished() {
+						runAutoBackup();
+					}
+				});
 			}
 		}
 	}
