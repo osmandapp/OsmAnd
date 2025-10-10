@@ -5870,4 +5870,6 @@
     <string name="average_slope">Prosečan nagib</string>
     <string name="shared_string_last_uphill">Poslednji uspon</string>
     <string name="shared_string_last_downhill">Poslednja nizbrdica</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skijaške staze i rute</string>
+    <string name="rendering_attr_pisteRoutes_name">Skijaške staze i rute</string>
 </resources>
