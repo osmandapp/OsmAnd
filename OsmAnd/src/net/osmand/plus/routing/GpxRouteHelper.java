@@ -164,7 +164,7 @@ public class GpxRouteHelper {
         }
 
         return new RouteCalculationResult(gpxRoute, gpxDirections, routeParams,
-                gpxParams.wpt, routeParams.gpxRoute.addMissingTurns);
+            gpxParams.wpt, routeParams.gpxRoute.addMissingTurns || gpxDirections.isEmpty());
     }
 
     private void calculateGpxRouteTimeSpeed(RouteCalculationParams params, List<RouteSegmentResult> gpxRouteResult) throws IOException {
