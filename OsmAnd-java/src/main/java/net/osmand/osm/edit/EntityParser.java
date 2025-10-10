@@ -27,7 +27,9 @@ public class EntityParser {
 		mo.setId(e.getId());
 		// use for all to make this type consistent everywhere (since 5.2)
 //		if (mo instanceof Amenity ) {
-		mo.setId(ObfConstants.createMapObjectIdFromOsmAndEntity(e));
+		if (e.getId() > 0) {
+			mo.setId(ObfConstants.createMapObjectIdFromOsmAndEntity(e));
+		}
 //			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
 //		}
 		if (mo.getName().length() == 0) {
