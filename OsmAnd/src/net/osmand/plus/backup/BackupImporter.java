@@ -177,7 +177,7 @@ class BackupImporter {
 					updateFileM5Digest(remoteFile, item, file);
 					updateFileUploadTime(remoteFile, item);
 					if (PluginsHelper.isDevelopment()) {
-						UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+						UploadedFileInfo info = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						LOG.debug(" importItemFile file info " + info);
 					}
 				}
@@ -201,8 +201,7 @@ class BackupImporter {
 
 	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, @Nullable File file) {
 		if (file != null && item instanceof FileSettingsItem fileItem && fileItem.needMd5Digest()) {
-			BackupDbHelper dbHelper = backupHelper.getDbHelper();
-			UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+			UploadedFileInfo fileInfo = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 			String lastMd5 = fileInfo != null ? fileInfo.getMd5Digest() : null;
 
 			if (Algorithms.isEmpty(lastMd5) && file != null) {

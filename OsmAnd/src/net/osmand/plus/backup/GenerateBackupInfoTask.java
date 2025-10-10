@@ -8,6 +8,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -30,30 +31,33 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 	private final OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
 
 	private final OsmandApplication app;
-	private final BackupDbHelper dbHelper;
+	private final BackupHelper backupHelper;
 
 	private final Map<String, LocalFile> localFiles;
 	private final Map<String, RemoteFile> uniqueRemoteFiles;
 	private final Map<String, RemoteFile> deletedRemoteFiles;
 	private final OnGenerateBackupInfoListener listener;
+	private final boolean autoSync;
 
 	protected GenerateBackupInfoTask(@NonNull OsmandApplication app,
 			@NonNull Map<String, LocalFile> localFiles,
 			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
 			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
+			@NonNull boolean autoSync,
 			@Nullable OnGenerateBackupInfoListener listener) {
 		this.app = app;
-		this.dbHelper = app.getBackupHelper().getDbHelper();
+		this.backupHelper = app.getBackupHelper();
 		this.localFiles = localFiles;
 		this.uniqueRemoteFiles = uniqueRemoteFiles;
 		this.deletedRemoteFiles = deletedRemoteFiles;
 		this.listener = listener;
+		this.autoSync = autoSync;
 		operationLog.startOperation();
 	}
 
 	@Override
 	protected BackupInfo doInBackground(Void... voids) {
-		BackupInfo info = new BackupInfo();
+		BackupInfo info = new BackupInfo(autoSync);
 				/*
 				operationLog.log("=== localFiles ===");
 				for (LocalFile localFile : localFiles.values()) {
@@ -100,7 +104,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 					}
 				}
 			} else if (!remoteFile.isDeleted()) {
-				UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+				UploadedFileInfo fileInfo = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 				// suggest to remove only if file exists in db
 				if (fileInfo != null && fileInfo.getUploadTime() >= remoteFile.getUpdatetimems()) {
 					// conflicts not supported yet

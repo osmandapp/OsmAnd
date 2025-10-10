@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
@@ -30,6 +30,7 @@ public class PrepareBackupTask {
 
 	private PrepareBackupResult backup;
 	private final OnPrepareBackupListener listener;
+	private final boolean autoSync;
 
 	private List<TaskType> pendingTasks = new ArrayList<>();
 	private List<TaskType> finishedTasks = new ArrayList<>();
@@ -52,9 +53,11 @@ public class PrepareBackupTask {
 		void onBackupPrepared(@Nullable PrepareBackupResult backupResult);
 	}
 
-	public PrepareBackupTask(@NonNull OsmandApplication app, @Nullable OnPrepareBackupListener listener) {
+	public PrepareBackupTask(@NonNull OsmandApplication app, boolean autoSync,
+			@Nullable OnPrepareBackupListener listener) {
 		this.app = app;
 		this.backupHelper = app.getBackupHelper();
+		this.autoSync = autoSync;
 		this.listener = listener;
 	}
 
@@ -75,7 +78,7 @@ public class PrepareBackupTask {
 	}
 
 	private void initTasks() {
-		backup = new PrepareBackupResult();
+		this.backup = new PrepareBackupResult(autoSync);
 		this.pendingTasks = new ArrayList<>(Arrays.asList(TaskType.values()));
 		this.finishedTasks = new ArrayList<>();
 	}
@@ -142,7 +145,7 @@ public class PrepareBackupTask {
 	}
 
 	private void collectLocalFilesImpl() {
-		backupHelper.collectLocalFiles(new OnCollectLocalFilesListener() {
+		backupHelper.collectLocalFiles(autoSync, new OnCollectLocalFilesListener() {
 			@Override
 			public void onFileCollected(@NonNull LocalFile localFile) {
 			}
@@ -183,7 +186,7 @@ public class PrepareBackupTask {
 			return;
 		}
 		backupHelper.generateBackupInfo(backup.getLocalFiles(), backup.getRemoteFiles(RemoteFilesType.UNIQUE),
-				backup.getRemoteFiles(RemoteFilesType.DELETED), (backupInfo, error) -> {
+				backup.getRemoteFiles(RemoteFilesType.DELETED), autoSync, (backupInfo, error) -> {
 					if (Algorithms.isEmpty(error)) {
 						backup.setBackupInfo(backupInfo);
 					} else {

@@ -6,10 +6,12 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,18 +20,31 @@ public class BackupDbHelper {
 	private final OsmandApplication app;
 
 	private static final String DB_NAME = "backup_files";
-	private static final int DB_VERSION = 3;
+	private static final int DB_VERSION = 4;
 	private static final String UPLOADED_FILES_TABLE_NAME = "uploaded_files";
 	private static final String UPLOADED_FILE_COL_TYPE = "type";
 	private static final String UPLOADED_FILE_COL_NAME = "name";
 	private static final String UPLOADED_FILE_COL_UPLOAD_TIME = "upload_time";
 	private static final String UPLOADED_FILE_COL_MD5_DIGEST = "md5_digest";
+	private static final String UPLOADED_FILE_COL_FILE_SIZE = "file_size";
+	private static final String UPLOADED_FILE_COL_AUTO_SYNC = "auto_sync";
+
 	private static final String UPLOADED_FILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + UPLOADED_FILES_TABLE_NAME + " (" +
 			UPLOADED_FILE_COL_TYPE + " TEXT, " +
 			UPLOADED_FILE_COL_NAME + " TEXT, " +
 			UPLOADED_FILE_COL_UPLOAD_TIME + " long, " +
-			UPLOADED_FILE_COL_MD5_DIGEST + " TEXT);";
+			UPLOADED_FILE_COL_MD5_DIGEST + " TEXT, " +
+			UPLOADED_FILE_COL_FILE_SIZE + " long, " +
+			UPLOADED_FILE_COL_AUTO_SYNC + " INTEGER);";
+
 	private static final String UPLOADED_FILES_INDEX_TYPE_NAME = "indexTypeName";
+
+	private static final String UPLOADED_FILE_ALL_COLUMNS = UPLOADED_FILE_COL_TYPE + ", " +
+			UPLOADED_FILE_COL_NAME + ", " +
+			UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
+			UPLOADED_FILE_COL_MD5_DIGEST + ", " +
+			UPLOADED_FILE_COL_FILE_SIZE + ", " +
+			UPLOADED_FILE_COL_AUTO_SYNC;
 
 	private static final String LAST_MODIFIED_TABLE_NAME = "last_modified_items";
 	private static final String LAST_MODIFIED_COL_NAME = "name";
@@ -43,30 +58,33 @@ public class BackupDbHelper {
 		private final String name;
 		private long uploadTime;
 		private String md5Digest = "";
+		private long fileSize;
+		private boolean autoSync;
 
 		public UploadedFileInfo(@NonNull String type, @NonNull String name) {
-			this.type = type;
-			this.name = name;
-			this.uploadTime = 0;
+			this(type, name, 0, "", 0, false);
 		}
 
 		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime) {
-			this.type = type;
-			this.name = name;
-			this.uploadTime = uploadTime;
+			this(type, name, uploadTime, "", 0, false);
 		}
 
 		public UploadedFileInfo(@NonNull String type, @NonNull String name, @NonNull String md5Digest) {
-			this.type = type;
-			this.name = name;
-			this.md5Digest = md5Digest;
+			this(type, name, 0, md5Digest, 0, false);
 		}
 
 		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime, @NonNull String md5Digest) {
+			this(type, name, uploadTime, md5Digest, 0, false);
+		}
+
+		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime,
+				@NonNull String md5Digest, long fileSize, boolean autoSync) {
 			this.type = type;
 			this.name = name;
 			this.uploadTime = uploadTime;
 			this.md5Digest = md5Digest;
+			this.fileSize = fileSize;
+			this.autoSync = autoSync;
 		}
 
 		public String getType() {
@@ -94,6 +112,22 @@ public class BackupDbHelper {
 			this.md5Digest = md5Digest;
 		}
 
+		public long getFileSize() {
+			return fileSize;
+		}
+
+		public void setFileSize(long fileSize) {
+			this.fileSize = fileSize;
+		}
+
+		public boolean isAutoSync() {
+			return autoSync;
+		}
+
+		public void setAutoSync(boolean autoSync) {
+			this.autoSync = autoSync;
+		}
+
 		@Override
 		public boolean equals(Object o) {
 			if (this == o) {
@@ -115,7 +149,13 @@ public class BackupDbHelper {
 		@NonNull
 		@Override
 		public String toString() {
-			return "UploadedFileInfo{type=" + type + ", name=" + name + ", uploadTime=" + uploadTime + '}';
+			return "UploadedFileInfo{" +
+					"type=" + type +
+					", name=" + name +
+					", uploadTime=" + uploadTime +
+					", fileSize=" + fileSize +
+					", autoSync=" + autoSync +
+					'}';
 		}
 	}
 
@@ -158,6 +198,10 @@ public class BackupDbHelper {
 		if (oldVersion < 3) {
 			db.execSQL("ALTER TABLE " + UPLOADED_FILES_TABLE_NAME + " ADD " + UPLOADED_FILE_COL_MD5_DIGEST + " TEXT");
 		}
+		if (oldVersion < 4) {
+			db.execSQL("ALTER TABLE " + UPLOADED_FILES_TABLE_NAME + " ADD " + UPLOADED_FILE_COL_FILE_SIZE + " long");
+			db.execSQL("ALTER TABLE " + UPLOADED_FILES_TABLE_NAME + " ADD " + UPLOADED_FILE_COL_AUTO_SYNC + " INTEGER");
+		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + UPLOADED_FILES_INDEX_TYPE_NAME + " ON " + UPLOADED_FILES_TABLE_NAME
 				+ " (" + UPLOADED_FILE_COL_TYPE + ", " + UPLOADED_FILE_COL_NAME + ");");
 	}
@@ -194,18 +238,24 @@ public class BackupDbHelper {
 		db.execSQL(
 				"UPDATE " + UPLOADED_FILES_TABLE_NAME + " SET "
 						+ UPLOADED_FILE_COL_UPLOAD_TIME + " = ?, "
-						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ? "
+						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ?, "
+						+ UPLOADED_FILE_COL_FILE_SIZE + " = ?, "
+						+ UPLOADED_FILE_COL_AUTO_SYNC + " = ? "
 						+ "WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-				new Object[] {info.uploadTime, info.md5Digest, info.type, info.name});
+				new Object[] {info.uploadTime, info.md5Digest, info.fileSize, info.autoSync ? 1 : 0, info.type, info.name});
 	}
 
 	private void addUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
-		db.execSQL(
-				"INSERT INTO " + UPLOADED_FILES_TABLE_NAME + "(" + UPLOADED_FILE_COL_TYPE + ", "
-						+ UPLOADED_FILE_COL_NAME + ", " + UPLOADED_FILE_COL_UPLOAD_TIME + ", "
-						+ UPLOADED_FILE_COL_MD5_DIGEST
-						+ ") VALUES (?, ?, ?, ?)",
-				new Object[] {info.type, info.name, info.uploadTime, info.md5Digest});
+		Map<String, Object> rowsMap = new LinkedHashMap<>();
+
+		rowsMap.put(UPLOADED_FILE_COL_TYPE, info.type);
+		rowsMap.put(UPLOADED_FILE_COL_NAME, info.name);
+		rowsMap.put(UPLOADED_FILE_COL_UPLOAD_TIME, info.uploadTime);
+		rowsMap.put(UPLOADED_FILE_COL_MD5_DIGEST, info.md5Digest);
+		rowsMap.put(UPLOADED_FILE_COL_FILE_SIZE, info.fileSize);
+		rowsMap.put(UPLOADED_FILE_COL_AUTO_SYNC, info.autoSync ? 1 : 0);
+
+		db.execSQL(AndroidDbUtils.createDbInsertQuery(UPLOADED_FILES_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
 
 	@NonNull
@@ -215,10 +265,7 @@ public class BackupDbHelper {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(
-						"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
-								UPLOADED_FILE_COL_NAME + ", " +
-								UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
-								UPLOADED_FILE_COL_MD5_DIGEST +
+						"SELECT " + UPLOADED_FILE_ALL_COLUMNS +
 								" FROM " + UPLOADED_FILES_TABLE_NAME, null);
 				if (query != null && query.moveToFirst()) {
 					do {
@@ -243,10 +290,7 @@ public class BackupDbHelper {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(
-						"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
-								UPLOADED_FILE_COL_NAME + ", " +
-								UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
-								UPLOADED_FILE_COL_MD5_DIGEST +
+						"SELECT " + UPLOADED_FILE_ALL_COLUMNS +
 								" FROM " + UPLOADED_FILES_TABLE_NAME, null);
 				if (query != null && query.moveToFirst()) {
 					do {
@@ -282,10 +326,7 @@ public class BackupDbHelper {
 	public UploadedFileInfo getUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull String type, @NonNull String name) {
 		UploadedFileInfo info = null;
 		SQLiteCursor query = db.rawQuery(
-				"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
-						UPLOADED_FILE_COL_NAME + ", " +
-						UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
-						UPLOADED_FILE_COL_MD5_DIGEST +
+				"SELECT " + UPLOADED_FILE_ALL_COLUMNS +
 						" FROM " + UPLOADED_FILES_TABLE_NAME +
 						" WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " +
 						UPLOADED_FILE_COL_NAME + " = ?",
@@ -300,7 +341,7 @@ public class BackupDbHelper {
 	}
 
 	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
-		SQLiteConnection db = openConnection(true);
+		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				UploadedFileInfo info = getUploadedFileInfo(db, type, fileName);
@@ -318,7 +359,7 @@ public class BackupDbHelper {
 	}
 
 	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName, @NonNull String md5Digest) {
-		SQLiteConnection db = openConnection(true);
+		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				UploadedFileInfo info = getUploadedFileInfo(db, type, fileName);
@@ -335,13 +376,26 @@ public class BackupDbHelper {
 		}
 	}
 
+	public void updateUploadedFileInfo(@NonNull UploadedFileInfo info) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				updateUploadedFileInfo(db, info);
+			} finally {
+				db.close();
+			}
+		}
+	}
+
 	@NonNull
 	private UploadedFileInfo readUploadedFileInfo(SQLiteCursor query) {
 		String type = query.getString(0);
 		String name = query.getString(1);
 		long uploadTime = query.getLong(2);
 		String md5Digest = query.getString(3);
-		return new UploadedFileInfo(type, name, uploadTime, md5Digest);
+		long fileSize = query.getLong(4);
+		boolean autoSync = query.getInt(5) == 1;
+		return new UploadedFileInfo(type, name, uploadTime, md5Digest, fileSize, autoSync);
 	}
 
 	public void setLastModifiedTime(@NonNull String name, long lastModifiedTime) {
