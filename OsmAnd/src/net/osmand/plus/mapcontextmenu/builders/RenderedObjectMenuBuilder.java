@@ -132,7 +132,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		Entity.EntityType type = ObfConstants.getOsmEntityType(renderedObject);
 		if (type != null) {
 			long osmId = ObfConstants.getOsmObjectId(renderedObject);
-			long objectId = ObfConstants.createMapObjectIdFromOsmId(osmId, type);
+			long objectId = ObfConstants.createMapObjectIdFromCleanOsmId(osmId, type);
 			am.setId(objectId);
 		}
 		am.setAdditionalInfo(additionalInfo);

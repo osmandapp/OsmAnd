@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import static net.osmand.binary.ObfConstants.createMapObjectIdFromOsmId;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
@@ -284,7 +284,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		amenity.setType(category);
 		amenity.setSubType(subtype);
 		if (properties.osmid > 0) {
-			amenity.setId(createMapObjectIdFromOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
+			amenity.setId(ObfConstants.createMapObjectIdFromCleanOsmId(properties.osmid, Entity.EntityType.valueOf(properties.osmtype)));
 		} else {
 			amenity.setId(-Long.parseLong(properties.id));
 		}

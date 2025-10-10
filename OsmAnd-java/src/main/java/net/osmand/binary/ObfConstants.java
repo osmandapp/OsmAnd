@@ -103,6 +103,11 @@ public class ObfConstants {
 		}
 		return originalId; 
 	}
+	
+	public static long getOsmIdFromBinaryMapObjectId(long id) {
+		// BinaryMapDataObject object
+		return getOsmId(id >> 1); 
+	}
 
 	public static long getOsmObjectId(RouteDataObject object) {
 		if (object == null) {
