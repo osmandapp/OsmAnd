@@ -5569,7 +5569,7 @@
     <string name="uphill_downhill_split">Suas an Cnoc / Síos an Cnoc</string>
     <string name="shared_string_flat">Maol</string>
     <string name="shared_string_split_by">Roinnte de réir</string>
-    <string name="ski_route_switch_style_description">Taiscéal fánaí sciála, ardaitheoirí agus tuilleadh leis an stíl léarscáile Geimhridh agus Sciála.</string>
+    <string name="ski_route_switch_style_description">Déan iniúchadh ar bhealaí sciála, fánaí agus ardaitheoirí leis an stíl léarscáile Geimhridh agus Sciála.</string>
     <string name="set_work">Obair socraithe</string>
     <string name="set_home">Socraigh baile</string>
     <string name="set_intermediate_point">Socraigh ceann scríbe idirmheánach</string>
@@ -5701,4 +5701,6 @@
     <string name="average_slope">Meán fána</string>
     <string name="shared_string_last_uphill">Deireanach suas an cnoc</string>
     <string name="shared_string_last_downhill">Deireanach síos an cnoc</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Fánaí sciála agus bealaí</string>
+    <string name="rendering_attr_pisteRoutes_name">Fánaí sciála agus bealaí</string>
 </resources>
