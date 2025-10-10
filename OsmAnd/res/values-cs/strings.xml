@@ -5762,7 +5762,7 @@
     <string name="set_start_point">Nastavit začátek</string>
     <string name="sensor_data">Data ze senzorů</string>
     <string name="battery">baterie</string>
-    <string name="ski_route_switch_style_description">Procházejte sjezdovky, lanovky a další se zimním a lyžařským mapovým stylem.</string>
+    <string name="ski_route_switch_style_description">Prozkoumejte lyžařské trasy, sjezdovky a vleky pomocí stylu mapy Zima a lyžování.</string>
     <string name="shared_string_switch">Přepnout</string>
     <string name="release_5_1">• Přidána podpora pro webové a meziplatformní nákupy\n\n • Jednotky teploty přesunuty do Obecných nastavení pro jednodušší přístup\n\n • Přidán indikátor úrovně baterie pro senzory BLE\n\n • Nové, intuitivnější rozhraní pro výběr bodů v Navigaci\n\n • Vylepšena viditelnost widgetů s novým obrysem\n\n • Přidána analýza stoupání/klesání\n\n • Rozšířena integrace Wikimedia a Wikivoyage pro více bodů zájmu.</string>
     <string name="osm_live_payment_renews_3_years">Obnovuje se každé tři roky</string>
@@ -5886,4 +5886,6 @@
     <string name="average_slope">Průměrný sklon</string>
     <string name="shared_string_last_uphill">Poslední stoupání</string>
     <string name="shared_string_last_downhill">Poslední klesání</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Lyžařské trasy a sjezdovky</string>
+    <string name="rendering_attr_pisteRoutes_name">Lyžařské trasy a sjezdovky</string>
 </resources>
