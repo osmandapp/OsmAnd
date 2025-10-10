@@ -33,6 +33,7 @@ import com.google.gson.GsonBuilder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 
@@ -143,7 +144,7 @@ public class RouteResultPreparationTest {
                     if (skipToSpeak) {
                         turnLanes = "[MUTE] " + turnLanes;
                     }
-                    long segmentId = segment.getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
+                    long segmentId = ObfConstants.getOsmObjectId(segment.getObject());
                     String expectedResult = null;
                     int startPoint = -1;
                     for (Entry<String, String> er : te.getExpectedResults().entrySet()) {
@@ -169,11 +170,11 @@ public class RouteResultPreparationTest {
                 }
                 prevSegment = i;
                 if (i < routeSegments.size()) {
-                    checkedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
+                    checkedSegments.add(ObfConstants.getOsmObjectId(routeSegments.get(i).getObject()));
                 }
             }
             if (i < routeSegments.size()) {
-                Long id = routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
+				Long id = ObfConstants.getOsmObjectId(routeSegments.get(i).getObject());
                 int startPoint = routeSegments.get(i).getStartPointIndex();
                 reachedSegmentsWithStartPoint.add(id + ":" + startPoint);
                 reachedSegments.add(id);
