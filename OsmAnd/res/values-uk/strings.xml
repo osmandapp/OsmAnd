@@ -5767,7 +5767,7 @@
     <string name="set_home">Встановити домашній</string>
     <string name="set_intermediate_point">Встановити проміжний пункт призначення</string>
     <string name="set_start_point">Встановити початкову точку</string>
-    <string name="ski_route_switch_style_description">Досліджуйте гірськолижні схили, підйомники та багато іншого за допомогою карти в стилі «Зима та лижі».</string>
+    <string name="ski_route_switch_style_description">Досліджуйте лижні маршрути, схили та підйомники за допомогою карти в стилі «Зима та лижі».</string>
     <string name="shared_string_switch">Перемикач</string>
     <string name="release_5_1">• Додано підтримку веб- та кросплатформних покупок\n\n• Одиниці вимірювання температури переміщено до загальних налаштувань для легшого доступу\n\n• Додано індикатор рівня заряду батареї для датчиків BLE\n\n• Новий, більш інтуїтивно зрозумілий інтерфейс для вибору точок у навігації\n\n• Покращена видимість віджетів з новим контуром\n\n• Додано аналізатор підйомів/спусків\n\n• Розширена інтеграція з Вікіпедією та Вікімандром для збільшення кількості точок інтересу.</string>
     <string name="osm_live_payment_renews_3_years">Оновлюється кожні три роки</string>
@@ -5891,4 +5891,6 @@
     <string name="average_slope">Середній нахил</string>
     <string name="shared_string_last_uphill">Останній підйом</string>
     <string name="shared_string_last_downhill">Останній спуск</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Гірськолижні схили та маршрути</string>
+    <string name="rendering_attr_pisteRoutes_name">Гірськолижні схили та маршрути</string>
 </resources>

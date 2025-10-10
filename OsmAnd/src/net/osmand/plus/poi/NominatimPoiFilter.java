@@ -127,7 +127,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 										Double.parseDouble(parser.getAttributeValue("", "lon"))); //$NON-NLS-1$//$NON-NLS-2$
 								long osmId = Long.parseLong(parser.getAttributeValue("", "osm_id"));
 								EntityType osmType = EntityType.valueOf(parser.getAttributeValue("", "osm_type").toUpperCase());
-								long id = ObfConstants.createMapObjectIdFromOsmId(osmId, osmType);
+								long id = ObfConstants.createMapObjectIdFromCleanOsmId(osmId, osmType);
 								a.setId(id);
 								String name = parser.getAttributeValue("", "display_name"); //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);

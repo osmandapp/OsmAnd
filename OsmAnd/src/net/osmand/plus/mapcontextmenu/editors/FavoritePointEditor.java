@@ -80,7 +80,7 @@ public class FavoritePointEditor extends PointEditor {
 
 			Amenity requestAmenity = new Amenity();
 			requestAmenity.setLocation(latLon);
-			requestAmenity.setId(ObfConstants.createMapObjectIdFromOsmId(entity.getId(), EntityType.valueOf(entity)));
+			requestAmenity.setId(ObfConstants.createMapObjectIdFromCleanOsmId(entity.getId(), EntityType.valueOf(entity)));
 
 			AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity);
 			amenity = searcher.searchDetailedAmenity(request, settings);

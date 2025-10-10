@@ -1,7 +1,6 @@
 package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
 
 import net.osmand.CallbackWithObject;
@@ -419,7 +418,7 @@ public class SearchUICore {
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
 
-						boolean isEqualId = getOsmId(a1) == getOsmId(a2);
+						boolean isEqualId = ObfConstants.getOsmObjectId(a1) == ObfConstants.getOsmObjectId(a2);
 
 						if (isEqualId && (FILTER_DUPLICATE_POI_SUBTYPE.contains(subType1)
 								|| FILTER_DUPLICATE_POI_SUBTYPE.contains(subType2))) {
@@ -456,13 +455,6 @@ public class SearchUICore {
 		}
 	}
 
-	private static long getOsmId(Amenity amenity) {
-		if (ObfConstants.isShiftedID(amenity.getId())) {
-			return ObfConstants.getOsmId(amenity.getId());
-		} else {
-			return amenity.getId() >> AMENITY_ID_RIGHT_SHIFT;
-		}
-	}
 	
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;

@@ -5156,4 +5156,6 @@
     <string name="poi_barrier_chain">Ланчана баријера</string>
     <string name="poi_barrier_log">Дрво</string>
     <string name="poi_barrier_sliding_gate">Клизна капија</string>
+    <string name="poi_piste_downhill">Низбрдна писта; Скијашка писта; Скијашки спуст</string>
+    <string name="poi_route_activity_type_skiing">Скијашке руте</string>
 </resources>

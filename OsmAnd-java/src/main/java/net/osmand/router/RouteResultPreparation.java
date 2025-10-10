@@ -4,6 +4,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -50,7 +51,7 @@ public class RouteResultPreparation {
 	private static final float UNMATCHED_TURN_DEGREE_MINIMUM = 45;
 	private static final float SPLIT_TURN_DEGREE_NOT_STRAIGHT = 100;
 	private static final float TURN_SLIGHT_DEGREE = 5;
-	public static final int SHIFT_ID = 6;
+	
 	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
 	
@@ -741,7 +742,7 @@ public class RouteResultPreparation {
 			additional.append("height = \"").append(Arrays.toString(res.getHeightValues())).append("\" ");
 			additional.append("description = \"").append(res.getDescription(false)).append("\" ");
 			println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
-					(res.getObject().getId() >> (SHIFT_ID )) + "", res.getObject().getId() + "", 
+					(ObfConstants.getOsmObjectId(res.getObject())) + "", res.getObject().getId() + "", 
 					res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
 			int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
 			int indexnext = res.getStartPointIndex();
@@ -774,7 +775,7 @@ public class RouteResultPreparation {
 								serializer.endTag("","slope");
 							}
 							serializer.startTag("","desc");
-							serializer.text((res.getObject().getId() >> (SHIFT_ID )) + " " + index);
+							serializer.text((ObfConstants.getOsmObjectId(res.getObject())) + " " + index);
 							serializer.endTag("","desc");
 							lastHeight = h;
 						} else if(lastHeight != -180){

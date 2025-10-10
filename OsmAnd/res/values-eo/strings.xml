@@ -5870,4 +5870,8 @@
     <string name="shared_string_price">Prezo</string>
     <string name="rendering_attr_showSkiSlopes_name">Skiaj descendejoj</string>
     <string name="rendering_attr_showSkiSlopes_description">Montri simpligitajn skiajn descendejojn</string>
+    <string name="track_folder_appearance">Aspekto de spur-dosierujo</string>
+    <string name="update_maps">Ĝisdatigi mapojn</string>
+    <string name="reconnect">Rekonekti</string>
+    <string name="trip_recording_downhill_widget_desc">Montras sumon de ĉiuj malsupreniroj aŭ la antaŭan malsupreniron de la nuna registrata spuro.</string>
 </resources>

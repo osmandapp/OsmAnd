@@ -963,11 +963,7 @@ public class Amenity extends MapObject {
 		if (id == null) {
 			return null;
 		}
-		if (ObfConstants.isShiftedID(id)) {
-			return ObfConstants.getOsmId(id);
-		} else {
-			return id >> AMENITY_ID_RIGHT_SHIFT;
-		}
+		return ObfConstants.getOsmObjectId(this);
 	}
 
 	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
