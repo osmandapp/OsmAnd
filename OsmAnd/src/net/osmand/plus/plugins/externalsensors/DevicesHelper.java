@@ -295,8 +295,14 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 	}
 
 	public void connectDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
-		device.addListener(this);
-		device.connect(app, activity);
+		if (AndroidUtils.hasBLEPermission(app)) {
+			device.addListener(this);
+			device.connect(app, activity);
+		} else {
+			if (activity != null) {
+				AndroidUtils.requestBLEPermissions(activity);
+			}
+		}
 	}
 
 	public void disconnectDevice(@NonNull AbstractDevice<?> device) {

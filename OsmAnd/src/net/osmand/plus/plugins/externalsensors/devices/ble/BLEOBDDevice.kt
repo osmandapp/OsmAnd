@@ -106,7 +106,7 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 						val sendResult = gatt.writeCharacteristic(
 							it,
 							command.toByteArray(),
-							BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+							BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE
 						)
 						result = sendResult == BluetoothStatusCodes.SUCCESS
 						errorMessage = "Send result code {$sendResult}"
