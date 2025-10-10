@@ -25,9 +25,10 @@ public class City extends MapObject {
 		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
 		
 		// not stored entities but registered to uniquely identify streets as SUBURB
-		BOROUGH(400, 2500), // 
+		BOROUGH(400, 2500),  
 		DISTRICT(400, 10000),
-		NEIGHBOURHOOD(300, 500), //
+		NEIGHBOURHOOD(300, 500),
+		CENSUS(400, 2500),
 		;
 		
 		private final double radius;
