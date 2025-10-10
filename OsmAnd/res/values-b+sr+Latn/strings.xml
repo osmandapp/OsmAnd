@@ -5862,4 +5862,14 @@
     <string name="update_maps">Ažuriranje mapa</string>
     <string name="reconnect">Ponovno povezivanje</string>
     <string name="track_folder_appearance">Izgled foldera za trase</string>
+    <string name="trip_recording_downhill_widget_desc">Prikazuje zbir svih spuštanja ili poslednje spuštanje trenutno zabeleženog putovanja.</string>
+    <string name="trip_recording_uphill_widget_desc">Prikazuje zbir svih uspona ili poslednji uspon trenutno zabeleženog putovanja.</string>
+    <string name="trip_recording_distance_widget_desc">Prikazuje ukupnu udaljenost za vaše trenutno zabeleženo putovanje, sa režimima za prikaz udaljenosti poslednjeg uspona i spusta.</string>
+    <string name="trip_recording_max_speed_widget_description">Prikazuje maksimalnu brzinu za trenutno zabeleženo putovanje. Dodirnite da biste prelazili između ukupne maksimalne brzine i maksimalne brzine sa poslednjeg uspona ili spusta.</string>
+    <string name="trip_recording_average_slope_widget_description">Prikazuje prosečan nagib za poslednju nizbrdicu ili uzbrdicu trenutno snimljenog putovanja.</string>
+    <string name="average_slope">Prosečan nagib</string>
+    <string name="shared_string_last_uphill">Poslednji uspon</string>
+    <string name="shared_string_last_downhill">Poslednja nizbrdica</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skijaške staze i rute</string>
+    <string name="rendering_attr_pisteRoutes_name">Skijaške staze i rute</string>
 </resources>

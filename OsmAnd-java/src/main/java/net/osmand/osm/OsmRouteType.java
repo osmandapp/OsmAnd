@@ -43,7 +43,7 @@ public class OsmRouteType {
 	public static final OsmRouteType FOOT = createType("foot").reg();
 	public static final OsmRouteType LIGHT_RAIL = createType("light_rail").reg();
 	public static final OsmRouteType RAILWAY = createType("railway").reg();
-	public static final OsmRouteType SKI = createType("piste").renderingPropertyAttr(PISTE_ROUTES).reg();
+	public static final OsmRouteType SKI_ROUTES = createType("piste").renderingPropertyAttr(PISTE_ROUTES).reg();
 	public static final OsmRouteType ALPINE = createType("alpine").renderingPropertyAttr(ALPINE_HIKING).reg();
 	public static final OsmRouteType FITNESS = createType("fitness_trail").renderingPropertyAttr(FITNESS_TRAILS).reg();
 	public static final OsmRouteType INLINE_SKATES = createType("inline_skates").reg();
@@ -312,7 +312,7 @@ public class OsmRouteType {
 			case "piste":
 			case "piste:type":
 			case "piste:difficulty":
-				return SKI;
+				return SKI_ROUTES;
 			case "snowmobile=designated":
 			case "snowmobile=permissive":
 			case "snowmobile=yes":

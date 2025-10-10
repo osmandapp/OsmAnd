@@ -1,6 +1,5 @@
 package net.osmand.binary;
 
-import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -55,7 +54,7 @@ public class HeightDataLoader {
         ResultMatcher<RouteDataObject> matcher = new ResultMatcher<>() {
             @Override
             public boolean publish(RouteDataObject routeDataObject) {
-                return routeDataObject != null && routeDataObject.getId() >> SHIFT_ID == osmId;
+                return routeDataObject != null && ObfConstants.getOsmObjectId(routeDataObject) == osmId;
             }
 
             @Override
@@ -146,7 +145,7 @@ public class HeightDataLoader {
                                 // live-update, changed tags
                                 continue;
                             }
-                            loaded += (results.put(obj.getId() >> SHIFT_ID, obj) == null) ? 1 : 0;
+                            loaded += (results.put(ObfConstants.getOsmObjectId(obj), obj) == null) ? 1 : 0;
                             usedIds.put(obj.id, obj.region);
                         }
                     }

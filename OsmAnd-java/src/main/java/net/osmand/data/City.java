@@ -3,21 +3,32 @@ package net.osmand.data;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+
 import java.util.*;
 
 
 public class City extends MapObject {
 	public enum CityType {
 		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
-		// district special type and it is not registered as a city
-		CITY(10000, 100000),
-		TOWN(4000, 20000),
-		VILLAGE(1300, 1000),
-		HAMLET(1000, 100),
-		SUBURB(400, 5000),
-		BOROUGH(400, 2500),
+		CITY(10000, 100000), // 0. City
+		TOWN(4000, 20000), // 1. Town
+		VILLAGE(1300, 1000), // 2. Village 
+		HAMLET(1000, 100), // 3. Hamlet - Small village
+		SUBURB(400, 5000), // 4. Mostly district of the city (introduced to avoid duplicate streets in city) - 
+						   // however BOROUGH, DISTRICT, NEIGHBOURHOOD could be used as well for that purpose
+						   // Main difference stores own streets to search and list by it  
+		// 5.2 stored in city / villages sections written as city type
+		BOUNDARY(0, 0), // 5. boundary no streets
+		// 5.3 stored in city / villages sections written as city type
+		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
+		
+		// not stored entities but registered to uniquely identify streets as SUBURB
+		BOROUGH(400, 2500), // 
 		DISTRICT(400, 10000),
-		NEIGHBOURHOOD(300, 500);
+		NEIGHBOURHOOD(300, 500), //
+		;
 		
 		private final double radius;
 		private final int population;
@@ -36,13 +47,30 @@ public class City extends MapObject {
 		}
 		
 		public boolean storedAsSeparateAdminEntity() {
-			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH;
+			if (this == CITY || this == TOWN || this == VILLAGE || 
+					this == HAMLET || this == SUBURB) {
+				return true;
+			}
+			return false;
+//			return this != DISTRICT && this != NEIGHBOURHOOD && this != BOROUGH 
+//					&& this != BOUNDARY && this != POSTCODE;
 		}
 
 		public static String valueToString(CityType t) {
 			return t.toString().toLowerCase();
 		}
 
+		public static CityType valueFromEntity(Entity e) {
+			String place = e.getTag(OSMTagKey.PLACE);
+			if ("locality".equals(place) && "townland".equals(e.getTag(OSMTagKey.LOCALITY))) {
+				// Irish townlands are very similar to suburb 
+				// however they could be separate polygons not inside town or city  
+				return CityType.SUBURB;
+			}
+			return valueFromString(place);
+		}
+		
+		// to be used only by amenity
 		public static CityType valueFromString(String place) {
 			if (place == null) {
 				return null;
@@ -50,27 +78,16 @@ public class City extends MapObject {
 			if ("township".equals(place)) {
 				return CityType.TOWN;
 			}
+			if ("township".equals(place)) {
+				return CityType.TOWN;
+			}
 			for (CityType t : CityType.values()) {
-				if (t.name().equalsIgnoreCase(place)) {
+				if (t.name().equalsIgnoreCase(place) 
+						&& t != BOUNDARY && t != POSTCODE) {
 					return t;
 				}
 			}
 			return null;
-		}
-		
-		public static String typeToString(CityType type) {
-			if (type == null) {
-				return null;
-			}
-			return type.name().toLowerCase();
-		}
-		
-		static public Set<String> getAllCityTypeStrings() {
-			Set<String> cityTypeStrings = new HashSet<>();
-			for (CityType type : CityType.values()) {
-				cityTypeStrings.add(typeToString(type));
-			}
-			return cityTypeStrings;
 		}
 		
 		
@@ -80,6 +97,7 @@ public class City extends MapObject {
 	private List<Street> listOfStreets = new ArrayList<Street>();
 	private String postcode = null;
 	private City closestCity = null;
+	private int[] bbox31 = null;
 	
 	private static long POSTCODE_INTERNAL_ID = -1000;
 	public static City createPostcode(String postcode){
@@ -94,7 +112,7 @@ public class City extends MapObject {
 	}
 	
 	public City(String postcode, long id) {
-		this.type = null;
+		this.type = CityType.POSTCODE;
 		this.name = this.enName = postcode;
 		this.id = id;
 	}
@@ -103,8 +121,16 @@ public class City extends MapObject {
 		return isin;
 	}
 	
+	public int[] getBbox31() {
+		return bbox31;
+	}
+	
+	public void setBbox31(int[] bbox31) {
+		this.bbox31 = bbox31;
+	}
+	
 	public boolean isPostcode(){
-		return type == null;
+		return type == CityType.POSTCODE;
 	}
 	
 	public String getPostcode() {

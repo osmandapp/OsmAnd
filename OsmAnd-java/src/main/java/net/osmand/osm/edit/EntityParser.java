@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -16,7 +17,6 @@ import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Relation.RelationMember;
 import net.osmand.util.Algorithms;
@@ -25,9 +25,13 @@ public class EntityParser {
 
 	public static void parseMapObject(MapObject mo, Entity e, Map<String, String> tags) {
 		mo.setId(e.getId());
-		if(mo instanceof Amenity) {
-			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
+		// use for all to make this type consistent everywhere (since 5.2)
+//		if (mo instanceof Amenity ) {
+		if (e.getId() > 0) {
+			mo.setId(ObfConstants.createMapObjectIdFromOsmAndEntity(e));
 		}
+//			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
+//		}
 		if (mo.getName().length() == 0) {
 			mo.setName(tags.get(OSMTagKey.NAME.getValue()));
 		}
@@ -235,12 +239,15 @@ public class EntityParser {
 		return b;
 	}
 
-	public static City parseCity(Node el) {
-		return parseCity(el, CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue())));
+	public static City parseCity(Entity el) {
+		return parseCity(el, null);
 	}
 
 	public static City parseCity(Entity el, CityType t) {
-		if(t == null) {
+		if (t == null) {
+			t = CityType.valueFromEntity(el);
+		}
+		if (t == null) {
 			return null;
 		}
 		City c = new City(t);

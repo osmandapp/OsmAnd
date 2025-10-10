@@ -1,5 +1,7 @@
 package net.osmand.plus.render;
 
+import static net.osmand.osm.RenderingPropertyAttr.SKI_SLOPES;
+
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.os.Handler;
@@ -836,7 +838,11 @@ public class MapRenderRepositories {
 				if (attrName.equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
 					renderingReq.setBooleanFilter(property, true);
 				} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(property.getCategory())) {
-					renderingReq.setBooleanFilter(property, false);
+					if (SKI_SLOPES.getAttrName().equals(property.getAttrName())) {
+						renderingReq.setBooleanFilter(property, settings.getRenderBooleanPropertyValue(property));
+					} else {
+						renderingReq.setBooleanFilter(property, false);
+					}
 				} else {
 					renderingReq.setBooleanFilter(property, settings.getRenderBooleanPropertyValue(property));
 				}

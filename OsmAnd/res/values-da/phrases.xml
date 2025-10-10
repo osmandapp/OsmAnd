@@ -4280,4 +4280,7 @@
     <string name="poi_hazard_additional_school_zone">Skolezone</string>
     <string name="poi_hazard_additional_cyclists">Cyklister</string>
     <string name="poi_hazard_additional_shooting_range">Skydebane</string>
+    <string name="poi_barrier_log">Stamme</string>
+    <string name="poi_barrier_chain">Kæde</string>
+    <string name="poi_barrier_sliding_gate">Skydelåge</string>
 </resources>

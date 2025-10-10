@@ -5152,4 +5152,10 @@
     <string name="poi_hazard_additional_queues_likely">Pravděpodobné fronty</string>
     <string name="poi_hazard_additional_side_winds">Boční vítr</string>
     <string name="poi_hazard_additional_ice">Led</string>
+    <string name="poi_historic_spacecraft">Historická kosmická loď</string>
+    <string name="poi_barrier_chain">Řetězová bariéra</string>
+    <string name="poi_barrier_log">Kmen</string>
+    <string name="poi_barrier_sliding_gate">Posuvná brána</string>
+    <string name="poi_piste_downhill">Sjezdovka;Lyžařský svah</string>
+    <string name="poi_route_activity_type_skiing">Lyžařské trasy</string>
 </resources>

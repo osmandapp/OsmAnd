@@ -472,7 +472,7 @@ public class SearchCoreFactory {
 								}
 								sr.objectType = ObjectType.CITY;
 								sr.priorityDistance = 0.1;
-							} else if (((City)object).isPostcode()) {
+							} else if (type == CityType.POSTCODE) {
 								if ((locSpecified && !postcodeBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.POSTCODE)) {
 									return false;
