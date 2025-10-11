@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:orientation="vertical">
+
+    <View
+        android:background="?attr/dashboard_divider"
+        android:id="@+id/topDivider"
+        android:layout_height="1dp"
+        android:layout_width="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatCheckedTextView
+        android:checkMark="?android:attr/listChoiceIndicatorSingle"
+        android:gravity="center_vertical"
+        android:id="@+id/text1"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:layout_width="match_parent"
+        android:paddingLeft="26dp"
+        android:paddingRight="@dimen/list_content_padding"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+	    android:paddingStart="26dp"
+	    android:paddingEnd="@dimen/list_content_padding" />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:id="@+id/switchLayout"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="26dp"
+        android:paddingRight="@dimen/list_content_padding"
+	    android:paddingEnd="@dimen/list_content_padding"
+	    android:paddingStart="26dp">
+
+        <TextView
+            android:id="@+id/switchText"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:paddingRight="@dimen/list_content_padding"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/default_sub_text_size"
+	        android:paddingEnd="@dimen/list_content_padding" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/check"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </LinearLayout>
+
+    <View
+        android:background="?attr/dashboard_divider"
+        android:id="@+id/bottomDivider"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/list_header_padding"
+        android:layout_width="wrap_content"/>
+
+</LinearLayout>
+
