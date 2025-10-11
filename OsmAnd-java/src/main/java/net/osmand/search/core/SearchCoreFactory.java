@@ -167,7 +167,7 @@ public class SearchCoreFactory {
 			boolean firstUnknownWordMatches = res.firstUnknownWordMatches;
 			List<String> leftUnknownSearchWords = new ArrayList<String>(phrase.getUnknownSearchWords());
 			if (res.otherWordsMatch != null) {
-//				leftUnknownSearchWords.removeAll(res.otherWordsMatch); // incorrect 
+//				leftUnknownSearchWords.removeAll(res.otherWordsMatch); // incorrect
 				for (String otherWord : res.otherWordsMatch) {
 					leftUnknownSearchWords.remove(otherWord); // remove 1 by 1
 				}
