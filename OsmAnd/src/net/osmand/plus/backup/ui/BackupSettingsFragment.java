@@ -32,6 +32,7 @@ import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -87,6 +88,7 @@ public class BackupSettingsFragment extends BaseFullScreenFragment implements On
 		setupRemoveOldData(view);
 		setupDeleteAccountData(view);
 		setupVersionHistory(view);
+		setupAutoBackup(view);
 
 		return view;
 	}
@@ -197,6 +199,30 @@ public class BackupSettingsFragment extends BaseFullScreenFragment implements On
 		setupSizeSummary(summary, oldRemoteFiles);
 	}
 
+	private void setupAutoBackup(@NonNull View view) {
+		boolean visible = PluginsHelper.isDevelopment();
+
+		View container = view.findViewById(R.id.auto_backup_container);
+
+		TextView title = container.findViewById(android.R.id.title);
+		title.setText(R.string.auto_backup_title);
+
+		ImageView icon = container.findViewById(android.R.id.icon);
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_storage));
+
+		container.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				AutoBackupController.showScreen(activity);
+			}
+		});
+		setupSelectableBackground(container);
+
+		AndroidUiHelper.updateVisibility(container, visible);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.auto_backup_divider), visible);
+		AndroidUiHelper.updateVisibility(container.findViewById(android.R.id.summary), false);
+	}
+
 	private void setupSizeSummary(@NonNull TextView summary, @NonNull Map<String, RemoteFile> remoteFiles) {
 		if (!Algorithms.isEmpty(remoteFiles)) {
 			int filesSize = 0;
@@ -305,6 +331,7 @@ public class BackupSettingsFragment extends BaseFullScreenFragment implements On
 			if (view != null) {
 				setupBackupTypes(view);
 				setupVersionHistory(view);
+				setupAutoBackup(view);
 			}
 		}
 	}

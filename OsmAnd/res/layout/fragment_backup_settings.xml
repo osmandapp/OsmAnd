@@ -162,6 +162,59 @@
 
 			</LinearLayout>
 
+			<include
+				android:id="@+id/auto_backup_divider"
+				layout="@layout/list_item_divider" />
+
+			<LinearLayout
+				android:id="@+id/auto_backup_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:minHeight="@dimen/bottom_sheet_list_item_height"
+					android:orientation="horizontal">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_weight="1"
+						android:gravity="center_vertical"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						android:text="@string/auto_backup_title"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size"
+						app:lineHeight="@dimen/default_title_line_height"
+						app:typefaceWeight="medium" />
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_marginBottom="@dimen/content_padding_small"
+						app:srcCompat="@drawable/ic_action_info_dark"
+						app:tint="?attr/default_icon_color" />
+
+				</LinearLayout>
+
+				<include
+					android:id="@+id/version_history"
+					layout="@layout/preference_with_descr" />
+
+			</LinearLayout>
+
 			<include layout="@layout/list_item_divider" />
 
 			<LinearLayout

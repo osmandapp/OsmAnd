@@ -228,7 +228,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 	@Nullable
 	private String getDescriptionForItemType(SettingsItemType type, String fileName, String summary) {
-		UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(type.name(), fileName);
+		UploadedFileInfo info = app.getBackupHelper().getUploadedFileInfo(type.name(), fileName);
 		return info != null ? generateTimeString(app, summary, info.getUploadTime()) : null;
 	}
 
