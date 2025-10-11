@@ -5827,7 +5827,7 @@
     <string name="osm_live_payment_renews_3_years">Wordt elke drie jaar verlengd</string>
     <string name="years_3">Drie jaar</string>
     <string name="shared_string_switch">Omschakelen</string>
-    <string name="ski_route_switch_style_description">Verken onder andere skipistes &amp; liften met de Winter- en Skikaartstijl.</string>
+    <string name="ski_route_switch_style_description">Verken onder andere ski-routes, skipistes &amp; liften met de Winter- en Skikaartstijl.</string>
     <string name="sensor_data">Sensordata</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Selecteer de parameters die opgenomen moeten worden in het GPX-bestand.</string>
@@ -6204,4 +6204,6 @@
     <string name="average_slope">Gemiddelde helling</string>
     <string name="shared_string_last_uphill">Laatste beklimming</string>
     <string name="shared_string_last_downhill">Laatste afdaling</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skipisten en routes</string>
+    <string name="rendering_attr_pisteRoutes_name">Skipisten en routes</string>
 </resources>
