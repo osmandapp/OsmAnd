@@ -5776,7 +5776,7 @@
     <string name="n_a">Н/А</string>
     <string name="write_location_provider_description">Сачувај добављача положаја свакој тачки трага током снимања</string>
     <string name="write_location_provider">Уписуј добављача положаја</string>
-    <string name="altitude_metrics_description">Постави јединицу приказа свим висинама у справицама и статистици.</string>
+    <string name="altitude_metrics_description">Подешава јединицу приказа за надморску висину у виџетима и статистици.</string>
     <string name="average_elevation">Просечна надморска висина</string>
     <string name="ascent">Успон</string>
     <string name="descent">Спуст</string>
