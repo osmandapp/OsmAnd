@@ -104,8 +104,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
 
-			leftWidgetsPanel.setScreenWidth(mapActivity);
-			rightWidgetsPanel.setScreenWidth(mapActivity);
+			leftWidgetsPanel.setScreenSize(mapActivity);
+			rightWidgetsPanel.setScreenSize(mapActivity);
 
 			LayoutInflater inflater = mapActivity.getLayoutInflater();
 			rulerWidget = (RulerWidget) inflater.inflate(R.layout.map_ruler, mapHudLayout, false);
