@@ -54,7 +54,6 @@ public class SettingsSearchButtonHelper {
 												final @IdRes int fragmentContainerViewId,
 												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>>> createSearchDatabaseTaskSupplier,
 												final OsmandApplication app) {
-
 		return new SettingsSearchButtonHelper(
 				rootSearchPreferenceFragment,
 				fragmentContainerViewId,
