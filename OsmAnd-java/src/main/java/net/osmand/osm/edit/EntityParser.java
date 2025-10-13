@@ -13,12 +13,10 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Relation.RelationMember;
 import net.osmand.util.Algorithms;
@@ -27,11 +25,13 @@ public class EntityParser {
 
 	public static void parseMapObject(MapObject mo, Entity e, Map<String, String> tags) {
 		mo.setId(e.getId());
-		if (mo instanceof Amenity || mo instanceof City || mo instanceof Street 
-				|| mo instanceof Building) {
-			mo.setId(ObfConstants.createMapObjectIdFromOsmId(e.getId(), EntityType.valueOf(e)));
-//			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
+		// use for all to make this type consistent everywhere (since 5.2)
+//		if (mo instanceof Amenity ) {
+		if (e.getId() > 0) {
+			mo.setId(ObfConstants.createMapObjectIdFromOsmAndEntity(e));
 		}
+//			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
+//		}
 		if (mo.getName().length() == 0) {
 			mo.setName(tags.get(OSMTagKey.NAME.getValue()));
 		}
@@ -253,8 +253,9 @@ public class EntityParser {
 		City c = new City(t);
 		parseMapObject(c, el, el.getTags());
 		String isin = el.getTag(OSMTagKey.IS_IN.getValue());
-		isin = isin != null ? isin.toLowerCase() : null;
-		c.setIsin(isin);
+		if (isin != null) {
+			c.setIsin(isin);
+		}
 		return c;
 	}
 

@@ -275,7 +275,7 @@ public class BaseDetailsObject {
 			EntityType type = ObfConstants.getOsmEntityType(renderedObject);
 			if (type != null) {
 				long osmId = ObfConstants.getOsmObjectId(renderedObject);
-				long objectId = ObfConstants.createMapObjectIdFromOsmId(osmId, type);
+				long objectId = ObfConstants.createMapObjectIdFromCleanOsmId(osmId, type);
 
 				if (syntheticAmenity.getId() == null && objectId > 0) {
 					syntheticAmenity.setId(objectId);

@@ -5753,7 +5753,7 @@
     <string name="set_home">Agordi kiel hejmon</string>
     <string name="set_intermediate_point">Agordi kiel intercelon</string>
     <string name="set_start_point">Agordi kiel komencejon</string>
-    <string name="ski_route_switch_style_description">Esplori descendejojn, telferojn kaj pli kun la map-stilo Vintro kaj skiado.</string>
+    <string name="ski_route_switch_style_description">Esploru skivojojn, descendejojn kaj telferojn kun la map-aspekto “Vintro kaj skiado”.</string>
     <string name="battery">baterio</string>
     <string name="sensor_data">Datumoj de sentilo</string>
     <string name="battery_level">Nivelo de baterio</string>
@@ -5870,4 +5870,17 @@
     <string name="shared_string_price">Prezo</string>
     <string name="rendering_attr_showSkiSlopes_name">Skiaj descendejoj</string>
     <string name="rendering_attr_showSkiSlopes_description">Montri simpligitajn skiajn descendejojn</string>
+    <string name="track_folder_appearance">Aspekto de spur-dosierujo</string>
+    <string name="update_maps">Ĝisdatigi mapojn</string>
+    <string name="reconnect">Rekonekti</string>
+    <string name="trip_recording_downhill_widget_desc">Montras sumon de ĉiuj malsupreniroj aŭ la antaŭan malsupreniron de la nuna registrata spuro.</string>
+    <string name="trip_recording_uphill_widget_desc">Montri sumon de ĉiuj supreniroj aŭ la antaŭan supreniron de la nune registrata spuro.</string>
+    <string name="trip_recording_distance_widget_desc">Montras la tutan distancon de la nune registrata spuro, kun reĝimoj ebligantaj vidi distancon de la antaŭa supreniro/malsupreniro.</string>
+    <string name="trip_recording_max_speed_widget_description">Montras la maksimuman rapidon de la nune registrata spuro. Frapetu por baskuligi inter la tuta maksimuma rapido kaj maksimuma rapido de la antaŭa (mal)supreniro.</string>
+    <string name="trip_recording_average_slope_widget_description">Montras la mezuman deklivecon de la antaŭa suprenira aŭ malsuprenira fragmento de la nune registrata spuro.</string>
+    <string name="average_slope">Mezuma dekliveco</string>
+    <string name="shared_string_last_uphill">Antaŭa supreniro</string>
+    <string name="shared_string_last_downhill">Antaŭa malsupreniro</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skiaj kursoj kaj descendejoj</string>
+    <string name="rendering_attr_pisteRoutes_name">Skivojoj kaj descendejoj</string>
 </resources>

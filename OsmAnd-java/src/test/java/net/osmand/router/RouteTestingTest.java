@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder;
 
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.RouterUtilTest;
 
@@ -160,15 +161,14 @@ public class RouteTestingTest {
 				if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
 					if (prevSegment >= 0) {
 						String name = routeSegments.get(prevSegment).getDescription(false);
-						long segmentId = routeSegments.get(prevSegment).getObject()
-								.getId() >> (RouteResultPreparation.SHIFT_ID);
+						long segmentId = ObfConstants.getOsmObjectId(routeSegments.get(prevSegment).getObject());
 						System.out.println("segmentId: " + segmentId + " description: " + name);
 					}
 					prevSegment = i;
 				}
 				if (i < routeSegments.size()) {
 					RouteSegmentResult seg = routeSegments.get(i);
-					long id = seg.getObject().getId() >> RouteResultPreparation.SHIFT_ID;
+					long id = ObfConstants.getOsmObjectId(seg.getObject());
 					for (int point = Math.min(seg.getStartPointIndex(), seg.getEndPointIndex());
 					     point <= Math.max(seg.getStartPointIndex(), seg.getEndPointIndex()); point++) {
 						reachedSegmentPoints.add(id + ":" + point);

@@ -111,7 +111,7 @@ public class DataTileManager<T> {
 	}
 
 	/**
-	 * returns not exactly sorted list (but sorted by tiles)
+	 * returns list of objects by radius
 	 */
 	public List<T> getClosestObjects(double latitude, double longitude, double radius) {
 		if (isEmpty()) {
@@ -134,15 +134,16 @@ public class DataTileManager<T> {
 				}
 			}
 		}
-		List<Long> keys = new ArrayList<>(tiles.keySet());
-		Collections.sort(keys, new Comparator<Long>() {
-			@Override
-			public int compare(Long o1, Long o2) {
-				return Double.compare(tiles.get(o1), tiles.get(o2));
-			}
-		});
+		// sorting takes too much time
+//		List<Long> keys = new ArrayList<>(tiles.keySet());
+//		Collections.sort(keys, new Comparator<Long>() {
+//			@Override
+//			public int compare(Long o1, Long o2) {
+//				return Double.compare(tiles.get(o1), tiles.get(o2));
+//			}
+//		});
 		List<T> result = new ArrayList<>();
-		for (Long key : keys) {
+		for (Long key : tiles.keySet()) {
 			putObjects(key, result);
 		}
 		return result;

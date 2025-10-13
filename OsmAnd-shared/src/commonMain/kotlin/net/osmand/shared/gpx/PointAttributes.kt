@@ -4,7 +4,7 @@ import net.osmand.shared.gpx.GpxUtilities.GPXTPX_PREFIX
 import net.osmand.shared.gpx.GpxUtilities.OSMAND_EXTENSIONS_PREFIX
 
 class PointAttributes(
-	var distance: Float, val timeDiff: Float, val firstPoint: Boolean, val lastPoint: Boolean
+	var distance: Float, var timeDiff: Float, var firstPoint: Boolean, var lastPoint: Boolean
 ) {
 
 	companion object {

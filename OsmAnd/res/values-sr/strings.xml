@@ -5744,7 +5744,7 @@
     <string name="set_home">Постави дом</string>
     <string name="battery_level">Попуњеност батерије</string>
     <string name="set_intermediate_point">Постави међуодредиште</string>
-    <string name="ski_route_switch_style_description">Истражите скијашке стазе, жичаре и још много тога помоћу приказа зимске и скијашке карте.</string>
+    <string name="ski_route_switch_style_description">Истражите скијашке руте, стазе и жичаре помоћу стила Зимске и Скијашке мапе.</string>
     <string name="shared_string_switch">Прекидач</string>
     <string name="years_3">Три године</string>
     <string name="three_years_subscription">Трогодишња претплата</string>
@@ -5776,7 +5776,7 @@
     <string name="n_a">Н/А</string>
     <string name="write_location_provider_description">Сачувај добављача положаја свакој тачки трага током снимања</string>
     <string name="write_location_provider">Уписуј добављача положаја</string>
-    <string name="altitude_metrics_description">Постави јединицу приказа свим висинама у справицама и статистици.</string>
+    <string name="altitude_metrics_description">Подешава јединицу приказа за надморску висину у виџетима и статистици.</string>
     <string name="average_elevation">Просечна надморска висина</string>
     <string name="ascent">Успон</string>
     <string name="descent">Спуст</string>
@@ -5868,4 +5868,6 @@
     <string name="average_slope">Просечан нагиб</string>
     <string name="shared_string_last_uphill">Последњи успон</string>
     <string name="shared_string_last_downhill">Последња низбрдица</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Скијашке стазе и руте</string>
+    <string name="rendering_attr_pisteRoutes_name">Скијашке стазе и руте</string>
 </resources>

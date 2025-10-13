@@ -1,19 +1,20 @@
 package net.osmand.osm.edit;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
-import net.osmand.router.RouteResultPreparation;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 
+@SuppressWarnings("serial")
 public abstract class Entity implements Serializable {
 	public enum EntityType {
 		NODE,
@@ -80,8 +81,8 @@ public abstract class Entity implements Serializable {
 
 		public String getOsmUrl() {
 			final String browseUrl = "https://www.openstreetmap.org/";
-			if (type == EntityType.NODE) return browseUrl + "node/" + (id >> RouteResultPreparation.SHIFT_ID);
-			if (type == EntityType.WAY) return browseUrl + "way/" + (id >> RouteResultPreparation.SHIFT_ID);
+			if (type == EntityType.NODE) return browseUrl + "node/" + (id >> ObfConstants.SHIFT_ID);
+			if (type == EntityType.WAY) return browseUrl + "way/" + (id >> ObfConstants.SHIFT_ID);
 			if (type == EntityType.RELATION) return browseUrl + "relation/" + id;
 			return browseUrl;
 		}
@@ -314,26 +315,33 @@ public abstract class Entity implements Serializable {
 	}
 
 	public Set<String> getIsInNames() {
+		Set<String> set = new TreeSet<String>();
+		String city = getTag(OSMTagKey.ADDR_CITY);
+		if (!Algorithms.isEmpty(city)) {
+			set.add(city.trim());
+		}
+		city = getTag(OSMTagKey.ADDR_SUBURB); // add anyway both could be present
+		if (!Algorithms.isEmpty(city)) {
+			set.add(city.trim());
+		}
+		// place is synonym of street i.e. group of buildings (don't add it)
+//		String place = getTag(OSMTagKey.ADDR_PLACE);
+//		if (set.isEmpty() && !Algorithms.isEmpty(place)) {
+//			set.add(city.trim());
+//		}
 		String values = getTag(OSMTagKey.IS_IN);
-		if (values == null) {
-			String city = getTag(OSMTagKey.ADDR_CITY);
-			String place = getTag(OSMTagKey.ADDR_PLACE);
-			if(!Algorithms.isEmpty(city)) {
-				return Collections.singleton(city.trim());	
-			} else if(!Algorithms.isEmpty(place)) {
-				return Collections.singleton(place.trim());	
+		if (values != null) {
+			String[] vls1 = values.split(";");
+			for (String vl1 : vls1) {
+				String[] vls2 = vl1.trim().split(",");
+				for (String vl2 : vls2) {
+					if (!Algorithms.isEmpty(vl2)) {
+						set.add(vl2.trim());
+					}
+				}
 			}
-			return Collections.emptySet();
 		}
-		if (values.indexOf(';') != -1) {
-			String[] splitted = values.split(";");
-			Set<String> set = new HashSet<String>(splitted.length);
-			for (int i = 0; i < splitted.length; i++) {
-				set.add(splitted[i].trim());
-			}
-			return set;
-		}
-		return Collections.singleton(values.trim());
+		return set;
 	}
 
 	public void entityDataLoaded() {
