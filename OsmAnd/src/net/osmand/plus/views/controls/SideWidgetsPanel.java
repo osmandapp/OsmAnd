@@ -21,6 +21,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -61,6 +62,8 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	private int screenWidth = -1;
 	private int screenHeight = -1;
+	private int topInset = -1;
+	private int bottomInset = -1;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -294,9 +297,16 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 			}
 
 			if (screenHeight != -1) {
-				// TODO "occupied" is a hard-coded value
-				//  calculate real system bars heights and dots panel height if present
-				int occupied = AndroidUtils.dpToPx(getContext(), 120);
+				int occupied = 0;
+				if (topInset != -1 && bottomInset != -1) {
+					occupied = topInset + bottomInset;
+					occupied += getPaddingTop() + getPaddingBottom();
+					if (getLayoutParams() instanceof MarginLayoutParams lp) {
+						occupied += lp.topMargin + lp.bottomMargin;
+					}
+					int dotsHeight = getContext().getResources().getDimensionPixelSize(R.dimen.radius_large);
+					occupied += dotsHeight;
+				}
 				int maxAllowedHeight = screenHeight - occupied;
 
 				if (measuredHeight > maxAllowedHeight) {
@@ -337,5 +347,11 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	public void setScreenSize(@NonNull Activity activity) {
 		screenWidth = AndroidUtils.getScreenWidth(activity);
 		screenHeight = AndroidUtils.getScreenHeight(activity);
+	}
+
+	public void setInsets(@NonNull Insets insets) {
+		topInset = insets.top;
+		bottomInset = insets.bottom;
+		wrapContentAroundPage(null);
 	}
 }

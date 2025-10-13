@@ -157,16 +157,16 @@ public class InsetsUtils {
 		processInsets(insetSupportedFragment, rootView, paddingsView, true);
 	}
 
-	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView, @Nullable View paddingsView, boolean consume) {
-		InsetTargetsCollection targetsCollection = insetSupportedFragment.getInsetTargets();
+	public static void processInsets(@NonNull ISupportInsets iSupportInsets, @NonNull View rootView, @Nullable View paddingsView, boolean consume) {
+		InsetTargetsCollection targetsCollection = iSupportInsets.getInsetTargets();
 
 		InsetsUtils.setWindowInsetsListener(rootView, (v, insets) -> {
 			View processedView = paddingsView != null ? paddingsView : v;
 			processInsets(processedView, targetsCollection, insets);
 			processSystemBarScrims(insets, v);
 
-			insetSupportedFragment.setLastRootInsets(insets);
-			insetSupportedFragment.onApplyInsets(insets);
+			iSupportInsets.setLastRootInsets(insets);
+			iSupportInsets.onApplyInsets(insets);
 		}, consume);
 	}
 

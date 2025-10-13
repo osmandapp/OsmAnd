@@ -37,6 +37,7 @@ import java.util.List;
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity implements ISupportInsets {
 
 	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
+	private WindowInsetsCompat lastRootInsets;
 
 	@ColorRes
 	protected int getStatusBarColorId() {
@@ -171,11 +172,11 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 	@Nullable
 	@Override
 	public WindowInsetsCompat getLastRootInsets() {
-		return null;
+		return lastRootInsets;
 	}
 
 	@Override
 	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
-
+		this.lastRootInsets = rootInsets;
 	}
 }

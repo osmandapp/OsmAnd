@@ -20,6 +20,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
@@ -196,6 +197,9 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public void setMapRendererChanged(boolean mapRendererChanged) {
 		this.mapRendererChanged = mapRendererChanged;
+	}
+
+	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
 	}
 
 	@NonNull
