@@ -30,6 +30,7 @@ import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
+import net.osmand.plus.backup.AutoBackupHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -355,6 +356,7 @@ public class AppInitializer implements IProgress {
 		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app), ExplorePlacesOnlineProvider.class);
 		app.helpArticlesHelper = startupInit(new HelpArticlesHelper(app), HelpArticlesHelper.class);
 		app.clickableWayHelper = startupInit(new ClickableWayHelper(app), ClickableWayHelper.class);
+		app.autoBackupHelper = startupInit(new AutoBackupHelper(app), AutoBackupHelper.class);
 		initOpeningHoursParser();
 	}
 

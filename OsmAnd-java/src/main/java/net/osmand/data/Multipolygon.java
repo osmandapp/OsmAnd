@@ -115,8 +115,9 @@ public class Multipolygon {
 	 */
 	public boolean containsPoint(double latitude, double longitude) {
 		// fast check
-		if (maxLat + 0.3 < latitude || minLat - 0.3 > latitude ||
-				maxLon + 0.3 < longitude || minLon - 0.3 > longitude) {
+		double d = 0.05;
+		if (maxLat + d < latitude || minLat - d > latitude ||
+				maxLon + d < longitude || minLon - d > longitude) {
 			return false;
 		}
 

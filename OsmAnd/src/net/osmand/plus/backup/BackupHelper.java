@@ -15,6 +15,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.backup.BackupDbHelper.AutoSyncActionType;
+import net.osmand.plus.backup.BackupDbHelper.AutoSyncEvent;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.*;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -107,7 +109,7 @@ public class BackupHelper {
 	private List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
 
 	private PrepareBackupTask prepareBackupTask;
-	private PrepareBackupResult backup = new PrepareBackupResult();
+	private PrepareBackupResult backup = new PrepareBackupResult(false);
 	private long maximumAccountSize;
 
 	private final BackupListeners backupListeners = new BackupListeners();
@@ -228,6 +230,11 @@ public class BackupHelper {
 		}
 	}
 
+	@Nullable
+	public UploadedFileInfo getUploadedFileInfo(@NonNull String type, @NonNull String fileName) {
+		return dbHelper.getUploadedFileInfo(type, fileName);
+	}
+
 	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName,
 			long updateTime) {
 		dbHelper.updateFileUploadTime(type, fileName, updateTime);
@@ -236,6 +243,11 @@ public class BackupHelper {
 	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName,
 			@NonNull String md5Hex) {
 		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
+	}
+
+	public void addAutoSyncEvent(@NonNull String type, @NonNull String name, long time,
+			long fileSize, @NonNull AutoSyncActionType actionType) {
+		dbHelper.addAutoSyncEvent(new AutoSyncEvent(type, name, time, fileSize, actionType));
 	}
 
 	public void updateBackupUploadTime() {
@@ -260,10 +272,12 @@ public class BackupHelper {
 		app.getInAppPurchaseHelper().resetPurchases();
 	}
 
-	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType) {
-		return BackupUtils.getBackupTypePref(app, exportType);
+	@NonNull
+	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType, boolean autoSync) {
+		return autoSync ? BackupUtils.getAutoBackupTypePref(app, exportType) : BackupUtils.getBackupTypePref(app, exportType);
 	}
 
+	@NonNull
 	public CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull ExportType exportType) {
 		return BackupUtils.getVersionHistoryTypePref(app, exportType);
 	}
@@ -382,12 +396,19 @@ public class BackupHelper {
 	}
 
 	public boolean prepareBackup() {
+		return prepareBackup(false, null);
+	}
+
+	public boolean prepareBackup(boolean autoSync, @Nullable OnPrepareBackupListener listener) {
 		if (isBackupPreparing()) {
 			return false;
 		}
-		PrepareBackupTask prepareBackupTask = new PrepareBackupTask(app, new OnPrepareBackupListener() {
+		PrepareBackupTask prepareBackupTask = new PrepareBackupTask(app, autoSync, new OnPrepareBackupListener() {
 			@Override
 			public void onBackupPreparing() {
+				if (listener != null) {
+					listener.onBackupPreparing();
+				}
 				for (OnPrepareBackupListener listener : prepareBackupListeners) {
 					listener.onBackupPreparing();
 				}
@@ -396,6 +417,9 @@ public class BackupHelper {
 			@Override
 			public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
 				setPrepareBackupTask(null);
+				if (listener != null) {
+					listener.onBackupPrepared(backupResult);
+				}
 				for (OnPrepareBackupListener listener : prepareBackupListeners) {
 					listener.onBackupPrepared(backupResult);
 				}
@@ -424,7 +448,7 @@ public class BackupHelper {
 	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type, long lastModifiedTime,
 			@NonNull StreamWriter streamWriter,
-			@Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
+			@Nullable OnUploadFileListener listener, boolean autoSync) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -433,6 +457,7 @@ public class BackupHelper {
 		params.put("name", fileName);
 		params.put("type", type);
 		params.put("clienttime", String.valueOf(lastModifiedTime));
+		params.put("autoSync", String.valueOf(autoSync));
 
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
@@ -476,19 +501,24 @@ public class BackupHelper {
 				});
 		String status = "";
 		long uploadTime = 0;
+		long fileSize = 0;
 		String response = networkResult.getResponse();
 		if (!Algorithms.isEmpty(response)) {
 			try {
 				JSONObject responseObj = new JSONObject(response);
 				status = responseObj.optString("status", "");
 				uploadTime = Long.parseLong(responseObj.optString("updatetime", "0"));
+				fileSize = Long.parseLong(responseObj.optString("filesize", "0"));
 			} catch (JSONException | NumberFormatException e) {
-				LOG.error("Cannot obtain updatetime after upload. Server response: " + response);
+				LOG.error("Cannot obtain updatetime or filesize after upload. Server response: " + response);
 			}
 		}
 		String error = networkResult.getError();
 		if (error == null && status.equals("ok")) {
 			updateFileUploadTime(type, fileName, uploadTime);
+			if (autoSync) {
+				addAutoSyncEvent(type, fileName, uploadTime, fileSize, AutoSyncActionType.UPLOAD);
+			}
 		}
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
@@ -610,7 +640,7 @@ public class BackupHelper {
 
 	@NonNull
 	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile,
-			@Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
+			@Nullable OnDownloadFileListener listener, boolean autoSync) throws UserNotRegisteredException {
 		checkRegistered();
 
 		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
@@ -625,6 +655,7 @@ public class BackupHelper {
 			params.put("name", fileName);
 			params.put("type", type);
 			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
+			params.put("autoSync", String.valueOf(autoSync));
 
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
@@ -678,6 +709,9 @@ public class BackupHelper {
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
 		}
+		if (error == null && autoSync) {
+			addAutoSyncEvent(type, fileName, System.currentTimeMillis(), remoteFile.getFilesize(), AutoSyncActionType.DOWNLOAD);
+		}
 		if (listener != null) {
 			listener.onFileDownloadDone(type, fileName, error);
 		}
@@ -686,8 +720,8 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void collectLocalFiles(@Nullable OnCollectLocalFilesListener listener) {
-		AsyncTask<Void, LocalFile, List<LocalFile>> task = new CollectLocalFilesTask(app, listener);
+	void collectLocalFiles(boolean autoSync, @Nullable OnCollectLocalFilesListener listener) {
+		AsyncTask<Void, LocalFile, List<LocalFile>> task = new CollectLocalFilesTask(app, autoSync, listener);
 		OsmAndTaskManager.executeTask(task);
 	}
 
@@ -695,7 +729,7 @@ public class BackupHelper {
 	void generateBackupInfo(@NonNull Map<String, LocalFile> localFiles,
 			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
 			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
-			@Nullable OnGenerateBackupInfoListener listener) {
-		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, listener), executor);
+			boolean autoSync, @Nullable OnGenerateBackupInfoListener listener) {
+		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, autoSync, listener), executor);
 	}
 }

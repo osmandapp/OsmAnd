@@ -5152,4 +5152,10 @@
     <string name="poi_hazard_additional_queues_likely">Oftaj trafik-ŝtopiĝoj</string>
     <string name="poi_hazard_additional_side_winds">Flankaj ventoj</string>
     <string name="poi_hazard_additional_ice">Glacio</string>
+    <string name="poi_piste_downhill">Skivojo alpa (malsuprenira);skikurso;skitrako</string>
+    <string name="poi_route_activity_type_skiing">Skivojoj</string>
+    <string name="poi_historic_spacecraft">Kosmoŝipo historia</string>
+    <string name="poi_barrier_chain">Ĉeno (barilo)</string>
+    <string name="poi_barrier_log">Faligita trunko</string>
+    <string name="poi_barrier_sliding_gate">Ŝovpordego</string>
 </resources>

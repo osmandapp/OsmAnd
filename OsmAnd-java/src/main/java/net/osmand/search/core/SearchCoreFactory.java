@@ -479,8 +479,8 @@ public class SearchCoreFactory {
 								}
 								sr.objectType = ObjectType.POSTCODE;
 								sr.priorityDistance = 0;
-							} else {
-								// TODO not correct object type is not village probably
+							} else if (type == CityType.HAMLET || type == CityType.SUBURB || 
+									type == CityType.VILLAGE || type == CityType.BOUNDARY) {
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
 									return false;

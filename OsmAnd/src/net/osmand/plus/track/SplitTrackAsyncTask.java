@@ -113,7 +113,6 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		}
 
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
-
 		for (int segmentIdx = 0; segmentIdx < group.getTrack().getSegments().size(); segmentIdx++) {
 			if (progress != null && progress.isInterrupted()) {
 				return;
@@ -123,7 +122,6 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 				int splitTime = group.getSplitTime();
 				double splitDistance = group.getSplitDistance();
 				boolean uphillDownhill = group.isSplitUphillDownhill();
-
 				for (GpxTrackAnalysis analysis : getTrackAnalysis(segment, splitTime, splitDistance, uphillDownhill, joinSegments)) {
 					if (progress != null && progress.isInterrupted()) {
 						return;

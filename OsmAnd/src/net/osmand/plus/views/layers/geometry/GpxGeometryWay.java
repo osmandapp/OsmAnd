@@ -99,11 +99,12 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				return;
 			}
 
+			boolean hasMapRenderer = hasMapRenderer();
 			Track3DStyle track3DStyle = getTrack3DStyle();
-			if (hasMapRenderer() && track3DStyle != null && track3DStyle.getVisualizationType().is3dType()) {
+			if (hasMapRenderer && track3DStyle != null && track3DStyle.getVisualizationType().is3dType()) {
 				updateGpx3dWay(tb, points, routeSegments, isHeightmapsActive());
 			} else if (coloringType.isTrackSolid()) {
-				if (hasMapRenderer()) {
+				if (hasMapRenderer) {
 					Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
 					GeometrySolidWayStyle<?> style = getSolidWayStyle(customColor);
 					styleMap.put(0, style);
@@ -112,7 +113,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 					updateWay(new GeometryWayWptPtProvider(points), tb);
 				}
 			} else if (coloringType.isGradient()) {
-				if (hasMapRenderer()) {
+				if (hasMapRenderer) {
 					updateGpxGradientWay(tb, points, isHeightmapsActive());
 				} else {
 					updateWay(new GeometryWayWptPtProvider(points), tb);

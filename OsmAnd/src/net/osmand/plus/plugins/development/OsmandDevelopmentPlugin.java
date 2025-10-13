@@ -354,20 +354,24 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
-		AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
+		// Disable AutoZoom dev chart
+		//AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
 	}
 
 	@Nullable
 	@Override
 	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart, @NonNull GpxTrackAnalysis analysis, @NonNull GPXDataSetType graphType, @NonNull GPXDataSetAxisType chartAxisType, boolean calcWithoutGaps, boolean useRightAxis) {
-		return AutoZoomBySpeedHelper.getOrderedLineDataSet(app, chart, analysis, graphType, chartAxisType,
-				calcWithoutGaps, useRightAxis);
+		// Disable AutoZoom dev chart
+		// return AutoZoomBySpeedHelper.getOrderedLineDataSet(app, chart, analysis, graphType, chartAxisType, calcWithoutGaps, useRightAxis);
+		return null;
 	}
 
 	@Nullable
 	@Override
 	protected TrackPointsAnalyser getTrackPointsAnalyser() {
-		return AutoZoomBySpeedHelper.getTrackPointsAnalyser(app);
+		// Disable AutoZoom dev chart
+		// return AutoZoomBySpeedHelper.getTrackPointsAnalyser(app);
+		return null;
 	}
 
 	private boolean avgStatsEnabled = false;

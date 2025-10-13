@@ -61,6 +61,8 @@ class GpxTrackAnalysis {
 	var lastUphill: ElevationDiffsCalculator.SlopeInfo? = null
 	var lastDownhill: ElevationDiffsCalculator.SlopeInfo? = null
 
+	private var _diffElevationUp: Double = 0.0
+	private var _diffElevationDown: Double = 0.0
 
 	fun getGpxParameter(parameter: GpxParameter): Any? {
 		return parameters[parameter] ?: parameter.defaultValue
@@ -296,8 +298,6 @@ class GpxTrackAnalysis {
 		pointsAnalyser: TrackPointsAnalyser?,
 		vararg splitSegments: SplitSegment
 	): GpxTrackAnalysis {
-		val calculations = FloatArray(1)
-
 		var startTimeOfSingleSegment: Long = 0
 		var endTimeOfSingleSegment: Long = 0
 
@@ -323,9 +323,26 @@ class GpxTrackAnalysis {
 		var sensorCadenceCount = 0
 		var totalSensorCadenceSum = 0.0
 
-		var _totalDistance = 0.0f
+		var _totalDistance = 0f
+		var _startTime = Long.MAX_VALUE
+		var _endTime = Long.MIN_VALUE
+		var _expectedRouteDuration = 0L
+		var _points = 0
+		var _timeMoving = 0L
+		var _totalDistanceMoving = 0f
+		var _minSpeed = Float.MAX_VALUE
+		var _maxSpeed = 0f
+		var _minElevation = 99999.0
+		var _maxElevation = -100.0
+		var _maxSensorSpeed = 0f
+		var _maxSensorCadence = 0f
+		var _minSensorHr = 0
+		var _maxSensorHr = 0
+		var _maxSensorTemperature = 0
+		var _maxSensorPower = 0
 
-		points = 0
+		_diffElevationUp = 0.0
+		_diffElevationDown = 0.0
 
 		pointAttributes = mutableListOf()
 		availableAttributes = mutableSetOf()
@@ -335,8 +352,8 @@ class GpxTrackAnalysis {
 			var segmentDistance = 0f
 			metricEnd += s.metricEnd
 			secondaryMetricEnd += s.secondaryMetricEnd
-			points += numberOfPoints
-			expectedRouteDuration += getExpectedRouteSegmentDuration(s)
+			_points += numberOfPoints
+			_expectedRouteDuration += getExpectedRouteSegmentDuration(s)
 
 			for (j in 0 until numberOfPoints) {
 				val point = s[j]
@@ -364,8 +381,8 @@ class GpxTrackAnalysis {
 							}
 						}
 					}
-					startTime = minOf(startTime, time)
-					endTime = maxOf(endTime, time)
+					_startTime = minOf(_startTime, time)
+					_endTime = maxOf(_endTime, time)
 				}
 				updateBounds(point)
 
@@ -375,41 +392,45 @@ class GpxTrackAnalysis {
 				}
 				updateHdop(point)
 
+				var distance = point.attributes?.distance ?: -1f
 				if (j > 0) {
 					val prev = s[j - 1]
-
-					calculations[0] = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
-
-					if (calculations[0] > maxDistanceBetweenPoints) {
-						maxDistanceBetweenPoints = calculations[0]
+					if (distance < 0f) {
+						distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
 					}
-
-					_totalDistance += calculations[0]
-					segmentDistance += calculations[0]
+					if (distance > maxDistanceBetweenPoints) {
+						maxDistanceBetweenPoints = distance
+					}
+					_totalDistance += distance
+					segmentDistance += distance
 					point.distance = segmentDistance.toDouble()
 
 					timeDiffMillis = maxOf(0, point.time - prev.time)
 					timeDiff = (timeDiffMillis / 1000).toInt()
 
 					if (!hasSpeedInTrack && speed == 0f && timeDiff > 0) {
-						speed = calculations[0] / timeDiff
+						speed = distance / timeDiff
 					}
 
 					val timeSpecified = point.time != 0L && prev.time != 0L
-					if (speed > 0 && timeSpecified && calculations[0] > timeDiffMillis / 10000f) {
-						timeMoving += timeDiffMillis
-						totalDistanceMoving += calculations[0]
+					if (speed > 0 && timeSpecified && distance > timeDiffMillis / 10000f) {
+						_timeMoving += timeDiffMillis
+						_totalDistanceMoving += distance
 						if (s.segment.generalSegment && !point.firstPoint) {
 							timeMovingOfSingleSegment += timeDiffMillis
-							distanceMovingOfSingleSegment += calculations[0]
+							distanceMovingOfSingleSegment += distance
 						}
 					}
+				} else {
+					distance = 0f
+					timeDiffMillis = 0
+					timeDiff = 0
 				}
 
-				minSpeed = minOf(speed, minSpeed)
+				_minSpeed = minOf(speed, _minSpeed)
 				if (speed > 0 && !speed.isInfinite()) {
 					totalSpeedSum += speed
-					maxSpeed = maxOf(speed, maxSpeed)
+					_maxSpeed = maxOf(speed, _maxSpeed)
 					speedCount++
 				}
 				val isNaN = point.ele.isNaN()
@@ -417,14 +438,14 @@ class GpxTrackAnalysis {
 				if (!isNaN) {
 					totalElevation += point.ele.toFloat()
 					elevationPoints++
-					minElevation = minOf(point.ele, minElevation)
-					maxElevation = maxOf(point.ele, maxElevation)
+					_minElevation = minOf(point.ele, _minElevation)
+					_maxElevation = maxOf(point.ele, _maxElevation)
 				}
 
 				var firstPoint = false
 				var lastPoint = false
 				if (s.segment.generalSegment) {
-					distanceOfSingleSegment += calculations[0]
+					distanceOfSingleSegment += distance
 					if (point.firstPoint) {
 						firstPoint = j > 0;
 						distanceOfSingleSegment = 0f
@@ -438,54 +459,81 @@ class GpxTrackAnalysis {
 						totalDistanceMovingWithoutGaps += distanceMovingOfSingleSegment
 					}
 				}
-				val distance = if (j > 0) calculations[0] else 0f
-				val attribute = PointAttributes(distance, timeDiff.toFloat(), firstPoint, lastPoint).apply {
-					this.speed = speed
-					this.elevation = elevation
+
+				var attributes = point.attributes
+				if (attributes == null) {
+					attributes = PointAttributes(distance, timeDiff.toFloat(), firstPoint, lastPoint).apply {
+						this.speed = speed
+						this.elevation = elevation
+					}
+				} else {
+					attributes.distance = distance
+					attributes.timeDiff = timeDiff.toFloat()
+					attributes.firstPoint = firstPoint
+					attributes.lastPoint = lastPoint
+					attributes.speed = speed
+					attributes.elevation = elevation
 				}
-				addWptAttribute(point, attribute, pointsAnalyser)
-				if (attribute.sensorSpeed > 0 && !attribute.sensorSpeed.isInfinite()) {
-					maxSensorSpeed = maxOf(attribute.sensorSpeed, maxSensorSpeed)
+				addWptAttribute(point, attributes, pointsAnalyser)
+				if (attributes.sensorSpeed > 0 && !attributes.sensorSpeed.isInfinite()) {
+					_maxSensorSpeed = maxOf(attributes.sensorSpeed, _maxSensorSpeed)
 					sensorSpeedCount++
-					totalSensorSpeedSum += attribute.sensorSpeed
+					totalSensorSpeedSum += attributes.sensorSpeed
 				}
 
-				if (attribute.bikeCadence > 0) {
-					maxSensorCadence = maxOf(attribute.bikeCadence, maxSensorCadence)
+				if (attributes.bikeCadence > 0) {
+					_maxSensorCadence = maxOf(attributes.bikeCadence, _maxSensorCadence)
 					sensorCadenceCount++
-					totalSensorCadenceSum += attribute.bikeCadence
+					totalSensorCadenceSum += attributes.bikeCadence
 				}
 
-				if (attribute.heartRate > 0) {
-					val hr = attribute.heartRate.toInt()
-					maxSensorHr = maxOf(hr, maxSensorHr)
-					minSensorHr = if (minSensorHr == 0) hr else minOf(hr, minSensorHr)
+				if (attributes.heartRate > 0) {
+					val hr = attributes.heartRate.toInt()
+					_maxSensorHr = maxOf(hr, _maxSensorHr)
+					_minSensorHr = if (_minSensorHr == 0) hr else minOf(hr, _minSensorHr)
 					sensorHrCount++
-					totalSensorHrSum += attribute.heartRate
+					totalSensorHrSum += attributes.heartRate
 				}
 
-				val temperature = attribute.getTemperature()
+				val temperature = attributes.getTemperature()
 				if (temperature > 0) {
-					maxSensorTemperature = maxOf(temperature.toInt(), maxSensorTemperature)
+					_maxSensorTemperature = maxOf(temperature.toInt(), _maxSensorTemperature)
 					sensorTemperatureCount++
 					totalSensorTemperatureSum += temperature
 				}
 
-				if (attribute.bikePower > 0) {
-					maxSensorPower = maxOf(attribute.bikePower.toInt(), maxSensorPower)
+				if (attributes.bikePower > 0) {
+					_maxSensorPower = maxOf(attributes.bikePower.toInt(), _maxSensorPower)
 					sensorPowerCount++
-					totalSensorPowerSum += attribute.bikePower
+					totalSensorPowerSum += attributes.bikePower
 				}
 			}
 			processElevationDiff(s)
 		}
-
 
 		if (!joinSegments && totalDistanceWithoutGaps > 0) {
 			totalDistance = totalDistanceWithoutGaps
 		} else {
 			totalDistance = _totalDistance
 		}
+		points = _points
+		expectedRouteDuration = _expectedRouteDuration
+		startTime = _startTime
+		endTime = _endTime
+		timeMoving = _timeMoving
+		totalDistanceMoving = _totalDistanceMoving
+		minSpeed = _minSpeed
+		maxSpeed = _maxSpeed
+		minElevation = _minElevation
+		maxElevation = _maxElevation
+		maxSensorSpeed = _maxSensorSpeed
+		maxSensorCadence = _maxSensorCadence
+		minSensorHr = _minSensorHr
+		maxSensorHr = _maxSensorHr
+		maxSensorTemperature = _maxSensorTemperature
+		maxSensorPower = _maxSensorPower
+		diffElevationUp = _diffElevationUp
+		diffElevationDown = _diffElevationDown
 
 		checkUnspecifiedValues(fileTimeStamp)
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount)
@@ -496,21 +544,25 @@ class GpxTrackAnalysis {
 		avgSensorPower = processAverageValue(totalSensorPowerSum, sensorPowerCount)
 		avgSensorTemperature =
 			processAverageValue(totalSensorTemperatureSum, sensorTemperatureCount)
+
 		return this
 	}
 
+
 	private fun addWptAttribute(
-		point: WptPt, attribute: PointAttributes, pointsAnalyser: TrackPointsAnalyser?
+		point: WptPt, attributes: PointAttributes, pointsAnalyser: TrackPointsAnalyser?
 	) {
-		if (!hasSpeedData() && attribute.speed > 0) {
+		if (!hasSpeedData() && attributes.speed > 0) {
 			setHasData(POINT_SPEED, true)
 		}
-		if (!hasElevationData() && !attribute.elevation.isNaN()) {
+		if (!hasElevationData() && !attributes.elevation.isNaN()) {
 			setHasData(POINT_ELEVATION, true)
 		}
-		point.attributes = attribute
-		pointsAnalyser?.onAnalysePoint(this, point, attribute)
-		pointAttributes.add(attribute)
+		if (point.attributes != attributes) {
+			point.attributes = attributes
+		}
+		pointsAnalyser?.onAnalysePoint(this, point, attributes)
+		pointAttributes.add(attributes)
 	}
 
 	private fun updateBounds(point: WptPt) {
@@ -601,8 +653,8 @@ class GpxTrackAnalysis {
 		if (distances != null && elevations != null && indexes != null) {
 			val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations, indexes)
 			elevationDiffsCalc.calculateElevationDiffs()
-			diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
-			diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
+			_diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
+			_diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
 
 			val segLastUp = elevationDiffsCalc.getLastUphill()
 			val segLastDown = elevationDiffsCalc.getLastDownhill()

@@ -700,6 +700,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
+		app.getAutoBackupHelper().runAutoBackup();
 
 		if (System.currentTimeMillis() - time > 50) {
 			LOG.error("onResume for MapActivity took " + (System.currentTimeMillis() - time) + " ms");

@@ -345,17 +345,24 @@ public class BinaryMapAddressReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				publishRawData(resultMatcher, c);
-				return (matcher == null || matcher.matches(c)) ? c : null;
+				if (c != null) {
+					c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+					publishRawData(resultMatcher, c);
+				}
+				return c != null && (matcher == null || matcher.matches(c)) ? c : null;
 			case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER:
 				int type = codedIS.readUInt32();
 				CityType[] vls = CityType.values();
-				if (type < vls.length) {
+				if (type <= CityType.POSTCODE.ordinal()) {
 					c = new City(vls[type]);
 				}
+				// Since 5.2 we skip unsupported city types c == null
 				break;
 			case OsmandOdb.CityIndex.ID_FIELD_NUMBER:
-				c.setId(codedIS.readUInt64());
+				long id = codedIS.readUInt64();
+				if (c != null) {
+					c.setId(id);
+				}
 				break;
 			case OsmandOdb.CityIndex.ATTRIBUTETAGIDS_FIELD_NUMBER:
 				int tgid = codedIS.readUInt32();
@@ -368,7 +375,7 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.CityIndex.ATTRIBUTEVALUES_FIELD_NUMBER:
 				String nm = codedIS.readString();
-				if (additionalTags != null && additionalTags.size() > 0) {
+				if (c != null && additionalTags != null && additionalTags.size() > 0) {
 					String tg = additionalTags.pollFirst();
 					if (tg.startsWith("name:")) {
 						c.setName(tg.substring("name:".length()), nm);
@@ -377,7 +384,9 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.CityIndex.NAME_EN_FIELD_NUMBER:
 				String enName = codedIS.readString();
-				c.setEnName(enName);
+				if (c != null) {
+					c.setEnName(enName);
+				}
 				break;
 			case OsmandOdb.CityIndex.BOUNDARY_FIELD_NUMBER:
 				int size = codedIS.readRawVarint32();
@@ -394,22 +403,25 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.CityIndex.NAME_FIELD_NUMBER:
 				String name = codedIS.readString();
 				if (c == null) {
-					// this is strange
+					// TODO should be deleted in 5.3 (as server side assigns 6)
 					c = City.createPostcode(name);
 				}
-				c.setName(name);
+				if (c != null) {
+					c.setName(name);
+				}
 				break;
 			case OsmandOdb.CityIndex.X_FIELD_NUMBER:
 				x = codedIS.readUInt32();
 				break;
 			case OsmandOdb.CityIndex.Y_FIELD_NUMBER:
 				y = codedIS.readUInt32();
-				c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
 				break;
 			case OsmandOdb.CityIndex.SHIFTTOCITYBLOCKINDEX_FIELD_NUMBER:
 				long offset = readInt();
 				offset += filePointer;
-				c.setFileOffset(offset);
+				if (c != null) {
+					c.setFileOffset(offset);
+				}
 				break;
 			default:
 				skipUnknownField(t);

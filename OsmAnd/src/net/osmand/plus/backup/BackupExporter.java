@@ -39,6 +39,7 @@ public class BackupExporter extends Exporter {
 	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
 	private List<RemoteFile> oldFilesToDelete = new ArrayList<>();
+	private final boolean autoSync;
 
 	public interface NetworkExportProgressListener {
 		void itemExportStarted(@NonNull String type, @NonNull String fileName, int work);
@@ -52,10 +53,11 @@ public class BackupExporter extends Exporter {
 		void networkExportDone(@NonNull Map<String, String> errors);
 	}
 
-	BackupExporter(@NonNull BackupHelper backupHelper, @Nullable NetworkExportProgressListener listener) {
+	BackupExporter(@NonNull BackupHelper backupHelper, @Nullable NetworkExportProgressListener listener, boolean autoSync) {
 		super(null);
 		this.backupHelper = backupHelper;
 		this.listener = listener;
+		this.autoSync = autoSync;
 	}
 
 	@NonNull
@@ -144,7 +146,7 @@ public class BackupExporter extends Exporter {
 		OnUploadItemListener uploadItemListener = getOnUploadItemListener(itemsProgress, dataProgress, errors);
 		OnDeleteFilesListener deleteFilesListener = getOnDeleteFilesListener(itemsProgress, dataProgress);
 
-		NetworkWriter networkWriter = new NetworkWriter(backupHelper, uploadItemListener);
+		NetworkWriter networkWriter = new NetworkWriter(backupHelper, uploadItemListener, autoSync);
 		writeItems(networkWriter);
 		deleteFiles(deleteFilesListener);
 		deleteOldFiles(deleteFilesListener);

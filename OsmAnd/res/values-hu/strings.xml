@@ -3936,7 +3936,7 @@
     <string name="benefits_for_contributors">Előnyök az OSM aktív szerkesztőinek</string>
     <string name="benefits_for_contributors_primary_descr">Az aktív OpenStreetMap.org szerkesztők korlátlan óránkénti térképfrissítésre lehetnek jogosultak.</string>
     <string name="benefits_for_contributors_secondary_descr">Jelentkezzen be az OpenStreetMapre, hogy ellenőrizze, jogosult-e korlátlan havi és óránkénti térképfrissítésre.</string>
-    <string name="enough_contributions_descr">Gratulálunk, elegendő OpenStreetMap-szerkesztést végzett, így mostantól korlátlanul élvezheti az OsmAnd térképfrissítéseit!</string>
+    <string name="enough_contributions_descr">Gratulálunk, elegendő OpenStreetMap-szerkesztést végzett, így most korlátlanul élvezheti az OsmAnd térképfrissítéseit!</string>
     <string name="shared_string_contributions">Hozzájárulások</string>
     <string name="contributions_may_calculate_with_delay">A szerkesztések kiszámítása több órát is igénybe vehet.</string>
     <string name="map_updates_are_unavailable_yet">Még nem érhető el térképfrissítés :-(</string>
@@ -5707,7 +5707,7 @@
     <string name="set_start_point">Kiindulópont megadása</string>
     <string name="battery">akkumulátor</string>
     <string name="shared_string_switch">Kapcsoló</string>
-    <string name="ski_route_switch_style_description">Fedezze fel a sípályákat, felvonókat és egyebeket a Tél és síelés térképstílussal.</string>
+    <string name="ski_route_switch_style_description">Fedezze fel a sípályákat, lejtőket, felvonókat a Tél és síelés térképstílussal.</string>
     <string name="release_5_1">• Hozzáadott támogatás webes és platformfüggetlen vásárlásokhoz\n\n • A hőmérsékleti mértékegységek átkerültek az Általános beállításokba a könnyebb hozzáférés érdekében\n\n • Hozzáadott akkumulátorszint-jelző a BLE érzékelőkhöz\n\n • Új, intuitívabb felhasználói felület a pontok kiválasztásához a Navigációban\n\n • Widget láthatóság javítása új körvonallal\n\n • Hozzáadott emelkedők/lejtők elemző\n\n • Bővített Wikipédia és Wikivoyage integráció további érdekes helyekhez (POI).</string>
     <string name="osm_live_payment_renews_3_years">Megújul 3 évente</string>
     <string name="years_3">3 év</string>
@@ -5830,4 +5830,6 @@
     <string name="average_slope">Átlagos meredekség</string>
     <string name="shared_string_last_uphill">Utolsó emelkedő</string>
     <string name="shared_string_last_downhill">Utolsó lejtő</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Sípályák és síútvonalak</string>
+    <string name="rendering_attr_pisteRoutes_name">Sípályák és síútvonalak</string>
 </resources>

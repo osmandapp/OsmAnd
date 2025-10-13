@@ -11,18 +11,22 @@ import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.settings.backend.ExportCategory;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class BackupDataController extends SwitchBackupTypesController {
+public class AutoBackupController extends SwitchBackupTypesController {
 
-	private static final String PROCESS_ID = "select_cloud_backup_types";
+	private static final String PROCESS_ID = "select_auto_backup_types";
 
-	public BackupDataController(@NonNull OsmandApplication app) {
-		super(app, BackupClearType.ALL, RemoteFilesType.UNIQUE);
+	public AutoBackupController(@NonNull OsmandApplication app) {
+		super(app, BackupClearType.ALL, RemoteFilesType.ALL);
 	}
 
 	@NonNull
@@ -33,7 +37,7 @@ public class BackupDataController extends SwitchBackupTypesController {
 
 	@Override
 	public int getTitleId() {
-		return R.string.backup_data;
+		return R.string.auto_backup_title;
 	}
 
 	@Override
@@ -41,7 +45,7 @@ public class BackupDataController extends SwitchBackupTypesController {
 	protected Map<ExportType, List<?>> collectSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 		for (ExportType exportType : ExportType.visibleValues()) {
-			boolean enabled = backupHelper.getBackupTypePref(exportType, false).get();
+			boolean enabled = backupHelper.getBackupTypePref(exportType, true).get();
 			boolean available = InAppPurchaseUtils.isExportTypeAvailable(app, exportType);
 
 			if (enabled && (available || cloudRestore)) {
@@ -51,9 +55,19 @@ public class BackupDataController extends SwitchBackupTypesController {
 		return selectedItemsMap;
 	}
 
+	@NonNull
+	@Override
+	protected Map<ExportCategory, SettingsCategoryItems> collectData() {
+		Map<ExportType, List<?>> map = new EnumMap<>(ExportType.class);
+		for (ExportType exportType : ExportType.visibleValues()) {
+			map.put(exportType, Collections.emptyList());
+		}
+		return SettingsHelper.categorizeSettingsToOperate(map, true);
+	}
+
 	@Override
 	protected void applyTypePreference(@NonNull ExportType exportType, boolean selected) {
-		backupHelper.getBackupTypePref(exportType, false).set(selected);
+		backupHelper.getBackupTypePref(exportType, true).set(selected);
 	}
 
 	@Override
@@ -64,9 +78,10 @@ public class BackupDataController extends SwitchBackupTypesController {
 	public static void showScreen(@NonNull FragmentActivity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, new BackupDataController(app));
+		dialogManager.register(PROCESS_ID, new AutoBackupController(app));
 
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		BackupDataFragment.showInstance(fragmentManager, PROCESS_ID);
+		BackupTypesFragment.showInstance(fragmentManager, PROCESS_ID);
 	}
 }
+

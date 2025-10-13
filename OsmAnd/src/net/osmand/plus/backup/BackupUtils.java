@@ -43,6 +43,7 @@ import java.util.Map;
 public class BackupUtils {
 
 	public static final String BACKUP_TYPE_PREFIX = "backup_type_";
+	public static final String AUTO_BACKUP_TYPE_PREFIX = "auto_backup_type_";
 	public static final String VERSION_HISTORY_PREFIX = "save_version_history_";
 
 	public static void setLastModifiedTime(@NonNull Context ctx, @NonNull String name) {
@@ -147,6 +148,11 @@ public class BackupUtils {
 	@NonNull
 	public static CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull OsmandApplication app, @NonNull ExportType type) {
 		return app.getSettings().registerBooleanPreference(type.getVersionHistoryTypePrefId(), true).makeGlobal().makeShared();
+	}
+
+	@NonNull
+	public static CommonPreference<Boolean> getAutoBackupTypePref(@NonNull OsmandApplication app, @NonNull ExportType type) {
+		return app.getSettings().registerBooleanPreference(type.getAutoBackupTypePrefId(), false).makeGlobal().makeShared();
 	}
 
 	@NonNull

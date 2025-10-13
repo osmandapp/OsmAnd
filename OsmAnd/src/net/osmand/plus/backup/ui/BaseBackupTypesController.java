@@ -109,7 +109,7 @@ public abstract class BaseBackupTypesController extends BaseDialogController
 	}
 
 	@NonNull
-	private Map<ExportCategory, SettingsCategoryItems> collectData() {
+	protected Map<ExportCategory, SettingsCategoryItems> collectData() {
 		Map<String, RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(remoteFilesType);
 		if (remoteFiles == null) {
 			remoteFiles = Collections.emptyMap();
