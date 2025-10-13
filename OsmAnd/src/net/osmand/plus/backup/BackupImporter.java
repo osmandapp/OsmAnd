@@ -12,7 +12,6 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -47,6 +46,7 @@ class BackupImporter {
 
 	private final BackupHelper backupHelper;
 	private final NetworkImportProgressListener listener;
+	private final boolean autoSync;
 
 	private boolean cancelled;
 
@@ -68,9 +68,10 @@ class BackupImporter {
 		void updateGeneralProgress(int downloadedItems, int uploadedKb);
 	}
 
-	BackupImporter(@NonNull BackupHelper backupHelper, @Nullable NetworkImportProgressListener listener) {
+	BackupImporter(@NonNull BackupHelper backupHelper, @Nullable NetworkImportProgressListener listener, boolean autoSync) {
 		this.listener = listener;
 		this.backupHelper = backupHelper;
+		this.autoSync = autoSync;
 	}
 
 	@NonNull
@@ -160,7 +161,7 @@ class BackupImporter {
 			if (reader != null) {
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
-				String errorStr = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
+				String errorStr = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item), autoSync);
 				boolean error = !Algorithms.isEmpty(errorStr);
 				if (PluginsHelper.isDevelopment()) {
 					LOG.debug("Temp file downloaded " + errorStr + " " + tempFile.getAbsolutePath());
@@ -680,7 +681,7 @@ class BackupImporter {
 
 		@Override
 		public Void call() throws Exception {
-			error = backupHelper.downloadFile(file, remoteFile, getOnDownloadFileListener());
+			error = backupHelper.downloadFile(file, remoteFile, getOnDownloadFileListener(), autoSync);
 			return null;
 		}
 

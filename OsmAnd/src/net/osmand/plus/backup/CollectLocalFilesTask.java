@@ -9,7 +9,6 @@ import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;

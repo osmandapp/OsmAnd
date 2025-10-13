@@ -15,7 +15,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
+import net.osmand.plus.backup.BackupDbHelper.AutoSyncActionType;
+import net.osmand.plus.backup.BackupDbHelper.AutoSyncEvent;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.*;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -222,9 +223,6 @@ public class BackupHelper {
 	public boolean isRegistered() {
 		return !Algorithms.isEmpty(getDeviceId()) && !Algorithms.isEmpty(getAccessToken());
 	}
-	public boolean isAutoSync() {
-		return backup.isAutoSync();
-	}
 
 	private void checkRegistered() throws UserNotRegisteredException {
 		if (Algorithms.isEmpty(getDeviceId()) || Algorithms.isEmpty(getAccessToken())) {
@@ -242,22 +240,14 @@ public class BackupHelper {
 		dbHelper.updateFileUploadTime(type, fileName, updateTime);
 	}
 
-	public void updateUploadedFileInfo(@NonNull String type, @NonNull String fileName,
-			long uploadTime, long fileSize, boolean autoSync) {
-		UploadedFileInfo info = getUploadedFileInfo(type, fileName);
-		if (info != null) {
-			info.setUploadTime(uploadTime);
-			info.setFileSize(fileSize);
-			info.setAutoSync(autoSync);
-		} else {
-			info = new UploadedFileInfo(type, fileName, uploadTime, "", fileSize, autoSync);
-		}
-		dbHelper.updateUploadedFileInfo(info);
-	}
-
 	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName,
 			@NonNull String md5Hex) {
 		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
+	}
+
+	public void addAutoSyncEvent(@NonNull String type, @NonNull String name, long time,
+			long fileSize, @NonNull AutoSyncActionType actionType) {
+		dbHelper.addAutoSyncEvent(new AutoSyncEvent(type, name, time, fileSize, actionType));
 	}
 
 	public void updateBackupUploadTime() {
@@ -458,10 +448,9 @@ public class BackupHelper {
 	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type, long lastModifiedTime,
 			@NonNull StreamWriter streamWriter,
-			@Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
+			@Nullable OnUploadFileListener listener, boolean autoSync) throws UserNotRegisteredException {
 		checkRegistered();
 
-		boolean autoSync = isAutoSync();
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
@@ -526,7 +515,10 @@ public class BackupHelper {
 		}
 		String error = networkResult.getError();
 		if (error == null && status.equals("ok")) {
-			updateUploadedFileInfo(type, fileName, uploadTime, fileSize, autoSync);
+			updateFileUploadTime(type, fileName, uploadTime);
+			if (autoSync) {
+				addAutoSyncEvent(type, fileName, uploadTime, fileSize, AutoSyncActionType.UPLOAD);
+			}
 		}
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
@@ -648,7 +640,7 @@ public class BackupHelper {
 
 	@NonNull
 	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile,
-			@Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
+			@Nullable OnDownloadFileListener listener, boolean autoSync) throws UserNotRegisteredException {
 		checkRegistered();
 
 		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
@@ -663,6 +655,7 @@ public class BackupHelper {
 			params.put("name", fileName);
 			params.put("type", type);
 			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
+			params.put("autoSync", String.valueOf(autoSync));
 
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
@@ -716,6 +709,9 @@ public class BackupHelper {
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
 		}
+		if (error == null && autoSync) {
+			addAutoSyncEvent(type, fileName, System.currentTimeMillis(), remoteFile.getFilesize(), AutoSyncActionType.DOWNLOAD);
+		}
 		if (listener != null) {
 			listener.onFileDownloadDone(type, fileName, error);
 		}
@@ -724,7 +720,7 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void collectLocalFiles(boolean autoSync, @NonNull OnCollectLocalFilesListener listener) {
+	void collectLocalFiles(boolean autoSync, @Nullable OnCollectLocalFilesListener listener) {
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new CollectLocalFilesTask(app, autoSync, listener);
 		OsmAndTaskManager.executeTask(task);
 	}

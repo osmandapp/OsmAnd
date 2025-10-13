@@ -58,7 +58,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	ImportBackupTask(@NonNull String key,
 	                 @NonNull NetworkSettingsHelper helper,
 	                 @Nullable BackupCollectListener collectListener,
-	                 boolean readData) {
+	                 boolean readData,
+	                 boolean autoSync) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -66,7 +67,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.collectListener = collectListener;
 		this.shouldReplace = true;
 		this.restoreDeleted = false;
-		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
+		importer = new BackupImporter(app.getBackupHelper(), getProgressListener(), autoSync);
 		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
 		maxProgress = calculateMaxProgress(app);
 	}
@@ -78,7 +79,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	                 @Nullable ImportListener importListener,
 	                 boolean forceReadData,
 	                 boolean shouldReplace,
-	                 boolean restoreDeleted) {
+	                 boolean restoreDeleted,
+	                 boolean autoSync) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -87,7 +89,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.items = items;
 		this.shouldReplace = shouldReplace;
 		this.restoreDeleted = restoreDeleted;
-		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
+		importer = new BackupImporter(app.getBackupHelper(), getProgressListener(), autoSync);
 		importType = forceReadData ? ImportType.IMPORT_FORCE_READ : ImportType.IMPORT;
 		maxProgress = calculateMaxProgress(app);
 	}
@@ -96,7 +98,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	                 @NonNull NetworkSettingsHelper helper,
 	                 @NonNull List<SettingsItem> items,
 	                 @NonNull List<SettingsItem> selectedItems,
-	                 @Nullable CheckDuplicatesListener duplicatesListener) {
+	                 @Nullable CheckDuplicatesListener duplicatesListener,
+	                 boolean autoSync) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -106,7 +109,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.selectedItems = selectedItems;
 		this.shouldReplace = true;
 		this.restoreDeleted = false;
-		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
+		importer = new BackupImporter(app.getBackupHelper(), getProgressListener(), autoSync);
 		importType = ImportType.CHECK_DUPLICATES;
 		maxProgress = calculateMaxProgress(app);
 	}

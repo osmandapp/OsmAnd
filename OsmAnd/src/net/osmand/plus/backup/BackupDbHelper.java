@@ -7,7 +7,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.utils.AndroidDbUtils;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,25 +25,20 @@ public class BackupDbHelper {
 	private static final String UPLOADED_FILE_COL_NAME = "name";
 	private static final String UPLOADED_FILE_COL_UPLOAD_TIME = "upload_time";
 	private static final String UPLOADED_FILE_COL_MD5_DIGEST = "md5_digest";
-	private static final String UPLOADED_FILE_COL_FILE_SIZE = "file_size";
-	private static final String UPLOADED_FILE_COL_AUTO_SYNC = "auto_sync";
 
 	private static final String UPLOADED_FILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + UPLOADED_FILES_TABLE_NAME + " (" +
 			UPLOADED_FILE_COL_TYPE + " TEXT, " +
 			UPLOADED_FILE_COL_NAME + " TEXT, " +
 			UPLOADED_FILE_COL_UPLOAD_TIME + " long, " +
-			UPLOADED_FILE_COL_MD5_DIGEST + " TEXT, " +
-			UPLOADED_FILE_COL_FILE_SIZE + " long, " +
-			UPLOADED_FILE_COL_AUTO_SYNC + " INTEGER);";
+			UPLOADED_FILE_COL_MD5_DIGEST + " TEXT);";
 
 	private static final String UPLOADED_FILES_INDEX_TYPE_NAME = "indexTypeName";
 
-	private static final String UPLOADED_FILE_ALL_COLUMNS = UPLOADED_FILE_COL_TYPE + ", " +
-			UPLOADED_FILE_COL_NAME + ", " +
-			UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
-			UPLOADED_FILE_COL_MD5_DIGEST + ", " +
-			UPLOADED_FILE_COL_FILE_SIZE + ", " +
-			UPLOADED_FILE_COL_AUTO_SYNC;
+	private static final String UPLOADED_FILE_ALL_COLUMNS =
+					UPLOADED_FILE_COL_TYPE + ", " +
+					UPLOADED_FILE_COL_NAME + ", " +
+					UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
+					UPLOADED_FILE_COL_MD5_DIGEST;
 
 	private static final String LAST_MODIFIED_TABLE_NAME = "last_modified_items";
 	private static final String LAST_MODIFIED_COL_NAME = "name";
@@ -53,110 +47,35 @@ public class BackupDbHelper {
 			LAST_MODIFIED_COL_NAME + " TEXT, " +
 			LAST_MODIFIED_COL_MODIFIED_TIME + " long);";
 
-	public static class UploadedFileInfo {
-		private final String type;
-		private final String name;
-		private long uploadTime;
-		private String md5Digest = "";
-		private long fileSize;
-		private boolean autoSync;
+	private static final String STATISTICS_TABLE_NAME = "autosync_statistics";
+	private static final String STATISTICS_COL_TYPE = "type";
+	private static final String STATISTICS_COL_NAME = "name";
+	private static final String STATISTICS_COL_TIME = "time";
+	private static final String STATISTICS_COL_FILE_SIZE = "file_size";
+	private static final String STATISTICS_COL_ACTION = "action";
 
-		public UploadedFileInfo(@NonNull String type, @NonNull String name) {
-			this(type, name, 0, "", 0, false);
-		}
+	private static final String STATISTICS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + STATISTICS_TABLE_NAME + " (" +
+			STATISTICS_COL_TYPE + " TEXT, " +
+			STATISTICS_COL_NAME + " TEXT, " +
+			STATISTICS_COL_TIME + " long, " +
+			STATISTICS_COL_FILE_SIZE + " long, " +
+			STATISTICS_COL_ACTION + " TEXT);";
 
-		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime) {
-			this(type, name, uploadTime, "", 0, false);
-		}
+	private static final String STATISTICS_ALL_COLUMNS =
+							STATISTICS_COL_TYPE + ", " +
+							STATISTICS_COL_NAME + ", " +
+							STATISTICS_COL_TIME + ", " +
+							STATISTICS_COL_FILE_SIZE + ", " +
+							STATISTICS_COL_ACTION;
 
-		public UploadedFileInfo(@NonNull String type, @NonNull String name, @NonNull String md5Digest) {
-			this(type, name, 0, md5Digest, 0, false);
-		}
+	public enum AutoSyncActionType {
+		UPLOAD,
+		DOWNLOAD
+	}
 
-		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime, @NonNull String md5Digest) {
-			this(type, name, uploadTime, md5Digest, 0, false);
-		}
+	public record AutoSyncEvent(@NonNull String type, @NonNull String name, long time,
+	                            long fileSize, @NonNull AutoSyncActionType action) {
 
-		public UploadedFileInfo(@NonNull String type, @NonNull String name, long uploadTime,
-				@NonNull String md5Digest, long fileSize, boolean autoSync) {
-			this.type = type;
-			this.name = name;
-			this.uploadTime = uploadTime;
-			this.md5Digest = md5Digest;
-			this.fileSize = fileSize;
-			this.autoSync = autoSync;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public long getUploadTime() {
-			return uploadTime;
-		}
-
-		public void setUploadTime(long uploadTime) {
-			this.uploadTime = uploadTime;
-		}
-
-		@Nullable
-		public String getMd5Digest() {
-			return md5Digest;
-		}
-
-		public void setMd5Digest(@NonNull String md5Digest) {
-			this.md5Digest = md5Digest;
-		}
-
-		public long getFileSize() {
-			return fileSize;
-		}
-
-		public void setFileSize(long fileSize) {
-			this.fileSize = fileSize;
-		}
-
-		public boolean isAutoSync() {
-			return autoSync;
-		}
-
-		public void setAutoSync(boolean autoSync) {
-			this.autoSync = autoSync;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) {
-				return true;
-			}
-			if (o == null || getClass() != o.getClass()) {
-				return false;
-			}
-			UploadedFileInfo that = (UploadedFileInfo) o;
-			return type.equals(that.type) &&
-					name.equals(that.name);
-		}
-
-		@Override
-		public int hashCode() {
-			return Algorithms.hash(type, name);
-		}
-
-		@NonNull
-		@Override
-		public String toString() {
-			return "UploadedFileInfo{" +
-					"type=" + type +
-					", name=" + name +
-					", uploadTime=" + uploadTime +
-					", fileSize=" + fileSize +
-					", autoSync=" + autoSync +
-					'}';
-		}
 	}
 
 	public BackupDbHelper(@NonNull OsmandApplication app) {
@@ -189,6 +108,7 @@ public class BackupDbHelper {
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + UPLOADED_FILES_INDEX_TYPE_NAME + " ON " + UPLOADED_FILES_TABLE_NAME
 				+ " (" + UPLOADED_FILE_COL_TYPE + ", " + UPLOADED_FILE_COL_NAME + ");");
 		db.execSQL(LAST_MODIFIED_TABLE_CREATE);
+		db.execSQL(STATISTICS_TABLE_CREATE);
 	}
 
 	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
@@ -199,8 +119,7 @@ public class BackupDbHelper {
 			db.execSQL("ALTER TABLE " + UPLOADED_FILES_TABLE_NAME + " ADD " + UPLOADED_FILE_COL_MD5_DIGEST + " TEXT");
 		}
 		if (oldVersion < 4) {
-			db.execSQL("ALTER TABLE " + UPLOADED_FILES_TABLE_NAME + " ADD " + UPLOADED_FILE_COL_FILE_SIZE + " long");
-			db.execSQL("ALTER TABLE " + UPLOADED_FILES_TABLE_NAME + " ADD " + UPLOADED_FILE_COL_AUTO_SYNC + " INTEGER");
+			db.execSQL(STATISTICS_TABLE_CREATE);
 		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + UPLOADED_FILES_INDEX_TYPE_NAME + " ON " + UPLOADED_FILES_TABLE_NAME
 				+ " (" + UPLOADED_FILE_COL_TYPE + ", " + UPLOADED_FILE_COL_NAME + ");");
@@ -212,7 +131,7 @@ public class BackupDbHelper {
 			try {
 				db.execSQL("DELETE FROM " + UPLOADED_FILES_TABLE_NAME + " WHERE " +
 								UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-						new Object[] {info.type, info.name});
+						new Object[] {info.getType(), info.getName()});
 			} finally {
 				db.close();
 			}
@@ -238,22 +157,17 @@ public class BackupDbHelper {
 		db.execSQL(
 				"UPDATE " + UPLOADED_FILES_TABLE_NAME + " SET "
 						+ UPLOADED_FILE_COL_UPLOAD_TIME + " = ?, "
-						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ?, "
-						+ UPLOADED_FILE_COL_FILE_SIZE + " = ?, "
-						+ UPLOADED_FILE_COL_AUTO_SYNC + " = ? "
+						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ? "
 						+ "WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-				new Object[] {info.uploadTime, info.md5Digest, info.fileSize, info.autoSync ? 1 : 0, info.type, info.name});
+				new Object[] {info.getUploadTime(), info.getMd5Digest(), info.getType(), info.getName()});
 	}
 
 	private void addUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
 		Map<String, Object> rowsMap = new LinkedHashMap<>();
-
-		rowsMap.put(UPLOADED_FILE_COL_TYPE, info.type);
-		rowsMap.put(UPLOADED_FILE_COL_NAME, info.name);
-		rowsMap.put(UPLOADED_FILE_COL_UPLOAD_TIME, info.uploadTime);
-		rowsMap.put(UPLOADED_FILE_COL_MD5_DIGEST, info.md5Digest);
-		rowsMap.put(UPLOADED_FILE_COL_FILE_SIZE, info.fileSize);
-		rowsMap.put(UPLOADED_FILE_COL_AUTO_SYNC, info.autoSync ? 1 : 0);
+		rowsMap.put(UPLOADED_FILE_COL_TYPE, info.getType());
+		rowsMap.put(UPLOADED_FILE_COL_NAME, info.getName());
+		rowsMap.put(UPLOADED_FILE_COL_UPLOAD_TIME, info.getUploadTime());
+		rowsMap.put(UPLOADED_FILE_COL_MD5_DIGEST, info.getMd5Digest());
 
 		db.execSQL(AndroidDbUtils.createDbInsertQuery(UPLOADED_FILES_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
@@ -367,7 +281,7 @@ public class BackupDbHelper {
 					info.setMd5Digest(md5Digest);
 					updateUploadedFileInfo(db, info);
 				} else {
-					info = new UploadedFileInfo(type, fileName, md5Digest);
+					info = new UploadedFileInfo(type, fileName, 0, md5Digest);
 					addUploadedFileInfo(db, info);
 				}
 			} finally {
@@ -393,9 +307,72 @@ public class BackupDbHelper {
 		String name = query.getString(1);
 		long uploadTime = query.getLong(2);
 		String md5Digest = query.getString(3);
-		long fileSize = query.getLong(4);
-		boolean autoSync = query.getInt(5) == 1;
-		return new UploadedFileInfo(type, name, uploadTime, md5Digest, fileSize, autoSync);
+		return new UploadedFileInfo(type, name, uploadTime, md5Digest);
+	}
+
+	public void addAutoSyncEvent(@NonNull AutoSyncEvent event) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				Map<String, Object> map = new LinkedHashMap<>();
+				map.put(STATISTICS_COL_TYPE, event.type);
+				map.put(STATISTICS_COL_NAME, event.name);
+				map.put(STATISTICS_COL_TIME, event.time);
+				map.put(STATISTICS_COL_FILE_SIZE, event.fileSize);
+				map.put(STATISTICS_COL_ACTION, event.action);
+
+				db.execSQL(AndroidDbUtils.createDbInsertQuery(STATISTICS_TABLE_NAME, map.keySet()), map.values().toArray());
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	@NonNull
+	public List<AutoSyncEvent> getAutoSyncEvents() {
+		List<AutoSyncEvent> events = new ArrayList<>();
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery("SELECT " + STATISTICS_ALL_COLUMNS +
+								" FROM " + STATISTICS_TABLE_NAME +
+								" ORDER BY " + STATISTICS_COL_TIME + " DESC", null);
+				if (query != null && query.moveToFirst()) {
+					do {
+						events.add(readAutoSyncEvent(query));
+					} while (query.moveToNext());
+				}
+				if (query != null) {
+					query.close();
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return events;
+	}
+
+	@NonNull
+	private AutoSyncEvent readAutoSyncEvent(@NonNull SQLiteCursor query) {
+		String type = query.getString(0);
+		String name = query.getString(1);
+		long time = query.getLong(2);
+		long fileSize = query.getLong(3);
+		String action = query.getString(4);
+		return new AutoSyncEvent(type, name, time, fileSize, AutoSyncActionType.valueOf(action));
+	}
+
+	public boolean removeAutoSyncStatistics() {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("DELETE FROM " + STATISTICS_TABLE_NAME);
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public void setLastModifiedTime(@NonNull String name, long lastModifiedTime) {

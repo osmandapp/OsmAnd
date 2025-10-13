@@ -1,7 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
-import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_AUTO_SYNC;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,12 +40,8 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 	}
 
 	public void runAutoBackup() {
-		if (isAutoBackupEnabled() && app.getBackupHelper().isRegistered()) {
-			if (!backupHelper.isBackupPreparing()) {
-				backupHelper.prepareBackup(true, this);
-			} else if (!settingsHelper.isBackupSyncing() && backupHelper.isAutoSync()) {
-				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC);
-			}
+		if (isAutoBackupEnabled() && app.getBackupHelper().isRegistered() && !backupHelper.isBackupPreparing()) {
+			backupHelper.prepareBackup(true, this);
 		}
 	}
 
@@ -68,7 +64,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		if (!settingsHelper.isBackupSyncing() && result != null && result.isAutoSync()) {
 			BackupInfo info = result.getBackupInfo();
 			if (info != null && info.hasFilteredFiles()) {
-				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC);
+				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_AUTO_SYNC);
 			}
 		}
 	}

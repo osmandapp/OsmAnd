@@ -169,8 +169,7 @@ public class PrepareBackupTask {
 							onError(app.getString(R.string.backup_error_failed_to_fetch_remote_items));
 						}
 						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
-					}
-			);
+					}, autoSync);
 		} catch (IllegalStateException e) {
 			String message = e.getMessage();
 			if (message != null) {
