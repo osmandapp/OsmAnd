@@ -107,6 +107,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.PreferencesDatabaseFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
@@ -939,6 +940,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.onStart();
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
+		app
+				.daoProviderManager
+				.initDAOProvider(
+						PreferencesDatabaseFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile(),
+						this);
+
 		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk
 //		{
 //			createSearchDatabaseTask =
@@ -1243,9 +1250,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-	                                              @Nullable Bundle prevIntentParams,
-	                                              @Nullable Uri intentData,
-	                                              @Nullable Bundle intentParams) {
+												  @Nullable Bundle prevIntentParams,
+												  @Nullable Uri intentData,
+												  @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1341,7 +1348,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@NonNull
-	public MapRouteInfoMenu getMapRouteInfoMenu() { return mapRouteInfoMenu; }
+	public MapRouteInfoMenu getMapRouteInfoMenu() {
+		return mapRouteInfoMenu;
+	}
 
 	@NonNull
 	public TrackDetailsMenu getTrackDetailsMenu() {
@@ -1571,7 +1580,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				sim.startStopRouteAnimation(this);
 			}
 		}
-		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			plugin.newRouteIsCalculated(newRoute);
 		}
 	}

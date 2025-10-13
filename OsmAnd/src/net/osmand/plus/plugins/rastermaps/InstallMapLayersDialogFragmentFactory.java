@@ -109,7 +109,11 @@ class InstallMapLayersDialogFragmentFactory {
 
 							private void resetSearchDatabase() {
 								// FK-TODO: nur den Teil der Suchdatenbank neu berechnen, der sich geändert hat.
-								DatabaseResetter.resetDatabase(DAOProviderFactory.getDAOProvider(activity));
+								DatabaseResetter.resetDatabase(
+										OsmandApplication
+												.getInstanceFromContext(activity)
+												.daoProviderManager
+												.getDAOProvider());
 							}
 						});
 	}

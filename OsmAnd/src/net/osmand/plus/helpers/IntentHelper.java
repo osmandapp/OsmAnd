@@ -155,7 +155,8 @@ public class IntentHelper {
 								MapActivity.FRAGMENT_CONTAINER_VIEW_ID,
 								MainSettingsFragment.class,
 								app.getSettings().AVAILABLE_APP_MODES,
-								app.getTileSourceTemplatesProvider()),
+								app.getTileSourceTemplatesProvider(),
+								app.daoProviderManager.getDAOProvider()),
 				getLocale());
 	}
 
@@ -280,7 +281,7 @@ public class IntentHelper {
 	}
 
 	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
-	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
+							@Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
 		if (appMode != null) {
 			app.getRoutingHelper().setAppMode(appMode);
 		}

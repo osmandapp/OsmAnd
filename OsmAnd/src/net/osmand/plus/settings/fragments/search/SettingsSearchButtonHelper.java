@@ -8,6 +8,7 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -49,6 +50,7 @@ public class SettingsSearchButtonHelper {
 	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
 	private final OsmandPreference<String> availableAppModes;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
+	private final DAOProvider daoProvider;
 
 	public static SettingsSearchButtonHelper of(final BaseSettingsFragment rootSearchPreferenceFragment,
 												final @IdRes int fragmentContainerViewId,
@@ -62,7 +64,8 @@ public class SettingsSearchButtonHelper {
 						new SetStringPreference(
 								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH)),
 				app.getSettings().AVAILABLE_APP_MODES,
-				app.getTileSourceTemplatesProvider());
+				app.getTileSourceTemplatesProvider(),
+				app.daoProviderManager.getDAOProvider());
 	}
 
 	private SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
@@ -70,13 +73,15 @@ public class SettingsSearchButtonHelper {
 									   final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>>> createSearchDatabaseTaskSupplier,
 									   final SearchDatabaseStatusHandler searchDatabaseStatusHandler,
 									   final OsmandPreference<String> availableAppModes,
-									   final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+									   final TileSourceTemplatesProvider tileSourceTemplatesProvider,
+									   final DAOProvider daoProvider) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
 		this.createSearchDatabaseTaskSupplier = createSearchDatabaseTaskSupplier;
 		this.searchDatabaseStatusHandler = searchDatabaseStatusHandler;
 		this.availableAppModes = availableAppModes;
 		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
+		this.daoProvider = daoProvider;
 	}
 
 	public void configureSettingsSearchButton(final ImageView settingsSearchButton) {
@@ -92,7 +97,8 @@ public class SettingsSearchButtonHelper {
 			final @IdRes int fragmentContainerViewId,
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
 			final OsmandPreference<String> availableAppModes,
-			final TileSourceTemplatesProvider tileSourceTemplatesProvider) {
+			final TileSourceTemplatesProvider tileSourceTemplatesProvider,
+			final DAOProvider daoProvider) {
 		final SearchResultsFilter searchResultsFilter =
 				SearchResultsFilterFactory.createSearchResultsFilter(
 						PreferencePathDisplayerFactory.getApplicationModeKeys(),
@@ -105,6 +111,18 @@ public class SettingsSearchButtonHelper {
 								.withFragmentFactory(new FragmentFactory())
 								.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 								.withActivityInitializerByActivity(getActivityInitializerByActivity(fragmentManager))
+								.withPreferenceFragmentIdProvider(
+										// FK-TODO: no, no, no!!!
+										new PreferenceFragmentIdProvider() {
+
+											private int count = 1;
+											private final PreferenceFragmentIdProvider delegate = new DefaultPreferenceFragmentIdProvider();
+
+											@Override
+											public String getId(final PreferenceFragmentCompat preferenceFragment) {
+												return delegate.getId(preferenceFragment) + count++;
+											}
+										})
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
@@ -122,7 +140,8 @@ public class SettingsSearchButtonHelper {
 								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
 								.withShowSettingsFragmentAndHighlightSetting(new ShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId))
 								.build(),
-						fragmentActivity)
+						fragmentActivity,
+						daoProvider)
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withOnMergedPreferenceScreenAvailable(onMergedPreferenceScreenAvailable)
 				.build();
@@ -164,7 +183,8 @@ public class SettingsSearchButtonHelper {
 						fragmentContainerViewId,
 						rootSearchPreferenceFragment.getClass(),
 						availableAppModes,
-						tileSourceTemplatesProvider);
+						tileSourceTemplatesProvider,
+						daoProvider);
 		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
 	}
 

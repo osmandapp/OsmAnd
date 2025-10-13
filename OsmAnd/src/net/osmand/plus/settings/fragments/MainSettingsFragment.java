@@ -56,7 +56,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	private static final String CONFIGURE_PROFILE = "configure_profile";
 	public static final String APP_PROFILES = "app_profiles";
 	private static final String PURCHASES_SETTINGS = "purchases_settings";
-	private static final String SELECTED_PROFILE = "selected_profile";
+	public static final String SELECTED_PROFILE = "selected_profile";
 	private static final String CREATE_PROFILE = "create_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
 	private static final String LOCAL_BACKUP = "local_backup";

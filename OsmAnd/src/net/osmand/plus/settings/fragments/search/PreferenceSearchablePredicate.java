@@ -4,6 +4,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
 import java.util.Set;
 
@@ -22,6 +23,6 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 
 	@Override
 	public boolean isPreferenceSearchable(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
-		return !NON_SEARCHABLE_LAYOUT_RESIDS.contains(preference.getLayoutResource());
+		return !NON_SEARCHABLE_LAYOUT_RESIDS.contains(preference.getLayoutResource()) && !MainSettingsFragment.SELECTED_PROFILE.equals(preference.getKey());
 	}
 }

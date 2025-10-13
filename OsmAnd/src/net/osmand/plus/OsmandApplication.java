@@ -147,6 +147,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
+import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProviderManager;
 
 public class OsmandApplication extends MultiDexApplication {
 
@@ -235,6 +236,12 @@ public class OsmandApplication extends MultiDexApplication {
 	// Typeface
 
 	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
+
+	public final DAOProviderManager daoProviderManager = new DAOProviderManager();
+
+	public static OsmandApplication getInstanceFromContext(final Context context) {
+		return (OsmandApplication) context.getApplicationContext();
+	}
 
 	@Override
 	public void onCreate() {
@@ -691,8 +698,8 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(@NonNull Context context, @NonNull ApplicationMode appMode,
-	                                   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
-	                                   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
+									   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
+									   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(appMode);
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			settings.VOICE_MUTE.setModeValue(appMode, true);
