@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: 'build-common.gradle'
+apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 
@@ -47,10 +48,10 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 24
-		versionCode 5000
+		minSdkVersion osmand_minSdk
+		versionCode 5299
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "5.0.0"
+		versionName "5.2.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -96,14 +97,6 @@ android {
 			java.srcDirs = ["src-google", "src-osmand"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
-		amazonFree {
-			java.srcDirs = ["src-amazon"]
-			manifest.srcFile "AndroidManifest-amazonFree.xml"
-		}
-		amazonFull {
-			java.srcDirs = ["src-amazon"]
-			manifest.srcFile "AndroidManifest-amazonFull.xml"
-		}
 		huawei {
 			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-huawei.xml"
@@ -145,18 +138,6 @@ android {
 			applicationId "net.osmand.plus"
 			resValue "string", "app_name", "OsmAnd+"
 			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
-		}
-		amazonFree {
-			dimension "version"
-			applicationId "net.osmand"
-			resValue "string", "app_name", "OsmAnd"
-			resValue "string", "app_edition", ""
-		}
-		amazonFull {
-			dimension "version"
-			applicationId "net.osmand.plus"
-			resValue "string", "app_name", "OsmAnd+"
-			resValue "string", "app_edition", ""
 		}
 		huawei {
 			dimension "version"
@@ -211,6 +192,11 @@ android {
 			println(osmandTask.getName() + " merge resources")
 			osmandTask.dependsOn(collectExternalResources)
 		}
+		def generateResources= "generate${taskName}Resources"
+		tasks.named(generateResources).configure { osmandTask ->
+			println(osmandTask.getName() + " generate resources")
+			osmandTask.dependsOn(collectExternalResources)
+		}
 	}
 }
 
@@ -238,35 +224,46 @@ tasks.register('copyOsmAndCoreWithJNI') {
 	dependsOn buildOsmAndCore
 	doLast {
 		file("libs/armeabi-v7a").mkdirs()
-		file("../../binaries/android/clang-armeabi-v7a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/armeabi-v7a/libOsmAndCoreWithJNI.so"))
+		copy { from("../../binaries/android/clang-armeabi-v7a/Debug/libOsmAndCoreWithJNI.so") into("libs/armeabi-v7a") }
+
 		file("libs/arm64-v8a").mkdirs()
-		file("../../binaries/android/clang-arm64-v8a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/arm64-v8a/libOsmAndCoreWithJNI.so"))
+		copy { from("../../binaries/android/clang-arm64-v8a/Debug/libOsmAndCoreWithJNI.so") into("libs/arm64-v8a") }
+
 		file("libs/x86").mkdirs()
-		file("../../binaries/android/clang-x86/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/x86/libOsmAndCoreWithJNI.so"))
+		copy { from("../../binaries/android/clang-x86/Debug/libOsmAndCoreWithJNI.so") into("libs/x86") }
+
 		file("libs/x86_64").mkdirs()
-		file("../../binaries/android/clang-x86_64/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/x86_64/libOsmAndCoreWithJNI.so"))
+		copy { from("../../binaries/android/clang-x86_64/Debug/libOsmAndCoreWithJNI.so") into("libs/x86_64") }
 	}
 }
 
 dependencies {
-	openglImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
-	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
-
-	// Uncomment for local debug
-	//openglImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
-
-	// Comment for local debug
-	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:master-snapshot@aar"
-	opengldebugImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
-
-	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
-	openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
+	openglImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar', 'QtAndroidNetwork.jar'], dir: 'libs')
+	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar', 'QtAndroidNetwork.jar'], dir: 'libs')
 
 	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
 	huaweiImplementation 'com.huawei.hms:appservice:6.8.0.300'
 
-	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
-	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
+}
+
+afterEvaluate {
+	def remoteAarSnapshot = "master-snapshot"
+	def localAarFile = file("../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar")
+
+	def requestedTasks = gradle.startParameter.taskNames.join(",").toLowerCase()
+	def useLocalOsmAndCore = requestedTasks.contains("opengldebug") && localAarFile.exists()
+
+	if (useLocalOsmAndCore) {
+		println "Using local OsmAndCore AAR (${localAarFile})"
+		dependencies.add("openglImplementation", files(localAarFile))
+		dependencies.add("opengldebugImplementation", files(localAarFile))
+	} else {
+		println "Using remote OsmAndCore snapshot (${remoteAarSnapshot})"
+		dependencies.add("openglImplementation", "net.osmand:OsmAndCore_androidNativeRelease:${remoteAarSnapshot}@aar")
+		dependencies.add("openglImplementation", "net.osmand:OsmAndCore_android:${remoteAarSnapshot}@aar")
+		dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_androidNativeDebug:${remoteAarSnapshot}@aar")
+		dependencies.add("opengldebugImplementation", "net.osmand:OsmAndCore_android:${remoteAarSnapshot}@aar")
+	}
 }

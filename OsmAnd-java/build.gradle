@@ -25,6 +25,9 @@ tasks.register('collectMiscResources', Copy) {
 	from("../../resources/poi") {
 		include "poi_types.xml"
 	}
+	from("../../resources/poi") {
+		include "activities.json"
+	}
 }
 
 tasks.register('collectRenderingStylesResources', Sync) {
@@ -34,7 +37,7 @@ tasks.register('collectRenderingStylesResources', Sync) {
 }
 
 tasks.register('collectRegionsInfoResources', Download) {
-	src 'https://creator.osmand.net/basemap/regions.ocbf'
+	src 'https://builder.osmand.net/basemap/regions.ocbf'
 	dest 'src/main/resources/net/osmand/map/regions.ocbf'
 	onlyIfModified true
 }

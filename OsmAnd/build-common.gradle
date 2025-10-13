@@ -1,14 +1,16 @@
+apply from: rootProject.file("versions.gradle")
+
 tasks.register('printc') {
 	configurations.each { if (it.isCanBeResolved()) println it.name }
 }
 
 android {
-    compileSdk 34
-    buildToolsVersion = "34.0.0"
+    compileSdk osmand_compileSdk
+    buildToolsVersion = osmand_buildToolsVersion
     // compileNdkVersion "android-ndk-r17b"
     namespace = "net.osmand.plus"
     defaultConfig {
-        targetSdkVersion 34
+        targetSdkVersion osmand_targetSdk
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,6 +34,10 @@ android {
 		cruncherEnabled = false
 		// Flag notifies aapt to keep the attribute IDs around
 		// additionalParameters "--no-version-vectors"
+	}
+
+	testOptions {
+		animationsDisabled = true
 	}
 
 	sourceSets {
@@ -174,14 +180,14 @@ tasks.register('validateTranslations') {
 }
 
 tasks.register('downloadWorldMiniBasemap', Download) {
-	src 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf'
+	src 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf'
 	dest 'assets/World_basemap_mini.obf'
 	onlyIfModified true
 }
 
 tasks.register('downloadWorldMiniBasemapAnt') {
 	doLast {
-		ant.get(src: 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
+		ant.get(src: 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
 	}
 }
 
@@ -196,13 +202,6 @@ tasks.register('collectFonts', Copy) {
 //	from "../../resources/rendering_styles/fonts/OpenSans"
 	into "assets/fonts"
 	include "*.ttf"
-}
-
-tasks.register('collectHelpContentsStyle', Copy) {
-	from("../../help/website/help/") {
-		include "style.css"
-	}
-	into "assets"
 }
 
 tasks.register('copyBundledAssets', Copy) {
@@ -292,7 +291,6 @@ tasks.register('copy3DModels', Copy) {
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
 			copyLargePOIIcons,
@@ -391,6 +389,8 @@ dependencies {
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.2.1'
 	implementation 'androidx.lifecycle:lifecycle-process:2.6.0'
+	implementation "androidx.activity:activity:1.10.1"
+//	implementation "androidx.core:core:1.16.0"
 	implementation fileTree(include: ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
@@ -404,6 +404,9 @@ dependencies {
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'com.squareup.picasso:picasso:2.71828'
+	//implementation("io.coil-kt.coil3:coil-core:3.1.0")
+	//implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+
 	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
 	implementation "net.osmand:antpluginlib:3.8.0@aar"
 	// JS core
@@ -449,4 +452,6 @@ dependencies {
 	androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.5.1') {
 		exclude module: "protobuf-lite"
 	}
+	implementation 'net.sf.marineapi:marineapi:0.12.0'
+	implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
 }

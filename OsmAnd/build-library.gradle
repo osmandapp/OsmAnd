@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
 apply from: 'build-common.gradle'
+apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 
 android {
 
 	defaultConfig {
-		minSdkVersion 24
+		minSdkVersion osmand_minSdk
 	}
 
 	lintOptions {
@@ -49,7 +50,6 @@ android {
 			osmandTask.dependsOn(collectFonts)
 			osmandTask.dependsOn(copyPoiCategories)
 			osmandTask.dependsOn(copyRouteActivities)
-			osmandTask.dependsOn(collectHelpContentsStyle)
 			osmandTask.dependsOn(copyColorPalettes)
 			osmandTask.dependsOn(copyBundledAssets)
 			osmandTask.dependsOn(copy3DModels)
@@ -66,6 +66,13 @@ android {
 		def packageResources= "package${taskName}Resources"
 		tasks.named(packageResources).configure { osmandTask ->
 			println(osmandTask.getName())
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
+		def generateResources= "generate${taskName}Resources"
+		tasks.named(generateResources).configure { osmandTask ->
+			println(osmandTask.getName() + " generate resources")
 			osmandTask.dependsOn(copyMapShaderIcons)
 			osmandTask.dependsOn(copyMapPOIIcons)
 			osmandTask.dependsOn(copyLargePOIIcons)
