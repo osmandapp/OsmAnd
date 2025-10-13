@@ -49,7 +49,7 @@ public class GpxApproximationHelper {
 			currentApproximator = null;
 		}
 		notifyOnNewCalculation();
-		params.getLocationsHolders();
+//		params.getLocationsHolders();
 		List<GpxApproximator> approximateList = new ArrayList<>();
 		for (LocationsHolder locationsHolder : params.getLocationsHolders()) {
 			GpxApproximator approximate = createApproximator(locationsHolder);
