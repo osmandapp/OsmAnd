@@ -59,7 +59,7 @@ public class BackupDbHelper {
 			STATISTICS_COL_NAME + " TEXT, " +
 			STATISTICS_COL_TIME + " long, " +
 			STATISTICS_COL_FILE_SIZE + " long, " +
-			STATISTICS_COL_ACTION + " TEXT);";
+			STATISTICS_COL_ACTION + " INTEGER);";
 
 	private static final String STATISTICS_ALL_COLUMNS =
 							STATISTICS_COL_TYPE + ", " +
@@ -70,11 +70,16 @@ public class BackupDbHelper {
 
 	public enum AutoSyncActionType {
 		UPLOAD,
-		DOWNLOAD
+		DOWNLOAD;
+
+		public static AutoSyncActionType valueOf(int ordinal) {
+			AutoSyncActionType[] values = AutoSyncActionType.values();
+			return ordinal >= 0 && ordinal < values.length ? values[ordinal] : UPLOAD;
+		}
 	}
 
 	public record AutoSyncEvent(@NonNull String type, @NonNull String name, long time,
-	                            long fileSize, @NonNull AutoSyncActionType action) {
+	                            long fileSize, @NonNull AutoSyncActionType actionType) {
 
 	}
 
@@ -315,11 +320,11 @@ public class BackupDbHelper {
 		if (db != null) {
 			try {
 				Map<String, Object> map = new LinkedHashMap<>();
-				map.put(STATISTICS_COL_TYPE, event.type);
-				map.put(STATISTICS_COL_NAME, event.name);
-				map.put(STATISTICS_COL_TIME, event.time);
-				map.put(STATISTICS_COL_FILE_SIZE, event.fileSize);
-				map.put(STATISTICS_COL_ACTION, event.action);
+				map.put(STATISTICS_COL_TYPE, event.type());
+				map.put(STATISTICS_COL_NAME, event.name());
+				map.put(STATISTICS_COL_TIME, event.time());
+				map.put(STATISTICS_COL_FILE_SIZE, event.fileSize());
+				map.put(STATISTICS_COL_ACTION, event.actionType().ordinal());
 
 				db.execSQL(AndroidDbUtils.createDbInsertQuery(STATISTICS_TABLE_NAME, map.keySet()), map.values().toArray());
 			} finally {
@@ -358,8 +363,8 @@ public class BackupDbHelper {
 		String name = query.getString(1);
 		long time = query.getLong(2);
 		long fileSize = query.getLong(3);
-		String action = query.getString(4);
-		return new AutoSyncEvent(type, name, time, fileSize, AutoSyncActionType.valueOf(action));
+		int actionType = query.getInt(4);
+		return new AutoSyncEvent(type, name, time, fileSize, AutoSyncActionType.valueOf(actionType));
 	}
 
 	public boolean removeAutoSyncStatistics() {
