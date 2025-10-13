@@ -9,7 +9,6 @@ import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
@@ -39,16 +38,18 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 	private final BackupHelper backupHelper;
 
 	private final OnCollectLocalFilesListener listener;
+	private final boolean autoSync;
 
 	private SQLiteConnection connection;
 	private Map<String, UploadedFileInfo> infos;
 
-	protected CollectLocalFilesTask(@NonNull OsmandApplication app,
+	protected CollectLocalFilesTask(@NonNull OsmandApplication app, boolean autoSync,
 			@Nullable OnCollectLocalFilesListener listener) {
 		this.app = app;
 		this.backupHelper = app.getBackupHelper();
 		this.dbHelper = backupHelper.getDbHelper();
 		this.listener = listener;
+		this.autoSync = autoSync;
 		operationLog.startOperation();
 	}
 
@@ -181,7 +182,7 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 	private List<ExportType> getEnabledExportTypes() {
 		List<ExportType> result = new ArrayList<>();
 		for (ExportType exportType : ExportType.enabledValues()) {
-			if (backupHelper.getBackupTypePref(exportType).get()) {
+			if (backupHelper.getBackupTypePref(exportType, autoSync).get()) {
 				result.add(exportType);
 			}
 		}
