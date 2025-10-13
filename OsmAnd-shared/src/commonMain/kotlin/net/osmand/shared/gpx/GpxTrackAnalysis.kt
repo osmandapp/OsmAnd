@@ -466,7 +466,6 @@ class GpxTrackAnalysis {
 						this.speed = speed
 						this.elevation = elevation
 					}
-					addWptAttribute(point, attributes, pointsAnalyser)
 				} else {
 					attributes.distance = distance
 					attributes.timeDiff = timeDiff.toFloat()
@@ -474,8 +473,8 @@ class GpxTrackAnalysis {
 					attributes.lastPoint = lastPoint
 					attributes.speed = speed
 					attributes.elevation = elevation
-					addWptAttribute(point, attributes, null)
 				}
+				addWptAttribute(point, attributes, pointsAnalyser)
 				if (attributes.sensorSpeed > 0 && !attributes.sensorSpeed.isInfinite()) {
 					_maxSensorSpeed = maxOf(attributes.sensorSpeed, _maxSensorSpeed)
 					sensorSpeedCount++
