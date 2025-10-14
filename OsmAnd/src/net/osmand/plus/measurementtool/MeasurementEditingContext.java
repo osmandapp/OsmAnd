@@ -797,7 +797,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	private void recreateSegments(List<TrkSegment> segments, List<TrkSegment> segmentsForSnap,
-								  List<WptPt> points, boolean calculateIfNeeded) {
+	                              List<WptPt> points, boolean calculateIfNeeded) {
 		List<Integer> roadSegmentIndexes = new ArrayList<>();
 		TrkSegment s = new TrkSegment();
 		segments.add(s);
@@ -973,6 +973,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 
 		calculatedTimeSpeed = useExternalTimestamps;
+		long currentTimestamp = originalPoints.isEmpty() ? 0 : originalPoints.get(0).getTime();
 
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
 		List<WptPt> routePoints = new ArrayList<>();
@@ -992,7 +993,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
 				boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
-				MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
+				currentTimestamp = MeasurementEditingContextUtils
+						.fillPointsArray(points, seg, includeEndPoint, currentTimestamp);
 			}
 			allSegments.addAll(segments);
 
@@ -1014,7 +1016,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				}
 				wp2.setProfileType(mode.getStringKey());
 				Pair<WptPt, WptPt> pair = new Pair<>(wp1, wp2);
-				// TODO match points vs originalPoints to fill the timestamps (Issue #22785)
 				roadSegmentData.put(pair, new RoadSegmentData(appMode, pair.first, pair.second, points, segments));
 			}
 			if (lastGpxPoint) {

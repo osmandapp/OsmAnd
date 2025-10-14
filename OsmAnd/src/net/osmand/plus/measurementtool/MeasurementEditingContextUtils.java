@@ -41,28 +41,40 @@ public class MeasurementEditingContextUtils {
 		return index;
 	}
 
-	static WptPt addPointToArray(List<WptPt> points, RouteSegmentResult seg, int index, float[] heightArray) {
-		LatLon l = seg.getPoint(index);
+	static long addPointToArray(List<WptPt> points, RouteSegmentResult seg, int index, float[] heightArray, long ts) {
+		LatLon ll = seg.getPoint(index);
 		WptPt pt = new WptPt();
 		if (heightArray != null && heightArray.length > index * 2 + 1) {
 			pt.setEle(heightArray[index * 2 + 1]);
 		}
-		pt.setLat(l.getLatitude());
-		pt.setLon(l.getLongitude());
+		pt.setLat(ll.getLatitude());
+		pt.setLon(ll.getLongitude());
+		if (ts > 0 && index != seg.getStartPointIndex()) {
+			LatLon prevLatLon = seg.getPoint(index - (seg.isForwardDirection() ? +1 : -1));
+			double distance = MapUtils.getDistance(ll, prevLatLon);
+			float speed = seg.getSegmentSpeed();
+			if (speed > 0) {
+				ts += (long)(distance / speed * 1000.0);
+			}
+		}
+		if (ts > 0) {
+			pt.setTime(ts);
+		}
 		points.add(pt);
-		return pt;
+		return ts;
 	}
 
-	static void fillPointsArray(List<WptPt> points, RouteSegmentResult seg, boolean includeEndPoint) {
+	static long fillPointsArray(List<WptPt> points, RouteSegmentResult seg, boolean includeEndPoint, long timestamp) {
 		int ind = seg.getStartPointIndex();
 		boolean plus = seg.isForwardDirection();
 		float[] heightArray = seg.getObject().calculateHeightArray();
 		while (ind != seg.getEndPointIndex()) {
-			addPointToArray(points, seg, ind, heightArray);
+			timestamp = addPointToArray(points, seg, ind, heightArray, timestamp);
 			ind = plus ? ind + 1 : ind - 1;
 		}
 		if (includeEndPoint) {
-			addPointToArray(points, seg, ind, heightArray);
+			timestamp = addPointToArray(points, seg, ind, heightArray, timestamp);
 		}
+		return timestamp;
 	}
 }

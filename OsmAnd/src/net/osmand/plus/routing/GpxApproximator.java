@@ -144,8 +144,11 @@ public class GpxApproximator {
 	public void calculateGpxApproximationSync(@NonNull GpxRouteApproximation gctx,
 	                                          @NonNull ResultMatcher<GpxRouteApproximation> matcher) {
 		try {
+			List<GpxPoint> gpxPoints = getPoints();
+			boolean useExternalTimestamps = !gpxPoints.isEmpty() && gpxPoints.get(0).time > 0;
+			// TODO FIXME useExternalTimestamps leads to wrong speed calculation in tunnels
 			// useExternalTimestamps affects RouteSegmentResult speed but does nothing on GPX timestamps
-			routingHelper.calculateGpxApproximation(env, gctx, getPoints(), matcher, false);
+			routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, matcher, useExternalTimestamps);
 		} catch (Exception e) {
 			matcher.publish(null);
 			log.error(e.getMessage(), e);
