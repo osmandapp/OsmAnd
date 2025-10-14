@@ -27,7 +27,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TripRecordingMaxSpeedWidget extends BaseLastSlopeRecordingWidget {
+public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 	private final TripRecordingMaxSpeedWidgetState widgetState;
 
 	protected final SavingTrackHelper savingTrackHelper;

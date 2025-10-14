@@ -34,7 +34,7 @@ import net.osmand.shared.settings.enums.AltitudeMetrics;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TripRecordingElevationWidget extends BaseLastSlopeRecordingWidget {
+public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 
 	protected final TripRecordingElevationWidgetState widgetState;
 	protected final SavingTrackHelper savingTrackHelper;

@@ -12,7 +12,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 
-public class BaseLastSlopeRecordingWidget extends SimpleWidget {
+public class BaseRecordingWidget extends SimpleWidget {
 
 	protected int currentTrackIndex;
 	protected final SavingTrackHelper savingTrackHelper;
@@ -21,7 +21,7 @@ public class BaseLastSlopeRecordingWidget extends SimpleWidget {
 	protected SlopeInfo slopeDownhillInfo;
 
 
-	public BaseLastSlopeRecordingWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
+	public BaseRecordingWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
 		this.savingTrackHelper = app.getSavingTrackHelper();
 	}

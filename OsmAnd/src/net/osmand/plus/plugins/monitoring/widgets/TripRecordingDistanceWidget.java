@@ -28,7 +28,7 @@ import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TripRecordingDistanceWidget extends BaseLastSlopeRecordingWidget {
+public class TripRecordingDistanceWidget extends BaseRecordingWidget {
 	private static final long BLINK_DELAY_MILLIS = 500;
 	private final TripRecordingDistanceWidgetState distanceWidgetState;
 	private final SavingTrackHelper savingTrackHelper;
