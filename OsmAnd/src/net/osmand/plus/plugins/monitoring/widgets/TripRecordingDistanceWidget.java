@@ -22,24 +22,16 @@ import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TripRecordingDistanceWidget extends SimpleWidget {
-
+public class TripRecordingDistanceWidget extends BaseLastSlopeRecordingWidget {
 	private static final long BLINK_DELAY_MILLIS = 500;
-
-	protected int currentTrackIndex;
-	protected SlopeInfo slopeInfo;
-
 	private final TripRecordingDistanceWidgetState distanceWidgetState;
 	private final SavingTrackHelper savingTrackHelper;
-
 	private long cachedLastUpdateTime;
 
 	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingDistanceWidgetState distanceWidgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
@@ -66,6 +58,7 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+		super.updateSimpleWidgetInfo(drawSettings);
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin == null) {
 			return;
@@ -106,24 +99,11 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 	}
 
 	private void setLastSlopeDistance(@NonNull TripRecordingDistanceMode recordingDistanceMode) {
-		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
-		GpxTrackAnalysis analysis = savingTrackHelper.getCurrentTrack().getTrackAnalysis(app);
-		if (this.currentTrackIndex != currentTrackIndex) {
-			slopeInfo = null;
-		}
-		SlopeInfo newSlopeInfo = recordingDistanceMode == TripRecordingDistanceMode.LAST_DOWNHILL ? analysis.getLastDownhill() : analysis.getLastUphill();
-		if (newSlopeInfo == null) {
+		SlopeInfo lastSlope = getLastSlope(recordingDistanceMode == TripRecordingDistanceMode.LAST_UPHILL);
+		if (lastSlope != null) {
+			setText((float) lastSlope.getDistance());
+		} else{
 			setText(0);
-			return;
-		}
-
-		if (slopeInfo == null
-				|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
-				|| slopeInfo.getDistance() < newSlopeInfo.getDistance()) {
-			slopeInfo = newSlopeInfo;
-		}
-		if (slopeInfo != null) {
-			setText((float) slopeInfo.getDistance());
 		}
 	}
 

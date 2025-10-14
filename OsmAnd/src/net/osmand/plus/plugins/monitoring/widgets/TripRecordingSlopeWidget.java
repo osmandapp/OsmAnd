@@ -18,23 +18,18 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.shared.gpx.ElevationDiffsCalculator;
+import net.osmand.shared.gpx.ElevationDiffsCalculator.SlopeInfo;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TripRecordingSlopeWidget extends SimpleWidget {
+public class TripRecordingSlopeWidget extends BaseLastSlopeRecordingWidget {
 	private final TripRecordingSlopeWidgetState widgetState;
 
-
 	protected final SavingTrackHelper savingTrackHelper;
-	protected int currentTrackIndex;
-
 	protected double cachedSlope = -1;
-	private int lastSlope;
 	private boolean forceUpdate;
 
 	public TripRecordingSlopeWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingSlopeWidgetState widgetState, @NonNull WidgetType widgetType,
@@ -60,9 +55,8 @@ public class TripRecordingSlopeWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
-		int elevationSlope = getSlope(this.currentTrackIndex != currentTrackIndex);
-		this.currentTrackIndex = currentTrackIndex;
+		super.updateSimpleWidgetInfo(drawSettings);
+		int elevationSlope = getSlope();
 		if (forceUpdate || isUpdateNeeded() || cachedSlope != elevationSlope) {
 			cachedSlope = elevationSlope;
 			forceUpdate = false;
@@ -70,18 +64,13 @@ public class TripRecordingSlopeWidget extends SimpleWidget {
 		}
 	}
 
-	protected int getSlope(boolean reset) {
-		if (reset) {
-			lastSlope = 0;
+	protected int getSlope() {
+		SlopeInfo lastSlope = getLastSlope(widgetState.getAverageSlopeModePreference().get() == AverageSlopeMode.LAST_UPHILL);
+		if (lastSlope != null) {
+			return (int) (lastSlope.getElevDiff() / lastSlope.getDistance() * 100);
+		} else {
+			return 0;
 		}
-		ElevationDiffsCalculator.SlopeInfo slopeInfo =
-				widgetState.getAverageSlopeModePreference().get() == AverageSlopeMode.LAST_UPHILL
-						? getAnalysis().getLastUphill()
-						: getAnalysis().getLastDownhill();
-		if (slopeInfo != null) {
-			lastSlope = (int) (slopeInfo.getElevDiff() / slopeInfo.getDistance() * 100);
-		}
-		return lastSlope;
 	}
 
 	@Nullable
