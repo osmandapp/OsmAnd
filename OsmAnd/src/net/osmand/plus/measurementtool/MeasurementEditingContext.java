@@ -550,8 +550,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	private void replacePoints(int targetSegmentIndex, List<WptPt> originalPoints, List<WptPt> points) {
 		if (originalPoints.size() > 1) {
-			int firstPointIndex = getPointIndexToReplace(targetSegmentIndex, before.getPoints(), originalPoints.get(0));
-			int lastPointIndex = getPointIndexToReplace(targetSegmentIndex, before.getPoints(), originalPoints.get(originalPoints.size() - 1));
+			int firstPointIndex = getPointIndexToReplace(before.getPoints(), targetSegmentIndex, true);
+			int lastPointIndex = getPointIndexToReplace(before.getPoints(), targetSegmentIndex, false);
 			List<WptPt> newPoints = new ArrayList<>();
 			if (firstPointIndex != -1 && lastPointIndex != -1) {
 				newPoints.addAll(before.getPoints().subList(0, firstPointIndex));
@@ -569,18 +569,25 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		updateSegmentsForSnap(false);
 	}
 
-	private int getPointIndexToReplace(int targetSegmentIndex, @NonNull List<WptPt> points, @NonNull WptPt point) {
+	private int getPointIndexToReplace(@NonNull List<WptPt> points, int targetSegmentIndex, boolean findStartNotEnd) {
+		Map<Integer, Integer> segmentStartIndexes = new HashMap<>();
+		Map<Integer, Integer> segmentEndIndexes = new HashMap<>();
 		for (int i = 0, currentSegmentIndex = 0; i < points.size(); i++) {
-			WptPt pt = points.get(i);
-			if (currentSegmentIndex == targetSegmentIndex &&
-					MapUtils.areLatLonEqual(point.getLat(), point.getLon(), pt.getLat(), pt.getLon())) {
-				return i;
-			}
-			if (pt.isGap()) {
+			segmentStartIndexes.putIfAbsent(currentSegmentIndex, i);
+			segmentEndIndexes.put(currentSegmentIndex, i);
+			if (points.get(i).isGap()) {
 				currentSegmentIndex++;
 			}
 		}
-		return -1;
+		Integer startIndex = segmentStartIndexes.get(targetSegmentIndex);
+		Integer endIndex = segmentEndIndexes.get(targetSegmentIndex);
+		if (findStartNotEnd && startIndex != null) {
+			return startIndex;
+		} else if (!findStartNotEnd && endIndex != null) {
+			return endIndex;
+		} else {
+			return -1;
+		}
 	}
 
 	public WptPt removePoint(int position, boolean updateSnapToRoad) {
