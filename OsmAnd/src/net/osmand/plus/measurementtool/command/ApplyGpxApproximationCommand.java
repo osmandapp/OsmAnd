@@ -54,7 +54,7 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 		MeasurementEditingContext ctx = getEditingCtx();
 		points = new ArrayList<>(ctx.getPoints());
 		roadSegmentData = ctx.getRoadSegmentData();
-		applyApproximation();
+		applyAllApproximations();
 		refreshMap();
 		return true;
 	}
@@ -65,7 +65,7 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 			ApplyGpxApproximationCommand approxCommand = (ApplyGpxApproximationCommand) command;
 			approximations = approxCommand.approximations;
 			mode = approxCommand.mode;
-			applyApproximation();
+			applyAllApproximations();
 			refreshMap();
 			return true;
 		}
@@ -85,11 +85,11 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 
 	@Override
 	public void redo() {
-		applyApproximation();
+		applyAllApproximations();
 		refreshMap();
 	}
 
-	public void applyApproximation() {
+	private void applyAllApproximations() {
 		MeasurementEditingContext ctx = getEditingCtx();
 		ctx.setAppMode(mode);
 		for (int i = 0; i < approximations.size(); i++) {

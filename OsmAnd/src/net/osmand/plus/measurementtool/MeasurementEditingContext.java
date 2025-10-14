@@ -548,7 +548,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		updateSegmentsForSnap(false);
 	}
 
-	public void replacePoints(List<WptPt> originalPoints, List<WptPt> points) {
+	private void replacePoints(List<WptPt> originalPoints, List<WptPt> points) {
 		if (originalPoints.size() > 1) {
 			int firstPointIndex = getPointIndexToReplace(before.getPoints(), originalPoints.get(0));
 			int lastPointIndex = getPointIndexToReplace(before.getPoints(), originalPoints.get(originalPoints.size() - 1));
@@ -572,7 +572,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private int getPointIndexToReplace(@NonNull List<WptPt> points, @NonNull WptPt point) {
 		for (int i = 0; i < points.size(); i++) {
 			WptPt pt = points.get(i);
-			if (point == pt) {
+			if (MapUtils.areLatLonEqual(point.getLat(), point.getLon(), pt.getLat(), pt.getLon())) {
 				return i;
 			}
 		}
@@ -964,8 +964,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		calculatedTimeSpeed = useExternalTimestamps;
 
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
-		WptPt firstOriginalPoint = originalPoints.get(0);
-		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
 		List<WptPt> routePoints = new ArrayList<>();
 		List<RouteSegmentResult> allSegments = new ArrayList<>();
 		for (int i = 0; i < gpxPoints.size(); i++) {
@@ -1016,6 +1014,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		for (RouteSegmentResult s : allSegments) {
 			calculatedDuration += s.getSegmentTime();
 		}
+
+		WptPt firstOriginalPoint = originalPoints.get(0);
+		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
 		long originalDuration = lastOriginalPoint.getTime() - firstOriginalPoint.getTime();
 		LOG.debug("Approximation result: start=" + firstOriginalPoint.getLat() + ", " + firstOriginalPoint.getLon() +
 				" finish=" + lastOriginalPoint.getLat() + ", " + lastOriginalPoint.getLon() +
