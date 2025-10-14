@@ -1014,6 +1014,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				}
 				wp2.setProfileType(mode.getStringKey());
 				Pair<WptPt, WptPt> pair = new Pair<>(wp1, wp2);
+				// TODO match points vs originalPoints to fill the timestamps (Issue #22785)
 				roadSegmentData.put(pair, new RoadSegmentData(appMode, pair.first, pair.second, points, segments));
 			}
 			if (lastGpxPoint) {
@@ -1223,6 +1224,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					l.setLongitude(pt.getLongitude());
 					if (!Double.isNaN(pt.getEle())) {
 						l.setAltitude(pt.getEle());
+					}
+					if (pt.getTime() > 0) {
+						l.setTime(pt.getTime());
 					}
 					locations.add(l);
 				}

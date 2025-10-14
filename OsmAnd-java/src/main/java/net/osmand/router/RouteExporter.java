@@ -111,6 +111,9 @@ public class RouteExporter {
 			if (loc.hasAccuracy()) {
 				pt.setHdop(loc.getAccuracy());
 			}
+			if (loc.getTime() > 0) {
+				pt.setTime(loc.getTime());
+			}
 			trkSegment.getPoints().add(pt);
 		}
 
