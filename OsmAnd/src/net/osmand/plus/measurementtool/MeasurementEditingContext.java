@@ -548,10 +548,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		updateSegmentsForSnap(false);
 	}
 
-	private void replacePoints(List<WptPt> originalPoints, List<WptPt> points) {
+	private void replacePoints(int targetSegmentIndex, List<WptPt> originalPoints, List<WptPt> points) {
 		if (originalPoints.size() > 1) {
-			int firstPointIndex = getPointIndexToReplace(before.getPoints(), originalPoints.get(0));
-			int lastPointIndex = getPointIndexToReplace(before.getPoints(), originalPoints.get(originalPoints.size() - 1));
+			int firstPointIndex = getPointIndexToReplace(targetSegmentIndex, before.getPoints(), originalPoints.get(0));
+			int lastPointIndex = getPointIndexToReplace(targetSegmentIndex, before.getPoints(), originalPoints.get(originalPoints.size() - 1));
 			List<WptPt> newPoints = new ArrayList<>();
 			if (firstPointIndex != -1 && lastPointIndex != -1) {
 				newPoints.addAll(before.getPoints().subList(0, firstPointIndex));
@@ -569,11 +569,15 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		updateSegmentsForSnap(false);
 	}
 
-	private int getPointIndexToReplace(@NonNull List<WptPt> points, @NonNull WptPt point) {
-		for (int i = 0; i < points.size(); i++) {
+	private int getPointIndexToReplace(int targetSegmentIndex, @NonNull List<WptPt> points, @NonNull WptPt point) {
+		for (int i = 0, currentSegmentIndex = 0; i < points.size(); i++) {
 			WptPt pt = points.get(i);
-			if (MapUtils.areLatLonEqual(point.getLat(), point.getLon(), pt.getLat(), pt.getLon())) {
+			if (currentSegmentIndex == targetSegmentIndex &&
+					MapUtils.areLatLonEqual(point.getLat(), point.getLon(), pt.getLat(), pt.getLon())) {
 				return i;
+			}
+			if (pt.isGap()) {
+				currentSegmentIndex++;
 			}
 		}
 		return -1;
@@ -954,8 +958,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return routePoints;
 	}
 
-	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
-                                 ApplicationMode mode, boolean useExternalTimestamps) {
+	public List<WptPt> setPoints(int targetSegmentIndex, GpxRouteApproximation gpxApproximation,
+	                             List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
 		if (gpxApproximation == null ||
 				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(originalPoints)) {
 			return null;
@@ -1025,7 +1029,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (lastOriginalPoint.isGap()) {
 			lastRoutePoint.setGap();
 		}
-		replacePoints(originalPoints, routePoints);
+		replacePoints(targetSegmentIndex, originalPoints, routePoints);
 		return routePoints;
 	}
 

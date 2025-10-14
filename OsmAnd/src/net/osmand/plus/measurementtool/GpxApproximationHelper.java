@@ -257,7 +257,7 @@ public class GpxApproximationHelper {
 		for (int i = 0; i < approximations.size(); i++) {
 			GpxRouteApproximation approximation = approximations.get(i);
 			List<WptPt> segment = points.get(i);
-			context.setPoints(approximation, segment, params.getAppMode(), false);
+			context.setPoints(i, approximation, segment, params.getAppMode(), false);
 		}
 		String trackName = getSuggestedFileName(app, context.getGpxData());
 		return context.exportGpx(trackName);
