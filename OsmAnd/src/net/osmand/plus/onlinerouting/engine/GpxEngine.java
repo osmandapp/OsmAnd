@@ -169,7 +169,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
 				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null, calculatedTimeSpeed[0]);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
-				ctx.setPoints(gpxApproximation, points, appMode, calculatedTimeSpeed[0]);
+				ctx.setPoints(0, gpxApproximation, points, appMode, calculatedTimeSpeed[0]);
 				calculatedTimeSpeed[0] = ctx.hasCalculatedTimeSpeed();
 				return ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
 			}
