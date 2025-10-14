@@ -18,9 +18,9 @@ abstract class ElevationDiffsCalculator {
 	data class SlopeInfo(
 		val startPointIndex: Int,
 		val endPointIndex: Int,
-		val elevDiff: Double,
-		val distance: Double = 0.0,
-		val maxSpeed: Double = 0.0
+		var elevDiff: Double,
+		var distance: Double = 0.0,
+		var maxSpeed: Double = 0.0
 	)
 
 	private var lastUphill: SlopeInfo? = null
