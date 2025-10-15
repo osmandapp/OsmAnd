@@ -18,6 +18,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
@@ -37,6 +39,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.utils.NativeUtilities;
@@ -96,20 +99,30 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private VectorLine rulerLine;
 	private MapMarker distanceMarker;
 	private boolean isShowTwoFingersDistance;
-	private final GestureDetector gestureDetector;
+	@Nullable
+	private GestureDetector gestureDetector;
 
 	private StateChangedListener<DistanceByTapTextSize> textSizeListener;
 
 	public DistanceRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
-		gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
-			@Override
-			public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
-				isShowTwoFingersDistance = false;
-				app.runInUIThread(() -> view.refreshMap());
-				return super.onSingleTapConfirmed(e);
-			}
-		});
+	}
+
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
+				@Override
+				public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+					isShowTwoFingersDistance = false;
+					app.runInUIThread(() -> view.refreshMap());
+					return super.onSingleTapConfirmed(e);
+				}
+			});
+		} else {
+			gestureDetector = null;
+		}
 	}
 
 	@Override
