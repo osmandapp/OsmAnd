@@ -748,7 +748,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		List<GpxDisplayGroup> groups = getGpxDisplayGroups();
 		SplitTrackListener listener = getSplitTrackListener();
 
-		double splitInterval = splitType == GpxSplitType.DISTANCE ? distanceSplit : timeSplit;
+		double splitInterval = 0;
+		if (GpxSplitType.DISTANCE == splitType) {
+			splitInterval = distanceSplit;
+		} else if (GpxSplitType.TIME == splitType) {
+			splitInterval = timeSplit;
+		} else if (GpxSplitType.UPHILL_DOWNHILL == splitType) {
+			splitInterval = 1;
+		}
 		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, trackDrawInfo.isJoinSegments());
 
 		app.getGpxDisplayHelper().splitTrackAsync(selectedGpxFile, groups, params, listener);

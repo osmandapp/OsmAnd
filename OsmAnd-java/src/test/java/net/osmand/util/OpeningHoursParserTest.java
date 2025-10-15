@@ -119,6 +119,36 @@ public class OpeningHoursParserTest {
 		testInfo("29.12.2022 14:00", hours, "Will open on 11:00 Mon.");
 		testInfo("30.12.2022 14:00", hours, "Will open on 11:00 Mon.");
 
+		hours = parseOpenedHours("2024 Jan 1-Dec 31");
+		System.out.println(hours);
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, false);
+
+		hours = parseOpenedHours("2024 Jan 01-Dec 31");
+		System.out.println(hours);
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, false);
+
+		hours = parseOpenedHours("2024 Jan 01-2024 Dec 31");
+		System.out.println(hours);
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, false);
+
+		hours = parseOpenedHours("2024 Jan 01-2025 Dec 31");
+		System.out.println(hours);
+		testOpened("31.12.2023 23:59", hours, false);
+		testOpened("01.01.2024 00:00", hours, true);
+		testOpened("31.12.2024 23:59", hours, true);
+		testOpened("01.01.2025 00:00", hours, true);
+		testOpened("31.12.2025 23:59", hours, true);
+		testOpened("01.01.2026 00:00", hours, false);
+
 		hours = parseOpenedHours("2022 Oct 24 - 2023 Oct 30");
 		System.out.println(hours);
 		testOpened("20.10.2022 10:00", hours, false);

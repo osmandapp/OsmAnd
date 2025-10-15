@@ -548,10 +548,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		updateSegmentsForSnap(false);
 	}
 
-	public void replacePoints(List<WptPt> originalPoints, List<WptPt> points) {
+	private void replacePoints(int targetSegmentIndex, List<WptPt> originalPoints, List<WptPt> points) {
 		if (originalPoints.size() > 1) {
-			int firstPointIndex = getPointIndexToReplace(before.getPoints(), originalPoints.get(0));
-			int lastPointIndex = getPointIndexToReplace(before.getPoints(), originalPoints.get(originalPoints.size() - 1));
+			int firstPointIndex = getPointIndexToReplace(before.getPoints(), targetSegmentIndex, true);
+			int lastPointIndex = getPointIndexToReplace(before.getPoints(), targetSegmentIndex, false);
 			List<WptPt> newPoints = new ArrayList<>();
 			if (firstPointIndex != -1 && lastPointIndex != -1) {
 				newPoints.addAll(before.getPoints().subList(0, firstPointIndex));
@@ -569,14 +569,25 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		updateSegmentsForSnap(false);
 	}
 
-	private int getPointIndexToReplace(@NonNull List<WptPt> points, @NonNull WptPt point) {
-		for (int i = 0; i < points.size(); i++) {
-			WptPt pt = points.get(i);
-			if (point == pt) {
-				return i;
+	private int getPointIndexToReplace(@NonNull List<WptPt> points, int targetSegmentIndex, boolean findStartNotEnd) {
+		Map<Integer, Integer> segmentStartIndexes = new HashMap<>();
+		Map<Integer, Integer> segmentEndIndexes = new HashMap<>();
+		for (int i = 0, currentSegmentIndex = 0; i < points.size(); i++) {
+			segmentStartIndexes.putIfAbsent(currentSegmentIndex, i);
+			segmentEndIndexes.put(currentSegmentIndex, i);
+			if (points.get(i).isGap()) {
+				currentSegmentIndex++;
 			}
 		}
-		return -1;
+		Integer startIndex = segmentStartIndexes.get(targetSegmentIndex);
+		Integer endIndex = segmentEndIndexes.get(targetSegmentIndex);
+		if (findStartNotEnd && startIndex != null) {
+			return startIndex;
+		} else if (!findStartNotEnd && endIndex != null) {
+			return endIndex;
+		} else {
+			return -1;
+		}
 	}
 
 	public WptPt removePoint(int position, boolean updateSnapToRoad) {
@@ -954,8 +965,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return routePoints;
 	}
 
-	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
-                                 ApplicationMode mode, boolean useExternalTimestamps) {
+	public List<WptPt> setPoints(int targetSegmentIndex, GpxRouteApproximation gpxApproximation,
+	                             List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
 		if (gpxApproximation == null ||
 				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(originalPoints)) {
 			return null;
@@ -964,8 +975,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		calculatedTimeSpeed = useExternalTimestamps;
 
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
-		WptPt firstOriginalPoint = originalPoints.get(0);
-		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
 		List<WptPt> routePoints = new ArrayList<>();
 		List<RouteSegmentResult> allSegments = new ArrayList<>();
 		for (int i = 0; i < gpxPoints.size(); i++) {
@@ -1016,6 +1025,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		for (RouteSegmentResult s : allSegments) {
 			calculatedDuration += s.getSegmentTime();
 		}
+
+		WptPt firstOriginalPoint = originalPoints.get(0);
+		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
 		long originalDuration = lastOriginalPoint.getTime() - firstOriginalPoint.getTime();
 		LOG.debug("Approximation result: start=" + firstOriginalPoint.getLat() + ", " + firstOriginalPoint.getLon() +
 				" finish=" + lastOriginalPoint.getLat() + ", " + lastOriginalPoint.getLon() +
@@ -1024,7 +1036,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (lastOriginalPoint.isGap()) {
 			lastRoutePoint.setGap();
 		}
-		replacePoints(originalPoints, routePoints);
+		replacePoints(targetSegmentIndex, originalPoints, routePoints);
 		return routePoints;
 	}
 

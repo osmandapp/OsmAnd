@@ -29,25 +29,22 @@ import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TripRecordingElevationWidget extends SimpleWidget {
+public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 
 	protected final TripRecordingElevationWidgetState widgetState;
 	protected final SavingTrackHelper savingTrackHelper;
-	protected int currentTrackIndex;
-	protected SlopeInfo slopeInfo;
 	protected double cachedElevationDiff = -1;
 	protected double cachedLastElevation = -1;
 	private final boolean isUphillType;
 
 	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingElevationWidgetState widgetState,
 	                                    @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId ,widgetsPanel);
+		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		isUphillType = widgetState.isUphillType;
 		this.savingTrackHelper = app.getSavingTrackHelper();
@@ -86,10 +83,9 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
-		double elevationDiff = getElevationDiff(this.currentTrackIndex != currentTrackIndex);
-		double lastElevation = getLastElevation(this.currentTrackIndex != currentTrackIndex);
-		this.currentTrackIndex = currentTrackIndex;
+		super.updateSimpleWidgetInfo(drawSettings);
+		double elevationDiff = getElevationDiff();
+		double lastElevation = getLastElevation();
 
 		if (isUpdateNeeded() || cachedElevationDiff != elevationDiff || cachedLastElevation != lastElevation) {
 			cachedElevationDiff = elevationDiff;
@@ -97,9 +93,9 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 			AltitudeMetrics altitudeMetrics = settings.ALTITUDE_METRIC.get();
 			FormattedValue formattedUphill = null;
 
-			if(widgetState.getElevationModePreference().get() == TripRecordingElevationMode.TOTAL){
+			if (widgetState.getElevationModePreference().get() == TripRecordingElevationMode.TOTAL) {
 				formattedUphill = OsmAndFormatter.getFormattedAltitudeValue(elevationDiff, app, altitudeMetrics);
-			} else{
+			} else {
 				formattedUphill = OsmAndFormatter.getFormattedAltitudeValue(lastElevation, app, altitudeMetrics);
 			}
 			setText(formattedUphill.value, formattedUphill.unit);
@@ -149,8 +145,9 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 		TrackMenuFragment.showInstance(mapActivity, mapActivity.getApp().getSavingTrackHelper().getCurrentTrack(), null);
 	}
 
-	protected abstract double getElevationDiff(boolean reset);
-	protected abstract double getLastElevation(boolean reset);
+	protected abstract double getElevationDiff();
+
+	protected abstract double getLastElevation();
 
 	@NonNull
 	protected GpxTrackAnalysis getAnalysis() {
@@ -166,29 +163,20 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 		}
 
 		@Override
-		protected double getElevationDiff(boolean reset) {
-			if (reset) {
-				diffElevationUp = 0;
-			}
+		protected double getElevationDiff() {
 			diffElevationUp = Math.max(getAnalysis().getDiffElevationUp(), diffElevationUp);
 			return diffElevationUp;
 		}
 
-		protected double getLastElevation(boolean reset) {
-			if (reset) {
-				slopeInfo = null;
-			}
-			SlopeInfo newSlopeInfo = getAnalysis().getLastUphill();
-			if (newSlopeInfo == null) {
-				return slopeInfo != null ? slopeInfo.getElevDiff() : 0;
-			}
+		protected double getLastElevation() {
+			SlopeInfo lastSlope = getLastSlope(true);
+			return lastSlope != null ? lastSlope.getElevDiff() : 0;
+		}
 
-			if (slopeInfo == null
-					|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
-					|| slopeInfo.getElevDiff() < newSlopeInfo.getElevDiff()) {
-				slopeInfo = newSlopeInfo;
-			}
-			return slopeInfo.getElevDiff();
+		@Override
+		protected void resetCachedValue() {
+			super.resetCachedValue();
+			diffElevationUp = 0;
 		}
 	}
 
@@ -200,29 +188,20 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 		}
 
 		@Override
-		protected double getElevationDiff(boolean reset) {
-			if (reset) {
-				diffElevationDown = 0;
-			}
+		protected double getElevationDiff() {
 			diffElevationDown = Math.max(getAnalysis().getDiffElevationDown(), diffElevationDown);
 			return diffElevationDown;
 		}
 
-		protected double getLastElevation(boolean reset) {
-			if (reset) {
-				slopeInfo = null;
-			}
-			SlopeInfo newSlopeInfo = getAnalysis().getLastDownhill();
-			if (newSlopeInfo == null) {
-				return slopeInfo != null ? slopeInfo.getElevDiff() : 0;
-			}
+		protected double getLastElevation() {
+			SlopeInfo lastSlope = getLastSlope(false);
+			return lastSlope != null ? lastSlope.getElevDiff() : 0;
+		}
 
-			if (slopeInfo == null
-					|| slopeInfo.getStartPointIndex() != newSlopeInfo.getStartPointIndex()
-					|| slopeInfo.getElevDiff() < newSlopeInfo.getElevDiff()) {
-				slopeInfo = newSlopeInfo;
-			}
-			return slopeInfo.getElevDiff();
+		@Override
+		protected void resetCachedValue() {
+			super.resetCachedValue();
+			diffElevationDown = 0;
 		}
 	}
 }

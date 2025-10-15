@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
@@ -40,7 +41,8 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 	}
 
 	public void runAutoBackup() {
-		if (isAutoBackupEnabled() && app.getBackupHelper().isRegistered() && !backupHelper.isBackupPreparing()) {
+		if (InAppPurchaseUtils.isBackupAvailable(app) && isAutoBackupEnabled()
+				&& app.getBackupHelper().isRegistered() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup(true, this);
 		}
 	}

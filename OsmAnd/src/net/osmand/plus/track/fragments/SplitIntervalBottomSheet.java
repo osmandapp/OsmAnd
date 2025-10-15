@@ -163,7 +163,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 				selectedTimeSplitInterval = Math.max(index, 0);
 			} else if (trackDrawInfo.getSplitType() == GpxSplitType.UPHILL_DOWNHILL.getType()) {
 				selectedSplitType = GpxSplitType.UPHILL_DOWNHILL;
-				selectedTimeSplitInterval = 0;
+				selectedTimeSplitInterval = 1;
 			}
 		}
 	}

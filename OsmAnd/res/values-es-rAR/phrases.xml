@@ -5152,4 +5152,10 @@
     <string name="poi_hazard_additional_queues_likely">Posible embotellamiento</string>
     <string name="poi_hazard_additional_side_winds">Vientos laterales</string>
     <string name="poi_hazard_additional_ice">Hielo</string>
+    <string name="poi_piste_downhill">Pista de descenso;Prueba de descenso;Pista de esquí;Pendiente de esquí</string>
+    <string name="poi_route_activity_type_skiing">Rutas de esquí</string>
+    <string name="poi_historic_spacecraft">Nave espacial histórica</string>
+    <string name="poi_barrier_chain">Cadena (barrera)</string>
+    <string name="poi_barrier_log">Tronco de árbol</string>
+    <string name="poi_barrier_sliding_gate">Puerta corrediza</string>
 </resources>
