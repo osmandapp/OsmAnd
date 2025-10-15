@@ -14,11 +14,14 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Pair;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarker.PinIconHorisontalAlignment;
@@ -27,7 +30,6 @@ import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.VectorDouble;
 import net.osmand.core.jni.VectorLine;
@@ -37,6 +39,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.utils.NativeUtilities;
@@ -50,8 +53,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public class DistanceRulerControlLayer extends OsmandMapLayer {
 
@@ -97,11 +98,31 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private VectorLinesCollection vectorLinesCollection;
 	private VectorLine rulerLine;
 	private MapMarker distanceMarker;
+	private boolean isShowTwoFingersDistance;
+	@Nullable
+	private GestureDetector gestureDetector;
 
 	private StateChangedListener<DistanceByTapTextSize> textSizeListener;
 
 	public DistanceRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
+	}
+
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
+				@Override
+				public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+					isShowTwoFingersDistance = false;
+					app.runInUIThread(() -> view.refreshMap());
+					return super.onSingleTapConfirmed(e);
+				}
+			});
+		} else {
+			gestureDetector = null;
+		}
 	}
 
 	@Override
@@ -152,8 +173,19 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
+	public void onDoubleFingerTap() {
+		super.onDoubleFingerTap();
+		if (rulerModeOn()) {
+			isShowTwoFingersDistance = true;
+		}
+	}
+
+	@Override
 	public boolean onTouchEvent(@NonNull MotionEvent event, @NonNull RotatedTileBox tileBox) {
 		if (rulerModeOn()) {
+			if (gestureDetector != null) {
+				gestureDetector.onTouchEvent(event);
+			}
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				touched = true;
 				touchOutside = false;
@@ -208,10 +240,11 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 			boolean showTwoFingersDistance =
 					currentTime - view.getMultiTouchStartTime() > DELAY_BEFORE_DRAW &&
-					(view.isMultiTouch() || currentTime - cacheMultiTouchEndTime < DRAW_TIME);
+							(view.isMultiTouch() || currentTime - cacheMultiTouchEndTime < DRAW_TIME);
 
+			isShowTwoFingersDistance = isShowTwoFingersDistance && showTwoFingersDistance;
 			boolean showDistBetweenFingerAndLocation = !wasPinchZoomOrRotation &&
-					!showTwoFingersDistance &&
+					!isShowTwoFingersDistance &&
 					!view.isMultiTouch() &&
 					!wasDoubleTapZoom &&
 					!touchOutside &&
@@ -222,17 +255,17 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			Location currentLoc = app.getLocationProvider().getLastKnownLocation();
 
 			if (hasMapRenderer) {
-				drawDistanceRulerOpenGl(mapRenderer, canvas, tb, nightMode, paintUpdated, showTwoFingersDistance, showDistBetweenFingerAndLocation);
+				drawDistanceRulerOpenGl(mapRenderer, canvas, tb, nightMode, paintUpdated, isShowTwoFingersDistance, showDistBetweenFingerAndLocation);
 			} else {
 				if (showDistBetweenFingerAndLocation && currentLoc != null) {
 					drawDistBetweenFingerAndLocation(canvas, tb, currentLoc, nightMode);
-				} else if (showTwoFingersDistance) {
+				} else if (isShowTwoFingersDistance) {
 					drawTwoFingersDistance(canvas, tb, view.getFirstTouchPointLatLon(),
 							view.getSecondTouchPointLatLon(), nightMode);
 				}
 			}
 
-			this.showTwoFingersDistance = showTwoFingersDistance;
+			this.showTwoFingersDistance = isShowTwoFingersDistance;
 			this.showDistBetweenFingerAndLocation = showDistBetweenFingerAndLocation;
 		} else {
 			if (hasMapRenderer) {
