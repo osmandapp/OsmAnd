@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.measurementtool.MeasurementEditingContextUtils.GpxTimeCalculator;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
@@ -973,7 +974,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 
 		calculatedTimeSpeed = useExternalTimestamps;
-		long currentTimestamp = originalPoints.isEmpty() ? 0 : originalPoints.get(0).getTime();
+
+		long initialTimestamp = originalPoints.isEmpty() ? 0 : originalPoints.get(0).getTime();
+		GpxTimeCalculator gpxTimeCalculator = new GpxTimeCalculator(initialTimestamp);
 
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
 		List<WptPt> routePoints = new ArrayList<>();
@@ -993,8 +996,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
 				boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
-				currentTimestamp = MeasurementEditingContextUtils
-						.fillPointsArray(points, seg, includeEndPoint, currentTimestamp);
+				gpxTimeCalculator.fillPointsArray(points, seg, includeEndPoint);
 			}
 			allSegments.addAll(segments);
 

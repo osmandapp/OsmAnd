@@ -41,40 +41,64 @@ public class MeasurementEditingContextUtils {
 		return index;
 	}
 
-	static long addPointToArray(List<WptPt> points, RouteSegmentResult seg, int index, float[] heightArray, long ts) {
-		LatLon ll = seg.getPoint(index);
-		WptPt pt = new WptPt();
-		if (heightArray != null && heightArray.length > index * 2 + 1) {
-			pt.setEle(heightArray[index * 2 + 1]);
+	public static class GpxTimeCalculator {
+		private long timestamp = 0;
+		private LatLon previousSegmentLastPoint = null;
+
+		public GpxTimeCalculator(long initialTimestamp) {
+			this.timestamp = initialTimestamp;
 		}
-		pt.setLat(ll.getLatitude());
-		pt.setLon(ll.getLongitude());
-		if (ts > 0 && index != seg.getStartPointIndex()) {
-			LatLon prevLatLon = seg.getPoint(index - (seg.isForwardDirection() ? +1 : -1));
-			double distance = MapUtils.getDistance(ll, prevLatLon);
-			float speed = seg.getSegmentSpeed();
-			if (speed > 0) {
-				ts += (long)(distance / speed * 1000.0);
+
+		public void fillPointsArray(List<WptPt> points, RouteSegmentResult seg, boolean includeEndPoint) {
+			int ind = seg.getStartPointIndex();
+			boolean plus = seg.isForwardDirection();
+			float[] heightArray = seg.getObject().calculateHeightArray();
+			while (ind != seg.getEndPointIndex()) {
+				addPointToArray(points, seg, ind, heightArray);
+				ind = plus ? ind + 1 : ind - 1;
+			}
+			if (includeEndPoint) {
+				addPointToArray(points, seg, ind, heightArray);
 			}
 		}
-		if (ts > 0) {
-			pt.setTime(ts);
-		}
-		points.add(pt);
-		return ts;
-	}
 
-	static long fillPointsArray(List<WptPt> points, RouteSegmentResult seg, boolean includeEndPoint, long timestamp) {
-		int ind = seg.getStartPointIndex();
-		boolean plus = seg.isForwardDirection();
-		float[] heightArray = seg.getObject().calculateHeightArray();
-		while (ind != seg.getEndPointIndex()) {
-			timestamp = addPointToArray(points, seg, ind, heightArray, timestamp);
-			ind = plus ? ind + 1 : ind - 1;
+		private void addPointToArray(List<WptPt> points, RouteSegmentResult seg, int index, float[] heightArray) {
+			LatLon ll = seg.getPoint(index);
+			WptPt pt = new WptPt();
+
+			pt.setLat(ll.getLatitude());
+			pt.setLon(ll.getLongitude());
+
+			// calculate elevation
+			if (heightArray != null && heightArray.length > index * 2 + 1) {
+				pt.setEle(heightArray[index * 2 + 1]);
+			}
+
+			// calculate time of gap between segments (e.g., no GPS in tunnels)
+			if (timestamp > 0 && index == seg.getStartPointIndex() && previousSegmentLastPoint != null) {
+				timestamp += calcTimeMs(seg, ll, previousSegmentLastPoint);
+			}
+
+			if (timestamp > 0) {
+				pt.setTime(timestamp);
+				pt.setSpeed(seg.getSegmentSpeed());
+			}
+
+			// calculate next timestamp inside current segment
+			if (timestamp > 0 && index != seg.getEndPointIndex()) {
+				LatLon nextLatLon = seg.getPoint(index + (seg.isForwardDirection() ? +1 : -1));
+				timestamp += calcTimeMs(seg, ll, nextLatLon);
+				previousSegmentLastPoint = nextLatLon;
+			}
+
+			points.add(pt);
 		}
-		if (includeEndPoint) {
-			timestamp = addPointToArray(points, seg, ind, heightArray, timestamp);
+
+		private long calcTimeMs(RouteSegmentResult seg, LatLon a, LatLon b) {
+			float speed = seg.getSegmentSpeed();
+			double distance = MapUtils.getDistance(a, b);
+			return distance > 0 && speed > 0 ? (long)(distance / speed * 1000.0) : 0;
 		}
-		return timestamp;
+
 	}
 }

@@ -146,7 +146,7 @@ public class GpxApproximator {
 		try {
 			List<GpxPoint> gpxPoints = getPoints();
 			boolean useExternalTimestamps = !gpxPoints.isEmpty() && gpxPoints.get(0).time > 0;
-			// useExternalTimestamps affects RouteSegmentResult speed but does not on GPX timestamps
+			// useExternalTimestamps affects RouteSegmentResult speed but does nothing on GPX timestamps
 			routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, matcher, useExternalTimestamps);
 		} catch (Exception e) {
 			matcher.publish(null);
