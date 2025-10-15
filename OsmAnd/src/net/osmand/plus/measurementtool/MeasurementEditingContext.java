@@ -1229,6 +1229,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					if (pt.getTime() > 0) {
 						l.setTime(pt.getTime());
 					}
+					if (pt.getSpeed() > 0) {
+						l.setSpeed((float)pt.getSpeed());
+					}
 					locations.add(l);
 				}
 

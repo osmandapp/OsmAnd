@@ -114,6 +114,9 @@ public class RouteExporter {
 			if (loc.getTime() > 0) {
 				pt.setTime(loc.getTime());
 			}
+			if (loc.getSpeed() > 0) {
+				pt.setSpeed(loc.getSpeed());
+			}
 			trkSegment.getPoints().add(pt);
 		}
 
