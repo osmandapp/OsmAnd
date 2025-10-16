@@ -6136,7 +6136,7 @@
     <string name="battery">bateria</string>
     <string name="shared_string_switch">Alternar</string>
     <string name="deleting_history">Excluindo o histórico…</string>
-    <string name="ski_route_switch_style_description">Explore as pistas de esqui, os teleféricos e muito mais com o estilo de mapa Inverno e esqui.</string>
+    <string name="ski_route_switch_style_description">Explore rotas de esqui, pistas e teleféricos com o estilo de mapa Inverno e Esqui.</string>
     <string name="show_rasterization_debug_tile">Mostrar informações de rasterização de ladrilhos</string>
     <string name="release_5_2">• Trabalho em andamento...</string>
     <string name="next_turn_information">Informações sobre a próxima curva</string>
@@ -6244,4 +6244,19 @@
     <string name="show_spherical_map_description">Exibir modelo esferoidal da Terra</string>
     <string name="accessibility_independent_features">Recursos independentes</string>
     <string name="lang_en_barebones">Português (básico)</string>
+    <string name="track_folder_appearance">Acompanhar a aparência da pasta</string>
+    <string name="update_maps">Atualizar mapas</string>
+    <string name="reconnect">Reconectar</string>
+    <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esqui</string>
+    <string name="rendering_attr_showSkiSlopes_description">Mostrar pistas de esqui simplificadas</string>
+    <string name="trip_recording_downhill_widget_desc">Mostra a soma de todos os descendentes da viagem atualmente gravada.</string>
+    <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atualmente registrada.</string>
+    <string name="trip_recording_distance_widget_desc">Mostra a distância total da sua viagem atualmente registrada, com modos para visualizar a distância da última subida e descida.</string>
+    <string name="trip_recording_max_speed_widget_description">Mostra a velocidade máxima da viagem atualmente registrada. Toque para alternar entre a velocidade máxima geral e a velocidade máxima da última subida ou descida.</string>
+    <string name="trip_recording_average_slope_widget_description">Mostra a inclinação média da última descida ou subida da viagem atualmente registrada.</string>
+    <string name="average_slope">Inclinação média</string>
+    <string name="shared_string_last_uphill">Última subida</string>
+    <string name="shared_string_last_downhill">Última descida</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Pistas e percursos de esqui</string>
+    <string name="rendering_attr_pisteRoutes_name">Rotas de esqui</string>
 </resources>

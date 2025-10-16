@@ -106,6 +106,7 @@ public class RoutePlannerFrontEnd {
 		public GpxPoint(GpxPoint point) {
 			this.ind = point.ind;
 			this.loc = point.loc;
+			this.time = point.time;
 			this.object = point.object;
 			this.cumDist = point.cumDist;
 		}

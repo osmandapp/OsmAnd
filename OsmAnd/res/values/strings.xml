@@ -60,9 +60,20 @@
     <string name="reverse_mode_original_track_desc">Follow the exact track back to the start.\nWarning: This can be dangerous as it ignores one-way traffic on roads.</string>
     <string name="reverse_mode">Reverse mode</string>
     <string name="release_5_2">
-        • Work in progress...
+        • Added street and city details to search results\n\n
+        • New Trip Recording widgets: Max Speed, Average Slope, and improved Uphill/Downhill\n\n
+        • New "Marine" nautical map style with extensive customization options\n\n
+        • Improved map rendering speed\n\n
+        • Enhanced connectivity with OBDII BLE adapters\n\n
+        • Added heart rate metrics to the "Analyze by Interval"\n\n
+        • Added duration display for planned tracks\n\n
+        • Altitude units can now be set separately from distance units\n\n
+        • Improved the map orientation Quick Action with selectable compass modes\n\n
+        • For Android Auto, added pre-navigation alerts for missing maps and private roads\n\n
+        • Resolved an issue with incorrect size parameters for the Radius Ruler widget\n\n
+        • Added inverted screen orientations\n\n
+        • Improved the user interface for specifying truck metrics\n\n
     </string>
-
     <string name="ble_prefix_pattern">%s • </string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Response</string>
