@@ -36,6 +36,7 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.search.core.SearchPhrase;
@@ -175,6 +176,15 @@ public class TravelObfHelper implements TravelHelper {
 	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
 		return tags.containsKey(ROUTE_ID)
 				&& ("segment".equals(tags.get(ROUTE)) || tags.containsKey(ROUTE_TYPE));
+	}
+
+	@NonNull
+	@Override
+	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon ll, @NonNull NetworkRouteSelectorFilter filter) {
+		// TODO 1. read map section with small radius
+		// TODO 2. parse tags for newOsmRoutes and filter
+		// TODO 3. call searchTravelGpx for each suitable (would only one call mostly)
+		return new ArrayList<>(); // TODO
 	}
 
 	@Nullable
