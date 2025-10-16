@@ -49,9 +49,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion osmand_minSdk
-		versionCode 5299
+		versionCode 5399
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "5.2.0"
+		versionName "5.3.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
