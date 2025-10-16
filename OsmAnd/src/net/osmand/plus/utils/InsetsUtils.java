@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
@@ -18,6 +19,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.ISupportInsets;
@@ -410,5 +412,14 @@ public class InsetsUtils {
 		} else {
 			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT);
 		}
+
+		Window window = activity.getWindow();
+		View decorView = window.getDecorView();
+
+		if (isEdgeToEdgeSupported()) {
+			window.setNavigationBarContrastEnforced(false);
+		}
+		WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(window, decorView);
+		controller.setAppearanceLightNavigationBars(insetSupportedFragment.isNavigationBarContentLight());
 	}
 }
