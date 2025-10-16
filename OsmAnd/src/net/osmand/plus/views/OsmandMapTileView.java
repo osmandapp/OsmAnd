@@ -1371,6 +1371,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering || forceUpdateVectorDrawing);
 			sendRefreshMapMsg(drawSettings, 20);
 			refreshBufferImage(drawSettings);
+			mapActivity.updateNavBarColor();
 		}
 	}
 
