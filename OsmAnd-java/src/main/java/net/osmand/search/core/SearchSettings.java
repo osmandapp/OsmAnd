@@ -3,6 +3,7 @@ package net.osmand.search.core;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
@@ -40,6 +41,7 @@ public class SearchSettings {
 	private boolean sortByName;
 	private QuadRect searchBBox31;
 	private boolean addressSearch;
+	private SearchStat stat;
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 
 	public SearchSettings(SearchSettings s) {
@@ -85,7 +87,7 @@ public class SearchSettings {
 	public String getLang() {
 		return mapLang;
 	}
-
+	
 	public SearchSettings setLang(String lang, boolean transliterateIfMissing) {
 		return setLangs(lang, lang, transliterateIfMissing);
 	}
@@ -209,6 +211,14 @@ public class SearchSettings {
 			}
 		}
 		return false;
+	}
+	
+	public SearchStat getStat() {
+		return stat;
+	}
+	
+	public void setStat(SearchStat stat) {
+		this.stat = stat;
 	}
 
 	public String getRegionLang() {
