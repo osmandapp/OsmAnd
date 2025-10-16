@@ -57,7 +57,7 @@ public class BinaryMapIndexReaderStats {
 				statByAPI.api = api;
 				byApis.put(api, statByAPI);
 			}
-			statByAPI.bytes = bytes;
+			statByAPI.bytes += bytes;
 			statByAPI.calls++;
 			statByAPI.time += timeCall;
 		}
