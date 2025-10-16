@@ -298,7 +298,7 @@ public class SearchCoreFactory {
 
 		public SearchAddressByNameAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
 									  SearchStreetByCityAPI cityApi) {
-			super(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE,
+			super(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.BOUNDARY, ObjectType.POSTCODE,
 					ObjectType.STREET, ObjectType.HOUSE, ObjectType.STREET_INTERSECTION);
 			this.streetsApi = streetsApi;
 			this.cityApi = cityApi;
@@ -340,7 +340,8 @@ public class SearchCoreFactory {
 				return false;
 			}
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
-			if (phrase.isNoSelectedType() || phrase.getRadiusLevel() >= 2) {
+			if (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.BOUNDARY)
+					|| phrase.getRadiusLevel() >= 2) {
 				initAndSearchCities(phrase, resultMatcher);
 				// not publish results (let it sort)
 				// resultMatcher.apiSearchFinished(this, phrase);
@@ -479,8 +480,16 @@ public class SearchCoreFactory {
 								}
 								sr.objectType = ObjectType.POSTCODE;
 								sr.priorityDistance = 0;
+							} else if (type == CityType.BOUNDARY) {
+								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
+										|| !phrase.isSearchTypeAllowed(ObjectType.BOUNDARY)) {
+									return false;
+								}
+								sr.objectType = ObjectType.BOUNDARY;
+								sr.priorityDistance = 0;
+								phrase.countUnknownWordsMatchMainResult(sr);
 							} else if (type == CityType.HAMLET || type == CityType.SUBURB || 
-									type == CityType.VILLAGE || type == CityType.BOUNDARY) {
+									type == CityType.VILLAGE) {
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
 									return false;
@@ -556,6 +565,8 @@ public class SearchCoreFactory {
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
+						} else if (res.objectType == ObjectType.BOUNDARY ) {
+							subSearchApiOrPublish(phrase, resultMatcher, res, this);
 						} else {
 							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 							searchPoiInCity(nphrase, res, resultMatcher);
@@ -1960,7 +1971,7 @@ public class SearchCoreFactory {
 
 	public static boolean isLastWordCityGroup(SearchPhrase p ) {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||
-				p.isLastWord(ObjectType.VILLAGE);
+				p.isLastWord(ObjectType.VILLAGE) || p.isLastWord(ObjectType.BOUNDARY);
 	}
 
 	public static SearchResult createSearchResult(Amenity amenity, SearchPhrase phrase, MapPoiTypes poiTypes) {
