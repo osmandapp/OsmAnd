@@ -32,9 +32,9 @@ public class BinaryMapIndexReaderStats {
 	
 	public static class SearchStat {
 		long lastReq = 0;
-		long totalTime = 0;
+		public long totalTime = 0;
+		public long totalBytes = 0;
 		Map<BinaryMapIndexReaderApiName, StatByAPI> byApis = new HashMap<>();
-		long totalBytes;
 
 		public long beginSearchStats(BinaryMapIndexReaderApiName api, BinaryIndexPart part, CodedInputStream codedIS, String extraInfo) {
 			lastReq = System.nanoTime();
