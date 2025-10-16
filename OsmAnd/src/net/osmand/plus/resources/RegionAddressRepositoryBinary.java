@@ -126,7 +126,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			try {
 				BinaryMapIndexReader reader = getOpenFile();
 				if (reader != null) {
-					reader.preloadBuildings(street, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+					reader.preloadBuildings(street, BinaryMapIndexReader.buildAddressRequest(resultMatcher), null);
 					street.sortBuildings();
 				}
 			} catch (Exception e) {
@@ -158,7 +158,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		try {
 			BinaryMapIndexReader reader = getOpenFile();
 			if (reader != null) {
-				reader.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+				reader.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher), null);
 			}
 		} catch (Exception e) {
 			log.error("Disk operation failed", e);  //$NON-NLS-1$

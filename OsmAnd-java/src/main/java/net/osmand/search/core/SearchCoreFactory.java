@@ -355,8 +355,7 @@ public class SearchCoreFactory {
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
 				if (!townCities.containsKey(r)) {
-					BinaryMapIndexReader.buildAddressRequest(null);
-					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE);
+					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
 					townCities.put(r, l);
 					for (City c  : l) {
 						c.setReferenceFile(r);
@@ -548,6 +547,7 @@ public class SearchCoreFactory {
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+					req.setSearchStat(phrase.getSettings().getStat());
 					if (locSpecified) {
 						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
 								phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
@@ -680,11 +680,13 @@ public class SearchCoreFactory {
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
 					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom,
 					matcher, rawDataCollector);
+			req.setSearchStat(phrase.getSettings().getStat());
 
 			SearchRequest<Amenity> reqUnlimited = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
 					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 					matcher, rawDataCollector);
+			reqUnlimited.setSearchStat(phrase.getSettings().getStat());
 
 			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
 			if (fileRequest != null) {
@@ -1295,6 +1297,7 @@ public class SearchCoreFactory {
 					}
 					SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest((int) bbox.left,
 							(int) bbox.right, (int) bbox.top, (int) bbox.bottom, -1, poiTypeFilter, poiAdditionalFilter, rm);
+					req.setSearchStat(phrase.getSettings().getStat());
 					r.searchPoi(req);
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
@@ -1471,7 +1474,7 @@ public class SearchCoreFactory {
 			if (isLastWordCityGroup(phrase) && sw.getResult() != null && sw.getResult().file != null) {
 				City c = (City) sw.getResult().object;
 				if (c.getStreets().isEmpty()) {
-					sw.getResult().file.preloadStreets(c, null);
+					sw.getResult().file.preloadStreets(c, null, phrase.getSettings().getStat());
 				}
 				int limit = 0;
 				NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
@@ -1574,7 +1577,7 @@ public class SearchCoreFactory {
 								}
 							});
 
-					file.preloadBuildings(s, sr);
+					file.preloadBuildings(s, sr, phrase.getSettings().getStat());
 					Collections.sort(s.getBuildings(), new Comparator<Building>() {
 
 						@Override
