@@ -249,7 +249,7 @@ dependencies {
 }
 
 afterEvaluate {
-	def remoteAarSnapshot = "5.2"
+	def remoteAarSnapshot = "master-snapshot"
 	def localAarFile = file("../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar")
 
 	def requestedTasks = gradle.startParameter.taskNames.join(",").toLowerCase()
