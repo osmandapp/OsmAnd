@@ -5585,7 +5585,7 @@
     <string name="set_intermediate_point">設定中途:目的地</string>
     <string name="set_start_point">設定起點</string>
     <string name="shared_string_switch">開關</string>
-    <string name="ski_route_switch_style_description">使用冬季與滑雪地圖風格探索滑雪場、纜車等。</string>
+    <string name="ski_route_switch_style_description">透過冬季與滑雪地圖樣式，探索滑雪路線、雪坡與纜車。</string>
     <string name="osm_live_payment_renews_3_years">每三年續訂</string>
     <string name="osm_live_payment_3_years_title">每三年</string>
     <string name="three_years_subscription">三年訂閱</string>
@@ -5708,4 +5708,6 @@
     <string name="average_slope">平均坡度</string>
     <string name="shared_string_last_uphill">上次上坡</string>
     <string name="shared_string_last_downhill">上次下坡</string>
+    <string name="help_article_navigation_routing_ski_routing_name">滑雪坡道與路線</string>
+    <string name="rendering_attr_pisteRoutes_name">滑雪坡道與路線</string>
 </resources>

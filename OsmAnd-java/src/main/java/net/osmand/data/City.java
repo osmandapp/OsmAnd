@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.util.Algorithms;
 
 import java.util.*;
 
@@ -25,9 +26,10 @@ public class City extends MapObject {
 		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
 		
 		// not stored entities but registered to uniquely identify streets as SUBURB
-		BOROUGH(400, 2500), // 
+		BOROUGH(400, 2500),  
 		DISTRICT(400, 10000),
-		NEIGHBOURHOOD(300, 500), //
+		NEIGHBOURHOOD(300, 500),
+		CENSUS(400, 2500),
 		;
 		
 		private final double radius;
@@ -117,8 +119,11 @@ public class City extends MapObject {
 		this.id = id;
 	}
 
-	public String getIsInValue() {
-		return isin;
+	public boolean isInCityByName(String name) {
+		if(isin == null) {
+			return false;
+		}
+		return isin.contains(name.toLowerCase());
 	}
 	
 	public int[] getBbox31() {
@@ -184,13 +189,26 @@ public class City extends MapObject {
 	}
 	
 
-	// GENERATION
 	// Be attentive ! Working with street names ignoring case
-	private String isin = null;
+	private Set<String> isin = null;
 	
+	
+	public Set<String> getIsin() {
+		return isin;
+	}
 		
-	public void setIsin(String isin) {
-		this.isin = isin;
+	public void setIsin(String val) {
+		this.isin = new TreeSet<String>();
+		String[] vls = val.toLowerCase().split(",");
+		for (String v1 : vls) {
+			String[] v2s = v1.trim().split(";");
+			for (String v2 : v2s) {
+				v2 = v2.trim();
+				if (!Algorithms.isEmpty(v2)) {
+					this.isin.add(v2);
+				}
+			}
+		}
 	}
 
 	public Map<Street, Street> mergeWith(City city) {

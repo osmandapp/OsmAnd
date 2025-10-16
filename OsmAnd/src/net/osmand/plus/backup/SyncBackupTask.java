@@ -3,8 +3,8 @@ package net.osmand.plus.backup;
 import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_AUTO_SYNC;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
-import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
 import static net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType.UNIQUE;
 
@@ -43,6 +43,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	private final SyncOperationType operation;
 	private final OnBackupSyncListener syncListener;
 	private final boolean syncOperation;
+	private final boolean autoSync;
 
 	private int maxProgress;
 	private int importProgress;
@@ -55,7 +56,8 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		this.app = app;
 		this.key = key;
 		this.operation = operation;
-		this.syncOperation = operation == SYNC_OPERATION_SYNC;
+		this.syncOperation = operation.isSyncOperation();
+		this.autoSync = operation == SYNC_OPERATION_AUTO_SYNC;
 		this.syncListener = syncListener;
 		this.backupHelper = app.getBackupHelper();
 		this.networkSettingsHelper = app.getNetworkSettingsHelper();
@@ -107,7 +109,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		if (operation != SYNC_OPERATION_UPLOAD) {
 			if (!Algorithms.isEmpty(settingsItems)) {
 				try {
-					networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this);
+					networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this, autoSync);
 				} catch (Exception e) {
 					LOG.error(e);
 				}
@@ -124,23 +126,23 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	public void uploadLocalItem(@NonNull SettingsItem item) {
 		networkSettingsHelper.exportSettings(
 				BackupUtils.getItemFileName(item), Collections.singletonList(item),
-				Collections.emptyList(), Collections.emptyList(), this);
+				Collections.emptyList(), Collections.emptyList(), this, autoSync);
 	}
 
 	public void deleteItem(@NonNull SettingsItem item) {
 		networkSettingsHelper.exportSettings(BackupUtils.getItemFileName(item), Collections.emptyList(),
-				Collections.singletonList(item), Collections.emptyList(), this);
+				Collections.singletonList(item), Collections.emptyList(), this, autoSync);
 	}
 
 	public void deleteLocalItem(@NonNull SettingsItem item) {
 		networkSettingsHelper.exportSettings(BackupUtils.getItemFileName(item), Collections.emptyList(),
-				Collections.emptyList(), Collections.singletonList(item), this);
+				Collections.emptyList(), Collections.singletonList(item), this, autoSync);
 	}
 
 	public void downloadItem(@NonNull SettingsItem item, @NonNull RemoteFilesType type, boolean shouldReplace, boolean restoreDeleted) {
 		item.setShouldReplace(shouldReplace);
 		String name = BackupUtils.getItemFileName(item);
-		networkSettingsHelper.importSettings(name, Collections.singletonList(item), type, true, shouldReplace, restoreDeleted, this);
+		networkSettingsHelper.importSettings(name, Collections.singletonList(item), type, true, shouldReplace, restoreDeleted, this, autoSync);
 	}
 
 	private void uploadNewItems() {
@@ -158,7 +160,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 		try {
 			if (!itemsToUpload.isEmpty() || !itemsToDelete.isEmpty() || !itemsToLocalDelete.isEmpty()) {
-				networkSettingsHelper.exportSettings(BACKUP_ITEMS_KEY, itemsToUpload, itemsToDelete, itemsToLocalDelete, this);
+				networkSettingsHelper.exportSettings(BACKUP_ITEMS_KEY, itemsToUpload, itemsToDelete, itemsToLocalDelete, this, autoSync);
 			} else {
 				onSyncFinished(null);
 			}

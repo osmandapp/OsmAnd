@@ -253,8 +253,9 @@ public class EntityParser {
 		City c = new City(t);
 		parseMapObject(c, el, el.getTags());
 		String isin = el.getTag(OSMTagKey.IS_IN.getValue());
-		isin = isin != null ? isin.toLowerCase() : null;
-		c.setIsin(isin);
+		if (isin != null) {
+			c.setIsin(isin);
+		}
 		return c;
 	}
 

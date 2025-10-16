@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
+import static net.osmand.plus.backup.BackupUtils.AUTO_BACKUP_TYPE_PREFIX;
 import static net.osmand.plus.backup.BackupUtils.BACKUP_TYPE_PREFIX;
 import static net.osmand.plus.backup.BackupUtils.VERSION_HISTORY_PREFIX;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
@@ -142,6 +143,12 @@ public enum ExportType {
 		return VERSION_HISTORY_PREFIX + key;
 	}
 
+	@NonNull
+	public String getAutoBackupTypePrefId() {
+		String key = this == GPX_DIR ? TRACKS.name() : name();
+		return AUTO_BACKUP_TYPE_PREFIX + key;
+	}
+
 	@Nullable
 	public static ExportType findBy(@NonNull OsmandApplication app, @NonNull Object object) {
 		return searchElementWithCondition(valuesList(),
@@ -201,7 +208,7 @@ public enum ExportType {
 
 	@NonNull
 	public static List<ExportType> visibleValues() {
-		return filterElementsWithCondition(valuesList(), type -> type.isEnabled() && !type.isHidden());
+		return filterElementsWithCondition(enabledValues(), type -> !type.isHidden());
 	}
 
 	@NonNull

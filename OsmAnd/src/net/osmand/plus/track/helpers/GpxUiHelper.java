@@ -603,11 +603,17 @@ public class GpxUiHelper {
 	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull Activity activity, @NonNull GpxFile gpxFile) {
 		if (gpxFile.isShowCurrentTrack()) {
 			saveAndShareCurrentGpx(app, activity, gpxFile);
-		} else if (!Algorithms.isEmpty(gpxFile.getPath())) {
-			KFile file = new KFile(gpxFile.getPath());
-			GpxDataItem item = app.getGpxDbHelper().getItem(file, dataItem -> saveAndShareGpxWithAppearance(app, activity, gpxFile, dataItem));
-			if (item != null) {
-				saveAndShareGpxWithAppearance(app, activity, gpxFile, item);
+		} else {
+			String path = gpxFile.getPath();
+			if (!Algorithms.isEmpty(path)) {
+				KFile file = new KFile(path);
+				GpxDataItem dataItem = app.getGpxDbHelper().getItem(file,
+						item -> saveAndShareGpxWithAppearance(app, activity, gpxFile, item));
+				if (dataItem != null) {
+					saveAndShareGpxWithAppearance(app, activity, gpxFile, dataItem);
+				} else if (!app.getGpxDbHelper().isReading(file)) {
+					shareGpx(app, activity, new File(path));
+				}
 			}
 		}
 	}
