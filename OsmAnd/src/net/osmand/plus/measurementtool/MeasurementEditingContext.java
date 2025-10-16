@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.measurementtool.MeasurementEditingContextUtils.GpxTimeCalculator;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
@@ -797,7 +798,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	private void recreateSegments(List<TrkSegment> segments, List<TrkSegment> segmentsForSnap,
-								  List<WptPt> points, boolean calculateIfNeeded) {
+	                              List<WptPt> points, boolean calculateIfNeeded) {
 		List<Integer> roadSegmentIndexes = new ArrayList<>();
 		TrkSegment s = new TrkSegment();
 		segments.add(s);
@@ -974,6 +975,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 		calculatedTimeSpeed = useExternalTimestamps;
 
+		long initialTimestamp = originalPoints.isEmpty() ? 0 : originalPoints.get(0).getTime();
+		GpxTimeCalculator gpxTimeCalculator = new GpxTimeCalculator(initialTimestamp);
+
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
 		List<WptPt> routePoints = new ArrayList<>();
 		List<RouteSegmentResult> allSegments = new ArrayList<>();
@@ -992,7 +996,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
 				boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
-				MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
+				gpxTimeCalculator.fillPointsArray(points, seg, includeEndPoint);
 			}
 			allSegments.addAll(segments);
 
@@ -1223,6 +1227,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					l.setLongitude(pt.getLongitude());
 					if (!Double.isNaN(pt.getEle())) {
 						l.setAltitude(pt.getEle());
+					}
+					if (pt.getTime() > 0) {
+						l.setTime(pt.getTime());
+					}
+					if (pt.getSpeed() > 0) {
+						l.setSpeed((float)pt.getSpeed());
 					}
 					locations.add(l);
 				}
