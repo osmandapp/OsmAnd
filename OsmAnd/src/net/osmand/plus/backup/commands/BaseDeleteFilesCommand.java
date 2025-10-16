@@ -9,7 +9,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils.RequestResponse;
 import net.osmand.OperationLog;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupCommand;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
+import net.osmand.plus.backup.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;

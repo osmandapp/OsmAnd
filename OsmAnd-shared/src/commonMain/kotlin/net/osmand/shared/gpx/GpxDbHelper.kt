@@ -304,7 +304,7 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	fun isReading(): Boolean = readerSync.synchronize { readers.isNotEmpty() }
 
-	private fun isReading(file: KFile): Boolean =
+	fun isReading(file: KFile): Boolean =
 		readerSync.synchronize { readingItemsMap.contains(file) || readers.any { it.isReading(file) } }
 
 	private fun readGpxItem(file: KFile, item: GpxDataItem?, callback: GpxDataItemCallback?) {

@@ -5152,4 +5152,10 @@
     <string name="poi_hazard_additional_queues_likely">交通繁忙</string>
     <string name="poi_hazard_additional_side_winds">強風</string>
     <string name="poi_hazard_additional_ice">冰</string>
+    <string name="poi_piste_downhill">下坡雪道；滑雪道；滑雪坡道</string>
+    <string name="poi_route_activity_type_skiing">滑雪路線</string>
+    <string name="poi_historic_spacecraft">歷史性太空船</string>
+    <string name="poi_barrier_chain">鏈條柵欄</string>
+    <string name="poi_barrier_log">原木</string>
+    <string name="poi_barrier_sliding_gate">滑動門</string>
 </resources>

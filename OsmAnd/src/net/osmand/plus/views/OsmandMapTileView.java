@@ -356,16 +356,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
-				if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ZOOM_OUT) || blockTwoFingersTap) {
+				if (blockTwoFingersTap) {
 					return;
 				}
-
-				Zoom zoom = getCurrentZoom();
-				if (zoom.isZoomOutAllowed()) {
-					zoom.zoomOut();
-					getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, false);
-					if (wasMapLinkedBeforeGesture) {
-						mapViewTrackingUtilities.setMapLinkedToLocation(true);
+				if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TAP)) {
+					for (OsmandMapLayer layer : getLayers()) {
+						if (layer.isMapGestureAllowed(MapGestureType.TWO_POINTERS_TAP)) {
+							layer.onDoubleFingerTap();
+						}
+					}
+				}
+				if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
+					Zoom zoom = getCurrentZoom();
+					if (zoom.isZoomOutAllowed()) {
+						zoom.zoomOut();
+						getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, false);
+						if (wasMapLinkedBeforeGesture) {
+							mapViewTrackingUtilities.setMapLinkedToLocation(true);
+						}
 					}
 				}
 			}
