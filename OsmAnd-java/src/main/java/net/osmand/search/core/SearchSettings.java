@@ -61,6 +61,7 @@ public class SearchSettings {
 			this.emptyQueryAllowed = s.emptyQueryAllowed;
 			this.sortByName = s.sortByName;
 			this.exportSettings = s.exportSettings;
+			this.stat = s.stat;
 		}
 	}
 	
