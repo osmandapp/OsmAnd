@@ -2,9 +2,11 @@ package net.osmand.plus.utils;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+import static net.osmand.plus.helpers.AndroidUiHelper.isOrientationPortrait;
 import static net.osmand.plus.helpers.AndroidUiHelper.processSystemBarScrims;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -25,6 +27,7 @@ import androidx.core.view.WindowInsetsCompat.Type.InsetsType;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.InsetTarget.Type;
@@ -96,7 +99,7 @@ public class InsetsUtils {
 	public static void applyPadding(@NonNull View rootView,
 	                                @NonNull WindowInsetsCompat insets,
 	                                @NonNull InsetTarget insetTarget) {
-		EnumSet<InsetSide> sides = insetTarget.getSides(isLandscape(rootView.getContext()));
+		EnumSet<InsetSide> sides = insetTarget.getSides(isOrientationPortrait(rootView.getContext()));
 		for (View view : resolveViews(rootView, insetTarget)) {
 			if (view != null) {
 				applyPadding(view, insets, sides, insetTarget.getTypeMask());
@@ -192,11 +195,11 @@ public class InsetsUtils {
 	private static void applyAppBarWithCollapseInsets(View root, InsetTarget target, WindowInsetsCompat insets, InsetTargetsCollection collection) {
 		for (View view : resolveViews(root, target)) {
 			if (view != null) {
-				EnumSet<InsetSide> sides = target.getSides(isLandscape(view.getContext()));
+				EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(view.getContext()));
 				applyPadding(view, insets, sides, target.getTypeMask());
 
 				for(InsetTarget insetTargets : collection.getByType(Type.ROOT_INSET)){
-					EnumSet<InsetsUtils.InsetSide> insetSides = insetTargets.getSides(isLandscape(view.getContext()));
+					EnumSet<InsetsUtils.InsetSide> insetSides = insetTargets.getSides(isOrientationPortrait(view.getContext()));
 					if (insetSides != null){
 						insetSides.remove(InsetSide.TOP);
 					}
@@ -207,7 +210,7 @@ public class InsetsUtils {
 
 	private static void applyRootInsetsPaddings(View root, InsetTarget target, WindowInsetsCompat insets) {
 		if (root != null) {
-			EnumSet<InsetSide> sides = target.getSides(isLandscape(root.getContext()));
+			EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(root.getContext()));
 			applyPadding(root, insets, sides, target.getTypeMask());
 		}
 	}
@@ -215,7 +218,7 @@ public class InsetsUtils {
 	private static void applyCustomInsets(View root, InsetTarget target, WindowInsetsCompat insets) {
 		for (View view : resolveViews(root, target)) {
 			if (view != null) {
-				EnumSet<InsetSide> sides = target.getSides(isLandscape(view.getContext()));
+				EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(view.getContext()));
 				if (target.isClipToPadding()) {
 					applyClipPadding(view);
 				}
@@ -408,22 +411,23 @@ public class InsetsUtils {
 		return result;
 	}
 
+	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment, @Nullable Dialog dialog) {
+		if (dialog == null || dialog.getWindow() == null) {
+			return;
+		}
+		boolean contentLight = insetSupportedFragment.isNavigationBarContentLight();
+		Window window = dialog.getWindow();
+		AndroidUiHelper.setNavigationBarContentColor(window, contentLight);
+	}
+
 	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment) {
+		boolean contentLight = insetSupportedFragment.isNavigationBarContentLight();
 		int colorId = insetSupportedFragment.getNavigationBarColorId();
 		Activity activity = insetSupportedFragment.requireActivity();
 		if (colorId != -1) {
-			AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId));
+			AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId), contentLight);
 		} else {
-			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT);
+			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT, contentLight);
 		}
-
-		Window window = activity.getWindow();
-		View decorView = window.getDecorView();
-
-		if (isEdgeToEdgeSupported()) {
-			window.setNavigationBarContrastEnforced(false);
-		}
-		WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(window, decorView);
-		controller.setAppearanceLightNavigationBars(insetSupportedFragment.isNavigationBarContentLight());
 	}
 }

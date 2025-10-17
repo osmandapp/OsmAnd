@@ -18,11 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.help.HelpActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -38,6 +40,8 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 
 	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
 	protected WindowInsetsCompat rootInsets;
+
+	private StateChangedListener<DayNightMode> stateChangedListener;
 	@ColorRes
 	protected int getStatusBarColorId() {
 		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
@@ -50,6 +54,8 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 			EdgeToEdge.enable(this);
 		}
 		updateNavBarColor();
+		stateChangedListener = o -> updateNavBarColor();
+		settings.DAYNIGHT_MODE.addListener(stateChangedListener);
 
 		super.onCreate(savedInstanceState);
 	}

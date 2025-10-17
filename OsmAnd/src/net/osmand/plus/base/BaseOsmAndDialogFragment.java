@@ -64,6 +64,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		Dialog dialog = getDialog();
 		if (dialog != null && dialog.getWindow() != null && InsetsUtils.isEdgeToEdgeSupported()) {
 			dialog.getWindow().setNavigationBarContrastEnforced(false);
+			InsetsUtils.processNavBarColor(this, dialog);
 
 			if (Build.VERSION.SDK_INT >= 36) {
 				//WindowCompat.enableEdgeToEdge(window);
