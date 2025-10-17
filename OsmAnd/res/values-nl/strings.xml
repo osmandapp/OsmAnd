@@ -5699,7 +5699,21 @@
 \n
 \n</string>
     <string name="app_mode_hang_gliding">Deltavliegen</string>
-    <string name="release_5_2">• Werk in uitvoering...</string>
+    <string name="release_5_2">
+        • Straat- en stadsdetails toegevoegd aan zoekresultaten\n\n
+        • Nieuwe widgets voor Reisopname: Max. snelheid, Gem. helling en verbeterd Stijgen/Dalen\n\n
+        • Nieuwe "Marine" nautische kaartstijl met uitgebreide aanpassingsopties\n\n
+        • Verbeterde kaartsnelheid\n\n
+        • Verbeterde connectiviteit met OBDII BLE-adapters\n\n
+        • Hartslagstatistieken toegevoegd aan "Analyseer per interval"\n\n
+        • Duurweergave toegevoegd voor geplande routes\n\n
+        • Hoogte-eenheden kunnen nu los van afstandseenheden worden ingesteld\n\n
+        • Verbeterde Snelle Actie voor kaartoriëntatie met selecteerbare kompasmodi\n\n
+        • Voor Android Auto, pre-navigatiewaarschuwingen toegevoegd voor ontbrekende kaarten en privéwegen\n\n
+        • Een probleem opgelost met onjuiste grootteparameters voor de Radiusliniaal-widget\n\n
+        • Omgekeerde schermoriëntaties toegevoegd\n\n
+        • Verbeterde gebruikersinterface voor het specificeren van vrachtwagengegevens\n\n
+    </string>
     <string name="deleting_history">Geschiedenis wordt gewist…</string>
     <string name="map_orientation_portrait_inverted">Portret (omgekeerd)</string>
     <string name="map_orientation_landscape_inverted">Landschap (omgekeerd)</string>

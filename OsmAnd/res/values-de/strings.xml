@@ -5799,7 +5799,21 @@
     <string name="shared_string_flat">Flach</string>
     <string name="shared_string_switch">Umschalten</string>
     <string name="show_rasterization_debug_tile">Informationen zur Kachelrasterung anzeigen</string>
-    <string name="release_5_2">In Bearbeitung …</string>
+    <string name="release_5_2">
+        • Straßen- und Stadtdetails zu den Suchergebnissen hinzugefügt\n\n
+        • Neue Widgets zur Aufzeichnung von Fahrten: Höchstgeschwindigkeit, durchschnittliche Steigung und verbesserte Bergauf-/Bergab-Anzeige\n\n
+        • Neuer nautischer Kartenstil „Marine“ mit umfangreichen Anpassungsoptionen\n\n
+        • Verbesserte Geschwindigkeit der Kartenwiedergabe\n\n
+        • Verbesserte Konnektivität mit OBDII-BLE-Adaptern\n\n
+        • Herzfrequenzmessungen zu „Analyse nach Intervall” hinzugefügt\n\n
+        • Anzeige der Dauer für geplante Strecken hinzugefügt\n\n
+        • Höheneinheiten können jetzt separat von Entfernungseinheiten eingestellt werden\n\n
+        • Verbesserte Schnellaktion für die Kartenausrichtung mit wählbaren Kompassmodi\n\n
+        • Für Android Auto wurden Vorwarnungen für fehlende Karten und Privatstraßen hinzugefügt\n\n
+        • Problem mit falschen Größenparametern für das Widget „Radiuslineal” behoben\n\n
+        • Umgekehrte Bildschirmausrichtung hinzugefügt\n\n
+        • Verbesserte Benutzeroberfläche für die Angabe von Lkw-Messwerten\n\n
+    </string>
     <string name="shared_string_threads">Threads</string>
     <string name="threads_allocated_for_rendering">Für das Rendern zugewiesene Threads</string>
     <string name="threads_allocated_for_rendering_desc">Eine niedrigere Threadzuweisung kann die Kartendarstellung in einigen Fällen beschleunigen.</string>
