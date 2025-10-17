@@ -2567,8 +2567,6 @@
     <string name="topo_render_descr">Pre turistiku a bicyklovanie v prírode. Dobrá čitateľnosť v exteriéri. Kontrastné cesty a prírodné objekty, rôzne typy trás, vrstevnice s pokročilými nastaveniami, viac detailov. Ďalšie nastavenia umožňujú rozlíšiť kvalitu povrchu ciest. Nemá nočný režim.</string>
     <string name="touring_view_render_descr">Štýl pre účely cestovania s vysokým kontrastom a všetkými detailami. Obsahuje všetky možnosti základného štýlu OsmAnd, pričom zobrazuje čo najviac detailov, všetky cesty, chodníky a iné spôsoby cestovania. Jasné rozlíšenie typov ciest ako v cestovných atlasoch. Vhodný pre denné, nočné aj externé použitie.</string>
     <string name="default_render_descr">Všeobecný štýl. Husto zakreslené mestá zobrazené čisto. Obsahuje trasy, kvalitu ciest, obmedzenia prístupu, čísla ciest, chodníky podľa stupnice SAC, objekty pre vodné športy, topografické objekty ako vrstevnice.</string>
-    <string name="open_wikipedia_link_online">Otvoriť odkaz Wikipédie na Internete</string>
-    <string name="open_wikipedia_link_online_description">Odkaz bude otvorený vo webovom prehliadači.</string>
     <string name="read_wikipedia_offline_description">Získajte predplatné OsmAnd Live, aby ste mohli čítať články Wikipédie a Wikivoyage aj bez prístupu na Internet.</string>
     <string name="how_to_open_link">Ako otvoriť odkaz?</string>
     <string name="read_wikipedia_offline">Čítať Wikipédiu offline</string>
@@ -2601,7 +2599,6 @@
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="unlock_all_features">Odomknite všetky funkcie OsmAnd</string>
     <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s na ich čítanie offline.</string>
-    <string name="download_wikipedia_label">Stiahnuť údaje Wikipédie</string>
     <string name="open_in_browser_wiki">Otvoriť článok online</string>
     <string name="open_in_browser_wiki_description">Zobraziť článok vo webovom prehliadači.</string>
     <string name="download_wiki_region_placeholder">táto oblasť</string>
@@ -5799,7 +5796,6 @@
     <string name="threads_allocated_for_rendering_desc">Menší počet vlákien môže niekedy zrýchliť vykresľovanie mapy.</string>
     <string name="turn_by_turn_directions">Podrobné navigačné pokyny</string>
     <string name="enable_msaa">Povoliť MSAA</string>
-    <string name="private_access_routing_req_short">Váš cieľ je v súkromnej oblasti. Povoliť použitie súkromných ciest?</string>
     <string name="view_on_phone">Zobraziť na telefóne</string>
     <string name="average_elevation">Priemerná nadmorská výška</string>
     <string name="ascent">Stúpanie</string>

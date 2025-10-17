@@ -2607,7 +2607,6 @@
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="purchase_dialog_title">Escolher plano</string>
     <string name="purchase_dialog_subtitle">Escolha o item adequado</string>
-    <string name="download_wikipedia_label">Baixar dados da Wikipédia</string>
     <string name="open_in_browser_wiki">Abrir artigo online</string>
     <string name="open_in_browser_wiki_description">Veja o artigo em um navegador.</string>
     <string name="download_wiki_region_placeholder">esta região</string>
@@ -2627,7 +2626,6 @@
     <string name="shared_string_bookmark">Marcar</string>
     <string name="hide_full_description">Ocultar descrição completa</string>
     <string name="show_full_description">Mostrar descrição completa</string>
-    <string name="open_wikipedia_link_online_description">O link será aberto em um navegador web.</string>
     <string name="how_to_open_link">Como abrir o link?</string>
     <string name="read_wikipedia_offline">Ler a Wikipédia offline</string>
     <string name="download_all">Baixar tudo</string>
@@ -2639,8 +2637,7 @@
     <string name="off_road_render_descr">Para condução off-road com base no estilo \"Topo\" e para utilização com imagens de satélite verdes como mapa de fundo. Espessura de via principal reduzido, espessura das trilhas, caminhos, ciclovias e outras vias aumentado.</string>
     <string name="nautical_render_descr">Para navegação náutica. Apresenta boias, faróis, vias fluviais, vias e sinais marítimos, portos, serviços de navegação e curvas batimétricas.</string>
     <string name="light_rs_render_descr">Estilo de condução simples. Modo noturno suave, estradas contrastantes em estilo laranja, escurece objetos secundários do mapa e recursos topográficos como curvas de nível.</string>
-    <string name="open_wikipedia_link_online">Abrir link da Wikipédia online</string>
-    <string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
+	<string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
     <string name="ski_map_render_descr">Para esquiar. Possui pistas, teleféricos, pistas de esqui, pistas de cross country, etc. Escurece objetos secundários do mapa.</string>
     <string name="error_notification_desc">Favor enviar uma captura de tela desta notificação para support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar ações</string>
@@ -6204,7 +6201,6 @@
     <string name="add_to_favorites">Adicionar aos favoritos</string>
     <string name="max_weight_at_full_load_description">Informe o peso máximo do seu veículo com carga total para evitar estradas e pontes com limites de peso.</string>
     <string name="max_axle_load_description">Forneça a carga máxima por eixo do seu veículo para evitar estradas e pontes com limites de peso.</string>
-    <string name="private_access_routing_req_short">Seu destino está em uma área privada. Permite o uso de estradas privadas?</string>
     <string name="view_on_phone">Ver no celular</string>
     <string name="shared_sting_osm_link">Link do OSM</string>
     <string name="marine_renderer">Marinha</string>

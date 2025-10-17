@@ -6,6 +6,7 @@ import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
+import static net.osmand.plus.settings.enums.ThemeUsageContext.MAP;
 import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
@@ -822,6 +823,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void updateStatusBarColor() {
 		UiUtilities.updateStatusBarColor(this);
+	}
+
+	@Override
+	public boolean isNavigationBarContentLight() {
+		return !app.getDaynightHelper().isNightMode(MAP);
 	}
 
 	public boolean isInAppPurchaseAllowed() {

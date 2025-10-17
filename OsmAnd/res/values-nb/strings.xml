@@ -2582,7 +2582,6 @@
     <string name="purchase_dialog_subtitle">Velg passende element</string>
     <string name="travel_card_download_descr">Last ned Wikivoyage-reiseguider for å se artikler om steder rundt om i verden uten å ha internettforbindelse.</string>
     <string name="popular_destinations">Populære reisemål</string>
-    <string name="download_wikipedia_label">Last ned Wikipedia-data</string>
     <string name="how_to_open_wiki_title">Hvordan åpne Wikipedia-artikler\?</string>
     <string name="download_wikipedia_description">Last ned Wikipedia-artiklene for %1$s slik at du kan lese dem frakoblet.</string>
     <string name="open_in_browser_wiki">Åpne artikkel på nettet</string>
@@ -2688,8 +2687,6 @@
     <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, avanserte kotealternativer, flere detaljer. Justering av overflate gjør det mulig å skjelne veikvalitet. Ingen nattmodus.</string>
     <string name="touring_view_render_descr">Turstil med høy kontrast og maksimalt med detaljer. Inkluderer alle alternativene til standardstilen til OsmAnd, med visning av så mange detaljer som mulig, i særdeleshet veier, stier og andre måter å reise på. Tydelig \"reiseatlas\"-skille mellom veityper. Egnet for dag, natt og utendørs bruk.</string>
     <string name="default_render_descr">Stil for generell bruk. Tettbebygde byer vises klart. Har ruter, overflatekvalitet, adgangsbegrensninger, veinummer, stiopptegning i henhold til SAC/CAI-skala, rafting/elvepadling-elementer, topografiske funksjoner som koter.</string>
-    <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
-    <string name="open_wikipedia_link_online_description">Lenken vil åpnes i en nettleser.</string>
     <string name="read_wikipedia_offline_description">Skaff OsmAnd Live-abonnement for å lese Wikipedia og Wikivoyage-artikler på nett.</string>
     <string name="how_to_open_link">Hvordan åpne lenken\?</string>
     <string name="read_wikipedia_offline">Les Wikipedia frakoblet</string>

@@ -3758,7 +3758,6 @@
     <string name="calculate_offline">Изчисляване без мрежа</string>
     <string name="calculate_offline_altitude_descr">Изчисляване на надморската височина въз основа на данни от картата на релефа (3D). Разликите спрямо отчетената от устройството надморска височина могат да бъдат използвани за корекция на надморската височина.</string>
     <string name="show_tunnels">Тунели</string>
-    <string name="download_wikipedia_label">Изтегли данните от Wikipedia</string>
     <string name="download_wikipedia_description">Изтеглете статиите от Wikipedia за %1$s, за да ги четете офлайн.</string>
     <string name="free_favorites_backup_description">Регистрирайте се в OsmAnd Cloud, за да получите безплатно резервно копие на избраните точки и настройките.</string>
     <string name="write_heading">Запазване на посоката</string>
