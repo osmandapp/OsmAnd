@@ -2553,7 +2553,6 @@
     <string name="wikivoyage_travel_guide">Ταξιδιωτικοί Οδηγοί</string>
     <string name="wikivoyage_travel_guide_descr">Οδηγοί για τα πιο ενδιαφέροντα μέρη στον πλανήτη, μέσα στο OsmAnd, χωρίς σύνδεση διαδικτύου.</string>
     <string name="download_wikipedia_description">Λήψη των λημμάτων της Βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
-    <string name="download_wikipedia_label">Λήψη δεδομένων Βικιπαίδειας</string>
     <string name="open_in_browser_wiki">Άνοιγμα άρθρου στο διαδίκτυο</string>
     <string name="open_in_browser_wiki_description">Προβολή άρθρου στον περιηγητή.</string>
     <string name="download_wiki_region_placeholder">αυτής της περιοχής</string>
@@ -2573,8 +2572,6 @@
     <string name="light_rs_render_descr">Για απλή οδήγηση. Απαλή νυχτερινή λειτουργία, εμφαίνοντας τους πορτοκαλί δρόμους, υποβαθμίζει τα δευτερεύοντα αντικείμενα στον χάρτη, τοπογραφικά χαρακτηριστικά όπως ισοϋψείς καμπύλες.</string>
     <string name="topo_render_descr">Για πεζοπορία, περπάτημα και ποδηλασία στη φύση. Ευανάγνωστο σε εξωτερικό φωτισμό. Με μεγάλη αντίθεση στους δρόμους και τα φυσικά στοιχεία, επιλογές για ανώτερες γραμμές περιγράμματος, επιπλέον λεπτομέρειες. Ρυθμίζοντας την αρτιότητα της επιφάνειας αναδεικνύει την ποιότητα των δρόμων. Δεν υπάρχει λειτουργία νύχτας.</string>
     <string name="default_render_descr">Μορφή γενικής χρήσης. Οι πυκνές πόλεις είναι ευδιάκριτες. Περιέχει διαδρομές, ποιότητα επιφάνειας, περιορισμούς πρόσβασης, οδικές πινακίδες, μονοπάτια που αποδίδονται σύμφωνα με την κλίμακα SAC/CAI, χαρακτηριστικά αθλημάτων με ορμητικό νερό, τοπογραφικά χαρακτηριστικά όπως ισοϋψείς καμπύλες.</string>
-    <string name="open_wikipedia_link_online">Άνοιγμα διαδικτυακού συνδέσμου Βικιπαίδειας</string>
-    <string name="open_wikipedia_link_online_description">Ο σύνδεσμος θα ανοιχτεί σε περιηγητή ιστού.</string>
     <string name="read_wikipedia_offline_description">Εγγραφείτε στο OsmAnd Live για να διαβάσετε χωρίς διαδίκτυο άρθρα στη Βικιπαίδεια και στα Βικιταξίδια.</string>
     <string name="how_to_open_link">Πώς να ανοίξετε τον σύνδεσμο;</string>
     <string name="read_wikipedia_offline">Ανάγνωση της Βικιπαίδειας χωρίς διαδίκτυο</string>

@@ -2557,7 +2557,6 @@
     <string name="monthly_map_updates">Actualització mensual de mapes</string>
     <string name="daily_map_updates">Actualització horària de mapes</string>
     <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia de %1$s per llegir-los fora de línia.</string>
-    <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
     <string name="open_in_browser_wiki">Obre l\'article en línia</string>
     <string name="open_in_browser_wiki_description">Consulta l\'article en un navegador.</string>
     <string name="download_wiki_region_placeholder">aquesta regió</string>
@@ -2584,8 +2583,6 @@
     <string name="unlock_all_features">Desbloca totes les funcions de OsmAnd</string>
     <string name="shared_string_wikivoyage">Viquiviatges</string>
     <string name="index_item_world_wikivoyage">Articles de Viquiviatges d\'arreu</string>
-    <string name="open_wikipedia_link_online">Obre l\'enllaç en línia de Viquipèdia</string>
-    <string name="open_wikipedia_link_online_description">L\'enllaç s\'obrirà en el vostre navegador.</string>
     <string name="how_to_open_link">Com obrir l\'enllaç?</string>
     <string name="read_wikipedia_offline">Consulta la Viquipèdia en local</string>
     <string name="download_all">Baixa-ho tot</string>

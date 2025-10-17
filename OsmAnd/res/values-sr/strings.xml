@@ -2321,7 +2321,6 @@
     <string name="route_general_information">Укупна удаљеност %1$s, време путовања %2$d h %3$d min.</string>
     <string name="position_on_map_center">На средини</string>
     <string name="position_on_map_bottom">На дну</string>
-    <string name="download_wikipedia_label">Преузми податке са Википедије</string>
     <string name="open_in_browser_wiki_description">Погледај чланак у читачу веба.</string>
     <string name="download_wiki_region_placeholder">ова област</string>
     <string name="wiki_article_search_text">Претражујем одговарајући чланак викија</string>
@@ -2509,8 +2508,6 @@
     <string name="light_rs_render_descr">Једноставан приказ вожње. Пријатан за очи ноћу, изохипсе, поморанџасти путеви са добрим сенчењем, замагљује мање битне ставке на карти.</string>
     <string name="topo_render_descr">За шетање, пешачење, трчање и бициклизам у природи. Добра читљивост у условима спољне осветљености. Добар контраст за путеве и природне објекте, различити типови путања, изохипсе са напредним подешавањима, више детаља. Могућност врста подлоге Вам омогућава да разликујете путеве са различитим квалитетима подлога. Нема ноћног рада.</string>
     <string name="default_render_descr">Стил опште намене. Густи градови су приказани јасно. Приказује изохипсе, путање, каквоћу подлоге, забране приступа, затварање путева, исцртавање путева по алпској лествици САЦ, објекти за спортове на брзацима.</string>
-    <string name="open_wikipedia_link_online">Отвори Википедија везу са интернетом</string>
-    <string name="open_wikipedia_link_online_description">Веза ће бити отворена у веб читачу.</string>
     <string name="read_wikipedia_offline_description">Да бисте читали чланке са Википедије и Викивоајажа, купите чланарину на ОсмАнд уживо.</string>
     <string name="how_to_open_link">Како да отворим везу?</string>
     <string name="read_wikipedia_offline">Читај Википедију ван мреже</string>

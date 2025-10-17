@@ -4153,8 +4153,6 @@
     <string name="osmand_team">Nhóm OsmAnd</string>
     <string name="purchase_cancelled_dialog_title">Bạn đã hủy đăng ký OsmAnd Live</string>
     <string name="markers_remove_dialog_msg">Xóa điểm đánh dấu bản đồ \'%s\'?</string>
-    <string name="open_wikipedia_link_online">Mở đường dẫn Wikipedia trực tuyến</string>
-    <string name="open_wikipedia_link_online_description">Đường dẫn sẽ được mở trong một trình duyệt web.</string>
     <string name="osm_live_payment_contribute_descr">Các khoản quyên góp giúp hỗ trợ kinh phí cho việc lập bản đồ của OSM.</string>
     <string name="send_search_query_description">Truy vấn tìm kiếm của bạn sẽ được gửi đến: \"%1$s\", cùng với vị trí của bạn.\n\nThông tin cá nhân không bị thu thập, chỉ dữ liệu tìm kiếm cần thiết để cải thiện tính năng tìm kiếm.</string>
     <string name="coord_input_edit_point">Chỉnh sửa điểm</string>

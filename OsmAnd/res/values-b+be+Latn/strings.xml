@@ -2617,8 +2617,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="topo_render_descr">Kantrastny styĺ, pryznačany ŭ pieršuju čarhu dlia špacyru, pachodu i katannia na rovary. Dobraja čytaĺnasć pry skladanym vonkavym asviatlienni. Asnoŭnyja mahčamasci: kantrastnyja darohi i pryrodnyja abjekty, roznyja typy maršrutaŭ, konturnyja linii z pašyranymi naladami, boĺš padrabiaznaja infarmacyja na adpaviednych uzroŭniach maštabavannia, čym u ahadanym styli. Opcyja celasnasci pavierchni dazvaliaje adroznivać darohi z roznaj jakasciu pavierchni. Biez načnoha režymu.</string>
     <string name="touring_view_render_descr">Vysokadetalizavany styĺ dlia turystyčnach met. Ukliučaje ŭ siabie ŭsie paramietry kanfihuracyi ahadanaha styliu i, akramia taho: pakazvaje, jak maha boĺš detaliaŭ, nakoĺki heta mahčyma, u pryvatnasci, usie darohi, šliachi i inšyja sposaby pieramiaščennia. Jasnaje vizuaĺnaje adrozniennie pamiž roznymi typami daroh, jakoje nahadvaje mnohija turystyčnyja atlasy. Vysokakantrastnaja kaliarovaja schiema dlia vuličnaha vykarystannia z dzionnym i načnym režymam.</string>
     <string name="default_render_descr">Styĺ ahuĺnaha pryznačennia. Sproščanaja čystaja admalioŭka ŭ ščyĺnanasielienych haradach. Asnoŭnyja mahčymasci: konturnyja linii, jakać pavierchni, abmiežavanni dostupu, darožnyja ščyty, admalioŭka šliachoŭ pa škalie SAC, abjekty vodnych splavaŭ.</string>
-    <string name="open_wikipedia_link_online">Adkryć Vikipiedyja-spasylku anlajn</string>
-    <string name="open_wikipedia_link_online_description">Spasylka adkryjecca ŭ veb-braŭziery.</string>
     <string name="read_wikipedia_offline_description">Atrymajcie padpisku na OsmAnd Live, kab čytać artykuly Vikipiedyi i Wikivoyage aŭtanomna.</string>
     <string name="how_to_open_link">Jak adkryć spasylku?</string>
     <string name="read_wikipedia_offline">Čytać Vikipiedyju aŭtanomna</string>
@@ -2670,7 +2668,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="access_intermediate_arrival_time">Pramiežkavy čas prybyccia</string>
     <string name="map_widget_intermediate_time">Pramiežkavy čas</string>
     <string name="download_wikipedia_description">Spampavać artykuly Vikipedyi dlia %1$s dlia aŭtanomnaha čytannia.</string>
-    <string name="download_wikipedia_label">Spampavać danyja Vikipedyi</string>
     <string name="open_in_browser_wiki">Adkryć artykul anlajn</string>
     <string name="open_in_browser_wiki_description">Pahliadzieć artykul u braŭziery.</string>
     <string name="download_wiki_region_placeholder">hety rehijon</string>

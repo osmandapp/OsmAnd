@@ -2540,7 +2540,6 @@
     <string name="pick_up_till">المغادرة قبل</string>
     <string name="show_number_pad">إظهار لوحة الأرقام</string>
     <string name="index_item_world_wikivoyage">مقالات ويكي الرحلات حول العالم</string>
-    <string name="download_wikipedia_label">تنزيل بيانات ويكيبيديا</string>
     <string name="open_in_browser_wiki">فتح المقالة على الويب</string>
     <string name="open_in_browser_wiki_description">عرض المقالة على متصفح الويب.</string>
     <string name="download_wiki_region_placeholder">هذه المنطقة</string>
@@ -2548,8 +2547,6 @@
     <string name="how_to_open_wiki_title">بأي طريقة تود فتح مقالات ويكيبيديا ؟</string>
     <string name="hide_full_description">إخفاء الوصف الموسَّع</string>
     <string name="show_full_description">عرض الوصف الكامل</string>
-    <string name="open_wikipedia_link_online">فتح رابط ويكيبيديا على الإنترنت</string>
-    <string name="open_wikipedia_link_online_description">سوف يتم فتح الرابط على متصفح الويب.</string>
     <string name="how_to_open_link">كيف يُفتح الرابط ؟</string>
     <string name="read_wikipedia_offline">قراءة ويكيبيديا مِن دون اتصال</string>
     <string name="download_all">تنزيل الكل</string>

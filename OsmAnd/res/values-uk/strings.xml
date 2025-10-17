@@ -2549,8 +2549,6 @@
     <string name="topo_render_descr">Для походів, пішого та вело туризму. Добре читається на вулиці. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти ізоліній, більше подробиць. Налаштування однорідності поверхні дозволяє відрізняти якість дороги. Нічного режиму немає.</string>
     <string name="touring_view_render_descr">Туристичний стиль з високим контрастом та високою деталізацією. Включає всі типові параметри стилю OsmAnd, показуючи при цьому докладні відомості, зокрема дороги, стежки та інші шляхи для подорожі. \"Туристичний атлас\" чітко показує різницю між типами доріг. Підходить для денного, нічного та використання на природі.</string>
     <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить маршрути, відомості про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC/CAI, елементи сплавних водних видів спорту, топографічні функції, такі як ізолінії.</string>
-    <string name="open_wikipedia_link_online">Перейти за посиланням до Вікіпедії</string>
-    <string name="open_wikipedia_link_online_description">Посилання буде відкрите в вебоглядачі.</string>
     <string name="read_wikipedia_offline_description">Передплатіть OsmAnd Live, щоб читати статті з Вікіпедії та Вікімандрів в офлайн режимі.</string>
     <string name="read_wikipedia_offline">Читати Вікіпедію в офлайн режимі</string>
     <string name="purchase_cancelled_dialog_title">Ви скасували передплату OsmAnd Live</string>
@@ -2624,7 +2622,6 @@
     <string name="access_intermediate_arrival_time">Прибуття в проміжний пункт призначення</string>
     <string name="map_widget_intermediate_time">Час до проміжного пункту призначення</string>
     <string name="download_wikipedia_description">Завантажити статті Вікіпедії для %1$s, щоб читати їх офлайн.</string>
-    <string name="download_wikipedia_label">Завантаження даних Вікіпедії</string>
     <string name="open_in_browser_wiki">Відкрити статтю в Інтернеті</string>
     <string name="open_in_browser_wiki_description">Переглянути статтю в оглядачі.</string>
     <string name="download_wiki_region_placeholder">цей регіон</string>

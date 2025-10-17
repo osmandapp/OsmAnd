@@ -2132,8 +2132,6 @@
     <string name="topo_render_descr">Para caminhadas, pedestrianismo e ciclismo de natureza. Legível em exteriores. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de linha de contorno, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
     <string name="touring_view_render_descr">Estilo turístico com alto contraste e máximo detalhe. Inclui todas as opções do estilo OsmAnd padrão, enquanto mostra o máximo de detalhes possíveis, particularmente estradas, caminhos e outras formas de viajar. Distinção clara do \"atlas turístico\" entre as categorias de estrada. Adequado para uso diurno, noturno e ao ar livre.</string>
     <string name="default_render_descr">Estilo de propósito geral. Cidades densas mostradas de forma limpa. Características: rotas, qualidade de superfície, restrições de acesso, escudos de estrada, caminhos conforme escala SAC/CAI, elementos desportivos de águas bravas, elementos de topografia como curvas de nível.</string>
-    <string name="open_wikipedia_link_online">Abrir página da Wikipédia na Internet</string>
-    <string name="open_wikipedia_link_online_description">A hiperligação será aberta no navegador de Internet.</string>
     <string name="read_wikipedia_offline_description">Obtenha uma subscrição do OsmAnd Live para ler artigos da Wikipédia e da Wikivoyage desligado da Internet.</string>
     <string name="how_to_open_link">Como abrir a hiperligação\?</string>
     <string name="read_wikipedia_offline">Ler a Wikipédia desligado da Internet</string>
@@ -2663,7 +2661,6 @@
     <string name="tunnel_warning">Túnel à frente</string>
     <string name="show_tunnels">Túneis</string>
     <string name="download_wikipedia_description">Descarregar artigos da Wikipédia de %1$s para lê-los offline.</string>
-    <string name="download_wikipedia_label">Descarregar dados da Wikipédia</string>
     <string name="open_in_browser_wiki">Abrir artigo na Internet</string>
     <string name="open_in_browser_wiki_description">Ver artigo no navegador web.</string>
     <string name="download_wiki_region_placeholder">esta região</string>
