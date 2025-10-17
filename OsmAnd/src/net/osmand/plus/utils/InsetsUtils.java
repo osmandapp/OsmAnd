@@ -18,6 +18,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsCompat.Type.InsetsType;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.ISupportInsets;
@@ -33,7 +34,7 @@ import java.util.Set;
 
 public class InsetsUtils {
 
-	public static final int MINIMUM_EDGE_TO_EDGE_SUPPORTED_API = 30;
+	public static final int MINIMUM_EDGE_TO_EDGE_SUPPORTED_API = 35;
 
 	public enum InsetSide {
 		LEFT, TOP, RIGHT, BOTTOM, RESET
@@ -88,28 +89,28 @@ public class InsetsUtils {
 		}
 	}
 
-	public static void setWindowInsetsListener(@NonNull View view, @Nullable Set<InsetSide> sides) {
-		setWindowInsetsListener(view, (v, insets) -> applyPadding(v, insets, sides), false);
-	}
-
 	public static void applyPadding(@NonNull View rootView,
 	                                @NonNull WindowInsetsCompat insets,
 	                                @NonNull InsetTarget insetTarget) {
 		EnumSet<InsetSide> sides = insetTarget.getSides(isLandscape(rootView.getContext()));
 		for (View view : resolveViews(rootView, insetTarget)) {
 			if (view != null) {
-				applyPadding(view, insets, sides);
+				applyPadding(view, insets, sides, insetTarget.getTypeMask());
 			}
 		}
 	}
 
 	public static void applyPadding(@NonNull View view,
 	                                @NonNull WindowInsetsCompat insets,
-	                                @Nullable Set<InsetSide> sides) {
+	                                @Nullable Set<InsetSide> sides,
+	                                @Nullable @InsetsType Integer typeMask) {
 		if (sides == null || !isEdgeToEdgeSupported()) {
 			return;
 		}
-		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+		if (typeMask == null) {
+			typeMask = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime();
+		}
+		Insets sysBars = insets.getInsets(typeMask);
 
 		boolean resetToInitial = sides.contains(InsetSide.RESET);
 		boolean left = sides.contains(InsetSide.LEFT);
@@ -188,7 +189,7 @@ public class InsetsUtils {
 		for (View view : resolveViews(root, target)) {
 			if (view != null) {
 				EnumSet<InsetSide> sides = target.getSides(isLandscape(view.getContext()));
-				applyPadding(view, insets, sides);
+				applyPadding(view, insets, sides, target.getTypeMask());
 
 				for(InsetTarget insetTargets : collection.getByType(Type.ROOT_INSET)){
 					EnumSet<InsetsUtils.InsetSide> insetSides = insetTargets.getSides(isLandscape(view.getContext()));
@@ -203,7 +204,7 @@ public class InsetsUtils {
 	private static void applyRootInsetsPaddings(View root, InsetTarget target, WindowInsetsCompat insets) {
 		if (root != null) {
 			EnumSet<InsetSide> sides = target.getSides(isLandscape(root.getContext()));
-			applyPadding(root, insets, sides);
+			applyPadding(root, insets, sides, target.getTypeMask());
 		}
 	}
 
