@@ -4,11 +4,11 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 import static net.osmand.plus.helpers.AndroidUiHelper.isOrientationPortrait;
 import static net.osmand.plus.helpers.AndroidUiHelper.processSystemBarScrims;
+import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
@@ -20,14 +20,14 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.graphics.ColorUtils;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsCompat.Type.InsetsType;
-import androidx.core.view.WindowInsetsControllerCompat;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.InsetTarget.Type;
@@ -51,7 +51,7 @@ public class InsetsUtils {
 		void onApply(@NonNull View view, @NonNull WindowInsetsCompat insets);
 	}
 
-	public static boolean isEdgeToEdgeSupported(){
+	public static boolean isEdgeToEdgeSupported() {
 		return Build.VERSION.SDK_INT >= MINIMUM_EDGE_TO_EDGE_SUPPORTED_API;
 	}
 
@@ -91,7 +91,8 @@ public class InsetsUtils {
 				}
 
 				@Override
-				public void onViewDetachedFromWindow(@NonNull View v) {}
+				public void onViewDetachedFromWindow(@NonNull View v) {
+				}
 			});
 		}
 	}
@@ -198,9 +199,9 @@ public class InsetsUtils {
 				EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(view.getContext()));
 				applyPadding(view, insets, sides, target.getTypeMask());
 
-				for(InsetTarget insetTargets : collection.getByType(Type.ROOT_INSET)){
+				for (InsetTarget insetTargets : collection.getByType(Type.ROOT_INSET)) {
 					EnumSet<InsetsUtils.InsetSide> insetSides = insetTargets.getSides(isOrientationPortrait(view.getContext()));
-					if (insetSides != null){
+					if (insetSides != null) {
 						insetSides.remove(InsetSide.TOP);
 					}
 				}
@@ -230,11 +231,11 @@ public class InsetsUtils {
 					applyRootInsetsPaddings(view, target, insets);
 				}
 
-				if(target.isAdjustHeight()){
+				if (target.isAdjustHeight()) {
 					applyHeightAdjust(view, target, sides, insets);
 				}
 
-				if(target.isAdjustWidth()){
+				if (target.isAdjustWidth()) {
 					applyWidthAdjust(view, target, sides, insets);
 				}
 			}
@@ -394,7 +395,7 @@ public class InsetsUtils {
 
 	public static boolean isLandscape(Context context) {
 		int orientation = context.getResources().getConfiguration().orientation;
-		return !(orientation  == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+		return !(orientation == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT);
 	}
 
 	private static List<View> resolveViews(View root, InsetTarget target) {
@@ -411,23 +412,31 @@ public class InsetsUtils {
 		return result;
 	}
 
-	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment, @Nullable Dialog dialog) {
+	public static void processNavBarColor(@NonNull ISupportInsets iSupportInsets, @Nullable Dialog dialog) {
 		if (dialog == null || dialog.getWindow() == null) {
 			return;
 		}
-		boolean contentLight = insetSupportedFragment.isNavigationBarContentLight();
+		boolean contentLight = iSupportInsets.isNavigationBarContentLight();
 		Window window = dialog.getWindow();
 		AndroidUiHelper.setNavigationBarContentColor(window, contentLight);
 	}
 
-	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment) {
-		boolean contentLight = insetSupportedFragment.isNavigationBarContentLight();
-		int colorId = insetSupportedFragment.getNavigationBarColorId();
-		Activity activity = insetSupportedFragment.requireActivity();
-		if (colorId != -1) {
-			AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId), contentLight);
+	public static void processNavBarColor(@NonNull ISupportInsets iSupportInsets) {
+
+		boolean contentLight = iSupportInsets.isNavigationBarContentLight();
+		int colorId = iSupportInsets.getNavigationBarColorId();
+		Activity activity = iSupportInsets.requireActivity();
+
+		if (isEdgeToEdgeSupported()) {
+			if (colorId != -1) {
+				AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId), contentLight);
+			} else {
+				AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT, contentLight);
+			}
 		} else {
-			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT, contentLight);
+			boolean nightMode = ((OsmandApplication) activity.getApplication()).getDaynightHelper().isNightMode(APP);
+			int color = ColorUtilities.getNavBarBackgroundColor(activity, nightMode);
+			AndroidUiHelper.setNavigationBarColor(activity, color, ColorUtils.calculateLuminance(color) >= 0.65);
 		}
 	}
 }
