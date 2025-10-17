@@ -553,7 +553,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         return new ResultMatcher<BinaryMapDataObject>() {
             @Override
             public boolean publish(BinaryMapDataObject object) {
-                if (isDeleted(object)) {
+                if (isDeletedBinaryMapDataObject(object)) {
                     binaryMapDataObjectMap.remove(object.getId()); // live-updates
                 }
                 if (object.getPointsLength() > 1) {
@@ -580,7 +580,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         };
     }
 
-    private boolean isDeleted(BinaryMapDataObject object) {
+    public static boolean isDeletedBinaryMapDataObject(BinaryMapDataObject object) {
         if (object.getTypes().length == 0) {
             return false;
         }
