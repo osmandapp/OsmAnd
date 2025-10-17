@@ -2653,7 +2653,6 @@
     <string name="show_full_description">Pokaži polni opis</string>
     <string name="quick_action_edit_actions">Uredi dejanja</string>
     <string name="purchase_dialog_title">Izbor načrta</string>
-    <string name="download_wikipedia_label">Prejmi podatke Wikipedije</string>
     <string name="open_in_browser_wiki">Odpri prispevek na spletni strani</string>
     <string name="open_in_browser_wiki_description">Pregledovanje prispevkov v spletnem brskalniku.</string>
     <string name="download_wiki_region_placeholder">to območje</string>
@@ -2675,8 +2674,6 @@
     <string name="coord_input_edit_point">Uredi točko</string>
     <string name="coord_input_add_point">Dodaj točko</string>
     <string name="coord_input_save_as_track">Shrani kot sled</string>
-    <string name="open_wikipedia_link_online">Odpri povezavo do spletišča Wikipedija</string>
-    <string name="open_wikipedia_link_online_description">Povezava bo odprta v spletnem brskalniku.</string>
     <string name="download_all">Prejmi vse</string>
     <string name="show_images">Pokaži slike</string>
     <string name="osm_live_plan_pricing">Paket in cenik</string>

@@ -2478,8 +2478,6 @@ POIの更新は利用できません</string>
     <string name="show_tunnels">トンネル</string>
     <string name="touring_view_render_descr">高いコントラストと最大限のディテールを持つツーリングスタイルです。 OsmAndデフォルトスタイルのすべてのオプションが含まれていますが、特に道路、パス、その他の移動方法など、可能な限り詳細に表示されます。道路タイプ間の明確な\"ツーリングアトラス\"の区別があります。昼、夜、屋外での使用に適しています。</string>
     <string name="default_render_descr">汎用スタイルです。密集した都市でも簡素化されわかりやすく表示されます。等高線、ルート、路面品質、通行制限、国道や県道(州道)を示すルート標識、SACスケールに応じたパスレンダリング、急流下りなどのウォータースポーツアイテムを備えています。</string>
-    <string name="open_wikipedia_link_online">Wikipediaをオンライン参照</string>
-    <string name="open_wikipedia_link_online_description">このリンクを開くとウェブブラウザで閲覧することができます。</string>
     <string name="import_as_gpx">GPXファイルとしてインポート</string>
     <string name="import_track">GPXファイルからインポート</string>
     <string name="access_intermediate_arrival_time">中間経由地点への到着時間</string>
@@ -2637,7 +2635,6 @@ POIの更新は利用できません</string>
     <string name="copy_location_name">場所/POI名称のコピー</string>
     <string name="toast_empty_name_error">名前の付けられていない場所</string>
     <string name="tunnel_warning">前方にトンネル有り</string>
-    <string name="download_wikipedia_label">Wikipediaデータのダウンロード</string>
     <string name="open_in_browser_wiki">記事をオンラインで開く</string>
     <string name="open_in_browser_wiki_description">ウェブブラウザで記事を閲覧します。</string>
     <string name="download_wiki_region_placeholder">当該地域</string>

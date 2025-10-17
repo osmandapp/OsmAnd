@@ -2519,7 +2519,6 @@
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
     <string name="welcome_to_open_beta">Bienvenue dans cette bêta publique</string>
     <string name="download_wikipedia_description">Télécharger les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
-    <string name="download_wikipedia_label">Télécharger les données Wikipédia</string>
     <string name="open_in_browser_wiki">Ouvrir l\'article en ligne</string>
     <string name="open_in_browser_wiki_description">Afficher l\'article dans un navigateur.</string>
     <string name="download_wiki_region_placeholder">cette région</string>
@@ -2536,8 +2535,6 @@
     <string name="shared_string_restart">Redémarrer l\'application</string>
     <string name="purchase_cancelled_dialog_title">Vous n\'êtes plus abonné à OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renouvelez votre abonnement pour continuer à utiliser toutes les fonctionnalités :</string>
-    <string name="open_wikipedia_link_online">Ouvrir le lien Wikipédia</string>
-    <string name="open_wikipedia_link_online_description">Le lien s\'ouvrira dans votre navigateur Internet.</string>
     <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipédia et Wikivoyage hors ligne.</string>
     <string name="how_to_open_link">Comment ouvrir le lien ?</string>
     <string name="read_wikipedia_offline">Consultez Wikipédia hors ligne</string>
@@ -5740,7 +5737,6 @@
     <string name="rendering_attr_spotSize_description">Taille du sondage ponctuel</string>
     <string name="rendering_attr_tidalFlatStyle_name">Style des vasières</string>
     <string name="rendering_attr_tidalFlatStyle_description">Style des vasières</string>
-    <string name="private_access_routing_req_short">Votre destination se situe dans une propriété privée. Souhaitez-vous emprunter des routes privées ?</string>
     <string name="view_on_phone">Afficher sur le téléphone</string>
     <string name="add_to_favorites">Ajouter aux favoris</string>
     <string name="backup_delete_data_warning_extended">Cette action supprimera définitivement toutes les données sélectionnées du Cloud. Il ne sera pas possible de les restaurer plus tard.</string>

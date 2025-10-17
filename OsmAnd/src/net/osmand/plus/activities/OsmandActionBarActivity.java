@@ -49,6 +49,8 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		if (InsetsUtils.isEdgeToEdgeSupported()) {
 			EdgeToEdge.enable(this);
 		}
+		updateNavBarColor();
+
 		super.onCreate(savedInstanceState);
 	}
 
@@ -149,6 +151,11 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 
 	public void updateNavigationBarColor() {
 		updateNavBarColor();
+	}
+
+	@Override
+	public boolean isNavigationBarContentLight() {
+		return !app.getDaynightHelper().isNightMode(APP);
 	}
 
 	@Override

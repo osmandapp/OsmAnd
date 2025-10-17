@@ -2563,7 +2563,6 @@
     <string name="index_item_world_wikivoyage">Articoli di Wikivoyage da tutto il mondo</string>
     <string name="lang_lo">Laotiano</string>
     <string name="download_wikipedia_description">Scarica gli articoli di Wikipedia per %1$s così da poterli leggere senza una connessione dati.</string>
-    <string name="download_wikipedia_label">Scarica dati di Wikipedia</string>
     <string name="open_in_browser_wiki">Apri articolo online</string>
     <string name="open_in_browser_wiki_description">Vedi articolo in un browser web.</string>
     <string name="download_wiki_region_placeholder">questa regione</string>
@@ -2578,8 +2577,6 @@
     <string name="light_rs_render_descr">Stile di guida semplice. Modalità notturna delicata, strade contrastanti in arancione, oscuramento di oggetti secondari della mappa, caratteristiche topografiche come linee di contorno.</string>
     <string name="topo_render_descr">Per passeggiate, escursioni e pedalate nella natura. Leggibile all\'aperto. Oggetti naturali e strade ad alto contrasto, tipi differenti di percorsi, isoipse con impostazioni avanzate, più dettagli. L\'integrità della superficie distingue la qualità delle strade. No modalità notte.</string>
     <string name="default_render_descr">Stile generico. Città densamente popolate mostrate chiaramente. Presenta percorsi, qualità del manto, divieti di accesso, segnali stradali, rendering dei percorsi secondo la scala SAC/CAI, articoli per sport acquatici, caratteristiche topografiche come curve di livello.</string>
-    <string name="open_wikipedia_link_online">Apri il link di Wikipedia online</string>
-    <string name="open_wikipedia_link_online_description">Il link verrà aperto in un browser web.</string>
     <string name="read_wikipedia_offline_description">Sottoscrivi OsmAnd Live per leggere gli articoli di Wikipedia e Wikivoyage senza una connessione dati.</string>
     <string name="how_to_open_link">Come aprire il link?</string>
     <string name="read_wikipedia_offline">Leggi Wikipedia senza una connessione dati</string>
@@ -5813,7 +5810,6 @@
     <string name="enable_msaa">Abilita MSAA</string>
     <string name="average_elevation">Elevazione media</string>
     <string name="descent">Discesa</string>
-    <string name="private_access_routing_req_short">La destinazione è in un\'area privata. Abilitare l\'uso di strade private?</string>
     <string name="view_on_phone">Vedi sul telefono</string>
     <string name="ascent">Salita</string>
     <string name="map_orientations_choose_description">Lasciare vuoto per passare tra le modalità disponibili, o aggiungere solo quelle preferite.</string>

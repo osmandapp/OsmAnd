@@ -439,13 +439,11 @@
     <string name="layer_osm_bugs">Nòtaichean OSM (air-loidhne)</string>
     <string name="online_map">Mapa air-loidhne</string>
     <string name="online_maps_searching_descr">A\' lorg air-loidhne…</string>
-    <string name="open_wikipedia_link_online_description">Fosglaidh an ceangal ann am brabhsair-lìn.</string>
     <string name="read_full_article">Leugh an aiste air fad (air-loidhne)</string>
     <string name="shared_string_online_maps">Mapaichean air-loidhne</string>
     <string name="open_in_browser_wiki">Fosgail an aiste air loidhne</string>
     <string name="backup_do_not_have_any">Chan eil lethbhreac-glèidhidh agad fhathast</string>
-    <string name="open_wikipedia_link_online">Fosgail ceangal na h-Uicipeid air-loidhne</string>
-    <string name="poi_filter_namefinder">NameFinder air-loidhne</string>
+	<string name="poi_filter_namefinder">NameFinder air-loidhne</string>
     <string name="offline_cache">Tasgadan far-loidhne</string>
     <string name="offline_wikipeadia">Uicipeid far-loidhne</string>
     <string name="wikipedia_and_wikivoyage_offline">Uicipeid agus Wikivoyage far-loidhne</string>

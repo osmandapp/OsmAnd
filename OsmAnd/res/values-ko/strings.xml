@@ -2464,8 +2464,7 @@
     <string name="select_nav_profile_dialog_message">\'탐색 유형\'은 사용 가능한 오프라인 및 온라인 라우팅 엔진을 사용하여 경로를 계산하는 방법을 선택합니다.</string>
     <string name="calculate_online_altitude_descr">위성 이미지 및 디지털 고도 모델을 기반으로 OsmAnd 서버에서 온라인으로 고도를 계산합니다. 장치에 기록된 고도와 다를 수 있으며 고도 보정으로 사용할 수 있습니다.</string>
     <string name="online_routing_engines">온라인 라우팅 엔진</string>
-    <string name="open_wikipedia_link_online">온라인 위키백과 링크 열기</string>
-    <string name="shared_string_contact">연락하기</string>
+	<string name="shared_string_contact">연락하기</string>
     <string name="average_speed_skip_stops_desc">%1$s 미만의 속도는 계산되지 않으며 평균 속도에 영향을 미칩니다.</string>
     <string name="average_speed_widget_desc">현재 이동의 평균 속도를 표시합니다.</string>
     <string name="map_widget_average_speed">평균 속도</string>
@@ -2480,7 +2479,6 @@
     <string name="send_logcat_log">개선용 진단로그 보내기</string>
     <string name="edit_online_routing_engine">온라인 라우팅 엔진 편집</string>
     <string name="system_default_theme">시스템 기본값</string>
-    <string name="open_wikipedia_link_online_description">링크는 웹 브라우저에서 열립니다.</string>
     <string name="shared_string_mode">모드</string>
     <string name="coordinates_widget_secondary_desc">좌표 형식은 %1$s – %2$s – %3$s에서 변경될 수 있습니다.</string>
     <string name="widget_secondary_desc_part_of">%1$s 플러그인의 일부입니다.</string>
@@ -4202,7 +4200,6 @@
     <string name="coords_format">좌표계 형식</string>
     <string name="edit_line">선 편집</string>
     <string name="measurement_tool">측정 거리</string>
-    <string name="download_wikipedia_label">다운로드 Wikipedia data</string>
     <string name="copy_poi_name">POI 이름 복사</string>
     <string name="upload_change">업로드 변경</string>
     <string name="cloud_version_will_be_removed">클라우드 버전이 제거됨</string>
