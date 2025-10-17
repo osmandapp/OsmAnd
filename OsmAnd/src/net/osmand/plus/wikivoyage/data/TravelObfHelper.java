@@ -46,7 +46,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -71,6 +70,7 @@ public class TravelObfHelper implements TravelHelper {
 	private static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	private static final int MAX_SEARCH_RADIUS = 800 * 1000;
 	private static final int TRAVEL_GPX_SEARCH_RADIUS = 10 * 1000; // Ref: POI_SEARCH_POINTS_INTERVAL_M in tools
+	private static final int MAX_TRAVEL_GPX_SEARCH_RADIUS = 50 * 1000;
 	private static final int ROUTES_ON_LINE_RADIUS = 25;
 	private static final int ROUTES_ON_LINE_ZOOM = 17;
 
@@ -190,7 +190,6 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon ll, @NonNull NetworkRouteSelectorFilter filter) {
 		Set<String> routeIds = new HashSet<>();
-		List<TravelGpx> routes = new ArrayList<>();
 
 		SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader.buildSearchRequest(0, 0, 0, 0,
 				ROUTES_ON_LINE_ZOOM, getRoutesSearchFilter(filter), getRoutesResultMatcher(routeIds, ll));
@@ -200,17 +199,12 @@ public class TravelObfHelper implements TravelHelper {
 			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
 				repo.searchMapIndex(mapRequest);
 			}
-
-			// TODO optimize multi-search
-			for (String routeId : routeIds) {
-				TravelGpx travelGpx = searchTravelGpx(ll, routeId);
-				if (travelGpx != null) {
-					routes.add(travelGpx);
-				}
+			if (!routeIds.isEmpty()) {
+				return searchTravelGpx(ll, routeIds);
 			}
 		}
 
-		return routes;
+		return new ArrayList<>();
 	}
 
 	@NonNull
@@ -278,31 +272,35 @@ public class TravelObfHelper implements TravelHelper {
 		};
 	}
 
-	@Nullable
-	public synchronized TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId) {
-		if (Algorithms.isEmpty(routeId)) {
-			LOG.error(String.format("searchTravelGpx(%s, null) failed due to empty routeId", location));
-			return null;
-		}
+	@NonNull
+	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull Set<String> routeIds) {
 		List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
+		boolean userGpxCollectionSearchRequested = false;
+		for (String routeIdPrefixed : routeIds) {
+			if (ObfConstants.getOsmIdFromPrefixedRouteId(routeIdPrefixed) == 0) {
+				userGpxCollectionSearchRequested = true;
+				break;
+			}
+		}
+		Map<String, TravelGpx> routes = new HashMap<>();
 		int searchRadius = TRAVEL_GPX_SEARCH_RADIUS;
-		TravelGpx travelGpx = null;
 		do {
 			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
 				if (repo.isWorldMap()) {
 					continue;
 				}
-				if (!isLocationIntersectsWithRepo(repo, location)) {
+				if (!isLocationIntersectsWithRepo(repo, location) && !userGpxCollectionSearchRequested) {
+					// User GPX collections may have insufficient POI bbox and should never be skipped
 					continue;
 				}
-				int previousFoundSize = foundAmenities.size();
 				boolean firstSearchCycle = searchRadius == TRAVEL_GPX_SEARCH_RADIUS;
 				if (firstSearchCycle) {
-					searchTravelGpxAmenityByRouteId(foundAmenities, repo, routeId, location, searchRadius); // indexed
-				}
-				boolean nothingFound = previousFoundSize == foundAmenities.size();
-				if (nothingFound) {
-					// fallback to non-indexed route_id (compatibility with old files)
+					searchTravelGpxAmenityByRouteId(foundAmenities, repo, routeIds, location, searchRadius); // indexed
+					if (foundAmenities.size() >= routeIds.size()) {
+						break; // optimization
+					}
+				} else {
+					// fallback to slow non-indexed route_id (compatibility with old files)
 					searchAmenity(foundAmenities, location, repo, searchRadius, 15, ROUTE_TRACK, null);
 				}
 			}
@@ -310,21 +308,35 @@ public class TravelObfHelper implements TravelHelper {
 				Amenity amenity = foundGpx.second;
 				final String aRouteId = amenity.getRouteId();
 				final String lcRouteId = aRouteId != null ? aRouteId.toLowerCase() : null;
-				if (routeId.toLowerCase().equals(lcRouteId)) {
-					travelGpx = getTravelGpx(foundGpx.first, amenity);
-					break;
+				for (String routeId : routeIds) {
+					if (routeId.toLowerCase().equals(lcRouteId)) {
+						routes.put(lcRouteId, getTravelGpx(foundGpx.first, amenity));
+						if (routeIds.size() == 1) {
+							break; // optimization
+						}
+					}
 				}
 			}
 			searchRadius *= 2;
-		} while (travelGpx == null && searchRadius < MAX_SEARCH_RADIUS);
-		if (travelGpx == null) {
-			LOG.error(String.format("searchTravelGpx(%s, %s) failed", location, routeId));
+		} while (routes.size() < routeIds.size() && searchRadius < MAX_TRAVEL_GPX_SEARCH_RADIUS);
+		if (routes.isEmpty()) {
+			LOG.error(String.format("searchTravelGpx(%s, %s) failed", location, routeIds));
 		}
-		return travelGpx;
+		return new ArrayList<>(routes.values());
+	}
+
+	@Nullable
+	public TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId) {
+		if (Algorithms.isEmpty(routeId)) {
+			LOG.error(String.format("searchTravelGpx(%s, null) failed due to empty routeId", location));
+			return null;
+		}
+		List<TravelGpx> routes = searchTravelGpx(location, Set.of(routeId));
+		return routes.isEmpty() ? null : routes.get(0);
 	}
 
 	private void searchTravelGpxAmenityByRouteId(@NonNull List<Pair<File, Amenity>> amenitiesList,
-	                                             @NonNull AmenityIndexRepository repo, @NonNull String routeId,
+	                                             @NonNull AmenityIndexRepository repo, @NonNull Set<String> routeIds,
 	                                             @NonNull LatLon location, int searchRadius) {
 		int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
 		SearchPoiTypeFilter poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
@@ -338,12 +350,14 @@ public class TravelObfHelper implements TravelHelper {
 				return false;
 			}
 		};
+		String searchRequestNameQuery = routeIds.size() == 1 ? routeIds.iterator().next() : ""; // optimization
 		SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-				0, 0, routeId, left, right, top, bottom, poiTypeFilter,
+				0, 0, searchRequestNameQuery, left, right, top, bottom, poiTypeFilter,
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity amenity) {
-						if (amenity.getRouteId() != null && amenity.getRouteId().equals(routeId)) {
+						String amenityRouteId = amenity.getRouteId();
+						if (amenityRouteId != null && routeIds.contains(amenityRouteId)) {
 							amenitiesList.add(new Pair<>(repo.getFile(), amenity));
 						}
 						return false;
