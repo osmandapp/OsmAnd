@@ -6201,7 +6201,6 @@
     <string name="add_to_favorites">Adicionar aos favoritos</string>
     <string name="max_weight_at_full_load_description">Informe o peso máximo do seu veículo com carga total para evitar estradas e pontes com limites de peso.</string>
     <string name="max_axle_load_description">Forneça a carga máxima por eixo do seu veículo para evitar estradas e pontes com limites de peso.</string>
-    <string name="private_access_routing_req_short">Seu destino está em uma área privada. Permite o uso de estradas privadas?</string>
     <string name="view_on_phone">Ver no celular</string>
     <string name="shared_sting_osm_link">Link do OSM</string>
     <string name="marine_renderer">Marinha</string>

@@ -5976,7 +5976,6 @@
     <string name="add_to_favorites">Gehitu gogokoetara</string>
     <string name="max_weight_at_full_load_description">Eman zure ibilgailuaren gehienezko pisua karga osoan, pisu-mugak dituzten errepide eta zubiak saihesteko.</string>
     <string name="max_axle_load_description">Eman zure ibilgailuaren ardatz-karga maximoa, pisu-mugak dituzten errepideak eta zubiak saihesteko.</string>
-    <string name="private_access_routing_req_short">Zure helmuga eremu pribatu batean dago. Baimendu errepide pribatuak erabiltzea?</string>
     <string name="view_on_phone">Ikusi mugikorrean</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>

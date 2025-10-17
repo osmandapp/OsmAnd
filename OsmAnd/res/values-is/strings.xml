@@ -5823,7 +5823,6 @@
     <string name="manage_storage_delete_data_dialog_summary">Ertu viss um að þú viljir eyða %1$s af OsmAnd-tölvuskýinu?\n\nÞú getur endurheimt það úr ruslinu innan næstu 30 daga.</string>
     <string name="max_weight_at_full_load_description">Settu inn hámarks-hleðsluþyngd farartækisins, takmarkanir geta verið á sumum vegum og brúm varðandi þyngd farartækja.</string>
     <string name="max_axle_load_description">Settu inn hámarks-öxulþyngd farartækisins, takmarkanir geta verið á sumum vegum og brúm varðandi þyngd farartækja.</string>
-    <string name="private_access_routing_req_short">Áfangastaður þinn er innan svæðis með einkaaðgangi. Viltu leyfa notkun einkavega?</string>
     <string name="rendering_attr_spotDistance_name">Fjarlægð dýptarmælingar</string>
     <string name="rendering_attr_spotDistance_description">Fjarlægð dýptarmælingar</string>
     <string name="rendering_attr_spotSize_name">Stærð dýptarmælingar</string>

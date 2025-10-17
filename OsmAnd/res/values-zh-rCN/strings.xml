@@ -5795,7 +5795,6 @@
     <string name="add_to_favorites">添加到收藏</string>
     <string name="max_weight_at_full_load_description">提供车辆满载最大重量，以避开限重道路和桥梁。</string>
     <string name="max_axle_load_description">提供车辆最大轴荷，以避开限重道路和桥梁。</string>
-    <string name="private_access_routing_req_short">您的目的地位于私人区域。是否允许使用私人道路？</string>
     <string name="view_on_phone">在手机上查看</string>
     <string name="average_elevation">平均海拔</string>
     <string name="ascent">上升</string>

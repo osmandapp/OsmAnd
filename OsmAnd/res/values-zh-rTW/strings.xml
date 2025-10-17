@@ -5674,7 +5674,6 @@
     <string name="add_to_favorites">新增至收藏</string>
     <string name="max_weight_at_full_load_description">請提供你車輛滿載時的最大重量，以避開有重量限制的道路與橋樑。</string>
     <string name="max_axle_load_description">請提供你車輛的最大軸重，以避開有重量限制的道路與橋樑。</string>
-    <string name="private_access_routing_req_short">您的目的地位於私人區域。允許使用私人道路？</string>
     <string name="view_on_phone">在手機上檢視</string>
     <string name="lang_en_barebones">英文（簡易）</string>
     <string name="shared_sting_osm_link">OSM 連結</string>

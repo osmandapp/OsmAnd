@@ -5868,7 +5868,6 @@
     <string name="add_to_favorites">Tilføj til favoritter</string>
     <string name="max_weight_at_full_load_description">Angiv dit køretøjs maksimale vægt ved fuld last for at undgå veje og broer med vægtbegrænsninger.</string>
     <string name="max_axle_load_description">Angiv dit køretøjs maksimale akseltryk for at undgå veje og broer med vægtbegrænsninger.</string>
-    <string name="private_access_routing_req_short">Din destination ligger i et privat område. Tillad brug af private veje?</string>
     <string name="view_on_phone">Vis på telefonen</string>
     <string name="rendering_attr_hideLightSectors_name">Lyse sektorer</string>
     <string name="rendering_attr_hideLightSectors_description">Skjul lyse sektorer</string>

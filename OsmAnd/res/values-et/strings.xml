@@ -5348,7 +5348,6 @@
     <string name="manage_storage">Halda andmeruumi</string>
     <string name="manage_storage_delete_data_dialog_summary">Kas oled kindel, et soovid %1$s OsmAnd Cloudist kustutada?\n\nNeid andmeid saad Kustutatud failide kaustast taastada 30 päeva jooksul.</string>
     <string name="deleting_history">Kustutan ajalugu…</string>
-    <string name="private_access_routing_req_short">Sinu sihtkoht on asub erakasutuses alal. Kas lubad kasutada teekonna koostamiseks erakasutuses teid?</string>
     <string name="view_on_phone">Vaata telefonis</string>
     <string name="average_elevation">Keskmine kõrgus</string>
     <string name="ascent">Tõus</string>

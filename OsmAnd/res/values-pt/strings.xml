@@ -5814,7 +5814,6 @@
     <string name="add_to_favorites">Adicionar aos favoritos</string>
     <string name="max_weight_at_full_load_description">Informe o peso máximo do seu veículo com carga total para evitar estradas e pontes com limites de peso.</string>
     <string name="max_axle_load_description">Forneça a carga máxima por eixo do seu veículo para evitar estradas e pontes com limites de peso.</string>
-    <string name="private_access_routing_req_short">O seu destino está numa área privada. Permite o uso de estradas privadas?</string>
     <string name="view_on_phone">Ver no telemóvel</string>
     <string name="map_orientations_choose_description">Deixe em branco para alternar entre todos os modos disponíveis ou adicione apenas os seus preferidos.</string>
     <string name="map_orientations">Orientações do mapa</string>

@@ -5786,7 +5786,6 @@
     <string name="rendering_attr_tidalFlatStyle_name">Árapály-síkság stílus</string>
     <string name="rendering_attr_tidalFlatStyle_description">Az árapály-síkságok stílusa</string>
     <string name="rendering_attr_spotDistance_name">Mélységi szondázás távolság</string>
-    <string name="private_access_routing_req_short">Az úti cél magánterületen található. Engedélyezi a magánutak használatát?</string>
     <string name="view_on_phone">Megtekintés telefonon</string>
     <string name="backup_delete_data_warning_extended">Ez a művelet véglegesen eltávolítja az összes kiválasztott adatot a felhőből. Később sem lehet visszaállítani őket.</string>
     <string name="amount_of_total_used">%1$s / %2$s használatban</string>
