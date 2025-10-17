@@ -20,13 +20,16 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
@@ -36,12 +39,15 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.AmenityIndexRepository;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -53,6 +59,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -64,6 +71,8 @@ public class TravelObfHelper implements TravelHelper {
 	private static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
 	private static final int MAX_SEARCH_RADIUS = 800 * 1000;
 	private static final int TRAVEL_GPX_SEARCH_RADIUS = 10 * 1000; // Ref: POI_SEARCH_POINTS_INTERVAL_M in tools
+	private static final int ROUTES_ON_LINE_RADIUS = 25;
+	private static final int ROUTES_ON_LINE_ZOOM = 17;
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -175,6 +184,98 @@ public class TravelObfHelper implements TravelHelper {
 	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
 		return tags.containsKey(ROUTE_ID)
 				&& ("segment".equals(tags.get(ROUTE)) || tags.containsKey(ROUTE_TYPE));
+	}
+
+	@NonNull
+	@Override
+	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon ll, @NonNull NetworkRouteSelectorFilter filter) {
+		Set<String> routeIds = new HashSet<>();
+		List<TravelGpx> routes = new ArrayList<>();
+
+		SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader.buildSearchRequest(0, 0, 0, 0,
+				ROUTES_ON_LINE_ZOOM, getRoutesSearchFilter(filter), getRoutesResultMatcher(routeIds, ll));
+		mapRequest.setBBoxRadius(ll.getLatitude(), ll.getLongitude(), ROUTES_ON_LINE_RADIUS);
+
+		if (!Algorithms.isEmpty(filter.typeFilter)) {
+			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
+				repo.searchMapIndex(mapRequest);
+			}
+
+			// TODO optimize multi-search
+			for (String routeId : routeIds) {
+				TravelGpx travelGpx = searchTravelGpx(ll, routeId);
+				if (travelGpx != null) {
+					routes.add(travelGpx);
+				}
+			}
+		}
+
+		return routes;
+	}
+
+	@NonNull
+	private BinaryMapIndexReader.SearchFilter getRoutesSearchFilter(@NonNull NetworkRouteSelectorFilter filter) {
+		Set<String> enabledRouteTypes = new HashSet<>();
+
+		if (filter.typeFilter != null) {
+			for (OsmRouteType osmRouteType : filter.typeFilter) {
+				String osmRouteTypeName = osmRouteType.getName();
+				RouteActivity activity = app.getRouteActivityHelper().findActivityByTag(osmRouteTypeName);
+				if (activity != null) {
+					enabledRouteTypes.add(activity.getGroup().getId());
+				}
+			}
+		}
+
+		return new BinaryMapIndexReader.SearchFilter() {
+			@Override
+			public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
+				for (String type : enabledRouteTypes) {
+					Integer routeTypeRuleIndex = mapIndex.getRule(ROUTE_TYPE, type);
+					if (routeTypeRuleIndex != null && types.contains(routeTypeRuleIndex)) {
+						return true;
+					}
+				}
+				return false;
+			}
+		};
+	}
+
+	@NonNull
+	private ResultMatcher<BinaryMapDataObject> getRoutesResultMatcher(@NonNull Set<String> routeIds,
+	                                                                  @NonNull LatLon pointLatLon) {
+		return new ResultMatcher<>() {
+			@Override
+			public boolean publish(BinaryMapDataObject object) {
+				if (object.getPointsLength() > 1 && !TravelObfGpxFileReader.isDeletedBinaryMapDataObject(object)) {
+					String routeIdPrefixed = object.getTagValue(ROUTE_ID);
+					if (ObfConstants.getOsmIdFromPrefixedRouteId(routeIdPrefixed) > 0
+							&& matchByDistance(object, pointLatLon)) {
+						routeIds.add(routeIdPrefixed);
+					}
+				}
+				return false;
+			}
+
+			private boolean matchByDistance(BinaryMapDataObject object, LatLon location) {
+				for (int i = 0; i < object.getPointsLength() - 1; i++) {
+					if (MapUtils.getOrthogonalDistance(
+							location.getLatitude(), location.getLongitude(),
+							MapUtils.get31LatitudeY(object.getPoint31YTile(i)),
+							MapUtils.get31LongitudeX(object.getPoint31XTile(i)),
+							MapUtils.get31LatitudeY(object.getPoint31YTile(i + 1)),
+							MapUtils.get31LongitudeX(object.getPoint31XTile(i + 1))) <= ROUTES_ON_LINE_RADIUS) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
 	}
 
 	@Nullable

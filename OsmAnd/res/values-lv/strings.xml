@@ -2881,7 +2881,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="get_unlimited_access">Saņemiet neierobežotu piekļuvi</string>
     <string name="welcome_to_open_beta">Sveicināti atvērtajā beta testēšanā</string>
     <string name="download_wikipedia_description">Lejupielādēt Vikipēdijas rakstus priekš %1$s, lai lasītu bezsaistē.</string>
-    <string name="download_wikipedia_label">Lejupielādēt Vikipēdijas datus</string>
     <string name="open_in_browser_wiki">Atvērt rakstu internetā</string>
     <string name="open_in_browser_wiki_description">Skatīt rakstu interneta pārlūkā.</string>
     <string name="download_wiki_region_placeholder">Šis reģions</string>
@@ -2899,8 +2898,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="purchase_cancelled_dialog_title">Jūs pārtraucāt OsmAnd Live abonomentu</string>
     <string name="purchase_cancelled_dialog_descr">Atjaunojiet abonomentu, lai varētu turpināt lietot visas iespējas:</string>
     <string name="download_all">Lejupielādēt visu</string>
-    <string name="open_wikipedia_link_online">Atvērt Vikipēdijas saiti tiešsaistē</string>
-    <string name="open_wikipedia_link_online_description">Saite tiks atvērta interneta pārlūkā.</string>
     <string name="read_wikipedia_offline_description">Iegūstiet OsmAnd Live abonomentu, lai lasītu Vikipēdijas un Vikiceļojumu rakstus bezsaistē.</string>
     <string name="how_to_open_link">Kā atvērt saiti\?</string>
     <string name="read_wikipedia_offline">Lasīt Vikipēdiju bezsaistē</string>

@@ -1984,8 +1984,6 @@
     <string name="shared_string_bookmark">Kirjanmerkki</string>
     <string name="hide_full_description">Piilota täysi kuvaus</string>
     <string name="show_full_description">Näytä täysi kuvaus</string>
-    <string name="open_wikipedia_link_online">Avaa Wikipedia-linkki verkossa</string>
-    <string name="open_wikipedia_link_online_description">Linkki avataan selaimessa.</string>
     <string name="how_to_open_link">Kuinka linkki avataan?</string>
     <string name="read_wikipedia_offline">Lue Wikipediaa ilman verkkoyhteyttä</string>
     <string name="download_all">Lataa kaikki</string>

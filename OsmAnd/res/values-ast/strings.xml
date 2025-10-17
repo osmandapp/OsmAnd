@@ -697,7 +697,6 @@
     <string name="third_party_application">Aplicación de terceros</string>
     <string name="error_notification_desc">Please send a screenshot of this notification to support@osmand.net</string>
     <string name="show_full_description">Amosar la descripción completa</string>
-    <string name="open_wikipedia_link_online_description">L\'enllaz va abrise nun restolador web.</string>
     <string name="how_to_open_link">¿Cómo abrir l\'enllaz\?</string>
     <string name="purchase_cancelled_dialog_title">You have canceled your OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue using all the features:</string>
@@ -1473,7 +1472,6 @@
     <string name="wiki_article_search_text">Searching for the corresponding wiki article</string>
     <string name="open_in_browser_wiki_description">View article in a web browser.</string>
     <string name="open_in_browser_wiki">Open article online</string>
-    <string name="download_wikipedia_label">Download Wikipedia data</string>
     <string name="download_wikipedia_description">Baxa los artículos de Wikipedia de «%1$s» pa lleelos ensin internet.</string>
     <string name="tunnel_warning">Tunnel ahead</string>
     <string name="copy_location_name">Copy location/POI name</string>
@@ -2855,7 +2853,6 @@
     <string name="download_all">Baxar too</string>
     <string name="read_wikipedia_offline">Read Wikipedia offline</string>
     <string name="read_wikipedia_offline_description">Consigui la soscripción d\'OsmAnd Live pa lleer los artículos de Wikipedia y Wikivoyage ensin internet.</string>
-    <string name="open_wikipedia_link_online">Open Wikipedia link online</string>
     <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC scale, whitewater sports items.</string>
     <string name="touring_view_render_descr">Touring style with high contrast and maximum detail. Includes all options of the OsmAnd default style, while displaying as much detail as possible, in particular roads, paths, and other ways to travel. Clear \"touring atlas\" distinction between road types. Suitable for day, night, and outdoor use.</string>
     <string name="topo_render_descr">For hiking, trekking, and nature cycling. Readable outdoors. Contrasting roads and natural objects, different route types, advanced contour line options, extra details. Adjusting \"Surface integrity\" distinguishes road quality. No night mode.</string>

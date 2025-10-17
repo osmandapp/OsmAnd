@@ -28,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,6 +47,7 @@ import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -171,10 +173,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					String title = amenity.getName(locale.getLanguage());
 					wikipediaUrl = "https://" + locale.getLanguage() + WIKIPEDIA_ORG_WIKI_URL_PART + title.replace(' ', '_');
 				}
-				MapActivity activity = app.getOsmandMap().getMapView().getMapActivity();
-				if (activity != null) {
-					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
-					AndroidUtils.openUrl(activity, wikipediaUrl, nightMode);
+				if (mapActivity != null && !Algorithms.isEmpty(wikipediaUrl)) {
+					LatLon location = amenity != null ? amenity.getLocation() : getLatLon();
+					boolean nightMode = app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
+					WikiArticleHelper.askShowArticle(mapActivity, nightMode, location, wikipediaUrl);
 				}
 			}
 		});

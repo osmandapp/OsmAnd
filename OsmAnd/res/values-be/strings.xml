@@ -2682,7 +2682,6 @@
     <string name="shared_string_travel_book">Дзённік падарожжаў</string>
     <string name="download_images">Спампаваць выявы</string>
     <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпедыі для %1$s, каб чытаць іх у аўтаномным рэжыме.</string>
-    <string name="download_wikipedia_label">Спампаваць даныя Вікіпедыі</string>
     <string name="open_in_browser_wiki">Адкрыць артыкул у сеціве</string>
     <string name="open_in_browser_wiki_description">Праглядзець артыкул у браўзеры.</string>
     <string name="download_wiki_region_placeholder">гэты рэгіён</string>
@@ -2701,8 +2700,6 @@
     <string name="light_rs_render_descr">Просты стыль для аўтамабільнай навігацыі. Мяккі начны рэжым, контурныя лініі, кантрастныя дарогі ў аранжавым стылі, зацененыя другасныя аб\'екты мапы.</string>
     <string name="topo_render_descr">Для шпацыру і катання на ровары. Добрая чытальнасць пры слабым асвятленні. Кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з дадатковымі наладамі, больш падрабязная інфармацыя. Параметр якасці дарожнага пакрыцця дае магчымасць адрозніваць дарогі з розным пакрыццём. Без начнога рэжыму.</string>
     <string name="default_render_descr">Стыль агульнага прызначэння. Спрошчанае адлюстраванне шчыльнанаселеных гарадоў. Пазначаюцца контурныя лініі, якасць паверхні, абмежаванні доступу, дарожныя шчыты, візуалізацыя маршрутаў па шкале SAC, аб\'екты спартовых сплаваў.</string>
-    <string name="open_wikipedia_link_online">Адкрыць спасылку на Вікіпедыю анлайн</string>
-    <string name="open_wikipedia_link_online_description">Спасылка адкрыецца ў вэб-браўзеры.</string>
     <string name="read_wikipedia_offline_description">Атрымайце падпіску на OsmAnd Live, каб чытаць артыкулы Вікіпедыі і Wikivoyage па-за сецівам.</string>
     <string name="how_to_open_link">Як адкрыць спасылку?</string>
     <string name="read_wikipedia_offline">Чытаць Вікіпедыю па-за сецівам</string>

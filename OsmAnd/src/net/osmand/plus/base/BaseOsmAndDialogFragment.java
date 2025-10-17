@@ -62,7 +62,10 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 		super.onStart();
 
 		Dialog dialog = getDialog();
-		if (dialog != null && dialog.getWindow() != null && Build.VERSION.SDK_INT > 29) {
+		if (dialog != null && dialog.getWindow() != null && InsetsUtils.isEdgeToEdgeSupported()) {
+			dialog.getWindow().setNavigationBarContrastEnforced(false);
+			InsetsUtils.processNavBarColor(this, dialog);
+
 			if (Build.VERSION.SDK_INT >= 36) {
 				//WindowCompat.enableEdgeToEdge(window);
 			} else {
@@ -75,8 +78,9 @@ public class BaseOsmAndDialogFragment extends DialogFragment implements IOsmAndF
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		Dialog dialog = getDialog();
-		if (dialog != null && dialog.getWindow() != null && Build.VERSION.SDK_INT > 29) {
+		if (dialog != null && dialog.getWindow() != null && InsetsUtils.isEdgeToEdgeSupported()) {
 			InsetsUtils.processInsets(this, dialog.getWindow().getDecorView(), view);
+			dialog.getWindow().setNavigationBarContrastEnforced(false);
 		} else {
 			InsetsUtils.processInsets(this, view, null);
 		}

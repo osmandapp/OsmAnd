@@ -2667,7 +2667,6 @@
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
     <string name="welcome_to_open_beta">به ارزیابی همگانی نسخهٔ بتا خوش آمدید</string>
     <string name="download_wikipedia_description">مقاله‌های ویکی‌سفر %1$s را بارگیری کنید تا آن‌ها را آفلاین بخوانید.</string>
-    <string name="download_wikipedia_label">بارگیری دادهٔ ویکی‌پدیا</string>
     <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
     <string name="open_in_browser_wiki_description">این مقاله را در مرورگر اینترنت مشاهده کنید.</string>
     <string name="download_wiki_region_placeholder">این منطقه</string>
@@ -2683,8 +2682,6 @@
     <string name="purchase_cancelled_dialog_title">اشتراک OsmAnd Live خود را لغو کردید</string>
     <string name="purchase_cancelled_dialog_descr">اشتراکتان را تجدید کنید تا از همهٔ قابلیت‌ها بهره‌مند شوید:</string>
     <string name="download_all">بارگیری همه</string>
-    <string name="open_wikipedia_link_online">ویکی‌پدیا آنلاین</string>
-    <string name="open_wikipedia_link_online_description">پیوند در یک مرورگر باز می‌شود.</string>
     <string name="hide_full_description">نمایش توضیح کوتاه</string>
     <string name="show_full_description">نمایش توضیح کامل</string>
     <string name="nautical_render_descr">مناسب برای ناوبری دریایی. به‌طور ویژه شناوه‌ها، فانوس‌های دریایی، راه‌های رودخانه‌ای، خطوط عبوری و نشانه‌های دریایی، بندرگاه‌ها، خدمات ساحلی و منحنی‌های میزان عمقی را نمایش می‌دهد.</string>

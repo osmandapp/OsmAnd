@@ -91,6 +91,7 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 		collection.removeType(Type.LANDSCAPE_SIDES);
 		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_container).landscapeLeftSided(true));
 		collection.replace(InsetTarget.createLeftSideContainer(true, R.id.main_view));
+		collection.replace(InsetTarget.createHorizontalLandscape(false, R.id.map_controls_container));
 		collection.add(InsetTarget.createHorizontalLandscape(true, R.id.toolbar, R.id.main_content));
 		return collection;
 	}

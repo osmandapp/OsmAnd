@@ -1990,8 +1990,6 @@
     <string name="purchase_dialog_title">Plan seçin</string>
     <string name="hide_full_description">Tam açıqlamanı gizlət</string>
     <string name="show_full_description">Tam açıqlamanı göstər</string>
-    <string name="open_wikipedia_link_online">Vikipediya linkini onlayn aç</string>
-    <string name="open_wikipedia_link_online_description">Link veb brauzerdə açılacaq.</string>
     <string name="how_to_open_link">Link necə açılır?</string>
     <string name="download_all">Hamısını endir</string>
     <string name="maps_you_need">Sizə lazımlı xəritələr</string>
@@ -2001,7 +1999,6 @@
     <string name="download_file">Faylı endir</string>
     <string name="start_editing">Düzəlişə başla</string>
     <string name="get_unlimited_access">Limitsiz giriş əldə et</string>
-    <string name="download_wikipedia_label">Vikipediya məlumatlarını endir</string>
     <string name="open_in_browser_wiki">Məqaləni onlayn aç</string>
     <string name="open_in_browser_wiki_description">Məqaləyə veb brauzerdə bax.</string>
     <string name="download_wiki_region_placeholder">bu region</string>

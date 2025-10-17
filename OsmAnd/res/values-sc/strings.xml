@@ -2666,7 +2666,6 @@
     <string name="get_unlimited_access">Otene s’atzessu illimitadu</string>
     <string name="welcome_to_open_beta">Bene bènnidu a sa beta aberta</string>
     <string name="download_wikipedia_description">Iscàrriga sos artìculos de Wikipedia pro %1$s pro los lèghere chene lìnia.</string>
-    <string name="download_wikipedia_label">Iscàrriga sos datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Aberi un\'artìculu in lìnia</string>
     <string name="open_in_browser_wiki_description">Leghe custu artìculu in un\'esploradore (browser) web.</string>
     <string name="download_wiki_region_placeholder">custa regione</string>
@@ -2684,8 +2683,6 @@
     <string name="purchase_cancelled_dialog_title">As iscantzelladu s\'abbonamentu tuo a OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Rinnova s\'abbonamentu tuo pro sighire a impreare totu sas funtzionalidades:</string>
     <string name="download_all">Iscàrriga totu</string>
-    <string name="open_wikipedia_link_online">Aberi su ligàmene de Wikipedia in lìnia</string>
-    <string name="open_wikipedia_link_online_description">Su ligàmene at a bènnere abertu in un\'esploradore.</string>
     <string name="read_wikipedia_offline_description">Abbona·ti a OsmAnd Live pro lèghere sos artìculos de Wikipedia e Wikivoyage chene connessione.</string>
     <string name="how_to_open_link">Comente abèrrere su ligàmene?</string>
     <string name="read_wikipedia_offline">Leghe Wikipedia chene connessione</string>

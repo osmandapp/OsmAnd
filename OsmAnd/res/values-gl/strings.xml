@@ -2405,8 +2405,6 @@
     <string name="topo_render_descr">Para practicar andainas, sendeirismo e ciclismo na natureza. Lexíbel ao ar libre. Camiños e obxectos naturais en contraste, diferentes tipos de percorridos, opcións avanzadas en curvas de nivel, detalles adicionais. Axustar a integridade da superficie, distingue a calidade do camiño. Sen modo noite.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste e máximo detalle. Inclúe todas as opcións do estilo predefinido do OsmAnd, mentres que amosa tantos detalles como sexa posíbel, en camiños, sendeiros e outros xeitos de viaxe. Clara distinción do \"atlas turístico\" entre tipos de camiños. Axeitado para emprego de día, de noite e ao ar libre.</string>
     <string name="default_render_descr">Estilo de emprego xeral. Cidade densas amosadas de xeito limpo. Conta con curvas de nivel, percorridos, calidade da superficie, restricións de acceso, sinais, visualización de camiños segundo a escala SA e elementos de deportes acuáticos.</string>
-    <string name="open_wikipedia_link_online">Abrir ligazón da Wikipedia en liña</string>
-    <string name="open_wikipedia_link_online_description">A ligazón abrirase nun navegador web.</string>
     <string name="how_to_open_link">De que xeito abrir a ligazón\?</string>
     <string name="read_wikipedia_offline">Ler a Wikipedia sen conexión</string>
     <string name="download_all">Baixar todo</string>
@@ -2592,7 +2590,6 @@
     <string name="tunnel_warning">Túnel adiante</string>
     <string name="show_tunnels">Túneles</string>
     <string name="download_wikipedia_description">Baixa os artigos da Wikipedia de %1$s para lelos sen conexión.</string>
-    <string name="download_wikipedia_label">Baixar datos da Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artigo en liña</string>
     <string name="open_in_browser_wiki_description">Ollar o artigo nun navegador web.</string>
     <string name="download_wiki_region_placeholder">esta rexión</string>

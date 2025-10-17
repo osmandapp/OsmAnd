@@ -2626,7 +2626,6 @@
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>
     <string name="download_wikipedia_description">Скачать статьи Википедии для %1$s, чтобы читать их без интернета.</string>
-    <string name="download_wikipedia_label">Загрузка данных Википедии</string>
     <string name="open_in_browser_wiki">Открыть статью в интернете</string>
     <string name="open_in_browser_wiki_description">Открыть статью в браузере.</string>
     <string name="download_wiki_region_placeholder">этот регион</string>
@@ -2650,8 +2649,6 @@
     <string name="light_rs_render_descr">Простой стиль для вождения. Мягкий ночной режим, контурные линии, контрастные дороги в оранжевом стиле, тусклые второстепенные объекты карты.</string>
     <string name="topo_render_descr">Для пеших походов, трекинга и велопоездок на природе. Хорошо читается при сложном освещении. Контрастные дороги и природные объекты, различные типы маршрутов, контурные линии с расширенными настройками, дополнительные детали. Параметр «дорожное покрытие» позволяет различать поверхность и качество дорог. Ночной режим отсутствует.</string>
     <string name="default_render_descr">Стиль общего назначения. Густонаселённые города показаны упрощённо. Выделены контурные линии, маршруты, качество поверхности, частные территории, дорожные щиты, объекты спортивных сплавов, отрисовка пешеходных маршрутов по шкале SAC/CAI.</string>
-    <string name="open_wikipedia_link_online">Открыть ссылку Википедии в онлайн</string>
-    <string name="open_wikipedia_link_online_description">Ссылка будет открыта в веб-браузере.</string>
     <string name="read_wikipedia_offline_description">Подпишитесь на OsmAnd Live и читайте Википедию и Викигид в автономном режиме.</string>
     <string name="how_to_open_link">Как открыть ссылку?</string>
     <string name="read_wikipedia_offline">Читать Википедию в режиме офлайн</string>

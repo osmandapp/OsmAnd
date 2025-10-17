@@ -42,7 +42,7 @@
 
 	</net.osmand.plus.views.controls.MapHudLayout>
 
-	<FrameLayout
+	<net.osmand.plus.views.ObservableFrameLayout
 		android:id="@+id/bottomFragmentContainer"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />

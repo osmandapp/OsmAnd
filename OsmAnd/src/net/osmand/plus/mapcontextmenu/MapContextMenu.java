@@ -374,7 +374,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MenuController menuController = getMenuController();
 		boolean needAcquireMenuController = menuController == null
 				|| appModeChanged
-				|| !update
+				|| update
 				|| thisObject == null && object != null
 				|| thisObject != null && object == null
 				|| (thisObject != null && !thisObject.getClass().equals(object.getClass()));

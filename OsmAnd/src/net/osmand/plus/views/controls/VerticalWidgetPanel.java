@@ -2,6 +2,7 @@ package net.osmand.plus.views.controls;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -40,6 +43,8 @@ import net.osmand.util.Algorithms;
 import java.util.*;
 
 public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContainer {
+
+	private final List<VerticalPanelVisibilityListener> visibilityListeners = new ArrayList<>();
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -94,7 +99,17 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 		updateRows();
 	}
 
-	private boolean isAnyRowVisible() {
+	public void addVisibilityListener(@Nullable VerticalPanelVisibilityListener listener) {
+		if (!visibilityListeners.contains(listener)) {
+			visibilityListeners.add(listener);
+		}
+	}
+
+	public void removeVisibilityListener(@Nullable VerticalPanelVisibilityListener listener) {
+		visibilityListeners.remove(listener);
+	}
+
+	public boolean isAnyRowVisible() {
 		for (Row row : visibleRows) {
 			if (row.isAnyWidgetVisible()) {
 				return true;
@@ -111,7 +126,20 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 	}
 
 	private void updateVisibility() {
-		AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
+		boolean isAnyRowVisible = isAnyRowVisible();
+		AndroidUiHelper.updateVisibility(this, isAnyRowVisible);
+
+		for (VerticalPanelVisibilityListener listener : visibilityListeners) {
+			listener.isVisible(isAnyRowVisible);
+		}
+		if (InsetsUtils.isEdgeToEdgeSupported() && !topPanel) {
+			boolean isTransparentWidgets = app.getSettings().TRANSPARENT_MAP_THEME.get();
+			if (isAnyRowVisible && !isTransparentWidgets) {
+				setBackgroundColor(ColorUtilities.getWidgetBackgroundColor(app, nightMode));
+			} else {
+				setBackgroundColor(Color.TRANSPARENT);
+			}
+		}
 	}
 
 	public void update(@Nullable DrawSettings drawSettings) {
@@ -466,5 +494,9 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			List<MapWidgetInfo> newMapWidgets = newRow != null ? newRow.enabledMapWidgets : Collections.emptyList();
 			return Algorithms.objectEquals(oldMapWidgets, newMapWidgets);
 		}
+	}
+
+	public interface VerticalPanelVisibilityListener {
+		void isVisible(boolean isVisible);
 	}
 }

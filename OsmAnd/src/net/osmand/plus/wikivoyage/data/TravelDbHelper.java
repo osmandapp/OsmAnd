@@ -24,6 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -743,6 +744,12 @@ public class TravelDbHelper implements TravelHelper {
 	@Override
 	public TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId) {
 		return null;
+	}
+
+	@NonNull
+	@Override
+	public List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull NetworkRouteSelectorFilter filter) {
+		return new ArrayList<>();
 	}
 
 	@Override

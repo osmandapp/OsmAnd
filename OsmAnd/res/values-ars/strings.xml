@@ -2369,9 +2369,7 @@
     <string name="app_mode_baby_transport">عربة الطفل</string>
     <string name="enable_3d_maps">تمكين خريطة ثلاثية الأبعاد</string>
     <string name="rendering_attr_moreDetailed_name">مزيد من التفاصيل</string>
-    <string name="open_wikipedia_link_online_description">سوف يتم فتح الرابط على متصفح الويب.</string>
     <string name="index_item_world_wikivoyage">مقالات ويكي الرحلات حول العالم</string>
-    <string name="open_wikipedia_link_online">فتح رابط ويكيبيديا على الإنترنت</string>
     <string name="show_gps_coordinates_text">عرض الإحداثيات على الخريطة</string>
     <string name="save_as_route_point">الحفظ كنقاط طريق</string>
     <string name="shared_string_navigation">الملاحة</string>
@@ -2570,7 +2568,6 @@
     <string name="points_delete_multiple">حذف %1$d نقطة؟</string>
     <string name="planning_trip_item">التخطيط لرحلة</string>
     <string name="routing_attr_avoid_ferry_name">تجنب العبارات</string>
-    <string name="download_wikipedia_label">تنزيل بيانات ويكيبيديا</string>
     <string name="map_widget_distance_by_tap">المسافة عن طريق الضغط</string>
     <string name="login_account">الحساب</string>
     <string name="help_article_navigation_setup_route_details_name">تفاصيل الطريق</string>

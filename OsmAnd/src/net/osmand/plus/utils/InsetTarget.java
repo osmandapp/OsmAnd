@@ -81,8 +81,8 @@ public final class InsetTarget {
 	}
 
 	@Nullable
-	public EnumSet<InsetsUtils.InsetSide> getSides(boolean isLandscape) {
-		return isLandscape ? landscapeSides : portraitSides;
+	public EnumSet<InsetsUtils.InsetSide> getSides(boolean isPortrait) {
+		return isPortrait ? portraitSides : landscapeSides;
 	}
 
 	public static InsetTargetBuilder createFab(int... ids) {

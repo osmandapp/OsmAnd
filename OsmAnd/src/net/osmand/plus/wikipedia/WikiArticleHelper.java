@@ -211,13 +211,7 @@ public class WikiArticleHelper {
 			@NonNull FragmentActivity activity, boolean nightMode,
 			@NonNull List<LatLon> locations, @NonNull String text
 	) {
-		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		if (Version.isPaidVersion(app)) {
-			WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(activity, nightMode);
-			wikiArticleHelper.showWikiArticle(locations, text);
-		} else {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			WikipediaArticleWikiLinkFragment.showInstance(fragmentManager, text);
-		}
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		WikipediaArticleWikiLinkFragment.showInstance(fragmentManager, text, locations);
 	}
 }

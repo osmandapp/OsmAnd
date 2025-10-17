@@ -2401,8 +2401,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="osm_recipients_label">OSM gavėjai</string>
     <string name="total_donations">Iš viso paaukota</string>
     <string name="nautical_renderer">Jūrinis</string>
-    <string name="open_wikipedia_link_online">Atversti Wikipedia puslapį</string>
-    <string name="how_to_open_link">Kaip atverti nuorodą?</string>
+	<string name="how_to_open_link">Kaip atverti nuorodą?</string>
     <string name="download_all">Atsisiųsti viską</string>
     <string name="show_images">Rodyti paveikslėlius</string>
     <string name="purchase_cancelled_dialog_title">Jūs atsisakėte OsmAnd Live prenumeratos</string>
@@ -2483,11 +2482,9 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_world">Pasaulis</string>
     <string name="coord_input_edit_point">Redaguoti tašką</string>
     <string name="coord_input_add_point">Pridėti tašką</string>
-    <string name="open_wikipedia_link_online_description">Nuoroda bus atverta naršyklėje.</string>
     <string name="start_editing_card_image_text">Atviras pasaulinis kelionių vadovas, kurie kiekvienas gali redaguoti.</string>
     <string name="access_intermediate_arrival_time">Tarpinis atvykimo laikas</string>
     <string name="map_widget_intermediate_time">Tarpinis laikas</string>
-    <string name="download_wikipedia_label">Atsisiųsti Vikipedijos duomenys</string>
     <string name="osm_live_plan_pricing">Planas ir kainos</string>
     <string name="osm_live_payment_monthly_title">Kas mėnesį</string>
     <string name="osm_live_payment_3_months_title">Kas 3-is mėnesius</string>

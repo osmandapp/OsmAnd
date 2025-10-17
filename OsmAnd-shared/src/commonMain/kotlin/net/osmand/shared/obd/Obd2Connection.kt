@@ -191,27 +191,6 @@ class Obd2Connection(
 		return normalizedResponse
 	}
 
-	private fun toHexValues(buffer: String): IntArray {
-		val values = IntArray(buffer.length / 2)
-		for (i in values.indices) {
-			values[i] = 16 * toDigitValue(buffer[2 * i]) + toDigitValue(buffer[2 * i + 1])
-		}
-		return values
-	}
-
-	private fun toDigitValue(c: Char): Int {
-		return when (c) {
-			in '0'..'9' -> c - '0'
-			'a', 'A' -> 10
-			'b', 'B' -> 11
-			'c', 'C' -> 12
-			'd', 'D' -> 13
-			'e', 'E' -> 14
-			'f', 'F' -> 15
-			else -> throw IllegalArgumentException("$c is not a valid hex digit")
-		}
-	}
-
 	private fun removeSideData(response: String): String {
 		var result = response
 		for (pattern in sideDataToRemoveFromAnswer) {
@@ -272,6 +251,27 @@ class Obd2Connection(
 
 		fun isInitCommand(command: String): Boolean {
 			return initCommands.contains(command)
+		}
+
+		fun toHexValues(buffer: String): IntArray {
+			val values = IntArray(buffer.length / 2)
+			for (i in values.indices) {
+				values[i] = 16 * toDigitValue(buffer[2 * i]) + toDigitValue(buffer[2 * i + 1])
+			}
+			return values
+		}
+
+		private fun toDigitValue(c: Char): Int {
+			return when (c) {
+				in '0'..'9' -> c - '0'
+				'a', 'A' -> 10
+				'b', 'B' -> 11
+				'c', 'C' -> 12
+				'd', 'D' -> 13
+				'e', 'E' -> 14
+				'f', 'F' -> 15
+				else -> throw IllegalArgumentException("$c is not a valid hex digit")
+			}
 		}
 	}
 

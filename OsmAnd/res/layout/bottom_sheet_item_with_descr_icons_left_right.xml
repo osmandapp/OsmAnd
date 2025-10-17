@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		tools:src="@drawable/list_destination" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding_double"
+		android:layout_weight="1"
+		android:orientation="vertical"
+		android:paddingLeft="@dimen/content_padding_half">
+
+		<TextView
+			android:id="@+id/title"
+			style="@style/TextAppearance.ListItemTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="1"
+			tools:text="Some title" />
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<TextView
+				android:id="@+id/description"
+				style="@style/TextAppearance.ContextMenuSubtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				android:maxLines="1"
+				android:visibility="gone"
+				tools:text="Some description" />
+
+			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+				android:id="@+id/progress_bar"
+				style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="4dp"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_marginBottom="@dimen/content_padding_small"
+				android:indeterminate="true"
+				android:visibility="gone"
+				app:mpb_progressStyle="horizontal"
+				app:mpb_useIntrinsicPadding="false"
+				tools:visibility="visible" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon_right"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		tools:src="@drawable/list_destination" />
+
+</LinearLayout>

@@ -18,6 +18,7 @@ import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,9 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -121,6 +125,17 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 		recyclerView.setAdapter(contentAdapter);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createCustomBuilder(R.id.content_recycler_view)
+				.portraitSides(InsetSide.TOP)
+				.typeMask(WindowInsetsCompat.Type.ime())
+				.applyPadding(true)
+				.build());
+		return collection;
 	}
 
 	public record TagItem(@NonNull String tag, @NonNull String value, long id) {

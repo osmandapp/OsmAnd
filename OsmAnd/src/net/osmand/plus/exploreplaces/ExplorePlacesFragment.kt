@@ -12,6 +12,8 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.graphics.Insets
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -36,6 +38,8 @@ import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.InsetTarget
+import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.views.OsmandMapTileView.MapZoomChangeListener
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
@@ -73,6 +77,8 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 	private var showOnMapContainer: View? = null
 	private var zoomButtonsView: View? = null
 	private var isPortrait: Boolean = false
+
+	private var leftInset: Insets = Insets.NONE
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -156,14 +162,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
         } else {
 			AndroidUiHelper.updateVisibility(showListContainer, false)
 
-			val isRtl = AndroidUtils.isLayoutRtl(requireActivity())
-			val fragmentWidth = resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat()
-
-			view.translationX = if (isRtl) {
-				fragmentWidth
-			} else {
-				-fragmentWidth
-			}
+			setupInitTranslation()
 
             getToolbar()?.saveInitialViewParams()
             getToolbar()?.setupAnimationParams()
@@ -171,6 +170,18 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 
 		updateMapControls()
 		return view
+	}
+
+	override fun getInsetTargets(): InsetTargetsCollection {
+		val collection = super.getInsetTargets()
+		collection.replace(InsetTarget.createLeftSideContainer(true, true, view))
+		collection.removeType(InsetTarget.Type.ROOT_INSET)
+		return collection
+	}
+
+	override fun onApplyInsets(insets: WindowInsetsCompat) {
+		leftInset = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+		setupInitTranslation()
 	}
 
 	fun isListHidden(): Boolean {
@@ -432,10 +443,23 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 		}
 	}
 
+	private fun setupInitTranslation(){
+		if (isPortrait) {
+			return
+		}
+		val fragmentWidth = resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat() + leftInset.left
+		val isRtl = AndroidUtils.isLayoutRtl(requireActivity())
+
+		view?.translationX = if (isRtl) {
+			fragmentWidth
+		} else {
+			-fragmentWidth
+		}
+	}
+
 	private fun slideLandscapeFragment(mapActivity: MapActivity, viewContainer: View) {
 		val density = app.resources.displayMetrics.density
-		val fragmentWidthPx =
-			resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat() * density
+		val fragmentWidthPx = (resources.getDimensionPixelSize(R.dimen.dashboard_land_width).toFloat() * density) + leftInset.left
 		val isLandScapeVisible = isLandScapeVisible()
 		if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 			val valueAnimator = ValueAnimator.ofFloat(0f, 1f)

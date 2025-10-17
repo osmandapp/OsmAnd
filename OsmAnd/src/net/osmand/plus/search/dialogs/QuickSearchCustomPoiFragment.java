@@ -48,6 +48,8 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.SearchUICore;
@@ -208,6 +210,14 @@ public class QuickSearchCustomPoiFragment extends BaseFullScreenDialogFragment i
 		});
 		view.findViewById(R.id.topBarShadow).setVisibility(View.VISIBLE);
 		return view;
+	}
+
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.search_button).build());
+		return collection;
 	}
 
 	@Override

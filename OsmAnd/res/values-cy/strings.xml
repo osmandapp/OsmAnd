@@ -1524,7 +1524,6 @@
     <string name="open_in_browser_wiki">Agor y cofnod arlein</string>
     <string name="routeInfo_surface_name">Arwyneb</string>
     <string name="routeInfo_smoothness_name">Esmwythder</string>
-    <string name="download_wikipedia_label">Llwytho data Wicipedia</string>
     <string name="download_wiki_region_placeholder">y rhanbarth hon</string>
     <string name="download_wikipedia_description">Llwytho cofnodion Wicipedia ar gyfer %1$s i\'w darllen all-lein.</string>
     <string name="how_to_open_wiki_title">Sut i agor cofnodion Wicipedia\?</string>
@@ -3865,8 +3864,6 @@
 \n Ni chesglir gwybodaeth bersonol, dim ond data chwilio sydd ei angen i wella\'r chwiliad.</string>
     <string name="point_deleted">Pwynt %1$s wedi\'i ddileu</string>
     <string name="default_render_descr">Arddull pwrpas cyffredinol. Dangosir dinasoedd trwchus yn lân. Mae\'n cynnwys cyfuchliniau, llwybrau, ansawdd wyneb, cyfyngiadau mynediad, tariannau ffordd, llwybrau sy\'n rendro yn unol â graddfa ACA, eitemau chwaraeon dŵr gwyn.</string>
-    <string name="open_wikipedia_link_online">Agor dolen Wicipedia ar-lein</string>
-    <string name="open_wikipedia_link_online_description">Bydd y ddolen yn cael ei hagor mewn porwr gwe.</string>
     <string name="read_wikipedia_offline_description">Cael tanysgrifiad OsmAnd Live i ddarllen erthyglau Wicipedia a Wikivoyage all-lein.</string>
     <string name="travel_card_update_descr">Mae data Wikivoyage newydd ar gael, ei ddiweddaru i\'w fwynhau.</string>
     <string name="shared_string_only_with_wifi">Dim ond ar Wi-Fi</string>

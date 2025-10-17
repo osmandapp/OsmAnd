@@ -45,7 +45,14 @@ class OBDSimulationSource {
 				"01" -> "41"
 				"09" -> "49"
 				else -> {
-					throw IllegalArgumentException("Not supported command group $commandCode")
+					when (fullCommand.replace("\r", "").trim()) {
+						"AT RV" -> {
+							bufferToRead = "12.9V>"
+							return@runBlocking
+						}
+
+						else -> throw IllegalArgumentException("Not supported command group $commandCode")
+					}
 				}
 			}
 			val command = splitCommand[1]

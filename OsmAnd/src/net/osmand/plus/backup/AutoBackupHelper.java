@@ -42,7 +42,8 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 
 	public void runAutoBackup() {
 		if (InAppPurchaseUtils.isBackupAvailable(app) && isAutoBackupEnabled()
-				&& app.getBackupHelper().isRegistered() && !backupHelper.isBackupPreparing()) {
+				&& app.getBackupHelper().isRegistered()
+				&& !settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup(true, this);
 		}
 	}

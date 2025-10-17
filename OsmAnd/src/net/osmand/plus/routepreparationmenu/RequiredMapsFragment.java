@@ -38,6 +38,8 @@ import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -102,6 +104,13 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		updateContent();
 		setupCalculateOnlineCard();
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createBottomContainer(R.id.bottom_panel).build());
+		return collection;
 	}
 
 	@Override
