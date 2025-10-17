@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -104,8 +106,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
 
-			leftWidgetsPanel.setScreenWidth(mapActivity);
-			rightWidgetsPanel.setScreenWidth(mapActivity);
+			leftWidgetsPanel.setScreenSize(mapActivity);
+			rightWidgetsPanel.setScreenSize(mapActivity);
 
 			LayoutInflater inflater = mapActivity.getLayoutInflater();
 			rulerWidget = (RulerWidget) inflater.inflate(R.layout.map_ruler, mapHudLayout, false);
@@ -150,6 +152,14 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			additionalWidgets = null;
 			topToolbarView = null;
 		}
+	}
+
+	@Override
+	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
+		super.setWindowInsets(windowInsets);
+		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()|WindowInsetsCompat.Type.navigationBars());
+		leftWidgetsPanel.setInsets(insets);
+		rightWidgetsPanel.setInsets(insets);
 	}
 
 	@Nullable

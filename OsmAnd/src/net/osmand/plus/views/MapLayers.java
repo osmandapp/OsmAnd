@@ -10,6 +10,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -246,6 +247,13 @@ public class MapLayers {
 			}
 		}
 		return false;
+	}
+
+	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		for (OsmandMapLayer layer : mapView.getLayers()) {
+			layer.setWindowInsets(windowInsets);
+		}
 	}
 
 	public void updateLayers(@Nullable MapActivity mapActivity) {
