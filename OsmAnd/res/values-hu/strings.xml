@@ -2437,8 +2437,6 @@
     <string name="shared_string_bookmark">Könyvjelző</string>
     <string name="hide_full_description">Teljes leírás elrejtése</string>
     <string name="show_full_description">Teljes leírás megjelenítése</string>
-    <string name="open_wikipedia_link_online">Wikipédia-link megnyitása online</string>
-    <string name="open_wikipedia_link_online_description">A hivatkozás böngészőben fog megnyílni.</string>
     <string name="read_wikipedia_offline">Wikipédia olvasása offline</string>
     <string name="download_all">Összes letöltése</string>
     <string name="shared_string_restart">App újraindítása</string>
@@ -2511,7 +2509,6 @@
     <string name="access_intermediate_arrival_time">Köztes érkezési idő</string>
     <string name="map_widget_intermediate_time">Köztes idő</string>
     <string name="download_wikipedia_description">Töltse le a(z) %1$s Wikipédia szócikkeit offline olvasáshoz.</string>
-    <string name="download_wikipedia_label">Wikipédia adatok letöltése</string>
     <string name="open_in_browser_wiki">Szócikk megnyitása online</string>
     <string name="open_in_browser_wiki_description">Szócikk megtekintése böngészőben.</string>
     <string name="download_wiki_region_placeholder">ezen régió</string>

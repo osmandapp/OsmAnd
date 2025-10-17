@@ -387,7 +387,6 @@
     <string name="download_wiki_region_placeholder">ova oblast</string>
     <string name="open_in_browser_wiki_description">Pogledaj članak u veba čitaču.</string>
     <string name="open_in_browser_wiki">Otvori članak na internetu</string>
-    <string name="download_wikipedia_label">Preuzmi podatke sa Vikipedije</string>
     <string name="download_wikipedia_description">Preuzmi članke Wikipedia za %1$s radi čitanja bez interneta.</string>
     <string name="show_tunnels">Tuneli</string>
     <string name="tunnel_warning">Tunel je ispred</string>
@@ -3061,8 +3060,6 @@
     <string name="read_wikipedia_offline">Čitaj Vikipediju bez interneta</string>
     <string name="how_to_open_link">Kako da otvorim link?</string>
     <string name="read_wikipedia_offline_description">Da bi čitao članke sa Wikipedia i Wikivoyage, kupi OsmAnd Live.</string>
-    <string name="open_wikipedia_link_online_description">Link će biti otvorena u web čitaču.</string>
-    <string name="open_wikipedia_link_online">Otvori Wikipedia link na internetu</string>
     <string name="default_render_descr">Stil opšte namene. Gusti gradovi su prikazani jasno. Prikazuje izohipse, rute, kvalitet podloge, zabrane pristupa, blokade puteva, iscrtavanje puteva po alpskoj lestvici SAC/SAI, objekti za sportove na brzacima.</string>
     <string name="touring_view_render_descr">Izgled za turističke ture sa visokim kontrastom i najviše detalja. Uključuje sve mogućnosti podrazumevanog izgleda OsmAnda, pritom prikazujući što je više detalja moguće, konkretno puteve, staze i ostale načine putovanja. Jasna vidna razlika između različitih vrsta puteva, tako da podseća na \"turističke atlase\". Pogodan za dnevni i noćni naćin rada, kao i korišćenje napolju.</string>
     <string name="topo_render_descr">Za šetanje, pešačenje, trčanje i biciklizam u prirodi. Dobra čitljivost u uslovima spoljne osvetljenosti. Dobar kontrast za puteve i prirodne objekte, različiti tipovi ruta, izohipse sa naprednim podešavanjima, više detalja. Mogućnost vrsta podloge omogućava da razlikuješ puteve sa različitim kvalitetima podloga. Nema noćnog rada.</string>

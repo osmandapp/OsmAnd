@@ -2437,8 +2437,6 @@
     <string name="wikivoyage_offline">Wikivoyage 离线</string>
     <string name="unlimited_downloads">无限下载</string>
     <string name="wikipedia_offline">离线维基百科</string>
-    <string name="open_wikipedia_link_online">在线打开维基百科链接</string>
-    <string name="open_wikipedia_link_online_description">链接将在网页浏览器中打开。</string>
     <string name="read_wikipedia_offline_description">获取 OsmAnd Live 订阅以离线阅读维基百科和 Wikivoyage 文章。</string>
     <string name="how_to_open_link">如何打开链接？</string>
     <string name="read_wikipedia_offline">离线阅读维基百科</string>
@@ -2466,7 +2464,6 @@
     <string name="get_osmand_live">获取 OsmAnd Live 以解锁全部功能：每日无限量地图下载与更新、所有付费与免费插件、维基百科、维基导游等等。</string>
     <string name="shared_string_bookmark">书签</string>
     <string name="how_to_open_wiki_title">如何打开维基百科文章？</string>
-    <string name="download_wikipedia_label">下载维基百科数据</string>
     <string name="open_in_browser_wiki">在线打开条目</string>
     <string name="wiki_article_not_found">未找到条目</string>
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>

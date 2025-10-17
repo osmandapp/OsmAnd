@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="requires_internet_connection">Requires an internet connection</string>
+    <string name="save_and_access_articles_offline">Save data and access articles offline anywhere</string>
     <string name="track_folder_appearance">Track folder appearance</string>
     <string name="update_maps">Update maps</string>
     <string name="reconnect">Reconnect</string>
@@ -3423,8 +3425,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="topo_render_descr">For hiking, trekking, and nature cycling. Readable outdoors. Contrasting roads and natural objects, different route types, advanced contour line options, extra details. Adjusting "Surface integrity" distinguishes road quality. No night mode.</string>
     <string name="touring_view_render_descr">Touring style with high contrast and maximum detail. Includes all options of the OsmAnd default style, while displaying as much detail as possible, in particular roads, paths, and other ways to travel. Clear \"touring atlas\" distinction between road types. Suitable for day, night, and outdoor use.</string>
     <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features routes, surface quality, access restrictions, road shields, paths rendering according to SAC/CAI scale, whitewater sports items, topography features like contour lines.</string>
-    <string name="open_wikipedia_link_online">Open Wikipedia link online</string>
-    <string name="open_wikipedia_link_online_description">The link will be opened in a web browser.</string>
     <string name="read_wikipedia_offline_description">Get OsmAnd Live subscription to read Wikipedia and Wikivoyage articles offline.</string>
     <string name="how_to_open_link">How to open the link?</string>
     <string name="read_wikipedia_offline">Read Wikipedia offline</string>
@@ -6221,7 +6221,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="tunnel_warning">Tunnel ahead</string>
     <string name="show_tunnels">Tunnels</string>
     <string name="download_wikipedia_description">Download the Wikipedia articles for %1$s to read them offline.</string>
-    <string name="download_wikipedia_label">Download Wikipedia data</string>
+    <string name="download_wikipedia_label">Download Wikipedia</string>
     <string name="open_in_browser_wiki">Open article online</string>
     <string name="open_in_browser_wiki_description">View article in a web browser.</string>
     <string name="download_wiki_region_placeholder">this region</string>

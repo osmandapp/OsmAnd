@@ -2577,7 +2577,6 @@
     <string name="get_unlimited_access">Fáðu ótakmarkaðan aðgang</string>
     <string name="welcome_to_open_beta">Velkomin í opnu beta-þróunarútgáfuna</string>
     <string name="download_wikipedia_description">Sækja Wikipedia greinar fyrir %1$s til að lesa þær án nettengingar.</string>
-    <string name="download_wikipedia_label">Sækja Wikipedia-gögn</string>
     <string name="open_in_browser_wiki">Opna greinina á netinu</string>
     <string name="open_in_browser_wiki_description">Skoða grein í vafra.</string>
     <string name="download_wiki_region_placeholder">þetta svæði</string>
@@ -2591,8 +2590,6 @@
     <string name="show_images">Birta myndir</string>
     <string name="purchase_cancelled_dialog_title">Þú hefur hætt áskrift þinni að OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Endurnýjaðu áskriftina til að halda áfram að nýta þér allra eiginleikana:</string>
-    <string name="open_wikipedia_link_online">Opna Wikipedia-tengil á netinu</string>
-    <string name="open_wikipedia_link_online_description">Tengilinn verður opnaður í vafra.</string>
     <string name="read_wikipedia_offline_description">Fáðu áskrift að OsmAnd Live til að lesa Wikipedia- og Wikivoyage-greinar án nettengingar.</string>
     <string name="how_to_open_link">Hvernig á að opna tengilinn?</string>
     <string name="read_wikipedia_offline">Lesa Wikipedia ónettengt</string>

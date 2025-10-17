@@ -22,7 +22,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	private int descriptionMaxLines = INVALID_VALUE;
 	private boolean descriptionLinksClickable;
 
-	private TextView descriptionTv;
+	protected TextView descriptionTv;
 
 	public BottomSheetItemWithDescription(View customView,
 										  @LayoutRes int layoutId,
@@ -52,8 +52,10 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 	public void setDescription(CharSequence description) {
 		this.description = description;
-		descriptionTv.setText(description);
-		changeDescriptionVisibility();
+		if (descriptionTv != null) {
+			descriptionTv.setText(description);
+			changeDescriptionVisibility();
+		}
 	}
 
 	public void setDescriptionMaxLines(int maxLines) {

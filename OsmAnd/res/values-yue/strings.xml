@@ -3033,8 +3033,6 @@
     <string name="topo_render_descr">專為遠足、徒步旅行和野外單車設計。版面易於戶外閱讀，具有對比鮮明的道路和自然地點，顯示不同路徑類型、進階等高線選項及額外細節。調整路面完整性有助於判斷道路狀況，不提供夜間模式。</string>
     <string name="touring_view_render_descr">高對比和最多細節的旅遊樣式。包含所有 OsmAnd 預設樣式的選項，並盡可能顯示更多細節，特別是在道路、路徑和其他旅行方式上。明確區分道路類型的旅遊地圖，適用於日間、夜間和戶外使用。</string>
     <string name="default_render_descr">通用樣式，即使在人口密集的城市中也能清晰顯示。特點包括路徑、路面狀況、進入限制、路障，以及根據 SAC/CAI 等級繪製的路徑和激流運動項目，還有等高線等地形特徵。</string>
-    <string name="open_wikipedia_link_online">在線上開啟維基百科連結</string>
-    <string name="open_wikipedia_link_online_description">該連結將在瀏覽器中開啟。</string>
     <string name="read_wikipedia_offline_description">加入 OsmAnd Live 付費計劃後，您可以離線閱讀維基百科和維基導遊的文章。</string>
     <string name="how_to_open_link">如何開啟連結？</string>
     <string name="read_wikipedia_offline">離線閱讀維基百科</string>
@@ -5533,7 +5531,6 @@
     <string name="tunnel_warning">前方有隧道</string>
     <string name="show_tunnels">隧道</string>
     <string name="download_wikipedia_description">下載 %1$s 的維基百科文章以便離線閱讀。</string>
-    <string name="download_wikipedia_label">下載維基百科資料</string>
     <string name="open_in_browser_wiki">線上開啟文章</string>
     <string name="open_in_browser_wiki_description">在瀏覽器中檢視文章。</string>
     <string name="download_wiki_region_placeholder">這個區域</string>

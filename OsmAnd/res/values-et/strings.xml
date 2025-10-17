@@ -178,8 +178,6 @@
     <string name="shared_string_bookmark">Järjehoidja</string>
     <string name="hide_full_description">Peida täielik kirjeldus</string>
     <string name="show_full_description">Näita täielikku kirjeldust</string>
-    <string name="open_wikipedia_link_online">Ava Vikipeedia link veebis</string>
-    <string name="open_wikipedia_link_online_description">Link avatakse veebilehitsejas.</string>
     <string name="how_to_open_link">Kuidas link avada?</string>
     <string name="read_wikipedia_offline">Loe Wikipediat ilma võrguühenduseta</string>
     <string name="download_all">Laadi kõik alla</string>
@@ -3108,7 +3106,6 @@
     <string name="tunnel_warning">Tunnel ees</string>
     <string name="show_tunnels">Tunnelid</string>
     <string name="download_wikipedia_description">Laadi alla Vikipeedia artiklid %1$s kohta ilma võrguühenduseta lugemiseks.</string>
-    <string name="download_wikipedia_label">Laadi alla Vikipeedia andmed</string>
     <string name="open_in_browser_wiki_description">Vaata artiklit veebilehitsejas.</string>
     <string name="download_wiki_region_placeholder">see piirkond</string>
     <string name="wiki_article_search_text">Vastava viki artikli otsing</string>

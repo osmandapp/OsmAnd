@@ -2814,8 +2814,6 @@
     <string name="purchase_cancelled_dialog_title">OsmAnd Live aboneliğinizi iptal ettiniz</string>
     <string name="purchase_cancelled_dialog_descr">Tüm özellikleri kullanmaya devam etmek için aboneliği yenileyin:</string>
     <string name="download_all">Hepsini indir</string>
-    <string name="open_wikipedia_link_online">Wikipedia linkini çevrim içi aç</string>
-    <string name="open_wikipedia_link_online_description">Link bir web tarayıcısında açılacaktır.</string>
     <string name="read_wikipedia_offline_description">Wikipedia ve Wikivoyage makalelerini çevrim dışı olarak okumak için OsmAnd Live üyeliği alın.</string>
     <string name="how_to_open_link">Link nasıl açılır\?</string>
     <string name="read_wikipedia_offline">Wikipedia\'yı çevrim dışı olarak oku</string>
@@ -3083,7 +3081,6 @@
     <string name="tunnel_warning">İleride tünel var</string>
     <string name="show_tunnels">Tüneller</string>
     <string name="download_wikipedia_description">Çevrim dışı okumak üzere %1$s için Wikipedia makalelerini indirin.</string>
-    <string name="download_wikipedia_label">Wikipedia verilerini indir</string>
     <string name="open_in_browser_wiki">Makaleyi çevrim içi aç</string>
     <string name="open_in_browser_wiki_description">Makaleyi bir web tarayıcısında görüntüleyin.</string>
     <string name="download_wiki_region_placeholder">bu bölge</string>

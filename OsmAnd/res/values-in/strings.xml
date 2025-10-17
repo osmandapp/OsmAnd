@@ -644,8 +644,6 @@
     <string name="purchase_cancelled_dialog_title">Anda telah membatalkan langganan OsmAnd Live Anda</string>
     <string name="purchase_cancelled_dialog_descr">Perpanjang langganan untuk melanjutkan menggunakan semua fitur:</string>
     <string name="download_all">Unduh semua</string>
-    <string name="open_wikipedia_link_online">Buka tautan Wikipedia</string>
-    <string name="open_wikipedia_link_online_description">Tautan akan dibuka di peramban web.</string>
     <string name="read_wikipedia_offline_description">Berlangganan OsmAnd Live untuk membaca artikel-artikel Wikipedia dan Wikivoyage secara luring.</string>
     <string name="how_to_open_link">Bagaimana cara membuka tautan\?</string>
     <string name="read_wikipedia_offline">Baca Wikipedia secara luring</string>
@@ -1512,7 +1510,6 @@
     <string name="toast_empty_name_error">Lokasi tanpa nama</string>
     <string name="download_wiki_region_placeholder">daerah ini</string>
     <string name="open_in_browser_wiki_description">Lihat artikel di sebuah browser web.</string>
-    <string name="download_wikipedia_label">Unduh data Wikipedia</string>
     <string name="show_tunnels">Terowongan-terowongan</string>
     <string name="tunnel_warning">Terowongan di depan</string>
     <string name="retry">Coba lagi</string>

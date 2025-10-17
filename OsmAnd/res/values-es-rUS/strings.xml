@@ -2535,7 +2535,6 @@
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Te damos la bienvenida a la beta abierta</string>
     <string name="download_wikipedia_description">Descarga los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
-    <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
     <string name="download_wiki_region_placeholder">esta región</string>
@@ -2551,8 +2550,6 @@
     <string name="shared_string_restart">Reiniciar aplicación</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
-    <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
-    <string name="open_wikipedia_link_online_description">El enlace se abrirá en un navegador web.</string>
     <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
     <string name="how_to_open_link">¿Cómo abrir el enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
