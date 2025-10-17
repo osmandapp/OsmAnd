@@ -35,6 +35,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.dialogs.DeleteWidgetConfirmationController;
@@ -229,9 +230,8 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		if (widgetInfo == null) {
 			return view;
 		}
-		if (Build.VERSION.SDK_INT < 30) {
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
-			view.setFitsSystemWindows(true);
 		}
 		promoBannerContainer = view.findViewById(R.id.promo_banner_container);
 		promoBanner = view.findViewById(R.id.promo_banner);
