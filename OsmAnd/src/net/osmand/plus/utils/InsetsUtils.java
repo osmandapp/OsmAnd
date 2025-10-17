@@ -434,7 +434,7 @@ public class InsetsUtils {
 				AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT, contentLight);
 			}
 		} else {
-			boolean nightMode = ((OsmandApplication) activity.getApplication()).getDaynightHelper().isNightMode(APP);
+			boolean nightMode = iSupportInsets.isNightMode();
 			int color = ColorUtilities.getNavBarBackgroundColor(activity, nightMode);
 			AndroidUiHelper.setNavigationBarColor(activity, color, ColorUtils.calculateLuminance(color) >= 0.65);
 		}
