@@ -37,7 +37,7 @@ import java.util.List;
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity implements ISupportInsets {
 
 	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
-
+	protected WindowInsetsCompat rootInsets;
 	@ColorRes
 	protected int getStatusBarColorId() {
 		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
@@ -73,6 +73,10 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		resultListeners.remove(listener);
 	}
 
+	protected int getRootViewId(){
+		return R.id.root;
+	}
+
 	@Override
 	public void onContentChanged() {
 		super.onContentChanged();
@@ -80,7 +84,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		setupHomeButton();
 		updateStatusBarColor();
 
-		View root = findViewById(R.id.root);
+		View root = findViewById(getRootViewId());
 		if (root != null) {
 			InsetsUtils.processInsets(this, root, null, false);
 		}
@@ -171,11 +175,11 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 	@Nullable
 	@Override
 	public WindowInsetsCompat getLastRootInsets() {
-		return null;
+		return rootInsets;
 	}
 
 	@Override
 	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
-
+		this.rootInsets = rootInsets;
 	}
 }

@@ -32,6 +32,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -244,15 +245,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		// Navigation Drawer
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 
-		InsetsUtils.setWindowInsetsListener(findViewById(R.id.menuItems), (view, insets) -> {
-			InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
-			targetsCollection.replace(InsetTarget.createCustomBuilder(view)
-					.portraitSides(InsetSide.TOP, InsetSide.BOTTOM).landscapeSides(InsetSide.TOP)
-					.applyPadding(true).build());
-			targetsCollection.replace(InsetTarget.createLeftSideContainer(true, true, view));
-
-			InsetsUtils.processInsets(view, targetsCollection, insets);
-		}, false);
+		View mapHudLayout = findViewById(R.id.map_hud_container);
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			mapHudLayout.setFitsSystemWindows(false);
+		}
 
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
@@ -332,6 +328,26 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapViewWithLayers.onCreate(savedInstanceState);
 		}
 		extendedMapActivity.onCreate(this, savedInstanceState);
+	}
+
+	protected int getRootViewId(){
+		return R.id.drawer_layout;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.add(InsetTarget.createCustomBuilder(R.id.menuItems)
+				.portraitSides(InsetSide.TOP, InsetSide.BOTTOM).landscapeSides(InsetSide.TOP)
+				.applyPadding(true).build());
+		collection.add(InsetTarget.createLeftSideContainer(true, true, R.id.menuItems));
+
+		return collection;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		getMapLayers().setWindowInsets(insets);
 	}
 
 	private void setMapInitialLatLon(@NonNull OsmandMapTileView mapView, @Nullable Location location) {

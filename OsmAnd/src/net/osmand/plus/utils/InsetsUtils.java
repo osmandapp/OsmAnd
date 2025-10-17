@@ -1,5 +1,7 @@
 package net.osmand.plus.utils;
 
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 import static net.osmand.plus.helpers.AndroidUiHelper.processSystemBarScrims;
 
 import android.app.Activity;
@@ -171,7 +173,7 @@ public class InsetsUtils {
 		}, consume);
 	}
 
-	public static void processInsets(View root, InsetTargetsCollection collection, @NonNull WindowInsetsCompat insets) {
+	public static void processInsets(@NonNull View root, @NonNull InsetTargetsCollection collection, @NonNull WindowInsetsCompat insets) {
 		for (InsetTarget target : collection.getAll()) {
 			if (Objects.requireNonNull(target.getType()) == Type.COLLAPSING_APPBAR) {
 				applyAppBarWithCollapseInsets(root, target, insets, collection);
@@ -206,10 +208,6 @@ public class InsetsUtils {
 			EnumSet<InsetSide> sides = target.getSides(isLandscape(root.getContext()));
 			applyPadding(root, insets, sides, target.getTypeMask());
 		}
-	}
-
-	public static boolean isLandscape(Context context) {
-		return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 	}
 
 	private static void applyCustomInsets(View root, InsetTarget target, WindowInsetsCompat insets) {
@@ -387,6 +385,11 @@ public class InsetsUtils {
 		if (view instanceof ViewGroup viewGroup) {
 			viewGroup.setClipToPadding(false);
 		}
+	}
+
+	public static boolean isLandscape(Context context) {
+		int orientation = context.getResources().getConfiguration().orientation;
+		return !(orientation  == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT);
 	}
 
 	private static List<View> resolveViews(View root, InsetTarget target) {
