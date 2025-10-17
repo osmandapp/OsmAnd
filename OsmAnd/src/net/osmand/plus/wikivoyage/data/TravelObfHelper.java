@@ -7,7 +7,6 @@ import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 
 import android.text.TextUtils;
@@ -47,6 +46,8 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -214,19 +215,28 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	private BinaryMapIndexReader.SearchFilter getRoutesSearchFilter(@NonNull NetworkRouteSelectorFilter filter) {
+		Set<String> enabledRouteTypes = new HashSet<>();
+
+		if (filter.typeFilter != null) {
+			for (OsmRouteType osmRouteType : filter.typeFilter) {
+				String osmRouteTypeName = osmRouteType.getName();
+				RouteActivity activity = app.getRouteActivityHelper().findActivityByTag(osmRouteTypeName);
+				if (activity != null) {
+					enabledRouteTypes.add(activity.getGroup().getId());
+				}
+			}
+		}
+
 		return new BinaryMapIndexReader.SearchFilter() {
 			@Override
 			public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
-//				if (filter.typeFilter != null) {
-//					for (OsmRouteType type : filter.typeFilter) {
-//						Integer routeActivityType = mapIndex.getRule(ROUTE_ACTIVITY_TYPE, type.getName());
-//						if (routeActivityType != null && types.contains(routeActivityType)) {
-//							return true;
-//						}
-//					}
-//				}
-//				return false;
-				return true; // TODO optimize
+				for (String type : enabledRouteTypes) {
+					Integer routeTypeRuleIndex = mapIndex.getRule(ROUTE_TYPE, type);
+					if (routeTypeRuleIndex != null && types.contains(routeTypeRuleIndex)) {
+						return true;
+					}
+				}
+				return false;
 			}
 		};
 	}
