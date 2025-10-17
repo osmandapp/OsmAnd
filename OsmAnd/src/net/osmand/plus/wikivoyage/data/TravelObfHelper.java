@@ -217,6 +217,15 @@ public class TravelObfHelper implements TravelHelper {
 		return new BinaryMapIndexReader.SearchFilter() {
 			@Override
 			public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
+//				if (filter.typeFilter != null) {
+//					for (OsmRouteType type : filter.typeFilter) {
+//						Integer routeActivityType = mapIndex.getRule(ROUTE_ACTIVITY_TYPE, type.getName());
+//						if (routeActivityType != null && types.contains(routeActivityType)) {
+//							return true;
+//						}
+//					}
+//				}
+//				return false;
 				return true; // TODO optimize
 			}
 		};
