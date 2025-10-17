@@ -160,11 +160,6 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 	}
 
 	@Override
-	public boolean isNavigationBarContentLight() {
-		return !app.getDaynightHelper().isNightMode(APP);
-	}
-
-	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = new InsetTargetsCollection();
 		collection.removeType(Type.FAB);
