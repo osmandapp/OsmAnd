@@ -11,6 +11,7 @@ import static android.view.Surface.ROTATION_90;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -33,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.transition.MaterialContainerTransform;
@@ -196,11 +198,11 @@ public class AndroidUiHelper {
 		return previousColor;
 	}
 
-	public static void setNavigationBarColor(@NonNull Activity activity, @ColorInt int color) {
-		setNavigationBarColor(activity.getWindow(), color);
+	public static void setNavigationBarColor(@NonNull Activity activity, @ColorInt int color, boolean lightContent) {
+		setNavigationBarColor(activity.getWindow(), color, lightContent);
 	}
 
-	public static void setNavigationBarColor(@NonNull Window window, @ColorInt int color) {
+	public static void setNavigationBarColor(@NonNull Window window, @ColorInt int color, boolean lightContent) {
 		if (InsetsUtils.isEdgeToEdgeSupported()) {
 			View scrim = getOrCreateScrim(window, R.id.navigation_bar_scrim, R.layout.navigation_bar_scrim);
 			if (scrim != null) {
@@ -209,6 +211,18 @@ public class AndroidUiHelper {
 		} else {
 			window.setNavigationBarColor(color);
 		}
+
+		setNavigationBarContentColor(window, lightContent);
+	}
+
+	public static void setNavigationBarContentColor(@NonNull Window window, boolean lightContent){
+		View decorView = window.getDecorView();
+
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			window.setNavigationBarContrastEnforced(false);
+		}
+		WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(window, decorView);
+		controller.setAppearanceLightNavigationBars(lightContent);
 	}
 
 	@Nullable

@@ -2625,7 +2625,6 @@
 \n • בחירה בין כל נתוני האזור לבין מערכת הדרכים (לדוגמה: הנפח של כל הנתונים על יפן הוא 700 מ״ב לעומת 200 מ״ב לנתוני הדרכים בלבד)</string>
     <string name="shared_string_release">מועד ההפצה</string>
     <string name="download_wikipedia_description">ניתן להוריד את הערכים בוויקיפדיה על %1$s כדי לקרוא אותם ללא חיבור לאינטרנט.</string>
-    <string name="download_wikipedia_label">הורדת נתונים מוויקיפדיה</string>
     <string name="open_in_browser_wiki">פתיחת ערך באופן מקוון</string>
     <string name="open_in_browser_wiki_description">הצגת ערך בדפדפן.</string>
     <string name="download_wiki_region_placeholder">אזור זה</string>
@@ -2687,8 +2686,6 @@
     <string name="purchase_cancelled_dialog_title">ביטלת את המינוי שלך ל־OsmAnd חי</string>
     <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות:</string>
     <string name="download_all">להוריד הכול</string>
-    <string name="open_wikipedia_link_online">פתיחת הקישור של ויקיפדיה בדפדפן</string>
-    <string name="open_wikipedia_link_online_description">הקישור ייפתח בדפדפן.</string>
     <string name="read_wikipedia_offline_description">עליך לערוך מינוי ל־OsmAnd חי כדי לקרוא ערכים מוויקיפדיה ומוויקימסע ללא חיבור לאינטרנט.</string>
     <string name="how_to_open_link">כיצד לפתוח את הקישור?</string>
     <string name="read_wikipedia_offline">קריאת ויקיפדיה ללא חיבור לאינטרנט</string>

@@ -1,14 +1,19 @@
 package net.osmand.plus.utils;
 
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+import static net.osmand.plus.helpers.AndroidUiHelper.isOrientationPortrait;
 import static net.osmand.plus.helpers.AndroidUiHelper.processSystemBarScrims;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
@@ -18,8 +23,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsCompat.Type.InsetsType;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.InsetTarget.Type;
@@ -33,7 +41,7 @@ import java.util.Set;
 
 public class InsetsUtils {
 
-	public static final int MINIMUM_EDGE_TO_EDGE_SUPPORTED_API = 30;
+	public static final int MINIMUM_EDGE_TO_EDGE_SUPPORTED_API = 35;
 
 	public enum InsetSide {
 		LEFT, TOP, RIGHT, BOTTOM, RESET
@@ -88,28 +96,28 @@ public class InsetsUtils {
 		}
 	}
 
-	public static void setWindowInsetsListener(@NonNull View view, @Nullable Set<InsetSide> sides) {
-		setWindowInsetsListener(view, (v, insets) -> applyPadding(v, insets, sides), false);
-	}
-
 	public static void applyPadding(@NonNull View rootView,
 	                                @NonNull WindowInsetsCompat insets,
 	                                @NonNull InsetTarget insetTarget) {
-		EnumSet<InsetSide> sides = insetTarget.getSides(isLandscape(rootView.getContext()));
+		EnumSet<InsetSide> sides = insetTarget.getSides(isOrientationPortrait(rootView.getContext()));
 		for (View view : resolveViews(rootView, insetTarget)) {
 			if (view != null) {
-				applyPadding(view, insets, sides);
+				applyPadding(view, insets, sides, insetTarget.getTypeMask());
 			}
 		}
 	}
 
 	public static void applyPadding(@NonNull View view,
 	                                @NonNull WindowInsetsCompat insets,
-	                                @Nullable Set<InsetSide> sides) {
+	                                @Nullable Set<InsetSide> sides,
+	                                @Nullable @InsetsType Integer typeMask) {
 		if (sides == null || !isEdgeToEdgeSupported()) {
 			return;
 		}
-		Insets sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+		if (typeMask == null) {
+			typeMask = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime();
+		}
+		Insets sysBars = insets.getInsets(typeMask);
 
 		boolean resetToInitial = sides.contains(InsetSide.RESET);
 		boolean left = sides.contains(InsetSide.LEFT);
@@ -170,7 +178,7 @@ public class InsetsUtils {
 		}, consume);
 	}
 
-	public static void processInsets(View root, InsetTargetsCollection collection, @NonNull WindowInsetsCompat insets) {
+	public static void processInsets(@NonNull View root, @NonNull InsetTargetsCollection collection, @NonNull WindowInsetsCompat insets) {
 		for (InsetTarget target : collection.getAll()) {
 			if (Objects.requireNonNull(target.getType()) == Type.COLLAPSING_APPBAR) {
 				applyAppBarWithCollapseInsets(root, target, insets, collection);
@@ -187,11 +195,11 @@ public class InsetsUtils {
 	private static void applyAppBarWithCollapseInsets(View root, InsetTarget target, WindowInsetsCompat insets, InsetTargetsCollection collection) {
 		for (View view : resolveViews(root, target)) {
 			if (view != null) {
-				EnumSet<InsetSide> sides = target.getSides(isLandscape(view.getContext()));
-				applyPadding(view, insets, sides);
+				EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(view.getContext()));
+				applyPadding(view, insets, sides, target.getTypeMask());
 
 				for(InsetTarget insetTargets : collection.getByType(Type.ROOT_INSET)){
-					EnumSet<InsetsUtils.InsetSide> insetSides = insetTargets.getSides(isLandscape(view.getContext()));
+					EnumSet<InsetsUtils.InsetSide> insetSides = insetTargets.getSides(isOrientationPortrait(view.getContext()));
 					if (insetSides != null){
 						insetSides.remove(InsetSide.TOP);
 					}
@@ -202,19 +210,15 @@ public class InsetsUtils {
 
 	private static void applyRootInsetsPaddings(View root, InsetTarget target, WindowInsetsCompat insets) {
 		if (root != null) {
-			EnumSet<InsetSide> sides = target.getSides(isLandscape(root.getContext()));
-			applyPadding(root, insets, sides);
+			EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(root.getContext()));
+			applyPadding(root, insets, sides, target.getTypeMask());
 		}
-	}
-
-	public static boolean isLandscape(Context context) {
-		return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 	}
 
 	private static void applyCustomInsets(View root, InsetTarget target, WindowInsetsCompat insets) {
 		for (View view : resolveViews(root, target)) {
 			if (view != null) {
-				EnumSet<InsetSide> sides = target.getSides(isLandscape(view.getContext()));
+				EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(view.getContext()));
 				if (target.isClipToPadding()) {
 					applyClipPadding(view);
 				}
@@ -388,6 +392,11 @@ public class InsetsUtils {
 		}
 	}
 
+	public static boolean isLandscape(Context context) {
+		int orientation = context.getResources().getConfiguration().orientation;
+		return !(orientation  == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+	}
+
 	private static List<View> resolveViews(View root, InsetTarget target) {
 		List<View> result = new ArrayList<>();
 		if (target.getViews() != null) {
@@ -402,13 +411,23 @@ public class InsetsUtils {
 		return result;
 	}
 
+	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment, @Nullable Dialog dialog) {
+		if (dialog == null || dialog.getWindow() == null) {
+			return;
+		}
+		boolean contentLight = insetSupportedFragment.isNavigationBarContentLight();
+		Window window = dialog.getWindow();
+		AndroidUiHelper.setNavigationBarContentColor(window, contentLight);
+	}
+
 	public static void processNavBarColor(@NonNull ISupportInsets insetSupportedFragment) {
+		boolean contentLight = insetSupportedFragment.isNavigationBarContentLight();
 		int colorId = insetSupportedFragment.getNavigationBarColorId();
 		Activity activity = insetSupportedFragment.requireActivity();
 		if (colorId != -1) {
-			AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId));
+			AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId), contentLight);
 		} else {
-			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT);
+			AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT, contentLight);
 		}
 	}
 }

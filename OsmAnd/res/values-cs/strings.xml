@@ -2570,7 +2570,6 @@
     <string name="monthly_map_updates">Aktualizace map každý měsíc</string>
     <string name="daily_map_updates">Aktualizace map každou hodinu</string>
     <string name="download_wikipedia_description">Stáhnout články Wikipedie pro %1$s a číst je v režimu offline.</string>
-    <string name="download_wikipedia_label">Stahování dat z Wikipedie</string>
     <string name="open_in_browser_wiki">Otevřít článek online</string>
     <string name="open_in_browser_wiki_description">Zobrazit článek ve webovém prohlížeči.</string>
     <string name="download_wiki_region_placeholder">tato oblast</string>
@@ -2600,8 +2599,6 @@
     <string name="unirs_render_descr">Upravený základní styl pro zvýšení kontrastu pěších a cyklistických cest. Používá starší barvy Mapnik.</string>
     <string name="shared_string_bookmark">Záložka</string>
     <string name="off_road_render_descr">Pro off-road terénní jízdu, založený na stylu \'Topo\' a pro použití se zelenými satelitními snímky jako podkladovou vrstvou. Zmenšená tloušťka hlavních cest, zvětšená tloušťka polních cest, pěšin, cyklotras a dalších cest.</string>
-    <string name="open_wikipedia_link_online">Otevřít odkaz Wikipedia na internetu</string>
-    <string name="open_wikipedia_link_online_description">Odkaz bude otevřen v internetovém prohlížeči.</string>
     <string name="read_wikipedia_offline_description">Stahování Wikipedia a Wikivoyage článků pro čtení offline je dostupné pouze předplatitelům OsmAnd Live.</string>
     <string name="how_to_open_link">Jak otevřít odkaz?</string>
     <string name="read_wikipedia_offline">Číst Wikipedii offline</string>
@@ -5812,7 +5809,6 @@
     <string name="liter_single">Litr</string>
     <string name="miles">Míle</string>
     <string name="mpg">MPG</string>
-    <string name="private_access_routing_req_short">Váš cíl je v soukromé oblasti. Chcete povolit použití soukromých cest?</string>
     <string name="view_on_phone">Zobrazit na telefonu</string>
     <string name="average_elevation">Průměrná nadmořská výška</string>
     <string name="ascent">Stoupání</string>

@@ -34,6 +34,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -90,9 +91,8 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements Q
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.fragment_configure_screen, container, false);
-		if (Build.VERSION.SDK_INT < 30) {
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
-			view.setFitsSystemWindows(true);
 		}
 
 		appBar = view.findViewById(R.id.appbar);

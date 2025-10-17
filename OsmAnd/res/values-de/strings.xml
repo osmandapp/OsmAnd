@@ -2597,7 +2597,6 @@
     <string name="unlock_all_features">Alle OsmAnd-Funktionen freischalten</string>
     <string name="purchase_dialog_title">Plan auswählen</string>
     <string name="download_wikipedia_description">Laden Sie die Wikipedia-Artikel für %1$s herunter, um sie offline zu lesen.</string>
-    <string name="download_wikipedia_label">Wikipedia-Daten herunterladen</string>
     <string name="open_in_browser_wiki">Artikel online öffnen</string>
     <string name="open_in_browser_wiki_description">Artikel in einem Webbrowser ansehen.</string>
     <string name="download_wiki_region_placeholder">diese Region</string>
@@ -2614,8 +2613,6 @@
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
     <string name="maps_you_need_descr">Basierend auf den Artikeln, die Sie mit einem Lesezeichen versehen haben, werden Ihnen die folgenden Karten zum Download empfohlen:</string>
     <string name="maps_you_need">Benötigte Karten</string>
-    <string name="open_wikipedia_link_online">Wikipedia-Link online öffnen</string>
-    <string name="open_wikipedia_link_online_description">Der Link wird im Webbrowser geöffnet.</string>
     <string name="read_wikipedia_offline_description">Holen Sie sich das OsmAnd-Live-Abonnement, um Wikipedia- und Wikivoyage-Artikel offline zu lesen.</string>
     <string name="how_to_open_link">Wie öffnet man den Link?</string>
     <string name="read_wikipedia_offline">Wikipedia offline lesen</string>
@@ -5841,7 +5838,6 @@
     <string name="add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="max_weight_at_full_load_description">Geben Sie das maximale Gesamtgewicht Ihres Fahrzeugs bei voller Beladung an, um Straßen und Brücken mit Gewichtsbeschränkungen zu vermeiden.</string>
     <string name="max_axle_load_description">Geben Sie die maximale Achslast Ihres Fahrzeugs an, um Straßen und Brücken mit Gewichtsbeschränkungen zu vermeiden.</string>
-    <string name="private_access_routing_req_short">Ihr Ziel befindet sich in einem privaten Bereich. Private Straßen benutzen?</string>
     <string name="view_on_phone">Auf Telefon ansehen</string>
     <string name="marine_renderer">Seefahrt</string>
     <string name="marine_render_descr">Hochgradig anpassbarer Navigationsstil für die Seefahrt. Basierend auf dem nautischen Stil. Funktioniert besser mit der Karte Nautical World Seamarks und optionalen Tiefenkarten.</string>

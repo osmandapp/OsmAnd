@@ -2631,8 +2631,6 @@
     <string name="topo_render_descr">Voor wandelaars, trektochten en fietsen in de natuur. Buiten goed leesbaar. Contrasterende wegen en natuurlijke objecten, verschillende routetypen, geavanceerde hoogtelijn opties, extra details. Aanpassing van de oppervlakte-integriteit onderscheidt de kwaliteit van de weg. Geen nachtmodus.</string>
     <string name="touring_view_render_descr">Stijl met hoog contrast en maximaal detail. Deze bevat alle opties van de standaardstijl van OsmAnd, met zoveel mogelijk details, specifiek wegen, paden en andere reismogelijkheden. Geen verschil tussen “wegenkaart”-wegtypes. Geschikt voor dag, nacht en outdoor gebruik.</string>
     <string name="default_render_descr">Stijl voor algemene doeleinden. Vereenvoudigde weergave dichtbevolkte steden. Routes, oppervlakkwaliteit, toegangsrestricties, wegnummers, weergave van paden volgens de SAC-schaal, wildwatersportelementen, topografische eigenschappen zoals contourlijnen.</string>
-    <string name="open_wikipedia_link_online">WIkipedia-link online openen</string>
-    <string name="open_wikipedia_link_online_description">De link wordt in een webbrowser geopend.</string>
     <string name="read_wikipedia_offline_description">Verkrijg het OsmAnd Live-abonnement om WIkipedia- en Wikivoyage-artikelen offline te lezen.</string>
     <string name="how_to_open_link">Hoe de link openen\?</string>
     <string name="read_wikipedia_offline">Wikipedia offline lezen</string>
@@ -2654,7 +2652,6 @@
     <string name="tunnel_warning">Tunnel</string>
     <string name="show_tunnels">Tunnels</string>
     <string name="download_wikipedia_description">Download de Wikipedia-artikelen voor %1$s om ze offline te lezen.</string>
-    <string name="download_wikipedia_label">Wikipedia-gegevens downloaden</string>
     <string name="open_in_browser_wiki">Artikel online openen</string>
     <string name="open_in_browser_wiki_description">Artikel in een webbrowser openen.</string>
     <string name="download_wiki_region_placeholder">deze regio</string>
@@ -6163,7 +6160,6 @@
     <string name="rendering_attr_lightDetail_description">Standaard: betonningsnaam (lichtkarakter.groep.periode), selecteer aanvullende informatie over sectoren 1 t/m 3 of sectoren 1,2,3,4,5 lichtkarakter</string>
     <string name="ascent">Stijging</string>
     <string name="descent">Daling</string>
-    <string name="private_access_routing_req_short">De bestemming ligt op een privéterrein. Gebruik van privéwegen toestaan?</string>
     <string name="view_on_phone">Bekijk op telefoon</string>
     <string name="backup_delete_data_warning_extended">Deze actie verwijdert alle geselecteerde gegevens permanent uit de cloud. Het is daarna niet meer mogelijk om ze te herstellen.</string>
     <string name="amount_of_total_used">%1$s van %2$s gebruikt</string>
