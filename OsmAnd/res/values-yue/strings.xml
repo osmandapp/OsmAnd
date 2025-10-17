@@ -5630,7 +5630,6 @@
     </plurals>
     <string name="navigate_point_olc_info_invalid">無效的 OLC\n</string>
     <string name="max_axle_load_description">請提供你車輛的最大軸載重，以避開有限重的道路與橋樑。</string>
-    <string name="private_access_routing_req_short">你的目的地位於私人區域。是否允許使用私人道路？</string>
     <string name="view_on_phone">在手機上檢視</string>
     <string name="backup_delete_data_warning_extended">此動作將永久從雲端移除所有所選資料，無法復原。</string>
     <string name="amount_of_total_used">已使用 %2$s 中的 %1$s</string>

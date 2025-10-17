@@ -5841,7 +5841,6 @@
     <string name="add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="max_weight_at_full_load_description">Geben Sie das maximale Gesamtgewicht Ihres Fahrzeugs bei voller Beladung an, um Straßen und Brücken mit Gewichtsbeschränkungen zu vermeiden.</string>
     <string name="max_axle_load_description">Geben Sie die maximale Achslast Ihres Fahrzeugs an, um Straßen und Brücken mit Gewichtsbeschränkungen zu vermeiden.</string>
-    <string name="private_access_routing_req_short">Ihr Ziel befindet sich in einem privaten Bereich. Private Straßen benutzen?</string>
     <string name="view_on_phone">Auf Telefon ansehen</string>
     <string name="marine_renderer">Seefahrt</string>
     <string name="marine_render_descr">Hochgradig anpassbarer Navigationsstil für die Seefahrt. Basierend auf dem nautischen Stil. Funktioniert besser mit der Karte Nautical World Seamarks und optionalen Tiefenkarten.</string>

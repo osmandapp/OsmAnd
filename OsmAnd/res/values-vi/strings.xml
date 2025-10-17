@@ -4311,7 +4311,6 @@
     <string name="add_to_favorites">Thêm vào yêu thích</string>
     <string name="max_weight_at_full_load_description">Cung cấp trọng lượng tối đa của xe khi chở đầy tải để tránh các tuyến đường và cây cầu có giới hạn tải trọng.</string>
     <string name="max_axle_load_description">Cung cấp tải trọng trục tối đa của xe để tránh các tuyến đường và cầu có giới hạn tải trọng.</string>
-    <string name="private_access_routing_req_short">Điểm đến của bạn nằm trong khu vực riêng tư. Cho phép sử dụng những tuyến đường riêng tư?</string>
     <string name="view_on_phone">Xem trên Điện thoại</string>
     <string name="average_elevation">Độ cao trung bình so với mực nước biển</string>
     <string name="ascent">Đi lên</string>

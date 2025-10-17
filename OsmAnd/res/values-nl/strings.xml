@@ -6163,7 +6163,6 @@
     <string name="rendering_attr_lightDetail_description">Standaard: betonningsnaam (lichtkarakter.groep.periode), selecteer aanvullende informatie over sectoren 1 t/m 3 of sectoren 1,2,3,4,5 lichtkarakter</string>
     <string name="ascent">Stijging</string>
     <string name="descent">Daling</string>
-    <string name="private_access_routing_req_short">De bestemming ligt op een privéterrein. Gebruik van privéwegen toestaan?</string>
     <string name="view_on_phone">Bekijk op telefoon</string>
     <string name="backup_delete_data_warning_extended">Deze actie verwijdert alle geselecteerde gegevens permanent uit de cloud. Het is daarna niet meer mogelijk om ze te herstellen.</string>
     <string name="amount_of_total_used">%1$s van %2$s gebruikt</string>

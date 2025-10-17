@@ -5799,7 +5799,6 @@
     <string name="threads_allocated_for_rendering_desc">Menší počet vlákien môže niekedy zrýchliť vykresľovanie mapy.</string>
     <string name="turn_by_turn_directions">Podrobné navigačné pokyny</string>
     <string name="enable_msaa">Povoliť MSAA</string>
-    <string name="private_access_routing_req_short">Váš cieľ je v súkromnej oblasti. Povoliť použitie súkromných ciest?</string>
     <string name="view_on_phone">Zobraziť na telefóne</string>
     <string name="average_elevation">Priemerná nadmorská výška</string>
     <string name="ascent">Stúpanie</string>

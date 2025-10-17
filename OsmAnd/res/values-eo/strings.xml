@@ -5849,7 +5849,6 @@
     <string name="add_to_favorites">Aldoni al ŝatataj</string>
     <string name="max_weight_at_full_load_description">Enigu maksimuman mason de via veturilo je plena ŝarĝo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
     <string name="max_axle_load_description">Enigu maksimuman mason prematan de akso de via veturilo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
-    <string name="private_access_routing_req_short">Via celo estas en privata areo. Ĉu ebligi navigi tra privataj vojoj?</string>
     <string name="view_on_phone">Montri sur telefono</string>
     <string name="lang_en_barebones">Angla (minimuma)</string>
     <string name="release_5_2">• Versio estas prilaborata…</string>

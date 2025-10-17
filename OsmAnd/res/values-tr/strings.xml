@@ -5753,7 +5753,6 @@
     <string name="add_to_a_folder">Bir klasöre ekle</string>
     <string name="add_to_favorites">Sık kullanılanlara ekle</string>
     <string name="max_weight_at_full_load_description">Ağırlık sınırlaması olan yollardan ve köprülerden kaçınmak için aracınızın tam yükte azami ağırlığını belirtin.</string>
-    <string name="private_access_routing_req_short">Hedefiniz özel bir alanda bulunuyor. Özel yolların kullanımına izin verilsin mi?</string>
     <string name="view_on_phone">Telefonda görüntüle</string>
     <string name="average_elevation">Ortalama yükseklik</string>
     <string name="ascent">Çıkış</string>

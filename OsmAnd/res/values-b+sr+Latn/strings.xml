@@ -5829,7 +5829,6 @@
     <string name="rendering_attr_tidalFlatStyle_description">Ravni stil plime</string>
     <string name="rendering_attr_watercolor_name">Boja vodenih površina</string>
     <string name="rendering_attr_watercolor_description">Boja vode</string>
-    <string name="private_access_routing_req_short">Vaše odredište je u privatnom prostoru. Dozvoljavate korišćenje privatnih puteva?</string>
     <string name="view_on_phone">Pogledaj na telefonu</string>
     <string name="copy_as_new_folder">Kopiraj kao novi folder</string>
     <string name="add_to_a_folder">Dodajte u folder</string>

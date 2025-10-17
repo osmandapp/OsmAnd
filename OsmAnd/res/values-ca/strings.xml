@@ -5732,7 +5732,6 @@
     <string name="add_to_favorites">Afegeix als preferits</string>
     <string name="max_weight_at_full_load_description">Proporciona el pes màxim del teu vehicle a plena càrrega per evitar carreteres i ponts amb límits de pes.</string>
     <string name="max_axle_load_description">Proporciona la càrrega màxima del teu vehicle per evitar carreteres i ponts amb límits de pes.</string>
-    <string name="private_access_routing_req_short">La teva destinació es troba en una zona privada. Voleu permetre l\'ús de carreteres privades?</string>
     <string name="view_on_phone">Visualitza al telèfon</string>
     <string name="average_elevation">Elevació mitjana</string>
     <string name="ascent">Ascensió</string>
