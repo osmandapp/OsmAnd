@@ -5664,7 +5664,21 @@
     <string name="deleting">Suppression…</string>
     <string name="deleting_history">Suppression de l’historique…</string>
     <string name="show_rasterization_debug_tile">Afficher les informations de rasterisation de la tuile</string>
-    <string name="release_5_2">• En cours ...</string>
+    <string name="release_5_2">
+        • Ajout des détails relatifs à la rue et à la ville dans les résultats de recherche\n\n
+        • Nouveaux widgets d\'enregistrement des trajets : vitesse maximale, pente moyenne et amélioration des montées/des descentes\n\n
+        • Nouveau style de carte nautique « Marine » avec de nombreuses options de personnalisation\n\n
+        • Amélioration de la vitesse de rendu des cartes\n\n
+        • Amélioration de la connectivité avec les adaptateurs OBDII BLE\n\n
+        • Ajout des mesures de fréquence cardiaque à l\'option « Analyser par intervalle »\n\n
+        • Ajout de l\'affichage de la durée pour les itinéraires planifiés\n\n
+        • Les unités d\'altitude peuvent désormais être définies séparément des unités de distance\n\n
+        • Amélioration de l\'action rapide d\'orientation de la carte avec des modes de boussole sélectionnables\n\n
+        • Pour Android Auto, ajout d\'alertes de pré-navigation pour les cartes manquantes et les routes privées\n\n
+        • Résolution d\'un problème lié à des paramètres de taille incorrects pour le widget Radius Ruler\n\n
+        • Ajout d\'orientations d\'écran inversées\n\n
+        • Amélioration de l\'interface utilisateur pour la spécification des mesures relatives aux camions\n\n
+    </string>
     <string name="shared_string_threads">Threads</string>
     <string name="threads_allocated_for_rendering">Threads alloués au rendu</string>
     <string name="threads_allocated_for_rendering_desc">L\'allocation d\'un faible nombre de threads peut, dans certains cas, accélérer le rendu de la carte.</string>

@@ -5785,7 +5785,21 @@
     <string name="battery">batteria</string>
     <string name="sensor_data">Dati dei sensori</string>
     <string name="show_rasterization_debug_tile">Mostra informazioni sulla rasterizzazione dei tile</string>
-    <string name="release_5_2">• Lavori in corso…</string>
+    <string name="release_5_2">
+        • Aggiunti dettagli su strade e città ai risultati di ricerca\n\n
+        • Nuovi widget di registrazione dei viaggi: velocità massima, pendenza media e miglioramento delle salite/discese\n\n
+        • Nuovo stile di mappa nautica “Marine” con ampie opzioni di personalizzazione\n\n
+        • Migliorata la velocità di rendering delle mappe\n\n
+        • Migliorata la connettività con gli adattatori OBDII BLE\n\n
+        • Aggiunte le metriche della frequenza cardiaca all\'opzione “Analizza per intervallo”\n\n
+        • Aggiunta la visualizzazione della durata per i percorsi pianificati\n\n
+        • Le unità di altitudine possono ora essere impostate separatamente dalle unità di distanza\n\n
+        • Migliorata l\'azione rapida di orientamento della mappa con modalità bussola selezionabili\n\n
+        • Per Android Auto, aggiunti avvisi di pre-navigazione per mappe mancanti e strade private\n\n
+        • Risolto un problema con parametri di dimensione errati per il widget Righello raggio\n\n
+        • Aggiunti orientamenti dello schermo invertiti\n\n
+        • Migliorata l\'interfaccia utente per specificare le metriche dei camion\n\n
+    </string>
     <string name="map_orientation_portrait_inverted">Ritratto (capovolto)</string>
     <string name="map_orientation_landscape_inverted">Paesaggio (capovolto)</string>
     <string name="reverse_mode_calculate_route">Calcola percorso</string>

@@ -38,11 +38,14 @@ public interface ISupportInsets {
 	}
 
 	default boolean isNavigationBarContentLight(){
-		OsmandApplication app = (OsmandApplication) requireActivity().getApplication();
-		return !app.getDaynightHelper().isNightMode(APP);
+		return !isNightMode();
 	}
 
 	default void updateNavBarColor(){
 		InsetsUtils.processNavBarColor(this);
+	}
+
+	default boolean isNightMode(){
+		return ((OsmandApplication) requireActivity().getApplication()).getDaynightHelper().isNightMode(APP);
 	}
 }
