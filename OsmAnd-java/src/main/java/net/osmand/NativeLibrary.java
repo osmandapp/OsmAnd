@@ -681,6 +681,10 @@ public class NativeLibrary {
 			return isPolygon;
 		}
 
+		public boolean isPoint() {
+			return x.size() == 1 && y.size() == 1;
+		}
+
 		public List<String> getOriginalNames() {
 			List<String> names = new ArrayList<>();
 			if (!Algorithms.isEmpty(name)) {
