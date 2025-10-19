@@ -340,7 +340,8 @@ public class SearchCoreFactory {
 				return false;
 			}
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
-			if (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.BOUNDARY)
+			if (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.BOUNDARY, ObjectType.REGION)
+					|| phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE)
 					|| phrase.getRadiusLevel() >= 2) {
 				initAndSearchCities(phrase, resultMatcher);
 				// not publish results (let it sort)
@@ -554,7 +555,7 @@ public class SearchCoreFactory {
 					currentFile[0] = r;
 					immediateResults.clear();
 					// FIXME
-					// System.out.println(wordToSearch + " " + r.getCountryName());
+//					 System.out.println("SEARСH " + wordToSearch + " " + r.getCountryName());
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
@@ -568,15 +569,20 @@ public class SearchCoreFactory {
 						if (res.objectType == ObjectType.STREET) {
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
+							// 4241 Cook Hollow Road Woodhull
 //							11601 Kelly Hill Road Pine City // TODO improve
 							// 8508 PA 61 Coal Township
 							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
-								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
+//								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
 						} else {
 							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 							searchPoiInCity(nphrase, res, resultMatcher);
+							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
+//								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
+								subSearchApiOrPublish(phrase, resultMatcher, res, this);
+							}
 						}
 					}
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
