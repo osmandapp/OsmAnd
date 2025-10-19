@@ -553,6 +553,8 @@ public class SearchCoreFactory {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					immediateResults.clear();
+					// FIXME
+					// System.out.println(wordToSearch + " " + r.getCountryName());
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
@@ -566,7 +568,12 @@ public class SearchCoreFactory {
 						if (res.objectType == ObjectType.STREET) {
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
-							subSearchApiOrPublish(phrase, resultMatcher, res, this);
+//							11601 Kelly Hill Road Pine City // TODO improve
+							// 8508 PA 61 Coal Township
+							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
+								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
+								subSearchApiOrPublish(phrase, resultMatcher, res, this);
+							}
 						} else {
 							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 							searchPoiInCity(nphrase, res, resultMatcher);
