@@ -162,11 +162,6 @@ public class SearchPhrase {
 		return fileRequest;
 	}
 	
-	public SearchPhrase generateNewPhrase(SearchPhrase phrase, BinaryMapIndexReader file) {
-		SearchPhrase nphrase = generateNewPhrase(phrase.getUnknownSearchPhrase(), phrase.getSettings());
-		nphrase.fileRequest = file;
-		return nphrase;
-	}
 	
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {

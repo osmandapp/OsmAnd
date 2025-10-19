@@ -665,11 +665,8 @@ public class SearchUICore {
 		return resultCollection;
 	}
 
-	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
-		search(text, delayedExecution, matcher, searchSettings);
-	}
 
-	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, final SearchSettings searchSettings) {
+	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		phrase.setAcceptPrivate(this.phrase.isAcceptPrivate());

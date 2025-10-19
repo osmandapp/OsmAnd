@@ -406,10 +406,11 @@ public class SearchCoreFactory {
 		
 		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
 			if (nphrase != null && res.objectType == ObjectType.CITY) {
-				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
-				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
-				newPhrase.getSettings().setOriginalLocation(res.location);
-				poiApi.search(newPhrase, resultMatcher);
+//				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+//				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
+				// FIXME not correct double check code with selection
+//				newPhrase.getSettings().setOriginalLocation(res.location);
+//				poiApi.search(newPhrase, resultMatcher);
 			}
 		}
 
@@ -555,7 +556,7 @@ public class SearchCoreFactory {
 					currentFile[0] = r;
 					immediateResults.clear();
 					// FIXME
-//					 System.out.println("SEARСH " + wordToSearch + " " + r.getCountryName());
+					 System.out.println("SEARСH " + wordToSearch + " " + r.getRegionName());
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
@@ -569,6 +570,8 @@ public class SearchCoreFactory {
 						if (res.objectType == ObjectType.STREET) {
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
+							// 6 Dorfstraße Remseck am Neckar
+							// 4 Hofäckerstraße Kernen im Remstal
 							// 4241 Cook Hollow Road Woodhull
 //							11601 Kelly Hill Road Pine City // TODO improve
 							// 8508 PA 61 Coal Township
@@ -578,9 +581,10 @@ public class SearchCoreFactory {
 							}
 						} else {
 							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-							searchPoiInCity(nphrase, res, resultMatcher);
+							// FIXME review implementation
+//							searchPoiInCity(nphrase, res, resultMatcher);
 							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
-//								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
+								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
 						}
