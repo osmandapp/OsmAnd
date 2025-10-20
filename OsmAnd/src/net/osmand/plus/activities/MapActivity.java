@@ -350,6 +350,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		super.onApplyInsets(insets);
 		getMapLayers().setWindowInsets(insets);
 	}
 
@@ -1704,11 +1705,5 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onInAppPurchaseItemPurchased(String sku) {
 		getMapLayers().getRouteLayer().resetColorAvailabilityCache();
-	}
-
-	@Override
-	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
-		super.onApplyInsets(insets);
-		getMapLayers().setWindowInsets(insets);
 	}
 }
