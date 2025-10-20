@@ -614,7 +614,7 @@ public class SearchCoreFactory {
 							// FIXME review implementation
 //							searchPoiInCity(nphrase, res, resultMatcher);
 							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
-								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
+//								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
 						}
