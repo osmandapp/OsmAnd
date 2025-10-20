@@ -5865,4 +5865,10 @@
     <string name="rendering_attr_tidalFlatStyle_name">Estilo de planície de maré</string>
     <string name="rendering_attr_tidalFlatStyle_description">Estilo das planícies de maré</string>
     <string name="show_local_names">Mostrar nomes locais</string>
+    <string name="track_folder_appearance">Aparência da pasta de trilhas</string>
+    <string name="update_maps">Atualizar mapas</string>
+    <string name="reconnect">Reconectar</string>
+    <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esqui</string>
+    <string name="rendering_attr_showSkiSlopes_description">Mostrar pistas de esqui simplificadas</string>
+    <string name="trip_recording_downhill_widget_desc">Mostra a soma de todas as descidas ou a última descida da viagem atualmente registada.</string>
 </resources>
