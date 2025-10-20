@@ -601,11 +601,11 @@ public class SearchCoreFactory {
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
 							// 6 Dorfstraße Remseck am Neckar
 							// 4 Hofäckerstraße Kernen im Remstal
+							// 4 Am Heuhaus Weinstadt
 							// 4241 Cook Hollow Road Woodhull
 //							11601 Kelly Hill Road Pine City // TODO improve
 							// 8508 PA 61 Coal Township
-							
-							if (matchCity(res, phrase, (City) res.object, true)) {
+							if (matchCity(null, phrase, (City) res.object, true)) {
 //							if (phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
 //								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
@@ -631,7 +631,7 @@ public class SearchCoreFactory {
 			List<String> localeNames = SearchPhrase.splitWords(localeName, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 			List<String> otherNames = ct.getOtherNames(true);
 			int matched = 0;
-			if (!res.firstUnknownWordMatches) {
+			if (res == null || !res.firstUnknownWordMatches) {
 				if (phrase.getFirstUnknownNameStringMatcher().matches(localeNames)) {
 					matched++;
 				}
@@ -639,7 +639,7 @@ public class SearchCoreFactory {
 					return true;
 				}
 			}
-			List<String> leftUnknownSearchWords = res.filterUnknownSearchWord(null);
+			List<String> leftUnknownSearchWords = res == null ? phrase.getUnknownSearchWords() : res.filterUnknownSearchWord(null);
 			List<String> unknownSearchWords = phrase.getUnknownSearchWords();
 			for (int i = 0; i < unknownSearchWords.size() && !match; i++) {
 				String leftUnknownSearchWord = unknownSearchWords.get(i);
