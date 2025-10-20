@@ -5903,4 +5903,8 @@
     <string name="shared_string_last_downhill">Останній спуск</string>
     <string name="help_article_navigation_routing_ski_routing_name">Гірськолижні схили та маршрути</string>
     <string name="rendering_attr_pisteRoutes_name">Гірськолижні схили та маршрути</string>
+    <string name="requires_internet_connection">Потрібне підключення до Інтернету</string>
+    <string name="save_and_access_articles_offline">Зберігайте дані та отримуйте доступ до статей офлайн будь-де</string>
+    <string name="private_access_routing_req_short">Дозволити користуватися приватною дорогою, щоб дістатися до пункту призначення?</string>
+    <string name="download_wikipedia_label">Завантажити Wikipedia</string>
 </resources>
