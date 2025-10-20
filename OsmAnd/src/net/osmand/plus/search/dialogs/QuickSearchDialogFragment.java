@@ -352,6 +352,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						} else {
 							filter = app.getPoiFilters().getShowOnMapFilter(searchPhrase);
 						}
+						LatLon cityLocation = searchPhrase.getCityLocation();
+						if (cityLocation != null && getActivity() != null) {
+							app.getSettings().setMapLocationToShow(cityLocation.getLatitude(), cityLocation.getLongitude(), SearchCoreFactory.PREFERRED_CITY_ZOOM);
+							MapActivity.launchMapActivityMoveToTop(getActivity());
+						}
 						showFilterOnMap(filter, getText());
 					} else {
 						SearchWord word = searchPhrase.getLastSelectedWord();

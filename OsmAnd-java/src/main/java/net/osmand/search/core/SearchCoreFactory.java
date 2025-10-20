@@ -8,6 +8,7 @@ import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+import static net.osmand.search.core.ObjectType.CITY;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
 
@@ -95,7 +96,6 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
 	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
-	
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
 
@@ -394,6 +394,13 @@ public class SearchCoreFactory {
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
 						SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 						searchPoiInCity(nphrase, res, resultMatcher);
+					} else if (!Algorithms.isEmpty(phrase.getUnknownWordsMatcher())) {
+						List<NameStringMatcher> nms = phrase.getUnknownWordsMatcher();
+						for (NameStringMatcher n : nms) {
+							if (n.matches(res.localeName) || n.matches(res.otherNames)) {
+								searchPoiInCity(phrase, res, resultMatcher);
+							}
+						}
 					}
 					if (limit++ > LIMIT * phrase.getRadiusLevel()) {
 						break;
@@ -404,10 +411,22 @@ public class SearchCoreFactory {
 		
 		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
 			if (nphrase != null && res.objectType == ObjectType.CITY) {
+				int cntBefore = resultMatcher.getCount();
 				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
-				newPhrase.getSettings().setOriginalLocation(res.location);
+				LatLon oldLocation = nphrase.getSettings().getOriginalLocation();
+				newPhrase.setOriginalLocation(res.location);//city location
+				newPhrase.addCityName(res.localeName);
+				if (res.object instanceof City city) {
+					newPhrase.addCityName(city.getName());
+				}
+
 				poiApi.search(newPhrase, resultMatcher);
+
+				res.requiredSearchPhrase.setOriginalLocation(oldLocation);
+				if (resultMatcher.getCount() > cntBefore) {
+					res.requiredSearchPhrase.addKnownCity(res, nphrase.getUnknownWordToSearch());
+				}
 			}
 		}
 
@@ -448,7 +467,7 @@ public class SearchCoreFactory {
 						List<City> closestCities = null;
 						if (object instanceof Street) {
 							// remove limitation by location
-							if (  //(locSpecified && !streetBbox.contains(x, y, x, y)) || 
+							if (  //(locSpecified && !streetBbox.contains(x, y, x, y)) ||
 								!phrase.isSearchTypeAllowed(ObjectType.STREET)) {
 								return false;
 							}
@@ -588,7 +607,7 @@ public class SearchCoreFactory {
 				return false;
 			}
 			// Take into account POI [bar] - 'Hospital 512'
-			// BEFORE: it was searching exact match of whole phrase.getUnknownSearchPhrase() [ Check feedback ] 
+			// BEFORE: it was searching exact match of whole phrase.getUnknownSearchPhrase() [ Check feedback ]
 
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
@@ -627,6 +646,21 @@ public class SearchCoreFactory {
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
 					if (ids.contains(poiID)) {
 						return false;
+					}
+					if (phrase.hasCityName()) {
+						boolean matchCity = false;
+						boolean matchInName = false;
+						for (String cityName : phrase.getKnownCityNames()) {
+							matchCity = matchCity || object.matchCity(cityName);
+							matchInName = matchInName || object.getName().contains(cityName);
+							matchInName = matchInName || object.getOtherNames().contains(cityName);
+							if (matchCity || matchInName) {
+								break;
+							}
+						}
+						if (!matchCity && !matchInName) {
+							return false;
+						}
 					}
 					SearchResult sr = new SearchResult(phrase);
 					sr.otherNames = object.getOtherNames(true);
@@ -1186,6 +1220,8 @@ public class SearchCoreFactory {
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
 		private static final int BBOX_RADIUS = 10000;
 		private static final int BBOX_RADIUS_NEAREST = 1000;
+
+		private static final int BBOX_RADIUS_CITIES = 500 * 1000;
 		private SearchAmenityTypesAPI searchAmenityTypesAPI;
 		private MapPoiTypes types;
 		private AbstractPoiType unselectedPoiType;
@@ -1277,6 +1313,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
+
 			this.nameFilter = nameFilter;
 			if (poiTypeFilter != null || poiAdditionalFilter != null) {
 				int radius = BBOX_RADIUS;
@@ -1285,6 +1322,9 @@ public class SearchCoreFactory {
 					if ("std_null".equals(name)) {
 						radius = BBOX_RADIUS_NEAREST;
 					}
+				}
+				if (phrase.hasCityName()) {
+					radius = BBOX_RADIUS_CITIES;
 				}
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
@@ -1362,10 +1402,18 @@ public class SearchCoreFactory {
 						}
 					}
 					if (ns != null) {
+						boolean match = false;
 						if (ns.matches(res.localeName) || ns.matches(res.otherNames)) {
 							phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
-						} else {
-							// Use ref https://github.com/osmandapp/OsmAnd/issues/8319
+							match = true;
+						} else if (phrase.hasCityName()) {
+							for (String cityName : phrase.getKnownCityNames()) {
+								match = match || object.matchCity(cityName);
+								match = match || object.getName().contains(cityName);
+								match = match || object.getOtherNames().contains(cityName);
+							}
+						}
+						if (!match) {
 							String ref = object.getTagContent(Amenity.REF, null);
 							if (ref == null || !ns.matches(ref)) {
 								return false;

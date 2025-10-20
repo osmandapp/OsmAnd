@@ -38,6 +38,9 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
+	private List<String> knownCityNames;
+	private List<LatLon> knownCityLocations;
+	private String knownCitySearchWord;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -142,8 +145,55 @@ public class SearchPhrase {
 			}
 		};
 	}
-	
-	
+
+	public boolean containsCityName(String cityName) {
+		if (knownCityNames == null) {
+			return false;
+		}
+		return knownCityNames.contains(cityName);
+	}
+
+	public List<String> getKnownCityNames() {
+		return knownCityNames;
+	}
+
+	public void addCityName(String cityName) {
+		if (knownCityNames == null) {
+			knownCityNames = new ArrayList<>();
+		}
+		knownCityNames.add(cityName);
+	}
+
+	public boolean hasCityName() {
+		return knownCityNames != null;
+	}
+
+	public LatLon getCityLocation() {
+		if (knownCityLocations != null && !knownCityLocations.isEmpty()) {
+			return knownCityLocations.get(0);
+		}
+		return null;
+	}
+
+	public String getCitySearchWord() {
+		return knownCitySearchWord;
+	}
+
+	public void addKnownCity(SearchResult res, String searchWord) {
+		if (res.objectType != ObjectType.CITY) {
+			return;
+		}
+		if (knownCityNames == null) {
+			knownCityNames = new ArrayList<>();
+		}
+		if (knownCityLocations == null) {
+			knownCityLocations = new ArrayList<>();
+		}
+		knownCityNames.add(res.localeName);
+		knownCityLocations.add(res.location);
+		knownCitySearchWord = searchWord;
+	}
+
 	public enum SearchPhraseDataType {
 		MAP, ADDRESS, ROUTING, POI
 	}
@@ -503,8 +553,13 @@ public class SearchPhrase {
 	public SearchSettings getSettings() {
 		return settings;
 	}
-	
-	
+
+	public void setOriginalLocation(LatLon l) {
+		cache1kmRect = null;
+		settings.changeOriginalLocation(l);
+	}
+
+
 	public int getRadiusLevel() {
 		return settings.getRadiusLevel();
 	}
@@ -957,5 +1012,8 @@ public class SearchPhrase {
 		return lastUnknownSearchWordComplete;
 	}
 
+	public List<NameStringMatcher> getUnknownWordsMatcher() {
+		return unknownWordsMatcher;
+	}
 	
 }
