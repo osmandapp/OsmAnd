@@ -41,7 +41,7 @@ public class BackupDataController extends SwitchBackupTypesController {
 	protected Map<ExportType, List<?>> collectSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 		for (ExportType exportType : ExportType.visibleValues()) {
-			boolean enabled = backupHelper.getBackupTypePref(exportType).get();
+			boolean enabled = backupHelper.getBackupTypePref(exportType, false).get();
 			boolean available = InAppPurchaseUtils.isExportTypeAvailable(app, exportType);
 
 			if (enabled && (available || cloudRestore)) {
@@ -53,7 +53,7 @@ public class BackupDataController extends SwitchBackupTypesController {
 
 	@Override
 	protected void applyTypePreference(@NonNull ExportType exportType, boolean selected) {
-		backupHelper.getBackupTypePref(exportType).set(selected);
+		backupHelper.getBackupTypePref(exportType, false).set(selected);
 	}
 
 	@Override

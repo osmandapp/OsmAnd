@@ -2585,7 +2585,6 @@
     <string name="get_unlimited_access">Akiri senliman atingon</string>
     <string name="welcome_to_open_beta">Bonvenon al malfermita beta-testado!</string>
     <string name="download_wikipedia_description">Elŝutu Vikipediajn artikolojn por %1$s, por legi ilin malkonekte.</string>
-    <string name="download_wikipedia_label">Elŝuti datumojn de Vikipedio</string>
     <string name="open_in_browser_wiki">Malfermi artikolon enrete</string>
     <string name="open_in_browser_wiki_description">Vidigi artikolon en foliumilo.</string>
     <string name="download_wiki_region_placeholder">tiu ĉi regiono</string>
@@ -2604,8 +2603,6 @@
     <string name="light_rs_render_descr">Simpla stilo por aŭt‑navigado. Agrabla por okuloj dum nokto, kontrastaj oranĝkoloraj vojoj, malpli absorbantaj malpli gravaj objektoj, prezento de topografio per nivelkurboj.</string>
     <string name="topo_render_descr">Por turisma marŝado kaj biciklado. Legebla ĉe maloportuna ekstera lumo. Kontrastaj vojoj kaj naturaj objektoj, diversaj specoj de kursoj, agordeblaj nivel-kurboj, pliaj detaloj. Distingebla firmeco de vojoj. Sen nokta reĝimo.</string>
     <string name="default_render_descr">Ĝenerala map-stilo. Legebla en dense loĝataj urboj. Trajtoj: vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ skaloj SAC/CAI, objektoj por rapid-akvaj sportoj, topografio (nivelkurboj).</string>
-    <string name="open_wikipedia_link_online">Malfermi Vikipedian ligilon enrete</string>
-    <string name="open_wikipedia_link_online_description">La ligilo estos malfermita per ret-foliumilo.</string>
     <string name="read_wikipedia_offline_description">Akiru abonon al OsmAnd Live por legi artikolojn de Vikipedio kaj Vikivojaĝo malkonekte.</string>
     <string name="how_to_open_link">Kiel malfermi la ligilon?</string>
     <string name="read_wikipedia_offline">Legi Vikipedion malkonekte</string>
@@ -5753,7 +5750,7 @@
     <string name="set_home">Agordi kiel hejmon</string>
     <string name="set_intermediate_point">Agordi kiel intercelon</string>
     <string name="set_start_point">Agordi kiel komencejon</string>
-    <string name="ski_route_switch_style_description">Esplori descendejojn, telferojn kaj pli kun la map-stilo Vintro kaj skiado.</string>
+    <string name="ski_route_switch_style_description">Esploru skivojojn, descendejojn kaj telferojn kun la map-aspekto “Vintro kaj skiado”.</string>
     <string name="battery">baterio</string>
     <string name="sensor_data">Datumoj de sentilo</string>
     <string name="battery_level">Nivelo de baterio</string>
@@ -5849,7 +5846,6 @@
     <string name="add_to_favorites">Aldoni al ŝatataj</string>
     <string name="max_weight_at_full_load_description">Enigu maksimuman mason de via veturilo je plena ŝarĝo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
     <string name="max_axle_load_description">Enigu maksimuman mason prematan de akso de via veturilo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
-    <string name="private_access_routing_req_short">Via celo estas en privata areo. Ĉu ebligi navigi tra privataj vojoj?</string>
     <string name="view_on_phone">Montri sur telefono</string>
     <string name="lang_en_barebones">Angla (minimuma)</string>
     <string name="release_5_2">• Versio estas prilaborata…</string>
@@ -5874,4 +5870,13 @@
     <string name="update_maps">Ĝisdatigi mapojn</string>
     <string name="reconnect">Rekonekti</string>
     <string name="trip_recording_downhill_widget_desc">Montras sumon de ĉiuj malsupreniroj aŭ la antaŭan malsupreniron de la nuna registrata spuro.</string>
+    <string name="trip_recording_uphill_widget_desc">Montri sumon de ĉiuj supreniroj aŭ la antaŭan supreniron de la nune registrata spuro.</string>
+    <string name="trip_recording_distance_widget_desc">Montras la tutan distancon de la nune registrata spuro, kun reĝimoj ebligantaj vidi distancon de la antaŭa supreniro/malsupreniro.</string>
+    <string name="trip_recording_max_speed_widget_description">Montras la maksimuman rapidon de la nune registrata spuro. Frapetu por baskuligi inter la tuta maksimuma rapido kaj maksimuma rapido de la antaŭa (mal)supreniro.</string>
+    <string name="trip_recording_average_slope_widget_description">Montras la mezuman deklivecon de la antaŭa suprenira aŭ malsuprenira fragmento de la nune registrata spuro.</string>
+    <string name="average_slope">Mezuma dekliveco</string>
+    <string name="shared_string_last_uphill">Antaŭa supreniro</string>
+    <string name="shared_string_last_downhill">Antaŭa malsupreniro</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skiaj kursoj kaj descendejoj</string>
+    <string name="rendering_attr_pisteRoutes_name">Skivojoj kaj descendejoj</string>
 </resources>

@@ -2597,7 +2597,6 @@
     <string name="unlock_all_features">Alle OsmAnd-Funktionen freischalten</string>
     <string name="purchase_dialog_title">Plan auswählen</string>
     <string name="download_wikipedia_description">Laden Sie die Wikipedia-Artikel für %1$s herunter, um sie offline zu lesen.</string>
-    <string name="download_wikipedia_label">Wikipedia-Daten herunterladen</string>
     <string name="open_in_browser_wiki">Artikel online öffnen</string>
     <string name="open_in_browser_wiki_description">Artikel in einem Webbrowser ansehen.</string>
     <string name="download_wiki_region_placeholder">diese Region</string>
@@ -2614,8 +2613,6 @@
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
     <string name="maps_you_need_descr">Basierend auf den Artikeln, die Sie mit einem Lesezeichen versehen haben, werden Ihnen die folgenden Karten zum Download empfohlen:</string>
     <string name="maps_you_need">Benötigte Karten</string>
-    <string name="open_wikipedia_link_online">Wikipedia-Link online öffnen</string>
-    <string name="open_wikipedia_link_online_description">Der Link wird im Webbrowser geöffnet.</string>
     <string name="read_wikipedia_offline_description">Holen Sie sich das OsmAnd-Live-Abonnement, um Wikipedia- und Wikivoyage-Artikel offline zu lesen.</string>
     <string name="how_to_open_link">Wie öffnet man den Link?</string>
     <string name="read_wikipedia_offline">Wikipedia offline lesen</string>
@@ -4664,7 +4661,7 @@
     <string name="mtb_imba_full">Internationale Vereinigung für Mountainbiking</string>
     <string name="mtb_segment_classification">Abschnittsklassifizierung</string>
     <string name="mtb_imba">IMBA</string>
-    <string name="open_weather_action_description">Ermöglicht es dir, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
+    <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
     <string name="shared_string_open">Geöffnet</string>
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
@@ -5132,7 +5129,7 @@
     <string name="press_button_to_link_with_action">Drücken Sie die Schaltfläche auf Ihrem Gerät, um sie der Aktion zuzuweisen: %1$s</string>
     <string name="deletion_error">Löschfehler</string>
     <string name="shared_string_button">Schaltfläche</string>
-    <string name="change_key_binding">Tastenbelegung ändern</string>
+    <string name="change_key_binding">Tastenzuweisung ändern</string>
     <string name="key_event_action_take_media_note">Mediennotiz aufnehmen</string>
     <string name="shared_string_action">Aktion</string>
     <string name="add_new_type">Neuen Typ ergänzen</string>
@@ -5150,16 +5147,16 @@
     <string name="enable_to_use_external_input_device">Verwendung eines externen Eingabegeräts mit OsmAnd aktivieren</string>
     <string name="key_event_action_previous_app_profile">Vorheriges App-Profil</string>
     <string name="show_toast_about_key_pressed">Hinweis über gedrückte Taste anzeigen</string>
-    <string name="key_event_action_move_left">Nach links bewegen</string>
-    <string name="key_event_action_move_right">Nach rechts bewegen</string>
+    <string name="key_event_action_move_left">Nach links verschieben</string>
+    <string name="key_event_action_move_right">Nach rechts verschieben</string>
     <string name="key_event_action_next_app_profile">Nächstes App-Profil</string>
     <string name="key_event_action_activity_back_pressed">Aktivität zurückgedrückt</string>
     <string name="key_event_action_emit_navigation_hint">Navigationshinweis ausgeben</string>
     <string name="remove_type_q">Typ „%1$s“ entfernen?</string>
-    <string name="key_event_action_move_up">Nach oben</string>
-    <string name="key_event_action_move_to_my_location">Zu meinem Standort bewegen</string>
+    <string name="key_event_action_move_up">Nach oben verschieben</string>
+    <string name="key_event_action_move_to_my_location">Zu meinem Standort verschieben</string>
     <string name="download_to_device">Auf das Gerät herunterladen</string>
-    <string name="key_event_action_move_down">Nach unten schieben</string>
+    <string name="key_event_action_move_down">Nach unten verschieben</string>
     <string name="remove_widget_first">Bitte entfernen Sie zuerst das Widget</string>
     <string name="add_row">Zeile hinzufügen</string>
     <string name="discard_changes_prompt">Änderungen verwerfen?</string>
@@ -5169,12 +5166,12 @@
     <string name="see_all_plans">Alle Pläne anzeigen</string>
     <string name="key_assignments">Tastenzuweisungen</string>
     <string name="topography_maps">Topografische Karten</string>
-    <string name="clear_key_assignment">Tastenbelegung löschen</string>
+    <string name="clear_key_assignment">Tastenzuweisung löschen</string>
     <string name="clear_key_assignment_desc">Tastenkürzel für die ausgewählte Aktion wird gelöscht und gesetzt auf „Keine“.</string>
-    <string name="reset_key_assignments_desc">Alle Tastenbelegungen für den ausgewählten Typ werden entfernt.</string>
+    <string name="reset_key_assignments_desc">Alle Tastenzuweisungen für den ausgewählten Typ werden entfernt.</string>
     <string name="rendering_attr_showToll_name">Mautbeschränkungen anzeigen</string>
     <string name="shared_string_reassign">Neu belegen</string>
-    <string name="reset_key_assignments">Tastenbelegungen zurücksetzen</string>
+    <string name="reset_key_assignments">Tastenzuweisungen zurücksetzen</string>
     <string name="rendering_attr_showToll_description">Mautbeschränkungen auf Straßen anzeigen</string>
     <string name="target_elevation">Zielhöhe</string>
     <string name="shared_string_eta">Voraussichtliche Ankunftszeit (ETA)</string>
@@ -5182,7 +5179,7 @@
     <string name="zoom_animated">Animierter Zoom</string>
     <string name="lang_zh_hans">Vereinfachtes Chinesisch</string>
     <string name="button_already_assigned_to_this_action">Schaltfläche bereits dieser Aktion zugewiesen.</string>
-    <string name="key_assignments_already_cleared_message">Alle Tastenbelegungen sind bereits gelöscht</string>
+    <string name="key_assignments_already_cleared_message">Alle Tastenzuweisungen sind bereits gelöscht</string>
     <string name="lang_zh_hant">Traditionelles Chinesisch</string>
     <string name="add_new_button">Eine neue Schaltfläche hinzufügen</string>
     <string name="use_v1_auto_zoom">Diskreter Autozoom (alte Version)</string>
@@ -5790,7 +5787,7 @@
     <string name="deleting">Wird gelöscht …</string>
     <string name="osm_live_payment_renews_3_years">Wird alle drei Jahre erneuert</string>
     <string name="three_years_subscription">Drei-Jahres-Abonnement</string>
-    <string name="ski_route_switch_style_description">Entdecken Sie Skipisten, Lifte und mehr mit dem Winter- und Skikartenstil.</string>
+    <string name="ski_route_switch_style_description">Entdecken Sie Skirouten, Pisten und Lifte mit dem Winter- und Skikartenstil.</string>
     <string name="battery_level">Batteriestand</string>
     <string name="set_work">Arbeit einstellen</string>
     <string name="battery">Batterie</string>
@@ -5802,7 +5799,21 @@
     <string name="shared_string_flat">Flach</string>
     <string name="shared_string_switch">Umschalten</string>
     <string name="show_rasterization_debug_tile">Informationen zur Kachelrasterung anzeigen</string>
-    <string name="release_5_2">In Bearbeitung …</string>
+    <string name="release_5_2">
+        • Straßen- und Stadtdetails zu den Suchergebnissen hinzugefügt\n\n
+        • Neue Widgets zur Aufzeichnung von Fahrten: Höchstgeschwindigkeit, durchschnittliche Steigung und verbesserte Bergauf-/Bergab-Anzeige\n\n
+        • Neuer nautischer Kartenstil „Marine“ mit umfangreichen Anpassungsoptionen\n\n
+        • Verbesserte Geschwindigkeit der Kartenwiedergabe\n\n
+        • Verbesserte Konnektivität mit OBDII-BLE-Adaptern\n\n
+        • Herzfrequenzmessungen zu „Analyse nach Intervall” hinzugefügt\n\n
+        • Anzeige der Dauer für geplante Strecken hinzugefügt\n\n
+        • Höheneinheiten können jetzt separat von Entfernungseinheiten eingestellt werden\n\n
+        • Verbesserte Schnellaktion für die Kartenausrichtung mit wählbaren Kompassmodi\n\n
+        • Für Android Auto wurden Vorwarnungen für fehlende Karten und Privatstraßen hinzugefügt\n\n
+        • Problem mit falschen Größenparametern für das Widget „Radiuslineal” behoben\n\n
+        • Umgekehrte Bildschirmausrichtung hinzugefügt\n\n
+        • Verbesserte Benutzeroberfläche für die Angabe von Lkw-Messwerten\n\n
+    </string>
     <string name="shared_string_threads">Threads</string>
     <string name="threads_allocated_for_rendering">Für das Rendern zugewiesene Threads</string>
     <string name="threads_allocated_for_rendering_desc">Eine niedrigere Threadzuweisung kann die Kartendarstellung in einigen Fällen beschleunigen.</string>
@@ -5821,7 +5832,7 @@
     <string name="enable_msaa">MSAA aktivieren</string>
     <string name="ascent">Steigung</string>
     <string name="descent">Gefälle</string>
-    <string name="map_orientations_choose_description">Lass das Feld leer, um zwischen allen verfügbaren Modi zu wechseln, oder füge nur deine bevorzugten hinzu.</string>
+    <string name="map_orientations_choose_description">Leer lassen, um zwischen allen verfügbaren Modi zu wechseln, oder nur Ihre bevorzugten Modi hinzufügen.</string>
     <string name="map_orientations">Kartenorientierungen</string>
     <string name="altitude_metrics_description">Legt die Anzeigeeinheit für die Höhe in Widgets und Statistiken fest.</string>
     <string name="write_location_provider_description">Standortanbieter während der Aufzeichnung für jeden Aufnahmepunkt speichern</string>
@@ -5841,7 +5852,6 @@
     <string name="add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="max_weight_at_full_load_description">Geben Sie das maximale Gesamtgewicht Ihres Fahrzeugs bei voller Beladung an, um Straßen und Brücken mit Gewichtsbeschränkungen zu vermeiden.</string>
     <string name="max_axle_load_description">Geben Sie die maximale Achslast Ihres Fahrzeugs an, um Straßen und Brücken mit Gewichtsbeschränkungen zu vermeiden.</string>
-    <string name="private_access_routing_req_short">Ihr Ziel befindet sich in einem privaten Bereich. Private Straßen benutzen?</string>
     <string name="view_on_phone">Auf Telefon ansehen</string>
     <string name="marine_renderer">Seefahrt</string>
     <string name="marine_render_descr">Hochgradig anpassbarer Navigationsstil für die Seefahrt. Basierend auf dem nautischen Stil. Funktioniert besser mit der Karte Nautical World Seamarks und optionalen Tiefenkarten.</string>
@@ -5905,4 +5915,17 @@
     <string name="shared_string_price">Preis</string>
     <string name="rendering_attr_showSkiSlopes_name">Skipisten anzeigen</string>
     <string name="rendering_attr_showSkiSlopes_description">Einfache Skipisten anzeigen</string>
+    <string name="track_folder_appearance">Aussehen des Track-Ordners</string>
+    <string name="update_maps">Karten aktualisieren</string>
+    <string name="reconnect">Erneut verbinden</string>
+    <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege oder den letzten Anstieg der aktuell aufgezeichneten Strecke an.</string>
+    <string name="trip_recording_distance_widget_desc">Zeigt die Gesamtstrecke Ihrer aktuell aufgezeichneten Strecke an, mit Modi zur Anzeige der Strecke des letzten Anstiegs und Abstiegs.</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skipisten und Routen</string>
+    <string name="rendering_attr_pisteRoutes_name">Skipisten und Routen</string>
+    <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten oder die letzte Abfahrt der aktuell aufgezeichneten Strecke an.</string>
+    <string name="trip_recording_max_speed_widget_description">Zeigt die Höchstgeschwindigkeit für die aktuell aufgezeichnete Strecke an. Tippen Sie darauf, um zwischen der Gesamt-Höchstgeschwindigkeit und der Höchstgeschwindigkeit der letzten Bergauf- oder Bergabfahrt zu wechseln.</string>
+    <string name="trip_recording_average_slope_widget_description">Zeigt die durchschnittliche Hangneigung für den letzten Abfahrts- oder Anstiegsabschnitt der aktuell aufgezeichneten Strecke an.</string>
+    <string name="average_slope">Durchschnittliche Hangneigung</string>
+    <string name="shared_string_last_uphill">Letzte Bergauffahrt</string>
+    <string name="shared_string_last_downhill">Letzte Bergabfahrt</string>
 </resources>

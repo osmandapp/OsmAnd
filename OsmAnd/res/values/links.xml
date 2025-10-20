@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--      <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-4-2-released/</string>  -->
-    <string name="docs_latest_version" translatable="false">https://docs.osmand.net/docs/versions/future-android</string>
+      <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-5-2-released/</string>  
     <string name="blog_guideline" translatable="false">https://osmand.net/blog/guideline-pt</string>
 
     <string name="docs_add_online_maps" translatable="false">https://docs.osmand.net/docs/user/map/raster-maps#add-new-online-raster-map-source</string>

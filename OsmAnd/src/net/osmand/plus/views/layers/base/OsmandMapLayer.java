@@ -117,6 +117,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	public enum MapGestureType {
+		TWO_POINTERS_TAP,
 		DOUBLE_TAP_ZOOM_IN,
 		DOUBLE_TAP_ZOOM_CHANGE,
 		TWO_POINTERS_ZOOM_OUT,
@@ -303,6 +304,9 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
+	}
+
+	public void onDoubleFingerTap() {
 	}
 
 	public boolean onLongPressEvent(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {

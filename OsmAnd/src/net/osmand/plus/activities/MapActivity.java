@@ -6,6 +6,7 @@ import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
+import static net.osmand.plus.settings.enums.ThemeUsageContext.MAP;
 import static net.osmand.plus.settings.enums.ThemeUsageContext.OVER_MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
@@ -245,15 +246,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		// Navigation Drawer
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 
-		InsetsUtils.setWindowInsetsListener(findViewById(R.id.menuItems), (view, insets) -> {
-			InsetTargetsCollection targetsCollection = new InsetTargetsCollection();
-			targetsCollection.replace(InsetTarget.createCustomBuilder(view)
-					.portraitSides(InsetSide.TOP, InsetSide.BOTTOM).landscapeSides(InsetSide.TOP)
-					.applyPadding(true).build());
-			targetsCollection.replace(InsetTarget.createLeftSideContainer(true, true, view));
-
-			InsetsUtils.processInsets(view, targetsCollection, insets);
-		}, false);
+		View mapHudLayout = findViewById(R.id.map_hud_container);
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			mapHudLayout.setFitsSystemWindows(false);
+		}
 
 		InsetsUtils.processInsets(this, findViewById(R.id.drawer_layout), null, false);
 
@@ -335,6 +331,26 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapViewWithLayers.onCreate(savedInstanceState);
 		}
 		extendedMapActivity.onCreate(this, savedInstanceState);
+	}
+
+	protected int getRootViewId(){
+		return R.id.drawer_layout;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = new InsetTargetsCollection();
+		collection.add(InsetTarget.createCustomBuilder(R.id.menuItems)
+				.portraitSides(InsetSide.TOP, InsetSide.BOTTOM).landscapeSides(InsetSide.TOP)
+				.applyPadding(true).build());
+		collection.add(InsetTarget.createLeftSideContainer(true, true, R.id.menuItems));
+
+		return collection;
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		getMapLayers().setWindowInsets(insets);
 	}
 
 	private void setMapInitialLatLon(@NonNull OsmandMapTileView mapView, @Nullable Location location) {
@@ -703,6 +719,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
+		app.getAutoBackupHelper().runAutoBackup();
 
 		if (System.currentTimeMillis() - time > 50) {
 			LOG.error("onResume for MapActivity took " + (System.currentTimeMillis() - time) + " ms");
@@ -808,6 +825,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void updateStatusBarColor() {
 		UiUtilities.updateStatusBarColor(this);
+	}
+
+	@Override
+	public boolean isNavigationBarContentLight() {
+		return !app.getDaynightHelper().isNightMode(MAP);
 	}
 
 	public boolean isInAppPurchaseAllowed() {

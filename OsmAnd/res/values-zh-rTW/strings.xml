@@ -2469,7 +2469,6 @@
     <string name="get_unlimited_access">解鎖無限使用權限</string>
     <string name="welcome_to_open_beta">歡迎加入公開測試</string>
     <string name="download_wikipedia_description">下載 %1$s 的維基百科文章以便離線閱讀。</string>
-    <string name="download_wikipedia_label">下載維基百科資料</string>
     <string name="open_in_browser_wiki">線上開啟文章</string>
     <string name="open_in_browser_wiki_description">在瀏覽器中檢視文章。</string>
     <string name="download_wiki_region_placeholder">這個區域</string>
@@ -2484,8 +2483,6 @@
     <string name="purchase_cancelled_dialog_descr">恢復訂閱以繼續使用所有功能：</string>
     <string name="maps_you_need_descr">根據您已儲存的書籤文章，建議您下載下方的地圖：</string>
     <string name="maps_you_need">您需要的地圖</string>
-    <string name="open_wikipedia_link_online">在線上開啟維基百科連結</string>
-    <string name="open_wikipedia_link_online_description">該連結將在瀏覽器中開啟。</string>
     <string name="read_wikipedia_offline_description">訂閱 OsmAnd Live 後，您可以離線閱讀維基百科和維基導遊的文章。</string>
     <string name="how_to_open_link">如何開啟連結？</string>
     <string name="read_wikipedia_offline">離線閱讀維基百科</string>
@@ -5585,7 +5582,7 @@
     <string name="set_intermediate_point">設定中途:目的地</string>
     <string name="set_start_point">設定起點</string>
     <string name="shared_string_switch">開關</string>
-    <string name="ski_route_switch_style_description">使用冬季與滑雪地圖風格探索滑雪場、纜車等。</string>
+    <string name="ski_route_switch_style_description">透過冬季與滑雪地圖樣式，探索滑雪路線、雪坡與纜車。</string>
     <string name="osm_live_payment_renews_3_years">每三年續訂</string>
     <string name="osm_live_payment_3_years_title">每三年</string>
     <string name="three_years_subscription">三年訂閱</string>
@@ -5677,7 +5674,6 @@
     <string name="add_to_favorites">新增至收藏</string>
     <string name="max_weight_at_full_load_description">請提供你車輛滿載時的最大重量，以避開有重量限制的道路與橋樑。</string>
     <string name="max_axle_load_description">請提供你車輛的最大軸重，以避開有重量限制的道路與橋樑。</string>
-    <string name="private_access_routing_req_short">您的目的地位於私人區域。允許使用私人道路？</string>
     <string name="view_on_phone">在手機上檢視</string>
     <string name="lang_en_barebones">英文（簡易）</string>
     <string name="shared_sting_osm_link">OSM 連結</string>
@@ -5708,4 +5704,6 @@
     <string name="average_slope">平均坡度</string>
     <string name="shared_string_last_uphill">上次上坡</string>
     <string name="shared_string_last_downhill">上次下坡</string>
+    <string name="help_article_navigation_routing_ski_routing_name">滑雪坡道與路線</string>
+    <string name="rendering_attr_pisteRoutes_name">滑雪坡道與路線</string>
 </resources>

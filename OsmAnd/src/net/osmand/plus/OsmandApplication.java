@@ -47,6 +47,7 @@ import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
+import net.osmand.plus.backup.AutoBackupHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -202,6 +203,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 	BackupHelper backupHelper;
+	AutoBackupHelper autoBackupHelper;
 	ImportHelper importHelper;
 	TravelRendererHelper travelRendererHelper;
 	LauncherShortcutsHelper launcherShortcutsHelper;
@@ -575,6 +577,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public BackupHelper getBackupHelper() {
 		return backupHelper;
+	}
+
+	public AutoBackupHelper getAutoBackupHelper() {
+		return autoBackupHelper;
 	}
 
 	public ImportHelper getImportHelper() {

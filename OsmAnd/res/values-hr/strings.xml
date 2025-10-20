@@ -1335,8 +1335,7 @@
     <string name="shared_string_bookmark">oznaka</string>
     <string name="hide_full_description">Sakrij opis</string>
     <string name="show_full_description">Prikaži cijeli opis</string>
-    <string name="open_wikipedia_link_online_description">Veza će biti otvorena u web pregledniku.</string>
-    <string name="how_to_open_link">Kako otvoriti link?</string>
+	<string name="how_to_open_link">Kako otvoriti link?</string>
     <string name="download_all">Preuzmi sve</string>
     <string name="shared_string_restart">Ponovno pokretanje aplikacije</string>
     <string name="show_images">Prikaži slike</string>

@@ -2503,7 +2503,6 @@
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Te damos la bienvenida a la beta abierta</string>
     <string name="download_wikipedia_description">Descargá los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
-    <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
     <string name="download_wiki_region_placeholder">esta región</string>
@@ -2519,8 +2518,6 @@
     <string name="shared_string_restart">Reiniciar aplicación</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renová la suscripción para continuar usando todas las funciones:</string>
-    <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
-    <string name="open_wikipedia_link_online_description">El enlace se abrirá en un navegador web.</string>
     <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
     <string name="how_to_open_link">¿Cómo abrir el enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
@@ -5625,7 +5622,7 @@
     <string name="set_parking_position">Definir ubicación del estacionamiento</string>
     <string name="set_work">Definir trabajo</string>
     <string name="set_start_point">Definir punto de inicio</string>
-    <string name="ski_route_switch_style_description">Explorá pistas de esquí, ascensores y más con el estilo de mapa de invierno y esquí.</string>
+    <string name="ski_route_switch_style_description">Explorá rutas de esquí, pistas y ascensores con el estilo de mapa de invierno y esquí.</string>
     <string name="battery">batería</string>
     <string name="sensor_data">Datos del sensor</string>
     <string name="set_home">Definir casa</string>
@@ -5712,7 +5709,6 @@
     <string name="rendering_attr_watercolor_description">Color del agua</string>
     <string name="rendering_attr_shellsStyle_description">Estilo para los moluscos en el fondo marino</string>
     <string name="rendering_attr_shellsStyle_name">Estilo para moluscos marinos</string>
-    <string name="private_access_routing_req_short">El destino está en un área privada. ¿Querés cruzar por caminos privados?</string>
     <string name="view_on_phone">Ver en el teléfono</string>
     <string name="backup_delete_data_warning_extended">Esta acción quitará de la nube todos los datos marcados. No podrás restaurarlos luego.</string>
     <string name="amount_of_total_used">Usado %1$s de %2$s</string>
@@ -5746,11 +5742,13 @@
     <string name="update_maps">Actualizar mapas</string>
     <string name="reconnect">Reconectar</string>
     <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
-    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actual registrado</string>
+    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje o del último actual registrado.</string>
     <string name="trip_recording_distance_widget_desc">Muestra la distancia total del recorrido actual registrado, con modos para ver la distancia del último ascenso y descenso.</string>
     <string name="trip_recording_max_speed_widget_description">Muestra la velocidad máxima del viaje actual registrado. Pulsá para cambiar entre la velocidad máxima general y la velocidad máxima del último ascenso o descenso.</string>
     <string name="trip_recording_average_slope_widget_description">Muestra la pendiente media del último ascenso o descenso del viaje actual registrado.</string>
     <string name="average_slope">Pendiente media</string>
     <string name="shared_string_last_uphill">Último ascenso</string>
     <string name="shared_string_last_downhill">Último descenso</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Pistas y rutas de esquí</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistas y rutas de esquí</string>
 </resources>

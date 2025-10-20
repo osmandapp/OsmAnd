@@ -2515,7 +2515,6 @@
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Te damos la bienvenida a la beta abierta</string>
     <string name="download_wikipedia_description">Descarga los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
-    <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
     <string name="download_wiki_region_placeholder">esta región</string>
@@ -2529,8 +2528,6 @@
     <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
     <string name="maps_you_need_descr">Basado en los artículos destacados, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
-    <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
-    <string name="open_wikipedia_link_online_description">El enlace se abrirá en un navegador web.</string>
     <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
     <string name="how_to_open_link">¿Cómo abrir el enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
@@ -5672,8 +5669,21 @@
     <string name="deleting_history">Borrando historial…</string>
     <string name="deleting">Borrando…</string>
     <string name="show_rasterization_debug_tile">Mostrar información de rasterización de teselas</string>
-    <string name="release_5_2">• En progreso...</string>
-    <string name="private_access_routing_req_short">Tu destino está en una zona privada. ¿Permitir el uso de carreteras privadas?</string>
+    <string name="release_5_2">
+        • Se han añadido detalles de calle y ciudad a los resultados de búsqueda\n\n
+        • Nuevos widgets de Grabación de viaje: Velocidad máxima, Pendiente media y Ascenso/Descenso mejorados\n\n
+        • Nuevo estilo de mapa náutico "Marino" con amplias opciones de personalización\n\n
+        • Mejorada la velocidad de renderizado del mapa\n\n
+        • Conectividad mejorada con adaptadores OBDII BLE\n\n
+        • Se han añadido métricas de frecuencia cardíaca a "Analizar por intervalo"\n\n
+        • Se ha añadido la visualización de la duración para las rutas planificadas\n\n
+        • Las unidades de altitud ahora se pueden configurar por separado de las unidades de distancia\n\n
+        • Mejorada la Acción Rápida de orientación del mapa con modos de brújula seleccionables\n\n
+        • Para Android Auto, se han añadido alertas previas a la navegación para mapas faltantes y carreteras privadas\n\n
+        • Resuelto un problema con parámetros de tamaño incorrectos para el widget de Regla de radio\n\n
+        • Se han añadido orientaciones de pantalla invertidas\n\n
+        • Mejorada la interfaz de usuario para especificar métricas de camión\n\n
+    </string>
     <string name="view_on_phone">Ver en el teléfono</string>
     <string name="average_elevation">Elevación media</string>
     <string name="ascent">Ascenso</string>

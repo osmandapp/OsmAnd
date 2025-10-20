@@ -37,8 +37,6 @@
     <string name="error_notification_desc">Support@osmand.net க்கு இந்த அறிவிப்பின் ஸ்கிரீன் ஷாட்டை அனுப்பவும்</string>
     <string name="get_osmand_live">வரம்பற்ற பதிவிறக்கங்கள், அனைத்து பணம் மற்றும் இலவச கூடுதல், விக்கிபீடியா, விக்கிவோயேஜ், தினசரி வரைபடத்தை மேம்படுத்தல்கள் மற்றும் பல அம்சங்கள் திறக்க பெற OsmAndLive பெறவும்.</string>
     <string name="update_is_available">மேம்படுத்தல் உள்ளது</string>
-    <string name="open_wikipedia_link_online">விக்கிபீடியா இணைப்பை ஆன்லைனில் திறக்கவும்</string>
-    <string name="open_wikipedia_link_online_description">இணைய உலாவியில் இணைப்பு திறக்கப்படும்.</string>
     <string name="read_wikipedia_offline_description">விக்கிபீடியா மற்றும் விக்கிபீஜ் கட்டுரைகளை வாசிப்பதற்கு OsmAnd Live சந்தாவை பெறவும்.</string>
     <string name="how_to_open_link">இணைப்பை எவ்வாறு திறக்க வேண்டும்\?</string>
     <string name="read_wikipedia_offline">விக்கிபீடியா ஆஃப்லைன் வாசிக்கவும்</string>
@@ -1239,7 +1237,6 @@
     <string name="toast_empty_name_error">பெயரிடப்படாத இடம்</string>
     <string name="tunnel_warning">சுரங்கப்பாதை முன் நோக்கி உள்ளது</string>
     <string name="show_tunnels">சுரங்கங்கள்</string>
-    <string name="download_wikipedia_label">விக்கிபீடியா கட்டுரையை பதிவிறக்கவும்</string>
     <string name="download_wiki_region_placeholder">இந்த பகுதி</string>
     <string name="wiki_article_search_text">குறிப்பிட்ட விக்கிபீடியா கட்டுரை தேடப்பட்டு வருகிறது</string>
     <string name="wiki_article_not_found">கட்டுரை காணப்படவில்லை</string>

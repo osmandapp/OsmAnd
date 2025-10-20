@@ -2631,8 +2631,6 @@
     <string name="topo_render_descr">Voor wandelaars, trektochten en fietsen in de natuur. Buiten goed leesbaar. Contrasterende wegen en natuurlijke objecten, verschillende routetypen, geavanceerde hoogtelijn opties, extra details. Aanpassing van de oppervlakte-integriteit onderscheidt de kwaliteit van de weg. Geen nachtmodus.</string>
     <string name="touring_view_render_descr">Stijl met hoog contrast en maximaal detail. Deze bevat alle opties van de standaardstijl van OsmAnd, met zoveel mogelijk details, specifiek wegen, paden en andere reismogelijkheden. Geen verschil tussen “wegenkaart”-wegtypes. Geschikt voor dag, nacht en outdoor gebruik.</string>
     <string name="default_render_descr">Stijl voor algemene doeleinden. Vereenvoudigde weergave dichtbevolkte steden. Routes, oppervlakkwaliteit, toegangsrestricties, wegnummers, weergave van paden volgens de SAC-schaal, wildwatersportelementen, topografische eigenschappen zoals contourlijnen.</string>
-    <string name="open_wikipedia_link_online">WIkipedia-link online openen</string>
-    <string name="open_wikipedia_link_online_description">De link wordt in een webbrowser geopend.</string>
     <string name="read_wikipedia_offline_description">Verkrijg het OsmAnd Live-abonnement om WIkipedia- en Wikivoyage-artikelen offline te lezen.</string>
     <string name="how_to_open_link">Hoe de link openen\?</string>
     <string name="read_wikipedia_offline">Wikipedia offline lezen</string>
@@ -2654,7 +2652,6 @@
     <string name="tunnel_warning">Tunnel</string>
     <string name="show_tunnels">Tunnels</string>
     <string name="download_wikipedia_description">Download de Wikipedia-artikelen voor %1$s om ze offline te lezen.</string>
-    <string name="download_wikipedia_label">Wikipedia-gegevens downloaden</string>
     <string name="open_in_browser_wiki">Artikel online openen</string>
     <string name="open_in_browser_wiki_description">Artikel in een webbrowser openen.</string>
     <string name="download_wiki_region_placeholder">deze regio</string>
@@ -5702,7 +5699,21 @@
 \n
 \n</string>
     <string name="app_mode_hang_gliding">Deltavliegen</string>
-    <string name="release_5_2">• Werk in uitvoering...</string>
+    <string name="release_5_2">
+        • Straat- en stadsdetails toegevoegd aan zoekresultaten\n\n
+        • Nieuwe widgets voor Reisopname: Max. snelheid, Gem. helling en verbeterd Stijgen/Dalen\n\n
+        • Nieuwe "Marine" nautische kaartstijl met uitgebreide aanpassingsopties\n\n
+        • Verbeterde kaartsnelheid\n\n
+        • Verbeterde connectiviteit met OBDII BLE-adapters\n\n
+        • Hartslagstatistieken toegevoegd aan "Analyseer per interval"\n\n
+        • Duurweergave toegevoegd voor geplande routes\n\n
+        • Hoogte-eenheden kunnen nu los van afstandseenheden worden ingesteld\n\n
+        • Verbeterde Snelle Actie voor kaartoriëntatie met selecteerbare kompasmodi\n\n
+        • Voor Android Auto, pre-navigatiewaarschuwingen toegevoegd voor ontbrekende kaarten en privéwegen\n\n
+        • Een probleem opgelost met onjuiste grootteparameters voor de Radiusliniaal-widget\n\n
+        • Omgekeerde schermoriëntaties toegevoegd\n\n
+        • Verbeterde gebruikersinterface voor het specificeren van vrachtwagengegevens\n\n
+    </string>
     <string name="deleting_history">Geschiedenis wordt gewist…</string>
     <string name="map_orientation_portrait_inverted">Portret (omgekeerd)</string>
     <string name="map_orientation_landscape_inverted">Landschap (omgekeerd)</string>
@@ -5827,7 +5838,7 @@
     <string name="osm_live_payment_renews_3_years">Wordt elke drie jaar verlengd</string>
     <string name="years_3">Drie jaar</string>
     <string name="shared_string_switch">Omschakelen</string>
-    <string name="ski_route_switch_style_description">Verken onder andere skipistes &amp; liften met de Winter- en Skikaartstijl.</string>
+    <string name="ski_route_switch_style_description">Verken onder andere ski-routes, skipistes &amp; liften met de Winter- en Skikaartstijl.</string>
     <string name="sensor_data">Sensordata</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Selecteer de parameters die opgenomen moeten worden in het GPX-bestand.</string>
@@ -6163,7 +6174,6 @@
     <string name="rendering_attr_lightDetail_description">Standaard: betonningsnaam (lichtkarakter.groep.periode), selecteer aanvullende informatie over sectoren 1 t/m 3 of sectoren 1,2,3,4,5 lichtkarakter</string>
     <string name="ascent">Stijging</string>
     <string name="descent">Daling</string>
-    <string name="private_access_routing_req_short">De bestemming ligt op een privéterrein. Gebruik van privéwegen toestaan?</string>
     <string name="view_on_phone">Bekijk op telefoon</string>
     <string name="backup_delete_data_warning_extended">Deze actie verwijdert alle geselecteerde gegevens permanent uit de cloud. Het is daarna niet meer mogelijk om ze te herstellen.</string>
     <string name="amount_of_total_used">%1$s van %2$s gebruikt</string>
@@ -6204,4 +6214,6 @@
     <string name="average_slope">Gemiddelde helling</string>
     <string name="shared_string_last_uphill">Laatste beklimming</string>
     <string name="shared_string_last_downhill">Laatste afdaling</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skipisten en routes</string>
+    <string name="rendering_attr_pisteRoutes_name">Skipisten en routes</string>
 </resources>

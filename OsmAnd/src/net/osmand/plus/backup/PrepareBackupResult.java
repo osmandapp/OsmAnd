@@ -23,6 +23,7 @@ public class PrepareBackupResult {
 	private Map<String, RemoteFile> oldRemoteFiles;
 	private Map<String, LocalFile> localFiles;
 	private String error;
+	private boolean autoSync;
 
 	public enum RemoteFilesType {
 		ALL,
@@ -32,7 +33,12 @@ public class PrepareBackupResult {
 		OLD,
 	}
 
-	PrepareBackupResult() {
+	PrepareBackupResult(boolean autoSync) {
+		this.autoSync = autoSync;
+	}
+
+	public boolean isAutoSync() {
+		return autoSync;
 	}
 
 	@Nullable

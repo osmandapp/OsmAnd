@@ -2553,7 +2553,6 @@
     <string name="wikivoyage_travel_guide">Ταξιδιωτικοί Οδηγοί</string>
     <string name="wikivoyage_travel_guide_descr">Οδηγοί για τα πιο ενδιαφέροντα μέρη στον πλανήτη, μέσα στο OsmAnd, χωρίς σύνδεση διαδικτύου.</string>
     <string name="download_wikipedia_description">Λήψη των λημμάτων της Βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
-    <string name="download_wikipedia_label">Λήψη δεδομένων Βικιπαίδειας</string>
     <string name="open_in_browser_wiki">Άνοιγμα άρθρου στο διαδίκτυο</string>
     <string name="open_in_browser_wiki_description">Προβολή άρθρου στον περιηγητή.</string>
     <string name="download_wiki_region_placeholder">αυτής της περιοχής</string>
@@ -2573,8 +2572,6 @@
     <string name="light_rs_render_descr">Για απλή οδήγηση. Απαλή νυχτερινή λειτουργία, εμφαίνοντας τους πορτοκαλί δρόμους, υποβαθμίζει τα δευτερεύοντα αντικείμενα στον χάρτη, τοπογραφικά χαρακτηριστικά όπως ισοϋψείς καμπύλες.</string>
     <string name="topo_render_descr">Για πεζοπορία, περπάτημα και ποδηλασία στη φύση. Ευανάγνωστο σε εξωτερικό φωτισμό. Με μεγάλη αντίθεση στους δρόμους και τα φυσικά στοιχεία, επιλογές για ανώτερες γραμμές περιγράμματος, επιπλέον λεπτομέρειες. Ρυθμίζοντας την αρτιότητα της επιφάνειας αναδεικνύει την ποιότητα των δρόμων. Δεν υπάρχει λειτουργία νύχτας.</string>
     <string name="default_render_descr">Μορφή γενικής χρήσης. Οι πυκνές πόλεις είναι ευδιάκριτες. Περιέχει διαδρομές, ποιότητα επιφάνειας, περιορισμούς πρόσβασης, οδικές πινακίδες, μονοπάτια που αποδίδονται σύμφωνα με την κλίμακα SAC/CAI, χαρακτηριστικά αθλημάτων με ορμητικό νερό, τοπογραφικά χαρακτηριστικά όπως ισοϋψείς καμπύλες.</string>
-    <string name="open_wikipedia_link_online">Άνοιγμα διαδικτυακού συνδέσμου Βικιπαίδειας</string>
-    <string name="open_wikipedia_link_online_description">Ο σύνδεσμος θα ανοιχτεί σε περιηγητή ιστού.</string>
     <string name="read_wikipedia_offline_description">Εγγραφείτε στο OsmAnd Live για να διαβάσετε χωρίς διαδίκτυο άρθρα στη Βικιπαίδεια και στα Βικιταξίδια.</string>
     <string name="how_to_open_link">Πώς να ανοίξετε τον σύνδεσμο;</string>
     <string name="read_wikipedia_offline">Ανάγνωση της Βικιπαίδειας χωρίς διαδίκτυο</string>
@@ -4826,7 +4823,7 @@
     <string name="fuel_tank_capacity_description">Εισάγετε την χωρητικότητα του ρεζερβουάρ για επακριβή παρακολούθηση των επιπέδων καυσίμου και κατανάλωσης</string>
     <string name="remaining_fuel_description">Δείχνει την ποσότητα καυσίμου που απομένει στο ντεπόζιτο του οχήματος</string>
     <string name="us_gallons">Γαλόνια ΗΠΑ</string>
-    <string name="ski_route_switch_style_description">Εξερευνήστε πίστες σκι, αναβατήρες και πολλά άλλα με το στυλ χάρτη Χειμώνα και Σκι.</string>
+    <string name="ski_route_switch_style_description">Εξερευνήστε διαδρομές σκι, πίστες και αναβατήρες με το στυλ χάρτη Χειμώνα και Σκι.</string>
     <string name="search_title">Αναζήτηση: %1$s</string>
     <string name="included_categories">Συμπεριλαμβανόμενες κατηγορίες</string>
     <string name="icon_group_nautical">Ναυτικός</string>
@@ -4964,7 +4961,7 @@
     <string name="announce_when_exceeded">Αναγγελία κατά την υπέρβαση</string>
     <string name="speak_gps_signal_status">Αναγγελία για χάσιμο και επαναφορά σήματος GPS</string>
     <string name="speak_route_recalculation">Αναγγελία επανυπολογισμού διαδρομής</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Σχηματική εμφάνιση εικονιδίων σε χαμηλές μεγεθύνσεις</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Μια σχηματική προβολή εικονιδίων σε χαμηλές μεγεθύνσεις για τα ΣΕ που δεν εμφανίζονται συνήθως</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Εικονίδια σε χαμηλές μεγενθύνσεις</string>
     <string name="rendering_attr_horse_scale_demanding_name">Απαιτητική</string>
     <string name="rendering_value_omit_name">Παράλειψη</string>
@@ -5480,7 +5477,7 @@
     <string name="generate_slope_from_3d_maps">Παραγωγή raster χαρτών κλίσης εδάφους από 3D χάρτες</string>
     <string name="generate_hillshade_from_3d_maps">Παραγωγή raster χαρτών σκίασης ανάγλυφου από 3D χάρτες</string>
     <string name="disable_vertex_hillshade_3d">Απενεργοποίηση κορυφών σκίασης ανάγλυφου σε 3D</string>
-    <string name="obd_alt_battery_voltage">Τάση μπαταρίας (αντάπτορας)</string>
+    <string name="obd_alt_battery_voltage">Τάση αντάπτορα</string>
     <string name="liter_single">Λίτρο</string>
     <string name="imperial_gallon">Αυτοκρατορικό γαλόνι</string>
     <string name="us_gallon">Αμερικάνικο γαλόνι</string>
@@ -5496,6 +5493,17 @@
     <string name="add_to_a_folder">Προσθήκη σε φάκελο</string>
     <string name="add_to_favorites">Προσθήκη στα αγαπημένα</string>
     <string name="view_on_phone">Προβολή στο Τηλέφωνο</string>
-    <string name="private_access_routing_req_short">Ο προορισμός σας είναι σε ιδιωτική περιοχή. Να επιτραπεί η χρήση ιδιωτικών δρόμων;</string>
     <string name="time_to_navigation_point_widget_settings_desc">Πατήστε το γραφικό στοιχείο για εναλλαγή λειτουργιών.</string>
+    <string name="track_folder_appearance">Εμφάνιση φακέλου ιχνών</string>
+    <string name="update_maps">Ενημέρωση χαρτών</string>
+    <string name="reconnect">Επανασύνδεση</string>
+    <string name="shared_string_last_uphill">Τελευταία ανηφόρα</string>
+    <string name="shared_string_last_downhill">Τελευταία κατηφόρα</string>
+    <string name="shared_string_price">Κόστος</string>
+    <string name="average_slope">Μέση κλίση</string>
+    <string name="trip_recording_downhill_widget_desc">Δείχνει το άρθροισμα όλων των καταβάσεων ή την τελευταία κατάβαση στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
+    <string name="trip_recording_uphill_widget_desc">Δείχνει το άρθροισμα όλων των αναβάσεων ή την τελευταία ανάβαση στην τρέχουσα καταγεγραμμένη διαδρομή.</string>
+    <string name="trip_recording_distance_widget_desc">Δείχνει την απόσταση της τρέχουσας καταγεγραμμένης διαδρομής, με λειτουργίες για προβολή της απόστασης της τελευταίας ανάβασης και κατάβασης.</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Πίστες και διαδρομές σκι</string>
+    <string name="rendering_attr_pisteRoutes_name">Πίστες και διαδρομές σκι</string>
 </resources>

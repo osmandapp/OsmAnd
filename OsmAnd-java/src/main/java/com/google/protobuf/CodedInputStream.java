@@ -773,6 +773,8 @@ public final class CodedInputStream {
     	long remain = raf.length() - raf.getFilePointer();
     	bufferSize = (int) Math.min(remain, buffer.length);
     	if(bufferSize > 0) {
+//    		System.out.printf("%,d %,d\n", raf.getFilePointer(), bytesCounter);
+    		bytesCounter += bufferSize;
     		raf.readFully(buffer, 0, bufferSize);
     	} else {
     		bufferSize = -1;
@@ -896,6 +898,8 @@ public final class CodedInputStream {
         	final int n;
         	// osmand change
         	if(raf != null) {
+//    			System.out.printf("%,d %,d\n", raf.getFilePointer(), bytesCounter);
+        		bytesCounter += (chunk.length - pos);
         		raf.readFully(chunk, pos, chunk.length - pos);
         		n = chunk.length - pos;
         	} else {
@@ -976,6 +980,18 @@ public final class CodedInputStream {
       }
     }
   }
+  
+  // OSMAND change
+  long bytesCounter = 0;
+  public long resetBytesCounter() {
+	  long p = bytesCounter;
+	  bytesCounter = 0;
+	  return p;
+  }
+  
+  public long getBytesCounter() {
+	return bytesCounter;
+}
   
   public void seek(long pointer) throws IOException {
 	  if (pointer - totalBytesRetired >= 0 && pointer - totalBytesRetired < bufferSize) {

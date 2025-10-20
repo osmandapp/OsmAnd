@@ -4,7 +4,7 @@ import net.osmand.shared.gpx.GpxUtilities.GPXTPX_PREFIX
 import net.osmand.shared.gpx.GpxUtilities.OSMAND_EXTENSIONS_PREFIX
 
 class PointAttributes(
-	var distance: Float, val timeDiff: Float, val firstPoint: Boolean, val lastPoint: Boolean
+	var distance: Float, var timeDiff: Float, var firstPoint: Boolean, var lastPoint: Boolean
 ) {
 
 	companion object {
@@ -39,6 +39,10 @@ class PointAttributes(
 	var animatedZoom: Float = Float.NaN
 	var interpolationOffsetN: Float = Float.NaN
 
+	private var anyValueSet: Boolean = false
+
+	fun hasAnyValueSet(): Boolean = anyValueSet
+
 	fun getAttributeValue(tag: String): Float? {
 		return when (tag) {
 			POINT_SPEED -> speed
@@ -71,6 +75,7 @@ class PointAttributes(
 			DEV_ANIMATED_ZOOM -> animatedZoom = value
 			DEV_INTERPOLATION_OFFSET_N -> interpolationOffsetN = value
 		}
+		anyValueSet = true
 	}
 
 	fun getTemperature(): Float {

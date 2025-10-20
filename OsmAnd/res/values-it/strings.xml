@@ -2563,7 +2563,6 @@
     <string name="index_item_world_wikivoyage">Articoli di Wikivoyage da tutto il mondo</string>
     <string name="lang_lo">Laotiano</string>
     <string name="download_wikipedia_description">Scarica gli articoli di Wikipedia per %1$s così da poterli leggere senza una connessione dati.</string>
-    <string name="download_wikipedia_label">Scarica dati di Wikipedia</string>
     <string name="open_in_browser_wiki">Apri articolo online</string>
     <string name="open_in_browser_wiki_description">Vedi articolo in un browser web.</string>
     <string name="download_wiki_region_placeholder">questa regione</string>
@@ -2578,8 +2577,6 @@
     <string name="light_rs_render_descr">Stile di guida semplice. Modalità notturna delicata, strade contrastanti in arancione, oscuramento di oggetti secondari della mappa, caratteristiche topografiche come linee di contorno.</string>
     <string name="topo_render_descr">Per passeggiate, escursioni e pedalate nella natura. Leggibile all\'aperto. Oggetti naturali e strade ad alto contrasto, tipi differenti di percorsi, isoipse con impostazioni avanzate, più dettagli. L\'integrità della superficie distingue la qualità delle strade. No modalità notte.</string>
     <string name="default_render_descr">Stile generico. Città densamente popolate mostrate chiaramente. Presenta percorsi, qualità del manto, divieti di accesso, segnali stradali, rendering dei percorsi secondo la scala SAC/CAI, articoli per sport acquatici, caratteristiche topografiche come curve di livello.</string>
-    <string name="open_wikipedia_link_online">Apri il link di Wikipedia online</string>
-    <string name="open_wikipedia_link_online_description">Il link verrà aperto in un browser web.</string>
     <string name="read_wikipedia_offline_description">Sottoscrivi OsmAnd Live per leggere gli articoli di Wikipedia e Wikivoyage senza una connessione dati.</string>
     <string name="how_to_open_link">Come aprire il link?</string>
     <string name="read_wikipedia_offline">Leggi Wikipedia senza una connessione dati</string>
@@ -5788,7 +5785,21 @@
     <string name="battery">batteria</string>
     <string name="sensor_data">Dati dei sensori</string>
     <string name="show_rasterization_debug_tile">Mostra informazioni sulla rasterizzazione dei tile</string>
-    <string name="release_5_2">• Lavori in corso…</string>
+    <string name="release_5_2">
+        • Aggiunti dettagli su strade e città ai risultati di ricerca\n\n
+        • Nuovi widget di registrazione dei viaggi: velocità massima, pendenza media e miglioramento delle salite/discese\n\n
+        • Nuovo stile di mappa nautica “Marine” con ampie opzioni di personalizzazione\n\n
+        • Migliorata la velocità di rendering delle mappe\n\n
+        • Migliorata la connettività con gli adattatori OBDII BLE\n\n
+        • Aggiunte le metriche della frequenza cardiaca all\'opzione “Analizza per intervallo”\n\n
+        • Aggiunta la visualizzazione della durata per i percorsi pianificati\n\n
+        • Le unità di altitudine possono ora essere impostate separatamente dalle unità di distanza\n\n
+        • Migliorata l\'azione rapida di orientamento della mappa con modalità bussola selezionabili\n\n
+        • Per Android Auto, aggiunti avvisi di pre-navigazione per mappe mancanti e strade private\n\n
+        • Risolto un problema con parametri di dimensione errati per il widget Righello raggio\n\n
+        • Aggiunti orientamenti dello schermo invertiti\n\n
+        • Migliorata l\'interfaccia utente per specificare le metriche dei camion\n\n
+    </string>
     <string name="map_orientation_portrait_inverted">Ritratto (capovolto)</string>
     <string name="map_orientation_landscape_inverted">Paesaggio (capovolto)</string>
     <string name="reverse_mode_calculate_route">Calcola percorso</string>
@@ -5813,7 +5824,6 @@
     <string name="enable_msaa">Abilita MSAA</string>
     <string name="average_elevation">Elevazione media</string>
     <string name="descent">Discesa</string>
-    <string name="private_access_routing_req_short">La destinazione è in un\'area privata. Abilitare l\'uso di strade private?</string>
     <string name="view_on_phone">Vedi sul telefono</string>
     <string name="ascent">Salita</string>
     <string name="map_orientations_choose_description">Lasciare vuoto per passare tra le modalità disponibili, o aggiungere solo quelle preferite.</string>

@@ -18,11 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.help.HelpActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -37,8 +39,9 @@ import java.util.List;
 public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity implements ISupportInsets {
 
 	private final List<ActivityResultListener> resultListeners = new ArrayList<>();
-	private WindowInsetsCompat lastRootInsets;
+	protected WindowInsetsCompat rootInsets;
 
+	private StateChangedListener<DayNightMode> stateChangedListener;
 	@ColorRes
 	protected int getStatusBarColorId() {
 		boolean nightMode = app.getDaynightHelper().isNightMode(APP);
@@ -50,6 +53,10 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		if (InsetsUtils.isEdgeToEdgeSupported()) {
 			EdgeToEdge.enable(this);
 		}
+		updateNavBarColor();
+		stateChangedListener = o -> updateNavBarColor();
+		settings.DAYNIGHT_MODE.addListener(stateChangedListener);
+
 		super.onCreate(savedInstanceState);
 	}
 
@@ -74,6 +81,10 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		resultListeners.remove(listener);
 	}
 
+	protected int getRootViewId(){
+		return R.id.root;
+	}
+
 	@Override
 	public void onContentChanged() {
 		super.onContentChanged();
@@ -81,7 +92,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 		setupHomeButton();
 		updateStatusBarColor();
 
-		View root = findViewById(R.id.root);
+		View root = findViewById(getRootViewId());
 		if (root != null) {
 			InsetsUtils.processInsets(this, root, null, false);
 		}
@@ -172,11 +183,11 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity impleme
 	@Nullable
 	@Override
 	public WindowInsetsCompat getLastRootInsets() {
-		return lastRootInsets;
+		return rootInsets;
 	}
 
 	@Override
 	public void setLastRootInsets(@NonNull WindowInsetsCompat rootInsets) {
-		this.lastRootInsets = rootInsets;
+		this.rootInsets = rootInsets;
 	}
 }
