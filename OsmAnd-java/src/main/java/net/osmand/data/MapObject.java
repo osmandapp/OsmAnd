@@ -110,7 +110,13 @@ public abstract class MapObject implements Comparable<MapObject> {
 			l.add(enName);
 		}
 		if (names != null) {
-			l.addAll(names.values());
+			for (String key : names.keySet()) {
+				// skip name:place, name:admin_level...
+				if (key.length() > 3) {
+					continue;
+				}
+				l.add(names.get(key));
+			}
 		}
 		return l;
 	}
