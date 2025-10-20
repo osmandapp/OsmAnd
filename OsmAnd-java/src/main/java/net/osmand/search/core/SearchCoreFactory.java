@@ -533,7 +533,7 @@ public class SearchCoreFactory {
 					currentFile[0] = r;
 					immediateResults.clear();
 					// FIXME
-					 System.out.println("SEARСH " + wordToSearch + " " + r.getRegionName());
+//					 System.out.println("SEARСH " + wordToSearch + " " + r.getRegionName());
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
