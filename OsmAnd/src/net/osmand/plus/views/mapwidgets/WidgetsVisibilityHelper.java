@@ -105,7 +105,8 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldHideBottomWidgets() {
 		return shouldHideVerticalWidgets()
 				|| isContextMenuFragmentVisible()
-				|| isInTrackMenuMode();
+				|| isInTrackMenuMode()
+				|| (isRecMenuVisible() && !isPortrait());
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
@@ -356,6 +357,11 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isTrackDetailsMenuOpened() {
 		return mapActivity.getTrackDetailsMenu().isVisible();
+	}
+
+	private boolean isRecMenuVisible() {
+		View view = mapActivity.findViewById(R.id.recording_note_layout);
+		return view != null && view.getVisibility() == View.VISIBLE;
 	}
 
 	private boolean isRouteCalculated() {
