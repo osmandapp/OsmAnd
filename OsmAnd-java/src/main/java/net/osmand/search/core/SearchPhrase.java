@@ -421,7 +421,12 @@ public class SearchPhrase {
 		if (l == null) {
 			return null;
 		}
-		float coeff = (float) (1000 / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
+		cache1kmRect= caculateBbox(1000, l);
+		return cache1kmRect;
+	}
+
+	public static QuadRect caculateBbox(int radiusMeters, LatLon l) {
+		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
 		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
 		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
 		double topLeftX = Math.max(0, tx - coeff);
@@ -430,8 +435,7 @@ public class SearchPhrase {
 		double bottomRightX = Math.min(max, tx + coeff);
 		double bottomRightY = Math.min(max, ty + coeff);
 		double pw = MapUtils.getPowZoom(31 - SearchRequest.ZOOM_TO_SEARCH_POI);
-		cache1kmRect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
-		return cache1kmRect;
+		return new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
 	}
 	
 	

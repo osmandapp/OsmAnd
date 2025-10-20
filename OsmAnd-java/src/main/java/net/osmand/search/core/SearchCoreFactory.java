@@ -157,65 +157,22 @@ public class SearchCoreFactory {
 
 		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api)
 				throws IOException {
-			return subSearchApiOrPublish(phrase, resultMatcher, res, api, true);
+			return subSearchApiOrPublish(phrase, resultMatcher, res, api, null, true);
 		}
 
 		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
-											 boolean publish)
+									SearchResult setParentSearchResult, boolean publish)
 				throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
-			boolean firstUnknownWordMatches = res.firstUnknownWordMatches;
-			List<String> leftUnknownSearchWords = new ArrayList<String>(phrase.getUnknownSearchWords());
-			if (res.otherWordsMatch != null) {
-//				leftUnknownSearchWords.removeAll(res.otherWordsMatch); // incorrect 
-				for (String otherWord : res.otherWordsMatch) {
-					leftUnknownSearchWords.remove(otherWord); // remove 1 by 1
-				}
-			}
-			SearchResult newParentSearchResult = null;
-			if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null &&
-					res.objectType == ObjectType.STREET && res.object instanceof Street && ((Street) res.object).getCity() != null) {
-				City ct = ((Street) res.object).getCity();
-				SearchResult cityResult = new SearchResult(phrase);
-				cityResult.object = ct;
-				cityResult.objectType = ObjectType.CITY;
-				cityResult.localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-				cityResult.otherNames = ct.getOtherNames(true);
-				cityResult.location = ct.getLocation();
-				cityResult.localeRelatedObjectName = res.file.getRegionName();
-				cityResult.file = res.file;
-				phrase.countUnknownWordsMatchMainResult(cityResult);
-				boolean match = false;
-				if (firstUnknownWordMatches) {
-					cityResult.firstUnknownWordMatches = false; // don't count same name twice
-				} else if (cityResult.firstUnknownWordMatches) {
-					firstUnknownWordMatches = true;
-					match = true;
-				}
-				if (cityResult.otherWordsMatch != null) {
-					Iterator<String> iterator = cityResult.otherWordsMatch.iterator();
-					while (iterator.hasNext()) {
-						String n = iterator.next();
-						boolean wasPresent = leftUnknownSearchWords.remove(n);
-						if (!wasPresent) {
-							iterator.remove(); // don't count same name twice
-						} else {
-							match = true;
-						}
-					}
-				}
-				// include parent search result even if it is empty
-				if (match) {
-					newParentSearchResult = cityResult;
-				}
-			}
-			if (!firstUnknownWordMatches) {
-				leftUnknownSearchWords.add(0, phrase.getFirstUnknownSearchWord());
+			List<String> leftUnknownSearchWords = res.filterUnknownSearchWord(null);
+			if (setParentSearchResult != null) {
+				phrase.countUnknownWordsMatchMainResult(setParentSearchResult);
+				leftUnknownSearchWords = setParentSearchResult.filterUnknownSearchWord(leftUnknownSearchWords);
 			}
 			// publish result to set parentSearchResult before search
 			if (publish) {
-				if (newParentSearchResult != null) {
-					SearchResult prev = resultMatcher.setParentSearchResult(newParentSearchResult);
+				if (setParentSearchResult != null) {
+					SearchResult prev = resultMatcher.setParentSearchResult(setParentSearchResult);
 					resultMatcher.publish(res);
 					resultMatcher.setParentSearchResult(prev);
 				} else {
@@ -289,9 +246,11 @@ public class SearchCoreFactory {
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
 		private static final int LIMIT = 10000;
 
-		private Map<BinaryMapIndexReader, List<City>> townCities = new LinkedHashMap<>();
+		private Set<String> townCitiesInit = new LinkedHashSet<>();
 		private QuadTree<City> townCitiesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
-				8, 0.55f);
+				12, 0.55f);
+		private QuadTree<City> boundariesQR = new QuadTree<City>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+				12, 0.55f);
 		private List<City> resArray = new ArrayList<>();
 		private SearchStreetByCityAPI cityApi;
 		private SearchBuildingAndIntersectionsByStreetAPI streetsApi;
@@ -356,16 +315,34 @@ public class SearchCoreFactory {
 			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes(bbox, SearchPhraseDataType.ADDRESS);
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
-				if (!townCities.containsKey(r)) {
+				if (!townCitiesInit.contains(r.getRegionName())) {
 					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
-					townCities.put(r, l);
+					townCitiesInit.addAll(r.getRegionNames());
+					for (City c  : l) {
+						c.setReferenceFile(r);
+						LatLon cl = c.getLocation();
+						
+						int y = MapUtils.get31TileNumberY(cl.getLatitude());
+						int x = MapUtils.get31TileNumberX(cl.getLongitude());
+						QuadRect qr = new QuadRect(x, y, x, y);
+						int[] bbox31 = c.getBbox31();
+						if (bbox31 != null) {
+							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
+						}
+						townCitiesQR.insert(c, qr);
+					}
+					l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
 					for (City c  : l) {
 						c.setReferenceFile(r);
 						LatLon cl = c.getLocation();
 						int y = MapUtils.get31TileNumberY(cl.getLatitude());
 						int x = MapUtils.get31TileNumberX(cl.getLongitude());
 						QuadRect qr = new QuadRect(x, y, x, y);
-						townCitiesQR.insert(c, qr);
+						int[] bbox31 = c.getBbox31();
+						if (bbox31 != null) {
+							qr = new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
+						}
+						boundariesQR.insert(c, qr);
 					}
 				}
 			}
@@ -424,7 +401,7 @@ public class SearchCoreFactory {
 //				final QuadRect streetBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 				final QuadRect postcodeBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
 				final QuadRect villagesBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 3);
-				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate search before
+				final QuadRect cityBbox = phrase.getRadiusBBoxToSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5); // covered by separate sbefore
 				final int priority = phrase.isNoSelectedType() ?
 						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
@@ -568,14 +545,67 @@ public class SearchCoreFactory {
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
-							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
+							SearchResult newParentSearchResult = null;
+							if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null &&
+									res.object instanceof Street && ((Street) res.object).getCity() != null) {
+								City ct = ((Street) res.object).getCity();
+								SearchResult cityResult = new SearchResult(phrase);
+								cityResult.object = ct;
+								cityResult.objectType = ObjectType.CITY;
+								cityResult.localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+								cityResult.otherNames = ct.getOtherNames(true);
+								cityResult.location = ct.getLocation();
+								cityResult.localeRelatedObjectName = res.file.getRegionName();
+								cityResult.file = res.file;
+								phrase.countUnknownWordsMatchMainResult(res);
+								// include parent search result even if it is empty
+								boolean match = matchCity(res, phrase, ct, false);
+								if (match) {
+									newParentSearchResult = cityResult;
+								} else {
+									resArray.clear();
+									QuadRect bbox = SearchPhrase.caculateBbox(1000, res.location);
+									resArray = boundariesQR.queryInBox(bbox, resArray);
+									// 		'Remseck am Neckar' [R 405291], 0 street(s) size 0 bytes 48.91138, 9.22288 - 48.84634, 9.31304
+									// 48.869724 Lon 9.276302
+//									'Remseck am Neckar' [R 405291], 0 street(s) size 0 bytes 48.91138, 9.22288 - 48.84634, 9.31304
+//									System.out.printf("Search %s %.5f, %.5f - %.5f, %.5f\n", res.toString(),
+//											MapUtils.get31LongitudeX((int) bbox.left), MapUtils.get31LatitudeY((int) bbox.top),
+//											MapUtils.get31LongitudeX((int) bbox.right), MapUtils.get31LatitudeY((int) bbox.bottom));
+									for (City boundary : resArray) {
+										int[] bb = boundary.getBbox31();
+										if (bb == null) {
+											continue;
+										}
+//										if (boundary.getName().toLowerCase().startsWith("remseck")) {
+//											System.out.println(boundary);
+//										}
+										QuadRect boundBox = new QuadRect(bb[0], bb[1], bb[2], bb[3]);
+										if (!QuadRect.intersects(boundBox, bbox)) {
+											continue;
+										}
+//										if (matchCity(res, phrase, boundary, true)) {
+										// FIXME
+										if(phrase.getFullSearchPhrase().contains(boundary.getName())) {
+//											System.out.printf("Found %s %.5f, %.5f - %.5f, %.5f\n", boundary.getName(),
+//													MapUtils.get31LongitudeX(bb[0]), MapUtils.get31LatitudeY(bb[1]),
+//													MapUtils.get31LongitudeX(bb[2]), MapUtils.get31LatitudeY(bb[3]));
+											cityResult.localeName = boundary.getName();
+											newParentSearchResult = cityResult;
+											break;
+										}
+									}
+								}
+							}
+							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
 							// 6 Dorfstraße Remseck am Neckar
 							// 4 Hofäckerstraße Kernen im Remstal
 							// 4241 Cook Hollow Road Woodhull
 //							11601 Kelly Hill Road Pine City // TODO improve
 							// 8508 PA 61 Coal Township
-							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
+							
+							if (phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
 //								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
@@ -592,6 +622,40 @@ public class SearchCoreFactory {
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
 			}
+		}
+		
+		private boolean matchCity(SearchResult res, SearchPhrase phrase, City ct, boolean fullMatch) {
+			boolean match = false;
+			String localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+			List<String> localeNames = SearchPhrase.splitWords(localeName, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
+			List<String> otherNames = ct.getOtherNames(true);
+			int matched = 0;
+			if (!res.firstUnknownWordMatches) {
+				if (phrase.getFirstUnknownNameStringMatcher().matches(localeNames)) {
+					matched++;
+				}
+				if (!fullMatch && phrase.getFirstUnknownNameStringMatcher().matches(otherNames)) {
+					return true;
+				}
+			}
+			List<String> leftUnknownSearchWords = res.filterUnknownSearchWord(null);
+			List<String> unknownSearchWords = phrase.getUnknownSearchWords();
+			for (int i = 0; i < unknownSearchWords.size() && !match; i++) {
+				String leftUnknownSearchWord = unknownSearchWords.get(i);
+				if (!leftUnknownSearchWords.contains(leftUnknownSearchWord)) {
+					continue;
+				}
+				if (phrase.getUnknownNameStringMatcher(i).matches(localeNames)) {
+					matched++;
+				}
+				if (!fullMatch && phrase.getUnknownNameStringMatcher(i).matches(otherNames)) {
+					return true;
+				}
+			}
+			if (matched == localeNames.size()) {
+				return true;
+			}
+			return false;
 		}
 	}
 
@@ -1473,7 +1537,7 @@ public class SearchCoreFactory {
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
 
-		private SearchBaseAPI streetsAPI;
+		private SearchBuildingAndIntersectionsByStreetAPI streetsAPI;
 		public SearchStreetByCityAPI(SearchBuildingAndIntersectionsByStreetAPI streetsAPI) {
 			super(ObjectType.HOUSE, ObjectType.STREET, ObjectType.STREET_INTERSECTION);
 			this.streetsAPI = streetsAPI;
@@ -1527,7 +1591,7 @@ public class SearchCoreFactory {
 					res.priority = SEARCH_STREET_BY_CITY_PRIORITY;
 					//res.priorityDistance = 1;
 					res.objectType = ObjectType.STREET;
-					subSearchApiOrPublish(phrase, resultMatcher, res, streetsAPI, pub);
+					subSearchApiOrPublish(phrase, resultMatcher, res, streetsAPI, null, pub);
 					if (limit++ > LIMIT) {
 						break;
 					}
