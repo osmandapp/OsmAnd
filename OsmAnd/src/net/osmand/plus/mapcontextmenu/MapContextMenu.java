@@ -329,7 +329,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public boolean init(@NonNull LatLon latLon,
 	                    @Nullable PointDescription pointDescription,
 	                    @Nullable Object object) {
-		return init(latLon, pointDescription, object, false, false);
+		return init(latLon, pointDescription, object, true, false);
 	}
 
 	public boolean init(@NonNull LatLon latLon,
