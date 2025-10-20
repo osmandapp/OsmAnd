@@ -19,4 +19,7 @@ public record Review(
         LocalDate date,
         URI link
 ) {
+    public Review withOpinion(String newOpinion) {
+        return new Review(id, newOpinion, rating, author, date, link);
+    }
 }

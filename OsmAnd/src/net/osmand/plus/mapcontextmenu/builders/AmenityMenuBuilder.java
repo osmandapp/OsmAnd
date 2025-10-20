@@ -33,13 +33,11 @@ import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
-import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
+import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.reviews.Reviews;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -72,6 +70,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 	public static final String WIKIPEDIA_ORG_WIKI_URL_PART = ".wikipedia.org/wiki/";
+	private static final int MAX_REVIEWS_TO_DISPLAY = 10;
+	private static final int MAX_REVIEW_CHARACTERS_TO_DISPLAY = 200;
 
 	protected AmenityUIHelper amenityUIHelper;
 	protected Map<String, String> extensions;
@@ -96,17 +96,27 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private void buildReviewsRow(View view) {
 		String reviewsJson = extensions.get(Amenity.REVIEWS);
 		if (reviewsJson == null) return;
+		String aggregateRatingStr = extensions.get(Amenity.REVIEWS_AGGREGATE_RATING);
+		if (aggregateRatingStr == null) {
+			LOG.error(String.format(Locale.US, "reviews specified without aggregate rating (%d:%s)", amenity.getOsmId(), amenity.getName()));
+			return;
+		}
+		int aggregateRating;
+		try {
+			aggregateRating = Integer.parseInt(aggregateRatingStr);
+		} catch (NumberFormatException ex) {
+			LOG.error(String.format(Locale.US, "invalid aggregate rating '%s' (%d:%s)", aggregateRatingStr, amenity.getOsmId(), amenity.getName()));
+			return;
+		}
 
 		ReviewJsonCodec codec = new ReviewJsonCodec();
 		List<Review> reviews = new ArrayList<>();
 		codec.fromJson(reviewsJson).forEach(reviews::add);
+		List<Review> reviewsToDisplay = truncateReviews(reviews);
 
-		CollapsableView cv = getReviewCollapsibleView(reviews);
+		CollapsableView cv = getReviewCollapsibleView(reviewsToDisplay);
 
-		// TODO: these should be precalculated for a POI
-		int meanRating = reviews.stream().mapToInt(Review::rating).sum() / reviews.size();
-
-		String title = app.getString(R.string.aggregate_rating, Reviews.INSTANCE.numericalStarRating(meanRating), Reviews.INSTANCE.formatStarRating(meanRating), reviews.size());
+		String title = app.getString(R.string.aggregate_rating, Reviews.INSTANCE.numericalStarRating(aggregateRating), Reviews.INSTANCE.formatStarRating(aggregateRating), reviews.size());
         BuildRowAttrs rowAttrs = new BuildRowAttrs.Builder()
                 .setIconId(R.drawable.ic_action_review)
                 .setTextPrefix(app.getString(R.string.reviews))
@@ -115,6 +125,21 @@ public class AmenityMenuBuilder extends MenuBuilder {
                 .setCollapsable(true)
                 .build();
         buildRow(view, rowAttrs);
+	}
+
+	private List<Review> truncateReviews(List<Review> reviews) {
+		List<Review> result = new ArrayList<>();
+		for (int i = 0; i < Math.min(MAX_REVIEWS_TO_DISPLAY, reviews.size()); i++) {
+			result.add(truncateReview(reviews.get(i)));
+		}
+		return result;
+	}
+
+	private Review truncateReview(Review review) {
+		if (review.opinion().length() <= MAX_REVIEW_CHARACTERS_TO_DISPLAY) {
+			return review;
+		}
+		return review.withOpinion(review.opinion().substring(0, MAX_REVIEW_CHARACTERS_TO_DISPLAY - 1) + "…");
 	}
 
 	protected void buildNearestWikiRow(ViewGroup view) {

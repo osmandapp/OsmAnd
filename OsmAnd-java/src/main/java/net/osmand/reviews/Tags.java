@@ -10,5 +10,7 @@ public final class Tags {
     public static final String REVIEWS_MARKER_VALUE = "reviewed_place";
     /** The key of the tag containing the review data */
     public static final String REVIEWS_KEY = "reviews";
+    /** The key of the tag containing the review count */
+    public static final String REVIEWS_AGGREGATE_RATING_KEY = "reviews:aggregate_rating";
     private Tags() {}
 }
