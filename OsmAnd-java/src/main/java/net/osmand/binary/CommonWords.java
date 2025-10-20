@@ -22,6 +22,9 @@ public class CommonWords {
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
 	}
 	public static int getCommon(String name) {
+		if (Character.isDigit(name.charAt(0)) && letters(name) < 2) {
+			name = NUMBER_WITH_LESS_THAN_2_LETTERS;
+		}
 		Integer i = commonWordsDictionary.get(name);
 		return i == null ? -1 : i.intValue();
 	}

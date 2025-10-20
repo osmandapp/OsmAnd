@@ -4898,7 +4898,7 @@
     <string name="check_for_updates">Caută actualizări</string>
     <string name="changes">Modificări %1$s</string>
     <string name="cloud_changes">Modificări Cloud</string>
-    <string name="shared_string_cloud">Nor</string>
+    <string name="shared_string_cloud">Cloud</string>
     <string name="new_file">Fișier nou</string>
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>
