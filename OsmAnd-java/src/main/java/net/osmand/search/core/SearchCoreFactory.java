@@ -584,9 +584,9 @@ public class SearchCoreFactory {
 										if (!QuadRect.intersects(boundBox, bbox)) {
 											continue;
 										}
-//										if (matchCity(res, phrase, boundary, true)) {
+										if (matchCity(res, phrase, boundary, true)) {
 										// FIXME
-										if(phrase.getFullSearchPhrase().contains(boundary.getName())) {
+//										if(phrase.getFullSearchPhrase().contains(boundary.getName())) {
 //											System.out.printf("Found %s %.5f, %.5f - %.5f, %.5f\n", boundary.getName(),
 //													MapUtils.get31LongitudeX(bb[0]), MapUtils.get31LatitudeY(bb[1]),
 //													MapUtils.get31LongitudeX(bb[2]), MapUtils.get31LatitudeY(bb[3]));
