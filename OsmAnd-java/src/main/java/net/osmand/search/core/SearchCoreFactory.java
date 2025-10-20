@@ -605,7 +605,8 @@ public class SearchCoreFactory {
 //							11601 Kelly Hill Road Pine City // TODO improve
 							// 8508 PA 61 Coal Township
 							
-							if (phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
+							if (matchCity(res, phrase, (City) res.object, true)) {
+//							if (phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
 //								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
