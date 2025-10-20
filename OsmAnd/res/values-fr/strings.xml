@@ -5795,6 +5795,6 @@
     <string name="rendering_attr_pisteRoutes_name">Pistes et itinéraires de ski</string>
     <string name="requires_internet_connection">Nécessite une connexion Internet</string>
     <string name="save_and_access_articles_offline">Sauvegardez vos données et accédez aux articles hors ligne où que vous soyez</string>
-    <string name="private_access_routing_req_short">Autoriser l\'utilisation d\'un chemin privé pour atteindre votre destination ?</string>
+    <string name="private_access_routing_req_short">Autorisez-vous l’emprunt de portions privées pour rejoindre votre destination ?</string>
     <string name="download_wikipedia_label">Télécharger Wikipédia</string>
 </resources>
