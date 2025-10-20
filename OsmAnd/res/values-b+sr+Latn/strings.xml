@@ -5868,4 +5868,6 @@
     <string name="shared_string_last_downhill">Poslednja nizbrdica</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skijaške staze i rute</string>
     <string name="rendering_attr_pisteRoutes_name">Skijaške staze i rute</string>
+    <string name="save_and_access_articles_offline">Sačuvajte podatke i pristupite člancima bilo gde bez interneta</string>
+    <string name="requires_internet_connection">Zahteva internet konekciju</string>
 </resources>
