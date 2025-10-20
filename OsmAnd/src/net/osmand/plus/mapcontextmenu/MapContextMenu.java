@@ -397,7 +397,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 			menuController = getMenuController();
 		} else {
-			menuController.update(pointDescription, object, latLon);
+			menuController.update(this.pointDescription, object, latLon);
 		}
 		initTitle();
 
