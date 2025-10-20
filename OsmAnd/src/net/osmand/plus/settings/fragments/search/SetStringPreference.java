@@ -26,8 +26,6 @@ class SetStringPreference {
 
 	private List<String> getList() {
 		final List<String> strings = listStringPreference.getStringsList();
-		return strings != null ?
-				strings :
-				Collections.emptyList();
+		return strings != null ? strings : Collections.emptyList();
 	}
 }
