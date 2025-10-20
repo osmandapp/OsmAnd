@@ -214,9 +214,6 @@ public class MapSelectionHelper {
 					log.warn("selectObjectsFromNative(v1) got duplicate: " + renderedObject);
 					continue;
 				}
-				if (rules.isOnlyPoints() && !renderedObject.isPoint()) {
-					continue;
-				}
 				LatLon objectLatLon = null;
 				Map<String, String> tags = renderedObject.getTags();
 
@@ -249,7 +246,7 @@ public class MapSelectionHelper {
 					renderedObject.setLabelLatLon(new LatLon(lat, lon));
 				}
 
-				if (renderedObject.isPoint()) {
+				if (renderedObject.isSimplePoint()) {
 					double lat = MapUtils.get31LatitudeY(renderedObject.getY().get(0));
 					double lon = MapUtils.get31LongitudeX(renderedObject.getX().get(0));
 					objectLatLon = new LatLon(lat, lon);
@@ -361,9 +358,6 @@ public class MapSelectionHelper {
 
 								RenderedObject renderedObject = createRenderedObject(symbolInfo, obfMapObject, tags);
 								if (renderedObject != null) {
-									if (rules.isOnlyPoints() && !renderedObject.isPoint()) {
-										continue;
-									}
 									if (allowRenderedObjects) {
 										result.collect(renderedObject, null);
 									} else {
