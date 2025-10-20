@@ -5884,4 +5884,7 @@
     <string name="shared_string_last_downhill">Poslední klesání</string>
     <string name="help_article_navigation_routing_ski_routing_name">Lyžařské trasy a sjezdovky</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžařské trasy a sjezdovky</string>
+    <string name="requires_internet_connection">Vyžaduje připojení k internetu</string>
+    <string name="private_access_routing_req_short">Povolit použití soukromých cest k dosažení vašeho cíle?</string>
+    <string name="download_wikipedia_label">Stáhnout Wikipedii</string>
 </resources>
