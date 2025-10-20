@@ -4283,7 +4283,7 @@
     <string name="public_transport_ped_route_title">Tá an bealach de shiúl na gcos thart ar %1$s, agus d\'fhéadfadh sé a bheith níos tapúla ná iompar poiblí</string>
     <string name="public_transport_try_ped">Bain triail as nascleanúint de shiúl na gcos.</string>
     <string name="send_search_query">Seol ceist chuardaigh?</string>
-	<string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
+    <string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
     <string name="move_marker_bottom_sheet_title">Bog an léarscáil chun ionad an mharcóra a athrú</string>
     <string name="storage_directory_shared">Cuimhne chomhroinnte</string>
     <string name="hno">Uimhir an tí</string>
