@@ -654,10 +654,13 @@ public class SearchCoreFactory {
 			String localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 			List<String> localeNames = SearchPhrase.splitWords(localeName, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
 			List<String> otherNames = ct.getOtherNames(true);
-			int matched = 0;
 			if (res == null || !res.firstUnknownWordMatches) {
-				if (phrase.getFirstUnknownNameStringMatcher().matches(localeNames)) {
-					matched++;
+				Iterator<String> it = localeNames.iterator();
+				while (it.hasNext()) {
+					String lName = it.next();
+					if (phrase.getFirstUnknownNameStringMatcher().matches(lName)) {
+						it.remove();
+					}
 				}
 				if (!fullMatch && phrase.getFirstUnknownNameStringMatcher().matches(otherNames)) {
 					return true;
@@ -670,14 +673,18 @@ public class SearchCoreFactory {
 				if (!leftUnknownSearchWords.contains(leftUnknownSearchWord)) {
 					continue;
 				}
-				if (phrase.getUnknownNameStringMatcher(i).matches(localeNames)) {
-					matched++;
+				Iterator<String> it = localeNames.iterator();
+				while (it.hasNext()) {
+					String lName = it.next();
+					if (phrase.getUnknownNameStringMatcher(i).matches(lName)) {
+						it.remove();
+					}
 				}
 				if (!fullMatch && phrase.getUnknownNameStringMatcher(i).matches(otherNames)) {
 					return true;
 				}
 			}
-			if (matched == localeNames.size()) {
+			if (localeNames.size() == 0) {
 				return true;
 			}
 			return false;
