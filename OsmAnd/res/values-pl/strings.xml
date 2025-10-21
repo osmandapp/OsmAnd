@@ -6028,7 +6028,21 @@
         <item quantity="many">%1$d (%2$d ścieżek)</item>
         <item quantity="other">%1$d (%2$d ścieżek)</item>
     </plurals>
-    <string name="release_5_2">• Praca w trakcie...</string>
+    <string name="release_5_2">
+        • Dodano szczegóły ulicy i miasta do wyników wyszukiwania\n\n
+        • Nowe widżety nagrywania podróży: Prędkość maksymalna, Średnie nachylenie oraz ulepszone Wzniesienia/Spadki\n\n
+        • Nowy styl mapy morskiej "Marine" z rozbudowanymi opcjami dostosowywania\n\n
+        • Poprawiona szybkość renderowania mapy\n\n
+        • Ulepszona łączność z adapterami OBDII BLE\n\n
+        • Dodano metryki tętna do "Analizuj według interwału"\n\n
+        • Dodano wyświetlanie czasu trwania dla planowanych tras\n\n
+        • Jednostki wysokości można teraz ustawiać oddzielnie od jednostek odległości\n\n
+        • Ulepszono Szybką Akcję orientacji mapy z wybieralnymi trybami kompasu\n\n
+        • Dla Android Auto dodano alerty przednawigacyjne dotyczące brakujących map i dróg prywatnych\n\n
+        • Rozwiązano problem z nieprawidłowymi parametrami rozmiaru widżetu Linijka Promienia\n\n
+        • Dodano odwrócone orientacje ekranu\n\n
+        • Ulepszono interfejs użytkownika do określania metryk ciężarówki\n\n
+    </string>
     <string name="quick_action_first_intermediate">Pierwszy od dołu</string>
     <string name="altitude_metrics_description">Ustawia jednostkę wyświetlania wysokości w widżetach i statystykach.</string>
     <string name="write_location_provider_description">Zapisz dostawcę lokalizacji dla każdego punktu śledzenia podczas nagrywania</string>
