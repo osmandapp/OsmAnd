@@ -52,6 +52,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.Algorithms;
 
 public class BackupCloudFragment extends BaseFullScreenFragment implements InAppPurchaseListener,
@@ -111,6 +113,13 @@ public class BackupCloudFragment extends BaseFullScreenFragment implements InApp
 		prepareBackup();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.container).build());
+		return collection;
 	}
 
 	private void setupToolbar(@NonNull View view) {
