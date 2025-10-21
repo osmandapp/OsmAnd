@@ -221,7 +221,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
 		super.setWindowInsets(windowInsets);
 		this.lastWindowInsets = windowInsets;
-		updateLayerInsets(bottomWidgetsPanel.isAnyRowVisible(), true);
+		if (bottomWidgetsPanel != null && mapHudLayout != null) {
+			updateLayerInsets(bottomWidgetsPanel.isAnyRowVisible(), true);
+		}
 	}
 
 	private void registerInsetListeners() {
