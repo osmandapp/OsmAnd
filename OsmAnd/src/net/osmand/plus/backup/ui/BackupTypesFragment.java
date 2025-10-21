@@ -27,6 +27,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 
 public class BackupTypesFragment extends BaseFullScreenFragment
 		implements IContextDialog, IDialogNightModeInfoProvider, InAppPurchaseListener {
@@ -69,6 +71,13 @@ public class BackupTypesFragment extends BaseFullScreenFragment
 		expandableList.setAdapter(adapter);
 		BaseSettingsListFragment.setupListView(expandableList);
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createScrollable(R.id.list));
+		return collection;
 	}
 
 	protected void setupToolbar(@NonNull View view) {

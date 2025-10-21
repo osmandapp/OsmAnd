@@ -44,6 +44,7 @@ import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -163,24 +164,21 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	@Override
-	public InsetTargetsCollection getInsetTargets() {
-		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.removeType(Type.BOTTOM_CONTAINER);
-		return collection;
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		requireMapActivity().disableDrawer();
-		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		requireMapActivity().enableDrawer();
-		view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		if (!InsetsUtils.isEdgeToEdgeSupported()) {
+			view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		}
 	}
 
 	@Override

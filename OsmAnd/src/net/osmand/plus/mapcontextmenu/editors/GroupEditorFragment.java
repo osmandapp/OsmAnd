@@ -83,14 +83,6 @@ public abstract class GroupEditorFragment extends EditorFragment {
 		return view;
 	}
 
-	@Override
-	public InsetTargetsCollection getInsetTargets() {
-		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.removeType(Type.SCROLLABLE);
-		collection.removeType(Type.ROOT_INSET);
-		return collection;
-	}
-
 	private void setupCategoryNameTextBox() {
 		nameCaption.setHint(getString(R.string.favorite_category_name));
 		nameCaption.setStartIconTintList(ColorStateList.valueOf(getColor()));

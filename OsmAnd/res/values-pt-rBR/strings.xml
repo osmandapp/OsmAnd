@@ -2637,7 +2637,7 @@
     <string name="off_road_render_descr">Para condução off-road com base no estilo \"Topo\" e para utilização com imagens de satélite verdes como mapa de fundo. Espessura de via principal reduzido, espessura das trilhas, caminhos, ciclovias e outras vias aumentado.</string>
     <string name="nautical_render_descr">Para navegação náutica. Apresenta boias, faróis, vias fluviais, vias e sinais marítimos, portos, serviços de navegação e curvas batimétricas.</string>
     <string name="light_rs_render_descr">Estilo de condução simples. Modo noturno suave, estradas contrastantes em estilo laranja, escurece objetos secundários do mapa e recursos topográficos como curvas de nível.</string>
-	<string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
+    <string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
     <string name="ski_map_render_descr">Para esquiar. Possui pistas, teleféricos, pistas de esqui, pistas de cross country, etc. Escurece objetos secundários do mapa.</string>
     <string name="error_notification_desc">Favor enviar uma captura de tela desta notificação para support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar ações</string>

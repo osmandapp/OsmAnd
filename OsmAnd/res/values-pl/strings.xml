@@ -2643,7 +2643,7 @@
     <string name="default_render_descr">Styl uniwersalny. Gęste miasta przedstawione w przejrzysty sposób. Zawiera trasy, jakość nawierzchni, ograniczenia dostępu, osłony drogowe, renderowanie ścieżek zgodnie ze skalą SAC/CAI, elementy sportów wodnych, cechy topograficzne, takie jak poziomice.</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
-	<string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży w trybie offline.</string>
+    <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży w trybie offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię w trybie offline</string>
     <string name="quick_action_edit_actions">Edycja działań</string>
     <string name="error_notification_desc">Wyślij zrzut ekranu z tego powiadomienia na adres support@osmand.net</string>

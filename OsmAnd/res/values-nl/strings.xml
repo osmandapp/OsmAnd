@@ -6216,4 +6216,8 @@
     <string name="shared_string_last_downhill">Laatste afdaling</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skipisten en routes</string>
     <string name="rendering_attr_pisteRoutes_name">Skipisten en routes</string>
+    <string name="requires_internet_connection">Vereist een internetverbinding</string>
+    <string name="private_access_routing_req_short">Toestaan privéwegen te gebruiken om je bestemming te bereiken?</string>
+    <string name="download_wikipedia_label">Download Wikipedia</string>
+    <string name="save_and_access_articles_offline">Bewaar gegevens en lees artikelen offline, waar je ook bent</string>
 </resources>

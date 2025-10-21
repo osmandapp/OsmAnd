@@ -5753,7 +5753,7 @@
     <string name="deleting">Brisanje…</string>
     <string name="deleting_history">Brisanje istorije…</string>
     <string name="show_rasterization_debug_tile">Prikaži informacije o rasterizaciji pločica</string>
-    <string name="release_5_2">• Rad u toku...</string>
+    <string name="release_5_2">• Dodati detalji o ulicama i gradovima u rezultate pretrage\n\n• Novi vidžeti za snimanje putovanja: Maksimalna brzina, Prosečan nagib i poboljšano Uzbrdo/Nizbrdo\n\n• Novi stil pomorske nautičke karte sa širokim opcijama prilagođavanja\n\n• Poboljšana brzina prikazivanja mape\n\n• Poboljšana povezanost sa OBDII BLE adapterima\n\n• Dodate metrike otkucaja srca u Analizu po intervalu\n\n• Dodat prikaz trajanja za planirane staze\n\n• Jedinice za nadmorsku visinu sada se mogu podesiti odvojeno od jedinica za udaljenost\n\n• Poboljšana orijentacija mape Brza akcija sa mogućnošću izbora režima kompasa\n\n• Za Android Auto, dodata upozorenja pre navigacije za nedostajuće mape i privatne puteve\n\n• Rešen je problem sa netačnim parametrima veličine za vidžet Radius Ruler\n\n• Dodate obrnute orijentacije ekrana\n\n• Poboljšan korisnički interfejs za određivanje metrika kamiona</string>
     <string name="threads_allocated_for_rendering_desc">U nekim slučajevima, manja brzina rendrovanja mape može da ubrza prikaz mape.</string>
     <string name="shared_string_threads">Teme</string>
     <string name="threads_allocated_for_rendering">Teme dodeljene za rendering</string>
@@ -5868,4 +5868,8 @@
     <string name="shared_string_last_downhill">Poslednja nizbrdica</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skijaške staze i rute</string>
     <string name="rendering_attr_pisteRoutes_name">Skijaške staze i rute</string>
+    <string name="save_and_access_articles_offline">Sačuvajte podatke i pristupite člancima bilo gde bez interneta</string>
+    <string name="requires_internet_connection">Zahteva internet konekciju</string>
+    <string name="private_access_routing_req_short">Dozvolite korišćenje privatnog puta da biste stigli do vašeg odredišta?</string>
+    <string name="download_wikipedia_label">Preuzmi Vikipediju</string>
 </resources>

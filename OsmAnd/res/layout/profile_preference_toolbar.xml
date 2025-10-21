@@ -12,6 +12,7 @@
 	app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout
+		android:id="@+id/toolbar_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:minHeight="@dimen/toolbar_height"

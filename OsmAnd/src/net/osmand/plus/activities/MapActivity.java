@@ -251,6 +251,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapHudLayout.setFitsSystemWindows(false);
 		}
 
+		InsetsUtils.processInsets(this, findViewById(R.id.drawer_layout), null, false);
+
 		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
 			if (showed) {
@@ -348,6 +350,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		super.onApplyInsets(insets);
 		getMapLayers().setWindowInsets(insets);
 	}
 

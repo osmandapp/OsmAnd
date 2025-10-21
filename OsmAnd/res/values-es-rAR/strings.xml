@@ -5636,7 +5636,7 @@
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
     <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
-    <string name="release_5_2">• Trabajo en progreso...</string>
+    <string name="release_5_2">• Se agregaron a los resultados de búsqueda algunos detalles sobre las calles y ciudades\n\n • Nuevos widgets en «Grabación de viaje»: velocidad máxima, pendiente media y mejoras de los ascensos y descensos\n\n • Nuevo estilo de mapa náutico marino con amplias opciones de personalización\n\n • Mejoras de velocidad en la renderización del mapa\n\n • Mejoras de conectividad con adaptadores OBDII BLE\n\n • Se agregaron estadísticas de frecuencia cardíaca al análisis por intervalos\n\n • Se agregó la visualización de la duración de las rutas planificadas\n\n • Ahora las unidades de altitud se pueden configurar por separado de las unidades de distancia\n\n • Se mejoró la acción rápida de orientación del mapa con modos de brújula seleccionables\n\n • Android Auto: se agregaron alertas previas a la navegación, para mapas faltantes y caminos privados\n\n • Se resolvió un problema con los parámetros de tamaño incorrectos para el widget «Regla radial»\n\n • Se agregaron orientaciones de pantalla invertidas\n\n • Se mejoró la interfaz de usuario para especificar estadísticas de camiones</string>
     <string name="shared_string_threads">Hilos</string>
     <string name="threads_allocated_for_rendering">Hilos asignados a la representación</string>
     <string name="threads_allocated_for_rendering_desc">La asignación de hilos inferiores podría acelerar la representación del mapa en algunos casos.</string>
@@ -5751,4 +5751,8 @@
     <string name="shared_string_last_downhill">Último descenso</string>
     <string name="help_article_navigation_routing_ski_routing_name">Pistas y rutas de esquí</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas y rutas de esquí</string>
+    <string name="requires_internet_connection">Necesitas conexión a internet</string>
+    <string name="save_and_access_articles_offline">Guardá datos y accedé a artículos sin conexión, en cualquier lugar</string>
+    <string name="private_access_routing_req_short">¿Usar un camino privado para llegar al destino?</string>
+    <string name="download_wikipedia_label">Descargar Wikipedia</string>
 </resources>

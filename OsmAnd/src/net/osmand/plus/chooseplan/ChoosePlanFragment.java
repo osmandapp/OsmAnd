@@ -34,7 +34,9 @@ import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -82,6 +84,10 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		listContainer = mainView.findViewById(R.id.list_container);
+
+		if (InsetsUtils.isEdgeToEdgeSupported()){
+			mainView.setFitsSystemWindows(false);
+		}
 
 		setupToolbar();
 		createFeaturesList();

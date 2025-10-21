@@ -3523,7 +3523,7 @@
     <string name="empty_state_my_tracks">Aldoni spuron</string>
     <string name="empty_state_my_tracks_desc">Registru novan spuron aŭ enportu dosierojn de spuroj</string>
     <string name="context_menu_item_add_waypoint">Aldoni navigadpunkton al spuro</string>
-    <string name="map_widget_monitoring">Registri spuron</string>
+    <string name="map_widget_monitoring">Spur-registrilo</string>
     <string name="marker_save_as_track">Konservi kiel dosieron de kurso</string>
     <string name="import_track_descr">Elekti dosieron de spuro por ĝin sekvi aŭ enporti el via aparato.</string>
     <string name="select_another_track">Elekti alian spuron</string>
@@ -5848,7 +5848,7 @@
     <string name="max_axle_load_description">Enigu maksimuman mason prematan de akso de via veturilo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
     <string name="view_on_phone">Montri sur telefono</string>
     <string name="lang_en_barebones">Angla (minimuma)</string>
-    <string name="release_5_2">• Versio estas prilaborata…</string>
+    <string name="release_5_2">• aldonis detalojn pri strato kaj urbo por serĉrezultoj\n\n• novaj fenestraĵoj de Spur-registrilo: Maksimuma rapido, Mezuma dekliveco kaj plibonigitaj Malsupreniroj/Supreniroj\n\n• nova map-aspekto – Marnavigada 2 – alte alĝustigebla\n\n• plialtigita rapido de map-bildigado\n\n• plibonigita konekteblo kun adaptiloj OBDII BLE\n\n• aldonis mezuro de korbata frekvenco al “Analizi laŭ fragmentoj”\n\n• aldonis vidigon de tempo al planataj kursoj\n\n• eblo agordi unuojn de altitudo sendepende de unuoj de distanco\n\n• plibonigis la butonon de rapida ago Map-orientiĝo: eblo elekti reĝimon de kompaso\n\n• Android Auto: aldonis avertojn antaŭ navigi sen necesaj mapoj kaj tra vojoj kun privata aliro\n\n• riparis eraron pri malĝusta grando de la fenestraĵo Cirkelo kaj mezurilo\n\n• aldonis inversajn orientiĝojn de ekrano\n\n• plibonigita fasado de parametroj de kamiono</string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
     <string name="obd_alt_battery_voltage">Tensio de adaptilo</string>
@@ -5879,4 +5879,8 @@
     <string name="shared_string_last_downhill">Antaŭa malsupreniro</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skiaj kursoj kaj descendejoj</string>
     <string name="rendering_attr_pisteRoutes_name">Skivojoj kaj descendejoj</string>
+    <string name="requires_internet_connection">Postulas konekton kun la interreto</string>
+    <string name="save_and_access_articles_offline">Ŝparas uzon de datum-konekto, ebligas aliri artikolojn malkonekte</string>
+    <string name="private_access_routing_req_short">Ĉu permesi uzi privatan vojon por aliri vian celon?</string>
+    <string name="download_wikipedia_label">Elŝuti Vikipedion</string>
 </resources>
