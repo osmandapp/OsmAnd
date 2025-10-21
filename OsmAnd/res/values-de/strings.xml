@@ -5834,7 +5834,7 @@
     <string name="descent">Gefälle</string>
     <string name="map_orientations_choose_description">Leer lassen, um zwischen allen verfügbaren Modi zu wechseln, oder nur Ihre bevorzugten Modi hinzufügen.</string>
     <string name="map_orientations">Kartenorientierungen</string>
-    <string name="altitude_metrics_description">Legt die Anzeigeeinheit für die Höhe in Widgets und Statistiken fest.</string>
+    <string name="altitude_metrics_description">Bestimmt die Einheit für die Höhenanzeige in Widgets und Statistiken.</string>
     <string name="write_location_provider_description">Standortanbieter während der Aufzeichnung für jeden Aufnahmepunkt speichern</string>
     <string name="write_location_provider">Standortanbieter schreiben</string>
     <string name="map_orientation_landscape_inverted">Querformat (umgekehrt)</string>
@@ -5928,4 +5928,5 @@
     <string name="average_slope">Durchschnittliche Hangneigung</string>
     <string name="shared_string_last_uphill">Letzte Bergauffahrt</string>
     <string name="shared_string_last_downhill">Letzte Bergabfahrt</string>
+    <string name="requires_internet_connection">Benötigt eine Internetverbindung</string>
 </resources>
