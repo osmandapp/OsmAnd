@@ -243,10 +243,10 @@ public class BinaryMapIndexReader {
 				AddressRegion region = new AddressRegion();
 				region.length = readInt();
 				region.filePointer = codedIS.getTotalBytesRead();
-				if(addressAdapter != null){
+				if (addressAdapter != null) {
 					oldLimit = codedIS.pushLimitLong((long) region.length);
 					addressAdapter.readAddressIndex(region);
-					if(region.name != null){
+					if (region.name != null) {
 						addressIndexes.add(region);
 						indexes.add(region);
 					}
@@ -335,7 +335,7 @@ public class BinaryMapIndexReader {
 								map.getLeftLongitude() / 2 + map.getRightLongitude() / 2);
 						break;
 					}
-				}	
+				}
 			}
 		}
 	}
@@ -416,14 +416,6 @@ public class BinaryMapIndexReader {
 		return false;
 	}
 	
-	public boolean containsAddressData(int left31x, int top31y, int right31x, int bottom31y) {
-		for (AddressRegion index : addressIndexes) {
-			if (right31x >= index.left31 && left31x <= index.right31 && index.top31 <= bottom31y && index.bottom31 >= top31y) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	public boolean containsMapData(int tile31x, int tile31y, int zoom) {
 		for (MapIndex mapIndex : mapIndexes) {
@@ -1862,6 +1854,15 @@ public class BinaryMapIndexReader {
 			right = (int) (x + cf31);
 			top = (int) (y - cf31);
 			bottom = (int) (y + cf31);
+		}
+
+		public void setBBox(int x31, int y31, int left, int top, int right, int bottom) {
+			x = x31;
+			y = y31;
+			this.left = left;
+			this.right = right;
+			this.top = top;
+			this.bottom = bottom;
 		}
 
 		public boolean publish(T obj) {
