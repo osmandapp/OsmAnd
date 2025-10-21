@@ -528,6 +528,11 @@ public class SearchCoreFactory {
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
+				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
+				if (wordToSearchSplit.size() > 1) {
+					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
+				}
+				
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
@@ -635,7 +640,7 @@ public class SearchCoreFactory {
 							}
 						} else {
 							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-							// FIXME review implementation
+							// FIXME check if subsearch successful don't call search by name inside 
 //							searchPoiInCity(nphrase, res, resultMatcher);
 //							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
 							if (matchCity(null, phrase, (City) res.object, true)) {
@@ -689,6 +694,30 @@ public class SearchCoreFactory {
 			}
 			return false;
 		}
+	}
+	
+	public static Set<String> splitAddressSearchNames(String name) {
+		int prev = -1;
+		Set<String> namesToAdd = new HashSet<>();
+
+		for (int i = 0; i <= name.length(); i++) {
+			boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
+					&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
+							|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
+			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
+					&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
+				if (prev != -1) {
+					String substr = name.substring(prev, i);
+					namesToAdd.add(substr.toLowerCase());
+					prev = -1;
+				}
+			} else {
+				if (prev == -1) {
+					prev = i;
+				}
+			}
+		}
+		return namesToAdd;
 	}
 
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {

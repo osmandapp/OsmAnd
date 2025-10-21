@@ -299,6 +299,16 @@ public class SearchPhrase {
 		return sp;
 	}
 	
+	public String selectMainUnknownWordToSearch(List<String> searchWords) {
+		Collections.sort(searchWords, commonWordsComparator);
+		for (String s : searchWords) {
+			s = s.trim();
+			if (s.length() > 0) {
+				return s;
+			}
+		}
+		return "";
+	}
 	
 	private void calcMainUnknownWordToSearch() {
 		if (mainUnknownWordToSearch != null) {
