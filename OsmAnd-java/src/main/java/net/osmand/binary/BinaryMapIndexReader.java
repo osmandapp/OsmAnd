@@ -1863,6 +1863,15 @@ public class BinaryMapIndexReader {
 			top = (int) (y - cf31);
 			bottom = (int) (y + cf31);
 		}
+		
+		public void setBBox(int x31, int y31, int left, int top, int right, int bottom) {
+			x = x31;
+			y = y31;
+			this.left = left;
+			this.right = right;
+			this.top = top;
+			this.bottom = bottom;
+		}
 
 		public boolean publish(T obj) {
 			if (resultMatcher == null || resultMatcher.publish(obj)) {

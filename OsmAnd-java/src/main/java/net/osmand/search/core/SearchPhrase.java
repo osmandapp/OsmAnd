@@ -674,16 +674,16 @@ public class SearchPhrase {
 	}
 
 	public SearchWord getLastSelectedWord() {
-		if(words.isEmpty()) {
+		if (words.isEmpty()) {
 			return null;
 		}
 		return words.get(words.size() - 1);
 	}
 	
 	public LatLon getWordLocation() {
-		for(int i = words.size() - 1; i >= 0; i--) {
+		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if(sw.getLocation() != null) {
+			if (sw.getLocation() != null) {
 				return sw.getLocation();
 			}
 		}
@@ -691,13 +691,13 @@ public class SearchPhrase {
 	}
 	
 	public LatLon getLastTokenLocation() {
-		for(int i = words.size() - 1; i >= 0; i--) {
+		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if(sw.getLocation() != null) {
+			if (sw.getLocation() != null) {
 				return sw.getLocation();
 			}
 		}
-		// last token or myLocationOrVisibleMap if not selected 
+		// last token or myLocationOrVisibleMap if not selected
 		if (settings != null) {
 			return settings.getOriginalLocation();
 		}

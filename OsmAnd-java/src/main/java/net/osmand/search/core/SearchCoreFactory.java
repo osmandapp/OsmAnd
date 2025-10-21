@@ -532,16 +532,38 @@ public class SearchCoreFactory {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					immediateResults.clear();
-					// FIXME
-//					 System.out.println("SEARСH " + wordToSearch + " " + r.getRegionName());
+					SearchWord lastWord = phrase.getLastSelectedWord();
+
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					req.setSearchStat(phrase.getSettings().getStat());
 					if (locSpecified) {
-						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
+						
+						if (lastWord != null && lastWord.getResult() != null
+								&& lastWord.getResult().object instanceof City c) {
+							int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());
+							int y31 = MapUtils.get31TileNumberY(c.getLocation().getLatitude());
+							int[] bb = c.getBbox31();
+							if(!r.containsAddressData(x31, y31, x31, y31)) {
+								continue;
+							} else if(bb != null && !r.containsAddressData(bb[0], bb[1], bb[2], bb[3])) {
+								continue;
+							}
+							if (bb != null) {
+								req.setBBox(x31, y31, bb[0], bb[1], bb[2], bb[3]);
+							} else {
+								req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(),
+										(int) c.getType().getRadius() * 3);
+							}
+						} else {
+							req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
 								phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
+						}
 					}
+					// FIXME
+					System.out.println("SEARСH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
+							+ (lastWord != null ? lastWord.getResult().object : ""));
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
@@ -603,6 +625,7 @@ public class SearchCoreFactory {
 							// 4 Hofäckerstraße Kernen im Remstal
 							// 4 Am Heuhaus Weinstadt
 							// 4241 Cook Hollow Road Woodhull
+							// 301 West Main Street Valley View   
 //							11601 Kelly Hill Road Pine City // TODO improve
 							// 8508 PA 61 Coal Township
 							if (matchCity(null, phrase, (City) res.object, true)) {
@@ -614,7 +637,8 @@ public class SearchCoreFactory {
 							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 							// FIXME review implementation
 //							searchPoiInCity(nphrase, res, resultMatcher);
-							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
+//							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
+							if (matchCity(null, phrase, (City) res.object, true)) {
 //								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
