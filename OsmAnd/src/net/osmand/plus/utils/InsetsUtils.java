@@ -163,7 +163,7 @@ public class InsetsUtils {
 	}
 
 	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView, @Nullable View paddingsView) {
-		processInsets(insetSupportedFragment, rootView, paddingsView, true);
+		processInsets(insetSupportedFragment, rootView, paddingsView, false);
 	}
 
 	public static void processInsets(@NonNull ISupportInsets insetSupportedFragment, @NonNull View rootView, @Nullable View paddingsView, boolean consume) {
