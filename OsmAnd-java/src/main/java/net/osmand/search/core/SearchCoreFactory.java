@@ -545,9 +545,9 @@ public class SearchCoreFactory {
 							int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());
 							int y31 = MapUtils.get31TileNumberY(c.getLocation().getLatitude());
 							int[] bb = c.getBbox31();
-							if(!r.containsAddressData(x31, y31, x31, y31)) {
+							if (bb == null && !r.containsRouteData(x31, y31, x31, y31, 15)) {
 								continue;
-							} else if(bb != null && !r.containsAddressData(bb[0], bb[1], bb[2], bb[3])) {
+							} else if(bb != null && !r.containsRouteData(bb[0], bb[1], bb[2], bb[3], 15)) {
 								continue;
 							}
 							if (bb != null) {
