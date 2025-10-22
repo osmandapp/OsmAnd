@@ -76,10 +76,4 @@ class CustomRoutingExportType extends AbstractFileExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.ROUTING;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

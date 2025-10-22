@@ -147,11 +147,11 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
-	protected boolean addInitialPoint(RotatedTileBox tb,
-	                                  double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-	                                  GeometryWayStyle<?> style, Location lastPoint, int startLocationIndex) {
+	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
+			double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
+			Location lastPoint, int startLocationIndex, List<GeometryWayPoint> points) {
 		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-				style, lastPoint, startLocationIndex);
+				style, lastPoint, startLocationIndex, points);
 		if (added) {
 			if (currentCachedSegment == null) {
 				currentCachedSegment = new Segment();

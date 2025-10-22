@@ -77,7 +77,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		remoteFiles.addAll(deletedRemoteFiles.values());
 		for (RemoteFile remoteFile : remoteFiles) {
 			ExportType exportType = ExportType.findBy(remoteFile);
-			if (exportType == null || !exportType.isEnabled() || remoteFile.isRecordedVoiceFile()) {
+			if (exportType == null || !exportType.isAvailable() || remoteFile.isRecordedVoiceFile()) {
 				continue;
 			}
 			LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
@@ -115,7 +115,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		}
 		for (LocalFile localFile : localFiles.values()) {
 			ExportType exportType = ExportType.findBy(localFile.item);
-			if (exportType == null || !exportType.isEnabled()) {
+			if (exportType == null || !exportType.isAvailable()) {
 				continue;
 			}
 			boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());

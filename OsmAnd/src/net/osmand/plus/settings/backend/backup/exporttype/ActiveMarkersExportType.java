@@ -83,10 +83,4 @@ class ActiveMarkersExportType extends AbstractExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.ACTIVE_MARKERS;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

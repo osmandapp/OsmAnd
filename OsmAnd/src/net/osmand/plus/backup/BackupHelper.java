@@ -547,14 +547,18 @@ public class BackupHelper {
 		}
 	}
 
-	void downloadFileList(
-			@Nullable OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	void downloadFileList(@Nullable OnDownloadFileListListener listener, boolean autoSync) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
 		params.put("deviceid", getDeviceId());
 		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
+
+		List<ExportType> types = ExportType.getEnabledExportTypes(app, autoSync);
+		if (!Algorithms.isEmpty(types)) {
+			params.put("type", BackupUtils.encodeExportTypes(types));
+		}
 		OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 		operationLog.startOperation();
 		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,

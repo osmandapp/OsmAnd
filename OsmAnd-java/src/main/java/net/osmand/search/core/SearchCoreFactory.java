@@ -544,13 +544,32 @@ public class SearchCoreFactory {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					immediateResults.clear();
+					SearchWord lastWord = phrase.getLastSelectedWord();
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					req.setSearchStat(phrase.getSettings().getStat());
 					if (locSpecified) {
-						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
+						if (lastWord != null && lastWord.getResult() != null
+								&& lastWord.getResult().object instanceof City c) {
+							int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());
+							int y31 = MapUtils.get31TileNumberY(c.getLocation().getLatitude());
+							int[] bb = c.getBbox31();
+							if (bb == null && !r.containsRouteData(x31, y31, x31, y31, 15)) {
+								continue;
+							} else if(bb != null && !r.containsRouteData(bb[0], bb[1], bb[2], bb[3], 15)) {
+								continue;
+							}
+							if (bb != null) {
+								req.setBBox(x31, y31, bb[0], bb[1], bb[2], bb[3]);
+							} else {
+								req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(),
+										(int) c.getType().getRadius() * 3);
+							}
+						} else {
+							req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
 								phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
+						}
 					}
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {

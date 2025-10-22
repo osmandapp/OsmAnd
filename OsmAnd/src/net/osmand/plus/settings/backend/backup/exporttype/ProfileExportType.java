@@ -81,10 +81,4 @@ class ProfileExportType extends AbstractExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.PROFILES;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

@@ -78,10 +78,4 @@ class ItineraryGroupsExportType extends AbstractExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.ITINERARY_GROUPS;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

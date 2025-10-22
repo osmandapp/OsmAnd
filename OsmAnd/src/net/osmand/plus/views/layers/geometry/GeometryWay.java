@@ -42,8 +42,6 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 	protected Map<Integer, GeometryWayStyle<?>> styleMap = Collections.emptyMap();
 	protected TreeMap<Integer, PathGeometryZoom> zooms = new TreeMap<>();
 
-	// cache arrays
-	List<GeometryWayPoint> points = new ArrayList<>();
 	//OpenGL
 	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
 	public int baseOrder = -1;
@@ -215,8 +213,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 		TByteArrayList simplification = geometryZoom != null ? geometryZoom.getSimplifyPoints() : null;
 		List<Double> odistances = geometryZoom != null ? geometryZoom.getDistances() : null;
 
-		clearArrays();
-
+		List<GeometryWayPoint> points = new ArrayList<>();
 		GeometryWayStyle<?> defaultWayStyle = getDefaultWayStyle();
 		GeometryWayStyle<?> walkWayStyle = new GeometryWalkWayStyle(getContext());
 		GeometryWayStyle<?> style = defaultWayStyle;
@@ -224,12 +221,12 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 		if (!hasMapRenderer) {
 			if (lastProjection != null) {
 				previousVisible = addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						style, lastProjection, startLocationIndex);
+						style, lastProjection, startLocationIndex, points);
 			}
 			Location nextVisiblePoint = getNextVisiblePoint();
 			if (nextVisiblePoint != null) {
 				boolean added = addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						style, nextVisiblePoint, startLocationIndex);
+						style, nextVisiblePoint, startLocationIndex, points);
 				if (added) {
 					previousVisible = true;
 				}
@@ -277,8 +274,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 					ignorePrevious = true;
 					previousVisibleIdx = -1;
 				} else {
-					addLocation(tb, i, previous == -1 || odistances == null ? 0 : odistances.get(i), style,
-							points);
+					addLocation(tb, i, previous == -1 || odistances == null ? 0 : odistances.get(i), style, points);
 					ignorePrevious = false;
 				}
 				double distToFinish = 0;
@@ -289,7 +285,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 				}
 				drawRouteSegment(tb, canvas, points, distToFinish);
 				previousVisible = false;
-				clearArrays();
+				points.clear();
 			}
 			previous = i;
 		}
@@ -375,8 +371,9 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 		points.add(pnt);
 	}
 
-	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude, double bottomLatitude,
-	                                  double rightLongitude, GeometryWayStyle<?> style, Location lastPoint, int startLocationIndex) {
+	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
+			double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
+			Location lastPoint, int startLocationIndex, List<GeometryWayPoint> points) {
 		if (hasMapRenderer() || (leftLongitude <= lastPoint.getLongitude() && lastPoint.getLongitude() <= rightLongitude
 				&& bottomLatitude <= lastPoint.getLatitude() && lastPoint.getLatitude() <= topLatitude)) {
 			addLocation(tb, lastPoint.getLatitude(), lastPoint.getLongitude(), startLocationIndex, 0, true,
@@ -454,11 +451,6 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 	protected boolean shouldDrawArrows() {
 		return true;
 	}
-
-	private void clearArrays() {
-		points.clear();
-	}
-
 
 	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
 	                             List<GeometryWayPoint> points, double distToFinish) {

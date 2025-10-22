@@ -137,6 +137,7 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	public void update() {
+		if (!plugin.isRecording()) return;
 		CurrentRecording recording = plugin.getCurrentRecording();
 		UiUtilities iconsCache = requireMapActivity().getApp().getUIUtilities();
 

@@ -153,7 +153,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private final ExecutorService parseGpxRouteSingleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
-	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
+	private final Map<String, CachedTrack> segmentsCache = new ConcurrentHashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new HashMap<>();
 	private SelectedGpxFile tmpVisibleTrack;
 

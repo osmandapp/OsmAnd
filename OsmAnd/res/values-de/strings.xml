@@ -5799,21 +5799,7 @@
     <string name="shared_string_flat">Flach</string>
     <string name="shared_string_switch">Umschalten</string>
     <string name="show_rasterization_debug_tile">Informationen zur Kachelrasterung anzeigen</string>
-    <string name="release_5_2">
-        • Straßen- und Stadtdetails zu den Suchergebnissen hinzugefügt\n\n
-        • Neue Widgets zur Aufzeichnung von Fahrten: Höchstgeschwindigkeit, durchschnittliche Steigung und verbesserte Bergauf-/Bergab-Anzeige\n\n
-        • Neuer nautischer Kartenstil „Marine“ mit umfangreichen Anpassungsoptionen\n\n
-        • Verbesserte Geschwindigkeit der Kartenwiedergabe\n\n
-        • Verbesserte Konnektivität mit OBDII-BLE-Adaptern\n\n
-        • Herzfrequenzmessungen zu „Analyse nach Intervall” hinzugefügt\n\n
-        • Anzeige der Dauer für geplante Strecken hinzugefügt\n\n
-        • Höheneinheiten können jetzt separat von Entfernungseinheiten eingestellt werden\n\n
-        • Verbesserte Schnellaktion für die Kartenausrichtung mit wählbaren Kompassmodi\n\n
-        • Für Android Auto wurden Vorwarnungen für fehlende Karten und Privatstraßen hinzugefügt\n\n
-        • Problem mit falschen Größenparametern für das Widget „Radiuslineal” behoben\n\n
-        • Umgekehrte Bildschirmausrichtung hinzugefügt\n\n
-        • Verbesserte Benutzeroberfläche für die Angabe von Lkw-Messwerten\n\n
-    </string>
+    <string name="release_5_2">• Straßen- und Stadtdetails zu den Suchergebnissen hinzugefügt\n\n • Neue Widgets zur Aufzeichnung von Fahrten: Höchstgeschwindigkeit, durchschnittliche Steigung und verbesserte Bergauf-/Bergab-Anzeige\n\n • Neuer nautischer Kartenstil „Marine“ mit umfangreichen Anpassungsoptionen\n\n • Geschwindigkeit der Kartenwiedergabe verbessert\n\n • Konnektivität mit OBD-II-BLE-Adaptern verbessert\n\n • Herzfrequenzmessungen zu „Analyse nach Intervall“ hinzugefügt\n\n • Anzeige der Dauer für geplante Strecken hinzugefügt\n\n • Höheneinheiten können jetzt separat von Entfernungseinheiten eingestellt werden\n\n • Schnellaktion für die Kartenausrichtung mit wählbaren Kompassmodi verbessert\n\n • Für Android Auto wurden Vorwarnungen für fehlende Karten und Privatstraßen hinzugefügt\n\n • Problem mit falschen Größenparametern für das Widget „Radiuslineal“ behoben\n\n • Umgekehrte Bildschirmausrichtung hinzugefügt\n\n • Benutzeroberfläche für die Angabe von Lkw-Messwerten verbessert</string>
     <string name="shared_string_threads">Threads</string>
     <string name="threads_allocated_for_rendering">Für das Rendern zugewiesene Threads</string>
     <string name="threads_allocated_for_rendering_desc">Eine niedrigere Threadzuweisung kann die Kartendarstellung in einigen Fällen beschleunigen.</string>
@@ -5834,7 +5820,7 @@
     <string name="descent">Gefälle</string>
     <string name="map_orientations_choose_description">Leer lassen, um zwischen allen verfügbaren Modi zu wechseln, oder nur Ihre bevorzugten Modi hinzufügen.</string>
     <string name="map_orientations">Kartenorientierungen</string>
-    <string name="altitude_metrics_description">Legt die Anzeigeeinheit für die Höhe in Widgets und Statistiken fest.</string>
+    <string name="altitude_metrics_description">Bestimmt die Einheit für die Höhenanzeige in Widgets und Statistiken.</string>
     <string name="write_location_provider_description">Standortanbieter während der Aufzeichnung für jeden Aufnahmepunkt speichern</string>
     <string name="write_location_provider">Standortanbieter schreiben</string>
     <string name="map_orientation_landscape_inverted">Querformat (umgekehrt)</string>
@@ -5928,4 +5914,6 @@
     <string name="average_slope">Durchschnittliche Hangneigung</string>
     <string name="shared_string_last_uphill">Letzte Bergauffahrt</string>
     <string name="shared_string_last_downhill">Letzte Bergabfahrt</string>
+    <string name="requires_internet_connection">Benötigt eine Internetverbindung</string>
+    <string name="save_and_access_articles_offline">Daten speichern und überall offline auf Artikel zugreifen</string>
 </resources>

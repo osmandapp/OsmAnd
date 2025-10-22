@@ -181,7 +181,7 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 	@NonNull
 	private List<ExportType> getEnabledExportTypes() {
 		List<ExportType> result = new ArrayList<>();
-		for (ExportType exportType : ExportType.enabledValues()) {
+		for (ExportType exportType : ExportType.availableValues()) {
 			if (backupHelper.getBackupTypePref(exportType, autoSync).get()) {
 				result.add(exportType);
 			}

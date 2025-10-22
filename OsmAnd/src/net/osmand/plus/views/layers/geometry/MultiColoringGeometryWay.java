@@ -301,10 +301,10 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 
 	@Override
 	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
-	                                  double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
-	                                  Location lastPoint, int startLocationIndex) {
+			double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
+			Location lastPoint, int startLocationIndex, List<GeometryWayPoint> points) {
 		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-				style, lastPoint, startLocationIndex);
+				style, lastPoint, startLocationIndex, points);
 		if (!added) {
 			return false;
 		}

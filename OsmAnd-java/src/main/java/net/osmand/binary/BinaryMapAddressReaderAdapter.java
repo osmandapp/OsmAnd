@@ -85,10 +85,11 @@ public class BinaryMapAddressReaderAdapter {
 		List<CitiesBlock> cities = new ArrayList<BinaryMapAddressReaderAdapter.CitiesBlock>();
 
 		LatLon calculatedCenter = null;
-		int bottom31;
-		int top31;
-		int right31;
-		int left31;
+		// should be written to osmand.indexes cache
+//		int bottom31;
+//		int top31;
+//		int right31;
+//		int left31;
 
 		public String getEnName() {
 			return enName;
@@ -155,16 +156,21 @@ public class BinaryMapAddressReaderAdapter {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndTileBox.LEFT_FIELD_NUMBER:
-				region.left31 = codedIS.readUInt32();
+				// should be written to osmand.indexes cache
+//				region.left31 = codedIS.readUInt32();
+				codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndTileBox.RIGHT_FIELD_NUMBER:
-				region.right31 = codedIS.readUInt32();
+//				region.right31 = codedIS.readUInt32();
+				codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndTileBox.TOP_FIELD_NUMBER:
-				region.top31 = codedIS.readUInt32();
+//				region.top31 = codedIS.readUInt32();
+				codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndTileBox.BOTTOM_FIELD_NUMBER:
-				region.bottom31 = codedIS.readUInt32();
+//				region.bottom31 = codedIS.readUInt32();
+				codedIS.readUInt32();
 				break;
 			default:
 				skipUnknownField(t);

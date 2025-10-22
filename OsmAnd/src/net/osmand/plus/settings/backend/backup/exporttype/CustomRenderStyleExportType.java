@@ -68,10 +68,4 @@ class CustomRenderStyleExportType extends AbstractFileExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.RENDERING_STYLES;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

@@ -78,12 +78,6 @@ class TracksExportType extends AbstractFileExportType {
 
 	@Nullable
 	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
-
-	@Nullable
-	@Override
 	public ExportType getAdditionalExportType() {
 		return ExportType.GPX_DIR;
 	}

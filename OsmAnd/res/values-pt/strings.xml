@@ -5772,7 +5772,21 @@
     <string name="ascent">Subida</string>
     <string name="descent">Descida</string>
     <string name="reverse_mode">Modo invertido</string>
-    <string name="release_5_2">• Trabalho em andamento...</string>
+    <string name="release_5_2">
+        • Adicionados detalhes de rua e cidade aos resultados da pesquisa\n\n
+        • Novos widgets de Gravação de Percurso: Velocidade Máxima, Inclinação Média e subida/descida melhoradas\n\n
+        • Novo estilo de mapa náutico "Marine" com extensas opções de personalização\n\n
+        • Velocidade de renderização do mapa melhorada\n\n
+        • Conectividade melhorada com adaptadores OBDII BLE\n\n
+        • Adicionadas métricas de frequência cardíaca ao "Analisar por Intervalo"\n\n
+        • Adicionada exibição de duração para trilhas planejadas\n\n
+        • As unidades de altitude agora podem ser definidas separadamente das unidades de distância\n\n
+        • Melhorada a Ação Rápida de orientação do mapa com modos de bússola selecionáveis\n\n
+        • Para o Android Auto, adicionados alertas de pré-navegação para mapas ausentes e estradas privadas\n\n
+        • Resolvido um problema com parâmetros de tamanho incorretos para o widget Régua de Raio\n\n
+        • Adicionadas orientações de tela invertidas\n\n
+        • Melhorada a interface do usuário para especificar métricas de caminhão\n\n
+    </string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Resposta</string>

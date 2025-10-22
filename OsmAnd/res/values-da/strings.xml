@@ -5799,7 +5799,21 @@
     <string name="deleting">Sletter…</string>
     <string name="deleting_history">Sletter historik…</string>
     <string name="show_rasterization_debug_tile">Vis oplysninger om rasterisering af kortfliser</string>
-    <string name="release_5_2">• Tilføjet gade- og byoplysninger til søgeresultaterne\n\n • Nye moduler til registrering af ture: Maksimal hastighed, gennemsnitlig stigning og forbedret stigning/nedstigning\n\n • Ny maritim søkortstil med omfattende tilpasningsmuligheder\n\n • Forbedret kortgengivelseshastighed\n\n • Forbedret tilslutningsmuligheder med OBDII BLE-adaptere\n\n • Tilføjet pulsmålinger til Analyser efter interval\n\n • Tilføjet visning af varighed for planlagte spor\n\n • Højdeenheder kan nu indstilles separat fra afstandsenheder\n\n • Forbedret kortorientering-hurtighandling med valgbare kompasfunktioner\n\n • For Android Auto er der tilføjet advarsler før navigation om manglende kort og private veje.\n\n • Løst et problem med forkerte størrelsesparametre for Radius lineal-modulet.\n\n • Tilføjet omvendt skærmretning\n\n • Forbedret brugergrænseflade til angivelse af lastbilens målinger</string>
+    <string name="release_5_2">
+        • Tilføjet gade- og byoplysninger til søgeresultater\n\n
+        • Nye widgets til Turoptagelse: Maks. hastighed, Gennemsnitlig hældning og forbedret Op ad bakke/Ned ad bakke\n\n
+        • Ny "Marine" nautisk kortstil med omfattende tilpasningsmuligheder\n\n
+        • Forbedret hastighed for kortgengivelse\n\n
+        • Forbedret forbindelse med OBDII BLE-adaptere\n\n
+        • Tilføjet pulsmålinger til "Analyser efter interval"\n\n
+        • Tilføjet visning af varighed for planlagte spor\n\n
+        • Højdeenheder kan nu indstilles separat fra afstandsenheder\n\n
+        • Forbedret Hurtig Handling for kortorientering med valgbare kompastilstande\n\n
+        • Til Android Auto, tilføjet præ-navigationsadvarsler for manglende kort og private veje\n\n
+        • Løst et problem med forkerte størrelsesparametre for widgetten Radiuslineal\n\n
+        • Tilføjet omvendte skærmorienteringer\n\n
+        • Forbedret brugergrænsefladen til specificering af lastbilmålinger\n\n
+    </string>
     <string name="shared_string_threads">Tråde</string>
     <string name="threads_allocated_for_rendering">Tråde allokeret til rendering</string>
     <string name="threads_allocated_for_rendering_desc">Lavere trådallokering kan i nogle tilfælde gøre kortgengivelsen hurtigere.</string>

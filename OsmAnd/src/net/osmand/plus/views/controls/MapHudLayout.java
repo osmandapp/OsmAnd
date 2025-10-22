@@ -282,7 +282,7 @@ public class MapHudLayout extends FrameLayout {
 		} else if (id == R.id.add_gpx_point_bottom_sheet || id == R.id.recording_note_layout) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_BOTTOM);
-			position.setPositionHorizontal(POS_FULL_WIDTH);
+			position.setPositionHorizontal(portrait ? POS_FULL_WIDTH : POS_LEFT);
 		} else if (view instanceof RulerWidget) {
 			position.setMoveHorizontal();
 			position.setPositionVertical(POS_BOTTOM);

@@ -96,7 +96,7 @@ class BackupImporter {
 				} else {
 					error.append(message);
 				}
-			});
+			}, autoSync);
 		} catch (UserNotRegisteredException e) {
 			throw new IllegalArgumentException(e.getMessage(), e);
 		}
