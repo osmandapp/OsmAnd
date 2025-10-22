@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -72,6 +73,7 @@ import net.osmand.plus.utils.CollatorFilteredAdapter;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
@@ -312,6 +314,11 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createHorizontalLandscape(R.id.tab_layout_container, R.id.toolbar, R.id.name_container, R.id.poi_type_container, R.id.viewpager).build());
+/*		collection.add(InsetTarget.createCustomBuilder(R.id.bottom_buttons_container)
+				.portraitSides(InsetSide.TOP)
+				.typeMask(WindowInsetsCompat.Type.ime())
+				.applyPadding(true)
+				.build());*/
 		return collection;
 	}
 

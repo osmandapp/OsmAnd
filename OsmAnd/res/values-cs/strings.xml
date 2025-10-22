@@ -2570,7 +2570,6 @@
     <string name="monthly_map_updates">Aktualizace map každý měsíc</string>
     <string name="daily_map_updates">Aktualizace map každou hodinu</string>
     <string name="download_wikipedia_description">Stáhnout články Wikipedie pro %1$s a číst je v režimu offline.</string>
-    <string name="download_wikipedia_label">Stahování dat z Wikipedie</string>
     <string name="open_in_browser_wiki">Otevřít článek online</string>
     <string name="open_in_browser_wiki_description">Zobrazit článek ve webovém prohlížeči.</string>
     <string name="download_wiki_region_placeholder">tato oblast</string>
@@ -2600,8 +2599,6 @@
     <string name="unirs_render_descr">Upravený základní styl pro zvýšení kontrastu pěších a cyklistických cest. Používá starší barvy Mapnik.</string>
     <string name="shared_string_bookmark">Záložka</string>
     <string name="off_road_render_descr">Pro off-road terénní jízdu, založený na stylu \'Topo\' a pro použití se zelenými satelitními snímky jako podkladovou vrstvou. Zmenšená tloušťka hlavních cest, zvětšená tloušťka polních cest, pěšin, cyklotras a dalších cest.</string>
-    <string name="open_wikipedia_link_online">Otevřít odkaz Wikipedia na internetu</string>
-    <string name="open_wikipedia_link_online_description">Odkaz bude otevřen v internetovém prohlížeči.</string>
     <string name="read_wikipedia_offline_description">Stahování Wikipedia a Wikivoyage článků pro čtení offline je dostupné pouze předplatitelům OsmAnd Live.</string>
     <string name="how_to_open_link">Jak otevřít odkaz?</string>
     <string name="read_wikipedia_offline">Číst Wikipedii offline</string>
@@ -5772,7 +5769,21 @@
     <string name="deleting_history">Mazání historie…</string>
     <string name="deleting">Mazání…</string>
     <string name="show_rasterization_debug_tile">Zobrazit informace o rasterizaci dlaždic</string>
-    <string name="release_5_2">• V přípravě…</string>
+    <string name="release_5_2">
+        • Do výsledků vyhledávání byly přidány podrobnosti o ulici a městě\n\n
+        • Nové widgety Záznamu trasy: Maximální rychlost, Průměrný sklon a vylepšené Stoupání/Klesání\n\n
+        • Nový styl námořní mapy "Marine" s rozsáhlými možnostmi přizpůsobení\n\n
+        • Vylepšená rychlost vykreslování mapy\n\n
+        • Vylepšená konektivita s adaptéry OBDII BLE\n\n
+        • Přidány metriky srdečního tepu do "Analyzovat podle intervalu"\n\n
+        • Přidáno zobrazení doby trvání plánovaných tras\n\n
+        • Jednotky nadmořské výšky lze nyní nastavit odděleně od jednotek vzdálenosti\n\n
+        • Vylepšena Rychlá akce orientace mapy s volitelnými režimy kompasu\n\n
+        • Pro Android Auto přidána upozornění před navigací na chybějící mapy a soukromé silnice\n\n
+        • Vyřešen problém s nesprávnými parametry velikosti widgetu Pravítko poloměru\n\n
+        • Přidány obrácené orientace obrazovky\n\n
+        • Vylepšeno uživatelské rozhraní pro zadávání metrik nákladních vozidel\n\n
+    </string>
     <string name="shared_string_threads">Vlákna</string>
     <string name="threads_allocated_for_rendering">Vlákna alokovaná pro vykreslování</string>
     <string name="threads_allocated_for_rendering_desc">Menší počet alokovaných vláken může v některých případech zrychlit vykreslování mapy.</string>
@@ -5794,7 +5805,7 @@
     <string name="n_a">N/A</string>
     <string name="write_location_provider_description">Uložit poskytovatele polohy pro každý bod stopy během nahrávání</string>
     <string name="write_location_provider">Zapsat poskytovatele polohy</string>
-    <string name="altitude_metrics_description">Nastaví jednotku zobrazení nadmořské výšky ve widgetech a statistikách.</string>
+    <string name="altitude_metrics_description">Nastaví zobrazenou jednotku pro nadmořskou výšku ve widgetech a statistikách.</string>
     <string name="backup_delete_data_warning_extended">Tato akce trvale odstraní všechna vybraná data z cloudu. Později nebude možné je obnovit.</string>
     <string name="amount_of_total_used">%1$s z %2$s použito</string>
     <string name="delete_data">Smazat data</string>
@@ -5812,7 +5823,6 @@
     <string name="liter_single">Litr</string>
     <string name="miles">Míle</string>
     <string name="mpg">MPG</string>
-    <string name="private_access_routing_req_short">Váš cíl je v soukromé oblasti. Chcete povolit použití soukromých cest?</string>
     <string name="view_on_phone">Zobrazit na telefonu</string>
     <string name="average_elevation">Průměrná nadmořská výška</string>
     <string name="ascent">Stoupání</string>
@@ -5888,4 +5898,8 @@
     <string name="shared_string_last_downhill">Poslední klesání</string>
     <string name="help_article_navigation_routing_ski_routing_name">Lyžařské trasy a sjezdovky</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžařské trasy a sjezdovky</string>
+    <string name="requires_internet_connection">Vyžaduje připojení k internetu</string>
+    <string name="private_access_routing_req_short">Povolit použití soukromých cest k dosažení vašeho cíle?</string>
+    <string name="download_wikipedia_label">Stáhnout Wikipedii</string>
+    <string name="save_and_access_articles_offline">Uložte si data a přistupujte ke článkům offline kdekoli</string>
 </resources>

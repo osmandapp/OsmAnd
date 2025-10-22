@@ -2549,8 +2549,6 @@
     <string name="topo_render_descr">Для походів, пішого та вело туризму. Добре читається на вулиці. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти ізоліній, більше подробиць. Налаштування однорідності поверхні дозволяє відрізняти якість дороги. Нічного режиму немає.</string>
     <string name="touring_view_render_descr">Туристичний стиль з високим контрастом та високою деталізацією. Включає всі типові параметри стилю OsmAnd, показуючи при цьому докладні відомості, зокрема дороги, стежки та інші шляхи для подорожі. \"Туристичний атлас\" чітко показує різницю між типами доріг. Підходить для денного, нічного та використання на природі.</string>
     <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить маршрути, відомості про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC/CAI, елементи сплавних водних видів спорту, топографічні функції, такі як ізолінії.</string>
-    <string name="open_wikipedia_link_online">Перейти за посиланням до Вікіпедії</string>
-    <string name="open_wikipedia_link_online_description">Посилання буде відкрите в вебоглядачі.</string>
     <string name="read_wikipedia_offline_description">Передплатіть OsmAnd Live, щоб читати статті з Вікіпедії та Вікімандрів в офлайн режимі.</string>
     <string name="read_wikipedia_offline">Читати Вікіпедію в офлайн режимі</string>
     <string name="purchase_cancelled_dialog_title">Ви скасували передплату OsmAnd Live</string>
@@ -2624,7 +2622,6 @@
     <string name="access_intermediate_arrival_time">Прибуття в проміжний пункт призначення</string>
     <string name="map_widget_intermediate_time">Час до проміжного пункту призначення</string>
     <string name="download_wikipedia_description">Завантажити статті Вікіпедії для %1$s, щоб читати їх офлайн.</string>
-    <string name="download_wikipedia_label">Завантаження даних Вікіпедії</string>
     <string name="open_in_browser_wiki">Відкрити статтю в Інтернеті</string>
     <string name="open_in_browser_wiki_description">Переглянути статтю в оглядачі.</string>
     <string name="download_wiki_region_placeholder">цей регіон</string>
@@ -5777,7 +5774,21 @@
     <string name="deleting">Видалення…</string>
     <string name="deleting_history">Видалення історії…</string>
     <string name="show_rasterization_debug_tile">Показати інформацію про растеризацію плиток</string>
-    <string name="release_5_2">• Робота триває...</string>
+    <string name="release_5_2">
+        • Додано деталі вулиць і міст до результатів пошуку\n\n
+        • Нові віджети запису поїздок: максимальна швидкість, середній ухил і покращений підйом/спуск\n\n
+        • Новий стиль морської карти «Marine» з широкими можливостями налаштування\n\n
+        • Покращено швидкість відображення карти\n\n
+        • Покращено зв\'язок з адаптерами OBDII BLE\n\n
+        • Додано показники серцевого ритму до «Аналізу за інтервалами»\n\n
+        • Додано відображення тривалості для запланованих маршрутів\n\n
+        • Одиниці вимірювання висоти тепер можна встановлювати окремо від одиниць вимірювання відстані\n\n
+        • Покращено швидку дію орієнтації карти з можливістю вибору режимів компаса\n\n
+        • Для Android Auto додано попередження перед навігацією про відсутні карти та приватні дороги\n\n
+        • Вирішено проблему з неправильними параметрами розміру для віджета «Радіус лініка»\n\n
+        • Додано інвертовану орієнтацію екрана\n\n
+        • Покращено користувацький інтерфейс для вказання показників вантажівки\n\n
+    </string>
     <string name="shared_string_threads">Теми</string>
     <string name="threads_allocated_for_rendering">Потоки, виділені для рендерингу</string>
     <string name="threads_allocated_for_rendering_desc">У деяких випадках менший розподіл потоків може пришвидшити рендеринг карти.</string>
@@ -5850,7 +5861,6 @@
     <string name="rendering_attr_tidalFlatStyle_description">Стиль припливних відмілин</string>
     <string name="rendering_attr_watercolor_name">Колір води</string>
     <string name="rendering_attr_watercolor_description">Колір з води</string>
-    <string name="private_access_routing_req_short">Ваш пункт призначення знаходиться на приватній території. Дозволити користування приватними дорогами?</string>
     <string name="view_on_phone">Переглянути на телефоні</string>
     <string name="backup_delete_data_warning_extended">Ця дія назавжди видалить усі вибрані дані з хмари. Відновити їх пізніше буде неможливо.</string>
     <string name="amount_of_total_used">Використано %1$s з %2$s</string>
@@ -5893,4 +5903,8 @@
     <string name="shared_string_last_downhill">Останній спуск</string>
     <string name="help_article_navigation_routing_ski_routing_name">Гірськолижні схили та маршрути</string>
     <string name="rendering_attr_pisteRoutes_name">Гірськолижні схили та маршрути</string>
+    <string name="requires_internet_connection">Потрібне підключення до Інтернету</string>
+    <string name="save_and_access_articles_offline">Зберігайте дані та отримуйте доступ до статей офлайн будь-де</string>
+    <string name="private_access_routing_req_short">Дозволити користуватися приватною дорогою, щоб дістатися до пункту призначення?</string>
+    <string name="download_wikipedia_label">Завантажити Wikipedia</string>
 </resources>

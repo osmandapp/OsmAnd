@@ -2132,8 +2132,6 @@
     <string name="topo_render_descr">Para caminhadas, pedestrianismo e ciclismo de natureza. Legível em exteriores. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de linha de contorno, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
     <string name="touring_view_render_descr">Estilo turístico com alto contraste e máximo detalhe. Inclui todas as opções do estilo OsmAnd padrão, enquanto mostra o máximo de detalhes possíveis, particularmente estradas, caminhos e outras formas de viajar. Distinção clara do \"atlas turístico\" entre as categorias de estrada. Adequado para uso diurno, noturno e ao ar livre.</string>
     <string name="default_render_descr">Estilo de propósito geral. Cidades densas mostradas de forma limpa. Características: rotas, qualidade de superfície, restrições de acesso, escudos de estrada, caminhos conforme escala SAC/CAI, elementos desportivos de águas bravas, elementos de topografia como curvas de nível.</string>
-    <string name="open_wikipedia_link_online">Abrir página da Wikipédia na Internet</string>
-    <string name="open_wikipedia_link_online_description">A hiperligação será aberta no navegador de Internet.</string>
     <string name="read_wikipedia_offline_description">Obtenha uma subscrição do OsmAnd Live para ler artigos da Wikipédia e da Wikivoyage desligado da Internet.</string>
     <string name="how_to_open_link">Como abrir a hiperligação\?</string>
     <string name="read_wikipedia_offline">Ler a Wikipédia desligado da Internet</string>
@@ -2663,7 +2661,6 @@
     <string name="tunnel_warning">Túnel à frente</string>
     <string name="show_tunnels">Túneis</string>
     <string name="download_wikipedia_description">Descarregar artigos da Wikipédia de %1$s para lê-los offline.</string>
-    <string name="download_wikipedia_label">Descarregar dados da Wikipédia</string>
     <string name="open_in_browser_wiki">Abrir artigo na Internet</string>
     <string name="open_in_browser_wiki_description">Ver artigo no navegador web.</string>
     <string name="download_wiki_region_placeholder">esta região</string>
@@ -5775,7 +5772,21 @@
     <string name="ascent">Subida</string>
     <string name="descent">Descida</string>
     <string name="reverse_mode">Modo invertido</string>
-    <string name="release_5_2">• Trabalho em andamento...</string>
+    <string name="release_5_2">
+        • Adicionados detalhes de rua e cidade aos resultados da pesquisa\n\n
+        • Novos widgets de Gravação de Percurso: Velocidade Máxima, Inclinação Média e subida/descida melhoradas\n\n
+        • Novo estilo de mapa náutico "Marine" com extensas opções de personalização\n\n
+        • Velocidade de renderização do mapa melhorada\n\n
+        • Conectividade melhorada com adaptadores OBDII BLE\n\n
+        • Adicionadas métricas de frequência cardíaca ao "Analisar por Intervalo"\n\n
+        • Adicionada exibição de duração para trilhas planejadas\n\n
+        • As unidades de altitude agora podem ser definidas separadamente das unidades de distância\n\n
+        • Melhorada a Ação Rápida de orientação do mapa com modos de bússola selecionáveis\n\n
+        • Para o Android Auto, adicionados alertas de pré-navegação para mapas ausentes e estradas privadas\n\n
+        • Resolvido um problema com parâmetros de tamanho incorretos para o widget Régua de Raio\n\n
+        • Adicionadas orientações de tela invertidas\n\n
+        • Melhorada a interface do usuário para especificar métricas de caminhão\n\n
+    </string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Resposta</string>
@@ -5817,7 +5828,6 @@
     <string name="add_to_favorites">Adicionar aos favoritos</string>
     <string name="max_weight_at_full_load_description">Informe o peso máximo do seu veículo com carga total para evitar estradas e pontes com limites de peso.</string>
     <string name="max_axle_load_description">Forneça a carga máxima por eixo do seu veículo para evitar estradas e pontes com limites de peso.</string>
-    <string name="private_access_routing_req_short">O seu destino está numa área privada. Permite o uso de estradas privadas?</string>
     <string name="view_on_phone">Ver no telemóvel</string>
     <string name="map_orientations_choose_description">Deixe em branco para alternar entre todos os modos disponíveis ou adicione apenas os seus preferidos.</string>
     <string name="map_orientations">Orientações do mapa</string>
@@ -5869,4 +5879,10 @@
     <string name="rendering_attr_tidalFlatStyle_name">Estilo de planície de maré</string>
     <string name="rendering_attr_tidalFlatStyle_description">Estilo das planícies de maré</string>
     <string name="show_local_names">Mostrar nomes locais</string>
+    <string name="track_folder_appearance">Aparência da pasta de trilhas</string>
+    <string name="update_maps">Atualizar mapas</string>
+    <string name="reconnect">Reconectar</string>
+    <string name="rendering_attr_showSkiSlopes_name">Mostrar pistas de esqui</string>
+    <string name="rendering_attr_showSkiSlopes_description">Mostrar pistas de esqui simplificadas</string>
+    <string name="trip_recording_downhill_widget_desc">Mostra a soma de todas as descidas ou a última descida da viagem atualmente registada.</string>
 </resources>

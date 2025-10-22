@@ -1696,9 +1696,7 @@
     <string name="off_road_render_descr">Za vozenje nadvor od patot zasnovan na stilot „Topo“ i za upotreba so zeleni satelitski snimki kako podloga. Namalena debelina na glavniot pat, zgolemena debelina na pateki, velosipedski i drugi pravci.</string>
     <string name="light_rs_render_descr">Ednostaven stil na vozenje. Nežen noḱen režim, konturni linii, kontrastni patišta so portokalov stil, zatemnuvaat sekundarni objekti na kartata.</string>
     <string name="topo_render_descr">Za pešačenje, treking i vozenje velosiped vo priroda. Može da se čita na otvoreno. Kontrastni patišta i prirodni objekti, različni tipovi maršruti, napredni opcii za konturni linii, dopolnitelni detali. Prilagoduvanjeto na integritetot na površinata go razlikuva kvalitetot na patot. Nema noḱen režim.</string>
-    <string name="open_wikipedia_link_online">Otvorete ja vrskata na Vikipedija na internet</string>
-    <string name="default_render_descr">Stil za opšta namena. Gustite gradovi prikažani čisto. Se odlikuva so konturni linii, maršruti, kvalitet na površinata, ograničuvanja na pristapot, štitovi na patištata, pateki koi se prikažuvaat spored skalata SAC, sportovi na bela voda.</string>
-    <string name="open_wikipedia_link_online_description">Vrskata ḱe se otvori vo veb-prelistuvač.</string>
+	<string name="default_render_descr">Stil za opšta namena. Gustite gradovi prikažani čisto. Se odlikuva so konturni linii, maršruti, kvalitet na površinata, ograničuvanja na pristapot, štitovi na patištata, pateki koi se prikažuvaat spored skalata SAC, sportovi na bela voda.</string>
     <string name="how_to_open_link">Kako da ja otvorite vrskata\?</string>
     <string name="read_wikipedia_offline_description">Dobijte pretplata za OsmAnd Live za da čitate statii na Vikipedija i Vikipatuvanje oflajn.</string>
     <string name="paid_plugin">Platen priklucok</string>
@@ -4548,7 +4546,6 @@
     <string name="toast_empty_name_error">Neimenuvana lokacija</string>
     <string name="tunnel_warning">Tunel napred</string>
     <string name="show_tunnels">Tuneli</string>
-    <string name="download_wikipedia_label">Prezemete podatoci od Vikipedija</string>
     <string name="download_wikipedia_description">Prevzemete gi statiite na Vikipedija za %1$s da gi proučite oflajn.</string>
     <string name="wiki_article_search_text">Prebaruvanje na soodvetnata viki statija</string>
     <string name="routeInfo_roadClass_name">Tip na pat</string>

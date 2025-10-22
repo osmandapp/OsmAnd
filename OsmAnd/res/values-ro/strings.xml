@@ -2736,8 +2736,6 @@
     <string name="wikivoyage_offline">Wikivoyage deconectat</string>
     <string name="wikipedia_offline">Wikipedia fără conexiune</string>
     <string name="purchase_cancelled_dialog_title">Ați anulat abonamentul la OsmAnd Live</string>
-    <string name="open_wikipedia_link_online">Deschideți linkul Wikipedia online</string>
-    <string name="open_wikipedia_link_online_description">Link-ul va fi deschis într-un browser web.</string>
     <string name="read_wikipedia_offline">Citiți Wikipedia offline</string>
     <string name="button_rate">Evaluează</string>
     <string name="sett_no_ext_input">Niciunul</string>
@@ -4096,7 +4094,6 @@
     <string name="download_wiki_region_placeholder">această regiune</string>
     <string name="open_in_browser_wiki_description">Vizualizați articolul într-un browser web.</string>
     <string name="open_in_browser_wiki">Deschideți articolul online</string>
-    <string name="download_wikipedia_label">Descărcați datele Wikipedia</string>
     <string name="download_wikipedia_description">Descărcați articolele din Wikipedia pentru %1$s a le citi offline.</string>
     <string name="show_tunnels">Tuneluri</string>
     <string name="tunnel_warning">Tunel în față</string>
@@ -4901,7 +4898,7 @@
     <string name="check_for_updates">Caută actualizări</string>
     <string name="changes">Modificări %1$s</string>
     <string name="cloud_changes">Modificări Cloud</string>
-    <string name="shared_string_cloud">Nor</string>
+    <string name="shared_string_cloud">Cloud</string>
     <string name="new_file">Fișier nou</string>
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>

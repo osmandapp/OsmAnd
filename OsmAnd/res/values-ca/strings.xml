@@ -2557,7 +2557,6 @@
     <string name="monthly_map_updates">Actualització mensual de mapes</string>
     <string name="daily_map_updates">Actualització horària de mapes</string>
     <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia de %1$s per llegir-los fora de línia.</string>
-    <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
     <string name="open_in_browser_wiki">Obre l\'article en línia</string>
     <string name="open_in_browser_wiki_description">Consulta l\'article en un navegador.</string>
     <string name="download_wiki_region_placeholder">aquesta regió</string>
@@ -2584,8 +2583,6 @@
     <string name="unlock_all_features">Desbloca totes les funcions de OsmAnd</string>
     <string name="shared_string_wikivoyage">Viquiviatges</string>
     <string name="index_item_world_wikivoyage">Articles de Viquiviatges d\'arreu</string>
-    <string name="open_wikipedia_link_online">Obre l\'enllaç en línia de Viquipèdia</string>
-    <string name="open_wikipedia_link_online_description">L\'enllaç s\'obrirà en el vostre navegador.</string>
     <string name="how_to_open_link">Com obrir l\'enllaç?</string>
     <string name="read_wikipedia_offline">Consulta la Viquipèdia en local</string>
     <string name="download_all">Baixa-ho tot</string>
@@ -4549,7 +4546,21 @@
     <string name="years_3">Tres anys</string>
     <string name="osm_live_payment_3_years_title">Cada tres anys</string>
     <string name="three_years_subscription">Subscripció de tres anys</string>
-    <string name="release_5_2">• Treball en curs...</string>
+    <string name="release_5_2">
+        • S\'han afegit detalls de carrer i ciutat als resultats de la cerca\n\n
+        • Nous ginys de gravació de viatges: Velocitat màxima, Pendent mitjà i Millora de Pujada/Baixada\n\n
+        • Nou estil de mapa nàutic "Marí" amb opcions de personalització àmplies\n\n
+        • Millora de la velocitat de renderització del mapa\n\n
+        • Millora de la connectivitat amb adaptadors OBDII BLE\n\n
+        • S\'han afegit mètriques de freqüència cardíaca a "Analitza per interval"\n\n
+        • S\'ha afegit la visualització de la durada per a les rutes planificades\n\n
+        • Les unitats d\'altitud ara es poden configurar per separat de les unitats de distància\n\n
+        • Millora de l\'acció ràpida d\'orientació del mapa amb modes de brúixola seleccionables\n\n
+        • Per a Android Auto, s\'han afegit alertes prèvies a la navegació per a mapes que falten i carreteres privades\n\n
+        • S\'ha resolt un problema amb paràmetres de mida incorrectes per al giny Regle de radi\n\n
+        • S\'han afegit orientacions de pantalla invertides\n\n
+        • Millora de la interfície d\'usuari per especificar mètriques de camió\n\n
+    </string>
     <string name="shared_string_switch">Commuta</string>
     <string name="ski_route_switch_style_description">Explora les pistes d\'esquí, els remuntadors, i més amb l\'estil de mapa d\'hivern i esquí.</string>
     <string name="battery">bateria</string>
@@ -5732,7 +5743,6 @@
     <string name="add_to_favorites">Afegeix als preferits</string>
     <string name="max_weight_at_full_load_description">Proporciona el pes màxim del teu vehicle a plena càrrega per evitar carreteres i ponts amb límits de pes.</string>
     <string name="max_axle_load_description">Proporciona la càrrega màxima del teu vehicle per evitar carreteres i ponts amb límits de pes.</string>
-    <string name="private_access_routing_req_short">La teva destinació es troba en una zona privada. Voleu permetre l\'ús de carreteres privades?</string>
     <string name="view_on_phone">Visualitza al telèfon</string>
     <string name="average_elevation">Elevació mitjana</string>
     <string name="ascent">Ascensió</string>

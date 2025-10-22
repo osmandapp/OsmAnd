@@ -1795,8 +1795,7 @@
     <string name="shared_string_bookmark">ബുക്ക്മാര്‍ക്ക്</string>
     <string name="hide_full_description">"പൂര്‍ണ്ണ വിവരണം  മറക്കുക "</string>
     <string name="show_full_description">"പൂര്‍ണ്ണവിവരങ്ങള്‍  കാണിക്കുക "</string>
-    <string name="open_wikipedia_link_online">വിക്കിപ്പീഡിയ ലേഖനം ഓണ്‍ലൈനില്‍ തുറക്കുക</string>
-    <string name="download_all">എല്ലാം ഡൗണ്‍ലോഡ് ചെയ്യുക</string>
+	<string name="download_all">എല്ലാം ഡൗണ്‍ലോഡ് ചെയ്യുക</string>
     <string name="shared_string_restart">"ആപ്പ് റീസ്റ്റാര്‍ട്ട് ചെയ്യുക "</string>
     <string name="show_images">ഇമേജുകള്‍ കാണിക്കുക</string>
     <string name="purchase_cancelled_dialog_title">"നിങ്ങള്‍  നിങ്ങളുടെ ഓഎസ് എംആന്റ് ലൈവ്  അംഗത്വം റദ്ചെയ്തിരിക്കുന്നു."</string>
@@ -1872,7 +1871,6 @@
     <string name="copy_location_name">"പോയിന്റ്/പിഓഐ യുടെ പേര് കോപ്പി ചെയ്യുക "</string>
     <string name="show_tunnels">"തുരങ്കങ്ങള്‍ "</string>
     <string name="download_wikipedia_description">%1$s വിക്കിപീഡിയ ലേഖനങ്ങള്‍ ഓഫ്ലൈനില്‍ വായിക്കാനായ് ഡൗണ്‍ലോഡ് ചെയ്യു</string>
-    <string name="download_wikipedia_label">"വിക്കിപ്പീഡിയ വിവരങ്ങള്‍ ഡൗണ്‍ലോഡ്  ചെയ്യുക "</string>
     <string name="open_in_browser_wiki">"പൂര്‍ണ്ണ ലേഖനം ഓണ്‍ലൈനില്‍ വായിക്കുക "</string>
     <string name="open_in_browser_wiki_description">"വെബ് ബ്റൗസറില്‍ ലേഖനം കാണുക  "</string>
     <string name="download_wiki_region_placeholder">ഈ പ്രദേശം</string>
@@ -2537,7 +2535,6 @@
     <string name="start_editing_card_description">വിക്കിവൊയേജിലെ ഏതൊരു ആർട്ടിക്കിളും നിങ്ങള്‍ക്ക് തിരുത്താം. അറിവ്| അനുഭവം| കഴിവുകൾ| നിങ്ങളുടെ ശ്രദ്ധ എന്നിവ പങ്കിടാം</string>
     <string name="get_unlimited_access">പരിധിയില്ലാത്ത ആക്സസ്സ് നേടുക</string>
     <string name="welcome_to_open_beta">ബീറ്റയിലേക്ക് വേര്‍ഷനിലേക്ക് സ്വാഗതം</string>
-    <string name="open_wikipedia_link_online_description">വെബ് ബ്രൗസറിൽ ലിങ്ക് തുറക്കുക.</string>
     <string name="topo_render_descr">"ഹൈക്കിംങ്| ട്രക്കിങ്| സൈക്ലിംഗ് എന്നിവയ്ക്ക് വേണ്ടി രൂപകൽപ്പന ചെയ്ത കോൺട്രാസ്റ്റ് ശൈലി. സങ്കീർണ്ണമായ വെളിച്ചത്തില്‍ പോലും  വായിക്കാനായ്. പ്രധാന സവിശേഷതകൾ: റോഡുകളും സ്വാഭാവിക വസ്തുക്കളും വേര്‍തിരിച്ചറിയാം| വിവിധ തരത്തിലുള്ള റൂട്ടുകൾ| വിപുലമായ സജ്ജീകരണങ്ങൾ ഉള്ള കോണ്ടൂർ ലൈനുകൾ| ഒരേ സൂം ലെവലിൽ സാധരണ ശൈലിയേക്കാൾ കൂടുതൽ വിശദാംശങ്ങൾ. റോഡ് ഗുണനിലവാരത്തെ തിരിച്ചറിയാം. രാത്രി മോഡ് ഇല്ല."</string>
     <string name="default_render_descr">പൊതു ഉദ്ദേശ്യ ശൈലി. ജനസാന്ദ്രതയുള്ള നഗരങ്ങളിൽ ലളിതമായ ക്ലീനർ റെൻഡറിംഗ്. പ്രധാന സവിശേഷതകൾ: കോണ്ടൂർ ലൈനുകൾ| വഴികൾ| ഉപരിതല നിലവാരം| പ്രവേശന നിയന്ത്രണങ്ങൾ| റോഡ് ഷീൽഡുകൾ| പാതകള്‍ എസ്എസി സ്കെയിൽ റെന്‍ഡര്‍ ചെയ്തിരിക്കുന്നു | വാട്ടർ സ്പോർട്സ് സവിശേഷതകൾ</string>
     <string name="touring_view_render_descr">ടൂറിങ്ങ് ആവശ്യകതകൾക്കായി ഉയർന്ന വിശദാംശങ്ങളുള്ള ശൈലി. സാധാരണ ശൈലിയിലുള്ള എല്ലാ കോൺഫിഗറേഷൻ ഓപ്ഷനുകളും ഉൾപ്പെടുന്നു: സാധ്യമായത്രയും വിശദമായി| പ്രത്യേകിച്ച് എല്ലാ റോഡുകളും പാതകളും യാത്ര ചെയ്യാനുള്ള മറ്റ് വഴികളും എല്ലാം പ്രദർശിപ്പിക്കുന്നു. എല്ലാ വ്യത്യസ്ത തരം റോഡുകൾക്കും വ്യക്തമാക്കുക. ഔട്ട്ഡോർ ഉപയോഗത്തിനായി ഉയർന്ന ദൃശ്യതീവ്രത നിറം| ദിനം| രാത്രി മോഡ്.</string>

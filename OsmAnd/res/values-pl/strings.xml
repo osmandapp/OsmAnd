@@ -2610,7 +2610,6 @@
 \nWiększość krajów na świecie jest dostępna do pobrania!
 \nUzyskaj niezawodną nawigację w swoim kraju - Francji, Polsce, Meksyku, Wielkiej Brytanii, Hiszpanii, Holandii, USA, Rosji, Brazylii i każdym innym.</string>
     <string name="download_wikipedia_description">Pobierz artykuły Wikipedii dla %1$s, by czytać je offline.</string>
-    <string name="download_wikipedia_label">Pobierz dane z Wikipedii</string>
     <string name="open_in_browser_wiki">Otwórz artykuł online</string>
     <string name="open_in_browser_wiki_description">Wyświetl artykuł w przeglądarce.</string>
     <string name="download_wiki_region_placeholder">ten region</string>
@@ -2628,7 +2627,6 @@
     <string name="shared_string_bookmark">Zakładka</string>
     <string name="hide_full_description">Ukryj pełny opis</string>
     <string name="show_full_description">Wyświetl pełny opis</string>
-    <string name="open_wikipedia_link_online_description">Odnośnik zostanie otwarty w przeglądarce internetowej.</string>
     <string name="how_to_open_link">Jak otwierać odnośniki?</string>
     <string name="import_gpx_file_description">można zaimportować jako Ulubione lub plik GPX.</string>
     <string name="import_as_favorites">Importuj jako Ulubione</string>
@@ -2645,7 +2643,6 @@
     <string name="default_render_descr">Styl uniwersalny. Gęste miasta przedstawione w przejrzysty sposób. Zawiera trasy, jakość nawierzchni, ograniczenia dostępu, osłony drogowe, renderowanie ścieżek zgodnie ze skalą SAC/CAI, elementy sportów wodnych, cechy topograficzne, takie jak poziomice.</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
-    <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
     <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży w trybie offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię w trybie offline</string>
     <string name="quick_action_edit_actions">Edycja działań</string>
@@ -6031,7 +6028,21 @@
         <item quantity="many">%1$d (%2$d ścieżek)</item>
         <item quantity="other">%1$d (%2$d ścieżek)</item>
     </plurals>
-    <string name="release_5_2">• Praca w trakcie...</string>
+    <string name="release_5_2">
+        • Dodano szczegóły ulicy i miasta do wyników wyszukiwania\n\n
+        • Nowe widżety nagrywania podróży: Prędkość maksymalna, Średnie nachylenie oraz ulepszone Wzniesienia/Spadki\n\n
+        • Nowy styl mapy morskiej "Marine" z rozbudowanymi opcjami dostosowywania\n\n
+        • Poprawiona szybkość renderowania mapy\n\n
+        • Ulepszona łączność z adapterami OBDII BLE\n\n
+        • Dodano metryki tętna do "Analizuj według interwału"\n\n
+        • Dodano wyświetlanie czasu trwania dla planowanych tras\n\n
+        • Jednostki wysokości można teraz ustawiać oddzielnie od jednostek odległości\n\n
+        • Ulepszono Szybką Akcję orientacji mapy z wybieralnymi trybami kompasu\n\n
+        • Dla Android Auto dodano alerty przednawigacyjne dotyczące brakujących map i dróg prywatnych\n\n
+        • Rozwiązano problem z nieprawidłowymi parametrami rozmiaru widżetu Linijka Promienia\n\n
+        • Dodano odwrócone orientacje ekranu\n\n
+        • Ulepszono interfejs użytkownika do określania metryk ciężarówki\n\n
+    </string>
     <string name="quick_action_first_intermediate">Pierwszy od dołu</string>
     <string name="altitude_metrics_description">Ustawia jednostkę wyświetlania wysokości w widżetach i statystykach.</string>
     <string name="write_location_provider_description">Zapisz dostawcę lokalizacji dla każdego punktu śledzenia podczas nagrywania</string>
@@ -6050,7 +6061,6 @@
     <string name="description_subscription_fastspring">Możesz zarządzać swoją subskrypcją i ją anulować za pośrednictwem portalu zarządzania kontem FastSpring.</string>
     <string name="manage_purchases">Zarządzaj zakupami</string>
     <string name="wiki_around">Popularne miejsca w pobliżu</string>
-    <string name="private_access_routing_req_short">Twój cel znajduje się na terenie prywatnym. Czy zezwalasz na korzystanie z dróg prywatnych?</string>
     <string name="view_on_phone">Wyświetl na telefonie</string>
     <string name="average_elevation">Średnia wysokość</string>
     <string name="map_orientations_choose_description">Pozostaw puste pole, aby móc przełączać się między wszystkimi dostępnymi trybami, lub dodaj tylko preferowane.</string>

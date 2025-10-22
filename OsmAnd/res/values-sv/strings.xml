@@ -2567,8 +2567,6 @@
     <string name="topo_render_descr">För utflykter, vandring och cykling i naturen. God läsbarhet utomhus. Kontrasterande vägar och naturobjekt, olika ledtyper, avancerade alternativ för höjdkurvor, mer detaljrik. Inställning för att visa vägbanans kvalitet. Inget nattläge.</string>
     <string name="touring_view_render_descr">Turiststil med hög kontrast och maximal detaljrikedom. Innehåller alla alternativ i OsmAnd:s standardstil, samtidigt som den visar så mycket detaljer som möjligt, särskilt vägar, stigar, och andra sätt att resa. Tydlig distinktion mellan olika vägtyper som i en turistatlas. Lämplig för användning på dag, natt, och utomhus.</string>
     <string name="default_render_descr">Allmän stil. Tydlig återgivning i tät bebyggelse. Visar leder, vägbanekvalitet, åtkomstbegränsningar, vägnummer, stigar enligt SAC-skalan, vattensportobjekt, topografi som tex höjdkurvor.</string>
-    <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på internet</string>
-    <string name="open_wikipedia_link_online_description">Länken kommer att öppnas i en webbläsare.</string>
     <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikivoyage-artiklar frånkopplad.</string>
     <string name="how_to_open_link">Hur öppnar man länken?</string>
     <string name="read_wikipedia_offline">Läs Wikipedia frånkopplad</string>
@@ -2680,7 +2678,6 @@
     <string name="toast_empty_name_error">Ej namngiven plats</string>
     <string name="tunnel_warning">Tunnel framöver</string>
     <string name="download_wikipedia_description">Hämta Wikipedia-artiklar om %1$s för att läsa dem offline.</string>
-    <string name="download_wikipedia_label">Hämta Wikipedia-data</string>
     <string name="open_in_browser_wiki">Öppna artikeln online</string>
     <string name="open_in_browser_wiki_description">Visa artikeln i en webbläsare.</string>
     <string name="download_wiki_region_placeholder">denna region</string>
@@ -5909,7 +5906,21 @@
     <string name="rendering_avg_info_details">FPS för senaste 1000 bilderna: %1$s\nCPU (kartrutor): %2$s\nCPU (inaktiv tid): %3$s\nCPU (väntar på GPU): %4$s</string>
     <string name="show_debug_tile_description">Visa information om kartsymboler på varje kartruta</string>
     <string name="shared_string_not_checked">Inte kontrollerad</string>
-    <string name="release_5_2">•• Arbete pågår...</string>
+    <string name="release_5_2">
+        • Lade till gatu- och stadsdetaljer i sökresultaten\n\n
+        • Nya widgets för ruttinspelning: Maxhastighet, Genomsnittlig lutning och förbättrad Uppför/Nedför\n\n
+        • Ny nautisk kartstil "Marin" med omfattande anpassningsalternativ\n\n
+        • Förbättrad karthastighet\n\n
+        • Förbättrad anslutning med OBDII BLE-adaptrar\n\n
+        • Lade till pulsdata i "Analysera per intervall"\n\n
+        • Lade till visning av varaktighet för planerade spår\n\n
+        • Höjdenheter kan nu ställas in separat från avståndsenheter\n\n
+        • Förbättrade snabbåtgärden för kartorientering med valbara kompasslägen\n\n
+        • För Android Auto, lade till förnavigeringsvarningar för saknade kartor och privata vägar\n\n
+        • Löste ett problem med felaktiga storleksparametrar för widgeten Radiuslinjal\n\n
+        • Lade till inverterade skärmorienteringar\n\n
+        • Förbättrade användargränssnittet för att specificera lastbilsmått\n\n
+    </string>
     <string name="release_5_1">• Lade till stöd för webb- och plattformsoberoende köp\n\n• Flyttade temperaturenheter till allmänna inställningar för enklare åtkomst\n\n• Lade till batterinivåindikator för BLE-sensorer\n\n• Nytt, mer intuitivt användargränssnitt för punktval i navigering\n\n• Förbättrad widgetsynlighet med en ny kontur\n\n• Lade till analysator för uppförsbackar/nedförsbackar\n\n• Utökad Wikipedia- och Wikivoyage-integration för fler intressepunkter.</string>
     <string name="uphill_downhill_split">Uppförsbacke / Nedförsbacke</string>
     <string name="display_priority">Visningsprioritet</string>

@@ -19,7 +19,7 @@ class PrivateAccessScreen(carContext: CarContext) : BaseAndroidAutoScreen(carCon
 
 	override fun getTemplate(): Template {
 		val yesAction = Action.Builder()
-			.setTitle(app.getString(R.string.shared_string_yes))
+			.setTitle(app.getString(R.string.shared_string_allow))
 			.setOnClickListener {
 				setResult(true)
 				finish()

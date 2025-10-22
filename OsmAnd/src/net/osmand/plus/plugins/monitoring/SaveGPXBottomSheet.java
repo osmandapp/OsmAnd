@@ -22,8 +22,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -199,19 +201,28 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 			TrackMenuFragment.openTrack(activity, file, null);
 			return;
 		}
-		if (showOnMap) {
-			showOnMap(activity, file);
-		}
+		showOnMap(activity, file);
 	}
 
 	private void showOnMap(@NonNull FragmentActivity activity, @NonNull File file) {
+		GpxSelectionHelper helper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+		GpxSelectionParams hideTrackParams = GpxSelectionParams.newInstance()
+				.hideFromMap().syncGroup().saveSelection();
 		if (selectedGpxFile != null) {
-			moveMap(activity, selectedGpxFile.getGpxFile());
+			if (showOnMap) {
+				moveMap(activity, selectedGpxFile.getGpxFile());
+			} else {
+				helper.selectGpxFile(selectedGpxFile.getGpxFile(), hideTrackParams);
+			}
 		} else {
 			GpxFileLoaderTask.loadGpxFile(file, activity, gpxFile -> {
-				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
-				moveMap(activity, gpxFile);
+				if (showOnMap) {
+					helper.setGpxFileToDisplay(gpxFile);
+					moveMap(activity, gpxFile);
+				} else {
+					helper.selectGpxFile(gpxFile, hideTrackParams);
+				}
 				return true;
 			});
 		}

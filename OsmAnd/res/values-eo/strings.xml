@@ -2585,7 +2585,6 @@
     <string name="get_unlimited_access">Akiri senliman atingon</string>
     <string name="welcome_to_open_beta">Bonvenon al malfermita beta-testado!</string>
     <string name="download_wikipedia_description">Elŝutu Vikipediajn artikolojn por %1$s, por legi ilin malkonekte.</string>
-    <string name="download_wikipedia_label">Elŝuti datumojn de Vikipedio</string>
     <string name="open_in_browser_wiki">Malfermi artikolon enrete</string>
     <string name="open_in_browser_wiki_description">Vidigi artikolon en foliumilo.</string>
     <string name="download_wiki_region_placeholder">tiu ĉi regiono</string>
@@ -2604,8 +2603,6 @@
     <string name="light_rs_render_descr">Simpla stilo por aŭt‑navigado. Agrabla por okuloj dum nokto, kontrastaj oranĝkoloraj vojoj, malpli absorbantaj malpli gravaj objektoj, prezento de topografio per nivelkurboj.</string>
     <string name="topo_render_descr">Por turisma marŝado kaj biciklado. Legebla ĉe maloportuna ekstera lumo. Kontrastaj vojoj kaj naturaj objektoj, diversaj specoj de kursoj, agordeblaj nivel-kurboj, pliaj detaloj. Distingebla firmeco de vojoj. Sen nokta reĝimo.</string>
     <string name="default_render_descr">Ĝenerala map-stilo. Legebla en dense loĝataj urboj. Trajtoj: vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ skaloj SAC/CAI, objektoj por rapid-akvaj sportoj, topografio (nivelkurboj).</string>
-    <string name="open_wikipedia_link_online">Malfermi Vikipedian ligilon enrete</string>
-    <string name="open_wikipedia_link_online_description">La ligilo estos malfermita per ret-foliumilo.</string>
     <string name="read_wikipedia_offline_description">Akiru abonon al OsmAnd Live por legi artikolojn de Vikipedio kaj Vikivojaĝo malkonekte.</string>
     <string name="how_to_open_link">Kiel malfermi la ligilon?</string>
     <string name="read_wikipedia_offline">Legi Vikipedion malkonekte</string>
@@ -3526,7 +3523,7 @@
     <string name="empty_state_my_tracks">Aldoni spuron</string>
     <string name="empty_state_my_tracks_desc">Registru novan spuron aŭ enportu dosierojn de spuroj</string>
     <string name="context_menu_item_add_waypoint">Aldoni navigadpunkton al spuro</string>
-    <string name="map_widget_monitoring">Registri spuron</string>
+    <string name="map_widget_monitoring">Spur-registrilo</string>
     <string name="marker_save_as_track">Konservi kiel dosieron de kurso</string>
     <string name="import_track_descr">Elekti dosieron de spuro por ĝin sekvi aŭ enporti el via aparato.</string>
     <string name="select_another_track">Elekti alian spuron</string>
@@ -5849,10 +5846,23 @@
     <string name="add_to_favorites">Aldoni al ŝatataj</string>
     <string name="max_weight_at_full_load_description">Enigu maksimuman mason de via veturilo je plena ŝarĝo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
     <string name="max_axle_load_description">Enigu maksimuman mason prematan de akso de via veturilo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
-    <string name="private_access_routing_req_short">Via celo estas en privata areo. Ĉu ebligi navigi tra privataj vojoj?</string>
     <string name="view_on_phone">Montri sur telefono</string>
     <string name="lang_en_barebones">Angla (minimuma)</string>
-    <string name="release_5_2">• Versio estas prilaborata…</string>
+    <string name="release_5_2">
+        • Aldonis strato- kaj urbodetalojn al serĉrezultoj\n\n
+        • Novaj vojaĝregistradaj fenestraĵoj: Maksimuma Rapido, Meza Deklivo kaj plibonigitaj Supreniro/Malsupreniro\n\n
+        • Nova "Mara" naŭtika mapstilo kun ampleksaj personigo-opcioj\n\n
+        • Plibonigita mapbildiga rapideco\n\n
+        • Plibonigita konektebleco kun OBDII BLE-adaptiloj\n\n
+        • Aldonis korfrekvencajn metrikojn al la "Analizi laŭ Intervalo"\n\n
+        • Aldonis daŭran montradon por planitaj spuroj\n\n
+        • Alteco-unuoj nun povas esti agorditaj aparte de distanco-unuoj\n\n
+        • Plibonigis la maporientiĝan Rapidan Agon kun elekteblaj kompasreĝimoj\n\n
+        • Por Android Auto, aldonis antaŭnavigadajn atentigojn pri mankantaj mapoj kaj privataj vojoj\n\n
+        • Solvis problemon kun malĝustaj grandecaj parametroj por la Radius-Regilo fenestraĵo\n\n
+        • Aldonis inversajn ekranorientiĝojn\n\n
+        • Plibonigis la uzantinterfacon por specifi kamionajn metrikojn\n\n
+    </string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
     <string name="obd_alt_battery_voltage">Tensio de adaptilo</string>
@@ -5883,4 +5893,8 @@
     <string name="shared_string_last_downhill">Antaŭa malsupreniro</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skiaj kursoj kaj descendejoj</string>
     <string name="rendering_attr_pisteRoutes_name">Skivojoj kaj descendejoj</string>
+    <string name="requires_internet_connection">Postulas konekton kun la interreto</string>
+    <string name="save_and_access_articles_offline">Ŝparas uzon de datum-konekto, ebligas aliri artikolojn malkonekte</string>
+    <string name="private_access_routing_req_short">Ĉu permesi uzi privatan vojon por aliri vian celon?</string>
+    <string name="download_wikipedia_label">Elŝuti Vikipedion</string>
 </resources>

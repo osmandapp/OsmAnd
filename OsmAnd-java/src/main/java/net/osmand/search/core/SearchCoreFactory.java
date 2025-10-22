@@ -538,13 +538,11 @@ public class SearchCoreFactory {
 					currentFile[0] = r;
 					immediateResults.clear();
 					SearchWord lastWord = phrase.getLastSelectedWord();
-
 					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					req.setSearchStat(phrase.getSettings().getStat());
 					if (locSpecified) {
-						
 						if (lastWord != null && lastWord.getResult() != null
 								&& lastWord.getResult().object instanceof City c) {
 							int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());

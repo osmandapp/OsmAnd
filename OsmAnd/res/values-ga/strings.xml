@@ -2685,7 +2685,6 @@
     <string name="navigate_point_top_text">Domhanleithead ionchur agus domhanfhad san fhormáid roghnaithe (D - céimeanna, M - nóiméad, S - soicind)</string>
     <string name="closing_at">Ag dúnadh ag</string>
     <string name="free_downloads_used_description">Taispeánann seo méid na n-íoslódálacha saor in aisce atá fágtha.</string>
-    <string name="download_wikipedia_label">Íoslódáil sonraí Vicipéide</string>
     <string name="search_action_descr">Osclaíonn seo cuardach.</string>
     <string name="login_open_street_map">Logáil isteach i OpenStreetMap</string>
     <string name="upload_poi">Uaslódáil POI</string>
@@ -3035,7 +3034,6 @@
     <string name="rendering_attr_surface_sand_name">Gaineamh</string>
     <string name="ask_for_location_permission">Tabhair rochtain ar shuíomh OsmAnd le leanúint ar aghaidh.</string>
     <string name="touring_view_render_descr">Stíl camchuairte le codarsnacht ard agus sonraí uasta. Áirítear gach rogha den stíl réamhshocraithe OsmAnd, agus an oiread sonraí agus is féidir á dtaispeáint, go háirithe bóithre, cosáin, agus bealaí eile chun taisteal. Idirdhealú soiléir \"atlas camchuairte\" idir cineálacha bóithre. Oiriúnach le haghaidh úsáide lae, oíche agus lasmuigh.</string>
-    <string name="open_wikipedia_link_online_description">Osclófar an nasc i mbrabhsálaí gréasáin.</string>
     <string name="select_travel_book">Roghnaigh leabhar taistil</string>
     <string name="last_seven_days">Le 7 lá anuas</string>
     <string name="index_item_depth_points_northern_hemisphere">Pointí doimhneachta farraige leathsféar thuaidh</string>
@@ -4285,7 +4283,6 @@
     <string name="public_transport_ped_route_title">Tá an bealach de shiúl na gcos thart ar %1$s, agus d\'fhéadfadh sé a bheith níos tapúla ná iompar poiblí</string>
     <string name="public_transport_try_ped">Bain triail as nascleanúint de shiúl na gcos.</string>
     <string name="send_search_query">Seol ceist chuardaigh?</string>
-    <string name="open_wikipedia_link_online">Oscail nasc Vicipéid ar líne</string>
     <string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
     <string name="move_marker_bottom_sheet_title">Bog an léarscáil chun ionad an mharcóra a athrú</string>
     <string name="storage_directory_shared">Cuimhne chomhroinnte</string>
@@ -5587,7 +5584,7 @@
     <string name="deleting">Ag scriosadh…</string>
     <string name="deleting_history">Stair á scriosadh…</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
-    <string name="release_5_2">• Obair ar siúl...</string>
+    <string name="release_5_2">• Sonraí sráide agus cathrach curtha leis na torthaí cuardaigh\n\n• Giuirléidí Taifeadta Turais Nua: Uasluas, Meánfhána, agus Feabhsuithe ar an gCnoc/An Cnoc Suas\n\n• Stíl léarscáile muirí nua le roghanna saincheaptha fairsinge\n\n• Luas rindreála léarscáile feabhsaithe\n\n• Nascacht fheabhsaithe le hoiriúnóirí OBDII BLE\n\n• Méadrachtaí ráta croí curtha leis an Anailís de réir Eatramh\n\n• Taispeántas fad curtha leis do rianta pleanáilte\n\n• Is féidir aonaid airde a shocrú anois ar leithligh ó aonaid achair\n\n• Treoshuíomh an léarscáil feabhsaithe Gníomh Tapa le modhanna compáis inroghnaithe\n\n• I gcás Android Auto, foláirimh réamh-loingseoireachta curtha leis le haghaidh léarscáileanna ar iarraidh agus bóithre príobháideacha\n\n• Fadhb réitithe le paraiméadair mhéide míchearta don ghiuirléid Rialóir Ga\n\n• Treoshuíomhanna scáileáin inbhéartaithe curtha leis\n\n• Comhéadan úsáideora feabhsaithe chun méadrachtaí trucaile a shonrú</string>
     <string name="shared_string_threads">Snáitheanna</string>
     <string name="threads_allocated_for_rendering">Snáitheanna leithdháilte le haghaidh rindreála</string>
     <string name="threads_allocated_for_rendering_desc">D’fhéadfadh leithdháileadh snáithe níos ísle luas a chur le rindreáil an léarscáil i gcásanna áirithe.</string>
@@ -5660,7 +5657,6 @@
     <string name="rendering_attr_tidalFlatStyle_description">Stíl na n-árasán taoide</string>
     <string name="rendering_attr_watercolor_name">Dath uisce</string>
     <string name="rendering_attr_watercolor_description">Dath an uisce</string>
-    <string name="private_access_routing_req_short">Tá do cheann scríbe i limistéar príobháideach. An bhfuil cead agat bóithre príobháideacha a úsáid?</string>
     <string name="view_on_phone">Féach ar an bhfón</string>
     <string name="backup_delete_data_warning_extended">Bainfear na sonraí roghnaithe go léir as an scamall go buan leis an ngníomh seo. Ní bheidh sé indéanta iad a athchóiriú níos déanaí.</string>
     <string name="amount_of_total_used">%1$s de %2$s úsáidte</string>
@@ -5703,4 +5699,8 @@
     <string name="shared_string_last_downhill">Deireanach síos an cnoc</string>
     <string name="help_article_navigation_routing_ski_routing_name">Fánaí sciála agus bealaí</string>
     <string name="rendering_attr_pisteRoutes_name">Fánaí sciála agus bealaí</string>
+    <string name="requires_internet_connection">Teastaíonn nasc idirlín</string>
+    <string name="save_and_access_articles_offline">Sábháil sonraí agus rochtain a fháil ar ailt as líne áit ar bith</string>
+    <string name="private_access_routing_req_short">Cead a thabhairt duit bóthar príobháideach a úsáid chun do cheann scríbe a bhaint amach?</string>
+    <string name="download_wikipedia_label">Íoslódáil Vicipéid</string>
 </resources>

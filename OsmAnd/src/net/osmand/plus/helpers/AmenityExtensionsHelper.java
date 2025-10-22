@@ -33,7 +33,8 @@ import java.util.List;
 import java.util.Map;
 
 public class AmenityExtensionsHelper {
-	public static final double MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW = 1.0;
+	public static final double MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW = 10.0;
+	public static final double MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW = 0.0; // customizable (default 0)
 
 	private static final Log LOG = PlatformUtil.getLog(AmenityExtensionsHelper.class);
 
@@ -115,10 +116,12 @@ public class AmenityExtensionsHelper {
 		List<String> metrics = new ArrayList<>();
 		if (distMeters > 0) {
 			metrics.add(dist);
-			if (upMeters > 0 && upMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+			if (upMeters >= MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW &&
+					upMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
 				metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);
 			}
-			if (downMeters > 0 && downMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
+			if (downMeters >= MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW &&
+					downMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
 				metrics.add(TrkSegment.SegmentSlopeType.DOWNHILL.getSymbol() + downhill);
 			}
 		}

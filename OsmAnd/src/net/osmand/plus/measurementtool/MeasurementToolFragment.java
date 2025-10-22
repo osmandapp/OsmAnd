@@ -88,6 +88,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.*;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
+import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -562,6 +563,14 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		}
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.ROOT_INSET);
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_content).build());
+		return collection;
 	}
 
 	public OnBackPressedCallback getOnBackPressedCallback() {

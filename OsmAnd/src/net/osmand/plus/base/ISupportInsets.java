@@ -1,11 +1,14 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.settings.enums.ThemeUsageContext.APP;
+
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
@@ -34,7 +37,15 @@ public interface ISupportInsets {
 		return -1;
 	}
 
+	default boolean isNavigationBarContentLight(){
+		return !isNightMode();
+	}
+
 	default void updateNavBarColor(){
 		InsetsUtils.processNavBarColor(this);
+	}
+
+	default boolean isNightMode(){
+		return ((OsmandApplication) requireActivity().getApplication()).getDaynightHelper().isNightMode(APP);
 	}
 }

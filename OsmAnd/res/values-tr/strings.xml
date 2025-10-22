@@ -2814,8 +2814,6 @@
     <string name="purchase_cancelled_dialog_title">OsmAnd Live aboneliğinizi iptal ettiniz</string>
     <string name="purchase_cancelled_dialog_descr">Tüm özellikleri kullanmaya devam etmek için aboneliği yenileyin:</string>
     <string name="download_all">Hepsini indir</string>
-    <string name="open_wikipedia_link_online">Wikipedia linkini çevrim içi aç</string>
-    <string name="open_wikipedia_link_online_description">Link bir web tarayıcısında açılacaktır.</string>
     <string name="read_wikipedia_offline_description">Wikipedia ve Wikivoyage makalelerini çevrim dışı olarak okumak için OsmAnd Live üyeliği alın.</string>
     <string name="how_to_open_link">Link nasıl açılır\?</string>
     <string name="read_wikipedia_offline">Wikipedia\'yı çevrim dışı olarak oku</string>
@@ -3083,7 +3081,6 @@
     <string name="tunnel_warning">İleride tünel var</string>
     <string name="show_tunnels">Tüneller</string>
     <string name="download_wikipedia_description">Çevrim dışı okumak üzere %1$s için Wikipedia makalelerini indirin.</string>
-    <string name="download_wikipedia_label">Wikipedia verilerini indir</string>
     <string name="open_in_browser_wiki">Makaleyi çevrim içi aç</string>
     <string name="open_in_browser_wiki_description">Makaleyi bir web tarayıcısında görüntüleyin.</string>
     <string name="download_wiki_region_placeholder">bu bölge</string>
@@ -5753,7 +5750,6 @@
     <string name="add_to_a_folder">Bir klasöre ekle</string>
     <string name="add_to_favorites">Sık kullanılanlara ekle</string>
     <string name="max_weight_at_full_load_description">Ağırlık sınırlaması olan yollardan ve köprülerden kaçınmak için aracınızın tam yükte azami ağırlığını belirtin.</string>
-    <string name="private_access_routing_req_short">Hedefiniz özel bir alanda bulunuyor. Özel yolların kullanımına izin verilsin mi?</string>
     <string name="view_on_phone">Telefonda görüntüle</string>
     <string name="average_elevation">Ortalama yükseklik</string>
     <string name="ascent">Çıkış</string>
@@ -5764,7 +5760,21 @@
     <string name="map_orientation_portrait_inverted">Dikey (ters)</string>
     <string name="map_orientation_landscape_inverted">Yatay (ters)</string>
     <string name="reverse_mode">Ters mod</string>
-    <string name="release_5_2">• Üzerinde çalışılıyor...</string>
+    <string name="release_5_2">
+        • Arama sonuçlarına cadde ve şehir detayları eklendi\n\n
+        • Yeni Yolculuk Kaydı widget\'ları: Maksimum Hız, Ortalama Eğim ve geliştirilmiş Yokuş Yukarı/Yokuş Aşağı\n\n
+        • Kapsamlı özelleştirme seçenekleriyle yeni "Deniz" deniz haritası stili\n\n
+        • İyileştirilmiş harita oluşturma hızı\n\n
+        • OBDII BLE adaptörleriyle geliştirilmiş bağlantı\n\n
+        • "Aralığa Göre Analiz Et" bölümüne kalp atış hızı metrikleri eklendi\n\n
+        • Planlanan rotalar için süre gösterimi eklendi\n\n
+        • Yükseklik birimleri artık mesafe birimlerinden ayrı olarak ayarlanabilir\n\n
+        • Seçilebilir pusula modlarıyla harita yönlendirmesi Hızlı Eylemi iyileştirildi\n\n
+        • Android Auto için eksik haritalar ve özel yollar için ön navigasyon uyarıları eklendi\n\n
+        • Yarıçap Cetveli widget\'ı için yanlış boyut parametreleriyle ilgili bir sorun çözüldü\n\n
+        • Ters ekran yönlendirmeleri eklendi\n\n
+        • Kamyon metriklerini belirtmek için kullanıcı arayüzü iyileştirildi\n\n
+    </string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Yanıt</string>

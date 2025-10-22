@@ -2583,7 +2583,6 @@
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
     <string name="welcome_to_open_beta">Velkommen til den åbne beta</string>
     <string name="download_wikipedia_description">Hent Wikipedia-artikler for %1$s og læs dem offline.</string>
-    <string name="download_wikipedia_label">Hent Wikipedia-data</string>
     <string name="open_in_browser_wiki">Åbn artiklen online</string>
     <string name="open_in_browser_wiki_description">Se artikel i en webbrowser.</string>
     <string name="download_wiki_region_placeholder">denne region</string>
@@ -2598,8 +2597,6 @@
     <string name="purchase_cancelled_dialog_title">Du har annulleret dit OsmAnd Live-abonnement</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for at fortsætte med at bruge alle funktioner:</string>
     <string name="download_all">Download alle</string>
-    <string name="open_wikipedia_link_online">Åbn Wikipedia-link online</string>
-    <string name="open_wikipedia_link_online_description">Linket vil blive åbnet i en webbrowser.</string>
     <string name="read_wikipedia_offline_description">Abonnér på OsmAnd Live for at læse Wikipedia- og Wikivoyage-artikler offline.</string>
     <string name="how_to_open_link">Hvordan linket åbnes?</string>
     <string name="read_wikipedia_offline">Læs Wikipedia offline</string>
@@ -5802,7 +5799,21 @@
     <string name="deleting">Sletter…</string>
     <string name="deleting_history">Sletter historik…</string>
     <string name="show_rasterization_debug_tile">Vis oplysninger om rasterisering af kortfliser</string>
-    <string name="release_5_2">• Arbejde i gang...</string>
+    <string name="release_5_2">
+        • Tilføjet gade- og byoplysninger til søgeresultater\n\n
+        • Nye widgets til Turoptagelse: Maks. hastighed, Gennemsnitlig hældning og forbedret Op ad bakke/Ned ad bakke\n\n
+        • Ny "Marine" nautisk kortstil med omfattende tilpasningsmuligheder\n\n
+        • Forbedret hastighed for kortgengivelse\n\n
+        • Forbedret forbindelse med OBDII BLE-adaptere\n\n
+        • Tilføjet pulsmålinger til "Analyser efter interval"\n\n
+        • Tilføjet visning af varighed for planlagte spor\n\n
+        • Højdeenheder kan nu indstilles separat fra afstandsenheder\n\n
+        • Forbedret Hurtig Handling for kortorientering med valgbare kompastilstande\n\n
+        • Til Android Auto, tilføjet præ-navigationsadvarsler for manglende kort og private veje\n\n
+        • Løst et problem med forkerte størrelsesparametre for widgetten Radiuslineal\n\n
+        • Tilføjet omvendte skærmorienteringer\n\n
+        • Forbedret brugergrænsefladen til specificering af lastbilmålinger\n\n
+    </string>
     <string name="shared_string_threads">Tråde</string>
     <string name="threads_allocated_for_rendering">Tråde allokeret til rendering</string>
     <string name="threads_allocated_for_rendering_desc">Lavere trådallokering kan i nogle tilfælde gøre kortgengivelsen hurtigere.</string>
@@ -5871,7 +5882,6 @@
     <string name="add_to_favorites">Tilføj til favoritter</string>
     <string name="max_weight_at_full_load_description">Angiv dit køretøjs maksimale vægt ved fuld last for at undgå veje og broer med vægtbegrænsninger.</string>
     <string name="max_axle_load_description">Angiv dit køretøjs maksimale akseltryk for at undgå veje og broer med vægtbegrænsninger.</string>
-    <string name="private_access_routing_req_short">Din destination ligger i et privat område. Tillad brug af private veje?</string>
     <string name="view_on_phone">Vis på telefonen</string>
     <string name="rendering_attr_hideLightSectors_name">Lyse sektorer</string>
     <string name="rendering_attr_hideLightSectors_description">Skjul lyse sektorer</string>
@@ -5918,4 +5928,8 @@
     <string name="shared_string_last_downhill">Sidste nedkørsel</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skiløjper og ruter</string>
     <string name="rendering_attr_pisteRoutes_name">Skiløjper og ruter</string>
+    <string name="requires_internet_connection">Kræver en internetforbindelse</string>
+    <string name="save_and_access_articles_offline">Gem data og få adgang til artikler offline hvor som helst</string>
+    <string name="private_access_routing_req_short">Tillad brug af en privat vej for at nå din destination?</string>
+    <string name="download_wikipedia_label">Download Wikipedia</string>
 </resources>
