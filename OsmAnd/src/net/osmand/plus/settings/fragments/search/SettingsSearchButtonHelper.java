@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.google.common.collect.Sets;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,6 +29,9 @@ import net.osmand.plus.widgets.alert.MapLayerSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.MultiSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.RoadStyleSelectionDialogFragment;
 
+import org.jgrapht.Graph;
+
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -34,13 +39,17 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import de.KnollFrank.lib.settingssearch.MergedPreferenceScreen;
+import de.KnollFrank.lib.settingssearch.PreferenceEdge;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
+import de.KnollFrank.lib.settingssearch.common.graph.GraphUtils;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
 import de.KnollFrank.lib.settingssearch.graph.ComputePreferencesListener;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
+import de.KnollFrank.lib.settingssearch.provider.PreferenceScreenGraphAvailableListener;
 
 public class SettingsSearchButtonHelper {
 
@@ -51,11 +60,13 @@ public class SettingsSearchButtonHelper {
 	private final OsmandPreference<String> availableAppModes;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
 	private final DAOProvider daoProvider;
+	private final Configuration configuration;
 
 	public static SettingsSearchButtonHelper of(final BaseSettingsFragment rootSearchPreferenceFragment,
 												final @IdRes int fragmentContainerViewId,
 												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>>> createSearchDatabaseTaskSupplier,
-												final OsmandApplication app) {
+												final OsmandApplication app,
+												final Configuration configuration) {
 		return new SettingsSearchButtonHelper(
 				rootSearchPreferenceFragment,
 				fragmentContainerViewId,
@@ -65,7 +76,8 @@ public class SettingsSearchButtonHelper {
 								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH)),
 				app.getSettings().AVAILABLE_APP_MODES,
 				app.getTileSourceTemplatesProvider(),
-				app.daoProviderManager.getDAOProvider());
+				app.daoProviderManager.getDAOProvider(),
+				configuration);
 	}
 
 	private SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
@@ -74,7 +86,8 @@ public class SettingsSearchButtonHelper {
 									   final SearchDatabaseStatusHandler searchDatabaseStatusHandler,
 									   final OsmandPreference<String> availableAppModes,
 									   final TileSourceTemplatesProvider tileSourceTemplatesProvider,
-									   final DAOProvider daoProvider) {
+									   final DAOProvider daoProvider,
+									   final Configuration configuration) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
 		this.createSearchDatabaseTaskSupplier = createSearchDatabaseTaskSupplier;
@@ -82,6 +95,7 @@ public class SettingsSearchButtonHelper {
 		this.availableAppModes = availableAppModes;
 		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
 		this.daoProvider = daoProvider;
+		this.configuration = configuration;
 	}
 
 	public void configureSettingsSearchButton(final ImageView settingsSearchButton) {
@@ -98,7 +112,8 @@ public class SettingsSearchButtonHelper {
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
 			final OsmandPreference<String> availableAppModes,
 			final TileSourceTemplatesProvider tileSourceTemplatesProvider,
-			final DAOProvider daoProvider) {
+			final DAOProvider daoProvider,
+			final Configuration configuration) {
 		final SearchResultsFilter searchResultsFilter =
 				SearchResultsFilterFactory.createSearchResultsFilter(
 						PreferencePathDisplayerFactory.getApplicationModeKeys(),
@@ -128,6 +143,35 @@ public class SettingsSearchButtonHelper {
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 								.withComputePreferencesListener(enableCacheForDownloadedTileSourceTemplatesWhileBuildingSearchDatabase(tileSourceTemplatesProvider))
+								// FK-TODO: remove PreferenceScreenGraphAvailableListener
+								.withPreferenceScreenGraphAvailableListener(
+										new PreferenceScreenGraphAvailableListener() {
+
+											@Override
+											public void onPreferenceScreenGraphAvailable(final Graph<PreferenceScreenWithHost, PreferenceEdge> preferenceScreenGraph) {
+												final PreferenceScreenWithHost rootNode =
+														GraphUtils
+																.getRootNode(preferenceScreenGraph)
+																.orElseThrow();
+
+												final Set<PreferenceScreenWithHost> nodesToRemove =
+														new HashSet<>(
+																Sets.difference(
+																		preferenceScreenGraph.vertexSet(),
+																		Set.of(rootNode)));
+
+												// preferenceScreenGraph.removeAllVertices(nodesToRemove);
+
+												if (preferenceScreenGraph.vertexSet().size() == 1) {
+													System.out.println("Graph erfolgreich auf den Wurzelknoten reduziert: " +
+															preferenceScreenGraph.vertexSet().iterator().next().host().getClass().getSimpleName());
+												} else {
+													System.err.println("Fehler: Graph konnte nicht korrekt reduziert werden. Verbleibende Knoten: " +
+															preferenceScreenGraph.vertexSet().size());
+												}
+											}
+										}
+								)
 								.build(),
 						SearchConfig
 								.builder(fragmentContainerViewId, fragmentActivity)
@@ -141,7 +185,8 @@ public class SettingsSearchButtonHelper {
 								.withShowSettingsFragmentAndHighlightSetting(new ShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId))
 								.build(),
 						fragmentActivity,
-						daoProvider)
+						daoProvider,
+						new ConfigurationBundleConverter().doForward(configuration))
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withOnMergedPreferenceScreenAvailable(onMergedPreferenceScreenAvailable)
 				.build();
@@ -184,15 +229,17 @@ public class SettingsSearchButtonHelper {
 						rootSearchPreferenceFragment.getClass(),
 						availableAppModes,
 						tileSourceTemplatesProvider,
-						daoProvider);
+						daoProvider,
+						configuration);
 		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
 	}
 
 	private void showSearchPreferenceFragment(final SearchPreferenceFragments searchPreferenceFragments) {
-		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
-			searchPreferenceFragments.rebuildSearchDatabase();
-			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
-		}
+		// FK-TODO: remove commented code? Test when condition is false
+//		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
+//			searchPreferenceFragments.rebuildSearchDatabase();
+//			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
+//		}
 		searchPreferenceFragments.showSearchPreferenceFragment();
 	}
 

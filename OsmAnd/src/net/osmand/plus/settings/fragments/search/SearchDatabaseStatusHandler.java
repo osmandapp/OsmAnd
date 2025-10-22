@@ -1,11 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.PluginsHelper;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-
+// FK-TODO: remove?
 class SearchDatabaseStatusHandler {
 
 	private final SetStringPreference pluginsCoveredBySettingsSearch;
@@ -15,18 +10,10 @@ class SearchDatabaseStatusHandler {
 	}
 
 	public boolean isSearchDatabaseUpToDate() {
-		return pluginsCoveredBySettingsSearch.get().equals(getEnabledPlugins());
+		return pluginsCoveredBySettingsSearch.get().equals(ConfigurationProvider.getEnabledPlugins());
 	}
 
 	public void setSearchDatabaseUpToDate() {
-		pluginsCoveredBySettingsSearch.set(getEnabledPlugins());
-	}
-
-	private static Set<String> getEnabledPlugins() {
-		return PluginsHelper
-				.getEnabledPlugins()
-				.stream()
-				.map(OsmandPlugin::getId)
-				.collect(Collectors.toSet());
+		pluginsCoveredBySettingsSearch.set(ConfigurationProvider.getEnabledPlugins());
 	}
 }

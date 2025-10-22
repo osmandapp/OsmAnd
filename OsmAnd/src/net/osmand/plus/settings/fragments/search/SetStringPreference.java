@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+// FK-TODO: remove
 class SetStringPreference {
 
 	private final ListStringPreference listStringPreference;

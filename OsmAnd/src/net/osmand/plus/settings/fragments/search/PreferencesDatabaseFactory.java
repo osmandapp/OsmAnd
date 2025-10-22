@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.os.PersistableBundle;
+
 import androidx.fragment.app.FragmentActivity;
 
 import java.io.File;
@@ -30,8 +32,11 @@ public class PreferencesDatabaseFactory {
 								new SearchablePreferenceScreenGraphProcessor() {
 
 									@Override
-									public SearchablePreferenceScreenGraph processGraph(final SearchablePreferenceScreenGraph graph, final FragmentActivity activityContext) {
-										return graph.asProcessedGraph();
+									public SearchablePreferenceScreenGraph processGraph(final SearchablePreferenceScreenGraph graph,
+																						final PersistableBundle actualConfiguration,
+																						final FragmentActivity activityContext) {
+										// FK-TODO: implement
+										return graph;
 									}
 								})),
 				PreferencesDatabaseConfig.JournalMode.AUTOMATIC);

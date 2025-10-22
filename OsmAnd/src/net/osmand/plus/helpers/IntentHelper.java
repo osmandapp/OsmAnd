@@ -30,6 +30,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
+import net.osmand.plus.settings.fragments.search.ConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
@@ -156,7 +157,8 @@ public class IntentHelper {
 								MainSettingsFragment.class,
 								app.getSettings().AVAILABLE_APP_MODES,
 								app.getTileSourceTemplatesProvider(),
-								app.daoProviderManager.getDAOProvider()),
+								app.daoProviderManager.getDAOProvider(),
+								ConfigurationProvider.getActualConfiguration()),
 				getLocale());
 	}
 

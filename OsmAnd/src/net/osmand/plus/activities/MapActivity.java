@@ -107,6 +107,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
+import net.osmand.plus.settings.fragments.search.ConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.PreferencesDatabaseFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
@@ -943,7 +945,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app
 				.daoProviderManager
 				.initDAOProvider(
-						PreferencesDatabaseFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile(),
+						PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
+						new ConfigurationBundleConverter().doForward(ConfigurationProvider.getActualConfiguration()),
 						this);
 
 		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk

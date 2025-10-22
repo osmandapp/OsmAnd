@@ -35,6 +35,7 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.search.ConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
@@ -327,7 +328,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 						this,
 						R.id.fragmentContainer,
 						Objects.requireNonNull(getMapActivity())::getCreateSearchDatabaseTask,
-						app);
+						app,
+						ConfigurationProvider.getActualConfiguration());
 		settingsSearchButtonHelper.configureSettingsSearchButton(view.findViewById(R.id.action_button));
 	}
 }
