@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
 import static net.osmand.plus.AppVersionUpgradeOnInit.updateExistingWidgetIds;
+import static net.osmand.plus.backup.AutoBackupHelper.DEFAULT_AUTO_BACKUP_INTERVAL_MS;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWithoutInternet;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
@@ -1532,6 +1533,9 @@ public class OsmandSettings {
 	public final OsmandPreference<String> ITINERARY_LAST_CALCULATED_MD5 = new StringPreference(this, "itinerary_last_calculated_md5", "").makeGlobal();
 
 	public final OsmandPreference<Boolean> AUTO_BACKUP_ENABLED = new BooleanPreference(this, OsmandBackupAgent.AUTO_BACKUP_ENABLED, true).makeGlobal().makeShared();
+
+	public final CommonPreference<Long> LAST_AUTO_BACKUP_TIMESTAMP = registerLongPreference("last_auto_backup_timestamp", 0L).makeGlobal();
+	public final CommonPreference<Long> AUTO_BACKUP_INTERVAL_MS = registerLongPreference("auto_backup_interval_ms", DEFAULT_AUTO_BACKUP_INTERVAL_MS).makeGlobal();
 
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = new EnumStringPreference<>(this, "daynight_mode", DayNightMode.DAY, DayNightMode.values());
 

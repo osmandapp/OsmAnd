@@ -85,10 +85,4 @@ public class ColorPaletteExportType extends LocalResourcesExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.COLOR_DATA;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

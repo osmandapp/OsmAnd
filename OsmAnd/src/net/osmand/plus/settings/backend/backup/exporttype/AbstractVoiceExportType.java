@@ -39,10 +39,4 @@ abstract class AbstractVoiceExportType extends LocalResourcesExportType {
 	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.FILE;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

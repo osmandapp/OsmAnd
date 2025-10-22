@@ -1,13 +1,11 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -71,11 +69,5 @@ public abstract class AbstractMapExportType extends LocalResourcesExportType {
 	@Override
 	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.FILE;
-	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
 	}
 }
