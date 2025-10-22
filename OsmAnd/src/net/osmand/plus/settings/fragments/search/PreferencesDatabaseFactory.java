@@ -35,7 +35,7 @@ public class PreferencesDatabaseFactory {
 									public SearchablePreferenceScreenGraph processGraph(final SearchablePreferenceScreenGraph graph,
 																						final PersistableBundle actualConfiguration,
 																						final FragmentActivity activityContext) {
-										// FK-TODO: implement
+										// FK-TODO: implement by computing graph for actualConfiguration
 										return graph;
 									}
 								})),
