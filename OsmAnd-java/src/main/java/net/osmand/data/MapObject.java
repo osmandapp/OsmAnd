@@ -112,7 +112,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (names != null) {
 			for (String key : names.keySet()) {
 				// skip name:place, name:admin_level...
-				if (key.length() > 3) {
+				if (key.equals("admin_level") || key.equals("place")) {
 					continue;
 				}
 				l.add(names.get(key));
@@ -120,7 +120,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 		return l;
 	}
-
+	
 	public void copyNames(String otherName, String otherEnName, Map<String, String> otherNames, boolean overwrite) {
 		if (!Algorithms.isEmpty(otherName) && (overwrite || Algorithms.isEmpty(name))) {
 			name = otherName;
