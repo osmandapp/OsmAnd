@@ -126,7 +126,7 @@ public enum ExportType {
 		return this == GPX_DIR;
 	}
 
-	public boolean isEnabled() {
+	public boolean isAvailable() {
 		Class<? extends OsmandPlugin> clazz = instance.getRelatedPluginClass();
 		return clazz == null || PluginsHelper.isActive(clazz);
 	}
@@ -196,19 +196,19 @@ public enum ExportType {
 	}
 
 	@NonNull
-	public static List<ExportType> enabledValuesOf(@NonNull ExportCategory exportCategory) {
-		return filterElementsWithCondition(enabledValues(),
+	public static List<ExportType> availableValuesOf(@NonNull ExportCategory exportCategory) {
+		return filterElementsWithCondition(availableValues(),
 				exportType -> exportType.isRelatedToCategory(exportCategory));
 	}
 
 	@NonNull
-	public static List<ExportType> enabledValues() {
-		return filterElementsWithCondition(valuesList(), ExportType::isEnabled);
+	public static List<ExportType> availableValues() {
+		return filterElementsWithCondition(valuesList(), ExportType::isAvailable);
 	}
 
 	@NonNull
 	public static List<ExportType> visibleValues() {
-		return filterElementsWithCondition(enabledValues(), type -> !type.isHidden());
+		return filterElementsWithCondition(availableValues(), type -> !type.isHidden());
 	}
 
 	@NonNull

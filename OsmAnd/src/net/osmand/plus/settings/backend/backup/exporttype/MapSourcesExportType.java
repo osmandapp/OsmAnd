@@ -104,12 +104,6 @@ public class MapSourcesExportType extends AbstractExportType {
 		return LocalItemType.TILES_DATA;
 	}
 
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
-
 	public static boolean shouldSkipMapSource(@NonNull ITileSource source) {
 		if (source instanceof TileSourceTemplate) {
 			TileSourceTemplate sourceTemplate = (TileSourceTemplate) source;

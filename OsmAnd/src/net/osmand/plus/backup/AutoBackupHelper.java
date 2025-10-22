@@ -35,7 +35,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 	}
 
 	private void initListeners() {
-		for (ExportType type : ExportType.enabledValues()) {
+		for (ExportType type : ExportType.availableValues()) {
 			addListener(type);
 		}
 	}
@@ -49,7 +49,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 	}
 
 	public boolean isAutoBackupEnabled() {
-		for (ExportType type : ExportType.enabledValues()) {
+		for (ExportType type : ExportType.availableValues()) {
 			if (backupHelper.getBackupTypePref(type, true).get()) {
 				return true;
 			}
@@ -64,7 +64,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult result) {
-		if (!settingsHelper.isBackupSyncing() && result != null && result.isAutoSync()) {
+		if (result != null && result.isAutoSync() && !settingsHelper.isBackupSyncing()) {
 			BackupInfo info = result.getBackupInfo();
 			if (info != null && info.hasFilteredFiles()) {
 				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_AUTO_SYNC);

@@ -149,7 +149,7 @@ public abstract class SettingsHelper {
 	                                                   @Nullable List<ExportType> acceptedTypes,
 	                                                   boolean allowEmptyTypes, boolean offlineBackup) {
 		Map<ExportType, List<?>> exportDataMap = new LinkedHashMap<>();
-		for (ExportType exportType : ExportType.enabledValuesOf(exportCategory)) {
+		for (ExportType exportType : ExportType.availableValuesOf(exportCategory)) {
 			if (acceptedTypes == null || acceptedTypes.contains(exportType)) {
 				List<?> exportData = exportType.fetchExportData(app, offlineBackup);
 				if (!exportData.isEmpty() || allowEmptyTypes) {
