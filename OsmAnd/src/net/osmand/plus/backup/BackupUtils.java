@@ -37,6 +37,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -314,5 +315,18 @@ public class BackupUtils {
 			}
 		}
 		return 0;
+	}
+
+	@NonNull
+	public static String encodeExportTypes(@NonNull List<ExportType> types) {
+		StringBuilder builder = new StringBuilder();
+		Iterator<ExportType> iterator = types.iterator();
+		while (iterator.hasNext()) {
+			builder.append(iterator.next().getItemName());
+			if (iterator.hasNext()) {
+				builder.append(",");
+			}
+		}
+		return builder.toString();
 	}
 }

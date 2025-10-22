@@ -212,6 +212,17 @@ public enum ExportType {
 	}
 
 	@NonNull
+	public static List<ExportType> getEnabledExportTypes(@NonNull OsmandApplication app, boolean autoSync) {
+		List<ExportType> list = new ArrayList<>();
+		for (ExportType type : ExportType.availableValues()) {
+			if (app.getBackupHelper().getBackupTypePref(type, autoSync).get()) {
+				list.add(type);
+			}
+		}
+		return list;
+	}
+
+	@NonNull
 	public static List<ExportType> valuesOf(@NonNull List<String> keys) {
 		List<ExportType> result = new ArrayList<>();
 		for (String key : keys) {
