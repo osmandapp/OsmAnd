@@ -32,7 +32,7 @@
     <string name="poi_club">Клуб</string>
     <string name="poi_sustenance">Храна</string>
     <string name="poi_cafe_and_restaurant">Кафе и ресторант</string>
-    <string name="poi_service">Услуга</string>
+    <string name="poi_service">Услуги</string>
     <string name="poi_craft">Занаяти</string>
     <string name="poi_finance">Финанси</string>
     <string name="poi_natural">Природа</string>
@@ -723,4 +723,11 @@
     <string name="poi_rtsa_scale_3a_asterisk">3A*</string>
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
+    <string name="poi_brushless">Безконтактно</string>
+    <string name="poi_covered">Покрито</string>
+    <string name="poi_ferry_terminal_cargo">Превозим товар</string>
+    <string name="poi_pharmacy_dispensing">Продажба на лекарства по рецепта</string>
+    <string name="poi_backcountry">Пущинак</string>
+    <string name="poi_microbrewery">Собствена пивоварна</string>
+    <string name="poi_beauty_salon_service">Услуги</string>
 </resources>
