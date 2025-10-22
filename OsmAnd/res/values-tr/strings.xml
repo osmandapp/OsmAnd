@@ -5760,7 +5760,21 @@
     <string name="map_orientation_portrait_inverted">Dikey (ters)</string>
     <string name="map_orientation_landscape_inverted">Yatay (ters)</string>
     <string name="reverse_mode">Ters mod</string>
-    <string name="release_5_2">• Üzerinde çalışılıyor...</string>
+    <string name="release_5_2">
+        • Arama sonuçlarına cadde ve şehir detayları eklendi\n\n
+        • Yeni Yolculuk Kaydı widget\'ları: Maksimum Hız, Ortalama Eğim ve geliştirilmiş Yokuş Yukarı/Yokuş Aşağı\n\n
+        • Kapsamlı özelleştirme seçenekleriyle yeni "Deniz" deniz haritası stili\n\n
+        • İyileştirilmiş harita oluşturma hızı\n\n
+        • OBDII BLE adaptörleriyle geliştirilmiş bağlantı\n\n
+        • "Aralığa Göre Analiz Et" bölümüne kalp atış hızı metrikleri eklendi\n\n
+        • Planlanan rotalar için süre gösterimi eklendi\n\n
+        • Yükseklik birimleri artık mesafe birimlerinden ayrı olarak ayarlanabilir\n\n
+        • Seçilebilir pusula modlarıyla harita yönlendirmesi Hızlı Eylemi iyileştirildi\n\n
+        • Android Auto için eksik haritalar ve özel yollar için ön navigasyon uyarıları eklendi\n\n
+        • Yarıçap Cetveli widget\'ı için yanlış boyut parametreleriyle ilgili bir sorun çözüldü\n\n
+        • Ters ekran yönlendirmeleri eklendi\n\n
+        • Kamyon metriklerini belirtmek için kullanıcı arayüzü iyileştirildi\n\n
+    </string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Yanıt</string>
