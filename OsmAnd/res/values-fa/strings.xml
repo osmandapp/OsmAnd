@@ -3956,7 +3956,7 @@
     <string name="rendering_attr_horse_scale_critical_name">بحرانی</string>
     <string name="rendering_attr_horse_scale_dangerous_name">خطرناک</string>
     <string name="rendering_attr_horse_scale_impossible_name">غیر ممکن</string>
-    <string name="safe_settings">بی‌خطر</string>
+    <string name="safe_settings">امن</string>
     <string name="shared_string_mini">مینی</string>
     <string name="exit_import">خروج؟</string>
     <string name="rendering_attr_horse_scale_difficult_name">دشوار</string>
@@ -4036,7 +4036,7 @@
     <string name="shared_string_sunset">غروب</string>
     <string name="lang_sat">سانتالی</string>
     <string name="widget_with_dot">ویجت.</string>
-    <string name="shared_string_precision">درستی</string>
+    <string name="shared_string_precision">دقت</string>
     <string name="shared_string_grade">درجه‌بندی</string>
     <string name="any_connected">هر آنچه متصل شده</string>
     <string name="row_number">ردیف %1$s</string>
