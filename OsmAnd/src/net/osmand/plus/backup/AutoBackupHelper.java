@@ -85,6 +85,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		app.removeMessagesInUiThread(MSG_RUN_AUTO_BACKUP);
 
 		if (canRunBackupNow()) {
+			log.info("Preparing auto backup");
 			settings.LAST_AUTO_BACKUP_TIMESTAMP.set(currentTime);
 			backupHelper.prepareBackup(true, this);
 		}
@@ -124,6 +125,7 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 		if (result != null && result.isAutoSync() && !settingsHelper.isBackupSyncing()) {
 			BackupInfo info = result.getBackupInfo();
 			if (info != null && info.hasFilteredFiles()) {
+				log.info("Auto backup starting");
 				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_AUTO_SYNC);
 			}
 		}
