@@ -554,7 +554,8 @@ public class SearchCoreFactory {
 								continue;
 							}
 							if (bb != null) {
-								req.setBBox(x31, y31, bb[0], bb[1], bb[2], bb[3]);
+								int w = (bb[2] - bb[0]) / 3, h = (bb[3] - bb[1]) / 3; // enlarge for 1234 Golden Pond Road Woodhull	
+								req.setBBox(x31, y31, bb[0] - w, bb[1] - h, bb[2] + w, bb[3] + h);
 							} else {
 								req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(),
 										(int) c.getType().getRadius() * 3);
