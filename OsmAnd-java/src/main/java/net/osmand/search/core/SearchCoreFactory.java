@@ -192,6 +192,84 @@ public class SearchCoreFactory {
 			}
 			return null;
 		}
+		
+		boolean matchAddressName(SearchPhrase phrase, SearchResult parent, SearchResult res, boolean fullMatch) {
+			boolean match = false;
+			if (!phrase.isUnknownSearchWordPresent()) {
+				return false;
+			}
+			// res only used as container to count matches 
+			phrase.countUnknownWordsMatchMainResult(res);
+			
+			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
+			String localeName = res.localeName;
+			Collection<String> otherNames = res.otherNames;
+			// quick check
+			if (!fullMatch && (nm.matches(localeName) || nm.matches(otherNames))) {
+				return true;
+			}
+			List<String> localeNames = SearchPhrase.splitWords(localeName, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
+			if (parent == null || !parent.firstUnknownWordMatches) {
+				Iterator<String> it = localeNames.iterator();
+				while (it.hasNext()) {
+					String lName = it.next();
+					if (phrase.getFirstUnknownNameStringMatcher().matches(lName)) {
+						it.remove();
+					}
+				}
+				if (!fullMatch && phrase.getFirstUnknownNameStringMatcher().matches(otherNames)) {
+					return true;
+				}
+			}
+			List<String> leftUnknownSearchWords = parent == null ? phrase.getUnknownSearchWords() : parent.filterUnknownSearchWord(null);
+			List<String> unknownSearchWords = phrase.getUnknownSearchWords();
+			for (int i = 0; i < unknownSearchWords.size() && !match; i++) {
+				String leftUnknownSearchWord = unknownSearchWords.get(i);
+				if (!leftUnknownSearchWords.contains(leftUnknownSearchWord)) {
+					continue;
+				}
+				Iterator<String> it = localeNames.iterator();
+				while (it.hasNext()) {
+					String lName = it.next();
+					if (phrase.getUnknownNameStringMatcher(i).matches(lName)) {
+						it.remove();
+					}
+				}
+				if (!fullMatch && phrase.getUnknownNameStringMatcher(i).matches(otherNames)) {
+					return true;
+				}
+			}
+			if (localeNames.size() == 0) {
+				return true;
+			}
+			return false;
+		}
+		
+		Set<String> splitAddressSearchNames(String name) {
+			int prev = -1;
+			Set<String> namesToAdd = new HashSet<>();
+
+			for (int i = 0; i <= name.length(); i++) {
+				boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
+						&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
+								|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
+				if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
+						&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
+					if (prev != -1) {
+						String substr = name.substring(prev, i);
+						namesToAdd.add(substr.toLowerCase());
+						prev = -1;
+					}
+				} else {
+					if (prev == -1) {
+						prev = i;
+					}
+				}
+			}
+			return namesToAdd;
+		}
+
+
 
 		@Override
 		public String toString() {
@@ -372,7 +450,15 @@ public class SearchCoreFactory {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
 						SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-						searchPoiInCity(nphrase, res, resultMatcher);
+						// FIXME searchPoiInCity
+//						searchPoiInCity(nphrase, res, resultMatcher);
+						
+						// FIXME no failed cases found yet
+						// FIXME check if subsearch successful don't call search by name inside
+						// require exact matching to search street by name (not attached to city)
+						if (matchAddressName(phrase, null, res, true)) {
+							subSearchApiOrPublish(phrase, resultMatcher, res, this);
+						}
 					}
 					if (limit++ > LIMIT * phrase.getRadiusLevel()) {
 						break;
@@ -382,10 +468,10 @@ public class SearchCoreFactory {
 		}
 		
 		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
+			// FIXME not correct double check code with selection
 			if (nphrase != null && res.objectType == ObjectType.CITY) {
 //				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 //				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
-				// FIXME not correct double check code with selection
 //				newPhrase.getSettings().setOriginalLocation(res.location);
 //				poiApi.search(newPhrase, resultMatcher);
 			}
@@ -528,6 +614,10 @@ public class SearchCoreFactory {
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
+				// FIXME UNIT-TESTS
+				// 7 J.-F.-Weishaar-Straße Korb
+				// 10 Martin-Luther-Straße Korb
+				// 35 Ostheimer Weg Korntal-Münchingen
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
@@ -583,39 +673,29 @@ public class SearchCoreFactory {
 								cityResult.location = ct.getLocation();
 								cityResult.localeRelatedObjectName = res.file.getRegionName();
 								cityResult.file = res.file;
-								phrase.countUnknownWordsMatchMainResult(res);
 								// include parent search result even if it is empty
-								boolean match = matchCity(res, phrase, ct, false);
+								// for street-city don't require exact matching 
+								boolean match = matchAddressName(phrase, res, cityResult,  false);
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
 									resArray.clear();
 									QuadRect bbox = SearchPhrase.caculateBbox(1000, res.location);
 									resArray = boundariesQR.queryInBox(bbox, resArray);
-									// 		'Remseck am Neckar' [R 405291], 0 street(s) size 0 bytes 48.91138, 9.22288 - 48.84634, 9.31304
-									// 48.869724 Lon 9.276302
-//									'Remseck am Neckar' [R 405291], 0 street(s) size 0 bytes 48.91138, 9.22288 - 48.84634, 9.31304
-//									System.out.printf("Search %s %.5f, %.5f - %.5f, %.5f\n", res.toString(),
-//											MapUtils.get31LongitudeX((int) bbox.left), MapUtils.get31LatitudeY((int) bbox.top),
-//											MapUtils.get31LongitudeX((int) bbox.right), MapUtils.get31LatitudeY((int) bbox.bottom));
 									for (City boundary : resArray) {
 										int[] bb = boundary.getBbox31();
 										if (bb == null) {
 											continue;
 										}
-//										if (boundary.getName().toLowerCase().startsWith("remseck")) {
-//											System.out.println(boundary);
-//										}
 										QuadRect boundBox = new QuadRect(bb[0], bb[1], bb[2], bb[3]);
 										if (!QuadRect.intersects(boundBox, bbox)) {
 											continue;
 										}
-										if (matchCity(res, phrase, boundary, true)) {
-										// FIXME
-//										if(phrase.getFullSearchPhrase().contains(boundary.getName())) {
-//											System.out.printf("Found %s %.5f, %.5f - %.5f, %.5f\n", boundary.getName(),
-//													MapUtils.get31LongitudeX(bb[0]), MapUtils.get31LatitudeY(bb[1]),
-//													MapUtils.get31LongitudeX(bb[2]), MapUtils.get31LatitudeY(bb[3]));
+										// cityResult.object = boundary; // keep city the same
+										cityResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+										cityResult.otherNames = boundary.getOtherNames(true);
+										// for another city require exact matching
+										if (matchAddressName(phrase, res, cityResult,  true)) {
 											cityResult.localeName = boundary.getName();
 											newParentSearchResult = cityResult;
 											break;
@@ -625,24 +705,34 @@ public class SearchCoreFactory {
 							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
+							// FIXME UNIT-TESTS
 							// 6 Dorfstraße Remseck am Neckar
 							// 4 Hofäckerstraße Kernen im Remstal
 							// 4 Am Heuhaus Weinstadt
-							// 4241 Cook Hollow Road Woodhull
 							// 301 West Main Street Valley View   
-//							11601 Kelly Hill Road Pine City // TODO improve
+							// 108 North Mountain Boulevard Mountain Top
 							// 8508 PA 61 Coal Township
-							if (matchCity(null, phrase, (City) res.object, true)) {
+							// 1281 Pennsylvania Avenue, Pine City PA 14871 United States
+							
+							// require exact matching to speed up
+							if (matchAddressName(phrase, null, res, true)) {
 //							if (phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
 //								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
 						} else {
+							 
 							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-							// FIXME check if subsearch successful don't call search by name inside 
+							// FIXME searchPoiInCity
 //							searchPoiInCity(nphrase, res, resultMatcher);
-//							if(phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
-							if (matchCity(null, phrase, (City) res.object, true)) {
+							
+							// FIXME UNIT-TESTS
+							// 4241 Cook Hollow Road Woodhull
+							// 11601 Kelly Hill Road Pine City
+							
+							// FIXME check if subsearch successful don't call search by name inside
+							// require exact matching to search street by name (not attached to city) 
+							if (matchAddressName(phrase, null, res, true)) {
 //								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
@@ -653,73 +743,9 @@ public class SearchCoreFactory {
 			}
 		}
 		
-		private boolean matchCity(SearchResult res, SearchPhrase phrase, City ct, boolean fullMatch) {
-			boolean match = false;
-			String localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-			List<String> localeNames = SearchPhrase.splitWords(localeName, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
-			List<String> otherNames = ct.getOtherNames(true);
-			if (res == null || !res.firstUnknownWordMatches) {
-				Iterator<String> it = localeNames.iterator();
-				while (it.hasNext()) {
-					String lName = it.next();
-					if (phrase.getFirstUnknownNameStringMatcher().matches(lName)) {
-						it.remove();
-					}
-				}
-				if (!fullMatch && phrase.getFirstUnknownNameStringMatcher().matches(otherNames)) {
-					return true;
-				}
-			}
-			List<String> leftUnknownSearchWords = res == null ? phrase.getUnknownSearchWords() : res.filterUnknownSearchWord(null);
-			List<String> unknownSearchWords = phrase.getUnknownSearchWords();
-			for (int i = 0; i < unknownSearchWords.size() && !match; i++) {
-				String leftUnknownSearchWord = unknownSearchWords.get(i);
-				if (!leftUnknownSearchWords.contains(leftUnknownSearchWord)) {
-					continue;
-				}
-				Iterator<String> it = localeNames.iterator();
-				while (it.hasNext()) {
-					String lName = it.next();
-					if (phrase.getUnknownNameStringMatcher(i).matches(lName)) {
-						it.remove();
-					}
-				}
-				if (!fullMatch && phrase.getUnknownNameStringMatcher(i).matches(otherNames)) {
-					return true;
-				}
-			}
-			if (localeNames.size() == 0) {
-				return true;
-			}
-			return false;
-		}
-	}
-	
-	public static Set<String> splitAddressSearchNames(String name) {
-		int prev = -1;
-		Set<String> namesToAdd = new HashSet<>();
-
-		for (int i = 0; i <= name.length(); i++) {
-			boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
-					&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
-							|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
-			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
-					&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
-				if (prev != -1) {
-					String substr = name.substring(prev, i);
-					namesToAdd.add(substr.toLowerCase());
-					prev = -1;
-				}
-			} else {
-				if (prev == -1) {
-					prev = i;
-				}
-			}
-		}
-		return namesToAdd;
 	}
 
-	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
+		public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 5600 * 1000; // 5600 is the minimum to pass test [14: hisar]
@@ -1629,22 +1655,19 @@ public class SearchCoreFactory {
 					sw.getResult().file.preloadStreets(c, null, phrase.getSettings().getStat());
 				}
 				int limit = 0;
-				NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 				for (Street object : c.getStreets()) {
 					SearchResult res = new SearchResult(phrase);
-
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getOtherNames(true);
+					res.object = object;
 					boolean pub = true;
 					if (object.getName().startsWith("<")) {
 						// streets related to city
 						pub = false;
-					} else if (phrase.isUnknownSearchWordPresent()
-							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
+					} else if (phrase.isUnknownSearchWordPresent() && !matchAddressName(phrase, null, res, false)) {
 						continue;
 					}
 					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-					res.object = object;
 					res.preferredZoom = PREFERRED_STREET_ZOOM;
 					res.file = sw.getResult().file;
 					res.location = object.getLocation();
@@ -1775,19 +1798,18 @@ public class SearchCoreFactory {
 					resultMatcher.publish(res);
 				}
 				String streetIntersection = phrase.getUnknownWordToSearch();
-				NameStringMatcher streetMatch = phrase.getMainUnknownNameStringMatcher();
 				if (Algorithms.isEmpty(streetIntersection) ||
 						(!Character.isDigit(streetIntersection.charAt(0)) &&
-								CommonWords.getCommonSearch(streetIntersection) == -1) ) {
+						  CommonWords.getCommonSearch(streetIntersection) == -1) &&
+						 phrase.isSearchTypeAllowed(ObjectType.STREET_INTERSECTION)) {
 					for (Street street : s.getIntersectedStreets()) {
 						SearchResult res = new SearchResult(phrase);
-						if ((!streetMatch.matches(street.getName()) && !streetMatch.matches(street.getOtherNames(true)))
-								|| !phrase.isSearchTypeAllowed(ObjectType.STREET_INTERSECTION)) {
-							continue;
-						}
 						res.otherNames = street.getOtherNames(true);
 						res.localeName = street.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						res.object = street;
+						if (!matchAddressName(phrase, null, res, false)) {
+							continue;
+						}
 						res.file = file;
 						res.relatedObject = s;
 						res.priority = priority + 1;
