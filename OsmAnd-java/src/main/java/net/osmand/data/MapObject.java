@@ -110,11 +110,17 @@ public abstract class MapObject implements Comparable<MapObject> {
 			l.add(enName);
 		}
 		if (names != null) {
-			l.addAll(names.values());
+			for (String key : names.keySet()) {
+				// skip name:place, name:admin_level...
+				if (key.length() > 5 || key.equals("place")) {
+					continue;
+				}
+				l.add(names.get(key));
+			}
 		}
 		return l;
 	}
-
+	
 	public void copyNames(String otherName, String otherEnName, Map<String, String> otherNames, boolean overwrite) {
 		if (!Algorithms.isEmpty(otherName) && (overwrite || Algorithms.isEmpty(name))) {
 			name = otherName;
