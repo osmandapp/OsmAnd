@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.osmedit.dialogs;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
@@ -72,15 +72,15 @@ public final class UploadingMultipleErrorDialogFragment extends BaseAlertDialogF
 		return builder.create();
 	}
 
-	private void showUploadItemsProgressDialog(@NonNull OsmPoint[] toUpload) {
+	private void showUploadItemsProgressDialog(@NonNull OsmPoint[] points) {
 		FragmentActivity activity = requireActivity();
 		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(
 					activity, getString(R.string.local_openstreetmap_were_uploaded));
-			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-					showProgressDialog(), helper, plugin, toUpload.length, false, false);
-			uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
+			UploadOpenstreetmapPointAsyncTask task = new UploadOpenstreetmapPointAsyncTask(
+					showProgressDialog(), helper, plugin, points.length, false, false);
+			OsmAndTaskManager.executeTask(task, points);
 		}
 	}
 
