@@ -10,6 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 public abstract class EditPointDescriptionController extends EditDescriptionController {
 
@@ -48,17 +49,18 @@ public abstract class EditPointDescriptionController extends EditDescriptionCont
 		return getContextMenuObject(activity);
 	}
 
+	@Nullable
 	public static EditPointDescriptionController getInstance(@NonNull MapActivity mapActivity) {
 		Object object = getContextMenuObject(mapActivity);
 		if (object instanceof FavouritePoint) {
 			return new EditFavoriteDescriptionController(mapActivity);
-		} else {
+		} else if (object instanceof WptPt) {
 			return new EditWptDescriptionController(mapActivity);
 		}
+		return null;
 	}
 
 	protected static Object getContextMenuObject(@NonNull MapActivity mapActivity) {
 		return mapActivity.getContextMenu().getObject();
 	}
-
 }
