@@ -36,6 +36,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -91,6 +93,13 @@ public class BackupSettingsFragment extends BaseFullScreenFragment implements On
 		setupAutoBackup(view);
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createScrollable(R.id.main_view));
+		return collection;
 	}
 
 	@Override
@@ -200,8 +209,6 @@ public class BackupSettingsFragment extends BaseFullScreenFragment implements On
 	}
 
 	private void setupAutoBackup(@NonNull View view) {
-		boolean visible = PluginsHelper.isDevelopment();
-
 		View container = view.findViewById(R.id.auto_backup_container);
 
 		TextView title = container.findViewById(android.R.id.title);
@@ -217,9 +224,6 @@ public class BackupSettingsFragment extends BaseFullScreenFragment implements On
 			}
 		});
 		setupSelectableBackground(container);
-
-		AndroidUiHelper.updateVisibility(container, visible);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.auto_backup_divider), visible);
 		AndroidUiHelper.updateVisibility(container.findViewById(android.R.id.summary), false);
 	}
 

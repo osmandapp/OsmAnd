@@ -5713,7 +5713,21 @@
     <string name="deleting">Törlés…</string>
     <string name="deleting_history">Előzmények törlése…</string>
     <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
-    <string name="release_5_2">• Hozzáadva a keresési eredményekhez az utca- és városadatok részletei\n\n • Új, útrögzítéshez kapcsolódó widgetek: Maximális sebesség, Átlagos lejtés és továbbfejlesztett emelkedő/lejtő\n\n • Új tengeri térképstílus széleskörű testreszabási lehetőségekkel\n\n • Javított térképmegjelenítési sebesség\n\n • Továbbfejlesztett csatlakozás OBDII BLE adapterekkel\n\n • Hozzáadva a pulzusszám az Intervallum elemzéshez\n\n • Hozzáadva időtartamkijelzés az útvonalaktervekhez\n\n • A magasság mértékegységek mostantól a távolsági mértékegységektől függetlenül állíthatóak be\n\n • Továbbfejlesztett térképtájolási gyorsművelet választható iránytű módokkal\n\n • Hozzáadva az Android Auto rendszerhez a navigáció előtti riasztások a hiányzó térképekről és a magánutakról\n\n • Kijavítva egy, a sugárvonalzó widgettel kapcsolatos hiba.\n\n • Hozzáadva a fordított képernyőtájolások\n\n • Továbbfejlesztett felhasználói felület a teherautó-metrikák megadásához</string>
+    <string name="release_5_2">
+        • Utca- és városadatok hozzáadása a keresési eredményekhez\n\n
+        • Új Útrögzítő widgetek: Maximális sebesség, Átlagos meredekség és továbbfejlesztett Emelkedő/Lejtő\n\n
+        • Új "Tengeri" térképstílus széles körű testreszabási lehetőségekkel\n\n
+        • Továbbfejlesztett térkémegjelenítési sebesség\n\n
+        • Továbbfejlesztett kapcsolat az OBDII BLE adapterekkel\n\n
+        • Pulzusmérők hozzáadása az "Elemzés intervallum szerint" funkcióhoz\n\n
+        • Időtartam kijelzése a tervezett útvonalakhoz\n\n
+        • A magassági egységek mostantól a távolsági egységektől elkülönítve állíthatók be\n\n
+        • Továbbfejlesztett térképtájolás Gyorsművelet választható iránytű módokkal\n\n
+        • Android Auto esetén navigáció előtti figyelmeztetések hiányzó térképekre és magánutakra\n\n
+        • Kijavítva egy hiba a Sugárvonalzó widget helytelen méretparamétereivel kapcsolatban\n\n
+        • Fordított képernyőtájolások hozzáadása\n\n
+        • Továbbfejlesztett felhasználói felület a teherautó-mérőszámok megadásához\n\n
+    </string>
     <string name="shared_string_threads">Szálak</string>
     <string name="threads_allocated_for_rendering">Rendereléshez lefoglalt szálak</string>
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>

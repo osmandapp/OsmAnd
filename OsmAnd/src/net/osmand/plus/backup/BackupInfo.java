@@ -131,7 +131,7 @@ public class BackupInfo {
 		List<LocalFile> files = new ArrayList<>();
 		for (LocalFile localFile : localFilesToDelete) {
 			ExportType exportType = ExportType.findBy(localFile.item);
-			if (exportType != null && exportType.isEnabled()) {
+			if (exportType != null && exportType.isAvailable()) {
 				files.add(localFile);
 			}
 		}

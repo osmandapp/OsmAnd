@@ -167,6 +167,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		//collection.removeType(Type.SCROLLABLE);
 		collection.removeType(Type.FAB);
 		collection.removeType(Type.COLLAPSING_APPBAR);
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.toolbar_switch_container, R.id.toolbar_container));
 		collection.add(InsetTarget.createScrollable(R.id.recycler_view));
 		collection.add(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
 		collection.add(InsetTarget.createRootInset());

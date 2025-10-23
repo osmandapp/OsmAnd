@@ -5769,7 +5769,21 @@
     <string name="deleting_history">Mazání historie…</string>
     <string name="deleting">Mazání…</string>
     <string name="show_rasterization_debug_tile">Zobrazit informace o rasterizaci dlaždic</string>
-    <string name="release_5_2">• V přípravě…</string>
+    <string name="release_5_2">
+        • Do výsledků vyhledávání byly přidány podrobnosti o ulici a městě\n\n
+        • Nové widgety Záznamu trasy: Maximální rychlost, Průměrný sklon a vylepšené Stoupání/Klesání\n\n
+        • Nový styl námořní mapy "Marine" s rozsáhlými možnostmi přizpůsobení\n\n
+        • Vylepšená rychlost vykreslování mapy\n\n
+        • Vylepšená konektivita s adaptéry OBDII BLE\n\n
+        • Přidány metriky srdečního tepu do "Analyzovat podle intervalu"\n\n
+        • Přidáno zobrazení doby trvání plánovaných tras\n\n
+        • Jednotky nadmořské výšky lze nyní nastavit odděleně od jednotek vzdálenosti\n\n
+        • Vylepšena Rychlá akce orientace mapy s volitelnými režimy kompasu\n\n
+        • Pro Android Auto přidána upozornění před navigací na chybějící mapy a soukromé silnice\n\n
+        • Vyřešen problém s nesprávnými parametry velikosti widgetu Pravítko poloměru\n\n
+        • Přidány obrácené orientace obrazovky\n\n
+        • Vylepšeno uživatelské rozhraní pro zadávání metrik nákladních vozidel\n\n
+    </string>
     <string name="shared_string_threads">Vlákna</string>
     <string name="threads_allocated_for_rendering">Vlákna alokovaná pro vykreslování</string>
     <string name="threads_allocated_for_rendering_desc">Menší počet alokovaných vláken může v některých případech zrychlit vykreslování mapy.</string>
@@ -5887,4 +5901,5 @@
     <string name="requires_internet_connection">Vyžaduje připojení k internetu</string>
     <string name="private_access_routing_req_short">Povolit použití soukromých cest k dosažení vašeho cíle?</string>
     <string name="download_wikipedia_label">Stáhnout Wikipedii</string>
+    <string name="save_and_access_articles_offline">Uložte si data a přistupujte ke článkům offline kdekoli</string>
 </resources>

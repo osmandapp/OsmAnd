@@ -5848,7 +5848,21 @@
     <string name="max_axle_load_description">Enigu maksimuman mason prematan de akso de via veturilo por eviti vojojn kaj pontojn kun pezaj limigoj.</string>
     <string name="view_on_phone">Montri sur telefono</string>
     <string name="lang_en_barebones">Angla (minimuma)</string>
-    <string name="release_5_2">• aldonis detalojn pri strato kaj urbo por serĉrezultoj\n\n• novaj fenestraĵoj de Spur-registrilo: Maksimuma rapido, Mezuma dekliveco kaj plibonigitaj Malsupreniroj/Supreniroj\n\n• nova map-aspekto – Marnavigada 2 – alte alĝustigebla\n\n• plialtigita rapido de map-bildigado\n\n• plibonigita konekteblo kun adaptiloj OBDII BLE\n\n• aldonis mezuro de korbata frekvenco al “Analizi laŭ fragmentoj”\n\n• aldonis vidigon de tempo al planataj kursoj\n\n• eblo agordi unuojn de altitudo sendepende de unuoj de distanco\n\n• plibonigis la butonon de rapida ago Map-orientiĝo: eblo elekti reĝimon de kompaso\n\n• Android Auto: aldonis avertojn antaŭ navigi sen necesaj mapoj kaj tra vojoj kun privata aliro\n\n• riparis eraron pri malĝusta grando de la fenestraĵo Cirkelo kaj mezurilo\n\n• aldonis inversajn orientiĝojn de ekrano\n\n• plibonigita fasado de parametroj de kamiono</string>
+    <string name="release_5_2">
+        • Aldonis strato- kaj urbodetalojn al serĉrezultoj\n\n
+        • Novaj vojaĝregistradaj fenestraĵoj: Maksimuma Rapido, Meza Deklivo kaj plibonigitaj Supreniro/Malsupreniro\n\n
+        • Nova "Mara" naŭtika mapstilo kun ampleksaj personigo-opcioj\n\n
+        • Plibonigita mapbildiga rapideco\n\n
+        • Plibonigita konektebleco kun OBDII BLE-adaptiloj\n\n
+        • Aldonis korfrekvencajn metrikojn al la "Analizi laŭ Intervalo"\n\n
+        • Aldonis daŭran montradon por planitaj spuroj\n\n
+        • Alteco-unuoj nun povas esti agorditaj aparte de distanco-unuoj\n\n
+        • Plibonigis la maporientiĝan Rapidan Agon kun elekteblaj kompasreĝimoj\n\n
+        • Por Android Auto, aldonis antaŭnavigadajn atentigojn pri mankantaj mapoj kaj privataj vojoj\n\n
+        • Solvis problemon kun malĝustaj grandecaj parametroj por la Radius-Regilo fenestraĵo\n\n
+        • Aldonis inversajn ekranorientiĝojn\n\n
+        • Plibonigis la uzantinterfacon por specifi kamionajn metrikojn\n\n
+    </string>
     <string name="shared_sting_osm_link">OSM-ligilo</string>
     <string name="show_local_names">Montri lokajn nomojn</string>
     <string name="obd_alt_battery_voltage">Tensio de adaptilo</string>

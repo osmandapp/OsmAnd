@@ -5584,7 +5584,7 @@
     <string name="deleting">Ag scriosadh…</string>
     <string name="deleting_history">Stair á scriosadh…</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
-    <string name="release_5_2">• Obair ar siúl...</string>
+    <string name="release_5_2">• Sonraí sráide agus cathrach curtha leis na torthaí cuardaigh\n\n• Giuirléidí Taifeadta Turais Nua: Uasluas, Meánfhána, agus Feabhsuithe ar an gCnoc/An Cnoc Suas\n\n• Stíl léarscáile muirí nua le roghanna saincheaptha fairsinge\n\n• Luas rindreála léarscáile feabhsaithe\n\n• Nascacht fheabhsaithe le hoiriúnóirí OBDII BLE\n\n• Méadrachtaí ráta croí curtha leis an Anailís de réir Eatramh\n\n• Taispeántas fad curtha leis do rianta pleanáilte\n\n• Is féidir aonaid airde a shocrú anois ar leithligh ó aonaid achair\n\n• Treoshuíomh an léarscáil feabhsaithe Gníomh Tapa le modhanna compáis inroghnaithe\n\n• I gcás Android Auto, foláirimh réamh-loingseoireachta curtha leis le haghaidh léarscáileanna ar iarraidh agus bóithre príobháideacha\n\n• Fadhb réitithe le paraiméadair mhéide míchearta don ghiuirléid Rialóir Ga\n\n• Treoshuíomhanna scáileáin inbhéartaithe curtha leis\n\n• Comhéadan úsáideora feabhsaithe chun méadrachtaí trucaile a shonrú</string>
     <string name="shared_string_threads">Snáitheanna</string>
     <string name="threads_allocated_for_rendering">Snáitheanna leithdháilte le haghaidh rindreála</string>
     <string name="threads_allocated_for_rendering_desc">D’fhéadfadh leithdháileadh snáithe níos ísle luas a chur le rindreáil an léarscáil i gcásanna áirithe.</string>
@@ -5699,4 +5699,8 @@
     <string name="shared_string_last_downhill">Deireanach síos an cnoc</string>
     <string name="help_article_navigation_routing_ski_routing_name">Fánaí sciála agus bealaí</string>
     <string name="rendering_attr_pisteRoutes_name">Fánaí sciála agus bealaí</string>
+    <string name="requires_internet_connection">Teastaíonn nasc idirlín</string>
+    <string name="save_and_access_articles_offline">Sábháil sonraí agus rochtain a fháil ar ailt as líne áit ar bith</string>
+    <string name="private_access_routing_req_short">Cead a thabhairt duit bóthar príobháideach a úsáid chun do cheann scríbe a bhaint amach?</string>
+    <string name="download_wikipedia_label">Íoslódáil Vicipéid</string>
 </resources>

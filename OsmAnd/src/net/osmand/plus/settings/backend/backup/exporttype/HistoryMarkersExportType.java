@@ -83,10 +83,4 @@ class HistoryMarkersExportType extends AbstractExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.HISTORY_MARKERS;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

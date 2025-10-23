@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -37,9 +40,10 @@ public class AudioVideoNoteRecordingMenu {
 	protected double lat;
 	protected double lon;
 
-	private final int screenHeight;
-	private final int buttonsHeight;
-	private final int statusBarHeight;
+	private int screenHeight;
+	private int buttonsHeight;
+	private int topInset;
+	private int bottomInset;
 
 	public static boolean showViewfinder = true;
 
@@ -48,19 +52,9 @@ public class AudioVideoNoteRecordingMenu {
 		this.lat = lat;
 		this.lon = lon;
 		handler = new Handler();
-
 		MapActivity mapActivity = requireMapActivity();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
-
 		initView(mapActivity);
-		viewfinder = view.findViewById(R.id.viewfinder);
-		showViewfinder = true;
-
-		screenHeight = AndroidUtils.getScreenHeight(mapActivity);
-		statusBarHeight = AndroidUtils.getStatusBarHeight(mapActivity);
-		buttonsHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_route_buttons_height);
-
-		update();
 	}
 
 	@Nullable
@@ -75,6 +69,18 @@ public class AudioVideoNoteRecordingMenu {
 
 	protected void initView(MapActivity mapActivity) {
 		view = mapActivity.findViewById(R.id.recording_note_layout);
+		viewfinder = view.findViewById(R.id.viewfinder);
+		showViewfinder = true;
+
+		screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+		buttonsHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_route_buttons_height);
+
+		InsetsUtils.setWindowInsetsListener(view, (view, insets) -> {
+			Insets inset = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+			topInset = inset.top;
+			bottomInset = inset.bottom;
+			update();
+		}, false);
 	}
 
 	public SurfaceView prepareSurfaceView() {
@@ -131,6 +137,7 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	public void update() {
+		if (!plugin.isRecording()) return;
 		CurrentRecording recording = plugin.getCurrentRecording();
 		UiUtilities iconsCache = requireMapActivity().getApp().getUIUtilities();
 
@@ -202,7 +209,7 @@ public class AudioVideoNoteRecordingMenu {
 		boolean show = showViewfinder && recording != null && recording.getType() != AVActionType.REC_AUDIO;
 		if (isLandscapeLayout() && mapActivity != null) {
 			int buttonsHeight = (int) view.getResources().getDimension(R.dimen.map_route_buttons_height);
-			int tileBoxHeight = mapActivity.getMapView().getCurrentRotatedTileBox().getPixHeight();
+			int tileBoxHeight = mapActivity.getMapView().getCurrentRotatedTileBox().getPixHeight() - topInset - bottomInset;
 			int h = show ? tileBoxHeight : buttonsHeight;
 			view.setLayoutParams(new LinearLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 320f), h));
 			view.requestLayout();
@@ -245,7 +252,7 @@ public class AudioVideoNoteRecordingMenu {
 			res = dm.heightPixels;
 		} else {
 			if (isLandscapeLayout()) {
-				res = screenHeight - statusBarHeight - buttonsHeight;
+				res = screenHeight - topInset - buttonsHeight - bottomInset;
 			} else {
 				res = AndroidUtils.dpToPx(mapActivity, 240f);
 			}
@@ -321,5 +328,4 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void hideFinalPhoto() {
 	}
-
 }
