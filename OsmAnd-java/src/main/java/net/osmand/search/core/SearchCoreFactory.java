@@ -646,6 +646,7 @@ public class SearchCoreFactory {
 					// FIXME UNIT-Tests common words
 					// Київська вулиця 10-Д
 					// 3119 Pleasant Valley Boulevard #1 Altoona
+					// 130/6 Mercedes-Benz Werk 1 (Untertürkheim) Stuttgart - (braces remove)
 					System.out.println("SEARCH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
 							+ (lastWord != null ? lastWord.getResult().object : ""));
 					r.searchAddressDataByName(req);
