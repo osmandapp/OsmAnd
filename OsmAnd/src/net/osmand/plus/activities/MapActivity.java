@@ -946,7 +946,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				.daoProviderManager
 				.initDAOProvider(
 						PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
-						new ConfigurationBundleConverter().doForward(ConfigurationProvider.getActualConfiguration()),
+						ConfigurationProvider.getActualConfiguration(),
+						new ConfigurationBundleConverter(),
 						this);
 
 		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk

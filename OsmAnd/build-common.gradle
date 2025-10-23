@@ -436,7 +436,7 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.4.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.3.0'
-	implementation 'com.github.KnollFrank:SettingsSearch:e9ab2b3d06'
+	implementation 'com.github.KnollFrank:SettingsSearch:416891c172'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	implementation 'com.google.guava:guava:33.5.0-android'
 	// https://mvnrepository.com/artifact/org.threeten/threetenbp

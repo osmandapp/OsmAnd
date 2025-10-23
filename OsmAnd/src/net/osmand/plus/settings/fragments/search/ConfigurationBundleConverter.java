@@ -6,9 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.converters.Converter;
-
-public class ConfigurationBundleConverter implements Converter<Configuration, PersistableBundle> {
+public class ConfigurationBundleConverter implements de.KnollFrank.lib.settingssearch.db.preference.pojo.converters.ConfigurationBundleConverter<Configuration> {
 
 	private static final String ENABLED_PLUGINS = "enabledPlugins";
 

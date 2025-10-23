@@ -237,7 +237,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
-	public final DAOProviderManager daoProviderManager = new DAOProviderManager();
+	public final DAOProviderManager<net.osmand.plus.settings.fragments.search.Configuration> daoProviderManager = new DAOProviderManager<>();
 
 	public static OsmandApplication getInstanceFromContext(final Context context) {
 		return (OsmandApplication) context.getApplicationContext();
