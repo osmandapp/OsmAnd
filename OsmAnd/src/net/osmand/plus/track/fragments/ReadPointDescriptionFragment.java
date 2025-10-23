@@ -34,23 +34,25 @@ public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 
 	@Override
 	public boolean onSaveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
-		controller.saveEditedDescription(editedText, () -> {
-			updateContent(editedText);
-			callback.onDescriptionSaved();
-		});
+		if (controller != null) {
+			controller.saveEditedDescription(editedText, () -> {
+				updateContent(editedText);
+				callback.onDescriptionSaved();
+			});
+		}
 		return true;
 	}
 
 	@NonNull
 	@Override
 	protected String getTitle() {
-		return controller.getTitle();
+		return controller != null ? controller.getTitle() : "";
 	}
 
 	@Nullable
 	@Override
 	protected String getImageUrl() {
-		return controller.getImageUrl();
+		return controller != null ? controller.getImageUrl() : "";
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
