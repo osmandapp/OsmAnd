@@ -3,7 +3,6 @@ package net.osmand.binary;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.util.*;
@@ -32,7 +31,16 @@ public class CommonWords {
 	}
 
 	public static int getCommonSearch(String name) {
-		if (Character.isDigit(name.charAt(0)) && letters(name) < 2) {
+		boolean startsWithDigit = false;
+		for (int i = 0; i < name.length(); i++) {
+			if (Character.isDigit(name.charAt(i))) {
+				startsWithDigit = true;
+				break;
+			} else if (Character.isLetter(name.charAt(i))) {
+				break;
+			}
+		}
+		if (startsWithDigit && letters(name) < 2) {
 			name = NUMBER_WITH_LESS_THAN_2_LETTERS;
 		}
 		Integer i = commonWordsDictionary.get(name);
