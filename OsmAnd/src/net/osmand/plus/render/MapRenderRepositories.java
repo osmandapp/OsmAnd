@@ -68,7 +68,7 @@ public class MapRenderRepositories {
 	private final OsmandApplication app;
 	private static final int zoomOnlyForBasemaps = 11;
 
-	private static final int REPLACE_LOCAL_NAMES_MAX_ZOOM = 6;
+	private static final int DETAILED_MAP_ZOOM = 9;
 	private static final List<String> LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP = Arrays.asList("ru", "uk", "be", "bg", "mk", "sr");
 
 	static int zoomForBaseRouteRendering  = 14;
@@ -727,7 +727,6 @@ public class MapRenderRepositories {
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.preferredLocale = getMapPreferredLocale(app, requestedBox.getZoom());
-			currentRenderingContext.transliterate = transliterateMapNames(app, requestedBox.getZoom());
 			float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			// Text/icon scales according to mapDensity (so text is size of road)
@@ -1246,17 +1245,13 @@ public class MapRenderRepositories {
 
 	@NonNull
 	public static String getMapPreferredLocale(@NonNull OsmandApplication app, int zoom) {
-		return useAppLocaleForMap(app, zoom)
+		return isBasemapZoom(zoom)
 				? app.getLanguage()
 				: app.getSettings().MAP_PREFERRED_LOCALE.get();
 	}
 
-	public static boolean transliterateMapNames(@NonNull OsmandApplication app, int zoom) {
-		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-		boolean useAppLocale = useAppLocaleForMap(app, zoom);
-		String mapPreferredLocale = getMapPreferredLocale(app, zoom);
-		boolean noTransliteration = LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP.contains(mapPreferredLocale);
-		return transliterate && (!useAppLocale || !noTransliteration);
+	public static boolean isBasemapZoom(int zoom) {
+		return zoom < DETAILED_MAP_ZOOM;
 	}
 
 	public static LanguagePreference getMapLanguageSetting(@NonNull OsmandApplication app, int zoom) {
@@ -1264,6 +1259,10 @@ public class MapRenderRepositories {
 		String preferredLocale = settings.MAP_PREFERRED_LOCALE.get();
 		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
 		boolean showLocal = settings.MAP_SHOW_LOCAL_NAMES.get();
+
+		if (isBasemapZoom(zoom)) {
+			return LanguagePreference.LocalizedOrTransliterated;
+		}
 		
 		if (preferredLocale.isEmpty()) {
 			return LanguagePreference.NativeOnly;
@@ -1283,10 +1282,4 @@ public class MapRenderRepositories {
 
         return LanguagePreference.LocalizedOrTransliterated;
     }
-
-	public static boolean useAppLocaleForMap(@NonNull OsmandApplication app, int zoom) {
-		boolean replaceLocalNamesToAppLocale = zoom <= REPLACE_LOCAL_NAMES_MAX_ZOOM;
-		boolean useLocalNames = app.getSettings().MAP_PREFERRED_LOCALE.get().isEmpty();
-		return replaceLocalNamesToAppLocale && useLocalNames;
-	}
 }
