@@ -246,6 +246,9 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     }
 
     private void sortPointList(List<Amenity> pointList) {
+        // Sort mixed "String Number" names to prettify WptPt list:
+        // [Station 5, Station 1, "", Station 15, Station 9, Station 17] =>
+        // [Station 1, Station 5, Station 9, Station 15, Station 17, ""]
         pointList.sort((p1, p2) -> {
             String a = p1.getName(), b = p2.getName();
             if (a == null || a.isBlank()) return (b == null || b.isBlank()) ? 0 : 1;
