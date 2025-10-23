@@ -23,6 +23,7 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
 import androidx.core.view.MenuProvider;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +34,8 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.IOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.BaseLocalItem;
@@ -57,7 +60,7 @@ public class ItemMenuProvider implements MenuProvider {
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 	private final DownloadActivity activity;
-	private final LocalBaseFragment fragment;
+	private final BaseOsmAndFragment fragment;
 	private final boolean nightMode;
 
 	private BaseLocalItem item;
@@ -66,7 +69,7 @@ public class ItemMenuProvider implements MenuProvider {
 	private int colorId;
 	private boolean showInfoItem = true;
 
-	public ItemMenuProvider(@NonNull DownloadActivity activity, @NonNull LocalBaseFragment fragment) {
+	public ItemMenuProvider(@NonNull DownloadActivity activity, @NonNull BaseOsmAndFragment fragment) {
 		this.activity = activity;
 		this.fragment = fragment;
 		this.nightMode = fragment.isNightMode();

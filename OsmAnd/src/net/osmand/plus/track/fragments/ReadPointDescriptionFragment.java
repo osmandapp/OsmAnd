@@ -21,6 +21,9 @@ public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		controller = EditPointDescriptionController.getInstance((MapActivity) requireActivity());
+		if (controller == null) {
+			dismiss();
+		}
 	}
 
 	@Override
@@ -61,5 +64,4 @@ public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 			fragment.show(manager, ReadDescriptionFragment.TAG);
 		}
 	}
-
 }
