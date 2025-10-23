@@ -395,7 +395,7 @@ public class SearchCoreFactory {
 				BinaryMapIndexReader r = offlineIndexes.next();
 				if (!townCitiesInit.contains(r.getRegionName())) {
 					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
-					townCitiesInit.addAll(r.getRegionNames());
+					townCitiesInit.add(r.getRegionName());
 					for (City c  : l) {
 						c.setReferenceFile(r);
 						LatLon cl = c.getLocation();
@@ -657,7 +657,7 @@ public class SearchCoreFactory {
 					}
 					// FIXME
 					// Київська вулиця 10-Д
-					System.out.println("SEARСH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
+					System.out.println("SEARCH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
 							+ (lastWord != null ? lastWord.getResult().object : ""));
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
