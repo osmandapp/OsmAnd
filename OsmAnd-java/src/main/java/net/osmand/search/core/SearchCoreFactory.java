@@ -656,6 +656,7 @@ public class SearchCoreFactory {
 						}
 					}
 					// FIXME
+					// Київська вулиця 10-Д
 					System.out.println("SEARСH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
 							+ (lastWord != null ? lastWord.getResult().object : ""));
 					r.searchAddressDataByName(req);
