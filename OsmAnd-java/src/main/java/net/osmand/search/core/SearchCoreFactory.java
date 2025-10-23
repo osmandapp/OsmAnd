@@ -449,16 +449,13 @@ public class SearchCoreFactory {
 					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
-						SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-						// FIXME searchPoiInCity
-//						searchPoiInCity(nphrase, res, resultMatcher);
-						
-						// FIXME no failed cases found yet
+						subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 						// FIXME check if subsearch successful don't call search by name inside
+						// No failed cases found yet - uncomment if city / town don't have exact boundary to match street
 						// require exact matching to search street by name (not attached to city)
-						if (matchAddressName(phrase, null, res, true)) {
-							subSearchApiOrPublish(phrase, resultMatcher, res, this);
-						}
+//						if (matchAddressName(phrase, null, res, true)) {
+//							subSearchApiOrPublish(phrase, resultMatcher, res, this);
+//						}
 					}
 					if (limit++ > LIMIT * phrase.getRadiusLevel()) {
 						break;
@@ -467,15 +464,6 @@ public class SearchCoreFactory {
 			}
 		}
 		
-		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
-			// FIXME not correct double check code with selection
-			if (nphrase != null && res.objectType == ObjectType.CITY) {
-//				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
-//				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
-//				newPhrase.getSettings().setOriginalLocation(res.location);
-//				poiApi.search(newPhrase, resultMatcher);
-			}
-		}
 
 		private void searchByName(final SearchPhrase phrase, final SearchResultMatcher resultMatcher)
 				throws IOException {
@@ -655,8 +643,9 @@ public class SearchCoreFactory {
 								phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
 						}
 					}
-					// FIXME
+					// FIXME UNIT-Tests common words
 					// Київська вулиця 10-Д
+					// 3119 Pleasant Valley Boulevard #1 Altoona
 					System.out.println("SEARCH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
 							+ (lastWord != null ? lastWord.getResult().object : ""));
 					r.searchAddressDataByName(req);
@@ -723,10 +712,7 @@ public class SearchCoreFactory {
 							}
 						} else {
 							 
-							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-							// FIXME searchPoiInCity
-//							searchPoiInCity(nphrase, res, resultMatcher);
-							
+							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 							// FIXME UNIT-TESTS
 							// 4241 Cook Hollow Road Woodhull
 							// 11601 Kelly Hill Road Pine City
