@@ -56,8 +56,7 @@ public class DeleteConfirmationDialogController extends BaseDialogController {
 	                              @NonNull FragmentManager manager,
 	                              @NonNull BaseLocalItem localItem,
 	                              @NonNull ConfirmDeletionListener listener) {
-		DeleteConfirmationDialogController controller =
-				new DeleteConfirmationDialogController(app, localItem);
+		DeleteConfirmationDialogController controller = new DeleteConfirmationDialogController(app, localItem);
 		controller.setListener(listener);
 
 		DialogManager dialogManager = app.getDialogManager();
