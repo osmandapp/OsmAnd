@@ -59,9 +59,9 @@
     <string name="shared_string_map">نقشه</string>
     <string name="average_altitude">میانگین ارتفاع</string>
     <string name="average_speed">میانگین سرعت</string>
-    <string name="shared_string_update">روزآمدسازی</string>
+    <string name="shared_string_update">به‌روزرسانی</string>
     <string name="shared_string_ok">خُب</string>
-    <string name="shared_string_search">جست‌وجو</string>
+    <string name="shared_string_search">جستجو</string>
     <string name="altitude">ارتفاع</string>
     <string name="shared_string_enable">فعال</string>
     <string name="shared_string_select">انتخاب</string>
@@ -143,4 +143,6 @@
     <string name="timeline_available_for_free_now">تایم لاین یک ویژگی است که اکنون به صورت رایگان در دسترس است.</string>
     <string name="type_contact_or_group_name">نام مخاطب یا گروه را تایپ کنید</string>
     <string name="search_contacts_descr">در همه گروه ها و مخاطبین خود جستجو کنید.</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="location_source">منبع مکان</string>
 </resources>
