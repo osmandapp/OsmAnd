@@ -294,7 +294,7 @@
     <string name="poi_bank">Bankejo</string>
     <string name="poi_beach">Sablobordo</string>
     <string name="poi_car_repair">Aŭtomobil-riparejo</string>
-    <string name="poi_service_tyres">pneŭoj</string>
+    <string name="poi_service_tyres">pneŭoj;pneuoj;bendoj;aerbendoj;radoj</string>
     <string name="poi_vehicle_inspection">Aŭtomobil-kontrolejo</string>
     <string name="poi_fuel_diesel">dizeloleo</string>
     <string name="poi_fuel_gtl_diesel">dizeloleo sinteza</string>
