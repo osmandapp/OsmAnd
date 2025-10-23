@@ -1274,7 +1274,7 @@ public class SearchUICore {
 			retName = localeName.substring(0, i);
 			int j = localeName.indexOf(')', i);
 			if (j > -1) {
-				retName = retName.trim() + ' ' + localeName.substring(j);
+				retName = (retName.trim() + ' ' + localeName.substring(j + 1)).trim();
 			}
 		}
 		return retName;

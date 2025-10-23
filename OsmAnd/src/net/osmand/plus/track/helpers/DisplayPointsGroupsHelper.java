@@ -170,12 +170,14 @@ public class DisplayPointsGroupsHelper {
 			return null;
 		}
 
-		public int getVisibleTrackGroupsNumber(@NonNull SelectedGpxFile selectedGpxFile) {
+		public int getVisibleTrackGroupsNumber(@Nullable SelectedGpxFile selectedGpxFile) {
 			int visibleGroupsNumber = 0;
-			for (GpxDisplayGroup group : itemGroups.keySet()) {
-				if (group.getType() == GpxDisplayItemType.TRACK_POINTS
-						&& !selectedGpxFile.isGroupHidden(group.getName())) {
-					visibleGroupsNumber++;
+			if (selectedGpxFile != null) {
+				for (GpxDisplayGroup group : itemGroups.keySet()) {
+					if (group.getType() == GpxDisplayItemType.TRACK_POINTS
+							&& !selectedGpxFile.isGroupHidden(group.getName())) {
+						visibleGroupsNumber++;
+					}
 				}
 			}
 			return visibleGroupsNumber;

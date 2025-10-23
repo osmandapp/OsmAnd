@@ -83,8 +83,9 @@ public class TerrainMode {
 		modes.add(new TerrainMode(app, DEFAULT_KEY, SLOPE, app.getString(R.string.shared_string_slope)));
 
 		File dir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
-		if (dir.exists() && dir.listFiles() != null) {
-			for (File file : dir.listFiles()) {
+		File[] files = dir.exists() ? dir.listFiles() : null;
+		if (files != null) {
+			for (File file : files) {
 				if (file == null || !file.getName().endsWith(TXT_EXT)) {
 					continue;
 				}
