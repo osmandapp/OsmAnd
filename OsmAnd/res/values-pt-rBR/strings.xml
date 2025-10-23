@@ -6255,4 +6255,8 @@
     <string name="shared_string_last_downhill">Última descida</string>
     <string name="help_article_navigation_routing_ski_routing_name">Pistas e percursos de esqui</string>
     <string name="rendering_attr_pisteRoutes_name">Rotas de esqui</string>
+    <string name="requires_internet_connection">Requer conexão com a Internet</string>
+    <string name="save_and_access_articles_offline">Salve dados e acesse artigos offline em qualquer lugar</string>
+    <string name="private_access_routing_req_short">Permitir o uso de uma estrada privada para chegar ao seu destino?</string>
+    <string name="download_wikipedia_label">Baixar Wikipédia</string>
 </resources>

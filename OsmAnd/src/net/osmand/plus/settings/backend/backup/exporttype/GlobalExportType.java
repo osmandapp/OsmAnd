@@ -74,10 +74,4 @@ class GlobalExportType extends AbstractExportType {
 	public LocalItemType getRelatedLocalItemType() {
 		return null;
 	}
-
-	@Nullable
-	@Override
-	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
-		return null;
-	}
 }

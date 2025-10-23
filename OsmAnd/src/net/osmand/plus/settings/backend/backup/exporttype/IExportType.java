@@ -50,7 +50,9 @@ interface IExportType {
 	LocalItemType getRelatedLocalItemType();
 
 	@Nullable
-	Class<? extends OsmandPlugin> getRelatedPluginClass();
+	default Class<? extends OsmandPlugin> getRelatedPluginClass() {
+		return null;
+	}
 
 	@Nullable
 	default ExportType getAdditionalExportType() {
