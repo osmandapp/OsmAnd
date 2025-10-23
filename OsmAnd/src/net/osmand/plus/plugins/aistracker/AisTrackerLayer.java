@@ -27,6 +27,7 @@ import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AisDataManager.AisObjectListener;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.MapSelectionRules;
@@ -47,7 +48,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private MapMarkersCollection markersCollection;
 	private VectorLinesCollection vectorLinesCollection;
-	private final SingleSkImage aisRestImage;
+	private SingleSkImage aisRestImage;
 	private float textScale = 1f;
 
 	public AisTrackerLayer(@NonNull Context context) {
@@ -57,6 +58,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		this.bitmapPaint.setFilterBitmap(true);
 		this.bitmapPaint.setStrokeWidth(4);
 		this.bitmapPaint.setColor(Color.DKGRAY);
+	}
+
+	@Override
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		ChartPointsHelper pointsHelper = new ChartPointsHelper(getContext());
 		float density = 5;
