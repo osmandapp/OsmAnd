@@ -13,6 +13,8 @@ import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.plus.settings.enums.LocalSortMode.COUNTRY_NAME_ASCENDING;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_OFFROUTE_RECALC;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.ROUTING_RECALC_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
@@ -56,6 +58,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.*;
 import net.osmand.plus.settings.enums.CompassMode;
@@ -67,6 +70,9 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.*;
@@ -1053,6 +1059,26 @@ public class AppVersionUpgradeOnInit {
 								.makeProfile().cache().setModeValue(appMode, showNextTurn);
 					}
 				}
+			}
+		}
+	}
+
+	private static final String DISABLE_MODE_STRING = "-1.0";
+	private static final String DEFAULT_DISTANCE_STRING = "0.0";
+
+	public static void migrateRouteRecalculationJsonValues(@NonNull JSONObject json) {
+		if (json.has(DISABLE_OFFROUTE_RECALC) && json.has(ROUTING_RECALC_DISTANCE)) {
+			try {
+				String disableOffrouteRecalc = json.getString(DISABLE_OFFROUTE_RECALC);
+				String routingRecalcDistance = json.getString(ROUTING_RECALC_DISTANCE);
+
+				if (DISABLE_MODE_STRING.equals(routingRecalcDistance) && "false".equals(disableOffrouteRecalc)) {
+					json.put(ROUTING_RECALC_DISTANCE, DEFAULT_DISTANCE_STRING);
+				} else if (!DISABLE_MODE_STRING.equals(routingRecalcDistance) && "true".equals(disableOffrouteRecalc)) {
+					json.put(ROUTING_RECALC_DISTANCE, DISABLE_MODE_STRING);
+				}
+			} catch (JSONException e) {
+				SettingsHelper.LOG.error("Error migrating route recalculation JSON values", e);
 			}
 		}
 	}
