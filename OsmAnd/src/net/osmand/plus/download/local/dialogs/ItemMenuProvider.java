@@ -33,6 +33,7 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.BaseLocalItem;
@@ -57,7 +58,7 @@ public class ItemMenuProvider implements MenuProvider {
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 	private final DownloadActivity activity;
-	private final LocalBaseFragment fragment;
+	private final BaseOsmAndFragment fragment;
 	private final boolean nightMode;
 
 	private BaseLocalItem item;
@@ -66,7 +67,8 @@ public class ItemMenuProvider implements MenuProvider {
 	private int colorId;
 	private boolean showInfoItem = true;
 
-	public ItemMenuProvider(@NonNull DownloadActivity activity, @NonNull LocalBaseFragment fragment) {
+	public ItemMenuProvider(@NonNull DownloadActivity activity,
+			@NonNull BaseOsmAndFragment fragment) {
 		this.activity = activity;
 		this.fragment = fragment;
 		this.nightMode = fragment.isNightMode();
@@ -183,15 +185,16 @@ public class ItemMenuProvider implements MenuProvider {
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem.setOnMenuItemClickListener(i -> {
 				FragmentManager manager = fragment.getFragmentManager();
-				if (manager != null) {
-					DeleteConfirmationDialogController.showDialog(app, manager, item, fragment);
+				if (manager != null && fragment instanceof LocalBaseFragment localFragment) {
+					DeleteConfirmationDialogController.showDialog(app, manager, item, localFragment);
 				}
 				return true;
 			});
 		}
 	}
 
-	private void addOperationItem(@NonNull Menu menu, @NonNull LocalItem localItem, @NonNull OperationType type) {
+	private void addOperationItem(@NonNull Menu menu, @NonNull LocalItem localItem,
+			@NonNull OperationType type) {
 		MenuItem menuItem = menu.add(0, type.getTitleId(), Menu.NONE, type.getTitleId());
 		menuItem.setIcon(getIcon(type.getIconId(), colorId));
 		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -202,7 +205,9 @@ public class ItemMenuProvider implements MenuProvider {
 	}
 
 	public void performOperation(@NonNull LocalItem localItem, @NonNull OperationType type) {
-		OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, fragment), localItem);
+		if (fragment instanceof LocalBaseFragment localFragment) {
+			OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, localFragment), localItem);
+		}
 	}
 
 	private void exportItem(@NonNull LocalItem localItem, @NonNull ExportType settingsType) {
@@ -221,8 +226,10 @@ public class ItemMenuProvider implements MenuProvider {
 		Context context = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-			LocalOperationTask task = new LocalOperationTask(app, CLEAR_TILES_OPERATION, fragment);
-			OsmAndTaskManager.executeTask(task, localItem);
+			if (fragment instanceof LocalBaseFragment localFragment) {
+				LocalOperationTask task = new LocalOperationTask(app, CLEAR_TILES_OPERATION, localFragment);
+				OsmAndTaskManager.executeTask(task, localItem);
+			}
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName(context)));
@@ -230,16 +237,18 @@ public class ItemMenuProvider implements MenuProvider {
 	}
 
 	private void updateItem(@NonNull LocalItem localItem) {
-		File file = localItem.getFile();
-		IndexItem indexItem = fragment.getItemsToUpdate().get(file.getName());
-		if (indexItem != null) {
-			activity.startDownload(indexItem);
-		} else {
-			Context context = UiUtilities.getThemedContext(activity, nightMode);
-			String text = app.getString(R.string.map_is_up_to_date, localItem.getName(context));
-			Snackbar snackbar = Snackbar.make(activity.getLayout(), text, Snackbar.LENGTH_LONG);
-			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
-			snackbar.show();
+		if (fragment instanceof LocalBaseFragment localFragment) {
+			File file = localItem.getFile();
+			IndexItem indexItem = localFragment.getItemsToUpdate().get(file.getName());
+			if (indexItem != null) {
+				activity.startDownload(indexItem);
+			} else {
+				Context context = UiUtilities.getThemedContext(activity, nightMode);
+				String text = app.getString(R.string.map_is_up_to_date, localItem.getName(context));
+				Snackbar snackbar = Snackbar.make(activity.getLayout(), text, Snackbar.LENGTH_LONG);
+				UiUtilities.setupSnackbar(snackbar, nightMode, 5);
+				snackbar.show();
+			}
 		}
 	}
 

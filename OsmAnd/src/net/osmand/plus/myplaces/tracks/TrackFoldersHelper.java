@@ -136,6 +136,9 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment, boolean isRootFolder) {
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+			return;
+		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
@@ -193,6 +196,9 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void showItemOptionsMenu(@NonNull TrackItem trackItem, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+			return;
+		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
