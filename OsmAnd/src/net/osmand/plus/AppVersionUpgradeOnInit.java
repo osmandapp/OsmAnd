@@ -12,6 +12,7 @@ import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.plus.settings.enums.LocalSortMode.COUNTRY_NAME_ASCENDING;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
@@ -148,8 +149,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_1_00 = 5100;
 	// 5101 - 5.1-01 (Migrate show_next_turn_info to widget-specific preference)
 	public static final int VERSION_5_1_01 = 5101;
+	public static final int VERSION_5_2_04 = 5204;
 
-	public static final int LAST_APP_VERSION = VERSION_5_1_01;
+	public static final int LAST_APP_VERSION = VERSION_5_2_04;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -300,6 +302,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_1_01) {
 					migrateShowNextTurnInfoPrefToWidgetSpecific();
+				}
+				if (prevAppVersion < VERSION_5_2_04) {
+					migrateRouteRecalculationValues();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -979,7 +984,6 @@ public class AppVersionUpgradeOnInit {
 	}
 
 	private void migrateSideWidgetsSizePrefToSmall(@NonNull OsmandSettings settings) {
-
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			List<String> leftPages = settings.LEFT_WIDGET_PANEL_ORDER.getStringsListForProfile(mode);
 			migrateSidePanelSizes(settings, mode, leftPages);
@@ -1007,6 +1011,20 @@ public class AppVersionUpgradeOnInit {
 							.makeProfile();
 					pref.resetModeToDefault(mode);
 				}
+			}
+		}
+	}
+
+	private void migrateRouteRecalculationValues() {
+		OsmandSettings settings = app.getSettings();
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			boolean recalcDisabled = settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode);
+			float recalcDistance = settings.ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
+
+			if (Float.compare(recalcDistance, DISABLE_MODE) == 0 && !recalcDisabled) {
+				settings.ROUTE_RECALCULATION_DISTANCE.resetModeToDefault(mode);
+			} else if (Float.compare(recalcDistance, DISABLE_MODE) != 0 && recalcDisabled) {
+				settings.ROUTE_RECALCULATION_DISTANCE.setModeValue(mode, DISABLE_MODE);
 			}
 		}
 	}
