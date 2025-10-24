@@ -490,7 +490,7 @@ public class MapRendererContext {
 			shadersCache.mkdir();
 		}
 		mapRendererView.setupOptions.setPathToOpenGLShadersCache(shadersCache.getAbsolutePath());
-		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(8);
+		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(4);
 		mapRendererView.setMSAAEnabled(MSAAEnabled);
 	}
 
