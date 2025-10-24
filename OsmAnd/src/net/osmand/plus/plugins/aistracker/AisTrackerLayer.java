@@ -7,13 +7,13 @@ import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_LANDSTATION;
 import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_SART;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -27,6 +27,7 @@ import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AisDataManager.AisObjectListener;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.MapSelectionRules;
@@ -47,22 +48,27 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private MapMarkersCollection markersCollection;
 	private VectorLinesCollection vectorLinesCollection;
-	private final SingleSkImage aisRestImage;
+	private Bitmap aisRestBitmap;
+	private SingleSkImage aisRestImage;
 	private float textScale = 1f;
 
 	public AisTrackerLayer(@NonNull Context context) {
 		super(context);
+	}
 
-		this.bitmapPaint.setAntiAlias(true);
-		this.bitmapPaint.setFilterBitmap(true);
-		this.bitmapPaint.setStrokeWidth(4);
-		this.bitmapPaint.setColor(Color.DKGRAY);
+	@Override
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
-		ChartPointsHelper pointsHelper = new ChartPointsHelper(getContext());
+		bitmapPaint.setAntiAlias(true);
+		bitmapPaint.setFilterBitmap(true);
+		bitmapPaint.setStrokeWidth(4);
+		bitmapPaint.setColor(Color.DKGRAY);
+
 		float density = 5;
 		int pointColor = 0xFFFFFFFF;
-		aisRestImage = NativeUtilities.createSkImageFromBitmap(
-				pointsHelper.createXAxisPointBitmap(pointColor, density));
+		ChartPointsHelper pointsHelper = new ChartPointsHelper(getContext());
+		aisRestBitmap = pointsHelper.createXAxisPointBitmap(pointColor, density);
 	}
 
 	@Override
@@ -73,23 +79,23 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			vectorLinesCollection.removeAllLines();
 			mapRenderer.removeSymbolsProvider(markersCollection);
 			mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+			aisRestImage = null;
 		}
 		objectDrawables.clear();
 	}
 
 	@Override
 	public void onAisObjectReceived(@NonNull AisObject ais) {
-		if (getMapRenderer() == null || markersCollection == null || vectorLinesCollection == null) {
-			return;
-		}
 		AisObjectDrawable drawable = objectDrawables.get(ais.getMmsi());
 		if (drawable == null) {
 			drawable = new AisObjectDrawable(ais);
 			objectDrawables.put(ais.getMmsi(), drawable);
-			drawable.createAisRenderData(getBaseOrder(), bitmapPaint,
-					markersCollection, vectorLinesCollection, aisRestImage);
 		} else {
 			drawable.set(ais);
+		}
+		if (getMapRenderer() != null && !drawable.hasAisRenderData() && aisRestImage != null
+				&& markersCollection != null && vectorLinesCollection != null) {
+			drawable.createAisRenderData(getBaseOrder(), bitmapPaint, markersCollection, vectorLinesCollection, aisRestImage);
 		}
 		drawable.updateAisRenderData(getTileView(), bitmapPaint);
 	}
@@ -135,6 +141,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			if (mapActivityInvalidated || mapRendererChanged || textScaleChanged) {
 				cleanupResources();
 
+				if (aisRestImage == null) {
+					aisRestImage = NativeUtilities.createSkImageFromBitmap(aisRestBitmap);
+				}
 				markersCollection = new MapMarkersCollection();
 				vectorLinesCollection = new VectorLinesCollection();
 				mapRenderer.addSymbolsProvider(markersCollection);
