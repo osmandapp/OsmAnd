@@ -2833,7 +2833,7 @@
     <string name="poi_home_visit">Visitas domiciliarias</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburguesas</string>
-    <string name="poi_cuisine_coffee">Café</string>
+    <string name="poi_cuisine_coffee_shop">Café</string>
     <string name="poi_cuisine_sandwich">Sándwich;Emparedados</string>
     <string name="poi_cuisine_kebab">Kebab;Brochetas</string>
     <string name="poi_cuisine_chicken">Pollo</string>

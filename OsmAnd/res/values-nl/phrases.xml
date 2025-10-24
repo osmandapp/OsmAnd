@@ -2325,7 +2325,7 @@
     <string name="poi_concentration_camp_gulag">Type: Goelag</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Burger</string>
-    <string name="poi_cuisine_coffee">Koffie</string>
+    <string name="poi_cuisine_coffee_shop">Koffie</string>
     <string name="poi_cuisine_sandwich">Broodjes</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_doner">Döner kebab (shoarma)</string>

@@ -2346,7 +2346,7 @@
     <string name="poi_cuisine">Тип кухиње</string>
     <string name="poi_cuisine_pizza">Пице</string>
     <string name="poi_cuisine_burger">Пљескавице</string>
-    <string name="poi_cuisine_coffee">Кафа</string>
+    <string name="poi_cuisine_coffee_shop">Кафа</string>
     <string name="poi_cuisine_sandwich">Сендвичи</string>
     <string name="poi_cuisine_kebab">Кебаб</string>
     <string name="poi_cuisine_doner">Донер кебаб (шавурма)</string>

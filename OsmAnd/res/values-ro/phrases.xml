@@ -3239,7 +3239,7 @@
     <string name="poi_cuisine_doner">Doner kebab (șaorma)</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_sandwich">Sandvici</string>
-    <string name="poi_cuisine_coffee">Cafea</string>
+    <string name="poi_cuisine_coffee_shop">Cafea</string>
     <string name="poi_cuisine_burger">Burger</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine">Specific</string>
