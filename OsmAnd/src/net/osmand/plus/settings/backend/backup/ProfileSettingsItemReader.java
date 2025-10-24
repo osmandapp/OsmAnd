@@ -8,6 +8,7 @@ import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.AppVersionUpgradeOnInit;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -48,6 +49,8 @@ public class ProfileSettingsItemReader<T extends ProfileSettingsItem> extends Os
 
 	@Override
 	public void readPreferencesFromJson(@NonNull JSONObject json) {
+		AppVersionUpgradeOnInit.migrateRouteRecalculationJsonValues(json);
+
 		OsmandApplication app = settingsItem.getApp();
 		app.runInUIThread(() -> {
 			OsmandSettings settings = app.getSettings();
