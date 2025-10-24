@@ -48,7 +48,7 @@
     <string name="poi_border_control">Hraniční kontrola</string>
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_car_repair">Autoservis</string>
-    <string name="poi_service_tyres">Pneuservis</string>
+    <string name="poi_service_tyres">Pneuservis;Pneu</string>
     <string name="poi_car_wash">Myčka</string>
     <string name="poi_fuel">Čerpací stanice;Benzínová pumpa</string>
     <string name="poi_electricity_combined_charging">Nabíjecí stanice</string>
