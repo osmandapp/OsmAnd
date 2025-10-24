@@ -321,4 +321,22 @@ public class SearchResult {
 	public boolean isFullPhraseEqualLocaleName() {
 		return requiredSearchPhrase.getFullSearchPhrase().equalsIgnoreCase(localeName);
 	}
+
+	public List<String> filterUnknownSearchWord(List<String> leftUnknownSearchWords) {
+		if (leftUnknownSearchWords == null) {
+			leftUnknownSearchWords = new ArrayList<String>(requiredSearchPhrase.getUnknownSearchWords());
+			leftUnknownSearchWords.add(0, requiredSearchPhrase.getFirstUnknownSearchWord());
+		}
+		if (firstUnknownWordMatches) {
+			leftUnknownSearchWords.remove(requiredSearchPhrase.getFirstUnknownSearchWord());
+		}
+		if (otherWordsMatch != null) {
+//			removeAll(res.otherWordsMatch); // incorrect 
+			for (String otherWord : otherWordsMatch) {
+				leftUnknownSearchWords.remove(otherWord); // remove 1 by 1
+			}
+		}
+		
+		return leftUnknownSearchWords;
+	}
 }

@@ -2,7 +2,7 @@ package net.osmand.search.core;
 
 public enum ObjectType {
 	// ADDRESS
-	CITY(true), VILLAGE(true), POSTCODE(true), STREET(true), HOUSE(true), STREET_INTERSECTION(true),
+	CITY(true), VILLAGE(true), BOUNDARY(true), POSTCODE(true), STREET(true), HOUSE(true), STREET_INTERSECTION(true),
 	// POI
 	POI_TYPE(false), POI(true),
 	// LOCATION
@@ -34,7 +34,7 @@ public enum ObjectType {
 	}
 
 	public static boolean isAddress(ObjectType t) {
-		return t == CITY || t == VILLAGE || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
+		return t == CITY || t == VILLAGE || t == BOUNDARY || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
 	}
 
 	public static boolean isTopVisible(ObjectType t) {
@@ -62,6 +62,7 @@ public enum ObjectType {
 			case VILLAGE:
 			case POSTCODE:
 				return 2;
+			case BOUNDARY:
 			case POI:
 				return 1;
 			default:
