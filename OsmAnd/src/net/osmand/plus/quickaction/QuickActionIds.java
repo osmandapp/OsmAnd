@@ -77,4 +77,6 @@ public class QuickActionIds {
 	public static final int LOCK_SCREEN_ACTION = 77;
 	public static final int SHOW_HIDE_OSM_EDITS_ACTION = 78;
 	public static final int SHOW_HIDE_COORDINATE_GRID_ACTION_ID = 79;
+	public static final int SHOW_HIDE_WEATHER_LAYERS = 80;
+	public static final int SHOW_HIDE_WIND_ANIMATION_LAYER = 81;
 }

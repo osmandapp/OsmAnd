@@ -30,5 +30,4 @@ public class EditFavoriteDescriptionController extends EditPointDescriptionContr
 		FavouritePoint point = (FavouritePoint) getContextMenuObject();
 		return  point != null ? point.getName() : super.getTitle();
 	}
-
 }

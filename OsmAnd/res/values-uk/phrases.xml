@@ -2919,7 +2919,7 @@
     <string name="poi_healthcare_speciality_depth">Глибинна психологія</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
     <string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
-    <string name="poi_cuisine_coffee">Кава</string>
+    <string name="poi_cuisine_coffee_shop">Кава</string>
     <string name="poi_cuisine_shawarma">Кебаб (шаурма)</string>
     <string name="poi_animal_keeping_type_open_stable">Стайня відкритого типу</string>
     <string name="poi_self_service_yes">Так;Самообслуговування</string>

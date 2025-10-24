@@ -10,7 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="quick_action_weather_layers">A toggle to show or hide weather layers on the map.</string>
+    <string name="quick_action_wind_animation_layer">A toggle to show or hide the wind animation layer on the map.</string>
+    <string name="wind_animation_layer">Wind animation layer</string>
+    <string name="weather_layers">Weather layers</string>
     <string name="requires_internet_connection">Requires an internet connection</string>
     <string name="save_and_access_articles_offline">Save data and access articles offline anywhere</string>
     <string name="track_folder_appearance">Track folder appearance</string>

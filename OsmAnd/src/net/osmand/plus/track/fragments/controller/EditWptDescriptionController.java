@@ -50,7 +50,8 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 	@Override
 	public String getTitle() {
 		WptPt wpt = (WptPt) getContextMenuObject();
-		return wpt != null ? wpt.getName() : super.getTitle();
+		String title = wpt != null ? wpt.getName() : null;
+		return title != null ? title : super.getTitle();
 	}
 
 	@Override

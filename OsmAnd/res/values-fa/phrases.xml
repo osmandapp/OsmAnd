@@ -1051,7 +1051,7 @@
     <string name="poi_cuisine">خوراک</string>
     <string name="poi_cuisine_pizza">پیتزا</string>
     <string name="poi_cuisine_burger">برگر</string>
-    <string name="poi_cuisine_coffee">قهوه</string>
+    <string name="poi_cuisine_coffee_shop">قهوه</string>
     <string name="poi_cuisine_sandwich">ساندویچ</string>
     <string name="poi_cuisine_kebab">کباب</string>
     <string name="poi_cuisine_doner">کباب ترکی (شاورما)</string>

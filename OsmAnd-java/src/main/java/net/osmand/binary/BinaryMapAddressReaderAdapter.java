@@ -277,7 +277,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 
 
-	protected void readCityStreets(SearchRequest<Street> resultMatcher, City city, List<String> attributeTagsTable) throws IOException {
+	protected void readCityStreets(SearchRequest<Street> resultMatcher, City city, boolean loadBuildings, List<String> attributeTagsTable) throws IOException {
 		int x = MapUtils.get31TileNumberX(city.getLocation().getLongitude());
 		int y = MapUtils.get31TileNumberY(city.getLocation().getLatitude());
 		while (true) {
@@ -291,7 +291,7 @@ public class BinaryMapAddressReaderAdapter {
 				s.setFileOffset(codedIS.getTotalBytesRead());
 				long length = codedIS.readRawVarint32();
 				long oldLimit = codedIS.pushLimitLong((long) length);
-				readStreet(s, null, false, x >> 7, y >> 7, city.isPostcode() ? city.getName() : null,
+				readStreet(s, null, loadBuildings, x >> 7, y >> 7, city.isPostcode() ? city.getName() : null,
 						attributeTagsTable);
 				publishRawData(resultMatcher, s);
 				if (resultMatcher == null || resultMatcher.publish(s)) {

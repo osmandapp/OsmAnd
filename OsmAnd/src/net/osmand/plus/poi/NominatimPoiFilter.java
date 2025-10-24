@@ -10,6 +10,7 @@ import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.poi.PoiFilterUtils.AmenityNameFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -90,7 +91,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 		try {
 			lastError = "";
 			String urlq = NOMINATIM_API + "?format=xml" +
-					"&addressdetails=0&accept-language=" + Locale.getDefault().getLanguage() +
+					"&accept-language=" + Locale.getDefault().getLanguage() +
 					"&q=" + URLEncoder.encode(getFilterByName()) +
 					"&extratags=1" +
 					"&addressdetails=1" + // nclude a breakdown of the address into elements
@@ -100,6 +101,8 @@ public class NominatimPoiFilter extends PoiUIFilter {
 			}
 			log.info("Online search: " + urlq);
 			URLConnection connection = NetworkUtils.getHttpURLConnection(urlq); //$NON-NLS-1$
+			connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
+
 			InputStream stream = connection.getInputStream();
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(stream, "UTF-8"); //$NON-NLS-1$

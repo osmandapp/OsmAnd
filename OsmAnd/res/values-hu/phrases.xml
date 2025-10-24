@@ -1744,7 +1744,7 @@
     <string name="poi_delivery">Házhoz szállítás</string>
     <string name="poi_cuisine_chicken">Csirke</string>
     <string name="poi_cuisine_fried_chicken">Sült csirke</string>
-    <string name="poi_cuisine_coffee">Kávé</string>
+    <string name="poi_cuisine_coffee_shop">Kávé</string>
     <string name="poi_cuisine_burger">Hamburger</string>
     <string name="poi_cuisine_ice_cream">Fagylalt</string>
     <string name="poi_cuisine_kebab">Kebab</string>

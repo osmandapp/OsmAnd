@@ -1367,7 +1367,7 @@
     <string name="poi_aerodrome_type_public">Público</string>
     <string name="poi_aerodrome_type_military_public">Militar/público</string>
     <string name="poi_public_bookcase">Libraría pública</string>
-    <string name="poi_cuisine_coffee">Café</string>
+    <string name="poi_cuisine_coffee_shop">Café</string>
     <string name="poi_feeding_place">Cebadeiro pra animais</string>
     <string name="poi_government_public_service">Servizo público</string>
     <string name="poi_government_transportation">Institución de transporte</string>

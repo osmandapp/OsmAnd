@@ -54,7 +54,7 @@ public class Building extends MapObject {
 	}
 	
 	public void addEntrance(String ref, LatLon location) {
-		if(entrances == null) {
+		if (entrances == null) {
 			entrances = new LinkedHashMap<>();
 		}
 		entrances.put(ref, location);
@@ -102,7 +102,17 @@ public class Building extends MapObject {
 			return fname + "-" + name2 + " (" + interpolationType.toString().toLowerCase() + ") ";
 		}
 		return name;
-	}	
+	}
+	
+	public String getFullName() {
+		String fname = this.name;
+		if (interpolationInterval != 0) {
+			return fname + "-" + name2 + " (+" + interpolationInterval + ") ";
+		} else if (interpolationType != null) {
+			return fname + "-" + name2 + " (" + interpolationType.toString().toLowerCase() + ") ";
+		}
+		return name;
+	}
 	
 
 	public float interpolation(String hno) {
@@ -207,8 +217,8 @@ public class Building extends MapObject {
 	@Override
 	public boolean equals(Object o) {
 		boolean res = super.equals(o);
-		if (res && o instanceof Building) {
-			return Algorithms.stringsEqual(((MapObject) o).getName(), getName());
+		if (res && o instanceof Building b) {
+			return Algorithms.stringsEqual(b.getFullName(), getFullName());
 		}
 		return res;
 	}

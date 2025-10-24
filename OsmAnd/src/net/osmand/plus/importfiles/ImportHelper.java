@@ -212,7 +212,9 @@ public class ImportHelper {
 			boolean isOsmAndSubDir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(uri.getPath()));
 			if (!isOsmAndSubDir && fileName != null) {
 				CallbackWithObject<Pair<GpxFile, Long>> callback = pair -> {
-					handleResult(pair.first, fileName, onGpxImport, pair.second, true, destinationDir, showSnackbar, singleImport);
+					if (pair != null) {
+						handleResult(pair.first, fileName, onGpxImport, pair.second, true, destinationDir, showSnackbar, singleImport);
+					}
 					return true;
 				};
 				GpxImportTask gpxImportTask = new GpxImportTask(activity, uri, fileName, callback);
@@ -290,21 +292,27 @@ public class ImportHelper {
 		}
 	}
 
-	public void handleGpxImport(@NonNull Uri uri, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
-	                            boolean useImportDir, boolean save, boolean showSnackbar) {
+	public void handleGpxImport(@NonNull Uri uri, @NonNull String fileName,
+			@Nullable OnSuccessfulGpxImport onGpxImport, boolean useImportDir, boolean save,
+			boolean showSnackbar) {
 		CallbackWithObject<Pair<GpxFile, Long>> callback = pair -> {
-			handleResult(pair.first, fileName, onGpxImport, pair.second, save, getGpxDestinationDir(app, useImportDir), showSnackbar, true);
+			if (pair != null) {
+				handleResult(pair.first, fileName, onGpxImport, pair.second, save,
+						getGpxDestinationDir(app, useImportDir), showSnackbar, true);
+			}
 			return true;
 		};
 		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
 	}
 
-	public void handleGpxOrFavouritesImport(Uri uri, String fileName, boolean save, boolean useImportDir,
-	                                        boolean forceImportFavourites, boolean forceImportGpx,
-	                                        boolean showSnackbar) {
+	public void handleGpxOrFavouritesImport(Uri uri, String fileName, boolean save,
+			boolean useImportDir, boolean forceImportFavourites, boolean forceImportGpx,
+			boolean showSnackbar) {
 		CallbackWithObject<Pair<GpxFile, Long>> callback = pair -> {
-			importGpxOrFavourites(pair.first, fileName, pair.second, save, useImportDir,
-					forceImportFavourites, forceImportGpx, showSnackbar);
+			if (pair != null) {
+				importGpxOrFavourites(pair.first, fileName, pair.second, save, useImportDir,
+						forceImportFavourites, forceImportGpx, showSnackbar);
+			}
 			return true;
 		};
 		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));

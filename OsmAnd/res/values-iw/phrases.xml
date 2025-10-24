@@ -743,7 +743,7 @@
     <string name="poi_cuisine">מטבח</string>
     <string name="poi_cuisine_pizza">פיצה</string>
     <string name="poi_cuisine_burger">המבורגר</string>
-    <string name="poi_cuisine_coffee">קפה</string>
+    <string name="poi_cuisine_coffee_shop">קפה</string>
     <string name="poi_cuisine_sandwich">כריך</string>
     <string name="poi_cuisine_kebab">קבב</string>
     <string name="poi_cuisine_doner">דונר (שווארמה)</string>

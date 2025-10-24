@@ -728,6 +728,10 @@ public class BinaryMapIndexReader {
 	}
 	
 	public int preloadStreets(City c, SearchRequest<Street> resultMatcher, SearchStat searchStat) throws IOException {
+		return preloadStreets(c, resultMatcher, false, searchStat);
+	}
+	
+	public int preloadStreets(City c, SearchRequest<Street> resultMatcher, boolean loadBuildings, SearchStat searchStat) throws IOException {
 		AddressRegion reg;
 		try {
 			reg = checkAddressIndex(c.getFileOffset());
@@ -741,7 +745,7 @@ public class BinaryMapIndexReader {
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		long old = codedIS.pushLimitLong((long) size);
-		addressAdapter.readCityStreets(resultMatcher, c, reg.attributeTagsTable);
+		addressAdapter.readCityStreets(resultMatcher, c, loadBuildings, reg.attributeTagsTable);
 		codedIS.popLimit(old);
 		if (statReq > 0) {
 			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_STREETS, reg, codedIS, null);

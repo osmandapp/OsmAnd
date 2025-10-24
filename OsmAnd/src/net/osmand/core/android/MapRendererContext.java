@@ -156,11 +156,14 @@ public class MapRendererContext {
 
 	public void updateLocalization() {
 		int zoom = app.getOsmandMap().getMapView().getZoom();
-		boolean useAppLocale = MapRenderRepositories.useAppLocaleForMap(app, zoom);
+		boolean useAppLocale = MapRenderRepositories.isBasemapZoom(zoom);
 		if (this.useAppLocale != useAppLocale) {
 			this.useAppLocale = useAppLocale;
 			updateMapSettings(false);
 		}
+
+		LanguagePreference langPref = MapRenderRepositories.getMapLanguageSetting(app, zoom);
+		mapPresentationEnvironment.setLanguagePreference(langPref);
 	}
 
 	public void updateMapSettings(boolean forceUpdateProviders) {
@@ -259,12 +262,8 @@ public class MapRendererContext {
 		mapPresentationEnvironment.setSettings(styleSettings);
 
 		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
-			if (recreateMapPresentation || forceUpdateProviders) {
+			if (recreateMapPresentation || forceUpdateProviders || languageParamsChanged) {
 				recreateRasterAndSymbolsProvider(providerType);
-			} else if (languageParamsChanged) {
-				if (mapPrimitivesProvider != null || updateMapPrimitivesProvider(providerType)) {
-					updateOrRemoveObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
-				}
 			}
 			setMapBackgroundColor();
 		}
@@ -490,7 +489,7 @@ public class MapRendererContext {
 			shadersCache.mkdir();
 		}
 		mapRendererView.setupOptions.setPathToOpenGLShadersCache(shadersCache.getAbsolutePath());
-		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(8);
+		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(4);
 		mapRendererView.setMSAAEnabled(MSAAEnabled);
 	}
 

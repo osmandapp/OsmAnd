@@ -299,11 +299,15 @@ public class AisObjectDrawable {
 		directionLine = lineBuilder.buildAndAddToCollection(vectorLinesCollection);
 	}
 
+	public boolean hasAisRenderData() {
+		return activeMarker != null && restMarker != null && lostMarker != null && directionLine != null;
+	}
+
 	public void updateAisRenderData(@Nullable OsmandMapTileView mapView, @NonNull Paint paint) {
 		// Call updateBitmap to update marker color
 		updateBitmap(paint);
 
-		if (activeMarker == null || restMarker == null || lostMarker == null || directionLine == null) {
+		if (!hasAisRenderData()) {
 			return;
 		}
 
@@ -376,5 +380,9 @@ public class AisObjectDrawable {
 		markersCollection.removeMarker(restMarker);
 		markersCollection.removeMarker(lostMarker);
 		vectorLinesCollection.removeLine(directionLine);
+		activeMarker = null;
+		restMarker = null;
+		lostMarker = null;
+		directionLine = null;
 	}
 }

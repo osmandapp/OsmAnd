@@ -57,8 +57,8 @@ public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
 	
-	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
-	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
+	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’', 'ʼ', '(', ')'}; // remove () subcities
+	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\'', '\'', ' ', ' '};
 
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 

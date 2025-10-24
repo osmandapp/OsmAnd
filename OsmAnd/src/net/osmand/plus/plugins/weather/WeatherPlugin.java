@@ -56,6 +56,8 @@ import net.osmand.plus.plugins.weather.actions.ShowHideAirPressureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideCloudLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
+import net.osmand.plus.plugins.weather.actions.ShowHideWeatherLayersAction;
+import net.osmand.plus.plugins.weather.actions.ShowHideWindAnimationAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.plugins.weather.enums.WeatherSource;
@@ -309,6 +311,8 @@ public class WeatherPlugin extends OsmandPlugin {
 		action.add(ShowHideAirPressureLayerAction.TYPE);
 		action.add(ShowHidePrecipitationLayerAction.TYPE);
 		action.add(ShowHideCloudLayerAction.TYPE);
+		action.add(ShowHideWeatherLayersAction.TYPE);
+		action.add(ShowHideWindAnimationAction.TYPE);
 		action.add(OpenWeatherAction.TYPE);
 		return action;
 	}

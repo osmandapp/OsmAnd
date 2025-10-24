@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.weather.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_WEATHER_LAYERS;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,49 +9,47 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.weather.WeatherBand;
-import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class BaseWeatherQuickAction extends QuickAction {
+public class ShowHideWeatherLayersAction extends QuickAction {
 
-	public BaseWeatherQuickAction(QuickActionType type) {
+	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_WEATHER_LAYERS,
+			"weather.layers.showhide", ShowHideWeatherLayersAction.class)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
+			.nameRes(R.string.weather_layers)
+			.iconRes(R.drawable.ic_action_umbrella).nonEditable()
+			.category(QuickActionType.CONFIGURE_MAP);
+
+	public ShowHideWeatherLayersAction() {
+		super(TYPE);
+	}
+
+	public ShowHideWeatherLayersAction(QuickActionType type) {
 		super(type);
 	}
 
-	public BaseWeatherQuickAction(QuickAction quickAction) {
+	public ShowHideWeatherLayersAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 
-	public abstract QuickActionType getActionType();
-
-	public abstract short getWeatherBand();
-
-	@StringRes
-	public abstract int getQuickActionDescription();
+	public QuickActionType getActionType(){
+		return TYPE;
+	}
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
-		OsmandApplication app = mapActivity.getApp();
-		WeatherHelper weatherHelper = app.getWeatherHelper();
-		WeatherBand weatherBand = weatherHelper.getWeatherBand(getWeatherBand());
 		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 
-		if (weatherBand != null && weatherPlugin != null) {
-			boolean visible = !weatherBand.isBandVisible();
-			if (visible && !PluginsHelper.isEnabled(WeatherPlugin.class)) {
-				PluginsHelper.enablePlugin(mapActivity, app, weatherPlugin, true);
-			}
-			weatherBand.setBandVisible(visible);
+		if (weatherPlugin != null) {
+			weatherPlugin.setWeatherEnabled(!weatherPlugin.isWeatherEnabled());
 			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
 	}
@@ -57,7 +57,7 @@ public abstract class BaseWeatherQuickAction extends QuickAction {
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity, boolean nightMode) {
 		View view = UiUtilities.inflate(parent.getContext(), nightMode, R.layout.quick_action_with_text, parent, false);
-		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(getQuickActionDescription()));
+		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(R.string.quick_action_weather_layers));
 		parent.addView(view);
 	}
 
@@ -70,7 +70,10 @@ public abstract class BaseWeatherQuickAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
-		WeatherBand weatherBand = app.getWeatherHelper().getWeatherBand(getWeatherBand());
-		return weatherBand != null && weatherBand.isBandVisible();
+		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		if (weatherPlugin != null) {
+			return weatherPlugin.isWeatherEnabled();
+		}
+		return false;
 	}
 }

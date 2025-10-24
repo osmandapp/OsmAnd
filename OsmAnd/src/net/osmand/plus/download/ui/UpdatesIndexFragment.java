@@ -154,15 +154,16 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 	public void invalidateListView(@NonNull Context context) {
 		DownloadResources indexes = app.getDownloadThread().getIndexes();
-		List<DownloadItem> downloadItems = indexes.getGroupedItemsToUpdate();
-
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
-		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, downloadItems,
-				!InAppPurchaseUtils.isLiveUpdatesAvailable(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
+		List<DownloadItem> downloadItems = new ArrayList<>(indexes.getGroupedItemsToUpdate());
+		boolean showBanner = !InAppPurchaseUtils.isLiveUpdatesAvailable(app)
+				|| settings.SHOULD_SHOW_FREE_VERSION_BANNER.get();
+
+		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, downloadItems, showBanner);
 		Collator collator = OsmAndCollator.primaryCollator();
-		listAdapter.sort((downloadItem1, downloadItem2) -> collator.compare(
-				downloadItem1.getVisibleName(app, osmandRegions),
-				downloadItem2.getVisibleName(app, osmandRegions)
+		listAdapter.sort((item1, item2) -> collator.compare(
+				item1.getVisibleName(app, osmandRegions),
+				item2.getVisibleName(app, osmandRegions)
 		));
 		setListAdapter(listAdapter);
 		updateErrorMessage();
