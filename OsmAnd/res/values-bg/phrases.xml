@@ -130,7 +130,7 @@
     <string name="poi_traffic_calming_bump">Гърбица</string>
     <string name="poi_traffic_calming_chicane">Шикан</string>
     <string name="poi_car_repair">Автосервиз</string>
-    <string name="poi_service_tyres">Гуми</string>
+    <string name="poi_service_tyres">Гуми;Гума</string>
     <string name="poi_erotic">Еротичен магазин;Сексшоп</string>
     <string name="poi_interior_decoration">Магазин за вътрешно декориране</string>
     <string name="poi_jewelry">Бижутериен магазин</string>

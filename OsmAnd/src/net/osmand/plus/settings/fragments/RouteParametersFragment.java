@@ -90,8 +90,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private static final String ROUTE_PARAMETERS_INFO = "route_parameters_info";
 	private static final String ROUTE_PARAMETERS_IMAGE = "route_parameters_image";
 	private static final String ROUTING_SHORT_WAY = "prouting_short_way";
-	private static final String ROUTING_RECALC_DISTANCE = "routing_recalc_distance";
-	private static final String DISABLE_OFFROUTE_RECALC = "disable_offroute_recalc";
+	public static final String ROUTING_RECALC_DISTANCE = "routing_recalc_distance";
+	public static final String DISABLE_OFFROUTE_RECALC = "disable_offroute_recalc";
 	private static final String ROUTING_RECALC_WRONG_DIRECTION = "disable_wrong_direction_recalc";
 	private static final String HAZMAT_TRANSPORTING_ENABLED = "hazmat_transporting_enabled";
 	private static final String DANGEROUS_GOODS_USA = "dangerous_goods_usa";
