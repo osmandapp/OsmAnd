@@ -50,7 +50,8 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
 	@Override
 	public void putBoolean(String key, boolean value) {
-		if (osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(key)) {
+		if (osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(key) ||
+				osmandSettings.DISABLE_OFFROUTE_RECALC.getId().equals(key)) {
 			osmandSettings.setPreference(key, !value, appMode);
 		} else {
 			osmandSettings.setPreference(key, value, appMode);
@@ -112,9 +113,9 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 	@Override
 	public boolean getBoolean(String key, boolean defValue) {
 		OsmandPreference<?> preference = osmandSettings.getPreference(key);
-		if (preference instanceof BooleanPreference) {
-			BooleanPreference booleanPreference = (BooleanPreference) preference;
-			if (osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(booleanPreference.getId())) {
+		if (preference instanceof BooleanPreference booleanPreference) {
+			if (osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(booleanPreference.getId())
+					|| osmandSettings.DISABLE_OFFROUTE_RECALC.getId().equals(booleanPreference.getId())) {
 				return !booleanPreference.getModeValue(appMode);
 			}
 			return booleanPreference.getModeValue(appMode);
