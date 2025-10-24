@@ -219,7 +219,7 @@
     <string name="poi_traffic_calming_island">Saobraćajno ostrvo</string>
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_car_repair">Autoservis</string>
-    <string name="poi_service_tyres">Gume</string>
+    <string name="poi_service_tyres">Gume;Guma</string>
     <string name="poi_vehicle_inspection">Pregled vozila</string>
     <string name="poi_car_wash">Auto perionica</string>
     <string name="poi_fuel">Benzinska stanica;Benzinska pumpa</string>

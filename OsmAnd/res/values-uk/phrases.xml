@@ -171,7 +171,7 @@
     <string name="poi_traffic_calming_choker">Звуження дороги</string>
     <string name="poi_traffic_signals">Світлофор</string>
     <string name="poi_car_repair">Ремонт машин (СТО)</string>
-    <string name="poi_service_tyres">Шини</string>
+    <string name="poi_service_tyres">Шини; Шина</string>
     <string name="poi_vehicle_inspection">Огляд автомобіля</string>
     <string name="poi_car_wash">Мийка автомобіля</string>
     <string name="poi_fuel">АЗС;Автомобільна заправка;Автозаправка;Бензоколонка;Бензозаправка</string>

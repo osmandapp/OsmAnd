@@ -381,7 +381,7 @@
     <string name="poi_traffic_calming_island">אי תנועה</string>
     <string name="poi_traffic_signals">רמזור</string>
     <string name="poi_car_repair">מוסך</string>
-    <string name="poi_service_tyres">צמיגים</string>
+    <string name="poi_service_tyres">צמיגים;צמיג</string>
     <string name="poi_vehicle_inspection">מבחן רישוי שנתי לרכב</string>
     <string name="poi_car_wash">שטיפת רכב</string>
     <string name="poi_fuel">תחנת דלק;תחנת תדלוק;תחנת מילוי דלק;תחנת בנזין</string>
