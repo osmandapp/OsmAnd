@@ -5018,4 +5018,13 @@
     <string name="poi_denomination_anabaptist">Anabaptist</string>
     <string name="poi_denomination_macedonian_orthodox">Makedonsk-ortodox</string>
     <string name="poi_denomination_syriac_orthodox">Syrisk-ortodox</string>
+    <string name="poi_denomination_old_catholic">Gamla katolska</string>
+    <string name="poi_denomination_shaivism">Shaivism</string>
+    <string name="poi_denomination_pkn">Protestantiska kyrkan i Nederländerna</string>
+    <string name="poi_denomination_conservative">Konservativ</string>
+    <string name="poi_denomination_scottish_episcopal">Skotska Episcopal</string>
+    <string name="poi_denomination_polish_catholic">Polska katolska</string>
+    <string name="poi_denomination_disciples_of_christ">Kristi lärjungar</string>
+    <string name="poi_denomination_free_methodist">Fri metodist</string>
+    <string name="poi_denomination_churches_of_christ">Kristi kyrka</string>
 </resources>
