@@ -233,13 +233,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 
 	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard) {
 		WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-		String date = metadata.getDate();
-		String author = metadata.getAuthor();
 		String license = metadata.getLicense();
 		return !wikiImageCard.isMetaDataDownloaded() && !controller.isMetadataDownloading(wikiImageCard)
-				&& (Algorithms.isEmpty(date) || date.equals("Unknown")
-				|| Algorithms.isEmpty(author) || author.equals("Unknown")
-				|| Algorithms.isEmpty(license) || license.equals("Unknown"));
+				&& (Algorithms.isEmpty(license) || license.equals("Unknown"));
 	}
 
 	private void updateImageDescriptionRow(@NonNull ImageCard imageCard, boolean initialLoad,
