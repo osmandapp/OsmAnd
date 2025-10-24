@@ -199,7 +199,7 @@ public class SearchCoreFactory {
 				return false;
 			}
 			// res only used as container to count matches 
-			phrase.countUnknownWordsMatchMainResult(res);
+//			phrase.countUnknownWordsMatchMainResult(res);
 			
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			String localeName = res.localeName;
@@ -647,8 +647,8 @@ public class SearchCoreFactory {
 					// Київська вулиця 10-Д
 					// 3119 Pleasant Valley Boulevard #1 Altoona
 					// 130/6 Mercedes-Benz Werk 1 (Untertürkheim) Stuttgart - (braces remove)
-					System.out.println("SEARCH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
-							+ (lastWord != null ? lastWord.getResult().object : ""));
+//					System.out.println("SEARCH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
+//							+ (lastWord != null ? lastWord.getResult().object : ""));
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
@@ -705,6 +705,7 @@ public class SearchCoreFactory {
 							// 8508 PA 61 Coal Township
 							// 1281 Pennsylvania Avenue, Pine City PA 14871 United States
 							
+							// 2401, Burnhamthorpe Road West, Oakville (not needed fix on server side)
 							// require exact matching to speed up
 							if (matchAddressName(phrase, null, res, true)) {
 //							if (phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
