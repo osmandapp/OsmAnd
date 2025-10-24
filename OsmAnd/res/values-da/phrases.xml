@@ -2833,7 +2833,7 @@
     <string name="poi_home_visit">Hjemmebesøg</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Burger</string>
-    <string name="poi_cuisine_coffee">Kaffe</string>
+    <string name="poi_cuisine_coffee_shop">Kaffe</string>
     <string name="poi_cuisine_sandwich">Sandwich</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_chicken">Kylling</string>

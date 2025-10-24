@@ -2185,7 +2185,7 @@
     <string name="poi_diplomatic_permanent_mission">Misi tetap</string>
     <string name="poi_diplomatic_delegation">Delegasi</string>
     <string name="poi_public_bookcase_type_wooden_cabinet">Jenis: lemari kayu</string>
-    <string name="poi_cuisine_coffee">Kopi</string>
+    <string name="poi_cuisine_coffee_shop">Kopi</string>
     <string name="poi_cuisine_chicken">Ayam</string>
     <string name="poi_cuisine_breakfast">Sarapan</string>
     <string name="poi_cuisine_gastropub">Gastropub</string>

@@ -2832,7 +2832,7 @@
     <string name="poi_payment_transport_type">Metoda płatności (transport)</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburger</string>
-    <string name="poi_cuisine_coffee">Kawa</string>
+    <string name="poi_cuisine_coffee_shop">Kawa</string>
     <string name="poi_cuisine_sandwich">Kanapki</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_chicken">Kurczak</string>

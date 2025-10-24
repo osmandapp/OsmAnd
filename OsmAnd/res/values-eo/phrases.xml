@@ -2830,7 +2830,7 @@
     <string name="poi_home_visit">Vizitoj en hejmo</string>
     <string name="poi_cuisine_pizza">picoj</string>
     <string name="poi_cuisine_burger">burgeroj</string>
-    <string name="poi_cuisine_coffee">kaftrinkaĵoj</string>
+    <string name="poi_cuisine_coffee_shop">kaftrinkaĵoj</string>
     <string name="poi_cuisine_sandwich">sandviĉoj</string>
     <string name="poi_cuisine_kebab">kebabo</string>
     <string name="poi_cuisine_chicken">kokaĵo</string>
