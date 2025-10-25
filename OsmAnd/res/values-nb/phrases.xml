@@ -1330,7 +1330,7 @@
     <string name="poi_tax_inspection">Skattekontroll</string>
     <string name="poi_climbing_crag">Ja</string>
     <string name="poi_traffic_calming_cushion">Fartshump</string>
-    <string name="poi_traffic_calming_table">Bred fartshump</string>
+    <string name="poi_traffic_calming_table">Lengre fartshump</string>
     <string name="poi_traffic_calming_choker">Innsnevring</string>
     <string name="poi_denotation">Betegnelse</string>
     <string name="poi_rtsa_scale_filter">Vanskelighetsgrad</string>
@@ -1971,4 +1971,10 @@
     <string name="poi_hazard_additional_dangerous_junction">Farlig kryss</string>
     <string name="poi_hazard_additional_falling_rocks">Steinras</string>
     <string name="poi_hazard_additional_erosion">Erosjon</string>
+    <string name="poi_route_activity_type_trekking">Fotturer</string>
+    <string name="poi_route_activity_type_walking">Gåruter</string>
+    <string name="poi_route_activity_type_cross_country_skiing">Langrenn</string>
+    <string name="poi_route_activity_type_skiing">Skiløyper</string>
+    <string name="poi_barrier_log">Tømmerstokk</string>
+    <string name="poi_barrier_sliding_gate">Skyveport</string>
 </resources>
