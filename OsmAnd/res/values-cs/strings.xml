@@ -5902,4 +5902,8 @@
     <string name="private_access_routing_req_short">Povolit použití soukromých cest k dosažení vašeho cíle?</string>
     <string name="download_wikipedia_label">Stáhnout Wikipedii</string>
     <string name="save_and_access_articles_offline">Uložte si data a přistupujte ke článkům offline kdekoli</string>
+    <string name="quick_action_weather_layers">Přepínač pro zobrazení nebo skrytí vrstev počasí na mapě.</string>
+    <string name="quick_action_wind_animation_layer">Přepínač pro zobrazení nebo skrytí vrstvy animace větru na mapě.</string>
+    <string name="wind_animation_layer">Vrstva animace větru</string>
+    <string name="weather_layers">Vrstvy počasí</string>
 </resources>

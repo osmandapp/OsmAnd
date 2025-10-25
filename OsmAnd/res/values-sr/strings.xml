@@ -5870,4 +5870,8 @@
     <string name="save_and_access_articles_offline">Уштедите податке и приступајте чланцима без мреже било где</string>
     <string name="private_access_routing_req_short">Дозволите коришћење приватног пута да бисте стигли до вашег одредишта?</string>
     <string name="download_wikipedia_label">Преузми Википедију</string>
+    <string name="quick_action_weather_layers">Прекидач за приказ или сакривање временских слојева на мапи.</string>
+    <string name="quick_action_wind_animation_layer">Прекидач за приказ или сакривање слоја анимације ветра на мапи.</string>
+    <string name="wind_animation_layer">Слој анимације ветра</string>
+    <string name="weather_layers">Временски слојеви</string>
 </resources>

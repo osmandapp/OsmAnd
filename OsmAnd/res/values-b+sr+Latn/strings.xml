@@ -4622,7 +4622,7 @@
     <string name="help_article_navigation_routing_name">Parametri rute</string>
     <string name="help_article_navigation_routing_brouter_name">BiRuter</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Rutiranje hodanjem</string>
-    <string name="help_article_navigation_routing_straight_line_routing_name">rutiranje pravom linijom (letelicom)</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Pravolinijsko rutiranje (letelicom)</string>
     <string name="help_article_navigation_routing_train_routing_name">Rutiranje vozom</string>
     <string name="help_article_navigation_setup_route_details_name">Detalji rute</string>
     <string name="copy_build_version">Kopiraj verziju izdanja</string>
@@ -5858,18 +5858,22 @@
     <string name="update_maps">Ažuriranje mapa</string>
     <string name="reconnect">Ponovno povezivanje</string>
     <string name="track_folder_appearance">Izgled foldera za trase</string>
-    <string name="trip_recording_downhill_widget_desc">Prikazuje zbir svih spuštanja ili poslednje spuštanje trenutno zabeleženog putovanja.</string>
-    <string name="trip_recording_uphill_widget_desc">Prikazuje zbir svih uspona ili poslednji uspon trenutno zabeleženog putovanja.</string>
+    <string name="trip_recording_downhill_widget_desc">Prikazuje sva spuštanja ili poslednji silazak trenutno zabeleženog putovanja.</string>
+    <string name="trip_recording_uphill_widget_desc">Prikazuje zbir svih uspona ili poslednji uspon trenutno snimljenog putovanja.</string>
     <string name="trip_recording_distance_widget_desc">Prikazuje ukupnu udaljenost za vaše trenutno zabeleženo putovanje, sa režimima za prikaz udaljenosti poslednjeg uspona i spusta.</string>
     <string name="trip_recording_max_speed_widget_description">Prikazuje maksimalnu brzinu za trenutno zabeleženo putovanje. Dodirnite da biste prelazili između ukupne maksimalne brzine i maksimalne brzine sa poslednjeg uspona ili spusta.</string>
     <string name="trip_recording_average_slope_widget_description">Prikazuje prosečan nagib za poslednju nizbrdicu ili uzbrdicu trenutno snimljenog putovanja.</string>
     <string name="average_slope">Prosečan nagib</string>
     <string name="shared_string_last_uphill">Poslednji uspon</string>
     <string name="shared_string_last_downhill">Poslednja nizbrdica</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skijaške staze i rute</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Ski staze i trase</string>
     <string name="rendering_attr_pisteRoutes_name">Skijaške staze i rute</string>
     <string name="save_and_access_articles_offline">Sačuvajte podatke i pristupite člancima bilo gde bez interneta</string>
     <string name="requires_internet_connection">Zahteva internet konekciju</string>
     <string name="private_access_routing_req_short">Dozvolite korišćenje privatnog puta da biste stigli do vašeg odredišta?</string>
     <string name="download_wikipedia_label">Preuzmi Vikipediju</string>
+    <string name="quick_action_weather_layers">Prekidač za prikazivanje ili skrivanje vremenskih slojeva na mapi.</string>
+    <string name="quick_action_wind_animation_layer">Prekidač za prikaz ili skrivanje sloja animacije vetra na mapi.</string>
+    <string name="wind_animation_layer">Sloj animacije vetra</string>
+    <string name="weather_layers">Vremenski slojevi</string>
 </resources>
