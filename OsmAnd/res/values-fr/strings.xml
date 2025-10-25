@@ -1598,7 +1598,7 @@
     <string name="si_min_km">Minutes par kilomètre</string>
     <string name="si_min_m">Minutes par mile</string>
     <string name="si_nm_h">Milles nautiques par heure (nœuds)</string>
-    <string name="nm_h">kn</string>
+    <string name="nm_h">nds</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -5717,7 +5717,7 @@
     <string name="rendering_attr_hideSpots_name">Sondages ponctuels</string>
     <string name="rendering_attr_hideSpots_description">Sondages ponctuels cachés</string>
     <string name="rendering_attr_shellsStyle_name">Style de coquillages</string>
-    <string name="rendering_attr_watercolor_name">Aquarelle</string>
+    <string name="rendering_attr_watercolor_name">Couleur de l\'eau</string>
     <string name="marine_renderer">Marin</string>
     <string name="marine_render_descr">Style hautement personnalisable pour la navigation maritime. Inspiré du style Nautique. Optimisé pour l\'utilisation de la carte Nautical World Seamarks et des cartes optionnelles de profondeur.</string>
     <string name="rendering_attr_hideAreas_name">Zones de profondeur</string>
@@ -5726,10 +5726,10 @@
     <string name="rendering_attr_hideContours_description">Masquer les contours de profondeur</string>
     <string name="rendering_attr_hideFairways_name">Fairways</string>
     <string name="rendering_attr_hideFairways_description">Masquer les fairways</string>
-    <string name="rendering_attr_hideFerries_name">Itinéraires de ferry</string>
-    <string name="rendering_attr_hideFerries_description">Masquer les itinéraires des ferries</string>
-    <string name="rendering_attr_hideLightSectorSources_name">Sources de secteurs lumineux</string>
-    <string name="rendering_attr_hideLightSectorSources_description">Masquer les sources de secteurs lumineux</string>
+    <string name="rendering_attr_hideFerries_name">Liaisons en ferry</string>
+    <string name="rendering_attr_hideFerries_description">Masquer les liaisons en ferry</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Sources des secteurs lumineux</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Masquer les sources des secteurs lumineux</string>
     <string name="rendering_attr_hideMinorContours_name">Courbes de profondeur mineures</string>
     <string name="rendering_attr_hideMinorContours_description">Masquer les contours de profondeur mineurs</string>
     <string name="rendering_attr_hideTidalFlats_name">Vasières</string>
@@ -5798,7 +5798,7 @@
     <string name="private_access_routing_req_short">Autorisez-vous l’emprunt de portions privées pour rejoindre votre destination ?</string>
     <string name="download_wikipedia_label">Télécharger Wikipédia</string>
     <string name="wind_animation_layer">Couche d\'animation du vent</string>
-    <string name="weather_layers">Couche météo</string>
-    <string name="quick_action_weather_layers">Une bascule pour afficher ou masquer les couches météorologiques sur la carte.</string>
-    <string name="quick_action_wind_animation_layer">Une bascule pour afficher ou masquer la couche d\'animation du vent sur la carte.</string>
+    <string name="weather_layers">Couches météo</string>
+    <string name="quick_action_weather_layers">Un interrupteur pour afficher ou masquer les couches météorologiques sur la carte.</string>
+    <string name="quick_action_wind_animation_layer">Un interrupteur pour afficher ou masquer la couche d\'animation du vent sur la carte.</string>
 </resources>
