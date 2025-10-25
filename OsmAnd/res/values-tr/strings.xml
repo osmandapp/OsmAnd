@@ -1028,7 +1028,7 @@
     <string name="mark_to_delete">Silmek için işaretle</string>
     <string name="confirmation_to_clear_history">Geçmişi temizle\?</string>
     <string name="no_updates_available">Kullanılabilir güncelleme yok</string>
-    <string name="download_live_updates">Canlı güncelleştirmeler</string>
+    <string name="download_live_updates">Canlı güncellemeler</string>
     <string name="rendering_value_default13_name">Varsayılan (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Varsayılan (yarı saydam camgöbeği)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX rengi</string>
@@ -5869,4 +5869,7 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="accessibility_independent_features">Bağımsız özellikler</string>
     <string name="lang_en_barebones">İngilizce (temel)</string>
+    <string name="requires_internet_connection">İnternet bağlantısı gerektirir</string>
+    <string name="save_and_access_articles_offline">Verileri kaydedin ve makalelere çevrim dışı olarak her yerden erişin</string>
+    <string name="app_profile">Uygulama profili</string>
 </resources>
