@@ -2036,6 +2036,12 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			cancelAddPointBeforeOrAfterMode();
 			return;
 		}
+		callMapActivity(activity -> {
+			TrackMenuFragment fragment = activity.getFragmentsHelper().getTrackMenuFragment();
+			if (fragment != null && fragment.isHidden()) {
+				fragment.show();
+			}
+		});
 		if (isFollowTrackMode()) {
 			callMapActivity(mapActivity -> {
 				mapActivity.getMapActions().showRouteInfoControlDialog();
