@@ -119,9 +119,9 @@ public class AisObjectDrawable {
 			if (ais.isMovable()) {
 				if (this.ais.getSog() <  2.0d) { return 0.0f; }
 				if (this.ais.getSog() <  5.0d) { return 1.0f; }
-				if (this.ais.getSog() < 10.0d) { return 3.0f; }
-				if (this.ais.getSog() < 25.0d) { return 6.0f; }
-				return 8.0f;
+				if (this.ais.getSog() < 10.0d) { return 2.0f; }
+				if (this.ais.getSog() < 25.0d) { return 3.0f; }
+				return 5.0f;
 			}
 		}
 		return 0.0f;
@@ -251,7 +251,8 @@ public class AisObjectDrawable {
 			} else {
 				canvas.drawBitmap(this.bitmap, Math.round(fx), Math.round(fy), paint);
 			}
-			if ((speedFactor > 0) && (!ais.isLost(getPlugin().getVesselLostTimeoutInMinutes())) && !vesselAtRest) {
+			if ((tileBox.getZoom() >= AisTrackerLayer.START_ZOOM_SHOW_DIRECTION) && (speedFactor > 0) &&
+					(!ais.isLost(getPlugin().getVesselLostTimeoutInMinutes())) && !vesselAtRest) {
 				float lineLength = (float)this.bitmap.getHeight() * speedFactor;
 				float lineStartY = locationY - this.bitmap.getHeight() / 4.0f;
 				float lineEndY = lineStartY - lineLength;

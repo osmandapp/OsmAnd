@@ -41,6 +41,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvider, AisObjectListener {
 
 	public static final int START_ZOOM = 6;
+	public static final int START_ZOOM_SHOW_DIRECTION = 10;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 	private final Paint bitmapPaint = new Paint();
