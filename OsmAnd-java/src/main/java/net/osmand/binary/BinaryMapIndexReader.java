@@ -100,6 +100,7 @@ public class BinaryMapIndexReader {
 	public static final int LABEL_ZOOM_ENCODE = 31 - SHIFT_COORDINATES;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
+	private static boolean TRACE_SEARCH = false; 
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
 		@Override
 		public boolean isEmpty() {
@@ -670,7 +671,7 @@ public class BinaryMapIndexReader {
 		for (TransportIndex index : transportIndexes) {
 			searchTransportIndex(index, req);
 		}
-		if (req.numberOfVisitedObjects > 0 && req.log) {
+		if (TRACE_SEARCH && req.numberOfVisitedObjects > 0 && req.log) {
 			log.debug("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			log.debug("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		}
@@ -1032,7 +1033,7 @@ public class BinaryMapIndexReader {
 				}
 			}
 		}
-		if (req.numberOfVisitedObjects > 0 && req.log) {
+		if (TRACE_SEARCH && req.numberOfVisitedObjects > 0 && req.log) {
 			log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		}
@@ -2605,7 +2606,6 @@ req.setSearchStat(stat);
 				fillCache = new CacheByNameIndex();
 				part.cacheByName = fillCache;
 			} else {
-				System.out.print("Use cache ");
 				Iterator<Entry<String, Integer>> it = part.cacheByName.cacheKeyVal.entrySet().iterator();
 				while (it.hasNext()) {
 					Entry<String, Integer> e = it.next();
