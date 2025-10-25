@@ -2605,6 +2605,7 @@ req.setSearchStat(stat);
 				fillCache = new CacheByNameIndex();
 				part.cacheByName = fillCache;
 			} else {
+				System.out.print("Use cache ");
 				Iterator<Entry<String, Integer>> it = part.cacheByName.cacheKeyVal.entrySet().iterator();
 				while (it.hasNext()) {
 					Entry<String, Integer> e = it.next();
