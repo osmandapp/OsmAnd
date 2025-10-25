@@ -164,53 +164,10 @@ public class SearchCoreFactory {
 									SearchResult setParentSearchResult, boolean publish)
 				throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
-			boolean firstUnknownWordMatches = res.firstUnknownWordMatches;
-			List<String> leftUnknownSearchWords = new ArrayList<String>(phrase.getUnknownSearchWords());
-			if (res.otherWordsMatch != null) {
-//				leftUnknownSearchWords.removeAll(res.otherWordsMatch); // incorrect
-				for (String otherWord : res.otherWordsMatch) {
-					leftUnknownSearchWords.remove(otherWord); // remove 1 by 1
-				}
-			}
-			SearchResult newParentSearchResult = null;
-			if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null &&
-					res.objectType == ObjectType.STREET && res.object instanceof Street && ((Street) res.object).getCity() != null) {
-				City ct = ((Street) res.object).getCity();
-				SearchResult cityResult = new SearchResult(phrase);
-				cityResult.object = ct;
-				cityResult.objectType = ObjectType.CITY;
-				cityResult.localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-				cityResult.otherNames = ct.getOtherNames(true);
-				cityResult.location = ct.getLocation();
-				cityResult.localeRelatedObjectName = res.file.getRegionName();
-				cityResult.file = res.file;
-				phrase.countUnknownWordsMatchMainResult(cityResult);
-				boolean match = false;
-				if (firstUnknownWordMatches) {
-					cityResult.firstUnknownWordMatches = false; // don't count same name twice
-				} else if (cityResult.firstUnknownWordMatches) {
-					firstUnknownWordMatches = true;
-					match = true;
-				}
-				if (cityResult.otherWordsMatch != null) {
-					Iterator<String> iterator = cityResult.otherWordsMatch.iterator();
-					while (iterator.hasNext()) {
-						String n = iterator.next();
-						boolean wasPresent = leftUnknownSearchWords.remove(n);
-						if (!wasPresent) {
-							iterator.remove(); // don't count same name twice
-						} else {
-							match = true;
-						}
-					}
-				}
-				// include parent search result even if it is empty
-				if (match) {
-					newParentSearchResult = cityResult;
-				}
-			}
-			if (!firstUnknownWordMatches) {
-				leftUnknownSearchWords.add(0, phrase.getFirstUnknownSearchWord());
+			List<String> leftUnknownSearchWords = res.filterUnknownSearchWord(null);
+			if (setParentSearchResult != null) {
+				phrase.countUnknownWordsMatchMainResult(setParentSearchResult);
+				leftUnknownSearchWords = setParentSearchResult.filterUnknownSearchWord(leftUnknownSearchWords);
 			}
 			// publish result to set parentSearchResult before search
 			if (publish) {
