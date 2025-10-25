@@ -220,7 +220,8 @@ public class SearchResult {
 		}
 		// when parent result was recreated with same phrase (it doesn't have preselected word)
 		// SearchCoreFactory.subSearchApiOrPublish
-		if (parentSearchResult != null && requiredSearchPhrase == parentSearchResult.requiredSearchPhrase) {
+		if (parentSearchResult != null && requiredSearchPhrase == parentSearchResult.requiredSearchPhrase
+				&& parentSearchResult.getOtherWordsMatch() != null) {
 			for (String s : parentSearchResult.getOtherWordsMatch()) {
 				searchPhraseNames.remove(s);
 			}
