@@ -5844,4 +5844,8 @@
     <string name="save_and_access_articles_offline">Adatmentés és cikkek offline elérése bárhonnan</string>
     <string name="private_access_routing_req_short">Engedélyezi a magánutak használatát az úticél eléréséhez?</string>
     <string name="download_wikipedia_label">Wikipédia letöltése</string>
+    <string name="quick_action_weather_layers">Kapcsoló az időjárási rétegek megjelenítéséhez vagy elrejtéséhez a térképen.</string>
+    <string name="quick_action_wind_animation_layer">Kapcsoló a szélanimáció rétegének megjelenítéséhez vagy elrejtéséhez a térképen.</string>
+    <string name="wind_animation_layer">Szélanimációs réteg</string>
+    <string name="weather_layers">Időjárási rétegek</string>
 </resources>
