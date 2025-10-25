@@ -696,8 +696,10 @@ public class BinaryMapAddressReaderAdapter {
 				// here offsets are sorted by distance
 				TIntArrayList charsList = new TIntArrayList();
 				charsList.add(0);
+				long tm = System.currentTimeMillis();
 				map.readIndexedStringTable(reg, stringMatcher.getCollator(), Collections.singletonList(req.nameQuery),
 						"", Collections.singletonList(loffsets), charsList);
+				System.out.println((System.currentTimeMillis() - tm) + "ms search by index");
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
