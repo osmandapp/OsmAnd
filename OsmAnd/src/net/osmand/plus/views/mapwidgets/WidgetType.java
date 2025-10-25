@@ -147,7 +147,11 @@ public enum WidgetType {
 
 	// Bottom panel
 	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, null, NAVIGATION_POINTS, BOTTOM),
-	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
+	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM),
+
+	PLANETS_VISIBILITY_WIDGET("planets_visibility", R.string.planets_visibility, R.string.planets_visibility_widget_desc, R.drawable.ic_action_world_globe, R.drawable.ic_action_world_globe, 0, SKY_CHART, BOTTOM),
+	PLANETS_ALTITUDE_WIDGET("planets_altitude", R.string.planets_altitude, R.string.planets_altitude_widget_desc, R.drawable.ic_action_get_my_location, R.drawable.ic_action_get_my_location, 0, SKY_CHART, BOTTOM),
+	CELESTIAL_PATH_WIDGET("celestial_path", R.string.planets_circle_chart, R.string.planets_circle_chart_widget_desc, R.drawable.ic_action_get_my_location, R.drawable.ic_action_get_my_location, 0, SKY_CHART, BOTTOM);
 
 	public static final String INTERMEDIATE_TIME_WIDGET_LEGACY = "intermediate_time";
 	public static final String NAVIGATION_TIME_WIDGET_LEGACY = "time";

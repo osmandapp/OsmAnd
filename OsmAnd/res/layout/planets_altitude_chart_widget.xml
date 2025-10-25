@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/map_center_view"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center_horizontal|top"
+	android:layout_marginTop="@dimen/map_button_margin"
+	android:background="@color/white_50_transparent"
+	android:orientation="vertical"
+	android:visibility="visible">
+
+	<net.osmand.plus.plugins.astro.views.PlanetsAltitudeChartView
+		android:id="@+id/chart_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+
+</LinearLayout>
