@@ -1,10 +1,19 @@
 package net.osmand.binary;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class BinaryIndexPart {
 
 	String name;
 	long length;
 	long filePointer;
+	CacheByNameIndex cacheByName = null;
+	
+	static class CacheByNameIndex {
+		Map<String, Integer> cacheKeyVal = new HashMap<String, Integer>();
+		Map<String, Integer> cacheSubtables = new HashMap<String, Integer>();
+	}
 	
 	abstract public String getPartName();
 

@@ -57,6 +57,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
+import net.osmand.binary.BinaryIndexPart.CacheByNameIndex;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
@@ -2595,9 +2596,34 @@ req.setSearchStat(stat);
 
 	}
 
-	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets, TIntArrayList matchedCharacters) throws IOException {
-		String key = null;
+	void readIndexedStringTable(BinaryIndexPart part, Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
+			TIntArrayList matchedCharacters) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
+		CacheByNameIndex fillCache = null;
+		if (prefix.length() == 0) {
+			if (part.cacheByName == null) {
+				fillCache = new CacheByNameIndex();
+				part.cacheByName = fillCache;
+			} else {
+				Iterator<Entry<String, Integer>> it = part.cacheByName.cacheKeyVal.entrySet().iterator();
+				while (it.hasNext()) {
+					Entry<String, Integer> e = it.next();
+					String key = e.getKey();
+					int val = e.getValue();
+					boolean shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets,
+							matchedCharacters, key, matched);
+					for (int i = 0; i < queries.size(); i++) {
+						if (matched[i]) {
+							listOffsets.get(i).add(val);
+						}
+					}
+					// FIXME use shouldWeReadSubtable
+				}
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				return;
+			}
+		}
+		String key = null;
 		boolean shouldWeReadSubtable = false;
 		while (true) {
 			int t = codedIS.readTag();
@@ -2610,39 +2636,14 @@ req.setSearchStat(stat);
 				if (prefix.length() > 0) {
 					key = prefix + key;
 				}
-				shouldWeReadSubtable = false;
-				for (int i = 0; i < queries.size(); i++) {
-					int charMatches = matchedCharacters.get(i);
-					String query = queries.get(i);
-					matched[i] = false;
-					if (query == null) {
-						continue;
-					}
-					
-					// check query is part of key (the best matching)
-					if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-						if (query.length() >= charMatches) {
-							if (query.length() > charMatches) {
-								matchedCharacters.set(i, query.length());
-								listOffsets.get(i).clear();
-							}
-							matched[i] = true;
-						}
-						// check key is part of query
-					} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-						if (key.length() >= charMatches) {
-							if (key.length() > charMatches) {
-								matchedCharacters.set(i, key.length());
-								listOffsets.get(i).clear();
-							}
-							matched[i] = true;
-						}
-					}
-					shouldWeReadSubtable |= matched[i];
-				}
+				shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets, matchedCharacters, key,
+						matched);
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = (int) readInt(); // FIXME
+				if (fillCache != null) {
+					fillCache.cacheKeyVal.put(key, val);
+				}
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i]) {
 						listOffsets.get(i).add(val);
@@ -2660,7 +2661,7 @@ req.setSearchStat(stat);
 							subqueries.set(i, null);
 						}
 					}
-					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
+					readIndexedStringTable(part, instance, subqueries, key, listOffsets, matchedCharacters);
 				} else {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
@@ -2671,6 +2672,41 @@ req.setSearchStat(stat);
 				break;
 			}
 		}
+	}
+
+	private boolean matchIndexByNameKey(Collator instance, List<String> queries, List<TIntArrayList> listOffsets,
+			TIntArrayList matchedCharacters, String key, boolean[] matched) {
+		boolean shouldWeReadSubtable = false;
+		for (int i = 0; i < queries.size(); i++) {
+			int charMatches = matchedCharacters.get(i);
+			String query = queries.get(i);
+			matched[i] = false;
+			if (query == null) {
+				continue;
+			}
+			
+			// check query is part of key (the best matching)
+			if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+				if (query.length() >= charMatches) {
+					if (query.length() > charMatches) {
+						matchedCharacters.set(i, query.length());
+						listOffsets.get(i).clear();
+					}
+					matched[i] = true;
+				}
+				// check key is part of query
+			} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+				if (key.length() >= charMatches) {
+					if (key.length() > charMatches) {
+						matchedCharacters.set(i, key.length());
+						listOffsets.get(i).clear();
+					}
+					matched[i] = true;
+				}
+			}
+			shouldWeReadSubtable |= matched[i];
+		}
+		return shouldWeReadSubtable;
 	}
 
 	private static void testAddressSearchByName(BinaryMapIndexReader reader, SearchStat stat) throws IOException {
