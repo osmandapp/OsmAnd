@@ -78,7 +78,7 @@
     <string name="live_monitoring_interval">Online útvonalrögzítés intervalluma</string>
     <string name="live_monitoring_url_descr">A webcímet a következő paraméterszintaxissal kell megadni: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Online útvonalrögzítés webcíme</string>
-    <string name="gpx_monitoring_disabled_warn">Nyomvonal naplózása a GPX modullal vagy az „Útvonalrögzítés” beállításaiban.</string>
+    <string name="gpx_monitoring_disabled_warn">Nyomvonal naplózása a GPX-modullal vagy az „Útvonalrögzítés” beállításaiban.</string>
     <string name="show_current_gpx_title">Jelenlegi útvonal megjelenítése</string>
     <string name="free_version_message">%1$s térképet tölthet le vagy frissíthet.</string>
     <string name="free_version_title">Ingyenes verzió</string>
@@ -107,7 +107,7 @@
     <string name="routing_settings">Navigáció</string>
     <string name="routing_settings_descr">Navigáció beállításainak megadása.</string>
     <string name="global_settings">Globális beállítások</string>
-    <string name="index_settings_descr">A készüléken tárolt offline térképfájlok letöltése és kezelése.</string>
+    <string name="index_settings_descr">Az eszközön tárolt offline térképfájlok letöltése és kezelése.</string>
     <string name="general_settings">Általános</string>
     <string name="general_settings_descr">A kijelző és az alkalmazás általános beállításai.</string>
     <string name="global_app_settings">Globális beállítások az alkalmazáshoz</string>
@@ -142,7 +142,7 @@
     <string name="animate_route">Szimuláció indítása</string>
     <string name="file_can_not_be_renamed">Nem sikerült átnevezni a fájlt.</string>
     <string name="file_with_name_already_exists">Már létezik ilyen nevű fájl.</string>
-    <string name="poi_query_by_name_matches_categories">Számos kapcsolódó érdekespont-kategóriát sikerült találni.</string>
+    <string name="poi_query_by_name_matches_categories">Számos kapcsolódó érdekes pont kategóriát sikerült találni.</string>
     <string name="data_to_search_poi_not_available">Offline adatok letöltése érdekes pontok kereséséhez.</string>
     <string name="poi_filter_by_name">Név szerinti keresés</string>
     <string name="old_poi_file_should_be_deleted">A(z) \'%1$s\' POI adatfájl felesleges és törölhető.</string>
@@ -169,7 +169,7 @@
     <string name="show_more_map_detail">Több térképrészlet megjelenítése</string>
     <string name="show_more_map_detail_descr">Több részlet megjelenítése (utak stb.) vektoros térképen már alacsonyabb nagyítási szinten.</string>
     <string name="favourites_delete_multiple_succesful">Kedvenc pont(ok) törölve.</string>
-    <string name="favorite_delete_multiple">Töröl %1$d kedvencet és %2$d kedvenccsoportot\?</string>
+    <string name="favorite_delete_multiple">Töröl %1$d kedvencet és %2$d kedvenc csoportot?</string>
     <string name="favorite_home_category">Család</string>
     <string name="favorite_friends_category">Barátok</string>
     <string name="favorite_places_category">Helyek</string>
@@ -195,7 +195,7 @@
     <string name="local_index_transport_data">Tömegközlekedési adatok</string>
     <string name="local_index_map_data">Térképadatok</string>
     <string name="local_indexes_cat_backup">Inaktiválva</string>
-    <string name="local_indexes_cat_tts">Hangutasítások (TTS szövegfelolvasás)</string>
+    <string name="local_indexes_cat_tts">Hangutasítások (TTS-szövegfelolvasás)</string>
     <string name="local_indexes_cat_voice">Hangutasítások (felvett beszédhang)</string>
     <string name="local_indexes_cat_tile">Online és gyorsítótárazott csempés térképek</string>
     <string name="local_indexes_cat_map">Normál térképek (vektoros)</string>
@@ -209,7 +209,7 @@
     <string name="installing_new_resources">Új adatok kicsomagolása…</string>
     <string name="internet_connection_required_for_online_route">Az online navigáció offline üzemmódban nem működik.</string>
     <string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
-    <string name="tts_language_not_supported">A kijelölt nyelvet az Android TTS (text-to-speech, szövegfelolvasó) rendszere nem támogatja, helyette az előre beállított szövegfelolvasási nyelv lesz használatban. Keresen másik TTS rendszert a Play Áruházban\?</string>
+    <string name="tts_language_not_supported">A kijelölt nyelvet az Android TTS (text-to-speech, szövegfelolvasó) rendszere nem támogatja, helyette az előre beállított szövegfelolvasási nyelv lesz használatban. Keres másik TTS-rendszert a Play Áruházban?</string>
     <string name="tts_missing_language_data_title">Hiányzó adat</string>
     <string name="tts_missing_language_data">Átváltasz az áruházra a kiválasztott nyelv letöltéséhez?</string>
     <string name="gpx_option_reverse_route">Nyomvonal irányának megfordítása</string>
@@ -261,7 +261,7 @@
     <string name="mile">mérföld</string>
     <string name="send_location_way_choose_title">Hely megosztásának módja</string>
     <string name="send_location_sms_pattern">Hely : %1$s\n%2$s</string>
-    <string name="send_location_email_pattern">A hely megtekintéséhez kövesse a(z) %1$s weblinket vagy a(z) %2$s Android-szándék linket</string>
+    <string name="send_location_email_pattern">A hely megtekintéséhez kövesse a(z) %1$s hivatkozást vagy a(z) %2$s Android intent hivatkozását</string>
     <string name="send_location">Pozíció elküldése</string>
     <string name="context_menu_item_share_location">Hely megosztása</string>
     <string name="add_waypoint_dialog_added">\'\'{0}\'\' GPX-útpont hozzáadva</string>
@@ -317,7 +317,7 @@
     <string name="install_selected_build">OsmAnd {0} – {1}, {2} MB. Telepíted?</string>
     <string name="loading_builds_failed">Az OsmAnd verziók listájának letöltése nem sikerült</string>
     <string name="loading_builds">OsmAnd összeállítások töltése…</string>
-    <string name="select_build_to_install">A telepítendő OsmAnd build kijelölése</string>
+    <string name="select_build_to_install">Válassza ki a telepítendő OsmAnd összeállítást</string>
     <string name="contribution_activity">Verzió telepítése</string>
     <string name="gps_status_app_not_found">A GPS státusz alkalmazás nincs telepítve. Megkeresi a piactéren?</string>
     <string name="voice_is_not_available_msg">A hangalapú navigáció nem érhető el. A „Beállítások” → „Navigációs beállítások”, profil kijelölése → „Hangutasítás” menüben választhat ki vagy tölthet le hangutasítás-csomagokat.</string>
@@ -347,8 +347,8 @@
     <string name="renderer_load_exception">Nem sikerült betölteni a megjelenítőt.</string>
     <string name="renderers">Vektoros megjelenítő</string>
     <string name="renderers_descr">Megjelenítési stílus kiválasztása</string>
-    <string name="poi_context_menu_website">POI weboldal megtekintése</string>
-    <string name="poi_context_menu_call">POI telefonszám megtekintése</string>
+    <string name="poi_context_menu_website">Érdekes pont weboldalának megjelenítése</string>
+    <string name="poi_context_menu_call">Érdekes pont telefonszámának megjelenítése</string>
     <string name="website">Weboldal</string>
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">szűrés</string>
@@ -361,7 +361,7 @@
     <string name="transport_search_again">Tömegközlekedés keresésének alaphelyzetbe állítása</string>
     <string name="voice">Felvett hang</string>
     <string name="no_vector_map_loaded">Nincs betöltött vektoros térkép</string>
-    <string name="gpx_files_not_found">Nem található GPX-fálj a tracks mappában</string>
+    <string name="gpx_files_not_found">Nem található GPX-fájl a tracks mappában</string>
     <string name="error_reading_gpx">Nem sikerült beolvasni a GPX-adatokat.</string>
     <string name="vector_data">Vektoros OSM térkép</string>
     <string name="transport_context_menu">Közlekedés keresése megállónál</string>
@@ -424,7 +424,7 @@
 \nÍgy nem fogod tudni megnézni a térképet és keresni.</string>
     <string name="sd_mounted_ro">A memóriakártya csak olvasható.
 \nJelenleg csak a betöltött térkép nézegethető, nem lehet új területeket letölteni.</string>
-    <string name="unzipping_file">Fájl kitömörítése (unzip)…</string>
+    <string name="unzipping_file">Fájl kitömörítése…</string>
     <string name="route_tr">Forduljon jobbra, és haladjon tovább ezen:</string>
     <string name="route_tshr">Forduljon élesen jobbra, és haladjon tovább ezen:</string>
     <string name="route_tslr">Forduljon enyhén jobbra, és haladjon tovább ezen:</string>
@@ -439,7 +439,7 @@
     <string name="search_poi_location">Várakozás jelre…</string>
     <string name="search_near_map">Keresés a jelenlegi térképközéppont közelében</string>
     <string name="search_nearby">Közeli pontok</string>
-    <string name="map_orientation_default">Mint a készülék</string>
+    <string name="map_orientation_default">Mint az eszköz</string>
     <string name="map_orientation_portrait">Álló</string>
     <string name="map_orientation_landscape">Fekvő</string>
     <string name="map_screen_orientation">Kijelző tájolása</string>
@@ -518,7 +518,7 @@
     <string name="loading_postcodes">Irányítószámok betöltése…</string>
     <string name="loading_streets">Utcák betöltése…</string>
     <string name="loading_cities">Települések betöltése…</string>
-    <string name="poi">POI</string>
+    <string name="poi">Érdekes hely</string>
     <string name="error_occurred_saving_gpx">Nem sikerült menteni a GPX-fájlt.</string>
     <string name="error_calculating_route">Nem sikerült útvonalat tervezni.</string>
     <string name="error_calculating_route_occured">Nem sikerült útvonalat tervezni.</string>
@@ -712,7 +712,7 @@
     <string name="osmand_parking_pm">du.</string>
     <string name="osmand_parking_am">de.</string>
     <string name="osmand_parking_position_name">Parkolóhely</string>
-    <string name="osmand_parking_plugin_description">Jelölje meg, hol parkol az autója, és kapjon értesítést naptárából a parkolási idő lejártáról. A jelölés elhelyezéséhez válasszon egy helyet a térképen, menjen a Műveletek menüpontra, és koppintson a Parkolóhely hozzáadása lehetőségre.</string>
+    <string name="osmand_parking_plugin_description">Jelölje meg, hol parkol az autója, és kapjon értesítést naptárából a parkolási idő lejártáról. A jelölés elhelyezéséhez válasszon egy helyet a térképen, menjen a „Műveletek” menüpontra, és koppintson a Parkolóhely hozzáadása lehetőségre.</string>
     <string name="osmand_parking_plugin_name">Parkolási pozíció</string>
     <string name="context_menu_item_add_parking_point">Itt parkolok</string>
     <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
@@ -773,8 +773,8 @@
     <string name="map_widget_vector_attributes">Megjelenítési tulajdonságok</string>
     <string name="map_widget_renderer">Térképstílus</string>
     <string name="osmand_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - kompakt vektoros térképek az egész világról \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n - Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - éjszakai/nappali nézet automatikus átkapcsolása \n - sebességfüggő térképnagyítás \n - térképigazítás iránytű vagy mozgásirány szerint \n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok \n \n Az OsmAnd ezen ingyenes verziójának korlátozásai: \n - letölthető térképek számának korlátozása \n - wikipédia-POI offline elérés nélkül \n \n Az OsmAnd-et aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testreszabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtési viszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM-adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható az eszköz memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása az eszköz tárhelyén) \n - kompakt vektoros térképek az egész világról \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n - Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - éjszakai/nappali nézet automatikus átkapcsolása \n - sebességfüggő térképnagyítás \n - térképigazítás iránytű vagy mozgásirány szerint \n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok \n \n Az OsmAnd ezen ingyenes verziójának korlátozásai: \n - letölthető térképek számának korlátozása \n - wikipédia-POI offline elérés nélkül \n \n Az OsmAnd-et aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM-adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható az eszköz memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása az eszköz tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testre szabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtési viszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
     <string name="avoid_motorway">Autópálya nélkül</string>
     <string name="snap_to_road">Úthoz illesztés</string>
@@ -835,14 +835,14 @@
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videójegyzetek</string>
     <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás, lejtési viszonyok segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sok minden mást. A topográfiai információk a térképen szintvonalakkal, domborzatárnyékolással és/vagy meredekségszínezéssel ábrázolhatók. \n \nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak. \n \nTovábbi információk: %1$s.</string>
-    <string name="recording_is_recorded">Hang-/videofelvétel. A leállításhoz koppintson az A/V modulra.</string>
+    <string name="recording_is_recorded">Hang- és videofelvétel. A leállításhoz koppintson az A/V modulra.</string>
     <string name="recording_playing">A megadott felvétel egyik hangfájljának a lejátszása elindult.
 \n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
     <string name="recording_delete_confirm">Törli az elemet\?</string>
     <string name="recording_unavailable">nem elérhető</string>
     <string name="recording_context_menu_arecord">Hangjegyzet készítése</string>
-    <string name="recording_context_menu_vrecord">Videojegyzet készítése</string>
+    <string name="recording_context_menu_vrecord">Videójegyzet készítése</string>
     <string name="layer_recordings">Felvétel réteg</string>
     <string name="recording_can_not_be_played">Nem sikerült lejátszani a felvételt.</string>
     <string name="recording_context_menu_delete">Felvétel törlése</string>
@@ -853,14 +853,14 @@
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-bővítmény offline topográfiai jellemzőkkel, mint szintvonalak, árnyékolás, lejtés</string>
     <string name="map_widget_distancemeasurement">Távolságmérés</string>
     <string name="audionotes_plugin_description">Készítsen hang-, fénykép-, vagy videójegyzeteket utazás közben egy térképgomb vagy a pozíció helyi menüjének használatával.</string>
-    <string name="av_def_action_video">Videofelvétel</string>
+    <string name="av_def_action_video">Videófelvétel</string>
     <string name="av_def_action_audio">Hangfelvétel</string>
-    <string name="av_video_format_descr">Kimeneti videoformátum:</string>
+    <string name="av_video_format_descr">Kimeneti videóformátum:</string>
     <string name="av_video_format">Videó kimeneti formátuma</string>
-    <string name="av_use_external_recorder_descr">Rendszeralkalmazás használata videofelvételre.</string>
+    <string name="av_use_external_recorder_descr">Rendszeralkalmazás használata a videófelvételhez.</string>
     <string name="av_use_external_recorder">Külső felvevő használata</string>
-    <string name="av_settings_descr">Hang- és videofelvétel beállításai.</string>
-    <string name="av_settings">Hang/videóbeállítások </string>
+    <string name="av_settings_descr">Hang- és videófelvétel beállításai.</string>
+    <string name="av_settings">Hang- és videóbeállítások</string>
     <string name="recording_error">A felvétel nem sikerült</string>
     <string name="recording_camera_not_available">A kamera nem érhető el</string>
     <string name="shared_string_control_stop">Leállítás</string>
@@ -870,9 +870,9 @@
     <string name="srtm_paid_version_msg">Fontolja meg a „Topográfia” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Topográfia bővítmény</string>
     <string name="intermediate_points_change_order">Más sorrend</string>
-    <string name="dropbox_plugin_description">Szinkronizálja a hang- és videójegyzeteket a Dropbox fiókjával.</string>
+    <string name="dropbox_plugin_description">Szinkronizálja a hang- és videójegyzeteket a Dropbox-fiókjával.</string>
     <string name="dropbox_plugin_name">Dropbox bővítmény</string>
-    <string name="local_indexes_cat_av">Hang- és videofelvétel</string>
+    <string name="local_indexes_cat_av">Hang- és videófelvétel</string>
     <string name="stop_routing_confirm">Megszakadjon a navigáció\?</string>
     <string name="clear_dest_confirm">Törli a célpontot (és a köztes célpontokat)\?</string>
     <string name="precise_routing_mode_descr">Pontos, hibamentes útvonaltervek készítése. Jelenleg korlátozott távolságra és lassan tervez.</string>
@@ -1000,7 +1000,7 @@
     <string name="edit_tilesource_maxzoom">Maximális nagyítás</string>
     <string name="edit_tilesource_expiration_time">Lejárati idő (perc)</string>
     <string name="edit_tilesource_minzoom">Minimális nagyítás</string>
-    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_url_to_load">Webcím</string>
     <string name="edit_tilesource_choose_existing">Meglévő kijelölése…</string>
     <string name="maps_define_edit">Megad/Szerkeszt…</string>
     <string name="base_world_map">Föld alaptérkép</string>
@@ -1230,7 +1230,7 @@
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
     <string name="speak_favorites">Közeli kedvencek</string>
     <string name="speak_poi">Közeli érdekes helyek (POI-k)</string>
-    <string name="download_additional_maps">Letöltia hiányzó térképeket %1$s (%2$d MB)\?</string>
+    <string name="download_additional_maps">Letölti a hiányzó térképeket %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Térképböngészés</string>
     <string name="rendering_value_car_name">Személyautó</string>
     <string name="rendering_value_bicycle_name">Kerékpár</string>
@@ -1343,7 +1343,7 @@
     <string name="avoid_roads_msg">Elkerülendő utak kijelölésével aktiválhat alternatív útvonalakat</string>
     <string name="enable_proxy_title">HTTP proxy engedélyezése</string>
     <string name="enable_proxy_descr">HTTP proxy beállítása minden hálózati kéréshez.</string>
-    <string name="proxy_host_title">Proxy hosztnév</string>
+    <string name="proxy_host_title">Proxy kiszolgáló</string>
     <string name="proxy_host_descr">Adja meg proxykiszolgálója állomásnevét (pl. 127.0.0.1).</string>
     <string name="proxy_port_title">Proxy port</string>
     <string name="proxy_port_descr">Adja meg a proxykiszolgálója portszámát (pl. 8118).</string>
@@ -1356,9 +1356,9 @@
     <string name="shared_string_disable">Letiltás</string>
     <string name="plugin_install_needs_network">A bővítmény telepítéséhez internetkapcsolat szükséges.</string>
     <string name="shared_string_get">Beszerzés</string>
-    <string name="version_settings">Build-ok</string>
+    <string name="version_settings">Összeállítások</string>
     <string name="plugin_ski_name">Sítérképnézet</string>
-    <string name="plugin_nautical_name">Hajózásitérkép-nézet</string>
+    <string name="plugin_nautical_name">Hajózási térképnézet</string>
     <string name="world_ski_missing">Töltse le a speciális offline térképet a sílétesítmények megjelenítéséhez.</string>
     <string name="nautical_maps_missing">Töltse le a speciális offline térképet a hajózási adatok megjelenítéséhez.</string>
     <string name="device_memory">Eszköz memóriája</string>
@@ -1446,7 +1446,7 @@
 \n 
 \nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
     <string name="plugin_nautical_descr">Gazdagítsa a térképet a hajózási útvonalakra, navigációs fényekre, hajózási veszélyzónákra, hajózási vagy kikötési korlátozásokkal érintett zónákra stb. vonatkozó adatokkal. Használatához töltse le a megfelelő tengeri térképeket, és engedélyezze a Térkép beállítása menüpontban a Hajózási térkép stílust. \n \nTovábbi olvasnivalók a %1$s oldalon.</string>
-    <string name="plugin_ski_descr">Télisport helyszíneken való navigációra tervezve: sífelvonók, sípályák és sífutópályák a nehézségi fokozatot jelző színes vonalakkal. Használatához engedélyezze ezt a bővítményt, valamint a Térkép beállítása menüpontban a Tél és síelés térképstílust.</string>
+    <string name="plugin_ski_descr">Télisport helyszíneken való navigációra tervezve: sífelvonók, sípályák és sífutópályák a nehézségi fokozatot jelző színes vonalakkal. Használatához engedélyezze ezt a bővítményt, valamint a „Térkép beállítása” menüpontban a „Tél és síelés” térképstílust.</string>
     <string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépeljen az összes kereséséhez</string>
     <string name="specified_directiory_not_writeable">Nem sikerült létrehozni a térképeket a megadott könyvtárban</string>
@@ -1611,10 +1611,10 @@
     <string name="unsaved_changes_will_be_lost">A nem mentett változtatások el fognak veszni. Folytatod?</string>
     <string name="downloads_left_template">%1$s letöltés maradt</string>
     <string name="roads">Utak</string>
-    <string name="show_free_version_banner">Ingyenes verzió banner megjelenítése</string>
-    <string name="show_free_version_banner_description">Az ingyenes verzió bannerének megjelenítése a fizetős verzióban is.</string>
+    <string name="show_free_version_banner">Ingyenes verzió plakátképének megjelenítése</string>
+    <string name="show_free_version_banner_description">Az ingyenes verzió plakátképének megjelenítése a fizetős verzióban is.</string>
     <string name="buy">Vásárlás</string>
-    <string name="activate_seamarks_plugin">Aktiválja a „Hajózásitérkép-nézet” bővítményt</string>
+    <string name="activate_seamarks_plugin">Aktiválja a „Hajózási térképnézet” bővítményt</string>
     <string name="activate_srtm_plugin">Aktiválja a „Topográfia” bővítményt</string>
     <string name="later">Tovább</string>
     <string name="get_full_version">Teljes verzió</string>
@@ -1708,12 +1708,12 @@
     <string name="use_dashboard_btn">Irányítópult használata</string>
     <string name="use_drawer_btn">Menü használata</string>
     <string name="dashboard_or_drawer_title">Vezérlés irányítópulttal vagy menüvel</string>
-    <string name="dashboard_or_drawer_description">Választhat, hogy az alkalmazást elsősorban a rugalmas irányítópulttal vagy egy statikus menüvel kívánja vezérelni. A döntés bármikor megváltoztatható az irányítópult beállításaiban.</string>
+    <string name="dashboard_or_drawer_description">Választhat, hogy az alkalmazást elsősorban a rugalmas irányítópulttal vagy egy statikus menüvel szeretné vezérelni. A döntés bármikor megváltoztatható az irányítópult beállításaiban.</string>
     <string name="shared_string_near">ennek közelében:</string>
     <string name="shared_string_hide">Elrejtés</string>
     <string name="av_video_quality_low">Legalacsonyabb minőség</string>
     <string name="av_video_quality_high">Legmagasabb minőség</string>
-    <string name="av_video_quality">Videokimenet minősége</string>
+    <string name="av_video_quality">Videókimenet minősége</string>
     <string name="av_video_quality_descr">Videóminőség kiválasztása.</string>
     <string name="av_audio_format">Hangkimenet formátuma</string>
     <string name="av_audio_format_descr">Hangkimenet formátumának kiválasztása.</string>
@@ -1725,7 +1725,7 @@
     <string name="rendering_attr_horseRoutes_name">Lovaglóutak</string>
     <string name="no_address_found">Ismeretlen cím</string>
     <string name="looking_up_address">Cím keresése</string>
-    <string name="only_download_over_wifi">Letöltés csak WiFi-n</string>
+    <string name="only_download_over_wifi">Letöltés csak Wi-Fi-n</string>
     <string name="live_update">Élő frissítés</string>
     <string name="update_now">Frissítés most</string>
     <string name="live_updates">Élő frissítések</string>
@@ -2020,7 +2020,7 @@
     <string name="quick_action_add_marker_descr">Gomb, amely létrehoz a képernyő közepén egy térképjelölőt.</string>
     <string name="quick_action_add_gpx_descr">Gomb, amely létrehoz a képernyő közepén egy GPX-útpontot.</string>
     <string name="quick_action_take_audio_note_descr">Gomb, amely létrehoz a képernyő közepén egy hangjegyzetet.</string>
-    <string name="quick_action_take_video_note_descr">Gomb, amely létrehoz a képernyő közepén egy videojegyzetet.</string>
+    <string name="quick_action_take_video_note_descr">Gomb, amely létrehoz a képernyő közepén egy videójegyzetet.</string>
     <string name="quick_action_take_photo_note_descr">Gomb, amely létrehoz a képernyő közepén egy fényképes jegyzetet.</string>
     <string name="quick_action_add_osm_bug_descr">Gomb, amely létrehoz a képernyő közepén egy OSM-jegyzetet.</string>
     <string name="quick_action_add_poi_descr">Gomb, amely létrehoz a képernyő közepén egy érdekes helyet (POI-t).</string>
@@ -2044,7 +2044,7 @@
     <string name="quick_action_category_descr">Kategória, amelybe a Kedvenc hely mentésre kerüljön:</string>
     <string name="quick_action_gpx_category_descr">Nem kötelező kategória kiválasztása.</string>
     <string name="quick_action_poi_list">POI lista</string>
-    <string name="quick_action_sh_poi_descr">Adjon hozzá egy vagy több a térképen megjelenítendő érdekespont-kategóriát.</string>
+    <string name="quick_action_sh_poi_descr">Adjon hozzá egy vagy több a térképen megjelenítendő érdekes pont kategóriát.</string>
     <string name="quick_action_map_style_action">Térképstílus hozzáadása</string>
     <string name="quick_action_empty_param_error">Töltse ki az összes paramétert</string>
     <string name="quick_action_map_styles">Térképstílusok</string>
@@ -2088,7 +2088,7 @@
     <string name="average_speed">Átlagsebesség</string>
     <string name="shared_string_time_moving">Mozgásban töltött idő</string>
     <string name="shared_string_time_span">Időtartam</string>
-    <string name="shared_string_max">Max</string>
+    <string name="shared_string_max">Maximum</string>
     <string name="shared_string_start_time">Indulási idő</string>
     <string name="shared_string_end_time">Érkezési idő</string>
     <string name="shared_string_color">Szín</string>
@@ -2184,7 +2184,7 @@
     <string name="mapillary_widget">Mapillary modul</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
     <string name="mapillary_descr">Online utcaszintű képek mindenkinek. Fedezzen fel helyeket, működjön együtt másokkal, örökítse meg a világot.</string>
-    <string name="plugin_mapillary_descr">Utcaszintű képek. Ön is közreműködhet. A meglévő adatok térképrétegként való megjelenítéséhez kapcsolja be a Térkép beállítása menüben az Utcaszintű képek lehetőséget.</string>
+    <string name="plugin_mapillary_descr">Utcaszintű képek. Ön is közreműködhet. A meglévő adatok térképrétegként való megjelenítéséhez kapcsolja be a „Térkép beállítása” menüben az „Utcaszintű képek” lehetőséget.</string>
     <string name="osmand_extended_description_part4">Síelés
 \nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
@@ -2331,7 +2331,7 @@
     <string name="one_tap_active_descr">Koppintson a térképen egy jelölőre, hogy az aktív jelölők tetejére lépjen anélkül, hogy megnyitná a környezeti menüt.</string>
     <string name="one_tap_active">Aktiválás egy koppintással</string>
     <string name="empty_state_av_notes">Készítsen jegyzeteket!</string>
-    <string name="empty_state_av_notes_desc">Hang-, video-, vagy fényképjegyzet hozzáadása a térkép bármely pontjához, modul vagy környezeti menü használatával.</string>
+    <string name="empty_state_av_notes_desc">Hang-, videó-, vagy fényképjegyzet hozzáadása a térkép bármely pontjához, modul vagy környezeti menü használatával.</string>
     <string name="notes_by_date">Hang/kép jegyzetek dátum szerint</string>
     <string name="by_date">Dátum szerint</string>
     <string name="by_type">Típus szerint</string>
@@ -2351,7 +2351,7 @@
     <string name="shared_string_two">Kettő</string>
     <string name="shared_string_one">Egy</string>
     <string name="show_guide_line_descr">Megjelenít egy irányjelző vonalat a jelenlegi pozíciótól az aktív térképjelölőkig.</string>
-    <string name="show_arrows_descr">Megjelenít egy vagy két nyilat jelenít, amelyek az aktív jelölők irányába mutatnak.</string>
+    <string name="show_arrows_descr">Megjelenít egy vagy két nyilat, amelyek az aktív jelölők irányába mutatnak.</string>
     <string name="distance_indication_descr">Válassza ki, hogyan jelenjen meg az aktív jelölők távolsága.</string>
     <string name="active_markers_descr">Adja meg az irányjelzők számát.</string>
     <string name="digits_quantity">Tizedesjegyek száma</string>
@@ -2476,11 +2476,11 @@
     <string name="travel_card_update_descr">Új Wikivoyage adat érhető el, a használatához frissíts.</string>
     <string name="travel_card_download_descr">Töltse le a Wikivoyage útikalauzokat, hogy internetkapcsolat nélkül olvashasson cikkeket a világ érdekes helyeiről.</string>
     <string name="start_editing_card_image_text">Az ingyenes, világméretű útikalauz, amit bárki szerkeszthet.</string>
-    <string name="welcome_to_open_beta_description">Az útikalauz a Wikivoyage-on alapul. Teszteld a lehetőségeit a nyílt bétateszt során ingyenesen.</string>
+    <string name="welcome_to_open_beta_description">Az útikalauz a Wikivoyage-on alapul. Tesztelje a lehetőségeit a nyílt béta teszten ingyenesen.</string>
     <string name="start_editing_card_description">Szerkesztheti, sőt szerkessze a Wikivoyage szócikkeit. Ossza meg tudását, tapasztalatait, tehetségét és figyelmességét.</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
-    <string name="welcome_to_open_beta">Üdvözöljük a nyílt bétatesztben</string>
+    <string name="welcome_to_open_beta">Üdvözöljük a nyílt béta tesztben</string>
     <string name="wikivoyage_travel_guide">Útikalauzok</string>
     <string name="wikivoyage_travel_guide_descr">Útikalauz a bolygó legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
     <string name="purchase_dialog_travel_description">Az offline útikalauz funkció használatához vásárolja meg az alábbiak egyikét:</string>
@@ -2494,7 +2494,7 @@
     <string name="shared_string_explore">Felfedezés</string>
     <string name="shared_string_contents">Tartalomjegyzék</string>
     <string name="shared_string_result">Eredmény</string>
-    <string name="use_two_digits_longitude">Kétszámjegyű hosszúsági fok használata</string>
+    <string name="use_two_digits_longitude">Két számjegyű hosszúsági fok használata</string>
     <string name="shared_string_travel_guides">Útikalauzok</string>
     <string name="waypoints_removed_from_map_markers">Útpontok eltávolítva a térképjelölők közül</string>
     <string name="nothing_found_in_radius">Nincs találat:</string>
@@ -2519,7 +2519,7 @@
     <string name="nautical_render_descr">Hajózási navigációhoz. Főbb tulajdonságok: bóják, világítótornyok, folyók, tengeri útvonalak és jelzések, kikötők, hajózási jelzések, mélységvonalak.</string>
     <string name="ski_map_render_descr">Síeléshez. Kiemeli a sípályákat, a felvonókat, a sífutónyomokat stb. A másodlagos térképobjektumokat elhalványítja.</string>
     <string name="light_rs_render_descr">Egyszerű vezetési stílus. Kellemes éjszakai mód, kontrasztos narancsszínű utak, elhalványított másodlagos térképobjektumok, topográfiai jellemzők, mint pl. szintvonalak.</string>
-    <string name="topo_render_descr">Túrázáshoz és természetben történő kerékpározáshoz. Szabad téren is olvasható. Kontrasztos utak és természeti objektumok, különböző úttípusok, speciális szintvonalbeállítások, további részletek. Ha beállítjuk az útfelszín épségének megjelenítését, akkor láthatóvá válik az út minősége. Éjszakai mód nincs.</string>
+    <string name="topo_render_descr">Túrázáshoz és természetben történő kerékpározáshoz. Szabad téren is olvasható. Kontrasztos utak és természeti objektumok, különböző úttípusok, speciális szintvonal-beállítások, további részletek. Ha beállítjuk az útfelszín épségének megjelenítését, akkor láthatóvá válik az út minősége. Éjszakai mód nincs.</string>
     <string name="touring_view_render_descr">Turisztikai stílus erős kontraszttal és a legtöbb részlettel. Tartalmazza az OsmAnd alapértelmezett stílus össze beállítását, miközben megjeleníti a lehető legtöbb részletet, különösen utakat, ösvényeket és más utazási útvonalakat. A turistatérkép-szerű stílus világos különbséget tesz az úttípusok között. Alkalmas nappali, éjszakai és szabad téri használatra is.</string>
     <string name="default_render_descr">Általános felhasználású stílus. A sűrű városok világosan jelennek meg. Jellemzői az útvonalak, a felszínminőség, a használati korlátozások, útszámozások, ösvények SAC/CAI-skála szerint, vadvízi sportlétesítmények, topográfiai jellemzők, mint pl. szintvonalak.</string>
     <string name="quick_action_edit_actions">Műveletek szerkesztése</string>
@@ -2627,7 +2627,7 @@
     <string name="quick_action_switch_day_night_descr">Az OsmAnd éjszakai és nappali módja között váltó kapcsoló.</string>
     <string name="quick_action_switch_day_mode">Nappali mód</string>
     <string name="quick_action_switch_night_mode">Éjszakai mód</string>
-    <string name="quick_action_day_night_switch_mode">Váltás a nappali/éjszakai mód között</string>
+    <string name="quick_action_day_night_switch_mode">Váltás a nappali és éjszakai mód között</string>
     <string name="run_full_osmand_msg">A(z) {0} térképet használja, amelyet az OsmAnd biztosít. Elindítja az OsmAnd teljes verzióját\?</string>
     <string name="run_full_osmand_header">Elindítja az OsmAnd-et?</string>
     <string name="add_work">Munkahely hozzáadása</string>
@@ -2667,7 +2667,7 @@
     <string name="avoid_pt_types">Közlekedési módok kihagyása…</string>
     <string name="shared_string_walk">Séta</string>
     <string name="public_transport_warning_descr_blog">Az OsmAnd útvonaltervezés módjáról a blogunkon olvashat.</string>
-    <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
+    <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg béta tesztelési állapotban van, hibák és pontatlanságok előfordulhatnak.</string>
     <string name="add_intermediate">Köztes célpont hozzáadása</string>
     <string name="transfers_size">%1$d átszállás</string>
     <string name="shared_string_degrees">Fok</string>
@@ -3059,7 +3059,7 @@
     <string name="save_heading_descr">Felvételkor az egyes útpontok irányát is menti.</string>
     <string name="select_navigation_icon">Mozgás közben látható pozícióikon</string>
     <string name="select_map_icon">Pozíció ikon álló helyzetben</string>
-    <string name="delete_profiles_descr">Az Alkalmaz-ra koppintva a törölt profilok végérvényesen elvesznek.</string>
+    <string name="delete_profiles_descr">Az Alkalmaz gombra koppintva a törölt profilok végérvényesen elvesznek.</string>
     <string name="master_profile">Főprofil</string>
     <string name="select_color">Szín kijelölése</string>
     <string name="edit_profiles_descr">Az alapértelmezett OsmAnd-profilok nem törölhetők, viszont letilthatók (az előző képernyőn) vagy letolhatók a lista aljára.</string>
@@ -3084,9 +3084,9 @@
 \n • Bekapcsolható útvonalrögzítés helyi GPX-fájlba vagy online módon
 \n • Bekapcsolható sebesség- és magasságkijelzés
 \n • Szintvonalak és domborzatárnyékolás megjelenítése (bővítmény telepítése után)</string>
-    <string name="osmand_plus_extended_description_part7">Szerkessze közvetlenül az OpenStreetMapet \n • Jelentsen be hibákat \n • Töltsön fel GPX-nyomvonalakat az OSM-re közvetlenül az alkalmazásból \n • Adjon hozzá érdekes pontokat és töltse fel őket közvetlenül (vagy később offline módon) az OSM-re \n • Beállítható útvonalrögzítés a háttérben is (miközben a készülék alvó üzemmódban van) \n Az OsmAnd aktívan fejlesztett nyílt forráskódú szoftver. Bárki közreműködhet az alkalmazás fejlesztésében hibák bejelentésével, a fordítások javításával vagy új funkciók kódolásával. A projekt az új funkciók kódolásánek és tesztelésének finanszírozását lehetővé tevő pénzügyi hozzájárulásoktól függ.</string>
-    <string name="release_3_4">• Alkalmazásprofilok: egyedi profil létrehozása saját igényei szerint, egyedi ikonnal és színnel \n \n • Most már minden profilban testreszabhatók az alapértelmezések és legkisebb/legnagyobb sebességek \n \n • Új modul a jelenlegi koordinátáknak \n \n • Új opciók az iránytű és a sugárirányú vonalzó térképen való megjelenítéséhez \n \n • A háttérben történő nyomvonalrögzítés hibáinak javítása \n \n • Háttérben történő térképletöltés javítása \n \n • A „Képernyő bekapcsolása” opció visszaállítása \n \n • A Wikipédia-nyelv kijelölésének javítása \n \n • Az iránytűgomb navigáció közbeni viselkedésének javítása \n \n • Más hibajavítások</string>
-    <string name="release_3_5">• Frissített alkalmazás- és profilbeállítások: a beállítások most típusonként vannak elrendezve. Minden profil külön-külön testreszabható. \n \n • Az új térképletöltési párbeszédablak böngészés közben javaslatot tesz a letöltendő térképre \n \n • A sötét téma hibáinak javítása \n \n • Számos útvonaltervezési probléma javítása világszerte \n \n • Frissített alaptérkép részletesebb úthálózattal \n \n • Elárasztott területek javítása világszerte \n \n • Sí útvonaltervezés: magassági profil és útvonalbonyolultság hozzáadása az útvonal részleteihez \n \n • További hibajavítások</string>
+    <string name="osmand_plus_extended_description_part7">Szerkessze közvetlenül az OpenStreetMapet \n • Jelentsen be hibákat \n • Töltsön fel GPX-nyomvonalakat az OSM-re közvetlenül az alkalmazásból \n • Adjon hozzá érdekes pontokat és töltse fel őket közvetlenül (vagy később offline módon) az OSM-re \n • Beállítható útvonalrögzítés a háttérben is (miközben az eszköz alvó üzemmódban van) \n Az OsmAnd aktívan fejlesztett nyílt forráskódú szoftver. Bárki közreműködhet az alkalmazás fejlesztésében hibák bejelentésével, a fordítások javításával vagy új funkciók kódolásával. A projekt az új funkciók kódolásának és tesztelésének finanszírozását lehetővé tevő pénzügyi hozzájárulásoktól függ.</string>
+    <string name="release_3_4">• Alkalmazásprofilok: egyedi profil létrehozása saját igényei szerint, egyedi ikonnal és színnel \n \n • Most már minden profilban testre szabhatók az alapértelmezések és legkisebb/legnagyobb sebességek \n \n • Új modul a jelenlegi koordinátáknak \n \n • Új opciók az iránytű és a sugárirányú vonalzó térképen való megjelenítéséhez \n \n • A háttérben történő nyomvonalrögzítés hibáinak javítása \n \n • Háttérben történő térképletöltés javítása \n \n • A „Képernyő bekapcsolása” opció visszaállítása \n \n • A Wikipédia-nyelv kijelölésének javítása \n \n • Az iránytűgomb navigáció közbeni viselkedésének javítása \n \n • Más hibajavítások</string>
+    <string name="release_3_5">• Frissített alkalmazás- és profilbeállítások: a beállítások most típusonként vannak elrendezve. Minden profil külön-külön testre szabható. \n \n • Az új térképletöltési párbeszédablak böngészés közben javaslatot tesz a letöltendő térképre \n \n • A sötét téma hibáinak javítása \n \n • Számos útvonaltervezési probléma javítása világszerte \n \n • Frissített alaptérkép részletesebb úthálózattal \n \n • Elárasztott területek javítása világszerte \n \n • Sí útvonaltervezés: magassági profil és az útvonal bonyolultságának hozzáadása az útvonal részleteihez \n \n • További hibajavítások</string>
     <string name="quick_action_directions_from_desc">Gomb, amely beállítja a képernyő közepét kiindulási pontnak. Ezután kérni fog egy úti célt vagy elindítja az útvonaltervezést.</string>
     <string name="reset_confirmation_descr">Minden módosítás elvész, ha erre koppint: %1$s.</string>
     <string name="reset_all_profile_settings_descr">Összes profilbeállítás visszaállítása az alapértelmezett állapotba.</string>
@@ -3101,7 +3101,7 @@
     <string name="import_routing_file">Úttervezési fájl importálása</string>
     <string name="import_profile">Profil importálása</string>
     <string name="monitoring_prefs_descr">Navigáció, naplózás pontossága</string>
-    <string name="multimedia_notes_prefs_descr">Képméret, hang- és videominőség</string>
+    <string name="multimedia_notes_prefs_descr">Képméret, hang- és videóminőség</string>
     <string name="osm_editing_prefs_descr">Bejelentkezés, jelszó, offline szerkesztés</string>
     <string name="accessibility_prefs_descr">Ikonalak, -szín és -méret kiválasztása</string>
     <string name="live_monitoring_descr">Az utazás felvételével lehetővé teszi a jelenlegi pozíció megosztását.</string>
@@ -3185,7 +3185,7 @@
     <string name="items_added">Tételek hozzáadva</string>
     <string name="recalculate_route_in_deviation">Útvonal újratervezése letérés esetén</string>
     <string name="select_distance_route_will_recalc">Jelölje ki a távolságot, amelytől kezdve az útvonal újra lesz számítva.</string>
-    <string name="recalculate_route_distance_promo">Az útvonal újrastervezésre kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
+    <string name="recalculate_route_distance_promo">Az útvonal újratervezésre kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
     <string name="n_items_of_z">%1$s a %2$s-ból</string>
     <string name="download_slope_maps">Lejtési viszonyok</string>
     <string name="quick_action_terrain_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzati réteget.</string>
@@ -3196,7 +3196,7 @@
     <string name="shared_string_circle">Kör</string>
     <string name="shared_string_octagon">Nyolcszög</string>
     <string name="shared_string_square">Négyzet</string>
-    <string name="shared_string_min">Min</string>
+    <string name="shared_string_min">Minimum</string>
     <string name="clear_recorded_data">Felvett adatok törlése</string>
     <string name="terrain_empty_state_text">Megjeleníti a térképen a domborzatárnyékolást vagy a lejtést. Ezekről a térképfajtákról a honlapunkon olvashat.</string>
     <string name="app_mode_ski_touring">Túrasízés</string>
@@ -3274,7 +3274,7 @@
     <string name="favorites_item">Kedvencek</string>
     <string name="subscription_osmandlive_item">Előfizetés - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd vásárlások</string>
-    <string name="legend_item_description">Útmutató a térkép szimbolikájához (jelmagyarázat).</string>
+    <string name="legend_item_description">Jelmagyarázat a térkép szimbolikájához.</string>
     <string name="navigation_profiles_item">Navigációs profilok</string>
     <string name="quick_action_transport_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a tömegközlekedési réteget.</string>
     <string name="additional_actions_descr">Ezeket a műveleteket a %1$s gombra koppintva éri el.</string>
@@ -3292,7 +3292,7 @@
     <string name="search_poi_types_descr">Kombináljon POI típusokat különböző kategóriákból. Koppintson egy kapcsolóra az összes altípus kiválasztásához, vagy koppintson egy szövegre az egyes altípusok kijelöléséhez.</string>
     <string name="search_poi_types">POI típusok keresése</string>
     <string name="index_item_world_basemap_detailed">Áttekintő világtérkép (részletes)</string>
-    <string name="release_3_7">• Új offline lejtőtérkép \n \n • Kedvencek és GPX-útpontok teljes testreszabhatósága – egyéni színek, ikonok, formák \n \n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testreszabható \n \n • Wikipédia külön rétegként szerepel a Térkép beállítása menüben, a kívánt nyelvek kiválaszthatók \n \n • Saját POI szűrők létrehozhatók / térképek teljes rugalmassággal \n \n • Egyéni profilok beállításainak visszaállíthatósága \n \n • Teljeskörű GPX útvonalak létrehozása a navigációból, mely támogatja a forgalmi sávokat és a teljes navigációs utasításokat \n \n • Felhasználói felület méreteinek javítása táblagépeken \n \n • Jobbról balra írt nyelvekkel kapcsolatos hibák javítása\n\n</string>
+    <string name="release_3_7">• Új offline lejtőtérkép \n \n • Kedvencek és GPX-útpontok teljes testre szabhatósága – egyéni színek, ikonok, formák \n \n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testre szabható \n \n • Wikipédia külön rétegként szerepel a Térkép beállítása menüben, a kívánt nyelvek kiválaszthatók \n \n • Saját POI-szűrők létrehozhatók / térképek teljes rugalmassággal \n \n • Egyéni profilok beállításainak visszaállíthatósága \n \n • Teljes körű GPX-útvonalak létrehozása a navigációból, mely támogatja a forgalmi sávokat és a teljes navigációs utasításokat \n \n • Felhasználói felület méreteinek javítása táblagépeken \n \n • Jobbról balra írt nyelvekkel kapcsolatos hibák javítása\n\n</string>
     <string name="unsupported_type_error">Nem támogatott típus</string>
     <string name="shared_string_resume">Folytatás</string>
     <string name="map_source_zoom_levels_descr">Ezek a paraméterek a térképként vagy fedő-/alátétrétegként való használatkor befolyásolják a megjelenítést.
@@ -3306,14 +3306,14 @@
     <string name="turn_screen_on_descr">Válassza ki a kijelző felébresztési lehetőségeit (fontos, hogy az OsmAnd az előtérben fusson, amikor az eszköz lezárásra kerül):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Valamennyi navigációs utasítás előtt a kijelző bekapcsolódik.</string>
     <string name="turn_screen_on_navigation_instructions">Navigációs utasítások</string>
-    <string name="turn_screen_on_power_button_descr">A készülék bekapcsológombjának megnyomásával a képernyő bekapcsol, a zárolási képernyő fölött pedig az OsmAnd jelenik meg.</string>
+    <string name="turn_screen_on_power_button_descr">Az eszköz bekapcsológombjának megnyomásával a képernyő bekapcsol, a zárolási képernyő fölött pedig megjelenik az OsmAnd.</string>
     <string name="turn_screen_on_power_button">Bekapcsológomb</string>
     <string name="turn_screen_on_proximity_sensor">Közelségérzékelő</string>
     <string name="keep_screen_on">Kijelző maradjon bekapcsolva</string>
     <string name="keep_screen_off">Kijelző maradjon kikapcsolva</string>
     <string name="one_image_per_tile">Egy képfájl csempénként</string>
     <string name="pseudo_mercator_projection">Pszeudo-Mercator vetület</string>
-    <string name="online_map_url_helper_text">Adja meg vagy illessze be az online forrás URL-jét.</string>
+    <string name="online_map_url_helper_text">Adja meg vagy illessze be az online forrás webcímét.</string>
     <string name="online_map_name_helper_text">Nevezze el az online térképforrást.</string>
     <string name="sqlite_db_file">SQLiteDB fájl</string>
     <string name="edit_online_source">Online forrás szerkesztése</string>
@@ -3327,9 +3327,9 @@
 \nEgy hét 10 080 perc. 
 \nEgy hónap 43 829 perc.</string>
     <string name="tiles_storage_descr">Válassza ki a letöltött csempék tárolási módját.</string>
-    <string name="width_limit_description">Adja meg járműve szélességét (a széles járművekre útvonalkorlátozások vonatkozhatnak).</string>
-    <string name="height_limit_description">Adja meg a járműve magasságát (a magas járművekre útvonalkorlátozások vonatkozhatnak).</string>
-    <string name="weight_limit_description">Adja meg a járműve tömegét (a nehéz járművekre útvonalkorlátozások vonatkozhatnak).</string>
+    <string name="width_limit_description">Adja meg járműve szélességét (a széles járművekre útvonal-korlátozások vonatkozhatnak).</string>
+    <string name="height_limit_description">Adja meg a járműve magasságát (a magas járművekre útvonal-korlátozások vonatkozhatnak).</string>
+    <string name="weight_limit_description">Adja meg a járműve tömegét (a nehéz járművekre útvonal-korlátozások vonatkozhatnak).</string>
     <string name="gpx_parse_error">Hiba egy GPX fájlban.
 \n
 \nTovábbi vizsgálathoz kapcsolatba léphet az OsmAnd ügyfélszolgálattal.</string>
@@ -3384,7 +3384,7 @@
 \nAz Android „Alkalmazások” beállításában távolítható el.</string>
     <string name="routing_profile_direct_to">Légvonalban</string>
     <string name="reset_to_default_category_button_promo">Az alapértelmezés visszaállítása a sorrendet visszaállítja a telepítés utáni alapértelmezett állapotba.</string>
-    <string name="accessibility_mode_disabled">A kisegítő lehetőségek a készülékén az Android rendszerben ki vannak kapcsolva.</string>
+    <string name="accessibility_mode_disabled">A kisegítő lehetőségek az eszközén az Android rendszerben ki vannak kapcsolva.</string>
     <string name="live_monitoring_time_buffer">Idő puffer</string>
     <string name="live_monitoring_tracking_interval">Rögzítési intervallum</string>
     <string name="live_monitoring_adress">Webcím</string>
@@ -3393,11 +3393,11 @@
     <string name="monitoring_min_accuracy">Legkisebb pontosság</string>
     <string name="monitoring_min_distance">Legkisebb elmozdulás</string>
     <string name="reset_plugin_to_default">Bővítménybeállítások visszaállítása alapértelmezettre</string>
-    <string name="use_volume_buttons_as_zoom_descr">A térképnagyítás szintjének vezérlése a készülék hangerőgombjaival.</string>
+    <string name="use_volume_buttons_as_zoom_descr">A térképnagyítás szintjének vezérlése az eszköz hangerőgombjaival.</string>
     <string name="use_volume_buttons_as_zoom">Hangerőgombok használata nagyításhoz</string>
     <string name="app_mode_inline_skates">Görkorcsolya</string>
     <string name="please_provide_point_name_error">Adjon nevet a pontnak</string>
-    <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonalkorlátozások vonatkozhatnak).</string>
+    <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonal-korlátozások vonatkozhatnak).</string>
     <string name="search_download_wikipedia_maps">Wikipédia-térképek letöltése</string>
     <string name="export_profile_dialog_description">További adatok kijelölése exportálásra a profillal együtt.</string>
     <string name="shared_string_include_data">Kiegészítő adatok átvétele</string>
@@ -3439,7 +3439,7 @@
     <string name="previous_segment">Előző szakasz</string>
     <string name="monitoring_min_accuracy_descr">Ez csak a legalább minimális pontossággal mért pontokat rögzíti (méterben/lábban, ahogy azt az Android a lapkakészletnek közvetíti). A pontosság (accuracy) a mérések valódi helyzethez való közelsége, és nem kapcsolódik közvetlenül az ismételt mérések szórásának pontosságához (precision).</string>
     <string name="follow_track">Nyomvonal követése</string>
-    <string name="monitoring_control_start">REC</string>
+    <string name="monitoring_control_start">Rögzítés</string>
     <string name="system_default_theme">Rendszer-alapértelmezés</string>
     <string name="plan_route_import_track">Nyomvonal importálása</string>
     <string name="all_next_segments_will_be_recalc">Minden későbbi szakasz újra lesz számítva a kiválasztott profilnak megfelelően.</string>
@@ -3465,8 +3465,8 @@
     <string name="marker_save_as_track">Mentés nyomvonalfájlként</string>
     <string name="select_another_track">Másik nyomvonal kiválasztása</string>
     <string name="open_saved_track">Elmentett nyomvonal megnyitása</string>
-    <string name="import_track_descr">Válassza ki a követni kívánt nyomvonalfájlt, vagy importáljon egyet a készülékéről.</string>
-    <string name="gpx_direction_arrows">Irányt mutató nyilak</string>
+    <string name="import_track_descr">Válassza ki a követendő nyomvonalfájlt, vagy importáljon egyet az eszközéről.</string>
+    <string name="gpx_direction_arrows">Iránymutató nyilak</string>
     <string name="monitoring_min_distance_descr_recommendation">Ajánlás: Állítson be 5 méteres elmozdulást, ha nem szükséges ennél finomabb részleteket rögzítenie, és nyugalmi állapotban sincs szüksége további adatokra.</string>
     <string name="next_segment">Következő szakasz</string>
     <string name="plan_route_trim_before">Kiigazítás ez előtt:</string>
@@ -3492,10 +3492,10 @@
     <string name="shared_string_save_as_gpx">Mentés új nyomvonalfájlként</string>
     <string name="plan_route_last_edited">Utoljára szerkesztve</string>
     <string name="save_global_track_interval_descr">Adja meg az általános nyomvonalfelvétel naplózási intervallumát (bekapcsolható a térképen található „Utazás felvétele” modullal).</string>
-    <string name="gpx_split_interval_none_descr">Válassza ki a kívánt felosztási lehetőséget: idő vagy távolság szerint.</string>
+    <string name="gpx_split_interval_none_descr">Válassza ki az előnyben részesített felosztási lehetőséget: idő vagy távolság szerint.</string>
     <string name="gpx_monitoring_start">Utazás felvételének folytatása</string>
     <string name="navigation_profile">Navigációs profil</string>
-    <string name="monitoring_min_speed_descr_remark">Megjegyzés a „sebesség &gt; 0” ellenőrzéséhez: A legtöbb GPS-chipkészlet csak akkor jelent sebességértéket, ha az algoritmus szerint Ön mozgásban van. Ha nem mozog, akkor nem. Ezért a „&gt; 0” beállítás használata ebben a szűrőben bizonyos értelemben a GPS-chipkészlet mozgásérzékelését használja. De még ha a felvétel során itt nincs is szűrés, a GPX-elemzésben akkor is használjuk a korrigált távolság meghatározásához (azaz az ebben a mezőben megjelenített érték a mozgás közben rögzített távolság).</string>
+    <string name="monitoring_min_speed_descr_remark">Megjegyzés a „sebesség &gt; 0” ellenőrzéséhez: A legtöbb GPS-lapkakészlet csak akkor jelent sebességértéket, ha az algoritmus szerint Ön mozgásban van. Ha nem mozog, akkor nem. Ezért a „&gt; 0” beállítás használata ebben a szűrőben bizonyos értelemben a GPS-lapkakészlet mozgásérzékelését használja. De még ha a felvétel során itt nincs is szűrés, a GPX-elemzésben akkor is használjuk a korrigált távolság meghatározásához (azaz az ebben a mezőben megjelenített érték a mozgás közben rögzített távolság).</string>
     <string name="only_selected_segment_recalc">Csak a kijelölt szakasz lesz újraszámítva a kiválasztott profilnak megfelelően.</string>
     <string name="plan_route_exit_dialog_descr">Elveti az összes módosítást a tervezett útvonalon\?</string>
     <string name="follow_track_descr">Válassza ki a követendő nyomvonalfájlt</string>
@@ -3561,10 +3561,10 @@
     <string name="mgrs_format_descr">Az OsmAnd az MGRS-t (Military Grid Reference System) használja, mely hasonlít az UTM-NATO formátumhoz.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Legalább két pontot adjon hozzá</string>
     <string name="manage_subscription">Előfizetés kezelése</string>
-    <string name="gpx_upload_trackable_visibility_descr">A \"követhető\" azt jelenti, hogy a nyomvonal egyetlen nyilvános listában sem jelenik meg, de a belőle származó, időbélyeggel ellátott, feldolgozott nyomvonalpontok (amelyek közvetlenül nem kapcsolhatók Önhöz) igen, mégpedig a nyilvános GPS API-ról történő letöltések révén.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">Az \"azonosítható\" azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a GPS-nyomvonalak nyilvános listáin, vagyis más felhasználók letölthetik a nyers nyomvonalat, és társíthatják azt a felhasználónévvel. A nyomvonalpont-API-n keresztül kiszolgált GPS API-ból származó nyilvános időbélyegzővel ellátott nyomvonalpont-adatok hivatkoznak az Ön eredeti nyomvonaloldalára.</string>
-    <string name="gpx_upload_public_visibility_descr">A \"nyilvános\" azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a nyilvános GPS-nyomvonal-listákban, valamint a nyilvános nyomvonal-listában, időbélyegekkel, nyers formában. Az API-n keresztül szolgáltatott adatok nem hivatkoznak az Ön nyomvonal-oldalára. A nyomvonalpont időbélyegei nem érhetők el a nyilvános GPS API-n keresztül, a nyomvonalpontok pedig nincsenek időrendben.</string>
-    <string name="gpx_upload_private_visibility_descr">A \"privát\" azt jelenti, hogy a nyomvonal semmilyen nyilvános listán nem jelenik meg, de az abból származó nyomvonalpontok (nem időrendben) továbbra is elérhetők lesznek a nyilvános GPS API-n időbélyegzők nélkül.</string>
+    <string name="gpx_upload_trackable_visibility_descr">A „követhető” azt jelenti, hogy a nyomvonal egyetlen nyilvános listában sem jelenik meg, de a belőle származó, időbélyeggel ellátott, feldolgozott nyomvonalpontok (amelyek közvetlenül nem kapcsolhatók Önhöz) igen, mégpedig a nyilvános GPS API-ról történő letöltések révén.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Az „azonosítható” azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a GPS-nyomvonalak nyilvános listáin, vagyis más felhasználók letölthetik a nyers nyomvonalat, és társíthatják azt a felhasználónévvel. A nyomvonalpont-API-n keresztül kiszolgált GPS API-ból származó nyilvános időbélyegzővel ellátott nyomvonalpont-adatok hivatkoznak az Ön eredeti nyomvonaloldalára.</string>
+    <string name="gpx_upload_public_visibility_descr">A „nyilvános” azt jelenti, hogy a nyomvonal nyilvánosan megjelenik az Ön GPS-nyomvonalai között és a nyilvános GPS-nyomvonal-listákban, valamint a nyilvános nyomvonal-listában, időbélyegekkel, nyers formában. Az API-n keresztül szolgáltatott adatok nem hivatkoznak az Ön nyomvonal-oldalára. A nyomvonalpont időbélyegei nem érhetők el a nyilvános GPS API-n keresztül, a nyomvonalpontok pedig nincsenek időrendben.</string>
+    <string name="gpx_upload_private_visibility_descr">A „privát” azt jelenti, hogy a nyomvonal semmilyen nyilvános listán nem jelenik meg, de az abból származó nyomvonalpontok (nem időrendben) továbbra is elérhetők lesznek a nyilvános GPS API-n időbélyegzők nélkül.</string>
     <string name="enter_text_separated">A címkéket vesszővel elválasztva írja be.</string>
     <string name="send_files_to_openstreetmap">GPX-fájl küldése az OpenStreetMapre</string>
     <string name="markers_history">Jelölők előzményei</string>
@@ -3595,12 +3595,12 @@
     <string name="approximate_file_size">Hozzávetőleges fájlméret</string>
     <string name="select_data_to_export">Jelölje ki a fájlba exportálandó adatokat.</string>
     <string name="file_size_needed_for_import">Szükséges az importáláshoz</string>
-    <string name="export_not_enough_space_descr">A készülékén csak %1$s szabad hely van. Szabadítson fel valamennyi helyet, vagy szüntesse meg néhány exportálandó elem kijelölését.</string>
+    <string name="export_not_enough_space_descr">Azbeszközön csak %1$s szabad hely van. Szabadítson fel valamennyi helyet, vagy szüntesse meg néhány exportálandó elem kijelölését.</string>
     <string name="export_not_enough_space">Nincs elég hely</string>
     <string name="select_groups_for_import">Importálandó csoportok kijelölése.</string>
     <string name="select_items_for_import">Importálandó elemek kijelölése.</string>
-    <string name="use_dev_url_descr">OSM-jegyzet, POI vagy GPX-nyomvonal feltöltésének teszteléséhez az openstreetmap.org helyett kapcsoljon át a dev.openstreetmap.org-ra.</string>
-    <string name="use_dev_url">A dev.openstreetmap.org használata</string>
+    <string name="use_dev_url_descr">Átváltás a dev.openstreetmap.org használatára az openstreetmap.org helyett az OSM Note / POI / GPX-feltöltésének teszteléséhez.</string>
+    <string name="use_dev_url">dev.openstreetmap.org használata</string>
     <string name="cannot_upload_image">Nem lehet feltölteni a képet, próbálja meg később</string>
     <string name="select_picture">Kép kijelölése</string>
     <string name="lang_de_casual">német (tegeződő)</string>
@@ -3631,10 +3631,10 @@
     <string name="shared_string_subtype">Altípus</string>
     <string name="shared_string_vehicle">Jármű</string>
     <string name="shared_string_api_key">API-kulcs</string>
-    <string name="shared_string_server_url">Kiszolgáló URL-je</string>
+    <string name="shared_string_server_url">Kiszolgáló webcíme</string>
     <string name="shared_string_enter_param">Paraméter megadása</string>
     <string name="keep_it_empty_if_not">Hagyja üresen, ha nincs</string>
-    <string name="online_routing_example_hint">Az összes paraméterrel rendelkező URL így néz ki:</string>
+    <string name="online_routing_example_hint">Az összes paraméterrel rendelkező webcím így néz ki:</string>
     <string name="test_route_calculation">Útvonaltervezés kipróbálása</string>
     <string name="copy_address">Cím másolása</string>
     <string name="online_routing_engine">Online útvonaltervező</string>
@@ -3666,12 +3666,12 @@
     <string name="routing_engine_vehicle_type_walking">Gyaloglás</string>
     <string name="routing_engine_vehicle_type_cycling_electric">E-kerékpározás</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Hegyi kerékpározás</string>
-    <string name="routing_engine_vehicle_type_cycling_road">Verenykerékpározás</string>
+    <string name="routing_engine_vehicle_type_cycling_road">Országúti kerékpározás</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Rendes kerékpározás</string>
     <string name="routing_engine_vehicle_type_truck">Teherautó</string>
     <string name="routing_engine_vehicle_type_hgv">Nehéz teherautó</string>
     <string name="routing_engine_vehicle_type_small_truck">Kisteherautó</string>
-    <string name="message_server_error">Szerverhiba: %1$s</string>
+    <string name="message_server_error">Kiszolgálóhiba: %1$s</string>
     <string name="message_name_is_already_exists">Ez a név már létezik</string>
     <string name="announcement_time_descr">A különféle hangutasítások bemondásának időzítése függ az utasítás típusától, a jelenlegi navigációs sebességtől és az alapértelmezett navigációs sebességtől.</string>
     <string name="announcement_time_title">Bemondás ideje</string>
@@ -3736,7 +3736,7 @@
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
     <string name="select_another_colorization">Válasszon másik színezéstípust.</string>
-    <string name="trip_recording_logging_interval_info">A naplózási intervallum azt az időközt határozza meg, amelyenként az OsmAnd lekérdezi a jelenlegi pozícióadatokat.</string>
+    <string name="trip_recording_logging_interval_info">A naplózási időköz azt az időközt határozza meg, amely alatt az OsmAnd lekérdezi a jelenlegi pozíció adatait.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
@@ -3746,12 +3746,12 @@
     <string name="customize_route_line">Útvonaljelző csík testreszabása</string>
     <string name="specify_color_for_map_mode">Szín meghatározása a következő térképmódhoz: %1$s.</string>
     <string name="no_purchases">Nincsenek vásárlásai</string>
-    <string name="new_device_account">Új készülék / új fiók</string>
+    <string name="new_device_account">Új eszköz / új fiók</string>
     <string name="contact_support_description">Ha kérdése van, lépjen kapcsolatba velünk: %1$s.</string>
     <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson erre: „%1$s”.</string>
     <string name="contact_support">Kapcsolatfelvétel az ügyfélszolgálattal</string>
     <string name="troubleshooting">Hibaelhárítás</string>
-    <string name="troubleshooting_description">Ha problémája akad a vásrlással, kattintson erre a linkre.</string>
+    <string name="troubleshooting_description">Ha problémája akad a vásárlással, kattintson erre a hivatkozásra.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Éves előfizetés</string>
     <string name="monthly_subscription">Havi előfizetés</string>
@@ -3817,9 +3817,9 @@
     <string name="loading_list_of_routing_services">Elérhető útvonaltervező szolgáltatások listájának betöltése</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Használhat előre meghatározott sablonokat, vagy a következő online útvonaltervezőket: OSRM, Graphhopper, openrouteservice és GPX.</string>
+    <string name="osmand_online_routing_promo">Használhat előre meghatározott sablonokat, vagy a következő online útvonaltervezőket: OSRM, GraphHopper, openrouteservice és GPX.</string>
     <string name="shared_string_external">Külső</string>
-    <string name="failed_loading_predefined_engines">Nem sikerült betölteni az előre meghatározott sablonok listáját. \nEllenőrízze az internetkapcsolatát.</string>
+    <string name="failed_loading_predefined_engines">Nem sikerült betölteni az előre meghatározott sablonok listáját. \nEllenőrizze az internetkapcsolatát.</string>
     <string name="shared_string_predefined">Előre meghatározott</string>
     <string name="backup_complete">A biztonsági mentés kész</string>
     <string name="backup_now">Biztonsági mentés most</string>
@@ -3841,7 +3841,7 @@
     <string name="backup_danger_zone">Veszélyes terület</string>
     <string name="select_backup_data_descr">Biztonsági mentésre kerülő adatok és mappák kijelölése.</string>
     <string name="backup_data">Adatok biztonsági mentése</string>
-    <string name="backup_restore_data_descr">A készüléken lévő adatok visszaállítása online biztonsági mentésekből.</string>
+    <string name="backup_restore_data_descr">Az eszközön lévő adatok visszaállítása online biztonsági mentésekből.</string>
     <string name="backup_restore_data">Adatok visszaállítása</string>
     <string name="restore_from_osmand_cloud">Visszaállítás az OsmAnd Cloud-ból</string>
     <string name="choose_what_to_restore">Válassza ki, mit állítson vissza.</string>
@@ -3981,7 +3981,7 @@
     <string name="routeInfo_smoothness_description">Utak/gyalogutak osztályozása, hogy mennyire használhatók kerekes járművekkel, különös tekintettel az útfelszín egyenletességére/simaságára.</string>
     <string name="add_group_to_markers">Csoport hozzáadása a jelölők listájához</string>
     <string name="remove_group_from_markers">Csoport eltávolítása a jelölők listájáról</string>
-    <string name="start_point">Start</string>
+    <string name="start_point">Indítás</string>
     <string name="mapillary_menu_filter_description_new">Képek szűrése dátum vagy típus szerint. Csak erős nagyításnál aktív.</string>
     <string name="service_is_not_available_please_try_later">A szolgáltatás nem érhető el. Próbálja újra később.</string>
     <string name="shared_string_files">Fájlok</string>
@@ -4008,15 +4008,15 @@
     <string name="purchases_feature_desc_android_auto">Elhozza az OsmAnd offline térképeit és navigációját az autója képernyőjére, és integrálódik a jármű kezelőszerveivel.</string>
     <string name="shared_string_details">Részletek</string>
     <string name="shared_app_storage_description">A megosztott memória már nem érhető el az Android tárhely-hozzáférés változásai miatt.</string>
-    <string name="rendering_attr_natureReserves_name">Természetvédelmi terület és védett területek</string>
+    <string name="rendering_attr_natureReserves_name">Természetvédelmi és védett terület</string>
     <string name="shared_string_articles">Cikkek</string>
     <string name="included_categories">Tartalmazott kategóriák</string>
     <string name="release_4_1">• Android Auto kezdeti támogatása \n \n • Felhasználói felület frissítése az UTM koordináták kereséséhez \n \n • GPS szűrő a GPX nyomvonalakhoz \n \n • Tengerszint feletti magasságot megjelenítő modul (Pro) \n \n • Kedvencek: megtekinthetők a legutóbb használt ikonok \n \n • Útvonaltervezés: indítás után a kiválasztott profil használata \n \n • Javult a Mapillary-réteg, a bővítmény mostantól alapértelmezés szerint le van tiltva \n \n • Új képernyő az alkalmazásban lévő összes előzmény kezeléséhez \n \n • Az alkalmazás újraindítása után a térkép tájolása nem áll vissza az alapértelmezés szerinti irányba \n \n • Javult az SRTM magasságjelző megjelenítése \n \n • Javultak az arab térképfeliratok \n \n • Különböző útvonaltervezési problémák javítása</string>
-    <string name="android_auto_purchase_request_title">Ha az OsmAnd-et az Android Autóval kívánja használni, vásárolja meg az OsmAnd Pro vagy a Maps+ alkalmazást</string>
+    <string name="android_auto_purchase_request_title">Ha az OsmAnd-et az Android Autóval szeretné használni, vásárolja meg az OsmAnd Pro vagy a Maps+ alkalmazást</string>
     <string name="continue_on_phone">Folytatás a mobileszközön</string>
     <string name="location_access_request_title">Az OsmAndnak a Hely engedélyre van szüksége a navigációhoz.</string>
     <string name="android_auto_map_placeholder_title">A térkép a jármű képernyőjén jelenik meg.</string>
-    <string name="android_auto_map_placeholder_descr">A térképnek az alkalmazásban történő megjelenítéséhez válassza le a készüléket az Android Auto rendszerről.</string>
+    <string name="android_auto_map_placeholder_descr">A térképnek az alkalmazásban történő megjelenítéséhez válassza le az eszközt az Android Auto rendszerről.</string>
     <string name="location_access_request_action">Hozzáférés engedélyezése</string>
     <string name="location_access_request_result">Jóváhagyva: %1$s Elutasítva: %2$s</string>
     <string name="clear_all_history_warning">Törli az alkalmazás összes előzményét, köztük a keresési, navigációs és jelölőelőzményeket is\?</string>
@@ -4083,7 +4083,7 @@
     <string name="app_modes_options">Alkalmazásmódok kiválasztása</string>
     <string name="shared_string_memory">Memória</string>
     <string name="reading_files">Fájlok beolvasása…</string>
-    <string name="no_items_selected_warning">Válasszon legalább egy elemet</string>
+    <string name="no_items_selected_warning">Válasszon ki legalább egy elemet</string>
     <string name="shared_string_hide_all">Összes elrejtése</string>
     <string name="memory_allocated_for_routing">Útvonaltervezéshez kiosztott memória</string>
     <string name="app_profile_type">Alkalmazásprofil típusa</string>
@@ -4125,7 +4125,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme címkék (javítandó objektumok) megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképszerkesztői megjegyzés) címkék megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonok kis nagyításnál</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Alacsony nagyításnál ikonok sematikus ábrázolása azoknál POI-knál, amelyek általában nincsenek megjelenítve</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak láthatóságának fokozása</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Vízi alagutak láthatóságának fokozása</string>
     <string name="navigate_point_format_swiss_grid_plus">Svájci koordináták (CH1903+)</string>
@@ -4175,7 +4175,7 @@
     <string name="estimated_download_size">Becsült letöltési méret</string>
     <string name="number_of_tiles">Csempék száma</string>
     <string name="zoom_levels_difference_description">A nagyítási szintek közötti nagy különbség növelheti a letöltött adat mennyiségét.</string>
-    <string name="move_map_to_select_area">Mozgassa a térképet a kívánt terület kijelöléséhez.</string>
+    <string name="move_map_to_select_area">Mozgassa a térképet a kijelölendő területhez.</string>
     <string name="rendering_attr_showFitnessTrails_description">Erdei tornapályák megjelenítése</string>
     <string name="rendering_attr_showFitnessTrails_name">Erdei tornapályák</string>
     <string name="rendering_attr_showRunningRoutes_description">Futóútvonalak megjelenítése</string>
@@ -4189,7 +4189,7 @@
     <string name="rendering_attr_showBusRoutes_name">Buszvonalak</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trolibuszvonalak</string>
     <string name="rendering_attr_showLightRailRoutes_name">HÉV-vonalak</string>
-    <string name="rendering_attr_showMonorailRoutes_name">Egysínűvasút-vonalak</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Egy sínből álló vasútvonalak</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Iránytaxi-vonalak</string>
     <string name="shared_string_visible_widgets">Látható modulok</string>
     <string name="top_widgets_panel">Felső panel</string>
@@ -4244,8 +4244,8 @@
     <string name="release_4_2">• Újratervezett modulok: új megjelenés és élmény, oldalak szerinti csoportosítás, sorrendmódosítás és tetszés szerinti kombinálhatóság. \n \n • Túrázás / Kerékpározás / Utazási útvonalak: koppintás az útvonal-szimbólumra a részletes útvonal-információkhoz. \n \n • Kedvenc csoportok: a csoport új pontjainak alapértelmezett megjelenésének beállítása \n \n • Javítások: online csempetérképek automatikus frissítése</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megtekintéséhez a térképen.</string>
     <string name="av_notes_choose_action_widget_desc">Válasszon műveletet.</string>
-    <string name="current_time_widget_desc">Megjeleníti a készüléke által szolgáltatott jelenlegi időt.</string>
-    <string name="battery_widget_desc">Megjeleníti a készüléke akkumulátorának töltöttségi szintjét.</string>
+    <string name="current_time_widget_desc">Megjeleníti az eszköze által szolgáltatott jelenlegi időt.</string>
+    <string name="battery_widget_desc">Megjeleníti az eszköze akkumulátorának töltöttségi szintjét.</string>
     <string name="current_speed_widget_desc">Megjeleníti a GPS-vevő által számított jelenlegi sebességét.</string>
     <string name="arrival_time_widget_desc">Az úti célhoz való megérkezés időpontja.</string>
     <string name="time_to_go_desc">Az úti cél eléréséhez szükséges időtartam percben vagy órában kifejezve.</string>
@@ -4279,7 +4279,7 @@
     <string name="bearing_desc">Megjeleníti a cél abszolút vagy relatív irányát szögegységben (180°, 360° vagy milliradián).</string>
     <string name="navigation_points_desc">A navigációs modulok a navigáció során vannak engedélyezve, és olyan információkat jelenítenek meg, mint a távolság, az érkezési vagy hátralévő idő, a következő kanyarok, az irány, a jelenlegi/következő utcanév, a sávokra vonatkozó információk, a sebességkorlátozás, a közeledő figyelmeztetések, az érdekes pontok (POI-k) vagy az útpontok.</string>
     <string name="track_attach_to_the_roads_descr">A nyomvonal az offline térképek segítségével lesz az úthoz csatolva, a nyomvonal geometriája ezért módosulni fog.</string>
-    <string name="street_name_widget_desc">Az utcanév widget az aktuális utcanevet mutatja egy egyenes helyzetjelző nyíllal, vagy a következő utcanevet egy közelgő kanyart jelző nyíllal.</string>
+    <string name="street_name_widget_desc">Az utcanév modul a jelenlegi utcanevet jeleníti meg egy egyenes helyzetjelző nyíllal, vagy a következő utcanevet egy közelgő kanyart jelző nyíllal.</string>
     <string name="route_maneuvers_desc">A navigációs modulok a navigáció során vannak engedélyezve, és olyan információkat jelenítenek meg, mint a távolság, az érkezési vagy hátralévő idő, a következő kanyarok, az irány, a jelenlegi utcanév, a sávokra vonatkozó információk, a sebességkorlátozás, a közeledő figyelmeztetések, az érdekes pontok (POI-k) vagy az útpontok.</string>
     <string name="routing_attr_avoid_4wd_only_name">Nehéz terep elkerülése</string>
     <string name="routing_attr_avoid_4wd_only_description">A csak összkerék-meghajtású járművel használható utak elkerülése</string>
@@ -4342,7 +4342,7 @@
     <string name="altitude_correction">Magasságkorrekció</string>
     <string name="no_altitude_data_desc">%1$s adatok fogadásához csatolja nyomvonalát az utakhoz, vagy számítsa ki online.</string>
     <string name="updated_map_time">Frissítve: %1$s.</string>
-    <string name="calculate_online_altitude_descr">Online magasságszámítás az OsmAnd szerverein, műholdas felvételek és digitális magassági modellek alapján. A készülék által rögzített magasságtól való eltérés felhasználható magasságkorrekcióként.</string>
+    <string name="calculate_online_altitude_descr">Online magasságszámítás az OsmAnd kiszolgálóin, műholdas felvételek és digitális magassági modellek alapján. Az eszköz által rögzített magasságtól való eltérés felhasználható magasságkorrekcióként.</string>
     <string name="next_live_update_date_and_time">Következő frissítés: %1$s %2$s-kor.</string>
     <string name="includes_osm_changes_until">Az OSM-en %1$s-ig végrehajtott módosításokat tartalmazza.</string>
     <string name="marker_2nd">2. jelölő</string>
@@ -4420,7 +4420,7 @@
     <string name="click_on_widget">Kattintson a modulra</string>
     <string name="shared_string_shows">Megjelenítés:</string>
     <string name="map_markers_desc">A modul megjeleníti a távolságot vagy a becsült érkezési időt a térképjelölők listájában szereplő első két jelölőhöz.</string>
-    <string name="quick_action_current_location_widget_descr">Kapcsoló a jelenlegi helyet mutató modul térképen való megjelenítéséhez vagy elrejtéséhez.</string>
+    <string name="quick_action_current_location_widget_descr">A jelenlegi helyet megjelenítő modul megjelenítésére vagy elrejtésére szolgáló kapcsoló a térképen.</string>
     <string name="coordinates_widget_map_center">Koordináták: térképközéppont</string>
     <string name="coordinates_widget_current_location_desc">Megjeleníti a jelenlegi helyzet földrajzi koordinátáit</string>
     <string name="coordinates_widget_current_location">Koordináták: jelenlegi hely</string>
@@ -4439,9 +4439,9 @@
     <string name="map_widget_ant_bicycle_cadence">Pedálfordulatszám</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Megjeleníti a felhasználó pedálozási sebességét</string>
     <string name="map_widget_ant_bicycle_speed_desc">Megjeleníti a haladás sebességét</string>
-    <string name="map_widget_ant_bicycle_dist">Kerékpáros távolság</string>
+    <string name="map_widget_ant_bicycle_dist">Távolság kerékpárral</string>
     <string name="map_widget_ant_bicycle_dist_desc">Megjeleníti a megtett távolságot</string>
-    <string name="map_widget_ant_heart_rate_desc">Valós időben mutatja a felhasználó pulzusát egy adott tevékenység során</string>
+    <string name="map_widget_ant_heart_rate_desc">Valós időben jeleníti meg a felhasználó pulzusát egy adott tevékenység során</string>
     <string name="nautical_depth_points">Tengeri mélységpontok</string>
     <string name="ant_missing_dependency_descr">A szükséges \"%1$s\" szolgáltatás nem található. \nTelepítenie vagy frissítenie kell az ANT+ beépülő szolgáltatást. \nSzeretne ehhez belépni a Google Play Áruházba?</string>
     <string name="ant_read_data">Adatok olvasása</string>
@@ -4474,21 +4474,21 @@
     <string name="location_simulation_speedup">Szimulációs felgyorsítása</string>
     <string name="current_location_widget">Koordináták: jelenlegi hely</string>
     <string name="map_center_widget">Koordináták: térképközéppont</string>
-    <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre van felhasználva: offline térképek letöltése az OsmAnd szerverekről, a szervererőforrások méltányos igénybevételének nyomon követése, a forgalom mintázatainak előrejelzése és anonim havi térképjelentések készítése.</string>
+    <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre van felhasználva: offline térképek letöltése az OsmAnd kiszolgálókról, a kiszolgáló erőforrásainak méltányos igénybevételének nyomon követése, a forgalom mintázatainak előrejelzése és anonim havi térképjelentések készítése.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
     <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpársebesség, -teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztül kell kapcsolódnia a megfelelő szenzorokhoz.</string>
     <string name="speak_gps_signal_status">GPS-jel elvesztésének és helyreállásának bemondása</string>
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
     <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpár-sebesség, -teljesítmény, pedálfordulatszám, valamint pulzusszám.</string>
     <string name="speak_route_recalculation">Útvonal újratervezésének bemondása</string>
-    <string name="release_4_3">Új, gyorsabb 2-es verziójú (OpenGL) térkép-megjelenítő motor, 2.5D nézettel \n \n • Folytonos animáció a mozgás közbeni helyváltoztatáskor \n \n • Új modul a térkép középpontjának koordinátáival és a hely magasságával \n \n • „Távolság koppintásra” szövegméret beállítások hozzáadva \n \n • A „Térképjelző” modul: lehetőség a kattintási viselkedés megváltoztatására \n \n • Javított „Pozícióelhelyezés” opció \n \n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez \n \n • A „Hajózási térképek” lista módosítása \n \n • Hozzáadva az ANT+ érzékelők támogatása \n \n • Hozzáadva az UUID letöltés letiltásának lehetősége \n \n • Alapértelmezett sebességgel állítható előrejelzés a magasságtól függő gyaloglási/túrázási/futási időkhöz \n \n • Hangkimenet és hangerőcsúszka viselkedésének javítása</string>
+    <string name="release_4_3">Új, gyorsabb 2-es verziójú (OpenGL) térkép-megjelenítő motor, 2.5D nézettel \n \n • Folytonos animáció a mozgás közbeni helyváltoztatáskor \n \n • Új modul a térkép középpontjának koordinátáival és a hely magasságával \n \n • „Távolság koppintásra” szövegméret beállítások hozzáadva \n \n • A „Térképjeölő” modul: lehetőség a kattintási viselkedés megváltoztatására \n \n • Javított „Pozícióelhelyezés” opció \n \n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez \n \n • A „Hajózási térképek” lista módosítása \n \n • Hozzáadva az ANT+ érzékelők támogatása \n \n • Hozzáadva az UUID letöltés letiltásának lehetősége \n \n • Alapértelmezett sebességgel állítható előrejelzés a magasságtól függő gyaloglási/túrázási/futási időkhöz \n \n • Hangkimenet és hangerőcsúszka viselkedésének javítása</string>
     <string name="show_map_symbols_desc">Szöveg, közlekedési táblák stb.</string>
     <string name="show_borders_of_downloaded_maps">Letöltött térképpel rendelkező területek eltérő színnel</string>
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
     <string name="map_rendering_engine_v1">1-es verzió</string>
     <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
     <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az „1-es verziójú” térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban. \n\nTámogassa a fejlesztéseket a hibanaplója elküldésével.</string>
-    <string name="map_rendering_engine_descr">Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.\nA 2-es verzió (OpenGL) egy erőteljesebbbb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz.</string>
+    <string name="map_rendering_engine_descr">Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.\nA 2-es verzió (OpenGL) egy erőteljesebb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz.</string>
     <string name="rendering_engine_failed">Az OsmAnd térkép-megjelenítője nemrég összeomlott.</string>
     <string name="share_crash_log">Összeomlási napló megosztása</string>
     <string name="dismiss_changes">Változtatások elvetése\?</string>
@@ -4538,7 +4538,7 @@
     <string name="shared_string_weather">Időjárás</string>
     <string name="empty_screen_weather_pressure_layer">Kapcsolja be a légnyomás réteg megtekintéséhez a térképen.</string>
     <string name="weather_wind_knots">csomó</string>
-    <string name="weather_wind_meters_per_second">méter/másodperc</string>
+    <string name="weather_wind_meters_per_second">m/s</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="wind_widget_desc">Megjeleníti a szelet a jelenlegi térképközéppontnál.</string>
     <string name="air_pressure_widget_desc">Megjeleníti a légnyomást a jelenlegi térképközéppontnál.</string>
@@ -4606,7 +4606,7 @@
     <string name="last_sync">Utolsó szinkronizálás</string>
     <string name="cloud_changes">Felhőbeli változások</string>
     <string name="shared_string_uploaded">Feltöltve</string>
-    <string name="backup_error_failed_to_fetch_remote_items">Nem sikerült lekérni a fájllistát a szerverről.</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Nem sikerült lekérni a fájllistát a kiszolgálóról.</string>
     <string name="checking_progress">Ellenőrzés…</string>
     <string name="shared_string_cloud">Felhő</string>
     <string name="deleted_file">Törölt fájl</string>
@@ -4617,7 +4617,7 @@
     <string name="sync_now">Szinkronizálás most</string>
     <string name="local_changes_will_be_dismissed">A helyi változások el lesznek vetve</string>
     <string name="cloud_all_changes_uploaded_descr">Az eszközön végrehajtott összes módosítás szinkronizálva van az OsmAnd felhőszolgáltatással.</string>
-    <string name="cloud_sync_progress">Szinkronizálás... %1$s</string>
+    <string name="cloud_sync_progress">Szinkronizálás… %1$s</string>
     <string name="si_nm_ft">Tengeri mérföld/láb</string>
     <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípus-tároló formátuma 3GPP (.3gp).</string>
     <string name="si_nm_mt">Tengeri mérföld/méter</string>
@@ -4655,7 +4655,7 @@
     <string name="inch">in</string>
     <string name="approximate_bearing">Hozzávetőleges irányszög</string>
     <string name="cloud_version_confirm_delete">\"%1$s\" törlése az OsmAnd felhőből?</string>
-    <string name="shared_string_delete_file">Fálj törlése</string>
+    <string name="shared_string_delete_file">Fájl törlése</string>
     <string name="local_version_do_not_exist">Nincs helyi verzió.</string>
     <string name="delete_cloud_version">Felhőben lévő verzió törlése</string>
     <string name="simulation_position_description">Válasszon ki egy nyomvonalfájlt, ami mozgatási forrásként fog szolgálni.</string>
@@ -4740,11 +4740,8 @@
     <string name="external_device_details_total_distance">Teljes távolság</string>
     <string name="external_device_details_distance">Távolság</string>
     <string name="bluetooth_not_supported">Bluetooth nem támogatott</string>
-    <string name="ant_plus_nothing_found_description">Győződjön meg róla, hogy:
-\n– a Bluetooth be van kapcsolva;
-\n– az érzékelő aktiválva van;
-\n– ez a készülék az érzékelő közelében található</string>
-    <string name="ant_plus_searching_text_description">Tartsa a készüléket az érzékelő közelében. Aktiválnia kell az érzékelőt, hogy az OsmAnd megtalálja.</string>
+    <string name="ant_plus_nothing_found_description">Győződjön meg róla, hogy: \n– a Bluetooth be van kapcsolva; \n– az érzékelő aktiválva van; \n– ez az eszköz az érzékelő közelében található</string>
+    <string name="ant_plus_searching_text_description">Tartsa az eszközt az érzékelő közelében. Aktiválnia kell az érzékelőt, hogy az OsmAnd megtalálja.</string>
     <string name="ant_plus_bluetooth_off_description">Kapcsolja be a Bluetooth-t, keresse meg és párosítása az érzékelőket.</string>
     <string name="ant_plus_searching_text">Érzékelők keresése</string>
     <string name="ant_plus_help_title">Nem tudom milyen típusú érzékelőm van</string>
@@ -4842,7 +4839,7 @@
     <string name="free_favorites_backup">Kedvencek mentése ingyenesen</string>
     <string name="get_osmand_cloud">Használja a OsmAnd Cloud-ot</string>
     <string name="free_account">Ingyenes fiók</string>
-    <string name="release_4_5">• BLE/ANT+ érzékelők: átdolgozott kapcsolódás, fogadott adatok írása és megtekintése GPX-ben \n \n • Biztonsági másolat ingyenesen a kedvencekről és a beállításokról az OsmAnd Cloudba \n \n • Új formátumú domborzati térképek 3D domborzat támogatással \n \n • Nyomvonalak kezelése: frissített felület, rendezés hozzáadása, beágyazott mappák támogatása \n \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez \n \n • Egyforma modullista az alsó/felső panelhez \n \n • Új vonat profil, vasúti útvonalak megtervezéséhez \n \n • Szintvonalak minden térképforráshoz \n \n • Kibővitett lista a külső billentyűzetek alapértelmezett műveleteihez \n \n • Egyéni útvonalfájlok, törlési és felülírási lehetőség \n \n • „Útvonaltól való eltérés bemondása” funkció \n \n • Kezdőképernyő: OsmAnd állapotának helyreállítása fájlból \n \n • Veszélyes anyagok osztályai hozzáadva a teherautós navigációhoz (Észak-Amerika) \n \n • „Via ferrata” (felszerelt hegyi út) támogatása gyalogos útvonaltervezéshez \n \n • CAI (Club Alpino Italiano) skála az útvonalak nehézségének osztályozásához \n \n • Javítva az alkalmazásonkénti nyelvválasztás funkció \n \n • Témaikonok támogatása \n \n • OsmAnd Cloud: fiók törlésének lehetősége \n \n • Akadálymentesítés: a gombok érzékelési területe 48 dp-re módosítva; javítva a képernyőolvasók számára látható térképkezelőfelülettel kapcsolatos probléma \n \n • A japán hangutasítások átdolgozva \n \n • A magasságváltozás és a lejtés átdolgozva</string>
+    <string name="release_4_5">• BLE/ANT+ érzékelők: átdolgozott kapcsolódás, fogadott adatok írása és megtekintése GPX-ben \n \n • Biztonsági másolat ingyenesen a kedvencekről és a beállításokról az OsmAnd Cloudba \n \n • Új formátumú domborzati térképek 3D domborzat támogatással \n \n • Nyomvonalak kezelése: frissített felület, rendezés hozzáadása, beágyazott mappák támogatása \n \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez \n \n • Egyforma modullista az alsó/felső panelhez \n \n • Új vonat profil, vasúti útvonalak megtervezéséhez \n \n • Szintvonalak minden térképforráshoz \n \n • Kibővített lista a külső billentyűzetek alapértelmezett műveleteihez \n \n • Egyéni útvonalfájlok, törlési és felülírási lehetőség \n \n • „Útvonaltól való eltérés bemondása” funkció \n \n • Kezdőképernyő: OsmAnd állapotának helyreállítása fájlból \n \n • Veszélyes anyagok osztályai hozzáadva a teherautós navigációhoz (Észak-Amerika) \n \n • „Via ferrata” (felszerelt hegyi út) támogatása gyalogos útvonaltervezéshez \n \n • CAI (Club Alpino Italiano) skála az útvonalak nehézségének osztályozásához \n \n • Javítva az alkalmazásonkénti nyelvválasztás funkció \n \n • Témaikonok támogatása \n \n • OsmAnd Cloud: fiók törlésének lehetősége \n \n • Akadálymentesítés: a gombok érzékelési területe 48 dp-re módosítva; javítva a képernyőolvasók számára látható térkép kezelőfelületével kapcsolatos probléma \n \n • A japán hangutasítások átdolgozva \n \n • A magasságváltozás és a lejtés átdolgozva</string>
     <string name="free_favorites_backup_description">Regisztráljon az OsmAnd Cloudba, hogy ingyenesen biztonsági másolatot készíthessen a kedvencekről és a beállításokról.</string>
     <string name="cache_size">Gyorsítótár méret</string>
     <string name="shared_string_avoid">Elkerülés</string>
@@ -4891,7 +4888,7 @@
     <string name="external_sensor_name_property_description">Szenzor neve</string>
     <string name="wheel_circumference">Kerék kerülete</string>
     <string name="contact_us">Kapcsolatfelvétel</string>
-    <string name="help_article_map_legend_nautical_map_name">Hajózásitérkép-stílus</string>
+    <string name="help_article_map_legend_nautical_map_name">Hajózási térképstílus</string>
     <string name="help_article_map_map_context_menu_name">Térkép helyi menü</string>
     <string name="help_article_map_point_layers_on_map_name">Pontok a térképen</string>
     <string name="help_article_map_raster_maps_name">Raszteres térképek (online/offline)</string>
@@ -4936,7 +4933,7 @@
     <string name="help_article_navigation_routing_horse_routing_name">Útvonaltervezés lovagláshoz</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Az OsmAnd útvonaltervezésről</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Útvonaltervezés gyalogláshoz</string>
-    <string name="help_article_navigation_routing_public_transport_navigation_name">Útvonaltervezés tömegközledéshez</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Útvonaltervezés tömegközlekedéshez</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Útvonaltervezés légvonalban (repülés)</string>
     <string name="help_article_navigation_routing_train_routing_name">Útvonaltervezés vonathoz</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigálás nyomvonallal</string>
@@ -4954,8 +4951,8 @@
     <string name="help_article_start_with_main_menu_name">Főmenü</string>
     <string name="help_article_troubleshooting_crash_logs_name">Összeomlási naplók</string>
     <string name="help_article_troubleshooting_general_name">Általános</string>
-    <string name="help_article_widgets_map_buttons_name">Térkép gombok</string>
-    <string name="help_article_widgets_markers_name">Jelölő modulok</string>
+    <string name="help_article_widgets_map_buttons_name">Térképgombok</string>
+    <string name="help_article_widgets_markers_name">Jelölőmodulok</string>
     <string name="help_article_widgets_nav_widgets_name">Navigációs modulok</string>
     <string name="help_article_widgets_radius_ruler_name">Sugárvonalzó és normál vonalzó</string>
     <string name="shared_string_setup">Beállítás</string>
@@ -4963,11 +4960,11 @@
     <string name="about_osmand">Az OsmAnd névjegye</string>
     <string name="help_article_map_legend_osmand_name">OsmAnd térképstílus</string>
     <string name="open_issue_on_github">Nyisson hibajegyet a Githubon</string>
-    <string name="copy_build_version">Build verzió másolása</string>
+    <string name="copy_build_version">Összeállítás verziójának másolása</string>
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Napszak” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtési viszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
+    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testre szabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Napszak” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtési viszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
     <string name="app_mode_baby_transport">Babakocsi</string>
     <string name="app_mode_paragliding">Siklóernyőzés</string>
@@ -5013,7 +5010,7 @@
     <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
     <string name="shared_string_loading">Betöltés</string>
     <string name="discard_filter_changes_prompt">Visszaállít minden szűrőt?</string>
-    <string name="no_config_smart_folder_description">Az okosmappákkal szűrők alapján csoportosíthatók a nyomvonalak</string>
+    <string name="no_config_smart_folder_description">Az okos mappákkal szűrők alapján csoportosíthatók a nyomvonalak</string>
     <string name="loading_tracks">Nyomvonalak újratöltése</string>
     <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
     <plurals name="tracks">
@@ -5045,7 +5042,7 @@
     <string name="key_event_action_previous_app_profile">Előző alkalmazásprofil</string>
     <string name="show_toast_about_key_pressed">A lenyomott billentyű kijelzése</string>
     <string name="key_event_action_move_left">Mozgás balra</string>
-    <string name="press_button_to_link_with_action">Nyomja meg a gombot a készülékén, hogy társítsa ehhez művelethez: %1$s</string>
+    <string name="press_button_to_link_with_action">Nyomja meg a gombot az eszközén, hogy a következő művelethez társítsa: %1$s</string>
     <string name="key_event_action_move_right">Mozgás jobbra</string>
     <string name="shared_string_button">Gomb</string>
     <string name="key_event_action_next_app_profile">Következő alkalmazásprofil</string>
@@ -5106,7 +5103,7 @@
     <string name="precise_distance_numbers">Pontos távolságadatok</string>
     <string name="any_connected">Bármelyik összekapcsolt</string>
     <string name="any_connected_with_device">Bármelyik összekapcsolt: %s</string>
-    <string name="shared_string_road_maps">Útitérképek</string>
+    <string name="shared_string_road_maps">Úti térképek</string>
     <string name="shared_string_all_tracks">Minden nyomvonal</string>
     <string name="shared_string_license">Licenc</string>
     <string name="shared_string_link">Hivatkozás</string>
@@ -5163,7 +5160,7 @@
     <string name="java_safe">Java (biztonságos)</string>
     <string name="shared_sting_all_colors">Összes szín</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="release_4_7">• Új Sebességmérő modul, amely kompatibilis az Android Autóval \n \n • Térképképernyő konfigurálása több Gyorsművelet gombbal \n \n • Jobban olvasható adatok a grafikonokon \n \n • Szenzoradatalapú szűrők a nyomvonalakhoz \n \n • Nyomvonalcsoportok megjelenésének jobb testreszabhatósága \n \n • További GPX-címkék támogatása \n \n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között \n \n • Egységes felhasználói felület a nyomvonalválasztásához \n \n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott</string>
+    <string name="release_4_7">• Új Sebességmérő modul, amely kompatibilis az Android Autóval \n \n • Térképképernyő konfigurálása több Gyorsművelet gombbal \n \n • Jobban olvasható adatok a grafikonokon \n \n • Szenzoradat-alapú szűrők a nyomvonalakhoz \n \n • Nyomvonalcsoportok megjelenésének jobb testre szabhatósága \n \n • További GPX-címkék támogatása \n \n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között \n \n • Egységes felhasználói felület a nyomvonalválasztásához \n \n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott</string>
     <string name="precise">Pontos</string>
     <string name="round_up">Kerekített</string>
     <string name="distance_during_navigation">Távolságok a navigálás során</string>
@@ -5305,7 +5302,7 @@
     <string name="quick_action_verb_start_stop">Kezdés / Befejezés</string>
     <string name="weather_screen">Időjárás-képernyő</string>
     <string name="quick_action_map_underlay">Alátétréteg</string>
-    <string name="quick_action_remove_next_destination">Következő úticél-pont</string>
+    <string name="quick_action_remove_next_destination">Következő úti célpont</string>
     <string name="energy_avg_info_description">Töltöttségi szint / perc: %1$s\nEnergiafogyasztás (mAh): %2$s</string>
     <string name="rendering_avg_info">Megjelenítési statisztika (1/5/15 perces átlagok)</string>
     <string name="energy_avg_info">Energiastatisztika (1/5/15 perces átlagok)</string>
@@ -5355,7 +5352,7 @@
     <string name="add_widget_below">Modul hozzáadása alulra</string>
     <string name="add_widget_above">Modul hozzáadása felülre</string>
     <string name="delete_widget_description">Ez a modul törölve lesz. Később visszaállíthatja a konfigurációs képernyőn.</string>
-    <string name="delete_widget">Modul törlése?</string>
+    <string name="delete_widget">Biztosan törli a modult?</string>
     <string name="battery_saving_mode">Energiatakarékos mód</string>
     <string name="y_axis_description">Válasszon legfeljebb két opciót az Y-tengelyhez.</string>
     <string name="graph_axis">Grafikon tengely</string>
@@ -5437,7 +5434,7 @@
     <string name="obd_fuel_consumption_rate">Fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Megjeleníti az üzemanyag-fogyasztást az OBD adatai alapján</string>
     <string name="obd_fuel_type">Üzemanyagtípus</string>
-    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motor fordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep pozíciója, akkumulátor töltöttsége\n</string>
+    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motorfordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep pozíciója, akkumulátor töltöttsége\n</string>
     <string name="obd_support">OBD támogatás</string>
     <string name="obd_plugin_name">Járműmetrika</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
@@ -5467,14 +5464,14 @@
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
     <string name="liter_per_hour">l/óra</string>
-    <string name="release_4_9">• Teljes képernyős képgaléria a Wikimedia képekhez\n\n • Új Járműmetrika bővítmény a jármű teljesítményének az OBD-II protokollon keresztüli nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy Átlagsebesség visszaállítása művelet a moduloknál\n\n • Új krosszmotor utak útvonalréteg\n\n •Nyomvonal automatikus rögzítése navigáció közben javítása\n\n • Javítva a jobbról balra író nyelveknél a koordináták felcserélése\n\n • Javítva a hiányzó szenzoradatok a jelenleg rögzített nyomvonalnál\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez</string>
+    <string name="release_4_9">• Teljes képernyős képgaléria a Wikimedia képekhez\n\n • Új Járműmetrika bővítmény a jármű teljesítményének az OBD-II protokollon keresztüli nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testre szabható térképgomb és precíz rácsok\n\n • Helyi menü és egy Átlagsebesség visszaállítása művelet a moduloknál\n\n • Új motokrossz utak útvonalréteg\n\n •Nyomvonal automatikus rögzítése navigáció közben javítása\n\n • Javítva a jobbról balra író nyelveknél a koordináták felcserélése\n\n • Javítva a hiányzó szenzoradatok a jelenleg rögzített nyomvonalnál\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy az útvonal attribútumainak megjelenítéséhez</string>
     <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
     <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Koppintson a gombra a feloldáshoz.</string>
     <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
     <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II olvasókat.</string>
     <string name="connect_obd_instructions_step2">Indítsa el a jármű motorját</string>
-    <string name="connect_obd_instructions_step3">Engedélyezze a Bluetooth-t a telefonján</string>
-    <string name="connect_obd_instructions_step4">Koppintson a „%1$s”-ra és válassza ki az OBD-olvasót a listáról.</string>
+    <string name="connect_obd_instructions_step3">Engedélyezze a Bluetooth-t az eszközén</string>
+    <string name="connect_obd_instructions_step4">Koppintson a(z) „%1$s” gombra és válassza ki az OBD-olvasót a listáról.</string>
     <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
     <string name="obd_fuel_left_liters">Maradék üzemanyag (liter)</string>
     <string name="obd_vehicle_info">Jármű információ</string>
@@ -5486,13 +5483,13 @@
     <string name="obd_widget_engine_speed">Motor fordulatszáma</string>
     <string name="obd_nothing_found_text">Nem található OBD-olvasó</string>
     <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth-t az OBD-olvasó megkereséséhez és csatlakoztatásához.</string>
-    <string name="obd_searching_text_description">Tartsa készülékét az OBD-olvasó közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
-    <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – készüléke az OBD-olvasó hatókörén belül van.</string>
+    <string name="obd_searching_text_description">Tartsa az eszközt az OBD-olvasó közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
+    <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – eszköze az OBD-olvasó hatókörén belül van.</string>
     <string name="obd_searching_text">OBD-olvasók keresése</string>
     <string name="obd_device_forget_sensor">OBD-olvasó elfelejtése</string>
     <string name="obd_device_forget_sensor_description">Az OBD-olvasó törlődik a listáról, de bármikor újra párosíthatja azt.</string>
     <string name="route_guidance_desc">Valós idejű útbaigazítást biztosít, beleértve a következő kanyar távolságát, az út nevét, a jelenlegi utca nevét és a sávinformációkat. A modulok navigáció közben aktívak.</string>
-    <string name="connect_obd_instructions_step">1. Helyezze az olvasót a jármű OBD-II aljzatába.\n\n 2. Indítsa el a jármű motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson a „%1$s” gombra, és válassza ki az OBD-olvasót a listából.</string>
+    <string name="connect_obd_instructions_step">1. Helyezze az olvasót a jármű OBD-II aljzatába.\n\n 2. Indítsa el a jármű motorját\n\n 3. Engedélyezze a Bluetooth-t az eszközén\n\n 4. Koppintson a(z) „%1$s” gombra, és válassza ki az OBD-olvasót a listából.</string>
     <string name="obd_fuel_consumption_rate_sensor">Fogyasztás (érzékelő)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Megjeleníti a jármű számított időalapú üzemanyag-fogyasztását liter/órában</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Megjeleníti a jármű üzemanyag-fogyasztását liter/órában az érzékelő adatai alapján</string>
@@ -5507,7 +5504,7 @@
     <string name="liter">l</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="l_100km">l/100 km</string>
-    <string name="simulate_obd">OBD adatok szimulálása</string>
+    <string name="simulate_obd">OBD-adatok szimulálása</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Üzemanyagnyomás</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Megjeleníti a jármű számított relatív üzemanyag-fogyasztási arányát (%/óra)</string>
@@ -5564,7 +5561,7 @@
     <string name="av_audio_sample_rate">Hang mintavételi arány</string>
     <string name="av_audio_sample_rate_descr">Válassza ki a hang mintavételi arányát.</string>
     <string name="connect_new_scanner">Csatlakoztasson új OBD-olvasót</string>
-    <string name="auto_zoom_3d_angle">Automatikus zoom 3D szög</string>
+    <string name="auto_zoom_3d_angle">Automatikus nagyítási 3D szög</string>
     <string name="vehicle_metrics_recording_description">Válassza ki a GPX-fájlba elmentendő paramétereket.</string>
     <string name="shared_string_engine">Motor</string>
     <string name="shared_string_interpolation">Interpoláció</string>
@@ -5576,7 +5573,7 @@
     <string name="default_buttons_opacity_original_description">Mindegyik gomb megtartja a saját háttér-átlátszatlanságát.</string>
     <string name="calculate_size">Méret kiszámítása</string>
     <string name="calculating_indication_message">Számítás…</string>
-    <string name="rendering_attr_showClimbingRoutes_description">Hegymászó utak megjeleítése</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Hegymászó utak megjelenítése</string>
     <string name="rendering_attr_showClimbingRoutes_name">Hegymászó utak</string>
     <string name="display_distance_to_first_intermediate_summary">A következő megállásig tartó időt és távolságot jeleníti meg. Tiltsa le, hogy ehelyett mindig az úti cél részleteit mutassa.</string>
     <string name="display_distance_to_first_intermediate">A következő megállásig tartó útvonal részleteinek megjelenítése</string>
@@ -5585,9 +5582,9 @@
     <string name="shared_string_avg_altitude">Átl. magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
     <string name="shared_string_length">Távolság</string>
-    <string name="map_widget_route_information">Útvonalinformációk</string>
+    <string name="map_widget_route_information">Útvonal-információk</string>
     <string name="shared_string_default_view">Alapértelmezett nézet</string>
-    <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktív navigációs útvonal távolságát.</string>
+    <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktuális navigációs útvonal távolságát.</string>
     <string name="ais_cpa_warning_distance_description">A hajók piros színnel vannak kiemelve, ha a CPA (Legközelebbi megközelítési pont) kisebb, mint a beállított küszöbérték, és a TCPA a \'Figyelmeztetési idő a CPA eléréséhez\' érték alá esik.</string>
     <string name="ais_object_lost_timeout_description">Állítsa be az AIS objektumok láthatóságának időkorlátját: a jel vétele nélkül ennyi idő után kerül az AIS objektum automatikusan eltávolításra a képernyőről.</string>
     <string name="ais_load_data">AIS adatok betöltése fájlból</string>
@@ -5644,14 +5641,14 @@
     <string name="shared_string_map_center">Térkép közepe</string>
     <string name="layer_coordinates_grid">Koordinátarács</string>
     <string name="show_image_previews">Képelőnézetek megjelenítése</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">A koordinátarács láthatóságának átváltása a térképen.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">A koordinátarács láthatóságának beállítása a térképen.</string>
     <string name="prime_meridian">Kezdő délkör (0°)</string>
     <string name="equator">Egyenlítő</string>
     <string name="meridian_180">180° délkör</string>
-    <string name="release_5_0">- Fedezze fel a legmagasabban rangsorolt POI-kat az új Felfedező móddal\n\n - Az összes OSM-útvonal mostantól kereshető! Túra-, kerékpár-, MTB-útvonalak és még sok minden más is\n\n - Az új navigációs widget egyesíti a kanyarodást jelző nyilat és a navigációs utasításokat\n\n - Aktuális útinformációs widget: megjeleníti a becsült érkezési időt és a távolságot.\n\n - Sípályák és MTB-útvonalak kiválasztása a térképen a részletes információkhoz\n\n - Lehetőség a widget méretének kiválasztására a bal és jobb oldali paneleken\n\n - Hozzáadott koordinátarács földrajzi koordinátákkal\n\n - Hozzáadva a kedvenc csoportok alapértelmezett megjelenésének testreszabási lehetősége\n\n - Android Auto: becsült érkezési idő és a következő úticél távolságának megtekintése; a városnevek mostantól megjelennek a keresési eredményekben\n\n - A kiemelkedő csúcsok mostantól térképen és keresésen keresztül is felfedezhetők\n\n - Hegycsúcsok magassága lábban\n\n - Hozzáadva: sziklák és mászóterületek a térképen\n\n - Javult a címkeresés az USA-ban\n\n - Hozzáadva héber felolvasó a navigációhoz</string>
+    <string name="release_5_0">- Fedezze fel a legmagasabban rangsorolt POI-kat az új Felfedező móddal\n\n - Az összes OSM-útvonal mostantól kereshető! Túra-, kerékpár-, MTB-útvonalak és még sok minden más is\n\n - Az új navigációs modul egyesíti a kanyarodást jelző nyilat és a navigációs utasításokat\n\n - Aktuális útinformációs modul: megjeleníti a becsült érkezési időt és a távolságot.\n\n - Sípályák és MTB-útvonalak kiválasztása a térképen a részletes információkhoz\n\n - Lehetőség a modul méretének kiválasztására a bal és jobb oldali paneleken\n\n - Hozzáadott koordinátarács földrajzi koordinátákkal\n\n - Hozzáadva a kedvenc csoportok alapértelmezett megjelenésének testreszabási lehetősége\n\n - Android Auto: becsült érkezési idő és a következő úti cél távolságának megtekintése; a városnevek mostantól megjelennek a keresési eredményekben\n\n - A kiemelkedő csúcsok mostantól térképen és keresésen keresztül is felfedezhetők\n\n - Hegycsúcsok magassága lábban\n\n - Hozzáadva: sziklák és mászóterületek a térképen\n\n - Javult a címkeresés az USA-ban\n\n - Hozzáadva héber felolvasó a navigációhoz</string>
     <string name="shared_string_offline_only">Csak offline</string>
     <string name="shared_string_online_only">Csak online</string>
-    <string name="add_widget">Widget hozzáadása</string>
+    <string name="add_widget">Modul hozzáadása</string>
     <string name="row_height">Sormagasság</string>
     <string name="display_priority">Kijelző prioritás</string>
     <string name="intermediate_first">Köztes először</string>
@@ -5665,7 +5662,7 @@
     <string name="shared_string_no_animation">Nincs animáció</string>
     <string name="position_animation">Pozíció animációja</string>
     <string name="wiki_around">Közeli népszerű helyek</string>
-    <string name="routing_attr_allow_ferries_description">Komp igénybevételének engedélyezése útvonaltervezéskor</string>
+    <string name="routing_attr_allow_ferries_description">Kompátkelők engedélyezése útvonaltervezéskor</string>
     <string name="routing_attr_allow_ferries_name">Komp is</string>
     <string name="grid_color">Rács színe</string>
     <string name="shared_string_edges">Élek</string>
@@ -5703,29 +5700,15 @@
     <string name="battery">akkumulátor</string>
     <string name="shared_string_switch">Kapcsoló</string>
     <string name="ski_route_switch_style_description">Fedezze fel a sípályákat, lejtőket, felvonókat a Tél és síelés térképstílussal.</string>
-    <string name="release_5_1">• Hozzáadott támogatás webes és platformfüggetlen vásárlásokhoz\n\n • A hőmérsékleti mértékegységek átkerültek az Általános beállításokba a könnyebb hozzáférés érdekében\n\n • Hozzáadott akkumulátorszint-jelző a BLE érzékelőkhöz\n\n • Új, intuitívabb felhasználói felület a pontok kiválasztásához a Navigációban\n\n • Widget láthatóság javítása új körvonallal\n\n • Hozzáadott emelkedők/lejtők elemző\n\n • Bővített Wikipédia és Wikivoyage integráció további érdekes helyekhez (POI).</string>
+    <string name="release_5_1">• Hozzáadott támogatás webes és platformfüggetlen vásárlásokhoz\n\n • A hőmérsékleti mértékegységek átkerültek az Általános beállításokba a könnyebb hozzáférés érdekében\n\n • Hozzáadott akkumulátorszint-jelző a BLE érzékelőkhöz\n\n • Új, intuitívabb felhasználói felület a pontok kiválasztásához a Navigációban\n\n • Modulok láthatóságának javítása új körvonallal\n\n • Hozzáadott emelkedők/lejtők elemző\n\n • Bővített Wikipédia és Wikivoyage integráció további érdekes helyekhez (POI).</string>
     <string name="osm_live_payment_renews_3_years">Megújul 3 évente</string>
     <string name="years_3">3 év</string>
     <string name="osm_live_payment_3_years_title">3 évente</string>
     <string name="three_years_subscription">3 éves előfizetés</string>
     <string name="deleting">Törlés…</string>
     <string name="deleting_history">Előzmények törlése…</string>
-    <string name="show_rasterization_debug_tile">Csempe raszterezési információk mutatása</string>
-    <string name="release_5_2">
-        • Utca- és városadatok hozzáadása a keresési eredményekhez\n\n
-        • Új Útrögzítő widgetek: Maximális sebesség, Átlagos meredekség és továbbfejlesztett Emelkedő/Lejtő\n\n
-        • Új "Tengeri" térképstílus széles körű testreszabási lehetőségekkel\n\n
-        • Továbbfejlesztett térkémegjelenítési sebesség\n\n
-        • Továbbfejlesztett kapcsolat az OBDII BLE adapterekkel\n\n
-        • Pulzusmérők hozzáadása az "Elemzés intervallum szerint" funkcióhoz\n\n
-        • Időtartam kijelzése a tervezett útvonalakhoz\n\n
-        • A magassági egységek mostantól a távolsági egységektől elkülönítve állíthatók be\n\n
-        • Továbbfejlesztett térképtájolás Gyorsművelet választható iránytű módokkal\n\n
-        • Android Auto esetén navigáció előtti figyelmeztetések hiányzó térképekre és magánutakra\n\n
-        • Kijavítva egy hiba a Sugárvonalzó widget helytelen méretparamétereivel kapcsolatban\n\n
-        • Fordított képernyőtájolások hozzáadása\n\n
-        • Továbbfejlesztett felhasználói felület a teherautó-mérőszámok megadásához\n\n
-    </string>
+    <string name="show_rasterization_debug_tile">Csempe raszterezési információk megjelenítése</string>
+    <string name="release_5_2">• Utca- és városadatok hozzáadása a keresési eredményekhez\n\n • Új túra-rögzítési modulok: Maximális sebesség, Átlagos meredekség és továbbfejlesztett Emelkedő/Lejtő\n\n • Új Tengeri térképstílus széles körű testreszabási lehetőségekkel\n\n • Továbbfejlesztett térképmegjelenítési sebesség\n\n • Továbbfejlesztett kapcsolat az OBDII BLE adapterekkel\n\n • Pulzusmérők hozzáadása az Elemzés intervallum szerint funkcióhoz\n\n • Időtartam kijelzése a tervezett útvonalakhoz\n\n • A magassági egységek mostantól a távolsági egységektől elkülönítve állíthatók be\n\n • Továbbfejlesztett térképtájolás Gyorsművelet választható iránytű módokkal\n\n • Android Auto esetén navigáció előtti figyelmeztetések hiányzó térképekre és magánutakra\n\n • Kijavítva egy hiba a Sugárvonalzó modul helytelen méretparamétereivel kapcsolatban\n\n • Fordított képernyőtájolások hozzáadása\n\n • Továbbfejlesztett felhasználói felület a teherautó-mérőszámok megadásához</string>
     <string name="shared_string_threads">Szálak</string>
     <string name="threads_allocated_for_rendering">Rendereléshez lefoglalt szálak</string>
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép renderelését.</string>
@@ -5733,7 +5716,7 @@
     <string name="failed_to_connect">Sikertelen csatlakozás ehhez: %1s</string>
     <string name="enable_msaa">MSAA engedélyezése</string>
     <string name="next_turn_information">Következő kanyarodás információ</string>
-    <string name="next_turn_information_desc">Mutatja a következő kanyarodás irányát és az utca nevét.</string>
+    <string name="next_turn_information_desc">Megjeleníti a következő kanyarodás irányát és az utca nevét.</string>
     <string name="description_purchases_fastspring">Vásárlásait a FastSpring fiókkezelő portálon keresztül kezelheti.</string>
     <string name="description_subscription_fastspring">Előfizetését a FastSpring fiókkezelési portálon keresztül kezelheti, illetve mondhatja le.</string>
     <string name="manage_purchases">Vásárlások kezelése</string>
@@ -5747,17 +5730,17 @@
     <string name="n_a">n.a</string>
     <string name="write_location_provider_description">Mentse el a helymeghatározó szolgáltatót minden egyes útvonalponthoz rögzítés közben</string>
     <string name="write_location_provider">Helymeghatározó szolgáltató tárolása</string>
-    <string name="altitude_metrics_description">Beállítja a magasság mértékegységét a widgetekben és a statisztikákban.</string>
+    <string name="altitude_metrics_description">Beállítja a magasság mértékegységét a modulokban és a statisztikákban.</string>
     <string name="average_elevation">Átlagos magasság</string>
     <string name="ascent">Emelkedés</string>
     <string name="descent">Ereszkedés</string>
-    <string name="map_orientations_choose_description">Hagyja üresen, ha az összes elérhető mód között szeretne váltani, vagy pedig adja hozzá a kívánt módot.</string>
+    <string name="map_orientations_choose_description">Hagyja üresen, hogy az összes rendelkezésre álló mód között válthasson, vagy csak az előnyben részesített módokat adja hozzá.</string>
     <string name="map_orientations">Térkép tájolása</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Válasz</string>
     <string name="marine_renderer">Tengeri</string>
-    <string name="marine_render_descr">Részletesen testreszabható tengeri navigációs stílus. A Hajózási stíluson alapul. Jobban működik a Nautical World Seamarks térképpel és az opcionális mélységtérképekkel.</string>
+    <string name="marine_render_descr">Részletesen testre szabható tengeri navigációs stílus. A Hajózási stíluson alapul. Jobban működik a Nautical World Seamarks térképpel és az opcionális mélységtérképekkel.</string>
     <string name="rendering_attr_hideAreas_name">Mélységi területek</string>
     <string name="rendering_attr_hideAreas_description">Mélységi területek elrejtése</string>
     <string name="rendering_attr_hideContours_description">Mélységvonalak elrejtése</string>
@@ -5770,8 +5753,8 @@
     <string name="rendering_attr_depthColorScheme_description">Mélység színséma</string>
     <string name="rendering_attr_depthContoursDashed_name">Szaggatott mélységvonalak</string>
     <string name="rendering_attr_depthContoursDashed_description">Szaggatott mélységvonalak</string>
-    <string name="rendering_attr_showLNAMmarker_name">ENC jelölők</string>
-    <string name="rendering_attr_showLNAMmarker_description">ENC jelölők mutatása</string>
+    <string name="rendering_attr_showLNAMmarker_name">ENC-jelölők</string>
+    <string name="rendering_attr_showLNAMmarker_description">ENC-jelölők megjelenítése</string>
     <string name="rendering_attr_watercolor_name">Vízszín</string>
     <string name="rendering_attr_watercolor_description">A víz színe</string>
     <string name="rendering_attr_hideFairways_name">Hajózóutak</string>
@@ -5786,19 +5769,19 @@
     <string name="rendering_attr_hideSpots_description">Mélységi szondázások elrejtése</string>
     <string name="rendering_attr_hideTidalFlats_name">Árapály-síkságok</string>
     <string name="rendering_attr_hideTidalFlats_description">Árapály-síkságok elrejtése</string>
-    <string name="rendering_attr_fairwayStyle_name">Hajózási út szín</string>
+    <string name="rendering_attr_fairwayStyle_name">Hajózási út színe</string>
     <string name="rendering_attr_fairwayStyle_description">A hajózási utak színe</string>
     <string name="rendering_attr_safetyContour_name">Biztonsági mélység kontúr</string>
     <string name="rendering_attr_safetyContour_description">Biztonsági mélység kontúr</string>
     <string name="rendering_attr_shellsStyle_description">Stílus a tengerfenéken lévő kagylókhoz</string>
     <string name="rendering_attr_shellsStyle_name">Kagylók stílusa</string>
-    <string name="rendering_attr_spotDistance_description">Mélységi szondázás távolság</string>
-    <string name="rendering_attr_spotSize_name">Mélységi szondázás méret</string>
-    <string name="rendering_attr_spotSize_description">Mélységi szondázás mére</string>
-    <string name="rendering_attr_tidalFlatStyle_name">Árapály-síkság stílus</string>
+    <string name="rendering_attr_spotDistance_description">Mélységi szondázási távolság</string>
+    <string name="rendering_attr_spotSize_name">Mélységi szondázási méret</string>
+    <string name="rendering_attr_spotSize_description">Mélységi szondázási méret</string>
+    <string name="rendering_attr_tidalFlatStyle_name">Árapály-síkság stílusa</string>
     <string name="rendering_attr_tidalFlatStyle_description">Az árapály-síkságok stílusa</string>
-    <string name="rendering_attr_spotDistance_name">Mélységi szondázás távolság</string>
-    <string name="view_on_phone">Megtekintés telefonon</string>
+    <string name="rendering_attr_spotDistance_name">Mélységi szondázási távolság</string>
+    <string name="view_on_phone">Megtekintés az eszközön</string>
     <string name="backup_delete_data_warning_extended">Ez a művelet véglegesen eltávolítja az összes kiválasztott adatot a felhőből. Később sem lehet visszaállítani őket.</string>
     <string name="amount_of_total_used">%1$s / %2$s használatban</string>
     <string name="delete_data">Adatok törlése</string>
@@ -5811,7 +5794,7 @@
     <string name="max_axle_load_description">Adja meg a járműve maximális tengelyterhelését, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
     <string name="lang_en_barebones">Angol (csupasz)</string>
     <string name="shared_sting_osm_link">OSM hivatkozás</string>
-    <string name="show_local_names">Helyi nevek mutatása</string>
+    <string name="show_local_names">Helyi nevek megjelenítése</string>
     <string name="obd_alt_battery_voltage">Adapter feszültsége</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Brit gallon</string>
@@ -5830,19 +5813,19 @@
     <string name="track_folder_appearance">Nyomvonalakat tartalmazó mappa megjelenése</string>
     <string name="update_maps">Térképek frissítése</string>
     <string name="reconnect">Újbóli csatlakozás</string>
-    <string name="trip_recording_downhill_widget_desc">Megjeleníti az összes lejtés összegét vagy a jelenleg rögzített utazás utolsó lejtőjét.</string>
-    <string name="trip_recording_uphill_widget_desc">Megjeleníti az összes emelkedés összegét vagy a jelenleg rögzített utazás utolsó emelkedőjét.</string>
-    <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás teljes hosszát, adott esetben az utolsó emelkedés és lejtés hosszával együtt.</string>
+    <string name="trip_recording_downhill_widget_desc">Megjeleníti az összes lejtő hosszát vagy a jelenleg rögzített út utolsó lejtőjének hosszát.</string>
+    <string name="trip_recording_uphill_widget_desc">Megjeleníti az összes emelkedő hosszát vagy a jelenleg rögzített út utolsó emelkedő hosszát.</string>
+    <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás teljes hosszát, valamint az utolsó emelkedés és lejtés hosszát.</string>
     <string name="trip_recording_max_speed_widget_description">Megjeleníti az aktuálisan rögzített utazás legnagyobb sebességét. Koppintással válthat az általános maximális sebesség és az utolsó emelkedőn vagy lejtőn elért maximális sebesség között.</string>
     <string name="trip_recording_average_slope_widget_description">Megjeleníti az aktuálisan rögzített utazás utolsó lejtő vagy emelkedő szakaszának átlagos meredekségét.</string>
     <string name="average_slope">Átlagos meredekség</string>
     <string name="shared_string_last_uphill">Utolsó emelkedő</string>
     <string name="shared_string_last_downhill">Utolsó lejtő</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Sípályák és síútvonalak</string>
-    <string name="rendering_attr_pisteRoutes_name">Sípályák és síútvonalak</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Sípályák és útvonalak</string>
+    <string name="rendering_attr_pisteRoutes_name">Sípályák és útvonalak</string>
     <string name="requires_internet_connection">Internet kapcsolat szükséges</string>
     <string name="save_and_access_articles_offline">Adatmentés és cikkek offline elérése bárhonnan</string>
-    <string name="private_access_routing_req_short">Engedélyezi a magánutak használatát az úticél eléréséhez?</string>
+    <string name="private_access_routing_req_short">Engedélyezi a magánutak használatát az úti cél eléréséhez?</string>
     <string name="download_wikipedia_label">Wikipédia letöltése</string>
     <string name="quick_action_weather_layers">Kapcsoló az időjárási rétegek megjelenítéséhez vagy elrejtéséhez a térképen.</string>
     <string name="quick_action_wind_animation_layer">Kapcsoló a szélanimáció rétegének megjelenítéséhez vagy elrejtéséhez a térképen.</string>
