@@ -128,7 +128,7 @@ public class AisObjectDrawable {
 	}
 
 	private boolean needRotation() {
-		return (((ais.getCog() != INVALID_COG) && (this.ais.getCog() != 0)) ||
+		return (((ais.getCog() != INVALID_COG) && (ais.getCog() != 0)) ||
 				((ais.getHeading() != INVALID_HEADING) && (ais.getHeading() != 0))) && ais.isMovable();
 	}
 
@@ -230,33 +230,88 @@ public class AisObjectDrawable {
 		canvas.drawCircle(locationX, locationY, 18.0f, localPaint);
 	}
 
+	private void drawShape(float locationX, float locationY, @NonNull RotatedTileBox tileBox,
+						   @NonNull Paint paint, @NonNull Canvas canvas) {
+		// draw the shape of the vessel based on the received dimension data,
+		// for vessel dimension encoding see ITU-R M.1371-5 (http://www.itu.int/rec/R-REC-M/e)
+		float a, b, c, d, e;
+		if ((tileBox.getZoom() >= AisTrackerLayer.START_ZOOM_SHOW_SHAPE) &&
+				(ais.getDimensionToBow() + ais.getDimensionToStern() > 0) &&
+				(ais.getDimensionToPort() + ais.getDimensionToStarboard() > 0) &&
+				(!ais.isLost(getPlugin().getVesselLostTimeoutInMinutes()))) {
+			double pixDensity = tileBox.getPixDensity();
+			if ((ais.getDimensionToBow() == 0) && (ais.getDimensionToPort() == 0)) {
+				a = (float)(ais.getDimensionToStern() * pixDensity * 0.5f);
+				b = a;
+				c = (float)(ais.getDimensionToStarboard() * pixDensity * 0.5f);
+				d = c;
+			} else {
+				a = (float)(ais.getDimensionToBow() * pixDensity);
+				b = (float)(ais.getDimensionToStern() * pixDensity);
+				c = (float)(ais.getDimensionToPort() * pixDensity);
+				d = (float)(ais.getDimensionToStarboard() * pixDensity);
+			}
+			e = 0.5f * (c + d);
+			canvas.drawLine((float) locationX - c, (float) locationY + b,
+					(float) locationX - c, (float) locationY - a + e, paint);
+			canvas.drawLine((float) locationX - c, (float) locationY - a + e,
+					(float) locationX - c + e, (float) locationY - a, paint);
+			canvas.drawLine((float) locationX - c + e, (float) locationY - a,
+					(float) locationX + d, (float) locationY - a + e, paint);
+			canvas.drawLine((float) locationX + d, (float) locationY - a + e,
+					(float) locationX + d, (float) locationY + b, paint);
+			canvas.drawLine((float) locationX + d, (float) locationY + b,
+					(float) locationX - c, (float) locationY + b, paint);
+		}
+	}
+
 	public void draw(@NonNull Paint paint, @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		updateBitmap(paint);
 		LatLon position = ais.getPosition();
+		int heading = ais.getHeading();
 		if (this.bitmap != null && position != null) {
 			canvas.save();
 			canvas.rotate(tileBox.getRotate(), (float)tileBox.getCenterPixelX(), (float)tileBox.getCenterPixelY());
-			float speedFactor = getMovement();
 			int locationX = tileBox.getPixXFromLonNoRot(position.getLongitude());
 			int locationY = tileBox.getPixYFromLatNoRot(position.getLatitude());
-			float fx =  locationX - this.bitmap.getWidth() / 2.0f;
-			float fy =  locationY - this.bitmap.getHeight() / 2.0f;
-			boolean vesselAtRest = ais.isVesselAtRest();
-			if (!vesselAtRest && this.needRotation()) {
-				float rotation = ais.getVesselRotation();
-				canvas.rotate(rotation, locationX, locationY);
-			}
-			if (vesselAtRest) {
+			if (ais.isVesselAtRest()) {
 				drawCircle(locationX, locationY, paint, canvas);
+				if (heading != INVALID_HEADING) {
+					if (heading != 0) {
+						canvas.rotate(heading, locationX, locationY);
+					}
+					drawShape(locationX, locationY, tileBox, paint, canvas);
+				}
 			} else {
+				boolean needRotation = this.needRotation();
+				float rotation = 0.0f;
+				float speedFactor = getMovement();
+				float fx =  locationX - this.bitmap.getWidth() / 2.0f;
+				float fy =  locationY - this.bitmap.getHeight() / 2.0f;
+				if (needRotation) {
+					// the idea of the directions of the bitmap, vessel shape etc. is:
+					// - draw the bitmap and the direction line in direction of the course (ais_cog) of the vessel
+					//  - if no course is available, use heading (ais_heading) instead
+					//  - if heading is also not available, fallback to "no rotation" (northwards)
+					// - the direction of the shape of the vessel may differ:
+					//  - if heading is given and differs from course, then use heading as direction of the shape
+					//  - in this case the direction of the bitmap (with direction line) differs from the shape direction
+					rotation = ais.getVesselRotation();
+					canvas.rotate(rotation, locationX, locationY);
+				}
 				canvas.drawBitmap(this.bitmap, Math.round(fx), Math.round(fy), paint);
-			}
-			if ((tileBox.getZoom() >= AisTrackerLayer.START_ZOOM_SHOW_DIRECTION) && (speedFactor > 0) &&
-					(!ais.isLost(getPlugin().getVesselLostTimeoutInMinutes())) && !vesselAtRest) {
-				float lineLength = (float)this.bitmap.getHeight() * speedFactor;
-				float lineStartY = locationY - this.bitmap.getHeight() / 4.0f;
-				float lineEndY = lineStartY - lineLength;
-				canvas.drawLine((float) locationX, lineStartY, (float) locationX, lineEndY, paint);
+				if ((tileBox.getZoom() >= AisTrackerLayer.START_ZOOM_SHOW_DIRECTION) && (speedFactor > 0.0f) &&
+						(!ais.isLost(getPlugin().getVesselLostTimeoutInMinutes()))) {
+					float lineLength = (float)this.bitmap.getHeight() * speedFactor;
+					float lineStartY = locationY - this.bitmap.getHeight() / 4.0f;
+					float lineEndY = lineStartY - lineLength;
+					canvas.drawLine((float) locationX, lineStartY, (float) locationX, lineEndY, paint);
+				}
+				if ((needRotation) && (heading != INVALID_HEADING) &&
+						(heading != 0) && (heading != rotation)) {
+					canvas.rotate(heading - rotation, locationX, locationY);
+				}
+				drawShape(locationX, locationY, tileBox, paint, canvas);
 			}
 			canvas.restore();
 		}

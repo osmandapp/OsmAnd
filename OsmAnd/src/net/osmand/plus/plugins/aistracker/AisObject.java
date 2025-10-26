@@ -835,7 +835,7 @@ public class AisObject {
         return (isLost(plugin.getVesselLostTimeoutInMinutes()) && isMovable() && !isVesselAtRest());
     }
 
-    float getVesselRotation() {
+    public float getVesselRotation() {
         float rotation = 0;
         if (this.ais_cog != INVALID_COG) {
             rotation = (float) this.ais_cog;
