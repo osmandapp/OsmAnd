@@ -3541,7 +3541,7 @@
     <string name="osm_login_descr">Vegeu utilitzant el mètode OAuth, o el vostre nom d\'usuari i contrasenya OSM.</string>
     <string name="shared_string_add_photo">Afegeix foto</string>
     <string name="register_opr_create_new_account">Crea un compte nou</string>
-    <string name="register_opr_have_account">ja tinc un compte</string>
+    <string name="register_opr_have_account">Ja tinc un compte</string>
     <string name="shared_string_search_history">Historial de cerques</string>
     <string name="app_mode_kayak">Caiac</string>
     <string name="app_mode_motorboat">Llanxa motora</string>
