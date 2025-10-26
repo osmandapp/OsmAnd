@@ -195,6 +195,9 @@ public class SearchCoreFactory {
 		
 		boolean matchAddressName(SearchPhrase phrase, SearchResult parent, SearchResult res, boolean fullMatch) {
 			boolean match = false;
+			if (parent != null) {
+				phrase.countUnknownWordsMatchMainResult(parent);
+			}
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
@@ -666,7 +669,8 @@ public class SearchCoreFactory {
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
 								// for street-city don't require exact matching 
-								boolean match = matchAddressName(phrase, res, cityResult,  false);
+								
+								boolean match = matchAddressName(phrase, res, cityResult,  true);
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
