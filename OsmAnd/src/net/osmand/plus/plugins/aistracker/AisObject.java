@@ -85,6 +85,7 @@ public class AisObject {
     private SortedSet<Integer> msgTypes = null;
     private AisObjType objectClass;
     private Cpa cpa;
+    public static final float SPEED_CONSIDERED_IN_REST = 0.4f; // in knots: vessels up to this speed are considered as "in rest"
 
     /* timestamp of last AIS message received for the current instance: */
     private long lastUpdate = 0;
@@ -801,9 +802,9 @@ public class AisObject {
         };
     }
 
-    /* return true if a vessel is moored etc. */
+    /* return true if a vessel is moored etc. and needs to be drawn as a circle */
     public boolean isVesselAtRest() {
-        switch (objectClass) {
+        switch (this.objectClass) {
             case AIS_VESSEL:
             case AIS_VESSEL_SPORT:
             case AIS_VESSEL_FAST:
@@ -813,16 +814,18 @@ public class AisObject {
             case AIS_VESSEL_AUTHORITIES:
             case AIS_VESSEL_SAR:
             case AIS_VESSEL_OTHER:
-                switch (ais_navStatus) {
+                switch (this.ais_navStatus) {
+                    case 1: // at anchor
                     case 5: // moored
                         /* sometimes the ais_navStatus is wrong and contradicts other data... */
-                        return (ais_cog == INVALID_COG) || (ais_sog < 0.2d);
+                        return (ais_cog == INVALID_COG) || (ais_sog < SPEED_CONSIDERED_IN_REST);
                     default:
-						return (msgTypes.contains(18) || msgTypes.contains(24)
-								|| msgTypes.contains(1) || msgTypes.contains(3))
-                                && (ais_cog == INVALID_COG /* maybe remove this condition */)
-								&& (ais_sog < 0.2d);
-				}
+                        if (msgTypes.contains(18) || msgTypes.contains(24)
+                                ||  msgTypes.contains(1)  || msgTypes.contains(3)) {
+                            return (ais_sog < SPEED_CONSIDERED_IN_REST);
+                        }
+                        return false;
+                }
             default:
                 return false;
         }
