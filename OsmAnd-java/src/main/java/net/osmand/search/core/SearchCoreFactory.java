@@ -161,8 +161,7 @@ public class SearchCoreFactory {
 		}
 
 		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
-									SearchResult setParentSearchResult, boolean publish)
-				throws IOException {
+									SearchResult setParentSearchResult, boolean publish) throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
 			List<String> leftUnknownSearchWords = res.filterUnknownSearchWord(null);
 			if (setParentSearchResult != null) {
@@ -691,7 +690,6 @@ public class SearchCoreFactory {
 										cityResult.otherNames = boundary.getOtherNames(true);
 										// for another city require exact matching
 										if (matchAddressName(phrase, res, cityResult,  true)) {
-											cityResult.localeName = boundary.getName();
 											newParentSearchResult = cityResult;
 											break;
 										}
@@ -709,11 +707,8 @@ public class SearchCoreFactory {
 							// 8508 PA 61 Coal Township
 							// 1281 Pennsylvania Avenue, Pine City PA 14871 United States
 							
-							// 2401, Burnhamthorpe Road West, Oakville (not needed fix on server side)
 							// require exact matching to speed up
 							if (matchAddressName(phrase, null, res, true)) {
-//							if (phrase.getFullSearchPhrase().toLowerCase().contains(res.localeName.toLowerCase())) {
-//								System.out.println("SUB " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
 						} else {
@@ -726,7 +721,6 @@ public class SearchCoreFactory {
 							// FIXME check if subsearch successful don't call search by name inside
 							// require exact matching to search street by name (not attached to city) 
 							if (matchAddressName(phrase, null, res, true)) {
-//								System.out.println("SUBCITY " + res.object + " " + res.localeName + " " + res.objectType);
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
 							}
 						}

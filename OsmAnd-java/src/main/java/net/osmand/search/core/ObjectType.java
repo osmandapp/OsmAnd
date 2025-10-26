@@ -40,7 +40,7 @@ public enum ObjectType {
 	public static boolean isTopVisible(ObjectType t) {
 		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION || t == INDEX_ITEM;
 	}
-
+	
 	public static ObjectType getExclusiveSearchType(ObjectType t) {
 		if (t == FAVORITE_GROUP) {
 			return FAVORITE;

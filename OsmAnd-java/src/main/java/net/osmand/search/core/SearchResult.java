@@ -6,8 +6,10 @@ import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
+import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
@@ -22,7 +24,7 @@ public class SearchResult {
 
 	public static final String DELIMITER = " ";
 	private static final String HYPHEN = "-";
-	private static final int NEAREST_METERS_LIMIT = 30000;
+	static final int NEAREST_METERS_LIMIT = 30000;
 	
 	// MAX_TYPES_BASE_10 should be > ObjectType.getTypeWeight(objectType) = 5
 	public static final double MAX_TYPES_BASE_10 = 10;
@@ -113,6 +115,18 @@ public class SearchResult {
 					}
 				}
 			}
+			City selectedCity = null;
+			if (exactResult != null && exactResult.object instanceof Street s) {
+				selectedCity = s.getCity();
+			} else if (exactResult != null && exactResult.object instanceof Building b && 
+					exactResult.parentSearchResult != null && exactResult.parentSearchResult.object instanceof Street s) {
+				selectedCity = s.getCity();
+			}
+			if (matched && selectedCity != null && object instanceof City c
+					&& !Algorithms.objectEquals(selectedCity.getName(), c.getName())) {
+				// city don't match because of boundary search -> lower priority
+				matched = false;
+			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (matched) {
 				res = getPhraseWeightForCompleteMatch(completeMatchRes);
@@ -132,8 +146,8 @@ public class SearchResult {
 		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10;
 		// if all words from search phrase == the search result words - we prioritize it even higher
 		if (completeMatchRes.allWordsEqual && requiredSearchPhrase.getLastTokenLocation() != null && this.location != null) {
-			boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
-					this.location) <= NEAREST_METERS_LIMIT;
+//			boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
+//					this.location) <= NEAREST_METERS_LIMIT;
 //			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
 				res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
 //			}
@@ -157,10 +171,23 @@ public class SearchResult {
 		}
 		return inc;
 	}
+	
+	public boolean hasObjectTypePresent(ObjectType type) {
+		if (objectType == type) {
+			return true;
+		}
+		if (parentSearchResult != null) {
+			return parentSearchResult.hasObjectTypePresent(type);
+		}
+		return false;
+	}
 
 	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		List<String> localResultNames;
+		if (name.indexOf('(') != -1) {
+			name = SearchPhrase.stripBraces(name);
+		}
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
 			// we split '-' words in result, so user can input same without '-'
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN);
