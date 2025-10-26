@@ -5932,4 +5932,8 @@
     <string name="save_and_access_articles_offline">Gem data og få adgang til artikler offline hvor som helst</string>
     <string name="private_access_routing_req_short">Tillad brug af en privat vej for at nå din destination?</string>
     <string name="download_wikipedia_label">Download Wikipedia</string>
+    <string name="quick_action_weather_layers">En skifter til at vise eller skjule vejrlag på kortet.</string>
+    <string name="quick_action_wind_animation_layer">En skifter til at vise eller skjule vindanimationslaget på kortet.</string>
+    <string name="wind_animation_layer">Vindanimationslag</string>
+    <string name="weather_layers">Vejrlag</string>
 </resources>
