@@ -1178,7 +1178,7 @@
     <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Fita</string>
     <string name="selected_gpx_info_show">\n\nPremeu contínuament per veure al mapa</string>
-    <string name="delay_navigation_start">Inicia les indicacions pas per pas automàticament</string>
+    <string name="delay_navigation_start">Inicia les indicacions pas a pas automàticament</string>
     <string name="shared_string_selected_lowercase">seleccionat</string>
     <string name="gpx_split_interval">Divideix l\'interval</string>
     <string name="gpx_info_diff_altitude">Interval d\'altitud: %1$s</string>
@@ -1411,7 +1411,7 @@
     <string name="local_osm_changes_upload_all_confirm">Voleu carregar %1$d canvis a OSM?</string>
     <string name="confirmation_to_clear_history">Voleu esborrar l\'historial?</string>
     <string name="delay_to_start_navigation_descr">Indiqueu el temps màxim d\'espera en la pantalla de planificació de la ruta.</string>
-    <string name="delay_to_start_navigation">Inicia les indicacions pas per pas després de…</string>
+    <string name="delay_to_start_navigation">Inicia les indicacions pas a pas després de…</string>
     <string name="shared_string_go">Vés</string>
     <string name="osmand_parking_overdue">obsolet</string>
     <string name="action_create">Acció de crear</string>
@@ -2692,7 +2692,7 @@
     <string name="tracks_on_map">Traces visualitzades</string>
     <string name="time_of_day">Hora del dia</string>
     <string name="by_transport_type">Per %1$s</string>
-    <string name="step_by_step">Pas per pas</string>
+    <string name="step_by_step">Pas a pas</string>
     <string name="routeInfo_road_types_name">Tipus de carretera</string>
     <string name="exit_at">Sortiu a</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botó per mostrar o amagar les traces seleccionades al mapa.</string>
@@ -3541,7 +3541,7 @@
     <string name="osm_login_descr">Vegeu utilitzant el mètode OAuth, o el vostre nom d\'usuari i contrasenya OSM.</string>
     <string name="shared_string_add_photo">Afegeix foto</string>
     <string name="register_opr_create_new_account">Crea un compte nou</string>
-    <string name="register_opr_have_account">ja tinc un compte</string>
+    <string name="register_opr_have_account">Ja tinc un compte</string>
     <string name="shared_string_search_history">Historial de cerques</string>
     <string name="app_mode_kayak">Caiac</string>
     <string name="app_mode_motorboat">Llanxa motora</string>
@@ -5772,7 +5772,7 @@
     <string name="shared_string_threads">Fils</string>
     <string name="threads_allocated_for_rendering">Fils assignats per a la renderització</string>
     <string name="threads_allocated_for_rendering_desc">La menor assignació de fils pot accelerar la representació del mapa en alguns casos.</string>
-    <string name="turn_by_turn_directions">Indicacions pas per pas</string>
+    <string name="turn_by_turn_directions">Indicacions pas a pas</string>
     <string name="marine_renderer">Marí</string>
     <string name="marine_render_descr">Estil de navegació marina molt personalitzable. Basat en l\'estil nàutic. Funciona millor amb el mapa de marques del món nàutic i mapes opcionals de profunditat.</string>
     <string name="rendering_attr_hideAreas_name">Àrees de profunditat</string>

@@ -104,11 +104,19 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 					weatherSettings.weatherEnabled.set(enabled);
 					updateScreenMode(view, enabled);
 					refreshMap((MapActivity) getMyActivity());
+					updateButtons();
 				});
 	}
 
 	private void refreshMap(@NonNull MapActivity mapActivity) {
 		app.runInUIThread(mapActivity::refreshMap);
+	}
+
+	private void updateButtons() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer(true);
+		}
 	}
 
 	private void setupWeatherLayers(@NonNull View view) {
@@ -125,6 +133,7 @@ public class WeatherMainFragment extends BaseFullScreenFragment implements Downl
 							weatherPlugin.setCurrentConfigureBand(weatherBand.getBandIndex());
 							int[] coordinates = AndroidUtils.getCenterViewCoordinates(itemView);
 							dashboard.setDashboardVisibility(true, DashboardType.WEATHER_LAYER, coordinates);
+							updateButtons();
 						}
 					}
 			);

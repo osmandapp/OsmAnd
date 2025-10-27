@@ -159,11 +159,7 @@
     <string name="map_online_data_descr">Online-Karten verwenden (Kacheln auf die Speicherkarte herunterladen und zwischenspeichern).</string>
     <string name="shared_string_online_maps">Online-Karten</string>
     <string name="online_map_settings_descr">Online- oder zwischengespeicherte Kachelkartenquellen auswählen.</string>
-    <string name="osmand_rastermaps_plugin_description">Zugriff auf viele Online-Karten (sogenannte Kachel- oder Rasterkarten), wie vorgerenderte OSM-Kacheln, Satellitenbilder und Spezialebenen wie Wetterkarten, Klimakarten, geologische Karten, Hügelschattenebenen usw.
-\n
-\n Jede dieser Karten kann als Hauptkarte (Basiskarte) oder als Überlagerung oder Hinterlegung anderen Basiskarten (wie die Offline-Vektorkarten von OsmAnd) angezeigt werden. Bestimmte Elemente der OsmAnd-Vektorkarten können über das Menü „Karte konfigurieren“ ausgeblendet werden, um die darunterliegende Karte besser sichtbar zu machen.
-\n
-\n Laden Sie Kachelkarten direkt herunter oder kopieren Sie sie als SQLite-Datenbankdateien in den Datenordner von OsmAnd, indem Sie eines der vielen Kartenvorbereitungstools von Drittanbietern verwenden.</string>
+    <string name="osmand_rastermaps_plugin_description">Zugriff auf viele Online-Karten (sogenannte Kachel- oder Rasterkarten), wie vorgerenderte OSM-Kacheln, Satellitenbilder und Spezialebenen wie Wetterkarten, Klimakarten, geologische Karten, Hügelschattenebenen usw. \n \n Jede dieser Karten kann als Hauptkarte (Basiskarte) oder als Overlay oder Underlay anderen Basiskarten (wie die Offline-Vektorkarten von OsmAnd) angezeigt werden. Bestimmte Elemente der OsmAnd-Vektorkarten können über das Menü „Karte konfigurieren“ ausgeblendet werden, um die darunterliegende Karte besser sichtbar zu machen. \n \n Laden Sie Kachelkarten direkt herunter oder kopieren Sie sie als SQLite-Datenbankdateien in den Datenordner von OsmAnd, indem Sie eines der vielen Kartenvorbereitungstools von Drittanbietern verwenden.</string>
     <string name="osmand_background_plugin_description">Zeigt die Einstellungen zum Einschalten der Hintergrundaufzeichnung und -Navigation durch regelmäßiges Aufwecken des GPS-Empfängers (bei ausgeschaltetem Bildschirm) an.</string>
     <string name="osmand_accessibility_description">Macht die Bedienungshilfen des Geräts direkt in OsmAnd verfügbar. Dies erleichtert z. B. die Anpassung der Sprechgeschwindigkeit für Text-to-Speech-Stimmen, die Konfiguration der D-Pad-Navigation, die Verwendung eines Trackballs zur Zoomsteuerung oder für Text-to-Speech-Rückmeldung, um beispielsweise Ihre Position automatisch anzusagen.</string>
     <string name="osmand_development_plugin_description">Bietet Funktionen zum Testen und Debuggen von OsmAnd: Simulieren von Navigationsrouten, Überwachen der Bildschirmdarstellung, Prüfen der Leistung usw. Diese Erweiterung ist für die normale Nutzung der App nicht erforderlich.</string>
@@ -333,7 +329,7 @@
     <string name="animate_route">Simulation starten</string>
     <string name="file_can_not_be_renamed">Datei konnte nicht umbenannt werden.</string>
     <string name="file_with_name_already_exists">Eine Datei mit diesem Namen existiert bereits.</string>
-    <string name="poi_query_by_name_matches_categories">Mehrere passende OVI-Kategorien gefunden.</string>
+    <string name="poi_query_by_name_matches_categories">Mehrere passende POI-Kategorien gefunden.</string>
     <string name="data_to_search_poi_not_available">Laden Sie Offline-Daten herunter, um nach POIs zu suchen.</string>
     <string name="poi_filter_by_name">Nach Namen suchen</string>
     <string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
@@ -431,7 +427,7 @@
     <string name="install_more">Weitere hinzufügen …</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online-OSM</u>-Kartenklassifizierung mit Bildern.</string>
     <string name="error_doing_search">Offline-Suche konnte nicht durchgeführt werden.</string>
     <string name="search_osm_offline">Suche nach Standort</string>
     <string name="system_locale">Systemeinstellung</string>
@@ -706,7 +702,7 @@
     <string name="loading_postcodes">Postleitzahlen werden geladen …</string>
     <string name="loading_streets">Straßen werden geladen …</string>
     <string name="loading_cities">Orte werden geladen …</string>
-    <string name="poi">OVI</string>
+    <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">GPX-Datei konnte nicht gespeichert werden.</string>
     <string name="error_calculating_route">Route konnte nicht berechnet werden.</string>
     <string name="error_calculating_route_occured">Route konnte nicht berechnet werden.</string>
@@ -744,7 +740,7 @@
     <string name="map_view_3d_descr">3D-Kartenansicht verwenden.</string>
     <string name="map_view_3d">3D-Kartenansicht</string>
     <string name="show_poi_over_map_description">Zuletzt verwendetes POI-Overlay anzeigen.</string>
-    <string name="show_poi_over_map">OVI-Overlay anzeigen</string>
+    <string name="show_poi_over_map">POI-Overlay anzeigen</string>
     <string name="map_tile_source_descr">Quelle für Online- oder zwischengespeicherte Kartenkacheln wählen.</string>
     <string name="map_tile_source">Kachelkartenquelle</string>
     <string name="map_source">Kartenquelle</string>
@@ -833,7 +829,7 @@
     <string name="basemap_was_selected_to_download">Die Basiskarte, die zur Bereitstellung grundlegender Funktionen erforderlich ist, befindet sich in der Downloadwarteschlange.</string>
     <string name="local_index_routing_data">Routing-Daten</string>
     <string name="navigate_point_format">Format</string>
-    <string name="poi_search_desc">OVI-Suche (Ort von Interesse)</string>
+    <string name="poi_search_desc">POI-Suche (Ort von Interesse)</string>
     <string name="address_search_desc">Adresssuche</string>
     <string name="navpoint_search_desc">Koordinaten</string>
     <string name="transport_search_desc">ÖPNV-Suche</string>
@@ -2099,7 +2095,7 @@
     <string name="quick_action_add_gpx_descr">Eine Schaltfläche, um einen GPX-Wegpunkt in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_add_osm_bug_descr">Eine Schaltfläche, um einen OSM-Hinweis in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_add_poi_descr">Eine Schaltfläche, um einen POI in der Bildschirmmitte einzufügen.</string>
-    <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
+    <string name="quick_action_navigation_voice_descr">Ein Schalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
     <string name="quick_action_add_parking_descr">Eine Schaltfläche, um eine Parkposition in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten anzeigen</string>
     <string name="favorite_autofill_toast_text">" gespeichert unter "</string>
@@ -2625,7 +2621,7 @@
     <string name="topo_render_descr">Für Wanderungen, Trekking und Radfahren in der Natur. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenbeschaffenheit kennzeichnet die Straßenqualität. Kein Nachtmodus.</string>
     <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC/CAI-Skala, Wildwassersportmerkmale, topografische Funktionen wie Höhenlinien.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
-    <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem Kartenstil „Topo“ und zur Verwendung mit grünen Satellitenbildern als Unterlage. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
+    <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem Kartenstil „Topo“ und zur Verwendung mit grünen Satellitenbildern als Underlay. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
     <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den „Touring-Atlas“. Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Zwischenankunftszeit</string>
@@ -2678,7 +2674,7 @@
     <string name="shared_string_launch">Starten</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="run_full_osmand_header">OsmAnd starten\?</string>
-    <string name="quick_action_switch_day_night_descr">Umschalter, um zwischen Tag- und Nacht-Modus für OsmAnd zu wechseln.</string>
+    <string name="quick_action_switch_day_night_descr">Ein Schalter, um zwischen Tag- und Nachtmodus für OsmAnd zu wechseln.</string>
     <string name="quick_action_switch_day_mode">Tag-Modus</string>
     <string name="quick_action_switch_night_mode">Nacht-Modus</string>
     <string name="quick_action_day_night_switch_mode">Tag-/Nacht-Modus umschalten</string>
@@ -2690,7 +2686,7 @@
     <string name="transfers">Umstiege</string>
     <string name="on_foot">Zu Fuß</string>
     <string name="route_way">Weg</string>
-    <string name="points_of_interests">Orte von Interesse (OVI)</string>
+    <string name="points_of_interests">Orte von Interesse (POI)</string>
     <string name="waiting_for_route_calculation">Route wird berechnet …</string>
     <string name="app_mode_public_transport">Öffentlicher Verkehr</string>
     <string name="avoid_roads_descr">Wählen Sie eine Straße, die Sie während der Navigation vermeiden möchten, entweder auf der Karte oder aus der folgenden Liste:</string>
@@ -3733,7 +3729,7 @@
     <string name="routing_engine_vehicle_type_walking">Fußgänger</string>
     <string name="routing_engine_vehicle_type_cycling_electric">E-Bike fahren</string>
     <string name="routing_engine_vehicle_type_cycling_road">Straßenradsport</string>
-    <string name="routing_engine_vehicle_type_cycling_mountain">Bergradsport</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Mountainbiking</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Normales Radfahren</string>
     <string name="routing_engine_vehicle_type_hgv">Lkw</string>
     <string name="routing_engine_vehicle_type_small_truck">Kleintransporter</string>
@@ -4219,7 +4215,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme-Tags anzeigen</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons bei niedrigen Zoomstufen</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme-Tags</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Eine schematische Darstellung von Symbolen bei niedrigen Zoomstufen für diejenigen OVI, die normalerweise nicht angezeigt werden</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Eine schematische Darstellung von Symbolen bei niedrigen Zoomstufen für diejenigen POIs, die normalerweise nicht angezeigt werden</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -4336,7 +4332,7 @@
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
     <string name="average_speed_skip_stops">Zwischenstopps berücksichtigen</string>
     <string name="map_widget_true_bearing">Tatsächliche Peilung</string>
-    <string name="average_speed_time_interval_desc">Gib das Zeitintervall für die Durchschnittsberechnung der Geschwindigkeit an.</string>
+    <string name="average_speed_time_interval_desc">Geben Sie das Zeitintervall für die Berechnung der Durchschnittsgeschwindigkeit an.</string>
     <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Reise an.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
     <string name="time_to_navigation_point_widget_settings_desc">Tippen Sie auf das Widget, um den Modus zu wechseln.</string>
@@ -4866,8 +4862,8 @@
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_small_name">Klein</string>
     <string name="rendering_value_name_only_name">Nur Name</string>
-    <string name="poi_categories">OVI-Kategorien</string>
-    <string name="no_poi_for_category">OVI nicht gefunden</string>
+    <string name="poi_categories">POI-Kategorien</string>
+    <string name="no_poi_for_category">POI nicht gefunden</string>
     <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie diese nach oben und unten, um die Kartenneigung anzupassen.</string>
     <string name="map_2d_mode_action">2D-Modus</string>
     <string name="map_3d_mode_action">3D-Modus</string>
@@ -5371,7 +5367,7 @@
     <string name="quick_action_next_app_profile">App-Profil zum nächsten</string>
     <string name="shared_string_replace">Ersetzen</string>
     <string name="shared_string_simulate">Simulieren</string>
-    <string name="quick_action_map_underlay">Unterlage</string>
+    <string name="quick_action_map_underlay">Unterlay</string>
     <string name="quick_action_map_style">Kartenstil</string>
     <string name="quick_action_move_map_down">Karte nach unten</string>
     <string name="quick_action_move_map_up">Karte nach oben</string>
@@ -5820,7 +5816,7 @@
     <string name="descent">Gefälle</string>
     <string name="map_orientations_choose_description">Leer lassen, um zwischen allen verfügbaren Modi zu wechseln, oder nur Ihre bevorzugten Modi hinzufügen.</string>
     <string name="map_orientations">Kartenorientierungen</string>
-    <string name="altitude_metrics_description">Bestimmt die Einheit für die Höhenanzeige in Widgets und Statistiken.</string>
+    <string name="altitude_metrics_description">Legt die Anzeigeeinheit für die Höhe in Widgets und Statistiken fest.</string>
     <string name="write_location_provider_description">Standortanbieter während der Aufzeichnung für jeden Aufnahmepunkt speichern</string>
     <string name="write_location_provider">Standortanbieter schreiben</string>
     <string name="map_orientation_landscape_inverted">Querformat (umgekehrt)</string>
@@ -5914,6 +5910,12 @@
     <string name="average_slope">Durchschnittliche Hangneigung</string>
     <string name="shared_string_last_uphill">Letzte Bergauffahrt</string>
     <string name="shared_string_last_downhill">Letzte Bergabfahrt</string>
-    <string name="requires_internet_connection">Benötigt eine Internetverbindung</string>
+    <string name="requires_internet_connection">Erfordert eine Internetverbindung</string>
     <string name="save_and_access_articles_offline">Daten speichern und überall offline auf Artikel zugreifen</string>
+    <string name="quick_action_wind_animation_layer">Ein Schalter zum Ein- oder Ausblenden der Windanimationsebene auf der Karte.</string>
+    <string name="quick_action_weather_layers">Ein Schalter zum Ein- oder Ausblenden von Wetterebenen auf der Karte.</string>
+    <string name="wind_animation_layer">Windanimationsebene</string>
+    <string name="weather_layers">Wetterebenen</string>
+    <string name="download_wikipedia_label">Wikipedia herunterladen</string>
+    <string name="private_access_routing_req_short">Erlauben Sie die Nutzung einer Privatstraße, um Ihr Ziel zu erreichen?</string>
 </resources>

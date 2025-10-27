@@ -5897,4 +5897,8 @@
     <string name="save_and_access_articles_offline">Ŝparas uzon de datum-konekto, ebligas aliri artikolojn malkonekte</string>
     <string name="private_access_routing_req_short">Ĉu permesi uzi privatan vojon por aliri vian celon?</string>
     <string name="download_wikipedia_label">Elŝuti Vikipedion</string>
+    <string name="quick_action_weather_layers">Butono por montri/kaŝi tavolojn de vetero sur la mapo.</string>
+    <string name="quick_action_wind_animation_layer">Butono por montri/kaŝi movbildan tavolon de vento sur la mapo.</string>
+    <string name="wind_animation_layer">Movbilda tavolo de vento</string>
+    <string name="weather_layers">Tavoloj de vetero</string>
 </resources>
