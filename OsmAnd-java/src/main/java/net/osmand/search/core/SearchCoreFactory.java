@@ -707,11 +707,10 @@ public class SearchCoreFactory {
 								}
 								
 							}
-							if (newParentSearchResult != null) {
-								System.out.println(newParentSearchResult + "  " + res + " " +
-										MapUtils.getDistance(newParentSearchResult.location, res.location));
-							}
-							System.out.println(res);
+//							if (newParentSearchResult != null) {
+//								System.out.println(newParentSearchResult + "  " + res + " " +
+//										MapUtils.getDistance(newParentSearchResult.location, res.location));
+//							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
 							// FIXME UNIT-TESTS
