@@ -219,8 +219,12 @@ public class SearchCoreFactory {
 						it.remove();
 					}
 				}
-				if (!fullMatch && phrase.getFirstUnknownNameStringMatcher().matches(otherNames)) {
-					return true;
+				for (String otherName : otherNames) {
+					if (phrase.getFirstUnknownNameStringMatcher().matches(otherName)) {
+						if (!fullMatch || phrase.getCollator().equals(phrase.getFirstUnknownSearchWord(), otherName)) {
+							return true;
+						}
+					}
 				}
 			}
 			List<String> leftUnknownSearchWords = parent == null ? phrase.getUnknownSearchWords() : parent.filterUnknownSearchWord(null);
@@ -237,8 +241,12 @@ public class SearchCoreFactory {
 						it.remove();
 					}
 				}
-				if (!fullMatch && phrase.getUnknownNameStringMatcher(i).matches(otherNames)) {
-					return true;
+				for (String otherName : otherNames) {
+					if (phrase.getUnknownNameStringMatcher(i).matches(otherName)) {
+						if (!fullMatch || phrase.getCollator().equals(phrase.getUnknownSearchWords().get(i), otherName)) {
+							return true;
+						}
+					}
 				}
 			}
 			if (localeNames.size() == 0) {
@@ -608,6 +616,7 @@ public class SearchCoreFactory {
 				// 7 J.-F.-Weishaar-Straße Korb
 				// 10 Martin-Luther-Straße Korb
 				// 35 Ostheimer Weg Korntal-Münchingen
+				// 15 Blumenstraße Esslingen (alt:name matchAddressByName)
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
@@ -668,7 +677,6 @@ public class SearchCoreFactory {
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
 								// for street-city don't require exact matching 
-								
 								boolean match = matchAddressName(phrase, res, cityResult,  true);
 								if (match) {
 									newParentSearchResult = cityResult;
@@ -697,11 +705,13 @@ public class SearchCoreFactory {
 										}
 									}
 								}
+								
 							}
-//							if (newParentSearchResult != null) {
-//								System.out.println(newParentSearchResult + "  " + res + " " +
-//										MapUtils.getDistance(newParentSearchResult.location, res.location));
-//							}
+							if (newParentSearchResult != null) {
+								System.out.println(newParentSearchResult + "  " + res + " " +
+										MapUtils.getDistance(newParentSearchResult.location, res.location));
+							}
+							System.out.println(res);
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
 							// FIXME UNIT-TESTS
