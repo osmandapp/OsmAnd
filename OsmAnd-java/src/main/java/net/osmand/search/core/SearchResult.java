@@ -91,6 +91,12 @@ public class SearchResult {
 	}
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
+		// FIXME unit tests
+		// 101 South Main Street Ashley (101, South Main Street, Luzerne)
+		// 423 Waverly Street Waverly 
+		// 211 Walnut Street Elmira (211, South Walnut Street, Elmira)
+		
+		// 15 Blumenstraße Esslingen  TODO
 		double res = ObjectType.getTypeWeight(objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched

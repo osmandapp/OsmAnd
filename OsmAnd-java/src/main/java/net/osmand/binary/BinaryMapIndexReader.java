@@ -57,7 +57,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
-import net.osmand.binary.BinaryIndexPart.CacheByNameIndex;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
@@ -2600,30 +2599,6 @@ req.setSearchStat(stat);
 	void readIndexedStringTable(BinaryIndexPart part, Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
-		CacheByNameIndex fillCache = null;
-		if (prefix.length() == 0) {
-			if (part.cacheByName == null) {
-				fillCache = new CacheByNameIndex();
-				part.cacheByName = fillCache;
-			} else {
-				Iterator<Entry<String, Integer>> it = part.cacheByName.cacheKeyVal.entrySet().iterator();
-				while (it.hasNext()) {
-					Entry<String, Integer> e = it.next();
-					String key = e.getKey();
-					int val = e.getValue();
-					boolean shouldWeReadSubtable = matchIndexByNameKey(instance, queries, listOffsets,
-							matchedCharacters, key, matched);
-					for (int i = 0; i < queries.size(); i++) {
-						if (matched[i]) {
-							listOffsets.get(i).add(val);
-						}
-					}
-					// FIXME use shouldWeReadSubtable
-				}
-				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				return;
-			}
-		}
 		String key = null;
 		boolean shouldWeReadSubtable = false;
 		while (true) {
@@ -2642,9 +2617,6 @@ req.setSearchStat(stat);
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = (int) readInt(); // FIXME
-				if (fillCache != null) {
-					fillCache.cacheKeyVal.put(key, val);
-				}
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i]) {
 						listOffsets.get(i).add(val);
