@@ -5,9 +5,9 @@ import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.*
+import androidx.core.graphics.toColorInt
 import androidx.core.graphics.withMatrix
 import androidx.core.graphics.withSave
-import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.*
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.views.OsmandMapTileView
@@ -48,7 +48,7 @@ class CelestialPathView @JvmOverloads constructor(
 		var elevationMeters: Double = 0.0,
 		var projection: Projection = Projection.EQUIDISTANT,
 		var showPaths: Boolean = true,
-		var showInstantLocations: Boolean = false,
+		var showInstantLocations: Boolean = true,
 		var minuteSample: Int = 10
 	) {
 		fun equalsTo(other: Config, eps: Double = 1e-3): Boolean {
@@ -183,7 +183,7 @@ class CelestialPathView @JvmOverloads constructor(
 	}
 
 	// ---------- Paints ----------
-	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#17181A".toColorInt() }
+	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#E4424242".toColorInt() }
 	private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		style = Paint.Style.STROKE; color = 0x33FFFFFF; strokeWidth = dp(1f)
 		pathEffect = DashPathEffect(floatArrayOf(dp(2f), dp(4f)), 0f)
@@ -193,9 +193,13 @@ class CelestialPathView @JvmOverloads constructor(
 	private val smallPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(10f); textAlign = Paint.Align.CENTER }
 	private val pathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeWidth = dp(2f) }
 	private val markerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
-	private val titlePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.CYAN; textSize = sp(16f); textAlign = Paint.Align.CENTER }
-	private val panelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xCC101114.toInt() }
+	private val titlePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD); textAlign = Paint.Align.CENTER
+	}
+	private val panelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x8C101114.toInt() }
 	private val panelStroke = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; color = 0x55FFFFFF; strokeWidth = dp(1f) }
+	private val hourPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(11f); textAlign = Paint.Align.LEFT }
+	private val hourDotPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; style = Paint.Style.FILL }
 
 	private fun dp(v: Float) = v * resources.displayMetrics.density
 	private fun sp(v: Float) = v * resources.displayMetrics.scaledDensity
@@ -204,7 +208,7 @@ class CelestialPathView @JvmOverloads constructor(
 	private data class Model(val start: ZonedDateTime, val end: ZonedDateTime, val observer: Observer)
 	private var cachedModel: Model? = null
 
-	private fun ensureConfig() {
+	private fun updateConfig() {
 		val loc = mapTileView.currentRotatedTileBox.centerLatLon
 		val fresh = Config(
 			date = LocalDate.now(),
@@ -235,7 +239,7 @@ class CelestialPathView @JvmOverloads constructor(
 
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
-		ensureConfig()
+		updateConfig()
 		val m = cachedModel ?: buildModel().also { cachedModel = it }
 
 		canvas.drawColor(bgPaint.color)
@@ -288,15 +292,6 @@ class CelestialPathView @JvmOverloads constructor(
 
 		// info panel (2) for selection
 		selected?.let { drawInfoPanel(canvas, it, m) }
-	}
-
-	private fun momentNowClamped(m: Model): ZonedDateTime {
-		val t = (moment ?: ZonedDateTime.now(config.zoneId)).withSecond(0).withNano(0)
-		return when {
-			t.isBefore(m.start) -> m.start
-			t.isAfter(m.end)    -> m.end
-			else -> t
-		}
 	}
 
 	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -369,7 +364,7 @@ class CelestialPathView @JvmOverloads constructor(
 		"#FFB36E".toColorInt(), // 18
 		"#FF814C".toColorInt()  // 21
 	)
-	private fun colorForUtcHour(h: Int): Int {
+	private fun colorForHour(h: Int): Int {
 		val idx = hourStops.indexOfLast { h >= it }
 		return hourColors[if (idx < 0) 0 else idx]
 	}
@@ -399,8 +394,7 @@ class CelestialPathView @JvmOverloads constructor(
 				is CelestialEntry.Planet -> topocentric(entry.body, t, m.observer)
 				is CelestialEntry.Fixed -> topocentricFromRaDec(entry.raHours, entry.decDeg, t, m.observer)
 			}
-			val hourUtc = t.withZoneSameInstant(ZoneOffset.UTC).hour
-			val color = colorForUtcHour(hourUtc)
+			val color = colorForHour(t.hour)
 			if (currentColor != color) { flushSegment(); currentColor = color }
 			if (topo.altitude > -1.0) {
 				val p = azAltToPoint(topo.azimuth, topo.altitude, radius)
@@ -414,27 +408,12 @@ class CelestialPathView @JvmOverloads constructor(
 		// label & rise/set markers
 		if (ptsForHit.isNotEmpty()) {
 			val mid = ptsForHit.size/4
-			drawText(canvas, entry.name, ptsForHit[mid], ptsForHit[mid+1] - dp(8f)/scale, smallPaint)
+			//drawText(canvas, entry.name, ptsForHit[mid], ptsForHit[mid+1] - dp(8f)/scale, smallPaint)
 			polylines += Poly(entry, ptsForHit.toFloatArray())
 		}
-		if (entry is CelestialEntry.Planet) {
-			drawRiseSetLabels(canvas, entry.body, m, radius, entry.color)
-		}
-
-		// highlight marker at current time (or moment), so it sits on the path
-		if (entry == selected) {
-			val tNow = momentNowClamped(m)
-			val topoNow = when (entry) {
-				is CelestialEntry.Planet -> topocentric(entry.body, tNow, m.observer)
-				is CelestialEntry.Fixed  -> topocentricFromRaDec(entry.raHours, entry.decDeg, tNow, m.observer)
-			}
-			// Only draw if we're drawing that part of the path (>= -1° like the path sampler)
-			if (topoNow.altitude > -1.0) {
-				val pNow = azAltToPoint(topoNow.azimuth, topoNow.altitude, radius)
-				markerPaint.color = Color.WHITE
-				canvas.drawCircle(pNow.x, pNow.y, dp(4.5f)/scale, markerPaint)
-			}
-		}
+//		if (entry is CelestialEntry.Planet) {
+//			drawRiseSetLabels(canvas, entry.body, m, radius, entry.color)
+//		}
 	}
 
 	private fun drawRiseSetLabels(canvas: Canvas, body: Body, m: Model, radius: Float, color: Int) {
@@ -462,8 +441,9 @@ class CelestialPathView @JvmOverloads constructor(
 		// layout bottom center
 		val dot = dp(8f)
 		val gap = dp(10f)
-		val widthNeeded = labels.size*dot + (labels.size-1)*gap + dp(24f)
-		val left = (width - widthNeeded)/2f
+		val hourWidth = hourPaint.measureText("00")
+		val widthNeeded = labels.size * (dot + gap + hourWidth + gap) - gap * 2f + dp(24f)
+		val left = (width - widthNeeded) / 2f
 		val top = height - dp(44f)
 		val r = RectF(left, top, left + widthNeeded, top + dp(32f))
 		// panel bg
@@ -472,12 +452,10 @@ class CelestialPathView @JvmOverloads constructor(
 
 		var x = r.left + dp(12f)
 		val y = r.centerY()
-		val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(11f); textAlign = Paint.Align.LEFT }
 		for (i in labels.indices) {
-			val p = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = hourColors[i]; style = Paint.Style.FILL }
-			canvas.drawCircle(x + dot/2, y, dot/2, p)
-			canvas.drawText(labels[i], x + dot + dp(4f), y + sp(4f)/3, textPaint)
-			x += dot + gap + dp(20f)
+			canvas.drawCircle(x + dot / 2, y, dot / 2, hourDotPaint.apply { color = hourColors[i] })
+			canvas.drawText(labels[i], x + dot + dp(4f), y + sp(4f), hourPaint)
+			x += gap + dot + gap + hourWidth
 		}
 	}
 

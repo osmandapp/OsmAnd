@@ -72,7 +72,7 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 	private val legendLineH = dp(22f)
 
 	// ---------- Paints ----------
-	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#B4424242".toColorInt() }
+	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#E4424242".toColorInt() }
 	private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#80868B".toColorInt(); strokeWidth = dp(1f) }
 	private val zeroPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = Color.WHITE; strokeWidth = dp(1.2f); pathEffect = DashPathEffect(floatArrayOf(10f,10f), 0f)
@@ -82,7 +82,6 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 	private val twiAstro = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC2B4C7E".toColorInt() }
 	private val twiNaut  = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC3C7AA6".toColorInt() }
 	private val twiCivil = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC5BBBF0".toColorInt() }
-
 	private val labelPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
 	}

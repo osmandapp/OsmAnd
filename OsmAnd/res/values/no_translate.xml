@@ -80,7 +80,7 @@
     <string name="planets_visibility_widget_desc">Shows visibility of the planets for the current map center.</string>
     <string name="planets_altitude">Planets altitude</string>
     <string name="planets_altitude_widget_desc">Shows altitude of the planets above the horizon for the current map center.</string>
-    <string name="planets_circle_chart">Planets circle chart</string>
-    <string name="planets_circle_chart_widget_desc">Shows circle chart of the planets for the current map center.</string>
+    <string name="celestial_path_chart">Celestial path chart</string>
+    <string name="celestial_path_chart_widget_desc">Shows celestial path chart for the current map center.</string>
 
 </resources>

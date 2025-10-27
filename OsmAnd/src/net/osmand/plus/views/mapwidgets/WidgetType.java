@@ -151,7 +151,7 @@ public enum WidgetType {
 
 	PLANETS_VISIBILITY_WIDGET("planets_visibility", R.string.planets_visibility, R.string.planets_visibility_widget_desc, R.drawable.ic_action_world_globe, R.drawable.ic_action_world_globe, 0, SKY_CHART, BOTTOM),
 	PLANETS_ALTITUDE_WIDGET("planets_altitude", R.string.planets_altitude, R.string.planets_altitude_widget_desc, R.drawable.ic_action_get_my_location, R.drawable.ic_action_get_my_location, 0, SKY_CHART, BOTTOM),
-	CELESTIAL_PATH_WIDGET("celestial_path", R.string.planets_circle_chart, R.string.planets_circle_chart_widget_desc, R.drawable.ic_action_get_my_location, R.drawable.ic_action_get_my_location, 0, SKY_CHART, BOTTOM);
+	CELESTIAL_PATH_WIDGET("celestial_path", R.string.celestial_path_chart, R.string.celestial_path_chart_widget_desc, R.drawable.ic_action_get_my_location, R.drawable.ic_action_get_my_location, 0, SKY_CHART, BOTTOM);
 
 	public static final String INTERMEDIATE_TIME_WIDGET_LEGACY = "intermediate_time";
 	public static final String NAVIGATION_TIME_WIDGET_LEGACY = "time";

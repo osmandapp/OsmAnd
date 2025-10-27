@@ -88,7 +88,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 	private val bottomPad = dp(16f)
 
 	// ---------- Paints ----------
-	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#B4424242".toColorInt() }
+	private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#E4424242".toColorInt() }
 	private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = "#80868B".toColorInt(); strokeWidth = dp(1f)
 	}
