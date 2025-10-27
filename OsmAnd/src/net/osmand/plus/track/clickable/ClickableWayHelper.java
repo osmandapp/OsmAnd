@@ -70,7 +70,7 @@ public class ClickableWayHelper {
 
     @Nullable
     public ClickableWay loadClickableWay(@NonNull LatLon selectedLatLon, @NonNull RenderedObject renderedObject) {
-        long osmId = ObfConstants.getOsmObjectId(renderedObject);
+        long osmId = ObfConstants.getOsmIdFromBinaryMapObjectId(renderedObject.getId());
         Map<String, String> tags = renderedObject.getTags();
         String name = renderedObject.getName();
         TIntArrayList xPoints = renderedObject.getX();
