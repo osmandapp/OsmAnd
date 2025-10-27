@@ -514,7 +514,7 @@ public class SearchCoreFactory {
 							sr.objectType = ObjectType.STREET;
 							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 							sr.relatedObject = ((Street)object).getCity();
-						} else if (object instanceof City) {
+						} else if (object instanceof City && !isLastWordCityGroup(phrase)) {
 							CityType type = ((City)object).getType();
 							if (type == CityType.CITY || type == CityType.TOWN) {
 								if (phrase.isNoSelectedType()) {

@@ -6,10 +6,8 @@ import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
-import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
@@ -93,10 +91,11 @@ public class SearchResult {
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
 		// FIXME unit tests
 		// 101 South Main Street Ashley (101, South Main Street, Luzerne)
-		// 423 Waverly Street Waverly 
 		// 211 Walnut Street Elmira (211, South Walnut Street, Elmira)
 		
+		// 423 Waverly Street Waverly 
 		// 15 Blumenstraße Esslingen  TODO
+		// 12 Friedhofstraße Stuttgart (new name - Goslarer Straße)
 		// 26 Panoramastraße Weinstadt 
 		double res = ObjectType.getTypeWeight(objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
