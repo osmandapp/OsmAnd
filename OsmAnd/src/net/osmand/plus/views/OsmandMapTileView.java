@@ -161,7 +161,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public interface MapZoomChangeListener {
-		void onMapZoomChanged(boolean manual);
+		void onMapZoomChanged(boolean manual, double oldZoom, double newZoom);
 	}
 
 	public interface ViewportListener {
@@ -651,8 +651,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
 
+		int newZoom = zoom.getBaseZoom();
 		for (MapZoomChangeListener listener : manualZoomListeners) {
-			listener.onMapZoomChanged(true);
+			listener.onMapZoomChanged(true, previousZoom, newZoom);
 		}
 	}
 
@@ -1105,8 +1106,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		double fullZoom = currentViewport.getFullZoom();
 		if (Math.abs(fullZoom - this.fullZoom) >= 0.0001f) {
+			double oldZoom = this.fullZoom;
 			this.fullZoom = fullZoom;
-			notifyMapZoomChanged();
+			notifyMapZoomChanged(oldZoom, fullZoom);
 		}
 
 		if (updateMapRenderer || viewportChanged || centerChanged) {
@@ -2532,9 +2534,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void notifyMapZoomChanged() {
+	private void notifyMapZoomChanged(double oldZoom, double newZoom) {
 		for (MapZoomChangeListener listener : manualZoomListeners) {
-			listener.onMapZoomChanged(false);
+			listener.onMapZoomChanged(false, oldZoom, newZoom);
 		}
 	}
 

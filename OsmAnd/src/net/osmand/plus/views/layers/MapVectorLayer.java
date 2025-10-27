@@ -28,7 +28,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 
-public class MapVectorLayer extends BaseMapLayer {
+public class MapVectorLayer extends BaseMapLayer implements OsmandMapTileView.MapZoomChangeListener {
 
 	private final ResourceManager resourceManager;
 	private Paint paintImg;
@@ -49,7 +49,20 @@ public class MapVectorLayer extends BaseMapLayer {
 	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
+		if (view != null) {
+			view.removeMapZoomChangeListener(this);
+		}
 		resetLayerProvider();
+	}
+
+	@Override
+	public void onMapZoomChanged(boolean manual, double oldZoom, double newZoom) {
+		if (isVisible()) {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				mapRendererContext.updateLocalization(newZoom);
+			}
+		}
 	}
 
 	@Override
@@ -65,6 +78,8 @@ public class MapVectorLayer extends BaseMapLayer {
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
 		cachedLabelsVisible = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
+		
+		view.addMapZoomChangeListener(this);
 	}
 
 	public boolean isVectorDataVisible() {
@@ -161,7 +176,6 @@ public class MapVectorLayer extends BaseMapLayer {
 				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 				if (mapRendererContext != null) {
 					mapRendererContext.setNightMode(drawSettings.isNightMode());
-					mapRendererContext.updateLocalization();
 				}
 			}
 			if ((mapRendererChanged || alphaChanged || symbolsAlphaChanged || visibleChanged || labelsVisibleChanged) && visible) {

@@ -154,15 +154,17 @@ public class MapRendererContext {
 		}
 	}
 
-	public void updateLocalization() {
-		int zoom = app.getOsmandMap().getMapView().getZoom();
+	public void updateLocalization(double newZoom) {
+		int zoom = (int)newZoom;
 		boolean useAppLocale = MapRenderRepositories.isBasemapZoom(zoom);
 		if (this.useAppLocale != useAppLocale) {
 			this.useAppLocale = useAppLocale;
 			updateMapSettings(false);
 		}
 
+		String langId = MapRenderRepositories.getMapPreferredLocale(app, zoom);
 		LanguagePreference langPref = MapRenderRepositories.getMapLanguageSetting(app, zoom);
+		mapPresentationEnvironment.setLocaleLanguageId(langId);
 		mapPresentationEnvironment.setLanguagePreference(langPref);
 	}
 
@@ -262,7 +264,7 @@ public class MapRendererContext {
 		mapPresentationEnvironment.setSettings(styleSettings);
 
 		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
-			if (recreateMapPresentation || forceUpdateProviders || languageParamsChanged) {
+			if (recreateMapPresentation || forceUpdateProviders) {
 				recreateRasterAndSymbolsProvider(providerType);
 			}
 			setMapBackgroundColor();

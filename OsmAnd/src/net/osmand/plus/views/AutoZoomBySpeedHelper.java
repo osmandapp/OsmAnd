@@ -266,7 +266,7 @@ public class AutoZoomBySpeedHelper implements MapZoomChangeListener, TouchListen
 	}
 
 	@Override
-	public void onMapZoomChanged(boolean manual) {
+	public void onMapZoomChanged(boolean manual, double oldZoom, double newZoom) {
 		if (manual) {
 			nextTurnInFocus = null;
 		}

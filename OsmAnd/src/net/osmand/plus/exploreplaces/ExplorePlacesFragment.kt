@@ -402,7 +402,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 		updatePoints()
 	}
 
-	override fun onMapZoomChanged(manual: Boolean) {
+	override fun onMapZoomChanged(manual: Boolean, oldZoom: Double, newZoom: Double) {
 		if (manual) {
 			updatePoints()
 		}
