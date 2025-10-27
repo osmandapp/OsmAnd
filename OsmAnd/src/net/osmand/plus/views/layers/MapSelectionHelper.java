@@ -223,10 +223,12 @@ public class MapSelectionHelper {
 
 				String routeId = tags.get(ROUTE_ID);
 				boolean isNewOsmRoute = isNewOsmRoute(routeId, isTravelGpx);
-				boolean shouldFilter = renderedObject.getId() == null || !renderedObject.isVisible() || renderedObject.isDrawOnPath();
 				boolean isSpecial = isOldOsmRoute || isNewOsmRoute || isTravelGpx || isClickableWay;
 
-				if ((isSpecial && rules.isOnlyPoints()) || (!isSpecial && shouldFilter)) {
+				boolean shouldFilterRenderedObject = renderedObject.getId() == null
+						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath();
+
+				if ((isSpecial && rules.isOnlyPoints()) || (!isSpecial && shouldFilterRenderedObject)) {
 					continue;
 				}
 
@@ -264,12 +266,11 @@ public class MapSelectionHelper {
 					addTravelGpx(result, routeId); // user TravelGpx
 				}
 
-				boolean allowAmenityObjects = !isTravelGpx;
+				boolean allowAmenityObjects = !isSpecial && !renderedObject.isDrawOnPath();
 
 				if (allowAmenityObjects) {
 					boolean allowRenderedObjects = !isOldOsmRoute && !isClickableWay
 							&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
-
 					if (allowRenderedObjects) {
 						result.collect(renderedObject, null);
 					} else {
@@ -277,6 +278,7 @@ public class MapSelectionHelper {
 						addAmenity(result, renderedObject, searchLatLon);
 					}
 				}
+
 				if (objectId != null) {
 					uniqueRenderedObjectIds.add(objectId);
 				}
@@ -348,27 +350,23 @@ public class MapSelectionHelper {
 							addTravelGpx(result, routeId); // user TravelGpx
 						}
 
-						boolean allowAmenityObjects = !isTravelGpx;
+						IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
+						boolean allowAmenityObjects = !isSpecial && onPathMapSymbol == null;
 
 						if (allowAmenityObjects) {
-							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
-							if (onPathMapSymbol == null) {
-								boolean allowRenderedObjects = !isOldOsmRoute && !isClickableWay
-										&& !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
-
-								RenderedObject renderedObject = createRenderedObject(symbolInfo, obfMapObject, tags);
-								if (renderedObject != null) {
-									if (allowRenderedObjects) {
-										result.collect(renderedObject, null);
-									} else {
-										AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
-										AmenitySearcher.Request request = new AmenitySearcher.Request(renderedObject);
-										detailsObject = amenitySearcher.searchDetailedObject(request, settings);
-										if (detailsObject != null) {
-											detailsObject.setMapIconName(getMapIconName(symbolInfo));
-											addGeometry(detailsObject, obfMapObject);
-											detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
-										}
+							boolean allowRenderedObjects = !NetworkRouteSelector.containsUnsupportedRouteTags(tags);
+							RenderedObject renderedObject = createRenderedObject(symbolInfo, obfMapObject, tags);
+							if (renderedObject != null) {
+								if (allowRenderedObjects) {
+									result.collect(renderedObject, null);
+								} else {
+									AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+									AmenitySearcher.Request request = new AmenitySearcher.Request(renderedObject);
+									detailsObject = amenitySearcher.searchDetailedObject(request, settings);
+									if (detailsObject != null) {
+										detailsObject.setMapIconName(getMapIconName(symbolInfo));
+										addGeometry(detailsObject, obfMapObject);
+										detailsObject.setObfResourceName(obfMapObject.getObfSection().getName());
 									}
 								}
 							}
