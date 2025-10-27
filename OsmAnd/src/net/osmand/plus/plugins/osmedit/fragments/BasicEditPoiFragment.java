@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,10 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnFragmentA
 import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursDaysDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
@@ -116,6 +121,19 @@ public class BasicEditPoiFragment extends BaseFullScreenFragment implements OnFr
 		onFragmentActivated();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createCustomBuilder(R.id.content_recycler_view)
+				.portraitSides(InsetSide.TOP)
+				.typeMask(WindowInsetsCompat.Type.ime())
+				.applyPadding(true)
+				.build());
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.content_recycler_view).build());
+		collection.removeType(Type.ROOT_INSET);
+		return collection;
 	}
 
 	@Nullable
