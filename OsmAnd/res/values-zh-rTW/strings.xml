@@ -5710,4 +5710,8 @@
     <string name="save_and_access_articles_offline">儲存資料並隨時隨地離線閱讀文章</string>
     <string name="private_access_routing_req_short">允許使用私人道路抵達目的地？</string>
     <string name="download_wikipedia_label">下載維基百科</string>
+    <string name="quick_action_weather_layers">切換開關，用來顯示或隱藏地圖上的天氣圖層。</string>
+    <string name="quick_action_wind_animation_layer">用於顯示或隱藏地圖上風力動畫圖層的切換按鈕。</string>
+    <string name="wind_animation_layer">風力動畫圖層</string>
+    <string name="weather_layers">天氣圖層</string>
 </resources>

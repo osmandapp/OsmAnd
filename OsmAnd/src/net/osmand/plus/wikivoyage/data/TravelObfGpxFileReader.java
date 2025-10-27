@@ -23,6 +23,9 @@ import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_I
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_NAMES;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_PREFIX;
 
+import android.icu.text.Collator;
+import android.icu.text.RuleBasedCollator;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -64,6 +67,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -83,6 +87,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelArticle article;
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
+    private final RuleBasedCollator icuNumericCollator;
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -93,6 +98,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         this.callback = callback;
         this.repos = repos;
         this.setShouldShowProgress(article instanceof TravelGpx);
+        this.icuNumericCollator = (RuleBasedCollator) Collator.getInstance(Locale.ROOT);
+        icuNumericCollator.setNumericCollation(true);
     }
 
     @Override
@@ -229,12 +236,25 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         }
         reconstructPointsGroups(gpxFile, pgNames, pgIcons, pgColors, pgBackgrounds); // create groups before points
         if (!pointList.isEmpty()) {
+            sortPointList(pointList);
             for (Amenity wayPoint : pointList) {
                 gpxFile.addPoint(article.createWptPt(wayPoint, article.getLang()));
             }
         }
         article.gpxFile = gpxFile;
         return gpxFile;
+    }
+
+    private void sortPointList(List<Amenity> pointList) {
+        // Sort mixed "String Number" names to prettify WptPt list:
+        // [Station 5, Station 1, "", Station 15, Station 9, Station 17] =>
+        // [Station 1, Station 5, Station 9, Station 15, Station 17, ""]
+        pointList.sort((p1, p2) -> {
+            String a = p1.getName(), b = p2.getName();
+            if (a == null || a.isBlank()) return (b == null || b.isBlank()) ? 0 : 1;
+            if (b == null || b.isBlank()) return -1;
+            return icuNumericCollator.compare(a, b);
+        });
     }
 
     private boolean fetchSegmentsAndPoints(@NonNull List<AmenityIndexRepository> repos,

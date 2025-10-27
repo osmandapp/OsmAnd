@@ -13,9 +13,14 @@ public class ClickableWayTags {
 					"snowmobile=yes", "snowmobile=designated", "snowmobile=permissive"
 			);
 	public static final Map<String, String> FORBIDDEN_TAGS =
-			Map.of("area", "yes", "access", "no", "aerialway", "*");
+			Map.of("area", "yes",
+					"access", "no",
+					"piste:type", "connection",
+					"osmc_stub_name", ".",
+					"aerialway", "*"
+			);
 	public static final Set<String> REQUIRED_TAGS_ANY =
-			Set.of("name", "ref", "piste:name", "mtb:name");
+			Set.of("name", "ref", "piste:name", "mtb:name", "shield_stub_name");
 	public static final Map<String, String> GPX_COLORS = Map.ofEntries(
 			Map.entry("0", "brown"),
 			Map.entry("1", "green"),
@@ -65,6 +70,7 @@ public class ClickableWayTags {
 		}
 		for (String required : REQUIRED_TAGS_ANY) {
 			// some objects have name passed from object props but not in the tags
+			// nameless objects may be included using a fake name, such as "shield_stub_name"
 			boolean isRequiredNameFound = "name".equals(required) && !Algorithms.isEmpty(name);
 			if (tags.containsKey(required) || isRequiredNameFound) {
 				for (String key : tags.keySet()) {
