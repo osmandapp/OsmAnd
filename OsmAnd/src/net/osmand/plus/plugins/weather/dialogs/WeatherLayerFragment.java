@@ -107,11 +107,19 @@ public class WeatherLayerFragment extends BaseFullScreenFragment {
 					weatherBand.setBandVisible(visible);
 					updateScreenMode(view, visible);
 					refreshMap((MapActivity) getMyActivity());
+					updateButtons();
 				});
 	}
 
 	private void refreshMap(@NonNull MapActivity mapActivity) {
 		app.runInUIThread(mapActivity::refreshMap);
+	}
+
+	private void updateButtons() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer(true);
+		}
 	}
 
 	private void setupTransparencySliderCard(@NonNull View view) {

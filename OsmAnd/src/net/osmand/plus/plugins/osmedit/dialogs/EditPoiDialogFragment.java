@@ -313,12 +313,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createHorizontalLandscape(R.id.tab_layout_container, R.id.toolbar, R.id.name_container, R.id.poi_type_container, R.id.viewpager).build());
-/*		collection.add(InsetTarget.createCustomBuilder(R.id.bottom_buttons_container)
-				.portraitSides(InsetSide.TOP)
-				.typeMask(WindowInsetsCompat.Type.ime())
-				.applyPadding(true)
-				.build());*/
+		collection.replace(InsetTarget.createHorizontalLandscape(R.id.tab_layout_container, R.id.toolbar, R.id.name_container, R.id.poi_type_container).build());
 		return collection;
 	}
 

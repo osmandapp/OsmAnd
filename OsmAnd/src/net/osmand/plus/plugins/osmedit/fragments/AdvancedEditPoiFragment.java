@@ -37,6 +37,7 @@ import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.Algorithms;
@@ -135,6 +136,8 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 				.typeMask(WindowInsetsCompat.Type.ime())
 				.applyPadding(true)
 				.build());
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.content_recycler_view).build());
+		collection.removeType(Type.ROOT_INSET);
 		return collection;
 	}
 

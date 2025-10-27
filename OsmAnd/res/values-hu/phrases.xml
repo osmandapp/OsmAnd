@@ -51,7 +51,7 @@
     <string name="poi_border_control">Határátkelő</string>
     <string name="poi_traffic_signals">Jelzőlámpa</string>
     <string name="poi_car_repair">Autószerelő</string>
-    <string name="poi_service_tyres">Autógumi-szerelő</string>
+    <string name="poi_service_tyres">Autógumi; Gumi</string>
     <string name="poi_car_wash">Autómosó</string>
     <string name="poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
     <string name="poi_electricity_combined_charging">Elektromos töltőállomás;Elektromos autó töltése;Villanyautó töltése;Elektromos töltőpont</string>
@@ -5114,4 +5114,24 @@
     <string name="poi_hazard_additional_ice">Jég</string>
     <string name="poi_hazard_additional_queues_likely">Torlódásveszély</string>
     <string name="poi_whitewater_hazard">Vadvízi veszély</string>
+    <string name="poi_denomination_thai_mahanikaya">Thai legfelsőbb tanács</string>
+    <string name="poi_denomination_african_methodist_episcopal_zion">Afrikai metodista püspöki zion</string>
+    <string name="poi_denomination_christ_scientist">Krisztusi scientológus</string>
+    <string name="poi_denomination_church_of_god">Isten Egyháza</string>
+    <string name="poi_denomination_free_evangelical">Szabad evangélikus</string>
+    <string name="poi_denomination_conservative">Konzervatív</string>
+    <string name="poi_denomination_disciples_of_christ">Krisztus tanítványai</string>
+    <string name="poi_denomination_philippine_independent">Fülöp-szigeteki független</string>
+    <string name="poi_denomination_church_of_god_in_christ">Isten Krisztusi Egyháza</string>
+    <string name="poi_denomination_christadelphian">Krisztusi testvériség</string>
+    <string name="poi_denomination_mission_covenant_church_of_sweden">Svéd missziós egyház</string>
+    <string name="poi_denomination_churches_of_christ">Krisztus egyházai</string>
+    <string name="poi_denomination_free_church_of_scotland">Skócia szabad egyháza</string>
+    <string name="poi_denomination_catholic_apostolic">Katolikus apostoli</string>
+    <string name="poi_piste_downhill">Lesiklópálya;Sípálya;Sílesikló</string>
+    <string name="poi_route_activity_type_skiing">Sípályák</string>
+    <string name="poi_historic_spacecraft">Történelmi űrhajó</string>
+    <string name="poi_barrier_chain">Láncos korlát</string>
+    <string name="poi_barrier_log">Rönk</string>
+    <string name="poi_barrier_sliding_gate">Csúszókapu</string>
 </resources>

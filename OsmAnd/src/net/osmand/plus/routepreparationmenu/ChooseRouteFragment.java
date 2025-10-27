@@ -54,6 +54,7 @@ import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
@@ -226,8 +227,12 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
+		View toolbar = view.findViewById(R.id.toolbar_layout);
+		View toolbarContainer = view.findViewById(R.id.toolbar_container);
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createLeftSideContainer(true, view));
+		collection.add(InsetTarget.createLeftSideContainer(true, false, toolbar));
+		collection.add(InsetTarget.createLeftSideContainer(true, true, toolbarContainer));
 		return collection;
 	}
 
@@ -855,6 +860,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 				}
 			}
 		}
+		updateNavBarColor();
 	}
 
 	@Override

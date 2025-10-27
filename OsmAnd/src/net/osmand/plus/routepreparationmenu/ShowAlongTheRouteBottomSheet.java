@@ -22,6 +22,8 @@ import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -78,6 +80,9 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		textView.setText(R.string.show_along_the_route);
 
 		Toolbar toolbar = titleView.findViewById(R.id.toolbar);
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			toolbar.setFitsSystemWindows(false);
+		}
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);

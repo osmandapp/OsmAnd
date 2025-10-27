@@ -166,6 +166,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createBottomContainer(R.id.bottom_buttons_container));
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.content_container));
 		return collection;
 	}
 

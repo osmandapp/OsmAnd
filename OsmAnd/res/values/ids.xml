@@ -22,6 +22,7 @@
     <item name="elevation_widget_show_slopes" type="id"/>
     <item name="elevation_widget_hide_slopes" type="id"/>
 
+    <item name="initial_expanded_title_margin_start" type="id"/>
     <item name="initial_margin_left" type="id"/>
     <item name="initial_margin_top" type="id"/>
     <item name="initial_margin_right" type="id"/>

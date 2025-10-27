@@ -676,7 +676,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			params = new LinearLayout.LayoutParams(infoViewWidth, -1);
 		}
 		if (params != null) {
-			AndroidUtils.setMargins(params, 0, 0, 0, bottomMargin);
+			if (!InsetsUtils.isEdgeToEdgeSupported()) {
+				AndroidUtils.setMargins(params, 0, 0, 0, bottomMargin);
+			}
 			cardsContainer.setLayoutParams(params);
 		}
 	}

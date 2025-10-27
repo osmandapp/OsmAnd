@@ -14,6 +14,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
@@ -25,6 +26,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsCompat.Type.InsetsType;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -198,6 +201,31 @@ public class InsetsUtils {
 			if (view != null) {
 				EnumSet<InsetSide> sides = target.getSides(isOrientationPortrait(view.getContext()));
 				applyPadding(view, insets, sides, target.getTypeMask());
+
+				if (view instanceof ViewGroup viewGroup) {
+					for (int i = 0; i < viewGroup.getChildCount(); i++) {
+						View childView = viewGroup.getChildAt(i);
+						if (childView instanceof CollapsingToolbarLayout collapsingToolbarLayout) {
+							Insets sysBars = insets.getInsets(target.getTypeMask());
+							int oldTitleMargin = collapsingToolbarLayout.getExpandedTitleMarginStart();
+							int initialTitleMarginStart = collapsingToolbarLayout.getTag(R.id.initial_expanded_title_margin_start) != null
+									? (int) collapsingToolbarLayout.getTag(R.id.initial_expanded_title_margin_start)
+									: oldTitleMargin;
+
+							if (collapsingToolbarLayout.getTag(R.id.initial_expanded_title_margin_start) == null) {
+								collapsingToolbarLayout.setTag(R.id.initial_expanded_title_margin_start, oldTitleMargin);
+							}
+
+							collapsingToolbarLayout.setExpandedTitleMarginStart(initialTitleMarginStart + sysBars.left);
+
+							View collapsingHeader = collapsingToolbarLayout.findViewById(R.id.header);
+							if (collapsingHeader != null) {
+								int mask = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
+								applyPadding(collapsingHeader, insets, EnumSet.of(InsetSide.LEFT), mask);
+							}
+						}
+					}
+				}
 
 				for (InsetTarget insetTargets : collection.getByType(Type.ROOT_INSET)) {
 					EnumSet<InsetsUtils.InsetSide> insetSides = insetTargets.getSides(isOrientationPortrait(view.getContext()));
