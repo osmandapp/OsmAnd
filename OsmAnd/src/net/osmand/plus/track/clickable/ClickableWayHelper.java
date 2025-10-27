@@ -7,9 +7,6 @@ import static net.osmand.gpx.clickable.ClickableWayTags.getGpxColorByTags;
 import static net.osmand.gpx.clickable.ClickableWayTags.getGpxShieldTags;
 import static net.osmand.gpx.clickable.ClickableWayTags.isClickableWayTags;
 
-// THINK use similar icon="piste_high_difficulty" for no-name pistes
-// THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
