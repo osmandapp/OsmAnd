@@ -17,7 +17,7 @@ public class City extends MapObject {
 		TOWN(4000, 20000), // 1. Town
 		VILLAGE(1300, 1000), // 2. Village 
 		HAMLET(1000, 100), // 3. Hamlet - Small village
-		SUBURB(400, 5000), // 4. Mostly district of the city (introduced to avoid duplicate streets in city) - 
+		SUBURB(1500, 5000), // 4. Mostly district of the city (introduced to avoid duplicate streets in city) - 
 						   // however BOROUGH, DISTRICT, NEIGHBOURHOOD could be used as well for that purpose
 						   // Main difference stores own streets to search and list by it  
 		// 5.2 stored in city / villages sections written as city type
@@ -26,10 +26,10 @@ public class City extends MapObject {
 		POSTCODE(500, 1000), // 6. write this could be activated after 5.2 release
 		
 		// not stored entities but registered to uniquely identify streets as SUBURB
-		BOROUGH(400, 2500),  
-		DISTRICT(400, 10000),
-		NEIGHBOURHOOD(300, 500),
-		CENSUS(400, 2500),
+		BOROUGH(2000, 2500),  
+		DISTRICT(1000, 10000),
+		NEIGHBOURHOOD(500, 500),
+		CENSUS(2000, 2500),
 		;
 		
 		private final double radius;
