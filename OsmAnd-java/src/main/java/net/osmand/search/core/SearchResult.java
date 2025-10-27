@@ -94,7 +94,8 @@ public class SearchResult {
 		// 211 Walnut Street Elmira (211, South Walnut Street, Elmira)
 		
 		// 423 Waverly Street Waverly 
-		// 15 Blumenstraße Esslingen  TODO
+		// 15 Blumenstraße Esslingen  (alt:name matchAddressByName) 
+		// 4 Beutelsbacher Straße Weinstadt
 		// 12 Friedhofstraße Stuttgart (new name - Goslarer Straße)
 		// 26 Panoramastraße Weinstadt 
 		double res = ObjectType.getTypeWeight(objectType);
@@ -134,7 +135,7 @@ public class SearchResult {
 					matched = false;
 					// for unmatched cities calculate how close street is to boundary
 					// 1 - very close, 0 - very far
-					res += 100 / Math.max(100, MapUtils.getDistance(location, exactResult.location));
+					res += 100 / Math.max(100, MapUtils.getDistance(location, selectedCity.getLocation()));
 				}
 			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher

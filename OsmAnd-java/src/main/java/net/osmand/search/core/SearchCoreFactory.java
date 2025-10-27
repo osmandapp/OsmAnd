@@ -616,7 +616,6 @@ public class SearchCoreFactory {
 				// 7 J.-F.-Weishaar-Straße Korb
 				// 10 Martin-Luther-Straße Korb
 				// 35 Ostheimer Weg Korntal-Münchingen
-				// 15 Blumenstraße Esslingen (alt:name matchAddressByName)
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));

@@ -813,7 +813,7 @@ public class SearchPhrase {
 				}
 				if (match) {
 					if (sr.otherWordsMatch == null) {
-						sr.otherWordsMatch = new TreeSet<>();
+						sr.otherWordsMatch = new TreeSet<>(getCollator());
 					}
 					sr.otherWordsMatch.add(otherUnknownWords.get(i));
 					r++;
