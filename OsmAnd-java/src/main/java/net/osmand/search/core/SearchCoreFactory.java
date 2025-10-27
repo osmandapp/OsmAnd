@@ -690,12 +690,17 @@ public class SearchCoreFactory {
 										cityResult.otherNames = boundary.getOtherNames(true);
 										// for another city require exact matching
 										if (matchAddressName(phrase, res, cityResult,  true)) {
+											cityResult.object = boundary; 
 											newParentSearchResult = cityResult;
 											break;
 										}
 									}
 								}
 							}
+//							if (newParentSearchResult != null) {
+//								System.out.println(newParentSearchResult + "  " + res + " " +
+//										MapUtils.getDistance(newParentSearchResult.location, res.location));
+//							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
 							// FIXME UNIT-TESTS

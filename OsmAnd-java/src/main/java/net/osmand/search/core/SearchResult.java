@@ -97,6 +97,7 @@ public class SearchResult {
 		// 211 Walnut Street Elmira (211, South Walnut Street, Elmira)
 		
 		// 15 Blumenstraße Esslingen  TODO
+		// 26 Panoramastraße Weinstadt 
 		double res = ObjectType.getTypeWeight(objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
@@ -124,14 +125,18 @@ public class SearchResult {
 			City selectedCity = null;
 			if (exactResult != null && exactResult.object instanceof Street s) {
 				selectedCity = s.getCity();
-			} else if (exactResult != null && exactResult.object instanceof Building b && 
+			} else if (exactResult != null && 
 					exactResult.parentSearchResult != null && exactResult.parentSearchResult.object instanceof Street s) {
 				selectedCity = s.getCity();
 			}
-			if (matched && selectedCity != null && object instanceof City c
-					&& !Algorithms.objectEquals(selectedCity.getName(), c.getName())) {
+			if (matched && selectedCity != null && object instanceof City c) {
 				// city don't match because of boundary search -> lower priority
-				matched = false;
+				if (!Algorithms.objectEquals(selectedCity.getName(), c.getName())) {
+					matched = false;
+					// for unmatched cities calculate how close street is to boundary
+					// 1 - very close, 0 - very far
+					res += 100 / Math.max(100, MapUtils.getDistance(location, exactResult.location));
+				}
 			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (matched) {
