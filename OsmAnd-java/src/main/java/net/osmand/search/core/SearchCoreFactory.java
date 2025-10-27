@@ -691,6 +691,7 @@ public class SearchCoreFactory {
 										// for another city require exact matching
 										if (matchAddressName(phrase, res, cityResult,  true)) {
 											cityResult.object = boundary; 
+											cityResult.location = boundary.getLocation();
 											newParentSearchResult = cityResult;
 											break;
 										}
