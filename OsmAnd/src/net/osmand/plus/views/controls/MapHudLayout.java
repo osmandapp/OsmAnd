@@ -18,6 +18,8 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -61,7 +63,8 @@ public class MapHudLayout extends FrameLayout {
 
 	private final float dpToPx;
 	private final int panelsMargin;
-	private final int statusBarHeight;
+	private int statusBarHeight;
+	private int navBarHeight;
 
 	private final boolean tablet;
 	private final boolean portrait;
@@ -401,7 +404,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	public int getAdjustedHeight() {
-		return getHeight() - statusBarHeight;
+		return getHeight() - statusBarHeight - navBarHeight;
 	}
 
 	private boolean shouldCenterVerticalPanels() {
@@ -471,5 +474,11 @@ public class MapHudLayout extends FrameLayout {
 				}
 			}
 		}, UI_REFRESH_INTERVAL_MILLIS);
+	}
+
+	public void setWindowInsets(WindowInsetsCompat windowInsets) {
+		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+		statusBarHeight = insets.top;
+		navBarHeight = insets.bottom;
 	}
 }

@@ -51,7 +51,7 @@ public class LiveGroupItem extends BaseLocalItem {
 	@Override
 	public String getDescription(@NonNull Context context) {
 		String size = getSizeDescription(context);
-		String formattedDate = getFormattedDate(new Date(getLastModified()));
+		String formattedDate = getFormattedDate(context, new Date(getLastModified()));
 		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate);
 	}
 
