@@ -7,9 +7,6 @@ import static net.osmand.gpx.clickable.ClickableWayTags.getGpxColorByTags;
 import static net.osmand.gpx.clickable.ClickableWayTags.getGpxShieldTags;
 import static net.osmand.gpx.clickable.ClickableWayTags.isClickableWayTags;
 
-// THINK use similar icon="piste_high_difficulty" for no-name pistes
-// THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -73,7 +70,7 @@ public class ClickableWayHelper {
 
     @Nullable
     public ClickableWay loadClickableWay(@NonNull LatLon selectedLatLon, @NonNull RenderedObject renderedObject) {
-        long osmId = ObfConstants.getOsmObjectId(renderedObject);
+        long osmId = ObfConstants.getOsmIdFromBinaryMapObjectId(renderedObject.getId());
         Map<String, String> tags = renderedObject.getTags();
         String name = renderedObject.getName();
         TIntArrayList xPoints = renderedObject.getX();
