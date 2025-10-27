@@ -3,7 +3,7 @@ package net.osmand.gpx.clickable;
 
 import net.osmand.util.Algorithms;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,11 +53,7 @@ public class ClickableWayTags {
 	}
 
 	public static Map<String, String> getGpxShieldTags(String color) {
-		Map<String, String> shieldTags = new LinkedHashMap<>();
-		if (color != null) {
-			shieldTags.putIfAbsent("shield_fg", "osmc_" + color + "_bar");
-		}
-		return shieldTags;
+		return color != null ? Map.of("shield_fg", "osmc_" + color + "_bar") : new HashMap<>();
 	}
 
 	public static boolean isClickableWayTags(String name, Map<String, String> tags) {
