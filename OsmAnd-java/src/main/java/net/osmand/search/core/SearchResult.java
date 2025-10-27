@@ -95,9 +95,10 @@ public class SearchResult {
 		
 		// 423 Waverly Street Waverly 
 		// 15 Blumenstraße Esslingen  (alt:name matchAddressByName) 
-		// 4 Beutelsbacher Straße Weinstadt
 		// 12 Friedhofstraße Stuttgart (new name - Goslarer Straße)
-		// 26 Panoramastraße Weinstadt 
+		// 4 Beutelsbacher Straße Weinstadt (distance to boundary)
+		// 26 Panoramastraße Weinstadt (distance to boundary)
+		// 24 Kelterstraße Kernen im Remstal (distance to boundary)  
 		double res = ObjectType.getTypeWeight(objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
@@ -135,7 +136,15 @@ public class SearchResult {
 					matched = false;
 					// for unmatched cities calculate how close street is to boundary
 					// 1 - very close, 0 - very far
-					res += 100 / Math.max(100, MapUtils.getDistance(location, selectedCity.getLocation()));
+					int[] bbox31 = selectedCity.getBbox31();
+					LatLon latlon = selectedCity.getLocation();
+					if (bbox31 != null) {
+						// even center is shifted probably best to do combination of bbox & center
+						double lon = MapUtils.get31LongitudeX(bbox31[0] / 2 + bbox31[2] / 2);
+						double lat = MapUtils.get31LatitudeY(bbox31[1] / 2 + bbox31[3] / 2);
+						latlon = new LatLon(lat, lon);
+					}
+					res += 100 / Math.max(100, MapUtils.getDistance(location, latlon));
 				}
 			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
