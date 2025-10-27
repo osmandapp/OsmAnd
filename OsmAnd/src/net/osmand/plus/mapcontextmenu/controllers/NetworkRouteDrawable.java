@@ -262,7 +262,8 @@ public class NetworkRouteDrawable extends Drawable {
 	private enum OsmcIconParams {
 		BACKGROUND("osmc_background", "h_osmc_", "_bg"),
 		FOREGROUND("osmc_foreground", "mm_osmc_", ""),
-		FOREGROUND_2("osmc_foreground2", "mm_osmc_", "");
+		FOREGROUND_2("osmc_foreground2", "mm_osmc_", ""),
+		OSMAND_FOREGROUND("osmand_foreground", "mm_", "");
 
 		@NonNull
 		final String key;
