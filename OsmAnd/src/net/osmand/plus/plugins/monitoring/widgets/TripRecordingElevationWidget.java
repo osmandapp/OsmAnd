@@ -41,6 +41,7 @@ public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 	protected double cachedElevationDiff = -1;
 	protected double cachedLastElevation = -1;
 	private final boolean isUphillType;
+	private boolean forceUpdate;
 
 	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @NonNull TripRecordingElevationWidgetState widgetState,
 	                                    @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
@@ -64,21 +65,14 @@ public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 
 	@Override
 	protected View.OnClickListener getOnClickListener() {
-		return v -> askShowBatteryOptimizationDialog();
-	}
-
-	private void askShowBatteryOptimizationDialog() {
-		BatteryOptimizationController.askShowDialog(mapActivity, true, activity -> askShowTrackMenuDialog());
-	}
-
-	private void askShowTrackMenuDialog() {
-		if (getAnalysis().hasElevationData()) {
-			Bundle params = new Bundle();
-			params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
-			params.putString(TrackMenuFragment.CHART_TAB_NAME, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE.name());
-			TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
-					null, null, params);
-		}
+		return v -> {
+			forceUpdate = true;
+			widgetState.changeToNextState();
+			updateInfo(null);
+			mapActivity.refreshMap();
+			updateWidgetName();
+			updateIcon();
+		};
 	}
 
 	@Override
@@ -99,7 +93,9 @@ public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 				formattedUphill = OsmAndFormatter.getFormattedAltitudeValue(lastElevation, app, altitudeMetrics);
 			}
 			setText(formattedUphill.value, formattedUphill.unit);
+			forceUpdate = false;
 		}
+		updateWidgetName();
 	}
 
 	@Nullable
@@ -124,6 +120,16 @@ public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 	@Override
 	public boolean isMetricSystemDepended() {
 		return true;
+	}
+
+	@Override
+	public boolean isAltitudeMetricDepended() {
+		return true;
+	}
+
+	@Override
+	public boolean isUpdateNeeded() {
+		return forceUpdate || super.isUpdateNeeded();
 	}
 
 	@Nullable

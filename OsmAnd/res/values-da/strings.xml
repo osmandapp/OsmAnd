@@ -4210,7 +4210,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Bemærkning-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Vis bemærkning-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">En skematisk repræsentation af ikoner ved lave zoomniveauer for de interessepunkter, som ikke normalt vises</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">En skematisk visning af ikoner ved lave zoomniveauer for de interessepunkter, der normalt ikke vises</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Øg synlighed af vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
@@ -5712,11 +5712,11 @@
     <string name="hmd_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s måneder</string>
     <string name="shared_string_road_exit">Afkørsel</string>
     <string name="hmd_promo">HMD Promo i %1$s måneder</string>
-    <string name="original_color_description">Hvert punkt beholder dets egen farve.</string>
+    <string name="original_color_description">Hvert punkt beholder sin egen farve.</string>
     <string name="original_icon_description">Hvert punkt beholder sit eget ikon.</string>
     <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
     <string name="apply_to_all_points">Anvend på alle punkter</string>
-    <string name="save_favorite_default_appearance">Vil du anvende ændringerne på alle eksisterende punkter i mappen eller kun på de nyoprettede?</string>
+    <string name="save_favorite_default_appearance">Anvend ændringer på alle eksisterende punkter i mappen eller kun på nytilføjede punkter?</string>
     <string name="show_mercator_grids_description">Vis gradnet i Mercator km i stedet for WGS84 eller UTM</string>
     <string name="show_dms_grids_description">Vis gradnet i grader, minutter, sekunder i stedet for grader</string>
     <string name="show_dm_grids">Brug DM i stedet for grader eller DMS</string>
@@ -5731,7 +5731,7 @@
     <string name="popular_places">Populære steder</string>
     <string name="choose_location">Vælg en placering</string>
     <string name="show_image_previews">Vis forhåndsvisninger af billeder</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Skift mellem at vise og skjule koordinatnettet på kortet.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Skift synlighed af koordinatnettet på kortet.</string>
     <string name="layer_coordinates_grid">Koordinatnet</string>
     <string name="release_5_0">• Opdag de bedst bedømte interessepunkter med den nye Udforsk-tilstand\n\n • Alle OSM-ruter, nu søgbare! Vandring, cykling, MTB og meget mere\n\n •Nyt navigations modul kombinerer svingpil og navigationsinstruktioner\n\n • Modul med aktuel ruteinfo: viser ETA, ankomsttid og afstand\n\n • Vælg skiløjper og MTB-spor på kortet for at få detaljerede oplysninger\n\n • Mulighed for at vælge modulstørrelse for venstre og højre panel\n\n • Tilføjet koordinatnet med geografiske koordinater\n\n • Tilføjet mulighed for at tilpasse standardudseendet for favoritgrupper\n\n • Android Auto: se ETA og afstand til næste rutepunkt; bynavne vises nu i søgeresultater\n\n • Fremtrædende bjergtoppe kan nu findes via kort og søgning\n\n • Bjergtoppes højde i meter\n\n • Tilføjet: Klipper og klatreområder på kortet\n\n • Adressesøgning i USA er blevet forbedret\n\n • Tilføjet hebraisk TTS til navigation</string>
     <string name="prime_meridian">Førstemeridian</string>
@@ -5918,9 +5918,9 @@
     <string name="track_folder_appearance">Spor-mappens udseende</string>
     <string name="update_maps">Opdatér kort</string>
     <string name="reconnect">Genopret forbindelse</string>
-    <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedstigninger på den aktuelt registreret tur.</string>
-    <string name="trip_recording_uphill_widget_desc">Viser summen af alle opstigninger på den aktuelt registreret tur.</string>
-    <string name="trip_recording_distance_widget_desc">Viser den samlede afstand for din aktuelt registrerede tur med mulighed for at se afstanden for den sidste stigning og nedstigning.</string>
+    <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedstigninger eller den sidste nedstigning på den aktuelt registrerede tur.</string>
+    <string name="trip_recording_uphill_widget_desc">Viser summen af alle opstigninger eller den sidste stigning på den aktuelt registreret tur.</string>
+    <string name="trip_recording_distance_widget_desc">Viser den samlede distance for din aktuelt registrerede tur med indstillinger til at se distancen for den sidste stigning og nedstigning.</string>
     <string name="trip_recording_max_speed_widget_description">Viser den maksimale hastighed for den aktuelt registrerede tur. Tryk for at skifte mellem den samlede maksimale hastighed og den maksimale hastighed fra den sidste op- eller nedkørsel.</string>
     <string name="trip_recording_average_slope_widget_description">Viser den gennemsnitlige hældning for det sidste nedadgående eller opadgående afsnit af den aktuelt registrerede tur.</string>
     <string name="average_slope">Gennemsnitlig hældning</string>
@@ -5932,4 +5932,8 @@
     <string name="save_and_access_articles_offline">Gem data og få adgang til artikler offline hvor som helst</string>
     <string name="private_access_routing_req_short">Tillad brug af en privat vej for at nå din destination?</string>
     <string name="download_wikipedia_label">Download Wikipedia</string>
+    <string name="quick_action_weather_layers">En skifter til at vise eller skjule vejrlag på kortet.</string>
+    <string name="quick_action_wind_animation_layer">En skifter til at vise eller skjule vindanimationslaget på kortet.</string>
+    <string name="wind_animation_layer">Vindanimationslag</string>
+    <string name="weather_layers">Vejrlag</string>
 </resources>

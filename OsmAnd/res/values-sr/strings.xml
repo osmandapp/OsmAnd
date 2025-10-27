@@ -650,7 +650,7 @@
     <string name="share_osm_edits_subject">Измене ОСМ-а дељене преко ОсмАнд-а</string>
     <string name="osm_edit_created_poi">Тачка занимања је направљена</string>
     <string name="nm">нми</string>
-    <string name="nm_h">чв</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -4084,7 +4084,7 @@
     <string name="history_is_disabled_descr">Омогућите историју ради добављања бржег приступа последњим коришћеним налазима.</string>
     <string name="clear_all_history">Обриши сву историју</string>
     <string name="history_actions_descr">Можете да извезете историју у датотеку.</string>
-    <string name="rendering_attr_natureReserves_name">Природни резерват и заштићена подручја</string>
+    <string name="rendering_attr_natureReserves_name">Заштићена подручја природе</string>
     <string name="show_parameter_seekbar">Прикажи траку за тражење одредница</string>
     <string name="clear_all_history_warning">Желите ли да обришете све уносе историје, укључујући претрагу, навођење и историју ознака\?</string>
     <string name="release_4_1">• Додата почетна подршка за Андроид Ауто \n \n • Освежавање корисничког сучеља за претрагу координата УТМ \n \n• Пропусник ГПС-а трагова ГПИкс-а \n \n • Справица за висински налог (издања про) \n \n • Омиљено: додата је могућност прегледа недавно коришћених сличица \n \n • Планирање путање: користиће се изабрани налог након покретања \n \n • Поправљен је слој Мапиларија, прикључак је сада подразумевано онемогућен \n \n • Додат је приказ за управљање целокупном историјом у програму \n \n • Усмерење карте се не враћа на почетно након поновног покретања програма \n \n • Побољшано је приказивање ознаке висине СРТМ \n \n • Исправљени су арапски натписи карата \n \n • Исправљени су различити проблеми са навођењем</string>
@@ -5284,7 +5284,7 @@
     <string name="rendering_value_dark_orange_name">Тамно поморанџаста</string>
     <string name="clear_key_assignment_summary">Додељивање дугмади за изабрано дејство ће бити обрисано.</string>
     <string name="key_assignment_add_action">Додај акцију</string>
-    <string name="assigned_keys">Додељена дугмад</string>
+    <string name="assigned_keys">Додељени Тастери</string>
     <string name="action_icon">Сличица дејства</string>
     <string name="user_palette">Кориснички образац боја</string>
     <string name="shared_string_colors">Боје</string>
@@ -5664,11 +5664,11 @@
     <string name="hmd_promo_description">Бесплатан приступ могућностима укључујући неограничено преузимање карата, просторног приказа итд. за %1$s месеци</string>
     <string name="shared_string_road_exit">Излаз</string>
     <string name="hmd_promo">ХМД промоција за %1$s месеци</string>
-    <string name="original_icon_description">Свака тачка задржава своју индивидуалну сличицу.</string>
-    <string name="original_shape_description">Свака тачка задржава свој индивидуални облик.</string>
+    <string name="original_icon_description">Свака тачка задржава своју индивидуалну икону.</string>
+    <string name="original_shape_description">Свака тачка задржава свој облик.</string>
     <string name="apply_to_all_points">Примени на све тачке</string>
-    <string name="original_color_description">Свака тачка задржава своју индивидуалну боју.</string>
-    <string name="save_favorite_default_appearance">Применити измене на све постојеће тачке у фолдеру или само на новододате?</string>
+    <string name="original_color_description">Свака тачка задржава своју боју.</string>
+    <string name="save_favorite_default_appearance">Применити измене на све постојеће тачке у фолдеру или само на ново додате?</string>
     <string name="show_mercator_grids">Користи Меркатор уместо WGS84 или UTM</string>
     <string name="show_mercator_grids_description">Прикажи мрежу у Меркатор km уместо WGS84 или UTM</string>
     <string name="show_dms_grids">Користи DMS уместо степени</string>
@@ -5812,7 +5812,7 @@
     <string name="rendering_attr_fairwayStyle_description">Боја пловних канала</string>
     <string name="rendering_attr_safetyContour_name">Контура безбедносне дубине</string>
     <string name="rendering_attr_safetyContour_description">Контура безбедносне дубине</string>
-    <string name="rendering_attr_shellsStyle_name">Стил шкољки</string>
+    <string name="rendering_attr_shellsStyle_name">Оквирни стилови</string>
     <string name="rendering_attr_shellsStyle_description">Стил за шкољке на морском дну</string>
     <string name="rendering_attr_showLNAMmarker_name">ЕНЦ маркери</string>
     <string name="rendering_attr_showLNAMmarker_description">Прикажи ЕНЦ маркере</string>
@@ -5838,12 +5838,12 @@
     <string name="lang_en_barebones">Енглески (основни)</string>
     <string name="shared_sting_osm_link">Веза ОСМ-а</string>
     <string name="show_local_names">Прикажи локална имена</string>
-    <string name="obd_alt_battery_voltage">Напон пуњача</string>
+    <string name="obd_alt_battery_voltage">Напон адаптера</string>
     <string name="liter_single">Литар</string>
     <string name="imperial_gallon">Империјални галон</string>
     <string name="us_gallon">Амерички галон</string>
-    <string name="kilometers">Километри</string>
-    <string name="miles">Миље</string>
+    <string name="kilometers">Километара</string>
+    <string name="miles">Миља</string>
     <string name="mpg">МПГ</string>
     <string name="access_pinch_zoom_magnification">Увећање приближавања штипањем прстију</string>
     <string name="access_pinch_zoom_magnification_descr">Користите сразмерно увећање приказа уместо постепених увећања приликом знакова приближавања.</string>
@@ -5852,7 +5852,7 @@
     <string name="show_spherical_map_description">Приказ сфероидног модела Земље</string>
     <string name="shared_string_price">Цена</string>
     <string name="rendering_attr_showSkiSlopes_name">Прикажи скијашке стазе</string>
-    <string name="rendering_attr_showSkiSlopes_description">Приказати лаке ски стазе</string>
+    <string name="rendering_attr_showSkiSlopes_description">Прикажи поједностављене скијашке стазе</string>
     <string name="track_folder_appearance">Изглед фолдера за праћење</string>
     <string name="update_maps">Ажурирај мапе</string>
     <string name="reconnect">Поново се повежите</string>
@@ -5870,4 +5870,8 @@
     <string name="save_and_access_articles_offline">Уштедите податке и приступајте чланцима без мреже било где</string>
     <string name="private_access_routing_req_short">Дозволите коришћење приватног пута да бисте стигли до вашег одредишта?</string>
     <string name="download_wikipedia_label">Преузми Википедију</string>
+    <string name="quick_action_weather_layers">Прекидач за приказ или сакривање временских слојева на мапи.</string>
+    <string name="quick_action_wind_animation_layer">Прекидач за приказ или сакривање слоја анимације ветра на мапи.</string>
+    <string name="wind_animation_layer">Слој анимације ветра</string>
+    <string name="weather_layers">Временски слојеви</string>
 </resources>

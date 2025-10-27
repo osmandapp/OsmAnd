@@ -172,8 +172,7 @@
     <string name="shared_string_hour_short">óra</string>
     <string name="shared_string_minute_short">perc</string>
     <string name="shared_string_second_short">másodperc</string>
-    <string name="welcome_descr">Az <b>OsmAnd Trackerrel</b> megoszthatja tartózkodási helyét és megtekintheti másokét az OsmAndban.<br/>
-        <br/>Az alkalmazás a Telegram API-ját használja, ezért Telegram-fiók szükséges hozzá.</string>
+    <string name="welcome_descr">Az <b>OsmAnd Trackerrel</b> megoszthatja tartózkodási helyét és megtekintheti másokét az OsmAndban.<br/><br/>Az alkalmazás a Telegram API-ját használja, ezért Telegram-fiók szükséges hozzá.</string>
     <string name="my_location">Tartózkodási helyem</string>
     <string name="live_now">Most élőben</string>
     <string name="timeline">Idővonal</string>

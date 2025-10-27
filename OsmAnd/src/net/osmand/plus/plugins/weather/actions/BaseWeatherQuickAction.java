@@ -50,6 +50,7 @@ public abstract class BaseWeatherQuickAction extends QuickAction {
 				PluginsHelper.enablePlugin(mapActivity, app, weatherPlugin, true);
 			}
 			weatherBand.setBandVisible(visible);
+			weatherPlugin.setWeatherEnabled(weatherHelper.hasVisibleBands());
 			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
 	}
