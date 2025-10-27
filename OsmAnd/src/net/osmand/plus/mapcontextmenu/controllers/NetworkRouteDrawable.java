@@ -88,7 +88,9 @@ public class NetworkRouteDrawable extends Drawable {
 		if (isClickableWay) {
 			String color = ClickableWayTags.getGpxColorByTags(amenity.getOsmTags());
 			if (color != null) {
-				shieldTags.putAll(ClickableWayTags.getGpxShieldTags(color));
+				for (Map.Entry<String, String> gpxShieldTags : ClickableWayTags.getGpxShieldTags(color).entrySet()) {
+					shieldTags.putIfAbsent(gpxShieldTags.getKey(), gpxShieldTags.getValue());
+				}
 			}
 		}
 		RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
