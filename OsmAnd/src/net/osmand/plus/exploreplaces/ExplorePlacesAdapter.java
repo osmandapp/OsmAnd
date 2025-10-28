@@ -63,7 +63,7 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 				yield new WikiItemViewHolder(view, locationViewCache, nightMode);
 			}
 			case POI_TYPE -> {
-				View view = inflater.inflate(R.layout.search_list_item, parent, false);
+				View view = inflater.inflate(R.layout.search_list_item_full, parent, false);
 				yield new SearchResultViewHolder(view, locationViewCache, nightMode);
 			}
 			default -> throw new IllegalArgumentException("Unsupported view type");

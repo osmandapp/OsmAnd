@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -58,7 +59,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private boolean useMapCenter;
 
-	private final int dp56;
+	private final int dividerMargin;
 	private final int dp1;
 
 	private boolean hasSearchMoreItem;
@@ -84,7 +85,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		this.nightMode = nightMode;
 		this.inflater = UiUtilities.getInflater(activity, nightMode);
 
-		dp56 = AndroidUtils.dpToPx(app, 56f);
+		dividerMargin = AndroidUtils.dpToPx(app, 16);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 	}
@@ -444,6 +445,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view = getLinearLayout(convertView, R.layout.search_gpx_list_item);
 			bindGpxTrack(view, listItem, (GPXInfo) searchResult.relatedObject);
 			setupCheckBox(position, view, listItem);
+		} else if (searchResult != null && searchResult.objectType == ObjectType.POI) {
+			view = getLinearLayout(convertView, R.layout.search_list_item_full);
+			SearchResultViewHolder.bindPOISearchResult(view, listItem, nightMode);
+			setupCheckBox(position, view, listItem);
+			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 		} else {
 			view = getLinearLayout(convertView, R.layout.search_list_item);
 			SearchResultViewHolder.bindSearchResult(view, listItem);
@@ -556,7 +562,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					divider.setLayoutParams(p);
 				} else {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
-					AndroidUtils.setMargins(p, dp56, 0, 0, 0);
+					AndroidUtils.setMargins(p, dividerMargin, 0, 0, 0);
 					divider.setLayoutParams(p);
 				}
 			}

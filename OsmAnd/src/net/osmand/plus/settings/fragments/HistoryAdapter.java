@@ -133,8 +133,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 			if (holder instanceof SearchItemViewHolder) {
 				SearchResult searchResult = (SearchResult) getItem(position);
 				QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
-				SearchResultViewHolder.bindSearchResult((LinearLayout) viewHolder.itemView, listItem);
-
+				SearchResultViewHolder.bindSearchResult(viewHolder.itemView, listItem);
 				int iconColor = ContextCompat.getColor(app, selected ? activeColorId : defaultColorId);
 				viewHolder.icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
 				updateCompassVisibility(viewHolder.compassView, searchResult.location);
