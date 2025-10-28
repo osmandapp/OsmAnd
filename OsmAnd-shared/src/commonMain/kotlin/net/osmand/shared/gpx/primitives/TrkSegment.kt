@@ -25,9 +25,9 @@ class TrkSegment : GpxExtensions() {
 	}
 
 	enum class SegmentSlopeType(val symbol: String) {
-		UPHILL("↗"),
-		DOWNHILL("↘"),
-		FLAT("➡");
+		UPHILL("↑"),
+		DOWNHILL("↑"),
+		FLAT("↔");
 	}
 
 	private fun TrkSegment.splitBySlopeTypeUsingExtremums(): List<SplitSegment> {

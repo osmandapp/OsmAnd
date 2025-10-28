@@ -21,6 +21,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
@@ -183,10 +184,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			if (amenity.isRouteTrack()) {
 				typeName = amenity.getRouteActivityType();
 				hasRouteShield = QuickSearchListItem.getRouteShieldDrawable(app, amenity) != null;
-				String distance = amenity.getAdditionalInfo(Amenity.DISTANCE);
-				String uphill = amenity.getAdditionalInfo(Amenity.DIFF_ELE_UP);
-				String downhill = amenity.getAdditionalInfo(Amenity.DIFF_ELE_DOWN);
-				address = String.format("↔ %s ↑ %s ↓ %s %s", distance, uphill, downhill, address);
+				address = String.format("%s • %s", AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app), address);
 			}
 		}
 

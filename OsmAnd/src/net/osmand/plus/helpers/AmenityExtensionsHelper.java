@@ -115,7 +115,7 @@ public class AmenityExtensionsHelper {
 
 		List<String> metrics = new ArrayList<>();
 		if (distMeters > 0) {
-			metrics.add(dist);
+			metrics.add(TrkSegment.SegmentSlopeType.FLAT.getSymbol() + dist);
 			if (upMeters >= MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW &&
 					upMeters / distMeters * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW) {
 				metrics.add(TrkSegment.SegmentSlopeType.UPHILL.getSymbol() + uphill);
