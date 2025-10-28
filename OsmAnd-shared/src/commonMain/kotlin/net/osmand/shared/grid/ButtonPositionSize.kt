@@ -19,6 +19,7 @@ class ButtonPositionSize {
 	var height: Int = 7
 	var xMove: Boolean = false
 	var yMove: Boolean = false
+	var moveable: Boolean = true
 	var moveDescendants: Int = MOVE_DESCENDANTS_ANY
 
 	private val bounds = KQuadRect()
@@ -43,6 +44,10 @@ class ButtonPositionSize {
 	}
 
 	fun setMoveVertical() = apply { this.yMove = true }
+
+	fun setMoveable() = apply { this.moveable = true }
+
+	fun setNotMoveable() = apply { this.moveable = false }
 
 	fun setMoveDescendantsAny() = apply { this.moveDescendants = MOVE_DESCENDANTS_ANY }
 
@@ -294,6 +299,9 @@ class ButtonPositionSize {
 			space: Int, toMove: ButtonPositionSize,
 			overlap: ButtonPositionSize, totalWidth: Int, totalHeight: Int
 		): Boolean {
+
+			if (!toMove.moveable) return false
+
 			var xMove = false
 			var yMove = false
 			when (overlap.moveDescendants) {
