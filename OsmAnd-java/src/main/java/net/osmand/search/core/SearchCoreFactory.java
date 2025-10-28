@@ -463,7 +463,7 @@ public class SearchCoreFactory {
 						// No failed cases found yet - city / town should have exact boundary that street belongs to
 						
 						// // Require exact name matching to search street by name (not attached to city)
-						// // Improve check if subsearch successful don't call search by name inside
+						// It will be very inefficient too
 //						if (matchAddressName(phrase, null, res, true)) {
 //							subSearchApiOrPublish(phrase, resultMatcher, res, this);
 //						}
@@ -727,7 +727,9 @@ public class SearchCoreFactory {
 							// 4241 Cook Hollow Road Woodhull
 							// 11601 Kelly Hill Road Pine City
 							
-							// FIXME check if subsearch successful don't call search by name inside
+							// if subsearch by cityApi we could avoid calling subsearch by boundary 
+							// but it's tricky to check how good matching reuslts (case Hohlmaier 1 Breuningsweiler)
+							
 							// require exact matching to search street by name (not attached to city) 
 							if (matchAddressName(phrase, null, res, true)) {
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
