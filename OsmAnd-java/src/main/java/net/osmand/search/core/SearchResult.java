@@ -103,8 +103,7 @@ public class SearchResult {
 			// don't overload with poi types
 		} else {
 			CheckWordsMatchCount completeMatchRes = new CheckWordsMatchCount();
-			boolean matched = false;
-			matched = allWordsMatched(localeName, exactResult, completeMatchRes);
+			boolean matched = allWordsMatched(localeName, exactResult, completeMatchRes);
 			// incorrect fix
 //			if (!matched && object instanceof Street s) { // parentSearchResult == null &&
 //				matched = allWordsMatched(localeName + " " + s.getCity().getName(requiredSearchPhrase.getSettings().getLang()), exactResult, completeMatchRes);
@@ -216,7 +215,10 @@ public class SearchResult {
 		while (exactResult != null && exactResult != this) {
 			List<String> lst = exactResult.getSearchPhraseNames();
 			for (String l : lst) {
-				searchPhraseNames.remove(l);
+				int i = searchPhraseNames.indexOf(l);
+				if (i != -1) {
+					searchPhraseNames.remove(i);
+				}
 			}
 			exactResult = exactResult.parentSearchResult;
 		}
@@ -264,7 +266,10 @@ public class SearchResult {
 		if (parentSearchResult != null && requiredSearchPhrase == parentSearchResult.requiredSearchPhrase
 				&& parentSearchResult.getOtherWordsMatch() != null) {
 			for (String s : parentSearchResult.getOtherWordsMatch()) {
-				searchPhraseNames.remove(s);
+				int i = searchPhraseNames.indexOf(s);
+				if (i != -1) {
+					searchPhraseNames.remove(i);
+				}
 			}
 		}
 
@@ -399,7 +404,11 @@ public class SearchResult {
 		if (otherWordsMatch != null) {
 //			removeAll(res.otherWordsMatch); // incorrect 
 			for (String otherWord : otherWordsMatch) {
-				leftUnknownSearchWords.remove(otherWord); // remove 1 by 1
+				int ind = firstUnknownWordMatches ? leftUnknownSearchWords.indexOf(otherWord)
+						: leftUnknownSearchWords.lastIndexOf(otherWord);
+				if (ind != -1) {
+					leftUnknownSearchWords.remove(ind); // remove 1 by 1
+				}
 			}
 		}
 		

@@ -23,7 +23,7 @@ public class Abbreviations {
         abbreviations.put("nw", "Northwest");
         abbreviations.put("ne", "Northeast");
         abbreviations.put("ln", "Lane");
-        abbreviations.put("drv", "Drive");
+        abbreviations.put("dr", "Drive");
         abbreviations.put("rd", "Road");
         abbreviations.put("ave", "Avenue");
         abbreviations.put("st", "Street");
