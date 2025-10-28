@@ -54,10 +54,10 @@ public enum ObjectType {
 		}
 		switch (t) {
 			case HOUSE:
-			case STREET_INTERSECTION:
 				return 4;
 			case STREET:
 				return 3;
+			case STREET_INTERSECTION:
 			case CITY:
 			case VILLAGE:
 			case POSTCODE:

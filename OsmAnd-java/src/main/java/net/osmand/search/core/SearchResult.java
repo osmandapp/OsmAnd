@@ -81,10 +81,7 @@ public class SearchResult {
 		if (unknownPhraseMatchWeight != 0) {
 			return unknownPhraseMatchWeight;
 		}
-		// normalize number to get as power, so we get numbers > 1
 		unknownPhraseMatchWeight = getSumPhraseMatchWeight(null);
-//		System.out.println(" ---- " + this + " " + unknownPhraseMatchWeight);
-//		unknownPhraseMatchWeight /= Math.pow(MAX_PHRASE_WEIGHT_TOTAL, getDepth() - 1);
 		return unknownPhraseMatchWeight;
 	}
 
@@ -150,9 +147,6 @@ public class SearchResult {
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (matched) {
 				res = getPhraseWeightForCompleteMatch(completeMatchRes);
-//				System.out.println(objectType + " " + localeName + " " + localeRelatedObjectName + "  "+ res);
-			} else {
-//				System.out.println(objectType + " ! " + localeName + " " + localeRelatedObjectName + "  "+ res);
 			}
 		}
 		if (parentSearchResult != null) {
@@ -165,12 +159,12 @@ public class SearchResult {
 	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes) {
 		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10;
 		// if all words from search phrase == the search result words - we prioritize it even higher
-		if (completeMatchRes.allWordsEqual && requiredSearchPhrase.getLastTokenLocation() != null && this.location != null) {
-//			boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
-//					this.location) <= NEAREST_METERS_LIMIT;
-//			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
+		if (completeMatchRes.allWordsEqual) {
+			boolean closeDistance = requiredSearchPhrase.getLastTokenLocation() != null && this.location != null 
+					&& MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(), this.location) <= NEAREST_METERS_LIMIT;
+			if (objectType != ObjectType.POI || closeDistance) {
 				res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
-//			}
+			}
 		}
 		return res;
 	}

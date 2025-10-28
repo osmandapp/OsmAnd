@@ -460,9 +460,10 @@ public class SearchCoreFactory {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
 						subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-						// FIXME check if subsearch successful don't call search by name inside
-						// No failed cases found yet - uncomment if city / town don't have exact boundary to match street
-						// require exact matching to search street by name (not attached to city)
+						// No failed cases found yet - city / town should have exact boundary that street belongs to
+						
+						// // Require exact name matching to search street by name (not attached to city)
+						// // Improve check if subsearch successful don't call search by name inside
 //						if (matchAddressName(phrase, null, res, true)) {
 //							subSearchApiOrPublish(phrase, resultMatcher, res, this);
 //						}
@@ -657,8 +658,6 @@ public class SearchCoreFactory {
 					// Київська вулиця 10-Д
 					// 3119 Pleasant Valley Boulevard #1 Altoona
 					// 130/6 Mercedes-Benz Werk 1 (Untertürkheim) Stuttgart - (braces remove)
-//					System.out.println("SEARCH BY NAME " + wordToSearch + " " + r.getRegionName() + " "
-//							+ (lastWord != null ? lastWord.getResult().object : ""));
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
@@ -706,10 +705,6 @@ public class SearchCoreFactory {
 								}
 								
 							}
-//							if (newParentSearchResult != null) {
-//								System.out.println(newParentSearchResult + "  " + res + " " +
-//										MapUtils.getDistance(newParentSearchResult.location, res.location));
-//							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
 							// FIXME UNIT-TESTS
