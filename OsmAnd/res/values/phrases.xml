@@ -1436,8 +1436,9 @@
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
-        <string name="reddit">Reddit</string>
+	<string name="reddit">Reddit</string>
 	<string name="twitter">Twitter</string>
+	<string name="x">X (formerly Twitter)</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
