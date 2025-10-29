@@ -193,6 +193,7 @@
 	<string name="poi_cafe_filter">Cafe</string>
 	<string name="poi_network_foot">Routes network (hiking)</string>
 	<string name="poi_network_cycling">Routes network (cycling)</string>
+	<string name="poi_sample_collection_filter">Sample collection</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -5759,5 +5760,9 @@
 	<string name="poi_barrier_chain">Chain barrier</string>
 	<string name="poi_barrier_log">Log</string>
 	<string name="poi_barrier_sliding_gate">Sliding gate</string>
+	<string name="poi_sample_collection">Sample collection</string>
+	<string name="poi_sample_collection_yes">Yes</string>
+	<string name="poi_sample_collection_covid19">COVID19</string>
+	<string name="poi_sample_collection_blood">Blood</string>
 
 </resources>
