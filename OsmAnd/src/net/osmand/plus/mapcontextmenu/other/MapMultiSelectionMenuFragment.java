@@ -160,12 +160,10 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 				}
 			}
 		};
-		view.post(() -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
-			}
-		});
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
+		}
 	}
 
 	@Override
