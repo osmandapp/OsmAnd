@@ -563,13 +563,8 @@ public class MapSelectionHelper {
 	private boolean isUniqueClickableWay(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull ClickableWay clickableWay) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
-			if (selectedObject.object() instanceof Amenity amenity && amenity.isRouteTrack()) {
-				String gpxActivityType = clickableWay.getGpxFile()
-						.getMetadata().getExtensionsToRead().get(GpxUtilities.ACTIVITY_TYPE);
-				if (gpxActivityType != null && gpxActivityType
-						.equals(amenity.getAdditionalInfo(ROUTE_ACTIVITY_TYPE + "_" + gpxActivityType))) {
-					return false; // skip if same-kind-of OSM route(s) found before
-				}
+			if (selectedObject.object() instanceof Amenity that && haveSameActivityType(that, clickableWay)) {
+				return false; // skip if same-kind-of OSM route(s) found before
 			}
 			if (selectedObject.object() instanceof Amenity that && clickableWay.getOsmId() == that.getOsmId()) {
 				return false; // skip if ClickableWayAmenity is selected
@@ -579,6 +574,13 @@ public class MapSelectionHelper {
 			}
 		}
 		return isUniqueGpxFileName(selectedObjects, clickableWay.getGpxFileName() + GPX_FILE_EXT);
+	}
+
+	private boolean haveSameActivityType(@NonNull Amenity amenity, @NonNull ClickableWay clickableWay) {
+		String gpxActivityType = clickableWay.getGpxFile()
+				.getMetadata().getExtensionsToRead().get(GpxUtilities.ACTIVITY_TYPE);
+		return gpxActivityType != null && gpxActivityType
+				.equals(amenity.getAdditionalInfo(ROUTE_ACTIVITY_TYPE + "_" + gpxActivityType));
 	}
 
 	private boolean isUniqueTravelGpx(@NonNull List<SelectedMapObject> selectedObjects,
