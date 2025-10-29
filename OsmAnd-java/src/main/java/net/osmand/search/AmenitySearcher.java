@@ -50,22 +50,28 @@ public class AmenitySearcher {
         private Collection<String> names;
         private boolean checkOriginName;
         private Map<String, String> tags;
+        private String mainAmenityType;
 
         public Request(MapObject mapObject) {
             osmId = ObfConstants.getOsmObjectId(mapObject);
             type = ObfConstants.getOsmEntityType(mapObject);
             tags = null;
+            mainAmenityType = null;
 
             if (mapObject instanceof Amenity amenity) {
                 latLon = mapObject.getLocation();
                 wikidata = amenity.getWikidata();
                 names = amenity.getOtherNames();
                 names.add(amenity.getName());
+                mainAmenityType = amenity.getSubType();
             } else if (mapObject instanceof RenderedObject renderedObject) {
                 latLon = renderedObject.getLatLon();
                 names = renderedObject.getOriginalNames();
                 wikidata = renderedObject.getTagValue(WIKIDATA);
                 tags = renderedObject.getTags();
+                if (renderedObject.getIconRes() != null && renderedObject.getIconRes().startsWith("amenity_")) {
+                    mainAmenityType = renderedObject.getIconRes().replace("amenity_", "");
+                }
             } else if (mapObject instanceof TransportStop stop) {
                 latLon = mapObject.getLocation();
                 names = stop.getOtherNames();
@@ -86,6 +92,10 @@ public class AmenitySearcher {
             this(mapObject);
             this.names = names;
             this.checkOriginName = checkOriginName;
+        }
+
+        public String getMainAmenityType() {
+            return mainAmenityType;
         }
     }
 
@@ -180,9 +190,7 @@ public class AmenitySearcher {
                             if (amenity.isClosed()) {
                                 closedAmenities.add(id);
                             } else if (!closedAmenities.contains(id)) {
-                                if (openAmenities.add(id)) {
-                                    actualAmenities.add(amenity);
-                                }
+                                actualAmenities.add(amenity);
                             }
                         }
                     }
@@ -229,6 +237,16 @@ public class AmenitySearcher {
             List<Amenity> amenities = searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true, settings.fileVisibility);
 
             List<Amenity> filtered = filterAmenities(amenities, request, settings);
+            if (request.getMainAmenityType() != null) {
+                final String type = request.getMainAmenityType();
+                filtered.sort((a1, a2) -> {
+                    boolean m1 = a1.getSubType().equals(type);
+                    boolean m2 = a2.getSubType().equals(type);
+                    if (m1 == m2)
+                        return 0;
+                    return m1 ? -1 : 1;
+                });
+            }
             if (!Algorithms.isEmpty(filtered)) {
                 return new BaseDetailsObject(filtered, settings.language().get());
             }
