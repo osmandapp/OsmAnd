@@ -608,7 +608,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 				}
 			}
 		};
-		view.post(() -> activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback));
+		activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
 	}
 
 	@Nullable
