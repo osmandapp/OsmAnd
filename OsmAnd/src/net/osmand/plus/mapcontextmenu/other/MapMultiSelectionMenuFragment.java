@@ -251,7 +251,9 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 
 	@Override
 	public void updateNightMode() {
-		menu.updateNightMode();
+		if (menu != null) {
+			menu.updateNightMode();
+		}
 		super.updateNightMode();
 	}
 
