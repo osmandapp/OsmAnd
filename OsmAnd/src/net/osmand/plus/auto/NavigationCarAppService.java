@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ServiceInfo;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.car.app.CarAppService;
@@ -88,7 +89,11 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 		if (!foreground && OsmAndLocationProvider.isLocationPermissionAvailable(getApp())) {
 			foreground = true;
 			Notification notification = getApp().getNotificationHelper().buildCarAppNotification();
-			startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+				startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+			} else {
+				startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+			}
 		}
 	}
 
