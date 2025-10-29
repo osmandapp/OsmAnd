@@ -88,7 +88,9 @@ public class NetworkRouteDrawable extends Drawable {
 		if (isClickableWay) {
 			String color = ClickableWayTags.getGpxColorByTags(amenity.getOsmTags());
 			if (color != null) {
-				shieldTags.putAll(ClickableWayTags.getGpxShieldTags(color));
+				for (Map.Entry<String, String> gpxShieldTags : ClickableWayTags.getGpxShieldTags(color).entrySet()) {
+					shieldTags.putIfAbsent(gpxShieldTags.getKey(), gpxShieldTags.getValue());
+				}
 			}
 		}
 		RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
@@ -262,7 +264,8 @@ public class NetworkRouteDrawable extends Drawable {
 	private enum OsmcIconParams {
 		BACKGROUND("osmc_background", "h_osmc_", "_bg"),
 		FOREGROUND("osmc_foreground", "mm_osmc_", ""),
-		FOREGROUND_2("osmc_foreground2", "mm_osmc_", "");
+		FOREGROUND_2("osmc_foreground2", "mm_osmc_", ""),
+		OSMAND_FOREGROUND("osmand_foreground", "mm_", "");
 
 		@NonNull
 		final String key;
