@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.data.Amenity.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.osm.OsmRouteType.HIKING;
@@ -48,6 +49,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.search.AmenitySearcher;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -259,11 +261,13 @@ public class MapSelectionHelper {
 				if (isNewOsmRoute || isOldOsmRoute) {
 					NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
 					addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), enabledRouteTypes, result);
-				} else if (isClickableWay) {
+				}
+				if (isClickableWay) {
 					addClickableWay(result, app.getClickableWayHelper()
 							.loadClickableWay(result.getPointLatLon(), renderedObject));
-				} else if (isTravelGpx) {
-					addTravelGpx(result, routeId); // user TravelGpx
+				}
+				if (isTravelGpx && !isNewOsmRoute) {
+					addTravelGpx(result, routeId); // WikiVoyage or User TravelGpx
 				}
 
 				boolean allowAmenityObjects = !isSpecial && !renderedObject.isDrawOnPath();
@@ -342,12 +346,14 @@ public class MapSelectionHelper {
 
 						if (isNewOsmRoute || isOldOsmRoute) {
 							NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-							addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), enabledRouteTypes, result);
-						} else if (isClickableWay) {
+									addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), enabledRouteTypes, result);
+						}
+						if (isClickableWay) {
 							addClickableWay(result, app.getClickableWayHelper()
 									.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
-						} else if (isTravelGpx) {
-							addTravelGpx(result, routeId); // user TravelGpx
+						}
+						if (isTravelGpx && !isNewOsmRoute) {
+							addTravelGpx(result, routeId); // WikiVoyage or User TravelGpx
 						}
 
 						IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
@@ -557,6 +563,9 @@ public class MapSelectionHelper {
 	private boolean isUniqueClickableWay(@NonNull List<SelectedMapObject> selectedObjects,
 			@NonNull ClickableWay clickableWay) {
 		for (SelectedMapObject selectedObject : selectedObjects) {
+			if (selectedObject.object() instanceof Amenity that && haveSameActivityType(that, clickableWay)) {
+				return false; // skip if same-kind-of OSM route(s) found before
+			}
 			if (selectedObject.object() instanceof Amenity that && clickableWay.getOsmId() == that.getOsmId()) {
 				return false; // skip if ClickableWayAmenity is selected
 			}
@@ -565,6 +574,13 @@ public class MapSelectionHelper {
 			}
 		}
 		return isUniqueGpxFileName(selectedObjects, clickableWay.getGpxFileName() + GPX_FILE_EXT);
+	}
+
+	private boolean haveSameActivityType(@NonNull Amenity amenity, @NonNull ClickableWay clickableWay) {
+		String gpxActivityType = clickableWay.getGpxFile()
+				.getMetadata().getExtensionsToRead().get(GpxUtilities.ACTIVITY_TYPE);
+		return gpxActivityType != null && gpxActivityType
+				.equals(amenity.getAdditionalInfo(ROUTE_ACTIVITY_TYPE + "_" + gpxActivityType));
 	}
 
 	private boolean isUniqueTravelGpx(@NonNull List<SelectedMapObject> selectedObjects,
