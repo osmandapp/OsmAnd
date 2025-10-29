@@ -69,9 +69,6 @@ public class AmenitySearcher {
                 names = renderedObject.getOriginalNames();
                 wikidata = renderedObject.getTagValue(WIKIDATA);
                 tags = renderedObject.getTags();
-                if (renderedObject.getIconRes() != null && renderedObject.getIconRes().startsWith("amenity_")) {
-                    mainAmenityType = renderedObject.getIconRes().replace("amenity_", "");
-                }
             } else if (mapObject instanceof TransportStop stop) {
                 latLon = mapObject.getLocation();
                 names = stop.getOtherNames();
