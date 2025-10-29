@@ -50,7 +50,7 @@
     <string name="docs_proxy_settings" translatable="false">https://osmand.net/docs/user/personal/global-settings/#proxy</string>
     <string name="docs_free_versions" translatable="false">https://docs.osmand.net/docs/versions/free-versions</string>
 
-    <string name="community_twitter" translatable="false">https://twitter.com/osmandapp</string>
+    <string name="community_twitter" translatable="false">https://x.com/osmandapp</string>
     <string name="community_reddit" translatable="false">https://www.reddit.com/r/OsmAnd</string>
     <string name="community_facebook" translatable="false">https://www.facebook.com/osmandapp</string>
     <string name="community_vk" translatable="false">https://vk.com/osmandapp</string>

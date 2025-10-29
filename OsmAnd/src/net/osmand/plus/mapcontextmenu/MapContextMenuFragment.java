@@ -1410,17 +1410,6 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		super.onPause();
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && !mapActivity.isChangingConfigurations()) {
-			GalleryController galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-			if (galleryController != null) {
-				galleryController.clearListeners();
-			}
-		}
-	}
 
 	@Override
 	public void onDestroyView() {
