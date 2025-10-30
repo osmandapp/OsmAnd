@@ -28,6 +28,9 @@ public class SearchResult {
 	public static final double MAX_TYPES_BASE_10 = 10;
 	// MAX_PHRASE_WEIGHT_TOTAL should be  > getSumPhraseMatchWeight
 	public static final double MAX_PHRASE_WEIGHT_TOTAL = MAX_TYPES_BASE_10 * MAX_TYPES_BASE_10;
+	
+	private static final int MIN_ELO_RATING = 2000;
+	private static final int MAX_ELO_RATING = 4000;
 
 	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
@@ -110,6 +113,13 @@ public class SearchResult {
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (completeMatchRes.allWordsInPhraseAreInResult) {
 				res = getPhraseWeightForCompleteMatch(completeMatchRes);
+			}
+			if (object instanceof Amenity a) {
+				int elo = a.getTravelEloNumber();
+				if (elo > MIN_ELO_RATING) {
+					double rat = ((double)elo - MIN_ELO_RATING) / (MAX_ELO_RATING - MIN_ELO_RATING);
+					res += rat * MAX_PHRASE_WEIGHT_TOTAL / 2; 
+				}
 			}
 		}
 		if (parentSearchResult != null) {
