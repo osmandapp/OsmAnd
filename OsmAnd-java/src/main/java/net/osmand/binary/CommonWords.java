@@ -843,8 +843,6 @@ public class CommonWords {
 		addFrequentlyUsed("augusta");
 		addFrequentlyUsed("neuburger");
 
-
-
 		addCommon("la");
 		addCommon("via");
 		addCommon("rua");
@@ -971,7 +969,6 @@ public class CommonWords {
 		addCommon("viale");
 		addCommon("loop");
 		
-
 		addCommon("bridge");
 		addCommon("embankment");
 		addCommon("township");
