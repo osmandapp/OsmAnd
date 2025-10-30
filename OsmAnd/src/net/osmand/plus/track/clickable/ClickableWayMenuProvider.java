@@ -1,19 +1,28 @@
 package net.osmand.plus.track.clickable;
 
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.binary.HeightDataLoader.CancellableCallback;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.MapSelectionResult;
 import net.osmand.plus.views.layers.MapSelectionRules;
+import net.osmand.router.network.NetworkRouteSelector;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.WptPt;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuProvider {
     private final OsmandApplication app;
@@ -50,8 +59,32 @@ public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuPr
     @NonNull
     @Override
     public PointDescription getObjectName(@NonNull Object o) {
-        String name = ((ClickableWay) o).getWayName();
-        return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
+        ClickableWay way = (ClickableWay) o;
+        String name = way.getWayName();
+        RouteActivity activity = getRouteActivity(way);
+        if (activity != null) {
+            String activityTranslated = app.getPoiTypes().getPoiTranslator()
+                    .getTranslation(Amenity.ROUTE_ACTIVITY_TYPE + "_" + activity.getId());
+            PointDescription details = new PointDescription(PointDescription.POINT_TYPE_GPX, activityTranslated, name);
+
+            Map<String, String> shieldTags = way.getGpxTags().entrySet().stream()
+                    .filter(e -> NetworkRouteSelector.RouteKey.SHIELD_TO_OSMC.containsKey(e.getKey()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+            shieldTags.putIfAbsent("shield_fg", activity.getIconName());
+            Drawable iconDrawable = NetworkRouteDrawable.getIconByShieldTags(shieldTags, app);
+            if (iconDrawable != null) {
+                details.setIconDrawable(iconDrawable);
+            }
+            return details;
+        } else {
+            return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
+        }
+    }
+
+    @Nullable
+    private RouteActivity getRouteActivity(ClickableWay way) {
+        String activityType = way.getActivityType();
+        return activityType != null ? app.getRouteActivityHelper().findRouteActivity(activityType) : null;
     }
 
     @Override

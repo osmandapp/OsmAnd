@@ -79,49 +79,8 @@ public class SearchPhrase {
 		conjunctions.add("y");
 		conjunctions.add("и");
 		
-		// short - issues for perfect matching "Drive A"
+		// Don't add short names !  issues for perfect matching "Drive A", ...
 //		conjunctions.add("f");
-//		conjunctions.add("u");
-//		conjunctions.add("jl.");
-//		conjunctions.add("j");
-//		conjunctions.add("sk");
-//		conjunctions.add("w");
-//		conjunctions.add("a.");
-//		conjunctions.add("of");
-//		conjunctions.add("k");
-//		conjunctions.add("r");
-//		conjunctions.add("h");
-//		conjunctions.add("mc");
-//		conjunctions.add("sw");
-//		conjunctions.add("g");
-//		conjunctions.add("v");
-//		conjunctions.add("m");
-//		conjunctions.add("c.");
-//		conjunctions.add("r.");
-//		conjunctions.add("ct");
-//		conjunctions.add("e.");
-//		conjunctions.add("dr.");
-//		conjunctions.add("j.");		
-//		conjunctions.add("in");
-//		conjunctions.add("al");
-//		conjunctions.add("út");
-//		conjunctions.add("per");
-//		conjunctions.add("ne");
-//		conjunctions.add("p");
-//		conjunctions.add("et");
-//		conjunctions.add("s.");
-//		conjunctions.add("f.");
-//		conjunctions.add("t");
-//		conjunctions.add("fe");
-//		conjunctions.add("à");
-//		conjunctions.add("i");
-//		conjunctions.add("c");
-//		conjunctions.add("le");
-//		conjunctions.add("s");
-//		conjunctions.add("av.");
-//		conjunctions.add("den");
-//		conjunctions.add("dr");
-//		conjunctions.add("y");
 
 		commonWordsComparator = new Comparator<String>() {
 
@@ -162,11 +121,6 @@ public class SearchPhrase {
 		return fileRequest;
 	}
 	
-	public SearchPhrase generateNewPhrase(SearchPhrase phrase, BinaryMapIndexReader file) {
-		SearchPhrase nphrase = generateNewPhrase(phrase.getUnknownSearchPhrase(), phrase.getSettings());
-		nphrase.fileRequest = file;
-		return nphrase;
-	}
 	
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
@@ -304,6 +258,16 @@ public class SearchPhrase {
 		return sp;
 	}
 	
+	public String selectMainUnknownWordToSearch(List<String> searchWords) {
+		Collections.sort(searchWords, commonWordsComparator);
+		for (String s : searchWords) {
+			s = s.trim();
+			if (s.length() > 0) {
+				return s;
+			}
+		}
+		return "";
+	}
 	
 	private void calcMainUnknownWordToSearch() {
 		if (mainUnknownWordToSearch != null) {
@@ -426,7 +390,12 @@ public class SearchPhrase {
 		if (l == null) {
 			return null;
 		}
-		float coeff = (float) (1000 / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
+		cache1kmRect= caculateBbox(1000, l);
+		return cache1kmRect;
+	}
+
+	public static QuadRect caculateBbox(int radiusMeters, LatLon l) {
+		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
 		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
 		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
 		double topLeftX = Math.max(0, tx - coeff);
@@ -435,8 +404,7 @@ public class SearchPhrase {
 		double bottomRightX = Math.min(max, tx + coeff);
 		double bottomRightY = Math.min(max, ty + coeff);
 		double pw = MapUtils.getPowZoom(31 - SearchRequest.ZOOM_TO_SEARCH_POI);
-		cache1kmRect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
-		return cache1kmRect;
+		return new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
 	}
 	
 	
@@ -675,16 +643,16 @@ public class SearchPhrase {
 	}
 
 	public SearchWord getLastSelectedWord() {
-		if(words.isEmpty()) {
+		if (words.isEmpty()) {
 			return null;
 		}
 		return words.get(words.size() - 1);
 	}
 	
 	public LatLon getWordLocation() {
-		for(int i = words.size() - 1; i >= 0; i--) {
+		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if(sw.getLocation() != null) {
+			if (sw.getLocation() != null) {
 				return sw.getLocation();
 			}
 		}
@@ -692,13 +660,13 @@ public class SearchPhrase {
 	}
 	
 	public LatLon getLastTokenLocation() {
-		for(int i = words.size() - 1; i >= 0; i--) {
+		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
-			if(sw.getLocation() != null) {
+			if (sw.getLocation() != null) {
 				return sw.getLocation();
 			}
 		}
-		// last token or myLocationOrVisibleMap if not selected 
+		// last token or myLocationOrVisibleMap if not selected
 		if (settings != null) {
 			return settings.getOriginalLocation();
 		}
@@ -845,7 +813,7 @@ public class SearchPhrase {
 				}
 				if (match) {
 					if (sr.otherWordsMatch == null) {
-						sr.otherWordsMatch = new TreeSet<>();
+						sr.otherWordsMatch = new TreeSet<>(getCollator());
 					}
 					sr.otherWordsMatch.add(otherUnknownWords.get(i));
 					r++;
@@ -957,5 +925,17 @@ public class SearchPhrase {
 		return lastUnknownSearchWordComplete;
 	}
 
+	public static String stripBraces(String localeName) {
+		int i = localeName.indexOf('(');
+		String retName = localeName;
+		if (i > -1) {
+			retName = localeName.substring(0, i);
+			int j = localeName.indexOf(')', i);
+			if (j > -1) {
+				retName = (retName.trim() + ' ' + localeName.substring(j + 1)).trim();
+			}
+		}
+		return retName;
+	}
 	
 }
