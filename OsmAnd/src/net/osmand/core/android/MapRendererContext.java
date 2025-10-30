@@ -464,7 +464,6 @@ public class MapRendererContext {
 		// If there's current provider and bound view, remove it
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (obfMapSymbolsProvider != null && mapRendererView != null && this.providerType == providerType) {
-			mapPrimitivesProvider.clearEntriesCache();
 			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 		}
 		// Create new OBF map symbols provider
