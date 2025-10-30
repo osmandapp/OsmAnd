@@ -665,8 +665,14 @@ public class SearchUICore {
 		return resultCollection;
 	}
 
-
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
+		search(text, delayedExecution, matcher, null);
+	}
+	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, 
+			SearchSettings overrideSettings) {
+		if (overrideSettings != null) {
+			this.searchSettings = overrideSettings;
+		}
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		phrase.setAcceptPrivate(this.phrase.isAcceptPrivate());
