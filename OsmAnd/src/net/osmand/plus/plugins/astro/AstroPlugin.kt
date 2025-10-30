@@ -8,10 +8,8 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
-import net.osmand.plus.plugins.astro.views.CelestialPathView
-import net.osmand.plus.plugins.astro.widgets.CelestialPathWidget
-import net.osmand.plus.plugins.astro.widgets.PlanetsAltitudeWidget
-import net.osmand.plus.plugins.astro.widgets.PlanetsVisibilityWidget
+import net.osmand.plus.plugins.astro.widgets.SkyChartWidgetState
+import net.osmand.plus.plugins.astro.widgets.SkyChartsWidget
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo
@@ -27,9 +25,7 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	init {
 		val noAppMode = arrayOf<ApplicationMode?>()
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.PLANETS_VISIBILITY_WIDGET, *noAppMode)
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.PLANETS_ALTITUDE_WIDGET, *noAppMode)
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.CELESTIAL_PATH_WIDGET, *noAppMode)
+		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.SKY_CHART_WIDGET, *noAppMode)
 	}
 
 	override fun getId(): String {
@@ -59,17 +55,9 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	override fun createWidgets(mapActivity: MapActivity, widgetInfos: MutableList<MapWidgetInfo?>, appMode: ApplicationMode) {
 		val creator = WidgetInfoCreator(app, appMode)
 
-		val planetsVisibilityWidget = createMapWidgetForParams(mapActivity, WidgetType.PLANETS_VISIBILITY_WIDGET)
+		val planetsVisibilityWidget = createMapWidgetForParams(mapActivity, WidgetType.SKY_CHART_WIDGET)
 		if (planetsVisibilityWidget != null) {
 			widgetInfos.add(creator.createWidgetInfo(planetsVisibilityWidget))
-		}
-		val planetsAltitudeWidget = createMapWidgetForParams(mapActivity, WidgetType.PLANETS_ALTITUDE_WIDGET)
-		if (planetsAltitudeWidget != null) {
-			widgetInfos.add(creator.createWidgetInfo(planetsAltitudeWidget))
-		}
-		val celestialPathWidget = createMapWidgetForParams(mapActivity, WidgetType.CELESTIAL_PATH_WIDGET)
-		if (celestialPathWidget != null) {
-			widgetInfos.add(creator.createWidgetInfo(celestialPathWidget))
 		}
 	}
 
@@ -80,14 +68,8 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	override fun createMapWidgetForParams(mapActivity: MapActivity, widgetType: WidgetType,
 										  customId: String?, widgetsPanel: WidgetsPanel?): MapWidget? {
 		return when (widgetType) {
-			WidgetType.PLANETS_VISIBILITY_WIDGET ->
-				PlanetsVisibilityWidget(mapActivity, customId, widgetsPanel)
-
-			WidgetType.PLANETS_ALTITUDE_WIDGET ->
-				PlanetsAltitudeWidget(mapActivity, customId, widgetsPanel)
-
-			WidgetType.CELESTIAL_PATH_WIDGET ->
-				CelestialPathWidget(mapActivity, customId, widgetsPanel)
+			WidgetType.SKY_CHART_WIDGET ->
+				SkyChartsWidget(mapActivity, SkyChartWidgetState(app, customId), customId, widgetsPanel)
 
 			else -> null
 		}

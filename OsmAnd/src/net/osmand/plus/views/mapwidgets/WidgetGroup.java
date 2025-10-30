@@ -37,7 +37,7 @@ public enum WidgetGroup {
 	SUNRISE_SUNSET(R.string.map_widget_sun_position, R.string.map_widget_group_sunrise_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0),
 	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0),
 	ROUTE_GUIDANCE(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
-	SKY_CHART(R.string.sky_chart_name, R.string.sky_chart_widget_group_desc, R.drawable.ic_action_world_globe, R.drawable.ic_action_world_globe, 0);
+	SKY_CHARTS(R.string.sky_charts_name, R.string.sky_charts_widget_group_desc, R.drawable.ic_action_world_globe, R.drawable.ic_action_world_globe, 0);
 
 	@StringRes
 	public final int titleId;
@@ -132,7 +132,7 @@ public enum WidgetGroup {
 			return getPartOfPluginDesc(context, ExternalSensorsPlugin.class);
 		} else if (this == WEATHER) {
 			return getPartOfPluginDesc(context, WeatherPlugin.class);
-		} else if (this == SKY_CHART) {
+		} else if (this == SKY_CHARTS) {
 			return getPartOfPluginDesc(context, AstroPlugin.class);
 		}
 		return null;
@@ -143,7 +143,7 @@ public enum WidgetGroup {
 		if (this == BEARING || this == COORDINATES_WIDGET) {
 			return R.drawable.ic_action_help;
 		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == DEVELOPER_OPTIONS
-				|| this == WEATHER || this == ANT_PLUS || this == SKY_CHART) {
+				|| this == WEATHER || this == ANT_PLUS || this == SKY_CHARTS) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;

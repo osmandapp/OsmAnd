@@ -447,8 +447,8 @@ class CelestialPathView @JvmOverloads constructor(
 		val top = height - dp(44f)
 		val r = RectF(left, top, left + widthNeeded, top + dp(32f))
 		// panel bg
-		canvas.drawRoundRect(r, dp(8f), dp(8f), panelPaint)
-		canvas.drawRoundRect(r, dp(8f), dp(8f), panelStroke)
+		//canvas.drawRoundRect(r, dp(8f), dp(8f), panelPaint)
+		//canvas.drawRoundRect(r, dp(8f), dp(8f), panelStroke)
 
 		var x = r.left + dp(12f)
 		val y = r.centerY()
