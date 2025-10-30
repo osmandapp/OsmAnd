@@ -89,7 +89,7 @@ public class SearchResult {
 	}
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
-		double res = ObjectType.getTypeWeight(objectType);
+		double res = getTypeWeight(exactResult, objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 		} else if (objectType == ObjectType.POI_TYPE) {
@@ -138,13 +138,13 @@ public class SearchResult {
 			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (matched) {
-				res = getPhraseWeightForCompleteMatch(completeMatchRes);
+				res = getPhraseWeightForCompleteMatch(exactResult, completeMatchRes);
 			}
 			if (object instanceof Amenity a) {
 				int elo = a.getTravelEloNumber();
 				if (elo > MIN_ELO_RATING) {
 					double rat = ((double)elo - MIN_ELO_RATING) / (MAX_ELO_RATING - MIN_ELO_RATING);
-					res += rat * MAX_PHRASE_WEIGHT_TOTAL / 2; 
+					res += rat * MAX_PHRASE_WEIGHT_TOTAL * 2 / 3; 
 				}
 			}
 		}
@@ -155,20 +155,27 @@ public class SearchResult {
 		return res;
 	}
 
-	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes) {
-		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10;
+	private double getPhraseWeightForCompleteMatch(SearchResult exactResult, CheckWordsMatchCount completeMatchRes) {
+		double res = getTypeWeight(exactResult, objectType) * MAX_TYPES_BASE_10;
 		// if all words from search phrase == the search result words - we prioritize it even higher
 		if (completeMatchRes.allWordsEqual) {
 			boolean closeDistance = requiredSearchPhrase.getLastTokenLocation() != null && this.location != null 
 					&& MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(), this.location) <= NEAREST_METERS_LIMIT;
 			if (objectType != ObjectType.POI || closeDistance) {
-				res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
+				res = getTypeWeight(exactResult, objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
 			}
 		}
 		return res;
 	}
 	
 	
+
+	private double getTypeWeight(SearchResult exactResult, ObjectType ot) {
+		if (exactResult == null && !requiredSearchPhrase.isLikelyAddressSearch()) {
+			return 1;
+		}
+		return ObjectType.getTypeWeight(ot);
+	}
 
 	public int getDepth() {
 		if (parentSearchResult != null) {
