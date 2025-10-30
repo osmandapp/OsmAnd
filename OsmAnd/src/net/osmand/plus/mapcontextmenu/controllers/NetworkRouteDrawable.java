@@ -15,11 +15,13 @@ import net.osmand.gpx.clickable.ClickableWayTags;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.data.Amenity;
 
@@ -75,6 +77,19 @@ public class NetworkRouteDrawable extends Drawable {
 		} else {
 			return UiUtilities.getLayeredIcon(icons.toArray(new Drawable[0]));
 		}
+	}
+
+	@Nullable
+	public static Drawable getIconByShieldTags(@NonNull Map<String, String> tags, @NonNull OsmandApplication app) {
+		NetworkRouteSelector.RouteKey shieldRouteKey = NetworkRouteSelector.RouteKey.fromShieldTags(tags);
+		if (shieldRouteKey != null) {
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+			NetworkRouteDrawable iconDrawable = new NetworkRouteDrawable(app, shieldRouteKey, nightMode);
+			if (iconDrawable.backgroundDrawable != null) {
+				return iconDrawable;
+			}
+		}
+		return null;
 	}
 
 	@Nullable
