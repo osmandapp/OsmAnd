@@ -665,11 +665,8 @@ public class SearchUICore {
 		return resultCollection;
 	}
 
-	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
-		search(text, delayedExecution, matcher, searchSettings);
-	}
 
-	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, final SearchSettings searchSettings) {
+	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		phrase.setAcceptPrivate(this.phrase.isAcceptPrivate());
@@ -1192,10 +1189,10 @@ public class SearchUICore {
 				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
 				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
 				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SearchResult.MAX_PHRASE_WEIGHT_TOTAL > 1) {
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o1.localeName))) {
+					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o1.localeName))) {
 						o1PhraseWeight--;
 					}
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o2.localeName))) {
+					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o2.localeName))) {
 						o2PhraseWeight--;
 					}
 				}
@@ -1268,20 +1265,9 @@ public class SearchUICore {
 			}
 			return 0;
 		}
+
 	}
 	
-	private static String stripBraces(String localeName) {
-		int i = localeName.indexOf('(');
-		String retName = localeName;
-		if (i > -1) {
-			retName = localeName.substring(0, i);
-			int j = localeName.indexOf(')', i);
-			if (j > -1) {
-				retName = retName.trim() + ' ' + localeName.substring(j);
-			}
-		}
-		return retName;
-	}
 
 	public boolean isOnlineSearch() {
 		return searchSettings.hasCustomSearchType(ONLINE_SEARCH);
