@@ -83,7 +83,7 @@ public class NetworkRouteDrawable extends Drawable {
 	public static Drawable getIconByShieldTags(@NonNull Map<String, String> tags, @NonNull OsmandApplication app) {
 		NetworkRouteSelector.RouteKey shieldRouteKey = NetworkRouteSelector.RouteKey.fromShieldTags(tags);
 		if (shieldRouteKey != null) {
-			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 			NetworkRouteDrawable iconDrawable = new NetworkRouteDrawable(app, shieldRouteKey, nightMode);
 			if (iconDrawable.backgroundDrawable != null) {
 				return iconDrawable;
