@@ -72,6 +72,12 @@ public class ClickableWayHelper {
         long osmId = ObfConstants.getOsmIdFromBinaryMapObjectId(renderedObject.getId());
         Map<String, String> tags = renderedObject.getTags();
         String name = renderedObject.getName();
+        if (Algorithms.isEmpty(name) || ".".equals(name)) {
+            name = tags.get(Amenity.NAME);
+        }
+        if (Algorithms.isEmpty(name) || ".".equals(name)) {
+            name = tags.get(Amenity.REF);
+        }
         TIntArrayList xPoints = renderedObject.getX();
         TIntArrayList yPoints = renderedObject.getY();
         QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);

@@ -293,6 +293,11 @@ public class OsmandSettings {
 		return globalPreferences != null && globalPreferences.getBoolean(SETTING_CUSTOMIZED_ID, false);
 	}
 
+	public boolean isProfileModified(@NonNull ApplicationMode mode) {
+		SharedPreferences preferences = (SharedPreferences) getProfilePreferences(mode);
+		return !Algorithms.isEmpty(preferences.getAll()) && getLastModePreferencesEditTime(mode) != 0;
+	}
+
 	// TODO doesn't look correct package visibility
 	public Object getProfilePreferences(@Nullable ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));

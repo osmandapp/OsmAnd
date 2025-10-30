@@ -470,7 +470,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		urls.put("facebook", "https://facebook.com/%s");
 		urls.put("vk", "https://vk.com/%s");
 		urls.put("instagram", "https://instagram.com/%s");
-		urls.put("twitter", "https://twitter.com/%s");
+		urls.put("twitter", "https://x.com/%s");
 		urls.put("ok", "https://ok.ru/%s");
 		urls.put("telegram", "https://t.me/%s");
 		urls.put("flickr", "https://flickr.com/%s");

@@ -37,7 +37,6 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.UrlImageCard;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController.DownloadMetadataListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -58,7 +57,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements DownloadMetadataListener {
+public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
@@ -94,15 +93,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		}
 	}
 
-	@Override
-	public void onMetadataUpdated(@NonNull Set<String> updatedMediaTagImages) {
-		ImageCard card = getSelectedImageCard();
-		if (card instanceof WikiImageCard wikiImageCard && updatedMediaTagImages.contains(wikiImageCard.getWikiImage().getWikiMediaTag())) {
-			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
-		}
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -123,7 +113,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		if (selectedPosition < imageCards.size()) {
 			setupViewPager(view);
 			preloadThumbNails();
-			updateImageDescriptionRow(getSelectedImageCard(), true, null);
+			updateImageDescriptionRow(getSelectedImageCard());
 		}
 
 		return view;
@@ -135,14 +125,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		collection.replace(InsetTarget.createBottomContainer(R.id.description_container));
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
-	}
-
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		if (controller != null) {
-			controller.addMetaDataListener(this);
-		}
 	}
 
 	private void preloadThumbNails() {
@@ -234,18 +216,15 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard) {
 		WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 		String license = metadata.getLicense();
-		return !wikiImageCard.isMetaDataDownloaded() && !controller.isMetadataDownloading(wikiImageCard)
+		return !wikiImageCard.isMetaDataDownloaded()
 				&& (Algorithms.isEmpty(license) || license.equals("Unknown"));
 	}
 
-	private void updateImageDescriptionRow(@NonNull ImageCard imageCard, boolean initialLoad,
-			@Nullable Boolean preloadNext) {
+	private void updateImageDescriptionRow(@NonNull ImageCard imageCard) {
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
 			licenseView.setVisibility(View.VISIBLE);
-			controller.addMetaDataListener(this);
-			controller.downloadWikiMetaData(getImagesToDownloadMetadata(wikiImageCard, initialLoad, preloadNext));
 
 			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
@@ -486,7 +465,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 				boolean shouldPreloadNext = selectedPosition < position;
 				selectedPosition = position;
 				preloadThumbNails(shouldPreloadNext);
-				updateImageDescriptionRow(getSelectedImageCard(), false, shouldPreloadNext);
+				updateImageDescriptionRow(getSelectedImageCard());
 			}
 
 			@Override
@@ -540,12 +519,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	public void onPause() {
 		super.onPause();
 		getMapActivity().enableDrawer();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		controller.removeMetaDataListener(this);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {

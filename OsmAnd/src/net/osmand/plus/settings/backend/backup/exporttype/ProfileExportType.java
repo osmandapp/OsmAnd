@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -36,9 +35,15 @@ class ProfileExportType extends AbstractExportType {
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		List<ApplicationModeBean> appModeBeans = new ArrayList<>();
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-			appModeBeans.add(appMode.toModeBean());
+			if (!shouldSkip(app, appMode)) {
+				appModeBeans.add(appMode.toModeBean());
+			}
 		}
 		return appModeBeans;
+	}
+
+	private boolean shouldSkip(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
+		return !appMode.isCustomProfile() && !app.getSettings().isProfileModified(appMode);
 	}
 
 	@NonNull

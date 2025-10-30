@@ -4062,7 +4062,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Íconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de los iconos a bajos niveles de zum para aquellos puntos de interés que no suelen mostrarse</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de los iconos a bajos niveles de zum para aquellos puntos de interés que no suelen mostrarse.</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
@@ -5550,7 +5550,7 @@
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
     <string name="hmd_promo">Oferta de HMD por %1$s meses</string>
     <string name="original_shape_description">Cada punto conserva su propia forma.</string>
-    <string name="save_favorite_default_appearance">¿Aplicar cambios a todos los puntos existentes en la carpeta, o sólo a los nuevos?</string>
+    <string name="save_favorite_default_appearance">¿Aplicar cambios a todos los puntos existentes en la carpeta o sólo a los nuevos?</string>
     <string name="original_color_description">Cada punto conserva su propio color.</string>
     <string name="apply_to_all_points">Aplicar a todos los puntos</string>
     <string name="original_icon_description">Cada punto conserva su propio ícono.</string>
@@ -5595,7 +5595,7 @@
     <string name="grid_color">Color de la cuadrícula</string>
     <string name="shared_string_edges">Bordes</string>
     <string name="labels_position">Ubicación de las etiquetas</string>
-    <string name="routing_attr_allow_ferries_description">Permite la navegación con transbordadores (ferris)</string>
+    <string name="routing_attr_allow_ferries_description">Permite navegar por transbordadores (ferris)</string>
     <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
     <string name="multipoligon_related">Relacionado</string>
     <string name="route_part_of">Parte de</string>
@@ -5741,9 +5741,9 @@
     <string name="track_folder_appearance">Aspecto de la carpeta de trazas</string>
     <string name="update_maps">Actualizar mapas</string>
     <string name="reconnect">Reconectar</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
+    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos o del último descenso, del viaje actual registrado.</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje o del último actual registrado.</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia total del recorrido actual registrado, con modos para ver la distancia del último ascenso y descenso.</string>
+    <string name="trip_recording_distance_widget_desc">Muestra la distancia total del viaje registrado actual, con modos para ver la distancia del último ascenso y descenso.</string>
     <string name="trip_recording_max_speed_widget_description">Muestra la velocidad máxima del viaje actual registrado. Pulsá para cambiar entre la velocidad máxima general y la velocidad máxima del último ascenso o descenso.</string>
     <string name="trip_recording_average_slope_widget_description">Muestra la pendiente media del último ascenso o descenso del viaje actual registrado.</string>
     <string name="average_slope">Pendiente media</string>
@@ -5755,4 +5755,8 @@
     <string name="save_and_access_articles_offline">Guardá datos y accedé a artículos sin conexión, en cualquier lugar</string>
     <string name="private_access_routing_req_short">¿Usar un camino privado para llegar al destino?</string>
     <string name="download_wikipedia_label">Descargar Wikipedia</string>
+    <string name="quick_action_weather_layers">Un botón que alterna en el mapa las capas de meteorología.</string>
+    <string name="quick_action_wind_animation_layer">Un botón que alterna en el mapa la capa animada del viento.</string>
+    <string name="wind_animation_layer">Capa animada del viento</string>
+    <string name="weather_layers">Capas de meteorología</string>
 </resources>

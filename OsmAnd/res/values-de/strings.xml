@@ -4081,7 +4081,7 @@
     <string name="shared_string_articles">Artikel</string>
     <string name="included_categories">Enthaltene Kategorien</string>
     <string name="release_4_1">• Erste Unterstützung für Android Auto hinzugefügt \n \n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM-Koordinaten \n \n • GPS-Filter für GPX-Tracks \n \n • Höhen-Widget (Pro) \n \n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt \n \n • Routenplanung: verwendet nach dem Start das ausgewählte Profil \n \n • Mapillary-Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert \n \n • Anzeige zur Verwaltung des gesamten Verlaufs der App hinzugefügt \n \n • Die Kartenausrichtung wird nach dem Neustart der App nicht zurückgesetzt \n \n • Verbesserte Darstellung von SRTM-Höhenmarkierungen \n \n • Arabische Kartenbeschriftungen korrigiert \n \n • Verschiedene Routingprobleme behoben</string>
-    <string name="rendering_attr_natureReserves_name">Naturreservate und -schutzgebiete</string>
+    <string name="rendering_attr_natureReserves_name">Naturschutzgebiet und Schutzgebiete</string>
     <string name="internal_app_storage_description">Interner Speicher, versteckt vor allen Benutzern und anderen Apps, sodass nur OsmAnd auf Ihre Daten zugreifen kann.</string>
     <string name="shared_string_details">Details</string>
     <string name="shared_app_storage_description">Gemeinsamer Speicher ist aufgrund des geänderten Android-Speicherzugriffs nicht mehr verfügbar.</string>
@@ -5316,7 +5316,7 @@
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
     <string name="wall_height">Höhe der Mauer</string>
     <string name="rendering_value_dark_orange_name">Dunkelorange</string>
-    <string name="clear_all_key_shortcuts">Alle Tastaturkürzel löschen</string>
+    <string name="clear_all_key_shortcuts">Alle Tastenkombinationen löschen</string>
     <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
     <string name="shared_string_key">Taste</string>
     <string name="new_key_assignment">Neue Tastenzuweisung</string>
@@ -5324,7 +5324,7 @@
     <string name="clear_key_assignment_summary">Tastenzuweisung für die ausgewählte Aktion wird gelöscht.</string>
     <string name="key_assignment_add_action">Aktion hinzufügen</string>
     <string name="clear_all_key_shortcuts_summary">Alle Tastenzuweisungen für den ausgewählten Typ werden entfernt.</string>
-    <string name="no_assigned_keys_desc">Wählen Sie eine Aktion aus und weisen Sie eine Taste mit der Schaltfläche „Hinzufügen“ zu.</string>
+    <string name="no_assigned_keys_desc">Wählen Sie eine Aktion aus und weisen Sie ihr eine Taste zu, indem Sie auf die Schaltfläche „Hinzufügen“ tippen.</string>
     <string name="key_assignment_add_key">Taste hinzufügen</string>
     <string name="assigned_keys">Zugewiesene Tasten</string>
     <string name="shared_string_colors">Farben</string>
@@ -5649,7 +5649,7 @@
     <string name="av_audio_sample_rate_descr">Wählen Sie die Audio-Samplerate.</string>
     <string name="connect_new_scanner">Neuen Scanner verbinden</string>
     <string name="preview_next_turn">Vorschau der nächsten Abbiegung</string>
-    <string name="auto_zoom_3d_angle">Autozoom 3D-Winkel</string>
+    <string name="auto_zoom_3d_angle">3D-Winkel mit automatischem Zoom</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Wählen Sie die Parameter aus, die in der GPX-Datei aufgezeichnet werden sollen.</string>
     <string name="location_interpolation_percent_desc">Legt den Prozentsatz der Standortinterpolation während der Routennavigation fest. Dieser Parameter reduziert die Verzögerung der Position des Standorts auf der Karte während der Animation.</string>
@@ -5672,7 +5672,7 @@
     <string name="shared_string_length">Länge</string>
     <string name="map_widget_route_information">Informationen zur Route</string>
     <string name="shared_string_default_view">Standardansicht</string>
-    <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktive Navigationsroute an.</string>
+    <string name="map_widget_route_information_desc">Zeigt die voraussichtliche Ankunftszeit, die verbleibende Reisezeit und die Entfernung für die aktive Navigationsroute an.</string>
     <string name="ais_nmea_protocol_description">Protokoll für NMEA-Datenempfang auswählen</string>
     <string name="ais_ship_lost_timeout_description">Zeitlimit für die Sichtbarkeit veralteter Schiffe festlegen: Nach Ablauf dieser Zeit ohne Signalempfang wird das Schiffssymbol durchgestrichen.</string>
     <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
@@ -5710,7 +5710,7 @@
     <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für %1$s Monate</string>
     <string name="hmd_promo">HMD Promo für %1$s Monate</string>
     <string name="apply_to_all_points">Auf alle Punkte anwenden</string>
-    <string name="save_favorite_default_appearance">Änderungen auf alle vorhandenen Punkte im Ordner anwenden oder nur auf neu hinzugefügte?</string>
+    <string name="save_favorite_default_appearance">Änderungen auf alle vorhandenen Punkte im Ordner oder nur auf neu hinzugefügte Punkte anwenden?</string>
     <string name="original_color_description">Jeder Punkt behält seine individuelle Farbe.</string>
     <string name="original_icon_description">Jeder Punkt behält sein individuelles Symbol.</string>
     <string name="original_shape_description">Jeder Punkt behält seine individuelle Form.</string>
@@ -5851,8 +5851,8 @@
     <string name="rendering_attr_hideTidalFlats_description">Wattflächen ausblenden</string>
     <string name="rendering_attr_depthColorScheme_name">Farbschema für Tiefe</string>
     <string name="rendering_attr_depthColorScheme_description">Farbschema für Tiefe</string>
-    <string name="rendering_attr_depthContoursDashed_name">Gestrichelte Tiefenlinien</string>
-    <string name="rendering_attr_depthContoursDashed_description">Gestrichelte Tiefenlinien</string>
+    <string name="rendering_attr_depthContoursDashed_name">Gestrichelte Tiefenkonturen</string>
+    <string name="rendering_attr_depthContoursDashed_description">Gestrichelte Tiefenkonturen</string>
     <string name="rendering_attr_fairwayStyle_name">Fahrrinnenfarbe</string>
     <string name="rendering_attr_fairwayStyle_description">Farbe der Fahrrinnen</string>
     <string name="rendering_attr_safetyContour_name">Sicherheitstiefenlinie</string>
@@ -5882,7 +5882,7 @@
     <string name="rendering_attr_tidalFlatStyle_name">Watt-Stil</string>
     <string name="rendering_attr_tidalFlatStyle_description">Stil der Wattflächen</string>
     <string name="lang_en_barebones">Englisch (wesentliches)</string>
-    <string name="obd_alt_battery_voltage">Adapterspannung</string>
+    <string name="obd_alt_battery_voltage">Adapter-Spannung</string>
     <string name="liter_single">Liter</string>
     <string name="imperial_gallon">Britische Gallone</string>
     <string name="us_gallon">US-Gallone</string>
@@ -5896,14 +5896,14 @@
     <string name="show_spherical_map_description">Sphäroidisches Modell der Erde anzeigen</string>
     <string name="shared_string_price">Preis</string>
     <string name="rendering_attr_showSkiSlopes_name">Skipisten anzeigen</string>
-    <string name="rendering_attr_showSkiSlopes_description">Einfache Skipisten anzeigen</string>
+    <string name="rendering_attr_showSkiSlopes_description">Vereinfachte Skipisten anzeigen</string>
     <string name="track_folder_appearance">Aussehen des Track-Ordners</string>
     <string name="update_maps">Karten aktualisieren</string>
     <string name="reconnect">Erneut verbinden</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege oder den letzten Anstieg der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_distance_widget_desc">Zeigt die Gesamtstrecke Ihrer aktuell aufgezeichneten Strecke an, mit Modi zur Anzeige der Strecke des letzten Anstiegs und Abstiegs.</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Skipisten und Routen</string>
-    <string name="rendering_attr_pisteRoutes_name">Skipisten und Routen</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skipisten und -routen</string>
+    <string name="rendering_attr_pisteRoutes_name">Skipisten und -routen</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten oder die letzte Abfahrt der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_max_speed_widget_description">Zeigt die Höchstgeschwindigkeit für die aktuell aufgezeichnete Strecke an. Tippen Sie darauf, um zwischen der Gesamt-Höchstgeschwindigkeit und der Höchstgeschwindigkeit der letzten Bergauf- oder Bergabfahrt zu wechseln.</string>
     <string name="trip_recording_average_slope_widget_description">Zeigt die durchschnittliche Hangneigung für den letzten Abfahrts- oder Anstiegsabschnitt der aktuell aufgezeichneten Strecke an.</string>

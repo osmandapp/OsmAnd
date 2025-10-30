@@ -1709,7 +1709,7 @@
     <string name="use_drawer_btn">Menü használata</string>
     <string name="dashboard_or_drawer_title">Vezérlés irányítópulttal vagy menüvel</string>
     <string name="dashboard_or_drawer_description">Választhat, hogy az alkalmazást elsősorban a rugalmas irányítópulttal vagy egy statikus menüvel szeretné vezérelni. A döntés bármikor megváltoztatható az irányítópult beállításaiban.</string>
-    <string name="shared_string_near">ennek közelében:</string>
+    <string name="shared_string_near">Ennek közelében:</string>
     <string name="shared_string_hide">Elrejtés</string>
     <string name="av_video_quality_low">Legalacsonyabb minőség</string>
     <string name="av_video_quality_high">Legmagasabb minőség</string>
@@ -2371,8 +2371,8 @@
     <string name="context_menu_read_full_article">Teljes cikk elolvasása</string>
     <string name="context_menu_read_article">Cikk elolvasása</string>
     <string name="context_menu_points_of_group">A csoport összes pontja</string>
-    <string name="open_from">Nyitás:</string>
-    <string name="open_till">Nyitva eddig:</string>
+    <string name="open_from">Kinyit ekkor:</string>
+    <string name="open_till">Bezár ekkor:</string>
     <string name="will_close_at">Zárás:</string>
     <string name="will_open_at">Nyitás:</string>
     <string name="will_open_on">Nyitás:</string>
@@ -5397,8 +5397,8 @@
     <string name="obd_fuel_type_methanol">Metanol</string>
     <string name="obd_fuel_type_ethanol">Etanol</string>
     <string name="obd_fuel_type_diesel">Gázolaj</string>
-    <string name="obd_fuel_type_lpg">LPG</string>
-    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_lpg">LPG (cseppfolyósított földgáz)</string>
+    <string name="obd_fuel_type_cng">CNG (sűrített földgáz)</string>
     <string name="obd_fuel_type_propane">Propán</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_not_provided">Nincs megadva üzemanyagtípus</string>
@@ -5418,7 +5418,7 @@
     <string name="obd_fuel_type_unknown">Ismeretlen üzemanyagtípus</string>
     <string name="shared_string_obd">OBD</string>
     <string name="percent_unit">%</string>
-    <string name="rpm_unit">rpm</string>
+    <string name="rpm_unit">ford/perc</string>
     <string name="obd_rpm_desc">Megjeleníti a jármű tachométere fordulatszámát az OBD-érzékelőn keresztül</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Hibrid elektromos és belső égésű motor</string>
     <string name="obd_fuel_type_hybrid_regenerative">Hibrid regeneratív</string>
@@ -5442,9 +5442,9 @@
     <string name="obd_fuel_type_bifuel_propane">Propánnal működő Bifuel</string>
     <string name="reset_average_speed">Átlagsebesség nullázása</string>
     <string name="unknown_bt_device">Ismeretlen eszköz</string>
-    <string name="obd_vin_desc">OBD általi VIN-kód</string>
+    <string name="obd_vin_desc">OBD-n keresztül kiolvasott alvázszám</string>
     <string name="vehicle_metrics_plugin_settings">Járműmetrika beállítások</string>
-    <string name="obd_vin">VIN</string>
+    <string name="obd_vin">Alvázszám</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
     <string name="quick_action_save_recorded_trip_and_continue">Túra rögzítése és folytatás</string>
     <string name="quick_action_new_trip_segment">Gomb egy új szakasz indításához a jelenleg rögzített GPX nyomvonalban.</string>

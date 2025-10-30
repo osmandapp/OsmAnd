@@ -113,15 +113,17 @@ public class SelectIndexesHelper {
 		WorldRegion baseParentRegion = mdi.getRelatedRegion();
 
 		for (DownloadItem di : mdi.getAllItems()) {
-			SelectableItem<DownloadItem> si = createSrtmSelectableItem((SrtmDownloadItem) di, baseParentRegion);
-			allItems.add(si);
-			if (itemsToDownload.contains(di)) {
-				selectedItems.add(si);
+			if (di instanceof SrtmDownloadItem srtmDownloadItem) {
+				SelectableItem<DownloadItem> si = createSrtmSelectableItem(srtmDownloadItem, baseParentRegion);
+				allItems.add(si);
+				if (itemsToDownload.contains(di)) {
+					selectedItems.add(si);
+				}
 			}
 		}
 
 		RadioItem meterBtn = createSrtmRadioBtn(baseParentRegion, true);
-		RadioItem feetBtn = createSrtmRadioBtn(baseParentRegion,false);
+		RadioItem feetBtn = createSrtmRadioBtn(baseParentRegion, false);
 		List<RadioItem> radioItems = new ArrayList<>();
 		radioItems.add(meterBtn);
 		radioItems.add(feetBtn);

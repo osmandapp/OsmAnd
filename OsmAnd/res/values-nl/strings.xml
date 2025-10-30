@@ -6038,7 +6038,7 @@
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Openen in webbrowser</string>
-    <string name="altitude_metrics_description">Stelt de weergave-eenheid voor hoogte in binnen widgets en statistieken.</string>
+    <string name="altitude_metrics_description">Stelt de weergave-eenheid voor hoogte in voor widgets en statistieken.</string>
     <string name="obd_fuel_type_diesel">Diesel</string>
     <string name="obd_fuel_type_lpg">LPG</string>
     <string name="obd_fuel_type_cng">CNG</string>

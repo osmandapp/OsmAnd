@@ -82,7 +82,7 @@
     <string name="poi_diplomatic_filter">ধরণ</string>
     <string name="poi_animal_training_type">ধরণ</string>
     <string name="poi_telescope_type">ধরণ</string>
-    <string name="poi_vending_type">ভেন্ডিং টাইপ</string>
+    <string name="poi_vending_type">বিক্রয়ের ধরণ</string>
     <string name="poi_fuel_avia_type">জ্বালানির ধরণ (এভিয়া)</string>
     <string name="poi_washing_machine">ওয়াশিং মেশিন</string>
     <string name="poi_tents">তাঁবু</string>

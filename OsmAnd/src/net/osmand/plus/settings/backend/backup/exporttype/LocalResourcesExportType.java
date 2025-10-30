@@ -33,7 +33,7 @@ abstract class LocalResourcesExportType extends AbstractFileExportType {
 	}
 
 	@NonNull
-	private List<LocalItem> collectLocalItems(@NonNull OsmandApplication app, @NonNull LocalItemType type) {
+	protected List<LocalItem> collectLocalItems(@NonNull OsmandApplication app,	@NonNull LocalItemType type) {
 		boolean readFiles = true;
 		boolean shouldUpdate = false;
 		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
@@ -41,9 +41,9 @@ abstract class LocalResourcesExportType extends AbstractFileExportType {
 	}
 
 	@NonNull
-	private List<File> collectFilesFromLocalItems(@NonNull OsmandApplication app,
-	                                              @NonNull List<LocalItem> items,
-	                                              @NonNull LocalItemType type) {
+	protected List<File> collectFilesFromLocalItems(@NonNull OsmandApplication app,
+	                                                @NonNull List<LocalItem> items,
+	                                                @NonNull LocalItemType type) {
 		List<File> result = new ArrayList<>();
 		for (LocalItem item : items) {
 			File file = new File(item.getPath());

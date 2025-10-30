@@ -128,7 +128,13 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 			updateIndexFiles();
 			items.add(downloadWikiItem);
 		} else {
-			Drawable osmandLiveIcon = getIcon(R.drawable.ic_action_wikipedia_download_colored_day, 0);
+			int iconRes;
+			if (nightMode) {
+				iconRes = R.drawable.ic_action_wikipedia_download_colored_night;
+			} else {
+				iconRes = R.drawable.ic_action_wikipedia_download_colored_day;
+			}
+			Drawable osmandLiveIcon = getIcon(iconRes);
 			BaseBottomSheetItem wikiArticleOfflineItem = new BottomSheetItemWithDescription.Builder()
 					.setDescription(getString(R.string.save_and_access_articles_offline))
 					.setIcon(osmandLiveIcon)
@@ -137,7 +143,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 					.setOnClickListener(v -> {
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
-							ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIVOYAGE);
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIPEDIA);
 						}
 						dismiss();
 					})

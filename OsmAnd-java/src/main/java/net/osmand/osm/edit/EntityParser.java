@@ -38,6 +38,9 @@ public class EntityParser {
 		if (mo.getEnName(false).length() == 0) {
 			mo.setEnName(tags.get(OSMTagKey.NAME_EN.getValue()));
 		}
+		if (tags.get(OSMTagKey.SHORT_NAME.getValue()) != null) {
+			mo.setName("short", tags.get(OSMTagKey.SHORT_NAME.getValue()));
+		}
 		for (Map.Entry<String, String> entry : tags.entrySet()) {
 			String ts = entry.getKey();
 			if (ts.startsWith("name:") && !ts.equals(OSMTagKey.NAME_EN.getValue())) {

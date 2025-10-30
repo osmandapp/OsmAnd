@@ -16,7 +16,7 @@ public class ClickableWayTags {
 			Map.of("area", "yes",
 					"access", "no",
 					"piste:type", "connection",
-					"osmc_stub_name", ".",
+//					"osmc_stub_name", ".", // enable to hide shields for Ways inside Relations
 					"aerialway", "*"
 			);
 	public static final Set<String> REQUIRED_TAGS_ANY =

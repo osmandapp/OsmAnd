@@ -6,6 +6,7 @@ public class OSMSettings {
 		NAME("name"), //$NON-NLS-1$
 		NAME_EN("name:en"), //$NON-NLS-1$
 		LOCK_NAME("lock_name"), //$NON-NLS-1$
+		SHORT_NAME("short_name"),
 		
 		// ways
 		HIGHWAY("highway"), //$NON-NLS-1$
