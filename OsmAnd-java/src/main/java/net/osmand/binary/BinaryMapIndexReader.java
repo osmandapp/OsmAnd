@@ -2616,7 +2616,7 @@ req.setSearchStat(stat);
 						matched);
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
-				int val = (int) readInt(); // FIXME
+				int val = (int) readInt(); // FIXME for 64 bit support
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i]) {
 						listOffsets.get(i).add(val);

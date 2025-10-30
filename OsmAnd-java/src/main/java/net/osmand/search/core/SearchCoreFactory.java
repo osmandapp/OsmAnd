@@ -613,10 +613,6 @@ public class SearchCoreFactory {
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
-				// FIXME UNIT-TESTS
-				// 7 J.-F.-Weishaar-Straße Korb
-				// 10 Martin-Luther-Straße Korb
-				// 35 Ostheimer Weg Korntal-Münchingen
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
@@ -654,10 +650,7 @@ public class SearchCoreFactory {
 								phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
 						}
 					}
-					// FIXME UNIT-Tests common words
-					// Київська вулиця 10-Д
-					// 3119 Pleasant Valley Boulevard #1 Altoona
-					// 130/6 Mercedes-Benz Werk 1 (Untertürkheim) Stuttgart - (braces remove)
+
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
@@ -707,15 +700,6 @@ public class SearchCoreFactory {
 							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY ) {
-							// FIXME UNIT-TESTS
-							// 6 Dorfstraße Remseck am Neckar
-							// 4 Hofäckerstraße Kernen im Remstal
-							// 4 Am Heuhaus Weinstadt
-							// 301 West Main Street Valley View   
-							// 108 North Mountain Boulevard Mountain Top
-							// 8508 PA 61 Coal Township
-							// 1281 Pennsylvania Avenue, Pine City PA 14871 United States
-							
 							// require exact matching to speed up
 							if (matchAddressName(phrase, null, res, true)) {
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
@@ -723,10 +707,6 @@ public class SearchCoreFactory {
 						} else {
 							 
 							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
-							// FIXME UNIT-TESTS
-							// 4241 Cook Hollow Road Woodhull
-							// 11601 Kelly Hill Road Pine City
-							
 							// if subsearch by cityApi we could avoid calling subsearch by boundary 
 							// but it's tricky to check how good matching reuslts (case Hohlmaier 1 Breuningsweiler)
 							

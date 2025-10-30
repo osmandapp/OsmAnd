@@ -86,16 +86,6 @@ public class SearchResult {
 	}
 
 	private double getSumPhraseMatchWeight(SearchResult exactResult) {
-		// FIXME unit tests
-		// 101 South Main Street Ashley (101, South Main Street, Luzerne)
-		// 211 Walnut Street Elmira (211, South Walnut Street, Elmira)
-		
-		// 423 Waverly Street Waverly 
-		// 15 Blumenstraße Esslingen  (alt:name matchAddressByName) 
-		// 12 Friedhofstraße Stuttgart (new name - Goslarer Straße)
-		// 4 Beutelsbacher Straße Weinstadt (distance to boundary)
-		// 26 Panoramastraße Weinstadt (distance to boundary)
-		// 24 Kelterstraße Kernen im Remstal (distance to boundary)  
 		double res = ObjectType.getTypeWeight(objectType);
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
