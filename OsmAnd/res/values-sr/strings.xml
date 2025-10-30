@@ -2295,7 +2295,7 @@
     <string name="purchase_dialog_title">Одаберите план</string>
     <string name="purchase_dialog_subtitle">Одаберите погодне ставке</string>
     <string name="shared_string_dont">Не</string>
-    <string name="shared_string_do">Да</string>
+    <string name="shared_string_do">Уради</string>
     <string name="shared_string_only_with_wifi">Само на бежичној мрежи</string>
     <string name="wikivoyage_download_pics">Преузимај слике</string>
     <string name="wikivoyage_download_pics_descr">Слике из чланака могу бити преузимане због приступа и ван мреже.
@@ -5874,4 +5874,5 @@
     <string name="quick_action_wind_animation_layer">Прекидач за приказ или сакривање слоја анимације ветра на мапи.</string>
     <string name="wind_animation_layer">Слој анимације ветра</string>
     <string name="weather_layers">Временски слојеви</string>
+    <string name="lang_crh">Кримски Татарски (латиница)</string>
 </resources>
