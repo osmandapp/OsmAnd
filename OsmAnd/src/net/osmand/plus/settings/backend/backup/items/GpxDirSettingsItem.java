@@ -75,7 +75,7 @@ public class GpxDirSettingsItem extends SettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return GpxHelper.INSTANCE.getGpxTitle(dirItem.getFile().name());
+		return dirItem.getFile().name();
 	}
 
 	@Override
