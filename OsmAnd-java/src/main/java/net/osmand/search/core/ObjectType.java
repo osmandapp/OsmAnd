@@ -2,7 +2,7 @@ package net.osmand.search.core;
 
 public enum ObjectType {
 	// ADDRESS
-	CITY(true), VILLAGE(true), POSTCODE(true), STREET(true), HOUSE(true), STREET_INTERSECTION(true),
+	CITY(true), VILLAGE(true), BOUNDARY(true), POSTCODE(true), STREET(true), HOUSE(true), STREET_INTERSECTION(true),
 	// POI
 	POI_TYPE(false), POI(true),
 	// LOCATION
@@ -34,13 +34,13 @@ public enum ObjectType {
 	}
 
 	public static boolean isAddress(ObjectType t) {
-		return t == CITY || t == VILLAGE || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
+		return t == CITY || t == VILLAGE || t == BOUNDARY || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
 	}
 
 	public static boolean isTopVisible(ObjectType t) {
 		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION || t == INDEX_ITEM;
 	}
-
+	
 	public static ObjectType getExclusiveSearchType(ObjectType t) {
 		if (t == FAVORITE_GROUP) {
 			return FAVORITE;
@@ -54,14 +54,15 @@ public enum ObjectType {
 		}
 		switch (t) {
 			case HOUSE:
-			case STREET_INTERSECTION:
 				return 4;
 			case STREET:
 				return 3;
+			case STREET_INTERSECTION:
 			case CITY:
 			case VILLAGE:
 			case POSTCODE:
 				return 2;
+			case BOUNDARY:
 			case POI:
 				return 1;
 			default:

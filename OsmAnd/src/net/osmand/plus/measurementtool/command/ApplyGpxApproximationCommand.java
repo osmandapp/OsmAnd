@@ -10,6 +10,7 @@ import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.measurementtool.RoadSegmentData;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GpxRouteApproximation;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,9 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 			GpxRouteApproximation approximation = approximations.get(i);
 			List<WptPt> segmentPoints = segmentPointsList.get(i);
 			List<WptPt> newSegmentPoints = ctx.setPoints(i, approximation, segmentPoints, mode, false);
-			if (newSegmentPoints != null) {
+			if (!Algorithms.isEmpty(newSegmentPoints)) {
+				long initialTimestamp = segmentPoints.isEmpty() ? 0 : segmentPoints.get(0).getTime();
+				newSegmentPoints.get(0).setTime(initialTimestamp);
 				segmentPointsList.set(i, newSegmentPoints);
 			}
 		}

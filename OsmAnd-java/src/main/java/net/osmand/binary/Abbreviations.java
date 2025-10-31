@@ -23,6 +23,11 @@ public class Abbreviations {
         abbreviations.put("nw", "Northwest");
         abbreviations.put("ne", "Northeast");
         abbreviations.put("ln", "Lane");
+        abbreviations.put("dr", "Drive");
+        abbreviations.put("rd", "Road");
+        abbreviations.put("ave", "Avenue");
+        abbreviations.put("st", "Street");
+        abbreviations.put("blvd", "Boulevard");
     }
 
     public static String replace(String word) {

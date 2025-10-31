@@ -18,7 +18,7 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDirItem;
-import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -75,7 +75,7 @@ public class GpxDirSettingsItem extends SettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return GpxHelper.INSTANCE.getGpxTitle(dirItem.getFile().name());
+		return dirItem.getFile().name();
 	}
 
 	@Override
@@ -84,27 +84,35 @@ public class GpxDirSettingsItem extends SettingsItem {
 	}
 
 	@Override
-	public long getInfoModifiedTime() {
-		GpxDirItem item = app.getGpxDbHelper().getGpxDirItem(dirItem.getFile());
-		return item != null ? item.getParameter(APPEARANCE_LAST_MODIFIED_TIME) : 0;
-	}
-
-	@Override
 	public long getLocalModifiedTime() {
-		return dirItem.getFile().lastModified();
+		GpxDirItem item = gpxDbHelper.getGpxDirItem(dirItem.getFile());
+		Long time = item.getParameter(APPEARANCE_LAST_MODIFIED_TIME);
+		return time != null ? time : 0;
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		FileUtils.getExistingDir(app, dirItem.getFile().path()).setLastModified(lastModifiedTime);
+		gpxDbHelper.updateDataItemParameter(dirItem, APPEARANCE_LAST_MODIFIED_TIME, lastModifiedTime);
 	}
 
 	@Override
 	public void apply() {
-		File dir = FileUtils.getExistingDir(app, dirItem.getFile().path());
+		KFile file = dirItem.getFile();
+		File dir = app.getAppPath(file.path());
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		if (gpxDbHelper.hasGpxDirItem(file)) {
+			gpxDbHelper.updateDataItem(dirItem);
+		} else {
+			gpxDbHelper.add(dirItem);
+		}
+	}
 
-		gpxDbHelper.updateDataItem(dirItem);
-		gpxDbHelper.updateDataItemParameter(dirItem, APPEARANCE_LAST_MODIFIED_TIME, dir.lastModified());
+	@Override
+	public void delete() {
+		super.delete();
+		gpxDbHelper.remove(dirItem);
 	}
 
 	@Override
@@ -138,7 +146,7 @@ public class GpxDirSettingsItem extends SettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader(false);
+		return getJsonReader(true);
 	}
 
 	@Nullable

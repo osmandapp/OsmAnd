@@ -5799,6 +5799,7 @@
     <string name="download_wikipedia_label">Télécharger Wikipédia</string>
     <string name="wind_animation_layer">Couche d\'animation du vent</string>
     <string name="weather_layers">Couches météo</string>
-    <string name="quick_action_weather_layers">Un interrupteur pour afficher ou masquer les couches météorologiques sur la carte.</string>
+    <string name="quick_action_weather_layers">Bouton permettant d\'afficher ou de masquer les calques météorologiques sur la carte.</string>
     <string name="quick_action_wind_animation_layer">Un interrupteur pour afficher ou masquer la couche d\'animation du vent sur la carte.</string>
+    <string name="lang_crh">Tatar de Crimée (latin)</string>
 </resources>

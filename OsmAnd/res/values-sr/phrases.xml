@@ -5158,4 +5158,10 @@
     <string name="poi_barrier_sliding_gate">Клизна капија</string>
     <string name="poi_piste_downhill">Низбрдна писта; Скијашка писта; Скијашки спуст</string>
     <string name="poi_route_activity_type_skiing">Скијашке руте</string>
+    <string name="poi_sample_collection_filter">Прикупљање узорака</string>
+    <string name="x">Екс (бивши Твитер)</string>
+    <string name="poi_sample_collection">Прикупљање узорака</string>
+    <string name="poi_sample_collection_yes">Да</string>
+    <string name="poi_sample_collection_covid19">Ковид19</string>
+    <string name="poi_sample_collection_blood">Крв</string>
 </resources>

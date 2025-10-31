@@ -428,7 +428,7 @@ public class BinaryMapPoiReaderAdapter {
 					charsList.add(0);
 					listOffsets.add(new TIntArrayList());
 				}
-				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList);
+				map.readIndexedStringTable(region, instance, queries, "", listOffsets, charsList);
 				codedIS.popLimit(oldLimit);
 				break;
 			}

@@ -247,7 +247,7 @@ public class NetworkRouteSelector {
 			return fromShieldTags(combinedExtensionsTags);
 		}
 
-		private static final Map<String, String> SHIELD_TO_OSMC = Map.ofEntries(
+		public static final Map<String, String> SHIELD_TO_OSMC = Map.ofEntries(
 				Map.entry("shield_bg", "osmc_background"),
 				Map.entry("shield_fg", "osmc_foreground"),
 				Map.entry("shield_fg_2", "osmc_foreground2"),

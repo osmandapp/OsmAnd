@@ -966,6 +966,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return routePoints;
 	}
 
+	@Nullable
 	public List<WptPt> setPoints(int targetSegmentIndex, GpxRouteApproximation gpxApproximation,
 	                             List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
 		if (gpxApproximation == null ||

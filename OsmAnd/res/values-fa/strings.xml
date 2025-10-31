@@ -5756,4 +5756,8 @@
     <string name="si_nm_mt">مایل دریایی/متر</string>
     <string name="si_nm_ft">مایل دریایی/فوت</string>
     <string name="av_audio_format_bottom_sheet_descr">یک قالب صوتی انتخاب کنید. نوع ظرف پرونده برای صوت 3GPP (.3gp) است.</string>
+    <string name="quick_action_weather_layers">یک کلید برای نمایش یا پنهان کردن لایه‌های آب‌وهوا روی نقشه.</string>
+    <string name="quick_action_wind_animation_layer">یک کلید برای نمایش یا پنهان کردن لایه پویانمایی باد روی نقشه.</string>
+    <string name="wind_animation_layer">لایه پویانمایی باد</string>
+    <string name="weather_layers">بایه‌های آب‌وهوا</string>
 </resources>
