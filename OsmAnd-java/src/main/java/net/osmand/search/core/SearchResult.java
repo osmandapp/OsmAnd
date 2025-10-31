@@ -29,8 +29,8 @@ public class SearchResult {
 	// MAX_PHRASE_WEIGHT_TOTAL should be  > getSumPhraseMatchWeight
 	public static final double MAX_PHRASE_WEIGHT_TOTAL = MAX_TYPES_BASE_10 * MAX_TYPES_BASE_10;
 	
-	private static final int MIN_ELO_RATING = 2000;
-	private static final int MAX_ELO_RATING = 4000;
+	private static final int MIN_ELO_RATING = 1800;
+	private static final int MAX_ELO_RATING = 4300;
 
 	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
