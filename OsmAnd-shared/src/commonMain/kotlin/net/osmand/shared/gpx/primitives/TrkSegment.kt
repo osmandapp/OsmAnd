@@ -26,7 +26,7 @@ class TrkSegment : GpxExtensions() {
 
 	enum class SegmentSlopeType(val symbol: String) {
 		UPHILL("↑"),
-		DOWNHILL("↑"),
+		DOWNHILL("↓"),
 		FLAT("↔");
 	}
 

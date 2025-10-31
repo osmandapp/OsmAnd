@@ -22,6 +22,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
@@ -57,13 +58,13 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		AndroidUtils.setBackground(itemView.findViewById(R.id.searchListItemLayout), UiUtilities.getSelectableDrawable(app));
 	}
 
-	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
-		bindSearchResult(itemView, item);
+	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter, @NonNull Calendar calendar) {
+		bindSearchResult(itemView, item, calendar);
 		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);
 
 	}
 
-	public static void bindSearchResult(@NonNull View view, @NonNull QuickSearchListItem item) {
+	public static void bindSearchResult(@NonNull View view, @NonNull QuickSearchListItem item, @NonNull Calendar calendar) {
 		TextView title = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
 		ImageView imageView = view.findViewById(R.id.imageView);
@@ -136,7 +137,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed));
-					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
+					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 
 					TextView timeText = view.findViewById(R.id.time);
@@ -152,7 +153,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
-	public static void bindPOISearchResult(@NonNull View view, @NonNull QuickSearchListItem item, boolean nightMode) {
+	public static void bindPOISearchResult(@NonNull View view, @NonNull QuickSearchListItem item,
+	                                       boolean nightMode, Calendar calendar) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		TextView title = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
@@ -201,15 +203,11 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			}
 		}
 
+		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);
 		subtitle.setText(typeName);
-		if (addressTv != null) {
-			addressTv.setText(address);
-			addressTv.setVisibility(Algorithms.isEmpty(address) ? View.GONE : View.VISIBLE);
-		}
-
 
 		if (timeLayout != null) {
-			if (amenity != null && ((Amenity) item.getSearchResult().object).getOpeningHours() != null) {
+			if (amenity != null && amenity.getOpeningHours() != null) {
 				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null && rs.getInfo() != null) {
 					int colorOpen = R.color.text_color_positive;
@@ -218,7 +216,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed));
-					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
+					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 
 					TextView timeText = view.findViewById(R.id.time);

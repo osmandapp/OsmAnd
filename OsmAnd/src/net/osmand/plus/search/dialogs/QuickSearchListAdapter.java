@@ -45,6 +45,7 @@ import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
@@ -56,7 +57,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private final boolean nightMode;
 	@Nullable
 	private PoiUIFilter poiUIFilter;
-
+	@NonNull
+	private final Calendar calendar = Calendar.getInstance();
 	private boolean useMapCenter;
 
 	private final int dividerMargin;
@@ -447,12 +449,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			setupCheckBox(position, view, listItem);
 		} else if (searchResult != null && searchResult.objectType == ObjectType.POI) {
 			view = getLinearLayout(convertView, R.layout.search_list_item_full);
-			SearchResultViewHolder.bindPOISearchResult(view, listItem, nightMode);
+			SearchResultViewHolder.bindPOISearchResult(view, listItem, nightMode, calendar);
 			setupCheckBox(position, view, listItem);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 		} else {
 			view = getLinearLayout(convertView, R.layout.search_list_item);
-			SearchResultViewHolder.bindSearchResult(view, listItem);
+			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 			setupCheckBox(position, view, listItem);
 		}

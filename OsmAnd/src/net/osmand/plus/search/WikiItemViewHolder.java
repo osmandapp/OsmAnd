@@ -88,10 +88,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 		icon.setImageDrawable(drawable);
 		errorImageView.setImageDrawable(drawable);
 
-		if (addressTv != null) {
-			addressTv.setText(address);
-			addressTv.setVisibility(Algorithms.isEmpty(address) ? View.GONE : View.VISIBLE);
-		}
+		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);
 
 		if (timeLayout != null) {
 			if (item.getSearchResult().object instanceof Amenity

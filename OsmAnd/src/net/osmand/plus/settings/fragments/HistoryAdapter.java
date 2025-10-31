@@ -53,6 +53,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 	private final UpdateLocationViewCache locationViewCache;
+	private final Calendar calendar = Calendar.getInstance();
 
 	private List<Object> items = new ArrayList<>();
 	private Set<?> selectedItems = new HashSet<>();
@@ -133,7 +134,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 			if (holder instanceof SearchItemViewHolder) {
 				SearchResult searchResult = (SearchResult) getItem(position);
 				QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
-				SearchResultViewHolder.bindSearchResult(viewHolder.itemView, listItem);
+				SearchResultViewHolder.bindSearchResult(viewHolder.itemView, listItem, calendar);
 				int iconColor = ContextCompat.getColor(app, selected ? activeColorId : defaultColorId);
 				viewHolder.icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
 				updateCompassVisibility(viewHolder.compassView, searchResult.location);

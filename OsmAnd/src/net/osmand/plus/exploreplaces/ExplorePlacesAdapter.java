@@ -25,6 +25,7 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -34,6 +35,8 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private final UpdateLocationViewCache locationViewCache;
 	private final NearbyItemClickListener itemClickListener;
+	@NonNull
+	private final Calendar calendar = Calendar.getInstance();
 	private final boolean nightMode;
 	private List<QuickSearchListItem> items = new ArrayList<>();
 
@@ -84,7 +87,7 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			});
 		} else if (holder instanceof SearchResultViewHolder viewHolder) {
 			QuickSearchListItem item = items.get(position);
-			viewHolder.bindItem(item, false);
+			viewHolder.bindItem(item, false, calendar);
 
 			viewHolder.itemView.setOnClickListener(v -> {
 				if (itemClickListener != null && item.getSearchResult().object instanceof Amenity amenity) {
