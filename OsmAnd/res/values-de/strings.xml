@@ -5840,7 +5840,7 @@
     <string name="rendering_attr_hideAreas_name">Tiefenbereiche</string>
     <string name="rendering_attr_hideAreas_description">Tiefenbereiche ausblenden</string>
     <string name="rendering_attr_hideContours_name">Tiefenlinien</string>
-    <string name="rendering_attr_hideContours_description">Tielenlinien ausblenden</string>
+    <string name="rendering_attr_hideContours_description">Tiefenlinien ausblenden</string>
     <string name="rendering_attr_hideFairways_name">Fahrrinnen</string>
     <string name="rendering_attr_hideFairways_description">Fahrrinnen ausblenden</string>
     <string name="rendering_attr_hideFerries_name">Fährverbindungen</string>
@@ -5918,4 +5918,5 @@
     <string name="weather_layers">Wetterebenen</string>
     <string name="download_wikipedia_label">Wikipedia herunterladen</string>
     <string name="private_access_routing_req_short">Erlauben Sie die Nutzung einer Privatstraße, um Ihr Ziel zu erreichen?</string>
+    <string name="lang_crh">Krimtatarisch (lateinisch)</string>
 </resources>

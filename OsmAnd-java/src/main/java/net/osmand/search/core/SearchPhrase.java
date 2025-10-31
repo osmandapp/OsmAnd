@@ -403,18 +403,18 @@ public class SearchPhrase {
 	}
 	
 	public QuadRect get1km31Rect() {
-		if(cache1kmRect != null) {
+		if (cache1kmRect != null) {
 			return cache1kmRect;
 		}
 		LatLon l = getLastTokenLocation();
 		if (l == null) {
 			return null;
 		}
-		cache1kmRect= caculateBbox(1000, l);
+		cache1kmRect= calculateBbox(1000, l);
 		return cache1kmRect;
 	}
 
-	public static QuadRect caculateBbox(int radiusMeters, LatLon l) {
+	public static QuadRect calculateBbox(int radiusMeters, LatLon l) {
 		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI));
 		double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLongitude());
 		double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, l.getLatitude());
