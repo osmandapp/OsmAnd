@@ -80,9 +80,6 @@ public class City extends MapObject {
 			if ("township".equals(place)) {
 				return CityType.TOWN;
 			}
-			if ("township".equals(place)) {
-				return CityType.TOWN;
-			}
 			for (CityType t : CityType.values()) {
 				if (t.name().equalsIgnoreCase(place) 
 						&& t != BOUNDARY && t != POSTCODE) {
