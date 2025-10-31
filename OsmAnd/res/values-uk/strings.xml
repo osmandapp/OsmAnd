@@ -5222,7 +5222,7 @@
     <string name="gpx_approximation_cpp">На основі маршрутизації (C++)</string>
     <string name="gpx_approximation_java">На основі маршрутизації (Java)</string>
     <string name="sorted_sufolders_toast">Підпапки в “%1$s” відсортовано за: “%2$s”</string>
-    <string name="use_nearby_roads_summary">Використовує офлайн-мапу для пошуку найближчих доріг та даних про висоту. Може регулювати геометрію колії.</string>
+    <string name="use_nearby_roads_summary">Використовує офлайн-мапу для пошуку найближчих доріг та даних про висоту. Може змінювати геометрію треку.</string>
     <string name="use_nearby_roads">Використовувати найближчі дороги</string>
     <string name="relief_3d_download_description">Для перегляду Місцевість на мапі потрібні додаткові мапи.</string>
     <string name="vertical_exaggeration_description">Змінюючи значення масштабу, ви можете підкреслити 3D-рельєф.</string>
