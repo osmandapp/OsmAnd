@@ -5830,8 +5830,8 @@
     <string name="copy_as_new_folder">Kopiraj kao novi folder</string>
     <string name="add_to_a_folder">Dodajte u folder</string>
     <string name="add_to_favorites">Dodaj u favorite</string>
-    <string name="max_weight_at_full_load_description">Odredite maximalnu težinu vašeg vozila sa punim opterećenjem, da bi se izbegli putevi i mostovi sa ograničenjima u težini.</string>
-    <string name="max_axle_load_description">Obezbediti maximalno opterećenje po osovini vašeg vozila, da se izbegnu putevi i mostovi sa ograničenjima u težini.</string>
+    <string name="max_weight_at_full_load_description">Navedite maksimalnu težinu vašeg vozila pri punom opterećenju kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
+    <string name="max_axle_load_description">Navedite maksimalno osovinsko opterećenje vašeg vozila kako biste izbegli puteve i mostove sa ograničenjima težine.</string>
     <string name="backup_delete_data_warning_extended">Ova akcija će trajno ukloniti sve izabrane podatke iz oblaka. Kasnije ga neće biti moguće obnoviti.</string>
     <string name="amount_of_total_used">%1$s od %2$s se koristi</string>
     <string name="delete_data">Izbriši podatke</string>
