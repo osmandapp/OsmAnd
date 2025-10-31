@@ -141,7 +141,7 @@
     <string name="animate_route_off">Szimuláció leállítása</string>
     <string name="animate_route">Szimuláció indítása</string>
     <string name="file_can_not_be_renamed">Nem sikerült átnevezni a fájlt.</string>
-    <string name="file_with_name_already_exists">Már létezik ilyen nevű fájl.</string>
+    <string name="file_with_name_already_exists">Már létezik egy ilyen nevű fájl.</string>
     <string name="poi_query_by_name_matches_categories">Számos kapcsolódó érdekes pont kategóriát sikerült találni.</string>
     <string name="data_to_search_poi_not_available">Offline adatok letöltése érdekes pontok kereséséhez.</string>
     <string name="poi_filter_by_name">Név szerinti keresés</string>
@@ -3948,7 +3948,7 @@
     <string name="map_updates_for_mappers">Térképfrissítések térképszerkesztőknek</string>
     <string name="use_login_and_password">Felhasználónév és jelszó használata</string>
     <string name="available_until">Elérhető eddig: %1$s</string>
-    <string name="purchases_restored">Visszaállított vásárlások</string>
+    <string name="purchases_restored">Vásárlások visszaállítva</string>
     <string name="grey_color_undefined">Az adatok nélküli részek szürkék.</string>
     <string name="osm_live_payment_subscription_management_amz">A fizetés az Amazon-fiókjáról kerül levonásra a vásárlás megerősítésekor.
 \n
