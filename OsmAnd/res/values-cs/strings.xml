@@ -4079,7 +4079,7 @@
     <string name="purchases_feature_desc_combined_wiki">Prozkoumejte články Wikipedie bez připojení na internet. Offline data jsou rozdělena podle zemí a dostupná ve všech jazycích.</string>
     <string name="purchases_feature_desc_wikivoyage">Prozkoumejte průvodce Wikivoyage offline. Články jsou rozdělené podle zemí a oblastí a jsou dostupné ve všech jazycích.</string>
     <string name="purchases_feature_desc_nautical">Získejte přístup k informacím o námořní hloubce</string>
-    <string name="rendering_attr_natureReserves_name">Přírodní rezervace a chráněná území</string>
+    <string name="rendering_attr_natureReserves_name">Přírodní rezervace a chráněné oblasti</string>
     <string name="benefits_for_contributors_secondary_descr">Přihlaste se do OpenStreetMap a zkontrolujte, zda máte nárok na neomezené měsíční a hodinové aktualizace map.</string>
     <string name="use_login_and_password">Použít jméno a heslo</string>
     <string name="duration_moment_ago">před chvílí</string>
@@ -5813,7 +5813,7 @@
     <string name="manage_storage">Správa úložiště</string>
     <string name="copy_as_new_folder">Kopírovat jako novou složku</string>
     <string name="imperial_gallon">Imperiální galon</string>
-    <string name="us_gallon">americký galon</string>
+    <string name="us_gallon">Americký galon</string>
     <string name="kilometers">Kilometry</string>
     <string name="add_to_a_folder">Přidat do složky</string>
     <string name="add_to_favorites">Přidat k oblíbeným</string>
@@ -5888,9 +5888,9 @@
     <string name="track_folder_appearance">Vzhled složky stop</string>
     <string name="update_maps">Aktualizovat mapy</string>
     <string name="reconnect">Znovu připojit</string>
-    <string name="trip_recording_downhill_widget_desc">Zobrazuje součet všech klesání nebo posledního klesání aktuálně zaznamenané jízdy.</string>
-    <string name="trip_recording_uphill_widget_desc">Zobrazí součet všech stoupání nebo posledního stoupání aktuálně zaznamenané jízdy.</string>
-    <string name="trip_recording_distance_widget_desc">Zobrazuje celkovou vzdálenost aktuálně zaznamenané jízdy, s režimy pro zobrazení vzdálenosti posledního stoupání a klesání.</string>
+    <string name="trip_recording_downhill_widget_desc">Zobrazuje součet všech klesání nebo poslední klesání aktuálně zaznamenané jízdy.</string>
+    <string name="trip_recording_uphill_widget_desc">Zobrazuje součet všech stoupání nebo poslední stoupání aktuálně zaznamenané cesty.</string>
+    <string name="trip_recording_distance_widget_desc">Zobrazuje celkovou vzdálenost aktuálně zaznamenávané jízdy, s režimy pro zobrazení vzdálenosti posledního stoupání a klesání.</string>
     <string name="trip_recording_max_speed_widget_description">Zobrazí maximální rychlost aktuálně zaznamenané jízdy. Klepněte pro přepnutí mezi celkovou maximální rychlostí a maximální rychlostí z posledního stoupání nebo klesání.</string>
     <string name="trip_recording_average_slope_widget_description">Zobrazí průměrný sklon poslední sekce klesání nebo stoupání aktuálně zaznamenané jízdy.</string>
     <string name="average_slope">Průměrný sklon</string>
@@ -5902,4 +5902,9 @@
     <string name="private_access_routing_req_short">Povolit použití soukromých cest k dosažení vašeho cíle?</string>
     <string name="download_wikipedia_label">Stáhnout Wikipedii</string>
     <string name="save_and_access_articles_offline">Uložte si data a přistupujte ke článkům offline kdekoli</string>
+    <string name="quick_action_weather_layers">Přepínač pro zobrazení nebo skrytí vrstev počasí na mapě.</string>
+    <string name="quick_action_wind_animation_layer">Přepínač pro zobrazení nebo skrytí vrstvy animace větru na mapě.</string>
+    <string name="wind_animation_layer">Vrstva animace větru</string>
+    <string name="weather_layers">Vrstvy počasí</string>
+    <string name="lang_crh">Krymská tatarština (latinka)</string>
 </resources>

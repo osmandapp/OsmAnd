@@ -41,6 +41,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -196,7 +197,8 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createBottomContainer(R.id.main_content));
+		collection.replace(InsetTarget.createBottomContainer(R.id.main_content).landscapeSides(InsetSide.BOTTOM, InsetSide.LEFT));
+		collection.replace(InsetTarget.createHorizontalLandscape(true, R.id.modes_toggle, R.id.toolbar, R.id.tab_layout));
 		return collection;
 	}
 

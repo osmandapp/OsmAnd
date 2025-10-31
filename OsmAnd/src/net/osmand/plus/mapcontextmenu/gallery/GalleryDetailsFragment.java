@@ -21,7 +21,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController.DownloadMetadataListener;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -33,7 +32,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.Set;
 
-public class GalleryDetailsFragment extends BaseFullScreenFragment implements DownloadMetadataListener {
+public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 
@@ -72,14 +71,6 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment implements Do
 		updateContent(view);
 
 		return view;
-	}
-
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		if (controller != null) {
-			controller.addMetaDataListener(this);
-		}
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -182,15 +173,6 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment implements Do
 	}
 
 	@Override
-	public void onMetadataUpdated(@NonNull Set<String> updatedMediaTagImages) {
-		ImageCard imageCard = getSelectedCard();
-		View view = getView();
-		if (view != null && imageCard instanceof WikiImageCard wikiImageCard && updatedMediaTagImages.contains(wikiImageCard.getWikiImage().getWikiMediaTag())) {
-			updateContent(view);
-		}
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 
@@ -214,15 +196,6 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment implements Do
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putInt(SELECTED_POSITION_KEY, selectedPosition);
 		super.onSaveInstanceState(outState);
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-
-		if (controller != null) {
-			controller.removeMetaDataListener(this);
-		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {

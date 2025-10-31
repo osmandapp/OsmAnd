@@ -15,11 +15,13 @@ import net.osmand.gpx.clickable.ClickableWayTags;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.data.Amenity;
 
@@ -78,6 +80,19 @@ public class NetworkRouteDrawable extends Drawable {
 	}
 
 	@Nullable
+	public static Drawable getIconByShieldTags(@NonNull Map<String, String> tags, @NonNull OsmandApplication app) {
+		NetworkRouteSelector.RouteKey shieldRouteKey = NetworkRouteSelector.RouteKey.fromShieldTags(tags);
+		if (shieldRouteKey != null) {
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
+			NetworkRouteDrawable iconDrawable = new NetworkRouteDrawable(app, shieldRouteKey, nightMode);
+			if (iconDrawable.backgroundDrawable != null) {
+				return iconDrawable;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
 	public static Drawable getIconByAmenityShieldTags(@NonNull Amenity amenity, @NonNull OsmandApplication app,
 	                                                  boolean nightMode, boolean isClickableWay) {
 		Map<String, String> shieldTags = new HashMap<>();
@@ -88,7 +103,9 @@ public class NetworkRouteDrawable extends Drawable {
 		if (isClickableWay) {
 			String color = ClickableWayTags.getGpxColorByTags(amenity.getOsmTags());
 			if (color != null) {
-				shieldTags.putAll(ClickableWayTags.getGpxShieldTags(color));
+				for (Map.Entry<String, String> gpxShieldTags : ClickableWayTags.getGpxShieldTags(color).entrySet()) {
+					shieldTags.putIfAbsent(gpxShieldTags.getKey(), gpxShieldTags.getValue());
+				}
 			}
 		}
 		RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
@@ -262,7 +279,8 @@ public class NetworkRouteDrawable extends Drawable {
 	private enum OsmcIconParams {
 		BACKGROUND("osmc_background", "h_osmc_", "_bg"),
 		FOREGROUND("osmc_foreground", "mm_osmc_", ""),
-		FOREGROUND_2("osmc_foreground2", "mm_osmc_", "");
+		FOREGROUND_2("osmc_foreground2", "mm_osmc_", ""),
+		OSMAND_FOREGROUND("osmand_foreground", "mm_", "");
 
 		@NonNull
 		final String key;

@@ -390,7 +390,7 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 			boolean firstRow = index == 0;
 
 			boolean showTopDivider =  (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider) && (firstRow && !topPanel && transparentMode);
-			boolean showBottomDivider = (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider) && (!lastRow || (topPanel && transparentMode));
+			boolean showBottomDivider = (visibleViewsInRowCount > 0 && rowWidgetsSupportBottomDivider) && ((!lastRow || (topPanel && transparentMode)) || ((InsetsUtils.isEdgeToEdgeSupported() && AndroidUiHelper.isOrientationPortrait(app) && lastRow)));
 
 			AndroidUiHelper.updateVisibility(bottomDivider, showBottomDivider);
 			AndroidUiHelper.updateVisibility(topDivider, showTopDivider);
