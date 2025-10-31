@@ -673,7 +673,7 @@ public class SearchCoreFactory {
 									newParentSearchResult = cityResult;
 								} else {
 									resArray.clear();
-									QuadRect bbox = SearchPhrase.caculateBbox(1000, res.location);
+									QuadRect bbox = SearchPhrase.calculateBbox(1000, res.location);
 									resArray = boundariesQR.queryInBox(bbox, resArray);
 									for (City boundary : resArray) {
 										int[] bb = boundary.getBbox31();
