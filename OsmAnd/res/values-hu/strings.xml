@@ -917,7 +917,7 @@
     <string name="files_limit">%1$d fájl maradt</string>
     <string name="available_downloads_left">%1$d letöltendő fájl maradt</string>
     <string name="install_paid">Teljes verzió</string>
-    <string name="use_magnetic_sensor_descr">A mágnesszenzor használata az iránytű értékének meghatározásához a tájolás szenzor helyett.</string>
+    <string name="use_magnetic_sensor_descr">A mágnesesség érzékelő használata az iránytű értékének meghatározásához a tájolási érzékelő helyett.</string>
     <string name="use_magnetic_sensor">Mágneses érzékelő (iránytű) használata</string>
     <string name="use_kalman_filter_compass_descr">Az iránytű olvasásakor csökkenti a zajt, de növeli a tehetetlenségét.</string>
     <string name="use_kalman_filter_compass">Kálmán-szűrő használata</string>
@@ -1042,8 +1042,8 @@
     <string name="routing_attr_avoid_ferries_description">Elkerüli a kompokat</string>
     <string name="routing_attr_avoid_motorway_name">Autópályák elkerülése</string>
     <string name="routing_attr_avoid_motorway_description">Elkerüli az autópályákat</string>
-    <string name="routing_attr_weight_name">Súly</string>
-    <string name="routing_attr_weight_description">Adja meg az útvonalakon a járművekre vonatkozó súlykorlátozást.</string>
+    <string name="routing_attr_weight_name">Tömeg</string>
+    <string name="routing_attr_weight_description">Adja meg az útvonalakon a járművekre vonatkozó tömegkorlátozást.</string>
     <string name="android_19_location_disabled">Az Android 4.4 (KitKat) verziója óta a régi tárolási mappa (%s) elavult. Másoljuk az összes OsmAnd fájlt az új helyre\?
 \n 1. megjegyzés: a régi fájlok érintetlenül maradnak (de kézzel törölhetők).
 \n 2. megjegyzés: az új tárolóhelyen nem lehet fájlokat megosztani az OsmAnd és OsmAnd+ között.</string>
@@ -4259,7 +4259,7 @@
     <string name="app_mode_mountain_bicycle">Hegyi kerékpár</string>
     <string name="av_def_action_choose">Kérésre</string>
     <string name="mapillary_widget_desc">Gyors hozzáférést biztosít a Mapillary alkalmazáshoz utcaszintű képek hozzáadásához.</string>
-    <string name="radius_rules_widget_desc">A sugárvonalzó eszköz egy kijelölt pont körüli távolságköröket jelenít meg a térképen.</string>
+    <string name="radius_rules_widget_desc">A sugárvonalzó-eszköz egy kijelölt pont körüli távolságköröket jelenít meg a térképen.</string>
     <string name="lanes_widgets_desc">Megjeleníti a jelenlegi közlekedési sávok elrendezését, és kiemeli azt, amelyen a navigáció szerint haladni kell.</string>
     <string name="map_markers_bar_widget_desc">A felső sávban lévő modul megjeleníti a következő térképjelölő távolságát és az irányát a jelenlegi helytől. Beállítható, hogy 1 vagy 2 jelölő legyen látható.</string>
     <string name="bearing_desc">Megjeleníti a cél abszolút vagy relatív irányát szögegységben (180°, 360° vagy milliradián).</string>
@@ -4462,7 +4462,7 @@
     <string name="map_center_widget">Koordináták: térképközéppont</string>
     <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre van felhasználva: offline térképek letöltése az OsmAnd kiszolgálókról, a kiszolgáló erőforrásainak méltányos igénybevételének nyomon követése, a forgalom mintázatainak előrejelzése és anonim havi térképjelentések készítése.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
-    <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpársebesség, -teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztül kell kapcsolódnia a megfelelő szenzorokhoz.</string>
+    <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpársebesség, -teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztül kell kapcsolódnia a megfelelő érzékelőkhöz.</string>
     <string name="speak_gps_signal_status">GPS-jel elvesztésének és helyreállásának bemondása</string>
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
     <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpár-sebesség, -teljesítmény, pedálfordulatszám, valamint pulzusszám.</string>
@@ -4871,7 +4871,7 @@
     <string name="map_widget_group_glide_desc">A modulok a célhoz vezető vagy a jelenlegi útra vonatkozó átlagos siklószámot jelenítik meg.</string>
     <string name="glide_ratio_to_target">Siklószám a úti célig</string>
     <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklószámot a megadott intervallumhoz.</string>
-    <string name="external_sensor_name_property_description">Szenzor neve</string>
+    <string name="external_sensor_name_property_description">Érzékelő neve</string>
     <string name="wheel_circumference">Kerék kerülete</string>
     <string name="contact_us">Kapcsolatfelvétel</string>
     <string name="help_article_map_legend_nautical_map_name">Hajózási térképstílus</string>
@@ -5087,8 +5087,8 @@
     <string name="previous_row_has_complex_widget">Az előző sorban összetett modul van</string>
     <string name="complex_widget_alert">%1$s modul csak a saját sorában helyezhető el.</string>
     <string name="precise_distance_numbers">Pontos távolságadatok</string>
-    <string name="any_connected">Bármelyik összekapcsolt</string>
-    <string name="any_connected_with_device">Bármelyik összekapcsolt: %s</string>
+    <string name="any_connected">Bármelyik párosított</string>
+    <string name="any_connected_with_device">Bármelyik párosított: %s</string>
     <string name="shared_string_road_maps">Úti térképek</string>
     <string name="shared_string_all_tracks">Minden nyomvonal</string>
     <string name="shared_string_license">Licenc</string>
@@ -5146,7 +5146,7 @@
     <string name="java_safe">Java (biztonságos)</string>
     <string name="shared_sting_all_colors">Összes szín</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="release_4_7">• Új Sebességmérő modul, amely kompatibilis az Android Autóval \n \n • Térképképernyő konfigurálása több Gyorsművelet gombbal \n \n • Jobban olvasható adatok a grafikonokon \n \n • Szenzoradat-alapú szűrők a nyomvonalakhoz \n \n • Nyomvonalcsoportok megjelenésének jobb testre szabhatósága \n \n • További GPX-címkék támogatása \n \n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között \n \n • Egységes felhasználói felület a nyomvonalválasztásához \n \n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott</string>
+    <string name="release_4_7">• Új Sebességmérő modul, amely kompatibilis az Android Autóval \n \n • Térképképernyő konfigurálása több Gyorsművelet gombbal \n \n • Jobban olvasható adatok a grafikonokon \n \n • Érzékelőadat-alapú szűrők a nyomvonalakhoz \n \n • Nyomvonalcsoportok megjelenésének jobb testre szabhatósága \n \n • További GPX-címkék támogatása \n \n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között \n \n • Egységes felhasználói felület a nyomvonalválasztásához \n \n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott</string>
     <string name="precise">Pontos</string>
     <string name="round_up">Kerekített</string>
     <string name="distance_during_navigation">Távolságok a navigálás során</string>
@@ -5395,7 +5395,7 @@
     <string name="obd_fuel_type_bifuel_lpg">LPG-vel működő Bifuel</string>
     <string name="obd_fuel_type_bifuel_cng">CNG-vel működő Bifuel</string>
     <string name="obd_fuel_type_bifuel_electricity">Elektromos árammal működő Bifuel</string>
-    <string name="obd_fuel_type_bifuel_electric_combustion">Bifuel elektromos és belső égésű motor</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Elektromos és belső égésű motorral működő Bifuel</string>
     <string name="obd_fuel_type_hybrid_gasoline">Hibrid benzines</string>
     <string name="obd_fuel_type_hybrid_ethanol">Hibrid etanollal</string>
     <string name="obd_fuel_type_hybrid_diesel">Hibrid dízel</string>
@@ -5405,7 +5405,7 @@
     <string name="shared_string_obd">OBD</string>
     <string name="percent_unit">%</string>
     <string name="rpm_unit">ford/perc</string>
-    <string name="obd_rpm_desc">Megjeleníti a jármű tachométere fordulatszámát az OBD-érzékelőn keresztül</string>
+    <string name="obd_rpm_desc">Megjeleníti a jármű fordulatszámmérőjével mért értéket az OBD-érzékelőn keresztül</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Hibrid elektromos és belső égésű motor</string>
     <string name="obd_fuel_type_hybrid_regenerative">Hibrid regeneratív</string>
     <string name="obd_widget_group">Járműmetrika</string>
@@ -5414,14 +5414,14 @@
     <string name="obd_fuel_type_desc">Megjeleníti az üzemanyag típusát az OBD-érzékelőn keresztül</string>
     <string name="obd_air_intake_temp">Beszívott levegő hőmérséklete</string>
     <string name="obd_ambient_air_temp">Környezeti levegő hőmérséklete</string>
-    <string name="obd_battery_voltage">Akkumulátor feszültség</string>
+    <string name="obd_battery_voltage">Akkumulátor feszültsége</string>
     <string name="obd_engine_coolant_temp">Hűtőfolyadék hőmérséklete</string>
     <string name="obd_fuel_level">Üzemanyag-hatékonyság (%)</string>
     <string name="obd_fuel_consumption_rate">Fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Megjeleníti az üzemanyag-fogyasztást az OBD adatai alapján</string>
     <string name="obd_fuel_type">Üzemanyagtípus</string>
-    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motorfordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep pozíciója, akkumulátor töltöttsége\n</string>
-    <string name="obd_support">OBD támogatás</string>
+    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motorfordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep helyzete, akkumulátor töltöttsége\n</string>
+    <string name="obd_support">OBD-támogatás</string>
     <string name="obd_plugin_name">Járműmetrika</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hibrid hidrogén</string>
@@ -5450,17 +5450,17 @@
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
     <string name="liter_per_hour">l/óra</string>
-    <string name="release_4_9">• Teljes képernyős képgaléria a Wikimedia képekhez\n\n • Új Járműmetrika bővítmény a jármű teljesítményének az OBD-II protokollon keresztüli nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testre szabható térképgomb és precíz rácsok\n\n • Helyi menü és egy Átlagsebesség visszaállítása művelet a moduloknál\n\n • Új motokrossz utak útvonalréteg\n\n •Nyomvonal automatikus rögzítése navigáció közben javítása\n\n • Javítva a jobbról balra író nyelveknél a koordináták felcserélése\n\n • Javítva a hiányzó szenzoradatok a jelenleg rögzített nyomvonalnál\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy az útvonal attribútumainak megjelenítéséhez</string>
+    <string name="release_4_9">• Teljes képernyős képgaléria a Wikimedia képekhez\n\n • Új Járműmetrika bővítmény a jármű teljesítményének az OBD-II protokollon keresztüli nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testre szabható térképgomb és precíz rácsok\n\n • Helyi menü és egy Átlagsebesség visszaállítása művelet a moduloknál\n\n • Új motokrossz utak útvonalréteg\n\n •Nyomvonal automatikus rögzítése navigáció közben javítása\n\n • Javítva a jobbról balra író nyelveknél a koordináták felcserélése\n\n • Javítva a hiányzó érzékelőadatok a jelenleg rögzített nyomvonalnál\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy az útvonal attribútumainak megjelenítéséhez</string>
     <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
     <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Koppintson a gombra a feloldáshoz.</string>
     <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
     <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II olvasókat.</string>
-    <string name="connect_obd_instructions_step2">Indítsa el a jármű motorját</string>
+    <string name="connect_obd_instructions_step2">Indítsa be a jármű motorját</string>
     <string name="connect_obd_instructions_step3">Engedélyezze a Bluetooth-t az eszközén</string>
     <string name="connect_obd_instructions_step4">Koppintson a(z) „%1$s” gombra és válassza ki az OBD-olvasót a listáról.</string>
     <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
     <string name="obd_fuel_left_liters">Maradék üzemanyag (liter)</string>
-    <string name="obd_vehicle_info">Jármű információ</string>
+    <string name="obd_vehicle_info">Jármű-információ</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_step1">Helyezze az olvasót a járműve OBD-II aljzatába.</string>
     <string name="obd_how_to_connect">Hogyan működik:</string>
@@ -5468,7 +5468,7 @@
     <string name="obd_widget_vehicle_speed">Jármű sebessége</string>
     <string name="obd_widget_engine_speed">Motor fordulatszáma</string>
     <string name="obd_nothing_found_text">Nem található OBD-olvasó</string>
-    <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth-t az OBD-olvasó megkereséséhez és csatlakoztatásához.</string>
+    <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth-t az OBD-olvasó megkereséséhez és párosításához.</string>
     <string name="obd_searching_text_description">Tartsa az eszközt az OBD-olvasó közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
     <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – eszköze az OBD-olvasó hatókörén belül van.</string>
     <string name="obd_searching_text">OBD-olvasók keresése</string>
@@ -5512,7 +5512,7 @@
     <string name="record_obd_data">A jármű mérési adatainak rögzítése</string>
     <string name="wunderlinq_datagrid">WunderLINQ adatrács</string>
     <string name="shared_string_volume">Térfogat</string>
-    <string name="obd_air_intake_temp_desc">Megjeleníti a motor szívócsonkjába belépő levegő hőmérsékletét.</string>
+    <string name="obd_air_intake_temp_desc">Megjeleníti a motor szívócsonkjába beszívott levegő hőmérsékletét.</string>
     <string name="obd_fuel_consumption_rate_sensor_type">A kiválasztott mértékegységek használata a névben.</string>
     <string name="remaining_fuel">Maradék üzemanyag</string>
     <string name="obd_fuel_consumption">Fogyasztás</string>
@@ -5531,7 +5531,7 @@
     <string name="current_temperature">Jelenlegi hőmérséklet</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Kövesse nyomon a jármű létfontosságú adatait az OBD-II protokoll segítségével. Kísérjen figyelemmel többek között olyan kulcsfontosságú mérőszámokat, mint a sebesség, a motorfordulatszám vagy az üzemanyag-fogyasztás.</string>
     <string name="obd_engine_oil_temperature_desc">Megjeleníti a motorolaj hőmérsékletét.</string>
-    <string name="obd_throttle_position">Fojtószeleplap helyzete</string>
+    <string name="obd_throttle_position">Fojtószelep helyzete</string>
     <string name="obd_battery_voltage_desc">Megjeleníti a jármű akkumulátorának feszültségét</string>
     <string name="obd_engine_coolant_temp_desc">Megjeleníti a hűtőfolyadék hőmérsékletét</string>
     <string name="obd_speed_desc">Megjeleníti a járműsebesség-érzékelőből (VSS) kiolvasott sebességet.</string>
@@ -5539,8 +5539,8 @@
     <string name="obd_engine_runtime_desc">Megjeleníti, mennyi ideje jár a motor az indítás óta.</string>
     <string name="obd_calculated_engine_load">Számított motorterhelés</string>
     <string name="obd_fuel_pressure_desc">Megjeleníti az üzemanyagrendszer nyomásértékét</string>
-    <string name="obd_engine_oil_temperature">Motorolaj hőmérséklet</string>
-    <string name="obd_throttle_position_desc">Megjeleníti a fojtószelepházban lévő fojtószeleplap szögét.</string>
+    <string name="obd_engine_oil_temperature">Motorolaj-hőmérséklet</string>
+    <string name="obd_throttle_position_desc">Megjeleníti a fojtószelepházban lévő pillangószelep szögét.</string>
     <string name="obd_calculated_engine_load_desc">Megjeleníti, hogy adott pillanatban a rendelkezésre álló motorteljesítmény hány százaléka van kihasználva.</string>
     <string name="obd_engine_runtime">Motor üzemidő</string>
     <string name="preview_next_turn">Következő kanyarodás előnézete</string>
@@ -5776,8 +5776,8 @@
     <string name="copy_as_new_folder">Másolás új mappaként</string>
     <string name="add_to_a_folder">Hozzáadás egy mappához</string>
     <string name="add_to_favorites">Hozzáadás a kedvencekhez</string>
-    <string name="max_weight_at_full_load_description">Adja meg a járműve teljes terhelés melletti maximális súlyát, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
-    <string name="max_axle_load_description">Adja meg a járműve maximális tengelyterhelését, hogy elkerülhesse a súlykorlátozásos utakat és hidakat.</string>
+    <string name="max_weight_at_full_load_description">Adja meg járműve teljes terhelési maximális tömegét, hogy navigáció közben a tömegkorlátozású utakat és hidakat elkerülhesse.</string>
+    <string name="max_axle_load_description">Adja meg járműve maximális tengelyterhelését, hogy elkerülje a tömegkorlátozású utakat és hidakat.</string>
     <string name="lang_en_barebones">Angol (csupasz)</string>
     <string name="shared_sting_osm_link">OSM hivatkozás</string>
     <string name="show_local_names">Helyi nevek megjelenítése</string>
