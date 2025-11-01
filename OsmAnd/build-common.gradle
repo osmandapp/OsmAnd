@@ -389,7 +389,9 @@ tasks.register('generateAndPullPreferencesDatabase', Exec) {
     onlyIf { gradle.startParameter.taskNames.contains('generateAndPullPreferencesDatabase') }
 
     ext {
+        // dbNameOnDevice MUST match PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile().databaseFileName()
         dbNameOnDevice = "searchable_preferences.db"
+        // assetPathAndName MUST match PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile().prepackagedPreferencesDatabase().get().databaseAssetFile().getPath()
         assetPathAndName = "database/searchable_preferences_prepackaged.db"
         testClassName = "net.osmand.plus.settings.fragments.search.GeneratePreferencesDatabaseTest"
     }
