@@ -610,7 +610,7 @@
     <string name="navigate_point_top_text">შეიყვანეთ განედი და გრძედი არჩეულ ფორმატში (D - გრადუსი, M - წუთ, S - წამი)</string>
     <string name="navigate_point_latitude">განედი</string>
     <string name="navigate_point_longitude">გრძედი</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_D">წწწ.წწწწწ</string>
     <string name="navigate_point_format_DM">DDD MM.MMM</string>
     <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="shared_string_show_on_map">რუკაზე ჩვენება</string>
@@ -1553,7 +1553,7 @@
     <string name="other_menu_group">სხვა</string>
     <string name="features_menu_group">მახასიათებლები</string>
     <string name="shared_string_send">გაგზავნა</string>
-    <string name="share_geo">geo:</string>
+    <string name="share_geo">გეო:</string>
     <string name="downloads">ჩამოწერები</string>
     <string name="regions">რეგიონები</string>
     <string name="later">გვიან</string>
@@ -3169,7 +3169,7 @@
     <string name="horseback_riding">ცხენის ჭენება</string>
     <string name="page_number">გვერდი %1$s</string>
     <string name="offline_wikivoyage">ინტერნეტგარეშე ვიკივოიაჟი</string>
-    <string name="rendering_attr_natureReserves_name">ნაკრძალები</string>
+    <string name="rendering_attr_natureReserves_name">ნაკრძალები და დაცული ტერიტორიები</string>
     <string name="auto_zoom_discrete">დისკრეტული</string>
     <string name="promo_subscription">პრომოს გამოწერა</string>
     <string name="rendering_attr_showRunningRoutes_name">სარბენი გზები</string>
@@ -3313,4 +3313,24 @@
     <string name="si_nm_h">საზღვაი მილი საათში (კვანძი)</string>
     <string name="donation_to_osm">შეწირულობა OSM-ის საზოგადოებისთვის</string>
     <string name="osm_live_enter_user_name">შეიყვანეთ საჯარო სახელი</string>
+    <string name="make_as_start_point">ამის მონიშვნა გასვლის წერტილად</string>
+    <string name="subsequent_dest_description">სამიზნის აწევა და შექმნა</string>
+    <string name="avoid_roads_msg">ალტერნატიული გზის შექმნის გაშვება თავიდან ასაცილებელი გზების მონიშვნისას</string>
+    <string name="save_global_track_interval_descr">მიუთითეთ ჟურნალში ჩაწერის ინტერვალ ზოგადი გზის ჩაწერისთვის (ირთვება \'მოგზაურობის ჩაწერის\' ვიჯეტიდან რუკაზე).</string>
+    <string name="confirm_usage_speed_cameras">ბევრ ქვეყანაში (გერმანია, საფრანგეთი, იტალია და ა.შ.) სიჩქარის კამერის გაფრთხილებების გამოყენება არაკანონიერია. OsmAnd უარს ამბობს პასუხისმგებლობაზე, თუ კანონს დაარღვევთ. დაატყაპუნეთ ღილაკზე \'დიახ\', თუ დარწმუნებული ბრძანდებით, რომ კანონს არ არღვევთ.</string>
+    <string name="avoid_in_routing_descr_">ზოგიერთი მარშრუტებისა და გზის ტიპების თავიდან აცილება</string>
+    <string name="keep_informing_descr">ნავიგაციის ინსტრუქციების თავიდან გამოცხადება განსაზღვრულ შუალედებში.</string>
+    <string name="show_from_zoom_level">დასაწყისების ჩვენება გადიდების დონეზე</string>
+    <string name="download_wikipedia_label">ვიკიპედიის მონაცემების გადმოწერა</string>
+    <string name="rendering_attr_pisteRoutes_name">სასრიალო ტრასები</string>
+    <string name="routing_attr_piste_type_nordic_name">კროსი და სკანდინავიური სრიალი</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd-ის მარშრუტის სეგმენტის გამოტვლა ინტერნეტის გარეშე</string>
+    <string name="profile_prefs_reset_successful">ყველა პროფილის პარამეტრი აღდგენილია ნაგულისხმევ მნიშვნელობაზე.</string>
+    <string name="rendering_attr_alpineHiking_description">სიძნელის კლასიფიკაციის ტიპები მარშრუტებისთვის.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d ტრეკი)</item>
+        <item quantity="other">%1$d (%2$d ტრეკი)</item>
+    </plurals>
+    <string name="nothing_found_descr">შეცვალეთ მოთხოვნა, ან გაზარდეთ მისი რადიუსი.</string>
+    <string name="app_restart_required">ზოგიერთი პარამეტრის ძალაში შესვლას აპის გადატვირთვა სჭირდება.</string>
 </resources>
