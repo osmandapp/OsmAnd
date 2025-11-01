@@ -946,7 +946,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app
 				.daoProviderManager
 				.initDAOProvider(
-						BuildConfig.GENERATE_DATABASE_FOR_ASSET ?
+						BuildConfig.GENERATE_PREFERENCES_DATABASE_FOR_ASSET ?
 								PreferencesDatabaseFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
 								PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
 						ConfigurationProvider.getActualConfiguration(),

@@ -14,7 +14,7 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "boolean", "GENERATE_DATABASE_FOR_ASSET", "false"
+        buildConfigField "boolean", "GENERATE_PREFERENCES_DATABASE_FOR_ASSET", "false"
     }
 
 	lintOptions {
@@ -122,9 +122,9 @@ clean.doFirst {
 	}
 }
 
-if (project.hasProperty('generateDb') && project.property('generateDb') == 'true') {
-    println ">>> '-PgenerateDb=true' detected. Configuring 'debug' build for DB generation."
-    android.buildTypes.debug.buildConfigField "boolean", "GENERATE_DATABASE_FOR_ASSET", "true"
+if (project.hasProperty('generatePreferencesDb') && project.property('generatePreferencesDb') == 'true') {
+    println ">>> '-generatePreferencesDb=true' detected. Configuring 'debug' build for Preferences DB generation."
+    android.buildTypes.debug.buildConfigField "boolean", "GENERATE_PREFERENCES_DATABASE_FOR_ASSET", "true"
 }
 
 tasks.register('validateTranslations') {
@@ -378,17 +378,15 @@ tasks.register('appStart', Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 }
 
-// execute this task using: ./gradlew installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generatePrepackagedDatabase -PgenerateDb=true
-tasks.register('generatePrepackagedDatabase', Exec) {
+// execute this task using: ./gradlew installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generatePrepackagedPreferencesDatabase -PgeneratePreferencesDb=true
+tasks.register('generatePrepackagedPreferencesDatabase', Exec) {
     group = "Database"
-    description = "Generates and pulls the prepackaged database. Use with the full installation command."
+    description = "Generates and pulls the prepackaged preferences database. Use with the full installation command."
 
-    // This ensures that this task runs only after both installation tasks have completed.
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebug'))
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebugAndroidTest'))
 
-    // This task will only execute if explicitly called from the command line.
-    onlyIf { gradle.startParameter.taskNames.contains('generatePrepackagedDatabase') }
+    onlyIf { gradle.startParameter.taskNames.contains('generatePrepackagedPreferencesDatabase') }
 
     ext {
         dbNameOnDevice = "searchable_preferences.db"
