@@ -5761,8 +5761,8 @@
     <string name="copy_as_new_folder">Copier comme nouveau dossier</string>
     <string name="add_to_a_folder">Ajouter à un dossier</string>
     <string name="lang_en_barebones">Anglais (barebones)</string>
-    <string name="max_weight_at_full_load_description">Indiquez le poids maximal de votre véhicule à pleine charge pour éviter les routes et les ponts avec des limites de poids.</string>
-    <string name="max_axle_load_description">Indiquez la charge maximale par essieu de votre véhicule pour éviter les routes et les ponts avec des limites de poids.</string>
+    <string name="max_weight_at_full_load_description">Indiquez le poids maximal de votre véhicule à pleine charge afin d\'éviter les routes et les ponts soumis à des limitations de poids.</string>
+    <string name="max_axle_load_description">Indiquez la charge maximale par essieu de votre véhicule afin d\'éviter les routes et les ponts soumis à des limites de poids.</string>
     <string name="shared_sting_osm_link">Lien OSM</string>
     <string name="show_local_names">Afficher les noms locaux</string>
     <string name="obd_alt_battery_voltage">Tension de l\'adaptateur</string>
@@ -5799,6 +5799,7 @@
     <string name="download_wikipedia_label">Télécharger Wikipédia</string>
     <string name="wind_animation_layer">Couche d\'animation du vent</string>
     <string name="weather_layers">Couches météo</string>
-    <string name="quick_action_weather_layers">Un interrupteur pour afficher ou masquer les couches météorologiques sur la carte.</string>
+    <string name="quick_action_weather_layers">Bouton permettant d\'afficher ou de masquer les calques météorologiques sur la carte.</string>
     <string name="quick_action_wind_animation_layer">Un interrupteur pour afficher ou masquer la couche d\'animation du vent sur la carte.</string>
+    <string name="lang_crh">Tatar de Crimée (latin)</string>
 </resources>

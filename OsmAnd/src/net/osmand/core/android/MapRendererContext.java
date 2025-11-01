@@ -161,9 +161,6 @@ public class MapRendererContext {
 			this.useAppLocale = useAppLocale;
 			updateMapSettings(false);
 		}
-
-		LanguagePreference langPref = MapRenderRepositories.getMapLanguageSetting(app, zoom);
-		mapPresentationEnvironment.setLanguagePreference(langPref);
 	}
 
 	public void updateMapSettings(boolean forceUpdateProviders) {
@@ -262,8 +259,12 @@ public class MapRendererContext {
 		mapPresentationEnvironment.setSettings(styleSettings);
 
 		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
-			if (recreateMapPresentation || forceUpdateProviders || languageParamsChanged) {
+			if (recreateMapPresentation || forceUpdateProviders) {
 				recreateRasterAndSymbolsProvider(providerType);
+			} else if (languageParamsChanged) {
+				if (mapPrimitivesProvider != null || updateMapPrimitivesProvider(providerType)) {
+					updateOrRemoveObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+				}
 			}
 			setMapBackgroundColor();
 		}
