@@ -47,8 +47,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
-import org.threeten.bp.Duration;
-
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 

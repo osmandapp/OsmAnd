@@ -41,8 +41,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 
-import org.threeten.bp.Duration;
-
+import java.time.Duration;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;

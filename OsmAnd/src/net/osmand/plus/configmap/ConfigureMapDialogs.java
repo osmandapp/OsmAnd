@@ -42,8 +42,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import org.threeten.bp.Duration;
-
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 

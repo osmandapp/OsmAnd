@@ -18,8 +18,7 @@ import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 
-import org.threeten.bp.Duration;
-
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

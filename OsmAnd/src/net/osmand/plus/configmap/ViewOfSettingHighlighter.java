@@ -5,8 +5,7 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import org.threeten.bp.Duration;
-
+import java.time.Duration;
 import java.util.function.Function;
 
 import de.KnollFrank.lib.settingssearch.results.Setting;

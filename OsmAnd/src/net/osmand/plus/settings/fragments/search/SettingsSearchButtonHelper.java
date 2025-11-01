@@ -181,7 +181,6 @@ public class SettingsSearchButtonHelper {
 								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI(searchResultsFilter))
 								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
 								.withPrepareShow(new PrepareShow())
-								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
 								.withShowSettingsFragmentAndHighlightSetting(new ShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId))
 								.build(),
 						fragmentActivity,

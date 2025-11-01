@@ -10,9 +10,9 @@ import java.util.stream.Stream;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 
-class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.settingssearch.provider.IncludePreferenceInSearchResultsPredicate {
+// FK-TODO: merge into SearchResultsFilter
+class IncludePreferenceInSearchResultsPredicate {
 
-	@Override
 	public boolean includePreferenceInSearchResults(final SearchablePreference preference) {
 		return !isPreferenceConnectedToAnyInactivePlugin(preference);
 	}

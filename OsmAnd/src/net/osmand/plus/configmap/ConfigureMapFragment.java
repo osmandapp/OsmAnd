@@ -51,8 +51,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
-import org.threeten.bp.Duration;
-
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
