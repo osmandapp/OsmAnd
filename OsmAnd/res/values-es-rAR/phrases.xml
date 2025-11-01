@@ -838,7 +838,7 @@
     <string name="poi_nwn_ref">Nodo de red nacional de senderismo</string>
     <string name="poi_rwn_ref">Nodo de red regional de senderismo</string>
     <string name="poi_lwn_ref">Nodo de red local de senderismo</string>
-    <string name="poi_opening_hours">Horario de atención</string>
+    <string name="poi_opening_hours">Horario de apertura</string>
     <string name="poi_collection_times">Horario de recolección</string>
     <string name="poi_description">Descripción</string>
     <string name="poi_phone">Teléfono</string>
@@ -2813,7 +2813,7 @@
     <string name="poi_xmas_tree">Árbol navideño;Árbol de navidad;Arbol navideño</string>
     <string name="poi_xmas_day_date">Período de fecha para evento navideño</string>
     <string name="poi_xmas_note">Navidad: nota</string>
-    <string name="poi_xmas_opening_hours">Navidad: horario de atención;horario de apertura</string>
+    <string name="poi_xmas_opening_hours">Navidad: horario de apertura</string>
     <string name="poi_xmas_location">Navidad: ubicación</string>
     <string name="poi_xmas_url">Navidad: sitio web</string>
     <string name="poi_public_bookcase">Biblioteca libre</string>
@@ -4249,7 +4249,7 @@
     <string name="poi_post_office_post_partner">Puesto asociado</string>
     <string name="poi_post_office_service_provider">Proveedor de servicios postales</string>
     <string name="poi_post_office_collection_times">Horarios de recolección en la oficina de correos</string>
-    <string name="poi_post_office_opening_hours">Horarios de atención de la oficina de correos</string>
+    <string name="poi_post_office_opening_hours">Horario de apertura de la oficina de correos</string>
     <string name="poi_toilets_disposal_dry_toilet">Eliminación de desechos: sanitario seco</string>
     <string name="poi_museum_type">Temática del museo</string>
     <string name="poi_museum_children">Infantil</string>
