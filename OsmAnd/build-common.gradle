@@ -396,7 +396,6 @@ tasks.register('generateAndPullPreferencesDatabase', Exec) {
     workingDir project.rootDir
     commandLine 'sh', '-c', """
         set -e
-        # Hardcoded for 'nightlyFree' flavor, which has the applicationId 'net.osmand.dev'
         appPackage="net.osmand.dev"
         adb="${android.sdkDirectory}/platform-tools/adb"
         dbNameOnDevice="${ext.dbNameOnDevice}"
@@ -409,7 +408,17 @@ tasks.register('generateAndPullPreferencesDatabase', Exec) {
         echo ">>> Pausing for 2 seconds to ensure apps are fully registered by the package manager..."
         sleep 2
         echo ">>> Starting test to create database on device..."
-        "\${adb}" shell am instrument -w -e class \${testClassName} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner
+        INSTRUMENTATION_OUTPUT=\$("\${adb}" shell am instrument -w -e class \${testClassName} \${appPackage}.test/androidx.test.runner.AndroidJUnitRunner 2>&1)
+        echo "--- Test Output Start ---"
+        echo "\${INSTRUMENTATION_OUTPUT}"
+        echo "--- Test Output End ---"
+        if echo "\${INSTRUMENTATION_OUTPUT}" | grep -q -E 'INSTRUMENTATION_CODE: 0|FAILURES!!!'; then
+            echo
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            echo "!!! BUILD FAILED: Test run crashed or reported a failure. !!!"
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            exit 1
+        fi
         echo ">>> Test finished. Pulling database from device to \${absoluteLocalAssetPath}..."
         "\${adb}" exec-out run-as \${appPackage} cat "databases/\${dbNameOnDevice}" > "\${absoluteLocalAssetPath}"
         echo ">>> Cleaning up: Uninstalling apps..."
