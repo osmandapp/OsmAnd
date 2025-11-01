@@ -378,15 +378,15 @@ tasks.register('appStart', Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 }
 
-// execute this task using: ./gradlew installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generatePrepackagedPreferencesDatabase -PgeneratePreferencesDb=true
-tasks.register('generatePrepackagedPreferencesDatabase', Exec) {
+// execute this task using: ./gradlew installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generateAndPullPreferencesDatabase -PgeneratePreferencesDb=true
+tasks.register('generateAndPullPreferencesDatabase', Exec) {
     group = "Database"
     description = "Generates and pulls the prepackaged preferences database. Use with the full installation command."
 
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebug'))
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebugAndroidTest'))
 
-    onlyIf { gradle.startParameter.taskNames.contains('generatePrepackagedPreferencesDatabase') }
+    onlyIf { gradle.startParameter.taskNames.contains('generateAndPullPreferencesDatabase') }
 
     ext {
         dbNameOnDevice = "searchable_preferences.db"
