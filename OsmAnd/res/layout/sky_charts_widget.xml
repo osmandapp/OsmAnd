@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/map_center_view"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center_horizontal|top"
+	android:layout_marginTop="@dimen/map_button_margin"
+	android:background="@color/white_50_transparent"
+	android:orientation="vertical"
+	android:visibility="visible">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.AppCompatButton
+			android:id="@+id/enter_3d_button"
+			style="@style/DashboardGeneralButton"
+			android:layout_gravity="start|top"
+			android:gravity="center"
+			android:layout_marginStart="0dp"
+			android:text="3D"
+			android:textAllCaps="true"
+			app:typefaceWeight="medium" />
+
+		<androidx.appcompat.widget.AppCompatButton
+			android:id="@+id/switch_chart_button"
+			style="@style/DashboardGeneralButton"
+			android:layout_gravity="end|top"
+			android:gravity="center"
+			android:layout_marginEnd="0dp"
+			android:text="@string/shared_string_switch"
+			android:textAllCaps="true"
+			app:typefaceWeight="medium" />
+
+		<net.osmand.plus.plugins.astro.views.CelestialPathView
+			android:id="@+id/celestial_path_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="gone"/>
+
+		<net.osmand.plus.plugins.astro.views.PlanetsAltitudeChartView
+			android:id="@+id/planets_altitude_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="gone"/>
+
+		<net.osmand.plus.plugins.astro.views.PlanetsVisiblityChartView
+			android:id="@+id/planets_visiblity_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="gone"/>
+
+	</FrameLayout>
+
+</LinearLayout>
