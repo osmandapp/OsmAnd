@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class GeneratePreferenceDatabaseTest extends AndroidTest {
+public class GeneratePreferencesDatabaseTest extends AndroidTest {
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> activityRule = new ActivityScenarioRule<>(MapActivity.class);

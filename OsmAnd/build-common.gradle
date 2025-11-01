@@ -391,7 +391,7 @@ tasks.register('generatePrepackagedPreferencesDatabase', Exec) {
     ext {
         dbNameOnDevice = "searchable_preferences.db"
         assetPathAndName = "database/searchable_preferences_prepackaged.db"
-        testClassName = "net.osmand.plus.settings.fragments.search.GenerateDatabaseTest"
+        testClassName = "net.osmand.plus.settings.fragments.search.GeneratePreferencesDatabaseTest"
     }
     workingDir project.rootDir
     commandLine 'sh', '-c', """
