@@ -1328,7 +1328,7 @@
     <string name="follow">Iniciar la guía</string>
     <string name="mark_final_location_first">Definí primero el destino</string>
     <string name="get_directions">Indicaciones</string>
-    <string name="opening_hours">Horario de atención</string>
+    <string name="opening_hours">Horario de apertura</string>
     <string name="opening_changeset">Abriendo conjunto de cambios…</string>
     <string name="closing_changeset">Cerrando conjunto de cambios…</string>
     <string name="commiting_node">Cambiando nodo…</string>
@@ -1569,7 +1569,7 @@
     <string name="av_locations_descr">Archivo GPX con ubicaciones.</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="contact_info">Información de contacto</string>
-    <string name="add_opening_hours">Agregar horario de atención</string>
+    <string name="add_opening_hours">Agregar horario de apertura</string>
     <string name="poi_dialog_poi_type">Tipo de PDI</string>
     <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
     <string name="please_specify_poi_type">Indicá el tipo de PDI.</string>
