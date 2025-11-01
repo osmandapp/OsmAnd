@@ -68,4 +68,21 @@
         android:title="@string/ais_cpa_warning_distance"
         tools:summary="@string/ais_cpa_warning_distance_description" />
 
+    <PreferenceCategory
+        android:key="ais_own_object"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/ais_own_object" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="ais_own_mmsi"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_own_mmsi"
+        tools:summary="@string/ais_own_mmsi_description" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_display_own_position"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_display_own_position"
+        tools:summary="@string/ais_display_own_position_description" />
+
 </PreferenceScreen>

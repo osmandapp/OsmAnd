@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -88,12 +89,27 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onAisObjectReceived(@NonNull AisObject ais) {
-		AisObjectDrawable drawable = objectDrawables.get(ais.getMmsi());
+		int mmsi = ais.getMmsi();
+		boolean showOwnObject = plugin.AIS_DISPLAY_OWN_POSITION.get();
+		boolean own = (mmsi == plugin.AIS_OWN_MMSI.get());
+		AisObjectDrawable drawable = objectDrawables.get(mmsi);
 		if (drawable == null) {
+			if ((own) && (!showOwnObject)) {
+				AisObjectDrawable.setOwnObject(null);
+				return; // exclude own AIS object from list
+			}
 			drawable = new AisObjectDrawable(ais);
 			objectDrawables.put(ais.getMmsi(), drawable);
 		} else {
-			drawable.set(ais);
+			if ((own) && (!showOwnObject)) {
+				this.onAisObjectRemoved(ais);
+				return;
+			} else {
+				drawable.set(ais);
+			}
+		}
+		if (own) {
+			AisObjectDrawable.setOwnObject(drawable);
 		}
 		if (getMapRenderer() != null && !drawable.hasAisRenderData() && aisRestImage != null
 				&& markersCollection != null && vectorLinesCollection != null) {
@@ -104,6 +120,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onAisObjectRemoved(@NonNull AisObject ais) {
+		if (ais.getMmsi() == plugin.AIS_OWN_MMSI.get()) {
+			AisObjectDrawable.setOwnObject(null);
+		}
 		if (getMapRenderer() != null && markersCollection != null && vectorLinesCollection != null) {
 			AisObjectDrawable drawable = objectDrawables.get(ais.getMmsi());
 			if (drawable != null) {

@@ -5703,6 +5703,11 @@
     <string name="ais_cpa_settings_description">Diese Werte bestimmen, wie AIS-Objekte angezeigt werden, wenn Sie sich der Position des Schiffs nähern.</string>
     <string name="ais_cpa_warning_time">Warnzeit vor dem Punkt der größten Annäherung (CPA)</string>
     <string name="ais_cpa_warning_distance">Warnabstand für den Punkt der größten Annäherung (CPA)</string>
+    <string name="ais_own_object">Einstellung zur Anzeige des eigenen AIS Objektes</string>
+    <string name="ais_own_object_description">Wenn das eigene Schiff einen AIS Transmitter besitzt, wird das empfangene Signal zusammen mit den anderen Schiffen empfangen. Die Anzeige des eigenen AIS Objektes kann hier definiert werden.</string>
+    <string name="ais_own_mmsi">Eigene MMSI (Maritime Mobile Service Identity)</string>
+    <string name="ais_own_mmsi_description">Eingabe der MMSI (9 stelliger numerischer Wert) für das eigene AIS Objekt.</string>
+    <string name="ais_display_own_position">Anzeige des eigenen AIS-Objektes erlauben.</string>
     <string name="map_grid">Kartenraster</string>
     <string name="show_grids">Kartenraster anzeigen</string>
     <string name="show_grids_description">Anzeige eines Rasters über der Karte erlauben</string>

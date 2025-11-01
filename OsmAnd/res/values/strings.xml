@@ -205,6 +205,12 @@
     <string name="ais_cpa_warning_time_description">If the TCPA (Time to Closest Point of Approach) with another vessel falls below the defined threshold, the vessel is highlighted in red.</string>
     <string name="ais_cpa_warning_distance">Warning distance for the Closes Point of Approach (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Vessels are highlighted in red if the CPA (Closest Point of Approach) is below the defined threshold and the TCPA (Time to CPA) falls within the warning time set in the \'Warning time to reach the CPA\' setting.</string>
+    <string name="ais_own_object">settings for display of own AIS object</string>
+    <string name="ais_own_object_description">If the own vessel has an AIS transmitter then the signal will be received together with other AIS vessel\'s signals. Special handling of the own AIS signal is defined here.</string>
+    <string name="ais_own_mmsi">Own MMSI (Maritime Mobile Service Identity)</string>
+    <string name="ais_own_mmsi_description">Identify the MMSI (9 digit numerical value) of own AIS object.</string>
+    <string name="ais_display_own_position">Define whether the own AIS object shall be displayed.</string>
+    <string name="ais_display_own_position_description">Usually the own position is shown by OsmAnd. The additional display of the own AIS object may be confusing and can be disabled here.</string>
     <string name="plugin_ais_tracker_name">AIS vessel tracker</string>
     <string name="plugin_ais_tracker_description">Displays AIS positions and information about nearby vessels. AIS data is received over the network from an external AIS receiver.</string>
     <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and is not intended for use in critical applications. It does not guarantee reliability or accuracy. Do not rely on this software for navigation, safety of life, or any other essential operations.</string>

@@ -31,6 +31,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		int currentProtocol = setupProtocol();
 		boolean cpaWarningEnabled = setupCpaWarningTime();
+		int ownMmsi = setupOwnMmsi();
 
 		setupIpAddress(currentProtocol);
 		setupTcpPort(currentProtocol);
@@ -38,6 +39,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		setupObjectLostTimeout();
 		setupShipLostTimeout();
 		setupCpaWarningDistance(cpaWarningEnabled);
+		setupDisplayOwnPosition(ownMmsi);
 	}
 
 	private int setupProtocol() {
@@ -165,6 +167,31 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		}
 	}
 
+	private int setupOwnMmsi() {
+		EditTextPreferenceEx aisOwnMmsi = findPreference(plugin.AIS_OWN_MMSI.getId());
+		if (aisOwnMmsi != null) {
+			int currentValue = plugin.AIS_OWN_MMSI.get();
+			aisOwnMmsi.setDescription(R.string.ais_own_mmsi_description);
+			aisOwnMmsi.setSummary(String.valueOf(currentValue));
+			return currentValue;
+		}
+		return 0;
+	}
+
+	private void setupDisplayOwnPosition(int ownMmsi) {
+		Boolean[] entryValues = { true, false };
+		String[] entries = new String[entryValues.length];
+		entries[0] = getString(R.string.shared_string_yes);
+		entries[1] = getString(R.string.shared_string_no);
+		ListPreferenceEx aisDisplayOwnPosition = findPreference(plugin.AIS_DISPLAY_OWN_POSITION.getId());
+		if (aisDisplayOwnPosition != null) {
+			aisDisplayOwnPosition.setEntries(entries);
+			aisDisplayOwnPosition.setEntryValues(entryValues);
+			aisDisplayOwnPosition.setDescription(R.string.ais_display_own_position_description);
+			aisDisplayOwnPosition.setEnabled(ownMmsi != 0);
+		}
+	}
+
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		if (preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_IP_ADDRESS_ID)) {
@@ -178,6 +205,12 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 				showAlertDialog("Only numerical values accepted in range 0..65535.");
 				return false;
 			}
+		} else if (preference.getKey().equals(AisTrackerPlugin.AIS_OWN_MMSI_ID)) {
+			if (!isValidMmsi(newValue.toString())) {
+				showAlertDialog("Only numerical values are accepted (9 digits).");
+				return false;
+			}
+			AisObjectDrawable.setOwnObject(null);
 		}
 		return super.onPreferenceChange(preference, newValue);
 	}
@@ -205,6 +238,19 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 			return false;
 		}
 		return (i >= 0) && (i <= 65535);
+	}
+
+	private static boolean isValidMmsi(@Nullable String value) {
+		int i;
+		if (value == null) {
+			return false;
+		}
+		try {
+			i = Integer.parseInt(value);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return (i >= 0) && (i <= 999999999);
 	}
 
 	private void showAlertDialog(@NonNull String message) {

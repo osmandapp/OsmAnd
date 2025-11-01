@@ -49,6 +49,8 @@ public class AisObjectDrawable {
 	private MapMarker lostMarker;
 	private VectorLine directionLine;
 
+	private static AisObjectDrawable ownObject = null; // object representing own AIS transmitter (if present)
+
 	public AisObjectDrawable(@NonNull AisObject ais) {
 		this.ais = ais;
 		this.imagesCache = ais.getPlugin().getAisImagesCache();
@@ -64,7 +66,7 @@ public class AisObjectDrawable {
 	}
 
 	public void set(@NonNull AisObject ais) {
-		this.ais.set(ais);
+		// this.ais.set(ais);
 
 		this.invalidateBitmap();
 		this.bitmapColor = 0;
@@ -191,7 +193,9 @@ public class AisObjectDrawable {
 	}
 
 	private void setColor(boolean vesselAtRest) {
-		if (ais.isLost(getPlugin().getVesselLostTimeoutInMinutes()) && !vesselAtRest) {
+		if (isOwn()) {
+			this.bitmapColor = Color.BLACK; // show own AIS object in black
+		} else if (ais.isLost(getPlugin().getVesselLostTimeoutInMinutes()) && !vesselAtRest) {
 			if (ais.isMovable()) {
 				this.bitmapColor = 0; // default icon
 			}
@@ -207,7 +211,7 @@ public class AisObjectDrawable {
 			if (!this.bitmapValid) {
 				setBitmap();
 			}
-			if (checkCpaWarning()) {
+			if ((!isOwn()) && checkCpaWarning()) {
 				activateCpaWarning();
 			} else {
 				deactivateCpaWarning();
@@ -441,4 +445,11 @@ public class AisObjectDrawable {
 		lostMarker = null;
 		directionLine = null;
 	}
+
+	private boolean isOwn() { return (ownObject == this); }
+
+	public static void setOwnObject(AisObjectDrawable obj) { ownObject = obj; }
+
+	@Nullable
+	public static AisObjectDrawable getOwnObject() { return ownObject; }
 }
