@@ -51,6 +51,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.BuildConfig;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -945,7 +946,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app
 				.daoProviderManager
 				.initDAOProvider(
-						PreferencesDatabaseFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile(),
+						BuildConfig.GENERATE_DATABASE_FOR_ASSET ?
+								PreferencesDatabaseFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
+								PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
 						ConfigurationProvider.getActualConfiguration(),
 						new ConfigurationBundleConverter(),
 						this);
