@@ -82,6 +82,11 @@ public class QuickSearchListItem {
 		}
 	}
 
+	@Nullable
+	public String getAltName() {
+		return searchResult.alternateName;
+	}
+
 	public String getName() {
 		return getName(app, searchResult);
 	}
@@ -359,14 +364,9 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				boolean isClickableWay = app.getClickableWayHelper().isClickableWayAmenity(amenity);
-				if (isClickableWay || amenity.isRouteTrack()) {
-					boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
-					Drawable shieldIcon = NetworkRouteDrawable
-							.getIconByAmenityShieldTags(amenity, app, nightMode, isClickableWay);
-					if (shieldIcon != null) {
-						return shieldIcon;
-					}
+				Drawable shieldIcon = getRouteShieldDrawable(app, amenity);
+				if (shieldIcon != null) {
+					return shieldIcon;
 				}
 				String id = getAmenityIconName(app, amenity);
 				Drawable icon = null;
@@ -417,6 +417,20 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_previous_route);
 			case UNKNOWN_NAME_FILTER:
 				break;
+		}
+		return null;
+	}
+
+	@Nullable
+	public static Drawable getRouteShieldDrawable(OsmandApplication app, Amenity amenity) {
+		boolean isClickableWay = app.getClickableWayHelper().isClickableWayAmenity(amenity);
+		if (isClickableWay || amenity.isRouteTrack()) {
+			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+			Drawable shieldIcon = NetworkRouteDrawable
+					.getIconByAmenityShieldTags(amenity, app, nightMode, isClickableWay);
+			if (shieldIcon != null) {
+				return shieldIcon;
+			}
 		}
 		return null;
 	}

@@ -89,6 +89,8 @@ public class Amenity extends MapObject {
 	public static final int DEFAULT_ELO = 900;
 	public static final String ADDR_STREET = "addr_street";
 	public static final String ADDR_HOUSENUMBER = "addr_housenumber";
+	public static final String DIFF_ELE_DOWN = "diff_ele_down";
+	public static final String DIFF_ELE_UP = "diff_ele_up";
 	
 	private String subType;
 	private PoiCategory type;

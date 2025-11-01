@@ -27,6 +27,7 @@ import android.view.*;
 import android.view.View.OnAttachStateChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.*;
 import androidx.appcompat.app.ActionBar;
@@ -42,6 +43,7 @@ import com.google.android.material.transition.MaterialContainerTransform;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.util.Algorithms;
 
 /**
  * Created by dummy on 28.01.15.
@@ -363,5 +365,12 @@ public class AndroidUiHelper {
 		transform.setScrimColor(Color.TRANSPARENT);
 		fragment.setSharedElementEnterTransition(transform);
 		view.setTransitionName(transitionName);
+	}
+
+	public static void setTextAndChangeVisibility (@Nullable TextView textView, String text) {
+		if (textView != null) {
+			textView.setText(text);
+			textView.setVisibility(Algorithms.isEmpty(text) ? View.GONE : View.VISIBLE);
+		}
 	}
 }

@@ -31,12 +31,14 @@ import net.osmand.shared.gpx.GpxFile;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class HistoryCard extends MapBaseCard {
 
 	private final List<SearchResult> searchResults;
 	private int limit = 3;
+	private final Calendar calendar = Calendar.getInstance();
 
 	public HistoryCard(MapActivity mapActivity, List<SearchResult> searchResults) {
 		super(mapActivity);
@@ -105,7 +107,7 @@ public class HistoryCard extends MapBaseCard {
 				});
 			} else {
 				view = (LinearLayout) themedInflater.inflate(R.layout.search_list_item, items, false);
-				SearchResultViewHolder.bindSearchResult(view, listItem);
+				SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 
 				ImageView icon = view.findViewById(R.id.imageView);
 				icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
