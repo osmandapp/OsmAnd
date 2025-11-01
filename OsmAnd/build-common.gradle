@@ -416,9 +416,9 @@ tasks.register('generateAndPullPreferencesDatabase', Exec) {
         echo "--- Test Output End ---"
         if echo "\${INSTRUMENTATION_OUTPUT}" | grep -q -E 'INSTRUMENTATION_CODE: 0|FAILURES!!!'; then
             echo
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             echo "!!! BUILD FAILED: Test run crashed or reported a failure. !!!"
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             exit 1
         fi
         echo ">>> Test finished. Pulling database from device to \${absoluteLocalAssetPath}..."
