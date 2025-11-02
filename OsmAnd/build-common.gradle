@@ -384,6 +384,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     group = "Database"
     description = "Generates and pulls the prepackaged preferences database. Use with the full installation command."
 
+    dependsOn(tasks.named('uninstallNightlyFreeLegacyFatDebug'))
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebug'))
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebugAndroidTest'))
 
