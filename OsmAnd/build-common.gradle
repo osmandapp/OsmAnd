@@ -404,7 +404,7 @@ tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
         dbNameOnDevice="${ext.dbNameOnDevice}"
         assetPathAndName="${ext.assetPathAndName}"
         testClassName="${ext.testClassName}"
-        absoluteLocalAssetPath="\${project.projectDir}/assets/\${assetPathAndName}"
+        absoluteLocalAssetPath="${project.projectDir}/assets/\${assetPathAndName}"
 
         mkdir -p "\$(dirname "\${absoluteLocalAssetPath}")"
         echo ">>> Pausing for 2 seconds to ensure apps are fully registered by the package manager..."
