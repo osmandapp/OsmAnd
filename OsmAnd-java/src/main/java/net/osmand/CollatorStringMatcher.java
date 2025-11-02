@@ -56,18 +56,28 @@ public class CollatorStringMatcher implements StringMatcher {
 	
 	@Override
 	public boolean matches(String name) {
-		return cmatches(collator, name, part, mode);
+		return cmatches(collator, name, part, false, mode);
 	}
 
 	public static boolean cmatches(Collator collator, String fullName, String part, StringMatcherMode mode) {
-		if (ArabicNormalizer.isSpecialArabic(fullName)) {
-			String normalized = ArabicNormalizer.normalize(fullName);
-			fullName = normalized == null ? fullName : normalized;
+		return cmatches(collator, fullName, part, true, mode);
+	}
+		
+	private static boolean cmatches(Collator collator, String fullName, String part, boolean alignPart,
+			StringMatcherMode mode) {
+		if (fullName != null && fullName.indexOf('-') != -1) {
+			// Test if it matches without space
+			if (cmatches(collator, fullName.replace("-", ""), part, mode)) {
+				return true;
+			}
 		}
-		if (ArabicNormalizer.isSpecialArabic(part)) {
-			String normalized = ArabicNormalizer.normalize(part);
-			part = normalized == null ? part : normalized;
+		if (alignPart) {
+			part = alignChars(part);
 		}
+		// FUTURE: This is not effective code, it runs on each comparison
+		// It would be more efficient to normalize all strings in file and normalize search string before collator
+		fullName = lowercaseAndAlignChars(fullName);
+		
 		switch (mode) {
 		case CHECK_CONTAINS:
 			return ccontains(collator, fullName, part);
@@ -96,7 +106,7 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * @param base String where to search
 	 * @return true if part is contained in base
 	 */
-	public static boolean ccontains(Collator collator, String base, String part) {
+	private static boolean ccontains(Collator collator, String base, String part) {
 //		int pos = 0;
 //		if (part.length() > 3) {
 //			// improve searching by searching first 3 characters
@@ -125,15 +135,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		return false;
 	}
 
-	private static int cindexOf(Collator collator, int start, String part, String base) {
-		for (int pos = start; pos <= base.length() - part.length(); pos++) {
-			if (collator.equals(base.substring(pos, pos + part.length()), part)) {
-				return pos;
-			}
-		}
-		return -1;
-	}
-
+	
 	/**
 	 * Checks if string starts with another string.
 	 * Special check try to find as well in the middle of name
@@ -143,12 +145,8 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * @param theStart
 	 * @return true if searchIn starts with token
 	 */
-	public static boolean cstartsWith(Collator collator, String fullTextP, String theStart, 
+	private static boolean cstartsWith(Collator collator, String searchIn, String theStart, 
 			boolean checkBeginning, boolean checkSpaces, boolean equals) {
-		// FUTURE: This is not effective code, it runs on each comparison
-		// It would be more efficient to normalize all strings in file and normalize search string before collator  
-		theStart = alignChars(theStart);
-		String searchIn = lowercaseAndAlignChars(fullTextP);
 		int searchInLength = searchIn.length();
 		int startLength = theStart.length();
 		if (startLength == 0) {
@@ -176,7 +174,7 @@ public class CollatorStringMatcher implements StringMatcher {
 				if (isSpace(searchIn.charAt(i - 1)) && !isSpace(searchIn.charAt(i))) {
 					if (collator.equals(searchIn.substring(i, i + startLength), theStart)) {
 						if(equals) {
-							if(i + startLength == searchInLength || 
+							if (i + startLength == searchInLength || 
 									isSpace(searchIn.charAt(i + startLength))) {
 								return true;
 							}
@@ -200,13 +198,15 @@ public class CollatorStringMatcher implements StringMatcher {
 	}
 
 	public static String alignChars(String fullText) {
-		if (fullText.indexOf('-') != -1) {
-			fullText = fullText.replace("-", "");
-		}
-		if (fullText.indexOf('\'') != -1) {
-			fullText = fullText.replace("'", "");
+		if (ArabicNormalizer.isSpecialArabic(fullText)) {
+			String normalized = ArabicNormalizer.normalize(fullText);
+			fullText = normalized == null ? fullText : normalized;
 		}
 		int i;
+		// more efficient way to do than replace("'", "")
+		while ((i = fullText.indexOf('\'')) != -1) {
+			fullText = fullText.substring(0, i) + fullText.substring(i + 1);
+		}
 		while ((i = fullText.indexOf('ß')) != -1) {
 			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}
