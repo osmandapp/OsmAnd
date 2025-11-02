@@ -407,6 +407,9 @@ public class SearchCoreFactory {
 					List<City> l = r.getCities(null, CityBlocks.CITY_TOWN_TYPE, null, phrase.getSettings().getStat());
 					townCitiesInit.add(r.getRegionName());
 					for (City c  : l) {
+						if (phrase.getSettings().isExportObjects()) {
+							resultMatcher.exportCity(phrase, c);
+						}
 						c.setReferenceFile(r);
 						LatLon cl = c.getLocation();
 						
@@ -421,6 +424,9 @@ public class SearchCoreFactory {
 					}
 					l = r.getCities(null, CityBlocks.BOUNDARY_TYPE, null, phrase.getSettings().getStat());
 					for (City c  : l) {
+						if (phrase.getSettings().isExportObjects()) {
+							resultMatcher.exportCity(phrase, c);
+						}
 						c.setReferenceFile(r);
 						LatLon cl = c.getLocation();
 						int y = MapUtils.get31TileNumberY(cl.getLatitude());
@@ -442,9 +448,6 @@ public class SearchCoreFactory {
 				resArray = townCitiesQR.queryInBox(bbox, resArray);
 				int limit = 0;
 				for (City c : resArray) {
-					if (phrase.getSettings().isExportObjects()) {
-						resultMatcher.exportCity(phrase, c);
-					}
 					SearchResult res = new SearchResult(phrase);
 					res.object = c;
 					res.file = (BinaryMapIndexReader) c.getReferenceFile();
