@@ -297,9 +297,16 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 
 		private List<RenderingRuleProperty> properties;
 
+		private static int counter = 1;
+
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final DetailsBottomSheet detailsBottomSheet) {
 			properties = detailsBottomSheet.propertiesRepresentingMenuItems;
+			// setArguments(BaseSettingsFragment.buildArguments(detailsBottomSheet.getAppMode()));
+			// FK-TODO: remove counter
+			final Bundle args = new Bundle();
+			args.putInt("counter", counter++);
+			setArguments(args);
 		}
 
 		@Override

@@ -28,9 +28,11 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -175,7 +177,8 @@ public class ConfigureMapDialogs {
 
 	public static MapLanguageDialog createMapLanguageDialog(final @NonNull MapActivity activity,
 															final boolean nightMode,
-															final @NonNull ContextMenuItem item) {
+															final @NonNull ContextMenuItem item,
+															final ApplicationMode appMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
@@ -262,7 +265,8 @@ public class ConfigureMapDialogs {
 				mapLanguageNameById,
 				dialogState,
 				settings.MAP_TRANSLITERATE_NAMES,
-				settings.MAP_PREFERRED_LOCALE);
+				settings.MAP_PREFERRED_LOCALE,
+				appMode);
 	}
 
 	private static int getSelected(final List<String> haystack, final String needle) {
@@ -292,17 +296,20 @@ public class ConfigureMapDialogs {
 		private final DialogState dialogState;
 		private final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES;
 		private final OsmandPreference<String> MAP_PREFERRED_LOCALE;
+		private final ApplicationMode appMode;
 
 		public MapLanguageDialog(final AlertDialog alertDialog,
 								 final Map<String, String> mapLanguageNameById,
 								 final DialogState dialogState,
 								 final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES,
-								 final OsmandPreference<String> MAP_PREFERRED_LOCALE) {
+								 final OsmandPreference<String> MAP_PREFERRED_LOCALE,
+								 final ApplicationMode appMode) {
 			this.alertDialog = alertDialog;
 			this.mapLanguageNameById = mapLanguageNameById;
 			this.dialogState = dialogState;
 			this.MAP_TRANSLITERATE_NAMES = MAP_TRANSLITERATE_NAMES;
 			this.MAP_PREFERRED_LOCALE = MAP_PREFERRED_LOCALE;
+			this.appMode = appMode;
 		}
 
 		@NonNull
@@ -355,6 +362,7 @@ public class ConfigureMapDialogs {
 			@Override
 			public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final MapLanguageDialog mapLanguageDialog) {
 				this.mapLanguageDialog = mapLanguageDialog;
+				setArguments(BaseSettingsFragment.buildArguments(mapLanguageDialog.appMode));
 			}
 
 			public MapLanguageDialog getPrincipal() {
@@ -380,7 +388,8 @@ public class ConfigureMapDialogs {
 			final @NonNull MapActivity activity,
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull ContextMenuItem item,
-			final boolean nightMode) {
+			final boolean nightMode,
+			final ApplicationMode appMode) {
 		return SelectionDialogFragmentFactory.createRoadStyleSelectionDialogFragment(
 				new AlertDialogData(activity, nightMode)
 						.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
@@ -394,7 +403,8 @@ public class ConfigureMapDialogs {
 							activity.refreshMapComplete();
 							item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, preference.get()));
 							activity.getDashboard().refreshContent(false);
-						});
+						},
+				appMode);
 	}
 
 	private static SelectionDialogFragmentData getSelectionDialogFragmentData(final RenderingRuleProperty property,
@@ -451,9 +461,10 @@ public class ConfigureMapDialogs {
 			final String category,
 			final List<RenderingRuleProperty> properties,
 			final List<CommonPreference<Boolean>> prefs,
-			final boolean nightMode) {
+			final boolean nightMode,
+			final ApplicationMode appMode) {
 		return AndroidUtils.isActivityNotDestroyed(activity) ?
-				Optional.of(createMultiSelectionDialogFragment(item, activity, category, properties, prefs, nightMode)) :
+				Optional.of(createMultiSelectionDialogFragment(item, activity, category, properties, prefs, nightMode, appMode)) :
 				Optional.empty();
 	}
 
@@ -463,7 +474,8 @@ public class ConfigureMapDialogs {
 			final String category,
 			final List<RenderingRuleProperty> properties,
 			final List<CommonPreference<Boolean>> prefs,
-			final boolean nightMode) {
+			final boolean nightMode,
+			final ApplicationMode appMode) {
 		final OsmandApplication app = activity.getMyApplication();
 		final boolean[] checkedItems = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
@@ -504,7 +516,8 @@ public class ConfigureMapDialogs {
 				v -> {
 					final int which = (int) v.getTag();
 					checkedItems[which] = !checkedItems[which];
-				});
+				},
+				appMode);
 	}
 
 	private static SelectionDialogFragmentData getSelectionDialogFragmentData(final MapActivity activity,

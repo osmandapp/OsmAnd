@@ -88,9 +88,9 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		if (MapModeFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.ConfigureMapFragmentProxy _srcProxy) {
-				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getApp()));
+				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getApp(), _srcProxy.getPrincipal().appMode));
 			} else if (srcProxy instanceof final MapModeFragment.MapModeFragmentProxy _srcProxy) {
-				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getApp()));
+				return Optional.of((T) MapModeFragment.createInstanceAndRegisterMapModeController(_srcProxy.getPrincipal().getApp(), _srcProxy.getPrincipal().getAppMode()));
 			}
 		}
 		return Optional.empty();

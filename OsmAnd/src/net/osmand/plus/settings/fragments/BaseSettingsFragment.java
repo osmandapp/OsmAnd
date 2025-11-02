@@ -401,12 +401,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public Bundle buildArguments() {
-		return buildArguments(appMode.getStringKey());
+		return buildArguments(appMode);
 	}
 
-	public Bundle buildArguments(String appModeKey) {
+	public static Bundle buildArguments(final ApplicationMode appModeKey) {
 		Bundle args = new Bundle();
-		args.putString(APP_MODE_KEY, appModeKey);
+		args.putString(APP_MODE_KEY, appModeKey.getStringKey());
 		return args;
 	}
 

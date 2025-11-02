@@ -54,7 +54,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	public static final String TAG = MainSettingsFragment.class.getName();
 
 	private static final String BACKUP_AND_RESTORE = "backup_and_restore";
-	private static final String CONFIGURE_PROFILE = "configure_profile";
+	public static final String CONFIGURE_PROFILE = "configure_profile";
 	public static final String APP_PROFILES = "app_profiles";
 	private static final String PURCHASES_SETTINGS = "purchases_settings";
 	public static final String SELECTED_PROFILE = "selected_profile";

@@ -64,6 +64,7 @@ import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMBugAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -471,7 +472,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				String id = OPEN_STREET_MAP_ITEMS_ID_SCHEME + property.getAttrName();
 				adapter.addItem(
 						ConfigureMapMenu
-								.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode)
+								.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode, ApplicationMode.DEFAULT)
 								.item());
 			}
 		}

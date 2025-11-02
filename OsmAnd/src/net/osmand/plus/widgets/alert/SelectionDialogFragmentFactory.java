@@ -4,6 +4,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 
+import net.osmand.plus.settings.backend.ApplicationMode;
+
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,25 +33,45 @@ public class SelectionDialogFragmentFactory {
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
 			final AlertDialogData data,
 			final SelectionDialogFragmentData selectionDialogFragmentData,
-			final View.OnClickListener itemClickListener) {
+			final View.OnClickListener itemClickListener,
+			final ApplicationMode appMode) {
 		return createSelectionDialogFragment(
 				data,
 				selectionDialogFragmentData,
 				itemClickListener,
 				false,
-				RoadStyleSelectionDialogFragment::new);
+				new _SelectionDialogFragmentFactory<>() {
+
+					@Override
+					public RoadStyleSelectionDialogFragment create(final AlertDialog alertDialog,
+																   final AlertDialogData alertDialogData,
+																   final Map<String, CharSequence> itemByKey,
+																   final SelectionDialogAdapter adapter) {
+						return new RoadStyleSelectionDialogFragment(alertDialog, alertDialogData, itemByKey, adapter, appMode);
+					}
+				});
 	}
 
 	public static MultiSelectionDialogFragment createMultiSelectionDialogFragment(
 			final AlertDialogData data,
 			final SelectionDialogFragmentData selectionDialogFragmentData,
-			final View.OnClickListener itemClickListener) {
+			final View.OnClickListener itemClickListener,
+			final ApplicationMode appMode) {
 		return createSelectionDialogFragment(
 				data,
 				selectionDialogFragmentData,
 				itemClickListener,
 				true,
-				MultiSelectionDialogFragment::new);
+				new _SelectionDialogFragmentFactory<>() {
+
+					@Override
+					public MultiSelectionDialogFragment create(final AlertDialog alertDialog,
+															   final AlertDialogData alertDialogData,
+															   final Map<String, CharSequence> itemByKey,
+															   final SelectionDialogAdapter adapter) {
+						return new MultiSelectionDialogFragment(alertDialog, alertDialogData, itemByKey, adapter, appMode);
+					}
+				});
 	}
 
 	public static InstallMapLayersDialogFragment createInstallMapLayersDialogFragment(

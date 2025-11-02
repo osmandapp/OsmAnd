@@ -53,7 +53,7 @@ class CustomizationItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 		} else {
 			View view = themedInflater.inflate(R.layout.list_item_ui_customization, parent, false);
-			return new CustomizationItemViewHolder(view, callback, nightMode);
+			return new CustomizationItemViewHolder(view, callback, nightMode, appMode);
 		}
 	}
 

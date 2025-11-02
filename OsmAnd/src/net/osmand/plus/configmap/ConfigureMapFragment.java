@@ -66,7 +66,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
 	private MapActivity mapActivity;
-	private ApplicationMode appMode;
+	public ApplicationMode appMode;
 
 	private ContextMenuAdapter adapter;
 	private Map<ContextMenuItem, List<ContextMenuItem>> items;
@@ -171,7 +171,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	}
 
 	private void updateItemsData() {
-		final ConfigureMapMenu menu = new ConfigureMapMenu(app);
+		final ConfigureMapMenu menu = new ConfigureMapMenu(app, appMode);
 		final ConfigureMapMenu.DialogsAndAdapter dialogsAndAdapter =
 				menu.createListAdapter(
 						mapActivity,
@@ -381,6 +381,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final ConfigureMapFragment configureMapFragment) {
 			this.configureMapFragment = configureMapFragment;
 			items = configureMapFragment.adapter.getItems();
+			setArguments(configureMapFragment.getArguments());
 		}
 
 		public ConfigureMapFragment getPrincipal() {

@@ -50,6 +50,7 @@ import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -91,6 +92,7 @@ public class ConfigureMapMenu {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final ApplicationMode appMode;
 
 	public record DialogsAndAdapter(Dialogs dialogs, ContextMenuAdapter adapter) {
 	}
@@ -119,9 +121,10 @@ public class ConfigureMapMenu {
 											ConfigureMapDialogs.MapLanguageDialog dialog) {
 	}
 
-	public ConfigureMapMenu(@NonNull OsmandApplication app) {
+	public ConfigureMapMenu(@NonNull OsmandApplication app, final ApplicationMode appMode) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.appMode = appMode;
 	}
 
 	@NonNull
@@ -554,7 +557,7 @@ public class ConfigureMapMenu {
 				.setListener((_uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						MapModeFragment
-								.createInstanceAndRegisterMapModeController(activity.getMyApplication())
+								.createInstanceAndRegisterMapModeController(activity.getMyApplication(), appMode)
 								.show(activity, false);
 					}
 					return true;
@@ -604,7 +607,7 @@ public class ConfigureMapMenu {
 				})
 				.setItemDeleteAction(settings.TEXT_SCALE));
 
-		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode);
+		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode, appMode);
 		adapter.addItem(mapLanguageItemAndDialog.item);
 
 		props =
@@ -660,7 +663,9 @@ public class ConfigureMapMenu {
 		return str != null && !str.isEmpty() ? str : defaultSupplier.get();
 	}
 
-	private MapLanguageItemAndDialog createMapLanguageItemAndDialog(final MapActivity activity, final boolean nightMode) {
+	private MapLanguageItemAndDialog createMapLanguageItemAndDialog(final MapActivity activity,
+																	final boolean nightMode,
+																	final ApplicationMode appMode) {
 		final ContextMenuItem mapLanguageItem =
 				new ContextMenuItem(MAP_LANGUAGE_ID)
 						.setTitleId(R.string.map_locale, activity)
@@ -672,7 +677,8 @@ public class ConfigureMapMenu {
 				ConfigureMapDialogs.createMapLanguageDialog(
 						activity,
 						nightMode,
-						mapLanguageItem);
+						mapLanguageItem,
+						appMode);
 		mapLanguageItem
 				.setListener(
 						new ItemClickListener() {
@@ -724,7 +730,7 @@ public class ConfigureMapMenu {
 									.show(activity.getSupportFragmentManager());
 						} else {
 							ConfigureMapMenu
-									.createMultiSelectionDialogFragment(strId, activity, nightMode, item, properties, preferences)
+									.createMultiSelectionDialogFragment(strId, activity, nightMode, item, properties, preferences, appMode)
 									.ifPresent(preferencesDialog -> preferencesDialog.show(activity.getSupportFragmentManager()));
 						}
 						return false;
@@ -748,7 +754,7 @@ public class ConfigureMapMenu {
 					new ItemAndHideDialog(
 							item,
 							UI_CATEGORY_HIDE.equals(category) ?
-									createMultiSelectionDialogFragment(strId, activity, nightMode, item, properties, preferences) :
+									createMultiSelectionDialogFragment(strId, activity, nightMode, item, properties, preferences, appMode) :
 									Optional.empty()));
 		}
 		return Optional.empty();
@@ -760,7 +766,8 @@ public class ConfigureMapMenu {
 			final boolean nightMode,
 			final ContextMenuItem item,
 			final List<RenderingRuleProperty> properties,
-			final List<CommonPreference<Boolean>> preferences) {
+			final List<CommonPreference<Boolean>> preferences,
+			final ApplicationMode appMode) {
 		return ConfigureMapDialogs
 				.createMultiSelectionDialogFragmentIfActivityNotDestroyed(
 						item,
@@ -768,7 +775,8 @@ public class ConfigureMapMenu {
 						activity.getString(strId),
 						properties,
 						preferences,
-						nightMode);
+						nightMode,
+						appMode);
 	}
 
 	private boolean isPropertyAccepted(RenderingRuleProperty property) {
@@ -804,7 +812,7 @@ public class ConfigureMapMenu {
 			if (isPropertyAccepted(p)) {
 				adapter.addItem(
 						ConfigureMapMenu
-								.createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode)
+								.createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode, appMode)
 								.item());
 			}
 		}
@@ -831,7 +839,7 @@ public class ConfigureMapMenu {
 																	 final boolean nightMode) {
 		for (final RenderingRuleProperty property : customRules) {
 			if (property.getAttrName().equals(attrName)) {
-				return Optional.of(ConfigureMapMenu.createRenderingProperty(activity, icon, property, id, nightMode));
+				return Optional.of(ConfigureMapMenu.createRenderingProperty(activity, icon, property, id, nightMode, appMode));
 			}
 		}
 		return Optional.empty();
@@ -841,7 +849,8 @@ public class ConfigureMapMenu {
 																 final @DrawableRes int icon,
 																 final RenderingRuleProperty property,
 																 final String id,
-																 final boolean nightMode) {
+																 final boolean nightMode,
+																 final ApplicationMode appMode) {
 		if (property.isBoolean()) {
 			return new ItemAndRoadStyleDialog(
 					createBooleanRenderingProperty(
@@ -861,7 +870,7 @@ public class ConfigureMapMenu {
 						.setDescription(getDescription(property, activity.getMyApplication()))
 						.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
 						.setLayout(R.layout.list_item_single_line_descrition_narrow);
-		final RoadStyleSelectionDialogFragment dialog = ConfigureMapDialogs.createRoadStyleSelectionDialogFragment(activity, property, item, nightMode);
+		final RoadStyleSelectionDialogFragment dialog = ConfigureMapDialogs.createRoadStyleSelectionDialogFragment(activity, property, item, nightMode, appMode);
 		item.setListener(
 				new ItemClickListener() {
 

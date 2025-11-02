@@ -28,6 +28,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,6 +57,15 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 	private LayoutInflater themedInflater;
 	private boolean isShowAnyTransport;
 	private final Map<String, View> viewByAttrName = new HashMap<>();
+	private final Optional<ApplicationMode> appMode;
+
+	public TransportLinesFragment() {
+		appMode = Optional.empty();
+	}
+
+	public TransportLinesFragment(final ApplicationMode appMode) {
+		this.appMode = Optional.of(appMode);
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -201,9 +212,9 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 		AndroidUtils.setBackground(view, background);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, final ApplicationMode appMode) {
 		TransportLinesFragment
-				.createInstance()
+				.createInstance(appMode)
 				.show(fragmentManager);
 	}
 
@@ -224,8 +235,8 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 		}
 	}
 
-	private static TransportLinesFragment createInstance() {
-		return new TransportLinesFragment();
+	private static TransportLinesFragment createInstance(final ApplicationMode appMode) {
+		return new TransportLinesFragment(appMode);
 	}
 
 	@Override
@@ -243,9 +254,20 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 
 		private Set<String> attrNames;
 
+		private static int counter = 1;
+
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final TransportLinesFragment transportLinesFragment) {
 			attrNames = transportLinesFragment.viewByAttrName.keySet();
+			setArguments(
+					transportLinesFragment
+							.appMode
+							.map(BaseSettingsFragment::buildArguments)
+							.orElseGet(() -> {
+								final Bundle bundle = new Bundle();
+								bundle.putInt("counter", counter++);
+								return bundle;
+							}));
 		}
 
 		@Override

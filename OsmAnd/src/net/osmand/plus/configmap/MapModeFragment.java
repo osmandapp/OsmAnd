@@ -21,7 +21,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.alert.PreferenceScreenFactory;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
@@ -39,9 +41,16 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 	private MapModeController controller;
 	private IconToggleButton toggleButton;
 
-	public static MapModeFragment createInstanceAndRegisterMapModeController(final OsmandApplication app) {
+	public static MapModeFragment createInstanceAndRegisterMapModeController(final OsmandApplication app,
+																			 final ApplicationMode appMode) {
 		MapModeController.registerNewInstance(app);
-		return new MapModeFragment();
+		final MapModeFragment mapModeFragment = new MapModeFragment();
+		mapModeFragment.setArguments(BaseSettingsFragment.buildArguments(appMode));
+		return mapModeFragment;
+	}
+
+	public ApplicationMode getAppMode() {
+		return ApplicationMode.valueOfStringKey(requireArguments().getString(BaseSettingsFragment.APP_MODE_KEY), null);
 	}
 
 	@Override
@@ -207,6 +216,7 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final MapModeFragment mapModeFragment) {
 			this.mapModeFragment = mapModeFragment;
+			setArguments(mapModeFragment.getArguments());
 		}
 
 		public MapModeFragment getPrincipal() {

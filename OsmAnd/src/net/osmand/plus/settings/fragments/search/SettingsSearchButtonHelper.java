@@ -8,7 +8,6 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.common.collect.Sets;
 
@@ -126,18 +125,6 @@ public class SettingsSearchButtonHelper {
 								.withFragmentFactory(new FragmentFactory())
 								.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 								.withActivityInitializerByActivity(getActivityInitializerByActivity(fragmentManager))
-								.withPreferenceFragmentIdProvider(
-										// FK-TODO: no, no, no!!!
-										new PreferenceFragmentIdProvider() {
-
-											private int count = 1;
-											private final PreferenceFragmentIdProvider delegate = new DefaultPreferenceFragmentIdProvider();
-
-											@Override
-											public String getId(final PreferenceFragmentCompat preferenceFragment) {
-												return delegate.getId(preferenceFragment) + count++;
-											}
-										})
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())

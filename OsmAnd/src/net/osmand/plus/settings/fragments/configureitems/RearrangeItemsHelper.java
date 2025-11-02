@@ -177,7 +177,7 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 				menuAdapter = mapActivity.getMapActions().createNormalOptionsMenu();
 				break;
 			case CONFIGURE_MAP:
-				ConfigureMapMenu configureMapMenu = new ConfigureMapMenu(app);
+				ConfigureMapMenu configureMapMenu = new ConfigureMapMenu(app, appMode);
 				menuAdapter = configureMapMenu.createListAdapter(mapActivity);
 				break;
 			case CONTEXT_MENU_ACTIONS:

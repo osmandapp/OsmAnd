@@ -100,6 +100,7 @@ public class SelectionDialogFragment extends DialogFragment implements SettingHi
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final Principal selectionDialogFragment) {
 			this.selectionDialogFragment = selectionDialogFragment;
+			setArguments(selectionDialogFragment.getArguments());
 		}
 
 		@Override

@@ -33,6 +33,7 @@ import java.util.List;
 public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
+	private final ApplicationMode appMode;
 	private final UiUtilities uiUtilities;
 	private final CallbackWithObject<ScreenType> callback;
 	private final boolean nightMode;
@@ -41,9 +42,10 @@ public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 	private final TextView title;
 	private final TextView subTitle;
 
-	public CustomizationItemViewHolder(@NonNull View itemView, @Nullable CallbackWithObject<ScreenType> callback, boolean nightMode) {
+	public CustomizationItemViewHolder(@NonNull View itemView, @Nullable CallbackWithObject<ScreenType> callback, boolean nightMode, final ApplicationMode appMode) {
 		super(itemView);
 		app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		this.appMode = appMode;
 		uiUtilities = app.getUIUtilities();
 		this.callback = callback;
 		this.nightMode = nightMode;
@@ -94,7 +96,7 @@ public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 			case DRAWER:
 				return ((MapActivity) activity).getMapActions().createNormalOptionsMenu();
 			case CONFIGURE_MAP:
-				ConfigureMapMenu configureMenu = new ConfigureMapMenu(app);
+				ConfigureMapMenu configureMenu = new ConfigureMapMenu(app, appMode);
 				return configureMenu.createListAdapter((MapActivity) activity);
 			case CONTEXT_MENU_ACTIONS:
 				MapContextMenu contextMenu = ((MapActivity) activity).getContextMenu();

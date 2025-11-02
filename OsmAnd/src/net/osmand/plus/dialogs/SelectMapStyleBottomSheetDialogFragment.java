@@ -300,9 +300,15 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		private Map<String, String> mapStyleByTranslation;
 
+		private static int counter = 1;
+
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final SelectMapStyleBottomSheetDialogFragment selectMapStyleBottomSheetDialogFragment) {
 			mapStyleByTranslation = selectMapStyleBottomSheetDialogFragment.stylesMap;
+			// FK-TODO: remove counter
+			final Bundle args = new Bundle();
+			args.putInt("counter", counter++);
+			setArguments(args);
 		}
 
 		@Override

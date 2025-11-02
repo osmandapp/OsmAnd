@@ -586,7 +586,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				} else if (isCurrentType(TRAVEL_ROUTES)) {
 					TravelRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRANSPORT_LINES)) {
-					TransportLinesFragment.showInstance(fragmentManager);
+					TransportLinesFragment.showInstance(fragmentManager, currentAppMode);
 				} else if (isCurrentType(NAUTICAL_DEPTH)) {
 					NauticalDepthContourFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TERRAIN)) {

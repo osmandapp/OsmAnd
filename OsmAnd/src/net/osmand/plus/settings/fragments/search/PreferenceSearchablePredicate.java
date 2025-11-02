@@ -23,6 +23,20 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 
 	@Override
 	public boolean isPreferenceSearchable(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
-		return !NON_SEARCHABLE_LAYOUT_RESIDS.contains(preference.getLayoutResource()) && !MainSettingsFragment.SELECTED_PROFILE.equals(preference.getKey());
+		return !isPreferenceNonSearchable(preference, hostOfPreference);
+	}
+
+	private static boolean isPreferenceNonSearchable(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
+		return NON_SEARCHABLE_LAYOUT_RESIDS.contains(preference.getLayoutResource()) ||
+				isSelectedProfilePreference(preference, hostOfPreference) ||
+				isConfigureProfilePreference(preference, hostOfPreference);
+	}
+
+	private static boolean isSelectedProfilePreference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
+		return MainSettingsFragment.SELECTED_PROFILE.equals(preference.getKey()) && hostOfPreference instanceof MainSettingsFragment;
+	}
+
+	private static boolean isConfigureProfilePreference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
+		return MainSettingsFragment.CONFIGURE_PROFILE.equals(preference.getKey()) && hostOfPreference instanceof MainSettingsFragment;
 	}
 }
