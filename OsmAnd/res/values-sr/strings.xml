@@ -5833,8 +5833,8 @@
     <string name="copy_as_new_folder">Умножи као нови омот</string>
     <string name="add_to_a_folder">Додај у омот</string>
     <string name="add_to_favorites">Додај у омиљене</string>
-    <string name="max_weight_at_full_load_description">Наведите највећу тежину свог возила при пуном оптерећењу ради избегавања путева и мостова са ограничењима тежине.</string>
-    <string name="max_axle_load_description">Наведите највеће осовинско оптерећење свог возила ради избегавања путева и мостова са ограничењима тежине.</string>
+    <string name="max_weight_at_full_load_description">Наведите максималну тежину вашег возила при пуном оптерећењу како бисте избегли путеве и мостове са ограничењима тежине.</string>
+    <string name="max_axle_load_description">Наведите максимално осовинско оптерећење вашег возила како бисте избегли путеве и мостове са ограничењима тежине.</string>
     <string name="lang_en_barebones">Енглески (основни)</string>
     <string name="shared_sting_osm_link">Веза ОСМ-а</string>
     <string name="show_local_names">Прикажи локална имена</string>

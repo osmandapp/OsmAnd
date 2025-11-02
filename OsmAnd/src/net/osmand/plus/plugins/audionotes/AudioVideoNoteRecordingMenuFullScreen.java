@@ -14,6 +14,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
@@ -33,7 +34,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 		progressBar = view.findViewById(R.id.progressBar);
 	}
 
-	protected void initView(MapActivity mapActivity) {
+	protected void initView(@NonNull MapActivity mapActivity) {
 		mapActivity.getContextMenu().hide();
 		AudioVideoNoteRecordingMenuFullScreenFragment.showInstance(this);
 		WeakReference<AudioVideoNoteRecordingMenuFullScreenFragment> fragmentRef = findMenuFragment();

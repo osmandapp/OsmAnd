@@ -7,6 +7,7 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -44,6 +45,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	private final AudioVideoNotesPlugin plugin;
 	private ContextMenuLayer contextMenuLayer;
 	private boolean changeMarkerPositionMode;
+	private WindowInsetsCompat windowInsets;
 
 	//OpenGL
 	private AudioNotesTileProvider audioNotesTileProvider;
@@ -201,6 +203,18 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
+	}
+
+	@Override
+	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
+		this.windowInsets = windowInsets;
+		AudioVideoNoteRecordingMenu menu = plugin.getRecordingMenu();
+		if (menu != null) menu.update();
+	}
+
+	@Nullable
+	public WindowInsetsCompat getWindowInsets() {
+		return windowInsets;
 	}
 
 	@Override

@@ -4062,7 +4062,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Íconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de los iconos a bajos niveles de zum para aquellos puntos de interés que no suelen mostrarse.</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una representación esquemática de los iconos a bajos niveles de zum para aquellos puntos de interés que no suelen mostrarse</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
@@ -5759,4 +5759,5 @@
     <string name="quick_action_wind_animation_layer">Un botón que alterna en el mapa la capa animada del viento.</string>
     <string name="wind_animation_layer">Capa animada del viento</string>
     <string name="weather_layers">Capas de meteorología</string>
+    <string name="lang_crh">Tártaro de Crimea (latín)</string>
 </resources>

@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Collator;
 import net.osmand.IProgress;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
@@ -71,6 +73,7 @@ public class GpxSelectionHelper {
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
 	private final Map<GpxFile, Long> selectedGpxFilesBackUp = new ConcurrentHashMap<>();
+	private final Collator collator = OsmAndCollator.primaryCollator();
 	private List<WeakReference<SelectGpxTaskListener>> listeners = new ArrayList<>();
 	private SelectGpxTask selectGpxTask;
 
@@ -336,22 +339,24 @@ public class GpxSelectionHelper {
 				array.put(obj);
 			}
 		}
-		for (Map.Entry<GpxFile, Long> entry : selectedGpxFilesBackUp.entrySet()) {
-			if (entry != null) {
-				try {
-					JSONObject obj = new JSONObject();
-					if (Algorithms.isEmpty(entry.getKey().getPath())) {
-						obj.put(CURRENT_TRACK, true);
-					} else {
-						obj.put(FILE, entry.getKey().getPath());
-					}
-					obj.put(SELECTED_BY_USER, true);
-					obj.put(BACKUP, true);
-					obj.put(BACKUP_MODIFIED_TIME, entry.getValue());
-					array.put(obj);
-				} catch (JSONException e) {
-					log.error(e);
+		List<GpxFile> gpxFiles = new ArrayList<>(selectedGpxFilesBackUp.keySet());
+		gpxFiles.sort((o1, o2) -> collator.compare(o1.getPath(), o2.getPath()));
+
+		for (GpxFile gpxFile : gpxFiles) {
+			try {
+				String path = gpxFile.getPath();
+				JSONObject obj = new JSONObject();
+				if (Algorithms.isEmpty(path)) {
+					obj.put(CURRENT_TRACK, true);
+				} else {
+					obj.put(FILE, path);
 				}
+				obj.put(SELECTED_BY_USER, true);
+				obj.put(BACKUP, true);
+				obj.putOpt(BACKUP_MODIFIED_TIME, selectedGpxFilesBackUp.get(gpxFile));
+				array.put(obj);
+			} catch (JSONException e) {
+				log.error(e);
 			}
 		}
 		app.getSettings().SELECTED_GPX.set(array.toString());
