@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -204,6 +205,7 @@ public class SearchResult {
 
 	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
+		name = CollatorStringMatcher.alignChars(name);
 		List<String> localResultNames;
 		if (name.indexOf('(') != -1) {
 			name = SearchPhrase.stripBraces(name);
@@ -263,17 +265,20 @@ public class SearchResult {
 		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
 		if (fw != null && fw.length() > 0) {
-			searchPhraseNames.add(fw);
+			searchPhraseNames.add(CollatorStringMatcher.alignChars(fw));
 		}
 		if (ow != null) {
-			searchPhraseNames.addAll(ow);
+			for(String o : ow) {
+				searchPhraseNames.add(CollatorStringMatcher.alignChars(o));
+			}
+			
 		}
 		// when parent result was recreated with same phrase (it doesn't have preselected word)
 		// SearchCoreFactory.subSearchApiOrPublish
 		if (parentSearchResult != null && requiredSearchPhrase == parentSearchResult.requiredSearchPhrase
 				&& parentSearchResult.getOtherWordsMatch() != null) {
 			for (String s : parentSearchResult.getOtherWordsMatch()) {
-				int i = searchPhraseNames.indexOf(s);
+				int i = searchPhraseNames.indexOf(CollatorStringMatcher.alignChars(s));
 				if (i != -1) {
 					searchPhraseNames.remove(i);
 				}

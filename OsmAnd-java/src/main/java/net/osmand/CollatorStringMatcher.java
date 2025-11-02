@@ -36,7 +36,7 @@ public class CollatorStringMatcher implements StringMatcher {
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
 		this.collator = OsmAndCollator.primaryCollator();
-		part = simplifyStringAndAlignChars(part);
+		part = lowercaseAndAlignChars(part);
 		if (part.length() > 0 && part.charAt(part.length() - 1) == '.') {
 			part = part.substring(0, part.length() - 1);
 			if (mode == StringMatcherMode.CHECK_EQUALS_FROM_SPACE) {
@@ -148,7 +148,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		// FUTURE: This is not effective code, it runs on each comparison
 		// It would be more efficient to normalize all strings in file and normalize search string before collator  
 		theStart = alignChars(theStart);
-		String searchIn = simplifyStringAndAlignChars(fullTextP);
+		String searchIn = lowercaseAndAlignChars(fullTextP);
 		int searchInLength = searchIn.length();
 		int startLength = theStart.length();
 		if (startLength == 0) {
@@ -193,16 +193,22 @@ public class CollatorStringMatcher implements StringMatcher {
 		return false;
 	}
 	
-	private static String simplifyStringAndAlignChars(String fullText) {
+	private static String lowercaseAndAlignChars(String fullText) {
 		fullText = fullText.toLowerCase(Locale.getDefault());
 		fullText = alignChars(fullText);
 		return fullText;
 	}
 
-	private static String alignChars(String fullText) {
+	public static String alignChars(String fullText) {
+		if (fullText.indexOf('-') != -1) {
+			fullText = fullText.replace("-", "");
+		}
+		if (fullText.indexOf('\'') != -1) {
+			fullText = fullText.replace("'", "");
+		}
 		int i;
 		while ((i = fullText.indexOf('ß')) != -1) {
-			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i+1);
+			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
 		}
 		return fullText;
 	}
