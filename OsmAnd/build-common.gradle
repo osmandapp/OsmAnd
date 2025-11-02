@@ -379,14 +379,15 @@ tasks.register('appStart', Exec) {
 }
 
 // execute this task using: ./gradlew installNightlyFreeLegacyFatDebug installNightlyFreeLegacyFatDebugAndroidTest generateAndPullPreferencesDatabase -PgeneratePreferencesDb=true
-tasks.register('generateAndPullPreferencesDatabase', Exec) {
+final String generateAndPullPreferencesDatabaseTaskName = 'generateAndPullPreferencesDatabase'
+tasks.register(generateAndPullPreferencesDatabaseTaskName, Exec) {
     group = "Database"
     description = "Generates and pulls the prepackaged preferences database. Use with the full installation command."
 
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebug'))
     mustRunAfter(tasks.named('installNightlyFreeLegacyFatDebugAndroidTest'))
 
-    onlyIf { gradle.startParameter.taskNames.contains('generateAndPullPreferencesDatabase') }
+    onlyIf { gradle.startParameter.taskNames.contains(generateAndPullPreferencesDatabaseTaskName) }
 
     ext {
         // dbNameOnDevice MUST match PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile().databaseFileName()
@@ -403,8 +404,7 @@ tasks.register('generateAndPullPreferencesDatabase', Exec) {
         dbNameOnDevice="${ext.dbNameOnDevice}"
         assetPathAndName="${ext.assetPathAndName}"
         testClassName="${ext.testClassName}"
-        appModulePath="${project.projectDir}"
-        absoluteLocalAssetPath="\${appModulePath}/assets/\${assetPathAndName}"
+        absoluteLocalAssetPath="\${project.projectDir}/assets/\${assetPathAndName}"
 
         mkdir -p "\$(dirname "\${absoluteLocalAssetPath}")"
         echo ">>> Pausing for 2 seconds to ensure apps are fully registered by the package manager..."
