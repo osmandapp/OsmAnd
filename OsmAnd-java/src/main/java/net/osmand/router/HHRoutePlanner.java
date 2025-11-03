@@ -70,7 +70,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	
 	// select specifically high cost params
 	// for example prefer_unpaved has higher cost > avoid_toll param, so it's better to select profile with prefer_unpaved shortcuts  
-	private static final Set<String> HIGH_COST_PARAMS = Set.of("prefer_unpaved", "driving_style_prefer_unpaved");   
+	private static final Set<String> HIGH_COST_PARAMS = Set.of("prefer_unpaved", "avoid_motorway", "driving_style_prefer_unpaved");   
 	
 	
 	
