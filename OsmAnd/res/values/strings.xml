@@ -660,6 +660,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
     <string name="show_spherical_map">Show spherical map</string>
     <string name="show_spherical_map_description">Display spheroidal model of the Earth</string>
+    <string name="enable_3d_objects">Enable 3D buildings</string>
+    <string name="enable_3d_objects_description">Display 3D building objects on the map</string>
     <string name="show_debug_tile">Show tile information</string>
     <string name="show_rasterization_debug_tile">Show tile rasterization information</string>
     <string name="show_debug_tile_description">Display information about map symbols of each tile</string>
