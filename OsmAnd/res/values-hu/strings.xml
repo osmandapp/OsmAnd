@@ -784,7 +784,7 @@
     <string name="map_widget_intermediate_distance">Köztes célpont</string>
     <string name="ending_point_too_far">Az úti cél közelében nem található út.</string>
     <string name="add_tag">Címke hozzáadása</string>
-    <string name="btn_advanced_mode">Fejlett mód…</string>
+    <string name="btn_advanced_mode">Speciális mód…</string>
     <string name="poi_filter_parking">Parkoló</string>
     <string name="poi_filter_emergency">Vészhelyzet</string>
     <string name="poi_filter_public_transport">Tömegközlekedés</string>
