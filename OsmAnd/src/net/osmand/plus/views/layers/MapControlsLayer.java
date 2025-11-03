@@ -256,7 +256,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onAnimationStart(Animator animation) {
 				super.onAnimationStart(animation);
-				if (show) {
+				if (show && mapHudContainer != null) {
 					mapHudContainer.setVisibility(VISIBLE);
 				}
 			}
@@ -265,13 +265,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onAnimationEnd(Animator animation) {
 				super.onAnimationEnd(animation);
 				if (!show) {
-					mapHudContainer.setVisibility(INVISIBLE);
 					mapHudButtonsTop.setTranslationY(transTopInitial);
 					mapHudButtonsBottom.setTranslationY(transBottomInitial);
-					mapHudContainer.setAlpha(alphaInitial);
-				}
-				mapHudLayout.updateButtons();
 
+					if (mapHudContainer != null) {
+						mapHudContainer.setVisibility(INVISIBLE);
+						mapHudContainer.setAlpha(alphaInitial);
+					}
+				}
+				if (mapHudLayout != null) {
+					mapHudLayout.updateButtons();
+				}
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					activity.updateStatusBarColor();
