@@ -297,7 +297,7 @@
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">A(z) \'\'{0}\'\' térképformátum elavult, nem támogatott</string>
     <string name="poi_filter_car_aid">Autós segítség</string>
-    <string name="poi_filter_closest_poi">Legközelebbi POI-k</string>
+    <string name="poi_filter_closest_poi">Legközelebbi érdekes hely</string>
     <string name="poi_filter_custom_filter">Egyéni szűrő</string>
     <string name="poi_filter_food_shop">Élelmiszer üzlet</string>
     <string name="poi_filter_for_tourists">Turistáknak</string>
@@ -954,7 +954,7 @@
     <string name="route_via">Ezen keresztül:</string>
     <string name="route_from">Innen:</string>
     <string name="speak_speed_limit">Sebességkorlátozás</string>
-    <string name="speak_cameras">Traffipaxok</string>
+    <string name="speak_cameras">Sebességmérő kamerák</string>
     <string name="speak_traffic_warnings">Forgalmi figyelmeztetések</string>
     <string name="destination_point">Úti cél %1$s</string>
     <string name="context_menu_item_destination_point">Beállítás úti célként</string>
@@ -1128,7 +1128,7 @@
     <string name="show_zoom_buttons_navigation">Nagyításgombok megjelenítése</string>
     <string name="save_as_favorites_points">Mentés Kedvencek csoportként</string>
     <string name="select_destination_and_intermediate_points">Úti célok megadása</string>
-    <string name="layer_amenity_label">Pontfeliratok (érdekes pontok, kedvencek)</string>
+    <string name="layer_amenity_label">Pontfeliratok (érdekes helyek, kedvencek)</string>
     <string name="map_widget_plain_time">Jelenlegi idő</string>
     <string name="shared_string_waypoint">Útpont</string>
     <string name="selected_gpx_info_show">\n\nHosszú érintés a térképen való megtekintéshez</string>
@@ -1246,7 +1246,7 @@
     <string name="traffic_warning_payment">Fizetőkapu</string>
     <string name="traffic_warning_stop">Stop tábla</string>
     <string name="traffic_warning_calming">Forgalomcsillapítás</string>
-    <string name="traffic_warning_speed_camera">Traffipax</string>
+    <string name="traffic_warning_speed_camera">Sebességmérő kamera</string>
     <string name="traffic_warning">Forgalmi figyelmeztetés</string>
     <string name="fav_point_dublicate">Duplikált Kedvenc-név megadva</string>
     <string name="fav_point_dublicate_message">A duplikálódás elkerülése érdekében a Kedvenc hely át lett nevezve a következőre: %1$s.</string>
@@ -1406,7 +1406,7 @@
     <string name="shared_string_release">Megjelent</string>
     <string name="days_behind">napos</string>
     <string name="welmode_download_maps">Térképek letöltése</string>
-    <string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország stb.) tilos traffipax-riasztást használni! Az OsmAnd nem vállal felelősséget a szabályok megsértéséért. Koppintson az Igen gombra, ha jogosult a funkció használatára.</string>
+    <string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország stb.) tilos értesítéseket használni a sebességmérő kamerákhoz! Az OsmAnd nem vállal felelősséget a szabályok megsértéséért. Koppintson az Igen gombra, ha jogosult a funkció használatára.</string>
     <string name="welcome_select_region">A jelzőtáblák és szabályok helyes értelmezéséhez jelölje ki a vezetési régiót:</string>
     <string name="welcome_text">Az OsmAnd lehetővé teszi a térképek és a navigáció offline használatát az egész világon.</string>
     <string name="current_route">Jelenlegi útvonal</string>
@@ -1810,7 +1810,7 @@
     <string name="road_blocked">Lezárt út</string>
     <string name="shared_string_select">Kijelölés</string>
     <string name="switch_start_finish">Kiindulási pont és az úti cél felcserélése</string>
-    <string name="rendering_attr_hideIcons_name">POI ikonok</string>
+    <string name="rendering_attr_hideIcons_name">Érdekes helyek ikonjai</string>
     <string name="item_removed">Elem eltávolítva</string>
     <string name="n_items_removed">elem eltávolítva</string>
     <string name="shared_string_type">Típus</string>
@@ -2392,7 +2392,7 @@
     <string name="all_data">Minden adat</string>
     <string name="osm_notes">OSM-jegyzetek</string>
     <string name="will_open_tomorrow_at">Holnap ekkor nyit:</string>
-    <string name="rendering_attr_hidePOILabels_name">POI-feliratok</string>
+    <string name="rendering_attr_hidePOILabels_name">Érdekes helyek feliratai</string>
     <string name="shared_string_without_name">Névtelen</string>
     <string name="empty_state_markers_history_desc">Ezen a képernyőn az elhagyott térképjelölők fognak megjelenni.</string>
     <string name="mark_passed">Megjelölés elhagyottként</string>
@@ -3271,7 +3271,7 @@
     <string name="quick_action_switch_profile_descr">A műveletgomb vált a kiválasztott profilok között.</string>
     <string name="shared_string_add_profile">Profil hozzáadása</string>
     <string name="change_application_profile">Alkalmazásprofil módosítása</string>
-    <string name="search_poi_types_descr">Kombináljon POI típusokat különböző kategóriákból. Koppintson egy kapcsolóra az összes altípus kiválasztásához, vagy koppintson egy szövegre az egyes altípusok kijelöléséhez.</string>
+    <string name="search_poi_types_descr">Kombináljon érdekes hely-típusokat különböző kategóriákból. Koppintson egy kapcsolóra az összes altípus kiválasztásához, vagy koppintson egy szövegre az egyes altípusok kijelöléséhez.</string>
     <string name="search_poi_types">POI típusok keresése</string>
     <string name="index_item_world_basemap_detailed">Áttekintő világtérkép (részletes)</string>
     <string name="release_3_7">• Új offline lejtőtérkép \n \n • Kedvencek és GPX-útpontok teljes testre szabhatósága – egyéni színek, ikonok, formák \n \n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testre szabható \n \n • Wikipédia külön rétegként szerepel a Térkép beállítása menüben, a kívánt nyelvek kiválaszthatók \n \n • Saját POI-szűrők létrehozhatók / térképek teljes rugalmassággal \n \n • Egyéni profilok beállításainak visszaállíthatósága \n \n • Teljes körű GPX-útvonalak létrehozása a navigációból, mely támogatja a forgalmi sávokat és a teljes navigációs utasításokat \n \n • Felhasználói felület méreteinek javítása táblagépeken \n \n • Jobbról balra írt nyelvekkel kapcsolatos hibák javítása\n\n</string>
@@ -3333,26 +3333,20 @@
     <string name="vessel_height_warning">Hajó magasságának megadása az alacsony hidak elkerüléséhez. Ha a híd mozgatható, a nyitott állapotú magassága számít.</string>
     <string name="vessel_width_limit_description">Adja meg a hajószélességet a keskeny hidak elkerüléséhez</string>
     <string name="quick_action_showhide_mapillary_descr">A Mapillary réteget a térképen megjelenítő vagy elrejtő kapcsoló.</string>
-    <string name="uninstall_speed_cameras">Traffipaxok eltávolítása</string>
+    <string name="uninstall_speed_cameras">Sebességmérő kamerák eltávolítása</string>
     <string name="shared_string_legal">Jogi</string>
-    <string name="speed_camera_pois">Traffipax POI-k</string>
-    <string name="speed_cameras_legal_descr">Bizonyos országokban és régiókban jogszabály tiltja a traffipaxra figyelmeztető alkalmazások használatát.
-\n
-\nOrszágának törvényei alapján kell döntenie.
-\n
-\n%1$s: figyelmeztetéseket és riasztásokat kap a traffipaxokról.
-\n
-\n%2$s: törlődik az összes traffipaxszal kapcsolatos adat (riasztások, értesítések, POI-k), amit csak az OsmAnd teljes újratelepítésével állíthat helyre.</string>
+    <string name="speed_camera_pois">Sebességmérő kamerák</string>
+    <string name="speed_cameras_legal_descr">Bizonyos országokban és régiókban jogszabály tiltja a sebességmérő kamerákra figyelmeztető alkalmazások használatát. \n \nOrszágának törvényei alapján kell döntenie. \n \n%1$s: figyelmeztetéseket és értesítéseket kap a sebességmérő kamerákról. \n \n%2$s: törlődik az összes sebességmérő kamerával kapcsolatos adat (riasztások, értesítések, érdekes helyek), amit csak az OsmAnd teljes újratelepítésével állíthat helyre.</string>
     <string name="keep_active">Maradjanak</string>
     <string name="shared_string_uninstall">Eltávolítás</string>
-    <string name="speed_cameras_alert">Bizonyos országokban a törvény tiltja a traffipaxriasztást.</string>
+    <string name="speed_cameras_alert">Bizonyos országokban a törvény tiltja az értesítések használatát a sebességmérő kamerákhoz.</string>
     <string name="shared_string_bearing">Irányszög</string>
     <string name="item_deleted">%1$s törölve</string>
-    <string name="speed_cameras_restart_descr">A traffipaxadatok végleges törléséhez indítsa újra az alkalmazást.</string>
+    <string name="speed_cameras_restart_descr">A sebességmérő kamerák adatainak végleges törléséhez indítsa újra az alkalmazást.</string>
     <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
     <string name="routing_attr_length_description">Adja meg az útvonalakon a járművekre vonatkozó hosszkorlátozást.</string>
     <string name="routing_attr_length_name">Hossz</string>
-    <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipaxadatokat.</string>
+    <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz adatokat a sebességmérő kamerákról.</string>
     <string name="replace_all_desc">A jelenlegi elemek lecserélésre kerülnek a fájlban lévőkre</string>
     <string name="keep_both_desc">Az importált elemek előtaggal lesznek hozzáadva</string>
     <string name="import_duplicates_description">Az OsmAnd már tartalmaz az importálttal megegyező nevű elemeket.
@@ -3711,7 +3705,7 @@
     <string name="purchases">Vásárlások</string>
     <string name="select_category_descr">Kategória kiválasztása vagy új hozzáadása</string>
     <string name="track_recording_will_be_continued">A felvétel folytatódni fog.</string>
-    <string name="copy_poi_name">Érdekes pont nevének másolása</string>
+    <string name="copy_poi_name">Érdekes hely nevének másolása</string>
     <string name="quick_action_show_hide_title">Megjelenítés / elrejtés</string>
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
