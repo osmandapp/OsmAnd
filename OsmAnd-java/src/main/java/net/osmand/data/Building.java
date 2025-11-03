@@ -47,7 +47,7 @@ public class Building extends MapObject {
 	}
 	
 	public Map<String, LatLon> getEntrances() {
-		if(entrances == null) {
+		if (entrances == null) {
 			return Collections.emptyMap();
 		}
 		return entrances;
