@@ -977,7 +977,7 @@
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Európa, Ázsia, Latin-Amerika és hasonlók</string>
     <string name="speak_title">Bemondás…</string>
-    <string name="speak_descr">Utcanevek, forgalmi figyelmeztetések (közúti ellenőrzés, fekvőrendőr), traffipaxriasztás és sebességkorlátozás bemondásának beállítása.</string>
+    <string name="speak_descr">Beállítások a következőkhöz: Utcanevek és forgalmi figyelmeztetések például: elsőbbségadás kötelező (stop) tábla, vagy fekvőrendőr bejelentése, figyelmeztetések a sebességmérő kamerákhoz és a sebességkorlátozásokra.</string>
     <string name="speak_street_names">Utcanevek (TTS)</string>
     <string name="osb_author_dialog_password">OSM jelszó (opcionális)</string>
     <string name="about_version">Verzió:</string>
