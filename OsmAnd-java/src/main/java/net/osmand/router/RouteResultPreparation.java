@@ -1377,7 +1377,7 @@ public class RouteResultPreparation {
 		}
 
 		boolean isSet = false;
-		int[] act = findActiveIndex(prevSegm, currentSegm, lanesArray, null, turnLanes);
+		int[] act = findActiveIndex(prevSegm, currentSegm, lanesArray, null, turnLanes, false, false);
 		int startIndex = act[0];
 		int endIndex = act[1];
 		if (startIndex != -1 && endIndex != -1) {
@@ -1453,7 +1453,7 @@ public class RouteResultPreparation {
 			}
 		}
 
-		int[] act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, turnLanes);
+		int[] act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, turnLanes, possiblyLeftTurn, possiblyRightTurn);
 		int activeBeginIndex = act[0];
 		int activeEndIndex = act[1];
 		int activeTurn = act[2];
@@ -2283,7 +2283,8 @@ public class RouteResultPreparation {
 		return r;
 	}
 
-	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes, RoadSplitStructure rs, String turnLanes) {
+	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes,
+	                              RoadSplitStructure rs, String turnLanes, boolean possiblyLeft, boolean possiblyRight) {
 		int[] pair = {-1, -1, 0};
 		if (turnLanes == null) {
 			return pair;
@@ -2299,7 +2300,23 @@ public class RouteResultPreparation {
 		}
 		int[] directions = getUniqTurnTypes(turnLanes);
 		if (rs.roadsOnLeft + rs.roadsOnRight < directions.length) {
-			int startDirection = directions[rs.roadsOnLeft];
+			int activeTurn = directions[rs.roadsOnLeft];
+			int startDirection = activeTurn; // classic beginning
+			boolean possibleTurnsDetected = possiblyLeft || possiblyRight;
+			boolean hasLeftRoadsWithLanes = rs.roadsOnLeft >0 && rs.leftLanes > 0;
+			boolean hasRightRoadsWithLanes = rs.roadsOnRight > 0 && rs.rightLanes > 0;
+			if (possibleTurnsDetected && (hasLeftRoadsWithLanes || hasRightRoadsWithLanes)) {
+				for (int i = rs.roadsOnLeft; i < directions.length - rs.roadsOnRight; i++) {
+					if (possiblyLeft && TurnType.isLeftTurn(directions[i])) {
+						startDirection = directions[i];
+						break;
+					}
+					if (possiblyRight && TurnType.isRightTurn(directions[i])) {
+						startDirection = directions[i];
+						break;
+					}
+				}
+			}
 			int endDirection = directions[directions.length - rs.roadsOnRight - 1];
 			for (int i = 0; i < rawLanes.length; i++) {
 				int p = TurnType.getPrimaryTurn(rawLanes[i]);
@@ -2307,7 +2324,7 @@ public class RouteResultPreparation {
 				int t = TurnType.getTertiaryTurn(rawLanes[i]);
 				if (p == startDirection || s == startDirection || t == startDirection) {
 					pair[0] = i;
-					pair[2] = startDirection;
+					pair[2] = activeTurn;
 					break;
 				}
 			}
