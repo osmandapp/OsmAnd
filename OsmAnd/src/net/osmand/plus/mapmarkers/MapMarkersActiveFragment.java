@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import net.osmand.plus.base.BaseNestedFragment;
-import net.osmand.plus.utils.InsetTarget;
-import net.osmand.plus.utils.InsetTarget.Type;
-import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.shared.gpx.primitives.WptPt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.Location;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -22,18 +24,16 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseNestedFragment;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter.MapMarkersActiveAdapterListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -119,7 +119,7 @@ public class MapMarkersActiveFragment extends BaseNestedFragment implements OsmA
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					hideSnackbar();
 					app.getMapMarkersHelper().saveGroups(false);
-					adapter.notifyDataSetChanged();
+					app.runInUIThread(() -> adapter.notifyDataSetChanged());
 				}
 			}
 
