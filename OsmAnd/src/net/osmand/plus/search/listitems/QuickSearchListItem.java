@@ -112,6 +112,18 @@ public class QuickSearchListItem {
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
+			case POI:
+				String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
+				Amenity amenity = (Amenity) searchResult.object;
+				String name = amenity.getName(lang);
+				if (Algorithms.isEmpty(name)) {
+					if (amenity.isRouteTrack()) {
+						return amenity.getRouteActivityType();
+					}
+					return amenity.getSubTypeStr();
+				} else {
+					return name;
+				}
 		}
 		return searchResult.localeName;
 	}
