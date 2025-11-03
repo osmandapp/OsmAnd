@@ -239,6 +239,9 @@ public class City extends MapObject {
 		if (postcode != null) {
 			json.put("postcode", postcode);
 		}
+		if (bbox31 != null) {
+			json.put("bbox31", Arrays.toString(bbox31));
+		}
 		JSONArray listOfStreetsArr = new JSONArray();
 		for (Street s : listOfStreets) {
 			listOfStreetsArr.put(s.toJSON(includingBuildings));

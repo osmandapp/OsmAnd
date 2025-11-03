@@ -325,7 +325,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			requestPurchaseScreen = null;
 			app.getOsmandMap().getMapView().setupRenderingView();
 
-			requestLocationPermission();
+			app.runInUIThread(this::requestLocationPermission);
 		}
 	}
 
@@ -380,10 +380,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				}
 				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), (obj) -> {
 					if (obj != null) {
-						getApp().getOsmandMap().getMapActions().startNavigation();
-						if (hasStarted()) {
-							startNavigationScreen();
-						}
+						getApp().runInUIThread(() -> {
+							getApp().getOsmandMap().getMapActions().startNavigation();
+							if (hasStarted()) {
+								startNavigationScreen();
+							}
+						});
 					}
 				});
 			} else {
@@ -549,10 +551,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			screenManager.popToRoot();
 			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
 				if (obj != null) {
-					app.getOsmandMap().getMapActions().startNavigation();
-					if (hasStarted()) {
-						startNavigationScreen();
-					}
+					app.runInUIThread(() -> {
+						app.getOsmandMap().getMapActions().startNavigation();
+						if (hasStarted()) {
+							startNavigationScreen();
+						}
+					});
 				}
 			});
 		}
@@ -797,18 +801,20 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			OsmandPreference<Boolean> allowPrivate = settings.getAllowPrivatePreference(appMode);
 			if (!allowPrivate.getModeValue(appMode)) {
 				getCarContext().getCarService(ScreenManager.class).pushForResult(new PrivateAccessScreen(getCarContext()), result -> {
-					if (result instanceof Boolean allowed) {
-						if (allowed) {
-							settings.setAllowPrivateAccessAllModes(true);
-							routingHelper.onSettingsChanged(null, true);
+					getApp().runInUIThread(() -> {
+						if (result instanceof Boolean allowed) {
+							if (allowed) {
+								settings.setAllowPrivateAccessAllModes(true);
+								routingHelper.onSettingsChanged(null, true);
+							} else {
+								getApp().stopNavigation();
+							}
+						} else if (isRoutePreviewPresent()) {
+							getScreenManager().popTo(RoutePreviewScreen.class.getSimpleName());
 						} else {
-							getApp().stopNavigation();
+							showRoutePreview();
 						}
-					} else if (isRoutePreviewPresent()) {
-						getScreenManager().popTo(RoutePreviewScreen.class.getSimpleName());
-					} else {
-						showRoutePreview();
-					}
+					});
 				});
 			}
 		}

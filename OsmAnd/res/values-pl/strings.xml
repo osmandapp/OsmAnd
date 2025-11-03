@@ -6124,4 +6124,10 @@
     <string name="ascent">Wzniesienie</string>
     <string name="descent">Spadek</string>
     <string name="shared_sting_osm_link">Link OSM</string>
+    <string name="quick_action_weather_layers">Przełącznik do pokazywania lub ukrywania warstw pogodowych na mapie.</string>
+    <string name="quick_action_wind_animation_layer">Przełącznik do pokazywania lub ukrywania warstwy animacji wiatru na mapie.</string>
+    <string name="wind_animation_layer">Warstwa animacji wiatru</string>
+    <string name="weather_layers">Warstwy pogodowe</string>
+    <string name="requires_internet_connection">Wymaga połączenia z Internetem</string>
+    <string name="save_and_access_articles_offline">Zapisuj dane i uzyskuj dostęp do artykułów w trybie offline z dowolnego miejsca</string>
 </resources>

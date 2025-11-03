@@ -1006,8 +1006,9 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	public void doZoomOut() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RotatedTileBox tb = map.getRotatedTileBox();
-			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
+			LatLon latLon = menu.getLatLon();
+			RotatedTileBox tileBox = map.getRotatedTileBox();
+			boolean containsLatLon = latLon != null && NativeUtilities.containsLatLon(map.getMapRenderer(), tileBox, latLon);
 			if (containsLatLon) {
 				setCustomMapRatio();
 			} else {

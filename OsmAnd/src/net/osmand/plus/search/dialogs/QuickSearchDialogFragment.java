@@ -820,7 +820,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	public void closeSearch() {
 		app.getPoiFilters().restoreSelectedPoiFilters();
-		dismiss();
+		dismissAllowingStateLoss();
 	}
 
 	public void addMainSearchFragment() {

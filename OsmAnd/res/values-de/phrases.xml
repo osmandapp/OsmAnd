@@ -624,7 +624,7 @@
     <string name="poi_tourism">Tourismus</string>
     <string name="poi_sightseeing">Sehenswürdigkeiten</string>
     <string name="poi_accomodation">Unterkunft</string>
-    <string name="poi_internet_access">Internetzugang</string>
+    <string name="poi_internet_access">Internet-Zugang</string>
     <string name="poi_entertainment">Freizeit</string>
     <string name="poi_club">Verein</string>
     <string name="poi_sustenance">Gastronomie</string>
@@ -785,7 +785,7 @@
     <string name="poi_wiki_lang_lv">Lettisches Wiki</string>
     <string name="poi_wiki_lang_ms">Malaiisches Wiki</string>
     <string name="poi_wiki_lang_new">Newarisches Wiki</string>
-    <string name="poi_node_networks">Wander-/Radwegenetzknoten</string>
+    <string name="poi_node_networks">Wander-/Radwegnetzknoten</string>
     <string name="poi_hiking_routes">Wanderrouten</string>
     <string name="poi_traffic_enforcement">Verkehrsüberwachung</string>
     <string name="poi_cheese">Käsegeschäft</string>
@@ -4865,7 +4865,7 @@
     <string name="poi_name_etymology">Namensetymologie</string>
     <string name="poi_name_left">Name der linken Seite</string>
     <string name="poi_name_right">Name der rechten Seite</string>
-    <string name="poi_camp_site_type">Campingplatz-Typ</string>
+    <string name="poi_camp_site_type">Zeltplatz-Typ</string>
     <string name="poi_camp_site_serviced">Betreut</string>
     <string name="poi_camp_site_deluxe">De luxe</string>
     <string name="poi_camp_site_standard">Standard</string>

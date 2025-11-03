@@ -76,14 +76,9 @@ public abstract class PointEditorFragment extends EditorFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		Context context = requireContext();
-		PointEditor editor = getEditor();
-		if (editor == null) {
-			view = inflate(getLayoutId(), container, false);
-			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
-			return view;
-		}
 
 		view = super.onCreateView(inflater, container, savedInstanceState);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
 		ImageView toolbarAction = view.findViewById(R.id.toolbar_action);
@@ -185,6 +180,10 @@ public abstract class PointEditorFragment extends EditorFragment {
 		View deleteButton = view.findViewById(R.id.button_delete_container);
 		deleteButton.setOnClickListener(v -> deletePressed());
 
+		PointEditor editor = getEditor();
+		if (editor == null) {
+			return view;
+		}
 		if (editor.isProcessingTemplate()) {
 			View replaceButton = view.findViewById(R.id.button_replace_container);
 			AndroidUiHelper.setVisibility(View.GONE, toolbarAction, replaceButton, deleteButton);
@@ -272,7 +271,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!descriptionEdit.getText().toString().isEmpty() || descriptionEdit.hasFocus()) {
+		CharSequence text = descriptionEdit.getText();
+		if (!Algorithms.isEmpty(text) || descriptionEdit.hasFocus()) {
 			descriptionCaption.setVisibility(View.VISIBLE);
 			addDelDescription.setText(app.getString(R.string.delete_description));
 		} else {

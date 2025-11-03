@@ -7,7 +7,7 @@ import net.osmand.plus.R;
 
 enum SocialNetwork {
 
-	X(R.string.x, R.string.community_x, R.drawable.ic_action_social_twitter),
+	X(R.string.x, R.string.community_x, R.drawable.ic_action_logo_x),
 	REDDIT(R.string.reddit, R.string.community_reddit, R.drawable.ic_action_social_reddit),
 	FACEBOOK(R.string.facebook, R.string.community_facebook, R.drawable.ic_action_social_facebook);
 

@@ -290,6 +290,10 @@ public abstract class MapRenderingTypes {
 			} else if ("borderout".equals(propagateToNodes)) {
 				rtype.propagateToNodes = PropagateToNodesType.BORDEROUT;
 			}
+			String propagateAvoidPolygonsValue = parser.getAttributeValue("", "propagateAvoidPolygons");
+			if (propagateAvoidPolygonsValue != null) {
+				rtype.propagateAvoidPolygons = Boolean.parseBoolean(propagateAvoidPolygonsValue);
+			}
 			String propagateToNodesPrefix = parser.getAttributeValue("", "propagateToNodesPrefix");
 			if (propagateToNodesPrefix != null) {
 				rtype.propagateToNodesPrefix = propagateToNodesPrefix;
@@ -585,6 +589,7 @@ public abstract class MapRenderingTypes {
 	public static class PropagateToNode {
 		public PropagateToNodesType propagateToNodes;
 		public String propagateToNodesPrefix;
+		public boolean propagateAvoidPolygons;
 		public Map<String, String> propagateIf;
 		public Map<String, String> propagateNetworkIf;
 		public String[] propagateAlsoTags;

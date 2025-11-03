@@ -324,10 +324,13 @@ public class RouteGeometryWay extends
 		List<List<RouteActionPoint>> actionArrows = getActionArrows(actionPoints);
 		if (!actionArrows.isEmpty()) {
 			int lineIdx = 0;
-			if (actionLinesCollection == null) {
-				actionLinesCollection = new VectorLinesCollection();
+
+			VectorLinesCollection linesCollection = actionLinesCollection;
+			if (linesCollection == null) {
+				linesCollection = new VectorLinesCollection();
+				actionLinesCollection = linesCollection;
 			}
-			QListVectorLine lines = actionLinesCollection.getLines();
+			QListVectorLine lines = linesCollection.getLines();
 			long initialLinesCount = lines.size();
 			for (List<RouteActionPoint> line : actionArrows) {
 				int arrowColor = getContrastArrowColor(line, customTurnArrowColor);
@@ -349,19 +352,19 @@ public class RouteGeometryWay extends
 					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
 					vectorLineBuilder.setBaseOrder(baseOrder--)
 							.setIsHidden(false)
-							.setLineId(actionLinesCollection.getLinesCount())
+							.setLineId(linesCollection.getLinesCount())
 							.setLineWidth(customWidth * vectorLineScale)
 							.setPoints(points)
 							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
 							.setFillColor(NativeUtilities.createFColorARGB(arrowColor));
-					vectorLineBuilder.buildAndAddToCollection(actionLinesCollection);
+					vectorLineBuilder.buildAndAddToCollection(linesCollection);
 				}
 			}
 			while (lineIdx < initialLinesCount) {
 				lines.get(lineIdx).setIsHidden(true);
 				lineIdx++;
 			}
-			mapRenderer.addSymbolsProvider(actionLinesCollection);
+			mapRenderer.addSymbolsProvider(linesCollection);
 		}
 	}
 
