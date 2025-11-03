@@ -113,9 +113,9 @@ public class QuickSearchListItem {
 				LatLon latLon = searchResult.location;
 				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
 			case POI:
-				String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
+				SearchSettings settings = searchResult.requiredSearchPhrase.getSettings();
 				Amenity amenity = (Amenity) searchResult.object;
-				String name = amenity.getName(lang);
+				String name = amenity.getName(settings.getLang(), settings.isTransliterate());
 				if (Algorithms.isEmpty(name)) {
 					if (amenity.isRouteTrack()) {
 						return amenity.getRouteActivityType();
