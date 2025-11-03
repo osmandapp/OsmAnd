@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
@@ -54,11 +55,13 @@ class SkymapFragment : BaseFullScreenDialogFragment() {
 		container: ViewGroup?,
 		savedInstanceState: Bundle?): View {
 		updateNightMode()
-		val view: View = themedInflater.inflate(R.layout.fragment_sky_map, container, false)
+		val view = themedInflater.inflate(R.layout.fragment_sky_map, container, false)
 		view.setBackgroundColor(
 			ContextCompat.getColor(
 				app,
 				if (nightMode) R.color.activity_background_color_dark else R.color.list_background_color_light))
+		val backButton: ImageView = view.findViewById(R.id.back_button)
+		backButton.setOnClickListener { dismiss() }
 		return view
 	}
 

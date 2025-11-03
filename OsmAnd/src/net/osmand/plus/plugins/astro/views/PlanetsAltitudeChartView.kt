@@ -1,17 +1,33 @@
-// PlanetsAltitudeChartView.kt  (drop-in replacement for your previous version)
 package net.osmand.plus.plugins.astro.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.DashPathEffect
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.view.View
 import androidx.core.graphics.toColorInt
-import io.github.cosinekitty.astronomy.*
-import net.osmand.plus.OsmandApplication
-import net.osmand.plus.views.OsmandMapTileView
-import java.time.*
+import io.github.cosinekitty.astronomy.Aberration
+import io.github.cosinekitty.astronomy.Body
+import io.github.cosinekitty.astronomy.Direction
+import io.github.cosinekitty.astronomy.EquatorEpoch
+import io.github.cosinekitty.astronomy.Observer
+import io.github.cosinekitty.astronomy.Refraction
+import io.github.cosinekitty.astronomy.Time
+import io.github.cosinekitty.astronomy.equator
+import io.github.cosinekitty.astronomy.horizon
+import io.github.cosinekitty.astronomy.searchAltitude
+import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.utils.AndroidUtils
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.abs
 import kotlin.math.max
@@ -22,42 +38,57 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
 	defStyleRes: Int = 0
-) : View(context, attrs, defStyleAttr, defStyleRes) {
+) : BaseChartView(context, attrs, defStyleAttr, defStyleRes) {
 
-	private val mapTileView: OsmandMapTileView
+	private data class Model(
+		val title: String,
+		override val startLocal: ZonedDateTime,
+		override val endLocal: ZonedDateTime,
+		val series: List<Series>,
+		val twilight: Twilight,
+		val yMin: Double,
+		val yMax: Double
+	) : BaseModel(startLocal, endLocal)
 
-	data class Config(
-		var date: LocalDate,
-		var zoneId: ZoneId,
-		var latitude: Double,
-		var longitude: Double,
-		var elevationMeters: Double = 0.0,
-		var showTwilightBands: Boolean = true,
-		var sampleMinutes: Int = 5,
-		var yMin: Double = -30.0,
-		var yMax: Double = +90.0
-	) {
-		fun equalsTo(other: Config, latLonEps: Double = 0.001, elevEps: Double = 1.0): Boolean {
+	private var cachedModel: Model? = null
+	private var config = Config()
+
+	private data class Config(
+		override val date: LocalDate = LocalDate.now(),
+		override val zoneId: ZoneId = ZoneId.systemDefault(),
+		override val latitude: Double = 0.0,
+		override val longitude: Double = 0.0,
+		override val elevation: Double = 0.0,
+		val showTwilightBands: Boolean = true,
+		val sampleMinutes: Int = 5,
+		val yMin: Double = -30.0,
+		val yMax: Double = +90.0
+	) : BaseConfig(date, zoneId, latitude, longitude, elevation) {
+		fun equalsTo(other: Config): Boolean {
+			if (super.equalsTo(other)) return false
+
 			if (zoneId != other.zoneId) return false
 			if (showTwilightBands != other.showTwilightBands) return false
 			if (sampleMinutes != other.sampleMinutes) return false
-			if (abs(yMin - other.yMin) > 1e-6 || abs(yMax - other.yMax) > 1e-6) return false
-			if (abs(latitude - other.latitude) > latLonEps) return false
-			if (abs(longitude - other.longitude) > latLonEps) return false
-			if (abs(elevationMeters - other.elevationMeters) > elevEps) return false
-			val t1 = date.atStartOfDay(zoneId).toInstant()
-			val t2 = other.date.atStartOfDay(other.zoneId).toInstant()
-			return t1 == t2
+			return (abs(yMin - other.yMin) > 1.0 || abs(yMax - other.yMax) > 1.0)
 		}
 	}
 
-	private var config = Config(
-		date = LocalDate.now(),
-		zoneId = ZoneId.systemDefault(),
-		latitude = 0.0,
-		longitude = 0.0,
-		elevationMeters = 0.0
-	)
+	private fun updateConfig() {
+		val loc = mapTileView.currentRotatedTileBox.centerLatLon
+		val config = Config(
+			date = LocalDate.now(),
+			zoneId = ZoneId.systemDefault(),
+			latitude = loc.latitude,
+			longitude = loc.longitude,
+			elevation = 0.0,
+			showTwilightBands = config.showTwilightBands,
+			sampleMinutes = config.sampleMinutes,
+			yMin = config.yMin,
+			yMax = config.yMax
+		)
+		if (!config.equalsTo(this.config)) { this.config = config; cachedModel = null }
+	}
 
 	private var bodies = listOf(Body.Sun, Body.Moon, Body.Mercury, Body.Venus, Body.Mars, Body.Jupiter, Body.Saturn)
 
@@ -83,7 +114,7 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 	private val twiNaut  = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC3C7AA6".toColorInt() }
 	private val twiCivil = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = "#CC5BBBF0".toColorInt() }
 	private val labelPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
+		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD); textAlign = Paint.Align.CENTER
 	}
 	private val smallPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
 	private val timePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.LTGRAY; textSize = sp(14f) }
@@ -103,27 +134,12 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 		color = hex.toColorInt(); strokeWidth = dp(2f); style = Paint.Style.STROKE
 	}
 
-	init {
-		val app = context.applicationContext as OsmandApplication
-		mapTileView = app.osmandMap.mapView
-	}
-
 	@SuppressLint("DrawAllocation")
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
 
-		val latLon = mapTileView.currentRotatedTileBox.centerLatLon
-		val cfg = Config(
-			date = LocalDate.now(),
-			zoneId = ZoneId.systemDefault(),
-			latitude = latLon.latitude,
-			longitude = latLon.longitude
-		)
-		if (!cfg.equalsTo(this.config)) {
-			this.config = cfg
-			buildModel()
-		}
-		val m = model ?: return
+		updateConfig()
+		val m = cachedModel ?: buildModel().also { cachedModel = it }
 
 		val height = measureHeight()
 		canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), bgPaint)
@@ -134,7 +150,7 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 		val chartBottom = height - bottomPad
 
 		// Title
-		canvas.drawText(m.title, dp(12f), headerH - dp(8f), labelPaint)
+		canvas.drawText(m.title, width / 2f, dp(25f), labelPaint)
 
 		// Time axis + vertical grid
 		drawTimeAxis(canvas, height, m.startLocal, m.endLocal, chartLeft, chartRight)
@@ -232,32 +248,13 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 		val set: ZonedDateTime?
 	)
 
-	private data class Twilight(
-		val sunrise: ZonedDateTime?, val sunset: ZonedDateTime?,
-		val civilDawn: ZonedDateTime?, val civilDusk: ZonedDateTime?,
-		val nauticalDawn: ZonedDateTime?, val nauticalDusk: ZonedDateTime?,
-		val astroDawn: ZonedDateTime?, val astroDusk: ZonedDateTime?
-	)
-
-	private data class Model(
-		val title: String,
-		val startLocal: ZonedDateTime,
-		val endLocal: ZonedDateTime,
-		val series: List<Series>,
-		val twilight: Twilight,
-		val yMin: Double,
-		val yMax: Double
-	)
-
-	private var model: Model? = null
-
 	// ---------- Build model ----------
 
-	private fun buildModel() {
+	private fun buildModel(): Model {
 		val zone = config.zoneId
 		val startLocal = config.date.atTime(12, 0).atZone(zone)
 		val endLocal = startLocal.plusDays(1)
-		val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
 		val stepMinutes = config.sampleMinutes.toLong()
 
 		fun computeRiseSet(body: Body): Pair<ZonedDateTime?, ZonedDateTime?> {
@@ -286,8 +283,8 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 		val series = bodies.map { computeSeries(it) }
 		val tw = computeTwilight(startLocal, endLocal)
 
-		val title = "Planet Altitudes — ${startLocal.toLocalDate()} to ${endLocal.toLocalDate()}"
-		model = Model(title, startLocal, endLocal, series, tw, config.yMin, config.yMax)
+		val title = "Planet Altitudes — ${startLocal.toLocalDate()}"
+		return Model(title, startLocal, endLocal, series, tw, config.yMin, config.yMax)
 	}
 
 	private fun bodyDisplayName(b: Body) = when (b) { Body.Sun -> "Sun"; Body.Moon -> "Moon"; else -> b.name }
@@ -301,7 +298,7 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 	}
 
 	private fun computeTwilight(startLocal: ZonedDateTime, endLocal: ZonedDateTime): Twilight {
-		val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
 		fun findAlt(direction: Direction, deg: Double): ZonedDateTime? {
 			val t0 = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
 			val t = searchAltitude(Body.Sun, obs, direction, t0, 2.0, deg)
@@ -390,17 +387,17 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 				else                           fillDay(clampX(sunrise), clampX(sunset))
 			}
 			sunrise != null -> {
-				val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) fillDay(left, right) else fillDay(clampX(sunrise), right)
 			}
 			sunset != null -> {
-				val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) fillDay(left, clampX(sunset))
 			}
 			else -> {
-				val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) fillDay(left, right)
 			}
@@ -445,10 +442,10 @@ class PlanetsAltitudeChartView @JvmOverloads constructor(
 
 	private fun measureHeight(): Int {
 		// single plot; leave a bit of height for the legend column
-		return (headerH + topAxisH + dp(180f) + bottomPad).toInt()
+		//return (headerH + topAxisH + dp(180f) + bottomPad).toInt()
+		return dp(300f).toInt()
 	}
 
-	// ---------- Utils ----------
-	private fun dp(v: Float) = v * context.resources.displayMetrics.density
-	private fun sp(v: Float) = v * context.resources.displayMetrics.scaledDensity
+	private fun dp(v: Float) = AndroidUtils.dpToPxF(context, v)
+	private fun sp(v: Float) = AndroidUtils.spToPxF(context, v)
 }

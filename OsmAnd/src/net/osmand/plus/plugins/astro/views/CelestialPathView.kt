@@ -1,72 +1,109 @@
 package net.osmand.plus.plugins.astro.views
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.DashPathEffect
+import android.graphics.Matrix
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.PointF
+import android.graphics.RectF
+import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.view.*
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import androidx.core.graphics.toColorInt
 import androidx.core.graphics.withMatrix
 import androidx.core.graphics.withSave
-import io.github.cosinekitty.astronomy.*
-import net.osmand.plus.OsmandApplication
-import net.osmand.plus.views.OsmandMapTileView
-import java.time.*
+import io.github.cosinekitty.astronomy.Aberration
+import io.github.cosinekitty.astronomy.Body
+import io.github.cosinekitty.astronomy.Direction
+import io.github.cosinekitty.astronomy.EquatorEpoch
+import io.github.cosinekitty.astronomy.Observer
+import io.github.cosinekitty.astronomy.Refraction
+import io.github.cosinekitty.astronomy.Time
+import io.github.cosinekitty.astronomy.Topocentric
+import io.github.cosinekitty.astronomy.defineStar
+import io.github.cosinekitty.astronomy.equator
+import io.github.cosinekitty.astronomy.horizon
+import io.github.cosinekitty.astronomy.searchRiseSet
+import net.osmand.plus.plugins.astro.AstroUtils
+import net.osmand.plus.utils.AndroidUtils
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.math.*
+import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.min
+import kotlin.math.sin
+import kotlin.math.tan
 
 class CelestialPathView @JvmOverloads constructor(
-	context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
-) : View(context, attrs, defStyleAttr, defStyleRes) {
+	context: Context,
+	attrs: AttributeSet? = null,
+	defStyleAttr: Int = 0,
+	defStyleRes: Int = 0
+) : BaseChartView(context, attrs, defStyleAttr, defStyleRes) {
 
-	private companion object {
-		fun bodyName(b: Body) = when (b) {
-			Body.Sun -> "Sun"
-			Body.Moon -> "Moon"
-			Body.Mercury -> "Mercury"
-			Body.Venus -> "Venus"
-			Body.Mars -> "Mars"
-			Body.Jupiter -> "Jupiter"
-			Body.Saturn -> "Saturn"
-			Body.Uranus -> "Uranus"
-			Body.Neptune -> "Neptune"
-			Body.Pluto -> "Pluto"
-			else -> b.toString()
-		}
-	}
+	private var extras: List<CelestialEntry> = emptyList()
+	private var moment: ZonedDateTime? = null
 
-	private val mapTileView: OsmandMapTileView =
-		(context.applicationContext as OsmandApplication).osmandMap.mapView
+	private data class Model(
+		override val startLocal: ZonedDateTime,
+		override val endLocal: ZonedDateTime,
+		val observer: Observer
+	) : BaseModel(startLocal, endLocal)
+
+	private var cachedModel: Model? = null
+	private var config = Config()
 
 	enum class Projection { EQUIDISTANT, STEREOGRAPHIC }
 
 	data class Config(
-		var date: LocalDate = LocalDate.now(),
-		var zoneId: ZoneId = ZoneId.systemDefault(),
-		var latitude: Double = 0.0,
-		var longitude: Double = 0.0,
-		var elevationMeters: Double = 0.0,
-		var projection: Projection = Projection.EQUIDISTANT,
-		var showPaths: Boolean = true,
-		var showInstantLocations: Boolean = true,
-		var minuteSample: Int = 10
-	) {
-		fun equalsTo(other: Config, eps: Double = 1e-3): Boolean {
+		override val date: LocalDate = LocalDate.now(),
+		override val zoneId: ZoneId = ZoneId.systemDefault(),
+		override val latitude: Double = 0.0,
+		override val longitude: Double = 0.0,
+		override val elevation: Double = 0.0,
+		val projection: Projection = Projection.EQUIDISTANT,
+		val showPaths: Boolean = true,
+		val showInstantLocations: Boolean = true,
+		val minuteSample: Int = 10
+	) : BaseConfig(date, zoneId, latitude, longitude, elevation) {
+		fun equalsTo(other: Config): Boolean {
+			if (super.equalsTo(other)) return false
+
 			if (projection != other.projection) return false
 			if (showPaths != other.showPaths) return false
 			if (showInstantLocations != other.showInstantLocations) return false
-			if (minuteSample != other.minuteSample) return false
-			if (zoneId != other.zoneId) return false
-			if (abs(latitude - other.latitude) > eps) return false
-			if (abs(longitude - other.longitude) > eps) return false
-			if (abs(elevationMeters - other.elevationMeters) > 1.0) return false
-			return date.atStartOfDay(zoneId).toInstant() == other.date.atStartOfDay(other.zoneId).toInstant()
+			return (minuteSample != other.minuteSample)
 		}
+	}
+
+	private fun updateConfig() {
+		val loc = mapTileView.currentRotatedTileBox.centerLatLon
+		val config = Config(
+			date = LocalDate.now(),
+			zoneId = ZoneId.systemDefault(),
+			latitude = loc.latitude,
+			longitude = loc.longitude,
+			elevation = 0.0,
+			projection = config.projection,
+			showPaths = config.showPaths,
+			showInstantLocations = config.showInstantLocations,
+			minuteSample = config.minuteSample
+		)
+		if (!config.equalsTo(this.config)) { this.config = config; cachedModel = null }
 	}
 
 	sealed class CelestialEntry(val name: String, val color: Int, val drawPath: Boolean = true) {
 		class Planet(val body: Body, color: Int, drawPath: Boolean = true)
-			: CelestialEntry(bodyName(body), color, drawPath)
+			: CelestialEntry(AstroUtils.bodyName(body), color, drawPath)
 		class Fixed(
 			name: String,
 			val raHours: Double,
@@ -80,10 +117,6 @@ class CelestialPathView @JvmOverloads constructor(
 	fun setCelestialDatabase(entries: List<CelestialEntry>) { extras = entries; invalidate() }
 	fun setMoment(dateTime: ZonedDateTime?) { moment = dateTime; invalidate() }
 	fun setConfig(newConfig: Config) { config = newConfig; cachedModel = null; invalidate() }
-
-	private var extras: List<CelestialEntry> = emptyList()
-	private var moment: ZonedDateTime? = null
-	private var config = Config()
 
 	private val defaultPlanets = listOf(
 		CelestialEntry.Planet(Body.Sun,  "#FFE53B".toColorInt()),
@@ -138,7 +171,7 @@ class CelestialPathView @JvmOverloads constructor(
 				var best: Pair<CelestialEntry, Float>? = null
 				for (poly in polylines) {
 					val d = distanceToPolyline(x, y, poly.points)
-					if (d < thresh && (best == null || d < best!!.second)) {
+					if (d < thresh && (best == null || d < best.second)) {
 						best = poly.entry to d
 					}
 				}
@@ -201,29 +234,6 @@ class CelestialPathView @JvmOverloads constructor(
 	private val hourPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(11f); textAlign = Paint.Align.LEFT }
 	private val hourDotPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; style = Paint.Style.FILL }
 
-	private fun dp(v: Float) = v * resources.displayMetrics.density
-	private fun sp(v: Float) = v * resources.displayMetrics.scaledDensity
-
-	// ---------- Model ----------
-	private data class Model(val start: ZonedDateTime, val end: ZonedDateTime, val observer: Observer)
-	private var cachedModel: Model? = null
-
-	private fun updateConfig() {
-		val loc = mapTileView.currentRotatedTileBox.centerLatLon
-		val fresh = Config(
-			date = LocalDate.now(),
-			zoneId = ZoneId.systemDefault(),
-			latitude = loc.latitude,
-			longitude = loc.longitude,
-			elevationMeters = 0.0,
-			projection = config.projection,
-			showPaths = config.showPaths,
-			showInstantLocations = config.showInstantLocations,
-			minuteSample = config.minuteSample
-		)
-		if (!fresh.equalsTo(config)) { config = fresh; cachedModel = null }
-	}
-
 	private fun topocentric(body: Body, t: ZonedDateTime, obs: Observer): Topocentric {
 		val utc = Time.fromMillisecondsSince1970(t.toInstant().toEpochMilli())
 		val eq = equator(body, utc, obs, EquatorEpoch.OfDate, Aberration.Corrected)
@@ -239,6 +249,7 @@ class CelestialPathView @JvmOverloads constructor(
 
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
+
 		updateConfig()
 		val m = cachedModel ?: buildModel().also { cachedModel = it }
 
@@ -250,7 +261,7 @@ class CelestialPathView @JvmOverloads constructor(
 		val radius = 0.9f * min(cx, cy)
 
 		// title
-		canvas.drawText("Celestial Paths — ${config.date}", cx, dp(22f), titlePaint)
+		canvas.drawText("Celestial Paths — ${config.date}", cx, dp(25f), titlePaint)
 
 		polylines.clear()
 
@@ -303,7 +314,7 @@ class CelestialPathView @JvmOverloads constructor(
 	private fun buildModel(): Model {
 		val startLocal = config.date.atStartOfDay(config.zoneId)
 		val endLocal = startLocal.plusDays(1)
-		val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
 		return Model(startLocal, endLocal, obs)
 	}
 
@@ -372,8 +383,8 @@ class CelestialPathView @JvmOverloads constructor(
 	private fun drawColoredPath(canvas: Canvas, entry: CelestialEntry, m: Model, radius: Float) {
 		// build segments grouped by UTC hour band
 		val stepMin = config.minuteSample.toLong().coerceAtLeast(1)
-		var t = m.start
-		val end = m.end
+		var t = m.startLocal
+		val end = m.endLocal
 		val ptsForHit = ArrayList<Float>(512)
 
 		var currentColor = -1
@@ -411,28 +422,6 @@ class CelestialPathView @JvmOverloads constructor(
 			//drawText(canvas, entry.name, ptsForHit[mid], ptsForHit[mid+1] - dp(8f)/scale, smallPaint)
 			polylines += Poly(entry, ptsForHit.toFloatArray())
 		}
-//		if (entry is CelestialEntry.Planet) {
-//			drawRiseSetLabels(canvas, entry.body, m, radius, entry.color)
-//		}
-	}
-
-	private fun drawRiseSetLabels(canvas: Canvas, body: Body, m: Model, radius: Float, color: Int) {
-		val startUtc = Time.fromMillisecondsSince1970(m.start.toInstant().toEpochMilli())
-		val rise = searchRiseSet(body, m.observer, Direction.Rise, startUtc, +2.0)
-		val set  = searchRiseSet(body, m.observer, Direction.Set , startUtc, +2.0)
-		val fmt = DateTimeFormatter.ofPattern("HH:mm")
-		val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-			this.color = color; textSize = sp(11f)/scale; textAlign = Paint.Align.CENTER
-		}
-		fun drawAt(t: Time?, label: String, dy: Float) {
-			t ?: return
-			val z = Instant.ofEpochMilli(t.toMillisecondsSince1970()).atZone(config.zoneId)
-			val topo = topocentric(body, z, m.observer)
-			val p = azAltToPoint(topo.azimuth, 0.0, radius)
-			drawText(canvas, "$label: ${z.toLocalTime().format(fmt)}", p.x, p.y + dy/scale, paint)
-		}
-		drawAt(rise, "Rise", -dp(10f))
-		drawAt(set , "Set" , +dp(16f))
 	}
 
 	// ---------- Legend (1) ----------
@@ -466,7 +455,7 @@ class CelestialPathView @JvmOverloads constructor(
 		canvas.drawRoundRect(r, dp(12f), dp(12f), panelPaint)
 		canvas.drawRoundRect(r, dp(12f), dp(12f), panelStroke)
 
-		val title = "${entry.name}"
+		val title = entry.name
 		val titlePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = sp(14f) }
 		canvas.drawText(title, r.left + dp(12f), r.top + dp(22f), titlePaint)
 
@@ -481,25 +470,27 @@ class CelestialPathView @JvmOverloads constructor(
 	}
 
 	private fun nextRiseSet(entry: CelestialEntry, m: Model): Pair<ZonedDateTime?, ZonedDateTime?> {
-		val startUtc = Time.fromMillisecondsSince1970(m.start.toInstant().toEpochMilli())
+		val startTime = Time.fromMillisecondsSince1970(m.startLocal.toInstant().toEpochMilli())
 		fun toZdt(t: Time?): ZonedDateTime? =
 			t?.let { Instant.ofEpochMilli(it.toMillisecondsSince1970()).atZone(config.zoneId) }
 
 		return when (entry) {
 			is CelestialEntry.Planet -> {
-				val r = searchRiseSet(entry.body, m.observer, Direction.Rise, startUtc, +2.0)
-				val s = searchRiseSet(entry.body, m.observer, Direction.Set , startUtc, +2.0)
+				val r = searchRiseSet(entry.body, m.observer, Direction.Rise, startTime, +2.0)
+				val s = searchRiseSet(entry.body, m.observer, Direction.Set , startTime, +2.0)
 				toZdt(r) to toZdt(s)
 			}
 			is CelestialEntry.Fixed -> {
 				defineStar(Body.Star1, entry.raHours, entry.decDeg, 1000.0)
-				val r = searchRiseSet(Body.Star1, m.observer, Direction.Rise, startUtc, +2.0)
-				val s = searchRiseSet(Body.Star1, m.observer, Direction.Set , startUtc, +2.0)
+				val r = searchRiseSet(Body.Star1, m.observer, Direction.Rise, startTime, +2.0)
+				val s = searchRiseSet(Body.Star1, m.observer, Direction.Set , startTime, +2.0)
 				toZdt(r) to toZdt(s)
 			}
 		}
 	}
 
-	// ---------- tiny helpers ----------
 	private fun drawText(canvas: Canvas, text: String, x: Float, y: Float, tp: TextPaint) { canvas.drawText(text, x, y, tp) }
+
+	private fun dp(v: Float) = AndroidUtils.dpToPxF(context, v)
+	private fun sp(v: Float) = AndroidUtils.spToPxF(context, v)
 }

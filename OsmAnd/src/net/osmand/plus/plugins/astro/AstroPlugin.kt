@@ -91,7 +91,7 @@ class AstroPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 		}
 	}
 
-	private fun showSkymap(mapActivity: MapActivity) {
+	fun showSkymap(mapActivity: MapActivity) {
 		SkymapFragment.showInstance(mapActivity)
 	}
 }

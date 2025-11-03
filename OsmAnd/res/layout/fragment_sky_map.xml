@@ -25,11 +25,67 @@
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/action_bar_height" />
+				android:layout_height="wrap_content"
+				android:minHeight="@dimen/toolbar_height"
+				app:layout_collapseMode="pin"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp">
+
+				<LinearLayout
+					android:id="@+id/toolbar_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/color_transparent"
+					android:minHeight="@dimen/toolbar_height"
+					android:orientation="horizontal">
+
+					<ImageButton
+						android:id="@+id/back_button"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
+						android:layout_gravity="center"
+						android:contentDescription="@string/shared_string_back"
+						app:srcCompat="@drawable/ic_arrow_back"
+						app:tint="@color/icon_color_default_light" />
+
+					<FrameLayout
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_gravity="center_vertical"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/toolbar_title"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:layout_marginVertical="@dimen/content_padding_half"
+							android:text="@string/skymap_3d"
+							android:textSize="@dimen/dialog_header_text_size"
+							app:typefaceWeight="medium" />
+
+					</FrameLayout>
+
+					<androidx.appcompat.widget.AppCompatImageButton
+						android:id="@+id/clearButton"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
+						android:layout_gravity="center"
+						android:contentDescription="@string/shared_string_menu"
+						android:tint="?default_icon_color"
+						app:srcCompat="@drawable/ic_overflow_menu_white" />
+
+				</LinearLayout>
+
+			</androidx.appcompat.widget.Toolbar>
 
 		</com.google.android.material.appbar.AppBarLayout>
 
-		<net.osmand.plus.plugins.astro.SkyView
+		<net.osmand.plus.plugins.astro.views.SkyView
 			android:id="@+id/sky_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />

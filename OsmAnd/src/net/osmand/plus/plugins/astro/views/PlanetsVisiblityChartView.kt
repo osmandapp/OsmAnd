@@ -9,7 +9,6 @@ import android.graphics.RectF
 import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.view.View
 import androidx.core.graphics.toColorInt
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
@@ -22,15 +21,13 @@ import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.searchAltitude
 import io.github.cosinekitty.astronomy.searchRiseSet
-import net.osmand.plus.OsmandApplication
-import net.osmand.plus.views.OsmandMapTileView
+import net.osmand.plus.utils.AndroidUtils
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -39,44 +36,52 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0,
 	defStyleRes: Int = 0
-) : View(context, attrs, defStyleAttr, defStyleRes) {
+) : BaseChartView(context, attrs, defStyleAttr, defStyleRes) {
 
-	private val mapTileView: OsmandMapTileView
+	private data class Model(
+		val title: String,
+		override val startLocal: ZonedDateTime,     // 12:00 local
+		override val endLocal: ZonedDateTime,       // +24h
+		val rows: List<Row>,
+		val twilight: Twilight
+	) : BaseModel(startLocal, endLocal)
 
-	data class Config(
-		var date: LocalDate,              // the civil date you want to center the night around
-		var zoneId: ZoneId,               // local timezone for labels and 24h window
-		var latitude: Double,
-		var longitude: Double,
-		var elevationMeters: Double = 0.0,
-		var showTwilightBands: Boolean = true,
-		var sampleMinutes: Int = 5        // altitude sampling granularity for visibility bars
-	) {
-		fun equalsTo(other: Config, latLonEps: Double = 0.001, elevEps: Double = 1.0): Boolean {
-			if (zoneId != other.zoneId) return false
-			if (showTwilightBands != other.showTwilightBands) return false
-			if (sampleMinutes != other.sampleMinutes) return false
-
-			if (abs(latitude - other.latitude) > latLonEps) return false
-			if (abs(longitude - other.longitude) > latLonEps) return false
-			if (abs(elevationMeters - other.elevationMeters) > elevEps) return false
-
-			val t1 = date.atStartOfDay(zoneId).toInstant()
-			val t2 = other.date.atStartOfDay(other.zoneId).toInstant()
-			return t1 == t2
-		}
-	}
-
-	private var config = Config(
-		date = LocalDate.now(),
-		zoneId = ZoneId.systemDefault(),
-		latitude = 0.0,
-		longitude = 0.0,
-		elevationMeters = 0.0
-	)
+	private var cachedModel: Model? = null
+	private var config = Config()
 
 	private var bodies =
 		listOf(Body.Sun, Body.Moon, Body.Mercury, Body.Venus, Body.Mars, Body.Jupiter, Body.Saturn)
+
+	data class Config(
+		override val date: LocalDate = LocalDate.now(),         // the civil date to center the night around
+		override val zoneId: ZoneId = ZoneId.systemDefault(),   // local timezone for labels and 24h window
+		override val latitude: Double = 0.0,
+		override val longitude: Double = 0.0,
+		override val elevation: Double = 0.0,
+		val showTwilightBands: Boolean = true,
+		val sampleMinutes: Int = 5        // altitude sampling granularity for visibility bars
+	) : BaseConfig(date, zoneId, latitude, longitude, elevation) {
+		fun equalsTo(other: Config): Boolean {
+			if (super.equalsTo(other)) return false
+
+			if (showTwilightBands != other.showTwilightBands) return false
+			return (sampleMinutes != other.sampleMinutes)
+		}
+	}
+
+	private fun updateConfig() {
+		val loc = mapTileView.currentRotatedTileBox.centerLatLon
+		val config = Config(
+			date = LocalDate.now(),
+			zoneId = ZoneId.systemDefault(),
+			latitude = loc.latitude,
+			longitude = loc.longitude,
+			elevation = 0.0,
+			showTwilightBands = config.showTwilightBands,
+			sampleMinutes = config.sampleMinutes
+		)
+		if (!config.equalsTo(this.config)) { this.config = config; cachedModel = null }
+	}
 
 	// ---------- Layout metrics ----------
 	private val leftLabelW get() = measureText("Mercury") + dp(16f)
@@ -103,7 +108,10 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 	}
 
 	private val labelPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
+		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD); textAlign = Paint.Align.CENTER
+	}
+	private val bodyPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = Color.WHITE; textSize = sp(18f); typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
 	}
 	private val smallPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = Color.LTGRAY; textSize = sp(14f)
@@ -112,28 +120,12 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 		color = Color.LTGRAY; textSize = sp(14f)
 	}
 
-	init {
-		val app = context.applicationContext as OsmandApplication
-		mapTileView = app.osmandMap.mapView
-	}
-
 	@SuppressLint("DrawAllocation")
 	override fun onDraw(canvas: Canvas) {
 		super.onDraw(canvas)
 
-		val latLon = mapTileView.currentRotatedTileBox.centerLatLon
-		val config = Config(
-			date = LocalDate.now(),
-			zoneId = ZoneId.systemDefault(),
-			latitude = latLon.latitude,
-			longitude = latLon.longitude
-		)
-		if (!config.equalsTo(this.config)) {
-			this.config = config
-			buildModel()
-		}
-
-		val m = model ?: return
+		updateConfig()
+		val m = cachedModel ?: buildModel().also { cachedModel = it }
 
 		val height = measureHeight()
 
@@ -146,7 +138,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 		val chartBottom = height - bottomPad
 
 		// Title
-		canvas.drawText(m.title, dp(12f), headerH - dp(8f), labelPaint)
+		canvas.drawText(m.title, width / 2f, dp(25f), labelPaint)
 
 		// Time axis labels & vertical grid every 6 hours
 		drawTimeAxis(canvas, height, m.startLocal, m.endLocal, chartLeft, chartRight)
@@ -160,7 +152,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 		m.rows.forEach { row ->
 			// labels: body name + rise/set
 			val baseY = y - rowH/2 + dp(6f)
-			canvas.drawText(row.name, dp(12f), baseY, labelPaint)
+			canvas.drawText(row.name, dp(12f), baseY, bodyPaint)
 
 			val riseText = row.rise?.toLocalTime()?.format(timeFmt) ?: "—"
 			val setText  = row.set ?.toLocalTime()?.format(timeFmt) ?: "—"
@@ -198,31 +190,14 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 
 	private data class Span(val start: ZonedDateTime, val end: ZonedDateTime)
 
-	private data class Twilight(
-		// each may be null if it doesn't occur in the 24h window
-		val sunrise: ZonedDateTime?, val sunset: ZonedDateTime?,
-		val civilDawn: ZonedDateTime?, val civilDusk: ZonedDateTime?,
-		val nauticalDawn: ZonedDateTime?, val nauticalDusk: ZonedDateTime?,
-		val astroDawn: ZonedDateTime?, val astroDusk: ZonedDateTime?
-	)
-
-	private data class Model(
-		val title: String,
-		val startLocal: ZonedDateTime,     // 12:00 local
-		val endLocal: ZonedDateTime,       // +24h
-		val rows: List<Row>,
-		val twilight: Twilight
-	)
-
-	private var model: Model? = null
-
 	private fun measureText(s: String) = labelPaint.measureText(s)
 
 	// ---------- Measuring / drawing ----------
 
 	private fun measureHeight(): Int {
-		val rows = model?.rows?.size ?: bodies.size
-		return (headerH + topAxisH + (rows * rowH) + bottomPad).toInt()
+		//val rows = cachedModel?.rows?.size ?: bodies.size
+		//return (headerH + topAxisH + (rows * rowH) + bottomPad).toInt()
+		return dp(300f).toInt()
 	}
 
 	// ---------- Rendering helpers ----------
@@ -282,7 +257,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 			sunrise != null -> {
 				// Only a sunrise in the window.
 				// If we start in day, everything is day; otherwise day begins at sunrise.
-				val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) {
 					fillDay(left, right)
@@ -293,7 +268,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 
 			sunset != null -> {
 				// Only a sunset in the window.
-				val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) {
 					// We start in day and turn to night at sunset.
@@ -305,7 +280,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 
 			else -> {
 				// No sunrise/sunset inside the window -> either all-day or all-night.
-				val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+				val obs = Observer(config.latitude, config.longitude, config.elevation)
 				val startAlt = altitude(Body.Sun, m.startLocal, obs)
 				if (startAlt > -0.833) fillDay(left, right) // continuous day
 				// else continuous night (already drawn as background)
@@ -363,7 +338,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 
 	// ---------- Model builder ----------
 
-	private fun buildModel() {
+	private fun buildModel(): Model {
 		val zone = config.zoneId
 		val startLocal = config.date.atTime(12, 0).atZone(zone)            // 12:00 local
 		val endLocal = startLocal.plusDays(1)
@@ -376,8 +351,8 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 
 		val tw = computeTwilight(startLocal, endLocal)
 
-		val title = "Planets Visibility — ${startLocal.toLocalDate()} to ${endLocal.toLocalDate()}"
-		model = Model(title, startLocal, endLocal, rows, tw)
+		val title = "Planets Visibility — ${startLocal.toLocalDate()}"
+		return Model(title, startLocal, endLocal, rows, tw)
 	}
 
 	private fun bodyDisplayName(b: Body) = when (b) {
@@ -391,7 +366,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 		startLocal: ZonedDateTime,
 		endLocal: ZonedDateTime
 	): List<Span> {
-		val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
 
 		fun Time.toZdt() =
 			Instant.ofEpochMilli(this.toMillisecondsSince1970()).atZone(config.zoneId)
@@ -448,7 +423,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 		startLocal: ZonedDateTime,
 		endLocal: ZonedDateTime
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
-		val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
 		// search within the window, using a start near its middle to reliably get next events
 		val searchStartUtc = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
 		val limitDays = 2.0  // generous to catch events straddling edges
@@ -465,7 +440,7 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 	}
 
 	private fun computeTwilight(startLocal: ZonedDateTime, endLocal: ZonedDateTime): Twilight {
-		val obs = Observer(config.latitude, config.longitude, config.elevationMeters)
+		val obs = Observer(config.latitude, config.longitude, config.elevation)
 		fun findAlt(direction: Direction, deg: Double): ZonedDateTime? {
 			val t0 = Time.fromMillisecondsSince1970(startLocal.toInstant().toEpochMilli())
 			val t = searchAltitude(Body.Sun, obs, direction, t0, 2.0, deg)
@@ -490,8 +465,6 @@ class PlanetsVisiblityChartView @JvmOverloads constructor(
 		return Twilight(srZ, ssZ, civilDawn, civilDusk, nauticalDawn, nauticalDusk, astroDawn, astroDusk)
 	}
 
-	// ---------- Utils ----------
-
-	private fun dp(v: Float) = v * context.resources.displayMetrics.density
-	private fun sp(v: Float) = v * context.resources.displayMetrics.scaledDensity
+	private fun dp(v: Float) = AndroidUtils.dpToPxF(context, v)
+	private fun sp(v: Float) = AndroidUtils.spToPxF(context, v)
 }

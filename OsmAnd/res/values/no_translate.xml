@@ -74,6 +74,7 @@
     <string name="astro_plugin_name">Astronomical</string>
     <string name="astro_plugin_description">Sky charts, 3D sky map</string>
     <string name="show_skymap">Show sky map</string>
+    <string name="skymap_3d">3D sky map</string>
     <string name="sky_charts_name">Sky charts</string>
     <string name="sky_charts_widget_group_desc">A set of views showing various astronomical information.</string>
     <string name="sky_chart_name">Sky chart</string>

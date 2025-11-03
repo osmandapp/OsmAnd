@@ -182,7 +182,6 @@ class SkyView @JvmOverloads constructor(
 		}
 	}
 
-
 	private fun drawCelestialObject(canvas: Canvas, star: Star) {
 		val point = skyToScreen(star.azimuth, star.altitude)
 		if (point != null) {

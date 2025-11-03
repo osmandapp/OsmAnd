@@ -4,6 +4,9 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatButton
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.plugins.OsmandPlugin
+import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.astro.AstroPlugin
 import net.osmand.plus.plugins.astro.views.CelestialPathView
 import net.osmand.plus.plugins.astro.views.PlanetsAltitudeChartView
 import net.osmand.plus.plugins.astro.views.PlanetsVisiblityChartView
@@ -24,7 +27,8 @@ class SkyChartsWidget(mapActivity: MapActivity, val skyChartWidgetState: SkyChar
 	init {
 		view.findViewById<AppCompatButton>(R.id.enter_3d_button).apply {
 			setOnClickListener {
-
+				val plugin = PluginsHelper.getActivePlugin(AstroPlugin::class.java)
+				plugin?.showSkymap(super.mapActivity)
 			}
 		}
 		view.findViewById<AppCompatButton>(R.id.switch_chart_button).apply {
