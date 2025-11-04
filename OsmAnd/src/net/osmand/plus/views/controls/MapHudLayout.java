@@ -425,7 +425,7 @@ public class MapHudLayout extends FrameLayout {
 
 	public void updateVerticalPanels() {
 		app.runInUIThreadAndCancelPrevious(REFRESH_VERTICAL_PANELS_ID, () -> {
-			updateHorizontalMargins(topBarPanelContainer);
+			updateHorizontalMargins(findViewById(R.id.top_widgets_panel));
 			updateHorizontalMargins(bottomWidgetsPanel);
 		}, UI_REFRESH_INTERVAL_MILLIS);
 	}
