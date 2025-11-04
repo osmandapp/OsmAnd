@@ -2,15 +2,12 @@ package net.osmand.plus.views.controls;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
-import static net.osmand.shared.grid.ButtonPositionSize.CELL_SIZE_DP;
-import static net.osmand.shared.grid.ButtonPositionSize.POS_BOTTOM;
-import static net.osmand.shared.grid.ButtonPositionSize.POS_FULL_WIDTH;
-import static net.osmand.shared.grid.ButtonPositionSize.POS_LEFT;
-import static net.osmand.shared.grid.ButtonPositionSize.POS_RIGHT;
-import static net.osmand.shared.grid.ButtonPositionSize.POS_TOP;
+import static net.osmand.shared.grid.ButtonPositionSize.*;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +22,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -56,18 +54,26 @@ public class MapHudLayout extends FrameLayout {
 	private final Map<View, ButtonPositionSize> additionalWidgetPositions = new LinkedHashMap<>();
 
 	private View alarmsContainer;
-	private View topBarPanelContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private final float dpToPx;
 	private final int panelsMargin;
+
 	private int statusBarHeight;
 	private int navBarHeight;
+	private int leftInset;
+	private int rightInset;
 
 	private final boolean tablet;
 	private final boolean portrait;
+
+	private final Paint gridPaint = new Paint();
+	private final Paint gridCrosshairPaint = new Paint();
+	private final Paint slotPaintStroke = new Paint();
+	private final Paint slotPaintFill = new Paint();
+	private final Paint framePaintStroke = new Paint();
 
 	public MapHudLayout(@NonNull Context context) {
 		this(context, null);
@@ -90,6 +96,25 @@ public class MapHudLayout extends FrameLayout {
 		this.statusBarHeight = AndroidUtils.getStatusBarHeight(context);
 		this.tablet = AndroidUiHelper.isTablet(context);
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
+
+		gridPaint.setColor(0xE6FF9800); // systemOrange @ 90%
+		gridPaint.setStrokeWidth(1);
+		gridPaint.setStyle(Paint.Style.STROKE);
+
+		gridCrosshairPaint.setColor(0x808E8E8E); // systemGray @ 50%
+		gridCrosshairPaint.setStrokeWidth(1);
+		gridCrosshairPaint.setStyle(Paint.Style.STROKE);
+
+		slotPaintStroke.setColor(0xFF009688); // systemTeal
+		slotPaintStroke.setStrokeWidth(1);
+		slotPaintStroke.setStyle(Paint.Style.STROKE);
+
+		slotPaintFill.setColor(0x40009688); // systemTeal @ 25%
+		slotPaintFill.setStyle(Paint.Style.FILL);
+
+		framePaintStroke.setColor(0xFFFF0000); // systemRed
+		framePaintStroke.setStrokeWidth(1);
+		framePaintStroke.setStyle(Paint.Style.STROKE);
 	}
 
 	@Override
@@ -99,7 +124,6 @@ public class MapHudLayout extends FrameLayout {
 		alarmsContainer = findViewById(R.id.alarms_container);
 		leftWidgetsPanel = findViewById(R.id.map_left_widgets_panel);
 		rightWidgetsPanel = findViewById(R.id.map_right_widgets_panel);
-		topBarPanelContainer = findViewById(R.id.top_bar_panel_container);
 		bottomWidgetsPanel = findViewById(R.id.map_bottom_widgets_panel);
 
 		if (shouldCenterVerticalPanels()) {
@@ -476,9 +500,104 @@ public class MapHudLayout extends FrameLayout {
 		}, UI_REFRESH_INTERVAL_MILLIS);
 	}
 
-	public void setWindowInsets(WindowInsetsCompat windowInsets) {
+	@Override
+	protected void dispatchDraw(@NonNull Canvas canvas) {
+		super.dispatchDraw(canvas);
+
+		if (!OsmandSettings.DRAW_EFFECTIVE_GRID && !OsmandSettings.DRAW_SLOTS && !OsmandSettings.DRAW_FRAMES) {
+			return;
+		}
+
+		float cellSizePx = CELL_SIZE_DP * dpToPx;
+		float marginPx = DEF_MARGIN_DP * dpToPx;
+		int width = getWidth();
+		int height = getHeight();
+
+		if (cellSizePx <= 0) {
+			return;
+		}
+
+		if (OsmandSettings.DRAW_EFFECTIVE_GRID) {
+			float left0 = marginPx + leftInset;
+			float right0 = width - marginPx - rightInset;
+			float top0 = statusBarHeight + marginPx;
+			float bottom0 = height - navBarHeight - marginPx;
+			float midX = (left0 + right0) / 2;
+			float midY = (top0 + bottom0) / 2;
+
+			// Top-Left
+			for (float x = left0; x < midX; x += cellSizePx)
+				canvas.drawLine(x, top0, x, midY, gridPaint);
+			for (float y = top0; y < midY; y += cellSizePx)
+				canvas.drawLine(left0, y, midX, y, gridPaint);
+
+			// Top-Right
+			for (float x = right0; x > midX; x -= cellSizePx)
+				canvas.drawLine(x, top0, x, midY, gridPaint);
+			for (float y = top0; y < midY; y += cellSizePx)
+				canvas.drawLine(midX, y, right0, y, gridPaint);
+
+			// Bottom-Left
+			for (float x = left0; x < midX; x += cellSizePx)
+				canvas.drawLine(x, midY, x, bottom0, gridPaint);
+			for (float y = bottom0; y > midY; y -= cellSizePx)
+				canvas.drawLine(left0, y, midX, y, gridPaint);
+
+			// Bottom-Right
+			for (float x = right0; x > midX; x -= cellSizePx)
+				canvas.drawLine(x, midY, x, bottom0, gridPaint);
+			for (float y = bottom0; y > midY; y -= cellSizePx)
+				canvas.drawLine(midX, y, right0, y, gridPaint);
+
+			// Crosshairs
+			canvas.drawLine(midX, top0, midX, bottom0, gridCrosshairPaint);
+			canvas.drawLine(left0, midY, right0, midY, gridCrosshairPaint);
+		}
+
+		if (OsmandSettings.DRAW_SLOTS || OsmandSettings.DRAW_FRAMES) {
+			Map<View, ButtonPositionSize> map = getButtonPositionSizes();
+			for (Map.Entry<View, ButtonPositionSize> entry : map.entrySet()) {
+				View view = entry.getKey();
+				ButtonPositionSize position = entry.getValue();
+
+				if (OsmandSettings.DRAW_FRAMES) {
+					canvas.drawRect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom(), framePaintStroke);
+				}
+				if (OsmandSettings.DRAW_SLOTS) {
+					float left, top, right, bottom;
+					int marginX = position.getXStartPix(dpToPx);
+					int marginY = position.getYStartPix(dpToPx);
+					int viewWidth = position.getWidthPix(dpToPx);
+					int viewHeight = position.getHeightPix(dpToPx);
+
+					if (position.isLeft()) {
+						left = marginX + leftInset;
+						right = left + viewWidth;
+					} else {
+						right = width - marginX - rightInset;
+						left = right - viewWidth;
+					}
+
+					if (position.isTop()) {
+						top = marginY + statusBarHeight;
+						bottom = top + viewHeight;
+					} else {
+						bottom = height - marginY - navBarHeight;
+						top = bottom - viewHeight;
+					}
+
+					canvas.drawRect(left, top, right, bottom, slotPaintFill);
+					canvas.drawRect(left, top, right, bottom, slotPaintStroke);
+				}
+			}
+		}
+	}
+
+	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
 		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
 		statusBarHeight = insets.top;
 		navBarHeight = insets.bottom;
+		leftInset = insets.left;
+		rightInset = insets.right;
 	}
 }
