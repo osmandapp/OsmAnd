@@ -21,7 +21,7 @@ class ButtonPositionSize {
 	var yMove: Boolean = false
 	var moveDescendants: Int = MOVE_DESCENDANTS_ANY
 
-	private val bounds = KQuadRect()
+	internal val bounds = KQuadRect()
 
 	constructor(id: String) : this(id, 7, true, true)
 
@@ -229,6 +229,7 @@ class ButtonPositionSize {
 		private const val MAX_ITERATIONS = 1000
 		private const val MAX_STUCK_ATTEMPTS = 20
 
+		var DEBUG_PRINT: Boolean = false; // false
 		const val CELL_SIZE_DP = 8
 		const val DEF_MARGIN_DP = 4
 
@@ -255,110 +256,80 @@ class ButtonPositionSize {
 			totalWidth: Int,
 			totalHeight: Int
 		): Boolean {
-			buttons.forEach { it.updateBounds(totalWidth, totalHeight) }
+			if (DEBUG_PRINT) {
+				LOG.info("---- Layout w=" + totalWidth + " h=" + totalHeight + " spc=" + space);
+				buttons.forEach {
+					it.updateBounds(totalWidth, totalHeight)
+					LOG.info("Before Button " + it + " " + it.bounds);
+				}
+			}
+			var iter = 0
 
-			var iteration = 0
-			val moveAttempts = mutableMapOf<ButtonPositionSize, Int>()
 			var fixedPos = buttons.size - 1
-
 			while (fixedPos >= 0) {
-				if (iteration++ > MAX_ITERATIONS) {
-					LOG.error("Relayout is broken")
+				if (iter++ > MAX_ITERATIONS) {
+					LOG.error("Relayout is broken.")
 					return false
 				}
+
 				var overlap = false
-				val button = buttons[fixedPos]
-				for (i in fixedPos + 1 until buttons.size) {
+				val button = buttons[fixedPos] // Use index access
+
+				// Use 'until' for a range that doesn't include the end value
+				for (i in (fixedPos + 1) until buttons.size) {
 					val check = buttons[i]
 					if (button.overlap(check)) {
-						val attempts = moveAttempts[check] ?: 0
-						if (attempts >= MAX_STUCK_ATTEMPTS) {
-							LOG.warn("Skipping move for $check (max attempts reached)")
-						} else if (moveButton(space, check, button, totalWidth, totalHeight)) {
-							overlap = true
-							check.updateBounds(totalWidth, totalHeight)
-							moveAttempts[check] = attempts + 1
-							fixedPos = i
-							break
+						overlap = true
+						if (DEBUG_PRINT) {
+							LOG.info("Move " + check + " because " + button);
 						}
+						check.updateBounds(totalWidth, totalHeight)
+						moveButton(space, check, button)
+						fixedPos = i
+						break
 					}
 				}
+
 				if (!overlap) {
 					fixedPos--
 				}
 			}
+			if (DEBUG_PRINT) {
+				buttons.forEach {
+					LOG.info("After Button " + it + " " + it.bounds);
+				}
+				LOG.info("++++ Layout w=" + totalWidth + " h=" + totalHeight + " spc=" + space);
+			}
 			return true
 		}
 
-		private fun moveButton(
-			space: Int, toMove: ButtonPositionSize,
-			overlap: ButtonPositionSize, totalWidth: Int, totalHeight: Int
-		): Boolean {
+		private fun moveButton(space: Int, toMove: ButtonPositionSize, overlap: ButtonPositionSize) {
 			var xMove = false
 			var yMove = false
-			when (overlap.moveDescendants) {
-				MOVE_DESCENDANTS_ANY -> {
-					if (overlap.isFullWidth) {
-						yMove = true
-					} else if (overlap.isFullHeight) {
-						xMove = true
-					} else {
-						if (toMove.xMove) xMove = true
-						if (toMove.yMove) yMove = true
-					}
+
+			if (overlap.moveDescendants == MOVE_DESCENDANTS_ANY) {
+				if (overlap.posH == POS_FULL_WIDTH) {
+					yMove = true
+				} else if (overlap.posV == POS_FULL_HEIGHT) {
+					xMove = true
+				} else {
+					// This logic is simpler than the original
+					// if (toMove.xMove) { xMove = toMove.xMove } is just xMove = toMove.xMove
+					xMove = toMove.xMove
+					yMove = toMove.yMove
 				}
-				MOVE_DESCENDANTS_VERTICAL -> yMove = true
-				MOVE_DESCENDANTS_HORIZONTAL -> xMove = true
+			} else if (overlap.moveDescendants == MOVE_DESCENDANTS_VERTICAL) {
+				yMove = true
+			} else if (overlap.moveDescendants == MOVE_DESCENDANTS_HORIZONTAL) {
+				xMove = true
 			}
 
-			val forceYOnly = overlap.isFullWidth || overlap.moveDescendants == MOVE_DESCENDANTS_VERTICAL
-			val forceXOnly = overlap.isFullHeight || overlap.moveDescendants == MOVE_DESCENDANTS_HORIZONTAL
-			val overlapHorizontalOnly = overlap.xMove && !overlap.yMove
-			val overlapVerticalOnly   = overlap.yMove && !overlap.xMove
-			var planX = false
-			var planY = false
-			when {
-				forceYOnly && yMove -> planY = true
-				forceXOnly && xMove -> planX = true
-				overlapHorizontalOnly && yMove -> planY = true
-				overlapVerticalOnly && xMove   -> planX = true
-				else -> {
-					if (xMove) planX = true
-					if (yMove) planY = true
-				}
+			if (xMove) {
+				toMove.marginX = space + overlap.marginX + overlap.width
 			}
-
-			val desiredX = space + overlap.marginX + overlap.width
-			val desiredY = space + overlap.marginY + overlap.height
-			var newX = if (planX) desiredX else toMove.marginX
-			var newY = if (planY) desiredY else toMove.marginY
-			if (planY && desiredY < toMove.marginY && !overlap.isFullWidth) {
-				newY = toMove.marginY
-				if (!planX) newX = desiredX
+			if (yMove) {
+				toMove.marginY = space + overlap.marginY + overlap.height
 			}
-			if (planY && !overlap.isFullWidth && (newY + toMove.height > totalHeight)) {
-				newY = toMove.marginY
-				if (!planX) newX = desiredX
-			}
-			if (newX + toMove.width > totalWidth) {
-				newX = max(0, totalWidth - toMove.width)
-				if (!planY) {
-					val desired = space + overlap.marginY + overlap.height
-					newY = max(0, min(desired, totalHeight - toMove.height))
-				}
-			}
-			if (newY + toMove.height > totalHeight) {
-				newY = max(0, totalHeight - toMove.height)
-				if (!planX) {
-					val desired = space + overlap.marginX + overlap.width
-					newX = max(0, min(desired, totalWidth - toMove.width))
-				}
-			}
-			val moved = (newX != toMove.marginX) || (newY != toMove.marginY)
-			toMove.marginX = newX
-			toMove.marginY = newY
-
-			return moved
 		}
 	}
 }
