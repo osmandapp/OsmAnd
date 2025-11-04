@@ -11,8 +11,6 @@ public class WikiImageCard extends ImageCard {
 
 	private final WikiImage wikiImage;
 
-	private boolean metadataDownloaded;
-
 	public WikiImageCard(@NonNull MapActivity mapActivity, @NonNull WikiImage wikiImage) {
 		super(mapActivity, null);
 		this.wikiImage = wikiImage;
@@ -29,13 +27,5 @@ public class WikiImageCard extends ImageCard {
 	@NonNull
 	public WikiImage getWikiImage() {
 		return wikiImage;
-	}
-
-	public boolean isMetaDataDownloaded() {
-		return metadataDownloaded;
-	}
-
-	public void setMetaDataDownloaded(boolean metadataDownloaded) {
-		this.metadataDownloaded = metadataDownloaded;
 	}
 }

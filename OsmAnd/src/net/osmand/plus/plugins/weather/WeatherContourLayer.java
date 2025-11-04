@@ -164,6 +164,15 @@ public class WeatherContourLayer extends BaseMapLayer {
 		mapActivityInvalidated = false;
 	}
 
+	public boolean shouldDrawLayer() {
+		WeatherContour contour = plugin.hasCustomForecast()
+				? plugin.getSelectedForecastContoursType()
+				: plugin.getSelectedContoursType();
+		short band = contour != null ? contour.getBandIndex() : WEATHER_BAND_NOTHING;
+		return band != WEATHER_BAND_NOTHING && (plugin.hasCustomForecast() ||
+				plugin.isWeatherEnabled() && plugin.isContoursEnabled());
+	}
+
 	private boolean shouldDrawLayer(@WeatherBandType short band) {
 		return band != WEATHER_BAND_NOTHING && (plugin.hasCustomForecast() ||
 				plugin.isWeatherEnabled() && plugin.isContoursEnabled());

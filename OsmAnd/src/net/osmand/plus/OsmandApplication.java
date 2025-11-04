@@ -147,6 +147,7 @@ public class OsmandApplication extends MultiDexApplication {
 	NavigationService navigationService;
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
+	OsmAndDiagnosticThread diagnosticThread;
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
@@ -241,11 +242,13 @@ public class OsmandApplication extends MultiDexApplication {
 			@Override
 			public void onStart(@NonNull LifecycleOwner owner) {
 				appInForeground = true;
+				startDiagnostics();
 			}
 
 			@Override
 			public void onStop(@NonNull LifecycleOwner owner) {
 				appInForeground = false;
+				stopDiagnostics();
 			}
 		};
 		ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
@@ -299,6 +302,23 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean isExternalStorageDirectoryReadOnly() {
 		return externalStorageDirectoryReadOnly;
+	}
+
+	private synchronized void startDiagnostics() {
+		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
+		if (diagnosticThread == null || !diagnosticThread.isAlive()) {
+			diagnosticThread = new OsmAndDiagnosticThread(this);
+			diagnosticThread.start();
+			this.diagnosticThread = diagnosticThread;
+		}
+	}
+
+	private synchronized void stopDiagnostics() {
+		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
+		this.diagnosticThread = null;
+		if (diagnosticThread != null) {
+			diagnosticThread.interrupt();
+		}
 	}
 
 	@Override
