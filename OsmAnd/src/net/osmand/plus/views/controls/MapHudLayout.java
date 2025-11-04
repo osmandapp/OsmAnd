@@ -294,22 +294,27 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(panel.isTopPanel() ? POS_TOP : POS_BOTTOM);
 			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
+			position.setNonMoveable();
 		} else if (view instanceof SideWidgetsPanel panel) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
+			position.setNonMoveable();
 		} else if (id == R.id.widget_top_bar) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(shouldCenterVerticalPanels() ? POS_LEFT : POS_FULL_WIDTH);
+			position.setNonMoveable();
 		} else if (id == R.id.measurement_buttons) {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
+			position.setNonMoveable();
 		} else if (id == R.id.add_gpx_point_bottom_sheet || id == R.id.recording_note_layout) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(portrait ? POS_FULL_WIDTH : POS_LEFT);
+			position.setNonMoveable();
 		} else if (view instanceof RulerWidget) {
 			position.setMoveHorizontal();
 			position.setPositionVertical(POS_BOTTOM);

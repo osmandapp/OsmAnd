@@ -52,6 +52,9 @@ class ButtonPositionSize {
 
 	fun setMoveHorizontal() = apply { this.xMove = true }
 
+	fun setNonMoveable() = apply { this.xMove = false; this.yMove = false; }
+
+
 	fun setSize(width8dp: Int, height8dp: Int) = apply {
 		this.width = width8dp
 		this.height = height8dp
@@ -234,7 +237,8 @@ class ButtonPositionSize {
 		private const val MAX_STUCK_ATTEMPTS = 20
 
 		var DEBUG_PRINT: Boolean = false; // false
-		var ALTERNATIVE_ALGORITHM: Boolean = false;
+		var DEBUG_PRINT_MOVE: Boolean = false; // false
+		var ALTERNATIVE_ALGORITHM: Boolean = true;
 
 		const val CELL_SIZE_DP = 8
 		const val DEF_MARGIN_DP = 4
@@ -290,14 +294,13 @@ class ButtonPositionSize {
 					for (j in 0 until i) {
 						val check = buttons[j]
 						if (button.overlap(check)) {
-							val moved = moveButton(space, button, check)
+							val moved = moveButton(space, button, check, totalWidth, totalHeight)
 							if (!moved) {
 								// skip unmoveable situations
 								continue;
 							}
 							overlap = true
-							button.updateBounds(totalWidth, totalHeight)
-							if (DEBUG_PRINT) {
+							if (DEBUG_PRINT_MOVE) {
 								LOG.info("Move $button because $check new bounds ${button.bounds}");
 							}
 						}
@@ -317,14 +320,14 @@ class ButtonPositionSize {
 					for (i in (fixedPos + 1) until buttons.size) {
 						val check = buttons[i]
 						if (button.overlap(check)) {
-							val moved = moveButton(space, check, button)
+							val moved = moveButton(space, check, button, totalWidth, totalHeight)
 							if (!moved) {
 								// skip unmoveable situations
 								continue;
 							}
 							overlap = true
 							check.updateBounds(totalWidth, totalHeight)
-							if (DEBUG_PRINT) {
+							if (DEBUG_PRINT_MOVE) {
 								LOG.info("Move $check because $button new bounds ${check.bounds}");
 							}
 							fixedPos = i
@@ -346,9 +349,20 @@ class ButtonPositionSize {
 			return true
 		}
 
-		private fun moveButton(space: Int, toMove: ButtonPositionSize, overlap: ButtonPositionSize): Boolean {
+		private fun moveAndCheck(toMove: ButtonPositionSize, overlap: ButtonPositionSize,
+								 totalWidth: Int, totalHeight: Int, mx: Int, my: Int): Boolean {
+			toMove.marginX += mx;
+			toMove.marginY += my;
+			toMove.updateBounds(totalWidth, totalHeight);
+			return toMove.overlap(overlap);
+		}
+		private fun moveButton(space: Int, toMove: ButtonPositionSize, overlap: ButtonPositionSize,
+							   totalWidth: Int, totalHeight: Int): Boolean {
 			var xMove = false
 			var yMove = false
+			if (!toMove.xMove && !toMove.yMove) {
+				return false
+			}
 
 			if (overlap.moveDescendants == MOVE_DESCENDANTS_ANY) {
 				if (overlap.posH == POS_FULL_WIDTH) {
@@ -364,14 +378,36 @@ class ButtonPositionSize {
 			} else if (overlap.moveDescendants == MOVE_DESCENDANTS_HORIZONTAL) {
 				xMove = true
 			}
-
-			if (xMove) {
-				toMove.marginX = space + overlap.marginX + overlap.width
+			var ox = toMove.marginX;
+			var oy = toMove.marginY;
+			var ok = false;
+			while (!ok && xMove && toMove.marginX <= totalWidth - toMove.width) {
+				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 1, 0)) {
+					if (moveAndCheck(toMove, overlap, totalWidth, totalHeight, space, 0)) {
+						// move back not enough space for space
+						moveAndCheck(toMove, overlap, totalWidth, totalHeight, -space, 0);
+					}
+					ok = true;
+				}
 			}
-			if (yMove) {
-				toMove.marginY = space + overlap.marginY + overlap.height
+			if (!ok) {
+				toMove.marginX = ox;
+				toMove.updateBounds(totalWidth, totalHeight);
 			}
-			return xMove || yMove;
+			while (!ok && yMove && toMove.marginY <= totalHeight - toMove.height) {
+				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, 1)) {
+					if (moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, space)) {
+						// move back not enough space for space
+						moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, -space);
+					}
+					ok = true;
+				}
+			}
+			if (!ok) {
+				toMove.marginY = oy;
+				toMove.updateBounds(totalWidth, totalHeight);
+			}
+			return ok;
 		}
 	}
 }
