@@ -37,6 +37,9 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -150,6 +153,14 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		contentWebView.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light));
 
 		return mainView;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createCustomBuilder(R.id.read_full_article).portraitSides(InsetSide.BOTTOM).preferMargin(true).build());
+
+		return collection;
 	}
 
 	@Override
