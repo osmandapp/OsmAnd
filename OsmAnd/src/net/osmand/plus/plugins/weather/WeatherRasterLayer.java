@@ -241,7 +241,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		mapActivityInvalidated = false;
 	}
 
-	private boolean shouldDrawLayer() {
+	public boolean shouldDrawLayer() {
 		return (weatherSettings.weatherEnabled.get() || plugin.hasCustomForecast())
 				&& !Algorithms.isEmpty(getVisibleBands());
 	}
