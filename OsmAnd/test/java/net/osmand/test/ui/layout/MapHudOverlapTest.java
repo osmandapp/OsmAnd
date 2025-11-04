@@ -117,7 +117,7 @@ public class MapHudOverlapTest extends AndroidTest {
 			LOG.info("--------");
 
 			float dpToPx = AndroidUtils.dpToPxF(app, 1);
-			int width = Math.round(mapHudLayout.getWidth() / dpToPx / CELL_SIZE_DP);
+			int width = Math.round(mapHudLayout.getAdjustedWidth() / dpToPx / CELL_SIZE_DP);
 			int height = Math.round(mapHudLayout.getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
 
 			boolean overlapFixed = ButtonPositionSize.Companion.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);

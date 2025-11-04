@@ -2,6 +2,9 @@ package net.osmand.plus.views.controls;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
+import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES;
+import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;
+import static net.osmand.plus.settings.backend.OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS;
 import static net.osmand.shared.grid.ButtonPositionSize.*;
 
 import android.content.Context;
@@ -22,7 +25,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -61,8 +63,8 @@ public class MapHudLayout extends FrameLayout {
 	private final float dpToPx;
 	private final int panelsMargin;
 
-	private int statusBarHeight;
-	private int navBarHeight;
+	private int topInset;
+	private int bottomInset;
 	private int leftInset;
 	private int rightInset;
 
@@ -93,7 +95,7 @@ public class MapHudLayout extends FrameLayout {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
 		this.panelsMargin = AndroidUtils.dpToPx(context, 16);
-		this.statusBarHeight = AndroidUtils.getStatusBarHeight(context);
+		this.topInset = AndroidUtils.getStatusBarHeight(context);
 		this.tablet = AndroidUiHelper.isTablet(context);
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
 
@@ -240,7 +242,7 @@ public class MapHudLayout extends FrameLayout {
 //		}
 //		LOG.info("--------");
 
-		int width = Math.round(getWidth() / dpToPx / CELL_SIZE_DP);
+		int width = Math.round(getAdjustedWidth() / dpToPx / CELL_SIZE_DP);
 		int height = Math.round(getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
 		ButtonPositionSize.Companion.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);
 
@@ -340,16 +342,20 @@ public class MapHudLayout extends FrameLayout {
 		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
 		position.setSize(width, height);
 
-		if (view instanceof SideWidgetsPanel || view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels()
-				|| id == R.id.measurement_buttons) {
-			int parentWidth = getWidth();
-			int parentHeight = getAdjustedHeight();
+		if (view instanceof SideWidgetsPanel || id == R.id.measurement_buttons
+				|| view instanceof VerticalWidgetPanel && shouldCenterVerticalPanels()) {
 			int[] margins = AndroidUtils.getRelativeMargins(this, view);
+			applyInsetsToMargins(margins);
+
 			if (margins[0] >= 0 && margins[1] >= 0 && margins[2] >= 0 && margins[3] >= 0) {
+				int parentWidth = getAdjustedWidth();
+				int parentHeight = getAdjustedHeight();
+
 				boolean top = position.isTop();
 				boolean left = position.isLeft();
 				int x = left ? margins[0] : margins[2];
-				int y = top ? margins[1] - statusBarHeight : margins[3] - statusBarHeight;
+				int y = top ? margins[1] : margins[3];
+
 				position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight, left, x, top, y);
 			}
 		} else if (view instanceof RulerWidget) {
@@ -357,6 +363,13 @@ public class MapHudLayout extends FrameLayout {
 			position.setMarginY(0);
 		}
 		return position;
+	}
+
+	private void applyInsetsToMargins(int[] margins) {
+		margins[0] -= leftInset;
+		margins[1] -= topInset;
+		margins[2] -= rightInset;
+		margins[3] -= bottomInset;
 	}
 
 	public void updatePositionParams(@NonNull View view, @NonNull ButtonPositionSize position) {
@@ -418,7 +431,7 @@ public class MapHudLayout extends FrameLayout {
 		MapButtonState buttonState = button.getButtonState();
 		ButtonPositionSize positionSize = buttonState != null ? buttonState.getPositionSize() : null;
 		if (buttonState != null) {
-			int width = getWidth();
+			int width = getAdjustedWidth();
 			int height = getAdjustedHeight();
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
@@ -433,7 +446,11 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	public int getAdjustedHeight() {
-		return getHeight() - statusBarHeight - navBarHeight;
+		return getHeight() - topInset - bottomInset;
+	}
+
+	public int getAdjustedWidth() {
+		return getWidth() - leftInset - rightInset;
 	}
 
 	private boolean shouldCenterVerticalPanels() {
@@ -509,7 +526,7 @@ public class MapHudLayout extends FrameLayout {
 	protected void dispatchDraw(@NonNull Canvas canvas) {
 		super.dispatchDraw(canvas);
 
-		if (!OsmandSettings.DRAW_EFFECTIVE_GRID && !OsmandSettings.DRAW_SLOTS && !OsmandSettings.DRAW_FRAMES) {
+		if (!DEV_GRID_LAYOUT_DRAW_CELLS && !DEV_GRID_LAYOUT_DRAW_SLOTS && !DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES) {
 			return;
 		}
 
@@ -522,11 +539,11 @@ public class MapHudLayout extends FrameLayout {
 			return;
 		}
 
-		if (OsmandSettings.DRAW_EFFECTIVE_GRID) {
+		if (DEV_GRID_LAYOUT_DRAW_CELLS) {
 			float left0 = marginPx + leftInset;
 			float right0 = width - marginPx - rightInset;
-			float top0 = statusBarHeight + marginPx;
-			float bottom0 = height - navBarHeight - marginPx;
+			float top0 = marginPx + topInset;
+			float bottom0 = height - marginPx - bottomInset;
 			float midX = (left0 + right0) / 2;
 			float midY = (top0 + bottom0) / 2;
 
@@ -559,16 +576,16 @@ public class MapHudLayout extends FrameLayout {
 			canvas.drawLine(left0, midY, right0, midY, gridCrosshairPaint);
 		}
 
-		if (OsmandSettings.DRAW_SLOTS || OsmandSettings.DRAW_FRAMES) {
+		if (DEV_GRID_LAYOUT_DRAW_SLOTS || DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES) {
 			Map<View, ButtonPositionSize> map = getButtonPositionSizes();
 			for (Map.Entry<View, ButtonPositionSize> entry : map.entrySet()) {
 				View view = entry.getKey();
 				ButtonPositionSize position = entry.getValue();
 
-				if (OsmandSettings.DRAW_FRAMES) {
+				if (DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES) {
 					canvas.drawRect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom(), framePaintStroke);
 				}
-				if (OsmandSettings.DRAW_SLOTS) {
+				if (DEV_GRID_LAYOUT_DRAW_SLOTS) {
 					float left, top, right, bottom;
 					int marginX = position.getXStartPix(dpToPx);
 					int marginY = position.getYStartPix(dpToPx);
@@ -584,10 +601,10 @@ public class MapHudLayout extends FrameLayout {
 					}
 
 					if (position.isTop()) {
-						top = marginY + statusBarHeight;
+						top = marginY + topInset;
 						bottom = top + viewHeight;
 					} else {
-						bottom = height - marginY - navBarHeight;
+						bottom = height - marginY - bottomInset;
 						top = bottom - viewHeight;
 					}
 
@@ -600,8 +617,8 @@ public class MapHudLayout extends FrameLayout {
 
 	public void setWindowInsets(@NonNull WindowInsetsCompat windowInsets) {
 		Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
-		statusBarHeight = insets.top;
-		navBarHeight = insets.bottom;
+		topInset = insets.top;
+		bottomInset = insets.bottom;
 		leftInset = insets.left;
 		rightInset = insets.right;
 	}
