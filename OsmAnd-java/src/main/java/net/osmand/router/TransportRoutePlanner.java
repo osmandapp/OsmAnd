@@ -13,6 +13,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
@@ -49,7 +50,7 @@ public class TransportRoutePlanner {
 			return Collections.emptyList();
 		}
 		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(), new SegmentsComparator(ctx));
-		for(TransportRouteSegment r : startStops){
+		for (TransportRouteSegment r : startStops) {
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
 			queue.add(r);
@@ -72,37 +73,45 @@ public class TransportRoutePlanner {
 				return null;
 			}
 			TransportRouteSegment segment = queue.poll();
-			TransportRouteSegment ex = ctx.visitedSegments.get(segment.getId());
-			if(ex != null) {
-				if(ex.distFromStart > segment.distFromStart) {
+			long segIdWithParent = segmentWithParentId(segment, segment.parentRoute);
+			TransportRouteSegment ex = ctx.visitedSegments.get(segIdWithParent);
+			if (ex != null) {
+				if (ex.distFromStart > segment.distFromStart) {
 					System.err.println(String.format("%.1f (%s) > %.1f (%s)", ex.distFromStart, ex, segment.distFromStart, segment));
 				}
 				continue;
 			}
 			ctx.visitedRoutesCount++;
-			ctx.visitedSegments.put(segment.getId(), segment);
+			ctx.visitedSegments.put(segIdWithParent, segment);
 			
 			if (segment.distFromStart > finishTime + ctx.finishTimeSeconds ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
-				break;
+//				break;
+				continue;
 			}
-			long segmentId = segment.getId();
+//			long segmentId = segment.getId();
 			TransportRouteSegment finish = null;
 			double minDist = 0;
 			double travelDist = 0;
 			double travelTime = 0;
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
-			if(routeTravelSpeed == 0) {
+			if (routeTravelSpeed == 0) {
 				continue;
 			}
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
+			if (ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 1209383l ||
+					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 3207891l) {
+				System.out.printf("-> %d (%d) %.2f\n", ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()),
+						segment.segStart, segment.distFromStart);
+				System.out.println(segment.parentRoute);
+			}
 			for (int ind = 1 + segment.segStart; ind < segment.getLength(); ind++) {
 				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 					return null;
 				}
-				segmentId ++;
-				ctx.visitedSegments.put(segmentId, segment);
+				segIdWithParent ++;
+				ctx.visitedSegments.put(segIdWithParent, segment);
 				TransportStop stop = segment.getStop(ind);
 				// could be geometry size
 				double segmentDist = MapUtils.getDistance(prevStop.getLocation(), stop.getLocation());
@@ -114,7 +123,7 @@ public class TransportRoutePlanner {
 				} else {
 					travelTime += ctx.cfg.stopTime + segmentDist / routeTravelSpeed;
 				}
-				if(segment.distFromStart + travelTime > finishTime + ctx.finishTimeSeconds) {
+				if (segment.distFromStart + travelTime > finishTime + ctx.finishTimeSeconds) {
 					break;
 				}
 				sgms.clear();
@@ -128,7 +137,7 @@ public class TransportRoutePlanner {
 						if (segment.wasVisited(sgm)) {
 							continue;
 						}
-						if (ctx.visitedSegments.containsKey(sgm.getId())) {
+						if (ctx.visitedSegments.containsKey(segmentWithParentId(sgm, segment))) {
 							continue;
 						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
@@ -149,9 +158,15 @@ public class TransportRoutePlanner {
 						} else {
 							queue.add(nextSegment);
 						}
+						if (ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId()) == 3207891l) {
+							System.out.printf("? Add to queue %d (%d) -> %d (%d) %.3f\n",  
+									ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()), ind,
+									ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId()), sgm.segStart,
+									nextSegment.distFromStart);
+						}
 					}
 				}
-				TransportRouteSegment finalSegment = endSegments.get(segmentId);
+				TransportRouteSegment finalSegment = endSegments.get(segment.getId() + ind);
 				double distToEnd = MapUtils.getDistance(stop.getLocation(), end);
 				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius) {
 					if (finish == null || minDist > distToEnd) {
@@ -194,6 +209,11 @@ public class TransportRoutePlanner {
 			
 		}
 		return prepareResults(ctx, results);
+	}
+
+	private long segmentWithParentId(TransportRouteSegment segment, TransportRouteSegment parent) {
+		return ((parent != null ? ObfConstants.getOsmIdFromBinaryMapObjectId(parent.road.getId()) : 0) << 30l) 
+				+ segment.getId();
 	}
 	
 	private void initProgressBar(TransportRoutingContext ctx, LatLon start, LatLon end) {
@@ -252,17 +272,17 @@ public class TransportRoutePlanner {
 				p = p.parentRoute;
 			}
 			// test if faster routes fully included
-			boolean include = false;
-			for(TransportRouteResult s : lst) {
+			boolean exclude = false;
+			for (TransportRouteResult s : lst) {
 				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 					return null;
 				}
-				if(includeRoute(s, route)) {
-					include = true;
+				if (includeRoute(s, route)) {
+					exclude = true;
 					break;
 				}
 			}
-			if(!include) {
+			if(!exclude) {
 				lst.add(route);
 				System.out.println(route.toString());
 			} else {
@@ -546,9 +566,9 @@ public class TransportRoutePlanner {
 		
 		public long getId() {
 			long l = road.getId();
-			
+
 			l = l << SHIFT_DEPTIME;
-			if(departureTime >= (1 << SHIFT_DEPTIME)) {
+			if (departureTime >= (1 << SHIFT_DEPTIME)) {
 				throw new IllegalStateException("too long dep time" + departureTime);
 			}
 			l += (departureTime + 1);
@@ -558,11 +578,11 @@ public class TransportRoutePlanner {
 				throw new IllegalStateException("too many stops " + road.getId() + " " + segStart);
 			}
 			l += segStart;
-			
-			if(l < 0 ) {
+
+			if (l < 0) {
 				throw new IllegalStateException("too long id " + road.getId());
 			}
-			return l  ;
+			return l;
 		}
 
 		public int getDepth() {

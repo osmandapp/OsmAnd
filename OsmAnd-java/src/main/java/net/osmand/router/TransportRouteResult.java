@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
 
@@ -142,7 +143,7 @@ public class TransportRouteResult {
 				arriveTime = String.format("and arrive at %s", TransportRoutePlanner.formatTransportTime(aTime));
 			}
 			bld.append(String.format(Locale.US, " %d. %s [%d]: walk %.1f m to '%s' and travel %s to '%s' by %s %d stops %s\n",
-					i + 1, s.route.getRef(), s.route.getId() / 2, s.walkDist, s.getStart().getName(),
+					i + 1, s.route.getRef(), ObfConstants.getOsmIdFromBinaryMapObjectId(s.route.getId()), s.walkDist, s.getStart().getName(),
 					 time, s.getEnd().getName(),s.route.getName(),  (s.end - s.start), arriveTime));
 		}
 		bld.append(String.format(" F. Walk %.1f m to reach your destination", finishWalkDist));
