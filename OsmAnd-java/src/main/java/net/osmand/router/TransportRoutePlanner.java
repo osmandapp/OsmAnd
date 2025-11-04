@@ -42,20 +42,22 @@ public class TransportRoutePlanner {
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
 
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
-		for(TransportRouteSegment s : endStops) {
+		for (TransportRouteSegment s : endStops) {
+//			System.out.printf(" END %s %.3f - %d \n", s, s.distFromStart, s.getId()); 
 			endSegments.put(s.getId(), s);
 		}
-		if(startStops.size() == 0) {
+		if (startStops.size() == 0) {
 			LOG.info("Public transport. Start stop is empty");
 			return Collections.emptyList();
 		}
-		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(), new SegmentsComparator(ctx));
+		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(),
+				new SegmentsComparator(ctx));
 		for (TransportRouteSegment r : startStops) {
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
 			queue.add(r);
 		}
-		
+
 		double finishTime = ctx.cfg.maxRouteTime;
 		ctx.finishTimeSeconds = ctx.cfg.finishTimeSeconds;
 		if (totalDistance > ctx.cfg.maxRouteDistance && ctx.cfg.maxRouteIncreaseSpeed > 0)  {
@@ -86,8 +88,8 @@ public class TransportRoutePlanner {
 			
 			if (segment.distFromStart > finishTime + ctx.finishTimeSeconds ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
-//				break;
-				continue;
+				break;
+//				continue;
 			}
 //			long segmentId = segment.getId();
 			TransportRouteSegment finish = null;
@@ -101,7 +103,8 @@ public class TransportRoutePlanner {
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			if (ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 1209383l ||
-					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 3207891l) {
+					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 3207891l || 
+					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 15421964l) {
 				System.out.printf("-> %d (%d) %.2f\n", ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()),
 						segment.segStart, segment.distFromStart);
 				System.out.println(segment.parentRoute);
@@ -159,14 +162,14 @@ public class TransportRoutePlanner {
 							queue.add(nextSegment);
 						}
 						if (ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId()) == 3207891l) {
-							System.out.printf("? Add to queue %d (%d) -> %d (%d) %.3f\n",  
-									ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()), ind,
-									ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId()), sgm.segStart,
-									nextSegment.distFromStart);
+//							System.out.printf("? Add to queue %d (%d) -> %d (%d) %.3f\n",  
+//									ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()), ind,
+//									ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId()), sgm.segStart,
+//									nextSegment.distFromStart);
 						}
 					}
 				}
-				TransportRouteSegment finalSegment = endSegments.get(segment.getId() + ind);
+				TransportRouteSegment finalSegment = endSegments.get(segment.getId() + ind - segment.segStart);
 				double distToEnd = MapUtils.getDistance(stop.getLocation(), end);
 				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius) {
 					if (finish == null || minDist > distToEnd) {
