@@ -230,6 +230,8 @@ class ButtonPositionSize {
 		private const val MAX_STUCK_ATTEMPTS = 20
 
 		var DEBUG_PRINT: Boolean = false; // false
+		var ALTERNATIVE_ALGORITHM: Boolean = false;
+
 		const val CELL_SIZE_DP = 8
 		const val DEF_MARGIN_DP = 4
 
@@ -256,54 +258,91 @@ class ButtonPositionSize {
 			totalWidth: Int,
 			totalHeight: Int
 		): Boolean {
+			buttons.forEach { it.updateBounds(totalWidth, totalHeight) }
 			if (DEBUG_PRINT) {
-				LOG.info("---- Layout w=" + totalWidth + " h=" + totalHeight + " spc=" + space);
+				LOG.info("---- Layout w=$totalWidth h=$totalHeight spc=$space");
 				buttons.forEach {
-					it.updateBounds(totalWidth, totalHeight)
-					LOG.info("Before Button " + it + " " + it.bounds);
+					LOG.info("Before Button $it ${it.bounds}");
 				}
 			}
 			var iter = 0
 
 			var fixedPos = buttons.size - 1
-			while (fixedPos >= 0) {
-				if (iter++ > MAX_ITERATIONS) {
-					LOG.error("Relayout is broken.")
-					return false
-				}
+			// we start checking button I and check if it overlaps I+1 (move it), I+2, ...
+			// then we check button I-1 and move I, I+1, (if they overlap)
+			// So on step I all buttons [I+1, ... N] are nicely arranged without overlap
 
-				var overlap = false
-				val button = buttons[fixedPos] // Use index access
-
-				// Use 'until' for a range that doesn't include the end value
-				for (i in (fixedPos + 1) until buttons.size) {
-					val check = buttons[i]
-					if (button.overlap(check)) {
-						overlap = true
-						if (DEBUG_PRINT) {
-							LOG.info("Move " + check + " because " + button);
+			// we don't do it in forward iteration (I step all [1, .. I-1] are arranged) -
+			// WHY ? See ALTERNATIVE... Because if layout is broken, then it will do something valuable at least?
+			if (ALTERNATIVE_ALGORITHM) {
+				var i = 1;
+				while (i < buttons.size) {
+					if (iter++ > MAX_ITERATIONS) {
+						LOG.error("Relayout is broken.")
+						return false
+					}
+					var overlap = false
+					val button = buttons[i]
+					for (j in 0 until i) {
+						val check = buttons[j]
+						if (button.overlap(check)) {
+							val moved = moveButton(space, button, check)
+							if (!moved) {
+								// skip unmoveable situations
+								continue;
+							}
+							overlap = true
+							button.updateBounds(totalWidth, totalHeight)
+							if (DEBUG_PRINT) {
+								LOG.info("Move $button because $check new bounds ${button.bounds}");
+							}
 						}
-						check.updateBounds(totalWidth, totalHeight)
-						moveButton(space, check, button)
-						fixedPos = i
-						break
+					}
+					if (!overlap) {
+						i++
 					}
 				}
+			} else {
+				while (fixedPos >= 0) {
+					if (iter++ > MAX_ITERATIONS) {
+						LOG.error("Relayout is broken.")
+						return false
+					}
+					var overlap = false
+					val button = buttons[fixedPos]
+					for (i in (fixedPos + 1) until buttons.size) {
+						val check = buttons[i]
+						if (button.overlap(check)) {
+							val moved = moveButton(space, check, button)
+							if (!moved) {
+								// skip unmoveable situations
+								continue;
+							}
+							overlap = true
+							check.updateBounds(totalWidth, totalHeight)
+							if (DEBUG_PRINT) {
+								LOG.info("Move $check because $button new bounds ${check.bounds}");
+							}
+							fixedPos = i
+							break
+						}
+					}
 
-				if (!overlap) {
-					fixedPos--
+					if (!overlap) {
+						fixedPos--
+					}
 				}
 			}
 			if (DEBUG_PRINT) {
 				buttons.forEach {
-					LOG.info("After Button " + it + " " + it.bounds);
+					LOG.info("After Button $it ${it.bounds}");
 				}
-				LOG.info("++++ Layout w=" + totalWidth + " h=" + totalHeight + " spc=" + space);
+				LOG.info("++++ Layout w=$totalWidth h=$totalHeight spc=$space");
 			}
 			return true
 		}
 
-		private fun moveButton(space: Int, toMove: ButtonPositionSize, overlap: ButtonPositionSize) {
+		private fun moveButton(space: Int, toMove: ButtonPositionSize, overlap: ButtonPositionSize): Boolean {
 			var xMove = false
 			var yMove = false
 
@@ -313,8 +352,6 @@ class ButtonPositionSize {
 				} else if (overlap.posV == POS_FULL_HEIGHT) {
 					xMove = true
 				} else {
-					// This logic is simpler than the original
-					// if (toMove.xMove) { xMove = toMove.xMove } is just xMove = toMove.xMove
 					xMove = toMove.xMove
 					yMove = toMove.yMove
 				}
@@ -330,6 +367,7 @@ class ButtonPositionSize {
 			if (yMove) {
 				toMove.marginY = space + overlap.marginY + overlap.height
 			}
+			return xMove || yMove;
 		}
 	}
 }

@@ -8,14 +8,19 @@ class ButtonPositionSizeTest {
 	@Test
 	fun testLayout1() {
 		ButtonPositionSize.DEBUG_PRINT = true;
+//		ButtonPositionSize.ALTERNATIVE_ALGORITHM = true;
 		val buttons = listOf(
 			ButtonPositionSize("map.view.zoom_out", 7, false, false),
 			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveVertical(),
-			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal()
+			ButtonPositionSize("map.view.zoom_id2", 7, false, false).setMoveVertical(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal(),
+			ButtonPositionSize("map.view.zoom_id3", 7, false, false).setMoveVertical(),
 		)
 		ButtonPositionSize.computeNonOverlap(1, buttons, 40, 40);
 		assertTrue { check(buttons, "map.view.zoom_out", 33.0, 33.0) }
 		assertTrue { check(buttons, "map.view.zoom_id", 33.0, 25.0) }
+		assertTrue { check(buttons, "map.view.zoom_id2", 33.0, 17.0) }
+		assertTrue { check(buttons, "map.view.zoom_id3", 33.0, 9.0) }
 		assertTrue { check(buttons, "map.view.back_to_loc", 25.0, 33.0) }
 
 	}
@@ -23,6 +28,7 @@ class ButtonPositionSizeTest {
 	@Test
 	fun testLayout2() {
 		ButtonPositionSize.DEBUG_PRINT = true;
+//		ButtonPositionSize.ALTERNATIVE_ALGORITHM = true;
 		val buttons = listOf(
 			ButtonPositionSize("map_right_widgets_panel", 12, false, true).
 				setSize(12, 4),
