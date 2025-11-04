@@ -47,9 +47,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String AISTRACKER_SIMULATION = "aistracker_simulation";
-	private static final String EFFICIENT_GRID = "efficient_grid";
-	private static final String SLOTS = "slots";
-	private static final String BUTTON_FRAMES = "button_frames";
+	private static final String GRID_LAYOUT_DRAW_CELLS = "grid_layout_draw_cells";
+	private static final String GRID_LAYOUT_DRAW_SLOTS = "grid_layout_draw_slots";
+	private static final String GRID_LAYOUT_DRAW_BUTTON_FRAMES = "grid_layout_draw_button_frames";
 
 	private static final int OPEN_AIS_FILE_REQUEST = 1001;
 
@@ -269,13 +269,13 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	private void setupGridPrefs() {
 		Preference category = findPreference("visualizing_button_grid");
-		SwitchPreferenceCompat efficientGridPref = findPreference(EFFICIENT_GRID);
-		SwitchPreferenceCompat slotsPref = findPreference(SLOTS);
-		SwitchPreferenceCompat buttonFramesPref = findPreference(BUTTON_FRAMES);
+		SwitchPreferenceCompat efficientGridPref = findPreference(GRID_LAYOUT_DRAW_CELLS);
+		SwitchPreferenceCompat slotsPref = findPreference(GRID_LAYOUT_DRAW_SLOTS);
+		SwitchPreferenceCompat buttonFramesPref = findPreference(GRID_LAYOUT_DRAW_BUTTON_FRAMES);
 
-		efficientGridPref.setChecked(OsmandSettings.DRAW_EFFECTIVE_GRID);
-		slotsPref.setChecked(OsmandSettings.DRAW_SLOTS);
-		buttonFramesPref.setChecked(OsmandSettings.DRAW_FRAMES);
+		efficientGridPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS);
+		slotsPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS);
+		buttonFramesPref.setChecked(OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES);
 
 		category.setIconSpaceReserved(false);
 		efficientGridPref.setIconSpaceReserved(false);
@@ -471,16 +471,16 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			restartActivity();
 			return true;
-		} else if (EFFICIENT_GRID.equals(prefId)) {
-			OsmandSettings.DRAW_EFFECTIVE_GRID = !OsmandSettings.DRAW_EFFECTIVE_GRID;
+		} else if (GRID_LAYOUT_DRAW_CELLS.equals(prefId)) {
+			OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;
 			app.getOsmandMap().getMapView().refreshMap();
 			return true;
-		} else if (SLOTS.equals(prefId)) {
-			OsmandSettings.DRAW_SLOTS = !OsmandSettings.DRAW_SLOTS;
+		} else if (GRID_LAYOUT_DRAW_SLOTS.equals(prefId)) {
+			OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_SLOTS;
 			app.getOsmandMap().getMapView().refreshMap();
 			return true;
-		} else if (BUTTON_FRAMES.equals(prefId)) {
-			OsmandSettings.DRAW_FRAMES = !OsmandSettings.DRAW_FRAMES;
+		} else if (GRID_LAYOUT_DRAW_BUTTON_FRAMES.equals(prefId)) {
+			OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES;
 			app.getOsmandMap().getMapView().refreshMap();
 			return true;
 		}
