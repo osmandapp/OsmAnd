@@ -147,6 +147,7 @@ public class OsmandApplication extends MultiDexApplication {
 	NavigationService navigationService;
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
+	OsmAndDiagnosticThread diagnosticThread;
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
@@ -273,6 +274,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
+		diagnosticThread = new OsmAndDiagnosticThread(this);
+		diagnosticThread.start();
+
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
