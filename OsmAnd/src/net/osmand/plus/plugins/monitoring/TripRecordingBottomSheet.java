@@ -40,6 +40,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.charts.ChartModeBottomSheet;
@@ -83,7 +84,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
+public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
 
 	public static final String TAG = TripRecordingBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomSheet.class);

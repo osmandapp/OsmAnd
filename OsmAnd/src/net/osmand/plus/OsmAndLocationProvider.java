@@ -24,6 +24,9 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -61,6 +64,8 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OsmAndLocationProvider implements SensorEventListener {
@@ -126,6 +131,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private int previousCompassIndA;
 	private int previousCompassIndB;
 	private boolean inUpdateValue;
+	private final ExecutorService sensorExecutor = Executors.newSingleThreadExecutor();
+	private final Handler mainHandler = new Handler(Looper.getMainLooper());
+	private long lastSensorUpdateTime = 0;
 
 	private Float heading;
 
@@ -369,64 +377,76 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		// Attention : sensor produces a lot of events & can hang the system
-		if (inUpdateValue) {
+		// Throttle updates to avoid overloading
+		long now = SystemClock.elapsedRealtime();
+		if (now - lastSensorUpdateTime < 50) {
 			return;
 		}
-		synchronized (this) {
-			if (!sensorRegistered) {
-				return;
-			}
-			inUpdateValue = true;
-			try {
-				float val = 0;
-				switch (event.sensor.getType()) {
-					case Sensor.TYPE_ACCELEROMETER:
-						System.arraycopy(event.values, 0, mGravs, 0, 3);
-						break;
-					case Sensor.TYPE_MAGNETIC_FIELD:
-						System.arraycopy(event.values, 0, mGeoMags, 0, 3);
-						break;
-					case Sensor.TYPE_ORIENTATION:
-					case Sensor.TYPE_ROTATION_VECTOR:
-						val = event.values[0];
-						break;
-					default:
-						return;
-				}
-				OsmandSettings settings = app.getSettings();
-				if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER || event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
-					boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
-					if (!success) {
-						return;
-					}
-					float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
-					val = (float) Math.toDegrees(orientation[0]);
-				} else if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
-					SensorManager.getRotationMatrixFromVector(mRotationM, event.values);
-					float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
-					val = (float) Math.toDegrees(orientation[0]);
-				}
-				val = calcScreenOrientationCorrection(val);
-				val = calcGeoMagneticCorrection(val);
+		lastSensorUpdateTime = now;
 
-				float valRad = (float) (val / 180f * Math.PI);
-				lastValSin = (float) Math.sin(valRad);
-				lastValCos = (float) Math.cos(valRad);
-				// lastHeadingCalcTime = System.currentTimeMillis();
-				boolean filter = settings.USE_KALMAN_FILTER_FOR_COMPASS.get();
-				if (filter) {
-					filterCompassValue();
-				} else {
-					avgValSin = lastValSin;
-					avgValCos = lastValCos;
-				}
+		// Quickly copy data off the main thread
+		final int type = event.sensor.getType();
+		final float[] values = event.values.clone();
 
-				heading = getAngle(avgValSin, avgValCos);
-				updateCompassVal();
-			} finally {
-				inUpdateValue = false;
+		// Offload processing to a background thread
+		sensorExecutor.execute(() -> processSensorEvent(type, values));
+	}
+
+	private synchronized void processSensorEvent(int sensorType, float[] values) {
+
+		// Attention : sensor produces a lot of events & can hang the system
+		if (inUpdateValue || !sensorRegistered) {
+			return;
+		}
+		inUpdateValue = true;
+		try {
+			float val = 0;
+			switch (sensorType) {
+				case Sensor.TYPE_ACCELEROMETER:
+					System.arraycopy(values, 0, mGravs, 0, 3);
+					break;
+				case Sensor.TYPE_MAGNETIC_FIELD:
+					System.arraycopy(values, 0, mGeoMags, 0, 3);
+					break;
+				case Sensor.TYPE_ORIENTATION:
+				case Sensor.TYPE_ROTATION_VECTOR:
+					val = values[0];
+					break;
+				default:
+					return;
 			}
+			OsmandSettings settings = app.getSettings();
+			if (sensorType == Sensor.TYPE_ACCELEROMETER || sensorType == Sensor.TYPE_MAGNETIC_FIELD) {
+				boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
+				if (!success) {
+					return;
+				}
+				float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
+				val = (float) Math.toDegrees(orientation[0]);
+			} else if (sensorType == Sensor.TYPE_ROTATION_VECTOR) {
+				SensorManager.getRotationMatrixFromVector(mRotationM, values);
+				float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
+				val = (float) Math.toDegrees(orientation[0]);
+			}
+			val = calcScreenOrientationCorrection(val);
+			val = calcGeoMagneticCorrection(val);
+
+			float valRad = (float) (val / 180f * Math.PI);
+			lastValSin = (float) Math.sin(valRad);
+			lastValCos = (float) Math.cos(valRad);
+			boolean filter = settings.USE_KALMAN_FILTER_FOR_COMPASS.get();
+			if (filter) {
+				filterCompassValue();
+			} else {
+				avgValSin = lastValSin;
+				avgValCos = lastValCos;
+			}
+
+			heading = getAngle(avgValSin, avgValCos);
+			// Post UI updates safely
+			mainHandler.post(this::updateCompassVal);
+		} finally {
+			inUpdateValue = false;
 		}
 	}
 
@@ -478,11 +498,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void updateCompassVal() {
-		for (OsmAndCompassListener c : compassListeners) {
-			c.updateCompassValue(heading);
+		Float heading = getHeading();
+		if (heading != null) {
+			for (OsmAndCompassListener c : compassListeners) {
+				c.updateCompassValue(heading);
+			}
 		}
 	}
 
+	@Nullable
 	public Float getHeading() {
 		return heading;
 	}

@@ -190,6 +190,16 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
+	@NonNull
+	public List<SelectedGpxFile> getSelectedFilesByDir(@NonNull String dirPath) {
+		List<SelectedGpxFile> list = new ArrayList<>();
+		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+			if (selectedGpxFile.getGpxFile().getPath().startsWith(dirPath)) {
+				list.add(selectedGpxFile);
+			}
+		}
+		return list;
+	}
 
 	/**
 	 * @deprecated Use the {@link #getSelectedFileByPath(String filePath)} method.

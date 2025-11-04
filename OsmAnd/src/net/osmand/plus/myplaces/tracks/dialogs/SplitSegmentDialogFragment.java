@@ -33,7 +33,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentsAdapter.SplitAdapterListener;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.track.GpxSplitParams;
+import net.osmand.plus.track.helpers.GpxDisplayHelper.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;

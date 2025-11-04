@@ -49,10 +49,12 @@ public enum GpxSplitType {
 	}
 
 	@NonNull
-	public static GpxSplitType getSplitTypeByTypeId(int typeId) {
-		for (GpxSplitType splitType : values()) {
-			if (splitType.type == typeId) {
-				return splitType;
+	public static GpxSplitType getSplitTypeByTypeId(@Nullable Integer typeId) {
+		if (typeId != null) {
+			for (GpxSplitType splitType : values()) {
+				if (splitType.type == typeId) {
+					return splitType;
+				}
 			}
 		}
 		return NO_SPLIT;
