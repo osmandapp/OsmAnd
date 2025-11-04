@@ -176,8 +176,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 							null,
 							QuickSearchDialogFragment.QuickSearchType.REGULAR,
 							QuickSearchDialogFragment.QuickSearchTab.CATEGORIES,
-							null
-					);
+							null);
 				}
 				break;
 			case MAP_SOURCES:
