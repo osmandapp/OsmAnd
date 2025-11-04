@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmAndTaskManager;
@@ -25,6 +26,7 @@ import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
@@ -45,6 +47,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String AISTRACKER_SIMULATION = "aistracker_simulation";
+	private static final String EFFICIENT_GRID = "efficient_grid";
+	private static final String SLOTS = "slots";
+	private static final String BUTTON_FRAMES = "button_frames";
 
 	private static final int OPEN_AIS_FILE_REQUEST = 1001;
 
@@ -94,6 +99,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupMapRenderingPrefs();
 		setupAisTrackerPrefs();
+		setupGridPrefs();
 
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
@@ -259,6 +265,22 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		category.setIconSpaceReserved(false);
 		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupGridPrefs() {
+		Preference category = findPreference("visualizing_button_grid");
+		SwitchPreferenceCompat efficientGridPref = findPreference(EFFICIENT_GRID);
+		SwitchPreferenceCompat slotsPref = findPreference(SLOTS);
+		SwitchPreferenceCompat buttonFramesPref = findPreference(BUTTON_FRAMES);
+
+		efficientGridPref.setChecked(OsmandSettings.DRAW_EFFECTIVE_GRID);
+		slotsPref.setChecked(OsmandSettings.DRAW_SLOTS);
+		buttonFramesPref.setChecked(OsmandSettings.DRAW_FRAMES);
+
+		category.setIconSpaceReserved(false);
+		efficientGridPref.setIconSpaceReserved(false);
+		slotsPref.setIconSpaceReserved(false);
+		buttonFramesPref.setIconSpaceReserved(false);
 	}
 
 	private void setupGlobalAppAllocatedMemoryPref() {
@@ -448,6 +470,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			return true;
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			restartActivity();
+			return true;
+		} else if (EFFICIENT_GRID.equals(prefId)) {
+			OsmandSettings.DRAW_EFFECTIVE_GRID = !OsmandSettings.DRAW_EFFECTIVE_GRID;
+			app.getOsmandMap().getMapView().refreshMap();
+			return true;
+		} else if (SLOTS.equals(prefId)) {
+			OsmandSettings.DRAW_SLOTS = !OsmandSettings.DRAW_SLOTS;
+			app.getOsmandMap().getMapView().refreshMap();
+			return true;
+		} else if (BUTTON_FRAMES.equals(prefId)) {
+			OsmandSettings.DRAW_FRAMES = !OsmandSettings.DRAW_FRAMES;
+			app.getOsmandMap().getMapView().refreshMap();
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);
