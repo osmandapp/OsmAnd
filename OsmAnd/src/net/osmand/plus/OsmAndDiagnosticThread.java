@@ -2,16 +2,22 @@ package net.osmand.plus;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import org.apache.commons.logging.Log;
+
 public class OsmAndDiagnosticThread extends Thread {
+
+	private static final Log LOG = PlatformUtil.getLog(OsmAndDiagnosticThread.class);
 
 	private static final long POLL_INTERVAL_MS = 500L;
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
+	private long lastDiagnosticThreadFailedTime = 0;
+	private long lastCallChainBuiltTime = 0;
 
 	@FunctionalInterface
 	private interface ChainedAction {
@@ -21,14 +27,21 @@ public class OsmAndDiagnosticThread extends Thread {
 	public OsmAndDiagnosticThread(@NonNull OsmandApplication app) {
 		super("OsmAndDiagnosticThread");
 		this.app = app;
-		this.settings = app.getSettings();
 	}
 
 	@Override
 	public void run() {
+		LOG.info("Diagnostic thread started. Building call chain...");
 		while (!isInterrupted()) {
+			long time = System.currentTimeMillis();
 			try {
+				OsmandSettings settings = app.getSettings();
 				ChainedAction callChain = this::awaitNextCheck;
+				if (settings == null) {
+					LOG.info("Call chain empty. Skipping...");
+					callChain.run();
+					continue;
+				}
 				if (app.useOpenGlRenderer()) {
 					if (app.getOsmandMap().getMapView().is3DMode()) {
 						final ChainedAction previousChain = callChain;
@@ -54,9 +67,19 @@ public class OsmAndDiagnosticThread extends Thread {
 					final ChainedAction previousChain = callChain;
 					callChain = () -> feature_RenderingV1_ON(previousChain);
 				}
+				if (time - lastCallChainBuiltTime > 1000L * 60L) {
+					LOG.info("Call chain built. Running...");
+					lastCallChainBuiltTime = time;
+				}
 				callChain.run();
 			} catch (InterruptedException e) {
+				LOG.info("Diagnostic thread interrupted.");
 				break;
+			} catch (Exception e) {
+				if (time - lastDiagnosticThreadFailedTime > 1000L * 60L) {
+					LOG.error("Diagnostic thread failed.", e);
+					lastDiagnosticThreadFailedTime = time;
+				}
 			}
 		}
 	}

@@ -242,11 +242,13 @@ public class OsmandApplication extends MultiDexApplication {
 			@Override
 			public void onStart(@NonNull LifecycleOwner owner) {
 				appInForeground = true;
+				startDiagnostics();
 			}
 
 			@Override
 			public void onStop(@NonNull LifecycleOwner owner) {
 				appInForeground = false;
+				stopDiagnostics();
 			}
 		};
 		ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
@@ -274,9 +276,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
-		diagnosticThread = new OsmAndDiagnosticThread(this);
-		diagnosticThread.start();
-
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
@@ -303,6 +302,23 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean isExternalStorageDirectoryReadOnly() {
 		return externalStorageDirectoryReadOnly;
+	}
+
+	private synchronized void startDiagnostics() {
+		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
+		if (diagnosticThread == null || !diagnosticThread.isAlive()) {
+			diagnosticThread = new OsmAndDiagnosticThread(this);
+			diagnosticThread.start();
+			this.diagnosticThread = diagnosticThread;
+		}
+	}
+
+	private synchronized void stopDiagnostics() {
+		OsmAndDiagnosticThread diagnosticThread = this.diagnosticThread;
+		this.diagnosticThread = null;
+		if (diagnosticThread != null) {
+			diagnosticThread.interrupt();
+		}
 	}
 
 	@Override
