@@ -379,10 +379,6 @@ class ButtonPositionSize {
 			var ok = false;
 			while (!ok && xMove && toMove.marginX <= totalWidth - toMove.width) {
 				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 1, 0)) {
-					if (moveAndCheck(toMove, overlap, totalWidth, totalHeight, space, 0)) {
-						// move back not enough space for space
-						moveAndCheck(toMove, overlap, totalWidth, totalHeight, -space, 0);
-					}
 					ok = true;
 				}
 			}
@@ -392,10 +388,6 @@ class ButtonPositionSize {
 			}
 			while (!ok && yMove && toMove.marginY <= totalHeight - toMove.height) {
 				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, 1)) {
-					if (moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, space)) {
-						// move back not enough space for space
-						moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, -space);
-					}
 					ok = true;
 				}
 			}
