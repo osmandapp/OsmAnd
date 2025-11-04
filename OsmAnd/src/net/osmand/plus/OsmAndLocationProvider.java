@@ -498,11 +498,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void updateCompassVal() {
-		for (OsmAndCompassListener c : compassListeners) {
-			c.updateCompassValue(heading);
+		Float heading = getHeading();
+		if (heading != null) {
+			for (OsmAndCompassListener c : compassListeners) {
+				c.updateCompassValue(heading);
+			}
 		}
 	}
 
+	@Nullable
 	public Float getHeading() {
 		return heading;
 	}
