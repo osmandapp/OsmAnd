@@ -15,7 +15,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -135,7 +134,7 @@ public class GpxDisplayHelper {
 			item.name = point.getName();
 			i++;
 			if (Algorithms.isEmpty(item.name)) {
-				item.name = getString(R.string.gpx_selection_point, String.valueOf(i));
+				item.name = app.getString(R.string.gpx_selection_point, String.valueOf(i));
 			}
 			item.locationStart = point;
 			item.locationEnd = point;
@@ -148,7 +147,7 @@ public class GpxDisplayHelper {
 	public GpxDisplayGroup buildPointsDisplayGroup(@NonNull GpxFile gpxFile, @NonNull List<WptPt> points, @NonNull String name) {
 		GpxDisplayGroup group = new PointsDisplayGroup(gpxFile);
 		group.applyName(app, name);
-		group.setDescription(getString(R.string.gpx_selection_number_of_points, String.valueOf(gpxFile.getPointsSize())));
+		group.setDescription(app.getString(R.string.gpx_selection_number_of_points, String.valueOf(gpxFile.getPointsSize())));
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 		int k = 0;
 		for (WptPt wptPt : points) {
@@ -158,7 +157,7 @@ public class GpxDisplayHelper {
 			item.name = wptPt.getName();
 			k++;
 			if (Algorithms.isEmpty(item.name)) {
-				item.name = getString(R.string.gpx_selection_point, String.valueOf(k));
+				item.name = app.getString(R.string.gpx_selection_point, String.valueOf(k));
 			}
 			item.expanded = true;
 			item.locationStart = wptPt;
@@ -364,7 +363,5 @@ public class GpxDisplayHelper {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
 	}
 
-	private String getString(int resId, Object... formatArgs) {
-		return app.getString(resId, formatArgs);
-	}
+	public record GpxSplitParams(GpxSplitType splitType, double splitInterval, boolean joinSegments) {}
 }
