@@ -34,6 +34,7 @@ public class PreferencesDatabaseFactory {
 																						final Configuration actualConfiguration,
 																						final FragmentActivity activityContext) {
 										// FK-TODO: implement by computing graph for actualConfiguration, d.h. actualConfiguration.enabledPlugins haben Preferences, die zum graph dazugefügt oder aus dem graph entfernt werden müssen.
+										// siehe SettingsSearch: SearchDatabaseRootedAtPrefsFragmentFirstAdapter
 										return graph;
 									}
 								})),
