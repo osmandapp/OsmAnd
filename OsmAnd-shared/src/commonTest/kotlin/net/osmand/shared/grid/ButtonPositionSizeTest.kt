@@ -10,6 +10,9 @@ import kotlin.test.assertTrue
 
 class ButtonPositionSizeTest {
 
+	private fun check(buttons: List<ButtonPositionSize>, id: String, x: Double, y: Double): Boolean {
+		return buttons.any { it.id == id && it.bounds.left == x && it.bounds.top == y }
+	}
 
 	@Test
 	fun testLayout0() {
@@ -54,7 +57,9 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal(),
 			ButtonPositionSize("map.view.zoom_id3", 7, false, false).setMoveVertical(),
 		)
-		ButtonPositionSize.computeNonOverlap(1, buttons, 40, 40);
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 40, 40)
+		assertTrue(computed)
+
 		assertTrue { check(buttons, "map.view.zoom_out", 33.0, 33.0) }
 		assertTrue { check(buttons, "map.view.zoom_id", 33.0, 25.0) }
 		assertTrue { check(buttons, "map.view.zoom_id2", 33.0, 17.0) }
@@ -80,7 +85,9 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveVertical(),
 			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal()
 		)
-		ButtonPositionSize.computeNonOverlap(1, buttons, 114, 45);
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 114, 45)
+		assertTrue(computed)
+
 		assertTrue { check(buttons, "map.view.zoom_out", 107.0, 38.0) }
 		assertTrue { check(buttons, "map.view.zoom_id", 107.0, 30.0) }
 		assertTrue { check(buttons, "map.view.back_to_loc", 99.0, 38.0) }
@@ -132,15 +139,11 @@ class ButtonPositionSizeTest {
 				posV = POS_BOTTOM
 			})
 
-		ButtonPositionSize.computeNonOverlap(1, buttons, 51, 100)
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 100)
+		assertTrue(computed)
 
 		assertTrue { !check(buttons, "map.view.zoom_id", 44.0, 1.0) } // buttons should not be moved above top_widgets_panel
 		assertTrue { !check(buttons, "map.view.zoom_out", 44.0, 1.0) }
 		assertTrue { !check(buttons, "map.view.back_to_loc", 36.0, 1.0) }
 	}
-
-	private fun check(buttons: List<ButtonPositionSize>, id: String, x: Double, y: Double): Boolean {
-		return buttons.any { it.id == id && it.bounds.left == x && it.bounds.top == y }
-	}
-
 }
