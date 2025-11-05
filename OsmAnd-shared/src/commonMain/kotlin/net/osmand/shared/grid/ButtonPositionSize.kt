@@ -236,9 +236,9 @@ class ButtonPositionSize {
 		private const val MAX_ITERATIONS = 1000
 		private const val MAX_STUCK_ATTEMPTS = 20
 
-		var DEBUG_PRINT: Boolean = false; // false
-		var DEBUG_PRINT_MOVE: Boolean = false; // false
-		var ALTERNATIVE_ALGORITHM: Boolean = true;
+		var DEBUG_PRINT: Boolean = true; // false
+		var DEBUG_PRINT_MOVE: Boolean = true; // false
+		var SIMPLIFIED_ALGORITHM: Boolean = true; // original algorithm is more complex but produces different result with broken layout
 
 		const val CELL_SIZE_DP = 8
 		const val DEF_MARGIN_DP = 4
@@ -266,7 +266,9 @@ class ButtonPositionSize {
 			totalWidth: Int,
 			totalHeight: Int
 		): Boolean {
-			buttons.forEach { it.updateBounds(totalWidth, totalHeight) }
+			buttons.forEach {
+				it.updateBounds(totalWidth, totalHeight);
+			}
 			if (DEBUG_PRINT) {
 				LOG.info("---- Layout w=$totalWidth h=$totalHeight spc=$space");
 				buttons.forEach {
@@ -276,36 +278,47 @@ class ButtonPositionSize {
 			var iter = 0
 
 			var fixedPos = buttons.size - 1
-			// we start checking button I and check if it overlaps I+1 (move it), I+2, ...
-			// then we check button I-1 and move I, I+1, (if they overlap)
-			// So on step I all buttons [I+1, ... N] are nicely arranged without overlap
-
-			// we don't do it in forward iteration (I step all [1, .. I-1] are arranged) -
-			// WHY ? See ALTERNATIVE... Because if layout is broken, then it will do something valuable at least?
-			if (ALTERNATIVE_ALGORITHM) {
+			// we tdo it in forward iteration (I step all [1, .. I-1] are arranged)
+			// not(SIMPLIFIED_ALGORITHM) is original algorithm it's more complex but produces different result with broken layout
+			if (SIMPLIFIED_ALGORITHM) {
 				var i = 1;
 				while (i < buttons.size) {
 					if (iter++ > MAX_ITERATIONS) {
 						LOG.error("Relayout is broken.")
 						return false
 					}
-					var overlap = false
+					var movedOnce = false;
+					var failMove = false;
 					val button = buttons[i]
-					for (j in 0 until i) {
+					var ox = button.marginX;
+					var oy = button.marginY;
+					for (j in i - 1 downTo 0) {
 						val check = buttons[j]
 						if (button.overlap(check)) {
 							val moved = moveButton(space, button, check, totalWidth, totalHeight)
 							if (!moved) {
-								// skip unmoveable situations
-								continue;
+								failMove = true;
+								break;
 							}
-							overlap = true
+							if (check.xMove || check.yMove) {
+								// if overlapped button / panel moveable save it
+								// do not overlap buttons but allow to overlap buttons over pannels
+								ox = button.marginX;
+								oy = button.marginY;
+
+							}
+							movedOnce = true
 							if (DEBUG_PRINT_MOVE) {
 								LOG.info("Move $button because $check new bounds ${button.bounds}");
 							}
 						}
 					}
-					if (!overlap) {
+					if (failMove) {
+						button.marginX = ox;
+						button.marginY = oy;
+						button.updateBounds(totalWidth, totalHeight);
+						i++
+					} else if (!movedOnce) {
 						i++
 					}
 				}
