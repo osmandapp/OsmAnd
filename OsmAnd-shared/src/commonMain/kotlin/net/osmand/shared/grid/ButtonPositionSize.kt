@@ -183,9 +183,17 @@ class ButtonPositionSize {
 		}
 		val xMoveIndicator = if (xMove) "+" else " "
 		val yMoveIndicator = if (yMove) "+" else " "
+
+		val moveDescendantsStr = when (moveDescendants) {
+			MOVE_DESCENDANTS_VERTICAL -> "vertical"
+			MOVE_DESCENDANTS_HORIZONTAL -> "horizontal"
+			else -> "any"
+		}
+
 		val paddedWidth = width.toString().padStart(2)
 		val paddedHeight = height.toString().padStart(2)
-		return "Pos ${id.padStart(10)} x=($posHStr->${marginX}$xMoveIndicator), y=($posVStr->${marginY}$yMoveIndicator), w=$paddedWidth, h=$paddedHeight"
+
+		return "Pos ${id.padStart(10)} x=($posHStr->${marginX}$xMoveIndicator), y=($posVStr->${marginY}$yMoveIndicator), w=$paddedWidth, h=$paddedHeight, move=$moveDescendantsStr"
 	}
 
 	fun overlap(position: ButtonPositionSize): Boolean {
