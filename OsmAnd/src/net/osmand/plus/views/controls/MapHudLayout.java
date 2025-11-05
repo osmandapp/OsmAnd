@@ -87,7 +87,6 @@ public class MapHudLayout extends FrameLayout {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
 		this.panelsMargin = AndroidUtils.dpToPx(context, 16);
-		this.statusBarHeight = AndroidUtils.getStatusBarHeight(context);
 		this.tablet = AndroidUiHelper.isTablet(context);
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
 	}
