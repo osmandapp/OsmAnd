@@ -13,6 +13,7 @@ public class TransportRouteResult {
 	double finishWalkDist;
 	double routeTime;
 	private final TransportRoutingConfiguration cfg;
+	List<TransportRouteResult> alternativeRoutes = new ArrayList<TransportRouteResult>();
 
 	public TransportRouteResult(TransportRoutingContext ctx) {
 		cfg = ctx.cfg;
@@ -24,6 +25,10 @@ public class TransportRouteResult {
 
 	public List<TransportRoutePlanner.TransportRouteResultSegment> getSegments() {
 		return segments;
+	}
+	
+	public List<TransportRouteResult> getAlternativeRoutes() {
+		return alternativeRoutes;
 	}
 
 	public void setFinishWalkDist(double finishWalkDist) {
