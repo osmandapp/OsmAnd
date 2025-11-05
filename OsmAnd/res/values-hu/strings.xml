@@ -2244,7 +2244,7 @@
     <string name="descendingly">Z–A</string>
     <string name="ascendingly">A–Z</string>
     <string name="date_added">Hozzáadva</string>
-    <string name="order_by">Rendezés alapja:</string>
+    <string name="order_by">Rendezési sorrend:</string>
     <string name="marker_show_distance_descr">Válassza ki, hogyan jelenjék meg a térképen a térképjelölők távolsága és iránya:</string>
     <string name="all_markers_moved_to_history">Minden térképjelölő áthelyezve az előzményekbe</string>
     <string name="marker_moved_to_history">Térképjelölő áthelyezve az előzményekhez</string>
@@ -2257,7 +2257,7 @@
     <string name="last_seven_days">Elmúlt 7 nap</string>
     <string name="this_year">Idén</string>
     <string name="show_direction">Távolság jelzése</string>
-    <string name="sort_by">Rendezés eszerint:</string>
+    <string name="sort_by">Rendezési szempont:</string>
     <string name="do_not_use_animations">Animációk eltávolítása</string>
     <string name="do_not_use_animations_descr">Térkép- és alkalmazásanimációk kikapcsolása.</string>
     <string name="keep_showing_on_map">Továbbra is mutassa a térképen</string>
