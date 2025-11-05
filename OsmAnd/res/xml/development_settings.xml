@@ -206,7 +206,7 @@
 		android:title="@string/visualizing_button_grid" />
 
 	<SwitchPreferenceCompat
-		android:key="efficient_grid"
+		android:key="grid_layout_draw_cells"
 		android:layout="@layout/preference_switch"
 		android:persistent="false"
 		android:summaryOff="@string/shared_string_disabled"
@@ -214,7 +214,7 @@
 		android:title="@string/efficient_grid" />
 
 	<SwitchPreferenceCompat
-		android:key="slots"
+		android:key="grid_layout_draw_slots"
 		android:layout="@layout/preference_switch"
 		android:persistent="false"
 		android:summaryOff="@string/shared_string_disabled"
@@ -222,7 +222,7 @@
 		android:title="@string/slots" />
 
 	<SwitchPreferenceCompat
-		android:key="button_frames"
+		android:key="grid_layout_draw_button_frames"
 		android:layout="@layout/preference_switch"
 		android:persistent="false"
 		android:summaryOff="@string/shared_string_disabled"
