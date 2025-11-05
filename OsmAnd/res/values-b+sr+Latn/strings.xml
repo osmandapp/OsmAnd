@@ -5877,4 +5877,8 @@
     <string name="wind_animation_layer">Sloj animacije vetra</string>
     <string name="weather_layers">Vremenski slojevi</string>
     <string name="lang_crh">Krimski tatarski (latinica)</string>
+    <string name="efficient_grid">Efikasna mreža</string>
+    <string name="slots">Slotovi</string>
+    <string name="button_frames">Okviri dugmeta</string>
+    <string name="visualizing_button_grid">Dugme za mrežu</string>
 </resources>
