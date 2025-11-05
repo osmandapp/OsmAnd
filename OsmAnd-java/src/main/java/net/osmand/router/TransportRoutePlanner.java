@@ -33,6 +33,8 @@ public class TransportRoutePlanner {
 	private static final int MIN_DIST_STOP_TO_GEOMETRY = 150;
 	public static final long GEOMETRY_WAY_ID = -1;
 	public static final long STOPS_WAY_ID = -2;
+	private static final double DIST_STOPS_FOR_ALT_ROUTES = 80;
+	private static final double SUM_DIST_STOPS_FOR_ALT_ROUTES = 300;
 	private final static Log LOG = PlatformUtil.getLog(TransportRoutePlanner.class);
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
@@ -248,7 +250,7 @@ public class TransportRoutePlanner {
 				ctx.visitedRoutesCount, ctx.visitedStops, 
 				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000),
 				ctx.loadedWays, ctx.wrongLoadedWays));
-		for(TransportRouteSegment res : results) {
+		for (TransportRouteSegment res : results) {
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
 			}
@@ -280,12 +282,12 @@ public class TransportRoutePlanner {
 				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 					return null;
 				}
-				if (includeRoute(s, route)) {
+				if (excludeRoute(s, route)) {
 					exclude = true;
 					break;
 				}
 			}
-			if(!exclude) {
+			if (!exclude) {
 				lst.add(route);
 				System.out.println(route.toString());
 			} else {
@@ -295,27 +297,62 @@ public class TransportRoutePlanner {
 		return lst;
 	}
 
-	private boolean includeRoute(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
-		if(testRoute.segments.size() < fastRoute.segments.size()) {
+	private boolean excludeRoute(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
+		if (sameRouteWithExtraSegments(fastRoute, testRoute)) {
+			return true;
+		}
+		for (TransportRouteResult alt : fastRoute.getAlternativeRoutes()) {
+			if (sameRouteWithExtraSegments(alt, testRoute)) {
+				return true;
+			}
+		}
+		if (testRoute.segments.size() == fastRoute.segments.size()) {
+			boolean alternativeRoute = true;
+			double sumDiffs = 0; 
+			for (int i = 0; i < fastRoute.segments.size(); i++) {
+				TransportRouteResultSegment seg1 = fastRoute.segments.get(i);
+				TransportRouteResultSegment seg2 = testRoute.segments.get(i);
+				double startDiff = MapUtils.getDistance(seg1.getStart().getLocation(), seg2.getStart().getLocation());
+				double endDiff = MapUtils.getDistance(seg1.getEnd().getLocation(), seg2.getEnd().getLocation());
+//				if (seg1.getStart().getId().longValue() != seg2.getStart().getId().longValue()
+//						|| seg1.getEnd().getId().longValue() == seg2.getEnd().getId().longValue()) {
+				sumDiffs += startDiff;
+				sumDiffs += endDiff;
+				if (startDiff > DIST_STOPS_FOR_ALT_ROUTES || endDiff > DIST_STOPS_FOR_ALT_ROUTES) {
+					alternativeRoute = false;
+					break;
+				}
+			}
+			if (alternativeRoute && sumDiffs < SUM_DIST_STOPS_FOR_ALT_ROUTES) {
+				fastRoute.alternativeRoutes.add(testRoute);
+			}
+			return alternativeRoute;
+		}
+		return false;
+	}
+
+	private boolean sameRouteWithExtraSegments(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
+		if (testRoute.segments.size() < fastRoute.segments.size()) {
 			return false;
 		}
 		int j = 0;
-		for(int i = 0; i < fastRoute.segments.size(); i++, j++) {
+		boolean sameRouteWithExtraSegments = true;
+		for (int i = 0; i < fastRoute.segments.size(); i++, j++) {
 			TransportRouteResultSegment fs = fastRoute.segments.get(i);
-			while(j < testRoute.segments.size()) {
+			while (j < testRoute.segments.size()) {
 				TransportRouteResultSegment ts = testRoute.segments.get(j);
-				if(fs.route.getId().longValue() != ts.route.getId().longValue()) {
-					j++;	
+				if (fs.route.getId().longValue() != ts.route.getId().longValue()) {
+					j++;
 				} else {
 					break;
 				}
 			}
-			if(j >= testRoute.segments.size()) {
-				return false;
+			if (j >= testRoute.segments.size()) {
+				sameRouteWithExtraSegments = false;
+				break;
 			}
 		}
-		
-		return true;
+		return sameRouteWithExtraSegments;
 	}
 
 	private static class SegmentsComparator implements Comparator<TransportRouteSegment> {
