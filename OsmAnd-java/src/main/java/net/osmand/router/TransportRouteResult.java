@@ -14,6 +14,7 @@ public class TransportRouteResult {
 	double finishWalkDist;
 	double routeTime;
 	private final TransportRoutingConfiguration cfg;
+	// alternative routes always match with number of segments 
 	List<TransportRouteResult> alternativeRoutes = new ArrayList<TransportRouteResult>();
 
 	public TransportRouteResult(TransportRoutingContext ctx) {
