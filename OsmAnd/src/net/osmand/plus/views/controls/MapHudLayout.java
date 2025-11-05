@@ -285,9 +285,12 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
-			position.setNonMoveable();
 		} else if (id == R.id.add_gpx_point_bottom_sheet || id == R.id.recording_note_layout) {
-			position.setMoveDescendantsVertical();
+			if (portrait) {
+				position.setMoveDescendantsVertical();
+			} else {
+				position.setMoveDescendantsHorizontal();
+			}
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(portrait ? POS_FULL_WIDTH : POS_LEFT);
 			position.setNonMoveable();
