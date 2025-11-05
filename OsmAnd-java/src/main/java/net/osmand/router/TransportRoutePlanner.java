@@ -33,8 +33,13 @@ public class TransportRoutePlanner {
 	private static final int MIN_DIST_STOP_TO_GEOMETRY = 150;
 	public static final long GEOMETRY_WAY_ID = -1;
 	public static final long STOPS_WAY_ID = -2;
-	private static final double DIST_STOPS_FOR_ALT_ROUTES = 80;
+	
+	// constants routing.xml?
+	private static final double LOOK_ALTERNATIVE_ROUTES_TIME_CF = 2.5;
+	private static final double DIST_STOPS_FOR_ALT_ROUTES = 120;
 	private static final double SUM_DIST_STOPS_FOR_ALT_ROUTES = 300;
+	private static final double MAX_WALK_INCREASE = 3;
+	
 	private final static Log LOG = PlatformUtil.getLog(TransportRoutePlanner.class);
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
@@ -61,12 +66,13 @@ public class TransportRoutePlanner {
 		}
 
 		double finishTime = ctx.cfg.maxRouteTime;
-		ctx.finishTimeSeconds = ctx.cfg.finishTimeSeconds;
+		
+//		ctx.finishTimeSeconds = ctx.cfg.finishTimeSeconds;
 		if (totalDistance > ctx.cfg.maxRouteDistance && ctx.cfg.maxRouteIncreaseSpeed > 0)  {
 			int increaseTime = (int) ((totalDistance - ctx.cfg.maxRouteDistance) 
 					* 3.6 / ctx.cfg.maxRouteIncreaseSpeed);
 			finishTime += increaseTime;
-			ctx.finishTimeSeconds += increaseTime / 6;
+//			ctx.finishTimeSeconds += increaseTime / 6;
 		}
 		double maxTravelTimeCmpToWalk = totalDistance / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
@@ -88,7 +94,7 @@ public class TransportRoutePlanner {
 			ctx.visitedRoutesCount++;
 			ctx.visitedSegments.put(segIdWithParent, segment);
 			
-			if (segment.distFromStart > finishTime + ctx.finishTimeSeconds ||
+			if (segment.distFromStart > finishTime * LOOK_ALTERNATIVE_ROUTES_TIME_CF ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
 				break;
 //				continue;
@@ -107,9 +113,9 @@ public class TransportRoutePlanner {
 			if (ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 1209383l ||
 					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 3207891l || 
 					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 15421964l) {
-				System.out.printf("-> %d (%d) %.2f\n", ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()),
-						segment.segStart, segment.distFromStart);
-				System.out.println(segment.parentRoute);
+//				System.out.printf("-> %d (%d) %.2f\n", ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()),
+//						segment.segStart, segment.distFromStart);
+//				System.out.println(segment.parentRoute);
 			}
 			for (int ind = 1 + segment.segStart; ind < segment.getLength(); ind++) {
 				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
@@ -128,7 +134,7 @@ public class TransportRoutePlanner {
 				} else {
 					travelTime += ctx.cfg.stopTime + segmentDist / routeTravelSpeed;
 				}
-				if (segment.distFromStart + travelTime > finishTime + ctx.finishTimeSeconds) {
+				if (segment.distFromStart + travelTime > finishTime * LOOK_ALTERNATIVE_ROUTES_TIME_CF) {
 					break;
 				}
 				sgms.clear();
@@ -194,7 +200,7 @@ public class TransportRoutePlanner {
 				if (finishTime > finish.distFromStart) {
 					finishTime = finish.distFromStart;
 				}
-				if(finish.distFromStart < finishTime + ctx.finishTimeSeconds && 
+				if (finish.distFromStart < finishTime * LOOK_ALTERNATIVE_ROUTES_TIME_CF && 
 						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 				}
@@ -288,6 +294,18 @@ public class TransportRoutePlanner {
 				}
 			}
 			if (!exclude) {
+				for (TransportRouteResult s : lst) {
+					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+						return null;
+					}
+					if (checkAlternative(s, route)) {
+						System.out.println("ALT " + s.getSegments().get(0).route + " " + route.toString());
+						exclude = true;
+						break;
+					}
+				}
+			}
+			if (!exclude) {
 				lst.add(route);
 				System.out.println(route.toString());
 			} else {
@@ -301,14 +319,24 @@ public class TransportRoutePlanner {
 		if (sameRouteWithExtraSegments(fastRoute, testRoute)) {
 			return true;
 		}
+		if (Math.max(fastRoute.getWalkDist(), DIST_STOPS_FOR_ALT_ROUTES) * MAX_WALK_INCREASE < testRoute
+				.getWalkDist()) {
+			// remove routes where we need to walk x3
+			return true;
+		}
 		for (TransportRouteResult alt : fastRoute.getAlternativeRoutes()) {
 			if (sameRouteWithExtraSegments(alt, testRoute)) {
 				return true;
 			}
 		}
+		return false;
+	}
+
+	private boolean checkAlternative(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
+		boolean alternativeRoute = false;
 		if (testRoute.segments.size() == fastRoute.segments.size()) {
-			boolean alternativeRoute = true;
 			double sumDiffs = 0; 
+			alternativeRoute = true;
 			for (int i = 0; i < fastRoute.segments.size(); i++) {
 				TransportRouteResultSegment seg1 = fastRoute.segments.get(i);
 				TransportRouteResultSegment seg2 = testRoute.segments.get(i);
@@ -318,7 +346,7 @@ public class TransportRoutePlanner {
 //						|| seg1.getEnd().getId().longValue() == seg2.getEnd().getId().longValue()) {
 				sumDiffs += startDiff;
 				sumDiffs += endDiff;
-				if (startDiff > DIST_STOPS_FOR_ALT_ROUTES || endDiff > DIST_STOPS_FOR_ALT_ROUTES) {
+				if (startDiff > DIST_STOPS_FOR_ALT_ROUTES+100 || endDiff > DIST_STOPS_FOR_ALT_ROUTES+100) {
 					alternativeRoute = false;
 					break;
 				}
@@ -326,9 +354,8 @@ public class TransportRoutePlanner {
 			if (alternativeRoute && sumDiffs < SUM_DIST_STOPS_FOR_ALT_ROUTES) {
 				fastRoute.alternativeRoutes.add(testRoute);
 			}
-			return alternativeRoute;
 		}
-		return false;
+		return alternativeRoute;
 	}
 
 	private boolean sameRouteWithExtraSegments(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
