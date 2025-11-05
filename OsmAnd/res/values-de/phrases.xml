@@ -153,7 +153,7 @@
     <string name="poi_confectionery">Süßwarenladen</string>
     <string name="poi_construction">Baustelle</string>
     <string name="poi_convenience">Lebensmittelgeschäft</string>
-    <string name="poi_copyshop">Copyshop</string>
+    <string name="poi_copyshop">Kopierladen</string>
     <string name="poi_cosmetics">Kosmetik</string>
     <string name="poi_courthouse">Gerichtsgebäude</string>
     <string name="poi_crater">Krater</string>
@@ -189,7 +189,7 @@
     <string name="poi_emergency_phone">Notruftelefon</string>
     <string name="poi_employment_agency">Arbeitsamt</string>
     <string name="poi_equestrian">Pferdesport</string>
-    <string name="poi_erotic">Sexshop</string>
+    <string name="poi_erotic">Sex-Laden</string>
     <string name="poi_estate_agent">Immobilienmakler</string>
     <string name="poi_fabric">Textilgeschäft</string>
     <string name="poi_fast_food">Fast Food</string>
@@ -855,7 +855,7 @@
     <string name="poi_enforcement_check">Kontrollpunkt</string>
     <string name="poi_enforcement_access">Kontrolle: Berechtigung</string>
     <string name="poi_enforcement_toll">Kontrolle: Maut</string>
-    <string name="poi_free_flying">Gleitschirmprodukte</string>
+    <string name="poi_free_flying">Gleitschirm-Produkte</string>
     <string name="poi_bollard">Poller</string>
     <string name="poi_energy">Energieanbieter</string>
     <string name="poi_stile">Zaunleiter</string>

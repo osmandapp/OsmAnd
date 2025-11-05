@@ -1,5 +1,9 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
+
 import android.os.AsyncTask.Status;
 
 import androidx.annotation.NonNull;
@@ -9,6 +13,11 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.SplitTrackAsyncTask;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxParameter;
@@ -16,17 +25,11 @@ import net.osmand.shared.gpx.primitives.Route;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.track.GpxSplitParams;
-import net.osmand.plus.track.SplitTrackAsyncTask;
-import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +43,12 @@ public class GpxDisplayHelper {
 	private static final Log log = PlatformUtil.getLog(GpxDisplayHelper.class);
 
 	private final OsmandApplication app;
+	private final GpxAppearanceHelper appearanceHelper;
 	private final Map<String, SplitTrackAsyncTask> splitTrackTasks = new ConcurrentHashMap<>();
 
 	public GpxDisplayHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.appearanceHelper = new GpxAppearanceHelper(app);
 	}
 
 	@NonNull
@@ -129,7 +134,7 @@ public class GpxDisplayHelper {
 			item.name = point.getName();
 			i++;
 			if (Algorithms.isEmpty(item.name)) {
-				item.name = getString(R.string.gpx_selection_point, String.valueOf(i));
+				item.name = app.getString(R.string.gpx_selection_point, String.valueOf(i));
 			}
 			item.locationStart = point;
 			item.locationEnd = point;
@@ -142,7 +147,7 @@ public class GpxDisplayHelper {
 	public GpxDisplayGroup buildPointsDisplayGroup(@NonNull GpxFile gpxFile, @NonNull List<WptPt> points, @NonNull String name) {
 		GpxDisplayGroup group = new PointsDisplayGroup(gpxFile);
 		group.applyName(app, name);
-		group.setDescription(getString(R.string.gpx_selection_number_of_points, String.valueOf(gpxFile.getPointsSize())));
+		group.setDescription(app.getString(R.string.gpx_selection_number_of_points, String.valueOf(gpxFile.getPointsSize())));
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 		int k = 0;
 		for (WptPt wptPt : points) {
@@ -152,7 +157,7 @@ public class GpxDisplayHelper {
 			item.name = wptPt.getName();
 			k++;
 			if (Algorithms.isEmpty(item.name)) {
-				item.name = getString(R.string.gpx_selection_point, String.valueOf(k));
+				item.name = app.getString(R.string.gpx_selection_point, String.valueOf(k));
 			}
 			item.expanded = true;
 			item.locationStart = wptPt;
@@ -209,8 +214,8 @@ public class GpxDisplayHelper {
 	private final ExecutorService splitTrackSingleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@NonNull
-	public List<GpxDisplayGroup> processSplitSync(@NonNull GpxFile gpxFile, @NonNull GpxDataItem dataItem) {
-		GpxSplitParams params = new GpxSplitParams(app, dataItem);
+	public List<GpxDisplayGroup> processSplitSync(@NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
+		GpxSplitParams params = getGpxSplitParams(item);
 		List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
 		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, params, groups, null);
 		try {
@@ -223,9 +228,9 @@ public class GpxDisplayHelper {
 
 	private void splitTrackAsync(@NonNull SelectedGpxFile selectedGpxFile, @Nullable CallbackWithObject<Boolean> callback) {
 		GpxFile gpxFile = selectedGpxFile.getGpxFile();
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath()));
-		if (!isSplittingTrack(selectedGpxFile) && dataItem != null) {
-			GpxSplitParams params = new GpxSplitParams(app, dataItem);
+		GpxDataItem item = app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath()));
+		if (!isSplittingTrack(selectedGpxFile) && item != null) {
+			GpxSplitParams params = getGpxSplitParams(item);
 			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
 			SplitTrackListener listener = getSplitTrackListener(selectedGpxFile, groups, callback);
 
@@ -233,6 +238,15 @@ public class GpxDisplayHelper {
 		} else if (callback != null) {
 			callback.processResult(false);
 		}
+	}
+
+	@NonNull
+	private GpxSplitParams getGpxSplitParams(@NonNull GpxDataItem item) {
+		Boolean joinSegments = appearanceHelper.requireParameter(item, JOIN_SEGMENTS);
+		Double splitInterval = appearanceHelper.requireParameter(item, SPLIT_INTERVAL);
+		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceHelper.requireParameter(item, SPLIT_TYPE));
+
+		return new GpxSplitParams(splitType, splitInterval, joinSegments);
 	}
 
 	public void splitTrackAsync(@NonNull SelectedGpxFile selectedGpxFile, @NonNull List<GpxDisplayGroup> groups,
@@ -349,7 +363,5 @@ public class GpxDisplayHelper {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
 	}
 
-	private String getString(int resId, Object... formatArgs) {
-		return app.getString(resId, formatArgs);
-	}
+	public record GpxSplitParams(GpxSplitType splitType, double splitInterval, boolean joinSegments) {}
 }

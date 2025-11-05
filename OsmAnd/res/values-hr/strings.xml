@@ -1758,4 +1758,23 @@
     <string name="default_speed_system">Jedinica brzine</string>
     <string name="arrival_distance">Obavijest o dostizanju cilja</string>
     <string name="arrival_distance_descr">Kada želiš primati obavijest o dostizanju cilja?</string>
+    <string name="quick_action_weather_layers">Uključi/isključi kontrola za prikaz ili sakrivanje sloja za vrijeme na mapi.</string>
+    <string name="download_depth_countours">Konture nautičke dubine</string>
+    <string name="quick_action_wind_animation_layer">Uključi/isključi kontrola za prikaz ili sakrivanje sloja animacije vjetra na mapi.</string>
+    <string name="wind_animation_layer">Animirani vjetar sloj</string>
+    <string name="day">Dan</string>
+    <string name="days_2_4">Dani</string>
+    <string name="days_5">Dani</string>
+    <string name="week">Tjedan</string>
+    <string name="weeks_2_4">Tjedni</string>
+    <string name="weeks_5">Tjedni</string>
+    <string name="month">Mjesec</string>
+    <string name="months_2_4">Mjeseci</string>
+    <string name="months_5">Mjeseci</string>
+    <string name="year">Godina</string>
+    <string name="years_2_4">Godine</string>
+    <string name="years_5">Godine</string>
+    <string name="months_3">Tri mjeseca</string>
+    <string name="years_3">Tri godine</string>
+    <string name="price_free">Besplatno</string>
 </resources>

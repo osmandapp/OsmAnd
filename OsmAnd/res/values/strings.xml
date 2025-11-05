@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="efficient_grid">Efficient grid</string>
+    <string name="slots">Slots</string>
+    <string name="button_frames">Button frames</string>
+    <string name="visualizing_button_grid">Map button grid</string>
     <string name="quick_action_weather_layers">A toggle to show or hide weather layers on the map.</string>
     <string name="quick_action_wind_animation_layer">A toggle to show or hide the wind animation layer on the map.</string>
     <string name="wind_animation_layer">Wind animation layer</string>
