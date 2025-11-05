@@ -1,10 +1,18 @@
 package net.osmand.shared.grid
 
+import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_BOTTOM
+import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_FULL_WIDTH
+import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_LEFT
+import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_RIGHT
+import net.osmand.shared.grid.ButtonPositionSize.Companion.POS_TOP
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class ButtonPositionSizeTest {
 
+	private fun check(buttons: List<ButtonPositionSize>, id: String, x: Double, y: Double): Boolean {
+		return buttons.any { it.id == id && it.bounds.left == x && it.bounds.top == y }
+	}
 
 	@Test
 	fun testLayout0() {
@@ -49,7 +57,9 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal(),
 			ButtonPositionSize("map.view.zoom_id3", 7, false, false).setMoveVertical(),
 		)
-		ButtonPositionSize.computeNonOverlap(1, buttons, 40, 40);
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 40, 40)
+		assertTrue(computed)
+
 		assertTrue { check(buttons, "map.view.zoom_out", 33.0, 33.0) }
 		assertTrue { check(buttons, "map.view.zoom_id", 33.0, 25.0) }
 		assertTrue { check(buttons, "map.view.zoom_id2", 33.0, 17.0) }
@@ -75,15 +85,65 @@ class ButtonPositionSizeTest {
 			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveVertical(),
 			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveHorizontal()
 		)
-		ButtonPositionSize.computeNonOverlap(1, buttons, 114, 45);
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 114, 45)
+		assertTrue(computed)
+
 		assertTrue { check(buttons, "map.view.zoom_out", 107.0, 38.0) }
 		assertTrue { check(buttons, "map.view.zoom_id", 107.0, 30.0) }
 		assertTrue { check(buttons, "map.view.back_to_loc", 99.0, 38.0) }
-
 	}
 
-	private fun check(buttons: List<ButtonPositionSize>, id: String, x: Double, y: Double): Boolean {
-		return buttons.any { it.id == id && it.bounds.left == x && it.bounds.top == y }
-	}
+	@Test
+	fun testLayout3() {
+		ButtonPositionSize.DEBUG_PRINT = true
+		// ButtonPositionSize.ALTERNATIVE_ALGORITHM = true
 
+		val buttons = listOf(
+			ButtonPositionSize("top_widgets_panel").setSize(51, 8).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_FULL_WIDTH
+					posV = POS_TOP
+				},
+
+			ButtonPositionSize("map_right_widgets_panel").setSize(22, 91).setNonMoveable()
+				.setMoveDescendantsVertical().apply {
+					posH = POS_RIGHT
+					posV = POS_TOP
+					marginY = 9
+				},
+
+			ButtonPositionSize("map.view.layers", 6, true, true).apply {
+				yMove = true
+			}, ButtonPositionSize("map.view.quick_search", 6, true, true).apply {
+				xMove = true
+			}, ButtonPositionSize("map.view.compass", 6, true, true).apply {
+				yMove = true
+			}, ButtonPositionSize("map.view.zoom_out", 7, false, false).apply {
+				yMove = true
+			}, ButtonPositionSize("map.view.zoom_id", 7, false, false).apply {
+				yMove = true
+			}, ButtonPositionSize("map.view.back_to_loc", 7, false, false).apply {
+				xMove = true
+			}, ButtonPositionSize("map.view.menu", 7, true, false).apply {
+				xMove = true
+			}, ButtonPositionSize("map.view.route_planning", 7, true, false).apply {
+				xMove = true
+			}, ButtonPositionSize("map.view.map_3d", 7, true, false).apply {
+				yMove = true
+				xMove = true
+				marginX = 9
+				marginY = 35
+			}, ButtonPositionSize("map_ruler_layout").setSize(8, 3).apply {
+				xMove = true
+				posH = POS_LEFT
+				posV = POS_BOTTOM
+			})
+
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 51, 100)
+		assertTrue(computed)
+
+		assertTrue { !check(buttons, "map.view.zoom_id", 44.0, 1.0) } // buttons should not be moved above top_widgets_panel
+		assertTrue { !check(buttons, "map.view.zoom_out", 44.0, 1.0) }
+		assertTrue { !check(buttons, "map.view.back_to_loc", 36.0, 1.0) }
+	}
 }
