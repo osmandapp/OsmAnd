@@ -95,7 +95,6 @@ public class MapHudLayout extends FrameLayout {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
 		this.panelsMargin = AndroidUtils.dpToPx(context, 16);
-		this.topInset = AndroidUtils.getStatusBarHeight(context);
 		this.tablet = AndroidUiHelper.isTablet(context);
 		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
 
@@ -236,17 +235,19 @@ public class MapHudLayout extends FrameLayout {
 	@NonNull
 	private Map<View, ButtonPositionSize> getButtonPositionSizes() {
 		Map<View, ButtonPositionSize> map = collectPositions();
+		List<ButtonPositionSize> list = new ArrayList<>(map.values());
+
 //		LOG.info("--------START--------");
-//		for (ButtonPositionSize b : map.values()) {
+//		for (ButtonPositionSize b : list) {
 //			LOG.info(b + " value = " + b.toLongValue());
 //		}
 //		LOG.info("--------");
 
 		int width = Math.round(getAdjustedWidth() / dpToPx / CELL_SIZE_DP);
 		int height = Math.round(getAdjustedHeight() / dpToPx / CELL_SIZE_DP);
-		ButtonPositionSize.Companion.computeNonOverlap(1, new ArrayList<>(map.values()), width, height);
+		ButtonPositionSize.Companion.computeNonOverlap(1, list, width, height);
 
-//		for (ButtonPositionSize b : map.values()) {
+//		for (ButtonPositionSize b : list) {
 //			LOG.info(b + " value = " + b.toLongValue());
 //		}
 //		LOG.info("--------END--------");
@@ -311,9 +312,12 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
-			position.setNonMoveable();
 		} else if (id == R.id.add_gpx_point_bottom_sheet || id == R.id.recording_note_layout) {
-			position.setMoveDescendantsVertical();
+			if (portrait) {
+				position.setMoveDescendantsVertical();
+			} else {
+				position.setMoveDescendantsHorizontal();
+			}
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(portrait ? POS_FULL_WIDTH : POS_LEFT);
 			position.setNonMoveable();

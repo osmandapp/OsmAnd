@@ -365,7 +365,7 @@
     <string name="lang_mk">Македонски</string>
     <string name="read_more">Прочитај више</string>
     <string name="whats_new">Шта је ново</string>
-    <string name="rendering_attr_showProposed_name">Предложене објекте</string>
+    <string name="rendering_attr_showProposed_name">Предложени објекти</string>
     <string name="shared_string_update">Надгради</string>
     <string name="shared_string_upload">Отпреми</string>
     <string name="world_map_download_descr">Основна карта света (која покрива целу Земљу при погледу издалека) не постоји или је застарела. Преузмите основну карту света за употпуњавање радне средине.</string>
@@ -1211,7 +1211,7 @@
     <string name="favorite_group_name">Име групе</string>
     <string name="change_color">Промени боју</string>
     <string name="edit_name">Промени име</string>
-    <string name="animate_my_location">Оживи мој положај</string>
+    <string name="animate_my_location">Анимирај мој положај</string>
     <string name="shared_string_install">Угради</string>
     <string name="online_photos">Фотографије са интернета</string>
     <string name="shared_string_add_photos">Додај слике</string>
@@ -3496,7 +3496,7 @@
     <string name="threshold_distance">Праг удаљености</string>
     <string name="navigation_profile">Налог навођења</string>
     <string name="route_between_points_add_track_desc">Изаберите датотеку трага којој ће се додати нови чланак.</string>
-    <string name="street_level_imagery">Слике на ступњу улице</string>
+    <string name="street_level_imagery">Слике на нивоу улице</string>
     <string name="plan_route_exit_dialog_descr">Одбацити све промене на планираној путањи\?</string>
     <string name="in_case_of_reverse_direction">У случају обрнутог правца</string>
     <string name="shared_string_save_as_gpx">Сачувај као нову датотеку трага</string>
@@ -3794,7 +3794,7 @@
     <string name="release_4_0_beta">• Додата је могућност преузимања изохипси у стопама\n\n• Планирајте положене путање: додати су листови за прелазак између тачака или слика\n\n• Освежавања ОсмАнда уживо су премештена у \"Преузимања &gt; Освежења\"\n\n • Путање се сада могу обојити по висини, брзини или нагибу.\n\n • Додата је могућност измене изгледа линија трагова\n\n • Освежен је прозорчић \"Снимање путовања\"</string>
     <string name="copy_address">Умножи адресу</string>
     <string name="voice_prompts_timetable">Времена гласовних навођења</string>
-    <string name="profile_type_osmand_string">ОсмАндов пресек</string>
+    <string name="profile_type_osmand_string">OsmAnd профил</string>
     <string name="profile_type_user_string">Кориснички профил</string>
     <string name="reverse_all_points">Обрни све тачке</string>
     <string name="profile_by_default_description">Одаберите профил које ће се користити по покретању апликације.</string>
