@@ -298,6 +298,19 @@ public class BaseDetailsObject {
 		}
 	}
 
+	private void addSubType(Amenity amenity, String subType) {
+		if (amenity.getSubType() == null) {
+			amenity.setSubType(subType);
+		} else {
+			for (String s : amenity.getSubType().split(";")) {
+				if (s.equals(subType)) {
+					return;
+				}
+			}
+			amenity.setSubType(amenity.getSubType() + ";" + subType);
+		}
+	}
+
 	protected void processAmenity(Amenity amenity, Set<String> contentLocales, boolean isSingleObject) {
 		processId(amenity);
 
@@ -310,8 +323,8 @@ public class BaseDetailsObject {
 			syntheticAmenity.setType(type);
 		}
 		String subType = amenity.getSubType();
-		if (syntheticAmenity.getSubType() == null && subType != null) {
-			syntheticAmenity.setSubType(subType);
+		if (subType != null) {
+			addSubType(syntheticAmenity, subType);
 		}
 		String mapIconName = amenity.getMapIconName();
 		if (syntheticAmenity.getMapIconName() == null && mapIconName != null) {
