@@ -100,11 +100,15 @@ object ImportGpx {
 		val gxCoords = mutableListOf<String>()
 		val gxWhens = mutableListOf<String>()
 		var elementCount = 0
+		var isFolderName = false
 
 		while (true) {
 			when (parser.getEventType()) {
 				XmlPullParser.START_TAG -> when (parser.getName()) {
-					TAG_FOLDER -> folderNameStack.addLast("")
+					TAG_FOLDER -> {
+						folderNameStack.addLast("")
+						isFolderName = true
+					}
 					TAG_DOCUMENT -> documentName = ""
 					TAG_PLACEMARK -> {
 						currentPlacemarkName = null
@@ -116,7 +120,12 @@ object ImportGpx {
 						val text = parser.nextText()
 						when {
 							documentName == "" -> documentName = text
-							folderNameStack.isNotEmpty() -> folderNameStack[folderNameStack.lastIndex] = text
+							isFolderName -> {
+								if (folderNameStack.isNotEmpty()) {
+									folderNameStack[folderNameStack.lastIndex] = text
+									isFolderName = false
+								}
+							}
 							else -> currentPlacemarkName = text
 						}
 					}
