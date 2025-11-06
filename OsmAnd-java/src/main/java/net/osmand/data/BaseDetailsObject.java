@@ -298,16 +298,22 @@ public class BaseDetailsObject {
 		}
 	}
 
-	private void addSubType(Amenity amenity, String subType) {
-		if (amenity.getSubType() == null) {
-			amenity.setSubType(subType);
-		} else {
-			for (String s : amenity.getSubType().split(";")) {
-				if (s.equals(subType)) {
-					return;
+	private void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
+		for (String subType : subTypesToAdd.split(";")) {
+			if (amenity.getSubType() == null) {
+				amenity.setSubType(subType);
+			} else {
+				boolean isSubTypeUnique = true;
+				for (String s : amenity.getSubType().split(";")) {
+					if (s.equals(subType)) {
+						isSubTypeUnique = false;
+						break;
+					}
+				}
+				if (isSubTypeUnique) {
+					amenity.setSubType(amenity.getSubType() + ";" + subType);
 				}
 			}
-			amenity.setSubType(amenity.getSubType() + ";" + subType);
 		}
 	}
 
@@ -324,7 +330,7 @@ public class BaseDetailsObject {
 		}
 		String subType = amenity.getSubType();
 		if (subType != null) {
-			addSubType(syntheticAmenity, subType);
+			updateAmenitySubTypes(syntheticAmenity, subType);
 		}
 		String mapIconName = amenity.getMapIconName();
 		if (syntheticAmenity.getMapIconName() == null && mapIconName != null) {
