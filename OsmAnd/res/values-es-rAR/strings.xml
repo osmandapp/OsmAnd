@@ -5760,4 +5760,8 @@
     <string name="wind_animation_layer">Capa animada del viento</string>
     <string name="weather_layers">Capas de meteorología</string>
     <string name="lang_crh">Tártaro de Crimea (latín)</string>
+    <string name="efficient_grid">Cuadrícula eficiente</string>
+    <string name="slots">Espacios</string>
+    <string name="button_frames">Marcos de botones</string>
+    <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
 </resources>
