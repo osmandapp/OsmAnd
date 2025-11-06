@@ -176,7 +176,11 @@ public class Amenity extends MapObject {
 		for (String subType : getSubType().split(";")) {
 			PoiType pt = getType().getPoiTypeByKeyName(subType);
 			if (pt == null) {
+				// Try to get POI type from another category, but skip non-OSM-types
 				pt = (PoiType)MapPoiTypes.getDefault().getAnyPoiTypeByKey(subType);
+				if (pt != null && pt.isNotEditableOsm()) {
+					pt = null;
+				}
 			}
 			if (pt != null) {
 				typeStr += typeStr.isEmpty() ? pt.getTranslation() : ", " + pt.getTranslation().toLowerCase();
