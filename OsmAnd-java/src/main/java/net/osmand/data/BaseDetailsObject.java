@@ -299,10 +299,10 @@ public class BaseDetailsObject {
 	}
 
 	private void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
-		for (String subType : subTypesToAdd.split(";")) {
-			if (amenity.getSubType() == null) {
-				amenity.setSubType(subType);
-			} else {
+		if (amenity.getSubType() == null) {
+			amenity.setSubType(subTypesToAdd);
+		} else {
+			for (String subType : subTypesToAdd.split(";")) {
 				boolean isSubTypeUnique = true;
 				for (String s : amenity.getSubType().split(";")) {
 					if (s.equals(subType)) {
