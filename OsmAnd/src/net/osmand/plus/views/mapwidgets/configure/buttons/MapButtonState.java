@@ -52,7 +52,7 @@ public abstract class MapButtonState {
 
 	private final StateChangedListener<Integer> sizeListener;
 
-	private boolean portrait;
+	protected boolean portrait;
 
 	public MapButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		this.id = id;
@@ -218,7 +218,7 @@ public abstract class MapButtonState {
 		preference.set(positionSize.toLongValue());
 	}
 
-	private void updatePosition(@NonNull ButtonPositionSize position) {
+	protected void updatePosition(@NonNull ButtonPositionSize position) {
 		CommonPreference<Long> preference = portrait ? portraitPositionPref : landscapePositionPref;
 		Long value = preference.get();
 		if (value != null && value > 0) {
