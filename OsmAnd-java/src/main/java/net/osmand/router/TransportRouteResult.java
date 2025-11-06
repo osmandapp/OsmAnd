@@ -1,7 +1,9 @@
 package net.osmand.router;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class TransportRouteResult {
 	double finishWalkDist;
 	double routeTime;
 	private final TransportRoutingConfiguration cfg;
+	// alternative routes always match with number of segments 
 	List<TransportRouteResult> alternativeRoutes = new ArrayList<TransportRouteResult>();
 
 	public TransportRouteResult(TransportRoutingContext ctx) {
@@ -99,6 +102,7 @@ public class TransportRouteResult {
 
 	public double getTravelTime() {
 		double t = 0;
+		TransportRoutePlanner.TransportRouteResultSegment prev = null;
 		for (TransportRoutePlanner.TransportRouteResultSegment s : segments) {
 			if (cfg.useSchedule) {
 				TransportSchedule sts = s.route.getSchedule();
@@ -106,9 +110,14 @@ public class TransportRouteResult {
 					t += sts.getAvgStopIntervals()[k] * 10;
 				}
 			} else {
-				t += cfg.getBoardingTime();
+				if (prev != null) {
+					t += cfg.getChangeTime(prev.route.getType(), s.route.getType());
+				}
+				// part of s.getTravelTime()
+//				t += cfg.getBoardingTime(s.route.getType());
 				t += s.getTravelTime();
 			}
+			prev = s;
 		}
 		return t;
 	}
@@ -117,12 +126,12 @@ public class TransportRouteResult {
 		return getWalkDist() / cfg.walkSpeed;
 	}
 
-	public double getChangeTime() {
-		return cfg.getChangeTime();
-	}
 
-	public double getBoardingTime() {
-		return cfg.getBoardingTime();
+	public int getChangeTime(TransportRouteResultSegment current, TransportRouteResultSegment next) {
+		if(next == null) {
+			return 0;
+		}
+		return cfg.getChangeTime(current.route.getType(), next.route.getType());
 	}
 
 	public int getChanges() {
@@ -147,7 +156,7 @@ public class TransportRouteResult {
 				arriveTime = String.format("and arrive at %s", TransportRoutePlanner.formatTransportTime(aTime));
 			}
 			bld.append(String.format(Locale.US, " %d. %s [%d]: walk %.1f m to '%s' and travel %s to '%s' by %s %d stops %s\n",
-					i + 1, s.route.getRef(), s.route.getId() / 2, s.walkDist, s.getStart().getName(),
+					i + 1, s.route.getRef(), ObfConstants.getOsmIdFromBinaryMapObjectId(s.route.getId()), s.walkDist, s.getStart().getName(),
 					 time, s.getEnd().getName(),s.route.getName(),  (s.end - s.start), arriveTime));
 		}
 		bld.append(String.format(" F. Walk %.1f m to reach your destination", finishWalkDist));
