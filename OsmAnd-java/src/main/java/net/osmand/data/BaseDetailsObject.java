@@ -298,6 +298,25 @@ public class BaseDetailsObject {
 		}
 	}
 
+	private void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
+		if (amenity.getSubType() == null) {
+			amenity.setSubType(subTypesToAdd);
+		} else {
+			for (String subType : subTypesToAdd.split(";")) {
+				boolean isSubTypeUnique = true;
+				for (String s : amenity.getSubType().split(";")) {
+					if (s.equals(subType)) {
+						isSubTypeUnique = false;
+						break;
+					}
+				}
+				if (isSubTypeUnique) {
+					amenity.setSubType(amenity.getSubType() + ";" + subType);
+				}
+			}
+		}
+	}
+
 	protected void processAmenity(Amenity amenity, Set<String> contentLocales, boolean isSingleObject) {
 		processId(amenity);
 
@@ -310,8 +329,8 @@ public class BaseDetailsObject {
 			syntheticAmenity.setType(type);
 		}
 		String subType = amenity.getSubType();
-		if (syntheticAmenity.getSubType() == null && subType != null) {
-			syntheticAmenity.setSubType(subType);
+		if (subType != null) {
+			updateAmenitySubTypes(syntheticAmenity, subType);
 		}
 		String mapIconName = amenity.getMapIconName();
 		if (syntheticAmenity.getMapIconName() == null && mapIconName != null) {

@@ -158,7 +158,6 @@ public class AmenitySearcher {
                                          Predicate<String> travelFileVisibility,
                                          ResultMatcher<Amenity> matcher) {
 
-        Set<Long> openAmenities = new HashSet<>();
         Set<Long> closedAmenities = new HashSet<>();
         List<Amenity> actualAmenities = new ArrayList<>();
 

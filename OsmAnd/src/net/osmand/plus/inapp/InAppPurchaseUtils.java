@@ -106,7 +106,7 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isVehicleMetricsAvailable(@NonNull OsmandApplication app) {
-		return isOsmAndProAvailable(app);
+		return isOsmAndProAvailable(app) || isBrandPromoAvailable(app);
 	}
 
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {

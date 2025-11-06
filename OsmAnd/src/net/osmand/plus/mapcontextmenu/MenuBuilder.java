@@ -1466,7 +1466,6 @@ public class MenuBuilder {
 				} else if (clickableWayHelper.isClickableWayAmenity(poi)) {
 					clickableWayHelper.openClickableWayAmenity(amenity, true);
 				} else {
-					mapContextMenu.hideMenus();
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
 					app.getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());

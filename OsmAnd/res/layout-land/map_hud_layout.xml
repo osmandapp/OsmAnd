@@ -17,10 +17,11 @@
 			android:id="@+id/MapHudButtonsOverlayTop"
 			layout="@layout/map_hud_top" />
 
-		<FrameLayout
+		<net.osmand.plus.widgets.FrameLayoutEx
 			android:id="@+id/left_side_menu"
 			android:layout_width="0dp"
-			android:layout_height="0dp" />
+			android:layout_height="0dp"
+			android:visibility="gone" />
 
 		<include
 			android:id="@+id/MapHudButtonsOverlayBottom"

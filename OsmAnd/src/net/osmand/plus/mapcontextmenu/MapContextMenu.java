@@ -441,7 +441,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	                 @Nullable Object object) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (init(latLon, pointDescription, object)) {
+			if (init(latLon, pointDescription, object, false, false)) {
 				mapActivity.getApp().logEvent("open_context_menu");
 				showInternal();
 			}
