@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="deleted_maps_warning">You are about to delete %d items(s)\nContinue?</string>
+    <string name="deleted_maps_prompt">These maps are no longer supported and have been replaced by smaller regions. Please remove them and download the new versions.</string>
+    <string name="unsupported_maps">Unsupported maps</string>
     <string name="quick_action_weather_layers">A toggle to show or hide weather layers on the map.</string>
     <string name="quick_action_wind_animation_layer">A toggle to show or hide the wind animation layer on the map.</string>
     <string name="wind_animation_layer">Wind animation layer</string>

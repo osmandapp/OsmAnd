@@ -44,6 +44,8 @@ public class DownloadActivityType {
 
 	public static final DownloadActivityType NORMAL_FILE =
 			new DownloadActivityType(R.string.download_regular_maps, "map", 10);
+	public static final DownloadActivityType DELETED_MAP =
+			new DownloadActivityType(R.string.unsupported_maps, "deleted_map", 5);
 	public static final DownloadActivityType VOICE_FILE =
 			new DownloadActivityType(R.string.voices, R.drawable.ic_action_volume_up, "voice", 20);
 	public static final DownloadActivityType FONT_FILE =
@@ -140,7 +142,7 @@ public class DownloadActivityType {
 	}
 
 	public boolean isAccepted(String fileName) {
-		if (NORMAL_FILE == this) {
+		if (NORMAL_FILE == this || DELETED_MAP == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION))
 					|| fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)
 					|| fileName.endsWith(IndexConstants.SQLITE_EXT);
@@ -192,7 +194,7 @@ public class DownloadActivityType {
 
 	@NonNull
 	public File getDefaultDownloadFolder(OsmandApplication app, IndexItem indexItem) {
-		if (NORMAL_FILE == this) {
+		if (NORMAL_FILE == this || DELETED_MAP == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 			}
@@ -249,7 +251,7 @@ public class DownloadActivityType {
 	}
 
 	public String getUnzipExtension(OsmandApplication ctx, IndexItem indexItem) {
-		if (NORMAL_FILE == this) {
+		if (NORMAL_FILE == this || DELETED_MAP == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 				return BINARY_MAP_INDEX_EXT;
 			} else if (indexItem.fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
