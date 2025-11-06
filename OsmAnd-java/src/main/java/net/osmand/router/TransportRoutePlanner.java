@@ -22,6 +22,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.data.TransportStopExit;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -34,11 +35,8 @@ public class TransportRoutePlanner {
 	public static final long GEOMETRY_WAY_ID = -1;
 	public static final long STOPS_WAY_ID = -2;
 	
-	// constants routing.xml?
-	private static final double LOOK_ALTERNATIVE_ROUTES_TIME_CF = 2.5;
-	private static final double DIST_STOPS_FOR_ALT_ROUTES = 120;
-	private static final double SUM_DIST_STOPS_FOR_ALT_ROUTES = 300;
-	private static final double MAX_WALK_INCREASE = 3;
+	static long TRACE_ONBOARD_ID = 0; //19728216l
+	static long TRACE_CHANGE_ID = 0; //19728216l
 	
 	private final static Log LOG = PlatformUtil.getLog(TransportRoutePlanner.class);
 
@@ -62,19 +60,19 @@ public class TransportRoutePlanner {
 		for (TransportRouteSegment r : startStops) {
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
+			if(r.distFromStart < 1000) {
+				System.out.println(r.distFromStart + " " + ObfConstants.getOsmIdFromBinaryMapObjectId(r.road.getId()) +" " + r);
+			}
 			queue.add(r);
 		}
 
 		double finishTime = ctx.cfg.maxRouteTime;
-		
-//		ctx.finishTimeSeconds = ctx.cfg.finishTimeSeconds;
 		if (totalDistance > ctx.cfg.maxRouteDistance && ctx.cfg.maxRouteIncreaseSpeed > 0)  {
 			int increaseTime = (int) ((totalDistance - ctx.cfg.maxRouteDistance) 
 					* 3.6 / ctx.cfg.maxRouteIncreaseSpeed);
 			finishTime += increaseTime;
-//			ctx.finishTimeSeconds += increaseTime / 6;
 		}
-		double maxTravelTimeCmpToWalk = totalDistance / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
+		double maxTravelTimeCmpToWalk = totalDistance / ctx.cfg.walkSpeed;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
@@ -94,28 +92,30 @@ public class TransportRoutePlanner {
 			ctx.visitedRoutesCount++;
 			ctx.visitedSegments.put(segIdWithParent, segment);
 			
-			if (segment.distFromStart > finishTime * LOOK_ALTERNATIVE_ROUTES_TIME_CF ||
+			if (segment.distFromStart > finishTime * ctx.cfg.increaseForAlternativesRoutes ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
 				break;
-//				continue;
 			}
-//			long segmentId = segment.getId();
 			TransportRouteSegment finish = null;
 			double minDist = 0;
 			double travelDist = 0;
-			double travelTime = 0;
+			int onboardTime = ctx.cfg.getBoardingTime(segment.road.getType());
+			int intervalTime = Algorithms.parseIntSilently(segment.road.getInterval(), 0);
+			if (intervalTime > 0) {
+				onboardTime = intervalTime * 60 / 2;
+			}
+			double travelTime = onboardTime;
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
 				continue;
 			}
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
-			if (ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 1209383l ||
-					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 3207891l || 
-					ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()) == 15421964l) {
-//				System.out.printf("-> %d (%d) %.2f\n", ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()),
-//						segment.segStart, segment.distFromStart);
-//				System.out.println(segment.parentRoute);
+			if (TRACE_ONBOARD_ID != 0) {
+				long id = ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId());
+				if (id == TRACE_ONBOARD_ID) {
+					System.out.printf("-> %d (%d) %.2f (parent %s) \n", id, segment.segStart, segment.distFromStart, segment.parentRoute);
+				}
 			}
 			for (int ind = 1 + segment.segStart; ind < segment.getLength(); ind++) {
 				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
@@ -127,14 +127,15 @@ public class TransportRoutePlanner {
 				// could be geometry size
 				double segmentDist = MapUtils.getDistance(prevStop.getLocation(), stop.getLocation());
 				travelDist += segmentDist;
-				if(ctx.cfg.useSchedule) {
+				if (ctx.cfg.useSchedule) {
 					TransportSchedule sc = segment.road.getSchedule();
 					int interval = sc.avgStopIntervals.get(ind - 1);
 					travelTime += interval * 10;
 				} else {
-					travelTime += ctx.cfg.stopTime + segmentDist / routeTravelSpeed;
+					int stopTime = ctx.cfg.getStopTime(segment.road.getType());
+					travelTime += stopTime + segmentDist / routeTravelSpeed;
 				}
-				if (segment.distFromStart + travelTime > finishTime * LOOK_ALTERNATIVE_ROUTES_TIME_CF) {
+				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
 					break;
 				}
 				sgms.clear();
@@ -157,8 +158,8 @@ public class TransportRoutePlanner {
 						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
 						nextSegment.parentTravelTime = travelTime;
 						nextSegment.parentTravelDist = travelDist;
-						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed
-								+ ctx.cfg.getChangeTime() + ctx.cfg.getBoardingTime();
+						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + 
+								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 						if (ctx.cfg.useSchedule) {
 							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
@@ -169,11 +170,11 @@ public class TransportRoutePlanner {
 						} else {
 							queue.add(nextSegment);
 						}
-						if (ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId()) == 3207891l) {
-//							System.out.printf("? Add to queue %d (%d) -> %d (%d) %.3f\n",  
-//									ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId()), ind,
-//									ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId()), sgm.segStart,
-//									nextSegment.distFromStart);
+						if (TRACE_CHANGE_ID != 0) {
+							long from = ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId());
+							long to = ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId());
+							System.out.printf("? Change %d (%d) -> %d (%d) %.3f\n", from, ind, to, sgm.segStart,
+									nextSegment.distFromStart);
 						}
 					}
 				}
@@ -188,7 +189,6 @@ public class TransportRoutePlanner {
 						finish.walkDist = distToEnd;
 						finish.parentTravelTime = travelTime;
 						finish.parentTravelDist = travelDist;
-
 						double walkTime = distToEnd / ctx.cfg.walkSpeed;
 						finish.distFromStart = segment.distFromStart + travelTime + walkTime;
 
@@ -200,7 +200,7 @@ public class TransportRoutePlanner {
 				if (finishTime > finish.distFromStart) {
 					finishTime = finish.distFromStart;
 				}
-				if (finish.distFromStart < finishTime * LOOK_ALTERNATIVE_ROUTES_TIME_CF && 
+				if (finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes && 
 						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 				}
@@ -288,7 +288,7 @@ public class TransportRoutePlanner {
 				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 					return null;
 				}
-				if (excludeRoute(s, route)) {
+				if (excludeRoute(ctx, s, route)) {
 					exclude = true;
 					break;
 				}
@@ -298,7 +298,7 @@ public class TransportRoutePlanner {
 					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 						return null;
 					}
-					if (checkAlternative(s, route)) {
+					if (checkAlternative(ctx, s, route)) {
 						System.out.println("ALT " + s.getSegments().get(0).route + " " + route.toString());
 						exclude = true;
 						break;
@@ -315,12 +315,13 @@ public class TransportRoutePlanner {
 		return lst;
 	}
 
-	private boolean excludeRoute(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
+	private boolean excludeRoute(TransportRoutingContext ctx, TransportRouteResult fastRoute, TransportRouteResult testRoute) {
 		if (sameRouteWithExtraSegments(fastRoute, testRoute)) {
 			return true;
 		}
-		if (Math.max(fastRoute.getWalkDist(), DIST_STOPS_FOR_ALT_ROUTES) * MAX_WALK_INCREASE < testRoute
-				.getWalkDist()) {
+		double fastRouteWalkDist = Math.max(fastRoute.getWalkDist(),
+				ctx.cfg.combineAltRoutesDiffStops * ctx.cfg.increaseForAltRoutesWalking);
+		if (fastRouteWalkDist * ctx.cfg.increaseForAltRoutesWalking < testRoute.getWalkDist()) {
 			// remove routes where we need to walk x3
 			return true;
 		}
@@ -332,7 +333,7 @@ public class TransportRoutePlanner {
 		return false;
 	}
 
-	private boolean checkAlternative(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
+	private boolean checkAlternative(TransportRoutingContext ctx, TransportRouteResult fastRoute, TransportRouteResult testRoute) {
 		boolean alternativeRoute = false;
 		if (testRoute.segments.size() == fastRoute.segments.size()) {
 			double sumDiffs = 0; 
@@ -346,12 +347,12 @@ public class TransportRoutePlanner {
 //						|| seg1.getEnd().getId().longValue() == seg2.getEnd().getId().longValue()) {
 				sumDiffs += startDiff;
 				sumDiffs += endDiff;
-				if (startDiff > DIST_STOPS_FOR_ALT_ROUTES+100 || endDiff > DIST_STOPS_FOR_ALT_ROUTES+100) {
+				if (startDiff > ctx.cfg.combineAltRoutesDiffStops || endDiff > ctx.cfg.combineAltRoutesDiffStops) {
 					alternativeRoute = false;
 					break;
 				}
 			}
-			if (alternativeRoute && sumDiffs < SUM_DIST_STOPS_FOR_ALT_ROUTES) {
+			if (alternativeRoute && sumDiffs < ctx.cfg.combineAltRoutesSumDiffStops) {
 				fastRoute.alternativeRoutes.add(testRoute);
 			}
 		}
