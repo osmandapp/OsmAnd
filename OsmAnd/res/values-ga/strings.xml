@@ -5708,4 +5708,8 @@
     <string name="wind_animation_layer">Sraith beochana gaoithe</string>
     <string name="weather_layers">Sraitheanna aimsire</string>
     <string name="lang_crh">Tatairis Chrimé (Laidin)</string>
+    <string name="efficient_grid">Eangach éifeachtach</string>
+    <string name="slots">Sliotáin</string>
+    <string name="button_frames">Frámaí cnaipe</string>
+    <string name="visualizing_button_grid">Eangach cnaipe léarscáile</string>
 </resources>

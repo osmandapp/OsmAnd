@@ -5875,4 +5875,8 @@
     <string name="wind_animation_layer">Слој живахности ветра</string>
     <string name="weather_layers">Слојеви временских прилика</string>
     <string name="lang_crh">Кримски Татарски (латиница)</string>
+    <string name="efficient_grid">Ефикасна мрежа</string>
+    <string name="slots">Слотови</string>
+    <string name="button_frames">Оквири за дугмад</string>
+    <string name="visualizing_button_grid">Мрежа дугмади мапе</string>
 </resources>

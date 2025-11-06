@@ -5937,4 +5937,8 @@
     <string name="wind_animation_layer">Vindanimationslag</string>
     <string name="weather_layers">Vejrlag</string>
     <string name="lang_crh">Krimtatarisk (latin)</string>
+    <string name="efficient_grid">Effektivt net</string>
+    <string name="slots">Pladser</string>
+    <string name="button_frames">Knaprammer</string>
+    <string name="visualizing_button_grid">Kortknap net</string>
 </resources>
