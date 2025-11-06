@@ -34,7 +34,6 @@ public class TransportRoutingContext {
 	// Incomplete routes usually don't need more files than around Max-BBOX of start/end,
 	// so here an improvement could be introduced
 	final TransportStopsRouteReader transportStopsReader;
-	public int finishTimeSeconds;
 
 	// stats
 	public long startCalcTime;

@@ -312,6 +312,10 @@ public class PublicTransportCard extends MapBaseCard {
 				}
 			}
 			routesBadges.addView(createRouteBadge(s, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+			for (TransportRouteResultSegment a : s.alternatives) {
+				routesBadges.addView(createRouteBadge(a, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+			}
+
 			if (iterator.hasNext()) {
 				routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
 			} else {

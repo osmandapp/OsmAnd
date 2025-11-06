@@ -91,7 +91,9 @@ import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RouteDetailsFragment extends ContextMenuFragment
 		implements PublicTransportCardListener, CardListener {
@@ -403,7 +405,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private void buildSegmentItem(View view, TransportRouteResultSegment segment,
-								  TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double boardingTime) {
+								  TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, int changeTime) {
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
 		TransportStop startStop = stops.get(0);
@@ -428,7 +430,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		Drawable icon = getContentIcon(drawableResId);
 
 		Typeface typeface = FontCache.getMediumFont();
-		startTime[0] += (int) boardingTime;
 		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
 		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
@@ -451,6 +452,17 @@ public class RouteDetailsFragment extends ContextMenuFragment
 				showRouteSegmentOnMap(segment);
 			}
 		});
+
+		for (TransportRouteResultSegment alt : segment.alternatives) {
+			TransportStopRoute altTransportStopRoute = TransportStopRoute.getTransportStopRoute(alt.route,
+					alt.getTravelStops().get(0));
+			buildTransportStopRouteRow(stopsContainer, altTransportStopRoute, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showRouteSegmentOnMap(alt);
+				}
+			});
+		}
 
 		CollapsableView collapsableView = null;
 		if (stops.size() > 2) {
@@ -496,7 +508,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		if (depTime <= 0) {
 			depTime = startTime[0] + arrivalTime;
 		}
-		// TODO: fix later for schedule
+		// fix later for schedule
 		startTime[0] += (int) segment.getTravelTime();
 		String textTime = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
@@ -521,6 +533,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 		if (nextSegment != null) {
 			double walkDist = (long) getWalkDistance(segment, nextSegment, segment.walkDist);
+
 			if (walkDist > 0) {
 				int walkTime = (int) getWalkTime(segment, nextSegment, walkDist, walkSpeed);
 				if (walkTime < 60) {
@@ -544,6 +557,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 					}
 				});
 				startTime[0] += walkTime;
+				startTime[0] += changeTime;
 			}
 		}
 	}
@@ -578,7 +592,10 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			if (first) {
 				buildStartItem(parent, startPoint, startTime, segment, routeResult.getWalkSpeed());
 			}
-			buildSegmentItem(parent, segment, !last ? segments.get(i + 1) : null, startTime, routeResult.getWalkSpeed(), routeResult.getBoardingTime());
+			TransportRouteResultSegment next = !last ? segments.get(i + 1) : null;
+			buildSegmentItem(parent, segment, next, startTime, routeResult.getWalkSpeed(),
+					routeResult.getChangeTime(segment, next));
+
 			if (last) {
 				buildDestinationItem(parent, endPoint, startTime, segment, routeResult.getWalkSpeed());
 			}
