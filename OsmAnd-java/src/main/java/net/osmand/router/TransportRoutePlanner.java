@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 
@@ -315,6 +317,20 @@ public class TransportRoutePlanner {
 //				System.err.println(route.toString());
 			}
 		}
+		for (TransportRouteResult r : lst) {
+			for (int i = 0; i < r.getSegments().size(); i++) {
+				Map<String, TransportRouteResultSegment> alts = new LinkedHashMap<>();
+				for (TransportRouteResult alt : r.alternativeRoutes) {
+					TransportRouteResultSegment rs = alt.getSegments().get(i);
+					if (rs.route.getRef() != null) {
+						alts.put(rs.route.getRef(), rs);
+					}
+				}
+				r.getSegments().get(i).alternatives.addAll(alts.values());
+			}
+		}
+		
+		
 		return lst;
 	}
 
@@ -409,6 +425,8 @@ public class TransportRoutePlanner {
 		public int end;
 		public double walkDist ;
 		public int depTime;
+		
+		public List<TransportRouteResultSegment> alternatives = new ArrayList<>();
 		
 		public TransportRouteResultSegment() {
 		}
