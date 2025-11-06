@@ -390,23 +390,37 @@ class ButtonPositionSize {
 			var ox = toMove.marginX;
 			var oy = toMove.marginY;
 			var ok = false;
-			while (!ok && xMove && toMove.marginX <= totalWidth - toMove.width) {
-				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 1, 0)) {
-					ok = true;
+			for (dist in 1 until totalHeight + totalWidth) {
+				if (ok) {
+					break;
 				}
-			}
-			if (!ok) {
-				toMove.marginX = ox;
-				toMove.updateBounds(totalWidth, totalHeight);
-			}
-			while (!ok && yMove && toMove.marginY <= totalHeight - toMove.height) {
-				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, 1)) {
-					ok = true;
+				for (x in 0 until dist) {
+					var dy = dist - x;
+					var dx = x;
+					if (!xMove || !yMove) {
+						if (x > 0) {
+							break;
+						}
+						if (!yMove) {
+							dx = dist - x;
+							dy = x;
+						}
+					}
+					if (toMove.marginX + dx + toMove.width > totalWidth) {
+						continue;
+					}
+					if (toMove.marginY + dy + toMove.height > totalHeight) {
+						continue;
+					}
+					if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, dx, dy)) {
+						ok = true;
+						break;
+					} else {
+						toMove.marginX = ox;
+						toMove.marginY = oy;
+						toMove.updateBounds(totalWidth, totalHeight);
+					}
 				}
-			}
-			if (!ok) {
-				toMove.marginY = oy;
-				toMove.updateBounds(totalWidth, totalHeight);
 			}
 			return ok;
 		}
