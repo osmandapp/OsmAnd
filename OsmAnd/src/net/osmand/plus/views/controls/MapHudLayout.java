@@ -116,6 +116,7 @@ public class MapHudLayout extends FrameLayout {
 			addPosition(leftWidgetsPanel);
 			addPosition(rightWidgetsPanel);
 		}
+		addPosition(findViewById(R.id.left_side_menu));
 		addPosition(findViewById(R.id.measurement_buttons));
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
@@ -274,6 +275,11 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
+			position.setNonMoveable();
+		} else if (id == R.id.left_side_menu) {
+			position.setMoveDescendantsHorizontal();
+			position.setPositionVertical(POS_TOP);
+			position.setPositionHorizontal(POS_LEFT);
 			position.setNonMoveable();
 		} else if (id == R.id.widget_top_bar) {
 			position.setMoveDescendantsVertical();
