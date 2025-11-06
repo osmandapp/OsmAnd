@@ -394,7 +394,7 @@ class ButtonPositionSize {
 				if (ok) {
 					break;
 				}
-				for (x in 0 until dist) {
+				for (x in 0 until dist + 1) {
 					var dy = dist - x;
 					var dx = x;
 					if (!xMove || !yMove) {
