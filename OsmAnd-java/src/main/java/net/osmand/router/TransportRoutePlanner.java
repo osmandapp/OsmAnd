@@ -60,8 +60,11 @@ public class TransportRoutePlanner {
 		for (TransportRouteSegment r : startStops) {
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
-			if(r.distFromStart < 1000) {
-				System.out.println(r.distFromStart + " " + ObfConstants.getOsmIdFromBinaryMapObjectId(r.road.getId()) +" " + r);
+			if (TRACE_ONBOARD_ID != 0) {
+				long id = ObfConstants.getOsmIdFromBinaryMapObjectId(r.road.getId());
+				if (id == TRACE_ONBOARD_ID) {
+					System.out.println(r.distFromStart + " " + id + " " + r);
+				}
 			}
 			queue.add(r);
 		}
