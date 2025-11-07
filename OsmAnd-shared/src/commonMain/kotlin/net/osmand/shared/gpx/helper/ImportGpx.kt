@@ -114,6 +114,7 @@ object ImportGpx {
 						currentPlacemarkName = null
 						currentPlacemarkDesc = null
 						currentCoordinates = null
+						isFolderName = false
 					}
 					TAG_GX_TRACK -> isGxTrack = true
 					TAG_NAME -> {
@@ -136,7 +137,10 @@ object ImportGpx {
 				}
 
 				XmlPullParser.END_TAG -> when (parser.getName()) {
-					TAG_FOLDER -> folderNameStack.removeLastOrNull()
+					TAG_FOLDER -> {
+						folderNameStack.removeLastOrNull()
+						isFolderName = false
+					}
 					TAG_PLACEMARK -> {
 						if (currentCoordinates != null) {
 							writePlacemarkAsGpx(
