@@ -49,6 +49,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
+	private List<IndexItem> deletedItems = new ArrayList<>();
 	private List<DownloadItem> groupedItemsToUpdate = new ArrayList<>();
 	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
@@ -186,6 +187,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	public void updateLoadedFiles() {
 		initAlreadyLoadedFiles();
 		prepareFilesToUpdate();
+		prepareDeletedFiles();
 	}
 
 	private void initAlreadyLoadedFiles() {
@@ -348,6 +350,27 @@ public class DownloadResources extends DownloadResourceGroup {
 		return file;
 	}
 
+	private void prepareDeletedFiles() {
+		this.deletedItems.clear();
+		List<IndexItem> itemsToDelete = new ArrayList<>();
+		DownloadResourceGroup deletedMaps = getSubGroupById(DownloadResourceGroupType.DELETED_MAPS.getDefaultId());
+		if (deletedMaps != null) {
+			List<IndexItem> deletedMapsItems = deletedMaps.getIndividualResources();
+			if (!Algorithms.isEmpty(deletedMapsItems) && rawResources != null) {
+				for (IndexItem item : deletedMapsItems) {
+					if (indexActivatedFileNames.containsKey(item.getTargetFileName())) {
+						itemsToDelete.add(item);
+					}
+				}
+			}
+		}
+		this.deletedItems.addAll(itemsToDelete);
+	}
+
+	public List<IndexItem> getDeletedItems() {
+		return deletedItems;
+	}
+
 	private void prepareFilesToUpdate() {
 		List<IndexItem> itemsToUpdate = new ArrayList<>();
 		List<IndexItem> filtered = rawResources;
@@ -403,6 +426,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
 
+		DownloadResourceGroup deletedMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.DELETED_MAPS);
+		addGroup(deletedMapsGroup);
 		DownloadResourceGroup extraMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.EXTRA_MAPS);
 
 		DownloadResourceGroup otherMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_MAPS_GROUP);
@@ -434,6 +459,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		Map<WorldRegion, List<IndexItem>> groupByRegion = new LinkedHashMap<>();
 		OsmandRegions regs = app.getRegions();
 		for (IndexItem item : resources) {
+			if (item.isDeleted) {
+				deletedMapsGroup.addItem(item);
+				continue;
+			}
 			DownloadActivityType type = item.getType();
 			if (type == DownloadActivityType.VOICE_FILE) {
 				if (DownloadActivityType.isVoiceTTS(item)) {

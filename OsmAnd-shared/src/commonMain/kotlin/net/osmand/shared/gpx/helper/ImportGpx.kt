@@ -100,23 +100,33 @@ object ImportGpx {
 		val gxCoords = mutableListOf<String>()
 		val gxWhens = mutableListOf<String>()
 		var elementCount = 0
+		var isFolderName = false
 
 		while (true) {
 			when (parser.getEventType()) {
 				XmlPullParser.START_TAG -> when (parser.getName()) {
-					TAG_FOLDER -> folderNameStack.addLast("")
+					TAG_FOLDER -> {
+						folderNameStack.addLast("")
+						isFolderName = true
+					}
 					TAG_DOCUMENT -> documentName = ""
 					TAG_PLACEMARK -> {
 						currentPlacemarkName = null
 						currentPlacemarkDesc = null
 						currentCoordinates = null
+						isFolderName = false
 					}
 					TAG_GX_TRACK -> isGxTrack = true
 					TAG_NAME -> {
 						val text = parser.nextText()
 						when {
 							documentName == "" -> documentName = text
-							folderNameStack.isNotEmpty() -> folderNameStack[folderNameStack.lastIndex] = text
+							isFolderName -> {
+								if (folderNameStack.isNotEmpty()) {
+									folderNameStack[folderNameStack.lastIndex] = text
+									isFolderName = false
+								}
+							}
 							else -> currentPlacemarkName = text
 						}
 					}
@@ -127,7 +137,10 @@ object ImportGpx {
 				}
 
 				XmlPullParser.END_TAG -> when (parser.getName()) {
-					TAG_FOLDER -> folderNameStack.removeLastOrNull()
+					TAG_FOLDER -> {
+						folderNameStack.removeLastOrNull()
+						isFolderName = false
+					}
 					TAG_PLACEMARK -> {
 						if (currentCoordinates != null) {
 							writePlacemarkAsGpx(

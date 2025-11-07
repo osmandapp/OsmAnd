@@ -87,12 +87,21 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 
 	private void startForegroundWithPermission() {
 		if (!foreground && OsmAndLocationProvider.isLocationPermissionAvailable(getApp())) {
-			foreground = true;
 			Notification notification = getApp().getNotificationHelper().buildCarAppNotification();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
-			} else {
-				startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+			try {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+					startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+				} else {
+					startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+				}
+				foreground = true;
+			} catch (SecurityException e) {
+				try {
+					startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+					foreground = true;
+				} catch (SecurityException e2) {
+					LOG.error("Can't startForegroundWithPermission");
+				}
 			}
 		}
 	}
