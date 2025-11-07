@@ -638,7 +638,7 @@ public class SearchCoreFactory {
 							int[] bb = c.getBbox31();
 							if (bb == null && !r.containsRouteData(x31, y31, x31, y31, 15)) {
 								continue;
-							} else if(bb != null && !r.containsRouteData(bb[0], bb[1], bb[2], bb[3], 15)) {
+							} else if(bb != null && !r.containsPoiData()) {
 								continue;
 							}
 							if (bb != null) {
