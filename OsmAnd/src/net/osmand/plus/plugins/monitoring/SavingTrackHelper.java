@@ -621,11 +621,19 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		if (newSegment) {
 			currentTrack.addEmptySegmentToDisplay();
 		}
+
+		// Check and add new track segment if needed
 		boolean segmentAdded = false;
-		if (track.getSegments().isEmpty() || newSegment) {
-			track.getSegments().add(new TrkSegment());
-			segmentAdded = true;
+		List<TrkSegment> segments = track.getSegments();
+		if (segments.isEmpty() || newSegment) {
+			TrkSegment lastSegment = !segments.isEmpty() ? segments.get(segments.size() - 1) : null;
+			// Don't duplicate empty segments, skip if we already have one
+			if (lastSegment == null || !lastSegment.getPoints().isEmpty()) {
+				segments.add(new TrkSegment());
+				segmentAdded = true;
+			}
 		}
+
 		if (pt != null) {
 			currentTrack.appendTrackPointToDisplay(pt, app);
 			TrkSegment lt = track.getSegments().get(track.getSegments().size() - 1);
