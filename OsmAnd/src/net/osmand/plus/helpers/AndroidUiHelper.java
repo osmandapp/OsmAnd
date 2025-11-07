@@ -11,7 +11,6 @@ import static android.view.Surface.ROTATION_90;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -168,6 +167,14 @@ public class AndroidUiHelper {
 	public static boolean isTablet(@NonNull Context context) {
 		Configuration config = context.getResources().getConfiguration();
 		return config.smallestScreenWidthDp >= 600;
+	}
+
+	public static boolean isPortrait(@NonNull @UiContext Context context) {
+		int orientation = context.getResources().getConfiguration().orientation;
+		if (orientation == Configuration.ORIENTATION_PORTRAIT) return true;
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE) return false;
+
+		return isOrientationPortrait(context);
 	}
 
 	public static boolean isOrientationPortrait(@NonNull @UiContext Context context) {
