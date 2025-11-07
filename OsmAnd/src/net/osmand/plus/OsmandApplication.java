@@ -1083,7 +1083,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
 				try {
-					if (isAppInForeground()) {
+					if (isAppInForeground() && OsmAndLocationProvider.isLocationPermissionAvailable(this)) {
 						LOG.info(">>>> APP startForegroundService = " + usageIntent);
 						context.startForegroundService(intent);
 					}
