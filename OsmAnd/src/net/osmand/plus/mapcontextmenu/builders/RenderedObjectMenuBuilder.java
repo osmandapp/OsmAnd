@@ -34,6 +34,10 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		this.renderedObject = renderedObject;
 	}
 
+	public void updateRenderedObject(@NonNull RenderedObject renderedObject) {
+		this.renderedObject = renderedObject;
+	}
+
 	@Override
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		searchAmenity(view, object);
