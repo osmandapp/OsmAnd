@@ -626,7 +626,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			shiftMapControls(false);
 		}
 		updateMapDisplayPosition();
-		cardsContainer.setVisibility(View.VISIBLE);
+		AndroidUiHelper.updateVisibility(cardsContainer, true);
 		updateUpDownBtn();
 	}
 
@@ -639,7 +639,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private void collapseInfoView() {
 		infoExpanded = false;
 		currentInfoType = null;
-		cardsContainer.setVisibility(View.GONE);
+		AndroidUiHelper.updateVisibility(cardsContainer, false);
 		if (!portrait) {
 			shiftMapControls(true);
 		}
