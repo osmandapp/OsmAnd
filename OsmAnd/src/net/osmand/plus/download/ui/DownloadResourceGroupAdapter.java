@@ -1,5 +1,6 @@
 package net.osmand.plus.download.ui;
 
+import static net.osmand.plus.download.DownloadResourceGroupType.DELETED_MAPS;
 import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
 import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
@@ -22,6 +23,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapter {
@@ -37,7 +39,15 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 
 	public void update(DownloadResourceGroup mainGroup) {
 		this.mainGroup = mainGroup;
-		data = mainGroup.getGroups();
+		List<DownloadResourceGroup> lst = new ArrayList<>(mainGroup.getGroups());
+		Iterator<DownloadResourceGroup> it = lst.iterator();
+		while (it.hasNext()) {
+			DownloadResourceGroup group = it.next();
+			if (group.getType() == DELETED_MAPS) {
+				it.remove();
+			}
+		}
+		data = lst;
 		notifyDataSetChanged();
 	}
 

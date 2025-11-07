@@ -244,8 +244,8 @@ class ButtonPositionSize {
 		private const val MAX_ITERATIONS = 1000
 		private const val MAX_STUCK_ATTEMPTS = 20
 
-		var DEBUG_PRINT: Boolean = true; // false
-		var DEBUG_PRINT_MOVE: Boolean = true; // false
+		var DEBUG_PRINT: Boolean = false; // false
+		var DEBUG_PRINT_MOVE: Boolean = false; // false
 
 		const val CELL_SIZE_DP = 8
 		const val DEF_MARGIN_DP = 4
