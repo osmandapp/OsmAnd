@@ -14,7 +14,6 @@ class ButtonPositionSizeTest {
 	@Test
 	fun testLayout0() {
 		ButtonPositionSize.DEBUG_PRINT = true;
-		ButtonPositionSize.SIMPLIFIED_ALGORITHM = true;
 		val buttons = listOf(
 			ButtonPositionSize("map_right_widgets_panel", 15, false, true).
 				setSize(15, 21).setMoveDescendantsHorizontal(),
