@@ -244,9 +244,8 @@ class ButtonPositionSize {
 		private const val MAX_ITERATIONS = 1000
 		private const val MAX_STUCK_ATTEMPTS = 20
 
-		var DEBUG_PRINT: Boolean = false; // false
-		var DEBUG_PRINT_MOVE: Boolean = false; // false
-		var SIMPLIFIED_ALGORITHM: Boolean = true; // original algorithm is more complex but produces different result with broken layout
+		var DEBUG_PRINT: Boolean = true; // false
+		var DEBUG_PRINT_MOVE: Boolean = true; // false
 
 		const val CELL_SIZE_DP = 8
 		const val DEF_MARGIN_DP = 4
@@ -284,81 +283,51 @@ class ButtonPositionSize {
 				}
 			}
 			var iter = 0
+			// we do it in forward iteration (I step all [1, .. I-1] are arranged)
+			var i = 1;
+			while (i < buttons.size) {
 
-			var fixedPos = buttons.size - 1
-			// we tdo it in forward iteration (I step all [1, .. I-1] are arranged)
-			// not(SIMPLIFIED_ALGORITHM) is original algorithm it's more complex but produces different result with broken layout
-			if (SIMPLIFIED_ALGORITHM) {
-				var i = 1;
-				while (i < buttons.size) {
+				var movedOnce = false;
+				var failMove = false;
+				val button = buttons[i]
+				var ox = button.marginX;
+				var oy = button.marginY;
+				var j = i - 1;
+				while (j >= 0) {
 					if (iter++ > MAX_ITERATIONS) {
 						LOG.error("Relayout is broken.")
 						return false
 					}
-					var movedOnce = false;
-					var failMove = false;
-					val button = buttons[i]
-					var ox = button.marginX;
-					var oy = button.marginY;
-					for (j in i - 1 downTo 0) {
-						val check = buttons[j]
-						if (button.overlap(check)) {
-							val moved = moveButton(space, button, check, totalWidth, totalHeight)
-							if (!moved) {
-								failMove = true;
-								break;
-							}
-							if (check.xMove || check.yMove) {
-								// if overlapped button / panel moveable save it
-								// do not overlap buttons but allow to overlap buttons over pannels
-								ox = button.marginX;
-								oy = button.marginY;
-
-							}
-							movedOnce = true
-							if (DEBUG_PRINT_MOVE) {
-								LOG.info("Move $button because $check new bounds ${button.bounds}");
-							}
+					val check = buttons[j]
+					if (button.overlap(check)) {
+						val moved = moveButton(space, button, check, totalWidth, totalHeight)
+						if (!moved) {
+							failMove = true;
+							break;
 						}
-					}
-					if (failMove) {
-						button.marginX = ox;
-						button.marginY = oy;
-						button.updateBounds(totalWidth, totalHeight);
-						i++
-					} else if (!movedOnce) {
-						i++
+						if (check.xMove || check.yMove) {
+							// if overlapped button / panel moveable save it
+							// do not overlap buttons but allow to overlap buttons over pannels
+							ox = button.marginX;
+							oy = button.marginY;
+
+						}
+						movedOnce = true
+						if (DEBUG_PRINT_MOVE) {
+							LOG.info("Move $button because $check new bounds ${button.bounds}");
+						}
+						j = i - 1;
+					} else {
+						j --;
 					}
 				}
-			} else {
-				while (fixedPos >= 0) {
-					if (iter++ > MAX_ITERATIONS) {
-						LOG.error("Relayout is broken.")
-						return false
-					}
-					var overlap = false
-					val button = buttons[fixedPos]
-					for (i in (fixedPos + 1) until buttons.size) {
-						val check = buttons[i]
-						if (button.overlap(check)) {
-							val moved = moveButton(space, check, button, totalWidth, totalHeight)
-							if (!moved) {
-								// skip unmoveable situations
-								continue;
-							}
-							overlap = true
-							check.updateBounds(totalWidth, totalHeight)
-							if (DEBUG_PRINT_MOVE) {
-								LOG.info("Move $check because $button new bounds ${check.bounds}");
-							}
-							fixedPos = i
-							break
-						}
-					}
-
-					if (!overlap) {
-						fixedPos--
-					}
+				if (failMove) {
+					button.marginX = ox;
+					button.marginY = oy;
+					button.updateBounds(totalWidth, totalHeight);
+					i++
+				} else if (!movedOnce) {
+					i++
 				}
 			}
 			if (DEBUG_PRINT) {
@@ -402,23 +371,37 @@ class ButtonPositionSize {
 			var ox = toMove.marginX;
 			var oy = toMove.marginY;
 			var ok = false;
-			while (!ok && xMove && toMove.marginX <= totalWidth - toMove.width) {
-				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 1, 0)) {
-					ok = true;
+			for (dist in 1 until totalHeight + totalWidth) {
+				if (ok) {
+					break;
 				}
-			}
-			if (!ok) {
-				toMove.marginX = ox;
-				toMove.updateBounds(totalWidth, totalHeight);
-			}
-			while (!ok && yMove && toMove.marginY <= totalHeight - toMove.height) {
-				if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, 0, 1)) {
-					ok = true;
+				for (x in 0 until dist + 1) {
+					var dy = dist - x;
+					var dx = x;
+					if (!xMove || !yMove) {
+						if (x > 0) {
+							break;
+						}
+						if (!yMove) {
+							dx = dist - x;
+							dy = x;
+						}
+					}
+					if (toMove.marginX + dx + toMove.width > totalWidth) {
+						continue;
+					}
+					if (toMove.marginY + dy + toMove.height > totalHeight) {
+						continue;
+					}
+					if (!moveAndCheck(toMove, overlap, totalWidth, totalHeight, dx, dy)) {
+						ok = true;
+						break;
+					} else {
+						toMove.marginX = ox;
+						toMove.marginY = oy;
+						toMove.updateBounds(totalWidth, totalHeight);
+					}
 				}
-			}
-			if (!ok) {
-				toMove.marginY = oy;
-				toMove.updateBounds(totalWidth, totalHeight);
 			}
 			return ok;
 		}
