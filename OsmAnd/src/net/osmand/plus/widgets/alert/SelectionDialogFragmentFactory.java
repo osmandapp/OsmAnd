@@ -15,7 +15,8 @@ public class SelectionDialogFragmentFactory {
 			final Optional<InstallMapLayersDialogFragment> installMapLayersDialogFragment,
 			final AlertDialogData data,
 			final SelectionDialogFragmentData selectionDialogFragmentData,
-			final View.OnClickListener itemClickListener) {
+			final View.OnClickListener itemClickListener,
+			final ApplicationMode appMode) {
 		return createSelectionDialogFragment(
 				data,
 				selectionDialogFragmentData,
@@ -27,7 +28,8 @@ public class SelectionDialogFragmentFactory {
 								alertDialog,
 								alertDialogData,
 								itemByKey,
-								adapter));
+								adapter,
+								appMode));
 	}
 
 	public static RoadStyleSelectionDialogFragment createRoadStyleSelectionDialogFragment(
@@ -77,13 +79,20 @@ public class SelectionDialogFragmentFactory {
 	public static InstallMapLayersDialogFragment createInstallMapLayersDialogFragment(
 			final AlertDialogData data,
 			final SelectionDialogFragmentData selectionDialogFragmentData,
-			final View.OnClickListener itemClickListener) {
+			final View.OnClickListener itemClickListener,
+			final ApplicationMode appMode) {
 		return createSelectionDialogFragment(
 				data,
 				selectionDialogFragmentData,
 				itemClickListener,
 				true,
-				InstallMapLayersDialogFragment::new);
+				new _SelectionDialogFragmentFactory<InstallMapLayersDialogFragment>() {
+
+					@Override
+					public InstallMapLayersDialogFragment create(final AlertDialog alertDialog, final AlertDialogData alertDialogData, final Map<String, CharSequence> itemByKey, final SelectionDialogAdapter adapter) {
+						return new InstallMapLayersDialogFragment(alertDialog, alertDialogData, itemByKey, adapter, appMode);
+					}
+				});
 	}
 
 	@FunctionalInterface

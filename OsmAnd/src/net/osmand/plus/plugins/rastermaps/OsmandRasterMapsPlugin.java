@@ -37,6 +37,7 @@ import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MapLayerType;
@@ -304,7 +305,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 										return cancel;
 									}
 								},
-								true);
+								true,
+								mapActivity.getMyApplication().getSettings().getApplicationMode());
 					} else {
 						mapPref.set(keys.get(which));
 						exMapPref.set(keys.get(which));
@@ -523,7 +525,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(
 			final FragmentActivity activity,
 			final ResultMatcher<TileSourceTemplate> result,
-			final boolean showUI) {
+			final boolean showUI,
+			final ApplicationMode appMode) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (!app.getSettings().isInternetConnectionAvailable(true)) {
 			if (showUI) {
@@ -535,7 +538,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		final List<TileSourceTemplate> tileSourceTemplates = waitFor(downloadTask);
 		final Optional<InstallMapLayersDialogFragment> dialog =
-				new InstallMapLayersDialogFragmentFactory(activity, result).createInstallMapLayersDialogFragment(tileSourceTemplates);
+				new InstallMapLayersDialogFragmentFactory(activity, result).createInstallMapLayersDialogFragment(tileSourceTemplates, appMode);
 		if (showUI) {
 			dialog.ifPresent(_dialog -> _dialog.show(activity.getSupportFragmentManager()));
 		}

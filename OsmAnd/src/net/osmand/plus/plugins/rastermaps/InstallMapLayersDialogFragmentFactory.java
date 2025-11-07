@@ -13,6 +13,7 @@ import static net.osmand.map.TileSourceManager.TileSourceTemplate;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.*;
@@ -38,7 +39,9 @@ class InstallMapLayersDialogFragmentFactory {
 		this.settings = ((OsmandApplication) activity.getApplication()).getSettings();
 	}
 
-	public Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(final List<TileSourceTemplate> tileSourceTemplates) {
+	public Optional<InstallMapLayersDialogFragment> createInstallMapLayersDialogFragment(
+			final List<TileSourceTemplate> tileSourceTemplates,
+			final ApplicationMode appMode) {
 		if (activity.isFinishing()) {
 			return Optional.empty();
 		}
@@ -59,7 +62,8 @@ class InstallMapLayersDialogFragmentFactory {
 									Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 								}
 							}
-						}));
+						},
+						appMode));
 	}
 
 	private AlertDialogData getAlertDialogData(final List<TileSourceTemplate> tileSourceTemplates,

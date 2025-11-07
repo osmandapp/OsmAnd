@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class RoadStyleSelectionDialogFragment extends SelectionDialogFragment {
 
+	// FK-TODO: move appMode to super class
 	private final ApplicationMode appMode;
 
 	public RoadStyleSelectionDialogFragment(final AlertDialog alertDialog,

@@ -435,9 +435,11 @@ public class MapLayers {
 		adapter.addItem(item);
 	}
 
-	public void selectMapSourceLayer(@NonNull MapActivity mapActivity, @NonNull ContextMenuItem item) {
+	public void selectMapSourceLayer(final @NonNull MapActivity mapActivity,
+									 final @NonNull ContextMenuItem item,
+									 final ApplicationMode appMode) {
 		this
-				.createMapLayerSelectionDialogFragment(mapActivity, item)
+				.createMapLayerSelectionDialogFragment(mapActivity, item, appMode)
 				.ifPresentOrElse(
 						mapLayerSelectionDialog -> mapLayerSelectionDialog.show(mapActivity.getSupportFragmentManager()),
 						() -> app.showToastMessage(R.string.map_online_plugin_is_not_installed));
@@ -445,7 +447,8 @@ public class MapLayers {
 
 	public Optional<MapLayerSelectionDialogFragment> createMapLayerSelectionDialogFragment(
 			final MapActivity mapActivity,
-			final ContextMenuItem item) {
+			final ContextMenuItem item,
+			final ApplicationMode appMode) {
 		return createMapLayerSelectionDialogFragment(
 				mapActivity,
 				true,
@@ -455,7 +458,8 @@ public class MapLayers {
 					item.setDescription(settings.getSelectedMapSourceTitle());
 					mapActivity.getDashboard().refreshContent(false);
 					return true;
-				});
+				},
+				appMode);
 	}
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
@@ -463,7 +467,7 @@ public class MapLayers {
 							   @NonNull CommonPreference<String> targetLayer,
 							   @Nullable CallbackWithObject<String> callback) {
 		this
-				.createMapLayerSelectionDialogFragment(mapActivity, includeOfflineMaps, targetLayer, callback)
+				.createMapLayerSelectionDialogFragment(mapActivity, includeOfflineMaps, targetLayer, callback, mapActivity.getMyApplication().getSettings().getApplicationMode())
 				.ifPresentOrElse(
 						dialog -> dialog.show(mapActivity.getSupportFragmentManager()),
 						() -> app.showToastMessage(R.string.map_online_plugin_is_not_installed));
@@ -473,7 +477,8 @@ public class MapLayers {
 			final @NonNull MapActivity mapActivity,
 			final boolean includeOfflineMaps,
 			final @NonNull CommonPreference<String> targetLayer,
-			final @Nullable CallbackWithObject<String> callback) {
+			final @Nullable CallbackWithObject<String> callback,
+			final ApplicationMode appMode) {
 		if (!isOnlineMapsPluginActive()) {
 			return Optional.empty();
 		}
@@ -493,7 +498,8 @@ public class MapLayers {
 								includeOfflineMaps,
 								targetLayer,
 								callback,
-								false),
+								false,
+								appMode),
 						dialogData,
 						selectionDialogFragmentData,
 						new View.OnClickListener() {
@@ -508,7 +514,8 @@ public class MapLayers {
 										callback,
 										selectionDialogFragmentData.keys().get(which));
 							}
-						}));
+						},
+						appMode));
 	}
 
 	private SelectionDialogFragmentData getSelectionDialogFragmentData(final boolean includeOfflineMaps,
@@ -587,7 +594,8 @@ public class MapLayers {
 						includeOfflineMaps,
 						targetLayer,
 						callback,
-						true);
+						true,
+						settings.getApplicationMode());
 			default:
 				targetLayer.set(layerKey);
 				if (targetLayer == settings.MAP_TILE_SOURCES) {
@@ -606,7 +614,8 @@ public class MapLayers {
 			final boolean includeOfflineMaps,
 			final CommonPreference<String> targetLayer,
 			final CallbackWithObject<String> callback,
-			final boolean showUI) {
+			final boolean showUI,
+			final ApplicationMode appMode) {
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		return OsmandRasterMapsPlugin.createInstallMapLayersDialogFragment(
 				mapActivity,
@@ -641,7 +650,8 @@ public class MapLayers {
 						return false;
 					}
 				},
-				showUI);
+				showUI,
+				appMode);
 	}
 
 	private void updateRoutingPoiFiltersIfNeeded() {

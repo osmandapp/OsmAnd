@@ -249,7 +249,8 @@ public class ConfigureMapMenu {
 		final Optional<MapLayerSelectionDialogFragment> mapLayerSelectionDialogFragment =
 				activity.getMapLayers().createMapLayerSelectionDialogFragment(
 						activity,
-						mapSourceItem);
+						mapSourceItem,
+						appMode);
 
 		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
