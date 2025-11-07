@@ -616,7 +616,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		trkPoints++;
 	}
 
-	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
+	private void addTrackPoint(WptPt point, boolean newSegment, long time) {
 		Track track = currentTrack.getModifiableGpxFile().getTracks().get(0);
 		if (newSegment) {
 			currentTrack.addEmptySegmentToDisplay();
@@ -634,10 +634,25 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			}
 		}
 
-		if (pt != null) {
-			currentTrack.appendTrackPointToDisplay(pt, app);
-			TrkSegment lt = track.getSegments().get(track.getSegments().size() - 1);
-			lt.getPoints().add(pt);
+		// Add point to the current segment
+		if (point != null) {
+			currentTrack.appendTrackPointToDisplay(point, app);
+			TrkSegment currentSegment = segments.get(segments.size() - 1);
+			List<WptPt> currentSegmentPoints = currentSegment.getPoints();
+			currentSegmentPoints.add(point);
+			if (currentSegmentPoints.size() == 1) {
+				// Mark current point as start for segment
+				point.setFirstPoint(true);
+				// Mark previous point as last for segment
+				if (segments.size() > 1) {
+					TrkSegment previousSegment = segments.get(segments.size() - 2);
+					List<WptPt> points = previousSegment.getPoints();
+					if (!points.isEmpty()) {
+						WptPt previousPoint = points.get(points.size() - 1);
+						previousPoint.setLastPoint(true);
+					}
+				}
+			}
 		}
 		if (segmentAdded) {
 			currentTrack.processPoints(app);
