@@ -18,7 +18,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.EmptyStackException;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,7 +30,7 @@ public class AisMessageListener {
     private InputStream tcpStream;
     private InputStream fileStream;
     private SentenceReader sentenceReader = null;
-    private Stack<SentenceListener> listenerList = null;
+    private Stack<SentenceListener> listeners = new Stack<>();
     private AisDataListener dataListener;
 
     public interface AisDataListener {
@@ -98,7 +97,7 @@ public class AisMessageListener {
         this.tcpSocket = null;
         this.tcpStream = null;
         this.fileStream = null;
-        this.listenerList = new Stack<>();
+        this.listeners = new Stack<>();
     }
 
     private void initListeners() throws IOException {
@@ -129,21 +128,13 @@ public class AisMessageListener {
         }
     }
 
-    private void removeListeners() {
-        if (sentenceReader != null) {
-            sentenceReader.stop();
-            while (!this.listenerList.isEmpty()) {
-                SentenceListener listener;
-                try {
-                    listener = this.listenerList.pop();
-                    sentenceReader.removeSentenceListener(listener);
-                    Log.d("AisMessageListener", "SentenceListener removed");
-                } catch (EmptyStackException e) {
-                    Log.e("AisMessageListener", "stack empty");
-                }
-            }
-        }
-    }
+	private void removeListeners() {
+		if (sentenceReader != null) {
+			sentenceReader.stop();
+			sentenceReader = null;
+		}
+		listeners = new Stack<>();
+	}
 
     public void stopListener() {
         if (this.timer != null) {
@@ -416,7 +407,7 @@ public class AisMessageListener {
         //AisMessageListener.this.sentenceReader.addSentenceListener(listener); // listen to all (!) NMEA messages
         AisMessageListener.this.sentenceReader.addSentenceListener(listener, SentenceId.VDM);
         AisMessageListener.this.sentenceReader.addSentenceListener(listener, SentenceId.VDO);
-        AisMessageListener.this.listenerList.push(listener);
+        AisMessageListener.this.listeners.push(listener);
         Log.d("AisMessageListener","Listener Type " + aisType + " started");
     }
 
