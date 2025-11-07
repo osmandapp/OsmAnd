@@ -53,6 +53,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/search_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_row_min_height"
             android:background="?attr/bg_color"
