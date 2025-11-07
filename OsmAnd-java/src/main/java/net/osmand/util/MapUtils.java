@@ -723,7 +723,7 @@ public class MapUtils {
 
 	public static QuadRect calculateLatLonBbox(double latitude, double longitude, int radiusMeters) {
 		int zoom = 16;
-		double coeff = (radiusMeters / MapUtils.getTileDistanceWidth(zoom)) * Math.sqrt(2);
+		double coeff = radiusMeters / MapUtils.getTileDistanceWidth(latitude, zoom);
 		double tx = MapUtils.getTileNumberX(zoom, longitude);
 		double ty = MapUtils.getTileNumberY(zoom, latitude);
 		double topLeftX = Math.max(0, tx - coeff);

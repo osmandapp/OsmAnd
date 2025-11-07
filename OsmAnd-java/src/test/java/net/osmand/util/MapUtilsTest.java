@@ -1,5 +1,8 @@
 package net.osmand.util;
 
+import net.osmand.data.QuadRect;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.util.KMapUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -90,6 +93,28 @@ public class MapUtilsTest {
 					MapUtils.getDistance(same1, same2) / 1000.0), MapUtils.getDistance(same1, same2) < 10);
 		}
 	}
-	
-	
+
+	@Test // ~10ms
+	public void calculateLatLonBboxTest() {
+		final double MAX_DIFF = 0.05; // 5% tolerance
+		for (double lat = MapUtils.MIN_LATITUDE + 10; lat <= MapUtils.MAX_LATITUDE - 10; lat += 10) {
+			for (double lon = MapUtils.MIN_LONGITUDE + 10; lon <= MapUtils.MAX_LONGITUDE - 10; lon += 10) {
+				for (double radius = 50; radius < 55000; radius *= 2) {
+					QuadRect bboxJava = MapUtils.calculateLatLonBbox(lat, lon, (int) radius);
+					double yJava = MapUtils.getDistance(bboxJava.top, bboxJava.left, bboxJava.top, bboxJava.right);
+					double xJava = MapUtils.getDistance(bboxJava.top, bboxJava.left, bboxJava.bottom, bboxJava.left);
+					KQuadRect bboxKotlin = KMapUtils.INSTANCE.calculateLatLonBbox(lat, lon, (int) radius);
+					double yKotlin = KMapUtils.INSTANCE.getDistance(
+							bboxKotlin.getTop(), bboxKotlin.getLeft(), bboxKotlin.getTop(), bboxKotlin.getRight());
+					double xKotlin = KMapUtils.INSTANCE.getDistance(
+							bboxKotlin.getTop(), bboxKotlin.getLeft(), bboxKotlin.getBottom(), bboxKotlin.getLeft());
+					Assert.assertTrue("yJava", Math.abs(radius * 2 - yJava) / (radius * 2) < MAX_DIFF);
+					Assert.assertTrue("xJava", Math.abs(radius * 2 - xJava) / (radius * 2) < MAX_DIFF);
+					Assert.assertTrue("yKotlin", Math.abs(radius * 2 - yKotlin) / (radius * 2) < MAX_DIFF);
+					Assert.assertTrue("xKotlin", Math.abs(radius * 2 - xKotlin) / (radius * 2) < MAX_DIFF);
+				}
+			}
+		}
+	}
+
 }

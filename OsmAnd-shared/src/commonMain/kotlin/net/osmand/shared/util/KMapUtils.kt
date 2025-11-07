@@ -576,7 +576,7 @@ object KMapUtils {
 
 	fun calculateLatLonBbox(latitude: Double, longitude: Double, radiusMeters: Int): KQuadRect {
 		val zoom = 16.0
-		val coeff = radiusMeters / getTileDistanceWidth(zoom) * sqrt(2.0)
+		val coeff = radiusMeters / getTileDistanceWidth(latitude, zoom)
 		val tx = getTileNumberX(zoom, longitude)
 		val ty = getTileNumberY(zoom, latitude)
 		val topLeftX = max(0.0, tx - coeff)
