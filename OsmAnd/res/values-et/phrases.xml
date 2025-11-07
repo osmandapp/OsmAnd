@@ -319,7 +319,7 @@
     <string name="poi_traffic_calming_choker">Lämmataja</string>
     <string name="poi_traffic_signals">Stopptuli</string>
     <string name="poi_car_repair">Autoremont</string>
-    <string name="poi_service_tyres">Rehvid</string>
+    <string name="poi_service_tyres">Rehvid;Rehv</string>
     <string name="poi_vehicle_inspection">Sõidukite tehnoülevaatus</string>
     <string name="poi_car_wash">Autopesula</string>
     <string name="poi_fuel">Tankla; Bensiinijaam</string>
@@ -2883,7 +2883,7 @@
     <string name="poi_public_bookcase_type_shelf">Liik: riiul</string>
     <string name="poi_cuisine_pizza">Pitsa</string>
     <string name="poi_cuisine_burger">Burger</string>
-    <string name="poi_cuisine_coffee">Kohv</string>
+    <string name="poi_cuisine_coffee_shop">Kohv</string>
     <string name="poi_cuisine_sandwich">Võileib</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_chicken">Kana</string>
@@ -3561,13 +3561,13 @@
     <string name="poi_healthcare_speciality_radiotherapy">Kiiritusravi</string>
     <string name="poi_rescue_box">Päästekast</string>
     <string name="reddit">Reddit</string>
-    <string name="poi_hazard_additional_erosion">Ohutegur: erosioon</string>
-    <string name="poi_hazard_additional_falling_rocks">Ohutegur: langevad kivid</string>
-    <string name="poi_hazard_additional_nuclear">Ohutegur: tuuma</string>
-    <string name="poi_hazard_additional_flood">Ohutegur: üleujutus</string>
-    <string name="poi_hazard_additional_avalanche">Ohutegur: laviin</string>
-    <string name="poi_hazard_additional_minefield">Ohutegur: miiniväli</string>
-    <string name="poi_hazard_additional_contamination">Ohutegur: saastumine</string>
+    <string name="poi_hazard_additional_erosion">Erosioon</string>
+    <string name="poi_hazard_additional_falling_rocks">Langevad kivid</string>
+    <string name="poi_hazard_additional_nuclear">Tuumaoht</string>
+    <string name="poi_hazard_additional_flood">Üleujutus</string>
+    <string name="poi_hazard_additional_avalanche">Laviin</string>
+    <string name="poi_hazard_additional_minefield">Miiniväli</string>
+    <string name="poi_hazard_additional_contamination">Saastumine</string>
     <string name="poi_defibrillator_location">Asukoht</string>
     <string name="poi_changing_table_yes">Jah;Mähkimislaud: jah</string>
     <string name="poi_changing_table_no">Ei;Mähkimislaud: ei</string>
@@ -5062,4 +5062,13 @@
     <string name="poi_route_point_category">Reisikategooria</string>
     <string name="poi_denomination_ukrainian_orthodox">Ukraina õigeusu</string>
     <string name="poi_denomination_ukrainian_greek_catholic">Ukraina kreekakatoliku</string>
+    <string name="poi_sample_collection_filter">Näidiste kogumispunkt</string>
+    <string name="poi_denomination_ashkenazi">Aškenazi</string>
+    <string name="poi_denomination_hasidic">Hassiidi</string>
+    <string name="poi_denomination_slavic">Slaavi</string>
+    <string name="poi_denomination_celtic">Keldi</string>
+    <string name="poi_denomination_conservative">Konservatiivne</string>
+    <string name="poi_denomination_neo_pentecostal">Uus-nelipühi</string>
+    <string name="poi_piste_downhill">Allasõidunõlv;Suusanõlv;Suusarada mäel</string>
+    <string name="poi_route_activity_type_skiing">Suusarajad</string>
 </resources>

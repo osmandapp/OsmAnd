@@ -596,6 +596,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection targetsCollection = super.getInsetTargets();
 		targetsCollection.replace(InsetTarget.createHorizontalLandscape(R.id.tab_toolbar_layout, R.id.toolbar, R.id.toolbar_edit, R.id.button_toolbar_layout));
+		targetsCollection.replace(InsetTarget.createFab(R.id.fab));
 		return targetsCollection;
 	}
 
@@ -819,7 +820,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	public void closeSearch() {
 		app.getPoiFilters().restoreSelectedPoiFilters();
-		dismiss();
+		dismissAllowingStateLoss();
 	}
 
 	public void addMainSearchFragment() {

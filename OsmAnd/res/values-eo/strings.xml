@@ -3523,7 +3523,7 @@
     <string name="empty_state_my_tracks">Aldoni spuron</string>
     <string name="empty_state_my_tracks_desc">Registru novan spuron aŭ enportu dosierojn de spuroj</string>
     <string name="context_menu_item_add_waypoint">Aldoni navigadpunkton al spuro</string>
-    <string name="map_widget_monitoring">Registri spuron</string>
+    <string name="map_widget_monitoring">Spur-registrilo</string>
     <string name="marker_save_as_track">Konservi kiel dosieron de kurso</string>
     <string name="import_track_descr">Elekti dosieron de spuro por ĝin sekvi aŭ enporti el via aparato.</string>
     <string name="select_another_track">Elekti alian spuron</string>
@@ -5893,4 +5893,17 @@
     <string name="shared_string_last_downhill">Antaŭa malsupreniro</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skiaj kursoj kaj descendejoj</string>
     <string name="rendering_attr_pisteRoutes_name">Skivojoj kaj descendejoj</string>
+    <string name="requires_internet_connection">Postulas konekton kun la interreto</string>
+    <string name="save_and_access_articles_offline">Ŝparas uzon de datum-konekto, ebligas aliri artikolojn malkonekte</string>
+    <string name="private_access_routing_req_short">Ĉu permesi uzi privatan vojon por aliri vian celon?</string>
+    <string name="download_wikipedia_label">Elŝuti Vikipedion</string>
+    <string name="quick_action_weather_layers">Butono por montri/kaŝi tavolojn de vetero sur la mapo.</string>
+    <string name="quick_action_wind_animation_layer">Butono por montri/kaŝi movbildan tavolon de vento sur la mapo.</string>
+    <string name="wind_animation_layer">Movbilda tavolo de vento</string>
+    <string name="weather_layers">Tavoloj de vetero</string>
+    <string name="lang_crh">Krime-tatara (latina)</string>
+    <string name="visualizing_button_grid">Krado de map-butonoj</string>
+    <string name="button_frames">Kadroj ĉirkaŭ butonoj</string>
+    <string name="slots">Truoj</string>
+    <string name="efficient_grid">Efika krado</string>
 </resources>

@@ -174,18 +174,18 @@ public class Amenity extends MapObject {
 	}
 
 	public String getSubTypeStr() {
-		PoiCategory pc = getType();
-		String[] subtypes = getSubType().split(";");
 		String typeStr = "";
-		//multi value
-		for (String subType : subtypes) {
-			PoiType pt = pc.getPoiTypeByKeyName(subType);
-			if (pt != null) {
-				if (!typeStr.isEmpty()) {
-					typeStr += ", " + pt.getTranslation().toLowerCase();
-				} else {
-					typeStr = pt.getTranslation();
+		for (String subType : getSubType().split(";")) {
+			PoiType pt = getType().getPoiTypeByKeyName(subType);
+			if (pt == null) {
+				// Try to get POI type from another category, but skip non-OSM-types
+				pt = (PoiType)MapPoiTypes.getDefault().getAnyPoiTypeByKey(subType);
+				if (pt != null && pt.isNotEditableOsm()) {
+					pt = null;
 				}
+			}
+			if (pt != null) {
+				typeStr += typeStr.isEmpty() ? pt.getTranslation() : ", " + pt.getTranslation().toLowerCase();
 			}
 		}
 		if (typeStr.isEmpty()) {

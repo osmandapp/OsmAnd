@@ -1,14 +1,9 @@
 package net.osmand.plus.track.clickable;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.gpx.clickable.ClickableWayTags.CLICKABLE_TAGS;
 import static net.osmand.gpx.clickable.ClickableWayTags.getGpxColorByTags;
-import static net.osmand.gpx.clickable.ClickableWayTags.getGpxShieldTags;
 import static net.osmand.gpx.clickable.ClickableWayTags.isClickableWayTags;
-
-// THINK use similar icon="piste_high_difficulty" for no-name pistes
-// THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +18,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.clickable.ClickableWayTags;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -73,9 +69,15 @@ public class ClickableWayHelper {
 
     @Nullable
     public ClickableWay loadClickableWay(@NonNull LatLon selectedLatLon, @NonNull RenderedObject renderedObject) {
-        long osmId = ObfConstants.getOsmObjectId(renderedObject);
+        long osmId = ObfConstants.getOsmIdFromBinaryMapObjectId(renderedObject.getId());
         Map<String, String> tags = renderedObject.getTags();
         String name = renderedObject.getName();
+        if (Algorithms.isEmpty(name) || ".".equals(name)) {
+            name = tags.get(Amenity.NAME);
+        }
+        if (Algorithms.isEmpty(name) || ".".equals(name)) {
+            name = tags.get(Amenity.REF);
+        }
         TIntArrayList xPoints = renderedObject.getX();
         TIntArrayList yPoints = renderedObject.getY();
         QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
@@ -149,7 +151,9 @@ public class ClickableWayHelper {
         String color = getGpxColorByTags(tags);
         if (color != null) {
             gpxFile.setColor(color);
-            gpxFile.getExtensionsToWrite().putAll(getGpxShieldTags(color));
+            for (Map.Entry<String, String> gpxShieldTags : ClickableWayTags.getGpxShieldTags(color).entrySet()) {
+                gpxFile.getExtensionsToWrite().putIfAbsent(gpxShieldTags.getKey(), gpxShieldTags.getValue());
+            }
         }
 
         return new ClickableWay(gpxFile, osmId, name, selectedLatLon, bbox);

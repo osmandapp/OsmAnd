@@ -44,6 +44,14 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private TextInputEditText noteText;
 
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if(titleTextId == 0) {
+			dismiss();
+		}
+	}
+
+	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(titleTextId)));
 

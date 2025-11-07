@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-      <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-5-2-released/</string>  
+<!--      <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-4-2-released/</string>  -->
+    <string name="docs_latest_version" translatable="false">https://docs.osmand.net/docs/versions/future-android</string>
     <string name="blog_guideline" translatable="false">https://osmand.net/blog/guideline-pt</string>
 
     <string name="docs_add_online_maps" translatable="false">https://docs.osmand.net/docs/user/map/raster-maps#add-new-online-raster-map-source</string>
@@ -49,7 +50,7 @@
     <string name="docs_proxy_settings" translatable="false">https://osmand.net/docs/user/personal/global-settings/#proxy</string>
     <string name="docs_free_versions" translatable="false">https://docs.osmand.net/docs/versions/free-versions</string>
 
-    <string name="community_twitter" translatable="false">https://twitter.com/osmandapp</string>
+    <string name="community_x" translatable="false">https://x.com/osmandapp</string>
     <string name="community_reddit" translatable="false">https://www.reddit.com/r/OsmAnd</string>
     <string name="community_facebook" translatable="false">https://www.facebook.com/osmandapp</string>
     <string name="community_vk" translatable="false">https://vk.com/osmandapp</string>

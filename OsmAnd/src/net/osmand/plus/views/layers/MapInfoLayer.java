@@ -206,7 +206,6 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (isVisible) {
 			targetsCollection.add(InsetTarget.createCustomBuilder(bottomWidgetsPanel)
 					.portraitSides(InsetSide.BOTTOM)
-					.landscapeSides(InsetSide.BOTTOM)
 					.applyPadding(true).build());
 
 			mapHudLayoutBuilder.portraitSides(InsetSide.TOP, InsetSide.RESET)
@@ -233,6 +232,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 		if (bottomWidgetsPanel != null && mapHudLayout != null) {
 			updateLayerInsets(bottomWidgetsPanel.isAnyRowVisible(), true);
+			mapHudLayout.setWindowInsets(windowInsets);
 		}
 	}
 

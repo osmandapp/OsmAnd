@@ -528,8 +528,8 @@
     <string name="poi_military_naval_base">Militaire marinebasis</string>
     <string name="poi_man_made">Kunstmatig</string>
     <string name="poi_service">Dienst</string>
-    <string name="poi_rugby_union">Rugby bond</string>
-    <string name="poi_rugby_league">Rugby competitie</string>
+    <string name="poi_rugby_union">Rugby Union</string>
+    <string name="poi_rugby_league">Rugby league</string>
     <string name="poi_toboggan">Rodelen</string>
     <string name="poi_artwork">Kunst</string>
     <string name="poi_boundary_stone">Grenspaal</string>
@@ -2325,7 +2325,7 @@
     <string name="poi_concentration_camp_gulag">Type: Goelag</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Burger</string>
-    <string name="poi_cuisine_coffee">Koffie</string>
+    <string name="poi_cuisine_coffee_shop">Koffie</string>
     <string name="poi_cuisine_sandwich">Broodjes</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_doner">Döner kebab (shoarma)</string>

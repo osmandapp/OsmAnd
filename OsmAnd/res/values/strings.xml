@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="efficient_grid">Efficient grid</string>
+    <string name="slots">Slots</string>
+    <string name="button_frames">Button frames</string>
+    <string name="visualizing_button_grid">Map button grid</string>
     <string name="quick_action_weather_layers">A toggle to show or hide weather layers on the map.</string>
     <string name="quick_action_wind_animation_layer">A toggle to show or hide the wind animation layer on the map.</string>
     <string name="wind_animation_layer">Wind animation layer</string>
@@ -660,6 +664,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
     <string name="show_spherical_map">Show spherical map</string>
     <string name="show_spherical_map_description">Display spheroidal model of the Earth</string>
+    <string name="enable_3d_objects">Enable 3D buildings</string>
+    <string name="enable_3d_objects_description">Display 3D building objects on the map</string>
     <string name="show_debug_tile">Show tile information</string>
     <string name="show_rasterization_debug_tile">Show tile rasterization information</string>
     <string name="show_debug_tile_description">Display information about map symbols of each tile</string>
@@ -6275,4 +6281,5 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
+    <string name="lang_crh">Crimean Tatar (latin)</string>
 </resources>

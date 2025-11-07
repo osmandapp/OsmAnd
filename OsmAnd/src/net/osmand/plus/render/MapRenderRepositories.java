@@ -1261,7 +1261,7 @@ public class MapRenderRepositories {
 		boolean showLocal = settings.MAP_SHOW_LOCAL_NAMES.get();
 
 		if (isBasemapZoom(zoom)) {
-			return LanguagePreference.LocalizedOrTransliterated;
+			return LanguagePreference.LocalizedOrNative;
 		}
 		
 		if (preferredLocale.isEmpty()) {

@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class PointDescription {
 	private String name = "";
 	private String typeName;
 	private String iconName;
+	private Drawable iconDrawable;
 
 	private double lat;
 	private double lon;
@@ -473,5 +475,13 @@ public class PointDescription {
 		} else {
 			return R.drawable.ic_action_street_name;
 		}
+	}
+
+	public Drawable getIconDrawable() {
+		return iconDrawable;
+	}
+
+	public void setIconDrawable(Drawable iconDrawable) {
+		this.iconDrawable = iconDrawable;
 	}
 }

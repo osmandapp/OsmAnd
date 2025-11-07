@@ -1860,7 +1860,7 @@
     <string name="poi_xmas_url">Natale: sito web</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Burger</string>
-    <string name="poi_cuisine_coffee">Caffè</string>
+    <string name="poi_cuisine_coffee_shop">Caffè</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_chicken">Pollo</string>
     <string name="poi_cuisine_sushi">Sushi</string>

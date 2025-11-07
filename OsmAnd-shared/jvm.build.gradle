@@ -64,14 +64,14 @@ artifacts {
 }
 
 
-version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "5.2"
+version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
 publishing {
     publications {
         ivyJava(IvyPublication) {
             from components.java
 
             // Define the artifact with a specific name and classifier
-            artifact("build/libs/OsmAnd-shared-jvm-5.2.jar") {
+            artifact("build/libs/OsmAnd-shared-jvm-master-snapshot.jar") {
                 name = 'OsmAnd-shared-jvm'
                 type = 'jar'
                 extension = 'jar'

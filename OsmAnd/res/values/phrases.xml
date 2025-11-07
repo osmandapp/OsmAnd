@@ -193,6 +193,7 @@
 	<string name="poi_cafe_filter">Cafe</string>
 	<string name="poi_network_foot">Routes network (hiking)</string>
 	<string name="poi_network_cycling">Routes network (cycling)</string>
+	<string name="poi_sample_collection_filter">Sample collection</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -398,7 +399,7 @@
 	<string name="poi_traffic_signals">Stop light</string>
 
 	<string name="poi_car_repair">Car repair</string>
-	<string name="poi_service_tyres">Tires</string>
+	<string name="poi_service_tyres">Tyres;Tire</string>
 	<string name="poi_vehicle_inspection">Vehicle inspection</string>
 	<string name="poi_car_wash">Car wash</string>
 	<string name="poi_fuel">Gas station;Gasoline station;Filling station;Petrol station</string>
@@ -1436,8 +1437,9 @@
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
-        <string name="reddit">Reddit</string>
+	<string name="reddit">Reddit</string>
 	<string name="twitter">Twitter</string>
+	<string name="x">X (formerly Twitter)</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
@@ -3324,7 +3326,7 @@
 	<string name="poi_cuisine">Cuisine</string>
 	<string name="poi_cuisine_pizza">Pizza</string>
 	<string name="poi_cuisine_burger">Burger</string>
-	<string name="poi_cuisine_coffee">Coffee</string>
+	<string name="poi_cuisine_coffee_shop">Coffee shop</string>
 	<string name="poi_cuisine_sandwich">Sandwich</string>
 	<string name="poi_cuisine_kebab">Kebab</string>
 	<string name="poi_cuisine_doner">Doner kebab (shawarma)</string>
@@ -5759,5 +5761,9 @@
 	<string name="poi_barrier_chain">Chain barrier</string>
 	<string name="poi_barrier_log">Log</string>
 	<string name="poi_barrier_sliding_gate">Sliding gate</string>
+	<string name="poi_sample_collection">Sample collection</string>
+	<string name="poi_sample_collection_yes">Yes</string>
+	<string name="poi_sample_collection_covid19">COVID19</string>
+	<string name="poi_sample_collection_blood">Blood</string>
 
 </resources>

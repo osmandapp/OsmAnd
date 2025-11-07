@@ -83,6 +83,15 @@ public class SplitCardController extends BaseMultiStateCardController {
 		return list;
 	}
 
+	@NonNull
+	@Override
+	protected CardState findCardState(@Nullable Object tag) {
+		if (tag instanceof Integer value && value > 0) {
+			return super.findCardState(CARD_STATE_SELECT_ID);
+		}
+		return super.findCardState(tag);
+	}
+
 	@Override
 	protected void onSelectCardState(@NonNull CardState cardState) {
 		if (cardState.isOriginal()) {

@@ -2249,7 +2249,7 @@
     <string name="poi_railway_yard">Gare aux marchandises</string>
     <string name="poi_military_checkpoint">Point de contrôle militaire</string>
     <string name="poi_traffic_mirror">Miroir de circulation</string>
-    <string name="poi_cuisine_coffee">Café</string>
+    <string name="poi_cuisine_coffee_shop">Café</string>
     <string name="poi_fast_food_cafeteria">Oui;Cafétéria</string>
     <string name="poi_drink_wine_yes">Vin : oui</string>
     <string name="poi_organic_yes">Oui;Biologique</string>
@@ -5158,4 +5158,10 @@
     <string name="poi_barrier_sliding_gate">Portail coulissant</string>
     <string name="poi_piste_downhill">Piste de descente ; Piste de ski</string>
     <string name="poi_route_activity_type_skiing">Itinéraires de ski</string>
+    <string name="poi_sample_collection_filter">Échantillonnage</string>
+    <string name="x">X (anciennement Twitter)</string>
+    <string name="poi_sample_collection">Échantillonnage</string>
+    <string name="poi_sample_collection_yes">Oui</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_blood">Sang</string>
 </resources>

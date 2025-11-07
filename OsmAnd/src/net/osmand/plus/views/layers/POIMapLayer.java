@@ -163,24 +163,24 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		travelRendererHelper.addFileVisibilityListener(this);
 		data = new MapLayerData<>() {
 
-            Set<PoiUIFilter> calculatedFilters;
+			Set<PoiUIFilter> calculatedFilters;
 
-            {
-                ZOOM_THRESHOLD = 0;
-            }
+			{
+				ZOOM_THRESHOLD = 0;
+			}
 
-            @Override
-            public boolean isInterrupted() {
-                return super.isInterrupted();
-            }
+			@Override
+			public boolean isInterrupted() {
+				return super.isInterrupted();
+			}
 
-            @Override
-            public void layerOnPreExecute() {
-                calculatedFilters = collectFilters();
-            }
+			@Override
+			public void layerOnPreExecute() {
+				calculatedFilters = collectFilters();
+			}
 
-            @Override
-            public void layerOnPostExecute() {
+			@Override
+			public void layerOnPostExecute() {
 				if (isDefferedResults()) {
 					clearPoiTileProvider();
 					setDefferedResults(false);
@@ -191,32 +191,33 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					mapRenderer.updateSubsection(SELECTED_POI_SECTION);
 				}
 				topPlacesBox = null;
-                app.getOsmandMap().refreshMap();
-            }
+				app.getOsmandMap().refreshMap();
+			}
 
-            @Override
-            protected Pair<List<Amenity>, List<Amenity>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
-                if (customObjectsDelegate != null) {
+			@Override
+			protected Pair<List<Amenity>, List<Amenity>> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				if (customObjectsDelegate != null) {
 					List<Amenity> mapObjects = customObjectsDelegate.getMapObjects();
 					return new Pair<>(mapObjects, mapObjects);
-                }
-                if (calculatedFilters.isEmpty()) {
+				}
+				Set<PoiUIFilter> poiUIFilters = this.calculatedFilters;
+				if (Algorithms.isEmpty(poiUIFilters)) {
 					topPlacesFilter = null;
-                    return new Pair<>(Collections.emptyList(), Collections.emptyList());
-                }
-                int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
+					return new Pair<>(Collections.emptyList(), Collections.emptyList());
+				}
+				int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
 
-                List<Amenity> res = new ArrayList<>();
-                Set<String> uniqueRouteIds = new HashSet<>();
+				List<Amenity> res = new ArrayList<>();
+				Set<String> uniqueRouteIds = new HashSet<>();
 				topPlacesFilter = null;
-				for (PoiUIFilter filter : calculatedFilters) {
+				for (PoiUIFilter filter : poiUIFilters) {
 					if (filter.isTopImagesFilter()) {
 						topPlacesFilter = filter;
 					}
 				}
-                PoiFilterUtils.combineStandardPoiFilters(calculatedFilters, app);
-                for (PoiUIFilter filter : calculatedFilters) {
-                    List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
+				PoiFilterUtils.combineStandardPoiFilters(poiUIFilters, app);
+				for (PoiUIFilter filter : poiUIFilters) {
+					List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, z, new PoiUIFilterResultMatcher<>() {
 
 								@Override
@@ -225,15 +226,15 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 								}
 
 								@Override
-                                public boolean publish(Amenity object) {
-                                    return true;
-                                }
+								public boolean publish(Amenity object) {
+									return true;
+								}
 
-			                    @Override
-			                    public boolean isCancelled() {
-				                    return isInterrupted();
-			                    }
-		                    });
+								@Override
+								public boolean isCancelled() {
+									return isInterrupted();
+								}
+							});
 					if (filter.isTopWikiFilter()) {
 						PoiFilterUtils.sortByElo(amenities);
 						res.addAll(0, amenities);
@@ -506,10 +507,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				}
 			}
 			Bitmap topPlaceBitmap = getTopPlaceBitmap(place);
-			if(topPlaceBitmap != null) {
+			if (topPlaceBitmap != null) {
 				mapPlaces.add(new MapTopPlace(placeId, position, topPlaceBitmap, alreadyExists));
 			}
-			if(mapPlaces.size() == topPlacesLimit) {
+			if (mapPlaces.size() == topPlacesLimit) {
 				break;
 			}
 		}

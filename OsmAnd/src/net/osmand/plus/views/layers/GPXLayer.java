@@ -1251,7 +1251,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					boolean showArrows = isShowArrowsForTrack(gpxFile);
-					if (coloringType.isRouteInfoAttribute()) {
+					if (coloringType.isRouteInfoAttribute() || currentTrack) {
 						CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 						updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
 					}

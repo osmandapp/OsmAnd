@@ -3,7 +3,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">A Telegram (üzenetküldő alkalmazás) a másokkal való összekapcsolódásra és kommunikációra használható.</string>
     <string name="privacy_policy_telegram_client">A Telegram nyílt platformot használó kliensprogramok egyike az OsmAnd Tracker. Partnerei bármelyik másik Telegram kliensprogramot is használhatják.</string>
-    <string name="privacy_policy_agree">A „Tovább”-ra koppintva elfogadja a Telegram és az OsmAnd adatvédelmi irányelveinek feltételeit.</string>
+    <string name="privacy_policy_agree">A „Tovább” gombra koppintva elfogadja a Telegram és az OsmAnd adatvédelmi irányelveinek feltételeit.</string>
     <string name="shared_string_accept">Elfogadás</string>
     <string name="telegram_privacy_policy">Telegram adatvédelmi irányelvei</string>
     <string name="osmand_privacy_policy">OsmAnd adatvédelmi irányelvei</string>
@@ -50,7 +50,7 @@
     <string name="location_recording_enabled">Tartózkodási hely rögzítésének engedélyezve</string>
     <string name="timeline_description">A figyelemmel kísérés engedélyezése az előzményekben található összes tartózkodási hely mentéséhez.</string>
     <string name="app_name_short">OsmAnd Tracker</string>
-    <string name="share_location_as_description">Ha egy Telegram-fiókhoz több eszközt szeretne csatlakoztatni, akkor tartózkodási helyének megosztásához egy másik eszközt kell használnia.</string>
+    <string name="share_location_as_description">Ha egy Telegram fiókhoz több eszközt szeretne csatlakoztatni, akkor tartózkodási helyének megosztásához egy másik eszközt kell használnia.</string>
     <string name="last_updated_location">Utoljára frissített tartózkodási hely:</string>
     <string name="successfully_sent_and_updated">Sikeresen elküldve és frissítve</string>
     <string name="not_possible_to_send_to_telegram_chats">Lehetetlen elküldeni a Telegram-chatre:</string>
@@ -105,7 +105,7 @@
     <string name="shared_string_live">Élő</string>
     <string name="shared_string_bot">Bot</string>
     <string name="get_telegram_title">Regisztráció a Telegramban</string>
-    <string name="get_telegram_account_first">A tartózkodási hely megosztásához szüksége lesz egy Telegram-fiókra.</string>
+    <string name="get_telegram_account_first">A tartózkodási hely megosztásához szüksége lesz egy Telegram fiókra.</string>
     <string name="get_telegram_description_continue">Kérjük, telepítse a Telegramot és hozzon létre egy fiókot.</string>
     <string name="get_telegram_after_creating_account">Utána használhatja ezt az alkalmazást.</string>
     <string name="shared_string_all">Minden</string>
@@ -172,8 +172,7 @@
     <string name="shared_string_hour_short">óra</string>
     <string name="shared_string_minute_short">perc</string>
     <string name="shared_string_second_short">másodperc</string>
-    <string name="welcome_descr">Az <b>OsmAnd Trackerrel</b> megoszthatja tartózkodási helyét és megtekintheti másokét az OsmAndban.<br/>
-        <br/>Az alkalmazás a Telegram API-ját használja, ezért Telegram-fiók szükséges hozzá.</string>
+    <string name="welcome_descr">Az <b>OsmAnd Trackerrel</b> megoszthatja tartózkodási helyét és megtekintheti másokét az OsmAndban.<br/><br/>Az alkalmazás a Telegram API-ját használja, ezért Telegram fiók szükséges hozzá.</string>
     <string name="my_location">Tartózkodási helyem</string>
     <string name="live_now">Most élőben</string>
     <string name="timeline">Idővonal</string>

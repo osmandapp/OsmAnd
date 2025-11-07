@@ -28,6 +28,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
@@ -88,6 +89,7 @@ public class MapRendererContext {
 	private MapPresentationEnvironment mapPresentationEnvironment;
 	private MapPrimitiviser mapPrimitiviser;
 	private MapPrimitivesProvider mapPrimitivesProvider;
+	private IMapTiledDataProvider map3DObjectsProvider;
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
@@ -161,9 +163,6 @@ public class MapRendererContext {
 			this.useAppLocale = useAppLocale;
 			updateMapSettings(false);
 		}
-
-		LanguagePreference langPref = MapRenderRepositories.getMapLanguageSetting(app, zoom);
-		mapPresentationEnvironment.setLanguagePreference(langPref);
 	}
 
 	public void updateMapSettings(boolean forceUpdateProviders) {
@@ -262,8 +261,12 @@ public class MapRendererContext {
 		mapPresentationEnvironment.setSettings(styleSettings);
 
 		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
-			if (recreateMapPresentation || forceUpdateProviders || languageParamsChanged) {
+			if (recreateMapPresentation || forceUpdateProviders) {
 				recreateRasterAndSymbolsProvider(providerType);
+			} else if (languageParamsChanged) {
+				if (mapPrimitivesProvider != null || updateMapPrimitivesProvider(providerType)) {
+					updateOrRemoveObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+				}
 			}
 			setMapBackgroundColor();
 		}
@@ -385,6 +388,7 @@ public class MapRendererContext {
 		if (updateMapPrimitivesProvider(providerType)) {
 			updateObfMapRasterLayerProvider(mapPrimitivesProvider, providerType);
 			updateOrRemoveObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+			recreate3DObjectsProvider();
 			this.providerType = providerType;
 		}
 	}
@@ -508,12 +512,44 @@ public class MapRendererContext {
 			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
 			mapRendererView.setMapLayerProvider(providerType.layerIndex, obfMapRasterLayerProvider);
 		}
+
+		recreate3DObjectsProvider();
 		if (obfMapSymbolsProvider != null) {
 			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
 		}
 		recreateHeightmapProvider();
 		updateVerticalExaggerationScale();
 		setMapBackgroundColor();
+	}
+
+	public void recreate3DObjectsProvider() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			if (mapPrimitivesProvider == null) {
+				mapRendererView.resetMap3DObjectsProvider();
+				map3DObjectsProvider = null;
+				return;
+			}
+
+			OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			if (devPlugin != null && devPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
+				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider);
+				mapRendererView.setMap3DObjectsProvider(map3DObjectsProvider);
+			} else {
+				mapRendererView.resetMap3DObjectsProvider();
+				map3DObjectsProvider = null;
+			}
+		} else {
+			map3DObjectsProvider = null;
+		}
+	}
+
+	public void reset3DObjectsProvider() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.resetMap3DObjectsProvider();
+		}
+		map3DObjectsProvider = null;
 	}
 
 	public void updateElevationConfiguration() {

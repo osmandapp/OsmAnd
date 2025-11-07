@@ -656,7 +656,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private boolean is3DMode() {
+	public boolean is3DMode() {
 		return elevationAngle != DEFAULT_ELEVATION_ANGLE;
 	}
 

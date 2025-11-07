@@ -366,7 +366,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private boolean isDataChanged(@NonNull DestinationInfo i1, @NonNull DestinationInfo i2) {
 		int distanceDif = Math.abs(i1.distance() - i2.distance());
 		long timeToGoDif = Math.abs(i1.timeToGo() - i2.timeToGo());
-		return distanceDif > DISTANCE_CHANGE_THRESHOLD || timeToGoDif > UPDATE_INTERVAL_SECONDS * 1000L;
+		long arrivalTimeDif = Math.abs(i1.arrivalTime() - i2.arrivalTime());
+
+		return distanceDif > DISTANCE_CHANGE_THRESHOLD || timeToGoDif > UPDATE_INTERVAL_SECONDS * 1000L || arrivalTimeDif > UPDATE_INTERVAL_SECONDS * 1000L;
 	}
 
 	@Override

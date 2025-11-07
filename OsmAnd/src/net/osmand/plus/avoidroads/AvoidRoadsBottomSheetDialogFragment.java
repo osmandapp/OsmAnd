@@ -33,6 +33,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -109,6 +110,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		textView.setText(!hideImpassableRoads ? R.string.impassable_road : R.string.avoid_pt_types);
 
 		Toolbar toolbar = titleView.findViewById(R.id.toolbar);
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			toolbar.setFitsSystemWindows(false);
+		}
 		int icBackResId = AndroidUtils.getNavigationIconResId(app);
 		toolbar.setNavigationIcon(getContentIcon(icBackResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);

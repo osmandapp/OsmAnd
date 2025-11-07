@@ -8,12 +8,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Street extends MapObject {
 
 	protected List<Building> buildings = new ArrayList<Building>();
+	protected Map<String, Building> buildingsByIdCache = null;
 	protected List<Street> intersectedStreets = null;
 	protected final City city;
 
@@ -40,11 +43,17 @@ public class Street extends MapObject {
 	}
 
 	public void addBuildingCheckById(Building building) {
-		for (Building b : buildings) {
-			if (b.equals(building)) {
-				return;
+		if (buildingsByIdCache == null) {
+			buildingsByIdCache = new HashMap<String, Building>();
+			for (Building b : buildings) {
+				buildingsByIdCache.put(b.getId() + " " + b.getFullName(), b);
 			}
 		}
+		String key = building.getId() + " " + building.getFullName();
+		if (buildingsByIdCache.containsKey(key)) {
+			return;
+		}
+		buildingsByIdCache.put(key, building);
 		buildings.add(building);
 	}
 
@@ -77,7 +86,9 @@ public class Street extends MapObject {
 	/// GENERATION
 
 	public void mergeWith(Street street) {
-		buildings.addAll(street.getBuildings());
+		for (Building b : street.getBuildings()) {
+			addBuildingCheckById(b);
+		}
 		copyNames(street);
 	}
 

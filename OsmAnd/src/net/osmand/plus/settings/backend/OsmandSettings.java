@@ -293,6 +293,11 @@ public class OsmandSettings {
 		return globalPreferences != null && globalPreferences.getBoolean(SETTING_CUSTOMIZED_ID, false);
 	}
 
+	public boolean isProfileModified(@NonNull ApplicationMode mode) {
+		SharedPreferences preferences = (SharedPreferences) getProfilePreferences(mode);
+		return !Algorithms.isEmpty(preferences.getAll()) && getLastModePreferencesEditTime(mode) != 0;
+	}
+
 	// TODO doesn't look correct package visibility
 	public Object getProfilePreferences(@Nullable ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
@@ -2914,6 +2919,9 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
 	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeGlobal();
 
+	public static boolean DEV_GRID_LAYOUT_DRAW_CELLS = false;
+	public static boolean DEV_GRID_LAYOUT_DRAW_SLOTS = false;
+	public static boolean DEV_GRID_LAYOUT_DRAW_BUTTON_FRAMES = false;
 
 	/**
 	 * the location of a parked car

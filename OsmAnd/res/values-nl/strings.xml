@@ -6038,7 +6038,7 @@
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Openen in webbrowser</string>
-    <string name="altitude_metrics_description">Stelt de weergave-eenheid voor hoogte in binnen widgets en statistieken.</string>
+    <string name="altitude_metrics_description">Stelt de weergave-eenheid voor hoogte in voor widgets en statistieken.</string>
     <string name="obd_fuel_type_diesel">Diesel</string>
     <string name="obd_fuel_type_lpg">LPG</string>
     <string name="obd_fuel_type_cng">CNG</string>
@@ -6216,4 +6216,13 @@
     <string name="shared_string_last_downhill">Laatste afdaling</string>
     <string name="help_article_navigation_routing_ski_routing_name">Skipisten en routes</string>
     <string name="rendering_attr_pisteRoutes_name">Skipisten en routes</string>
+    <string name="requires_internet_connection">Vereist een internetverbinding</string>
+    <string name="private_access_routing_req_short">Toestaan privéwegen te gebruiken om je bestemming te bereiken?</string>
+    <string name="download_wikipedia_label">Download Wikipedia</string>
+    <string name="save_and_access_articles_offline">Bewaar gegevens en lees artikelen offline, waar je ook bent</string>
+    <string name="quick_action_weather_layers">Een knop om weerlagen al dan niet te tonen op de kaart.</string>
+    <string name="quick_action_wind_animation_layer">Een knop om de windanimatielaag al dan niet te tonen op de kaart.</string>
+    <string name="wind_animation_layer">Windanimatielaag</string>
+    <string name="weather_layers">Weerlagen</string>
+    <string name="lang_crh">Krim-Tataars (Latijns)</string>
 </resources>

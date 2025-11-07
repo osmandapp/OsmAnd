@@ -1,5 +1,7 @@
 package net.osmand.plus.track.clickable;
 
+import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -9,6 +11,8 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
+
+import java.util.Map;
 
 public class ClickableWay {
     private final long osmId;
@@ -62,6 +66,16 @@ public class ClickableWay {
             String altName = gpxFile.getExtensionsToRead().get("ref");
             return altName != null ? altName : Long.toString(osmId);
         }
+    }
+
+    @Nullable
+    public String getActivityType() {
+        return gpxFile.getMetadata().getExtensionsToRead().get(ACTIVITY_TYPE);
+    }
+
+    @NonNull
+    public Map<String, String> getGpxTags() {
+        return gpxFile.getExtensionsToRead();
     }
 
     @Override
