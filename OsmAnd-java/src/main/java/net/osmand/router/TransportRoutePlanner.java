@@ -319,10 +319,12 @@ public class TransportRoutePlanner {
 		}
 		for (TransportRouteResult r : lst) {
 			for (int i = 0; i < r.getSegments().size(); i++) {
+				TransportRouteResultSegment mainSegment = r.getSegments().get(i);
 				Map<String, TransportRouteResultSegment> alts = new LinkedHashMap<>();
 				for (TransportRouteResult alt : r.alternativeRoutes) {
 					TransportRouteResultSegment rs = alt.getSegments().get(i);
-					if (rs.route.getRef() != null) {
+					if (rs.route.getRef() != null
+							&& !Algorithms.stringsEqual(mainSegment.route.getRef(), rs.route.getRef())) {
 						alts.put(rs.route.getRef(), rs);
 					}
 				}

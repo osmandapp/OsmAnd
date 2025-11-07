@@ -18,7 +18,7 @@ public class TransportRoutingConfiguration {
 	
 	public int maxNumberOfChanges = 3;  
 	
-//	public int finishTimeSeconds = 1200;
+	public int finishTimeSeconds = 1200; // deprecated
 	
 	public double increaseForAlternativesRoutes = 2.0;
 	public double increaseForAltRoutesWalking = 3.0;

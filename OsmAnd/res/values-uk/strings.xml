@@ -5912,4 +5912,8 @@
     <string name="wind_animation_layer">Шар анімації вітру</string>
     <string name="weather_layers">Погодні шари</string>
     <string name="lang_crh">Кримськотатарська (латиниця)</string>
+    <string name="efficient_grid">Ефективна мережа</string>
+    <string name="slots">Слоти</string>
+    <string name="button_frames">Рамки для ґудзиків</string>
+    <string name="visualizing_button_grid">Сітка кнопок карти</string>
 </resources>

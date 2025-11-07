@@ -5902,4 +5902,8 @@
     <string name="wind_animation_layer">Movbilda tavolo de vento</string>
     <string name="weather_layers">Tavoloj de vetero</string>
     <string name="lang_crh">Krime-tatara (latina)</string>
+    <string name="visualizing_button_grid">Krado de map-butonoj</string>
+    <string name="button_frames">Kadroj ĉirkaŭ butonoj</string>
+    <string name="slots">Truoj</string>
+    <string name="efficient_grid">Efika krado</string>
 </resources>

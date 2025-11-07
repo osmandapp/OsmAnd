@@ -189,6 +189,13 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/show_spherical_map" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="enable_3d_map_objects"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/enable_3d_objects" />
+
 	<PreferenceCategory
 		android:key="aistracker"
 		android:layout="@layout/preference_category_with_descr"

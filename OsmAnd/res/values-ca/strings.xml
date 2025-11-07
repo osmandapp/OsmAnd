@@ -5065,7 +5065,7 @@
     <string name="routing_attr_hazmat_category_usa_8_name">Substàncies corrosives</string>
     <string name="dangerous_goods_description">En algunes carreteres i túnels està prohibit el transport de materials perillosos.</string>
     <string name="dangerous_goods">Productes perillosos</string>
-    <string name="free_ride">Passeig gratis</string>
+    <string name="free_ride">Navegació lliure</string>
     <string name="free_settings_backup">Còpia de seguretat de configuració lliure</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Usa ràster sqlitedb per a l\'ombra de turons / pendent</string>
     <string name="cache_size">Mida de la memòria cau</string>
@@ -5126,7 +5126,7 @@
     <string name="number_of_tracks">%1$s pistes</string>
     <string name="search_track_by_name">Cerca la pista per nom</string>
     <string name="no_search_results">Sense resultats</string>
-    <string name="poi_categories">Categories POI</string>
+    <string name="poi_categories">Categories de PDI</string>
     <string name="is_imported">%1$s s\'ha importat.</string>
     <string name="file_already_exists_description">\"%1$s\" (en anglès). Ja existeix un fitxer amb aquest nom. Reemplaça sobreescriurà tots els canvis fets amb la versió actual.</string>
     <string name="file_already_exists">El fitxer ja existeix</string>

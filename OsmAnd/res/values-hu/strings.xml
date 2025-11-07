@@ -5804,4 +5804,8 @@
     <string name="wind_animation_layer">Szélanimációs réteg</string>
     <string name="weather_layers">Időjárási rétegek</string>
     <string name="lang_crh">Krími tatár (latin)</string>
+    <string name="slots">Rekeszek</string>
+    <string name="button_frames">Gombkeretek</string>
+    <string name="visualizing_button_grid">Gombrács megjelenítése a térképen</string>
+    <string name="efficient_grid">Hatékony rács</string>
 </resources>

@@ -5715,4 +5715,8 @@
     <string name="wind_animation_layer">風力動畫圖層</string>
     <string name="weather_layers">天氣圖層</string>
     <string name="lang_crh">克里米亞韃靼語（拉丁）</string>
+    <string name="efficient_grid">高效能網格</string>
+    <string name="slots">插槽</string>
+    <string name="button_frames">按鈕框架</string>
+    <string name="visualizing_button_grid">地圖按鈕網格</string>
 </resources>

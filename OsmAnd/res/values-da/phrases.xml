@@ -179,7 +179,7 @@
     <string name="poi_power_transformer">Transformator</string>
     <string name="poi_power_plant">Kraftværk</string>
     <string name="poi_power_generator">Strømgenerator</string>
-    <string name="poi_post_office">Posthus</string>
+    <string name="poi_post_office">Postkontor</string>
     <string name="poi_post_box">Postkasse</string>
     <string name="poi_telephone">Telefon</string>
     <string name="poi_communication_tower">Kommunikationstårn</string>
@@ -4295,4 +4295,9 @@
     <string name="poi_route_point_category">Rejsekategori</string>
     <string name="poi_airline">Flyselskabskontor</string>
     <string name="poi_international_organization">International organisation</string>
+    <string name="poi_post_office_post_partner">Pakkeshop</string>
+    <string name="poi_post_office_service_provider">Postkontor leverandør</string>
+    <string name="poi_post_office_service_brand">Postkontors varemærke</string>
+    <string name="poi_post_office_collection_times">Postkontors afhentningstider</string>
+    <string name="poi_post_office_opening_hours">Postkontors åbningstider</string>
 </resources>
