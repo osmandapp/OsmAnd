@@ -96,7 +96,7 @@ public class MapUtilsTest {
 
 	@Test // ~10ms
 	public void calculateLatLonBboxTest() {
-		final double MAX_DIFF = 0.05; // 5% tolerance
+		final double MAX_DIFF = 0.04; // 4% tolerance
 		for (double lat = MapUtils.MIN_LATITUDE + 10; lat <= MapUtils.MAX_LATITUDE - 10; lat += 10) {
 			for (double lon = MapUtils.MIN_LONGITUDE + 10; lon <= MapUtils.MAX_LONGITUDE - 10; lon += 10) {
 				for (double radius = 50; radius < 55000; radius *= 2) {
@@ -108,10 +108,10 @@ public class MapUtilsTest {
 							bboxKotlin.getTop(), bboxKotlin.getLeft(), bboxKotlin.getTop(), bboxKotlin.getRight());
 					double xKotlin = KMapUtils.INSTANCE.getDistance(
 							bboxKotlin.getTop(), bboxKotlin.getLeft(), bboxKotlin.getBottom(), bboxKotlin.getLeft());
-					Assert.assertTrue("yJava", Math.abs(radius * 2 - yJava) / (radius * 2) < MAX_DIFF);
-					Assert.assertTrue("xJava", Math.abs(radius * 2 - xJava) / (radius * 2) < MAX_DIFF);
-					Assert.assertTrue("yKotlin", Math.abs(radius * 2 - yKotlin) / (radius * 2) < MAX_DIFF);
-					Assert.assertTrue("xKotlin", Math.abs(radius * 2 - xKotlin) / (radius * 2) < MAX_DIFF);
+					Assert.assertTrue("yJava", Math.abs(radius - yJava / 2) / radius < MAX_DIFF);
+					Assert.assertTrue("xJava", Math.abs(radius - xJava / 2) / radius < MAX_DIFF);
+					Assert.assertTrue("yKotlin", Math.abs(radius - yKotlin / 2) / radius < MAX_DIFF);
+					Assert.assertTrue("xKotlin", Math.abs(radius - xKotlin / 2) / radius < MAX_DIFF);
 				}
 			}
 		}
