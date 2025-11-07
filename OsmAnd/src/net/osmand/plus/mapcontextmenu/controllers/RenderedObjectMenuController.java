@@ -57,6 +57,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	private void setRenderedObject(@NonNull RenderedObject renderedObject) {
 		this.renderedObject = renderedObject;
+		((RenderedObjectMenuBuilder) builder).updateRenderedObject(renderedObject);
 	}
 
 	@Override
