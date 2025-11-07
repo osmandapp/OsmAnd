@@ -435,7 +435,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				return;
 			}
 		}
-		if (navigationScreen == null) {
+		if (navigationScreen == null || navigationScreen.getLifecycle().getCurrentState().isAtLeast(State.DESTROYED)) {
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
