@@ -71,7 +71,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindItem(@NonNull QuickSearchWikiItem item, @Nullable PoiUIFilter poiUIFilter,
 			boolean useMapCenter) {
-		String address = item.getAltName();
+		String address = item.getAddress();
 		String descr = item.getDescription();
 		if (description != null) {
 			description.setText(descr);

@@ -87,6 +87,11 @@ public class QuickSearchListItem {
 		return searchResult.alternateName;
 	}
 
+	@Nullable
+	public String getAddress() {
+		return searchResult.addressName;
+	}
+
 	public String getName() {
 		return getName(app, searchResult);
 	}

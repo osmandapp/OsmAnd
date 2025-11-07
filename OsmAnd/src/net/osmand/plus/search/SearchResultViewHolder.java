@@ -166,10 +166,9 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		FrameLayout imageContainer = view.findViewById(R.id.image_container);
 		boolean hasRouteShield = false;
 
-		//todo here altName can contain whether address or altName. need to separate them
-		String address = item.getAltName();
+		String address = item.getAddress();
 		String name = item.getName();
-		String altName = null;
+		String altName = item.getAltName();
 		String typeName = QuickSearchListItem.getTypeName(app, item.getSearchResult());
 		Amenity amenity = (Amenity) item.getSearchResult().object;
 		String description = null;
