@@ -221,11 +221,11 @@ public class SettingsSearchButtonHelper {
 	}
 
 	private void showSearchPreferenceFragment(final SearchPreferenceFragments searchPreferenceFragments) {
-		// FK-TODO: remove commented code? Test when condition is false
-//		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
-//			searchPreferenceFragments.rebuildSearchDatabase();
-//			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
-//		}
+		// FK-TODO: remove if-block? Test when condition is false
+		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
+			searchPreferenceFragments.rebuildSearchDatabase();
+			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
+		}
 		searchPreferenceFragments.showSearchPreferenceFragment();
 	}
 
