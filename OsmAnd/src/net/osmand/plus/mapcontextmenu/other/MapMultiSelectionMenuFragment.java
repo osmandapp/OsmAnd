@@ -78,7 +78,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 
 		view = inflate(R.layout.menu_obj_selection_fragment, container, false);
 		Context context = view.getContext();
-		if (menu != null) {
+		if (menu == null) {
 			dismiss();
 			return null;
 		}
