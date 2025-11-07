@@ -45,6 +45,9 @@ import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -191,6 +194,17 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 		setupScrollableMapView();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.removeType(Type.SCROLLABLE);
+		collection.add(InsetTarget.createLeftSideContainer(true, R.id.main_view).build());
+		collection.add(InsetTarget.createLeftSideContainer(true, true, R.id.toolbar, R.id.content).build());
+		collection.add(InsetTarget.createLeftSideContainer(false, false, R.id.right_divider).build());
+		collection.add(InsetTarget.createLeftSideContainer(false, true, R.id.map_window).preferMargin(true).build());
+		return collection;
 	}
 
 	@Override

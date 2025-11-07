@@ -148,8 +148,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.removeType(Type.BOTTOM_CONTAINER);
-		collection.replace(InsetTarget.createScrollable(R.id.list_container));
 		return collection;
 	}
 

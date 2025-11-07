@@ -27,6 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -224,6 +226,14 @@ public abstract class PointEditorFragment extends EditorFragment {
 		drawPointImage();
 
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+
+		collection.add(InsetTarget.createScrollable(R.id.editor_scroll_view).build());
+		return collection;
 	}
 
 	private void updateDescriptionIcon() {

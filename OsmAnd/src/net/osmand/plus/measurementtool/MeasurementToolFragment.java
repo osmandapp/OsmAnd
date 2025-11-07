@@ -26,7 +26,12 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.*;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
@@ -267,12 +272,12 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					MapContextMenu contextMenu = activity.getContextMenu();
-					if(contextMenu.isVisible()) {
+					if (contextMenu.isVisible()) {
 						contextMenu.hide();
 						shouldQuit = false;
 					}
 				}
-				if(shouldQuit) {
+				if (shouldQuit) {
 					quit(true);
 				}
 			}
@@ -325,7 +330,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 		measurementLayer.setEditingCtx(editingCtx);
 
-		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		portrait = AndroidUiHelper.isPortrait(mapActivity);
 		int btnWidth = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();

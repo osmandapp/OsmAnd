@@ -14,10 +14,12 @@
 		<include layout="@layout/download_tiles_toolbar" />
 
 		<ScrollView
+			android:id="@+id/content"
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
 			android:layout_weight="1"
 			android:fillViewport="true"
+			android:background="?attr/activity_background_color"
 			android:foreground="@drawable/bg_contextmenu_shadow"
 			android:foregroundGravity="fill_horizontal|top"
 			android:overScrollMode="never">
@@ -55,6 +57,7 @@
 				android:background="@color/map_window_outer_color" />
 
 			<View
+				android:id="@+id/right_divider"
 				android:layout_width="@dimen/content_padding_half"
 				android:layout_height="0dp"
 				android:layout_marginTop="@dimen/content_padding_half"
