@@ -53,6 +53,7 @@
 		android:dividerHeight="0.5dp" />
 
 	<FrameLayout
+		android:id="@+id/bottom_buttons_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/list_background_color"

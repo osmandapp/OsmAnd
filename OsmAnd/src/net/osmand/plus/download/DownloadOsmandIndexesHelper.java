@@ -3,7 +3,6 @@ package net.osmand.plus.download;
 import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_INDEX_EXT_ZIP;
-import static net.osmand.plus.download.DownloadActivityType.DELETED_MAP;
 import static net.osmand.plus.download.DownloadActivityType.VOICE_FILE;
 import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
 
@@ -311,9 +310,6 @@ public class DownloadOsmandIndexesHelper {
 							IndexItem item = type.parseIndexItem(app, parser);
 							if (item != null) {
 								result.add(item);
-								if (type == DELETED_MAP) {
-									item.isDeleted = true;
-								}
 							}
 						} else if ("osmand_regions".equals(parser.getName())) {
 							String mapVersion = parser.getAttributeValue(null, "mapversion");

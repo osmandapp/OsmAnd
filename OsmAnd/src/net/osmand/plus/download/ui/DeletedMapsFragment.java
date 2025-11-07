@@ -69,7 +69,7 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = inflate(R.layout.deleted_maps_fragment, container, false);
+		View view = inflate(R.layout.deprecated_maps_fragment, container, false);
 		activity = (DownloadActivity) getActivity();
 
 		toolbar = view.findViewById(R.id.toolbar);
@@ -113,7 +113,6 @@ public class DeletedMapsFragment extends BaseFullScreenDialogFragment implements
 					this,
 					title,
 					description,
-					app.getSettings().getApplicationMode(),
 					requestCode);
 		}
 	}
