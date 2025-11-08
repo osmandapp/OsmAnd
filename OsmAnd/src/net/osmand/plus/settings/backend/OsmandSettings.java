@@ -1700,8 +1700,6 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> GRADIENT_PALETTES = new StringPreference(this, "gradient_color_palettes", null).makeGlobal().makeShared();
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
-	// FK-TODO: remove PLUGINS_COVERED_BY_SETTINGS_SEARCH
-	public final ListStringPreference PLUGINS_COVERED_BY_SETTINGS_SEARCH = (ListStringPreference) new ListStringPreference(this, "plugins_covered_by_settings_search", null, ",").makeGlobal().makeShared();
 
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
 
