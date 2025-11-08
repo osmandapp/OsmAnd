@@ -109,7 +109,7 @@ import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.ConfigurationBundleConverter;
-import net.osmand.plus.settings.fragments.search.ConfigurationProvider;
+import net.osmand.plus.settings.fragments.search.ActualConfigurationProvider;
 import net.osmand.plus.settings.fragments.search.PreferencesDatabaseFactory;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
@@ -949,7 +949,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						BuildConfig.GENERATE_PREFERENCES_DATABASE_FOR_ASSET ?
 								PreferencesDatabaseFactory.createPreferencesDatabaseConfigForCreationOfPrepackagedDatabaseAssetFile() :
 								PreferencesDatabaseFactory.createPreferencesDatabaseConfigUsingPrepackagedDatabaseAssetFile(),
-						ConfigurationProvider.getActualConfiguration(),
+						new ActualConfigurationProvider().getActualConfiguration(),
 						new ConfigurationBundleConverter(),
 						this);
 

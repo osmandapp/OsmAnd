@@ -1,19 +1,17 @@
 package net.osmand.plus.settings.fragments.search;
 
-// FK-TODO: remove?
 class SearchDatabaseStatusHandler {
 
-	private final SetStringPreference pluginsCoveredBySettingsSearch;
+	private final ConfigurationFromSearchDatabaseProvider configurationFromSearchDatabaseProvider;
+	private final ActualConfigurationProvider actualConfigurationProvider;
 
-	public SearchDatabaseStatusHandler(final SetStringPreference pluginsCoveredBySettingsSearch) {
-		this.pluginsCoveredBySettingsSearch = pluginsCoveredBySettingsSearch;
+	public SearchDatabaseStatusHandler(final ConfigurationFromSearchDatabaseProvider configurationFromSearchDatabaseProvider,
+									   final ActualConfigurationProvider actualConfigurationProvider) {
+		this.configurationFromSearchDatabaseProvider = configurationFromSearchDatabaseProvider;
+		this.actualConfigurationProvider = actualConfigurationProvider;
 	}
 
 	public boolean isSearchDatabaseUpToDate() {
-		return pluginsCoveredBySettingsSearch.get().equals(ConfigurationProvider.getEnabledPlugins());
-	}
-
-	public void setSearchDatabaseUpToDate() {
-		pluginsCoveredBySettingsSearch.set(ConfigurationProvider.getEnabledPlugins());
+		return configurationFromSearchDatabaseProvider.getConfigurationFromSearchDatabase().equals(actualConfigurationProvider.getActualConfiguration());
 	}
 }

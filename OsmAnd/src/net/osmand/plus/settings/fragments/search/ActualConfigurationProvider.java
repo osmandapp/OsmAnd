@@ -6,13 +6,13 @@ import net.osmand.plus.plugins.PluginsHelper;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ConfigurationProvider {
+public class ActualConfigurationProvider {
 
-	public static Configuration getActualConfiguration() {
+	public Configuration getActualConfiguration() {
 		return new Configuration(getEnabledPlugins());
 	}
 
-	public static Set<String> getEnabledPlugins() {
+	public Set<String> getEnabledPlugins() {
 		return PluginsHelper
 				.getEnabledPlugins()
 				.stream()

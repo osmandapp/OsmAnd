@@ -43,6 +43,7 @@ import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
+import de.KnollFrank.lib.settingssearch.common.Utils;
 import de.KnollFrank.lib.settingssearch.common.graph.GraphUtils;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
@@ -71,8 +72,11 @@ public class SettingsSearchButtonHelper {
 				fragmentContainerViewId,
 				createSearchDatabaseTaskSupplier,
 				new SearchDatabaseStatusHandler(
-						new SetStringPreference(
-								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH)),
+						new ConfigurationFromSearchDatabaseProvider(
+								app.daoProviderManager.getDAOProvider().searchablePreferenceScreenGraphDAO(),
+								Utils.getCurrentLanguageLocale(app.getResources()),
+								new ConfigurationBundleConverter()),
+						new ActualConfigurationProvider()),
 				app.getSettings().AVAILABLE_APP_MODES,
 				app.getTileSourceTemplatesProvider(),
 				app.daoProviderManager.getDAOProvider(),
@@ -224,7 +228,6 @@ public class SettingsSearchButtonHelper {
 		// FK-TODO: remove if-block? Test when condition is false
 		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
 			searchPreferenceFragments.rebuildSearchDatabase();
-			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
 		}
 		searchPreferenceFragments.showSearchPreferenceFragment();
 	}
