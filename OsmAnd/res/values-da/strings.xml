@@ -5941,4 +5941,6 @@
     <string name="slots">Pladser</string>
     <string name="button_frames">Knaprammer</string>
     <string name="visualizing_button_grid">Kortknap net</string>
+    <string name="enable_3d_objects_description">Vis 3D-bygningsobjekter på kortet</string>
+    <string name="enable_3d_objects">Aktivér 3D-bygninger</string>
 </resources>

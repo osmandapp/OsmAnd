@@ -5804,6 +5804,8 @@
     <string name="lang_crh">Tatar de Crimée (latin)</string>
     <string name="efficient_grid">Grille d\'efficacité</string>
     <string name="slots">Machines à sous</string>
-    <string name="button_frames">Cadres à boutons</string>
-    <string name="visualizing_button_grid">Grille de boutons de carte</string>
+    <string name="button_frames">Disposition des boutons</string>
+    <string name="visualizing_button_grid">Bouton grille de la carte</string>
+    <string name="enable_3d_objects">Activer les bâtiments 3D</string>
+    <string name="enable_3d_objects_description">Afficher sur la carte les constructions en 3D</string>
 </resources>

@@ -5879,4 +5879,6 @@
     <string name="slots">Слотови</string>
     <string name="button_frames">Оквири за дугмад</string>
     <string name="visualizing_button_grid">Мрежа дугмади мапе</string>
+    <string name="enable_3d_objects">Омогући 3Д зграде</string>
+    <string name="enable_3d_objects_description">Приказ 3Д објеката зграда на мапи</string>
 </resources>

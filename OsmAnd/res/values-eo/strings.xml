@@ -5906,4 +5906,6 @@
     <string name="button_frames">Kadroj ĉirkaŭ butonoj</string>
     <string name="slots">Truoj</string>
     <string name="efficient_grid">Efika krado</string>
+    <string name="enable_3d_objects">Aktivigi 3-dimensiajn konstruaĵojn</string>
+    <string name="enable_3d_objects_description">Vidigi 3-dimensiajn konstruaĵojn sur la mapo</string>
 </resources>

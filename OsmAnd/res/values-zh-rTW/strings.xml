@@ -5719,4 +5719,6 @@
     <string name="slots">插槽</string>
     <string name="button_frames">按鈕框架</string>
     <string name="visualizing_button_grid">地圖按鈕網格</string>
+    <string name="enable_3d_objects">啟用 3D 建築物</string>
+    <string name="enable_3d_objects_description">在地圖上顯示 3D 建築物物件</string>
 </resources>

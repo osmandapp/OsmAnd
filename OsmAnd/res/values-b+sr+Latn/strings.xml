@@ -5881,4 +5881,6 @@
     <string name="slots">Slotovi</string>
     <string name="button_frames">Okviri dugmeta</string>
     <string name="visualizing_button_grid">Dugme za mrežu</string>
+    <string name="enable_3d_objects_description">Prikaz 3D zgrada na mapi</string>
+    <string name="enable_3d_objects">Omogućite 3D zgrade</string>
 </resources>

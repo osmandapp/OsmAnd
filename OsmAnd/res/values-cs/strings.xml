@@ -5907,4 +5907,10 @@
     <string name="wind_animation_layer">Vrstva animace větru</string>
     <string name="weather_layers">Vrstvy počasí</string>
     <string name="lang_crh">Krymská tatarština (latinka)</string>
+    <string name="efficient_grid">Efektivní mřížka</string>
+    <string name="slots">Místa</string>
+    <string name="button_frames">Rámečky tlačítek</string>
+    <string name="visualizing_button_grid">Mřížka tlačítek na mapě</string>
+    <string name="enable_3d_objects">Povolit 3D stavby</string>
+    <string name="enable_3d_objects_description">Zobrazit 3D stavby na mapě</string>
 </resources>

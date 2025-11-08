@@ -5826,4 +5826,10 @@
     <string name="shared_string_last_downhill">Último descenso</string>
     <string name="private_access_routing_req_short">¿Usar un camino privado para llegar al destino?</string>
     <string name="download_wikipedia_label">Descargar Wikipedia</string>
+    <string name="efficient_grid">Cuadrícula eficiente</string>
+    <string name="slots">Espacios</string>
+    <string name="button_frames">Marcos de botones</string>
+    <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
+    <string name="enable_3d_objects">Activar edificios en 3D</string>
+    <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
 </resources>

@@ -5868,4 +5868,10 @@
     <string name="shared_string_last_downhill">Ultima discesa</string>
     <string name="marine_renderer">Matittimo</string>
     <string name="requires_internet_connection">Richiede una connessione a internet</string>
+    <string name="quick_action_weather_layers">Un pulsante per mostrare o nascondere i livelli meteo sulla mappa.</string>
+    <string name="quick_action_wind_animation_layer">Un pulsante per mostrare o nascondere il livello di animazione del vento sulla mappa.</string>
+    <string name="wind_animation_layer">Livello di animazione del vento</string>
+    <string name="weather_layers">Livello meteo</string>
+    <string name="backup_delete_data_warning_extended">Questa azione rimuoverà definitivamente tutti i dati selezionati dal cloud. Non sarà possibile ripristinarli più tardi.</string>
+    <string name="private_access_routing_req_short">Permetti di usare una strada privata per raggiungere la tua destinazione?</string>
 </resources>
