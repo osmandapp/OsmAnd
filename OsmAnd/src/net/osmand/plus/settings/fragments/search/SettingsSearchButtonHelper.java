@@ -67,19 +67,20 @@ public class SettingsSearchButtonHelper {
 												final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>>> createSearchDatabaseTaskSupplier,
 												final OsmandApplication app,
 												final Configuration configuration) {
+		final DAOProvider daoProvider = app.daoProviderManager.getDAOProvider();
 		return new SettingsSearchButtonHelper(
 				rootSearchPreferenceFragment,
 				fragmentContainerViewId,
 				createSearchDatabaseTaskSupplier,
 				new SearchDatabaseStatusHandler(
 						new ConfigurationFromSearchDatabaseProvider(
-								app.daoProviderManager.getDAOProvider().searchablePreferenceScreenGraphDAO(),
+								daoProvider.searchablePreferenceScreenGraphDAO(),
 								Utils.getCurrentLanguageLocale(app.getResources()),
 								new ConfigurationBundleConverter()),
 						new ActualConfigurationProvider()),
 				app.getSettings().AVAILABLE_APP_MODES,
 				app.getTileSourceTemplatesProvider(),
-				app.daoProviderManager.getDAOProvider(),
+				daoProvider,
 				configuration);
 	}
 
