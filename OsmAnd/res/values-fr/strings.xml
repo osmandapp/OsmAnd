@@ -5808,4 +5808,7 @@
     <string name="visualizing_button_grid">Bouton grille de la carte</string>
     <string name="enable_3d_objects">Activer les bâtiments 3D</string>
     <string name="enable_3d_objects_description">Afficher sur la carte les constructions en 3D</string>
+    <string name="deleted_maps_warning">Vous allez supprimer %d élement(s)\nPoursuivre ?</string>
+    <string name="deleted_maps_prompt">Ces cartes ne sont plus prises en charge, elles ont été remplacées. Veuillez les supprimer et télécharger les nouvelles régions.</string>
+    <string name="unsupported_maps">Cartes non prises en charge</string>
 </resources>
