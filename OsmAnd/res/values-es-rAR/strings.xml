@@ -5764,4 +5764,6 @@
     <string name="slots">Espacios</string>
     <string name="button_frames">Marcos de botones</string>
     <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
+    <string name="enable_3d_objects">Activar edificios en 3D</string>
+    <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
 </resources>

@@ -5808,4 +5808,6 @@
     <string name="button_frames">Gombkeretek</string>
     <string name="visualizing_button_grid">Gombrács megjelenítése a térképen</string>
     <string name="efficient_grid">Hatékony rács</string>
+    <string name="enable_3d_objects">3D-s épületek engedélyezése</string>
+    <string name="enable_3d_objects_description">3D épületobjektumok megjelenítése a térképen</string>
 </resources>

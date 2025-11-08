@@ -5916,4 +5916,6 @@
     <string name="slots">Слоти</string>
     <string name="button_frames">Рамки для ґудзиків</string>
     <string name="visualizing_button_grid">Сітка кнопок карти</string>
+    <string name="enable_3d_objects">Увімкнути 3D-будівлі</string>
+    <string name="enable_3d_objects_description">Відображення 3D-об\'єктів будівель на карті</string>
 </resources>
