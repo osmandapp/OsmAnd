@@ -5901,4 +5901,7 @@
     <string name="shared_string_last_downhill">Posledné klesanie</string>
     <string name="shared_string_price">Cena</string>
     <string name="lang_crh">Krymská tatárčina (latinka)</string>
+    <string name="deleted_maps_warning">Chystáte sa vymazať %d položiek\nChcete pokračovať?</string>
+    <string name="deleted_maps_prompt">Tieto mapy už nie sú podporované a boli nahradené menšími regiónmi. Prosím odstráňte ich a stiahnite si nové verzie oblastí.</string>
+    <string name="unsupported_maps">Nepodporované mapy</string>
 </resources>

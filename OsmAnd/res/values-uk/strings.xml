@@ -5918,4 +5918,7 @@
     <string name="visualizing_button_grid">Сітка кнопок карти</string>
     <string name="enable_3d_objects">Увімкнути 3D-будівлі</string>
     <string name="enable_3d_objects_description">Відображення 3D-об\'єктів будівель на карті</string>
+    <string name="deleted_maps_warning">Ви збираєтеся видалити %d елементів(ів)\nПродовжити?</string>
+    <string name="deleted_maps_prompt">Ці карти більше не підтримуються та були замінені меншими регіонами. Видаліть їх та завантажте нові версії.</string>
+    <string name="unsupported_maps">Непідтримувані карти</string>
 </resources>
