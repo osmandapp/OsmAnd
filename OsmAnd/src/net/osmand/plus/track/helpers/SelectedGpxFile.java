@@ -170,7 +170,8 @@ public class SelectedGpxFile {
 		processedPointsToDisplay.add(new TrkSegment());
 	}
 
-	public final void appendTrackPointToDisplay(@NonNull WptPt point, @NonNull OsmandApplication app) {
+	public final void appendTrackPointToDisplay(@NonNull OsmandApplication app,
+	                                            @NonNull WptPt point, boolean firstPoint) {
 		TrkSegment lastSegment;
 		if (processedPointsToDisplay.isEmpty()) {
 			lastSegment = new TrkSegment();
@@ -180,9 +181,21 @@ public class SelectedGpxFile {
 		}
 		lastSegment.getPoints().add(point);
 
-		TrkSegment generalSegment = gpxFile != null ? gpxFile.getGeneralSegment() : null;
+		// Add current point to the general segment
+		TrkSegment generalSegment = gpxFile != null ? gpxFile.getGeneralSegment(false) : null;
 		if (generalSegment != null) {
-			generalSegment.getPoints().add(point);
+			WptPt wptPt = new WptPt(point);
+			List<WptPt> points = generalSegment.getPoints();
+			if (firstPoint) {
+				// Mark current point as start for segment
+				wptPt.setFirstPoint(true);
+				if (!points.isEmpty()) {
+					// Mark previous point as last for segment
+					WptPt previousPoint = points.get(points.size() - 1);
+					previousPoint.setLastPoint(true);
+				}
+			}
+			points.add(wptPt);
 		}
 
 		boolean hasCalculatedBounds = !bounds.hasInitialState();

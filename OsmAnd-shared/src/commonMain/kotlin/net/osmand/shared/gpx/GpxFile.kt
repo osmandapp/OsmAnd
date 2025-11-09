@@ -246,21 +246,27 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getGeneralSegment(): TrkSegment? {
+		return getGeneralSegment(markInnerSegments = true)
+	}
+
+	fun getGeneralSegment(markInnerSegments: Boolean): TrkSegment? {
 		if (generalSegment == null && getNonEmptySegmentsCount() > 1) {
-			buildGeneralSegment()
+			buildGeneralSegment(markInnerSegments)
 		}
 		return generalSegment
 	}
 
-	private fun buildGeneralSegment() {
+	private fun buildGeneralSegment(markInnerSegments: Boolean) {
 		val segment = TrkSegment()
 		for (track in tracks) {
 			for (trkSegment in track.segments) {
 				segment.routeSegments.addAll(trkSegment.routeSegments)
 				if (trkSegment.points.isNotEmpty()) {
 					val waypoints = trkSegment.points.map { WptPt(it) }.toMutableList()
-					waypoints.first().firstPoint = true
-					waypoints.last().lastPoint = true
+					if (markInnerSegments) {
+						waypoints.first().firstPoint = true
+						waypoints.last().lastPoint = true
+					}
 					segment.points.addAll(waypoints)
 				}
 			}
