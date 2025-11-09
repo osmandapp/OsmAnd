@@ -246,12 +246,8 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getGeneralSegment(): TrkSegment? {
-		return getGeneralSegment(markInnerSegments = true)
-	}
-
-	fun getGeneralSegment(markInnerSegments: Boolean): TrkSegment? {
 		if (generalSegment == null && getNonEmptySegmentsCount() > 1) {
-			buildGeneralSegment(markInnerSegments)
+			buildGeneralSegment(!showCurrentTrack)
 		}
 		return generalSegment
 	}

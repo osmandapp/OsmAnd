@@ -182,7 +182,7 @@ public class SelectedGpxFile {
 		lastSegment.getPoints().add(point);
 
 		// Add current point to the general segment
-		TrkSegment generalSegment = gpxFile != null ? gpxFile.getGeneralSegment(false) : null;
+		TrkSegment generalSegment = gpxFile != null ? gpxFile.getGeneralSegment() : null;
 		if (generalSegment != null) {
 			WptPt wptPt = new WptPt(point);
 			List<WptPt> points = generalSegment.getPoints();
