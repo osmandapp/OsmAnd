@@ -5913,4 +5913,7 @@
     <string name="visualizing_button_grid">Mřížka tlačítek na mapě</string>
     <string name="enable_3d_objects">Povolit 3D stavby</string>
     <string name="enable_3d_objects_description">Zobrazit 3D stavby na mapě</string>
+    <string name="deleted_maps_warning">Chystáte se odstranit %d položek\nChcete pokračovat?</string>
+    <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími regiony. Odstraňte je prosím a stáhněte si nové verze.</string>
+    <string name="unsupported_maps">Nepodporované mapy</string>
 </resources>

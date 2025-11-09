@@ -6266,4 +6266,8 @@
     <string name="enable_3d_objects">Ativar edifícios 3D</string>
     <string name="enable_3d_objects_description">Exibir objetos de construção 3D no mapa</string>
     <string name="lang_crh">Tártaro da Crimeia (latim)</string>
+    <string name="visualizing_button_grid">Grade de botões do mapa</string>
+    <string name="efficient_grid">Grade eficiente</string>
+    <string name="button_frames">Molduras de botão</string>
+    <string name="slots">Slots</string>
 </resources>

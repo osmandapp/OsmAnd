@@ -5883,4 +5883,7 @@
     <string name="visualizing_button_grid">Dugme za mrežu</string>
     <string name="enable_3d_objects_description">Prikaz 3D zgrada na mapi</string>
     <string name="enable_3d_objects">Omogućite 3D zgrade</string>
+    <string name="deleted_maps_prompt">Ove mape više nisu podržane i zamenjene su manjim regionima. Molimo Vas da ih uklonite i preuzmete nove verzije.</string>
+    <string name="unsupported_maps">Nepodržane mape</string>
+    <string name="deleted_maps_warning">Spremate se da izbrišete %d stavke(e)\nNastavljate?</string>
 </resources>

@@ -5881,4 +5881,7 @@
     <string name="visualizing_button_grid">Мрежа дугмади мапе</string>
     <string name="enable_3d_objects">Омогући 3Д зграде</string>
     <string name="enable_3d_objects_description">Приказ 3Д објеката зграда на мапи</string>
+    <string name="deleted_maps_warning">Управо ћете обрисати %d ставке(е)\nНаставити даље?</string>
+    <string name="deleted_maps_prompt">Ове мапе више нису подржане и замењене су мањим регионима. Уклоните их и преузмите нове верзије.</string>
+    <string name="unsupported_maps">Неподржане мапе</string>
 </resources>

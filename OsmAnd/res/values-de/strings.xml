@@ -5922,4 +5922,6 @@
     <string name="enable_3d_objects_description">3D-Gebäudeobjekte auf der Karte anzeigen</string>
     <string name="efficient_grid">Effizientes Gitter</string>
     <string name="enable_3d_objects">3D-Gebäude aktivieren</string>
+    <string name="unsupported_maps">Nicht mehr verfügbare Karten</string>
+    <string name="deleted_maps_prompt">Diese Karten werden nicht mehr unterstützt und wurden durch regionale Aufteilung ersetzt. Bitte entfernen und die neuen Karten herunterladen.</string>
 </resources>

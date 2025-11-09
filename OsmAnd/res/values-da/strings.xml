@@ -5943,4 +5943,7 @@
     <string name="visualizing_button_grid">Kortknap net</string>
     <string name="enable_3d_objects_description">Vis 3D-bygningsobjekter på kortet</string>
     <string name="enable_3d_objects">Aktivér 3D-bygninger</string>
+    <string name="deleted_maps_warning">Du er ved at slette %d element(er)\nFortsæt?</string>
+    <string name="deleted_maps_prompt">Disse kort understøttes ikke længere og er blevet erstattet af mindre regioner. Fjern dem og download de nye versioner.</string>
+    <string name="unsupported_maps">Ikke-understøttede kort</string>
 </resources>
