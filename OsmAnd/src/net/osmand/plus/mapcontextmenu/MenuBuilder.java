@@ -122,14 +122,7 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class MenuBuilder {
 
@@ -360,7 +353,6 @@ public class MenuBuilder {
 			buildPhotosRow(view, object);
 		}
 	}
-
 
 	public void buildNearestRows(@NonNull ViewGroup view, @Nullable Object object) {
 		buildNearestWikiRow(view);
