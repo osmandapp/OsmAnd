@@ -696,7 +696,7 @@ public class BinaryMapAddressReaderAdapter {
 				// here offsets are sorted by distance
 				TIntArrayList charsList = new TIntArrayList();
 				charsList.add(0);
-				map.readIndexedStringTable(reg, stringMatcher.getCollator(), Collections.singletonList(req.nameQuery),
+				map.readIndexedStringTable(stringMatcher.getCollator(), Collections.singletonList(req.nameQuery),
 						"", Collections.singletonList(loffsets), charsList);
 				codedIS.popLimit(oldLimit);
 				break;
