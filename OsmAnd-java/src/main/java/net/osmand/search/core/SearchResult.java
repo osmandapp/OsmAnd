@@ -174,16 +174,6 @@ public class SearchResult {
 		}
 		return inc;
 	}
-	
-	public boolean hasObjectTypePresent(ObjectType type) {
-		if (objectType == type) {
-			return true;
-		}
-		if (parentSearchResult != null) {
-			return parentSearchResult.hasObjectTypePresent(type);
-		}
-		return false;
-	}
 
 	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();

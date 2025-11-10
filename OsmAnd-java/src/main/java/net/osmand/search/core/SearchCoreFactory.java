@@ -613,46 +613,45 @@ public class SearchCoreFactory {
 					};
 				}
 
-				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
-						SearchPhraseDataType.ADDRESS);
+				SearchWord lastWord = phrase.getLastSelectedWord();
+				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5, SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				Set<String> wordToSearchSplit = splitAddressSearchNames(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
+				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
+						phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+								: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+				if (locSpecified) {
+					QuadRect rect;
+					if (lastWord != null && lastWord.getResult() != null && lastWord.getResult().object instanceof City c) {
+						int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());
+						int y31 = MapUtils.get31TileNumberY(c.getLocation().getLatitude());
+						int[] bb = c.getBbox31();
+						if (bb != null && bb.length >= 4) {
+							int w = (bb[2] - bb[0]) / 3, h = (bb[3] - bb[1]) / 3; // enlarge for 1234 Golden Pond Road Woodhull
+							int left = bb[0] - w, top = bb[1] - h, right = bb[2] + w, bottom = bb[3] + h;
+							rect = new QuadRect(left, top, right, bottom);
+							req.setBBox(x31, y31, left, top, right, bottom);
+						} else {
+							int radius = (int) c.getType().getRadius() * 3;
+							rect = SearchPhrase.calculateBbox(radius, c.getLocation());
+							req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(), radius);
+						}
+					} else {
+						int radius = phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5);
+						rect = SearchPhrase.calculateBbox(radius, loc);
+						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), radius);
+					}
+                    offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
+                }
 				
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					immediateResults.clear();
-					SearchWord lastWord = phrase.getLastSelectedWord();
-					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
-							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
-									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					req.setSearchStat(phrase.getSettings().getStat());
-					if (locSpecified) {
-						if (lastWord != null && lastWord.getResult() != null
-								&& lastWord.getResult().object instanceof City c) {
-							int x31 = MapUtils.get31TileNumberX(c.getLocation().getLongitude());
-							int y31 = MapUtils.get31TileNumberY(c.getLocation().getLatitude());
-							int[] bb = c.getBbox31();
-							if (bb == null && !r.containsRouteData(x31, y31, x31, y31, 15)) {
-								continue;
-							} else if(bb != null && !r.containsRouteData(bb[0], bb[1], bb[2], bb[3], 15)) {
-								continue;
-							}
-							if (bb != null) {
-								int w = (bb[2] - bb[0]) / 3, h = (bb[3] - bb[1]) / 3; // enlarge for 1234 Golden Pond Road Woodhull	
-								req.setBBox(x31, y31, bb[0] - w, bb[1] - h, bb[2] + w, bb[3] + h);
-							} else {
-								req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(),
-										(int) c.getType().getRadius() * 3);
-							}
-						} else {
-							req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(),
-								phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS * 5));
-						}
-					}
 
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {

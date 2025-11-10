@@ -6099,4 +6099,6 @@
     <string name="rendering_attr_hideNoLNAM_name">OSM sjömärken (vissa)</string>
     <string name="rendering_attr_hideNoLNAM_description">Dölj OSM sjömärken (vissa)</string>
     <string name="show_local_names">Visa lokala namn</string>
+    <string name="efficient_grid">Effektivt rutnät</string>
+    <string name="slots">rutor</string>
 </resources>

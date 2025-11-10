@@ -4245,4 +4245,5 @@
     <string name="poi_socket_type2_voltage_high">Hoog</string>
     <string name="poi_climbing_rock_basalt">Klimrots: basalt</string>
     <string name="poi_climbing_rock_conglomerate">Klimrots: conglomeraat</string>
+    <string name="x">X (voorheen Twitter)</string>
 </resources>
