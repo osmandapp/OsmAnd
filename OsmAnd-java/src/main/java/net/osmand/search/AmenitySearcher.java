@@ -302,7 +302,33 @@ public class AmenitySearcher {
                 }
             }
         }
+        return filterAuxiliaryDataByName(result);
+    }
+
+    private List<Amenity> filterAuxiliaryDataByName(List<Amenity> amenities) {
+        String referenceName = null;
+        for (Amenity amenity : amenities) {
+            if (!amenity.isAuxiliaryData() && amenity.getName() != null) {
+                referenceName = amenity.getName();
+                break;
+            }
+        }
+        if (referenceName == null) {
+            return amenities;
+        }
+        List<Amenity> result = new ArrayList<>();
+        for (Amenity amenity : amenities) {
+            if (amenity.isAuxiliaryData() && !namesMatch(referenceName, amenity.getName())) {
+                continue;
+            }
+            result.add(amenity);
+        }
         return result;
+    }
+
+    private static boolean namesMatch(String referenceName, String name) {
+        // TODO: more lax matching, allow for minor typo corrections
+        return name == null || referenceName.equalsIgnoreCase(name);
     }
 
     private List<Amenity> filterByLatLonAndType(Collection<Amenity> amenities, LatLon point, Map<String, String> tags) {
