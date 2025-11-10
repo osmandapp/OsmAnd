@@ -14,6 +14,8 @@
     <string name="slots">Slots</string>
     <string name="button_frames">Button frames</string>
     <string name="visualizing_button_grid">Map button grid</string>
+    <string name="routing_attr_weightrating_name">Max weight at full load</string>
+    <string name="routing_attr_maxaxleload_name">Max axle load</string>
     <string name="deleted_maps_warning">You are about to delete %d items(s)\nContinue?</string>
     <string name="deleted_maps_prompt">These maps are no longer supported and have been replaced by smaller regions. Please remove them and download the new versions.</string>
     <string name="unsupported_maps">Unsupported maps</string>
