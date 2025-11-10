@@ -439,14 +439,16 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 		private final List<LocalItem> localItems = new ArrayList<>();
 		private final boolean showSubscriptionPurchaseBanner;
-		int deletedMapsCount;
 
 		@Override
 		public void addData(@NonNull List<LocalItem> indexes) {
 			localItems.addAll(indexes);
-			DownloadResources downloadIndexes = app.getDownloadThread().getIndexes();
-			deletedMapsCount = downloadIndexes.getDeletedItems().size();
 			notifyDataSetChanged();
+		}
+
+		private int getDeletedMapsCount() {
+			DownloadResources downloadIndexes = app.getDownloadThread().getIndexes();
+			return downloadIndexes.getDeletedItems().size();
 		}
 
 		@Override
@@ -458,7 +460,6 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		public UpdateIndexAdapter(Context context, int resource, List<DownloadItem> items, boolean showSubscriptionPurchaseBanner) {
 			super(context, resource, items);
 			DownloadResources downloadIndexes = app.getDownloadThread().getIndexes();
-			deletedMapsCount = downloadIndexes.getDeletedItems().size();
 			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
 		}
 
@@ -502,7 +503,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		}
 
 		private boolean hasDeletedMaps() {
-			return deletedMapsCount > 0;
+			return getDeletedMapsCount() > 0;
 		}
 
 		@NonNull
@@ -562,7 +563,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 				holder.bindDownloadItem(downloadItem);
 			} else if (viewType == DELETED_MAPS) {
 				DeletedItemsCountViewHolder holder = (DeletedItemsCountViewHolder) view.getTag();
-				holder.bindItem(deletedMapsCount);
+				holder.bindItem(getDeletedMapsCount());
 				view.setOnClickListener(v -> {
 					DeletedMapsFragment.showInstance(getActivity(), UpdatesIndexFragment.this);
 				});
