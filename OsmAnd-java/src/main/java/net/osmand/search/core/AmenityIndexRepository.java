@@ -45,9 +45,4 @@ public interface AmenityIndexRepository {
 	boolean isPoiSectionIntersects(SearchRequest<?> searchRequest);
 
 	List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher);
-
-	/**
-	 * @return {@code true} if this repository contains auxiliary data such as reviews, rather than the basic POI information.
-	 */
-	boolean isAuxiliaryData();
 }

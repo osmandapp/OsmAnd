@@ -290,11 +290,6 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		return false;
 	}
 
-	@Override
-	public boolean isAuxiliaryData() {
-		return getFile().getName().toLowerCase().endsWith(".reviews.obf");
-	}
-
 	@NonNull
 	@Override
 	public String toString() {
