@@ -179,19 +179,19 @@ public class Amenity extends MapObject {
 		MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
 
 		for (String type : subtype.split(";")) {
-			AbstractPoiType poiType = category.getPoiTypeByKeyName(type);
+			PoiType poiType = category.getPoiTypeByKeyName(type);
 			if (poiType == null) {
 				// Try to get POI type from another category, but skip non-OSM-types
-				poiType = mapPoiTypes.getAnyPoiTypeByKey(type);
-				if (poiType != null && poiType.isNotEditableOsm()) {
-					poiType = null;
+				AbstractPoiType abstractPoiType = mapPoiTypes.getAnyPoiTypeByKey(type);
+				if (abstractPoiType instanceof PoiType && !abstractPoiType.isNotEditableOsm()) {
+					poiType = (PoiType) abstractPoiType;
 				}
 			}
 			if (poiType != null) {
-				builder.append((builder.isEmpty()) ? poiType.getTranslation() : ", " + poiType.getTranslation().toLowerCase());
+				builder.append((builder.length() == 0) ? poiType.getTranslation() : ", " + poiType.getTranslation().toLowerCase());
 			}
 		}
-		if (builder.isEmpty()) {
+		if (builder.length() == 0) {
 			builder.append(Algorithms.capitalizeFirstLetterAndLowercase(subtype.replace('_', ' ')));
 		}
 		return builder.toString();
