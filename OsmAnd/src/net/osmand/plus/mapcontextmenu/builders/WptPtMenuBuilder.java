@@ -40,7 +40,7 @@ import java.util.Map;
 public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
-	private final Map<String, String> amenityExtensions = new HashMap<>();
+	private Map<String, String> amenityExtensions = new HashMap<>();
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt,
 			@Nullable PlaceDetailsObject detailsObject) {
@@ -58,10 +58,10 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		if (amenity == null) {
 			String originName = wpt.getAmenityOriginName();
 			if (!Algorithms.isEmpty(originName)) {
-				amenity = helper.findAmenity(originName, wpt.getLatitude(), wpt.getLongitude());
+				setAmenity(helper.findAmenity(originName, wpt.getLatitude(), wpt.getLongitude()));
 			}
 		}
-		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(wpt.getExtensionsToRead(), amenity));
+		amenityExtensions = helper.getUpdatedAmenityExtensions(wpt.getExtensionsToRead(), amenity);
 	}
 
 	@Override

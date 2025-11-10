@@ -57,8 +57,7 @@ public class AmenityExtensionsHelper {
 	}
 
 	@NonNull
-	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> extensions,
-			@Nullable Amenity amenity) {
+	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> extensions, @Nullable Amenity amenity) {
 		Map<String, String> updatedExtensions = new HashMap<>();
 		for (Map.Entry<String, String> entry : extensions.entrySet()) {
 			String key = entry.getKey();

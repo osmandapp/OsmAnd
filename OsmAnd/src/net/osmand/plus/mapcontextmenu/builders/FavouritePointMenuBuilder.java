@@ -45,7 +45,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private static final Log LOG = PlatformUtil.getLog(FavouritePointMenuBuilder.class);
 
 	private final FavouritePoint point;
-	private final Map<String, String> amenityExtensions = new HashMap<>();
+	private Map<String, String> amenityExtensions = new HashMap<>();
 
 	public FavouritePointMenuBuilder(@NonNull MapActivity activity, @NonNull FavouritePoint point, @Nullable Amenity amenity) {
 		super(activity);
@@ -60,10 +60,10 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		if (amenity == null) {
 			String originName = point.getAmenityOriginName();
 			if (!Algorithms.isEmpty(originName)) {
-				amenity = helper.findAmenity(originName, point.getLatitude(), point.getLongitude());
+				setAmenity(helper.findAmenity(originName, point.getLatitude(), point.getLongitude()));
 			}
 		}
-		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(), amenity));
+		amenityExtensions = helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(), amenity);
 	}
 
 	@Nullable

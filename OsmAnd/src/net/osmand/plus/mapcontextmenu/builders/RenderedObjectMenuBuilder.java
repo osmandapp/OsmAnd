@@ -36,6 +36,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	public void updateRenderedObject(@NonNull RenderedObject renderedObject) {
 		this.renderedObject = renderedObject;
+		setAmenity(getSyntheticAmenity(mapActivity, renderedObject));
 	}
 
 	@Override
