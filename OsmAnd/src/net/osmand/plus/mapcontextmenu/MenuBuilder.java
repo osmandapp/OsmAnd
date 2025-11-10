@@ -160,6 +160,7 @@ public class MenuBuilder {
 
 	private CollapseExpandListener collapseExpandListener;
 	private GetImageCardsTask getImageCardsTask;
+	private final List<SearchAmenitiesTask> searchAmenitiesTasks = new ArrayList<>();
 
 	private final String preferredMapLang;
 	private String preferredMapAppLang;
@@ -394,6 +395,7 @@ public class MenuBuilder {
 		}
 		clearPluginRows();
 		stopLoadingImagesTask();
+		stopSearchAmenitiesTasks();
 	}
 
 	public boolean isHidden() {
@@ -734,6 +736,17 @@ public class MenuBuilder {
 				return true;
 			});
 			OsmAndTaskManager.executeTask(cacheReadTask);
+		}
+	}
+
+	private void stopSearchAmenitiesTasks() {
+		if (!Algorithms.isEmpty(searchAmenitiesTasks)) {
+			for (SearchAmenitiesTask task : searchAmenitiesTasks) {
+				if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+					task.cancel(false);
+				}
+			}
+			searchAmenitiesTasks.clear();
 		}
 	}
 
@@ -1653,7 +1666,9 @@ public class MenuBuilder {
 
 	private void searchSortedAmenities(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
 			@Nullable SearchAmenitiesListener listener) {
-		OsmAndTaskManager.executeTask(new SearchAmenitiesTask(filter, latLon, amenity, listener));
+		SearchAmenitiesTask task = new SearchAmenitiesTask(filter, latLon, amenity, listener);
+		searchAmenitiesTasks.add(task);
+		OsmAndTaskManager.executeTask(task);
 	}
 
 	@ColorInt

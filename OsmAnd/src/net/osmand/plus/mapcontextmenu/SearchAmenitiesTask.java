@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -39,6 +40,9 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 		int radius = NEARBY_POI_MIN_RADIUS;
 		List<Amenity> amenities = Collections.emptyList();
 		while (amenities.size() < NEARBY_MAX_POI_COUNT && radius <= NEARBY_POI_MAX_RADIUS) {
+			if (isCancelled()) {
+				break;
+			}
 			QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 			amenities = getAmenities(rect);
 			amenities.remove(amenity);
@@ -50,7 +54,17 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 	@NonNull
 	private List<Amenity> getAmenities(@NonNull QuadRect rect) {
-		return filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		return filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, new ResultMatcher<>() {
+			@Override
+			public boolean publish(Amenity amenity) {
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return SearchAmenitiesTask.this.isCancelled();
+			}
+		});
 	}
 
 	@Override
