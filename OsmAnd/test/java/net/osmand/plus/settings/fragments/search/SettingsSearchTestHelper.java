@@ -5,6 +5,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.Matchers.recyclerViewHasItem;
 import static org.hamcrest.Matchers.allOf;
@@ -37,5 +38,9 @@ class SettingsSearchTestHelper {
 
 	public static Matcher<View> hasSearchResultWithSubstring(final String substring) {
 		return recyclerViewHasItem(hasDescendant(withSubstring(substring)));
+	}
+
+	public static Matcher<View> hasSearchResultWithText(final String text) {
+		return recyclerViewHasItem(hasDescendant(withText(text)));
 	}
 }

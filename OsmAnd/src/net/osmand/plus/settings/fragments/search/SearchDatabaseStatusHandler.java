@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import java.util.Optional;
+
 class SearchDatabaseStatusHandler {
 
 	private final ConfigurationFromSearchDatabaseProvider configurationFromSearchDatabaseProvider;
@@ -12,6 +14,8 @@ class SearchDatabaseStatusHandler {
 	}
 
 	public boolean isSearchDatabaseUpToDate() {
-		return configurationFromSearchDatabaseProvider.getConfigurationFromSearchDatabase().equals(actualConfigurationProvider.getActualConfiguration());
+		final Optional<Configuration> configurationFromSearchDatabase = configurationFromSearchDatabaseProvider.getConfigurationFromSearchDatabase();
+		final Configuration actualConfiguration = actualConfigurationProvider.getActualConfiguration();
+		return configurationFromSearchDatabase.equals(Optional.of(actualConfiguration));
 	}
 }

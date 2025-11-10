@@ -1,8 +1,10 @@
 package net.osmand.plus.settings.fragments.search;
 
 import java.util.Locale;
+import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchablePreferenceScreenGraphDAO;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
 
 class ConfigurationFromSearchDatabaseProvider {
 
@@ -18,11 +20,10 @@ class ConfigurationFromSearchDatabaseProvider {
 		this.configurationBundleConverter = configurationBundleConverter;
 	}
 
-	public Configuration getConfigurationFromSearchDatabase() {
-		return configurationBundleConverter.doBackward(
-				searchablePreferenceScreenGraphDAO
-						.findGraphById(locale)
-						.orElseThrow()
-						.configuration());
+	public Optional<Configuration> getConfigurationFromSearchDatabase() {
+		return searchablePreferenceScreenGraphDAO
+				.findGraphById(locale)
+				.map(SearchablePreferenceScreenGraph::configuration)
+				.map(configurationBundleConverter::doBackward);
 	}
 }

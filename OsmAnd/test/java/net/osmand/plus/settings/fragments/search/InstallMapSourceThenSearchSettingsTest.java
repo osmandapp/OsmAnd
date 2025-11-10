@@ -1,0 +1,168 @@
+package net.osmand.plus.settings.fragments.search;
+
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static net.osmand.plus.settings.fragments.search.SearchButtonClick.mapMenuButton;
+import static net.osmand.plus.settings.fragments.search.SearchButtonClick.searchButton;
+import static net.osmand.plus.settings.fragments.search.SearchButtonClick.settingsButton;
+import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.hasSearchResultWithText;
+import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchResultsView;
+import static net.osmand.plus.settings.fragments.search.SettingsSearchTestHelper.searchView;
+import static net.osmand.test.common.Matchers.childAtPosition;
+import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
+
+import android.view.View;
+
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.test.common.AndroidTest;
+
+import org.hamcrest.Matcher;
+import org.hamcrest.core.IsInstanceOf;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@LargeTest
+@RunWith(AndroidJUnit4.class)
+public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
+
+	@Rule
+	public NonClosingActivityScenarioRule<MapActivity> nonClosingActivityScenarioRule = new NonClosingActivityScenarioRule<>(MapActivity.class);
+
+	private static final String MICROSOFT_MAPS = "Microsoft Maps";
+
+	// Fk-TODO: integrate this test method into SettingsSearchTest as a new test case
+	@Test
+	public void shouldInstallMapSourceThenSearchSettings() {
+		skipAppStartDialogs(app);
+		addMicrosoftMapsSource();
+
+		onView(searchButton()).perform(click());
+		onView(searchView()).perform(replaceText(MICROSOFT_MAPS), closeSoftKeyboard());
+
+		// Then
+		onView(searchResultsView()).check(matches(hasSearchResultWithText("Path: Driving > Configure map > Map source…")));
+		onView(searchResultsView()).check(matches(hasSearchResultWithText(MICROSOFT_MAPS)));
+	}
+
+	private static Matcher<View> navigateUpButton() {
+		return allOf(
+				withId(R.id.close_button),
+				withContentDescription("Navigate up"),
+				childAtPosition(
+						childAtPosition(
+								withClassName(is("android.widget.LinearLayout")),
+								0),
+						0),
+				isDisplayed());
+	}
+
+	private static Matcher<View> backToMapButton() {
+		return allOf(
+				withId(R.id.toolbar_back),
+				withContentDescription("Back to map"),
+				childAtPosition(
+						childAtPosition(
+								withClassName(is("android.widget.LinearLayout")),
+								0),
+						0),
+				isDisplayed());
+	}
+
+	private void addMicrosoftMapsSource() {
+		PluginsHelper.enablePlugin(OsmandRasterMapsPlugin.class, app);
+		onView(mapMenuButton()).perform(click());
+		onView(settingsButton()).perform(click());
+		clickDriving();
+		clickConfigureMap();
+		onView(mapSourceButton()).perform(click());
+		onView(addMoreButton()).perform(click());
+		onView(microsoftMapsButton()).perform(click());
+		onView(applyButton()).perform(scrollTo(), click());
+		onView(backToMapButton()).perform(click());
+		onView(navigateUpButton()).perform(click());
+	}
+
+	private static Matcher<View> applyButton() {
+		return allOf(
+				withId(android.R.id.button1),
+				withText("Apply"),
+				childAtPosition(
+						childAtPosition(
+								withId(me.zhanghai.android.materialprogressbar.R.id.buttonPanel),
+								0),
+						3));
+	}
+
+	private static Matcher<View> microsoftMapsButton() {
+		return allOf(
+				withId(R.id.text),
+				withText(MICROSOFT_MAPS),
+				withParent(
+						allOf(
+								withId(R.id.button),
+								withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout.class)))),
+				isDisplayed());
+	}
+
+	private static void clickDriving() {
+		getViewInteraction().perform(actionOnItemAtPosition(10, click()));
+	}
+
+	private static void clickConfigureMap() {
+		getViewInteraction().perform(actionOnItemAtPosition(3, click()));
+	}
+
+	private static Matcher<View> mapSourceButton() {
+		return allOf(
+				childAtPosition(
+						allOf(
+								withId(R.id.items_container),
+								childAtPosition(
+										withClassName(is("android.widget.FrameLayout")),
+										0)),
+						6),
+				isDisplayed());
+	}
+
+	private static Matcher<View> addMoreButton() {
+		return allOf(
+				withId(R.id.text),
+				withText("Add more…"),
+				withParent(
+						allOf(
+								withId(R.id.button),
+								withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout.class)))),
+				isDisplayed());
+	}
+
+	// FK-TODO: rename
+	private static ViewInteraction getViewInteraction() {
+		return onView(
+				allOf(
+						withId(R.id.recycler_view),
+						childAtPosition(
+								withId(android.R.id.list_container),
+								0)));
+	}
+}

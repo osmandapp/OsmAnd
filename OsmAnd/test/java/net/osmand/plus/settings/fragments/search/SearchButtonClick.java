@@ -28,7 +28,7 @@ class SearchButtonClick {
 		onView(searchButton()).perform(click());
 	}
 
-	private static Matcher<View> mapMenuButton() {
+	public static Matcher<View> mapMenuButton() {
 		return allOf(
 				withId(R.id.map_menu_button),
 				withContentDescription("Back to menu"),
@@ -42,13 +42,13 @@ class SearchButtonClick {
 				isDisplayed());
 	}
 
-	private static Matcher<View> settingsButton() {
+	public static Matcher<View> settingsButton() {
 		return allOf(
 				withText(R.string.shared_string_settings),
 				isDisplayed());
 	}
 
-	private static Matcher<View> searchButton() {
+	public static Matcher<View> searchButton() {
 		return allOf(
 				withId(R.id.action_button),
 				childAtPosition(
