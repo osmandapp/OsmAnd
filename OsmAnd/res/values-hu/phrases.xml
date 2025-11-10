@@ -1998,7 +1998,7 @@
     <string name="poi_industrial_water_purification">Típus: víztisztító</string>
     <string name="poi_industrial_port">Típus: kikötő</string>
     <string name="poi_industrial_depot">Típus: járműtároló</string>
-    <string name="poi_note">Megjegyzés</string>
+    <string name="poi_note">Jegyzet</string>
     <string name="poi_industrial_wellsite">Típus: olajkút</string>
     <string name="poi_watering_place">Állatitató hely</string>
     <string name="poi_animal_boarding">Állatpanzió</string>
@@ -3456,7 +3456,7 @@
     <string name="poi_glacier_ele_bottom">Legalacsonyabb pont</string>
     <string name="poi_glacier_slope">Átlagos lejtés</string>
     <string name="poi_checkpoint_type">Ellenőrzőpont típusa</string>
-    <string name="poi_checkpoint_hiking">Túra ellenőrzőpont</string>
+    <string name="poi_checkpoint_hiking">Túra ellenőrzőpontja</string>
     <string name="poi_checkpoint_type_stamp">Pecsételőhely</string>
     <string name="poi_checkpoint_type_code">Kód</string>
     <string name="poi_checkpoint_type_electronic">Elektronikus</string>
@@ -3523,7 +3523,7 @@
     <string name="poi_park_ride_tram">Villamos</string>
     <string name="poi_park_ride_ferry">Komp</string>
     <string name="poi_hazard">Veszély</string>
-    <string name="poi_rtsa_scale_filter">Nehézségi fok (az Orosz Túrasportszövetség skáláján)</string>
+    <string name="poi_rtsa_scale_filter">Nehézségi kategória (az Orosz Túrasportszövetség skáláján)</string>
     <string name="poi_rtsa_scale_nc">N/A</string>
     <string name="poi_rtsa_scale_nc_asterisk">N/A*</string>
     <string name="poi_rtsa_scale_1a">1A</string>
@@ -4369,7 +4369,7 @@
     <string name="poi_playground_basketrotator">Forgó fészekhinta</string>
     <string name="poi_parking_fee_filter">Parkolási díj</string>
     <string name="poi_access_yes">Szabadon használható</string>
-    <string name="poi_climbing_grade_filter">Sziklamászás nehézségi foka</string>
+    <string name="poi_climbing_grade_filter">Sziklamászás nehézségi szintje</string>
     <string name="poi_climbing_rock_gritstone">Mászókőzet: homokkő</string>
     <string name="poi_climbing_grade_french_mean">Átlagos útvonal (francia fokozat)</string>
     <string name="poi_climbing_grade_french_max">Legnehezebb útvonal (francia fokozat)</string>

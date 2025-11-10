@@ -153,7 +153,7 @@
     <string name="poi_confectionery">Süßwarenladen</string>
     <string name="poi_construction">Baustelle</string>
     <string name="poi_convenience">Lebensmittelgeschäft</string>
-    <string name="poi_copyshop">Copyshop</string>
+    <string name="poi_copyshop">Kopierladen</string>
     <string name="poi_cosmetics">Kosmetik</string>
     <string name="poi_courthouse">Gerichtsgebäude</string>
     <string name="poi_crater">Krater</string>
@@ -189,7 +189,7 @@
     <string name="poi_emergency_phone">Notruftelefon</string>
     <string name="poi_employment_agency">Arbeitsamt</string>
     <string name="poi_equestrian">Pferdesport</string>
-    <string name="poi_erotic">Sexshop</string>
+    <string name="poi_erotic">Sex-Laden</string>
     <string name="poi_estate_agent">Immobilienmakler</string>
     <string name="poi_fabric">Textilgeschäft</string>
     <string name="poi_fast_food">Fast Food</string>
@@ -624,7 +624,7 @@
     <string name="poi_tourism">Tourismus</string>
     <string name="poi_sightseeing">Sehenswürdigkeiten</string>
     <string name="poi_accomodation">Unterkunft</string>
-    <string name="poi_internet_access">Internetzugang</string>
+    <string name="poi_internet_access">Internet-Zugang</string>
     <string name="poi_entertainment">Freizeit</string>
     <string name="poi_club">Verein</string>
     <string name="poi_sustenance">Gastronomie</string>
@@ -785,7 +785,7 @@
     <string name="poi_wiki_lang_lv">Lettisches Wiki</string>
     <string name="poi_wiki_lang_ms">Malaiisches Wiki</string>
     <string name="poi_wiki_lang_new">Newarisches Wiki</string>
-    <string name="poi_node_networks">Wander-/Radwegenetzknoten</string>
+    <string name="poi_node_networks">Wander-/Radwegnetzknoten</string>
     <string name="poi_hiking_routes">Wanderrouten</string>
     <string name="poi_traffic_enforcement">Verkehrsüberwachung</string>
     <string name="poi_cheese">Käsegeschäft</string>
@@ -855,7 +855,7 @@
     <string name="poi_enforcement_check">Kontrollpunkt</string>
     <string name="poi_enforcement_access">Kontrolle: Berechtigung</string>
     <string name="poi_enforcement_toll">Kontrolle: Maut</string>
-    <string name="poi_free_flying">Gleitschirmprodukte</string>
+    <string name="poi_free_flying">Gleitschirm-Produkte</string>
     <string name="poi_bollard">Poller</string>
     <string name="poi_energy">Energieanbieter</string>
     <string name="poi_stile">Zaunleiter</string>
@@ -4865,7 +4865,7 @@
     <string name="poi_name_etymology">Namensetymologie</string>
     <string name="poi_name_left">Name der linken Seite</string>
     <string name="poi_name_right">Name der rechten Seite</string>
-    <string name="poi_camp_site_type">Campingplatz-Typ</string>
+    <string name="poi_camp_site_type">Zeltplatz-Typ</string>
     <string name="poi_camp_site_serviced">Betreut</string>
     <string name="poi_camp_site_deluxe">De luxe</string>
     <string name="poi_camp_site_standard">Standard</string>
@@ -5158,4 +5158,10 @@
     <string name="poi_barrier_sliding_gate">Schiebetor</string>
     <string name="poi_barrier_log">Baumstammbarriere</string>
     <string name="poi_piste_downhill">Abfahrtspiste;Skipiste;Skiabfahrt</string>
+    <string name="poi_sample_collection_filter">Probenentnahme</string>
+    <string name="x">X (früher Twitter)</string>
+    <string name="poi_sample_collection">Stichprobenerhebung</string>
+    <string name="poi_sample_collection_yes">Ja</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_blood">Blut</string>
 </resources>

@@ -5508,7 +5508,7 @@
     <string name="obd_fuel_type_hybrid_diesel">Hybrid-Diesel</string>
     <string name="obd_fuel_type_hybrid_regenerative">Hybrid regenerativ</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hybrid-Wasserstoff</string>
-    <string name="obd_fuel_type_unknown">Unbekannter Kraftstoff</string>
+    <string name="obd_fuel_type_unknown">Unbekannter Kraftstofftyp</string>
     <string name="obd_widget_group">Fahrzeugdaten</string>
     <string name="obd_air_intake_temp">Ansaugtemperatur</string>
     <string name="obd_ambient_air_temp">Umgebungstemperatur</string>
@@ -5919,4 +5919,9 @@
     <string name="download_wikipedia_label">Wikipedia herunterladen</string>
     <string name="private_access_routing_req_short">Erlauben Sie die Nutzung einer Privatstraße, um Ihr Ziel zu erreichen?</string>
     <string name="lang_crh">Krimtatarisch (lateinisch)</string>
+    <string name="enable_3d_objects_description">3D-Gebäudeobjekte auf der Karte anzeigen</string>
+    <string name="efficient_grid">Effizientes Gitter</string>
+    <string name="enable_3d_objects">3D-Gebäude aktivieren</string>
+    <string name="unsupported_maps">Nicht mehr verfügbare Karten</string>
+    <string name="deleted_maps_prompt">Diese Karten werden nicht mehr unterstützt und wurden durch regionale Aufteilung ersetzt. Bitte entfernen und die neuen Karten herunterladen.</string>
 </resources>

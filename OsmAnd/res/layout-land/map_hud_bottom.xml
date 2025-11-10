@@ -64,7 +64,6 @@
 					android:layout_marginBottom="@dimen/map_button_margin"
 					android:orientation="horizontal">
 
-
 					<net.osmand.plus.widgets.FrameLayoutEx
 						android:id="@+id/measurement_buttons"
 						android:layout_width="wrap_content"

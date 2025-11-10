@@ -289,8 +289,8 @@
     <string name="index_item_world_altitude_correction">Corrección mundial de altitud</string>
     <string name="index_item_world_seamarks">Balizas náuticas mundiales</string>
     <string name="index_item_world_bitcoin_payments">Pagos mundiales con Bitcoin</string>
-    <string name="index_item_world_basemap">Mapa mundial general</string>
-    <string name="index_item_world_ski">Mapa mundial de esquí</string>
+    <string name="index_item_world_basemap">Mapamundi general</string>
+    <string name="index_item_world_ski">Mapamundi de esquí</string>
     <string name="lang_zh">Chino</string>
     <string name="lang_pt_br">Portugués (Brasil)</string>
     <string name="lang_en">Inglés</string>
@@ -3299,7 +3299,7 @@
     <string name="shared_string_add_profile">Agregar perfil</string>
     <string name="change_application_profile">Cambiar perfil de la aplicación</string>
     <string name="profiles_for_action_not_found">No se encontró ninguno de estos perfiles.</string>
-    <string name="index_item_world_basemap_detailed">Mapa mundial general (detallado)</string>
+    <string name="index_item_world_basemap_detailed">Mapamundi general (detallado)</string>
     <string name="unsupported_type_error">Tipo no admitido</string>
     <string name="gpx_parse_error">Se encontraron problemas con un archivo GPX. \n \nContactá con la asistencia de OsmAnd para investigar.</string>
     <string name="shared_string_always">Siempre</string>
@@ -5668,7 +5668,7 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Respuesta</string>
     <string name="marine_renderer">Marino</string>
-    <string name="marine_render_descr">Estilo de navegación náutica altamente personalizable. Basado en el estilo Náutico. Funciona mejor con el mapa mundial de balizas náuticas y los mapas de profundidad opcionales.</string>
+    <string name="marine_render_descr">Estilo de navegación náutica altamente personalizable. Basado en el estilo Náutico. Funciona mejor con el mapamundi de balizas náuticas y los mapas de profundidad opcionales.</string>
     <string name="rendering_attr_hideAreas_name">Áreas de profundidad</string>
     <string name="rendering_attr_hideAreas_description">Ocultar áreas de profundidad</string>
     <string name="rendering_attr_hideContours_name">Curvas de profundidad</string>
@@ -5760,4 +5760,13 @@
     <string name="wind_animation_layer">Capa animada del viento</string>
     <string name="weather_layers">Capas de meteorología</string>
     <string name="lang_crh">Tártaro de Crimea (latín)</string>
+    <string name="efficient_grid">Cuadrícula eficiente</string>
+    <string name="slots">Espacios</string>
+    <string name="button_frames">Marcos de botones</string>
+    <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
+    <string name="enable_3d_objects">Activar edificios en 3D</string>
+    <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
+    <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
+    <string name="deleted_maps_prompt">Estos mapas ya no se admiten y fueron reemplazados por regiones más pequeñas. Es necesario quitarlos y descargar las nuevas versiones.</string>
+    <string name="unsupported_maps">Mapas incompatibles</string>
 </resources>

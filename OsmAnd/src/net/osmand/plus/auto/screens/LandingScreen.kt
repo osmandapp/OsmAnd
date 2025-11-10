@@ -48,7 +48,7 @@ class LandingScreen(
                     .setTitle(title)
                     .setImage(icon)
                     .setBrowsable(true)
-                    .setOnClickListener { onCategoryClick(category) }
+	                .setOnClickListener { app.runInUIThread { onCategoryClick(category) } }
                     .build())
         }
         val actionStripBuilder = ActionStrip.Builder()
@@ -119,8 +119,8 @@ class LandingScreen(
             .setImage(icon)
             .setBrowsable(true)
             .setOnClickListener {
-                app.carNavigationSession?.let { carNavigationSession ->
-                    carNavigationSession.startNavigationScreen()
+                app.runInUIThread {
+	                app.carNavigationSession?.startNavigationScreen()
                 }
             }
             .build()

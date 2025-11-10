@@ -5877,4 +5877,13 @@
     <string name="wind_animation_layer">Sloj animacije vetra</string>
     <string name="weather_layers">Vremenski slojevi</string>
     <string name="lang_crh">Krimski tatarski (latinica)</string>
+    <string name="efficient_grid">Efikasna mreža</string>
+    <string name="slots">Slotovi</string>
+    <string name="button_frames">Okviri dugmeta</string>
+    <string name="visualizing_button_grid">Dugme za mrežu</string>
+    <string name="enable_3d_objects_description">Prikaz 3D zgrada na mapi</string>
+    <string name="enable_3d_objects">Omogućite 3D zgrade</string>
+    <string name="deleted_maps_prompt">Ove mape više nisu podržane i zamenjene su manjim regionima. Molimo Vas da ih uklonite i preuzmete nove verzije.</string>
+    <string name="unsupported_maps">Nepodržane mape</string>
+    <string name="deleted_maps_warning">Spremate se da izbrišete %d stavke(e)\nNastavljate?</string>
 </resources>

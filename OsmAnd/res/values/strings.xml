@@ -10,6 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="efficient_grid">Efficient grid</string>
+    <string name="slots">Slots</string>
+    <string name="button_frames">Button frames</string>
+    <string name="visualizing_button_grid">Map button grid</string>
+    <string name="deleted_maps_warning">You are about to delete %d items(s)\nContinue?</string>
+    <string name="deleted_maps_prompt">These maps are no longer supported and have been replaced by smaller regions. Please remove them and download the new versions.</string>
+    <string name="unsupported_maps">Unsupported maps</string>
     <string name="quick_action_weather_layers">A toggle to show or hide weather layers on the map.</string>
     <string name="quick_action_wind_animation_layer">A toggle to show or hide the wind animation layer on the map.</string>
     <string name="wind_animation_layer">Wind animation layer</string>
@@ -660,6 +667,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
     <string name="show_spherical_map">Show spherical map</string>
     <string name="show_spherical_map_description">Display spheroidal model of the Earth</string>
+    <string name="enable_3d_objects">Enable 3D buildings</string>
+    <string name="enable_3d_objects_description">Display 3D building objects on the map</string>
     <string name="show_debug_tile">Show tile information</string>
     <string name="show_rasterization_debug_tile">Show tile rasterization information</string>
     <string name="show_debug_tile_description">Display information about map symbols of each tile</string>

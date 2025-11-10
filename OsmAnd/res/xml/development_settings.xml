@@ -189,6 +189,13 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/show_spherical_map" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="enable_3d_map_objects"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/enable_3d_objects" />
+
 	<PreferenceCategory
 		android:key="aistracker"
 		android:layout="@layout/preference_category_with_descr"
@@ -199,6 +206,35 @@
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/ais_load_data" />
+
+	<PreferenceCategory
+		android:key="visualizing_button_grid"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/visualizing_button_grid" />
+
+	<SwitchPreferenceCompat
+		android:key="grid_layout_draw_cells"
+		android:layout="@layout/preference_switch"
+		android:persistent="false"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/efficient_grid" />
+
+	<SwitchPreferenceCompat
+		android:key="grid_layout_draw_slots"
+		android:layout="@layout/preference_switch"
+		android:persistent="false"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/slots" />
+
+	<SwitchPreferenceCompat
+		android:key="grid_layout_draw_button_frames"
+		android:layout="@layout/preference_switch"
+		android:persistent="false"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/button_frames" />
 
 	<PreferenceCategory
 		android:key="info"

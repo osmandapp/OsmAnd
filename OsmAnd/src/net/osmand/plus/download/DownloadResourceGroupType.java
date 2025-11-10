@@ -2,6 +2,7 @@ package net.osmand.plus.download;
 
 public enum DownloadResourceGroupType {
 	// headers
+	DELETED_MAPS(net.osmand.plus.R.string.unsupported_maps),
 	WORLD_MAPS(net.osmand.plus.R.string.world_maps),
 	REGION_MAPS(net.osmand.plus.R.string.region_maps),
 	SRTM_HEADER(net.osmand.plus.R.string.download_srtm_maps),
@@ -70,7 +71,8 @@ public enum DownloadResourceGroupType {
 				|| this == NAUTICAL_POINTS_HEADER
 				|| this == NAUTICAL_MAPS_GROUP
 				|| this == WIKIVOYAGE_HEADER || this == TRAVEL_GROUP
-				|| this == EXTRA_MAPS;
+				|| this == EXTRA_MAPS
+				|| this == DELETED_MAPS;
 	}
 
 	public static String getVoiceTTSId() {

@@ -179,47 +179,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	@NonNull
-	private Set<WikiImageCard> getImagesToDownloadMetadata(@NonNull WikiImageCard wikiImageCard,
-			boolean initialLoad, @Nullable Boolean preloadNext) {
-		Set<WikiImageCard> result = new HashSet<>();
-		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
-		if (imageCards.size() <= 1 && !initialLoad) {
-			return result;
-		}
-		if (shouldDownloadMetadata(wikiImageCard)) {
-			result.add(wikiImageCard);
-		}
-		if (preloadNext == null) {
-			addImages(imageCards, result, false, 2);
-			addImages(imageCards, result, true, 2);
-		} else {
-			addImages(imageCards, result, preloadNext, 4);
-		}
-		return result;
-	}
-
-	private void addImages(@NonNull List<ImageCard> imageList, @NonNull Set<WikiImageCard> result,
-			boolean next, int downloadCount) {
-		int direction = next ? 1 : -1;
-		for (int i = 1; i <= downloadCount; i++) {
-			int currentIndex = selectedPosition + (i * direction);
-			if (currentIndex >= 0 && currentIndex < imageList.size()) {
-				ImageCard card = imageList.get(currentIndex);
-				if (card instanceof WikiImageCard wikiImageCard && shouldDownloadMetadata(wikiImageCard)) {
-					result.add(wikiImageCard);
-				}
-			}
-		}
-	}
-
-	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard) {
-		WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-		String license = metadata.getLicense();
-		return !wikiImageCard.isMetaDataDownloaded()
-				&& (Algorithms.isEmpty(license) || license.equals("Unknown"));
-	}
-
 	private void updateImageDescriptionRow(@NonNull ImageCard imageCard) {
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);

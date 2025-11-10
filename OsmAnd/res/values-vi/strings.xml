@@ -922,7 +922,7 @@
     <string name="routing_attr_motor_type_petrol_name">Xăng</string>
     <string name="routing_attr_motor_type_diesel_name">Đi-ê-den</string>
     <string name="routing_attr_motor_type_electric_name">Điện</string>
-    <string name="average_speed_time_interval_desc">Chỉ rõ khoảng thời gian tính vận tốc trung bình.</string>
+    <string name="average_speed_time_interval_desc">Chỉ rõ khoảng thời gian tính tốc độ trung bình.</string>
     <string name="transport_hazmat_yes_desc">Chọn danh mục phù hợp.</string>
     <string name="custom_map_button_name_present">Nút như vậy đã có sẵn</string>
     <string name="custom_buttons">Tuỳ chỉnh các nút</string>
@@ -1007,7 +1007,7 @@
     <string name="routing_attr_motor_type_gas_name">Khí nén thiên nhiên</string>
     <string name="routing_attr_motor_type_hybrid_name">Lai</string>
     <string name="transport_hazmat_title">Việc vận chuyển các chất nguy hại</string>
-    <string name="map_widget_average_speed">Vận tốc trung bình</string>
+    <string name="map_widget_average_speed">Tốc độ trung bình</string>
     <string name="routing_attr_avoid_highway_name">Tránh đường cao tốc</string>
     <string name="routing_attr_avoid_highway_description">Tránh đường cao tốc</string>
     <string name="routing_attr_avoid_fords_name">Tránh khúc sông cạn</string>
@@ -1017,7 +1017,7 @@
     <string name="rendering_engine_failed_descr">OsmAnd đã quay lại kết xuất bản đồ \'Phiên bản 1\'. Bạn có thể chọn công cụ kết xuất \'Phiên bản 2 (OpenGL)\' mới hơn trong phần cài đặt.\n\nVui lòng hỗ trợ sự cải thiện bằng cách cung cấp nhật ký lỗi.</string>
     <string name="dismiss_changes_descr">Tất cả thay đổi sẽ bị loại bỏ.</string>
     <string name="shared_string_speedometer">Đồng hồ chỉ tốc độ</string>
-    <string name="average_speed_widget_desc">Hiện vận tốc trung bình của chuyến đi hiện tại.</string>
+    <string name="average_speed_widget_desc">Hiện tốc độ trung bình của chuyến đi hiện tại.</string>
     <string name="map_widget_time_to_intermediate">Thời gian đến điểm trung gian</string>
     <string name="routing_attr_allow_private_for_truck_description">Cho phép xe tải đi vào những khu vực riêng tư.</string>
     <string name="temperature_layer">Lớp nhiệt độ</string>
@@ -1407,7 +1407,7 @@
     <string name="shared_string_activity">Hoạt động</string>
     <string name="shared_string_keywords">Từ khoá</string>
     <string name="routing_attr_hazmat_category_usa_3_name">Chất lỏng dễ cháy</string>
-    <string name="simulation_real_mode_desc">Trên những đoạn đường thẳng, vận tốc sẽ giống với vận tốc tối đa cho phép.\nỞ nơi giao nhau, sự mô phỏng sẽ chậm lại.\nNhững sự giảm tốc sẽ xảy ra khi có tín hiệu giao thông, biển bắt buộc dừng v.v.</string>
+    <string name="simulation_real_mode_desc">Trên những đoạn đường thẳng, tốc độ sẽ giống với tốc độ tối đa cho phép.\nỞ nơi giao nhau, sự mô phỏng sẽ chậm lại.\nNhững sự giảm tốc sẽ xảy ra khi có tín hiệu giao thông, biển bắt buộc dừng v.v.</string>
     <string name="rendering_attr_showFitnessTrails_name">Cung đường tập luyện thể chất</string>
     <string name="rendering_attr_showFitnessTrails_description">Hiện những cung đường tập luyện thể chất</string>
     <string name="shared_string_complete">hoàn thành</string>
@@ -1919,7 +1919,7 @@
     <string name="map_widget_rendering_fps_desc">Hiện tốc độ hiển thị bản đồ và các yếu tố bản đồ theo số khung hình trên giây (FPS).</string>
     <string name="simulate_location_by_gpx">Giả lập vị trí bởi GPX</string>
     <string name="explore_plans">Khám phá các kế hoạch</string>
-    <string name="map_marker_interval_dialog_desc">Chỉ rõ khoảng thời gian trong đó vận tốc trung bình được đo để tính thời gian đến dự kiến.</string>
+    <string name="map_marker_interval_dialog_desc">Chỉ rõ khoảng thời gian trong đó tốc độ trung bình được đo để tính thời gian đến dự kiến.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Hệ màu đường đồng mức độ sâu</string>
     <string name="map_widget_camera_distance">Độ cao máy ảnh</string>
     <string name="shared_string_speed">Tốc độ</string>
@@ -4367,4 +4367,6 @@
     <string name="threads_allocated_for_rendering_desc">Phân bổ ít luồng hơn có thể tăng tốc kết xuất bản đồ trong một số trường hợp.</string>
     <string name="turn_by_turn_directions">Chỉ đường từng bước</string>
     <string name="shared_string_flat">Phẳng</string>
+    <string name="average_speed">Tốc độ trung bình</string>
+    <string name="gpx_info_average_speed">Tốc độ trung bình: %1$s</string>
 </resources>
