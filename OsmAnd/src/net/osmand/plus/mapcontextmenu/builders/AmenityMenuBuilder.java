@@ -282,7 +282,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		processRoutePointAmenityTags(view);
-		// TODO: verify position
 		buildReviewsRow(view);
 		buildInternalRows(view);
 
