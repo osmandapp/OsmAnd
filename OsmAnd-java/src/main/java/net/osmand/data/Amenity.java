@@ -172,25 +172,29 @@ public class Amenity extends MapObject {
 	}
 
 	public String getSubTypeStr() {
-		String typeStr = "";
-		for (String subType : getSubType().split(";")) {
-			PoiType pt = getType().getPoiTypeByKeyName(subType);
-			if (pt == null) {
+		StringBuilder builder = new StringBuilder();
+
+		String subtype = getSubType();
+		PoiCategory category = getType();
+		MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
+
+		for (String type : subtype.split(";")) {
+			AbstractPoiType poiType = category.getPoiTypeByKeyName(type);
+			if (poiType == null) {
 				// Try to get POI type from another category, but skip non-OSM-types
-				pt = (PoiType)MapPoiTypes.getDefault().getAnyPoiTypeByKey(subType);
-				if (pt != null && pt.isNotEditableOsm()) {
-					pt = null;
+				poiType = mapPoiTypes.getAnyPoiTypeByKey(type);
+				if (poiType != null && poiType.isNotEditableOsm()) {
+					poiType = null;
 				}
 			}
-			if (pt != null) {
-				typeStr += typeStr.isEmpty() ? pt.getTranslation() : ", " + pt.getTranslation().toLowerCase();
+			if (poiType != null) {
+				builder.append((builder.isEmpty()) ? poiType.getTranslation() : ", " + poiType.getTranslation().toLowerCase());
 			}
 		}
-		if (typeStr.isEmpty()) {
-			typeStr = getSubType();
-			typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
+		if (builder.isEmpty()) {
+			builder.append(Algorithms.capitalizeFirstLetterAndLowercase(subtype.replace('_', ' ')));
 		}
-		return typeStr;
+		return builder.toString();
 	}
 
 	public String getOpeningHours() {
