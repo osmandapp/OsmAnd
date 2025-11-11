@@ -507,6 +507,11 @@ public class IntentHelper {
 					mapActivity.getImportHelper().handleGpxFilesImport(uris, getGpxDestinationDir(app, true), OPEN_GPX_CONTEXT_MENU, !singleTrack, singleTrack);
 					clearIntent(intent);
 				}
+			} else if (Intent.ACTION_SEND.equals(action)) {
+				Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+				if (uri != null) {
+					mapActivity.getImportHelper().handleContentImport(uri, intent.getExtras(), true);
+				}
 			}
 			if (intent.getBooleanExtra(CLOSE_ALL_FRAGMENTS, false)) {
 				mapActivity.getFragmentsHelper().closeAllFragments();
@@ -518,7 +523,7 @@ public class IntentHelper {
 				}
 				clearIntent(intent);
 			}
-			if(intent.hasExtra(RequiredMapsFragment.OPEN_FRAGMENT_KEY)) {
+			if  (intent.hasExtra(RequiredMapsFragment.OPEN_FRAGMENT_KEY)) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				RequiredMapsFragment.showInstance(fragmentManager);
 				clearIntent(intent);
