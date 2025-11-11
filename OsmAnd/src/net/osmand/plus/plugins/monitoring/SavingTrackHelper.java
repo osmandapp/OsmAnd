@@ -421,14 +421,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 					GpxUtilities.INSTANCE.assignExtensionWriter(pt, extensions, "plugins");
 				}
 
+				boolean autoSplit = settings.AUTO_SPLIT_RECORDING.get();
 				boolean newInterval = pt.getLat() == 0 && pt.getLon() == 0;
 				long currentInterval = Math.abs(pt.getTime() - previousTime);
-				if (track != null && !newInterval && (!settings.AUTO_SPLIT_RECORDING.get()
-						|| currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
+				if (track != null && !newInterval && (!autoSplit || currentInterval < 6 * 60 * 1000
+						|| currentInterval < 10 * previousInterval)) {
 					// 6 minute - same segment
 					segment.getPoints().add(pt);
-				} else if (track != null && (settings.AUTO_SPLIT_RECORDING.get()
-						&& currentInterval < 2 * 60 * 60 * 1000)) {
+				} else if (track != null && (autoSplit && currentInterval < 2 * 60 * 60 * 1000 || newInterval)) {
 					// 2 hour - same track
 					segment = new TrkSegment();
 					if (!newInterval) {
