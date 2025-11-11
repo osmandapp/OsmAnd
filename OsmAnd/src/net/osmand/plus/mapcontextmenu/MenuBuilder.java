@@ -1666,7 +1666,13 @@ public class MenuBuilder {
 
 	private void searchSortedAmenities(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
 			@Nullable SearchAmenitiesListener listener) {
-		SearchAmenitiesTask task = new SearchAmenitiesTask(filter, latLon, amenity, listener);
+		SearchAmenitiesTask task = new SearchAmenitiesTask(filter, latLon, amenity);
+		task.setListener(amenities -> {
+			searchAmenitiesTasks.remove(task);
+			if (listener != null) {
+				listener.onFinish(amenities);
+			}
+		});
 		searchAmenitiesTasks.add(task);
 		OsmAndTaskManager.executeTask(task);
 	}

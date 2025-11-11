@@ -25,13 +25,15 @@ public class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
 	private final LatLon latLon;
 	private final PoiUIFilter filter;
 	private final Amenity amenity;
-	private final SearchAmenitiesListener listener;
+	private SearchAmenitiesListener listener;
 
-	protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
-			@Nullable Amenity amenity, @Nullable SearchAmenitiesListener listener) {
+	protected SearchAmenitiesTask(@NonNull PoiUIFilter filter, @NonNull LatLon latLon, @Nullable Amenity amenity) {
 		this.filter = filter;
 		this.latLon = latLon;
 		this.amenity = amenity;
+	}
+
+	public void setListener(@Nullable SearchAmenitiesListener listener) {
 		this.listener = listener;
 	}
 
