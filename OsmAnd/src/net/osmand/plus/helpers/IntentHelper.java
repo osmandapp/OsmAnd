@@ -498,19 +498,19 @@ public class IntentHelper {
 					}
 				}
 			} else if (Intent.ACTION_SEND_MULTIPLE.equals(action)) {
-				List<Uri> uris = new ArrayList<>();
-				ArrayList<Uri> receivedUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-				if (receivedUris != null) uris.addAll(receivedUris);
-				if ("application/gpx+xml".equals(intent.getType())){
+				List<Uri> uris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+				if (!Algorithms.isEmpty(uris) && "application/gpx+xml".equals(intent.getType())) {
 					mapActivity.getFragmentsHelper().closeAllFragments();
-					boolean singleTrack = uris.size() == 1;
+					boolean singleTrack = uris.size() <= 1;
 					mapActivity.getImportHelper().handleGpxFilesImport(uris, getGpxDestinationDir(app, true), OPEN_GPX_CONTEXT_MENU, !singleTrack, singleTrack);
 					clearIntent(intent);
 				}
 			} else if (Intent.ACTION_SEND.equals(action)) {
 				Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
 				if (uri != null) {
+					mapActivity.getFragmentsHelper().closeAllFragments();
 					mapActivity.getImportHelper().handleContentImport(uri, intent.getExtras(), true);
+					clearIntent(intent);
 				}
 			}
 			if (intent.getBooleanExtra(CLOSE_ALL_FRAGMENTS, false)) {
