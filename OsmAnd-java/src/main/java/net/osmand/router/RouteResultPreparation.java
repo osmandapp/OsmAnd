@@ -2302,10 +2302,12 @@ public class RouteResultPreparation {
 		if (rs.roadsOnLeft + rs.roadsOnRight < directions.length) {
 			int activeTurn = directions[rs.roadsOnLeft];
 			int startDirection = activeTurn; // classic beginning
-			boolean possibleTurnsDetected = possiblyLeft || possiblyRight;
-			boolean hasLeftRoadsWithLanes = rs.roadsOnLeft >0 && rs.leftLanes > 0;
+
+			boolean potentialTurnsDetected = possiblyLeft || possiblyRight;
+			boolean hasLeftRoadsWithLanes = rs.roadsOnLeft > 0 && rs.leftLanes > 0;
 			boolean hasRightRoadsWithLanes = rs.roadsOnRight > 0 && rs.rightLanes > 0;
-			if (possibleTurnsDetected && (hasLeftRoadsWithLanes || hasRightRoadsWithLanes)) {
+			if (potentialTurnsDetected && (hasLeftRoadsWithLanes || hasRightRoadsWithLanes)) {
+				// find more suitable and less greedy start direction if potential turns exist
 				for (int i = rs.roadsOnLeft; i < directions.length - rs.roadsOnRight; i++) {
 					if (possiblyLeft && TurnType.isLeftTurn(directions[i])) {
 						startDirection = directions[i];
@@ -2317,6 +2319,7 @@ public class RouteResultPreparation {
 					}
 				}
 			}
+
 			int endDirection = directions[directions.length - rs.roadsOnRight - 1];
 			for (int i = 0; i < rawLanes.length; i++) {
 				int p = TurnType.getPrimaryTurn(rawLanes[i]);
