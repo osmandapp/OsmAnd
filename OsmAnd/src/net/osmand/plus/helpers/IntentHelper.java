@@ -503,7 +503,7 @@ public class IntentHelper {
 				if (receivedUris != null) uris.addAll(receivedUris);
 				if ("application/gpx+xml".equals(intent.getType())){
 					mapActivity.getFragmentsHelper().closeAllFragments();
-					boolean singleTrack = (long) uris.size() == 1;
+					boolean singleTrack = uris.size() == 1;
 					mapActivity.getImportHelper().handleGpxFilesImport(uris, getGpxDestinationDir(app, true), OPEN_GPX_CONTEXT_MENU, !singleTrack, singleTrack);
 					clearIntent(intent);
 				}
