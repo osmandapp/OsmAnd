@@ -5911,4 +5911,6 @@
     <string name="deleted_maps_warning">%d elemento(j) estos forigita(j).\nĈu vi certas?</string>
     <string name="deleted_maps_prompt">La jenaj mapoj ne estos plu subtenataj kaj estas anstataŭigitaj per mapoj de malpli grandaj regionoj. Forigu ilin kaj elŝutu la novajn versiojn.</string>
     <string name="unsupported_maps">Nesubtenataj mapoj</string>
+    <string name="routing_attr_weightrating_name">Maksimuma maso je plena ŝarĝo</string>
+    <string name="routing_attr_maxaxleload_name">Maksimuma pezo sur akso</string>
 </resources>
