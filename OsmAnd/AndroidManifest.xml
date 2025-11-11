@@ -132,6 +132,13 @@
 				<data android:scheme="content" android:host="*" android:mimeType="application/octet-stream" />
 			</intent-filter>
 
+
+			<intent-filter>
+				<action android:name="android.intent.action.SEND_MULTIPLE" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="application/gpx+xml" />
+			</intent-filter>
+
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

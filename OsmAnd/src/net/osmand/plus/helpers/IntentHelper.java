@@ -5,6 +5,8 @@ import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAG
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.importfiles.ImportHelper.getGpxDestinationDir;
+import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.mapcontextmenu.other.ShareMenu.KEY_SAVE_FILE_NAME;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
@@ -494,6 +496,16 @@ public class IntentHelper {
 						app.getLauncherShortcutsHelper().parseIntent(mapActivity, intent);
 						clearIntent(intent);
 					}
+				}
+			} else if (Intent.ACTION_SEND_MULTIPLE.equals(action)) {
+				List<Uri> uris = new ArrayList<>();
+				ArrayList<Uri> receivedUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+				if (receivedUris != null) uris.addAll(receivedUris);
+				if ("application/gpx+xml".equals(intent.getType())){
+					mapActivity.getFragmentsHelper().closeAllFragments();
+					boolean singleTrack = (long) uris.size() == 1;
+					mapActivity.getImportHelper().handleGpxFilesImport(uris, getGpxDestinationDir(app, true), OPEN_GPX_CONTEXT_MENU, !singleTrack, singleTrack);
+					clearIntent(intent);
 				}
 			}
 			if (intent.getBooleanExtra(CLOSE_ALL_FRAGMENTS, false)) {
