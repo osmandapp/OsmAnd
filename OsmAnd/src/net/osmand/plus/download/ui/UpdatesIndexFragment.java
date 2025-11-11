@@ -272,13 +272,13 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
 		LocalIndexItem item = listAdapter.getItem(position);
 		if (item != null) {
-			if (item.isBanner) {
+			if (item.isBanner()) {
 				callActivity(activity -> {
 					if (!listAdapter.isShowSubscriptionPurchaseBanner()) {
 						LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), this);
 					}
 				});
-			} else if (item.isDownloadItem) {
+			} else if (item.isDownloadItem()) {
 				DownloadItem e = item.downloadItem;
 				ItemViewHolder vh = (ItemViewHolder) v.getTag();
 				OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
@@ -448,31 +448,47 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		return (DownloadActivity) getActivity();
 	}
 
+	private enum LocalIndexItemType {
+		BANNER,
+		DELETED_MAPS,
+		DOWNLOAD_ITEM
+	}
+
 	static class LocalIndexItem {
-		private boolean isBanner;
-		private boolean isDeletedMaps;
-		private boolean isDownloadItem;
+		private LocalIndexItemType type;
 		private int deletedMapsCount;
 		DownloadItem downloadItem;
 
 		static LocalIndexItem createBannerItem() {
 			LocalIndexItem item = new LocalIndexItem();
-			item.isBanner = true;
+			item.type = LocalIndexItemType.BANNER;
 			return item;
 		}
 
 		static LocalIndexItem createDeletedMapsItem(int deletedMapsCount) {
 			LocalIndexItem item = new LocalIndexItem();
-			item.isDeletedMaps = true;
+			item.type = LocalIndexItemType.DELETED_MAPS;
 			item.deletedMapsCount = deletedMapsCount;
 			return item;
 		}
 
 		static LocalIndexItem createDownloadItem(DownloadItem downloadItem) {
 			LocalIndexItem item = new LocalIndexItem();
-			item.isDownloadItem = true;
+			item.type = LocalIndexItemType.DOWNLOAD_ITEM;
 			item.downloadItem = downloadItem;
 			return item;
+		}
+
+		public boolean isBanner() {
+			return type == LocalIndexItemType.BANNER;
+		}
+
+		public boolean isDeletedMaps() {
+			return type == LocalIndexItemType.DELETED_MAPS;
+		}
+
+		public boolean isDownloadItem() {
+			return type == LocalIndexItemType.DOWNLOAD_ITEM;
 		}
 	}
 
@@ -517,9 +533,9 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			LocalIndexItem item = getItem(position);
 			if (item == null) {
 				return -1;
-			} else if (item.isBanner) {
+			} else if (item.isBanner()) {
 				return OSM_LIVE_BANNER;
-			} else if (item.isDeletedMaps) {
+			} else if (item.isDeletedMaps()) {
 				return DELETED_MAPS;
 			} else {
 				return DOWNLOAD_ITEM;
@@ -575,7 +591,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			}
 			LocalIndexItem item = getItem(position);
 			if (item != null) {
-				if (viewType == DOWNLOAD_ITEM && item.isDownloadItem) {
+				if (viewType == DOWNLOAD_ITEM && item.isDownloadItem()) {
 					DownloadItem downloadItem = Objects.requireNonNull(item.downloadItem);
 					ItemViewHolder holder = (ItemViewHolder) view.getTag();
 					holder.setShowRemoteDate(true);
@@ -583,7 +599,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 					holder.setShowParentRegionName(true);
 					holder.setUpdatesMode(true);
 					holder.bindDownloadItem(downloadItem);
-				} else if (viewType == DELETED_MAPS && item.isDeletedMaps) {
+				} else if (viewType == DELETED_MAPS && item.isDeletedMaps()) {
 					DeletedItemsCountViewHolder holder = (DeletedItemsCountViewHolder) view.getTag();
 					holder.bindItem(item.deletedMapsCount);
 					view.setOnClickListener(v -> {
