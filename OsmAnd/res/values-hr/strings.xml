@@ -21,7 +21,7 @@
     <string name="av_def_action_video">Snimanje videa</string>
     <string name="av_def_action_audio">Snimanje zvuka</string>
     <string name="av_use_external_camera">Koristite aplikaciju kamere</string>
-    <string name="av_settings_descr">Postavke zvuka i videa</string>
+    <string name="av_settings_descr">Postavi audio and video postavke.</string>
     <string name="av_settings">Postavke zvuka/videa </string>
     <string name="recording_error">Dogodila se greška tijekom snimanja </string>
     <string name="recording_camera_not_available">Kamera nije dostupna</string>
@@ -31,7 +31,7 @@
     <string name="recording_context_menu_arecord">Snimi zvučni zapis</string>
     <string name="recording_context_menu_vrecord">Snimi video zapis</string>
     <string name="layer_recordings">Snimanje sloja</string>
-    <string name="recording_can_not_be_played">Snimka se ne može otvoriti</string>
+    <string name="recording_can_not_be_played">Nije bilo moguće reproducirati snimku.</string>
     <string name="recording_context_menu_delete">Izbriši zapis</string>
     <string name="recording_context_menu_play">Pokreni</string>
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
@@ -46,11 +46,11 @@
     <string name="download_roads_only_item">Samo ceste</string>
     <string name="download_regular_maps">Standardna karta</string>
     <string name="recording_photo_description">Slika %1$s of %2$s</string>
-    <string name="av_widget_action_descr">Odaberite zadanu radnju widgeta</string>
+    <string name="av_widget_action_descr">Zadana radnja widgeta:</string>
     <string name="av_widget_action">Zadana radnja widgeta</string>
-    <string name="av_video_format_descr">Odaberite format videa</string>
+    <string name="av_video_format_descr">Format video rezultata:</string>
     <string name="av_video_format">Video format</string>
-    <string name="av_use_external_recorder_descr">Koristite sistemsku aplikaciju za video snimanje</string>
+    <string name="av_use_external_recorder_descr">Koristi sustavsku aplikaciju za snimanje videa.</string>
     <string name="av_use_external_recorder">Koristite sistemsku aplikaciju za snimanje</string>
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
@@ -94,10 +94,10 @@
     <string name="avoid_motorway">Izbjegni autoceste</string>
     <string name="show_warnings_descr">Konfiguracija prometnih upozorenja (ograničenja brzine, prisilno zaustavljanje, ležeći policajci, tuneli), radari i informacije o traci.</string>
     <string name="auto_zoom_map">Automatsko zumiranje karte</string>
-    <string name="av_use_external_camera_descr">Koristite sistemsku aplikaciju za fotografiranje</string>
+    <string name="av_use_external_camera_descr">Koristi sustavsku aplikaciju za fotografije.</string>
     <string name="filterpoi_activity">Stvori POI filter</string>
     <string name="recalculate_route_to_your_location">Način prijevoza:</string>
-    <string name="select_navigation_mode">Odaberite načina prijevoza</string>
+    <string name="select_navigation_mode">Način prijevoza:</string>
     <string name="day_night_info_description">Izlazak sunca: %1$s
 \nZalazak sunca: %2$s</string>
     <string name="day_night_info">Informacije dan/noć</string>
@@ -154,7 +154,7 @@
     <string name="navpoint_search_desc">Zemljopisne kordinate</string>
     <string name="offline_navigation_not_available">OsmAnd offline navigacija privremeno nije dostupna.</string>
     <string name="left_side_navigation">Vožnja lijevom stranom</string>
-    <string name="left_side_navigation_descr">Označi za države s vožnjom na lijevoj strani</string>
+    <string name="left_side_navigation_descr">Za zemlje u kojima se vozi lijevom stranom.</string>
     <string name="local_indexes_cat_map">Offline karte (vektorske)</string>
     <string name="shared_string_online_maps">Online karte</string>
     <string name="plugins_screen">Dodaci</string>
@@ -202,7 +202,7 @@
     <string name="rendering_attr_appMode_description">Optimizirate kartu za</string>
     <string name="favourites_search_desc">Pretraži favorite</string>
     <string name="transport_search_desc">Potraži prijevoz</string>
-    <string name="unknown_from_location">Polazna točka još nije određena</string>
+    <string name="unknown_from_location">Mjesto polaska još nije određeno.</string>
     <string name="unknown_location">Položaj još nije poznat.</string>
     <string name="gpx_visibility_txt">Vidljivost</string>
     <string name="gpx_tags_txt">Oznake</string>
@@ -557,9 +557,9 @@
     <string name="background_router_service_descr">OsmAnd radi u pozadini i prati tvoju poziciju, dok je zaslon isključen</string>
     <string name="off_router_service_no_gps_available">Navigacija u stanju mirovanja zahtijeva da lokacijske usluge budu uključene.</string>
     <string name="background_service_provider">Lokacijske usluge</string>
-    <string name="background_service_provider_descr">Odaberite lokaciju davatelja usluge koju koristi stanje mirovanja</string>
+    <string name="background_service_provider_descr">Metoda lokaciranja koju koristi pozadinska usluga:</string>
     <string name="background_service_int">Interval buđenja GPS-a</string>
-    <string name="background_service_int_descr">Postavite interval buđenja koji koristi stanje mirovanja</string>
+    <string name="background_service_int_descr">Interval buđenja koji koristi pozadinska usluga:</string>
     <string name="int_min">min</string>
     <string name="process_navigation_service">OsmAnd navigacija</string>
     <string name="background_service_wait_int">Maksimalno čekanje za popravak</string>
@@ -573,7 +573,7 @@
     <string name="poi_namefinder_query_empty">Za pretraživanje POI morate unijeti upit</string>
     <string name="fav_file_to_load_not_found">GPX datoteku koja sadrži favorite nije moguće pronaći na {0}</string>
     <string name="rotate_map_to">Orijentacija karte</string>
-    <string name="rotate_map_to_descr">Odaberite poravnanje karte na zaslonu</string>
+    <string name="rotate_map_to_descr">Poravnanje karte:</string>
     <string name="transport_context_menu">Traži prijevoz na stanici</string>
     <string name="context_menu_item_search_transport">Pretraži javni prijevoz</string>
     <string name="transport_searching_transport">Rezultati prijevoza (bez odredišta):</string>
@@ -605,7 +605,7 @@
     <string name="level_to_switch_vector_raster_descr">Minimalna razina uvećanja kod korištenja vektorske karte</string>
     <string name="level_to_switch_vector_raster">Min. razina uvećanja vektora</string>
     <string name="internet_not_available">Internet priključak koji je potreban za rad, nije dostupan</string>
-    <string name="select_tile_source_to_install">Odaberite karte za instalirati ili ažurirati</string>
+    <string name="select_tile_source_to_install">Odaberi izvore pločica karte:</string>
     <string name="map_overlay_descr">Odaberite slojnu kartu</string>
     <string name="map_overlay">Karta sloja</string>
     <string name="shared_string_none">Bez</string>
@@ -623,7 +623,7 @@
     <string name="warning_tile_layer_not_downloadable">Program ne može preuzeti sloj karte %1$s, pokušajte ga ponovno instalirati.</string>
     <string name="tts_language_not_supported">Instalirani Android TTS (tekst-u-govor) pogon ne podržava odabrani jezik. Umjesto toga će se koristit njegov unaprijed postavljeni TTS jezik. Želite li tražiti jedan drugi TTS program u trgovini?</string>
     <string name="internet_connection_required_for_online_route">Online navigacija je odabrana, ali internet veza nije dostupna.</string>
-    <string name="map_text_size_descr">Odaberite veličinu teksta za imena na karti</string>
+    <string name="map_text_size_descr">Veličina teksta za imena na karti:</string>
     <string name="map_text_size">Veličina slova na karti</string>
     <string name="local_indexes_cat_poi">POI podaci</string>
     <string name="ttsvoice">TTS Glas</string>
@@ -668,7 +668,7 @@
     <string name="map_version_changed_info">Server sadrži datoteke karata koje nisu kompatibilne s trenutnom verzijom aplikacije. Za preuzimanje i korištenje, molimo vas da nadogradite aplikaciju na noviju verziju.</string>
     <string name="poi_filter_by_name">Traži po imenu</string>
     <string name="old_poi_file_should_be_deleted">POI datoteka \'%1$s\' je suvišna i može se izbrisati.</string>
-    <string name="poi_query_by_name_matches_categories">Nekoliko POI kategorija podudara se s upitom:</string>
+    <string name="poi_query_by_name_matches_categories">Pronađeno je nekoliko povezanih POI kategorija.</string>
     <string name="file_can_not_be_renamed">Datoteka se ne može preimenovati.</string>
     <string name="file_with_name_already_exists">Datoteka s tim imenom već postoji.</string>
     <string name="animate_route_off">Zaustavi animaciju</string>
@@ -753,13 +753,13 @@
     <string name="available_downloads_left">Dostupno je još %1$d preuzimanja</string>
     <string name="files_limit">%1$d datoteka preostalo</string>
     <string name="install_paid">Puna inačica</string>
-    <string name="choose_osmand_theme_descr">Odaberite temu aplikacije</string>
+    <string name="choose_osmand_theme_descr">Prilagodi izgled aplikacije.</string>
     <string name="choose_osmand_theme">Tema aplikacije</string>
     <string name="shared_string_more_actions">Ostale aktivnosti</string>
     <string name="other_location">Druga</string>
-    <string name="use_magnetic_sensor_descr">Koristite magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora</string>
+    <string name="use_magnetic_sensor_descr">Koristi magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora.</string>
     <string name="use_magnetic_sensor">Koristi magnetski senzor</string>
-    <string name="index_settings_descr">Preuzmite karte i upravljajte offline podacima pohranjenim na uređaju</string>
+    <string name="index_settings_descr">Preuzmite karte i upravljajte offline podacima pohranjenim na uređaju.</string>
     <string name="delete_point">Izbriši točku</string>
     <string name="plugin_distance_point_time">vrijeme</string>
     <string name="plugin_distance_point_hdop">preciznost</string>
@@ -807,7 +807,7 @@
     <string name="route_from">Od:</string>
     <string name="please_select_address">Odaberite prvo grad ili ulicu</string>
     <string name="app_modes_choose">Profili aplikacije</string>
-    <string name="app_modes_choose_descr">Odaberite profil koji će se koristiti u aplikaciji</string>
+    <string name="app_modes_choose_descr">Odaberi prikazane profile.</string>
     <string name="local_osm_changes_delete_all_confirm">Izbrisati ćete %1$d osm promjene. Jeste li sigurni?</string>
     <string name="local_index_tile_data_expire">Expire za (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Preuzimanje: %1$s</string>
@@ -817,7 +817,7 @@
     <string name="search_street_in_neighborhood_cities">Traži ulicu u susjedstvu</string>
     <string name="intermediate_items_sort_by_distance">Poredaj od vrata do vrata</string>
     <string name="local_osm_changes_backup_successful">Datoteka OSM izmjena je uspješno generirana %1$s</string>
-    <string name="local_osm_changes_backup_failed">Sigurnosna kopija OSM izmjena nije uspjela</string>
+    <string name="local_osm_changes_backup_failed">Nije bilo moguće spremiti sigurnosnu kopiju OSM promjena.</string>
     <string name="local_osm_changes_backup">Sigurnosna kopija kao OSM izmjena</string>
     <string name="gpx_file_name">Naziv GPX datoteke</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulator udaljenosti i alat za planiranje</string>
@@ -830,7 +830,7 @@
     <string name="distance_measurement_clear_route">Obriši sve točke</string>
     <string name="monitoring_settings">Bilježenje položaja i stanje mirovanja</string>
     <string name="map_widget_mini_route">Mini karta rute</string>
-    <string name="select_animate_speedup">Odaberite brzinu simulacije rute</string>
+    <string name="select_animate_speedup">Brzina simulacije rute:</string>
     <string name="basemap_was_selected_to_download">Osnovna karta svijeta je potrebna za pravilno funkcioniranje aplikacije te je odabrana za preuzimanje.</string>
     <string name="select_index_file_to_download">Ništa nije pronađeno. Ako ne možete pronaći svoju regiju, možete to učiniti sami (vidi http://osmand.net).</string>
     <string name="map_widget_fluorescent">Fluorescentne rute</string>
@@ -892,7 +892,7 @@
     <string name="guidance_preferences_descr">Postavke navigacije</string>
     <string name="speech_rate_descr">Odredi brzinu govora sustava čitanja teksta.</string>
     <string name="speech_rate">Brzina govora</string>
-    <string name="disable_complex_routing_descr">Onemogućiti 2-fazno usmjeravanje za automobilsku navigaciju</string>
+    <string name="disable_complex_routing_descr">Isključi dvofazno usmjeravanje za automobilsku navigaciju.</string>
     <string name="disable_complex_routing">Onemogućiti složenu usmjeravanje</string>
     <string name="local_index_tile_data_maxzoom">Maksimalni zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimalni zoom: %1$s</string>
@@ -967,7 +967,7 @@
     <string name="enable_sleep_mode">Uključi GPS modus u pozadini</string>
     <string name="gps_wake_up_timer">Interval uključivanja GPS-a</string>
     <string name="sleep_mode_stop_dialog">Zaustaviti GPS modus u pozadini?</string>
-    <string name="map_preferred_locale_descr">Izaberite jezik za oznake na karti (ako jezik nije dostupan prebaciti će se na Engleski ili lokalni jezik)</string>
+    <string name="map_preferred_locale_descr">Preferirani jezik za oznake na karti (ako nije dostupan, koristit će se engleska ili lokalna imena).</string>
     <string name="map_preferred_locale">Jezik karte</string>
     <string name="local_map_names">Lokalni nazivi</string>
     <string name="lang_sw">Svahili</string>
@@ -1021,7 +1021,7 @@
     <string name="traffic_warning">Upozorenja u prometu</string>
     <string name="stop_navigation_service">Zaustavi</string>
     <string name="rendering_attr_publicTransportMode_name">Autobus, trolejbus, Shuttle bus</string>
-    <string name="monitoring_settings_descr">Konfigurirajte kako zabilježiti vaše putovanje</string>
+    <string name="monitoring_settings_descr">Konfiguriraj kako zabilježiti putovanja.</string>
     <string name="shared_string_waypoints">Međutočke</string>
     <string name="rendering_attr_subwayMode_name">Linije podzemne željeznice</string>
     <string name="shared_string_waypoint">Međutočke</string>
@@ -1143,7 +1143,7 @@
     <string name="shared_string_edit">Uredi</string>
     <string name="shared_string_places">Mjesta</string>
     <string name="shared_string_search">Traži</string>
-    <string name="shared_string_show_description">Prikaži opis</string>
+    <string name="shared_string_show_description">Prikaži opis.</string>
     <string name="shared_string_message">Upravljaj</string>
     <string name="agps_data_last_downloaded">Preuzeti su ažurirani A-GPS podaci: %1$s</string>
     <string name="welmode_download_maps">Preuzimanje karata</string>
@@ -1165,7 +1165,7 @@
     <string name="your_edits">vaša uređivanja</string>
     <string name="waypoint_visit_after">Posjeti poslije</string>
     <string name="waypoint_visit_before">Posjeti prije</string>
-    <string name="tips_and_tricks_descr">Često postavljana pitanja, nedavne promjene, i drugo</string>
+    <string name="tips_and_tricks_descr">Često postavljana pitanja, nedavne promjene, i drugo.</string>
     <string name="routing_settings_2">Postavke navigacije</string>
     <string name="general_settings_2">Opće postavke</string>
     <string name="shared_string_ellipsis">…</string>
@@ -1202,8 +1202,8 @@
     <string name="roads_only">Samo ceste</string>
     <string name="free">Slobodno %1$s</string>
     <string name="device_memory">Memorija uređaja</string>
-    <string name="world_ski_missing">Kako bi se prikazale skijaške karte, potrebno je preuzeti posebne offline karte</string>
-    <string name="nautical_maps_missing">Kako bi se prikazale nautičke karte, potrebno je preuzeti posebne offline karte</string>
+    <string name="world_ski_missing">Preuzmi posebnu offline kartu za prikaz skijaških objekata.</string>
+    <string name="nautical_maps_missing">Preuzmi posebnu offline kartu za prikaz nautičkih detalja.</string>
     <string name="edit_group">Uredi grupu</string>
     <string name="parking_place">Parkirno mjesto</string>
     <string name="remove_the_tag">Ukloniti oznaku</string>
@@ -1225,7 +1225,7 @@
     <string name="download_tab_downloads">Sva preuzimanja</string>
     <string name="download_tab_updates">Ažuriranja</string>
     <string name="everything_up_to_date">Sve datoteke su ažurirane</string>
-    <string name="no_internet_connection">Preuzimanje nije moguće, provjerite internetsku vezu.</string>
+    <string name="no_internet_connection">Ne postoji internetska veza</string>
     <string name="navigate_point_easting"/>
     <string name="search_for">Traži</string>
     <string name="map_update">Ažuriranja dostupna za %1$s karte</string>
@@ -1275,7 +1275,7 @@
     <string name="rendering_value_highContrastRoads_name">Visoki kontrast ceste</string>
     <string name="routing_attr_no_new_routing_description">Nemoj koristiti pravila usmjeravanje uvedena u v1.9.</string>
     <string name="trip_rec_notification_settings">Snimanje puta (nema podataka)</string>
-    <string name="trip_rec_notification_settings_desc">Prikaži obavijest koja omogućuje pokretanje snimanja puta tako da pritisnete tipku za snimanje</string>
+    <string name="trip_rec_notification_settings_desc">Prikaži obavijest koja omogućuje pokretanje snimanja putovanja.</string>
     <string name="shared_string_notifications">Obavjesti</string>
     <string name="shared_string_continue">Nastavi</string>
     <string name="shared_string_pause">Pauziraj</string>
@@ -1758,9 +1758,9 @@
     <string name="default_speed_system">Jedinica brzine</string>
     <string name="arrival_distance">Obavijest o dostizanju cilja</string>
     <string name="arrival_distance_descr">Kada želiš primati obavijest o dostizanju cilja?</string>
-    <string name="quick_action_weather_layers">Uključi/isključi kontrola za prikaz ili sakrivanje sloja za vrijeme na mapi.</string>
+    <string name="quick_action_weather_layers">Prekidač za prikazivanje ili skrivanje sloja vremenskih uvjeta na karti.</string>
     <string name="download_depth_countours">Konture nautičke dubine</string>
-    <string name="quick_action_wind_animation_layer">Uključi/isključi kontrola za prikaz ili sakrivanje sloja animacije vjetra na mapi.</string>
+    <string name="quick_action_wind_animation_layer">Prekidač za prikazivanje ili skrivanje sloja animacije vjetra na karti.</string>
     <string name="wind_animation_layer">Animirani vjetar sloj</string>
     <string name="day">Dan</string>
     <string name="days_2_4">Dana</string>
