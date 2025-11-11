@@ -6225,4 +6225,9 @@
     <string name="wind_animation_layer">Windanimatielaag</string>
     <string name="weather_layers">Weerlagen</string>
     <string name="lang_crh">Krim-Tataars (Latijns)</string>
+    <string name="deleted_maps_prompt">Deze kaarten worden niet meer ondersteund en zijn vervangen door kleinere regio\'s. Verwijder ze en download de nieuwe versies.</string>
+    <string name="unsupported_maps">Niet-ondersteunde kaarten</string>
+    <string name="enable_3d_objects">Activeer 3D-gebouwen</string>
+    <string name="enable_3d_objects_description">Toon 3D-gebouwobjecten op de kaart</string>
+    <string name="efficient_grid">Efficiënt grid</string>
 </resources>
