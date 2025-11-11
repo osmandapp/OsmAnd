@@ -521,6 +521,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				if (object != null) {
 					clearSelectedObject(object);
 				}
+				if (searchingAddress()) {
+					cancelSearchAddress();
+				}
 				result = hide(animated);
 				if (menuController != null) {
 					menuController.setActive(false);
