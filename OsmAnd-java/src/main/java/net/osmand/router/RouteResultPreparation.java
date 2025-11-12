@@ -2300,10 +2300,10 @@ public class RouteResultPreparation {
 		int[] directions = getUniqTurnTypes(turnLanes);
 		int[] prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
 		int[] curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
-		int cnt = getAttachedLanesCount(rs);
+		int attachedLanesCount = getAttachedLanesCount(rs);
 		if (prevCntLanes != null && curCntLanes != null
 				&& prevCntLanes.length > curCntLanes.length
-				&& prevCntLanes.length == curCntLanes.length + cnt) {
+				&& prevCntLanes.length == curCntLanes.length + attachedLanesCount) {
 			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
 				pair[0] = 0;
 				pair[1] = curCntLanes.length - 1;
@@ -2442,14 +2442,14 @@ public class RouteResultPreparation {
 		}
 		int tp = oldTurnType.getValue();
 		int cnt = 0;
-		boolean isSharp = TurnType.isSharpOrReverse(oldTurnType.getValue());
+		boolean isOldTurnTypeSharp = TurnType.isSharpOrReverse(tp);
 		for (int k = 0; k < lanes.length; k++) {
 			int ln = lanes[k];
 			if ((ln & 1) > 0) {
 				int[] oneActiveLane = {lanes[k]};
 				if (hasAllowedLanes(oldTurnType.getValue(), oneActiveLane, 0, 0)) {
 					tp = TurnType.getPrimaryTurn(lanes[k]);
-					if (isSharp && TurnType.isSharpOrReverse(tp)) {
+					if (isOldTurnTypeSharp && TurnType.isSharpOrReverse(tp)) {
 						break;
 					}
 				}
