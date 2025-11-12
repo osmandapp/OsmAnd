@@ -2283,8 +2283,9 @@ public class RouteResultPreparation {
 		return r;
 	}
 
-	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes, RoadSplitStructure rs, String turnLanes) {
-		int[] pair = {-1, -1, 0};
+	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes,
+	                              RoadSplitStructure rs, String turnLanes) {
+		int[] pair = {-1, -1, 0}; // [activeBeginIndex, activeEndIndex, activeTurn]
 		if (turnLanes == null) {
 			return pair;
 		}
@@ -2297,25 +2298,19 @@ public class RouteResultPreparation {
 		if (rs == null) {
 			return pair;
 		}
+
 		int[] directions = getUniqTurnTypes(turnLanes);
-		int[] prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
-		int[] curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
-		int attachedLanesCount = getAttachedLanesCount(rs);
-		if (prevCntLanes != null && curCntLanes != null
-				&& prevCntLanes.length > curCntLanes.length
-				&& prevCntLanes.length == curCntLanes.length + attachedLanesCount) {
-			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
-				pair[0] = 0;
-				pair[1] = curCntLanes.length - 1;
-				pair[2] = directions[0];
-				return pair;
-			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
-				pair[0] = rawLanes.length - curCntLanes.length;
-				pair[1] = rawLanes.length - 1;
-				pair[2] = directions[rs.roadsOnLeft];
-				return pair;
-			}
+
+		if (findActiveIndexByLanes(pair, directions, rs, rawLanes, prevSegm, currentSegm)) {
+			return pair;
 		}
+
+		findActiveIndexByUniqueDirections(pair, directions, rs, rawLanes);
+
+		return pair;
+	}
+
+	private void findActiveIndexByUniqueDirections(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes) {
 		if (rs.roadsOnLeft + rs.roadsOnRight < directions.length) {
 			int startDirection = directions[rs.roadsOnLeft];
 			int endDirection = directions[directions.length - rs.roadsOnRight - 1];
@@ -2339,7 +2334,29 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		return pair;
+	}
+
+	private boolean findActiveIndexByLanes(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes,
+	                                       RouteSegmentResult prevSegm, RouteSegmentResult currentSegm) {
+		int[] prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
+		int[] curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
+		int attachedLanesCount = getAttachedLanesCount(rs);
+		if (prevCntLanes != null && curCntLanes != null
+				&& prevCntLanes.length > curCntLanes.length
+				&& prevCntLanes.length == curCntLanes.length + attachedLanesCount) {
+			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
+				pair[0] = 0;
+				pair[1] = curCntLanes.length - 1;
+				pair[2] = directions[0];
+				return true;
+			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
+				pair[0] = rawLanes.length - curCntLanes.length;
+				pair[1] = rawLanes.length - 1;
+				pair[2] = directions[rs.roadsOnLeft];
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private int getAttachedLanesCount(RoadSplitStructure rs) {
