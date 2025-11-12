@@ -55,8 +55,8 @@ public class RoundaboutTurn {
 		int[] prevTypes = prev.getObject().getPointTypes(prev.getEndPointIndex());
 		int[] currentTypes = current.getObject().getPointTypes(current.getStartPointIndex());
 		if (prevTypes != null && currentTypes != null) {
-			Integer miniType = prev.getObject().region.decodingRules.get("highway#mini_roundabout");
-			if (miniType == null) {
+			int miniType = prev.getObject().region.searchRouteEncodingRule("highway", "mini_roundabout");
+			if (miniType < 0) {
 				return false;
 			}
 			boolean p = false;
