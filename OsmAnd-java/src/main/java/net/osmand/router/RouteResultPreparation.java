@@ -2300,13 +2300,16 @@ public class RouteResultPreparation {
 		int[] directions = getUniqTurnTypes(turnLanes);
 		int[] prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
 		int[] curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
-		if (prevCntLanes != null && curCntLanes != null && prevCntLanes.length > curCntLanes.length) {
-			/*if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
+		int cnt = getAttachedLanesCount(rs);
+		if (prevCntLanes != null && curCntLanes != null
+				&& prevCntLanes.length > curCntLanes.length
+				&& prevCntLanes.length == curCntLanes.length + cnt) {
+			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
 				pair[0] = 0;
 				pair[1] = curCntLanes.length - 1;
 				pair[2] = directions[0];
 				return pair;
-			} else*/ if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
+			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
 				pair[0] = rawLanes.length - curCntLanes.length;
 				pair[1] = rawLanes.length - 1;
 				pair[2] = directions[rs.roadsOnLeft];
@@ -2337,6 +2340,21 @@ public class RouteResultPreparation {
 			}
 		}
 		return pair;
+	}
+
+	private int getAttachedLanesCount(RoadSplitStructure rs) {
+		int cnt = 0;
+		if (rs.leftLanesInfo != null) {
+			for (AttachedRoadInfo ri : rs.leftLanesInfo) {
+				cnt += ri.lanes;
+			}
+		}
+		if (rs.rightLanesInfo != null) {
+			for (AttachedRoadInfo ri : rs.rightLanesInfo) {
+				cnt += ri.lanes;
+			}
+		}
+		return cnt;
 	}
 
 	private boolean hasTurn(String turnLanes, int turnType) {
