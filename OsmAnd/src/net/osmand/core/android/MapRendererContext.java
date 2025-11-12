@@ -533,7 +533,7 @@ public class MapRendererContext {
 
 			OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 			if (devPlugin != null && devPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
-				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider);
+				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider, mapPresentationEnvironment);
 				mapRendererView.setMap3DObjectsProvider(map3DObjectsProvider);
 			} else {
 				mapRendererView.resetMap3DObjectsProvider();
