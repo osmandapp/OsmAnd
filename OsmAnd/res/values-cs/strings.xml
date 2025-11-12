@@ -5916,4 +5916,6 @@
     <string name="deleted_maps_warning">Chystáte se odstranit %d položek\nChcete pokračovat?</string>
     <string name="deleted_maps_prompt">Tyto mapy již nejsou podporovány a byly nahrazeny menšími regiony. Odstraňte je prosím a stáhněte si nové verze.</string>
     <string name="unsupported_maps">Nepodporované mapy</string>
+    <string name="routing_attr_weightrating_name">Maximální hmotnost při plném zatížení</string>
+    <string name="routing_attr_maxaxleload_name">Maximální zatížení nápravy</string>
 </resources>
