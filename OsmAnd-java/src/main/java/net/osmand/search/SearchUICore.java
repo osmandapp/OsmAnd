@@ -984,6 +984,10 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
+			// disable boundary for end results
+			if (object.objectType == ObjectType.BOUNDARY) {
+				return false;
+			}
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
 					&& Algorithms.isEmpty(object.alternateName)) {
 				boolean updateName = false;
