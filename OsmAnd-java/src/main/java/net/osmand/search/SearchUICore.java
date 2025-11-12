@@ -41,28 +41,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
-	
+	private static final boolean FILTER_OBJECTS = false;
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final int TIMEOUT_BEFORE_SEARCH = 50;
@@ -1067,38 +1053,63 @@ public class SearchUICore {
 			exportedCities.add(city);
 		}
 
+		private List<MapObject> filterObjects(List<SearchResult> results) {
+			List<MapObject> allowed = new ArrayList<>();
+			for (SearchResult sr : results) {
+				if (sr.object instanceof MapObject o && o.getId() != null) {
+					allowed.add(o);
+					if (o instanceof Amenity)
+						return allowed;
+				}
+			}
+
+			return allowed;
+		}
+
+		private List<City> filterCities(List<SearchResult> results) {
+			List<City> allowed = new ArrayList<>();
+			for (SearchResult r : results) {
+				if (r.object instanceof Building && r.parentSearchResult != null && r.parentSearchResult.object instanceof Street s) {
+					allowed.add(s.getCity());
+					return allowed;
+				} else if (r.object instanceof City c) {
+					allowed.add(c);
+				}
+			}
+
+			return allowed;
+		}
+
 		public JSONObject createTestJSON(SearchResultCollection searchResult) {
 			JSONObject json = new JSONObject();
 
 			Set<Amenity> amenities = new HashSet<>();
-			Set<City> cities;
+			Set<City> cities = new HashSet<>();
 			Set<City> matchedCities = new HashSet<>();
 			Set<City> streetCities = new HashSet<>();
-			if (exportedCities != null) {
-				cities = new HashSet<>(exportedCities);
-			} else {
-				cities = new HashSet<>();
-			}
 			Set<Street> streets = new HashSet<>();
 			if (exportedObjects != null) {
-				for (MapObject obj : exportedObjects) {
+				List<MapObject> objects = FILTER_OBJECTS ? filterObjects(searchResult.searchResults) : exportedObjects;
+				cities = new HashSet<>(FILTER_OBJECTS ? filterCities(searchResult.searchResults) : exportedCities);
+				for (MapObject obj : objects) {
 					if (obj instanceof Amenity) {
 						amenities.add((Amenity) obj);
-					} else if (obj instanceof Street) {
-						Street street = (Street) obj;
+					} else if (obj instanceof Street street) {
 						streets.add(street);
 						if (street.getCity() != null) {
 							final City city = street.getCity();
 							cities.add(city);
 							streetCities.add(city);
 						}
-					} else if (obj instanceof City) {
-						City city = (City) obj;
+					} else if (obj instanceof City city) {
 						cities.add(city);
 						matchedCities.add(city);
 					}
 				}
 			}
+			if (matchedCities.isEmpty() && !cities.isEmpty())
+				matchedCities.add(cities.iterator().next());
+
 			for (City city : cities) {
 				List<Street> cityStreets = city.getStreets();
 				for (Street street : streets) {
