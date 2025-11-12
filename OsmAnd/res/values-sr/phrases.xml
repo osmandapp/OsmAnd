@@ -219,7 +219,7 @@
     <string name="poi_traffic_calming_island">Саобраћајно острво</string>
     <string name="poi_traffic_signals">Стоп светло</string>
     <string name="poi_car_repair">Поправка кола</string>
-    <string name="poi_service_tyres">Гуме</string>
+    <string name="poi_service_tyres">Гуме;Гума</string>
     <string name="poi_vehicle_inspection">Преглед возила</string>
     <string name="poi_car_wash">Прање кола</string>
     <string name="poi_fuel">Бензинска пумпа;Пумпа за плин;Станица за пуњење</string>
@@ -2346,7 +2346,7 @@
     <string name="poi_cuisine">Тип кухиње</string>
     <string name="poi_cuisine_pizza">Пице</string>
     <string name="poi_cuisine_burger">Пљескавице</string>
-    <string name="poi_cuisine_coffee">Кафа</string>
+    <string name="poi_cuisine_coffee_shop">Кафа</string>
     <string name="poi_cuisine_sandwich">Сендвичи</string>
     <string name="poi_cuisine_kebab">Кебаб</string>
     <string name="poi_cuisine_doner">Донер кебаб (шавурма)</string>
@@ -5158,4 +5158,10 @@
     <string name="poi_barrier_sliding_gate">Клизна капија</string>
     <string name="poi_piste_downhill">Низбрдна писта; Скијашка писта; Скијашки спуст</string>
     <string name="poi_route_activity_type_skiing">Скијашке руте</string>
+    <string name="poi_sample_collection_filter">Прикупљање узорака</string>
+    <string name="x">Екс (бивши Твитер)</string>
+    <string name="poi_sample_collection">Прикупљање узорака</string>
+    <string name="poi_sample_collection_yes">Да</string>
+    <string name="poi_sample_collection_covid19">Ковид19</string>
+    <string name="poi_sample_collection_blood">Крв</string>
 </resources>

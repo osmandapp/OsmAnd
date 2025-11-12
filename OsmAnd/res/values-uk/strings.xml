@@ -5159,12 +5159,12 @@
     <string name="map_widget_sun_position_desc">Показує час до сходу або заходу сонця.</string>
     <string name="rendering_attr_showToll_name">Показати обмеження по оплаті за проїзд</string>
     <string name="reset_key_assignments_desc">Усі призначення кнопок для вибраного типу буде вилучено.</string>
-    <string name="lang_zh_hans">Китайська спрощена</string>
+    <string name="lang_zh_hans">Спрощена китайська</string>
     <string name="shared_string_reassign">Перепризначити</string>
     <string name="reset_key_assignments">Скинути призначення кнопок</string>
     <string name="rendering_attr_showToll_description">Показати обмеження плати за проїзд дорогами</string>
     <string name="target_elevation">Висота цілі</string>
-    <string name="lang_zh_hant">Китайська традиційна</string>
+    <string name="lang_zh_hant">Традиційна китайська</string>
     <string name="shared_string_eta">ETA</string>
     <string name="previous_row_has_complex_widget">У попередньому рядку розміщено складний віджет</string>
     <string name="complex_widget_alert">Віджет %1$s можна розмістити лише в окремому рядку.</string>
@@ -5860,7 +5860,7 @@
     <string name="rendering_attr_tidalFlatStyle_name">Припливний плоский стиль</string>
     <string name="rendering_attr_tidalFlatStyle_description">Стиль припливних відмілин</string>
     <string name="rendering_attr_watercolor_name">Колір води</string>
-    <string name="rendering_attr_watercolor_description">Колір з води</string>
+    <string name="rendering_attr_watercolor_description">Колір води</string>
     <string name="view_on_phone">Переглянути на телефоні</string>
     <string name="backup_delete_data_warning_extended">Ця дія назавжди видалить усі вибрані дані з хмари. Відновити їх пізніше буде неможливо.</string>
     <string name="amount_of_total_used">Використано %1$s з %2$s</string>
@@ -5903,4 +5903,22 @@
     <string name="shared_string_last_downhill">Останній спуск</string>
     <string name="help_article_navigation_routing_ski_routing_name">Гірськолижні схили та маршрути</string>
     <string name="rendering_attr_pisteRoutes_name">Гірськолижні схили та маршрути</string>
+    <string name="requires_internet_connection">Потрібне підключення до Інтернету</string>
+    <string name="save_and_access_articles_offline">Зберігайте дані та отримуйте доступ до статей офлайн будь-де</string>
+    <string name="private_access_routing_req_short">Дозволити користуватися приватною дорогою, щоб дістатися до пункту призначення?</string>
+    <string name="download_wikipedia_label">Завантажити Wikipedia</string>
+    <string name="quick_action_weather_layers">Перемикач для відображення або приховування шарів погоди на карті.</string>
+    <string name="quick_action_wind_animation_layer">Перемикач для відображення або приховування шару анімації вітру на карті.</string>
+    <string name="wind_animation_layer">Шар анімації вітру</string>
+    <string name="weather_layers">Погодні шари</string>
+    <string name="lang_crh">Кримськотатарська (латиниця)</string>
+    <string name="efficient_grid">Ефективна мережа</string>
+    <string name="slots">Слоти</string>
+    <string name="button_frames">Рамки для ґудзиків</string>
+    <string name="visualizing_button_grid">Сітка кнопок карти</string>
+    <string name="enable_3d_objects">Увімкнути 3D-будівлі</string>
+    <string name="enable_3d_objects_description">Відображення 3D-об\'єктів будівель на карті</string>
+    <string name="deleted_maps_warning">Ви збираєтеся видалити %d елементів(ів)\nПродовжити?</string>
+    <string name="deleted_maps_prompt">Ці карти більше не підтримуються та були замінені меншими регіонами. Видаліть їх та завантажте нові версії.</string>
+    <string name="unsupported_maps">Непідтримувані карти</string>
 </resources>

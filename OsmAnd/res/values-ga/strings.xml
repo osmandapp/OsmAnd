@@ -4283,7 +4283,7 @@
     <string name="public_transport_ped_route_title">Tá an bealach de shiúl na gcos thart ar %1$s, agus d\'fhéadfadh sé a bheith níos tapúla ná iompar poiblí</string>
     <string name="public_transport_try_ped">Bain triail as nascleanúint de shiúl na gcos.</string>
     <string name="send_search_query">Seol ceist chuardaigh?</string>
-	<string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
+    <string name="read_wikipedia_offline">Léigh Vicipéid as líne</string>
     <string name="move_marker_bottom_sheet_title">Bog an léarscáil chun ionad an mharcóra a athrú</string>
     <string name="storage_directory_shared">Cuimhne chomhroinnte</string>
     <string name="hno">Uimhir an tí</string>
@@ -5584,7 +5584,7 @@
     <string name="deleting">Ag scriosadh…</string>
     <string name="deleting_history">Stair á scriosadh…</string>
     <string name="show_rasterization_debug_tile">Taispeáin faisnéis rastaireachta tíleanna</string>
-    <string name="release_5_2">• Obair ar siúl...</string>
+    <string name="release_5_2">• Sonraí sráide agus cathrach curtha leis na torthaí cuardaigh\n\n• Giuirléidí Taifeadta Turais Nua: Uasluas, Meánfhána, agus Feabhsuithe ar an gCnoc/An Cnoc Suas\n\n• Stíl léarscáile muirí nua le roghanna saincheaptha fairsinge\n\n• Luas rindreála léarscáile feabhsaithe\n\n• Nascacht fheabhsaithe le hoiriúnóirí OBDII BLE\n\n• Méadrachtaí ráta croí curtha leis an Anailís de réir Eatramh\n\n• Taispeántas fad curtha leis do rianta pleanáilte\n\n• Is féidir aonaid airde a shocrú anois ar leithligh ó aonaid achair\n\n• Treoshuíomh an léarscáil feabhsaithe Gníomh Tapa le modhanna compáis inroghnaithe\n\n• I gcás Android Auto, foláirimh réamh-loingseoireachta curtha leis le haghaidh léarscáileanna ar iarraidh agus bóithre príobháideacha\n\n• Fadhb réitithe le paraiméadair mhéide míchearta don ghiuirléid Rialóir Ga\n\n• Treoshuíomhanna scáileáin inbhéartaithe curtha leis\n\n• Comhéadan úsáideora feabhsaithe chun méadrachtaí trucaile a shonrú</string>
     <string name="shared_string_threads">Snáitheanna</string>
     <string name="threads_allocated_for_rendering">Snáitheanna leithdháilte le haghaidh rindreála</string>
     <string name="threads_allocated_for_rendering_desc">D’fhéadfadh leithdháileadh snáithe níos ísle luas a chur le rindreáil an léarscáil i gcásanna áirithe.</string>
@@ -5699,4 +5699,22 @@
     <string name="shared_string_last_downhill">Deireanach síos an cnoc</string>
     <string name="help_article_navigation_routing_ski_routing_name">Fánaí sciála agus bealaí</string>
     <string name="rendering_attr_pisteRoutes_name">Fánaí sciála agus bealaí</string>
+    <string name="requires_internet_connection">Teastaíonn nasc idirlín</string>
+    <string name="save_and_access_articles_offline">Sábháil sonraí agus rochtain a fháil ar ailt as líne áit ar bith</string>
+    <string name="private_access_routing_req_short">Cead a thabhairt duit bóthar príobháideach a úsáid chun do cheann scríbe a bhaint amach?</string>
+    <string name="download_wikipedia_label">Íoslódáil Vicipéid</string>
+    <string name="quick_action_weather_layers">Toggle chun sraitheanna aimsire ar an léarscáil a thaispeáint nó a cheilt.</string>
+    <string name="quick_action_wind_animation_layer">Toggle chun an ciseal beochana gaoithe a thaispeáint nó a cheilt ar an léarscáil.</string>
+    <string name="wind_animation_layer">Sraith beochana gaoithe</string>
+    <string name="weather_layers">Sraitheanna aimsire</string>
+    <string name="lang_crh">Tatairis Chrimé (Laidin)</string>
+    <string name="efficient_grid">Eangach éifeachtach</string>
+    <string name="slots">Sliotáin</string>
+    <string name="button_frames">Frámaí cnaipe</string>
+    <string name="visualizing_button_grid">Eangach cnaipe léarscáile</string>
+    <string name="deleted_maps_warning">Tá tú ar tí %d mír(eanna) a scriosadh\nLean ar aghaidh?</string>
+    <string name="deleted_maps_prompt">Ní thacaítear leis na léarscáileanna seo a thuilleadh agus tá réigiúin níos lú ina n-áit. Bain iad agus íoslódáil na leaganacha nua le do thoil.</string>
+    <string name="unsupported_maps">Léarscáileanna gan tacaíocht</string>
+    <string name="enable_3d_objects">Cumasaigh foirgnimh 3T</string>
+    <string name="enable_3d_objects_description">Taispeáin réada foirgnimh 3T ar an léarscáil</string>
 </resources>

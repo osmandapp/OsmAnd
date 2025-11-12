@@ -179,7 +179,7 @@
     <string name="poi_power_transformer">Transformator</string>
     <string name="poi_power_plant">Kraftværk</string>
     <string name="poi_power_generator">Strømgenerator</string>
-    <string name="poi_post_office">Posthus</string>
+    <string name="poi_post_office">Postkontor</string>
     <string name="poi_post_box">Postkasse</string>
     <string name="poi_telephone">Telefon</string>
     <string name="poi_communication_tower">Kommunikationstårn</string>
@@ -2833,7 +2833,7 @@
     <string name="poi_home_visit">Hjemmebesøg</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Burger</string>
-    <string name="poi_cuisine_coffee">Kaffe</string>
+    <string name="poi_cuisine_coffee_shop">Kaffe</string>
     <string name="poi_cuisine_sandwich">Sandwich</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_chicken">Kylling</string>
@@ -4124,7 +4124,7 @@
     <string name="poi_route_activity_type_inline_skates">Rulleskøjter</string>
     <string name="poi_music_venue">Spillested</string>
     <string name="poi_indoor_seating_yes">Indendørs siddepladser: ja</string>
-    <string name="poi_photo_booth">Foto station</string>
+    <string name="poi_photo_booth">Fotoautomat</string>
     <string name="poi_route_activity_type_rafting">Rafting</string>
     <string name="poi_route_activity_type_fitness">Fitness</string>
     <string name="poi_climbing_boulder">Klatre boulder</string>
@@ -4283,4 +4283,21 @@
     <string name="poi_barrier_log">Stamme</string>
     <string name="poi_barrier_chain">Kæde</string>
     <string name="poi_barrier_sliding_gate">Skydelåge</string>
+    <string name="poi_driver_training">Køreteknisk anlæg</string>
+    <string name="x">X (tidligere Twitter)</string>
+    <string name="poi_sample_collection_blood">Blod</string>
+    <string name="poi_sample_collection_yes">Ja</string>
+    <string name="poi_sample_collection">Prøvetagning</string>
+    <string name="poi_historic_spacecraft">Historisk rumfartøj</string>
+    <string name="poi_canoe_put_in_egress">Kano-isætning og -udtagning</string>
+    <string name="poi_canoe_egress">Kano-udtagning</string>
+    <string name="poi_canoe_put_in">Kano-isætning</string>
+    <string name="poi_route_point_category">Rejsekategori</string>
+    <string name="poi_airline">Flyselskabskontor</string>
+    <string name="poi_international_organization">International organisation</string>
+    <string name="poi_post_office_post_partner">Pakkeshop</string>
+    <string name="poi_post_office_service_provider">Postkontor leverandør</string>
+    <string name="poi_post_office_service_brand">Postkontors varemærke</string>
+    <string name="poi_post_office_collection_times">Postkontors afhentningstider</string>
+    <string name="poi_post_office_opening_hours">Postkontors åbningstider</string>
 </resources>

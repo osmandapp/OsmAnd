@@ -171,7 +171,7 @@
     <string name="poi_traffic_calming_choker">Звуження дороги</string>
     <string name="poi_traffic_signals">Світлофор</string>
     <string name="poi_car_repair">Ремонт машин (СТО)</string>
-    <string name="poi_service_tyres">Шини</string>
+    <string name="poi_service_tyres">Шини; Шина</string>
     <string name="poi_vehicle_inspection">Огляд автомобіля</string>
     <string name="poi_car_wash">Мийка автомобіля</string>
     <string name="poi_fuel">АЗС;Автомобільна заправка;Автозаправка;Бензоколонка;Бензозаправка</string>
@@ -2919,7 +2919,7 @@
     <string name="poi_healthcare_speciality_depth">Глибинна психологія</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
     <string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
-    <string name="poi_cuisine_coffee">Кава</string>
+    <string name="poi_cuisine_coffee_shop">Кава</string>
     <string name="poi_cuisine_shawarma">Кебаб (шаурма)</string>
     <string name="poi_animal_keeping_type_open_stable">Стайня відкритого типу</string>
     <string name="poi_self_service_yes">Так;Самообслуговування</string>
@@ -5158,4 +5158,10 @@
     <string name="poi_barrier_sliding_gate">Розсувні ворота</string>
     <string name="poi_piste_downhill">Схили вниз по схилах; Гірськолижні схили; Гірськолижні схили</string>
     <string name="poi_route_activity_type_skiing">Лижні маршрути</string>
+    <string name="poi_sample_collection_filter">Збір зразків</string>
+    <string name="x">X (раніше Твіттер)</string>
+    <string name="poi_sample_collection">Збір зразків</string>
+    <string name="poi_sample_collection_yes">Так</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_blood">Кров</string>
 </resources>

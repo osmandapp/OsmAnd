@@ -485,7 +485,7 @@
     <string name="poi_shower_filter_yes">Ja;Dusjfilter</string>
     <string name="poi_caravans_yes">Ja;Campingvogner</string>
     <string name="poi_power_supply_yes">Ja;Strømforsyning</string>
-    <string name="poi_compressed_air_yes">Ja</string>
+    <string name="poi_compressed_air_yes">Ja;Trykkluft</string>
     <string name="poi_vacuum_cleaner_yes">Ja</string>
     <string name="poi_home_visit_yes">Ja</string>
     <string name="poi_wheelchair_designated">Merket for</string>
@@ -1330,7 +1330,7 @@
     <string name="poi_tax_inspection">Skattekontroll</string>
     <string name="poi_climbing_crag">Ja</string>
     <string name="poi_traffic_calming_cushion">Fartshump</string>
-    <string name="poi_traffic_calming_table">Bred fartshump</string>
+    <string name="poi_traffic_calming_table">Lengre fartshump</string>
     <string name="poi_traffic_calming_choker">Innsnevring</string>
     <string name="poi_denotation">Betegnelse</string>
     <string name="poi_rtsa_scale_filter">Vanskelighetsgrad</string>
@@ -1829,7 +1829,7 @@
     <string name="poi_furniture_filter">Møbler</string>
     <string name="poi_computer_sales">Datamaskinsutsalg</string>
     <string name="poi_faculty_filter">Fakultet</string>
-    <string name="poi_climbing_grade_filter">Gradering</string>
+    <string name="poi_climbing_grade_filter">Klatringsgradering</string>
     <string name="poi_computer_parts">Deler for datamaskiner</string>
     <string name="poi_laundry_service_filter">Tøyvask</string>
     <string name="poi_socket_type2_cable_output_filter">Type 2-kabelkonnektorutgang</string>
@@ -1946,7 +1946,7 @@
     <string name="poi_cash_in_customers">Kunder</string>
     <string name="poi_diet_pescetarian_no">Pesco-vegetarisk: nei</string>
     <string name="poi_waste_accepted">Akseptert avfall</string>
-    <string name="poi_route_track_point">Andre rutepunkter</string>
+    <string name="poi_route_track_point">Rutepunkter</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Tunnel forbudt for fotgjengere</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel forbudt for syklister</string>
     <string name="poi_route_activity_type_e_mountain_bike">El-terrengsykkel</string>
@@ -1971,4 +1971,31 @@
     <string name="poi_hazard_additional_dangerous_junction">Farlig kryss</string>
     <string name="poi_hazard_additional_falling_rocks">Steinras</string>
     <string name="poi_hazard_additional_erosion">Erosjon</string>
+    <string name="poi_route_activity_type_trekking">Fotturer</string>
+    <string name="poi_route_activity_type_walking">Gåruter</string>
+    <string name="poi_route_activity_type_cross_country_skiing">Langrenn</string>
+    <string name="poi_route_activity_type_skiing">Skiløyper</string>
+    <string name="poi_barrier_log">Tømmerstokk</string>
+    <string name="poi_barrier_sliding_gate">Skyveport</string>
+    <string name="poi_piste_nordic">Langrennsløype</string>
+    <string name="poi_swing_gate">Svingbom</string>
+    <string name="poi_weightlifting">Vektløfting</string>
+    <string name="poi_aeroway_gate">Flyplass-gate</string>
+    <string name="poi_gender_segregated_yes">Kjønnssegregering: ja</string>
+    <string name="poi_gender_segregated_no">Kjønnssegregering: nei</string>
+    <string name="poi_denomination_greek_orthodox">Gresk-ortodoks</string>
+    <string name="poi_slipway">Slipp</string>
+    <string name="poi_climbing_bolt">Klatringsbolt</string>
+    <string name="poi_climbing_bolts_filter">Klatringsbolter</string>
+    <string name="poi_climbing_quality">Klatringskvalitet</string>
+    <string name="poi_second_hand_filter">Bruktvarer</string>
+    <string name="poi_compressed_air_no">Trykkluft: nei</string>
+    <string name="poi_park_ride_metro">T-bane</string>
+    <string name="poi_route_trolleybus_ref">Trolleybuss</string>
+    <string name="poi_route_tram_ref">Trikk</string>
+    <string name="poi_route_train_ref">Tog</string>
+    <string name="poi_surveillance_yes">Overvåking: ja</string>
+    <string name="poi_shop_additional_yes">Med butikk</string>
+    <string name="poi_park_ride_tram">Trikk</string>
+    <string name="poi_park_ride_ferry">Ferge</string>
 </resources>

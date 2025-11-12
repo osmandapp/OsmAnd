@@ -294,7 +294,7 @@
     <string name="poi_bank">Bankejo</string>
     <string name="poi_beach">Sablobordo</string>
     <string name="poi_car_repair">Aŭtomobil-riparejo</string>
-    <string name="poi_service_tyres">pneŭoj</string>
+    <string name="poi_service_tyres">pneŭoj;pneuoj;bendoj;aerbendoj;radoj</string>
     <string name="poi_vehicle_inspection">Aŭtomobil-kontrolejo</string>
     <string name="poi_fuel_diesel">dizeloleo</string>
     <string name="poi_fuel_gtl_diesel">dizeloleo sinteza</string>
@@ -2830,7 +2830,7 @@
     <string name="poi_home_visit">Vizitoj en hejmo</string>
     <string name="poi_cuisine_pizza">picoj</string>
     <string name="poi_cuisine_burger">burgeroj</string>
-    <string name="poi_cuisine_coffee">kaftrinkaĵoj</string>
+    <string name="poi_cuisine_coffee_shop">kaftrinkaĵoj</string>
     <string name="poi_cuisine_sandwich">sandviĉoj</string>
     <string name="poi_cuisine_kebab">kebabo</string>
     <string name="poi_cuisine_chicken">kokaĵo</string>
@@ -5158,4 +5158,10 @@
     <string name="poi_barrier_chain">Ĉeno (barilo)</string>
     <string name="poi_barrier_log">Faligita trunko</string>
     <string name="poi_barrier_sliding_gate">Ŝovpordego</string>
+    <string name="poi_sample_collection_filter">Specimenoj prenataj</string>
+    <string name="x">X (ekse Twitter)</string>
+    <string name="poi_sample_collection">Prenejo de specimenoj</string>
+    <string name="poi_sample_collection_yes">jes</string>
+    <string name="poi_sample_collection_covid19">KOVIM-19</string>
+    <string name="poi_sample_collection_blood">sango</string>
 </resources>

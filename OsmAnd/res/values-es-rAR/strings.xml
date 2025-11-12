@@ -289,8 +289,8 @@
     <string name="index_item_world_altitude_correction">Corrección mundial de altitud</string>
     <string name="index_item_world_seamarks">Balizas náuticas mundiales</string>
     <string name="index_item_world_bitcoin_payments">Pagos mundiales con Bitcoin</string>
-    <string name="index_item_world_basemap">Mapa mundial general</string>
-    <string name="index_item_world_ski">Mapa mundial de esquí</string>
+    <string name="index_item_world_basemap">Mapamundi general</string>
+    <string name="index_item_world_ski">Mapamundi de esquí</string>
     <string name="lang_zh">Chino</string>
     <string name="lang_pt_br">Portugués (Brasil)</string>
     <string name="lang_en">Inglés</string>
@@ -1328,7 +1328,7 @@
     <string name="follow">Iniciar la guía</string>
     <string name="mark_final_location_first">Definí primero el destino</string>
     <string name="get_directions">Indicaciones</string>
-    <string name="opening_hours">Horario de atención</string>
+    <string name="opening_hours">Horario de apertura</string>
     <string name="opening_changeset">Abriendo conjunto de cambios…</string>
     <string name="closing_changeset">Cerrando conjunto de cambios…</string>
     <string name="commiting_node">Cambiando nodo…</string>
@@ -1569,7 +1569,7 @@
     <string name="av_locations_descr">Archivo GPX con ubicaciones.</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="contact_info">Información de contacto</string>
-    <string name="add_opening_hours">Agregar horario de atención</string>
+    <string name="add_opening_hours">Agregar horario de apertura</string>
     <string name="poi_dialog_poi_type">Tipo de PDI</string>
     <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
     <string name="please_specify_poi_type">Indicá el tipo de PDI.</string>
@@ -3299,7 +3299,7 @@
     <string name="shared_string_add_profile">Agregar perfil</string>
     <string name="change_application_profile">Cambiar perfil de la aplicación</string>
     <string name="profiles_for_action_not_found">No se encontró ninguno de estos perfiles.</string>
-    <string name="index_item_world_basemap_detailed">Mapa mundial general (detallado)</string>
+    <string name="index_item_world_basemap_detailed">Mapamundi general (detallado)</string>
     <string name="unsupported_type_error">Tipo no admitido</string>
     <string name="gpx_parse_error">Se encontraron problemas con un archivo GPX. \n \nContactá con la asistencia de OsmAnd para investigar.</string>
     <string name="shared_string_always">Siempre</string>
@@ -5550,7 +5550,7 @@
     <string name="hmd_promo_description">Acceso gratuito a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s meses</string>
     <string name="hmd_promo">Oferta de HMD por %1$s meses</string>
     <string name="original_shape_description">Cada punto conserva su propia forma.</string>
-    <string name="save_favorite_default_appearance">¿Aplicar cambios a todos los puntos existentes en la carpeta, o sólo a los nuevos?</string>
+    <string name="save_favorite_default_appearance">¿Aplicar cambios a todos los puntos existentes en la carpeta o sólo a los nuevos?</string>
     <string name="original_color_description">Cada punto conserva su propio color.</string>
     <string name="apply_to_all_points">Aplicar a todos los puntos</string>
     <string name="original_icon_description">Cada punto conserva su propio ícono.</string>
@@ -5595,7 +5595,7 @@
     <string name="grid_color">Color de la cuadrícula</string>
     <string name="shared_string_edges">Bordes</string>
     <string name="labels_position">Ubicación de las etiquetas</string>
-    <string name="routing_attr_allow_ferries_description">Permite la navegación con transbordadores (ferris)</string>
+    <string name="routing_attr_allow_ferries_description">Permite navegar por transbordadores (ferris)</string>
     <string name="customize_grid_color">Personalizar el color de la cuadrícula</string>
     <string name="multipoligon_related">Relacionado</string>
     <string name="route_part_of">Parte de</string>
@@ -5636,7 +5636,7 @@
     <string name="deleting">Borrando…</string>
     <string name="deleting_history">Borrando historial…</string>
     <string name="show_rasterization_debug_tile">Mostrar datos de rasterización de las teselas</string>
-    <string name="release_5_2">• Trabajo en progreso...</string>
+    <string name="release_5_2">• Se agregaron a los resultados de búsqueda algunos detalles sobre las calles y ciudades\n\n • Nuevos widgets en «Grabación de viaje»: velocidad máxima, pendiente media y mejoras de los ascensos y descensos\n\n • Nuevo estilo de mapa náutico marino con amplias opciones de personalización\n\n • Mejoras de velocidad en la renderización del mapa\n\n • Mejoras de conectividad con adaptadores OBDII BLE\n\n • Se agregaron estadísticas de frecuencia cardíaca al análisis por intervalos\n\n • Se agregó la visualización de la duración de las rutas planificadas\n\n • Ahora las unidades de altitud se pueden configurar por separado de las unidades de distancia\n\n • Se mejoró la acción rápida de orientación del mapa con modos de brújula seleccionables\n\n • Android Auto: se agregaron alertas previas a la navegación, para mapas faltantes y caminos privados\n\n • Se resolvió un problema con los parámetros de tamaño incorrectos para el widget «Regla radial»\n\n • Se agregaron orientaciones de pantalla invertidas\n\n • Se mejoró la interfaz de usuario para especificar estadísticas de camiones</string>
     <string name="shared_string_threads">Hilos</string>
     <string name="threads_allocated_for_rendering">Hilos asignados a la representación</string>
     <string name="threads_allocated_for_rendering_desc">La asignación de hilos inferiores podría acelerar la representación del mapa en algunos casos.</string>
@@ -5668,7 +5668,7 @@
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Respuesta</string>
     <string name="marine_renderer">Marino</string>
-    <string name="marine_render_descr">Estilo de navegación náutica altamente personalizable. Basado en el estilo Náutico. Funciona mejor con el mapa mundial de balizas náuticas y los mapas de profundidad opcionales.</string>
+    <string name="marine_render_descr">Estilo de navegación náutica altamente personalizable. Basado en el estilo Náutico. Funciona mejor con el mapamundi de balizas náuticas y los mapas de profundidad opcionales.</string>
     <string name="rendering_attr_hideAreas_name">Áreas de profundidad</string>
     <string name="rendering_attr_hideAreas_description">Ocultar áreas de profundidad</string>
     <string name="rendering_attr_hideContours_name">Curvas de profundidad</string>
@@ -5741,9 +5741,9 @@
     <string name="track_folder_appearance">Aspecto de la carpeta de trazas</string>
     <string name="update_maps">Actualizar mapas</string>
     <string name="reconnect">Reconectar</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
+    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos o del último descenso, del viaje actual registrado.</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje o del último actual registrado.</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia total del recorrido actual registrado, con modos para ver la distancia del último ascenso y descenso.</string>
+    <string name="trip_recording_distance_widget_desc">Muestra la distancia total del viaje registrado actual, con modos para ver la distancia del último ascenso y descenso.</string>
     <string name="trip_recording_max_speed_widget_description">Muestra la velocidad máxima del viaje actual registrado. Pulsá para cambiar entre la velocidad máxima general y la velocidad máxima del último ascenso o descenso.</string>
     <string name="trip_recording_average_slope_widget_description">Muestra la pendiente media del último ascenso o descenso del viaje actual registrado.</string>
     <string name="average_slope">Pendiente media</string>
@@ -5751,4 +5751,22 @@
     <string name="shared_string_last_downhill">Último descenso</string>
     <string name="help_article_navigation_routing_ski_routing_name">Pistas y rutas de esquí</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas y rutas de esquí</string>
+    <string name="requires_internet_connection">Necesitas conexión a internet</string>
+    <string name="save_and_access_articles_offline">Guardá datos y accedé a artículos sin conexión, en cualquier lugar</string>
+    <string name="private_access_routing_req_short">¿Usar un camino privado para llegar al destino?</string>
+    <string name="download_wikipedia_label">Descargar Wikipedia</string>
+    <string name="quick_action_weather_layers">Un botón que alterna en el mapa las capas de meteorología.</string>
+    <string name="quick_action_wind_animation_layer">Un botón que alterna en el mapa la capa animada del viento.</string>
+    <string name="wind_animation_layer">Capa animada del viento</string>
+    <string name="weather_layers">Capas de meteorología</string>
+    <string name="lang_crh">Tártaro de Crimea (latín)</string>
+    <string name="efficient_grid">Cuadrícula eficiente</string>
+    <string name="slots">Espacios</string>
+    <string name="button_frames">Marcos de botones</string>
+    <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
+    <string name="enable_3d_objects">Activar edificios en 3D</string>
+    <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
+    <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
+    <string name="deleted_maps_prompt">Estos mapas ya no se admiten y fueron reemplazados por regiones más pequeñas. Es necesario quitarlos y descargar las nuevas versiones.</string>
+    <string name="unsupported_maps">Mapas incompatibles</string>
 </resources>

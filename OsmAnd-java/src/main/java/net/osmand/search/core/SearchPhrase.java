@@ -390,7 +390,7 @@ public class SearchPhrase {
 		if (l == null) {
 			return null;
 		}
-		cache1kmRect = calculateBbox(1000, l);
+		cache1kmRect= calculateBbox(1000, l);
 		return cache1kmRect;
 	}
 

@@ -159,11 +159,11 @@
     <string name="poi_traffic_calming_choker">Calzada reducida;Gargantilla</string>
     <string name="poi_traffic_signals">Semáforo</string>
     <string name="poi_car_repair">Taller de automóviles;Taller mecánico; Reparación de automotores</string>
-    <string name="poi_service_tyres">Neumáticos</string>
+    <string name="poi_service_tyres">Neumáticos;Gomería</string>
     <string name="poi_vehicle_inspection">Inspección de vehículos</string>
     <string name="poi_car_wash">Lavadero de automóviles</string>
     <string name="poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera;Bomba</string>
-    <string name="poi_fuel_diesel">Diésel (Euro);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium</string>
+    <string name="poi_fuel_diesel">Diésel (grado 3, euro V);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium</string>
     <string name="poi_fuel_gtl_diesel">Diésel GTL</string>
     <string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
     <string name="poi_fuel_biodiesel">Biodiésel</string>
@@ -1492,7 +1492,7 @@
     <string name="poi_automated_yes">Sí;Automatizado</string>
     <string name="poi_automated_no">No automatizado</string>
     <string name="poi_full_service_yes">Servicio completo</string>
-    <string name="poi_aeroway_fuel">Gasolinera para aviones;Estación de combustible para aviones</string>
+    <string name="poi_aeroway_fuel">Gasolinera (aviones);Aeroplanta;Estación de combustible (aviones)</string>
     <string name="poi_public_bath">Baños públicos (termas)</string>
     <string name="poi_male_yes">Masculino</string>
     <string name="poi_male_no">Hombres: prohibido</string>
@@ -2834,7 +2834,7 @@
     <string name="poi_dish">Plato</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburguesas</string>
-    <string name="poi_cuisine_coffee">Café</string>
+    <string name="poi_cuisine_coffee_shop">Café</string>
     <string name="poi_cuisine_sandwich">Sándwich;Emparedados</string>
     <string name="poi_cuisine_kebab">Kebab;Brochetas</string>
     <string name="poi_cuisine_chicken">Pollo</string>
@@ -5152,4 +5152,16 @@
     <string name="poi_hazard_additional_queues_likely">Posible embotellamiento</string>
     <string name="poi_hazard_additional_side_winds">Vientos laterales</string>
     <string name="poi_hazard_additional_ice">Hielo</string>
+    <string name="poi_sample_collection_filter">Recolección de muestras</string>
+    <string name="poi_piste_downhill">Pista de descenso;Prueba de descenso;Pista de esquí;Pendiente de esquí</string>
+    <string name="x">X (antes Twitter)</string>
+    <string name="poi_route_activity_type_skiing">Rutas de esquí</string>
+    <string name="poi_historic_spacecraft">Nave espacial histórica</string>
+    <string name="poi_barrier_chain">Cadena (barrera)</string>
+    <string name="poi_barrier_log">Tronco de árbol</string>
+    <string name="poi_barrier_sliding_gate">Puerta corrediza</string>
+    <string name="poi_sample_collection">Recolección de muestras</string>
+    <string name="poi_sample_collection_yes">Sí</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_blood">Sangre</string>
 </resources>

@@ -2434,7 +2434,7 @@
     <string name="osm_live_header">Þessi áskrift virkjar uppfærslur á klukkustundar fresti fyrir öll kort um allan heim.
 \n Hluti innkomunnar fer til OSM-samfélagsins og er greitt fyrir hvert framlag til OSM.
 \n Ef þér líkar við OsmAnd og OSM og vilt styðja við verkefnið og fá stuðning frá þeim, þá er þetta kjörin leið.</string>
-    <string name="fav_point_emoticons_message">Nafni eftirlætisins hefur verið breytt í %1$s til að auðvelda rétta vistun strengsins ásamt tjáningartáknum yfir í skrá.</string>
+    <string name="fav_point_emoticons_message">Nafni eftirlætisins hefur verið breytt í %1$s til að auðvelda rétta vistun strengsins með lyndistáknum yfir í skrá.</string>
     <string name="save_track_to_gpx_globally_descr">Hægt er að kveikja og slökkva á almennri skráningu staðsetninga í GPX-skrá með viðmótshlutanum fyrir GPX-skráningu á kortaskjánum.</string>
     <string name="android_19_location_disabled">Síðan í Android útgáfu 4.4 (KitKat) er gamla geymslumappan (%s) úrelt. Á að afrita allar OsmAnd-skrár í nýja möppu\?
 \n Athugasemd 1: Gömlu skrárnar þínar haldast óbreyttar (en hægt er að eyða þeim handvirkt).
@@ -5750,7 +5750,7 @@
     <string name="reverse_mode_calculate_route">Reikna leið</string>
     <string name="reverse_mode_original_track">Upprunalegur ferill</string>
     <string name="reverse_mode">Öfugur hamur</string>
-    <string name="release_5_2">• Í vinnslu...</string>
+    <string name="release_5_2">• Nánari upplýsingum um götur og borgir bætt í leitarniðurstöður\n\n • Nýir viðmótshlutar í skráningu leiða: Hámarkshraði, meðalhalli og endurbætur á hækkun/lækkun\n\n • Nýr \'Sjávartengt\' kortastíll með margvíslegum möguleikum á sérsníðingum\n\n • Endurbættur myndgerðarhraði landakorta\n\n • Betri tengingar við OBDII BLE skynjara\n\n • Bætt við hjartsláttarmælingum í \'Greina eftir millibilum\'\n\n • Bætt við birtingu tímalengda í skipulögðum leiðum\n\n • Hæðareiningar er nú hægt að stilla óháð einingum vegalengda\n\n • Endurbætt flýtiaðgerð fyrir stefnu korts með veljanlegum áttavitastillingum\n\n • Fyrir Android Auto, bætt við for-leiðsagnar viðvörunum vegna korta sem vantar og einkavega\n\n • Leyst vandamál með rangar stærðir í viðmótshlutanum \'Mælistika út frá miðju hrings\'\n\n • Bætt við viðsnúnum stefnum fyrir skjá\n\n • Notandaviðmót bætt varðandi skilgreiningar á mælistærðum flutningafarartækja</string>
     <string name="ble_prefix_pattern">%s •</string>
     <string name="device_address_with_prefix">%1$s%2$s</string>
     <string name="response">Svar</string>
@@ -5830,7 +5830,7 @@
     <string name="reverse_mode_calculate_route_desc">Reikna nýja, bestaða leið að upphafspunktinum.</string>
     <string name="next_turn_information_desc">Birtir komandi beygjuleiðbeiningar og götuheiti.</string>
     <string name="threads_allocated_for_rendering_desc">Úthlutun færri þráða getur í sumum tilfellum hraðað myndgerð kortsins.</string>
-    <string name="ski_route_switch_style_description">Uppgötvaðu skíðaleiðir, lyftur og fleira með Vetrar- og Skíðakortastílunum.</string>
+    <string name="ski_route_switch_style_description">Uppgötvaðu skíðaleiðir, brekkur, lyftur og fleira með Vetrar- og Skíðakortastílunum.</string>
     <string name="hmd_promo_description_years">Ókeypis aðgangur að eiginleikum á borð við ótakmörkuð niðurhöl korta, þrívíddarlandslag, o.fl. í %1$s ár</string>
     <string name="altitude_metrics_description">Stillir einingu birtingar á hæð í viðmótshlutum og tölfræði.</string>
     <string name="write_location_provider_description">Vista staðsetningarveitu í hvern ferilpunkt á meðan upptöku stendur</string>
@@ -5856,4 +5856,23 @@
     <string name="show_spherical_map_description">Birta kúlulaga líkan af Jörðinni</string>
     <string name="release_5_1">• Bætt við stuðningi við innkaup á vefnum í mörgum stýrikerfum\n\n • Hitaeiningar færðar í Almennar stillingar til að þær finnist betur\n\n • Bætt við rafhleðslumerki fyrir BLE-skynjara\n\n • Nýtt og betra viðmót til að velja punkta í leiðsögn\n\n • Bættur sýnileiki viðmótshluta með nýjum útlínum\n\n • Bætt við greiningu á Hækkun/Lækkun\n\n • Ítarlegri samþætting Wikipedia og Wikivoyage á fleiri merkisstöðum.</string>
     <string name="shared_string_price">Verð</string>
+    <string name="requires_internet_connection">Krefst internettengingar</string>
+    <string name="save_and_access_articles_offline">Vistaðu gögn og hafðu aðgang að greinum hvar sem er án nettengingar</string>
+    <string name="track_folder_appearance">Útlit ferlamöppu</string>
+    <string name="update_maps">Uppfæra kort</string>
+    <string name="reconnect">Endurtengjast</string>
+    <string name="rendering_attr_showSkiSlopes_name">Sýna skíðabrekkur</string>
+    <string name="rendering_attr_showSkiSlopes_description">Sýna einfaldaðar skíðabrekkur</string>
+    <string name="trip_recording_downhill_widget_desc">Sýnir summu allra lækkana eða síðustu lækkun í leiðinni sem verið er að skrá.</string>
+    <string name="trip_recording_uphill_widget_desc">Sýnir summu allra hækkana eða síðustu hækkun í leiðinni sem verið er að skrá.</string>
+    <string name="trip_recording_distance_widget_desc">Birtir heildarvegalengd leiðarinnar sem verið er að skrá, með möguleika á að sjá vegalengd síðustu hækkunar og lækkunar.</string>
+    <string name="trip_recording_max_speed_widget_description">Birtir hámarkshraðann fyrir leiðina sem verið er að skrá. Ýttu til að skipta á milli heildarhámarkshraða og hámarkshraða síðustu upp- eða niðurferðar.</string>
+    <string name="trip_recording_average_slope_widget_description">Birtir meðalhalla síðustu upp- eða niðurferðar fyrir leiðina sem verið er að skrá.</string>
+    <string name="average_slope">Meðalhalli</string>
+    <string name="shared_string_last_uphill">Síðasta hækkun</string>
+    <string name="shared_string_last_downhill">Síðasta lækkun</string>
+    <string name="private_access_routing_req_short">Leyfa að notaðir séu einkavegir til að ná á áfangastað?</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skíðabrekkur og leiðir</string>
+    <string name="rendering_attr_pisteRoutes_name">Skíðabrekkur og leiðir</string>
+    <string name="download_wikipedia_label">Sækja Wikipedíu</string>
 </resources>

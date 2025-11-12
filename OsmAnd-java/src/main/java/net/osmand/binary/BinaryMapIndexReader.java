@@ -729,6 +729,10 @@ public class BinaryMapIndexReader {
 	}
 	
 	public int preloadStreets(City c, SearchRequest<Street> resultMatcher, SearchStat searchStat) throws IOException {
+		return preloadStreets(c, resultMatcher, false, searchStat);
+	}
+	
+	public int preloadStreets(City c, SearchRequest<Street> resultMatcher, boolean loadBuildings, SearchStat searchStat) throws IOException {
 		AddressRegion reg;
 		try {
 			reg = checkAddressIndex(c.getFileOffset());
@@ -742,7 +746,7 @@ public class BinaryMapIndexReader {
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		long old = codedIS.pushLimitLong((long) size);
-		addressAdapter.readCityStreets(resultMatcher, c, reg.attributeTagsTable);
+		addressAdapter.readCityStreets(resultMatcher, c, loadBuildings, reg.attributeTagsTable);
 		codedIS.popLimit(old);
 		if (statReq > 0) {
 			searchStat.endSearchStats(statReq, BinaryMapIndexReaderApiName.LOAD_STREETS, reg, codedIS, null);
@@ -2592,7 +2596,7 @@ req.setSearchStat(stat);
 
 	}
 
-	void readIndexedStringTable(BinaryIndexPart part, Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
+	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
 		String key = null;
@@ -2630,7 +2634,7 @@ req.setSearchStat(stat);
 							subqueries.set(i, null);
 						}
 					}
-					readIndexedStringTable(part, instance, subqueries, key, listOffsets, matchedCharacters);
+					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
 				} else {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}

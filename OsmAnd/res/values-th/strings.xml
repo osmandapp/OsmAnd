@@ -801,4 +801,6 @@
     <string name="rendering_attr_tramRoutes_name">เส้นทางรถราง</string>
     <string name="rendering_attr_busRoutes_name">เส้นทางรถประจำทาง</string>
     <string name="favourites">สถานที่ที่ชื่นชอบ</string>
+    <string name="configure_profile">ตั้งค่าโปรไฟล์</string>
+    <string name="routing_settings">การนำทาง</string>
 </resources>

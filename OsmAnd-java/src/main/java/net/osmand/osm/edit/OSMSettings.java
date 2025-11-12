@@ -6,6 +6,7 @@ public class OSMSettings {
 		NAME("name"), //$NON-NLS-1$
 		NAME_EN("name:en"), //$NON-NLS-1$
 		LOCK_NAME("lock_name"), //$NON-NLS-1$
+		SHORT_NAME("short_name"),
 		
 		// ways
 		HIGHWAY("highway"), //$NON-NLS-1$
@@ -36,6 +37,7 @@ public class OSMSettings {
 		// address
 		PLACE("place"), //$NON-NLS-1$
 		ADDR_HOUSE_NUMBER("addr:housenumber"), //$NON-NLS-1$
+		ADDR_UNIT("addr:unit"), //$NON-NLS-1$
 		ADDR2_HOUSE_NUMBER("addr2:housenumber"), //$NON-NLS-1$
 		ADDR_HOUSE_NAME("addr:housename"), //$NON-NLS-1$
 		ADDR_STREET("addr:street"), //$NON-NLS-1$

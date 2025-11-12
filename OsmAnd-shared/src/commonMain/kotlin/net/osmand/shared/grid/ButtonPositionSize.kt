@@ -141,6 +141,10 @@ class ButtonPositionSize {
 		return ((width * CELL_SIZE_DP) * dpToPix).toInt()
 	}
 
+	fun getHeightPix(dpToPix: Float): Int {
+		return ((height * CELL_SIZE_DP) * dpToPix).toInt()
+	}
+
 	fun fromLongValue(v: Long) = apply {
 		var value = v
 		width = (value and SIZE_MASK.toLong()).toInt()

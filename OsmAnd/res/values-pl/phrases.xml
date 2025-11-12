@@ -2832,7 +2832,7 @@
     <string name="poi_payment_transport_type">Metoda płatności (transport)</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburger</string>
-    <string name="poi_cuisine_coffee">Kawa</string>
+    <string name="poi_cuisine_coffee_shop">Kawa</string>
     <string name="poi_cuisine_sandwich">Kanapki</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_chicken">Kurczak</string>
@@ -4214,8 +4214,8 @@
     <string name="poi_playground_balancebeam">Belka równoważąca</string>
     <string name="poi_playground_playhouse">Domek zabaw</string>
     <string name="poi_playground_sandpit">Piaskownica</string>
-    <string name="poi_playground_map">Mapa</string>
-    <string name="poi_playground_bridge">Most</string>
+    <string name="poi_playground_map">Mapa na placu zabaw</string>
+    <string name="poi_playground_bridge">Most na placu zabaw</string>
     <string name="poi_climbing_bolts">Śruby wspinaczkowe</string>
     <string name="poi_climbing_quality_medium">Średni</string>
     <string name="poi_butcher_lamb">Jagnięcina</string>
