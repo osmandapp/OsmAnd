@@ -33,7 +33,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 		if (controller != null) {
 			controller.bindDialog(requireMapActivity(), this);
 		} else {
-			dismiss();
+			app.runInUIThread(this::dismiss);
 		}
 		MapActivity activity = requireMapActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -72,7 +72,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	@Nullable
 	@Override
 	protected String getToolbarTitle() {
-		return controller.getDialogTitle();
+		return controller != null ? controller.getDialogTitle() : null;
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	private void updateCoordinatesView(@NonNull View view) {
 		TextView tvCoordinates = view.findViewById(R.id.coordinates);
-		if (tvCoordinates != null) {
+		if (tvCoordinates != null && controller != null) {
 			tvCoordinates.setText(controller.getFormattedCoordinates());
 		}
 	}
@@ -126,8 +126,9 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
-		controller.onResume();
-
+		if (controller != null) {
+			controller.onResume();
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getWidgetsVisibilityHelper().hideWidgets();
@@ -137,8 +138,9 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	@Override
 	public void onPause() {
 		super.onPause();
-		controller.onPause();
-
+		if (controller != null) {
+			controller.onPause();
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getWidgetsVisibilityHelper().showWidgets();
@@ -148,7 +150,9 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.onDestroy(getActivity());
+		if (controller != null) {
+			controller.onDestroy(getActivity());
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
