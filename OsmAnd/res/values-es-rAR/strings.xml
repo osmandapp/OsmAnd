@@ -5769,4 +5769,6 @@
     <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
     <string name="deleted_maps_prompt">Estos mapas ya no se admiten y fueron reemplazados por regiones más pequeñas. Es necesario quitarlos y descargar las nuevas versiones.</string>
     <string name="unsupported_maps">Mapas incompatibles</string>
+    <string name="routing_attr_weightrating_name">Peso bruto máximo</string>
+    <string name="routing_attr_maxaxleload_name">Carga máxima de eje</string>
 </resources>
