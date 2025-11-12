@@ -188,7 +188,7 @@ public class SearchResult {
 	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		List<String> localResultNames;
-		if (name.indexOf('(') != -1) {
+		if (!Algorithms.isEmpty(name) && name.indexOf('(') != -1) {
 			name = SearchPhrase.stripBraces(name);
 		}
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
