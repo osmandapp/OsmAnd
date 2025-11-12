@@ -4989,7 +4989,7 @@
     <string name="poi_pentecostal_church">五旬節教堂</string>
     <string name="poi_aerodrome_type_airfield">飛行場</string>
     <string name="poi_consulate">領事館</string>
-    <string name="poi_hazard_additional_landslide">災害：山崩</string>
+    <string name="poi_hazard_additional_landslide">山崩</string>
     <string name="poi_hazard_falling_rocks">落石</string>
     <string name="poi_hazard_contamination">污染</string>
     <string name="poi_hazard_yes">災害</string>
