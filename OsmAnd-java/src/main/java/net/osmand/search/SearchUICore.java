@@ -984,6 +984,10 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
+			// disable boundary for end results
+			if (object.objectType == ObjectType.BOUNDARY) {
+				return false;
+			}
 			if (phrase != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)
 					&& Algorithms.isEmpty(object.alternateName)) {
 				boolean updateName = false;
@@ -1018,10 +1022,7 @@ public class SearchUICore {
 			if (matcher == null || matcher.publish(object)) {
 				count++;
 				if (totalLimit == -1 || count < totalLimit) {
-					// disable boundary for end results 
-					if (object.objectType != ObjectType.BOUNDARY) {
-						requestResults.add(object);
-					}
+					requestResults.add(object);
 				}
 				return true;
 			}
