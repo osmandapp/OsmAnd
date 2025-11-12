@@ -1018,7 +1018,10 @@ public class SearchUICore {
 			if (matcher == null || matcher.publish(object)) {
 				count++;
 				if (totalLimit == -1 || count < totalLimit) {
-					requestResults.add(object);
+					// disable boundary for end results 
+					if (object.objectType != ObjectType.BOUNDARY) {
+						requestResults.add(object);
+					}
 				}
 				return true;
 			}
