@@ -25,6 +25,9 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.Algorithms;
 
 public class MapMarkerEditorFragment extends BaseFullScreenFragment {
@@ -105,6 +108,15 @@ public class MapMarkerEditorFragment extends BaseFullScreenFragment {
 			nameEdit.setHint(R.string.access_hint_enter_name);
 		}
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createBottomContainer(R.id.buttons_layout).landscapeSides(InsetSide.BOTTOM));
+		collection.replace(InsetTarget.createLeftSideContainer(true, false, R.id.point_edit_layout));
+		collection.add(InsetTarget.createLeftSideContainer(true, true, R.id.main_content, R.id.buttons_layout));
+		return collection;
 	}
 
 	private void savePressed() {
