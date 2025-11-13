@@ -142,6 +142,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		return review.withOpinion(review.opinion().substring(0, MAX_REVIEW_CHARACTERS_TO_DISPLAY - 1) + "…");
 	}
 
+	@Override
 	protected void buildNearestWikiRow(ViewGroup view) {
 	}
 
@@ -376,7 +377,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				return;
 			}
 			String title = app.getString(R.string.speak_poi);
-			String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+			String type = "\"" + AmenityMenuController.getTypeStr(app, amenity) + "\"";
 			String count = "(" + amenities.size() + ")";
 			String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
