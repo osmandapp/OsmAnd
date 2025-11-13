@@ -2937,7 +2937,7 @@
     <string name="poi_public_bookcase_type_shelf">Casta: iscafale</string>
     <string name="poi_cuisine_pizza">Pitza</string>
     <string name="poi_cuisine_burger">Hamburger</string>
-    <string name="poi_cuisine_coffee">Cafè</string>
+    <string name="poi_cuisine_coffee_shop">Cafè</string>
     <string name="poi_cuisine_sandwich">Paninos</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_doner">Doner kebab (shawarma)</string>

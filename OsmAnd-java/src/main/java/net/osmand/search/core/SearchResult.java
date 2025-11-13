@@ -174,21 +174,11 @@ public class SearchResult {
 		}
 		return inc;
 	}
-	
-	public boolean hasObjectTypePresent(ObjectType type) {
-		if (objectType == type) {
-			return true;
-		}
-		if (parentSearchResult != null) {
-			return parentSearchResult.hasObjectTypePresent(type);
-		}
-		return false;
-	}
 
 	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		List<String> localResultNames;
-		if (name.indexOf('(') != -1) {
+		if (!Algorithms.isEmpty(name) && name.indexOf('(') != -1) {
 			name = SearchPhrase.stripBraces(name);
 		}
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {

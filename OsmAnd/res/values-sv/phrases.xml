@@ -2874,7 +2874,7 @@
     <string name="poi_cuisine">Kök</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburgare</string>
-    <string name="poi_cuisine_coffee">Kaffe</string>
+    <string name="poi_cuisine_coffee_shop">Kaffe</string>
     <string name="poi_cuisine_sandwich">Smörgås</string>
     <string name="poi_cuisine_kebab">Kebab</string>
     <string name="poi_cuisine_doner">Dönerkebab (shawarma)</string>
@@ -4931,11 +4931,10 @@
     <string name="poi_route_activity_type_all_terrain_vehicle">Fyrhjuling</string>
     <string name="poi_lit">Belysning</string>
     <string name="poi_piste_oneway">Pist enkelriktad</string>
-    <string name="poi_hazard_additional_landslide">Fara: jordskred</string>
+    <string name="poi_hazard_landslide">Fara: jordskred</string>
     <string name="poi_hazard_additional_yes">Fara</string>
     <string name="poi_hazard_contamination">Förorening</string>
     <string name="poi_hazard_yes">Fara</string>
-    <string name="poi_hazard_additional_slippery_road">Slirig väg</string>
     <string name="poi_steps">Trappa</string>
     <string name="poi_ukrainian_greek_catholic_church">Ukrainsk grekisk-katolsk kyrka</string>
     <string name="poi_neo_pentecostal_church">Neo-pentekostal kyrka</string>
@@ -5018,4 +5017,13 @@
     <string name="poi_denomination_anabaptist">Anabaptist</string>
     <string name="poi_denomination_macedonian_orthodox">Makedonsk-ortodox</string>
     <string name="poi_denomination_syriac_orthodox">Syrisk-ortodox</string>
+    <string name="poi_denomination_old_catholic">Gamla katolska</string>
+    <string name="poi_denomination_shaivism">Shaivism</string>
+    <string name="poi_denomination_pkn">Protestantiska kyrkan i Nederländerna</string>
+    <string name="poi_denomination_conservative">Konservativ</string>
+    <string name="poi_denomination_scottish_episcopal">Skotska Episcopal</string>
+    <string name="poi_denomination_polish_catholic">Polska katolska</string>
+    <string name="poi_denomination_disciples_of_christ">Kristi lärjungar</string>
+    <string name="poi_denomination_free_methodist">Fri metodist</string>
+    <string name="poi_denomination_churches_of_christ">Kristi kyrka</string>
 </resources>

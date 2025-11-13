@@ -5591,7 +5591,7 @@
     <string name="deleting">正在刪除……</string>
     <string name="deleting_history">正在刪除歷史紀錄……</string>
     <string name="show_rasterization_debug_tile">顯示圖磚點陣化資訊</string>
-    <string name="release_5_2">• 正在進行中……</string>
+    <string name="release_5_2">• 在搜尋結果中新增街道與城市詳細資訊\n\n • 新增行程記錄小工具：最高速度、平均坡度，以及改良的上坡/下坡功能\n\n • 全新海洋航海圖樣式，具備廣泛的自訂選項\n\n • 改善地圖顯示速度\n\n • 透過 OBDII BLE 轉接器實現強化連線功能\n\n • 新增心率指標至「按間隔分析」功能\n\n • 新增預定路線的持續時間顯示\n\n • 高度單位現可獨立於距離單位進行設定\n\n • 改進地圖方位快速操作功能，新增選擇性指南針模式\n\n • 針對 Android Auto，新增了導航前警示功能，用於提醒缺少的地圖及私人道路\n\n • 已修復半徑尺規小工具大小參數錯誤的問題\n\n • 新增倒置螢幕方向\n\n • 改進了車輛指定為卡車時的使用者介面</string>
     <string name="shared_string_threads">執行緒</string>
     <string name="threads_allocated_for_rendering">分配用於繪製的執行緒</string>
     <string name="threads_allocated_for_rendering_desc">在某些情況下，較低的執行緒分配可能會加速地圖繪製的速度。</string>
@@ -5706,4 +5706,22 @@
     <string name="shared_string_last_downhill">上次下坡</string>
     <string name="help_article_navigation_routing_ski_routing_name">滑雪坡道與路線</string>
     <string name="rendering_attr_pisteRoutes_name">滑雪坡道與路線</string>
+    <string name="requires_internet_connection">需要網際網路連線</string>
+    <string name="save_and_access_articles_offline">儲存資料並隨時隨地離線閱讀文章</string>
+    <string name="private_access_routing_req_short">允許使用私人道路抵達目的地？</string>
+    <string name="download_wikipedia_label">下載維基百科</string>
+    <string name="quick_action_weather_layers">切換開關，用來顯示或隱藏地圖上的天氣圖層。</string>
+    <string name="quick_action_wind_animation_layer">用於顯示或隱藏地圖上風力動畫圖層的切換按鈕。</string>
+    <string name="wind_animation_layer">風力動畫圖層</string>
+    <string name="weather_layers">天氣圖層</string>
+    <string name="lang_crh">克里米亞韃靼語（拉丁）</string>
+    <string name="efficient_grid">高效能網格</string>
+    <string name="slots">插槽</string>
+    <string name="button_frames">按鈕框架</string>
+    <string name="visualizing_button_grid">地圖按鈕網格</string>
+    <string name="enable_3d_objects">啟用 3D 建築物</string>
+    <string name="enable_3d_objects_description">在地圖上顯示 3D 建築物物件</string>
+    <string name="deleted_maps_warning">您將要刪除 %d 個項目\n要繼續嗎？</string>
+    <string name="deleted_maps_prompt">這些地圖已不再受支援，並已被較小的區域取代。請移除它們並下載新版地圖。</string>
+    <string name="unsupported_maps">不受支援的地圖</string>
 </resources>

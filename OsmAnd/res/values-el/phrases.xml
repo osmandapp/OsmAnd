@@ -2887,7 +2887,7 @@
     <string name="poi_cuisine">Κουζίνα</string>
     <string name="poi_cuisine_pizza">Πίτσα</string>
     <string name="poi_cuisine_burger">Μπέργκερ</string>
-    <string name="poi_cuisine_coffee">Καφές</string>
+    <string name="poi_cuisine_coffee_shop">Καφές</string>
     <string name="poi_cuisine_sandwich">Σάντουιτς</string>
     <string name="poi_cuisine_kebab">Καλαμάκι (Κεμπάμπ)</string>
     <string name="poi_cuisine_doner">Ντόνερ κεμπάμπ (σαουάρμα)</string>
@@ -3874,7 +3874,6 @@
     <string name="poi_episcopal_church">Επισκοπική εκκλησία</string>
     <string name="poi_mormon_church">Εκκλησία των Μορμόνων</string>
     <string name="poi_hazard_yes">Κίνδυνος</string>
-    <string name="poi_hazard_additional_slippery_road">Ολισθηρός δρόμος</string>
     <string name="poi_steps">Σκαλιά</string>
     <string name="poi_footway">Μονοπάτι</string>
     <string name="poi_area_highway">Περιοχή κινητικότητας</string>
@@ -3884,7 +3883,7 @@
     <string name="poi_access_main_tag">Πρόσβαση</string>
     <string name="poi_aerodrome_type_airfield">Αεροδρόμιο</string>
     <string name="poi_consulate">Προξενείο</string>
-    <string name="poi_hazard_additional_landslide">Κίνδυνος: κατολίσθηση</string>
+    <string name="poi_hazard_landslide">Κίνδυνος: κατολίσθηση</string>
     <string name="poi_hazard_additional_yes">Κίνδυνος</string>
     <string name="poi_hazard_falling_rocks">Πτώση βράχων</string>
     <string name="poi_hazard_contamination">Μόλυνση</string>

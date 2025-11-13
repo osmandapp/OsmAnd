@@ -30,4 +30,20 @@
     <string name="three_years_subscription">তিন বছরের জন্য চাঁদা</string>
     <string name="osmand_pro_tagline">সবরকমের বেশিষ্ট নিন</string>
     <string name="osm_live_subscriptions">চাঁদাসমূহ</string>
+    <string name="quick_action_weather_layers">মানচিত্রে আবহাওয়ার স্তরগুলি দেখানো বা লুকানোর জন্য একটি টগল বাটন।</string>
+    <string name="download_depth_countours">নৌ গভীরতার রূপরেখা</string>
+    <string name="quick_action_wind_animation_layer">মানচিত্রে বায়ু প্রবাহের অ্যানিমেশন স্তর দেখানো বা লুকানোর জন্য একটি টগল।</string>
+    <string name="weather_layers">আবহাওয়ার স্তর সমূহ</string>
+    <string name="requires_internet_connection">ইন্টারনেট সংযোগ প্রয়োজন</string>
+    <string name="save_and_access_articles_offline">তথ্য সংরক্ষণ করুন এবং নিবন্ধনগুলো যেকোন জায়গা থেকে অফলাইনে উপলব্ধি করুন</string>
+    <string name="wind_animation_layer">বায়ু প্রবাহ অ্যানিমেশন স্তর</string>
+    <string name="update_maps">মানচিত্র নবায়ন করুন</string>
+    <string name="reconnect">পুনরায় সংযোগ স্থাপন করুন</string>
+    <string name="rendering_attr_showSkiSlopes_name">স্কি ঢালগুলো দেখান</string>
+    <string name="rendering_attr_showSkiSlopes_description">সরলীকৃত স্কি ঢাল গুলো দেখান</string>
+    <string name="trip_recording_downhill_widget_desc">বর্তমানে রেকর্ড করা ভ্রমণের সমস্ত অবতরণের যোগফল অথবা শেষ অবতরণের সমষ্টি দেখায়।</string>
+    <string name="trip_recording_uphill_widget_desc">সমস্ত আরোহণের যোগফল অথবা বর্তমানে রেকর্ড করা ট্রিপের শেষ আরোহণটি দেখায়।</string>
+    <string name="trip_recording_distance_widget_desc">আপনার বর্তমানে রেকর্ড করা ভ্রমণের মোট দূরত্ব দেখায়, শেষ আরোহণ এবং অবতরণের দূরত্ব দেখার মোড সহ।</string>
+    <string name="trip_recording_max_speed_widget_description">বর্তমানে রেকর্ড করা ট্রিপের সর্বোচ্চ গতি দেখায়। শেষ চড়াই বা উতরাই থেকে সামগ্রিক সর্বোচ্চ গতি এবং সর্বোচ্চ গতির মধ্যে স্যুইচ করতে ট্যাপ করুন।</string>
+    <string name="trip_recording_average_slope_widget_description">বর্তমানে রেকর্ড করা ট্রিপের শেষ উতরাই বা চড়াই অংশের গড় ঢাল দেখায়।</string>
 </resources>
