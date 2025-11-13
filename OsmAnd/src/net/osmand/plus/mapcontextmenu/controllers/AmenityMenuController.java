@@ -15,6 +15,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -242,14 +243,21 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		ClickableWayHelper clickableWayHelper = getApplication().getClickableWayHelper();
-		return amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)
-				? getTypeWithDistanceStr(amenity, getApplication())
-				: getTypeStr(amenity);
+		return getTypeStr(getApplication(), amenity);
+	}
+
+	public static String getTypeStr(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
+		ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
+		if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
+			return getTypeWithDistanceStr(amenity, app);
+		} else if (amenity.getType() != null && amenity.getType().isWiki()) {
+			return getCommonWikiTypeStr(amenity, app);
+		}
+		return getTypeStr(amenity);
 	}
 
 	@NonNull
-	private String getTypeWithDistanceStr(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+	private static String getTypeWithDistanceStr(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
 		String type = getTypeStr(amenity);
 		String metrics = AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app);
 		String activityType = amenity.getRouteActivityType();
@@ -263,6 +271,19 @@ public class AmenityMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
+	public static String getCommonWikiTypeStr(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+		MapPoiTypes poiTypes = app.getPoiTypes();
+		for (String additionalInfoKey : amenity.getAdditionalInfoKeys()) {
+			PoiType poiType = poiTypes.getPoiTypeByKey(additionalInfoKey);
+			if (poiType != null) {
+				return poiType.getTranslation();
+			}
+		}
+		return getTypeStr(amenity);
+	}
+
+	@NonNull
 	public static String getTypeStr(@NonNull Amenity amenity) {
 		return amenity.getSubTypeStr();
 	}
@@ -294,10 +315,10 @@ public class AmenityMenuController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 	}
 
-	public static void addTypeMenuItem(@NonNull Context context,
+	public static void addTypeMenuItem(@NonNull OsmandApplication app,
 	                                   @NonNull Amenity amenity, @NonNull MenuBuilder builder) {
-		String textPrefix = context.getString(R.string.shared_string_type);
-		String typeStr = getTypeStr(amenity);
+		String textPrefix = app.getString(R.string.shared_string_type);
+		String typeStr = getTypeStr(app, amenity);
 		if (!Algorithms.isEmpty(typeStr)) {
 			int resId = getRightIconId(builder.getApplication(), amenity);
 			if (resId == 0) {
