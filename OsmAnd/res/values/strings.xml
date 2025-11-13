@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="poi_sample_collection">Sample collection</string>
     <string name="routing_attr_weightrating_name">Max weight at full load</string>
     <string name="routing_attr_maxaxleload_name">Max axle load</string>
     <string name="deleted_maps_warning">You are about to delete %d items(s)\nContinue?</string>
