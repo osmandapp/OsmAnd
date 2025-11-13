@@ -196,6 +196,9 @@ public class RouteResultPreparation {
 	}
 
 	public RouteCalcResult prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+		if (ctx.requestNativePrepareResult) {
+			return new RouteCalcResult(result);
+		}
 		for (int i = 0; i < result.size(); i++) {
 			RouteDataObject road = result.get(i).getObject();
 			checkAndInitRouteRegion(ctx, road);

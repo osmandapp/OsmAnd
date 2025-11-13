@@ -120,6 +120,7 @@ public class RouteResultPreparationTest {
         if (useNative) {
             ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
                     RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+            ctx.requestNativePrepareResult = true;
         } else {
             ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
                     RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
