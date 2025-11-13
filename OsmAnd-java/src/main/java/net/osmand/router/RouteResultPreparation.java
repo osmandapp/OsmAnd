@@ -2303,6 +2303,9 @@ public class RouteResultPreparation {
 		}
 
 		int[] directions = getUniqTurnTypes(turnLanes);
+		if (rs.roadsOnLeft + rs.roadsOnRight >= directions.length) {
+			return pair;
+		}
 
 		if (findActiveIndexByLanes(pair, directions, rs, rawLanes, prevSegm, currentSegm)) {
 			return pair;
@@ -2314,27 +2317,25 @@ public class RouteResultPreparation {
 	}
 
 	private void findActiveIndexByUniqueDirections(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes) {
-		if (rs.roadsOnLeft + rs.roadsOnRight < directions.length) {
-			int startDirection = directions[rs.roadsOnLeft];
-			int endDirection = directions[directions.length - rs.roadsOnRight - 1];
-			for (int i = 0; i < rawLanes.length; i++) {
-				int p = TurnType.getPrimaryTurn(rawLanes[i]);
-				int s = TurnType.getSecondaryTurn(rawLanes[i]);
-				int t = TurnType.getTertiaryTurn(rawLanes[i]);
-				if (p == startDirection || s == startDirection || t == startDirection) {
-					pair[0] = i;
-					pair[2] = startDirection;
-					break;
-				}
+		int startDirection = directions[rs.roadsOnLeft];
+		int endDirection = directions[directions.length - rs.roadsOnRight - 1];
+		for (int i = 0; i < rawLanes.length; i++) {
+			int p = TurnType.getPrimaryTurn(rawLanes[i]);
+			int s = TurnType.getSecondaryTurn(rawLanes[i]);
+			int t = TurnType.getTertiaryTurn(rawLanes[i]);
+			if (p == startDirection || s == startDirection || t == startDirection) {
+				pair[0] = i;
+				pair[2] = startDirection;
+				break;
 			}
-			for (int i = rawLanes.length - 1; i >= 0; i--) {
-				int p = TurnType.getPrimaryTurn(rawLanes[i]);
-				int s = TurnType.getSecondaryTurn(rawLanes[i]);
-				int t = TurnType.getTertiaryTurn(rawLanes[i]);
-				if (p == endDirection || s == endDirection || t == endDirection) {
-					pair[1] = i;
-					break;
-				}
+		}
+		for (int i = rawLanes.length - 1; i >= 0; i--) {
+			int p = TurnType.getPrimaryTurn(rawLanes[i]);
+			int s = TurnType.getSecondaryTurn(rawLanes[i]);
+			int t = TurnType.getTertiaryTurn(rawLanes[i]);
+			if (p == endDirection || s == endDirection || t == endDirection) {
+				pair[1] = i;
+				break;
 			}
 		}
 	}
