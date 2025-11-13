@@ -84,7 +84,15 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 			ttsVoiceUsed = "-";
 			ttsRequests = 0;
 
-			mTts = new TextToSpeech(app, status -> {
+			final TextToSpeech[] textToSpeech = new TextToSpeech[1];
+			textToSpeech[0] = new TextToSpeech(app, status -> {
+				if (mTts != textToSpeech[0]) {
+					log.info("Obsolete TTS instance finished initializing. Shutting it down.");
+					if (textToSpeech[0] != null) {
+						textToSpeech[0].shutdown();
+					}
+					return;
+				}
 				if (status != TextToSpeech.SUCCESS) {
 					ttsVoiceStatus = "NO INIT SUCCESS";
 					internalClear();
@@ -94,6 +102,8 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 					onSuccessfulTtsInit(locale, cSpeechRate);
 				}
 			});
+			mTts = textToSpeech[0];
+
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
 				// The call back is on a binder thread.
 				@Override
