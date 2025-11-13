@@ -26,11 +26,11 @@ public class ObfConstantsTest {
 		Assert.assertEquals(193930639L, ObfConstants.getOsmObjectId(ro)); // Way (building)
 
 		ro.setId(8804205012992L); // https://www.openstreetmap.org/relation/1980466
-		Assert.assertEquals(1980466L, ObfConstants.getOsmObjectId(ro)); // Relation (natural=water) UI=ok
+		Assert.assertEquals(1980466L, ObfConstants.getOsmObjectId(ro)); // Relation (natural=water)
 		ro.setId(8817178845508L); // https://www.openstreetmap.org/relation/5147906
-		Assert.assertEquals(5147906L, ObfConstants.getOsmObjectId(ro)); // Relation (amenity=university) UI=ok
+		Assert.assertEquals(5147906L, ObfConstants.getOsmObjectId(ro)); // Relation (amenity=university)
 		ro.setId(8873046276608L); // https://www.openstreetmap.org/relation/18787415
-		Assert.assertEquals(18787417L, ObfConstants.getOsmObjectId(ro)); // Relation (type=multipolygon) UI=fail
+		Assert.assertEquals(18787415L, ObfConstants.getOsmObjectId(ro)); // Relation (type=multipolygon)
 
 		ro.setId(1131128778166272L); // https://www.openstreetmap.org/way/1276579913
 		Assert.assertEquals(1276579913L, ObfConstants.getOsmObjectId(ro)); // Propagated Node (osmand_amenity)
