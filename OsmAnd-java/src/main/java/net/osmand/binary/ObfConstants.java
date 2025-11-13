@@ -85,7 +85,11 @@ public class ObfConstants {
 	}
 
 	private static long shiftRenderedObjectId(long id) {
-		return isIdFromPropagatedNode(id >> 1) ? id >> 1 : id >> SHIFT_ID;
+		if (isIdFromPropagatedNode(id >> 1) || isIdFromRelation(id >> 1)) {
+			return id >> 1;
+		} else {
+			return id >> SHIFT_ID;
+		}
 	}
 
 	// Use getOsmObjectId(MapObject) for RenderedObject
