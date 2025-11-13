@@ -51,6 +51,8 @@ public class RoutingHelper {
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
 	private static final int MAX_POSSIBLE_SPEED = 340; // ~ 1 Mach
 	private static final boolean ENABLE_LOG_POS_PROCESSED = false;
+	private static final int STOP_NAVIGATION_ON_AA_DISCONNECT_DISTANCE_THRESHOLD = 100;
+	private static final int PAUSE_NAVIGATION_ON_AA_DISCONNECT_SPEED_THRESHOLD = 1;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -66,6 +68,7 @@ public class RoutingHelper {
 	private boolean isFollowingMode;
 	private boolean isRoutePlanningMode;
 	private boolean isPauseNavigation;
+	private boolean isPausedOnAADisconnect;
 
 	private GPXRouteParamsBuilder currentGPXRoute;
 
@@ -153,6 +156,29 @@ public class RoutingHelper {
 		setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 	}
 
+	public void onCarNavigationStart() {
+		if(isPausedOnAADisconnect && isPauseNavigation()) {
+			isPausedOnAADisconnect = false;
+			resumeNavigation();
+		}
+	}
+
+	public void onCarNavigationSessionChanged() {
+		if(app.getCarNavigationSession() == null) {
+			if(isFollowingMode()) {
+				if (getLeftDistance() < STOP_NAVIGATION_ON_AA_DISCONNECT_DISTANCE_THRESHOLD) {
+					app.stopNavigation();
+				} else {
+					Location currentLocation = app.getLocationProvider().getLastKnownLocation();
+					if (currentLocation != null && currentLocation.getSpeed() < PAUSE_NAVIGATION_ON_AA_DISCONNECT_SPEED_THRESHOLD) {
+						isPausedOnAADisconnect = true;
+						pauseNavigation();
+					}
+				}
+			}
+		}
+	}
+
 	public void pauseNavigation() {
 		setRoutePlanningMode(true);
 		setFollowingMode(false);
@@ -180,6 +206,7 @@ public class RoutingHelper {
 
 	public void setFollowingMode(boolean follow) {
 		app.logRoutingEvent("setFollowingMode follow " + follow);
+		isPausedOnAADisconnect = false;
 		isFollowingMode = follow;
 		isPauseNavigation = false;
 		if (!follow) {

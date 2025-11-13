@@ -58,6 +58,7 @@ public class RoutingContext {
 	// 0. Reference to native routingcontext for multiple routes
 	public long nativeRoutingContext;
 	public boolean keepNativeRoutingContext;
+	public boolean requestNativePrepareResult; // OK for tests/tools. Do not use in Android UI.
 	
 	// 1. Initial variables
 	public int startX;

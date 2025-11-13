@@ -983,6 +983,10 @@ public class SearchCoreFactory {
 			List<PoiType> additionals = pt.getPoiAdditionals();
 			if (additionals != null) {
 				for (PoiType a : additionals) {
+					if (a.getReferenceType() != null) {
+						// ignore reference types as duplicates
+						continue;
+					}
 					PoiTypeResult existingResult = results.get(a.getKeyName());
 					if (existingResult != null) {
 						PoiAdditionalCustomFilter f ;

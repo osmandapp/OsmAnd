@@ -548,7 +548,7 @@ public class MenuBuilder {
 						return;
 					}
 					String title = app.getString(R.string.speak_poi);
-					String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+					String type = "\"" + AmenityMenuController.getTypeStr(app, amenity) + "\"";
 					String count = "(" + amenities.size() + ")";
 					String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
@@ -601,7 +601,7 @@ public class MenuBuilder {
 		if (viewGroup1 == null || Algorithms.isEmpty(amenities)) {
 			return;
 		}
-		String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+		String type = "\"" + AmenityMenuController.getTypeStr(app, amenity) + "\"";
 		String count = "(" + amenities.size() + ")";
 		String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 		View wikiRow = viewGroup1.findViewWithTag(NEAREST_WIKI_KEY);
@@ -1464,7 +1464,7 @@ public class MenuBuilder {
 			PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(poi);
 			String name = pointDescription.getName();
 			if (Algorithms.isBlank(name)) {
-				name = AmenityMenuController.getTypeStr(poi);
+				name = AmenityMenuController.getTypeStr(app, poi);
 			}
 			float dist = (float) MapUtils.getDistance(latLon, poi.getLocation());
 			name += " (" + OsmAndFormatter.getFormattedDistance(dist, app) + ")";

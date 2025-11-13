@@ -421,14 +421,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 					GpxUtilities.INSTANCE.assignExtensionWriter(pt, extensions, "plugins");
 				}
 
+				boolean autoSplit = settings.AUTO_SPLIT_RECORDING.get();
 				boolean newInterval = pt.getLat() == 0 && pt.getLon() == 0;
 				long currentInterval = Math.abs(pt.getTime() - previousTime);
-				if (track != null && !newInterval && (!settings.AUTO_SPLIT_RECORDING.get()
-						|| currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
+				if (track != null && !newInterval && (!autoSplit || currentInterval < 6 * 60 * 1000
+						|| currentInterval < 10 * previousInterval)) {
 					// 6 minute - same segment
 					segment.getPoints().add(pt);
-				} else if (track != null && (settings.AUTO_SPLIT_RECORDING.get()
-						&& currentInterval < 2 * 60 * 60 * 1000)) {
+				} else if (track != null && (autoSplit || newInterval) && currentInterval < 2 * 60 * 60 * 1000) {
 					// 2 hour - same track
 					segment = new TrkSegment();
 					if (!newInterval) {
@@ -621,15 +621,23 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		if (newSegment) {
 			currentTrack.addEmptySegmentToDisplay();
 		}
+
+		// Check and add new track segment if needed
 		boolean segmentAdded = false;
-		if (track.getSegments().isEmpty() || newSegment) {
-			track.getSegments().add(new TrkSegment());
-			segmentAdded = true;
+		List<TrkSegment> segments = track.getSegments();
+		if (segments.isEmpty() || newSegment) {
+			TrkSegment lastSegment = !segments.isEmpty() ? segments.get(segments.size() - 1) : null;
+			// Don't duplicate empty segments, skip if we already have one
+			if (lastSegment == null || !lastSegment.getPoints().isEmpty()) {
+				segments.add(new TrkSegment());
+				segmentAdded = true;
+			}
 		}
+
 		if (pt != null) {
-			currentTrack.appendTrackPointToDisplay(pt, app);
-			TrkSegment lt = track.getSegments().get(track.getSegments().size() - 1);
-			lt.getPoints().add(pt);
+			TrkSegment currentSegment = segments.get(segments.size() - 1);
+			currentTrack.appendTrackPointToDisplay(app, pt, currentSegment.getPoints().isEmpty());
+			currentSegment.getPoints().add(pt);
 		}
 		if (segmentAdded) {
 			currentTrack.processPoints(app);

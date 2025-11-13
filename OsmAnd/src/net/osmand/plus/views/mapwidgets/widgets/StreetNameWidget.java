@@ -284,13 +284,13 @@ public class StreetNameWidget extends MapWidget {
 		TextRenderer textRenderer = new TextRenderer(app);
 		TextDrawInfo text = new TextDrawInfo(shieldValue);
 
-		int shieldRes = -1;
+		int shieldRes = 0;
 		if (rreq.isSpecified(rreq.ALL.R_TEXT_SHIELD)) {
 			text.setShieldResIcon(rreq.getStringPropertyValue(rreq.ALL.R_TEXT_SHIELD));
 			shieldRes = app.getResources().getIdentifier("h_" + text.getShieldResIcon(),
 					"drawable", app.getPackageName());
 		}
-		if (shieldRes == -1) {
+		if (shieldRes == 0) {
 			return false;
 		}
 

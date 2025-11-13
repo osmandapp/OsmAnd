@@ -10,6 +10,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -135,7 +136,7 @@ public class MapTransparencyHelper {
 	}
 
 	public void hideTransparencyBar() {
-		transparencyBarLayout.setVisibility(View.GONE);
+		AndroidUiHelper.updateVisibility(transparencyBarLayout, false);
 		transparencySetting = null;
 	}
 

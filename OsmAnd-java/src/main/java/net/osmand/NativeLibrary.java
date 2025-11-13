@@ -261,7 +261,7 @@ public class NativeLibrary {
 		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
 		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
 				CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
-				regions, basemap);
+				regions, basemap, c.requestNativePrepareResult);
 	}
 
 	private void setHHNativeFilterAndParameters(RoutingContext ctx) {
@@ -361,7 +361,9 @@ public class NativeLibrary {
 
 	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
 
-	protected static native RouteSegmentResult[] nativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig,  float initDirection, RouteRegion[] regions, boolean basemap);
+	protected static native RouteSegmentResult[] nativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig,
+	                                                           float initDirection, RouteRegion[] regions,
+	                                                           boolean basemap, boolean requestNativePrepareResult);
 
 	protected static native NativeTransportRoutingResult[] nativeTransportRouting(int[] coordinates, TransportRoutingConfiguration cfg,
 																				  RouteCalculationProgress progress);

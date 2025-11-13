@@ -37,8 +37,6 @@ import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -321,7 +319,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				return;
 			}
 			String title = app.getString(R.string.speak_poi);
-			String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+			String type = "\"" + AmenityMenuController.getTypeStr(app, amenity) + "\"";
 			String count = "(" + amenities.size() + ")";
 			String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 

@@ -253,9 +253,11 @@ public class FirstUsageWizardFragment extends BaseFullScreenFragment implements 
 				wizardButton.setButtonType(DialogButtonType.PRIMARY);
 				wizardButton.setTitleId(R.string.go_to_map);
 
-				wizardButton.setOnClickListener(view -> {
-					showOnMap(new LatLon(location.getLatitude(), location.getLongitude()));
-				});
+				if (location != null) {
+					wizardButton.setOnClickListener(view -> showOnMap(new LatLon(location.getLatitude(), location.getLongitude())));
+				} else {
+					closeWizard();
+				}
 				break;
 		}
 	}

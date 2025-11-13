@@ -31,6 +31,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -770,6 +771,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = true;
+		routingHelper.onCarNavigationStart();
 	}
 
 	public void onCarNavigationSessionStop(@NonNull NavigationSession carNavigationSession) {
@@ -784,6 +786,7 @@ public class OsmandApplication extends MultiDexApplication {
 				plugin.onCarNavigationSessionCreated();
 			}
 		}
+		routingHelper.onCarNavigationSessionChanged();
 	}
 
 	public void refreshCarScreen() {

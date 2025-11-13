@@ -452,7 +452,7 @@ class GpxTrackAnalysis {
 						timeMovingOfSingleSegment = 0
 						distanceMovingOfSingleSegment = 0f
 					}
-					if (point.lastPoint) {
+					if (point.lastPoint || j == numberOfPoints - 1) {
 						lastPoint = j < numberOfPoints - 1;
 						totalDistanceWithoutGaps += distanceOfSingleSegment
 						timeMovingWithoutGaps += timeMovingOfSingleSegment
