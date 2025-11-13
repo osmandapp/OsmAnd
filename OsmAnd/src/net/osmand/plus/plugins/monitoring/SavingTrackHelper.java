@@ -428,7 +428,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 						|| currentInterval < 10 * previousInterval)) {
 					// 6 minute - same segment
 					segment.getPoints().add(pt);
-				} else if (track != null && (autoSplit && currentInterval < 2 * 60 * 60 * 1000 || newInterval)) {
+				} else if (track != null && (autoSplit || newInterval) && currentInterval < 2 * 60 * 60 * 1000) {
 					// 2 hour - same track
 					segment = new TrkSegment();
 					if (!newInterval) {
