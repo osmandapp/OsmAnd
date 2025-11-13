@@ -489,7 +489,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void routeWasFinished() {
-		getApp().stopNavigation();
+		ScreenManager screenManager = getScreenManager();
+		screenManager.popToRoot();
+		screenManager.push(new DestinationReachedScreen(carContext));
 	}
 
 	private boolean isRoutePreviewPresent() {
