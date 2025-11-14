@@ -31,12 +31,8 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
-import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesDownloader;
-import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
@@ -57,6 +53,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -85,6 +82,7 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
@@ -92,6 +90,8 @@ import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
+import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesDownloader;
+import net.osmand.plus.plugins.rastermaps.TileSourceTemplatesProvider;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -109,6 +109,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -148,6 +149,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProviderManager;
+import de.KnollFrank.lib.settingssearch.db.preference.db.DatabaseResetter;
 
 public class OsmandApplication extends MultiDexApplication {
 
@@ -238,6 +240,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private TileSourceTemplatesProvider tileSourceTemplatesProvider;
 
 	public final DAOProviderManager<net.osmand.plus.settings.fragments.search.Configuration> daoProviderManager = new DAOProviderManager<>();
+	private final StateChangedListener<String> pluginsListenerResettingSearchDatabase = plugins -> DatabaseResetter.resetDatabase(daoProviderManager.getDAOProvider());
 
 	public static OsmandApplication getInstanceFromContext(final Context context) {
 		return (OsmandApplication) context.getApplicationContext();
@@ -311,6 +314,7 @@ public class OsmandApplication extends MultiDexApplication {
 						new TileSourceTemplatesDownloader(
 								Version.getVersionAsURLParam(this)),
 						false);
+		settings.PLUGINS.addListener(pluginsListenerResettingSearchDatabase);
 	}
 
 	public TileSourceTemplatesProvider getTileSourceTemplatesProvider() {

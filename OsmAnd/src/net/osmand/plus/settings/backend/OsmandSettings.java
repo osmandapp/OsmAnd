@@ -84,10 +84,38 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.menuitems.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.DrawerMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
-import net.osmand.plus.settings.backend.preferences.*;
+import net.osmand.plus.settings.backend.preferences.BooleanAccessibilityPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.FloatPreference;
+import net.osmand.plus.settings.backend.preferences.IntPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.settings.backend.preferences.LongPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.settings.enums.*;
+import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.ApproximationType;
+import net.osmand.plus.settings.enums.AutoZoomMap;
+import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.enums.DistanceByTapTextSize;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.enums.MarkerDisplayOption;
+import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.enums.SimulationMode;
+import net.osmand.plus.settings.enums.SpeedLimitWarningState;
+import net.osmand.plus.settings.enums.TrackApproximationType;
+import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -108,7 +136,18 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class OsmandSettings {
 
@@ -831,7 +870,7 @@ public class OsmandSettings {
 
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
-	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "").makeGlobal().makeShared();
+	public final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "").makeGlobal().makeShared();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();

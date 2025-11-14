@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments.search;
 
 import java.util.Optional;
 
+// FK-TODO: remove?
 class SearchDatabaseStatusHandler {
 
 	private final ConfigurationFromSearchDatabaseProvider configurationFromSearchDatabaseProvider;

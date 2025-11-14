@@ -18,7 +18,6 @@ import java.util.function.Supplier;
 
 import de.KnollFrank.lib.settingssearch.MergedPreferenceScreen;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
-import de.KnollFrank.lib.settingssearch.common.Utils;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 import de.KnollFrank.lib.settingssearch.db.preference.db.DAOProvider;
 
@@ -27,7 +26,6 @@ public class SettingsSearchButtonHelper {
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
 	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>>> createSearchDatabaseTaskSupplier;
-	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
 	private final OsmandPreference<String> availableAppModes;
 	private final TileSourceTemplatesProvider tileSourceTemplatesProvider;
 	private final DAOProvider daoProvider;
@@ -43,12 +41,6 @@ public class SettingsSearchButtonHelper {
 				rootSearchPreferenceFragment,
 				fragmentContainerViewId,
 				createSearchDatabaseTaskSupplier,
-				new SearchDatabaseStatusHandler(
-						new ConfigurationFromSearchDatabaseProvider(
-								daoProvider.searchablePreferenceScreenGraphDAO(),
-								Utils.getCurrentLanguageLocale(app.getResources()),
-								new ConfigurationBundleConverter()),
-						new ActualConfigurationProvider()),
 				app.getSettings().AVAILABLE_APP_MODES,
 				app.getTileSourceTemplatesProvider(),
 				daoProvider,
@@ -58,7 +50,6 @@ public class SettingsSearchButtonHelper {
 	private SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
 									   final int fragmentContainerViewId,
 									   final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<Void, DAOProvider>>> createSearchDatabaseTaskSupplier,
-									   final SearchDatabaseStatusHandler searchDatabaseStatusHandler,
 									   final OsmandPreference<String> availableAppModes,
 									   final TileSourceTemplatesProvider tileSourceTemplatesProvider,
 									   final DAOProvider daoProvider,
@@ -66,7 +57,6 @@ public class SettingsSearchButtonHelper {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
 		this.createSearchDatabaseTaskSupplier = createSearchDatabaseTaskSupplier;
-		this.searchDatabaseStatusHandler = searchDatabaseStatusHandler;
 		this.availableAppModes = availableAppModes;
 		this.tileSourceTemplatesProvider = tileSourceTemplatesProvider;
 		this.daoProvider = daoProvider;
@@ -124,10 +114,6 @@ public class SettingsSearchButtonHelper {
 	}
 
 	private void showSearchPreferenceFragment(final SearchPreferenceFragments searchPreferenceFragments) {
-		// FK-TODO: remove if-block? Test when condition is false
-		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
-			searchPreferenceFragments.rebuildSearchDatabase();
-		}
 		searchPreferenceFragments.showSearchPreferenceFragment();
 	}
 }

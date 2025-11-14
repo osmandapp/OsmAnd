@@ -6,6 +6,7 @@ import java.util.Optional;
 import de.KnollFrank.lib.settingssearch.db.preference.dao.SearchablePreferenceScreenGraphDAO;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceScreenGraph;
 
+// FK-TODO: remove?
 class ConfigurationFromSearchDatabaseProvider {
 
 	private final SearchablePreferenceScreenGraphDAO searchablePreferenceScreenGraphDAO;
