@@ -149,7 +149,7 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isGridColorAvailable(@NonNull OsmandApplication app) {
-		return isSubscribedToAny(app);
+		return Version.isPaidVersion(app) || checkDeveloperBuildIfNeeded(app, true);
 	}
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
