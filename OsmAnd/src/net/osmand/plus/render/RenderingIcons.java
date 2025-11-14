@@ -182,6 +182,10 @@ public class RenderingIcons {
 			return poiType.getIconKeyName();
 		} else if (containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
+		} else if(RenderingIcons.containsBigIcon(poiType.getOsmTag())){
+			return poiType.getOsmTag();
+		} else if(RenderingIcons.containsBigIcon(poiType.getCategory().getIconKeyName())) {
+			return poiType.getCategory().getIconKeyName();
 		}
 		return null;
 	}
