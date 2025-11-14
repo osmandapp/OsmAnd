@@ -17,7 +17,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import de.KnollFrank.lib.settingssearch.MergedPreferenceScreen;
-import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.common.Utils;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
@@ -90,26 +89,16 @@ public class SettingsSearchButtonHelper {
 			final TileSourceTemplatesProvider tileSourceTemplatesProvider,
 			final DAOProvider daoProvider,
 			final Configuration configuration) {
-		final SearchResultsFilter searchResultsFilter =
-				SearchResultsFilterFactory.createSearchResultsFilter(
-						PreferencePathDisplayerFactory.getApplicationModeKeys(),
-						availableAppModes);
 		return SearchPreferenceFragments
 				.builder(
 						SearchDatabaseConfigFactory.createSearchDatabaseConfig(
 								rootPreferenceFragment,
 								tileSourceTemplatesProvider,
 								fragmentActivity.getSupportFragmentManager()),
-						SearchConfig
-								.builder(fragmentContainerViewId, fragmentActivity)
-								.withQueryHint("Search Settings")
-								.withSearchResultsFilter(searchResultsFilter)
-								.withPreferencePathDisplayer(PreferencePathDisplayerFactory.createPreferencePathDisplayer(fragmentActivity))
-								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI(searchResultsFilter))
-								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
-								.withPrepareShow(new PrepareShow())
-								.withShowSettingsFragmentAndHighlightSetting(new ShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId))
-								.build(),
+						SearchConfigFactory.createSearchConfig(
+								fragmentActivity,
+								fragmentContainerViewId,
+								availableAppModes),
 						fragmentActivity,
 						daoProvider,
 						new ConfigurationBundleConverter().doForward(configuration))
