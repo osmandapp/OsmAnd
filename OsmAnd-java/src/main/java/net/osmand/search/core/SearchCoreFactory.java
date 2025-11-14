@@ -196,6 +196,18 @@ public class SearchCoreFactory {
 			boolean match = false;
 			if (parent != null) {
 				phrase.countUnknownWordsMatchMainResult(parent);
+				List<String> leftUnknownSearchWords = parent.filterUnknownSearchWord(null);
+				SearchPhrase nphrase = phrase.selectWord(parent, leftUnknownSearchWords,
+						phrase.isLastUnknownSearchWordComplete()
+								|| !leftUnknownSearchWords.contains(phrase.getLastUnknownSearchWord()));
+//				NameStringMatcher unknownNameStringMatcher = nphrase.getMainUnknownNameStringMatcher();
+				for (String otherName : res.otherNames) {
+					// for now do full equals (in future we could count with matcher
+					// 	if (unknownNameStringMatcher.matches(otherName)) {
+					if (phrase.getCollator().equals(nphrase.getUnknownWordToSearch(), otherName)) {
+						return true;
+					}
+				}
 			}
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
@@ -655,8 +667,9 @@ public class SearchCoreFactory {
 								cityResult.localeRelatedObjectName = res.file.getRegionName();
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
-								// for street-city don't require exact matching 
+								// for street-city don't require exact matching
 								boolean match = matchAddressName(phrase, res, cityResult,  true);
+								
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
