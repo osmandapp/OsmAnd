@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.SystemClock;
 import android.os.Vibrator;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
@@ -186,7 +187,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	}
 
 	// Get distance and direction string for specified point
-	public synchronized String getDirectionString(LatLon apoint, Float heading) {
+	public synchronized String getDirectionString(LatLon apoint, @Nullable Float heading) {
 		if ((currentLocation != null) && (apoint != null)) {
 			Location point = new Location("");
 			point.setLatitude(apoint.getLatitude());
@@ -332,7 +333,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	}
 
 	// Show all available info
-	public void show(TargetPoint point, Float heading, Context ctx) {
+	public void show(TargetPoint point, @Nullable Float heading, Context ctx) {
 		List<String> attributes = new ArrayList<String>();
 		String item;
 

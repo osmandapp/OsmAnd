@@ -174,6 +174,7 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection targetsCollection = super.getInsetTargets();
 		targetsCollection.replace(InsetTarget.createScrollable(R.id.list));
+		targetsCollection.add(InsetTarget.createHorizontalLandscape(R.id.search_button).build());
 		return targetsCollection;
 	}
 

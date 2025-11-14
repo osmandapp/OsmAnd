@@ -2596,7 +2596,7 @@ req.setSearchStat(stat);
 
 	}
 
-	void readIndexedStringTable(BinaryIndexPart part, Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
+	void readIndexedStringTable(Collator instance, List<String> queries, String prefix, List<TIntArrayList> listOffsets,
 			TIntArrayList matchedCharacters) throws IOException {
 		boolean[] matched = new boolean[matchedCharacters.size()];
 		String key = null;
@@ -2634,7 +2634,7 @@ req.setSearchStat(stat);
 							subqueries.set(i, null);
 						}
 					}
-					readIndexedStringTable(part, instance, subqueries, key, listOffsets, matchedCharacters);
+					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
 				} else {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}

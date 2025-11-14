@@ -325,7 +325,7 @@ public class BinaryMapRouteReaderAdapter {
 		public int regionsRead;
 		public List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
 		public int routeEncodingRulesBytes = 0;
-		public Map<String, Integer> decodingRules = null;
+		Map<String, Integer> decodingRules = null;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
 		
@@ -355,16 +355,16 @@ public class BinaryMapRouteReaderAdapter {
 		}
 		
 		public int searchRouteEncodingRule(String tag, String value) {
-			if(decodingRules == null) {
+			if (decodingRules == null) {
 				decodingRules = new LinkedHashMap<String, Integer>();
-				for(int i = 1; i < routeEncodingRules.size(); i++) {
+				for (int i = 1; i < routeEncodingRules.size(); i++) {
 					RouteTypeRule rt = routeEncodingRules.get(i);
-					String ks = rt.getTag() +"#" + (rt.getValue() == null ? "" : rt.getValue());
+					String ks = rt.getTag() + "#" + (rt.getValue() == null ? "" : rt.getValue());
 					decodingRules.put(ks, i);
 				}
 			}
 			String k = tag +"#" + (value == null ? "" : value);
-			if(decodingRules.containsKey(k)) {
+			if (decodingRules.containsKey(k)) {
 				return decodingRules.get(k).intValue();
 			}
 			return -1;

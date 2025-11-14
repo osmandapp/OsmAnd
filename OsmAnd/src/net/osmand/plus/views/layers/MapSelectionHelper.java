@@ -258,16 +258,18 @@ public class MapSelectionHelper {
 					objectLatLon = renderedObject.getLabelLatLon();
 				}
 
+				LatLon searchLatLon = objectLatLon != null ? objectLatLon : result.getPointLatLon();
+
 				if (isNewOsmRoute || isOldOsmRoute) {
 					NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-					addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), enabledRouteTypes, result);
+					addFilteredOsmRoutesAtLatLon(searchLatLon, enabledRouteTypes, result);
 				}
 				if (isClickableWay) {
 					addClickableWay(result, app.getClickableWayHelper()
-							.loadClickableWay(result.getPointLatLon(), renderedObject));
+							.loadClickableWay(searchLatLon, renderedObject));
 				}
 				if (isTravelGpx && !isNewOsmRoute) {
-					addTravelGpx(result, routeId); // WikiVoyage or User TravelGpx
+					addTravelGpx(result, routeId, searchLatLon); // WikiVoyage or User TravelGpx
 				}
 
 				boolean allowAmenityObjects = !isSpecial && !renderedObject.isDrawOnPath();
@@ -278,7 +280,6 @@ public class MapSelectionHelper {
 					if (allowRenderedObjects) {
 						result.collect(renderedObject, null);
 					} else {
-						LatLon searchLatLon = objectLatLon != null ? objectLatLon : result.getPointLatLon();
 						addAmenity(result, renderedObject, searchLatLon);
 					}
 				}
@@ -346,14 +347,14 @@ public class MapSelectionHelper {
 
 						if (isNewOsmRoute || isOldOsmRoute) {
 							NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-									addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), enabledRouteTypes, result);
+							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, result);
 						}
 						if (isClickableWay) {
 							addClickableWay(result, app.getClickableWayHelper()
-									.loadClickableWay(result.getPointLatLon(), obfMapObject, tags));
+									.loadClickableWay(objectLatLon, obfMapObject, tags));
 						}
 						if (isTravelGpx && !isNewOsmRoute) {
-							addTravelGpx(result, routeId); // WikiVoyage or User TravelGpx
+							addTravelGpx(result, routeId, objectLatLon); // WikiVoyage or User TravelGpx
 						}
 
 						IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
@@ -522,8 +523,8 @@ public class MapSelectionHelper {
 		}
 	}
 
-	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
-		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.getPointLatLon(), routeId);
+	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId, @NonNull LatLon location) {
+		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(location, routeId);
 		if (travelGpx != null && travelGpx.getAmenity() != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
 			result.collect(travelGpx.getAmenity(), mapLayers.getPoiMapLayer());
 		} else if (travelGpx == null) {

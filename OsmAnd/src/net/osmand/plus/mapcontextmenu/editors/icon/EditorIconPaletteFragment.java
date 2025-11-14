@@ -36,6 +36,9 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -102,6 +105,14 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 		onScreenModeChanged();
 		updateSelectedCategory();
 		return view;
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.replace(InsetTarget.createScrollable(R.id.icon_categories).build());
+		collection.add(InsetTarget.createCustomBuilder(R.id.icons_categories_selector).applyPadding(true).landscapeSides(InsetSide.RIGHT, InsetSide.LEFT).build());
+		return collection;
 	}
 
 	private void setupToolbar(@NonNull View view) {

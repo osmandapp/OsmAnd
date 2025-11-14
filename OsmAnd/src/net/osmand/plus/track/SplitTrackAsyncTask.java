@@ -11,19 +11,20 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.IProgress;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
-import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayHelper.GpxSplitParams;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 			TrackDisplayGroup trackGroup = getTrackDisplayGroup(model);
 			if (trackGroup != null) {
 				trackGroup.updateSplit(splitParams);
-				processGroupTrack(app, trackGroup, progress, splitParams.joinSegments);
+				processGroupTrack(app, trackGroup, progress, splitParams.joinSegments());
 			}
 		}
 		return null;

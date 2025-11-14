@@ -5901,4 +5901,14 @@
     <string name="quick_action_wind_animation_layer">Butono por montri/kaŝi movbildan tavolon de vento sur la mapo.</string>
     <string name="wind_animation_layer">Movbilda tavolo de vento</string>
     <string name="weather_layers">Tavoloj de vetero</string>
+    <string name="lang_crh">Krime-tatara (latina)</string>
+    <string name="visualizing_button_grid">Krado de map-butonoj</string>
+    <string name="button_frames">Kadroj ĉirkaŭ butonoj</string>
+    <string name="slots">Truoj</string>
+    <string name="efficient_grid">Efika krado</string>
+    <string name="enable_3d_objects">Aktivigi 3-dimensiajn konstruaĵojn</string>
+    <string name="enable_3d_objects_description">Vidigi 3-dimensiajn konstruaĵojn sur la mapo</string>
+    <string name="deleted_maps_warning">%d elemento(j) estos forigita(j).\nĈu vi certas?</string>
+    <string name="deleted_maps_prompt">La jenaj mapoj ne estos plu subtenataj kaj estas anstataŭigitaj per mapoj de malpli grandaj regionoj. Forigu ilin kaj elŝutu la novajn versiojn.</string>
+    <string name="unsupported_maps">Nesubtenataj mapoj</string>
 </resources>

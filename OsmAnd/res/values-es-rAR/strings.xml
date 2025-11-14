@@ -5760,4 +5760,13 @@
     <string name="wind_animation_layer">Capa animada del viento</string>
     <string name="weather_layers">Capas de meteorología</string>
     <string name="lang_crh">Tártaro de Crimea (latín)</string>
+    <string name="efficient_grid">Cuadrícula eficiente</string>
+    <string name="slots">Espacios</string>
+    <string name="button_frames">Marcos de botones</string>
+    <string name="visualizing_button_grid">Cuadrícula de botones del mapa</string>
+    <string name="enable_3d_objects">Activar edificios en 3D</string>
+    <string name="enable_3d_objects_description">Muestra edificios en 3D como objetos en el mapa</string>
+    <string name="deleted_maps_warning">Borrarás %d elemento(s)\n¿Continuar?</string>
+    <string name="deleted_maps_prompt">Estos mapas ya no se admiten y fueron reemplazados por regiones más pequeñas. Es necesario quitarlos y descargar las nuevas versiones.</string>
+    <string name="unsupported_maps">Mapas incompatibles</string>
 </resources>

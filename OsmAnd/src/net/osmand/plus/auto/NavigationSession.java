@@ -435,7 +435,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				return;
 			}
 		}
-		if (navigationScreen == null) {
+		if (navigationScreen == null || navigationScreen.getLifecycle().getCurrentState().isAtLeast(State.DESTROYED)) {
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
@@ -489,7 +489,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void routeWasFinished() {
-		getApp().stopNavigation();
+		ScreenManager screenManager = getScreenManager();
+		screenManager.popToRoot();
+		screenManager.push(new DestinationReachedScreen(carContext));
 	}
 
 	private boolean isRoutePreviewPresent() {
