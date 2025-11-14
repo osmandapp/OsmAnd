@@ -204,7 +204,7 @@ public class SearchCoreFactory {
 //			phrase.countUnknownWordsMatchMainResult(res);
 			
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			String localeName = res.localeName;
+			String localeName = SearchPhrase.stripBraces(res.localeName);
 			Collection<String> otherNames = res.otherNames;
 			// quick check
 			if (!fullMatch && (nm.matches(localeName) || nm.matches(otherNames))) {
@@ -217,13 +217,6 @@ public class SearchCoreFactory {
 					String lName = it.next();
 					if (phrase.getFirstUnknownNameStringMatcher().matches(lName)) {
 						it.remove();
-					}
-				}
-				for (String otherName : otherNames) {
-					if (phrase.getFirstUnknownNameStringMatcher().matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getFirstUnknownSearchWord(), otherName)) {
-							return true;
-						}
 					}
 				}
 			}
@@ -239,13 +232,6 @@ public class SearchCoreFactory {
 					String lName = it.next();
 					if (phrase.getUnknownNameStringMatcher(i).matches(lName)) {
 						it.remove();
-					}
-				}
-				for (String otherName : otherNames) {
-					if (phrase.getUnknownNameStringMatcher(i).matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getUnknownSearchWords().get(i), otherName)) {
-							return true;
-						}
 					}
 				}
 			}
@@ -2134,8 +2120,6 @@ public class SearchCoreFactory {
 		SearchSettings settings = phrase.getSettings();
 		result.otherNames = amenity.getOtherNames(true);
 		result.cityName = amenity.getCityFromTagGroups(settings.getLang());
-		// we can calculate alternate name possibly
-		result.alternateName = result.cityName;
 		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
 		if (Algorithms.isEmpty(result.localeName)) {
 			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());

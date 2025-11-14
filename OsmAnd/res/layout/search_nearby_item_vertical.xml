@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -9,8 +10,11 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding_small_half"
 		android:orientation="horizontal"
-		android:padding="@dimen/content_padding">
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding">
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -22,49 +26,22 @@
 				android:id="@+id/item_title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:maxLines="2"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="16sp"
 				tools:text="Eiffel Tower" />
 
-			<TextView
-				android:id="@+id/item_description"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="3dp"
-				android:ellipsize="end"
-				android:maxLines="2"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="14sp"
-				tools:text="Eiffel Tower - super tower" />
-
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="6dp"
-				android:layout_marginEnd="@dimen/content_padding_small"
 				android:orientation="horizontal">
-
-				<ImageView
-					android:id="@+id/item_icon"
-					android:layout_width="16dp"
-					android:layout_height="16dp"
-					android:layout_gravity="center_vertical"
-					android:layout_marginEnd="6dp" />
-
-				<TextView
-					android:id="@+id/item_type"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:textColor="?android:textColorSecondary"
-					android:textSize="14sp"
-					tools:text="Monument" />
 
 				<LinearLayout
 					android:id="@+id/compass_layout"
 					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:gravity="bottom|right"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:gravity="center_vertical|right"
 					android:orientation="horizontal">
 
 					<androidx.appcompat.widget.AppCompatImageView
@@ -77,16 +54,105 @@
 					<TextView
 						android:id="@+id/distance"
 						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_height="match_parent"
 						android:layout_gravity="center_vertical"
 						android:layout_marginStart="2dp"
-						android:layout_marginLeft="2dp"
+						android:gravity="center_vertical"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_sub_text_size"
 						tools:text="100500 km" />
 
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="4dp"
+						android:layout_marginRight="4dp"
+						android:gravity="center_vertical"
+						android:text="•"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						android:visibility="visible" />
+
 				</LinearLayout>
-			</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginEnd="@dimen/content_padding_small"
+					android:orientation="horizontal">
+
+					<ImageView
+						android:id="@+id/item_icon"
+						android:layout_width="16dp"
+						android:layout_height="16dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="6dp" />
+
+					<TextView
+						android:id="@+id/item_type"
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_weight="1"
+						android:gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						tools:text="Monument" />
+
+				</LinearLayout>
+
+			</LinearLayout> <!--Compass - type-->
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_minimal"
+				android:orientation="horizontal">
+
+				<TextView
+					android:id="@+id/address"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical|start"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:gravity="center_vertical|start"
+					android:maxLines="1"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					tools:text="City" />
+
+				<LinearLayout
+					android:id="@+id/time_layout"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:gravity="end"
+					android:orientation="horizontal">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/time_icon"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+						android:layout_marginRight="@dimen/gpx_small_icon_margin"
+						app:srcCompat="@drawable/ic_action_time_16" />
+
+					<TextView
+						android:id="@+id/time"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_gravity="center_vertical"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:lines="1"
+						android:maxLines="1"
+						android:scrollHorizontally="true"
+						android:singleLine="true"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_sub_text_size"
+						tools:text="10-12 am" />
+				</LinearLayout>
+			</LinearLayout> <!--address open hours-->
 
 		</LinearLayout>
 
@@ -115,12 +181,25 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:layout_gravity="center_horizontal"
-				android:scaleType="centerCrop"
 				android:contentDescription="@string/popular_places_nearby"
+				android:scaleType="centerCrop"
 				android:visibility="gone" />
-		</FrameLayout>
+		</FrameLayout>  <!--Image-->
 
 	</LinearLayout>
+
+	<TextView
+		android:id="@+id/item_description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:ellipsize="end"
+		android:maxLines="2"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="16sp"
+		tools:text="Eiffel Tower - super tower" />
 
 	<include
 		layout="@layout/divider"

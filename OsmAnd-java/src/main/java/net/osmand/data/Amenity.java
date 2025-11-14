@@ -11,6 +11,7 @@ import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.ObfConstants;
+import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -89,6 +90,8 @@ public class Amenity extends MapObject {
 	public static final int DEFAULT_ELO = 900;
 	public static final String ADDR_STREET = "addr_street";
 	public static final String ADDR_HOUSENUMBER = "addr_housenumber";
+	public static final String DIFF_ELE_DOWN = "diff_ele_down";
+	public static final String DIFF_ELE_UP = "diff_ele_up";
 	
 	private String subType;
 	private PoiCategory type;
@@ -897,7 +900,7 @@ public class Amenity extends MapObject {
 		if (tagGroups == null) {
 			return null;
 		}
-		String result = null;
+		TreeMap<CityType, String> names = new TreeMap<City.CityType, String>(); 
 		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
 			String translated = "";
 			String nonTranslated = "";
@@ -915,8 +918,15 @@ public class Amenity extends MapObject {
 			}
 			String name = translated.isEmpty() ? nonTranslated : translated;
 			if (!name.isEmpty() && isCityTypeAccept(type)) {
-				result = result == null ? name : result + ", " + name;
+				names.put(type, name);
 			}
+		}
+		String result = "";
+		for (String nm : names.values()) {
+			if (result.length() > 0) {
+				result += ", ";
+			}
+			result += nm;
 		}
 		return result;
 	}
