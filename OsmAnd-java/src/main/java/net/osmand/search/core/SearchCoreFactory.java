@@ -2134,8 +2134,6 @@ public class SearchCoreFactory {
 		SearchSettings settings = phrase.getSettings();
 		result.otherNames = amenity.getOtherNames(true);
 		result.cityName = amenity.getCityFromTagGroups(settings.getLang());
-		// we can calculate alternate name possibly
-		result.alternateName = result.cityName;
 		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
 		if (Algorithms.isEmpty(result.localeName)) {
 			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
