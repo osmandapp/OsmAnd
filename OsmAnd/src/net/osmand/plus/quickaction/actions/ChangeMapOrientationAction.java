@@ -78,7 +78,7 @@ public class ChangeMapOrientationAction extends SwitchableAction<String> {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandSettings settings = app.getSettings();
 		CompassMode compassMode = settings.getCompassMode();
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.APP);
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 		return compassMode.getIconId(nightMode);
 	}
 
