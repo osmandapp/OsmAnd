@@ -219,13 +219,13 @@ public class SearchCoreFactory {
 						it.remove();
 					}
 				}
-				for (String otherName : otherNames) {
-					if (phrase.getFirstUnknownNameStringMatcher().matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getFirstUnknownSearchWord(), otherName)) {
-							return true;
-						}
-					}
-				}
+//				for (String otherName : otherNames) {
+//					if (phrase.getFirstUnknownNameStringMatcher().matches(otherName)) {
+//						if (!fullMatch || phrase.getCollator().equals(phrase.getFirstUnknownSearchWord(), otherName)) {
+//							return true;
+//						}
+//					}
+//				}
 			}
 			List<String> leftUnknownSearchWords = parent == null ? phrase.getUnknownSearchWords() : parent.filterUnknownSearchWord(null);
 			List<String> unknownSearchWords = phrase.getUnknownSearchWords();
@@ -241,13 +241,13 @@ public class SearchCoreFactory {
 						it.remove();
 					}
 				}
-				for (String otherName : otherNames) {
-					if (phrase.getUnknownNameStringMatcher(i).matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getUnknownSearchWords().get(i), otherName)) {
-							return true;
-						}
-					}
-				}
+//				for (String otherName : otherNames) {
+//					if (phrase.getUnknownNameStringMatcher(i).matches(otherName)) {
+//						if (!fullMatch || phrase.getCollator().equals(phrase.getUnknownSearchWords().get(i), otherName)) {
+//							return true;
+//						}
+//					}
+//				}
 			}
 			if (localeNames.size() == 0) {
 				return true;
