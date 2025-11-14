@@ -79,9 +79,9 @@ public class CommonWords {
 		Iterator<Entry<String, String>> it = abbreviations.entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<String, String> e = it.next();
-			Integer indx = commonWordsDictionary.get(e.getValue());
+			Integer indx = commonWordsDictionary.get(e.getValue().toLowerCase());
 			if (indx != null) {
-				commonWordsDictionary.put(e.getKey(), indx);
+				commonWordsDictionary.put(e.getKey().toLowerCase(), indx);
 			}
 		}
 	}
@@ -135,6 +135,7 @@ public class CommonWords {
 		addFrequentlyUsed("west");
 		addFrequentlyUsed("east");
 		addFrequentlyUsed("north");
+		addFrequentlyUsed("south");
 		addFrequentlyUsed("northeast");
 		addFrequentlyUsed("northwest");
 		addFrequentlyUsed("southwest");
