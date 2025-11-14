@@ -196,6 +196,18 @@ public class SearchCoreFactory {
 			boolean match = false;
 			if (parent != null) {
 				phrase.countUnknownWordsMatchMainResult(parent);
+				List<String> leftUnknownSearchWords = parent.filterUnknownSearchWord(null);
+				SearchPhrase nphrase = phrase.selectWord(parent, leftUnknownSearchWords,
+						phrase.isLastUnknownSearchWordComplete()
+								|| !leftUnknownSearchWords.contains(phrase.getLastUnknownSearchWord()));
+//				NameStringMatcher unknownNameStringMatcher = nphrase.getMainUnknownNameStringMatcher();
+				for (String otherName : res.otherNames) {
+					// for now do full equals (in future we could count with matcher
+					// 	if (unknownNameStringMatcher.matches(otherName)) {
+					if (phrase.getCollator().equals(nphrase.getUnknownWordToSearch(), otherName)) {
+						return true;
+					}
+				}
 			}
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
@@ -204,7 +216,7 @@ public class SearchCoreFactory {
 //			phrase.countUnknownWordsMatchMainResult(res);
 			
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			String localeName = res.localeName;
+			String localeName = SearchPhrase.stripBraces(res.localeName);
 			Collection<String> otherNames = res.otherNames;
 			// quick check
 			if (!fullMatch && (nm.matches(localeName) || nm.matches(otherNames))) {
@@ -217,13 +229,6 @@ public class SearchCoreFactory {
 					String lName = it.next();
 					if (phrase.getFirstUnknownNameStringMatcher().matches(lName)) {
 						it.remove();
-					}
-				}
-				for (String otherName : otherNames) {
-					if (phrase.getFirstUnknownNameStringMatcher().matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getFirstUnknownSearchWord(), otherName)) {
-							return true;
-						}
 					}
 				}
 			}
@@ -239,13 +244,6 @@ public class SearchCoreFactory {
 					String lName = it.next();
 					if (phrase.getUnknownNameStringMatcher(i).matches(lName)) {
 						it.remove();
-					}
-				}
-				for (String otherName : otherNames) {
-					if (phrase.getUnknownNameStringMatcher(i).matches(otherName)) {
-						if (!fullMatch || phrase.getCollator().equals(phrase.getUnknownSearchWords().get(i), otherName)) {
-							return true;
-						}
 					}
 				}
 			}
@@ -669,8 +667,9 @@ public class SearchCoreFactory {
 								cityResult.localeRelatedObjectName = res.file.getRegionName();
 								cityResult.file = res.file;
 								// include parent search result even if it is empty
-								// for street-city don't require exact matching 
+								// for street-city don't require exact matching
 								boolean match = matchAddressName(phrase, res, cityResult,  true);
+								
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else {
@@ -2134,8 +2133,6 @@ public class SearchCoreFactory {
 		SearchSettings settings = phrase.getSettings();
 		result.otherNames = amenity.getOtherNames(true);
 		result.cityName = amenity.getCityFromTagGroups(settings.getLang());
-		// we can calculate alternate name possibly
-		result.alternateName = result.cityName;
 		result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
 		if (Algorithms.isEmpty(result.localeName)) {
 			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
