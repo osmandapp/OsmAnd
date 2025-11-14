@@ -204,7 +204,7 @@ public class SearchCoreFactory {
 //			phrase.countUnknownWordsMatchMainResult(res);
 			
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			String localeName = res.localeName;
+			String localeName = SearchPhrase.stripBraces(res.localeName);
 			Collection<String> otherNames = res.otherNames;
 			// quick check
 			if (!fullMatch && (nm.matches(localeName) || nm.matches(otherNames))) {
