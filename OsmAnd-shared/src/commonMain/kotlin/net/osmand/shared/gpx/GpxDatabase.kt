@@ -46,11 +46,6 @@ class GpxDatabase {
 		val BATCH_SIZE = 100
 	}
 
-	init {
-		val db = openConnection(false)
-		db?.close()
-	}
-
 	fun openConnection(readonly: Boolean): SQLiteConnection? {
 		var conn = PlatformUtil.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly)
 		if (conn == null) return null

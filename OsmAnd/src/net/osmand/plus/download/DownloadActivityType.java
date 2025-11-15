@@ -537,7 +537,12 @@ public class DownloadActivityType {
 
 	@NonNull
 	public String getBasename(@NonNull DownloadItem downloadItem) {
-		String fileName = downloadItem.getFileName();
+		return getBasename(downloadItem.getFileName(), downloadItem.getType());
+	}
+
+	@NonNull
+	public String getBasename(@NonNull String fileName, @NonNull DownloadActivityType downloadActivityType) {
+
 		if (Algorithms.isEmpty(fileName)) return fileName;
 
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
@@ -558,7 +563,7 @@ public class DownloadActivityType {
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 		}
-		if (downloadItem.getType() == WIKIVOYAGE_FILE &&
+		if (downloadActivityType == WIKIVOYAGE_FILE &&
 				fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
 		}

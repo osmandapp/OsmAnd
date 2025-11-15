@@ -29,11 +29,15 @@ public class Abbreviations {
         abbreviations.put("st", "Street");
         abbreviations.put("blvd", "Boulevard");
     }
-
+    
     public static String replace(String word) {
         String value = abbreviations.get(word.toLowerCase());
         return value != null ? value : word;
     }
+    
+    public static Map<String, String> getAbbreviations() {
+		return abbreviations;
+	}
 
     public static String replaceAll(String phrase) {
         String[] words = phrase.split(SearchPhrase.DELIMITER);

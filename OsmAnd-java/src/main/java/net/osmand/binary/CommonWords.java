@@ -6,6 +6,7 @@ import net.osmand.map.WorldRegion;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
@@ -73,6 +74,18 @@ public class CommonWords {
 		return count;
 	}
 
+	private static void addAbbrevations() {
+		Map<String, String> abbreviations = Abbreviations.getAbbreviations();
+		Iterator<Entry<String, String>> it = abbreviations.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<String, String> e = it.next();
+			Integer indx = commonWordsDictionary.get(e.getValue().toLowerCase());
+			if (indx != null) {
+				commonWordsDictionary.put(e.getKey().toLowerCase(), indx);
+			}
+		}
+	}
+	
 	private static void addRegionNames() {
 		OsmandRegions osmandRegions = null;
 		try {
@@ -122,6 +135,7 @@ public class CommonWords {
 		addFrequentlyUsed("west");
 		addFrequentlyUsed("east");
 		addFrequentlyUsed("north");
+		addFrequentlyUsed("south");
 		addFrequentlyUsed("northeast");
 		addFrequentlyUsed("northwest");
 		addFrequentlyUsed("southwest");
@@ -1346,6 +1360,7 @@ public class CommonWords {
 		addCommon("trafficway");
 		addCommon("plaine");
 
+		addAbbrevations();
 		addRegionNames(); // add regions names and region abbreviations
 
 	}
