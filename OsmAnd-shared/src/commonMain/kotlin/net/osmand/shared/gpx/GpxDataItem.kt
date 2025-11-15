@@ -101,20 +101,24 @@ class GpxDataItem(
 			GpxParameter.SHOW_START_FINISH -> {
 				setParameter(
 					GpxParameter.SHOW_START_FINISH,
-					if (gpxFile.isShowStartFinishSet()) gpxFile.isShowStartFinish() else null);
+					if (gpxFile.isShowStartFinishSet()) gpxFile.isShowStartFinish() else null)
 
 			}
 
 			GpxParameter.SPLIT_TYPE -> {
-				if (!gpxFile.getSplitType().isNullOrEmpty() && gpxFile.getSplitInterval() > 0) {
+				if (gpxFile.isSplitSet()) {
 					val splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType())
 					setParameter(GpxParameter.SPLIT_TYPE, splitType.type)
+				} else {
+					resetSplitParameters()
 				}
 			}
 
 			GpxParameter.SPLIT_INTERVAL -> {
-				if (!gpxFile.getSplitType().isNullOrEmpty() && gpxFile.getSplitInterval() > 0) {
+				if (gpxFile.isSplitSet()) {
 					setParameter(GpxParameter.SPLIT_INTERVAL, gpxFile.getSplitInterval())
+				} else {
+					resetSplitParameters()
 				}
 			}
 
@@ -156,6 +160,11 @@ class GpxDataItem(
 
 			else -> {}
 		}
+	}
+
+	private fun resetSplitParameters() {
+		map.remove(GpxParameter.SPLIT_TYPE)
+		map.remove(GpxParameter.SPLIT_INTERVAL)
 	}
 
 	inline fun <reified T: Any> getAppearanceParameter(parameter: GpxParameter): T? {
