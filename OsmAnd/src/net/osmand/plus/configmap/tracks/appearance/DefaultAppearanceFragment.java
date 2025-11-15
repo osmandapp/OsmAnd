@@ -173,10 +173,7 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void saveChanges(boolean updateExisting) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			controller.saveChanges(activity, updateExisting);
-		}
+		callActivity(activity -> controller.saveChanges(activity, updateExisting));
 	}
 
 	@Override

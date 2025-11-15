@@ -667,6 +667,10 @@ class GpxFile : GpxExtensions {
 		getExtensionsToWrite().remove("gradient_scale_type")
 	}
 
+	fun isSplitSet(): Boolean {
+		return !getSplitType().isNullOrEmpty() && getSplitInterval() > 0
+	}
+
 	fun getSplitType(): String? {
 		return extensions?.get("split_type")
 	}
