@@ -4,6 +4,8 @@ import net.osmand.search.core.SearchPhrase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 public class Abbreviations {
@@ -12,7 +14,27 @@ public class Abbreviations {
     }
 
     private static final Map<String, String> abbreviations = new HashMap<>();
+	private static final Set<String> conjunctions = new TreeSet<>();
 
+    static {
+    	conjunctions.add("the");
+		conjunctions.add("der");
+		conjunctions.add("den");
+		conjunctions.add("die");
+		conjunctions.add("das");
+		conjunctions.add("la");
+		conjunctions.add("le");
+		conjunctions.add("el");
+		conjunctions.add("il");
+		// and
+		conjunctions.add("and");
+		conjunctions.add("und");
+		conjunctions.add("en");
+		conjunctions.add("et");
+		conjunctions.add("y");
+		conjunctions.add("и");
+    }
+    
     static {
         abbreviations.put("e", "East");
         abbreviations.put("w", "West");
@@ -57,4 +79,8 @@ public class Abbreviations {
         }
         return changed ? r.toString() : phrase;
     }
+
+	public static boolean isConjunction(String lowerCase) {
+		return conjunctions.contains(lowerCase);
+	}
 }
