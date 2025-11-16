@@ -5921,4 +5921,6 @@
     <string name="deleted_maps_warning">Ви збираєтеся видалити %d елементів(ів)\nПродовжити?</string>
     <string name="deleted_maps_prompt">Ці карти більше не підтримуються та були замінені меншими регіонами. Видаліть їх та завантажте нові версії.</string>
     <string name="unsupported_maps">Непідтримувані карти</string>
+    <string name="routing_attr_weightrating_name">Максимальна вага при повному завантаженні</string>
+    <string name="routing_attr_maxaxleload_name">Максимальне навантаження на вісь</string>
 </resources>
