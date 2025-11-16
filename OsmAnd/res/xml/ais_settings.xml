@@ -33,6 +33,12 @@
         android:title="@string/ais_port_nmea_local"
         tools:summary="@string/ais_port_nmea_local_description" />
 
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_receive_in_background"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_receive_in_background"
+        tools:summary="@string/ais_receive_in_background_description" />
+
     <PreferenceCategory
         android:key="ais_object_lost_timeouts"
         android:layout="@layout/preference_category_with_descr"

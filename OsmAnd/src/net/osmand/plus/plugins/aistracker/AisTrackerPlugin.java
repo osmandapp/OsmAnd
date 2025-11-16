@@ -58,7 +58,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public static final String AIS_CPA_WARNING_TIME_ID = "ais_cpa_warning_time"; // see xml/ais_settings.xml
 	public static final String AIS_CPA_WARNING_DISTANCE_ID = "ais_cpa_warning_distance"; // see xml/ais_settings.xml
 	public static final String AIS_OWN_MMSI_ID = "ais_own_mmsi"; // see xml/ais_settings.xml
-	public static final String AIS_DISPLAY_OWN_POSITION_ID = "ais_display_own_position"; // see xml/ais_settings.xml
+    public static final String AIS_DISPLAY_OWN_POSITION_ID = "ais_display_own_position"; // see xml/ais_settings.xml
+    public static final String AIS_RECEIVE_IN_BACKGROUND_ID = "ais_receive_in_background"; // see xml/ais_settings.xml
 	public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
 	public static final int AIS_NMEA_PROTOCOL_UDP = 0;
 	public static final int AIS_NMEA_PROTOCOL_TCP = 1;
@@ -82,6 +83,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public static final Integer AIS_DEFAULT_OWN_MMSI = 0;
 	public final CommonPreference<Boolean> AIS_DISPLAY_OWN_POSITION;
 	public static final Boolean AIS_DISPLAY_OWN_POSITION_DEFAULT = false;
+    public final CommonPreference<Boolean> AIS_RECEIVE_IN_BACKGROUND;
+    public static final Boolean AIS_RECEIVE_IN_BACKGROUND_DEFAULT = true;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
@@ -205,6 +208,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_CPA_WARNING_DISTANCE = registerFloatPreference(AIS_CPA_WARNING_DISTANCE_ID, AIS_CPA_WARNING_DEFAULT_DISTANCE);
 		AIS_OWN_MMSI = registerIntPreference(AIS_OWN_MMSI_ID, AIS_DEFAULT_OWN_MMSI);
 		AIS_DISPLAY_OWN_POSITION = registerBooleanPreference(AIS_DISPLAY_OWN_POSITION_ID, AIS_DISPLAY_OWN_POSITION_DEFAULT);
+        AIS_RECEIVE_IN_BACKGROUND = registerBooleanPreference(AIS_RECEIVE_IN_BACKGROUND_ID, AIS_RECEIVE_IN_BACKGROUND_DEFAULT);
 		AIS_NMEA_IP_ADDRESS.addListener(addrPrefListener);
 		AIS_NMEA_PROTOCOL.addListener(protocolPortPrefListener);
 		AIS_NMEA_TCP_PORT.addListener(protocolPortPrefListener);
@@ -323,7 +327,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityPause(@NonNull MapActivity activity) {
-		stopAisListener();
+        if (!AIS_RECEIVE_IN_BACKGROUND.get()) {
+            stopAisListener();
+        }
 	}
 
 	@Override

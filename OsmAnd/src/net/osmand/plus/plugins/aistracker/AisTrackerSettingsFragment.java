@@ -36,6 +36,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		setupIpAddress(currentProtocol);
 		setupTcpPort(currentProtocol);
 		setupUdpPort(currentProtocol);
+        setupReceiveInBackground();
 		setupObjectLostTimeout();
 		setupShipLostTimeout();
 		setupCpaWarningDistance(cpaWarningEnabled);
@@ -191,6 +192,19 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 			aisDisplayOwnPosition.setEnabled(ownMmsi != 0);
 		}
 	}
+
+    private void setupReceiveInBackground() {
+        Boolean[] entryValues = { true, false };
+        String[] entries = new String[entryValues.length];
+        entries[0] = getString(R.string.shared_string_yes);
+        entries[1] = getString(R.string.shared_string_no);
+        ListPreferenceEx aisReceiveInBackground = findPreference(plugin.AIS_RECEIVE_IN_BACKGROUND.getId());
+        if (aisReceiveInBackground != null) {
+            aisReceiveInBackground.setEntries(entries);
+            aisReceiveInBackground.setEntryValues(entryValues);
+            aisReceiveInBackground.setDescription(R.string.ais_receive_in_background_description);
+        }
+    }
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
