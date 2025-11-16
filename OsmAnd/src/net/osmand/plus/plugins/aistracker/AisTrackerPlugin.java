@@ -87,8 +87,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	private long lastMessageReceived = 0;
 	private Location fakeOwnPosition = null; // used for test purposes to fake own position
 
-	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener(true);
-	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener(true);
+	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener();
+	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener();
 
 	public class AisDataManager implements AisDataListener {
 
@@ -331,7 +331,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
 			if (layer == null) {
-				Log.d("AisTrackerPlugin", "call registerLayers()");
+				Log.d("AisTrackerPlugin", "call updateLayers()");
 				registerLayers(context, mapActivity);
 			}
 			if (!mapView.getLayers().contains(layer)) {
@@ -418,8 +418,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		if (aisListener != null) {
 			if (aisListener.checkTcpSocket()) {
 				if (((System.currentTimeMillis() - getAndUpdateLastMessageReceived()) / 1000) > 20) {
-					Log.d("AisTrackerLayer", "checkTcpConnection(): restart TCP socket");
-					restartNetworkListener(false);
+					Log.d("AisTrackerLayer", "restartStalledTcpConnection(): restart TCP socket");
+					restartNetworkListener();
 					return true;
 				}
 			}
@@ -427,11 +427,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public void restartNetworkListener(boolean clearData) {
+	public void restartNetworkListener() {
 		stopAisListener();
-		if (clearData) {
-			aisDataManager.cleanupResources();
-		}
 		startAisNetworkListener();
 	}
 
