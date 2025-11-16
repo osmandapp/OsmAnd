@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/context_img_card_width"
+    android:layout_height="@dimen/context_img_card_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="?attr/bg_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:paddingLeft="@dimen/dialog_content_margin"
+        android:paddingRight="@dimen/dialog_content_margin"
+        android:paddingTop="@dimen/subHeaderPadding"
+        android:maxLines="4"
+        android:gravity="center"
+        android:ellipsize="end"
+        tools:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+        android:text="@string/mapillary_action_descr"
+	    android:paddingEnd="@dimen/dialog_content_margin"
+	    android:paddingStart="@dimen/dialog_content_margin" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/blue_button_drawable"
+        app:backgroundTint="@color/mapillary_color"
+        android:layout_gravity="bottom|center_horizontal"
+		app:drawableLeftCompat="@drawable/ic_action_mapillary"
+        app:drawableStartCompat="@drawable/ic_action_mapillary"
+        android:drawablePadding="@dimen/content_padding_half"
+        android:paddingLeft="10dp"
+        android:paddingRight="14dp"
+        android:layout_marginBottom="@dimen/content_padding"
+        android:textColor="@color/card_and_list_background_light"
+        android:text="@string/shared_string_add_photos"
+	    android:paddingEnd="14dp"
+	    android:paddingStart="10dp" />
+
+    <View
+        android:id="@+id/card_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="?attr/context_menu_card"/>
+
+</FrameLayout>
