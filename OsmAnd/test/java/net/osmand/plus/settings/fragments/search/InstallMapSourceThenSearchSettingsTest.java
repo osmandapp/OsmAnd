@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -61,8 +60,7 @@ public class InstallMapSourceThenSearchSettingsTest extends AndroidTest {
 		onView(searchView()).perform(replaceText(MICROSOFT_MAPS), closeSoftKeyboard());
 
 		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithText("Path: Driving > Configure map > Map source…")));
-		onView(searchResultsView()).check(matches(hasSearchResultWithText(MICROSOFT_MAPS)));
+		onView(searchResultsView()).check(matches(hasSearchResultWithText(String.format("Path: Driving > Configure map > Map source… > %s", MICROSOFT_MAPS))));
 	}
 
 	private static Matcher<View> navigateUpButton() {
