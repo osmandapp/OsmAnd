@@ -379,9 +379,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			this.groupedItemsToUpdate.clear();
 			DateFormat format = app.getResourceManager().getDateFormat();
 			for (IndexItem item : filtered) {
-				boolean outdated = checkIfItemOutdated(item, format);
-				// include only activated files here
-				if (outdated && indexActivatedFileNames.containsKey(item.getTargetFileName())) {
+				if (checkIfItemOutdated(item, format)) {
 					itemsToUpdate.add(item);
 				}
 			}
