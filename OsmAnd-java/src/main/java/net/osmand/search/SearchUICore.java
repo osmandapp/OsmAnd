@@ -891,7 +891,7 @@ public class SearchUICore {
 		int count = 0;
 		private SearchPhrase phrase;
 		private List<MapObject> exportedObjects;
-		private List<City> exportedCities;
+		private List<City> exportedCities = new ArrayList<>();
 
 		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 								   AtomicInteger requestNumber, int totalLimit) {
